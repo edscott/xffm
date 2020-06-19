@@ -64,7 +64,7 @@ public:
             offset = head_len + (suggest_len - token_len) + 1;
             print_c::print_status(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
-            gtk_text_buffer_place_cursor(buffer, &end);	
+            gtk_text_buffer_place_cursor(buffer, &end);
         }
         g_free(suggest);
 
@@ -94,7 +94,7 @@ public:
                 }
             } 
             if (tail && strlen(tail)) {
-		TRACE("bash_suggestion: suggest=\"%s\" tail=\"%s\"\n", suggest, tail);
+                TRACE("bash_suggestion: suggest=\"%s\" tail=\"%s\"\n", suggest, tail);
                 gchar *g = g_strconcat(suggest, tail, NULL);
                 g_free(suggest);
                 suggest = g;
@@ -102,7 +102,7 @@ public:
         }
         g_free(token);
         g_free(tail);
-	TRACE("retval, bash_suggestion: suggest=\"%s\"\n", suggest);
+        TRACE("retval, bash_suggestion: suggest=\"%s\"\n", suggest);
         return suggest;
     }
 private:
@@ -126,7 +126,7 @@ private:
     
     static void
     msg_help_text(GtkTextView *output){
-	if (!output) return;
+        if (!output) return;
         print_c::show_text(output);
 
         print_c::print_icon(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
@@ -139,7 +139,7 @@ private:
 
     static void
     msg_result_text(GtkTextView *output, gint match_type){
-	if (!output) return;
+        if (!output) return;
         print_c::show_text(output);
 #ifdef DEBUG_TRACE
         print_c::print_icon(output, "dialog-info", "green", g_strdup(_("Options >>")));
@@ -297,7 +297,7 @@ private:
         }
 
         if (command_token) {
-                suggest = bash_exec_completion(output, workdir, command_token);	
+                suggest = bash_exec_completion(output, workdir, command_token);        
         }
         else if (file_token) {
                 suggest = bash_file_completion(output, workdir, file_token);
@@ -361,8 +361,8 @@ private:
         gchar *suggest = bash_complete(output, workdir, g_strchug(p));
         g_free(p);
         if (suggest) {
-	    TRACE("bash_complete_with_head: token=\"%s\", suggest=\"%s\"\n",
-		    token, suggest);
+            TRACE("bash_complete_with_head: token=\"%s\", suggest=\"%s\"\n",
+                    token, suggest);
             gchar *g = g_strconcat(token, suggest, NULL);
             g_free(suggest);
             suggest=g;

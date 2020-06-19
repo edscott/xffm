@@ -68,19 +68,19 @@ public:
         }
         // On activate, run the lpcommand.
         if((event->keyval == GDK_KEY_Return) || (event->keyval == GDK_KEY_KP_Enter)) {
-	    gchar *command = print_c::get_current_text(completionInput_);
-	    TRACE("activated with %s\n", command);
+            gchar *command = print_c::get_current_text(completionInput_);
+            TRACE("activated with %s\n", command);
             this->csh_clean_start();
             const gchar *workdir = ((Page<Type> *)this)->workDir();
-	    if (!workdir || !g_file_test(workdir, G_FILE_TEST_IS_DIR)){
-		ERROR("completionKeyboardEvent(): invalid workdir: %s\n", workdir);
-		return TRUE;
-	    }
+            if (!workdir || !g_file_test(workdir, G_FILE_TEST_IS_DIR)){
+                ERROR("completionKeyboardEvent(): invalid workdir: %s\n", workdir);
+                return TRUE;
+            }
             TRACE("command at %s\n", workdir);
-	    this->run_lp_command(completionOutput_, workdir, command);
-	    this->csh_save_history(command);
-	    print_c::clear_text(completionInput_);
-	    g_free(command);
+            this->run_lp_command(completionOutput_, workdir, command);
+            this->csh_save_history(command);
+            print_c::clear_text(completionInput_);
+            g_free(command);
             return TRUE;
         }
         if((event->keyval == GDK_KEY_Page_Up) || (event->keyval == GDK_KEY_Page_Down)) {

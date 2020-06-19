@@ -2,21 +2,21 @@
 #define XF_FSTAB_HH
 
 // These are the strings returned from getMntType()
-#define MNTTYPE_PROCFS	"proc"
-#define MNTTYPE_SMBFS	"smbfs"
-#define MNTTYPE_DEV	"devpts"
-#define MNTTYPE_SHM	"tmpfs"
-#define	MNTTYPE_CDFS	"iso9660"
-#define MNTTYPE_SWAP	"swap"
-#define MNTTYPE_NFS	"nfs"
+#define MNTTYPE_PROCFS        "proc"
+#define MNTTYPE_SMBFS        "smbfs"
+#define MNTTYPE_DEV        "devpts"
+#define MNTTYPE_SHM        "tmpfs"
+#define        MNTTYPE_CDFS        "iso9660"
+#define MNTTYPE_SWAP        "swap"
+#define MNTTYPE_NFS        "nfs"
 
-#define MNTTYPE_CACHEFS	"cachefs"       // proc
-#define MNTTYPE_HSFS	"hsfs"  // proc
+#define MNTTYPE_CACHEFS        "cachefs"       // proc
+#define MNTTYPE_HSFS        "hsfs"  // proc
 
-#define MNTTYPE_CODAFS	"coda"  //nfs
+#define MNTTYPE_CODAFS        "coda"  //nfs
 #define MNTTYPE_CDFS_AIX "cdrfs"        /* AIX */
-#define MNTTYPE_KERNFS	"kernfs"        // proc
-#define MNTTYPE_MFS	"mfs"   //proc
+#define MNTTYPE_KERNFS        "kernfs"        // proc
+#define MNTTYPE_MFS        "mfs"   //proc
 
 /*
 msgid "eCryptfs Volume"
@@ -83,97 +83,97 @@ class FstabView: public FstabPopUp<Type> {
 private:
     static GSList *dfInfo(void){
         GSList *list=NULL;
-	gchar *df = g_find_program_in_path("df");
-	if (!df) {
-	    DBG("\"df\" command not in path!");
-	    return NULL;
-	}
-	gchar *result = NULL; 
-	gchar *command = g_strdup_printf("%s -h -l", df);
-	result = Util<Type>::pipeCommandFull(command);
-	if (!result) return NULL;
-	g_free(command);
-	g_free(df);
+        gchar *df = g_find_program_in_path("df");
+        if (!df) {
+            DBG("\"df\" command not in path!");
+            return NULL;
+        }
+        gchar *result = NULL; 
+        gchar *command = g_strdup_printf("%s -h -l", df);
+        result = Util<Type>::pipeCommandFull(command);
+        if (!result) return NULL;
+        g_free(command);
+        g_free(df);
 
-	auto lines = g_strsplit(result, "\n", -1);
-	for (auto l=lines+1; l && *l; l++){
-	    if (strlen(*l))list = g_slist_prepend(list, g_strdup(*l)); 
-	}
-	if (list) list = g_slist_reverse(list);
-	
-	g_free(result);
-	g_strfreev(lines);
-	return list;
+        auto lines = g_strsplit(result, "\n", -1);
+        for (auto l=lines+1; l && *l; l++){
+            if (strlen(*l))list = g_slist_prepend(list, g_strdup(*l)); 
+        }
+        if (list) list = g_slist_reverse(list);
+        
+        g_free(result);
+        g_strfreev(lines);
+        return list;
     }
 
     static gchar **compactStrV(const gchar *line)
     {
-	if (!line) return NULL;
-	auto strv = g_strsplit(line," ", -1);
-	gchar **out = NULL;
-	gint count = 0;
-	for (auto w=strv; w && *w; w++){
-	    if (strlen(*w) > 0) count++;
-	}
-	DBG("count %d\n", count);
-	if (!count) return NULL;
-	out = (gchar **)calloc(count+1, sizeof(gchar *));
-	auto v = out;
-	for (auto w=strv; w && *w; w++){
-	    if (strlen(*w) > 0){
-	       *v = g_strdup(*w);
-	       v++;
-	    }
-	}
-	return out;
+        if (!line) return NULL;
+        auto strv = g_strsplit(line," ", -1);
+        gchar **out = NULL;
+        gint count = 0;
+        for (auto w=strv; w && *w; w++){
+            if (strlen(*w) > 0) count++;
+        }
+        DBG("count %d\n", count);
+        if (!count) return NULL;
+        out = (gchar **)calloc(count+1, sizeof(gchar *));
+        auto v = out;
+        for (auto w=strv; w && *w; w++){
+            if (strlen(*w) > 0){
+               *v = g_strdup(*w);
+               v++;
+            }
+        }
+        return out;
     }
 
     static void
     addDfPartition(GtkTreeModel *treeModel, const gchar *line){
 
-	auto r = compactStrV(line);
+        auto r = compactStrV(line);
 
 
 
-	for (auto w=r; w && *w; w++){
-	    fprintf(stderr,"\"%s\" ",*w);
-	}
+        for (auto w=r; w && *w; w++){
+            fprintf(stderr,"\"%s\" ",*w);
+        }
 
         fprintf(stderr,"\n");
-	addPartition2Model(treeModel, (const gchar **)r);
+        addPartition2Model(treeModel, (const gchar **)r);
 
-	g_strfreev(r);
+        g_strfreev(r);
     }
 
     static void
     addPartitionItems(GtkTreeModel *treeModel){
         auto list = dfInfo();
         for (auto l=list; l&&l->data; l=l->next){
-	    DBG("adding \"%s\"\n", (const gchar *)l->data);
-	    
+            DBG("adding \"%s\"\n", (const gchar *)l->data);
+            
             addDfPartition(treeModel, (const gchar *)l->data);
-	    g_free(l->data);
+            g_free(l->data);
         }
-	g_slist_free(list);
+        g_slist_free(list);
     }
 
     static void
     addPartition2Model(GtkTreeModel *treeModel, const gchar **strv){
-	auto path = strv[0];
+        auto path = strv[0];
         if (!path){
             ERROR("fstab/view.hh::addPartition: path cannot be null\n");
             return;
         }
-	auto mntdir = strv[5];
- 	GtkTreeIter iter;
+        auto mntdir = strv[5];
+         GtkTreeIter iter;
 
         gboolean mounted = isMounted(path);
         gchar *text;
- 	text = g_strdup_printf("** %s (%s): %s\n%s %s\n%s %s\n%s %s",
-			strv[5], path, strv[1],  // size, mountpoint
-			_("Used"), strv[2],
-			_("Available"), strv[3],
-			_("Usage"), strv[4]);
+         text = g_strdup_printf("** %s (%s): %s\n%s %s\n%s %s\n%s %s",
+                        strv[5], path, strv[1],  // size, mountpoint
+                        _("Used"), strv[2],
+                        _("Available"), strv[3],
+                        _("Usage"), strv[4]);
 
         auto label = g_strdup_printf("%s", strv[5]);
         auto utf_name = util_c::utf_string(label);
@@ -223,18 +223,18 @@ public:
             ERROR("fstab/view.hh::addPartition: path cannot be null\n");
             return;
         }
- 	GtkTreeIter iter;
+         GtkTreeIter iter;
         gchar *basename = g_path_get_basename(path);
         gchar *mntDir = getMntDir(path);
         auto label = e2Label(basename);
-	TRACE("fstab/addPartition()...\n");
+        TRACE("fstab/addPartition()...\n");
 
         gboolean mounted = isMounted(path);
         gchar *text;
         auto fstype = fsType(path);        
         gchar *fileInfo = util_c::fileInfo(path);
- 	text = g_strdup_printf("** %s (%s):\n%s\n%s %s\n%s",
-			basename, 
+         text = g_strdup_printf("** %s (%s):\n%s\n%s %s\n%s",
+                        basename, 
                         label?label:_("No Label"),
                         fstype?fstype:_("There is no file system available (unformatted)"),
                         _("Mount point:"), mounted?mntDir:_("Not mounted"),

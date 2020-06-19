@@ -38,15 +38,15 @@ class RootPopUp  {
         setPath(view);
         auto itemPath =Popup<Type>::getWidgetData(rootItemPopUp, "itemPath");
         TRACE("reset root menu items, itemPath=%s\n", itemPath);
-	gboolean isBookMark = RootView<Type>::isBookmarked(itemPath);
+        gboolean isBookMark = RootView<Type>::isBookmarked(itemPath);
 #ifdef DO_MOUNT_ITEMS
         if (EFS<Type>::isEFS(itemPath)) isBookMark = TRUE;
 #endif
-	auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
-	gtk_widget_set_sensitive(menuitem, isBookMark);
+        auto menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Remove bookmark"));
+        gtk_widget_set_sensitive(menuitem, isBookMark);
         if (isBookMark) gtk_widget_show(menuitem);
         else gtk_widget_hide(menuitem);
-	menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Empty trash"));
+        menuitem = GTK_WIDGET(g_object_get_data(G_OBJECT(rootItemPopUp), "Empty trash"));
         auto trashFiles = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
         if (strstr(itemPath, trashFiles)) gtk_widget_show(menuitem);
         else gtk_widget_hide(menuitem);
@@ -59,7 +59,7 @@ class RootPopUp  {
         if (EFS<Type>::isEFS(itemPath)){
             itemPath += strlen("efs:/");
             GtkWidget *show, *hide;
-	    TRACE("Root<>::resetMenuItems()...\n");
+            TRACE("Root<>::resetMenuItems()...\n");
             if (FstabView<Type>::isMounted(itemPath)){
                 show = umountW;
                 hide = mountW;
@@ -83,6 +83,11 @@ class RootPopUp  {
     static void
     resetPopup(void) {
         TRACE("reset root popup, is TreeView=%d\n", isTreeView);
+        auto item = GTK_WIDGET(g_object_get_data(G_OBJECT(rootPopUp), "Clear cache"));
+        auto cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
+        gtk_widget_set_sensitive(item,g_file_test(cache_dir, G_FILE_TEST_EXISTS)); 
+        g_free(cache_dir);
+
         //auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(rootPopUp), "View as list"));
         //gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(w), isTreeView);
 
@@ -92,12 +97,12 @@ private:
 
     static void 
     setPath(View<Type> * view){
-	if (!view) {
-	    ERROR("local/popup: setPath() view is %p\n", view);
-	    return;
-	}
+        if (!view) {
+            ERROR("local/popup: setPath() view is %p\n", view);
+            return;
+        }
 
-	gint listLength = g_list_length(view->selectionList());
+        gint listLength = g_list_length(view->selectionList());
         GtkTreeIter iter;
         if (listLength > 1) return;
 
@@ -106,14 +111,14 @@ private:
         gchar *iconName;
         gchar *mimetype;
         gchar *displayName;
-	if (!gtk_tree_model_get_iter (view->treeModel(), &iter, tpath)) {
-	    return ;
-	}
-	gtk_tree_model_get (view->treeModel(), &iter, 
-		//ACTUAL_NAME, &aname,
-		DISPLAY_NAME, &displayName,
+        if (!gtk_tree_model_get_iter (view->treeModel(), &iter, tpath)) {
+            return ;
+        }
+        gtk_tree_model_get (view->treeModel(), &iter, 
+                //ACTUAL_NAME, &aname,
+                DISPLAY_NAME, &displayName,
                 MIMETYPE, &mimetype, 
-		ICON_NAME, &iconName,
+                ICON_NAME, &iconName,
                 PATH, &itemPath, 
                 -1);
         if (!mimetype){
@@ -126,32 +131,32 @@ private:
         if (g_list_length(view->selectionList()) > 1) statLine = g_strdup("");
         else {
             struct stat st;
-	    if (stat(itemPath, &st)<0){
-		statLine = g_strdup_printf("stat(%s): %s", itemPath, strerror(errno));
-		errno=0;
-	    } else statLine  = Util<Type>::statInfo(&st);
+            if (stat(itemPath, &st)<0){
+                statLine = g_strdup_printf("stat(%s): %s", itemPath, strerror(errno));
+                errno=0;
+            } else statLine  = Util<Type>::statInfo(&st);
         }
 
-	gchar *fileInfo = Util<Type>::fileInfo(itemPath);
+        gchar *fileInfo = Util<Type>::fileInfo(itemPath);
 
-	auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(rootItemPopUp), "title"));
-	gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", displayName);
-	Gtk<Type>::menu_item_content(title, iconName, markup, -48);
-	g_free(markup);
+        auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(rootItemPopUp), "title"));
+        gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", displayName);
+        Gtk<Type>::menu_item_content(title, iconName, markup, -48);
+        g_free(markup);
         
-	
-	    Popup<Type>::setWidgetData(rootItemPopUp, "fileInfo", fileInfo);
-	    Popup<Type>::setWidgetData(rootItemPopUp, "iconName", iconName);
-	    Popup<Type>::setWidgetData(rootItemPopUp, "displayName", displayName);
-	    Popup<Type>::setWidgetData(rootItemPopUp, "itemPath", itemPath);
-	    Popup<Type>::setWidgetData(rootItemPopUp, "mimetype", mimetype);
-	    Popup<Type>::setWidgetData(rootItemPopUp, "statLine", statLine);
-	    g_free(fileInfo);
-	    g_free(iconName);
-	    g_free(displayName);
-	    g_free(itemPath);
-	    g_free(mimetype);
-	    g_free(statLine);
+        
+            Popup<Type>::setWidgetData(rootItemPopUp, "fileInfo", fileInfo);
+            Popup<Type>::setWidgetData(rootItemPopUp, "iconName", iconName);
+            Popup<Type>::setWidgetData(rootItemPopUp, "displayName", displayName);
+            Popup<Type>::setWidgetData(rootItemPopUp, "itemPath", itemPath);
+            Popup<Type>::setWidgetData(rootItemPopUp, "mimetype", mimetype);
+            Popup<Type>::setWidgetData(rootItemPopUp, "statLine", statLine);
+            g_free(fileInfo);
+            g_free(iconName);
+            g_free(displayName);
+            g_free(itemPath);
+            g_free(mimetype);
+            g_free(statLine);
        return;
     }
 
@@ -188,16 +193,16 @@ private:
 
 
     static GtkMenu *createItemPopUp(void){
-	menuItem_t item[]=
+        menuItem_t item[]=
         {
-	    {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, rootItemPopUp, NULL},
+            {N_("Open in New Tab"), (void *)LocalPopUp<Type>::newTab, rootItemPopUp, NULL},
             {N_("Remove bookmark"), (void *)removeBookmarkItem, NULL, NULL},
 #ifdef DO_MOUNT_ITEMS
             {N_("Mount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
             {N_("Unmount the volume associated with this folder"), (void *)LocalPopUp<Type>::mount, NULL, NULL},
 #endif
             {N_("Empty trash"), (void *)emptyTrash, NULL, NULL},
-	     {NULL,NULL,NULL,NULL}
+             {NULL,NULL,NULL,NULL}
         };
         const gchar *key[]={
             "Open in New Tab",
@@ -232,9 +237,11 @@ private:
     clearCache(GtkMenuItem *menuItem, gpointer data)
     {
         TRACE("clearCache\n");
-	auto cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
-	Gio<Type>::clearDirectory(cache_dir);
-	g_free(cache_dir);
+        auto cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
+        if (g_file_test(cache_dir, G_FILE_TEST_EXISTS)){
+            Gio<Type>::clearDirectory(cache_dir);
+        }
+        g_free(cache_dir);
     }
 
 #ifdef ENABLE_EFS_MODULE
@@ -281,7 +288,7 @@ private:
         if (response){
             response = LocalPopUp<Type>::ckDir(response);
             if (!response) return;
- 	    g_strstrip(response);
+             g_strstrip(response);
             if (!strlen(response))return;
             switch (which) {
                 case 1:
@@ -302,55 +309,55 @@ private:
     removeBookmarkItem(GtkMenuItem *menuItem, gpointer data)
     {
         TRACE("Remove bookmark\n");
-	auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "itemPath");
+        auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "itemPath");
         if (EFS<Type>::isEFS(path)){
             if (!EFS<Type>::removeItem(path+strlen("efs:/"))) return;
         } else {
             if (!RootView<Type>::removeBookmark(path)) return;
         }
-	auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
-	view->reloadModel();
+        auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        view->reloadModel();
     }
 
     static gboolean
     updateTrashIcon(GtkTreeModel *treeModel, GtkTreePath *tpath, GtkTreeIter *iter, void *data){
-	auto path = (const gchar *)data;
-	if (!path) return FALSE;
-	gchar *thisPath;
+        auto path = (const gchar *)data;
+        if (!path) return FALSE;
+        gchar *thisPath;
         gtk_tree_model_get(treeModel, iter, PATH, &thisPath, -1);
-	TRACE( "%s <__> %s \n", thisPath, path);
-	if (!thisPath) return FALSE;
-	if (!strstr(thisPath, path)){
-	    g_free(thisPath);
+        TRACE( "%s <__> %s \n", thisPath, path);
+        if (!thisPath) return FALSE;
+        if (!strstr(thisPath, path)){
+            g_free(thisPath);
             return FALSE;
-	}
-        g_free(thisPath);	
-	auto icon_name = "user-trash";
-	auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
-	auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
-	auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
-	auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
-	g_free(highlight_name);
-	
-	gtk_list_store_set (GTK_LIST_STORE(treeModel), iter, 
-		ICON_NAME, icon_name,
+        }
+        g_free(thisPath);        
+        auto icon_name = "user-trash";
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
+        auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
+        auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
+        g_free(highlight_name);
+        
+        gtk_list_store_set (GTK_LIST_STORE(treeModel), iter, 
+                ICON_NAME, icon_name,
                 TREEVIEW_PIXBUF, treeViewPixbuf, 
-		DISPLAY_PIXBUF, normal_pixbuf,
-		NORMAL_PIXBUF, normal_pixbuf,
-		HIGHLIGHT_PIXBUF, highlight_pixbuf,
-		-1);
-	return TRUE;
+                DISPLAY_PIXBUF, normal_pixbuf,
+                NORMAL_PIXBUF, normal_pixbuf,
+                HIGHLIGHT_PIXBUF, highlight_pixbuf,
+                -1);
+        return TRUE;
     }
 
     static void
     emptyTrash(GtkMenuItem *menuItem, gpointer data) {
-	auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
-	Gio<Type>::execute((GtkDialog *)NULL, trash, MODE_RM);
-	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
-	gtk_tree_model_foreach(view->treeModel(), updateTrashIcon, (void *)trash);
-	g_free(trash);
+        auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
+        Gio<Type>::execute((GtkDialog *)NULL, trash, MODE_RM);
+        auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        gtk_tree_model_foreach(view->treeModel(), updateTrashIcon, (void *)trash);
+        g_free(trash);
     }
-	
+        
 
 
 };

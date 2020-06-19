@@ -60,7 +60,7 @@ public:
         // XXX: Probably should retrieve path the same way from
         //      menu item in both cases... But that would use
         //      more memory and CPU unnecessarily...
-	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         // paste into:
         // auto path = (const gchar *)g_object_get_data(G_OBJECT(menuItem), "path");
         // if (!path) path = view->path();
@@ -97,18 +97,18 @@ public:
             ERROR("clipboard.hh::::putInClipBoard(): Not a valid utf8 string: %s\n", clipData);
             gtk_clipboard_set_text (clipBoard, "", 1);
         } else gtk_clipboard_set_text (clipBoard, clipData, strlen(clipData)+1);
-	gtk_icon_view_unselect_all (view->iconView());
+        gtk_icon_view_unselect_all (view->iconView());
     }
 
     static void
     copy(GtkMenuItem *menuItem, gpointer data) { 
-	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         putInClipBoard(view, "copy");
     }
 
     static void
     cut(GtkMenuItem *menuItem, gpointer data) { 
-	auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
+        auto view = (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         putInClipBoard(view, "move");
     }
 
@@ -154,25 +154,25 @@ public:
 
     static void
     addClipBoardEmblems(void){
-	TRACE("*** addClipBoardEmblems\n");
+        TRACE("*** addClipBoardEmblems\n");
         gchar **files = NULL;
-	if (clipBoardCache) files = g_strsplit(clipBoardCache, "\n", -1);
-	sendMonitorSignals(files);
+        if (clipBoardCache) files = g_strsplit(clipBoardCache, "\n", -1);
+        sendMonitorSignals(files);
         g_strfreev(files);
     }
 
     static gchar *
     removeClipBoardEmblems(void){
-	TRACE("*** removeClipBoardEmblems\n");
-	if (!clipBoardCache) return NULL;
+        TRACE("*** removeClipBoardEmblems\n");
+        if (!clipBoardCache) return NULL;
         gchar **files = g_strsplit(clipBoardCache, "\n", -1);
 
-	g_free(clipBoardCache);
-	clipBoardCache = NULL;  
+        g_free(clipBoardCache);
+        clipBoardCache = NULL;  
 
-	sendMonitorSignals(files);
+        sendMonitorSignals(files);
         g_strfreev(files);
-	return NULL;
+        return NULL;
     }
 
     static void
@@ -182,14 +182,14 @@ public:
         for (auto list = localMonitorList; list && list->data; list = list->next){
             auto monitor = (GFileMonitor *)list->data;
             TRACE("Sending signal to monitor %p to update icons, files=%p. ***\n", 
-		    list->data, files);
+                    list->data, files);
             for (gchar **f = files; f && *f; f++) {
-		if (strncmp(*f, URIFILE, strlen(URIFILE))) {
-		    TRACE("sendMonitorSignals: %s is not URL.\n", *f);
-		    continue;
-		}
-		else TRACE("sendMonitorSignals: signaling change for %s.\n", *f);
-		const gchar *path = *f + strlen(URIFILE);
+                if (strncmp(*f, URIFILE, strlen(URIFILE))) {
+                    TRACE("sendMonitorSignals: %s is not URL.\n", *f);
+                    continue;
+                }
+                else TRACE("sendMonitorSignals: signaling change for %s.\n", *f);
+                const gchar *path = *f + strlen(URIFILE);
                 TRACE("*** monitor %p update: %s\n", list->data, path);
                 GFile *child = g_file_new_for_path (path); 
                 g_file_monitor_emit_event (monitor,
@@ -201,7 +201,7 @@ public:
 
     static gchar *
     clipBoardEmblem(const gchar *path){
-	gchar *emblem = NULL;
+        gchar *emblem = NULL;
         if (isInClipBoard(path)){
             if(isClipBoardCut()) {
                 emblem = g_strdup("/NE/edit-cut-symbolic/2.0/220");
@@ -209,29 +209,29 @@ public:
                 emblem = g_strdup("/NE/edit-copy-symbolic/2.0/220");
             }
         }
-	TRACE("clipBoardEmblem for %s %s\n", path, emblem);
-	return emblem;
+        TRACE("clipBoardEmblem for %s %s\n", path, emblem);
+        return emblem;
     }
 
     static void 
     updateClipBoardCache(const gchar *text){
-	gboolean updateIconBusiness = FALSE;
+        gboolean updateIconBusiness = FALSE;
         if (!validClipBoard){
-	    if (clipBoardCache){
-		// Update any previously set icons.
-		clipBoardCache = removeClipBoardEmblems();
-		updateIconBusiness = TRUE;
-	    }
-	}
-	else if (!clipBoardCache || strcmp(text, clipBoardCache)){
-	    // Update any previously set icons.
-	    clipBoardCache = removeClipBoardEmblems();
+            if (clipBoardCache){
+                // Update any previously set icons.
+                clipBoardCache = removeClipBoardEmblems();
+                updateIconBusiness = TRUE;
+            }
+        }
+        else if (!clipBoardCache || strcmp(text, clipBoardCache)){
+            // Update any previously set icons.
+            clipBoardCache = removeClipBoardEmblems();
             g_free(clipBoardCache);
             clipBoardCache = g_strdup(text);
-	    updateIconBusiness = TRUE;
+            updateIconBusiness = TRUE;
         }
-	if (!updateIconBusiness) return;
-	addClipBoardEmblems();
+        if (!updateIconBusiness) return;
+        addClipBoardEmblems();
     }
 
     static void
@@ -244,7 +244,7 @@ public:
             validClipBoard = TRUE;
         } else validClipBoard = FALSE;
         TRACE("Clip board is valid = %d\n", validClipBoard);
-	updateClipBoardCache(text);
+        updateClipBoardCache(text);
         return;
     }
 

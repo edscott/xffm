@@ -29,8 +29,8 @@ private:
          auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
          gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET(vbox));
          label_ = GTK_LABEL(gtk_label_new (""));
-	 auto markup = 
-	    g_strdup_printf("   <span color=\"blue\" size=\"larger\"><b>%s</b></span>   ", message);           
+         auto markup = 
+            g_strdup_printf("   <span color=\"blue\" size=\"larger\"><b>%s</b></span>   ", message);           
          gtk_label_set_markup(label_, markup);
          g_free(markup);
          
@@ -51,7 +51,7 @@ private:
          gtk_box_pack_start(vbox, GTK_WIDGET(progressBar_), FALSE, FALSE,0);
 
 
-	 gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
+         gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER_ON_PARENT);
          return dialog;
     }
 };
@@ -62,7 +62,7 @@ gboolean stop_;
 
 public:
     Progress(const gchar *message, const gchar *icon, 
-	    const gchar *title, const gchar *text):
+            const gchar *title, const gchar *text):
         BaseProgress<Type>(message, icon)
     {
         stop_ = FALSE;
@@ -76,41 +76,41 @@ private:
     GtkWindow *
     progressDialog(const gchar *title, const gchar *text)
     {
-	auto dialog = this->dialog();
-	auto progressBar = this->progressBar();
+        auto dialog = this->dialog();
+        auto progressBar = this->progressBar();
 
         gtk_window_set_title(dialog, title?title:_("Running"));
         /*auto text = g_strdup_printf("%s (pid: %d)", 
                  _("Waiting for operation to finish..."),
                  Tubo<Type>::getChild (pid));*/
 
-	gtk_progress_bar_set_text (progressBar, text?text:_("Waiting for operation to finish..."));
-	gtk_progress_bar_set_show_text (progressBar, TRUE);
+        gtk_progress_bar_set_text (progressBar, text?text:_("Waiting for operation to finish..."));
+        gtk_progress_bar_set_show_text (progressBar, TRUE);
         gtk_progress_bar_pulse(progressBar);
-	gtk_widget_realize (GTK_WIDGET(dialog));
-	 
-	gtk_widget_show_all (GTK_WIDGET(dialog));
+        gtk_widget_realize (GTK_WIDGET(dialog));
+         
+        gtk_widget_show_all (GTK_WIDGET(dialog));
         Dialogs<Type>::placeDialog(dialog);
         g_timeout_add(250, simplePulse_f, (void *)this);
 
 
-	return dialog;
+        return dialog;
     }
 
     static gboolean simplePulse_f(void *data) {
         auto progress = (Progress<Type> *)data;
         auto progressBar = progress->progressBar();
-	auto dialog = progress->dialog();
-	if (!GTK_IS_PROGRESS_BAR(progressBar)){
+        auto dialog = progress->dialog();
+        if (!GTK_IS_PROGRESS_BAR(progressBar)){
             ERROR("simplePulse_f() not a progressbar\n");
-	    return FALSE;
-	}
-	if (progress->getStop()){
-	    gtk_widget_hide(GTK_WIDGET(dialog));
-	    gtk_widget_destroy(GTK_WIDGET(dialog));
+            return FALSE;
+        }
+        if (progress->getStop()){
+            gtk_widget_hide(GTK_WIDGET(dialog));
+            gtk_widget_destroy(GTK_WIDGET(dialog));
             delete(progress);
-	    return FALSE;
-	}
+            return FALSE;
+        }
         gtk_progress_bar_pulse(progressBar);
         return TRUE;
     }  

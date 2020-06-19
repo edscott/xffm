@@ -10,23 +10,23 @@ class Dialogs{
 private:
     static void
     responseYes (GtkWidget * button, gpointer data) {
-	g_object_set_data(G_OBJECT(data), "response", GINT_TO_POINTER(1));
-	gtk_widget_hide(GTK_WIDGET(data));
-	gtk_dialog_response(GTK_DIALOG(data), GTK_RESPONSE_YES);
+        g_object_set_data(G_OBJECT(data), "response", GINT_TO_POINTER(1));
+        gtk_widget_hide(GTK_WIDGET(data));
+        gtk_dialog_response(GTK_DIALOG(data), GTK_RESPONSE_YES);
     }
 
 public:
 
     static GtkWidget *yesNo(const gchar *message){
-	auto dialog = Dialogs<Type>::quickHelp(mainWindow, message, "dialog-question");
-	auto buttonBox = (GtkBox *)g_object_get_data(G_OBJECT(dialog), "buttonBox");
-	auto button = Gtk<Type>::dialog_button("greenball", _("Yes"));
-	g_signal_connect (button, "clicked", G_CALLBACK (responseYes), dialog);
-	gtk_box_pack_start(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
-	
-	
-	gtk_dialog_run(GTK_DIALOG(dialog));
-	return dialog;
+        auto dialog = Dialogs<Type>::quickHelp(mainWindow, message, "dialog-question");
+        auto buttonBox = (GtkBox *)g_object_get_data(G_OBJECT(dialog), "buttonBox");
+        auto button = Gtk<Type>::dialog_button("greenball", _("Yes"));
+        g_signal_connect (button, "clicked", G_CALLBACK (responseYes), dialog);
+        gtk_box_pack_start(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
+        
+        
+        gtk_dialog_run(GTK_DIALOG(dialog));
+        return dialog;
     }
     
     static void
@@ -96,11 +96,11 @@ public:
      if (parent){
          g_signal_connect_swapped(dialog, "response", 
                     G_CALLBACK (gtk_widget_show),
-		    parent);
+                    parent);
      }
      g_signal_connect_swapped (dialog, "response",
-		G_CALLBACK (closeQuickDialog),
-		dialog);
+                G_CALLBACK (closeQuickDialog),
+                dialog);
 
 
      // Add the label, and show everything we have added
@@ -110,14 +110,14 @@ public:
      gtk_box_pack_start(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
      
      if (icon){
-	auto pixbuf = Pixbuf<Type>::getPixbuf(icon, -48);
+        auto pixbuf = Pixbuf<Type>::getPixbuf(icon, -48);
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
-	    if (image) {
-	        gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
-	        gtk_widget_show (image);
+            if (image) {
+                gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
+                gtk_widget_show (image);
             }
-	}
+        }
      }
      auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
      gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
@@ -132,8 +132,8 @@ public:
      gtk_box_pack_end(hbox2, GTK_WIDGET(button), FALSE, FALSE,0);
      g_object_set_data(G_OBJECT(dialog), "buttonBox", (void *)hbox2); 
      g_signal_connect (button, "clicked",
-		G_CALLBACK (onQuickCancel),
-		dialog);
+                G_CALLBACK (onQuickCancel),
+                dialog);
 
         
 
@@ -151,9 +151,9 @@ private:
     
     static void
     closeQuickDialog(GtkWidget *widget, GdkEventKey * event, void *data){
-	TRACE("closeQuickDialog\n");
-	gtk_widget_hide(widget);
-	gtk_widget_destroy(widget);
+        TRACE("closeQuickDialog\n");
+        gtk_widget_hide(widget);
+        gtk_widget_destroy(widget);
     }
 
 

@@ -5,13 +5,8 @@
 
 #define XFFM_CC
 #include "config.h"
-//#define NOFORK 1
 // Run in background, detached.
-# define FORK 1
-#ifdef NOFORK
-# undef FORK
-# warning "FORK is disabled"
-#endif
+// Otherwise, use argv[1]=="-f"
 
 // Version 0.93, enable fstab and ecryptfs (Linux)
 #ifdef BSD_NOT_FOUND
@@ -36,9 +31,6 @@
 # define ENABLE_PKG_MODULE 1
 # undef ENABLE_DIFF_MODULE 
 # define ENABLE_DIFF_MODULE 1
-// Easier debugging:
-//# undef FORK 
-//# warning "Fork not active..."
 // Core dumps for debugging:
 # define FORCE_CORE
 # warning "Core dump enabled..."
@@ -85,6 +77,30 @@
 #define URIFILE "file://"
 #define USER_DIR                 g_get_home_dir()
 
+
+namespace xf {
+    template <class Type> class Fm;
+}
+
+
+# undef TRACE
+# define TRACE(...)   { (void)0; }
+//# define TRACE(...)  {fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);}
+# undef DBG
+//# define DBG(...)   { (void)0; }
+# define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
+
+# undef ERROR
+//# define ERROR(...)  {fprintf(stderr, "ERROR> "); fprintf(stderr, __VA_ARGS__);}
+# define ERROR(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printError(errorText); }
+# undef INFO
+//# define INFO(...)  {fprintf(stderr, "INFO> "); fprintf(stderr, __VA_ARGS__);}
+# define INFO(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printInfo(errorText); }
+
+# undef DBG_
+# define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
+
+
 static gchar *buildDir=NULL;
 static const gchar *buildIcons=NULL;
 static const gchar *xffmProgram;
@@ -123,11 +139,8 @@ main (int argc, char *argv[]) {
     } 
 
 
-#ifndef FORK
-    DBG("FORK disabled: SSH_ASKPASS will not work.");
-#endif
     if (chdir(g_get_home_dir()) < 0){
-        ERROR("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
+        fprintf(stderr, "xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
         exit(1);
     }
     xffindProgram = argv[0];
@@ -153,6 +166,7 @@ main (int argc, char *argv[]) {
     //g_free(text);
 #endif
     gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+    
     gtk_main();
     //delete(fm);
     return 0;

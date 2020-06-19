@@ -43,7 +43,7 @@ public:
 
     void
     start_monitor(View<Type> *view, const gchar *path){
-	TRACE("Starting monitor for path:%s\n", path);
+        TRACE("Starting monitor for path:%s\n", path);
         this->startMonitor(view->treeModel(), path, (void *)monitor_f);
         view->setMonitorObject(this);
         // start mountThread
@@ -52,12 +52,12 @@ public:
         this->mountArg_[0] = (void *)this;
         this->mountArg_[1] = GINT_TO_POINTER(TRUE);
         this->mountArg_[2] = GINT_TO_POINTER(TRUE);
-	// mountThreadF will monitor if items are mounted or unmounted
-	gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
-	if (retval){
-	    ERROR("fm/view/fstab/monitor::thread_create(): %s\n", strerror(retval));
-	    //return retval;
-	}
+        // mountThreadF will monitor if items are mounted or unmounted
+        gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
+        if (retval){
+            ERROR("fm/view/fstab/monitor::thread_create(): %s\n", strerror(retval));
+            //return retval;
+        }
 #endif
     }
 
@@ -77,10 +77,10 @@ public:
         }
         TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s basemonitor=%p", sum, baseMonitor);
         
-	auto hash = getMountHash(NULL);
+        auto hash = getMountHash(NULL);
         while (arg[1]){// arg[1] is semaphore to thread
             usleep(250000);
-	    if (!baseMonitor->active())continue;
+            if (!baseMonitor->active())continue;
             //sleep(1);
             TRACE("mountThreadF loop for arg=%p\n", data);
             gchar *newSum = Util<Type>::md5sum("/proc/mounts");
@@ -116,7 +116,7 @@ public:
             }
             if (strcmp(newSumPartitions, sumPartitions)){
                 TRACE("new md5sum /proc/partitions = %s (%s)\n", newSumPartitions, sumPartitions);
-	    }
+            }
         }
         g_free(sum);
         TRACE("***now exiting mountThreadF(), baseMonitor=%p\n", baseMonitor);
@@ -150,8 +150,8 @@ private:
         gchar *path;
         gboolean retval = FALSE;
         // Mounted but not in mounts hash:
- 	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
-	TRACE("Fstab<>::checkIfMounted(%s)...\n", path);
+         gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
+        TRACE("Fstab<>::checkIfMounted(%s)...\n", path);
         if (FstabView<Type>::isMounted(path)) {
             gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
             if (!g_hash_table_lookup((GHashTable *)data, key)){
@@ -175,7 +175,7 @@ private:
         gchar *path;
         gboolean retval = FALSE;
         // Mounted but not in mounts hash:
- 	gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
+         gtk_tree_model_get (treeModel, iter, PATH, &path, -1);
         if (!FstabView<Type>::isMounted(path)) {
             gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
             if (g_hash_table_lookup((GHashTable *)data, key)){
@@ -197,8 +197,8 @@ private:
 
      static GHashTable *getMountHash(GHashTable *oldHash){
          if (oldHash) g_hash_table_destroy(oldHash);
-	// Get first two items per line of /proc/mounts
-	// and add both to hash.
+        // Get first two items per line of /proc/mounts
+        // and add both to hash.
         GHashTable  *hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
         FILE *mounts = fopen("/proc/mounts", "r");
         if (!mounts) return NULL;
@@ -220,23 +220,23 @@ private:
             }
         }
         fclose(mounts);
-	return hash;
+        return hash;
      }
    
     static gchar *
     uuid2Partition(const gchar *partuuidPath){
         const gchar *command = "ls -l /dev/disk/by-partuuid";
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
-	    return NULL;
-	}
+        FILE *pipe = popen (command, "r");
+        if(pipe == NULL) {
+            ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
+            return NULL;
+        }
         gchar *partuuid = g_path_get_basename(partuuidPath);
         gchar line[256];
         memset(line, 0, 256);
         gchar *partition = NULL;
             TRACE("uuid2Partition(): looking for : \"%s\"\n", partuuid);
-	while (fgets (line, 255, pipe) && !feof(pipe)) {
+        while (fgets (line, 255, pipe) && !feof(pipe)) {
             TRACE("uuid2Partition(): %s: %s\n", partuuid, line);
             if (!strstr(line, "->")) continue;
             if (!strstr(line, partuuid)) continue;
@@ -261,26 +261,26 @@ private:
                 }
                 break;
             }*/
-	}
+        }
         pclose (pipe);
         g_free(partuuid);
-	return partition;
+        return partition;
 
     }
     static gchar *
     id2Partition(const gchar *idPath){
         const gchar *command = "ls -l /dev/disk/by-id";
-	FILE *pipe = popen (command, "r");
-	if(pipe == NULL) {
-	    ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
-	    return NULL;
-	}
+        FILE *pipe = popen (command, "r");
+        if(pipe == NULL) {
+            ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
+            return NULL;
+        }
         gchar *base = g_path_get_basename(idPath);
         gchar line[256];
         memset(line, 0, 256);
         gchar *partition = NULL;
             TRACE("id2Partition(): looking for : \"%s\"\n", base);
-	while (fgets (line, 255, pipe) && !feof(pipe)) {
+        while (fgets (line, 255, pipe) && !feof(pipe)) {
             TRACE("id2Partition(): %s: %s\n", base, line);
             if (!strstr(line, "->")) continue;
             if (!strstr(line, base)) continue;
@@ -305,36 +305,36 @@ private:
                 }
                 break;
             }*/
-	}
+        }
         pclose (pipe);
         g_free(base);
-	return partition;
+        return partition;
 
     }
     
     static gboolean rm_func (GtkTreeModel *model,
-				GtkTreePath *tpath,
-				GtkTreeIter *iter,
-				gpointer data){
-	gchar *id;
-	gchar *path;
-	gtk_tree_model_get (model, iter, PATH, &path, DISK_ID, &id, -1);  
+                                GtkTreePath *tpath,
+                                GtkTreeIter *iter,
+                                gpointer data){
+        gchar *id;
+        gchar *path;
+        gtk_tree_model_get (model, iter, PATH, &path, DISK_ID, &id, -1);  
 
-	TRACE("%s test for removing %s (%s) from treemodel.\n", path, id, (gchar *)data);
+        TRACE("%s test for removing %s (%s) from treemodel.\n", path, id, (gchar *)data);
         if (!id) return FALSE;
-	
-	if (!strstr(id, (gchar *)data)){
-	    g_free(id);
-	    g_free(path);
-	    return FALSE;
-	}
-	TRACE("removing %s (%s) from treemodel.\n", id, (gchar *)data);
-	GtkListStore *store = GTK_LIST_STORE(model);
+        
+        if (!strstr(id, (gchar *)data)){
+            g_free(id);
+            g_free(path);
+            return FALSE;
+        }
+        TRACE("removing %s (%s) from treemodel.\n", id, (gchar *)data);
+        GtkListStore *store = GTK_LIST_STORE(model);
 
-	gtk_list_store_remove(store, iter);
-	g_free(path);
+        gtk_list_store_remove(store, iter);
+        g_free(path);
         g_free(id);
-	return TRUE;
+        return TRUE;
     }
     
 
@@ -428,12 +428,12 @@ private:
     }
 
    static gboolean changeIcon (GtkTreeModel *model,
-				GtkTreePath *tpath,
-				GtkTreeIter *iter,
-				gpointer data){
-	auto path = (const gchar *)data;
+                                GtkTreePath *tpath,
+                                GtkTreeIter *iter,
+                                gpointer data){
+        auto path = (const gchar *)data;
         gchar *currentPath;
-	gtk_tree_model_get (model, iter, PATH, &currentPath, -1);  
+        gtk_tree_model_get (model, iter, PATH, &currentPath, -1);  
         
         TRACE("fstabmonitor currentPath \"%s\" == \"%s\"\n", currentPath, path);
         if (strcmp(path, currentPath)){
@@ -442,21 +442,21 @@ private:
         }
         g_free(currentPath);
         TRACE("*** fstabmonitor currentPath %s\n", currentPath, path);
-	
-	GtkListStore *store = GTK_LIST_STORE(model);
+        
+        GtkListStore *store = GTK_LIST_STORE(model);
 
         gboolean mounted = FstabView<Type>::isMounted(path);
         auto iconName = (mounted)?"drive-harddisk/NW/greenball/3.0/180":
             "drive-harddisk/NW/grayball/3.0/180";
         TRACE("fstabmonitor stat_func(): iconname=%s\n", iconName);
         GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf(iconName,  GTK_ICON_SIZE_DIALOG);
-	gtk_list_store_set (store, iter, 
+        gtk_list_store_set (store, iter, 
                 ICON_NAME, iconName,
                 DISPLAY_PIXBUF, pixbuf,
                 NORMAL_PIXBUF, pixbuf,
-		-1);
+                -1);
 
-	return TRUE;
+        return TRUE;
     }
 
 #endif

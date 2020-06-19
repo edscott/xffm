@@ -18,12 +18,12 @@
 
 #include  <locale.h>
 
-#define GLOBBER_MASK	     0xffff
+#define GLOBBER_MASK             0xffff
 
-#define GLOBBER_RECURSIVE    		0x01
-#define GLOBBER_RECURSIVE_NO_HIDDEN    	0x02
-#define GLOBBER_VERBOSE      		0x04
-#define GLOBBER_ADD_DOT_FILTER		0x08
+#define GLOBBER_RECURSIVE                    0x01
+#define GLOBBER_RECURSIVE_NO_HIDDEN            0x02
+#define GLOBBER_VERBOSE                      0x04
+#define GLOBBER_ADD_DOT_FILTER                0x08
 
 /* things that require a stat: */
 #define GLOBBER_MTIME        0x040
@@ -36,7 +36,7 @@
 #define GLOBBER_TYPE         0x1000
 #define GLOBBER_USER         0x2000
 #define GLOBBER_GROUP        0x4000
-#define GLOBBER_STAT	     (GLOBBER_XDEV|GLOBBER_SIZE|GLOBBER_TIME|GLOBBER_PERM|GLOBBER_TYPE|GLOBBER_USER|GLOBBER_GROUP)
+#define GLOBBER_STAT             (GLOBBER_XDEV|GLOBBER_SIZE|GLOBBER_TIME|GLOBBER_PERM|GLOBBER_TYPE|GLOBBER_USER|GLOBBER_GROUP)
 #define GLOBBER_RESULT_LIMIT        0x8000
 
 #ifndef S_IFMT
@@ -67,16 +67,16 @@
 # define      S_ISVTX    0001000
 #endif
 
-#define GLOBRUN_PID     	0x10000
-#define GLOBRUN_COUNT   	0x20000
-#define GLOBRUN_FILTERED   	0x40000
-#define GLOBRUN_IGNORE_CASE	0x80000
-#define GLOBRUN_REG_EXP  	0x100000
-#define GLOBRUN_INVERT       	0x200000
-#define GLOBRUN_WORDS_ONLY   	0x400000
-#define GLOBRUN_LINES_ONLY   	0x800000
-#define GLOBRUN_ZERO_BYTE    	0x1000000
-#define GLOBRUN_NOBINARIES   	0x2000000
+#define GLOBRUN_PID             0x10000
+#define GLOBRUN_COUNT           0x20000
+#define GLOBRUN_FILTERED           0x40000
+#define GLOBRUN_IGNORE_CASE        0x80000
+#define GLOBRUN_REG_EXP          0x100000
+#define GLOBRUN_INVERT               0x200000
+#define GLOBRUN_WORDS_ONLY           0x400000
+#define GLOBRUN_LINES_ONLY           0x800000
+#define GLOBRUN_ZERO_BYTE            0x1000000
+#define GLOBRUN_NOBINARIES           0x2000000
 
 #ifndef GLOB_TILDE
 # define GLOB_TILDE 0x0
@@ -234,7 +234,7 @@ public:
         if (strcmp(base, "fgr")) fgrMain(argc, argv);
         else  fgrMain(argc-1, ++argv);
         g_free(base);
-	return 0;
+        return 0;
     }
 
 private:
@@ -612,7 +612,7 @@ private:
         }
 
         //terminated = globber (object, path, operate, filter);
-    /*	if (terminated) printf("glob run was terminated.\n");*/
+    /*        if (terminated) printf("glob run was terminated.\n");*/
         if(!terminated) {           /* die quietly and quickly */
             if(options & GLOBRUN_PID)
                 printf ("GLOB DONE=%d\n", (int)getpid ());
@@ -840,11 +840,11 @@ private:
         // If file cannot be stat(), assume it is not there (whatever).
         // coverity[fs_check_call : FALSE]
         if(stat (path, &path_st) < 0) {
-	    if (errno){
-		DBG("fgr.hh::globber(): stat %s (%s)\n",
-		    path, strerror(errno));
-		errno=0;
-	    }
+            if (errno){
+                DBG("fgr.hh::globber(): stat %s (%s)\n",
+                    path, strerror(errno));
+                errno=0;
+            }
             int pass = object->pass;
             if (!address) free(object);
             free(globstring);

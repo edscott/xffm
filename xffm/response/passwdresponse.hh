@@ -22,32 +22,32 @@ public:
     static void sendPassword(gchar **argv){
         gchar *p;
 
-	gchar *string=NULL;
-	if (argv[1]) {
+        gchar *string=NULL;
+        if (argv[1]) {
             if (strncmp(argv[1], "Password", strlen("Password"))==0) 
                 string = g_strdup_printf("%s:", _("Enter password"));
             else{
-	        string = g_strdup(_(argv[1]));
+                string = g_strdup(_(argv[1]));
             }
 
-	} else {
-	    string = g_strdup_printf("%s:", _("Enter password"));
-	}
+        } else {
+            string = g_strdup_printf("%s:", _("Enter password"));
+        }
 
         p = getResponse (string, NULL, TRUE);
-	g_free(string);
-	if (p && strlen(p)) {
-	    fprintf (stdout, "%s\n", p);
-	    memset(p, 0, strlen(p));
-	} else {
-	    // No password, either cancel or close, then
-	    // send interrupt signal to parent
-	    pid_t parent = getppid();
-	    kill(parent, SIGINT);
-	}
-	g_free(p);
+        g_free(string);
+        if (p && strlen(p)) {
+            fprintf (stdout, "%s\n", p);
+            memset(p, 0, strlen(p));
+        } else {
+            // No password, either cancel or close, then
+            // send interrupt signal to parent
+            pid_t parent = getppid();
+            kill(parent, SIGINT);
+        }
+        g_free(p);
 
-	exit(0);
+        exit(0);
     }
 
 private:

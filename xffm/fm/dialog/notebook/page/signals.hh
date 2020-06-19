@@ -59,7 +59,7 @@ public:
         TRACE("range off\n");
         auto size = page->fontSize();
         page->parent()->resizeWindow(size);
-	Settings<Type>::setSettingInteger("xfterm", "fontSize",size);
+        Settings<Type>::setSettingInteger("xfterm", "fontSize",size);
         // for all pages, change fontSize
         auto notebook = page->parent()->notebook();
         for (int i=0; i<gtk_notebook_get_n_pages (notebook); i++){
@@ -69,26 +69,26 @@ public:
             print_c::set_font_size(GTK_WIDGET(page2->output()), size);
             print_c::set_font_size(GTK_WIDGET(page2->input()), size);
         }
-	return FALSE;
+        return FALSE;
     }
 
 #ifdef XFFM_CC
         // This would be for topScrolledWindow
-	// and here we eliminate any lingering tooltip window
-	// (once we enable tooltip
+        // and here we eliminate any lingering tooltip window
+        // (once we enable tooltip
     static void
     setWindowToolTip(GtkWindow *data, const gchar *data2){
 /*
  * FIXME
-	//if (data2) tooltip_path_string = g_strdup(data2);
-	//set_tooltip_path_string(data2);
-	auto toolTipWindow = GTK_WINDOW(data);
-	gtk_widget_set_tooltip_window (GTK_WIDGET(window), toolTipWindow);
-	if (toolTipWindow && G_IS_OBJECT (toolTipWindow)) {
-	    //g_object_set_data(G_OBJECT(toolTipWindow), "tooltip_target", (void *)window);
-	}
-	*/
-	return;
+        //if (data2) tooltip_path_string = g_strdup(data2);
+        //set_tooltip_path_string(data2);
+        auto toolTipWindow = GTK_WINDOW(data);
+        gtk_widget_set_tooltip_window (GTK_WIDGET(window), toolTipWindow);
+        if (toolTipWindow && G_IS_OBJECT (toolTipWindow)) {
+            //g_object_set_data(G_OBJECT(toolTipWindow), "tooltip_target", (void *)window);
+        }
+        */
+        return;
     }
 
     static gboolean
@@ -99,15 +99,15 @@ public:
             TRACE("leave_notify_event: data cannot be NULL\n");
             return FALSE;
         }
-	TRACE("leave_notify_event\n");
+        TRACE("leave_notify_event\n");
 
-	auto page = (Page<Type> *)data;
+        auto page = (Page<Type> *)data;
         auto dialog = page->parent();
-	auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(page->topScrolledWindow()),"baseModel");
-	if (baseModel) {
-	    BaseSignals<Type>::clear_highlights(baseModel);
-	}
-	//FIXME:
+        auto baseModel = (BaseModel<Type> *)g_object_get_data(G_OBJECT(page->topScrolledWindow()),"baseModel");
+        if (baseModel) {
+            BaseSignals<Type>::clear_highlights(baseModel);
+        }
+        //FIXME:
         //if (!view_p->all_set_up) return FALSE;
 
         //view_p->get_xfdir_p()->clear_highlights();

@@ -15,16 +15,16 @@ class RootView  :
         auto iconView = view->iconView();
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
         g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"RootView");
-	view->disableDnD();	
-	RootModel<Type>::loadModel(view->treeModel());
-	return TRUE;
+        view->disableDnD();        
+        RootModel<Type>::loadModel(view->treeModel());
+        return TRUE;
     }
-	
+        
     static gboolean
     isSelectable(GtkTreeModel *treeModel, GtkTreeIter *iter){
-	return TRUE;
+        return TRUE;
        /* gchar *path;
-	gtk_tree_model_get (treeModel, iter, DISPLAY_NAME, &path, -1);
+        gtk_tree_model_get (treeModel, iter, DISPLAY_NAME, &path, -1);
         gboolean retval = TRUE;
         if (strcmp(path, "..")==0 )retval = FALSE;
         TRACE("is %s selectable? %d\n", path, retval);

@@ -1,7 +1,7 @@
 #ifndef ECRYPTFS_I
 #define ECRYPTFS_I
 
-#define EFS_KEY_FILE		g_get_user_config_dir(),"xffm+","efs.ini"
+#define EFS_KEY_FILE                g_get_user_config_dir(),"xffm+","efs.ini"
 
 #define EFS_AUTHORIZATION _("Encryption Options")
 #define EFS_TIP _("Encrypt Files")
@@ -43,50 +43,50 @@ static gchar **mount_option_keys = NULL;
 static  group_options_t mount_options[]={
 //linux options:
     {
-	.sensitive = 1, .flag = "-r", .id = N_("Mount file system readonly."), 
+        .sensitive = 1, .flag = "-r", .id = N_("Mount file system readonly."), 
         .text = NULL, 
-	.entry = NULL, .tip = NULL
+        .entry = NULL, .tip = NULL
     },
     {
-	.sensitive = 1, .flag = "-v", .id = N_("Be verbose."), 
+        .sensitive = 1, .flag = "-v", .id = N_("Be verbose."), 
         .text = NULL, 
-	.entry = NULL, .tip = NULL
+        .entry = NULL, .tip = NULL
     },
     {
-	.sensitive = 1, .flag = "-V", .id = N_("Print version."), 
+        .sensitive = 1, .flag = "-V", .id = N_("Print version."), 
         .text = NULL, 
-	.entry = NULL, .tip = NULL
+        .entry = NULL, .tip = NULL
     },
     {
-	.sensitive = 2, .flag = "-w", .id = N_("Mount file system read-write."), 
+        .sensitive = 2, .flag = "-w", .id = N_("Mount file system read-write."), 
         .text = NULL, 
-	.entry = NULL, .tip = NULL
+        .entry = NULL, .tip = NULL
     },
 //#ifdef THIS_IS_LINUX
     {
-	.sensitive = 1, .flag = "-f", .id = N_("Fake mount."), 
+        .sensitive = 1, .flag = "-f", .id = N_("Fake mount."), 
         .text = NULL,  
-	.entry = NULL, 
+        .entry = NULL, 
         .tip = N_("Don't actually call the mount system call.")
     },
     {
-	.sensitive = 1, .flag = "-n", .id = N_("Do  not  update  /etc/mtab."), 
+        .sensitive = 1, .flag = "-n", .id = N_("Do  not  update  /etc/mtab."), 
         .text = NULL, 
-	.entry = NULL,
-	.tip = 
+        .entry = NULL,
+        .tip = 
 N_("By default, an entry is created in/etc/mtab for every mounted file system.\n Use this option to skip making an entry.")
     },
     {
-	.sensitive = 1, .flag = "-s", .id = N_("Tolerate sloppy options."), 
-	.text = NULL,
-	.entry = NULL,
+        .sensitive = 1, .flag = "-s", .id = N_("Tolerate sloppy options."), 
+        .text = NULL,
+        .entry = NULL,
         .tip = N_("Tolerate sloppy mount options rather than fail.") 
     },
 //#endif
     {
-	.sensitive = 1, .flag = "-h", .id = N_("Print help message."), 
+        .sensitive = 1, .flag = "-h", .id = N_("Print help message."), 
         .text = NULL, 
-	.entry = NULL, .tip = NULL
+        .entry = NULL, .tip = NULL
     },
     
     {.sensitive = 1, NULL, NULL, NULL, NULL, NULL}
@@ -95,136 +95,136 @@ N_("By default, an entry is created in/etc/mtab for every mounted file system.\n
 static gchar **efs_option_keys = NULL;
 static  group_options_t efs_options[]={
     {
-	.sensitive = 2, .flag = "", .id = "ecryptfs_cipher=", 
-	.text = "aes | blowfish | des3_ede | cast6 | cast5",
-	.entry = "aes",
+        .sensitive = 2, .flag = "", .id = "ecryptfs_cipher=", 
+        .text = "aes | blowfish | des3_ede | cast6 | cast5",
+        .entry = "aes",
         .tip = N_("Specify the symmetric cipher to be used on a per file basis. ")
     },
     
     {
-	.sensitive = 2, .flag = "", .id = "ecryptfs_key_bytes=", 
+        .sensitive = 2, .flag = "", .id = "ecryptfs_key_bytes=", 
         .text = NULL, 
-	.entry = "16",
+        .entry = "16",
         .tip = N_("Specify  the keysize to be used with the selected cipher. If the cipher only has one keysize the keysize  does  not  need  to  be specified.\n\n\taes: blocksize = 16; min keysize = 16; max keysize = 32\n\tblowfish: blocksize = 16; min keysize = 16; max keysize = 56\n\tdes3_ede: blocksize = 8; min keysize = 24; max keysize = 24\n\tcast6: blocksize = 16; min keysize = 16; max keysize = 32\n\tcast5: blocksize = 8; min keysize = 5; max keysize = 16\n\t")
     },
     {
-	.sensitive = 3, .flag = "", .id = "ecryptfs_passthrough=", 
+        .sensitive = 3, .flag = "", .id = "ecryptfs_passthrough=", 
         .text = NULL, 
-	.entry = "no",
+        .entry = "no",
         .tip = N_("Allows for non-eCryptfs files to be read and written from within an eCryptfs mount. This option is turned off by default.")
     },
         
     {
-	.sensitive = 3, .flag = "", .id = "ecryptfs_enable_filename_crypto=", 
+        .sensitive = 3, .flag = "", .id = "ecryptfs_enable_filename_crypto=", 
         .text = NULL, 
-	.entry = "no",
+        .entry = "no",
         .tip = N_("Specify whether filename encryption should be enabled.  If  not, the  mount  helper  will  not  prompt  the user for the filename encryption key signature.\nIf you enabled filename encryption then pass an additional mount option: ecryptfs_fnek_sig=XY, where XY is the same signature you provide with the ecryptfs_sig option.")
     },
     {
-	.sensitive = 1, .flag = "", .id = "ecryptfs_sig=", 
+        .sensitive = 1, .flag = "", .id = "ecryptfs_sig=", 
         .text = N_("fekek_sig"), 
-	.entry = "",
+        .entry = "",
         .tip = N_("Specify  the  signature  of the mount wide authentication token. The authentication token must be in the  kernel  keyring  before the  mount  is performed. \necryptfs-manager or the eCryptfs mount helper can be used to construct the authentication token and add it to the keyring prior to mounting.") 
     },
     
     {
-	.sensitive = 1, .flag = "", .id = "ecryptfs_fnek_sig=", 
+        .sensitive = 1, .flag = "", .id = "ecryptfs_fnek_sig=", 
         .text = N_("fnek_sig"), 
-	.entry ="",
+        .entry ="",
         .tip = N_("Specify  the  signature  of  the mount wide authentication token used for filename crypto. The authentication must be in the kernel keyring before mounting.")
     },
     
     
     
     {
-	.sensitive = -1, .flag = "", .id = "no_sig_cache", 
+        .sensitive = -1, .flag = "", .id = "no_sig_cache", 
         .text = NULL, 
-	.entry = NULL,
+        .entry = NULL,
         .tip = N_("Do not check the mount key signature against the values  in  the user's  ~/.ecryptfs/sig-cache.txt  file. This is useful for such things as non-interactive  setup  scripts,  so  that  the  mount helper  does  not stop and prompt the user in the event that the key sig is not in the cache.")
     },
     
     {
-	.sensitive = 1, .flag = "", .id = "ecryptfs_encrypted_view", 
+        .sensitive = 1, .flag = "", .id = "ecryptfs_encrypted_view", 
         .text = NULL, 
-	.entry = NULL,
+        .entry = NULL,
         .tip = N_("This option provides a unified  encrypted  file  format  of  the eCryptfs  files in the lower mount point.  Currently, it is only useful if the lower mount point contains files with the metadata stored in the extended attribute.  Upon a file read in the upper mount point, the encrypted version of the file will be presented with  the  metadata  in  the  file  header instead of the xattr.  Files cannot be opened for writing when this option is enabled.")
     },
     
     {
-	.sensitive = 1, .flag = "", .id = "ecryptfs_xattr", 
+        .sensitive = 1, .flag = "", .id = "ecryptfs_xattr", 
         .text = NULL, 
-	.entry = NULL,
+        .entry = NULL,
         .tip = N_("Store the metadata in the extended attribute of the lower  files rather than the header region of the lower files.")
     },
     
     {
-	.sensitive = 1, .flag = "", .id = "verbose", 
+        .sensitive = 1, .flag = "", .id = "verbose", 
         .text = NULL, 
-	.entry = NULL,
+        .entry = NULL,
         .tip = N_("Log  ecryptfs  information  to  /var/log/messages.   Do  not run eCryptfs in verbose-mode unless you are doing so  for  the  sole purpose  of development, since secret values will be written out to the system log in that case.")
     },
 
     
     {
-	.sensitive = -1, .flag = "", .id = "verbosity=", 
+        .sensitive = -1, .flag = "", .id = "verbosity=", 
         .text = NULL, 
-	.entry = "1",
+        .entry = "1",
         .tip = N_("If verbosity=1, the mount helper will ask you for missing values (default).  Otherwise, if verbosity=0, it will not ask for missing values and will fail if required values are omitted.  ")
     },
     
     {
-	.sensitive = 0, .flag = "", .id = "passphrase_passwd=", 
+        .sensitive = 0, .flag = "", .id = "passphrase_passwd=", 
         .text = N_("passphrase"), 
-	.entry = "",
+        .entry = "",
         .tip = N_("The actual password is passphrase. Since the password is visible to utilities (like ps under Unix) this form should only be  used where security is not important.")
     },
     
     {
-	.sensitive = 1, .flag = "", .id = "passphrase_passwd_file=", 
+        .sensitive = 1, .flag = "", .id = "passphrase_passwd_file=", 
         .text = N_("filename"), 
-	.entry = "",
+        .entry = "",
         .tip = N_("The    password   should   be   specified   in   a   file   with passwd=(passphrase). It is highly reccomended that the  file  be stored on a secure medium such as a personal usb key.")
     },
     
     {
-	.sensitive = 0, .flag = "", .id = "passphrase_passwd_fd=", 
+        .sensitive = 0, .flag = "", .id = "passphrase_passwd_fd=", 
         .text = N_(""), 
-	.entry = "",
+        .entry = "",
         .tip = N_("The password is specified through the specified file descriptor.")
     },
     
     {
-	.sensitive = 1, .flag = "", .id = "passphrase_salt=", 
+        .sensitive = 1, .flag = "", .id = "passphrase_salt=", 
         .text = "hex value", 
-	.entry = "",
+        .entry = "",
         .tip = N_("The salt should be specified as a 16 digit hex value.  ")
     },
     
     {
-	.sensitive = 1, .flag = "", .id = "openssl_keyfile=", 
+        .sensitive = 1, .flag = "", .id = "openssl_keyfile=", 
         .text = N_("filename"), 
-	.entry = "",
+        .entry = "",
         .tip = N_("The   password   should   be   specified   in   a   file    with openssl_passwd=(openssl-password). It is highly reccomended that the file be stored on a secure medium such  as  a  personal  usb key.")
     },
     
     
     
     {
-	.sensitive = 1, .flag = "", .id = "openssl_passwd_file=", 
+        .sensitive = 1, .flag = "", .id = "openssl_passwd_file=", 
         .text = N_("filename"), 
-	.entry = "",
+        .entry = "",
         .tip = N_("The   password   should   be   specified   in   a   file    with openssl_passwd=(openssl-password). It is highly reccomended that the file be stored on a secure medium such  as  a  personal  usb key.")
     },
     {
-	.sensitive = 0, .flag = "", .id = "openssl_passwd_fd=", 
+        .sensitive = 0, .flag = "", .id = "openssl_passwd_fd=", 
         .text = N_("file descriptor"), 
-	.entry = "",
+        .entry = "",
         .tip = N_("The password is specified through the specified file descriptor.")
     },
     {
-	.sensitive = 0, .flag = "", .id = "openssl_passwd=", 
+        .sensitive = 0, .flag = "", .id = "openssl_passwd=", 
         .text = N_("password"), 
-	.entry = "",
+        .entry = "",
         .tip = N_("The  password  can  be  specified on the command line. Since the password is visible in the process list,  it  is  highly  recommended to use this option only for testing purposes.")
     },
     

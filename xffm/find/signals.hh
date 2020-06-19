@@ -55,7 +55,7 @@ template <class Type> class DnDBox{
 
     static void
     onResponse (GtkWidget * widget, gpointer data) {
-	findResultsWidgets = g_list_remove(findResultsWidgets, widget);
+        findResultsWidgets = g_list_remove(findResultsWidgets, widget);
     }
 
 public:
@@ -66,12 +66,12 @@ public:
         //auto dialog = GTK_WINDOW(Dialogs<Type>::quickDialog(parent, _("Results"), NULL, title));
         auto dialog = GTK_WINDOW(Dialogs<Type>::quickDialog(NULL, _("Results"), NULL, title));
         gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
-	findResultsWidgets = g_list_prepend(findResultsWidgets, dialog);
-	g_signal_connect(G_OBJECT(dialog), "response", 
-		G_CALLBACK(onResponse),NULL);
+        findResultsWidgets = g_list_prepend(findResultsWidgets, dialog);
+        g_signal_connect(G_OBJECT(dialog), "response", 
+                G_CALLBACK(onResponse),NULL);
         
         auto vbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "vbox"));
-	auto scrolledWindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
+        auto scrolledWindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new (NULL, NULL));
         gtk_scrolled_window_set_policy (scrolledWindow, GTK_POLICY_NEVER,GTK_POLICY_AUTOMATIC);
         gtk_widget_set_size_request (GTK_WIDGET(scrolledWindow), 200, 200);
 
@@ -92,7 +92,7 @@ public:
         }
 
         auto treeView = GTK_TREE_VIEW(gtk_tree_view_new());
-	gtk_tree_view_set_model(treeView, GTK_TREE_MODEL(model));
+        gtk_tree_view_set_model(treeView, GTK_TREE_MODEL(model));
         TreeView<Type>::appendColumnPixbuf(treeView, 0);
         TreeView<Type>::appendColumnText(treeView, _("Path"), 1);
        
@@ -129,7 +129,7 @@ private:
         // Get activated path.
         auto treeModel = gtk_tree_view_get_model(treeView);
 
-	gchar *path;
+        gchar *path;
         GtkTreeIter iter;
         if (!gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath)){
             DBG("tpath does not exist. Aborting activate signal.\n");
@@ -138,9 +138,9 @@ private:
         GdkPixbuf *normal_pixbuf;
 
         gtk_tree_model_get (treeModel, &iter, 1, &path, -1);
-	
+        
         TRACE("base-signals::activate: %s\n", path);
-	/*if (!view->loadModel(treeModel, tpath, path)){
+        /*if (!view->loadModel(treeModel, tpath, path)){
             TRACE("base-signals:activate():cannot load %s\n", path);
         }*/
         TRACE("path is %s\n", path);
@@ -165,8 +165,8 @@ private:
             g_strfreev(argv);
         }
 
-	g_free(path);
-	g_free(wd);
+        g_free(path);
+        g_free(wd);
         g_list_free(pathList);
     }
     static void
@@ -186,40 +186,40 @@ public:
 
 
     static void onSizeAllocate (GtkWidget    *widget,
-		   GdkRectangle *allocation,
-		   gpointer      data){
+                   GdkRectangle *allocation,
+                   gpointer      data){
         static gint lastX=-1;
         static gint lastY=-1;
         if (allocation->width == lastX && allocation->height == lastY) return;
-	TRACE("dialog.hh::onSizeAllocate():SIZE allocate\n");
+        TRACE("dialog.hh::onSizeAllocate():SIZE allocate\n");
         lastX = allocation->width;
         lastY = allocation->height;
 
         // Save selection width and height to .ini
-	Settings<Type>::setSettingInteger( "xffind", "width", lastX);
-	Settings<Type>::setSettingInteger( "xffind", "height", lastY);
+        Settings<Type>::setSettingInteger( "xffind", "width", lastX);
+        Settings<Type>::setSettingInteger( "xffind", "height", lastY);
 
     }
 
     static void 
     sensitivize (GtkToggleButton *togglebutton, gpointer data){
-	TRACE("sensitivize\n");
-	GtkWidget *widget = GTK_WIDGET(data);
-	gtk_widget_set_sensitive(widget, gtk_toggle_button_get_active(togglebutton));
+        TRACE("sensitivize\n");
+        GtkWidget *widget = GTK_WIDGET(data);
+        gtk_widget_set_sensitive(widget, gtk_toggle_button_get_active(togglebutton));
     }
 
     static void 
     sensitivize_radio (GtkToggleButton *togglebutton, gpointer data){
-	TRACE("sensitivize_radio\n");
-	if (!data) return;
-	radio_t *radio_p = (radio_t *)data;
-	gtk_widget_set_sensitive(GTK_WIDGET(radio_p->box), FALSE);
-	GtkToggleButton **tb_p = radio_p->toggle;
-	for (; tb_p && *tb_p; tb_p++){
-	    if (gtk_toggle_button_get_active(*tb_p)){
-		gtk_widget_set_sensitive(GTK_WIDGET(radio_p->box), TRUE);
-	    }
-	}
+        TRACE("sensitivize_radio\n");
+        if (!data) return;
+        radio_t *radio_p = (radio_t *)data;
+        gtk_widget_set_sensitive(GTK_WIDGET(radio_p->box), FALSE);
+        GtkToggleButton **tb_p = radio_p->toggle;
+        for (; tb_p && *tb_p; tb_p++){
+            if (gtk_toggle_button_get_active(*tb_p)){
+                gtk_widget_set_sensitive(GTK_WIDGET(radio_p->box), TRUE);
+            }
+        }
     }
 
     static void
@@ -234,17 +234,17 @@ public:
 
     static void
     on_buttonHelp (GtkWidget * button, gpointer data) {
-	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
-	const gchar *message = (const gchar *)data;
-	TRACE("fixme: signals::on_buttonHelp\n");
-	Dialogs<Type>::quickHelp(dialog_, message);
+        GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
+        const gchar *message = (const gchar *)data;
+        TRACE("fixme: signals::on_buttonHelp\n");
+        Dialogs<Type>::quickHelp(dialog_, message);
     }
 
 
     static void
     onClearButton (GtkWidget * button, gpointer data) {
-	GtkTextView *diagnostics = GTK_TEXT_VIEW(data);
-	TRACE("fixme: signals::onClearButton\n");
+        GtkTextView *diagnostics = GTK_TEXT_VIEW(data);
+        TRACE("fixme: signals::onClearButton\n");
         print_c::clear_text(diagnostics);
         print_c::hide_text(diagnostics);
 
@@ -252,8 +252,8 @@ public:
 
     static void
     onEditButton (GtkWidget * button, gpointer data) {
-	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
-	TRACE("fixme: signals::onEditButton\n");
+        GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "diagnostics"));
+        TRACE("fixme: signals::onEditButton\n");
         //print_c::print_status(diagnostics, g_strdup("fixme: signals::onEditButton testing run\n"));
         print_c::showTextSmall(diagnostics);        
         edit_command(data);
@@ -261,13 +261,13 @@ public:
 
     static void
     onCloseButton (GtkWidget * button, gpointer data) {
-	TRACE("fixme: signals::onCloseButton\n");
+        TRACE("fixme: signals::onCloseButton\n");
         GtkWidget *dialog = GTK_WIDGET(data);
         gtk_widget_hide(dialog);
-	for (auto l=findResultsWidgets; l && l->data; l=l->next){
-	    if (!GTK_IS_WIDGET(l->data))continue;
-	    gtk_widget_hide(GTK_WIDGET(l->data));
-	}
+        for (auto l=findResultsWidgets; l && l->data; l=l->next){
+            if (!GTK_IS_WIDGET(l->data))continue;
+            gtk_widget_hide(GTK_WIDGET(l->data));
+        }
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exit(1);
@@ -293,7 +293,7 @@ public:
 
     static void
     onCancelButton (GtkWidget * button, gpointer data) {
-	TRACE("fixme: signals::onCancelButton\n");
+        TRACE("fixme: signals::onCancelButton\n");
         cancel_all(data);
     }
 
@@ -302,7 +302,7 @@ public:
         if (!controllerHash){
             controllerHash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
         }
-	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
+        GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
         updateCompletions(dialog);
         
         print_c::showTextSmall(diagnostics);
@@ -314,16 +314,16 @@ public:
         gtk_widget_hide(widget);
         gtk_widget_destroy(widget);
 
-	while (gtk_events_pending()) gtk_main_iteration();
+        while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exit(1);
         return TRUE;
     }
 
     static void grepOptions (GtkEntry *widget, gpointer data) {
-	TRACE("grepOptions\n");
-      	gboolean active = FALSE;
-	gchar *text = util_c::compact_line(gtk_entry_get_text(GTK_ENTRY(widget)));
+        TRACE("grepOptions\n");
+              gboolean active = FALSE;
+        gchar *text = util_c::compact_line(gtk_entry_get_text(GTK_ENTRY(widget)));
         if (text && strlen(text)) active = TRUE;
         g_free(text);
         if (data){
@@ -354,9 +354,9 @@ private:
     
     static void
     doCommand (GtkWidget * button, gpointer data, gboolean scrollUp) {
-	TRACE("fixme: signals::doCommand\n");
-	GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
-	GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog_), "diagnostics"));
+        TRACE("fixme: signals::doCommand\n");
+        GtkWindow *dialog_=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "dialog_"));
+        GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog_), "diagnostics"));
         print_c::clear_text(diagnostics);
         //run_c::thread_run(diagnostics, (const gchar *)data);
         run_c::thread_run(diagnostics, (const gchar *)data, scrollUp);
@@ -408,7 +408,7 @@ private:
     }
     static void
     cancel_all(void * dialog){
-	TRACE("cancel_all\n");
+        TRACE("cancel_all\n");
         void *diagnostics = g_object_get_data(G_OBJECT(dialog), "diagnostics");
         g_hash_table_foreach_remove (controllerHash, removeFunc, diagnostics);
         GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "cancel_button"));
@@ -417,7 +417,7 @@ private:
 
     static gboolean
     Cleanup (void *data) {
-	TRACE("Cleanup\n");
+        TRACE("Cleanup\n");
        fgrData_t *Data = (fgrData_t *)data;
        GtkWindow *dialog = Data->dialog;
        if (g_hash_table_size(controllerHash) == 0){
@@ -434,9 +434,9 @@ private:
                         g_strdup_printf("%s\n", _("No editor for current action.")));
                 return FALSE;
             }
-	    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
+            gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
        } else {
-	    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
+            gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
        }
        if (Data->done) {
            freeFgrData(Data);
@@ -569,7 +569,7 @@ private:
 
     static gboolean
     on_find_clicked_action (GtkWindow *dialog) {
-	TRACE("on_find_clicked_action\n");
+        TRACE("on_find_clicked_action\n");
         GtkTextView *diagnostics = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(dialog), "diagnostics"));
         // Get the search path.
         GtkEntry *entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "path_entry"));
@@ -635,7 +635,7 @@ private:
         print_c::print_icon(diagnostics, "system-search", "green", g_strconcat( _("Searching..."), "\n", NULL));
         print_c::print_icon(diagnostics, "system-run", "bold", 
                 g_strdup_printf("%s: \"%s\"\n",_("Searching..."), (gchar *) command));
-	return FALSE;
+        return FALSE;
     }
 
     static void
@@ -673,7 +673,7 @@ private:
                     g_object_get_data(G_OBJECT(dialog), "size_greater"))) 
         {
              gint size_greater = gtk_spin_button_get_value_as_int (
-                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "size_greater_spin")));	    
+                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "size_greater_spin")));            
              Data->argument[i++] = g_strdup("-s");
              Data->argument[i++] = g_strdup_printf("+%d", size_greater);
         }
@@ -681,7 +681,7 @@ private:
                     g_object_get_data(G_OBJECT(dialog), "size_smaller"))) 
         {
              gint size_smaller = gtk_spin_button_get_value_as_int (
-                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "size_smaller_spin")));	    
+                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "size_smaller_spin")));            
              Data->argument[i++] = g_strdup("-s");
              Data->argument[i++] = g_strdup_printf("-%d", size_smaller);
         }
@@ -690,7 +690,7 @@ private:
         {
             Data->argument[i++] = g_strdup((gchar *)get_time_type(dialog));
             gint last_months = gtk_spin_button_get_value_as_int (
-                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_months_spin")));	    
+                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_months_spin")));            
             Data->argument[i++] = g_strdup("-m");
             Data->argument[i++] = g_strdup_printf("%d", last_months);
         }
@@ -699,7 +699,7 @@ private:
         {
             Data->argument[i++] = (gchar *)get_time_type(dialog);
             gint last_days = gtk_spin_button_get_value_as_int (
-                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_days_spin")));	    
+                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_days_spin")));            
             Data->argument[i++] = g_strdup("-d");
             Data->argument[i++] = g_strdup_printf("%d", last_days);
         }
@@ -708,7 +708,7 @@ private:
         {
             Data->argument[i++] = (gchar *)get_time_type(dialog);
             gint last_hours = gtk_spin_button_get_value_as_int (
-                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_hours_spin")));	    
+                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_hours_spin")));            
             Data->argument[i++] = g_strdup("-h");
             Data->argument[i++] = g_strdup_printf("%d", last_hours);
         }
@@ -717,7 +717,7 @@ private:
         {
             Data->argument[i++] = g_strdup((gchar *)get_time_type(dialog));
             gint last_minutes = gtk_spin_button_get_value_as_int (
-                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_minutes_spin")));	    
+                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(dialog), "last_minutes_spin")));            
             Data->argument[i++] = g_strdup("-k");
             Data->argument[i++] = g_strdup_printf("%d", last_minutes);
         }
@@ -863,7 +863,7 @@ private:
             return;
         }*/
 
-	auto editor = Util<Type>::getEditor();
+        auto editor = Util<Type>::getEditor();
         if (!editor || strlen(editor)==0){
             print_c::print_error(diagnostics, g_strdup_printf("%s\n",
                         _("No editor for current action.")));
@@ -871,11 +871,11 @@ private:
         }
         TRACE("editor = %s\n", editor);
         gchar *command;
-	if (Run<Type>::runInTerminal(editor)){
-	    command = Run<Type>::mkTerminalLine(editor, "");
-	} else {
-	    command = g_strdup(editor);
-	}
+        if (Run<Type>::runInTerminal(editor)){
+            command = Run<Type>::mkTerminalLine(editor, "");
+        } else {
+            command = g_strdup(editor);
+        }
       
         TRACE("command = %s\n", command);
 

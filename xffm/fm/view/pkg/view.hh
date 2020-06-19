@@ -32,9 +32,9 @@ class PkgView  :
         auto iconView = view->iconView();
         gtk_icon_view_set_selection_mode (iconView,GTK_SELECTION_SINGLE); 
         g_object_set_data(G_OBJECT(iconView), "iconViewType", (void *)"PkgView");
-	view->disableDnD();	
-	PkgModel<Type>::loadModel(view->treeModel());
-	return TRUE;
+        view->disableDnD();        
+        PkgModel<Type>::loadModel(view->treeModel());
+        return TRUE;
     }
 
  

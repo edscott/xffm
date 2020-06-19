@@ -81,23 +81,23 @@ protected:
         return selected;
     }
     static gboolean reselect_func (GtkTreeModel *model,
-				GtkTreePath *tpath,
-				GtkTreeIter *iter,
-				gpointer data){
+                                GtkTreePath *tpath,
+                                GtkTreeIter *iter,
+                                gpointer data){
         gchar *path;
-	auto arg = (void **)data;
-	auto inPath = (const gchar *)arg[0];
+        auto arg = (void **)data;
+        auto inPath = (const gchar *)arg[0];
         auto view = (View<Type> *)arg[1];
 
-	gtk_tree_model_get (model, iter, PATH, &path, -1);  
+        gtk_tree_model_get (model, iter, PATH, &path, -1);  
 
-	TRACE("reselect_func: %s <--> %s\n", path, inPath);
-	if (strcmp(path, inPath)){
+        TRACE("reselect_func: %s <--> %s\n", path, inPath);
+        if (strcmp(path, inPath)){
             g_free(path);
-	    return FALSE;
-	}
+            return FALSE;
+        }
         g_free(path);
-	TRACE("*** reselect_func: gotcha %s\n", inPath);
+        TRACE("*** reselect_func: gotcha %s\n", inPath);
         if (isTreeView){
             auto selection = gtk_tree_view_get_selection (view->treeView());
             gtk_tree_selection_select_path(selection, tpath);
@@ -136,7 +136,7 @@ public:
         gfile_ = NULL;
         store_ = GTK_LIST_STORE(treeModel);
         monitor_ = NULL;
-	active_ = FALSE;
+        active_ = FALSE;
         
     }
     ~BaseMonitor(void){
@@ -161,12 +161,12 @@ private:
                             gpointer data){
         auto hash = (GHashTable *)data;
         gchar *path;
-	gtk_tree_model_get (model, iter, PATH, &path, -1);  
-	// use hashkey
-	gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
+        gtk_tree_model_get (model, iter, PATH, &path, -1);  
+        // use hashkey
+        gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
         g_hash_table_replace(hash, key, g_strdup(path));
         TRACE("add2hash: %s -> %s\n", key, path);
-	g_free(path);
+        g_free(path);
         return FALSE;
     }
 
@@ -174,14 +174,14 @@ public:
     
     gboolean pathInTreeHash(const gchar *path, GHashTable *hash){
         gboolean retval = FALSE;
-	gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
+        gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
         TRACE("looking for %s (%s) in hash: %p\n", path, key, hash);
-	if(hash && g_hash_table_lookup(hash,key)) {
+        if(hash && g_hash_table_lookup(hash,key)) {
             TRACE("found %s (%s) in hash: %p\n", path, key, hash);
             retval = TRUE;
         }
         g_free(key);
-	return FALSE;
+        return FALSE;
     }
 
     void
@@ -208,12 +208,12 @@ public:
         }
         g_signal_connect (monitor_, "changed", 
                 G_CALLBACK (monitor_f), (void *)this);
-	active_ = TRUE;
+        active_ = TRUE;
     }
 
     void 
     stop_monitor(void){
-	active_ = FALSE;
+        active_ = FALSE;
         if (!monitor_) {
             DBG("no monitor to stop\n");
             return;
@@ -221,15 +221,15 @@ public:
         TRACE("*** stop monitor %p\n", monitor_);
         localMonitorList = g_list_remove(localMonitorList, (void *)monitor_);      
         if (gfile_) {
-	    gchar *p = g_file_get_path(gfile_);
-	    TRACE("*** stop_monitor at: %s\n", p);
-	    g_free(p);
+            gchar *p = g_file_get_path(gfile_);
+            TRACE("*** stop_monitor at: %s\n", p);
+            g_free(p);
         }
-	g_file_monitor_cancel(monitor_);
+        g_file_monitor_cancel(monitor_);
         g_object_unref(monitor_);
         monitor_ = NULL;   
-	// while (gtk_events_pending())gtk_main_iteration();  
-	// hash table remains alive until mountThread finishes.
+        // while (gtk_events_pending())gtk_main_iteration();  
+        // hash table remains alive until mountThread finishes.
     }
 
 protected:
@@ -238,8 +238,8 @@ protected:
     remove_item(const gchar *path){
         // find the iter and remove iteam
         TRACE("remove item...\n");
-	// use hashkey
-	gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
+        // use hashkey
+        gchar *key = PixbufHash<Type>::get_hash_key(path, 10);
         if (itemsHash_) g_hash_table_remove(itemsHash_, key); 
         gtk_tree_model_foreach (GTK_TREE_MODEL(store_), rm_func, (gpointer) path); 
         return TRUE;
@@ -256,24 +256,24 @@ protected:
 
 private:
     static gboolean rm_func (GtkTreeModel *model,
-				GtkTreePath *tpath,
-				GtkTreeIter *iter,
-				gpointer data){
-	gchar *path;
-	gtk_tree_model_get (model, iter, 
-		PATH, &path, 
-		-1);  
-	
-	if (strcmp(path, (gchar *)data)){
-	    g_free(path);
-	    return FALSE;
-	}
-	TRACE("removing %s from treemodel.\n", path);
-	GtkListStore *store = GTK_LIST_STORE(model);
+                                GtkTreePath *tpath,
+                                GtkTreeIter *iter,
+                                gpointer data){
+        gchar *path;
+        gtk_tree_model_get (model, iter, 
+                PATH, &path, 
+                -1);  
+        
+        if (strcmp(path, (gchar *)data)){
+            g_free(path);
+            return FALSE;
+        }
+        TRACE("removing %s from treemodel.\n", path);
+        GtkListStore *store = GTK_LIST_STORE(model);
 
-	gtk_list_store_remove(store, iter);
-	g_free(path);
-	return TRUE;
+        gtk_list_store_remove(store, iter);
+        g_free(path);
+        return TRUE;
     }
 
 

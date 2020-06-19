@@ -1,8 +1,8 @@
 #ifndef BOOKMARKS_HH
 #define BOOKMARKS_HH
-#define USER_DIR 		g_get_home_dir()
-#define BOOKMARKS_DIR		"gtk-3.0"
-#define BOOKMARKS_FILE		"bookmarks"
+#define USER_DIR                 g_get_home_dir()
+#define BOOKMARKS_DIR                "gtk-3.0"
+#define BOOKMARKS_FILE                "bookmarks"
 
 namespace xf {
 
@@ -100,17 +100,17 @@ private:
     getBookmarksFilename(void){
         auto configDir = g_get_user_config_dir();
         auto dir = g_build_filename(configDir, BOOKMARKS_DIR, NULL);
-	if (!g_file_test(dir, G_FILE_TEST_IS_DIR)){
-	    if (g_mkdir_with_parents(dir, 0755)<0){
-		DBG("Cannot create %s: %s\n", dir, strerror(errno));
-		g_free(dir);
-		return NULL;
-	    }
-	}
-	auto name = g_build_filename(configDir, BOOKMARKS_DIR, BOOKMARKS_FILE, NULL);
-	if (!g_file_test(name, G_FILE_TEST_EXISTS)){
-	    fclose(fopen(name, "w"));
-	}
+        if (!g_file_test(dir, G_FILE_TEST_IS_DIR)){
+            if (g_mkdir_with_parents(dir, 0755)<0){
+                DBG("Cannot create %s: %s\n", dir, strerror(errno));
+                g_free(dir);
+                return NULL;
+            }
+        }
+        auto name = g_build_filename(configDir, BOOKMARKS_DIR, BOOKMARKS_FILE, NULL);
+        if (!g_file_test(name, G_FILE_TEST_EXISTS)){
+            fclose(fopen(name, "w"));
+        }
 
         return name;
     }
@@ -224,7 +224,7 @@ private:
     static void
     saveBookmarkFile(GSList *list){
         gchar *filename = getBookmarksFilename();
-	if (!filename) return;
+        if (!filename) return;
         if (list==NULL || g_slist_length(list)==0){
             if (g_file_test(filename, G_FILE_TEST_EXISTS)){
                 if (unlink(filename) < 0){

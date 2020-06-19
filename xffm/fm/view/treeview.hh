@@ -9,7 +9,7 @@ class TreeView {
 public: 
     static GtkTreeView *createTreeview(View<Type> *view){
         auto treeView = GTK_TREE_VIEW(gtk_tree_view_new());
-	gtk_tree_view_set_model(treeView, view->treeModel());
+        gtk_tree_view_set_model(treeView, view->treeModel());
         g_object_set(G_OBJECT(treeView), "has-tooltip", TRUE, NULL);
         //gtk_icon_view_set_item_width (icon_view, 60);
         gtk_tree_view_set_activate_on_single_click(treeView, TRUE);
@@ -90,7 +90,7 @@ public:
                         NULL);
         //gtk_tree_view_column_pack_start (column, GtkCellRenderer *cell, FALSE);
         gtk_tree_view_insert_column (treeView,column,-1);
-	if (title) gtk_tree_view_column_set_title(column,title);
+        if (title) gtk_tree_view_column_set_title(column,title);
 
     }
 

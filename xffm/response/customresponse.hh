@@ -32,7 +32,7 @@ public:
                 auto markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s</span>", tooltip);
                 gtk_label_set_markup(label, markup);
                 g_free(markup);
-	        gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(label), FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(label), FALSE, FALSE, 0);
                 gtk_widget_show(GTK_WIDGET(label));
                 g_free(tooltip);
             }
@@ -59,9 +59,9 @@ public:
         g_object_set_data(G_OBJECT(this->yes_), "workdir", workdir_);
         if (terminal_ == 1) g_object_set_data(G_OBJECT(this->yes_), "terminal", GINT_TO_POINTER(1));
         else g_object_set_data(G_OBJECT(this->yes_), "terminal", NULL);
-	g_signal_connect (G_OBJECT (this->no_), "clicked", G_CALLBACK (cancel), this);
-	g_signal_connect (G_OBJECT (this->yes_), "clicked", G_CALLBACK (run), this);
-	g_signal_connect (G_OBJECT (this->dialog()), "delete-event", G_CALLBACK (response_delete), this);
+        g_signal_connect (G_OBJECT (this->no_), "clicked", G_CALLBACK (cancel), this);
+        g_signal_connect (G_OBJECT (this->yes_), "clicked", G_CALLBACK (run), this);
+        g_signal_connect (G_OBJECT (this->dialog()), "delete-event", G_CALLBACK (response_delete), this);
 
         // get selection list paths in (gchar **)
         auto view = Fm<Type>::getCurrentView();
@@ -85,7 +85,7 @@ public:
                     continue;
                 }
                 gchar *path;
-        	gtk_tree_model_get (view->treeModel(), &iter, PATH, &path, -1);
+                gtk_tree_model_get (view->treeModel(), &iter, PATH, &path, -1);
                 paths[i++] = g_path_get_basename(path);
                 if (!workdir_) {
                     workdir_ = g_path_get_dirname(path);
@@ -101,58 +101,58 @@ public:
 
         this->setComboBashCompletion("/");// XXX folder or file entry should be determined on .ini file (probably just inherit from comboresponse for multiple files options (selected files)...
         this->setComboLabel(_("Source File"));
-	auto options = getKeys(file, "options");
+        auto options = getKeys(file, "options");
         for (auto p=options; p && *p; p++){
             auto itemValue = getString(file, "options", *p);
-	    auto hbox = gtk_c::hboxNew (FALSE, 6);
-	    auto innerbox = gtk_c::hboxNew (FALSE, 6);
+            auto hbox = gtk_c::hboxNew (FALSE, 6);
+            auto innerbox = gtk_c::hboxNew (FALSE, 6);
             auto check = gtk_check_button_new();
             g_object_set_data(G_OBJECT(hbox), "check", check);
             g_object_set_data(G_OBJECT(hbox), "innerbox", innerbox);
-	    auto option = g_strdup_printf("--%s", *p);  
-	    auto label = gtk_label_new(option);
+            auto option = g_strdup_printf("--%s", *p);  
+            auto label = gtk_label_new(option);
             g_free(option);
             g_object_set_data(G_OBJECT(hbox), "label", label);
 
             optionsList = g_list_append(optionsList, (void *)hbox);
-	    gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
-	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(check), FALSE, FALSE, 0);
-	    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(innerbox), FALSE, FALSE, 0);
-	    gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(label), FALSE, FALSE, 0);
-	    if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0
+            gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+            gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(check), FALSE, FALSE, 0);
+            gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(innerbox), FALSE, FALSE, 0);
+            gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(label), FALSE, FALSE, 0);
+            if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0
                     || strcmp(itemValue, "text")==0) {
-		auto entry = GTK_ENTRY(gtk_entry_new ());
+                auto entry = GTK_ENTRY(gtk_entry_new ());
                 g_object_set_data(G_OBJECT(hbox), "entry", entry);
                     g_object_set_data(G_OBJECT(entry), "workdir", workdir_);
 
-		gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
-		if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0){
+                gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
+                if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0){
 
-		    auto button = gtk_c::dialog_button ((strcmp(itemValue, "file")==0)?
-			    "document-new-symbolic":"folder-symbolic", NULL);
-		    gtk_box_pack_start (innerbox, GTK_WIDGET(button), FALSE, FALSE, 0);
-		    if (strcmp(itemValue, "folder")==0){
-			DBG("setting up exec completion\n");
-			g_signal_connect (G_OBJECT(button), 
-				"clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
-				(gpointer) entry);
-		       this->setComboBashCompletion("/");
-		    } else if (strcmp(itemValue, "file")==0) {
-			DBG("setting up file completion\n");
-			g_signal_connect (G_OBJECT(button), 
-				"clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
-				(gpointer) entry);
-		       this->setComboBashFileCompletion(g_get_home_dir());
-		    } 
-		    this->setInLineCompletion(0);
-		}
-	    }
-	    else if (strcmp(itemValue, "on")==0) {
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), TRUE);
-	    }
+                    auto button = gtk_c::dialog_button ((strcmp(itemValue, "file")==0)?
+                            "document-new-symbolic":"folder-symbolic", NULL);
+                    gtk_box_pack_start (innerbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+                    if (strcmp(itemValue, "folder")==0){
+                        DBG("setting up exec completion\n");
+                        g_signal_connect (G_OBJECT(button), 
+                                "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::folderChooser), 
+                                (gpointer) entry);
+                       this->setComboBashCompletion("/");
+                    } else if (strcmp(itemValue, "file")==0) {
+                        DBG("setting up file completion\n");
+                        g_signal_connect (G_OBJECT(button), 
+                                "clicked", BUTTON_CALLBACK (ChooserResponse<Type>::fileChooser), 
+                                (gpointer) entry);
+                       this->setComboBashFileCompletion(g_get_home_dir());
+                    } 
+                    this->setInLineCompletion(0);
+                }
+            }
+            else if (strcmp(itemValue, "on")==0) {
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), TRUE);
+            }
             g_signal_connect(G_OBJECT(check), 
-			    "clicked", BUTTON_CALLBACK (toggleBox), 
-			    (gpointer) innerbox);
+                            "clicked", BUTTON_CALLBACK (toggleBox), 
+                            (gpointer) innerbox);
 
             gtk_widget_set_sensitive(GTK_WIDGET(innerbox), 
                         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(check)));
@@ -171,9 +171,9 @@ public:
         if (!loaded) {
             ERROR("Cannot load %s\n", file);
             g_key_file_free(keyFile);
-	    return NULL;
+            return NULL;
         }
-	auto retval = g_key_file_get_keys (keyFile, group, NULL, NULL);
+        auto retval = g_key_file_get_keys (keyFile, group, NULL, NULL);
         g_key_file_free(keyFile);
         return retval;
 
@@ -185,16 +185,16 @@ public:
         if (!loaded) {
             ERROR("Cannot load %s\n", file);
             g_key_file_free(keyFile);
-	    return -1;
+            return -1;
         }
-	GError *error = NULL;
-	auto retval = g_key_file_get_integer (keyFile, group, item, &error);
-	if (error){
-	    //ERROR("custombutton():: %s\n", error->message);
+        GError *error = NULL;
+        auto retval = g_key_file_get_integer (keyFile, group, item, &error);
+        if (error){
+            //ERROR("custombutton():: %s\n", error->message);
             g_key_file_free(keyFile);
             g_error_free(error);
-	    return -1;
-	}
+            return -1;
+        }
         g_key_file_free(keyFile);
         return retval;
     }
@@ -205,16 +205,16 @@ public:
         if (!loaded) {
             ERROR("Cannot load %s\n", file);
             g_key_file_free(keyFile);
-	    return NULL;
+            return NULL;
         }
-	GError *error = NULL;
-	auto retval = g_key_file_get_string (keyFile, group, item, &error);
-	if (error){
-	    DBG("custombutton():: %s\n", error->message);
+        GError *error = NULL;
+        auto retval = g_key_file_get_string (keyFile, group, item, &error);
+        if (error){
+            DBG("custombutton():: %s\n", error->message);
             g_key_file_free(keyFile);
             g_error_free(error);
-	    return NULL;
-	}
+            return NULL;
+        }
         g_key_file_free(keyFile);
         return retval;
     }
@@ -234,11 +234,11 @@ public:
     static GtkButton *custombutton(const gchar *file){
         auto icon = getIcon(file);
         auto tooltip = getTooltip(file);
-	auto button = Gtk<Type>::newButton(icon, tooltip);
-	g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(openCustomDialog), g_strdup(file));
-	g_free(icon);
-	
-	return button;
+        auto button = Gtk<Type>::newButton(icon, tooltip);
+        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(openCustomDialog), g_strdup(file));
+        g_free(icon);
+        
+        return button;
     }
 private:
          
@@ -338,35 +338,35 @@ private:
     }
 /*
     void add_cancel_ok(GtkDialog *dialog){
-	// button no
-	no_ = gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
+        // button no
+        no_ = gtk_c::dialog_button ("window-close-symbolic", _("Cancel"));
         g_object_set_data(G_OBJECT(no_), "dialog", dialog);
-	gtk_widget_show (GTK_WIDGET(no_));
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(no_), GTK_RESPONSE_NO);
-	g_signal_connect (G_OBJECT (no_), "clicked", G_CALLBACK (cancel), this);
-	yes_ = gtk_c::dialog_button ("system-run-symbolic", _("Ok"));
-	gtk_widget_show (GTK_WIDGET(yes_));
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(yes_), GTK_RESPONSE_YES);
+        gtk_widget_show (GTK_WIDGET(no_));
+        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(no_), GTK_RESPONSE_NO);
+        g_signal_connect (G_OBJECT (no_), "clicked", G_CALLBACK (cancel), this);
+        yes_ = gtk_c::dialog_button ("system-run-symbolic", _("Ok"));
+        gtk_widget_show (GTK_WIDGET(yes_));
+        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(yes_), GTK_RESPONSE_YES);
     }
   */  
     static gboolean 
     response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
         cancel(NULL, data);
-	return TRUE;
+        return TRUE;
     }
 
     void 
     runResponse(void){
         /* show response_ and return */
-	gtk_window_set_type_hint(GTK_WINDOW(this->response_), GDK_WINDOW_TYPE_HINT_NORMAL);
+        gtk_window_set_type_hint(GTK_WINDOW(this->response_), GDK_WINDOW_TYPE_HINT_NORMAL);
         //GDK_WINDOW_TYPE_HINT_DIALOG
-	gtk_window_set_modal (GTK_WINDOW (this->response_), FALSE);
-	gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER_ON_PARENT);
-	gtk_widget_show (GTK_WIDGET(this->response_));
+        gtk_window_set_modal (GTK_WINDOW (this->response_), FALSE);
+        gtk_window_set_position(GTK_WINDOW(this->response_), GTK_WIN_POS_CENTER_ON_PARENT);
+        gtk_widget_show (GTK_WIDGET(this->response_));
         Dialogs<Type>::placeDialog(GTK_WINDOW(this->response_));
         //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         //gtk_main();
-	return;
+        return;
     }
 
 };
