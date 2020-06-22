@@ -826,12 +826,16 @@ private:
                 terminal=*p;
                 g_free(t);
                 setenv("TERMINAL", *p, 1);
+                setTerminalCmd(*p);
                 done = TRUE;
                 return;
             }  
         }
         if (!terminal){
             DBG("No terminal command found. Please install or define TERMINAL environment variable.\n");
+            // Fallback...
+            setenv("TERMINAL", "xterm", 1);
+            setTerminalCmd("xterm");
         }
         done = TRUE;
         return ;
@@ -839,6 +843,8 @@ private:
 
     static void
     setTerminalCmd (const gchar *t) {
+        static gboolean done = FALSE;
+        if (done) return;
         const gchar *exec_option = "-e";
         if(strncmp (t, "gnome-terminal", strlen("gnome-terminal")) == 0 ||
            strncmp (t, "Terminal", strlen("Terminal")) == 0) {

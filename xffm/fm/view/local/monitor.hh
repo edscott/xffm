@@ -358,6 +358,7 @@ private:
 
         
         gboolean verbose = FALSE;
+        if (verbose) DBG("monitor thread %p...\n", g_thread_self());
         switch (event){
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:

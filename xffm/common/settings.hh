@@ -134,7 +134,6 @@ private:
     getKeyFile(void){
         auto keyFile = g_key_file_new();
         auto settingsfile = g_build_filename(SETTINGS_FILE, NULL);
-        getFileLock(settingsfile);
 
         auto loaded = g_key_file_load_from_file(keyFile, settingsfile,
                //(GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
@@ -143,7 +142,6 @@ private:
         if (!loaded) {
             TRACE("%s %s\n", _("New File:"), settingsfile);
         }
-        removeFileLock(settingsfile);
         g_free(settingsfile);
         return keyFile;
     }
