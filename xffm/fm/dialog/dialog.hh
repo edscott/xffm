@@ -37,7 +37,7 @@ public:
     }
 
     void init(const gchar *path){
-        isTreeView = (Settings<Type>::getSettingInteger("window", "TreeView") > 0);
+        isTreeView = (Settings<Type>::getInteger("window", "TreeView") > 0);
         mainWindow = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
         g_object_set_data(G_OBJECT(mainWindow), "dialogObject", (void *)this);
         g_signal_connect (G_OBJECT (mainWindow), "delete-event", EVENT_CALLBACK (DialogSignals<Type>::delete_event), NULL);
@@ -188,8 +188,8 @@ public:
                                &naturalSize_);
         }
         // First try a saved width/height
-        gint width = Settings<Type>::getSettingInteger("window", "width");
-        gint height = Settings<Type>::getSettingInteger("window", "height");
+        gint width = Settings<Type>::getInteger("window", "width");
+        gint height = Settings<Type>::getInteger("window", "height");
         if (width >= naturalSize_.width && height >= naturalSize_.height){
             gtk_window_resize (GTK_WINDOW(mainWindow), width, height);
             return;

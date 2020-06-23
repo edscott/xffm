@@ -18,9 +18,37 @@ namespace xf
 
 template <class Type>
 class Print {
-    using util_c = Util<double>;
     using pixbuf_c = Pixbuf<double>;
 public:
+    
+    static void // print_icon will free string.
+    printInfo(GtkTextView *textview, gchar *string){
+        auto tag = Settings<Type>::getString("window.infoColor");
+        if (tag) print(textview, tag, string);
+        else print(textview, string);
+     
+    }
+    
+    static void // print_icon will free string.
+    printInfo(GtkTextView *textview, const gchar *icon, gchar *string){
+        auto tag = Settings<Type>::getString("window.infoColor");
+        if (tag) print(textview, icon, tag, string);
+        else print(textview, icon, string);
+     
+    }
+
+    static void // print_icon will free string.
+    printDbg(GtkTextView *textview, gchar *string){
+        print(textview, "dialog-warning", string);
+    }
+
+    static void // print_icon will free string.
+    printError(GtkTextView *textview, gchar *string){
+        auto tag = Settings<Type>::getString("window.errorColor");
+        if (tag) print(textview, "dialog-error", tag, string);
+        else print(textview, "dialog-error", "bold", string);
+    }
+    
 
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
         if (!textview) return;
@@ -49,6 +77,14 @@ public:
         void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
         context_function(print_i, arg);
         g_free(string);
+    }
+
+    static void print(GtkTextView *textview, 
+                                const gchar *iconname, 
+                                const gchar *tag, 
+                                gchar *string)
+    {
+        print_icon(textview, iconname, tag, string);
     }
 
     static void print_icon(GtkTextView *textview, 
@@ -526,6 +562,12 @@ private:
         } 
 
         tag = gtk_text_tag_table_lookup (gtk_text_buffer_get_tag_table (buffer), id);
+        if (!tag && id[0] == '#'){
+            // create a new tag for color id.
+            // Yeah, yeah I know gdkcolor is deprecated, but that was a dumb thing to do.
+            tag = gtk_text_buffer_create_tag(buffer, id, "foreground_gdk", id, NULL);
+        }
+
         // if (!tag) ERROR("No GtkTextTag for %s\n", id);
         return tag;
     }
@@ -682,7 +724,7 @@ endloop:;
             return;
         }
 
-        gchar *q = util_c::utf_string (s);
+        gchar *q = Util<Type>::utf_string (s);
         /// this should be mutex protected since this function is being called
         //  from threads all over the place.
         static pthread_mutex_t insert_mutex =  PTHREAD_MUTEX_INITIALIZER;

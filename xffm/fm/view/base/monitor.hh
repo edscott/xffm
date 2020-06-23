@@ -131,7 +131,7 @@ public:
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
           //      TRACE("BaseMonitor thread itemshash=%p\n", itemsHash_);
         baseView_ = view;
-        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
+        gboolean showHidden = (Settings<Type>::getInteger("LocalView", "ShowHidden") > 0);
         cancellable_ = g_cancellable_new ();
         gfile_ = NULL;
         store_ = GTK_LIST_STORE(treeModel);

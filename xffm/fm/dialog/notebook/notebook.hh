@@ -197,7 +197,7 @@ public:
         page->setPageWorkdir(workdir); 
         g_free(workdir);
 
-        auto size = Settings<Type>::getSettingInteger("xfterm", "fontSize");
+        auto size = Settings<Type>::getInteger("xfterm", "fontSize");
         print_c::set_font_size(GTK_WIDGET(page->output()), size);
         print_c::set_font_size(GTK_WIDGET(page->input()), size);
     

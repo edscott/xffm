@@ -196,8 +196,8 @@ public:
         lastY = allocation->height;
 
         // Save selection width and height to .ini
-        Settings<Type>::setSettingInteger( "xffind", "width", lastX);
-        Settings<Type>::setSettingInteger( "xffind", "height", lastY);
+        Settings<Type>::setInteger( "xffind", "width", lastX);
+        Settings<Type>::setInteger( "xffind", "height", lastY);
 
     }
 

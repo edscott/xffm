@@ -1073,7 +1073,7 @@ public:
         // get last used arguments...
         gchar *dirname = NULL;
         if (Settings<Type>::keyFileHasGroupKey(iniGroup, "Default")){
-            dirname = Settings<Type>::getSettingString(iniGroup, "Default");
+            dirname = Settings<Type>::getString(iniGroup, "Default");
         } 
         if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
             g_free(dirname);
@@ -1088,7 +1088,7 @@ public:
         if (response){
             response = ckDir(response);
              g_strstrip(response);
-            Settings<Type>::setSettingString(iniGroup, "Default", response);
+            Settings<Type>::setString(iniGroup, "Default", response);
         }
        return response;
     
@@ -1276,7 +1276,7 @@ public:
         if (Run<Type>::fixedInTerminal(text)){
             gchar *a = Run<Type>::baseCommand(text);
             gtk_toggle_button_set_active(checkButton, TRUE);
-            Settings<Type>::setSettingInteger("Terminal", a, 1);
+            Settings<Type>::setInteger("Terminal", a, 1);
             g_free(a);
         }
 

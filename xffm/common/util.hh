@@ -195,7 +195,7 @@ public:
     static GList *
     sortList(GList *list){
         // Default sort order:
-        if (Settings<Type>::getSettingInteger("LocalView", "Descending") <= 0) {
+        if (Settings<Type>::getInteger("LocalView", "Descending") <= 0) {
             return g_list_sort (list,compareDown);
         } else {
             return g_list_sort (list,compareUp);

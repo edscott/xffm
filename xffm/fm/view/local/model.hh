@@ -192,12 +192,12 @@ public:
         TRACE( "shows hidden=%d\n", showHidden);
         gint count = 0;
         gboolean bySize = 
-            (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
+            (Settings<Type>::getInteger("LocalView", "BySize") > 0);
         gboolean byDate = 
-            (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
+            (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
 
         auto needStat = bySize || byDate;
-        //gboolean doPreviews = (Settings<Type>::getSettingInteger("ImageSize", path) > 0);
+        //gboolean doPreviews = (Settings<Type>::getInteger("ImageSize", path) > 0);
         gboolean doPreviews = FALSE;
         while ((d = readdir(directory))  != NULL){
             TRACE( "%p  %s\n", d, d->d_name);
@@ -504,9 +504,9 @@ private:
     static GList *
     sortList(GList *list){
         // Default sort order:
-        gboolean descending = Settings<Type>::getSettingInteger("LocalView", "Descending") > 0;
-        gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
-        gboolean byDate = (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
+        gboolean descending = Settings<Type>::getInteger("LocalView", "Descending") > 0;
+        gboolean bySize = (Settings<Type>::getInteger("LocalView", "BySize") > 0);
+        gboolean byDate = (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
         if (bySize || byDate){
             for (auto l=list; l && l->data; l=l->next){
                 auto xd_p = (xd_t *) l->data;
@@ -643,7 +643,7 @@ public:
 
     static void updateIcons(View<Type> *view, GList *directoryList, const gchar *path){
         // if no previews, return.
-        gint pixels = Settings<Type>::getSettingInteger("ImageSize", path);
+        gint pixels = Settings<Type>::getInteger("ImageSize", path);
         if (pixels <= 24) {
             TRACE("No previews for %s\n", path);
             return;
@@ -737,9 +737,9 @@ public:
         xd_b->d_type = type;
         TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, xd_b->name);
         gint sortResult;
-        gboolean descending = Settings<Type>::getSettingInteger("LocalView", "Descending") > 0;
-        gboolean bySize = (Settings<Type>::getSettingInteger("LocalView", "BySize") > 0);
-        gboolean byDate = (Settings<Type>::getSettingInteger("LocalView", "ByDate") > 0);
+        gboolean descending = Settings<Type>::getInteger("LocalView", "Descending") > 0;
+        gboolean bySize = (Settings<Type>::getInteger("LocalView", "BySize") > 0);
+        gboolean byDate = (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
         if ((bySize || byDate) && !xd_b->st) getStat(xd_b);
         if (byDate && bySize) sortResult = compareByDateSize((void *)xd_p, (void *)(xd_b), descending);
         else if (byDate) sortResult = compareByDate((void *)xd_p, (void *)(xd_b), descending);
@@ -773,12 +773,12 @@ public:
     add_local_item(GtkListStore *list_store, xd_t *xd_p){
         //FIXME need for shows_hidden only in monitor_ function...
         //      monitor must reload when showHidden changes...
-        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
+        gboolean showHidden = (Settings<Type>::getInteger("LocalView", "ShowHidden") > 0);
         if (!showHidden && xd_p->d_name[0] == '.'  && strcmp("..", xd_p->d_name)){
             TRACE("add local item returns on %s\n", xd_p->d_name);
             return;
         }
-        gboolean showBackups = (Settings<Type>::getSettingInteger("LocalView", "ShowBackups") > 0);
+        gboolean showBackups = (Settings<Type>::getInteger("LocalView", "ShowBackups") > 0);
         if (!showBackups && LocalIcons<Type>::backupType(xd_p->d_name)){
             return;
         }

@@ -339,7 +339,7 @@ public:
                 gtk_widget_get_allocation(GTK_WIDGET(this->hViewBox()),&allocation);
                 TRACE("current hViewBox height = %d\n", allocation.height);
                 if (allocation.height - currentPosition < 5){
-                    gint position = settings_c::getSettingInteger("window", "height");
+                    gint position = settings_c::getInteger("window", "height");
                     if (position < 0) position = 200;
                     else position /= 2;
                     setVpanePosition(position);

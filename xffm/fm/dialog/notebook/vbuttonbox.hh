@@ -14,7 +14,7 @@ class VButtonBox {
 #ifdef ENABLE_CUSTOM_RESPONSE
     static void removeCustomButton(GtkButton *button, void *data){
         auto comboResponse = new(ComboResponse<Type>)(mainWindow, _("Remove Button Contents"), "list-remove");
-        auto actualFiles = Settings<Type>::getSettingString("custombuttons", "files");
+        auto actualFiles = Settings<Type>::getString("custombuttons", "files");
         if (!actualFiles) return;
 
         auto paths = g_strsplit(actualFiles, ":", -1);
@@ -49,7 +49,7 @@ class VButtonBox {
             if (!newPaths || !strlen(newPaths)) gtk_widget_hide(GTK_WIDGET(button));
             g_strfreev(paths);
             // save setting
-            Settings<Type>::setSettingString("custombuttons", "files", newPaths);
+            Settings<Type>::setString("custombuttons", "files", newPaths);
             g_free(newPaths);
 
             // hide button with data response
@@ -148,12 +148,12 @@ class VButtonBox {
 
         
 
-        auto files = Settings<Type>::getSettingString("custombuttons", "files");
+        auto files = Settings<Type>::getString("custombuttons", "files");
         if (!files) {
-            Settings<Type>::setSettingString("custombuttons", "files", response);
+            Settings<Type>::setString("custombuttons", "files", response);
         } else { 
             auto g = g_strconcat(files, ":", response, NULL);
-            Settings<Type>::setSettingString("custombuttons", "files", g);
+            Settings<Type>::setString("custombuttons", "files", g);
             g_free(g);
         }
 
@@ -226,7 +226,7 @@ public:
             gtk_c::newButton("list-remove", _("Remove Button Contents"));
         g_signal_connect(G_OBJECT(removeCustom), "clicked", G_CALLBACK(removeCustomButton), vButtonBox_);
         gtk_box_pack_end (vButtonBox_, GTK_WIDGET(removeCustom), FALSE, FALSE, 0);
-        auto customButtonFiles = Settings<Type>::getSettingString("custombuttons", "files");
+        auto customButtonFiles = Settings<Type>::getString("custombuttons", "files");
         if (customButtonFiles){
             gchar **files;
             if (strchr(customButtonFiles ,':')) {
@@ -326,7 +326,7 @@ private:
                gpointer   data) {
         auto page = Fm<Type>::getCurrentPage();
         auto view = page->view();
-        auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
+        auto pixels = Settings<Type>::getInteger("ImageSize", page->workDir());
         page->setImageSize(pixels/2);
         view->reloadModel();
         return FALSE;
@@ -339,7 +339,7 @@ private:
         auto page = Fm<Type>::getCurrentPage();
         auto view = page->view();
 
-        auto pixels = Settings<Type>::getSettingInteger("ImageSize", page->workDir());
+        auto pixels = Settings<Type>::getInteger("ImageSize", page->workDir());
         if (pixels > 0) pixels *=2;
         else pixels = 48;
         page->setImageSize(pixels);

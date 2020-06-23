@@ -1140,8 +1140,8 @@ public:
 private:
     static gint
     setFindSize(GtkWindow *dialog){
-        gint width = Settings<Type>::getSettingInteger("xffind", "width");
-        gint height = Settings<Type>::getSettingInteger("xffind", "height");
+        gint width = Settings<Type>::getInteger("xffind", "width");
+        gint height = Settings<Type>::getInteger("xffind", "height");
         gtk_widget_realize(GTK_WIDGET(dialog));
         
         gtk_widget_set_size_request (GTK_WIDGET(dialog), 450, 440);

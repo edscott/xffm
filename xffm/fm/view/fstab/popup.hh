@@ -145,7 +145,7 @@ class FstabPopUp {
         // get last used arguments...
         gchar *dirname = NULL;
         if (Settings<Type>::keyFileHasGroupKey("MountPoints", basename)){
-            dirname = Settings<Type>::getSettingString("MountPoints", basename);
+            dirname = Settings<Type>::getString("MountPoints", basename);
         } 
         if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
             g_free(dirname);
@@ -163,7 +163,7 @@ class FstabPopUp {
         TRACE("response=%s\n", response);
         if (response){
             g_strstrip(response);
-            Settings<Type>::setSettingString("MountPoints", basename, response);
+            Settings<Type>::setString("MountPoints", basename, response);
             if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
                 // Try to create...
                 // FIXME: use sudo if configured and fails

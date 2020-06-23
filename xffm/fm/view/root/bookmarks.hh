@@ -34,7 +34,7 @@ public:
     initBookmarks(void) {
         if (bookmarks) return;
         bookmarks = readBookmarkFile(bookmarks);
-        auto serial = Settings<Type>::getSettingInteger("Bookmarks", "serial"); 
+        auto serial = Settings<Type>::getInteger("Bookmarks", "serial"); 
         gchar *g=g_strdup_printf("%d", serial);
         setenv ("RFM_BOOKMARK_SERIAL", g, TRUE);
         g_free(g);
@@ -247,7 +247,7 @@ private:
             
         auto serial = getBookMarkSerial();
         serial++;
-        Settings<Type>::setSettingInteger("Bookmarks", "serial", serial); 
+        Settings<Type>::setInteger("Bookmarks", "serial", serial); 
 
         gchar *g=g_strdup_printf("%d", serial);
         setenv ("RFM_BOOKMARK_SERIAL", g, TRUE);

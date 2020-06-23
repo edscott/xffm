@@ -3,7 +3,6 @@
 #include "hbuttonbox.hh"
 #include "pathbar.hh"
 #include "vpane.hh"
-#include "threadcontrol.hh"
 
 namespace xf {
 
@@ -60,13 +59,13 @@ public:
             auto message = g_strdup_printf(" %s: (%d) [%s]\n",_("Reset image size"), pixels, this->workDir());
             Print<Type>::showTextSmall(this->output());
             Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
-            Settings<Type>::setSettingInteger("ImageSize", this->workDir(), pixels);
+            Settings<Type>::setInteger("ImageSize", this->workDir(), pixels);
         }
     }
     
     gint
     getImageSize(void) {
-        auto pixels = Settings<Type>::getSettingInteger("ImageSize", this->workDir());
+        auto pixels = Settings<Type>::getInteger("ImageSize", this->workDir());
         if (pixels < 0) pixels = 48;
         return pixels;
         //return this->imageSize_;

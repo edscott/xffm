@@ -2,6 +2,8 @@
 #define MENU_POPOVER_HH
 
 namespace xf {
+
+GtkMenu *settingsMenu;
 template <class Type> class Notebook;
 template <class Type> class Page;
 template <class Type>
@@ -183,13 +185,13 @@ public:
     toggleGroupItem(GtkCheckMenuItem *menuItem, const gchar *group, const gchar *item)
     {
         gboolean value; 
-        if (Settings<Type>::getSettingInteger(group, item) > 0){
+        if (Settings<Type>::getInteger(group, item) > 0){
             value = FALSE;
         } else {
             value = TRUE;
         }
         gtk_check_menu_item_set_active(menuItem, value);
-        Settings<Type>::setSettingInteger(group, item, value);
+        Settings<Type>::setInteger(group, item, value);
         auto notebook_p = Fm<Type>::getCurrentNotebook();
         gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
         for (int i=0; i<pages; i++){
@@ -209,6 +211,24 @@ private:
         toggleGroupItem(menuItem, "LocalView", item);
     }
 
+    void createSettingsMenu(void){
+        menuItem_t item[]={
+            {N_("Background Color"), (void *)bgcolor, NULL, NULL},
+            {N_("Foreground Color"), (void *)fgcolor, NULL, NULL},
+            // Currently broken, must change gdkcolor to gdkrgba...
+            //{N_("Command Text Color"),(void *) infoColor, NULL, NULL},
+            //{N_("Error Text Color"), (void *)errorColor, NULL, NULL},
+            {NULL}};
+        settingsMenu = Popup<Type>::createMenu(item);
+        auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(settingsMenu), "title"));
+        gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
+        gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", _("Color settings"));
+        Gtk<Type>::menu_item_content(title, NULL, markup, -24);
+        g_free(markup);
+        gtk_widget_show(GTK_WIDGET(title));
+
+    }
+
     GtkMenu *createMenu(void){
         menuItem_t item[]={
             {N_("View as list"), (void *)toggleView, (void *)"TreeView", "window"},
@@ -218,31 +238,20 @@ private:
 
             {N_("Sort by date"), (void *)toggleItem, (void *) "ByDate", "LocalView"},
             {N_("Sort by size"), (void *)toggleItem, (void *) "BySize", "LocalView"},
-            {N_("Background Color"), (void *)bgcolor, NULL, NULL},
-            {N_("Foreground Color"), (void *)fgcolor, NULL, NULL},
+            {N_("Color settings"), (void *)settings, NULL, NULL},
             {N_("Exit"), (void *)MenuPopoverSignals<Type>::finish, (void *) menuButton_},
             {NULL}};
+
         const gchar *key[]={
-            "Home Directory",
-            "Disk Image Mounter",
-            "Software Updater",
-            "Trash bin",
-            "Open terminal",
-            "Open a New Window",
-            "Search",
+            "Color settings",
             "Exit",
+            "Search",
             NULL
         };
         const gchar *keyIcon[]={
-            "go-home",
-            "folder-remote",
-            "x-package-repository",
-            "user-trash",
-
-            "utilities-terminal",
-            "window-new",
-            "system-search",
+            "applications-graphics",
             "application-exit",
+            "system-search",
             NULL
         };
        
@@ -260,6 +269,7 @@ private:
         
         g_signal_connect (G_OBJECT(menuButton_), "clicked", G_CALLBACK(updateMenu), g_object_get_data(G_OBJECT(menu), "View as list"));
 
+        createSettingsMenu();
         gtk_widget_show (GTK_WIDGET(menu));
         return menu;
     }
@@ -306,11 +316,35 @@ private:
     }
 
     static void
+    settings(GtkMenuItem *menuItem, gpointer data)
+    {
+        gtk_menu_popup_at_pointer(settingsMenu, NULL);
+    }
+
+    static void
+    infoColor(GtkMenuItem *menuItem, gpointer data)
+    {
+        GdkRGBA rgba;
+        auto code = getColor(_("Command Text Color"), &rgba);
+        Settings<Type>::setString("window", "infoColor", code);
+        g_free(code);
+    }
+
+    static void
+    errorColor(GtkMenuItem *menuItem, gpointer data)
+    {
+        GdkRGBA rgba;
+        auto code = getColor(_("Error Text Color"), &rgba);
+        Settings<Type>::setString("window", "errorColor", code);
+        g_free(code);
+    }
+
+    static void
     fgcolor(GtkMenuItem *menuItem, gpointer data)
     {
         GdkRGBA rgba;
         auto code = getColor(_("Foreground Color"), &rgba);
-        Settings<Type>::setSettingString("window", "fgColor", code);
+        Settings<Type>::setString("window", "fgColor", code);
         g_free(code);
         applyColors();
     }
@@ -319,7 +353,7 @@ private:
     {
         GdkRGBA rgba;
         auto code = getColor(_("Background Color"), &rgba);
-        Settings<Type>::setSettingString("window", "bgColor", code);
+        Settings<Type>::setString("window", "bgColor", code);
         g_free(code);
         applyColors();
     }
@@ -329,7 +363,7 @@ private:
         auto item = (const gchar *)data;
         isTreeView = !isTreeView;
         gtk_check_menu_item_set_active(menuItem, isTreeView);
-        Settings<Type>::setSettingInteger("window", "TreeView", isTreeView);
+        Settings<Type>::setInteger("window", "TreeView", isTreeView);
         auto notebook_p = Fm<Type>::getCurrentNotebook();
         gint pages = gtk_notebook_get_n_pages (notebook_p->notebook());
         for (int i=0; i<pages; i++){
@@ -352,7 +386,7 @@ private:
     }
     static void
     updateMenu(GtkButton *button, void *data){
-        auto state = Settings<Type>::getSettingInteger("window", "TreeView");
+        auto state = Settings<Type>::getInteger("window", "TreeView");
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(data), state);
 
     }

@@ -167,24 +167,22 @@ public:
 
 public:
 
-    static void // print_icon will free string.
+    static void // Print<Type>::printInfo will free string.
     printInfo(gchar *string){
         auto page = getCurrentPage();
-        //if (icon) Print<Type>::print_icon(page->output(), "dialog-information", string);
-        Print<Type>::print(page->output(), string);
-     
+        Print<Type>::printInfo(page->output(), string);     
     }
 
-    static void // print_icon will free string.
+    static void // Print<Type>::printDbg will free string.
     printDbg(gchar *string){
         auto page = getCurrentPage();
-        Print<Type>::print_icon(page->output(), "dialog-warning", string);
+        Print<Type>::printDbg(page->output(), string);     
     }
 
-    static void // print_icon will free string.
+    static void // Print<Type>::printErrorýb will free string.
     printError(gchar *string){
         auto page = getCurrentPage();
-        Print<Type>::print_icon(page->output(), "dialog-error", "bold", string);
+        Print<Type>::printError(page->output(), string);     
     }
     
 

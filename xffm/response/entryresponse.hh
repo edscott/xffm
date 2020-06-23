@@ -371,7 +371,7 @@ private:
         if (Run<Type>::fixedInTerminal(text)){
             gchar *a = Run<Type>::baseCommand(text);
             gtk_toggle_button_set_active(checkButton, TRUE);
-            Settings<Type>::setSettingInteger("Terminal", a, 1);
+            Settings<Type>::setInteger("Terminal", a, 1);
             g_free(a);
         }
 

@@ -13,20 +13,20 @@ class Settings {
 
 public:
     static gint 
-    getSettingInteger(const gchar *group, const gchar *item){
+    getInteger(const gchar *group, const gchar *item){
         //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gint value = -1;
         GError *error = NULL;
         if (!g_key_file_has_key(keyFile, group, item, &error)) {
             // DBG crashes: Glib bug with GError->message:
-            //TRACE("getSettingInteger(): %s\n", error->message);
+            //TRACE("getInteger(): %s\n", error->message);
             if (error) g_error_free(error);
         } else {
             value = g_key_file_get_integer (keyFile, group, item, &error);
             if (error){
                 // DBG crashes: Glib bug with GError->message:
-                //TRACE("getSettingInteger(): %s\n", error->message);
+                //TRACE("getInteger(): %s\n", error->message);
                 g_error_free(error);
                 value = -1;
             }
@@ -35,22 +35,33 @@ public:
         //pthread_mutex_unlock(&settingsMutex);
         return value;
     }
+
+    static gint 
+    getInteger(const gchar *groupitem){
+        if (!strchr(groupitem, '.')) return -1;
+        auto group = g_strdup(groupitem);
+        *(strchr(group, '.')) = 0;
+        auto item = group + strlen(group) + 1;
+        auto result = getInteger(group, item);
+        g_free(group);
+        return result;
+    }
  
     static gchar * 
-    getSettingString(const gchar *group, const gchar *item){
+    getString(const gchar *group, const gchar *item){
         //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gchar *value = NULL;
         GError *error = NULL;
         if (!g_key_file_has_key(keyFile, group, item, &error)) {
             // DBG crashes: Glib bug with GError->message:
-            //DBG(".getSettingString(): %s\n", error->message);
+            //DBG(".getString(): %s\n", error->message);
             if (error) g_error_free(error);
         } else {
             value = g_key_file_get_string (keyFile, group, item, &error);
             if (error){
                 // DBG crashes: Glib bug with GError->message:
-                //DBG("..getSettingString(): %s\n", error->message);
+                //DBG("..getString(): %s\n", error->message);
                 g_error_free(error);
                 value = NULL;
             }
@@ -59,9 +70,23 @@ public:
        // pthread_mutex_unlock(&settingsMutex);
         return value;
     }
+
+    static gchar * 
+    getString(const gchar *groupitem){
+        if (!strchr(groupitem, '.')) return NULL;
+        auto group = g_strdup(groupitem);
+        *(strchr(group, '.')) = 0;
+        auto item = group + strlen(group) + 1;
+        auto result = getString(group, item);
+        g_free(group);
+        return result;
+    }
+        
+
+
        
     static void
-    setSettingInteger(const gchar *group, const gchar *item, int value){
+    setInteger(const gchar *group, const gchar *item, int value){
         //pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         g_key_file_set_integer (keyFile, group, item, value);
@@ -72,8 +97,12 @@ public:
     }
     
     static void
-    setSettingString(const gchar *group, const gchar *item, const gchar *value){
+    setString(const gchar *group, const gchar *item, const gchar *value){
         //pthread_mutex_lock(&settingsMutex);
+        if (!value) {
+            TRACE("Settings::setString: %s.%s value is null\n", group, item);
+            return;
+        }
         auto keyFile = getKeyFile();
         g_key_file_set_string (keyFile, group, item, value);
         writeKeyFile(keyFile);

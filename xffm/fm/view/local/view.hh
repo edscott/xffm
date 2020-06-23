@@ -147,7 +147,7 @@ public:
                 //     icon, since the command will be issued several times
                 //     in a row. 
                 auto mimetype = Mime<Type>::mimeType(path);
-                gchar *response = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
+                gchar *response = Settings<Type>::getString("MimeTypeApplications", mimetype);
                 if (response) {
                     gchar *command;
                     // Check whether applicacion is valid.

@@ -284,7 +284,7 @@ private:
         GSList *elements = NULL;
         struct fstab *fs;
         for(fs = getfsent (); fs != NULL; fs = getfsent ()) {
-            if (!g_path_is_absolute(fs->fs_file)) continue;
+            if (!fs->fs_file || !g_path_is_absolute(fs->fs_file)) continue;
             TRACE("elements_list: %s\n", fs->fs_file);
             elements = g_slist_prepend(elements, g_strdup(fs->fs_file));
         }

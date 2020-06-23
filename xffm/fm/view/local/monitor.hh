@@ -142,7 +142,7 @@ public:
     gboolean
     add_new_item(GFile *file){
        xd_t *xd_p = get_xd_p(file);
-        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
+        gboolean showHidden = (Settings<Type>::getInteger("LocalView", "ShowHidden") > 0);
         if (xd_p) {
             if (xd_p->d_name[0] == '.' && !showHidden) return FALSE;
             // here we should insert according to sort order...
@@ -200,7 +200,8 @@ public:
             xd_p->icon = LocalIcons<Type>::getIconname(xd_p);   
         }
         TRACE("2. %s --> %s --> %s\n", xd_p->path, xd_p->mimetype, xd_p->icon);
-        gchar *iconName = xd_p->icon;
+        const gchar *iconName = xd_p->icon;
+        if (!iconName) iconName = "default";
 
         
         TRACE("***localmonitor stat_func(): iconname=%s\n", iconName);
@@ -306,7 +307,7 @@ public:
         // Then, if found, we go on to find the item in the treemodel and update.
         // If not found, we should add item.
         TRACE("restat_item %s \n", path);
-        gboolean showHidden = (Settings<Type>::getSettingInteger("LocalView", "ShowHidden") > 0);
+        gboolean showHidden = (Settings<Type>::getInteger("LocalView", "ShowHidden") > 0);
         if (path[0] == '.' && !showHidden) {
             return FALSE;
         }
@@ -324,13 +325,15 @@ private:
         auto f = (gchar *)arg[1];
         // If an direct path icon (image for example) clear hash first
         // This will clear the thumbnail since item is no longer hashed.
-        if (g_path_is_absolute(f)){
-            PixbufHash<Type>::rm_from_pixbuf_hash(f, 24);
-            PixbufHash<Type>::rm_from_pixbuf_hash(f, 48);
+        if (f) {
+            if (g_path_is_absolute(f)){
+                PixbufHash<Type>::rm_from_pixbuf_hash(f, 24);
+                PixbufHash<Type>::rm_from_pixbuf_hash(f, 48);
+            }
+            // XXX: doesn't restat item do the above?
+            p->restat_item(f);
+            g_free(f);
         }
-        // XXX: doesn't restat item do the above?
-        p->restat_item(f);
-        g_free(f);
         g_free(arg);
         return G_SOURCE_REMOVE;
     }

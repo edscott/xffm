@@ -407,7 +407,7 @@ private:
         // get last used arguments...
         gchar *dirname = NULL;
         if (Settings<Type>::keyFileHasGroupKey("GoTo", "Default")){
-            dirname = Settings<Type>::getSettingString("GoTo", "Default");
+            dirname = Settings<Type>::getString("GoTo", "Default");
         } 
         if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
             g_free(dirname);

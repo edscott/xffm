@@ -706,7 +706,7 @@ public:
     mountPath (View<Type> *view, const gchar *path, const gchar *mountPoint) 
     {
         TRACE("FstabView<Type>::mountPath(%s, %s)\n", path, mountPoint);
-        if (!g_path_is_absolute(path)){
+        if (!path || !g_path_is_absolute(path)){
             ERROR("fstab/view.hh::mountPath: %s is not absolute.\n", path);
             return FALSE;
         }

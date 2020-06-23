@@ -21,6 +21,7 @@ template <class Type> class MimeApplication;
 template <class Type> class Mime;
 template <class Type> class EntryResponse;
 template <class Type> class ComboResponse;
+template <class Type> class CommandResponse;
 template <class Type>
 class Run {
 
@@ -29,7 +30,7 @@ class Run {
         pthread_mutex_lock(&string_hash_mutex);
         if (!stringHash) {
             stringHash = 
-                    g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_free);      
+                g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_free);      
         }
         g_hash_table_replace(stringHash, GINT_TO_POINTER(controller), string);
         pthread_mutex_unlock(&string_hash_mutex);
@@ -44,18 +45,15 @@ class Run {
         }
 
         auto string = (gchar *)g_hash_table_lookup (stringHash, GINT_TO_POINTER(controller));
-        gchar bold[]={27, '[', '1', 'm',0};
         if (!string){
             //WARN("controller %d not found in hashtable (process has completed)\n", controller);
-	    string = g_strdup_printf("%d\n", controller);
+            string = g_strdup_printf("%d\n", controller);
         } else {
-	    g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
-	}
-	auto dbg_string = g_strconcat(bold, string, NULL);
+            g_hash_table_steal(stringHash, GINT_TO_POINTER(controller));
+        }
         pthread_mutex_unlock(&string_hash_mutex);
 
-        g_free(string);
-        return dbg_string;
+        return string;
     }
 
     static gchar *
@@ -74,16 +72,10 @@ class Run {
                 pid = Tubo<Type>::getChild((pid_t) id);
             }
         }
-#ifdef DEBUG_TRACE
-        auto g = g_strdup_printf("%c[31m<%d>", 27, pid);
-#else
-        auto g = g_strdup("");
-#endif
-        //gchar *c_string = pop_hash((pid_t)id);
         gchar *c_string = pop_hash((pid_t)pid);
-        string = g_strconcat(g, c_string, "\n", NULL);
+        g_strstrip(c_string);
+        string = g_strconcat(c_string, "\n", NULL);
         g_free(c_string);
-        g_free(g);
         return string;
     }
 
@@ -135,13 +127,16 @@ private:
                                     finish_f,
                                     data, // XXX view_v,
                                     flags);
-	if (pid < 0) {
-	    g_free(command);
-	    return 0;
-	}
+        if (pid < 0) {
+            g_free(command);
+            return 0;
+        }
         pid_t grandchild=Tubo<Type>::getChild (pid);
-	// Reference to command now belongs to the hashtable.
-        push_hash(grandchild, command);
+        // Reference to command now belongs to the hashtable.
+        g_strstrip(command);
+        push_hash(grandchild, g_strdup(command));
+        TRACE("push hash: \"%s\"\n", command);
+        g_free(command);
         return pid;
     }
 public:
@@ -170,12 +165,10 @@ public:
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=Tubo<Type>::getChild (pid);
-#if 0       
-        Print<Type>::print(textview, "Green", g_strdup_printf("%d:%s\n", grandchild, command));
-#else
-        if (textview) Print<Type>::print_icon(textview, "greenball", "green", g_strdup_printf("%d:%s\n", grandchild, command));
-#endif
+        if (textview) Print<Type>::printInfo(textview, "greenball", g_strdup_printf("%d:%s\n", grandchild, command));
+        g_strstrip(command);
         push_hash(grandchild, g_strdup(command));
+        TRACE("push hash: \"%s\"\n", command);
         g_free(command);
         return pid;
     }
@@ -223,7 +216,7 @@ public:
         }
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
             auto msg = g_strcompress (error->message);
-            if (textview) Print<Type>::print_error(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
+            if (textview) Print<Type>::printError(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
             else DBG("%s: %s\n", msg, ncommand);
             g_free(ncommand);
             g_error_free (error);
@@ -255,7 +248,7 @@ public:
         if (!data){
             textview = Fm<Type>::getCurrentTextview();
         } else {
-	   if (!Notebook<Type>::isValidTextView(data)) return;
+           if (!Notebook<Type>::isValidTextView(data)) return;
            textview = GTK_TEXT_VIEW(data);
         }
         if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
@@ -297,12 +290,9 @@ public:
         outline[j] = 0;
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
-//#ifdef DEBUG
             gchar *string = exit_string(line);
-	    Print<Type>::print_icon(textview, "redball", "Red", g_strdup(string));
-            //Print<Type>::print_icon(textview, "process-stop", g_strdup(string));
+            Print<Type>::printInfo(textview, "redball", g_strdup_printf("%s", string));
             g_free(string);
-//#endif
         } else {
             Print<Type>::print(textview, g_strdup(outline));
         }
@@ -348,9 +338,8 @@ public:
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
                 Print<Type>::print(textview, "yellow", g_strdup(line));
             } else {                
-                Print<Type>::print(textview, "bold", g_strdup(line));
+                Print<Type>::printError(textview, g_strdup(line));
             }
-                //Print<Type>::print(textview, g_strdup(line));
         }
 
         // With this, this thread will not do a DOS attack
@@ -367,7 +356,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        Print<Type>::print(textview, "green",  g_strdup(line));
+        Print<Type>::print(textview, g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -384,7 +373,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        Print<Type>::print(textview, "red",  g_strdup(line));
+        Print<Type>::printError(textview, g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -458,82 +447,82 @@ public:
 
     static gchar *
     sudo_fix(const gchar *command){
-	if (!strstr(command, "sudo ")) return NULL; 
-	gchar *new_command = NULL;
-	if (strncmp(strstr(command, "sudo "), "sudo -A ", strlen("sudo -A "))!=0)
-	{
-	    auto original_head=g_strdup(command);
-	    auto pos = strstr(original_head, "sudo ");
-	    if (pos){
-		*pos = 0;
-		auto tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
-		new_command = g_strconcat(original_head, "sudo -A -p \\\"",_("Enter password"), ": \\\" ", tail, NULL);
-		g_free(tail);
-	    }
-	    g_free(original_head);
-	}
-	return new_command;
+        if (!strstr(command, "sudo ")) return NULL; 
+        gchar *new_command = NULL;
+        if (strncmp(strstr(command, "sudo "), "sudo -A ", strlen("sudo -A "))!=0)
+        {
+            auto original_head=g_strdup(command);
+            auto pos = strstr(original_head, "sudo ");
+            if (pos){
+                *pos = 0;
+                auto tail=g_strdup(strstr(command, "sudo ")+strlen("sudo "));
+                new_command = g_strconcat(original_head, "sudo -A -p \\\"",_("Enter password"), ": \\\" ", tail, NULL);
+                g_free(tail);
+            }
+            g_free(original_head);
+        }
+        return new_command;
     }
 
     static pid_t 
     shell_command(GtkTextView *textview, const gchar *c, gboolean scrollUp){
-	// Make sure any sudo command has the "-A" option
-	auto command = sudo_fix(c);
-	TRACE("shell_command = %s\n", c);
-	Print<Type>::showTextSmall(textview);
-	pid_t pid = thread_run(textview, command?command:c, scrollUp);
-	g_free (command);
-	if (!pid) return 0;
-	return pid;
+        // Make sure any sudo command has the "-A" option
+        auto command = sudo_fix(c);
+        TRACE("shell_command = %s\n", c);
+        Print<Type>::showTextSmall(textview);
+        pid_t pid = thread_run(textview, command?command:c, scrollUp);
+        g_free (command);
+        if (!pid) return 0;
+        return pid;
     }
 
     static gboolean
     runInTerminal(const gchar *commandFmt){
-	if (fixedInTerminal(commandFmt)) return TRUE;
-	gchar *a = baseCommand(commandFmt);
-	gboolean retval = FALSE;
-	if (Settings<Type>::keyFileHasGroupKey("Terminal",  a) &&
-		Settings<Type>::getSettingInteger("Terminal", a))retval = TRUE;
-	g_free(a);
-	return retval;
+        if (fixedInTerminal(commandFmt)) return TRUE;
+        gchar *a = baseCommand(commandFmt);
+        gboolean retval = FALSE;
+        if (Settings<Type>::keyFileHasGroupKey("Terminal",  a) &&
+                Settings<Type>::getInteger("Terminal", a))retval = TRUE;
+        g_free(a);
+        return retval;
     }
  
     static gchar *
     baseIcon(const gchar *iconFmt){
-	if (!iconFmt) return NULL;
-	gchar *a = g_strdup(iconFmt);
-	g_strstrip(a);
-	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
-	gchar *g = g_path_get_basename(a);
-	g_free(a);
-	a=g;
-	return a;
+        if (!iconFmt) return NULL;
+        gchar *a = g_strdup(iconFmt);
+        g_strstrip(a);
+        if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+        gchar *g = g_path_get_basename(a);
+        g_free(a);
+        a=g;
+        return a;
     }
    
     static gchar *
     baseCommand(const gchar *commandFmt){
-	if (!commandFmt) return NULL;
-	gchar *a = g_strdup(commandFmt);
-	g_strstrip(a);
-	if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
-	return a;
+        if (!commandFmt) return NULL;
+        gchar *a = g_strdup(commandFmt);
+        g_strstrip(a);
+        if (strchr(a, ' ')) *(strchr(a, ' ')) = 0;
+        return a;
     }
     static gboolean
     fixedInTerminal(const gchar *app){
-	gchar *a = baseCommand(app);
-	gchar *b = strrchr(a, G_DIR_SEPARATOR);
-	if (!b) b=a; else b++;
-	gchar const *exceptions[] = {"vi", "vim", "vimdiff", "vimtutor", "nano", NULL};
-	gchar const **q;
-	gboolean retval = FALSE;
-	for (q=exceptions; q && *q; q++){
-	    if (strcmp(a, *q) == 0){
-		retval=TRUE;
-		break;
-	    }
-	}
-	g_free(a);
-	return retval;
+        gchar *a = baseCommand(app);
+        gchar *b = strrchr(a, G_DIR_SEPARATOR);
+        if (!b) b=a; else b++;
+        gchar const *exceptions[] = {"vi", "vim", "vimdiff", "vimtutor", "nano", NULL};
+        gchar const **q;
+        gboolean retval = FALSE;
+        for (q=exceptions; q && *q; q++){
+            if (strcmp(a, *q) == 0){
+                retval=TRUE;
+                break;
+            }
+        }
+        g_free(a);
+        return retval;
     }
     
     static gchar *
@@ -577,11 +566,11 @@ public:
         gchar *command_line = NULL;
 
         if(!command) return NULL;
-	gchar *a = mkCommandLine(command, path);
+        gchar *a = mkCommandLine(command, path);
 
         auto term = Util<Type>::getTerminalCmd();
         command_line = g_strdup_printf ("%s %s", term, a);
-	g_free(a);
+        g_free(a);
         return command_line;
     }
 
@@ -646,12 +635,12 @@ public:
     
     static gchar *getRunCommand(GtkWindow *parent, const gchar *path){
         TRACE("runWith: path = %s\n", path);
-	auto displayPath = Util<Type>::valid_utf_pathstring(path);
-	auto markup = 
-	    g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
-		_("Executable"));  
-	g_free(displayPath);
-	
+        auto displayPath = Util<Type>::valid_utf_pathstring(path);
+        auto markup = 
+            g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
+                _("Executable"));  
+        g_free(displayPath);
+        
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(parent), _("Run Executable..."), "system-run");
         entryResponse->setResponseLabel(markup);
         g_free(markup);
@@ -667,14 +656,14 @@ public:
         auto response = entryResponse->runResponse();
 
 
-	if (!response) return NULL;
-	// Is the terminal flag set?
-	gchar *command ;
-	if (runInTerminal(path)){
-	    command = mkTerminalLine(path, response);
-	} else {
-	    command = mkCommandLine(path, response);
-	}
+        if (!response) return NULL;
+        // Is the terminal flag set?
+        gchar *command ;
+        if (runInTerminal(path)){
+            command = mkTerminalLine(path, response);
+        } else {
+            command = mkCommandLine(path, response);
+        }
         g_free(response);
         return command;
     }
@@ -685,15 +674,15 @@ public:
         const gchar *path ;
         const gchar *pathExt ;
         gchar *mimetype;
-	const gchar **apps;
+        const gchar **apps;
         gchar *defaultApp;
-	gchar *textApp = NULL;
+        gchar *textApp = NULL;
 
        
         for (auto l= pathList; l && l->data; l=l->next){
             path  = (const gchar *)l->data;
-            auto fileInfo = Util<Type>::fileInfo(path);	
-	    textApp = defaultTextApp(fileInfo);
+            auto fileInfo = Util<Type>::fileInfo(path);        
+            textApp = defaultTextApp(fileInfo);
             if (textApp && strlen(textApp)) break;
         }
 
@@ -706,7 +695,7 @@ public:
         for (auto l= pathList; l && l->data; l=l->next){
             path  = (const gchar *)l->data;
             mimetype = Mime<Type>::mimeType(path);
-	    apps = MimeApplication<Type>::locate_apps(mimetype);
+            apps = MimeApplication<Type>::locate_apps(mimetype);
             if (apps) break;
         }
         
@@ -714,7 +703,7 @@ public:
         gchar *mpath = getMpath(pathList);
         gchar *responseLabel = getResponseLabel(mpath, multiple?NULL:mimetype);
         gchar *response = NULL;
-	gchar *command = NULL;
+        gchar *command = NULL;
 
         auto appCount = 0;
         if (apps && apps[0]) {
@@ -761,33 +750,33 @@ public:
         }
 
         if (not response) goto done;
-	if (strrchr(response,'\n')) *(strrchr(response,'\n')) = 0;
+        if (strrchr(response,'\n')) *(strrchr(response,'\n')) = 0;
         if (strlen(response)==0) goto done;
 
-	// Check whether application is valid.
-	if (!Run<Type>::isValidCommand(response)){
-	    gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
-	    Dialogs<Type>::quickHelp (GTK_WINDOW(parent), message);
-	    g_free(message);
+        // Check whether application is valid.
+        if (!Run<Type>::isValidCommand(response)){
+            gchar *message = g_strdup_printf("\n<span color=\"#990000\"><b>%s</b></span>:\n <b>%s</b>\n", _("Invalid entry"), response); 
+            Dialogs<Type>::quickHelp (GTK_WINDOW(parent), message);
+            g_free(message);
             goto done;
-	}
+        }
 
 
-	// save value as default for mimetype extension
+        // save value as default for mimetype extension
         setMimetypeDefault(path, mimetype, response);
-	TRACE("setting mimetype default to: %s\n", response);
-	MimeApplication<Type>::add2ApplicationHash(mimetype, response, TRUE);
+        TRACE("setting mimetype default to: %s\n", response);
+        MimeApplication<Type>::add2ApplicationHash(mimetype, response, TRUE);
 
         // get command line
         if (!multiple) {
-	// Is the terminal flag set?
-	    if (runInTerminal(response)){
+        // Is the terminal flag set?
+            if (runInTerminal(response)){
                 command = mkTerminalLine(response, mpath);
             } else {
                 command = mkCommandLine(response, mpath);
             }
         } else { 
-   	    if (runInTerminal(response)){
+               if (runInTerminal(response)){
                 command = mkTerminalLine(response, "");
             } else {
                 command = mkCommandLine(response, "");
@@ -797,9 +786,9 @@ public:
             command = g;
         }
 done:
-	g_free(mimetype);
- 	g_free(defaultApp);
-	g_free(mpath);
+        g_free(mimetype);
+         g_free(defaultApp);
+        g_free(mpath);
         g_free(responseLabel);
         g_free(response);
 
@@ -811,39 +800,39 @@ done:
     defaultExtApp(const gchar *path){
         auto ext = strrchr(path, '.');
         if (!ext || strlen(ext)<2) return NULL;
-	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", ext+1);
+        gchar *defaultApp = Settings<Type>::getString("MimeTypeApplications", ext+1);
         TRACE("*** defaultExtApp (%s) --> %s --> %s\n", path, ext+1, defaultApp);
-	return defaultApp;
+        return defaultApp;
     }
 
     static gchar *
     defaultTextApp(const gchar *fileInfo){
-	gchar *defaultApp = NULL;
+        gchar *defaultApp = NULL;
         gboolean textFiletype =(fileInfo && 
                 (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
         if (textFiletype) {
             auto editor = Util<Type>::getEditor();
             defaultApp =g_strdup_printf("%s %%s", editor);
         }
-	return defaultApp;
+        return defaultApp;
     }
 
     static gchar *
     defaultMimeTypeApp(const gchar *mimetype){
-	gchar *defaultApp = Settings<Type>::getSettingString("MimeTypeApplications", mimetype);
-	if (!defaultApp) {
-	    const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
-	    if (apps && *apps) defaultApp = g_strdup(*apps);
-	}
+        gchar *defaultApp = Settings<Type>::getString("MimeTypeApplications", mimetype);
+        if (!defaultApp) {
+            const gchar **apps = MimeApplication<Type>::locate_apps(mimetype);
+            if (apps && *apps) defaultApp = g_strdup(*apps);
+        }
 
-	if (!defaultApp)  {
-	    gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
-	    if (textMimetype) {
-		auto editor = Util<Type>::getEditor();
-		defaultApp =g_strdup_printf("%s %%s", editor);
-	    }
-	}
-	return defaultApp;
+        if (!defaultApp)  {
+            gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
+            if (textMimetype) {
+                auto editor = Util<Type>::getEditor();
+                defaultApp =g_strdup_printf("%s %%s", editor);
+            }
+        }
+        return defaultApp;
     }
 private:
 
@@ -852,10 +841,10 @@ private:
         
         if (strchr(path, '.') && strlen(strchr(path, '.'))>1){
             auto ext = strrchr(path,'.') + 1; 
-	    Settings<Type>::setSettingString("MimeTypeApplications", ext, response);
+            Settings<Type>::setString("MimeTypeApplications", ext, response);
             TRACE("*** saving %s --> response\n", ext, response);
         } else {
-	    Settings<Type>::setSettingString("MimeTypeApplications", mimetype, response);
+            Settings<Type>::setString("MimeTypeApplications", mimetype, response);
             TRACE("*** saving %s --> response\n", mimetype, response);
         }
     }
@@ -865,7 +854,7 @@ private:
         gboolean multiple = (g_list_length(pathList) > 1);
         auto path =(const gchar *)pathList->data;
         gchar *mpath = multiple?g_strdup(""):g_strdup(path);
-	if (multiple) {
+        if (multiple) {
             for(auto l = pathList; l && l->data; l = l->next) {
                 auto path  = (const gchar *)l->data;
                 TRACE("multiple path: %s\n", path);
@@ -875,66 +864,66 @@ private:
             }
             TRACE("composite path: %s\n", mpath);
         } 
-	return mpath;
+        return mpath;
     }
     static gchar *
     getResponseLabel(const gchar *mpath, const gchar *mimetype){
-	return g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
-		!mimetype?"":mpath, 
-		!mimetype?_("You have selected multiple files or folders"):mimetype);
+        return g_strdup_printf("<b><span size=\"larger\" color=\"blue\">%s</span></b>\n<span color=\"#880000\">(%s)</span>", 
+                !mimetype?"":mpath, 
+                !mimetype?_("You have selected multiple files or folders"):mimetype);
     }
     
     static void 
     toggleTerminalRun (GtkToggleButton *togglebutton, gpointer data){
-	if (!data) {
-	    ERROR("toggleTerminalRun: data not set to path\n");
-	    return;
-	}
-	auto path = (const gchar *)data;
-	TRACE("runPath = %s\n", path);
-	gint value;
-	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
-	gchar *a = Run<Type>::baseCommand(path);
-	Settings<Type>::setSettingInteger("Terminal", a, value);
-	g_free(a);
+        if (!data) {
+            ERROR("toggleTerminalRun: data not set to path\n");
+            return;
+        }
+        auto path = (const gchar *)data;
+        TRACE("runPath = %s\n", path);
+        gint value;
+        if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
+        gchar *a = Run<Type>::baseCommand(path);
+        Settings<Type>::setInteger("Terminal", a, value);
+        g_free(a);
     }
 
     static void 
     toggleTerminal (GtkToggleButton *togglebutton, gpointer data){
-	if (!data) return;
-	const gchar *app = gtk_entry_get_text(GTK_ENTRY(data));
-	// Hard coded exceptions:
-	if (Run<Type>::fixedInTerminal(app)) {
-	    gtk_toggle_button_set_active(togglebutton, TRUE);
-	    return;
-	}
-	
-	// if not valid command, do nothing 
-	if (!Run<Type>::isValidCommand(app)) return;
-	// Valid command, continue. Get basename 
-	gint value;
-	if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
-	gchar *a = Run<Type>::baseCommand(app);
-	Settings<Type>::setSettingInteger("Terminal", a, value);
-	g_free(a);
+        if (!data) return;
+        const gchar *app = gtk_entry_get_text(GTK_ENTRY(data));
+        // Hard coded exceptions:
+        if (Run<Type>::fixedInTerminal(app)) {
+            gtk_toggle_button_set_active(togglebutton, TRUE);
+            return;
+        }
+        
+        // if not valid command, do nothing 
+        if (!Run<Type>::isValidCommand(app)) return;
+        // Valid command, continue. Get basename 
+        gint value;
+        if (gtk_toggle_button_get_active(togglebutton)) value = 1; else value = 0;
+        gchar *a = Run<Type>::baseCommand(app);
+        Settings<Type>::setInteger("Terminal", a, value);
+        g_free(a);
     }
    
     static void
     comboChanged (GtkComboBox *combo, gpointer data){
         auto comboResponse = (ComboResponse<Type> *)data;
-	auto checkButton = GTK_TOGGLE_BUTTON(comboResponse->checkButton());
+        auto checkButton = GTK_TOGGLE_BUTTON(comboResponse->checkButton());
         auto entry = comboResponse->comboEntry();
-	const gchar *text = gtk_entry_get_text(entry);
-	gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
+        const gchar *text = gtk_entry_get_text(entry);
+        gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
     }
 
     static void
     entryKeyRelease (GtkWidget *widget, GdkEvent  *event, gpointer data){
         auto entryResponse = (EntryResponse<Type> *)data;
-	auto checkButton = GTK_TOGGLE_BUTTON(entryResponse->checkButton());
+        auto checkButton = GTK_TOGGLE_BUTTON(entryResponse->checkButton());
         auto entry = GTK_ENTRY(widget);
-	const gchar *text = gtk_entry_get_text(entry);
-	gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
+        const gchar *text = gtk_entry_get_text(entry);
+        gtk_toggle_button_set_active(checkButton, Run<Type>::runInTerminal(text));
     }
    
     

@@ -59,7 +59,7 @@ public:
         TRACE("range off\n");
         auto size = page->fontSize();
         page->parent()->resizeWindow(size);
-        Settings<Type>::setSettingInteger("xfterm", "fontSize",size);
+        Settings<Type>::setInteger("xfterm", "fontSize",size);
         // for all pages, change fontSize
         auto notebook = page->parent()->notebook();
         for (int i=0; i<gtk_notebook_get_n_pages (notebook); i++){
