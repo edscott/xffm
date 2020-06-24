@@ -1,5 +1,10 @@
 For 0.95
-BUG: thread wait functions are not completing wait in FreeBSD: Tubo and Runbutton, mostly Tubo. threadedWait_f 
+* All pthread_creates should be converted to Thread<Type> objects
+  to ensure proper thread control. Pending files:
+  /usr/home/edscott/GIT/xffm+/xffm/gtk/preview.hh
+  /usr/home/edscott/GIT/xffm+/xffm/fm/view/local/monitor.hh
+  /usr/home/edscott/GIT/xffm+/xffm/fm/view/fstab/monitor.hh
+  /usr/home/edscott/GIT/xffm+/xffm/common/gio.hh
 
 Probably fixed: settings bug: problem with settings file. Seems like it is zapped somehow and when 
 zapped and menu opened, listview is automatically selected. Background color is lost
