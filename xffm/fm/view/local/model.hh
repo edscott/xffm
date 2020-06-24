@@ -129,10 +129,11 @@ public:
         arg[0] = (void *)directoryList;
         arg[1] = (void *)view;
         arg[2] = (void *)g_strdup(path);
-        pthread_t thread;
-        pthread_create(&thread, NULL, threadInsert, (void *)arg);
-        // detach
-        pthread_detach(thread);
+        auto text = g_strdup_printf("LocalModel::loadModel(): threadInsert(%s)", path);
+
+
+        new(Thread<Type>)(text, threadInsert, (void *)arg);
+        g_free(text);
         return 0;
     }
 

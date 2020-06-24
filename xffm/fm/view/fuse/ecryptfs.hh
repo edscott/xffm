@@ -719,9 +719,8 @@ public:
         // cleanup
         memset(optionsOn, 0, strlen(optionsOn));
         g_free(optionsOn);
-        pthread_t cleanupThread; 
-        pthread_create (&cleanupThread, NULL, cleanup_passfile, (void *) passphraseFile);
-        pthread_detach(cleanupThread);      
+        new(Thread<Type>)("EFS::mountUrl(): cleanup_passfile", cleanup_passfile, (void *) passphraseFile);
+
    }
 
     static gboolean changeEfsItem(void *data){

@@ -497,11 +497,19 @@ private:
 
     static void *stdoutThread_f (void * data) {
         stdio_f (1, data);
+        auto newfork = (forkStruct_t *) data;
+        pthread_mutex_lock(&(newfork->done_mutex));
+        newfork->done_value++;
+        pthread_mutex_unlock(&(newfork->done_mutex));
         TRACE( "oooo  stdoutThread_f is now complete...\n");
         return NULL;
     }
 
     static void *stderrThread_f (void * data) {
+        auto newfork = (forkStruct_t *) data;
+        pthread_mutex_lock(&(newfork->done_mutex));
+        newfork->done_value++;
+        pthread_mutex_unlock(&(newfork->done_mutex));
         stdio_f (2, data);
         TRACE( "oooo  stderrThread_f is now complete...\n");
         return NULL;
@@ -513,18 +521,25 @@ private:
         //map_remote_semaphores(fork_p);
         TRACE ("....  thread=0x%x, wait for 0x%x\n", (unsigned)getpid (), (unsigned)(fork_p->PID));
 
+#if 0
+        // XXX Seems that for xffm+, we should always reap child.
         if(fork_p->flags & TUBO_REAP_CHILD) {
             waitpid (fork_p->PID, &status, 0);
         } 
         else {
-
+DBG("threadedWait_f(): leaving child in waitable state...\n");
             // leave child in waitable state...
             // no such thing in openBSD (P_PID will not be defined)
 #ifdef P_PID
+DBG("threadedWait_f(): wait will be done by system...\n");
             siginfo_t infop;
             waitid (P_PID, fork_p->PID, &infop, WNOWAIT);
 #endif
         }
+
+#else
+            waitpid (fork_p->PID, &status, 0);
+#endif
 
         // TRACE (" threadedWait_f waiting for semaphore 0 (stdin)...\n");
         // sem_wait (fork_p->local_semaphore); // go ahead with stdin
@@ -557,16 +572,19 @@ private:
             close (fork_p->tubo[0][1]);
 
 
-        TRACE( "oooo  threadedWait_f complete for 0x%x\n", (unsigned)(fork_p->PID));
 
         
         pthread_mutex_lock(&(fork_p->done_mutex));
-        do {
+        TRACE("locked fork_p->done_mutex done_value= %d\n", fork_p->done_value);
+        while (fork_p->done_value < 2) {
             pthread_cond_wait(&(fork_p->done_signal),&(fork_p->done_mutex)); 
-        } while (fork_p->done_value < 2);
+        } 
+        TRACE("fork_p->done_value >=2\n");
         pthread_mutex_unlock(&(fork_p->done_mutex)); 
+        TRACE("unlocked fork_p->done_mutex\n");
 
         g_free (fork_p);
+        TRACE( "oooo  threadedWait_f complete for 0x%x\n", (unsigned)(fork_p->PID));
         return NULL;
     }
 
@@ -773,9 +791,10 @@ private:
                 newfork->done_value++;
             } else {
                 TRACE( " parent creating stdout thread\n");
-                pthread_t thread;
+                new(Thread<Type>)("Tubo::parentSetup(): stdoutThread_f", stdoutThread_f, (void *)newfork);
+                /*pthread_t thread;
                 pthread_create(&thread, NULL, stdoutThread_f, (void *)newfork);
-                pthread_detach(thread);
+                pthread_detach(thread);*/
             }
             /* stderr for read: */
             if(newfork->stderr_f == NULL) {
@@ -786,16 +805,19 @@ private:
                 newfork->done_value++;
             } else {
                 TRACE (" parent creating stderr thread\n");
-                pthread_t thread;
+                new(Thread<Type>)("Tubo::parentSetup():stderrThread_f ", stderrThread_f, (void *)newfork);
+                /*pthread_t thread;
                 pthread_create(&thread, NULL, stderrThread_f, (void *)newfork);
-                pthread_detach(thread);
+                pthread_detach(thread);*/
             }
 
            
-            /* fire off a threaded wait for the child */
-            pthread_t thread;
+            /* fire off a threaded wait for the child process (not threadwait) */
+            new(Thread<Type>)("Tubo::parentSetup():threadedWait_f ", threadedWait_f, (void *)newfork);
+           
+/*            pthread_t thread;
             pthread_create(&thread, NULL, threadedWait_f, (void *)newfork);
-            pthread_detach(thread);
+            pthread_detach(thread);*/
 
             /* threads are now in place and ready to read from pipes,
              * child process will get green light to exec

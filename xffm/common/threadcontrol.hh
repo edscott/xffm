@@ -1,16 +1,135 @@
 #ifndef THREADCONTROL_HH
 #define THREADCONTROL_HH
 #define DEBUG_THREADS 1
-//FIXME: include these into class template
-namespace xf {
-template <class Type>
-class ThreadControl {
-    
-    typedef struct wait_t{
-        ThreadControl *thread_control_p;
-        pthread_t thread;
-    }wait_t;
+//FIXME: convert to static.
 
+
+namespace xf {
+    gint thread_count = 0;
+    pthread_mutex_t inc_dec_mutex=PTHREAD_MUTEX_INITIALIZER;
+#ifdef DEBUG_THREADS        
+    pthread_mutex_t reference_mutex=PTHREAD_MUTEX_INITIALIZER;
+    GHashTable *thread_hash = NULL;
+    GList *thread_list = NULL;
+#endif
+
+template <class Type>
+class Thread {
+
+pthread_t *runThread_;
+pthread_t *waitThread_;
+gchar *dbg_text_;
+public:
+    Thread(const gchar *dbg_text, void *(*thread_f)(void *), void *data) {
+        dbg_text_ = g_strdup(dbg_text);
+        runThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
+        waitThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
+        if (thread_create(dbg_text, thread_f, data)){
+            throw 1;
+        }
+    }
+    
+    ~Thread(void){
+        g_free(runThread_);
+        g_free(waitThread_);
+        g_free(dbg_text_);
+    }
+
+    pthread_t *
+    runThread(void){ return this->runThread_;}
+
+    pthread_t *
+    waitThread(void){ return this->waitThread_;}
+
+    gint
+    thread_create(const gchar *dbg_text, void *(*thread_f)(void *), void *data)
+    {
+        TRACE("thread_create: %s\n", dbg_text);
+        //auto thread = (pthread_t *)calloc(1,sizeof(pthread_t *));
+        gint retval = pthread_create(runThread_, NULL, thread_f, data);
+        if (retval){
+            ERROR("threadcontrol.hh::thread_create(): %s\n", strerror(retval));
+            return retval;
+        }
+        thread_reference(runThread_, dbg_text);
+        pthread_create (waitThread_, NULL, wait_f, (void *)this);
+        pthread_detach(*waitThread_);
+        return 0;
+    }
+private:
+    static void *
+    wait_f(void *data){
+        auto thread_p = (Thread<Type> *)data;
+        void *retval;
+        auto runThread = thread_p->runThread();
+        pthread_join(*runThread, &retval);
+        Thread<Type>::thread_unreference(runThread);
+        delete(thread_p);
+        return NULL;
+    }
+
+
+    static void
+    inc_dec_view_ref(gboolean increment,pthread_t *thread, const gchar *dbg_text ){
+        // do this in a thread so gtk thread does not block
+        pthread_mutex_lock(&inc_dec_mutex);
+        if (increment) {
+            thread_count++;
+            DBG("Thread count is %d added 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
+        } else {
+            thread_count--;
+            DBG("Thread count is %d removed 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
+        }
+        pthread_mutex_unlock(&inc_dec_mutex);
+    }
+
+    static void
+    thread_reference(pthread_t *thread, const gchar *dbg_text){
+        if (thread) inc_dec_view_ref(TRUE, thread, dbg_text);
+        TRACE("Thread count: %d 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
+
+#ifdef DEBUG_THREADS
+        if (thread_hash == NULL) {
+            thread_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal,NULL, g_free);
+        }
+        if (!thread_hash) ERROR("threadcontrol.hh::thread_reference: hash is null!\n");
+
+        pthread_mutex_lock(&reference_mutex);
+        g_hash_table_replace(thread_hash, thread, 
+                (dbg_text)?
+                (void *)g_strdup(dbg_text):(void *)g_strdup("no debug text"));
+        pthread_mutex_unlock(&reference_mutex);
+#endif
+    }
+
+    static void
+    thread_unreference(pthread_t *thread){
+#ifdef DEBUG_THREADS
+        pthread_mutex_lock(&reference_mutex);
+        if (thread_hash == NULL) {
+            thread_hash = g_hash_table_new(g_direct_hash, g_direct_equal);
+        }
+        if (!thread_hash) ERROR("threadcontrol.hh::thread_unreference: hash is null!\n");
+        gchar *removed_text = g_strdup((const gchar *)g_hash_table_lookup(thread_hash, (void *)thread));
+        TRACE( "Thread count %d: 0x%x (%s)\n", 
+                g_list_length(thread_list)-1,
+                GPOINTER_TO_INT(thread), removed_text);
+            
+        g_hash_table_remove(thread_hash, thread);
+        pthread_mutex_unlock(&reference_mutex);
+#endif
+        if (thread) inc_dec_view_ref(FALSE, thread, removed_text);
+        g_free(removed_text);
+        //no more... g_free(thread);
+    }
+    
+
+
+};
+
+// Other useful stuff (not used anymore...)
+#if 0
+    
     typedef struct heartbeat_t{
         gboolean condition;
         pthread_mutex_t *mutex;
@@ -20,109 +139,8 @@ class ThreadControl {
         GFileTest test;
     } heartbeat_t;
 
-private:
-    gint thread_count;
-    pthread_mutex_t inc_dec_mutex;
-#ifdef DEBUG_THREADS        
-    pthread_mutex_t reference_mutex;
-    GHashTable *thread_hash;
-    GList *thread_list;
-#endif
-
-
-
-public:
-
-    ThreadControl(void){
-        thread_count = 0;
-        inc_dec_mutex=PTHREAD_MUTEX_INITIALIZER;
-#ifdef DEBUG_THREADS            
-        reference_mutex = PTHREAD_MUTEX_INITIALIZER;
-        thread_hash = g_hash_table_new(g_direct_hash, g_direct_equal);
-        thread_list = NULL;
-#endif
-    }
-
-    ~ThreadControl(void){
-        // FIXME: this should run in detached thread and only complete
-        //        when all threads are destroyed.
-        while (thread_count){
-            TRACE("~ThreadControl: %p waiting for %d threads\n", (void *)this, thread_count);
-            sleep(1);
-        }
-        pthread_mutex_destroy(&inc_dec_mutex);
-#ifdef DEBUG_THREADS            
-        pthread_mutex_destroy(&reference_mutex);
-        g_hash_table_destroy(thread_hash);
-        g_list_free(thread_list);
-#endif
-    }
-
-
-    gint
-    thread_create(const gchar *dbg_text, void *(*thread_f)(void *), void *data, gboolean joinable)
-    {
-        TRACE("thread_create: %s\n", dbg_text);
-        pthread_t thread;
-        gint retval = pthread_create(&thread, NULL, thread_f, data);
-        if (retval){
-            ERROR("threadcontrol.hh::thread_create(): %s\n", strerror(retval));
-            return retval;
-        }
-        if (joinable){
-            pthread_t wait_thread; 
-            wait_t *wait_p = (wait_t *)calloc(1, sizeof(wait_t));
-            wait_p->thread_control_p = this;
-            wait_p->thread = thread;
-            thread_reference(&(wait_p->thread), dbg_text);
-            
-            pthread_create (&wait_thread, NULL, wait_f, (void *)wait_p);
-            pthread_detach(wait_thread);
-            return 0;
-        } 
-        pthread_detach(thread);
-        return 0;
-    }
-
-    void
-    thread_unreference(pthread_t *thread){
-        if (thread) inc_dec_view_ref(FALSE);
-#ifdef DEBUG_THREADS
-        pthread_mutex_lock(&reference_mutex);
-        if (!thread_hash) ERROR("threadcontrol.hh::thread_unreference: hash is null!\n");
-        const gchar *removed_text = (const gchar *)g_hash_table_lookup(thread_hash, (void *)thread);
-        TRACE( "- view decrement: 0x%x (%s) view ref = %d\n", 
-                GPOINTER_TO_INT(thread), removed_text,
-                g_list_length(thread_list)-1);
-            
-        thread_list = g_list_remove(thread_list, thread);
-        g_hash_table_remove(thread_hash, thread);
-
-#ifdef DEBUG_TRACE
-        gchar *trace_text = NULL;
-        GList *t = thread_list;
-        if (g_list_length(thread_list)) for(;t && t->data; t=t->next){
-            const gchar *dbg_text = (const gchar *)g_hash_table_lookup(thread_hash, t->data);
-            gchar *g = g_strdup_printf("%s 0x%x (%s)", 
-                        trace_text?trace_text:"- decrement pending:",
-                        GPOINTER_TO_INT(t->data), dbg_text);
-            g_free(trace_text);
-            trace_text = g;
-        } else {
-            trace_text = g_strdup("- view decrement: no threads pending");
-        }
-        if (trace_text) {
-            TRACE( "%s (%d)\n", trace_text, g_list_length(thread_list));
-            g_free(trace_text);
-        }
-#endif
-        pthread_mutex_unlock(&reference_mutex);
-#endif
-        //no more... g_free(thread);
-    }
-    
     // g_file_test_with_timeout
-    gboolean
+    static gboolean
     file_test_with_wait(const gchar *path, GFileTest test){
         if (!path) return FALSE;
         if (!g_path_is_absolute(path)) return FALSE;
@@ -185,16 +203,6 @@ public:
 
 
     static void *
-    wait_f(void *data){
-        wait_t *wait_p =(wait_t *)data;
-        void *retval;
-        pthread_join(wait_p->thread, &retval);
-        wait_p->thread_control_p->thread_unreference(&(wait_p->thread));
-        g_free(wait_p);
-        return NULL;
-    }
-
-    static void *
     heartbeat_g_file_test(gpointer data){
         heartbeat_t *heartbeat_p = (heartbeat_t *)data;
 
@@ -245,6 +253,7 @@ public:
 
     }
 
+
     static 
     void *wait_on_thread(gpointer data){
         heartbeat_t *heartbeat_p = (heartbeat_t *)data;
@@ -261,10 +270,7 @@ public:
         return value;
     }
 
-
-private:
-
-    gboolean 
+    static gboolean 
     cond_timed_wait(const gchar *path, pthread_cond_t *signal, pthread_mutex_t *mutex, gint seconds){
         struct timespec tv;
         memset(&tv, 0, sizeof (struct timespec));
@@ -281,36 +287,9 @@ private:
     }
 
 
-    void
-    inc_dec_view_ref(gboolean increment){
-        // do this in a thread so gtk thread does not block
-        pthread_mutex_lock(&inc_dec_mutex);
-        if (increment) {
-            thread_count++;
-        } else {
-            thread_count--;
-        }
-        pthread_mutex_unlock(&inc_dec_mutex);
-    }
-
-    void
-    thread_reference(pthread_t *thread, const gchar *dbg_text){
-        if (thread) inc_dec_view_ref(TRUE);
-
-#ifdef DEBUG_THREADS
-        if (!thread_hash) ERROR("threadcontrol.hh::thread_reference: hash is null!\n");
-        TRACE( "- view increment: 0x%x:0x%x (%s) view ref = %d\n",
-                GPOINTER_TO_INT(this), GPOINTER_TO_INT(thread), 
-                dbg_text, g_list_length(thread_list)+1);
-
-        pthread_mutex_lock(&reference_mutex);
-        thread_list = g_list_prepend(thread_list, thread);
-        g_hash_table_replace(thread_hash, thread, (dbg_text)?(void *)dbg_text:(void *)"no debug text");
-        pthread_mutex_unlock(&reference_mutex);
 #endif
-    }
 
-};
+
 }
 #endif
 

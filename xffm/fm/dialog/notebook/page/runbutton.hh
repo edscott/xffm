@@ -90,8 +90,9 @@ public:
         TRACE ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
 
         create_menu();
-        page_->thread_create("RunButton::RunButton: run_wait_f", 
-                run_wait_f, (void *) this, FALSE);
+        auto text = g_strdup_printf("RunButton::setup(): %s", command_);
+        new(Thread<Type>)(text, run_wait_f, (void *) this);
+        g_free(text);
     }
 
 

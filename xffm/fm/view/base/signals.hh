@@ -409,11 +409,8 @@ public:
             pthread_mutex_lock(&longPressMutex);
             longPressTime = 0;
             pthread_mutex_unlock(&longPressMutex);
-            
-            pthread_t longPressThread; 
-            
-            pthread_create (&longPressThread, NULL, longPressCheck_f, NULL);
-            pthread_detach(longPressThread);
+           
+            new(Thread<Type>)("BaseSignals::buttonPress(): longPressCheck_f",longPressCheck_f, NULL);
             
             controlMode = FALSE;
             gint mode = 0;

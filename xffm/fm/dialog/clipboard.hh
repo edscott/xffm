@@ -271,12 +271,8 @@ public:
         // start clipBoard
         clipBoard = gtk_clipboard_get_for_display (gdk_display_get_default(), GDK_SELECTION_CLIPBOARD);
         clipBoardSemaphore = TRUE;
-        pthread_t clipBoardThread;
-        gint retval = pthread_create(&clipBoardThread, NULL, ClipBoard<Type>::clipboardThreadF, NULL);
-        if (retval){
-            ERROR("clipboard.hh::thread_create(): clipBoardThread %s\n", strerror(retval));
-            //return retval;
-        }
+        new(Thread<Type>)("ClipBoard::startClipBoard()", ClipBoard<Type>::clipboardThreadF, NULL);
+
         TRACE("*** clipboard thread started.\n")
     }
 

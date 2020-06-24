@@ -96,13 +96,7 @@ private:
     static gboolean loadAppHash(void){
         pthread_t thread;
         void *retval;
-        int result;
-        result = pthread_create(&thread, NULL, loadAppHash_f, NULL);
-        if (result != 0) {
-            DBG("MimeApplications::loadAppHash() pthread_create: %s\n", strerror(errno));
-            return FALSE;
-        }
-        pthread_detach(thread);
+        new(Thread<Type>)("MimeApplication::loadAppHash(): loadAppHash_f", loadAppHash_f, NULL);
         return TRUE;
     }
 

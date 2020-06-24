@@ -11,7 +11,7 @@ class PageBase :
     public HButtonBox<double>,
 //    public VButtonBox<double>,
     public Vpane<double>,
-    public ThreadControl<double>,
+//    public ThreadControl<double>,
     public Pathbar<double>,
     public Completion<double>
 {
