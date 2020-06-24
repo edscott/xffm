@@ -144,10 +144,11 @@ public:
         arg[2] = GINT_TO_POINTER(mode);
         arg[3] = NULL;
         TRACE("thread1 create\n");
-        if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
+        new(Thread<Type>)("Gio::execute(): thread1", thread1, (void *)arg);
+        /*if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
             ERROR("execute(): Unable to create thread1\n");
         }
-        pthread_detach(thread);
+        pthread_detach(thread);*/
         TRACE("return to event loop\n");
 
         return TRUE;
@@ -191,7 +192,6 @@ public:
         g_free(source);
 
         // Proceed...
-        pthread_t thread;
         auto arg = (void **)calloc(4,sizeof(void *));
         if (!arg){
             ERROR("execute(): calloc: %s\n", strerror(errno));
@@ -202,10 +202,13 @@ public:
         arg[1] = (void *)g_strdup(target);
         arg[2] = GINT_TO_POINTER(mode);
         TRACE("dnd thread1 create\n");
+        new(Thread<Type>)("Gio::executeURL(): thread1", thread1, (void *)arg);
+        /*
+        pthread_t thread;
         if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
             ERROR("execute(): Unable to create thread1\n");
         }
-        pthread_detach(thread);
+        pthread_detach(thread);*/
         TRACE("dnd return to event loop\n");
 
         return result;
