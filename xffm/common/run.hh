@@ -338,7 +338,7 @@ public:
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
                 Print<Type>::print(textview, "yellow", g_strdup(line));
             } else {                
-                Print<Type>::printError(textview, g_strdup(line));
+                Print<Type>::printStdErr(textview, g_strdup(line));
             }
         }
 
@@ -373,7 +373,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        Print<Type>::printError(textview, g_strdup(line));
+        Print<Type>::printStdErr(textview, g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;

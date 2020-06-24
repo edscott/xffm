@@ -25,7 +25,7 @@ public:
     printInfo(GtkTextView *textview, gchar *string){
         auto tag = Settings<Type>::getString("window.infoColor");
         if (tag) print(textview, tag, string);
-        else print(textview, string);
+        else print(textview, "green", string);
      
     }
     
@@ -33,7 +33,7 @@ public:
     printInfo(GtkTextView *textview, const gchar *icon, gchar *string){
         auto tag = Settings<Type>::getString("window.infoColor");
         if (tag) print(textview, icon, tag, string);
-        else print(textview, icon, string);
+        else print(textview, icon, "green", string);
      
     }
 
@@ -46,9 +46,16 @@ public:
     printError(GtkTextView *textview, gchar *string){
         auto tag = Settings<Type>::getString("window.errorColor");
         if (tag) print(textview, "dialog-error", tag, string);
-        else print(textview, "dialog-error", "bold", string);
+        else print(textview, "dialog-error", "red", string);
     }
-    
+ 
+    static void // print_icon will free string.
+    printStdErr(GtkTextView *textview, gchar *string){
+        auto tag = Settings<Type>::getString("window.errorColor");
+        if (tag) print(textview, tag, string);
+        else print(textview, "red", string);
+    }
+   
 
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
         if (!textview) return;
