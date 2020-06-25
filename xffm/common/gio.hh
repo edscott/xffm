@@ -217,16 +217,6 @@ private:
         auto pageP = notebookP->currentPageObject();
         pageP->run_lp_command(pageP->output(), pageP->workDir(), 
                 Util<Type>::argv2command(arg));
-/*      auto pid=fork();
-       if (pid){
-           gint status;
-           waitpid(pid, &status, 0);
-           TRACE("fore(): wait complete\n");
-           return;
-       }
-        execvp(arg[0], (gchar * const *)arg);
-           TRACE("fore(): execvp failed.\n");
-        _exit(123);*/
     }
 
     static void

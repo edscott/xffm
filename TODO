@@ -1,20 +1,17 @@
 For 0.95
-* All pthread_creates should be converted to Thread<Type> objects
-  to ensure proper thread control. Pending files:
-  /usr/home/edscott/GIT/xffm+/xffm/gtk/preview.hh
-  /usr/home/edscott/GIT/xffm+/xffm/fm/view/local/monitor.hh
-  /usr/home/edscott/GIT/xffm+/xffm/fm/view/fstab/monitor.hh
-  /usr/home/edscott/GIT/xffm+/xffm/common/gio.hh
+
+*Set error and info colors from menupopover
+*(BSD) Enable LocalMonitor::startMountThread for watching mount
+*(BSD) Enable fstab monitor to watch for fstab/mtab changes
 
 Probably fixed: settings bug: problem with settings file. Seems like it is zapped somehow and when 
 zapped and menu opened, listview is automatically selected. Background color is lost
 as well as all other saved settings...
 
 BSD stuff
-- There is a waitpid in preview.hh (not openBSD)
 - fstab partitions for BSD (if possible) and ZFS dealings
 - monitor fstab module in BSD (maybe)
-- root items popup shows mount item
+- root items popup shows mount item 
 
 
 For 0.92
