@@ -792,9 +792,6 @@ DBG("threadedWait_f(): wait will be done by system...\n");
             } else {
                 TRACE( " parent creating stdout thread\n");
                 new(Thread<Type>)("Tubo::parentSetup(): stdoutThread_f", stdoutThread_f, (void *)newfork);
-                /*pthread_t thread;
-                pthread_create(&thread, NULL, stdoutThread_f, (void *)newfork);
-                pthread_detach(thread);*/
             }
             /* stderr for read: */
             if(newfork->stderr_f == NULL) {
@@ -806,19 +803,12 @@ DBG("threadedWait_f(): wait will be done by system...\n");
             } else {
                 TRACE (" parent creating stderr thread\n");
                 new(Thread<Type>)("Tubo::parentSetup():stderrThread_f ", stderrThread_f, (void *)newfork);
-                /*pthread_t thread;
-                pthread_create(&thread, NULL, stderrThread_f, (void *)newfork);
-                pthread_detach(thread);*/
             }
 
            
             /* fire off a threaded wait for the child process (not threadwait) */
             new(Thread<Type>)("Tubo::parentSetup():threadedWait_f ", threadedWait_f, (void *)newfork);
            
-/*            pthread_t thread;
-            pthread_create(&thread, NULL, threadedWait_f, (void *)newfork);
-            pthread_detach(thread);*/
-
             /* threads are now in place and ready to read from pipes,
              * child process will get green light to exec
              * as soon as stdin/stdout threads are ready... */

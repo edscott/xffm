@@ -109,10 +109,14 @@ private:
             (Progress<Type> *)(Util<Type>::context_function(createProgressObject, (void *)contextArg));
         arg[3] = (void *)progressObject;
 
+        // This thread is managed out of Thread<Type>, as it is joinable.
         if (pthread_create(&thread, NULL, thread2,data) != 0){
             ERROR("thread1(): Unable to create thread2\n");
         } 
           
+        // We need to be sure all threads are joined (thus completed)
+        // before the program can exit. Thus we keep track with
+        // asyncReference.
         asyncReference++;
         if (pthread_join(thread, &retval)!=0){
             ERROR("thread1(): Unable to join thread1\n");
@@ -145,10 +149,7 @@ public:
         arg[3] = NULL;
         TRACE("thread1 create\n");
         new(Thread<Type>)("Gio::execute(): thread1", thread1, (void *)arg);
-        /*if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
-            ERROR("execute(): Unable to create thread1\n");
-        }
-        pthread_detach(thread);*/
+
         TRACE("return to event loop\n");
 
         return TRUE;
@@ -203,12 +204,7 @@ public:
         arg[2] = GINT_TO_POINTER(mode);
         TRACE("dnd thread1 create\n");
         new(Thread<Type>)("Gio::executeURL(): thread1", thread1, (void *)arg);
-        /*
-        pthread_t thread;
-        if (pthread_create(&thread, NULL, thread1, (void *)arg) != 0){
-            ERROR("execute(): Unable to create thread1\n");
-        }
-        pthread_detach(thread);*/
+
         TRACE("dnd return to event loop\n");
 
         return result;

@@ -64,6 +64,7 @@ namespace xf {
 template <class Type> class Pixbuf;
 template <class Type> class LocalView;
 template <class Type> class Mime;
+template <class Type> class Thread;
 
 template <class Type>
 class Preview {
@@ -243,33 +244,30 @@ private:
             execv (arg[0], arg);
             _exit (123);
         } else {
-        // Create wait thread.
+        
+        // Create wait thread. Detached.
         void **arg = (void **)calloc(3, sizeof(void *));
         if (!arg) g_error("gsPreview(): malloc: %s\n", strerror(errno));
         pthread_mutex_t waitMutex = PTHREAD_MUTEX_INITIALIZER;
-        //GMutex *wait_mutex;
 
-        //GCond *wait_signal;
         pthread_cond_t waitSignal = PTHREAD_COND_INITIALIZER;
 
 
-        //rfm_mutex_init(wait_mutex);
-        //rfm_cond_init(wait_signal);
         
         arg[0] = &waitMutex;
         arg[1] = &waitSignal;
         arg[2] = GINT_TO_POINTER(pid);
 
         pthread_mutex_lock(&waitMutex);
-        //g_mutex_lock(wait_mutex);
-        pthread_t thread;
-        pthread_create(&thread, NULL, gs_wait_f, arg);
+        
+        auto dbgText = g_strdup_printf("Preview::gsPreview(%s)", path);
+        auto thread_p = new(Thread<Type>)(dbgText, gs_wait_f, arg);
+        g_free(dbgText);
+
         const struct timespec abstime={
             time(NULL) + 4, 0
         };
-        //if (!pthread_cond_timedwait(&waitSignal, &waitMutex, &abstime)){
         if (pthread_cond_wait(&waitSignal, &waitMutex) != 0){
-        //if (!rfm_cond_timed_wait(wait_signal, wait_mutex, 4)){
             ERROR("Aborting runaway ghostscript preview for %s (pid %d)\n",
                 src, (int)pid);
             kill(pid, SIGKILL);
@@ -281,9 +279,7 @@ private:
             //retval = loadFromThumbnails(path, NULL, pixels);
         }
         pthread_mutex_unlock(&waitMutex);
-        //g_mutex_unlock(wait_mutex);
         pthread_mutex_destroy(&waitMutex);
-        //rfm_mutex_free(wait_mutex);
             TRACE ("SHOW_TIPx: preview created by convert\n");
         }
         g_free (ghostscript);       //arg[0]

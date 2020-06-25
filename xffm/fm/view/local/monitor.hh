@@ -65,17 +65,14 @@ public:
     }
 #else
     void startMountThread(void){
+        TRACE("LocalMonitor::startMountThread()...\n");
         // start mountThread
         pthread_t mountThread;
         //TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
         this->mountArg_[0] = (void *)this;
         this->mountArg_[1] = GINT_TO_POINTER(TRUE);
         this->mountArg_[2] = GINT_TO_POINTER(TRUE);
-        gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
-        if (retval){
-            ERROR("fm/view/local/model.hh::finishLoad():thread_create(): %s\n", strerror(retval));
-            //return retval;
-        }
+        new(Thread<Type>)("LocalMonitor::startMountThread()", FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
     }
 #endif
 #endif
@@ -99,19 +96,7 @@ public:
         //        reason, swiching treemodels...
         //        Now moved to when load thread has completed treemodel switch.
         //        At local/model.hh
-# if 0
-        // start mountThread
-        pthread_t mountThread;
-        //TRACE("LocalMonitor thread itemshash=%p\n", this->itemsHash());
-        mountArg_[0] = (void *)this;
-        mountArg_[1] = GINT_TO_POINTER(TRUE);
-        mountArg_[2] = GINT_TO_POINTER(TRUE);
-        gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)mountArg_);
-        if (retval){
-            ERROR("fm/view/local/monitor::thread_create(): %s\n", strerror(retval));
-            //return retval;
-        }
-# endif
+
 #endif
     }
 

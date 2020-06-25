@@ -29,7 +29,7 @@ public:
     }
     ~FstabMonitor(void){
         TRACE("Destructor:~local_monitor_c()\n");
-#ifdef xUSE_MOUNTTHREAD
+#ifdef USE_MOUNTTHREAD
         // stop mountThread
         this->mountArg_[1] = NULL;
         while (this->mountArg_[2]){
@@ -43,7 +43,7 @@ public:
 
     void
     start_monitor(View<Type> *view, const gchar *path){
-        TRACE("Starting monitor for path:%s\n", path);
+        DBG("Starting monitor for path:%s\n", path);
         this->startMonitor(view->treeModel(), path, (void *)monitor_f);
         view->setMonitorObject(this);
         // start mountThread
@@ -53,11 +53,10 @@ public:
         this->mountArg_[1] = GINT_TO_POINTER(TRUE);
         this->mountArg_[2] = GINT_TO_POINTER(TRUE);
         // mountThreadF will monitor if items are mounted or unmounted
-        gint retval = pthread_create(&mountThread, NULL, FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
-        if (retval){
-            ERROR("fm/view/fstab/monitor::thread_create(): %s\n", strerror(retval));
-            //return retval;
-        }
+
+        auto dbgText = g_strdup_printf("FstabMonitor::start_monitor(%s)", path);
+        new(Thread<Type>)(dbgText,  FstabMonitor<Type>::mountThreadF, (void *)this->mountArg_);
+        g_free(dbgText);
 #endif
     }
 

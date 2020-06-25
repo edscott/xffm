@@ -35,6 +35,8 @@ public:
         g_free(dbg_text_);
     }
 
+private:
+
     pthread_t *
     runThread(void){ return this->runThread_;}
 
@@ -56,7 +58,7 @@ public:
         pthread_detach(*waitThread_);
         return 0;
     }
-private:
+    
     static void *
     wait_f(void *data){
         auto thread_p = (Thread<Type> *)data;
