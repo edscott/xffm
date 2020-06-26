@@ -604,7 +604,7 @@ public:
                 MIMETYPE, &mimetype, -1);
         // get icon name.
         auto iconName = LocalIcons<Type>::getBasicIconname(path, mimetype, TRUE);
-        if (!g_path_is_absolute(iconName)){
+        if (!iconName || !g_path_is_absolute(iconName)){
             g_free(path);
             g_free(iconName);
             g_free(mimetype);
@@ -822,7 +822,7 @@ private:
         GdkPixbuf *highlight_pixbuf = NULL;
 
 
-        if (g_path_is_absolute(icon_name)){
+        if (icon_name && g_path_is_absolute(icon_name)){
             auto page_p = Fm<Type>::getCurrentPage();
             auto pixels = page_p->getImageSize();
             TRACE("add_local_item(%s): pixels = %d \n", icon_name, pixels);

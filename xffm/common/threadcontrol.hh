@@ -129,7 +129,7 @@ private:
 
 };
 
-// Other useful stuff (not used anymore...)
+// Other useful stuff (to be used next...)
 #if 0
     
     typedef struct heartbeat_t{
