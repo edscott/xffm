@@ -387,6 +387,7 @@ private:
     static void
     updateMenu(GtkButton *button, void *data){
         auto state = Settings<Type>::getInteger("window", "TreeView");
+	if (state < 0) state = 0;
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(data), state);
 
     }
