@@ -94,14 +94,11 @@ public:
 private:
 
     static gboolean loadAppHash(void){
-        pthread_t thread;
-        void *retval;
         new(Thread<Type>)("MimeApplication::loadAppHash(): loadAppHash_f", loadAppHash_f, NULL);
         return TRUE;
     }
 
     static void *loadAppHash_f(void *data){
-        g_thread_yield();
         processApplicationDir("/usr/share/applications");
         processApplicationDir("/usr/local/share/applications");
         return NULL;

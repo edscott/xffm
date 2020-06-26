@@ -1,4 +1,5 @@
 For 0.95
+Critical: need to reenable heartbeat timeout for all g_file_tests, as if not, stale nfs conexion will hang program.
 
 *Set error and info colors from menupopover
 *(BSD) Enable LocalMonitor::startMountThread for watching mount
