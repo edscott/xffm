@@ -188,7 +188,9 @@ public:
         auto utf_name = util_c::utf_string(_("Trash bin"));
         auto icon_name = TRASH_ICON;
         auto trash = g_build_filename(g_get_home_dir(), ".local/share/Trash", NULL);
-        if (g_file_test(trash, G_FILE_TEST_EXISTS))icon_name =TRASH_FULL_ICON;
+        if (Thread<Type>::fileTest(trash, G_FILE_TEST_EXISTS)){
+	    icon_name =TRASH_FULL_ICON;
+	}
             
         auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
@@ -251,8 +253,8 @@ public:
             TRACE("adding bookmark %p -> %s\n", p, p->path);
              if (g_path_is_absolute(p->path)) {
                 const gchar *icon_name = "emblem-documents-symbolic/SE/bookmark-new/2.0/220";
-                if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
-                    DBG("Bookmark %s does not exist\n", p->path);
+                if (!Thread<Type>::fileTest(p->path, G_FILE_TEST_EXISTS)) {
+                    DBG_("Bookmark %s does not exist\n", p->path);
                     icon_name = "emblem-documents-symbolic/SE/edit-delete/2.0/220";
                 }
                 auto basename = g_path_get_basename(p->path);

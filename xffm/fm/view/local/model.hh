@@ -97,19 +97,23 @@ public:
         if (pthread_mutex_trylock(&previewMutex) != 0){
             DBG("Image preview thread is locked.\n");
             auto text = g_strdup_printf("%s (%s)", _("There are unfinished jobs: please wait until they are finished."), _("Previews"));
-            view->page()->showFmButtonBox();
-            view->page()->updateStatusLabel(text);
-            while(gtk_events_pending())gtk_main_iteration();
-            
+	    DBG_("%s", text);
+	    g_free(text);
             gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
             return 0;
         }
         pthread_mutex_unlock(&previewMutex);
+
+	// Verify conectivity:
+	if (!Thread<Type>::fileTest(path,G_FILE_TEST_EXISTS)){
+            gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+	    ERROR_("no response: %s\n", path);
+	    return 0;
+	}
         
         TRACE("*** local/model.hh loadModel()\n");
         auto treeModel = view->treeModel();
 
-        int heartbeat = 0;
 
         auto reading = g_strdup_printf(_("Reading \"%s\""), path);
         view->page()->updateStatusLabel(reading);
@@ -117,7 +121,7 @@ public:
         while(gtk_events_pending())gtk_main_iteration();
         GList *directoryList = NULL;
 
-        directoryList = read_items (path, &heartbeat);
+        directoryList = read_items (path);
 
         /*auto inserting = g_strdup_printf("%s (%d)",_("Inserting rows..."), g_list_length(directoryList));
         view->page()->updateStatusLabel(reading);
@@ -165,10 +169,10 @@ public:
         return "system-file-manager";
     }
 
-    //FIXME: must be done by non main thread (already mutex protected)
+    //XXX: Could be done by non main thread (already mutex protected)
     //       if this is going to take long (network connection...)
     static GList *
-    read_items (const gchar *path,  gint *heartbeat)
+    read_items (const gchar *path)
     {
         GList *directory_list = NULL;
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
@@ -213,10 +217,6 @@ public:
             // On this pass, stat according to sort order or dt_type.
             xd_t *xd_p = get_xd_p(path, d, needStat, doPreviews);
             if (xd_p) directory_list = g_list_prepend(directory_list, xd_p);
-            if (heartbeat) {
-                (*heartbeat)++;
-                TRACE(stderr,"incrementing heartbeat records to %d\n", *heartbeat);
-            }
         }
         if (errno) {
             ERROR("fm/view/local/model.hh::read_files_local: %s: %s\n", strerror(errno), path);

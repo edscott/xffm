@@ -86,16 +86,16 @@ namespace xf {
 # undef TRACE
 # define TRACE(...)   { (void)0; }
 //# define TRACE(...)  {fprintf(stderr, "TRACE> "); fprintf(stderr, __VA_ARGS__);}
+# undef ERROR
+# define ERROR(...)  {fprintf(stderr, "ERROR> "); fprintf(stderr, __VA_ARGS__);}
+# define ERROR_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printError(errorText); }
+# undef INFO
+# define INFO(...)  {fprintf(stderr, "INFO> "); fprintf(stderr, __VA_ARGS__);}
+# define INFO_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printInfo(errorText); }
+
 # undef DBG
 //# define DBG(...)   { (void)0; }
 # define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
-
-# undef ERROR
-# define ERROR_(...)  {fprintf(stderr, "ERROR> "); fprintf(stderr, __VA_ARGS__);}
-# define ERROR(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printError(errorText); }
-# undef INFO
-# define INFO_(...)  {fprintf(stderr, "INFO> "); fprintf(stderr, __VA_ARGS__);}
-# define INFO(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printInfo(errorText); }
 
 # undef DBG_
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }

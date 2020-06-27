@@ -853,7 +853,7 @@ public:
     getViewType(const gchar *path){
         TRACE("getViewType: %s\n", path);
         if (!path) return ROOTVIEW_TYPE;
-        if (g_file_test(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
+        if (Thread<Type>::fileTest(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
         if (strcmp(path, "/dev/disks")==0) return (LOCALVIEW_TYPE);
         if (g_path_is_absolute(path)){
             gchar *m;

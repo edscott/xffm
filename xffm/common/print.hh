@@ -39,11 +39,15 @@ public:
 
     static void // print_icon will free string.
     printDbg(GtkTextView *textview, gchar *string){
-        print(textview, "dialog-warning", string);
+	showTextSmall(textview);
+        auto tag = Settings<Type>::getString("window.dbgColor");
+        if (tag) print(textview, "dialog-warning", tag, string);
+        else print(textview, "dialog-warning", "yellow", string);
     }
 
     static void // print_icon will free string.
     printError(GtkTextView *textview, gchar *string){
+	showTextSmall(textview);
         auto tag = Settings<Type>::getString("window.errorColor");
         if (tag) print(textview, "dialog-error", tag, string);
         else print(textview, "dialog-error", "red", string);
@@ -51,6 +55,7 @@ public:
  
     static void // print_icon will free string.
     printStdErr(GtkTextView *textview, gchar *string){
+	showTextSmall(textview);
         auto tag = Settings<Type>::getString("window.errorColor");
         if (tag) print(textview, tag, string);
         else print(textview, "red", string);
