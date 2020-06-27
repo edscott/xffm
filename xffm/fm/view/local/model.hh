@@ -270,7 +270,9 @@ public:
                 xd_p->path,   xd_p->d_type, withStat);
         // Stat necessary items.
         if (withStat){
-            getStat(xd_p);
+            if (getStat(xd_p) != 0){
+		DBG("getStat failed at get_xd_p()\n");
+	    }
         }
         xd_p->mimetype = getMimeType(xd_p);
         // the following call uses xd_p->mimetype
@@ -511,7 +513,9 @@ private:
         if (bySize || byDate){
             for (auto l=list; l && l->data; l=l->next){
                 auto xd_p = (xd_t *) l->data;
-                if (!xd_p->st) getStat(xd_p);
+                if (!xd_p->st) {
+		    if (getStat(xd_p) != 0) DBG("getStat failed at sortList()\n");
+		}
             }
         }
 
@@ -741,7 +745,10 @@ public:
         gboolean descending = Settings<Type>::getInteger("LocalView", "Descending") > 0;
         gboolean bySize = (Settings<Type>::getInteger("LocalView", "BySize") > 0);
         gboolean byDate = (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
-        if ((bySize || byDate) && !xd_b->st) getStat(xd_b);
+        if ((bySize || byDate) && !xd_b->st) {
+    	    if (getStat(xd_b) != 0) DBG("getStat failed at insertItem()\n");
+	    //getStat(xd_b);
+	}
         if (byDate && bySize) sortResult = compareByDateSize((void *)xd_p, (void *)(xd_b), descending);
         else if (byDate) sortResult = compareByDate((void *)xd_p, (void *)(xd_b), descending);
         else if (bySize) sortResult = compareBySize((void *)xd_p, (void *)(xd_b), descending);
@@ -878,7 +885,9 @@ private:
         // statInfo is too long for big directories, and only 
         // required for treeview...
         if (isTreeView) {
-            getStat(xd_p);
+            if (getStat(xd_p) != 0){
+		DBG("getStat failed at add_local_item\n");
+	    }
             TRACE("getstat for %s\n", xd_p->path);
             statInfo = Util<Type>::statInfo(xd_p->st);
         }

@@ -1,8 +1,6 @@
 #ifndef THREADCONTROL_HH
 #define THREADCONTROL_HH
 #define DEBUG_THREADS 1
-//FIXME: convert to static.
-
 
 namespace xf {
     gint thread_count = 0;
@@ -127,10 +125,6 @@ private:
     
 
 
-};
-
-// Other useful stuff (to be used next...)
-#if 0
     
     typedef struct heartbeat_t{
         gboolean condition;
@@ -141,22 +135,28 @@ private:
         GFileTest test;
     } heartbeat_t;
 
+ 
+public:
     // g_file_test_with_timeout
+    // This should only be for network items.
     static gboolean
-    file_test_with_wait(const gchar *path, GFileTest test){
+    fileTest(const gchar *path, GFileTest test){
         if (!path) return FALSE;
+	DBG("*** Thread::fileTest(%s)\n", path);
+	
+
         if (!g_path_is_absolute(path)) return FALSE;
-        TRACE( "file_test_with_wait(): %s\n", path);
+        TRACE( "Thread::fileTest(): %s\n", path);
 
         heartbeat_t *heartbeat_p = (heartbeat_t *)calloc(1,sizeof(heartbeat_t));
         if (!heartbeat_p) {
-            g_warning("malloc heartbeat_p: %s\n",strerror(errno));
+            g_warning("calloc heartbeat_p: %s\n",strerror(errno));
             return FALSE;
         }
 
         heartbeat_p->mutex=(pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
         if (!heartbeat_p->mutex){
-            g_warning("malloc heartbeat_p->mutex: %s\n",strerror(errno));
+            g_warning("calloc heartbeat_p->mutex: %s\n",strerror(errno));
             g_free(heartbeat_p);
             return FALSE;
        }
@@ -177,24 +177,24 @@ private:
         heartbeat_p->test = test;
 
         pthread_mutex_lock(heartbeat_p->mutex);
-        TRACE("Creating wait thread for heartbeat_g_file_test_with_timeout\n");
+        TRACE("Thread:: fileTest: Creating wait thread for heartbeat_g_file_test_with_timeout\n");
         // This thread does not affect view nor window.
         gint r =
-            pthread_create (&heartbeat_p->thread, NULL, heartbeat_g_file_test, (void *)heartbeat_p);
+            pthread_create (&heartbeat_p->thread, NULL, heartBeatTest, (void *)heartbeat_p);
         
         if (r==0 && !heartbeat_p->condition) {
-            if (!cond_timed_wait(path, heartbeat_p->signal, heartbeat_p->mutex, 2)) {
+            if (!condTimedWait(path, heartbeat_p->signal, heartbeat_p->mutex, 2)) {
                 pthread_mutex_unlock(heartbeat_p->mutex);
-                ERROR("threadcontrol.hh::file_test_with_wait(): dead heartbeat, aborting\n");
+                ERROR("Thread::fileTest(%s): dead heartbeat, aborting\n",heartbeat_p->path);
                 // Dead heartbeat:
                 // Fire off a wait and cleanup thread.
-                // nonjoinable just to pick up zombie
+                // nonjoinable just to pick up the zombie
                 pthread_t wait_thread;
-                pthread_create (&wait_thread, NULL, wait_on_thread, (void *)heartbeat_p);
+                pthread_create (&wait_thread, NULL, waitOnThread, (void *)heartbeat_p);
                 pthread_detach(wait_thread);
                 return FALSE;
             }
-            DBG("file_test_with_wait(): wait complete within time.\n");
+            DBG("Thread::fileTest(): wait complete within time.\n");
         }
         pthread_mutex_unlock(heartbeat_p->mutex);
         return (TRUE);
@@ -202,10 +202,10 @@ private:
     }
 
     ////////////////////////////////////////////////////////////////////
-
+private:
 
     static void *
-    heartbeat_g_file_test(gpointer data){
+    heartBeatTest(gpointer data){
         heartbeat_t *heartbeat_p = (heartbeat_t *)data;
 
         // This function call may block
@@ -213,7 +213,7 @@ private:
         struct stat st;
         errno=0;
         if (lstat(heartbeat_p->path, &st) < 0) {
-            DBG("threadcontrol.hh::heartbeat_g_file_test(): lstat %s (%s)\n",
+            DBG("threadcontrol.hh::heartBeatTest(): lstat %s (%s)\n",
                 heartbeat_p->path, strerror(errno));
             errno=0;
             return NULL;
@@ -227,7 +227,7 @@ private:
             }
             errno=0;
             if (stat(heartbeat_p->path, &st) < 0) {
-                DBG("threadcontrol.hh::heartbeat_g_file_test(): lstat %s (%s)\n",
+                DBG("threadcontrol.hh::heartBeatTest(): lstat %s (%s)\n",
                     heartbeat_p->path, strerror(errno));
                 errno=0;
                 return NULL;
@@ -257,7 +257,7 @@ private:
 
 
     static 
-    void *wait_on_thread(gpointer data){
+    void *waitOnThread(gpointer data){
         heartbeat_t *heartbeat_p = (heartbeat_t *)data;
         void *value;
         pthread_join(heartbeat_p->thread, &value);
@@ -273,7 +273,7 @@ private:
     }
 
     static gboolean 
-    cond_timed_wait(const gchar *path, pthread_cond_t *signal, pthread_mutex_t *mutex, gint seconds){
+    condTimedWait(const gchar *path, pthread_cond_t *signal, pthread_mutex_t *mutex, gint seconds){
         struct timespec tv;
         memset(&tv, 0, sizeof (struct timespec));
         tv.tv_sec = time(NULL) + seconds;
@@ -283,13 +283,12 @@ private:
         gboolean retval = TRUE;
         if (r){
             retval = FALSE;
-            g_warning("%s: %s\n", path, strerror(errno));
+            TRACE("Thread::condTimedWait returning FALSE for: %s\n", path);
         }
         return retval;
     }
+};
 
-
-#endif
 
 
 }

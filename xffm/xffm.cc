@@ -101,6 +101,13 @@ namespace xf {
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
 
 
+// This is drastic, we need a finer control for 
+// g_file_test hangs on stale nfs mounts
+//#define g_file_test(X,Y) xf::Thread<Type>::fileTest(X,Y)
+namespace xf {
+    template <class Type> class Thread;
+}
+
 static gchar *buildDir=NULL;
 static const gchar *buildIcons=NULL;
 static const gchar *xffmProgram;

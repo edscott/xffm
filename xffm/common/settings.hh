@@ -12,6 +12,12 @@ template <class Type>
 class Settings {
 
 public:
+    static const gchar *settingsFile(void){
+	static gchar *filename = NULL;
+	if (!filename) filename = g_build_filename(SETTINGS_FILE, NULL);
+	return filename;
+    }
+
     static gint 
     getInteger(const gchar *group, const gchar *item){
         //pthread_mutex_lock(&settingsMutex);
@@ -137,7 +143,7 @@ public:
 private:
 
     static void
-    getFileLock(gchar *settingsfile){
+    getFileLock(const gchar *settingsfile){
         gint count=0;
         auto lock = g_strconcat(settingsfile,".lock", NULL);
         while (g_file_test(lock, G_FILE_TEST_EXISTS)){ 
@@ -153,7 +159,7 @@ private:
     }
 
     static void
-    removeFileLock(gchar *settingsfile){
+    removeFileLock(const gchar *settingsfile){
         auto lock = g_strconcat(settingsfile,".lock", NULL);
         unlink(lock);
         g_free(lock);
@@ -162,7 +168,7 @@ private:
     static GKeyFile *
     getKeyFile(void){
         auto keyFile = g_key_file_new();
-        auto settingsfile = g_build_filename(SETTINGS_FILE, NULL);
+        auto settingsfile = settingsFile();
 
         auto loaded = g_key_file_load_from_file(keyFile, settingsfile,
                //(GKeyFileFlags) (G_KEY_FILE_KEEP_COMMENTS |  G_KEY_FILE_KEEP_TRANSLATIONS),
@@ -171,23 +177,23 @@ private:
         if (!loaded) {
             TRACE("%s %s\n", _("New File:"), settingsfile);
         }
-        g_free(settingsfile);
         return keyFile;
     }
 
     static void
     writeKeyFile(GKeyFile *keyFile){
-        auto settingsfile = g_build_filename(SETTINGS_FILE, NULL);
+        auto settingsfile = settingsFile();
         gchar *config_directory = g_path_get_dirname(settingsfile);
         if (!g_file_test(config_directory, G_FILE_TEST_IS_DIR)) {
             if (g_mkdir_with_parents(config_directory, 0700) < 0){
                 WARN("Cannot create %s: %s\n", config_directory, strerror(errno));
-                g_free(settingsfile);
                 g_free(config_directory);
                 return;
             }
         }
-        getFileLock(settingsfile);
+        DBG("Settings::writeKeyFile... getting lock.\n");
+	getFileLock(settingsfile);
+        DBG("Settings::writeKeyFile... got lock.\n");
 
         gsize file_length;
         gchar *file_string = g_key_file_to_data (keyFile, &file_length, NULL);
@@ -208,9 +214,9 @@ private:
         } else {
             WARN("writeKeyFile(): cannot open %s for write: %s\n", settingsfile, strerror(errno));
         }
+	DBG("Settings::removing file lock\n");
         removeFileLock(settingsfile);
         g_free(file_string);
-        g_free(settingsfile);
         g_free(config_directory);
         return;
     }
