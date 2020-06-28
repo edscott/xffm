@@ -305,9 +305,21 @@ public:
 
 private:
     static gboolean changeItem(void *data){
+	// This is coming in 500 miliseconds after change event detected.
         auto arg = (void **)data;
         auto p = (LocalMonitor<Type> *)arg[0];
-        auto f = (gchar *)arg[1];
+        auto f = (gchar *)arg[1]; // path
+
+        // Since this has a time lag, we must check whether if the
+        // directory is still valid.
+        auto view = p->view();
+        if (view->serial() != p->serial()){
+           DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",view->serial(), p->serial());
+            return G_SOURCE_REMOVE;
+        }
+        DBG("LocalMonitor::changeItem(%s) serial Ok (%d)\n",f, p->serial());
+
+
         // If an direct path icon (image for example) clear hash first
         // This will clear the thumbnail since item is no longer hashed.
         if (f) {

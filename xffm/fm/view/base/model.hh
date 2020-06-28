@@ -56,19 +56,26 @@ protected:
     GtkTreeModel *backTreeModel_;
     GtkIconView *iconView_;
     GtkTreeView *treeView_;
+    gint viewSerial_;
     
-public:    
+public:  
+    gint serial(void){return viewSerial_;} 
+    void incSerial(void){ viewSerial_++;}
+
     void setTreeModel(GtkTreeModel *model){ treeModel_ = model;}
     void setBackTreeModel(GtkTreeModel *model){ backTreeModel_ = model;}
+
     gint items(void){ 
         return gtk_tree_model_iter_n_children(treeModel_, NULL);
     }
-    GtkTreeView *treeView(void){return treeView_;}
 
+    GtkTreeView *treeView(void){return treeView_;}
     GtkIconView *iconView(void){return iconView_;}
     
     BaseModel(Page<Type> *page){
         page_ = page; 
+        viewSerial_ = 1;
+        DBG("BaseModel:: viewSerial=%d\n", viewSerial_);
         path_ = NULL;
         selectionList_ = NULL;
         treeModel_ = mkTreeModel();

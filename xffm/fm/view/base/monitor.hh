@@ -8,8 +8,10 @@ class BaseMonitor {
     gboolean active_;
     GHashTable *itemsHash_;
     GList *reSelectList_;
+    gint monitorSerial_;
 public:
     void setMonitorStore(GtkListStore *store){store_ = store;}
+
 protected:
     void *mountArg_[5]; // Needs to exist until destructor is called.
     GCancellable *cancellable_;
@@ -125,9 +127,12 @@ public:
     GtkTreeModel *treeModel(void){return GTK_TREE_MODEL(store_);}
     gboolean active(void){return active_;}
     void setActive(gboolean state){active_ = state;}
+    gint serial(void){ return monitorSerial_;}
     
     BaseMonitor(GtkTreeModel *treeModel, View<Type> *view){
         reSelectList_ = NULL;
+        monitorSerial_ = view->serial();
+        DBG("BaseMonitor:: monitorSerial=%d\n", monitorSerial_);
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
           //      TRACE("BaseMonitor thread itemshash=%p\n", itemsHash_);
         baseView_ = view;
