@@ -853,19 +853,6 @@ public:
     getViewType(const gchar *path){
         TRACE("getViewType: %s\n", path);
         if (!path) return ROOTVIEW_TYPE;
-        if (Thread<Type>::fileTest(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
-        if (strcmp(path, "/dev/disks")==0) return (LOCALVIEW_TYPE);
-        if (g_path_is_absolute(path)){
-            gchar *m;
-            if (strstr(path,"/.local/share/Trash")) {
-                m = g_strdup(_("Trash is empty"));
-            } else {
-                m = g_strdup_printf("%s: %s\n",_("Directory does not exist."), path); 
-            }
-            Dialogs<Type>::quickHelp(mainWindow, m, "dialog-error");
-            ERROR("fm/base/signals.hh::getViewType: %s\n",m);
-            g_free(m);
-        }
         if (strcmp(path, "xffm:local")==0) return (LOCALVIEW_TYPE);
         if (strcmp(path, "xffm:root")==0) return (ROOTVIEW_TYPE);
         if (strcmp(path, "xffm:fstab")==0) return (FSTAB_TYPE);
@@ -874,8 +861,19 @@ public:
         if (strcmp(path, "xffm:cifs")==0) return (CIFS_TYPE);
         if (strncmp(path, "xffm:pkg", strlen("xffm:pkg"))==0) return (PKG_TYPE);
         if (EFS<Type>::isEFS(path)) return (EFS_TYPE);
-        
-        ERROR("fm/base/signals.hh::getViewType() %s not defined.\n", path);
+            
+        if (strstr(path,"/.local/share/Trash")) {
+            if (!g_file_test(path, G_FILE_TEST_EXISTS)){
+                auto m = g_strdup(_("Trash is empty"));
+                Dialogs<Type>::quickHelp(mainWindow, m, "dialog-information");
+                g_free(m);
+                return (-1);
+            }
+        }
+        if (Thread<Type>::fileTest(path, G_FILE_TEST_EXISTS)) return (LOCALVIEW_TYPE);
+        auto m = g_strdup_printf("%s: %s\n",_("Directory does not exist."), path); 
+        Dialogs<Type>::quickHelp(mainWindow, m, "dialog-error");
+        g_free(m);
         return (-1);
     }
 
