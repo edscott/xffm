@@ -201,7 +201,7 @@ public:
             createHash();
            // return NULL;
         }
-	if (!icon_name) return NULL;
+        if (!icon_name) return NULL;
         gchar *hash_key = get_hash_key (icon_name, size);
         TRACE( "lookup_icon(): find in pixbuf hash(%s): %s(%d)\n",hash_key, icon_name, size);
 

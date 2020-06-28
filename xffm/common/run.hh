@@ -73,6 +73,7 @@ class Run {
             }
         }
         gchar *c_string = pop_hash((pid_t)pid);
+        if (!c_string) return g_strdup("\n");
         g_strstrip(c_string);
         string = g_strconcat(c_string, "\n", NULL);
         g_free(c_string);
