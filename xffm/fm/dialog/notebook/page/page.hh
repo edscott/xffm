@@ -275,7 +275,7 @@ public:
         this->setWorkDir(dir);
         TRACE("update_pathbar: %s\n", dir);
         this->update_pathbar(dir);
-        INFO("cd %s\n", dir);
+        INFO_("cd %s\n", dir);
         gchar *g = get_tab_name(this->workDir());
         setPageLabel(g);
         g_free(g);

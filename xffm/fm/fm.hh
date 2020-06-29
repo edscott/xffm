@@ -179,7 +179,7 @@ public:
         Print<Type>::printDbg(page->output(), string);     
     }
 
-    static void // Print<Type>::printErrorýb will free string.
+    static void // Print<Type>::printError will free string.
     printError(gchar *string){
         auto page = getCurrentPage();
         Print<Type>::printError(page->output(), string);     

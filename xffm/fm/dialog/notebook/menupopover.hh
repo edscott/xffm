@@ -216,8 +216,8 @@ private:
             {N_("Background Color"), (void *)bgcolor, NULL, NULL},
             {N_("Foreground Color"), (void *)fgcolor, NULL, NULL},
             // Currently broken, must change gdkcolor to gdkrgba...
-            //{N_("Command Text Color"),(void *) infoColor, NULL, NULL},
-            //{N_("Error Text Color"), (void *)errorColor, NULL, NULL},
+            {N_("Command Text Color"),(void *) infoColor, NULL, NULL},
+            {N_("Error Text Color"), (void *)errorColor, NULL, NULL},
             {NULL}};
         settingsMenu = Popup<Type>::createMenu(item);
         auto title = GTK_MENU_ITEM(g_object_get_data(G_OBJECT(settingsMenu), "title"));
