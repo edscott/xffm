@@ -1,13 +1,11 @@
 For 0.95
-Critical: need to reenable heartbeat timeout for all g_file_tests, as if not, stale nfs conexion will hang program.
+OK, in debug mode:Critical: need to reenable heartbeat timeout for all g_file_tests, as if not, stale nfs conexion will hang program.
 
-*Set error and info colors from menupopover
+OK, in debug mode: *Set error and info colors from menupopover
 *(BSD) Enable LocalMonitor::startMountThread for watching mount
 *(BSD) Enable fstab monitor to watch for fstab/mtab changes
 
-Probably fixed: settings bug: problem with settings file. Seems like it is zapped somehow and when 
-zapped and menu opened, listview is automatically selected. Background color is lost
-as well as all other saved settings...
+OK, in debug mode: fixed. Maybe setttings file could still be lost. Probably fixed: settings bug: problem with settings file. Seems like it is zapped somehow and when zapped and menu opened, listview is automatically selected. Background color is lost as well as all other saved settings...
 
 BSD stuff
 - fstab partitions for BSD (if possible) and ZFS dealings
