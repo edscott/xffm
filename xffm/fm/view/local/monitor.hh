@@ -162,6 +162,13 @@ public:
         }
         g_free(path);
         TRACE("stat_func: gotcha %s\n", inPath);
+        // Clear any absolute path icons from the pixbuf hash
+        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 24);
+        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 48);
+        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 96);
+        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 192);
+        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 384);
+       
         GtkListStore *store = GTK_LIST_STORE(model);
 
         auto directory = g_path_get_dirname(inPath);
@@ -278,13 +285,6 @@ public:
         g_free(size);
         return TRUE;
     }
-    gboolean 
-    restat_item(GFile *src){
-        gchar *path = g_file_get_path(src);
-        auto retval = restat_item(path);
-        g_free(path);
-        return retval;
-    }
 
     gboolean 
     restat_item(const gchar *path){
@@ -305,7 +305,6 @@ public:
 
 private:
     static gboolean changeItem(void *data){
-	// This is coming in 500 miliseconds after change event detected.
         auto arg = (void **)data;
         auto p = (LocalMonitor<Type> *)arg[0];
         auto f = (gchar *)arg[1]; // path
@@ -334,9 +333,7 @@ private:
         g_free(arg);
         return G_SOURCE_REMOVE;
     }
-        
-        
-    
+
     static void
     monitor_f (GFileMonitor      *mon,
               GFile             *first,
@@ -349,13 +346,18 @@ private:
        
 
         TRACE("*** monitor_f call...\n");
+        if (!f || !s) return;
         auto p = (LocalMonitor<Type> *)data;
         if (!p->active()){
             TRACE("monitor_f(): monitor not currently active.\n");
             return;
         }
         if (!BaseSignals<Type>::validBaseView(p->view())) return;
-
+        if (p->view()->serial() != p->serial()){
+            DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",p->view()->serial(), p->serial());
+            return;
+        }
+        
         
         gboolean verbose = FALSE;
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());
@@ -370,27 +372,14 @@ private:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                //p->restat_item(first);
-#if 10
-                /*if (isInModel(p->treeModel(), f)){
-                    p->restat_item(first);
-                } else*/ 
-                {
-                    p->add_new_item(first);
-                    p->updateFileCountLabel();
-                }
-#endif
+                p->add_new_item(first);
+                p->updateFileCountLabel();
+
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
             {
                 if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
-         /*       // reload icon
-                PixbufHash<Type>::rm_from_pixbuf_hash(f, 24);
-                PixbufHash<Type>::rm_from_pixbuf_hash(f, 48);
-                // Thumbnails are not thumbnailed.
-                //PixbufHash<Type>::zap_thumbnail_file(f, 24);
-                //PixbufHash<Type>::zap_thumbnail_file(f, 48);
-                p->restat_item(first);*/
+                /*
                 auto arg = (void **)calloc(2, sizeof(void *));
                 if (!arg){
                     ERROR("local/monitor.hh::monitor_f(): %s\n",strerror(errno));
@@ -399,10 +388,12 @@ private:
                     arg[1]=g_strdup(f);
                     g_timeout_add(500, changeItem, arg);
                 }
+                */
+                p->restat_item(f);
             } break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
                 if (verbose) DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
-                p->restat_item(first);
+                p->restat_item(f);
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
                 if (verbose) DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
@@ -417,7 +408,7 @@ private:
                 p->remove_item(first); 
                 if (isInModel(p->treeModel(), s))
                 {
-                    p->restat_item(second);
+                    p->restat_item(s);
                 } else p->add_new_item(second);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
