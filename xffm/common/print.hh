@@ -520,7 +520,7 @@ private:
     static
     GtkTextTag *
     resolve_tag (GtkTextBuffer * buffer, const gchar * id) {
-        DBG("Print::resolve_tag(%s)\n", id);
+        TRACE("Print::resolve_tag(%s)\n", id);
         if (!id) return NULL;
 
         GtkTextTag *tag = NULL;
@@ -560,7 +560,7 @@ private:
                 gtk_text_buffer_create_tag (buffer, p->id, 
                         "foreground_gdk", &(p->color), 
                         NULL);
-                DBG("*** gtk_text_tag_table_lookup(%s) -> %p\n",p->id, tag);
+                TRACE("*** gtk_text_tag_table_lookup(%s) -> %p\n",p->id, tag);
                 gchar *bg_id = g_strconcat(p->id, "_bg", NULL);
                 gtk_text_buffer_create_tag (buffer, bg_id, 
                         "background_gdk", &(p->color), 
@@ -575,35 +575,39 @@ private:
         } 
 
         tag = gtk_text_tag_table_lookup (gtk_text_buffer_get_tag_table (buffer), id);
-        DBG("*** gtk_text_tag_table_lookup(%s) -> %p\n",id, tag);
+        TRACE("*** gtk_text_tag_table_lookup(%s) -> %p\n",id, tag);
 
-        //if (id[0] == '#'){
         if (!tag && id[0] == '#'){
             // create a new tag for color id.
-            // Yeah, yeah I know gdkcolor is deprecated, but that was a dumb thing to do.
-            DBG("Print::resolve_tag(%s): *** creating new tag.\n", id);
-            auto color = (GdkColor *)calloc(1, sizeof(GdkColor));
+            TRACE("Print::resolve_tag(%s): *** creating new tag.\n", id);
+            auto color = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
             if (!color){
                 ERROR("Print::resolve_tag: calloc: %s\n", strerror(errno));
                 exit(1);
             }
-            color->pixel = 550;
-            color->red = (id[1]-'0')*16*16*16 +(id[1]-'0')*16*16 +  (id[2]-'0')*16+ id[2]-'0';
-            color->green = (id[3]-'0')*16*16*16 +(id[3]-'0')*16*16 +  (id[4]-'0')*16+ id[4]-'0';
-            color->blue = (id[5]-'0')*16*16*16 +(id[5]-'0')*16*16 +  (id[6]-'0')*16+ id[6]-'0';
-            //color->green = (id[3]-'0')*16 + id[4]-'0';
-            //color->blue = (id[5]-'0')*16 + id[6]-'0';
-
-            tag = gtk_text_buffer_create_tag(buffer, id, "foreground_gdk", color, NULL);
+            if (gdk_rgba_parse (color, id)) {
+                auto c = (GdkColor *)calloc(1, sizeof(GdkColor));
+                if (!c){
+                    ERROR("Print::resolve_tag: calloc: %s\n", strerror(errno));
+                    exit(1);
+                }
+                c->red = color->red * 0xffff;
+                c->green = color->green * 0xffff;
+                c->blue = color->blue * 0xffff;
+                TRACE("***tag %s is %lf,%lf,%lf\n", id, color->red,color->green,color->blue); 
+                TRACE("***tag %s is 0x%0x,0x%0x,0x%0x\n", id, c->red,c->green,c->blue); 
+                tag = gtk_text_buffer_create_tag(buffer, id, "foreground_gdk", c, NULL);
+            } 
+            g_free(color);            
         }
 
-        // if (!tag) ERROR("No GtkTextTag for %s\n", id);
+        if (!tag) Fm<Type>::printError(g_strdup_printf("No GtkTextTag for %s\n", id));
         return tag;
     }
 
     static GtkTextTag **
     resolve_tags(GtkTextBuffer * buffer, const gchar *tag){
-        DBG("Print::resolve_tags(%s)\n", tag);
+        TRACE("Print::resolve_tags(%s)\n", tag);
         if (!tag) return NULL;
         gchar **userTags;
         if (strchr(tag, '/')){
@@ -623,7 +627,7 @@ private:
         for (t=userTags; t && *t;t++){
             tags[i] = resolve_tag (buffer, *t);
             if (tags[i] == NULL) {
-                DBG("*** could not resolve tag: \"%s\"\n", *t);
+                TRACE("*** could not resolve tag: \"%s\"\n", *t);
             } else i++;
         }
         g_strfreev(userTags);

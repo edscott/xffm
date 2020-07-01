@@ -75,7 +75,7 @@ public:
     BaseModel(Page<Type> *page){
         page_ = page; 
         viewSerial_ = 1;
-        DBG("BaseModel:: viewSerial=%d\n", viewSerial_);
+        TRACE("BaseModel:: viewSerial=%d\n", viewSerial_);
         path_ = NULL;
         selectionList_ = NULL;
         treeModel_ = mkTreeModel();

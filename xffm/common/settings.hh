@@ -191,9 +191,9 @@ private:
                 return;
             }
         }
-        DBG("Settings::writeKeyFile... getting lock.\n");
-	getFileLock(settingsfile);
-        DBG("Settings::writeKeyFile... got lock.\n");
+        TRACE("Settings::writeKeyFile... getting lock.\n");
+	    getFileLock(settingsfile);
+        TRACE("Settings::writeKeyFile... got lock.\n");
 
         gsize file_length;
         gchar *file_string = g_key_file_to_data (keyFile, &file_length, NULL);
@@ -214,7 +214,7 @@ private:
         } else {
             WARN("writeKeyFile(): cannot open %s for write: %s\n", settingsfile, strerror(errno));
         }
-	DBG("Settings::removing file lock\n");
+	    TRACE("Settings::removing file lock\n");
         removeFileLock(settingsfile);
         g_free(file_string);
         g_free(config_directory);

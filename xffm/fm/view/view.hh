@@ -157,7 +157,7 @@ public:
 
         // Increment view serial. Currently used for local view monitor sanity check.
         view->incSerial();
-        DBG("View:: serial is now %d\n", view->serial());
+        TRACE("View:: serial is now %d\n", view->serial());
         switch (view->viewType()){
             case (ROOTVIEW_TYPE):
                 RootView<Type>::loadModel(view);

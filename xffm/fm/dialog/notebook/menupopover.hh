@@ -280,7 +280,10 @@ private:
 private:
     static gchar *
     getColor(const gchar *which, GdkRGBA *rgba){
+        DBG("***gtk_color_chooser_dialog_new...\n");
         auto chooser = GTK_DIALOG(gtk_color_chooser_dialog_new(which, mainWindow));
+        gtk_widget_show(GTK_WIDGET(chooser));
+        DBG("***gtk_dialog_run...\n");
         auto response = gtk_dialog_run(chooser);
         gtk_widget_hide(GTK_WIDGET(chooser));
         gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(chooser), rgba);

@@ -48,17 +48,17 @@ public:
             if (hasKey) {
                 Settings<Type>::removeKey("ImageSize", this->workDir());
             }
+            auto message = g_strdup_printf(" %s: [%s]\n",_("No Image Preview"),  this->workDir());
+            Fm<Type>::printInfo("image-x-generic/SE/list-remove/1.5/220", message);
         } 
         else if (pixels > MAX_PIXBUF_SIZE){
             auto message = g_strdup_printf(" %s: (%d) [%s]\n",_("Maximum image size for thumbnailing"),  MAX_PIXBUF_SIZE, this->workDir());
-            Print<Type>::showTextSmall(this->output());
-            Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
+            Fm<Type>::printInfo("image-x-generic/SE/list-add/1.5/220", message);
             return;
         }
         if (pixels >= 48) {
             auto message = g_strdup_printf(" %s: (%d) [%s]\n",_("Reset image size"), pixels, this->workDir());
-            Print<Type>::showTextSmall(this->output());
-            Print<Type>::print_icon(this->output(), "image-x-generic/SE/list-add/1.5/220", message);
+            Fm<Type>::printInfo("image-x-generic/SE/list-add/1.5/220", message);
             Settings<Type>::setInteger("ImageSize", this->workDir(), pixels);
         }
     }

@@ -168,20 +168,30 @@ public:
 public:
 
     static void // Print<Type>::printInfo will free string.
+    printInfo(const gchar *icon, gchar *string){
+        auto page = getCurrentPage();
+        Print<Type>::showTextSmall(page->output());
+        Print<Type>::printInfo(page->output(), icon, string);     
+    }
+
+    static void // Print<Type>::printInfo will free string.
     printInfo(gchar *string){
         auto page = getCurrentPage();
+        Print<Type>::showTextSmall(page->output());
         Print<Type>::printInfo(page->output(), string);     
     }
 
     static void // Print<Type>::printDbg will free string.
     printDbg(gchar *string){
         auto page = getCurrentPage();
+        Print<Type>::showTextSmall(page->output());
         Print<Type>::printDbg(page->output(), string);     
     }
 
     static void // Print<Type>::printError will free string.
     printError(gchar *string){
         auto page = getCurrentPage();
+        Print<Type>::showTextSmall(page->output());
         Print<Type>::printError(page->output(), string);     
     }
     
