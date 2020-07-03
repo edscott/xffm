@@ -104,6 +104,10 @@ public:
     get_xd_p(GFile *first){
         gchar *path = g_file_get_path(this->gfile_);
         gchar *basename = g_file_get_basename(first);
+        auto dir = g_path_get_dirname(path);
+        gboolean doPreview = (Settings<Type>::getInteger("ImageSize", dir) > 24);
+        g_free(dir);
+
         struct dirent *d; // static pointer
         TRACE("looking for %s info\n", basename);
         DIR *directory = opendir(path);
@@ -111,7 +115,7 @@ public:
         if (directory) {
           while ((d = readdir(directory))  != NULL) {
             if(strcmp (d->d_name, basename)) continue;
-            xd_p = LocalView<Type>::get_xd_p(path, d, TRUE);
+            xd_p = LocalModel<Type>::get_xd_p(path, d, TRUE, doPreview);
             break;
           }
           closedir (directory);
@@ -161,13 +165,19 @@ public:
             return FALSE;
         }
         g_free(path);
-        TRACE("stat_func: gotcha %s\n", inPath);
-        // Clear any absolute path icons from the pixbuf hash
-        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 24);
-        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 48);
-        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 96);
-        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 192);
-        PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 384);
+        auto dir = g_path_get_dirname(inPath);
+        gboolean doPreview = (Settings<Type>::getInteger("ImageSize", dir) > 24);
+        g_free(dir);
+
+        TRACE("stat_func: gotcha %s, doPreview=%d\n", inPath, doPreview);
+        if (doPreview) {
+            // Clear any absolute path icons from the pixbuf hash
+            PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 24);
+            PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 48);
+            PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 96);
+            PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 192);
+            PixbufHash<Type>::rm_from_pixbuf_hash(inPath, 384);
+        }
        
         GtkListStore *store = GTK_LIST_STORE(model);
 
@@ -176,7 +186,7 @@ public:
         auto basename = g_path_get_basename(inPath);
         strncpy(d.d_name, basename, 256);
         g_free(basename);
-        auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE, TRUE);
+        auto xd_p = LocalModel<Type>::get_xd_p(directory, &d, TRUE, doPreview);
         g_free(directory);
         TRACE("%s --> %s --> %s\n", xd_p->path, xd_p->mimetype, xd_p->icon);
         if (strcmp(xd_p->mimetype, "inode/unknown")==0){
@@ -211,20 +221,17 @@ public:
 
 
 
-        // decorate image preview with cut emblem
-        if (Gtk<Type>::isImage(xd_p->mimetype)){
-            const gchar *clipEmblem=NULL;
-            clipEmblem= ClipBoard<Type>::clipBoardEmblem(xd_p->path);
+        // decorate image preview with cut/copy emblem
+        const gchar *clipEmblem=NULL;
+        clipEmblem= ClipBoard<Type>::clipBoardEmblem(xd_p->path);
 
-            if (clipEmblem){
-                void *arg2[] = {NULL, (void *)pixbuf, NULL, NULL, (void *)(clipEmblem+1) };
-                Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg2);
+        if (clipEmblem){
+            void *arg2[] = {NULL, (void *)pixbuf, NULL, NULL, (void *)(clipEmblem+1) };
+            Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg2);
 
-                void *arg3[] = {NULL, (void *)treepixbuf, NULL, NULL, (void *)(clipEmblem+1) };
-                Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg3);
-            } else {
-            }
-        }
+            void *arg3[] = {NULL, (void *)treepixbuf, NULL, NULL, (void *)(clipEmblem+1) };
+            Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg3);
+        } 
 
         GdkPixbuf *highlight_pixbuf;
         if (strcmp(xd_p->mimetype, "inode/directory")==0){
@@ -359,38 +366,9 @@ private:
         }
         
         
-        gboolean verbose = FALSE;
+        gboolean verbose = TRUE;//FALSE;
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());
         switch (event){
-            case G_FILE_MONITOR_EVENT_DELETED:
-            case G_FILE_MONITOR_EVENT_MOVED_OUT:
-                if (verbose) DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);
-                
-                p->remove_item(first);
-                p->updateFileCountLabel();
-                break;
-            case G_FILE_MONITOR_EVENT_CREATED:
-            case G_FILE_MONITOR_EVENT_MOVED_IN:
-                if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                p->add_new_item(first);
-                p->updateFileCountLabel();
-
-                break;
-            case G_FILE_MONITOR_EVENT_CHANGED:
-            {
-                if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
-                /*
-                auto arg = (void **)calloc(2, sizeof(void *));
-                if (!arg){
-                    ERROR("local/monitor.hh::monitor_f(): %s\n",strerror(errno));
-                } else {
-                    arg[0]=(void *)p;
-                    arg[1]=g_strdup(f);
-                    g_timeout_add(500, changeItem, arg);
-                }
-                */
-                p->restat_item(f);
-            } break;
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
                 if (verbose) DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->restat_item(f);
@@ -401,15 +379,35 @@ private:
             case G_FILE_MONITOR_EVENT_UNMOUNTED:
                 if (verbose) DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
                 break;
+
+            case G_FILE_MONITOR_EVENT_DELETED:
+            case G_FILE_MONITOR_EVENT_MOVED_OUT:
+                if (verbose) DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);                
+                p->remove_item(first);
+                p->updateFileCountLabel();
+                break;
+
+            case G_FILE_MONITOR_EVENT_CREATED:
+            case G_FILE_MONITOR_EVENT_MOVED_IN:
+                if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                p->add_new_item(first);
+                p->updateFileCountLabel();
+
+                break;
+            case G_FILE_MONITOR_EVENT_CHANGED:
+            {
+                if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                p->restat_item(f);
+            } break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
                 if (verbose) DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
                 p->add2reSelect(f); // Only adds to selection list if item is selected.
                 p->remove_item(first); 
-                if (isInModel(p->treeModel(), s))
-                {
-                    p->restat_item(s);
-                } else p->add_new_item(second);
+
+                if (!isInModel(p->treeModel(), s)){
+                    p->add_new_item(second);
+                } else p->restat_item(s);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
                 if (verbose) DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);

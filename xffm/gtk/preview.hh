@@ -90,8 +90,9 @@ public:
         if (!st_p){
             st_p = &st;
             if (stat(filePath, st_p) != 0){
-            DBG("previewAtSize():: stat(%s): %s\n", filePath, strerror(errno));
-            return NULL;
+                DBG("previewAtSize():: stat(%s): %s\n", 
+                        filePath, strerror(errno));
+                return NULL;
             }
         }
         TRACE("previewDefault(%s)...\n", filePath);
@@ -113,7 +114,7 @@ public:
                 Pixbuf<Type>::getImageAtSize(filePath, PREVIEW_IMAGE_SIZE, mimetype, st_p);
             // We get the preview image path:
             auto previewPath = 
-            PixbufHash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
+                PixbufHash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
             TRACE("previewDefault(%s)... thumbnail for PREVIEW_IMAGE_SIZE: %s\n", 
                 filePath, previewPath);
             // Now we get the resized pixmap.
@@ -121,12 +122,13 @@ public:
                 filePath, previewPath, size);
             GdkPixbuf *pixbuf = NULL;
             if (g_file_test(previewPath, G_FILE_TEST_EXISTS)) {
-            pixbuf = Pixbuf<Type>::buildImagePixbuf(previewPath, size);
-            // Since this is loading a png image, label is wrong.
-            // Overwrite label:
-            auto label = " pdf";
-            if (strstr(mimetype, "postscript")) label = "  ps";
-            Pixbuf<Type>::insertPixbufLabel(pixbuf, label);
+                pixbuf = Pixbuf<Type>::buildImagePixbuf(previewPath, size);
+                // Since this is loading a png image, label is wrong.
+                // Overwrite label:
+                auto label = " pdf";
+                if (strstr(mimetype, "postscript")) label = "  ps";
+                Pixbuf<Type>::insertPixbufLabel(pixbuf, label);
+
             }
             g_free(previewPath);
             TRACE("previewDefault(%s)... OK\n", filePath);

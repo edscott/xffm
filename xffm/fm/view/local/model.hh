@@ -830,11 +830,23 @@ private:
 
 
         if (icon_name && g_path_is_absolute(icon_name)){
-            auto page_p = Fm<Type>::getCurrentPage();
-            auto pixels = page_p->getImageSize();
-            TRACE("add_local_item(%s): pixels = %d \n", icon_name, pixels);
-            normal_pixbuf = Pixbuf<Type>::getImageAtSize(icon_name, pixels, xd_p->mimetype, xd_p->st);
-            treeViewPixbuf = Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
+            auto dir = g_path_get_dirname(icon_name);
+            auto pixels = Settings<Type>::getInteger("ImageSize", dir);
+            gboolean doPreview = (pixels > 24);
+            g_free(dir);
+            
+            DBG("add_local_item(%s): pixels = %d \n", icon_name, pixels);
+            if (doPreview) {
+                normal_pixbuf = 
+                    Pixbuf<Type>::getImageAtSize(icon_name, pixels, xd_p->mimetype, xd_p->st);
+                treeViewPixbuf = 
+                    Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
+            } else {
+                normal_pixbuf = 
+                    Pixbuf<Type>::getPixbuf("image-x-generic", -48);
+                treeViewPixbuf = 
+                    Pixbuf<Type>::getPixbuf("image-x-generic", -24);
+            }
         }
 
         else if (xd_p->st) {

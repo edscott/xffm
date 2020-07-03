@@ -256,7 +256,7 @@ public:
         auto newWindow = gtk_c::newButton("window-new", _("Open a New Window"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
-                (void *)"xffm");
+                (void *)xffmProgram);
 
 #ifdef ENABLE_DIFF_MODULE
         auto diffApp = g_find_program_in_path("rodent-diff");

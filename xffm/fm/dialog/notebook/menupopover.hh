@@ -137,7 +137,7 @@ public:
 
         const gchar *path = Fm<Type>::getCurrentNotebook()->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
-        gchar *find = g_strdup_printf("xffm --find \"%s\"", path);
+        gchar *find = g_strdup_printf("%s --find \"%s\"", xffmProgram, path);
         run(Fm<Type>::getCurrentNotebook(), find);
         g_free(find);
     }
