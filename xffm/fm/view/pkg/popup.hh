@@ -43,95 +43,6 @@
 #define NO_VERSION                0x1000
 #define SCROLL_UP                0x2000
 */
-static void
-mainStart (GMarkupParseContext * context,
-               const gchar * element_name,
-               const gchar ** attribute_names, 
-           const gchar ** attribute_values, 
-           gpointer data, 
-           GError ** error) 
-{
-    DBG ("mainStart -> %s\n",element_name); 
-
-     return;
-}
-static void mainEnd(GMarkupParseContext *context,
-                          const gchar         *element_name,
-                          gpointer             user_data,
-                          GError             **error){
-    DBG ("mainEnd -> %s\n",element_name); 
-     ;
- }
-  /* text is not nul-terminated */
-static void mainText (GMarkupParseContext *context,
-                          const gchar         *text,
-                          gsize                text_len,
-                          gpointer             user_data,
-                          GError             **error){
-    DBG ("mainText -> %s\n",text); 
-
-}
-  /* text is not nul-terminated. */
-static void mainPassthrough (GMarkupParseContext *context,
-                          const gchar         *passthrough_text,
-                          gsize                text_len,
-                          gpointer             user_data,
-                          GError             **error)
-{
-    DBG ("mainPassthrough -> %s\n",passthrough_text); 
-    
-}
-static void mainError (GMarkupParseContext *context,
-                          GError              *error,
-                          gpointer             user_data)
-{
-    DBG ("mainError -> %s\n",error->message); 
-}
-GMarkupParser mainParser = {
-    mainStart,
-    mainEnd, // mainEnd,
-    mainText,                   /*text_fun, */
-    mainPassthrough,
-    mainError
-};
-
-static void parseXMLfile(const gchar *xmlFile){
-    auto resourcePath = g_build_filename(PREFIX, "share", "xml", "xffm+", xmlFile, NULL);
-    if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
-        DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
-        g_free(resourcePath);
-        resourcePath = g_build_filename(buildXml, xmlFile, NULL);
-        if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
-            DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
-            g_free(resourcePath);
-            return;
-        }
-    }
-    DBG("parseXMLfile(): %s\n", resourcePath);
-    auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
-    auto input = fopen (resourcePath, "r");
-    if(!input) {
-        TRACE ("cannot open %s\n", resourcePath);
-        return;
-    }
-    gchar line[2048];
-    while(!feof (input) && fgets (line, 2048, input)) {
-        memset(line, 0, 2048);
-        //fprintf(stderr, "%s", line);
-        GError *error = NULL;
-        if (!g_markup_parse_context_parse (mainContext, line, strlen(line), &error) )
-        {
-            DBG("parseXMLfile(): %s\n", error->message);
-            g_error_free(error);
-        }
-    }
-    fclose (input);
-    
-    g_markup_parse_context_free (mainContext);
-
-    g_free(resourcePath);
-    
-}
 
 
 namespace xf
@@ -176,7 +87,7 @@ public:
     const gchar *title(void){return "foo";}
     const gchar *itemTitle(void){return "bar";}
     void parseXML(void){
-        parseXMLfile("pkg_pkg.xml");
+        PkgPopUp<Type>::parseXMLfile("pkg_pkg.xml");
     }
 
 private:
@@ -245,11 +156,102 @@ public:
     void resetPopup(Type *type);
     void resetMenuItems(Type *type);
     //void parseXML(Type *type);
-    
-    
 
+    static void parseXMLfile(const gchar *xmlFile){
+        auto resourcePath = g_build_filename(PREFIX, "share", "xml", "xffm+", xmlFile, NULL);
+        if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
+            DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
+            g_free(resourcePath);
+            resourcePath = g_build_filename(buildXml, xmlFile, NULL);
+            if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
+                DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
+                g_free(resourcePath);
+                return;
+            }
+        }
+        DBG("parseXMLfile(): %s\n", resourcePath);
 
+        GMarkupParser mainParser = {
+            mainStart,
+            mainEnd, // mainEnd,
+            mainText,                   /*text_fun, */
+            mainPassthrough,
+            mainError
+        };
+        
+        auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
+        auto input = fopen (resourcePath, "r");
+        if(!input) {
+            TRACE ("cannot open %s\n", resourcePath);
+            return;
+        }
+        gchar line[2048];
+        memset(line, 0, 2048);
+        while(!feof (input) && fgets (line, 2048, input)) {
+            //fprintf(stderr, "%s", line);
+            GError *error = NULL;
+            if (!g_markup_parse_context_parse (mainContext, line, strlen(line), &error) )
+            {
+                DBG("parseXMLfile(): %s\n", error->message);
+                g_error_free(error);
+            }
+        }
+        fclose (input);
+        
+        g_markup_parse_context_free (mainContext);
+
+        g_free(resourcePath);
+        
+    }
 private:
+    
+    static void
+    mainStart (GMarkupParseContext * context,
+                   const gchar * element_name,
+                   const gchar ** attribute_names, 
+               const gchar ** attribute_values, 
+               gpointer data, 
+               GError ** error) 
+    {
+        DBG ("mainStart -> %s\n",element_name); 
+
+         return;
+    }
+    static void mainEnd(GMarkupParseContext *context,
+                              const gchar         *element_name,
+                              gpointer             user_data,
+                              GError             **error){
+        DBG ("mainEnd -> %s\n",element_name); 
+         ;
+     }
+      /* text is not nul-terminated */
+    static void mainText (GMarkupParseContext *context,
+                              const gchar         *text,
+                              gsize                text_len,
+                              gpointer             user_data,
+                              GError             **error){
+        DBG ("mainText -> %s\n",text); 
+
+    }
+      /* text is not nul-terminated. */
+    static void mainPassthrough (GMarkupParseContext *context,
+                              const gchar         *passthrough_text,
+                              gsize                text_len,
+                              gpointer             user_data,
+                              GError             **error)
+    {
+        DBG ("mainPassthrough -> %s\n",passthrough_text); 
+        
+    }
+    static void mainError (GMarkupParseContext *context,
+                              GError              *error,
+                              gpointer             user_data)
+    {
+        DBG ("mainError -> %s\n",error->message); 
+    }
+    
+
+
     void addMenuTitle(GtkMenu *menu, const gchar *text){
         GtkWidget *title = Gtk<Type>::menu_item_new(NULL, text); 
         gtk_widget_set_sensitive(title, TRUE);
