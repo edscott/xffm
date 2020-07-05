@@ -116,9 +116,9 @@ static void parseXMLfile(const gchar *xmlFile){
     }
     gchar line[2048];
     while(!feof (input) && fgets (line, 2048, input)) {
+        memset(line, 0, 2048);
         //fprintf(stderr, "%s", line);
         GError *error = NULL;
-        memset(line, 0, 2048);
         if (!g_markup_parse_context_parse (mainContext, line, strlen(line), &error) )
         {
             DBG("parseXMLfile(): %s\n", error->message);
