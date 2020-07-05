@@ -36,6 +36,21 @@ class PkgView  :
         PkgModel<Type>::loadModel(view->treeModel());
         return TRUE;
     }
+  /*   static void selectables(GtkIconView *iconview){
+        GtkTreePath *tpath = gtk_tree_path_new_first ();
+        GtkTreeModel *treeModel = gtk_icon_view_get_model (iconview);
+        GtkTreeIter iter;
+        if (!gtk_tree_model_get_iter (treeModel, &iter, tpath)) {
+            gtk_tree_path_free(tpath);
+            return ;
+        }
+        gboolean retval = LocalModel<Type>::isSelectable(treeModel, &iter);
+        if (!retval) {
+            gtk_icon_view_unselect_path (iconview,tpath);
+        }
+        gtk_tree_path_free(tpath);
+        return ;
+    }*/
 
  
 };

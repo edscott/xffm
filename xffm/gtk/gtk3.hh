@@ -7,5 +7,6 @@
 #include "pixbuf.hh"
 #include "dialogs.hh"
 #include "gtk.hh"
+#include "xmlmenu.hh"
 #endif
 

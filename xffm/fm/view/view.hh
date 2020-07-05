@@ -286,6 +286,8 @@ public:
                 if (isTreeView) LocalView<Type>::selectables(this->treeView());
                 else LocalView<Type>::selectables(this->iconView());        
                 break;
+            case (PKG_TYPE):
+                break;
             default:
                 if (isTreeView){
                     auto selection = gtk_tree_view_get_selection (this->treeView());
@@ -311,6 +313,9 @@ public:
                 break;
             case (FSTAB_TYPE):
                 return FstabView<Type>::isSelectable(this->treeModel(),&iter);        
+                break;
+            case (PKG_TYPE):
+                return TRUE;
                 break;
             default:
                 DBG("View::selectables(): No items are selectable for viewType: %d ()\n", this->viewType());

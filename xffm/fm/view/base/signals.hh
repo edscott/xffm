@@ -32,6 +32,7 @@ template <class Type> class LocalView;
 template <class Type> class PkgView;
 template <class Type> class BaseModel;
 
+template <class Type> class PkgBSD;
 template <class Type> class PkgPopUp;
 template <class Type> class LocalPopUp;
 template <class Type> class RootPopUp;
@@ -576,7 +577,7 @@ public:
     getItemsMenu(View<Type> *view){
         gint viewType = view->viewType();
         TRACE("getItemsMenu\n" );
-        GtkMenu *menu;
+        GtkMenu *menu=NULL;
         switch (viewType){
             case (ROOTVIEW_TYPE):
                     menu = RootPopUp<Type>::popUpItem(); 
@@ -593,24 +594,28 @@ public:
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-                    menu =  PkgPopUp<Type>::popUpItem(); 
+                {
+                    PkgPopUp<PkgBSD<Type>> popup;
+                    PkgBSD<Type> BSDpopup;
+                    menu = popup.popUpItem(&BSDpopup);
+                    //menu =  PkgPopUp<PkgBSD<double>>::popUpItem(); 
+                }
                 break;
 #endif
-
             default:
                 ERROR("fm/base/signals.hh::getItemsMenu() ViewType %d not defined.\n", viewType);
                 menu = RootPopUp<Type>::popUp(); 
                 break;
         }
         TRACE("menu = %p\n", menu);
-        g_object_set_data(G_OBJECT(menu),"view", view);
+        if (menu) g_object_set_data(G_OBJECT(menu),"view", view);
+        else DBG("base/signals.hh:: getItemsMenu() menu is NULL\n");
         return menu;
     }
 
     static void
     configureItemsMenu(gint viewType){
         TRACE("configureItemsMenu\n" );
-        GtkMenu *menu;
         switch (viewType){
             case (ROOTVIEW_TYPE):
                     RootPopUp<Type>::resetMenuItems();
@@ -629,7 +634,12 @@ public:
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-                    PkgPopUp<Type>::resetMenuItems();
+                {
+                    PkgPopUp<PkgBSD<Type>> popup;
+                    PkgBSD<Type> BSDpopup;
+                    popup.resetMenuItems(&BSDpopup);
+                    //PkgPopUp<PkgBSD<double>>::resetMenuItems();
+                }
                 break;
 #endif
             default:
@@ -641,6 +651,7 @@ public:
 
     static GtkMenu *
     getViewMenu(View<Type> *view){
+
         gint viewType = view->viewType();
         TRACE("getViewMenu\n" );
         GtkMenu *menu;
@@ -658,7 +669,11 @@ public:
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-                    menu = PkgPopUp<Type>::popUp();
+                {
+                    PkgPopUp<PkgBSD<Type>> popup;
+                    PkgBSD<Type> BSDpopup;
+                    menu = popup.popUp(&BSDpopup);
+                }
                 break;
 #endif
             default:
@@ -666,7 +681,8 @@ public:
                 ERROR("fm/base/signals.hh::getViewMenu() ViewType %d not defined.\n", viewType);
                 break;
         }
-        g_object_set_data(G_OBJECT(menu),"view", view);
+        if (menu) g_object_set_data(G_OBJECT(menu),"view", view);
+        else DBG("base/signals.hh:: getViewMenu() menu is NULL\n");
         return menu;
     }
     static void
@@ -686,7 +702,12 @@ public:
 #endif
 #ifdef ENABLE_PKG_MODULE
             case (PKG_TYPE):
-                    PkgPopUp<Type>::resetPopup();
+                {
+                    PkgPopUp<PkgBSD<Type>> popup;
+                    PkgBSD<Type> BSDpopup;
+                    popup.resetPopup(&BSDpopup);
+                    //PkgPopUp<PkgBSD<double>>::resetPopup();
+                }
                 break;
 #endif
             default:

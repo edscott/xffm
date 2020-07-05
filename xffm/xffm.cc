@@ -95,7 +95,7 @@ namespace xf {
 
 # undef DBG
 //# define DBG(...)   { (void)0; }
-# define DBG(...)  {fprintf(stderr, "DBG> "); fprintf(stderr, __VA_ARGS__);}
+# define DBG(...)  {fprintf(stderr, "DBG***> "); fprintf(stderr, __VA_ARGS__);}
 
 # undef DBG_
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
@@ -109,6 +109,7 @@ namespace xf {
 }
 
 static gchar *buildDir=NULL;
+static const gchar *buildXml=NULL;
 static const gchar *buildIcons=NULL;
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
@@ -141,6 +142,7 @@ main (int argc, char *argv[]) {
     TRACE("dir= %s\n", buildDir);
     if (strstr(buildDir, "/build/xffm")){
         *strstr(buildDir, "/build/xffm") = 0;
+        buildXml = g_build_path(G_DIR_SEPARATOR_S,buildDir, "xffm", "xml", NULL);
         buildIcons = g_build_path(G_DIR_SEPARATOR_S,buildDir, "xffm", "icons", NULL);
         TRACE("buildIcons=%s\n", buildIcons);
     } 
