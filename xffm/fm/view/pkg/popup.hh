@@ -55,13 +55,44 @@ mainStart (GMarkupParseContext * context,
 
      return;
 }
+static void mainEnd(GMarkupParseContext *context,
+                          const gchar         *element_name,
+                          gpointer             user_data,
+                          GError             **error){
+    DBG ("mainEnd -> %s\n",element_name); 
+     ;
+ }
+  /* text is not nul-terminated */
+static void mainText (GMarkupParseContext *context,
+                          const gchar         *text,
+                          gsize                text_len,
+                          gpointer             user_data,
+                          GError             **error){
+    DBG ("mainText -> %s\n",text); 
 
+}
+  /* text is not nul-terminated. */
+static void mainPassthrough (GMarkupParseContext *context,
+                          const gchar         *passthrough_text,
+                          gsize                text_len,
+                          gpointer             user_data,
+                          GError             **error)
+{
+    DBG ("mainPassthrough -> %s\n",passthrough_text); 
+    
+}
+static void mainError (GMarkupParseContext *context,
+                          GError              *error,
+                          gpointer             user_data)
+{
+    DBG ("mainError -> %s\n",error->message); 
+}
 GMarkupParser mainParser = {
     mainStart,
-    NULL, // mainEnd,
-    NULL,                   /*text_fun, */
-    NULL,
-    NULL
+    mainEnd, // mainEnd,
+    mainText,                   /*text_fun, */
+    mainPassthrough,
+    mainError
 };
 
 static void parseXMLfile(const gchar *xmlFile){
