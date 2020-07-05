@@ -87,7 +87,7 @@ public:
     const gchar *title(void){return "foo";}
     const gchar *itemTitle(void){return "bar";}
     void parseXML(void){
-        PkgPopUp<Type>::parseXMLfile("pkg_pkg.xml");
+        PkgPopUp<Type>::parseXMLfile("pkg_pkg.xml", com_);
     }
 
 private:
@@ -147,8 +147,23 @@ private:
     }
 };
 
+
+namespace pkg {
+    class PkgProperties {
+    public:
+        gint count;
+        gchar line[2048];
+        const gchar *command;
+        const gchar *tag;
+        FILE *input;
+        gboolean startCount;
+    };
+    PkgProperties properties;
+}
+
 template <class Type>
 class PkgPopUp {
+    using Data=pkg::PkgProperties;
 
 public:
     GtkMenu *popUp(Type *type);
@@ -157,30 +172,23 @@ public:
     void resetMenuItems(Type *type);
     //void parseXML(Type *type);
 
-    static void parseXMLfile(const gchar *xmlFile){
-        auto resourcePath = g_build_filename(PREFIX, "share", "xml", "xffm+", xmlFile, NULL);
-        if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
-            DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
-            g_free(resourcePath);
-            resourcePath = g_build_filename(buildXml, xmlFile, NULL);
-            if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
-                DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
-                g_free(resourcePath);
-                return;
-            }
+    static void parseXMLfile(const gchar *xmlFile, const gchar *command){
+        Data& data = pkg::properties;
+        if (!initProperties(xmlFile, command, "option")){
+            DBG("parseXMLfile() initProperties failed.\n");
+            return;
         }
-        DBG("parseXMLfile(): %s\n", resourcePath);
-
+        populateGlobalOptions();
+/*
         GMarkupParser mainParser = {
             mainStart,
-            mainEnd, // mainEnd,
-            mainText,                   /*text_fun, */
+            mainEnd,                    // mainEnd,
+            mainText,                   //text_fun
             mainPassthrough,
             mainError
         };
         
         auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
-        auto input = fopen (resourcePath, "r");
         if(!input) {
             TRACE ("cannot open %s\n", resourcePath);
             return;
@@ -196,22 +204,169 @@ public:
                 g_error_free(error);
             }
         }
-        fclose (input);
         
         g_markup_parse_context_free (mainContext);
+        */
+        fclose (data.input);
 
-        g_free(resourcePath);
         
     }
 private:
+    static gboolean initProperties(const gchar *xmlFile, const gchar *command, const gchar *tag = NULL){
+        Data& data = pkg::properties;
+        data.command = command;
+        data.tag = tag;
+        data.count = 0;
+        data.input = NULL;
+        data.startCount = 0;
+        memset(data.line, 0, 2048);
+        auto resourcePath = g_build_filename(PREFIX, "share", "xml", "xffm+", xmlFile, NULL);
+        if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
+            DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
+            g_free(resourcePath);
+            resourcePath = g_build_filename(buildXml, xmlFile, NULL);
+            if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
+                DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
+                g_free(resourcePath);
+                return FALSE;
+            }
+        }
+        DBG("parseXMLfile(): %s\n", resourcePath);
+        data.input = fopen (resourcePath, "r");
+        g_free(resourcePath);
+        if (!data.input) return FALSE;
+        return TRUE;
+    }
+
+    static void 
+    populateGlobalOptions(){
+        // Count number of options. 
+        gint count = countXmlTags();
+        Data& data = pkg::properties;
+        DBG("\"%s\" count = %d (%d)\n", data.tag, count, data.count);
+/*
+        // Allocate structure
+        xml_options = (pkg_option_t *) malloc((option_count+1)*sizeof(pkg_option_t));
+        if (!xml_options){
+            DBG("populate_global_options() malloc failed: %s\n", strerror(errno));
+            return;
+        }
+        memset(xml_options, 0, (option_count+1)*sizeof(pkg_option_t));
+
+
+        xmlNodePtr node = xmlDocGetRootElement (doc);
+        for(node = node->children; node; node = node->next) {
+            if (strcasecmp(command, (gchar *)(node->name))) continue;
+            // Here we have our particular command section
+            pkg_option_t *s = xml_options;
+            xmlNodePtr node1;
+            for(node1 = node->children; node1; node1 = node1->next) {
+                if (strcasecmp("option", (gchar *)(node1->name)) == 0){
+                    option_parse(node1, s);
+                    s++;
+                }
+            }
+        }
+#ifdef DEBUG   
+        pkg_option_t *pp;
+        for (pp=xml_options; pp && pp->loption; pp++){
+            NOOP("... %s\n", pp->loption);
+        }
+#endif
+*/
+    }
+ 
+    static gint
+    countXmlTags(void){
+        Data& data = pkg::properties;
+        data.count = 0;
+        rewind(data.input);
+
+        GMarkupParser mainParser = { mainStartCount, mainEndCount, NULL, NULL, NULL};
+        auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
+
+        while(!feof (data.input) && fgets (data.line, 2048, data.input)) {
+            //fprintf(stderr, "%s", line);
+            GError *error = NULL;
+            if (!g_markup_parse_context_parse (mainContext, data.line, strlen(data.line), &error) )
+            {
+                DBG("parseXMLfile(): %s\n", error->message);
+                g_error_free(error);
+            }
+        }
+
+        g_markup_parse_context_free (mainContext);
+/*
+        xmlNodePtr node = xmlDocGetRootElement (doc); 
+        for(node = node->children; node; node = node->next) {
+            if (strcasecmp(command, (gchar *)(node->name))) continue;
+            // Here we have our particular parent_tag section
+            count = count_tags(node, tag);
+        }
+        */
+        return data.count;
+    }
+
+
+
+    
+    static void
+    mainCount (GMarkupParseContext * context,
+                    const gchar * elementName,
+                    const gchar ** attributeNames, 
+                    const gchar ** attributeValues, 
+                    gpointer functionData, 
+                    GError ** error) 
+    {
+        TRACE ("mainStart -> %s\n",elementName); 
+        Data& data = pkg::properties;
+        if (data.tag && strcmp(data.tag, elementName)==0){
+            DBG("Gotcha: tag=%s\n", elementName);
+            data.count++;
+        }  
+        return;
+    }
+
+    
+    static void
+    mainStartCount (GMarkupParseContext * context,
+                    const gchar * elementName,
+                    const gchar ** attributeNames, 
+                    const gchar ** attributeValues, 
+                    gpointer functionData, 
+                    GError ** error) 
+    {
+        TRACE ("mainStart -> %s\n",elementName); 
+        Data& data = pkg::properties;
+        if (data.command && strcmp(data.command, elementName)==0){
+            DBG("Gotcha: command=%s\n", elementName);
+            data.startCount = TRUE;
+        }  
+        if (data.startCount && data.tag && strcmp(data.tag, elementName)==0){
+            data.count++;
+        }
+        return;
+    }
+
+    static void mainEndCount(GMarkupParseContext *context,
+                              const gchar         *elementName,
+                              gpointer             functionData,
+                              GError             **error){
+        Data& data = pkg::properties;
+        if (data.command && strcmp(data.command, elementName)==0){
+            DBG ("mainEnd -> %s\n",elementName); 
+            data.startCount = FALSE;
+        }
+         
+     }
     
     static void
     mainStart (GMarkupParseContext * context,
-                   const gchar * element_name,
-                   const gchar ** attribute_names, 
-               const gchar ** attribute_values, 
-               gpointer data, 
-               GError ** error) 
+                    const gchar * element_name,
+                    const gchar ** attribute_names, 
+                    const gchar ** attribute_values, 
+                    gpointer functionData, 
+                    GError ** error) 
     {
         DBG ("mainStart -> %s\n",element_name); 
 
@@ -219,7 +374,7 @@ private:
     }
     static void mainEnd(GMarkupParseContext *context,
                               const gchar         *element_name,
-                              gpointer             user_data,
+                              gpointer             functionData,
                               GError             **error){
         DBG ("mainEnd -> %s\n",element_name); 
          ;
@@ -228,7 +383,7 @@ private:
     static void mainText (GMarkupParseContext *context,
                               const gchar         *text,
                               gsize                text_len,
-                              gpointer             user_data,
+                              gpointer             functionData,
                               GError             **error){
         DBG ("mainText -> %s\n",text); 
 
@@ -237,7 +392,7 @@ private:
     static void mainPassthrough (GMarkupParseContext *context,
                               const gchar         *passthrough_text,
                               gsize                text_len,
-                              gpointer             user_data,
+                              gpointer             functionData,
                               GError             **error)
     {
         DBG ("mainPassthrough -> %s\n",passthrough_text); 
@@ -245,7 +400,7 @@ private:
     }
     static void mainError (GMarkupParseContext *context,
                               GError              *error,
-                              gpointer             user_data)
+                              gpointer             functionData)
     {
         DBG ("mainError -> %s\n",error->message); 
     }
