@@ -156,10 +156,12 @@ namespace pkg {
         const gchar *command;
         const gchar *tag;
         FILE *input;
-        gboolean startCount;
+        gboolean start;
     };
     PkgProperties properties;
+    pkg_option_t *xml_options; 
 }
+
 
 template <class Type>
 class PkgPopUp {
@@ -218,7 +220,7 @@ private:
         data.tag = tag;
         data.count = 0;
         data.input = NULL;
-        data.startCount = 0;
+        data.start = FALSE;
         memset(data.line, 0, 2048);
         auto resourcePath = g_build_filename(PREFIX, "share", "xml", "xffm+", xmlFile, NULL);
         if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
@@ -244,15 +246,30 @@ private:
         gint count = countXmlTags();
         Data& data = pkg::properties;
         DBG("\"%s\" count = %d (%d)\n", data.tag, count, data.count);
-/*
+
         // Allocate structure
-        xml_options = (pkg_option_t *) malloc((option_count+1)*sizeof(pkg_option_t));
-        if (!xml_options){
-            DBG("populate_global_options() malloc failed: %s\n", strerror(errno));
+        pkg::xml_options = (pkg_option_t *) calloc((count+1),sizeof(pkg_option_t));
+        if (!pkg::xml_options){
+            DBG("populateGlobalOptions() calloc: %s\n", strerror(errno));
             return;
         }
-        memset(xml_options, 0, (option_count+1)*sizeof(pkg_option_t));
+        parse(mainOptions, mainEndCount, NULL, NULL);
 
+/*
+        GMarkupParser mainParser = { mainStartOptions, mainEndOptions, NULL, NULL, NULL};
+        auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
+
+        while(!feof (data.input) && fgets (data.line, 2048, data.input)) {
+            //fprintf(stderr, "%s", line);
+            GError *error = NULL;
+            if (!g_markup_parse_context_parse (mainContext, data.line, strlen(data.line), &error) )
+            {
+                DBG("parseXMLfile(): %s\n", error->message);
+                g_error_free(error);
+            }
+        }
+
+        g_markup_parse_context_free (mainContext);
 
         xmlNodePtr node = xmlDocGetRootElement (doc);
         for(node = node->children; node; node = node->next) {
@@ -267,12 +284,9 @@ private:
                 }
             }
         }
-#ifdef DEBUG   
-        pkg_option_t *pp;
-        for (pp=xml_options; pp && pp->loption; pp++){
-            NOOP("... %s\n", pp->loption);
+        for (auto pp=xml_options; pp && pp->loption; pp++){
+            DBG("... %s\n", pp->loption);
         }
-#endif
 */
     }
  
@@ -280,9 +294,24 @@ private:
     countXmlTags(void){
         Data& data = pkg::properties;
         data.count = 0;
-        rewind(data.input);
+        parse(mainStartCount, mainEndCount, NULL, NULL);
+        return data.count;
+    }
 
-        GMarkupParser mainParser = { mainStartCount, mainEndCount, NULL, NULL, NULL};
+    static void
+    parse(
+            void (*start)(GMarkupParseContext *, const gchar *, 
+                  const gchar **, const gchar **, gpointer, GError **), 
+            void (*end)(GMarkupParseContext *, const gchar *, 
+                  gpointer, GError **), 
+            void (*text)(GMarkupParseContext *, 
+                  const gchar *, gsize, gpointer, GError **)=NULL, 
+            void (*passthrough)(GMarkupParseContext *,
+                  const gchar *, gsize, gpointer, GError **)=NULL)
+    {
+        Data& data = pkg::properties;
+        rewind(data.input);
+        GMarkupParser mainParser = { start, end, text, passthrough, NULL};
         auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
 
         while(!feof (data.input) && fgets (data.line, 2048, data.input)) {
@@ -290,25 +319,41 @@ private:
             GError *error = NULL;
             if (!g_markup_parse_context_parse (mainContext, data.line, strlen(data.line), &error) )
             {
-                DBG("parseXMLfile(): %s\n", error->message);
+                DBG("parse(): %s\n", error->message);
                 g_error_free(error);
             }
         }
 
         g_markup_parse_context_free (mainContext);
-/*
-        xmlNodePtr node = xmlDocGetRootElement (doc); 
-        for(node = node->children; node; node = node->next) {
-            if (strcasecmp(command, (gchar *)(node->name))) continue;
-            // Here we have our particular parent_tag section
-            count = count_tags(node, tag);
-        }
-        */
-        return data.count;
+
     }
 
+    
+    static void
+    mainOptions (GMarkupParseContext * context,
+                    const gchar * elementName,
+                    const gchar ** attributeNames, 
+                    const gchar ** attributeValues, 
+                    gpointer functionData, 
+                    GError ** error) 
+    {
+        TRACE ("mainStart -> %s\n",elementName); 
+        Data& data = pkg::properties;
+        if (data.tag && strcmp(data.tag, elementName)==0){
+            DBG("Gotcha: tag=%s\n", elementName);
+            data.start = TRUE;
+        }  
+        if (data.start &&  strcasecmp("option", elementName)){
+            const gchar **p;
+            const gchar **q;
+            for (p=attributeNames, q=attributeValues;
+                    p && *p; p++, q++){
+                DBG("%s = %s \n", *p, *q);
+            }
 
-
+        }
+        return;
+    }
     
     static void
     mainCount (GMarkupParseContext * context,
@@ -340,9 +385,9 @@ private:
         Data& data = pkg::properties;
         if (data.command && strcmp(data.command, elementName)==0){
             DBG("Gotcha: command=%s\n", elementName);
-            data.startCount = TRUE;
+            data.start = TRUE;
         }  
-        if (data.startCount && data.tag && strcmp(data.tag, elementName)==0){
+        if (data.start && data.tag && strcmp(data.tag, elementName)==0){
             data.count++;
         }
         return;
@@ -355,7 +400,7 @@ private:
         Data& data = pkg::properties;
         if (data.command && strcmp(data.command, elementName)==0){
             DBG ("mainEnd -> %s\n",elementName); 
-            data.startCount = FALSE;
+            data.start = FALSE;
         }
          
      }
