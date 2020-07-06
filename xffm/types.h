@@ -144,6 +144,34 @@ template <class Type> class Notebook;
 #else
 # define WARN(...)   { (void)0; }
 #endif
+typedef enum {
+    NULL_TYPE,
+    SUBMENU_TYPE,
+    MENUITEM_TYPE,
+    CHECKITEM_TYPE,
+    RADIOITEM_TYPE,
+    SEPARATOR_TYPE
+}RodentMenuType;
+
+typedef struct RodentCallback {
+    gint function_id;
+    const gchar *string;
+    const gchar *icon;
+    gpointer function;
+    gpointer data;
+    guint key; 
+    guint mask; 
+    gint type;
+}RodentCallback;
+
+
+typedef struct RodentMenuDefinition{
+    gint type;
+    const gchar *parent_id;
+    const gchar *id;
+    RodentCallback callback;
+} RodentMenuDefinition;
+
 
 typedef struct menuItem_t {
     const gchar *label;

@@ -58,10 +58,10 @@ typedef struct pkg_option_t {
 typedef struct pkg_command_t {
     gint flags;     // command flags
     gchar *pkg;     // pkg command 
+    gchar *parameter;
     gchar *cmd;     // pkg action
     pkg_option_t *pkg_options;
     pkg_option_t *cmd_options;
-    gchar *parameter;
     gchar *hlp;     // tooltip help
     gchar *argument;
     gchar *string;
@@ -149,24 +149,42 @@ private:
 
 
 namespace pkg {
-    class PkgProperties {
-    public:
+    class XmlProperties {
+    private:
         gint count;
-        gchar line[2048];
-        const gchar *command;
-        const gchar *tag;
+        const gchar *tag[2];
+        gboolean start[2];
+        void incCount(void){ count++;}
+    public:
         FILE *input;
-        gboolean start;
-        gboolean startTag;
+        const gchar *getTag(gint id){return tag[id];}
+        void setTag(gint id, const gchar *t){
+            tag[id] = t;
+            unsetStart(0);
+            unsetStart(1);
+            incCount();
+        }
+        void resetCount(void){ count=0;}
+        gint index(void){return count-1;}
+
+        void setStart(gint id){
+            start[id] = TRUE;
+            if (id == 1) incCount();
+        }
+        void unsetStart(gint id) {start[id] = FALSE;}
+        gboolean getStart(gint id){return start[id];}
+        
+        pkg_option_t *xmlOptions; 
+        pkg_command_t *xmlCmds;
+        RodentMenuDefinition *xmlMenuDefinitions;
     };
-    PkgProperties properties;
-    pkg_option_t *xml_options; 
+    XmlProperties properties;
 }
 
 
 template <class Type>
 class PkgPopUp {
-    using Data=pkg::PkgProperties;
+    using Data=pkg::XmlProperties;
 
 public:
     GtkMenu *popUp(Type *type);
@@ -175,46 +193,75 @@ public:
     void resetMenuItems(Type *type);
     //void parseXML(Type *type);
 
-    static void parseXMLfile(const gchar *xmlFile, const gchar *command){
+    static void parseXMLfile(const gchar *xmlFile, const gchar *tag){
         Data& data = pkg::properties;
-        if (!initProperties(xmlFile, command, "option")){
+        if (!initXml(xmlFile, tag)){
             DBG("parseXMLfile() initProperties failed.\n");
             return;
         }
         populateGlobalOptions();
-        //populateMenu();
+        populateMenu();
         fclose (data.input);
 
         
     }
 private:
+    static void 
+    populateGlobalOptions(){
+        // Count number of options.
+        Data& data = pkg::properties;
+        initSubTag("option");
+        parse(mainCount, mainEnd, NULL, NULL);
+        DBG("\"%s\" count = %d \n", data.getTag(1), data.index()+2);
+
+        // Allocate structure
+        data.xmlOptions = (pkg_option_t *) calloc((data.index()+2),sizeof(pkg_option_t));
+        if (!data.xmlOptions){
+            DBG("populateGlobalOptions() calloc: %s\n", strerror(errno));
+            return;
+        }
+        initSubTag("option");
+        parse(mainOptions, mainSubTagEnd, mainOptionsText, NULL);
+
+    }
+
     static void
     populateMenu(void){
         Data& data = pkg::properties;
-        data.tag="action";
-        data.count = 0;
+        initSubTag("action");
         parse(mainCount, mainEnd, NULL, NULL);
-        DBG("\"%s\" count = %d \n", data.tag, data.count);
+        DBG("\"%s\" count = %d \n", data.getTag(1), data.index()+1);
+        // Allocate structures
+        data.xmlCmds = (pkg_command_t *) calloc(data.index()+2,sizeof(pkg_command_t));
+        data.xmlMenuDefinitions = 
+            (RodentMenuDefinition *)calloc(data.index()+2,sizeof(RodentMenuDefinition));
+        if (!data.xmlOptions || !data.xmlMenuDefinitions){
+            DBG("populateGlobalOptions() calloc: %s\n", strerror(errno));
+            return;
+        }
+        initSubTag("action");
+        parse(mainActions, mainSubTagEnd, mainActionsText, NULL);
+
 /*
         // Allocate structures
         xml_cmds = 
             (pkg_command_t *)malloc((action_count+1)*sizeof(pkg_command_t));
-        xml_menu_definitions = 
+        xmlMenuDefinitions = 
             (RodentMenuDefinition *)malloc((action_count+1)*sizeof(RodentMenuDefinition));
 
-        if (!xml_cmds || !xml_menu_definitions){
+        if (!xml_cmds || !xmlMenuDefinitions){
             DBG("populateXML_menu() malloc failed: %s\n", strerror(errno));
             return;
         }
         memset(xml_cmds, 0, (action_count+1)*sizeof(pkg_command_t));
-        memset(xml_menu_definitions, 0, (action_count+1)*sizeof(RodentMenuDefinition));
+        memset(xmlMenuDefinitions, 0, (action_count+1)*sizeof(RodentMenuDefinition));
 
 
         xmlNodePtr node = xmlDocGetRootElement (doc);   
         for(node = node->children; node; node = node->next) {
             if (strcasecmp(command, (gchar *)(node->name))) continue;
             // Here we have our particular command section
-            RodentMenuDefinition *p = xml_menu_definitions;
+            RodentMenuDefinition *p = xmlMenuDefinitions;
             pkg_command_t *q = xml_cmds;
             xmlNodePtr node1;
             for(node1 = node->children; node1; node1 = node1->next) {
@@ -231,26 +278,80 @@ private:
         */
     }
 
-
-    static void 
-    populateGlobalOptions(){
-        // Count number of options.
+    static void
+    mainActions (GMarkupParseContext * context,
+                    const gchar * elementName,
+                    const gchar ** attributeNames, 
+                    const gchar ** attributeValues, 
+                    gpointer functionData, 
+                    GError ** error) 
+    {
+        TRACE ("mainStart -> %s\n",elementName); 
         Data& data = pkg::properties;
-        data.tag="option";
-        data.count = 0;
-        parse(mainCount, mainEnd, NULL, NULL);
-        DBG("\"%s\" count = %d \n", data.tag, data.count);
-
-        // Allocate structure
-        pkg::xml_options = (pkg_option_t *) calloc((data.count+1),sizeof(pkg_option_t));
-        if (!pkg::xml_options){
-            DBG("populateGlobalOptions() calloc: %s\n", strerror(errno));
-            return;
+        if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
+            TRACE("Gotcha: getTag(0)=%s\n", elementName);
+            data.setStart(0);
+        }  
+        if (data.getStart(0) &&  strcasecmp(data.getTag(1), elementName)==0){
+            data.setStart(1);
+            const gchar **p;
+            const gchar **q;
+            for (p=attributeNames, q=attributeValues;
+                    p && *p; p++, q++){
+                DBG("(%s: %d) %s = %s \n", data.getTag(1), data.index(), *p, *q);
+                // Strings.
+                if (strcasecmp(*p, "pkg")==0)
+                    data.xmlCmds[data.index()].pkg=g_strdup(*q);
+                else if (strcasecmp(*p, "parameter")==0)
+                    data.xmlCmds[data.index()].parameter=g_strdup(*q);
+                else if (strcasecmp(*p, "cmd")==0)
+                    data.xmlCmds[data.index()].cmd=g_strdup(*q);
+                else if (strcasecmp(*p, "argument")==0)
+                    data.xmlCmds[data.index()].argument=g_strdup(*q);
+                else if (strcasecmp(*p, "string")==0)
+                    data.xmlCmds[data.index()].string=g_strdup(*q);
+                else if (strcasecmp(*p, "icon")==0)
+                    data.xmlCmds[data.index()].icon=g_strdup(*q);
+                // Flags.
+                else if (strcasecmp(*p, "protected")==0) 
+                    data.xmlCmds[data.index()].flags |= PKG_ACCESS_READ;
+                else if (strcasecmp(*p, "local")==0)
+                    data.xmlCmds[data.index()].flags |= PKG_LOCAL_SELECTION;
+                else if (strcasecmp(*p, "remote")==0)
+                    data.xmlCmds[data.index()].flags |= PKG_REMOTE_SELECTION;
+                else if (strcasecmp(*p, "no_selection")==0)
+                    data.xmlCmds[data.index()].flags |= PKG_NO_SELECTION;
+                else if (strcasecmp(*p, "no_version")==0)
+                    data.xmlCmds[data.index()].flags |= PKG_NO_VERSION;
+                else if (strcasecmp(*p, "scroll_up")==0)
+                    data.xmlCmds[data.index()].flags |= PKG_SCROLL_UP;
+          }
+          // text field: data.[data.index()].hlp = g_strdup_printf("<b>%s %s</b>\n%s",q->pkg, (q->cmd)? q->cmd:"", value); 
+            data.xmlCmds[data.index()].pkg_options = data.xmlOptions;
         }
-        data.count = 0;
-        data.start = FALSE;
-        data.startTag = FALSE;
-        parse(mainOptions, mainOptionsEnd, mainOptionsText, NULL);
+        return;
+    }
+
+   
+    static void mainActionsText (GMarkupParseContext *context,
+                              const gchar         *text,
+                              gsize                text_len,
+                              gpointer             functionData,
+                              GError             **error){
+        Data& data = pkg::properties;
+        if (data.getStart(1) && text_len > 0){
+            gchar buffer[text_len+1];
+            memset(buffer, 0, text_len+1);
+            memcpy(buffer, text, text_len);
+            g_strstrip(buffer);
+            if (!strlen(buffer)) return;
+            DBG ("mainActionsText -> \"%s\"\n",buffer); 
+            data.xmlCmds[data.index()].hlp=g_strdup_printf("<b>%s %s</b>\n%s", 
+//                        "foo", "bar" , buffer);
+              data.xmlCmds[data.index()].pkg, 
+              (data.xmlCmds[data.index()].cmd)? data.xmlCmds[data.index()].cmd:"",
+              buffer);
+        }
 
     }
     
@@ -264,23 +365,23 @@ private:
     {
         TRACE ("mainStart -> %s\n",elementName); 
         Data& data = pkg::properties;
-        if (data.command && strcmp(data.command, elementName)==0){
-            TRACE("Gotcha: tag=%s\n", elementName);
-            data.start = TRUE;
+        if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
+            TRACE("Gotcha: getTag(0)=%s\n", elementName);
+            data.setStart(0);
         }  
-        if (data.start &&  strcasecmp(data.tag, elementName)==0){
-            data.startTag = TRUE;
+        if (data.getStart(0) &&  strcasecmp(data.getTag(1), elementName)==0){
+            data.setStart(1);
             const gchar **p;
             const gchar **q;
             for (p=attributeNames, q=attributeValues;
                     p && *p; p++, q++){
-                DBG("(%s: %d) %s = %s \n", data.tag, data.count, *p, *q);
+                TRACE("(%s: %d) %s = %s \n", data.getTag(1), data.index(), *p, *q);
                 if (strcasecmp(*p, "loption")==0)
-                    pkg::xml_options[data.count].loption=g_strdup(*p);
+                    data.xmlOptions[data.index()].loption=g_strdup(*p);
                 if (strcasecmp(*p, "parameter")==0)
-                    pkg::xml_options[data.count].parameter=g_strdup(*p);
+                    data.xmlOptions[data.index()].parameter=g_strdup(*p);
                 if (strcasecmp(*p, "active")==0)
-                    pkg::xml_options[data.count].loption=g_strdup(*p);
+                    data.xmlOptions[data.index()].loption=g_strdup(*p);
           }
 
         }
@@ -293,37 +394,31 @@ private:
                               gpointer             functionData,
                               GError             **error){
         Data& data = pkg::properties;
-        // FIXME: check whether this is correct and will
-        // only capture text for option... 
-        // probably not. We need another start variable for the
-        // tag, data.startTag...
-        if (data.startTag){
-//        if (data.start &&  strcasecmp(data.tag, elementName)==0){
-            // this is text...
-            // (not null terminated!)
+        if (data.getStart(1) && text_len > 0){
             gchar buffer[text_len+1];
             memset(buffer, 0, text_len+1);
             memcpy(buffer, text, text_len);
-            DBG ("mainText -> %s\n",buffer); 
-            pkg::xml_options[data.count].hlp=g_strdup_printf("<b>%s</b>\n%s", 
-                        "foo", buffer);
-//                        pkg::xml_options[count].loption, buffer);
+            g_strstrip(buffer);
+            if (!strlen(buffer)) return;
+            TRACE ("mainText -> \"%s\"\n",buffer); 
+            data.xmlOptions[data.index()].hlp=g_strdup_printf("<b>%s</b>\n%s", 
+//                        "foo", buffer);
+                        data.xmlOptions[data.index()].loption, buffer);
         }
 
     }
 
-    static void mainOptionsEnd(GMarkupParseContext *context,
+    static void mainSubTagEnd(GMarkupParseContext *context,
                               const gchar         *elementName,
                               gpointer             functionData,
                               GError             **error){
         Data& data = pkg::properties;
-        if (data.command && strcmp(data.command, elementName)==0){
+        if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
             DBG ("mainEnd -> %s\n",elementName); 
-            data.start = FALSE;
+            data.unsetStart(0);
         }
-        if (data.start &&  strcasecmp(data.tag, elementName)==0){
-            data.count++;
-            data.startTag = FALSE;
+        if (data.getStart(0) &&  strcasecmp(data.getTag(0), elementName)==0){
+            data.unsetStart(1);
         }
          
      }
@@ -338,12 +433,12 @@ private:
     {
         TRACE ("mainStart -> %s\n",elementName); 
         Data& data = pkg::properties;
-        if (data.command && strcmp(data.command, elementName)==0){
-            data.start = TRUE;
+        if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
+            data.setStart(0);
         }
-        if (data.start && data.tag && strcmp(data.tag, elementName)==0){
-            TRACE("Gotcha: tag=%s\n", elementName);
-            data.count++;
+        if (data.getStart(0) && data.getTag(1) && strcmp(data.getTag(1), elementName)==0){
+            TRACE("Gotcha: getTag(0)=%s\n", elementName);
+            data.setStart(1);
         }  
         return;
     }
@@ -354,9 +449,9 @@ private:
                               gpointer             functionData,
                               GError             **error){
         Data& data = pkg::properties;
-        if (data.command && strcmp(data.command, elementName)==0){
+        if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
             DBG ("mainEnd -> %s\n",elementName); 
-            data.start = FALSE;
+            data.unsetStart(0);
         }
          
      }
@@ -432,11 +527,13 @@ private:
         rewind(data.input);
         GMarkupParser mainParser = { start, end, text, passthrough, NULL};
         auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
-
-        while(!feof (data.input) && fgets (data.line, 2048, data.input)) {
+        
+        gchar line[2048];
+        memset(line, 0, 2048);
+        while(!feof (data.input) && fgets (line, 2048, data.input)) {
             //fprintf(stderr, "%s", line);
             GError *error = NULL;
-            if (!g_markup_parse_context_parse (mainContext, data.line, strlen(data.line), &error) )
+            if (!g_markup_parse_context_parse (mainContext, line, strlen(line), &error) )
             {
                 DBG("parse(): %s\n", error->message);
                 g_error_free(error);
@@ -447,14 +544,18 @@ private:
 
     }
 
-    static gboolean initProperties(const gchar *xmlFile, const gchar *command, const gchar *tag = NULL){
+    static void initSubTag(const gchar *subTag){
         Data& data = pkg::properties;
-        data.command = command;
-        data.tag = tag;
-        data.count = 0;
+        data.resetCount();
+        data.setTag(1,subTag);
+        data.unsetStart(0);
+        data.unsetStart(0);
+    }
+
+    static gboolean initXml(const gchar *xmlFile, const gchar *tag){
+        Data& data = pkg::properties;
         data.input = NULL;
-        data.start = FALSE;
-        memset(data.line, 0, 2048);
+        data.setTag(0,tag);
         auto resourcePath = g_build_filename(PREFIX, "share", "xml", "xffm+", xmlFile, NULL);
         if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
             DBG("parseXMLfile(): %s %s\n", resourcePath, strerror(ENOENT));
