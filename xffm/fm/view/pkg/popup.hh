@@ -70,84 +70,6 @@ typedef struct pkg_command_t {
 } pkg_command_t;
 
 
-template <class Type>
-class PkgBSD {
-    gchar *pkg_;
-    gchar *com_;
-    gchar *pkg_dbdir_;
-    gchar *pkg_cachedir_;  
-    gchar *portsdir_;
-          
-public:
-    PkgBSD(void) {
-        getDefaults();
-        //printDefaults();
-    }
-
-    const gchar *title(void){return "foo";}
-    const gchar *itemTitle(void){return "bar";}
-    void parseXML(void){
-        PkgPopUp<Type>::parseXMLfile("pkg_pkg.xml", com_);
-    }
-
-private:
-    // Get basic pkg program defaults.
-    void getDefaults(void){
-        pkg_ = g_find_program_in_path("pkg");
-        if (!pkg_) throw 1;
-        com_ = g_path_get_basename(pkg_);
-        pkg_cachedir_ = g_strdup("/var/cache/pkg");
-        portsdir_ = g_strdup("/usr/ports");
-
-        const gchar *e = getenv("PKG_DBDIR");
-        if (e && strlen(e) && g_file_test(e, G_FILE_TEST_IS_DIR)){
-           pkg_dbdir_ = g_strdup(e);
-        }
-        else pkg_dbdir_ = g_strdup("/var/db/pkg");
-        readPkfConf();
-    }
-
-    // Overwrite defaults with values in pkg.conf.
-    void readPkfConf() {
-        FILE *f = fopen("/usr/local/etc/pkg.conf", "r");
-            if (f) {
-                gchar line[256];
-                memset (line, 0, 256);
-                while (fgets(line, 255, f) && !feof(f)){
-                    g_strchug(line);
-                    if (*line == '#') continue;
-                    if (strchr(line, '\n'))*strchr(line, '\n') = 0;
-                    if (getParam(&pkg_dbdir_, line, "PKG_DB_DIR")) continue;
-                    if (getParam(&pkg_cachedir_, line, "PKG_CACHEDIR")) continue;
-                    if (getParam(&portsdir_, line, "PORTSDIR")) continue;
-                }
-                fclose(f);
-            }
-        }
-    
-    // Parse pkg.conf line for variable.
-    gboolean getParam(gchar **variable, const gchar *line, const gchar *identifier){
-        if (strncmp (line, identifier, strlen(identifier))==0){
-            g_free(*variable);
-            gchar **gg = g_strsplit(line, ":", -1);
-            *variable = g_strdup(gg[1]);
-            g_strstrip(*variable);
-            g_strfreev(gg);
-            return TRUE;
-        }
-        return FALSE;
-    }
-
-    void printDefaults(void){
-        DBG("pkg_ = %s\n", pkg_);
-        DBG("com_ = %s\n", com_);
-        DBG("pkg_dbdir_ = %s\n", pkg_dbdir_);
-        DBG("pkg_cachedir_ = %s\n", pkg_cachedir_);
-        DBG("portsdir_ = %s\n", portsdir_);
-    }
-};
-
-
 namespace pkg {
     class XmlProperties {
     private:
@@ -155,17 +77,37 @@ namespace pkg {
         const gchar *tag[2];
         gboolean start[2];
         void incCount(void){ count++;}
+        GSList *stack;
+        
     public:
+        gboolean atLevel(void){
+            gboolean retval = current() && tag[0] && strcmp(current(),tag[0])==0;
+            return (retval);
+        }
+
+        void push(const gchar *elementName){stack = g_slist_insert(stack, g_strdup(elementName), 0);}
+        void pop(void){
+            auto last = g_slist_nth_data(stack, 0);
+            stack = g_slist_remove(stack, last);
+            g_free(last);
+        }
+        const gchar *current(void){
+            if (!stack) return NULL;
+            return (const gchar *)stack->data;
+        }
+                 
+        XmlProperties(void):stack(NULL){}
+        
+        gchar *currentTag;
         FILE *input;
         const gchar *getTag(gint id){return tag[id];}
         void setTag(gint id, const gchar *t){
             tag[id] = t;
             unsetStart(0);
             unsetStart(1);
-            incCount();
         }
         void resetCount(void){ count=0;}
-        gint index(void){return count-1;}
+        gint index(void){return count;}
 
         void setStart(gint id){
             start[id] = TRUE;
@@ -211,17 +153,17 @@ private:
         // Count number of options.
         Data& data = pkg::properties;
         initSubTag("option");
-        parse(mainCount, mainEnd, NULL, NULL);
-        DBG("\"%s\" count = %d \n", data.getTag(1), data.index()+2);
+        parse(startCount, endCount, NULL, NULL);
+        DBG("\"%s\" count = %d \n", data.getTag(1), data.index());
 
-        // Allocate structure
-        data.xmlOptions = (pkg_option_t *) calloc((data.index()+2),sizeof(pkg_option_t));
+        // Allocate structure (extra item for NULL terminator).
+        data.xmlOptions = (pkg_option_t *) calloc((data.index()+1),sizeof(pkg_option_t));
         if (!data.xmlOptions){
             DBG("populateGlobalOptions() calloc: %s\n", strerror(errno));
             return;
         }
         initSubTag("option");
-        parse(mainOptions, mainSubTagEnd, mainOptionsText, NULL);
+        parse(startOptions, endCount, textOptions, NULL);
 
     }
 
@@ -229,10 +171,10 @@ private:
     populateMenu(void){
         Data& data = pkg::properties;
         initSubTag("action");
-        parse(mainCount, mainEnd, NULL, NULL);
-        DBG("\"%s\" count = %d \n", data.getTag(1), data.index()+1);
-        // Allocate structures
-        data.xmlCmds = (pkg_command_t *) calloc(data.index()+2,sizeof(pkg_command_t));
+        parse(startCount, endCount, NULL, NULL);
+        DBG("\"%s\" count = %d \n", data.getTag(1), data.index());
+        // Allocate structures (extra item for NULL terminator).
+        data.xmlCmds = (pkg_command_t *) calloc(data.index()+1,sizeof(pkg_command_t));
         data.xmlMenuDefinitions = 
             (RodentMenuDefinition *)calloc(data.index()+2,sizeof(RodentMenuDefinition));
         if (!data.xmlOptions || !data.xmlMenuDefinitions){
@@ -240,7 +182,15 @@ private:
             return;
         }
         initSubTag("action");
-        parse(mainActions, mainSubTagEnd, mainActionsText, NULL);
+        parse(startActions, endCount, textActions, NULL);
+        // For each action, count options.
+        auto count = data.index();
+        data.setTag(0, "action");
+        for (auto i=0; i<count; i++){
+            initSubTag("option");
+            parse(startCount, endCount, NULL, NULL);
+            DBG("action %d: options=%d\n", i, data.index());
+        }
 
 /*
         // Allocate structures
@@ -279,20 +229,22 @@ private:
     }
 
     static void
-    mainActions (GMarkupParseContext * context,
+    startActions (GMarkupParseContext * context,
                     const gchar * elementName,
                     const gchar ** attributeNames, 
                     const gchar ** attributeValues, 
                     gpointer functionData, 
                     GError ** error) 
     {
-        TRACE ("mainStart -> %s\n",elementName); 
+        TRACE ("startActions -> %s\n",elementName); 
         Data& data = pkg::properties;
         if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
             TRACE("Gotcha: getTag(0)=%s\n", elementName);
             data.setStart(0);
+            data.push(elementName);
+            return;
         }  
-        if (data.getStart(0) &&  strcasecmp(data.getTag(1), elementName)==0){
+        if (data.atLevel() && data.getStart(0) &&  strcasecmp(data.getTag(1), elementName)==0){
             data.setStart(1);
             const gchar **p;
             const gchar **q;
@@ -326,14 +278,29 @@ private:
                 else if (strcasecmp(*p, "scroll_up")==0)
                     data.xmlCmds[data.index()].flags |= PKG_SCROLL_UP;
           }
+
+          // Process inner "options"
+          gchar buffer[2048];
+          memset(buffer, 0, 2048);
+          while (fgets(buffer, 255, data.input) && !feof(data.input)){
+            if (strstr(buffer,"/action")) break;
+            DBG("%s", buffer);
+            // here we need another processor to handle the following...
+            // process options
+            // process text
+          }
           // text field: data.[data.index()].hlp = g_strdup_printf("<b>%s %s</b>\n%s",q->pkg, (q->cmd)? q->cmd:"", value); 
             data.xmlCmds[data.index()].pkg_options = data.xmlOptions;
+            // We are done here. No need to push.
+            data.setStart(0);
+            return;
         }
+        data.push(elementName);
         return;
     }
 
    
-    static void mainActionsText (GMarkupParseContext *context,
+    static void textActions (GMarkupParseContext *context,
                               const gchar         *text,
                               gsize                text_len,
                               gpointer             functionData,
@@ -345,7 +312,7 @@ private:
             memcpy(buffer, text, text_len);
             g_strstrip(buffer);
             if (!strlen(buffer)) return;
-            DBG ("mainActionsText -> \"%s\"\n",buffer); 
+            TRACE ("mainActionsText -> \"%s\"\n",buffer); 
             data.xmlCmds[data.index()].hlp=g_strdup_printf("<b>%s %s</b>\n%s", 
 //                        "foo", "bar" , buffer);
               data.xmlCmds[data.index()].pkg, 
@@ -356,7 +323,7 @@ private:
     }
     
     static void
-    mainOptions (GMarkupParseContext * context,
+    startOptions (GMarkupParseContext * context,
                     const gchar * elementName,
                     const gchar ** attributeNames, 
                     const gchar ** attributeValues, 
@@ -368,14 +335,16 @@ private:
         if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
             TRACE("Gotcha: getTag(0)=%s\n", elementName);
             data.setStart(0);
+            data.push(elementName);
+            return;
         }  
-        if (data.getStart(0) &&  strcasecmp(data.getTag(1), elementName)==0){
+        if (data.atLevel() && data.getStart(0) &&  strcasecmp(data.getTag(1), elementName)==0){
             data.setStart(1);
             const gchar **p;
             const gchar **q;
             for (p=attributeNames, q=attributeValues;
                     p && *p; p++, q++){
-                TRACE("(%s: %d) %s = %s \n", data.getTag(1), data.index(), *p, *q);
+                DBG("(%s: %d) %s = %s \n", data.getTag(1), data.index(), *p, *q);
                 if (strcasecmp(*p, "loption")==0)
                     data.xmlOptions[data.index()].loption=g_strdup(*p);
                 if (strcasecmp(*p, "parameter")==0)
@@ -383,12 +352,12 @@ private:
                 if (strcasecmp(*p, "active")==0)
                     data.xmlOptions[data.index()].loption=g_strdup(*p);
           }
-
         }
+        data.push(elementName);
         return;
     }
     
-    static void mainOptionsText (GMarkupParseContext *context,
+    static void textOptions (GMarkupParseContext *context,
                               const gchar         *text,
                               gsize                text_len,
                               gpointer             functionData,
@@ -400,7 +369,7 @@ private:
             memcpy(buffer, text, text_len);
             g_strstrip(buffer);
             if (!strlen(buffer)) return;
-            TRACE ("mainText -> \"%s\"\n",buffer); 
+            DBG ("Text -> \"%s\"\n",buffer); 
             data.xmlOptions[data.index()].hlp=g_strdup_printf("<b>%s</b>\n%s", 
 //                        "foo", buffer);
                         data.xmlOptions[data.index()].loption, buffer);
@@ -408,23 +377,25 @@ private:
 
     }
 
-    static void mainSubTagEnd(GMarkupParseContext *context,
+ /*   static void endOptions(GMarkupParseContext *context,
                               const gchar         *elementName,
                               gpointer             functionData,
                               GError             **error){
         Data& data = pkg::properties;
+        data.pop();
         if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
             DBG ("mainEnd -> %s\n",elementName); 
             data.unsetStart(0);
         }
-        if (data.getStart(0) &&  strcasecmp(data.getTag(0), elementName)==0){
-            data.unsetStart(1);
+        auto currentElement = data.current();
+        if (currentElement && strcmp(currentElement,data.getTag(0)) == 0){
+            data.unsetStart(1);     
         }
          
-     }
+     }*/
     
     static void
-    mainCount (GMarkupParseContext * context,
+    startCount (GMarkupParseContext * context,
                     const gchar * elementName,
                     const gchar ** attributeNames, 
                     const gchar ** attributeValues, 
@@ -435,25 +406,35 @@ private:
         Data& data = pkg::properties;
         if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
             data.setStart(0);
+            data.push(elementName);
+            return;
         }
-        if (data.getStart(0) && data.getTag(1) && strcmp(data.getTag(1), elementName)==0){
-            TRACE("Gotcha: getTag(0)=%s\n", elementName);
+
+        if (data.atLevel() && data.getTag(1) && strcmp(data.getTag(1), elementName)==0){
+            TRACE("Gotcha(%d): current=%s, elementName=%s\n", data.index(), data.current(), elementName);
             data.setStart(1);
         }  
+        data.push(elementName);
         return;
     }
 
 
-    static void mainEnd(GMarkupParseContext *context,
+    static void endCount(GMarkupParseContext *context,
                               const gchar         *elementName,
                               gpointer             functionData,
                               GError             **error){
         Data& data = pkg::properties;
+        data.pop();
+
         if (data.getTag(0) && strcmp(data.getTag(0), elementName)==0){
-            DBG ("mainEnd -> %s\n",elementName); 
+            TRACE ("endCount -> %s\n",elementName); 
             data.unsetStart(0);
+            return;
         }
-         
+        if (!data.atLevel()) return;
+        if (data.getTag(1) && strcmp(data.getTag(1), elementName)==0){
+            data.unsetStart(1);     
+        }         
      }
     
    /* static void
@@ -929,7 +910,90 @@ public:
 
 
 };
+
+
+
 #endif
+
+
+
+template <class Type>
+class PkgBSD {
+    gchar *pkg_;
+    gchar *com_;
+    gchar *pkg_dbdir_;
+    gchar *pkg_cachedir_;  
+    gchar *portsdir_;
+          
+public:
+    PkgBSD(void) {
+        getDefaults();
+        //printDefaults();
+    }
+
+    const gchar *title(void){return "foo";}
+    const gchar *itemTitle(void){return "bar";}
+    void parseXML(void){
+        PkgPopUp<Type>::parseXMLfile("pkg_pkg.xml", com_);
+    }
+
+private:
+    // Get basic pkg program defaults.
+    void getDefaults(void){
+        pkg_ = g_find_program_in_path("pkg");
+        if (!pkg_) throw 1;
+        com_ = g_path_get_basename(pkg_);
+        pkg_cachedir_ = g_strdup("/var/cache/pkg");
+        portsdir_ = g_strdup("/usr/ports");
+
+        const gchar *e = getenv("PKG_DBDIR");
+        if (e && strlen(e) && g_file_test(e, G_FILE_TEST_IS_DIR)){
+           pkg_dbdir_ = g_strdup(e);
+        }
+        else pkg_dbdir_ = g_strdup("/var/db/pkg");
+        readPkfConf();
+    }
+
+    // Overwrite defaults with values in pkg.conf.
+    void readPkfConf() {
+        FILE *f = fopen("/usr/local/etc/pkg.conf", "r");
+            if (f) {
+                gchar line[256];
+                memset (line, 0, 256);
+                while (fgets(line, 255, f) && !feof(f)){
+                    g_strchug(line);
+                    if (*line == '#') continue;
+                    if (strchr(line, '\n'))*strchr(line, '\n') = 0;
+                    if (getParam(&pkg_dbdir_, line, "PKG_DB_DIR")) continue;
+                    if (getParam(&pkg_cachedir_, line, "PKG_CACHEDIR")) continue;
+                    if (getParam(&portsdir_, line, "PORTSDIR")) continue;
+                }
+                fclose(f);
+            }
+        }
+    
+    // Parse pkg.conf line for variable.
+    gboolean getParam(gchar **variable, const gchar *line, const gchar *identifier){
+        if (strncmp (line, identifier, strlen(identifier))==0){
+            g_free(*variable);
+            gchar **gg = g_strsplit(line, ":", -1);
+            *variable = g_strdup(gg[1]);
+            g_strstrip(*variable);
+            g_strfreev(gg);
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    void printDefaults(void){
+        DBG("pkg_ = %s\n", pkg_);
+        DBG("com_ = %s\n", com_);
+        DBG("pkg_dbdir_ = %s\n", pkg_dbdir_);
+        DBG("pkg_cachedir_ = %s\n", pkg_cachedir_);
+        DBG("portsdir_ = %s\n", portsdir_);
+    }
+};
+
 
 }
 #endif
