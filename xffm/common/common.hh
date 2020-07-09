@@ -6,6 +6,7 @@
 #include "run.hh"
 #include "gio.hh"
 #include "dnd.hh"
+#include "xml.hh"
 
 #include "tooltip.hh"
 #include "popup.hh"
