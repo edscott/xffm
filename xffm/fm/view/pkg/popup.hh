@@ -69,6 +69,10 @@ typedef struct pkg_command_t {
 
 } pkg_command_t;
 
+namespace PKG{
+    GList *parentList=NULL;
+    GList *nodeList=NULL;
+}
 
 
 template <class Type>
@@ -84,46 +88,166 @@ public:
 
     static void parseXMLfile(const gchar *xmlFile, const gchar *tag){
         auto xmlStructure = new(XML::XmlStructure)(xmlFile);
-        auto topNode = xmlStructure->topNode();
-        const gchar *data[]={"pkg", "option", NULL}; 
-        xmlStructure->sweep(topNode, process2, (void *)data);
+        populateStructures(xmlStructure, tag);
+
+       /* auto topNode = xmlStructure->topNode();
+        const gchar *data[]={tag, "option", NULL}; 
+        xmlStructure->sweep(topNode, processOptions, (void *)data);
         const gchar *data2[]={"action", "option", NULL}; 
-        xmlStructure->sweep(topNode, process3, (void *)data2);
+        xmlStructure->sweep(topNode, processActions, (void *)data2);*/
     }
+private:
 
-    static void process2(XML::XmlNode *node, void *data){
-        TRACE("process2: %s (%d)\n", node->name, node->level);
-        auto p = node->attNames;
-        auto q = node->attValues;
-        
-        auto parent = node->parent;
-        if (!parent) return;
-        if (!parent->name) return;
-        auto tags = (gchar **)data;
-        if (strcmp(parent->name, tags[0])) return;
-        if (strcmp(node->name, tags[1])) return;
-        fprintf(stderr, "***%d) %s/%s ( ", node->level, parent->name, node->name); 
-        
-        for (;p && *p; p++, q++){
-            fprintf(stderr, "%s=%s ", *p, *q);
+    static void 
+    initLists(XML::XmlStructure *xmlStructure){
+        if (PKG::parentList) {
+            g_list_free(PKG::parentList);
+            PKG::parentList = NULL;
         }
-        fprintf(stderr, ")\n");
-        
+        if (PKG::nodeList) {
+            g_list_free(PKG::nodeList);
+            PKG::nodeList = NULL;
+        }
+        xmlStructure->initSweepCount();
     }
 
-    static void process3(XML::XmlNode *node, void *data){
-        TRACE("process3: %s (%d)\n", node->name, node->level);
-        
-        auto parent = node->parent;
-        if (!parent) return;
-        if (!parent->name) return;
-        auto tags = (gchar **)data;
-        if (strcmp(parent->name, tags[0])) return;
-        if (strcmp(node->name, tags[1])) return;
+    static gint 
+    countSweepItems(XML::XmlStructure *xmlStructure, void *data){
+        initLists(xmlStructure);
+        auto topNode = xmlStructure->topNode();
+        xmlStructure->sweep(topNode, countItems, data);
 
-        fprintf(stderr, "***%d) %s/%s/%s ( ", node->level, parent->parent->name, parent->name, node->name); 
-        auto p = parent->attNames;
-        auto q = parent->attValues;
+        auto tags = (const gchar **)data;
+        DBG("countSweepItems(): %s/%s count = %d/%d parents = %d nodelist=%d\n",
+                tags[0], tags[1],
+                xmlStructure->sweepCount(),
+                XML::xml.items,
+                g_list_length(PKG::parentList),
+                g_list_length(PKG::nodeList));
+        return xmlStructure->sweepCount();
+    }
+
+    static gint 
+    countChildlessItems(XML::XmlStructure *xmlStructure, void *data){
+        initLists(xmlStructure);
+        auto topNode = xmlStructure->topNode();
+        xmlStructure->sweep(topNode, countChildless, data);
+
+        auto tags = (const gchar **)data;
+        DBG("countChildlessItems(): %s/%s count = %d/%d parents = %d nodelist=%d\n",
+                tags[0], tags[1],
+                xmlStructure->sweepCount(),
+                XML::xml.items,
+                g_list_length(PKG::parentList),
+                g_list_length(PKG::nodeList));
+        return xmlStructure->sweepCount();
+    }
+
+    static void 
+    populateStructures(XML::XmlStructure *xmlStructure, const gchar *tag){
+        //auto topNode = xmlStructure->topNode();
+        gint count;
+        
+        const gchar *data[]={tag, "option", NULL};
+        //count = countSweepItems(xmlStructure, (void *)data);
+        count = countChildlessItems(xmlStructure, (void *)data);
+
+        auto pkgOptions = globalOptions(PKG::nodeList);
+
+        const gchar *data2[]={tag, "action", NULL}; 
+        auto countActions = countSweepItems(xmlStructure, (void *)data2);
+        //count = countChildlessItems(xmlStructure, (void *)data2);
+
+        const gchar *data3[]={"action", "option", NULL}; 
+        count = countSweepItems(xmlStructure, (void *)data3);
+        auto countActionParents = g_list_length(PKG::parentList);
+
+
+    }
+
+    static pkg_option_t * 
+    globalOptions(GList *list){
+        // Allocate structure
+        auto count = g_list_length(list);
+        auto xmlOptions = (pkg_option_t *) calloc((count+1), sizeof(pkg_option_t));
+        if (!xmlOptions){
+            DBG("globalOptions() calloc failed: %s\n", strerror(errno));
+            throw 1;
+        }
+        auto s = xmlOptions;
+        for (auto l=list; l && l->data; l=l->next, s++){
+            DBG("list data=%p\n", l->data);
+            auto node = (XML::XmlNode *)l->data;
+            auto p = node->attNames;
+            auto q = node->attValues;
+            for (;p && *p; p++, q++){
+                if (strcmp(*p, "loption")==0) s->loption = g_strdup(*q);
+                else if (strcmp(*p, "parameter")==0) s->parameter = g_strdup(*q);
+                else if (strcmp(*p, "active")==0) s->active = g_strdup(*q);
+            }
+            if (node->text){
+                s->hlp = g_strdup_printf("<b>%s</b>\n", *q);
+                DBG("text(%s): %s\n", s->loption, node->text);
+           }
+        }
+        return xmlOptions;
+    }
+
+
+
+    // check for childless nodes
+    static gboolean
+    checkLevel1(XML::XmlNode *node, const gchar **tags){
+        if (!checkLevel2(node, tags)) return FALSE;
+        // Childless:
+        if (node->child) return FALSE;
+
+        TRACE("parent: %s (%p) childless %s %p\n",
+                node->parent->name,  node->parent,
+                node->name,  node);
+        return TRUE;
+    }
+
+    static gboolean
+    checkLevel2(XML::XmlNode *node, const gchar **tags){
+        if (!node || !tags) return FALSE;
+        if (!node->parent || !node->parent->name) return FALSE;
+        if (strcmp(node->parent->name, tags[0])) return FALSE;
+        if (strcmp(node->name, tags[1])) return FALSE;
+        TRACE("parent: %s (%p)\n",node->parent->name,  node->parent);
+        if (!PKG::parentList || !g_list_find (PKG::parentList, node->parent)){
+            PKG::parentList = g_list_append(PKG::parentList, node->parent);
+        }
+        return TRUE;
+    }
+
+    static gboolean countItems(XML::XmlNode *node, void *data){
+        auto tags = (const gchar **)data;
+        if (!checkLevel2(node, tags)) return FALSE;
+        //printNode(node);
+        PKG::nodeList = g_list_append(PKG::nodeList, node);
+
+        return TRUE;        
+    }
+
+    static gboolean countChildless(XML::XmlNode *node, void *data){
+        auto tags = (const gchar **)data;
+        if (!checkLevel1(node, tags)) return FALSE;
+        //printNode(node);
+        PKG::nodeList = g_list_append(PKG::nodeList, node);
+        DBG("appended %p to nodelist\n", node);
+
+        return TRUE;        
+    }
+
+    static void
+    printNode(XML::XmlNode *node){
+        fprintf(stderr, "***%d) %s/%s/%s %p( ", 
+                node->level, 
+                node->parent->parent->name, 
+                node->parent->name, node->name, node); 
+        auto p = node->parent->attNames;
+        auto q = node->parent->attValues;
         for (;p && *p; p++, q++){
             fprintf(stderr, "%s=%s ", *p, *q);
         }
@@ -135,7 +259,48 @@ public:
             fprintf(stderr, "%s=%s ", *p, *q);
         }
         fprintf(stderr, ")\n");
+    }
+
+    static gboolean processOptions(XML::XmlNode *node, void *data){
+        auto tags = (const gchar **)data;
+        if (!checkLevel2(node, tags)) return FALSE;
+
+        TRACE("processOptions: %s (%d)\n", node->name, node->level);
+        auto p = node->attNames;
+        auto q = node->attValues;
+        fprintf(stderr, "***%d) %s/%s ( ", 
+                node->level, node->parent->name, node->name); 
         
+        for (;p && *p; p++, q++){
+            fprintf(stderr, "%s=%s ", *p, *q);
+        }
+        fprintf(stderr, ")\n");
+        return TRUE;
+    }
+
+    static gboolean processActions(XML::XmlNode *node, void *data){
+        TRACE("process3: %s (%d)\n", node->name, node->level);
+        auto tags = (const gchar **)data;
+        if (!checkLevel2(node, tags)) return FALSE;
+
+        fprintf(stderr, "***%d) %s/%s/%s ( ", 
+                node->level, 
+                node->parent->parent->name, 
+                node->parent->name, node->name); 
+        auto p = node->parent->attNames;
+        auto q = node->parent->attValues;
+        for (;p && *p; p++, q++){
+            fprintf(stderr, "%s=%s ", *p, *q);
+        }
+        fprintf(stderr, ")\n( ");
+       
+        p = node->attNames;
+        q = node->attValues;
+        for (;p && *p; p++, q++){
+            fprintf(stderr, "%s=%s ", *p, *q);
+        }
+        fprintf(stderr, ")\n");
+        return TRUE;
     }
 
     void addMenuTitle(GtkMenu *menu, const gchar *text){

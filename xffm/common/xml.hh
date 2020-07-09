@@ -53,13 +53,13 @@ public:
 class Xml{
     FILE *input_;
 public:
-    gint items_;
+    gint items;
 
     gint level;
     XmlNode **lastNode;
     XmlNode *topNode;
 
-    Xml(void): level(-1), items_(0){
+    Xml(void): level(-1), items(0){
         lastNode = (XmlNode **)calloc(256, sizeof(XmlNode *));
         
         if (!lastNode) throw 1;
@@ -126,13 +126,15 @@ public:
 }; // class Xml<class Type>
 Xml xml;
 
-
-
 class XmlStructure {
     GSList *nodeList;
+    gint sweepCount_;
 
 public:
-    gint sweepItems;
+    void initSweepCount(void){sweepCount_=0; }
+    gint sweepCount(void){return sweepCount_;}
+//    gint items(void){return XML::xml.items;}
+
     XmlNode *topNode(void){
         Xml& xml = XML::xml;
         return xml.topNode;
@@ -144,23 +146,27 @@ public:
             DBG("parseXMLfile() initProperties failed.\n");
             return;
         }
-        xml.parse(startXML,endXML);
+        xml.parse(startXML, endXML, textXML);
         xml.close();
-        DBG("XmlStructure:: total source items=%d\n", xml.items_);
-        sweepItems=0;
+        DBG("XmlStructure:: total source items=%d\n", xml.items);
+        sweepCount_=0;
     }
     ~XmlStructure(void){
 
     }
         //XmlNode *node = topNode();
 
+    
     void sweep(XmlNode *node, 
-            void (*function)(XmlNode *, void *data)=NULL,
+            gboolean (*function)(XmlNode *, void *data)=NULL,
             void *data=NULL)
     {
-        sweepItems++;
+        
         TRACE("sweep: %s (%d)\n", node->name, node->level);
-        if (function) (*function)(node, data);
+        if (function) {
+            auto result = (*function)(node, data);
+            if (result) sweepCount_++;
+        }
         if (node->child) sweep(node->child, function, data);
         if (node->next) sweep(node->next, function, data);
     }
@@ -176,30 +182,33 @@ private:
                     GError ** error) 
     {
         Xml& xml = XML::xml;
-        xml.items_++;
+        xml.items++;
         
-        xml.level++;
-        if (xml.level > 255){
+        if (xml.level > 254){
             DBG("Error: Xml nesting level limited to 256.\n");
             throw 1;
         }
         TRACE ("startXML -> %s (%d)\n",elementName, xml.level); 
         auto node = new(XML::XmlNode)(xml.level, elementName, attributeNames, attributeValues);
 
-        if (((void *)(xml.lastNode[xml.level]))==NULL) {
-            // First child detected. Second child will be sibling of the first.
-            if (xml.level - 1 >= 0){
-                xml.lastNode[xml.level-1]->child = node;
-                node->parent = xml.lastNode[xml.level-1];
-            } else {
-                xml.topNode = node;
-                node->parent = NULL;
-            }
-        } else {
-            // Node is a sibling.
-            xml.lastNode[xml.level]->next = node;
-            node->parent = xml.lastNode[xml.level]->parent;
+        if (xml.level < 0) {
+            xml.topNode = node;
+        }
+        xml.level++;
 
+        // Parent is last node at previous level.
+        if (xml.topNode == node) {
+            node->parent = NULL;
+        } else {
+            node->parent = xml.lastNode[xml.level-1];
+        }
+
+        if (node->parent && !node->parent->child) {
+            // First child.
+            node->parent->child = node;
+        } else if (node != xml.topNode ){
+            // Sibling.
+            xml.lastNode[xml.level]->next = node;
         }
         xml.lastNode[xml.level] = node;
         return;
@@ -213,19 +222,23 @@ private:
         Xml& xml = XML::xml;
         TRACE ("endXML -> %s (%d)\n",elementName, xml.level); 
         xml.level--;
-
      }
-     
  
     /* text is not nul-terminated */
-    static void mainText (GMarkupParseContext *context,
+    static void textXML (GMarkupParseContext *context,
                               const gchar         *text,
                               gsize                text_len,
                               gpointer             functionData,
                               GError             **error){
-        DBG ("mainText -> %s\n",text); 
-
+        Xml& xml = XML::xml;
+        // Text not null terminated, so move to terminated buffer.
+        gchar buffer[text_len+1];
+        memset(buffer, 0, text_len+1);
+        memcpy(buffer, text, text_len);
+        auto node = xml.lastNode[xml.level];
+        node->text = g_strdup(buffer);
     }
+
       /* text is not nul-terminated. */
     static void mainPassthrough (GMarkupParseContext *context,
                               const gchar         *passthrough_text,
