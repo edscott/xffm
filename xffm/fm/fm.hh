@@ -9,7 +9,6 @@ namespace xf {
     static GtkMenu *localItemPopUp=NULL;
     static GtkMenu *rootPopUp=NULL;
     static GtkMenu *rootItemPopUp=NULL;
-    static GtkMenu *pkgItemPopUp=NULL;
 
 }
 

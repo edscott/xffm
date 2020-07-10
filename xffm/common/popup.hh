@@ -6,11 +6,18 @@ template <class Type>
 class Popup{
     GtkMenu *menu_;
 public:
+    Popup(menuItem2_t *item){
+        DBG("Popup constructor\n" );
+        menu_ = createMenu(item);
+        g_object_set_data(G_OBJECT(menu_), "popup", this);
+        DBG("Popup constructed\n" );
+    }
     Popup(menuItem_t *item, const gchar *key[]=NULL, const gchar *keyIcon[]=NULL, gboolean small=FALSE){
+        DBG("Popup constructor\n" );
         menu_ = createMenu(item);
         decorateItems(menu_, key, keyIcon, small);
         g_object_set_data(G_OBJECT(menu_), "popup", this);
-        TRACE("Popup constructed\n" );
+        DBG("Popup constructed\n" );
     }
 
     GtkMenu *menu(void){ return menu_;}
@@ -168,16 +175,55 @@ public:
         gtk_widget_show (GTK_WIDGET(menu));
         return menu;
     }
+
+    static GtkMenu *
+    createMenu(menuItem2_t *item){
+        TRACE("createMenu\n" );
+        auto menu = GTK_MENU(gtk_menu_new());
+        // Create title element
+        GtkWidget *title = Gtk<Type>::menu_item_new(NULL, ""); 
+        gtk_widget_set_sensitive(title, TRUE);
+        gtk_widget_show (title);
+        g_object_set_data(G_OBJECT(menu), "title", title);
+        gtk_container_add (GTK_CONTAINER (menu), title);
+        auto p = item;
+        for (gint i=0;p && p->label; p++,i++){
+            GtkWidget *v;
+            v = Gtk<Type>::menu_item_new(NULL, _(p->label));
+            
+            g_object_set_data(G_OBJECT(menu), p->label, v);
+            gtk_widget_set_sensitive(v, TRUE);
+            gtk_container_add (GTK_CONTAINER (menu), v);
+            g_signal_connect ((gpointer) v, "activate", 
+                    (p->callback)?MENUITEM_CALLBACK (p->callback):MENUITEM_CALLBACK (noop), 
+                    (p->callbackData)?p->callbackData:(void *) menu);
+
+            gchar *markup;
+            markup = g_strdup_printf("<span size=\"small\">%s</span>", _(p->label));
+            Gtk<Type>::menu_item_content(GTK_MENU_ITEM(v), p->icon, markup, -16);
+      
+            g_free(markup);
+            gtk_widget_show (v);
+        }
+        gtk_widget_show (GTK_WIDGET(menu));
+        return menu;
+    }
 private:
 
     static void
     decorateItems(GtkMenu *menu, const gchar *key[], const gchar *keyIcon[], gboolean small){
-        TRACE("decorateItems, menu = %p\n", menu );
-        if (!key || !keyIcon) return;
+        DBG("decorateItems, menu = %p\n", menu );
+        if (!key || !keyIcon) {
+            DBG("!key || !keyIcon\n");
+            return;
+        }
         gint i=0;
-        for (auto k=key; k && key[i] && keyIcon[i]; k++, i++){
+        for (auto k=key; key[i] && keyIcon[i]; k++, i++){
             auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
-            if (!mItem) continue;
+            if (!mItem) {
+                DBG("g_object_get_data(G_OBJECT(menu), \"%s\") failed.\n", *k);
+                continue;
+            }
             gchar *markup;
             if (small) {
                 markup = g_strdup_printf("<span size=\"small\">%s</span>", _(*k));

@@ -94,7 +94,8 @@ namespace PKG{
     GList *nodeList=NULL;
     GtkMenu *pkgPopUp=NULL;
     GtkMenu *pkgItemPopUp=NULL;
-    
+    menuItem2_t *mainItems=NULL;
+    menuItem2_t *specificItems=NULL;
     RodentMenuDefinition *xml_menu_definitions = NULL;
 }
 
@@ -114,7 +115,7 @@ public:
         auto xmlStructure = new(XML::XmlStructure)(xmlFile);
         populateStructures(xmlStructure, tag);
         // We can now free XML source tree.
-        delete(xmlStructure);
+        //delete(xmlStructure);
 
         // create popup menus.
 
@@ -208,7 +209,7 @@ private:
                 count++;
                 node = node->next;
             } while (node);
-            DBG("%s %s has %d options.\n", s->pkg, s->cmd, count);
+            TRACE("%s %s has %d options.\n", s->pkg, s->cmd, count);
             s->cmd_options = (pkg_option_t *)calloc(count+1, sizeof(pkg_option_t));
             if (!s->cmd_options){
                 DBG("processActionOptions() calloc failed: %s\n", strerror(errno));
@@ -228,21 +229,24 @@ private:
     }
 
     static pkg_command_t *globalActions(GList *list){
+        TRACE("globalActions...\n");
         auto count = g_list_length(list);
         auto xmlActions = (pkg_command_t *) calloc(count+1, sizeof(pkg_command_t));
-        PKG::xml_menu_definitions = 
-            (RodentMenuDefinition *)calloc((count+1),sizeof(RodentMenuDefinition));             if (!xmlActions || !PKG::xml_menu_definitions){
+        if (!xmlActions){
             DBG("populateStructures():: calloc: %s\n", strerror(errno));
             throw 1;
         }
+
+        (xmlActions+count)->pkg=NULL;
         auto s = xmlActions;
-        auto t = PKG::xml_menu_definitions;
-        for (auto l=list; l && l->data; l=l->next, s++, t++){
+        for (auto l=list; l && l->data; l=l->next, s++){
+            //memset(s, 0, sizeof(pkg_command_t));//XXX
+            //s->string = NULL;//XXX
             TRACE("list data=%p\n", l->data);
             auto node = (XML::XmlNode *)l->data;
             auto p = node->attNames;
             auto q = node->attValues;
-            for (;p && *p; p++, q++){
+            for (p = node->attNames;p && *p; p++, q++){
                 TRACE("actionOption: %s->%s\n", *p, *q);
                 if (strcmp(*p, "pkg")==0) s->pkg = g_strdup(*q);
                 if (strcmp(*p, "parameter")==0) s->parameter = g_strdup(*q);
@@ -256,11 +260,13 @@ private:
                 if (strcmp(*p, "no_version")==0) s->flags |= PKG_NO_VERSION;
                 if (strcmp(*p, "scroll_up")==0) s->flags |= PKG_SCROLL_UP;
                 
-                if (strcmp(*p, "protected")==0) s->flags |= PKG_ACCESS_WRITE;
-                else s->flags |= PKG_ACCESS_READ;
+                if (strcmp(*p, "protected")==0){
+                    s->flags |= PKG_ACCESS_WRITE;
+                } else s->flags |= PKG_ACCESS_READ;
 
                 if (strcmp(*p, "string")==0) s->string = g_strdup(*q);
-                else s->string = g_strdup_printf("%s%s%s",s->pkg, (s->cmd)?" ":"",(s->cmd)?s->cmd:"");
+                //else s->string = g_strdup_printf("%s%s%s",s->pkg, (s->cmd)?" ":"",(s->cmd)?s->cmd:"");
+                TRACE("string: %s\n", s->string?s->string:"null");
 
             }
             if (node->text){
@@ -269,28 +275,46 @@ private:
                 TRACE("text(%s %s): %s\n", 
                         s->pkg, (s->cmd)?s->cmd:"", node->text);
             }
-            // Now we fill in the RodentMenuDefinition structures.
-            // (only if "string" is defined)
-            if (s->string){ 
-                t->type = MENUITEM_TYPE;
-                t->parent_id = "pkg_menu_menu";
-                t->id = g_strdup_printf("pkg_%s", s->cmd?s->cmd:"");
-                TRACE("menu item id: %s\n", t->id);
-                t->callback.data = s;
-
-                t->callback.string = s->string;
-                TRACE("menu string = %s \n", t->callback.string);
-                t->callback.icon = s->icon;
-
-                // XXX Pending: create class RodentPkg or namespace or both.
-                //t->callback.function = RodentPkg::process_cmd; 		
-                //t->callback.function = process_cmd; 		
-                // unused items:
-                t->callback.function_id = 0x2001;
-            }
-            
+            TRACE("set..%p: %s %s\n", s, s->pkg, (s->cmd)?s->cmd:"");
         }
 
+
+        // Only show items with defined icon.
+        GList *stringList = NULL;
+        for(s = xmlActions; s->pkg != NULL; s++){
+            if (s->icon){
+                stringList = g_list_append(stringList, s);
+            }
+
+        }
+        PKG::mainItems =(menuItem2_t *)calloc(g_list_length(stringList)+1, sizeof(menuItem2_t));
+        if (!PKG::mainItems){
+            DBG("globalActions(): calloc: %s\n", strerror(errno));
+            throw(1);
+        }
+        
+        auto t = PKG::mainItems;
+
+        for(auto l = stringList; l && l->data; l = l->next){
+            auto ss = (pkg_command_t *)l->data;
+            if (ss->cmd) {
+                t->label=g_strdup_printf("  <i>%s %s</i>", ss->pkg, ss->cmd);
+            } else {
+                t->label=g_strdup_printf("<b>%s</b>", ss->pkg);
+            }
+            TRACE("label = %s\n", t->label);
+            t->callback=(void *)MenuPopoverSignals<Type>::noop;
+            t->callbackData=ss;
+            t->icon = (ss->icon)?ss->icon:NULL;
+            t++;
+        }
+        g_list_free(stringList);
+
+        DBG("creating Popup<Type>...\n");
+        auto popup = new(Popup<Type>)(PKG::mainItems);
+        popup->changeTitle( _("Software Updater"), PKG_ICON);
+        PKG::pkgPopUp = popup->menu();
+        gtk_widget_show_all(GTK_WIDGET(PKG::pkgPopUp));
 
 
         return xmlActions;

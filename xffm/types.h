@@ -180,6 +180,13 @@ typedef struct menuItem_t {
     const gchar *toggleID;
 }menuItem_t;
 
+typedef struct menuItem2_t {
+    const gchar *label;
+    const gchar *icon;
+    void *callback;
+    void *callbackData;
+}menuItem2_t;
+
 typedef struct radio_t {
     GtkBox *box;
     GtkToggleButton *toggle[5];
