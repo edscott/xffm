@@ -60,12 +60,12 @@ typedef struct pkg_command_t {
     gchar *pkg;     // pkg command 
     gchar *parameter;
     gchar *cmd;     // pkg action
-    pkg_option_t *pkg_options;
-    pkg_option_t *cmd_options;
-    gchar *hlp;     // tooltip help
     gchar *argument;
     gchar *string;
     gchar *icon;
+    gchar *hlp;     // tooltip help
+    pkg_option_t *pkg_options;
+    pkg_option_t *cmd_options;
 
 } pkg_command_t;
 
@@ -151,18 +151,101 @@ private:
         const gchar *data[]={tag, "option", NULL};
         //count = countSweepItems(xmlStructure, (void *)data);
         count = countChildlessItems(xmlStructure, (void *)data);
-
         auto pkgOptions = globalOptions(PKG::nodeList);
 
         const gchar *data2[]={tag, "action", NULL}; 
-        auto countActions = countSweepItems(xmlStructure, (void *)data2);
-        //count = countChildlessItems(xmlStructure, (void *)data2);
+        auto countActions = countSweepItems(xmlStructure,(void *)data2);
+        auto pkgActions = globalActions(PKG::nodeList);
 
+        processActionOptions(PKG::nodeList, pkgActions);
+        
         const gchar *data3[]={"action", "option", NULL}; 
         count = countSweepItems(xmlStructure, (void *)data3);
         auto countActionParents = g_list_length(PKG::parentList);
 
 
+
+    }
+        
+    // emerge has no action options.
+    static void
+    processActionOptions(GList *list, pkg_command_t *xmlActions){
+        auto s = xmlActions;
+        for (auto l=list; l && l->data; l=l->next, s++){
+            auto parent = (XML::XmlNode *)l->data;
+            if (parent->child == NULL){
+                TRACE("%s %s has no options.\n", s->pkg, s->cmd);
+                continue;
+            }
+            TRACE("%s %s ...\n", s->pkg, s->cmd);
+            auto node = parent->child;
+            gint count = 0;
+            do { 
+                count++;
+                node = node->next;
+            } while (node);
+            DBG("%s %s has %d options.\n", s->pkg, s->cmd, count);
+            s->cmd_options = (pkg_option_t *)calloc(count+1, sizeof(pkg_option_t));
+            if (!s->cmd_options){
+                DBG("processActionOptions() calloc failed: %s\n", strerror(errno));
+                throw 1;
+            }
+            node = parent->child;
+            auto t = s->cmd_options;
+            do {
+                optionParse(node, t);
+                node = node->next;
+                t++;
+            } while (node);
+
+
+
+        }
+
+
+    }
+    static pkg_command_t *globalActions(GList *list){
+        auto count = g_list_length(list);
+        auto xmlActions = (pkg_command_t *) calloc(count+1, sizeof(pkg_command_t));
+        if (!xmlActions){
+            DBG("populateStructures():: calloc: %s\n", strerror(errno));
+            throw 1;
+        }
+        auto s = xmlActions;
+        for (auto l=list; l && l->data; l=l->next, s++){
+            TRACE("list data=%p\n", l->data);
+            auto node = (XML::XmlNode *)l->data;
+            auto p = node->attNames;
+            auto q = node->attValues;
+            for (;p && *p; p++, q++){
+                TRACE("actionOption: %s->%s\n", *p, *q);
+                if (strcmp(*p, "pkg")==0) s->pkg = g_strdup(*q);
+                if (strcmp(*p, "parameter")==0) s->parameter = g_strdup(*q);
+                if (strcmp(*p, "cmd")==0) s->cmd = g_strdup(*q);
+                if (strcmp(*p, "argument")==0) s->argument = g_strdup(*q);
+                if (strcmp(*p, "icon")==0) s->icon = g_strdup(*q);
+
+                if (strcmp(*p, "local")==0) s->flags |= PKG_LOCAL_SELECTION;
+                if (strcmp(*p, "remote")==0) s->flags |= PKG_REMOTE_SELECTION;
+                if (strcmp(*p, "no_selection")==0) s->flags |= PKG_NO_SELECTION;
+                if (strcmp(*p, "no_version")==0) s->flags |= PKG_NO_VERSION;
+                if (strcmp(*p, "scroll_up")==0) s->flags |= PKG_SCROLL_UP;
+                
+                if (strcmp(*p, "protected")==0) s->flags |= PKG_ACCESS_WRITE;
+                else s->flags |= PKG_ACCESS_READ;
+
+                if (strcmp(*p, "string")==0) s->string = g_strdup(*q);
+                else s->string = g_strdup_printf("%s%s%s",s->pkg, (s->cmd)?" ":"",(s->cmd)?s->cmd:"");
+
+            }
+            if (node->text){
+                s->hlp = g_strdup_printf("<b>%s %s</b>\n%s", 
+                        s->pkg, (s->cmd)?s->cmd:"",node->text);
+                TRACE("text(%s %s): %s\n", 
+                        s->pkg, (s->cmd)?s->cmd:"", node->text);
+           }
+        }
+        return xmlActions;
     }
 
     static pkg_option_t * 
@@ -176,22 +259,28 @@ private:
         }
         auto s = xmlOptions;
         for (auto l=list; l && l->data; l=l->next, s++){
-            DBG("list data=%p\n", l->data);
+            TRACE("list data=%p\n", l->data);
             auto node = (XML::XmlNode *)l->data;
-            auto p = node->attNames;
-            auto q = node->attValues;
-            for (;p && *p; p++, q++){
-                if (strcmp(*p, "loption")==0) s->loption = g_strdup(*q);
-                else if (strcmp(*p, "parameter")==0) s->parameter = g_strdup(*q);
-                else if (strcmp(*p, "active")==0) s->active = g_strdup(*q);
-            }
-            if (node->text){
-                s->hlp = g_strdup_printf("<b>%s</b>\n", *q);
-                DBG("text(%s): %s\n", s->loption, node->text);
-           }
+            optionParse(node, s);
         }
         return xmlOptions;
     }
+
+    static void
+    optionParse(XML::XmlNode *node, pkg_option_t *s){
+        auto p = node->attNames;
+        auto q = node->attValues;
+        for (;p && *p; p++, q++){
+            if (strcmp(*p, "loption")==0) s->loption = g_strdup(*q);
+            else if (strcmp(*p, "parameter")==0) s->parameter = g_strdup(*q);
+            else if (strcmp(*p, "active")==0) s->active = g_strdup(*q);
+        }
+        if (node->text){
+            s->hlp = g_strdup_printf("<b>%s</b>\n", *q);
+            TRACE("text(%s): %s\n", s->loption, node->text);
+       }
+    }
+
 
 
 
@@ -235,7 +324,7 @@ private:
         if (!checkLevel1(node, tags)) return FALSE;
         //printNode(node);
         PKG::nodeList = g_list_append(PKG::nodeList, node);
-        DBG("appended %p to nodelist\n", node);
+        TRACE("appended %p to nodelist\n", node);
 
         return TRUE;        
     }
