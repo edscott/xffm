@@ -69,9 +69,33 @@ typedef struct pkg_command_t {
 
 } pkg_command_t;
 
+typedef struct RodentCallback {
+    gint function_id;
+    const gchar *string;
+    const gchar *icon;
+    gpointer function;
+    gpointer data;
+    guint key; 
+    guint mask; 
+    gint type;
+}RodentCallback;
+
+
+typedef struct RodentMenuDefinition{
+    gint type;
+    const gchar *parent_id;
+    const gchar *id;
+    RodentCallback callback;
+} RodentMenuDefinition;
+
+
 namespace PKG{
     GList *parentList=NULL;
     GList *nodeList=NULL;
+    GtkMenu *pkgPopUp=NULL;
+    GtkMenu *pkgItemPopUp=NULL;
+    
+    RodentMenuDefinition *xml_menu_definitions = NULL;
 }
 
 
@@ -89,12 +113,12 @@ public:
     static void parseXMLfile(const gchar *xmlFile, const gchar *tag){
         auto xmlStructure = new(XML::XmlStructure)(xmlFile);
         populateStructures(xmlStructure, tag);
+        // We can now free XML source tree.
+        delete(xmlStructure);
 
-       /* auto topNode = xmlStructure->topNode();
-        const gchar *data[]={tag, "option", NULL}; 
-        xmlStructure->sweep(topNode, processOptions, (void *)data);
-        const gchar *data2[]={"action", "option", NULL}; 
-        xmlStructure->sweep(topNode, processActions, (void *)data2);*/
+        // create popup menus.
+
+
     }
 private:
 
@@ -201,18 +225,19 @@ private:
 
 
         }
-
-
     }
+
     static pkg_command_t *globalActions(GList *list){
         auto count = g_list_length(list);
         auto xmlActions = (pkg_command_t *) calloc(count+1, sizeof(pkg_command_t));
-        if (!xmlActions){
+        PKG::xml_menu_definitions = 
+            (RodentMenuDefinition *)calloc((count+1),sizeof(RodentMenuDefinition));             if (!xmlActions || !PKG::xml_menu_definitions){
             DBG("populateStructures():: calloc: %s\n", strerror(errno));
             throw 1;
         }
         auto s = xmlActions;
-        for (auto l=list; l && l->data; l=l->next, s++){
+        auto t = PKG::xml_menu_definitions;
+        for (auto l=list; l && l->data; l=l->next, s++, t++){
             TRACE("list data=%p\n", l->data);
             auto node = (XML::XmlNode *)l->data;
             auto p = node->attNames;
@@ -243,8 +268,31 @@ private:
                         s->pkg, (s->cmd)?s->cmd:"",node->text);
                 TRACE("text(%s %s): %s\n", 
                         s->pkg, (s->cmd)?s->cmd:"", node->text);
-           }
+            }
+            // Now we fill in the RodentMenuDefinition structures.
+            // (only if "string" is defined)
+            if (s->string){ 
+                t->type = MENUITEM_TYPE;
+                t->parent_id = "pkg_menu_menu";
+                t->id = g_strdup_printf("pkg_%s", s->cmd?s->cmd:"");
+                TRACE("menu item id: %s\n", t->id);
+                t->callback.data = s;
+
+                t->callback.string = s->string;
+                TRACE("menu string = %s \n", t->callback.string);
+                t->callback.icon = s->icon;
+
+                // XXX Pending: create class RodentPkg or namespace or both.
+                //t->callback.function = RodentPkg::process_cmd; 		
+                //t->callback.function = process_cmd; 		
+                // unused items:
+                t->callback.function_id = 0x2001;
+            }
+            
         }
+
+
+
         return xmlActions;
     }
 
@@ -280,9 +328,6 @@ private:
             TRACE("text(%s): %s\n", s->loption, node->text);
        }
     }
-
-
-
 
     // check for childless nodes
     static gboolean
@@ -406,27 +451,37 @@ private:
 
 template <class Type>
 GtkMenu *PkgPopUp<Type>::popUp(Type *type){
-    if (!pkgPopUp) {
-        pkgPopUp = GTK_MENU(gtk_menu_new()); 
-        addMenuTitle(pkgPopUp, type->title());
+    if (!PKG::pkgPopUp) {
+        PKG::pkgPopUp = GTK_MENU(gtk_menu_new()); 
+        addMenuTitle(PKG::pkgPopUp, type->title());
+        //type->parseXML(); // implied with PkgPopUp<Type>::popUpItem()
     }
-    return pkgPopUp;
+    auto view = Fm<Type>::getCurrentView();
+    g_object_set_data(G_OBJECT(PKG::pkgPopUp), "baseModel", (void *)view);
+    g_object_set_data(G_OBJECT(PKG::pkgPopUp), "view", (void *)view);  
+    DBG("pkgItemPopUp=%p\n", PKG::pkgPopUp);
+    return PKG::pkgPopUp;
 }
 
 template <class Type>
 GtkMenu *PkgPopUp<Type>::popUpItem(Type *type){
-    if (!pkgItemPopUp) {
-        pkgItemPopUp = GTK_MENU(gtk_menu_new());
-        addMenuTitle(pkgItemPopUp, type->itemTitle());
+    // when this is created, nonItem is also created.
+    if (!PKG::pkgItemPopUp) {
+        PKG::pkgItemPopUp = GTK_MENU(gtk_menu_new());
+        addMenuTitle(PKG::pkgItemPopUp, type->itemTitle());
         type->parseXML();
     }
-    DBG("pkgItemPopUp=%p\n", pkgItemPopUp);
-    return pkgItemPopUp;
+
+    auto view = Fm<Type>::getCurrentView();
+    g_object_set_data(G_OBJECT(PKG::pkgItemPopUp), "baseModel", (void *)view);
+    g_object_set_data(G_OBJECT(PKG::pkgItemPopUp), "view", (void *)view);    
+    DBG("pkgItemPopUp=%p\n", PKG::pkgItemPopUp);
+    return PKG::pkgItemPopUp;
 }
 
 template <class Type>
 void PkgPopUp<Type>::resetPopup(Type *type){
-    DBG("resetPopup=%p\n", pkgItemPopUp);  
+    DBG("resetPopup=%p\n", PKG::pkgItemPopUp);  
 }
 
 template <class Type>

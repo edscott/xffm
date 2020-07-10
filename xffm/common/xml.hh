@@ -60,9 +60,14 @@ public:
     XmlNode *topNode;
 
     Xml(void): level(-1), items(0){
+        // 255 node levels, more than enough.
         lastNode = (XmlNode **)calloc(256, sizeof(XmlNode *));
         
         if (!lastNode) throw 1;
+    }
+
+    ~Xml(void){
+        g_free(lastNode);
     }
 
 
@@ -152,6 +157,10 @@ public:
         sweepCount_=0;
     }
     ~XmlStructure(void){
+        // FIXME:
+        // Get a list of all nodes
+        // Free every item of the list
+        // free list
 
     }
         //XmlNode *node = topNode();

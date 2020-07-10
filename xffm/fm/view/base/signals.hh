@@ -23,6 +23,19 @@ static GtkTargetEntry targetTable[] = {
 
 namespace xf
 {
+
+GtkMenu *popUpArray[]={
+    fstabPopUp,
+    fstabItemPopUp,
+    localPopUp,
+    localItemPopUp,
+    rootPopUp,
+    rootItemPopUp,
+    //PKG::pkgPopUp,
+    //PKG::pkgItemPopUp,
+    NULL
+};
+
 GtkWidget *popupImage = NULL;
 
 template <class Type> class View;
@@ -182,6 +195,11 @@ public:
             reSelect(data, tpath);
 
             TRACE("Here we do a call to activate item.\n");
+            // FIXME: put this in each local reference file:
+            //  auto view = Fm<Type>::getCurrentView();
+            //  g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
+            //  g_object_set_data(G_OBJECT(*popup), "view", (void *)view);  
+
             for (auto popup=popUpArray; popup && *popup; popup++){
                 g_object_set_data(G_OBJECT(*popup), "baseModel", (void *)view);
                 g_object_set_data(G_OBJECT(*popup), "view", (void *)view);
