@@ -8,6 +8,7 @@ static GHashTable *iconname_hash=NULL;
 namespace xf
 {
 
+template <class Type> class Tooltip;
 template <class Type>
 class Gtk{
     
@@ -152,12 +153,12 @@ public:
         // Elaborate tooltip
         static gboolean waylandWarn = TRUE;
         if (waylandWarn) {
-            WARN("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
+            INFO("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
             waylandWarn = FALSE;
         }
-        //custom_tooltip(button, pixbuf, icon_tip);
+        // Tooltip<Type>::custom_tooltip(GTK_WIDGET(button), pixbuf, icon_tip);
         // Simple tooltip:
-         gtk_widget_set_tooltip_text (GTK_WIDGET(button), icon_tip);
+        gtk_widget_set_tooltip_text (GTK_WIDGET(button), icon_tip);
         
     }  
 

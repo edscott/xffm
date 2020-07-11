@@ -185,6 +185,7 @@ typedef struct menuItem2_t {
     const gchar *icon;
     void *callback;
     void *callbackData;
+    const gchar *tooltip;
 }menuItem2_t;
 
 typedef struct radio_t {

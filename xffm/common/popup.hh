@@ -201,7 +201,11 @@ public:
             gchar *markup;
             markup = g_strdup_printf("<span size=\"small\">%s</span>", _(p->label));
             Gtk<Type>::menu_item_content(GTK_MENU_ITEM(v), p->icon, markup, -16);
-      
+            if (p->tooltip) {
+                //Tooltip<Type>::custom_tooltip(GTK_WIDGET(v), NULL, markup);
+                //Tooltip<Type>::custom_tooltip(GTK_WIDGET(v), pixbuf, markup);
+                gtk_widget_set_tooltip_text(GTK_WIDGET(v), p->tooltip);
+            }
             g_free(markup);
             gtk_widget_show (v);
         }

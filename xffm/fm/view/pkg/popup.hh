@@ -114,59 +114,27 @@ public:
     static void parseXMLfile(const gchar *xmlFile, const gchar *tag){
         auto xmlStructure = new(XML::XmlStructure)(xmlFile);
         // PopulateStructures will create PKG::nodeList 
-        populateStructures(xmlStructure, tag);
+        //populateStructures(xmlStructure, tag);
+        GList *optionsList = xmlStructure->getList(tag, "option");
+        GList *actionsList = xmlStructure->getList(tag, "action");
+        GList *actionOptionsList = xmlStructure->getList("action", "option");
         // create popup menus.
-        createMainMenu(xmlStructure, PKG::nodeList);
-        createSpecificMenu(xmlStructure, PKG::nodeList);
+        createMainMenu(xmlStructure, actionsList, actionOptionsList);
+        createSpecificMenu(xmlStructure, actionsList);
+        for (auto l=actionsList; l && l->data; l=l->next){
+            auto node = (XML::XmlNode *)l->data;
+            auto cmd = xmlStructure->getAttribute(node, "cmd");
+            DBG("-> %s: %s\n", cmd, node->text);
+        }
+            
+
+        g_list_free(optionsList);
+        g_list_free(actionsList);
+        g_list_free(actionOptionsList);
 
 
     }
 private:
-
-    static void 
-    initLists(XML::XmlStructure *xmlStructure){
-        if (PKG::parentList) {
-            g_list_free(PKG::parentList);
-            PKG::parentList = NULL;
-        }
-        if (PKG::nodeList) {
-            g_list_free(PKG::nodeList);
-            PKG::nodeList = NULL;
-        }
-        xmlStructure->initSweepCount();
-    }
-
-    static gint 
-    countSweepItems(XML::XmlStructure *xmlStructure, void *data){
-        initLists(xmlStructure);
-        auto topNode = xmlStructure->topNode();
-        xmlStructure->sweep(topNode, countItems, data);
-
-        auto tags = (const gchar **)data;
-        DBG("countSweepItems(): %s/%s count = %d/%d parents = %d nodelist=%d\n",
-                tags[0], tags[1],
-                xmlStructure->sweepCount(),
-                XML::xml.items,
-                g_list_length(PKG::parentList),
-                g_list_length(PKG::nodeList));
-        return xmlStructure->sweepCount();
-    }
-
-    static gint 
-    countChildlessItems(XML::XmlStructure *xmlStructure, void *data){
-        initLists(xmlStructure);
-        auto topNode = xmlStructure->topNode();
-        xmlStructure->sweep(topNode, countChildless, data);
-
-        auto tags = (const gchar **)data;
-        DBG("countChildlessItems(): %s/%s count = %d/%d parents = %d nodelist=%d\n",
-                tags[0], tags[1],
-                xmlStructure->sweepCount(),
-                XML::xml.items,
-                g_list_length(PKG::parentList),
-                g_list_length(PKG::nodeList));
-        return xmlStructure->sweepCount();
-    }
 
     static void 
     populateStructures(XML::XmlStructure *xmlStructure, const gchar *tag){
@@ -174,7 +142,7 @@ private:
         
         // We need this to create the menus (based on actions)
         const gchar *data2[]={tag, "action", NULL}; 
-        auto countActions = countSweepItems(xmlStructure,(void *)data2);
+        //auto countActions = countSweepItems(xmlStructure,(void *)data2);
 /*      
         // We need this later on to get the options for each action.
         const gchar *data[]={tag, "option", NULL};
@@ -191,13 +159,17 @@ private:
 
 
     }
-        
+       
+    //We need GList for options (currently have), and GList for actions 
+    //in simultaneous mode.
+    //Update window icon
     
     static void createSpecificMenu(XML::XmlStructure *xmlStructure, 
             GList *list){
 
         TRACE("createSpecificMenu...\n");
-        GList *specificList = getSpecificList(xmlStructure, list);
+        const gchar *tag[2]={"local", "remote"};
+        GList *specificList = getActiveList(xmlStructure, list, "icon", tag);
 
         PKG::specificItems =(menuItem2_t *)calloc(g_list_length(specificList)+1, sizeof(menuItem2_t));
         if (!PKG::specificItems){
@@ -211,12 +183,17 @@ private:
             t->icon = xmlStructure->getAttribute(node, "icon");
             auto cmd = xmlStructure->getAttribute(node, "cmd");
             auto pkg = xmlStructure->getAttribute(node, "pkg");
+            // Not for actions:
+            // auto text = xmlStructure->getText(node);
+            auto tooltip = xmlStructure->getAttribute(node, "tooltip");
             if (cmd) {
                 t->label=g_strdup_printf("  <i>%s %s</i>", pkg, cmd);
             } else {
                 t->label=g_strdup_printf("<b>%s</b>", pkg);
             }
             TRACE("label = %s\n", t->label);
+            // t->tooltip = text;
+            t->tooltip = (tooltip)?tooltip:NULL;
             t->callback=(void *)MenuPopoverSignals<Type>::noop;
             t->callbackData=node;
         }
@@ -232,9 +209,9 @@ private:
 
 
     static void createMainMenu(XML::XmlStructure *xmlStructure, 
-            GList *list){
+            GList *actionsList, GList *actionOptionsList){
         TRACE("createMainMenu...\n");
-        GList *activeList = getActiveList(xmlStructure, list);
+        GList *activeList = getActiveList(xmlStructure, actionsList, "icon");
 
         PKG::mainItems =(menuItem2_t *)calloc(g_list_length(activeList)+1, sizeof(menuItem2_t));
         if (!PKG::mainItems){
@@ -248,15 +225,21 @@ private:
             t->icon = xmlStructure->getAttribute(node, "icon");
             auto cmd = xmlStructure->getAttribute(node, "cmd");
             auto pkg = xmlStructure->getAttribute(node, "pkg");
+            // Not for actions:
+            // auto text = xmlStructure->getText(node);
+            auto tooltip = xmlStructure->getAttribute(node, "tooltip");
             if (cmd) {
                 t->label=g_strdup_printf("  <i>%s %s</i>", pkg, cmd);
             } else {
                 t->label=g_strdup_printf("<b>%s</b>", pkg);
             }
+            t->tooltip = (tooltip)?tooltip:NULL;
+//            t->tooltip = text;
             TRACE("label = %s\n", t->label);
             t->callback=(void *)MenuPopoverSignals<Type>::noop;
             t->callbackData=node;
         }
+        
         g_list_free(activeList);
         DBG("creating Popup<Type>...\n");
         auto popup = new(Popup<Type>)(PKG::mainItems);
@@ -270,81 +253,27 @@ private:
         // First, lets count how many items have the 
         // "icon" attribute set. Only items with
         // "icon" attribute will appear in popup menu.
+
     static GList *
     getActiveList(XML::XmlStructure *xmlStructure, 
-            GList *list){
+            GList *list, const gchar *required, const gchar *tag[2]=NULL){
         GList *activeList = NULL;
         for (auto l=list; l && l->data; l=l->next){
             auto node =(XML::XmlNode *)l->data;
-            auto attribute = xmlStructure->getAttribute(node, "icon");
-            if (attribute) activeList = g_list_prepend(activeList, node);
+            auto attribute = xmlStructure->getAttribute(node, required);
+            if (attribute) {
+                if (!tag) activeList = g_list_prepend(activeList, node);
+                else { 
+                    auto tag1 = xmlStructure->getAttribute(node, tag[0]);
+                    auto tag2 = xmlStructure->getAttribute(node, tag[1]);
+                    if (tag1 || tag2){
+                        activeList = g_list_prepend(activeList, node);
+                    }
+                }
+            }
         }
         activeList=g_list_reverse(activeList);
         return activeList;
-    }
-
-    static GList *
-    getSpecificList(XML::XmlStructure *xmlStructure, 
-            GList *list){
-        GList *specificList = NULL;
-        for (auto l=list; l && l->data; l=l->next){
-            auto node =(XML::XmlNode *)l->data;
-            auto attribute = xmlStructure->getAttribute(node, "icon");
-            if (attribute) {
-                auto local = xmlStructure->getAttribute(node, "local");
-                auto remote = xmlStructure->getAttribute(node, "remote");
-                if (local || remote){
-                    specificList = g_list_prepend(specificList, node);
-                }
-            }
-
-        }
-        specificList=g_list_reverse(specificList);
-        return specificList;
-    }
-    // check for childless nodes
-    static gboolean
-    checkLevel1(XML::XmlNode *node, const gchar **tags){
-        if (!checkLevel2(node, tags)) return FALSE;
-        // Childless:
-        if (node->child) return FALSE;
-
-        TRACE("parent: %s (%p) childless %s %p\n",
-                node->parent->name,  node->parent,
-                node->name,  node);
-        return TRUE;
-    }
-
-    static gboolean
-    checkLevel2(XML::XmlNode *node, const gchar **tags){
-        if (!node || !tags) return FALSE;
-        if (!node->parent || !node->parent->name) return FALSE;
-        if (strcmp(node->parent->name, tags[0])) return FALSE;
-        if (strcmp(node->name, tags[1])) return FALSE;
-        TRACE("parent: %s (%p)\n",node->parent->name,  node->parent);
-        if (!PKG::parentList || !g_list_find (PKG::parentList, node->parent)){
-            PKG::parentList = g_list_append(PKG::parentList, node->parent);
-        }
-        return TRUE;
-    }
-
-    static gboolean countItems(XML::XmlNode *node, void *data){
-        auto tags = (const gchar **)data;
-        if (!checkLevel2(node, tags)) return FALSE;
-        //printNode(node);
-        PKG::nodeList = g_list_append(PKG::nodeList, node);
-
-        return TRUE;        
-    }
-
-    static gboolean countChildless(XML::XmlNode *node, void *data){
-        auto tags = (const gchar **)data;
-        if (!checkLevel1(node, tags)) return FALSE;
-        //printNode(node);
-        PKG::nodeList = g_list_append(PKG::nodeList, node);
-        TRACE("appended %p to nodelist\n", node);
-
-        return TRUE;        
     }
 
     static void

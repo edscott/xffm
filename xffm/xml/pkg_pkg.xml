@@ -56,24 +56,17 @@ Displays the current version of pkg
 
     <action pkg="pkg" command_options="1" actions="1" icon="emblem-bsd"
     string="pkg" argument="action argument (if any)"
-    protected="1" local="1" remote="1" no_selection="1" >
-NAME
-     pkg, pkg-static -- a utility for manipulating packages
-DESCRIPTION
-     provides an interface for manipulating packages - registering, adding,
-     removing and upgrading of packages. pkg-static is a statically linked
-     variant of	pkg typically only used for the initial installation of pkg.
-     There are some differences in functionality.  See pkg.conf(5) for
-     details.
+    protected="1" local="1" remote="1" no_selection="1"  tooltip="
+Interface for manipulating packages - registering, adding, removing and upgrading of packages. See pkg.conf(5) for details.">
     </action>
     <action pkg="pkg" cmd="add" string="Add" icon="list-add"
     protected="1" no_selection="1"
-    command_options="1"  argument="pkg-name/url">
+    command_options="1"  argument="pkg-name/url" tooltip="
 Install a package from either a local source or a remote one.
 When installing from remote source you need to specify the protocol
 to use	when fetching the package.
-Currently supported protocols are FTP, HTTP and HTTPS.
-    <option loption="automatic">
+Currently supported protocols are FTP, HTTP and HTTPS.">
+<option loption="automatic">
 		Mark the installed packages as orphan.	Will be	automatically
 		removed	if no other packages depend on them.  For more infor-
 		mation please refer to pkg-autoremove(8).
@@ -101,13 +94,13 @@ Currently supported protocols are FTP, HTTP and HTTPS.
     </action>
     <action pkg="pkg" cmd="annotate"
     protected="1" local="1" no_selection="1" 
-    command_options="1" argument="">
-Add, modify or delete tag-value style annotations on packages.
+    command_options="1" argument="" tooltip="
+Add, modify or delete tag-value style annotations on packages.">
     </action>
     <action pkg="pkg" cmd="audit" string="audit" 
     protected="1" no_selection="1"
-    command_options="1" argument="pkg-name">
-Audits installed packages against known vulnerabilities.
+    command_options="1" argument="pkg-name" tooltip="
+Audits installed packages against known vulnerabilities.">
     <option loption="file" parameter="filename">
 	    Use	filename as the	local copy of the vulnerability	database.  If
 	    used in combination	with -F	download the vulnerability database to
@@ -127,9 +120,9 @@ Audits installed packages against known vulnerabilities.
     </action>
     <action pkg="pkg" cmd="autoremove" string="autoremove" 
     protected="1" no_selection="1"
-    command_options="1" >
+    command_options="1" tooltip="
 Delete packages which were automatically installed as dependencies 
-and are not required any more.
+and are not required any more.">
     <option loption="dry-run">
 	      Dry-run mode.  The list of changes to packages is	always
 	      printed, but no changes are actually made.
@@ -144,8 +137,8 @@ and are not required any more.
     </action>
     <action pkg="pkg" cmd="backup" string="Backup" icon="media-tape"
     protected="1" no_selection="1"
-    command_options="1">
-Dump the local package database to a file specified on the command-line.
+    command_options="1" tooltip="
+Dump the local package database to a file specified on the command-line.">
     <option loption="dump" parameter="dest_file">
     </option>   
     <option loption="restore" parameter="src_file">
@@ -155,17 +148,17 @@ Dump the local package database to a file specified on the command-line.
     </action>
     <action pkg="pkg" cmd="bootstrap"  
     protected="1" no_selection="1"
-    command_options="1">
+    command_options="1" tooltip="
 This is for compatibility with the pkg(7) bootstrapper. If pkg
 is already installed, nothing is done.
 If invoked with the -f flag an attempt will be made to reinstall
 pkg from remote repository.  This is not supported on FreeBSD 8.3
-as it did not have pkg(7).
+as it did not have pkg(7).">
     </action>
     <action pkg="pkg" cmd="check" string="Check" 
     protected="1" no_selection="1"
-    command_options="1" >
-Sanity checks installed packages.
+    command_options="1"  tooltip="
+Sanity checks installed packages.">
     <option loption="all">
                    Process all packages.
     </option>
@@ -198,8 +191,8 @@ Sanity checks installed packages.
     </action>
     <action pkg="pkg" cmd="clean" string="Clean" icon="edit-clear-all"
     protected="1" no_selection="1"
-    command_options="1" >
-Cleans the local cache of fetched remote packages.
+    command_options="1"  tooltip="
+Cleans the local cache of fetched remote packages.">
     <option loption="all">
          Delete	all cached packages.
     </option>
@@ -221,8 +214,8 @@ Cleans the local cache of fetched remote packages.
     </action>
     <action pkg="pkg" cmd="convert" string="Convert" 
     protected="1" no_selection="1"
-    command_options="1" argument="">
-Convert to and from the old pkg_add(1) format.
+    command_options="1" argument="" tooltip="
+Convert to and from the old pkg_add(1) format.">
     <option loption="pkg-dbdir" parameter="pkg_dbdir">
     </option>
     <option loption="dry-run">
@@ -232,12 +225,12 @@ Convert to and from the old pkg_add(1) format.
     </action>
     <action pkg="pkg" cmd="create"  
     protected="1" no_selection="1"
-    command_options="1" argument="">
-Create a package
+    command_options="1" argument="" tooltip="
+Create a package.">
     </action>
     <action pkg="pkg" cmd="delete" string="Uninstall" icon="list-remove"
-    protected="1" local="1"  argument="pkg-name">
-Delete a package from the database and the system.
+    protected="1" local="1"  argument="pkg-name" tooltip="
+Delete a package from the database and the system.">
     <option loption="all">
                 Deletes	all installed packages from the	system and empties the
 		database.  
@@ -283,8 +276,8 @@ Delete a package from the database and the system.
     </option>
     </action>
     <action pkg="pkg" cmd="fetch" string="Download" icon="document-save"
-    protected="1" remote="1" no_selection="1" argument="pkg-name">
-Fetches packages from a remote repository.
+    protected="1" remote="1" no_selection="1" argument="pkg-name" tooltip="
+Fetches packages from a remote repository.">
     <option loption="all">
                    Fetch all packages.
     </option>
@@ -338,8 +331,8 @@ Fetches packages from a remote repository.
     </action>
     <action pkg="pkg" cmd="info" string="Information" icon="dialog-information"
     scroll_up="1"
-    local="1" no_selection="1" argument="pkg-name">
-Display information about installed packages.
+    local="1" no_selection="1" argument="pkg-name" tooltip="
+Display information about installed packages.">
     <option loption="all">
 	     Display all installed packages.
     </option>
@@ -432,47 +425,12 @@ Display information about installed packages.
     </option>
     </action>
     <action pkg="pkg" cmd="install" string="Install" icon="system-software-install"
-    protected="1" remote="1" no_selection="1" argument="pkg-name">
+    protected="1" remote="1" no_selection="1" argument="pkg-name" tooltip="
 Install a package from a remote package repository.  If a package
 is found in more than one remote repository, then installation
 happens from the first one.  Downloading a package is tried from
 each package repository in turn, until the package is success-
-fully fetched.
-
-     pkg install is used for installation of packages from a package reposi-
-     tory or local archives.  Multiple package names can be specified on the
-     command line, either explicitly or	by matching against package names (or
-     origins) in the repository	catalogues using shell globbing	or regular
-     expressions.
-     pkg install first updates any out-of-date repository catalogues, unless
-     REPO_AUTOUPDATE has been set to NO	in pkg.conf.
-     It	then creates a work-list of all	the package installations to do.  Any
-     already installed and up-to-date packages will be dropped from the	list
-     unless the	-f (force) option is supplied, in which	case those packages
-     will be reinstalled.
-     The dependencies of packages in the list are examined and any missing
-     packages are added	to the list for	installation.  Such implicitly added
-     packages are flagged as candidates	for autoremoval.  See
-     pkg-autoremove(8) for details.
-     Autoremoval flags are sticky, and will persist over reinstallation	or
-     upgrade of	the packages concerned,	even if	subsequently the packages are
-     named explicitly on a command line.  See pkg-query(8) for finding the
-     autoremoval status	of a package, and pkg-set(8) for modifying it.
-     Any already installed but out of date packages, either named on the com-
-     mand line or from the sum of all their dependencies are added to the work
-     list as upgrade jobs.  The	work list is sorted into dependency order and
-     pkg install will present it to the	user for approval before proceeding,
-     unless overridden by the -y option	or the ASSUME_ALWAYS_YES setting in
-     pkg.conf.
-     Packages are fetched from the repositories	into the local package cache
-     if	they are not already present, or if the	checksum of the	cached package
-     file differs from the one in the repository.  Packages may	be downloaded
-     from any of the repositories mentioned in pkg.conf(5) or in the files in
-     /usr/local/etc/pkg/repo.  See pkg-repository(5) for details.
-     Package repository	catalogues will	be automatically updated whenever pkg
-     install is	run by a user ID with write access to the package database,
-     unless disabled by	the -U flag  or	setting	REPO_AUTOUPDATE	to NO in
-     pkg.conf(5).
+fully fetched.">
     <option loption="automatic">
 		Mark the installed packages as orphan.	Will be	automatically
 		removed	if no other packages depend on them.  For more infor-
@@ -541,8 +499,8 @@ fully fetched.
     </option>
     </action>
     <action pkg="pkg" cmd="lock" string="Lock" icon="changes-prevent"
-    protected="1" local="1" no_selection="1" argument="pkg-name">
-Prevent modification or deletion of a package.
+    protected="1" local="1" no_selection="1" argument="pkg-name" tooltip="
+Prevent modification or deletion of a package.">
     <option loption="all">
 	  Lock or unlock all installed packages.
     </option>
@@ -575,30 +533,30 @@ Prevent modification or deletion of a package.
     </option>
     </action>
     <action pkg="pkg" cmd="plugins" string="Plugins" 
-    no_selection="1" >
-List the available plugins.
+    no_selection="1"  tooltip="
+List the available plugins.">
     </action>
     <action pkg="pkg" cmd="query" 
-    local="1" no_selection="1" argument="&lt;query-format&gt; &lt;pkg-name&gt;">
-Query information about installed packages.
+    local="1" no_selection="1" argument="&lt;query-format&gt; &lt;pkg-name&gt;" tooltip="
+Query information about installed packages.">
     </action>
     <action pkg="pkg" cmd="register"  
     protected="1" no_selection="1"
-    command_options="1" argument="">
-Register a package in the database.
+    command_options="1" argument="" tooltip="
+Register a package in the database.">
     </action>
     <action pkg="pkg" cmd="repo"  
     protected="1" no_selection="1"
-    command_options="1" argument="">
-Create a local package repository for remote usage.
+    command_options="1" argument="" tooltip="
+Create a local package repository for remote usage.">
     </action>
     <action pkg="pkg" cmd="rquery"  
-    no_selection="1" argument="">
-Query information for remote repositories.
+    no_selection="1" argument="" tooltip="
+Query information for remote repositories.">
     </action>
     <action pkg="pkg" cmd="search" string="Search" icon="edit-find"
-    no_selection="1" argument="pattern/pkg_name">
-Search for the given pattern in the remote package repositories.
+    no_selection="1" argument="pattern/pkg_name" tooltip="
+Search for the given pattern in the remote package repositories.">
     <option loption="case-sensitive">
 		 Make the exact	(-e) or	the regular expression (-x) matching
 		 against pkg-name case sensitive.
@@ -699,19 +657,19 @@ Search for the given pattern in the remote package repositories.
     </action>
     <action pkg="pkg" cmd="set"  
     protected="1" local="1" remote="1" no_selection="1"
-    command_options="1" argument="pkg_name">
-Modify information in the installed database.
+    command_options="1" argument="pkg_name" tooltip="
+Modify information in the installed database.">
     </action>
     <action pkg="pkg" cmd="shell" 
     protected="1" no_selection="1"
-    command_options="1" argument="">
+    command_options="1" argument="" tooltip="
 Fires up a sqlite shell to the local or remote database.  Extreme
-care should be taken when using this command.
+care should be taken when using this command.">
     </action>
     <action pkg="pkg" cmd="shlib" string="Shared libraries" 
     protected="1" no_selection="1"
-    command_options="1" argument="library">
-Displays which packages link to a specific shared library.
+    command_options="1" argument="library" tooltip="
+Displays which packages link to a specific shared library.">
     <option loption="provides">
 	       Show only the installed packages	which provide the named
 	       library.
@@ -722,8 +680,8 @@ Displays which packages link to a specific shared library.
     </action>
     <action pkg="pkg" cmd="stats" string="Statistics" 
     scroll_up="1"
-    protected="1" no_selection="1">
-Display package database statistics.
+    protected="1" no_selection="1" tooltip="
+Display package database statistics.">
     <option loption="quiet">
 	    Quiet mode.	 Show less output.
     </option>
@@ -738,8 +696,8 @@ Display package database statistics.
     </option>
     </action>
     <action pkg="pkg" cmd="unlock" string="Unlock" icon="dialog-password"
-    protected="1" local="1" no_selection="1" argument="pkg-name">
-Unlocks packages, allowing them to be modified or deleted
+    protected="1" local="1" no_selection="1" argument="pkg-name" tooltip="
+Unlocks packages, allowing them to be modified or deleted.">
     <option loption="all">
 	  Lock or unlock all installed packages.
     </option>
@@ -773,9 +731,9 @@ Unlocks packages, allowing them to be modified or deleted
     </action>
     <action pkg="pkg" cmd="update" string="Update Database" icon="view-refresh"
     protected="1" no_selection="1"
-    command_options="1" >
+    command_options="1"  tooltip="
 Update the available remote repositories as listed in
-pkg.conf(5).
+pkg.conf(5).">
     <option loption="quiet">
 	    Force quiet	output
     </option>
@@ -791,8 +749,8 @@ pkg.conf(5).
     </option>
     </action>
     <action pkg="pkg" cmd="updating" string="Updating" 
-    no_selection="1" argument="pkg-name">
-Displays UPDATING entries of installed packages.
+    no_selection="1" argument="pkg-name" tooltip="
+Displays UPDATING entries of installed packages.">
     <option loption="date" parameter="date">
 	   Only	entries	newer than date	are shown.  Use	a YYYYMMDD date	for-
 	   mat.
@@ -803,8 +761,8 @@ Displays UPDATING entries of installed packages.
     </action>
     <action pkg="pkg" cmd="upgrade" string="Upgrade" 
     no_version="1" icon="system-software-update"
-    protected="1" local="1" remote="1" no_selection="1" argument="pkg-name">
-Upgrade a package to a newer version.
+    protected="1" local="1" remote="1" no_selection="1" argument="pkg-name" tooltip="
+Upgrade a package to a newer version.">
     <option loption="case-sensitive">
 		 Make the standard or the regular expression (-x) matching
 		 against pkg-name case sensitive.
@@ -857,12 +815,12 @@ Upgrade a package to a newer version.
     </option>
     </action>
     <action pkg="pkg" cmd="version" string="Version" 
-   no_selection="1" argument="">
-Summarize installed versions of packages.
+   no_selection="1" argument="" tooltip="
+Summarize installed versions of packages.">
     </action>
     <action pkg="pkg" cmd="which" string="which" 
-    no_selection="1" argument="file">
-Query the database for package(s) that installed a specific file.
+    no_selection="1" argument="file" tooltip="
+Query the database for package(s) that installed a specific file.">
     <option loption="glob">
 	     Treat file as a glob pattern.
     </option>
@@ -877,8 +835,8 @@ Query the database for package(s) that installed a specific file.
     </option>
     </action>
     <action pkg="pkg" cmd="help" string="Help" icon="help-about"
-    no_selection="1" scroll_up="1">
-Display usage information of the specified command.
+    no_selection="1" scroll_up="1" tooltip="
+Display usage information of the specified command.">
     </action>
  </pkg>
 </rodent_pkg>

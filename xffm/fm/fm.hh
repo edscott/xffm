@@ -98,7 +98,8 @@ public:
         Util<Type>::getTerminalCmd();
         Util<Type>::getPasswordPrompt();
         g_object_set_data(G_OBJECT(mainWindow), "xffm", xffm);
-        xffm->setDialogIcon("system-file-manager");
+        xffm->setDialogIcon("rodent-logo");
+//        xffm->setDialogIcon("system-file-manager");
         xf::ClipBoard<double>::startClipBoard();  
     }
 

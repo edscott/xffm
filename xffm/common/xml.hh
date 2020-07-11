@@ -3,6 +3,10 @@
 namespace xf
 {
 namespace XML {
+    GList *nodeList=NULL;
+    GList *parentList=NULL;
+    gboolean textMode=FALSE;
+    gboolean passthroughMode=FALSE;
 
 class XmlNode{
 
@@ -52,6 +56,7 @@ public:
 //template <class Type>
 class Xml{
     FILE *input_;
+    struct stat st_;
 public:
     gint items;
 
@@ -85,6 +90,10 @@ public:
             }
         }
         DBG("initXml(): %s\n", resourcePath);
+        struct stat st;
+        stat(resourcePath, &st_);
+
+        
         input_ = fopen (resourcePath, "r");
         g_free(resourcePath);
         if (!input_) return FALSE;
@@ -110,18 +119,36 @@ public:
         GMarkupParser mainParser = { start, end, text, passthrough, NULL};
         auto mainContext = g_markup_parse_context_new (&mainParser, (GMarkupParseFlags)0, NULL, NULL);
         
+        auto buffer = (gchar *)calloc(1, st_.st_size);
+        if (!buffer){
+            DBG("calloc: %s\n", strerror(errno));
+            throw 1;
+        }
+            
+        GError *error = NULL;
+        
+
+        fread(buffer, st_.st_size, 1, input_);
+        if (!g_markup_parse_context_parse (mainContext, buffer, st_.st_size, &error) )
+        {
+            DBG("parse(): %s\n", error->message);
+            g_error_free(error);
+        }
+        g_free(buffer);
+
+/*
         gchar line[2048];
         memset(line, 0, 2048);
         while(!feof (input_) && fgets (line, 2048, input_)) {
             //fprintf(stderr, "%s", line);
-            GError *error = NULL;
+            if (!strlen(line)) continue;
             if (!g_markup_parse_context_parse (mainContext, line, strlen(line), &error) )
             {
                 DBG("parse(): %s\n", error->message);
                 g_error_free(error);
             }
         }
-
+*/
         g_markup_parse_context_free (mainContext);
 
     }
@@ -132,7 +159,6 @@ public:
 Xml xml;
 
 class XmlStructure {
-    GSList *nodeList;
     gint sweepCount_;
 
 public:
@@ -166,6 +192,37 @@ public:
         //XmlNode *node = topNode();
 
     const gchar *
+    getText(XmlNode *node){
+        if (!node) return NULL;
+        return node->text;
+    }
+    
+    XmlNode *
+    getSubNode(XmlNode *parent, const gchar *name, const gchar *value){
+        if (!parent || !parent->child) return NULL;
+        auto node = parent->child;
+        do {
+            auto v = getAttribute(node, name);
+            DBG("%s: %s->%s (%s)\n", node->name, name, v, value);
+            if (v && strcmp(value, v)==0) return node;
+            node = node->next;
+        } while (node);
+        return node;
+    }
+
+    GList *getList(const gchar *tag, const gchar *subtag){
+        const gchar *data[] = {tag, subtag, NULL};
+        auto countActions = countSweepItems(this,(void *)data);
+        GList *list = NULL;
+        for (auto l=XML::nodeList; l && l->data; l=l->next){
+            list = g_list_prepend(list, l->data);
+        }
+        list = g_list_reverse(list);
+        return list;
+    }
+
+
+    const gchar *
     getAttribute(XmlNode *node, const gchar *attribute){
         auto p = node->attNames;
         auto q = node->attValues;
@@ -193,7 +250,97 @@ public:
     }
 
 private:
-    
+ 
+    static void 
+    initLists(XML::XmlStructure *xmlStructure){
+        if (XML::parentList) {
+            g_list_free(XML::parentList);
+            XML::parentList = NULL;
+        }
+        if (XML::nodeList) {
+            g_list_free(XML::nodeList);
+            XML::nodeList = NULL;
+        }
+        xmlStructure->initSweepCount();
+    }
+   
+    static gint 
+    countSweepItems(XML::XmlStructure *xmlStructure, void *data){
+        initLists(xmlStructure);
+        auto topNode = xmlStructure->topNode();
+        xmlStructure->sweep(topNode, countItems, data);
+
+        auto tags = (const gchar **)data;
+        DBG("countSweepItems(): %s/%s count = %d/%d parents = %d nodelist=%d\n",
+                tags[0], tags[1],
+                xmlStructure->sweepCount(),
+                XML::xml.items,
+                g_list_length(XML::parentList),
+                g_list_length(XML::nodeList));
+        return xmlStructure->sweepCount();
+    }
+    static gint 
+    countChildlessItems(XML::XmlStructure *xmlStructure, void *data){
+        initLists(xmlStructure);
+        auto topNode = xmlStructure->topNode();
+        xmlStructure->sweep(topNode, countChildless, data);
+
+        auto tags = (const gchar **)data;
+        DBG("countChildlessItems(): %s/%s count = %d/%d parents = %d nodelist=%d\n",
+                tags[0], tags[1],
+                xmlStructure->sweepCount(),
+                XML::xml.items,
+                g_list_length(XML::parentList),
+                g_list_length(XML::nodeList));
+        return xmlStructure->sweepCount();
+    }
+
+    // check for childless nodes
+    static gboolean
+    checkLevel1(XML::XmlNode *node, const gchar **tags){
+        if (!checkLevel2(node, tags)) return FALSE;
+        // Childless:
+        if (node->child) return FALSE;
+
+        TRACE("parent: %s (%p) childless %s %p\n",
+                node->parent->name,  node->parent,
+                node->name,  node);
+        return TRUE;
+    }
+
+    static gboolean
+    checkLevel2(XML::XmlNode *node, const gchar **tags){
+        if (!node || !tags) return FALSE;
+        if (!node->parent || !node->parent->name) return FALSE;
+        if (strcmp(node->parent->name, tags[0])) return FALSE;
+        if (strcmp(node->name, tags[1])) return FALSE;
+        TRACE("parent: %s (%p)\n",node->parent->name,  node->parent);
+        if (!XML::parentList || !g_list_find (XML::parentList, node->parent)){
+            XML::parentList = g_list_append(XML::parentList, node->parent);
+        }
+        return TRUE;
+    }
+
+    static gboolean countItems(XML::XmlNode *node, void *data){
+        auto tags = (const gchar **)data;
+        if (!checkLevel2(node, tags)) return FALSE;
+        //printNode(node);
+        XML::nodeList = g_list_append(XML::nodeList, node);
+
+        return TRUE;        
+    }
+
+    static gboolean countChildless(XML::XmlNode *node, void *data){
+        auto tags = (const gchar **)data;
+        if (!checkLevel1(node, tags)) return FALSE;
+        //printNode(node);
+        XML::nodeList = g_list_append(XML::nodeList, node);
+        TRACE("appended %p to nodelist\n", node);
+
+        return TRUE;        
+    }
+
+
     static void
     startXML (GMarkupParseContext * context,
                     const gchar * elementName,
