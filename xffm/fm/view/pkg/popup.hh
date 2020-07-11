@@ -113,11 +113,11 @@ public:
 
     static void parseXMLfile(const gchar *xmlFile, const gchar *tag){
         auto xmlStructure = new(XML::XmlStructure)(xmlFile);
+        // PopulateStructures will create PKG::nodeList 
         populateStructures(xmlStructure, tag);
-        // We can now free XML source tree.
-        //delete(xmlStructure);
-
         // create popup menus.
+        createMainMenu(xmlStructure, PKG::nodeList);
+        createSpecificMenu(xmlStructure, PKG::nodeList);
 
 
     }
@@ -170,189 +170,138 @@ private:
 
     static void 
     populateStructures(XML::XmlStructure *xmlStructure, const gchar *tag){
-        //auto topNode = xmlStructure->topNode();
         gint count;
         
+        // We need this to create the menus (based on actions)
+        const gchar *data2[]={tag, "action", NULL}; 
+        auto countActions = countSweepItems(xmlStructure,(void *)data2);
+/*      
+        // We need this later on to get the options for each action.
         const gchar *data[]={tag, "option", NULL};
-        //count = countSweepItems(xmlStructure, (void *)data);
         count = countChildlessItems(xmlStructure, (void *)data);
-        auto pkgOptions = globalOptions(PKG::nodeList);
+        //auto pkgOptions = globalOptions(PKG::nodeList);
 
         const gchar *data2[]={tag, "action", NULL}; 
         auto countActions = countSweepItems(xmlStructure,(void *)data2);
-        auto pkgActions = globalActions(PKG::nodeList);
-
-        processActionOptions(PKG::nodeList, pkgActions);
-        
-        const gchar *data3[]={"action", "option", NULL}; 
+*/
+        /*const gchar *data3[]={"action", "option", NULL}; 
         count = countSweepItems(xmlStructure, (void *)data3);
         auto countActionParents = g_list_length(PKG::parentList);
-
+        */
 
 
     }
         
-    // emerge has no action options.
-    static void
-    processActionOptions(GList *list, pkg_command_t *xmlActions){
-        auto s = xmlActions;
-        for (auto l=list; l && l->data; l=l->next, s++){
-            auto parent = (XML::XmlNode *)l->data;
-            if (parent->child == NULL){
-                TRACE("%s %s has no options.\n", s->pkg, s->cmd);
-                continue;
-            }
-            TRACE("%s %s ...\n", s->pkg, s->cmd);
-            auto node = parent->child;
-            gint count = 0;
-            do { 
-                count++;
-                node = node->next;
-            } while (node);
-            TRACE("%s %s has %d options.\n", s->pkg, s->cmd, count);
-            s->cmd_options = (pkg_option_t *)calloc(count+1, sizeof(pkg_option_t));
-            if (!s->cmd_options){
-                DBG("processActionOptions() calloc failed: %s\n", strerror(errno));
-                throw 1;
-            }
-            node = parent->child;
-            auto t = s->cmd_options;
-            do {
-                optionParse(node, t);
-                node = node->next;
-                t++;
-            } while (node);
+    
+    static void createSpecificMenu(XML::XmlStructure *xmlStructure, 
+            GList *list){
 
+        TRACE("createSpecificMenu...\n");
+        GList *specificList = getSpecificList(xmlStructure, list);
 
-
+        PKG::specificItems =(menuItem2_t *)calloc(g_list_length(specificList)+1, sizeof(menuItem2_t));
+        if (!PKG::specificItems){
+            DBG("createSpecificMenu(): calloc: %s\n", strerror(errno));
+            throw(1);
         }
+        
+        auto t = PKG::specificItems;
+        for(auto l = specificList; l && l->data; l = l->next, t++){
+            auto node = (XML::XmlNode *)l->data;
+            t->icon = xmlStructure->getAttribute(node, "icon");
+            auto cmd = xmlStructure->getAttribute(node, "cmd");
+            auto pkg = xmlStructure->getAttribute(node, "pkg");
+            if (cmd) {
+                t->label=g_strdup_printf("  <i>%s %s</i>", pkg, cmd);
+            } else {
+                t->label=g_strdup_printf("<b>%s</b>", pkg);
+            }
+            TRACE("label = %s\n", t->label);
+            t->callback=(void *)MenuPopoverSignals<Type>::noop;
+            t->callbackData=node;
+        }
+        g_list_free(specificList);
+        DBG("creating Popup<Type>...\n");
+        auto popup = new(Popup<Type>)(PKG::specificItems);
+        //Title would be selected item label:
+        //popup->changeTitle( _("Software Updater"), PKG_ICON);
+        PKG::pkgItemPopUp = popup->menu();
+        gtk_widget_show_all(GTK_WIDGET(PKG::pkgItemPopUp));
+        return;
     }
 
-    static pkg_command_t *globalActions(GList *list){
-        TRACE("globalActions...\n");
-        auto count = g_list_length(list);
-        auto xmlActions = (pkg_command_t *) calloc(count+1, sizeof(pkg_command_t));
-        if (!xmlActions){
-            DBG("populateStructures():: calloc: %s\n", strerror(errno));
-            throw 1;
-        }
 
-        (xmlActions+count)->pkg=NULL;
-        auto s = xmlActions;
-        for (auto l=list; l && l->data; l=l->next, s++){
-            //memset(s, 0, sizeof(pkg_command_t));//XXX
-            //s->string = NULL;//XXX
-            TRACE("list data=%p\n", l->data);
-            auto node = (XML::XmlNode *)l->data;
-            auto p = node->attNames;
-            auto q = node->attValues;
-            for (p = node->attNames;p && *p; p++, q++){
-                TRACE("actionOption: %s->%s\n", *p, *q);
-                if (strcmp(*p, "pkg")==0) s->pkg = g_strdup(*q);
-                if (strcmp(*p, "parameter")==0) s->parameter = g_strdup(*q);
-                if (strcmp(*p, "cmd")==0) s->cmd = g_strdup(*q);
-                if (strcmp(*p, "argument")==0) s->argument = g_strdup(*q);
-                if (strcmp(*p, "icon")==0) s->icon = g_strdup(*q);
+    static void createMainMenu(XML::XmlStructure *xmlStructure, 
+            GList *list){
+        TRACE("createMainMenu...\n");
+        GList *activeList = getActiveList(xmlStructure, list);
 
-                if (strcmp(*p, "local")==0) s->flags |= PKG_LOCAL_SELECTION;
-                if (strcmp(*p, "remote")==0) s->flags |= PKG_REMOTE_SELECTION;
-                if (strcmp(*p, "no_selection")==0) s->flags |= PKG_NO_SELECTION;
-                if (strcmp(*p, "no_version")==0) s->flags |= PKG_NO_VERSION;
-                if (strcmp(*p, "scroll_up")==0) s->flags |= PKG_SCROLL_UP;
-                
-                if (strcmp(*p, "protected")==0){
-                    s->flags |= PKG_ACCESS_WRITE;
-                } else s->flags |= PKG_ACCESS_READ;
-
-                if (strcmp(*p, "string")==0) s->string = g_strdup(*q);
-                //else s->string = g_strdup_printf("%s%s%s",s->pkg, (s->cmd)?" ":"",(s->cmd)?s->cmd:"");
-                TRACE("string: %s\n", s->string?s->string:"null");
-
-            }
-            if (node->text){
-                s->hlp = g_strdup_printf("<b>%s %s</b>\n%s", 
-                        s->pkg, (s->cmd)?s->cmd:"",node->text);
-                TRACE("text(%s %s): %s\n", 
-                        s->pkg, (s->cmd)?s->cmd:"", node->text);
-            }
-            TRACE("set..%p: %s %s\n", s, s->pkg, (s->cmd)?s->cmd:"");
-        }
-
-
-        // Only show items with defined icon.
-        GList *stringList = NULL;
-        for(s = xmlActions; s->pkg != NULL; s++){
-            if (s->icon){
-                stringList = g_list_append(stringList, s);
-            }
-
-        }
-        PKG::mainItems =(menuItem2_t *)calloc(g_list_length(stringList)+1, sizeof(menuItem2_t));
+        PKG::mainItems =(menuItem2_t *)calloc(g_list_length(activeList)+1, sizeof(menuItem2_t));
         if (!PKG::mainItems){
-            DBG("globalActions(): calloc: %s\n", strerror(errno));
+            DBG("createMainMenu(): calloc: %s\n", strerror(errno));
             throw(1);
         }
         
         auto t = PKG::mainItems;
-
-        for(auto l = stringList; l && l->data; l = l->next){
-            auto ss = (pkg_command_t *)l->data;
-            if (ss->cmd) {
-                t->label=g_strdup_printf("  <i>%s %s</i>", ss->pkg, ss->cmd);
+        for(auto l = activeList; l && l->data; l = l->next, t++){
+            auto node = (XML::XmlNode *)l->data;
+            t->icon = xmlStructure->getAttribute(node, "icon");
+            auto cmd = xmlStructure->getAttribute(node, "cmd");
+            auto pkg = xmlStructure->getAttribute(node, "pkg");
+            if (cmd) {
+                t->label=g_strdup_printf("  <i>%s %s</i>", pkg, cmd);
             } else {
-                t->label=g_strdup_printf("<b>%s</b>", ss->pkg);
+                t->label=g_strdup_printf("<b>%s</b>", pkg);
             }
             TRACE("label = %s\n", t->label);
             t->callback=(void *)MenuPopoverSignals<Type>::noop;
-            t->callbackData=ss;
-            t->icon = (ss->icon)?ss->icon:NULL;
-            t++;
+            t->callbackData=node;
         }
-        g_list_free(stringList);
-
+        g_list_free(activeList);
         DBG("creating Popup<Type>...\n");
         auto popup = new(Popup<Type>)(PKG::mainItems);
         popup->changeTitle( _("Software Updater"), PKG_ICON);
         PKG::pkgPopUp = popup->menu();
         gtk_widget_show_all(GTK_WIDGET(PKG::pkgPopUp));
+        return;
+     }
 
-
-        return xmlActions;
+private:
+        // First, lets count how many items have the 
+        // "icon" attribute set. Only items with
+        // "icon" attribute will appear in popup menu.
+    static GList *
+    getActiveList(XML::XmlStructure *xmlStructure, 
+            GList *list){
+        GList *activeList = NULL;
+        for (auto l=list; l && l->data; l=l->next){
+            auto node =(XML::XmlNode *)l->data;
+            auto attribute = xmlStructure->getAttribute(node, "icon");
+            if (attribute) activeList = g_list_prepend(activeList, node);
+        }
+        activeList=g_list_reverse(activeList);
+        return activeList;
     }
 
-    static pkg_option_t * 
-    globalOptions(GList *list){
-        // Allocate structure
-        auto count = g_list_length(list);
-        auto xmlOptions = (pkg_option_t *) calloc((count+1), sizeof(pkg_option_t));
-        if (!xmlOptions){
-            DBG("globalOptions() calloc failed: %s\n", strerror(errno));
-            throw 1;
-        }
-        auto s = xmlOptions;
-        for (auto l=list; l && l->data; l=l->next, s++){
-            TRACE("list data=%p\n", l->data);
-            auto node = (XML::XmlNode *)l->data;
-            optionParse(node, s);
-        }
-        return xmlOptions;
-    }
+    static GList *
+    getSpecificList(XML::XmlStructure *xmlStructure, 
+            GList *list){
+        GList *specificList = NULL;
+        for (auto l=list; l && l->data; l=l->next){
+            auto node =(XML::XmlNode *)l->data;
+            auto attribute = xmlStructure->getAttribute(node, "icon");
+            if (attribute) {
+                auto local = xmlStructure->getAttribute(node, "local");
+                auto remote = xmlStructure->getAttribute(node, "remote");
+                if (local || remote){
+                    specificList = g_list_prepend(specificList, node);
+                }
+            }
 
-    static void
-    optionParse(XML::XmlNode *node, pkg_option_t *s){
-        auto p = node->attNames;
-        auto q = node->attValues;
-        for (;p && *p; p++, q++){
-            if (strcmp(*p, "loption")==0) s->loption = g_strdup(*q);
-            else if (strcmp(*p, "parameter")==0) s->parameter = g_strdup(*q);
-            else if (strcmp(*p, "active")==0) s->active = g_strdup(*q);
         }
-        if (node->text){
-            s->hlp = g_strdup_printf("<b>%s</b>\n", *q);
-            TRACE("text(%s): %s\n", s->loption, node->text);
-       }
+        specificList=g_list_reverse(specificList);
+        return specificList;
     }
-
     // check for childless nodes
     static gboolean
     checkLevel1(XML::XmlNode *node, const gchar **tags){
@@ -419,48 +368,6 @@ private:
         fprintf(stderr, ")\n");
     }
 
-    static gboolean processOptions(XML::XmlNode *node, void *data){
-        auto tags = (const gchar **)data;
-        if (!checkLevel2(node, tags)) return FALSE;
-
-        TRACE("processOptions: %s (%d)\n", node->name, node->level);
-        auto p = node->attNames;
-        auto q = node->attValues;
-        fprintf(stderr, "***%d) %s/%s ( ", 
-                node->level, node->parent->name, node->name); 
-        
-        for (;p && *p; p++, q++){
-            fprintf(stderr, "%s=%s ", *p, *q);
-        }
-        fprintf(stderr, ")\n");
-        return TRUE;
-    }
-
-    static gboolean processActions(XML::XmlNode *node, void *data){
-        TRACE("process3: %s (%d)\n", node->name, node->level);
-        auto tags = (const gchar **)data;
-        if (!checkLevel2(node, tags)) return FALSE;
-
-        fprintf(stderr, "***%d) %s/%s/%s ( ", 
-                node->level, 
-                node->parent->parent->name, 
-                node->parent->name, node->name); 
-        auto p = node->parent->attNames;
-        auto q = node->parent->attValues;
-        for (;p && *p; p++, q++){
-            fprintf(stderr, "%s=%s ", *p, *q);
-        }
-        fprintf(stderr, ")\n( ");
-       
-        p = node->attNames;
-        q = node->attValues;
-        for (;p && *p; p++, q++){
-            fprintf(stderr, "%s=%s ", *p, *q);
-        }
-        fprintf(stderr, ")\n");
-        return TRUE;
-    }
-
     void addMenuTitle(GtkMenu *menu, const gchar *text){
         GtkWidget *title = Gtk<Type>::menu_item_new(NULL, text); 
         gtk_widget_set_sensitive(title, TRUE);
@@ -478,7 +385,7 @@ GtkMenu *PkgPopUp<Type>::popUp(Type *type){
     if (!PKG::pkgPopUp) {
         PKG::pkgPopUp = GTK_MENU(gtk_menu_new()); 
         addMenuTitle(PKG::pkgPopUp, type->title());
-        //type->parseXML(); // implied with PkgPopUp<Type>::popUpItem()
+        type->parseXML(); 
     }
     auto view = Fm<Type>::getCurrentView();
     g_object_set_data(G_OBJECT(PKG::pkgPopUp), "baseModel", (void *)view);
@@ -489,7 +396,6 @@ GtkMenu *PkgPopUp<Type>::popUp(Type *type){
 
 template <class Type>
 GtkMenu *PkgPopUp<Type>::popUpItem(Type *type){
-    // when this is created, nonItem is also created.
     if (!PKG::pkgItemPopUp) {
         PKG::pkgItemPopUp = GTK_MENU(gtk_menu_new());
         addMenuTitle(PKG::pkgItemPopUp, type->itemTitle());

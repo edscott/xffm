@@ -165,7 +165,19 @@ public:
     }
         //XmlNode *node = topNode();
 
-    
+    const gchar *
+    getAttribute(XmlNode *node, const gchar *attribute){
+        auto p = node->attNames;
+        auto q = node->attValues;
+        for (p = node->attNames;p && *p; p++, q++){
+            if (strcmp(*p, attribute)==0 && *q){
+                return *q;
+            }
+        }
+        return NULL;
+    }
+
+
     void sweep(XmlNode *node, 
             gboolean (*function)(XmlNode *, void *data)=NULL,
             void *data=NULL)

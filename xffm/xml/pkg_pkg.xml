@@ -54,7 +54,7 @@ main configuration file.
 Displays the current version of pkg
     </option> 
 
-    <action pkg="pkg" command_options="1" actions="1" icon="xffm/emblem_bsd"
+    <action pkg="pkg" command_options="1" actions="1" icon="emblem-bsd"
     string="pkg" argument="action argument (if any)"
     protected="1" local="1" remote="1" no_selection="1" >
 NAME
@@ -66,7 +66,7 @@ DESCRIPTION
      There are some differences in functionality.  See pkg.conf(5) for
      details.
     </action>
-    <action pkg="pkg" cmd="add" string="Add" icon="xffm/stock_add"
+    <action pkg="pkg" cmd="add" string="Add" icon="list-add"
     protected="1" no_selection="1"
     command_options="1"  argument="pkg-name/url">
 Install a package from either a local source or a remote one.
@@ -142,7 +142,7 @@ and are not required any more.
 	      moval.
     </option>
     </action>
-    <action pkg="pkg" cmd="backup" string="Backup" icon="xffm/emblem_important"
+    <action pkg="pkg" cmd="backup" string="Backup" icon="media-tape"
     protected="1" no_selection="1"
     command_options="1">
 Dump the local package database to a file specified on the command-line.
@@ -196,7 +196,7 @@ Sanity checks installed packages.
                    Assume yes when asked for confirmation before installing
 		   missing dependencies.    </option>
     </action>
-    <action pkg="pkg" cmd="clean" string="Clean" icon="xffm/stock_edit-clear"
+    <action pkg="pkg" cmd="clean" string="Clean" icon="edit-clear-all"
     protected="1" no_selection="1"
     command_options="1" >
 Cleans the local cache of fetched remote packages.
@@ -235,7 +235,7 @@ Convert to and from the old pkg_add(1) format.
     command_options="1" argument="">
 Create a package
     </action>
-    <action pkg="pkg" cmd="delete" string="Uninstall" icon="xffm/stock_remove"
+    <action pkg="pkg" cmd="delete" string="Uninstall" icon="list-remove"
     protected="1" local="1"  argument="pkg-name">
 Delete a package from the database and the system.
     <option loption="all">
@@ -282,7 +282,7 @@ Delete a package from the database and the system.
 		tion.  
     </option>
     </action>
-    <action pkg="pkg" cmd="fetch" string="Download" icon="xffm/emblem_blueball"
+    <action pkg="pkg" cmd="fetch" string="Download" icon="document-save"
     protected="1" remote="1" no_selection="1" argument="pkg-name">
 Fetches packages from a remote repository.
     <option loption="all">
@@ -336,7 +336,7 @@ Fetches packages from a remote repository.
 		   packages.
     </option>
     </action>
-    <action pkg="pkg" cmd="info" string="Information" icon="xffm/stock_about"
+    <action pkg="pkg" cmd="info" string="Information" icon="dialog-information"
     scroll_up="1"
     local="1" no_selection="1" argument="pkg-name">
 Display information about installed packages.
@@ -431,7 +431,7 @@ Display information about installed packages.
 	     Displays information from the package archive pkg-file.
     </option>
     </action>
-    <action pkg="pkg" cmd="install" string="Install" icon="xffm/emblem_greenball"
+    <action pkg="pkg" cmd="install" string="Install" icon="software-update-available"
     protected="1" remote="1" no_selection="1" argument="pkg-name">
 Install a package from a remote package repository.  If a package
 is found in more than one remote repository, then installation
@@ -540,7 +540,7 @@ fully fetched.
 		lation.
     </option>
     </action>
-    <action pkg="pkg" cmd="lock" string="Lock" icon="xffm/emblem_lock"
+    <action pkg="pkg" cmd="lock" string="Lock" icon="changes-prevent"
     protected="1" local="1" no_selection="1" argument="pkg-name">
 Prevent modification or deletion of a package.
     <option loption="all">
@@ -596,7 +596,7 @@ Create a local package repository for remote usage.
     no_selection="1" argument="">
 Query information for remote repositories.
     </action>
-    <action pkg="pkg" cmd="search" string="Search" icon="xffm/emblem_find"
+    <action pkg="pkg" cmd="search" string="Search" icon="edit-find"
     no_selection="1" argument="pattern/pkg_name">
 Search for the given pattern in the remote package repositories.
     <option loption="case-sensitive">
@@ -737,7 +737,7 @@ Display package database statistics.
 	    Display disk space usage in	bytes only.
     </option>
     </action>
-    <action pkg="pkg" cmd="unlock" string="Unlock" icon="xffm/emblem_keyhole"
+    <action pkg="pkg" cmd="unlock" string="Unlock" icon="dialog-password"
     protected="1" local="1" no_selection="1" argument="pkg-name">
 Unlocks packages, allowing them to be modified or deleted
     <option loption="all">
@@ -771,7 +771,7 @@ Unlocks packages, allowing them to be modified or deleted
 	  Assume "yes" as the answer to	all questions.
     </option>
     </action>
-    <action pkg="pkg" cmd="update" string="Update Database" icon="xffm/stock_refresh"
+    <action pkg="pkg" cmd="update" string="Update Database" icon="view-refresh"
     protected="1" no_selection="1"
     command_options="1" >
 Update the available remote repositories as listed in
@@ -802,7 +802,7 @@ Displays UPDATING entries of installed packages.
     </option>
     </action>
     <action pkg="pkg" cmd="upgrade" string="Upgrade" 
-    no_version="1" icon="xffm/emblem_synchronized"
+    no_version="1" icon="edit-redo"
     protected="1" local="1" remote="1" no_selection="1" argument="pkg-name">
 Upgrade a package to a newer version.
     <option loption="case-sensitive">
@@ -876,7 +876,7 @@ Query the database for package(s) that installed a specific file.
 	     Be	quiet
     </option>
     </action>
-    <action pkg="pkg" cmd="help" string="Help" icon="xffm/emblem_help"
+    <action pkg="pkg" cmd="help" string="Help" icon="help-about"
     no_selection="1" scroll_up="1">
 Display usage information of the specified command.
     </action>
