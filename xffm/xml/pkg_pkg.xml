@@ -431,7 +431,7 @@ Display information about installed packages.
 	     Displays information from the package archive pkg-file.
     </option>
     </action>
-    <action pkg="pkg" cmd="install" string="Install" icon="software-update-available"
+    <action pkg="pkg" cmd="install" string="Install" icon="system-software-install"
     protected="1" remote="1" no_selection="1" argument="pkg-name">
 Install a package from a remote package repository.  If a package
 is found in more than one remote repository, then installation
@@ -802,7 +802,7 @@ Displays UPDATING entries of installed packages.
     </option>
     </action>
     <action pkg="pkg" cmd="upgrade" string="Upgrade" 
-    no_version="1" icon="edit-redo"
+    no_version="1" icon="system-software-update"
     protected="1" local="1" remote="1" no_selection="1" argument="pkg-name">
 Upgrade a package to a newer version.
     <option loption="case-sensitive">

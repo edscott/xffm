@@ -48,8 +48,8 @@ public:
     printError(GtkTextView *textview, gchar *string){
 	showTextSmall(textview);
         auto tag = Settings<Type>::getString("window.errorColor");
-        if (tag) print(textview, "xball", tag, string);
-        else print(textview, "xball", "red", string);
+        if (tag) print(textview, "edit-delete", tag, string);
+        else print(textview, "edit-delete", "red", string);
     }
  
     static void // print_icon will free string.

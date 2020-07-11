@@ -94,16 +94,17 @@ namespace xf {
 # define INFO_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printInfo(errorText); }
 
 # undef DBG
-//# define DBG(...)   { (void)0; }
+
+#ifdef NODEBUG
+# define DBG(...)   { (void)0; }
+#else
 # define DBG(...)  {fprintf(stderr, "DBG***> "); fprintf(stderr, __VA_ARGS__);}
+#endif
 
 # undef DBG_
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
 
 
-// This is drastic, we need a finer control for 
-// g_file_test hangs on stale nfs mounts
-//#define g_file_test(X,Y) xf::Thread<Type>::fileTest(X,Y)
 namespace xf {
     template <class Type> class Thread;
 }

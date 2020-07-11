@@ -125,7 +125,7 @@ public:
         g_hash_table_insert(iconname_hash, 
                 (void *)_("Copy"), (void *)"copy");
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Delete"), (void *)"delete");
+                (void *)_("Delete"), (void *)"edit-delete");
         g_hash_table_insert(iconname_hash, 
                 (void *)_("Shred"), (void *)"dialog-warning");
         //g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
