@@ -153,25 +153,6 @@ typedef enum {
     SEPARATOR_TYPE
 }RodentMenuType;
 
-typedef struct RodentCallback {
-    gint function_id;
-    const gchar *string;
-    const gchar *icon;
-    gpointer function;
-    gpointer data;
-    guint key; 
-    guint mask; 
-    gint type;
-}RodentCallback;
-
-
-typedef struct RodentMenuDefinition{
-    gint type;
-    const gchar *parent_id;
-    const gchar *id;
-    RodentCallback callback;
-} RodentMenuDefinition;
-
 
 typedef struct menuItem_t {
     const gchar *label;

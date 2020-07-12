@@ -22,6 +22,7 @@ public:
     XmlNode *child;
     XmlNode *parent;
 
+
     XmlNode(gint in_level, const gchar *in_name, const gchar **aNames, const gchar **aValues):
         text(NULL), next(NULL), child(NULL),level(in_level)
     {
@@ -57,12 +58,15 @@ public:
 class Xml{
     FILE *input_;
     struct stat st_;
+    void *structure_;
 public:
     gint items;
 
     gint level;
     XmlNode **lastNode;
     XmlNode *topNode;
+    
+    void *structure(void){return structure_;}
 
     Xml(void): level(-1), items(0){
         // 255 node levels, more than enough.
@@ -76,8 +80,9 @@ public:
     }
 
 
-    gboolean init(const gchar *xmlFile){
+    gboolean init(const gchar *xmlFile, void *structure){
         input_ = NULL;
+        structure_ = structure;
         auto resourcePath = g_build_filename(PREFIX, "share", "xml", "xffm+", xmlFile, NULL);
         if (!g_file_test(resourcePath, G_FILE_TEST_EXISTS)){
             DBG("initXml(): %s %s\n", resourcePath, strerror(ENOENT));
@@ -173,7 +178,7 @@ public:
 
     XmlStructure(const gchar *xmlFile){
         Xml& xml = XML::xml;
-        if (!xml.init(xmlFile)){
+        if (!xml.init(xmlFile, (void *)this)){
             DBG("parseXMLfile() initProperties failed.\n");
             return;
         }

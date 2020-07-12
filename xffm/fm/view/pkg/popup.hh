@@ -44,6 +44,9 @@
 #define SCROLL_UP                0x2000
 */
 
+#define PLAIN_OPTION    0x01
+#define ARGUMENT_OPTION  0x02
+#define ARGUMENT_EXCLUSIVE_OPTION  0x04
 
 namespace xf
 {
@@ -69,25 +72,6 @@ typedef struct pkg_command_t {
 
 } pkg_command_t;
 
-typedef struct RodentCallback {
-    gint function_id;
-    const gchar *string;
-    const gchar *icon;
-    gpointer function;
-    gpointer data;
-    guint key; 
-    guint mask; 
-    gint type;
-}RodentCallback;
-
-
-typedef struct RodentMenuDefinition{
-    gint type;
-    const gchar *parent_id;
-    const gchar *id;
-    RodentCallback callback;
-} RodentMenuDefinition;
-
 
 namespace PKG{
     GList *parentList=NULL;
@@ -96,7 +80,6 @@ namespace PKG{
     GtkMenu *pkgItemPopUp=NULL;
     menuItem2_t *mainItems=NULL;
     menuItem2_t *specificItems=NULL;
-    RodentMenuDefinition *xml_menu_definitions = NULL;
 }
 
 
@@ -119,13 +102,14 @@ public:
         GList *actionsList = xmlStructure->getList(tag, "action");
         GList *actionOptionsList = xmlStructure->getList("action", "option");
         // create popup menus.
-        createMainMenu(xmlStructure, actionsList, actionOptionsList);
-        createSpecificMenu(xmlStructure, actionsList);
-        for (auto l=actionsList; l && l->data; l=l->next){
+        createMenu(xmlStructure, actionsList, &(PKG::pkgPopUp));
+        createMenu(xmlStructure, actionsList, &(PKG::pkgItemPopUp), TRUE);
+        
+        /*for (auto l=actionsList; l && l->data; l=l->next){
             auto node = (XML::XmlNode *)l->data;
             auto cmd = xmlStructure->getAttribute(node, "cmd");
             DBG("-> %s: %s\n", cmd, node->text);
-        }
+        }*/
             
 
         g_list_free(optionsList);
@@ -159,67 +143,24 @@ private:
 
 
     }
-       
-    //We need GList for options (currently have), and GList for actions 
-    //in simultaneous mode.
-    //Update window icon
+
     
-    static void createSpecificMenu(XML::XmlStructure *xmlStructure, 
-            GList *list){
+    static void createMenu(XML::XmlStructure *xmlStructure, 
+            GList *list, GtkMenu **menu_p, gboolean specific=FALSE){
 
         TRACE("createSpecificMenu...\n");
         const gchar *tag[2]={"local", "remote"};
-        GList *specificList = getActiveList(xmlStructure, list, "icon", tag);
+        // Only nodes with "icon" attribute defined will be shown.
+        GList *activeList = getActiveList(xmlStructure, list, 
+                "icon", specific?tag:NULL);
 
-        PKG::specificItems =(menuItem2_t *)calloc(g_list_length(specificList)+1, sizeof(menuItem2_t));
-        if (!PKG::specificItems){
-            DBG("createSpecificMenu(): calloc: %s\n", strerror(errno));
+        auto items = (menuItem2_t *)calloc(g_list_length(activeList)+1, sizeof(menuItem2_t));
+        if (!items){
+            DBG("createSpecificMenu(items): calloc: %s\n", strerror(errno));
             throw(1);
         }
         
-        auto t = PKG::specificItems;
-        for(auto l = specificList; l && l->data; l = l->next, t++){
-            auto node = (XML::XmlNode *)l->data;
-            t->icon = xmlStructure->getAttribute(node, "icon");
-            auto cmd = xmlStructure->getAttribute(node, "cmd");
-            auto pkg = xmlStructure->getAttribute(node, "pkg");
-            // Not for actions:
-            // auto text = xmlStructure->getText(node);
-            auto tooltip = xmlStructure->getAttribute(node, "tooltip");
-            if (cmd) {
-                t->label=g_strdup_printf("  <i>%s %s</i>", pkg, cmd);
-            } else {
-                t->label=g_strdup_printf("<b>%s</b>", pkg);
-            }
-            TRACE("label = %s\n", t->label);
-            // t->tooltip = text;
-            t->tooltip = (tooltip)?tooltip:NULL;
-            t->callback=(void *)MenuPopoverSignals<Type>::noop;
-            t->callbackData=node;
-        }
-        g_list_free(specificList);
-        DBG("creating Popup<Type>...\n");
-        auto popup = new(Popup<Type>)(PKG::specificItems);
-        //Title would be selected item label:
-        //popup->changeTitle( _("Software Updater"), PKG_ICON);
-        PKG::pkgItemPopUp = popup->menu();
-        gtk_widget_show_all(GTK_WIDGET(PKG::pkgItemPopUp));
-        return;
-    }
-
-
-    static void createMainMenu(XML::XmlStructure *xmlStructure, 
-            GList *actionsList, GList *actionOptionsList){
-        TRACE("createMainMenu...\n");
-        GList *activeList = getActiveList(xmlStructure, actionsList, "icon");
-
-        PKG::mainItems =(menuItem2_t *)calloc(g_list_length(activeList)+1, sizeof(menuItem2_t));
-        if (!PKG::mainItems){
-            DBG("createMainMenu(): calloc: %s\n", strerror(errno));
-            throw(1);
-        }
-        
-        auto t = PKG::mainItems;
+        auto t = items;
         for(auto l = activeList; l && l->data; l = l->next, t++){
             auto node = (XML::XmlNode *)l->data;
             t->icon = xmlStructure->getAttribute(node, "icon");
@@ -229,25 +170,27 @@ private:
             // auto text = xmlStructure->getText(node);
             auto tooltip = xmlStructure->getAttribute(node, "tooltip");
             if (cmd) {
-                t->label=g_strdup_printf("  <i>%s %s</i>", pkg, cmd);
+                t->label= cmd;
+                //t->label=g_strdup_printf("  <i>%s %s</i>", pkg, cmd);
             } else {
-                t->label=g_strdup_printf("<b>%s</b>", pkg);
+                t->label= pkg;
+                //t->label=g_strdup_printf("<b>%s</b>", pkg);
             }
-            t->tooltip = (tooltip)?tooltip:NULL;
-//            t->tooltip = text;
             TRACE("label = %s\n", t->label);
-            t->callback=(void *)MenuPopoverSignals<Type>::noop;
+            t->tooltip = (tooltip)?tooltip:NULL;
+            t->callback=(void *)processCmd;
             t->callbackData=node;
         }
-        
         g_list_free(activeList);
         DBG("creating Popup<Type>...\n");
-        auto popup = new(Popup<Type>)(PKG::mainItems);
-        popup->changeTitle( _("Software Updater"), PKG_ICON);
-        PKG::pkgPopUp = popup->menu();
-        gtk_widget_show_all(GTK_WIDGET(PKG::pkgPopUp));
+        auto popup = new(Popup<Type>)(items);
+        g_free(items);
+        //Title would be selected item label:
+        //popup->changeTitle( _("Software Updater"), PKG_ICON);
+        *menu_p = popup->menu();
+        gtk_widget_show_all(GTK_WIDGET(*menu_p));
         return;
-     }
+    }
 
 private:
         // First, lets count how many items have the 
@@ -304,6 +247,429 @@ private:
         g_object_set_data(G_OBJECT(menu), "title", title);
         gtk_container_add (GTK_CONTAINER (menu), title);
 
+    }
+   
+    static GtkDialog *createDialog(XML::XmlNode *node)
+    {
+        auto xmlStructure = (XML::XmlStructure *)XML::xml.structure();
+        auto dialog = GTK_DIALOG(gtk_dialog_new());
+        gtk_window_set_modal (GTK_WINDOW(dialog), TRUE);
+        gtk_window_set_resizable(GTK_WINDOW(dialog), TRUE);
+        gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(mainWindow));
+        //gtk_window_set_keep_above (GTK_WINDOW(dialog), TRUE);
+        gtk_window_set_title(GTK_WINDOW(dialog), _("Package Manager"));
+        gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+        
+        auto button = Gtk<Type>::dialog_button("help-contents", _("Help"));
+        gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 1);
+        button = Gtk<Type>::dialog_button("redball", _("Cancel"));
+        gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 2);
+        button = Gtk<Type>::dialog_button("greenball", _("Accept"));
+        gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 3);
+
+        auto content_box = GTK_BOX(gtk_dialog_get_content_area(dialog));
+        g_object_set_data(G_OBJECT(content_box),"dialog", dialog);
+        auto top = GTK_LABEL(gtk_label_new(""));
+        g_object_set_data(G_OBJECT(dialog), "top", top);
+
+        auto cmd = xmlStructure->getAttribute(node, "cmd");
+        auto pkg = xmlStructure->getAttribute(node, "pkg");
+        gchar *t = 
+            g_strdup_printf("<big><b>%s <i>%s</i></b></big>",
+                    pkg, (cmd)?cmd:"");
+        gtk_label_set_markup(top, t);
+        g_free(t);
+        gtk_widget_show(GTK_WIDGET(top));
+        gtk_box_pack_start(content_box, GTK_WIDGET(top), FALSE, FALSE, 1);
+         
+        // Add pkg options...
+        auto markup =g_strdup_printf("<b>%s</b> %s", pkg, _("options:"));
+        auto button2 = gtk_toggle_button_new_with_label("");
+        auto label_widget = gtk_bin_get_child(GTK_BIN(button2));
+        gtk_label_set_markup(GTK_LABEL(label_widget), markup);
+        auto obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
+        gtk_box_pack_start(GTK_BOX(obox), button2, FALSE, FALSE, 1);
+        gtk_widget_show(GTK_WIDGET(obox));
+        gtk_widget_show(button2);
+        gtk_box_pack_start(GTK_BOX(content_box), GTK_WIDGET(obox), FALSE, FALSE, 1);
+
+        
+        //contentAddOptions(content_box, node, markup);
+        g_free(markup);                  
+ /*
+        if (use_custom_envar){
+            GtkBox *env_box = GTK_BOX(rfm_hbox_new(FALSE, 1));
+            gtk_box_pack_start(content_box, GTK_WIDGET(env_box), FALSE, FALSE, 1);
+    // FIXME: find available translation for "Environment options:"
+            GtkWidget *env=gtk_label_new(_("Environment options:"));
+            gtk_box_pack_start(env_box, GTK_WIDGET(env), FALSE, FALSE, 1);
+            GtkWidget *env_entry = gtk_entry_new();
+            if (envvar && strlen(envvar)) gtk_entry_set_text(GTK_ENTRY(env_entry), envvar);
+            else {
+                gtk_entry_set_placeholder_text (GTK_ENTRY(env_entry), 
+                        (use_custom_envar_string)?(use_custom_envar_string):"ENVAR=\"\"");
+            }
+            gtk_box_pack_start(env_box, GTK_WIDGET(env_entry), FALSE, FALSE, 1);
+            g_object_set_data(G_OBJECT(dialog), "env_entry", env_entry);
+            gtk_widget_show_all(GTK_WIDGET(env_box));
+        }
+  */          
+
+
+
+        /*if (cmd==NULL){
+            content_add_actions(view_p, content_box, _("action:"));//XXX
+        }*/
+
+
+        /*if (c->cmd_options){
+            markup =g_strdup_printf("<b>%s</b> %s", c->cmd, _("options:"));
+            content_add_options(view_p, content_box, c->cmd_options, markup);//XXX
+            g_free(markup);
+        } */ 
+        
+        /*{
+            GtkWidget *cmd_options_box = rfm_vbox_new(FALSE, 1);
+            g_object_set_data(G_OBJECT(cmd_options_box),"dialog", dialog);
+            gtk_widget_show(cmd_options_box);
+            gtk_box_pack_start(GTK_BOX(content_box), GTK_WIDGET(cmd_options_box), FALSE, FALSE, 1);
+            g_object_set_data(G_OBJECT(dialog), "cmd_options_box", cmd_options_box);
+        }
+            
+        GtkWidget *argument = content_add_argument(view_p, content_box, c);
+*/
+        gtk_widget_show(GTK_WIDGET(content_box));
+
+        gtk_widget_grab_focus(GTK_WIDGET(button)); 
+        gtk_widget_show(GTK_WIDGET(dialog));
+        return dialog;
+    }
+    
+    static void 
+    contentAddOptions(GtkBox *content_box, XML::XmlNode *node, const gchar *markup){
+        auto xmlStructure = (XML::XmlStructure *)XML::xml.structure();
+        if (!options) return;
+        auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(content_box), "dialog"));
+        auto obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
+        auto button = gtk_toggle_button_new_with_label(markup);
+        auto label_widget = gtk_bin_get_child(GTK_BIN(button));
+        gtk_label_set_markup(GTK_LABEL(label_widget), markup);
+        g_object_set_data(G_OBJECT(button), "dialog", dialog);
+        gtk_box_pack_start(GTK_BOX(content_box), GTK_WIDGET(obox), FALSE, FALSE, 1);
+        gtk_box_pack_start(GTK_BOX(obox), button, FALSE, FALSE, 1);
+            
+        auto tit = gtk_label_new("");
+        gtk_box_pack_start(obox, tit, FALSE, FALSE, 1);
+        gtk_widget_show(tit);
+        
+        gtk_widget_show(GTK_WIDGET(obox));
+        gtk_widget_show(button);
+
+        auto scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+        gtk_box_pack_start(GTK_BOX(content_box), scrolled_window, FALSE, FALSE, 1);
+        
+        obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
+        gtk_container_add(GTK_CONTAINER(scrolled_window), GTK_WIDGET(obox));
+        gtk_widget_show(GTK_WIDGET(obox));
+
+        auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));;
+        gtk_box_pack_start(obox, GTK_WIDGET(vbox), FALSE, FALSE, 1);
+        //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(hideshow), scrolled_window); //XXX
+        gtk_widget_realize(GTK_WIDGET(obox));
+
+
+        gint width = -1;
+        GtkWidget *check;
+        auto childNode=node->child;
+
+        for (auto optionNode = node->child; optionNode; optionNode = optionNode->next)
+        {
+            obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
+            gtk_box_pack_start(vbox, GTK_WIDGET(obox), FALSE, FALSE, 1);
+       
+            auto loption = xmlStructure->getAttribute(optionNode, "loption");
+            
+            gchar *label = g_strdup_printf ("--%s", loption);
+            check = gtk_check_button_new_with_label(label);
+            g_object_set_data(G_OBJECT(dialog), label, check);
+            TRACE("adding %s -> %p\n", label, check);
+            auto hlp = xmlStructure->getText(optionNode);
+
+            //GdkPixbuf *pixbuf = rfm_get_pixbuf("xffm/emblem_about", 24);
+            //rfm_add_custom_tooltip(check, pixbuf, pp->hlp);
+            gtk_widget_set_tooltip_text(GTK_WIDGET(check), hlp);
+
+            g_object_set_data(G_OBJECT(check), "dialog", dialog);
+            //g_object_set_data(G_OBJECT(check), "options", options);//XXX
+            gtk_box_pack_start(GTK_BOX(obox), check, FALSE, FALSE, 1);
+            GtkRequisition minimum;
+            auto parameter = xmlStructure->getAttribute(optionNode, "parameter");
+            auto active = xmlStructure->getAttribute(optionNode, "active");
+            if (parameter) {
+                GtkWidget *entry = createOptionEntry(obox, dialog, check, parameter, label);
+                //gtk_widget_size_request(GTK_WIDGET(dialog), &minimum);//XXX
+                if (minimum.width > width) width = minimum.width;
+                g_object_set_data(G_OBJECT(check), "type", GINT_TO_POINTER(ARGUMENT_OPTION));
+                //g_object_set_data(G_OBJECT(entry), "options", options);//XXX
+                //g_signal_connect(G_OBJECT (entry), "key-release-event", G_CALLBACK (update_option_entry), tit);//XXX
+                //g_signal_connect(G_OBJECT (entry), "button-press-event", G_CALLBACK (update_option_entry), tit);//XXX
+                if (active) {
+                    gtk_entry_set_text(GTK_ENTRY(entry), active);
+                }
+
+            } else {
+                g_object_set_data(G_OBJECT(check), "type", GINT_TO_POINTER(PLAIN_OPTION));
+            }
+            if (active) {
+                gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), TRUE);
+            }
+            //g_signal_connect(G_OBJECT (check), "clicked", G_CALLBACK (update_option), tit);//XXX
+            //g_signal_connect (G_OBJECT (check), "clicked", G_CALLBACK (sensitivize_checks), NULL);//XXX
+
+            g_free(label);
+        }
+        // update option text after last button is created, not before.
+        //update_option(GTK_BUTTON(check), tit);//XXX XXX
+
+        if (width > 0) width +=30; // hack
+        gtk_widget_set_size_request(scrolled_window, width, 100);
+        gtk_widget_realize(GTK_WIDGET(vbox));
+    }
+
+    static GtkWidget *
+    createOptionEntry(GtkBox *obox, GtkDialog *dialog, GtkWidget *check, 
+            const gchar *parameter, const gchar *label){
+        GtkWidget *entry = gtk_entry_new();
+                
+        g_object_set_data(G_OBJECT(entry), "check", check);
+        gtk_entry_set_placeholder_text (GTK_ENTRY(entry),  parameter);
+        g_object_set_data(G_OBJECT(entry), "dialog", dialog);
+        
+        g_object_set_data(G_OBJECT(check), "entry", entry);
+        gchar *elabel = g_strconcat(label, "-entry", NULL);
+        g_object_set_data(G_OBJECT(dialog), elabel, entry);
+        g_free(elabel);
+        GtkWidget *lab = gtk_label_new("=");
+        gtk_box_pack_start(obox, GTK_WIDGET(lab), FALSE, FALSE, 1);
+        gtk_box_pack_end(obox, GTK_WIDGET(entry), TRUE, TRUE, 1);
+        gtk_widget_show_all(GTK_WIDGET(obox));
+        gtk_widget_set_sensitive(entry, FALSE);
+        g_object_set_data(G_OBJECT(check), "type", GINT_TO_POINTER(ARGUMENT_OPTION)); 
+        return entry;
+    }
+
+/*    
+    static void
+    update_option(GtkButton *button, gpointer data){
+        GtkDialog *dialog = g_object_get_data(G_OBJECT(button), "dialog");
+        gchar *text=g_strdup("");
+        pkg_option_t *options = g_object_get_data(G_OBJECT(button), "options");
+        if (options != xml_options){
+            g_object_set_data(G_OBJECT(dialog), "cmd_options", options);
+        }
+
+        text = content_get_options(dialog, text, options);
+
+        GtkLabel *tit = data;
+        gchar *markup = g_strdup_printf("<span color=\"red\">%s</span>", text);
+        gtk_label_set_markup(tit, markup);
+        g_free(markup);
+    }
+
+    static gboolean
+    update_option_entry (GtkWidget *widget,
+                   GdkEvent  *event,
+                   gpointer   data){
+        GtkButton *button = g_object_get_data(G_OBJECT(widget), "check");
+
+        update_option(button, data);
+        return FALSE;
+    }
+*/
+
+    static gchar *
+    pkgConfirm(void *data){
+        auto *node = (XML::XmlNode *)data;
+        auto dialog = createDialog(node);
+
+        gint response;
+        response = gtk_dialog_run(dialog);
+        gtk_widget_hide(GTK_WIDGET(dialog));
+
+
+        gtk_widget_destroy(GTK_WIDGET(dialog));
+        return NULL;
+#if 0
+        if (use_custom_envar) {
+            GtkEntry *entry = g_object_get_data(G_OBJECT(dialog), "env_entry");
+            const gchar *g = gtk_entry_get_text(entry);
+            g_free(envvar);
+            if (g && strlen(g)) envvar = g_strdup(g);
+            else envvar = NULL;
+        }
+
+        if (response == 1){ // Help button
+            // construct specific help command 
+            widgets_t *widgets_p = rfm_get_widget("widgets_p");
+            // default, freebsd pkg
+            gchar *arg[]={pkg_command, "help", c->cmd, NULL};
+            if (emerge){ // This will probably change if emerge implements action specific help
+                arg[0] = "man";
+                arg[1] = "emerge";
+                arg[2] = NULL;
+            } else if (apt){
+                arg[0] = "man";
+                arg[1] = "apt-get";
+                arg[2] = NULL;
+            } 
+            // FIXME: zypper and yum case, and apt
+            //        need to consider translations, or execute in locale=C
+
+            rfm_clear_text (widgets_p); 
+            rfm_show_text (widgets_p); 
+            if (emerge) {
+                // dump stderr on man output...
+                rfm_thread_run_argv_full (widgets_p, arg, FALSE, NULL, rfm_operate_stdout, dump_stderr, scroll_to_top);
+            } else {
+                rfm_thread_run_argv_full (widgets_p, arg, FALSE, NULL, rfm_operate_stdout, NULL, scroll_to_top);
+            }
+        }
+
+        gtk_widget_hide(GTK_WIDGET(dialog));
+
+
+        // get response string
+        gchar *response_string = NULL;
+        if (response == 3){
+            widgets_t *widgets_p = rfm_get_widget("widgets_p");
+            response_string = content_get_options(dialog, g_strdup(""), xml_options);
+            gchar *pcr=g_object_get_data(G_OBJECT(widgets_p->paper), "pkg_confirm_response");
+            g_free(pcr);
+            pcr = NULL;
+            g_object_set_data(G_OBJECT(widgets_p->paper), "pkg_confirm_response", NULL);
+            // In zypper/yum, assume yes is a global option
+            if (zypper) {
+                pcr = g_strdup_printf("%s --non-interactive", response_string);
+            }
+            else if (yum){
+                pcr = g_strdup_printf("%s --assumeyes", response_string);
+            } else if (apt) {
+                pcr = g_strdup_printf("%s --assume-yes", response_string);
+            }
+
+            const gchar *action = NULL;
+            if (c->cmd == NULL) action = content_get_action(GTK_WIDGET(dialog));
+            else action = c->cmd;
+            if (action) {
+                gchar *g = g_strconcat(response_string, " ", action, NULL);
+                g_free(response_string);
+                response_string = g; 
+                if (pcr) {
+                    g = g_strconcat(pcr, " ", action, NULL);
+                    g_free(pcr);
+                    pcr = g;   
+                }   
+            }
+
+            // In pkg, assume yes is an action option
+            if (pkg) {
+                pcr = g_strdup_printf("%s -y", response_string);
+            }
+
+            // If action has any other options, then get them too.
+            pkg_option_t *cmd_options = g_object_get_data(G_OBJECT(dialog), "cmd_options");
+            
+            if (cmd_options || c->cmd_options) {
+                response_string = content_get_options(dialog, response_string, 
+                        (c->cmd_options)?c->cmd_options:cmd_options);
+            }
+        
+            
+
+            // FIXME: get and append action options
+            
+            if (argument) {
+                const gchar *a = gtk_entry_get_text(GTK_ENTRY(argument));
+                gchar *g = g_strconcat(response_string, " ", a, NULL);
+                g_free(response_string);
+                response_string = g;
+                if (pcr) {
+                    g = g_strconcat(pcr, " ", a, NULL);
+                    g_free(pcr);
+                    pcr = g;   
+                }   
+            }
+            g_object_set_data(G_OBJECT(widgets_p->paper), "pkg_confirm_response", pcr);
+        }
+
+        gtk_widget_destroy(GTK_WIDGET(dialog));
+        return (void *) response_string;
+#endif
+
+    }
+
+    static 
+    void
+    processCmd(GtkMenuItem *m, gpointer data){
+        gchar *response = pkgConfirm(data);
+        
+#if 0
+        pkg_command_t *c = data;
+        if (!c) return;
+        widgets_t *widgets_p = rfm_get_widget ("widgets_p");
+        gint flags = 0;
+        DBG("pkg:\"%s\" cmd:\"%s\"\n", c->pkg, c->cmd);
+        gchar *cmd=NULL;
+        gchar *response = rfm_context_function(pkg_confirm_f, c);
+        if (response){
+                g_object_set_data(G_OBJECT(widgets_p->paper), "flags", NULL);
+            DBG("response=%s\n", response);
+            if (c->cmd && 
+            (strcmp(c->cmd, "search")==0 ||
+             strcmp(c->cmd, "--search")==0 ||
+                 strcmp(c->cmd, "-Ss")==0)){
+                view_t *view_p = widgets_p->view_p;
+                record_entry_t *en = rfm_copy_entry(view_p->en);
+                g_free (en->path);
+                g_strstrip(response);
+                en->path = g_strdup_printf("%s", response);
+                DBG("command will be \"emerge %s\" \n", en->path);
+                rodent_refresh (widgets_p, en);
+                // This would open a new window, which annoys me:
+                // gchar * cmd = g_strdup_printf("rodent-plug pkg %s", response);
+                // g_free(cmd);
+                flags = c->flags;
+                g_free(response);
+                return;
+            }
+            
+            const gchar *sudo;
+            if (geteuid() == 0 || (c->flags & ACCESS_READ)) sudo="";
+            else sudo = "sudo -A ";
+            cmd = g_strdup_printf("%s%s %s %s", sudo, (envvar)?envvar:"", c->pkg, response);
+
+            if (sudo && strlen(sudo)) {
+                // sudoize pcr if necessary
+                gchar *pcr=g_object_get_data(G_OBJECT(widgets_p->paper), "pkg_confirm_response");
+                gchar *g = g_strdup_printf("%s%s %s", sudo, c->pkg, pcr);
+                g_free(pcr);
+                pcr=g;
+                g_object_set_data(G_OBJECT(widgets_p->paper), "pkg_confirm_response", pcr);
+            }
+
+            g_object_set_data(G_OBJECT(widgets_p->paper), "flags", GINT_TO_POINTER(c->flags));
+
+
+            flags = c->flags;
+            rfm_diagnostics(widgets_p, "xffm_tag/blue", cmd, "\n", NULL);
+            DBG("do it --> %s\n", cmd);
+            g_free(response);
+        }
+            
+        do_it(widgets_p, cmd, flags);
+        g_free(cmd);
+#endif
+        return;
     }
 
 
