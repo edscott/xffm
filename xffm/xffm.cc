@@ -55,6 +55,7 @@
 
 #include <memory>
 
+//#define XFFM_ICON "emblem-bsd"
 #define XFFM_ICON "rodent_logo"
 #define FSTAB_ICON "media-eject/SE/drive-harddisk/2.0/225"
 #define EFS_ICON "drive-harddisk/SE/emblem-readonly/2.0/225"
