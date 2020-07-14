@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
-<rodent_pkg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rodent-pkg.xsd">
+<XffmPkg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XffmPkg.xsd">
+<!-- Schema not yet available. (Would require LibXml2 or similar)-->
  <pkg>
-
+    <action pkg="pkg" command_options="1" actions="1" icon="emblem-bsd"
+    string="pkg" argument="action argument (if any)"
+    protected="1" local="1" remote="1" no_selection="1"  tooltip="
+Interface for manipulating packages - registering, adding, removing and upgrading of packages. See pkg.conf(5) for details.">
     <option loption="debug" >
 Show debug information
     </option> 
@@ -54,10 +58,8 @@ main configuration file.
 Displays the current version of pkg
     </option> 
 
-    <action pkg="pkg" command_options="1" actions="1" icon="emblem-bsd"
-    string="pkg" argument="action argument (if any)"
-    protected="1" local="1" remote="1" no_selection="1"  tooltip="
-Interface for manipulating packages - registering, adding, removing and upgrading of packages. See pkg.conf(5) for details.">
+
+
     </action>
     <action pkg="pkg" cmd="add" string="Add" icon="list-add"
     protected="1" no_selection="1"

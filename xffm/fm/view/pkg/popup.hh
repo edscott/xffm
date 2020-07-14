@@ -97,26 +97,21 @@ public:
     static void parseXMLfile(const gchar *xmlFile, const gchar *tag){
         auto xmlStructure = new(XML::XmlStructure)(xmlFile);
         // PopulateStructures will create PKG::nodeList 
-        //populateStructures(xmlStructure, tag);
+        // populateStructures(xmlStructure, tag);
         GList *optionsList = xmlStructure->getList(tag, "option");
         GList *actionsList = xmlStructure->getList(tag, "action");
         GList *actionOptionsList = xmlStructure->getList("action", "option");
         // create popup menus.
         createMenu(xmlStructure, actionsList, &(PKG::pkgPopUp));
         createMenu(xmlStructure, actionsList, &(PKG::pkgItemPopUp), TRUE);
-        
         /*for (auto l=actionsList; l && l->data; l=l->next){
             auto node = (XML::XmlNode *)l->data;
             auto cmd = xmlStructure->getAttribute(node, "cmd");
             DBG("-> %s: %s\n", cmd, node->text);
         }*/
-            
-
         g_list_free(optionsList);
         g_list_free(actionsList);
         g_list_free(actionOptionsList);
-
-
     }
 private:
 
@@ -281,21 +276,8 @@ private:
         g_free(t);
         gtk_widget_show(GTK_WIDGET(top));
         gtk_box_pack_start(content_box, GTK_WIDGET(top), FALSE, FALSE, 1);
-         
-        // Add pkg options...
-        auto markup =g_strdup_printf("<b>%s</b> %s", pkg, _("options:"));
-        auto button2 = gtk_toggle_button_new_with_label("");
-        auto label_widget = gtk_bin_get_child(GTK_BIN(button2));
-        gtk_label_set_markup(GTK_LABEL(label_widget), markup);
-        auto obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
-        gtk_box_pack_start(GTK_BOX(obox), button2, FALSE, FALSE, 1);
-        gtk_widget_show(GTK_WIDGET(obox));
-        gtk_widget_show(button2);
-        gtk_box_pack_start(GTK_BOX(content_box), GTK_WIDGET(obox), FALSE, FALSE, 1);
 
-        
-        //contentAddOptions(content_box, node, markup);
-        g_free(markup);                  
+        // XXX here goes the use_custom_envar() conditional...
  /*
         if (use_custom_envar){
             GtkBox *env_box = GTK_BOX(rfm_hbox_new(FALSE, 1));
@@ -313,7 +295,15 @@ private:
             g_object_set_data(G_OBJECT(dialog), "env_entry", env_entry);
             gtk_widget_show_all(GTK_WIDGET(env_box));
         }
-  */          
+  */           
+        // Add pkg options...
+        auto markup =g_strdup_printf("<b>%s</b> %s", pkg, _("options:"));
+        contentAddOptions(node->child, content_box, markup);
+        g_free(markup);                  
+    
+        
+        
+        
 
 
 
@@ -345,71 +335,62 @@ private:
         return dialog;
     }
     
-    static void 
-    contentAddOptions(GtkBox *content_box, XML::XmlNode *node, const gchar *markup){
+    static void contentAddOptions(XML::XmlNode *node,
+            GtkBox *content_box, const gchar *markup)
+    {
         auto xmlStructure = (XML::XmlStructure *)XML::xml.structure();
-        if (!options) return;
-        auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(content_box), "dialog"));
-        auto obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
-        auto button = gtk_toggle_button_new_with_label(markup);
-        auto label_widget = gtk_bin_get_child(GTK_BIN(button));
-        gtk_label_set_markup(GTK_LABEL(label_widget), markup);
-        g_object_set_data(G_OBJECT(button), "dialog", dialog);
-        gtk_box_pack_start(GTK_BOX(content_box), GTK_WIDGET(obox), FALSE, FALSE, 1);
-        gtk_box_pack_start(GTK_BOX(obox), button, FALSE, FALSE, 1);
-            
-        auto tit = gtk_label_new("");
-        gtk_box_pack_start(obox, tit, FALSE, FALSE, 1);
-        gtk_widget_show(tit);
         
-        gtk_widget_show(GTK_WIDGET(obox));
-        gtk_widget_show(button);
+        auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(content_box), "dialog"));
+        auto pkgButton = gtk_toggle_button_new_with_label("");
+        g_object_set_data(G_OBJECT(pkgButton), "dialog", dialog);
+        
+        auto label_widget = gtk_bin_get_child(GTK_BIN(pkgButton));
+        gtk_label_set_markup(GTK_LABEL(label_widget), markup);
+        auto pkgBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
+        gtk_box_pack_start(GTK_BOX(pkgBox), pkgButton, FALSE, FALSE, 1);
+        gtk_widget_show(GTK_WIDGET(pkgBox));
+        gtk_widget_show(pkgButton);
+        gtk_box_pack_start(GTK_BOX(content_box), GTK_WIDGET(pkgBox), FALSE, FALSE, 1);
 
+        // Pkg options box.
         auto scrolled_window = gtk_scrolled_window_new(NULL, NULL);
         gtk_box_pack_start(GTK_BOX(content_box), scrolled_window, FALSE, FALSE, 1);
+
+        auto pkgOptionsBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
+        gtk_container_add(GTK_CONTAINER(scrolled_window), GTK_WIDGET(pkgOptionsBox));
+        gtk_widget_show(GTK_WIDGET(pkgOptionsBox));//
+        //gtk_widget_realize(GTK_WIDGET(pkgOptionsBox));
+
+        auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 1));
+        gtk_box_pack_start(GTK_BOX(pkgOptionsBox), GTK_WIDGET(vbox), FALSE, FALSE, 1);
+        g_signal_connect(G_OBJECT(pkgButton), "clicked", G_CALLBACK(hideShow), scrolled_window); 
+
         
-        obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
-        gtk_container_add(GTK_CONTAINER(scrolled_window), GTK_WIDGET(obox));
-        gtk_widget_show(GTK_WIDGET(obox));
-
-        auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));;
-        gtk_box_pack_start(obox, GTK_WIDGET(vbox), FALSE, FALSE, 1);
-        //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(hideshow), scrolled_window); //XXX
-        gtk_widget_realize(GTK_WIDGET(obox));
-
 
         gint width = -1;
         GtkWidget *check;
-        auto childNode=node->child;
-
-        for (auto optionNode = node->child; optionNode; optionNode = optionNode->next)
-        {
-            obox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
-            gtk_box_pack_start(vbox, GTK_WIDGET(obox), FALSE, FALSE, 1);
-       
+        for (auto optionNode = node; optionNode; optionNode = optionNode->next){
+            auto optionBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
+            gtk_box_pack_start(GTK_BOX(vbox), GTK_WIDGET(optionBox), FALSE, FALSE, 1);
             auto loption = xmlStructure->getAttribute(optionNode, "loption");
-            
             gchar *label = g_strdup_printf ("--%s", loption);
             check = gtk_check_button_new_with_label(label);
+            // XXX might collision with action option:
             g_object_set_data(G_OBJECT(dialog), label, check);
-            TRACE("adding %s -> %p\n", label, check);
+            DBG("adding %s -> %p\n", label, check);
             auto hlp = xmlStructure->getText(optionNode);
-
-            //GdkPixbuf *pixbuf = rfm_get_pixbuf("xffm/emblem_about", 24);
-            //rfm_add_custom_tooltip(check, pixbuf, pp->hlp);
             gtk_widget_set_tooltip_text(GTK_WIDGET(check), hlp);
-
             g_object_set_data(G_OBJECT(check), "dialog", dialog);
-            //g_object_set_data(G_OBJECT(check), "options", options);//XXX
-            gtk_box_pack_start(GTK_BOX(obox), check, FALSE, FALSE, 1);
+            //g_object_set_data(G_OBJECT(check), "options", options);
+            gtk_box_pack_start(GTK_BOX(optionBox), check, FALSE, FALSE, 1);
+            
             GtkRequisition minimum;
             auto parameter = xmlStructure->getAttribute(optionNode, "parameter");
             auto active = xmlStructure->getAttribute(optionNode, "active");
             if (parameter) {
-                GtkWidget *entry = createOptionEntry(obox, dialog, check, parameter, label);
-                //gtk_widget_size_request(GTK_WIDGET(dialog), &minimum);//XXX
+                GtkWidget *entry = createOptionEntry(optionBox, dialog, check, parameter, label);
+                gtk_widget_get_preferred_size(GTK_WIDGET(optionBox), &minimum, NULL);
                 if (minimum.width > width) width = minimum.width;
-                g_object_set_data(G_OBJECT(check), "type", GINT_TO_POINTER(ARGUMENT_OPTION));
                 //g_object_set_data(G_OBJECT(entry), "options", options);//XXX
                 //g_signal_connect(G_OBJECT (entry), "key-release-event", G_CALLBACK (update_option_entry), tit);//XXX
                 //g_signal_connect(G_OBJECT (entry), "button-press-event", G_CALLBACK (update_option_entry), tit);//XXX
@@ -425,16 +406,42 @@ private:
             }
             //g_signal_connect(G_OBJECT (check), "clicked", G_CALLBACK (update_option), tit);//XXX
             //g_signal_connect (G_OBJECT (check), "clicked", G_CALLBACK (sensitivize_checks), NULL);//XXX
-
             g_free(label);
+        
+            gtk_widget_show(GTK_WIDGET(check));
+            gtk_widget_show(GTK_WIDGET(optionBox));
+
+        
         }
         // update option text after last button is created, not before.
-        //update_option(GTK_BUTTON(check), tit);//XXX XXX
-
+        updateOption(GTK_BUTTON(check), g_object_get_data(G_OBJECT(dialog), "top"));
         if (width > 0) width +=30; // hack
         gtk_widget_set_size_request(scrolled_window, width, 100);
-        gtk_widget_realize(GTK_WIDGET(vbox));
+        //gtk_widget_realize(GTK_WIDGET(vbox));
+        gtk_widget_show(GTK_WIDGET(vbox));
     }
+
+    static void 
+    hideShow(GtkButton *button, gpointer *data) {
+
+        if (gtk_widget_get_visible(GTK_WIDGET(data))){
+            gtk_widget_hide(GTK_WIDGET(data));
+            gtk_widget_unrealize(GTK_WIDGET(data));
+
+            auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(button), "dialog"));
+            GtkRequisition requisition;
+            GtkRequisition natural;
+            gtk_widget_get_preferred_size(GTK_WIDGET(dialog), &requisition, &natural);
+            TRACE("w= %d h= %d\n", requisition.width, requisition.height);
+
+            gtk_window_resize(GTK_WINDOW(dialog), requisition.width, requisition.height);
+            gtk_window_set_resizable(GTK_WINDOW(dialog), TRUE);
+            // XXX use this resize algorithm for local/properties dialog...
+        } else {
+            gtk_widget_show_all(GTK_WIDGET(data));
+        }
+    }
+    
 
     static GtkWidget *
     createOptionEntry(GtkBox *obox, GtkDialog *dialog, GtkWidget *check, 
@@ -458,11 +465,24 @@ private:
         return entry;
     }
 
-/*    
+    
     static void
-    update_option(GtkButton *button, gpointer data){
+    updateOption(GtkButton *button, gpointer data){
+        GtkLabel *top = GTK_LABEL(data);
+
+        auto text = "FIXME: update with options";
+        gchar *markup = g_strdup_printf("<span color=\"red\">%s</span>", text);
+        gtk_label_set_markup(top, markup);
+        g_free(markup);
+
+        /*
+        auto node = (XML::XmlNode *node)data;
         GtkDialog *dialog = g_object_get_data(G_OBJECT(button), "dialog");
         gchar *text=g_strdup("");
+
+        for (auto n=node; n; n = n->next){
+
+        }
         pkg_option_t *options = g_object_get_data(G_OBJECT(button), "options");
         if (options != xml_options){
             g_object_set_data(G_OBJECT(dialog), "cmd_options", options);
@@ -473,9 +493,9 @@ private:
         GtkLabel *tit = data;
         gchar *markup = g_strdup_printf("<span color=\"red\">%s</span>", text);
         gtk_label_set_markup(tit, markup);
-        g_free(markup);
+        g_free(markup);*/
     }
-
+/*
     static gboolean
     update_option_entry (GtkWidget *widget,
                    GdkEvent  *event,
