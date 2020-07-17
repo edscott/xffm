@@ -7,17 +7,17 @@ class Popup{
     GtkMenu *menu_;
 public:
     Popup(menuItem2_t *item){
-        DBG("Popup constructor\n" );
+        TRACE("Popup constructor\n" );
         menu_ = createMenu(item);
         g_object_set_data(G_OBJECT(menu_), "popup", this);
-        DBG("Popup constructed\n" );
+        TRACE("Popup constructed\n" );
     }
     Popup(menuItem_t *item, const gchar *key[]=NULL, const gchar *keyIcon[]=NULL, gboolean small=FALSE){
-        DBG("Popup constructor\n" );
+        TRACE("Popup constructor\n" );
         menu_ = createMenu(item);
         decorateItems(menu_, key, keyIcon, small);
         g_object_set_data(G_OBJECT(menu_), "popup", this);
-        DBG("Popup constructed\n" );
+        TRACE("Popup constructed\n" );
     }
 
     GtkMenu *menu(void){ return menu_;}
@@ -58,6 +58,14 @@ public:
         gtk_widget_show(GTK_WIDGET(title));
     }
 
+    void changeTitle(const gchar *text, const gchar *iconName,
+            gchar *titleTooltip){
+        changeTitle(text, iconName);
+        auto title = GTK_WIDGET(g_object_get_data(G_OBJECT(menu_), "title"));
+        gtk_widget_set_tooltip_text(title, titleTooltip);
+        gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
+    }
+
     void changeTitle(const gchar *text, const gchar *iconName)
     {
         if (!text) return;
@@ -67,7 +75,7 @@ public:
             ERROR("base/popup.hh::changeTitle(): menu has no data object \"title\"\n");
             return;
         }
-        TRACE("changeTitle, title = %p\n",(void *)title);
+        TRACE("changeTitle, title = %p, iconName=%s\n",(void *)title, iconName);
         if (!strstr(text, "</span>")){
             gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", text);
             Gtk<Type>::menu_item_content(title, iconName, markup, -48);
@@ -216,7 +224,7 @@ private:
 
     static void
     decorateItems(GtkMenu *menu, const gchar *key[], const gchar *keyIcon[], gboolean small){
-        DBG("decorateItems, menu = %p\n", menu );
+        TRACE("decorateItems, menu = %p\n", menu );
         if (!key || !keyIcon) {
             DBG("!key || !keyIcon\n");
             return;

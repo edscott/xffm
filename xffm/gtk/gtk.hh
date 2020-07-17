@@ -295,6 +295,7 @@ public:
     static void 
     menu_item_content(GtkMenuItem *menuItem, const gchar *icon_id, const gchar *text, gint size){
         GdkPixbuf *pixbuf = (icon_id)? Pixbuf<Type>::getPixbuf (icon_id, size): NULL;    
+        TRACE("menu_item_content(%s) -> %p\n", icon_id, pixbuf);
         menu_item_content(menuItem, pixbuf, text);
         return;
     }
