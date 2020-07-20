@@ -376,13 +376,18 @@ public:
             pixbuf = zipThumbnail(path);
         }
         if (!pixbuf) {
-            pixbuf = gdk_pixbuf_new_from_file (path, &error);
+            // If file disappears before this completes, pixbuf will be
+            // NULL and GError undefined. So just ignore GError to avoid
+            // crash while trying to get the error message.
+            pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+            if (!pixbuf) return NULL;
+            /*pixbuf = gdk_pixbuf_new_from_file (path, &error);
             if (error){
                 Fm<Type>::printError(error->message);
                 TRACE("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
                 g_error_free(error);
                 return NULL;
-            }
+            }*/
         }
         auto pixbufWidth = gdk_pixbuf_get_width(pixbuf);
         auto pixbufHeight = gdk_pixbuf_get_height(pixbuf);
