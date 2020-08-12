@@ -207,7 +207,9 @@ public:
                     (p->callbackData)?p->callbackData:(void *) menu);
 
             gchar *markup;
-            markup = g_strdup_printf("<span size=\"small\">%s</span>", _(p->label));
+            auto color = p->protect?" color=\"#990000\"":" color=\"#009900\"";
+            markup = g_strdup_printf("<span size=\"small\" %s>%s</span>", color, _(p->label));
+            TRACE("*** markup=%s\n", color);
             Gtk<Type>::menu_item_content(GTK_MENU_ITEM(v), p->icon, markup, -16);
             if (p->tooltip) {
                 //Tooltip<Type>::custom_tooltip(GTK_WIDGET(v), NULL, markup);
@@ -215,6 +217,7 @@ public:
                 gtk_widget_set_tooltip_text(GTK_WIDGET(v), p->tooltip);
             }
             g_free(markup);
+            //gtk_widget_set_sensitive(GTK_WIDGET(v), p->sensitive);
             gtk_widget_show (v);
         }
         gtk_widget_show (GTK_WIDGET(menu));

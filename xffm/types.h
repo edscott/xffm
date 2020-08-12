@@ -167,6 +167,7 @@ typedef struct menuItem2_t {
     void *callback;
     void *callbackData;
     const gchar *tooltip;
+    gboolean protect;
 }menuItem2_t;
 
 typedef struct radio_t {

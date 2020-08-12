@@ -166,6 +166,7 @@ private:
             auto pkg = xmlStructure->getAttribute(node, "pkg");
             auto icon = xmlStructure->getAttribute(node, "icon"); 
             auto tooltip = xmlStructure->getAttribute(node, "tooltip");
+            auto protect = xmlStructure->getAttribute(node, "protected");
             if (!cmd){
                 titleIcon = icon;
                 titleText = pkg;
@@ -178,9 +179,10 @@ private:
             t->tooltip = tooltip;
             t->callback=(void *)processCmd;
             t->callbackData=node;
+            t->protect=protect?TRUE:FALSE;
         }
         g_list_free(activeList);
-        DBG("creating Popup<Type>...\n");
+        TRACE("creating Popup<Type>...\n");
         auto popup = new(Popup<Type>)(items);
         g_free(items);
         //Title would be selected item label:
@@ -258,9 +260,9 @@ private:
         gtk_window_set_title(GTK_WINDOW(dialog), _("Package Manager"));
         gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         
-        auto button = Gtk<Type>::dialog_button("help-contents", _("Help"));
-        gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 1);
-        button = Gtk<Type>::dialog_button("redball", _("Cancel"));
+        /*auto button = Gtk<Type>::dialog_button("help-contents", _("Help"));
+        gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 1);*/
+        auto button = Gtk<Type>::dialog_button("redball", _("Cancel"));
         gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 2);
         button = Gtk<Type>::dialog_button("greenball", _("Accept"));
         gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 3);
@@ -370,7 +372,6 @@ private:
             g_object_set_data(G_OBJECT(dialog), label, check);
             g_object_set_data(G_OBJECT(check), "top", top);
             g_object_set_data(G_OBJECT(check), "dialog", dialog);
-            DBG("adding %s -> %p\n", label, check);
             auto hlp = xmlStructure->getText(optionNode);
             gtk_widget_set_tooltip_text(GTK_WIDGET(check), hlp);
             g_object_set_data(G_OBJECT(check), "dialog", dialog);
@@ -379,6 +380,7 @@ private:
             GtkRequisition minimum;
             auto parameter = xmlStructure->getAttribute(optionNode, "parameter");
             auto active = xmlStructure->getAttribute(optionNode, "active");
+            TRACE("adding %s -> %p active=%s\n", label, check, active);
             if (parameter) {
                 GtkWidget *entry = createOptionEntry(optionBox, dialog, check, parameter, label);
                 gtk_widget_get_preferred_size(GTK_WIDGET(optionBox), &minimum, NULL);
@@ -458,13 +460,10 @@ private:
         g_object_set_data(G_OBJECT(check), "type", GINT_TO_POINTER(ARGUMENT_OPTION)); 
         return entry;
     }
-    
-    static void
-    updateOption(GtkButton *button, gpointer data){
+   
+    static gchar *commandLine(GtkDialog *dialog, gboolean withMarkup){
         auto xmlStructure = (XML::XmlStructure *)XML::xml.structure();
         //auto optionNode = (XML::XmlNode *)data;
-        GtkLabel *top = GTK_LABEL(g_object_get_data(G_OBJECT(button), "top"));
-        auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(button), "dialog"));
         auto pkgNode =  getPkgNode();
         auto actionNode =  (XML::XmlNode *)g_object_get_data(G_OBJECT(dialog), "actionNode");
         auto pkgText = contentGetOptions(pkgNode->child, dialog);
@@ -472,23 +471,33 @@ private:
 
         auto pkg = xmlStructure->getAttribute(actionNode, "pkg");
         auto cmd = xmlStructure->getAttribute(actionNode, "cmd");
-
-        auto markup = g_strdup_printf("<big><b>%s</b></big> <span color=\"red\">%s</span>\n<big><b><i>%s</i></b></big> <span color=\"red\">%s</span>",
+        gchar *markup;
+        if (withMarkup){
+            markup = g_strdup_printf("<big><b>%s</b></big> <span color=\"red\">%s</span>\n<big><b><i>%s</i></b></big> <span color=\"red\">%s</span>",
                 pkg, pkgText, cmd, actionText);
-
-        gtk_label_set_markup(top, markup);
-        g_free(markup);
+        } else {
+            markup = g_strdup_printf("%s %s %s %s", pkg, pkgText, cmd, actionText);
+        }
         g_free(pkgText);
         g_free(actionText);
+        return markup;
+    }
 
- 
+    static void
+    updateOption(GtkButton *button, gpointer data){
+        auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(button), "dialog"));
+        GtkLabel *top = GTK_LABEL(g_object_get_data(G_OBJECT(button), "top"));
+        auto markup = commandLine(dialog, TRUE);
+        auto xmlStructure = (XML::XmlStructure *)XML::xml.structure();
+        gtk_label_set_markup(top, markup);
+        g_free(markup);
     }
 
     static gboolean
     update_option_entry (GtkWidget *widget,
                    GdkEvent  *event,
                    gpointer   data){
-        DBG("update_option_entry...\n");
+        TRACE("update_option_entry...\n");
         auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(widget), "check"));
 
         updateOption(button, data);
@@ -506,6 +515,11 @@ private:
         gint response;
         response = gtk_dialog_run(dialog);
         gtk_widget_hide(GTK_WIDGET(dialog));
+        DBG("Response = %d\n", response);
+        if (response == 3){
+            auto command = commandLine(dialog, FALSE);
+            DBG("commandLine = %s\n", command);
+        }
 
 
         gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -572,7 +586,7 @@ private:
             gchar *label = g_strdup_printf ("--%s", loption);
             auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(dialog), label));
        
-            DBG("check %s: %p\n", label, check);
+            TRACE("check %s: %p\n", label, check);
             if (!check || !GTK_IS_TOGGLE_BUTTON(check)) continue;
 
             if (gtk_toggle_button_get_active(check)){
@@ -801,7 +815,7 @@ GtkMenu *PkgPopUp<Type>::popUp(Type *type){
     auto view = Fm<Type>::getCurrentView();
     g_object_set_data(G_OBJECT(PKG::pkgPopUp), "baseModel", (void *)view);
     g_object_set_data(G_OBJECT(PKG::pkgPopUp), "view", (void *)view);  
-    DBG("pkgItemPopUp=%p\n", PKG::pkgPopUp);
+    TRACE("pkgItemPopUp=%p\n", PKG::pkgPopUp);
     return PKG::pkgPopUp;
 }
 
@@ -816,18 +830,18 @@ GtkMenu *PkgPopUp<Type>::popUpItem(Type *type){
     auto view = Fm<Type>::getCurrentView();
     g_object_set_data(G_OBJECT(PKG::pkgItemPopUp), "baseModel", (void *)view);
     g_object_set_data(G_OBJECT(PKG::pkgItemPopUp), "view", (void *)view);    
-    DBG("pkgItemPopUp=%p\n", PKG::pkgItemPopUp);
+    TRACE("pkgItemPopUp=%p\n", PKG::pkgItemPopUp);
     return PKG::pkgItemPopUp;
 }
 
 template <class Type>
 void PkgPopUp<Type>::resetPopup(Type *type){
-    DBG("resetPopup=%p\n", PKG::pkgItemPopUp);  
+    TRACE("resetPopup=%p\n", PKG::pkgItemPopUp);  
 }
 
 template <class Type>
 void PkgPopUp<Type>::resetMenuItems(Type *type) {
-    DBG("resetMenuItems...\n");
+    TRACE("resetMenuItems...\n");
 }
 
 

@@ -609,7 +609,7 @@ Search for the given pattern in the remote package repositories.">
 		 Display the package installation prefix for each matched
 		 package.  Equivalent to -Q prefix.
     </option>
-    <option loption="quiet">
+    <option loption="quiet" active="1">
 		 Be ``quiet''.	Produce	less output.  In particular do not
 		 show an identifying label field for each package.
     </option>
