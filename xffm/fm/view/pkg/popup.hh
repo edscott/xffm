@@ -266,6 +266,7 @@ private:
         gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 2);
         button = Gtk<Type>::dialog_button("greenball", _("Accept"));
         gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), 3);
+        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(accept), dialog); 
 
         auto content_box = GTK_BOX(gtk_dialog_get_content_area(dialog));
         g_object_set_data(G_OBJECT(content_box),"dialog", dialog);
@@ -415,6 +416,15 @@ private:
         gtk_widget_set_size_request(scrolled_window, width, 100);
         //gtk_widget_realize(GTK_WIDGET(vbox));
         gtk_widget_show(GTK_WIDGET(vbox));
+    }
+    static void 
+    accept(GtkButton *button, gpointer *data) {
+        auto dialog = GTK_DIALOG(data);
+        auto  command = commandLine(dialog, FALSE);
+        DBG("command = %s\n", command);
+        // If not without confirm, confirm dialog
+        g_free(command);
+        return;
     }
 
     static void 

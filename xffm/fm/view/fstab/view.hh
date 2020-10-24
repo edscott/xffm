@@ -115,7 +115,7 @@ private:
         for (auto w=strv; w && *w; w++){
             if (strlen(*w) > 0) count++;
         }
-        DBG("count %d\n", count);
+        TRACE("count %d\n", count);
         if (!count) return NULL;
         out = (gchar **)calloc(count+1, sizeof(gchar *));
         auto v = out;

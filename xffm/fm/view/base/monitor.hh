@@ -132,7 +132,7 @@ public:
     BaseMonitor(GtkTreeModel *treeModel, View<Type> *view){
         reSelectList_ = NULL;
         monitorSerial_ = view->serial();
-        DBG("BaseMonitor:: monitorSerial=%d\n", monitorSerial_);
+        TRACE("BaseMonitor:: monitorSerial=%d\n", monitorSerial_);
         itemsHash_ = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
           //      TRACE("BaseMonitor thread itemshash=%p\n", itemsHash_);
         baseView_ = view;

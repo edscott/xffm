@@ -323,7 +323,7 @@ private:
            DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",view->serial(), p->serial());
             return G_SOURCE_REMOVE;
         }
-        DBG("LocalMonitor::changeItem(%s) serial Ok (%d)\n",f, p->serial());
+        TRACE("LocalMonitor::changeItem(%s) serial Ok (%d)\n",f, p->serial());
 
 
         // If an direct path icon (image for example) clear hash first
@@ -366,7 +366,7 @@ private:
         }
         
         
-        gboolean verbose = TRUE;//FALSE;
+        gboolean verbose = FALSE;
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());
         switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:

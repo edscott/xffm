@@ -806,7 +806,7 @@ public:
         if (!BaseSignals<Type>::validBaseView(view)) return;
         auto page = view->page();
         auto viewPath = g_strdup(page->workDir());    
-        DBG("local/popup.hh::reloadIcons()\"%s\"\n",viewPath);        
+        TRACE("local/popup.hh::reloadIcons()\"%s\"\n",viewPath);        
         view->loadModel(viewPath);
         g_free(viewPath);
     }
@@ -815,7 +815,7 @@ public:
     addBookmark(GtkMenuItem *menuItem, gpointer data)
     {
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        DBG("local/popup.hh::addBookmark():\"%s\"\n",path);
+        TRACE("local/popup.hh::addBookmark():\"%s\"\n",path);
         if (!RootView<Type>::addBookmark(path)) return;
         auto view =  (View<Type> *)g_object_get_data(G_OBJECT(data), "view");
         reloadIcons(view);

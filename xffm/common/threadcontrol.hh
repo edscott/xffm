@@ -151,7 +151,7 @@ public:
     // This should only be for network items.
     static gboolean
     fileTest(const gchar *path, GFileTest test){
-	DBG("*** Thread::fileTest(%s)\n", path);
+	DBG_T("*** Thread::fileTest(%s)\n", path);
         if (!path || !g_path_is_absolute(path)) return FALSE;
 
 	// Create data structure for sharing with thread.
@@ -226,11 +226,11 @@ public:
 		retval = FALSE;
 	       	break;
 	    case 1:
-		DBG("Thread::fileTest(%s): wait complete within time, result = FALSE.\n", heartbeat_p->path);
+		DBG_T("Thread::fileTest(%s): wait complete within time, result = FALSE.\n", heartbeat_p->path);
 		retval = FALSE;
 		break;
 	    case 2:
-		DBG("Thread::fileTest(%s): wait complete within time, result = TRUE.\n", heartbeat_p->path);
+		DBG_T("Thread::fileTest(%s): wait complete within time, result = TRUE.\n", heartbeat_p->path);
 		retval = TRUE;
 		break;
 	}
@@ -267,7 +267,7 @@ private:
         TRACE("heartbeat doing stat %s\n", heartbeat_p->path);
         struct stat st;
         if (lstat(heartbeat_p->path, &st) < 0) {
-            DBG("threadcontrol.hh::heartBeatTest(): lstat %s (%s)\n", heartbeat_p->path, strerror(errno));
+            DBG_T("threadcontrol.hh::heartBeatTest(): lstat %s (%s)\n", heartbeat_p->path, strerror(errno));
 	    condition = 1; // failed (FALSE)
 	    goto end;
         }
@@ -280,7 +280,7 @@ private:
                 goto end;
             }
             if (stat(heartbeat_p->path, &st) < 0) {
-                DBG("threadcontrol.hh::heartBeatTest(): stat %s (%s)\n",
+                DBG_T("threadcontrol.hh::heartBeatTest(): stat %s (%s)\n",
                     heartbeat_p->path, strerror(errno));
 		    condition = 1; // failed (FALSE)
 		    goto end;
