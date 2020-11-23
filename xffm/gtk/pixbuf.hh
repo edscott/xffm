@@ -316,14 +316,7 @@ private:
             close(fd);
         }
         if (g_file_test(fname, G_FILE_TEST_EXISTS)){
-            GError *error = NULL;
-            pixbuf = gdk_pixbuf_new_from_file (fname, &error);
-            if (error){
-                Fm<Type>::printError(error->message);
-                TRACE("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
-                pixbuf=NULL;
-                g_error_free(error);
-            }
+            pixbuf = gdk_pixbuf_new_from_file (fname, NULL);
             unlink(fname);
         }    
         g_free(fname);
@@ -381,13 +374,6 @@ public:
             // crash while trying to get the error message.
             pixbuf = gdk_pixbuf_new_from_file (path, NULL);
             if (!pixbuf) return NULL;
-            /*pixbuf = gdk_pixbuf_new_from_file (path, &error);
-            if (error){
-                Fm<Type>::printError(error->message);
-                TRACE("pixbuf.hh::gdk_pixbuf_new_from_file(): %s\n", error->message);
-                g_error_free(error);
-                return NULL;
-            }*/
         }
         auto pixbufWidth = gdk_pixbuf_get_width(pixbuf);
         auto pixbufHeight = gdk_pixbuf_get_height(pixbuf);
@@ -417,18 +403,10 @@ public:
 private:
     static GdkPixbuf *
     readThumbnail(const gchar *iconName, gint height){
-        GError *error=NULL;
         auto thumbnailPath = PixbufHash<Type>::get_thumbnail_path (iconName, height);
         TRACE("readThumbnail(): Now trying to load thumbnail from %s\n",  thumbnailPath);
-        auto pixbuf = gdk_pixbuf_new_from_file (thumbnailPath, &error);
-        if (error){
-            Fm<Type>::printError(error->message);
-            TRACE("readThumbnail(): %s (%s)\n", thumbnailPath, error->message);
-            g_error_free(error);
-            g_free(thumbnailPath);
-            return NULL;
-        } 
-        TRACE("preview.hh::loadFromThumbnails(%s): %s... OK.\n", iconName, thumbnailPath);
+        auto pixbuf = gdk_pixbuf_new_from_file (thumbnailPath, NULL);
+        TRACE("preview.hh::loadFromThumbnails(%s): %s... %p.\n", iconName, thumbnailPath, pixbuf);
         g_free(thumbnailPath);
         return pixbuf;
     }
