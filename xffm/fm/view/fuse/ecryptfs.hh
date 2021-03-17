@@ -709,12 +709,11 @@ public:
 
         auto textview = Fm<Type>::getCurrentTextview();
         Print<Type>::showTextSmall(textview);
-        auto command = g_strdup_printf(_("Mounting %s"), path);
+        gchar *command = g_strdup_printf(_("Mounting %s"), path);
  
         pthread_mutex_lock(&efsMountMutex);
         new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo, (void *)view);
 
-        g_free(command);
 
         // cleanup
         memset(optionsOn, 0, strlen(optionsOn));

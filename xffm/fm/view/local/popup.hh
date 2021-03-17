@@ -888,7 +888,6 @@ public:
                 };
                 new (CommandResponse<Type>)(command,"system-run", arg);
                 g_free(format);
-                g_free(command);
                 chdir(g_get_home_dir());
 
             } else {
@@ -934,7 +933,6 @@ public:
             new (CommandResponse<Type>)(command,"system-run", arg);
             g_free(basename);
             g_free(fmt);
-            g_free(command);
             g_free(target);
             g_free(response);
         }

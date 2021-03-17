@@ -123,7 +123,10 @@ private:
         }
         asyncReference--;
 
+
         progressObject->stop(); // This will destroy object.
+
+        
         for (auto l=list; l && l->data; l= l->next) g_free(l->data);
         g_list_free(list);
         g_free(target);

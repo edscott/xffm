@@ -743,7 +743,6 @@ public:
                     _("Unmounting %s"):_("Mounting %s"), path);
  
         new (CommandResponse<Type>)(command,"system-run", arg);
-        g_free(command);
 
 
         return TRUE;
