@@ -77,6 +77,8 @@ public:
                 _exit (123);
             }
             setsid(); // detach main process from tty
+        } else {
+          DBG("Xffm running in foreground.\n")
         }
         if (argv[1] && strcmp(argv[1],"-f")==0) {
             argv[1] = argv[2];

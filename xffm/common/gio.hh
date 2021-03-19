@@ -219,7 +219,7 @@ private:
          auto notebookP = Fm<Type>::getCurrentNotebook();
         auto pageP = notebookP->currentPageObject();
         pageP->run_lp_command(pageP->output(), pageP->workDir(), 
-                Util<Type>::argv2command(arg));
+                Util<Type>::argv2command(arg), FALSE);
     }
 
     static void
@@ -446,7 +446,7 @@ private:
         auto notebookP = Fm<Type>::getCurrentNotebook();
         auto pageP = notebookP->currentPageObject();
         Print<double>::showTextSmall(pageP->output());
-        //pageP->run_lp_command(pageP->output(), pageP->workDir(), command);        
+        //pageP->run_lp_command(pageP->output(), pageP->workDir(), command, FALSE);        
         switch (mode) {
             case MODE_RM:
                if (g_file_test(path, G_FILE_TEST_IS_DIR)){

@@ -94,6 +94,9 @@ public:
     static gint
     loadModel (View<Type> *view, const gchar *path)
     {
+      // XXX: This screws up one tab if a different tab is loading...
+      //      Create a mutex per each tab... 
+#if 10
         if (pthread_mutex_trylock(&previewMutex) != 0){
             DBG("Image preview thread is locked.\n");
             auto text = g_strdup_printf("%s (%s)", _("There are unfinished jobs: please wait until they are finished."), _("Previews"));
@@ -103,6 +106,7 @@ public:
             return 0;
         }
         pthread_mutex_unlock(&previewMutex);
+#endif
 
 	// Verify conectivity:
 	if (!Thread<Type>::fileTest(path,G_FILE_TEST_EXISTS)){

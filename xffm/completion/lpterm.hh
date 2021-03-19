@@ -93,7 +93,7 @@ public:
     }
 
     pid_t 
-    run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command){
+    run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command, gboolean withRunButton){
         pid_t child = 0;
         // On empty string, do a simple pwd
         if (!command || !strlen(command)) command = "pwd";
@@ -148,7 +148,7 @@ public:
             }
 
             child = run_c::shell_command(output, *c, scrollup);
-            page_->newRunButton(*c, child);
+            if (withRunButton) page_->newRunButton(*c, child);
             // forced shell to command:
             //run_c::shell_command(output, *c, FALSE);
             /*

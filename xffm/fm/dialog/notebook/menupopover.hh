@@ -198,6 +198,7 @@ public:
             auto page = notebook_p->currentPageObject(i);
             auto view = page->view();
             view->reloadModel();
+            DBG("toggleGroupItem page %d, reload...\n", i);
         }
         return value;
     }

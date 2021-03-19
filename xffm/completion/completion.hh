@@ -77,7 +77,7 @@ public:
                 return TRUE;
             }
             TRACE("command at %s\n", workdir);
-            this->run_lp_command(completionOutput_, workdir, command);
+            this->run_lp_command(completionOutput_, workdir, command, TRUE);
             this->csh_save_history(command);
             print_c::clear_text(completionInput_);
             g_free(command);
