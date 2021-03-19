@@ -96,6 +96,7 @@ public:
     {
       // XXX: This screws up one tab if a different tab is loading...
       //      Create a mutex per each tab... 
+      //      or do not loop a reload for all tabs (preferred)
 #if 10
         if (pthread_mutex_trylock(&previewMutex) != 0){
             DBG("Image preview thread is locked.\n");

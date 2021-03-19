@@ -193,6 +193,11 @@ public:
         gtk_check_menu_item_set_active(menuItem, value);
         Settings<Type>::setInteger(group, item, value);
         auto notebook_p = Fm<Type>::getCurrentNotebook();
+        auto page = Fm<Type>::getCurrentPage();
+        auto view = page->view();
+        view->reloadModel();
+/*
+ * see note view/local/model.hh:97 at function loadModel (View<Type> *, const gchar *)
         gint pages = gtk_notebook_get_n_pages (Fm<Type>::getCurrentNotebook()->notebook());
         for (int i=0; i<pages; i++){
             auto page = notebook_p->currentPageObject(i);
@@ -200,6 +205,7 @@ public:
             view->reloadModel();
             DBG("toggleGroupItem page %d, reload...\n", i);
         }
+*/
         return value;
     }
 
