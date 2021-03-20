@@ -216,10 +216,12 @@ public:
             g_free(command);
             return NULL;
         }
-        g_free(command);
         gchar buffer[1024];
         memset (buffer, 0, 1024);
-        fgets(buffer, 1023, pipe);
+        if (!fgets(buffer, 1023, pipe)){
+           DBG("fgets(%s): %s\n", command, "no characters read.");
+        }
+        g_free(command);
         pclose(pipe);
         if (strlen(buffer)) return g_strdup(buffer);
         return NULL;
@@ -309,8 +311,11 @@ public:
         if(pipe) {
             gchar line[PAGE_LINE];
             line[PAGE_LINE - 1] = 0;
-            fgets (line, PAGE_LINE - 1, pipe);
-            if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
+            if (!fgets (line, PAGE_LINE - 1, pipe)){
+                  DBG("fgets(%s): %s\n", command, "no characters read.");
+            } else {
+              if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
+            }
             pclose (pipe);
             return g_strdup(line);
         } 

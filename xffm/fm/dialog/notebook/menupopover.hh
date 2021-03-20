@@ -57,11 +57,15 @@ public:
         if (!workdir) workdir = Fm<Type>::getCurrentWorkdir();
         gchar *c = g_strdup(command);
         gchar *oldDir = g_get_current_dir ();
-        chdir(workdir);
+        if (chdir(workdir) < 0){
+          DBG("chdir(%s): %s\n", workdir, strerror(errno));
+        }
         pid_t child = run_c::thread_run(Fm<Type>::getCurrentTextview(), c, FALSE);
         Fm<Type>::getCurrentPage()->newRunButton(c, child);
         g_free(c);
-        chdir(oldDir);
+        if (chdir(oldDir) < 0){
+          DBG("chdir(%s): %s\n", oldDir, strerror(errno));         
+        }
         g_free(oldDir);
     }
 

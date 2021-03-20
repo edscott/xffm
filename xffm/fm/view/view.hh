@@ -162,8 +162,14 @@ public:
             case (ROOTVIEW_TYPE):
                 RootView<Type>::loadModel(view);
                 view->page()->updateStatusLabel(NULL);
+                view->page()->update_pathbar(g_get_home_dir());
+                {
+                  auto base = g_path_get_basename(g_get_home_dir());
+                  view->page()->setPageLabel(base);
+                  g_free(base);
+                }
                 break;
-            case (LOCALVIEW_TYPE):
+            case (LOCALVIEW_TYPE):{
                 // stop current monitor
                 if (view->monitorObject_) {
                     delete ((LocalMonitor<Type> *)view->monitorObject_);
@@ -172,14 +178,21 @@ public:
 
                 gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
                 while (gtk_events_pending()) gtk_main_iteration();
+                const gchar *thePath = g_get_home_dir();
                 if (strcmp(path, "xffm:local")==0) {
                     //view->monitor_ = 
                         LocalView<Type>::loadModel(view, g_get_home_dir());
                 } else {
                     //view->monitor_ = 
                         LocalView<Type>::loadModel(view, path);
+                    thePath = path;
                 }
-                break;
+                view->page()->update_pathbar(thePath);
+                auto base = g_path_get_basename(thePath);
+                view->page()->setPageLabel(base);
+                g_free(base);
+              }
+              break;
 #ifdef ENABLE_FSTAB_MODULE
             case (FSTAB_TYPE):
                 // stop current monitor
@@ -189,6 +202,7 @@ public:
                 }                //view->monitor_ = 
                 FstabView<Type>::loadModel(view);
                 view->page()->updateStatusLabel(NULL);
+                view->page()->update_pathbar(g_get_home_dir());
                 break;
 #ifdef ENABLE_EFS_MODULE
             case (EFS_TYPE):

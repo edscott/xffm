@@ -888,7 +888,9 @@ public:
                 };
                 new (CommandResponse<Type>)(command,"system-run", arg);
                 g_free(format);
-                chdir(g_get_home_dir());
+                if (chdir(g_get_home_dir()) < 0){
+                    DBG("chdir(%s): %s\n", g_get_home_dir(), strerror(errno));
+                }
 
             } else {
                 auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno?errno:ENOENT));

@@ -88,7 +88,9 @@ public:
         if (argv[1]){
             if (g_file_test(argv[1], G_FILE_TEST_IS_DIR)){
                 path = (gchar *)calloc(1,PATH_MAX);
-                realpath(argv[1], path);
+                if (!realpath(argv[1], path)){
+                  DBG("realpath(%s): %s\n", path, strerror(errno));
+                }
             }
             else path = g_strdup("xffm:root");
         } else path = g_strdup("xffm:root");
