@@ -258,7 +258,7 @@ private:
         //gtk_widget_show (GTK_WIDGET(right_options_vbox));
         //gtk_widget_show (GTK_WIDGET(center_options_vbox));
         //gtk_widget_show (GTK_WIDGET(left_options_vbox));
-        auto closeButton = gtk_c::dialog_button(NULL, _("Close"));
+        auto closeButton = gtk_c::dialog_button(NULL, _("Exit"));
         gtk_box_pack_start (vbox7b, GTK_WIDGET(closeButton), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT (closeButton), "clicked", 
                 BUTTON_CALLBACK(Type::onCloseDetails), (void *)findDialog);
@@ -598,7 +598,7 @@ private:
         gtk_widget_show (GTK_WIDGET(clearButton));
 
         auto closeButton =  
-            gtk_c::dialog_button("application-exit-symbolic", _("Close"));
+            gtk_c::dialog_button("application-exit-symbolic", _("Exit"));
         g_object_set_data(G_OBJECT(findDialog), "close_button", closeButton);
         g_object_set_data(G_OBJECT(closeButton), "dialog_", findDialog);
         g_signal_connect (G_OBJECT (closeButton), "clicked",

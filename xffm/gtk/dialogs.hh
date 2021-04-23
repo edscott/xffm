@@ -128,7 +128,7 @@ public:
      gtk_box_pack_end(vbox, GTK_WIDGET(vbox2), FALSE, FALSE,0);
      auto hbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
      gtk_box_pack_end(vbox2, GTK_WIDGET(hbox2), FALSE, FALSE,0);
-     auto button = Gtk<Type>::dialog_button("redball", _("Cancel"));
+     auto button = Gtk<Type>::dialog_button("redball", _("Close"));
      gtk_box_pack_end(hbox2, GTK_WIDGET(button), FALSE, FALSE,0);
      g_object_set_data(G_OBJECT(dialog), "buttonBox", (void *)hbox2); 
      g_signal_connect (button, "clicked",
