@@ -98,52 +98,53 @@ public:
       //      Create a mutex per each tab... 
       //      or do not loop a reload for all tabs (preferred)
 #if 10
-        if (pthread_mutex_trylock(&previewMutex) != 0){
-            DBG("Image preview thread is locked.\n");
-            auto text = g_strdup_printf("%s (%s)", _("There are unfinished jobs: please wait until they are finished."), _("Previews"));
-	    DBG_("%s", text);
-	    g_free(text);
-            gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
-            return 0;
-        }
-        pthread_mutex_unlock(&previewMutex);
+      if (pthread_mutex_trylock(&previewMutex) != 0){
+        DBG("Image preview thread is locked.\n");
+        auto text = g_strdup_printf("%s (%s)", 
+            _("There are unfinished jobs: please wait until they are finished."), _("Previews"));
+        DBG_("%s", text);
+        g_free(text);
+        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+        return 0;
+      }
+      pthread_mutex_unlock(&previewMutex);
 #endif
 
-	// Verify conectivity:
-	if (!Thread<Type>::fileTest(path,G_FILE_TEST_EXISTS)){
-            gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
-	    ERROR_("no response: %s\n", path);
-	    return 0;
-	}
+      // Verify conectivity:
+      if (!Thread<Type>::fileTest(path,G_FILE_TEST_EXISTS)){
+                gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+          ERROR_("no response: %s\n", path);
+          return 0;
+      }
         
-        TRACE("*** local/model.hh loadModel()\n");
-        auto treeModel = view->treeModel();
+      TRACE("*** local/model.hh loadModel()\n");
+      auto treeModel = view->treeModel();
 
 
-        auto reading = g_strdup_printf(_("Reading \"%s\""), path);
-        view->page()->updateStatusLabel(reading);
-        g_free(reading);
-        while(gtk_events_pending())gtk_main_iteration();
-        GList *directoryList = NULL;
+      auto reading = g_strdup_printf(_("Reading \"%s\""), path);
+      view->page()->updateStatusLabel(reading);
+      g_free(reading);
+      while(gtk_events_pending())gtk_main_iteration();
+      GList *directoryList = NULL;
 
-        directoryList = read_items (path);
+      directoryList = read_items (path);
 
-        /*auto inserting = g_strdup_printf("%s (%d)",_("Inserting rows..."), g_list_length(directoryList));
-        view->page()->updateStatusLabel(reading);
-        g_free(inserting);*/
-        while(gtk_events_pending())gtk_main_iteration();
+      /*auto inserting = g_strdup_printf("%s (%d)",_("Inserting rows..."), g_list_length(directoryList));
+      view->page()->updateStatusLabel(reading);
+      g_free(inserting);*/
+      while(gtk_events_pending())gtk_main_iteration();
 
-        // start adding items... (threaded...)
-        auto arg = (void **)calloc(3, sizeof(void *));
-        arg[0] = (void *)directoryList;
-        arg[1] = (void *)view;
-        arg[2] = (void *)g_strdup(path);
-        auto text = g_strdup_printf("LocalModel::loadModel(): threadInsert(%s)", path);
+      // start adding items... (threaded...)
+      auto arg = (void **)calloc(3, sizeof(void *));
+      arg[0] = (void *)directoryList;
+      arg[1] = (void *)view;
+      arg[2] = (void *)g_strdup(path);
+      auto text = g_strdup_printf("LocalModel::loadModel(): threadInsert(%s)", path);
 
 
-        new(Thread<Type>)(text, threadInsert, (void *)arg);
-        g_free(text);
-        return 0;
+      new(Thread<Type>)(text, threadInsert, (void *)arg);
+      g_free(text);
+      return 0;
     }
 
 
@@ -205,6 +206,8 @@ public:
             (Settings<Type>::getInteger("LocalView", "BySize") > 0);
         gboolean byDate = 
             (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
+        gboolean byType = 
+            (Settings<Type>::getInteger("LocalView", "ByType") > 0);
 
         auto needStat = bySize || byDate;
         //gboolean doPreviews = (Settings<Type>::getInteger("ImageSize", path) > 0);
@@ -468,6 +471,120 @@ public:
         return strcasecmp(xd_a->d_name, xd_b->d_name);
     }
 
+    static gint 
+    compareByType(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending,2);
+        if (test != 0) return test;
+        auto sign = (descending)? -1: 1;
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+        
+        gchar *ext_a = strrchr(xd_a->d_name,'.');
+        gchar *ext_b = strrchr(xd_b->d_name,'.');
+        if (!ext_a && !ext_b){
+          return sign * strcasecmp(xd_a->d_name, xd_b->d_name);
+        }
+        if (!ext_a) return sign;
+        if (!ext_b) return -sign;
+
+        return sign * strcasecmp(ext_a, ext_b);
+    }
+
+
+    static gint 
+    compareByNameType(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending,2);
+        if (test != 0) return test;
+        auto result = compareByType(a, b, descending);
+        if (result) return result;
+        // subsorting
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+        auto sign = (descending)? -1: 1;
+        return  sign * strcasecmp(xd_a->d_name, xd_b->d_name);
+    }
+
+    static gint 
+    compareByDateType(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending,2);
+        if (test != 0) return test;
+        auto result = compareByType(a, b, descending);
+        if (result) return result;
+        // subsorting
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+        auto sign = (descending)? -1: 1;
+        return  compareByDate(a, b, descending);
+    }
+
+    static gint 
+    compareBySizeType(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending,2);
+        if (test != 0) return test;
+        auto result = compareByType(a, b, descending);
+        if (result) return result;
+        // subsorting
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+        auto sign = (descending)? -1: 1;
+        return  compareByDate(a, b, descending);
+    }
+
+    static gint 
+    compareByDateSizeType(const void *a, const void *b, gboolean descending){
+        auto test = directoryTest(a, b, descending,2);
+        if (test != 0) return test;
+        auto result = compareByType(a, b, descending);
+        if (result) return result;
+        // subsorting
+        const xd_t *xd_a = (const xd_t *)a;
+        const xd_t *xd_b = (const xd_t *)b;
+        auto sign = (descending)? -1: 1;
+        return  compareByDateSize(a, b, descending);
+    }
+
+    static gint
+    compareByTypeUp (const void *a, const void *b) {
+        return compareByNameType(a, b, FALSE);
+    }
+    
+    static gint
+    compareByTypeDown (const void *a, const void *b) {
+        return compareByNameType(a, b, TRUE);
+    }
+
+ 
+    static gint
+    compareByDateTypeUp (const void *a, const void *b) {
+        return compareByDateType(a, b, FALSE);
+    }
+    
+    static gint
+    compareByDateTypeDown (const void *a, const void *b) {
+        return compareByDateType(a, b, TRUE);
+    }
+
+
+    static gint
+    compareBySizeTypeUp (const void *a, const void *b) {
+        return compareBySizeType(a, b, FALSE);
+    }
+    
+    static gint
+    compareBySizeTypeDown (const void *a, const void *b) {
+        return compareBySizeType(a, b, TRUE);
+    }
+
+    static gint
+    compareByDateSizeTypeUp (const void *a, const void *b) {
+        return compareByDateSizeType(a, b, FALSE);
+    }
+    
+    static gint
+    compareByDateSizeTypeDown (const void *a, const void *b) {
+        return compareByDateSizeType(a, b, TRUE);
+    }
+
     static gint
     compareByNameUp (const void *a, const void *b) {
         return compareByName(a, b, FALSE);
@@ -511,30 +628,41 @@ private:
 
     static GList *
     sortList(GList *list){
-        // Default sort order:
-        gboolean descending = Settings<Type>::getInteger("LocalView", "Descending") > 0;
-        gboolean bySize = (Settings<Type>::getInteger("LocalView", "BySize") > 0);
-        gboolean byDate = (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
-        if (bySize || byDate){
-            for (auto l=list; l && l->data; l=l->next){
-                auto xd_p = (xd_t *) l->data;
-                if (!xd_p->st) {
-		    if (getStat(xd_p) != 0) DBG("getStat failed at sortList()\n");
-		}
-            }
+      // Default sort order:
+      gboolean descending = Settings<Type>::getInteger("LocalView", "Descending") > 0;
+      gboolean bySize = (Settings<Type>::getInteger("LocalView", "BySize") > 0);
+      gboolean byDate = (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
+      gboolean byType = (Settings<Type>::getInteger("LocalView", "ByType") > 0);
+      if (bySize || byDate){
+        for (auto l=list; l && l->data; l=l->next){
+          auto xd_p = (xd_t *) l->data;
+          if (!xd_p->st) {
+            if (getStat(xd_p) != 0) DBG("getStat failed at sortList()\n");
+          }
         }
+      }
 
-        if (descending) { // byDate takes presedence over bySize...
-            if (byDate && bySize) return g_list_sort (list,compareByDateSizeDown); 
-            else if (byDate) return g_list_sort (list,compareByDateDown); 
-            else if (bySize) return g_list_sort (list,compareBySizeDown); 
-            else return g_list_sort (list,compareByNameDown);
-        } else {
-            if (byDate && bySize) return g_list_sort (list,compareByDateSizeUp); 
-            else if (byDate) return g_list_sort (list,compareByDateUp); 
-            else if (bySize) return g_list_sort (list,compareBySizeUp);
-            else return g_list_sort (list,compareByNameUp);
-        }
+      if (descending) { // byDate takes presedence over bySize...
+        if (byDate && bySize && byType) return g_list_sort (list,compareByDateSizeTypeDown); 
+        if (byDate && bySize) return g_list_sort (list,compareByDateSizeDown); 
+        else if (byDate && byType) return g_list_sort (list,compareByDateTypeDown); 
+        else if (byType && bySize) return g_list_sort (list,compareBySizeTypeDown); 
+
+        else if (byDate) return g_list_sort (list,compareByDateDown); 
+        else if (bySize) return g_list_sort (list,compareBySizeDown); 
+        else if (byType) return g_list_sort (list,compareByTypeDown); 
+        else return g_list_sort (list,compareByNameDown);
+      } else {
+        if (byDate && bySize && byType) return g_list_sort (list,compareByDateSizeTypeUp); 
+        if (byDate && bySize) return g_list_sort (list,compareByDateSizeUp); 
+        else if (byDate && byType) return g_list_sort (list,compareByDateTypeUp); 
+        else if (byType && bySize) return g_list_sort (list,compareBySizeTypeUp); 
+
+        else if (byDate) return g_list_sort (list,compareByDateUp); 
+        else if (bySize) return g_list_sort (list,compareBySizeUp);
+        else if (byType) return g_list_sort (list,compareByTypeUp);
+        else return g_list_sort (list,compareByNameUp);
+      }
     }
         
     static void *replaceTreeModel(void *data){
@@ -750,13 +878,16 @@ public:
         gboolean descending = Settings<Type>::getInteger("LocalView", "Descending") > 0;
         gboolean bySize = (Settings<Type>::getInteger("LocalView", "BySize") > 0);
         gboolean byDate = (Settings<Type>::getInteger("LocalView", "ByDate") > 0);
+        gboolean byType = (Settings<Type>::getInteger("LocalView", "ByType") > 0);
         if ((bySize || byDate) && !xd_b->st) {
     	    if (getStat(xd_b) != 0) DBG("getStat failed at insertItem()\n");
 	    //getStat(xd_b);
 	}
-        if (byDate && bySize) sortResult = compareByDateSize((void *)xd_p, (void *)(xd_b), descending);
+        if (byDate && bySize && byType) sortResult = compareByDateSizeType((void *)xd_p, (void *)(xd_b), descending);
+        else if (byDate && bySize) sortResult = compareByDateSize((void *)xd_p, (void *)(xd_b), descending);
         else if (byDate) sortResult = compareByDate((void *)xd_p, (void *)(xd_b), descending);
         else if (bySize) sortResult = compareBySize((void *)xd_p, (void *)(xd_b), descending);
+        else if (byType) sortResult = compareByType((void *)xd_p, (void *)(xd_b), descending);
         else sortResult = compareByName((void *)xd_p, (void *)(xd_b), descending);
 
         if (sortResult < 0){
