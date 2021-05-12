@@ -90,7 +90,7 @@ private:
         setWindowMaxSize();
         //g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
         gtk_window_set_title (findDialog, _("Find"));
-        gtk_window_set_position (findDialog, GTK_WIN_POS_MOUSE);
+        //gtk_window_set_position (findDialog, GTK_WIN_POS_MOUSE);
 
         GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf("edit-find", SIZE_ICON);
         gtk_window_set_icon (findDialog, pixbuf);
