@@ -233,8 +233,9 @@ public:
             g_warning("rfm_set_bin_markup(): incorrect function call\n");
             return;
         }
-        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(bin), "label"));
-        gtk_label_set_markup(label, (text)?text:"");
+
+        auto label = (GtkLabel *)g_object_get_data(G_OBJECT(bin), "label");
+        if (label) gtk_label_set_markup(label, (text)?text:"");
     }
 
     static void
