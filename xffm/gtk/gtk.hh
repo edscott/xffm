@@ -269,27 +269,29 @@ public:
 
     static void 
     menu_item_content(GtkMenuItem *menuItem, GdkPixbuf *pixbuf, const gchar *text){
-        auto image = GTK_IMAGE(g_object_get_data(G_OBJECT(menuItem), "image"));
-        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menuItem), "label"));
-        auto box = (GtkBox *)g_object_get_data(G_OBJECT(menuItem), "box");
-        gtk_container_remove(GTK_CONTAINER(menuItem), GTK_WIDGET(box));
-        box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
-        g_object_set_data(G_OBJECT(menuItem), "box", box);
+      GtkBox *oldBox = (GtkBox *)g_object_get_data(G_OBJECT(menuItem), "box");
 
-        if (pixbuf){
-            image = GTK_IMAGE(gtk_image_new_from_pixbuf (pixbuf));
-            gtk_widget_show (GTK_WIDGET(image));
-            gtk_box_pack_start(box, GTK_WIDGET(image), FALSE,FALSE,0);
-            g_object_set_data(G_OBJECT(menuItem), "image", image);
-        }
-        label = GTK_LABEL(gtk_label_new(""));
-        gtk_label_set_markup(label, text);
-        gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,0);
-        gtk_widget_show (GTK_WIDGET(label));
-        g_object_set_data(G_OBJECT(menuItem), "label", label);
-        gtk_widget_show(GTK_WIDGET(box));
-        gtk_container_add(GTK_CONTAINER(menuItem), GTK_WIDGET(box));
-        return;
+      gtk_container_remove(GTK_CONTAINER(menuItem), GTK_WIDGET(oldBox));
+      
+
+      auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0));
+      g_object_set_data(G_OBJECT(menuItem), "box", box);
+
+      if (pixbuf){
+          auto image = GTK_IMAGE(gtk_image_new_from_pixbuf (pixbuf));
+          gtk_widget_show (GTK_WIDGET(image));
+          gtk_box_pack_start(box, GTK_WIDGET(image), FALSE,FALSE,0);
+          g_object_set_data(G_OBJECT(menuItem), "image", image);
+      }
+      auto label = GTK_LABEL(gtk_label_new(""));
+      gtk_label_set_markup(label, text);
+      gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,0);
+      gtk_widget_show (GTK_WIDGET(label));
+      g_object_set_data(G_OBJECT(menuItem), "label", label);
+      gtk_widget_show(GTK_WIDGET(box));
+      gtk_container_add(GTK_CONTAINER(menuItem), GTK_WIDGET(box));
+    
+      return;
     }
 
     static void 
