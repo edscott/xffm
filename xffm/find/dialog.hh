@@ -86,7 +86,10 @@ private:
     
     void mkDialog(void){
         findDialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+        
         gtk_window_set_type_hint(findDialog, GDK_WINDOW_TYPE_HINT_DIALOG);
+        //gtk_window_set_position (findDialog, GTK_WIN_POS_MOUSE);
+        
         setWindowMaxSize();
         //g_object_set_data(G_OBJECT(findDialog), "window", findDialog);
         gtk_window_set_title (findDialog, _("Find"));
@@ -96,6 +99,9 @@ private:
         gtk_window_set_icon (findDialog, pixbuf);
         g_object_unref(pixbuf);
         
+        gtk_window_present (findDialog);
+        while (gtk_events_pending()) gtk_main_iteration();
+      
     }
 
     GtkPaned *mkVpane(void){
