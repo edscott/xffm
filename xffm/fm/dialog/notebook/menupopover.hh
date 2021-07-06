@@ -1,6 +1,6 @@
 #ifndef MENU_POPOVER_HH
 #define MENU_POPOVER_HH
-
+// add sort by extension
 namespace xf {
 
 GtkMenu *settingsMenu;
