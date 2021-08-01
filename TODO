@@ -1,3 +1,8 @@
+Really need this:
+Enable regexp filter located in pathbar zone, or just a checkbox 
+button in pathbar zone which will show/hide another hbox below the
+pathbar with text entry for regexp to be used. (regexp: entry)
+
 For 0.95
      
 *(BSD) Enable LocalMonitor::startMountThread for watching mount
