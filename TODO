@@ -1,3 +1,4 @@
+BUG: fgr no está pelando el -R (busqueda recursiva)
 Really need this:
 Enable regexp filter located in pathbar zone, or just a checkbox 
 button in pathbar zone which will show/hide another hbox below the
