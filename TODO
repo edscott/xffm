@@ -1,3 +1,5 @@
+BUG: showstopper, on copy/move, overwrite dialog will open for each and everyfile, only yes/no buttons. Missing checkbox "apply to all" and button "cancel". Also, stupid dialog causes deadlock (no core file found).
+
 BUG: fgr no está pelando el -R (busqueda recursiva)
 Really need this:
 Enable regexp filter located in pathbar zone, or just a checkbox 
