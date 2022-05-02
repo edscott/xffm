@@ -262,9 +262,9 @@ private:
             NULL
         };
         const gchar *keyIcon[]={
-            "applications-graphics",
-            "application-exit",
-            "system-search",
+            APPLICATIONS_GRAPHICS,
+            APPLICATION_EXIT,
+            SEARCH,
             NULL
         };
        

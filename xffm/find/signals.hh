@@ -632,8 +632,8 @@ private:
             command = g;
         }
         g_hash_table_replace(controllerHash, GINT_TO_POINTER(Data->pid), command);
-        print_c::print_icon(diagnostics, "system-search", "green", g_strconcat( _("Searching..."), "\n", NULL));
-        print_c::print_icon(diagnostics, "system-run", "bold", 
+        print_c::print_icon(diagnostics, SEARCH, "green", g_strconcat( _("Searching..."), "\n", NULL));
+        print_c::print_icon(diagnostics, SYSTEM_RUN, "bold", 
                 g_strdup_printf("%s: \"%s\"\n",_("Searching..."), (gchar *) command));
         return FALSE;
     }

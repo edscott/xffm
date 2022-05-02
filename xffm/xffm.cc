@@ -55,13 +55,6 @@
 
 #include <memory>
 
-//#define XFFM_ICON "emblem-bsd"
-#define XFFM_ICON "rodent_logo"
-#define FSTAB_ICON "media-eject/SE/drive-harddisk/2.0/225"
-#define EFS_ICON "drive-harddisk/SE/emblem-readonly/2.0/225"
-#define HOME_ICON "go-home"
-#define TRASH_ICON "user-trash"
-#define TRASH_FULL_ICON "user-trash-full"
 
 #ifdef HAVE_EMERGE 
 # define PKG_ICON "emblem-gentoo"

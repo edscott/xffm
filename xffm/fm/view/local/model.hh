@@ -979,16 +979,16 @@ private:
                     Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
             } else {
                 normal_pixbuf = 
-                    Pixbuf<Type>::getPixbuf("image-x-generic", -48);
+                    Pixbuf<Type>::getPixbuf(IMAGE_X_GENERIC, -48);
                 treeViewPixbuf = 
-                    Pixbuf<Type>::getPixbuf("image-x-generic", -24);
+                    Pixbuf<Type>::getPixbuf(IMAGE_X_GENERIC, -24);
             }
         }
 
         else if (xd_p->st) {
             auto type = xd_p->st->st_mode & S_IFMT;
             if (type == S_IFDIR) {
-                highlight_pixbuf = Pixbuf<Type>::getPixbuf(up?HIGHLIGHT_UP:"document-open", -48);
+                highlight_pixbuf = Pixbuf<Type>::getPixbuf(up?HIGHLIGHT_UP:DOCUMENT_OPEN, -48);
             }
         }
 

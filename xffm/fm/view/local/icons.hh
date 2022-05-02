@@ -1,7 +1,6 @@
 #ifndef XF_LOCALICONS__HH
 # define XF_LOCALICONS__HH
 
-#define DEFAULT_ICON "text-x-generic"
 namespace xf
 {
 template <class Type> class FstabView;
@@ -52,7 +51,7 @@ private:
             struct stat *st_p, gboolean doPreviews=FALSE){
         TRACE("getIconname(full)..\n");
         // Up directory:
-        if (strcmp(basename, "..")==0) return  g_strdup("go-up");
+        if (strcmp(basename, "..")==0) return  g_strdup(GO_UP);
 
         auto name = getBasicIconname(path, mimetype, doPreviews);
         if (!name){
@@ -111,24 +110,24 @@ public:
     static gchar *
     getBasicIconname(const gchar *path, const gchar *mimetype, gboolean doPreviews=FALSE){        
         TRACE("getBasicIconname(path, mimetype) mimetype=%s\n", mimetype);
-        if (strcmp(path, g_get_home_dir())==0) return g_strdup("user-home");
+        if (strcmp(path, g_get_home_dir())==0) return g_strdup(USER_HOME);
         if (!mimetype) {
             ERROR("fm/view/icons.hh/::getBasicIconname mimetype cannot be null\n");
             return g_strdup("image-missing");
         }
-        if (strcmp(mimetype, "inode/directory")==0) return  g_strdup("folder");
+        if (strcmp(mimetype, "inode/directory")==0) return  g_strdup(FOLDER);
 
         // Block device
-        if (strcmp(mimetype, "inode/blockdevice")==0) return g_strdup("drive-harddisk");
+        if (strcmp(mimetype, "inode/blockdevice")==0) return g_strdup(DRIVE_HARDDISK);
         
         // Character device:
-        if (strcmp(mimetype, "inode/chardevice")==0) return  g_strdup("input-keyboard-symbolic");
+        if (strcmp(mimetype, "inode/chardevice")==0) return  g_strdup(INPUT_KEYBOARD_SYMBOLIC);
 
         // Named pipe (FIFO):
-        if (strcmp(mimetype, "inode/fifo")==0) return  g_strdup("network-wired-symbolic");
+        if (strcmp(mimetype, "inode/fifo")==0) return  g_strdup(NETWORK_WIRED_SYMBOLIC);
 
         // UNIX domain socket:
-        if (strcmp(mimetype, "inode/socket")==0) return  g_strdup("network-wired-symbolic");
+        if (strcmp(mimetype, "inode/socket")==0) return  g_strdup(NETWORK_WIRED_SYMBOLIC);
         //if (strcmp(mimetype, "inode/regular")==0) return g_strdup(DEFAULT_ICON);
         
 

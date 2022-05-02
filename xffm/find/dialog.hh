@@ -586,7 +586,7 @@ private:
 
 
         auto cancelButton =  
-            gtk_c::dialog_button("process-stop-symbolic", _("Cancel"));
+            gtk_c::dialog_button(PROCESS_STOP, _("Cancel"));
         g_object_set_data(G_OBJECT(findDialog), "cancel_button", cancelButton);
         g_object_set_data(G_OBJECT(cancelButton), "dialog_", findDialog);
         gtk_widget_set_sensitive(GTK_WIDGET(cancelButton), FALSE);
@@ -596,7 +596,7 @@ private:
         
 
         auto clearButton =  
-            gtk_c::dialog_button("edit-clear-all-symbolic", _("Clear"));
+            gtk_c::dialog_button(EDIT_CLEAR, _("Clear"));
         g_object_set_data(G_OBJECT(findDialog), "clear_button", clearButton);
         g_object_set_data(G_OBJECT(clearButton), "dialog_", findDialog);
         g_signal_connect (G_OBJECT (clearButton), "clicked",
@@ -604,7 +604,7 @@ private:
         gtk_widget_show (GTK_WIDGET(clearButton));
 
         auto closeButton =  
-            gtk_c::dialog_button("application-exit-symbolic", _("Exit"));
+            gtk_c::dialog_button(APPLICATION_EXIT, _("Exit"));
         g_object_set_data(G_OBJECT(findDialog), "close_button", closeButton);
         g_object_set_data(G_OBJECT(closeButton), "dialog_", findDialog);
         g_signal_connect (G_OBJECT (closeButton), "clicked",
@@ -613,7 +613,7 @@ private:
 
 
         auto findButton =  
-            gtk_c::dialog_button("system-search-symbolic", _("Find"));
+            gtk_c::dialog_button(SEARCH, _("Find"));
         gtk_widget_set_can_default(GTK_WIDGET(findButton), TRUE);
         g_signal_connect (G_OBJECT (findButton), "clicked",
                 BUTTON_CALLBACK(Type::onFindButton), (gpointer)findDialog);

@@ -262,8 +262,8 @@ public:
         // Root
         auto name = "xffm:root";
         auto utf_name = util_c::utf_string(".");
-        auto icon_name = "go-up";
-        auto highlight_name = "go-up/NW/go-up-symbolic/2.0/225";
+        auto icon_name = GO_UP;
+        auto highlight_name = GO_UP "/NW/" GO_UP_SYMBOLIC "/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
         auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   
@@ -289,8 +289,8 @@ public:
          GtkTreeIter iter;
         // Home
         auto name = g_get_home_dir();
-        auto icon_name = "system-search";
-        auto highlight_name = "system-search/NE/" PKG_EMBLEM "/2.0/225";
+        auto icon_name = SEARCH;
+        auto highlight_name = SEARCH "/NE/" PKG_EMBLEM "/2.0/225";
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);
         auto highlight_pixbuf = pixbuf_c::getPixbuf(highlight_name,  -48);   

@@ -105,7 +105,7 @@ public:
         auto name = "xffm:root";
         auto utf_name = util_c::utf_string(".");
         auto icon_name = GO_UP;
-        auto highlight_name = "go-up/NW/go-up-symbolic/2.0/225";
+        auto highlight_name = GO_UP "/NW/" GO_UP_SYMBOLIC "/2.0/225";
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
@@ -131,7 +131,7 @@ public:
         // Root
         auto name = "/";
         auto utf_name = util_c::utf_string(_("Root Directory"));
-        auto icon_name = "system-file-manager";
+        auto icon_name = "system-file-manager-symbolic";
         auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);

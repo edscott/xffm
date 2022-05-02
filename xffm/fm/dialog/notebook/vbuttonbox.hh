@@ -245,15 +245,15 @@ public:
             g_strfreev(files);
         }
 #endif
-        auto search = gtk_c::newButton("system-search", _("Search"));
+        auto search = gtk_c::newButton(SEARCH, _("Search"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(search), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::search), NULL);
 
-        auto terminal = gtk_c::newButton("utilities-terminal", _("Open terminal"));
+        auto terminal = gtk_c::newButton(UTILITIES_TERMINAL, _("Open terminal"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(terminal), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(terminal), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::terminal), NULL);
 
-        auto newWindow = gtk_c::newButton("window-new", _("Open a New Window"));
+        auto newWindow = gtk_c::newButton(WINDOW_NEW, _("Open a New Window"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)xffmProgram);
@@ -268,16 +268,16 @@ public:
         }
 #endif
 
-        auto home = gtk_c::newButton("go-home", _("Home Directory"));
+        auto home = gtk_c::newButton(GO_HOME, _("Home Directory"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(home), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::home), NULL);
 
         // Increase image preview size button
-        auto imageUpButton = gtk_c::newButton("image-x-generic/SE/list-add/1.5/220", _("Reset image size"));
+        auto imageUpButton = gtk_c::newButton(IMAGE_X_GENERIC "/SE/list-add/1.5/220", _("Reset image size"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageUpButton), FALSE, FALSE, 0);
         g_signal_connect(imageUpButton, "clicked", G_CALLBACK(upImage), NULL);
         // Decrease image preview size button
-        auto imageDownButton = gtk_c::newButton("image-x-generic/SE/list-remove/1.5/220", _("Reset image size"));
+        auto imageDownButton = gtk_c::newButton(IMAGE_X_GENERIC "/SE/list-remove/1.5/220", _("Reset image size"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageDownButton), FALSE, FALSE, 0);
         g_signal_connect(imageDownButton, "clicked", G_CALLBACK(downImage), NULL);
 
