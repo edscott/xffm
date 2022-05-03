@@ -104,34 +104,34 @@ public:
         static void
         populate_iconname_hash(void){
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Open terminal"), (void *)"terminal");
+                (void *)_("Open terminal"), (void *)UTILITIES_TERMINAL);
         g_hash_table_insert(iconname_hash, 
                 (void *)_("Execute Shell Command"), (void *)"execute");
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Paste"), (void *)"edit-paste");
+                (void *)_("Paste"), (void *)EDIT_PASTE);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Add bookmark"), (void *)"list-add");
+                (void *)_("Add bookmark"), (void *)LIST_ADD);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Remove bookmark"), (void *)"list-remove");
+                (void *)_("Remove bookmark"), (void *)LIST_REMOVE);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Search"), (void *)"edit-find");
+                (void *)_("Search"), (void *)SEARCH);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Close"), (void *)"cancel");
+                (void *)_("Close"), (void *)CANCEL);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Exit"), (void *)"window-close");
+                (void *)_("Exit"), (void *)WINDOW_CLOSE);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Open with"), (void *)"execute");
+                (void *)_("Open with"), (void *)EXECUTE);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Cut"), (void *)"cut");
+                (void *)_("Cut"), (void *)EDIT_CUT);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Copy"), (void *)"copy");
+                (void *)_("Copy"), (void *)EDIT_COPY);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Delete"), (void *)"edit-delete");
+                (void *)_("Delete"), (void *)EDIT_DELETE);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Shred"), (void *)"dialog-warning");
+                (void *)_("Shred"), (void *)DIALOG_WARNING);
         //g_hash_table_insert(iconname_hash, "bcrypt", (void *)"emblem-keyhole");
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Open in New Tab"), (void *)"open");
+                (void *)_("Open in New Tab"), (void *)OPEN);
     }
 
     static void

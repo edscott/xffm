@@ -122,13 +122,13 @@ public:
     }
     static const gchar **menuIcons(void){
         static const gchar *keyIcon[]={
-            "document-new",
-            "tab-new-symbolic",
-            "edit-cut",
-            "edit-copy",
-            "edit-paste",
-            "edit-paste",
-            "edit-delete",
+            DOCUMENT_NEW,
+            TAB_NEW,
+            EDIT_CUT,
+            EDIT_COPY,
+            EDIT_PASTE,
+            EDIT_PASTE,
+            EDIT_PASTE,
             NULL
         };
         return keyIcon;
@@ -195,26 +195,26 @@ public:
     
     static const gchar **localMenuItemsIcons(void){
         static const gchar *keyIcon[]={
-            "bookmark-new",
-            "edit-clear-all",
-            "tab-new-symbolic",
-            "package-x-generic",
-            "insert-object",
+            BOOKMARK_NEW,
+            EDIT_CLEAR,
+            TAB_NEW,
+            PACKAGE_X_GENERIC,
+            INSERT_OBJECT,
 #ifdef ENABLE_FSTAB_MODULE            
-            "greenball",
-            "redball",
+            GREENBALL,
+            REDBALL,
 #endif
-            "edit-cut",
-            "edit-copy",
-            "edit-paste",
-            "edit-paste",
-            "edit-paste",
-            "edit-delete",
+            EDIT_CUT,
+            EDIT_COPY,
+            EDIT_PASTE,
+            EDIT_PASTE,
+            EDIT_PASTE,
+            EDIT_DELETE,
 
-            "document-revert",
-            "document-save",
-            "emblem-symbolic-link",
-            "document-properties",
+            DOCUMENT_REVERT,
+            DOCUMENT_SAVE,
+            SYMLINK,
+            DOCUMENT_PROPERTIES,
             NULL
         };
         return keyIcon;

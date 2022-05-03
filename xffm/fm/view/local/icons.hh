@@ -386,19 +386,19 @@ private:
         if (is_lnk) {
             TRACE("link %s --> %s\n", path, realpath(path,NULL));
             if (g_file_test(path, G_FILE_TEST_EXISTS))
-                emblem = g_strdup("/SW/emblem-symbolic-link/2.0/220");
+                emblem = g_strdup("/SW/" SYMLINK "/2.0/220");
             else
-                emblem = g_strdup("/SW/emblem-unreadable/2.0/220");
+                emblem = g_strdup("/SW/" EMBLEM_UNREADABLE "/2.0/220");
 #ifdef ENABLE_FSTAB_MODULE
             if (FstabView<Type>::isMounted(path)){
-                emblem = addEmblem(emblem, "/NW/greenball/3.0/220");
+                emblem = addEmblem(emblem, "/NW/" GREENBALL "/3.0/220");
                 return emblem;
             }
 #endif
         }
 
         if (RootView<Type>::isBookmarked(path)){
-            emblem = g_strdup("/SE/bookmark-new/2.0/220");
+            emblem = g_strdup("/SE/" BOOKMARK_NEW "/2.0/220");
         }
 
         gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(path);
@@ -410,9 +410,9 @@ private:
         if (d_type == DT_DIR || d_type == DT_BLK){
 
             if (FstabView<Type>::isMounted(path)){
-                emblem = addEmblem(emblem, "/NW/greenball/3.0/180");
+                emblem = addEmblem(emblem, "/NW/" GREENBALL "/3.0/180");
             } else if (FstabView<Type>::isInFstab(path)){
-                emblem = addEmblem(emblem, "/NW/grayball/3.0/180");
+                emblem = addEmblem(emblem, "/NW/" GRAYBALL "/3.0/180");
             }
         }
 #endif

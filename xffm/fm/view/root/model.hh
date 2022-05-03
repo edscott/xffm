@@ -131,7 +131,7 @@ public:
         // Root
         auto name = "/";
         auto utf_name = util_c::utf_string(_("Root Directory"));
-        auto icon_name = "system-file-manager-symbolic";
+        auto icon_name = FILE_MANAGER;
         auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
@@ -252,10 +252,10 @@ public:
             if (!p->path) continue;
             TRACE("adding bookmark %p -> %s\n", p, p->path);
              if (g_path_is_absolute(p->path)) {
-                const gchar *icon_name = "emblem-documents-symbolic/SE/bookmark-new/2.0/220";
+                const gchar *icon_name = EMBLEM_DOCUMENTS "/SE/" BOOKMARK_NEW "/2.0/220";
                 if (!Thread<Type>::fileTest(p->path, G_FILE_TEST_EXISTS)) {
                     DBG_("Bookmark %s does not exist\n", p->path);
-                    icon_name = "emblem-documents-symbolic/SE/edit-delete/2.0/220";
+                    icon_name = EMBLEM_DOCUMENTS "/SE/edit-delete/2.0/220";
                 }
                 auto basename = g_path_get_basename(p->path);
                 auto utf_name = util_c::utf_string(basename);

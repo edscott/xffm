@@ -234,6 +234,7 @@ private:
         }
         gint i=0;
         for (auto k=key; key[i] && keyIcon[i]; k++, i++){
+          TRACE("key=%s\n", *k);
             auto mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(menu), *k);
             if (!mItem) {
                 DBG("g_object_get_data(G_OBJECT(menu), \"%s\") failed.\n", *k);

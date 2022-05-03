@@ -258,13 +258,13 @@ private:
         const gchar *key[]={
             "Color settings",
             "Exit",
-            "Search",
+            //"Search",
             NULL
         };
         const gchar *keyIcon[]={
             APPLICATIONS_GRAPHICS,
             APPLICATION_EXIT,
-            SEARCH,
+            //SEARCH,
             NULL
         };
        

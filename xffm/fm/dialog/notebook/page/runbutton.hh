@@ -70,11 +70,11 @@ private:
 public:    
 
     RunButton(void){
-      DBG("RunButton void\n");
+      TRACE("RunButton void\n");
     }
     RunButton(void *data, const gchar * exec_command, pid_t child, gboolean shellIcon)
     {
-      DBG("RunButton for %s\n", exec_command);
+      TRACE("RunButton for %s\n", exec_command);
         setup(data, exec_command, child, shellIcon);
     }
     void setup(void *data, const gchar * exec_command, pid_t child, gboolean shellIcon)
@@ -100,7 +100,7 @@ public:
 
 
     ~RunButton(void){
-        DBG("RunButton::~RunButton... button_ %p\n", (void *)button_);
+        TRACE("RunButton::~RunButton... button_ %p\n", (void *)button_);
         gtk_widget_hide(GTK_WIDGET(menu_));
         gtk_widget_destroy(GTK_WIDGET(menu_));
         gtk_widget_hide(GTK_WIDGET (button_));

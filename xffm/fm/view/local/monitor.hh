@@ -352,11 +352,11 @@ private:
         gchar *s= second? g_file_get_path (second):g_strdup("--");
        
 
-        TRACE("*** monitor_f call...\n");
+        DBG("*** monitor_f call...\n");
         if (!f || !s) return;
         auto p = (LocalMonitor<Type> *)data;
         if (!p->active()){
-            TRACE("monitor_f(): monitor not currently active.\n");
+            DBG("monitor_f(): monitor not currently active.\n");
             return;
         }
         if (!BaseSignals<Type>::validBaseView(p->view())) return;
@@ -366,7 +366,8 @@ private:
         }
         
         
-        gboolean verbose = FALSE;
+        //gboolean verbose = FALSE;
+        gboolean verbose = TRUE;
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());
         switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
