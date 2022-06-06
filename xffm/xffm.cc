@@ -120,7 +120,7 @@ GList *customDialogs = NULL;
 #include "find/find.hh"
 #include "fm/fm.hh"
 
-
+#include <cassert>
 
 int
 main (int argc, char *argv[]) {
@@ -170,6 +170,10 @@ main (int argc, char *argv[]) {
     //g_free(text);
 #endif
     gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+
+    /*GMainLoop *ws = g_main_loop_new(NULL, FALSE);
+    assert(ws);
+    g_main_loop_run(ws);*/
     
     gtk_main();
     //delete(fm);
