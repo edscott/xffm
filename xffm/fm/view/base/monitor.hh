@@ -197,7 +197,7 @@ public:
         // add all initial items to hash
         if (itemsHash_) gtk_tree_model_foreach (treeModel, add2hash, (void *)itemsHash_);
         store_ = GTK_LIST_STORE(treeModel);
-        DBG( "*** start_monitor: %s\n", path);
+        TRACE( "*** start_monitor: %s\n", path);
         if (gfile_) g_object_unref(gfile_);
         gfile_ = g_file_new_for_path (path);
         GError *error=NULL;
@@ -206,7 +206,7 @@ public:
           g_object_unref(monitor_);
         }
         monitor_ = g_file_monitor (gfile_, G_FILE_MONITOR_WATCH_MOVES, cancellable_,&error);
-        DBG("monitor_=%p g_file=%p\n", monitor_, gfile_);
+        TRACE("monitor_=%p g_file=%p\n", monitor_, gfile_);
         if (error){
             ERROR("fm/base/monitor::g_file_monitor_directory(%s) failed: %s\n",
                     path, error->message);

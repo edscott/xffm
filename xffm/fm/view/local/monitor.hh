@@ -352,7 +352,7 @@ private:
         gchar *s= second? g_file_get_path (second):g_strdup("--");
        
 
-        DBG("*** monitor_f call...\n");
+        TRACE("*** monitor_f call...\n");
         if (!f || !s) return;
         auto p = (LocalMonitor<Type> *)data;
         if (!p->active()){
@@ -366,8 +366,8 @@ private:
         }
         
         
-        //gboolean verbose = FALSE;
-        gboolean verbose = TRUE;
+        gboolean verbose = FALSE;
+        //gboolean verbose = TRUE;
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());
         switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
