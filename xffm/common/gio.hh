@@ -219,7 +219,7 @@ private:
          auto notebookP = Fm<Type>::getCurrentNotebook();
         auto pageP = notebookP->currentPageObject();
         pageP->run_lp_command(pageP->output(), pageP->workDir(), 
-                Util<Type>::argv2command(arg), FALSE);
+                Util<Type>::argv2command(arg), FALSE,FALSE);
     }
 
     static void

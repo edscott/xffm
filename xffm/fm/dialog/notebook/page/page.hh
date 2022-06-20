@@ -133,11 +133,11 @@ public:
       
 
     pid_t command(const gchar *command){
-        return (this->run_lp_command(this->output(), this->workDir(), command, TRUE));
+        return (this->run_lp_command(this->output(), this->workDir(), command, TRUE, FALSE));
     }
 
     pid_t command(const gchar *command, const gchar *workdir){
-        return (this->run_lp_command(this->output(), workdir, command, TRUE));
+        return (this->run_lp_command(this->output(), workdir, command, TRUE, FALSE));
     }    
     
     void scriptRun(void){
@@ -180,7 +180,7 @@ public:
             g_free(command);
             command = g;
             this->csh_clean_start();
-            this->run_lp_command(this->output(), this->workDir(), command, TRUE);
+            this->run_lp_command(this->output(), this->workDir(), command, TRUE, FALSE);
             this->csh_save_history(command);
             print_c::clear_text(this->input());
             g_free(command);

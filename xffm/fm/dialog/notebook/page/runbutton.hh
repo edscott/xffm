@@ -376,7 +376,7 @@ public:
         if (inShell()) pid = shell_child_pid(pid);
 
         gchar *command = g_strdup_printf("renice +1 -p %ld", pid);
-        run_c::shell_command(textview_, command, FALSE);
+        run_c::shell_command(textview_, command, FALSE, TRUE);
         // Here we do not need to save "$command" to history...
         g_free(command);
 
@@ -439,7 +439,7 @@ public:
             command =  g_strdup_printf("%s -%d -%ld", kill, signal_id, pid);
         }
         WARN("signalling with %s\n", command);
-        Run<Type>::shell_command(textview_, command, FALSE);
+        Run<Type>::shell_command(textview_, command, FALSE, TRUE);
         // Again, when we signal process, there is no need to save command
         // in the csh history file.
         g_free(command);

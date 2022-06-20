@@ -93,7 +93,7 @@ public:
     }
 
     pid_t 
-    run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command, gboolean withRunButton){
+    run_lp_command(GtkTextView *output, const gchar *workdir, const gchar *command, gboolean withRunButton, gboolean showTextPane){
         pid_t child = 0;
         // On empty string, do a simple pwd
         if (!command || !strlen(command)) command = "pwd";
@@ -146,8 +146,8 @@ public:
                 scrollup = TRUE;
                 print_c::clear_text(output);
             }
-
-            child = run_c::shell_command(output, *c, scrollup);
+fprintf(stderr, "run_lp_command: %s\n",*c);
+            child = run_c::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) page_->newRunButton(*c, child);
             // forced shell to command:
             //run_c::shell_command(output, *c, FALSE);
@@ -169,7 +169,7 @@ public:
     void
     open_terminal(GtkTextView *output){
         const gchar *terminal = util_c::what_term();
-        run_c::shell_command(output, terminal, FALSE);
+        run_c::shell_command(output, terminal, FALSE, FALSE);
 /*        run_button_c *run_button_p = NULL;
         // XXX runbutton constructor will need textview and runbutton box
         run_button_p = new run_button_c(view_v, c, pid, run_in_shell(c));*/
