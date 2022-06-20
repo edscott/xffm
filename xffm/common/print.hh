@@ -395,9 +395,10 @@ private:
         GtkAllocation allocation;
         gtk_widget_get_allocation(window, &allocation);
         gint height = allocation.height;
+        
 
-        TRACE("setting vpane position to %d\n", height);
-        gtk_paned_set_position (vpane, height);
+        TRACE("setting vpane position to %d\n", height*2);
+        gtk_paned_set_position (vpane, height*2);
         g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
         return NULL;
     }
@@ -417,7 +418,7 @@ private:
         g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
         g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
         if (fullview) {
-            TRACE("show_text_buffer_f:setting vpane position to %d\n", min);
+            TRACE("show_text_buffer_f()::fullview:setting vpane position to %d\n", min);
             gtk_paned_set_position (vpane, min);
             g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(min));
             while (gtk_events_pending()) gtk_main_iteration();
@@ -435,7 +436,7 @@ private:
         else height = 2*vheight/3;
         TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
         if (gtk_paned_get_position(vpane) > height) {
-            TRACE("setting vpane position to %d\n", height);
+            TRACE("show_text_buffer_f()::setting vpane position to %d\n", height);
             gtk_paned_set_position (vpane, height);
             g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
         } else TRACE("not setting vpane position to %d\n", height);
