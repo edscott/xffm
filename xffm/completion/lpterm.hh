@@ -59,7 +59,9 @@ public:
     void setIconviewIcon(GtkWidget *iconview_icon){iconview_icon_ = iconview_icon;}
 
     LpTerm(void){
-        active_ = FALSE;
+      // always active as of 0.97  
+      //active_ = FALSE;
+        //
         // FIXME: these callback functions and connection should be connected 
         // in pagechild
          /*
@@ -146,7 +148,7 @@ public:
                 scrollup = TRUE;
                 print_c::clear_text(output);
             }
-fprintf(stderr, "run_lp_command: %s\n",*c);
+            TRACE("run_lp_command: %s\n",*c);
             child = run_c::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) page_->newRunButton(*c, child);
             // forced shell to command:

@@ -103,7 +103,7 @@ public:
         Util<Type>::getPasswordPrompt();
         g_object_set_data(G_OBJECT(mainWindow), "xffm", xffm);
         xffm->setDialogIcon(XFFM_ICON);
-//        xffm->setDialogIcon("system-file-manager");
+//        xffm->setDialogIcon(FILE_MANAGER);
         xf::ClipBoard<double>::startClipBoard();  
     }
 

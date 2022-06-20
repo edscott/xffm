@@ -7,6 +7,12 @@
 #define CANCEL "cancel"
 #define EXECUTE "execute"
 
+#define UTILITIES_TERMINAL "utilities-terminal-symbolic"
+#define UTILITIES_TERMINAL_ACTIVE "utilities-terminal-symbolic/NE/greenball/2.0/225"
+#define UTILITIES_TERMINAL_ERROR "utilities-terminal-symbolic/NE/redball/2.0/225"
+
+#define FILE_MANAGER "system-file-manager-symbolic"
+
 #define DEFAULT_ICON "text-x-generic"
 #define USER_HOME "user-home"
 #define FOLDER "folder"
@@ -15,7 +21,6 @@
 #define NETWORK_WIRED_SYMBOLIC "network-wired-symbolic"
 #define IMAGE_X_GENERIC "image-x-generic-symbolic"
 #define ACCESSORIES_TEXT_EDITOR "document-edit-symbolic"
-#define UTILITIES_TERMINAL "utilities-terminal-symbolic"
 #define WINDOW_NEW "window-new-symbolic"
 #define WINDOW_CLOSE "window-close-symbolic"
 #define DIALOG_WARNING "dialog-warning"
@@ -29,7 +34,6 @@
 #define GO_HOME "go-home-symbolic"
 #define APPLICATION_EXIT "application-exit-symbolic"
 #define SYSTEM_RUN "system-run"
-#define FILE_MANAGER "system-file-manager-symbolic"
 #define PROCESS_STOP "process-stop-symbolic"
 #define TAB_NEW "tab-new-symbolic"
 

@@ -52,7 +52,7 @@ public:
 
     static const gchar *
     get_xfdir_iconname(void){
-        return "system-file-manager";
+        return FILE_MANAGER;
     }
 
 

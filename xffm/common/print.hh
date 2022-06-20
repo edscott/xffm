@@ -38,7 +38,8 @@ public:
 
     static void // print_icon will free string.
     printDbg(GtkTextView *textview, gchar *string){
-	showTextSmall(textview);
+      TRACE("printDbg\n");
+	      showTextSmallErr(textview);
         auto tag = Settings<Type>::getString("window.dbgColor");
         if (tag) print(textview, "redball", tag, string);
         else print(textview, "redball", "yellow", string);
@@ -46,7 +47,8 @@ public:
 
     static void // print_icon will free string.
     printError(GtkTextView *textview, gchar *string){
-	showTextSmall(textview);
+      TRACE("printError\n");
+	      showTextSmallErr(textview);
         auto tag = Settings<Type>::getString("window.errorColor");
         if (tag) print(textview, "edit-delete", tag, string);
         else print(textview, "edit-delete", "red", string);
@@ -54,7 +56,8 @@ public:
  
     static void // print_icon will free string.
     printStdErr(GtkTextView *textview, gchar *string){
-	showTextSmall(textview);
+      DBG("printStdErr\n");
+	      showTextSmallErr(textview);
         auto tag = Settings<Type>::getString("window.errorColor");
         if (tag) print(textview, tag, string);
         else print(textview, "red", string);
@@ -144,20 +147,29 @@ public:
     static void showText(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-        void *arg[]={(void *)vpane, NULL, NULL, NULL};
+        void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
+        context_function(show_text_buffer_f, arg);
+    }
+
+    static void showTextSmallErr(GtkTextView *textview){
+      TRACE("showTextSmallErr...\n");
+        if (!textview) return;
+        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+        void *arg[]={(void *)vpane, NULL,GINT_TO_POINTER(1), GINT_TO_POINTER(1), NULL};
         context_function(show_text_buffer_f, arg);
     }
 
     static void showTextSmall(GtkTextView *textview){
+      TRACE("showTextSmall...\n");
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-        void *arg[]={(void *)vpane, NULL,GINT_TO_POINTER(1), NULL};
+        void *arg[]={(void *)vpane, NULL,GINT_TO_POINTER(1), NULL, NULL};
         context_function(show_text_buffer_f, arg);
     }
     static void show_textFull(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-        void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL, NULL};
+        void *arg[]={(void *)vpane, GINT_TO_POINTER(1),NULL, NULL, NULL};
         context_function(show_text_buffer_f, arg);
     }
  /*   static gboolean show_textFull(void *data){
@@ -410,10 +422,12 @@ private:
         auto vpane = GTK_PANED(arg[0]);
         auto fullview =arg[1]; 
         auto small = arg[2];
+        auto err = arg[3];
         if(!vpane) {
             ERROR("vpane is NULL\n");
             return NULL;
         }
+        TRACE("show_text_buffer_f:: err=%p\n", err);
         gint min, max;
         g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
         g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
@@ -435,11 +449,28 @@ private:
         if (small) height = 8*vheight/10;
         else height = 2*vheight/3;
         TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
+        // Here we need to reset the terminal icon on error...
         if (gtk_paned_get_position(vpane) > height) {
             TRACE("show_text_buffer_f()::setting vpane position to %d\n", height);
             gtk_paned_set_position (vpane, height);
             g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
         } else TRACE("not setting vpane position to %d\n", height);
+        
+        auto fmButtonBox_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "fmButtonBox"));
+        auto termButtonBox_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "termButtonBox"));
+        auto toggleToIconview_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "toggleToIconview"));
+        auto toggleToIconviewErr_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "toggleToIconviewErr"));
+        gtk_widget_hide(GTK_WIDGET(fmButtonBox_));
+        gtk_widget_show_all(GTK_WIDGET(termButtonBox_));
+        if (err) {
+          TRACE("a bit hacky... \n");
+          gtk_widget_hide(GTK_WIDGET(toggleToIconview_));
+          gtk_widget_show(GTK_WIDGET(toggleToIconviewErr_));
+        } else { // the opposite (OK).
+          gtk_widget_hide(GTK_WIDGET(toggleToIconviewErr_));
+          gtk_widget_show(GTK_WIDGET(toggleToIconview_));
+        }
+
         return NULL;
     }
 

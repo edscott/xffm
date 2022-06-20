@@ -172,7 +172,7 @@ public:
 
     static const gchar *
     get_xfdir_iconname(void){
-        return "system-file-manager";
+        return FILE_MANAGER;
     }
 
     //XXX: Could be done by non main thread (already mutex protected)
@@ -692,7 +692,7 @@ public:
         auto arg = (void **)data;
         auto view = (View<Type> *)arg[0]; 
         auto text = (const gchar *)arg[1]; 
-        view->page()->showFmButtonBox();
+        view->page()->showFmButtonBox(FALSE);
         view->page()->updateStatusLabel(text);
         while(gtk_events_pending())gtk_main_iteration();
         return NULL;

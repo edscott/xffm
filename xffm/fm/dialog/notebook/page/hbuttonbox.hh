@@ -14,6 +14,7 @@ class HButtonBox {
     GtkBox *termButtonBox_;
     GtkTextView *input_;
     GtkButton *toggleToIconview_;
+    GtkButton *toggleToIconviewErr_;
     GtkButton *toggleToTerminal_;
     GtkButton *clearButton_;
     GtkButton *scriptButton_;
@@ -22,10 +23,14 @@ public:
     GtkTextView *input(void){return input_;}
 protected:   
     GtkButton *toggleToIconview(void){return toggleToIconview_;}
+    GtkButton *toggleToIconviewErr(void){return toggleToIconviewErr_;}
     GtkButton *toggleToTerminal(void){return toggleToTerminal_;}
     GtkButton *clearButton(void){return clearButton_;}
     GtkButton *scriptButton(void){return scriptButton_;}
     GtkScale *sizeScale(void){return sizeScale_;}
+
+    GtkWidget *fmButtonBox(void){return GTK_WIDGET(fmButtonBox_);}
+    GtkWidget *termButtonBox(void){return GTK_WIDGET(termButtonBox_);}
 public:
 
     HButtonBox(void){
@@ -34,10 +39,11 @@ public:
         fmButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         termButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         
-        toggleToTerminal_ =  gtk_c::newButton("utilities-terminal-symbolic",_("Embedded Terminal"));
-        toggleToIconview_ = gtk_c::newButton("system-file-manager-symbolic", _("All items in the iconview."));
-        scriptButton_ =  gtk_c::newButton("document-revert-symbolic", _("Scripting"));
-        clearButton_ =  gtk_c::newButton("edit-clear-all", _("Clear Log"));
+        toggleToTerminal_ =  gtk_c::newButton(UTILITIES_TERMINAL,_("Embedded Terminal"));
+        toggleToIconview_ = gtk_c::newButton(UTILITIES_TERMINAL_ACTIVE, _("Embedded Terminal"));
+        toggleToIconviewErr_ = gtk_c::newButton(UTILITIES_TERMINAL_ERROR, _("Embedded Terminal"));
+        scriptButton_ =  gtk_c::newButton(DOCUMENT_REVERT, _("Scripting"));
+        clearButton_ =  gtk_c::newButton(EDIT_CLEAR, _("Clear Log"));
         input_ = createStatus(); // Status textview
         sizeScale_ = newSizeScale(_("Terminal font"));
         statusLabel_ = GTK_LABEL(gtk_label_new (""));
@@ -52,6 +58,7 @@ public:
         gtk_box_pack_start (fmButtonBox_, GTK_WIDGET(statusButton), TRUE, TRUE, 0);
         
         gtk_box_pack_start (termButtonBox_, GTK_WIDGET(toggleToIconview_), FALSE, FALSE, 0);
+        gtk_box_pack_start (termButtonBox_, GTK_WIDGET(toggleToIconviewErr_), FALSE, FALSE, 0);
         gtk_box_pack_start (termButtonBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
 
         gtk_box_pack_end (termButtonBox_, GTK_WIDGET(clearButton_), FALSE, FALSE, 0);
@@ -59,6 +66,7 @@ public:
         gtk_box_pack_end (termButtonBox_, GTK_WIDGET(scriptButton_), FALSE, FALSE, 0);
         
         gtk_widget_show_all(GTK_WIDGET(hButtonBox_));
+        gtk_widget_hide(GTK_WIDGET(toggleToIconviewErr_));
 
 
         return;  
@@ -67,13 +75,19 @@ public:
     GtkBox *hButtonBox(void){return hButtonBox_;}
     
     void showFmBox(void){
+      fprintf(stderr, "showFmBox...\n");
         gtk_widget_hide(GTK_WIDGET(termButtonBox_));
         gtk_widget_show_all(GTK_WIDGET(fmButtonBox_));
     }
 
-    void showTermBox(void){
+    void showTermBox(gboolean err){
         gtk_widget_hide(GTK_WIDGET(fmButtonBox_));
         gtk_widget_show_all(GTK_WIDGET(termButtonBox_));
+        if (err) {
+          gtk_widget_hide(GTK_WIDGET(toggleToIconview_));
+        } else {
+          gtk_widget_hide(GTK_WIDGET(toggleToIconviewErr_));
+        }
     }
 
     static void *

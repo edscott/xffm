@@ -86,6 +86,8 @@ public:
         gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(this->toggleToIconview()), "clicked", 
                 BUTTON_CALLBACK(pagesignals_c::toggleToIconview), (void *)this);
+        g_signal_connect(G_OBJECT(this->toggleToIconviewErr()), "clicked", 
+                BUTTON_CALLBACK(pagesignals_c::toggleToIconview), (void *)this);
         g_signal_connect(G_OBJECT(this->toggleToTerminal()), "clicked", 
                 BUTTON_CALLBACK(pagesignals_c::toggleToTerminal), (void *)this);
         g_signal_connect(G_OBJECT(this->sizeScale()), "change-value", 
@@ -108,6 +110,12 @@ public:
         this->setCompletionOutput(this->output());
         this->setCompletionInput(this->input());
         this->setLPTermPage(this);
+        
+        // This is for the hacky stderr output in print.hh
+        g_object_set_data(G_OBJECT(this->vpane()), "toggleToIconview", this->toggleToIconview());
+        g_object_set_data(G_OBJECT(this->vpane()), "toggleToIconviewErr", this->toggleToIconviewErr());
+        g_object_set_data(G_OBJECT(this->vpane()), "fmButtonBox", this->fmButtonBox());
+        g_object_set_data(G_OBJECT(this->vpane()), "termButtonBox", this->termButtonBox());
 
         //gtk_widget_realize(GTK_WIDGET(pageChild_));
         gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
@@ -313,9 +321,14 @@ public:
     void setDefaultIconview(gboolean state){iconviewIsDefault_ = state;}
     gboolean iconviewIsDefault(void){return iconviewIsDefault_;}
     
-    void showFmButtonBox(){
+    void showFmButtonBox(gboolean err){
+      if (!err) {
         this->showFmBox();
         terminalMode_ = FALSE;
+      } else {
+         this->showTermBox(err);
+        terminalMode_ = FALSE;
+      }
    }
     
     void showIconview(gint state){
@@ -325,10 +338,10 @@ public:
         }
 
         if (state > 0) {
-            showFmButtonBox();
+            showFmButtonBox(FALSE);
             print_c::hide_text(this->output());
         } else  {
-            this->showTermBox();
+            this->showTermBox(FALSE);
             while (gtk_events_pending())gtk_main_iteration();
             if (state == 0) setVpanePosition(0);
             else {

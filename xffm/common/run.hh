@@ -469,7 +469,7 @@ public:
     shell_command(GtkTextView *textview, const gchar *c, gboolean scrollUp, gboolean showTextPane){
         // Make sure any sudo command has the "-A" option
         auto command = sudo_fix(c);
-        fprintf(stderr,"shell_command = %s\n", c);
+        TRACE("shell_command = %s\n", c);
         if (showTextPane) Print<Type>::showTextSmall(textview);
         pid_t pid = thread_run(textview, command?command:c, scrollUp);
         g_free (command);
