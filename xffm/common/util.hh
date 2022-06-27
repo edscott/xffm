@@ -863,8 +863,8 @@ private:
     static const gchar **
     getTerminals(void) {
         static const gchar *terminals_v[] = {
-            "uxterm -vb -rv", 
             "xterm -vb -rv", 
+            "uxterm -vb -rv", 
             "konsole", 
             "gnome-terminal", 
             "sakura",
