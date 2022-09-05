@@ -11,7 +11,8 @@
 # warning "PREFIX not defined: defaulting to /usr/local"
 #define PREFIX "/usr/local"
 #endif
-#define MAX_PIXBUF_SIZE 400
+//#define MAX_PIXBUF_SIZE 400
+#define MAX_PIXBUF_SIZE 769
 
 namespace xf
 {
