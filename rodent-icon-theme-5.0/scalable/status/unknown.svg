@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="0.41"
+   sodipodi:docname="xfce-unknown.svg"
+   sodipodi:docbase="/home/francois/Images/Rodent/Rodent/scalable/apps"
+   height="128pt"
+   width="128pt"
+   sodipodi:version="0.32"
+   id="svg559">
+  <defs
+     id="defs561" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg559"
+     gridempspacing="5"
+     inkscape:grid-bbox="false"
+     showgrid="true"
+     inkscape:window-y="34"
+     inkscape:window-x="160"
+     inkscape:window-height="653"
+     inkscape:window-width="829"
+     inkscape:cy="80.000000"
+     inkscape:cx="80.000000"
+     inkscape:zoom="2.9500000"
+     id="base" />
+  <path
+     id="path2059"
+     d="M 82.081889,20.301341 L 71.197631,43.489544 L 82.081889,49.510064 L 92.939857,43.489544 L 82.081889,20.301341 z M 92.939857,43.489544 L 99.354736,57.160593 L 111.94787,59.079798 L 116.62757,30.396885 L 92.939857,43.489544 z M 111.94787,59.079798 L 110.02866,70.884223 L 120.17679,81.321543 L 137.97544,63.049660 L 111.94787,59.079798 z M 120.17679,81.321543 L 110.02866,91.758863 L 111.94787,103.56329 L 137.97544,99.593426 L 120.17679,81.321543 z M 111.94787,103.56329 L 99.354736,105.48250 L 92.939857,119.15355 L 116.62757,132.24620 L 111.94787,103.56329 z M 92.939857,119.15355 L 82.081889,113.13303 L 71.197631,119.15355 L 82.081889,142.34175 L 92.939857,119.15355 z M 71.197631,119.15355 L 64.809045,105.50879 L 52.189615,103.58958 L 47.536200,132.27249 L 71.197631,119.15355 z M 52.189615,103.58958 L 54.108820,91.758863 L 43.960695,81.347834 L 26.162040,99.593426 L 52.189615,103.58958 z M 43.960695,81.347834 L 54.108820,70.910514 L 52.189615,59.106088 L 26.162040,63.075951 L 43.960695,81.347834 z M 52.189615,59.106088 L 64.809045,57.160593 L 71.197631,43.489544 L 47.509909,30.396885 L 52.189615,59.106088 z "
+     style="stroke-dasharray:none;stroke-opacity:0.44129553;stroke-miterlimit:4.0000000;stroke-width:5.0000000;stroke:#000000;fill-rule:evenodd;fill-opacity:1.0000000;fill:none;font-size:12.000000" />
+  <path
+     id="polygon563"
+     d="M 80.081889,18.301341 L 69.197631,41.489544 L 80.081889,47.510064 L 90.939857,41.489544 L 80.081889,18.301341 z M 90.939857,41.489544 L 97.354736,55.160593 L 109.94787,57.079798 L 114.62757,28.396885 L 90.939857,41.489544 z M 109.94787,57.079798 L 108.02866,68.884223 L 118.17679,79.321543 L 135.97544,61.049660 L 109.94787,57.079798 z M 118.17679,79.321543 L 108.02866,89.758863 L 109.94787,101.56329 L 135.97544,97.593426 L 118.17679,79.321543 z M 109.94787,101.56329 L 97.354736,103.48250 L 90.939857,117.15355 L 114.62757,130.24620 L 109.94787,101.56329 z M 90.939857,117.15355 L 80.081889,111.13303 L 69.197631,117.15355 L 80.081889,140.34175 L 90.939857,117.15355 z M 69.197631,117.15355 L 62.809045,103.50879 L 50.189615,101.58958 L 45.536200,130.27249 L 69.197631,117.15355 z M 50.189615,101.58958 L 52.108820,89.758863 L 41.960695,79.347834 L 24.162040,97.593426 L 50.189615,101.58958 z M 41.960695,79.347834 L 52.108820,68.910514 L 50.189615,57.106088 L 24.162040,61.075951 L 41.960695,79.347834 z M 50.189615,57.106088 L 62.809045,55.160593 L 69.197631,41.489544 L 45.509909,28.396885 L 50.189615,57.106088 z "
+     style="stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-opacity:1.0000000;stroke-width:3.7500000;stroke:#000000;fill-rule:evenodd;fill-opacity:1.0000000;fill:#887fa3;font-size:12.000000" />
+  <metadata
+     id="metadata6">
+    <rdf:RDF
+       id="RDF7">
+      <cc:Work
+         id="Work8"
+         rdf:about="">
+        <dc:format
+           id="format9">image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+           id="type11" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
