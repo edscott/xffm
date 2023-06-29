@@ -14,8 +14,8 @@ include(cmake/pthreads.cmake)
 # debugging in lldb/gdb 
 # to avoid disabling ALPHA, set these options via environment
 # variable CXXFLAGS.
-#set(CMAKE_CXX_FLAGS "-g -O0")
-set(CMAKE_CXX_FLAGS "-g -O3")
+set(CMAKE_CXX_FLAGS "-g -O0")
+#set(CMAKE_CXX_FLAGS "-g -O3")
 
 execute_process(COMMAND uname -s OUTPUT_VARIABLE UNAME)
     

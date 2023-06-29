@@ -57,7 +57,7 @@ public:
         if (argv[1] && strcmp(argv[1],"--find")==0){
             xf::Find<xf::findSignals<double>> dialog((const gchar *)argv[2]);
             //g_idle_add(set_up_dialog, path);
-            gtk_main();
+            //gtk_main();
             return;
         }
 

@@ -162,14 +162,16 @@ main (int argc, char *argv[]) {
 
     auto fm = new(xf::Fm<double>)(argc, argv);
     //xf::Fm<double> *fm = std::make_shared<xf::Fm>(argc, argv);
-    gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
+    if (mainWindow) {
+      gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
     
 #ifdef FORCE_CORE
     //auto text = g_strdup_printf("Xffm+-%s", VERSION);
     //xf::TimeoutResponse<double>::dialogFull(NULL, text, "xffm_logo", -200, 1);
     //g_free(text);
 #endif
-    gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+      gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
+    }
 
     /*GMainLoop *ws = g_main_loop_new(NULL, FALSE);
     assert(ws);

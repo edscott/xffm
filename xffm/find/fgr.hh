@@ -367,7 +367,7 @@ private:
         }
         object = globber_create ();
         for(i = 1; i < argc; i++) {
-            if(argv[i][0] == '-') {
+            if(argv[i][0] == '-' && strcmp(argv[i],"--fgr")) {
                 /* options for the globber : **************** */
                 if(strstr (argv[i], "v") != NULL) {
                     glob_set_options (object, GLOBBER_VERBOSE);
@@ -931,7 +931,7 @@ private:
             if (!address) free(object);
             return (pass);  /* error returned from function */
         }
-
+#if 10
         if(object->options & GLOBBER_RECURSIVE) {
             DIR *directory;
             struct dirent *d;
@@ -976,6 +976,7 @@ private:
             closedir (directory);
 
         }
+#endif
         int pass = object->pass;
         if (!address) free(object);
         return (pass);

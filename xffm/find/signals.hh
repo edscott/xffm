@@ -41,6 +41,7 @@ static GSList *lastFind = NULL;
 
 namespace xf {
 GList *findResultsWidgets = NULL;
+pthread_mutex_t findResultsMutex = PTHREAD_MUTEX_INITIALIZER;
 GtkWindow *findDialog;
 
 template <class Type> class TreeView;
@@ -55,7 +56,9 @@ template <class Type> class DnDBox{
 
     static void
     onResponse (GtkWidget * widget, gpointer data) {
+      pthread_mutex_lock(&findResultsMutex);
         findResultsWidgets = g_list_remove(findResultsWidgets, widget);
+      pthread_mutex_unlock(&findResultsMutex);
     }
 
 public:
@@ -66,7 +69,9 @@ public:
         //auto dialog = GTK_WINDOW(Dialogs<Type>::quickDialog(parent, _("Results"), NULL, title));
         auto dialog = GTK_WINDOW(Dialogs<Type>::quickDialog(NULL, _("Results"), NULL, title));
         gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
+      pthread_mutex_lock(&findResultsMutex);
         findResultsWidgets = g_list_prepend(findResultsWidgets, dialog);
+      pthread_mutex_unlock(&findResultsMutex);
         g_signal_connect(G_OBJECT(dialog), "response", 
                 G_CALLBACK(onResponse),NULL);
         
@@ -264,10 +269,12 @@ public:
         TRACE("fixme: signals::onCloseButton\n");
         GtkWidget *dialog = GTK_WIDGET(data);
         gtk_widget_hide(dialog);
+      pthread_mutex_lock(&findResultsMutex);
         for (auto l=findResultsWidgets; l && l->data; l=l->next){
             if (!GTK_IS_WIDGET(l->data))continue;
             gtk_widget_hide(GTK_WIDGET(l->data));
         }
+      pthread_mutex_unlock(&findResultsMutex);
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exit(1);
@@ -314,7 +321,7 @@ public:
         gtk_widget_hide(widget);
         gtk_widget_destroy(widget);
 
-        while (gtk_events_pending()) gtk_main_iteration();
+        //while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exit(1);
         return TRUE;
@@ -403,7 +410,9 @@ private:
         print_c::print_icon(diagnostics, "edit-delete", "bold", 
                 g_strdup_printf("%s: \"%s\"\n",_("Cancel"), (gchar *) value));
         //Signal process controller to kill child process.
+      fprintf(stderr, "removeFunc...\n");
         kill(GPOINTER_TO_INT(key), SIGUSR2);
+      fprintf(stderr, "removeFunc\n");
         return FALSE;
     }
     static void

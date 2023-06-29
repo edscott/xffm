@@ -457,9 +457,14 @@ private:
         } else TRACE("not setting vpane position to %d\n", height);
         
         auto fmButtonBox_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "fmButtonBox"));
+        if (!fmButtonBox_) return NULL;
+
         auto termButtonBox_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "termButtonBox"));
+        if (!termButtonBox_) return NULL;
         auto toggleToIconview_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "toggleToIconview"));
+        if (!toggleToIconview_) return NULL;
         auto toggleToIconviewErr_ = GTK_WIDGET(g_object_get_data(G_OBJECT(vpane), "toggleToIconviewErr"));
+        if (!toggleToIconviewErr_) return NULL;
         gtk_widget_hide(GTK_WIDGET(fmButtonBox_));
         gtk_widget_show_all(GTK_WIDGET(termButtonBox_));
         if (err) {
