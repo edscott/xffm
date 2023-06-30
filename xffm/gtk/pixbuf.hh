@@ -27,24 +27,29 @@ static GtkIconTheme *icon_theme=NULL;
 static pthread_mutex_t pixbuf_mutex;
 //static gint imageSize = 48;
 template <class Type>
+//#undef USE_DEFAULT_ICON_THEME
 class Pixbuf {
     static void
     init(void){
-        TRACE("Calling Pixbuf initializer...buildicons=%s\n", buildIcons);
+        // Is this routine even called? Yes.
+        //fprintf(stderr, "Calling Pixbuf initializer...buildicons=%s\n", buildIcons);
         pixbuf_mutex = PTHREAD_MUTEX_INITIALIZER;
+#ifdef USE_DEFAULT_ICON_THEME
         icon_theme = gtk_icon_theme_get_default ();
+#endif
         if (!icon_theme){
             TRACE("cannot get default icon theme!\n");
             icon_theme = gtk_icon_theme_new();
             //throw 1;
         }
-
+        
         self = g_thread_self();
         auto resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
         if (g_file_test(resource_path, G_FILE_TEST_IS_DIR)) {
             gtk_icon_theme_add_resource_path (icon_theme,resource_path);
         }
         
+        //fprintf(stderr, "buildIcons: %s \n", buildIcons);
         if (buildIcons && g_file_test(buildIcons, G_FILE_TEST_IS_DIR)){
             TRACE("adding resource path:%s\n", buildIcons);
             gtk_icon_theme_add_resource_path (icon_theme,buildIcons);
@@ -70,7 +75,7 @@ class Pixbuf {
             if (buildIcons) for (auto p=subdirs; p && *p; p++){
                 auto path = g_build_filename(buildIcons, *p, NULL);
             gtk_icon_theme_append_search_path (icon_theme, path);
-            TRACE("appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
+            //fprintf(stderr, "appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
 
             g_free(path);
             

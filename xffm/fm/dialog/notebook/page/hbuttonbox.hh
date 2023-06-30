@@ -75,7 +75,7 @@ public:
     GtkBox *hButtonBox(void){return hButtonBox_;}
     
     void showFmBox(void){
-      fprintf(stderr, "showFmBox...\n");
+      //fprintf(stderr, "showFmBox...\n");
         gtk_widget_hide(GTK_WIDGET(termButtonBox_));
         gtk_widget_show_all(GTK_WIDGET(fmButtonBox_));
     }
