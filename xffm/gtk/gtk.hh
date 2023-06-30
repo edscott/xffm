@@ -153,7 +153,7 @@ public:
         // Elaborate tooltip
         static gboolean waylandWarn = TRUE;
         if (waylandWarn) {
-            INFO("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
+            //INFO("gtk_c.cpp:: custom_tooltip not working right in Wayland\n");
             waylandWarn = FALSE;
         }
         // Tooltip<Type>::custom_tooltip(GTK_WIDGET(button), pixbuf, icon_tip);

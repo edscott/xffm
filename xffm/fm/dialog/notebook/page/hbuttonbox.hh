@@ -21,6 +21,8 @@ class HButtonBox {
     GtkScale *sizeScale_;
 public:
     GtkTextView *input(void){return input_;}
+    GtkWidget *fmButtonBox(void){return GTK_WIDGET(fmButtonBox_);}
+    GtkWidget *termButtonBox(void){return GTK_WIDGET(termButtonBox_);}
 protected:   
     GtkButton *toggleToIconview(void){return toggleToIconview_;}
     GtkButton *toggleToIconviewErr(void){return toggleToIconviewErr_;}
@@ -29,8 +31,6 @@ protected:
     GtkButton *scriptButton(void){return scriptButton_;}
     GtkScale *sizeScale(void){return sizeScale_;}
 
-    GtkWidget *fmButtonBox(void){return GTK_WIDGET(fmButtonBox_);}
-    GtkWidget *termButtonBox(void){return GTK_WIDGET(termButtonBox_);}
 public:
 
     HButtonBox(void){
@@ -59,6 +59,7 @@ public:
         
         gtk_box_pack_start (termButtonBox_, GTK_WIDGET(toggleToIconview_), FALSE, FALSE, 0);
         gtk_box_pack_start (termButtonBox_, GTK_WIDGET(toggleToIconviewErr_), FALSE, FALSE, 0);
+        g_object_set_data(G_OBJECT(termButtonBox_),"toggleToIconviewErr_", toggleToIconviewErr_);
         gtk_box_pack_start (termButtonBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
 
         gtk_box_pack_end (termButtonBox_, GTK_WIDGET(clearButton_), FALSE, FALSE, 0);

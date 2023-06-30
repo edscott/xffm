@@ -100,9 +100,13 @@ public:
         g_signal_connect(G_OBJECT(this->sizeScale()), "button-release-event", 
                 EVENT_CALLBACK(pagesignals_c::rangeOff), (void *)this);
 
+        
         g_signal_connect (this->topScrolledWindow(), "leave-notify-event", 
                 EVENT_CALLBACK (pagesignals_c::leave_notify_event),
                 (void *)this);
+
+        g_signal_connect(G_OBJECT(this->vpane()), "button-release-event", 
+                EVENT_CALLBACK(pagesignals_c::paneRelease), (void *)this);
 
 
         print_c::setColor(GTK_WIDGET(this->output()));

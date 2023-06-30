@@ -76,6 +76,45 @@ public:
         // This would be for topScrolledWindow
         // and here we eliminate any lingering tooltip window
         // (once we enable tooltip
+
+    static gboolean paneRelease(GtkPaned* self, GdkEvent event, gpointer data){
+       // here we should set/unset iconview/termview according to position...
+      int position = gtk_paned_get_position (self);
+      //f (!panePressed_) return FALSE;
+      //panePressed_ = false;
+      //fprintf(stderr, "pressed=%d, position=%d\n", 0, position);
+      GtkWidget *child = gtk_paned_get_child2(self);
+      int min, max;
+      g_object_get(G_OBJECT(self),"max-position", &max, NULL);
+      
+      auto page = (Page<Type> *)data;
+      GtkWidget *box1 = GTK_WIDGET(g_object_get_data(G_OBJECT(self),"fmButtonBox"));
+      GtkWidget *box2 = GTK_WIDGET(g_object_get_data(G_OBJECT(self),"termButtonBox"));
+        
+      if (position == max){
+        //fprintf(stderr, "iconview: max=%d\n",max);
+        gtk_widget_hide(box2);
+        gtk_widget_show_all(box1);
+      } else {
+        //fprintf(stderr, "termview: max=%d\n",max);
+        gtk_widget_hide(box1);
+        gtk_widget_show_all(box2);
+        GtkWidget *errButton = GTK_WIDGET(g_object_get_data(G_OBJECT(box2), "toggleToIconviewErr_"));
+        gtk_widget_hide(errButton);
+      }
+ 
+
+      return FALSE;
+
+    }
+   /* static gboolean configure_w(GtkWidget* self, GdkEventConfigure event, gpointer user_data){
+       // here we should set/unset iconview/termview according to position...
+      //int position = gtk_paned_get_position (self);
+      fprintf(stderr, "configure_w position=xxx\n");
+      return FALSE;
+
+    }*/
+    
     static void
     setWindowToolTip(GtkWindow *data, const gchar *data2){
 /*
