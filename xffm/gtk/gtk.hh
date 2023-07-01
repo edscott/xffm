@@ -110,9 +110,9 @@ public:
         g_hash_table_insert(iconname_hash, 
                 (void *)_("Paste"), (void *)EDIT_PASTE);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Add bookmark"), (void *)LIST_ADD);
+                (void *)_("Add bookmark"), (void *)BOOKMARK_NEW);
         g_hash_table_insert(iconname_hash, 
-                (void *)_("Remove bookmark"), (void *)LIST_REMOVE);
+                (void *)_("Remove bookmark"), (void *)RM_BOOKMARK);
         g_hash_table_insert(iconname_hash, 
                 (void *)_("Search"), (void *)SEARCH);
         g_hash_table_insert(iconname_hash, 

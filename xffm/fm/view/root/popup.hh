@@ -216,7 +216,7 @@ private:
         };
         const gchar *keyIcon[]={
             "tab-new-symbolic",
-            "edit-clear-all",
+            RM_BOOKMARK,
 #ifdef DO_MOUNT_ITEMS
             "greenball",
             "redball",

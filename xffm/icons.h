@@ -67,7 +67,8 @@
 #define TRASH_ICON "user-trash"
 #define TRASH_FULL_ICON "user-trash-full"
 #define EMBLEM_BOOKMARK "emblem-favorite"
-#define BOOKMARK_NEW EMBLEM_BOOKMARK
+#define BOOKMARK_NEW EMBLEM_BOOKMARK"/C/greenball/2.0/225"
+#define RM_BOOKMARK EMBLEM_BOOKMARK"/C/redball/2.0/225"
 
 #define HIGHLIGHT_EMBLEM "NE/" DOCUMENT_OPEN "/2.5/220"
 #define HIGHLIGHT_TEXT "NE/" ACCESSORIES_TEXT_EDITOR "/2.5/220"
