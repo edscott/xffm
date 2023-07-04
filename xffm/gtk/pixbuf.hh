@@ -27,7 +27,7 @@ static GtkIconTheme *icon_theme=NULL;
 static pthread_mutex_t pixbuf_mutex;
 //static gint imageSize = 48;
 template <class Type>
-//#undef USE_DEFAULT_ICON_THEME
+#undef USE_DEFAULT_ICON_THEME
 class Pixbuf {
     static void
     init(void){
@@ -69,15 +69,15 @@ class Pixbuf {
             };
             for (auto p=subdirs; p && *p; p++){
                 auto path = g_build_filename(resource_path, *p, NULL);
-            gtk_icon_theme_append_search_path (icon_theme, path);
-            g_free(path);
+                gtk_icon_theme_prepend_search_path (icon_theme, path);
+                g_free(path);
             }
             if (buildIcons) for (auto p=subdirs; p && *p; p++){
                 auto path = g_build_filename(buildIcons, *p, NULL);
-            gtk_icon_theme_append_search_path (icon_theme, path);
-            //fprintf(stderr, "appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
+                gtk_icon_theme_prepend_search_path (icon_theme, path);
+                //fprintf(stderr, "appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
 
-            g_free(path);
+                g_free(path);
             
             }
 #if 0
@@ -133,7 +133,7 @@ public:
         }
         if (!pixbuf){
             auto icon = LocalIcons<Type>::getBasicIconname(iconName, mimetype);
-            TRACE("getPreview(): !pixbuf for %s.. retry with %s\n", iconName, icon);
+            //fprintf(stderr, "getPreview(): !pixbuf for %s.. retry with %s\n", iconName, icon);
             pixbuf = Pixbuf<Type>::getPixbuf(icon, -192);
         }
         if (!pixbuf){
@@ -156,9 +156,9 @@ public:
     static void
     insertImageDecoration(const gchar *path, GdkPixbuf *pixbuf){
         if (strchr(path, '.')){
-            auto label = strrchr(path,'.')+1;
+        /*    auto label = strrchr(path,'.')+1;
             TRACE("insertPixbufLabel %s\n", label);
-            if (strlen(label)) Pixbuf<Type>::insertPixbufLabel(pixbuf, label);
+            if (strlen(label)) Pixbuf<Type>::insertPixbufLabel(pixbuf, label);*/
         }
         if (g_file_test(path, G_FILE_TEST_IS_SYMLINK)){
             insertPixbufEmblems(pixbuf, "SW/emblem-symbolic-link/4.0/220");
@@ -465,6 +465,22 @@ private:
     getThemePixbuf(const gchar *icon_name, gint pixels){
         if (!icon_theme) init();
         GdkPixbuf *pixbuf = NULL;
+#if 0
+        // Check for rodent svg first.
+        auto svgPath = g_build_filename(PREFIX, "share", "icons", "xffm+", "scalable",icon_name,NULL);
+        auto g = g_strconcat(svgPath, ".svg", NULL);
+        g_free(svgPath);
+        svgPath = g;
+        if (g_file_test(svgPath, G_FILE_TEST_EXISTS)){
+          pixbuf = buildImagePixbuf(svgPath, pixels);
+          if (pixbuf){
+            g_free(svgPath);
+            return pixbuf;
+          }
+          
+        }
+        g_free(svgPath);
+#endif
 
         // Load the basic icontheme icon
         GError *error = NULL;

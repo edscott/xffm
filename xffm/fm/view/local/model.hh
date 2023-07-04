@@ -964,12 +964,24 @@ private:
         GdkPixbuf *normal_pixbuf = NULL;
         GdkPixbuf *highlight_pixbuf = NULL;
 
+            auto dir = g_path_get_dirname(xd_p->path);
+            auto pixels = Settings<Type>::getInteger("ImageSize", dir);
+            gboolean doPreview = (pixels > 48);
+            g_free(dir);
+
+        //fprintf (stderr, "%s: mimetype=%s\n", filePath, mimetype);
+        if (!xd_p->st) getStat(xd_p);
+        if (!xd_p->mimetype)xd_p->mimetype = getMimeType(xd_p);
+        
+        if (doPreview && strcmp(xd_p->mimetype,"inode/regular")==0){
+          gchar *m2 = Util<Type>::fileInfo(xd_p->path);
+          if (strstr(m2, "text")) {// Further info necesary on inode/regular
+            g_free(xd_p->mimetype);
+            xd_p->mimetype = g_strdup("text/plain");
+          }         
+        }
 
         if (icon_name && g_path_is_absolute(icon_name)){
-            auto dir = g_path_get_dirname(icon_name);
-            auto pixels = Settings<Type>::getInteger("ImageSize", dir);
-            gboolean doPreview = (pixels > 24);
-            g_free(dir);
             
             DBG("add_local_item(%s): pixels = %d \n", icon_name, pixels);
             if (doPreview) {
@@ -985,20 +997,32 @@ private:
             }
         }
 
-        else if (xd_p->st) {
+
+        //fprintf(stderr, "1) %s: mime=%s pixbuf=%p\n", xd_p->path, xd_p->mimetype, normal_pixbuf);
+        
+        //else if (xd_p->st) {
             auto type = xd_p->st->st_mode & S_IFMT;
             if (type == S_IFDIR) {
-                highlight_pixbuf = Pixbuf<Type>::getPixbuf(up?HIGHLIGHT_UP:DOCUMENT_OPEN, -48);
+                if (up) highlight_pixbuf = Pixbuf<Type>::getPixbuf(HIGHLIGHT_UP, -48);
+                else {
+                  if (pixels != 384) highlight_pixbuf = Pixbuf<Type>::getPixbuf(DOCUMENT_OPEN, -48);
+                }
+//                highlight_pixbuf = Pixbuf<Type>::getPixbuf(up?HIGHLIGHT_UP:DOCUMENT_OPEN, -48);
             }
-        }
+        //}
 
       
         if (!treeViewPixbuf){ 
             treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name, -24);
         }
         if (!normal_pixbuf) {
-            normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name, -48);
+            if (doPreview && pixels == 384) {
+              normal_pixbuf = Pixbuf<Type>::getPreview(xd_p->path, xd_p->mimetype, xd_p->st);  
+            } else 
+              normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name, -48);
+            
         }
+        //fprintf(stderr, "2) %s: mime=%s pixbuf=%p\n", xd_p->path, xd_p->mimetype, normal_pixbuf);
         //Highlight emblem macros are defined in types.h
         //
         // Decorate highlight pixbuf
@@ -1007,7 +1031,10 @@ private:
             highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
         
             const gchar *emblem= HIGHLIGHT_EMBLEM;
-            if (xd_p->mimetype){
+            if (type == S_IFDIR) {
+              emblem = up?HIGHLIGHT_UP:HIGHLIGHT_FOLDER;
+            }
+            else if (xd_p->mimetype){
                 if (strncmp(xd_p->mimetype, "inode/regular", strlen("inode/regular"))==0){
                     emblem = HIGHLIGHT_TEXT;
                 }

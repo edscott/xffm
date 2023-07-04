@@ -7,6 +7,8 @@
 #define CANCEL "cancel"
 #define EXECUTE "execute"
 
+#define OPEN_FILEMANAGER "system-file-manager"
+#define OPEN_TERMINAL "video-display"
 #define UTILITIES_TERMINAL "utilities-terminal-symbolic"
 #define UTILITIES_TERMINAL_ACTIVE "utilities-terminal-symbolic/NE/greenball/2.0/225"
 #define UTILITIES_TERMINAL_ERROR "utilities-terminal-symbolic/NE/redball/2.0/225"
@@ -16,6 +18,7 @@
 #define DEFAULT_ICON "text-x-generic"
 #define USER_HOME "user-home"
 #define FOLDER "folder"
+#define FOLDER_OPEN "folder-open"
 #define DRIVE_HARDDISK "drive-harddisk-symbolic"
 #define INPUT_KEYBOARD_SYMBOLIC "input-keyboard-symbolic"
 #define NETWORK_WIRED_SYMBOLIC "network-wired-symbolic"
@@ -28,9 +31,9 @@
 #define SEARCH "system-search-symbolic"
 #define INSERT_OBJECT "insert-object-symbolic"
 #define APPLICATION_X_EXECUTABLE "application-x-executable-symbolic"
-#define GO_UP_SYMBOLIC "go-up-symbolic"
-#define GO_UP "go-up-symbolic"
-#define GO_HOME "go-home-symbolic"
+#define GO_UP_SYMBOLIC "go-up"
+#define GO_UP "go-up"
+#define GO_HOME "go-home"
 #define APPLICATION_EXIT "application-exit-symbolic"
 #define SYSTEM_RUN "system-run"
 #define PROCESS_STOP "process-stop-symbolic"
@@ -70,14 +73,10 @@
 #define BOOKMARK_NEW EMBLEM_BOOKMARK"/C/greenball/2.0/225"
 #define RM_BOOKMARK EMBLEM_BOOKMARK"/C/redball/2.0/225"
 
+#define HIGHLIGHT_FOLDER "NE/" DOCUMENT_OPEN "/2.5/220"
 #define HIGHLIGHT_EMBLEM "NE/" DOCUMENT_OPEN "/2.5/220"
 #define HIGHLIGHT_TEXT "NE/" ACCESSORIES_TEXT_EDITOR "/2.5/220"
 #define HIGHLIGHT_APP "NE/" APPLICATION_X_EXECUTABLE "/2.5/220"
 #define HIGHLIGHT_UP GO_UP "/NW/" GO_UP_SYMBOLIC "/2.0/225"
-
-//#define HIGHLIGHT_EMBLEM "NE/document-open/2.5/220"
-//#define HIGHLIGHT_TEXT "NE/accessories-text-editor/2.5/220"
-//#define HIGHLIGHT_APP "NE/application-x-executable/2.5/220"
-//#define HIGHLIGHT_UP "go-up/NW/go-up-symbolic/2.0/225"
 
 #endif

@@ -96,6 +96,25 @@ public:
             }
         }
         TRACE("previewDefault(%s)...\n", filePath);
+        // Text file preview creations.
+        if (!mimetype){
+            ERROR("previewDefault(): Mimetype should be defined beforehand\n");
+            return NULL;
+        }
+        
+
+        gboolean textType =(
+            strstr(mimetype, "text")
+            || strstr(mimetype, "shellscript")
+            || strcmp(filePath, "empty-file")==0
+            || g_file_test(filePath, G_FILE_TEST_IS_DIR)
+            );
+
+        if (textType){
+             GdkPixbuf *pixbuf = textPreview (filePath, PREVIEW_IMAGE_SIZE); 
+             TRACE("%s texttype pixbuf=%p\n", filePath, pixbuf);
+             return pixbuf;
+        }
 
         GdkPixbuf *previewPixbuf = NULL;
 
@@ -125,9 +144,9 @@ public:
                 pixbuf = Pixbuf<Type>::buildImagePixbuf(previewPath, size);
                 // Since this is loading a png image, label is wrong.
                 // Overwrite label:
-                auto label = " pdf";
+             /*   auto label = " pdf";
                 if (strstr(mimetype, "postscript")) label = "  ps";
-                Pixbuf<Type>::insertPixbufLabel(pixbuf, label);
+                Pixbuf<Type>::insertPixbufLabel(pixbuf, label);*/
 
             }
             g_free(previewPath);
@@ -153,21 +172,6 @@ public:
 
         // From here we only create pixbuf at preview size PREVIEW_IMAGE_SIZE.
 
-        // Text file preview creations.
-        if (!mimetype){
-            ERROR("previewDefault(): Mimetype should be defined beforehand\n");
-            return NULL;
-        }
-        gboolean textType =(
-            strstr(mimetype, "text")
-            || strstr(mimetype, "shellscript")
-            || strcmp(filePath, "empty-file")==0
-            || g_file_test(filePath, G_FILE_TEST_IS_DIR)
-            );
-
-        if (textType){
-            return textPreview (filePath, PREVIEW_IMAGE_SIZE); 
-        }
             
         // pdf previews...
         gboolean useGhostScript = (strstr (mimetype, "pdf")

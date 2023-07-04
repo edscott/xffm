@@ -249,11 +249,11 @@ public:
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(search), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::search), NULL);
 
-        auto terminal = gtk_c::newButton(UTILITIES_TERMINAL, _("Open terminal"));
+        auto terminal = gtk_c::newButton(OPEN_TERMINAL, _("Open terminal"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(terminal), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(terminal), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::terminal), NULL);
 
-        auto newWindow = gtk_c::newButton(WINDOW_NEW, _("Open a New Window"));
+        auto newWindow = gtk_c::newButton(OPEN_FILEMANAGER, _("Open a New Window"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)xffmProgram);
@@ -327,7 +327,10 @@ private:
         auto page = Fm<Type>::getCurrentPage();
         auto view = page->view();
         auto pixels = Settings<Type>::getInteger("ImageSize", page->workDir());
-        page->setImageSize(pixels/2);
+        if (pixels  > 384)  pixels = 384;
+        else  if (pixels  > 48 ) pixels = 48;
+        else pixels = 0;
+        page->setImageSize(pixels);
         view->reloadModel();
         return FALSE;
     }
@@ -340,10 +343,14 @@ private:
         auto view = page->view();
 
         auto pixels = Settings<Type>::getInteger("ImageSize", page->workDir());
-        if (pixels > 0) pixels *=2;
-        else pixels = 48;
-        page->setImageSize(pixels);
-        if (pixels <= MAX_PIXBUF_SIZE) view->reloadModel();
+        if (pixels < 48) pixels = 48;
+        else if (pixels < 384) pixels = 384;
+        else if (pixels < 768) pixels = 768;
+          //else pixels = 0;
+        if (pixels !=  Settings<Type>::getInteger("ImageSize", page->workDir())) {
+          page->setImageSize(pixels);
+          if (pixels <= MAX_PIXBUF_SIZE) view->reloadModel();
+        }
         return FALSE;
     }
 

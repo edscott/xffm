@@ -36,10 +36,12 @@ public:
 
         auto eventBox1 = eventButton("go-previous", "RFM_GOTO", "xffm:back", (void *)go_back);
         auto eventBox2 = eventButton("go-jump", "RFM_GOTO", "xffm:goto", (void *)go_jump);
+        gtk_widget_set_tooltip_markup(GTK_WIDGET(eventBox1),_("Previous"));
+        gtk_widget_set_tooltip_markup(GTK_WIDGET(eventBox2),_("Go to"));
         //auto eventBox3 = eventButton("image-x-generic/SE/list-add/1.5/220", "RFM_GOTO", "xffm:image+", (void *)upImage);
         //auto eventBox4 = eventButton("image-x-generic/SE/list-remove/1.5/220", "RFM_GOTO", "xffm:image+", (void *)downImage);
-        gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
         //gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
         //gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox4), FALSE, FALSE, 0);
 
