@@ -782,7 +782,7 @@ private:
         //output layouts to page ()
         output_page (pango_lines, &page_layout);
         // tmp: write png of pixbuf
-        TRACE("// numpages=%d\n", num_pages);
+        //TRACE("// numpages=%d\n", num_pages);
         cairo_destroy (page_layout.cr);
         TRACE ("// write previewPixbuf\n");
         if(cairo_surface_write_to_png (page_layout.surface, previewPixbuf) != CAIRO_STATUS_SUCCESS) {

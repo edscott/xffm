@@ -716,7 +716,7 @@ public:
         TRACE("appcount=%d\n",appCount);
 
         if (appCount <= 1) {
-            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(parent), _("Open with"), "document-open");
+            auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(parent), _("Open with"), RUN);
             entryResponse->setResponseLabel(responseLabel);
 
             entryResponse->setCheckButton(_("Run in Terminal"));
@@ -732,7 +732,7 @@ public:
             entryResponse->setEntryCallback((void *)entryKeyRelease); 
             response = entryResponse->runResponse();
         } else {
-            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(parent), _("Open with"), "document-open");
+            auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(parent), _("Open with"), RUN);
             comboResponse->setResponseLabel(responseLabel);
 
             comboResponse->setCheckButton(_("Run in Terminal"));

@@ -41,7 +41,7 @@ public:
     
     Fuse(const gchar *info1, const gchar *info2)
     {
-        TRACE("Fuse constructor(%s, %s, %s)\n", url, info1, info2);
+        TRACE("Fuse constructor(%s, %s)\n", info1, info2);
         dialog_ = initDialog(info1, info2);
     }
 
@@ -796,7 +796,7 @@ public:
                     g_error("This is a what some people call \"a chickpea that weighs a pound\"\n");
                 }
             }
-            TRACE("passfile=%s on try %d\n", passfile, try);
+           // TRACE("passfile=%s on try %d\n", passfile, try);
 
             fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR, 0600);
     //        fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR|O_SYNC|O_DIRECT, 0600);

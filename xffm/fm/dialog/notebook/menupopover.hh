@@ -166,7 +166,7 @@ class MenuPopover {
 public:
     MenuPopover(void) {
 
-        menuButton_ = Gtk<Type>::newMenuButton("open-menu-symbolic", _("Open menu"));
+        menuButton_ = Gtk<Type>::newMenuButton(OPEN_MENU, _("Open menu"));
 #ifdef TRY_POPOVER
         auto popover = createPopover(GTK_WIDGET(menuButton_));
         gtk_menu_button_set_popover(menuButton_, GTK_WIDGET(popover));

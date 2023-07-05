@@ -74,7 +74,7 @@ public:
             }
             auto icon_name = g_strconcat(EFS_ICON, ball, NULL);
 
-            auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+            auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
             auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
             auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
             auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
@@ -132,7 +132,7 @@ public:
         auto name = "/";
         auto utf_name = util_c::utf_string(_("Root Directory"));
         auto icon_name = FILE_MANAGER;
-        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
@@ -160,7 +160,7 @@ public:
         auto name = g_get_home_dir();
         auto utf_name = util_c::utf_string(_("Home Directory"));
         auto icon_name = HOME_ICON;
-        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
         auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
@@ -192,7 +192,7 @@ public:
 	    icon_name =TRASH_FULL_ICON;
 	}
             
-        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
@@ -220,7 +220,7 @@ public:
         auto name = "xffm:fstab";
         auto utf_name = util_c::utf_string(_("Disk Image Mounter"));
         auto icon_name = FSTAB_ICON;
-        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);
@@ -260,7 +260,7 @@ public:
                 auto basename = g_path_get_basename(p->path);
                 auto utf_name = util_c::utf_string(basename);
              
-                auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+                auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
 
                 auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
                 GdkPixbuf *normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
@@ -306,7 +306,7 @@ public:
         auto name = "xffm:efs";
         auto utf_name = util_c::utf_string(_("Ecryptfs (EFS)"));
         auto icon_name = "emblem-readonly/SE/list-add/2.0/225";
-        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  GTK_ICON_SIZE_DIALOG);

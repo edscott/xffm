@@ -13,7 +13,7 @@ class VButtonBox {
     using gtk_c = Gtk<double>;
 #ifdef ENABLE_CUSTOM_RESPONSE
     static void removeCustomButton(GtkButton *button, void *data){
-        auto comboResponse = new(ComboResponse<Type>)(mainWindow, _("Remove Button Contents"), "list-remove");
+        auto comboResponse = new(ComboResponse<Type>)(mainWindow, _("Remove Button Contents"), LIST_REMOVE);
         auto actualFiles = Settings<Type>::getString("custombuttons", "files");
         if (!actualFiles) return;
 
@@ -72,7 +72,7 @@ class VButtonBox {
     }
 
     static void addCustomButton(GtkButton *button, void *data){
-        auto entryResponse = new(EntryFileResponse<Type>)(mainWindow, _("Add custom content"), "list-add");
+        auto entryResponse = new(EntryFileResponse<Type>)(mainWindow, _("Add custom content"), LIST_ADD);
         entryResponse->setEntryLabel(_("Select file to load"));
         
         auto entry = entryResponse->entry();
@@ -158,7 +158,7 @@ class VButtonBox {
         }
 
         g_free(response);
-        Dialogs<Type>::quickHelp(mainWindow, _("You need to restart the application"), "dialog-warning");
+        Dialogs<Type>::quickHelp(mainWindow, _("You need to restart the application"), DIALOG_WARNING);
     }
 #endif
 public:
@@ -191,18 +191,18 @@ public:
 #ifdef ENABLE_PKG_MODULE
 #ifdef HAVE_PKG
         auto pkg = 
-            gtk_c::newButton("emblem-bsd", _("Software Updater"));
+            gtk_c::newButton(EMBLEM_BSD, _("Software Updater"));
 #else
 # ifdef HAVE_PACMAN
         auto pkg = 
-            gtk_c::newButton("emblem-archlinux", _("Software Updater"));
+            gtk_c::newButton(EMBLEM_ARCH, _("Software Updater"));
 # else
 #  ifdef HAVE_EMERGE
         auto pkg = 
-            gtk_c::newButton("emblem-gentoo", _("Software Updater"));
+            gtk_c::newButton(EMBLEM_GENTOO, _("Software Updater"));
 #  else
         auto pkg = 
-            gtk_c::newButton("help-about-symbolic", _("Software Updater"));
+            gtk_c::newButton(HELP_ABOUT, _("Software Updater"));
 #  endif
 # endif
 #endif
@@ -213,17 +213,17 @@ public:
 
 #ifdef ENABLE_CUSTOM_RESPONSE
         auto newCustom = 
-            gtk_c::newButton("document-new", _("FIXME New custom content"));
+            gtk_c::newButton(DOCUMENT_NEW, _("FIXME New custom content"));
         g_signal_connect(G_OBJECT(newCustom), "clicked", G_CALLBACK(newCustomButton), NULL);
         gtk_box_pack_end (vButtonBox_, GTK_WIDGET(newCustom), FALSE, FALSE, 0); 
         
         auto addCustom = 
-            gtk_c::newButton("list-add", _("Add custom content"));
+            gtk_c::newButton(LIST_ADD, _("Add custom content"));
         g_signal_connect(G_OBJECT(addCustom), "clicked", G_CALLBACK(addCustomButton), NULL);
         gtk_box_pack_end (vButtonBox_, GTK_WIDGET(addCustom), FALSE, FALSE, 0);
 
         auto removeCustom = 
-            gtk_c::newButton("list-remove", _("Remove Button Contents"));
+            gtk_c::newButton(LIST_REMOVE, _("Remove Button Contents"));
         g_signal_connect(G_OBJECT(removeCustom), "clicked", G_CALLBACK(removeCustomButton), vButtonBox_);
         gtk_box_pack_end (vButtonBox_, GTK_WIDGET(removeCustom), FALSE, FALSE, 0);
         auto customButtonFiles = Settings<Type>::getString("custombuttons", "files");
@@ -261,7 +261,7 @@ public:
 #ifdef ENABLE_DIFF_MODULE
         auto diffApp = g_find_program_in_path("rodent-diff");
         if (diffApp) {
-            auto differences = gtk_c::newButton("differences", _("Differences"));
+            auto differences = gtk_c::newButton(DIFFERENCES, _("Differences"));
             gtk_box_pack_start (vButtonBox_, GTK_WIDGET(differences), FALSE, FALSE, 0);
             g_signal_connect(G_OBJECT(differences), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)"rodent-diff");
@@ -273,11 +273,11 @@ public:
         g_signal_connect(G_OBJECT(home), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::home), NULL);
 
         // Increase image preview size button
-        auto imageUpButton = gtk_c::newButton(LIST_ADD, _("Reset image size"));
+        auto imageUpButton = gtk_c::newButton(GLIST_ADD, _("Reset image size"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageUpButton), FALSE, FALSE, 0);
         g_signal_connect(imageUpButton, "clicked", G_CALLBACK(upImage), NULL);
         // Decrease image preview size button
-        auto imageDownButton = gtk_c::newButton(LIST_REMOVE, _("Reset image size"));
+        auto imageDownButton = gtk_c::newButton(GLIST_REMOVE, _("Reset image size"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageDownButton), FALSE, FALSE, 0);
         g_signal_connect(imageDownButton, "clicked", G_CALLBACK(downImage), NULL);
 
@@ -285,12 +285,12 @@ public:
 
 #if 0
 #ifdef ENABLE_FSTAB_MODULE
-        auto fstab = gtk_c::newButton("media-eject", _("Disk Image Mounter"));
+        auto fstab = gtk_c::newButton(DRIVE_HARDDISK, _("Disk Image Mounter"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(fstab), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::fstab), NULL);
 #endif
 
-        auto trash = gtk_c::newButton("user-trash", _("Trash bin"));
+        auto trash = gtk_c::newButton(TRASH_ICON, _("Trash bin"));
         gtk_box_pack_start (vButtonBox_, GTK_WIDGET(trash), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(trash), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::trash), NULL);
 #endif

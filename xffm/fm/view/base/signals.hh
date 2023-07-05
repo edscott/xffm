@@ -817,7 +817,7 @@ public:
             //static gint count=0;
             // No item at position?
             // Do we need to clear hash table?
-            TRACE("highlight clear_highlights %d\n", count++);
+           // TRACE("highlight clear_highlights %d\n", count++);
             clear_highlights(data);
             return;
         }
@@ -1021,7 +1021,7 @@ public:
             case (LOCALVIEW_TYPE):
             {
                 dndData = Dnd<Type>::sendDndData(view);
-                TRACE("drag finish result=%d\n", result);
+                //TRACE("drag finish result=%d\n", result);
                 break;
             }
 
@@ -1127,7 +1127,7 @@ public:
         // Treeview or iconview?
         GdkDragAction action = gdk_drag_context_get_selected_action(context);
         
-        TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
+        //TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
         if(info != TARGET_URI_LIST) {
             ERROR("fm/base/signals.hh::signal_drag_data_receive: info != TARGET_URI_LIST\n");
             // not needed with GTK_DEST_DEFAULT_DROP

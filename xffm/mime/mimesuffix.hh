@@ -189,7 +189,7 @@ public:
             gchar *sfx;
             /* try all lower case (hash table keys are set this way) */
             sfx = g_utf8_strdown (p, -1);
-            TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
+           // TRACE("mime-module, lOOking for \"%s\" with key=%s\n", sfx, key);
 
             type = lookupBySuffix(NULL, sfx);
             if(type) {

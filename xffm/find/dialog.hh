@@ -675,10 +675,10 @@ private:
         // width will be the smaller of the two.
         gint width = (geometry_.max_width < allocation.width)?
             geometry_.max_width: allocation.width;
-        TRACE(stderr, "max w= %d, top_pane w= %d, label w=%d\n", 
-                geometry_.max_width,
-                 allocation.width, 
-                label_allocation.width);
+        //TRACE(stderr, "max w= %d, top_pane w= %d, label w=%d\n", 
+          //      geometry_.max_width,
+            //     allocation.width, 
+              //  label_allocation.width);
         gint combo_width;
         combo_width = width - label_allocation.width - 120;
         if (combo_width > 100){
@@ -1157,10 +1157,10 @@ private:
         gtk_widget_get_preferred_size (GTK_WIDGET(dialog),
                                &minimumSize,
                                &naturalSize);
-        TRACE("xffind Size: minimum=%d,%d, natural=%d,%d, settings=%d,%d\n",
-                minimumSize.width, minimumSize.height,
-                naturalSize.width, naturalSize.height,gravity
-                width, height);
+       // TRACE("xffind Size: minimum=%d,%d, natural=%d,%d, settings=%d,%d\n",
+         //       minimumSize.width, minimumSize.height,
+           //     naturalSize.width, naturalSize.height,gravity
+             //   width, height);
         if (width >= naturalSize.width && height >= naturalSize.height){
             gtk_window_resize (GTK_WINDOW(dialog), width, height);
         }

@@ -227,7 +227,7 @@ public:
         } 
 
 
-        if (mimetype && 
+    /*    if (mimetype && 
             (strstr(mimetype, "pdf") ||
              strstr(mimetype, "postscript")) )
         {
@@ -246,7 +246,8 @@ public:
             insertPixbufLabel(pixbuf, label);
             return pixbuf;
             }
-        } else {
+        } else */
+        {
             // Single size thumbnails:
             pixbuf = buildImagePixbuf(iconName, height);
         }
@@ -660,6 +661,7 @@ public:
             g_strfreev(tokens);
         }
         if (label){
+          TRACE("Cairo<Type>::add_label_pixbuf: %s\n", label);
             Cairo<Type>::add_label_pixbuf(pixbuf_context, base_pixbuf, label);
         }
 

@@ -261,7 +261,7 @@ public:
             if (strncmp(xd_p->mimetype, "application", strlen("application"))==0){
                 emblem = HIGHLIGHT_APP;
             }
-            else emblem = HIGHLIGHT_EMBLEM;
+            else emblem = HIGHLIGHT_JUMP;
         }
         // Images as well...
         if (strlen(emblem)){

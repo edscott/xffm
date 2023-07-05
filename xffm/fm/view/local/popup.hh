@@ -82,7 +82,7 @@ public:
         gchar *markup;
         mItem = (GtkMenuItem *)g_object_get_data(G_OBJECT(localItemPopUp), "Open with");
         markup = g_strdup_printf("<b>%s</b>", _("Open with"));
-        Gtk<Type>::menu_item_content(mItem, "system-run", markup, -24);
+        Gtk<Type>::menu_item_content(mItem, RUN, markup, -24);
         TRACE("createLocalItemPopUp: %p\n" , localItemPopUp);
 
         return localItemPopUp;

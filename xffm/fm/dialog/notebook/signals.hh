@@ -163,7 +163,7 @@ public:
         auto view = page->view();
         
         //const gchar *workdir = notebook->workdir();
-        TRACE("on_new_page this: %p (%s)\n", data, workdir);
+        //TRACE("on_new_page this: %p (%s)\n", data, workdir);
         //auto dialog = (Dialog<Type> *) data;
         //dialog->addPage(notebook->workdir());
         notebook->addPage(view->path());

@@ -200,7 +200,7 @@ public:
         TRACE( "++ mutex for %s obtained.\n", path);
         struct dirent *d; // static pointer
         errno=0;
-        TRACE( "shows hidden=%d\n", showHidden);
+        //TRACE( "shows hidden=%d\n", showHidden);
         gint count = 0;
         gboolean bySize = 
             (Settings<Type>::getInteger("LocalView", "BySize") > 0);
@@ -873,7 +873,7 @@ public:
         xd_b->path = path;
         xd_b->d_name = up?g_strdup(".."):g_path_get_basename(path);
         xd_b->d_type = type;
-        TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, xd_b->name);
+        //TRACE("compare %s with iconview item \"%s\"\n", xd_p->d_name, xd_b->name);
         gint sortResult;
         gboolean descending = Settings<Type>::getInteger("LocalView", "Descending") > 0;
         gboolean bySize = (Settings<Type>::getInteger("LocalView", "BySize") > 0);
@@ -947,6 +947,9 @@ private:
         is_dir = (xd_p->d_type == DT_DIR);
         is_reg_not_link = (xd_p->d_type == DT_REG && !(xd_p->d_type == DT_LNK));
         if (is_reg_not_link) {
+          /* 
+            // this will chop off extension if less than EXTENSION_LABEL_LENGTH
+            // (obsolete)
             gchar *t = g_strdup(xd_p->d_name);
             if (strchr(t, '.') && strrchr(t, '.') != t){
                 if (strlen(strrchr(t, '.')+1) <= EXTENSION_LABEL_LENGTH) {
@@ -955,23 +958,26 @@ private:
                     utf_name = Util<Type>::utf_string(t);
                 } 
                 g_free(t);
-            }
+            }*/
         }
         gboolean up = (strcmp(xd_p->d_name, "..")==0);
 
-        TRACE("iconname, highlight: %s, %s\n", icon_name, highlight_name);
+        TRACE("iconname, : %s\n", icon_name);
         GdkPixbuf *treeViewPixbuf = NULL;
         GdkPixbuf *normal_pixbuf = NULL;
         GdkPixbuf *highlight_pixbuf = NULL;
 
-            auto dir = g_path_get_dirname(xd_p->path);
-            auto pixels = Settings<Type>::getInteger("ImageSize", dir);
-            gboolean doPreview = (pixels > 48);
-            g_free(dir);
+        auto dir = g_path_get_dirname(xd_p->path);
+        auto pixels = Settings<Type>::getInteger("ImageSize", dir);
+        gboolean doPreview = (pixels >= 48);
+        
+        g_free(dir);
 
         //fprintf (stderr, "%s: mimetype=%s\n", filePath, mimetype);
-        if (!xd_p->st) getStat(xd_p);
-        if (!xd_p->mimetype)xd_p->mimetype = getMimeType(xd_p);
+        if (doPreview) {
+          if (!xd_p->st) getStat(xd_p);
+          if (!xd_p->mimetype)xd_p->mimetype = getMimeType(xd_p);
+        }
         
         if (doPreview && strcmp(xd_p->mimetype,"inode/regular")==0){
           gchar *m2 = Util<Type>::fileInfo(xd_p->path);
@@ -980,13 +986,26 @@ private:
             xd_p->mimetype = g_strdup("text/plain");
           }         
         }
+        if (doPreview) {
+          if (pixels != 384){
+            if (strncmp(xd_p->mimetype, "text", strlen("text"))==0) doPreview = FALSE;
+            if (xd_p->d_type  == DT_DIR)  doPreview = FALSE;
+          }
+        }
 
-        if (icon_name && g_path_is_absolute(icon_name)){
+        // obsolete: ?
+/*        if (icon_name && g_path_is_absolute(icon_name)){
             
             DBG("add_local_item(%s): pixels = %d \n", icon_name, pixels);
             if (doPreview) {
                 normal_pixbuf = 
                     Pixbuf<Type>::getImageAtSize(icon_name, pixels, xd_p->mimetype, xd_p->st);
+                if (strchr(xd_p->path, '.')){
+                  void *arg[] = {NULL, (void *)normal_pixbuf, (void *)(strrchr(xd_p->path, '.')), NULL, NULL };
+                  // Done by main gtk thread:
+                  Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg);
+                }
+
                 treeViewPixbuf = 
                     Pixbuf<Type>::getImageAtSize(icon_name, 24, xd_p->mimetype);
             } else {
@@ -995,31 +1014,38 @@ private:
                 treeViewPixbuf = 
                     Pixbuf<Type>::getPixbuf(IMAGE_X_GENERIC, -24);
             }
-        }
+        }*/
 
 
         //fprintf(stderr, "1) %s: mime=%s pixbuf=%p\n", xd_p->path, xd_p->mimetype, normal_pixbuf);
         
-        //else if (xd_p->st) {
-            auto type = xd_p->st->st_mode & S_IFMT;
-            if (type == S_IFDIR) {
-                if (up) highlight_pixbuf = Pixbuf<Type>::getPixbuf(HIGHLIGHT_UP, -48);
-                else {
-                  if (pixels != 384) highlight_pixbuf = Pixbuf<Type>::getPixbuf(DOCUMENT_OPEN, -48);
-                }
-//                highlight_pixbuf = Pixbuf<Type>::getPixbuf(up?HIGHLIGHT_UP:DOCUMENT_OPEN, -48);
+        if (xd_p->d_type  == DT_DIR) {
+            if (up) highlight_pixbuf = Pixbuf<Type>::getPixbuf(HIGHLIGHT_UP, -48);
+            else {
+              if (pixels != 384) highlight_pixbuf = Pixbuf<Type>::getPixbuf(DOCUMENT_OPEN, -48);
             }
-        //}
+        }
 
       
         if (!treeViewPixbuf){ 
             treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name, -24);
         }
         if (!normal_pixbuf) {
-            if (doPreview && pixels == 384) {
+            if (doPreview) {
               normal_pixbuf = Pixbuf<Type>::getPreview(xd_p->path, xd_p->mimetype, xd_p->st);  
-            } else 
+              const char *tag = "";
+              if (xd_p->d_type  == DT_DIR) tag = _("Directory");
+              else if (strchr(xd_p->path, '.')) tag = strrchr(xd_p->path, '.');
+
+              TRACE("insert_decoration_f for %s %s\n", xd_p->path,tag);
+              void *arg[] = {NULL, (void *)normal_pixbuf, (void *)(tag), NULL, NULL };
+              // Done by main gtk thread:
+              Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg);
+
+            } else {
+              TRACE("normal pixbuf %s\n", icon_name);
               normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name, -48);
+            }
             
         }
         //fprintf(stderr, "2) %s: mime=%s pixbuf=%p\n", xd_p->path, xd_p->mimetype, normal_pixbuf);
@@ -1030,24 +1056,11 @@ private:
         if (!highlight_pixbuf) {
             highlight_pixbuf = gdk_pixbuf_copy(normal_pixbuf);
         
-            const gchar *emblem= HIGHLIGHT_EMBLEM;
-            if (type == S_IFDIR) {
-              emblem = up?HIGHLIGHT_UP:HIGHLIGHT_FOLDER;
+            const gchar *emblem= "";
+            if (xd_p->d_type  == DT_DIR) {
+              emblem = up?HIGHLIGHT_UP:HIGHLIGHT_JUMP;
             }
-            else if (xd_p->mimetype){
-                if (strncmp(xd_p->mimetype, "inode/regular", strlen("inode/regular"))==0){
-                    emblem = HIGHLIGHT_TEXT;
-                }
-                if (strncmp(xd_p->mimetype, "text", strlen("text"))==0){
-                    emblem = HIGHLIGHT_TEXT;
-                }
-                if (strncmp(xd_p->mimetype, "application", strlen("application"))==0){
-                    emblem = HIGHLIGHT_APP;
-                }
-                if (strstr(xd_p->mimetype, "image")==0){
-                    emblem = HIGHLIGHT_TEXT;
-                }
-            }
+            else emblem = HIGHLIGHT_APP;   
 
             // Now decorate the pixbuf with emblem (types.h).
             void *arg[] = {NULL, (void *)highlight_pixbuf, NULL, NULL, (void *)emblem };
@@ -1061,7 +1074,7 @@ private:
         // required for treeview...
         if (isTreeView) {
             if (getStat(xd_p) != 0){
-		DBG("getStat failed at add_local_item\n");
+		TRACE("getStat failed at add_local_item\n");
 	    }
             TRACE("getstat for %s\n", xd_p->path);
             statInfo = Util<Type>::statInfo(xd_p->st);

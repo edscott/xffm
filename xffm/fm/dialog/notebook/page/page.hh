@@ -447,7 +447,7 @@ public:
         }
 
         if(newsize != fontsize || !family || strcmp(family, in_family)) {
-            TRACE(stderr, "XXX setting %s fontsize  %d -> %d \n", in_family, fontsize, newsize);
+            //TRACE(stderr, "XXX setting %s fontsize  %d -> %d \n", in_family, fontsize, newsize);
             if (!family || strcmp(family, in_family)) {
                 g_free(family);
                 family = g_strdup(in_family);

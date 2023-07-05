@@ -176,9 +176,9 @@ private:
             NULL
         };
         const gchar *keyIcon[]={
-            "list-add",
-            "list-add",
-            "list-remove",
+            LIST_ADD,
+            LIST_ADD,
+            LIST_REMOVE,
             NULL
         };
 
@@ -215,13 +215,13 @@ private:
             NULL
         };
         const gchar *keyIcon[]={
-            "tab-new-symbolic",
+            TAB_NEW,
             RM_BOOKMARK,
 #ifdef DO_MOUNT_ITEMS
-            "greenball",
-            "redball",
+            GREENBALL,
+            REDBALL,
 #endif
-            "user-trash-full",
+            TRASH_FULL_ICON,
             NULL
         };
         auto popup = new(Popup<Type>)(item, key, keyIcon, TRUE);
@@ -333,7 +333,7 @@ private:
         }
         g_free(thisPath);        
         auto icon_name = "user-trash";
-        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
         auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   

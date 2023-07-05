@@ -1,82 +1,114 @@
 #ifndef ICON_MACROS
 #define ICON_MACROS
 
+// VButtonBox.hh
+#define LIST_REMOVE "list-remove"
+#define LIST_ADD "list-add"
+#define GLIST_REMOVE "glist-remove"
+#define GLIST_ADD "glist-add"
+#define DIALOG_WARNING "warning"
+#define EMBLEM_BSD "emblem-bsd"
+#define EMBLEM_ARCH "emblem-archlinux"
+#define EMBLEM_GENTOO "emblem-gentoo"
+#define HELP_ABOUT "help-about"
+#define DOCUMENT_NEW "document-new"
+#define SEARCH "edit-find"
+#define OPEN_TERMINAL "video-display"
+#define OPEN_FILEMANAGER "rodent_logo"
+#define DIFFERENCES "differences"
+#define GO_HOME "home"
+#define DRIVE_HARDDISK "drive-harddisk-symbolic"
+#define TRASH_ICON "user-trash"
+
+// pathbar.hh
+#define GO_PREVIOUS "previous"
+#define GO_JUMP "jump"
+
+// menupopover.hh
+#define OPEN_MENU "open-menu-symbolic"
+#define APPLICATIONS_GRAPHICS "applications-graphics"
+#define APPLICATION_EXIT "application-exit"
+
+// local/popup.hh
+//            DOCUMENT_NEW,
+#define RUN "run"
+#define TAB_NEW "list-add-symbolic"
+#define PACKAGE_X_GENERIC "package-x-generic"
+#define INSERT_OBJECT "insert-object"
 #define GREENBALL "greenball"
 #define REDBALL "redball"
+#define EDIT_CUT "edit-cut"
+#define EDIT_COPY "edit-copy"
+#define EDIT_PASTE "edit-paste"
+#define EDIT_DELETE "edit-delete"
+#define DOCUMENT_REVERT "document-revert"
+#define DOCUMENT_SAVE "document-save"
+#define SYMLINK "emblem-symbolic-link"
+#define DOCUMENT_PROPERTIES "document-properties"
+
+// root/model.hh
+#define EFS_ICON "password"
+// GO_UP above
+#define FILE_MANAGER "system-file-manager"
+#define HOME_ICON "user-home"
+// TRASH_ICON above
+#define TRASH_FULL_ICON "user-trash-full"
+#define FSTAB_ICON "drive-harddisk"
+#define EMBLEM_BOOKMARK "emblem-favorite"
+// GO_JUMP
+#define HIGHLIGHT_JUMP "NE/" GO_JUMP "/2.5/220"
+
+
+// local/model.hh
+
+
+
 #define GRAYBALL "grayball"
 #define CANCEL "cancel"
 #define EXECUTE "execute"
 
-#define OPEN_FILEMANAGER "system-file-manager"
-#define OPEN_TERMINAL "video-display"
-#define UTILITIES_TERMINAL "utilities-terminal-symbolic"
-#define UTILITIES_TERMINAL_ACTIVE "utilities-terminal-symbolic/NE/greenball/2.0/225"
-#define UTILITIES_TERMINAL_ERROR "utilities-terminal-symbolic/NE/redball/2.0/225"
+#define UTILITIES_TERMINAL "utilities-terminal"
+#define UTILITIES_TERMINAL_ACTIVE UTILITIES_TERMINAL "/NE/greenball/2.0/225"
+#define UTILITIES_TERMINAL_ERROR UTILITIES_TERMINAL "/NE/redball/2.0/225"
 
-#define FILE_MANAGER "system-file-manager-symbolic"
 
 #define DEFAULT_ICON "text-x-generic"
 #define USER_HOME "user-home"
-#define FOLDER "folder"
-#define FOLDER_OPEN "folder-open"
-#define DRIVE_HARDDISK "drive-harddisk-symbolic"
+#define FOLDER "bluefolder"
+#define FOLDER_OPEN "bluefolder-open"
 #define INPUT_KEYBOARD_SYMBOLIC "input-keyboard-symbolic"
 #define NETWORK_WIRED_SYMBOLIC "network-wired-symbolic"
 #define IMAGE_X_GENERIC "image-x-generic-symbolic"
 #define ACCESSORIES_TEXT_EDITOR "document-edit-symbolic"
 #define WINDOW_NEW "window-new-symbolic"
 #define WINDOW_CLOSE "window-close-symbolic"
-#define DIALOG_WARNING "dialog-warning"
-#define APPLICATIONS_GRAPHICS "applications-graphics-symbolic"
-#define SEARCH "system-search-symbolic"
-#define INSERT_OBJECT "insert-object-symbolic"
 #define APPLICATION_X_EXECUTABLE "application-x-executable-symbolic"
-#define GO_UP_SYMBOLIC "go-up"
-#define GO_UP "go-up"
-#define GO_HOME "go-home"
-#define APPLICATION_EXIT "application-exit-symbolic"
-#define SYSTEM_RUN "system-run"
+#define GO_UP_SYMBOLIC "up"
+#define GO_UP "up"
 #define PROCESS_STOP "process-stop-symbolic"
-#define TAB_NEW "tab-new-symbolic"
 
-#define LIST_ADD "list-add"
-#define LIST_REMOVE "list-remove"
 
-#define PACKAGE_X_GENERIC "package-x-generic"
 
-#define EDIT_CLEAR "edit-clear-all-symbolic"
-#define EDIT_CUT "edit-cut-symbolic"
-#define EDIT_COPY "edit-copy-symbolic"
-#define EDIT_PASTE "edit-paste-symbolic"
-#define EDIT_DELETE "edit-delete-symbolic"
+
+#define EDIT_CLEAR "edit-clear-all"
 
 #define OPEN "open"
-#define DOCUMENT_OPEN "folder-open"
-#define DOCUMENT_NEW "document-new"
-#define DOCUMENT_REVERT "document-revert-symbolic"
-#define DOCUMENT_SAVE "document-save-symbolic"
-#define DOCUMENT_PROPERTIES "document-properties-symbolic"
+#define DOCUMENT_OPEN "bluefolder-open"
 
-#define SYMLINK "emblem-symbolic-link"
 #define EMBLEM_DOCUMENTS "emblem-documents-symbolic"
 #define EMBLEM_UNREADABLE "emblem-unreadable"
 
 //#define  ""
 //#define XFFM_ICON "emblem-bsd"
 #define XFFM_ICON "rodent_logo"
-#define FSTAB_ICON "drive-harddisk"
-#define EFS_ICON "drive-harddisk/SE/emblem-readonly/2.0/225"
-#define HOME_ICON "user-home"
-#define TRASH_ICON "user-trash"
-#define TRASH_FULL_ICON "user-trash-full"
-#define EMBLEM_BOOKMARK "emblem-favorite"
 #define BOOKMARK_NEW EMBLEM_BOOKMARK"/C/greenball/2.0/225"
 #define RM_BOOKMARK EMBLEM_BOOKMARK"/C/redball/2.0/225"
 
-#define HIGHLIGHT_FOLDER "NE/" DOCUMENT_OPEN "/2.5/220"
-#define HIGHLIGHT_EMBLEM "NE/" DOCUMENT_OPEN "/2.5/220"
-#define HIGHLIGHT_TEXT "NE/" ACCESSORIES_TEXT_EDITOR "/2.5/220"
-#define HIGHLIGHT_APP "NE/" APPLICATION_X_EXECUTABLE "/2.5/220"
-#define HIGHLIGHT_UP GO_UP "/NW/" GO_UP_SYMBOLIC "/2.0/225"
+//#define HIGHLIGHT_FOLDER "NE/" DOCUMENT_OPEN "/2.5/220"
+#define SYSTEM_RUN "gears"
+//#define HIGHLIGHT_EMBLEM "NE/" DOCUMENT_OPEN "/2.5/220"
+#define HIGHLIGHT_TEXT "NE/" SYSTEM_RUN "/2.5/220"
+#define HIGHLIGHT_APP "NE/" SYSTEM_RUN "/2.5/220"
+#define HIGHLIGHT_UP GO_UP "/NW/" GO_JUMP "/2.0/225"
 
 #endif

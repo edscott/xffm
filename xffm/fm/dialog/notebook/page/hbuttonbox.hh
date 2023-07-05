@@ -40,8 +40,8 @@ public:
         termButtonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         
         toggleToTerminal_ =  gtk_c::newButton(UTILITIES_TERMINAL,_("Embedded Terminal"));
-        toggleToIconview_ = gtk_c::newButton(UTILITIES_TERMINAL_ACTIVE, _("Embedded Terminal"));
-        toggleToIconviewErr_ = gtk_c::newButton(UTILITIES_TERMINAL_ERROR, _("Embedded Terminal"));
+        toggleToIconview_ = gtk_c::newButton(UTILITIES_TERMINAL_ACTIVE, _("All items in the iconview."));
+        toggleToIconviewErr_ = gtk_c::newButton(UTILITIES_TERMINAL_ERROR, _("All items in the iconview."));
         scriptButton_ =  gtk_c::newButton(DOCUMENT_REVERT, _("Scripting"));
         clearButton_ =  gtk_c::newButton(EDIT_CLEAR, _("Clear Log"));
         input_ = createStatus(); // Status textview

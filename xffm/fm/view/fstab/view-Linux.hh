@@ -88,7 +88,7 @@ public:
 
         auto utf_name = util_c::utf_string(_("Disks"));
         auto icon_name = "drive-multidisk";
-        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_EMBLEM, NULL);
+        auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
 
         auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
         auto normal_pixbuf = pixbuf_c::getPixbuf(icon_name,  -48);

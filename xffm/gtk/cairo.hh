@@ -328,7 +328,7 @@ public:
         guchar red = r;
         guchar green = g;
         guchar blue = b;
-        TRACE("pixbuf_hash_c::add_color_pixbuf: color %x,%x,%x\n", red, green, blue);  
+        TRACE("Cairo::add_color_pixbuf: color %x,%x,%x\n", red, green, blue);  
     //    GdkPixbuf *pixbuf_mask = create_pixbuf_mask(pixbuf, 0x11, 0x11, 0x11);  
         GdkPixbuf *pixbuf_mask = create_pixbuf_mask(pixbuf, red, green, blue);  
         gdk_cairo_set_source_pixbuf(pixbuf_context, pixbuf_mask, 0,0);
@@ -427,7 +427,10 @@ public:
 
     static void
     add_label_pixbuf(cairo_t *pixbuf_context, GdkPixbuf *pixbuf, const gchar *icon_text){
-        if (!icon_text || !pixbuf || !pixbuf_context) return;
+        if (!icon_text || !pixbuf || !pixbuf_context || strlen(icon_text) == 0) {
+          TRACE("add_label_pixbuf: no icontext...\n");
+          return;
+        }
         // Insert text into pixbuf
         gint x = 0;
         gint y = 0;
@@ -487,6 +490,7 @@ public:
             cairo_paint_with_alpha(pixbuf_context, 0.650);
             g_object_unref(t_pixbuf);
         }
+          TRACE("add_label_pixbuf: done for %s\n",icon_text);
 
         return ;
     }

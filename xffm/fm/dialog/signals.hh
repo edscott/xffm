@@ -94,8 +94,8 @@ public:
         gint max, current;
         g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
         g_object_get(G_OBJECT(vpane), "position", &current, NULL);
-        TRACE(">> max=%d, current=%d dialogw=%d dialogH+%d\n",
-                max, current, allocation->width, allocation->height);
+       // TRACE(">> max=%d, current=%d dialogw=%d dialogH+%d\n",
+         //       max, current, allocation->width, allocation->height);
         if (!G_IS_OBJECT(vpane)) return;
         auto oldMax = 
             GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vpane), "oldMax"));

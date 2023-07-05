@@ -128,7 +128,7 @@ private:
                 relative_directory=NULL;
             }
         }
-        TRACE(stderr, "file_token=%s\ndirectory=%s\n", file_token, directory);
+        TRACE("file_token=%s\ndirectory=%s\n", file_token, directory);
         glob_t stack_glob_v;
         gint flags=GLOB_NOESCAPE;
 
@@ -144,7 +144,7 @@ private:
             g_free(file_token);
             return NULL;
         } else if (stack_glob_v.gl_pathc == 0){
-            TRACE(stderr, "NO MATCHES\n");
+            TRACE("NO MATCHES\n");
             globfree(&stack_glob_v);
             g_free(file_token);
             return NULL;
@@ -293,19 +293,19 @@ private:
         char *suggest = g_strdup ((gchar *) (p->data));
         int equal_length=strlen(suggest);
         for(a = matches; a && a->data; a = a->next) {
-            TRACE(stderr, "comparing a %s\n", (gchar *)a->data);
+            TRACE("comparing a %s\n", (gchar *)a->data);
             for(b = a->next; b && b->data; b = b->next) {
-                TRACE(stderr, "comparing b %s\n", (gchar *)b->data);
+                TRACE("comparing b %s\n", (gchar *)b->data);
                 length=util_c::length_equal_string(
                         (const gchar *)(a->data), (const gchar *)(b->data));
                 if(length < equal_length) {
                     equal_length = length;
                 }
-                TRACE(stderr, "comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
+                TRACE("comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
             }
         }
         suggest[equal_length]=0;
-        TRACE(stderr, "string=%s, equal_length=%d, suggest=%s\n",
+        TRACE("string=%s, equal_length=%d, suggest=%s\n",
                 (gchar *) (p->data), equal_length, suggest);
 
         a = NULL;
@@ -380,20 +380,20 @@ private:
         suggest = g_strdup ((gchar *) (matches->data));
         int equal_length=strlen(suggest);
         for(a = matches; a && a->data; a = a->next) {
-            TRACE (stderr,  "comparing a %s\n", (gchar *)a->data);
+            TRACE ( "comparing a %s\n", (gchar *)a->data);
             for(b = a->next; b && b->data; b = b->next) {
-                TRACE (stderr,  "comparing b %s\n", (gchar *)b->data);
+                TRACE ( "comparing b %s\n", (gchar *)b->data);
                 length=util_c::length_equal_string(
                         (const gchar *)(a->data), (const gchar *)(b->data));
                 if(length < equal_length) {
                     equal_length = length;
                 }
-                TRACE (stderr, "comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
+                TRACE ("comparing %s to %s: length=%d\n", (gchar *)a->data, (gchar *)b->data, length);
             }
         }
         suggest[equal_length]=0;
-        TRACE (stderr, "string=%s, equal_length=%d, suggest=%s\n",
-                (gchar *) (p->data), equal_length, suggest);
+        //TRACE ("string=%s, equal_length=%d, suggest=%s\n",
+          //      (gchar *) (p->data), equal_length, suggest);
         for(a = matches; a && a->data; a = a->next) {
             g_free(a->data);
         } 

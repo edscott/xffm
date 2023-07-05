@@ -46,7 +46,7 @@ public:
         }
         auto iconName = (gchar *)g_object_get_data(G_OBJECT(menu_), "iconName");
 
-        TRACE("iconName=%s, markup=%s\n", iconName, markup);
+        //TRACE("iconName=%s, markup=%s\n", iconName, markup);
         if (!strstr(text, "</span>")){
             gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"large\">%s</span>", text);
             Gtk<Type>::menu_item_content(title, iconName, markup, -48);
