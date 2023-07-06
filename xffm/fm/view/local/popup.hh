@@ -196,7 +196,7 @@ public:
     static const gchar **localMenuItemsIcons(void){
         static const gchar *keyIcon[]={
             BOOKMARK_NEW,
-            EDIT_CLEAR,
+            RM_BOOKMARK,
             TAB_NEW,
             PACKAGE_X_GENERIC,
             INSERT_OBJECT,

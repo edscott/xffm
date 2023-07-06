@@ -57,7 +57,7 @@
 // TRASH_ICON above
 #define TRASH_FULL_ICON "user-trash-full"
 #define FSTAB_ICON "drive-harddisk"
-#define EMBLEM_BOOKMARK "emblem-favorite"
+#define EMBLEM_BOOKMARK "emblem-bookmark"
 // GO_JUMP
 #define HIGHLIGHT_JUMP "NE/" GO_JUMP "/2.5/220"
 

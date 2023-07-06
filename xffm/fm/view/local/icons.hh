@@ -398,7 +398,7 @@ private:
         }
 
         if (RootView<Type>::isBookmarked(path)){
-            emblem = g_strdup("/SE/" BOOKMARK_NEW "/2.0/220");
+            emblem = g_strdup("/SE/" EMBLEM_BOOKMARK "/2.0/220");
         }
 
         gchar *clipEmblem = ClipBoard<Type>::clipBoardEmblem(path);
