@@ -458,7 +458,11 @@ private:
         TRACE("setFileInfo... %s\n",entry->path);
         auto h = g_get_home_dir();
         struct stat st;
-        stat(entry->path, &st);
+        if (stat(entry->path, &st)){
+          if (lstat(entry->path, &st)){
+            DBG("lstat(%s) failed!\n", entry->path);
+          }
+        }
         if (!entry->mimetype) entry->mimetype = Mime<Type>::mimeMagic(entry->path);
         gchar *m1 = Util<Type>::statInfo(&st);
         gchar *m2 = Util<Type>::fileInfo(entry->path);
