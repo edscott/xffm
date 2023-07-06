@@ -25,7 +25,10 @@
 #define GO_JUMP "jump"
 
 // menupopover.hh
-#define OPEN_MENU "open-menu-symbolic"
+#define OPEN_MENU "menuTab"
+#define CLOSE_TAB "closeTab"
+#define NEW_TAB "newTab"
+
 #define APPLICATIONS_GRAPHICS "applications-graphics"
 #define APPLICATION_EXIT "application-exit"
 

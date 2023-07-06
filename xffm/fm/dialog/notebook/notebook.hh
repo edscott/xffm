@@ -72,7 +72,7 @@ public:
 */
         auto actionWidget = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
         auto tabButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
-        auto newTabButton = gtk_c::newButton("list-add-symbolic", _("New Tab"));
+        auto newTabButton = gtk_c::newButton(NEW_TAB, _("New Tab"));
         g_signal_connect(G_OBJECT(newTabButton), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_new_page), (void *)this);    
         

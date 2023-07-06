@@ -68,7 +68,7 @@ public:
         gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabelIconBox_), TRUE, TRUE, 0);
         gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabel_), TRUE, TRUE, 2);
         gtk_box_pack_end (pageLabelBox_, GTK_WIDGET(pageLabelButton_), TRUE, TRUE, 0);
-        gtk_c::setup_image_button(pageLabelButton_, "window-close-symbolic", _("Close"));
+        gtk_c::setup_image_button(pageLabelButton_, CLOSE_TAB, _("Close"));
     
         //set_spinner(pageSpinner_, TRUE, pageLabelIconBox_);
         set_spinner(FALSE);
