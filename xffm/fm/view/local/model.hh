@@ -1032,15 +1032,19 @@ private:
         }
         if (!normal_pixbuf) {
             if (doPreview) {
-              normal_pixbuf = Pixbuf<Type>::getPreview(xd_p->path, xd_p->mimetype, xd_p->st);  
+              normal_pixbuf = Pixbuf<Type>::getPreview(pixels, xd_p->path, xd_p->mimetype, xd_p->st);  
+//              normal_pixbuf = Pixbuf<Type>::getPreview(xd_p->path, xd_p->mimetype, xd_p->st);  
               const char *tag = "";
               if (xd_p->d_type  == DT_DIR) tag = _("Directory");
+#ifdef ADD_EXTENSION_TAG
               else if (strchr(xd_p->path, '.')) tag = strrchr(xd_p->path, '.');
-
-              TRACE("insert_decoration_f for %s %s\n", xd_p->path,tag);
-              void *arg[] = {NULL, (void *)normal_pixbuf, (void *)(tag), NULL, NULL };
-              // Done by main gtk thread:
-              Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg);
+#endif
+              if (strlen(tag)){
+                TRACE("insert_decoration_f for %s %s\n", xd_p->path,tag);
+                void *arg[] = {NULL, (void *)normal_pixbuf, (void *)(tag), NULL, NULL };
+                // Done by main gtk thread:
+                Util<Type>::context_function(Pixbuf<Type>::insert_decoration_f, arg);
+              }
 
             } else {
               TRACE("normal pixbuf %s\n", icon_name);

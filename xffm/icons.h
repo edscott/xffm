@@ -35,7 +35,6 @@
 // local/popup.hh
 //            DOCUMENT_NEW,
 #define RUN "run"
-#define TAB_NEW "list-add-symbolic"
 #define PACKAGE_X_GENERIC "package-x-generic"
 #define INSERT_OBJECT "insert-object"
 #define GREENBALL "greenball"

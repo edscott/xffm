@@ -128,13 +128,14 @@ public:
         // First we get the preview from hash, thumbnail or creation.
         if (size != PREVIEW_IMAGE_SIZE){
             // This will put the preview into hash table if not there already:
-            TRACE("previewDefault(%s)...Pixbuf<Type>::getImageAtSize PREVIEW_IMAGE_SIZE\n", filePath);
+            TRACE("previewDefault(%s)...Pixbuf<Type>::getImageAtSize %d\n", filePath, size);
+
             previewPixbuf = 
-                Pixbuf<Type>::getImageAtSize(filePath, PREVIEW_IMAGE_SIZE, mimetype, st_p);
+                Pixbuf<Type>::getImageAtSize(filePath, size, mimetype, st_p);
             // We get the preview image path:
             auto previewPath = 
-                PixbufHash<Type>::get_thumbnail_path (filePath, PREVIEW_IMAGE_SIZE);
-            TRACE("previewDefault(%s)... thumbnail for PREVIEW_IMAGE_SIZE: %s\n", 
+                PixbufHash<Type>::get_thumbnail_path (filePath, size);
+            TRACE("previewDefault(%s)... thumbnail : %s\n", 
                 filePath, previewPath);
             // Now we get the resized pixmap.
             TRACE("previewDefault(%s)... get the resized pixmap from %s at size %d\n", 
@@ -150,7 +151,7 @@ public:
 
             }
             g_free(previewPath);
-            TRACE("previewDefault(%s)... OK\n", filePath);
+            TRACE("previewDefault(%s)... OK pixbuf=%p\n", filePath, pixbuf);
 
             return (pixbuf);
         } 

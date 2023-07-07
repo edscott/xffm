@@ -425,8 +425,11 @@ private:
 
         TRACE("getEmblem: %s --> %s\n", path, emblem);
         gchar *extend;
+#ifdef ADD_EXTENSION_TAG
         if (d_type != DT_DIR) extend = extension(basename);
-        else extend=g_strdup("");
+        else 
+#endif
+          extend=g_strdup("");
         /*if (d_type != DT_REG) extend = g_strdup("");
         else extend = extension(basename);*/
         TRACE("extend: %s --> %s\n", path, extend);

@@ -2,6 +2,7 @@
  * Copyright 2005-2018 Edscott Wilson Garcia 
  * license: GPL v.3
  */
+#undef ADD_EXTENSION_TAG
 
 #define XFFM_CC
 #include "config.h"

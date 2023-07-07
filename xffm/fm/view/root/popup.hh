@@ -215,7 +215,7 @@ private:
             NULL
         };
         const gchar *keyIcon[]={
-            TAB_NEW,
+            NEW_TAB,
             RM_BOOKMARK,
 #ifdef DO_MOUNT_ITEMS
             GREENBALL,

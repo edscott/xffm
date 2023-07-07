@@ -114,9 +114,13 @@ class Pixbuf {
     }
 
 public:
+    static GdkPixbuf *
+    getPreview(const gchar *iconName, const gchar *mimetype, struct stat *st_p = NULL){
+      return getPreview(PREVIEW_IMAGE_SIZE, iconName, mimetype, st_p);
+    }
 
     static GdkPixbuf *
-    getPreview(const gchar *iconName, const gchar *mimetype, struct stat *st_p = NULL)
+    getPreview(int size, const gchar *iconName, const gchar *mimetype, struct stat *st_p = NULL)
     {
         GdkPixbuf *pixbuf = NULL;
         auto isImage = Gtk<Type>::isImage(mimetype, TRUE);
@@ -125,16 +129,16 @@ public:
                 || strstr(mimetype, "postscript"));
         if (isImage && !isGs) {
             pixbuf = 
-                Pixbuf<Type>::getImageAtSize(iconName, PREVIEW_IMAGE_SIZE, 
+                Pixbuf<Type>::getImageAtSize(iconName, size, 
                         mimetype, st_p);
         } else {
             pixbuf = 
-                Preview<Type>::previewDefault(iconName, mimetype, st_p);
+                Preview<Type>::previewDefault(iconName, mimetype, st_p, size);
         }
         if (!pixbuf){
             auto icon = LocalIcons<Type>::getBasicIconname(iconName, mimetype);
             //fprintf(stderr, "getPreview(): !pixbuf for %s.. retry with %s\n", iconName, icon);
-            pixbuf = Pixbuf<Type>::getPixbuf(icon, -192);
+            pixbuf = Pixbuf<Type>::getPixbuf(icon, -48);
         }
         if (!pixbuf){
             DBG("getPreview(): cannot get pixbuf for %s\n",iconName);
@@ -227,26 +231,7 @@ public:
         } 
 
 
-    /*    if (mimetype && 
-            (strstr(mimetype, "pdf") ||
-             strstr(mimetype, "postscript")) )
-        {
-            // Variable size thumbnails:
-            // Get current page first.
-            //auto page_p = Fm<Type>::getCurrentPage();
-            //auto pixels = page_p->getImageSize();
-            pixbuf = 
-                Preview<Type>::previewDefault(iconName, mimetype, st_p, height);
-            if (!pixbuf) {
-            auto icon = "text-x-generic";
-            auto label = "pdf";
 
-            if (strstr(mimetype, "postscript")) label = "ps";
-            pixbuf = buildPixbuf(icon, 48);
-            insertPixbufLabel(pixbuf, label);
-            return pixbuf;
-            }
-        } else */
         {
             // Single size thumbnails:
             pixbuf = buildImagePixbuf(iconName, height);
@@ -571,6 +556,10 @@ public:
         auto label = strchr(name, '*');
         auto color = strchr(name, '#');
         auto emblems = strchr(name, '/');
+#ifndef ADD_EXTENSION_TAG
+        label = NULL;
+#endif
+        
         if (label){
             *label=0;
             label++;

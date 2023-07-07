@@ -123,7 +123,7 @@ public:
     static const gchar **menuIcons(void){
         static const gchar *keyIcon[]={
             DOCUMENT_NEW,
-            TAB_NEW,
+            NEW_TAB,
             EDIT_CUT,
             EDIT_COPY,
             EDIT_PASTE,
@@ -197,7 +197,7 @@ public:
         static const gchar *keyIcon[]={
             BOOKMARK_NEW,
             RM_BOOKMARK,
-            TAB_NEW,
+            NEW_TAB,
             PACKAGE_X_GENERIC,
             INSERT_OBJECT,
 #ifdef ENABLE_FSTAB_MODULE            
