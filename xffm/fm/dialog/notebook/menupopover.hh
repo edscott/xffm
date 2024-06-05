@@ -141,9 +141,19 @@ public:
 
         const gchar *path = Fm<Type>::getCurrentNotebook()->workdir();
         if (!path || !g_file_test(path, G_FILE_TEST_IS_DIR)) path = g_get_home_dir();
+#if 0
         gchar *find = g_strdup_printf("%s --find \"%s\"", xffmProgram, path);
         run(Fm<Type>::getCurrentNotebook(), find);
-        g_free(find);
+        g_free(find);  
+#else   
+        pid_t pid = fork();
+        if (!pid){
+          execlp(xffmProgram, xffmProgram, "--find", path, NULL);
+          fprintf(stderr, "Problem with execlp(%s,%s,%s,%s,NULL)\n" ,
+              xffmProgram, xffmProgram, "--find", path);
+          _exit(123);
+        } 
+#endif
     }
 
     static void
