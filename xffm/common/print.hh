@@ -56,7 +56,6 @@ public:
  
     static void // print_icon will free string.
     printStdErr(GtkTextView *textview, gchar *string){
-      DBG("printStdErr\n");
 	      showTextSmallErr(textview);
         auto tag = Settings<Type>::getString("window.errorColor");
         if (tag) print(textview, tag, string);

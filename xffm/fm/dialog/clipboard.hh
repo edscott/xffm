@@ -134,6 +134,8 @@ public:
             }
             g_free(path);
         }
+        // remove trailing \n
+        if (strchr(data, '\n')) *strrchr(data, '\n')=0;
         return data;
     }
 

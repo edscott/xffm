@@ -406,7 +406,7 @@ private:
                     strerror(EEXIST),fullTarget,
                     _("Overwrite?")); 
                     
-            auto yesNo = Dialogs<Type>::yesNo(message);
+            auto yesNo = Dialogs<Type>::overwriteCancel(message);
             g_free(message);
             auto response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(yesNo), "response"));
             gtk_widget_destroy(GTK_WIDGET(yesNo));

@@ -28,6 +28,18 @@ public:
         gtk_dialog_run(GTK_DIALOG(dialog));
         return dialog;
     }
+
+    static GtkWidget *overwriteCancel(const gchar *message){
+        auto dialog = Dialogs<Type>::quickCancel(mainWindow, message, "dialog-question");
+        auto buttonBox = (GtkBox *)g_object_get_data(G_OBJECT(dialog), "buttonBox");
+        auto button = Gtk<Type>::dialog_button("greenball", _("Overwrite"));
+        g_signal_connect (button, "clicked", G_CALLBACK (responseYes), dialog);
+        gtk_box_pack_start(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
+        
+        
+        gtk_dialog_run(GTK_DIALOG(dialog));
+        return dialog;
+    }
     
     static void
     placeDialog(GtkWindow *dialog){
@@ -53,6 +65,92 @@ public:
         gtk_window_move(dialog, mouseX, mouseY);
     }
 
+
+    static GtkWidget *
+    quickCancel (GtkWindow *parent, 
+            const gchar *message, 
+            const gchar *icon="dialog-question", 
+            const gchar *title=_("Confirm"))
+    {
+        auto dialog = quickDialogCancel(parent, message, icon, title);
+        gtk_widget_show_all (GTK_WIDGET(dialog));
+        return dialog;
+    }
+
+    static GtkWidget *
+    quickDialogCancel (GtkWindow *parent, 
+            const gchar *message, 
+            const gchar *icon, 
+            const gchar *title)
+    {
+     GtkWidget *dialog = NULL;
+     GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
+
+     // Create the widgets
+     dialog = gtk_dialog_new ();
+     if (parent) {
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), 
+                GTK_WINDOW (parent));
+     } else {
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+     }
+     gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+     
+     auto content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+     auto label = GTK_LABEL(gtk_label_new (""));
+     gtk_label_set_markup(label, message);
+     
+
+     // Ensure that the dialog box is destroyed when the user responds
+/*
+     if (parent){
+         g_signal_connect_swapped(dialog, "response", 
+                    G_CALLBACK (gtk_widget_show),
+                    parent);
+     }
+     */
+     g_signal_connect_swapped (dialog, "response",
+                G_CALLBACK (closeQuickDialog),
+                dialog);
+
+
+     // Add the label, and show everything we have added
+     auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+     g_object_set_data(G_OBJECT(dialog), "vbox", vbox);
+     
+     gtk_box_pack_start(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
+     
+     if (icon){
+        auto pixbuf = Pixbuf<Type>::getPixbuf(icon, -48);
+        if (pixbuf) {
+            auto image = gtk_image_new_from_pixbuf(pixbuf);
+            if (image) {
+                gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
+                gtk_widget_show (image);
+            }
+        }
+     }
+     auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+     gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
+     gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
+
+     auto vbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+   
+     gtk_box_pack_end(vbox, GTK_WIDGET(vbox2), FALSE, FALSE,0);
+     auto hbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+     gtk_box_pack_end(vbox2, GTK_WIDGET(hbox2), FALSE, FALSE,0);
+     auto button = Gtk<Type>::dialog_button("redball", _("Cancel"));
+     gtk_box_pack_end(hbox2, GTK_WIDGET(button), FALSE, FALSE,0);
+     g_object_set_data(G_OBJECT(dialog), "buttonBox", (void *)hbox2); 
+     g_signal_connect (button, "clicked",
+                G_CALLBACK (onQuickCancel),
+                dialog);
+
+        
+
+     return dialog;
+    }
 
     static GtkWidget *
     quickHelp (GtkWindow *parent, 

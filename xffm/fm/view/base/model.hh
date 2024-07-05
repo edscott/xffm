@@ -135,6 +135,12 @@ public:
         //    (void *)baseView);
         
 
+        // GDK signals...related API is rarely needed.
+        /*g_signal_connect (G_OBJECT (this->destination()), 
+             "GDK_DRAG_MOTION", 
+             G_CALLBACK (BaseSignals<Type>::DropDragMotion),
+             (void *)this);*/
+
         
     }
     ~BaseModel(void){

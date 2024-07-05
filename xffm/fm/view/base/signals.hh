@@ -61,9 +61,11 @@ static gboolean rubberBand_=FALSE;
 static gint buttonPressX=-1;
 static gint buttonPressY=-1;
 
+static gint whichButton=0;
+static bool shiftOn=false;
 
 static GtkTargetList *targets=NULL;
-static GdkDragContext *context=NULL;
+static GdkDragContext *motionContext_=NULL;
 
 static gboolean controlMode = FALSE;
 
@@ -74,8 +76,15 @@ static gint dragMode=0;
 static gint longPressTime;
 static pthread_mutex_t longPressMutex=PTHREAD_MUTEX_INITIALIZER;
 
+    static GdkPixbuf *mvPixbuf_=NULL;
+    static GdkPixbuf *cpPixbuf_=NULL;
+    static GdkPixbuf *lnPixbuf_=NULL;
+    static GdkPixbuf *askPixbuf_=NULL;
+
+
 template <class Type> 
 class BaseSignals {
+
 public:
 
     static gboolean
@@ -93,9 +102,12 @@ public:
            
         if (abs(e->x - motionX) > 5 || abs(e->y - motionY) > 5 )noMotion=FALSE;
 
+
         if (buttonPressX >= 0 && buttonPressY >= 0){
             TRACE("buttonPressX >= 0 && buttonPressY >= 0\n");
+            if (event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) shiftOn=true; else shiftOn=false;
             if (sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10){
+              //DBG("motion sqrt(pow(e->x - buttonPressX,2) + pow(e->y - buttonPressY, 2)) > 10\n");
                 GList *selectionList;
                 view->selectables();
                 if (isTreeView) {
@@ -124,8 +136,7 @@ public:
                 }
 
                 if (!targets) targets= gtk_target_list_new (targetTable,TARGETS);
-
-                context =
+                motionContext_ =
                     gtk_drag_begin_with_coordinates (view->source(),
                              targets,
                              (GdkDragAction)(((gint)GDK_ACTION_MOVE)|
@@ -424,7 +435,8 @@ public:
         dragOn_ = FALSE;
 
         GtkTreePath *tpath = NULL;
-        if (event->button == 1) {
+        if (event->button == 1 || event->button == 2) {
+            whichButton = event->button;
             pthread_mutex_lock(&longPressMutex);
             longPressTime = 0;
             pthread_mutex_unlock(&longPressMutex);
@@ -927,19 +939,77 @@ public:
         return allocation.height;
     }
     
+    static void dragPixbufs(void){
+       // One time pixbuf creation.
+      if (!mvPixbuf_) {
+        mvPixbuf_ = Pixbuf<Type>::getPixbuf("text-x-generic/SE/edit-redo/2.0/220", -24);
+        g_object_ref(G_OBJECT(mvPixbuf_));
+      }
+      if (!cpPixbuf_) {
+        cpPixbuf_ = Pixbuf<Type>::getPixbuf("text-x-generic/SE/list-add/2.0/220", -24);
+        g_object_ref(G_OBJECT(cpPixbuf_));
+      }
+      if (!lnPixbuf_) {
+        lnPixbuf_ = Pixbuf<Type>::getPixbuf("text-x-generic/SE/emblem-symbolic-link/2.0/220", -24);
+        g_object_ref(G_OBJECT(lnPixbuf_));     
+      }
+      if (!askPixbuf_) {
+        askPixbuf_ = Pixbuf<Type>::getPixbuf("dialog-question", -24);
+        g_object_ref(G_OBJECT(askPixbuf_));     
+      }
+   }
+
     static gboolean
     DragMotion (GtkWidget * widget, 
             GdkDragContext * dc, gint dragX, gint dragY, 
             guint t, gpointer data) {
         static gboolean highlighted = FALSE;
         auto view = (View<Type> *)data;
-        TRACE("signal_drag_motion\n");
+        //DBG("signal_drag_motion\n");
+        auto list = view->selectionList();
+        auto number =  g_list_length(list);
+        if (number == 0) return FALSE;
+        auto ask = (number > 1);
+        //DBG("items selected=%d\n", number);
+
         gtk_widget_hide(GTK_WIDGET(xf::popupImage));
 
         GtkTreePath *tpath;
-                                        
-        gint actions = gdk_drag_context_get_actions(dc);
-        TRACE("motion_notify_event, dragmode= %d\n", actions);
+                          
+#if 10
+        // get the current dragMotion context (dc) action selection.        
+        GdkDragAction actions = gdk_drag_context_get_actions(dc);
+        if (whichButton == 1 && actions == 14) actions = GDK_ACTION_COPY;
+        if (whichButton == 2 ) actions = GDK_ACTION_MOVE;
+        // One time pixbuf creation.
+        dragPixbufs();
+        // ask for multiple files or folder moves
+        if (ask) actions = GDK_ACTION_ASK;
+       // DBG("DragMotion action=%d\n", actions);
+        // set motion dragContext to action
+        if (GDK_IS_DRAG_CONTEXT(motionContext_)) {
+          gdk_drag_status (motionContext_, actions, t);
+          // set motion dragContext pixbuf to corresponding to action
+          switch (actions){
+            case GDK_ACTION_MOVE: //4
+                gtk_drag_set_icon_pixbuf (motionContext_, mvPixbuf_,1,24);
+              break;
+            case GDK_ACTION_COPY: //2
+                gtk_drag_set_icon_pixbuf (motionContext_, cpPixbuf_,1,24);
+              break;
+            case GDK_ACTION_LINK://8
+                gtk_drag_set_icon_pixbuf (motionContext_, lnPixbuf_,1,24);
+              break;
+            case GDK_ACTION_ASK: // 32
+                gtk_drag_set_icon_pixbuf (motionContext_, askPixbuf_,1,24);
+              break;
+            default:
+              gdk_drag_status (motionContext_, GDK_ACTION_COPY, t);
+              gtk_drag_set_icon_pixbuf (motionContext_, mvPixbuf_,1,24);
+          }
+        }
+#else // obsolete
+        GdkDragAction actions = gdk_drag_context_get_actions(dc);
         const gchar *dragIcon = "text-x-generic/SE/edit-redo/4.0/220";
         
         if(actions == GDK_ACTION_MOVE){
@@ -955,7 +1025,9 @@ public:
         }
 
         GdkPixbuf *pixbuf = Pixbuf<Type>::getPixbuf(dragIcon, -24);
-        if (GDK_IS_DRAG_CONTEXT(context)) gtk_drag_set_icon_pixbuf (context, pixbuf,1,24);
+        if (GDK_IS_DRAG_CONTEXT(motionContext_))  // works
+          gtk_drag_set_icon_pixbuf (motionContext_, pixbuf,1,24);
+#endif
             
         gboolean folderDND = FALSE;
         auto viewDragY = dragY - dragOffset(widget);
@@ -1005,7 +1077,7 @@ public:
                        guint info, 
                        guint time,
                        gpointer data) {
-        TRACE("signal_drag_data_send\n");
+        //DBG("DND>> DragDataSend...\n");
         //g_free(files);
         
         //int drag_type;
@@ -1121,11 +1193,17 @@ public:
                       guint info, 
                       guint time, 
                       gpointer data){
-        TRACE( "DND>> signal_drag_data\n");
+        //DBG( "DND>> DragDataReceive...\n");
         auto view = (View<Type> *)data;
 
-        // Treeview or iconview?
+        //auto dbgdndData = (const char *)gtk_selection_data_get_data (selection_data);
+        //DBG("dbgdndData = \"%s\"\n", dbgdndData);
+       
+        // This gets the gtk mouse selected action, not the selected as of yet... 
         GdkDragAction action = gdk_drag_context_get_selected_action(context);
+        //DBG("GdkDragAction action = %d\n", action);
+        
+        // Treeview or iconview?
         
         //TRACE("rodent_mouse: DND receive, info=%d (%d,%d)\n", info, TARGET_STRING, TARGET_URI_LIST);
         if(info != TARGET_URI_LIST) {
@@ -1134,6 +1212,11 @@ public:
             // gtk_drag_finish(context, FALSE, FALSE, time);
             return;
         }
+
+        //if (whichButton == 2 && shiftOn) return;
+        if (whichButton == 2 ) action = GDK_ACTION_MOVE;
+        //DBG("*** final GdkDragAction action = %d button=%d shiftOn=%d\n", action, whichButton, shiftOn);
+        
         if(action != GDK_ACTION_MOVE && 
            action != GDK_ACTION_COPY &&
            action != GDK_ACTION_LINK) {
@@ -1161,7 +1244,7 @@ public:
         
         
         auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
-        TRACE("dndData = \"\n%s\"\n", dndData);
+        //DBG("dndData = \"\n%s\"\n", dndData);
         
         switch (view->viewType()) {
             case (LOCALVIEW_TYPE):
@@ -1180,14 +1263,17 @@ public:
      /*   gtk_drag_finish (context, result, 
                 (action == GDK_ACTION_MOVE) ? result : FALSE, 
                 time); */
-        TRACE("DND receive, drag_over\n");
+        //DBG("DND receive, drag_over\n");
         return;
     }
 
 
     static void
     signal_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        TRACE("signal_drag_end\n");
+        //DBG("signal_drag_end\n");
+        //DBG("signal_drag_end:: unsetting motionContext_\n");
+        // Bug fix:
+        motionContext_=NULL;
         
         auto view = (View<Type> *)data;
 
@@ -1221,7 +1307,7 @@ public:
                 message="The drag operation failed due to some unspecified error.";
                 break;
         }
-        ERROR("fm/base/signals.hh::Drag was not accepted: %s\n", message);
+        DBG("fm/base/signals.hh::Drag was not accepted: %s\n", message);
         return TRUE;
 
     }
@@ -1229,13 +1315,13 @@ public:
 
     static void
     signal_drag_leave (GtkWidget * widget, GdkDragContext * drag_context, guint time, gpointer data) {
-        TRACE("signal_drag_leave\n");
+        //DBG("signal_drag_leave...\n");
 
     }
 
     static void
     signal_drag_delete (GtkWidget * widget, GdkDragContext * context, gpointer data) {
-        ERROR("fm/base/signals.hh::signal_drag_delete\n");
+        //DBG("fm/base/signals.hh::signal_drag_delete...\n");
     }
     
 public:
