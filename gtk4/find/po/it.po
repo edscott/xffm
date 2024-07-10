@@ -1,0 +1,374 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:38:56 CDT 2013 ---
+#
+# Antonio Trande <sagitter@fedoraproject.org>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2014-03-09 17:41+0100\n"
+"Last-Translator: \n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "Qualsiasi"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "Regolare"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "Directory"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "Collegamento simbolico"
+
+#: .././src/find-module.i:29
+msgid "Socket"
+msgstr "Socket"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "Device a blocchi"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "Device a caratteri"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr "FIFO"
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "Risultati"
+
+#: .././src/find-module.i:162
+msgid "Upper limit:"
+msgstr "Limite superiore:"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+msgid "Counting files..."
+msgstr "Conteggio file..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+msgid "Search Complete"
+msgstr "Ricerca completata"
+
+#: .././src/find-module.i:197
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Trovata %d occorrenza"
+msgstr[1] "Trovate %d occorrenze"
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s completato: %s"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "Seleziona i file..."
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "Selezionare la cartella in cui cercare"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "Ricerca..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Regole di base:\n"
+"\n"
+"* Abbinerà qualsiasi carattere zero o più volte.\n"
+"? Abbinerà qualsiasi carattere esattamente una volta\n"
+"[] Abbina qualsiasi carattere all'interno di [] \n"
+"^ Abbina all'inizio della stringa\n"
+"$ Abbina alla fine della stringa \n"
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"I caratteri riservati alle regexp estese sono\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"Nelle espressioni regolari base, i metacaratteri\n"
+"?, +, {, |, (, and ) perdono il loro speciale significato.\n"
+"\n"
+"Il punto  .   abbina qualsiasi carattere singolo.\n"
+"The simbolo ^ abbina all'inizio della linea.\n"
+"Il dollaro $ abbina alla fine della linea.\n"
+"\n"
+"I caratteri entro [ ] abbinano qualsiasi singolo \n"
+"       carattere nella lista.\n"
+"I caratteri entro [^ ] abbinano qualsiasi singolo\n"
+"       carattere *non* nella lista.\n"
+"I caratteri entro [ - ] abbinano un intervallo di\n"
+"       caratteri (ie [0-9] o [a-z]).\n"
+"\n"
+"Un'espressione regolare può essere seguita da uno\n"
+"       dei tanti repetition operator:\n"
+"?      L'oggetto precedente è opzionale ed abbina\n"
+"       al più una volta.\n"
+"*      L'oggetto precedente sarà abbinato zero\n"
+"       o più volte.\n"
+"+      L'oggetto precedente sarà abbinato una o\n"
+"       più volte.\n"
+"{n}    L'oggetto precedente è abbinato esattamente n volte.\n"
+"{n,}   L'oggetto precedente è abbinato n o più volte.\n"
+"{n,m}  TL'oggetto precedente è abbinato almeno n volte,\n"
+"       ma non più di m volte.\n"
+"\n"
+"Per abbinare qualsiasi carattere riservato, precederlo con \\. \n"
+"\n"
+"Due espressioni regolari possono essere congiunte dal logico o\n"
+"       operatore |.\n"
+"Due espressioni regolari possono essere concatenate.\n"
+"\n"
+"Maggiori informazioni sono disponibili digitando \"man grep\"\n"
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr "La ricerca non ha prodotto risultati"
+
+#: .././src/find-module_gui.c:165
+msgid "No editor component found."
+msgstr "Nessun componente editor trovato."
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "sconosciuto"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "Modificato"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "Creato"
+
+#: .././src/find-module_gui.c:284
+msgid "Accessed"
+msgstr "Acceduto"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "Trova"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "Percorso"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "Filtro:"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr "Ricorsivo"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+msgid "Find hidden files and directories"
+msgstr "Trova file e cartelle nascosti"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+msgid "Stay on single filesystem"
+msgstr "Stare su un solo filesystem"
+
+#: .././src/find-module_gui.c:767
+msgid "Upper limit"
+msgstr "Limite superiore"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr "Al minimo"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+msgid "kBytes"
+msgstr "kByte"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr "Al massimo"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "Utente"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "Gruppo"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "Permessi ottali"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "SUID"
+
+#: .././src/find-module_gui.c:798
+msgid "Executable"
+msgstr "Eseguibile"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "Minuti"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "Ore"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "Giorni"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "Mesi"
+
+#: .././src/find-module_gui.c:828
+msgid "File type : "
+msgstr "Tipo file : "
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+msgid "Contains"
+msgstr "Contiene"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "Contiene il testo"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "Maiuscole/minuscole"
+
+#: .././src/find-module_gui.c:914
+msgid "Extended regexp"
+msgstr "Regexp estesa"
+
+#: .././src/find-module_gui.c:921
+msgid "Include binary files"
+msgstr "Includi i file binari"
+
+#: .././src/find-module_gui.c:928
+msgid "Line Count"
+msgstr "Conteggio righe"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "Corrisponde"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr "Dovunque"
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "Solo parole intere"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "righe"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "Nessuna corrispondenza"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "Chiudi"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "Annulla"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "Pulisci"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "Modifica"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "Cartella Home"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr "Strumento di ricerca basato su fgr"

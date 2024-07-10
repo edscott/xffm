@@ -1,0 +1,1 @@
+ find ./ -name "*.c" > po/POTFILES.in  &&  find ./ -name "*.i"  >> po/POTFILES.in &&  find ./ -name "*.h" >> po/POTFILES.in  &&  find ./ -name "*.desktop.in.in"  >> po/POTFILES.in

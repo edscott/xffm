@@ -1,0 +1,342 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:45:20 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2010-01-24 17:20+0200\n"
+"Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
+"Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%s00 > 0  n%s00 "
+"<20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "Oricare"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "Obișnuit"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "Dosar"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "Legătură simbolică"
+
+#: .././src/find-module.i:29
+msgid "Socket"
+msgstr "Socket"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "Dispozitiv bloc"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "Dispozitiv caracter"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr "FIFO"
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "Rezultate"
+
+#: .././src/find-module.i:162
+msgid "Upper limit:"
+msgstr "Limita de sus:"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+msgid "Counting files..."
+msgstr "Numărare fișiere..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "Căutare terminată."
+
+#: .././src/find-module.i:197
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "A fost găsit %d potrivire"
+msgstr[1] "Au fost găsite %d potriviri"
+msgstr[2] "Au fost găsite %d de potriviri"
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Finalizat : %s"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "Selectează fișiere..."
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "Alegeți dosarele în care să se caute"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "Se caută..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr "Căutarea nu a dat rezultate"
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "Nicio componentă-calendar găsită."
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "necunoscut"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "Modificate"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "Creat"
+
+#: .././src/find-module_gui.c:284
+msgid "Accessed"
+msgstr "Accesat"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "Caută"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "Cale"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "Filtru:"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr "Recursiv"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Arată fișierele și directoarele ascunse"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Scanează un sistem de fișiere"
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "Limita de sus:"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr "Cel puțin"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+msgid "kBytes"
+msgstr "kocteți"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr "Cel mult"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "Utilizator"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "Grup"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "Permisiuni octale"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "SUID"
+
+#: .././src/find-module_gui.c:798
+msgid "Executable"
+msgstr "Executabil"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "Minute"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "Ore"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "Zile"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "Luni"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr "Tip fișier:"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+msgid "Contains"
+msgstr "Conține"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "Conține textul"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "Sensibil la majuscule"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "Scoate extins"
+
+#: .././src/find-module_gui.c:921
+msgid "Include binary files"
+msgstr "Include fișierele binare"
+
+#: .././src/find-module_gui.c:928
+msgid "Line Count"
+msgstr "Număr de linii"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "Potrivire"
+
+#: .././src/find-module_gui.c:963
+#, fuzzy
+msgid "Anywhere"
+msgstr "Potrivește oriunde"
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "Numai cuvinte întregi"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "linii"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "Nicio potrivire"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "Închide"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "Renunță"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "Curăță"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "Editare"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "Dosar Acasă"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

@@ -1,0 +1,352 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:39:50 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2008-06-14 21:25+0200\n"
+"Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
+"Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "Totes"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "Regular"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "Repertòri"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "Ligam simbolic"
+
+#: .././src/find-module.i:29
+#, fuzzy
+msgid "Socket"
+msgstr "PocketPC"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "Periferic blòc"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "Periferic de caractèrs"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr ""
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "Resultas"
+
+#: .././src/find-module.i:162
+#, fuzzy
+msgid "Upper limit:"
+msgstr "Temps limit :"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+#, fuzzy
+msgid "Counting files..."
+msgstr "Dobertura del fichièr %s..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+#, fuzzy
+msgid "Search Complete"
+msgstr "Recercar de personas"
+
+#: .././src/find-module.i:197
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s Terminat : %s"
+
+#: .././src/find-module.i:237
+#, fuzzy
+msgid "Select Files..."
+msgstr "Seleccionatz de fichièrs"
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "Seleccionatz un repertòri ont recercar"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "Recèrca..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+
+#: .././src/find-module_gui.c:158
+#, fuzzy
+msgid "Search returned no results"
+msgstr "Pas de resulta per vòstra recèrca."
+
+#: .././src/find-module_gui.c:165
+#, fuzzy
+msgid "No editor component found."
+msgstr "Pas cap de periferic ret trobat"
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "desconegut"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "Modificat"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "Creat"
+
+#: .././src/find-module_gui.c:284
+#, fuzzy
+msgid "Accessed"
+msgstr "Darrièr accès :"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "Recercar"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "Camin"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "Filtre :"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr ""
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+#, fuzzy
+msgid "Find hidden files and directories"
+msgstr "Sincronizar de repertòris"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+#, fuzzy
+msgid "Stay on single filesystem"
+msgstr "Visualizar totes los sistèmas de fichièrs"
+
+#: .././src/find-module_gui.c:767
+#, fuzzy
+msgid "Upper limit"
+msgstr "Temps limit :"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+#, fuzzy
+msgid "At Least"
+msgstr "Al mens"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+#, fuzzy
+msgid "kBytes"
+msgstr "Octets"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+#, fuzzy
+msgid "At Most"
+msgstr "A prepaus dels moduls"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "Utilizaire"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "Grop"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "Permissions en octal"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "SUID"
+
+#: .././src/find-module_gui.c:798
+#, fuzzy
+msgid "Executable"
+msgstr "Executable :"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "Minutas"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "Oras"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "Jorns"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "Meses"
+
+#: .././src/find-module_gui.c:828
+#, fuzzy
+msgid "File type : "
+msgstr "Tipe de fichièr :"
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+msgid "Contains"
+msgstr "Conten"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "Conten lo tèxt"
+
+#: .././src/find-module_gui.c:907
+#, fuzzy
+msgid "Case Sensitive"
+msgstr "Respectar la cassa"
+
+#: .././src/find-module_gui.c:914
+#, fuzzy
+msgid "Extended regexp"
+msgstr "Regulärer Ausdruck in der Fensterrolle"
+
+#: .././src/find-module_gui.c:921
+#, fuzzy
+msgid "Include binary files"
+msgstr "Inclure los fichièrs :"
+
+#: .././src/find-module_gui.c:928
+#, fuzzy
+msgid "Line Count"
+msgstr "Descompte de las paginas"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "Correspondéncia"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr "Pertot"
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "Sonque los mots entièrs"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "linhas"
+
+#: .././src/find-module_gui.c:998
+#, fuzzy
+msgid "No match"
+msgstr "Observador"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "Tampar"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "Anullar"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "Netejar"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "Edicion"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "Repertòri personal"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

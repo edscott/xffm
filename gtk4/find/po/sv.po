@@ -1,0 +1,373 @@
+# Translations for Rodent package.
+# Copyright (C) 2004-2012 FSF.
+# This file is distributed under the same license as the Rodent package.
+#   --- vie may  3 10:38:51 CDT 2013 ---
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rodent Delta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-09 17:28-0600\n"
+"PO-Revision-Date: 2012-10-21 21:40+0200\n"
+"Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .././src/find-module.i:25
+msgid "Any"
+msgstr "Alla"
+
+#: .././src/find-module.i:26
+msgid "Regular"
+msgstr "Vanlig"
+
+#: .././src/find-module.i:27
+msgid "Directory"
+msgstr "Katalog"
+
+#: .././src/find-module.i:28
+msgid "Symbolic Link"
+msgstr "Symbolisk länk"
+
+#: .././src/find-module.i:29
+msgid "Socket"
+msgstr "Uttag"
+
+#: .././src/find-module.i:30
+msgid "Block device"
+msgstr "Blockenhet"
+
+#: .././src/find-module.i:31
+msgid "Character device"
+msgstr "Teckenenhet"
+
+#: .././src/find-module.i:32
+msgid "FIFO"
+msgstr "FIFO"
+
+#. / option "upper_limit_spin" (only in gtk dialog)
+#: .././src/find-module.i:162 .././src/find-module_gui.c:767
+msgid "Results"
+msgstr "Resultat"
+
+#: .././src/find-module.i:162
+msgid "Upper limit:"
+msgstr "Övre gräns:"
+
+#: .././src/find-module.i:165 .././src/find-module.i:171
+msgid "Counting files..."
+msgstr "Räknar filer..."
+
+#. Standalone
+#: .././src/find-module.i:179 .././src/find-module.i:183
+msgid "Search Complete"
+msgstr "Sökning färdig"
+
+#: .././src/find-module.i:197
+#, c-format
+msgid "Found %d match"
+msgid_plural "Found %d matches"
+msgstr[0] "Hittade en träff"
+msgstr[1] "Hittade %d träffar"
+
+#: .././src/find-module.i:200
+#, c-format
+msgid "%s Finished : %s"
+msgstr "%s klar: %s"
+
+#: .././src/find-module.i:237
+msgid "Select Files..."
+msgstr "Välj filer..."
+
+#: .././src/find-module.i:239
+msgid "Select folder to search in"
+msgstr "Välj mapp att söka i"
+
+#: .././src/find-module.i:719 .././src/find-module.i:723
+msgid "Searching..."
+msgstr "Söker..."
+
+#: .././src/find-module_gui.c:58
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+"[] Match any character within the [] \n"
+"^  Match at beginning of string\n"
+"$  Match at end of string \n"
+msgstr ""
+"Grundregler:\n"
+"\n"
+"*  Motsvarar vilket tecken som helst ingen eller fler gånger.\n"
+"?  Motsvarar vilket tecken som helst exakt en gång.\n"
+
+#: .././src/find-module_gui.c:66
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+msgstr ""
+"Reserverade tecken för utökad regexp är\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"Vid grundläggande regular expression förlorar metatecknen\n"
+"?, +, {, |, ( och ) sin speciella betydelse.\n"
+"\n"
+"Punkten . motsvarar vilken enda bokstav som helst.\n"
+"Utelämningstecknet ^ söker överensstämmelse i början av raden.\n"
+"Dollartecknet $ söker överensstämmelse i slutet av raden.\n"
+"\n"
+"Tecken inom [ ] motsvarar vilket enda tecken \n"
+"     \t\tsom helst i listan.\n"
+"Tecken inom [^ ] motsvarar vilket tecken som helst\n"
+"       som *inte* finns i listan.\n"
+"Tecken inom [ - ] motsvarar en uppsättning\n"
+"       tecken (ie [0-9] eller [a-z]).\n"
+"\n"
+"Ett reguljärt uttryck kan åtföljas av en\n"
+"       av flera repetitions-operatorer:\n"
+"?      Föregående fält är valfritt och överensstämmer\n"
+"       som mest en gång.\n"
+"*      Föregående fält kommer att överensstämma noll\n"
+"       eller fler gånger.\n"
+"+      Föregående fält kommer att överensstämma en eller\n"
+"       fler gånger.\n"
+"{n}    Föregående fält överensstämmer exakt n gånger.\n"
+"{n,}   Föregående fält överensstämmer n eller fler gånger.\n"
+"{n,m}  Föregående fält överensstämmer åtminsten n gånger,\n"
+"       men inte fler än m gånger.\n"
+"\n"
+"För att matcha ett reserverat tecken, låt det föregås av \\. \n"
+"\n"
+"Två reguljära uttryck kan kopplas ihop genom den logiska OR-\n"
+"       operatorn |.\n"
+"Två reguljära uttryck kan kedjakopplas.\n"
+"\n"
+"Mer information är tillgänglig genom \"man grep\"\n"
+"       på en kommandorad.\n"
+
+#: .././src/find-module_gui.c:158
+msgid "Search returned no results"
+msgstr "Sökningen gav inga resultat"
+
+#: .././src/find-module_gui.c:165
+msgid "No editor component found."
+msgstr "Ingen editorkomponent hittades."
+
+#: .././src/find-module_gui.c:226 .././src/find-module_gui.c:241
+msgid "unknown"
+msgstr "okänd"
+
+#: .././src/find-module_gui.c:278
+msgid "Modified"
+msgstr "Ändrades"
+
+#: .././src/find-module_gui.c:281
+msgid "Created"
+msgstr "Skapad"
+
+#: .././src/find-module_gui.c:284
+#, fuzzy
+msgid "Accessed"
+msgstr "Använd:"
+
+#: .././src/find-module_gui.c:594 .././src/find-module_gui.c:650
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1031
+msgid "Find"
+msgstr "Sök"
+
+#: .././src/find-module_gui.c:677
+msgid "Path"
+msgstr "Sökväg"
+
+#: .././src/find-module_gui.c:710
+msgid "Filter:"
+msgstr "Filter:"
+
+#. / option -r "recursive"
+#: .././src/find-module_gui.c:758
+msgid "Recursive"
+msgstr "Rekursivt"
+
+#. / option -D "recursiveH"
+#: .././src/find-module_gui.c:761
+msgid "Find hidden files and directories"
+msgstr "Sök efter gömda filer och kataloger"
+
+#. / option -a "xdev"
+#: .././src/find-module_gui.c:764
+msgid "Stay on single filesystem"
+msgstr "Stanna inom ett enda filsystem"
+
+#: .././src/find-module_gui.c:767
+msgid "Upper limit"
+msgstr "Övre gräns"
+
+#. option -s +KByte "size_greater", "size_greater_spin"
+#: .././src/find-module_gui.c:772
+msgid "At Least"
+msgstr "Åtminstone"
+
+#: .././src/find-module_gui.c:772 .././src/find-module_gui.c:777
+msgid "kBytes"
+msgstr "Kibyte"
+
+#. option -s -KByte "size_smaller", "size_smaller_spin"
+#: .././src/find-module_gui.c:777
+msgid "At Most"
+msgstr "Inte mer än"
+
+#: .././src/find-module_gui.c:784
+msgid "User"
+msgstr "Användare"
+
+#: .././src/find-module_gui.c:789
+msgid "Group"
+msgstr "Grupp"
+
+#. option -o octal "octal_p" "permissions_entry"
+#: .././src/find-module_gui.c:793
+msgid "Octal Permissions"
+msgstr "Rättigheter på oktal form"
+
+#. option -p suid | exe
+#: .././src/find-module_gui.c:798
+msgid "SUID"
+msgstr "SUID"
+
+#: .././src/find-module_gui.c:798
+msgid "Executable"
+msgstr "Körbart program"
+
+#. radio_p freed on destroy event for dialog.
+#. option -k minutes "last_minutes", "last_minutes_spin"
+#: .././src/find-module_gui.c:806
+msgid "Minutes"
+msgstr "Minuter"
+
+#. option -h hours "last_hours", "last_hours_spin"
+#: .././src/find-module_gui.c:810
+msgid "Hours"
+msgstr "Timmar"
+
+#. option -d days "last_days", "last_days_spin"
+#: .././src/find-module_gui.c:814
+msgid "Days"
+msgstr "Dygn"
+
+#. option -m months "last_months", "last_months_spin"
+#: .././src/find-module_gui.c:818
+msgid "Months"
+msgstr "Månader"
+
+#: .././src/find-module_gui.c:828
+msgid "File type : "
+msgstr "Filtyp: "
+
+#. //////////////  grep options.... /////////////////////////
+#: .././src/find-module_gui.c:844
+msgid "Contains"
+msgstr "Innehåller"
+
+#: .././src/find-module_gui.c:866
+msgid "Contains the text"
+msgstr "Innehåller texten"
+
+#: .././src/find-module_gui.c:907
+msgid "Case Sensitive"
+msgstr "Skiftlägeskänslig"
+
+#: .././src/find-module_gui.c:914
+msgid "Extended regexp"
+msgstr "Utökad regexp"
+
+#: .././src/find-module_gui.c:921
+msgid "Include binary files"
+msgstr "Sök även i binärfiler"
+
+#: .././src/find-module_gui.c:928
+msgid "Line Count"
+msgstr "Radantal"
+
+#: .././src/find-module_gui.c:953
+msgid "Match"
+msgstr "Matcha"
+
+#: .././src/find-module_gui.c:963
+msgid "Anywhere"
+msgstr "Var som helst"
+
+#: .././src/find-module_gui.c:975
+msgid "Whole words only"
+msgstr "Endast hela ord"
+
+#: .././src/find-module_gui.c:987
+msgid "lines"
+msgstr "rader"
+
+#: .././src/find-module_gui.c:998
+msgid "No match"
+msgstr "Ingen matchning"
+
+#: .././src/find-module_gui.c:1021 .././src/find-module_gui.c:1061
+msgid "Close"
+msgstr "Stäng"
+
+#: .././src/find-module_gui.c:1041
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: .././src/find-module_gui.c:1051
+msgid "Clear"
+msgstr "Töm"
+
+#: .././src/find-module_gui.c:1093
+msgid "Edit"
+msgstr "Redigera"
+
+#: .././Rodent-fgr.desktop.in.in.h:1
+msgid "Home Folder"
+msgstr "Hemmapp"
+
+#: .././Rodent-fgr.desktop.in.in.h:2
+msgid "Search tool based on fgr"
+msgstr ""
+

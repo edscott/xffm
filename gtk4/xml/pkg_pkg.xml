@@ -1,0 +1,845 @@
+<?xml version="1.0"?>
+<XffmPkg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XffmPkg.xsd">
+<!-- Schema not yet available. (Would require LibXml2 or similar)-->
+ <pkg>
+    <action pkg="pkg" command_options="1" actions="1" icon="emblem-bsd"
+    string="pkg" argument="action argument (if any)"
+    protected="1" local="1" remote="1" no_selection="1"  tooltip="
+Interface for manipulating packages - registering, adding, removing and upgrading of packages. See pkg.conf(5) for details.">
+    <option loption="debug" >
+Show debug information
+    </option> 
+    <option loption="list" >
+List all the available command names, and exit without performing
+any other action. The -v option takes precedence over -l but -l
+will override any other command line arguments.
+    </option> 
+    <option loption="option" parameter="option=value">
+Set configuration option for pkg from the command line. Options
+that are set from the environment are redefined. It is permitted
+to specify this option multiple times.
+    </option> 
+    <option loption="N" parameter="">
+Activation status check mode.  Prevent pkg from automatically
+creating or initializing the sqlite database in
+/var/db/pkg/local.sqlite if it does not already exist.
+Prevent pkg from performing any actions if	no packages are	cur-
+rently installed, on the basis that a correctly initialised sys-
+tem using pkg will always have at least the pkg package itself
+registered.
+If used without any other arguments, pkg -N will run the sanity
+tests and if successful print out a short message showing how
+many packages are currently installed.  The exit status should be
+a reliable indication of whether a system is configured to use
+pkg as its package management system or not.
+
+The -N flag was first released in the /usr/sbin/pkg bootstrapper
+in FreeBSD 8.4, but was missing from FreeBSD 9.1. It may not be
+enough to just call pkg -N, as the bootstrapper may be invoked,
+or an error returned from pkg.  
+    </option> 
+    <option loption="jail" parameter="jail name or id">
+pkg will execute in the given jail name or id, where name
+matches ``jls name'' and id matches ``jls jid''.  See jail(8) and
+jls(8).    
+    </option> 
+    <option loption="chroot" parameter="chroot path">
+pkg will chroot in the "chroot path" Environment
+    </option> 
+    <option loption="config" parameter="configuration file">
+pkg will use the specified file as a configuration file
+    </option> 
+    <option loption="repo-conf-dir" parameter="repo conf dir">
+pkg will search the directory for per-repository configuration
+files.  This overrides any value of REPOS_DIR specified in the
+main configuration file.
+    </option> 
+    <option loption="version">
+Displays the current version of pkg
+    </option> 
+
+
+
+    </action>
+    <action pkg="pkg" cmd="add" string="Add" icon="list-add"
+    protected="1" no_selection="1"
+    command_options="1"  argument="pkg-name/url" tooltip="
+Install a package from either a local source or a remote one.
+When installing from remote source you need to specify the protocol
+to use	when fetching the package.
+Currently supported protocols are FTP, HTTP and HTTPS.">
+<option loption="automatic">
+		Mark the installed packages as orphan.	Will be	automatically
+		removed	if no other packages depend on them.  For more infor-
+		mation please refer to pkg-autoremove(8).
+    </option>
+    <option loption="force">
+		Force the reinstallation of the	package	if already installed.
+    </option>
+    <option loption="no-scripts">
+		If any installation scripts (pre-install or post-install)
+		exist for given	packages, do not execute them.
+    </option>
+    <option loption="accept-missing">
+		Force the installation of the package with missing dependen-
+		cies.
+    </option>
+    <option loption="quiet">
+		Force quiet output.
+    </option>
+    <option loption="relocate" parameter="location">
+		Annotates the package as having	been relocated to location,
+		which is an alternate system root.  This is an experimental
+		feature	and intended for cross-architecture package manage-
+		ment.  There is	no corresponding single	letter option.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="annotate"
+    protected="1" local="1" no_selection="1" 
+    command_options="1" argument="" tooltip="
+Add, modify or delete tag-value style annotations on packages.">
+    </action>
+    <action pkg="pkg" cmd="audit" string="audit" 
+    protected="1" no_selection="1"
+    command_options="1" argument="pkg-name" tooltip="
+Audits installed packages against known vulnerabilities.">
+    <option loption="file" parameter="filename">
+	    Use	filename as the	local copy of the vulnerability	database.  If
+	    used in combination	with -F	download the vulnerability database to
+	    the	named filename before auditing installed ports against it.
+    </option>
+    <option loption="fetch">
+	    Fetch the database before checking.
+    </option>
+    <option loption="quiet">
+	    Be ``quiet''.  Prints only the requested information without dis-
+	    playing many hints.
+    </option>
+    <option loption="recursive">
+	    Prints packages that depend	on vulnerable packages and are thus
+	    potentially	vulnerable as well.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="autoremove" string="autoremove" 
+    protected="1" no_selection="1"
+    command_options="1" tooltip="
+Delete packages which were automatically installed as dependencies 
+and are not required any more.">
+    <option loption="dry-run">
+	      Dry-run mode.  The list of changes to packages is	always
+	      printed, but no changes are actually made.
+    </option>
+    <option loption="quiet">
+	      Force quiet output
+    </option>
+    <option loption="yes">
+	      Assume yes when asked for	confirmation before package autore-
+	      moval.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="backup" string="Backup" icon="media-tape"
+    protected="1" no_selection="1"
+    command_options="1" tooltip="
+Dump the local package database to a file specified on the command-line.">
+    <option loption="dump" parameter="dest_file">
+    </option>   
+    <option loption="restore" parameter="src_file">
+    </option>
+    <option loption="quiet">
+    </option>
+    </action>
+    <action pkg="pkg" cmd="bootstrap"  
+    protected="1" no_selection="1"
+    command_options="1" tooltip="
+This is for compatibility with the pkg(7) bootstrapper. If pkg
+is already installed, nothing is done.
+If invoked with the -f flag an attempt will be made to reinstall
+pkg from remote repository.  This is not supported on FreeBSD 8.3
+as it did not have pkg(7).">
+    </action>
+    <action pkg="pkg" cmd="check" string="Check" 
+    protected="1" no_selection="1"
+    command_options="1"  tooltip="
+Sanity checks installed packages.">
+    <option loption="all">
+                   Process all packages.
+    </option>
+    <option loption="case-sensitive">
+		   Make	the standard or	regular	expression (-x)	matching
+		   against pattern case	sensitive.
+    </option>
+    <option loption="glob">
+                   Treat pattern as a shell glob pattern.
+    </option>
+    <option loption="case-insensitive">
+		   Make	the standard or	regular	expression (-x)	matching
+		   against pattern case	insensitive.  This is the default,
+		   unless modified by setting CASE_SENSITIVE_MATCH to true in
+		   pkg.conf.
+    </option>
+    <option loption="dry-run">
+		   Merely check	for missing dependencies and do	not install
+		   them.
+    </option>
+    <option loption="verbose">
+		   Be verbose.
+    </option>
+    <option loption="regex">
+                   Treat pattern as a regular expression.  This	uses the "mod-
+		   ern"	or "extended" syntax described in re_format(7)    </option>
+    <option loption="yes">
+                   Assume yes when asked for confirmation before installing
+		   missing dependencies.    </option>
+    </action>
+    <action pkg="pkg" cmd="clean" string="Clean" icon="edit-clear-all"
+    protected="1" no_selection="1"
+    command_options="1"  tooltip="
+Cleans the local cache of fetched remote packages.">
+    <option loption="all">
+         Delete	all cached packages.
+    </option>
+    <option loption="dry-run">
+	 Does not delete any package files from	the cache, but show what would
+	 be done instead.  Forces the preview of the packages that would be
+	 deleted to be shown, even when	used with -y.  Note: the package cache
+	 file permissions only permit root access.  Results will be disap-
+	 pointing for any other	user.
+    </option>
+    <option loption="quiet">
+	 Be quiet.  Suppress most output.  All output is suppressed if -y is
+	 also used.
+    </option>
+    <option loption="yes">
+	 Assume	a yes answer instead of	asking for confirmation	before delet-
+	 ing any out-of-date or	redundant packages from	the cache.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="convert" string="Convert" 
+    protected="1" no_selection="1"
+    command_options="1" argument="" tooltip="
+Convert to and from the old pkg_add(1) format.">
+    <option loption="pkg-dbdir" parameter="pkg_dbdir">
+    </option>
+    <option loption="dry-run">
+    </option>   
+    <option loption="revert">
+    </option>
+    </action>
+    <action pkg="pkg" cmd="create"  
+    protected="1" no_selection="1"
+    command_options="1" argument="" tooltip="
+Create a package.">
+    </action>
+    <action pkg="pkg" cmd="delete" string="Uninstall" icon="list-remove"
+    protected="1" local="1"  argument="pkg-name" tooltip="
+Delete a package from the database and the system.">
+    <option loption="all">
+                Deletes	all installed packages from the	system and empties the
+		database.  
+    </option>
+    <option loption="case-sensitive">
+		Make the standard or regular expression	(-x) matching against
+		pkg-name case sensitive.
+    </option>
+    <option loption="no-deinstall-script">
+		If a deinstallation script exists for a	given package, do not
+		execute	it.
+    </option>
+    <option loption="force">
+		Forces packages	to be removed despite leaving unresolved
+		dependencies.
+    </option>
+    <option loption="glob">
+		Treat the package names	as shell glob patterns.
+    </option>
+    <option loption="case-insensitive">
+		Make the standard or regular expression	(-x) matching against
+		pkg-name case insensitive.  This is the	defalt,	unless modi-
+		fied by	setting	CASE_SENSITIVE_MATCH to	true in	pkg.conf.
+    </option>
+    <option loption="dry-run">
+		Dry run	mode.  The list	of packages to delete is always
+		printed, but no	packages are actually deleted.
+    </option>
+    <option loption="quiet">
+		Force quiet output, except where -n is also used, when pkg
+		delete will show the list of packages to be deleted.
+    </option>
+    <option loption="recursive">
+		Delete all packages that require the listed packages as	well.
+    </option>
+    <option loption="regex">
+		Treat the package names	as regular expressions according to
+		the "modern" or	"extended" syntax of re_format(7).
+    </option>
+    <option loption="yes">
+                Assume yes when	asked for confirmation before package dele-
+		tion.  
+    </option>
+    </action>
+    <action pkg="pkg" cmd="fetch" string="Download" icon="document-save"
+    protected="1" remote="1" no_selection="1" argument="pkg-name" tooltip="
+Fetches packages from a remote repository.">
+    <option loption="all">
+                   Fetch all packages.
+    </option>
+    <option loption="output" parameter="destdir">
+		   Place files in a sub-directory called All of	the specified
+		   directory.  In this mode, packages are fetched for distri-
+		   bution instead of placing them into the internal cache.
+    </option>
+    <option loption="case-sensitive">
+		   Make	the standard or	the regular expression (-x) matching
+		   against pkg-name case sensitive.
+    </option>
+    <option loption="dependencies">
+		   Fetch the package and its dependencies as well.
+    </option>
+    <option loption="glob">
+                   Treat pkg-name as a shell glob pattern.
+    </option>
+    <option loption="case-insensitive">
+		   Make	the standard or	regular	expression (-x)	matching
+		   against pkg-name case insensitive.  This is the default,
+		   unless modified by setting CASE_SENSITIVE_MATCH to true in
+		   pkg.conf.
+    </option>
+    <option loption="quiet">
+                   Quiet mode.	Show less output.
+    </option>
+    <option loption="repository" parameter="reponame">
+		   Fetches packages from the given reponame if multiple	repo
+		   support is enabled.	See pkg.conf(5).
+    </option>
+    <option loption="available-updates">
+		   Fetch all available updates for the currently installed
+		   packages.
+    </option>
+    <option loption="no-repo-update">
+		   Suppress the	automatic update of the	local copy of the
+		   repository catalogue	from remote.  Automatic	repository
+		   catalogue updates are only attempted	when the effective UID
+		   of the process has write access to the package database.
+		   Otherwise they are silently ignored.
+    </option>
+    <option loption="regex">
+                   Treat pkg-name as a regular expression according to the
+		   "modern" or "extended" syntax of re_format(7).
+    </option>
+    <option loption="yes">
+                   Assume yes when asked for confirmation before fetching
+		   packages.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="info" string="Information" icon="dialog-information"
+    scroll_up="1"
+    local="1" no_selection="1" argument="pkg-name" tooltip="
+Display information about installed packages.">
+    <option loption="all">
+	     Display all installed packages.
+    </option>
+    <option loption="annotations">
+	     Display any annotations added to the package.
+    </option>
+    <option loption="case-insensitive">
+	     Make the standard or the regular expression (-x) matching against
+	     pkg-name case sensitive.
+    </option>
+    <option loption="full">
+	     Display full information about the	packages matching pkg-name.
+	     This is the default.
+    </option>
+    <option loption="raw">
+	     Display the full manifest (raw) for the packages matching
+	     pkg-name.
+    </option>
+    <option loption="raw-format" parameter="format">
+	     Allow to chose the	output format for the raw output, format can
+	     be: json, json-conpact, yaml (default).
+    </option>
+    <option loption="exists">
+	     If	pkg-name is installed and registered in	the database, return
+	     0,	otherwise return 1.  Useful for	checking whether the package
+	     is	installed.
+    </option>
+    <option loption="pkg-message">
+	     Show the pkg-message for matching packages.
+    </option>
+    <option loption="glob">
+	     Treat pkg-name as a shell glob pattern.
+    </option>
+    <option loption="case-insensitive">
+	     Make the standard or the regular expression (-x) matching against
+	     pkg-name case insensitive.	 This is the default, unless modified
+	     by	setting	CASE_SENSITIVE_MATCH to	true in	pkg.conf.
+    </option>
+    <option loption="regex">
+	     Treat pkg-name as a regular expression according to the "modern"
+	     or	"extended" syntax of re_format(7).
+    </option>
+    <option loption="dependencies">
+	     Display the list of packages on which pkg-name depends.
+    </option>
+    <option loption="required-by">
+	     Display the list of packages which	require	pkg-name.
+    </option>
+    <option loption="locked">
+	     Show the locking status for pkg-name.  When used in combination
+	     with -d or	-r, indicate which packages, dependencies or require-
+	     ments are locked by '(*)'.	 Locking status	is only	meaningful for
+	     installed packages; all locking statuses will show	as unlocked
+	     when information about a pkg-file is queried.
+    </option>
+    <option loption="list-files">
+	     Display all files installed by pkg-name.
+    </option>
+    <option loption="provided-shlibs">
+	     Display all shared	libraries provided by pkg-name.
+    </option>
+    <option loption="required-shlibs">
+	     Display all shared	libraries used by pkg-name.
+    </option>
+    <option loption="size">
+	     Display the total size of files installed by pkg-name
+    </option>
+    <option loption="quiet">
+	     Be	``quiet''.  Prints only	the requested information without dis-
+	     playing many hints.
+    </option>
+    <option loption="by-origin">
+	     Search is done by the pkg-name origin.  Added only	for Ports com-
+	     patibility.
+    </option>
+    <option loption="show-name-only">
+	     Hides the full package output and only shows the package name.
+	     This option is deprecated and exists only for Ports compatibil-
+	     ity.
+    </option>
+    <option loption="origin">
+	     Display pkg-name origin.
+    </option>
+    <option loption="prefix">
+	     Display the installation prefix for each package matching
+	     pkg-name.
+    </option>
+    <option loption="file" parameter="pkg-file">
+	     Displays information from the package archive pkg-file.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="install" string="Install" icon="system-software-install"
+    protected="1" remote="1" no_selection="1" argument="pkg-name" tooltip="
+Install a package from a remote package repository.  If a package
+is found in more than one remote repository, then installation
+happens from the first one.  Downloading a package is tried from
+each package repository in turn, until the package is success-
+fully fetched.">
+    <option loption="automatic">
+		Mark the installed packages as orphan.	Will be	automatically
+		removed	if no other packages depend on them.  For more infor-
+		mation please refer to pkg-autoremove(8)
+    </option>
+    <option loption="case-sensitive">
+		Make the standard or the regular expression (-x) matching
+		against	pkg-name case sensitive.
+    </option>
+    <option loption="force">
+		Force the reinstallation of the	package	if already installed.
+    </option>
+    <option loption="glob">
+		Treat the package names	as shell glob patterns.
+    </option>
+    <option loption="no-install-scripts">
+		If any installation scripts (pre-install or post-install)
+		exist for a given package, do not execute them.	 When a	pack-
+		age is updated,	deinstallation scripts (pre-deinstall or post-
+		deinstall) are not run either.
+    </option>
+    <option loption="case-sensitive">
+		Make the standard or the regular expression (-x) matching
+		against	pkg-name case insensitive.  This is the	default,
+		unless modified	by setting CASE_SENSITIVE_MATCH	to true	in
+		pkg.conf.
+    </option>
+    <option loption="ignore-missing">
+		Force the installation of the package with missing dependen-
+		cies.
+    </option>
+    <option loption="dry-run">
+		Dry-run	mode.  The list	of changes to packages is always
+    </option>
+    <option loption="fetch-only">
+		Do not perform actual installation of packages,	merely fetch
+		packages that should be	upgraded and detect possible con-
+		flicts.
+    </option>
+    <option loption="quiet">
+		Force quiet output, except when	-n is used, where pkg install
+		will always show packages to be	installed, upgraded or
+		deleted.
+    </option>
+    <option loption="from-root">
+		When used with -f, reinstalls any packages that	require	the
+		given package.
+    </option>
+    <option loption="repository" parameter="reponame">
+		Install	packages from only the named repository, irrespective
+		of the configured ``active'' status from repo.conf.
+    </option>
+    <option loption="no-repo-update">
+		Suppress the automatic update of the local copy	of the reposi-
+		tory catalogue from remote.  Automatic repository catalogue
+		updates	are only attempted when	the effective UID of the
+		process	has write access to the	package	database.  Otherwise
+		they are silently ignored.
+    </option>
+    <option loption="regex">
+		Treat the package names	as regular expressions according to
+		the "modern" or	"extended" syntax of re_format(7).    </option>
+    <option loption="yes">
+                Assume yes when	asked for confirmation before package instal-
+		lation.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="lock" string="Lock" icon="changes-prevent"
+    protected="1" local="1" no_selection="1" argument="pkg-name" tooltip="
+Prevent modification or deletion of a package.">
+    <option loption="all">
+	  Lock or unlock all installed packages.
+    </option>
+    <option loption="case-sensitive">
+	  Make the standard or the regular expression (-x) matching against
+	  pkg-name case	sensitive.
+    </option>
+    <option loption="glob">
+	  Treat	pkg-name as a shell glob pattern.
+    </option>
+    <option loption="case-insensitive">
+	  Make the standard or the regular expression (-x) matching against
+	  pkg-name case	insensitive.  This is the default, unless modified by
+	  setting CASE_SENSITIVE_MATCH to true in pkg.conf.
+    </option>
+    <option loption="show-locked">
+	  Show list of all locked packages after any lock or unlock opera-
+	  tions.
+    </option>
+    <option loption="quiet">
+	  Operate quietly: do not output anything other	than confirmatory
+	  questions.
+    </option>
+    <option loption="regex">
+	  Treat	pkg-name as a regular expression according to the "modern" or
+	  "extended" syntax of re_format(7).
+    </option>
+    <option loption="yes">
+	  Assume "yes" as the answer to	all questions.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="plugins" string="Plugins" 
+    no_selection="1"  tooltip="
+List the available plugins.">
+    </action>
+    <action pkg="pkg" cmd="query" 
+    local="1" no_selection="1" argument="&lt;query-format&gt; &lt;pkg-name&gt;" tooltip="
+Query information about installed packages.">
+    </action>
+    <action pkg="pkg" cmd="register"  
+    protected="1" no_selection="1"
+    command_options="1" argument="" tooltip="
+Register a package in the database.">
+    </action>
+    <action pkg="pkg" cmd="repo"  
+    protected="1" no_selection="1"
+    command_options="1" argument="" tooltip="
+Create a local package repository for remote usage.">
+    </action>
+    <action pkg="pkg" cmd="rquery"  
+    no_selection="1" argument="" tooltip="
+Query information for remote repositories.">
+    </action>
+    <action pkg="pkg" cmd="search" string="Search" icon="edit-find"
+    no_selection="1" argument="pattern/pkg_name" tooltip="
+Search for the given pattern in the remote package repositories.">
+    <option loption="case-sensitive">
+		 Make the exact	(-e) or	the regular expression (-x) matching
+		 against pkg-name case sensitive.
+    </option>
+    <option loption="comment">
+		 Search	for packages with comment text matching	pattern.
+		 Equivalent to -S comment.
+    </option>
+    <option loption="description">
+		 Search	for packages with description text matching pattern.
+		 Equivalent to -S description.
+    </option>
+    <option loption="depends-on">
+		 Display the list of packages depended on by each matched
+		 package.  Equivalent to -Q depends-on.
+    </option>
+    <option loption="exact">
+		 pattern should	be an exact match against the search field.
+    </option>
+    <option loption="full">
+                 Show ``full'' information about the package.  Equivalent to
+		 -Q full.
+    </option>
+    <option loption="glob">
+                 Treat pattern as a shell globbing expression.	The glob pat-
+		 tern must match the entire field being	seached.
+    </option>
+    <option loption="case-insensitive">
+		 Make the exact	(-e) or	regular	expression (-x)	matching
+		 against pattern case insensitive.  This is the	default,
+		 unless	modified by setting CASE_SENSITIVE_MATCH to true in
+		 pkg.conf.
+    </option>
+    <option loption="label" parameter="label">
+		 Select	which identifying label	is printed for each matched
+		 package, unless -q is used.  Several different	fields from
+		 the repository	catalogue database may be used to search on,
+		 or to generate	the label, as indicated	by the label argument.
+		 See the "Search and Label Options" section for	details.  If
+		 unspecified, label is set to the same as the value searched
+		 via the -S search option.
+    </option>
+    <option loption="origins">
+		 List packages by origin for each package matching pattern.
+		 Equivalent to -L origin.
+    </option>
+    <option loption="prefix">
+		 Display the package installation prefix for each matched
+		 package.  Equivalent to -Q prefix.
+    </option>
+    <option loption="quiet" active="1">
+		 Be ``quiet''.	Produce	less output.  In particular do not
+		 show an identifying label field for each package.
+    </option>
+    <option loption="query-modifier" parameter="query-modifier">
+		 Modify	the query output by adding an additional field to the
+		 result.  Multiple fields can be added by using	additional -Q
+		 query-modifier	flags.	See the	"Output	Modifier Options" sec-
+		 tion for details.
+    </option>
+    <option loption="repository" parameter="reponame">
+		 Search	for packages from only the named repository, irrespec-
+		 tive of the configured	``active'' status from repo.conf.  By
+		 default all repository	catalogues marked ``active'' are
+		 searched.
+    </option>
+    <option loption="raw">
+                 Display the full manifest (raw) from the matching packages.
+    </option>
+    <option loption="search" parameter="search">
+		 Specify the field to search the repository catalogue on.  If
+		 unspecified, searches on pkg-name unless the search term con-
+		 tains a / character, when it searches on port origin.	Output
+		 will be sorted	in order of the	search field.  See the "Search
+		 and Label Options" sections for more details.
+    </option>
+    <option loption="raw-format" parameter="format">
+		 Allow to chose	the output format for the raw output, format
+		 can be: json, json-conpact, yaml (default).
+    </option>
+    <option loption="size">
+                 Display the installed size of matched packages.  Equivalent
+		 to -Q size.
+    </option>
+    <option loption="no-repo-update">
+		 Suppress the automatic	update of the local copy of the	repos-
+		 itory catalogue from remote.  Automatic repository catalogue
+		 updates are only attempted when the effective UID of the
+		 process has write access to the package database.  Otherwise
+		 they are silently ignored.
+    </option>
+    <option loption="regex">
+		 Treat pattern as a regular expression according to the	"mod-
+		 ern" or "extended" syntax of re_format(7).  This is the
+		 default.  Matches any substring of the	search field unless
+		 explicit beginning or ending anchor terms are used.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="set"  
+    protected="1" local="1" remote="1" no_selection="1"
+    command_options="1" argument="pkg_name" tooltip="
+Modify information in the installed database.">
+    </action>
+    <action pkg="pkg" cmd="shell" 
+    protected="1" no_selection="1"
+    command_options="1" argument="" tooltip="
+Fires up a sqlite shell to the local or remote database.  Extreme
+care should be taken when using this command.">
+    </action>
+    <action pkg="pkg" cmd="shlib" string="Shared libraries" 
+    protected="1" no_selection="1"
+    command_options="1" argument="library" tooltip="
+Displays which packages link to a specific shared library.">
+    <option loption="provides">
+	       Show only the installed packages	which provide the named
+	       library.
+    </option>
+    <option loption="requires">
+    	       Show only the installed packages	which require library.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="stats" string="Statistics" 
+    scroll_up="1"
+    protected="1" no_selection="1" tooltip="
+Display package database statistics.">
+    <option loption="quiet">
+	    Quiet mode.	 Show less output.
+    </option>
+    <option loption="local">
+	    Display stats only for the local package database.
+    </option>
+    <option loption="remote">
+	    Display stats only for the remote package database(s).
+    </option>
+    <option loption="bytes">
+	    Display disk space usage in	bytes only.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="unlock" string="Unlock" icon="dialog-password"
+    protected="1" local="1" no_selection="1" argument="pkg-name" tooltip="
+Unlocks packages, allowing them to be modified or deleted.">
+    <option loption="all">
+	  Lock or unlock all installed packages.
+    </option>
+    <option loption="case-sensitive">
+	  Make the standard or the regular expression (-x) matching against
+	  pkg-name case	sensitive.
+    </option>
+    <option loption="glob">
+	  Treat	pkg-name as a shell glob pattern.
+    </option>
+    <option loption="case-insensitive">
+	  Make the standard or the regular expression (-x) matching against
+	  pkg-name case	insensitive.  This is the default, unless modified by
+	  setting CASE_SENSITIVE_MATCH to true in pkg.conf.
+    </option>
+    <option loption="show-locked">
+	  Show list of all locked packages after any lock or unlock opera-
+	  tions.
+    </option>
+    <option loption="quiet">
+	  Operate quietly: do not output anything other	than confirmatory
+	  questions.
+    </option>
+    <option loption="regex">
+	  Treat	pkg-name as a regular expression according to the "modern" or
+	  "extended" syntax of re_format(7).
+    </option>
+    <option loption="yes">
+	  Assume "yes" as the answer to	all questions.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="update" string="Update Database" icon="view-refresh"
+    protected="1" no_selection="1"
+    command_options="1"  tooltip="
+Update the available remote repositories as listed in
+pkg.conf(5).">
+    <option loption="quiet">
+	    Force quiet	output
+    </option>
+    <option loption="force">
+	    Force a full download of the repository catalogue without regard
+	    to the respective ages of the local	and remote copies of the cata-
+	    logue
+    </option>
+    <option loption="repository" parameter="reponame">
+	    Download the catalogue for the named repository only.  This	will
+	    update only	the named repository, irrespective of the configured
+	    ``active'' status from repo.conf.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="updating" string="Updating" 
+    no_selection="1" argument="pkg-name" tooltip="
+Displays UPDATING entries of installed packages.">
+    <option loption="date" parameter="date">
+	   Only	entries	newer than date	are shown.  Use	a YYYYMMDD date	for-
+	   mat.
+    </option>
+    <option loption="file" parameter="file">
+	   Defines a alternative location of the UPDATING file.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="upgrade" string="Upgrade" 
+    no_version="1" icon="system-software-update"
+    protected="1" local="1" remote="1" no_selection="1" argument="pkg-name" tooltip="
+Upgrade a package to a newer version.">
+    <option loption="case-sensitive">
+		 Make the standard or the regular expression (-x) matching
+		 against pkg-name case sensitive.
+    </option>
+    <option loption="fetch-only">
+		 Do not	perform	installation of	packages, merely fetch pack-
+		 ages that should be upgraded and detect possible conflicts.
+    </option>
+    <option loption="force">
+		 Force the reinstallation or upgrade of	the whole set of pack-
+		 ages.
+    </option>
+    <option loption="glob">
+                 Treat the package names as shell glob patterns.
+    </option>
+    <option loption="no-install-scripts">
+		 If any	installation scripts (pre-install or post-install) or
+		 deinstallation	scripts	(pre-deinstall or post-deinstall)
+		 exist for a given package, do not execute them.
+    </option>
+    <option loption="case-insensitive">
+		 Make the standard or the regular expression (-x) matching
+		 against pkg-name case insensitive.  This is the default,
+		 unless	modified by setting CASE_SENSITIVE_MATCH to true in
+		 pkg.conf.
+    </option>
+    <option loption="dry-run">
+		 Dry-run mode: show what packages have updates available, but
+		 do not	perform	any upgrades.  Repository catalogues will be
+		 updated as usual unless the -U	option is also given.
+    </option>
+    <option loption="quiet">
+		 Force quiet output, except when -n is used, where a summary
+		 of the	work list is always displayed.
+    </option>
+    <option loption="repository" parameter="reponame">
+		 Install packages from only the	named repository, irrespective
+		 of the	configured ``active'' status from repo.conf.
+    </option>
+    <option loption="no-repo-update">
+		 Suppress the automatic	update of the local copy of the	repos-
+		 itory catalogue from remote.  Automatic repository catalogue
+		 updates are only attempted when the effective UID of the
+		 process has write access to the package database.  Otherwise
+		 they are silently ignored.
+    </option>
+    <option loption="yes">
+                 Assume	yes when asked for confirmation	before package instal-
+		 lation.
+    </option>
+    </action>
+    <action pkg="pkg" cmd="version" string="Version" 
+   no_selection="1" argument="" tooltip="
+Summarize installed versions of packages.">
+    </action>
+    <action pkg="pkg" cmd="which" string="which" 
+    no_selection="1" argument="file" tooltip="
+Query the database for package(s) that installed a specific file.">
+    <option loption="glob">
+	     Treat file as a glob pattern.
+    </option>
+    <option loption="origin">
+	     Shows the origin of the package instead of	name-version
+    </option>
+    <option loption="path-search">
+	     Search for	the filename in	PATH.
+    </option>
+    <option loption="quiet">
+	     Be	quiet
+    </option>
+    </action>
+    <action pkg="pkg" cmd="help" string="Help" icon="help-about"
+    no_selection="1" scroll_up="1" tooltip="
+Display usage information of the specified command.">
+    </action>
+ </pkg>
+</rodent_pkg>
+
