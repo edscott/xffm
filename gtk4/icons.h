@@ -87,7 +87,7 @@
 #define APPLICATION_X_EXECUTABLE "application-x-executable-symbolic"
 #define GO_UP_SYMBOLIC "up"
 #define GO_UP "up"
-#define PROCESS_STOP "process-stop-symbolic"
+#define PROCESS_STOP "redball"
 
 
 

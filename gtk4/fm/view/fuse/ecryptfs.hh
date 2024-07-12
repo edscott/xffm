@@ -69,7 +69,7 @@ public:
         g_object_set_data(G_OBJECT(this->dialog()), item_id, hbox);
         gtk_widget_set_sensitive(GTK_WIDGET(hbox), state);
         auto entry = (GtkEntry *)g_object_get_data(G_OBJECT(hbox), "entry");
-        gtk_box_pack_start (GTK_BOX (vbox_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (vbox_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
         return entry;
     }
 
@@ -123,23 +123,23 @@ private:
         gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
         auto hbox = Gtk<Type>::hboxNew (FALSE, 2);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (dialog))), GTK_WIDGET(hbox), FALSE, FALSE, 0);
 
         auto pixbuf = Pixbuf<Type>::getPixbuf("dialog-question", -24);
         auto image = gtk_image_new_from_pixbuf(pixbuf);
         g_object_unref(pixbuf);
-        gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 
         auto text = g_strconcat(_("Options:"), " ", 
                 info1, "\n\n", 
                 info2, NULL);        
         auto labelview = mkTextView(text);
         g_free(text);
-        gtk_box_pack_start (hbox, GTK_WIDGET(labelview), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (hbox, GTK_WIDGET(labelview), TRUE, TRUE, 0);
 
 
         auto tbox = Gtk<Type>::vboxNew(TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), GTK_WIDGET(tbox), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), GTK_WIDGET(tbox), TRUE, TRUE, 0);
         GtkWidget *notebook = gtk_notebook_new ();
         g_object_set_data(G_OBJECT(dialog), "notebook", notebook);
         gtk_notebook_popup_enable (GTK_NOTEBOOK(notebook));
@@ -154,7 +154,7 @@ private:
                       GTK_POS_TOP, NULL);  
 
 
-        gtk_box_pack_start (tbox, notebook, TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (tbox, notebook, TRUE, TRUE, 0);
         vbox_ = Gtk<Type>::vboxNew (TRUE, 0);
 
         //gtk_widget_show(GTK_WIDGET(vbox_));
@@ -166,24 +166,24 @@ private:
         gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK(notebook), GTK_WIDGET(vbox_), TRUE);
 
         auto action_area = Gtk<Type>::hboxNew(FALSE, 1);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(dialog))), 
+        compat<bool>::boxPackStart (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(dialog))), 
                 GTK_WIDGET(action_area), FALSE, FALSE, 0);
         //gtk_widget_show(GTK_WIDGET(action_area));
 
 
 
         cancelButton_ = Gtk<Type>::dialog_button ("window-close", _("Cancel"));
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(cancelButton_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(cancelButton_), FALSE, FALSE, 0);
 
 
         saveButton_ = Gtk<Type>::dialog_button ("media-floppy", _("Save"));
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(saveButton_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(saveButton_), FALSE, FALSE, 0);
 
         //loadButton_ = Gtk<Type>::dialog_button ("document-open", _("Load"));
-        //gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(loadButton_), FALSE, FALSE, 0);
+        //compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(loadButton_), FALSE, FALSE, 0);
 
         mountButton_ = Gtk<Type>::dialog_button ("greenball", _("Mount"));
-        gtk_box_pack_start (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
 
 
         //g_signal_connect (G_OBJECT (loadButton_), "clicked", G_CALLBACK (button_load), this);
@@ -233,14 +233,14 @@ private:
         gtk_entry_set_visibility (GTK_ENTRY(entry), visibility);
         g_object_set_data(G_OBJECT(hbox), "entry", entry);
         g_object_set_data(G_OBJECT(hbox), "label", label);
-        gtk_box_pack_start (hbox, label, FALSE, FALSE, 0);
-        gtk_box_pack_start (hbox, entry, TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (hbox, label, FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (hbox, entry, TRUE, TRUE, 0);
         if (withSelector){
             auto button = Gtk<Type>::dialog_button ("document-open", NULL);
             g_object_set_data(G_OBJECT(hbox), "button", button);
             g_signal_connect (G_OBJECT (button), "clicked", 
                     G_CALLBACK (ChooserResponse<Type>::folderChooser), entry);
-            gtk_box_pack_start (hbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+            compat<bool>::boxPackStart (hbox, GTK_WIDGET(button), FALSE, FALSE, 0);
         }
         return hbox;
     }
@@ -288,17 +288,17 @@ private:
           g_object_set_data(G_OBJECT(hbox),"check", check);
           g_object_set_data(G_OBJECT(hbox),"label", label);
 
-          gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox), FALSE, FALSE, 0);
-          gtk_box_pack_start (GTK_BOX (vbox2), GTK_WIDGET(hbox2), TRUE, TRUE, 0);
-          gtk_box_pack_start (GTK_BOX (hbox), check, FALSE, FALSE, 0);
-          gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+          compat<bool>::boxPackStart (GTK_BOX (vbox2), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+          compat<bool>::boxPackStart (GTK_BOX (vbox2), GTK_WIDGET(hbox2), TRUE, TRUE, 0);
+          compat<bool>::boxPackStart (GTK_BOX (hbox), check, FALSE, FALSE, 0);
+          compat<bool>::boxPackStart (GTK_BOX (hbox), label, FALSE, FALSE, 0);
           gtk_widget_set_sensitive(GTK_WIDGET(label), (options_p->sensitive > 0) && options_p->sensitive != 3);
 
           if (options_p->entry)  {
             auto entry = GTK_ENTRY(gtk_entry_new());
             g_object_set_data(G_OBJECT(hbox),"entry", entry);
             gtk_entry_set_text(entry, options_p->entry);
-            gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
+            compat<bool>::boxPackStart (GTK_BOX (hbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
             gtk_widget_set_sensitive(GTK_WIDGET(entry), (options_p->sensitive > 0));
           }
           if (options_p->text || options_p->tip) {
@@ -307,7 +307,7 @@ private:
                         (options_p->tip)?options_p->text:NULL,
                         NULL);
                 auto labelview = mkTextView(text);
-                gtk_box_pack_start (GTK_BOX (hbox2), GTK_WIDGET(labelview), TRUE, TRUE, 0);
+                compat<bool>::boxPackStart (GTK_BOX (hbox2), GTK_WIDGET(labelview), TRUE, TRUE, 0);
                 g_free(text);
           }
 
@@ -317,7 +317,7 @@ private:
 
           i++;
 
-          gtk_box_pack_start (vbox, GTK_WIDGET(vbox2), FALSE, FALSE, 0);      
+          compat<bool>::boxPackStart (vbox, GTK_WIDGET(vbox2), FALSE, FALSE, 0);      
         }
         gtk_widget_set_size_request(sw, 400, -1);
         return sw;

@@ -22,7 +22,7 @@ public:
         auto buttonBox = (GtkBox *)g_object_get_data(G_OBJECT(dialog), "buttonBox");
         auto button = Gtk<Type>::dialog_button("greenball", _("Yes"));
         g_signal_connect (button, "clicked", G_CALLBACK (responseYes), dialog);
-        gtk_box_pack_start(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
+        compat<bool>::boxPack0(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
         
         
         gtk_dialog_run(GTK_DIALOG(dialog));
@@ -34,7 +34,7 @@ public:
         auto buttonBox = (GtkBox *)g_object_get_data(G_OBJECT(dialog), "buttonBox");
         auto button = Gtk<Type>::dialog_button("greenball", _("Overwrite"));
         g_signal_connect (button, "clicked", G_CALLBACK (responseYes), dialog);
-        gtk_box_pack_start(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
+        compat<bool>::boxPack0(buttonBox, GTK_WIDGET(button), FALSE, FALSE,0);
         
         
         gtk_dialog_run(GTK_DIALOG(dialog));
@@ -119,21 +119,21 @@ public:
      auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
      g_object_set_data(G_OBJECT(dialog), "vbox", vbox);
      
-     gtk_box_pack_start(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
+     compat<bool>::boxPack0(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
      
      if (icon){
         auto pixbuf = Pixbuf<Type>::getPixbuf(icon, -48);
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
             if (image) {
-                gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
+                compat<bool>::boxPack0(vbox, image, FALSE, FALSE,0);
                 gtk_widget_show (image);
             }
         }
      }
      auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-     gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
-     gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
+     compat<bool>::boxPack0(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
+     compat<bool>::boxPack0(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
 
      auto vbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
    
@@ -175,6 +175,7 @@ public:
 
      // Create the widgets
      dialog = gtk_dialog_new ();
+     g_object_set_data(G_OBJECT(dialog),"parent", parent);
      if (parent) {
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_transient_for (GTK_WINDOW (dialog), 
@@ -206,33 +207,36 @@ public:
      auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
      g_object_set_data(G_OBJECT(dialog), "vbox", vbox);
      
-     gtk_box_pack_start(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
      
      if (icon){
         auto pixbuf = Pixbuf<Type>::getPixbuf(icon, -48);
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
             if (image) {
-                gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
+                compat<bool>::boxPack0(vbox, image, FALSE, FALSE,0);
                 gtk_widget_show (image);
             }
         }
      }
+     compat<bool>::boxPack0(GTK_BOX(content_area), GTK_WIDGET(vbox), TRUE, TRUE,0);
      auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-     gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE,0);
-     gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE,0);
-
+     compat<bool>::boxPack0(vbox, GTK_WIDGET(hbox), TRUE, TRUE, 0);
+     auto button = Gtk<Type>::dialog_button(WINDOW_CLOSE, "");
+     compat<bool>::boxPack0(hbox, GTK_WIDGET(label), TRUE, TRUE,0);
      auto vbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-   
-     gtk_box_pack_end(vbox, GTK_WIDGET(vbox2), FALSE, FALSE,0);
-     auto hbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-     gtk_box_pack_end(vbox2, GTK_WIDGET(hbox2), FALSE, FALSE,0);
-     auto button = Gtk<Type>::dialog_button("redball", _("Close"));
-     gtk_box_pack_end(hbox2, GTK_WIDGET(button), FALSE, FALSE,0);
-     g_object_set_data(G_OBJECT(dialog), "buttonBox", (void *)hbox2); 
+     compat<bool>::boxPack0(hbox, GTK_WIDGET(button), FALSE, FALSE,0);
      g_signal_connect (button, "clicked",
                 G_CALLBACK (onQuickCancel),
                 dialog);
+
+     //auto vbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+   
+     //gtk_box_pack_end(vbox, GTK_WIDGET(vbox2), FALSE, FALSE,0);
+     //auto hbox2 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+     //gtk_box_pack_end(vbox2, GTK_WIDGET(hbox2), FALSE, FALSE,0);
+     //auto button = Gtk<Type>::dialog_button("redball", _("Close"));
+     //gtk_box_pack_end(hbox2, GTK_WIDGET(button), FALSE, FALSE,0);
+     //g_object_set_data(G_OBJECT(dialog), "buttonBox", (void *)hbox2); 
 
         
 
@@ -252,6 +256,10 @@ private:
     closeQuickDialog(GtkWidget *widget, GdkEventKey * event, void *data){
         TRACE("closeQuickDialog\n");
         gtk_widget_hide(widget);
+        auto parent = GTK_WINDOW(g_object_get_data(G_OBJECT(widget), "parent"));
+        if (parent && GTK_IS_WINDOW(parent)) {
+          gtk_window_present_with_time(parent, GDK_CURRENT_TIME);
+        }
         gtk_widget_destroy(widget);
     }
 

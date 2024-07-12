@@ -38,19 +38,15 @@ public:
         auto eventBox2 = eventButton(GO_JUMP, "RFM_GOTO", "xffm:goto", (void *)go_jump);
         gtk_widget_set_tooltip_markup(GTK_WIDGET(eventBox1),_("Previous"));
         gtk_widget_set_tooltip_markup(GTK_WIDGET(eventBox2),_("Go to"));
-        //auto eventBox3 = eventButton("image-x-generic/SE/list-add/1.5/220", "RFM_GOTO", "xffm:image+", (void *)upImage);
-        //auto eventBox4 = eventButton("image-x-generic/SE/list-remove/1.5/220", "RFM_GOTO", "xffm:image+", (void *)downImage);
-        gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
-        //gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
-        //gtk_box_pack_end (GTK_BOX (pathbar_), GTK_WIDGET(eventBox4), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
 
 
         // xffm:root button:
         auto pb_button = pathbarLabelButton(".");
 
         
-        gtk_box_pack_start (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
         g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("xffm:root"));
     

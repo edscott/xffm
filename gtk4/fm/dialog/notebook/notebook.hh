@@ -76,10 +76,12 @@ public:
         g_signal_connect(G_OBJECT(newTabButton), "clicked", 
                 BUTTON_CALLBACK(notebookSignals<Type>::on_new_page), (void *)this);    
         
-        gtk_box_pack_start(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
-        gtk_box_pack_start(tabButtonBox, GTK_WIDGET(popupImage),  TRUE, FALSE, 0);
-        gtk_box_pack_start(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
-        gtk_box_pack_start(tabButtonBox, GTK_WIDGET(this->menuButton()),  TRUE, FALSE, 0);
+        gtk_widget_set_hexpand(GTK_WIDGET(actionWidget), FALSE);
+
+        compat<bool>::boxPack0(tabButtonBox, GTK_WIDGET(popupImage),  TRUE, FALSE, 0);
+        compat<bool>::boxPack0(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
+        compat<bool>::boxPack0(tabButtonBox, GTK_WIDGET(this->menuButton()),  TRUE, FALSE, 0);
+        compat<bool>::boxPack0(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
 
         gtk_widget_show_all(GTK_WIDGET(actionWidget));
         gtk_notebook_set_action_widget (notebook_, GTK_WIDGET(actionWidget), GTK_PACK_END);
@@ -370,8 +372,11 @@ public:
         g_object_set_data(G_OBJECT(window), "notebook", (void *)notebook_);
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(box));
-        gtk_box_pack_start (box, GTK_WIDGET(notebook_), TRUE, TRUE, 0);
-        gtk_box_pack_end (box, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
+        gtk_widget_set_hexpand(GTK_WIDGET(box), TRUE);
+        
+        compat<bool>::boxPack0 (box, GTK_WIDGET(notebook_), TRUE, TRUE, 0);
+        compat<bool>::boxPack1 (box, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
+        //gtk_box_pack_end (box, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
         gtk_widget_show(GTK_WIDGET(box));
         
     }

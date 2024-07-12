@@ -55,10 +55,10 @@ public:
         auto topbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
         auto footerbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
         auto bottombox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
-        gtk_box_pack_start(vbox, GTK_WIDGET(headerbox), FALSE, FALSE, 3);
-        gtk_box_pack_start(vbox, GTK_WIDGET(topbox), FALSE, FALSE, 3);
-        gtk_box_pack_start(vbox, GTK_WIDGET(footerbox), FALSE, FALSE, 3);
-        gtk_box_pack_start(vbox, GTK_WIDGET(bottombox_), TRUE, FALSE, 3);
+        compat<bool>::boxPackStart(vbox, GTK_WIDGET(headerbox), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(vbox, GTK_WIDGET(topbox), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(vbox, GTK_WIDGET(footerbox), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(vbox, GTK_WIDGET(bottombox_), TRUE, FALSE, 3);
 
 
         auto label1 = GTK_LABEL(gtk_label_new(""));
@@ -68,8 +68,8 @@ public:
 
         gtk_label_set_markup(label1, markup1);
         gtk_label_set_markup(label2, markup2);
-        gtk_box_pack_start(headerbox, GTK_WIDGET(label1), FALSE, FALSE, 3);
-        gtk_box_pack_start(footerbox, GTK_WIDGET(label2), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(headerbox, GTK_WIDGET(label1), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(footerbox, GTK_WIDGET(label2), FALSE, FALSE, 3);
 
         auto addButton = addIconButton(footerbox, NULL, "list-add");
         gtk_widget_set_tooltip_text(GTK_WIDGET(addButton), _("Add option"));
@@ -109,8 +109,8 @@ private:
         auto hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
         auto label = GTK_LABEL(gtk_label_new(text));
         g_object_set_data(G_OBJECT(hbox), "label", (void *)label);
-        gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE, 3);
-        gtk_box_pack_start(vbox, GTK_WIDGET(hbox), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(label), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(vbox, GTK_WIDGET(hbox), FALSE, FALSE, 3);
         return hbox;
     }
 
@@ -125,7 +125,7 @@ private:
     GtkCheckButton *addCheckButton(GtkBox *vbox, const gchar *text){
         auto hbox = labelBox(vbox, text);
         auto button = GTK_CHECK_BUTTON(gtk_check_button_new());
-        gtk_box_pack_start(hbox, GTK_WIDGET(button), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(button), FALSE, FALSE, 3);
         return button;
         
     }
@@ -142,7 +142,7 @@ private:
         auto button = getButton(hbox, iconId);
         if (text) gtk_widget_set_tooltip_text(GTK_WIDGET(button), text); 
         g_object_set_data(G_OBJECT(button), "label", (void *)label);
-        gtk_box_pack_start(hbox, GTK_WIDGET(button), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(button), FALSE, FALSE, 3);
         return button;
         
     }
@@ -150,7 +150,7 @@ private:
     GtkEntry *addEntryInput(GtkBox *vbox, const gchar *text){
         auto hbox = labelBox(vbox, text);
         auto entry = GTK_ENTRY(gtk_entry_new());
-        gtk_box_pack_start(hbox, GTK_WIDGET(entry), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(entry), FALSE, FALSE, 3);
         return entry;
         
     }
@@ -415,36 +415,36 @@ public:
         gtk_label_set_markup(label, markup);
         g_free(markup);
 
-        gtk_box_pack_start(box, GTK_WIDGET(hbox), FALSE, FALSE, 3);
-        gtk_box_pack_start(hbox, GTK_WIDGET(label), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(box, GTK_WIDGET(hbox), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(label), FALSE, FALSE, 3);
         auto entry = addEntryInput(hbox, _("Option"));
         g_object_set_data(G_OBJECT(hbox), "entry", entry);
 
         auto text = GTK_RADIO_BUTTON(gtk_radio_button_new_with_label(
                     NULL, _("text")));
-        gtk_box_pack_start(hbox, GTK_WIDGET(text), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(text), FALSE, FALSE, 3);
         g_object_set_data(G_OBJECT(text), "type", (void *)"text");
         
 
 
         auto file = GTK_RADIO_BUTTON(gtk_radio_button_new_with_label(
                     gtk_radio_button_get_group(text), _("file")));
-        gtk_box_pack_start(hbox, GTK_WIDGET(file), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(file), FALSE, FALSE, 3);
         g_object_set_data(G_OBJECT(file), "type", (void *)"file");
 
         auto folder = GTK_RADIO_BUTTON(gtk_radio_button_new_with_label(
                     gtk_radio_button_get_group(text), _("folder")));
-        gtk_box_pack_start(hbox, GTK_WIDGET(folder), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(folder), FALSE, FALSE, 3);
         g_object_set_data(G_OBJECT(folder), "type", (void *)"folder");
 
         auto on = GTK_RADIO_BUTTON(gtk_radio_button_new_with_label(
                     gtk_radio_button_get_group(text), _("on")));
-        gtk_box_pack_start(hbox, GTK_WIDGET(on), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(on), FALSE, FALSE, 3);
         g_object_set_data(G_OBJECT(on), "type", (void *)"on");
 
         auto off = GTK_RADIO_BUTTON(gtk_radio_button_new_with_label(
                     gtk_radio_button_get_group(text), _("off")));
-        gtk_box_pack_start(hbox, GTK_WIDGET(off), FALSE, FALSE, 3);
+        compat<bool>::boxPackStart(hbox, GTK_WIDGET(off), FALSE, FALSE, 3);
         g_object_set_data(G_OBJECT(off), "type", (void *)"off");
 
         GSList *group = gtk_radio_button_get_group(text);

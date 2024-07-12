@@ -25,7 +25,7 @@ typedef struct entry_t {
 
 
 #define box_pack_start(box,w) \
-        gtk_box_pack_start(GTK_BOX(box),w,TRUE,FALSE,0)
+        compat<bool>::boxPackStart(GTK_BOX(box),w,TRUE,FALSE,0)
 #define box_pack_end(box,w) \
         gtk_box_pack_end(GTK_BOX(box),w,TRUE,FALSE,0)
 #define X_PAD 8
@@ -240,17 +240,17 @@ private:
         auto mainBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
         gtk_container_add(GTK_CONTAINER(properties_p->dialog), GTK_WIDGET(mainBox));
         auto titlePath = GTK_LABEL(gtk_label_new(""));
-        gtk_box_pack_start(mainBox, GTK_WIDGET(titlePath), TRUE, FALSE, 0);
+        compat<bool>::boxPackStart(mainBox, GTK_WIDGET(titlePath), TRUE, FALSE, 0);
 
         auto contentBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
-        gtk_box_pack_start(mainBox, GTK_WIDGET(contentBox), TRUE, FALSE, 0);
+        compat<bool>::boxPackStart(mainBox, GTK_WIDGET(contentBox), TRUE, FALSE, 0);
         properties_p->imageBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
         //gtk_widget_set_size_request (GTK_WIDGET(properties_p->imageBox), PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
         auto infoBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
-        gtk_box_pack_start(contentBox, GTK_WIDGET(properties_p->imageBox), TRUE, FALSE, 0);
-        gtk_box_pack_start(contentBox, GTK_WIDGET(infoBox), TRUE, FALSE, 0);
+        compat<bool>::boxPackStart(contentBox, GTK_WIDGET(properties_p->imageBox), TRUE, FALSE, 0);
+        compat<bool>::boxPackStart(contentBox, GTK_WIDGET(infoBox), TRUE, FALSE, 0);
         auto buttonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
-        gtk_box_pack_start(mainBox, GTK_WIDGET(buttonBox), TRUE, FALSE, 0);
+        compat<bool>::boxPackStart(mainBox, GTK_WIDGET(buttonBox), TRUE, FALSE, 0);
 
         
         auto combo = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new());
@@ -267,7 +267,7 @@ private:
                 _("File Mode:"));
         gtk_label_set_markup(label, markup);
         g_free(markup);
-        gtk_box_pack_start(infoBox, GTK_WIDGET(label), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart(infoBox, GTK_WIDGET(label), FALSE, FALSE, 0);
 
 
         properties_p->modeBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 1));
@@ -278,10 +278,10 @@ private:
         auto modeInfo = GTK_LABEL(gtk_label_new(""));  //child 3
         g_object_set_data(G_OBJECT(properties_p->modeBox), "titlePath", titlePath);
         
-        gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeLabel), FALSE, FALSE, 0);
-        gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeEntry), FALSE, FALSE, 0);
-        gtk_box_pack_start(properties_p->modeBox, GTK_WIDGET(modeInfo), FALSE, FALSE, 0);
-        gtk_box_pack_start(infoBox, GTK_WIDGET(properties_p->modeBox), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart(properties_p->modeBox, GTK_WIDGET(modeLabel), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart(properties_p->modeBox, GTK_WIDGET(modeEntry), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart(properties_p->modeBox, GTK_WIDGET(modeInfo), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart(infoBox, GTK_WIDGET(properties_p->modeBox), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(properties_p->imageBox), "modeBox", properties_p->modeBox);
         g_object_set_data(G_OBJECT(modeEntry), "modeBox", properties_p->modeBox);
         g_object_set_data(G_OBJECT(modeEntry), "modeLabel", modeLabel);
@@ -293,8 +293,8 @@ private:
                 _("File:"));
         gtk_label_set_markup(label, markup);
         g_free(markup);
-        gtk_box_pack_start(infoBox, GTK_WIDGET(label), FALSE, FALSE, 0);
-        gtk_box_pack_start(infoBox, GTK_WIDGET(combo), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart(infoBox, GTK_WIDGET(label), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart(infoBox, GTK_WIDGET(combo), FALSE, FALSE, 0);
         
         // Add file info stuff
         // set info stuff data according to combo box

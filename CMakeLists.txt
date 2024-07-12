@@ -5,7 +5,7 @@ set (CMAKE_CXX_STANDARD 11)
 set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 0)
-set(xffm_VERSION_MINOR 986)
+set(xffm_VERSION_MINOR 987)
 include(cmake/pthreads.cmake)
 
 
@@ -57,7 +57,8 @@ configure_file(
     "${PROJECT_BINARY_DIR}/config.h"
     )
 
-add_subdirectory(xffm)
+add_subdirectory(gtk4)
+#add_subdirectory(xffm)
 #add_subdirectory(structure)
 
 

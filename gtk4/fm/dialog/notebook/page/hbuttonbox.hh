@@ -50,17 +50,20 @@ public:
         auto statusButton = createStatusButton(statusLabel_);
 
 
-        gtk_box_pack_start (hButtonBox_, GTK_WIDGET(fmButtonBox_), TRUE, TRUE, 0);
-        gtk_box_pack_start (hButtonBox_, GTK_WIDGET(termButtonBox_), TRUE, TRUE, 0);
+        gtk_widget_set_hexpand(GTK_WIDGET(hButtonBox_), FALSE);
+        compat<bool>::boxPack0 (hButtonBox_, GTK_WIDGET(fmButtonBox_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (hButtonBox_, GTK_WIDGET(termButtonBox_), TRUE, TRUE, 0);
 
 
-        gtk_box_pack_start (fmButtonBox_, GTK_WIDGET(toggleToTerminal_), FALSE, FALSE, 0);
-        gtk_box_pack_start (fmButtonBox_, GTK_WIDGET(statusButton), TRUE, TRUE, 0);
+        gtk_widget_set_hexpand(GTK_WIDGET(fmButtonBox_), TRUE);
+        compat<bool>::boxPack0 (fmButtonBox_, GTK_WIDGET(toggleToTerminal_), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (fmButtonBox_, GTK_WIDGET(statusButton), TRUE, TRUE, 0);
         
-        gtk_box_pack_start (termButtonBox_, GTK_WIDGET(toggleToIconview_), FALSE, FALSE, 0);
-        gtk_box_pack_start (termButtonBox_, GTK_WIDGET(toggleToIconviewErr_), FALSE, FALSE, 0);
+        gtk_widget_set_hexpand(GTK_WIDGET(termButtonBox_), TRUE);
+        compat<bool>::boxPack0 (termButtonBox_, GTK_WIDGET(toggleToIconview_), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (termButtonBox_, GTK_WIDGET(toggleToIconviewErr_), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(termButtonBox_),"toggleToIconviewErr_", toggleToIconviewErr_);
-        gtk_box_pack_start (termButtonBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (termButtonBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
 
         gtk_box_pack_end (termButtonBox_, GTK_WIDGET(clearButton_), FALSE, FALSE, 0);
         gtk_box_pack_end (termButtonBox_, GTK_WIDGET(sizeScale_), FALSE, FALSE, 0);
@@ -146,9 +149,10 @@ private:
 
     static GtkButton *createStatusButton(GtkLabel *label){
         auto statusBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(statusBox), TRUE);
         auto statusButton = GTK_BUTTON(gtk_button_new());
         gtk_container_add (GTK_CONTAINER (statusButton), GTK_WIDGET(statusBox));
-        gtk_box_pack_start (statusBox, GTK_WIDGET(label), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (statusBox, GTK_WIDGET(label), FALSE, FALSE, 0);
         gtk_widget_show_all(GTK_WIDGET(statusButton));
         return statusButton;
     }

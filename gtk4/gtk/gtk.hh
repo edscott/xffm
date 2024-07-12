@@ -168,7 +168,7 @@ public:
         auto page_label_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto page_label_icon_box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto page_label_button = GTK_BUTTON(gtk_button_new ());
-        gtk_box_pack_start (page_label_box, GTK_WIDGET(page_label_icon_box), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (page_label_box, GTK_WIDGET(page_label_icon_box), TRUE, TRUE, 0);
         gtk_box_pack_end (page_label_box, GTK_WIDGET(page_label_button), TRUE, TRUE, 0);
         gtk_widget_show_all (GTK_WIDGET(page_label_box));
         gtk_widget_show (GTK_WIDGET(page_child_box));
@@ -216,7 +216,7 @@ public:
         if(icon_id) {
             auto pb = Pixbuf<Type>::getPixbuf (icon_id, size);
             auto image = gtk_image_new_from_pixbuf (pb);
-            gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE,0);
+            compat<bool>::boxPack0(GTK_BOX(box), image, FALSE, FALSE,0);
             g_object_set_data(G_OBJECT(bin), "icon", image);
             gtk_widget_show(image);
             // Pixbufs are hashed, so references must be kept.
@@ -281,12 +281,12 @@ public:
       if (pixbuf){
           auto image = GTK_IMAGE(gtk_image_new_from_pixbuf (pixbuf));
           gtk_widget_show (GTK_WIDGET(image));
-          gtk_box_pack_start(box, GTK_WIDGET(image), FALSE,FALSE,0);
+          compat<bool>::boxPack0(box, GTK_WIDGET(image), FALSE,FALSE,0);
           g_object_set_data(G_OBJECT(menuItem), "image", image);
       }
       auto label = GTK_LABEL(gtk_label_new(""));
       gtk_label_set_markup(label, text);
-      gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,0);
+      compat<bool>::boxPack0(box, GTK_WIDGET(label), FALSE,FALSE,0);
       gtk_widget_show (GTK_WIDGET(label));
       g_object_set_data(G_OBJECT(menuItem), "label", label);
       gtk_widget_show(GTK_WIDGET(box));
@@ -318,7 +318,7 @@ public:
         if (pb){
             auto image = gtk_image_new_from_pixbuf (pb);
             gtk_widget_show (image);
-            gtk_box_pack_start(box, image, FALSE,FALSE,0);
+            compat<bool>::boxPack0(box, image, FALSE,FALSE,0);
             g_object_set_data(G_OBJECT(w), "image", image);
         }
         if (label && GTK_IS_WIDGET(label)) {
@@ -326,7 +326,7 @@ public:
                 /*gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"red\"><b><i>%s</i></b></span>", text);
                 gtk_label_set_markup(label, markup);
                 g_free(markup);*/
-            gtk_box_pack_start(box, GTK_WIDGET(label), FALSE,FALSE,3);
+            compat<bool>::boxPack0(box, GTK_WIDGET(label), FALSE,FALSE,3);
             g_object_set_data(G_OBJECT(w), "label", label);
             gtk_widget_show(GTK_WIDGET(label));
             g_object_unref(label);

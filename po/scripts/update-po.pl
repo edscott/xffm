@@ -6,7 +6,7 @@ use warnings;
 use File::Compare;
 my $srcdir="xffm";
 my $workdir=`pwd`;
-my $fullPoDir = "/home/GIT/source_po-processed";
+my $fullPoDir = "/home/GIT/po-5.0";
 my $catalog="xffm+";
 
 my $intltool_update = "/usr/bin/intltool-update";

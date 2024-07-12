@@ -32,7 +32,7 @@ public:
                 auto markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s</span>", tooltip);
                 gtk_label_set_markup(label, markup);
                 g_free(markup);
-                gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(label), FALSE, FALSE, 0);
+                compat<bool>::boxPackStart (GTK_BOX (this->vbox2_), GTK_WIDGET(label), FALSE, FALSE, 0);
                 gtk_widget_show(GTK_WIDGET(label));
                 g_free(tooltip);
             }
@@ -115,22 +115,22 @@ public:
             g_object_set_data(G_OBJECT(hbox), "label", label);
 
             optionsList = g_list_append(optionsList, (void *)hbox);
-            gtk_box_pack_start (GTK_BOX (this->vbox2_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
-            gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(check), FALSE, FALSE, 0);
-            gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(innerbox), FALSE, FALSE, 0);
-            gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(label), FALSE, FALSE, 0);
+            compat<bool>::boxPackStart (GTK_BOX (this->vbox2_), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+            compat<bool>::boxPackStart (GTK_BOX (hbox), GTK_WIDGET(check), FALSE, FALSE, 0);
+            compat<bool>::boxPackStart (GTK_BOX (hbox), GTK_WIDGET(innerbox), FALSE, FALSE, 0);
+            compat<bool>::boxPackStart (GTK_BOX (innerbox), GTK_WIDGET(label), FALSE, FALSE, 0);
             if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0
                     || strcmp(itemValue, "text")==0) {
                 auto entry = GTK_ENTRY(gtk_entry_new ());
                 g_object_set_data(G_OBJECT(hbox), "entry", entry);
                     g_object_set_data(G_OBJECT(entry), "workdir", workdir_);
 
-                gtk_box_pack_start (GTK_BOX (innerbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
+                compat<bool>::boxPackStart (GTK_BOX (innerbox), GTK_WIDGET(entry), FALSE, FALSE, 0);
                 if (strcmp(itemValue, "file")==0 || strcmp(itemValue, "folder")==0){
 
                     auto button = gtk_c::dialog_button ((strcmp(itemValue, "file")==0)?
                             "document-new-symbolic":"folder-symbolic", NULL);
-                    gtk_box_pack_start (innerbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+                    compat<bool>::boxPackStart (innerbox, GTK_WIDGET(button), FALSE, FALSE, 0);
                     if (strcmp(itemValue, "folder")==0){
                         DBG("setting up exec completion\n");
                         g_signal_connect (G_OBJECT(button), 

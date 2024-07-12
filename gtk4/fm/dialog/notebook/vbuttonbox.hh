@@ -25,9 +25,9 @@ class VButtonBox {
         }
         g_strfreev(paths);
         gtk_combo_box_set_active (GTK_COMBO_BOX(combo),0);
-        gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(combo), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (GTK_BOX (hbox), GTK_WIDGET(combo), TRUE, TRUE, 0);
         gtk_widget_show_all(GTK_WIDGET(hbox));
-        gtk_box_pack_start (GTK_BOX (comboResponse->vbox2()), GTK_WIDGET(hbox), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (GTK_BOX (comboResponse->vbox2()), GTK_WIDGET(hbox), TRUE, TRUE, 0);
 
         gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         auto response = comboResponse->runResponse(0);
@@ -188,6 +188,7 @@ public:
             gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
                                     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
         }
+#if 0
 #ifdef ENABLE_PKG_MODULE
 #ifdef HAVE_PKG
         auto pkg = 
@@ -206,26 +207,26 @@ public:
 #  endif
 # endif
 #endif
-        gtk_box_pack_end (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
+        boxPack1 (vButtonBox_, GTK_WIDGET(pkg), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(pkg), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::pkg), NULL);
 #endif
-
+#endif
 
 #ifdef ENABLE_CUSTOM_RESPONSE
         auto newCustom = 
             gtk_c::newButton(DOCUMENT_NEW, _("FIXME New custom content"));
         g_signal_connect(G_OBJECT(newCustom), "clicked", G_CALLBACK(newCustomButton), NULL);
-        gtk_box_pack_end (vButtonBox_, GTK_WIDGET(newCustom), FALSE, FALSE, 0); 
+        boxPack1 (vButtonBox_, GTK_WIDGET(newCustom), FALSE, FALSE, 0); 
         
         auto addCustom = 
             gtk_c::newButton(LIST_ADD, _("Add custom content"));
         g_signal_connect(G_OBJECT(addCustom), "clicked", G_CALLBACK(addCustomButton), NULL);
-        gtk_box_pack_end (vButtonBox_, GTK_WIDGET(addCustom), FALSE, FALSE, 0);
+        boxPack1 (vButtonBox_, GTK_WIDGET(addCustom), FALSE, FALSE, 0);
 
         auto removeCustom = 
             gtk_c::newButton(LIST_REMOVE, _("Remove Button Contents"));
         g_signal_connect(G_OBJECT(removeCustom), "clicked", G_CALLBACK(removeCustomButton), vButtonBox_);
-        gtk_box_pack_end (vButtonBox_, GTK_WIDGET(removeCustom), FALSE, FALSE, 0);
+        boxPack1 (vButtonBox_, GTK_WIDGET(removeCustom), FALSE, FALSE, 0);
         auto customButtonFiles = Settings<Type>::getString("custombuttons", "files");
         if (customButtonFiles){
             gchar **files;
@@ -239,62 +240,64 @@ public:
                 if (g_file_test(*p, G_FILE_TEST_EXISTS)){
                     auto custombutton = CustomResponse<Type>::custombutton(*p);
                     g_object_set_data(G_OBJECT(custombutton), "file", g_strdup(*p));
-                    if (custombutton) gtk_box_pack_end (vButtonBox_, GTK_WIDGET(custombutton), FALSE, FALSE, 0);
+                    if (custombutton) boxPack1 (vButtonBox_, GTK_WIDGET(custombutton), FALSE, FALSE, 0);
                 }
             }
             g_strfreev(files);
         }
 #endif
         auto search = gtk_c::newButton(SEARCH, _("Search"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(search), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(search), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::search), NULL);
 
         auto terminal = gtk_c::newButton(OPEN_TERMINAL, _("Open terminal"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(terminal), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(terminal), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(terminal), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::terminal), NULL);
 
         auto newWindow = gtk_c::newButton(OPEN_FILEMANAGER, _("Open a New Window"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(newWindow), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(newWindow), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)xffmProgram);
 
+#if 0
 #ifdef ENABLE_DIFF_MODULE
         auto diffApp = g_find_program_in_path("rodent-diff");
         if (diffApp) {
             auto differences = gtk_c::newButton(DIFFERENCES, _("Differences"));
-            gtk_box_pack_start (vButtonBox_, GTK_WIDGET(differences), FALSE, FALSE, 0);
+            compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(differences), FALSE, FALSE, 0);
             g_signal_connect(G_OBJECT(differences), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::open), 
                 (void *)"rodent-diff");
         }
 #endif
+#endif
 
         auto home = gtk_c::newButton(GO_HOME, _("Home Directory"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(home), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(home), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::home), NULL);
 
-        // Increase image preview size button
-        auto imageUpButton = gtk_c::newButton(GLIST_ADD, _("Reset image size"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageUpButton), FALSE, FALSE, 0);
-        g_signal_connect(imageUpButton, "clicked", G_CALLBACK(upImage), NULL);
-        // Decrease image preview size button
-        auto imageDownButton = gtk_c::newButton(GLIST_REMOVE, _("Reset image size"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(imageDownButton), FALSE, FALSE, 0);
-        g_signal_connect(imageDownButton, "clicked", G_CALLBACK(downImage), NULL);
 
 
-
-#if 0
 #ifdef ENABLE_FSTAB_MODULE
         auto fstab = gtk_c::newButton(DRIVE_HARDDISK, _("Disk Image Mounter"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(fstab), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(fstab), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::fstab), NULL);
 #endif
 
         auto trash = gtk_c::newButton(TRASH_ICON, _("Trash bin"));
-        gtk_box_pack_start (vButtonBox_, GTK_WIDGET(trash), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(trash), FALSE, FALSE, 0);
         g_signal_connect(G_OBJECT(trash), "clicked", G_CALLBACK(MenuPopoverSignals<Type>::trash), NULL);
-#endif
 
+
+
+        // Increase image preview size button
+        auto imageUpButton = gtk_c::newButton(GLIST_ADD, _("Reset image size"));
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(imageUpButton), FALSE, FALSE, 0);
+        g_signal_connect(imageUpButton, "clicked", G_CALLBACK(upImage), NULL);
+        // Decrease image preview size button
+        auto imageDownButton = gtk_c::newButton(GLIST_REMOVE, _("Reset image size"));
+        compat<bool>::boxPack0 (vButtonBox_, GTK_WIDGET(imageDownButton), FALSE, FALSE, 0);
+        g_signal_connect(imageDownButton, "clicked", G_CALLBACK(downImage), NULL);
+        
         gtk_widget_show_all(GTK_WIDGET(vButtonBox_));
         
 #ifdef ENABLE_CUSTOM_RESPONSE

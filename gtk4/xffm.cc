@@ -113,6 +113,7 @@ static GtkWindow *mainWindow = NULL;
 static gboolean isTreeView = FALSE;
 GList *customDialogs = NULL;
 
+#include "common/compat.hh"
 #include "gtk/gtk3.hh"
 #include "common/common.hh"
 #include "mime/mime.hh"

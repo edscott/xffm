@@ -196,7 +196,7 @@ public:
             } else {
                 tip_image = gtk_image_new_from_pixbuf ((GdkPixbuf *)pixbuf);
             }
-            gtk_box_pack_start(GTK_BOX(box),tip_image, FALSE, FALSE,0);
+            compat<bool>::boxPackStart(GTK_BOX(box),tip_image, FALSE, FALSE,0);
             gtk_widget_show(tip_image);
         }
         if (markup) {
@@ -206,7 +206,7 @@ public:
             gtk_label_set_markup(GTK_LABEL(label), small);
             g_free(small);
 
-            gtk_box_pack_start(GTK_BOX(box),label,TRUE,TRUE,0);
+            compat<bool>::boxPackStart(GTK_BOX(box),label,TRUE,TRUE,0);
             gtk_widget_show(label);
         }
                                                           

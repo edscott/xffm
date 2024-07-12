@@ -56,34 +56,41 @@ public:
         parent_ = parent;
         Notebook<Type>::reference_textview(this->output());
         pageChild_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(pageChild_), TRUE);
+
         pageLabel_ = GTK_LABEL(gtk_label_new (_("loading...")));
         pageLabelBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(pageLabelBox_), FALSE);
+
         pageLabelSpinner_ = GTK_SPINNER(gtk_spinner_new());
         pageLabelSpinnerBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(pageLabelSpinnerBox_), FALSE);
+
         pageLabelIconBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(pageLabelIconBox_), FALSE);
         pageLabelButton_ = GTK_BUTTON(gtk_button_new ());
 
-        gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabelSpinnerBox_), TRUE, TRUE, 0);
-        gtk_box_pack_start (pageLabelSpinnerBox_, GTK_WIDGET(pageLabelSpinner_), TRUE, TRUE, 0);
-        gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabelIconBox_), TRUE, TRUE, 0);
-        gtk_box_pack_start (pageLabelBox_, GTK_WIDGET(pageLabel_), TRUE, TRUE, 2);
-        gtk_box_pack_end (pageLabelBox_, GTK_WIDGET(pageLabelButton_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (pageLabelBox_, GTK_WIDGET(pageLabelSpinnerBox_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (pageLabelSpinnerBox_, GTK_WIDGET(pageLabelSpinner_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (pageLabelBox_, GTK_WIDGET(pageLabelIconBox_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (pageLabelBox_, GTK_WIDGET(pageLabel_), TRUE, TRUE, 2);
+        compat<bool>::boxPack1 (pageLabelBox_, GTK_WIDGET(pageLabelButton_), TRUE, TRUE, 0);
         gtk_c::setup_image_button(pageLabelButton_, CLOSE_TAB, _("Close"));
     
         //set_spinner(pageSpinner_, TRUE, pageLabelIconBox_);
         set_spinner(FALSE);
 
-        gtk_box_pack_start (pageChild_, this->pathbar(), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (pageChild_, this->pathbar(), FALSE, TRUE, 0);
+//        compat<bool>::boxPack0 (pageChild_, this->pathbar(), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(pageChild_), "pathbar", this->pathbar());
 
-        //gtk_widget_show_all(GTK_WIDGET(pageLabelBox_));
 
         hViewBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+        //gtk_widget_set_hexpand(GTK_WIDGET(hViewBox_), TRUE);
 
-        gtk_box_pack_start (hViewBox_, GTK_WIDGET(this->vpane()), TRUE, TRUE, 0);
-        //gtk_box_pack_start (hViewBox_, GTK_WIDGET(this->vButtonBox()), FALSE, FALSE, 0);
-        gtk_box_pack_start (pageChild_, GTK_WIDGET(hViewBox_), TRUE, TRUE, 0);
-        gtk_box_pack_start (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (hViewBox_, GTK_WIDGET(this->vpane()), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (pageChild_, GTK_WIDGET(hViewBox_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (pageChild_, GTK_WIDGET(this->hButtonBox()), FALSE, TRUE, 0);
         g_signal_connect(G_OBJECT(this->toggleToIconview()), "clicked", 
                 BUTTON_CALLBACK(pagesignals_c::toggleToIconview), (void *)this);
         g_signal_connect(G_OBJECT(this->toggleToIconviewErr()), "clicked", 
