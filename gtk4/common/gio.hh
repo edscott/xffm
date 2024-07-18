@@ -371,11 +371,10 @@ private:
     }
     
     
-    static gboolean doItFore(const gchar *path, const gchar *target, gint mode){
-        TRACE("doItFore...%s --> %s  (%d)\n", path, target, mode);
+    static gboolean doItFore(const gchar *path, const gchar *target, gint mode, gboolean *all){
+        DBG("doItFore...%s --> %s  (%d) all=%d\n", path, target, mode, *all);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
             return FALSE;
-        gboolean retval=TRUE;
         if (!path || !target) return FALSE; // should not happen.
             TRACE("%s .. %s \n", path, target);
         
@@ -400,25 +399,32 @@ private:
             fullTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
             g_free(base);
         } else fullTarget = g_strdup(target);
-        if (g_file_test(fullTarget, G_FILE_TEST_EXISTS)){
+        int response = 1;
+        DBG("do overwrite: all = %d\n", *all);
+        if (g_file_test(fullTarget, G_FILE_TEST_EXISTS) && *all == 0){
             // Overwrite? Backup will be created.
             auto message = g_strdup_printf("<span size=\"larger\"><span color=\"blue\">%s:</span>\n%s\n<span color=\"red\">%s</span></span>\n", 
                     strerror(EEXIST),fullTarget,
                     _("Overwrite?")); 
                     
-            auto yesNo = Dialogs<Type>::overwriteCancel(message);
+            auto dialog = Dialogs<Type>::overwriteCancel(message);
             g_free(message);
-            auto response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(yesNo), "response"));
-            gtk_widget_destroy(GTK_WIDGET(yesNo));
+
+            response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
+
             TRACE("response=%d\n", response);
-            if(response != 1){
-                TRACE("No Overwrite\n");
-                return FALSE;
+            auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(dialog), "all"));
+            if (gtk_toggle_button_get_active(check)) *all = TRUE;
+            
+            gtk_widget_destroy(GTK_WIDGET(dialog));
+            if (response != 1) {
+              g_free(fullTarget);
+              if (*all == TRUE) return FALSE;
+              return TRUE;
             }
-            TRACE("Overwrite with backup...\n");
         }
         g_free(fullTarget);
-        switch (mode) {
+        if (response == 1) switch (mode) {
             case MODE_COPY:
                copyFore(path,target);
                break;
@@ -434,7 +440,7 @@ private:
                break;
             }
         }
-        return retval;
+        return TRUE;
     }
 
 
@@ -512,14 +518,15 @@ private:
     static gboolean
     multiDoItFore(GList *fileList, const gchar *target, gint mode, Progress<Type> *progress)
     {
-        TRACE("multiDoItFore, mode %d...\n", mode);
+        DBG("multiDoItFore, mode %d...\n", mode);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
             return FALSE;
         gint items = g_list_length(fileList);
         if (!items) return FALSE;
 
         gint count = 1;
-        gboolean retval;
+        gboolean retval=FALSE;
+        gboolean all = FALSE;
         for (auto l = fileList; l && l->data; l=l->next) {
             // update progressBar dialog with filecount
             void *arg[]={(void *)progress, GINT_TO_POINTER(count), (void *)fileList};
@@ -528,7 +535,8 @@ private:
             // update progress dialog with path
             void *arg2[]={(void *)progress, (void *)path};
             Util<Type>::context_function(setProgressMessage, (void *)arg2);
-            doItFore(path, target, mode);
+            retval=doItFore(path, target, mode, &all);
+            if (!retval) return FALSE;
             //sleep(1);
             count++;
         }
