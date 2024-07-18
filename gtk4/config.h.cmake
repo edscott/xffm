@@ -1,0 +1,34 @@
+@ALPHA@
+@ENABLE_NLS@ 
+#define PREFIX "@CMAKE_INSTALL_PREFIX@"
+#define GETTEXT_PACKAGE "@GETTEXT_PACKAGE@"
+#define PACKAGE_LOCALE_DIR "@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LOCALEDIR@"
+
+#define xffm_VERSION_MAJOR @xffm_VERSION_MAJOR@
+#define xffm_VERSION_MINOR @xffm_VERSION_MINOR@
+#define VERSION "@xffm_VERSION_MAJOR@.@xffm_VERSION_MINOR@"
+
+#define @FREEBSD@
+#define @GVIM_PROGRAM@
+#define @UNZIP_PROGRAM@
+
+#define @MNTENT_H@
+#define @SYS_UCRED_H@
+#define @SYS_PARAM_H@
+#define @SYS_MOUNT_H@
+#define @SYS_TYPES_H@
+#define @SYS_SYSCTL_H@
+#define @SIGNAL_H@
+#define @MAGIC_H@
+#define @ZIP_H@
+#define @READLINE_HISTORY_H@
+#define @HAVE_GREP@
+#define @HAVE_EMERGE@
+#define @HAVE_PACMAN@
+#define @HAVE_PKG@
+
+#define @MIMETYPE_PROGRAM@
+#define @FREEDESKTOP_GLOBS@
+#define @FREEDESKTOP_ALIAS@
+#define @FREEDESKTOP_ICONS@
+

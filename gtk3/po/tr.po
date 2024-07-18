@@ -1,0 +1,1531 @@
+# Xffm+ translation file: jue 18 jul 2024 12:37:23 CST
+# Merged from existing open source files
+# http://xffm.org
+#
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
+        "PO-Revision-Date: 2005-03-14 04:17+0200\n"
+        "Last-Translator: Deniz Akkus Kanca <deniz@arayan.com>\n"
+        "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
+        "Language: tr\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+        "X-Generator: KBabel 1.9.1\n"
+
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
+#, fuzzy
+msgid   "Open terminal"
+msgstr  "Uçbirim Aç"
+
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+msgid   "Execute Shell Command"
+msgstr  "Kabuk Komutu Çalıştır"
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
+msgid   "Paste"
+msgstr  "Yapıştır"
+
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
+msgid   "Add bookmark"
+msgstr  "Yer imi ekle"
+
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
+msgid   "Remove bookmark"
+msgstr  "Yer imlerini temizle"
+
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
+msgid   "Search"
+msgstr  "Ara"
+
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+msgid   "Close"
+msgstr  "Kapat"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
+msgid   "Exit"
+msgstr  "Çık"
+
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
+msgid   "Open with"
+msgstr  "Birlikte aç"
+
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Cut"
+msgstr  "Kes"
+
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
+msgid   "Copy"
+msgstr  "Kopyala"
+
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
+msgid   "Delete"
+msgstr  "Sil"
+
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  "Yok-et"
+
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
+msgid   "Open in New Tab"
+msgstr  "Yeni Sekmede Aç"
+
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Yeni Sekme"
+
+#: ../xffm/gtk/dialogs.hh:29
+msgid   "Yes"
+msgstr  "Evet"
+
+#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+msgid   "Confirm"
+msgstr  "Doğrula"
+
+#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "Tümüne uygula"
+
+#: ../xffm/gtk/dialogs.hh:110
+msgid   "Overwrite"
+msgstr  "Üzerine Yaz"
+
+#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:411
+msgid   "Cancel"
+msgstr  "İptal Et"
+
+#: ../xffm/gtk/dialogs.hh:240
+msgid   "Help"
+msgstr  "Yardım"
+
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
+#: ../xffm/find/dialog.hh:666
+msgid   "unknown"
+msgstr  "bilinmiyor"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+msgid   "Block device"
+msgstr  "Blok aygıtı"
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+msgid   "Character device"
+msgstr  "Karakter aygıtı"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+msgid   "Directory"
+msgstr  "Dizin"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+msgid   "Symbolic Link"
+msgstr  "Sembolik Bağlantı"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+#, fuzzy
+msgid   "Regular file"
+msgstr  "normal dosya"
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+msgid   "Socket"
+msgstr  "Soket"
+
+#: ../xffm/gtk/preview.hh:587
+msgid   "Empty file"
+msgstr  "Boş dosya"
+
+#: ../xffm/gtk/preview.hh:658
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "%s adresinden okunamıyor"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Komut"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Dosya"
+
+#: ../xffm/completion/base.hh:34
+msgid   "Command history"
+msgstr  "Komut geçmişi"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+msgid   "User"
+msgstr  "Kullanıcı"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Değişken"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Makine"
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  "Elşeşme bulunamadı"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Eşleşiyor"
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  "Çok fazla dosya açık"
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+msgid   "Options:"
+msgstr  "Seçenekler:"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Tamamlama kipi:"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "komut"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  "dosya"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Seçenekler >>"
+
+#: ../xffm/fm/view/view.hh:144
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  "Yükleniyor %s...%s"
+
+#: ../xffm/fm/view/view.hh:144
+msgid   "Please Wait..."
+msgstr  "Lütfen Bekleyin..."
+
+#: ../xffm/fm/view/root/popup.hh:167
+#, fuzzy
+msgid   "Ecryptfs (EFS)"
+msgstr  "Dosyaları şifrele"
+
+#: ../xffm/fm/view/root/popup.hh:169
+msgid   "Clear cache"
+msgstr  "Önbelleği temizle"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+msgid   "Mount the volume associated with this folder"
+msgstr  "Bu klasörle ilişkili birimi bağla"
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Bu klasör ile ilişkili birimin bağını kaldır"
+
+#: ../xffm/fm/view/root/popup.hh:204
+msgid   "Empty trash"
+msgstr  "Çöp kutusunu boşaltıldığında"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "şifrelenmiş bölüm"
+
+#: ../xffm/fm/view/root/popup.hh:270
+msgid   "private"
+msgstr  "özel"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+msgid   "Specify Output Directory..."
+msgstr  "Çıktı Dizinini Belirt..."
+
+#: ../xffm/fm/view/root/model.hh:133
+msgid   "Root Directory"
+msgstr  "Kök Dizin"
+
+#: ../xffm/fm/view/root/model.hh:149
+msgid   "This is the root of the filesystem"
+msgstr  "Bu dosya sisteminin kök dizinidir"
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+msgid   "Home Directory"
+msgstr  "Başlangıç Dizini"
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+msgid   "Trash bin"
+msgstr  "Çöp kutusu"
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+msgid   "Disk Image Mounter"
+msgstr  "Disk Kalıbı Bağlayıcı"
+
+#: ../xffm/fm/view/root/model.hh:238
+msgid   "Mount local disks and devices"
+msgstr  "Yerel diskleri ve aygıtları bağla"
+
+#: ../xffm/fm/view/root/model.hh:278
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "Sonraki yer imi konumuna git."
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "İsim"
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:138
+msgid   "Details"
+msgstr  "Ayrıntılar"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "Boy"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  "Tarih"
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+msgid   "Mimetype"
+msgstr  "Mime tipi"
+
+#: ../xffm/fm/view/base/signals.hh:918
+msgid   "Trash is empty"
+msgstr  "Çöp boş"
+
+#: ../xffm/fm/view/base/signals.hh:925
+msgid   "Directory does not exist."
+msgstr  "Dizin bulunamadı."
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#, c-format
+msgid   "Files: %s"
+msgstr  "Dosyalar: %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Bağla"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Kaydet"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Seçenekler"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Gelişmiş"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, c-format
+msgid   "Mounting %s"
+msgstr  "Bağlanıyor %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "%s için Parola Metnini Girin"
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+msgid   "Package Manager"
+msgstr  "Paket Yöneticisi"
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  "Kabul Et"
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "seçenekler"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
+msgid   "Software Updater"
+msgstr  "Yazılım Güncelleyici"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  "Sisteminizde yüklü yazılımları ekleyin veya kaldırın"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Dizgi"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+msgid   "Waiting for search results"
+msgstr  "Arama sonuçları için bekliyor"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+msgid   "No results"
+msgstr  "Sonuç yok"
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Şu an kullanılmıyor"
+
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
+msgid   "Invalid entry"
+msgstr  "Geçersiz giriş"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Aygıt bağlı değil"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, c-format
+msgid   "Delete %s"
+msgstr  "Sil %s"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Uyarı: "
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
+msgid   "Multiple selections"
+msgstr  "Çoklu seçimler"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Sil"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Çöp kutusu"
+
+#: ../xffm/fm/view/local/popup.hh:93
+msgid   "New"
+msgstr  "Yeni"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
+#, fuzzy
+msgid   "Paste into"
+msgstr  "İçine Yapıştır"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Panoda yapıştırılacak bir şey yok."
+
+#: ../xffm/fm/view/local/popup.hh:105
+msgid   "Select All"
+msgstr  "Hepsini Seç"
+
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
+msgid   "Match regular expression"
+msgstr  "Düzenli ifade eşle"
+
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
+msgid   "Run Executable..."
+msgstr  "Çalıştır Yürüt..."
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
+msgid   "Extract files from the archive"
+msgstr  "Arşivden dosyaları aç"
+
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Şeçilen nesnelerle sıkıştırılmış bir arşiv oluştur"
+
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
+msgid   "Rename"
+msgstr  "Yeniden Adlandır"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
+msgid   "Duplicate"
+msgstr  "Sil"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:63
+msgid   "Link"
+msgstr  "Bağlantı"
+
+#: ../xffm/fm/view/local/popup.hh:163
+msgid   "Properties"
+msgstr  "Seçenekler"
+
+#: ../xffm/fm/view/local/popup.hh:566
+msgid   "Files:"
+msgstr  "Dosyalar:"
+
+#: ../xffm/fm/view/local/popup.hh:715
+msgid   "Select items"
+msgstr  "Ögeleri seç"
+
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "Düzenli ifade"
+
+#: ../xffm/fm/view/local/popup.hh:732
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Düzenli ifade sözdizimi doğru değil"
+
+#: ../xffm/fm/view/local/popup.hh:762
+msgid   "No selection"
+msgstr  "Seçim yok"
+
+#: ../xffm/fm/view/local/popup.hh:762
+msgid   "No matches."
+msgstr  "Eşleme yok."
+
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
+msgid   "Create new..."
+msgstr  "Yeni oluştur..."
+
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
+msgid   "New Name:"
+msgstr  "Yeni İsim:"
+
+#: ../xffm/fm/view/local/popup.hh:980
+msgid   "No name"
+msgstr  "İsimsiz"
+
+#: ../xffm/fm/view/local/popup.hh:993
+#, fuzzy, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "\"%s\" içinde aynı isimde bir dosya zaten mevcut."
+
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
+msgid   "Not a directory"
+msgstr  "Dizin değil"
+
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+msgid   "error"
+msgstr  "hata"
+
+#: ../xffm/fm/view/local/model.hh:104
+#, fuzzy
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  "Henüz bitmemiş işler var, lütfen işler bitene kadar bekleyiniz."
+
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "Previews"
+msgstr  "Önizlemeler"
+
+#: ../xffm/fm/view/local/model.hh:124
+#, c-format
+msgid   "Reading \"%s\""
+msgstr  "\"%s\" okunuyor"
+
+#: ../xffm/fm/view/local/model.hh:722
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "%d/%d makale yüklendi"
+
+#: ../xffm/fm/view/local/properties.hh:239
+msgid   "Properties and Attributes"
+msgstr  "Özellikler ve Öznitelikler"
+
+#: ../xffm/fm/view/local/properties.hh:267
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Dosya türü"
+
+#: ../xffm/fm/view/local/properties.hh:293
+msgid   "File:"
+msgstr  "Dosya:"
+
+#: ../xffm/fm/view/local/properties.hh:305
+msgid   "Apply changes"
+msgstr  "Değişiklikleri uygula"
+
+#: ../xffm/fm/view/local/properties.hh:473
+msgid   "Encoding"
+msgstr  "Kodlama"
+
+#: ../xffm/fm/view/local/properties.hh:496
+msgid   "Successfully moved to trash."
+msgstr  "Başarılı bir şekilde çöpe taşındı."
+
+#: ../xffm/fm/view/local/properties.hh:497
+msgid   "Source:"
+msgstr  "Kaynak:"
+
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "Dolu"
+
+#: ../xffm/fm/view/fstab/view.hh:175
+msgid   "Available"
+msgstr  "Boş"
+
+#: ../xffm/fm/view/fstab/view.hh:176
+msgid   "Usage"
+msgstr  "Kullanım"
+
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
+msgid   "No Label"
+msgstr  "Etiket Yok"
+
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
+msgid   "There is no file system available (unformatted)"
+msgstr  "Kullanılabilir bir dosya sistemi yok (biçimlendirilmemiş)"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+msgid   "Mount point:"
+msgstr  "Bağlama noktası:"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+msgid   "Not mounted"
+msgstr  "Bağlı değil"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+msgid   "Disks"
+msgstr  "Diskler"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+msgid   "NFS Network Volume"
+msgstr  "NFS Ağ Sistemi"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
+msgid   "SFTP (via SSH)"
+msgstr  "SFTP (SSH ile)"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "TrueCrypt Birimleri"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+msgid   "CIFS Volume"
+msgstr  "CIFS Sistemi"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
+#, c-format
+msgid   "Unmounting %s"
+msgstr  "%s Ayrılıyor"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Bağlama noktası:"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Aygıtı Bağla"
+
+#: ../xffm/fm/view/fstab/popup.hh:21
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "SSHFS Uzak Eşzamanlama Klasörü"
+
+#: ../xffm/fm/view/fstab/popup.hh:132
+msgid   "Mount Device"
+msgstr  "Aygıtı Bağla"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+msgid   "Copying files locally"
+msgstr  "Dosyalar yerel olarak kopyalanıyor"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
+#: ../xffm/common/gio.hh:93
+msgid   "Moving files"
+msgstr  "Dosya taşıma"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+msgid   "No Image Preview"
+msgstr  "Resim Önizleme Yok"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+msgid   "Maximum image size for thumbnailing"
+msgstr  "Örneklenecek olan resmin azami büyüklüğü"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+msgid   "Reset image size"
+msgstr  "Resmi orijinal boyutuna getir"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "Gömülü Uçbirim desteği"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
+msgid   "All items in the iconview."
+msgstr  "Simge görünümündeki tüm ögeler."
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
+msgid   "Scripting"
+msgstr  "Betik Yazma"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
+msgid   "Clear Log"
+msgstr  "Günlük Kaydını Temizle"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
+msgid   "Terminal font"
+msgstr  "Uçbirim yazıtipi"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Renice Process"
+msgstr  "Sürecin Önceliğini Değiştir"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Suspend"
+msgstr  "Askıya Al"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Continue"
+msgstr  "Devam"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Interrupt"
+msgstr  "Kesme"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Hangup"
+msgstr  "Kapat"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "User 1 (USR1)"
+msgstr  "Kullanıcı 1 (USR1)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "User 2 (USR2)"
+msgstr  "Kullanıcı 2 (USR2)"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "Terminate Task"
+msgstr  "Görevi Sonlandır"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "Abort"
+msgstr  "İptal"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
+msgid   "Kill"
+msgstr  "Öldür"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "Bölümleme ihlali"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Önceki"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
+msgid   "Go to"
+msgstr  "Git"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
+msgid   "loading..."
+msgstr  "yükleniyor..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
+msgid   "Confirm Replace"
+msgstr  "Değiştirme Onayı"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
+msgid   "Destination File"
+msgstr  "Hedef dosya"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "%s isimli bir dosya zaten var, üzerine yazmak ister misiniz?"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  "Uzun basma zamanı"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+msgid   "Remove Button Contents"
+msgstr  "Düğme içeriğini uzaklaştır"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Özel düğme içeriği ekle"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Eklemek için dosya seç:"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "%s dosyası yüklenemedi. Sebep: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+msgid   "You need to restart the application"
+msgstr  "Uygulamayı yeniden başlatmanız gerekiyor"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "Özel yazı tiplerini etkinleştir"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+msgid   "Open a New Window"
+msgstr  "Yeni Pencere Aç"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+msgid   "Differences"
+msgstr  "Farklılıklar"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+#, fuzzy
+msgid   "maximum"
+msgstr  "En Çok"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+msgid   "Add option"
+msgstr  "Seçenek ekle"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:79
+#, fuzzy
+msgid   "Remove option"
+msgstr  "Eylemi kaldır"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:158
+#, fuzzy
+msgid   "icon ID"
+msgstr  "simge"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:159
+#, fuzzy
+msgid   "tooltip"
+msgstr  "ipucu"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+#, fuzzy
+msgid   "Select work directory"
+msgstr  "Bir dizin seçin"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "Tabloları seçin:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "Uçbirim içinde çalıştır"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Aç"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+msgid   "Choose file"
+msgstr  "Dosya seç"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+msgid   "Choose directory"
+msgstr  "Dizin seç"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "Dosya Kaydet"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+#, fuzzy
+msgid   "customButton.ini"
+msgstr  "Dugme"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+msgid   "Option"
+msgstr  "Seçenek"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "metin"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+msgid   "folder"
+msgstr  "dizin"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  "içeren"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  "seçili değil"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Menüyü Aç"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+msgid   "Background Color"
+msgstr  "Arkaplan Rengi"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+msgid   "Foreground Color"
+msgstr  "Önalan Rengi"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "Metin Rengini Değiştir"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+#, fuzzy
+msgid   "Error Text Color"
+msgstr  "Metin Rengi:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+msgid   "Color settings"
+msgstr  "Renk ayarları"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "Sort by"
+msgstr  "Sırala"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "File extension"
+msgstr  "Dosya uzantısı"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
+msgid   "View as list"
+msgstr  "Liste olarak görüntüle"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
+msgid   "Show hidden files"
+msgstr  "Gizli dosyaları göster"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "YyedeklemeBbaşarısı Oldu."
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
+msgid   "Sort data in descending order"
+msgstr  "Veriyi azalan şekilde sırala"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
+msgid   "Sort by date"
+msgstr  "Tarihe göre sırala"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
+msgid   "Sort by size"
+msgstr  "Boyuta göre sırala"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
+msgid   "Main menu"
+msgstr  "Ana menü"
+
+#: ../xffm/fm/dialog/dialog.hh:121
+msgid   "Removed"
+msgstr  "Kaldırıldı"
+
+#: ../xffm/common/run.hh:339
+msgid   "warning"
+msgstr  "uyarı"
+
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+msgid   "Enter password"
+msgstr  "Parola girin"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+msgid   "Executable"
+msgstr  "Çalıştırılabilir dosya"
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+msgid   "Run in Terminal"
+msgstr  "Uçbirim İçinde Çalıştır"
+
+#: ../xffm/common/run.hh:652
+msgid   "Arguments for the Command"
+msgstr  "Komut Argümanları"
+
+#: ../xffm/common/run.hh:874
+msgid   "You have selected multiple files or folders"
+msgstr  "Birden çok dosya veya klasör seçtiniz"
+
+#: ../xffm/common/settings.hh:178
+#, fuzzy
+msgid   "New File:"
+msgstr  "Yeni Dosya"
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  "Betik dosyası \"%s\" çalıştırılabilir değil. Lütfen bu dosyanın "
+        "çalıştırılabilir özniteliğini aktifleştirin."
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, c-format
+msgid   "Open with %s"
+msgstr  "%s ile aç"
+
+#: ../xffm/common/util.hh:1513
+msgid   "Text Editor"
+msgstr  "Metin Düzenleyici"
+
+#: ../xffm/common/util.hh:1554
+#, fuzzy
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "Buraya bir komut yaz ve enter tuşuna bas..."
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Target"
+msgstr  "Hedef"
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Files"
+msgstr  "Dosyalar"
+
+#: ../xffm/common/dnd.hh:49
+msgid   "More…"
+msgstr  "Daha…"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "Move"
+msgstr  "Taşı"
+
+#: ../xffm/common/dnd.hh:143
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Bağlantı yarat"
+
+#: ../xffm/common/dnd.hh:155
+msgid   "more"
+msgstr  "daha fazla"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "Dosyalar kopyalanıyor"
+
+#: ../xffm/common/gio.hh:95
+msgid   "linking"
+msgstr  "ilintileniyor"
+
+#: ../xffm/common/gio.hh:97
+msgid   "rename"
+msgstr  "yeniden adlandır"
+
+#: ../xffm/common/gio.hh:408
+msgid   "Overwrite?"
+msgstr  "Üzerine yazılsın mı?"
+
+#: ../xffm/common/gio.hh:498
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d / %d)"
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "Komut çalıştır"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Kaynak Dosya"
+
+#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+msgid   "Ok"
+msgstr  "Tamam"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "İptal Et"
+
+#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
+msgid   "Running"
+msgstr  "Çalışıyor"
+
+#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
+msgid   "Waiting for operation to finish..."
+msgstr  "İşlemin bitmesi bekleniyor..."
+
+#: ../xffm/response/passwdresponse.hh:131
+msgid   "User Input"
+msgstr  "Kullanıcı Girişi"
+
+#: ../xffm/response/passwdresponse.hh:147
+msgid   "Response Requested"
+msgstr  "Yanıt İstendi"
+
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  "Okuma İzni Yok"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:341
+msgid   "Path"
+msgstr  "Yol"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Bu bilgisayar üzerindeki belgeleri ve klasörler ismiyle ya da "
+        "içeriğiyle konumlandırın"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+msgid   "Filter:"
+msgstr  "Filtre adı:"
+
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "Dosya ara"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "İçerik:"
+
+#: ../xffm/find/fgr.hh:128
+#, fuzzy
+msgid   "File's contents filtered as plain text."
+msgstr  "Düz yazı olarak kaydedilsin mi?"
+
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "Ayrıntılı hata ayıklama çıktısı kipi."
+
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Sürüm bilgisini göster"
+
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "Filtre Ayrıntıları"
+
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+msgid   "Stay on single filesystem"
+msgstr  "Tek dosya sistemi üstünde dur"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Yazdır..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "Süreci tanımlayan benzersiz Süreç Kimliği."
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+msgid   "Find hidden files and directories"
+msgstr  "Gizli dosya ve dizinleri bul"
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Filtre"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  "Filtreden geçer dosyaları görüntülemek için (yıldız ve düzenli "
+        "ifadeler işlemden geçer)"
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+msgid   "Recursive"
+msgstr  "Tekrarlı"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "KBayt"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "büyük ya da eşit"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "küçük ya da eşit"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "UID Belirle"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Çalıştırılabilir Metin Dosyaları"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Dosyanın erişim hakları, sekizlik yazımda."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Tür"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Any"
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "Hazır olan tip"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "UNIX Şeması"
+
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+msgid   "Minutes"
+msgstr  "Dakika"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  "SAAT"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+msgid   "Hours"
+msgstr  "Saat"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+msgid   "Days"
+msgstr  "Günler"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Ay"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Ay"
+
+#: ../xffm/find/fgr.hh:180
+msgid   "Modification Time :"
+msgstr  "Değiştirme Tarihi :"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  "Erişim Tarihi :"
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  "Oluşturma Tarihi :"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "uid "
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Kullanıcı:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "kimlik"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Grup:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "İçerik Görünümü"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "DİZGİ"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "Genişletilmiş"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Büyük/küçük harf önemli değil"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Metin Dosyaları"
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+msgid   "No match"
+msgstr  "Eşleme yok"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+msgid   "Line Count"
+msgstr  "Satır Sayısı"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Kelimeler"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Çizgiler"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Kullanım: %s [SEÇENEK]\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Sıradan"
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
+#: ../xffm/find/dialog.hh:245
+msgid   "Results"
+msgstr  "Sonuçlar"
+
+#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Hataları düzeltmeye çalışma"
+
+#: ../xffm/find/signals.hh:501
+msgid   "Upper limit:"
+msgstr  "Üst limit:"
+
+#: ../xffm/find/signals.hh:503
+msgid   "Counting files..."
+msgstr  "Dosyalar sayılıyor..."
+
+#: ../xffm/find/signals.hh:518
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d eşleşme bulundu"
+
+#: ../xffm/find/signals.hh:520
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "Bitiş: %s"
+
+#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+msgid   "Searching..."
+msgstr  "Aranıyor..."
+
+#: ../xffm/find/dialog.hh:106
+msgid   "Find"
+msgstr  "Bul"
+
+#: ../xffm/find/dialog.hh:131
+#, fuzzy
+msgid   "Close find"
+msgstr  "Pencereyi kapat"
+
+#: ../xffm/find/dialog.hh:146
+#, fuzzy
+msgid   "Find Files"
+msgstr  "Dosya Bul"
+
+#: ../xffm/find/dialog.hh:209
+msgid   "Select advanced options"
+msgstr  "Gelişmiş seçenekleri seç"
+
+#: ../xffm/find/dialog.hh:245
+msgid   "Upper limit"
+msgstr  "Üst sınır"
+
+#: ../xffm/find/dialog.hh:250
+msgid   "At Least"
+msgstr  "En Az"
+
+#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+msgid   "kBytes"
+msgstr  "kBayt"
+
+#: ../xffm/find/dialog.hh:255
+msgid   "At Most"
+msgstr  "En Çok"
+
+#: ../xffm/find/dialog.hh:266
+msgid   "Group"
+msgstr  "Grup"
+
+#: ../xffm/find/dialog.hh:270
+msgid   "Octal Permissions"
+msgstr  "Sekizli Erişim Hakları"
+
+#: ../xffm/find/dialog.hh:275
+msgid   "SUID"
+msgstr  "SUID"
+
+#: ../xffm/find/dialog.hh:299
+msgid   "Months"
+msgstr  "Ay"
+
+#: ../xffm/find/dialog.hh:309
+msgid   "File type : "
+msgstr  "Dosya türü : "
+
+#: ../xffm/find/dialog.hh:355
+msgid   "Display file selection dialog"
+msgstr  "Dosya seçme penceresini görüntüle"
+
+#: ../xffm/find/dialog.hh:414
+msgid   "Contains the text"
+msgstr  "Metni içerir"
+
+#: ../xffm/find/dialog.hh:444
+msgid   "Case Sensitive"
+msgstr  "Büyük/Küçük Harfe Duyarlı"
+
+#: ../xffm/find/dialog.hh:445
+msgid   "Extended regexp"
+msgstr  "Uzatılmış düzenli ifade"
+
+#: ../xffm/find/dialog.hh:446
+msgid   "Include binary files"
+msgstr  "İkili dosyaları da içer"
+
+#: ../xffm/find/dialog.hh:455
+msgid   "Anywhere"
+msgstr  "Herhangi bir yer"
+
+#: ../xffm/find/dialog.hh:456
+msgid   "Whole words only"
+msgstr  "Sadece tam sözcükler"
+
+#: ../xffm/find/dialog.hh:457
+msgid   "lines"
+msgstr  "satır"
+
+#: ../xffm/find/dialog.hh:680
+msgid   "Modified"
+msgstr  "Değiştirildi"
+
+#: ../xffm/find/dialog.hh:684
+msgid   "Created"
+msgstr  "Oluşturulma"
+
+#: ../xffm/find/dialog.hh:688
+#, fuzzy
+msgid   "Accessed"
+msgstr  "Erişim:"
+
+#: ../xffm/find/dialog.hh:1006
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "Pencereyi kapat"
+
+#: ../xffm/find/dialog.hh:1010
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1019
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+

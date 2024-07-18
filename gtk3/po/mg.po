@@ -1,0 +1,1660 @@
+# Xffm+ translation file: jue 18 jul 2024 12:36:09 CST
+# Merged from existing open source files
+# http://xffm.org
+#
+#
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
+        "PO-Revision-Date: 2007-03-06 13:33+0300\n"
+        "Last-Translator: Fano Rajaonarisoa <fano@isvtec.com>\n"
+        "Language-Team: MALAGASY <i18n-malagasy-gnome@gna.org>\n"
+        "Language: mg\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
+#, fuzzy
+msgid   "Open terminal"
+msgstr  "Hanokatra terminal"
+
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+msgid   "Execute Shell Command"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
+msgid   "Paste"
+msgstr  "Apetao"
+
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
+#, fuzzy
+msgid   "Add bookmark"
+msgstr  "Mampiditra rohy"
+
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
+#, fuzzy
+msgid   "Remove bookmark"
+msgstr  "Hamindra io rohy io"
+
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
+msgid   "Search"
+msgstr  "Karohy"
+
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+msgid   "Close"
+msgstr  "Hidio"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
+#, fuzzy
+msgid   "Exit"
+msgstr  "Najanona"
+
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
+#, fuzzy
+msgid   "Open with"
+msgstr  "Sokafy amin'ny Alalan'ny"
+
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Cut"
+msgstr  "Esory"
+
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
+msgid   "Copy"
+msgstr  "Adikao"
+
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
+msgid   "Delete"
+msgstr  "Fafao"
+
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
+#, fuzzy
+msgid   "Open in New Tab"
+msgstr  "Sokafy anaty vakizoro vaovao"
+
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  "Vakizoro vaovao"
+
+#: ../xffm/gtk/dialogs.hh:29
+msgid   "Yes"
+msgstr  "Eny"
+
+#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+#, fuzzy
+msgid   "Confirm"
+msgstr  "Hikirakira"
+
+#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Ampiharo ilay endri-tsoratra"
+
+#: ../xffm/gtk/dialogs.hh:110
+msgid   "Overwrite"
+msgstr  "Tsindrio"
+
+#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:411
+msgid   "Cancel"
+msgstr  "Aoka"
+
+#: ../xffm/gtk/dialogs.hh:240
+msgid   "Help"
+msgstr  "Toro-làlana"
+
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
+#: ../xffm/find/dialog.hh:666
+msgid   "unknown"
+msgstr  "tsy fantatra"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+#, fuzzy
+msgid   "Block device"
+msgstr  "Periferika mpanodina zana-kapila:"
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+#, fuzzy
+msgid   "Character device"
+msgstr  "Fanafangoana marika"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+msgid   "Directory"
+msgstr  "Laha-tahiry"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  ""
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#, fuzzy
+msgid   "Symbolic Link"
+msgstr  "Rohy misolotena"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+#, fuzzy
+msgid   "Regular file"
+msgstr  "Rakitra tsy mahazatra"
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+#, fuzzy
+msgid   "Socket"
+msgstr  "PocketPC"
+
+#: ../xffm/gtk/preview.hh:587
+#, fuzzy
+msgid   "Empty file"
+msgstr  "Rakitra foana"
+
+#: ../xffm/gtk/preview.hh:658
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "Tsy voavaky ny karazan-daza avy amin'ny rakitra"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Baiko"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Rakitra"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "Fidiran'ilay baiko"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+msgid   "User"
+msgstr  "Mpampiasa"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Miovaova"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Mpampiantrano"
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Matches"
+msgstr  "Hajao ny efitrefi-dohavipirinty"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "Be loatra ireo rakitra misokatra"
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+#, fuzzy
+msgid   "Options:"
+msgstr  "Safidy:\t"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Vita"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "Baiko"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  "rakitra"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Safidy"
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Maka ny %s"
+
+#: ../xffm/fm/view/view.hh:144
+msgid   "Please Wait..."
+msgstr  "Mahandrasa kely azafady..."
+
+#: ../xffm/fm/view/root/popup.hh:167
+msgid   "Ecryptfs (EFS)"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:169
+#, fuzzy
+msgid   "Clear cache"
+msgstr  "Mamafa izay voasoratra"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "Mamaritra ireo fariana hita anatin'ity laha-tahiry ity"
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Mamaritra ireo fariana hita anatin'ity laha-tahiry ity"
+
+#: ../xffm/fm/view/root/popup.hh:204
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Müll leeren"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Fitoerana EncFS"
+
+#: ../xffm/fm/view/root/popup.hh:270
+#, fuzzy
+msgid   "private"
+msgstr  "Alefaso"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+#, fuzzy
+msgid   "Specify Output Directory..."
+msgstr  "Msiafidiana laha-tahiry iray"
+
+#: ../xffm/fm/view/root/model.hh:133
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "Laha-tahiry"
+
+#: ../xffm/fm/view/root/model.hh:149
+#, fuzzy
+msgid   "This is the root of the filesystem"
+msgstr  "Ny vondrona misy ilay rakitra."
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+#, fuzzy
+msgid   "Home Directory"
+msgstr  "Lahatahirin'ny fandraisana"
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Daba"
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "Mpampakatra kapila"
+
+#: ../xffm/fm/view/root/model.hh:238
+msgid   "Mount local disks and devices"
+msgstr  "Mampakatra ireo kapila sy periferika an-toerana "
+
+#: ../xffm/fm/view/root/model.hh:278
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "Ho any amin'ny toeran'ny fandraisana"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Anarana"
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:138
+msgid   "Details"
+msgstr  "Antsipiriany"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "Habe"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  "Daty"
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "Karazan'ilay sary:"
+
+#: ../xffm/fm/view/base/signals.hh:918
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Foana ny anaran'ilay mpampiasa"
+
+#: ../xffm/fm/view/base/signals.hh:925
+#, fuzzy
+msgid   "Directory does not exist."
+msgstr  "%s: Tsy misy ny laha-tahiry %s."
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "Rakitra: %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+#, fuzzy
+msgid   "Mount"
+msgstr  "Akaro ny %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Raiketo"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Safidy"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Avo lenta"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Akaro ny %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Manorata teny fanalahidy"
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+#, fuzzy
+msgid   "Package Manager"
+msgstr  "Mpandrindra arsiva"
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  "Ekeo"
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "Safidy:\t"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "Rindran'asa"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Laha-daza"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "Valin'ny karoka"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+#, fuzzy
+msgid   "No results"
+msgstr  "Tsy nahitana valiny ny \"%s\""
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Ny ampiasaina izao"
+
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "Tahirin-kevitra diso"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Tsy hita ny kaonti-mpampiasa '%s'"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, fuzzy, c-format
+msgid   "Delete %s"
+msgstr  "Fafao"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  "Fampilazana:"
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Manesotra izay voafaritra"
+
+#: ../xffm/fm/view/local/rm.hh:92
+msgid   "Remove"
+msgstr  "Esory"
+
+#: ../xffm/fm/view/local/rm.hh:183
+msgid   "Trash"
+msgstr  "Daba"
+
+#: ../xffm/fm/view/local/popup.hh:93
+msgid   "New"
+msgstr  "Vaovao"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
+#, fuzzy
+msgid   "Paste into"
+msgstr  "Apetao ao anatin'ilay laha-tahiry"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Tsy misy zavatra hapetaka avy ao anaty fanindri-taratasy."
+
+#: ../xffm/fm/view/local/popup.hh:105
+msgid   "Select All"
+msgstr  "Farito izy rehetra"
+
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "Mifanaraka amin'ny fiteny mahazatra ilay anarana"
+
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "Alefaso miaraka amin'ny rakitra..."
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
+msgid   "Extract files from the archive"
+msgstr  "Manaboraka rakitra avy anatin'ilay arsiva"
+
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
+#, fuzzy
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Mamorona arsiva avy amin'ireo zavatra voafaritra"
+
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
+msgid   "Rename"
+msgstr  "Ovay anarana"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
+msgid   "Duplicate"
+msgstr  "Anaovy dika mitovy"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:63
+msgid   "Link"
+msgstr  "Rohy"
+
+#: ../xffm/fm/view/local/popup.hh:163
+msgid   "Properties"
+msgstr  "Toetoetra"
+
+#: ../xffm/fm/view/local/popup.hh:566
+msgid   "Files:"
+msgstr  "Rakitra:"
+
+#: ../xffm/fm/view/local/popup.hh:715
+#, fuzzy
+msgid   "Select items"
+msgstr  "Misafidy rafitra"
+
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Regular expression"
+msgstr  "Fiteny mahazatra"
+
+#: ../xffm/fm/view/local/popup.hh:732
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Fiteny mahazatra"
+
+#: ../xffm/fm/view/local/popup.hh:762
+#, fuzzy
+msgid   "No selection"
+msgstr  "Handika izay voafaritra"
+
+#: ../xffm/fm/view/local/popup.hh:762
+#, fuzzy
+msgid   "No matches."
+msgstr  "Teny mifanandrify maro..."
+
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
+#, fuzzy
+msgid   "Create new..."
+msgstr  "Hamorona mpandefa..."
+
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
+#, fuzzy
+msgid   "New Name:"
+msgstr  "Lalao vaovao"
+
+#: ../xffm/fm/view/local/popup.hh:980
+msgid   "No name"
+msgstr  "Tsy misy anarana"
+
+#: ../xffm/fm/view/local/popup.hh:993
+#, fuzzy, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Efa misy rakitra manana io anarana io. Mampiasà anarana hafa."
+
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
+msgid   "Not a directory"
+msgstr  "Tsy lahatahiry"
+
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+#, fuzzy
+msgid   "error"
+msgstr  "Terror"
+
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  ""
+
+#: ../xffm/fm/view/local/model.hh:104
+#, fuzzy
+msgid   "Previews"
+msgstr  "Topy maso"
+
+#: ../xffm/fm/view/local/model.hh:124
+#, fuzzy, c-format
+msgid   "Reading \"%s\""
+msgstr  "Maka ny %s"
+
+#: ../xffm/fm/view/local/model.hh:722
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Ireo rakitra azo:"
+
+#: ../xffm/fm/view/local/properties.hh:239
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "Marika manokan'ilay rakitra"
+
+#: ../xffm/fm/view/local/properties.hh:267
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Haben'ilay rakitra:"
+
+#: ../xffm/fm/view/local/properties.hh:293
+msgid   "File:"
+msgstr  "Rakitra:"
+
+#: ../xffm/fm/view/local/properties.hh:305
+#, fuzzy
+msgid   "Apply changes"
+msgstr  "Ampiharo ireo fanovan'ny mpampiasa"
+
+#: ../xffm/fm/view/local/properties.hh:473
+msgid   "Encoding"
+msgstr  "Fanafangoana"
+
+#: ../xffm/fm/view/local/properties.hh:496
+msgid   "Successfully moved to trash."
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:497
+msgid   "Source:"
+msgstr  "Loharano:"
+
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "Ampiasaina"
+
+#: ../xffm/fm/view/fstab/view.hh:175
+msgid   "Available"
+msgstr  "Malalaka"
+
+#: ../xffm/fm/view/fstab/view.hh:176
+#, fuzzy
+msgid   "Usage"
+msgstr  "Fampiasa:"
+
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
+#, fuzzy
+msgid   "No Label"
+msgstr  "Mari-tsoratra"
+
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
+msgid   "There is no file system available (unformatted)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+#, fuzzy
+msgid   "Mount point:"
+msgstr  "Toerana fampiakarana"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "(tsy nakarina)"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+#, fuzzy
+msgid   "Disks"
+msgstr  "Kapila"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+msgid   "NFS Network Volume"
+msgstr  "Fitoerana Rezo NFS"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Fitoerana arika"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+msgid   "CIFS Volume"
+msgstr  "Fitoerana CIFS"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Alatsao ny %s"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Toerana fampiakarana"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Hamaritra periferika"
+
+#: ../xffm/fm/view/fstab/popup.hh:21
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/popup.hh:132
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "Mpampiditra"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Mandika rakitra"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
+#: ../xffm/common/gio.hh:93
+msgid   "Moving files"
+msgstr  "Mamindra ireo rakitra"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+#, fuzzy
+msgid   "No Image Preview"
+msgstr  "Topimason'ilay sary"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+msgid   "Maximum image size for thumbnailing"
+msgstr  "Haben-tsary azo anaovana sary madinika ambony indrindra"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+#, fuzzy
+msgid   "Reset image size"
+msgstr  "Haben'ilay sarimihetsika"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "Hanokatra terminal"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
+#, fuzzy
+msgid   "All items in the iconview."
+msgstr  "Farito daholo ireo zavatra anatin'ity fikandrana ity "
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Baiko soratra"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "Foano"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
+#, fuzzy
+msgid   "Terminal font"
+msgstr  "Terminal"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "Afeno ilay asa"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Suspend"
+msgstr  "Aatoy"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Continue"
+msgstr  "Hanohy"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Interrupt"
+msgstr  "Tapao"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Hangup"
+msgstr  "Ahatoy"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "User 1 (USR1)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "User 2 (USR2)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "Fiafarana"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "Abort"
+msgstr  "Hiala"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
+msgid   "Kill"
+msgstr  "Vonoy"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "Fanimbazimbana ny segmentation"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Aloha"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
+#, fuzzy
+msgid   "Go to"
+msgstr  "Ho any amin'ny pejy"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
+msgid   "loading..."
+msgstr  "Mangala..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "Soloy"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
+#, fuzzy
+msgid   "Destination File"
+msgstr  "Lahatahiry iantefana:"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "Efa misy io arsiva io. Tianao tsindriana ve izy io?"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Manova ny oran'ny rafitra"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+msgid   "Remove Button Contents"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Ataovy loko safidy:"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Misafidiana rakitra maro hosokafana"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Tsy nahavita naka ny rakitra \"%s\": %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Mikirakira ilay rindranasa"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+msgid   "FIXME New custom content"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Hanokatra fikandrana vaovao"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Differences"
+msgstr  "Safidy manokana"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+#, fuzzy
+msgid   "maximum"
+msgstr  "Ambony indrindra:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+#, fuzzy
+msgid   "Add option"
+msgstr  "Hanampy toerana"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:79
+#, fuzzy
+msgid   "Remove option"
+msgstr  "Hanaisotra ilay toerana"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:158
+msgid   "icon ID"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:159
+#, fuzzy
+msgid   "tooltip"
+msgstr  "Hizaha ny torohevitra miserana"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+#, fuzzy
+msgid   "Select work directory"
+msgstr  "Msiafidiana laha-tahiry iray"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "Misafidiana rakitra iray"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  "Alefaso amin'ny alalan'ny Terminal"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Sokafy"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:55
+#: ../xffm/response/chooserresponse.hh:69
+#, fuzzy
+msgid   "Choose file"
+msgstr  "Misafidy rakitra..."
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:50
+#: ../xffm/response/chooserresponse.hh:62
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Lahatahirin'ny fandraisana"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "Raiketo ilay rakitra"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+msgid   "customButton.ini"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+#, fuzzy
+msgid   "Option"
+msgstr  "Safidy"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+#, fuzzy
+msgid   "text"
+msgstr  "Seha-kevitra"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+#, fuzzy
+msgid   "folder"
+msgstr  "Lahatahiry"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+#, fuzzy
+msgid   "on"
+msgstr  "Con"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+#, fuzzy
+msgid   "off"
+msgstr  "amin'ny"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Asehoy ilay sary"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+msgid   "Background Color"
+msgstr  "Loko afara"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+#, fuzzy
+msgid   "Foreground Color"
+msgstr  "Lokon'ny tavan'ny lohateny"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "Lokon'ny lahabolana"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+#, fuzzy
+msgid   "Error Text Color"
+msgstr  "Lokon'ny lahabolana"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+#, fuzzy
+msgid   "Color settings"
+msgstr  "Rindran'ny mpanara-maso"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+#, fuzzy
+msgid   "Sort by"
+msgstr  "Avaho araka ny"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+#, fuzzy
+msgid   "File extension"
+msgstr  "Tovan-drakitra:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
+#, fuzzy
+msgid   "View as list"
+msgstr  "Asehoy toy ny lisitra"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
+#, fuzzy
+msgid   "Show hidden files"
+msgstr  "Asehoy ireo laha-tahiry miafina"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
+#, fuzzy
+msgid   "Show Backup Files"
+msgstr  "Asehoy ireo rakitra sy laha-tahiry miafina"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "fantina midina"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Avaho araka ny anarana"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
+msgid   "Sort by size"
+msgstr  "Avaho araka ny habe"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
+#, fuzzy
+msgid   "Main menu"
+msgstr  "Tolotra Fototra"
+
+#: ../xffm/fm/dialog/dialog.hh:121
+#, fuzzy
+msgid   "Removed"
+msgstr  "Esory"
+
+#: ../xffm/common/run.hh:339
+#, fuzzy
+msgid   "warning"
+msgstr  "Fampilazana"
+
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+msgid   "Enter password"
+msgstr  "Soraty ny teny fanalahidy"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#, fuzzy
+msgid   "Executable"
+msgstr  "Fandefasana"
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+msgid   "Run in Terminal"
+msgstr  "Alefaso amin'ny alalan'ny Terminal"
+
+#: ../xffm/common/run.hh:652
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Tsy misy valin-teny ho an'ny baiko %s."
+
+#: ../xffm/common/run.hh:874
+msgid   "You have selected multiple files or folders"
+msgstr  ""
+
+#: ../xffm/common/settings.hh:178
+#, fuzzy
+msgid   "New File:"
+msgstr  "Rakitra vaovao"
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, c-format
+msgid   "Open with %s"
+msgstr  "Sokafy amin'ny alalan'ny %s"
+
+#: ../xffm/common/util.hh:1513
+msgid   "Text Editor"
+msgstr  "Mpanova lahabolana"
+
+#: ../xffm/common/util.hh:1554
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:41
+#, fuzzy
+msgid   "Target"
+msgstr  "Kinendry"
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Files"
+msgstr  "Rakitra"
+
+#: ../xffm/common/dnd.hh:49
+msgid   "More…"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:63
+msgid   "Move"
+msgstr  "Afindrao"
+
+#: ../xffm/common/dnd.hh:143
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Hamorona rojom-panalahidy"
+
+#: ../xffm/common/dnd.hh:155
+msgid   "more"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "Mandika rakitra"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "Mamorona rohy"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "Ovay anarana"
+
+#: ../xffm/common/gio.hh:408
+#, fuzzy
+msgid   "Overwrite?"
+msgstr  "Tsindrio"
+
+#: ../xffm/common/gio.hh:498
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d amin'ny %d)"
+
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
+msgstr  "baikon'ny totozy"
+
+#: ../xffm/response/customresponse.hh:103
+#, fuzzy
+msgid   "Source File"
+msgstr  "Anaran'ny loharano"
+
+#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+msgid   "Ok"
+msgstr  ""
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
+msgid   "Running"
+msgstr  "Mandeha"
+
+#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "Miandry fahazoan-dàlana avy amin'ny “%s”..."
+
+#: ../xffm/response/passwdresponse.hh:131
+#, fuzzy
+msgid   "User Input"
+msgstr  "%u Eingabe"
+
+#: ../xffm/response/passwdresponse.hh:147
+msgid   "Response Requested"
+msgstr  ""
+
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+#, fuzzy
+msgid   "No Read Permission"
+msgstr  "Alalana"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:341
+msgid   "Path"
+msgstr  "Sori-dàlana"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Tadiavo ny tahirin-kevitra sy ny laha-tahiry ao amin'io solosaina io "
+        "sakajina araky ny anarana na ny anatiny"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+msgid   "Filter:"
+msgstr  "Sivana:"
+
+#: ../xffm/find/fgr.hh:126
+#, fuzzy
+msgid   "Search for files"
+msgstr  "Misafidiana ny rakitra:"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Mpiaty:"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
+#, fuzzy
+msgid   "Verbose output debugging mode."
+msgstr  "Mandefa ny fangon'ny debugging"
+
+#: ../xffm/find/fgr.hh:133
+#, fuzzy
+msgid   "Show version information"
+msgstr  "Anoratana ny mombamomba anao"
+
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "Fleur de Lys"
+
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "Rafi-drakitra vakiana fotsiny"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Atontay..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+msgid   "Find hidden files and directories"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+#, fuzzy
+msgid   "Filter"
+msgstr  "Sivana"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+msgid   "Recursive"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "KByte"
+msgstr  "Octet"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Set UID"
+msgstr  "Farito ny ID'ny mpampiasa"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Executable Text Files"
+msgstr  "Ireo raki-tsoratra rehetra"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Ny alalana mikasika ilay rakitra, aseho amin'ny endrika octet."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Karazana"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Izay misy"
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "Karazan'endri-tsoratra tsotra"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "Oran'ny UNIX"
+
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+#, fuzzy
+msgid   "Minutes"
+msgstr  "Minitra"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+#, fuzzy
+msgid   "Hours"
+msgstr  "Ora"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+msgid   "Days"
+msgstr  "Andro"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Volana"
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "Volana"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Fotoam-panovana"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "Nosokafana ny:"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "Fotoam-pamoronana"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "uid"
+msgstr  "Fotaka"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Mpampiasa:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Vondrony:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Sehon'ny mpiaty"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "LAHA-DAZA"
+
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Extended"
+msgstr  "Fikarohana mivelatra"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Aza mandraharaha ny haben-tsoratra"
+
+#: ../xffm/find/fgr.hh:208
+#, fuzzy
+msgid   "Text Files"
+msgstr  "Raki-tsoratra"
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+#, fuzzy
+msgid   "No match"
+msgstr  "Fifanandrifiana marina"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Fanamarihana mikasika ny andalana"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Teny"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Andalana"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Fampiasa: %s\n"
+
+#: ../xffm/find/signals.hh:7
+#, fuzzy
+msgid   "Regular"
+msgstr  "Sans Regular 8"
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
+#: ../xffm/find/dialog.hh:245
+#, fuzzy
+msgid   "Results"
+msgstr  "Valin'ny fitsapana"
+
+#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Manajanona ny asa atao izao"
+
+#: ../xffm/find/signals.hh:501
+msgid   "Upper limit:"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:503
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "Mandika rakitra"
+
+#: ../xffm/find/signals.hh:518
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       ""
+msgstr[1]       ""
+
+#: ../xffm/find/signals.hh:520
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s: Tsy nety fandefasana: %s"
+
+#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+msgid   "Searching..."
+msgstr  "Mikaroka..."
+
+#: ../xffm/find/dialog.hh:106
+msgid   "Find"
+msgstr  "Tadiavo"
+
+#: ../xffm/find/dialog.hh:131
+#, fuzzy
+msgid   "Close find"
+msgstr  "Manidy fikandrana"
+
+#: ../xffm/find/dialog.hh:146
+#, fuzzy
+msgid   "Find Files"
+msgstr  "Hampiditra rakitra"
+
+#: ../xffm/find/dialog.hh:209
+#, fuzzy
+msgid   "Select advanced options"
+msgstr  "Hijery safidy misimisy kokoa"
+
+#: ../xffm/find/dialog.hh:245
+#, fuzzy
+msgid   "Upper limit"
+msgstr  "Tsy voafetra"
+
+#: ../xffm/find/dialog.hh:250
+msgid   "At Least"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+#, fuzzy
+msgid   "kBytes"
+msgstr  "Octet"
+
+#: ../xffm/find/dialog.hh:255
+msgid   "At Most"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:266
+msgid   "Group"
+msgstr  "Vondrona"
+
+#: ../xffm/find/dialog.hh:270
+msgid   "Octal Permissions"
+msgstr  "Alalana ara-octet"
+
+#: ../xffm/find/dialog.hh:275
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:299
+#, fuzzy
+msgid   "Months"
+msgstr  "Volana"
+
+#: ../xffm/find/dialog.hh:309
+#, fuzzy
+msgid   "File type : "
+msgstr  "Karazan'ny rakitra"
+
+#: ../xffm/find/dialog.hh:355
+msgid   "Display file selection dialog"
+msgstr  "Asehoy ny takila fisafidianana rakitra"
+
+#: ../xffm/find/dialog.hh:414
+msgid   "Contains the text"
+msgstr  "Misy ilay lahabolana"
+
+#: ../xffm/find/dialog.hh:444
+msgid   "Case Sensitive"
+msgstr  "Manaja haben-tsoratra"
+
+#: ../xffm/find/dialog.hh:445
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Fikarohana mivelatra"
+
+#: ../xffm/find/dialog.hh:446
+#, fuzzy
+msgid   "Include binary files"
+msgstr  "Ampidiro ireo zana-dahatahiry"
+
+#: ../xffm/find/dialog.hh:455
+msgid   "Anywhere"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:456
+#, fuzzy
+msgid   "Whole words only"
+msgstr  "Ny mifanaraka amin'ilay teny ihany"
+
+#: ../xffm/find/dialog.hh:457
+msgid   "lines"
+msgstr  "andalana"
+
+#: ../xffm/find/dialog.hh:680
+#, fuzzy
+msgid   "Modified"
+msgstr  "Novana:"
+
+#: ../xffm/find/dialog.hh:684
+#, fuzzy
+msgid   "Created"
+msgstr  "Noforonina:"
+
+#: ../xffm/find/dialog.hh:688
+#, fuzzy
+msgid   "Accessed"
+msgstr  "Nosokafana ny:"
+
+#: ../xffm/find/dialog.hh:1006
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "Manidy fikandrana"
+
+#: ../xffm/find/dialog.hh:1010
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1019
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
