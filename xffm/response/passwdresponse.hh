@@ -135,7 +135,7 @@ private:
         auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_box_set_homogeneous(hbox, FALSE);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-        gtk_box_pack_start (
+        compat<bool>::boxPackStart (
                 GTK_BOX (gtk_dialog_get_content_area(dialog)),
                 GTK_WIDGET(hbox), TRUE, TRUE, 0);
         gtk_widget_show (GTK_WIDGET(hbox));
@@ -147,42 +147,42 @@ private:
             gtk_label_set_markup  (label, _("Response Requested"));
         }
 
-        gtk_box_pack_start (hbox, GTK_WIDGET(label), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (hbox, GTK_WIDGET(label), TRUE, TRUE, 0);
         gtk_widget_show (GTK_WIDGET(label));
 
         auto bhbox=GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_box_set_homogeneous(bhbox, FALSE);
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(dialog))), 
+        compat<bool>::boxPackStart (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(dialog))), 
                 GTK_WIDGET(bhbox), TRUE, TRUE, 0);
         gtk_widget_show (GTK_WIDGET(bhbox));
 
         auto vbox=GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_box_set_homogeneous(vbox, FALSE);
-        gtk_box_pack_start (bhbox, GTK_WIDGET(vbox), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (bhbox, GTK_WIDGET(vbox), TRUE, TRUE, 0);
         // put image here
         auto pixbuf = pixbuf_c::getPixbuf("user-info-symbolic", BIG_ICON_SIZE);
 //        auto pixbuf = pixbuf_c::getPixbuf("user-info-symbolic",SIZE_ICON);
         auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(pixbuf));
         //g_object_unref(pixbuf);
-        gtk_box_pack_start (vbox, GTK_WIDGET(image), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (vbox, GTK_WIDGET(image), TRUE, TRUE, 0);
 
         gtk_widget_show (GTK_WIDGET(image));
         gtk_widget_show (GTK_WIDGET(vbox));
         vbox=GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_box_set_homogeneous(vbox, FALSE);
-        gtk_box_pack_start (bhbox, GTK_WIDGET(vbox), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (bhbox, GTK_WIDGET(vbox), TRUE, TRUE, 0);
         gtk_widget_show (GTK_WIDGET(vbox));
 
         hbox=GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_box_set_homogeneous(hbox, FALSE);
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-        gtk_box_pack_start (vbox, GTK_WIDGET(hbox), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (vbox, GTK_WIDGET(hbox), TRUE, TRUE, 0);
         gtk_widget_show (GTK_WIDGET(hbox));
 
 
         auto response_text = GTK_ENTRY(gtk_entry_new ());
         g_object_set_data(G_OBJECT(response_text), "dialog", dialog);
-        gtk_box_pack_start (hbox, GTK_WIDGET(response_text), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (hbox, GTK_WIDGET(response_text), TRUE, TRUE, 0);
         gtk_entry_set_visibility ((GtkEntry *) response_text, (hidden)?FALSE:TRUE);
         g_signal_connect (G_OBJECT (response_text), "activate", ENTRY_CALLBACK (entry_activate), NULL);
         gtk_widget_show (GTK_WIDGET(response_text));
@@ -198,7 +198,7 @@ private:
         
         auto button = gtk_c::dialog_button ("window-close-symbolic", NULL);
         gtk_widget_show (GTK_WIDGET(button));
-        gtk_box_pack_start (hbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (hbox, GTK_WIDGET(button), FALSE, FALSE, 0);
         g_signal_connect (G_OBJECT (button), "clicked", BUTTON_CALLBACK (cancel_entry), (void *)dialog);
         //gtk_dialog_add_action_widget (dialog, GTK_WIDGET(button), GTK_RESPONSE_NO);
 

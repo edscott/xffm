@@ -140,7 +140,8 @@ public:
             g_signal_connect (G_OBJECT (tt_window), "map", G_CALLBACK (tooltip_map), NULL);
             g_signal_connect (G_OBJECT (tt_window), "unmap", G_CALLBACK (tooltip_unmap), NULL);
             gtk_window_set_type_hint (GTK_WINDOW (tt_window), GDK_WINDOW_TYPE_HINT_TOOLTIP);
-            gtk_widget_set_app_paintable (tt_window, TRUE);
+            // deprecated:
+            //gtk_widget_set_app_paintable (tt_window, TRUE);
             gtk_window_set_resizable (GTK_WINDOW (tt_window), FALSE);
             gtk_widget_set_name (tt_window, "gtk-tooltip");  
         } else {
@@ -195,7 +196,7 @@ public:
             } else {
                 tip_image = gtk_image_new_from_pixbuf ((GdkPixbuf *)pixbuf);
             }
-            gtk_box_pack_start(GTK_BOX(box),tip_image, FALSE, FALSE,0);
+            compat<bool>::boxPackStart(GTK_BOX(box),tip_image, FALSE, FALSE,0);
             gtk_widget_show(tip_image);
         }
         if (markup) {
@@ -205,7 +206,7 @@ public:
             gtk_label_set_markup(GTK_LABEL(label), small);
             g_free(small);
 
-            gtk_box_pack_start(GTK_BOX(box),label,TRUE,TRUE,0);
+            compat<bool>::boxPackStart(GTK_BOX(box),label,TRUE,TRUE,0);
             gtk_widget_show(label);
         }
                                                           

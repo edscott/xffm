@@ -121,21 +121,40 @@ private:
 
         auto vbox1 = gtk_c::vboxNew(FALSE, 0);
         auto vbox2 = gtk_c::vboxNew(FALSE, 0);
+        auto vbox3 = gtk_c::vboxNew(FALSE, 0);
 
+        ////////////   closeButton... /////////////////////////
         auto closeButton =  gtk_c::dialog_button(WINDOW_CLOSE, "");
         g_object_set_data(G_OBJECT(findDialog), "close_button", closeButton);
         g_object_set_data(G_OBJECT(closeButton), "findDialog", findDialog);
         g_signal_connect (G_OBJECT (closeButton), "clicked",
                 BUTTON_CALLBACK(Type::onCloseButton), (gpointer)findDialog);
         compat<bool>::boxPack0 (vbox2, GTK_WIDGET(closeButton), TRUE, TRUE, 0);
-        auto h = g_strconcat(_("Close find"), "\n...\n", NULL); 
+        auto h = g_strconcat(_("Close find"), "\n\n", NULL); 
         tooltip_c::custom_tooltip(GTK_WIDGET(closeButton), NULL, h);
         g_free(h);
+
+        ////////////   findButton... /////////////////////////
+        auto findButton =  gtk_c::dialog_button(SEARCH, "");
+        gtk_widget_set_can_default(GTK_WIDGET(findButton), TRUE);
+        g_signal_connect (G_OBJECT (findButton), "clicked",
+                BUTTON_CALLBACK(Type::onFindButton), (gpointer)findDialog);
+        compat<bool>::boxPack0 (vbox3, GTK_WIDGET(findButton), TRUE, TRUE, 0);
+        auto h2 = g_strconcat(_("Search Action"), "\n\n", NULL); 
+        tooltip_c::custom_tooltip(GTK_WIDGET(findButton), NULL, h2);
+        g_free(h2);
+
         ////////////   advanced options... /////////////////////////
         auto advancedDialog = advancedOptions();
         gtk_window_set_transient_for(GTK_WINDOW(advancedDialog), GTK_WINDOW(findDialog));
-        
-        auto advancedButton = gtk_c::toggle_button(NULL, _("Details"));
+       
+
+
+        auto advancedButton = gtk_c::toggle_button(DOCUMENT_PROPERTIES, NULL);
+//        auto advancedButton = gtk_c::toggle_button(NULL, _("Details"));
+        auto h3 = g_strconcat(_("Details"), "\n\n", NULL); 
+        tooltip_c::custom_tooltip(GTK_WIDGET(advancedButton), NULL, h3);
+        g_free(h3);
         g_object_set_data(G_OBJECT(findDialog), "advancedButton", advancedButton);
         g_object_set_data(G_OBJECT(findDialog), "advancedDialog", advancedDialog);
         compat<bool>::boxPack0 (vbox1, GTK_WIDGET(advancedButton), TRUE, TRUE, 5);
@@ -147,8 +166,9 @@ private:
         auto title = GTK_LABEL(gtk_label_new (t));
         gtk_label_set_use_markup (title, TRUE);
         g_free(t);
-        compat<bool>::boxPack0 (topPaneHbox_, GTK_WIDGET(title), TRUE, TRUE, 0);
         compat<bool>::boxPack0 (topPaneHbox_, GTK_WIDGET(vbox1), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (topPaneHbox_, GTK_WIDGET(title), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (topPaneHbox_, GTK_WIDGET(vbox3), FALSE, FALSE, 0);
         compat<bool>::boxPack0 (topPaneHbox_, GTK_WIDGET(vbox2), FALSE, FALSE, 0);
 
 
@@ -352,7 +372,7 @@ private:
             g_free(default_path);
         }
         auto button = gtk_c::dialog_button ("folder-symbolic", NULL);
-        auto h = g_strconcat(_("Display file selection dialog"), "\n","Shows directory selection dialog. Returns selected directory.","\n", NULL); 
+        auto h = g_strconcat(_("Display file selection dialog"), "\n\n", NULL); 
         tooltip_c::custom_tooltip(GTK_WIDGET(button), NULL, h);
         g_free(h);
         auto vbox = gtk_c::vboxNew (FALSE, 6);
@@ -508,10 +528,6 @@ private:
         g_signal_connect (G_OBJECT (clearButton), "clicked",
                 BUTTON_CALLBACK(Type::onClearButton), g_object_get_data(G_OBJECT(findDialog), "diagnostics"));
 
-        auto findButton =  gtk_c::dialog_button(SEARCH, "");
-        gtk_widget_set_can_default(GTK_WIDGET(findButton), TRUE);
-        g_signal_connect (G_OBJECT (findButton), "clicked",
-                BUTTON_CALLBACK(Type::onFindButton), (gpointer)findDialog);
 
 
         GtkButton *edit_button = NULL;
@@ -545,7 +561,6 @@ private:
             TRACE("getEditor() = \"%s\"\n", editor);
         }
 
-        compat<bool>::boxPack0 (hbuttonbox2, GTK_WIDGET(findButton), FALSE, FALSE, 0);
         compat<bool>::boxPack0 (hbuttonbox2, GTK_WIDGET(clearButton), FALSE, FALSE, 0);
         if (edit_button) compat<bool>::boxPack0 (hbuttonbox2, GTK_WIDGET(edit_button), FALSE, FALSE, 0);
         compat<bool>::boxPack0 (hbuttonbox2, GTK_WIDGET(cancelButton), FALSE, FALSE, 0);

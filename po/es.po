@@ -1,4 +1,4 @@
-# Xffm+ translation file: vie 12 jul 2024 14:19:18 CST
+# Xffm+ translation file: jue 18 jul 2024 12:35:11 CST
 # Merged from existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2024-07-12 14:18-0600\n"
+        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
         "PO-Revision-Date: 2011-10-18 15:26+0200\n"
         "Last-Translator: Santiago Vila Doncel <sanvila@unex.es>\n"
         "Language-Team: Spanish <es@li.org>\n"
@@ -16,7 +16,7 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Transfer-Encoding: 8-bit\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
 msgid   "Open terminal"
 msgstr  "Abrir terminal"
 
@@ -40,18 +40,16 @@ msgstr  "Quitar marcador"
 
 #: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
 #: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
 msgid   "Search"
 msgstr  "Buscar"
 
-#: ../xffm/gtk/gtk.hh:119 ../xffm/gtk/dialogs.hh:230
-#: ../xffm/fm/dialog/notebook/page/page.hh:71
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
 msgid   "Close"
 msgstr  "Cerrar"
 
 #: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
-#: ../xffm/fm/dialog/notebook/menupopover.hh:265 ../xffm/find/dialog.hh:267
-#: ../xffm/find/dialog.hh:607
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
 msgid   "Exit"
 msgstr  "Salir"
 
@@ -91,36 +89,40 @@ msgstr  "Abrir en solapa nueva"
 msgid   "New Tab"
 msgstr  "Solapa nueva"
 
-#: ../xffm/gtk/dialogs.hh:23
+#: ../xffm/gtk/dialogs.hh:29
 msgid   "Yes"
 msgstr  "Sí"
 
-#: ../xffm/gtk/dialogs.hh:35
-msgid   "Overwrite"
-msgstr  "Sobreescribir"
-
-#: ../xffm/gtk/dialogs.hh:73
+#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
 msgid   "Confirm"
 msgstr  "Confirmar"
 
-#: ../xffm/gtk/dialogs.hh:143 ../xffm/fm/view/fuse/ecryptfs.hh:175
-#: ../xffm/fm/view/pkg/popup.hh:265 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "Aplicar a todos"
+
+#: ../xffm/gtk/dialogs.hh:110
+msgid   "Overwrite"
+msgstr  "Sobreescribir"
+
+#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
 #: ../xffm/fm/dialog/notebook/createini.hh:232
 #: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
 #: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
-#: ../xffm/find/signals.hh:411 ../xffm/find/dialog.hh:589
+#: ../xffm/find/signals.hh:411
 msgid   "Cancel"
 msgstr  "Cancelar"
 
-#: ../xffm/gtk/dialogs.hh:159
+#: ../xffm/gtk/dialogs.hh:240
 msgid   "Help"
 msgstr  "Ayuda"
 
 #: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
 #: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
-#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:755
-#: ../xffm/find/dialog.hh:770
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
+#: ../xffm/find/dialog.hh:666
 msgid   "unknown"
 msgstr  "desconocido"
 
@@ -178,7 +180,7 @@ msgstr  "Archivo"
 msgid   "Command history"
 msgstr  "Historial de órdenes"
 
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:204
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
 msgid   "User"
 msgstr  "Usuario"
 
@@ -265,7 +267,7 @@ msgid   "private"
 msgstr  "privativa"
 
 #: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:408
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
 msgid   "Specify Output Directory..."
 msgstr  "Especificar directorio de salida..."
 
@@ -278,17 +280,17 @@ msgid   "This is the root of the filesystem"
 msgstr  "Esta es la raíz del sistema de archivos"
 
 #: ../xffm/fm/view/root/model.hh:161
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:271
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
 msgid   "Home Directory"
 msgstr  "Directorio personal"
 
 #: ../xffm/fm/view/root/model.hh:188
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
 msgid   "Trash bin"
 msgstr  "Papelera"
 
 #: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:288
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
 msgid   "Disk Image Mounter"
 msgstr  "Montador de imágenes de discos"
 
@@ -306,7 +308,7 @@ msgstr  "Nombre"
 
 #: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
 #: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
-#: ../xffm/find/dialog.hh:375
+#: ../xffm/find/dialog.hh:138
 msgid   "Details"
 msgstr  "Detalles"
 
@@ -378,10 +380,10 @@ msgstr  "Aceptar"
 msgid   "options:"
 msgstr  "opciones"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
 msgid   "Software Updater"
 msgstr  "Actualizador de software"
 
@@ -432,10 +434,6 @@ msgstr  "Selección múltiple"
 #: ../xffm/fm/view/local/rm.hh:92
 msgid   "Remove"
 msgstr  "Quitar"
-
-#: ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "Aplicar a todos"
 
 #: ../xffm/fm/view/local/rm.hh:183
 msgid   "Trash"
@@ -535,7 +533,7 @@ msgid   "Another file with the same name already exists in “%s”."
 msgstr  "Ya existe otro archivo con el mismo nombre en «%s»."
 
 #: ../xffm/fm/view/local/popup.hh:1103
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:434
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
 msgid   "Not a directory"
 msgstr  "No es un directorio"
 
@@ -680,8 +678,8 @@ msgid   "Maximum image size for thumbnailing"
 msgstr  "Tamaño máximo para miniaturizar una imagen"
 
 #: ../xffm/fm/dialog/notebook/page/base.hh:60
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:276
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:280
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
 msgid   "Reset image size"
 msgstr  "Restablecer el tamaño de la imagen"
 
@@ -760,25 +758,25 @@ msgid   "Previous"
 msgstr  "Anterior"
 
 #: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:401
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:403
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
 msgid   "Go to"
 msgstr  "Ir a"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
 msgid   "loading..."
 msgstr  "cargando…"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:164
-#: ../xffm/fm/dialog/notebook/page/page.hh:179
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
 msgid   "Confirm Replace"
 msgstr  "Confirmar el reemplazo"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
 msgid   "Destination File"
 msgstr  "Archivo destino"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:178
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
 #, c-format
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "El archivo de salida %s ya existe. ¿Desea sobrescribirlo?"
@@ -788,12 +786,12 @@ msgid   "Long press time"
 msgstr  "Tiempo de pulsación largo"
 
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
 msgid   "Remove Button Contents"
 msgstr  "Quitar el contenido de los botones"
 
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
 msgid   "Add custom content"
 msgstr  "Añadir contenido personalizado"
 
@@ -810,16 +808,16 @@ msgstr  "No se puede cargar el archivo %s. Razón: %s"
 msgid   "You need to restart the application"
 msgstr  "Debe reiniciar la aplicación"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
 #, fuzzy
 msgid   "FIXME New custom content"
 msgstr  "Añadir contenido personalizado"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
 msgid   "Open a New Window"
 msgstr  "Abrir una ventana nueva"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:264
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
 msgid   "Differences"
 msgstr  "Diferencias"
 
@@ -985,7 +983,7 @@ msgstr  "atención"
 msgid   "Enter password"
 msgstr  "Introduzca la contraseña"
 
-#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:218
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
 msgid   "Executable"
 msgstr  "Ejecutable"
 
@@ -1064,11 +1062,11 @@ msgstr  "enlazando"
 msgid   "rename"
 msgstr  "rename"
 
-#: ../xffm/common/gio.hh:407
+#: ../xffm/common/gio.hh:408
 msgid   "Overwrite?"
 msgstr  "¿Sobrescribir?"
 
-#: ../xffm/common/gio.hh:492
+#: ../xffm/common/gio.hh:498
 #, c-format
 msgid   "(%d of %d)"
 msgstr  "(%d de %d)"
@@ -1110,7 +1108,7 @@ msgid   "No Read Permission"
 msgstr  "Sin permiso de lectura"
 
 #: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
-#: ../xffm/find/dialog.hh:313
+#: ../xffm/find/dialog.hh:341
 msgid   "Path"
 msgstr  "Ruta"
 
@@ -1118,7 +1116,7 @@ msgstr  "Ruta"
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "Localice documentos y carpetas por nombre o contenido en este equipo"
 
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:346
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
 msgid   "Filter:"
 msgstr  "Filtro:"
 
@@ -1146,7 +1144,7 @@ msgstr  "Muestra la información de la versión"
 msgid   "Filter Details"
 msgstr  "Detalles del filtro"
 
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:185
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
 msgid   "Stay on single filesystem"
 msgstr  "Permanecer en este sistema de archivos"
 
@@ -1158,7 +1156,7 @@ msgstr  "Imprimir…"
 msgid   "The unique Process ID that identifies this process."
 msgstr  "El Id único del proceso que identifica este proceso."
 
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:182
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
 msgid   "Find hidden files and directories"
 msgstr  "Buscar archivos y directorios ocultos"
 
@@ -1171,7 +1169,7 @@ msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:179
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
 msgid   "Recursive"
 msgstr  "Recursiva"
 
@@ -1216,7 +1214,7 @@ msgstr  "Tipo predeterminado"
 msgid   "UNIX Socket"
 msgstr  "Socket UNIX"
 
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:226
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
 msgid   "Minutes"
 msgstr  "Minutos"
 
@@ -1227,11 +1225,11 @@ msgstr  "Minutos"
 msgid   "TIME"
 msgstr  "TIEMPO"
 
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:231
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
 msgid   "Hours"
 msgstr  "Horas"
 
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:236
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
 msgid   "Days"
 msgstr  "Días"
 
@@ -1297,11 +1295,11 @@ msgstr  "Ignorar capitalización"
 msgid   "Text Files"
 msgstr  "Archivos de texto"
 
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:557
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
 msgid   "No match"
 msgstr  "No hay ninguna coincidencia"
 
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:475
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
 msgid   "Line Count"
 msgstr  "Cuenta de líneas"
 
@@ -1322,8 +1320,8 @@ msgstr  "Uso : %s [OPTIONS]\n"
 msgid   "Regular"
 msgstr  "Habitual"
 
-#: ../xffm/find/signals.hh:70 ../xffm/find/signals.hh:501
-#: ../xffm/find/dialog.hh:188
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
+#: ../xffm/find/dialog.hh:245
 msgid   "Results"
 msgstr  "Resultados"
 
@@ -1355,104 +1353,109 @@ msgstr  "%s Terminado: %s"
 msgid   "Searching..."
 msgstr  "Buscando…"
 
-#: ../xffm/find/dialog.hh:95 ../xffm/find/dialog.hh:155
-#: ../xffm/find/dialog.hh:616
+#: ../xffm/find/dialog.hh:106
 msgid   "Find"
 msgstr  "Buscar"
 
-#: ../xffm/find/dialog.hh:188
+#: ../xffm/find/dialog.hh:131
+msgid   "Close find"
+msgstr  "Cerrar búsqueda"
+
+#: ../xffm/find/dialog.hh:146
+msgid   "Find Files"
+msgstr  "Buscar archivos"
+
+#: ../xffm/find/dialog.hh:209
+msgid   "Select advanced options"
+msgstr  "Seleccionar opciones avanzadas"
+
+#: ../xffm/find/dialog.hh:245
 msgid   "Upper limit"
 msgstr  "Límite superior"
 
-#: ../xffm/find/dialog.hh:193
+#: ../xffm/find/dialog.hh:250
 msgid   "At Least"
 msgstr  "Al menos"
 
-#: ../xffm/find/dialog.hh:193 ../xffm/find/dialog.hh:198
+#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
 msgid   "kBytes"
 msgstr  "kBytes"
 
-#: ../xffm/find/dialog.hh:198
+#: ../xffm/find/dialog.hh:255
 msgid   "At Most"
 msgstr  "Como máximo"
 
-#: ../xffm/find/dialog.hh:209
+#: ../xffm/find/dialog.hh:266
 msgid   "Group"
 msgstr  "Grupo"
 
-#: ../xffm/find/dialog.hh:213
+#: ../xffm/find/dialog.hh:270
 msgid   "Octal Permissions"
 msgstr  "Permisos octales"
 
-#: ../xffm/find/dialog.hh:218
+#: ../xffm/find/dialog.hh:275
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/dialog.hh:242
+#: ../xffm/find/dialog.hh:299
 msgid   "Months"
 msgstr  "Meses"
 
-#: ../xffm/find/dialog.hh:253
+#: ../xffm/find/dialog.hh:309
 msgid   "File type : "
 msgstr  "Tipo de archivo : "
 
-#: ../xffm/find/dialog.hh:389
-msgid   "Contains"
-msgstr  "Contiene"
+#: ../xffm/find/dialog.hh:355
+msgid   "Display file selection dialog"
+msgstr  "Mostrar el diálogo de selección de archivo"
 
-#: ../xffm/find/dialog.hh:409
+#: ../xffm/find/dialog.hh:414
 msgid   "Contains the text"
 msgstr  "Contiene el texto"
 
-#: ../xffm/find/dialog.hh:442
+#: ../xffm/find/dialog.hh:444
 msgid   "Case Sensitive"
 msgstr  "Sensible a capitalización"
 
-#: ../xffm/find/dialog.hh:454
+#: ../xffm/find/dialog.hh:445
 msgid   "Extended regexp"
 msgstr  "Expreg extendida"
 
-#: ../xffm/find/dialog.hh:465
+#: ../xffm/find/dialog.hh:446
 msgid   "Include binary files"
 msgstr  "Incluir archivos binarios"
 
-#: ../xffm/find/dialog.hh:501
-msgid   "Match"
-msgstr  "Coincidencia"
-
-#: ../xffm/find/dialog.hh:513
+#: ../xffm/find/dialog.hh:455
 msgid   "Anywhere"
 msgstr  "En cualquier sitio"
 
-#: ../xffm/find/dialog.hh:528
+#: ../xffm/find/dialog.hh:456
 msgid   "Whole words only"
 msgstr  "Solo palabras completas"
 
-#: ../xffm/find/dialog.hh:543
+#: ../xffm/find/dialog.hh:457
 msgid   "lines"
 msgstr  "líneas"
 
-#: ../xffm/find/dialog.hh:599
-msgid   "Clear"
-msgstr  "Limpiar"
-
-#: ../xffm/find/dialog.hh:641
-msgid   "Edit"
-msgstr  "Editar"
-
-#: ../xffm/find/dialog.hh:784
+#: ../xffm/find/dialog.hh:680
 msgid   "Modified"
 msgstr  "Modificado"
 
-#: ../xffm/find/dialog.hh:788
+#: ../xffm/find/dialog.hh:684
 msgid   "Created"
 msgstr  "Creado"
 
-#: ../xffm/find/dialog.hh:792
+#: ../xffm/find/dialog.hh:688
 msgid   "Accessed"
 msgstr  "Accedido"
 
-#: ../xffm/find/dialog.hh:1110
+#: ../xffm/find/dialog.hh:1006
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "Cerrar búsqueda"
+
+#: ../xffm/find/dialog.hh:1010
 msgid   "Basic rules:\n"
         "\n"
         "*  Will match any character zero or more times.\n"
@@ -1468,7 +1471,7 @@ msgstr  "Reglas básicas:\n"
         "^  Coincidirá al comienzo de la cadena\n"
         "$  Coincidirá al final de la cadena\n"
 
-#: ../xffm/find/dialog.hh:1119
+#: ../xffm/find/dialog.hh:1019
 #, fuzzy
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"

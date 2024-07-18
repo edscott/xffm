@@ -31,8 +31,8 @@ public:
          g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
 
         auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
-        gtk_box_pack_start (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
-        gtk_box_pack_start (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
         gtk_paned_pack1 (vpane_, GTK_WIDGET(vbox), FALSE, TRUE);
        
         //gtk_paned_pack1 (vpane_, GTK_WIDGET(topScrolledWindow_), FALSE, TRUE);

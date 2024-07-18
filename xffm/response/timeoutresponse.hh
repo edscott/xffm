@@ -47,15 +47,15 @@ public:
         if (pixbuf) {
             auto image = gtk_image_new_from_pixbuf(pixbuf);
             if (image) {
-                gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
+                compat<bool>::boxPackStart(vbox, image, FALSE, FALSE,0);
                 gtk_widget_show (image);
             }
         }
-         gtk_box_pack_start(vbox, GTK_WIDGET(label), FALSE, FALSE,0);
+         compat<bool>::boxPackStart(vbox, GTK_WIDGET(label), FALSE, FALSE,0);
          g_signal_connect (G_OBJECT (dialog), "delete-event", 
                  EVENT_CALLBACK (delete_event), NULL);
          auto button = Gtk<Type>::dialog_button("window-close", _("Dismiss"));
-         gtk_box_pack_start(vbox, GTK_WIDGET(button), FALSE, FALSE,0);
+         compat<bool>::boxPackStart(vbox, GTK_WIDGET(button), FALSE, FALSE,0);
          g_signal_connect (G_OBJECT (button), "button-press-event", 
                  EVENT_CALLBACK (dismiss_event), dialog);
 

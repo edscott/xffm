@@ -1,4 +1,4 @@
-# Xffm+ translation file: mié nov 20 12:40:31 CST 2019
+# Xffm+ translation file: jue 18 jul 2024 12:35:47 CST
 # Merged from existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
+        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
         "PO-Revision-Date: 2003-05-04 11:21--100\n"
         "Last-Translator: Samuel Jon Gunnarsson <sammi@techattack.nu>\n"
         "Language-Team: Icelandic <gnome@techattack.nu>\n"
@@ -15,684 +15,394 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
-#, fuzzy
-msgid   "No Read Permission"
-msgstr  "Bæta við aðgangsheimildum"
-
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "Leita"
-
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
-msgid   "Recursive"
-msgstr  "Undirmöppur"
-
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "Forskoða faldar skrár og möppur"
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Ritvarið skráarkerfi"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
-#: ../xffm/find/signals.hh:427
-msgid   "Results"
-msgstr  "Niðurstöður"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "Efri mörk:"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "Að minnsta kosti"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "kBæti"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "Í mesta lagi"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
-msgid   "User"
-msgstr  "Notandi"
-
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "Hópur"
-
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "Áttundakerfis heimildir"
-
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
-#, fuzzy
-msgid   "Executable"
-msgstr  "Keyrsluskrá:"
-
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "Mínútur"
-
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "Klukkustundir"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "Dagar"
-
-#: ../xffm/find/dialog.hh:230
-msgid   "Months"
-msgstr  "Mánuðir"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "Skráategund:"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
-#: ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "Loka"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Nánar"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:94
-msgid   "Path"
-msgstr  "Slóð"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "Sía:"
-
-#: ../xffm/find/dialog.hh:377
-msgid   "Contains"
-msgstr  "Inniheldur"
-
-#: ../xffm/find/dialog.hh:397
-#, fuzzy
-msgid   "Contains the text"
-msgstr  "Sem inniheldur texta:"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "Há/Lá-stafir skipta máli"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "Auka hliðarslá"
-
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  "Leita í tvíundarskrám"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-#, fuzzy
-msgid   "Line Count"
-msgstr  "Skráafjöldi"
-
-#: ../xffm/find/dialog.hh:489
-msgid   "Match"
-msgstr  "Passar við"
-
-#: ../xffm/find/dialog.hh:501
-#, fuzzy
-msgid   "Anywhere"
-msgstr  "Allsstaðar"
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "Aðeins stök orð"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "línur"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-msgid   "No match"
-msgstr  "Ekkert fannst"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
-#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
-#: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369
-#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
-msgid   "Cancel"
-msgstr  "Hætta við"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "Hreinsa"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "Breyta"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "óþekkt"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "Breytt"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "Búið til"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "Síðast notað:"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
-#: ../xffm/completion/base.hh:339
-msgid   "Options:"
-msgstr  "Valkostir:"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "Staðsetja skrár og möppur á þessari tölvu eftir nafni eða innihaldi"
-
-#: ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Search for files"
-msgstr  "Leita að skrám..."
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Innihald:"
-
-#: ../xffm/find/fgr.hh:128
-#, fuzzy
-msgid   "File's contents filtered as plain text."
-msgstr  "Vista miða sem texta"
-
-#: ../xffm/find/fgr.hh:131
-msgid   "Verbose output debugging mode."
-msgstr  "Aflúsunarhamur með ítarlegum skýringum í úttaki."
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "Sýna upplýsingar um útgáfu"
-
-#: ../xffm/find/fgr.hh:135
-msgid   "Filter Details"
-msgstr  "Nánar um síu"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Prenta..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Sía"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "KBæti"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "er stærra eða jafnt og"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "er minna eða jafnt og"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "Setja UID"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Executable Text Files"
-msgstr  "Keyranlegar textaskrár"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "Skráarréttindi fyrir valda skrá, í áttundakerfiskóða."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Tegund"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Hvað sem er"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "Sjálfgefin sía"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "Jafnt hnitanet"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
-msgid   "Directory"
-msgstr  "Mappa"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "Tákntengi"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "Sökkull"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-msgid   "Block device"
-msgstr  "Blokkartæki"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-msgid   "Character device"
-msgstr  "Tákneining"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "TIME"
-msgstr  "ISTIME(x)"
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Fyrri"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Mánuður"
-
-#: ../xffm/find/fgr.hh:177
-#, fuzzy
-msgid   "Month(s)"
-msgstr  "mánuði(r)"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "Breytingar"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "Síðast notað:"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "Búið til klukkan"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-msgid   "uid"
-msgstr  "uid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Notandi:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "gdb"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Hópur:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "Innihaldssýn"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:750
-msgid   "Regular expression"
-msgstr  "Regluleg segð"
-
-#: ../xffm/find/fgr.hh:204
-#, fuzzy
-msgid   "Extended"
-msgstr  "útvíkkað"
-
-#: ../xffm/find/fgr.hh:206
-#, fuzzy
-msgid   "Ignore case"
-msgstr  "Hunsa myndir"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Textaskrár"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Orð"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Línur"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Notkun: %s %s\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "Venjuleg"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-msgid   "Socket"
-msgstr  "Sökkull"
-
-#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "Engin villuleiðrétting"
-
-#: ../xffm/find/signals.hh:427
-msgid   "Upper limit:"
-msgstr  "Efri mörk:"
-
-#: ../xffm/find/signals.hh:429
-msgid   "Counting files..."
-msgstr  "Tel skrár ..."
-
-#: ../xffm/find/signals.hh:444
-#, fuzzy, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "%d passaði"
-msgstr[1]       "%d pössuðu"
-
-#: ../xffm/find/signals.hh:446
-#, fuzzy, c-format
-msgid   "%s Finished : %s"
-msgstr  "%s [lokið]"
-
-#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
-msgid   "Searching..."
-msgstr  "Leita..."
-
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "tóm skrá"
-
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "Gat ekki lesið úr %s."
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "Ný skrá"
-
-#: ../xffm/common/gio.hh:91
-msgid   "Copying files"
-msgstr  "Afrita skrár"
-
-#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-#, fuzzy
-msgid   "Moving files"
-msgstr  "Færi skrár"
-
-#: ../xffm/common/gio.hh:95
-#, fuzzy
-msgid   "linking"
-msgstr  "kóngur"
-
-#: ../xffm/common/gio.hh:97
-#, fuzzy
-msgid   "rename"
-msgstr  "Endurnefna"
-
-#: ../xffm/common/gio.hh:449
-#, fuzzy, c-format
-msgid   "(%d of %d)"
-msgstr  " (%s af %s)"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Opna með %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Textaritill"
-
-#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
-msgid   "Execute Shell Command"
-msgstr  "Keyra skeljarskipun"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
-#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
-msgid   "Run in Terminal"
-msgstr  "Keyra í skel"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-#, fuzzy
-msgid   "Copying files locally"
-msgstr  "Afrita skrár"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "Búa til tákntengi (symlink)"
-
-#: ../xffm/common/dnd.hh:63
-msgid   "more"
-msgstr  "fleiri"
-
-#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
-msgid   "error"
-msgstr  "villa"
-
-#: ../xffm/common/run.hh:342
-#, fuzzy
-msgid   "warning"
-msgstr  "1 aðvörun"
-
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
-#: ../xffm/response/passwdresponse.hh:34
-#, fuzzy
-msgid   "Enter password"
-msgstr  "Sláðu inn lykilorð"
-
-#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "Opna skjáhermi"
 
-#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+msgid   "Execute Shell Command"
+msgstr  "Keyra skeljarskipun"
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
 msgid   "Paste"
 msgstr  "Líma"
 
-#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
-#: ../xffm/fm/view/root/popup.hh:224
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
 msgid   "Add bookmark"
 msgstr  "Setja bókamerki"
 
-#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:170
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
 #, fuzzy
 msgid   "Remove bookmark"
 msgstr  "Fjarlægja bókamerki"
 
-#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
 #: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
 msgid   "Search"
 msgstr  "Leita"
 
-#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+msgid   "Close"
+msgstr  "Loka"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
 msgid   "Exit"
 msgstr  "Hætta"
 
-#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
-#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
-#: ../xffm/fm/view/local/popup.hh:1356
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
 msgid   "Open with"
 msgstr  "Opna með"
 
-#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
 msgid   "Cut"
 msgstr  "Klippa"
 
-#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
 msgid   "Copy"
 msgstr  "Afrita"
 
-#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
 msgid   "Delete"
 msgstr  "Eyða"
 
-#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
 msgid   "Shred"
 msgstr  ""
 
-#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
-#: ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
 msgid   "Open in New Tab"
 msgstr  "Opna í nýjum flipa"
 
-#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
 msgid   "New Tab"
 msgstr  "Nýr Flipi"
 
-#: ../xffm/gtk/dialogs.hh:42
+#: ../xffm/gtk/dialogs.hh:29
+msgid   "Yes"
+msgstr  "Já"
+
+#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+msgid   "Confirm"
+msgstr  "Staðfesta"
+
+#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Nota á allt"
+
+#: ../xffm/gtk/dialogs.hh:110
+msgid   "Overwrite"
+msgstr  "Yfirskrifa"
+
+#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:411
+msgid   "Cancel"
+msgstr  "Hætta við"
+
+#: ../xffm/gtk/dialogs.hh:240
 msgid   "Help"
 msgstr  "Hjálp"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
+#: ../xffm/find/dialog.hh:666
+msgid   "unknown"
+msgstr  "óþekkt"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+msgid   "Block device"
+msgstr  "Blokkartæki"
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+msgid   "Character device"
+msgstr  "Tákneining"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+msgid   "Directory"
+msgstr  "Mappa"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+msgid   "Symbolic Link"
+msgstr  "Tákntengi"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+#, fuzzy
+msgid   "Regular file"
+msgstr  "Jafnt hnitanet"
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+msgid   "Socket"
+msgstr  "Sökkull"
+
+#: ../xffm/gtk/preview.hh:587
+#, fuzzy
+msgid   "Empty file"
+msgstr  "tóm skrá"
+
+#: ../xffm/gtk/preview.hh:658
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "Gat ekki lesið úr %s."
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Skipun"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Skrá"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "sögu yfir keyrðar skipanir"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+msgid   "User"
+msgstr  "Notandi"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Breyta"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Vél"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "Ekkert fannst"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Matches"
+msgstr  "Plástrar"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "Of margar opnar skrár"
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+msgid   "Options:"
+msgstr  "Valkostir:"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Safnmappa:"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "Skipun"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  "skrá"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "Valkostir >>"
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Hleð %s..."
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "Augnablik..."
+
+#: ../xffm/fm/view/root/popup.hh:167
+#, fuzzy
+msgid   "Ecryptfs (EFS)"
+msgstr  "Dulrita skrá"
+
+#: ../xffm/fm/view/root/popup.hh:169
+#, fuzzy
+msgid   "Clear cache"
+msgstr  "Tæma skyndiminni"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+msgid   "Mount the volume associated with this folder"
+msgstr  "Tengja diskinn sem tengist þessari möppu"
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Aftengja diskinn sem tengist þessari möppu"
+
+#: ../xffm/fm/view/root/popup.hh:204
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Tæma ruslið"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Dulrita skrá"
+
+#: ../xffm/fm/view/root/popup.hh:270
+#, fuzzy
+msgid   "private"
+msgstr  "Lokað (private)"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+msgid   "Specify Output Directory..."
+msgstr  "Skilgreindu úttaksmöppu..."
+
+#: ../xffm/fm/view/root/model.hh:133
+msgid   "Root Directory"
+msgstr  "Grunnmappa"
+
+#: ../xffm/fm/view/root/model.hh:149
+msgid   "This is the root of the filesystem"
+msgstr  "Þetta er rót skráakerfisins"
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+msgid   "Home Directory"
+msgstr  "Heimasvæði"
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Eyða skrá"
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "Disktengir"
+
+#: ../xffm/fm/view/root/model.hh:238
+msgid   "Mount local disks and devices"
+msgstr  "Tengja staðværa diska og önnur tæki við skrárkeri"
+
+#: ../xffm/fm/view/root/model.hh:278
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "Staðsetning bókamerkis"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Nafn"
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:138
+msgid   "Details"
+msgstr  "Nánar"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "Stærð"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  "Dagsetning"
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+msgid   "Mimetype"
+msgstr  "Mime-tög"
+
+#: ../xffm/fm/view/base/signals.hh:918
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Lykilorð vantar"
+
+#: ../xffm/fm/view/base/signals.hh:925
+msgid   "Directory does not exist."
+msgstr  "Mappan er ekki til."
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "Skrá: %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Tengja"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Vista"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Valkostir"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Ítarlegt"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Tengi"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Sláðu inn lykilorð fyrir %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+#, fuzzy
+msgid   "Package Manager"
+msgstr  "Muon pakkastjórinn"
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  "Samþykkja"
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "Valkostir:"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "Biðminni í hugbúnaði:"
@@ -721,74 +431,15 @@ msgstr  "Engar niðurstöður fundust."
 msgid   "Currently busy\n"
 msgstr  "Núverandi lagalisti"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "Uppfæra gagnagrunn"
-
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "Sækja"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
 #, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Sett inn"
+msgid   "Invalid entry"
+msgstr  "Ógildur lykill."
 
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Setja upp"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "Taka út"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "Henda út"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Upplýsingar"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Útgáfa"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-#, fuzzy
-msgid   "Go up"
-msgstr  "fara upp"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "Leita aftur á bak."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "Hleð %s..."
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
-#, fuzzy
-msgid   "Please Wait..."
-msgstr  "Augnablik..."
-
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "Lestur frétta"
-
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "Skrá: %s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "%d af %d skrá "
+msgid   "The volume '%s' is not mounted."
+msgstr  "Stíllinn '%s' fannst ekki"
 
 #: ../xffm/fm/view/local/rm.hh:59
 #, c-format
@@ -799,7 +450,8 @@ msgstr  "Eyða %s"
 msgid   "Warning: "
 msgstr  "Viðvörun:"
 
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "Klippa valið"
@@ -808,451 +460,425 @@ msgstr  "Klippa valið"
 msgid   "Remove"
 msgstr  "Fjarlægja:"
 
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "Nota á allt"
-
 #: ../xffm/fm/view/local/rm.hh:183
 msgid   "Trash"
 msgstr  "Rusl"
 
-#: ../xffm/fm/view/local/popup.hh:94
+#: ../xffm/fm/view/local/popup.hh:93
 msgid   "New"
 msgstr  "Ný"
 
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
 #, fuzzy
 msgid   "Paste into"
 msgstr  "Límklippusafn (pastebin)"
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "Það er ekkert í úrklippusafni til að líma."
 
-#: ../xffm/fm/view/local/popup.hh:106
+#: ../xffm/fm/view/local/popup.hh:105
 msgid   "Select All"
 msgstr  "Velja allt"
 
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
 msgid   "Match regular expression"
 msgstr  "Samsvara reglulegri segð"
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
 #, fuzzy
 msgid   "Run Executable..."
 msgstr  "Keyrsluskrá:"
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
 msgid   "Extract files from the archive"
 msgstr  "Afþjappa skrám úr skjalasafni"
 
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
 #, fuzzy
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "Hefja spjall við valinn tengilið."
 
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
-#: ../xffm/fm/view/fstab/popup.hh:37
-msgid   "Mount the volume associated with this folder"
-msgstr  "Tengja diskinn sem tengist þessari möppu"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
-#: ../xffm/fm/view/fstab/popup.hh:38
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Aftengja diskinn sem tengist þessari möppu"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
 msgid   "Rename"
 msgstr  "Endurnefna"
 
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
 msgid   "Duplicate"
 msgstr  "Tvöfalda"
 
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:63
 msgid   "Link"
 msgstr  "Tengill"
 
-#: ../xffm/fm/view/local/popup.hh:164
+#: ../xffm/fm/view/local/popup.hh:163
 msgid   "Properties"
 msgstr  "Stillingar"
 
-#: ../xffm/fm/view/local/popup.hh:554
+#: ../xffm/fm/view/local/popup.hh:566
 msgid   "Files:"
 msgstr  "Skjöl:"
 
-#: ../xffm/fm/view/local/popup.hh:744
+#: ../xffm/fm/view/local/popup.hh:715
 #, fuzzy
 msgid   "Select items"
 msgstr  "Velja hlut"
 
-#: ../xffm/fm/view/local/popup.hh:761
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "Regluleg segð"
+
+#: ../xffm/fm/view/local/popup.hh:732
 #, fuzzy
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "Ritill fyrir reglulegar segðir"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 msgid   "No selection"
 msgstr  "Ekkert valið"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 #, fuzzy
 msgid   "No matches."
 msgstr  "Engar samsvaranir"
 
-#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
 #, fuzzy
 msgid   "Create new..."
 msgstr  "Hér verði"
 
-#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
-#: ../xffm/fm/view/local/popup.hh:1159
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
 #, fuzzy
 msgid   "New Name:"
 msgstr  "Nýtt nafn: "
 
-#: ../xffm/fm/view/local/popup.hh:998
+#: ../xffm/fm/view/local/popup.hh:980
 msgid   "No name"
 msgstr  "Ónefnt"
 
-#: ../xffm/fm/view/local/popup.hh:1011
+#: ../xffm/fm/view/local/popup.hh:993
 #, fuzzy, c-format
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "Skjal með sama nafni (%s) er til í möppunni %s."
 
-#: ../xffm/fm/view/local/popup.hh:1036
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "Viðföng fyrir skipun"
-
-#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
-msgid   "Specify Output Directory..."
-msgstr  "Skilgreindu úttaksmöppu..."
-
-#: ../xffm/fm/view/local/popup.hh:1148
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
 msgid   "Not a directory"
 msgstr  "Er ekki mappa"
 
-#: ../xffm/fm/view/local/popup.hh:1307
-#, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "Þú hefur tilgreint möppu."
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+msgid   "error"
+msgstr  "villa"
 
-#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "Ógildur lykill."
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  ""
 
-#: ../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "Previews"
+msgstr  "Forsýningar"
+
+#: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Stíllinn '%s' fannst ekki"
+msgid   "Reading \"%s\""
+msgstr  "Lestur frétta"
 
-#: ../xffm/fm/view/local/properties.hh:241
+#: ../xffm/fm/view/local/model.hh:722
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "%d af %d skrá "
+
+#: ../xffm/fm/view/local/properties.hh:239
 #, fuzzy
 msgid   "Properties and Attributes"
 msgstr  "Staðlaðir eiginleikar"
 
-#: ../xffm/fm/view/local/properties.hh:270
+#: ../xffm/fm/view/local/properties.hh:267
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "Einfaldur hamur"
 
-#: ../xffm/fm/view/local/properties.hh:296
+#: ../xffm/fm/view/local/properties.hh:293
 msgid   "File:"
 msgstr  "Skrá:"
 
-#: ../xffm/fm/view/local/properties.hh:308
+#: ../xffm/fm/view/local/properties.hh:305
 msgid   "Apply changes"
 msgstr  "Virkja stillingar"
 
-#: ../xffm/fm/view/local/properties.hh:469
+#: ../xffm/fm/view/local/properties.hh:473
 msgid   "Encoding"
 msgstr  "Kóðun"
 
-#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
-msgid   "Mimetype"
-msgstr  "Mime-tög"
-
-#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "Stærð"
-
-#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "Dagsetning"
-
-#: ../xffm/fm/view/local/properties.hh:492
+#: ../xffm/fm/view/local/properties.hh:496
 msgid   "Successfully moved to trash."
 msgstr  "Flutningur í ruslið tókst."
 
-#: ../xffm/fm/view/local/properties.hh:493
+#: ../xffm/fm/view/local/properties.hh:497
 msgid   "Source:"
 msgstr  "Uppruni:"
 
-#: ../xffm/fm/view/root/model.hh:124
-msgid   "Root Directory"
-msgstr  "Grunnmappa"
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "Notað"
 
-#: ../xffm/fm/view/root/model.hh:140
-msgid   "This is the root of the filesystem"
-msgstr  "Þetta er rót skráakerfisins"
+#: ../xffm/fm/view/fstab/view.hh:175
+msgid   "Available"
+msgstr  "Tiltækt"
 
-#: ../xffm/fm/view/root/model.hh:152
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
-msgid   "Home Directory"
-msgstr  "Heimasvæði"
+#: ../xffm/fm/view/fstab/view.hh:176
+msgid   "Usage"
+msgstr  "Notkun"
 
-#: ../xffm/fm/view/root/model.hh:179
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "Eyða skrá"
-
-#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "Disktengir"
-
-#: ../xffm/fm/view/root/model.hh:227
-msgid   "Mount local disks and devices"
-msgstr  "Tengja staðværa diska og önnur tæki við skrárkeri"
-
-#: ../xffm/fm/view/root/model.hh:267
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "Staðsetning bókamerkis"
-
-#: ../xffm/fm/view/root/popup.hh:175
-#, fuzzy
-msgid   "Empty trash"
-msgstr  "Tæma ruslið"
-
-#: ../xffm/fm/view/root/popup.hh:228
-#, fuzzy
-msgid   "Ecrypt Volume"
-msgstr  "Dulrita skrá"
-
-#: ../xffm/fm/view/root/popup.hh:229
-#, fuzzy
-msgid   "private"
-msgstr  "Lokað (private)"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
-#: ../xffm/fm/view/fuse/ecryptfs.hh:185
-msgid   "Mount"
-msgstr  "Tengja"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:179
-#: ../xffm/fm/dialog/notebook/createini.hh:87
-#: ../xffm/fm/dialog/notebook/createini.hh:371
-msgid   "Save"
-msgstr  "Vista"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:182
-msgid   "Load"
-msgstr  "Álag"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-msgid   "Options"
-msgstr  "Valkostir"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
-msgid   "Advanced"
-msgstr  "Ítarlegt"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "Tengi"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:745
-#, fuzzy, c-format
-msgid   "Enter Passphrase for %s"
-msgstr  "Sláðu inn lykilorð fyrir %s"
-
-#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
-#, fuzzy
-msgid   "NFS Network Volume"
-msgstr  "Geymslumiðill"
-
-#: ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Samræmingarhamur"
-
-#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "Minnka hljóðstyrk"
-
-#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
-#, fuzzy
-msgid   "CIFS Volume"
-msgstr  "Hljóðstyrkur"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-msgid   "Mount Device"
-msgstr  "Tengja tæki"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
-msgid   "Mount point:"
-msgstr  "Tengipunktur:"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Tengipunktur:"
-
-#: ../xffm/fm/view/fstab/view.hh:592
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Tengja tæki"
-
-#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
-#, fuzzy
-msgid   "Disks"
-msgstr  "Diskur"
-
-#: ../xffm/fm/view/fstab/view.hh:922
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
 #, fuzzy
 msgid   "No Label"
 msgstr  "Sýna skýringu"
 
-#: ../xffm/fm/view/fstab/view.hh:923
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
 msgid   "There is no file system available (unformatted)"
 msgstr  "Það er ekkert skráakerfi tiltækt (óforsniðið)"
 
-#: ../xffm/fm/view/fstab/view.hh:924
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+msgid   "Mount point:"
+msgstr  "Tengipunktur:"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
 msgid   "Not mounted"
 msgstr  "Ekki tengd"
 
-#: ../xffm/fm/view/fstab/view.hh:1059
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+#, fuzzy
+msgid   "Disks"
+msgstr  "Diskur"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+#, fuzzy
+msgid   "NFS Network Volume"
+msgstr  "Geymslumiðill"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
 msgid   "SFTP (via SSH)"
 msgstr  ""
 
-#: ../xffm/fm/view/fstab/view.hh:1414
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Minnka hljóðstyrk"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Hljóðstyrkur"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
 #, c-format
 msgid   "Unmounting %s"
 msgstr  "Aftengi %s"
 
-#: ../xffm/fm/view/base/signals.hh:845
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
 #, fuzzy
-msgid   "Trash is empty"
-msgstr  "Lykilorð vantar"
+msgid   "Mount point: "
+msgstr  "Tengipunktur:"
 
-#: ../xffm/fm/view/base/signals.hh:847
-msgid   "Directory does not exist."
-msgstr  "Mappan er ekki til."
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Tengja tæki"
 
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Nafn"
+#: ../xffm/fm/view/fstab/popup.hh:21
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Samræmingarhamur"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/fstab/popup.hh:132
+msgid   "Mount Device"
+msgstr  "Tengja tæki"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Afrita skrár"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
+#: ../xffm/common/gio.hh:93
+#, fuzzy
+msgid   "Moving files"
+msgstr  "Færi skrár"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+msgid   "No Image Preview"
+msgstr  "Engin forsýning á mynd"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+msgid   "Maximum image size for thumbnailing"
+msgstr  "Hámarksstærð mynda fyrir smámyndasýn"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+#, fuzzy
+msgid   "Reset image size"
+msgstr  "Lagfæra stærð mynda"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
 #, fuzzy
 msgid   "Embedded Terminal"
 msgstr  "Innbyggðar smámyndir"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
 #, fuzzy
 msgid   "All items in the iconview."
 msgstr  "Velja alla hluti inn í þessum glugga"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
 msgid   "Scripting"
 msgstr  "Skriftun"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
 msgid   "Clear Log"
 msgstr  "Hreinsa annál"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
 #, fuzzy
 msgid   "Terminal font"
 msgstr  "Stjórnborðsletur:"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Renice Process"
 msgstr  "Forgangsbreyting ferlis"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Suspend"
 msgstr  "Hvíla"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Continue"
 msgstr  "Halda áfram"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Interrupt"
 msgstr  "Ígrip"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Hangup"
 msgstr  "Leggja á"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "User 1 (USR1)"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "User 2 (USR2)"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 #, fuzzy
 msgid   "Terminate Task"
 msgstr  "Enda %s"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "Abort"
 msgstr  "Hætta við"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
 #, fuzzy
 msgid   "Kill"
 msgstr  "X Kill"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
 #, fuzzy
 msgid   "Segmentation fault"
 msgstr  "Kynningarefni"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
 msgid   "PID"
 msgstr  "PID"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Fyrri"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
 msgid   "Go to"
 msgstr  "Fara til"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
 msgid   "loading..."
 msgstr  "Hleð..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:152
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "Staðfestu eyðingu"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:154
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
 #, fuzzy
 msgid   "Destination File"
 msgstr  "Áfangastaður"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
 #, fuzzy, c-format
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "Skráin %s er þegar til. Viltu skrifa yfir hana?"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Langhlið"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Fjarlægja tíurnar"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Sem sérvalin litur"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Veldu skrá til að spila"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Gat ekki opnað skrá : %s : %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Flýtiræsing forrita"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "Virkja sértækar leturgerðir"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Opna í nýjum glugga"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Differences"
+msgstr  "Mismunur"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
@@ -1328,10 +954,6 @@ msgstr  "Valkostir"
 msgid   "text"
 msgstr  "texti"
 
-#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "skrá"
-
 #: ../xffm/fm/dialog/notebook/createini.hh:436
 #, fuzzy
 msgid   "folder"
@@ -1345,105 +967,211 @@ msgstr  "á"
 msgid   "off"
 msgstr  "af"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Fjarlægja tíurnar"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Sem sérvalin litur"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Veldu skrá til að spila"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Gat ekki opnað skrá : %s : %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "Flýtiræsing forrita"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
-#, fuzzy
-msgid   "FIXME New custom content"
-msgstr  "Virkja sértækar leturgerðir"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Opna í nýjum glugga"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
-#, fuzzy
-msgid   "Differences"
-msgstr  "Mismunur"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
 #, fuzzy
 msgid   "Open menu"
 msgstr  "Opnar valmynd"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+msgid   "Background Color"
+msgstr  "Bakgrunnslitur"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+msgid   "Foreground Color"
+msgstr  "Forgrunnslitur"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "Textalitur fyrirsagna"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+#, fuzzy
+msgid   "Error Text Color"
+msgstr  "Texta Litur"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+msgid   "Color settings"
+msgstr  "Stillingar lita"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "Sort by"
+msgstr  "Raða eftir"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "File extension"
+msgstr  "Skráarending"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
 #, fuzzy
 msgid   "View as list"
 msgstr  "Skoða sem prufu"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
 msgid   "Show hidden files"
 msgstr  "Sýna faldar skrár"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
 #, fuzzy
 msgid   "Show Backup Files"
 msgstr  "öryggisafrit"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
 #, fuzzy
 msgid   "Sort data in descending order"
 msgstr  "flokka z-a"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
 msgid   "Sort by date"
 msgstr  "Raða eftir dagsetningu"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
 #, fuzzy
 msgid   "Sort by size"
 msgstr  "Raða eftir stærð"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
 msgid   "Main menu"
 msgstr  "Aðalvalmynd"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid   "Long press time"
-msgstr  "Langhlið"
-
-#: ../xffm/fm/dialog/dialog.hh:122
+#: ../xffm/fm/dialog/dialog.hh:121
 #, fuzzy
 msgid   "Removed"
 msgstr  "Fjarlægja:"
 
-#: ../xffm/fm/dialog/dialog.hh:143
+#: ../xffm/common/run.hh:339
 #, fuzzy
-msgid   "Detected device(s):"
-msgstr  "Fundin tæki"
+msgid   "warning"
+msgstr  "1 aðvörun"
 
-#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+#, fuzzy
+msgid   "Enter password"
+msgstr  "Sláðu inn lykilorð"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#, fuzzy
+msgid   "Executable"
+msgstr  "Keyrsluskrá:"
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+msgid   "Run in Terminal"
+msgstr  "Keyra í skel"
+
+#: ../xffm/common/run.hh:652
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Viðföng fyrir skipun"
+
+#: ../xffm/common/run.hh:874
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Þú hefur tilgreint möppu."
+
+#: ../xffm/common/settings.hh:178
+#, fuzzy
+msgid   "New File:"
+msgstr  "Ný skrá"
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, c-format
+msgid   "Open with %s"
+msgstr  "Opna með %s"
+
+#: ../xffm/common/util.hh:1513
+msgid   "Text Editor"
+msgstr  "Textaritill"
+
+#: ../xffm/common/util.hh:1554
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Target"
+msgstr  "Útkoma"
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Files"
+msgstr  "Skrár"
+
+#: ../xffm/common/dnd.hh:49
+#, fuzzy
+msgid   "More…"
+msgstr  "Meira"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "Move"
+msgstr  "Leikur"
+
+#: ../xffm/common/dnd.hh:143
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Búa til tákntengi (symlink)"
+
+#: ../xffm/common/dnd.hh:155
+msgid   "more"
+msgstr  "fleiri"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "Afrita skrár"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "kóngur"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "Endurnefna"
+
+#: ../xffm/common/gio.hh:408
+#, fuzzy
+msgid   "Overwrite?"
+msgstr  "Yfirskrifa"
+
+#: ../xffm/common/gio.hh:498
+#, fuzzy, c-format
+msgid   "(%d of %d)"
+msgstr  " (%s af %s)"
+
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
+msgstr  "Keyra skipun"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Frumskra"
+
+#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+msgid   "Ok"
+msgstr  "Ok"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
 msgid   "Running"
 msgstr  "Keyrir"
 
-#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
+#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
 #, fuzzy
 msgid   "Waiting for operation to finish..."
 msgstr  "Bíð þess að dvips ljúki vinnslu..."
@@ -1458,70 +1186,430 @@ msgstr  "Notendaupplýsingar"
 msgid   "Response Requested"
 msgstr  "Ef beðið er um"
 
-#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
-msgid   "Ok"
-msgstr  "Ok"
-
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 #, fuzzy
-msgid   "Execute command"
-msgstr  "Keyra skipun"
+msgid   "No Read Permission"
+msgstr  "Bæta við aðgangsheimildum"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Frumskra"
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:341
+msgid   "Path"
+msgstr  "Slóð"
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Staðsetja skrár og möppur á þessari tölvu eftir nafni eða innihaldi"
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+msgid   "Filter:"
+msgstr  "Sía:"
+
+#: ../xffm/find/fgr.hh:126
+#, fuzzy
+msgid   "Search for files"
+msgstr  "Leita að skrám..."
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Innihald:"
+
+#: ../xffm/find/fgr.hh:128
+#, fuzzy
+msgid   "File's contents filtered as plain text."
+msgstr  "Vista miða sem texta"
+
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "Aflúsunarhamur með ítarlegum skýringum í úttaki."
+
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Sýna upplýsingar um útgáfu"
+
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "Nánar um síu"
+
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "Ritvarið skráarkerfi"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Prenta..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
 msgstr  ""
 
-#: ../xffm/completion/bash.hh:133
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
 #, fuzzy
-msgid   "Completion mode:"
-msgstr  "Safnmappa:"
+msgid   "Find hidden files and directories"
+msgstr  "Forskoða faldar skrár og möppur"
 
-#: ../xffm/completion/bash.hh:134
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Sía"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+msgid   "Recursive"
+msgstr  "Undirmöppur"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "KBæti"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "er stærra eða jafnt og"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "er minna eða jafnt og"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Setja UID"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Keyranlegar textaskrár"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Skráarréttindi fyrir valda skrá, í áttundakerfiskóða."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Tegund"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Hvað sem er"
+
+#: ../xffm/find/fgr.hh:157
 #, fuzzy
-msgid   "command"
-msgstr  "Skipun"
+msgid   "Default type"
+msgstr  "Sjálfgefin sía"
 
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "Valkostir >>"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Skipun"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Skrá"
-
-#: ../xffm/completion/base.hh:34
+#: ../xffm/find/fgr.hh:161
 #, fuzzy
-msgid   "Command history"
-msgstr  "sögu yfir keyrðar skipanir"
+msgid   "UNIX Socket"
+msgstr  "Sökkull"
 
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Breyta"
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+msgid   "Minutes"
+msgstr  "Mínútur"
 
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Vél"
-
-#: ../xffm/completion/base.hh:55
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
 #, fuzzy
-msgid   "Found no match"
+msgid   "TIME"
+msgstr  "ISTIME(x)"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+msgid   "Hours"
+msgstr  "Klukkustundir"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+msgid   "Days"
+msgstr  "Dagar"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Mánuður"
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "mánuði(r)"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Breytingar"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "Síðast notað:"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "Búið til klukkan"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "uid"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Notandi:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "gdb"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Hópur:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Innihaldssýn"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Extended"
+msgstr  "útvíkkað"
+
+#: ../xffm/find/fgr.hh:206
+#, fuzzy
+msgid   "Ignore case"
+msgstr  "Hunsa myndir"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Textaskrár"
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+msgid   "No match"
 msgstr  "Ekkert fannst"
 
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
 #, fuzzy
-msgid   "Matches"
-msgstr  "Plástrar"
+msgid   "Line Count"
+msgstr  "Skráafjöldi"
 
-#: ../xffm/completion/base.hh:142
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Orð"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Línur"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Notkun: %s %s\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Venjuleg"
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
+#: ../xffm/find/dialog.hh:245
+msgid   "Results"
+msgstr  "Niðurstöður"
+
+#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
 #, fuzzy
-msgid   "Too many files open"
-msgstr  "Of margar opnar skrár"
+msgid   "No editor for current action."
+msgstr  "Engin villuleiðrétting"
+
+#: ../xffm/find/signals.hh:501
+msgid   "Upper limit:"
+msgstr  "Efri mörk:"
+
+#: ../xffm/find/signals.hh:503
+msgid   "Counting files..."
+msgstr  "Tel skrár ..."
+
+#: ../xffm/find/signals.hh:518
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d passaði"
+msgstr[1]       "%d pössuðu"
+
+#: ../xffm/find/signals.hh:520
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s [lokið]"
+
+#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+msgid   "Searching..."
+msgstr  "Leita..."
+
+#: ../xffm/find/dialog.hh:106
+msgid   "Find"
+msgstr  "Leita"
+
+#: ../xffm/find/dialog.hh:131
+#, fuzzy
+msgid   "Close find"
+msgstr  "Loka glugga"
+
+#: ../xffm/find/dialog.hh:146
+#, fuzzy
+msgid   "Find Files"
+msgstr  "Finna skrá..."
+
+#: ../xffm/find/dialog.hh:209
+#, fuzzy
+msgid   "Select advanced options"
+msgstr  "Veldu einn möguleika"
+
+#: ../xffm/find/dialog.hh:245
+#, fuzzy
+msgid   "Upper limit"
+msgstr  "Efri mörk:"
+
+#: ../xffm/find/dialog.hh:250
+msgid   "At Least"
+msgstr  "Að minnsta kosti"
+
+#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+msgid   "kBytes"
+msgstr  "kBæti"
+
+#: ../xffm/find/dialog.hh:255
+msgid   "At Most"
+msgstr  "Í mesta lagi"
+
+#: ../xffm/find/dialog.hh:266
+msgid   "Group"
+msgstr  "Hópur"
+
+#: ../xffm/find/dialog.hh:270
+msgid   "Octal Permissions"
+msgstr  "Áttundakerfis heimildir"
+
+#: ../xffm/find/dialog.hh:275
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:299
+msgid   "Months"
+msgstr  "Mánuðir"
+
+#: ../xffm/find/dialog.hh:309
+#, fuzzy
+msgid   "File type : "
+msgstr  "Skráategund:"
+
+#: ../xffm/find/dialog.hh:355
+#, fuzzy
+msgid   "Display file selection dialog"
+msgstr  "Sýna stillingaglugga"
+
+#: ../xffm/find/dialog.hh:414
+#, fuzzy
+msgid   "Contains the text"
+msgstr  "Sem inniheldur texta:"
+
+#: ../xffm/find/dialog.hh:444
+msgid   "Case Sensitive"
+msgstr  "Há/Lá-stafir skipta máli"
+
+#: ../xffm/find/dialog.hh:445
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Auka hliðarslá"
+
+#: ../xffm/find/dialog.hh:446
+msgid   "Include binary files"
+msgstr  "Leita í tvíundarskrám"
+
+#: ../xffm/find/dialog.hh:455
+#, fuzzy
+msgid   "Anywhere"
+msgstr  "Allsstaðar"
+
+#: ../xffm/find/dialog.hh:456
+msgid   "Whole words only"
+msgstr  "Aðeins stök orð"
+
+#: ../xffm/find/dialog.hh:457
+msgid   "lines"
+msgstr  "línur"
+
+#: ../xffm/find/dialog.hh:680
+msgid   "Modified"
+msgstr  "Breytt"
+
+#: ../xffm/find/dialog.hh:684
+msgid   "Created"
+msgstr  "Búið til"
+
+#: ../xffm/find/dialog.hh:688
+#, fuzzy
+msgid   "Accessed"
+msgstr  "Síðast notað:"
+
+#: ../xffm/find/dialog.hh:1006
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "Loka glugga"
+
+#: ../xffm/find/dialog.hh:1010
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1019
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 

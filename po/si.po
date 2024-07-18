@@ -1,4 +1,4 @@
-# Xffm+ translation file: mié nov 20 12:43:59 CST 2019
+# Xffm+ translation file: jue 18 jul 2024 12:36:54 CST
 # Merged from existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
+        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
         "PO-Revision-Date: 2007-09-11 17:16+0530\n"
         "Last-Translator: Danishka Navin <snavin@redhat.com>\n"
         "Language-Team: Sinhala <en@li.org>\n"
@@ -17,692 +17,399 @@ msgstr  "Project-Id-Version: xffm+\n"
         "X-Generator: KBabel 1.11.4\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
-#, fuzzy
-msgid   "No Read Permission"
-msgstr  "%s කියවීමට අවසර නැත"
-
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "සොයන්න"
-
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
-msgid   "Recursive"
-msgstr  "නැවත නැවතත්"
-
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "ගොනු සහ බහලුම්"
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "ගොනු පද්ධතිය පරිලෝකණය කරන්න"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
-#: ../xffm/find/signals.hh:427
-msgid   "Results"
-msgstr  "ප්‍රථිපළ"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "උපරිම සීමාව:"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "අවම වශයෙන්"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "kBytes"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "බොහෝ විට"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
-msgid   "User"
-msgstr  "පරිශිලක"
-
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "කණ්ඩායම"
-
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "අටේපාදයෙන් අවසර"
-
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
-#, fuzzy
-msgid   "Executable"
-msgstr  "විධානීය (E) :"
-
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "මිනිත්තු"
-
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "පැය"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "දින"
-
-#: ../xffm/find/dialog.hh:230
-msgid   "Months"
-msgstr  "මාසය"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "ගොනු වර්‍ගය (t):"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
-#: ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "වසන්න"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "විස්තර"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:94
-msgid   "Path"
-msgstr  "පෙත"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "පෙරහන (F):"
-
-#: ../xffm/find/dialog.hh:377
-msgid   "Contains"
-msgstr  "අඩංගු වන"
-
-#: ../xffm/find/dialog.hh:397
-msgid   "Contains the text"
-msgstr  "පෙළ ඇතුලත්ව (t)"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "අක්‍ෂර සංවේදී"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "දිගුකල"
-
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  "බයිනරි ගොනුද ඇතුලත්ව (b)"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-#, fuzzy
-msgid   "Line Count"
-msgstr  "ගොනු ගණන"
-
-#: ../xffm/find/dialog.hh:489
-#, fuzzy
-msgid   "Match"
-msgstr  "ගැළපීම්"
-
-#: ../xffm/find/dialog.hh:501
-#, fuzzy
-msgid   "Anywhere"
-msgstr  "සැම තැනම"
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "සම්පූර්ණ පදයම පමණයි (W)"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "පේළි"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-#, fuzzy
-msgid   "No match"
-msgstr  "%s ගැලපීම"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
-#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
-#: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369
-#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
-msgid   "Cancel"
-msgstr  "අවලංගු කරන්න"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "පැහැදිලි කරන්න (C)"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "සැකසුම් (E)"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "නොදන්නා"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "වෙනස් කළ"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "නිර්මාණය කරන ලදි"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "ප්‍රවේශිත:"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
-#: ../xffm/completion/base.hh:339
-msgid   "Options:"
-msgstr  "විකල්ප:"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "නමින් හෝ අන්තර්ගතයෙන් ලේඛන හෝ බහලුම් පිහිටුම් සොයාගන්න"
-
-#: ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Search for files"
-msgstr  "ගොනු සදහා සෙවුම"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "අන්තර්ගතයන: "
-
-#: ../xffm/find/fgr.hh:128
-#, fuzzy
-msgid   "File's contents filtered as plain text."
-msgstr  "සටහන පැහැදිලි පෙළ ලෙස සුරකින්න"
-
-#: ../xffm/find/fgr.hh:131
-#, fuzzy
-msgid   "Verbose output debugging mode."
-msgstr  "දෝෂහරිණ කේත සක්‍රිය කරන්න"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "වෙළුම් තොරතුරු පෙන්වන්න"
-
-#: ../xffm/find/fgr.hh:135
-#, fuzzy
-msgid   "Filter Details"
-msgstr  "පරිශීලක තොරතුරු"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "මුද්‍රණය... (P)"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  "මෙම සැකසුම හඳුනාගැනීමට ඇති අනන්‍ය සැකසුම් ID."
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "පෙරනය"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "KByte"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Set UID"
-msgstr  "පරිශීලක අංකය සකසන්න (u)"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Executable Text Files"
-msgstr  "විධානීය ගොනු"
-
-#: ../xffm/find/fgr.hh:154
-#, fuzzy
-msgid   "The permissions of the file, in octal notation."
-msgstr  "ගොනුවේ අවසර."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "වර්‍ගය"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "ඔනැම"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "පෙරනිමි නාමය"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "සාමාන්‍ය ජාලය"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
-msgid   "Directory"
-msgstr  "බහලුම"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "සංකේත සබැඳි"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "UNIX ක්‍රමය"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-#, fuzzy
-msgid   "Block device"
-msgstr  "බ්ලොක් උපාංග"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-#, fuzzy
-msgid   "Character device"
-msgstr  "අක්‍ෂර උපාංග"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-msgid   "TIME"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "පෙර (P)"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "මාසය"
-
-#: ../xffm/find/fgr.hh:177
-#, fuzzy
-msgid   "Month(s)"
-msgstr  "මාස(ය)"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "වෙනස් කිරිමේ වෙලාව"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "ප්‍රවේශිත:"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "නිර්මණය කිරිමේ වෙලාව"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-#, fuzzy
-msgid   "uid"
-msgstr  "Uuid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "පරිශීලක:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "ID"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "සමූහය (G):"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "අන්තර්ගතය දර්ශනය"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "STRING"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:750
-msgid   "Regular expression"
-msgstr  "සාමාන්‍ය ප්‍රකාශනය"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "දිගුකල"
-
-#: ../xffm/find/fgr.hh:206
-#, fuzzy
-msgid   "Ignore case"
-msgstr  "පිළිඹිබු නොසලකන්න"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "පෙළ ගොනු"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "වචන"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "පේළි"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "භාවියත: %s %s\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "ක්‍රමවත්"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-#, fuzzy
-msgid   "Socket"
-msgstr  "සංඝට්ටන"
-
-#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "දැනට ඇති පිහිටුම අගුලු දමන්න"
-
-#: ../xffm/find/signals.hh:427
-msgid   "Upper limit:"
-msgstr  "උපරිම සීමාව:"
-
-#: ../xffm/find/signals.hh:429
-#, fuzzy
-msgid   "Counting files..."
-msgstr  "ගොනු පිටපත් කරමින් සිටී"
-
-#: ../xffm/find/signals.hh:444
-#, fuzzy, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "%d ගැලපුමක්"
-msgstr[1]       "%d ගැලපුමක්"
-
-#: ../xffm/find/signals.hh:446
-#, fuzzy, c-format
-msgid   "%s Finished : %s"
-msgstr  "අවසන් වන්නේ:"
-
-#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
-msgid   "Searching..."
-msgstr  "සොයයමින්..."
-
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "හිස් ගොනුව (E)"
-
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "%s:CD කියවිය නොහැක"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "නව ගොනුව (i)"
-
-#: ../xffm/common/gio.hh:91
-msgid   "Copying files"
-msgstr  "ගොනු පිටපත් කරමින් සිටී"
-
-#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-msgid   "Moving files"
-msgstr  "ගොනු ගෙන යමින්"
-
-#: ../xffm/common/gio.hh:95
-#, fuzzy
-msgid   "linking"
-msgstr  "පුරුක සකසමින්"
-
-#: ../xffm/common/gio.hh:97
-#, fuzzy
-msgid   "rename"
-msgstr  "නම වෙනස් කරන්න (R)"
-
-#: ../xffm/common/gio.hh:449
-#, fuzzy, c-format
-msgid   "(%d of %d)"
-msgstr  "%ld න් %ld"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "%s සමඟ විවෘත කරන්න"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "පෙළ සකසනය"
-
-#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
-msgid   "Execute Shell Command"
-msgstr  "Execute Shell Command"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
-#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
-msgid   "Run in Terminal"
-msgstr  "අග්‍රය තුල ක්‍රියාත්මක කරන්න (T)"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-#, fuzzy
-msgid   "Copying files locally"
-msgstr  "ගොනු පිටපත් කරමින් සිටී"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "සබැඳිය මකන්න"
-
-#: ../xffm/common/dnd.hh:63
-#, fuzzy
-msgid   "more"
-msgstr  "1 හෝ කිහිපයක්"
-
-#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
-msgid   "error"
-msgstr  "දෝෂය"
-
-#: ../xffm/common/run.hh:342
-msgid   "warning"
-msgstr  "අවවාදය"
-
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
-#: ../xffm/response/passwdresponse.hh:34
-msgid   "Enter password"
-msgstr  "රහස්පදය ඇතුළත් කරන්න"
-
-#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "අග්‍රය විවෘත කරන්න (T)"
 
-#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+msgid   "Execute Shell Command"
+msgstr  "Execute Shell Command"
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
 msgid   "Paste"
 msgstr  "අලවන්න (P)"
 
-#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
-#: ../xffm/fm/view/root/popup.hh:224
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
 #, fuzzy
 msgid   "Add bookmark"
 msgstr  "පිටු සළකුණු එක් කරන්න (A)"
 
-#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:170
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
 #, fuzzy
 msgid   "Remove bookmark"
 msgstr  "පිටුසලකුණ ඉවත් කරන්න"
 
-#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
 #: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
 msgid   "Search"
 msgstr  "සොයන්න"
 
-#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+msgid   "Close"
+msgstr  "වසන්න"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
 msgid   "Exit"
 msgstr  "ඉවත්වීම "
 
-#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
-#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
-#: ../xffm/fm/view/local/popup.hh:1356
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
 msgid   "Open with"
 msgstr  "සමඟ විවෘත කරන්න... (O)"
 
-#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
 msgid   "Cut"
 msgstr  "කපන්න (u)"
 
-#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
 msgid   "Copy"
 msgstr  "පිටපත් කරන්න (C)"
 
-#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
 msgid   "Delete"
 msgstr  "මකන්න"
 
-#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
 msgid   "Shred"
 msgstr  ""
 
-#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
-#: ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
 msgid   "Open in New Tab"
 msgstr  "නව ටැබයක විවෘත කරන්න"
 
-#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
 msgid   "New Tab"
 msgstr  "නව ටැබය (T)"
 
-#: ../xffm/gtk/dialogs.hh:42
+#: ../xffm/gtk/dialogs.hh:29
+msgid   "Yes"
+msgstr  "ඔව්"
+
+#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+msgid   "Confirm"
+msgstr  "තහවුරු කරනවා"
+
+#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "සියල්ලට යොදන්න (y)"
+
+#: ../xffm/gtk/dialogs.hh:110
+msgid   "Overwrite"
+msgstr  "මත ලියන්න (O)"
+
+#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:411
+msgid   "Cancel"
+msgstr  "අවලංගු කරන්න"
+
+#: ../xffm/gtk/dialogs.hh:240
 msgid   "Help"
 msgstr  "උදව්"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
+#: ../xffm/find/dialog.hh:666
+msgid   "unknown"
+msgstr  "නොදන්නා"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+#, fuzzy
+msgid   "Block device"
+msgstr  "බ්ලොක් උපාංග"
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+#, fuzzy
+msgid   "Character device"
+msgstr  "අක්‍ෂර උපාංග"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+msgid   "Directory"
+msgstr  "බහලුම"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+msgid   "Symbolic Link"
+msgstr  "සංකේත සබැඳි"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+#, fuzzy
+msgid   "Regular file"
+msgstr  "සාමාන්‍ය ජාලය"
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+#, fuzzy
+msgid   "Socket"
+msgstr  "සංඝට්ටන"
+
+#: ../xffm/gtk/preview.hh:587
+#, fuzzy
+msgid   "Empty file"
+msgstr  "හිස් ගොනුව (E)"
+
+#: ../xffm/gtk/preview.hh:658
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "%s:CD කියවිය නොහැක"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "විධානය"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ගොනු (F)"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "විධාන ඇතුලත් කිරීම්"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+msgid   "User"
+msgstr  "පරිශිලක"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "විචල්‍යය"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "ධාරකය"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "ගැලපීමට වචන"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "ගැළපීම්"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "බහාළුම් විශාල ප්‍රමාණයක්"
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+msgid   "Options:"
+msgstr  "විකල්ප:"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "සම්පූර්ණකරණ ප්‍රකාරය (m):"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "විධානය"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  "ගොනුව"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "විකල්ප"
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "%s පූරණය වෙමින්"
+
+#: ../xffm/fm/view/view.hh:144
+msgid   "Please Wait..."
+msgstr  "කරුණාකර රැදී සිටින්න..."
+
+#: ../xffm/fm/view/root/popup.hh:167
+msgid   "Ecryptfs (EFS)"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:169
+#, fuzzy
+msgid   "Clear cache"
+msgstr  "කැච් පිරිසිදු කරන්න (C)"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "විවෘතව ඇති බහලුම සමඟ සබැදි පරීමාවේ  සංයුතිය සකසන්න"
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Unmount the volume associated with this folder"
+msgstr  "විවෘතව ඇති බහලුම සමඟ සබැදි පරීමාවේ  සංයුතිය සකසන්න"
+
+#: ../xffm/fm/view/root/popup.hh:204
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Müll leeren"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "ස්ඵාපන පරිමාව (M)"
+
+#: ../xffm/fm/view/root/popup.hh:270
+msgid   "private"
+msgstr  "පුද්ගලික"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+msgid   "Specify Output Directory..."
+msgstr  "ප්‍රතිධාන බහලුම දක්වන්න..."
+
+#: ../xffm/fm/view/root/model.hh:133
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "මූලික HTML බහලුම"
+
+#: ../xffm/fm/view/root/model.hh:149
+msgid   "This is the root of the filesystem"
+msgstr  "මෙය ගොනු පද්ධතියේ මූලය වේ"
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+#, fuzzy
+msgid   "Home Directory"
+msgstr  "නිවාස බහලුම"
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "ගොනුව ඉවත දමන්න"
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "තැටි ස්ථාපකය"
+
+#: ../xffm/fm/view/root/model.hh:238
+msgid   "Mount local disks and devices"
+msgstr  "අභ්යන්තර තැටි සහ උපාංග ස්ථාපනය කරන්න"
+
+#: ../xffm/fm/view/root/model.hh:278
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "නිවාස පිහිටිමට යන්න"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "නම"
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:138
+msgid   "Details"
+msgstr  "විස්තර"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "ප්‍රමාණය"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  "දිනය"
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "මයිම් වර්‍ග"
+
+#: ../xffm/fm/view/base/signals.hh:918
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "රහස්පදය හිස්"
+
+#: ../xffm/fm/view/base/signals.hh:925
+#, fuzzy
+msgid   "Directory does not exist."
+msgstr  "%s බහලුම නොපවතී"
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "ගොනුව: %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "ස්ඵාපනය (M)"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "සුරකින්න"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "විකල්ප"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "උසස්"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "%s ස්ථාපන කරන්න (M)"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "%s සඳහා රහස්පදය ඇතුළත් කරන්න"
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+#, fuzzy
+msgid   "Package Manager"
+msgstr  "ප්ලාස්මා පැකේජ පාලකය"
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  "පිළිගන්න"
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "විකල්ප:"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "ආරම්භක දිනය"
@@ -730,74 +437,15 @@ msgstr  "කිසිඳු ප්‍රතිඵලයක් හමු නො�
 msgid   "Currently busy\n"
 msgstr  "දැනට ඇති තත්ත්වය"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
 #, fuzzy
-msgid   "Update Database"
-msgstr  "ඇ.එ.ජ පේටන්ට් දත්ත මූලය"
+msgid   "Invalid entry"
+msgstr  "සාවද්‍ය අකුරු"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-#, fuzzy
-msgid   "Fetch"
-msgstr  "Sketch"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "මොඩියුලය ස්ථාපනය කරන්න (I)"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "ස්තාපනය (I)"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "අස්තාපනය කරමින්"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "අස්ථාපනය"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "තොරතුරු"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "වෙළුම"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "පසුපසට සොයන්න"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "%s පූරණය වෙමින්"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
-msgid   "Please Wait..."
-msgstr  "කරුණාකර රැදී සිටින්න..."
-
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "\"%s\" අවුල් කරමින්"
-
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "ගොනුව: %s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "Geladene Dateien:"
+msgid   "The volume '%s' is not mounted."
+msgstr  "'%s' රටාව හමුවුයේ නැත"
 
 #: ../xffm/fm/view/local/rm.hh:59
 #, fuzzy, c-format
@@ -808,7 +456,8 @@ msgstr  "ධාරකය මකන්න (D)"
 msgid   "Warning: "
 msgstr  "අවවාදය: "
 
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "ගොනු තෝරාගැනීම"
@@ -817,461 +466,431 @@ msgstr  "ගොනු තෝරාගැනීම"
 msgid   "Remove"
 msgstr  "ඉවත් කරන්න (R)"
 
-#: ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "සියල්ලට යොදන්න (y)"
-
 #: ../xffm/fm/view/local/rm.hh:183
 msgid   "Trash"
 msgstr  "නොවැදගත්"
 
-#: ../xffm/fm/view/local/popup.hh:94
+#: ../xffm/fm/view/local/popup.hh:93
 msgid   "New"
 msgstr  "නව (N)"
 
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
 #, fuzzy
 msgid   "Paste into"
 msgstr  "ඇලවීම් සකසනය"
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
 #, fuzzy
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "අවලංගු කිරීමට කිසිවක් නොමැත."
 
-#: ../xffm/fm/view/local/popup.hh:106
+#: ../xffm/fm/view/local/popup.hh:105
 msgid   "Select All"
 msgstr  "සියල්ල තෝරන්න"
 
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "සාමාන්‍ය ප්‍රකාශන ගලපන්න"
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
 #, fuzzy
 msgid   "Run Executable..."
 msgstr  "ක්‍රියාත්මක කරන්න..."
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
 #, fuzzy
 msgid   "Extract files from the archive"
 msgstr  "සංරක්‍ෂණයෙන් ගොනු විහිදුවමින්"
 
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
 #, fuzzy
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "තෝරාගත් වස්තුවන් සමඟ සංරක්‍ෂණය නිර්මාණය කරන්න"
 
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
-#: ../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid   "Mount the volume associated with this folder"
-msgstr  "විවෘතව ඇති බහලුම සමඟ සබැදි පරීමාවේ  සංයුතිය සකසන්න"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
-#: ../xffm/fm/view/fstab/popup.hh:38
-#, fuzzy
-msgid   "Unmount the volume associated with this folder"
-msgstr  "විවෘතව ඇති බහලුම සමඟ සබැදි පරීමාවේ  සංයුතිය සකසන්න"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
 msgid   "Rename"
 msgstr  "නම වෙනස් කරන්න (R)"
 
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
 msgid   "Duplicate"
 msgstr  "පිටපත් කළ (u)"
 
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:63
 msgid   "Link"
 msgstr  "පුරුක"
 
-#: ../xffm/fm/view/local/popup.hh:164
+#: ../xffm/fm/view/local/popup.hh:163
 msgid   "Properties"
 msgstr  "වත්කම්"
 
-#: ../xffm/fm/view/local/popup.hh:554
+#: ../xffm/fm/view/local/popup.hh:566
 msgid   "Files:"
 msgstr  "ගොනු: (F)"
 
-#: ../xffm/fm/view/local/popup.hh:744
+#: ../xffm/fm/view/local/popup.hh:715
 #, fuzzy
 msgid   "Select items"
 msgstr  "අයිතමය තෝරන්න"
 
-#: ../xffm/fm/view/local/popup.hh:761
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "සාමාන්‍ය ප්‍රකාශනය"
+
+#: ../xffm/fm/view/local/popup.hh:732
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "සාමාන්‍ය ප්‍රකාශන යෙදුම නිවැරදි නොවේ"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 #, fuzzy
 msgid   "No selection"
 msgstr  "පිටපත් කරන්න"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 #, fuzzy
 msgid   "No matches."
 msgstr  "<ගැලපුම් නොමැත>"
 
-#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
 #, fuzzy
 msgid   "Create new..."
 msgstr  "අලුතින් නිර්මාණය"
 
-#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
-#: ../xffm/fm/view/local/popup.hh:1159
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
 msgid   "New Name:"
 msgstr  "අලුත් නම:"
 
-#: ../xffm/fm/view/local/popup.hh:998
+#: ../xffm/fm/view/local/popup.hh:980
 msgid   "No name"
 msgstr  "නමක් නැත"
 
-#: ../xffm/fm/view/local/popup.hh:1011
+#: ../xffm/fm/view/local/popup.hh:993
 #, fuzzy, c-format
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "මෙම නමින් දැනටමත් ක්‍රමයක් ඇත."
 
-#: ../xffm/fm/view/local/popup.hh:1036
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "විධානයට තර්ක"
-
-#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
-msgid   "Specify Output Directory..."
-msgstr  "ප්‍රතිධාන බහලුම දක්වන්න..."
-
-#: ../xffm/fm/view/local/popup.hh:1148
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
 msgid   "Not a directory"
 msgstr  "බහලුමක් නොවේ"
 
-#: ../xffm/fm/view/local/popup.hh:1307
-#, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "තෝරාගත් ගොනුව හෝ බහලුමේ නම වෙනස් කරන්න"
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+msgid   "error"
+msgstr  "දෝෂය"
 
-#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "සාවද්‍ය අකුරු"
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  ""
 
-#: ../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "Previews"
+msgstr  "පූර්‍වදසුන"
+
+#: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "'%s' රටාව හමුවුයේ නැත"
+msgid   "Reading \"%s\""
+msgstr  "\"%s\" අවුල් කරමින්"
 
-#: ../xffm/fm/view/local/properties.hh:241
+#: ../xffm/fm/view/local/model.hh:722
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Geladene Dateien:"
+
+#: ../xffm/fm/view/local/properties.hh:239
 #, fuzzy
 msgid   "Properties and Attributes"
 msgstr  "වත්කම් යාවත්කාලීන විය"
 
-#: ../xffm/fm/view/local/properties.hh:270
+#: ../xffm/fm/view/local/properties.hh:267
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "දසුන් අකාරය (V):"
 
-#: ../xffm/fm/view/local/properties.hh:296
+#: ../xffm/fm/view/local/properties.hh:293
 msgid   "File:"
 msgstr  "ගොනු: (F)"
 
-#: ../xffm/fm/view/local/properties.hh:308
+#: ../xffm/fm/view/local/properties.hh:305
 msgid   "Apply changes"
 msgstr  "වෙනස්කම් යොදන්න"
 
-#: ../xffm/fm/view/local/properties.hh:469
+#: ../xffm/fm/view/local/properties.hh:473
 msgid   "Encoding"
 msgstr  "කේතාංකනය (E)"
 
-#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
-#, fuzzy
-msgid   "Mimetype"
-msgstr  "මයිම් වර්‍ග"
-
-#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "ප්‍රමාණය"
-
-#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "දිනය"
-
-#: ../xffm/fm/view/local/properties.hh:492
+#: ../xffm/fm/view/local/properties.hh:496
 msgid   "Successfully moved to trash."
 msgstr  "සාර්ථකව මැකුණි."
 
-#: ../xffm/fm/view/local/properties.hh:493
+#: ../xffm/fm/view/local/properties.hh:497
 msgid   "Source:"
 msgstr  "මූලය:"
 
-#: ../xffm/fm/view/root/model.hh:124
-#, fuzzy
-msgid   "Root Directory"
-msgstr  "මූලික HTML බහලුම"
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "භාවිතා කළ (U)"
 
-#: ../xffm/fm/view/root/model.hh:140
-msgid   "This is the root of the filesystem"
-msgstr  "මෙය ගොනු පද්ධතියේ මූලය වේ"
+#: ../xffm/fm/view/fstab/view.hh:175
+msgid   "Available"
+msgstr  "භාවිතයට ඇති"
 
-#: ../xffm/fm/view/root/model.hh:152
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "නිවාස බහලුම"
+#: ../xffm/fm/view/fstab/view.hh:176
+msgid   "Usage"
+msgstr  "භාවිතය"
 
-#: ../xffm/fm/view/root/model.hh:179
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "ගොනුව ඉවත දමන්න"
-
-#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "තැටි ස්ථාපකය"
-
-#: ../xffm/fm/view/root/model.hh:227
-msgid   "Mount local disks and devices"
-msgstr  "අභ්යන්තර තැටි සහ උපාංග ස්ථාපනය කරන්න"
-
-#: ../xffm/fm/view/root/model.hh:267
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "නිවාස පිහිටිමට යන්න"
-
-#: ../xffm/fm/view/root/popup.hh:175
-#, fuzzy
-msgid   "Empty trash"
-msgstr  "Müll leeren"
-
-#: ../xffm/fm/view/root/popup.hh:228
-#, fuzzy
-msgid   "Ecrypt Volume"
-msgstr  "ස්ඵාපන පරිමාව (M)"
-
-#: ../xffm/fm/view/root/popup.hh:229
-msgid   "private"
-msgstr  "පුද්ගලික"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
-#: ../xffm/fm/view/fuse/ecryptfs.hh:185
-msgid   "Mount"
-msgstr  "ස්ඵාපනය (M)"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:179
-#: ../xffm/fm/dialog/notebook/createini.hh:87
-#: ../xffm/fm/dialog/notebook/createini.hh:371
-msgid   "Save"
-msgstr  "සුරකින්න"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:182
-msgid   "Load"
-msgstr  "පූරණය"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-msgid   "Options"
-msgstr  "විකල්ප"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
-msgid   "Advanced"
-msgstr  "උසස්"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "%s ස්ථාපන කරන්න (M)"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:745
-#, fuzzy, c-format
-msgid   "Enter Passphrase for %s"
-msgstr  "%s සඳහා රහස්පදය ඇතුළත් කරන්න"
-
-#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
-#, fuzzy
-msgid   "NFS Network Volume"
-msgstr  "දත්ත පරිමාව"
-
-#: ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "බහලුම් සමකාලිකය"
-
-#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
-msgid   "eCryptfs Volume"
-msgstr  ""
-
-#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
-#, fuzzy
-msgid   "CIFS Volume"
-msgstr  "උපරිම හඬ"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-#, fuzzy
-msgid   "Mount Device"
-msgstr  "ශබ්ද උපකරණය"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
-#, fuzzy
-msgid   "Mount point:"
-msgstr  "සවිකරන ස්ථානය"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "සවිකරන ස්ථානය"
-
-#: ../xffm/fm/view/fstab/view.hh:592
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "මොඩම් උපකරණය (v):"
-
-#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
-#, fuzzy
-msgid   "Disks"
-msgstr  "තැටිය"
-
-#: ../xffm/fm/view/fstab/view.hh:922
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
 msgid   "No Label"
 msgstr  "ලේබල නැත"
 
-#: ../xffm/fm/view/fstab/view.hh:923
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
 #, fuzzy
 msgid   "There is no file system available (unformatted)"
 msgstr  "භාවිතයට ගතහැකි ගොනු පද්ධතියක් නොමැත(සකස් කරනැත)"
 
-#: ../xffm/fm/view/fstab/view.hh:924
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+#, fuzzy
+msgid   "Mount point:"
+msgstr  "සවිකරන ස්ථානය"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
 #, fuzzy
 msgid   "Not mounted"
 msgstr  "නොරැඳවූ"
 
-#: ../xffm/fm/view/fstab/view.hh:1059
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+#, fuzzy
+msgid   "Disks"
+msgstr  "තැටිය"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+#, fuzzy
+msgid   "NFS Network Volume"
+msgstr  "දත්ත පරිමාව"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
 msgid   "SFTP (via SSH)"
 msgstr  ""
 
-#: ../xffm/fm/view/fstab/view.hh:1414
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "eCryptfs Volume"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "උපරිම හඬ"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
 #, fuzzy, c-format
 msgid   "Unmounting %s"
 msgstr  "1%කින් අඩු වේ."
 
-#: ../xffm/fm/view/base/signals.hh:845
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
 #, fuzzy
-msgid   "Trash is empty"
-msgstr  "රහස්පදය හිස්"
+msgid   "Mount point: "
+msgstr  "සවිකරන ස්ථානය"
 
-#: ../xffm/fm/view/base/signals.hh:847
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
 #, fuzzy
-msgid   "Directory does not exist."
-msgstr  "%s බහලුම නොපවතී"
+msgid   "Mount device: "
+msgstr  "මොඩම් උපකරණය (v):"
 
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "නම"
+#: ../xffm/fm/view/fstab/popup.hh:21
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "බහලුම් සමකාලිකය"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/fstab/popup.hh:132
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "ශබ්ද උපකරණය"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "ගොනු පිටපත් කරමින් සිටී"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
+#: ../xffm/common/gio.hh:93
+msgid   "Moving files"
+msgstr  "ගොනු ගෙන යමින්"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+#, fuzzy
+msgid   "No Image Preview"
+msgstr  "පිටු පුර්ව දර්ශනය"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+msgid   "Maximum image size for thumbnailing"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+#, fuzzy
+msgid   "Reset image size"
+msgstr  "වීඩියෝවේ ප්‍රමාණයට යළි සකසන්න"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
 #, fuzzy
 msgid   "Embedded Terminal"
 msgstr  "තිළැලි ගොනු (E)"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
 #, fuzzy
 msgid   "All items in the iconview."
 msgstr  "මෙම කවුළුව තුළ ඇති සියලුම අයිතම තෝරන්න"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
 msgid   "Scripting"
 msgstr  "විධානාවලි"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
 #, fuzzy
 msgid   "Clear Log"
 msgstr  "වාර්ථා ගොනුව පිරිසිදු"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
 #, fuzzy
 msgid   "Terminal font"
 msgstr  "අග්‍රය"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Renice Process"
 msgstr  "සැකසුම නැවත අලංකාර කරන්න"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Suspend"
 msgstr  "අත්හිටු වීම"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Continue"
 msgstr  "දිගටම කරගෙන යන්න"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Interrupt"
 msgstr  "අතුරු බිදුම"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Hangup"
 msgstr  "විසන්ධෛ"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "User 1 (USR1)"
 msgstr  "1 වන පරිශීලක (USR1)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "User 2 (USR2)"
 msgstr  "2 වන පරිශීලක (USR2)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 #, fuzzy
 msgid   "Terminate Task"
 msgstr  "අවසන් කරන්න"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "Abort"
 msgstr  "පිළිබඳව (A)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
 msgid   "Kill"
 msgstr  "වසන්න"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
 #, fuzzy
 msgid   "Segmentation fault"
 msgstr  "ලියාපදිංචිය අසාර්ථකයි."
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
 msgid   "PID"
 msgstr  "PID"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "පෙර (P)"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
 #, fuzzy
 msgid   "Go to"
 msgstr  "%s වෙතට යන්න"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
 msgid   "loading..."
 msgstr  "පූරණය වෙමින්..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:152
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "මකාදැමීම තහවුරු කරන්න"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:154
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
 #, fuzzy
 msgid   "Destination File"
 msgstr  "අනිත් අන්තයේ බහලුම"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
 #, fuzzy, c-format
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "'%s' ගොනුව දැනටමත් පවතී.\n"
         "ඔබට එය මත ලිවීමට ඇවැසිද?"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Systemzeit ändern"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "සංරචකය ඉවත් කරන්න"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "අභිරුචි ෆොන්ටයක් භාවිතා කරන්න (f)"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "ZModem අපගත කිරීමට ගොනු තෝරන්න"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "%s ගොනුව විවෘත කල නොහැක: %s"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "යෙදුමෙන් පිටවී නැවත අරඹන්න"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "අභිරුචි ෆොන්ට සක්‍රීය කරන්න"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "නව කවුළුවක් විවෘත කරන්න (W)"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Differences"
+msgstr  "වෙනස පෙන්වන්න (V)"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
@@ -1347,10 +966,6 @@ msgstr  "විකල්පය"
 msgid   "text"
 msgstr  "පෙළ"
 
-#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "ගොනුව"
-
 #: ../xffm/fm/dialog/notebook/createini.hh:436
 #, fuzzy
 msgid   "folder"
@@ -1366,107 +981,214 @@ msgstr  "සඳු (M)"
 msgid   "off"
 msgstr  "Roff"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "සංරචකය ඉවත් කරන්න"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "අභිරුචි ෆොන්ටයක් භාවිතා කරන්න (f)"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "ZModem අපගත කිරීමට ගොනු තෝරන්න"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "%s ගොනුව විවෘත කල නොහැක: %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "යෙදුමෙන් පිටවී නැවත අරඹන්න"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
-#, fuzzy
-msgid   "FIXME New custom content"
-msgstr  "අභිරුචි ෆොන්ට සක්‍රීය කරන්න"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "නව කවුළුවක් විවෘත කරන්න (W)"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
-#, fuzzy
-msgid   "Differences"
-msgstr  "වෙනස පෙන්වන්න (V)"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
 #, fuzzy
 msgid   "Open menu"
 msgstr  "පිළිබිඹුව විවෘත"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+msgid   "Background Color"
+msgstr  "පසුබිම් වර්‍ණය"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+#, fuzzy
+msgid   "Foreground Color"
+msgstr  "පුර්‍වබිම් වර්‍ණය"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "පෙළ වර්‍ණය"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+#, fuzzy
+msgid   "Error Text Color"
+msgstr  "පෙළ වර්‍ණය"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+msgid   "Color settings"
+msgstr  "වර්‍ණ සැකසුම්"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+#, fuzzy
+msgid   "Sort by"
+msgstr  "ලෙස පෙලගසන්න (S):"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "File extension"
+msgstr  "ගොනු දිගුව"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
 #, fuzzy
 msgid   "View as list"
 msgstr  "ලැයිස්තුවක් ලෙස දර්ශණය කරන්න"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
 msgid   "Show hidden files"
 msgstr  "සැඟවුණු ගොනු පෙන්වන්න"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
 #, fuzzy
 msgid   "Show Backup Files"
 msgstr  "සියළු ගොනු පෙන්වන්න"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
 #, fuzzy
 msgid   "Sort data in descending order"
 msgstr  "විවෘත කල පිලිවෙලට අනුපිලිවෙලට සකසන්න"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
 #, fuzzy
 msgid   "Sort by date"
 msgstr  "නම මඟින් සුබෙදන්න (N)"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
 #, fuzzy
 msgid   "Sort by size"
 msgstr  "නම මඟින් සුබෙදන්න (N)"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
 #, fuzzy
 msgid   "Main menu"
 msgstr  "ප්‍රධාන මෙනුව"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid   "Long press time"
-msgstr  "Systemzeit ändern"
-
-#: ../xffm/fm/dialog/dialog.hh:122
+#: ../xffm/fm/dialog/dialog.hh:121
 #, fuzzy
 msgid   "Removed"
 msgstr  "ඉවත් කරන්න (R)"
 
-#: ../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid   "Detected device(s):"
-msgstr  "ගොනු(ව) මකන්න"
+#: ../xffm/common/run.hh:339
+msgid   "warning"
+msgstr  "අවවාදය"
 
-#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+msgid   "Enter password"
+msgstr  "රහස්පදය ඇතුළත් කරන්න"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#, fuzzy
+msgid   "Executable"
+msgstr  "විධානීය (E) :"
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+msgid   "Run in Terminal"
+msgstr  "අග්‍රය තුල ක්‍රියාත්මක කරන්න (T)"
+
+#: ../xffm/common/run.hh:652
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "විධානයට තර්ක"
+
+#: ../xffm/common/run.hh:874
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "තෝරාගත් ගොනුව හෝ බහලුමේ නම වෙනස් කරන්න"
+
+#: ../xffm/common/settings.hh:178
+#, fuzzy
+msgid   "New File:"
+msgstr  "නව ගොනුව (i)"
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, c-format
+msgid   "Open with %s"
+msgstr  "%s සමඟ විවෘත කරන්න"
+
+#: ../xffm/common/util.hh:1513
+msgid   "Text Editor"
+msgstr  "පෙළ සකසනය"
+
+#: ../xffm/common/util.hh:1554
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:41
+#, fuzzy
+msgid   "Target"
+msgstr  "ඉලක්ක"
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Files"
+msgstr  "ගොනු"
+
+#: ../xffm/common/dnd.hh:49
+#, fuzzy
+msgid   "More…"
+msgstr  "තවත්"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "Move"
+msgstr  "ගෙන යන්න (M)"
+
+#: ../xffm/common/dnd.hh:143
+#, fuzzy
+msgid   "Create Link"
+msgstr  "සබැඳිය මකන්න"
+
+#: ../xffm/common/dnd.hh:155
+#, fuzzy
+msgid   "more"
+msgstr  "1 හෝ කිහිපයක්"
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "ගොනු පිටපත් කරමින් සිටී"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "පුරුක සකසමින්"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "නම වෙනස් කරන්න (R)"
+
+#: ../xffm/common/gio.hh:408
+#, fuzzy
+msgid   "Overwrite?"
+msgstr  "මත ලියන්න (O)"
+
+#: ../xffm/common/gio.hh:498
+#, fuzzy, c-format
+msgid   "(%d of %d)"
+msgstr  "%ld න් %ld"
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "විධානය ක්‍රියාත්මක කරන්න"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "මූල ගොණුව"
+
+#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+msgid   "Ok"
+msgstr  "හරි"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
 msgid   "Running"
 msgstr  "ක්‍රියාත්මක වෙමින්"
 
-#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
+#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
 #, fuzzy
 msgid   "Waiting for operation to finish..."
 msgstr  "අවසන් කිරීම සඳහා dvips වෙත රැඳෙමින්..."
@@ -1481,68 +1203,434 @@ msgstr  "මුසික ප්‍රධාන"
 msgid   "Response Requested"
 msgstr  "දායකත්වය ඉල්ලීම"
 
-#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
-msgid   "Ok"
-msgstr  "හරි"
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+#, fuzzy
+msgid   "No Read Permission"
+msgstr  "%s කියවීමට අවසර නැත"
 
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "විධානය ක්‍රියාත්මක කරන්න"
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:341
+msgid   "Path"
+msgstr  "පෙත"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "මූල ගොණුව"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "නමින් හෝ අන්තර්ගතයෙන් ලේඛන හෝ බහලුම් පිහිටුම් සොයාගන්න"
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+msgid   "Filter:"
+msgstr  "පෙරහන (F):"
+
+#: ../xffm/find/fgr.hh:126
+#, fuzzy
+msgid   "Search for files"
+msgstr  "ගොනු සදහා සෙවුම"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "අන්තර්ගතයන: "
+
+#: ../xffm/find/fgr.hh:128
+#, fuzzy
+msgid   "File's contents filtered as plain text."
+msgstr  "සටහන පැහැදිලි පෙළ ලෙස සුරකින්න"
+
+#: ../xffm/find/fgr.hh:131
+#, fuzzy
+msgid   "Verbose output debugging mode."
+msgstr  "දෝෂහරිණ කේත සක්‍රිය කරන්න"
+
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "වෙළුම් තොරතුරු පෙන්වන්න"
+
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "පරිශීලක තොරතුරු"
+
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "ගොනු පද්ධතිය පරිලෝකණය කරන්න"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "මුද්‍රණය... (P)"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "මෙම සැකසුම හඳුනාගැනීමට ඇති අනන්‍ය සැකසුම් ID."
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "ගොනු සහ බහලුම්"
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "පෙරනය"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
 msgstr  ""
 
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "සම්පූර්ණකරණ ප්‍රකාරය (m):"
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+msgid   "Recursive"
+msgstr  "නැවත නැවතත්"
 
-#: ../xffm/completion/bash.hh:134
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "KByte"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:152
 #, fuzzy
-msgid   "command"
-msgstr  "විධානය"
+msgid   "Set UID"
+msgstr  "පරිශීලක අංකය සකසන්න (u)"
 
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#: ../xffm/find/fgr.hh:152
 #, fuzzy
-msgid   "Options >>"
-msgstr  "විකල්ප"
+msgid   "Executable Text Files"
+msgstr  "විධානීය ගොනු"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "විධානය"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "ගොනු (F)"
-
-#: ../xffm/completion/base.hh:34
+#: ../xffm/find/fgr.hh:154
 #, fuzzy
-msgid   "Command history"
-msgstr  "විධාන ඇතුලත් කිරීම්"
+msgid   "The permissions of the file, in octal notation."
+msgstr  "ගොනුවේ අවසර."
 
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "විචල්‍යය"
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "වර්‍ගය"
 
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "ධාරකය"
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "ඔනැම"
 
-#: ../xffm/completion/base.hh:55
+#: ../xffm/find/fgr.hh:157
 #, fuzzy
-msgid   "Found no match"
-msgstr  "ගැලපීමට වචන"
+msgid   "Default type"
+msgstr  "පෙරනිමි නාමය"
 
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "ගැළපීම්"
-
-#: ../xffm/completion/base.hh:142
+#: ../xffm/find/fgr.hh:161
 #, fuzzy
-msgid   "Too many files open"
-msgstr  "බහාළුම් විශාල ප්‍රමාණයක්"
+msgid   "UNIX Socket"
+msgstr  "UNIX ක්‍රමය"
+
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+msgid   "Minutes"
+msgstr  "මිනිත්තු"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+msgid   "Hours"
+msgstr  "පැය"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+msgid   "Days"
+msgstr  "දින"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "මාසය"
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "මාස(ය)"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "වෙනස් කිරිමේ වෙලාව"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "ප්‍රවේශිත:"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "නිර්මණය කිරිමේ වෙලාව"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "uid"
+msgstr  "Uuid"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "පරිශීලක:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "ID"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "සමූහය (G):"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "අන්තර්ගතය දර්ශනය"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "STRING"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "දිගුකල"
+
+#: ../xffm/find/fgr.hh:206
+#, fuzzy
+msgid   "Ignore case"
+msgstr  "පිළිඹිබු නොසලකන්න"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "පෙළ ගොනු"
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+#, fuzzy
+msgid   "No match"
+msgstr  "%s ගැලපීම"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+#, fuzzy
+msgid   "Line Count"
+msgstr  "ගොනු ගණන"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "වචන"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "පේළි"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "භාවියත: %s %s\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "ක්‍රමවත්"
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
+#: ../xffm/find/dialog.hh:245
+msgid   "Results"
+msgstr  "ප්‍රථිපළ"
+
+#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "දැනට ඇති පිහිටුම අගුලු දමන්න"
+
+#: ../xffm/find/signals.hh:501
+msgid   "Upper limit:"
+msgstr  "උපරිම සීමාව:"
+
+#: ../xffm/find/signals.hh:503
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "ගොනු පිටපත් කරමින් සිටී"
+
+#: ../xffm/find/signals.hh:518
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "%d ගැලපුමක්"
+msgstr[1]       "%d ගැලපුමක්"
+
+#: ../xffm/find/signals.hh:520
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "අවසන් වන්නේ:"
+
+#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+msgid   "Searching..."
+msgstr  "සොයයමින්..."
+
+#: ../xffm/find/dialog.hh:106
+msgid   "Find"
+msgstr  "සොයන්න"
+
+#: ../xffm/find/dialog.hh:131
+#, fuzzy
+msgid   "Close find"
+msgstr  "කවුළුව වසන්න"
+
+#: ../xffm/find/dialog.hh:146
+#, fuzzy
+msgid   "Find Files"
+msgstr  "ගොනුව සොයන්න..."
+
+#: ../xffm/find/dialog.hh:209
+#, fuzzy
+msgid   "Select advanced options"
+msgstr  "තවත් විකල්ප තෝරන්න (o)"
+
+#: ../xffm/find/dialog.hh:245
+#, fuzzy
+msgid   "Upper limit"
+msgstr  "උපරිම සීමාව:"
+
+#: ../xffm/find/dialog.hh:250
+msgid   "At Least"
+msgstr  "අවම වශයෙන්"
+
+#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+msgid   "kBytes"
+msgstr  "kBytes"
+
+#: ../xffm/find/dialog.hh:255
+msgid   "At Most"
+msgstr  "බොහෝ විට"
+
+#: ../xffm/find/dialog.hh:266
+msgid   "Group"
+msgstr  "කණ්ඩායම"
+
+#: ../xffm/find/dialog.hh:270
+msgid   "Octal Permissions"
+msgstr  "අටේපාදයෙන් අවසර"
+
+#: ../xffm/find/dialog.hh:275
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:299
+msgid   "Months"
+msgstr  "මාසය"
+
+#: ../xffm/find/dialog.hh:309
+#, fuzzy
+msgid   "File type : "
+msgstr  "ගොනු වර්‍ගය (t):"
+
+#: ../xffm/find/dialog.hh:355
+msgid   "Display file selection dialog"
+msgstr  "ගොනු තේරුම් සංවාදය පෙන්වන්න"
+
+#: ../xffm/find/dialog.hh:414
+msgid   "Contains the text"
+msgstr  "පෙළ ඇතුලත්ව (t)"
+
+#: ../xffm/find/dialog.hh:444
+msgid   "Case Sensitive"
+msgstr  "අක්‍ෂර සංවේදී"
+
+#: ../xffm/find/dialog.hh:445
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "දිගුකල"
+
+#: ../xffm/find/dialog.hh:446
+msgid   "Include binary files"
+msgstr  "බයිනරි ගොනුද ඇතුලත්ව (b)"
+
+#: ../xffm/find/dialog.hh:455
+#, fuzzy
+msgid   "Anywhere"
+msgstr  "සැම තැනම"
+
+#: ../xffm/find/dialog.hh:456
+msgid   "Whole words only"
+msgstr  "සම්පූර්ණ පදයම පමණයි (W)"
+
+#: ../xffm/find/dialog.hh:457
+msgid   "lines"
+msgstr  "පේළි"
+
+#: ../xffm/find/dialog.hh:680
+msgid   "Modified"
+msgstr  "වෙනස් කළ"
+
+#: ../xffm/find/dialog.hh:684
+msgid   "Created"
+msgstr  "නිර්මාණය කරන ලදි"
+
+#: ../xffm/find/dialog.hh:688
+#, fuzzy
+msgid   "Accessed"
+msgstr  "ප්‍රවේශිත:"
+
+#: ../xffm/find/dialog.hh:1006
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "කවුළුව වසන්න"
+
+#: ../xffm/find/dialog.hh:1010
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1019
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 

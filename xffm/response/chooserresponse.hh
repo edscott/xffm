@@ -83,7 +83,7 @@ public:
         EntryResponse<Type>(parent, windowTitle, icon)
     {
         chooserButton_ = Gtk<Type>::dialog_button (fileSelector?"document-new-symbolic":"folder-symbolic", NULL);
-        gtk_box_pack_start (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
         gtk_widget_show (GTK_WIDGET(this->entry()));
         gtk_widget_show (GTK_WIDGET(chooserButton_));
     }
@@ -123,7 +123,7 @@ public:
         ComboResponse<Type>(parent, windowTitle, icon)
     {
         chooserButton_ = Gtk<Type>::dialog_button (fileSelector?"document-new-symbolic":"folder-symbolic", NULL);
-        gtk_box_pack_start (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (this->hbox_, GTK_WIDGET(chooserButton_), FALSE, FALSE, 0);
         gtk_widget_show (GTK_WIDGET(chooserButton_));
     }
 };

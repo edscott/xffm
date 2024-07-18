@@ -1,4 +1,4 @@
-# Xffm+ translation file: mié nov 20 12:41:12 CST 2019
+# Xffm+ translation file: jue 18 jul 2024 12:36:00 CST
 # Merged from existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
+        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
         "PO-Revision-Date: 2012-02-03 14:44+0700\n"
         "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
         "Language-Team: Khmer\n"
@@ -18,684 +18,390 @@ msgstr  "Project-Id-Version: xffm+\n"
         "X-Generator: KBabel 1.11.4\n"
         "X-Language: km-KH\n"
 
-#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
-msgid   "No Read Permission"
-msgstr  "គ្មាន​សិទ្ធិ​អាន"
-
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "រក"
-
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
-msgid   "Recursive"
-msgstr  "ត្រឡប់"
-
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-#, fuzzy
-msgid   "Find hidden files and directories"
-msgstr  "បង្ហាញ​ថត និង​ឯកសារ​ដែល​បាន​លាក់"
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "អាន​តែ​ប្រព័ន្ធ​ឯកសារ​ប៉ុណ្ណោះ"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
-#: ../xffm/find/signals.hh:427
-msgid   "Results"
-msgstr  "លទ្ធ​ផល"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "ព្រំដែន​លើ ៖"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "យ៉ាង​ហោច​ណាស់"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "គីឡូបៃ"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "ច្រើន​បំផុត"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
-msgid   "User"
-msgstr  "អ្នកប្រើ"
-
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "ក្រុម"
-
-#: ../xffm/find/dialog.hh:201
-#, fuzzy
-msgid   "Octal Permissions"
-msgstr  "សិទ្ធិ"
-
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
-#, fuzzy
-msgid   "Executable"
-msgstr  "ឯកសារ​ប្រតិបត្តិ ៖"
-
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "នាទី"
-
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "ម៉ោង"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "ថ្ងៃ"
-
-#: ../xffm/find/dialog.hh:230
-msgid   "Months"
-msgstr  "ខែ"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "ប្រភេទ​ឯកសារ ៖"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
-#: ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "បិទ"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "សេចក្ដី​លម្អិត"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:94
-msgid   "Path"
-msgstr  "ផ្លូវ"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "តម្រង ៖"
-
-#: ../xffm/find/dialog.hh:377
-msgid   "Contains"
-msgstr  "មាន"
-
-#: ../xffm/find/dialog.hh:397
-#, fuzzy
-msgid   "Contains the text"
-msgstr  "មាន​ធាតុ %d"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "ប្រកាន់​តួ​អក្សរ​តូច​ធំ"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "ដក​ចេញ​បន្ថែម​"
-
-#: ../xffm/find/dialog.hh:453
-msgid   "Include binary files"
-msgstr  "រួម​បញ្ចូល​ឯកសារ​ទ្វេភាគ"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-msgid   "Line Count"
-msgstr  "ចំនួន​ជួរ"
-
-#: ../xffm/find/dialog.hh:489
-#, fuzzy
-msgid   "Match"
-msgstr  "ផ្គូផ្គង ៖"
-
-#: ../xffm/find/dialog.hh:501
-msgid   "Anywhere"
-msgstr  "កន្លែង​ណាមួយ"
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "តែ​ពាក្យ​ទាំងមូល​ប៉ុណ្ណោះ"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "បន្ទាត់"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-#, fuzzy
-msgid   "No match"
-msgstr  "គ្មាន​ការ​ផ្គូផ្គង"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
-#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
-#: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369
-#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
-msgid   "Cancel"
-msgstr  "បោះបង់"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "សម្អាត"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "កែសម្រួល"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "មិន​ស្គាល់"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "បាន​កែប្រែ"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "បាន​បង្កើត​"
-
-#: ../xffm/find/dialog.hh:780
-#, fuzzy
-msgid   "Accessed"
-msgstr  "បាន​ដំណើរការ ៖"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
-#: ../xffm/completion/base.hh:339
-msgid   "Options:"
-msgstr  "ជម្រើស ៖"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "រក​ឯកសារ និង​ថត​នៅ​​កុំព្យូទ័រ​នេះ​តាម​ឈ្មោះ ឬ​មាតិកា"
-
-#: ../xffm/find/fgr.hh:126
-msgid   "Search for files"
-msgstr  "ស្វែងរក​ឯកសារ"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "មាតិកា ៖"
-
-#: ../xffm/find/fgr.hh:128
-#, fuzzy
-msgid   "File's contents filtered as plain text."
-msgstr  "រក្សាទុក​ឯកសារ​ជា​អត្ថបទ​ធម្មតា ?"
-
-#: ../xffm/find/fgr.hh:131
-msgid   "Verbose output debugging mode."
-msgstr  "របៀប​បំបាត់​កំហុស​ដែល​មាន​លទ្ធ​ដោយ​បរិយាយ ។"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "បង្ហាញ​ព័ត៌មាន​កំណែ"
-
-#: ../xffm/find/fgr.hh:135
-msgid   "Filter Details"
-msgstr  "សេចក្តី​លម្អិត​តម្រង"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "បោះពុម្ព..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  "លេខសម្គាល់​ដំណើរការ​មានតែមួយ ដែល​កំណត់អត្តសញ្ញាណ​ដំណើរការ​នេះ ។"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "តម្រង"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "គីឡូបៃ"
-
-#: ../xffm/find/fgr.hh:148
-#, fuzzy
-msgid   "is greater than or equal to"
-msgstr  "ការ​វាយ​តម្លៃ​ធំជាង ឬ​ស្នើ​នឹង %s ។"
-
-#: ../xffm/find/fgr.hh:150
-#, fuzzy
-msgid   "is less than or equal to"
-msgstr  "ការ​វាយតម្លៃ​តូច​​ជាង ឬ​ស្មើ​នឹង %s ។"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "កំណត់ UID"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Executable Text Files"
-msgstr  "ឯកសារ​ដែល​អាច​ប្រតិបត្តិ​បាន"
-
-#: ../xffm/find/fgr.hh:154
-#, fuzzy
-msgid   "The permissions of the file, in octal notation."
-msgstr  "ទីតាំង​ឯកសារ​មិន​អាច​ត្រូវ​បាន​ម៉ោន​ទេ ។"
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "ប្រភេទ"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "ណាមួយ"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "ពេល​​វេលា​​លំនាំ​​ដើម​"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "ក្រឡាចត្រង្គ​ធម្មតា"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
-msgid   "Directory"
-msgstr  "ថត"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "តំណ​និម្មិតសញ្ញា"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "គ្រោងការណ៍​យូនីក"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-#, fuzzy
-msgid   "Block device"
-msgstr  "ឧបករណ៍​ទប់ស្កាត់"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-#, fuzzy
-msgid   "Character device"
-msgstr  "ឧបករណ៍​តួអក្សរ"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-msgid   "TIME"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "មុន"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "ខែ"
-
-#: ../xffm/find/fgr.hh:177
-msgid   "Month(s)"
-msgstr  "ខែ​"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "ពេលវេលា​កំណែប្រែ​"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "រយៈ​ពេល​ដំណើរការ"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "ពេលវេលា​បង្កើត"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-#, fuzzy
-msgid   "uid"
-msgstr  "Uuid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "អ្នកប្រើ ៖"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "មិន​ចេះ​ប្រែប្រួល"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "ក្រុម ៖"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-#, fuzzy
-msgid   "Content View"
-msgstr  "​ទិដ្ឋ​ភាព​បរិបទ"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "ខ្សែ​អក្សរ"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:750
-msgid   "Regular expression"
-msgstr  "កន្សោម​ធម្មតា"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "បន្ថែម"
-
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "មិន​អើពើ​ករណី​ដូច​គ្នា"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "ឯកសារ​អត្ថបទ"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "ពាក្យ"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "បន្ទាត់"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "ការ​ប្រើ​ ៖​ %sRAW​ [បើក​​ | បិទ​]"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "ធម្មតា"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-msgid   "Socket"
-msgstr  "រន្ធ"
-
-#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
-msgid   "No editor for current action."
-msgstr  "គ្មាន​កម្មវិធីនិពន្ធ​សម្រាប់​សកម្មភាព​បច្ចុប្បន្ន​ទេ ។"
-
-#: ../xffm/find/signals.hh:427
-msgid   "Upper limit:"
-msgstr  "ព្រំដែន​លើ ៖"
-
-#: ../xffm/find/signals.hh:429
-msgid   "Counting files..."
-msgstr  "កំពុង​រាប់​ឯកសារ..."
-
-#: ../xffm/find/signals.hh:444
-#, fuzzy, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       "ផ្គូផ្គង %d"
-
-#: ../xffm/find/signals.hh:446
-#, fuzzy, c-format
-msgid   "%s Finished : %s"
-msgstr  "%s [បាន​បញ្ចប់]"
-
-#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
-msgid   "Searching..."
-msgstr  "កំពុង​ស្វែង​រក..."
-
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "ផ្លូវ​ឯកសារ​ទទេ"
-
-#: ../xffm/common/preview.hh:636
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "មិន​អាច​អាន​ពី %s បានទេ"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "ឯកសារ​ថ្មី"
-
-#: ../xffm/common/gio.hh:91
-#, fuzzy
-msgid   "Copying files"
-msgstr  "ចម្លង​ឯកសារ"
-
-#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-#, fuzzy
-msgid   "Moving files"
-msgstr  "ការ​ផ្លាស់ទី​បានបរាជ័យ"
-
-#: ../xffm/common/gio.hh:95
-#, fuzzy
-msgid   "linking"
-msgstr  "កំពុង​គិត"
-
-#: ../xffm/common/gio.hh:97
-#, fuzzy
-msgid   "rename"
-msgstr  "ប្ដូរ​ឈ្មោះ"
-
-#: ../xffm/common/gio.hh:449
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d នៃ %d)"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "បើក​ជា​មួយ %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "កម្មវិធី​​កែសម្រួល​​អត្ថបទ"
-
-#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
-msgid   "Execute Shell Command"
-msgstr  "ប្រតិបត្តិ​ពាក្យ​បញ្ជា​របស់​សែល"
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  "កុងសូល ៖ ដំណើរការ​ពាក្យ​បញ្ជា​ទោល​ដោយ​រហ័ស -- សរសេរ​ពាក្យ​បញ្ជា​នៅ​ទីនេះ ហើយ​ចុច បញ្ចូល "
-        "(enter) ។"
-
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
-#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
-msgid   "Run in Terminal"
-msgstr  "ដំណើរការ​ក្នុង​ស្ថានីយ"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-msgid   "Copying files locally"
-msgstr  "ចម្លង​ឯកសារ​មូលដ្ឋាន"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "​បង្កើត​តំណ​និមិត្ត​សញ្ញា"
-
-#: ../xffm/common/dnd.hh:63
-#, fuzzy
-msgid   "more"
-msgstr  "ឬ​ច្រើន​ជាង"
-
-#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
-msgid   "error"
-msgstr  "កំហុស"
-
-#: ../xffm/common/run.hh:342
-msgid   "warning"
-msgstr  "ការព្រមាន​"
-
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
-#: ../xffm/response/passwdresponse.hh:34
-msgid   "Enter password"
-msgstr  "បញ្ចូល​ពាក្យសម្ងាត់"
-
-#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "បើក​ស្ថានីយ"
 
-#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+msgid   "Execute Shell Command"
+msgstr  "ប្រតិបត្តិ​ពាក្យ​បញ្ជា​របស់​សែល"
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
 msgid   "Paste"
 msgstr  "បិទភ្ជាប់"
 
-#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
-#: ../xffm/fm/view/root/popup.hh:224
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
 msgid   "Add bookmark"
 msgstr  "បន្ថែម​ចំណាំ"
 
-#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:170
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
 msgid   "Remove bookmark"
 msgstr  "យក​ចំណាំ​ចេញ"
 
-#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
 #: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
 msgid   "Search"
 msgstr  "ស្វែងរក"
 
-#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+msgid   "Close"
+msgstr  "បិទ"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
 msgid   "Exit"
 msgstr  "​ចេញ"
 
-#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
-#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
-#: ../xffm/fm/view/local/popup.hh:1356
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
 msgid   "Open with"
 msgstr  "បើក​ជាមួយ"
 
-#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
 msgid   "Cut"
 msgstr  "កាត់"
 
-#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
 msgid   "Copy"
 msgstr  "ចម្លង"
 
-#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
 msgid   "Delete"
 msgstr  "លុប"
 
-#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
 msgid   "Shred"
 msgstr  ""
 
-#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
-#: ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
 msgid   "Open in New Tab"
 msgstr  "បើក​នៅ​ក្នុង​ផ្ទាំង​ថ្មី"
 
-#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
 msgid   "New Tab"
 msgstr  "ផ្ទាំង​ថ្មី"
 
-#: ../xffm/gtk/dialogs.hh:42
+#: ../xffm/gtk/dialogs.hh:29
+msgid   "Yes"
+msgstr  "បាទ/ចាស"
+
+#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+msgid   "Confirm"
+msgstr  "អះអាង"
+
+#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+msgid   "Apply to all"
+msgstr  "អនុវត្ត​ទៅ​ទាំងអស់"
+
+#: ../xffm/gtk/dialogs.hh:110
+msgid   "Overwrite"
+msgstr  "សរសេរ​ជាន់​លើ"
+
+#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:411
+msgid   "Cancel"
+msgstr  "បោះបង់"
+
+#: ../xffm/gtk/dialogs.hh:240
 msgid   "Help"
 msgstr  "ជំនួយ"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
+#: ../xffm/find/dialog.hh:666
+msgid   "unknown"
+msgstr  "មិន​ស្គាល់"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+#, fuzzy
+msgid   "Block device"
+msgstr  "ឧបករណ៍​ទប់ស្កាត់"
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+#, fuzzy
+msgid   "Character device"
+msgstr  "ឧបករណ៍​តួអក្សរ"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+msgid   "Directory"
+msgstr  "ថត"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+msgid   "Symbolic Link"
+msgstr  "តំណ​និម្មិតសញ្ញា"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+#, fuzzy
+msgid   "Regular file"
+msgstr  "ក្រឡាចត្រង្គ​ធម្មតា"
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+msgid   "Socket"
+msgstr  "រន្ធ"
+
+#: ../xffm/gtk/preview.hh:587
+#, fuzzy
+msgid   "Empty file"
+msgstr  "ផ្លូវ​ឯកសារ​ទទេ"
+
+#: ../xffm/gtk/preview.hh:658
+#, c-format
+msgid   "Cannot read from %s"
+msgstr  "មិន​អាច​អាន​ពី %s បានទេ"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "ពាក្យ​បញ្ជា"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "ឯកសារ"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "ដំណើរការ​ប្រវត្តិ​ពាក្យ​បញ្ជា"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+msgid   "User"
+msgstr  "អ្នកប្រើ"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "អថេរ"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "ម៉ាស៊ីន"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "មិន​ផ្គូផ្គង"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "ផ្គូផ្គង"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "ថត​ច្រើន​ពេក"
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+msgid   "Options:"
+msgstr  "ជម្រើស ៖"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "របៀប​បំពេញ​ ៖"
+
+#: ../xffm/completion/bash.hh:134
+msgid   "command"
+msgstr  "ពាក្យ​បញ្ជា"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  "ឯកសារ"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+msgid   "Options >>"
+msgstr  "ជម្រើស >>"
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "ផ្ទុក %s"
+
+#: ../xffm/fm/view/view.hh:144
+msgid   "Please Wait..."
+msgstr  "សូមរង់ចាំ​​...​"
+
+#: ../xffm/fm/view/root/popup.hh:167
+#, fuzzy
+msgid   "Ecryptfs (EFS)"
+msgstr  "អ៊ិនគ្រីប​ឯកសារ"
+
+#: ../xffm/fm/view/root/popup.hh:169
+#, fuzzy
+msgid   "Clear cache"
+msgstr  "ជម្រះ​ឃ្លាំង​សម្ងាត់"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "ម៉ាស៊ីនបម្រើ IRC ដែល​ទាក់ទង​ជាមួយ​បណ្ដាញ​នេះ"
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Unmount the volume associated with this folder"
+msgstr  "ម៉ាស៊ីនបម្រើ IRC ដែល​ទាក់ទង​ជាមួយ​បណ្ដាញ​នេះ"
+
+#: ../xffm/fm/view/root/popup.hh:204
+msgid   "Empty trash"
+msgstr  "សម្អាត​ធុងសំរាម"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "ភាគ​ថាស eCryptfs"
+
+#: ../xffm/fm/view/root/popup.hh:270
+msgid   "private"
+msgstr  "ឯកជន​"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+msgid   "Specify Output Directory..."
+msgstr  "បញ្ជាក់​ថត​លទ្ធផល..."
+
+#: ../xffm/fm/view/root/model.hh:133
+msgid   "Root Directory"
+msgstr  "ថត​ Root ​"
+
+#: ../xffm/fm/view/root/model.hh:149
+msgid   "This is the root of the filesystem"
+msgstr  "នេះ​ជា​ Root របស់​ប្រព័ន្ធ​ឯកសារ"
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+msgid   "Home Directory"
+msgstr  "ថត​ផ្ទះ"
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "ចោល​ឯកសារ"
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+msgid   "Disk Image Mounter"
+msgstr  "កម្មវិធី​ម៉ោន​រូបភាព​ផ្ទៃតុ"
+
+#: ../xffm/fm/view/root/model.hh:238
+#, fuzzy
+msgid   "Mount local disks and devices"
+msgstr  "ប្រព័ន្ធ និង​ឧបករណ៍​ចាប់​យក​អូឌីយ៉ូ"
+
+#: ../xffm/fm/view/root/model.hh:278
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "ទីតាំង​ចំណាំ​"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "ឈ្មោះ"
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:138
+msgid   "Details"
+msgstr  "សេចក្ដី​លម្អិត"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "ទំហំ"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  "កាលបរិច្ឆេទ"
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+msgid   "Mimetype"
+msgstr  "ប្រភេទ Mime"
+
+#: ../xffm/fm/view/base/signals.hh:918
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Tablet អស់​ថ្ម"
+
+#: ../xffm/fm/view/base/signals.hh:925
+msgid   "Directory does not exist."
+msgstr  "ថត​មិន​មាន​ឡើយ ។"
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "ឯកសារ ៖ %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "ម៉ោន"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "រក្សាទុក"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "ជម្រើស"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "កម្រិត​ខ្ពស់"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "ការ​ម៉ោន"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "បញ្ចូល​ឃ្លា​សម្ងាត់"
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+#, fuzzy
+msgid   "Package Manager"
+msgstr  "កម្មវិធី​គ្រប់គ្រង​កញ្ចប់​ប្លាស្មា"
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  "ព្រម​ទទួល"
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "ជម្រើស"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "ធ្វើ​បច្ចុប្បន្នភាព​កម្មវិធី"
@@ -723,72 +429,14 @@ msgstr  "គ្មាន​លទ្ធផល"
 msgid   "Currently busy\n"
 msgstr  "អ្នក​ប្រើ​បច្ចុប្បន្ន ៖"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
-msgid   "Update Database"
-msgstr  "ធ្វើ​ឲ្យ​មូលដ្ឋាន​ទិន្នន័យ​ទាន់សម័យ"
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
+msgid   "Invalid entry"
+msgstr  "ធាតុ​មិន​ត្រឹមត្រូវ"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-msgid   "Fetch"
-msgstr  "ទៅប្រមូល​យក"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "ដំឡើង​ម៉ូឌុល"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "ដំឡើង"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-#, fuzzy
-msgid   "Uninstall --dry-run"
-msgstr  "លុប"
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-msgid   "Uninstall"
-msgstr  "លុប"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "ព័ត៌មាន"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "កំណែ"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-msgid   "Go up"
-msgstr  "ទៅលើ"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "ស្វែង​រក​គ្រប់​ទំព័រ​"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "ផ្ទុក %s"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
-msgid   "Please Wait..."
-msgstr  "សូមរង់ចាំ​​...​"
-
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "ធ្វើ​មិន​ត្រឹមត្រូវ \"%s\""
-
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "ឯកសារ ៖ %s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  ""
+msgid   "The volume '%s' is not mounted."
+msgstr  "មិន​បាន​ម៉ោន​ភាគ​ផ្ទុក %s ឡើយ"
 
 #: ../xffm/fm/view/local/rm.hh:59
 #, c-format
@@ -799,7 +447,8 @@ msgstr  "លុប %s"
 msgid   "Warning: "
 msgstr  "ការ​ព្រមាន ៖ "
 
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
 msgid   "Multiple selections"
 msgstr  "ពហុ​ជម្រើស​"
 
@@ -807,444 +456,419 @@ msgstr  "ពហុ​ជម្រើស​"
 msgid   "Remove"
 msgstr  "Remove"
 
-#: ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "អនុវត្ត​ទៅ​ទាំងអស់"
-
 #: ../xffm/fm/view/local/rm.hh:183
 msgid   "Trash"
 msgstr  "ធុងសំរាម"
 
-#: ../xffm/fm/view/local/popup.hh:94
+#: ../xffm/fm/view/local/popup.hh:93
 msgid   "New"
 msgstr  "ថ្មី"
 
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
 #, fuzzy
 msgid   "Paste into"
 msgstr  "បិទភ្ជាប់​កម្មវិធី​កែសម្រួល"
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
 #, fuzzy
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "គ្មាន​ធាតុ​នៅ​ក្ដារ​តម្បៀត​ខ្ទាស់​សម្រាប់​បិទ​ភ្ជាប់​ទេ ។"
 
-#: ../xffm/fm/view/local/popup.hh:106
+#: ../xffm/fm/view/local/popup.hh:105
 msgid   "Select All"
 msgstr  "ជ្រើស​ទាំងអស់"
 
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "ផ្គូផ្គង​ជា​កន្សោម​ធម្មតា"
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
 #, fuzzy
 msgid   "Run Executable..."
 msgstr  "ប្រតិបត្តិ..."
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
 msgid   "Extract files from the archive"
 msgstr  "ស្រង់​ឯកសារ​ចេញ​ពី​ប័ណ្ណសារ"
 
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "បង្កើត​ប័ណ្ណសារ​ដែល​បាន​បង្ហាប់​​ជាមួយ​វត្ថុ​ដែល​បាន​ជ្រើស"
 
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
-#: ../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid   "Mount the volume associated with this folder"
-msgstr  "ម៉ាស៊ីនបម្រើ IRC ដែល​ទាក់ទង​ជាមួយ​បណ្ដាញ​នេះ"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
-#: ../xffm/fm/view/fstab/popup.hh:38
-#, fuzzy
-msgid   "Unmount the volume associated with this folder"
-msgstr  "ម៉ាស៊ីនបម្រើ IRC ដែល​ទាក់ទង​ជាមួយ​បណ្ដាញ​នេះ"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
 msgid   "Rename"
 msgstr  "ប្ដូរ​ឈ្មោះ"
 
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
 msgid   "Duplicate"
 msgstr  "ចម្លង"
 
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:63
 msgid   "Link"
 msgstr  "តំណ"
 
-#: ../xffm/fm/view/local/popup.hh:164
+#: ../xffm/fm/view/local/popup.hh:163
 msgid   "Properties"
 msgstr  "លក្ខណសម្បត្តិ"
 
-#: ../xffm/fm/view/local/popup.hh:554
+#: ../xffm/fm/view/local/popup.hh:566
 msgid   "Files:"
 msgstr  "ឯកសារ ៖"
 
-#: ../xffm/fm/view/local/popup.hh:744
+#: ../xffm/fm/view/local/popup.hh:715
 #, fuzzy
 msgid   "Select items"
 msgstr  "ធាតុ​ដែល​បាន​ជ្រើស"
 
-#: ../xffm/fm/view/local/popup.hh:761
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "កន្សោម​ធម្មតា"
+
+#: ../xffm/fm/view/local/popup.hh:732
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "វាក្យសម្ព័ន្ធ​​ម​ធម្មតា​មិន​ត្រឹមត្រូវ​ទេ"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 msgid   "No selection"
 msgstr  "គ្មាន​ជម្រើស"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 #, fuzzy
 msgid   "No matches."
 msgstr  "គ្មាន​ការ​ផ្គូផ្គង"
 
-#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
 #, fuzzy
 msgid   "Create new..."
 msgstr  "បង្កើត​ថ្មី​ %s..."
 
-#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
-#: ../xffm/fm/view/local/popup.hh:1159
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
 msgid   "New Name:"
 msgstr  "ឈ្មោះថ្មី ៖"
 
-#: ../xffm/fm/view/local/popup.hh:998
+#: ../xffm/fm/view/local/popup.hh:980
 msgid   "No name"
 msgstr  "គ្មាន​ឈ្មោះ"
 
-#: ../xffm/fm/view/local/popup.hh:1011
+#: ../xffm/fm/view/local/popup.hh:993
 #, fuzzy, c-format
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "ឈ្មោះ​ឧបករណ៍​នេះ​មាន​រួចហើយ !"
 
-#: ../xffm/fm/view/local/popup.hh:1036
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "អាគុយម៉ង់​សម្រាប់​ពាក្យ​បញ្ជា"
-
-#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
-msgid   "Specify Output Directory..."
-msgstr  "បញ្ជាក់​ថត​លទ្ធផល..."
-
-#: ../xffm/fm/view/local/popup.hh:1148
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
 msgid   "Not a directory"
 msgstr  "មិនមែន​ជា​ថត"
 
-#: ../xffm/fm/view/local/popup.hh:1307
-#, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "ប្ដូរ​ឈ្មោះ​ឯកសរ ឬ​ថត​ដែល​បាន​ជ្រើស"
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+msgid   "error"
+msgstr  "កំហុស"
 
-#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
-msgid   "Invalid entry"
-msgstr  "ធាតុ​មិន​ត្រឹមត្រូវ"
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  "មាន​ការងារ​មិន​ទាន់​បញ្ចប់ ៖ សូម​រង់ចាំ​រហូត​ដល់​វា​បាន​បញ្ចប់ ។"
 
-#: ../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "Previews"
+msgstr  "មើល​ជាមុន​"
+
+#: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "មិន​បាន​ម៉ោន​ភាគ​ផ្ទុក %s ឡើយ"
+msgid   "Reading \"%s\""
+msgstr  "ធ្វើ​មិន​ត្រឹមត្រូវ \"%s\""
 
-#: ../xffm/fm/view/local/properties.hh:241
+#: ../xffm/fm/view/local/model.hh:722
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:239
 msgid   "Properties and Attributes"
 msgstr  "លក្ខណ​សម្បត្តិ​ និង​គុណ​លក្ខណៈ"
 
-#: ../xffm/fm/view/local/properties.hh:270
+#: ../xffm/fm/view/local/properties.hh:267
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "របៀប​មើល​ ៖"
 
-#: ../xffm/fm/view/local/properties.hh:296
+#: ../xffm/fm/view/local/properties.hh:293
 msgid   "File:"
 msgstr  "ឯកសារ ៖"
 
-#: ../xffm/fm/view/local/properties.hh:308
+#: ../xffm/fm/view/local/properties.hh:305
 msgid   "Apply changes"
 msgstr  "អនុវត្តការ​ផ្លាស់ប្ដូរ"
 
-#: ../xffm/fm/view/local/properties.hh:469
+#: ../xffm/fm/view/local/properties.hh:473
 msgid   "Encoding"
 msgstr  "ការ​អ៊ីនកូដ"
 
-#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
-msgid   "Mimetype"
-msgstr  "ប្រភេទ Mime"
-
-#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "ទំហំ"
-
-#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "កាលបរិច្ឆេទ"
-
-#: ../xffm/fm/view/local/properties.hh:492
+#: ../xffm/fm/view/local/properties.hh:496
 msgid   "Successfully moved to trash."
 msgstr  "បាន​ផ្លាស់ទី​ទៅ​ធុង​សំរាម​ដោយ​ជោគជ័យ ។"
 
-#: ../xffm/fm/view/local/properties.hh:493
+#: ../xffm/fm/view/local/properties.hh:497
 msgid   "Source:"
 msgstr  "ប្រភព ៖"
 
-#: ../xffm/fm/view/root/model.hh:124
-msgid   "Root Directory"
-msgstr  "ថត​ Root ​"
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "បាន​ប្រើ"
 
-#: ../xffm/fm/view/root/model.hh:140
-msgid   "This is the root of the filesystem"
-msgstr  "នេះ​ជា​ Root របស់​ប្រព័ន្ធ​ឯកសារ"
+#: ../xffm/fm/view/fstab/view.hh:175
+msgid   "Available"
+msgstr  "មាន"
 
-#: ../xffm/fm/view/root/model.hh:152
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
-msgid   "Home Directory"
-msgstr  "ថត​ផ្ទះ"
+#: ../xffm/fm/view/fstab/view.hh:176
+msgid   "Usage"
+msgstr  "កា​រប្រើប្រាស់"
 
-#: ../xffm/fm/view/root/model.hh:179
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "ចោល​ឯកសារ"
-
-#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
-msgid   "Disk Image Mounter"
-msgstr  "កម្មវិធី​ម៉ោន​រូបភាព​ផ្ទៃតុ"
-
-#: ../xffm/fm/view/root/model.hh:227
-#, fuzzy
-msgid   "Mount local disks and devices"
-msgstr  "ប្រព័ន្ធ និង​ឧបករណ៍​ចាប់​យក​អូឌីយ៉ូ"
-
-#: ../xffm/fm/view/root/model.hh:267
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "ទីតាំង​ចំណាំ​"
-
-#: ../xffm/fm/view/root/popup.hh:175
-msgid   "Empty trash"
-msgstr  "សម្អាត​ធុងសំរាម"
-
-#: ../xffm/fm/view/root/popup.hh:228
-#, fuzzy
-msgid   "Ecrypt Volume"
-msgstr  "ភាគ​ថាស eCryptfs"
-
-#: ../xffm/fm/view/root/popup.hh:229
-msgid   "private"
-msgstr  "ឯកជន​"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
-#: ../xffm/fm/view/fuse/ecryptfs.hh:185
-msgid   "Mount"
-msgstr  "ម៉ោន"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:179
-#: ../xffm/fm/dialog/notebook/createini.hh:87
-#: ../xffm/fm/dialog/notebook/createini.hh:371
-msgid   "Save"
-msgstr  "រក្សាទុក"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:182
-msgid   "Load"
-msgstr  "ផ្ទុក"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-msgid   "Options"
-msgstr  "ជម្រើស"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
-msgid   "Advanced"
-msgstr  "កម្រិត​ខ្ពស់"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "ការ​ម៉ោន"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:745
-#, fuzzy, c-format
-msgid   "Enter Passphrase for %s"
-msgstr  "បញ្ចូល​ឃ្លា​សម្ងាត់"
-
-#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
-msgid   "NFS Network Volume"
-msgstr  "ភាគ​ថាស​បណ្ដាញ NFS"
-
-#: ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "សម​កាល​កម្ម​ថត​"
-
-#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
-msgid   "eCryptfs Volume"
-msgstr  "ភាគ​ថាស eCryptfs"
-
-#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
-msgid   "CIFS Volume"
-msgstr  "ភាគ​ថាស CIFS"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-msgid   "Mount Device"
-msgstr  "ម៉ោន​ឧបករណ៍"
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
-msgid   "Mount point:"
-msgstr  "ចំណុច​ម៉ោន ៖"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "ចំណុច​ម៉ោន ៖"
-
-#: ../xffm/fm/view/fstab/view.hh:592
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "ម៉ោន​ឧបករណ៍"
-
-#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
-msgid   "Disks"
-msgstr  "ដ្រាយ"
-
-#: ../xffm/fm/view/fstab/view.hh:922
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
 msgid   "No Label"
 msgstr  "គ្មាន​ស្លាក"
 
-#: ../xffm/fm/view/fstab/view.hh:923
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
 #, fuzzy
 msgid   "There is no file system available (unformatted)"
 msgstr  "មិន​មាន​ជំនួយ​សម្រាប់ '%s' ឡើយ ។"
 
-#: ../xffm/fm/view/fstab/view.hh:924
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+msgid   "Mount point:"
+msgstr  "ចំណុច​ម៉ោន ៖"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
 #, fuzzy
 msgid   "Not mounted"
 msgstr  "មិន​បាន​ម៉ោន"
 
-#: ../xffm/fm/view/fstab/view.hh:1059
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+msgid   "Disks"
+msgstr  "ដ្រាយ"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+msgid   "NFS Network Volume"
+msgstr  "ភាគ​ថាស​បណ្ដាញ NFS"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
 msgid   "SFTP (via SSH)"
 msgstr  "SFTP (តាមរយៈ SSH)"
 
-#: ../xffm/fm/view/fstab/view.hh:1414
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "eCryptfs Volume"
+msgstr  "ភាគ​ថាស eCryptfs"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+msgid   "CIFS Volume"
+msgstr  "ភាគ​ថាស CIFS"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
 #, fuzzy, c-format
 msgid   "Unmounting %s"
 msgstr  "ការ​អាន់ម៉ោន"
 
-#: ../xffm/fm/view/base/signals.hh:845
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
 #, fuzzy
-msgid   "Trash is empty"
-msgstr  "Tablet អស់​ថ្ម"
+msgid   "Mount point: "
+msgstr  "ចំណុច​ម៉ោន ៖"
 
-#: ../xffm/fm/view/base/signals.hh:847
-msgid   "Directory does not exist."
-msgstr  "ថត​មិន​មាន​ឡើយ ។"
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "ម៉ោន​ឧបករណ៍"
 
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "ឈ្មោះ"
+#: ../xffm/fm/view/fstab/popup.hh:21
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "សម​កាល​កម្ម​ថត​"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/fstab/popup.hh:132
+msgid   "Mount Device"
+msgstr  "ម៉ោន​ឧបករណ៍"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+msgid   "Copying files locally"
+msgstr  "ចម្លង​ឯកសារ​មូលដ្ឋាន"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
+#: ../xffm/common/gio.hh:93
+#, fuzzy
+msgid   "Moving files"
+msgstr  "ការ​ផ្លាស់ទី​បានបរាជ័យ"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+msgid   "No Image Preview"
+msgstr  "គ្មាន​ការ​មើល​រូបភាព​​ជា​មុន​ឡើយ​"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+#, fuzzy
+msgid   "Maximum image size for thumbnailing"
+msgstr  "ទំហំ​ឯកសារ​អតិបរមា សម្រាប់​រូបភាពតូច ៖"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+#, fuzzy
+msgid   "Reset image size"
+msgstr  "កំណត់​ទំហំ​រូបភាព"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
 #, fuzzy
 msgid   "Embedded Terminal"
 msgstr  "ឯកសារ​បង្កប់"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
 #, fuzzy
 msgid   "All items in the iconview."
 msgstr  "ជ្រើស​ធាតុ​ទាំងអស់​នៅ​ក្នុង​ទិដ្ឋភាព​បច្ចុប្បន្ន"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
 msgid   "Scripting"
 msgstr  "កា​រស្គ្រីប"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
 #, fuzzy
 msgid   "Clear Log"
 msgstr  "សម្អាត​ឯកសារ​កំណត់​ហេតុ"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
 #, fuzzy
 msgid   "Terminal font"
 msgstr  "ស្ថានីយ"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Renice Process"
 msgstr  "ដំណើរការ Renice"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Suspend"
 msgstr  "ផ្អាក"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Continue"
 msgstr  "បន្ត"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Interrupt"
 msgstr  "ការ​ផ្អាក"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Hangup"
 msgstr  "Hangup"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "User 1 (USR1)"
 msgstr  "អ្នកប្រើ ១ (USR1)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "User 2 (USR2)"
 msgstr  "អ្នកប្រើ ២ (USR2)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "Terminate Task"
 msgstr  "បញ្ចប់​ដំណើរការ​ភារកិច្ច"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "Abort"
 msgstr  "បោះបង់"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
 msgid   "Kill"
 msgstr  "បញ្ចប់​"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
 #, fuzzy
 msgid   "Segmentation fault"
 msgstr  "ការ​ចចារ TLS បាន​បរាជ័យ"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
 msgid   "PID"
 msgstr  "PID"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "មុន"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
 msgid   "Go to"
 msgstr  "ទៅកាន់"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
 #, fuzzy
 msgid   "loading..."
 msgstr  "កំពុងផ្ទុក..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:152
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "អះអាង​ការយក​​ចេញ "
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:154
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
 #, fuzzy
 msgid   "Destination File"
 msgstr  "ថត​ទិសដៅ"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
 #, fuzzy, c-format
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "មាន​ឯកសារ %s រួច​ហើយ ។ តើ​អ្នក​ចង់​សរសេរ​ជាន់​លើ​វា​ឬ​ទេ ?"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "ផ្នែកវែង"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "ប៊ូតុង យក​ចេញ"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "បន្ថែម​មាតិកា​ប៊ូតុង​ផ្ទាល់ខ្លួន"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "ជ្រើស​ឯកសារ​ដើម្បី​បន្ថែម..."
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "មិន​អាច​ពង្រីក​​ឯកសារ %s ៖ %s​"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "អ្នក​ត្រូវ​ចាប់ផ្ដើម​កម្មវិធី​ឡើងវិញ ។"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "បន្ថែម​មាតិកា​ប៊ូតុង​ផ្ទាល់ខ្លួន"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+msgid   "Open a New Window"
+msgstr  "បើក​បង្អួច​ថ្មី"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Differences"
+msgstr  "ភាព​ខុស​គ្នា​"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
@@ -1318,10 +942,6 @@ msgstr  "ជម្រើស​"
 msgid   "text"
 msgstr  "អត្ថបទ"
 
-#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "ឯកសារ"
-
 #: ../xffm/fm/dialog/notebook/createini.hh:436
 msgid   "folder"
 msgstr  "ថត"
@@ -1334,102 +954,208 @@ msgstr  "នៅ"
 msgid   "off"
 msgstr  "បិទ"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "ប៊ូតុង យក​ចេញ"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "បន្ថែម​មាតិកា​ប៊ូតុង​ផ្ទាល់ខ្លួន"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "ជ្រើស​ឯកសារ​ដើម្បី​បន្ថែម..."
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "មិន​អាច​ពង្រីក​​ឯកសារ %s ៖ %s​"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "អ្នក​ត្រូវ​ចាប់ផ្ដើម​កម្មវិធី​ឡើងវិញ ។"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
-#, fuzzy
-msgid   "FIXME New custom content"
-msgstr  "បន្ថែម​មាតិកា​ប៊ូតុង​ផ្ទាល់ខ្លួន"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-msgid   "Open a New Window"
-msgstr  "បើក​បង្អួច​ថ្មី"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
-#, fuzzy
-msgid   "Differences"
-msgstr  "ភាព​ខុស​គ្នា​"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
 #, fuzzy
 msgid   "Open menu"
 msgstr  "បើក​ម៉ឺនុយ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+msgid   "Background Color"
+msgstr  "ពណ៌​ផ្ទៃខាងក្រោយ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+msgid   "Foreground Color"
+msgstr  "ពណ៌​ផ្ទៃ​ខាងមុខ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "ពណ៌​ពាក្យ​បញ្ជា ៖"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+#, fuzzy
+msgid   "Error Text Color"
+msgstr  "ពណ៌​អត្ថបទ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+msgid   "Color settings"
+msgstr  "ការ​កំណត់​ពណ៌"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "Sort by"
+msgstr  "តម្រៀប​តាម"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "File extension"
+msgstr  "កន្ទុយ​ឯកសារ"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
 #, fuzzy
 msgid   "View as list"
 msgstr  "មើល​បញ្ជី​ចាក់​មេឌៀ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
 msgid   "Show hidden files"
 msgstr  "បង្ហាញ​ឯកសារ​ដែលលាក់"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
 #, fuzzy
 msgid   "Show Backup Files"
 msgstr  "បង្ហាញ​ឯកសារ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
 msgid   "Sort data in descending order"
 msgstr  "តម្រៀប​ទិន្នន័យ​តាម​លំដាប់​ចុះ"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
 msgid   "Sort by date"
 msgstr  "តម្រៀប​តាម​កាលបរិច្ឆេទ​"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
 #, fuzzy
 msgid   "Sort by size"
 msgstr  "តម្រៀប​តាម​ទំហំ​"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
 msgid   "Main menu"
 msgstr  "ម៉ឺនុយ​មេ"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid   "Long press time"
-msgstr  "ផ្នែកវែង"
-
-#: ../xffm/fm/dialog/dialog.hh:122
+#: ../xffm/fm/dialog/dialog.hh:121
 msgid   "Removed"
 msgstr  "បាន​យកចេញ​"
 
-#: ../xffm/fm/dialog/dialog.hh:143
-#, fuzzy
-msgid   "Detected device(s):"
-msgstr  "ឧបករណ៍​ដែល​បាន​រក​ឃើញ"
+#: ../xffm/common/run.hh:339
+msgid   "warning"
+msgstr  "ការព្រមាន​"
 
-#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+msgid   "Enter password"
+msgstr  "បញ្ចូល​ពាក្យសម្ងាត់"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#, fuzzy
+msgid   "Executable"
+msgstr  "ឯកសារ​ប្រតិបត្តិ ៖"
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+msgid   "Run in Terminal"
+msgstr  "ដំណើរការ​ក្នុង​ស្ថានីយ"
+
+#: ../xffm/common/run.hh:652
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "អាគុយម៉ង់​សម្រាប់​ពាក្យ​បញ្ជា"
+
+#: ../xffm/common/run.hh:874
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "ប្ដូរ​ឈ្មោះ​ឯកសរ ឬ​ថត​ដែល​បាន​ជ្រើស"
+
+#: ../xffm/common/settings.hh:178
+#, fuzzy
+msgid   "New File:"
+msgstr  "ឯកសារ​ថ្មី"
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, c-format
+msgid   "Open with %s"
+msgstr  "បើក​ជា​មួយ %s"
+
+#: ../xffm/common/util.hh:1513
+msgid   "Text Editor"
+msgstr  "កម្មវិធី​​កែសម្រួល​​អត្ថបទ"
+
+#: ../xffm/common/util.hh:1554
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  "កុងសូល ៖ ដំណើរការ​ពាក្យ​បញ្ជា​ទោល​ដោយ​រហ័ស -- សរសេរ​ពាក្យ​បញ្ជា​នៅ​ទីនេះ ហើយ​ចុច បញ្ចូល "
+        "(enter) ។"
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Target"
+msgstr  "គោលដៅ​"
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Files"
+msgstr  "ឯកសារ"
+
+#: ../xffm/common/dnd.hh:49
+#, fuzzy
+msgid   "More…"
+msgstr  "ច្រើន​ទៀត"
+
+#: ../xffm/common/dnd.hh:63
+msgid   "Move"
+msgstr  "​ផ្លាស់ទី​"
+
+#: ../xffm/common/dnd.hh:143
+#, fuzzy
+msgid   "Create Link"
+msgstr  "​បង្កើត​តំណ​និមិត្ត​សញ្ញា"
+
+#: ../xffm/common/dnd.hh:155
+#, fuzzy
+msgid   "more"
+msgstr  "ឬ​ច្រើន​ជាង"
+
+#: ../xffm/common/gio.hh:91
+#, fuzzy
+msgid   "Copying files"
+msgstr  "ចម្លង​ឯកសារ"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "កំពុង​គិត"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "ប្ដូរ​ឈ្មោះ"
+
+#: ../xffm/common/gio.hh:408
+msgid   "Overwrite?"
+msgstr  "សរសេរ​ជាន់​លើ ?"
+
+#: ../xffm/common/gio.hh:498
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d នៃ %d)"
+
+#: ../xffm/response/customresponse.hh:55
+msgid   "Execute command"
+msgstr  "ប្រតិបត្តិ​ពាក្យ​បញ្ជា"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "ឯកសា​ប្រភព"
+
+#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+msgid   "Ok"
+msgstr  "យល់ព្រម"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "ចាកចេញ"
+
+#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
 msgid   "Running"
 msgstr  "ដំណើរការ"
 
-#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
+#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
 #, fuzzy
 msgid   "Waiting for operation to finish..."
 msgstr  "កំពុង​រង់ចាំ​ dvips ដើម្បី​បញ្ចប់​..."
@@ -1443,66 +1169,428 @@ msgstr  "ព័ត៌មាន​អ្នក​ប្រើ​"
 msgid   "Response Requested"
 msgstr  "បាន​ស្នើ​ការ​ឆ្លើយ​តប​"
 
-#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
-msgid   "Ok"
-msgstr  "យល់ព្រម"
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  "គ្មាន​សិទ្ធិ​អាន"
 
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "ប្រតិបត្តិ​ពាក្យ​បញ្ជា"
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:341
+msgid   "Path"
+msgstr  "ផ្លូវ"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "ឯកសា​ប្រភព"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "រក​ឯកសារ និង​ថត​នៅ​​កុំព្យូទ័រ​នេះ​តាម​ឈ្មោះ ឬ​មាតិកា"
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "ចាកចេញ"
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+msgid   "Filter:"
+msgstr  "តម្រង ៖"
 
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "របៀប​បំពេញ​ ៖"
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  "ស្វែងរក​ឯកសារ"
 
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "ពាក្យ​បញ្ជា"
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "មាតិកា ៖"
 
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "ជម្រើស >>"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "ពាក្យ​បញ្ជា"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "ឯកសារ"
-
-#: ../xffm/completion/base.hh:34
+#: ../xffm/find/fgr.hh:128
 #, fuzzy
-msgid   "Command history"
-msgstr  "ដំណើរការ​ប្រវត្តិ​ពាក្យ​បញ្ជា"
+msgid   "File's contents filtered as plain text."
+msgstr  "រក្សាទុក​ឯកសារ​ជា​អត្ថបទ​ធម្មតា ?"
 
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "អថេរ"
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  "របៀប​បំបាត់​កំហុស​ដែល​មាន​លទ្ធ​ដោយ​បរិយាយ ។"
 
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "ម៉ាស៊ីន"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "បង្ហាញ​ព័ត៌មាន​កំណែ"
 
-#: ../xffm/completion/base.hh:55
+#: ../xffm/find/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "សេចក្តី​លម្អិត​តម្រង"
+
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
 #, fuzzy
-msgid   "Found no match"
-msgstr  "មិន​ផ្គូផ្គង"
+msgid   "Stay on single filesystem"
+msgstr  "អាន​តែ​ប្រព័ន្ធ​ឯកសារ​ប៉ុណ្ណោះ"
 
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "ផ្គូផ្គង"
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "បោះពុម្ព..."
 
-#: ../xffm/completion/base.hh:142
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "លេខសម្គាល់​ដំណើរការ​មានតែមួយ ដែល​កំណត់អត្តសញ្ញាណ​ដំណើរការ​នេះ ។"
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
 #, fuzzy
-msgid   "Too many files open"
-msgstr  "ថត​ច្រើន​ពេក"
+msgid   "Find hidden files and directories"
+msgstr  "បង្ហាញ​ថត និង​ឯកសារ​ដែល​បាន​លាក់"
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "តម្រង"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+msgid   "Recursive"
+msgstr  "ត្រឡប់"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  "គីឡូបៃ"
+
+#: ../xffm/find/fgr.hh:148
+#, fuzzy
+msgid   "is greater than or equal to"
+msgstr  "ការ​វាយ​តម្លៃ​ធំជាង ឬ​ស្នើ​នឹង %s ។"
+
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "is less than or equal to"
+msgstr  "ការ​វាយតម្លៃ​តូច​​ជាង ឬ​ស្មើ​នឹង %s ។"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "កំណត់ UID"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Executable Text Files"
+msgstr  "ឯកសារ​ដែល​អាច​ប្រតិបត្តិ​បាន"
+
+#: ../xffm/find/fgr.hh:154
+#, fuzzy
+msgid   "The permissions of the file, in octal notation."
+msgstr  "ទីតាំង​ឯកសារ​មិន​អាច​ត្រូវ​បាន​ម៉ោន​ទេ ។"
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "ប្រភេទ"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "ណាមួយ"
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "ពេល​​វេលា​​លំនាំ​​ដើម​"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "គ្រោងការណ៍​យូនីក"
+
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+msgid   "Minutes"
+msgstr  "នាទី"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+msgid   "Hours"
+msgstr  "ម៉ោង"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+msgid   "Days"
+msgstr  "ថ្ងៃ"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "ខែ"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "ខែ​"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "ពេលវេលា​កំណែប្រែ​"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "រយៈ​ពេល​ដំណើរការ"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "ពេលវេលា​បង្កើត"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "uid"
+msgstr  "Uuid"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "អ្នកប្រើ ៖"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "មិន​ចេះ​ប្រែប្រួល"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "ក្រុម ៖"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+#, fuzzy
+msgid   "Content View"
+msgstr  "​ទិដ្ឋ​ភាព​បរិបទ"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "ខ្សែ​អក្សរ"
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  "បន្ថែម"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "មិន​អើពើ​ករណី​ដូច​គ្នា"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "ឯកសារ​អត្ថបទ"
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+#, fuzzy
+msgid   "No match"
+msgstr  "គ្មាន​ការ​ផ្គូផ្គង"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+msgid   "Line Count"
+msgstr  "ចំនួន​ជួរ"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "ពាក្យ"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "បន្ទាត់"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "ការ​ប្រើ​ ៖​ %sRAW​ [បើក​​ | បិទ​]"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "ធម្មតា"
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
+#: ../xffm/find/dialog.hh:245
+msgid   "Results"
+msgstr  "លទ្ធ​ផល"
+
+#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+msgid   "No editor for current action."
+msgstr  "គ្មាន​កម្មវិធីនិពន្ធ​សម្រាប់​សកម្មភាព​បច្ចុប្បន្ន​ទេ ។"
+
+#: ../xffm/find/signals.hh:501
+msgid   "Upper limit:"
+msgstr  "ព្រំដែន​លើ ៖"
+
+#: ../xffm/find/signals.hh:503
+msgid   "Counting files..."
+msgstr  "កំពុង​រាប់​ឯកសារ..."
+
+#: ../xffm/find/signals.hh:518
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "ផ្គូផ្គង %d"
+
+#: ../xffm/find/signals.hh:520
+#, fuzzy, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s [បាន​បញ្ចប់]"
+
+#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+msgid   "Searching..."
+msgstr  "កំពុង​ស្វែង​រក..."
+
+#: ../xffm/find/dialog.hh:106
+msgid   "Find"
+msgstr  "រក"
+
+#: ../xffm/find/dialog.hh:131
+#, fuzzy
+msgid   "Close find"
+msgstr  "បិទ"
+
+#: ../xffm/find/dialog.hh:146
+#, fuzzy
+msgid   "Find Files"
+msgstr  "រក​ឃើញ​ឯកសារ"
+
+#: ../xffm/find/dialog.hh:209
+#, fuzzy
+msgid   "Select advanced options"
+msgstr  "ជ្រើស​ជម្រើស​មួយ"
+
+#: ../xffm/find/dialog.hh:245
+#, fuzzy
+msgid   "Upper limit"
+msgstr  "ព្រំដែន​លើ ៖"
+
+#: ../xffm/find/dialog.hh:250
+msgid   "At Least"
+msgstr  "យ៉ាង​ហោច​ណាស់"
+
+#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+msgid   "kBytes"
+msgstr  "គីឡូបៃ"
+
+#: ../xffm/find/dialog.hh:255
+msgid   "At Most"
+msgstr  "ច្រើន​បំផុត"
+
+#: ../xffm/find/dialog.hh:266
+msgid   "Group"
+msgstr  "ក្រុម"
+
+#: ../xffm/find/dialog.hh:270
+#, fuzzy
+msgid   "Octal Permissions"
+msgstr  "សិទ្ធិ"
+
+#: ../xffm/find/dialog.hh:275
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:299
+msgid   "Months"
+msgstr  "ខែ"
+
+#: ../xffm/find/dialog.hh:309
+#, fuzzy
+msgid   "File type : "
+msgstr  "ប្រភេទ​ឯកសារ ៖"
+
+#: ../xffm/find/dialog.hh:355
+#, fuzzy
+msgid   "Display file selection dialog"
+msgstr  "បង្ហាញ​ជម្រើស"
+
+#: ../xffm/find/dialog.hh:414
+#, fuzzy
+msgid   "Contains the text"
+msgstr  "មាន​ធាតុ %d"
+
+#: ../xffm/find/dialog.hh:444
+msgid   "Case Sensitive"
+msgstr  "ប្រកាន់​តួ​អក្សរ​តូច​ធំ"
+
+#: ../xffm/find/dialog.hh:445
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "ដក​ចេញ​បន្ថែម​"
+
+#: ../xffm/find/dialog.hh:446
+msgid   "Include binary files"
+msgstr  "រួម​បញ្ចូល​ឯកសារ​ទ្វេភាគ"
+
+#: ../xffm/find/dialog.hh:455
+msgid   "Anywhere"
+msgstr  "កន្លែង​ណាមួយ"
+
+#: ../xffm/find/dialog.hh:456
+msgid   "Whole words only"
+msgstr  "តែ​ពាក្យ​ទាំងមូល​ប៉ុណ្ណោះ"
+
+#: ../xffm/find/dialog.hh:457
+msgid   "lines"
+msgstr  "បន្ទាត់"
+
+#: ../xffm/find/dialog.hh:680
+msgid   "Modified"
+msgstr  "បាន​កែប្រែ"
+
+#: ../xffm/find/dialog.hh:684
+msgid   "Created"
+msgstr  "បាន​បង្កើត​"
+
+#: ../xffm/find/dialog.hh:688
+#, fuzzy
+msgid   "Accessed"
+msgstr  "បាន​ដំណើរការ ៖"
+
+#: ../xffm/find/dialog.hh:1006
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "បិទ"
+
+#: ../xffm/find/dialog.hh:1010
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1019
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 

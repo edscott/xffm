@@ -67,7 +67,7 @@ public:
       for (const char **p=opts; p && *p; p++, k++){
         r = gtk_radio_button_new_with_label_from_widget (group, *p);
         if (k==0) group = GTK_RADIO_BUTTON(r);
-        gtk_box_pack_start(GTK_BOX(rBox), r, TRUE, TRUE, 5);
+        compat<bool>::boxPackStart(GTK_BOX(rBox), r, TRUE, TRUE, 5);
         g_object_set_data(G_OBJECT(dialog), *p, r);
         g_object_set_data(G_OBJECT(r), "action", GINT_TO_POINTER(optAction[k]));
         if (action == optAction[k]) gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(r), TRUE);

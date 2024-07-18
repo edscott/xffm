@@ -116,14 +116,14 @@ private:
             if (pixbuf) {
                 auto image = gtk_image_new_from_pixbuf(pixbuf);
                 if (image) {
-                    gtk_box_pack_start(vbox, image, FALSE, FALSE,0);
+                    compat<bool>::boxPackStart(vbox, image, FALSE, FALSE,0);
                     gtk_widget_show (image);
                 }
             }
         }
-        gtk_box_pack_start(vbox, GTK_WIDGET(label_), FALSE, FALSE,0);
+        compat<bool>::boxPackStart(vbox, GTK_WIDGET(label_), FALSE, FALSE,0);
         progressBar_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
-        gtk_box_pack_start(vbox, GTK_WIDGET(progressBar_), FALSE, FALSE,0);
+        compat<bool>::boxPackStart(vbox, GTK_WIDGET(progressBar_), FALSE, FALSE,0);
         setTitle(NULL, dialog);
         setProgressBarText(NULL, progressBar_);
         gtk_widget_realize (GTK_WIDGET(dialog));

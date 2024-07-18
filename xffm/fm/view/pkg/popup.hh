@@ -281,23 +281,23 @@ private:
         gtk_label_set_markup(top, t);
         g_free(t);
         gtk_widget_show(GTK_WIDGET(top));
-        gtk_box_pack_start(content_box, GTK_WIDGET(top), FALSE, FALSE, 1);
+        compat<bool>::boxPackStart(content_box, GTK_WIDGET(top), FALSE, FALSE, 1);
 
         // XXX here goes the use_custom_envar() conditional...
  /*
         if (use_custom_envar){
             GtkBox *env_box = GTK_BOX(rfm_hbox_new(FALSE, 1));
-            gtk_box_pack_start(content_box, GTK_WIDGET(env_box), FALSE, FALSE, 1);
+            compat<bool>::boxPackStart(content_box, GTK_WIDGET(env_box), FALSE, FALSE, 1);
     // FIXME: find available translation for "Environment options:"
             GtkWidget *env=gtk_label_new(_("Environment options:"));
-            gtk_box_pack_start(env_box, GTK_WIDGET(env), FALSE, FALSE, 1);
+            compat<bool>::boxPackStart(env_box, GTK_WIDGET(env), FALSE, FALSE, 1);
             GtkWidget *env_entry = gtk_entry_new();
             if (envvar && strlen(envvar)) gtk_entry_set_text(GTK_ENTRY(env_entry), envvar);
             else {
                 gtk_entry_set_placeholder_text (GTK_ENTRY(env_entry), 
                         (use_custom_envar_string)?(use_custom_envar_string):"ENVAR=\"\"");
             }
-            gtk_box_pack_start(env_box, GTK_WIDGET(env_entry), FALSE, FALSE, 1);
+            compat<bool>::boxPackStart(env_box, GTK_WIDGET(env_entry), FALSE, FALSE, 1);
             g_object_set_data(G_OBJECT(dialog), "env_entry", env_entry);
             gtk_widget_show_all(GTK_WIDGET(env_box));
         }
@@ -342,14 +342,14 @@ private:
         auto label_widget = gtk_bin_get_child(GTK_BIN(pkgButton));
         gtk_label_set_markup(GTK_LABEL(label_widget), markup);
         auto pkgBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
-        gtk_box_pack_start(GTK_BOX(pkgBox), pkgButton, FALSE, FALSE, 1);
+        compat<bool>::boxPackStart(GTK_BOX(pkgBox), pkgButton, FALSE, FALSE, 1);
         gtk_widget_show(GTK_WIDGET(pkgBox));
         gtk_widget_show(pkgButton);
-        gtk_box_pack_start(GTK_BOX(content_box), GTK_WIDGET(pkgBox), FALSE, FALSE, 1);
+        compat<bool>::boxPackStart(GTK_BOX(content_box), GTK_WIDGET(pkgBox), FALSE, FALSE, 1);
 
         // Pkg options box.
         auto scrolled_window = gtk_scrolled_window_new(NULL, NULL);
-        gtk_box_pack_start(GTK_BOX(content_box), scrolled_window, FALSE, FALSE, 1);
+        compat<bool>::boxPackStart(GTK_BOX(content_box), scrolled_window, FALSE, FALSE, 1);
 
         auto pkgOptionsBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
         gtk_container_add(GTK_CONTAINER(scrolled_window), GTK_WIDGET(pkgOptionsBox));
@@ -357,7 +357,7 @@ private:
         //gtk_widget_realize(GTK_WIDGET(pkgOptionsBox));
 
         auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 1));
-        gtk_box_pack_start(GTK_BOX(pkgOptionsBox), GTK_WIDGET(vbox), FALSE, FALSE, 1);
+        compat<bool>::boxPackStart(GTK_BOX(pkgOptionsBox), GTK_WIDGET(vbox), FALSE, FALSE, 1);
         g_signal_connect(G_OBJECT(pkgButton), "clicked", G_CALLBACK(hideShow), scrolled_window); 
 
         
@@ -366,7 +366,7 @@ private:
         GtkWidget *check;
         for (auto optionNode = node; optionNode; optionNode = optionNode->next){
             auto optionBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1));
-            gtk_box_pack_start(GTK_BOX(vbox), GTK_WIDGET(optionBox), FALSE, FALSE, 1);
+            compat<bool>::boxPackStart(GTK_BOX(vbox), GTK_WIDGET(optionBox), FALSE, FALSE, 1);
             auto loption = xmlStructure->getAttribute(optionNode, "loption");
             gchar *label = g_strdup_printf ("--%s", loption);
             check = gtk_check_button_new_with_label(label);
@@ -376,7 +376,7 @@ private:
             auto hlp = xmlStructure->getText(optionNode);
             gtk_widget_set_tooltip_text(GTK_WIDGET(check), hlp);
             g_object_set_data(G_OBJECT(check), "dialog", dialog);
-            gtk_box_pack_start(GTK_BOX(optionBox), check, FALSE, FALSE, 1);
+            compat<bool>::boxPackStart(GTK_BOX(optionBox), check, FALSE, FALSE, 1);
             
             GtkRequisition minimum;
             auto parameter = xmlStructure->getAttribute(optionNode, "parameter");
@@ -463,7 +463,7 @@ private:
         g_object_set_data(G_OBJECT(dialog), elabel, entry);
         g_free(elabel);
         GtkWidget *lab = gtk_label_new("=");
-        gtk_box_pack_start(obox, GTK_WIDGET(lab), FALSE, FALSE, 1);
+        compat<bool>::boxPackStart(obox, GTK_WIDGET(lab), FALSE, FALSE, 1);
         gtk_box_pack_end(obox, GTK_WIDGET(entry), TRUE, TRUE, 1);
         gtk_widget_show_all(GTK_WIDGET(obox));
         gtk_widget_set_sensitive(entry, FALSE);

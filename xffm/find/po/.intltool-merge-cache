@@ -1,1920 +1,0 @@
-gaFilter:Scagaire:hiCloseबंद करेंlbClearEidelmaachencyMonthsMisoeddbglinesредаdaMatchMatchbgkBytesкБsr@ijekavianlatinAnybilo kojasqRegularI RregulltmlModifiedപരിഷ്കരിച്ചുskPathCestaelRegularΤακτικέςjaSelect folder to search in検索するフォルダーの選択plExtended regexpRozszerzone wyrażenia regularnehuInclude binary filesBináris fájlokban isplNo matchBrak dopasowaniazh_HKClose關閉svLine CountRadantalteCancelరద్దుచేయిhuReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-A bővített regexp által lefoglalt karakterek:
-. ^ $ [ ] ? * + { } | \ ( ) : 
-Az alapvető reguláris kifejezésekben a ?, +, {, |, (, és )metakarakterek elveszítik különleges jelentésüket.
-
-. = egyetlen tetszőleges karakter
-^ = a sor eleje
-$ = a sor vége
-
-[ ] = egyetlen karakter ebből a listából
-[^ ] = egyelen karakter, amely nincs ebben a listában
-[ - ] = egyetlen karakter az adott intervallumból
-
-Ezeket követheti egy ismétlődési operátor:
-? = az előző elem opcionális, legfeljebb egyszer szerepel
-* = az előző elem nulla, egy vagy több alkalommal fordul elő
-+ = az előző elem egy vagy több alkalommal fordul elő
-{n} = az előző elem pontosan n-szer szerepel
-{n,} = az előző elem n-szer vagy többször szerepel
-{n,m} = az előző elem legalább n-szer, legfejlebb m-szer szerepel
-
-Speciális karakterekkel történő egyezés kereséséhez azok elé tegyünk egy \-t.
-
-Több reguláris kifejezés logikai VAGY kapcsolatba köthető a | jellel.
-További információk a parancssorban kiadott "man grep" paranccsal érhetők el.
-zh_TWCase Sensitive區分大小寫kmUserអ្នកប្រើesBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Reglas básicas:
-
-*  Coincidirá con cualquier carácter cero o más veces.
-?  Coincidirá con cualquier carácter exáctamente una vez.
-[] Coincidirá con cualquier carácter dentro del []
-^  Coincidirá al comienzo de la cadena
-$  Coincidirá al final de la cadena
-skOctal PermissionsOsmičkové oprávneniauz@cyrillicClearТозалашpaOctal Permissionsਉਕਟਿਲ ਅਧਿਕਾਰpt_BRPathCaminhoesNo matchNo hay ninguna coincidenciaeuContains the textTestu hau dubnFindঅনুসন্ধান (F)csFilter:Filtr:ksCase Sensitiveकेस सेंसेटिव  (a)ca@valenciaFindCercaidGroupGrupthMatchตรงกับรายการfyWhole words onlyAllinne hiele wurdenruHoursЧасыsr@ijekavianlatinPathputanja|/|$[svojstva naredbeno 'detalji:
-putanja' spiskovno 'dopunski detalji: putanja']huFIFOFIFOfyFindSykjeorResultsଫଳାଫଳଗୁଡ଼ିକen_CAResultsResultstklineshatlardzMatchམཐུན་སྒྲིག་འབད་elAnywhereΟπουδήποτεmaiContains the textपाठ सामिल करैत अछि (t)hiInclude binary filesबाइनरी फ़ाइलें शामिल करें (b)ruRecursiveРекурсивныйpaContainsਸ਼ਾਮਿਲsr@ijePathПутањаhrContains the textSadrži tekstskRecursiveRekurzívnybrCase SensitiveDoujañs d'ar pennlizherennpt_BRFIFOFIFOcaSearch returned no resultsLa cerca no ha retornat cap resultatzh_HKClear清除(C)siCase Sensitiveඅක්‍ෂර සංවේදීigunknownAmaghịruExecutableИсполняемый файлiaFIFOFIFOetCounting files...Failide loendamine...etCancelLoobukaunknownუცნობიაafSymbolic LinkSimboliese skakelglDaysDíasneSUIDSUIDafMinutesMinuteioAnyIrgacsDaysdnůgvEditCaghlaannMinutesMinuttdePathPfaddaWhole words onlyKun hele ordmaiDaysदिनfurGroupGrupdzlinesགྱལ་རིམ།srContains the textСадржи текстruHome FolderДомашняя папкаesLine CountCuenta de líneasmsOctal PermissionsKeizinan OktalastMatchConcasaskFile type : Typ súboru : gakByteskBeartnlRecursiveRecursiefesExecutableEjecutabletgUserКорбарugunknownنامەلۇمzh_HKContains the text包含指定的文字(T)eoSearching...Serĉante...roDaysZilennCase SensitiveSkil mellom små/store bokstavarptModifiedAlteradoelExecutableΕκτελέσιμοwaCreatedAhivékySearching...Издөө…ltRecursiveRekursyvusmkGroupГрупирајmrBlock deviceब्लॉक उपकरणcaLine CountComptador de líniesknUserಬಳಕೆದಾರheFindחיפושheRegularרגילgaInclude binary filesCuir comhaid dhénártha san áireamhslModifiedSpremenjenopaAt Mostਵੱਧੋ-ਵੱਧsrCloseЗатвориslPathPotzh_TW.Big5Results結果nnUpper limit:Øvre grense:en_GBCreatedCreatedndsEditBewarkenmaiGroupसमूहdaAt MostHøjestsvFile type : Filtyp: maiFilter:फिल्टर:heWhole words onlyמילים שלמות בלבדplSymbolic LinkDowiązanie symboliczneamClearሰርዝ (L)esExtended regexpExpreg extendidaeuUserErabiltzaileabnBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-মৌলিক নিয়ম নীতি:
-
-*  যে কোনো অক্ষর শূণ্য অথবা অধিক বার মেলানো হবে।
-?  যে কোনো অক্ষর শুধুমাত্র একবার মেলানো হবে
-plkByteskBajtówen_CAClearClearthRegularตามตำรับafRecursiveRekursieffiunknowntuntematonca@valenciaContains the textConté el textamDirectoryዶሴnlUpper limitBovengrensbeResultsРезультатыzh_HKEdit編輯(E)gaDaysLaethantayoGroupẸgbẹ́maiHoursघंटाviGroupNhómyiunknownאומבאַקאַנטsvMinutesMinuterdaMinutesMinutterbeAt LeastНе меншkoResults기본값elMinutesΛεπτάbrAt LeastD'an nebeutañsqModifiedNdryshuarkuSelect Files...Pelan Hilbijêre...deOctal PermissionsOktale ZugriffsrechtelvSearch returned no resultsMeklēšana neatgriež rezultātusasUserব্যৱহাৰকৰ্তাor%s Finished : %s%s ସମାପ୍ତ ହୋଇଛି : %scySearching...Yn Chwilio...mnMinutesМинутmsBlock devicePeranti blokelSymbolic LinkΣυμβολικός δεσμόςbgBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Основни правила:
-
-*  Съвпада с всеки символ повтарящ се нула или повече пъти.
-?  Съвпада с всеки символ точно един път.
-tgFindЁфтанhsbCreatedZhotowjenefrExecutableExécutablezh_TW.Big5Extended regexp延紳常規符號法則elPathΔιαδρομήcsCancelZrušiten_CAContains the textContains the textskExecutableSúbor programunlEditBewerkenastSymbolic LinkEnllaz simbólicuthFilter:ตัวกรอง:idkByteskBitacrhOctal PermissionsSekizli RuhsetleryiEditרעדאַגירltDaysDienosukkBytesкбайтівteSelect folder to search inశోధించవలసిన సంచయాన్ని ఎంచుకోండిguModifiedબદલાયેલsr@ijeFindПронађиtrAt LeastEn AzastkByteskBytesfaBlock deviceدستگاه بلوکteCase Sensitiveసందర్భ స్పందనuzCase SensitiveKatta-kichik harfni farqlashidUserPenggunauzRecursiveRekursivltClearIšvalytifi%s Finished : %s%s valmis: %sguStay on single filesystemએક ફાઈલ સિસ્ટમ પર રહોeuunknownezezagunaxhCancelHlabanoCloseLukkelFile type : Τύπος αρχείου :faCase Sensitiveحساس به بزرگی و کوچکی حروفtrSearch CompleteArama Tamamlandıuz@cyrillicRecursiveРекурсивzh_CNMatch匹配fiAt MostEnintäänhiSelect Files...फ़ाइलें चुनें...mnunknownтодорхойгүйnoSearching...Søker ...sr@ijekavianlatinUserKorisniknsoOctal PermissionsDitumelelo tša Dinomoro tše Arolwago ka Seswai hneModifiedपरिवर्धितruResultsРезультатыpsCreatedجوړ شویskDirectoryAdresáruz@cyrillicSocketСокетbgBlock deviceБлоково устройствоmiCancelWhakakorebeModifiedЗмененыtrSUIDSUIDndsFIFOFIFOmaiFindखोजू (F)kkUpper limit:Жоғарғы шегі:rukBytesкбайтruAt Mostне болееbsLine CountBroj linijaheAt Mostלכל היותרarHoursساعاتca@valenciaUpper limit:Límit superior:nnRegularVanlegmlAnyഏതെങ്കിലുംhuSearching...Keresés…roNo matchNicio potrivireidHoursJamarkBytesك. بايتasCreatedনিৰ্মাণেৰ সময়elGroupΟμάδαviSearching...Đang tìm kiếm...deFile type :  Dateityp: idAnySembarangbsSearching...Tražim...astPathCamínanlinesliniastgkBytesБайтҳоpaRegularਰੈਗੂਲਰroCancelRenunțăzh_CNNo match无匹配sr@latinAnyBilo kojahekBytesק"בukAnywhereБудь-деeoUserUzantoioGroupGruponoSelect folder to search inVel mappa du vil søkja iidAt LeastSekurang-kurangnyaiaUpper limit:Limite superior:kuMinutesXulekguRegularનિયમિતnnWhole words onlyBerre heile ordhuUpper limit:Felső korlát:zh_CNSearching...搜索中...pt_BRUpper limitLimite superioretunknowntundmatupaCase Sensitiveਅੱਖਰ ਅਕਾਰ 'ਤੇ ਨਿਰਭਰ(a)nlHoursUrenbsRegularosnovnimkkBytesКБајтиlvRecursiveRekursīvselAt MostΤο πολύsr@latinSearching...Pretražujem...beAt MostНе большviContainschứaviUserNgười dùngndsAnyJichtenswatastResultsResultaoseoCancelNuligiuz@cyrillicDaysКунcsGroupSkupinadeUserBenutzerglSelect folder to search inSeleccione o cartafol no que buscarmgPathSori-dàlanagaDirectoryComhadlannbrAnyAn hollbgRegularОбикновенаtrFile type : Dosya türü : en_GBHome FolderHome FolderknkBytesಕಿಲೋಬೈಟುಗಳುkkRegularҚалыптыnnClearTømeuFIFOFIFOnsoBlock deviceSediriwa sa go thibaseMonthsMánuhuSelect Files...Fájlválasztás…kuRegularAsayîocCreatedCreattkSocketSukettkUserUllançyidSearch returned no resultsPencarian tak ada hasil.idHome FolderFolder Rumahbn_INClearমুছে ফেলুনtkCancelYbtaldeExtended regexpErweiterter Regexen_GBPathPathhiResultsपरिणामeoMatchKompaript_PTSocketSocketsrDaysДаниasResultsফলাফলসমূহfaSearching...در حال جست و جوhrunknownnepoznatozh_HKFind搜尋bgCloseЗатварянеdaSocketSokkelfyRecursiveRekursyfcsBlock deviceBlokové zařízeníazBlock deviceBlok avadanlığıdeUpper limitOberes LimitmrSearching...शोधत आहे...etSearching...Otsing...asFIFOFIFOtaInclude binary filesஉள்ளடக்குஇரும கோப்புகள்kmEditកែសម្រួលzh_HKlines行csMonthsMěsícůcsBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Základní pravidla:
-
-* Zastupuje žádný nebo více libovolných znaků.
-? Zastupuje jeden libovolný znak.
-caAnywhereOn siguiafAnyEnigedeGroupGruppemlFindകണ്ടെത്തുകarAnywhereأي مكانwaFilter:Passete:etExecutableTäitmisfailkoLine Count줄 수kmAnyណាមួយjaModified変更済bnCase Sensitiveঅক্ষরের ছাঁদ সংবেদনশীলitFIFOFIFOesFindBuscarnbHoursTimernsoEditLokišaugGroupگۇرۇپپاmlHome Folderആസ്ഥാന അറpt_BRMatchCombinaviBlock deviceThiết bị khốicyPathLlwybrroInclude binary filesInclude fișierele binarearRecursiveتكرارcyCreatedCrëwyden_CAEditEditplModifiedZmodyfikowanokyFindТабууastAnyCualisquierajaContains含むneSymbolic Linkसाङ्केतिक लिङ्कetMinutesMinutitasDaysদিনবোৰkoDirectory디렉토리taDirectoryi அடைவுhiFind hidden files and directoriesछुपी फ़ाइलों तथा डिरेक्ट्रीज़ ढूंढेंazEditDüzəltetDirectoryKataloogisRecursiveUndirmöppursr@ijekavianlatinSearching...Tražim...cyEditGolygufaMatchتطبیقelUserΧρήστηςugFilter:سۈزگۈچ:sqMatchKorrispondimiroCloseÎnchidekaSearching...ვეძებ...heDaysימיםamunknownያልታወቀptFilter:Filtro:thCloseปิดkuGroupKombrInclude binary filesEnlakaat restroù binarelisInclude binary filesLeita í tvíundarskrámiaInclude binary filesIl include files binaribnunknownঅজানাmaiUserप्रयोक्ताthUserผู้ใช้heAnyכל סוגzuUserUmsebenzisifrContains the textContient le texteesInclude binary filesIncluir archivos binarioslvContains the textSatur tekstutePathత్రోవuz@cyrillicAccessedФойдаланилганpsEditسمونzh_CNMonths月deFIFOFIFOsvCharacter deviceTeckenenhethePathנתיבndsContainsBargtdaCancelAfbryden_GBRecursiveRecursivezh_TW.Big5Basic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-基本規則：
-
-*  匹配任何字符 0 或任意次。
-?  匹配任何字符 1 次。
-tkDirectoryDaýrektorykaPathგეზიnblineslinjerjaSymbolic Linkシンボリックリンクzh_TWCancel取消mrCreatedनिर्मितtgGroupГурӯҳcsSocketSoketpaRecursiveਲੜੀਵਾਰlbUserBenotzerdzCase Sensitiveགནད་དོན་ཉེན་ཅན།(a)hrRecursiveRekurzivnokoSocket소켓elSearching...Αναζήτηση...paFile type : ਫਾਇਲ ਕਿਸਮ ਃ myPathလမ်း​ကြောင်းbn_INWhole words onlyশুধুমাত্র সম্পূর্ণ শব্দ (W)skClearZmazaťne%s Finished : %s%s समाप्त भयो : %snoFIFOFIFOfyHoursoerenfyAnyEltsekuAt LeastBi KêmanîsrSelect folder to search inИзаберите фасциклу у којој извршити претрагуguCase Sensitiveકેસ પ્રત્યે સંવેદનશીલttPathYuluz@cyrillicSelect folder to search inҚидириш амалга ошириладиган жилдни танлашhneFind hidden files and directoriesलुकाए फाइल मन ल अउ डिरेक्टरीज खोजवneSocketसकेटzh_CNWhole words only匹配整个单词(W)pt_BRNo editor component found.Nenhum editor de componente encontrado.bgModifiedПромененnnunknownukjendeuNo matchBat datorrenik ezkoAt Least최소한mkCase SensitiveРазликувај мали-големи буквиcsSelect Files...Vybrat soubory...bsCloseZatvorieoInclude binary filesInkluzivi duumajn dosierojnsvunknownokändmlUpper limit:കൂടിയ‌ പരിധി:afStay on single filesystemBly binne een lêerstelseljaPathパス名nsoCloseTswalelahsbFilter:Filter:ukInclude binary filesВключати двійкові файлиidFound %d match%s [Selesai]ugMatchمۇۋاپىقcrhModifiedDeñiştirilgencsbContainsZamëkôwaMinutesMunutesca@valenciaContainsContélvFIFOFIFOslSearch returned no resultsIskanje ni vrnilo rezultatoven_GBContainsContainsca@valenciaSUIDSUIDnnSymbolic LinkSymbolsk lenkjewaCloseClôreglCancelCancelarsiClearපැහැදිලි කරන්න (C)seHoursDiimmuafFindVindmsDaysHarirwCancelKurekadaFindFindfilinesriviäbgAt Mostнай-многоkaHome Folderსახლის დასტაplHoursGodzinyttUserQullanuçızh_HKCancel取消mnCancelЦуцлаcaCreatedCreatca@valencialineslíniesbgCreatedСъздаденоptSelect folder to search inSelecione a pasta onde procurarkyHome FolderӨзүмдүк каталогca@valenciaCloseTancakyGroupТоптун радиосуltCreatedSukurtaitFind hidden files and directoriesTrova file e cartelle nascostiocUserUtilizairept_BREditEditarplExecutablePlik wykonywalnyjaCase Sensitive大/小文字を区別するsrMinutesМинутаsiGroupකණ්ඩායමtgCancelБекор карданukSelect Files...Виберіть файли...heSelect folder to search inבחירת תיקייה לחיפושkyHoursСаатhneSocketसाकेटkmkBytesគីឡូបៃkaSelect folder to search inძებნის ჩასატარებლად დასტის ამორჩევაjaCharacter deviceキャラクターデバイスsiRegularක්‍රමවත්brSelect Files...Dibabit ar restroù ...sqResultsRezultatetukAnyБудь-якийfurUserUtentmsFindCarizh_TWHome Folder家資料夾nlSymbolic LinkSymbolische koppelingmlMinutesമിനിറ്റുകള്‍amGroupመድረክ (G)azFindAxtarkaEditრედაქტირებაzh_CNEdit编辑(E)euBlock deviceBlokeatu gailuafiContainsSisältäätrSocketSoketbsNo editor component found.Nije pronađena komponenta urednika.huNo matchNincs találatroMatchPotriviretkFindTapndsFilter:Filter:mgUserMpampiasafaResultsنتایجnlBlock deviceBlok-apparaatitUpper limit:Limite superiore:eulinesLerroaktgCloseПӯшиданmaiWhole words onlyकेवल संपूर्ण अक्षर (W)teHome Folderనివాస సంచయంnlFilter:Filters:mlFIFOFIFOuzAt MostKoʻpidabn_INHome Folderব্যক্তিগত ফোল্ডারlbWhole words onlyNëmme ganz WierderslSelect Files...Izberite datoteke ...ptRegularNormalelUpper limitΆνω όριοsr@ijekavianSelect Files...Изабери фајлове...ca@valenciaFind hidden files and directoriesCerca fitxers i directoris ocultsbn_IN%s Finished : %s%s সম্পন্ন : %splOctal PermissionsUprawnienia w notacji ósemkowejen_GBlineslineslvGroupGrupapsClearپاکولsiModifiedවෙනස් කළbsBlock deviceBlok uređajidMonthsBulanslNo matchBrez zadetkovptSelect Files...Seleccionar os Ficheiros...gaNo editor component found.Níor aimsíodh aon chomhpháirt eagarthóireachta..iaRecursiveRecursiveneFIFOFIFOesSearching...Buscando…lgCancelSazamuhsbWhole words onlyJenož cyłe słowabsMinutesMinutasr@ijekavianlatinSearch CompletePretraga završenaglDirectoryDirectorionlAnywhereOveralthHome Folderโฟลเดอร์บ้านafBlock deviceBloktoestelitFindTrovazh_TWBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-基本規則：
-
-* 匹配任何字元出現零次或零次以上。
-? 匹配任何字元僅僅出現一次
-guDirectoryડિરેક્ટરીarSUIDSUIDen_CAMatchMatchpt_BRDirectoryDiretórioviCharacter deviceThiết bị ký tựugResultsنەتىجەarUpper limit:الحد الأعلى:sr@latinSelect Files...Izaberi fajlove...koCounting files...파일 개수 세는 중...isModifiedBreyttselineslinnjáeuCase SensitiveMaiuskula/minuskulafrSocketSocketslHoursUreelDaysΗμέρεςroClearCurățăukMinutesХвилиниkmMonthsខែca@valenciaCreatedCreatptSearching...A Procurar...ndsCounting files...Dateien warrt tellt...yiCancelרוף אָפּuzModifiedOʻzgartirilgansr@ijekavianlatinFindNađisrAt MostнајвишеhiStay on single filesystemएकल फाइल सिस्टम पर टिके रहेंsr@ijeGroupГрупаuzContainsBorcyunknownanhysbyssr@ijekavianlatinFilter:Filter:ruSearch CompleteПоиск завершёнfrGroupGroupepaSelect folder to search inਖੋਜ ਕਰਨ ਲਈ ਫੋਲਡਰ ਚੁਣੋptLine CountNúmero de LinhasplFilter:Filtr:waSearching...Cweriaedje...waClearNetyîitDirectoryDirectoryheNo matchהמיאתמ תזורחמ האצמנ אלsqPathPozicionikyunknownбелгисизhrWhole words onlySamo cijele riječiialineslineasuz@cyrillicEditТаҳрирлашbnkBytesকিলোবাইটwaCharacter deviceÉndjin caracterefrFindRecherchercrhClearTemizleroRecursiveRecursivzh_TWAnywhere在任何地方kaFindძიებაsqSocketSocketmaiPathपथsr@ijeCloseЗатвориidSelect Files...Pilih Berkas...roDirectoryDosarelCloseΚλείσιμοeoLine CountMontri nombron de liniojkuAt MostBi PiranîhrNo matchNema poklapanjagaNo matchNíl a leithéid annkmUpper limit:ព្រំដែន​លើ ៖be@latinDirectoryKatalohmsResultsKeputusanastNo matchNun hai coincidenciesca@valenciaUpper limitLímit superiorbsCreatedNapravljenocaCounting files...S'estan comptant els fitxers...kyAnyКаалаганtaFind hidden files and directoriesமறைந்த கோப்புகளையும் அடைவுகளையும் தேடுastExecutableExecutableamPathመተላለፊያcsUpper limit:Horní mez:caCloseTancateEditసరిచేయు (E)be@latinDaysDnifyFilter:Filterje:tgAnyҲарruPathПутьhe%s Finished : %s%s סיים : %sbsCounting files...Brojim datoteke...nnResultsResultatbrSymbolic LinkArouezerebnRegularসাধারণviFile type : Loại tập tin : sr@ijekavianMinutesминутаhneInclude binary filesबाइनरी फाइल मन ल सामिल करव (b)sr@ijeUserКорисникcsModifiedUpravenoarOctal Permissionsتصاريح ثُمانيّةhuUserFelhasználóocContainsContenruDirectoryКаталогmaiSymbolic Linkसिंबॉलिक लिंक younknownàìmọ̀kuHourssaetfrSearch CompleteRecherche terminéebgSelect folder to search inИзбор на папка, в която да търситеcrhunknownnamalümetNo editor component found.Redaktorikomponenti ei leitud.ndsUpper limit:Bövergrenz:aslinesশাৰীৰসমূহmkInclude binary filesВклучи бинарни
-датотекиkkClearТазартуseSearching...Ohcamin …lvCase SensitiveReģistrjūtīgscsCharacter deviceZnakové zařízeníastSelect Files...Seleicionar Ficheros...pt_BRSymbolic LinkLink simbólicozh_CNClear清除(C)bn_INlinesখানি পংক্তির জন্যzhSocket套接字itMonthsMesiglCounting files...A contar os ficheiros...ioCancelAbrogezarCloseأغلقwaUpper limit:Limite do dzeu :lbFound %d matchFäerdeglvUserLietotājsplMonthsMiesięcylvlinesrindasmaiCancelरद्द करूzh_TWContains the text包含指定的文字(T)zh_HKUser使用者bgHome FolderДомашна папкаjaGroupグループguClearસાફmkMinutesМинутиukGroupГрупаnnSelect folder to search inVel mappa du vil søkja iyoClearParẹ́siSearching...සොයයමින්...kmCancelបោះបង់iaMonthsMensesbsCancelOdustanimsInclude binary filesMasukkan fail binarikkAt MostКелесіден артық емесsr@latinSymbolic Linksimbolička vezanlWhole words onlyAlleen hele woordenknClearಅಳಿಸು(C)tgAccessedДастёбишудаmsCloseTutupca@valenciaHoursHorestrSelect folder to search inArama yapılacak klasörü seçinslkByteskBajtovbsContains the textSadrži tekstviBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Các quy tắc cơ bản:
-
-* Tương ứng với bất cứ kí tự nào không hoặc nhiều lần.
-? Tương ứng với bất cứ kí tự nào đúng một lần
-afWhole words onlyVolledige woorde slegsltSelect Files...Išrinkti failus...hrSymbolic LinkSimbolička vezahrClearObrišimyFindရှာဖွေkmInclude binary filesរួម​បញ្ចូល​ឯកសារ​ទ្វេភាគfurAnyCualsiseiafCase SensitiveKassensitiefheFile type : סוג קובץ: sr@ijekavianlatinHourssatisr@ijekavianCloseЗатвориfiDaysPäivääocPathCaminseSymbolic LinkSymbolalaš liŋkadeCase SensitiveGroß-/Kleinschreibung beachtenen_CAHoursHourssrBlock deviceБлоковски уређајnnSearching...Søkjer ...eoDirectoryDosierujobnCancelবাতিল করুনsqSearching...Duke kërkuar...faAnyهر چیزpt_BRBlock deviceDispositivo de blocotgSymbolic LinkПайванди рамзӣnbMonthsmånederdeBlock deviceBlockorientiertes GerätetCreatedLoodudastGroupGrupuzhPath路径taFIFOஎப்ஐஎப்ஓsvFilter:Filter:xhContains the textZiqulethe umbhalocsbClearWëczëszczësiEditසැකසුම් (E)hiSUIDSUIDetEditRedaktorlvWhole words onlyTikai pilnus vārdusthInclude binary filesรวมแฟ้มภาษาเครื่องด้วยkoHome Folder홈 폴더skAnyČokoľveknoRegularVanleghrDirectoryDirektorijkyDaysКүнeoWhole words onlyNur tutvorteplSearching...Wyszukiwanie...zh_CNPath路径zhGroup组tgInclude binary filesБо ҳамроҳи файлҳои ҳисоби дуӣpt_BRAccessedAcessadoknOctal PermissionsOctal ಅನುಮತಿಗಳುbsContainssadržiukCharacter deviceСимвольний пристрійhyCase SensitiveԶգայուն ռեգիստրի նկատմամբplAnyDowolnykoSUIDSUIDasHome Folderঘৰ ফোল্ডাৰcyFindCanfodkolines줄ruNo matchНет соответствияafModifiedVeranderocSearching...Recèrca...sqWhole words onlyVetëm fjalë të PlotatgAt LeastНа КамugWhole words onlyسۆزنىلا(W)nlMonthsMaandeneuClearGarbituesUserUsuarioyoDirectoryÌdaríelAt LeastΤουλάχιστονbeContains the textЗмяшчае тэкстzh_CNFind查找(F)arResultsالنتائجzh_TW.Big5Regular常規en_GBEditEditukPathПутьknMinutesನಿಮಿಷಗಳುskFIFOFIFOsr@latinMinutesMinutasr@latinEditUređivanjehuLine CountSorok számahiBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-मूल नियम:
-
-*  कोई भी अक्षर शून्य या अधिक बार मेल करें.
-?  कोई भी अक्षर सटीक एक बार मेल करें.
-ndsCreatedErstelltndsAt MostTohööchsteuSelect Files...Hautatu fitxategiak...fiReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Varatut erikoismerkit laajennetuille säännöllisille lausekkeille 
-(regexp) ovat: . ^ $ [ ] ? * + { } | \ ( ) : 
-Yksinkertaisissa säännöllisissä lausekkeissa merkit:
-?, +, {, |, (, ja ) menettävät erityismerkityksensä.
-
- . tarkoittaa mitä tahansa yhtä merkkiä.
- ^ tarkoittaa rivin alkua.
- $ tarkoittaa rivin loppua.
-
-Hakasulkujen [] sisällä olevat merkit tarkoittavat, että mikä 
-     tahansa näistä merkeistä kelpaa.
-[^ ] tarkoittaa, että lueteltuja merkkejä lukuunottamatta
-     kaikki merkit kelpaavat.
-[ - ] määrittää merkkialueen, jonka jokainen jäsen kelpaa.
-     Esimerkiksi [0-9] tai [a-z].
-
-Säännöllistä lauseketta voi seurata toistoa osoittava merkki:
-?     tarkoittaa, että em. lauseke saa toistua korkeintaan
-      yhden kerran.
-*     lauseke voi esiintyä nolla tai useampia kertoja.
-+     lauseke voi esiintyä yhden tai useampia kertoja.
-{n}   lauseke hyväksytään täsmälleen n kertaa.
-{n,}  lauseke hyväksytään n tai useampia kertoja 
-{n,m} lauseke esiintyy vähintään n kertaa ja enintään m kertaa.
-
-Jos haluat etsiä varattua erikoismerkkiä, voit poistaa sen
-erikoismerkityksen laittamalla \ merkin eteen. Esim. \*
-
-Kaksi säännöllistä lauseketta voidaan yhdistää loogisella
-       tai-operaattorilla |.
-Säännöllisiä lausekkeita voidaan kirjoittaa peräkkäin
-
-Lisäää tietoa saat komentorivillä komennoilla "man grep"
-       tai "man regexp"
-sr@ijekavianSocketСокетwaEditCandjîitEditModificaheFilter:מסנן:roSearching...Se caută...kkSelect Files...Файлдарды таңдау...ukNo editor component found.Не знайдено компонента редактора.dzAccessedའཛུལ་སྤྱོད་འབད་ཡོདཔ།koCancel취소sePathBálggishu%s Finished : %s%s Befejezve : %smlClearവ്യ‌‌ക്തമാക്കുകuzSocketSoketdeWhole words onlyNur ganze Wörterpt_BRModifiedModificadoslOctal PermissionsOsm. dov.bgClearИзчистванеca@valenciaAt MostCom a màximdekBytesKByteneClearखाली गर्नुहोस्asSelect folder to search inসন্ধানৰ বাবে ফোল্ডাৰ বাছকhneCloseबंद करवsrHoursСатиltLine CountEilučių skaičiusmaiOctal Permissionsऑक्टल अनुमतिसभheStay on single filesystemלהשאר במערכת קבצים (filesystem) אחתkaCreatedშექმნილიაkuMonthsMehzh_TW.Big5Character device字符設備plPathŚcieżkazhCharacter device字符设备neDaysदिनहरूnoSocketSokkelbeMatchПараўнацьafAccessedToegang verkrycsbSearching...Szëkba...nbNo editor component found.Fant ingen skriveprogramkomponent.fyAt LeastTeminsteisOctal PermissionsÁttundakerfis heimildirugMinutesمىنۇتelCase SensitiveΔιάκριση πεζών/κεφαλαίωνmaiAnyकोनोiaHoursHoraslbCancelOfbriechenbn_INOctal Permissionsঅক্টাল সংখ্যায় প্রকাশিত অনুমতিzh_TWFIFOFIFOgaAnywhereÁit Ar BithkkCounting files...Файдарды санау...fyRegularNormaaluz@cyrillicLine CountСатр сониtrBlock deviceBlok aygıtıdeCreatedErstelltsr@ijekavianDaysданаneInclude binary filesबाइनरी फाइल समावेश गर्नुहोस्roHoursOrenbGroupGruppehneMonthsमहिनाneUserप्रयोगकर्ताjaCreated作成日ocHome FolderRepertòri personaldeDaysTagebgSearch CompleteТърсенето завършиknFilter:ಫಿಲ್ಟರ್:hsbSearching...Pytam hišće...svBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Grundregler:
-
-*  Motsvarar vilket tecken som helst ingen eller fler gånger.
-?  Motsvarar vilket tecken som helst exakt en gång.
-ltAt MostdaugiausiaigaCounting files...Comhaid á n-áireamh...plDaysDnizh_CNInclude binary files包含二进制文件psPathيونلورnlContains the textBevat de tekstndsSocketSocketkkResultsНәтижелерmsModifiedDiubahsuaimgFindTadiavosrDirectoryДиректоријумhuCase SensitiveKis- és nagybetűbsAt MostNajvišeukMonthsмісяціcaDirectoryDirectorilvEditRediģētheSymbolic Linkקישור סמליseFilter:Silli:pt_BRFilter:Filtro:ugCloseياپltCounting files...Skaičiuojami failai...nlMinutesMinutenhiFIFOफीफोtrResultsSonuçlarviFIFOFIFOrwMinutesIminotapt%s Finished : %s%s Finalizado: %spt_BRWhole words onlySomente palavras inteirasguOctal Permissionsઓક્ટલ પરવાનગીઓioClearVakuigezmkLine CountБрој на линииdzCloseཁ་བསྡམ།kuCancelBetalkiringuGroupજૂથukAccessedДоступuz@cyrillicAnyИсталганnbWhole words onlyBare hele ordnlAt LeastTenminstesvSymbolic LinkSymbolisk länkiaCancelAnnullaren_GBClearClearwaGroupGroupekkExecutableОрындалатын файлorSUIDSUIDteContains the textపాఠమును కలిగివున్నది(t)bn_INNo matchমিল পাওয়া যায়নিzhExtended regexp扩展的正则表达式beUserКарыстальнікruContains the textСодержит текстsqAt MostSë ShumtiugDirectoryمۇندەرىجەarEditتحريرbsCharacter deviceZnakovni uređajdeMatchTrefferca@valenciaSymbolic LinkEnllaç simbòliccaEditEditaiaMinutesMinutasbrCloseSerriñptUpper limit:Limite superior:en_GBAccessedAccessedbn_INFilter:ফিল্টার:frSUIDSUIDltUserNaudotojasglFilter:Filtro:srContainsсадржиxhFilter:Icebo lokucoca ulwelo:thDaysวันsr@ijekavianlatinCase Sensitiverazlikovanje veličine slovaukSUIDSUIDwaInclude binary filesPrinde les fitchîs binaires avouviRegularChuẩnzh_TW.Big5unknown未知ksEditसंपादन (E)taSelect folder to search inதேட வேண்டிய அடைவினை தேர்ந்தெடுhsbCancelPřetorhnyćastCancelEncaboxarfaCloseخروجruFilter:Фильтр:etkByteskBthHoursชั่วโมงskAnywhereNezávisléelCounting files...Μέτρηση αρχείων...kyUserколодонуучунунkyOctal PermissionsСегиздик укуктарbn_INCloseবন্ধ করা হবে (C)glSearching...Buscando…faHome Folderپوشه‌ی آغازهliCloseSjloeteguDaysદિવસોkkAt LeastКем дегендеastunknowndesconocíuzh_TWWhole words only全字拼寫須相符(W)ukSearch returned no resultsНічого не знайденоmlContains the textപദാവലി അടങ്ങുന്നുtrAt MostEn ÇokpsCancelبندولcaNo matchNo hi ha cap coincidènciafaPathمسیرfySymbolic LinkSymboalyske skeakelviSelect folder to search inChọn thư mục nơi cần tìm kiếmeoAt LeastAlmenaŭfrCharacter devicePériphérique caractèreeuHome FolderKarpeta nagusiaarModifiedمعدلةhrAt LeastBaremnlMatchGelijk zijnmsFIFOFIFOsr@latinunknownnepoznatoslUpper limitZgornja mejanoAnyKva som helsthi%s Finished : %s%s संपन्न: %skoSymbolic Link심볼릭 링크vi%s Finished : %s%s Đã kết thúc : %sgaWhole words onlyFocail iomláin amháindzCharacter deviceཡིག་འབྲུ་ཐབས་འཕྲུལ།kkHoursСағатdaUserBrugerpaStay on single filesystemਇਕੱਲੇ ਫਾਇਲ ਸਿਸਟਮ ਉ	ਪਰ ਰੁਕੋcyGroupGrŵpsr@ijekavianMatchпоклапањеtgUpper limitҲади болотаринruAnyЛюбой вариантslMonthsMesecevzh_HKHome Folder家資料夾brAccessedDiwezhañrwPathInziranbSelect Files...Velg filer …nlSocketSocketitModifiedModificatofaContains the textحاوی متنocClearNetejarafHome FolderTuisgidscsHoursHodinytrFilter:Filtre adı:brMinutesa vunutennoùbnCloseবন্ধ (C)mgFound %d match%s: Tsy nety fandefasana: %sndsDaysDagerwFindGushakabe@latinEditRedahujkgClearvunzunaelCreatedΔημιουργήθηκεgaAnyAr BithviInclude binary filesGồm tập tin nhị phânbgCharacter deviceЗнаково устройствоgvHome FolderCoodagh ThaiewaAt MostÅ d' pushneDaysदिनptSymbolic LinkLigação SimbólicaglSUIDSUIDsr@ijekavianlatinInclude binary filesUključi binarne fajlovecaUserUsuarisiOctal Permissionsඅටේපාදයෙන් අවසරen_GBCloseCloseknGroupಗುಂಪುಗೂಡಿಸು(G)elEditΕπεξεργασίαtrFindBulfaCharacter deviceدستگاه نویسهtaContainsகொண்டுள்ளதுsr@latinNo matchBez poklapanjakuPathRêçkkPathЖолыca@valenciaRecursiveRecursiujaUpper limit:上限:deSymbolic LinkSymbolische VerknüpfungdaSearching...Søger...kmSocketរន្ធkkModifiedӨзгертілгенrwHoursamasahakoSearch returned no results검색 결과가 없습니다msMatchPadannbCounting files...Teller filer …dzSearch returned no resultsའཚོལ་ཞིབ་འབད་མི་འདི་ གྲུབ་འབྲས་མ་འབྱུང་igCloseMechietrCancelİptal EtcaSearch CompleteCerca completakaSymbolic Linkსიმბოლური ბმაnsoGroupSehlophasr@latinFilter:Propusnik:csResultsVýsledkyteClearశుబ్రం చేయు(C)guFile type : ફાઈલનો પ્રકાર : mkWhole words onlyСамо цели зборовиmgCloseHidiobgCancelОтказfaFilter:صافی:daBlock deviceBlokenhedpt_PTRecursiveRecursivokukByteskBayttaRegularவழக்கமானit%s Finished : %s%s completato: %skmFindរកzuGroupIqembutalinesவரிகள்iaAt LeastAl minusslGroupSkupinaskCloseZatvoriťsr@ijekavianlatinContainssadržiisFIFOFIFOhyPathՃանապարհcsInclude binary filesVčetně binárních souborůrwunknownntibizwisvMatchMatchasr@ijekavianunknownнепознатоdzSearching...འཚོལ་ཞིབ་འབད་དོ།་་་fiUserKäyttäjäorFindଖୋଜନ୍ତୁ (F)csbModifiedZjinaczonéisWhole words onlyAðeins stök orðsr@ijekavianFind hidden files and directoriesПронађи скривене фајлове и фасциклеen_GBResultsResultsamCancelተወውamAnyማነኛውምbgAccessedИзползванcsCreatedVytvořenoukUserКористувачpaLine Countਲਾਈਨ ਗਿਣਤੀhiCase Sensitiveकेस सेंसिटिवtrModifiedDeğiştirildihiCancelनिरस्तdaPathStihiMatchमिलानidNo matchTidak cocokneCreatedसिर्जना गरियोcrhContains the textMetinni ihtiva etefiOctal PermissionsOikeudet oktaalilukunakaDaysდღეnlLine CountAantal regelsfaExtended regexpregexp گسترش یافتهetSocketSokkelzhCancel取消asClearClearsqLine CountNumëro RreshtatsvWhole words onlyEndast hela ordpsFilter::چاڼthAnyทุกเวลาen_GBFile type : File type : dzBlock deviceཐབས་འཕྲུལ་འགགeuSelect folder to search inHautatu karpeta bertan bilatzekokmunknownមិន​ស្គាល់slUpper limit:Zgornja meja:kySocketСокетneCancelरद्द गर्नुहोस्elFilter:Φίλτρο:frEditÉditioneuBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Oinarrizko arauak:
-
-* Zero edo edozein karaktere ordezkatzen du.
-? Karaktere bat edo gehiago ordezkatzen ditu 
-en_CASelect folder to search inSelect folder to search inruUpper limitВерхний пределhneHoursघंटेplAnywhereGdziekolwiekiaContainsIl contineslWhole words onlySamo cele besedepsDirectoryدرکموندhsbRegularnormalnetrContains the textMetni içerirnlAnyWillekeurigxhAt LeastEyona incinci nokoneAt Leastकम्तिमाmkSocketSocketelFIFOFIFOteResultsఫలితాలుcaWhole words onlyNomés paraules senceressr@ijekavianlatinDirectoryFasciklauz@cyrillicUserФойдаланувчиmkEditУредиhneAnywhereकहीं मं भीlvUpper limit:Augšējais limits:itInclude binary filesIncludi i file binaribe@latinlinesradkoŭnlDaysDagenknNo matchಯಾವುದೂ ತಾಳೆಯಾಗುತ್ತಿಲ್ಲsqClearPastroglunknowndescoñecidoidSelect folder to search inPilih folder pencariancrhCancelVazgeçruSelect folder to search inВыбрать папку для поискаbnSUIDএস-ইউ-আই-ডিbsSearch CompletePretraga je gotovalbunknownOnbekanntviNo matchKhông tìm thấyen_GBAt MostAt MostglInclude binary filesIncluír os ficheiros binarioszh_HKResults結果bn_INFindসন্ধান করুন (F)furPathPercorsbgSearching...Търсене…mrlinesरेषाitMinutesMinutimrContains the textपाठ्य समाविष्टीत (t)ocMonthsMesesuz@cyrillicAt LeastКамидаglEditEditarastHoursHoresnsounknowne sa tsebjwegosr@ijekavianWhole words onlyСамо цијеле ријечиsrCreatedНаправљеноneAnyकुनैpt_BRClearLimparbrCancelNullañisSearching...Leita...thSelect Files...เลือกแฟ้ม...caInclude binary filesInclou els fitxers binarisastUpper limit:Llende superior:guMatchસરખાવો (M)heModifiedשונהbeRecursiveРэкурсыўнаen_CAlineslinessrUpper limit:Горња граница:mrSymbolic Linkबोधचिन्हाकृत लिंकen_GBContains the textContains the textptHoursHorasetLine CountRidade arvmsSymbolic LinkPautan Simbolikzh_CNClose关闭eoAnyIu ajnrwSearching...Gushakisha...sr@latinFindPronađittClearBuşatsr@latinContainssadržietModifiedMuudetudisSelect Files...Velja skrár...daHome FolderHjemmemappecrhSelect folder to search inArama yapılacak klasörü seçinlbRegularRegulärfrNo editor component found.Aucun composant éditeur trouvé.calineslíniespt_PTFindProcurarttSelect Files...Файлны сайлау...hiSocketसॉकेटidFilter:Filter:asSearch returned no resultsসন্ধানে কোনো ফলাফল দিযা নাইocSelect folder to search inSeleccionatz un repertòri ont recercaritMatchCorrispondecsCounting files...Jsou počítány soubory ...hiMonthsमाहkoFilter:필터:jaSocketソケットxhSymbolic LinkIkhonkco olunophawuuzAccessedFoydalanilganzh_HKAccessed存取時間plSUIDSUIDcyContainsCynhwysaiaAnyQualcunqueitExecutableEseguibiledeReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Reservierte Zeichen für erweiterte reguläre Ausdrücke sind: ^ $ [ ] ? * + { } | \ ( ).
-In einfachen regulären Ausdrücken verlieren die Metazeichen ?, +, {, |, (, und ) ihre
-spezielle Bedeutung.
-
-Der Punkt . steht für ein beliebiges, einzelnes Zeichen.
-^ passt auf den Zeilenanfang, $ auf das Zeilenende.
-
-Der Ausdruck [abc] passt auf ein beliebiges Zeichen in dieser 
-     Liste, hier also für a, b oder c.
-Der Ausdruck [^abc] passt auf ein beliebiges Zeichen, das nicht
-     in der Liste vorkommt, hier also auf alles außer a, b und c.
-Der Ausdruck [a-c] passt auf jedes Zeichen zwischen a und b
-     (beide eingeschlossen). Beispiel: [0-9] für Ziffen.
-
-Nach Ausdrücken können Quantifizierer folgen, die angeben, wie oft das/die
-angegebene(n) Zeichen wiederholt werden darf/dürfen. Ohne Quantifizierer muss das 
-Zeichen genau einmal vorkommen, damit der Ausdruck passt.
-
-Gültige Angaben sind:
-? Der vorhergehende Ausdruck darf entwede einmal oder gar nicht vorkommen.
-* Der vorhergehende Ausdruck darf beliebig oft (auch gar nicht) vorkommen.
-+ Der vorhergehende Ausdruck darf beliebig oft vorkommen, mindestens aber einmal.
-{n} Der vorhergehdnde Ausdruck muss n-mal vorkommen. 
-{n,}  Der vorhergende Ausdruck muss mindestens n-mal vorkommen.
-{n,m} Der vorerhgende Ausdruck muss zwischen n- und m-mal vorkommen.
-
-Reservierte Zeichen müssen mit \ maskiert werden.
-
-Zwei reguläre Ausdrücke können mit dem logischen Oder "|" 
-verbunden oder einfach konkateniert werden. 
-
-Weitere Information erhalten Sie in der Manualseite zu 
-grep ("man 1 grep") oder zu regulären Ausdrücken allgemein 
-("man 7 regex").
-ja%s Finished : %s%s が終了 : %sukAt MostЩонайбільшеbnFile type : ফাইলের ধরন : trCreatedOluşturulmaeuHoursOrduak:caRecursiveRecursiufiUpper limit:Yläraja:bnMinutesমিনিটzh_HKSUIDSUIDcyAt LeastO leiaftgRegularОддӣheSearch returned no resultsהחיפוש לא החזיר תוצאותdaMonthsMånederbeUpper limit:Верхняя мяжа:nnDirectoryKatalogioHome FolderHema DokumentuyoorWhole words onlyସମ୍ପୂର୍ଣ୍ଣ ଶବ୍ଦଗୁଡିକ କେବଳ (W)gvClearDoll maghsrSUIDSUIDcyOctal PermissionsCaniatadau Wytholen_AUClearCleardzDirectoryསྣོད་ཐོ།seCase SensitiveStuorra ja smávva bustávaid earuheapmifurOctal PermissionsPermès otâiruFile type : Тип файла : taClearதுடைiaSelect Files...Selectiona archivos...zhFIFO管道ptPathCaminhozh_HKSocketSocketbn_INHoursঘন্টাkaCloseდახურვაjaRegular標準viSearch returned no resultsKhông tìm thấy.srFindПронађиskEditUpraviťplInclude binary filesUwzględniaj pliki binarnehukBytesKBpt_PTCancelCancelarmsAnySebaranggvSelect folder to search inReih coodagh dy shirrey aynsskContainsObsahujecsbHoursGòdz.nbAnyAllezuFindTholaptAt MostNo MáximondsunknownunbekanntgaUserÚsáideoirarSocketمقبسcsContains the textObsahuje textcaContains the textConté el texteuDaysegunhyUserՕգտագործողhrUpper limitGornja granicahuWhole words onlyCsak egész szavakatpaFilter:ਫਿਲਟਰ:slFilter:Filter:frDaysJourssr@latinHoursSatihyCloseՓակելkkSearching...Іздеу...daLine CountLinjetallvAt LeastVismazptBlock deviceDispositivo de blocomkSelect Files...Избирање датотеки...waSymbolic LinkLoyén simboliketrUpper limitÜst sınırcsbCancelÒprzestóńsr@latinCloseZatvoritgMinutesДақиқаҳоidSocketsokethrCloseZatvoripsunknownناڅرګندelSocketΥποδοχήurEditتدوینhrResultsRezultatiugkBytesكىلوبايتsr@ijeOctal PermissionsОвлашћења у окталном записуiaPathPercursoruCounting files...Подсчёт файлов...thLine Countจำนวนบรรทัดorlinesଧାଡ଼ିଗୁଡ଼ିକbn_INFIFOFIFOtrStay on single filesystemTek dosya sistemi üstünde durliHome FolderHeimmapca@valenciaDirectoryDirectorietWhole words onlyAinult terved sõnadbn_INDaysদিনwaUserUzeuglSearch returned no resultsA busca non obtivo resultadosfiEditMuokkaacsblinesréżczislAt MostNajvečen_GBHoursHoursaflinesreëlsttCancelҮткәрмәүidBlock devicePerangkat blokgaMonthsMíonnaocDaysJornssiFindසොයන්නfyAt MostTe heechsteen_GBMonthsMonthsesClearLimpiarpaSearching...ਖੋਜ ਜਾਰੀ ਹੈ…hrEditUredietFile type : Faili tüüp : mrSearch returned no resultsशोधमुळे परिणाम आढळले नाहीpaResultsਨਤੀਜੇcsAt MostnejvíceiaCase SensitiveDistingue inter majusculas e minusculastaLine Countவரி எண்ணிக்கைafContainsBevatsqCloseMbyllesSearch CompleteBúsqueda completadaafUserGebruikerslDaysDneviesDirectoryDirectoriokoGroup그룹esSearch returned no resultsLa búsqueda no devolvió ningún resultadoen_CARecursiveRecursivebgMatchСъвпадениеmsHome FolderFolder UtamaltMatchAtrinkimasgaCharacter deviceGaireas CaractarteGroupగ్రూప్csUpper limitHorní limitfrSearch returned no resultsAucun résultathuMonthsHónapknContainsಹೊಂದಿರುವelCancelΑκύρωσηfaWhole words onlyفقط تمام کلمات‌be@latinOctal PermissionsVaśmiaryčnyja dazvołyskAt LeastNajmenejzh_HKDirectory目錄rwUserUkoreshamgSearching...Mikaroka...lvunknownnezināmsanHome FolderCarpeta presonalpaSUIDSUIDptUpper limitLimite superiorkoInclude binary files바이너리 파일 포함koCreated만듦beSymbolic LinkСімвалічная спасылкаmyEditE တည်းဖြတ်trGroupGrupeuAt LeastGutxienezzh_TWPath路徑be@latinPathŚciežkakmMinutesនាទីcsbRecursiveRekùrencyjnokalinesხაზიzuCloseValabeFindШукацьcaMonthsMesospt_BRContainsContémbsModifiedPromijenjenoiaUserUsatorseFindOzakaWhole words onlyმხოლოდ სრული სიტყვებიhiDirectoryनिर्देशिकाorRegularନିଯମିତen_GBFindFindarClearامسحhuAccessedHozzáférvepsCloseبندولbgWhole words onlyТърсене само на цели думиknSelect folder to search inಶೋಧಿಸಲು ಕಡತಕೋಶವನ್ನು ಆರಿಸುthEditแก้ไขndsWhole words onlyBloots hele WöörguUpper limit:ઉપલી મર્યાદા:neEditसम्पादनkoStay on single filesystem화일 시스템 하나만ruGroupГруппаhiUserप्रयोक्ताhilinesपंक्तिuz@cyrillickBytesКбzh_HKSymbolic Link符號連結plMatchPrzeszukiwanieocOctal PermissionsPermissions en octalelHoursΏρεςcyCharacter deviceDyfais beitetFIFOFIFOboSelect folder to search inའཚོལ་བཤེར་བྱེད་སའི་ཡིག་སྣོད་འདེམས་པxhNo matchAkukho luthelekisocaResultsResultatsplAt Mostco najwyżejltHoursValandosteMatchసరిచూచు (M)jaExtended regexpregexp延長huSUIDSUIDhiGroupसमूहsqMonthsMuajtsr@latinSearch CompletePretraga završenabe@latinHoursHadzinykgEditsobululafiCharacter deviceMerkkilaitecaOctal PermissionsPermisos en octalhiFindढूँढें (F)deDirectoryOrdnertgDirectoryДиректорияisSelect folder to search inVeldu þá möppu sem þú vilt leita ízh_CNAt Most最多psGroupډلهmkFilter:Филтер:pt_BRDaysDiaswaSelect Files...Tchoezi fitchîs...seContainsSisttisdoallásr@ijeClearОбришиfrMatchRechercheruzEditTahrirlashdaAt LeastMindstteunknownతెలియనిkkFIFOFIFOuz@cyrillicHoursСоатthSelect folder to search inเลือกโฟลเดอร์ที่จะค้นหาsvHome FolderHemmappitFilter:Filtro:hyWhole words onlyՄիայն ամբողջ բառերisRegularVenjulegwaAt LeastPol moensnlBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Basisregels:
-
-*  willekeurig teken, nul of meer keer.
-?  willekeurig teken, precies een keer.
-glkByteskBytesdzHome Folderཁྱིམ་གྱི་ སྣོད་འཛིན་ mlResultsഫലങ്ങള്‍zh_TWNo match沒有符合的字串paExtended regexpਵਧਿਆ regexpanModifiedModificaultFilter:Filtras:nbModifiedEndretzh_TWSearch returned no results沒有找到搜尋結果kmContainsមានfyInclude binary filesYnklusyf binêre triemmenmrFIFOFIFOkuHome FolderPeldanka malfiSelect Files...Valitse tiedostot...tgCounting files...Ҳисоб кардани файлҳо...siPathපෙතmrExtended regexpविस्तारित रेगएक्स्पnlFindZoekenglAt MostComo moitoetUpper limit:Ülemine raja:nbUpper limitØvre grenseguSelect folder to search inશોધવા માટે ફોલ્ડર પસંદ કરોzh_CNSUIDSUIDbe@latinCancelAnulujzh_HKMonths個月skMinutesPočet minútsr@latinGroupGrupaasDirectoryপঞ্জিকা (D)uz@cyrillicOctal PermissionsСаккизлик ҳуқуқларafMonthsMaandeitSUIDSUIDkoPath경로mlCase Sensitiveകേസ് സെന്‍സിറ്റീവ്taSelect Files...கோப்புகளைத் தேர்வு செய்க...astClearLlimpiaruzCloseYopishmlUserഉപയോക്താവ്guWhole words onlyફક્ત આખો શબ્દ (W)idFIFOFIFOetAnySuvalinebn_INCreatedনির্মাণের সময়kkDaysкүнmrCloseबंद करा (C)thRecursiveแบบลงลึกpt_BRRegularRegularuzRegularOddiyeslineslíneasidResultsHasilskInclude binary filesAj binárne súboryfiNo editor component found.Muokkainosaa ei löytynyt.slContains the textVsebuje besedilogvGroupPossanzuCharacter deviceUmhlahlo wesici-sithofyEditBewurkjesr@ijekavianlinesредоваviOctal PermissionsQuyền (bát phân)fyCloseSlutemnPathЗамgvCancelCur asszh_TWSearch Complete搜尋完成kaFind hidden files and directoriesდამალული ფაილების და დირექტორიების ძიებაiaCounting files...Conta le files...xhHome FolderIsiqulathi -zifayili SasekhayamlSelect Files...ഫയലുകള്‍ തെരഞ്ഞെടുക്കുക... nbSearch CompleteSøk fullførtbrCreatedKroueteoRegularRegulacyBlock deviceDyfais blockuDaysRojsvContainsInnehållerroSearch returned no resultsCăutarea nu a dat rezultatenlkByteskByteskkSocketСокетugLine Countقۇر سانىskModifiedZmenenýxhGroupYenza iqelazh_CNFile type : 文件类型 : sqSelect Files...Zgjidh Skedarët...guBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-આધારભૂત નિયમો:
-
-*  કોઈપણ અક્ષરને શૂન્ય અથવા વધુ વખતે સરખાવશે.
-?  કોઈપણ અક્ષરને બરાબર એક વાર જ સરખાવશે
-eoCounting files...Nombrante dosierojn...etStay on single filesystemJää ühele failisüsteemilehuAt MostlegfeljebbdaContains the textIndeholder tekstenndsExecutableUtföhrbor DateiukCase SensitiveЗ урахуванням регіструseSelect Files...Vállje fiillaid …srunknownнепознатоbgDirectoryПапкаetFilter:Filter:faDirectoryشاخهen_CACharacter deviceCharacter deviceetAt LeastVähemaltbeClearАчысьціцьen_CAFindFindthUpper limit:ขีดจำกัดบน:elContainsΠεριέχειnbHome FolderHjemmemappennNo matchInga treffgvCloseDooineymrPathमार्गuzDirectoryDirektoriyadeFind hidden files and directoriesVersteckte Dateien und Ordner einbeziehenzh_TWMatch符合seFIFOFIFOmlAt Leastകുറഞ്ഞതു്eoHome FolderHejmujoyoCancelParẹ́̀neMatchजोडाplGroupGrupaafGroupGroeppt_BRMonthsMesesmailinesपँक्तिसभglMatchCoincidenciapt_BROctal PermissionsPermissões em octalmaiContainsसमाहित करैछmkDaysДеновиnnFIFOFIFOmkSearch returned no resultsНема резултати од барањетоbe@latinFilter:Filter:sekBytesKBsr@ijeEditУређивањеmrUserवापरकर्ताarFile type : نوع الملف :plReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Znaki zarezerwowane dla zaawansowanych wyrażeń regularnych to
-. ^ $ [ ] ? * + { } | \ ( ) : 
-W prostych wyrażeniach regularnych metaznaki
-?, +, {, |, (, oraz ) tracą ich specjalne znaczenie.
-
-Znak kropki .  odpowiada jednemu znakowi.
-Znak karetki ^ oznacza początek linii.
-Znak dolara $ oznacza koniec linii.
-
-Znaki pomiędzy [ ] oznaczają jakikolwiek pojedynczy
-       znak występujący w liście.
-Znaki pomiędzy [^ ] oznaczają jakikolwiek pojedynczy
-       znak nie występujący w liście.
-Znaki występujące w [ - ] oznaczają przedział
-       znaków (np. [0-9] lub [a-z]).
-
-Wyrażenie regulatne może być uzupełnione przez
-       jeden z wielu operatorów powtarzania:
-?      Poprzedzający element jest opcjonalny i może wystąpić
-       wyłącznie jeden raz.
-*      Poprzedzający element może wystąpić zero
-       lub więcej razy.
-+      Poprzedzający element może wystąpić jeden raz lub
-       więcej razy.
-{n}    Poprzedzający element może wystąpić dokładnie n razy.
-{n,}   Poprzedzający element może wystąpić dokładnie n lub więcej razy.
-{n,m}  Poprzedzający element może wystąpić co najmniej n razy,
-       ale nie więcej niż m razy.
-
-Aby wyszukać któryś z zarezerwowanych znaków poprzedź go znakiem \. 
-
-Dwa wyrażenia regularne mogę być połączone przy pomocy
-       logicznego operatora or: |.
-Dwa wyrażenia regularne mogę być złączone.
-
-Po więcej informacji wpisz "man grep"
-       w oknie terminala.
-nbCancelAvbrytzh_HKCreated建立hsbHome FolderDomjacy zapiskesFIFOFIFOeuUpper limitGoiko mugahneEditसंपादन (E)pt_PTunknowndesconhecidogaLine CountLíon na Línteuz@cyrillicCreatedЯратилганsr@ijekavianlatinRecursiveRekurzivnocaunknowndesconegutknSearching...ಹುಡುಕಲಾಗುತ್ತಿದೆ...hrBlock deviceBlok uređajetDayspäevahuGroupCsoportpt_BRAnyQualquerarCase Sensitiveحساس لحالة الأحرفbeCreatedСтворанаhneMinutesमिनट्सcrhWhole words onlyTek bütün kelimelerbe@latinUpper limit:Vierchniaja miaža:ruCharacter deviceСимвольное устройствоptResultsResultadoshiNo matchबेमेलpaGroupਗਰੁੱਪnlClearWissenttCloseYapcsSelect folder to search inVýběr složky pro hledánífyDirectoryMaptaFind(F) தேடுen_CAHome FolderHome FolderteSUIDSUIDca@valenciaCounting files...S'estan comptant els fitxers...hneFIFOफीफोmkOctal PermissionsОктални пермисииugCase Sensitiveچوڭ-كىچىك يېزىلىشى پەرقلەندۈرcsbunknownnieznónyeuMonthshilabeteidDaysHarigaHome FolderFillteán BaileesEditEditaridMinutesMenitgaPathConairxhunknownayaziwaen_GBDaysDayspsContains the textليکنه لريidDirectoryDirektoriukExecutableВиконуваний файлtaFile type : கோப்பு வகை :mlOctal Permissionsഒക്ടല്‍ അനുവാദങ്ങള്‍hneContainsरखे हुए हेthCase Sensitiveตัวพิมพ์ใหญ่-เล็กตรงกันfaFindجست‌وجوltunknownnežinomauzUserFoydalanuvchilvSocketLigzdatrFIFOFIFOneWhole words onlyपूरा शब्द मात्रptMatchCombinaçõesfiCounting files...Lasketaan tiedostoja...jaAt Least以上be@latinClearAčyścitrCloseKapattaCounting files...கணக்கிடுகின்ற கோப்புகள்...plContains the textZawiera tekstzh_TW.Big5Block device區塊設備eoDaysTagojzh_CNCreated已创建trlinessatırisEditBreytaisSocketSökkullskLine CountPočet riadkovxhRegularRhoqoguAt Mostવધુમાં વધુrwModifiedByahinduweazClearTəmizləmrCase Sensitiveकेस सेंसिटीव्ह(a)en_GBunknownunknownndsGroupGrupphneWhole words onlyसिरिफ पूरा अक्छर (W)ptEditEditaren_GBCase SensitiveCase SensitivennCharacter deviceTeikneiningidInclude binary filesTermasuk berkas binerheContains the textהמכילים את הטקסטnlModifiedAangepastfrDirectoryRépertoirekmGroupក្រុមioCloseKlozezugSymbolic Linkبەلگە ئۇلىنىشىplUserUżytkowniksr@ijekavianAt LeastнајмањеazMatchTapitSearch tool based on fgrStrumento di ricerca basato su fgrorunknownଅଜଣାen_GBkBytesKBndsDirectoryPadarRegularمنتظمsvSearch CompleteSökning färdigslAt LeastVsajarDaysأيامastContains the textContién el testumrRecursiveरिकरसिव्हheClearנקהesSelect Files...Seleccionar archivos...en_CABlock deviceBlock deviceeoBlock deviceBlokaparatokkRecursiveРекурсивтіukHoursГодиниbgFound %d matchЗавършено:etMatchVastabitCounting files...Conteggio file...sqCancelAnulloukExtended regexpРозширений регулярний виразmsDirectoryDirektorica@valenciaClearBuidacsOctal PermissionsOprávnění osmičkovětgPathМасирdzSUIDཨེསི་ཡུ་ཨའི་ཌི།uz@cyrillicContainsБорesResultsResultadosfyUserBrûkermgDaysAndrokuWhole words onlyTenê hemû peyvhiAnyकोई भीdaClearRydhuFindKeresésfyUpper limitBoppeste limytiakByteskByteskuUpper limit:Sînora Jor:esUpper limit:Límite superior:viContains the textChứa chữcsUserUživatelxhResultsIziphumoitCancelAnnullapt_PTExtended regexpregexp extendidokmCreatedបាន​បង្កើត​fiFindEtsiptExtended regexpregexp extendidondsSymbolic LinkSymboolsch LinknlSelect Files...Bestanden selecteren...astlinesllinieskkAnywhereКез келген жердеen_CACancelCancelca@valenciaSearch returned no resultsLa cerca no ha retornat cap resultattrMinutesDakikasvAt LeastÅtminstoneen_GBSelect Files...Select Files...zhunknown未知nbEditRedigeritContainsContieneplSearch returned no resultsBrak wyników wyszukiwaniadeSearch returned no resultsDie Suche brachte keine ErgebnissepsMinutesمېنټونهruAnywhereГде угодноjaExecutable実行可能(E)itSearch CompleteRicerca completatakuUserUserbe@latinSelect folder to search inKataloh, dzie šukaćen_GBCancelCancelhsbAt LeastznajmjeńšaguSocketસોકેટhneunknownअग्यातzh_TW.Big5FIFO快出快入maiDirectoryनिर्देशिकाhiAnywhereकहीं पर भीhuCloseBezárástgWhole words onlyТанҳо калимаҳои пурmsRegularBiasahrFindNađizhClear清除esCancelCancelarsqDaysDitëpaCreatedਬਣਾਇਆuz@cyrillicHome FolderУй жилдиbeCharacter deviceЗнакавая прыладаyoFindWádeunknownunbekanntfiAt LeastVähintäänpaMatchਮੇਲ(M)ndsLine CountRegentallukRecursiveРекурсивнийzh_CNUpper limit上限bn_INUserব্যবহারকারীaz%s Finished : %s%s Qurtarıldı : %staUpper limitமேல் வரம்புnnEditRedigerheResultsתוצאותglPathRutacsSearch CompleteVyhledávání dokončenodzunknownམ་ཤེསཔknCase Sensitiveಕೇಸ್ ಸಂವೇದಿ(a)fySocketSocketthSymbolic Linkแฟ้มเชื่อมโยงแบบสัญลักษณ์zh_CNBlock device块设备mlPathപാഥ്kmHome Folderថត​ផ្ទះgaUpper limit:Uasteorainn:etCloseSulgesrCancelОткажиltWhole words onlyTik pilnus žodžiusnoFilter:Filter:zh_CNSelect Files...选择文件...neSelect Files...फाइल चयन गर्नुहोस्...ca@valenciaFilter:Filtre:iaWhole words onlySolmente parolas integrebgHoursЧасовеsiHome Folderනිවාස බහලුමsr@ijekavianModifiedизмијењенmrInclude binary filesबायनरी फाइल समाविष्ट करा (b)huSelect folder to search inVálassza ki a mappát, amelyben kerespaHome Folderਘਰ ਫੋਲਡਰtrDirectoryDizinhrSelect Files...Odaberi datoteke…frCancelAnnulerbnSymbolic Linkসিম্বলিক লিঙ্কtrExtended regexpUzatılmış düzenli ifadeuzSearching...Qidirilmoqda...csbSelect Files...Wëbierzë lopczi...boGroupཚོ་ཁགltUpper limitViršutinis rėžiskmSelect Files...ជ្រើស​ឯកសារ...ruContainsСодержитmkUserКорисникsrRegularРедованdzNo matchམཐུན་སྒྲིག་མེད།orMinutesମିନଟjaMonthsカ月nnLine CountLinjetalfyDaysDagenjaAnywhereどこでもtrNo matchEşleme yoknnHoursTimarbn_INEditসম্পাদনা (E)ndsCase SensitiveOp Groot- un Lüttschrieven kiekenneunknownअज्ञातltFindRastiorDaysଦିନitFile type : Tipo file : pt_PTStay on single filesystemPermanecer apenas num sistema de ficheirosbrMonthsMizioùkoContains포함함bgUpper limit:Горен предел:astCase SensitiveSensible a capitalizaciónmnContains the textАгуулсан текстheCase Sensitiveתלוי רשיותkyClearТазалооukClearОчиститиidAccessedDiaksespt_BRSearch CompleteProcura TerminadacyCase SensitivePrif lythrennau o bwyslvResultsRezultāticsbRegularRegùlarnyglFind hidden files and directoriesBuscar ficheiros e cartafoles acochadosknSelect Files...ಕಡತಗಳನ್ನು ಆರಿಸಿ...uz@cyrillicAt MostКўпидаguCancelરદ કરોsr@ijekavianSearch CompleteПретрага завршенаnnMonthsMånaderptHome FolderPasta PessoalafSocketSokcrhHome FolderEv Cilbentizh_HKFilter:過濾條件(I):plCreatedUtworzonoguSUIDSUIDbe@latinContains the textUtrymlivaje teksten_GBLine CountLine CountptSUIDSUIDesSearch tool based on fgrHerramienta de búsqueda basada en fgrruCase SensitiveУчитывать регистрfyGroupGroeptrOctal PermissionsSekizli Erişim HaklarıarContains the textيحتوي النصeuRecursiveErrekurtsiboazuEditHlelaorDirectoryବିବରଣୀପଞ୍ଜିକାesWhole words onlySolo palabras completasafUpper limit:Boonste beperk:zh_TWEdit編輯(E)skFindNájsťbn_INModifiedপরিবর্তনের সময়thAt Mostอย่างมากviAccessedTruy cậpteHoursగంటలుheSocketשקעhuEditSzerkesztésda%s Finished : %s%s fuldført : %selResultsΑποτελέσματαcrhSelect Files...Dosyelerni Sayla...nlRegularGewoonmsFile type : Jenis fail : hneAt Mostअधिक से अधिकbnOctal Permissionsঅক্টাল সংখ্যায় প্রকাশিত অনুমতিzhSelect Files...选择文件...csLine CountPočet řádkůsvClearTömzhStay on single filesystem局限于单文件系统ukSelect folder to search inВибрати теку для пошукуnoFindFinnafContains the textBevat die teksskAt MostNajviacbgContainsСъдържаmlDirectoryനാമസൂചീഗൃഹം(ഡയറക്റ്ററി)roAccessedAccesatpsSymbolic Linkپېلامي تړنهneCase Sensitiveकेस संवेदनशिलताpt_BRContains the textContém o textoglNo editor component found.Non foi posíbel atopar o compoñente do editor.ltSocketJungtisitkByteskByteesCloseCerrarnnUserBrukarguAt Leastઓછામાં ઓછુંjaAccessedアクセス時刻kuDirectoryPelrêçsr@ijekavianlatinkBytesKiBltBlock deviceBlokinis įrenginysastModifiedCamudáufiResultsTuloksetkkCreatedЖазылған кезіeuOctal PermissionsBaimen zortzitarraktaSearching...தேடுகிறது...slFindPoiščixhAccessedIgqithiselweasFilter:ফিল্টাৰ:msCreatedDiciptazh_TWDays天ukRegularЗвичайнаttWhole words onlyТулы сүзләр генәbnUpper limit:উর্দ্ধসীমা:paModifiedਸੋਧਿਅਾfrAnywhereN'importe oùviHoursGiờesSymbolic LinkEnlace simbólicoliDirectoryMapkmResultsលទ្ធ​ផលbn_INSymbolic Linkসিম্বলিক লিঙ্কugUpper limit:يۇقىرى چەك:bn_INRegularসাধারণmrCancelरद्द करा (n)roPathCaleesBlock deviceDispositivo de bloqueslbFindSichenkuModifiedHatiye guherandinplUpper limitGranica górnafrBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Règles de base :
-
-* Correspond à n'importe quel caractère répété zéro ou plusieurs fois.
-? Correspond à n'importe quel caractère répété exactement une fois.
-astWhole words onlyNamái pallabres completeszh_TW.Big5Stay on single filesystem局限於單一系統sr@latinClearOčistimlkByteskBytesfyCounting files...Triemmen wurde teld...sr@latinHome FolderLična fasciklaviRecursiveĐệ quysvSearch returned no resultsSökningen gav inga resultatzhContains the text含有文本(T)xhMonthsIinyangacs%s Finished : %s%s dokončeno: %snbLine CountAntall linjeritGroupGruppozuCancelChithazh_TW.Big5Socket套接字glContainsConténcsbInclude binary filesTéż binarné lopczimrClearनष्ट करा (C)iaClearExpungerdzCancelཆ་མེད་གཏང་kmSearching...កំពុង​ស្វែង​រក...pt_BRCancelCancelaritUpper limitLimite superioreasNo matchকোনো মিল নাইhiModifiedपरिवर्धितfaFIFOFIFOcaMatchCoincidènciabnSocketসকেটisGroupHópurthCancelยกเลิกplNo editor component found.Nie znaleziono komponentu edytora.asPathপথcaSearching...S'està cercant...bnWhole words onlyশুধুমাত্র গোটা শব্দltInclude binary filesĮtraukti dvejetainius failussvInclude binary filesSök även i binärfilerskDaysDnílvHoursStundasviReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Các kí tự dành cho diễn đạt thông thường mở rộng là
-. ^ $ [ ] ? * + { } | \ ( ) : 
-Trong các diễn đạt thông thường cơ bản các kí tự meta
-?, +, {, |, (, và ) mất ý nghĩa đặc biệt của chúng.
-
-Dấu chấm . ứng với bất cứ kí tự đơn nào.
-Dấu mũ ^ ứng với đầu dòng.
-Dấu đô-la $ ứng với cuối dòng.
-
-Các kí tự bên trong [ ] ứng với bất cứ kí tự
-       đơn nào trong danh sách.
-Các kí tự bên trong [^ ] ứng với bất cứ kí tự
-       đơn nào *không* có trong danh sách.
-Các kí tự bên trong [ - ] ứng với một khoảng
-       kí tự (thí dụ [0-9] hoặc [a-z]).
-
-Một diễn đạt thông thường có thể theo sau bởi một
-       trong số các toán tử:
-?      Mục đi trước là tuỳ chọn và tương ứng
-       tối đa một lần.
-*      Mục đi trước ứng không hoặc nhiều lần.
-+      Mục đi trước tương ứng một hoặc nhiều lần.
-{n}    Mục đi trước tương ứng chính xác n lần
-{n,}   Mục đi trước tương ứng n lần hoặc nhiều hơn.
-{n,m}  Mục đi trước tương ứng ít nhất n lần,
-       nhưng không nhiều hơn m lần.
-
-Để tương ứng với kí tự dành riêng, đặt trước nó dấu \. 
-
-Hai diễn đạt thông thường có thể kết hợp nhau bằng
-       toán tử luận lí OR |.
-Hai diễn đạt thông thường có thể được gắn với nhau.
-
-Xem thêm bằng cách gõ "man grep"
-       tại dấu nhắc dòng lệnh.
-caSelect folder to search inSeleccioneu la carpeta on cercarmlCreatedനിര്‍മ്മിച്ചുcsAnywhereKdekolivskContains the textObsahuje textuz@cyrillicGroupГуруҳca@valenciaWhole words onlyNomés paraules senceresnbCreatedOpprettetjaDirectoryフォルダーfaClearپاک کردنca@valenciaCase SensitiveCoincidència de majúscules i minúsculestgUpper limit:Ҳудуди болоӣ:viDirectoryThư mụcmgAnyIzay misyfaModifiedتغییر داده شدroContains the textConține textulfaUserکاربرptDirectoryDirectórioitAnyQualsiasihrHome FolderOsobna mapaelkByteskBytesfaExecutableاجراییastRegularHabitualyiClearזײַ מבֿטלen_AUEditEditcaCase SensitiveCoincidència de majúscules i minúsculessvSearching...Söker...kyMatchТуура келетheHome Folderתיקיית הביתsr@ijekavianPathпутања|/|$[својства наредбено 'детаљи:
-путања' списковно 'допунски детаљи: путања']ndsHoursStunnenocAnyTotesasCloseবন্ধ কৰক (C)ltAnyBet koksheOctal Permissionsהרשאות אוקטליותhyEditԽմբագրելhsbSelect Files...Dataje wubrać ...nbFilter:Filter:squnknownnuk njihetukWhole words onlyТільки цілі словаnbFind hidden files and directoriesFinn skjulte filer og mappereoMinutesMinutojca@valenciaLine CountComptador de líniesxhEditHlelannAt Leastminstzh_TWResults結果pt_PTDirectoryDirectórionnOctal PermissionsOktale løyvesvlinesraderteUserవినియోగదారుukModifiedЗміненоbgEditРедактиранеtaHoursமணிகள்slCounting files...Štetje datotek ...pt_BRUserUsuáriolvMonthsmēnešuslvCounting files...Skaita failus...daContainsIndeholderen_CADaysDaysnoResultsResultatlvRegularRegulārslvPathCeļšca@valenciaResultsResultatsiaHome FolderDossier Domo caSymbolic LinkEnllaç simbòlicfrSearching...Recherche en cours…mr%s Finished : %s%s प्रारंभ केले : %sen_CAOctal PermissionsOctal PermissionsorContains the textପାଠ୍ଯକୁ ଧାରଣ କରିଅଛି (t)en_GBAnywhereAnywherecsbkByteskBajtówdeContains the textEnthält den Textbe@latinAnyLubywaResultsRizultatsugEditتەھرىر(E)kmFIFOFIFOtaCloseமூடுzh_TWHours時maiResultsपरिणामkulinesrêziksvRecursiveRekursivtneCloseबन्द गर्नुहोस्guExtended regexpવિસ્તૃત regexpgaEditEagarocMatchCorrespondénciakmDaysថ្ងៃplRecursiveRekurencyjnyzh_HKSearch returned no results沒有找到搜尋結果ptClearLimparteMinutesనిముషములుzh_CNSymbolic Link符号链接azGroupQruplaşdırasGroupদলlvMinutesMinūtesbsMonthsMjesecibrHoursEurthCharacter deviceอุปกรณ์แบบอักขระglMonthsMesesglMinutesMinutosocRegularRegularzh_CNModified已修改hsbSymbolic LinkWotkazcsbMinutesMinutëitlinesrigheigClearWepụhsbClearWuprózdnićsrExtended regexpProšireni regexpbe@latinSearch returned no resultsNiama vynikaŭ pošukuzh_TW.Big5Reserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-延紳的常規符號有
-. ^ $ [ ] ? * + { } | \ ( ) : 
-在基本的常規符號中某些元字符如
-?、 +、 {、 |、 (、 和 ) 會失去其原本意義。
-
- . 套用於任何單字元。
- ^ 套用於字行的開頭。
- $ 套用於字行的結尾。
-
-在 [ ] 內的字元套用於任何單一的
-     可列出之字元。
-在 [^ ] 內的字元套用於任何單一的
-     不可列出之字元。
-在 [ - ] 內的字元套用於一範圍內的
-     可列出之字元 (例如 [0-9] 或 [a-z])。
-
-一個延紳的常規符號法則後面必須有
-     其中一個可重複運算元：
-?    在此符號前的項目是選擇性的並被套用
-     最多一次。
-*    在此符號前的項目會被套用零
-     或多次。
-+    在此符號前的項目會被套用一或
-     或多次。
-{n}  在此符號前的項目會被套用n次。
-{n,} 在此符號前的項目會被套用n或多次。
-{n,m}在此符號前的項目會被套用最少n次。
-     但不多於m次。
-
-要套用任何保留字元、可在此前輸入\。
-
-要相連兩個常規符號、可用邏輯符或
-     運算元 |。
-兩個常規符號便能互相連接。
-
-如要更詳盡資料請鍵入指令 "man grep"
-     在終端機模式。
-koUser사용자glLine CountNúmero de liñasarMatchمطابقةhsbunknownnjeznajuitRecursiveRicorsivoviUpper limit:Giới hạn trên:ugUserئىشلەتكۈچىroGroupGrupsr@ijekavianlatinResultsRezultatidaOctal PermissionsOktale rettighederhneSearching...खोजत हे...skCreatedVytvorenémyMinutesမိနစ်caFIFOFIFOmrStay on single filesystemएक फाईल प्रणालीवर रहाelSUIDSUIDglSocketSocketarFIFOFIFOskCancelStornotrRegularSıradanfr%s Finished : %s%s fini : %sarWhole words onlyالكلمات الكاملة فقطheBlock deviceהתקן בלוקhiMinutesमिनटcsCloseZavřítelCharacter deviceΣυσκευή χαρακτήραbnAnyঅনির্দিষ্টnnContains the textInneheld tekstenugContains the textئۆز ئىچىگە ئالغان تېكىست(T)sqFindGjejcaClearBuidaneModifiedपरिमार्जितguAnyકોઇપણfiMonthskuukausiguPathપાથkn%s Finished : %s%s ಪೂರ್ಣಗೊಂಡಿದೆ : %sttModifiedÜzgäreldeukSocketсокетelDirectoryΚατάλογοςnlunknownonbekendzh_CNResults结果be@latinkByteskBcsCase SensitiveRozlišovát velikost písmencyUserDefnyddwyrnbkByteskByteiaAt MostAl plusruUserПользовательhiCreatedउत्पन्न कियाasModifiedপৰিবৰ্তনেৰ সময়zh_CNHours小时roExecutableExecutabilmrFile type : फाईलचा प्रकार : daResultsResultaterzh_CNSocket套接字csFile type : Typ souboru : slSUIDSUIDwaBlock deviceÉndjin bloktaMinutesநிமிடங்கள்etRegularTavalinendsNo editor component found.Keen Editor-Komponent funnen.slRecursiveRekurzivnohuRecursiveRekurzívhuStay on single filesystemMaradjon egyszerű fájlrendszerendeModifiedVerändertbnBlock deviceব্লক ডিভাইসslDirectoryMapaafCharacter deviceKaraktertoestelnlContainsBevatteOctal Permissionsఅష్టపు అనుమతులుlvAt MostNe vairāk parocModifiedModificaten_GBExtended regexpExtended regexpzh_CNExecutable可执行文件ltSearching...Ieškoma...xhFindFumanapt_PTBlock deviceDispositivo de BlocolvDaysDienasruNo editor component found.Компонент редактирования не найден.en_AUCancelCancelfrLine CountNombre de lignesbgFIFOКуп (стек)hneSearch Completeढूंढना पूराbsWhole words onlySamo cijele riječiurUserصا رفzh_CNStay on single filesystem局限于单文件系统ruDaysДниcsbFindNalezëen_CACreatedCreatedmiModifiedKua whakarereketiaruFindНайтиlvSelect folder to search inIzvēlieties mapi, kurā meklētliFindZeukesAt MostComo máximofurSelect folder to search inSielç la cartele dulà cirîafAt LeastNa MinstearDirectoryالمجلدafEditRedigeeryiCloseפֿאַרמאַךheunknownלא ידועelUpper limit:Ανώτερο όριο:siFilter:පෙරහන (F):afPathPadseEditDoaimmatfaSymbolic Linkپیوند نمادیzh_TWOctal Permissions8 進位權限idCloseTutupthGroupกลุ่มbgRecursiveРекурсивноmlInclude binary filesബൈനറി ഫയലുകള്‍ ഉള്‍പ്പെടുത്തുകbe@latinFindZnajdzidaNo editor component found.Ingen editor-komponent fundet.tgFilter:Филтр:guHome Folderઘર ફોલ્ડરhuOctal PermissionsJogosultságok (nyolcas számrendszerben)thSearching...กำลังค้นหา...zh_CN%s Finished : %s%s 已完成：%ssrStay on single filesystemSamo u jednom fajl sistemudaModifiedÆndretthNo matchไม่มีรายการที่ตรงmyHoursနာရီisCase SensitiveHá/Lá-stafir skipta málifrClearEffacersr@ijekavianlatinAt MostnajvišeuzSelect folder to search inQidirish amalga oshiriladigan jildni tanlashhiWhole words onlyसिर्फ संपूर्ण अक्षर (W)ruWhole words onlyТолько полные словаpt_BRSelect folder to search inSelecionar pasta onde pesquisarsqkByteskBytesskHoursHodinyelOctal PermissionsΟκταδικά δικαιώματαuzunknownnomaʼlumbnHoursঘন্টাfrkBytesKoctetselFind hidden files and directoriesΑναζήτηση κρυφών αρχείων και καταλόγωνiaDirectoryDirectoriofaEditویرایشcyCancelDiddymufrAt MostAu plussiSelect folder to search inසෙවීම සඳහා බහලුමක් තොරන්නjaSelect Files...ファイルを選択...nlUserGebruikernlReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Gereserveerde karakters voor uitgebreide reguliere 
-expressies zijn
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In standaard reguliere expressies verliezen de 
-volgende karakters hun special betekenis:
-? + { } | ( )
-
-De punt . geeft een match voor ieder teken.
-De circonflex ^ geeft een match aan het begin van 
-  een regel.
-Het dollarteken $ geeft een match aan het eind van 
-  een regel.
-Tekens tussen [ ] geven een match voor elk van deze 
-  tekens.
-Tekens tussen [^ ] geven een match voor elk teken 
-  *niet* in de lijst.
-Tekens tussen [ - ] geven een match voor een reeks
-  tekens (bijv. [0-9] of [a-z]).
-
-Een reguliere expressie kan gevolgd worden door een
-  herhalingsoperator:
-?     Match 0 of 1 keer.
-*     Match 0 of meer keer.
-+     Match 1 of meer keer.
-{n}   Match precies n keer.
-{n,}  Match n of meer keer.
-{n,m} Match tenminste n en hoogstens m keer.<
-
-Gebruik een / om een gereserveerd teken te matchen.
-
-Twee reguliere expressies kunnen met de logische of 
-operator | verbonden worden.
-
-Type voor meer informatie "man grep" op de commando-
-regel.
- 
-frContainsContientnlSelect folder to search inSelecteer de map die doorzocht moet wordendzModifiedལེགས་བཅོས་འབད་ཡོདཔ།furDirectoryDirectoryen_CAStay on single filesystemStay on single filesystemfrCase SensitiveSensible à la cassekoFIFOFIFOsiSymbolic Linkසංකේත සබැඳිisClearHreinsahneAnyकोई भीdeSelect Files...Dateien auswählen ...fiFile type : Tiedostotyyppi: mkHome FolderДомашна папкаocDirectoryRepertòriguHoursકલાકોzh_TWlines行beEditРэдагаваньнеjaClose閉じるugAt Mostكوپ بولغانداfurunknownno cognossûtocContains the textConten lo tèxtteWhole words only(W) పూర్తి పదాలు మాత్రమేtrMatchEşleştiresunknowndesconocidoigCancelWepụmlunknownഅറിയാത്തarunknownمجهولwaRegularNormåleamlinesመስመሮችgllinesliñaskoFound %d match%s [완료됨]mkMonthsМесециpt_BRSUIDSUIDarGroupالمجموعةen_AUCloseClosendsAt LeastTominnsteuRegularArruntazh_HKModified已修改nbFile type : Filtype :csbHome FolderDomôcy katalogttSymbolic LinkСимволик сылтамаuzAt LeastKamidadeFindSuchenbnSearching...অনুসন্ধান করা হচ্ছে...svContains the textInnehåller textenteAccessedవాడబడినదిtaCase Sensitiveஉணர்வுள்ள உறை மூடிdeUpper limit:Obere Grenze:sr@ijekavianContainsсадржиmrWhole words onlyफक्त पूर्ण शब्द (W)bsFIFOFIFOsr@ijekavianlatinFIFOFIFOsqCreatedKrijuarpaReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-ਵਧੇ regexp ਲਈ ਰਾਖਵੇਂ ਅੱਖਰ ਹਨ
-. ^ $ [ ] ? * + { } | \ ( ) : 
-ਮੁੱਖ ਨਿਰੰਤਰ ਸਮੀਕਰਣਾਂ ਵਿੱਚ ਅੱਖਰਾਂ ਬਾਰੇ ਅੱਖਰ
-?, +, {, |, (, ਅਤੇ ) ਆਪਣਾ ਖਾਸ ਅਰਥ ਗਵਾ ਦਿੰਦੇ ਹਨ|
-
-ਵਿਸ਼ਰਾਮ . ਕੋਈ ਵੀ ਇਕੱਲਾ ਅੱਖਰ ਮਿਲਾਉਦਾ ਹੈ|
-ਕੈਰੇਟ  ^ ਲਾਈਨ ਦੇ ਸ਼ੁਰੂ ਵਿੱਚ ਮਿਲਾਉਦਾ ਹੈ|
-ਡੌਲਰ $ ਲਾਈਨ ਦੇ ਅੰਤ ਤੇ ਮਿਲਾਉਦਾ ਹੈ
-
- [ ]  ਵਿਚਲਾ ਅੱਖਰ ਕੋਈ ਵੀ ਇਕੱਲਾ
-          ਲੜੀ ਵਿਚਲਾ ਅੱਖਰ ਮਿਲਾਉਦਾ ਹੈ|
- [^ ] ਵਿਚਲਾ ਅੱਖਰ ਕੋਈ ਵੀ ਇਕੱਲਾ
-          ਲੜੀ ਤੋਂ ਬਾਹਰਲਾ ਅੱਖਰ ਮਿਲਾਉਦਾ ਹੈ|
- [ - ] ਵਿਚਲਾ ਅੱਖਰ ਸੀਮਾ ਵਿਚਲੇ ਅੱਖਰ
-ੀ         (ਜਿਵੇਂ ਕਿ [0-9] ਜਾਂ [a- z])ਮਿਲਾਉਦਾ ਹੈ|
-
-ਇੱਕ ਲਗਾਤਾਰ ਸਮੀਕਰਨ ਕੁਝ ਦੁਹਰਾਈ ਆਪਰੇਟਰਾਂ
-       ਦੇ ਬਾਅਦ ਹੋ ਸਕਦਾ ਹੈਃ
-?      ਅਗਲੀ ਇੰਦਰਾਜ ਚੋਣਵੀਂ ਹੈ ਅਤੇ ਇੱਕ ਵਾਰ
-        ਮਿਲਾਈ ਮਿਲਾਈ ਗਈ|
-*      ਅਗਲੀ ਇੰਦਰਾਜ ਜ਼ੀਰੋ ਜਾਂ ਜਿਆਦਾ ਵਾਰ
-        ਮਿਲਾਈ ਗਈ|
-+      ਅਗਲੀ ਇੰਦਰਾਜ ਇੱਕ ਜਾਂ ਜਿਆਦਾ ਵਾਰ
-       ਮਿਲਾਈ |
-{n}    ਅਗਲੀ ਇੰਦਰਾਜ ਪੂਰੀ n ਵਾਰ ਮਿਲਾਈ ਗਈ|
-{n,}  ਅਗਲੀ ਇੰਦਰਾਜm nਜਾਂ ਜਿਆਦਾ ਵਾਰ ਮਿਲਾਈ ਗਈ|.
-{n,m} ਅਗਲੀ ਇੰਦਰਾਜ ਘੱਟੋ-ਘੱਟ n ਵਾਰ ਮਿਲਾਈ ਗਈ|,
-      ਪਰ m ਤੋਂ ਜਿਆਦਾ ਵਾਰ ਨਹੀਂ|
-
-ਕੋਈ ਰਾਖਵਾਂ ਅੱਖਰ ਮਿਲਾਉਣ ਲਈr,ਇਸ ਨੂੰ \ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ|
-
-ਦੋ ਨਿਰੰਤਰ ਸਮੀਕਰਨਾ ਲੌਜੀਕਲ ਜਾਂ | ਆਪਰੇਟਰ ਨਾਲ
-   ਜੁੜ ਸਕਣਗੀਆਂ|
-ਦੋ ਨਿਰੰਤਰ ਸਮੀਕਰਨਾ ਜੋੜੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ|
-
-ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਕਮਾਂਡ ਪਰੌਂਪਟ ਤੇ "man grep" ਟਾਈਪ ਕਰ
-        ਕੇ ਉਪਲੱਬਧ ਹੋਵੇਗੀ|
-walinesroyesmaiCase Sensitiveस्थिति क' प्रति संवेदनशील (a)zh_CNGroup组siMinutesමිනිත්තුkmlinesបន្ទាត់nePathबाटोfaMonthsماهioModifiedModifikitafiContains the textSisältää tekstinsrLine Countброј редова|/|$[својства наредбено 'детаљи:
-број редова' списковно 'допунски детаљи: број редова']arMonthsشهورzh_CNLine Count行数bsDaysdanicsPathCestaskSearch returned no resultsHľadanie nevrátilo žiadne výsledkyltSymbolic LinkSimbolinė nuorodataMatch(M) பொருத்தம்caSelect Files...Selecciona els fitxers...bslineslinijazuFound %d match%s: Ngehlulekile ukuqala: %szh_TW.Big5Minutes分nnAnyEinkvarskBlock deviceBlokové zariadeniamnFindОлazRegularNormalukCloseЗакритиzh_TWAccessed存取時間daGroupGruppeazDaysGünskHome FolderDomovský priečinoksrInclude binary filesУкључи бинарне фајловеbnHome Folderহোম ফোল্ডারmlRegularസാധാരണdaExecutableKørbartaBlock deviceகட்டம் சாதனம்sr@latinDaysDanikoMatch맞음fiHome FolderKotikansionnlineslinjermrOctal Permissionsऑक्टल परवानगीndslinesReegenocCancelAnullarjaStay on single filesystem単一のファイルシステム上のみzh_CNCounting files...正在统计文件...knSymbolic Linkಸಾಂಕೇತಿಕ ಕೊಂಡಿ (symbolic link)fyAnywhereOeralcsbAt Mostco nôwicyfurSearching...Daur a cirî...cyCounting files...Yn cyfri ffeiliau...idContains the textBerisi teksuzMinutesDaqiqaviCreatedĐã tạonnCounting files...Tel filer …nsoModifiedMpshafaditšweca@valenciaEditEditajaHome FolderホームフォルダーfrUserUtilisateurksFindछांडsrFIFOFIFOzh_TWCounting files...計算檔案中...guMinutesમિનીટોelSearch CompleteΗ αναζήτηση ολοκληρώθηκεlvOctal PermissionsOktālās atļaujasmsAt MostPaling TinggigaOctal PermissionsCeadanna OchtnárthapsDaysورځېnsoCharacter deviceSediriwa sa ditlhakakaOctal Permissionsრვაობითი უფლებებიen_GBBlock deviceBlock devicelvClearAttīrītuz@cyrillicCloseЁпишfyMonthsMoannenamHoursሰዓቶችnnSelect Files...Vel filer …plBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Podstawowe zasady:
-
-*  Odpowiada jakiemukolwiek znakowi występującemu 0 lub więcej razy.
-?  Odpowiada jakiemukolwiek znakowi występującemu dokładnie jeden raz
-jaContains the text次の文字列を含む(T)neLine Countरेखा गणना गर्नुहोस्bsMatchSličnostsqFIFOFIFOsiMonthsමාසයsqHoursOrëslUserUporabnikneResultsपरिणामglBlock deviceDispositivo de bloquestaCanceln ரத்துசெய்கviModifiedBị sửa đổicaSUIDSUIDbrFilter:Sil :zh_TWClear清除(C)sr@ijekavianlatinRegularosnovniorCloseବନ୍ଦ କରନ୍ତୁ (C)itAt LeastAl minimorwlinesImirongoisunknownóþekktbeunknownневядомаguCreatedબનાવાયેલcrhCloseQapatgaGroupGrúpacyMatchCydwedduskSymbolic LinkSymbolický odkazmsLine CountKiraan BariskuAnyHema yekjaDays日guContains the textલખાણ ધરાવે છે (t)ukDirectoryКаталогbgExtended regexpРегулярен изразheCloseסגורteNo matchఏదీ సరిపోలిలేదుpt_BRFile type : Tipo de ficheiro : svResultsResultatplClearWyczyśćocCharacter devicePeriferic de caractèrspalinesਸਤਰਾਂzh_TWExecutable執行檔kkUserПайдаланушыen_GBFIFOFIFOesFind hidden files and directoriesBuscar archivos y directorios ocultosnlStay on single filesystemBlijf op een bestandssysteemuz@cyrillicunknownномаълумhneResultsपरिनाम (R)plunknownnieznanezh_HKAny任何品牌tkPathÝollvSelect Files...Izvēlēties failus...heSelect Files...בחירת קבצים...kmWhole words onlyតែ​ពាក្យ​ទាំងមូល​ប៉ុណ្ណោះkyDirectoryКаталогugHoursسائەتtaWhole words onlyமுழுவார்த்தைகள் மட்டும்lvSearching...Meklēju...bn_INDirectoryডিরেক্টরি (D)mnEditЗасварлаtrCounting files...Dosyalar sayılıyor...isMinutesMínúturhiSearch returned no resultsखोज ने कोई परिणाम नहीं दियाpsNo matchهېڅ ساریro%s Finished : %s%s Finalizat : %ssrUserКорисникviPathĐường dẫnisCloseLokataMonthsமாதங்கள்faMinutesدقیقهviSymbolic LinkLiên kết tượng trưngzh_HKunknown不明sqSelect folder to search inZgjidh kartelën ku do të kërkohetdaSearch CompleteSøgning færdigkgCancelvangulaeoRecursiveRekursiahiHome Folderघर फोल्डरglHoursHorashySymbolic LinkՍիմվոլիկ հղումviAt MostNhiều nhấtorCase Sensitiveଅକ୍ଷର ନିର୍ଦ୍ଦିଷ୍ଟfaRegularبا قاعدهbeSocketГняздоbsRecursiveRekurzivnopt_PTFile type : Tipo de ficheiro : csAccessedPřistoupenoroFIFOFIFOwaWhole words onlyMots etirs seulmintpaAt Leastਘੱਟੋ-ਘੱਟkmDirectoryថតgukBytesકિબાઇટ્સbe@latinAt MostNia bolšthClearล้างhySelect Files...նիշքերի ընտրություն...hsbFound %d matchZakónčene nadawkiviFilter:Lọc:dzDaysཉིནམ་ཚུ་bnModifiedপরিবর্তনের সময়hrModifiedMijenjanocyContains the textYn cynnwys y testunptAnywhereSemprennUpper limitØvre grensebrGroupStrolaldtelinesవరుసలుsqlinesrreshtabgunknownнепознатоtgSearching...Идет поиск...lvMatchAtbilstbrHome FolderRenkell ar gêritCloseChiudisrFilter:Пропусник:kuCreatedAfirandîlgNo matchTewali kifaanaganaesContainsContieneitDaysGiornineSearching...खोजी गर्दैछ...en_GBUserUsermyCase SensitiveA စာလုံးပေါင်း သတိပြုပါkoCharacter device문자 디바이스azModifiedTəkmilləşdirilibesMonthsMeseskklinesжолmlEditചിട്ടപ്പെടുത്തുകitRegularRegolarewaPathTchiminsiDirectoryබහලුමhuMinutesPercmlNo matchചേരുന്നതില്ലitOctal PermissionsPermessi ottalipaDaysਦਿਨzh_CNCase Sensitive区分大小写ca@valenciaOctal PermissionsPermisos en octalfyCase SensitiveHaadlettergefoelichglClearLimparheCreatedתאריך היצירהhuFile type : Fájltípus: paDirectoryਡਾਇਰੈਕਟਰੀmaiNo matchबेमेलmsEditEditazlinessətirbgUserПотребителca@valenciaFIFOFIFOdaAnywhereHvor som helsttrAnywhereHerhangi bir yeramDaysቀንzh_CNSearch returned no results搜索没有返回结果beRegularЗвычайнаяseCreatedRáhkaduvvonarSearch returned no resultsلا نتائج لعملية البحث.be@latinHome FolderChatni katalohhneCancelखारिज करवdaDirectoryMappeskMonthsMesiacetrFind hidden files and directoriesGizli dosya ve dizinleri bulbn_INContains the textচিহ্নিত লেখাসহ(t)bsInclude binary filesUkljući binarne datotekeca@valenciaSelect folder to search inSeleccioneu la carpeta on cercargaCloseDúnzhFind hidden files and directories查找隐藏目录和文件mgHome FolderLaha-tahirin'ny fandraisanakaNo matchარავითარი დამთხვევაsr@ijekavianlatinMonthsmesecifykByteskBytesltCharacter deviceSimbolinis įrenginyskuNo matchLihevhatin tunefrunknowninconnuxhCase SensitiveIyabeva OonobumbasvkBytesKibytebounknownམི་ཤེས་པsilinesපේළිzhBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-基本规则:
-
-*  匹配任何字符 0 或任意次.
-?  匹配任何字符 1 次.
-glNo matchNon hai coincidenciassvSocketUttagsvOctal PermissionsRättigheter på oktal formfrlineslignesslSearch CompleteIskanje končanokyCancelАйынууmnHoursЦагpt_BRSelect Files...Selecionar arquivos...zuBlock deviceUmhlahlo wokuvimbelaen_CALine CountLine CountpsAnyهريوukSearch CompleteПошук завершеноyoHome FolderFódà Iléen_CACloseClosemaiSelect Files...फाइलसभ चुनू...deHome FolderPersönlicher OrdnerisResultsNiðurstöðurzuCase SensitiveKuqaphe ubukhulu kanye nobuncane bamagamabeMinutesХвіліныwaunknownnén cnoxhoubn_INSelect Files...ফাইল নির্বাচন করুন...sqGroupGrupisr@latinAt Leastnajmanjesr@latinContains the textSadrži tekstksCloseबंद करिव (C)rwCloseGufungawaContainsA dvinsnlSUIDSUIDdzLine Countགྲལ་ཐིག་གྱངས་ཁ་hsbPathpućsr@ijekavianlatinlinesredovakaAnyნებისმიერიsvUserAnvändareioEditRedaktezfiSelect folder to search inValitse kansio, johon haku kohdistetaankaFilter:ფილტრი:msGroupKumpulandaInclude binary filesMedtag binære fileruzGroupGuruhfrCounting files...Décompte des fichiers...hyGroupԽումբarBlock deviceجهاز كتلاتitSelect folder to search inSelezionare la cartella in cui cercareorFilter:ଫିଲଟର:esUpper limitLímite superiorptUserUtilizadormkCharacter deviceКарактерен уредsr@ijekavianlatinCounting files...Brojim fajlove...isSymbolic LinkTákntengiltSelect folder to search inPasirinkite aplanką, kuriame ieškositeetNo matchEi leitudzh_CNSelect folder to search in选择进行搜索的文件夹be@latinMinutesChvilinyzh_TW.Big5Days天huUpper limitFelső korláteuReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Espresio erregularrentzat erreserbaturiko karaktereak hauek dira
-. ^ $ [ ] ? * + { } | \ ( ) : 
-Espresio erregularretan oinarrizko metakaraktere hauek
-?, +, {, |, (, and ) beraien esanahia galtzen dute.
-
-Karaktere honek . edozein karaktere balio du.
-Karaktere honek ^ lerro hasiera esan nahi du.
-Karaktere honek $ lerro amaiera esan nahi du.
-
-Kortxete arteko karaktereak [ ] bakarra(k) d(ir)en         karakterea(k)  adierazten d(it)u
-[^] arteko karkatereak zerrendan ez dagoen
-karakterre bakarra asierazte dute
-[ - ] arteko karaktereak karakter tarteak
-[0-9] edo [a-z] adibidez. 
-
-Esperios erregular bat dauden errepikapen operadore multzotik edozein jarraian izan dezake:?      Aurreko elemenua aukerakoa da eta gehienez
-      behin agertuko da.
-*      Aurreko elementua beharrezkoa da, 0 izan daiteke
-      eta behin baino gehiago ager daiteke
-+      Aurreko elementua behien edo gehiagotan
-      agertuko da
-{n}	Aurreko elementua espreski n aldiz agertu behar da
-{n,}	Aurreko elementua n aldiz edo gehiagota agertu behar da.
-{n,m}	Aurreko elementu gutxienez n aldiz agertuko da baina 
-        ez m aldiz baino gehiagotan
-
-Erreserbaturiko karaktere bat aurkitzeko jarri \ aurretik. 
-
-Bi espresio erregular "or" operadore logikoa erabiliaz
-        batu daitezke.
-Bi espresi erregular bat bestearen atzean jar daitezke.
-
-Argibide gehiago komando lerroa "man grep"
-        ipiniaz aurki daitezke
-psHome Folderکور پوښۍdzContains the textནང་ན་ཚིག་ཡིག་ཡོད།(t)trLine CountSatır SayısıcsFIFOFronta FIFOdeAt LeastmindestensazUserİstifadəçiazFilter:Filtr:nlCharacter deviceKarakterapparaatpaSelect Files...ਫਾਇਲਾਂ ਚੁਣੋ...svCounting files...Räknar filer...msNo matchTiada padananknUpper limit:ಮೇಲಿನ ಮಿತಿcsNo matchŽádná shodasvFIFOFIFOneDirectoryडाइरेक्टरीndsCancelAvbrekenltFile type : Failo tipas :bsUpper limit:Gornja granica:kkUpper limitЖоғарғышекbn_INunknownঅজানাlgEditKyusaafRegularAlgemeenpsRegularسادهgaClearGlannbOctal PermissionsOktale rettighetersr@ijekavianlatinDaysdanabn_INInclude binary filesবাইনারি ফাইল অন্তর্ভুক্ত করা হবে (b)zh_HK%s Finished : %s%s 結束：%selHome FolderΠροσωπικός φάκελοςroSUIDSUIDskkByteskBajtythMonthsเดือนeuSymbolic LinkEsteka sinbolikoafaInclude binary filesشامل پرونده‌های دوگانی‌trNo editor component found.Hiç düzenleyici bileşeni bulunamadı.beAnywhereДзе заўгоднаfrFilter:Filtre :etBlock deviceBlokkseadeafClearMaak skoonneAt MostबढीमाfiHoursTuntiacyResultsCanlyniadaudzHoursཆུ་ཚོད་ཚུ་azPathCığırslMatchSe skladaorModifiedପରିବର୍ତ୍ତିତmnSocketСоккетen_GBFind hidden files and directoriesFind hidden files and directoriesruSymbolic LinkСимволическая ссылкаroResultsRezultatebn_INGroupদলviMonthsThángfyHome FolderThúsmaproAt MostCel multpl%s Finished : %s%s Zakończono : %sglFIFOFIFOcaHome FolderCarpeta de l'usuariuz@cyrillicPathЙўлiaCreatedCreatesrPathПутањаugMonthsئايcyHoursOriaundsModifiedÄnnertmsCounting files...Menghitung fail...uz@cyrillicUpper limit:Юқори чегара:am%s Finished : %s%sን ጨርሷል ፦ %sastFindGuetaresSelect folder to search inSeleccione la carpeta en la que buscarnbExecutableProgramfilbe@latinUserKarystalnikhneClearसाफ करवdeNo editor component found.Es wurde keine Editorkomponente gefunden.sr@ijeHome FolderЛични директоријумgu%s Finished : %s%s સમાપ્ત થયેલ છે : %shyunknownանհայտkoRecursive순환iaFindCercarmsCase SensitiveCase SensitifeuAt MostGehienezzh_CNContains the text含有文本(T)zhRecursive递归csbAnyWszëtczéfaAt LeastحداقلcaExecutableExecutablecskByteskBytescsAnyLibovolnýplWhole words onlyCałe słowazh_TW.Big5lines行arUserمستخدمbsCase SensitiveRazlikovanje malih i velikih slovagaSocketSoicéadtrunknownbilinmiyoreuAnyEdozeinsr@ijekavianSearching...Тражим...ptOctal PermissionsPermissões em OctalknSearch returned no resultsಹುಡುಕಾಟಕ್ಕೆ ಯಾವುದೆ ಫಲಿತಾಂಶ ದೊರೆತಿಲ್ಲrwResultsIbisubizocyDirectoryCyfeiriadurzh_TW.Big5Cancel取消astCreatedCreáusr@ijekavianMonthsмесециkuEditBiguherînefySelect Files...Triemmen selektearje...zh_HKMatch符合eoOctal PermissionsOkumaj permesojneAnywhereकहीँ पनिukFilter:Фільтр:koFile type : 종류 : siAt Leastඅවම වශයෙන්daSearch returned no resultsSøgning fandt ingen resultaterkuCase SensitiveRewşahistiyaruzHoursSoatzh_TW.Big5Group組別srFind hidden files and directoriesПронађи скривене фајлове и фасциклеzh_HKWhole words only全字拼寫須相符(W)euUpper limit:Goiko muga:bgFindТърсенеwaCase SensitiveDiferince pititès/grandès letesbnAt Mostবড়জোরsqEditNdryshoen_GBFilter:Filter:bgCounting files...Преброяване на файловете...iaEditModificarseModifiedRievdaduvvoneuFile type : Fitxategi mota : ca@valenciaMatchCoincidènciamkResultsРезултатиpt_BRStay on single filesystemPermanecer apenas num sistema de ficheiroszh_CNCharacter device字符设备fiPathPolkugaCreatedCruthaitheesSocketSocketrwFound %d matchByarangiyetaSocketதுளைheMatchהתאמהmgDirectoryLaha-tahiryjaUserユーザーsvCloseStängmsStay on single filesystemTetap pada sistemfail tunggalafFilter:Filter:paHoursਘੰਟੇetBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Baasreeglid:
-
-*  Klapib iga sümboliga null või rohkem korda järjest.
-?  Klapib iga sümboliga täpselt ühe korra.
-csbUserBrëkòwnikitSocketSocketde%s Finished : %s%s abgeschlossen: %smaiInclude binary filesबाइनरी फाइलकेँ शामिल करू (b)bgContains the textСъдържа текстаkuSearching...Lê tê gerandin...te%s Finished : %s%s పూర్తైనది : %sidOctal PermissionsHak Akses Oktalpt_BRAt LeastNo mínimofiExecutableSuoritettava tiedostofyContainsBefettetcy%s Finished : %s%s Wedi gorffen: %sca@valenciaRegularRegularnlCounting files...Bestanden worden geteld...zh_TWLine Count行數anCase SensitiveSensible a mayusclasroWhole words onlyNumai cuvinte întregifaCounting files...در حال شمارش پرونده‌ها...ptWhole words onlyApenas palavras completasuzMonthsOylararLine Countعدد الأسطرeoFindSerĉiocResultsResultasptunknowndesconhecidoellinesγραμμέςskSocketSoketzh_TWunknown不明nbBlock deviceBlokkenhetta%s Finished : %s%s முடிவடைந்தது : %sglOctal PermissionsPermisos en octalamSUIDSUIDhsbGroupSkupinahuPathÚtvonalgalinesLinifrFIFOFIFOpt_PTCharacter deviceDispositivo de CaracterheGroupקבוצהteSearching...వెతుకుతోంది...ltCase SensitiveSkirti raidžių dydįkoAccessed접근 시간zhClose关闭msFilter:Penapis:bnRecursiveপুনরাবৃত্তিttFindЭзләүfrNo matchAucune correspondancekaRegularჩვეულებრივიcsbMonthsMies.bgInclude binary filesТърсене във всички файловеbgLine CountБрой редовеgaMinutesNóiméidnlOctal PermissionsOctale rechtenbnContains the textচিহ্নিত লেখাসহ (t)svStay on single filesystemStanna inom ett enda filsystemfrWhole words onlyMots entiers seulementslEditUredien_GBAt LeastAt LeasteukByteskByteelMatchΑναζήτησηltUpper limit:Viršutinė riba:nsoHome FolderSephuthedi sa Gaeen_GBGroupGroupviCase SensitivePhân biệt chữ hoa/thườngthFindหาmrHoursतासfiRegularTavallinenkkCancelБас тартуfyUpper limit:Boppegrins:igFindChọ̀ọ́deSearch CompleteSuche abgeschlossenndsNo matchKeen RutkamenjaSearch Complete検索完了mrSelect folder to search inशोधण्याकरीता रंग निवडाesMatchCoincidencianeRegularनियमितsikByteskBytesviSelect Files...Chọn tập tin...ca@valenciaSocketSòcolkkOctal PermissionsСегіздік түрде рұқсаттарltCancelAtšauktihiOctal Permissionsऑक्टल अनुमतियाँnbDirectoryKatalogbn_INCase Sensitiveহরফের ছাঁদ সম্পর্কে সচেতনmiGroupRōpūcsMinutesMinutyplLine CountLiczba wierszyhneGroupसमूहmkMatchСпоредиplCloseZamknijzh_TW.Big5Hours小時kuSymbolic LinkGirêdana SembolîkseUpper limit:Bajit rádji:xhCloseValabn_INPathপাথrwCreatedByaremwebnFIFOFIFOglContains the textContén o textotgFIFOFIFOmaiAt Leastकम सँ कमjaOctal Permissions8 進数表記のアクセス権koSearching...찾는 중입니다...kmSymbolic Linkតំណ​និម្មិតសញ្ញាigEditDeziearSelect Files...اختر الملفات...deHoursStundenen_GBSocketSocketoc%s Finished : %s%s Terminat : %slvkByteskBaitibelinesрадкоўptGroupGrupoafAt MostNa Meesuz@cyrillicRegularОддийdaRegularRegulærbeSelect Files...Выбраць файлы...uzInclude binary filesBinar fayllarhyClearՄաքրելsiUserපරිශිලකsr@latinResultsRezultaticyInclude binary filesCynnwys ffeiliau deuolpaunknownਅਣਜਾਣcsExecutableProgrammsRecursiveRekursifjaFIFOFIFOuzDaysKunxhSearching...Isakhangela...thDirectoryไดเรกทอรีmlFilter:അരിപ്പ:fyMinutesMinutenzuOctal PermissionsIzimvume zeOctalugAt Leastئاز دېگەندەhiReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-विस्तारित regexp के लिए सुरक्षित अक्षर हैं
-. ^ $ [ ] ? * + { } | \ ( ) : 
-सामान्य मूल एक्सप्रेसन्स में मेटाकैरेक्टर्स
-?, +, {, |, (, और ) अपने विशेष अर्थ खो देते हैं.
-
-बिन्दु  .  कोई भी एक अक्षर से मेल खाता है.
-कैरेट ^ लाइन की शुरूआत से मेल खाता है.
-डॉलर $ लाइन के अंत से मेल खाता है.
-
- [ ] के भीतर अक्षर सूची में अन्य अकेले अक्षर से
-        मेल खाता है.
-[^ ] के भीतर अक्षर सूची में अन्य अकेले अक्षर से
-        मेल *नहीं* खाता है.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-       at the command prompt.
-daAnyEnhverptFindProcurardeCounting files...Dateien werden gezählt ...plFind hidden files and directoriesZnajdź ukryte pliki i katalogithlinesบรรทัดsr@ijekavianCancelОдустаниxhMinutesImizuzugaAccessedRochtainknFindಪತ್ತೆ ಹಚ್ಚುiskByteskBætidakByteskBytehuCounting files...A fájlok számolása folyik...isAt MostÍ mesta lagiheExtended regexpregexp ממושךmyHome Folderပင်မဖိုင်တွဲmaiHome Folderघर फ़ोल्डरidFindCarisiResultsප්‍රථිපළnbAnywhereHvor som helstslContainsVsebujeseunknownamasbsunknownnepoznatowaModifiedCandjîmaiMinutesमिनटheCounting files...סופר קבצים...euPathBide-izenansoPathTsejanazh_CNkBytes千字节huModifiedMódosítvaeuWhole words onlyHitz osoak bakarrikthFound %d match%s [เสร็จสิ้น]etSelect Files...Vali failid...itLine CountConteggio righeslCase SensitiveRazlikovanje velikosti črkgaFindAimsighplCase SensitiveRozróżnianie małych i wielkich literzh_TWSelect folder to search in選取在哪個資料夾中搜尋nnCancelAvbrytruSearching...Поиск…huExecutableVégrehajthatóidSearching...Mencari...sr@ijekavianlatinSymbolic Linksimbolička vezasqUserPërdoruesisr@ijekavianlatinCloseZatvorizhSearching...正在搜索...uz@cyrillicSearching...Қидирилмоқда...knResultsಫಲಿತಾಂಶಗಳುhrDaysDanindsRecursiveRekursievhiunknownअज्ञातzhFile type : 文件类型 : furEditModificheesHome FolderCarpeta personalnnGroupGruppesrGroupГрупаtkOctal PermissionsSekizlik ejazalardzCreatedགསར་བསྐྲུན་འབད་ཡོདཔ།zhSearch Complete搜索完成kgFindsololamsCharacter devicePeranti aksaraafDirectoryGidsafunknownonbekendnnCreatedLagauklinesрядокukLine CountКількість рядківkmFilter:តម្រង ៖taEditதொகுglCharacter deviceDispositivo de carácterarInclude binary filesضمن الملفات الثنائيةsrClearОчистиmnGroupБүлэглэviAnyBất kỳeuSearching...Bilatzea...kaSocketსოკეტიpt_BRHoursHorasen_USEditEditukContainsМіститьnbCloseLukkcaFind hidden files and directoriesCerca fitxers i directoris ocultsbnGroupগ্রুপdalineslinjerglGroupGrupoptContainsContémitCharacter deviceDevice a caratteriarFindابحثmkUpper limit:Горна граница:uzWhole words onlyFaqat butun soʻzcyCloseCaumsUpper limitHad atasttEditÜzgärtüidCharacter devicePerangkat karakterhneFindखोजव (F)sr@latinSocketUtičnicaslInclude binary filesVključi binarne datotekeorSelect folder to search inଖୋଜିବା ପାଇଁ ଗୋଟିଏ ଫୋଲଡର କୁ ବାଛନ୍ତୁbgAnyВсекиplAt LeastprzynajmniejanGroupCollaiaRegularRegularseMinutesMinuhtagaCase SensitiveCásíogairiaModifiedModificateen_CAGroupGroupfiFilter:Suodatin:bsClearOčistimiEditWhakatikabe@latinSymbolic LinkSymbaličny łučzh_CNUpper limit:上限：sr@latinCancelOtkažiocEditEdicionugHome Folderماكان مۇندەرىجەarNo matchلا تطابقeuStay on single filesystemPermanecer en sistema de archivosmgCase SensitiveManaja haben-tsoratraugClearتازىلا(C)sr@ijekavianCreatedНаправљенetResultsTulemusedxhAnyNayiphi naeuSocketSocket-absFindNađiptAnyQuaisquertgSocketБастагоҳplFindSzukajmyGroupအဖွဲ့skUpper limit:Horný limit:neCharacter deviceक्यारेक्टर यन्त्रpt_BRBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Regras básicas:
-
-*  Representa qualquer caracter zero ou mais vezes
-?  Representa qualquer caracter exactamente uma vez
-dzSelect folder to search inའཚོལ་ཞིབ་འབད་ནིའི་དོན་ལུ་ སྣོད་འཛིན་སེལ་འཐུ་འབད།frAnyTousltPathKeliascaFindCercazh_TWAny任何品牌sr@ijekavianlatinWhole words onlySamo cijele riječilgModifiedAmakyusibwagaMatchComhoiriúnaighkoExtended regexp정규표현식 확장ndsSearching...Sök...gaSelect Files...Roghnaigh Comhaid...sr@ijekavianClearОчистиamEditአስተካክል (E)ca@valenciaCancelCancel·lafikByteskt/sazCharacter deviceHərf avadanlığıca@valenciaunknowndesconeguten_GBSymbolic LinkSymbolic LinkdeSelect folder to search inZu durchsuchender OrdnerheAt Leastלכל הפחותjaBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-* は何もなしもしくはどんな長さでも一致。
-? はどんな長さでも一文字一致
-skSelect Files...Vybrať súbory...ukCancelСкасуватиmskByteskByteukSymbolic LinkСимволічне посиланняcyAccessedHygyrchwydneNo matchजोडा मिलेनcsSearching...Vyhledává se…en_GBSearch returned no resultsSearch returned no resultskoModified수정함skResultsVýsledkytgResultsНатиҷаҳоsr@ijeCharacter deviceКарактер уређајkkSelect folder to search inІшінен іздеу үшін буманы көрсетіңізcsbFound %d matchSkùńczony robòtëgl%s Finished : %sFinalizado %s : %sorSymbolic Linkପ୍ରତୀକାତ୍ମକ ସମ୍ପର୍କptNo matchSem correspondênciaslunknownneznanozh_TWAt Most最多euResultsEmaitzakyiGroupגרופּעtaAnyஏதாவதுesFile type : Tipo de archivo : mkClearИсчистиlvNo matchNav sakritībuhiFile type : फाइल प्रकार :pa%s Finished : %s%s ਨੇ %s ਨੂੰ ਖਤਮ ਕੀਤਾkuCloseGirtinkoAny어떤maiUpper limit:उप्परक सीमाःltMonthsMėnesiaibgUpper limitГорна границаelClearΕκκαθάρισηkkMonthsайnnContainsInneheldjaSearch returned no results検索しましたが、何も見つかりませんthContains the textมีข้อความdeRegularRegelmäßigbe@latinCase SensitiveUličvaj rehistarelAccessedΠροσπελάστηκεfrUpper limitLimite supérieuremrAnyकुठलेहीarSearching...بحث...iaSearching...On initia cerca...pt_BRFind hidden files and directoriesEncontrar arquivos e diretórios ocultostrRecursiveTekrarlımkCancelОткажиdeResultsErgebnissefrBlock devicePériphérique bloclvAnyJebkuršheSearching...מחפש...pt_BRSocketSocketglAnyCalquerapt_BRCharacter deviceDispositivo de caracterebeHome FolderХатняя папкаetFindOtsibnNo matchকোন মিল পাওয়া যায়নিfrOctal PermissionsPermissions en octalastDaysDíespt_BRExecutableExecutávelorCancelବାତିଲ କରନ୍ତୁkaGroupჯგუფიroSelect Files...Selectează fișiere...bnEditসম্পাদনা (E)huContains the textTartalmazza ezt a szövegetpaCancelਰੱਦ ਕਰੋ(C)tgModifiedТағйиршудаthAt Leastอย่างน้อยzh_TWStay on single filesystem僅限目前檔案系統eoSocketKontactilonbunknownukjentkoMonths개월sr@ijekaviankBytesKiBhiUpper limit:ऊपरी सीमाःpt_BRNo matchNenhuma ocorrência do padrãosqSymbolic LinkLidhje SimbolikehneCreatedनिर्मितruInclude binary filesИскать в двоичных файлахca@valenciaNo editor component found.No s'ha trobat el component d'edició.esRecursiveRecursivaeoFound %d match%s [Plenumita]hiPathपथzh_TWGroup群組zh_TWCharacter device字元裝置ndsFind hidden files and directoriesVersteken Dateien un Ornern bekiekenruRegularОбычныйsr@ijekavianlatinMatchpoklapanjecsEditUpravitmrHome Folderहोम फोल्डरukNo matchНемає збігівpaEditਸੋਧ(E)sr@ijekavianFIFOФИФОen_CAModifiedModifiedsvNo matchIngen matchninglgClearSiimulacaBlock deviceDispositiu de blocstaAt Mostஆகக்கூடிய lbDirectoryVerzeechnisbe@latinCreatedStvoranaas%s Finished : %s%s সম্পন্ন : %sbgMinutesМинутиdeAccessedLetzter ZugrifftgCreatedЭҷодшудаneMonthsमहिनाsrCounting files...Бројим фајлове...cakByteskBytesseAt LeastUnnimusesModifiedModificadomnModifiedӨөрчлөгдсөнteDirectoryవివరముdaCloseLukltResultsRezultataindsUpper limitBövergrenzruBlock deviceБлочное устройствоtrInclude binary filesİkili dosyaları da içerkyAccessedАкыркы кайрылууsr@latinUpper limit:Gornja granica:en_GBAnyAnynnDaysDagarbrSearching...O klask...siRecursiveනැවත නැවතත්en_GBInclude binary filesInclude binary fileskaSearch Completeძიება დასრულდაsr@latinCreatedNapravljenouzkBytesKbseCloseGiddees%s Finished : %s%s Terminado: %szh_CNAccessed已访问过orClearସଫା କରନ୍ତୁ (C)mrDaysदिवसislineslínurpaUpper limit:ਉੱਪਰਲੀ ਲਿਮਟ:sr@ijekavianGroupгрупаarMinutesدقائقmaiunknownअज्ञातitSearching...Ricerca...miClearWhakawāteaugInclude binary filesئىككىلىك ھۆججەتلەرنىمۇ(B)zh_TWDirectory目錄glCase SensitiveSensíbel a capitalizaciónfakBytesکیلوبایتeuSUIDSUIDmlHoursമണിക്കൂറുകള്‍glSymbolic LinkLigazón simbólicasr@latinRecursiveRekurzivnofaLine Countشمارش خطarAt Mostعلى الأكثرcaHoursHoresbn_INSearching...অনুসন্ধান করা হচ্ছে...astContainsContiénjaAny全てeoContainsEnhavasmkSUIDSUIDcsSearch returned no resultsHledání nevrátilo žádné výsledkysqMinutesMinutaisFindLeitabgOctal PermissionsОсмични праваnlAt MostTen hoogstefiCase SensitiveHuomioi kirjainkokofaSocketسوکتzhFilter:过滤器:koDays일mlSelect folder to search inതിരയുന്നതിനായി അറ തിരഞ്ഞെടുക്കുകbrDaysDeizioùsr%s Finished : %sЗавршено %s : %snounknownukjenteuCharacter deviceKaraktere-gailuateSelect Files...దస్త్రాలను ఎంచుకొనుము...furlinesrîsndsRegularNormaaldeEditBearbeitenheAccessedמועד גישהviunknownkhông rõhuAt LeastlegalábbkoAt Most최대한zh_TW.Big5Find查找hyFindՓնտրելmaiFIFOफीफोzh_TWBlock device區塊裝置esStay on single filesystemPermanecer en este sistema de archivospaCounting files...ਫਾਇਲਾਂ ਦੀ ਗਿਣਤੀ ਜਾਰੀ ਹੈ...trEditDüzenleocFilter:Filtre :en_CAunknownunknownslCancelPrekličiviMinutesPhútplCounting files...Zliczanie plików....srlinesредоваkkDirectoryПапкаseRecursiveRekursivabrContainsEnnañca@valenciaModifiedModificatsr@ijekavianFindНађиmsSUIDSUIDwaAnyTot l' minme li kéknlFile type : Bestandstype : ruModifiedИзменёнgaSymbolic LinkNasc SiombalachteFilter:వడపోత:pt_PTGroupGrupoukContains the textМістить текстptBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Regras básicas:
-
-*  Representa qualquer caracter zero ou mais vezes
-?  Representa qualquer caracter exactamente uma vez
-orHoursଘଣ୍ଟାdaSymbolic LinkSymbolsk linkndsClearOpklarenmaiAt Mostबेसी सँ बेसीen_CAFIFOFIFOlvLine CountRindu skaitsamCloseዝጋzh_CNBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-基本规则:
-
-*  匹配任何字符 0 或任意次.
-?  匹配任何字符 1 次.
-tgHome FolderФеҳристи хонагӣafInclude binary filesSluit binêre lêers indaNo matchIngen træfferocSUIDSUIDtkGroupToparzh_TWAt Least最少eoSelect Files...Elektu dosierojn...xhSocketIsokethiesContains the textContiene el textohiRecursiveरिकर्सिवesHoursHorasurGroupگروپsr@ijeunknownнепознатоeoUpper limit:Supra limo:arFilter:مرشِّح:csRecursiveRekurzecaContainsContébnFilter:ফিল্টার:jaCounting files...ファイルを数えています...deSearching...Suche …myunknownအမျိုးအမည်မသိltlineslinijosorSearch returned no resultsସନ୍ଧାନ କୌଣସି ଫଳ ପ୍ରଦାନ କରିଲା ନାହିଁsr@ijekavianlatinSocketSoketnlExtended regexpUitgebreide regexplbGroupGruppéierennlSearching...Zoeken…ocGroupGropbnStay on single filesystemশুধুমাত্র একটি ফাইল-সিস্টেমের মধ্যে অনুসন্ধান করা হবেuzFilter:Filtr:glHome FolderCartafol persoaleounknownnekonateazFIFOFIFOzh_TWCreated建立mlGroupകൂട്ടംeskByteskBytessr@latinOctal PermissionsOktalna ovlašćenjaafOctal PermissionsOktale toegangsregtedeNo matchKeine Übereinstimmungbe@latinMonthsMiesiacyuz@cyrillicFindҚидиришbeNo matchНічога не знойдзенаplContainsZawierakoBlock device블럭 디바이스ndsMatchMusterhrMinutesMinutesr@ijekavianSymbolic Linkсимболичка везаhuSocketIllesztőponten_CASUIDSUIDnbSearch returned no resultsIngen søkeresultaterpaSymbolic Linkਸਿੰਬੋਲਿਕ ਲਿੰਕnnSocketSokkeldzOctal Permissionsཨོཀ་ཊཱལ་གནང་བ་ཚུ།siSelect Files...ගොනු තෝරන්න...caFilter:Filtre:mkRecursiveРекурзивноafCounting files...Tel lêers...nbInclude binary filesTa med binærfileruzCancelBekor qilishrwClearGusibaseCancelGaskkalduhttendsResultsResultatennnFilter:Filter:ptFile type : Tipo de ficheiro : hrCreatedNapravljenoen_CANo matchNo matcheuAccessedAtzitutafiRecursiveRekursiivinenelSelect Files...Επιλογή αρχείων...cyMinutesMunudaujaNo match一致しませんmrAt MostकमालesDaysDíasigDirectoryEbenlereanyasiContains the textපෙළ ඇතුලත්ව (t)bsAt LeastNajmanjecsSymbolic LinkSymbolický odkazzh_TWSUIDSUIDjaBlock deviceブロックデバイスmkCreatedКреираноmrCharacter deviceअक्षर उपकरणeoGroupGrupofaContainsداردfrHome FolderDossier personneldeInclude binary filesBinärdateien einschließenhuResultsTalálatokidlinesbarisisCancelHætta viðgaModifiedAthraithekgNo matchnkatult%s Finished : %s%s pabaigta: %steSearch returned no resultsశోధన యెటువంటి ఫలితాలను తిరిగియివ్వలేదుslBlock deviceOnemogoči napravoarCancelألغِmrGroupगटtaCharacter deviceஎழுத்துரு சாதனம்iaSymbolic LinkLigamine symbolicamUserተጠቃሚthContainsมีคำว่าkkNo editor component found.Редактор компоненті табылмадыheCharacter deviceהתקן תוmaiRegularनियमितmsContainsMengandungiknWhole words onlyಪೂರ್ಣಪದ ಮಾತ್ರ(W)koFind찾기(F)huDirectoryKönyvtárkmLine Countចំនួន​ជួរetSearch returned no resultsOtsing ei andnud tulemusitgCase SensitiveБо Ҳисоби ҲассосиятbeInclude binary filesДазволіць пошук двайковых файлаўdeCharacter deviceZeichenorientiertes GerätukUpper limit:Верхня межа:xhDaysIintsukuruFind hidden files and directoriesУчитывать скрытые файлы и каталогиmkContainsсодржиnbContains the textInnholder tekstenhuHome FolderSaját mapparuUpper limit:Верхний предел:jaunknown不明ndsHome FolderHemverteeknisrulinesЛинииetAt MostMaksimaalselttrPathYolnlCreatedGemaaktetRecursiveRekursiivnezh_TW.Big5Close關閉plBlock deviceUrządzenie blokoweuz@cyrillicMinutesДақиқаzh_TW.Big5Filter:過濾:srSearching...Претражујем...nbCase SensitiveSkill mellom små/store bokstaverfyCancelÔfbrekkearCreatedتاريخ الإنشاءesSUIDSUIDndsFindFinnenhuBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Alapvető szabályok:
-
-A * bármennyi karaktert helyettesíthet.
-A ? pontosan egy karaktert helyettesít.
-mrDirectoryडायरेक्ट्रीpt_BRlineslinhaspsWhole words onlyيوازې بشپړ ويېونهcaAt LeastAlmenysmsContains the textMengandungi tekshneFilter:फिल्टर:plAccessedCzas dostępueoFIFOFIFOplDirectoryKatalogxhCreatedYenziweneContains the textपाठ समाविष्ट गर्दछhr%s Finished : %s%s Završeno : %samFindፈልግidMatchCocokhneAt Leastकम से कमca@valenciaMonthsMesosbeSelect folder to search inВыберыце папку для пошукуugContainsئۆز ئىچىگە ئالغانruSearch returned no resultsНичего не найденоheMinutesדקותgvunknownGyn fysnnRecursiveRekursivkkAnyКез-келгенheUpper limit:הגבלה עליונה:srHome FolderЛична фасциклаnekBytesकिलो बाइटmsPathLaluansr@ijekavianlatinUpper limit:Gornja granica:seAt MostEanemusdz%s Finished : %s%s མཇུག་བསྡུ་ཡོདཔ། : %smaikBytesके-बाइट्सhrOctal PermissionsDozvole u oktalnom zapisuhrFilter:Filtar:liSocketsocketguFilter:ગાળક:cyRecursiveYmgylchollvCreatedIzveidotseoUpper limitSupra limozh_TWMinutes分seAnyVaikko makkárasHoursঘন্টাplSearch CompletePołączenie zakończonebrClearSkarzhañbsDirectoryDirektorijsr@ijekavianRecursiveРекурзивноukFind hidden files and directoriesПоказувати приховані файли і текиetGroupGruppjaReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Reserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-メタキャラクタの普通の表現
-?, +, {, |, (, と ) それらの特別な意味を失う。
-
-ピリオド . は何か一つの文字の一致。
-キャレット ^ ははじめのラインの一致。
-ドル $ は終わりのラインの一致。
-
-[ ]の中のリストはどれか一文字の一致。
-[^ ]の中のリストはどれか一文字*でない*一致。
-[ - ]の中のリストはその範囲内の一致
-       （すなわち[0-9]もしくは[a-z]）。
-
-普通の表現は一つのそれぞれの繰り返し
-       はたらきをフォローしてよい:
-?      この文字は任意の一文字の一致
-*      この文字は何もなしもしくはどんな長さでも一致。
-+      この文字は一文字もしくはどんな長さでも一致。
-{n}    この文字は厳密にn回の一致。
-{n,}   この文字はn回かそれ以上の一致。
-{n,m}  この文字は最小のn回もしくはたったm回の一致。
-
-たくさんの文字予約はプレコードと \. 
-
-二つの表現を論理的につなげたい場合は|。
-二つの表現を含む。
-
-これ以上の情報が欲しい場合ははコマンドプロンプトで
-        "man grep" とタイプしてみてください。
-paWhole words onlyਪੂਰੇ ਅੱਖਰ ਹੀ(W)jaWhole words only単語単位(W)roSymbolic LinkLegătură simbolicăazOctal PermissionsSəkkizlik SəlahiyyətlərviClearXoábgSocketСокетhneMatchमिलिसneHome Folderगृह फोल्डरdaFIFOFIFOtrCase SensitiveBüyük/Küçük Harfe DuyarlımlAt Mostകൂടിയതു്zh_HKRegular正規gaFIFOFIFOkmCase Sensitiveប្រកាន់​តួ​អក្សរ​តូច​ធំetCharacter deviceMärkseadeptCloseFecharguSearch returned no resultsશોધ પરિણામો પાછા મળ્યા નહિંhneCase Sensitiveकेस सेंसिटिवfylinesrigelshneSelect Files...फाइल मन ल चुनव...trHome FolderEv KlasörüiaSocketSocket daSelect folder to search inVælg mappe at søge iruOctal PermissionsВосьмеричные праваisContainsInniheldurdzRecursiveལོག་རིམ་amResultsውጤቶችukCreatedСтвореноen_GBModifiedModifiednsoUserModirišiknRegularಸಾಮಾನ್ಯukBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Базові правила:
-
-*  відповідає будь-якій кількості символів або порожньому місцю.
-?  відповідає будь-якому одному символу
-cykByteskBeitiauroOctal PermissionsPermisiuni octalehuCreatedLétrehozvarwDirectoryUbubikoptAt LeastNo MínimougFindئىزدە(F)afFile type : Lêertipe : taSearch returned no resultsதேடுதல் எந்த முடிவையும் கொடுக்கவில்லைdzResultsགྲུབ་འབྲས་ཚུ་(R)siunknownනොදන්නාanSearching...Mirando...dzPathའགྲུལ་ལམ་cyRegularArferolukEditПравкаcsbSymbolic LinkSymbòliczné zlënkòwaniérounknownnecunoscuthsbFindPytaćmrFindशोधा (F)knDaysದಿನಗಳುslFind hidden files and directoriesNajdi skrite datoteke in mapeugPathيولglBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Regras básicas:
-
-* Corresponde-se a calquer carácter, zero ou máis veces.
-? Corresponde-se a calquer carácter, exactamente unha vez.
-kkEditТүзетуbnInclude binary filesবাইনারি ফাইলেও সন্ধান করোwaDirectoryRidantnsoClearPhumolakoEdit편집(E)bnDaysদিনukSearching...Пошук…mrRegularसर्वसाधारणsr@ijekavianResultsРезултатиmlMonthsമാസങ്ങള്‍nsoDirectoryThupetoocAnywherePertotskUserPouživateľcaSocketSòcolfyCreatedMakkeviSocketSocketiaDaysDiesmrResultsपरिणामmrSUIDSUIDknAt Mostಇದಕ್ಕೆ ಸಮನಾದguFindશોધોmlMatchചേ‌ര്ച്ചhrAt MostNajvišemglinesandalanaastEditEditarttunknownbilgesezuz@cyrillicModifiedЎзгартирилганidWhole words onlyHanya seluruh kataxh%s Finished : %s%s Igqityiwe : %staSymbolic Linkஉருவக இணைப்புkoNo match해당 사항 없음daCharacter deviceTegnenhedbe@latinRegularZvyčajnyzh_HKGroup羣組xhWhole words onlyAmagama apheleleyo kuphelabeAnyЛюбыkuSelect folder to search inPeldanka ku wê lêgerîn pêk were hilbijêrîitCreatedCreatozh_HKSearching...搜尋...skExtended regexpRozšírené regexpca@valenciaInclude binary filesInclou els fitxers binaristrWhole words onlySadece tam sözcüklerhulinessoronkéntzh_TWNo editor component found.找不到編輯器組件。astOctal PermissionsPermisos Octalessr@ijeCancelОдустаниxhHoursIiyureruEditПравкаsr@ijekavianlatinFind hidden files and directoriesPronađi skrivene fajlove i fasciklekkunknownбелгісізuzSymbolic LinkRamziy bogʻcrhFindTaporGroupସମୂହsiDaysදිනbeWhole words onlyТолькі асобныя словыitNo matchNessuna corrispondenzazh_CNlines行orCreatedସୃଷ୍ଟିହୋଇଥିବାslAccessedUporabljanocsbFIFOFIFOroMinutesMinutevikByteskByteteFindవెతుకు (F)zh_TW.Big5Clear清除yoOctal PermissionsÀwọn Ìyànda OctalnlSearch returned no resultsDe zoekopdracht had geen resultatenzh_CNAny任意的maiSelect folder to search inएकरामे खोजबाक लेल फोल्डर चुनूuz@cyrillicCancelБекор қилишeuMatchParekatucsFindHledatplSelect Files...Wybierz pliki...tgSelect Files...Интихоби файлҳо...glRecursiveRecursivakkSymbolic LinkСимволдық сілтемеfyunknownunbekendwaFindTroverknCancelರದ್ದು ಮಾಡುasMinutesমিনিটeuInclude binary filesFitxategi bitarrak barnehneExecutableचलाय-जा सकेः (E)vilinesdòngbrLine CountNiver a linenndaCounting files...Tæller filer...pt_BRFindLocalizarbgNo matchНяма съответствиеcsNo editor component found.Žádná komponenta editoru nebyla nalezena.maiSearching...खोजि रहल अछि...kmAt Mostច្រើន​បំផុតtrSymbolic LinkSembolik Bağlantınl%s Finished : %s%s Voltooid : %sukFile type : Тип файлів: bn_INSearch returned no resultsঅনুসন্ধানের কোনো ফলাফল পাওয়া যায়নিzh_CNContains包含bnCharacter deviceক্যারেক্টার ডিভাইসskSearching...Hľadá sa…afHoursUreazHome FolderEv QovluğuhsbDirectoryZapiskarAccessedوُصل إليه فيglExtended regexpRegexp extendidatrUpper limit:Üst limit:iaGroupGrupposr@latinAt MostnajvišeeuSearch returned no resultsBilaketak ez du emaitzik aurkituhiContainsरखे हुए हैguContainsસમાવે છેplRegularZwykłyxhDirectoryUvimba weefayilisr@ijekavianlatinClearOčistimlDaysദിവസങ്ങള്‍faStay on single filesystemباقی ماندن بر یک سیستم پروندهglRegularHabitualnbRecursiveRekursivbeGroupЗгрупавацьzh_HKNo match沒有相符nbPathStigaExecutableComhad InriteetMonthskuudthOctal Permissionsสิทธิ์ในรูปเลขฐานแปดcrhNo matchEşleşme yoqhiSelect folder to search inइसमें खोजने के लिये फोल्डर चुनेंuz@cyrillicCase SensitiveКатта-кичик ҳарфни фарқлашkoContains the text텍스트 포함(T)sr@latinCase SensitiveRazlikuj veličinu slovabrFindKavouthiSearching...ढूंढ रहे हैं...caNo editor component found.No s'ha trobat el component d'edició.fiSearch returned no resultsHaku ei palauttanut tuloksiaocSymbolic LinkLigam simbolicesOctal PermissionsPermisos octalescrhlinessatırnı nomeralandırtaGroupகுழுelNo editor component found.Δεν βρέθηκε συστατικό επεξεργαστή κειμένου.mkRegularСтандардноhiDaysदिनfrHoursHeurespt_BRAnywhereSemprebgSearch returned no resultsТърсенето не върна никакви резултатиviWhole words onlyChỉ nguyên từnllinesregelsmrunknownअपरिचीतroRegularObișnuitocBlock devicePeriferic blòcitStay on single filesystemStare su un solo filesystemndsSelect folder to search inWähl een Verteeknis to'm döörsökenzh_TWContains包含brUserArveriadcsbDaysDn.lvCancelAtceltukMatchВідповідністьsr@latin%s Finished : %sZavršeno %s : %spt_BRCounting files...Contando arquivos...be@latinunknownnieviadomycsContainsObsahujesvAnyAllanbDaysDagerelLine CountΠλήθος γραμμώνtaDaysநாட்கள்srSearch CompleteПретрага завршенаeuFindBilatutaHome Folderஇல்ல அடைவுtaUserபயனர்mklinesлинииorAnyଯେ କୌଣସିtrHoursSaatzh_TWInclude binary files包含二進位檔案ndsPathPadseDirectoryMáhppadzClearབསལ།(C)sr@ijekavianlatinHome FolderDomaća fasciklahsbUserWužiwarmkunknownнепознатоzh_TWMonths月itAt MostAl massimokmRecursiveត្រឡប់ugModifiedئۆزگەرتىلگەن ۋاقتىsrSocketСокетmsAt LeastPaling KurangeoEditRedaktiplMinutesMinutyteModifiedమార్చినdaunknownukendtfiWhole words onlyVain kokonaiset sanatbgPathПътzuunknownakwaziwahuCancelMégseroCounting files...Numărare fișiere...srModifiedИзмењенmnDaysӨдөрocWhole words onlySonque los mots entièrscrhUserQullanıcıbgFilter:Филтър:xhAt MostEyona ininzi nokokmHoursម៉ោងcyUpper limitTerfyn uwchjaSearching...検索中...caUpper limit:Límit superior:slHome FolderDomača mapabnDirectoryডিরেক্টরিhnekBytesके-बाइट्सazAnyHər Hansı Birzh_TWRecursive循環idCreatedDibuatmkSymbolic LinkСимболичка врскаuzClearTozalashbePathШляхbgFind hidden files and directoriesОткриване на скрити файлове и директорииzh_CNExtended regexp扩展的正则表达式liEditBewirkehnelinesपंक्तियाँeoMonthsMonatojarHome Folderمجلّد المنزلesRegularHabitualsk%s Finished : %s%s Dokončený: %setUpper limitÜlemine piirkkCase SensitiveРегистрге тәуелді іздеуmaiCloseबन्न करू (C)koSelect Files...파일 선택...huHoursÓramkDirectoryДиректориумen_GBExecutableExecutableasCancelবাতিল কৰক (n)seRegularDábálašen_GBSelect folder to search inSelect folder to search infiMinutesMinuuttiasiUpper limit:උපරිම සීමාව:asWhole words onlyঅকল সম্পূৰ্ণ শব্দ (W)bgStay on single filesystemОстани в текущата файлова системаelNo matchΔεν υπάρχει ταίριασμαroCharacter deviceDispozitiv caracterglUpper limit:Límite superior:nbAt LeastI det minstehneUpper limit:ऊपरी सीमाःskCase SensitiveRozlišovať veľkosť písmeneoNo matchNeniu trafosr@latinFind hidden files and directoriesPronađi skrivene fajlove i fasciklenbClearTømnlFIFOFIFOltHome FolderNamų aplankaslgFindZuuladaRecursiveRekursivhsbModifiedZměnjeneguNo matchબંધબેસતુ નથીseUserGeavaheaddjiisHome FolderHeimamappaidRecursiveRekursifmkAnyБило коиroSelect folder to search inAlegeți dosarele în care să se cauteplSelect folder to search inKatalog do przeszukaniaiaCloseClaudermnlinesМөрүүдhrHoursSatimrkByteskByteszuDirectoryUmkhondomrMinutesमिनीटंjaUpper limit上限sklinesriadkovgaSearching...Ag Cuardach...pt_PTRegularRegularsr@ijekavianlatinunknownnepoznatoxhModifiedIlungisiwenoContains the textInneheld tekstensr@ijekavianCounting files...Бројим фајлове...azSocketSoketbrNo matchKendoare ebetptkByteskBytesxhUpper limit:Umda ophezulu:ptContains the textContém o textofaCancelلغوhiEditसंपादित करेंcrhSymbolic LinkRemziy İlişimfiSocketPistokesr@ijekavianlatinSelect Files...Izaberi fajlove...gvOctal PermissionsKiedyn octalhiExtended regexpविस्तारित regexpbsSocketSocketbeOctal PermissionsДазволы ў васьмярковай формеuk%s Finished : %sЗавершено %s : %shuExtended regexpKiterjesztett regexpseWhole words onlyDušše olles sánitfrCloseFermerhyCancelՀրաժարվելsr@latinlinesredovabnClearমুছে ফেলুনdaSUIDSUIDfrInclude binary filesInclure les fichiers binaireskoHours시간ndsMinutesMinuutennlExecutableUitvoerbaar programmannPathStiguResultsપરિમાણોwakByteskOctetsitPathPercorsougDaysكۈنmkBlock deviceБлок уредugRegularئۆلچەملىكhneRecursiveरिकर्सिवbrunknowndianavsrRecursiveРекурзивноmaiMonthsमहीनाigOctal PermissionsIkikere ọ́ktààlụ̀ukBlock deviceБлочний пристрійsqCharacter deviceDispozitiv me karaktereiaFilter:Filtro:maiEditसंपादन (E)rwRegularIbisanzwejaHours時間anCloseTrancarcyAnyUnrhyw UncrhEditDüzenlezh_CNAnywhere任何地方csExtended regexpRozšířený regulární výrazskCounting files...Počítam súbory...ltMinutesMinutėstaSUIDSUIDhsbCloseZačinićnlCase SensitiveHoofdlettergevoeligguBlock deviceબ્લોક ઉપકરણsvDaysDygnzh_CNUser用户srResultsРезултатиmsWhole words onlySeluruh perkataan sahajaesNo editor component found.No se ha encontrado un componente de edición.sr@ijekavianHoursсатиukAt LeastЩонайменшеmnClearЦэвэрлэbe@latinInclude binary filesUłučna z dvajkovymi fajłamiknInclude binary filesಬೈನರಿ ಕಡತಗಳನ್ನೂ ಸೇರಿಸು(b)asEditসম্পাদনা কৰক (E)trClearTemizleskWhole words onlyLen celé slovásr@ijekavianInclude binary filesУкључи бинарне фајловеetHome FolderKodukataloogjaSUIDSUIDcaCharacter deviceDispositiu de caràctersruunknownнеизвестноuz@cyrillicFilter:Филтр:zh_TWSymbolic Link符號連結hrGroupGrupazh_TWFilter:過濾條件(I):idModifiedDiubahbsSymbolic Linksimbolička vezalvHome FolderMājas mapehiBlock deviceब्लॉक उपकरणhiFilter:फिल्टर:arSelect folder to search inاختر مجلدا للبحث فيهasunknownঅজ্ঞাতpt_BRCloseFecharmkSearching...Пребарувам...csHome FolderDomovská složkapaAnyਕੋਈ ਵੀzh_TW.Big5Path目錄kaCase Sensitiveრეგისტრის გათვალისწინებაarContainsتحتويbrResultsDisoc'hoùglSelect Files...Escoller os ficheiros...uzLine CountSatr sonisr@ijekavianlatinAt Leastnajmanjept_BRResultsResultadosroAnyOricareorSearching...ସନ୍ଧାନ କରୁଅଛି...arUpper limitالنهاية العلياmlWhole words onlyമുഴുവന്‍ വാക്കുകള്‍ മാത്രംhyNo matchՀամընկնում չկաseInclude binary filesMaiddái binearafiillaidfrSelect Files...Sélectionner les fichiers...miDirectoryTe kōpakiviDaysNgàyzhAny任何pt_BRMinutesMinutosasSelect Files...নথিপত্ৰ নিৰ্ব্বাচন কৰক...sr@latinCounting files...Brojim fajlove...etSelect folder to search inKataloogi valimine, millest otsidaviCloseĐóngsqBlock deviceDispozitiv në blloqeptFind hidden files and directoriesProcurar os ficheiros e pastas escondidosbsAnyBilo kojifiSUIDSUIDbrModifiedKemmetbgSymbolic LinkСимволна връзкаukDaysДніkkInclude binary filesБинарлық файлдарды қосаhuFind hidden files and directoriesA keresések a rejtett fájlokra és könyvtárakra is terjedjenek kica@valenciaSearch CompleteCerca completakounknown알 수 없음bnAt Leastঅন্ততpt_BRCase SensitiveSensível à maiusculizaçãoguSearching...શોધ કરી રહ્યા છે...bnContains-তে আছেyoEditÀ̀yẹ̀wòlvFilter:Filtrs:en_GBMatchMatchhiAt Leastकम से कमfurClearNeteboCloseསྒོ་རྒྱག(C)neOctal Permissionsओक्टल अनुमतिहरूruAt Leastне менееbeCase SensitiveУлічваць рэгістр літарdeLine CountZeilenzahlfiFIFOFIFOazCancelLəğv EtptSearch CompleteProcura TerminadacsFind hidden files and directoriesProhledat skryté soubory a adresářemkHoursЧасовиzhDirectory目录ttGroupTörkemglWhole words onlySó palabras completasruExtended regexpРасширенные регулярные выраженияen_GBCounting files...Counting files...svAnywhereVar som helstcySocketSocedplSocketGniazdosrAt LeastнајмањеwaLine CountContaedje des royesca@valenciaAt LeastAlmenyskgunknowndianzenzafaCreatedایجاد شدmkModifiedИзменетоuzFindQidirishkkFilter:Сүзгі:neGroupसमूहkokByteskBkuFilter:Fîltre:dzUserལག་ལེན་པ།deAt Mosthöchstenssr@ijekavianAt MostнајвишеcsStay on single filesystemProhledat pouze jeden souborový systémzhSelect folder to search in选择进行搜索的文件夹eoSymbolic LinkSimbola ligotgClearПок кардани интихобhiCounting files...फ़ाइलें गिन रहेeoCreatedKreitesr@ijekavianlatinMinutesminutasr@ijekavianAnyбило којаelInclude binary filesΝα περιλαμβάνονται δυαδικά αρχείαfrPathCheminlvFindMeklētltOctal PermissionsAštuntainiai leidimaicsbGroupGrëpaskFilter:Filter:uzCreatedYaratilganliCharacter deviceKarakter-apperaatastMonthsmesesskGroupSkupinasr@ijeBlock deviceБлок уређајpt_BRunknowndesconhecidoisUpper limit:Efri mörk:lvCloseAizvērtmnCharacter deviceТэмдэгт төхөөрөмжlbSocketSocketrwDaysIminsicyFilter:Hidlydd:heMonthsחודשיםkaMinutesწუთიnlResultsResultatensqRecursiveRipërsëritësehrAccessedPristupljenoknHoursಗಂಟೆಗಳುsvSelect folder to search inVälj mapp att söka ifaGroupگروهxhkByteskByteszh_CNFind hidden files and directories查找隐藏目录和文件ocMinutesMinutassrMatchПоклапањеhrCase SensitiveRazlikuj velika i mala slovanbExtended regexpUtvidet regulært uttrykkugAnyخالىغانpt_BRkByteskByteslvModifiedModificētsptCreatedCriadoliCancelAnnuleremsCancelBatalbn_INSelect folder to search inঅনুসন্ধানের জন্য ফোল্ডার নির্বাচন করুনetAccessedLoetudbsPathPutanjaitSearch returned no resultsLa ricerca non ha prodotto risultatiguEditફેરફાર (E)jaInclude binary filesバイナリファイルを含める(B)ugRecursiveچوڭقۇرلاشbn_INkBytesকিলোবাইটpakByteskBytesgaContainsIna bhfuilmaiUpper limitउप्परक सीमाhuMatchTalálatthWhole words onlyตรงกันทุกตัวอักษรuglinesسىزىقلارsr@ijekavianlatinEditUredihneUpper limitऊपरी सीमाen_GBNo matchNo matchsiCloseවසන්නslCloseZapriukResultsРезультатиptCounting files...A contar os ficheiros...afSelect folder to search inKies gids om in te soekneMinutesमिनेटndsSelect Files...Dateien utsöken...uzOctal PermissionsSakkizlik huquqlarnbFIFOFIFOroFindCautădaUpper limit:Øvre grænse:hrSocketUtičnicabe@latinWhole words onlyTolki słovy całkomugCancelۋاز كەچ(N)miCloseKatikaDirectoryდასტაhrSearching...Tražim...brAt MostD'ar muiañthResultsผลลัพธ์trSearching...Aranıyor...gaAt LeastAr a LaghadazMinutesDəqiqəastFilter:Fieltru:deFilter:Filter:lvSUIDSUIDzh_TWUpper limit上限fiBlock deviceLohkolaitekmPathផ្លូវugSearching...ئىزدەۋاتىدۇ…seClearSálkeidContainsBerisimlCloseഅടയ്‍ക്കുകidPathPathnlNo editor component found.Geen editor-component gevonden.svHoursTimmarkmAt Leastយ៉ាង​ហោច​ណាស់sr@ijekavianFilter:Филтер:nlCancelAnnulerenisNo matchEkkert fannstltEditKeistigaunknowngan aithnidfyPathPaadltFIFOFIFOsqContainsPërmbanhyHome FolderՏնային պանակviAt LeastÍt nhấtazunknownnamə'lumbgMonthsМесециugFIFOFIFOyoCloseTibrSelect folder to search inDiuzañ an teuliad ma vo klasket ennañazRecursiveTəkrarlamalıca@valenciaUserUsuarifiStay on single filesystemEtsi vain tästä tiedostojärjestelmästäugNo matchماس كېلىدىغىنى يوقsvCreatedSkapadhsbMinutesMjeńšinynbMatchFinnfaNo matchبدون تطبیقbn_INAt Mostসর্বাধিকzh_HKHours時ruCloseЗакрытьtaOctal Permissionsஎண்ம அனுமதிbsGroupGrupaelContains the textΠεριέχει το κείμενοdaHoursTimersr@ijekavianlatinCancelOdustanikoWhole words only단어 단위로(W)rwEditKwandikaheFIFOFIFOtkCloseÝapcsbEditEdicëjôneRecursiveपुनरावृतिकthFIFOFIFOuz@cyrillicMonthsОйларdzAnyག་འབད་རུང་csSUIDSUIDzh_HKCase Sensitive區分大小寫isUserNotandittFound %d matchӘзерugSelect Files...ھۆججەت تاللا…skMatchZhodaetSearch CompleteOtsing lõpetatudetCase SensitiveTõstutundliktgunknownномаълумzh_CNFIFO先进先出文件(FIFO)daDaysDageca@valenciaGroupGrupfurFindCjateltDirectoryKatalogasglClosePechalo todobeLine CountКолькасць радкоўpt_PTClearLimparfrSelect folder to search inSélectionnez le dossier dans lequel rechercherjaCancelキャンセルiounknownnekonocatabrPathTreugzh_CNRegular常规mkSelect folder to search inИзберете папка за пребарувањеknlinesಸಾಲುಗಳುmkPathПатекаdeStay on single filesystemAuf einzelnem Dateisystem bleibentaSearch Completeதேடல் முடிவடைந்ததுetPathAsukohtasAnyযিকোনোpaCharacter deviceਅੱਖਰ ਜੰਤਰfiNo matchEi vastaavuuttapaContains the textਟੈਕਸਟ ਰੱਖਦਾ ਹੈ(t)kuClearPaqijkehyDirectoryՊանակtrMonthsAymsClearKosongkanmsUpper limit:Had atas:teSymbolic Linkచిహ్నమైన లింకుpsHoursګېنټېbgSelect Files...Избор на файлове...azContains the textMətni daxil edirjaMinutes分nlHome FolderPersoonlijke mapdaCreatedOprettetskSelect folder to search inVybrať priečinok, v ktorom sa bude hľadaťmrAt LeastकिमानsqAnyÇfarëdollojbeCancelСкасавацьetInclude binary filesKaasa arvatud binaarfailidslCreatedUstvarjenoocHoursOraspllineswierszynelinesलाइनहरूafCloseSluitsr@ijekavianUserКорисникpaMonthsਮਹੀਨੇsiAt Mostබොහෝ විටmslinesbarisfrMinutesMinutesnbResultsResultateritNo editor component found.Nessun componente editor trovato.esReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Los caracteres reservados para expresiones regulares extendidas son
-. ^ $ [ ] ? * + { } | \ ( ) : 
-En expresiones regulares básicas los metacaracteres
-?, +, {, |, (, y ) pierden su significado especial.
-
-El punto  .  se asocia a cualquier carácter.
-El acento circunflejo ^ busca coincidencias al principio de la línea.
-El dólar $ busca coincidencias al final de la línea.
-
-Caracteres dentro de [ ] coinciden con cualquier carácter en la lista.
-Caracteres dentro de [^ ] coinciden con cualquier carácter *no* en la lista.
-Caracteres dentro de [ - ] coinciden con un rango de caracteres (pe [0-9] ó [a-z]).
-
-Una expresión regular puede ser seguida por uno o varios operadores de repetición
-?      El elemento anterior es opcional y coincidirá como máximo una vez.
-*      El elemento anterior coincidirá cero o más veces.
-+      El elemento anterior coincidirá una o más veces.
-{n}    El elemento anterior coincidirá exactamente n veces.
-{n,}   El elemento anterior coincidirá n o más veces.
-{n,m}  El elemento anterior coincidirá al menos n veces, pero no más de m veces
- 
-Para buscar coincidencia con cualquier carácter reservado, precédalo con \. 
-
-Dos expresiones regulares se pueden unir con el operador | (o lógico).
-Dos expresiones regulares se pueden concatenar.
-
-Más információn disponible con "man grep" en la línea de órdenes.
-arSymbolic Linkوصلة رمزيةelRecursiveΑναδρομικόmnHome FolderГэр хавтасsr@latinRegularRedovanpslinesليکېeuCounting files...Fitxategiak zenbatzen...iaLine CountComputo de lineadeAnywhereIrgendwoptlineslinhasmgEditFanovanahiClearसाफ़ करें (C)noGroupGruppeisAt LeastAð minnsta kostieokByteskBajtojidCase SensitivePeka Huruf Besar KecilhrContainsSadržixhCharacter deviceIsixhobo seempawueoAt MostMaksimumekkCloseЖабуkkLine CountЖолдар саныboOctal Permissionsབརྒྱད་འགྲུལ་ལུགས་ཀྱི་ཆོག་འཆནtgAt MostНа ЗиёдаsrEditУређивањеcyHome FolderPlygell CartrefheDirectoryספרייהpaPathਮਾਰਗbsFilter:Filter:bsUpper limitGornja granicaasCase Sensitiveফলা সংবেদ্য (a)hrlineslinijesr@ijekavianCase Sensitiveразликовање величине словаtrSelect Files...Dosyaları Seç...trAnyAnyhyOctal PermissionsՈւթանգամյան թույլտվությունsr@ijekavianLine Countброј редова|/|$[својства наредбено 'детаљи:
-број редова' списковно 'допунски детаљи: број редова']svUpper limit:Övre gräns:svReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Reserverade tecken för utökad regexp är
-. ^ $ [ ] ? * + { } | \ ( ) : 
-Vid grundläggande regular expression förlorar metatecknen
-?, +, {, |, ( och ) sin speciella betydelse.
-
-Punkten . motsvarar vilken enda bokstav som helst.
-Utelämningstecknet ^ söker överensstämmelse i början av raden.
-Dollartecknet $ söker överensstämmelse i slutet av raden.
-
-Tecken inom [ ] motsvarar vilket enda tecken 
-     		som helst i listan.
-Tecken inom [^ ] motsvarar vilket tecken som helst
-       som *inte* finns i listan.
-Tecken inom [ - ] motsvarar en uppsättning
-       tecken (ie [0-9] eller [a-z]).
-
-Ett reguljärt uttryck kan åtföljas av en
-       av flera repetitions-operatorer:
-?      Föregående fält är valfritt och överensstämmer
-       som mest en gång.
-*      Föregående fält kommer att överensstämma noll
-       eller fler gånger.
-+      Föregående fält kommer att överensstämma en eller
-       fler gånger.
-{n}    Föregående fält överensstämmer exakt n gånger.
-{n,}   Föregående fält överensstämmer n eller fler gånger.
-{n,m}  Föregående fält överensstämmer åtminsten n gånger,
-       men inte fler än m gånger.
-
-För att matcha ett reserverat tecken, låt det föregås av \. 
-
-Två reguljära uttryck kan kopplas ihop genom den logiska OR-
-       operatorn |.
-Två reguljära uttryck kan kedjakopplas.
-
-Mer information är tillgänglig genom "man grep"
-       på en kommandorad.
-slSearching...Iskanje ...euFilter:Iragazkia:gaUpper limitUasteorainnglAt LeastPolo menospaClearਸਾਫ਼en_GBSearch CompleteSearch CompleteroAt LeastCel puținhsbEditWobdźěłaćruFIFOFIFOca@valenciaDaysDiesfiMatchTäsmääasOctal Permissionsঅক্টাল সংখ্যাত প্ৰকাশিত অনুমতিroContainsConțineen_CAPathPathsrSymbolic Linkсимболичка везаkyModifiedАкыркы өзгөртүүdzFindའཚོལ།roFilter:Filtru:glSearch CompleteBusca rematadaitSymbolic LinkCollegamento simbolicobrSocketLugellnbUserBrukerkyMinutesМинутeuModifiedAldatutadeMinutesMinutennnMatchTreffsqContains the textQë përmban tekstinitWhole words onlySolo parole interenbUpper limit:Øvre grense:asSearching...সন্ধান কৰা হৈছে...etAnywhereSuvalises kohasukunknownНевідомоlbCloseZoumaachenbsHome FolderPočetni direktorijmsMonthsBulanltCloseUžvertidzFilter:ཚགས་མ: (i)rwGroupItsindafaAnywhereهر کجاcsRegularregulárníroEditEditaredeMonthsMonateen_GBSUIDSUIDrolinesliniiknCloseಮುಚ್ಚುzh_HKDays天ca@valenciaSelect Files...Selecciona els fitxers...zh_CNAt Least至少en_GBOctal PermissionsOctal PermissionsthSocketซ็อกเก็ตkaHoursსაათიugUpper limitيۇقىرى چېكىmlCancelറദ്ദാക്കുകzh_HKOctal Permissions8 進位權限nbRegularVanligbeHoursГадзіныuzUpper limit:Yuqori chegara:svBlock deviceBlockenhetpaBlock deviceਬਲਾੱਕ ਜੰਤਰeuGroupTaldeaen_GBDirectoryDirectorypaUserਯੂਜ਼ਰcslinesřádkůeoPathVojoukReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Зарезервовані символи для розширених виразів:
-. ^ $ [ ] ? * + { } | \ ( ) : 
-В загальних регулярний. виразах метасимволи
-?, +, {, |, (, and ) втрачають їх особливе значення.
-
-Крапка . відповідає будь-якому єдиному символу.
-Шапка ^ відповідає початку рядка.
-Долар $ відповідає кінцю рядка.
-
-Символи всередині [ ] відповідають будь-яким
-       символам зі списку.
-Символи всередині [^ ] відповідають будь-яким
-       символам, відсутнім у списку.
-Символи всередині [ - ] відповідають
-       діапазону символів (напр., [0-9] або [a-z]).
-
-За регулярним виразом може йти один
-       з декількох операторів повтору:
-?      попередній елемент є
-       необов'язковим.
-*      попередній елемент відповідає
-       жодному або будь-якій кількості його повторень.
-+      попередній елемент відповідає
-       одному або більшій кількості повторень.
-{n}    попередні елемент відповідає його n повторенням.
-{n,}   попередні елемент відповідає його n або більше повторенням.
-{n,m}  попередні елемент відповідає його n або більше повторенням,
-       але менше ніж m.
-
-Щоб відобразити зарезервований символ наберіть \. 
-
-Два регулярних вирази можна логічно об'єднати за
-       допомогою оператора |.
-Два регулярних вирази можуть бути об'єднані послідовно.
-
-Щоб отримати додаткову інформацію, наберіть "man grep"
-       у командному рядку.
-jaMatch一致xhBlock deviceIsixhobo esithintelayohrPathPutanjacsAt LeastpřinejmenšímidSymbolic LinkTaut SimbolisdeBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Grundregeln:
-
-*  passt nullmal oder beliebig öfter auf jedes Zeichen
-?  passt auf jedes Zeichen genau einmal
-bn_INAnyঅনির্দিষ্টsvEditRedigeralvInclude binary filesIekļaut binārās datnesroBlock deviceDispozitiv blockmClearសម្អាតltContains the textTuri tekstąndskByteskByteskoClear지우기(C)liUserEigenaergulinesવાક્યોbgDaysДниzh_CNDirectory目录zh_HKRecursive循環sr@ijekavianlatinLine Countbroj redova|/|$[svojstva naredbeno 'detalji:
-broj redova' spiskovno 'dopunski detalji: broj redova']ruMatchСравнениеsvSUIDSUIDkuFindBibîneesCreatedCreadobnPathপাথnoSelect Files...Vel filer …mgFilter:Sivana:sr@latinMonthsmesecimkAt Mostнајмогуuz@cyrillicWhole words onlyФақат бутун сўзsrAnyБило којajaFile type : ファイルの種類 : heUpper limitגבול עליוןdeRecursiveRekursivcaUpper limitLímit superiornlFind hidden files and directoriesVerborgen bestanden en mappen zoekensr@ijeSocketСокетneContainsसमाविष्टfyLine CountRegeltellingitExtended regexpRegexp estesamllinesവരികള്‍hiCharacter deviceअक्षर उपकरणmaiClearसाफ़ करू (C)brCounting files...Emaon o niveriñ ar restroù ...amHome Folderየቤት ዶሴlvSymbolic LinkSimboliskā saiteukHome FolderДомашня текаasSymbolic Linkসাঙ্কেতিক সংযোগhiUpper limitऊपरी सीमाcyClearCliriomyCloseပိတ်သိမ်းhrFIFOFIFOlbSymbolic LinkSymbolësche LinkdeSUIDSUIDhikBytesके-बाइट्सjaFind hidden files and directories隠しファイル/ディレクトリを検索するdaFind hidden files and directoriesFind skjulte filer og mappermrModifiedबदलेलेviStay on single filesystemTìm kiếm trên chỉ một hệ thông tập tinkuFIFOFIFObe@latinNo matchNiama adpaviednikaŭguSymbolic Linkસાંકેતિક કડીfiAnyMikä vainknContains the textಈ ಪಠ್ಯವನ್ನು ಹೊಂದಿದೆ(t)taAt Leastஆகக்குறைந்த kkkBytesКБайтetSymbolic LinkSümbolviitruCancelОтменитьkkMatchМынаныboAnyགང་ཡངsqHome FolderKartela personalezh_TWRegular正規en_CASocketSocketkmModifiedបាន​កែប្រែanCancelCancelarsr@latinSearch returned no resultsPretraga nije dala rezultatukFindЗнайтиelSelect folder to search inΕπιλογή φακέλου για αναζήτησηsr@latinFIFOFIFOnsoFound %d match%s: E paletšwe go thoma: %scySymbolic LinkCyswllt SymbolaiddastUserUsuariutrkByteskBaytsr@ijekavianlatinGroupgruparuClearОчиститьtkModifiedÜýtgänastSearch returned no resultsLa gueta nun devolvió resultaosbsResultsRezultatimgCancelAokaviMatchKhớpruStay on single filesystemОставаться на одной файловой системеdzMinutesསྐར་མ་ཚུ་en_CAExtended regexpExtended regexpfaunknownنامعلومcrhRegularMuntazamisDaysDagarplCancelAnulujhuAnyBármiruSUIDSUIDtgHoursСоатxhlinesimigcaetFind hidden files and directoriesPeidetud failide ja kataloogide otsiminecyUpper limit:Terfyn uwch:nnCloseLukkthkBytesกิโลไบต์bsSelect Files...Izaberi datoteke...ukOctal PermissionsВісімкові праваsr@ijekavianUpper limit:Горња граница:bgCase SensitiveЗачитане на главни/малкиpsFindلټولskRegularPravidelnýltAt LeastmažiausiaiwaFIFOFIFOitAccessedAccedutosvSelect Files...Välj filer...esCase SensitiveSensible a capitalizaciónsr@ijekavianlatinCreatedNapravljenfiGroupRyhmämyModifiedပြုပြင်ချက်ptStay on single filesystemPermanecer apenas num sistema de ficheirosca@valenciaAnyCapguCloseબંધ કરો (C)deClearLeerengaHoursUaireantaheContainsמכילsr@ijekavianlatinModifiedizmijenjenmgContains the textMisy ilay lahabolanakyPathКонтурisCounting files...Tel skrár ...ltGroupGrupėzh_CNDays天hyModifiedՓոփոխվածcsbWhole words onlyCałowné słowatkEditEditcaRegularRegularbn_INAt Leastঅন্ততmaiCreatedउत्पन्न कएलnlNo matchGeen overeenkomstenbnlinesলাইনzh_TWUser使用者zh_TWClose關閉kmRegularធម្មតាmrNo matchजुळवणी नाहीfrUpper limit:Limite supérieure :hrUserKorisnikjaRecursive繰り返しcaDaysDiespt_BRLine CountNúmero de linhashuAnywhereBárholcylinesllinellauguCharacter deviceઅક્ષર ઉપકરણafDaysDaexhUserUmsebenzisiesCounting files...Contando archivos...hrCancelOdustaniesFilter:Filtro:svDirectoryKatalogmgOctal PermissionsAlalana ara-octetmiHome FolderKōpaki KāingawaHome FolderRidant måjhonskNo matchBez zhodyhneDirectoryडिरेक्टरीeoCase SensitiveUsklecodistingetaModifiedமாற்றப்பட்டgaRegularGnáthca@valenciaNo matchNo hi ha cap coincidèncianeBlock deviceयन्त्र बन्द गर्नुहोस्euLine CountLerro kopuruahnePathपथ (P)pt_BR%s Finished : %s%s Concluído : %sfrRecursiveRécursifeuCloseItxieoFilter:Filtrilo:orPathପଥknunknownಗೊತ್ತಾಗದboEditབསྒྱུར་བཅོསneSelect folder to search inखोजीमा फोल्डर चयन गर्नुहोस्igGroupÒtùhuClearTörlészh_TWUpper limit:上限：sr@ijekavianRegularосновниhrUpper limit:Gornja granica:etContainsSisaldabptCase SensitiveSensível à CapitalizaçãoruSocketсокетeoSUIDSUIDzh_HKSelect folder to search in選取在哪個資料夾中搜尋frResultsRésultatsasSUIDSUIDuzHome FolderUy jildien_GBStay on single filesystemStay on single filesystemfiCancelPeruutaanEditEditaritClearPuliscindsOctal PermissionsOctale Rechtesr@ijekavianDirectoryФасциклаorHome Folderମୂଳ ଫୋଲଡରfaSelect Files...برگزیدن پرونده‌ها...sr@ijekavianHome FolderДомаћа фасциклаidUpper limit:Batas atas:nbMinutesMinutteren_GBUpper limitUpper limitmnUserХэрэглэгчglStay on single filesystemLimitar-se a un só sistema de arquivosastDirectoryDireutoriuzh_CNFilter:过滤规则(I)：bnSelect Files...ফাইল নির্বাচন করুন...siWhole words onlyසම්පූර්ණ පදයම පමණයි (W)itResultsRisultatisqNo matchAsnjë përputhjebrMatchKlotadennkyCloseЖабууen_USClearClearseHome FolderRuoktomáhppaitAnywhereDovunqueetClearPuhastasr@latinMatchPoklapanjethMinutesนาทีbrOctal PermissionsAotreoù eizhredelazDirectoryCərgəen_CAUserUserzh_TWExtended regexp擴展正規表達式fiExtended regexpLaajennettu säännöllinen lausekemyClearL  ရှင်းလင်းafFIFOFIFOhiContains the textपाठ सम्मिलित हैं (t)nlSearch CompleteZoeken voltooidroUpper limit:Limita de sus:trContainsİçerenbrWhole words onlyGerioù klok hepkenfaHoursساعتnsoSocketSokheteitBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Regole di base:
-
-* Abbinerà qualsiasi carattere zero o più volte.
-? Abbinerà qualsiasi carattere esattamente una volta
-[] Abbina qualsiasi carattere all'interno di [] 
-^ Abbina all'inizio della stringa
-$ Abbina alla fine della stringa 
-seGroupJoavkukoUpper limit:최댓값:ndsUserBrukertaFilter:வடிப்பி:viResultsKết quảtaRecursiveமறுச்சுழல் nbSUIDSUIDteAnyఏదేనిsvGroupGruppjaClearクリア(C)zuSocketIsikhoxennFindFinnglModifiedModificadobn_INResultsফলাফলptSearch returned no resultsA pesquisa não devolveu resultadosarAnyالكلeoCharacter deviceSignoaparatokmAnywhereកន្លែង​ណាមួយkkGroupТопhuSymbolic LinkSzimbolikus linkiaunknownincogniteafkBytesKgrepeplStay on single filesystemSzukaj na jednym systemie plikówafNo matchNiks wat pasfrCreatedCrééneUpper limit:माथिल्लो सीमा:furCloseSiereelWhole words onlyΜόνο ολόκληρες λέξειςbe@latinSelect Files...Abiary fajły...pt_BRGroupGrupotkunknownnätanyşnbCharacter deviceTegnenhetfiLine CountRivimääräruMinutesМинутыsrNo matchБез поклапањаsvExecutableKörbart programheInclude binary filesכלול קבצים בינרייםeoResultsRezultojhuDaysnappalmgunknowntsy fantatraguunknownઅજ્ઞાતfiSearching...Etsitään...bnSelect folder to search inঅনুসন্ধানের জন্য ফোল্ডার নির্বাচন করুনmgClearFoanozh_CNMinutes分钟heHoursשעותcsbCloseZamknimsSearching...Sedang mencari...trDaysGünlerzh_CNHome Folder主文件夹knPathಮಾರ್ಗesAt LeastAl menosugSelect folder to search inئىزدەيدىغان قىسقۇچنى تاللاڭisAnyHvað sem eritUserUtenteruAccessedПоследнее открытиеsr@ijekavianEditУредиisCreatedBúið tilpt_BRExtended regexpregexp extendidoarCharacter deviceجهاز أحرفseFound %d matchGearganbe@latinCloseZačynipaNo matchਕੋਈ ਮੇਲ ਨਹੀਂnoPathStignnModifiedEndraruLine CountКоличество строкfiDirectoryKansioisMatchPassar viðafCreatedGeskepptInclude binary filesIncluir os ficheiros bináriosocunknowndesconegutcsbUpper limit:Górnô grëńca:paMinutesਮਿੰਟhrSUIDSUIDviHome FolderThư mục chínhsqFilter:Filtri:en_GBRegularRegularnbSocketSocketgaResultsTorthaíbn_INMinutesমিনিটorEditସମ୍ପାଦନ କରନ୍ତୁ (E)ms%s Finished : %s%s Tamat : %skoRegular일반hneHome Folderमुख फोल्डरzh_TWSearching...搜尋...en_CACase SensitiveCase SensitivecyNo matchDim cydweddiadeoSelect folder to search inElekti dosierujon por serĉadomnSearching...Хайж байна...en_CAMinutesMinutesuzAnyIstalganfalinesسطر شماره‌گذاری شودbgSUIDSUIDslLine CountŠtetje vrsticdaUpper limitØvre grænseneHoursघण्टाglUpper limit Limite superior  liClearLaegekkMinutesМинутgvAnyOilley deContainsEnthältjaFind検索(F)kkFindІздеуhrCharacter deviceZnakovni uređajsiCreatedනිර්මාණය කරන ලදිroCase SensitiveSensibil la majusculesr@ijeModifiedИзмјењенsvNo editor component found.Ingen editorkomponent hittades.lv%s Finished : %s%s izpildīts — %sjaLine Count行数waCancelRinoncîelBlock deviceΣυσκευή ομάδαςuz@cyrillicInclude binary filesБинар файлларslClearPočistica@valenciaHome FolderCarpeta de l'usuarimrFilter:गाळण:plResultsWynikifiCreatedLuotucaAnyQualsevolslSelect folder to search inIzberite mapo, v kateri želite iskatimyCancelN  နေတော့kmCounting files...កំពុង​រាប់​ឯកសារ...mlSearching...തിരയുന്നു...cyDaysDyddiauetOctal PermissionsÕigused kaheksandkujulesCharacter deviceDispositivo caracteresanunknowndesconoxiuisPathSlóðltNo matchAtitikmenų nerastanlDirectoryMapcsunknownneznámýslSymbolic LinkSimbolična povezavasr@latinkBytesKiBzh_TWkByteskBytesplEditEdycjaitHoursOrewaDaysDjoûsslAnywhereKjerkolibeDirectoryКаталогoclineslinhascaMinutesMinutsbgReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Запазени знаци за regexp са
-.·^·$·[·]·?·*·+·{·}·|·\·(·)·:·
-В основните регулярни изрази метазнаците
-?,·+,·{,·|,·(,·и·)·губят техните специални значения.
-
-Периода··.···съвпада с всеки един знак.
-Каретката·^·съвпада с началото на реда.
-Долара·$·съвпада с края на реда.
-
-Знаците оградени с·[·]·съвпадат с всеки един знак·
-·······в списъка.
-Знаците·оградени·с [^·]·съвпадат с всеки един знак
-·······който *не е* в списъка.
-Знаците в·[·-·]·съвпадат с обхват от
-·······знаци·(например·[0-9]·или·[a-z]).
-
-Регулярен израз може да бъде следван от един
-·······от няколко повтарящи се оператори:
-?······Предишния знак е опционален и съвпада
-·······ведъж.
-*······Предипния знак съвпада нула
-·······или повече пъти.
-+······Предишния знак съвпада един или
-·······повече пъти.
-{n}····Предишния знак съвпада точно n пъти.
-{n,}···Предишния знак съвпада n или повече пъти.
-{n,m}··Предишния знак съвпада най-малко n,
-·······и най-много m пъти.
-
-За съвпадане с някой запазен знак,·предшествайте с·\.·
-
-Два регулярни израза могат да бъдат съединени с логическия ИЛИ
-·······оператор·|.
-Два регулярни израза могат да бъдат свързани.
-
-Повече информация ще научите като напишете "man·grep"
-·······в конадния ред.
-caCancelCancel·landsMonthsMaandentglinesхатҳоnsoFindHwetšabrContains the textEnderc'hel a ra an destennkoSelect folder to search in찾아 볼 폴더 선택ptMonthsMesesptCancelCancelarslAnyKaterikolihneUserकमइयाesGroupGruposqOctal PermissionsTë drejtat oktaleguFIFOFIFOltSearch returned no resultsPaieška negrąžino jokių rezultatųkuunknownnenasbsEditIzmjeniasContains the textচিহ্নিত লেখাসহ(t)en_CASearching...Searching...msHoursJamnnBlock deviceBlokk-einingcrhSearching...Qıdırıla...plCharacter deviceUrządzenie znakowesrWhole words onlyСамо целе речиnnAt MosthøgstknHome Folderನೆಲೆ ಕಡತಕೋಶfaSearch returned no resultsجستجو بی‌نتیجه بودcsbDirectoryKatalogen_CAAnyAnycaGroupGrupskUpper limitHorný limittrUserKullanıcıasRegularRegularruCreatedСозданоpt_BRUpper limit:Limite superior:sr@latinWhole words onlySamo cele rečien_GBWhole words onlyWhole words onlytaAccessedஅணுகியcsbCreatedÙsôdzonynoCancelAvbrytpt_PTFIFOFIFOcsbPathStegnaheEdit‏עריכהukCounting files...Підрахування файлів...slCharacter deviceZnakovna napravaptCharacter deviceDispositivo de caracteresmiFindKiteaxhOctal PermissionsIimvume Zesibhozoidunknowntak dikenalnnHome FolderHeimemappeknDirectoryಕೋಶliunknownónbekèndzuPathIndlelaptSocketSocketskCharacter deviceZnakové zariadeniaafExtended regexpUitgebreide regexpasFindসন্ধান কৰক (F)deCloseSchließensr@latinSelect folder to search inIzaberite fasciklu u kojoj izvršiti pretragutkHome FolderÖý HaltasypaFIFOFIFOgaAt MostAr a MhéidhyRegularՍովորականwaUpper limitLimite do dzeuigHome FolderNsomebefaịlụ nke ụlọesAnyCualquieranlInclude binary filesInclusief binaire bestandencrhAnyHer hangisifrFind hidden files and directoriesChercher les fichiers et les dossiers cachésen_GBCharacter deviceCharacter devicebsHoursSatifiBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-Perussäännöt:
-
-*=mikä tahansa merkki ei yhtään tai useita kertoja
-?=mikä tahansa merkki tarkalleen yhden kerran
-tgEditТаҳрир карданmlSymbolic Linkചിഹ്നിത ബന്ധംastSelect folder to search inEscueyi en qué carpeta restolarpt_BRHome FolderPasta pessoalliBlock deviceBlok-apperaatsrSearch returned no resultsПретрага није дала резултатesAnywhereEn cualquier sitiocsWhole words onlyPouze celá slovaidEditSuntingsvMonthsMånaderseDaysBeaivviroUserUtilizatoranFound %d matchS'ha rematau a carga de %s.arlinesسطورelMonthsΜήνεςisFilter:Sía:en_GBMinutesMinutesitContains the textContiene il testoviLine CountTổng số dònganAnyQualsiquieracsbAt LeastprzenômnisllinesvrsticahgvFindFeddynheReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-אותיות וסמלים שמורים לregexp רחב, הם
-. ^ $ [ ] ? * + { } | \ ( ) : 
-בביטויים רגילים הסמלים 
-?, +, {, |, (, ו- ) מאבדים את ערכם המיוחד
-
-הנקודה  .   מתאים לאות או סמל אחת.
-הכובע  ^  מתאים בתחילת שורה.
-הדולר  $  מתאים בסוף שורה.
-
-אותיות וסמלים בתוך [ ] מתאימים לאיזשהו אות או סמל
-אחת ברשימה.
-אותיות וסמלים בתוך [ ^] מתאימים לאיזשהו אות או סמל
-אחת שאיננה ברשימה.
-אותיות וסמלים בתוך [ - ] מתאימים למגוון של אותיות או סמלים
-כגון [0-9] או [a-z] וכו'.
-
-אחרי ביטוי רגיל אפשר לשים
-אחד מפעולות החוזרות הבאות:
-?      הפריט הקודם הוא לא חיוני
-       ויתואם הכי הרבה פעם אחת.
-*      הפריט הקודם יתואם אפס
-       או יותר פעמים.
-+      הפריט הקודם יתואם פעם אחת
-       או יותר.
-י {n}    הפריט הקודם יתואם בדיוק n פעמים.
-י {n,}   הפריט הקודם יתואם n פעמים או יותר.
-י {n,m}  הפריט הקודם יתואם לפחות n פעמים,
-       אך לא יותר מ-m פעמים.
-
-לתאם כל אות או סמל שמור תקדים אותו עם \. 
-
-ניתן לחבר שתי ביטויים רגילים על ידי ההגיוני אן מפעיל |.
-ניתן לבצע על שתי ביטויים רגילים קונקטנציה concatendation)
-)
-ניתן לקבל יותר מידע על ידי הקשת man grep"
-"       בשורת הפקודה.
-frAccessedAccédéarAt Leastعلى الأقلzh_CNRecursive递归ndsCloseSlutenkyEditОңдооbeSearching...Пошук...srSelect Files...Изабери фајлове...nb%s Finished : %s%s fullført : %szhBlock device块设备ptExecutableExecutávelen_CAFilter:Filter:hrAnyBilo kojiastMinutesMinutosorOctal Permissionsଅଷ୍ଟୋକ ଅନୁମତିpt_BRRecursiveRecursivaca@valenciaSearching...S'està cercant...mkCounting files...Пребројувам датотеки...sv%s Finished : %s%s klar: %sisBlock deviceBlokkartækimnResultsҮр дүнsvExtended regexpUtökad regexpitunknownsconosciutoetExtended regexpLaiendatud lausedsiFIFOFIFOisCharacter deviceTákneiningsrOctal PermissionsОктална овлашћењаviCancelThôibrEditKemmañdzFIFOཨེཕ་ཨའི་ཨེཕ་ཨོ།csMatchShodasrCharacter deviceЗнаковни уређајbekBytesкбfrAt LeastAu moinszh_TWSocketSockethiSymbolic Linkसिंबॉलिक लिंक neFilter:फिल्टर:koClose닫기paSocketਸਾਕਟmrSocketसॉकेटboHome Folderགཙོ་ངོས་ཡིག་སྣོདazSearching...Axtarılır...mkContains the textСодржи текстbskByteskBtgContainsдороиkkNo matchСәйкестік жоқsvUpper limitÖvre gränsnbSymbolic LinkSymbolsk lenkeuzPathYoʻletlinesridadzRegularདུས་རྒྱུན་nsoCancelKhanselatkClearDurlaafSearching...Soek tans...huunknownismeretlenesPathRutanoClearSlettfurHome FolderCartele HomecyModifiedNewidiwyddeSocketSocketglAnywhereCalquera partezuClearSusaeolinesliniojnbSelect folder to search inVelg mappen du vil søke iastHome FolderCarpeta personaletContains the textSisaldab tekstimsSocketSoketcsDirectoryAdresářeoHoursHorojnbNo matchIngen treffpsUserکارنheBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-כללים בסיסים:
-
-*  יחליף אות או צורה אפס פעמים או יותר.
-?  יחליף אות או צורה בדיוק פעם אחד.
-mrEditसंपादन (E)sqAt LeastTë PaktënocFindRecercarfyModifiedBewurkeknAnyಯಾವುದೆbeContainsЗмяшчаеkaUserმონაწილეcaPathCamídaFilter:Filter:sr@latinPathPutanjasvCase SensitiveSkiftlägeskänsligthBlock deviceอุปกรณ์แบบบล็อคel%s Finished : %s%s Τελείωσε : %staContains the text(t)உரையில்teCloseమూసివేయిcrhPathYolçıqbeDaysДзёнisDirectoryMappasrMonthsмесециbe@latinGroupHrupaisHoursKlukkustundirlbEditVerännerenuz@cyrillicSymbolic LinkРамзий боғfaSelect folder to search inیک پوشه جهت جست‌وجو در آن انتخاب کنیدca@valenciaAnywhereOn sigaidLine CountCacah BarisitReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-I caratteri riservati alle regexp estese sono
-. ^ $ [ ] ? * + { } | \ ( ) : 
-Nelle espressioni regolari base, i metacaratteri
-?, +, {, |, (, and ) perdono il loro speciale significato.
-
-Il punto  .   abbina qualsiasi carattere singolo.
-The simbolo ^ abbina all'inizio della linea.
-Il dollaro $ abbina alla fine della linea.
-
-I caratteri entro [ ] abbinano qualsiasi singolo 
-       carattere nella lista.
-I caratteri entro [^ ] abbinano qualsiasi singolo
-       carattere *non* nella lista.
-I caratteri entro [ - ] abbinano un intervallo di
-       caratteri (ie [0-9] o [a-z]).
-
-Un'espressione regolare può essere seguita da uno
-       dei tanti repetition operator:
-?      L'oggetto precedente è opzionale ed abbina
-       al più una volta.
-*      L'oggetto precedente sarà abbinato zero
-       o più volte.
-+      L'oggetto precedente sarà abbinato una o
-       più volte.
-{n}    L'oggetto precedente è abbinato esattamente n volte.
-{n,}   L'oggetto precedente è abbinato n o più volte.
-{n,m}  TL'oggetto precedente è abbinato almeno n volte,
-       ma non più di m volte.
-
-Per abbinare qualsiasi carattere riservato, precederlo con \. 
-
-Due espressioni regolari possono essere congiunte dal logico o
-       operatore |.
-Due espressioni regolari possono essere concatenate.
-
-Maggiori informazioni sono disponibili digitando "man grep"
-pt_BRSearching...Pesquisando...fiSymbolic LinkSymbolinen linkkizh_HKPath路徑noEditRedigeren_AUFindFindviFindTìmptMinutesMinutosbrlineslinennoùitBlock deviceDevice a blocchihrInclude binary filesUvrsti izvršne (binarne) datotekebgResultsРезултатиorNo matchକୌଣସି ମେଳକ ନାହିଁtgMonthsМоҳҳоxhRecursiveYenziwe  kwakhona ngaphandle kosibaorUserଚାଳକfurCancelAnulebn_INSUIDSUIDsvFind hidden files and directoriesSök efter gömda filer och katalogerbrDirectoryRenkellnlUpper limit:Bovengrens:frRegularRégulierbn_INCancelবাতিল করুনdzGroupསྡེ་ཚན།faRecursiveبازگشتیmnRegularХэвийнjaResults結果表示用heCancelביטולbe@latinSearching...Pošuk...roCreatedCreatruSelect Files...Выбор файлов...huContainsTartalmazzahuBlock deviceBlokkos eszközsvAt MostInte mer änpsSelect Files......دوتنې ټاکلzhFind查找bsExecutableIzvršnidaCase SensitiveVersalfølsomafCancelKanselleerhuCharacter deviceKarakteres eszköznlPathPadpt_BRAt MostNo máximozh_CNSearch Complete搜索完成frReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Les caractères réservés pour regexp étendu sont
-    . ^ $ [ ] ? * + { } | \ ( ) : 
-
-Le point   .   correspond à n'importe quel caractère.
-Le chapeau ^ correspond au début de la ligne.
-Le dollar $ correspond à la fin de la ligne.
-
-Les caractères entre [ ] correspondent à n'importe quel caractère dans la liste.
-Les caractères entre [^ ] correspondent à n'importe quel caractère qui n'est pas dans la liste.
-Les caractères dans  [ - ] correspondent à un ensemble (ie [0-9] ou [a-z]).
-
-Une expression régulière peut être suivie par un ou plusieurs opérateurs:
-?      Le bloc précédent est optionnel et correspond au plus une fois.
-*      Le bloc précédent correspond zéro ou plus de fois..
-+      Le bloc précédent correspond une fois ou plus.
-{n}    Le bloc précédent correspond exactement n fois.
-{n,}   Le bloc précédent correspond n fois ou plus.
-{n,m}  Le bloc précédent correspond n fois au moins, mais pas plus de m fois.
-
-Pour faire correspondre n'importe quel caractère réservé, le faire précéder de \. 
-
-Deux expressions régulières peuvent être ajoutées par l'opérateur | (ou logique). 
-Deux expressions régulières peuvent être concaténées.
-
-Plus d'informations sont disponibles en tapant "man grep" à l'invité de commande.
-fiUpper limitYlärajaisMonthsMánuðirkgModifiednsadululuglFindBuscarpaFindਲੱਭੋmgGroupVondronannInclude binary filesTa med binærfileridRegularRegulerkkContainsкелесі барsvRegularVanligcaModifiedModificatltContainsTuribgFile type : Тип на файла : msunknownentahen_GBUpper limit:Upper limit:siCancelඅවලංගු කරන්නmkFindПронајдиhrMonthsMjeseciltSUIDSUIDseUpper limitBadjerádjisqDirectoryDirectoryptRecursiveRecursivaglCreatedCreadotaUpper limit:மேல் எல்லை:daAccessedTilgåetxhPathIndlelazh_HKMinutes分glReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Os caracteres reservados para regexp extendida son
-. ^ $ [ ] ? * + { } | \ ( ) : 
-En expresións regulares básicas os metacaracteres
-?, +, {, |, (, e ) perden os seus significados usuais.
-
-O ponto  .   corresponde a calquer caracter simples.
-O circunflexo ^ corresponde ao comezo de liña.
-O dolar $ corresponde ao fin de liña.
-
-Os caracteres entre [ ] corresponden a calquer carácter simples da lista
-Os caracteres entre [^ ] corresponden a calquer carácter simples que non
-              está na lista
-Os conxuntos de caracteres denotan-se: [ - ], ex. [0-5] (0,1,2,4,5), [a-z]...
-
-Unha expresión regular pode ir seguida por un ou vários operadores
-?      O item precedente é opcional e acha-se como moito unha vez.
-*      O item precedente acha-se zero ou máis veces.
-+      O item precedente acha-se unha ou máis veces.
-{n}    O item precedente acha-se exactamente n veces.
-{n,}   O item precedente acha-se n ou máis veces.
-{n,m}  O item precedente acha-se como mínimo n veces,
-       mais non máis de m veces.
-
-
-Para procurar calquer carácter reservado, preceda-o con \. 
-
-É posíbel unir duas expresións regulares mediante o operador
-lóxico or |. Sendo tamén posíbel concatena-las.
-
-Pode obter-se mais información tecleando "man grep" na liña de comandos
-
-eoCloseFermien_GBSearching...Searching…knEditಸಂಪಾದಿಸು(E)sr@latinInclude binary filesUključi binarne fajloveroModifiedModificateslMinutesMinuteetReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Tingimuste jaoks on reserveeritud järgmised tähed:
-. ^ $ [ ] ? * + { } | \ ( ) : 
-Baas regulaar väljendis metasümbolid
-?, +, {, | ( ja ) kaotavad eritähenduse.
-
- .       -punkt, vastab igale üksikule sümbolile.
- ^       -katus, vastab rea algusele.
- $       -dollar, vastab rea lõpule.
-
- [ ... ] -kolme '.' asemel iga täht vastab ühele tähele.
- [^... ] -iga täht, mis pole '.'de asemel vastab õigele.
-  [..-..] -vastab piirkond sümboleid, nt: [0-9] või [a-z].
- 
-Regulaarsele tingimusele võivad järgneda erinevad operaatorid (eelnev liige ...):
- ?       -on lisaks ja leidub ainult üks kord.
- *       -esineb null või palju kordi.
- +       -eelnev esineb üks või rohkem kordi.
- {n}     -eelnev esineb täpselt n korda.
- {n,}    -eelnev esineb n või rohkem korda.
- {n,m}   -eelnev esineb vähemalt n kuni m korda.
- 
-Seadmaks vastavusse iga reserveeritud sümboliga, pane tema ette \.
- 
-Tingimusi võib ühendada loogilise VÕI tehtega: |
-Kaks tingimust võib 'ik concatenated'.
-
-Rohkem informatsiooni saab kui trükite käsureale "man grep".
-kkHome FolderҮй бумасыheRecursiveנסיגהplFile type : Typ pliku :rokByteskoctețieoClearVakigiitHome FolderCartella HomefiModifiedMuokattuzh_TWFind搜尋faAt MostحداکثرhrRegularObičnobnUserব্যবহারকারীcyWhole words onlyDim ond geiriau cyfanen_AUunknownunknownbsUserKorisniknbFindFinnpsSearching......پلټل کيږيmyNo matchမကိုက်ညီဘူးca@valenciaPathCamíeuCancelUtziukStay on single filesystemОбмежити однією файловою системоюfrExtended regexpregexp étendumaiModifiedसुधार कएलbeBlock deviceБлёкавая прыладаelSearch returned no resultsΗ αναζήτηση δεν επέστρεψε αποτελέσματαltModifiedPakeistassl%s Finished : %s%s končano: %sguRecursiveપુનરાવર્તિતgaRecursiveAthchúrsachbe@latinMatchZnajdzien_GBNo editor component found.No editor component found.nbAt MostIkke mer ennteCreatedసృష్టించబడిందిmkCloseЗатвориhuSearch returned no resultsA keresés nem adott vissza eredményeketpt_BRInclude binary filesIncluir arquivos bináriosndsSearch CompleteSöök afslatenpaCloseਬੰਦen_CA%s Finished : %s%s Finished : %smrSelect Files...फाइल निवडा...ocCloseTamparzh_TWSelect Files...選擇檔案...taResultsவிளைவுகள்esMinutesMinutoskaContains the textშეიცავს ტექსტსtakBytesகேபைட்ஸ்idClearBersihkantaCreatedஉருவாக்கப்பட்டதுmnDirectoryЛавлахca@valenciaExecutableExecutableukFIFOбуфер FIFOsiHoursපැයtgRecursiveНадастнависglExecutableExecutábeljaAt Most以下ptFIFOFIFOtaNo matchஒத்து போகவில்லைbgAt Leastнай-малкоdaSelect Files...Vælg filer...caAt MostCom a màximitCase SensitiveMaiuscole/minuscolegaCancelCeallaighukUpper limitВерхня межаsr@latinUserKorisnikthunknownไม่ทราบslRegularObičajnolvContainsSaturfrMonthsMoismkAt Leastнајмалкуzh_TWModified已修改knSUIDSUIDteDaysరోజులుen_CAFile type : File type : be@latinAt LeastPrynamsiliPathPaadmsUserPenggunaptNo editor component found.Não foi encontrado nenhum componente de edição.fiCloseSuljeplFIFOFIFOpaBasic rules:
-
-*  Will match any character zero or more times.
-?  Will match any character exactly one time
-[] Match any character within the [] 
-^  Match at beginning of string
-$  Match at end of string 
-ਮੁੱਖ ਕਾਨੂੰਨਃ
-
-* ਜੀਰੋ ਜਾਂ ਜਿਆਦਾ ਵਾਰ ਕੋਈ ਅੱਖਰ ਮਿਲਾਏਗਾ|
-? ਇੱਕ ਵਾਰ ਕੋਈ ਅੱਖਰ ਮਿਲਾਏਗਾ 
-nlCloseSluitenca%s Finished : %s%s ha finalitzat :%szh_CNOctal Permissions八进制权限jaFilter:フィルター(F):csbFilter:Filter:idCancelBatalhneRegularनियमितsr@latinModifiedIzmenjenguInclude binary filesબાઇનરી ફાઇલોનો સામવેશ કરો (b)mnCase SensitiveҮсгийн хэмжээг ялганаamMinutesደቂቃዎችknAt Leastಕಡೆಪಕ್ಷugOctal Permissionsسەككىزلىك سىستېمىدىكى ھوقۇقىpsModifiedبدل شویhiAt Mostअधिक से अधिकroMonthsLunidaEditRedigérkkWhole words onlyТек бүтін сөздердіruMonthsмесяцевroHome FolderDosar AcasămnBlock deviceБүлэг төхөөрөмжltExtended regexpIšplėstas regexpfrModifiedModifiéviExtended regexpDiễn đạt thông thường mở rộngelFindΕύρεσηsvModifiedÄndradesbeFilter:Фільтр:kaClearგასუფთავებაhiRegularनियमितcsClearVymazatneCounting files...फाइल गणना गर्दैछ...koMinutes분xhCounting files...Ibala iifayile ...taunknownதெரியாததுviEditSửabsAnywheregdje biloazResultsNəticələrugCreatedقۇرغان ۋاقتىazHoursSaatndsInclude binary filesOk bineer Dateienen_GB%s Finished : %s%s Finished : %sguUserવપરાશકર્તાiaMatchCorrespondemsSelect Files...Pilih Fail...huSearch CompleteA keresés befejeződöttpt_BRSearch returned no resultsNenhum resultado encontradohneSymbolic Linkसिंबालिक संकली srCase SensitiveРазликуј величину словаetHoursTundizh_TWReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-使用擴展常規表示式時，特殊字元為
-. ^ $ [ ] ? * + { } | \ ( ) : 
-使用基本的常規表示式時，
-?, +, {, |, (, 及 ) 並非特殊字元。
-
-. 符號匹配任何一個字元。
-^ 符號匹配一行的開頭。
-$ 符號匹配一行的結尾。
-
-在 [ ] 之內列出字元，匹配任一被列出的字元。
-在 [^ ] 之內列出字元，匹配任一未被列出的字元。
-在 [ - ] 之內的一對字元匹配第一至二個字元之間
-       的所有字元（例如 [0-9] 或 [a-z]）。
-
-常規表示式後，可加上以下幾種重複運算子：
-?      前一項為選擇性，匹配最多一次
-*      前一項將被匹配零次或以上
-+      前一項將被匹配一次或以上
-{n}    前一項將被匹配一次
-{n,}   前一項將被匹配 n 次或以上
-{n,m}  前一項將被匹配 n 次或以上，最多 m 次
-
-要匹配任何特殊字元，在特殊字元前加上 \ 即可。
-
-兩個常規表示式可用「邏輯的或」運算子 | 連結。
-兩個常規表示式可連接 (concatenate)。
-
-詳情請使用「man grep」指令。
-fyClearLeegjeetUserKasutajaheUserמשתמשjalines行hiSearch Completeढूंढना सम्पन्नzhRegular常规dzEditཞུན་དག་འབད་ནི།(E)fySearching...Dwaande mei sykjen...crhGroupZümrekoOctal Permissions8진수 권한eoModifiedModifiteeuEditEditatukgClosekangaelAnyΟποιαδήποτεkaCancelშეწყვეტაbgGroupГрупаtrExecutableÇalıştırılabilir dosyacsReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-Vyhrazené znaky pro regulární výrazy jsou
-     . ^ $ [ ] ? * + { } | \ ( ) :
-V základních regulárních výrazech ztrácejí metaznaky
-?, +, {, |, (, and ) své speciální významy.
-
-Tečka    .  zastupuje libovolný znak.
-Stříška  ^  zastupuje začátek řádku.
-Dolar    $  zastupuje konec řádku.
-
-Znaky uvnitř [ ]   zastupují jeden libovolný
-      znak ze seznamu.
-Znaky uvnitř [^ ]  zastupují jeden libovolný
-      znak, který není na seznamu.
-Znaky uvnitř [ - ] zastupují jeden znak
-      z rozsahu znaků (např.[0-9] nebo [a-z]).
-
-Regulární výraz může následovat jeden
-       nebo několik opakovacích operátorů:
-?      Zastupuje jeden nebo žádný výskyt
-       předchozího výrazu.
-*      Zastupuje žádný nebo více výskytů
-       předchozího výrazu.
-+      Zastupuje jeden nebo více výskytů
-       předchozího výrazu.
-{n}    Zastupuje přesně n násobný výskyt
-       předchozího výrazu.
-{n,}   Zastupuje alepoň n násobný výskyt
-       předchozího výrazu.
-{n,m}  Zastupuje alespoň n a méně než m
-       výskytů předchozího výrazu.
-
-Vyhrazené znaky pro použití ve výrazech se uvozují \.
-
-Dva regulární výrazy mohou být spojeny operátorem |
-       (logický součet or).
-Dva regulární výrazy mohou být zřetězené.
-
-Více informací je dostupné po zadání man grep
-       v příkazové rádce.
-en_CADirectoryDirectoryelunknownάγνωστοdeAnyBeliebigeuDirectoryDirektorioalgCloseGalanlGroupGroepltRegularĮprastasneFindफेला पार्नुहोस्svFindSökcyAt MostAr y mwyafteRegularసాదారణthCounting files...กำลังนับแฟ้ม...fiClearTyhjennämsMinutesMinitmlContainsഅടങ്ങുന്നത്mnCloseХааzh_CNunknown未知huFilter:Szűrő:knModifiedಮಾರ್ಪಡಿಸಲಾದanFindMirarsiAnyඔනැමthModifiedมีการเปลี่ยนแปลงslSocketVtičwaMonthsMoesbnReserved characters for extended regexp are
-. ^ $ [ ] ? * + { } | \ ( ) : 
-In  basic regular expressions the metacharacters
-?, +, {, |, (, and ) lose their special meaning.
-
-The  period  .   matches  any  single  character.
-The caret ^ matches at the start of line.
-The dollar $ matches at the end of line.
-
-Characters within [ ] matches any single 
-       character in the list.
-Characters within [^ ] matches any single
-       character *not* in the list.
-Characters inside [ - ] matches a range of
-       characters (ie [0-9] or [a-z]).
-
-A regular expression may be followed by one
-       of several repetition operators:
-?      The preceding item is optional and matched
-       at most once.
-*      The preceding item will be matched zero
-       or more times.
-+      The preceding item will be matched one or
-       more times.
-{n}    The preceding item is matched exactly n times.
-{n,}   The preceding item is matched n or more times.
-{n,m}  The preceding item is matched at least n times,
-       but not more than m times.
-
-To match any reserved character, precede it with \. 
-
-Two regular expressions may be joined by the logical or
-       operator |.
-Two regular expressions may be concatenated.
-
-More information is available by typing "man grep"
-extended regexp-র জন্য সংরক্ষিত অক্ষরগুলি হল
-. ^ $ [ ] ? * + { } | \ ( ) : 
-মৌলিক রেগুলার এক্সপ্রেশনের মধ্যে মেটাচ্যারেক্টার
-যেমন ?, +, {, |, (, এবং )-র বিশেষ প্রয়োগ করা হয় না।
-
-বিরাম চিহ্ন  .  যে কোনো একটি অক্ষরের সাথে মেলাতে প্রায়োগ করা হয়।
-ক্যারেট চিহ্ন ^ পংক্তির প্রারম্ভে মেলানোর প্রচেষ্টা করে।
-ডলার চিহ্ন $ পংক্তির শেষে মেলোনোর প্রচেষ্টা করে।
-
-[ ] মধ্যে লেখা অক্ষরের ক্ষেত্রে 
-       তালিকার মধ্যে লেখা কোনো একটি অক্ষরের সাথে মেলানো হবে।
-[^ ] মধ্যে লেখা অক্ষরের ক্ষেত্রে 
-       তালিকার মধ্যে লেখা কোনো অক্ষরেবর সাথে মেলানো *হবে না*।
-[ - ] মধ্যে লেখা অক্ষরের ক্ষেত্রে 
-       নির্দিষ্ট সীমার মধ্যে অক্ষড় অথবা সংখ্যা মেলানো হয় (যেমন [0-9] অথবা [a-z])।
-
-রেগুলার এক্সপ্রেশনের সাথে বিভিন্ন রিপিটেশন অপারেটর
-       ব্যবহার করা যাবে:
-?      এর পূর্ববর্তী বস্তুটি ঐচ্ছিক এবং শুধুমাত্র একবার
-       মেলানো হবে।
-*      এর পূর্ববর্তী বস্তুটি শূণ্য অথবা তার অধিক বার
-       মেলানো হবে।
-+      এর পূর্ববর্তী বস্তুটি এক অথবা তার অধিক বার
-       মেলানো হবে।
-{n}    পূর্ববর্তী বস্তুটি n সংখ্যক বার মেলানো হবে।
-{n,}   পূর্ববর্তী বস্তুটি n অথবা তার বেশিবার মেলানো হবে।
-{n,m}  পূর্ববর্তী বস্তুটি অন্তত n সংখ্যক বার মেলানো হবে,
-       সর্বাধিক m সংখ্যক।
-
-কোনো সংরক্ষিত অক্ষর মেলাতে হলে, তার পূর্বে \ লিখুন। 
-
-দুটি রেগুলার এক্সপ্রেশন লজিকাল অথবা 
-       অপারেটর | সাহায্যে যুক্ত করা সম্ভব।
-দুটি রেগুলার এক্সপ্রেশন যুক্ত করা সম্ভব।
-
-কমান্ড প্রম্পটে "man grep" লিখে অধিক
-       বিবরণ পাওয়া যাবে।
-beCloseЗакрыцьplUpper limit:Limit górny:kmCloseបិទsvCancelAvbrytmnOctal PermissionsОктал (наймт) эрхmsExtended regexpSambungan regexpwaSocketSoketfaDaysروزهاglUserUsuarioptDaysDiassqCase SensitiveNdjeshmëri ndaj ndryshimit gërma të mëdha/voglajaEdit編集(E)paInclude binary filesਬਾਈਨਰੀ ਫਾਇਲਾਂ ਸ਼ਾਮਲ(b)elModifiedΤροποποιήθηκεroSocketSockethuRegularMegszokottbe@latinModifiedZmadyfikavanyesAccessedAccedidoeuExtended regexpestendituriko espresio eregularradeExecutableProgrammdateihiHoursघंटाca@valenciaMinutesMinutsthPathพาธhrMatchOdgovarabnCreatedনির্মাণের সময়nbSearching...Søker ...sr@latinLine Countbroj redova|/|$[svojstva naredbeno 'detalji:
-broj redova' spiskovno 'dopunski detalji: broj redova']slFIFOFIFOlvDirectoryDirektorijafaOctal Permissionsاجازه‌های هشت‌هشتیfrFile type : Type de fichier : mnFound %d matchДуусавsiInclude binary filesබයිනරි ගොනුද ඇතුලත්ව (b)trCharacter deviceKarakter aygıtıdzMonthsཟླཝ་ཚུ་astCloseZarrarboCancelརྩིས་མེད་གཏོངsrkBytesKiBsvPathSökvägfrStay on single filesystemSe limiter à un seul système de fichierzh_TWFile type : 檔案型態：tgDaysРӯзҳоzh_TW%s Finished : %s%s 結束：%shrkByteskByteovaxhClearCikafaFile type : نوع پرونده : azClosebağlawaHoursEurespt_BRCreatedCriado poreu%s Finished : %s%s amaituta : %szh_TW.Big5Directory目錄faUpper limit:حد بالایی:euMinutesMinutuak:koCase Sensitive대소문자 구별itSelect Files...Seleziona i file...zuHome FolderIsibaya sasekhayasr@latinDirectoryDirektorijumen_CARegularRegularorSelect Files...ଫାଇଲ ଚୟନ କରନ୍ତୁ...thCreatedสร้างidAt MostSebanyak-banyaknyaru%s Finished : %s%s: завершено: %shelinesשורותguSelect Files...ફાઈલો પસંદ કરો...anClearEscoscardelinesZeilenfrSymbolic LinkLien symboliquefiInclude binary filesSisällytä binääritiedostotskunknownneznámydeCancelAbbrechenplHome FolderKatalog domowyastRecursiveRecursivabsOctal PermissionsOktalne dozvoleglResultsResultadosbrRegularReizhzh_CNCancel取消(C)fiAnywhereMissä tahansasiContainsඅඩංගු වනarPathمسارroLine CountNumăr de liniitaPathபாதைastSearching...Guetando...knCreatedನಿರ್ಮಿಸಲಾಗಿದೆeuContainsHonakoa du:hneCounting files...फाइल मन ल गिन रहेeuCreatedSortutabsFind hidden files and directoriesPronađi skrivene datoteke i direktorijendsAnywhereJichtenswouz@cyrillicDirectoryЖилдnbContainsInneholderslResultsRezultati

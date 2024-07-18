@@ -105,43 +105,43 @@ private:
             pb = Pixbuf<Type>::getPixbuf ("dialog-warning", -96);
             auto q = gtk_image_new_from_pixbuf (pb);
             gtk_widget_show (GTK_WIDGET(q));
-            gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
+            compat<bool>::boxPackStart (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
         } else {
             pb = Pixbuf<Type>::getPixbuf ("edit-delete", -48);
             auto q = gtk_image_new_from_pixbuf (pb);
             gtk_widget_show (GTK_WIDGET(q));
-            gtk_box_pack_start (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
+            compat<bool>::boxPackStart (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);
         }
 
         auto hbox26 = Gtk<Type>::hboxNew (FALSE, 0);
         gtk_widget_show (GTK_WIDGET(hbox26));
-        gtk_box_pack_start (vbox2, GTK_WIDGET(hbox26), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (vbox2, GTK_WIDGET(hbox26), TRUE, TRUE, 0);
 
 
         auto vbox12 = Gtk<Type>::vboxNew (FALSE, 0);
         gtk_widget_show (GTK_WIDGET(vbox12));
-        gtk_box_pack_start (hbox26, GTK_WIDGET(vbox12), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (hbox26, GTK_WIDGET(vbox12), TRUE, TRUE, 0);
 
         auto label16 = GTK_LABEL(gtk_label_new (""));
         auto markup = g_strdup_printf("<span size=\"larger\"><b>  %s  </b></span>", text);
         gtk_label_set_markup(label16, markup);
         g_free(markup);
         gtk_widget_show (GTK_WIDGET(label16));
-        gtk_box_pack_start (vbox12, GTK_WIDGET(label16), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (vbox12, GTK_WIDGET(label16), FALSE, FALSE, 0);
 
         auto label20 = GTK_LABEL(gtk_label_new (message));
         gtk_label_set_markup(label20, message);
         gtk_widget_show (GTK_WIDGET(label20));
-        gtk_box_pack_start (vbox12, GTK_WIDGET(label20), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (vbox12, GTK_WIDGET(label20), FALSE, FALSE, 0);
 
         auto hbox9 = Gtk<Type>::hboxNew (FALSE, 0);
         gtk_widget_show (GTK_WIDGET(hbox9));
-        gtk_box_pack_start (vbox12, GTK_WIDGET(hbox9), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (vbox12, GTK_WIDGET(hbox9), TRUE, TRUE, 0);
         gtk_container_set_border_width (GTK_CONTAINER (hbox9), 5);
 
         auto togglebutton = gtk_check_button_new_with_mnemonic (_("Apply to all"));
         gtk_widget_show (GTK_WIDGET(togglebutton));
-        gtk_box_pack_start (hbox9, GTK_WIDGET(togglebutton), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (hbox9, GTK_WIDGET(togglebutton), FALSE, FALSE, 0);
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (togglebutton), !always);
         
@@ -149,7 +149,7 @@ private:
 
         auto buttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
         gtk_widget_show (GTK_WIDGET(buttonbox));
-        gtk_box_pack_start (GTK_BOX (vbox12), GTK_WIDGET(buttonbox), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (vbox12), GTK_WIDGET(buttonbox), TRUE, TRUE, 0);
         gtk_container_set_border_width (GTK_CONTAINER (buttonbox), 5);
         gtk_button_box_set_layout (GTK_BUTTON_BOX (buttonbox), GTK_BUTTONBOX_END);
         gtk_box_set_spacing (GTK_BOX (buttonbox), 5);

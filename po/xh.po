@@ -1,4 +1,4 @@
-# Xffm+ translation file: mié nov 20 12:46:08 CST 2019
+# Xffm+ translation file: jue 18 jul 2024 12:37:33 CST
 # Merged from existing open source files
 # http://xffm.org
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2019-11-20 12:34-0600\n"
+        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
         "PO-Revision-Date: 2005-02-17 10:54+0200\n"
         "Last-Translator: Canonical Ltd <translations@canonical.com>\n"
         "Language-Team: Xhosa <xh-translate@ubuntu.com>\n"
@@ -15,689 +15,401 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
-#, fuzzy
-msgid   "No Read Permission"
-msgstr  "Iimvumelwano"
-
-#: ../xffm/find/dialog.hh:91 ../xffm/find/dialog.hh:143
-#: ../xffm/find/dialog.hh:604
-msgid   "Find"
-msgstr  "Fumana"
-
-#: ../xffm/find/dialog.hh:167 ../xffm/find/fgr.hh:146
-msgid   "Recursive"
-msgstr  "Yenziwe  kwakhona ngaphandle kosiba"
-
-#: ../xffm/find/dialog.hh:170 ../xffm/find/fgr.hh:142
-msgid   "Find hidden files and directories"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:173 ../xffm/find/fgr.hh:138
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Inkqubo yefayili yokufunda kuphela"
-
-#: ../xffm/find/dialog.hh:176 ../xffm/find/signals.hh:65
-#: ../xffm/find/signals.hh:427
-msgid   "Results"
-msgstr  "Iziphumo"
-
-#: ../xffm/find/dialog.hh:176
-#, fuzzy
-msgid   "Upper limit"
-msgstr  "Umda ophezulu:"
-
-#: ../xffm/find/dialog.hh:181
-msgid   "At Least"
-msgstr  "Eyona incinci noko"
-
-#: ../xffm/find/dialog.hh:181 ../xffm/find/dialog.hh:186
-msgid   "kBytes"
-msgstr  "kBytes"
-
-#: ../xffm/find/dialog.hh:186
-msgid   "At Most"
-msgstr  "Eyona ininzi noko"
-
-#: ../xffm/find/dialog.hh:192 ../xffm/completion/base.hh:37
-msgid   "User"
-msgstr  "Umsebenzisi"
-
-#: ../xffm/find/dialog.hh:197
-msgid   "Group"
-msgstr  "Yenza iqela"
-
-#: ../xffm/find/dialog.hh:201
-msgid   "Octal Permissions"
-msgstr  "Iimvume Zesibhozo"
-
-#: ../xffm/find/dialog.hh:206
-msgid   "SUID"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:206 ../xffm/fm/view/local/popup.hh:1026
-#, fuzzy
-msgid   "Executable"
-msgstr  "Iphunyeziwe:"
-
-#: ../xffm/find/dialog.hh:214 ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168
-msgid   "Minutes"
-msgstr  "Imizuzu"
-
-#: ../xffm/find/dialog.hh:219 ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171
-msgid   "Hours"
-msgstr  "Iiyure"
-
-#: ../xffm/find/dialog.hh:224 ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174
-msgid   "Days"
-msgstr  "Iintsuku"
-
-#: ../xffm/find/dialog.hh:230
-msgid   "Months"
-msgstr  "Iinyanga"
-
-#: ../xffm/find/dialog.hh:241
-#, fuzzy
-msgid   "File type : "
-msgstr  "Uhlobo lwefayili:"
-
-#: ../xffm/find/dialog.hh:255 ../xffm/find/dialog.hh:595 ../xffm/gtk/gtk.hh:80
-#: ../xffm/fm/dialog/notebook/page/page.hh:71
-msgid   "Close"
-msgstr  "Vala"
-
-#: ../xffm/find/dialog.hh:263 ../xffm/find/dialog.hh:363
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/fm/view/treeview.hh:18
-msgid   "Details"
-msgstr  "Iinkcukacha"
-
-#: ../xffm/find/dialog.hh:301 ../xffm/find/fgr.hh:124
-#: ../xffm/find/signals.hh:94
-msgid   "Path"
-msgstr  "Indlela"
-
-#: ../xffm/find/dialog.hh:334 ../xffm/find/fgr.hh:126
-msgid   "Filter:"
-msgstr  "Icebo lokucoca ulwelo:"
-
-#: ../xffm/find/dialog.hh:377
-#, fuzzy
-msgid   "Contains"
-msgstr  "iqulethe"
-
-#: ../xffm/find/dialog.hh:397
-msgid   "Contains the text"
-msgstr  "Ziqulethe umbhalo"
-
-#: ../xffm/find/dialog.hh:430
-msgid   "Case Sensitive"
-msgstr  "Iyabeva Oonobumba"
-
-#: ../xffm/find/dialog.hh:442
-#, fuzzy
-msgid   "Extended regexp"
-msgstr  "Qwalasela Ibar yasecaleni"
-
-#: ../xffm/find/dialog.hh:453
-#, fuzzy
-msgid   "Include binary files"
-msgstr  "Faka kunye neefayili:"
-
-#: ../xffm/find/dialog.hh:463 ../xffm/find/fgr.hh:212
-#, fuzzy
-msgid   "Line Count"
-msgstr  "Umgca Wenkcazo"
-
-#: ../xffm/find/dialog.hh:489
-#, fuzzy
-msgid   "Match"
-msgstr  "Ziyadibana"
-
-#: ../xffm/find/dialog.hh:501
-#, fuzzy
-msgid   "Anywhere"
-msgstr  "Akukho ndawo"
-
-#: ../xffm/find/dialog.hh:516
-msgid   "Whole words only"
-msgstr  "Amagama apheleleyo kuphela"
-
-#: ../xffm/find/dialog.hh:531
-msgid   "lines"
-msgstr  "imigca"
-
-#: ../xffm/find/dialog.hh:545 ../xffm/find/fgr.hh:210
-msgid   "No match"
-msgstr  "Akukho luthelekiso"
-
-#: ../xffm/find/dialog.hh:577 ../xffm/find/signals.hh:341
-#: ../xffm/gtk/dialogs.hh:110 ../xffm/fm/view/local/rm.hh:157
-#: ../xffm/fm/view/local/properties.hh:310 ../xffm/fm/view/fuse/ecryptfs.hh:175
-#: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369
-#: ../xffm/response/entryresponse.hh:453 ../xffm/response/chooserresponse.hh:18
-msgid   "Cancel"
-msgstr  "Hlaba"
-
-#: ../xffm/find/dialog.hh:587
-msgid   "Clear"
-msgstr  "Cika"
-
-#: ../xffm/find/dialog.hh:629
-msgid   "Edit"
-msgstr  "Hlela"
-
-#: ../xffm/find/dialog.hh:743 ../xffm/find/dialog.hh:758
-#: ../xffm/common/preview.hh:460 ../xffm/common/util.hh:1354
-#: ../xffm/common/util.hh:1356 ../xffm/common/util.hh:1362
-#: ../xffm/common/util.hh:1364
-msgid   "unknown"
-msgstr  "ayaziwa"
-
-#: ../xffm/find/dialog.hh:772
-msgid   "Modified"
-msgstr  "Ilungisiwe"
-
-#: ../xffm/find/dialog.hh:776
-msgid   "Created"
-msgstr  "Yenziwe"
-
-#: ../xffm/find/dialog.hh:780
-msgid   "Accessed"
-msgstr  "Igqithiselwe"
-
-#: ../xffm/find/dialog.hh:1098
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/dialog.hh:1107
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:124 ../xffm/fm/view/fuse/ecryptfs.hh:133
-#: ../xffm/completion/base.hh:339
-#, fuzzy
-msgid   "Options:"
-msgstr  "Ekunokukhethwa kuko"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:126
-#, fuzzy
-msgid   "Search for files"
-msgstr  "Khangela iiFayili"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Okuqulathiweyo:"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "File's contents filtered as plain text."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:131
-#, fuzzy
-msgid   "Verbose output debugging mode."
-msgstr  "Yenza ibe nako ukulungisa isiphene sekhowudi kwinkqubo"
-
-#: ../xffm/find/fgr.hh:133
-msgid   "Show version information"
-msgstr  "Bonisa ulwazi loguqulelo lomsebenzi kolunye ulwimi"
-
-#: ../xffm/find/fgr.hh:135
-#, fuzzy
-msgid   "Filter Details"
-msgstr  "Sebenzisa icebo lokucoca kuzozonke"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Shicilela..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Icebo lokucoca ulwelo"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-#, fuzzy
-msgid   "KByte"
-msgstr  "Byte"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "inkulu kune okanye ilingana ne"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "incinane kune okanye ilingana ne"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "Cwangcisa i UID"
-
-#: ../xffm/find/fgr.hh:152
-#, fuzzy
-msgid   "Executable Text Files"
-msgstr  "Iifayile Eziphunyeziweyo"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "Iimvume zalefayili, ngobhalo lwamanani kasibhozo."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Uhlobo"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Nayiphi na"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "Icebo lokucoca ulwelo Elingagqibekanga"
-
-#: ../xffm/find/fgr.hh:158 ../xffm/common/preview.hh:478
-#, fuzzy
-msgid   "Regular file"
-msgstr  "Rhoqo"
-
-#: ../xffm/find/fgr.hh:159 ../xffm/find/signals.hh:8
-#: ../xffm/common/preview.hh:469 ../xffm/fm/view/local/popup.hh:987
-msgid   "Directory"
-msgstr  "Uvimba weefayili"
-
-#: ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-#: ../xffm/common/preview.hh:475
-msgid   "Symbolic Link"
-msgstr  "Ikhonkco olunophawu"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "Udweliso lwe UNIX"
-
-#: ../xffm/find/fgr.hh:162 ../xffm/find/signals.hh:11
-#: ../xffm/common/preview.hh:463
-msgid   "Block device"
-msgstr  "Isixhobo esithintelayo"
-
-#: ../xffm/find/fgr.hh:163 ../xffm/find/signals.hh:12
-#: ../xffm/common/preview.hh:466
-msgid   "Character device"
-msgstr  "Isixhobo seempawu"
-
-#: ../xffm/find/fgr.hh:164 ../xffm/find/signals.hh:13
-#: ../xffm/common/preview.hh:472
-msgid   "FIFO"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "TIME"
-msgstr  "Nge XESHA"
-
-#: ../xffm/find/fgr.hh:168 ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174
-#: ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Ngaphambili"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Inyanga"
-
-#: ../xffm/find/fgr.hh:177
-msgid   "Month(s)"
-msgstr  "Inyanga(ii)"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "Bonisa Ixesha Loguqulelo kancinane"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "Bonisa Ixesha Egqithiselwe ngalo"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "Bonisa Ixesha Lokwenziwa kwayo"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-#, fuzzy
-msgid   "uid"
-msgstr  "i-Buhid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Umsebenzisi:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "i-gdb"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Iqela:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "Isibonisi Somthamo"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "ULUHLU LWAMAGAMA"
-
-#: ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:204
-#: ../xffm/fm/view/local/popup.hh:750
-msgid   "Regular expression"
-msgstr  "Ukuzichaza okuthe rhoqo"
-
-#: ../xffm/find/fgr.hh:204
-#, fuzzy
-msgid   "Extended"
-msgstr  "Eyandisiweyo"
-
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "Musa ukumhoya unobumba"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Iifayile Zombhalo"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Amagama"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Imigca"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Usebenziso: %s %s\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "Rhoqo"
-
-#: ../xffm/find/signals.hh:10 ../xffm/common/preview.hh:481
-msgid   "Socket"
-msgstr  "Isokethi"
-
-#: ../xffm/find/signals.hh:369 ../xffm/find/signals.hh:803
-#, fuzzy
-msgid   "No editor for current action."
-msgstr  "Tshixa Kwindawo ekuyo Yangoku"
-
-#: ../xffm/find/signals.hh:427
-msgid   "Upper limit:"
-msgstr  "Umda ophezulu:"
-
-#: ../xffm/find/signals.hh:429
-msgid   "Counting files..."
-msgstr  "Ibala iifayile ..."
-
-#: ../xffm/find/signals.hh:444
-#, fuzzy, c-format
-msgid   "Found %d match"
-msgid_plural    "Found %d matches"
-msgstr[0]       " %d telekisa"
-msgstr[1]       "%d iintelekiso"
-
-#: ../xffm/find/signals.hh:446
-#, c-format
-msgid   "%s Finished : %s"
-msgstr  "%s Igqityiwe : %s"
-
-#: ../xffm/find/signals.hh:569 ../xffm/find/signals.hh:571
-msgid   "Searching..."
-msgstr  "Isakhangela..."
-
-#: ../xffm/common/preview.hh:581
-#, fuzzy
-msgid   "Empty file"
-msgstr  "Ifayili Engenanto"
-
-#: ../xffm/common/preview.hh:636
-#, fuzzy, c-format
-msgid   "Cannot read from %s"
-msgstr  "Akukwazeki ukufunda i-CD: %s"
-
-#: ../xffm/common/settings.hh:30
-#, fuzzy
-msgid   "New File:"
-msgstr  "IFayili eNtsha"
-
-#: ../xffm/common/gio.hh:91
-msgid   "Copying files"
-msgstr  "Ikopa iifayili"
-
-#: ../xffm/common/gio.hh:93 ../xffm/common/dnd.hh:35
-#: ../xffm/fm/dialog/clipboard.hh:30
-msgid   "Moving files"
-msgstr  "Ishenxisa iifayili"
-
-#: ../xffm/common/gio.hh:95
-#, fuzzy
-msgid   "linking"
-msgstr  "Iyanxulumanisa"
-
-#: ../xffm/common/gio.hh:97
-#, fuzzy
-msgid   "rename"
-msgstr  "Nika elinye igama"
-
-#: ../xffm/common/gio.hh:449
-#, fuzzy, c-format
-msgid   "(%d of %d)"
-msgstr  "i-%d ye %d"
-
-#: ../xffm/common/util.hh:1404
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1406 ../xffm/common/util.hh:1441
-#, c-format
-msgid   "Open with %s"
-msgstr  "Vula nge %s"
-
-#: ../xffm/common/util.hh:1406
-msgid   "Text Editor"
-msgstr  "Umhleli woMbhalo"
-
-#: ../xffm/common/util.hh:1443 ../xffm/gtk/gtk.hh:70
-#, fuzzy
-msgid   "Execute Shell Command"
-msgstr  "Phumeza Umyalelo Weqokobhe..."
-
-#: ../xffm/common/util.hh:1447
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/util.hh:1452 ../xffm/fm/view/local/popup.hh:1033
-#: ../xffm/fm/view/local/popup.hh:1336 ../xffm/fm/view/local/popup.hh:1353
-msgid   "Run in Terminal"
-msgstr  "Phumeza ngaphakathi i-Terminal"
-
-#: ../xffm/common/dnd.hh:41 ../xffm/fm/dialog/clipboard.hh:23
-#, fuzzy
-msgid   "Copying files locally"
-msgstr  "Ikopa iifayili"
-
-#: ../xffm/common/dnd.hh:47
-#, fuzzy
-msgid   "Create Link"
-msgstr  "Iyenza"
-
-#: ../xffm/common/dnd.hh:63
-msgid   "more"
-msgstr  ""
-
-#: ../xffm/common/run.hh:338 ../xffm/fm/view/local/popup.hh:1149
-#, fuzzy
-msgid   "error"
-msgstr  "Uloyiko"
-
-#: ../xffm/common/run.hh:342
-#, fuzzy
-msgid   "warning"
-msgstr  "Isilumkiso"
-
-#: ../xffm/common/run.hh:464 ../xffm/response/passwdresponse.hh:28
-#: ../xffm/response/passwdresponse.hh:34
-msgid   "Enter password"
-msgstr  "Faka i-password"
-
-#: ../xffm/gtk/gtk.hh:68 ../xffm/fm/dialog/notebook/vbuttonbox.hh:252
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "Vula i-Terminal"
 
-#: ../xffm/gtk/gtk.hh:72 ../xffm/fm/view/local/popup.hh:157
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+#, fuzzy
+msgid   "Execute Shell Command"
+msgstr  "Phumeza Umyalelo Weqokobhe..."
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
 msgid   "Paste"
 msgstr  "Ncamathisela"
 
-#: ../xffm/gtk/gtk.hh:74 ../xffm/fm/view/local/popup.hh:151
-#: ../xffm/fm/view/root/popup.hh:224
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
 #, fuzzy
 msgid   "Add bookmark"
 msgstr  "Yongeza iNto yokuPhawula"
 
-#: ../xffm/gtk/gtk.hh:76 ../xffm/fm/view/local/popup.hh:152
-#: ../xffm/fm/view/root/popup.hh:170
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
 #, fuzzy
 msgid   "Remove bookmark"
 msgstr  "Susa Into Yokuphawula"
 
-#: ../xffm/gtk/gtk.hh:78 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
 #: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
-#: ../xffm/fm/view/pkg/popup.hh:151
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:248
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
 msgid   "Search"
 msgstr  "Khangela"
 
-#: ../xffm/gtk/gtk.hh:82 ../xffm/fm/dialog/notebook/createini.hh:83
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+msgid   "Close"
+msgstr  "Vala"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
 msgid   "Exit"
 msgstr  "Phuma"
 
-#: ../xffm/gtk/gtk.hh:84 ../xffm/fm/view/local/popup.hh:85
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/fm/view/local/popup.hh:1332
-#: ../xffm/fm/view/local/popup.hh:1339 ../xffm/fm/view/local/popup.hh:1349
-#: ../xffm/fm/view/local/popup.hh:1356
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
 msgid   "Open with"
 msgstr  "Vula nge"
 
-#: ../xffm/gtk/gtk.hh:86 ../xffm/fm/view/local/popup.hh:100
-#: ../xffm/fm/view/local/popup.hh:156
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
 msgid   "Cut"
 msgstr  "Sika"
 
-#: ../xffm/gtk/gtk.hh:88 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
 msgid   "Copy"
 msgstr  "Kopa"
 
-#: ../xffm/gtk/gtk.hh:90 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:103 ../xffm/fm/view/local/popup.hh:160
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
 msgid   "Delete"
 msgstr  "Cima"
 
-#: ../xffm/gtk/gtk.hh:92 ../xffm/fm/view/local/rm.hh:165
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
 #, fuzzy
 msgid   "Shred"
 msgstr  "Iifayile Ezikrazukileyo"
 
-#: ../xffm/gtk/gtk.hh:95 ../xffm/fm/view/local/popup.hh:95
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/root/popup.hh:169
-#: ../xffm/fm/view/fstab/popup.hh:20
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
 msgid   "Open in New Tab"
 msgstr  "Vula kwi Tab Entsha"
 
-#: ../xffm/gtk/gtk.hh:140 ../xffm/fm/dialog/notebook/notebook.hh:75
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
 msgid   "New Tab"
 msgstr  "I-Tab eNtsha"
 
-#: ../xffm/gtk/dialogs.hh:42
+#: ../xffm/gtk/dialogs.hh:29
+msgid   "Yes"
+msgstr  "Ewe"
+
+#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+msgid   "Confirm"
+msgstr  "Qinisekisa"
+
+#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Faka kuyo yonke imifanekiso"
+
+#: ../xffm/gtk/dialogs.hh:110
+msgid   "Overwrite"
+msgstr  "Bhala phezu kokubhaliweyo"
+
+#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:411
+msgid   "Cancel"
+msgstr  "Hlaba"
+
+#: ../xffm/gtk/dialogs.hh:240
 msgid   "Help"
 msgstr  "Uncedo"
 
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/view/pkg/popup.hh:35
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:194
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:198
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:202
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:205
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
+#: ../xffm/find/dialog.hh:666
+msgid   "unknown"
+msgstr  "ayaziwa"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+msgid   "Block device"
+msgstr  "Isixhobo esithintelayo"
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+msgid   "Character device"
+msgstr  "Isixhobo seempawu"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+msgid   "Directory"
+msgstr  "Uvimba weefayili"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  ""
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+msgid   "Symbolic Link"
+msgstr  "Ikhonkco olunophawu"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+#, fuzzy
+msgid   "Regular file"
+msgstr  "Rhoqo"
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+msgid   "Socket"
+msgstr  "Isokethi"
+
+#: ../xffm/gtk/preview.hh:587
+#, fuzzy
+msgid   "Empty file"
+msgstr  "Ifayili Engenanto"
+
+#: ../xffm/gtk/preview.hh:658
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "Akukwazeki ukufunda i-CD: %s"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Umyalelo"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "iFayili"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "Ungeniso lomyalelo"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+msgid   "User"
+msgstr  "Umsebenzisi"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Ugcino lwamaxabiso aguqukayo"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Umququzeleli"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "Izidibani"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  "Ziyadibana"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "Iifayili ezininzi ezivuliweyo"
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+#, fuzzy
+msgid   "Options:"
+msgstr  "Ekunokukhethwa kuko"
+
+#: ../xffm/completion/bash.hh:133
+msgid   "Completion mode:"
+msgstr  "Indlela yogqibezelo:"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "Umyalelo"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  "ifayile"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Ekunokukhethwa kuko"
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Iyalayisha %s"
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy
+msgid   "Please Wait..."
+msgstr  "Nceda ulinde."
+
+#: ../xffm/fm/view/root/popup.hh:167
+msgid   "Ecryptfs (EFS)"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:169
+#, fuzzy
+msgid   "Clear cache"
+msgstr  "Cima Indawo yokugcina ngokufihlakeleyo"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+#, fuzzy
+msgid   "Mount the volume associated with this folder"
+msgstr  "Khetha imiqulu ebonakalayo kwesi siqulathi- zifayili"
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+#, fuzzy
+msgid   "Unmount the volume associated with this folder"
+msgstr  "Khetha imiqulu ebonakalayo kwesi siqulathi- zifayili"
+
+#: ../xffm/fm/view/root/popup.hh:204
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Müll leeren"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Ubukhulu benkqubo"
+
+#: ../xffm/fm/view/root/popup.hh:270
+msgid   "private"
+msgstr  "ikhusi"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+#, fuzzy
+msgid   "Specify Output Directory..."
+msgstr  "Ukuskena uvimba wento kawonke-wonke..."
+
+#: ../xffm/fm/view/root/model.hh:133
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "Name=Ingcambu Yolawulo"
+
+#: ../xffm/fm/view/root/model.hh:149
+msgid   "This is the root of the filesystem"
+msgstr  "Le yingcambu yendlela yefayile"
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+#, fuzzy
+msgid   "Home Directory"
+msgstr  "Ulawulo lwasekhaya"
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Inkunkuma"
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "Isifaki kwisakhelo sediski"
+
+#: ../xffm/fm/view/root/model.hh:238
+msgid   "Mount local disks and devices"
+msgstr  "Faka kwisakhelo iidiski kunye nezixhobo ezifikeleleka ngqo"
+
+#: ../xffm/fm/view/root/model.hh:278
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "Yiya kwindawo yasekhaya"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Igama"
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:138
+msgid   "Details"
+msgstr  "Iinkcukacha"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "Ubungakanani"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  "Umhla"
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "Mimetypes"
+
+#: ../xffm/fm/view/base/signals.hh:918
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "I ariya ayinanto"
+
+#: ../xffm/fm/view/base/signals.hh:925
+#, fuzzy
+msgid   "Directory does not exist."
+msgstr  "%s: uVimba weefayili %s awukho."
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "Ifayili: %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Layisha"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Gcina"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Ekunokukhethwa kuko"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+msgid   "Advanced"
+msgstr  "Ihambelle phambili"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Faka kwisakhelo %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Faka I-password ye %s"
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+msgid   "Package Manager"
+msgstr  "Umphathi Wokudityaniswe kunye"
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  "Yamnkela"
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "Ekunokukhethwa kuko"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
 #, fuzzy
 msgid   "Software Updater"
 msgstr  "Umhla wokuqalisa"
@@ -725,76 +437,15 @@ msgstr  "Iziphumo"
 msgid   "Currently busy\n"
 msgstr  "Umaleko wangoku kuphela"
 
-#: ../xffm/fm/view/pkg/popup.hh:44
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
 #, fuzzy
-msgid   "Update Database"
-msgstr  "Idatabase"
+msgid   "Invalid entry"
+msgstr  "Umxhubi ongasebenziyo"
 
-#: ../xffm/fm/view/pkg/popup.hh:45
-#, fuzzy
-msgid   "Fetch"
-msgstr  "Umzobo"
-
-#: ../xffm/fm/view/pkg/popup.hh:46
-#, fuzzy
-msgid   "Install --dry-run"
-msgstr  "Useko lwezixhobo lulibazisekile"
-
-#: ../xffm/fm/view/pkg/popup.hh:47
-msgid   "Install"
-msgstr  "Faka"
-
-#: ../xffm/fm/view/pkg/popup.hh:48
-msgid   "Uninstall --dry-run"
-msgstr  ""
-
-#: ../xffm/fm/view/pkg/popup.hh:49
-#, fuzzy
-msgid   "Uninstall"
-msgstr  "Faka"
-
-#: ../xffm/fm/view/pkg/popup.hh:50
-msgid   "Information"
-msgstr  "Iinkcukacha"
-
-#: ../xffm/fm/view/pkg/popup.hh:140
-msgid   "Version"
-msgstr  "Uhlobo"
-
-#: ../xffm/fm/view/pkg/popup.hh:149
-#, fuzzy
-msgid   "Go up"
-msgstr  "yiya phezulu"
-
-#: ../xffm/fm/view/pkg/popup.hh:152
-#, fuzzy
-msgid   "Search packages"
-msgstr  "Khangela usiya ngasemva"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
+#: ../xffm/fm/view/local/view.hh:177
 #, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "Iyalayisha %s"
-
-#: ../xffm/fm/view/pkg/popup.hh:184 ../xffm/fm/view/view.hh:95
-#, fuzzy
-msgid   "Please Wait..."
-msgstr  "Nceda ulinde."
-
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "Ukunika elinye igama %s"
-
-#: ../xffm/fm/view/local/model.hh:577 ../xffm/fm/view/base/monitor.hh:34
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "Ifayili: %s"
-
-#: ../xffm/fm/view/local/model.hh:580
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "Ifayili %d efakiweyo"
+msgid   "The volume '%s' is not mounted."
+msgstr  "Umthetho %s awuxhaswanga."
 
 #: ../xffm/fm/view/local/rm.hh:59
 #, c-format
@@ -805,7 +456,8 @@ msgstr  "Cima %s"
 msgid   "Warning: "
 msgstr  "Isilumkiso: "
 
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:557
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "Ukhetho oludadayo"
@@ -814,461 +466,432 @@ msgstr  "Ukhetho oludadayo"
 msgid   "Remove"
 msgstr  "Susa"
 
-#: ../xffm/fm/view/local/rm.hh:142
-#, fuzzy
-msgid   "Apply to all"
-msgstr  "Faka kuyo yonke imifanekiso"
-
 #: ../xffm/fm/view/local/rm.hh:183
 msgid   "Trash"
 msgstr  "Inkunkuma"
 
-#: ../xffm/fm/view/local/popup.hh:94
+#: ../xffm/fm/view/local/popup.hh:93
 msgid   "New"
 msgstr  "Entsha"
 
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:159
-#: ../xffm/fm/view/local/popup.hh:232 ../xffm/fm/view/local/popup.hh:234
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
 #, fuzzy
 msgid   "Paste into"
 msgstr  "Ncamathelisa Umbhalo"
 
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
 msgid   "There is nothing on the clipboard to paste."
 msgstr  "Akukho nto yokuncamathisela kwi-clipboard."
 
-#: ../xffm/fm/view/local/popup.hh:106
+#: ../xffm/fm/view/local/popup.hh:105
 msgid   "Select All"
 msgstr  "Khetha Konke"
 
-#: ../xffm/fm/view/local/popup.hh:107 ../xffm/fm/view/local/popup.hh:746
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "Igama lifana netetho eqhelekileyo"
 
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:1029
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
 #, fuzzy
 msgid   "Run Executable..."
 msgstr  "Iphunyeziwe:"
 
-#: ../xffm/fm/view/local/popup.hh:144 ../xffm/fm/view/local/popup.hh:877
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
 msgid   "Extract files from the archive"
 msgstr  "Khupha iifayili kuvimba"
 
-#: ../xffm/fm/view/local/popup.hh:146 ../xffm/fm/view/local/popup.hh:928
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
 #, fuzzy
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "Yakha uvimba ngezinto ezikhethiweyo"
 
-#: ../xffm/fm/view/local/popup.hh:148 ../xffm/fm/view/root/popup.hh:172
-#: ../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid   "Mount the volume associated with this folder"
-msgstr  "Khetha imiqulu ebonakalayo kwesi siqulathi- zifayili"
-
-#: ../xffm/fm/view/local/popup.hh:149 ../xffm/fm/view/root/popup.hh:173
-#: ../xffm/fm/view/fstab/popup.hh:38
-#, fuzzy
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Khetha imiqulu ebonakalayo kwesi siqulathi- zifayili"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1242
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
 msgid   "Rename"
 msgstr  "Nika elinye igama"
 
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1225
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
 msgid   "Duplicate"
 msgstr  "Phinda"
 
-#: ../xffm/fm/view/local/popup.hh:163 ../xffm/fm/view/local/popup.hh:1208
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:63
 msgid   "Link"
 msgstr  "Unxulumaniso"
 
-#: ../xffm/fm/view/local/popup.hh:164
+#: ../xffm/fm/view/local/popup.hh:163
 msgid   "Properties"
 msgstr  "Iimpawu"
 
-#: ../xffm/fm/view/local/popup.hh:554
+#: ../xffm/fm/view/local/popup.hh:566
 msgid   "Files:"
 msgstr  "Iifayili:"
 
-#: ../xffm/fm/view/local/popup.hh:744
+#: ../xffm/fm/view/local/popup.hh:715
 #, fuzzy
 msgid   "Select items"
 msgstr  "Khetha iifayili"
 
-#: ../xffm/fm/view/local/popup.hh:761
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "Ukuzichaza okuthe rhoqo"
+
+#: ../xffm/fm/view/local/popup.hh:732
 #, fuzzy
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "Umhleli Wentetho Eyaziwayo"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 msgid   "No selection"
 msgstr  "Akukho lukhetho"
 
-#: ../xffm/fm/view/local/popup.hh:791
+#: ../xffm/fm/view/local/popup.hh:762
 #, fuzzy
 msgid   "No matches."
 msgstr  "Akukho ngqinelwano"
 
-#: ../xffm/fm/view/local/popup.hh:983 ../xffm/fm/view/local/popup.hh:1156
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
 #, fuzzy
 msgid   "Create new..."
 msgstr  "Yenza Entsha..."
 
-#: ../xffm/fm/view/local/popup.hh:990 ../xffm/fm/view/local/popup.hh:1085
-#: ../xffm/fm/view/local/popup.hh:1159
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
 #, fuzzy
 msgid   "New Name:"
 msgstr  "IGama eliTsha"
 
-#: ../xffm/fm/view/local/popup.hh:998
+#: ../xffm/fm/view/local/popup.hh:980
 msgid   "No name"
 msgstr  "Akukho gama"
 
-#: ../xffm/fm/view/local/popup.hh:1011
+#: ../xffm/fm/view/local/popup.hh:993
 #, fuzzy, c-format
 msgid   "Another file with the same name already exists in “%s”."
 msgstr  "Isiqulathi seefayili esinegama elifanayo neli sele sikho"
 
-#: ../xffm/fm/view/local/popup.hh:1036
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "Uvula kwakhona umyalelo"
-
-#: ../xffm/fm/view/local/popup.hh:1117 ../xffm/fm/view/root/popup.hh:237
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:383
-#, fuzzy
-msgid   "Specify Output Directory..."
-msgstr  "Ukuskena uvimba wento kawonke-wonke..."
-
-#: ../xffm/fm/view/local/popup.hh:1148
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:409
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
 msgid   "Not a directory"
 msgstr  "Ayingovimba weefayili"
 
-#: ../xffm/fm/view/local/popup.hh:1307
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
 #, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "Kufuneka ukhethe iiseli ezininzi."
+msgid   "error"
+msgstr  "Uloyiko"
 
-#: ../xffm/fm/view/local/popup.hh:1375 ../xffm/fm/view/local/view.hh:156
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "Umxhubi ongasebenziyo"
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  ""
 
-#: ../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "Previews"
+msgstr  "Ukuzijonga phambi koshicilelo"
+
+#: ../xffm/fm/view/local/model.hh:124
 #, fuzzy, c-format
-msgid   "The volume '%s' is not mounted."
-msgstr  "Umthetho %s awuxhaswanga."
+msgid   "Reading \"%s\""
+msgstr  "Ukunika elinye igama %s"
 
-#: ../xffm/fm/view/local/properties.hh:241
+#: ../xffm/fm/view/local/model.hh:722
+#, fuzzy, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Ifayili %d efakiweyo"
+
+#: ../xffm/fm/view/local/properties.hh:239
 #, fuzzy
 msgid   "Properties and Attributes"
 msgstr  "Iimpawu Zesikhokelo"
 
-#: ../xffm/fm/view/local/properties.hh:270
+#: ../xffm/fm/view/local/properties.hh:267
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "Indlela Yokwenza Ifayili"
 
-#: ../xffm/fm/view/local/properties.hh:296
+#: ../xffm/fm/view/local/properties.hh:293
 msgid   "File:"
 msgstr  "Ifayili:"
 
-#: ../xffm/fm/view/local/properties.hh:308
+#: ../xffm/fm/view/local/properties.hh:305
 msgid   "Apply changes"
 msgstr  "Yenza utshintsho"
 
-#: ../xffm/fm/view/local/properties.hh:469
+#: ../xffm/fm/view/local/properties.hh:473
 msgid   "Encoding"
 msgstr  "Ukunxulumana"
 
-#: ../xffm/fm/view/local/properties.hh:470 ../xffm/fm/view/treeview.hh:22
-#, fuzzy
-msgid   "Mimetype"
-msgstr  "Mimetypes"
-
-#: ../xffm/fm/view/local/properties.hh:474 ../xffm/fm/view/treeview.hh:19
-msgid   "Size"
-msgstr  "Ubungakanani"
-
-#: ../xffm/fm/view/local/properties.hh:475 ../xffm/fm/view/treeview.hh:20
-msgid   "Date"
-msgstr  "Umhla"
-
-#: ../xffm/fm/view/local/properties.hh:492
+#: ../xffm/fm/view/local/properties.hh:496
 #, fuzzy
 msgid   "Successfully moved to trash."
 msgstr  "Idibene ngempumeleleo ku %s"
 
-#: ../xffm/fm/view/local/properties.hh:493
+#: ../xffm/fm/view/local/properties.hh:497
 msgid   "Source:"
 msgstr  "Umthombo:"
 
-#: ../xffm/fm/view/root/model.hh:124
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "Isetyenzisiwe"
+
+#: ../xffm/fm/view/fstab/view.hh:175
+msgid   "Available"
+msgstr  "Iyafumaneka"
+
+#: ../xffm/fm/view/fstab/view.hh:176
 #, fuzzy
-msgid   "Root Directory"
-msgstr  "Name=Ingcambu Yolawulo"
+msgid   "Usage"
+msgstr  "Ukusetyenziswa:"
 
-#: ../xffm/fm/view/root/model.hh:140
-msgid   "This is the root of the filesystem"
-msgstr  "Le yingcambu yendlela yefayile"
-
-#: ../xffm/fm/view/root/model.hh:152
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:268
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "Ulawulo lwasekhaya"
-
-#: ../xffm/fm/view/root/model.hh:179
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:278
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "Inkunkuma"
-
-#: ../xffm/fm/view/root/model.hh:210 ../xffm/fm/view/fstab/popup.hh:29
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:273
-#, fuzzy
-msgid   "Disk Image Mounter"
-msgstr  "Isifaki kwisakhelo sediski"
-
-#: ../xffm/fm/view/root/model.hh:227
-msgid   "Mount local disks and devices"
-msgstr  "Faka kwisakhelo iidiski kunye nezixhobo ezifikeleleka ngqo"
-
-#: ../xffm/fm/view/root/model.hh:267
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "Yiya kwindawo yasekhaya"
-
-#: ../xffm/fm/view/root/popup.hh:175
-#, fuzzy
-msgid   "Empty trash"
-msgstr  "Müll leeren"
-
-#: ../xffm/fm/view/root/popup.hh:228
-#, fuzzy
-msgid   "Ecrypt Volume"
-msgstr  "Ubukhulu benkqubo"
-
-#: ../xffm/fm/view/root/popup.hh:229
-msgid   "private"
-msgstr  "ikhusi"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
-#: ../xffm/fm/view/fuse/ecryptfs.hh:185
-msgid   "Mount"
-msgstr  "Layisha"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:179
-#: ../xffm/fm/dialog/notebook/createini.hh:87
-#: ../xffm/fm/dialog/notebook/createini.hh:371
-msgid   "Save"
-msgstr  "Gcina"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:182
-msgid   "Load"
-msgstr  "Laden"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-msgid   "Options"
-msgstr  "Ekunokukhethwa kuko"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
-msgid   "Advanced"
-msgstr  "Ihambelle phambili"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:692 ../xffm/fm/view/fstab/view.hh:1414
-#, fuzzy, c-format
-msgid   "Mounting %s"
-msgstr  "Faka kwisakhelo %s"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:745
-#, fuzzy, c-format
-msgid   "Enter Passphrase for %s"
-msgstr  "Faka I-password ye %s"
-
-#: ../xffm/fm/view/fstab/popup.hh:21 ../xffm/fm/view/fstab/view.hh:1033
-msgid   "NFS Network Volume"
-msgstr  "Ubukhulu bothungelwano lwe-NFS"
-
-#: ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Ukusebenza ngaxeshanye kuphelile"
-
-#: ../xffm/fm/view/fstab/popup.hh:23 ../xffm/fm/view/fstab/view.hh:1085
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "Ubukhulu bukavimba wolwazi"
-
-#: ../xffm/fm/view/fstab/popup.hh:24 ../xffm/fm/view/fstab/view.hh:1111
-#, fuzzy
-msgid   "CIFS Volume"
-msgstr  "Ubukhulu be-XIAFS"
-
-#: ../xffm/fm/view/fstab/popup.hh:129
-msgid   "Mount Device"
-msgstr  "Icebo elinyusiweyo "
-
-#: ../xffm/fm/view/fstab/popup.hh:141 ../xffm/fm/view/fstab/view.hh:924
-msgid   "Mount point:"
-msgstr  "Incopho yonyuso:"
-
-#: ../xffm/fm/view/fstab/view.hh:591
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Incopho yonyuso:"
-
-#: ../xffm/fm/view/fstab/view.hh:592
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Icebo elinyusiweyo "
-
-#: ../xffm/fm/view/fstab/view.hh:660 ../xffm/fm/view/fstab/view.hh:676
-#, fuzzy
-msgid   "Disks"
-msgstr  "iDiski"
-
-#: ../xffm/fm/view/fstab/view.hh:922
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
 #, fuzzy
 msgid   "No Label"
 msgstr  "Ilebhile"
 
-#: ../xffm/fm/view/fstab/view.hh:923
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
 #, fuzzy
 msgid   "There is no file system available (unformatted)"
 msgstr  "Akukho khalenda yokwenza imisebenzi efumanekayo"
 
-#: ../xffm/fm/view/fstab/view.hh:924
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+msgid   "Mount point:"
+msgstr  "Incopho yonyuso:"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
 #, fuzzy
 msgid   "Not mounted"
 msgstr  "Azihlelwanga"
 
-#: ../xffm/fm/view/fstab/view.hh:1059
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+#, fuzzy
+msgid   "Disks"
+msgstr  "iDiski"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+msgid   "NFS Network Volume"
+msgstr  "Ubukhulu bothungelwano lwe-NFS"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
 msgid   "SFTP (via SSH)"
 msgstr  ""
 
-#: ../xffm/fm/view/fstab/view.hh:1414
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Ubukhulu bukavimba wolwazi"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Ubukhulu be-XIAFS"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
 #, fuzzy, c-format
 msgid   "Unmounting %s"
 msgstr  "Ayifakwanga kwisakhelo %s"
 
-#: ../xffm/fm/view/base/signals.hh:845
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
 #, fuzzy
-msgid   "Trash is empty"
-msgstr  "I ariya ayinanto"
+msgid   "Mount point: "
+msgstr  "Incopho yonyuso:"
 
-#: ../xffm/fm/view/base/signals.hh:847
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
 #, fuzzy
-msgid   "Directory does not exist."
-msgstr  "%s: uVimba weefayili %s awukho."
+msgid   "Mount device: "
+msgstr  "Icebo elinyusiweyo "
 
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Igama"
+#: ../xffm/fm/view/fstab/popup.hh:21
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Ukusebenza ngaxeshanye kuphelile"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:37
+#: ../xffm/fm/view/fstab/popup.hh:132
+msgid   "Mount Device"
+msgstr  "Icebo elinyusiweyo "
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Ikopa iifayili"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
+#: ../xffm/common/gio.hh:93
+msgid   "Moving files"
+msgstr  "Ishenxisa iifayili"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+#, fuzzy
+msgid   "No Image Preview"
+msgstr  "UkuJonga phambi koshicilelo koMfanekiso"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+msgid   "Maximum image size for thumbnailing"
+msgstr  "Obona bukhulu bobungakanani bomfanekiso obenzelwe ukutyhila "
+        "ngokukhawuleza"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+#, fuzzy
+msgid   "Reset image size"
+msgstr  "Tshintsha ubungakanani bubengangoko bevidiyo"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
 #, fuzzy
 msgid   "Embedded Terminal"
 msgstr  "Name=Isiphelo sendlela se X"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:38
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
 #, fuzzy
 msgid   "All items in the iconview."
 msgstr  "Khetha zonke izinto kule festile"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:39
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
 #, fuzzy
 msgid   "Scripting"
 msgstr  "iSkripti"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:40
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
 msgid   "Clear Log"
 msgstr  "Cima okubhaliweyo kwemiyalezo ye HoySynce\n"
         "Cacisa Uluhlu"
 
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
 msgid   "Terminal font"
 msgstr  "Ifonti yekhompyutha exhomekeke kwenye"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Renice Process"
 msgstr  "Inkqubela ye Renice"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Suspend"
 msgstr  "Nqumamisa"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:135
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
 msgid   "Continue"
 msgstr  "Qhubekeka"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Interrupt"
 msgstr  "Phazamisa"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "Hangup"
 msgstr  "Beka umnxeba"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:136
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
 msgid   "User 1 (USR1)"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "User 2 (USR2)"
 msgstr  ""
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 #, fuzzy
 msgid   "Terminate Task"
 msgstr  "Shicilela Imisebenzi"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:137
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
 msgid   "Abort"
 msgstr  "Yeka"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:138
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
 msgid   "Kill"
 msgstr  "Bulala"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
 #, fuzzy
 msgid   "Segmentation fault"
 msgstr  "Ukwaphulwa kwenkqubo"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:216
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
 msgid   "PID"
 msgstr  "i-PID"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:376
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:378
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Ngaphambili"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
 #, fuzzy
 msgid   "Go to"
 msgstr  "Yiya Kwisiphelo"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:59
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
 msgid   "loading..."
 msgstr  "iyalayisha..."
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:152
-#: ../xffm/fm/dialog/notebook/page/page.hh:167
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
 #, fuzzy
 msgid   "Confirm Replace"
 msgstr  "Qinisekisa Ususo"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:154
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
 msgid   "Destination File"
 msgstr  "Ifayile Yendawo ekungqongileyo"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:166
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
 #, fuzzy, c-format
 msgid   "The output file %s already exists, do you want to overwrite it?"
 msgstr  "Ifayile %s inokuba ikhona\n"
         "Ingaba ufuna ukubhala ngaphezulu kwayo?"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Icala elide"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+#, fuzzy
+msgid   "Remove Button Contents"
+msgstr  "Susa izishumi"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Lungelelanisa uthelekiso lwemibala"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Khetha iifayili ofuna ukuzivula"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Akukwazeki ukufaka isiqulathi seefayili \"%s\": %s\n"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Phuma kule nkqubo"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+#, fuzzy
+msgid   "FIXME New custom content"
+msgstr  "Sebenzisa iifonti zomthengi"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Vula Entsha Ifestile"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Differences"
+msgstr  "Umahluko"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:67
 #, fuzzy
@@ -1344,10 +967,6 @@ msgstr  "Ukhetho"
 msgid   "text"
 msgstr  "umbhalo"
 
-#: ../xffm/fm/dialog/notebook/createini.hh:431 ../xffm/completion/bash.hh:135
-msgid   "file"
-msgstr  "ifayile"
-
 #: ../xffm/fm/dialog/notebook/createini.hh:436
 #, fuzzy
 msgid   "folder"
@@ -1361,107 +980,215 @@ msgstr  "ivuliwe"
 msgid   "off"
 msgstr  "cima"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:226
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Susa izishumi"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:221
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Lungelelanisa uthelekiso lwemibala"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Khetha iifayili ofuna ukuzivula"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Akukwazeki ukufaka isiqulathi seefayili \"%s\": %s\n"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "Phuma kule nkqubo"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:216
-#, fuzzy
-msgid   "FIXME New custom content"
-msgstr  "Sebenzisa iifonti zomthengi"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:256
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Vula Entsha Ifestile"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:262
-#, fuzzy
-msgid   "Differences"
-msgstr  "Umahluko"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:178
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
 #, fuzzy
 msgid   "Open menu"
 msgstr  "Vuka umfanekiso"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:230
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+msgid   "Background Color"
+msgstr  "Umbala ongasemva"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+#, fuzzy
+msgid   "Foreground Color"
+msgstr  "uMbala wokuNgaphambili"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "Tshintsha Umbala Wombhalo"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+#, fuzzy
+msgid   "Error Text Color"
+msgstr  "Umbala Wombhalo"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+msgid   "Color settings"
+msgstr  "Izicwangciso zombala"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+#, fuzzy
+msgid   "Sort by"
+msgstr  "Ikhetwe ngu"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+#, fuzzy
+msgid   "File extension"
+msgstr  "Isongezo seFayili:"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
 #, fuzzy
 msgid   "View as list"
 msgstr  "Bonisa njengo-Luhlu"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:231
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
 #, fuzzy
 msgid   "Show hidden files"
 msgstr  "Bonisa iincwadi ezineenkcukacha ezifihliweyo"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:232
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
 #, fuzzy
 msgid   "Show Backup Files"
 msgstr  "Ifayile Yogcino lwasemva"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:233
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
 #, fuzzy
 msgid   "Sort data in descending order"
 msgstr  "hlela ngokuhla"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:235
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
 #, fuzzy
 msgid   "Sort by date"
 msgstr  "Hlela ngokusebenzisa igama"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:236
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
 #, fuzzy
 msgid   "Sort by size"
 msgstr  "Lungisa ngokwe salathisi"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:270
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
 #, fuzzy
 msgid   "Main menu"
 msgstr  "Imenyu Esentloko"
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid   "Long press time"
-msgstr  "Icala elide"
-
-#: ../xffm/fm/dialog/dialog.hh:122
+#: ../xffm/fm/dialog/dialog.hh:121
 msgid   "Removed"
 msgstr  "Isusiwe"
 
-#: ../xffm/fm/dialog/dialog.hh:143
+#: ../xffm/common/run.hh:339
 #, fuzzy
-msgid   "Detected device(s):"
-msgstr  "Fumanisa izixhobo"
+msgid   "warning"
+msgstr  "Isilumkiso"
 
-#: ../xffm/response/progress.hh:82 ../xffm/response/commandresponse.hh:57
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+msgid   "Enter password"
+msgstr  "Faka i-password"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#, fuzzy
+msgid   "Executable"
+msgstr  "Iphunyeziwe:"
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+msgid   "Run in Terminal"
+msgstr  "Phumeza ngaphakathi i-Terminal"
+
+#: ../xffm/common/run.hh:652
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Uvula kwakhona umyalelo"
+
+#: ../xffm/common/run.hh:874
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Kufuneka ukhethe iiseli ezininzi."
+
+#: ../xffm/common/settings.hh:178
+#, fuzzy
+msgid   "New File:"
+msgstr  "IFayili eNtsha"
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, c-format
+msgid   "Open with %s"
+msgstr  "Vula nge %s"
+
+#: ../xffm/common/util.hh:1513
+msgid   "Text Editor"
+msgstr  "Umhleli woMbhalo"
+
+#: ../xffm/common/util.hh:1554
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:41
+#, fuzzy
+msgid   "Target"
+msgstr  "Okungqaliweyo:"
+
+#: ../xffm/common/dnd.hh:41
+msgid   "Files"
+msgstr  "Iifayili"
+
+#: ../xffm/common/dnd.hh:49
+msgid   "More…"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:63
+msgid   "Move"
+msgstr  "Shenxisa"
+
+#: ../xffm/common/dnd.hh:143
+#, fuzzy
+msgid   "Create Link"
+msgstr  "Iyenza"
+
+#: ../xffm/common/dnd.hh:155
+msgid   "more"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:91
+msgid   "Copying files"
+msgstr  "Ikopa iifayili"
+
+#: ../xffm/common/gio.hh:95
+#, fuzzy
+msgid   "linking"
+msgstr  "Iyanxulumanisa"
+
+#: ../xffm/common/gio.hh:97
+#, fuzzy
+msgid   "rename"
+msgstr  "Nika elinye igama"
+
+#: ../xffm/common/gio.hh:408
+#, fuzzy
+msgid   "Overwrite?"
+msgstr  "Bhala phezu kokubhaliweyo"
+
+#: ../xffm/common/gio.hh:498
+#, fuzzy, c-format
+msgid   "(%d of %d)"
+msgstr  "i-%d ye %d"
+
+#: ../xffm/response/customresponse.hh:55
+#, fuzzy
+msgid   "Execute command"
+msgstr  "Ukuphumeza umyalelo"
+
+#: ../xffm/response/customresponse.hh:103
+msgid   "Source File"
+msgstr  "Imvelaphi Yefayile"
+
+#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+msgid   "Ok"
+msgstr  "Kulungile"
+
+#: ../xffm/response/timeoutresponse.hh:57
+msgid   "Dismiss"
+msgstr  "Yekisa"
+
+#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
 msgid   "Running"
 msgstr  "Kuyaphunyezwa"
 
-#: ../xffm/response/progress.hh:87 ../xffm/response/commandresponse.hh:61
+#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
 #, fuzzy
 msgid   "Waiting for operation to finish..."
 msgstr  "Ilinde ushukumiso lwe khomputha..."
@@ -1476,69 +1203,429 @@ msgstr  "Ulwazi lomsebenzisi"
 msgid   "Response Requested"
 msgstr  "Akuphumelelanga ukubuyisela isicelo"
 
-#: ../xffm/response/passwdresponse.hh:194 ../xffm/response/entryresponse.hh:457
-msgid   "Ok"
-msgstr  "Kulungile"
-
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
 #, fuzzy
-msgid   "Execute command"
-msgstr  "Ukuphumeza umyalelo"
+msgid   "No Read Permission"
+msgstr  "Iimvumelwano"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Imvelaphi Yefayile"
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:341
+msgid   "Path"
+msgstr  "Indlela"
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "Yekisa"
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
 
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "Indlela yogqibezelo:"
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+msgid   "Filter:"
+msgstr  "Icebo lokucoca ulwelo:"
 
-#: ../xffm/completion/bash.hh:134
+#: ../xffm/find/fgr.hh:126
 #, fuzzy
-msgid   "command"
-msgstr  "Umyalelo"
+msgid   "Search for files"
+msgstr  "Khangela iiFayili"
 
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Okuqulathiweyo:"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
 #, fuzzy
-msgid   "Options >>"
-msgstr  "Ekunokukhethwa kuko"
+msgid   "Verbose output debugging mode."
+msgstr  "Yenza ibe nako ukulungisa isiphene sekhowudi kwinkqubo"
 
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Umyalelo"
+#: ../xffm/find/fgr.hh:133
+msgid   "Show version information"
+msgstr  "Bonisa ulwazi loguqulelo lomsebenzi kolunye ulwimi"
 
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "iFayili"
-
-#: ../xffm/completion/base.hh:34
+#: ../xffm/find/fgr.hh:135
 #, fuzzy
-msgid   "Command history"
-msgstr  "Ungeniso lomyalelo"
+msgid   "Filter Details"
+msgstr  "Sebenzisa icebo lokucoca kuzozonke"
 
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Ugcino lwamaxabiso aguqukayo"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Umququzeleli"
-
-#: ../xffm/completion/base.hh:55
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
 #, fuzzy
-msgid   "Found no match"
-msgstr  "Izidibani"
+msgid   "Stay on single filesystem"
+msgstr  "Inkqubo yefayili yokufunda kuphela"
 
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Ziyadibana"
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Shicilela..."
 
-#: ../xffm/completion/base.hh:142
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+msgid   "Find hidden files and directories"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Icebo lokucoca ulwelo"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+msgid   "Recursive"
+msgstr  "Yenziwe  kwakhona ngaphandle kosiba"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
 #, fuzzy
-msgid   "Too many files open"
-msgstr  "Iifayili ezininzi ezivuliweyo"
+msgid   "KByte"
+msgstr  "Byte"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "inkulu kune okanye ilingana ne"
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "incinane kune okanye ilingana ne"
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Cwangcisa i UID"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Executable Text Files"
+msgstr  "Iifayile Eziphunyeziweyo"
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Iimvume zalefayili, ngobhalo lwamanani kasibhozo."
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Uhlobo"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Nayiphi na"
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "Icebo lokucoca ulwelo Elingagqibekanga"
+
+#: ../xffm/find/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "Udweliso lwe UNIX"
+
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+msgid   "Minutes"
+msgstr  "Imizuzu"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "TIME"
+msgstr  "Nge XESHA"
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+msgid   "Hours"
+msgstr  "Iiyure"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+msgid   "Days"
+msgstr  "Iintsuku"
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  "Inyanga"
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Inyanga(ii)"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Bonisa Ixesha Loguqulelo kancinane"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "Bonisa Ixesha Egqithiselwe ngalo"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "Bonisa Ixesha Lokwenziwa kwayo"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "uid"
+msgstr  "i-Buhid"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Umsebenzisi:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "i-gdb"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Iqela:"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  "Isibonisi Somthamo"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  "ULUHLU LWAMAGAMA"
+
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Extended"
+msgstr  "Eyandisiweyo"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Musa ukumhoya unobumba"
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Iifayile Zombhalo"
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+msgid   "No match"
+msgstr  "Akukho luthelekiso"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Umgca Wenkcazo"
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  "Amagama"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Imigca"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Usebenziso: %s %s\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Rhoqo"
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
+#: ../xffm/find/dialog.hh:245
+msgid   "Results"
+msgstr  "Iziphumo"
+
+#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Tshixa Kwindawo ekuyo Yangoku"
+
+#: ../xffm/find/signals.hh:501
+msgid   "Upper limit:"
+msgstr  "Umda ophezulu:"
+
+#: ../xffm/find/signals.hh:503
+msgid   "Counting files..."
+msgstr  "Ibala iifayile ..."
+
+#: ../xffm/find/signals.hh:518
+#, fuzzy, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       " %d telekisa"
+msgstr[1]       "%d iintelekiso"
+
+#: ../xffm/find/signals.hh:520
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  "%s Igqityiwe : %s"
+
+#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+msgid   "Searching..."
+msgstr  "Isakhangela..."
+
+#: ../xffm/find/dialog.hh:106
+msgid   "Find"
+msgstr  "Fumana"
+
+#: ../xffm/find/dialog.hh:131
+#, fuzzy
+msgid   "Close find"
+msgstr  "Vala ifestile"
+
+#: ../xffm/find/dialog.hh:146
+#, fuzzy
+msgid   "Find Files"
+msgstr  "Fumana Ifayile..."
+
+#: ../xffm/find/dialog.hh:209
+#, fuzzy
+msgid   "Select advanced options"
+msgstr  "Fihla iinketho ezibhekisa phambili"
+
+#: ../xffm/find/dialog.hh:245
+#, fuzzy
+msgid   "Upper limit"
+msgstr  "Umda ophezulu:"
+
+#: ../xffm/find/dialog.hh:250
+msgid   "At Least"
+msgstr  "Eyona incinci noko"
+
+#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+msgid   "kBytes"
+msgstr  "kBytes"
+
+#: ../xffm/find/dialog.hh:255
+msgid   "At Most"
+msgstr  "Eyona ininzi noko"
+
+#: ../xffm/find/dialog.hh:266
+msgid   "Group"
+msgstr  "Yenza iqela"
+
+#: ../xffm/find/dialog.hh:270
+msgid   "Octal Permissions"
+msgstr  "Iimvume Zesibhozo"
+
+#: ../xffm/find/dialog.hh:275
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:299
+msgid   "Months"
+msgstr  "Iinyanga"
+
+#: ../xffm/find/dialog.hh:309
+#, fuzzy
+msgid   "File type : "
+msgstr  "Uhlobo lwefayili:"
+
+#: ../xffm/find/dialog.hh:355
+msgid   "Display file selection dialog"
+msgstr  "Bonisa unxibelelwano lokukhetha ifayili"
+
+#: ../xffm/find/dialog.hh:414
+msgid   "Contains the text"
+msgstr  "Ziqulethe umbhalo"
+
+#: ../xffm/find/dialog.hh:444
+msgid   "Case Sensitive"
+msgstr  "Iyabeva Oonobumba"
+
+#: ../xffm/find/dialog.hh:445
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Qwalasela Ibar yasecaleni"
+
+#: ../xffm/find/dialog.hh:446
+#, fuzzy
+msgid   "Include binary files"
+msgstr  "Faka kunye neefayili:"
+
+#: ../xffm/find/dialog.hh:455
+#, fuzzy
+msgid   "Anywhere"
+msgstr  "Akukho ndawo"
+
+#: ../xffm/find/dialog.hh:456
+msgid   "Whole words only"
+msgstr  "Amagama apheleleyo kuphela"
+
+#: ../xffm/find/dialog.hh:457
+msgid   "lines"
+msgstr  "imigca"
+
+#: ../xffm/find/dialog.hh:680
+msgid   "Modified"
+msgstr  "Ilungisiwe"
+
+#: ../xffm/find/dialog.hh:684
+msgid   "Created"
+msgstr  "Yenziwe"
+
+#: ../xffm/find/dialog.hh:688
+msgid   "Accessed"
+msgstr  "Igqithiselwe"
+
+#: ../xffm/find/dialog.hh:1006
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "Vala ifestile"
+
+#: ../xffm/find/dialog.hh:1010
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1019
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 

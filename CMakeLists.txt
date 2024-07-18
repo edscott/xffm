@@ -57,8 +57,8 @@ configure_file(
     "${PROJECT_BINARY_DIR}/config.h"
     )
 
-add_subdirectory(gtk4)
-#add_subdirectory(xffm)
+#add_subdirectory(gtk4)
+add_subdirectory(xffm)
 #add_subdirectory(structure)
 
 

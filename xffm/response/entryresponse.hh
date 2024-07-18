@@ -95,21 +95,21 @@ public:
 
         auto vbox = gtk_c::vboxNew (FALSE, 6);
         gtk_widget_show(GTK_WIDGET(vbox));
-        gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (response_))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG (response_))), GTK_WIDGET(vbox), FALSE, FALSE, 0);
 
         auto hbox = gtk_c::hboxNew (FALSE, 6);
 
         responseLabel_ = GTK_LABEL(gtk_label_new (""));
-        gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (vbox), GTK_WIDGET(responseLabel_), FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET(hbox), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (vbox), GTK_WIDGET(hbox), FALSE, FALSE, 0);
 
 
         if (icon){
             GdkPixbuf *p = Pixbuf<Type>::getPixbuf(icon, -48);
             if (p){
                 auto image = GTK_IMAGE(gtk_image_new_from_pixbuf(p));
-                gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(image), FALSE, FALSE, 0);
+                compat<bool>::boxPackStart (GTK_BOX (hbox), GTK_WIDGET(image), FALSE, FALSE, 0);
                 gtk_widget_show(GTK_WIDGET(image));
                 TRACE("Loaded icon %s\n", icon);
             } else {
@@ -119,17 +119,17 @@ public:
 
         vbox2_ = gtk_c::vboxNew (FALSE, 6);
         gtk_widget_show(GTK_WIDGET(vbox2_));
-        gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET(vbox2_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (hbox), GTK_WIDGET(vbox2_), FALSE, FALSE, 0);
 
         hbox_ = gtk_c::hboxNew (FALSE, 6);
         gtk_widget_show(GTK_WIDGET(hbox));
-        gtk_box_pack_start (GTK_BOX (vbox2_), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (vbox2_), GTK_WIDGET(hbox_), FALSE, FALSE, 0);
         
         entryLabel_ = GTK_LABEL(gtk_label_new (""));
-        gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), FALSE, TRUE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (hbox_), GTK_WIDGET(entryLabel_), FALSE, TRUE, 0);
         
         entry_ = GTK_ENTRY(gtk_entry_new ());
-        gtk_box_pack_start (GTK_BOX (hbox_), GTK_WIDGET(entry_), TRUE, TRUE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (hbox_), GTK_WIDGET(entry_), TRUE, TRUE, 0);
         g_object_set_data(G_OBJECT(entry_),"response", response_);
         g_signal_connect (G_OBJECT (entry_), "activate", 
                 ENTRY_CALLBACK (EntryResponse<Type>::activate_entry), (void *)response_);
@@ -143,7 +143,7 @@ public:
         gtk_entry_completion_set_model (bashCompletion_, GTK_TREE_MODEL(bashCompletionStore_));
 
         checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(""));
-        gtk_box_pack_start (GTK_BOX (vbox),GTK_WIDGET(checkbutton_), FALSE, FALSE, 0);
+        compat<bool>::boxPackStart (GTK_BOX (vbox),GTK_WIDGET(checkbutton_), FALSE, FALSE, 0);
 
         timeoutProgress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
         gtk_box_pack_end (GTK_BOX (vbox),GTK_WIDGET(timeoutProgress_), FALSE, FALSE, 0);
