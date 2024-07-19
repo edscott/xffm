@@ -14,7 +14,8 @@ include(cmake/pthreads.cmake)
 # debugging in lldb/gdb 
 # to avoid disabling ALPHA, set these options via environment
 # variable CXXFLAGS.
-set(CMAKE_CXX_FLAGS "-g -O0 -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED")
+set(CMAKE_CXX_FLAGS "-g -O0 -DUSE_GTK4")
+#set(CMAKE_CXX_FLAGS "-g -O0 -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED")
 #set(CMAKE_CXX_FLAGS "-g -O0")
 #set(CMAKE_CXX_FLAGS "-g -O3")
 
@@ -41,7 +42,9 @@ find_package(PkgConfig REQUIRED)
 find_package(X11 REQUIRED)
 #set(ENV{PKG_CONFIG_PATH} "/opt/lib/pkgconfig")
 find_package(GLIB 2.56.2 REQUIRED)
-find_package(GTK3 3.24.1 REQUIRED)
+#find_package(GTK4 3.24.0 REQUIRED)
+find_package(GTK4 4.10.0 REQUIRED)
+#pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk4)
 
 include(GNUInstallDirs)
 include(cmake/headers.cmake)
@@ -57,7 +60,6 @@ configure_file(
     "${PROJECT_BINARY_DIR}/config.h"
     )
 
-#add_subdirectory(gtk4)
 add_subdirectory(xffm)
 #add_subdirectory(structure)
 

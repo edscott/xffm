@@ -2,27 +2,31 @@
 #define XF_DIALOG
 #include <memory>
 
-#include "clipboard.hh"
-#include "signals.hh"
-#include "notebook/notebook.hh"
+//#include "clipboard.hh"
+//#include "signals.hh"
+//#include "notebook/notebook.hh"
 
 namespace xf {
 
 template <class Type>
-class Dialog :public Notebook<Type> {
-    using pixbuf_c = Pixbuf<double>;
-    using print_c = Print<double>;
+//class window :public Notebook<Type> {
+class window  {
+//    using pixbuf_c = Pixbuf<double>;
+//    using print_c = Print<double>;
+private:
+    gint dialogMinW_, dialogNatW_, dialogMinH_, dialogNatH_;
     GFileMonitor *deviceMonitor_;
     GCancellable *cancellable_;
     GFile *gfile_;
 public:
-    Dialog(const gchar *path){
+    window(const gchar *path){
         init(path);
         //Mime<Type>::mimeBuildHashes();
+        /*
         auto page = this->currentPageObject();
         // Default into iconview...
         page->setDefaultIconview(TRUE);
-        page->showIconview(1);
+        page->showIconview(1);*/
         startDeviceMonitor();
         g_object_set_data(G_OBJECT(mainWindow), "dialog",this);
     }
@@ -32,48 +36,78 @@ public:
         setDialogIcon(icon);
         setDialogTitle(title);
     } */
-    ~Dialog(void){
+    ~window(void){
         g_file_monitor_cancel(deviceMonitor_);
     }
 
+    // delete/destroy
+    static gboolean delete_event (GtkWidget *widget,
+               GdkEvent  *event,
+               gpointer   user_data){
+        gtk_widget_set_visible(widget, FALSE);
+        gtk_window_destroy(mainWindow);
+        //_exit(123);
+        return TRUE;
+    }
+    
     void init(const gchar *path){
-        isTreeView = (Settings<Type>::getInteger("window", "TreeView") > 0);
-        mainWindow = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+        //isTreeView = (Settings<Type>::getInteger("window", "TreeView") > 0);
+        mainWindow = GTK_WINDOW(gtk_window_new ());
         g_object_set_data(G_OBJECT(mainWindow), "dialogObject", (void *)this);
-        g_signal_connect (G_OBJECT (mainWindow), "delete-event", EVENT_CALLBACK (DialogSignals<Type>::delete_event), NULL);
+        g_signal_connect (G_OBJECT (mainWindow), "delete-event", EVENT_CALLBACK (window<Type>::delete_event), NULL);
         // XXX Is it overkill with signal to destroy-event?
-        g_signal_connect (G_OBJECT (mainWindow), "destroy-event", EVENT_CALLBACK (DialogSignals<Type>::delete_event), NULL);
+        g_signal_connect (G_OBJECT (mainWindow), "destroy-event", EVENT_CALLBACK (window<Type>::delete_event), NULL);
 
-        gtk_widget_set_has_tooltip (GTK_WIDGET(mainWindow), TRUE);
-        // FIXME: enable tooltip
-        //g_signal_connect (G_OBJECT (mainWindow), "query-tooltip", G_CALLBACK (window_tooltip_f), (void *)this);
-        g_signal_connect (G_OBJECT (mainWindow), "key-press-event", KEY_EVENT_CALLBACK (DialogSignals<Type>::window_keyboard_event), (void *)this);
+        
+        //g_signal_connect (G_OBJECT (mainWindow), "key-press-event", KEY_EVENT_CALLBACK (DialogSignals<Type>::window_keyboard_event), (void *)this);
 
-        gtk_widget_get_preferred_width (GTK_WIDGET(mainWindow), &dialogMinW_, &dialogNatW_);
-        gtk_widget_get_preferred_height (GTK_WIDGET(mainWindow), &dialogMinH_, &dialogNatH_);
-        gtk_window_set_type_hint(mainWindow, GDK_WINDOW_TYPE_HINT_DIALOG);
+        gtk_window_get_default_size (mainWindow, &dialogMinW_, &dialogMinH_);
+        dialogNatH_ = dialogMinH_;
+        dialogNatW_ = dialogMinW_;
+
+
+        //gdk_set_program_class("Xffm");
+        //gtk_window_set_type_hint(mainWindow, GDK_WINDOW_TYPE_HINT_DIALOG);
+
         //setWindowMaxSize(mainWindow);
-        gtk_window_set_position (mainWindow, GTK_WIN_POS_MOUSE);
-        this->insertNotebook(mainWindow);     
+        //gtk_window_set_position (mainWindow, GTK_WIN_POS_MOUSE);
 
+/*        
+        // Notebook
+        this->insertNotebook(mainWindow);     
         this->addPage(path); 
         TRACE("dialog this=%p\n", (void *)this);
-        //this->insertPageChild(this->notebook());
         
-        
+        // vpane:
         gint max, current;
         auto vpane = this->vpane();
         g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
         g_object_get(G_OBJECT(vpane), "position", &current, NULL);
         g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(current));
         g_object_set_data(G_OBJECT(vpane), "oldMax", GINT_TO_POINTER(max));
-        
-        g_signal_connect (G_OBJECT (mainWindow), "size-allocate", 
-                SIZE_CALLBACK(DialogSignals<Type>::onSizeAllocate), (void *)this);
+*/        
+  //      g_signal_connect (G_OBJECT (mainWindow), "size-allocate", 
+    //            SIZE_CALLBACK(DialogSignals<Type>::onSizeAllocate), (void *)this);
         setDefaultSize();
-        setDefaultFixedFontSize();
+        //setDefaultFixedFontSize();
+        XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
+        wm_class->res_name = g_strdup("xffm");
+        wm_class->res_class = g_strdup("Xffm");
+
+        GdkDisplay *displayGdk = gdk_display_get_default();
+        Display *display = gdk_x11_display_get_xdisplay(displayGdk);
+
+        GtkWidget *widget = GTK_WIDGET(mainWindow);
+        gtk_widget_realize(widget);
+        GtkNative *native = gtk_widget_get_native(widget);
+        GdkSurface *surface = gtk_native_get_surface(native);
+        Window w = gdk_x11_surface_get_xid (surface);
+        //auto w = gdk_x11_drawable_get_xid(gtk_widget_get_window(widget));
+        //auto w= gdk_x11_display_get_xrootwindow (displayGdk);
+        XSetClassHint(display, w, wm_class);
+
+
         gtk_window_present (mainWindow);
-        while (gtk_events_pending()) gtk_main_iteration();
         return;
     }
 
@@ -131,7 +165,7 @@ public:
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 TRACE("moved in: %s\n", f);
-#ifdef ENABLE_FSTAB_MODULE
+#ifdef xENABLE_FSTAB_MODULE
             if (strstr(f, "part")){ // When device is added, we have partition id.
                 gchar *path = FstabView<Type>::id2Partition(f); // path to partition
                 gchar *label = NULL;
@@ -159,7 +193,7 @@ public:
         g_free(s);
     }
    
-
+/*
     void setDialogTitle(const gchar *title){
         gtk_window_set_title (mainWindow, title);
     }
@@ -168,7 +202,8 @@ public:
         gtk_window_set_icon (mainWindow, pixbuf);
         g_object_unref(pixbuf);
     }
-
+*/
+    /*
     void resizeWindow(gint fontSize){
         if (fontSize == 0){
             ERROR("fm/dialog.hh::fontSize cannot be zero\n");
@@ -202,10 +237,10 @@ public:
         gtk_window_resize (GTK_WINDOW(mainWindow), w, h);
         
     } 
-
+*/
 protected:
 
-
+/*
 
     void setDefaultFixedFontSize(void){
         auto page = this->currentPageObject();
@@ -215,7 +250,7 @@ protected:
         print_c::set_font_size(GTK_WIDGET(page->input()), size);
         resizeWindow(size);
     }
-
+*/
 private:
         GtkRequisition minimumSize_;
         GtkRequisition naturalSize_;
@@ -237,6 +272,7 @@ private:
         chosenSize_.height = h;
     }
     void setWindowMaxSize(void){
+      /*
         gint x_return, y_return;
         guint w_return, h_return, d_return, border_return;
         Window root_return;
@@ -254,10 +290,9 @@ private:
         maximumSize_.width = geometry.max_width;
         maximumSize_.height = geometry.max_height;
         gtk_window_set_geometry_hints (GTK_WINDOW(mainWindow), GTK_WIDGET(mainWindow), &geometry, GDK_HINT_MAX_SIZE);
+        */
     }
 
-private:
-    gint dialogMinW_, dialogNatW_, dialogMinH_, dialogNatH_;
 };
 }
 

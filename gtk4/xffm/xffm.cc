@@ -113,15 +113,20 @@ static GtkWindow *mainWindow = NULL;
 static gboolean isTreeView = FALSE;
 GList *customDialogs = NULL;
 
-#include "common/compat.hh"
-#include "gtk/gtk3.hh"
-#include "common/common.hh"
-#include "mime/mime.hh"
-#include "completion/completion.hh"
-#include "response/response.hh"
-#include "find/find.hh"
-#include "fm/fm.hh"
+#ifdef USE_GTK4
+# include "common/compat.hh"
 
+# include "fm/fm.hh"
+#else
+# include "common/compat.hh"
+# include "gtk/gtk3.hh"
+# include "common/common.hh"
+# include "mime/mime.hh"
+# include "completion/completion.hh"
+# include "response/response.hh"
+# include "find/find.hh"
+# include "fm/fm.hh"
+#endif
 #include <cassert>
 
 int
@@ -179,7 +184,8 @@ main (int argc, char *argv[]) {
     assert(ws);
     g_main_loop_run(ws);*/
     
-    gtk_main();
+    while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
+      g_main_context_iteration (NULL, TRUE);
     //delete(fm);
     return 0;
 }

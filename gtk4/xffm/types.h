@@ -21,7 +21,11 @@
 #include <iostream>
 
 #include <gtk/gtk.h>
-#include <gdk/gdkx.h>
+#ifdef USE_GTK4
+# include <gdk/x11/gdkx.h>
+#else
+# include <gdk/gdkx.h>
+#endif
 #include <gmodule.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -173,6 +177,14 @@ typedef struct sequence_t {
     const gchar *sequence;
 } sequence_t;
 
+#ifdef USE_GTK4
+struct GdkColor {
+  guint32 pixel;
+  guint16 red;
+  guint16 green;
+  guint16 blue;
+};
+#endif
 
 typedef struct lpterm_colors_t {
     const gchar *id;
