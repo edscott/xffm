@@ -446,7 +446,8 @@ public:
         gchar *layout_text;
             layout_text = g_strdup_printf("<span foreground=\"black\" background=\"#ffffff\" size=\"%s\" font_weight=\"bold\">%s </span>", text_size, _(icon_text));
 
-        PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
+        PangoContext *context = gtk_widget_get_pango_context (widget...);
+        //PangoContext *context = gdk_pango_context_get_for_screen (gdk_screen_get_default());
 
         PangoLayout *layout = pango_layout_new (context);
 

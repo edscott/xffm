@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include "cairo.hh"
+//#include "cairo.hh"
 
 #ifndef PREFIX
 # warning "PREFIX not defined: defaulting to /usr/local"
@@ -69,12 +69,14 @@ class Pixbuf {
             };
             for (auto p=subdirs; p && *p; p++){
                 auto path = g_build_filename(resource_path, *p, NULL);
-                gtk_icon_theme_prepend_search_path (icon_theme, path);
+                gtk_icon_theme_add_search_path (icon_theme, path);
+                //gtk_icon_theme_prepend_search_path (icon_theme, path);
                 g_free(path);
             }
             if (buildIcons) for (auto p=subdirs; p && *p; p++){
                 auto path = g_build_filename(buildIcons, *p, NULL);
-                gtk_icon_theme_prepend_search_path (icon_theme, path);
+                gtk_icon_theme_add_search_path (icon_theme, path);
+                //gtk_icon_theme_prepend_search_path (icon_theme, path);
                 //fprintf(stderr, "appending icon search path: %s (%d)\n", path, g_file_test(path,G_FILE_TEST_IS_DIR));
 
                 g_free(path);
@@ -94,8 +96,10 @@ class Pixbuf {
 
     static gint
     get_pixel_size(gint size){
-        gint pixels = 24;
-        switch (size){
+        if (size < 0) return abs(size);
+        return size;
+    }
+    /*
             case GTK_ICON_SIZE_MENU:          // Size appropriate for menus (16px).
             case GTK_ICON_SIZE_SMALL_TOOLBAR: // Size appropriate for small toolbars (16px).
             case GTK_ICON_SIZE_BUTTON:        // Size appropriate for buttons (16px)
@@ -106,12 +110,7 @@ class Pixbuf {
             pixels = 32; break;
             case GTK_ICON_SIZE_DIALOG:        // Size appropriate for dialogs (48px)
             pixels = 48; break;
-            default: 
-            if (size < 0) pixels = abs(size);
-            break;
-        }
-        return pixels;
-    }
+    */
 
 public:
     static GdkPixbuf *
@@ -594,6 +593,8 @@ public:
 
         return pixbuf;
     }
+
+#if 0
     static void *
     insert_decoration_f (void *data){
         if (!icon_theme) init();
@@ -745,6 +746,7 @@ public:
         Cairo<Type>::pixbuf_cairo_destroy(pixbuf_context, base_pixbuf);
         return NULL;
     }
+#endif 
 
 };
 }

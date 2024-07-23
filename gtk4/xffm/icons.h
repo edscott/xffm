@@ -4,8 +4,8 @@
 // VButtonBox.hh
 #define LIST_REMOVE "list-remove"
 #define LIST_ADD "list-add"
-#define GLIST_REMOVE "glist-remove"
-#define GLIST_ADD "glist-add"
+#define GLIST_REMOVE "zoom-out"
+#define GLIST_ADD "zoom-in"
 #define DIALOG_WARNING "warning"
 #define EMBLEM_BSD "emblem-bsd"
 #define EMBLEM_ARCH "emblem-archlinux"
@@ -14,10 +14,10 @@
 #define DOCUMENT_NEW "document-new"
 #define SEARCH "edit-find"
 #define OPEN_TERMINAL "video-display"
-#define OPEN_FILEMANAGER "rodent_logo"
+#define OPEN_FILEMANAGER "star-new"
 #define DIFFERENCES "differences"
-#define GO_HOME "home"
-#define DRIVE_HARDDISK "drive-harddisk-symbolic"
+#define GO_HOME "user-home"
+#define DRIVE_HARDDISK "media-removable"
 #define TRASH_ICON "user-trash"
 
 // pathbar.hh
