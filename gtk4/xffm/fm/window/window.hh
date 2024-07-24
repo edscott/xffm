@@ -3,13 +3,148 @@
 #define NOTEBOOK_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkWidget *, guint, gpointer)) X)
 
 namespace xf {
+  class Util {
+    public:
+    static 
+    GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
+      auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
+      auto t =g_strconcat("<span color=\"yellow\"><i>", tooltipText, "</i></span>", NULL);
+      gtk_widget_set_tooltip_markup (GTK_WIDGET(button),t);
+      g_free(t);
+      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+      gtk_button_set_has_frame(button, FALSE);
+      return button;
+    }
+    static 
+    GtkTextView *newTextView(void){
+        auto output = GTK_TEXT_VIEW(gtk_text_view_new ());
+        gtk_text_view_set_monospace (output, TRUE);
+        gtk_widget_set_can_focus(GTK_WIDGET(output), FALSE);
+        gtk_text_view_set_wrap_mode (output, GTK_WRAP_WORD);
+        gtk_text_view_set_cursor_visible (output, FALSE);
+        gtk_widget_add_css_class (GTK_WIDGET(output), "lpterm" );
+        //gtk_container_set_border_width (GTK_CONTAINER (output), 2);
+        return output;
+    }
+  };
 
-class MainWindow  {
+  class Vpane{
+    private:
+    GtkPaned *vpane_;
+    GtkTextView *output_;
+    GtkScrolledWindow *topScrolledWindow_;
+    GtkScrolledWindow *treeScrolledWindow_;
+    GtkScrolledWindow *bottomScrolledWindow_; 
+
+    public:
+    GtkPaned *vpane(void){return vpane_;}
+    GtkTextView *output(void){return output_;}
+    GtkScrolledWindow *treeScrolledWindow(void){return treeScrolledWindow_;}
+    GtkScrolledWindow *topScrolledWindow(void){return topScrolledWindow_;}
+    GtkScrolledWindow *bottomScrolledWindow(void){return bottomScrolledWindow_;}
+
+    Vpane(void){
+        vpane_ = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
+        gtk_paned_set_wide_handle (vpane_, TRUE);
+        //gtk_paned_set_wide_handle (vpane_, FALSE);
+        topScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
+        treeScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
+        
+        bottomScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
+        output_ = Util::newTextView();
+
+         g_object_set_data(G_OBJECT(vpane_), "diagnostics", output_);
+         g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
+
+        auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
+        compat<bool>::boxPack0 (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
+        gtk_paned_set_start_child (vpane_, GTK_WIDGET(vbox));
+       
+        //gtk_paned_pack1 (vpane_, GTK_WIDGET(topScrolledWindow_), FALSE, TRUE);
+        
+        gtk_paned_set_end_child (vpane_, GTK_WIDGET(bottomScrolledWindow_));
+        g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
+        gtk_scrolled_window_set_child(bottomScrolledWindow_, GTK_WIDGET(output_));
+        
+        //gtk_widget_show_all(GTK_WIDGET(vpane_));
+        return ;
+    }
+
+  };
+
+  class FMpage: public Vpane {
+    private:
+      gchar *path_=NULL;
+    public:
+      FMpage(void){
+      }
+      ~FMpage(){
+        g_free(path_);
+      }
+
+      GtkBox *mkPageBox(const gchar *path){
+        path_ = g_strdup(path);
+        gchar *tag = path_? g_path_get_basename(path_):g_strdup(".");
+        auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
+        auto *label = gtk_label_new(tag);
+        g_free(tag);
+        gtk_widget_set_hexpand(GTK_WIDGET(box), TRUE);
+
+        compat<bool>::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
+        compat<bool>::boxPack0(box, GTK_WIDGET(label),  TRUE, TRUE, 0);
+
+        return box;
+      }
+    private:
+
+
+  };
+
+  class EmptyButtonBox{
+    public:
+    GtkBox *mkVbuttonBox(){
+      return GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));  
+    }
+  };
+  class FMbuttonBox{
+    private:
+      GtkBox *vButtonBox_;
+    public:
+    GtkBox *mkVbuttonBox(){
+ 
+        auto hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(hbox), FALSE);
+        vButtonBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));
+        
+        gtk_widget_add_css_class (GTK_WIDGET(vButtonBox_), "vbox" );
+
+
+        gtk_widget_set_hexpand(GTK_WIDGET(vButtonBox_), TRUE);
+
+        const char *bIcon[]={SEARCH, OPEN_TERMINAL, OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, GLIST_ADD, GLIST_REMOVE, NULL};
+        const char *bText[]={_("Search"),_("Open terminal"),_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_("Reset image size"),_("Reset image size"), NULL};
+        auto q = bText;
+        for (auto p=bIcon; p && *p; p++, q++){
+          auto button = Util::newButton(*p, *q);
+          compat<bool>::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
+        }
+        
+        compat<bool>::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
+
+        return hbox;
+    }
+  };
+
+
+template <class VbuttonClass, class PageClass> 
+class MainWindow: public VbuttonClass, public PageClass {
+  using mainWindow_c = MainWindow<VbuttonClass, PageClass>;
+// We need to inherit VbuttonClass so as to instantiate object.
 private:
     GList *pageList_=NULL;
     GtkWindow *mainWindow_ = NULL;
     GtkNotebook *notebook_;
-    GtkBox *vButtonBox_;
     double windowH_ = 400;    
     double windowW_ = 400*1.618;    
     GList *run_button_list=NULL;
@@ -92,17 +227,15 @@ private:
     }
 
     void addPage(const gchar *path){
-      gchar *tag = path? g_path_get_basename(path):g_strdup(".");
-
-      GtkWidget *child = gtk_label_new(tag);// XXX temporary
+      
+      GtkBox *child = this->mkPageBox(path);
       
       pageList_ = g_list_append(pageList_, child);
       auto label = tabLabel(path, (void *)this);
       auto close = g_object_get_data(G_OBJECT(label), "close");
       g_object_set_data(G_OBJECT(child), "close", close);
 
-      auto num = gtk_notebook_append_page (notebook_, child, label);
-      g_free(tag);
+      auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
       if (num >= 0) {
         while (num != gtk_notebook_get_current_page(notebook_)) 
           gtk_notebook_next_page(notebook_);
@@ -162,15 +295,6 @@ private:
 */
     }
 
-    GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
-      auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
-      auto t =g_strconcat("<span color=\"yellow\"><i>", tooltipText, "</i></span>", NULL);
-      gtk_widget_set_tooltip_markup (GTK_WIDGET(button),t);
-      g_free(t);
-      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
-      gtk_button_set_has_frame(button, FALSE);
-      return button;
-    }
 
     GtkWidget *tabLabel(const gchar *path, void *data){
       MainWindow *w = (MainWindow *)data;
@@ -181,7 +305,7 @@ private:
       GtkWidget *label = gtk_label_new(tag);
       compat<bool>::boxPack0(tabBox, label,  FALSE, FALSE, 0);
 
-      auto close = newButton(WINDOW_CLOSE, _("Close"));
+      auto close = Util::newButton(WINDOW_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(close), "clicked", 
               BUTTON_CALLBACK(w->on_zap_page), data);    
       g_object_set_data(G_OBJECT(tabBox), "close", close);
@@ -190,44 +314,6 @@ private:
       return GTK_WIDGET(tabBox);
     }
     
-    GtkBox *mkVbuttonBox(){
-        auto hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_widget_set_hexpand(GTK_WIDGET(hbox), FALSE);
-        vButtonBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));
-        gtk_widget_set_hexpand(GTK_WIDGET(vButtonBox_), TRUE);
-
-        const char *bIcon[]={SEARCH, OPEN_TERMINAL, OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, GLIST_ADD, GLIST_REMOVE, NULL};
-        const char *bText[]={_("Search"),_("Open terminal"),_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_("Reset image size"),_("Reset image size"), NULL};
-        auto q = bText;
-        for (auto p=bIcon; p && *p; p++, q++){
-          auto button = newButton(*p, *q);
-          compat<bool>::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
-        }
-        
-        compat<bool>::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
-/*
- // Color setting deprecated in 4.10, no viable replacement found (doesn't mean there isn't one).
-        GtkStyleContext *style_context = gtk_widget_get_style_context (GTK_WIDGET(vButtonBox_));
-        gtk_style_context_add_class(style_context, GTK_STYLE_CLASS_BUTTON );
-        GtkCssProvider *css_provider = gtk_css_provider_new();
-        gtk_css_provider_load_from_string (css_provider, 
- //     background-color: #dcdad5;
-    "\
-    box * {\
-      background-color: #888888;\
-      border-width: 0px;\
-      border-radius: 0px;\
-      border-color: transparent;\
-    }\
-    ");
-         {
-            gtk_style_context_add_provider (style_context, GTK_STYLE_PROVIDER(css_provider),
-                                    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-        }
-*/
-
-        return hbox;
-    }
 
     void mkNotebook(){
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
@@ -244,11 +330,11 @@ private:
       auto actionWidget = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       auto tabButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
-      auto newTabButton = newButton("list-add", _("New Tab"));
+      auto newTabButton = Util::newButton("list-add", _("New Tab"));
 
 
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
-              BUTTON_CALLBACK(MainWindow::on_new_page), (void *)this);    
+              BUTTON_CALLBACK(mainWindow_c::on_new_page), (void *)this);    
       g_signal_connect (notebook_, "switch-page", 
                 NOTEBOOK_CALLBACK (on_switch_page), (void *)this);
       
@@ -279,7 +365,8 @@ private:
       mkNotebook();
       compat<bool>::boxPack0(hbox1, GTK_WIDGET(notebook_),  TRUE, TRUE, 0);
 
-      auto hbox2 = mkVbuttonBox();    
+      auto hbox2 = this->mkVbuttonBox();  // More precise.  
+//      auto hbox2 = VbuttonClass::mkVbuttonBox(); // This works too, but less clear.   
       compat<bool>::boxPack0(mainBox, GTK_WIDGET(hbox2),  FALSE, FALSE, 0);
 
 

@@ -77,7 +77,8 @@ main (int argc, char *argv[]) {
 
   // Run in foreground if "-f"  given:
   if (!detachProcess(argv[1])) argv[1] = argv[2];
-      
+
+  
   gchar *path = getPath(argv[1]);
   auto fm = new(xf::Fm)(path);
   
