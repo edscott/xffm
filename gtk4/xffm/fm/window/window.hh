@@ -6,6 +6,12 @@ namespace xf {
   class Util {
     public:
     static 
+    void packEnd(GtkBox *box, GtkWidget *widget){
+        GtkBox *vbox =    GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        compat<bool>::boxPack0 (box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
+        compat<bool>::boxPack0 (vbox, GTK_WIDGET(widget), FALSE, FALSE, 0);
+    }
+    static 
     GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
       auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
       auto t =g_strconcat("<span color=\"yellow\"><i>", tooltipText, "</i></span>", NULL);
@@ -25,6 +31,62 @@ namespace xf {
         gtk_widget_add_css_class (GTK_WIDGET(output), "lpterm" );
         //gtk_container_set_border_width (GTK_CONTAINER (output), 2);
         return output;
+    }
+  };
+
+  class Prompt {
+    private:
+    GtkBox *promptBox_;
+    GtkButton *promptButton_;
+    GtkTextView *input_;
+    GtkButton *clearButton_;
+    GtkScale *sizeScale_;
+    
+    GtkTextView *createInput(void){
+        GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());
+        gtk_text_view_set_pixels_above_lines (input, 10);
+        gtk_text_view_set_monospace (input, TRUE);
+        gtk_text_view_set_editable (input, TRUE);
+        gtk_text_view_set_cursor_visible (input, TRUE);
+        gtk_text_view_place_cursor_onscreen(input);
+        gtk_text_view_set_wrap_mode (input, GTK_WRAP_CHAR);
+        gtk_widget_set_can_focus(GTK_WIDGET(input), TRUE);
+        return input;
+    }
+#define DEFAULT_FIXED_FONT_SIZE 13
+    GtkScale *newSizeScale(const gchar *tooltipText){
+        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 6.0, 24.0, 6.0));
+        // Load saved value fron xffm+/settings.ini file (if any)
+        //gint size = Settings<Type>::getInteger("xfterm", "fontSize");//FIXME
+        gint size = -1;
+        if (size < 0) size = DEFAULT_FIXED_FONT_SIZE;
+        gtk_range_set_value(GTK_RANGE(size_scale), size);
+        gtk_range_set_increments (GTK_RANGE(size_scale), 2.0, 6.0);
+        gtk_widget_set_size_request (GTK_WIDGET(size_scale),75,-1);
+        gtk_scale_set_value_pos (size_scale,GTK_POS_RIGHT);
+        gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
+        gtk_widget_set_tooltip_markup (GTK_WIDGET(size_scale),tooltipText);        
+        return size_scale;
+    }
+
+    public:
+    GtkBox *promptBox(void){ return promptBox_;}
+    Prompt(void) {
+        promptBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
+        clearButton_ =  Util::newButton(EDIT_CLEAR, _("Clear Log"));
+        input_ = createInput(); 
+        sizeScale_ = newSizeScale(_("Terminal font"));
+        promptButton_ = Util::newButton(OPEN_TERMINAL, _("Open terminal"));
+        
+        compat<bool>::boxPack0 (promptBox_, GTK_WIDGET(promptButton_), FALSE, FALSE, 0);
+
+        auto label = gtk_label_new("foobar");
+        compat<bool>::boxPack0 (promptBox_, GTK_WIDGET(label), TRUE, TRUE, 0);
+        compat<bool>::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
+
+        Util::packEnd (promptBox_, GTK_WIDGET(sizeScale_));
+        Util::packEnd (promptBox_, GTK_WIDGET(clearButton_));
     }
   };
 
@@ -53,7 +115,8 @@ namespace xf {
         bottomScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util::newTextView();
 
-         g_object_set_data(G_OBJECT(vpane_), "diagnostics", output_);
+         // deprecated g_object_set_data(G_OBJECT(vpane_), "diagnostics", output_);
+         g_object_set_data(G_OBJECT(vpane_), "output", output_);
          g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
 
         auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
@@ -61,21 +124,25 @@ namespace xf {
         compat<bool>::boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
         gtk_paned_set_start_child (vpane_, GTK_WIDGET(vbox));
        
-        //gtk_paned_pack1 (vpane_, GTK_WIDGET(topScrolledWindow_), FALSE, TRUE);
         
         gtk_paned_set_end_child (vpane_, GTK_WIDGET(bottomScrolledWindow_));
         g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
         gtk_scrolled_window_set_child(bottomScrolledWindow_, GTK_WIDGET(output_));
         
-        //gtk_widget_show_all(GTK_WIDGET(vpane_));
         return ;
     }
 
   };
 
-  class FMpage: public Vpane {
+  class FMpage {
     private:
       gchar *path_=NULL;
+      // We keep reference to Vpane object,
+      // eventhough it will change. Actual reference
+      // will be asociated to page box.
+      // Same for Prompt.
+      Vpane *vpane_object_;
+      Prompt *prompt_object_;
     public:
       FMpage(void){
       }
@@ -90,12 +157,17 @@ namespace xf {
         auto *label = gtk_label_new(tag);
         g_free(tag);
         gtk_widget_set_hexpand(GTK_WIDGET(box), TRUE);
+        vpane_object_ = new(Vpane);
+        prompt_object_ = new(Prompt);
+        g_object_set_data(G_OBJECT(box), "vpane_object", vpane_object_);
+        g_object_set_data(G_OBJECT(box), "prompt_object", prompt_object_);
 
-        compat<bool>::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
-        compat<bool>::boxPack0(box, GTK_WIDGET(label),  TRUE, TRUE, 0);
+        compat<bool>::boxPack0(box, GTK_WIDGET(vpane_object_->vpane()),  TRUE, TRUE, 0);
+        compat<bool>::boxPack0(box, GTK_WIDGET(prompt_object_->promptBox()),  FALSE, FALSE, 0);
 
         return box;
       }
+
     private:
 
 
@@ -122,8 +194,10 @@ namespace xf {
 
         gtk_widget_set_hexpand(GTK_WIDGET(vButtonBox_), TRUE);
 
-        const char *bIcon[]={SEARCH, OPEN_TERMINAL, OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, GLIST_ADD, GLIST_REMOVE, NULL};
-        const char *bText[]={_("Search"),_("Open terminal"),_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_("Reset image size"),_("Reset image size"), NULL};
+ //       const char *bIcon[]={SEARCH, OPEN_TERMINAL, OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, GLIST_ADD, GLIST_REMOVE, NULL};
+        const char *bIcon[]={SEARCH, OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, GLIST_ADD, GLIST_REMOVE, NULL};
+        const char *bText[]={_("Search"),_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_("Reset image size"),_("Reset image size"), NULL};
+//        const char *bText[]={_("Search"),_("Open terminal"),_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_("Reset image size"),_("Reset image size"), NULL};
         auto q = bText;
         for (auto p=bIcon; p && *p; p++, q++){
           auto button = Util::newButton(*p, *q);
@@ -150,14 +224,16 @@ private:
     GList *run_button_list=NULL;
     pthread_mutex_t *rbl_mutex; // run button list mutex
 
+
     GtkWidget *longPressImage_=NULL;
     GHashTable *pageHash_=NULL;
 // Constructor  
 public:
     GtkNotebook *getNotebook(void) {return notebook_;}
     MainWindow(const gchar *path){
-        createWindow();        
-        // for page: startDeviceMonitor();
+        createWindow(); 
+        addKeyController(GTK_WIDGET(mainWindow_));
+          // for page: startDeviceMonitor();
         auto box = contentBox(path);
         gtk_window_set_child(mainWindow_, box);
         addPage(path);
@@ -189,14 +265,65 @@ public:
         TRACE("new page=%d\n", new_page);
         w->switchPage(new_page);
     }
+    static gboolean
+//    on_keypress (GtkWidget *window, GdkEventKey * event, gpointer data){
+    on_keypress (GtkEventControllerKey* self,
+          guint keyval,
+          guint keycode,
+          GdkModifierType state,
+          gpointer data){
+        DBG("window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
+            keyval, keyval, keycode, keycode, state, data);
+        gint ignore[]={
+            GDK_KEY_Control_L,
+            GDK_KEY_Control_R,
+            GDK_KEY_Shift_L,
+            GDK_KEY_Shift_R,
+            GDK_KEY_Shift_Lock,
+            GDK_KEY_Caps_Lock,
+            GDK_KEY_Meta_L,
+            GDK_KEY_Meta_R,
+            GDK_KEY_Alt_L,
+            GDK_KEY_Alt_R,
+            GDK_KEY_Super_L,
+            GDK_KEY_Super_R,
+            GDK_KEY_Hyper_L,
+            GDK_KEY_Hyper_R,
+            GDK_KEY_ISO_Lock,
+            GDK_KEY_ISO_Level2_Latch,
+            GDK_KEY_ISO_Level3_Shift,
+            GDK_KEY_ISO_Level3_Latch,
+            GDK_KEY_ISO_Level3_Lock,
+            GDK_KEY_ISO_Level5_Shift,
+            GDK_KEY_ISO_Level5_Latch,
+            GDK_KEY_ISO_Level5_Lock,
+            0
+        };
+
+        gint i;
+        for (i=0; ignore[i]; i++) {
+            if(keyval ==  ignore[i]) {
+                DBG("window_keyboard_event: key ignored\n");
+                return TRUE;
+            }
+        }
+        return TRUE;
+    }
 
 private:
+    void addKeyController(GtkWidget *widget){
+        auto keyController = gtk_event_controller_key_new();
+        gtk_widget_add_controller(GTK_WIDGET(widget), keyController);
+        g_signal_connect (G_OBJECT (keyController), "key-pressed", 
+            G_CALLBACK (this->on_keypress), (void *)this);
+    }
 
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
         g_object_set_data(G_OBJECT(mainWindow_), "windowObject", (void *)this);
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
 
+//            KEY_EVENT_CALLBACK (this->on_keypress), (void *)this);
 
    
   //      g_signal_connect (G_OBJECT (mainWindow_), "size-allocate", 
@@ -240,6 +367,7 @@ private:
         while (num != gtk_notebook_get_current_page(notebook_)) 
           gtk_notebook_next_page(notebook_);
       }
+     
     }
 
     void zapPage(){
@@ -251,8 +379,13 @@ private:
         gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
         exit(0);
       }
-        
+      // Get VPane object from child widget (box)
+      Vpane *vpane_object =  (Vpane *)g_object_get_data(G_OBJECT(child), "vpane_object");
+      Prompt *prompt_object =  (Prompt *)g_object_get_data(G_OBJECT(child), "prompt_object");
       gtk_notebook_remove_page(notebook_, num);
+      if (vpane_object) delete(vpane_object);
+      if (prompt_object) delete(prompt_object);
+      
     }
 
     void switchPage (gint new_page) {
@@ -317,6 +450,7 @@ private:
 
     void mkNotebook(){
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
+      addKeyController(GTK_WIDGET(notebook_));
       //g_object_set_data(G_OBJECT(this->menuButton_), "notebook_p", (void *)this);
       //pageHash_ =g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, NULL);
       gtk_notebook_set_scrollable (notebook_, TRUE);

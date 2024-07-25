@@ -44,7 +44,7 @@ private:
     }\
     .lpterm {\
       background-color: #000000;\
-      foreground-color: #eeeeee;\
+      color: #eeeeee;\
     }\
     ");
     gtk_style_context_add_provider_for_display(gdk_display_get_default(),GTK_STYLE_PROVIDER(css_provider),GTK_STYLE_PROVIDER_PRIORITY_USER); 
