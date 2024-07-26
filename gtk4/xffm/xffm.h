@@ -51,7 +51,7 @@
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
 
 
-# include "common/compat.hh"
+# include "util.hh"
 
 
 #endif

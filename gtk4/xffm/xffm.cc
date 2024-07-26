@@ -7,6 +7,7 @@
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 
+
 static void setupBindText(void){
 #ifdef ENABLE_NLS
     /* this binds domain: */

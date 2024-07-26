@@ -1,7 +1,7 @@
 #ifndef FM_HH
 #define FM_HH
 
-#include "window/window.hh"
+#include "window.hh"
 
 namespace xf {
 //template <class Type> 

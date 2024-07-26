@@ -1,7 +1,5 @@
 
-#add_subdirectory(fm)
 add_subdirectory(icons)
-add_subdirectory(xml)
 
 add_executable(xffm xffm.cc)
 #target_link_libraries(ProjectCESGI PRIVATE PkgConfig::GTK4)
@@ -18,7 +16,7 @@ target_link_libraries(xffm
     ${LIBMAGIC_LIBRARIES}
     ${THREAD_LIBRARIES})
 
-execute_process(COMMAND ln -sf xffm xfgetpass WORKING_DIRECTORY xffm)
+#execute_process(COMMAND ln -sf xffm xfgetpass WORKING_DIRECTORY xffm)
 
 
 install(TARGETS xffm RUNTIME DESTINATION bin)
