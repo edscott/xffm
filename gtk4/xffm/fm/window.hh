@@ -61,13 +61,12 @@ public:
         w->switchPage(new_page);
     }
     static gboolean
-//    on_keypress (GtkWidget *window, GdkEventKey * event, gpointer data){
     on_keypress (GtkEventControllerKey* self,
           guint keyval,
           guint keycode,
           GdkModifierType state,
           gpointer data){
-        DBG("window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
+        TRACE("window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
             keyval, keyval, keycode, keycode, state, data);
         gint ignore[]={
             GDK_KEY_Control_L,
@@ -99,10 +98,10 @@ public:
         for (i=0; ignore[i]; i++) {
             if(keyval ==  ignore[i]) {
                 DBG("window_keyboard_event: key ignored\n");
-                return TRUE;
+                return FALSE;
             }
         }
-        return TRUE;
+        return FALSE;
     }
 
 private:

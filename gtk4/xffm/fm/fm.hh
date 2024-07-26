@@ -42,9 +42,17 @@ private:
       border-radius: 0px;\
       border-color: transparent;\
     }\
-    .lpterm {\
-      background-color: #000000;\
-      color: #eeeeee;\
+    .output {\
+      background-color: #bbbbbb;\
+      color: #111111;\
+    }\
+    .input {\
+      background-color: #dddddd;\
+      color: #000000;\
+    }\
+    .prompt {\
+      background-color: #333333;\
+      color: #00ff00;\
     }\
     ");
     gtk_style_context_add_provider_for_display(gdk_display_get_default(),GTK_STYLE_PROVIDER(css_provider),GTK_STYLE_PROVIDER_PRIORITY_USER); 

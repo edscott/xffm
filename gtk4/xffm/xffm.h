@@ -50,6 +50,7 @@
 # undef DBG_
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
 
+#define DEFAULT_FIXED_FONT_SIZE 12
 
 # include "util.hh"
 

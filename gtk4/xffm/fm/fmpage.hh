@@ -71,14 +71,17 @@ namespace xf {
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
         auto *label = gtk_label_new(tag);
         g_free(tag);
-        gtk_widget_set_hexpand(GTK_WIDGET(box), TRUE);
+        gtk_widget_set_vexpand(GTK_WIDGET(box), TRUE);
         vpane_object_ = new(Vpane);
         prompt_object_ = new(Prompt);
         g_object_set_data(G_OBJECT(box), "vpane_object", vpane_object_);
         g_object_set_data(G_OBJECT(box), "prompt_object", prompt_object_);
+        auto output = vpane_object_->output();
+        auto input = prompt_object_->input();
+        g_object_set_data(G_OBJECT(input), "output", output);
 
         Util::boxPack0(box, GTK_WIDGET(vpane_object_->vpane()),  TRUE, TRUE, 0);
-        Util::boxPack0(box, GTK_WIDGET(prompt_object_->promptBox()),  FALSE, FALSE, 0);
+        Util::boxPack0(box, GTK_WIDGET(prompt_object_->promptBox()),  FALSE, TRUE, 0);
 
         return box;
       }
