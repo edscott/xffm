@@ -24,7 +24,8 @@ private:
     GHashTable *pageHash_=NULL;
 // Constructor  
 public:
-    GtkNotebook *getNotebook(void) {return notebook_;}
+    GtkNotebook *notebook(void) {return notebook_;}
+//    GtkNotebook *getNotebook(void) {return notebook_;}
     MainWindow(const gchar *path){
         createWindow(); 
         addKeyController(GTK_WIDGET(mainWindow_));
@@ -66,40 +67,16 @@ public:
           guint keycode,
           GdkModifierType state,
           gpointer data){
-        TRACE("window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
-            keyval, keyval, keycode, keycode, state, data);
-        gint ignore[]={
-            GDK_KEY_Control_L,
-            GDK_KEY_Control_R,
-            GDK_KEY_Shift_L,
-            GDK_KEY_Shift_R,
-            GDK_KEY_Shift_Lock,
-            GDK_KEY_Caps_Lock,
-            GDK_KEY_Meta_L,
-            GDK_KEY_Meta_R,
-            GDK_KEY_Alt_L,
-            GDK_KEY_Alt_R,
-            GDK_KEY_Super_L,
-            GDK_KEY_Super_R,
-            GDK_KEY_Hyper_L,
-            GDK_KEY_Hyper_R,
-            GDK_KEY_ISO_Lock,
-            GDK_KEY_ISO_Level2_Latch,
-            GDK_KEY_ISO_Level3_Shift,
-            GDK_KEY_ISO_Level3_Latch,
-            GDK_KEY_ISO_Level3_Lock,
-            GDK_KEY_ISO_Level5_Shift,
-            GDK_KEY_ISO_Level5_Latch,
-            GDK_KEY_ISO_Level5_Lock,
-            0
-        };
-
-        gint i;
-        for (i=0; ignore[i]; i++) {
-            if(keyval ==  ignore[i]) {
-                DBG("window_keyboard_event: key ignored\n");
-                return FALSE;
-            }
+        
+        MainWindow *w = (MainWindow *)data;
+        auto notebook = GTK_NOTEBOOK(w->notebook());
+        auto num = gtk_notebook_get_current_page(notebook);
+        auto child = gtk_notebook_get_nth_page(notebook, num); //page box
+        auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
+        bool termKey = (keyval >= GDK_KEY_space && keyval <= GDK_KEY_asciitilde);
+        if (!gtk_widget_is_focus(input)) {
+          gtk_widget_grab_focus(input);
+          if (termKey) Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
         }
         return FALSE;
     }
@@ -115,6 +92,7 @@ private:
 
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
+        MainWidget = GTK_WIDGET(mainWindow_);
         g_object_set_data(G_OBJECT(mainWindow_), "windowObject", (void *)this);
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         return;
@@ -150,6 +128,9 @@ private:
       g_object_set_data(G_OBJECT(child), "close", close);
 
       auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
+      gtk_widget_realize(GTK_WIDGET(child));
+      Util::flushGTK();
+      
       if (num >= 0) {
         while (num != gtk_notebook_get_current_page(notebook_)) 
           gtk_notebook_next_page(notebook_);
@@ -158,8 +139,8 @@ private:
     }
 
     void zapPage(){
-      int num = gtk_notebook_get_current_page(notebook_);
-      GtkWidget *child = gtk_notebook_get_nth_page (notebook_, num);
+      DBG("zapPage...\n");
+      GtkWidget *child = Util::getCurrentChild();
       GList *item = g_list_find(pageList_, child);
       pageList_ = g_list_remove(pageList_, child);
       if (g_list_length(pageList_) == 0){
@@ -169,7 +150,7 @@ private:
       // Get VPane object from child widget (box)
       Vpane *vpane_object =  (Vpane *)g_object_get_data(G_OBJECT(child), "vpane_object");
       Prompt *prompt_object =  (Prompt *)g_object_get_data(G_OBJECT(child), "prompt_object");
-      gtk_notebook_remove_page(notebook_, num);
+      gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
       if (vpane_object) delete(vpane_object);
       if (prompt_object) delete(prompt_object);
       
@@ -211,6 +192,7 @@ private:
 
     void mkNotebook(){
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
+      g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
       gtk_notebook_set_scrollable (notebook_, TRUE);
 
       longPressImage_ = gtk_label_new("");

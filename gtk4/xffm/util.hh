@@ -1,9 +1,176 @@
 #ifndef XF_UTIL_HH
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
+
 namespace xf {
   class Util {
+    private:
+
     public:
+    static char *inputText(GtkTextView *input){
+        auto buffer = gtk_text_view_get_buffer(input);
+        GtkTextIter  start, end;
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        auto text = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
+        if (strchr(text, '$')) *strchr(text, '$')=' ';
+        g_strstrip(text);   
+        return text;
+    }
+    static void historyDown(GtkTextView *input){
+      if (where_history() == 0) history_set_pos(history_length);
+      auto h = next_history();
+      clear_text(input);
+      print(input, g_strdup_printf("$ %s", h?h->line:""));
+    }
+    static void historyUp(GtkTextView *input){
+      if (where_history() == 0) history_set_pos(history_length);
+      auto h = previous_history();
+      clear_text(input);
+      print(input, g_strdup_printf("$ %s", h?h->line:""));
+    }
+
+    static bool
+    addHistory(const char *text, GtkTextView *input){
+      errno=0;
+      add_history(text);
+      gchar *dirname = g_path_get_dirname(historyFile);
+      if (!g_file_test(dirname, G_FILE_TEST_IS_DIR)){
+        if (mkdir(dirname, 0700) != 0 ){
+          DBG("addHistory(): cannot create \"%s\"\n", historyFile);
+          return false;
+        }
+      }
+      g_free(dirname);
+      if (!g_file_test(historyFile, G_FILE_TEST_EXISTS)) {
+        if (write_history(historyFile) != 0){
+            DBG("failed write_history to \"%s\": %s\n", historyFile, strerror(errno));
+        }
+      } else {
+            //DBG("\"%s\": exists\n", historyFile);
+
+        if (append_history(1, historyFile) != 0){
+            DBG("failed append to \"%s\": %s\n", historyFile, strerror(errno));
+            return false;
+        }       
+        g_object_set_data(G_OBJECT(input), "historyOffset", GINT_TO_POINTER(history_length));
+      }
+      return true;
+    }
+      
+    // List histories
+/*    static gchar *
+    showHistory (void) {
+      char *t = NULL; 
+      auto history = g_strconcat(XF_HISTORY, NULL);
+
+FILE *historyFile = fopen (history, "r");
+        if(historyFile) {
+            gchar line[256];
+            memset (line, 0, 256);
+            while(fgets (line, 255, historyFile) && !feof (historyFile)) {
+              if (!strchr (line, '\n')) line[255] = '\n';
+              concat(&t, line);
+            }
+            fclose (historyFile);
+        }           
+        return t;
+    }*/
+
+    static bool
+    cd (const gchar **v) {   
+        if (v[1] == NULL){
+          return setWorkdir(g_get_home_dir());
+        }
+        // tilde and $HOME
+        if (strncmp(v[1], "~", strlen("~")) == 0){
+          const char *part2 = v[1] + strlen("~");
+          char *dir = g_strconcat(g_get_home_dir(), part2, NULL);
+          auto retval = setWorkdir(dir);
+          g_free(dir);
+          return retval;
+        }
+        if (strncmp(v[1], "$HOME", strlen("$HOME")) == 0){
+          const char *part2 = v[1] + strlen("$HOME");
+          char *dir = g_strconcat(g_get_home_dir(),  part2, NULL);
+          auto retval = setWorkdir(dir);
+          g_free(dir);
+          return retval;
+        }
+
+        // must allow relative paths too.
+        if (!g_path_is_absolute(v[1])){
+          //const gchar *wd = getWorkdir();
+          //bool isRoot = (strcmp(wd, G_DIR_SEPARATOR_S)==0);
+          char *dir =  g_strconcat(getWorkdir(), G_DIR_SEPARATOR_S, v[1], NULL);
+          gchar *rpath = realpath(dir, NULL);
+          g_free(dir);
+          if (!rpath) return false;
+
+          if(!g_file_test (rpath, G_FILE_TEST_IS_DIR)) {
+            g_free(rpath);
+            return false; 
+          }
+          auto retval = setWorkdir(rpath);
+          g_free(rpath);
+          return retval;
+        }
+        // absolute path
+
+        gchar *rpath = realpath(v[1], NULL);
+        if (!rpath) return false;
+        
+
+        auto retval = setWorkdir(rpath);
+        g_free(rpath);
+
+        return retval;
+    }
+
+    static char **getVector(const char *text, const char *token){
+      auto string =g_strdup(text);
+      g_strstrip(string);     
+      //DBG( "getVector():string=%s\n", string);
+      char **vector;
+      if (!strstr(string, token)){
+        vector = (char **)calloc(2,sizeof(char *));
+        vector[0] = g_strdup(string);
+      } else {
+        vector = g_strsplit(string,token,-1);
+      }
+      g_free(string);
+      //for (char **p=vector; p && *p && p->id p++)  DBG( "getVector():p=%s\n",*p);
+      return vector;
+    }
+
+    static GtkWidget *getCurrentChild(void){
+      //DBG("getCurrentChild...\n");
+      if (!MainWidget) return NULL;
+      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+      int num = gtk_notebook_get_current_page(notebook);
+      GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
+      return child;
+    }
+    static const gchar *getWorkdir(void){
+      //DBG("getWorkdir...\n");
+      if (!MainWidget) return NULL;
+      auto child = getCurrentChild();
+      return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
+    }
+    static bool setWorkdir(const gchar *path){
+      //DBG("setWorkdir...\n");
+      if (!MainWidget) return false;
+      auto child = getCurrentChild();
+      auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
+      g_free(wd);
+      g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      return true;
+    }
+      
+    static void
+    flushGTK(void){
+      while (g_main_context_pending(NULL))
+        g_main_context_iteration(NULL, TRUE);
+    }
     static void
     concat(gchar **fullString, const gchar* addOn){
         if (!(*fullString)) {
@@ -84,6 +251,73 @@ namespace xf {
   }
   /////   print  //////
 
+    static void *
+    scroll_to_top(GtkTextView *textview){
+        if (!textview) return NULL;
+        // make sure all text is written before attempting scroll
+        flushGTK();
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        gtk_text_view_scroll_to_iter (textview,
+                              &start,
+                              0.0,
+                              FALSE,
+                              0.0, 0.0);        
+        flushGTK();
+        return NULL;
+    }
+
+    static void *
+    scroll_to_bottom(GtkTextView *textview){
+        if (!textview) return NULL;
+        // make sure all text is written before attempting scroll
+        flushGTK();
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
+        gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
+                                      TRUE, 1.0, 1.0);
+        //gtk_text_view_scroll_mark_onscreen (textview, mark);
+        flushGTK();
+        return NULL;
+    }
+
+    static gint
+    length_equal_string(const gchar *a, const gchar *b){
+        int length=0;
+        int i;
+        for (i = 0; i < strlen(a) && i < strlen(b); i++){
+            if (strncmp(a,b,i+1)) {
+                length=i;
+                break;
+            } else {
+                length=i+1;
+            }
+        }
+         TRACE("%s --- %s differ at length =%d\n", a,b,length);
+       return length;
+    }
+
+    static gchar *
+    get_tilde_dir(const gchar *token){
+        struct passwd *pw;
+        gchar *tilde_dir = NULL;
+        while((pw = getpwent ()) != NULL) {
+            gchar *id = g_strdup_printf("~%s/", pw->pw_name);
+            if (strncmp(token, id, strlen(id))==0){
+                tilde_dir = g_strdup_printf("%s/", pw->pw_dir);
+                g_free(id);
+                break;
+            }
+            g_free(id);
+        }
+        endpwent ();
+        return tilde_dir;
+    }
+
+
   static void clear_text(GtkTextView *textview){
       if (!textview) return;
       void *arg[]={(void *)textview, NULL};
@@ -98,6 +332,20 @@ namespace xf {
   static void print(GtkTextView *textview, gchar *string){
       print(textview, NULL, string);
   }
+
+
+    static void print_error(GtkTextView *textview, gchar *string){
+        if (!textview) return;
+        print_icon(textview, "dialog-error", "bold", string);
+    }
+
+    static void print_icon(GtkTextView *textview, 
+                              const gchar *iconname, 
+                              const gchar *tag, 
+                              gchar *string){
+    print(textview, string);
+  }
+
 /*
 
   static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
@@ -362,22 +610,6 @@ endloop:;
       g_free (a);
       return;
   }
-  static void *
-  scroll_to_bottom(GtkTextView *textview){
-      if (!textview) return NULL;
-      // make sure all text is written before attempting scroll
-      // necessary??? 
-      // while (gtk_events_pending()) gtk_main_iteration();
-      GtkTextIter start, end;
-      auto buffer = gtk_text_view_get_buffer (textview);
-      gtk_text_buffer_get_bounds (buffer, &start, &end);
-      auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
-      gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
-                                    TRUE, 1.0, 1.0);
-      //gtk_text_view_scroll_mark_onscreen (textview, mark);
-      gtk_text_buffer_delete_mark(buffer, mark);
-      return NULL;
-  }
   static gboolean
   context_function_f(gpointer data){
       void **arg = (void **)data;
@@ -641,6 +873,88 @@ endloop:;
       return NULL;
 
   }
+    static void *
+    show_text_buffer_f (void *data) {
+        if (!data) return GINT_TO_POINTER(-1);
+        auto arg=(void **)data;
+        auto vpane = GTK_PANED(arg[0]);
+        auto fullview =arg[1]; 
+        auto small = arg[2];
+        auto err = arg[3];
+        if(!vpane) {
+            ERROR("vpane is NULL\n");
+            return NULL;
+        }
+        TRACE("show_text_buffer_f:: err=%p\n", err);
+  /*      gint min, max;
+        g_object_get(G_OBJECT(vpane), "min-position", &min, NULL);
+        g_object_get(G_OBJECT(vpane), "max-position", &max, NULL);
+        if (fullview) {
+            TRACE("show_text_buffer_f()::fullview:setting vpane position to %d\n", min);
+            gtk_paned_set_position (vpane, min);
+            g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(min));
+            while (gtk_events_pending()) gtk_main_iteration();
+            TRACE("vpane position set to =%d\n", gtk_paned_get_position(vpane));
+            return NULL;
+        }*/
+
+        graphene_rect_t grect;
+        if (!gtk_widget_compute_bounds (GTK_WIDGET(vpane), MainWidget, &grect)){
+          fprintf(stderr, "show_text_buffer_f:: should not happen.\n");
+        }
+
+        //GtkAllocation allocation;
+        //gtk_widget_get_allocation(GTK_WIDGET(vpane), &allocation);
+        float vheight = grect.size.height;
+        gint height ;
+        if (small) height = 8*vheight/10;
+        else height = 2*vheight/3;
+        TRACE("vheight = %d, position = %d\n", vheight, gtk_paned_get_position(vpane));
+        if (gtk_paned_get_position(vpane) > height) {
+            TRACE("show_text_buffer_f()::setting vpane position to %d\n", height);
+            gtk_paned_set_position (vpane, height);
+            //g_object_set_data(G_OBJECT(vpane), "oldCurrent", GINT_TO_POINTER(height));
+        } else TRACE("not setting vpane position to %d\n", height);
+        
+
+        return NULL;
+    }
+ public:
+    static void showText(GtkTextView *textview){
+        if (!textview) return;
+        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+        void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
+        context_function(show_text_buffer_f, arg);
+    }
+    static gchar *
+    get_text_to_cursor (GtkTextView *textview) {
+        // get current text
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
+        gint cursor_position;
+        // cursor_position is a GtkTextBuffer internal property (read only)
+        g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
+        
+        gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
+        gtk_text_buffer_get_iter_at_offset (buffer, &end, cursor_position);
+        auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+        g_strchug(t);
+        TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
+        return t;
+    }
+    static gchar *
+    get_current_text (GtkTextView *textview) {
+        // get current text
+        GtkTextIter start, end;
+        auto buffer = gtk_text_view_get_buffer (textview);
+
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+        g_strchug(t);
+        return t;
+    }
+
+  private:  
 
 
   };

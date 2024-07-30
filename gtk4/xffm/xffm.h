@@ -4,6 +4,11 @@
  */
 #ifndef XFFM_H
 #define XFFM_H
+#include "config.h"
+#include "types.h"
+
+#include <readline/readline.h>
+#include  <readline/history.h>
 #include <memory>
 #include <cassert>
 
@@ -11,8 +16,6 @@
 # include <magic.h>
 #endif
 
-#include "config.h"
-#include "types.h"
 
 #define URIFILE "file://"
 #define USER_DIR                 g_get_home_dir()
@@ -51,8 +54,11 @@
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
 
 #define DEFAULT_FIXED_FONT_SIZE 12
+#define XF_HISTORY g_get_user_cache_dir(),G_DIR_SEPARATOR_S,"xffm+",G_DIR_SEPARATOR_S,"xf","_history"
 
-# include "util.hh"
-
+static const gchar *xffmProgram;
+static const gchar *xffindProgram;
+static const gchar *historyFile;
+GtkWidget *MainWidget;
 
 #endif

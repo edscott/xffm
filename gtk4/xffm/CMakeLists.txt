@@ -10,6 +10,7 @@ include_directories(
     "${GTK4_INCLUDE_DIRS}")
 
 target_link_libraries(xffm 
+    ${HISTORY_LIBRARIES}
     ${GTK4_LIBRARIES}
     ${X11_LIBRARIES}
     ${LIBZIP_LIBRARIES}

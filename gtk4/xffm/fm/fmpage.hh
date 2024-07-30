@@ -69,6 +69,15 @@ namespace xf {
         path_ = g_strdup(path);
         gchar *tag = path_? g_path_get_basename(path_):g_strdup(".");
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
+        
+        if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+          // too soon Util::setWorkdir(path);
+          g_object_set_data(G_OBJECT(box), "path", g_strdup(path));
+        } else {
+          g_object_set_data(G_OBJECT(box), "path", g_strdup(g_get_home_dir()));
+          // too soon Util::setWorkdir(g_get_home_dir());
+        }
+
         auto *label = gtk_label_new(tag);
         g_free(tag);
         gtk_widget_set_vexpand(GTK_WIDGET(box), TRUE);
@@ -78,10 +87,19 @@ namespace xf {
         g_object_set_data(G_OBJECT(box), "prompt_object", prompt_object_);
         auto output = vpane_object_->output();
         auto input = prompt_object_->input();
-        g_object_set_data(G_OBJECT(input), "output", output);
 
-        Util::boxPack0(box, GTK_WIDGET(vpane_object_->vpane()),  TRUE, TRUE, 0);
-        Util::boxPack0(box, GTK_WIDGET(prompt_object_->promptBox()),  FALSE, TRUE, 0);
+        g_object_set_data(G_OBJECT(input), "output", output);
+        g_object_set_data(G_OBJECT(output), "input", input);
+
+        g_object_set_data(G_OBJECT(box), "output", output);
+        g_object_set_data(G_OBJECT(box), "input", input);
+
+        auto promptBox = GTK_WIDGET(prompt_object_->promptBox());
+        auto vpane = GTK_WIDGET(vpane_object_->vpane());
+        Util::boxPack0(box, GTK_WIDGET(vpane),  TRUE, TRUE, 0);
+        Util::boxPack0(box, GTK_WIDGET(promptBox),  FALSE, TRUE, 0);
+
+        //gtk_widget_set_visible(promptBox, TRUE);
 
         return box;
       }
