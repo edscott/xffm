@@ -30,14 +30,14 @@ namespace xf {
           auto h = current_history();
           //DBG("Down found %s at %d\n", h->line, where_history());
           Util::clear_text(input);
-          Util::print(input, g_strdup_printf("$ %s", h->line));
+          Util::print(input, g_strdup_printf("%s", h->line));
         } else {
           history_set_pos(position);
         }
       } else {
         auto h = next_history();
         Util::clear_text(input);
-        Util::print(input, g_strdup_printf("$ %s", h?h->line:""));
+        Util::print(input, g_strdup_printf("%s", h?h->line:""));
       }
     }
     static void
@@ -65,12 +65,12 @@ namespace xf {
           auto h = current_history();
           //DBG("Up found %s at %d\n", h->line, where_history());
           Util::clear_text(input);
-          Util::print(input, g_strdup_printf("$ %s", h->line));
+          Util::print(input, g_strdup_printf("%s", h->line));
         }
       } else {
         auto h = previous_history();
         Util::clear_text(input);
-        Util::print(input, g_strdup_printf("$ %s", h?h->line:""));
+        Util::print(input, g_strdup_printf("%s", h?h->line:""));
       }
     }
     static char *
@@ -114,7 +114,7 @@ namespace xf {
         add_history(text);
         write_history(historyFile);
       } else {
-        DBG("add(\"%s\", \"%s\"): skipped\n",p->line, text);
+        //DBG("add(\"%s\", \"%s\"): skipped\n",p->line, text);
       }
       reset();
       return true;

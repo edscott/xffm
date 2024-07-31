@@ -870,22 +870,6 @@ endloop:;
         context_function(show_text_buffer_f, arg);
     }
     static gchar *
-    get_text_to_cursor (GtkTextView *textview) {
-        // get current text
-        GtkTextIter start, end;
-        auto buffer = gtk_text_view_get_buffer (textview);
-        gint cursor_position;
-        // cursor_position is a GtkTextBuffer internal property (read only)
-        g_object_get (G_OBJECT (buffer), "cursor-position", &cursor_position, NULL);
-        
-        gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
-        gtk_text_buffer_get_iter_at_offset (buffer, &end, cursor_position);
-        auto t = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
-        g_strchug(t);
-        TRACE ("lpterm_c::get_text_to_cursor: to cursor position=%d %s\n", cursor_position, t);
-        return t;
-    }
-    static gchar *
     get_current_text (GtkTextView *textview) {
         // get current text
         GtkTextIter start, end;

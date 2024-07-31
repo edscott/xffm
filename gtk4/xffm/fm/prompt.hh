@@ -19,12 +19,14 @@ namespace xf {
     Prompt(void) {
         promptBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
+        auto dollar = createPrompt();
         input_ = createInput(); 
-        Util::print(input_,g_strdup("$ "));
+
         auto keyController = gtk_event_controller_key_new();
         gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
         g_signal_connect (G_OBJECT (keyController), "key-pressed", 
             G_CALLBACK (this->on_keypress), (void *)input_);
+        Util::boxPack0 (promptBox_, GTK_WIDGET(dollar), FALSE, FALSE, 0);
         Util::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
     }
     private:
@@ -79,14 +81,39 @@ namespace xf {
       return true;
     }
     static bool
+    exe(GtkTextView *input, GtkTextView *output, const char *text){
+      if (!History::add(text)) DBG("History::add(%s) failed\n", text );
+      gchar **v = Util::getVector(text, " ");
+      char *inPath = g_find_program_in_path(v[0]);
+      if (!inPath && g_file_test(v[0], G_FILE_TEST_IS_EXECUTABLE)) inPath = realpath(v[0], NULL);
+      if (!inPath){
+        Util::print(output, g_strdup_printf("$ %s\n", v[0]));
+        Util::print(output, g_strdup_printf("%s: %s\n", v[0], _("Command not found.")));
+        g_strfreev(v);
+        return true;
+      }
+      Util::print(output, g_strdup_printf("$ %s", inPath));
+      for (int i=1; v[i]; i++){
+        Util::print(output, g_strdup_printf(" %s", v[i]));
+      }
+      Util::print(output, g_strdup_printf("\n"));
+        
+      Util::print(output, g_strdup_printf("// FIXME: execute command with run button.\n"));
+
+      g_free(inPath);
+      g_strfreev(v);
+      return true;
+    }
+    static bool
     com(GtkTextView *input, GtkTextView *output, guint keyval){
       if (keyval != GDK_KEY_Return && keyval != GDK_KEY_KP_Enter) return false;
       auto text = Util::inputText(input);
       if (pwd(output, text)) return true;
       if (history(output, text)) return true;
       if (cd(output, text)) return true;
+      exe(input, output, text); 
       g_free(text);
-      return false;
+      return true;
     }
     static 
     gboolean on_keypress(GtkEventControllerKey* self,
@@ -102,7 +129,7 @@ namespace xf {
         auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "output"));
 
         if(keyval ==  GDK_KEY_Tab){
-          BashCompletion::bash_completion(input, output, Util::getWorkdir());
+          Bash::complete(input, output);
           return TRUE;
         }
 
@@ -118,25 +145,27 @@ namespace xf {
 
         if (com(input, output, keyval)){
           Util::clear_text(input);
-          Util::print(input, g_strdup("$ "));
           return TRUE;
         }
 
         return FALSE;
     }
     
-    GtkTextView *createPrompt(void){
-        GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());
-        gtk_text_view_set_pixels_above_lines (input, 10);
-        gtk_text_view_set_monospace (input, TRUE);
-        gtk_text_view_set_editable (input, FALSE);
-        gtk_text_view_set_cursor_visible (input, FALSE);
-        //gtk_text_view_place_cursor_onscreen(input);
-        //gtk_text_view_set_wrap_mode (input, GTK_WRAP_CHAR);
-        gtk_widget_set_can_focus(GTK_WIDGET(input), FALSE);
-        gtk_widget_add_css_class (GTK_WIDGET(input), "input" );
+    GtkBox *createPrompt(void){
+        auto dollarBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(dollarBox), FALSE);
+        GtkTextView *dollar = GTK_TEXT_VIEW(gtk_text_view_new ());
+        gtk_widget_set_size_request(GTK_WIDGET(dollar), 20, -1);
+        Util::print(dollar, g_strdup("$"));
 
-        return input;
+        gtk_text_view_set_pixels_above_lines (dollar, 10);
+        gtk_text_view_set_monospace (dollar, TRUE);
+        gtk_text_view_set_editable (dollar, FALSE);
+        gtk_text_view_set_cursor_visible (dollar, FALSE);
+        gtk_widget_set_can_focus(GTK_WIDGET(dollar), FALSE);
+        gtk_widget_add_css_class (GTK_WIDGET(dollar), "input" );
+        Util::boxPack0 (dollarBox, GTK_WIDGET(dollar), FALSE, FALSE, 0);
+        return dollarBox;
     }
     GtkTextView *createInput(void){
         GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());
