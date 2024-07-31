@@ -12,70 +12,13 @@ namespace xf {
         GtkTextIter  start, end;
         gtk_text_buffer_get_bounds (buffer, &start, &end);
         auto text = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
-        if (strchr(text, '$')) *strchr(text, '$')=' ';
         g_strstrip(text);   
+        if (text[0] == '$') { // Eliminate any preceeding $
+          text[0] = ' ';
+          g_strstrip(text);   
+        }
         return text;
     }
-    static void historyDown(GtkTextView *input){
-      if (where_history() == 0) history_set_pos(history_length);
-      auto h = next_history();
-      clear_text(input);
-      print(input, g_strdup_printf("$ %s", h?h->line:""));
-    }
-    static void historyUp(GtkTextView *input){
-      if (where_history() == 0) history_set_pos(history_length);
-      auto h = previous_history();
-      clear_text(input);
-      print(input, g_strdup_printf("$ %s", h?h->line:""));
-    }
-
-    static bool
-    addHistory(const char *text, GtkTextView *input){
-      errno=0;
-      add_history(text);
-      gchar *dirname = g_path_get_dirname(historyFile);
-      if (!g_file_test(dirname, G_FILE_TEST_IS_DIR)){
-        if (mkdir(dirname, 0700) != 0 ){
-          DBG("addHistory(): cannot create \"%s\"\n", historyFile);
-          return false;
-        }
-      }
-      g_free(dirname);
-      if (!g_file_test(historyFile, G_FILE_TEST_EXISTS)) {
-        if (write_history(historyFile) != 0){
-            DBG("failed write_history to \"%s\": %s\n", historyFile, strerror(errno));
-        }
-      } else {
-            //DBG("\"%s\": exists\n", historyFile);
-
-        if (append_history(1, historyFile) != 0){
-            DBG("failed append to \"%s\": %s\n", historyFile, strerror(errno));
-            return false;
-        }       
-        g_object_set_data(G_OBJECT(input), "historyOffset", GINT_TO_POINTER(history_length));
-      }
-      return true;
-    }
-      
-    // List histories
-/*    static gchar *
-    showHistory (void) {
-      char *t = NULL; 
-      auto history = g_strconcat(XF_HISTORY, NULL);
-
-FILE *historyFile = fopen (history, "r");
-        if(historyFile) {
-            gchar line[256];
-            memset (line, 0, 256);
-            while(fgets (line, 255, historyFile) && !feof (historyFile)) {
-              if (!strchr (line, '\n')) line[255] = '\n';
-              concat(&t, line);
-            }
-            fclose (historyFile);
-        }           
-        return t;
-    }*/
-
     static bool
     cd (const gchar **v) {   
         if (v[1] == NULL){

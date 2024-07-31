@@ -5,6 +5,7 @@
 #include "xffm.h"
 #include "util.hh"
 #include "bash.hh"
+#include "history.hh"
 
 
 static void setupBindText(void){
@@ -67,10 +68,6 @@ main (int argc, char *argv[]) {
   coreSetup(argc, argv);
   xffindProgram = argv[0];
   xffmProgram = argv[0];
-
-  using_history();
-  historyFile = g_strconcat(XF_HISTORY, NULL);
-  read_history(historyFile);
   
   if (chdir(g_get_home_dir()) < 0){
     fprintf(stderr, "xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));

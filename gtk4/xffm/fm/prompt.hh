@@ -25,12 +25,69 @@ namespace xf {
         gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
         g_signal_connect (G_OBJECT (keyController), "key-pressed", 
             G_CALLBACK (this->on_keypress), (void *)input_);
-        
-        
         Util::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
-
- }
+    }
     private:
+    static bool
+    history(GtkTextView *input, guint keyval){
+      switch (keyval){
+        case GDK_KEY_Up:
+          History::up(input);
+          return true;
+      case GDK_KEY_Down:
+           History::down(input);
+           return true;
+      }
+      return false;
+    }
+    static bool 
+    pwd(GtkTextView *output, const char *text){
+      if (strcmp(text, "pwd")) return false;
+      auto workdir = Util::getWorkdir();
+      Util::print(output, g_strdup_printf("$ %s\n", text));
+      Util::print(output, g_strdup(workdir));
+      Util::print(output, g_strdup("\n"));
+      if (!History::add(text)) DBG("History::add(%s) failed\n", text );
+      return true;
+    }
+    static bool
+    history(GtkTextView *output, const char *text){
+      if (strcmp(text, "history")) return false;
+      char *t = History::history();
+      Util::print(output, g_strdup_printf("$ %s\n", text));
+      Util::print(output, g_strdup_printf("%s", t));
+      g_free(t);
+      Util::scroll_to_bottom(output);
+      return true;
+    }
+    static bool
+    cd(GtkTextView *output, const char *text){
+      gchar **v = Util::getVector(text, " ");
+      if (strcmp(v[0], "cd")) {
+        g_strfreev(v);
+        return false;
+      }
+      auto retval = Util::cd((const gchar **)v);
+      Util::print(output, g_strdup_printf("$ %s\n", text));
+      if (retval){
+        Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir()));
+        if (!History::add(text)) DBG("History::add(%s) failed\n", text );
+      } else {
+        Util::print(output, g_strdup_printf(_("failed to chdir to %s"), v[1]));
+      }
+      g_strfreev(v);
+      return true;
+    }
+    static bool
+    com(GtkTextView *input, GtkTextView *output, guint keyval){
+      if (keyval != GDK_KEY_Return && keyval != GDK_KEY_KP_Enter) return false;
+      auto text = Util::inputText(input);
+      if (pwd(output, text)) return true;
+      if (history(output, text)) return true;
+      if (cd(output, text)) return true;
+      g_free(text);
+      return false;
+    }
     static 
     gboolean on_keypress(GtkEventControllerKey* self,
           guint keyval,
@@ -48,81 +105,23 @@ namespace xf {
           BashCompletion::bash_completion(input, output, Util::getWorkdir());
           return TRUE;
         }
-        if(keyval ==  GDK_KEY_Up){
-          
-           Util::historyUp(input);
-           return TRUE;
-        }
-        if(keyval ==  GDK_KEY_Down){
 
-           Util::historyDown(input);
-           return TRUE;
-        }
-        if(keyval ==  GDK_KEY_Tab || keyval ==  GDK_KEY_Escape){
+        if(keyval ==  GDK_KEY_Escape){
            gtk_widget_grab_focus(GTK_WIDGET(input));
            gtk_text_view_set_cursor_visible(input, TRUE);
            Util::flushGTK();
            return TRUE;
         }
-        gint gotcha[]={
-          GDK_KEY_Return,
-          GDK_KEY_KP_Enter,
-          0
-        };
-        for (gint i=0; gotcha[i]; i++) {
-            if(keyval ==  gotcha[i]) {
-              Util::clear_text(input);
-              Util::print(input, g_strdup("$ "));
-              auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(input), "output"));
 
-              auto text = Util::inputText(input);
-              Util::print(output, g_strdup("$ "));
-              Util::print(output, g_strdup(text));
-              Util::print(output, g_strdup("\n"));
-              //Util::print(output, g_strdup_printf("text=\"%s\"\n", text));
+        if (history(input, keyval)) return TRUE;
+        History::reset();
 
-              if (strcmp(text, "pwd")==0){
-                auto workdir = Util::getWorkdir();
-                Util::print(output, g_strdup(workdir));
-                Util::print(output, g_strdup("\n"));
-                if (!Util::addHistory(text, input)) DBG("addHistory(%s) failed\n", text );
-                g_free(text);
-                return TRUE;
-              }
-              if (strcmp(text, "history")==0){
-                HIST_ENTRY **history = history_list();
-                int k=1;
-                const char *last = "";
-                for (HIST_ENTRY **p=history; p && *p; p++, k++){
-                  if (strcmp(last, (*p)->line)){
-                    Util::print(output, g_strdup_printf("%5d  %s\n", k, (*p)->line));
-                  }
-                  last = (*p)->line;
-                }
-                g_free(text);
-                Util::scroll_to_bottom(output);
-                return TRUE;
-              }
-
-              gchar **v = Util::getVector(text, " ");
-              if (strcmp(v[0], "cd")==0) {
-                 auto retval = Util::cd((const gchar **)v);
-                 if (!retval){
-                   Util::print(output, g_strdup_printf(_("failed to chdir to %s"), v[1]));
-                 } else {
-                   if (!Util::addHistory(text,input)) DBG("addHistory(%s) failed\n", text );
-                   
-                  // Util::print(output, g_strdup_printf("DBG: workdir = \"%s\"\n", Util::getWorkdir()));
-                  //XXX take care of in taskbar object  
-                  // XXX: we must signal a reload to the iconview...
-                 }
-                 
-              }
-              g_strfreev(v);              
-              g_free(text);
-              return TRUE;
-            }
+        if (com(input, output, keyval)){
+          Util::clear_text(input);
+          Util::print(input, g_strdup("$ "));
+          return TRUE;
         }
+
         return FALSE;
     }
     
