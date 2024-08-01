@@ -55,6 +55,7 @@ namespace xf {
         Util::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);
         
         Util::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
+        g_object_set_data(G_OBJECT(MainWidget), "buttonBox", vButtonBox_);
 
         return hbox;
     }

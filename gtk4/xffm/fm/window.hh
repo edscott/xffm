@@ -6,7 +6,6 @@
 namespace xf {
 
 
-
 template <class VbuttonClass, class PageClass> 
 class MainWindow: public VbuttonClass, public PageClass {
   using mainWindow_c = MainWindow<VbuttonClass, PageClass>;
@@ -39,7 +38,6 @@ public:
     ~MainWindow(void){
        // for each page: g_file_monitor_cancel(deviceMonitor_);
     }
-    
 // Free functions (for signals)
 public:
     static void
@@ -121,7 +119,8 @@ private:
     void addPage(const gchar *path){
       
       GtkBox *child = this->mkPageBox(path);
-      
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+      Util::reference_textview(output);
       pageList_ = g_list_append(pageList_, child);
       auto label = tabLabel(path, (void *)this);
       auto close = g_object_get_data(G_OBJECT(label), "close");
@@ -141,6 +140,8 @@ private:
     void zapPage(){
       DBG("zapPage...\n");
       GtkWidget *child = Util::getCurrentChild();
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+      Util::unreference_textview(output);
       GList *item = g_list_find(pageList_, child);
       pageList_ = g_list_remove(pageList_, child);
       if (g_list_length(pageList_) == 0){
@@ -237,10 +238,12 @@ private:
 
       mkNotebook();
       Util::boxPack0(hbox1, GTK_WIDGET(notebook_),  TRUE, TRUE, 0);
+      g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
 
       auto hbox2 = this->mkVbuttonBox();  // More precise.  
 //      auto hbox2 = VbuttonClass::mkVbuttonBox(); // This works too, but less clear.   
       Util::boxPack0(mainBox, GTK_WIDGET(hbox2),  FALSE, FALSE, 0);
+
       return GTK_WIDGET(mainBox);
     }
 

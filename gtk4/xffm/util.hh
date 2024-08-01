@@ -5,8 +5,120 @@
 namespace xf {
   class Util {
     private:
+#define MAX_PATH_LABEL 40
+#define MAX_PATH_START_LABEL 18
+    static const gchar *
+    chop_excess (gchar * b) {
+        // chop excess length...
+
+        const gchar *home = g_get_home_dir();
+        gchar *bb;
+        if (strncmp(home, b, strlen(home))==0){
+            if (strlen(home) == strlen(b)) return b;
+            bb = g_strconcat("~/", b + strlen(home)+1, NULL);
+        } else {
+            bb = g_strdup(b);
+        }
+        
+        int len = strlen (bb);
+
+        if(len < MAX_PATH_LABEL) {
+            strcpy(b, bb);
+            g_free(bb);
+            return (b);
+        }
+            
+        bb[MAX_PATH_START_LABEL - 3] = 0;
+
+        gchar *g = g_strconcat(bb, "...", b + (len - MAX_PATH_LABEL + MAX_PATH_START_LABEL), NULL);
+        strcpy (b, g);
+        g_free(bb);
+        g_free(g);
+
+        return b;
+    }
+
+#define MAX_NAME_LENGTH 13
+    static gboolean
+    chopBeginning (gchar * b) {
+        gint len = strlen (b);
+
+        if(len <= MAX_NAME_LENGTH) {
+            return FALSE;
+        }
+        gint newStart = len - MAX_NAME_LENGTH;
+        memmove(b, b+newStart, MAX_NAME_LENGTH+1);
+        return TRUE;
+    }
+
+
+
+    static gchar *
+    compact_line(const gchar *line){
+        //1. Remove leading and trailing whitespace
+        //2. Compact intermediate whitespace
+
+        gchar *newline= g_strdup(line); 
+        g_strstrip(newline);
+        gchar *p = newline;
+        for(;p && *p; p++){
+            if (*p ==' ') g_strchug(p+1);
+        }
+        return newline;
+    }
+
+    static     gchar *
+    get_terminal_name (void) {
+      auto path = getWorkdir();
+        gchar *iconname;
+        if(!path) {
+            iconname = utf_string (g_get_host_name());
+        } else if(g_path_is_absolute(path) &&
+                g_file_test (path, G_FILE_TEST_EXISTS)) {
+            gchar *basename = g_path_get_basename (path);
+            gchar *pathname = g_strdup (path);
+            gchar *b = utf_string (basename);   // non chopped
+            chop_excess (pathname);
+            gchar *q = utf_string (pathname);   // non chopped
+
+            g_free (basename);
+            g_free (pathname);
+            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
+            iconname = g_strconcat (b, " (", q, ")", NULL);
+            g_free (q);
+            g_free (b);
+        } else {
+            iconname = utf_string (path);
+            chop_excess (iconname);
+        }
+
+        return (iconname);
+    }
+
 
     public:
+    static
+    void setWindowTitle(void){
+        gchar *gg = get_terminal_name();
+        auto user = g_get_user_name();
+        auto host = g_strdup(g_get_host_name());
+        if (strchr(host, '.')) *strchr(host, '.')=0;
+        gchar *g = g_strconcat(user,"@",host,":",gg, NULL);
+        g_free(host);
+        g_free(gg); 
+        gtk_window_set_title(GTK_WINDOW(MainWidget), g);
+        g_free(g);
+        auto h = g_path_get_basename(getWorkdir());
+        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+        auto child = getCurrentChild();
+        auto w = gtk_notebook_get_tab_label(notebook, child);
+        
+
+        // FIXME Should retrieve label within widget 
+        // gtk_notebook_set_tab_label_text(notebook, getCurrentChild(), h);
+        g_free(h);
+    }
+    
     static char *inputText(GtkTextView *input){
         auto buffer = gtk_text_view_get_buffer(input);
         GtkTextIter  start, end;
@@ -85,6 +197,14 @@ namespace xf {
       return vector;
     }
 
+    static GtkBox *vButtonBox(void){
+      return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
+    }
+    static GtkTextView *getCurrentTextView(void){
+      auto child = getCurrentChild();
+      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+    }
+
     static GtkWidget *getCurrentChild(void){
       //DBG("getCurrentChild...\n");
       if (!MainWidget) return NULL;
@@ -106,6 +226,7 @@ namespace xf {
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      setWindowTitle();
       return true;
     }
       
@@ -192,7 +313,229 @@ namespace xf {
       exit(2);
     }
   }
-  /////   print  //////
+    private:
+    static gboolean
+    program_in_path(const gchar *program){
+        gchar *s = g_find_program_in_path (program);
+        if (!s) return FALSE;
+        g_free(s);
+        return TRUE;
+    }
+
+    static const gchar *
+    default_shell(void){
+        const gchar *shells[]={"bash","tcsh","csh","dash","zsh","ksh","sash","ash","sh",NULL};
+        const gchar **shell;
+        for (shell = shells; shell && *shell; shell++){
+            if (program_in_path(*shell)) return *shell;
+        }
+        g_warning("unable to find a valid shell\n");
+        return "/bin/sh";
+    }
+    public:
+   static const gchar *
+    u_shell(void){
+        if(getenv ("SHELL") && strlen (getenv ("SHELL"))) {
+            if (program_in_path(getenv ("SHELL"))) return getenv ("SHELL");
+        }
+
+        if(getenv ("XTERM_SHELL") && strlen (getenv ("XTERM_SHELL"))) {
+            if (program_in_path(getenv ("XTERM_SHELL"))) return getenv ("XTERM_SHELL");
+        }
+        return default_shell();
+    }
+    static gchar *
+    esc_string (const gchar * string) {
+        gint i, j, k;
+        const gchar *charset = "\\\"\' ()|<>";
+
+        for(j = 0, i = 0; i < strlen (string); i++) {
+            for(k = 0; k < strlen (charset); k++) {
+                if(string[i] == charset[k])
+                    j++;
+            }
+        }
+        gchar *estring = (gchar *) calloc (1, strlen (string) + j + 1);
+        for(j = 0, i = 0; i < strlen (string); i++, j++) {
+            for(k = 0; k < strlen (charset); k++) {
+                if(string[i] == charset[k])
+                    estring[j++] = '\\';
+            }
+            estring[j] = string[i];
+        }
+        TRACE ("ESC:estring=%s\n", estring);
+        return estring;
+    }
+
+    static const gchar *getTerminalCmd(){
+        setTerminal();
+        return  getenv("TERMINAL_CMD");
+    }
+private:
+
+    static const gchar *fixTerminalEditor(const gchar *e){
+        // Terminal based editors...
+        for (auto p=getTerminalEditors(); p && *p; p++){
+            if (strncmp(e, *p,strlen(*p))==0){
+                auto terminalCmd = getTerminalCmd();
+                // A terminal based editor.
+                static gchar *f = g_strdup_printf("%s %s", terminalCmd, e); 
+                setenv("EDITOR", f, 1);
+                return f;
+            }
+        }
+        return e;
+    }
+
+    static const gchar *fixGvim(const gchar *e){
+        // Do not fork gvim, so that git commit works...
+        if (e && strcmp(e, "gvim")==0) return "gvim -f";
+        return e;
+    }
+
+    static void setEditor(void){
+        static gboolean done = FALSE;
+        if (done) return;
+
+        // Environment variable EDITOR was defined previously.
+        const gchar *e = getenv("EDITOR");
+        if (e && strlen(e)==0) e = NULL;
+
+        else if (e) { // Predefined value.
+            e = fixGvim(e);
+            e = fixTerminalEditor(e);
+            setenv("EDITOR", e, 1);
+            done = TRUE;
+            return;
+        }
+
+        // Environment variable EDITOR was not defined.
+        // Look for one.
+        auto editors = getEditors();
+        for (auto p=editors; p && *p; p++){
+            auto s = g_strdup(*p);
+            if (strchr(s, ' ')) *strchr(s, ' ') = 0;
+            auto t = g_find_program_in_path (s);
+            g_free(s);
+            if (t) {
+                e=*p;
+                g_free(t);
+                break;  
+            }  
+        }
+
+        if (!e){
+            DBG("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
+            e="vi";
+        } else {
+            INFO("Found EDITOR %s\n", e);
+
+        }
+        e = fixGvim(e);
+        e = fixTerminalEditor(e);
+        setenv("EDITOR", e, 1);
+        done = TRUE;
+        return;
+    }
+
+    static void setTerminal(void){
+        static gboolean done = FALSE;
+        if (done) return;
+        const gchar *terminal = getenv("TERMINAL");
+        if (terminal && strlen(terminal)) {
+            INFO("User set terminal = %s\n", terminal);
+            setTerminalCmd(terminal);
+            done = TRUE;
+            return;
+        } 
+        DBG("setTerminal()... TERMINAL not defined in environment.\n");
+        // TERMINAL not defined. Look for one.
+        const gchar **p=getTerminals();
+        const gchar *foundTerm = NULL;
+        for (;p && *p; p++){
+            auto s = g_strdup(*p);
+            if (strchr(s, ' ')) *strchr(s, ' ') = 0;
+            auto t = g_find_program_in_path (s);
+            g_free(s);
+            if (t) {
+                INFO("Found terminal: %s\n", t);
+                terminal=*p;
+                g_free(t);
+                setenv("TERMINAL", *p, 1);
+                setTerminalCmd(*p);
+                done = TRUE;
+                return;
+            }  
+        }
+        if (!terminal){
+            DBG("No terminal command found. Please install or define TERMINAL environment variable.\n");
+            // Fallback...
+            setenv("TERMINAL", "xterm", 1);
+            setTerminalCmd("xterm");
+        }
+        done = TRUE;
+        return ;
+    }
+
+    static void
+    setTerminalCmd (const gchar *t) {
+        static gboolean done = FALSE;
+        if (done) return;
+        const gchar *exec_option = "-e";
+        if(strncmp (t, "gnome-terminal", strlen("gnome-terminal")) == 0 ||
+           strncmp (t, "Terminal", strlen("Terminal")) == 0) {
+            exec_option = "-x";
+        }
+        static const gchar *terminalCommand = g_strconcat(t, " ", exec_option, NULL);
+        setenv("TERMINAL_CMD", terminalCommand, 1);
+        return;
+    }
+     
+    static const gchar **
+    getTerminals(void) {
+        static const gchar *terminals_v[] = {
+            "xterm -vb -rv", 
+            "uxterm -vb -rv", 
+            "konsole", 
+            "gnome-terminal", 
+            "sakura",
+            "Eterm", 
+            "Terminal", 
+            "aterm", 
+            "kterm", 
+            "wterm", 
+            NULL
+        };
+        return terminals_v;
+    }
+
+    static const gchar **
+    getEditors(void) {
+        static const gchar *editors_v[] = {
+            "gvim -f",  
+            "gedit", 
+            "kate", 
+            "xemacs", 
+            "nano",
+            "vi",
+            NULL
+        }; 
+        return editors_v;
+    }
+    static const gchar **
+    getTerminalEditors(void) {
+        static const gchar *editors_v[] = {
+            "emacs", 
+            "nano",
+            "vi",
+            "vim",
+            NULL
+        }; 
+        return editors_v;
+    }
+    
+public:
+    /////   print  //////
 
     static void *
     scroll_to_top(GtkTextView *textview){
@@ -286,10 +629,61 @@ namespace xf {
                               const gchar *iconname, 
                               const gchar *tag, 
                               gchar *string){
-    print(textview, string);
-  }
+        print(textview, string);
+    }
+    static void // print_icon will free string.
+    printInfo(GtkTextView *textview, const gchar *icon, gchar *string){
+        print(textview, string);
+    }
+    static void // print_icon will free string.
+    printError(GtkTextView *textview, gchar *string){
+        print(textview, string);
+    }
+    static void // print_icon will free string.
+    printStdErr(GtkTextView *textview, gchar *string){
+        print(textview, string);
+    }
+
+    static void showText(GtkTextView *textview){
+        if (!textview) return;
+        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
+        void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
+        context_function(show_text_buffer_f, arg);
+    }
 
 /*
+
+    static void // print_icon will free string.
+    printError(GtkTextView *textview, gchar *string){
+      TRACE("printError\n");
+	      showTextSmallErr(textview);
+        auto tag = Settings<Type>::getString("window.errorColor");
+        if (tag) print(textview, "edit-delete", tag, string);
+        else print(textview, "edit-delete", "red", string);
+    }
+ 
+    static void // print_icon will free string.
+    printStdErr(GtkTextView *textview, gchar *string){
+	      showTextSmallErr(textview);
+        auto tag = Settings<Type>::getString("window.errorColor");
+        if (tag) print(textview, tag, string);
+        else print(textview, "red", string);
+    }
+
+    static void // print_icon will free string.
+    printInfo(GtkTextView *textview, gchar *string){
+        auto tag = Settings<Type>::getString("window.infoColor");
+        if (tag) print(textview, tag, string);
+        else print(textview, "green", string);
+    }
+    
+    static void // print_icon will free string.
+    printInfo(GtkTextView *textview, const gchar *icon, gchar *string){
+        auto tag = Settings<Type>::getString("window.infoColor");
+        if (tag) print(textview, icon, tag, string);
+        else print(textview, icon, "green", string);
+     
+    }
 
   static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
   {
@@ -568,7 +962,7 @@ endloop:;
       pthread_mutex_unlock(mutex);
       return FALSE;
   }
-
+ public:
   static void *context_function(void * (*function)(gpointer), void * function_data){
       pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
       pthread_cond_t signal = PTHREAD_COND_INITIALIZER; 
@@ -593,7 +987,7 @@ endloop:;
       pthread_cond_destroy(&signal);
       return result;
   }
-
+ private:
   static
   GtkTextTag *
   resolve_tag (GtkTextBuffer * buffer, const gchar * id) {
@@ -863,12 +1257,6 @@ endloop:;
         return NULL;
     }
  public:
-    static void showText(GtkTextView *textview){
-        if (!textview) return;
-        auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
-        void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
-        context_function(show_text_buffer_f, arg);
-    }
     static gchar *
     get_current_text (GtkTextView *textview) {
         // get current text
@@ -880,8 +1268,27 @@ endloop:;
         g_strchug(t);
         return t;
     }
+    static gboolean isValidTextView(void *textView){
+        gboolean retval = FALSE;
+        void *p = g_list_find(textviewList, textView);
+        if (p) retval = TRUE;
+        return retval;
+    }
 
-  private:  
+    static void *reference_textview(GtkTextView *textView){
+        TRACE("reference_run_button(%p)\n", (void *)textView);
+        textviewList = g_list_prepend(textviewList, (void *)textView);
+        return NULL;
+    }
+
+    static void
+    unreference_textview(GtkTextView *textView){
+        TRACE("unreference_run_button(%p)\n", (void *)textView);
+        void *p = g_list_find(textviewList, (void *)textView);
+        if (p){
+            textviewList = g_list_remove(textviewList, (void *)textView);
+        }
+    }
 
 
   };

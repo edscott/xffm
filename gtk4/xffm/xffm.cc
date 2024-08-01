@@ -6,6 +6,13 @@
 #include "util.hh"
 #include "bash.hh"
 #include "history.hh"
+#include "thread.hh"
+#include "tubo.hh"
+#include "settings.hh"
+#include "run.hh"
+#include "runbutton.hh"
+
+#include "paintable.hh"
 
 
 static void setupBindText(void){

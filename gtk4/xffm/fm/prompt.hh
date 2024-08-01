@@ -1,5 +1,6 @@
 #ifndef XF_PROMPT_HH
 #define XF_PROMPT_HH
+#include "run.hh"
 namespace xf {
   class Prompt {
 
@@ -30,6 +31,75 @@ namespace xf {
         Util::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
     }
     private:
+    static pid_t
+    run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane){
+      DBG("run: %s\n", command);
+        pid_t child = 0;
+        auto workdir = Util::getWorkdir();
+        if (!command || !strlen(command)) return 0;
+        // escape all quotes
+        gchar *ncommand;
+        if (strchr (command, '\"') || strchr(command,'\'')){
+            gchar **g;
+            if (strchr (command, '\"')) {
+                g = g_strsplit(command, "\"", -1);
+                ncommand = g_strjoinv ("\\\"", g);
+                g_strfreev(g);
+            } else {
+                g = g_strsplit(command, "\'", -1);
+                ncommand = g_strjoinv ("\\\'", g);
+                g_strfreev(g);
+            }
+            TRACE("ncommand is %s\n", ncommand);
+        } else ncommand = g_strdup(command);
+        command = ncommand;
+      DBG("escaped run: %s\n", command);
+
+        gchar *newWorkdir =NULL;
+        gchar ** commands = NULL;
+        commands = Util::getVector(command, ";");
+      DBG("commands[0]: %s\n", commands[0]);
+
+        for (gchar **c=commands; c && *c; c++){
+            if (strncmp(*c,"cd", strlen("cd"))==0){
+              auto w = Util::getVector(*c, " ");
+              Util::cd((const char **)w);
+              g_strfreev(w);
+              DBG("internal command=%s\n", *c);
+              continue;
+            }
+            // automatic shell determination:
+            if (!g_file_test(workdir, G_FILE_TEST_IS_DIR)) {
+                if (chdir(g_get_home_dir()) < 0){
+                    DBG("Cannot chdir to %s\n", g_get_home_dir());
+                    DBG("aborting command: \"%s\"\n", command);
+                    continue;
+                }
+            } else {
+                if (chdir(workdir) < 0){
+                    DBG("Cannot chdir to %s\n", workdir);
+                    DBG("aborting command: \"%s\"\n", command);
+                    continue;
+                }
+            }
+            gboolean scrollup = FALSE;
+            if (strncmp(command, "man", strlen("man"))==0) {
+                scrollup = TRUE;
+                Util::clear_text(output);
+            }
+            Util::print(output, g_strdup_printf("DBG> final run: %s\n",*c));
+            child = Run::shell_command(output, *c, scrollup, showTextPane);
+            if (withRunButton) {
+              auto runButton = new (RunButton);
+              runButton->init(runButton, *c, child);
+            }
+//            if (withRunButton) newRunButton(*c, child);
+        }
+        g_strfreev(commands);
+        g_free(ncommand); 
+        return child;
+    }
+
     static bool
     history(GtkTextView *input, guint keyval){
       switch (keyval){
@@ -99,7 +169,7 @@ namespace xf {
       Util::print(output, g_strdup_printf("\n"));
         
       Util::print(output, g_strdup_printf("// FIXME: execute command with run button.\n"));
-
+      run(output, text, false, true);
       g_free(inPath);
       g_strfreev(v);
       return true;

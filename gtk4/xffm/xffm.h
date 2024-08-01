@@ -52,9 +52,15 @@
 # define DBG_(...)  {auto errorText = g_strdup_printf(__VA_ARGS__);xf::Fm<Type>::printDbg(errorText); }
 
 #define DEFAULT_FIXED_FONT_SIZE 12
+#define DEFAULT_FONT_SIZE    "12"
+#define PREVIEW_IMAGE_SIZE  400
+#define DEFAULT_FONT_FAMILY    "Sans"
 
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
-GtkWidget *MainWidget;
+static GtkWidget *MainWidget;
+static GList *textviewList = NULL;
+static GList *run_button_list = NULL;
 
+static pthread_mutex_t rbl_mutex = PTHREAD_MUTEX_INITIALIZER;
 #endif
