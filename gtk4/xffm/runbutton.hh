@@ -24,8 +24,8 @@ private:
     gchar *command_;
     gchar *tip_;
     gchar *icon_id_;
-    GtkButton *button_;
-    //FIXME GtkMenu *menu_;
+    GtkMenuButton *button_;
+    GtkPopoverMenu *menu_;
     gboolean in_shell_;
      
 public:    
@@ -100,7 +100,8 @@ public:
         //FIXME gtk_widget_hide(GTK_WIDGET(menu_));
         //FIXME gtk_widget_destroy(GTK_WIDGET(menu_));
         gtk_widget_set_visible(GTK_WIDGET (button_), FALSE);
-        g_object_unref(G_OBJECT (button_));
+        //g_object_unref(G_OBJECT (button_));
+        gtk_widget_unparent(GTK_WIDGET (button_));
         g_free (tip_);
         g_free (command_);
         g_free (icon_id_);
@@ -109,10 +110,10 @@ public:
     gboolean inShell(void){return in_shell_;}
     gint pid(void){ return (gint)pid_;}
     gint grandchild(void){ return (gint)grandchild_;}
-    //FIXME GtkMenu *menu(void){return menu_;}
+    GtkPopoverMenu *menu(void){return menu_;}
     GtkBox *button_space(void){return button_space_;}
     // read/write
-    void setButton(GtkButton *button){button_ = button;}
+    void setButton(GtkMenuButton *button){button_ = button;}
     const gchar *icon_id(void){ return (const gchar *)icon_id_;}
     void set_icon_id(const gchar *data){
         g_free(icon_id_); 
@@ -129,21 +130,30 @@ public:
         tip_ = g_strdup(tip); 
     }
 
-
+ 
     void create_menu(void){
-      /* FIXME
-        const gchar *items[]={N_("Renice Process"),N_("Suspend"),N_("Continue"),
-            N_("Interrupt"),N_("Hangup"),N_("User 1 (USR1)"),
-            N_("User 2 (USR2)"),N_("Terminate Task"),N_("Abort"),
-            N_("Kill"),
-            N_("Segmentation fault"),NULL};
+      GMenu *menuModel = g_menu_new(); 
+      GMenuItem *item;
+      
+      const gchar *items[]={N_("Renice Process"),N_("Suspend"),N_("Continue"),
+          N_("Interrupt"),N_("Hangup"),N_("User 1 (USR1)"),
+          N_("User 2 (USR2)"),N_("Terminate Task"),N_("Abort"),
+          N_("Kill"),
+          N_("Segmentation fault"),NULL};
+      for (const gchar **p=items; p && *p; p++){
+        item = g_menu_item_new (*p, NULL);
+        g_menu_append_item(menuModel, item);
+      }
+      menu_ = GTK_POPOVER_MENU(gtk_popover_menu_new_from_model(G_MENU_MODEL(menuModel)));
+  
+/*
+        
         gint signals[] = {
             -1,
             SIGSTOP, SIGCONT, SIGINT, SIGHUP, SIGUSR1, 
             SIGUSR2, SIGTERM, SIGABRT, SIGKILL, SIGSEGV};
 
         
-        menu_ = GTK_MENU(gtk_menu_new());
         GtkMenuItem *title = GTK_MENU_ITEM(gtk_c::menu_item_new(NULL, "")); 
         gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
         gtk_widget_show (GTK_WIDGET(title));
@@ -240,7 +250,9 @@ public:
     make_run_data_button (void *data) {
         auto run_button_p = (RunButton *)data;
         //auto button = GTK_MENU_BUTTON(gtk_menu_button_new ());
-        auto button = Util::newButton("avatar-default", "tooltip here" );
+        auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
+        gtk_menu_button_set_icon_name(button, "avatar-default");
+        //auto button = Util::newButton("avatar-default", "tooltip here" );
         run_button_p->setButton(button);
         TRACE("make_run_data_button... \n");
         // FIXME gtk_menu_button_set_popup (button,  GTK_WIDGET(run_button_p->menu()));

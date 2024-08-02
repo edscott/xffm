@@ -169,7 +169,7 @@ namespace xf {
       Util::print(output, g_strdup_printf("\n"));
         
       Util::print(output, g_strdup_printf("// FIXME: execute command with run button.\n"));
-      run(output, text, false, true);
+      run(output, text, true, true);
       g_free(inPath);
       g_strfreev(v);
       return true;
