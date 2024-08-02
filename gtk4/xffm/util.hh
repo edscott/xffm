@@ -108,15 +108,13 @@ namespace xf {
         g_free(gg); 
         gtk_window_set_title(GTK_WINDOW(MainWidget), g);
         g_free(g);
-        auto h = g_path_get_basename(getWorkdir());
+        auto basename = g_path_get_basename(getWorkdir());
         auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
         auto child = getCurrentChild();
-        auto w = gtk_notebook_get_tab_label(notebook, child);
-        
-
-        // FIXME Should retrieve label within widget 
-        // gtk_notebook_set_tab_label_text(notebook, getCurrentChild(), h);
-        g_free(h);
+        auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
+        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "label"));
+        gtk_label_set_markup(label, basename);
+        g_free(basename);
     }
     
     static char *inputText(GtkTextView *input){

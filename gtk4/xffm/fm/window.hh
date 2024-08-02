@@ -43,7 +43,7 @@ public:
     static void
     on_new_page(GtkButton *button, void *data){
         MainWindow *w = (MainWindow *)data;
-        w->addPage("foo");
+        w->addPage(Util::getWorkdir());
     }
     static void
     on_zap_page(GtkButton *button, void *data){
@@ -169,6 +169,8 @@ private:
       auto child = gtk_notebook_get_nth_page(notebook_, new_page);
       auto close = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "close"));
       gtk_widget_set_visible (close, TRUE);
+      
+      Util::setWindowTitle();     
     }
 
 
@@ -179,12 +181,14 @@ private:
       gtk_widget_set_vexpand(GTK_WIDGET(tabBox), FALSE);
       gchar *tag = path? g_path_get_basename(path):g_strdup(".");
       GtkWidget *label = gtk_label_new(tag);
+      g_free(tag);
       Util::boxPack0(tabBox, label,  FALSE, FALSE, 0);
 
       auto close = Util::newButton(WINDOW_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(close), "clicked", 
               BUTTON_CALLBACK(w->on_zap_page), data);    
       g_object_set_data(G_OBJECT(tabBox), "close", close);
+      g_object_set_data(G_OBJECT(tabBox), "label", label);
       
       Util::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
       return GTK_WIDGET(tabBox);
