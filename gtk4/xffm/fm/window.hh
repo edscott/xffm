@@ -98,20 +98,26 @@ private:
 
     void showWindow(){
 
+        GtkWidget *widget = GTK_WIDGET(mainWindow_);
+        gtk_widget_realize(widget);
+
         GdkDisplay *displayGdk = gdk_display_get_default();
         Display *display = gdk_x11_display_get_xdisplay(displayGdk);
-
         XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
         wm_class->res_name = g_strdup("xffm");
         wm_class->res_class = g_strdup("Xffm");
 
-        GtkWidget *widget = GTK_WIDGET(mainWindow_);
-        gtk_widget_realize(widget);
         GtkNative *native = gtk_widget_get_native(widget);
         GdkSurface *surface = gtk_native_get_surface(native);
         Window w = gdk_x11_surface_get_xid (surface);
         XSetClassHint(display, w, wm_class);
 
+        Atom atom = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE_DIALOG");
+        Atom atom0 = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE");
+        XChangeProperty (display, w,
+		      atom0, XA_ATOM, 
+          32, PropModeReplace,
+		      (guchar *)&atom, 1);
         gtk_window_present (mainWindow_);
 
     }
