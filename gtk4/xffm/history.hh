@@ -103,6 +103,12 @@ namespace xf {
       g_free(dirname);
 
       if (!g_file_test(historyFile, G_FILE_TEST_EXISTS)) {
+        // gtk3 history
+        auto oldHistory = g_strconcat(g_get_user_cache_dir(),G_DIR_SEPARATOR_S,"lp_terminal_history",NULL);
+        if (g_file_test(oldHistory, G_FILE_TEST_EXISTS)){
+          read_history(oldHistory);
+          g_free(oldHistory);
+        }
         if (write_history(historyFile) != 0){
           DBG("failed write_history to \"%s\": %s\n", historyFile, strerror(errno));
           return false;
@@ -110,7 +116,7 @@ namespace xf {
       } 
       // get last entry
       HIST_ENTRY *p = history_get(history_length);
-      if (strcmp(p->line, text)){
+      if (history_length == 0 || (p != NULL && strcmp(p->line, text))){
         add_history(text);
         write_history(historyFile);
       } else {

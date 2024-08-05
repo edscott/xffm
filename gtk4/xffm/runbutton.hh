@@ -25,11 +25,11 @@ private:
     gchar *tip_;
     gchar *icon_id_;
     GtkMenuButton *button_;
-    GtkPopoverMenu *menu_;
+    //GtkPopover *menu_;
     gboolean in_shell_;
      
 public:    
-
+    GtkMenuButton *button(void){ return button_;}
     RunButton(void){
       TRACE("RunButton void\n");
     }
@@ -88,7 +88,7 @@ public:
         tip_ = NULL;
         TRACE ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
 
-        create_menu();
+//        
         auto text = g_strdup_printf("RunButton::setup(): %s", command_);
         new(Thread)(text, run_wait_f, (void *) this);
         g_free(text);
@@ -110,10 +110,11 @@ public:
     gboolean inShell(void){return in_shell_;}
     gint pid(void){ return (gint)pid_;}
     gint grandchild(void){ return (gint)grandchild_;}
-    GtkPopoverMenu *menu(void){return menu_;}
     GtkBox *button_space(void){return button_space_;}
     // read/write
-    void setButton(GtkMenuButton *button){button_ = button;}
+    void setButton(GtkMenuButton *button){
+      button_ = button;
+    }
     const gchar *icon_id(void){ return (const gchar *)icon_id_;}
     void set_icon_id(const gchar *data){
         g_free(icon_id_); 
@@ -131,20 +132,35 @@ public:
     }
 
  
-    void create_menu(void){
-      GMenu *menuModel = g_menu_new(); 
-      GMenuItem *item;
-      
-      const gchar *items[]={N_("Renice Process"),N_("Suspend"),N_("Continue"),
-          N_("Interrupt"),N_("Hangup"),N_("User 1 (USR1)"),
+static void
+activate(GtkWidget *self, gpointer data) { 
+  char *string = (char *)data;
+  fprintf(stderr,"activate: %s\n", string);
+  GtkPopover *menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+  gtk_popover_popdown(menu);
+  if (strcmp(string, "quit")==0){
+    fprintf(stderr,"goodbye.\n");
+    GtkWindow *window = GTK_WINDOW(g_object_get_data(G_OBJECT(menu), "window"));
+    if (window) gtk_window_destroy(window);
+    else fprintf(stderr, "activate():: programming error g_object_get_data(G_OBJECT(menu), \"window\")\n");
+  }
+  return;
+}
+
+    static GtkWidget *create_menu(void){      
+      const gchar *items[]={N_("Renice Process"),N_("Suspend"),N_("Continue"),N_("Interrupt"),
+        NULL};
+      GCallback callbacks[]={G_CALLBACK(activate), G_CALLBACK(activate), G_CALLBACK(activate), G_CALLBACK(activate), NULL};
+      void *data[]={(void *)"test1", (void *)"test12", (void *)"test123", (void *)"quit", NULL};
+      /*
+          N_("Hangup"),N_("User 1 (USR1)"),
           N_("User 2 (USR2)"),N_("Terminate Task"),N_("Abort"),
           N_("Kill"),
           N_("Segmentation fault"),NULL};
-      for (const gchar **p=items; p && *p; p++){
-        item = g_menu_item_new (*p, NULL);
-        g_menu_append_item(menuModel, item);
-      }
-      menu_ = GTK_POPOVER_MENU(gtk_popover_menu_new_from_model(G_MENU_MODEL(menuModel)));
+      GCallback callbacks[]={ NULL};
+      void *data[]={ NULL};*/
+      return GTK_WIDGET(Util::mkMenu(items, callbacks, data));
+      
   
 /*
         
@@ -182,8 +198,8 @@ public:
             gtk_widget_show (v);
         }
         gtk_widget_show (GTK_WIDGET(menu_));
-        */
-        return ;
+      
+        return ;*/
     }
 
     static void
@@ -242,6 +258,7 @@ public:
         g_free(tip);
         g_free(command);
         TRACE("RunButton::new_run_button: icon_id_=%s  command_=%s pid_=%d grandchild_=%d tip_=%s\n", run_button_p->icon_id(), run_button_p->command(), run_button_p->pid(), run_button_p->grandchild(), run_button_p->tip());
+        
         return ;
     }
 ////////////////////////////////////////////////////////////////////
@@ -251,9 +268,14 @@ public:
         auto run_button_p = (RunButton *)data;
         //auto button = GTK_MENU_BUTTON(gtk_menu_button_new ());
         auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
+
         gtk_menu_button_set_icon_name(button, "avatar-default");
         //auto button = Util::newButton("avatar-default", "tooltip here" );
         run_button_p->setButton(button);
+
+        auto menu = create_menu();
+        gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), GTK_WIDGET(menu));  
+
         TRACE("make_run_data_button... \n");
         // FIXME gtk_menu_button_set_popup (button,  GTK_WIDGET(run_button_p->menu()));
             

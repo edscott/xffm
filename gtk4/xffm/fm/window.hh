@@ -170,7 +170,8 @@ private:
       pageList_ = g_list_remove(pageList_, child);
       if (g_list_length(pageList_) == 0){
         gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
-        exit(0);
+        gtk_window_destroy(mainWindow_);
+        //exit(0);
       }
       // Get VPane object from child widget (box)
       Vpane *vpane_object =  (Vpane *)g_object_get_data(G_OBJECT(child), "vpane_object");

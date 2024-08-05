@@ -97,6 +97,33 @@ namespace xf {
 
 
     public:
+
+
+    static GtkPopover *mkMenu(const gchar **items, GCallback *callback, void **data){
+      GtkWidget *vbox;
+      GtkWidget *menu = gtk_popover_new ();
+      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
+      gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
+      vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+
+      GCallback *q = callback;
+      void **r = data;
+      for (const gchar **p=items; p && *p; p++){
+        GtkWidget *item = gtk_button_new_with_label(*p);
+        gtk_button_set_has_frame(GTK_BUTTON(item), FALSE);
+        gtk_box_append (GTK_BOX (vbox), item);
+        if (*q) {
+          g_signal_connect (G_OBJECT (item), "clicked", *q, *r);
+        }
+        g_object_set_data(G_OBJECT(item), "menu", menu);
+        if (q) q++;
+        if (r) r++;
+      }
+          
+      gtk_popover_set_child (GTK_POPOVER (menu), vbox);
+      return GTK_POPOVER(menu);
+    }
+
     static
     void setWindowTitle(void){
         gchar *gg = get_terminal_name();
