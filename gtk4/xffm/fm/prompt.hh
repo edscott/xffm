@@ -6,10 +6,12 @@ namespace xf {
 
     public:
     GtkBox *promptBox(void){ return promptBox_;}
+    GtkBox *buttonBox(void){ return buttonBox_;}
     GtkTextView *input(void){ return input_;}
     private:
     GtkBox *promptBox_;
     GtkTextView *input_;
+    GtkBox *buttonBox_;
     
     GtkButton *promptButton_;
     GtkButton *clearButton_;
@@ -19,9 +21,13 @@ namespace xf {
 
     Prompt(void) {
         promptBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        buttonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
         auto dollar = createPrompt();
         input_ = createInput(); 
+        g_object_set_data(G_OBJECT(input_), "buttonBox", buttonBox_);
+        //Util::boxPack0 (buttonBox_, gtk_button_new_from_icon_name("network-workgroup"), FALSE, TRUE, 0);
+
 
         auto keyController = gtk_event_controller_key_new();
         gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
@@ -29,10 +35,11 @@ namespace xf {
             G_CALLBACK (this->on_keypress), (void *)input_);
         Util::boxPack0 (promptBox_, GTK_WIDGET(dollar), FALSE, FALSE, 0);
         Util::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
+        Util::boxPack0 (promptBox_, GTK_WIDGET(buttonBox_), FALSE, TRUE, 0);
     }
     private:
     static pid_t
-    run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane){
+    run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonBox){
       DBG("run: %s\n", command);
         pid_t child = 0;
         auto workdir = Util::getWorkdir();
@@ -59,7 +66,7 @@ namespace xf {
         gchar ** commands = NULL;
         commands = Util::getVector(command, ";");
       DBG("commands[0]: %s\n", commands[0]);
-
+        RunButton *runButton;
         for (gchar **c=commands; c && *c; c++){
             if (strncmp(*c,"cd", strlen("cd"))==0){
               auto w = Util::getVector(*c, " ");
@@ -90,9 +97,10 @@ namespace xf {
             Util::print(output, g_strdup_printf("DBG> final run: %s\n",*c));
             child = Run::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) {
-              auto runButton = new (RunButton);
-              runButton->init(runButton, *c, child);
+              runButton = new (RunButton);
+              runButton->init(runButton, *c, child, output, Util::getWorkdir(), buttonBox);
             }
+            DBG("command loop...\n");
 //            if (withRunButton) newRunButton(*c, child);
         }
         g_strfreev(commands);
@@ -169,7 +177,10 @@ namespace xf {
       Util::print(output, g_strdup_printf("\n"));
         
       Util::print(output, g_strdup_printf("// FIXME: execute command with run button.\n"));
-      run(output, text, true, true);
+       
+      auto buttonBox = GTK_BOX(g_object_get_data(G_OBJECT(input), "buttonBox"));
+      
+      run(output, text, true, true, buttonBox);
       g_free(inPath);
       g_strfreev(v);
       return true;

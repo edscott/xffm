@@ -99,21 +99,24 @@ namespace xf {
     public:
 
 
-    static GtkPopover *mkMenu(const gchar **items, GCallback *callback, void **data){
-      GtkWidget *vbox;
+    static GtkPopover *mkMenu(const gchar **items, void **callback, void **data){
+      auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+      auto titleBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      gtk_box_append (GTK_BOX (vbox), GTK_WIDGET(titleBox));
+      g_object_set_data(G_OBJECT(vbox), "titleBox", titleBox);
+
       GtkWidget *menu = gtk_popover_new ();
       gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
-      vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-      GCallback *q = callback;
+      void **q = callback;
       void **r = data;
-      for (const gchar **p=items; p && *p; p++){
+      for (const gchar **p=items; p && *p && *q; p++){
         GtkWidget *item = gtk_button_new_with_label(*p);
         gtk_button_set_has_frame(GTK_BUTTON(item), FALSE);
         gtk_box_append (GTK_BOX (vbox), item);
         if (*q) {
-          g_signal_connect (G_OBJECT (item), "clicked", *q, *r);
+          g_signal_connect (G_OBJECT (item), "clicked", G_CALLBACK(*q), *r);
         }
         g_object_set_data(G_OBJECT(item), "menu", menu);
         if (q) q++;
