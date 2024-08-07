@@ -26,7 +26,6 @@ namespace xf {
         auto dollar = createPrompt();
         input_ = createInput(); 
         g_object_set_data(G_OBJECT(input_), "buttonBox", buttonBox_);
-        //Util::boxPack0 (buttonBox_, gtk_button_new_from_icon_name("network-workgroup"), FALSE, TRUE, 0);
 
 
         auto keyController = gtk_event_controller_key_new();
@@ -176,8 +175,6 @@ namespace xf {
       }
       Util::print(output, g_strdup_printf("\n"));
         
-      Util::print(output, g_strdup_printf("// FIXME: execute command with run button.\n"));
-       
       auto buttonBox = GTK_BOX(g_object_get_data(G_OBJECT(input), "buttonBox"));
       
       run(output, text, true, true, buttonBox);

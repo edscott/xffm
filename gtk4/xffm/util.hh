@@ -279,12 +279,20 @@ namespace xf {
         Util::boxPack0 (box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
         Util::boxPack0 (vbox, GTK_WIDGET(widget), FALSE, FALSE, 0);
     }
+    static void
+    setTooltip(GtkWidget *w, const gchar *text){
+      //auto t =g_strconcat("<span color=\"yellow\" bgcolor=\"blue\"><i>", text, "</i></span>", NULL);
+      auto t =g_strconcat("<span color=\"yellow\"><i>", text, "</i></span>", NULL);
+      gtk_widget_set_tooltip_markup (w,t);
+      //gtk_widget_add_css_class (w, "tooltip" );
+      g_free(t);
+      return;
+    }
     static 
     GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
       auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
-      auto t =g_strconcat("<span color=\"yellow\"><i>", tooltipText, "</i></span>", NULL);
-      gtk_widget_set_tooltip_markup (GTK_WIDGET(button),t);
-      g_free(t);
+      setTooltip(GTK_WIDGET(button), tooltipText);
+
       gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
       gtk_button_set_has_frame(button, FALSE);
       return button;
@@ -304,15 +312,14 @@ namespace xf {
     GtkScale *newSizeScale(const gchar *tooltipText){
         auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 6.0, 24.0, 6.0));
         // Load saved value fron xffm+/settings.ini file (if any)
-        //gint size = Settings<Type>::getInteger("xfterm", "fontSize");//FIXME
-        gint size = -1;
+        gint size = Settings::getInteger("xfterm", "fontSize");
         if (size < 0) size = DEFAULT_FIXED_FONT_SIZE;
         gtk_range_set_value(GTK_RANGE(size_scale), size);
         gtk_range_set_increments (GTK_RANGE(size_scale), 2.0, 6.0);
         gtk_widget_set_size_request (GTK_WIDGET(size_scale),-1,75);
         gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
         gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
-        gtk_widget_set_tooltip_markup (GTK_WIDGET(size_scale),tooltipText);        
+        setTooltip (GTK_WIDGET(size_scale),tooltipText);        
         return size_scale;
     }
 
@@ -826,13 +833,7 @@ public:
           // single
           for (;pp && *pp; pp++){
               gchar *code = *pp;
-             
-              // this was for mpg123... FIXME no eol
-              // mpg123 is not providing new lines
-              /* if (*code == 'K'){
-                  insert_string (buffer, "\n", NULL);
-                  continue;
-              }*/
+
               if (*code == 'K'){
                    // erase from cursor to eol
                    // insert string with whatever tag you have.

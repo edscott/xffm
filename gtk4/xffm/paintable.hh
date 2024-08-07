@@ -5,12 +5,11 @@
 namespace xf
 {
 
-static GtkIconTheme *icon_theme=NULL;
 //static gint imageSize = 48;
 #undef USE_DEFAULT_ICON_THEME
 
 class Paintable {
-    static void
+ /*   static void
     init(void){
         // Is this routine even called? Yes.
         //fprintf(stderr, "Calling Pixbuf initializer...buildicons=%s\n", buildIcons);
@@ -24,7 +23,7 @@ class Paintable {
         }
         
     }
-
+*/
 };
 }
 ///////////////////////////////////////////////////////////////////////

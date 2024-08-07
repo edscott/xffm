@@ -107,12 +107,6 @@ private:
             command = g;
         }
         TRACE("thread_run command = %s\n", command);
-        /* FIXME: workdir must be set in constructor
-        if (chdir(get_workdir())<0){
-            printc::print_error(textview, g_strdup_printf("chdir(%s): %s\n", get_workdir(), strerror(errno)));
-            return 0;
-        }
-        */
 
         pid_t pid = Tubo::Fork (fork_function,(gchar **)arguments,
                                     NULL, // stdin
@@ -173,12 +167,6 @@ public:
             command = g;
         }
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
-        /* FIXME: workdir must be set in constructor
-        if (chdir(get_workdir())<0){
-            printc::print_error(textview, g_strdup_printf("chdir(%s): %s\n", get_workdir(), strerror(errno)));
-            return 0;
-        }
-        */
 
         pid_t pid = Tubo::Fork (fork_function,(gchar **)arguments,
                                     NULL, // stdin

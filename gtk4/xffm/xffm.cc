@@ -3,12 +3,12 @@
  * license: GPL v.3
  */
 #include "xffm.h"
+#include "settings.hh"
 #include "util.hh"
 #include "bash.hh"
 #include "history.hh"
 #include "thread.hh"
 #include "tubo.hh"
-#include "settings.hh"
 #include "run.hh"
 #include "runbutton.hh"
 

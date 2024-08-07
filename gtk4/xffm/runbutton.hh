@@ -60,19 +60,14 @@ public:
         TRACE("RunButton for %s\n", exec_command);
         gboolean shellIcon = Run::run_in_shell(command);
 
-        //parent_ = page_->parent(); // aparently not in use...
-        
-        // FIXME: place button space on each page
-        //button_space_ = page_->parent()->vButtonBox();
-        
         in_shell_ = shellIcon;
         pid_ = child;
         grandchild_ = Tubo::getChild(child);
         command_ = g_strdup (command);
         icon_id_ = NULL;
-        tip_ = NULL;
+        tip_ = g_strdup (command);
         workdir_ = g_strdup(workdir);
-        textview_ = output; //textview_ = page_->output();
+        textview_ = output; 
         buttonSpace_ = buttonBox;
         TRACE ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
 
@@ -143,9 +138,10 @@ public:
     void set_tip(const gchar *tip){
         g_free(tip_);
         tip_ = g_strdup(tip); 
+        Util::setTooltip(GTK_WIDGET(button_), tip_);
     }
 
- 
+/* 
 static void
 activate(GtkWidget *self, gpointer data) { 
   char *string = (char *)data;
@@ -160,14 +156,13 @@ activate(GtkWidget *self, gpointer data) {
   }
   return;
 }
-
+*/
     static GtkPopover *
     mkPsMenu(GtkLabel *title, RunButton *run_button_p, const gchar **items, void **callback, void **data){
       auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
       auto titleBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       gtk_box_append (GTK_BOX (vbox), GTK_WIDGET(titleBox));
       gtk_box_append (GTK_BOX (titleBox), GTK_WIDGET(title));
-      //g_object_set_data(G_OBJECT(vbox), "titleBox", titleBox);
 
       GtkWidget *menu = gtk_popover_new ();
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
@@ -178,6 +173,9 @@ activate(GtkWidget *self, gpointer data) {
       void **r = data;
       for (const gchar **p=items; p && *p && *q; p++){
         GtkWidget *item = gtk_button_new_with_label(*p);
+        gchar *t = g_strdup_printf("%s: %d", _("Signal to emit"), *r);
+        Util::setTooltip(item, t);
+        g_free(t);
         g_object_set_data(G_OBJECT(item), "run_button_p", run_button_p);
         gtk_button_set_has_frame(GTK_BUTTON(item), FALSE);
         gtk_box_append (GTK_BOX (vbox), item);
@@ -238,61 +236,26 @@ activate(GtkWidget *self, gpointer data) {
         (void *)ps_signal, //11
         NULL};
         GtkLabel *title = GTK_LABEL(gtk_label_new(""));
-        gchar *markup1 = g_strdup(run_button_p->command());
-        for (auto p = markup1; p && *p; p++){
+
+        gchar *commandS = g_strdup(run_button_p->command());
+        for (auto p = commandS; p && *p; p++){
             if (*p == '&') *p='^';
             if (*p == '>') *p='!';
             if (*p == '<') *p='!';
         }
-        gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s\n</span><span color=\"red\" size=\"larger\">pid: %d</span>", markup1, run_button_p->grandchild());
-        g_free(markup1);
+
+        gchar *process = g_strdup_printf("Process: %s\n", commandS);
+        gchar *pidS = g_strdup_printf("<span color=\"red\" size=\"larger\">pid: %d</span>", run_button_p->grandchild());
+        gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s</span>%s", process, pidS);
+        Util::concat(&markup, "\n<span color=\"green\" size=\"larger\">Send signal:</span>");
+        g_free(commandS);
+        g_free(process);
+        g_free(pidS);
+
         gtk_label_set_markup(title, markup);
         g_free(markup);
-
-
-      
-        
-        return GTK_WIDGET(mkPsMenu(title, run_button_p, items, callbacks, signals));
-      
-  
-/*
-        
-        gint signals[] = {
-            -1,
-            SIGSTOP, SIGCONT, SIGINT, SIGHUP, SIGUSR1, 
-            SIGUSR2, SIGTERM, SIGABRT, SIGKILL, SIGSEGV};
-
-        
-        GtkMenuItem *title = GTK_MENU_ITEM(gtk_c::menu_item_new(NULL, "")); 
-        gtk_widget_set_sensitive(GTK_WIDGET(title), FALSE);
-        gtk_widget_show (GTK_WIDGET(title));
-        gtk_container_add (GTK_CONTAINER (menu_), GTK_WIDGET(title));
-        // No good for commands with && or >
-        gchar *markup1 = g_strdup( command_);
-        for (auto p = markup1; p && *p; p++){
-            if (*p == '&') *p='^';
-            if (*p == '>') *p='!';
-            if (*p == '<') *p='!';
-        }
-        
-        gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s\n</span><span color=\"red\" size=\"larger\">pid: %d</span>", markup1, grandchild_);
-        g_free(markup1);        
-        gtk_c::menu_item_content(title, NULL, markup, -48);
-        g_free(markup);
-
-        const gchar **p = items;
-        gint i;
-        for (i=0;p && *p; p++,i++){
-            GtkWidget *v = gtk_menu_item_new_with_label (_(*p));
-            g_object_set_data(G_OBJECT(v), "run_button_p", (void *)this);
-            TRACE("set data: (%p) -> %p\n", (void *)v, (void *)this);
-            gtk_container_add (GTK_CONTAINER (menu_), v);
-            g_signal_connect ((gpointer) v, "activate", MENUITEM_CALLBACK (ps_signal), GINT_TO_POINTER(signals[i]));
-            gtk_widget_show (v);
-        }
-        gtk_widget_show (GTK_WIDGET(menu_));
-      
-        return ;*/
+             
+        return GTK_WIDGET(mkPsMenu(title, run_button_p, items, callbacks, signals)); 
     }
 
     static void
@@ -303,10 +266,10 @@ activate(GtkWidget *self, gpointer data) {
         // Shell commands come from lpterminal (with specific shell characters).
         gchar *command = g_strdup(run_button_p->command());
         
-        /*if (run_button_p->inShell()) {
+        if (run_button_p->inShell()) {
             TRACE("run_button_p->inShell\n");
             run_button_p->set_icon_id("utilities-terminal");
-        } else */
+        } else 
         {
             command = g_strstrip(command);
             gchar **args = g_strsplit(command, " ", -1);
@@ -317,21 +280,18 @@ activate(GtkWidget *self, gpointer data) {
                 // xterm exception
                 if (strcmp(icon_id, "xterm")==0){
                     g_free(icon_id);
-                    icon_id = g_strdup("utilities-terminal");
+                    icon_id = g_strdup("video-display");
                 } 
-                GdkDisplay *displayGdk = gdk_display_get_default();
-                GtkIconTheme *theme = gtk_icon_theme_get_for_display(displayGdk);
-                if (gtk_icon_theme_has_icon (theme, icon_id)){
+                if (gtk_icon_theme_has_icon (icon_theme, icon_id)){
                   auto button = run_button_p->button();
                   gtk_menu_button_set_icon_name(button, icon_id);
                 }
 
             }
             g_strfreev(args);
-            if (!icon_id) {
-                //icon_id = g_strdup("run");
-                icon_id = g_strdup("system-run");
-            }
+           /* if (!icon_id) {
+                icon_id = g_strdup("network-workgroup");
+            }*/
             run_button_p->set_icon_id(icon_id);
         }
 
@@ -364,7 +324,7 @@ activate(GtkWidget *self, gpointer data) {
         //auto button = GTK_MENU_BUTTON(gtk_menu_button_new ());
         auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
 
-        gtk_menu_button_set_icon_name(button, "network-workgroup");
+        gtk_menu_button_set_icon_name(button, "emblem-greenball");
         //auto button = Util::newButton("avatar-default", "tooltip here" );
         run_button_p->setButton(button);
 
@@ -424,15 +384,6 @@ activate(GtkWidget *self, gpointer data) {
                 run_button_p->pid(), run_button_p->grandchild()));
 #endif
         
-        /// FIXME: the following code is to signal the background monitor
-        //         currently no monitor is enabled.
-        // Run has completed.  
-        // no use for controller process anymore....
-        TRACE("run has completed: %d\n", run_button_p->pid());
-        // FIXME: what does rfm_remove_child do??
-        //        remove controller!
-        // FIXME: enable
-        // rfm_remove_child(run_data_p->pid);
         // Flush pipes.
         fflush(NULL);  
         // Destroy little button (if exists) and free run_data_p 
@@ -504,7 +455,6 @@ activate(GtkWidget *self, gpointer data) {
         if (inShell()) pid = shell_child_pid(pid);
 
         gchar *command = g_strdup_printf("renice +1 -p %ld", pid);
-        // FIXME: remove .  false, true line
         Run::shell_command(textview_, command, false, true); // yes output to textview
         //Run::shell_command(textview_, command, false, false); // no output to textview
         // Here we do not need to save "$command" to history...
@@ -526,17 +476,15 @@ activate(GtkWidget *self, gpointer data) {
     static void
     show_run_info (GtkButton * button, gpointer data) {
         auto run_button_p = (RunButton *)data;
-        TRACE("FIXME: popup signal menu or dialog here.\n");
+        TRACE("popup signal menu or dialog here.\n");
     }
     
 public:
     void sendSignal(gint signal_id){
         glong pid = grandchild();
-        fprintf(stderr, "signal %d to %ld\n", signal_id, grandchild());
         if (!pid) return;
         // Do we need sudo?
         gboolean sudoize = FALSE;
-        fprintf(stderr, "signal %d to %s\n", signal_id, command());
         if (strncmp(command(), "sudo", strlen("sudo"))==0) sudoize = TRUE;
         // Are we running in a shell?
         if (inShell() || sudoize){
@@ -568,7 +516,6 @@ public:
             command =  g_strdup_printf("%s -%d -%ld", kill, signal_id, pid);
         }
         DBG("signalling with %s\n", command);
-        // FIXME: remove   FALSE, TRUE line
         Run::shell_command(textview_, command, FALSE, TRUE); // yes output to textview
         //Run::shell_command(textview_, command, FALSE, FALSE); // no output to textview
         // Again, when we signal process, there is no need to save command
