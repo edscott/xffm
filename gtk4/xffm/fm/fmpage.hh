@@ -87,6 +87,8 @@ namespace xf {
         g_object_set_data(G_OBJECT(box), "prompt_object", prompt_object_);
         auto output = vpane_object_->output();
         auto input = prompt_object_->input();
+        auto buttonSpace = prompt_object_->buttonSpace();
+        g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
 
         g_object_set_data(G_OBJECT(input), "output", output);
         g_object_set_data(G_OBJECT(output), "input", input);
@@ -96,6 +98,8 @@ namespace xf {
 
         auto promptBox = GTK_WIDGET(prompt_object_->promptBox());
         auto vpane = GTK_WIDGET(vpane_object_->vpane());
+        g_object_set_data(G_OBJECT(box), "vpane", vpane);
+
         Util::boxPack0(box, GTK_WIDGET(vpane),  TRUE, TRUE, 0);
         Util::boxPack0(box, GTK_WIDGET(promptBox),  FALSE, TRUE, 0);
 

@@ -57,7 +57,7 @@ public:
     }
     
     void init(RunButton *runButton, const gchar *command, pid_t child, GtkTextView *output, const gchar *workdir, GtkBox *buttonBox){
-        TRACE("RunButton for %s\n", exec_command);
+        TRACE("RunButton for %s\n", command);
         gboolean shellIcon = Run::run_in_shell(command);
 
         in_shell_ = shellIcon;
@@ -70,7 +70,7 @@ public:
         textview_ = output; 
         buttonSpace_ = buttonBox;
         TRACE ("RunButton::setup_run_button_thread: controller/process=%d/%d\n", (int)child, (gint)grandchild_);
-
+        TRACE ("RunButton::buttonSpace = %p\n", buttonSpace_);
 //        
         auto text = g_strdup_printf("RunButton::setup(): %s", command_);
         new(Thread)(text, run_wait_f, (void *) this);
@@ -181,10 +181,10 @@ activate(GtkWidget *self, gpointer data) {
         gtk_box_append (GTK_BOX (vbox), item);
         if (*q) {
           g_signal_connect (G_OBJECT (item), "clicked", G_CALLBACK(*q), *r);
+          q++;
         }
         g_object_set_data(G_OBJECT(item), "menu", menu);
-        if (q) q++;
-        if (r) r++;
+        if (*r) r++;
       }
           
       gtk_popover_set_child (GTK_POPOVER (menu), vbox);
@@ -492,7 +492,7 @@ public:
             pid = shell_child_pid(pid);
         }
             
-        DBG("signal to pid: %ld (inShell()=%d sudo=%d) \"%s\"\n", pid, inShell(), sudoize, command());
+        TRACE("signal to pid: %ld (inShell()=%d sudo=%d) \"%s\"\n", pid, inShell(), sudoize, command());
             //        1.undetached child will remain as zombie
             //        2.sudo will remain in wait state and button will not disappear
             // hack: if signal is kill, kill sudo in the same command
@@ -515,9 +515,9 @@ public:
         } else {
             command =  g_strdup_printf("%s -%d -%ld", kill, signal_id, pid);
         }
-        DBG("signalling with %s\n", command);
-        Run::shell_command(textview_, command, FALSE, TRUE); // yes output to textview
-        //Run::shell_command(textview_, command, FALSE, FALSE); // no output to textview
+        TRACE("signalling with %s\n", command);
+        //Run::shell_command(textview_, command, FALSE, TRUE); // yes output to textview
+        Run::shell_command(textview_, command, FALSE, FALSE); // no output to textview
         // Again, when we signal process, there is no need to save command
         // in the csh history file.
         g_free(command);

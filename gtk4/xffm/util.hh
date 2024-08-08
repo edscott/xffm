@@ -232,7 +232,16 @@ namespace xf {
       auto child = getCurrentChild();
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
     }
+    static GtkPaned *getCurrentPane(void){
+      auto child = getCurrentChild();
+      auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(child), "vpane"));
+      return vpane;
+    }
 
+    static GtkBox *getCurrentButtonSpace(void){
+      auto child = getCurrentChild();
+      return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
+    }
     static GtkWidget *getCurrentChild(void){
       //DBG("getCurrentChild...\n");
       if (!MainWidget) return NULL;
@@ -400,6 +409,10 @@ namespace xf {
         }
         TRACE ("ESC:estring=%s\n", estring);
         return estring;
+    }
+    static const gchar *getTerminal(){
+        setTerminal();
+        return  getenv("TERMINAL");
     }
 
     static const gchar *getTerminalCmd(){

@@ -450,8 +450,22 @@ public:
         auto command = sudo_fix(c);
         TRACE("shell_command = %s\n", c);
         if (showTextPane) Util::showText(textview);
+        auto currentDir = g_get_current_dir();
+        auto wd = Util::getWorkdir();
+#ifdef WINDOWS_COMPILE
+        g_chdir(wd);
+#else
+        chdir(wd);
+#endif
         pid_t pid = thread_run(textview, command?command:c, scrollUp);
         g_free (command);
+#ifdef WINDOWS_COMPILE
+        g_chdir(currentDir);
+#else
+        chdir(currentDir);
+#endif
+
+        g_free(currentDir);
         if (!pid) return 0;
         return pid;
     }

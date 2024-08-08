@@ -6,12 +6,12 @@ namespace xf {
 
     public:
     GtkBox *promptBox(void){ return promptBox_;}
-    GtkBox *buttonBox(void){ return buttonBox_;}
+    GtkBox *buttonSpace(void){ return buttonSpace_;}
     GtkTextView *input(void){ return input_;}
     private:
     GtkBox *promptBox_;
     GtkTextView *input_;
-    GtkBox *buttonBox_;
+    GtkBox *buttonSpace_;
     
     GtkButton *promptButton_;
     GtkButton *clearButton_;
@@ -21,11 +21,17 @@ namespace xf {
 
     Prompt(void) {
         promptBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        buttonBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        buttonSpace_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
         auto dollar = createPrompt();
         input_ = createInput(); 
-        g_object_set_data(G_OBJECT(input_), "buttonBox", buttonBox_);
+        g_object_set_data(G_OBJECT(input_), "buttonSpace", buttonSpace_);
+        g_object_set_data(G_OBJECT(promptBox_), "buttonSpace", buttonSpace_);
+
+        // child does not yet exist.
+        //auto child =Util::getCurrentChild();
+        //g_object_set_data(G_OBJECT(child), "buttonSpace", buttonSpace_);
+        //DBG ("Prompt::childWidget= %p, buttonSpace = %p\n", child, buttonSpace_);
 
 
         auto keyController = gtk_event_controller_key_new();
@@ -34,7 +40,7 @@ namespace xf {
             G_CALLBACK (this->on_keypress), (void *)input_);
         Util::boxPack0 (promptBox_, GTK_WIDGET(dollar), FALSE, FALSE, 0);
         Util::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
-        Util::boxPack0 (promptBox_, GTK_WIDGET(buttonBox_), FALSE, TRUE, 0);
+        Util::boxPack0 (promptBox_, GTK_WIDGET(buttonSpace_), FALSE, TRUE, 0);
     }
     private:
     static pid_t
