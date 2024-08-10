@@ -99,10 +99,18 @@ namespace xf {
     public:
 
 
-    static GtkPopover *mkMenu(const char **text, GHashTable **mHash){
+    static GtkPopover *mkMenu(const char **text, GHashTable **mHash, const gchar *title){
       auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
       auto titleBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       gtk_box_append (vbox, GTK_WIDGET(titleBox));
+      if (title) {
+        auto label = GTK_LABEL(gtk_label_new(""));
+        auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", title);
+        gtk_label_set_markup(label, markup);
+        g_free(markup);
+        gtk_box_append (vbox, GTK_WIDGET(label));
+      }
+      
 
       GtkPopover *menu = GTK_POPOVER(gtk_popover_new ());
       g_object_set_data(G_OBJECT(menu), "titleBox", titleBox);

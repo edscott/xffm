@@ -30,6 +30,8 @@ namespace xf {
         bottomScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util::newTextView();
 
+        auto popover = mkTextviewMenu();
+//FIXME/// add signal controller for popover menu.
          // deprecated g_object_set_data(G_OBJECT(vpane_), "diagnostics", output_);
          g_object_set_data(G_OBJECT(vpane_), "output", output_);
          g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
@@ -45,6 +47,29 @@ namespace xf {
         gtk_scrolled_window_set_child(bottomScrolledWindow_, GTK_WIDGET(output_));
         
         return ;
+    }
+
+    private:
+    GtkPopover *mkTextviewMenu(void){
+      static const char *text[]= {
+        _("Copy"), 
+        _("Select All"), 
+        NULL
+      };
+      GHashTable *mHash[3];
+      mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+      for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
+
+      g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
+      g_hash_table_insert(mHash[1], _("Copy"), NULL);
+      g_hash_table_insert(mHash[2], _("Copy"), NULL);
+      g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
+      g_hash_table_insert(mHash[1], _("Select All"), NULL);
+      g_hash_table_insert(mHash[2], _("Select All"), NULL);
+
+      auto menu = Util::mkMenu(text,mHash,_("Output Menu"));
+ 
+      return menu;
     }
 
   };

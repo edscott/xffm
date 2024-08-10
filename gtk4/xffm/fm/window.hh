@@ -228,8 +228,8 @@ private:
       static const char *text[]= {
         _("New"),
         _("Open in New Tab"), 
-        _("Dual Mode AccessPoint"), 
-        //_("Open in New Window"), 
+        //_("Dual Mode AccessPoint"), // quite hard...
+        _("Open in New Window"), 
         _("Copy"), 
         _("Cut"), 
         _("Paste"), 
@@ -244,8 +244,8 @@ private:
       // icons
       g_hash_table_insert(mHash[0], _("New"), g_strdup(DOCUMENT_NEW));
       g_hash_table_insert(mHash[0], _("Open in New Tab"), g_strdup(NEW_TAB));
-      g_hash_table_insert(mHash[0], _("Dual Mode AccessPoint"), g_strdup(DUAL_VIEW));
-//      g_hash_table_insert(mHash[0], _("Open in New Window"), g_strdup());
+      //g_hash_table_insert(mHash[0], _("Dual Mode AccessPoint"), g_strdup(DUAL_VIEW));
+      g_hash_table_insert(mHash[0], _("Open in New Window"), g_strdup(DUAL_VIEW));
       g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
       g_hash_table_insert(mHash[0], _("Cut"), g_strdup(EDIT_CUT));
       g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
@@ -259,8 +259,8 @@ private:
       // callbacks
       g_hash_table_insert(mHash[1], _("New"), NULL);
       g_hash_table_insert(mHash[1], _("Open in New Tab"), NULL);
-      g_hash_table_insert(mHash[1], _("Dual Mode AccessPoint"), NULL);
-//      g_hash_table_insert(mHash[1], _("Open in New Window"), NULL);
+      //g_hash_table_insert(mHash[1], _("Dual Mode AccessPoint"), NULL);
+      g_hash_table_insert(mHash[1], _("Open in New Window"), NULL);
       g_hash_table_insert(mHash[1], _("Copy"), NULL);
       g_hash_table_insert(mHash[1], _("Cut"), NULL);
       g_hash_table_insert(mHash[1], _("Paste"), NULL);
@@ -271,7 +271,7 @@ private:
       g_hash_table_insert(mHash[1], _("Global Settings"), NULL);
       g_hash_table_insert(mHash[1], _("Close"), (void *)close);
 
-      auto menu = Util::mkMenu(text,mHash);
+      auto menu = Util::mkMenu(text,mHash, _("Main Menu"));
       //auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("New")));
       for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
       return menu;
@@ -299,12 +299,6 @@ private:
       auto menu = mkMainMenu();
       
       gtk_menu_button_set_popover (newMenuButton, GTK_WIDGET(menu));  
-      auto titleBox = GTK_BOX(g_object_get_data(G_OBJECT(menu), "titleBox"));
-      auto label = GTK_LABEL(gtk_label_new(""));
-      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Main Menu"));
-      gtk_label_set_markup(label, markup);
-      g_free(markup);
-      Util::boxPack0(titleBox, GTK_WIDGET(label),  TRUE, FALSE, 0);
 
 
 
