@@ -56,6 +56,7 @@
 #define PREVIEW_IMAGE_SIZE  400
 #define DEFAULT_FONT_FAMILY    "Sans"
 
+
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 static GtkWidget *MainWidget;

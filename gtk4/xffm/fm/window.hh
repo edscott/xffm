@@ -5,7 +5,6 @@
 
 namespace xf {
 
-
 template <class VbuttonClass, class PageClass> 
 class MainWindow: public VbuttonClass, public PageClass {
   using mainWindow_c = MainWindow<VbuttonClass, PageClass>;
@@ -218,6 +217,65 @@ private:
       Util::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
       return GTK_WIDGET(tabBox);
     }
+
+    GtkPopover *mkMainMenu(void){
+#define ICONHASH mHash[0];
+#define CALLBACKHASH mHash[1];
+#define DATAHASH mHash[2];
+      GHashTable *mHash[3];
+      mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+      for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
+      static const char *text[]= {
+        _("New"),
+        _("Open in New Tab"), 
+        _("Dual Mode AccessPoint"), 
+        //_("Open in New Window"), 
+        _("Copy"), 
+        _("Cut"), 
+        _("Paste"), 
+        _("Delete"), 
+        _("Select All"), 
+        _("Match regular expression"), 
+        _("Local Settings"), 
+        _("Global Settings"), 
+        _("Close"), 
+        NULL
+      };
+      // icons
+      g_hash_table_insert(mHash[0], _("New"), g_strdup(DOCUMENT_NEW));
+      g_hash_table_insert(mHash[0], _("Open in New Tab"), g_strdup(NEW_TAB));
+      g_hash_table_insert(mHash[0], _("Dual Mode AccessPoint"), g_strdup(DUAL_VIEW));
+//      g_hash_table_insert(mHash[0], _("Open in New Window"), g_strdup());
+      g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
+      g_hash_table_insert(mHash[0], _("Cut"), g_strdup(EDIT_CUT));
+      g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
+      g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
+      g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
+      g_hash_table_insert(mHash[0], _("Match regular expression"), g_strdup(DIALOG_QUESTION));
+      g_hash_table_insert(mHash[0], _("Local Settings"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[0], _("Global Settings"), g_strdup(PREFERENCES));
+      g_hash_table_insert(mHash[0], _("Close"), g_strdup(WINDOW_SHUTDOWN));
+
+      // callbacks
+      g_hash_table_insert(mHash[1], _("New"), NULL);
+      g_hash_table_insert(mHash[1], _("Open in New Tab"), NULL);
+      g_hash_table_insert(mHash[1], _("Dual Mode AccessPoint"), NULL);
+//      g_hash_table_insert(mHash[1], _("Open in New Window"), NULL);
+      g_hash_table_insert(mHash[1], _("Copy"), NULL);
+      g_hash_table_insert(mHash[1], _("Cut"), NULL);
+      g_hash_table_insert(mHash[1], _("Paste"), NULL);
+      g_hash_table_insert(mHash[1], _("Delete"), NULL);
+      g_hash_table_insert(mHash[1], _("Select All"), NULL);
+      g_hash_table_insert(mHash[1], _("Match regular expression"), NULL);
+      g_hash_table_insert(mHash[1], _("Local Settings"), NULL);
+      g_hash_table_insert(mHash[1], _("Global Settings"), NULL);
+      g_hash_table_insert(mHash[1], _("Close"), (void *)close);
+
+      auto menu = Util::mkMenu(text,mHash);
+      //auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("New")));
+      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
+      return menu;
+    }
     
 
     void mkNotebook(){
@@ -233,8 +291,21 @@ private:
 
       auto actionWidget = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       auto tabButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+      auto menuButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
       auto newTabButton = Util::newButton("list-add", _("New Tab"));
+//      auto newMenuButton = Util::newMenuButton("open-menu", _("Open Menu"));
+      auto newMenuButton = Util::newMenuButton("open-menu", NULL);
+      auto menu = mkMainMenu();
+      
+      gtk_menu_button_set_popover (newMenuButton, GTK_WIDGET(menu));  
+      auto titleBox = GTK_BOX(g_object_get_data(G_OBJECT(menu), "titleBox"));
+      auto label = GTK_LABEL(gtk_label_new(""));
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Main Menu"));
+      gtk_label_set_markup(label, markup);
+      g_free(markup);
+      Util::boxPack0(titleBox, GTK_WIDGET(label),  TRUE, FALSE, 0);
+
 
 
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
@@ -246,8 +317,10 @@ private:
 
       Util::boxPack0(tabButtonBox, GTK_WIDGET(longPressImage_),  TRUE, FALSE, 0);
       Util::boxPack0(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
+      Util::boxPack0(menuButtonBox, GTK_WIDGET(newMenuButton),  TRUE, FALSE, 0);
       //Util::boxPack0(tabButtonBox, GTK_WIDGET(this->menuButton()),  TRUE, FALSE, 0);
       Util::boxPack0(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
+      Util::boxPack0(actionWidget, GTK_WIDGET(menuButtonBox),  TRUE, FALSE, 0);
 
       gtk_notebook_set_action_widget (notebook_, GTK_WIDGET(actionWidget), GTK_PACK_END);
 
@@ -276,6 +349,12 @@ private:
       return GTK_WIDGET(mainBox);
     }
 
+private:
+    static void
+    close(GtkButton *self, void *data){
+      gtk_widget_set_visible(MainWidget, FALSE);
+      gtk_window_destroy(GTK_WINDOW(MainWidget));
+    }
 };
 
 

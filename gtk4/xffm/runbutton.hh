@@ -321,11 +321,9 @@ activate(GtkWidget *self, gpointer data) {
     static void *
     make_run_data_button (void *data) {
         auto run_button_p = (RunButton *)data;
-        //auto button = GTK_MENU_BUTTON(gtk_menu_button_new ());
         auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
 
         gtk_menu_button_set_icon_name(button, "emblem-greenball");
-        //auto button = Util::newButton("avatar-default", "tooltip here" );
         run_button_p->setButton(button);
 
         auto menu = create_menu(run_button_p);

@@ -47,6 +47,10 @@
 #define DOCUMENT_SAVE "document-save"
 #define SYMLINK "emblem-symbolic-link"
 #define DOCUMENT_PROPERTIES "document-properties"
+#define PREFERENCES "preferences-system"
+#define DUAL_VIEW "view-dual"
+#define VIEW_MORE "view-more"
+#define DIALOG_QUESTION "dialog-question"
 
 // root/model.hh
 #define EFS_ICON "password"
@@ -84,6 +88,7 @@
 #define ACCESSORIES_TEXT_EDITOR "document-edit-symbolic"
 #define WINDOW_NEW "window-new-symbolic"
 #define WINDOW_CLOSE "window-close-symbolic"
+#define WINDOW_SHUTDOWN "system-shutdown-symbolic"
 #define APPLICATION_X_EXECUTABLE "application-x-executable-symbolic"
 #define GO_UP_SYMBOLIC "up"
 #define GO_UP "up"

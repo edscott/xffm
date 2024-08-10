@@ -99,32 +99,49 @@ namespace xf {
     public:
 
 
-    static GtkPopover *mkMenu(const gchar **items, void **callback, void **data){
-      auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    static GtkPopover *mkMenu(const char **text, GHashTable **mHash){
+      auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
       auto titleBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-      gtk_box_append (GTK_BOX (vbox), GTK_WIDGET(titleBox));
-      g_object_set_data(G_OBJECT(vbox), "titleBox", titleBox);
+      gtk_box_append (vbox, GTK_WIDGET(titleBox));
 
-      GtkWidget *menu = gtk_popover_new ();
+      GtkPopover *menu = GTK_POPOVER(gtk_popover_new ());
+      g_object_set_data(G_OBJECT(menu), "titleBox", titleBox);
+      gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
       gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
 
-      void **q = callback;
-      void **r = data;
-      for (const gchar **p=items; p && *p && *q; p++){
-        GtkWidget *item = gtk_button_new_with_label(*p);
-        gtk_button_set_has_frame(GTK_BUTTON(item), FALSE);
-        gtk_box_append (GTK_BOX (vbox), item);
-        if (*q) {
-          g_signal_connect (G_OBJECT (item), "clicked", G_CALLBACK(*q), *r);
+
+      for (const char **p=text; p && *p; p++){
+        GtkButton *button = GTK_BUTTON(gtk_button_new());
+        auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        auto label = GTK_LABEL(gtk_label_new(""));
+        gtk_label_set_markup(label, *p);
+        auto icon = (const char *) g_hash_table_lookup(mHash[0], *p);
+        if (icon){
+          auto image = gtk_image_new_from_icon_name(icon);
+          Util::boxPack0(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
         }
-        g_object_set_data(G_OBJECT(item), "menu", menu);
-        if (q) q++;
-        if (r) r++;
+        Util::boxPack0(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);
+        gtk_button_set_child(button, GTK_WIDGET(hbox));
+        Util::boxPack0(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
+      
+        
+        g_object_set_data(G_OBJECT(menu), *p, button);
+
+        gtk_button_set_has_frame(button, FALSE);
+        gtk_widget_set_visible(GTK_WIDGET(button), TRUE);
+        
+        auto callback = g_hash_table_lookup(mHash[1], *p);
+        TRACE("mkMenu() callback=%p, icon=%s\n", callback, icon);
+        if (callback) {
+          auto data = g_hash_table_lookup(mHash[2], *p);
+          g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(callback), data);
+        }
+        g_object_set_data(G_OBJECT(button), "menu", menu);
       }
           
-      gtk_popover_set_child (GTK_POPOVER (menu), vbox);
-      return GTK_POPOVER(menu);
+      gtk_popover_set_child (menu, GTK_WIDGET(vbox));
+      return menu;
     }
 
     static
@@ -304,6 +321,23 @@ namespace xf {
 
       gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
       gtk_button_set_has_frame(button, FALSE);
+      return button;
+    }
+    static 
+    GtkMenuButton *newMenuButton(const gchar *icon, const gchar *tooltipText){
+      if (!tooltipText && !icon) {
+        fprintf(stderr, "Util::newMenuButton(): programing error.\n");
+        exit(1);
+      }
+      auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
+      if (tooltipText) {
+        if (!icon) gtk_menu_button_set_label(button, tooltipText);
+        else setTooltip(GTK_WIDGET(button), tooltipText);
+      }
+      if (icon) gtk_menu_button_set_icon_name(button, icon);
+
+      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+      gtk_menu_button_set_has_frame(button, FALSE);
       return button;
     }
     static 
