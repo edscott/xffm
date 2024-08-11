@@ -44,7 +44,7 @@ namespace xf {
     }
     private:
     static pid_t
-    run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonBox){
+    run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonSpace){
       DBG("run: %s\n", command);
         pid_t child = 0;
         auto workdir = Util::getWorkdir();
@@ -103,7 +103,7 @@ namespace xf {
             child = Run::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) {
               runButton = new (RunButton);
-              runButton->init(runButton, *c, child, output, Util::getWorkdir(), buttonBox);
+              runButton->init(runButton, *c, child, output, Util::getWorkdir(), buttonSpace);
             }
             DBG("command loop...\n");
 //            if (withRunButton) newRunButton(*c, child);
@@ -181,9 +181,9 @@ namespace xf {
       }
       Util::print(output, g_strdup_printf("\n"));
         
-      auto buttonBox = GTK_BOX(g_object_get_data(G_OBJECT(input), "buttonBox"));
+      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(input), "buttonSpace"));
       
-      run(output, text, true, true, buttonBox);
+      run(output, text, true, true, buttonSpace);
       g_free(inPath);
       g_strfreev(v);
       return true;

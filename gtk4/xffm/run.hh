@@ -199,7 +199,7 @@ public:
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
             auto msg = g_strcompress (error->message);
             if (textview) Util::printError(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
-            else DBG("%s: %s\n", msg, ncommand);
+            else TRACE("%s: %s\n", msg, ncommand);
             g_free(ncommand);
             g_error_free (error);
             g_free (msg);

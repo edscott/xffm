@@ -486,7 +486,7 @@ public:
         if (strncmp(command(), "sudo", strlen("sudo"))==0) sudoize = TRUE;
         // Are we running in a shell?
         if (inShell() || sudoize){
-            DBG("shell child pid required...\n");
+            TRACE("shell child pid required...\n");
             pid = shell_child_pid(pid);
         }
             
