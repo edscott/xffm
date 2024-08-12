@@ -117,9 +117,11 @@ namespace xf {
     history(GtkTextView *input, guint keyval){
       switch (keyval){
         case GDK_KEY_Up:
+        case GDK_KEY_KP_Up:
           History::up(input);
           return true;
       case GDK_KEY_Down:
+      case GDK_KEY_KP_Down:
            History::down(input);
            return true;
       }

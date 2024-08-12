@@ -21,8 +21,8 @@
 #define TRASH_ICON "user-trash"
 
 // pathbar.hh
-#define GO_PREVIOUS "previous"
-#define GO_JUMP "jump"
+//#define GO_PREVIOUS "previous"
+//#define GO_JUMP "jump"
 
 // menupopover.hh
 #define OPEN_MENU "menuTab"

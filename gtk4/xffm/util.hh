@@ -4,6 +4,69 @@
 
 namespace xf {
   class Util {
+  public:
+    static GtkBox *vButtonBox(void){
+      return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
+    }
+    static GtkTextView *getCurrentInput(void){
+      auto child = getCurrentChild();
+      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "input"));
+    }
+    static GtkTextView *getCurrentTextView(void){
+      auto child = getCurrentChild();
+      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+    }
+    static GtkPaned *getCurrentPane(void){
+      auto child = getCurrentChild();
+      auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(child), "vpane"));
+      return vpane;
+    }
+
+    static GtkBox *getCurrentButtonSpace(void){
+      auto child = getCurrentChild();
+      return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
+    }
+    static GtkWidget *getCurrentChild(void){
+      //DBG("getCurrentChild...\n");
+      if (!MainWidget) return NULL;
+      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+      int num = gtk_notebook_get_current_page(notebook);
+      GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
+      return child;
+    }
+    static const gchar *getWorkdir(void){
+      //DBG("getWorkdir...\n");
+      if (!MainWidget) return NULL;
+      auto child = getCurrentChild();
+      return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
+    }
+    static bool setWorkdir(const gchar *path){
+      //DBG("setWorkdir...\n");
+      if (!MainWidget) return false;
+      auto child = getCurrentChild();
+      auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
+      g_free(wd);
+      g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      setWindowTitle();
+      return true;
+    }
+      
+    static void
+    flushGTK(void){
+      while (g_main_context_pending(NULL))
+        g_main_context_iteration(NULL, TRUE);
+    }
+    static void
+    concat(gchar **fullString, const gchar* addOn){
+        if (!(*fullString)) {
+          *fullString = g_strdup(addOn);
+          return;
+        }
+        auto newString = g_strconcat(*fullString, addOn, NULL);
+        g_free(*fullString);
+        *fullString = newString;
+    }
+
     private:
 #define MAX_PATH_LABEL 40
 #define MAX_PATH_START_LABEL 18
@@ -248,64 +311,6 @@ namespace xf {
       g_free(string);
       //for (char **p=vector; p && *p && p->id p++)  DBG( "getVector():p=%s\n",*p);
       return vector;
-    }
-
-    static GtkBox *vButtonBox(void){
-      return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
-    }
-    static GtkTextView *getCurrentTextView(void){
-      auto child = getCurrentChild();
-      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
-    }
-    static GtkPaned *getCurrentPane(void){
-      auto child = getCurrentChild();
-      auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(child), "vpane"));
-      return vpane;
-    }
-
-    static GtkBox *getCurrentButtonSpace(void){
-      auto child = getCurrentChild();
-      return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
-    }
-    static GtkWidget *getCurrentChild(void){
-      //DBG("getCurrentChild...\n");
-      if (!MainWidget) return NULL;
-      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
-      int num = gtk_notebook_get_current_page(notebook);
-      GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
-      return child;
-    }
-    static const gchar *getWorkdir(void){
-      //DBG("getWorkdir...\n");
-      if (!MainWidget) return NULL;
-      auto child = getCurrentChild();
-      return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
-    }
-    static bool setWorkdir(const gchar *path){
-      //DBG("setWorkdir...\n");
-      if (!MainWidget) return false;
-      auto child = getCurrentChild();
-      auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
-      g_free(wd);
-      g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
-      setWindowTitle();
-      return true;
-    }
-      
-    static void
-    flushGTK(void){
-      while (g_main_context_pending(NULL))
-        g_main_context_iteration(NULL, TRUE);
-    }
-    static void
-    concat(gchar **fullString, const gchar* addOn){
-        if (!(*fullString)) {
-          *fullString = g_strdup(addOn);
-          return;
-        }
-        auto newString = g_strconcat(*fullString, addOn, NULL);
-        g_free(*fullString);
-        *fullString = newString;
     }
     static 
     void packEnd(GtkBox *box, GtkWidget *widget){
@@ -1188,6 +1193,7 @@ endloop:;
       g_strfreev(userTags);
       return tags;
   }
+ public:
   static gchar *
   utf_string (const gchar * t) {
       if(!t) { return g_strdup (""); }
@@ -1234,7 +1240,7 @@ endloop:;
       }
       return actual_tag;
   }
-
+ private:
   static const gchar *
   get_ansi_tag(const gchar *code){
       static sequence_t sequence_v[] = {

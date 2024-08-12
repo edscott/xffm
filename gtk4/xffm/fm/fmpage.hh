@@ -2,6 +2,7 @@
 #define XF_FMPAGE_HH
 #include "prompt.hh"
 #include "fmbuttonbox.hh"
+#include "pathbar.hh"
 
 namespace xf {
 
@@ -74,15 +75,13 @@ namespace xf {
 
   };
 
-  class FMpage {
+  class FMpage : public Pathbar, public Vpane, public Prompt {
     private:
       gchar *path_=NULL;
       // We keep reference to Vpane object,
       // eventhough it will change. Actual reference
       // will be asociated to page box.
       // Same for Prompt.
-      Vpane *vpane_object_;
-      Prompt *prompt_object_;
     public:
       FMpage(void){
       }
@@ -106,13 +105,11 @@ namespace xf {
         auto *label = gtk_label_new(tag);
         g_free(tag);
         gtk_widget_set_vexpand(GTK_WIDGET(box), TRUE);
-        vpane_object_ = new(Vpane);
-        prompt_object_ = new(Prompt);
-        g_object_set_data(G_OBJECT(box), "vpane_object", vpane_object_);
-        g_object_set_data(G_OBJECT(box), "prompt_object", prompt_object_);
-        auto output = vpane_object_->output();
-        auto input = prompt_object_->input();
-        auto buttonSpace = prompt_object_->buttonSpace();
+
+        
+        auto output = this->output();
+        auto input = this->input();
+        auto buttonSpace = this->buttonSpace();
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
 
         g_object_set_data(G_OBJECT(input), "output", output);
@@ -121,12 +118,13 @@ namespace xf {
         g_object_set_data(G_OBJECT(box), "output", output);
         g_object_set_data(G_OBJECT(box), "input", input);
 
-        auto promptBox = GTK_WIDGET(prompt_object_->promptBox());
-        auto vpane = GTK_WIDGET(vpane_object_->vpane());
+        auto promptBox = GTK_WIDGET(this->promptBox());
+        auto vpane = GTK_WIDGET(this->vpane());
         g_object_set_data(G_OBJECT(box), "vpane", vpane);
 
-        Util::boxPack0(box, GTK_WIDGET(vpane),  TRUE, TRUE, 0);
-        Util::boxPack0(box, GTK_WIDGET(promptBox),  FALSE, TRUE, 0);
+        Util::boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
+        Util::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
+        Util::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
 
         //gtk_widget_set_visible(promptBox, TRUE);
 

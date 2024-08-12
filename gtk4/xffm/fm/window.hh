@@ -71,9 +71,13 @@ public:
         auto child = gtk_notebook_get_nth_page(notebook, num); //page box
         auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
         bool termKey = (keyval >= GDK_KEY_space && keyval <= GDK_KEY_asciitilde);
+        bool upArrow = (keyval == GDK_KEY_Up || keyval == GDK_KEY_KP_Up);
         if (!gtk_widget_is_focus(input)) {
           gtk_widget_grab_focus(input);
           if (termKey) Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
+          if (upArrow) {
+            History::up(Util::getCurrentInput());
+          }
         }
         return FALSE;
     }
