@@ -90,6 +90,7 @@ namespace xf {
       }
 
       GtkBox *mkPageBox(const gchar *path){
+        DBG("mkPageBox(%s)\n", path);
         path_ = g_strdup(path);
         gchar *tag = path_? g_path_get_basename(path_):g_strdup(".");
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
@@ -122,6 +123,8 @@ namespace xf {
         auto vpane = GTK_WIDGET(this->vpane());
         g_object_set_data(G_OBJECT(box), "vpane", vpane);
 
+
+        this->update_pathbar(path);
         Util::boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
         Util::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
         Util::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
