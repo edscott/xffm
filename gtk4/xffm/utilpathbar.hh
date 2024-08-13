@@ -97,12 +97,28 @@ namespace xf {
             pb_path = g;
             DBG( "+++***** setting pbpath --> %s\n", pb_path);
             g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
-            // FIXME:
-    /*        g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)pathbar_p);
-            g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_white), (void *)pathbar_p);
-            g_signal_connect (G_OBJECT(pb_button) , "leave-notify-event", EVENT_CALLBACK (pathbar_blue), (void *)pathbar_p);*/
 
 
+            auto motion = gtk_event_controller_motion_new();
+            gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
+            gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
+            g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (pathbar_white), (void *)pathbar);
+            g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (pathbar_blue), (void *)pathbar);
+            
+         /*   auto click = gtk_event_controller_legacy_new();
+            g_signal_connect (G_OBJECT(click) , "event", EVENT_CALLBACK (pathbarGo), (void *)pb_button);
+            gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(click));*/
+
+            auto gesture1 = gtk_gesture_click_new();
+            gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
+            g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (pathbar_go), (void *)pathbar);
+            gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
+            
+            auto gesture3 = gtk_gesture_click_new();
+            gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture3),3);
+            g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (pathbar_go), (void *)pathbar);
+            gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture3));
+ 
             gtk_widget_set_visible(GTK_WIDGET(pb_button), TRUE);
         }
         g_free(pb_path);
@@ -112,6 +128,98 @@ namespace xf {
         togglePathbar(path, pathbar);
         g_free(path);
         return NULL;
+    }
+    static gboolean
+    pathbar_white ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+        auto pathbar = GTK_BOX(data);
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        auto path = (const char *) g_object_get_data(G_OBJECT(pathbar), "path");
+
+        UtilPathbar::setPathButtonText(eventBox, path, "white", "#acaaa5");
+        return FALSE;
+    }
+
+    static gboolean
+    pathbar_blue (GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) {
+        auto pathbar = GTK_BOX(data);
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        auto path = (const char *) g_object_get_data(G_OBJECT(pathbar), "path");
+
+        setPathButtonText(eventBox, path, "blue", NULL);
+        return FALSE;
+
+    }
+    static gboolean
+    pathbarGo (
+              GtkEventControllerLegacy* self,
+              GdkEvent* event,
+              gpointer data ) 
+    {
+        auto eventBox = GTK_BOX(data);
+        auto type = gdk_event_get_event_type(event);
+        if (type != GDK_BUTTON_RELEASE) return FALSE;
+        DBG("button release...\n");
+
+        return TRUE;
+    }
+
+    static gboolean
+    pathbar_go (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data ) 
+    {
+        auto pathbar = GTK_BOX(data);
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
+        auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
+        auto button = gtk_gesture_single_get_button(GTK_GESTURE_SINGLE(self));
+        if (button == 1){
+          DBG("pathbar goto...\n");
+          return TRUE;
+        }
+        if (button == 3){
+          DBG("pathbar menu...\n");
+          return TRUE;
+        }
+        //DBG("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);
+        return FALSE;
+        /*
+        
+        if (event->button == 1) {
+            pathbar_p->pathbar_ok(eventBox);
+        }
+
+        if (event->button == 3) {
+            auto view = pathbar_p->pathbarView();
+            const gchar *path = pathbar_p->getClickPath(eventBox);
+            TRACE("***clickpath=%s\n", path);
+            GtkMenu *menu = NULL;
+            if (g_file_test(path, G_FILE_TEST_IS_DIR)){ 
+                menu = LocalPopUp<Type>::popUp();
+                Popup<Type>::setWidgetData(menu, "path", path);
+                g_object_set_data(G_OBJECT(menu),"view", NULL);
+                BaseSignals<Type>::configureViewMenu(LOCALVIEW_TYPE);
+            } else {
+                // do xffm:root menu
+                RootPopUp<Type>::resetPopup();
+                menu = RootPopUp<Type>::popUp();
+            }
+            if (menu) {
+                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
+            }          
+        }
+
+        return FALSE;*/
     }
 
     static void 
@@ -135,6 +243,9 @@ namespace xf {
             setPathButtonText(GTK_WIDGET(children->data), path, "blue", NULL);
         }
         g_list_free(children_list);
+        auto lastPath = (char *) g_object_get_data(G_OBJECT(pathbar), "path");
+        g_free(lastPath);
+        g_object_set_data(G_OBJECT(pathbar), "path", g_strdup(path));
     }
     static GtkBox *
     pathbarLabelButton (const char *text) {
@@ -166,12 +277,7 @@ namespace xf {
         DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
       }
       auto size = &(bounds.size);
-      DBG("showWhatFits: pathbar width = %f\n", size->width);
       auto width = size->width;
-        /*GtkAllocation allocation;
-        gtk_widget_get_allocation(MainWidget, &allocation);
-        DBG("pathbar width=%d\n", allocation.width);
-        gint width = allocation.width;*/
 
         // First we hide all buttons, except "RFM_ROOT"
         //      and go buttons
@@ -186,7 +292,6 @@ namespace xf {
             }
             if (strcmp(name, "RFM_GOTO")==0) continue;
             gtk_widget_set_visible(GTK_WIDGET(children->data), FALSE);
-            //gtk_widget_hide(GTK_WIDGET(children->data));
         }
 
         // Find first item to place in pathbar.
@@ -207,7 +312,6 @@ namespace xf {
         }
          // Show active button
         gtk_widget_set_visible(GTK_WIDGET(active->data), TRUE);
-        //gtk_widget_show_all(GTK_WIDGET(active->data));
 
         gtk_widget_get_preferred_size(GTK_WIDGET(active->data), &minimum, NULL);
             DBG("#### width, minimum.width %d %d\n",width,  minimum.width);
@@ -223,14 +327,10 @@ namespace xf {
               DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
             }
 
-            //gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
-            //DBG("#### width, allocaltion.width %d %d\n",width,  allocation.width);
             DBG("#### width, allocaltion.width %f %f\n",width,  bounds.size.width);
-            //width -= allocation.width;
             width -= bounds.size.width;
             if (width < 0) break;
             gtk_widget_set_visible(GTK_WIDGET(children->data), TRUE);
-            //gtk_widget_show_all(GTK_WIDGET(children->data));
         }
 
         // Now we work forwards, showing buttons that fit.
@@ -242,16 +342,13 @@ namespace xf {
             if (!gtk_widget_compute_bounds(GTK_WIDGET(children->data), GTK_WIDGET(children->data), &bounds)) {
               DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
             }
-            //gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
-           // width -= allocation.width;
             width -= bounds.size.width;
 
             if (width < 0) break;
             gtk_widget_set_visible(GTK_WIDGET(children->data), TRUE);
-            //gtk_widget_show_all(GTK_WIDGET(children->data));
         }
     }
-
+  public:
     static void 
     setPathButtonText(GtkWidget *eventBox, const gchar *path, const gchar *color, const gchar *bgcolor){
         //const gchar *fontSize = "size=\"small\"";

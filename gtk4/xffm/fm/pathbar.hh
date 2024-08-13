@@ -37,9 +37,12 @@ namespace xf {
     // FIXME : this iluminate background of "button".
     /*    
         g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)this);
-        g_signal_connect (G_OBJECT(pb_button) , "enter-notify-event", EVENT_CALLBACK (pathbar_white), (void *)this);
-        g_signal_connect (G_OBJECT(pb_button) , "leave-notify-event", EVENT_CALLBACK (pathbar_blue), (void *)this);
         */
+        auto motion = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
+        g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (UtilPathbar::pathbar_white), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (UtilPathbar::pathbar_blue), (void *)pathbar_);
         
         //gtk_widget_show(GTK_WIDGET(pb_button));
 
@@ -58,6 +61,7 @@ namespace xf {
         // g_signal_connect (G_OBJECT(eventBox) , "button-press-event", EVENT_CALLBACK (callback), (void *)this);
         return eventBox;        
     }
+
 
      static gboolean
     go_back (GtkWidget *eventBox,
