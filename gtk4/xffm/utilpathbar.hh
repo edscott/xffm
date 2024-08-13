@@ -2,7 +2,7 @@
 #define UTILPATHBAR_HH
 
 namespace xf {
-  class UtilPathbar  :  private UtilBasic{
+  class UtilPathbar  :  public  UtilBasic{
     public:
     static void 
     updatePathbar(const gchar *path, GtkBox *pathbar){
@@ -167,10 +167,12 @@ namespace xf {
       }
       auto size = &(bounds.size);
       DBG("showWhatFits: pathbar width = %f\n", size->width);
-        GtkAllocation allocation;
+      auto width = size->width;
+        /*GtkAllocation allocation;
         gtk_widget_get_allocation(MainWidget, &allocation);
         DBG("pathbar width=%d\n", allocation.width);
-        gint width = allocation.width;
+        gint width = allocation.width;*/
+
         // First we hide all buttons, except "RFM_ROOT"
         //      and go buttons
         GList *children = g_list_last(children_list);
@@ -216,9 +218,16 @@ namespace xf {
         for (;children && children->data; children=children->prev){
             gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
             if (strcmp(name, "RFM_ROOT")==0) continue;
-            gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
-            DBG("#### width, allocaltion.width %d %d\n",width,  allocation.width);
-            width -= allocation.width;
+
+            if (!gtk_widget_compute_bounds(GTK_WIDGET(children->data), GTK_WIDGET(children->data), &bounds)) {
+              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
+            }
+
+            //gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
+            //DBG("#### width, allocaltion.width %d %d\n",width,  allocation.width);
+            DBG("#### width, allocaltion.width %f %f\n",width,  bounds.size.width);
+            //width -= allocation.width;
+            width -= bounds.size.width;
             if (width < 0) break;
             gtk_widget_set_visible(GTK_WIDGET(children->data), TRUE);
             //gtk_widget_show_all(GTK_WIDGET(children->data));
@@ -229,8 +238,14 @@ namespace xf {
         for (;children && children->data; children=children->next){
            gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
             if (strcmp(name, "RFM_ROOT")==0) continue;
-            gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
-            width -= allocation.width;
+
+            if (!gtk_widget_compute_bounds(GTK_WIDGET(children->data), GTK_WIDGET(children->data), &bounds)) {
+              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
+            }
+            //gtk_widget_get_allocation(GTK_WIDGET(children->data), &allocation);
+           // width -= allocation.width;
+            width -= bounds.size.width;
+
             if (width < 0) break;
             gtk_widget_set_visible(GTK_WIDGET(children->data), TRUE);
             //gtk_widget_show_all(GTK_WIDGET(children->data));

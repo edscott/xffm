@@ -6,7 +6,7 @@
 
 namespace xf {
 
-  class Vpane{
+  class Vpane : public UtilBasic {
     private:
     GtkPaned *vpane_;
     GtkTextView *output_;
@@ -38,8 +38,8 @@ namespace xf {
          g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
 
         auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
-        Util::boxPack0 (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
-        Util::boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
+        boxPack0 (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
+        boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
         gtk_paned_set_start_child (vpane_, GTK_WIDGET(vbox));
        
         
@@ -75,7 +75,7 @@ namespace xf {
 
   };
 
-  class FMpage : public Vpane, public Prompt, public Pathbar {
+  class FMpage : private Util, public Vpane, public Prompt, public Pathbar {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;
@@ -130,9 +130,9 @@ namespace xf {
 
         Util::updatePathbar(path, pathbar);
 
-        Util::boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
-        Util::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
-        Util::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
+        boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
+        boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
+        boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
 
         //gtk_widget_set_visible(promptBox, TRUE);
 

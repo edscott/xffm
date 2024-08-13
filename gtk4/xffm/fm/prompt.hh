@@ -2,7 +2,7 @@
 #define XF_PROMPT_HH
 #include "run.hh"
 namespace xf {
-  class Prompt {
+  class Prompt : private UtilBasic {
 
     public:
     GtkBox *promptBox(void){ return promptBox_;}
@@ -38,9 +38,9 @@ namespace xf {
         gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
         g_signal_connect (G_OBJECT (keyController), "key-pressed", 
             G_CALLBACK (this->on_keypress), (void *)input_);
-        Util::boxPack0 (promptBox_, GTK_WIDGET(dollar), FALSE, FALSE, 0);
-        Util::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
-        Util::boxPack0 (promptBox_, GTK_WIDGET(buttonSpace_), FALSE, TRUE, 0);
+        boxPack0 (promptBox_, GTK_WIDGET(dollar), FALSE, FALSE, 0);
+        boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
+        boxPack0 (promptBox_, GTK_WIDGET(buttonSpace_), FALSE, TRUE, 0);
     }
     private:
     static pid_t
@@ -253,7 +253,7 @@ namespace xf {
         gtk_text_view_set_cursor_visible (dollar, FALSE);
         gtk_widget_set_can_focus(GTK_WIDGET(dollar), FALSE);
         gtk_widget_add_css_class (GTK_WIDGET(dollar), "input" );
-        Util::boxPack0 (dollarBox, GTK_WIDGET(dollar), FALSE, FALSE, 0);
+        boxPack0 (dollarBox, GTK_WIDGET(dollar), FALSE, FALSE, 0);
         return dollarBox;
     }
     GtkTextView *createInput(void){

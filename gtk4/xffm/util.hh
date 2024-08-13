@@ -4,7 +4,8 @@
 #include "utilbasic.hh"
 #include "utilpathbar.hh"
 namespace xf {
-  class Util : public UtilPathbar, public UtilBasic {
+//  class Util : public UtilPathbar, public UtilBasic {
+  class Util : public UtilPathbar {
   public:
     static GtkBox *vButtonBox(void){
       return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));

@@ -6,7 +6,7 @@
 namespace xf {
 
 template <class VbuttonClass, class PageClass> 
-class MainWindow: public VbuttonClass {
+class MainWindow: public VbuttonClass, public UtilBasic {
 // We need to inherit VbuttonClass so as to instantiate object.
 private:
     GList *pageList_=NULL;
