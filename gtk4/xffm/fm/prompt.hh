@@ -75,7 +75,9 @@ namespace xf {
         for (gchar **c=commands; c && *c; c++){
             if (strncmp(*c,"cd", strlen("cd"))==0){
               auto w = Util::getVector(*c, " ");
-              Util::cd((const char **)w);
+              auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
+              Util::cd((const char **)w, pathbar);
+
               g_strfreev(w);
               DBG("internal command=%s\n", *c);
               continue;
@@ -154,7 +156,8 @@ namespace xf {
         g_strfreev(v);
         return false;
       }
-      auto retval = Util::cd((const gchar **)v);
+      auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
+      auto retval = Util::cd((const gchar **)v, pathbar);
       Util::print(output, g_strdup_printf("$ %s\n", text));
       if (retval){
         Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir()));

@@ -1,8 +1,8 @@
 #ifndef XF_FMPAGE_HH
 #define XF_FMPAGE_HH
-#include "prompt.hh"
 #include "fmbuttonbox.hh"
 #include "pathbar.hh"
+#include "prompt.hh"
 
 namespace xf {
 
@@ -75,7 +75,7 @@ namespace xf {
 
   };
 
-  class FMpage : public Pathbar, public Vpane, public Prompt {
+  class FMpage : public Vpane, public Prompt, public Pathbar {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;
@@ -124,10 +124,12 @@ namespace xf {
 
         auto promptBox = GTK_WIDGET(this->promptBox());
         auto vpane = GTK_WIDGET(this->vpane());
+        auto pathbar = this->pathbar();
         g_object_set_data(G_OBJECT(box), "vpane", vpane);
+        g_object_set_data(G_OBJECT(output), "pathbar", pathbar);
 
+        Util::updatePathbar(path, pathbar);
 
-        this->update_pathbar(path);
         Util::boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
         Util::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
         Util::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);

@@ -1,9 +1,10 @@
 #ifndef XF_UTIL_HH
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
-
+#include "utilbasic.hh"
+#include "utilpathbar.hh"
 namespace xf {
-  class Util {
+  class Util : public UtilPathbar, public UtilBasic {
   public:
     static GtkBox *vButtonBox(void){
       return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
@@ -40,7 +41,7 @@ namespace xf {
       auto child = getCurrentChild();
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
     }
-    static bool setWorkdir(const gchar *path){
+    static bool setWorkdir(const gchar *path, GtkBox *pathbar){
       //DBG("setWorkdir...\n");
       if (!MainWidget) return false;
       auto child = getCurrentChild();
@@ -48,6 +49,7 @@ namespace xf {
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       setWindowTitle();
+      updatePathbar(path, pathbar);
       return true;
     }
       
@@ -190,11 +192,11 @@ namespace xf {
         auto icon = (const char *) g_hash_table_lookup(mHash[0], *p);
         if (icon){
           auto image = gtk_image_new_from_icon_name(icon);
-          Util::boxPack0(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
+          boxPack0(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
         }
-        Util::boxPack0(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);
+        boxPack0(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);
         gtk_button_set_child(button, GTK_WIDGET(hbox));
-        Util::boxPack0(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
+        boxPack0(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
       
         
         g_object_set_data(G_OBJECT(menu), *p, button);
@@ -248,22 +250,22 @@ namespace xf {
         return text;
     }
     static bool
-    cd (const gchar **v) {   
+    cd (const gchar **v, GtkBox *pathbar) {   
         if (v[1] == NULL){
-          return setWorkdir(g_get_home_dir());
+          return setWorkdir(g_get_home_dir(), pathbar);
         }
         // tilde and $HOME
         if (strncmp(v[1], "~", strlen("~")) == 0){
           const char *part2 = v[1] + strlen("~");
           char *dir = g_strconcat(g_get_home_dir(), part2, NULL);
-          auto retval = setWorkdir(dir);
+          auto retval = setWorkdir(dir, pathbar);
           g_free(dir);
           return retval;
         }
         if (strncmp(v[1], "$HOME", strlen("$HOME")) == 0){
           const char *part2 = v[1] + strlen("$HOME");
           char *dir = g_strconcat(g_get_home_dir(),  part2, NULL);
-          auto retval = setWorkdir(dir);
+          auto retval = setWorkdir(dir, pathbar);
           g_free(dir);
           return retval;
         }
@@ -281,7 +283,7 @@ namespace xf {
             g_free(rpath);
             return false; 
           }
-          auto retval = setWorkdir(rpath);
+          auto retval = setWorkdir(rpath, pathbar);
           g_free(rpath);
           return retval;
         }
@@ -291,7 +293,7 @@ namespace xf {
         if (!rpath) return false;
         
 
-        auto retval = setWorkdir(rpath);
+        auto retval = setWorkdir(rpath, pathbar);
         g_free(rpath);
 
         return retval;
@@ -315,8 +317,8 @@ namespace xf {
     static 
     void packEnd(GtkBox *box, GtkWidget *widget){
         GtkBox *vbox =    GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-        Util::boxPack0 (box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
-        Util::boxPack0 (vbox, GTK_WIDGET(widget), FALSE, FALSE, 0);
+        boxPack0 (box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
+        boxPack0 (vbox, GTK_WIDGET(widget), FALSE, FALSE, 0);
     }
     static void
     setTooltip(GtkWidget *w, const gchar *text){
@@ -379,31 +381,6 @@ namespace xf {
         return size_scale;
     }
 
-  static 
-  void boxPack0(  
-      GtkBox* box,
-      GtkWidget* child,
-      gboolean expand,
-      gboolean fill,
-      guint padding)
-  {
-    GtkOrientation orientation = gtk_orientable_get_orientation(GTK_ORIENTABLE(box));
-    gtk_box_append(box, child);
-    gtk_widget_set_halign (GTK_WIDGET(child),fill?GTK_ALIGN_FILL: GTK_ALIGN_START);
-    // other options: GTK_ALIGN_START, GTK_ALIGN_END, GTK_ALIGN_BASELINE
-    if (orientation == GTK_ORIENTATION_HORIZONTAL){
-      gtk_widget_set_hexpand(GTK_WIDGET(child), expand);
-      gtk_widget_set_margin_start(GTK_WIDGET(child), padding);
-      gtk_widget_set_margin_end(GTK_WIDGET(child), padding);
-    } else if (orientation == GTK_ORIENTATION_VERTICAL){
-      gtk_widget_set_vexpand(GTK_WIDGET(child), expand);
-      gtk_widget_set_margin_top(GTK_WIDGET(child), padding);
-      gtk_widget_set_margin_bottom(GTK_WIDGET(child), padding);
-    } else {
-      fprintf(stderr, "boxPack0(): programming error. Exit(2)\n");
-      exit(2);
-    }
-  }
     private:
     static gboolean
     program_in_path(const gchar *program){
@@ -1036,46 +1013,7 @@ endloop:;
       g_free (a);
       return;
   }
-  static gboolean
-  context_function_f(gpointer data){
-      void **arg = (void **)data;
-      void * (*function)(gpointer) = (void* (*)(void*))arg[0];
-      gpointer function_data = arg[1];
-      pthread_mutex_t *mutex = (pthread_mutex_t *)arg[2];
-      pthread_cond_t *signal = (pthread_cond_t *)arg[3];
-      auto result_p = (void **)arg[4];
-      void *result = (*function)(function_data);
-      pthread_mutex_lock(mutex);
-      *result_p = result;
-      pthread_cond_signal(signal);
-      pthread_mutex_unlock(mutex);
-      return FALSE;
-  }
  public:
-  static void *context_function(void * (*function)(gpointer), void * function_data){
-      pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-      pthread_cond_t signal = PTHREAD_COND_INITIALIZER; 
-      auto result=GINT_TO_POINTER(-1);
-      void *arg[] = {
-          (void *)function,
-          (void *)function_data,
-          (void *)&mutex,
-          (void *)&signal,
-          (void *)&result
-      };
-      gboolean owner = g_main_context_is_owner(g_main_context_default());
-      if (owner){
-          context_function_f(arg);
-      } else {
-          g_main_context_invoke(NULL, CONTEXT_CALLBACK(context_function_f), arg);
-          pthread_mutex_lock(&mutex);
-          if (result == GINT_TO_POINTER(-1)) pthread_cond_wait(&signal, &mutex);
-          pthread_mutex_unlock(&mutex);
-      }
-      pthread_mutex_destroy(&mutex);
-      pthread_cond_destroy(&signal);
-      return result;
-  }
  private:
   static
   GtkTextTag *
@@ -1194,52 +1132,6 @@ endloop:;
       return tags;
   }
  public:
-  static gchar *
-  utf_string (const gchar * t) {
-      if(!t) { return g_strdup (""); }
-      if(g_utf8_validate (t, -1, NULL)) { return g_strdup (t); }
-      /* so we got a non-UTF-8 */
-      /* but is it a valid locale string? */
-      gchar *actual_tag;
-      actual_tag = g_locale_to_utf8 (t, -1, NULL, NULL, NULL);
-      if(actual_tag)
-          return actual_tag;
-      /* So it is not even a valid locale string... 
-       * Let us get valid utf-8 caracters then: */
-      const gchar *p;
-      actual_tag = g_strdup ("");
-      for(p = t; *p; p++) {
-          // short circuit end of string:
-          gchar *r = g_locale_to_utf8 (p, -1, NULL, NULL, NULL);
-          if(g_utf8_validate (p, -1, NULL)) {
-              gchar *qq = g_strconcat (actual_tag, p, NULL);
-              g_free (actual_tag);
-              actual_tag = qq;
-              break;
-          } else if(r) {
-              gchar *qq = g_strconcat (actual_tag, r, NULL);
-              g_free (r);
-              g_free (actual_tag);
-              actual_tag = qq;
-              break;
-          }
-          // convert caracter to utf-8 valid.
-          gunichar gu = g_utf8_get_char_validated (p, 2);
-          if(gu == (gunichar) - 1) {
-              gu = g_utf8_get_char_validated ("?", -1);
-          }
-          gchar outbuf[8];
-          memset (outbuf, 0, 8);
-          gint outbuf_len = g_unichar_to_utf8 (gu, outbuf);
-          if(outbuf_len < 0) {
-              ERROR ("utf_string: unichar=%d char =%c outbuf_len=%d\n", gu, p[0], outbuf_len);
-          }
-          gchar *qq = g_strconcat (actual_tag, outbuf, NULL);
-          g_free (actual_tag);
-          actual_tag = qq;
-      }
-      return actual_tag;
-  }
  private:
   static const gchar *
   get_ansi_tag(const gchar *code){
@@ -1379,7 +1271,6 @@ endloop:;
             textviewList = g_list_remove(textviewList, (void *)textView);
         }
     }
-
 
   };
 }
