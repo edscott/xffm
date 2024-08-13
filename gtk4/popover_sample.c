@@ -92,6 +92,7 @@ int main (int argc, char *argv[])
   gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), menu);
 
   gtk_window_present (GTK_WINDOW(window));
+  //        gtk_popover_popup(GTK_POPOVER(menu));// crash
 
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);

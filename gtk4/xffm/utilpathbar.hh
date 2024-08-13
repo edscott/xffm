@@ -195,6 +195,7 @@ namespace xf {
         auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
         auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
         auto button = gtk_gesture_single_get_button(GTK_GESTURE_SINGLE(self));
+          DBG("pathbar goto... name=%s, path=%s\n", name, path);
         if (button == 1){
           DBG("pathbar goto...\n");
           if (strcmp(path, "xffm:root")==0) setWorkdir(g_get_home_dir(), pathbar);
@@ -203,6 +204,27 @@ namespace xf {
         }
         if (button == 3){
           DBG("pathbar menu...\n");
+          GtkPopover *menu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
+          const char *text[] = {_("Open in new tab"), _("Paste"), NULL};
+          GHashTable *mHash[3];
+          mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+          for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
+          g_hash_table_insert(mHash[0], _("Open in new tab"), g_strdup(LIST_ADD));
+          g_hash_table_insert(mHash[1], _("Open in new tab"), NULL); // callback
+          g_hash_table_insert(mHash[2], _("Open in new tab"), NULL); // data
+          g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
+          g_hash_table_insert(mHash[1], _("Paste"), NULL);
+          g_hash_table_insert(mHash[2], _("Paste"), NULL);
+
+          if (!menu) {
+            menu = mkMenu(text, mHash, path);
+            gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar));
+            //gtk_widget_realize(GTK_WIDGET(menu));
+            g_object_set_data(G_OBJECT(pathbar), "menu", menu);
+          }
+          setMenuTitle(menu, path);
+          gtk_popover_popup(menu);
+                
           return TRUE;
         }
         //DBG("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);

@@ -194,7 +194,75 @@ namespace xf {
 
         return b;
     }
-    
+ 
+    public:
+ 
+    static void 
+    setMenuTitle(GtkPopover *menu, const char *title){
+     if (title) {      
+        auto titleBox = GTK_BOX(g_object_get_data(G_OBJECT(menu), "titleBox"));
+        auto titleLabel = GTK_LABEL(g_object_get_data(G_OBJECT(menu), "titleLabel"));
+        auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", title);
+        gtk_label_set_markup(titleLabel, markup);
+        g_free(markup);
+      }
+
+    }
+    static GtkPopover *mkMenu(const char **text, GHashTable **mHash, const gchar *title){
+      auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+      auto titleBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+      gtk_box_append (vbox, GTK_WIDGET(titleBox));
+
+      auto titleLabel = GTK_LABEL(gtk_label_new(""));
+
+      gtk_box_append (titleBox, GTK_WIDGET(titleLabel));
+      
+      
+
+      GtkPopover *menu = GTK_POPOVER(gtk_popover_new ());
+      g_object_set_data(G_OBJECT(menu), "titleBox", titleBox);
+      g_object_set_data(G_OBJECT(menu), "titleLabel", titleLabel);
+      setMenuTitle(menu, title);
+
+      gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
+      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
+      gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
+
+
+      for (const char **p=text; p && *p; p++){
+        GtkButton *button = GTK_BUTTON(gtk_button_new());
+        auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        auto label = GTK_LABEL(gtk_label_new(""));
+        gtk_label_set_markup(label, *p);
+        auto icon = (const char *) g_hash_table_lookup(mHash[0], *p);
+        if (icon){
+          auto image = gtk_image_new_from_icon_name(icon);
+          boxPack0(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
+        }
+        boxPack0(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);
+        gtk_button_set_child(button, GTK_WIDGET(hbox));
+        boxPack0(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
+      
+        
+        g_object_set_data(G_OBJECT(menu), *p, button);
+
+        gtk_button_set_has_frame(button, FALSE);
+        gtk_widget_set_visible(GTK_WIDGET(button), TRUE);
+        
+        auto callback = g_hash_table_lookup(mHash[1], *p);
+        TRACE("mkMenu() callback=%p, icon=%s\n", callback, icon);
+        if (callback) {
+          auto data = g_hash_table_lookup(mHash[2], *p);
+          g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(callback), data);
+        }
+        g_object_set_data(G_OBJECT(button), "menu", menu);
+      }
+          
+
+      gtk_popover_set_child (menu, GTK_WIDGET(vbox));
+      return menu;
+    }
+   
   };
 }
 #endif
