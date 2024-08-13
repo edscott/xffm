@@ -200,7 +200,7 @@ private:
       auto close = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "close"));
       gtk_widget_set_visible (close, TRUE);
       
-      Util::setWindowTitle();     
+      setWindowTitle(child);     
     }
 
 

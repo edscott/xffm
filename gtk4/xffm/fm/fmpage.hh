@@ -127,6 +127,7 @@ namespace xf {
         auto pathbar = this->pathbar();
         g_object_set_data(G_OBJECT(box), "vpane", vpane);
         g_object_set_data(G_OBJECT(output), "pathbar", pathbar);
+        g_object_set_data(G_OBJECT(pathbar), "child", box);
 
         Util::updatePathbar(path, pathbar);
 

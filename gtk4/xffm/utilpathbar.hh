@@ -4,6 +4,17 @@
 namespace xf {
   class UtilPathbar  :  public  UtilBasic{
     public:
+    static bool setWorkdir(const gchar *path, GtkBox *pathbar){
+      //DBG("setWorkdir...\n");
+      if (!MainWidget) return false;
+      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
+      auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
+      g_free(wd);
+      g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      setWindowTitle(child);
+      updatePathbar(path, pathbar);
+      return true;
+    }
     static void 
     updatePathbar(const gchar *path, GtkBox *pathbar){
         DBG( "update pathbar to %s\n", path);
@@ -156,6 +167,7 @@ namespace xf {
         return FALSE;
 
     }
+    /* legacy
     static gboolean
     pathbarGo (
               GtkEventControllerLegacy* self,
@@ -168,7 +180,7 @@ namespace xf {
         DBG("button release...\n");
 
         return TRUE;
-    }
+    }*/
 
     static gboolean
     pathbar_go (
@@ -185,6 +197,8 @@ namespace xf {
         auto button = gtk_gesture_single_get_button(GTK_GESTURE_SINGLE(self));
         if (button == 1){
           DBG("pathbar goto...\n");
+          if (strcmp(path, "xffm:root")==0) setWorkdir(g_get_home_dir(), pathbar);
+          else setWorkdir(path, pathbar);
           return TRUE;
         }
         if (button == 3){

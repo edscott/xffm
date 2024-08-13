@@ -114,6 +114,87 @@ namespace xf {
       pthread_mutex_unlock(mutex);
       return FALSE;
   }
+    static
+    void setWindowTitle(GtkWidget *child){
+        auto path = (const char *) g_object_get_data(G_OBJECT(child), "path");
+        gchar *gg = get_terminal_name(path);
+        auto user = g_get_user_name();
+        auto host = g_strdup(g_get_host_name());
+        if (strchr(host, '.')) *strchr(host, '.')=0;
+        gchar *g = g_strconcat(user,"@",host,":",gg, NULL);
+        g_free(host);
+        g_free(gg); 
+        gtk_window_set_title(GTK_WINDOW(MainWidget), g);
+        g_free(g);
+        auto basename = g_path_get_basename(path);
+        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+        auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
+        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "label"));
+        gtk_label_set_markup(label, basename);
+        g_free(basename);
+    }
+    private:
+
+    static     gchar *
+    get_terminal_name (const char *path) {
+        gchar *iconname;
+        if(!path) {
+            iconname = utf_string (g_get_host_name());
+        } else if(g_path_is_absolute(path) &&
+                g_file_test (path, G_FILE_TEST_EXISTS)) {
+            gchar *basename = g_path_get_basename (path);
+            gchar *pathname = g_strdup (path);
+            gchar *b = utf_string (basename);   // non chopped
+            chop_excess (pathname);
+            gchar *q = utf_string (pathname);   // non chopped
+
+            g_free (basename);
+            g_free (pathname);
+            //iconname = g_strconcat (display_host, ":  ", b, " (", q, ")", NULL);
+            iconname = g_strconcat (b, " (", q, ")", NULL);
+            g_free (q);
+            g_free (b);
+        } else {
+            iconname = utf_string (path);
+            chop_excess (iconname);
+        }
+
+        return (iconname);
+    }
+
+#define MAX_PATH_LABEL 40
+#define MAX_PATH_START_LABEL 18
+    static const gchar *
+    chop_excess (gchar * b) {
+        // chop excess length...
+
+        const gchar *home = g_get_home_dir();
+        gchar *bb;
+        if (strncmp(home, b, strlen(home))==0){
+            if (strlen(home) == strlen(b)) return b;
+            bb = g_strconcat("~/", b + strlen(home)+1, NULL);
+        } else {
+            bb = g_strdup(b);
+        }
+        
+        int len = strlen (bb);
+
+        if(len < MAX_PATH_LABEL) {
+            strcpy(b, bb);
+            g_free(bb);
+            return (b);
+        }
+            
+        bb[MAX_PATH_START_LABEL - 3] = 0;
+
+        gchar *g = g_strconcat(bb, "...", b + (len - MAX_PATH_LABEL + MAX_PATH_START_LABEL), NULL);
+        strcpy (b, g);
+        g_free(bb);
+        g_free(g);
+
+        return b;
+    }
+    
   };
 }
 #endif
