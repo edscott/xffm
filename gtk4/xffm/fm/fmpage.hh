@@ -77,13 +77,17 @@ namespace xf {
 
   class FMpage : public Pathbar, public Vpane, public Prompt {
     private:
+      GtkBox *childBox_;
       gchar *path_=NULL;
       // We keep reference to Vpane object,
       // eventhough it will change. Actual reference
       // will be asociated to page box.
       // Same for Prompt.
     public:
-      FMpage(void){
+      GtkBox *childBox(void){ return childBox_;}
+      FMpage(const char *path){
+        path_ = g_strdup(path);
+        childBox_ = mkPageBox(path);
       }
       ~FMpage(){
         g_free(path_);
@@ -91,7 +95,6 @@ namespace xf {
 
       GtkBox *mkPageBox(const gchar *path){
         DBG("mkPageBox(%s)\n", path);
-        path_ = g_strdup(path);
         gchar *tag = path_? g_path_get_basename(path_):g_strdup(".");
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
         

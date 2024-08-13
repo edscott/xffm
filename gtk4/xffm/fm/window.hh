@@ -6,8 +6,7 @@
 namespace xf {
 
 template <class VbuttonClass, class PageClass> 
-class MainWindow: public VbuttonClass, public PageClass {
-  using mainWindow_c = MainWindow<VbuttonClass, PageClass>;
+class MainWindow: public VbuttonClass {
 // We need to inherit VbuttonClass so as to instantiate object.
 private:
     GList *pageList_=NULL;
@@ -144,8 +143,11 @@ private:
     }
 
     void addPage(const gchar *path){
-      
-      GtkBox *child = this->mkPageBox(path);
+      auto page = new PageClass(path);
+      auto child = page->childBox();
+      g_object_set_data(G_OBJECT(child), "page", page);
+
+      //GtkBox *child = this->mkPageBox(path);
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       Util::reference_textview(output);
       pageList_ = g_list_append(pageList_, child);
@@ -163,10 +165,12 @@ private:
       }
      
     }
-
+ 
     void zapPage(){
       DBG("zapPage...\n");
-      GtkWidget *child = Util::getCurrentChild();
+
+      auto num = gtk_notebook_get_current_page(notebook_);
+      auto child = gtk_notebook_get_nth_page(notebook_, num);
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       Util::unreference_textview(output);
       GList *item = g_list_find(pageList_, child);
@@ -177,11 +181,9 @@ private:
         //exit(0);
       }
       // Get VPane object from child widget (box)
-      Vpane *vpane_object =  (Vpane *)g_object_get_data(G_OBJECT(child), "vpane_object");
-      Prompt *prompt_object =  (Prompt *)g_object_get_data(G_OBJECT(child), "prompt_object");
+      auto page = (PageClass *) g_object_get_data(G_OBJECT(child), "page");
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
-      if (vpane_object) delete(vpane_object);
-      if (prompt_object) delete(prompt_object);
+      delete(page);
       
     }
 
@@ -307,7 +309,7 @@ private:
 
 
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
-              BUTTON_CALLBACK(mainWindow_c::on_new_page), (void *)this);    
+              BUTTON_CALLBACK(on_new_page), (void *)this);    
       g_signal_connect (notebook_, "switch-page", 
                 NOTEBOOK_CALLBACK (on_switch_page), (void *)this);
       

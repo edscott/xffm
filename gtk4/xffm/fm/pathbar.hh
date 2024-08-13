@@ -163,7 +163,8 @@ namespace xf {
         DBG("*** toggle_pathbar\n");
         GList *children_list = getChildren(pathbar_);
 
-        showWhatFits(pathbar_, path, children_list);
+        if (gtk_widget_get_realized(MainWidget)) showWhatFits(pathbar_, path, children_list);
+        else {DBG("MainWidget not yet realized...\n");}
 
         /*if (gtk_widget_is_visible(GTK_WIDGET(mainWindow))) showWhatFits(pathbar_, path, children_list);
         else gtk_widget_show_all(GTK_WIDGET(pathbar_));*/
@@ -180,8 +181,14 @@ namespace xf {
   private:
     static void         
     showWhatFits(GtkBox *pathbar, const gchar *path, GList *children_list){
-        GtkRequisition minimum;
+      GtkRequisition minimum;
 
+      graphene_rect_t bounds;
+      if (!gtk_widget_compute_bounds(GTK_WIDGET(pathbar), GTK_WIDGET(pathbar), &bounds)) {
+        DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
+      }
+      auto size = &(bounds.size);
+      DBG("showWhatFits: pathbar width = %f\n", size->width);
         GtkAllocation allocation;
         gtk_widget_get_allocation(MainWidget, &allocation);
         DBG("pathbar width=%d\n", allocation.width);
