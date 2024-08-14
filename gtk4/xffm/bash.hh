@@ -432,7 +432,9 @@ public:
 
 public:
     static void complete(GtkTextView *input, GtkTextView *output){
-        auto workdir = Util::getWorkdir();
+        auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "child"));
+
+        auto workdir = Util::getWorkdir(child);
         gchar *head=get_text_to_cursor(input);
         g_strstrip(head);   
         if (head[0] == '$') { // Eliminate any preceeding $

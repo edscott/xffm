@@ -81,7 +81,7 @@ private:
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Util::getWorkdir();
+      auto workDir = Util::getWorkdir(childWidget);
         DBG ("openTerminal::childWidget= %p, buttonSpace = %p workdir=%s\n", 
             childWidget, buttonSpace, workDir);
 
@@ -97,7 +97,7 @@ private:
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Util::getWorkdir();
+      auto workDir = Util::getWorkdir(childWidget);
 
       auto find = g_strdup_printf("xffm --find %s", workDir);
       pid_t childPid = Run::shell_command(output, find, false, false);
@@ -112,7 +112,7 @@ private:
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Util::getWorkdir();
+      auto workDir = Util::getWorkdir(childWidget);
 
       auto xffm = g_strdup_printf("xffm -f %s", workDir);
       pid_t childPid = Run::shell_command(output, xffm, false, false);
@@ -127,7 +127,7 @@ private:
     upImage (GtkButton *self, void *data){
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto workDir = Util::getWorkdir();
+      auto workDir = Util::getWorkdir(childWidget);
 
       auto pixels = Settings::getInteger("ImageSize", workDir);
       if (pixels < 48) pixels = 48;
@@ -148,7 +148,7 @@ private:
     downImage (GtkButton *self, void *data){
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto workDir = Util::getWorkdir();
+      auto workDir = Util::getWorkdir(childWidget);
 
       auto pixels = Settings::getInteger("ImageSize", workDir);
       if (pixels  > 384)  pixels = 384;

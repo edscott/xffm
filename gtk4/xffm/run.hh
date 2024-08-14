@@ -451,7 +451,8 @@ public:
         TRACE("shell_command = %s\n", c);
         if (showTextPane) Util::showText(textview);
         auto currentDir = g_get_current_dir();
-        auto wd = Util::getWorkdir();
+        auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(textview), "child"));
+        auto wd = Util::getWorkdir(child);
 #ifdef WINDOWS_COMPILE
         g_chdir(wd);
 #else

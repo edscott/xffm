@@ -46,8 +46,9 @@ namespace xf {
     static pid_t
     run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonSpace){
       DBG("run: %s\n", command);
-        pid_t child = 0;
-        auto workdir = Util::getWorkdir();
+        auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
+        pid_t childPID = 0;
+        auto workdir = Util::getWorkdir(child);
         if (!command || !strlen(command)) return 0;
         // escape all quotes
         gchar *ncommand;
@@ -76,7 +77,12 @@ namespace xf {
             if (strncmp(*c,"cd", strlen("cd"))==0){
               auto w = Util::getVector(*c, " ");
               auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
-              Util::cd((const char **)w, pathbar);
+              auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
+              if (Util::cd((const char **)w, child)){
+                auto path = Util::getWorkdir(child);
+                setWindowTitle(child);
+                UtilPathbar::updatePathbar(path, pathbar);
+              }
 
               g_strfreev(w);
               DBG("internal command=%s\n", *c);
@@ -102,17 +108,17 @@ namespace xf {
                 Util::clear_text(output);
             }
             Util::print(output, g_strdup_printf("DBG> final run: %s\n",*c));
-            child = Run::shell_command(output, *c, scrollup, showTextPane);
+            childPID = Run::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) {
               runButton = new (RunButton);
-              runButton->init(runButton, *c, child, output, Util::getWorkdir(), buttonSpace);
+              runButton->init(runButton, *c, childPID, output, Util::getWorkdir(child), buttonSpace);
             }
             DBG("command loop...\n");
-//            if (withRunButton) newRunButton(*c, child);
+//            if (withRunButton) newRunButton(*c, childPID);
         }
         g_strfreev(commands);
         g_free(ncommand); 
-        return child;
+        return childPID;
     }
 
     static bool
@@ -131,8 +137,9 @@ namespace xf {
     }
     static bool 
     pwd(GtkTextView *output, const char *text){
+      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
       if (strcmp(text, "pwd")) return false;
-      auto workdir = Util::getWorkdir();
+      auto workdir = Util::getWorkdir(child);
       Util::print(output, g_strdup_printf("$ %s\n", text));
       Util::print(output, g_strdup(workdir));
       Util::print(output, g_strdup("\n"));
@@ -157,10 +164,11 @@ namespace xf {
         return false;
       }
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
-      auto retval = Util::cd((const gchar **)v, pathbar);
+      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
+      auto retval = Util::cd((const gchar **)v, child);
       Util::print(output, g_strdup_printf("$ %s\n", text));
       if (retval){
-        Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir()));
+        Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir(child)));
         if (!History::add(text)) DBG("History::add(%s) failed\n", text );
       } else {
         Util::print(output, g_strdup_printf(_("failed to chdir to %s"), v[1]));

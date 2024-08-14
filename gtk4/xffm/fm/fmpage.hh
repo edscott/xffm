@@ -1,6 +1,7 @@
 #ifndef XF_FMPAGE_HH
 #define XF_FMPAGE_HH
 #include "fmbuttonbox.hh"
+#include "utilpathbar.hh"
 #include "pathbar.hh"
 #include "prompt.hh"
 
@@ -129,7 +130,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(output), "pathbar", pathbar);
         g_object_set_data(G_OBJECT(pathbar), "child", box);
 
-        Util::updatePathbar(path, pathbar);
+        UtilPathbar::updatePathbar(path, pathbar);
 
         boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
         boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);

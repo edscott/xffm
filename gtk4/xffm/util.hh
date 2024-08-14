@@ -2,10 +2,9 @@
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
 #include "utilbasic.hh"
-#include "utilpathbar.hh"
 namespace xf {
 //  class Util : public UtilPathbar, public UtilBasic {
-  class Util : public UtilPathbar {
+  class Util : public UtilBasic {
   public:
     static GtkBox *vButtonBox(void){
       return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
@@ -36,11 +35,9 @@ namespace xf {
       GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
       return child;
     }
-    // FIXME deprecate:
-    static const gchar *getWorkdir(void){
+    static const gchar *getWorkdir(GtkWidget *child){
       //DBG("getWorkdir...\n");
       if (!MainWidget) return NULL;
-      auto child = getCurrentChild();
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
     }
       
@@ -108,32 +105,40 @@ namespace xf {
         }
         return text;
     }
+    static bool setWorkdir(const gchar *path, GtkWidget *child){
+      //DBG("setWorkdir...\n");
+      if (!MainWidget) return false;
+      auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
+      g_free(wd);
+      g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      return true;
+    }
     static bool
-    cd (const gchar **v, GtkBox *pathbar) {   
+    cd (const gchar **v, GtkWidget *child) {   
         if (v[1] == NULL){
-          return setWorkdir(g_get_home_dir(), pathbar);
+          return setWorkdir(g_get_home_dir(), child);
         }
         // tilde and $HOME
         if (strncmp(v[1], "~", strlen("~")) == 0){
           const char *part2 = v[1] + strlen("~");
           char *dir = g_strconcat(g_get_home_dir(), part2, NULL);
-          auto retval = setWorkdir(dir, pathbar);
+          auto retval = setWorkdir(dir, child);
           g_free(dir);
           return retval;
         }
         if (strncmp(v[1], "$HOME", strlen("$HOME")) == 0){
           const char *part2 = v[1] + strlen("$HOME");
           char *dir = g_strconcat(g_get_home_dir(),  part2, NULL);
-          auto retval = setWorkdir(dir, pathbar);
+          auto retval = setWorkdir(dir, child);
           g_free(dir);
           return retval;
         }
 
         // must allow relative paths too.
         if (!g_path_is_absolute(v[1])){
-          //const gchar *wd = getWorkdir();
+          //const gchar *wd = getWorkdir(child);
           //bool isRoot = (strcmp(wd, G_DIR_SEPARATOR_S)==0);
-          char *dir =  g_strconcat(getWorkdir(), G_DIR_SEPARATOR_S, v[1], NULL);
+          char *dir =  g_strconcat(getWorkdir(child), G_DIR_SEPARATOR_S, v[1], NULL);
           gchar *rpath = realpath(dir, NULL);
           g_free(dir);
           if (!rpath) return false;
@@ -142,7 +147,7 @@ namespace xf {
             g_free(rpath);
             return false; 
           }
-          auto retval = setWorkdir(rpath, pathbar);
+          auto retval = setWorkdir(rpath, child);
           g_free(rpath);
           return retval;
         }
@@ -152,7 +157,7 @@ namespace xf {
         if (!rpath) return false;
         
 
-        auto retval = setWorkdir(rpath, pathbar);
+        auto retval = setWorkdir(rpath, child);
         g_free(rpath);
 
         return retval;
@@ -172,12 +177,6 @@ namespace xf {
       g_free(string);
       //for (char **p=vector; p && *p && p->id p++)  DBG( "getVector():p=%s\n",*p);
       return vector;
-    }
-    static 
-    void packEnd(GtkBox *box, GtkWidget *widget){
-        GtkBox *vbox =    GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-        boxPack0 (box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
-        boxPack0 (vbox, GTK_WIDGET(widget), FALSE, FALSE, 0);
     }
     static void
     setTooltip(GtkWidget *w, const gchar *text){

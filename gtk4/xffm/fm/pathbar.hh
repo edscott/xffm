@@ -1,7 +1,7 @@
 #ifndef PATHBAR_HH
 #define PATHBAR_HH
 namespace xf {
-  class Pathbar : private UtilBasic
+  class Pathbar : public UtilPathbar
   {
     GtkBox *pathbar_;
     gchar *path_;
@@ -27,7 +27,7 @@ namespace xf {
 
 
         // xffm:root button:
-        auto pb_button = Util::pathbarLabelButton(".");
+        auto pb_button = pathbarLabelButton(".");
 
         
         boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
