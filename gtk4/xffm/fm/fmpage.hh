@@ -130,7 +130,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(output), "pathbar", pathbar);
         g_object_set_data(G_OBJECT(pathbar), "child", box);
 
-        UtilPathbar::updatePathbar(path, pathbar);
+        UtilPathbar::updatePathbar(path, pathbar, true);
 
         boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
         boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);

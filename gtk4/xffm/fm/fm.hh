@@ -95,6 +95,12 @@ private:
       border-radius: 0px;\
       border-color: transparent;\
     }\
+    .pathbarboxNegative * {\
+      background-color: #acaaa5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
     ");
     gtk_style_context_add_provider_for_display(gdk_display_get_default(),GTK_STYLE_PROVIDER(css_provider),GTK_STYLE_PROVIDER_PRIORITY_USER); 
   }

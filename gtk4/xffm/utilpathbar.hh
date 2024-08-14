@@ -4,21 +4,21 @@
 namespace xf {
   class UtilPathbar  :  public  UtilBasic{
     public:
-    static bool setWorkdir(const gchar *path, GtkBox *pathbar){
-      //DBG("setWorkdir...\n");
+    static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
+      //TRACE("setWorkdir...\n");
       if (!MainWidget) return false;
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       setWindowTitle(child);
-      updatePathbar(path, pathbar);
+      updatePathbar(path, pathbar, updateHistory);
       return true;
     }
     static void 
-    updatePathbar(const gchar *path, GtkBox *pathbar){
-        DBG( "update pathbar to %s\n", path);
-        void *arg[]={(void *)(path?g_strdup(path):NULL), (void *)pathbar};
+    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory){
+        TRACE( "update pathbar to %s (update=%d)\n", path, updateHistory);
+        void *arg[]={(void *)(path?g_strdup(path):NULL), (void *)pathbar, GINT_TO_POINTER(updateHistory)};
         context_function(update_pathbar_f, arg);
     }
     static GList *getChildren(GtkBox *box){
@@ -28,22 +28,40 @@ namespace xf {
       while ((w=gtk_widget_get_next_sibling(w)) != NULL) list = g_list_append(list, w);
       return list;
     }
-    
+
     static void *
     update_pathbar_f(void *data){
         void **arg = (void **)data;
         ///Pathbar *pathbar_p = (Pathbar *)arg[0];
         auto path = (gchar *)arg[0];
         auto pathbar = GTK_BOX(arg[1]);
-        DBG( "update_pathbar_f:: %s\n", path);
+        auto updateHistory = GPOINTER_TO_INT(arg[2]);
+        TRACE( "update_pathbar_f:: %s\n", path);
 
         if (!pathbar) return NULL;
         if (!path){
-            DBG("##### togglePathbar(NULL, pathbar)\n");
+            TRACE("##### togglePathbar(NULL, pathbar)\n");
             togglePathbar(NULL, pathbar);
 //            pathbar_p->toggle_pathbar(NULL);
             return NULL;
         }
+        if (updateHistory) {
+          GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
+          if (historyBack){
+            if (strcmp(path, (const char *)historyBack->data) != 0){
+              historyBack = g_list_prepend(historyBack, g_strdup(path));
+            }
+          } else {
+              historyBack = g_list_prepend(historyBack, g_strdup(path));
+          }
+          g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
+          // wipe next history 
+          GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
+          for (GList *l=historyNext; l && l->data; l=l->next) g_free(l->data);
+          g_list_free(historyNext);
+          g_object_set_data(G_OBJECT(pathbar), "historyNext", NULL);
+        }
+        
 
         // Trim pathbar.
         gchar **paths;
@@ -68,7 +86,7 @@ namespace xf {
             gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
             if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "RFM_GOTO")==0) continue;
             //gchar *p = g_strdup_printf("%s%c", paths[i], G_DIR_SEPARATOR);
-            DBG( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
+            TRACE( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
             if (paths[i] && strcmp(name, paths[i]) == 0){
                 g_free(pb_path);
                 const gchar *p = (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
@@ -78,11 +96,11 @@ namespace xf {
             }
             // Eliminate tail (only if tail will differ)
             if (paths[i] == NULL) break;
-            DBG( "Zapping tail: \"%s\"\n", paths[i]);
+            TRACE( "Zapping tail: \"%s\"\n", paths[i]);
             GList *tail = children;
             for (;tail && tail->data; tail = tail->next){
                 gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
-                DBG( "Zapping tail item: \"%s\"\n", name);
+                TRACE( "Zapping tail item: \"%s\"\n", name);
                 g_free(name);
                 gtk_widget_unparent(GTK_WIDGET(tail->data));
                 //gtk_container_remove(GTK_CONTAINER(pathbar), GTK_WIDGET(tail->data));
@@ -106,7 +124,7 @@ namespace xf {
                 g_strdup(paths[i]);
             g_free(pb_path);
             pb_path = g;
-            DBG( "+++***** setting pbpath --> %s\n", pb_path);
+            TRACE( "+++***** setting pbpath --> %s\n", pb_path);
             g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(pb_path));
 
 
@@ -177,7 +195,7 @@ namespace xf {
         auto eventBox = GTK_BOX(data);
         auto type = gdk_event_get_event_type(event);
         if (type != GDK_BUTTON_RELEASE) return FALSE;
-        DBG("button release...\n");
+        TRACE("button release...\n");
 
         return TRUE;
     }*/
@@ -195,15 +213,16 @@ namespace xf {
         auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
         auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
         auto button = gtk_gesture_single_get_button(GTK_GESTURE_SINGLE(self));
-          DBG("pathbar goto... name=%s, path=%s\n", name, path);
+          TRACE("pathbar goto... name=%s, path=%s\n", name, path);
         if (button == 1){
-          DBG("pathbar goto...\n");
-          if (strcmp(path, "xffm:root")==0) setWorkdir(g_get_home_dir(), pathbar);
-          else setWorkdir(path, pathbar);
+          TRACE("pathbar goto...\n");
+          //if (strcmp(path, "xffm:root")==0) setWorkdir(g_get_home_dir(), pathbar, true);
+          //else setWorkdir(path, pathbar, true);
+          setWorkdir(path, pathbar, true);
           return TRUE;
         }
         if (button == 3){
-          DBG("pathbar menu...\n");
+          TRACE("pathbar menu...\n");
           GtkPopover *menu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
           const char *text[] = {_("Open in new tab"), _("Paste"), NULL};
           GHashTable *mHash[3];
@@ -227,7 +246,7 @@ namespace xf {
                 
           return TRUE;
         }
-        //DBG("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);
+        //TRACE("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);
         return FALSE;
         /*
         
@@ -263,11 +282,11 @@ namespace xf {
         // Hiding stuff which does not fit does not work until
         // window has been shown. This is not yet the case on
         // initial startup, so we skip that on first pass.
-        DBG("*** togglePathbar\n");
+        TRACE("*** togglePathbar\n");
         GList *children_list = getChildren(pathbar);
 
         if (gtk_widget_get_realized(MainWidget)) showWhatFits(pathbar, path, children_list);
-        else {DBG("MainWidget not yet realized...\n");}
+        else {TRACE("MainWidget not yet realized...\n");}
 
         /*if (gtk_widget_is_visible(GTK_WIDGET(mainWindow))) showWhatFits(pathbar_, path, children_list);
         else gtk_widget_show_all(GTK_WIDGET(pathbar_));*/
@@ -350,7 +369,7 @@ namespace xf {
         gtk_widget_set_visible(GTK_WIDGET(active->data), TRUE);
 
         gtk_widget_get_preferred_size(GTK_WIDGET(active->data), &minimum, NULL);
-            DBG("#### width, minimum.width %d %d\n",width,  minimum.width);
+            TRACE("#### width, minimum.width %d %d\n",width,  minimum.width);
         width -= minimum.width;
      
         // Work backwards from active button we show buttons that will fit.
@@ -363,7 +382,7 @@ namespace xf {
               DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
             }
 
-            DBG("#### width, allocaltion.width %f %f\n",width,  bounds.size.width);
+            TRACE("#### width, allocaltion.width %f %f\n",width,  bounds.size.width);
             width -= bounds.size.width;
             if (width < 0) break;
             gtk_widget_set_visible(GTK_WIDGET(children->data), TRUE);

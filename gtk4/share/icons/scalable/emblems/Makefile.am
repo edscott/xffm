@@ -107,6 +107,9 @@ icon_DATA = \
            emblem-wait.svg\
            emblem-webcam.svg\
            emblem-write-ok.svg\
+           xf-go-to.svg\
+           xf-go-next.svg\
+           xf-go-previous.svg\
            emblem-www.svg
 
 EXTRA_DIST =  $(icon_DATA)

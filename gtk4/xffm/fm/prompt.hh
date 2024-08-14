@@ -81,7 +81,7 @@ namespace xf {
               if (Util::cd((const char **)w, child)){
                 auto path = Util::getWorkdir(child);
                 setWindowTitle(child);
-                UtilPathbar::updatePathbar(path, pathbar);
+                UtilPathbar::updatePathbar(path, pathbar, true);
               }
 
               g_strfreev(w);
@@ -137,7 +137,8 @@ namespace xf {
     }
     static bool 
     pwd(GtkTextView *output, const char *text){
-      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
+      auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
+      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       if (strcmp(text, "pwd")) return false;
       auto workdir = Util::getWorkdir(child);
       Util::print(output, g_strdup_printf("$ %s\n", text));
@@ -164,8 +165,10 @@ namespace xf {
         return false;
       }
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
-      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
+      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto retval = Util::cd((const gchar **)v, child);
+      auto path = Util::getWorkdir(child);
+      UtilPathbar::updatePathbar(path, pathbar, true);
       Util::print(output, g_strdup_printf("$ %s\n", text));
       if (retval){
         Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir(child)));
