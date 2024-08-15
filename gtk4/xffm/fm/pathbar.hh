@@ -22,9 +22,10 @@ namespace xf {
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (goJump), (void *)pathbar_);
       gtk_widget_add_controller(GTK_WIDGET(eventBox), GTK_EVENT_CONTROLLER(gesture));
    } 
-
+ 
    ~Pathbar(void){
-    /* GList *historyList = (GList *)g_object_get_data(G_OBJECT(pathbar_), "historyList");
+    /* //FIXME
+     GList *historyList = (GList *)g_object_get_data(G_OBJECT(pathbar_), "historyList");
      if (historyList) {
        for (GList *l=historyList; l && l->data; l=l->next) g_free(l->data);
        g_list_free(historyList);
@@ -32,9 +33,7 @@ namespace xf {
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-
-        //mkNavButtons(pathbar_);
-
+ 
         auto eventBox1 = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));
         auto eventBox2 = eventButton("xf-go-next", "RFM_GOTO", "xffm:next", _("Next"));
         auto eventBox3 = eventButton("xf-go-to", "RFM_GOTO", "xffm:goto", _("Go to"));
@@ -43,9 +42,9 @@ namespace xf {
         addSignals(eventBox2, "xffm:next");
         addSignals(eventBox3, "xffm:goto");
 
-        boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
-        boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
-        boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
+        boxPack0 (pathbar_, GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
+        boxPack0 (pathbar_, GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
+        boxPack0 (pathbar_, GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
         
 
 
@@ -53,14 +52,10 @@ namespace xf {
         auto pb_button = pathbarLabelButton(".");
 
         
-        boxPack0 (GTK_BOX (pathbar_), GTK_WIDGET(pb_button), FALSE, FALSE, 0);
+        boxPack0 (pathbar_, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
         g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("xffm:root"));
 
-    // FIXME : this iluminate background of "button".
-    /*    
-        g_signal_connect (G_OBJECT(pb_button) , "button-press-event", EVENT_CALLBACK (pathbar_go), (void *)this);
-        */
         auto motion = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
@@ -77,10 +72,78 @@ namespace xf {
         g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (UtilPathbar::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture3));
         
-        //gtk_widget_show(GTK_WIDGET(pb_button));
 
     }
   private:
+    static gboolean
+    goJump (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data ) 
+    {
+      auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
+      auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
+      auto pathbar = GTK_WIDGET(data);
+      auto location = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "location"));
+      auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "input"));
+      auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
+      if (strcmp(path, "xffm:back") == 0){
+         GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
+         if (!historyBack){
+           DBG("no back history List\n");
+           return TRUE;
+         }
+         else if (historyBack->next == NULL){
+           DBG("no back history next\n");
+           return TRUE;
+         }
+         else {
+           auto current = (char *) historyBack->data;
+           auto previous = (char *) historyBack->next->data;
+           DBG("Back path is %s\n", previous);
+           GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
+           historyNext = g_list_prepend(historyNext, current);
+           historyBack = g_list_remove(historyBack,  current);
+           for (GList *l=historyNext; l && l->data; l=l->next){
+             DBG("historyNext list = %s\n", (char *)l->data);
+           }
+           g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
+           g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
+           setWorkdir(previous, GTK_BOX(pathbar), false);
+           return TRUE;
+         }
+      }
+      if (strcmp(path, "xffm:next") == 0){
+         GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
+         if (!historyNext){
+           DBG("no next history\n");
+           return TRUE;
+         }
+         else {
+           char *current = (char *) historyNext->data;
+           DBG("next path is %s\n", (const char *) current);
+           GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
+           historyBack = g_list_prepend(historyBack, current);
+           historyNext = g_list_remove(historyNext, current);
+           g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
+           g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
+           setWorkdir(current, GTK_BOX(pathbar), false);
+           return TRUE;
+         }
+      }
+      if (strcmp(path, "xffm:goto") == 0){
+        Util::clear_text(GTK_TEXT_VIEW(input));
+        Util::print(GTK_TEXT_VIEW(input), g_strdup("cd ")); 
+        gtk_widget_grab_focus(GTK_WIDGET(input));
+
+        Util::flushGTK();
+      }
+      
+      return TRUE;
+    }
     static gboolean
     buttonNegative ( GtkEventControllerMotion* self,
                     gdouble x,
@@ -119,66 +182,6 @@ namespace xf {
         // FIXME:
         // g_signal_connect (G_OBJECT(eventBox) , "button-press-event", EVENT_CALLBACK (callback), (void *)this);
         return eventBox;        
-    }
-    
-    static gboolean
-    goJump (
-              GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              gpointer data ) 
-    {
-      auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-      auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
-      auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
-      auto pathbar = GTK_BOX(data);
-      if (strcmp(path, "xffm:back") == 0){
-         GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
-         if (!historyBack){
-           DBG("no back history List\n");
-           return TRUE;
-         }
-         else if (historyBack->next == NULL){
-           DBG("no back history next\n");
-           return TRUE;
-         }
-         else {
-           auto current = (char *) historyBack->data;
-           auto previous = (char *) historyBack->next->data;
-           DBG("Back path is %s\n", previous);
-           GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
-           historyNext = g_list_prepend(historyNext, current);
-           historyBack = g_list_remove(historyBack,  current);
-           for (GList *l=historyNext; l && l->data; l=l->next){
-             DBG("historyNext list = %s\n", (char *)l->data);
-           }
-           g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
-           g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           setWorkdir(previous, pathbar, false);
-           return TRUE;
-         }
-      }
-      if (strcmp(path, "xffm:next") == 0){
-         GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
-         if (!historyNext){
-           DBG("no next history\n");
-           return TRUE;
-         }
-         else {
-           char *current = (char *) historyNext->data;
-           DBG("next path is %s\n", (const char *) current);
-           GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
-           historyBack = g_list_prepend(historyBack, current);
-           historyNext = g_list_remove(historyNext, current);
-           g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
-           g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           setWorkdir(current, pathbar, false);
-           return TRUE;
-         }
-      }
-      
-      return TRUE;
     }
     static gboolean
     xgo_jump (GtkWidget *eventBox,

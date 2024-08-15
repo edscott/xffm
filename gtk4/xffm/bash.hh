@@ -531,6 +531,94 @@ public:
         TRACE("retval, bash_suggestion: suggest=\"%s\"\n", suggest);
         return suggest;
     }
+
+
+        static void bashCompletionDir(GtkTextView *input, GtkTextView *output, const char *workdir){
+        TRACE("bashCompletionDir\n");
+        gchar *head=get_text_to_cursor(input);
+        gint head_len = strlen(head);
+        g_free (head);
+        gchar *token = Util::get_current_text (input);
+        gchar *newToken = tokenExpand(input, token);
+        if (newToken){
+            g_free(token);
+            token = newToken;
+            Util::clear_text(input);
+            Util::print(input, g_strdup(newToken));
+            Util::flushGTK();
+            return;
+        }
+
+        gint token_len = strlen(token);
+        gchar *suggest = bash_suggestion(output, workdir, token, head_len);
+        g_free (token);
+        TRACE("bashCompletionDir; %s\n", suggest);
+        if (suggest) {
+            gint suggest_len = strlen(suggest);
+            GtkTextIter end;
+            GtkTextBuffer *buffer = gtk_text_view_get_buffer (input);
+            gint offset = -1;
+            // +1 is icon...
+            offset = head_len + (suggest_len - token_len) + 1;
+            Util::print_status(input, g_strdup(suggest));
+            gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
+            gtk_text_buffer_place_cursor(buffer, &end);
+        }
+        g_free(suggest);
+
+        gtk_text_view_set_cursor_visible(input, TRUE);
+        return ;
+
+    }
+
+        static void bash_completion(GtkTextView *input, GtkTextView *output, const char *workdir){
+        TRACE("bash_completion\n");
+        gchar *head=get_text_to_cursor(input);
+        gint head_len = strlen(head);
+        g_free (head);
+        gchar *token = Util::get_current_text (input);
+        gchar *newToken = tokenExpand(input, token);
+        if (newToken){
+            g_free(token);
+            token = newToken;
+            Util::clear_text(input);
+            Util::print(input, g_strdup(newToken));
+            Util::flushGTK();
+            return;
+        }
+
+        if (strncmp(token, "sudo", strlen("sudo"))==0 &&
+            strncmp(token, "sudo -A", strlen("sudo -A"))){
+            gchar *o = token;
+            gchar *oo = o+strlen("sudo");
+            while (*oo == ' ') oo++;
+            token = g_strconcat("sudo -A ", oo, NULL);
+            g_free(o);
+            head_len += strlen(" -A");
+        }
+
+        gint token_len = strlen(token);
+        gchar *suggest = bash_suggestion(output, workdir, token, head_len);
+        g_free (token);
+        TRACE("bash_completion; %s\n", suggest);
+        if (suggest) {
+            gint suggest_len = strlen(suggest);
+            GtkTextIter end;
+            GtkTextBuffer *buffer = gtk_text_view_get_buffer (input);
+            gint offset = -1;
+            // +1 is icon...
+            offset = head_len + (suggest_len - token_len) + 1;
+            Util::print_status(input, g_strdup(suggest));
+            gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
+            gtk_text_buffer_place_cursor(buffer, &end);
+        }
+        g_free(suggest);
+
+        gtk_text_view_set_cursor_visible(input, TRUE);
+        return ;
+
+    }
+
 private:
 
  /*   gchar *

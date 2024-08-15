@@ -24,8 +24,9 @@ namespace xf {
         buttonSpace_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
         auto dollar = createPrompt();
-        input_ = createInput(); 
+        input_ = UtilPathbar::createInput(); 
         g_object_set_data(G_OBJECT(input_), "buttonSpace", buttonSpace_);
+        g_object_set_data(G_OBJECT(input_), "promptBox", promptBox_);
         g_object_set_data(G_OBJECT(promptBox_), "buttonSpace", buttonSpace_);
 
         // child does not yet exist.
@@ -223,7 +224,7 @@ namespace xf {
           gpointer data)
     {
       //fprintf(stderr, "bar...\n");
-        TRACE("window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
+        DBG("prompt window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
             keyval, keyval, keycode, keycode, state, data);
         auto input = GTK_TEXT_VIEW(data);
         auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "output"));
@@ -266,18 +267,6 @@ namespace xf {
         gtk_widget_add_css_class (GTK_WIDGET(dollar), "input" );
         boxPack0 (dollarBox, GTK_WIDGET(dollar), FALSE, FALSE, 0);
         return dollarBox;
-    }
-    GtkTextView *createInput(void){
-        GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());
-        gtk_text_view_set_pixels_above_lines (input, 10);
-        gtk_text_view_set_monospace (input, TRUE);
-        gtk_text_view_set_editable (input, TRUE);
-        gtk_text_view_set_cursor_visible (input, TRUE);
-        gtk_text_view_place_cursor_onscreen(input);
-        gtk_text_view_set_wrap_mode (input, GTK_WRAP_CHAR);
-        gtk_widget_set_can_focus(GTK_WIDGET(input), TRUE);
-        gtk_widget_add_css_class (GTK_WIDGET(input), "input" );
-        return input;
     }
     
   };

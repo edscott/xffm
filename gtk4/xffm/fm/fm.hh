@@ -95,6 +95,13 @@ private:
       border-radius: 0px;\
       border-color: transparent;\
     }\
+    .location * {\
+      color: blue;\
+      background-color: #dcdad5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
     .pathbarboxNegative * {\
       background-color: #acaaa5;\
       border-width: 0px;\

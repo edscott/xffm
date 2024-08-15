@@ -128,9 +128,16 @@ namespace xf {
         auto pathbar = this->pathbar();
         g_object_set_data(G_OBJECT(box), "vpane", vpane);
         g_object_set_data(G_OBJECT(output), "pathbar", pathbar);
-        g_object_set_data(G_OBJECT(pathbar), "child", box);
 
-        UtilPathbar::updatePathbar(path, pathbar, true);
+        g_object_set_data(G_OBJECT(input), "child", box);
+        g_object_set_data(G_OBJECT(output), "child", box);
+        g_object_set_data(G_OBJECT(pathbar), "child", box);
+        g_object_set_data(G_OBJECT(pathbar), "input", input);
+        g_object_set_data(G_OBJECT(pathbar), "output", output);
+
+        DBG("updatePathbar(%s)\n", path);
+        UtilPathbar::updatePathbar(path, pathbar, true); 
+        // bool is to add navigation history
 
         boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
         boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);

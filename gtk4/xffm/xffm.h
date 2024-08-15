@@ -64,5 +64,6 @@ static GList *textviewList = NULL;
 static GList *run_button_list = NULL;
 static GtkIconTheme *icon_theme=NULL;
 
+
 static pthread_mutex_t rbl_mutex = PTHREAD_MUTEX_INITIALIZER;
 #endif

@@ -575,10 +575,37 @@ public:
     }
 
     static void showText(GtkTextView *textview){
+      // FIXME
+      return;
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
         void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
         context_function(show_text_buffer_f, arg);
+    }
+    static void print_status(GtkTextView *textview, gchar *string){
+        if (!textview) return;
+        void *arg[]={(void *)textview, (void *)string};
+        context_function(print_s, arg);
+        g_free(string);
+    }
+    static void *
+    print_s(void *data){
+        if (!data) return GINT_TO_POINTER(-1);
+        auto arg = (void **)data;
+        auto textview = GTK_TEXT_VIEW(arg[0]);
+ 
+        if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
+        auto string = (const gchar *)arg[1];
+
+        // FIXME set_font_size (GTK_WIDGET(textview));
+        auto buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+        GtkTextIter start, end;
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        gtk_text_buffer_delete (buffer, &start, &end);
+        if(string && strlen (string)) {
+            insert_string (buffer, string, NULL);
+        }
+        return NULL;
     }
 
 /*
@@ -963,6 +990,9 @@ endloop:;
 
   static GtkTextTag **
   resolve_tags(GtkTextBuffer * buffer, const gchar *tag){
+    // 
+    // FIXME:
+    return NULL;
       TRACE("Print::resolve_tags(%s)\n", tag);
       if (!tag) return NULL;
       gchar **userTags;
@@ -1059,7 +1089,7 @@ endloop:;
         auto small = arg[2];
         auto err = arg[3];
         if(!vpane) {
-            ERROR("vpane is NULL\n");
+            ERROR("show_text_buffer_f(): vpane is NULL\n");
             return NULL;
         }
         TRACE("show_text_buffer_f:: err=%p\n", err);

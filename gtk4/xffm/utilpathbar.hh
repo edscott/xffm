@@ -4,6 +4,19 @@
 namespace xf {
   class UtilPathbar  :  public  UtilBasic{
     public:
+    static
+    GtkTextView *createInput(void){
+        GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());
+        gtk_text_view_set_pixels_above_lines (input, 10);
+        gtk_text_view_set_monospace (input, TRUE);
+        gtk_text_view_set_editable (input, TRUE);
+        gtk_text_view_set_cursor_visible (input, TRUE);
+        gtk_text_view_place_cursor_onscreen(input);
+        gtk_text_view_set_wrap_mode (input, GTK_WRAP_CHAR);
+        gtk_widget_set_can_focus(GTK_WIDGET(input), TRUE);
+        gtk_widget_add_css_class (GTK_WIDGET(input), "input" );
+        return input;
+    }
     static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
       //TRACE("setWorkdir...\n");
       if (!MainWidget) return false;
@@ -282,7 +295,13 @@ namespace xf {
         // Hiding stuff which does not fit does not work until
         // window has been shown. This is not yet the case on
         // initial startup, so we skip that on first pass.
-        TRACE("*** togglePathbar\n");
+        //
+        // Probably bug if initial startup path width is
+        // larger than initial window width, as 
+        // everything will show. Maybe the window width 
+        // will adjust?
+        //
+        DBG("*** togglePathbar: %s\n", path);
         GList *children_list = getChildren(pathbar);
 
         if (gtk_widget_get_realized(MainWidget)) showWhatFits(pathbar, path, children_list);
@@ -326,13 +345,22 @@ namespace xf {
     static void         
     showWhatFits(GtkBox *pathbar, const gchar *path, GList *children_list){
       GtkRequisition minimum;
-
       graphene_rect_t bounds;
-      if (!gtk_widget_compute_bounds(GTK_WIDGET(pathbar), GTK_WIDGET(pathbar), &bounds)) {
-        DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
+      if (!gtk_widget_get_realized(GTK_WIDGET(pathbar))){
+        // Take window width.
+        if (!gtk_widget_compute_bounds(GTK_WIDGET(MainWidget), GTK_WIDGET(MainWidget), &bounds)) {
+          DBG("***Error:: gtk_widget_compute_bounds(MainWidget)\n");
+        }
+      } else {
+        if (!gtk_widget_compute_bounds(GTK_WIDGET(pathbar), GTK_WIDGET(pathbar), &bounds)) {
+          DBG("***Error:: gtk_widget_compute_bounds(pathbar)\n");
+        }
       }
+      TRACE("Window is realized =%d\n", gtk_widget_get_realized(MainWidget));
+      TRACE("pathbar is realized =%d\n", gtk_widget_get_realized(GTK_WIDGET(pathbar)));
       auto size = &(bounds.size);
       auto width = size->width;
+      TRACE("initial width = %f\n", width);
 
         // First we hide all buttons, except "RFM_ROOT"
         //      and go buttons
@@ -346,6 +374,7 @@ namespace xf {
                 continue;
             }
             if (strcmp(name, "RFM_GOTO")==0) continue;
+            auto pb_path = (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
             gtk_widget_set_visible(GTK_WIDGET(children->data), FALSE);
         }
 
@@ -357,8 +386,8 @@ namespace xf {
         // If path is not in the buttons, then the first to map
         // will be the last path visited.
         if (path) for (;children && children->data; children=children->prev){
-            auto pb_path = (const gchar *)
-                g_object_get_data(G_OBJECT(children->data), "path");
+            gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
+            auto pb_path = (const gchar *)g_object_get_data(G_OBJECT(children->data), "path");
             if (!pb_path) continue;
             if (strcmp(path, pb_path)==0) {
                 active = children;
@@ -373,7 +402,9 @@ namespace xf {
         width -= minimum.width;
      
         // Work backwards from active button we show buttons that will fit.
+        // Active is already shown above.
         children = active->prev;
+
         for (;children && children->data; children=children->prev){
             gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
             if (strcmp(name, "RFM_ROOT")==0) continue;
@@ -384,7 +415,10 @@ namespace xf {
 
             TRACE("#### width, allocaltion.width %f %f\n",width,  bounds.size.width);
             width -= bounds.size.width;
-            if (width < 0) break;
+            if (width < 0) {
+              TRACE("**pathbar width=%f\n", width);
+              break;
+            }
             gtk_widget_set_visible(GTK_WIDGET(children->data), TRUE);
         }
 
