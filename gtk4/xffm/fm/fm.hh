@@ -32,7 +32,7 @@ public:
 
     /*auto rp = gtk_icon_theme_get_resource_path(icon_theme);
     for (auto p=rp; p && *p; p++){
-      DBG("resourcepath = \"%s\"\n", *p);
+      TRACE("resourcepath = \"%s\"\n", *p);
     }*/
 
     auto resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);

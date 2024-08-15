@@ -74,7 +74,7 @@ public:
         bool termKey = (keyval >= GDK_KEY_space && keyval <= GDK_KEY_asciitilde);
         bool upArrow = (keyval == GDK_KEY_Up || keyval == GDK_KEY_KP_Up);
         if (gtk_widget_get_visible(promptBox) && !gtk_widget_is_focus(input)) {
-          DBG("window on_keypress,  focusing input\n");
+          TRACE("window on_keypress,  focusing input\n");
           gtk_widget_grab_focus(input);
           if (termKey) Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
           if (upArrow) {
@@ -170,7 +170,7 @@ private:
     }
  
     void zapPage(){
-      DBG("zapPage...\n");
+      TRACE("zapPage...\n");
 
       auto num = gtk_notebook_get_current_page(notebook_);
       auto child = gtk_notebook_get_nth_page(notebook_, num);

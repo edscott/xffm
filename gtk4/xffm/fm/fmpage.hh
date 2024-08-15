@@ -95,7 +95,7 @@ namespace xf {
       }
 
       GtkBox *mkPageBox(const gchar *path){
-        DBG("mkPageBox(%s)\n", path);
+        TRACE("mkPageBox(%s)\n", path);
         gchar *tag = path_? g_path_get_basename(path_):g_strdup(".");
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
         
@@ -135,7 +135,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(pathbar), "input", input);
         g_object_set_data(G_OBJECT(pathbar), "output", output);
 
-        DBG("updatePathbar(%s)\n", path);
+        TRACE("updatePathbar(%s)\n", path);
         UtilPathbar::updatePathbar(path, pathbar, true); 
         // bool is to add navigation history
 

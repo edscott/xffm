@@ -32,7 +32,7 @@ namespace xf {
         // child does not yet exist.
         //auto child =Util::getCurrentChild();
         //g_object_set_data(G_OBJECT(child), "buttonSpace", buttonSpace_);
-        //DBG ("Prompt::childWidget= %p, buttonSpace = %p\n", child, buttonSpace_);
+        //TRACE ("Prompt::childWidget= %p, buttonSpace = %p\n", child, buttonSpace_);
 
 
         auto keyController = gtk_event_controller_key_new();
@@ -46,7 +46,7 @@ namespace xf {
     private:
     static pid_t
     run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonSpace){
-      DBG("run: %s\n", command);
+      TRACE("run: %s\n", command);
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
         pid_t childPID = 0;
         auto workdir = Util::getWorkdir(child);
@@ -67,12 +67,12 @@ namespace xf {
             TRACE("ncommand is %s\n", ncommand);
         } else ncommand = g_strdup(command);
         command = ncommand;
-      DBG("escaped run: %s\n", command);
+      TRACE("escaped run: %s\n", command);
 
         gchar *newWorkdir =NULL;
         gchar ** commands = NULL;
         commands = Util::getVector(command, ";");
-      DBG("commands[0]: %s\n", commands[0]);
+      TRACE("commands[0]: %s\n", commands[0]);
         RunButton *runButton;
         for (gchar **c=commands; c && *c; c++){
             if (strncmp(*c,"cd", strlen("cd"))==0){
@@ -86,7 +86,7 @@ namespace xf {
               }
 
               g_strfreev(w);
-              DBG("internal command=%s\n", *c);
+              TRACE("internal command=%s\n", *c);
               continue;
             }
             // automatic shell determination:
@@ -108,13 +108,13 @@ namespace xf {
                 scrollup = TRUE;
                 Util::clear_text(output);
             }
-            Util::print(output, g_strdup_printf("DBG> final run: %s\n",*c));
+            //Util::print(output, g_strdup_printf("TRACE> final run: %s\n",*c));
             childPID = Run::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) {
               runButton = new (RunButton);
               runButton->init(runButton, *c, childPID, output, Util::getWorkdir(child), buttonSpace);
             }
-            DBG("command loop...\n");
+            TRACE("command loop...\n");
 //            if (withRunButton) newRunButton(*c, childPID);
         }
         g_strfreev(commands);
@@ -224,7 +224,7 @@ namespace xf {
           gpointer data)
     {
       //fprintf(stderr, "bar...\n");
-        DBG("prompt window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
+        TRACE("prompt window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
             keyval, keyval, keycode, keycode, state, data);
         auto input = GTK_TEXT_VIEW(data);
         auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "output"));

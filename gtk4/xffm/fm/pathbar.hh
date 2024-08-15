@@ -5,6 +5,9 @@ namespace xf {
   {
     GtkBox *pathbar_;
     gchar *path_;
+    GtkWidget *back_;
+    GtkWidget *next_;
+
 
      
   public:
@@ -37,6 +40,15 @@ namespace xf {
         auto eventBox1 = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));
         auto eventBox2 = eventButton("xf-go-next", "RFM_GOTO", "xffm:next", _("Next"));
         auto eventBox3 = eventButton("xf-go-to", "RFM_GOTO", "xffm:goto", _("Go to"));
+        back_ = GTK_WIDGET(eventBox1);
+        next_ = GTK_WIDGET(eventBox2);
+        g_object_set_data(G_OBJECT(pathbar_), "back", back_);
+        g_object_set_data(G_OBJECT(pathbar_), "next", next_);
+
+        gtk_widget_set_sensitive(GTK_WIDGET(eventBox1), FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(eventBox2), FALSE);
+        //gtk_widget_remove_css_class (GTK_WIDGET(eventBox2), "pathbarbox" );
+        //gtk_widget_add_css_class (GTK_WIDGET(eventBox2), "pathbarboxInactive" );
 
         addSignals(eventBox1, "xffm:back");
         addSignals(eventBox2, "xffm:next");
@@ -93,22 +105,22 @@ namespace xf {
       if (strcmp(path, "xffm:back") == 0){
          GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
          if (!historyBack){
-           DBG("no back history List\n");
+           TRACE("no back history List\n");
            return TRUE;
          }
          else if (historyBack->next == NULL){
-           DBG("no back history next\n");
+           TRACE("no back history next\n");
            return TRUE;
          }
          else {
            auto current = (char *) historyBack->data;
            auto previous = (char *) historyBack->next->data;
-           DBG("Back path is %s\n", previous);
+           TRACE("Back path is %s\n", previous);
            GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
            historyNext = g_list_prepend(historyNext, current);
            historyBack = g_list_remove(historyBack,  current);
            for (GList *l=historyNext; l && l->data; l=l->next){
-             DBG("historyNext list = %s\n", (char *)l->data);
+             TRACE("historyNext list = %s\n", (char *)l->data);
            }
            g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
            g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
@@ -119,12 +131,12 @@ namespace xf {
       if (strcmp(path, "xffm:next") == 0){
          GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
          if (!historyNext){
-           DBG("no next history\n");
+           TRACE("no next history\n");
            return TRUE;
          }
          else {
            char *current = (char *) historyNext->data;
-           DBG("next path is %s\n", (const char *) current);
+           TRACE("next path is %s\n", (const char *) current);
            GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
            historyBack = g_list_prepend(historyBack, current);
            historyNext = g_list_remove(historyNext, current);
@@ -183,60 +195,6 @@ namespace xf {
         // g_signal_connect (G_OBJECT(eventBox) , "button-press-event", EVENT_CALLBACK (callback), (void *)this);
         return eventBox;        
     }
-    static gboolean
-    xgo_jump (GtkWidget *eventBox,
-               GdkEvent  *event,
-               gpointer   data) {
-      //FIXME
-/*        Pathbar *pathbar_p = (Pathbar *)data;
-        // File chooser
-        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Go to"), "go-jump");
-        auto markup = 
-            g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>", _("Go to"));  
-        
-        entryResponse->setResponseLabel(markup);
-        g_free(markup);
-
-        entryResponse->setEntryLabel(_("Specify Output Directory..."));
-        // get last used arguments...
-        gchar *dirname = NULL;
-        if (Settings<Type>::keyFileHasGroupKey("GoTo", "Default")){
-            dirname = Settings<Type>::getString("GoTo", "Default");
-        } 
-        if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
-            g_free(dirname);
-            dirname = g_strdup("");
-        }
-        entryResponse->setEntryDefault(dirname);
-        g_free(dirname);
-        auto page = (Page<Type> *)pathbar_p;
-        const gchar *wd = page->workDir();
-        if (!wd) wd = g_get_home_dir();
-        entryResponse->setEntryBashCompletion(wd);
-        entryResponse->setInLineCompletion(TRUE);
-        
-        auto response = entryResponse->runResponse();
-        DBG("response=%s\n", response);
-        
-        if (!response) return FALSE;
-        if (strlen(response) > 1 && response[strlen(response)-1] == G_DIR_SEPARATOR){
-            response[strlen(response)-1] = 0;
-        }
-        if (!g_file_test(response, G_FILE_TEST_IS_DIR)){
-            gchar *message = g_strdup_printf("\n  %s:  \n  %s  \n", response, _("Not a directory"));
-            Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow), message, "dialog-error");
-            g_free(message);
-        } else {
-            auto view = (View<Type> *)
-                g_object_get_data(G_OBJECT(page->topScrolledWindow()), "view");
-            view->loadModel(response);
-        }
-        g_free(response);*/
-        return FALSE;
-
-    }
-
-    
 
   };
 }

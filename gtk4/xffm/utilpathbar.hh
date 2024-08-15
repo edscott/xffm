@@ -169,6 +169,27 @@ namespace xf {
         // show what fits
         togglePathbar(path, pathbar);
         g_free(path);
+
+        // Now process to back and next buttons
+        {
+          auto next = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "next"));
+          auto back = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "back"));
+          GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
+          GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
+          TRACE("length historyNext=%d\n", g_list_length(historyNext));
+          TRACE("length historyBack=%d\n", g_list_length(historyBack));
+          if (g_list_length(historyNext) <= 0) {
+            gtk_widget_remove_css_class (GTK_WIDGET(next), "pathbarboxNegative" );
+            gtk_widget_add_css_class (GTK_WIDGET(next), "pathbarbox" );          
+          }
+          gtk_widget_set_sensitive(next, g_list_length(historyNext) > 0);
+          // History back contains the first path visited. 
+          if (g_list_length(historyBack) <= 1) {
+            gtk_widget_remove_css_class (GTK_WIDGET(back), "pathbarboxNegative" );
+            gtk_widget_add_css_class (GTK_WIDGET(back), "pathbarbox" );          
+          }
+          gtk_widget_set_sensitive(back, g_list_length(historyBack) > 1); 
+        }
         return NULL;
     }
     static gboolean
@@ -301,7 +322,7 @@ namespace xf {
         // everything will show. Maybe the window width 
         // will adjust?
         //
-        DBG("*** togglePathbar: %s\n", path);
+        TRACE("*** togglePathbar: %s\n", path);
         GList *children_list = getChildren(pathbar);
 
         if (gtk_widget_get_realized(MainWidget)) showWhatFits(pathbar, path, children_list);
