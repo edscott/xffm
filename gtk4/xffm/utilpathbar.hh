@@ -233,7 +233,24 @@ namespace xf {
 
         return TRUE;
     }*/
+    private:
+    static void
+    openNewTab(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      gtk_popover_popdown(menu);
 
+    }
+    static void
+    paste(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      gtk_popover_popdown(menu);
+    }
+    static void
+    showPaste(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      gtk_popover_popdown(menu);
+    }
+    public:
     static gboolean
     pathbar_go (
               GtkGestureClick* self,
@@ -258,16 +275,19 @@ namespace xf {
         if (button == 3){
           TRACE("pathbar menu...\n");
           GtkPopover *menu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
-          const char *text[] = {_("Open in new tab"), _("Paste"), NULL};
+          const char *text[] = {_("Open in new tab"), _("Paste"), _("Preview of data from clipboard"), NULL};
           GHashTable *mHash[3];
           mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
           for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
           g_hash_table_insert(mHash[0], _("Open in new tab"), g_strdup(LIST_ADD));
-          g_hash_table_insert(mHash[1], _("Open in new tab"), NULL); // callback
+          g_hash_table_insert(mHash[1], _("Open in new tab"), (void *) openNewTab); // callback
           g_hash_table_insert(mHash[2], _("Open in new tab"), NULL); // data
           g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
-          g_hash_table_insert(mHash[1], _("Paste"), NULL);
+          g_hash_table_insert(mHash[1], _("Paste"), (void *) paste);
           g_hash_table_insert(mHash[2], _("Paste"), NULL);
+          g_hash_table_insert(mHash[0], _("Preview of data from clipboard"), g_strdup("view-reveal"));
+          g_hash_table_insert(mHash[1], _("Preview of data from clipboard"), (void *)showPaste );
+          g_hash_table_insert(mHash[2], _("Preview of data from clipboard"), NULL);
 
           if (!menu) {
             menu = mkMenu(text, mHash, path);
