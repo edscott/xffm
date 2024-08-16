@@ -2,7 +2,7 @@
 #define XF_WINDOW_HH
 #define NOTEBOOK_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkWidget *, guint, gpointer)) X)
 #include "fmpage.hh"
-
+#include <gio/gio.h>
 namespace xf {
 
 template <class VbuttonClass, class PageClass> 
@@ -261,8 +261,8 @@ private:
         _("Delete"), 
         _("Select All"), 
         _("Match regular expression"), 
-        //_("Terminal font"), 
-        _("Global Settings"), 
+        _("Colors"), 
+        //_("Global Settings"), 
         _("Close"), 
         NULL
       };
@@ -277,7 +277,7 @@ private:
       g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
       g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
       g_hash_table_insert(mHash[0], _("Match regular expression"), g_strdup(DIALOG_QUESTION));
-      //g_hash_table_insert(mHash[0], _("Terminal font"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[0], _("Colors"), g_strdup(DOCUMENT_PROPERTIES));
       //g_hash_table_insert(mHash[0], _("Global Settings"), g_strdup(PREFERENCES));
       g_hash_table_insert(mHash[0], _("Close"), g_strdup(WINDOW_SHUTDOWN));
 
@@ -292,7 +292,7 @@ private:
       g_hash_table_insert(mHash[1], _("Delete"), NULL);
       g_hash_table_insert(mHash[1], _("Select All"), NULL);
       g_hash_table_insert(mHash[1], _("Match regular expression"), NULL);
-      //g_hash_table_insert(mHash[1], _("Terminal font"), NULL);
+      g_hash_table_insert(mHash[1], _("Colors"), (void *)terminalColors);
       //g_hash_table_insert(mHash[1], _("Global Settings"), NULL);
       g_hash_table_insert(mHash[1], _("Close"), (void *)close);
 
@@ -369,6 +369,51 @@ private:
     }
 
 private:
+    static void
+    setColor(GObject* source_object, GAsyncResult* result, gpointer data){
+      auto dialog =(GtkColorDialog*)source_object;
+      GError *error_=NULL;
+
+      GdkRGBA *color = gtk_color_dialog_choose_rgba_finish (dialog, result, &error_);
+      if (color) {
+        DBG("setColor: r=%f, g=%f, b=%f, a=%f\n",
+          color->red, color->green, color->blue, color->alpha);
+        short int red = color->red * 255;
+        short int green = color->green * 255;
+        short int blue = color->blue * 255;
+        DBG("color #%x%x%x\n", red, green, blue);
+        // Now we change the CSS class.
+        // 1. Save color to Settings
+        // 2. Reload modified CSS class
+        //    if this does the trick END
+        //    if not, then 
+        //       1. remove css class from all outputs
+        //       2. add modified css to all class.
+        // Also, we could use a user class.
+        // with user class:
+        // 1. Save color to Settings
+        // 2. create modified user css class
+        // 3. remove default color css class
+        // 4. add user defined color css.
+        // On startup, use user color css instead if
+        // Settings has the information.
+        // 
+      } else {
+        DBG("No color selected.\n");
+      }
+      g_free(color);
+    }
+
+    static void
+    terminalColors(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu")); 
+      gtk_popover_popdown(menu);
+      auto dialog = gtk_color_dialog_new();
+      gtk_color_dialog_set_modal (dialog, TRUE);
+      gtk_color_dialog_set_title (dialog, "fixme: color dialog title");
+      gtk_color_dialog_choose_rgba (dialog, GTK_WINDOW(MainWidget), 
+          NULL, NULL, setColor, NULL);
+    }
     static void
     close(GtkButton *self, void *data){
       gtk_widget_set_visible(MainWidget, FALSE);

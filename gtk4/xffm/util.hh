@@ -284,6 +284,7 @@ namespace xf {
         gtk_text_view_set_wrap_mode (output, GTK_WRAP_WORD);
         gtk_text_view_set_cursor_visible (output, FALSE);
         gtk_widget_add_css_class (GTK_WIDGET(output), "output" );
+        gtk_widget_add_css_class (GTK_WIDGET(output), "outputview" );
         char *size = Settings::getString("xfterm", "size");
         if (!size) size = g_strdup("font4"); // medium
         gtk_widget_add_css_class (GTK_WIDGET(output), size );
