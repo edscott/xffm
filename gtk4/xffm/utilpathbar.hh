@@ -7,7 +7,12 @@ namespace xf {
     static
     GtkTextView *createInput(void){
         GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());
-        gtk_text_view_set_pixels_above_lines (input, 10);
+        char *size = Settings::getString("xfterm", "size");
+        if (!size) size = g_strdup("font4"); // medium
+        gtk_widget_add_css_class (GTK_WIDGET(input), size );
+        
+        gtk_text_view_set_pixels_above_lines (input, 5);
+        gtk_text_view_set_pixels_below_lines (input, 5);
         gtk_text_view_set_monospace (input, TRUE);
         gtk_text_view_set_editable (input, TRUE);
         gtk_text_view_set_cursor_visible (input, TRUE);

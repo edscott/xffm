@@ -75,10 +75,33 @@ private:
     .output {\
       background-color: #bbbbbb;\
       color: #111111;\
+      font-family: monospace;\
+    }\
+    .font1 {\
+      font-size: xx-small;\
+    }\
+    .font2 {\
+      font-size: x-small;\
+    }\
+    .font3 {\
+      font-size: small;\
+    }\
+    .font4 {\
+      font-size: medium;\
+    }\
+    .font5 {\
+      font-size: large;\
+    }\
+    .font6 {\
+      font-size: x-large;\
+    }\
+    .font7 {\
+      font-size: xx-large;\
     }\
     .input {\
       background-color: #dddddd;\
       color: #000000;\
+      font-family: monospace;\
     }\
     .prompt {\
       background-color: #333333;\

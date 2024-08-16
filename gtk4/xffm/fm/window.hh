@@ -261,7 +261,7 @@ private:
         _("Delete"), 
         _("Select All"), 
         _("Match regular expression"), 
-        _("Local Settings"), 
+        //_("Terminal font"), 
         _("Global Settings"), 
         _("Close"), 
         NULL
@@ -277,8 +277,8 @@ private:
       g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
       g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
       g_hash_table_insert(mHash[0], _("Match regular expression"), g_strdup(DIALOG_QUESTION));
-      g_hash_table_insert(mHash[0], _("Local Settings"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash[0], _("Global Settings"), g_strdup(PREFERENCES));
+      //g_hash_table_insert(mHash[0], _("Terminal font"), g_strdup(DOCUMENT_PROPERTIES));
+      //g_hash_table_insert(mHash[0], _("Global Settings"), g_strdup(PREFERENCES));
       g_hash_table_insert(mHash[0], _("Close"), g_strdup(WINDOW_SHUTDOWN));
 
       // callbacks
@@ -292,8 +292,8 @@ private:
       g_hash_table_insert(mHash[1], _("Delete"), NULL);
       g_hash_table_insert(mHash[1], _("Select All"), NULL);
       g_hash_table_insert(mHash[1], _("Match regular expression"), NULL);
-      g_hash_table_insert(mHash[1], _("Local Settings"), NULL);
-      g_hash_table_insert(mHash[1], _("Global Settings"), NULL);
+      //g_hash_table_insert(mHash[1], _("Terminal font"), NULL);
+      //g_hash_table_insert(mHash[1], _("Global Settings"), NULL);
       g_hash_table_insert(mHash[1], _("Close"), (void *)close);
 
       auto menu = Util::mkMenu(text,mHash, _("Main Menu"));

@@ -98,6 +98,7 @@ namespace xf {
         
         auto output = this->output();
         auto input = this->input();
+        auto dollar = this->dollar();
         auto buttonSpace = this->buttonSpace();
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
 
@@ -106,6 +107,7 @@ namespace xf {
 
         g_object_set_data(G_OBJECT(box), "output", output);
         g_object_set_data(G_OBJECT(box), "input", input);
+        g_object_set_data(G_OBJECT(box), "dollar", dollar);
 
         auto promptBox = GTK_WIDGET(this->promptBox());
         auto vpane = GTK_WIDGET(this->vpane());

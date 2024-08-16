@@ -284,22 +284,10 @@ namespace xf {
         gtk_text_view_set_wrap_mode (output, GTK_WRAP_WORD);
         gtk_text_view_set_cursor_visible (output, FALSE);
         gtk_widget_add_css_class (GTK_WIDGET(output), "output" );
-        //gtk_container_set_border_width (GTK_CONTAINER (output), 2);
+        char *size = Settings::getString("xfterm", "size");
+        if (!size) size = g_strdup("font4"); // medium
+        gtk_widget_add_css_class (GTK_WIDGET(output), size );
         return output;
-    }
-    static 
-    GtkScale *newSizeScale(const gchar *tooltipText){
-        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 6.0, 24.0, 6.0));
-        // Load saved value fron xffm+/settings.ini file (if any)
-        gint size = Settings::getInteger("xfterm", "fontSize");
-        if (size < 0) size = DEFAULT_FIXED_FONT_SIZE;
-        gtk_range_set_value(GTK_RANGE(size_scale), size);
-        gtk_range_set_increments (GTK_RANGE(size_scale), 2.0, 6.0);
-        gtk_widget_set_size_request (GTK_WIDGET(size_scale),-1,75);
-        gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
-        gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
-        setTooltip (GTK_WIDGET(size_scale),tooltipText);        
-        return size_scale;
     }
 
     private:

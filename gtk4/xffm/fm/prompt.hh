@@ -8,9 +8,11 @@ namespace xf {
     GtkBox *promptBox(void){ return promptBox_;}
     GtkBox *buttonSpace(void){ return buttonSpace_;}
     GtkTextView *input(void){ return input_;}
+    GtkTextView *dollar(void){ return dollar_;}
     private:
     GtkBox *promptBox_;
     GtkTextView *input_;
+    GtkTextView *dollar_;
     GtkBox *buttonSpace_;
     
     GtkButton *promptButton_;
@@ -23,7 +25,7 @@ namespace xf {
         promptBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         buttonSpace_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
-        auto dollar = createPrompt();
+        auto dollarBox = createPrompt();
         input_ = UtilPathbar::createInput(); 
         auto title = g_strconcat(_("Input"),_(" TTY"), NULL);
         auto menu = Util::mkTextviewMenu(title);
@@ -44,7 +46,7 @@ namespace xf {
         gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
         g_signal_connect (G_OBJECT (keyController), "key-pressed", 
             G_CALLBACK (this->on_keypress), (void *)input_);
-        boxPack0 (promptBox_, GTK_WIDGET(dollar), FALSE, FALSE, 0);
+        boxPack0 (promptBox_, GTK_WIDGET(dollarBox), FALSE, FALSE, 0);
         boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
         boxPack0 (promptBox_, GTK_WIDGET(buttonSpace_), FALSE, TRUE, 0);
     }
@@ -260,17 +262,23 @@ namespace xf {
     GtkBox *createPrompt(void){
         auto dollarBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(dollarBox), FALSE);
-        GtkTextView *dollar = GTK_TEXT_VIEW(gtk_text_view_new ());
-        gtk_widget_set_size_request(GTK_WIDGET(dollar), 20, -1);
-        Util::print(dollar, g_strdup("$"));
+        dollar_ = GTK_TEXT_VIEW(gtk_text_view_new ());
+        char *size = Settings::getString("xfterm", "size");
+        if (!size) size = g_strdup("font4"); // medium
+        gtk_widget_add_css_class (GTK_WIDGET(dollar_), size );
 
-        gtk_text_view_set_pixels_above_lines (dollar, 10);
-        gtk_text_view_set_monospace (dollar, TRUE);
-        gtk_text_view_set_editable (dollar, FALSE);
-        gtk_text_view_set_cursor_visible (dollar, FALSE);
-        gtk_widget_set_can_focus(GTK_WIDGET(dollar), FALSE);
-        gtk_widget_add_css_class (GTK_WIDGET(dollar), "input" );
-        boxPack0 (dollarBox, GTK_WIDGET(dollar), FALSE, FALSE, 0);
+        gtk_widget_set_size_request(GTK_WIDGET(dollar_), 20, -1);
+        
+        Util::print(dollar_, g_strdup("$"));
+
+        gtk_text_view_set_pixels_above_lines (dollar_, 5);
+        gtk_text_view_set_pixels_below_lines (dollar_, 5);
+        gtk_text_view_set_monospace (dollar_, TRUE);
+        gtk_text_view_set_editable (dollar_, FALSE);
+        gtk_text_view_set_cursor_visible (dollar_, FALSE);
+        gtk_widget_set_can_focus(GTK_WIDGET(dollar_), FALSE);
+        gtk_widget_add_css_class (GTK_WIDGET(dollar_), "input" );
+        boxPack0 (dollarBox, GTK_WIDGET(dollar_), FALSE, FALSE, 0);
         return dollarBox;
     }
     
