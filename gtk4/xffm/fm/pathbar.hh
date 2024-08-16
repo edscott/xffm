@@ -31,9 +31,6 @@ namespace xf {
    } 
  
    ~Pathbar(void){
-
-    /* //FIXME
-     }*/
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));

@@ -241,7 +241,7 @@ private:
       return GTK_WIDGET(tabBox);
     }
 
-    // FIXME: should use template for window so that main menu
+    // FIXME(maybe): use template for window so that main menu
     //        is dependent on the application.
     GtkPopover *mkMainMenu(void){
 #define ICONHASH mHash[0];

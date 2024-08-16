@@ -56,8 +56,71 @@ namespace xf {
         g_free(*fullString);
         *fullString = newString;
     }
+    static void addMenu(const char *title, GtkPopover *menu, GtkWidget *parent){
+      g_object_set_data(G_OBJECT(parent), "menu", menu);
+      // Important: must use both of the following instructions:
+      gtk_popover_set_default_widget(menu, parent);
+      gtk_widget_set_parent(GTK_WIDGET(menu), parent);
+
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3);
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (openMenu), (void *)menu);
+      gtk_widget_add_controller(GTK_WIDGET(parent), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_CAPTURE);
+      return;  
+    }
+    static GtkPopover *
+    mkTextviewMenu(const char *title){
+      static const char *text[]= {
+        _("Cut"), // 0x01
+        _("Copy"), // 0x02
+        _("Paste"), // 0x04
+        _("Delete"), // 0x08
+        _("Select All"), //0x10
+        NULL
+      };
+      GHashTable *mHash[3];
+      mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+      for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
+
+      g_hash_table_insert(mHash[0], _("Cut"), g_strdup(EDIT_CUT));
+      g_hash_table_insert(mHash[1], _("Cut"), NULL);
+      g_hash_table_insert(mHash[2], _("Cut"), NULL);
+
+      g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
+      g_hash_table_insert(mHash[1], _("Copy"), NULL);
+      g_hash_table_insert(mHash[2], _("Copy"), NULL);
+
+      g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
+      g_hash_table_insert(mHash[1], _("Paste"), NULL);
+      g_hash_table_insert(mHash[2], _("Paste"), NULL);
+
+      g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
+      g_hash_table_insert(mHash[1], _("Delete"), NULL);
+      g_hash_table_insert(mHash[2], _("Delete"), NULL);
+
+      g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
+      g_hash_table_insert(mHash[1], _("Select All"), NULL);
+      g_hash_table_insert(mHash[2], _("Select All"), NULL);
+
+      auto menu = Util::mkMenu(text,mHash,_(title));
+ 
+      return menu;
+    }
 
     private:
+    static gboolean openMenu(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+      auto menu = GTK_POPOVER(data);
+      // position is relative to the parent/default widget.
+      TRACE("position %lf,%lf\n", x, y);
+      gtk_popover_popup(menu);
+      return TRUE;
+    }
 
 #define MAX_NAME_LENGTH 13
     static gboolean

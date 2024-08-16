@@ -25,6 +25,11 @@ namespace xf {
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
         auto dollar = createPrompt();
         input_ = UtilPathbar::createInput(); 
+        auto title = g_strconcat(_("Input"),_(" TTY"), NULL);
+        auto menu = Util::mkTextviewMenu(title);
+        Util::addMenu(title, menu, GTK_WIDGET(input_));
+        g_free(title);
+
         g_object_set_data(G_OBJECT(input_), "buttonSpace", buttonSpace_);
         g_object_set_data(G_OBJECT(input_), "promptBox", promptBox_);
         g_object_set_data(G_OBJECT(promptBox_), "buttonSpace", buttonSpace_);
