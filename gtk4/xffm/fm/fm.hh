@@ -72,9 +72,14 @@ private:
       border-radius: 0px;\
       border-color: transparent;\
     }\
-    .output {\
+    .output0 {\
       background-color: #bbbbbb;\
       color: #111111;\
+      font-family: monospace;\
+    }\
+    .output {\
+      background-color: black;\
+      color: white;\
       font-family: monospace;\
     }\
     .font1 {\
