@@ -82,6 +82,10 @@ private:
       color: white;\
       font-family: monospace;\
     }\
+    .view text selection {\
+      background-color: blue;\
+      color: yellow;\
+    }\
     .font1 {\
       font-size: xx-small;\
     }\
