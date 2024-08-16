@@ -183,6 +183,20 @@ private:
         gtk_window_destroy(mainWindow_);
         //exit(0);
       }
+      
+      // Clear page history
+      auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(child ), "pathbar"));
+      auto historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
+      auto historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
+      if (historyBack){
+        for (GList *l=historyBack; l && l->data; l=l->next) g_free(l->data);
+        g_list_free(historyBack);
+      }
+      if (historyNext){
+        for (GList *l=historyNext; l && l->data; l=l->next) g_free(l->data);
+        g_list_free(historyNext);
+      }
+
       // Get VPane object from child widget (box)
       auto page = (PageClass *) g_object_get_data(G_OBJECT(child), "page");
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));

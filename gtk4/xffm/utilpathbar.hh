@@ -59,6 +59,7 @@ namespace xf {
             return NULL;
         }
         if (updateHistory) {
+          
           GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
           if (historyBack){
             if (strcmp(path, (const char *)historyBack->data) != 0){

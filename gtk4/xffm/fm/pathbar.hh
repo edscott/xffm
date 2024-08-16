@@ -7,12 +7,16 @@ namespace xf {
     gchar *path_;
     GtkWidget *back_;
     GtkWidget *next_;
-
-
+    GList *historyBack_;
+    GList *historyNext_;
      
   public:
    GtkBox *pathbar(void){return pathbar_;} 
-    const gchar *path(void){ return path_;}
+   const gchar *path(void){ return path_;}
+   GList *historyBack(void){ return historyBack_;}
+   GList *historyNext(void){ return historyNext_;}
+   void setHistoryBack(GList *historyBack){ historyBack_ = historyBack;}
+   void setHistoryNext(GList *historyNext){ historyNext_ = historyNext;}
     
    void addSignals(GtkBox *eventBox, const char *path){
       auto motionB = gtk_event_controller_motion_new();
@@ -27,11 +31,8 @@ namespace xf {
    } 
  
    ~Pathbar(void){
+
     /* //FIXME
-     GList *historyList = (GList *)g_object_get_data(G_OBJECT(pathbar_), "historyList");
-     if (historyList) {
-       for (GList *l=historyList; l && l->data; l=l->next) g_free(l->data);
-       g_list_free(historyList);
      }*/
    }
    Pathbar(void) {
@@ -95,10 +96,10 @@ namespace xf {
               gdouble y,
               gpointer data ) 
     {
+      auto pathbar = GTK_WIDGET(data);
       auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
       auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
-      auto pathbar = GTK_WIDGET(data);
       auto location = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "location"));
       auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "input"));
       auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
@@ -191,8 +192,6 @@ namespace xf {
         boxPack0 (eventBox, GTK_WIDGET(eventImage), FALSE, FALSE, 0);
         gtk_widget_set_tooltip_markup(GTK_WIDGET(eventBox),tooltip);
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
-        // FIXME:
-        // g_signal_connect (G_OBJECT(eventBox) , "button-press-event", EVENT_CALLBACK (callback), (void *)this);
         return eventBox;        
     }
 

@@ -92,6 +92,7 @@ namespace xf {
       }
       ~FMpage(){
         g_free(path_);
+       
       }
 
       GtkBox *mkPageBox(const gchar *path){
@@ -127,6 +128,7 @@ namespace xf {
         auto vpane = GTK_WIDGET(this->vpane());
         auto pathbar = this->pathbar();
         g_object_set_data(G_OBJECT(box), "vpane", vpane);
+        g_object_set_data(G_OBJECT(box), "pathbar", pathbar);
         g_object_set_data(G_OBJECT(output), "pathbar", pathbar);
 
         g_object_set_data(G_OBJECT(input), "child", box);
