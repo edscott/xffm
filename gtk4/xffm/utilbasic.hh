@@ -230,32 +230,40 @@ namespace xf {
 
 
       for (const char **p=text; p && *p; p++){
-        GtkButton *button = GTK_BUTTON(gtk_button_new());
         auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto label = GTK_LABEL(gtk_label_new(""));
         gtk_label_set_markup(label, *p);
         auto icon = (const char *) g_hash_table_lookup(mHash[0], *p);
+        DBG("icon is %s\n",icon);
         if (icon){
           auto image = gtk_image_new_from_icon_name(icon);
           boxPack0(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
         }
         boxPack0(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);
-        gtk_button_set_child(button, GTK_WIDGET(hbox));
-        boxPack0(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
-      
-        
-        g_object_set_data(G_OBJECT(menu), *p, button);
 
-        gtk_button_set_has_frame(button, FALSE);
-        gtk_widget_set_visible(GTK_WIDGET(button), TRUE);
+        if (GPOINTER_TO_INT(g_hash_table_lookup(mHash[2], *p)) == -1) {
+          boxPack0(vbox, GTK_WIDGET(hbox),  FALSE, FALSE, 0);
+          g_object_set_data(G_OBJECT(menu), *p, hbox);
+          gtk_widget_set_visible(GTK_WIDGET(hbox), TRUE);
+          continue;
+        } else {
+          GtkButton *button = GTK_BUTTON(gtk_button_new());
+          gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(hbox));
+          boxPack0(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
+          g_object_set_data(G_OBJECT(menu), *p, button);
+          gtk_button_set_has_frame(GTK_BUTTON(button), FALSE);
+          gtk_widget_set_visible(GTK_WIDGET(button), TRUE);
         
-        auto callback = g_hash_table_lookup(mHash[1], *p);
-        TRACE("mkMenu() callback=%p, icon=%s\n", callback, icon);
-        if (callback) {
-          auto data = g_hash_table_lookup(mHash[2], *p);
-          g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(callback), data);
+          auto callback = g_hash_table_lookup(mHash[1], *p);
+          TRACE("mkMenu() callback=%p, icon=%s\n", callback, icon);
+          if (callback) {
+            auto data = g_hash_table_lookup(mHash[2], *p);
+            g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(callback), data);
+          }
+          g_object_set_data(G_OBJECT(button), "menu", menu);
+          g_object_set_data(G_OBJECT(menu), *p, button);
+          continue;
         }
-        g_object_set_data(G_OBJECT(button), "menu", menu);
       }
           
 

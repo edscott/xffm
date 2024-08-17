@@ -262,7 +262,6 @@ private:
         _("Select All"), 
         _("Match regular expression"), 
         _("Colors"), 
-        //_("Global Settings"), 
         _("Close"), 
         NULL
       };
@@ -278,7 +277,6 @@ private:
       g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
       g_hash_table_insert(mHash[0], _("Match regular expression"), g_strdup(DIALOG_QUESTION));
       g_hash_table_insert(mHash[0], _("Colors"), g_strdup(DOCUMENT_PROPERTIES));
-      //g_hash_table_insert(mHash[0], _("Global Settings"), g_strdup(PREFERENCES));
       g_hash_table_insert(mHash[0], _("Close"), g_strdup(WINDOW_SHUTDOWN));
 
       // callbacks
@@ -292,13 +290,50 @@ private:
       g_hash_table_insert(mHash[1], _("Delete"), NULL);
       g_hash_table_insert(mHash[1], _("Select All"), NULL);
       g_hash_table_insert(mHash[1], _("Match regular expression"), NULL);
-      g_hash_table_insert(mHash[1], _("Colors"), (void *)terminalColors);
-      //g_hash_table_insert(mHash[1], _("Global Settings"), NULL);
+      g_hash_table_insert(mHash[1], _("Colors"), NULL);
       g_hash_table_insert(mHash[1], _("Close"), (void *)close);
 
+      //g_hash_table_insert(mHash[2], _("Colors"), GINT_TO_POINTER(-1));
       auto menu = Util::mkMenu(text,mHash, _("Main Menu"));
-      //auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("New")));
       for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
+// 
+      GHashTable *mHash2[3];
+      mHash2[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+      for (int i=1; i<3; i++) mHash2[i] = g_hash_table_new(g_str_hash, g_str_equal);
+      static const char *text2[]= {
+        _("terminal"), 
+        _("Set foreground color"),
+        _("Set background color"), 
+        _("icon"), 
+        _("Select foreground color"),
+        _("Select background color"), 
+        NULL
+      };
+      g_hash_table_insert(mHash2[0], _("terminal"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("icon"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Set foreground color"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Set background color"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Select foreground color"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Select background color"), g_strdup(DOCUMENT_PROPERTIES));
+
+      g_hash_table_insert(mHash2[1], _("Set foreground color"), (void *)terminalColors);
+      g_hash_table_insert(mHash2[1], _("Set background color"), (void *)terminalColors);
+      g_hash_table_insert(mHash2[1], _("Select foreground color"), (void *)terminalColors);
+      g_hash_table_insert(mHash2[1], _("Select background color"), (void *)terminalColors);
+
+      g_hash_table_insert(mHash2[2], _("terminal"), GINT_TO_POINTER(-1));
+      g_hash_table_insert(mHash2[2], _("icon"), GINT_TO_POINTER(-1));
+
+      auto submenu = Util::mkMenu(text2,mHash2, _("Colors"));
+      g_object_set_data(G_OBJECT(submenu), "menu", menu);
+      auto button = GTK_MENU_BUTTON(g_object_get_data(G_OBJECT(menu), _("Colors")));
+     // Important: must use both of the following instructions:
+      gtk_popover_set_default_widget(submenu, GTK_WIDGET(button));
+      gtk_widget_set_parent(GTK_WIDGET(submenu), GTK_WIDGET(button));
+      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
+  //    gtk_menu_button_set_popover (GTK_MENU_BUTTON(button), GTK_WIDGET(submenu));  
+      //for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
+
       return menu;
     }
     
@@ -407,7 +442,9 @@ private:
     static void
     terminalColors(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu")); 
+      auto topMenu = GTK_POPOVER(g_object_get_data(G_OBJECT(menu), "menu"));
       gtk_popover_popdown(menu);
+      gtk_popover_popdown(topMenu);
       auto dialog = gtk_color_dialog_new();
       gtk_color_dialog_set_modal (dialog, TRUE);
       gtk_color_dialog_set_title (dialog, "fixme: color dialog title");
@@ -418,6 +455,12 @@ private:
     close(GtkButton *self, void *data){
       gtk_widget_set_visible(MainWidget, FALSE);
       gtk_window_destroy(GTK_WINDOW(MainWidget));
+    }
+    static void
+    popup(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(data);
+      
+      gtk_popover_popup(menu);
     }
 };
 
