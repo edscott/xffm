@@ -56,6 +56,179 @@ namespace xf {
         g_free(*fullString);
         *fullString = newString;
     }
+  static
+  GtkCssProvider * setCSSprovider(void){
+    GtkCssProvider *css_provider = gtk_css_provider_new();
+
+    char *outputBg = Settings::getString("xfterm", "outputBg");
+    if (!outputBg) outputBg = g_strdup("#bbbbbb");
+
+    char *outputFg = Settings::getString("xfterm", "outputFg");
+    if (!outputFg) outputFg = g_strdup("#111111");
+
+    char *inputBg = Settings::getString("xfterm", "inputBg");
+    if (!inputBg) inputBg = g_strdup("#dddddd");
+
+    char *inputFg = Settings::getString("xfterm", "inputFg");
+    if (!inputFg) inputFg = g_strdup("#000000");
+
+    char *iconsFg = Settings::getString("xfterm", "iconsFg");
+    if (!iconsFg) iconsFg = g_strdup("#000000");
+
+    char *iconsBg = Settings::getString("xfterm", "iconsBg");
+    if (!iconsBg) iconsBg = g_strdup("#ffffff");
+
+
+    char *data = g_strdup_printf(
+    "\
+    .vbox {\
+      background-color: #888888;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    .output {\
+      background-color: %s;\
+      color: %s;\
+      font-family: monospace;\
+    }\
+    .outputview text selection {\
+      background-color: blue;\
+      color: yellow;\
+    }\
+    .input {\
+      background-color: %s;\
+      color: %s;\
+      font-family: monospace;\
+    }\
+    .xficons {\
+      background-color: %s;\
+      color: %s;\
+      font-family: monospace;\
+    }\
+    .font1 {\
+      font-size: xx-small;\
+    }\
+    .font2 {\
+      font-size: x-small;\
+    }\
+    .font3 {\
+      font-size: small;\
+    }\
+    .font4 {\
+      font-size: medium;\
+    }\
+    .font5 {\
+      font-size: large;\
+    }\
+    .font6 {\
+      font-size: x-large;\
+    }\
+    .font7 {\
+      font-size: xx-large;\
+    }\
+    .prompt {\
+      background-color: #333333;\
+      color: #00ff00;\
+    }\
+    .tooltip {\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    .pathbarbox * {\
+      background-color: #dcdad5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    .location * {\
+      color: blue;\
+      background-color: #dcdad5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    .pathbarboxNegative * {\
+      background-color: #acaaa5;\
+      border-width: 0px;\
+      border-radius: 0px;\
+      border-color: transparent;\
+    }\
+    ",
+      outputBg, outputFg, inputBg, inputFg, iconsBg, iconsFg);
+    g_free(outputBg);
+    g_free(outputFg);
+    g_free(inputBg);
+    g_free(inputFg);
+    g_free(iconsFg);
+    g_free(iconsBg);
+    gtk_css_provider_load_from_string (css_provider, data);
+    return css_provider;
+  }
+  static void
+  defaultColors(GtkButton *self, void *data){
+    auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu")); 
+    auto topMenu = GTK_POPOVER(g_object_get_data(G_OBJECT(menu), "menu"));
+    const char *x[]={"Bg", "Fg", NULL};
+    for (const char **p = x; p && *p; p++){
+      auto key = g_strconcat((const char *)data, *p, NULL);
+      Settings::removeKey("xfterm", key);
+      g_free(key);
+    }
+    auto css = Util::setCSSprovider();
+    gtk_style_context_add_provider_for_display(gdk_display_get_default(),
+        GTK_STYLE_PROVIDER(css),
+        GTK_STYLE_PROVIDER_PRIORITY_USER); 
+    gtk_popover_popdown(menu);
+    gtk_popover_popdown(topMenu);
+    return;
+  }
+
+    static void
+    setColor(GObject* source_object, GAsyncResult* result, gpointer data){
+      auto dialog =(GtkColorDialog*)source_object;
+      GError *error_=NULL;
+      auto item = (const char *)data;
+
+      GdkRGBA *color = gtk_color_dialog_choose_rgba_finish (dialog, result, &error_);
+      if (color) {
+        DBG("setColor: r=%f, g=%f, b=%f, a=%f\n",
+          color->red, color->green, color->blue, color->alpha);
+        short int red = color->red * 255;
+        short int green = color->green * 255;
+        short int blue = color->blue * 255;
+        DBG("color #%02x%02x%02x for %s\n", red, green, blue, item);
+        char buffer[32];
+        snprintf(buffer, 32, "#%02x%02x%02x", red, green, blue);
+        Settings::setString("xfterm", item, buffer);
+        auto css = Util::setCSSprovider();
+        gtk_style_context_add_provider_for_display(gdk_display_get_default(),
+            GTK_STYLE_PROVIDER(css),
+            GTK_STYLE_PROVIDER_PRIORITY_USER); 
+        
+        // Now we change the CSS class.
+        // 1. Save color to Settings
+        // 2. Reload modified CSS class
+        //    if this does the trick END
+        //    if not, then 
+        //       1. remove css class from all outputs
+        //       2. add modified css to all class.
+        // Also, we could use a user class.
+        // with user class:
+        // 1. Save color to Settings
+        // 2. create modified user css class
+        // 3. remove default color css class
+        // 4. add user defined color css.
+        // On startup, use user color css instead if
+        // Settings has the information.
+        // 
+      } else {
+        DBG("No color selected.\n");
+      }
+      g_free(color);
+    }
+    
     static void addMenu(const char *title, GtkPopover *menu, GtkWidget *parent){
       g_object_set_data(G_OBJECT(parent), "menu", menu);
       // Important: must use both of the following instructions:
@@ -71,13 +244,14 @@ namespace xf {
       return;  
     }
     static GtkPopover *
-    mkTextviewMenu(const char *title){
+    mkTextviewMenu(const char *title, const char *which, const char *whichFg, const char *whichBg){
       static const char *text[]= {
         _("Cut"), // 0x01
         _("Copy"), // 0x02
         _("Paste"), // 0x04
         _("Delete"), // 0x08
         _("Select All"), //0x10
+        _("Colors"), 
         NULL
       };
       GHashTable *mHash[3];
@@ -103,10 +277,68 @@ namespace xf {
       g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
       g_hash_table_insert(mHash[1], _("Select All"), NULL);
       g_hash_table_insert(mHash[2], _("Select All"), NULL);
+      
+      g_hash_table_insert(mHash[0], _("Colors"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[1], _("Colors"), NULL);
 
       auto menu = Util::mkMenu(text,mHash,_(title));
- 
+
+      
+       GHashTable *mHash2[3];
+      mHash2[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+      for (int i=1; i<3; i++) mHash2[i] = g_hash_table_new(g_str_hash, g_str_equal);
+      static const char *text2[]= {
+        _("Foreground"),
+        _("Background"), 
+        _("Default"), 
+        NULL
+      };
+
+      g_hash_table_insert(mHash2[0], _("Foreground"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Background"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
+
+      g_hash_table_insert(mHash2[1], _("Foreground"), (void *)Util::terminalColors);
+      g_hash_table_insert(mHash2[1], _("Background"), (void *)Util::terminalColors);
+      g_hash_table_insert(mHash2[1], _("Default"), (void *)Util::defaultColors);
+
+
+      g_hash_table_insert(mHash2[2], _("Foreground"), (void *)whichFg);
+      g_hash_table_insert(mHash2[2], _("Background"), (void *)whichBg);
+      g_hash_table_insert(mHash2[2], _("Default"), (void *)which);
+
+      auto submenu = Util::mkMenu(text2,mHash2, _("Colors"));
+      g_object_set_data(G_OBJECT(submenu), "menu", menu);
+      auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("Colors")));
+     // Important: must use both of the following instructions:
+      gtk_popover_set_default_widget(submenu, GTK_WIDGET(button));
+      gtk_widget_set_parent(GTK_WIDGET(submenu), GTK_WIDGET(button));
+g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
+  //    gtk_menu_button_set_popover (GTK_MENU_BUTTON(button), GTK_WIDGET(submenu));  
+      //for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
+
+      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
+      for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
+
       return menu;
+    }
+    static void
+    terminalColors(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu")); 
+      auto topMenu = GTK_POPOVER(g_object_get_data(G_OBJECT(menu), "menu"));
+      gtk_popover_popdown(menu);
+      gtk_popover_popdown(topMenu);
+      auto dialog = gtk_color_dialog_new();
+      gtk_color_dialog_set_modal (dialog, TRUE);
+      gtk_color_dialog_set_title (dialog, "fixme: color dialog title");
+      gtk_color_dialog_choose_rgba (dialog, GTK_WINDOW(MainWidget), 
+          NULL, NULL, Util::setColor, data);
+    }
+    static void
+    popup(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(data);
+      
+      gtk_popover_popup(menu);
     }
 
     private:

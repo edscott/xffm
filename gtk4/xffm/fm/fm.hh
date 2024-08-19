@@ -25,7 +25,10 @@ public:
     // This is to avoid crashes on remote x connection which want to use audible bell:
     auto gtksettings = gtk_settings_get_default();
     g_object_set(G_OBJECT(gtksettings), "gtk-error-bell", FALSE, NULL);
-    setCSSprovider();
+    auto css = Util::setCSSprovider();
+    gtk_style_context_add_provider_for_display(gdk_display_get_default(),
+        GTK_STYLE_PROVIDER(css),
+        GTK_STYLE_PROVIDER_PRIORITY_USER); 
 
     GdkDisplay *displayGdk = gdk_display_get_default();
     icon_theme = gtk_icon_theme_get_for_display(displayGdk);
@@ -61,88 +64,7 @@ public:
     //auto xffm = new(xf::MainWindow<EmptyButtonBox>)(path);
   }
 
-private:
-  void setCSSprovider(void){
-    GtkCssProvider *css_provider = gtk_css_provider_new();
-    gtk_css_provider_load_from_string (css_provider, 
-    "\
-    .vbox {\
-      background-color: #888888;\
-      border-width: 0px;\
-      border-radius: 0px;\
-      border-color: transparent;\
-    }\
-    .output0 {\
-      background-color: #bbbbbb;\
-      color: #111111;\
-      font-family: monospace;\
-    }\
-    .output {\
-      background-color: black;\
-      color: white;\
-      font-family: monospace;\
-    }\
-    .outputview text selection {\
-      background-color: blue;\
-      color: yellow;\
-    }\
-    .font1 {\
-      font-size: xx-small;\
-    }\
-    .font2 {\
-      font-size: x-small;\
-    }\
-    .font3 {\
-      font-size: small;\
-    }\
-    .font4 {\
-      font-size: medium;\
-    }\
-    .font5 {\
-      font-size: large;\
-    }\
-    .font6 {\
-      font-size: x-large;\
-    }\
-    .font7 {\
-      font-size: xx-large;\
-    }\
-    .input {\
-      background-color: #dddddd;\
-      color: #000000;\
-      font-family: monospace;\
-    }\
-    .prompt {\
-      background-color: #333333;\
-      color: #00ff00;\
-    }\
-    .tooltip {\
-      border-width: 0px;\
-      border-radius: 0px;\
-      border-color: transparent;\
-    }\
-    .pathbarbox * {\
-      background-color: #dcdad5;\
-      border-width: 0px;\
-      border-radius: 0px;\
-      border-color: transparent;\
-    }\
-    .location * {\
-      color: blue;\
-      background-color: #dcdad5;\
-      border-width: 0px;\
-      border-radius: 0px;\
-      border-color: transparent;\
-    }\
-    .pathbarboxNegative * {\
-      background-color: #acaaa5;\
-      border-width: 0px;\
-      border-radius: 0px;\
-      border-color: transparent;\
-    }\
-    ");
-    gtk_style_context_add_provider_for_display(gdk_display_get_default(),GTK_STYLE_PROVIDER(css_provider),GTK_STYLE_PROVIDER_PRIORITY_USER); 
-  }
+public:
 };
 }
 #endif

@@ -28,7 +28,7 @@ namespace xf {
         auto dollarBox = createPrompt();
         input_ = UtilPathbar::createInput(); 
         auto title = g_strconcat(_("Input"),_(" TTY"), NULL);
-        auto menu = Util::mkTextviewMenu(title);
+        auto menu = Util::mkTextviewMenu(title, "input", "inputFg", "inputBg");
         Util::addMenu(title, menu, GTK_WIDGET(input_));
         g_free(title);
 

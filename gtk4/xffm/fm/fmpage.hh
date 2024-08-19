@@ -33,7 +33,7 @@ namespace xf {
         output_ = Util::newTextView();
 
         auto title = g_strconcat(_("Output"),_(" TTY"), NULL);
-        auto menu = Util::mkTextviewMenu(title);
+        auto menu = Util::mkTextviewMenu(title, "output", "outputFg", "outputBg");
         Util::addMenu(title, menu, GTK_WIDGET(output_));
         g_free(title);
        
@@ -44,11 +44,26 @@ namespace xf {
         boxPack0 (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
         boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
         gtk_paned_set_start_child (vpane_, GTK_WIDGET(vbox));
+        
+        
+
+
+        gtk_widget_set_visible(GTK_WIDGET(treeScrolledWindow_), FALSE);
+
        
         
         gtk_paned_set_end_child (vpane_, GTK_WIDGET(bottomScrolledWindow_));
         g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
         gtk_scrolled_window_set_child(bottomScrolledWindow_, GTK_WIDGET(output_));
+
+        auto gridview = gtk_grid_view_new(NULL, NULL);
+        gtk_scrolled_window_set_child(topScrolledWindow_, GTK_WIDGET(gridview));
+
+        auto treeExpander = gtk_tree_expander_new();
+        gtk_scrolled_window_set_child(treeScrolledWindow_, GTK_WIDGET(treeExpander));
+
+        gtk_widget_add_css_class(gridview, "xficons");
+        gtk_widget_add_css_class(treeExpander, "xficons");
         
         return ;
     }
