@@ -1,7 +1,7 @@
 #ifndef XF_FMPAGE_HH
 #define XF_FMPAGE_HH
-#include "fmbuttonbox.hh"
 #include "utilpathbar.hh"
+#include "fmbuttonbox.hh"
 #include "pathbar.hh"
 #include "prompt.hh"
 

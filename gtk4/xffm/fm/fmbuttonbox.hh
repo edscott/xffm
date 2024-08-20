@@ -15,6 +15,7 @@ namespace xf {
     GtkBox *mkVbuttonBox(){
          const char *bIcon[]={
            OPEN_TERMINAL, 
+           GO_HOME, 
            SEARCH, 
            OPEN_FILEMANAGER, 
            GLIST_ADD, 
@@ -25,6 +26,7 @@ namespace xf {
          };
         const char *bText[]={
           _("Open terminal"),
+          _("Home"),
           _("Search"),
           _("Open a New Window"),
           _("Reset image size"),
@@ -35,6 +37,7 @@ namespace xf {
         };
         void *bCallback[]={
           (void *)openTerminal,
+          (void *)goHome,
           (void *)openFind,
           (void *)openXffm,
           (void *)upImage,
@@ -124,6 +127,24 @@ private:
       Settings::setString("xfterm", "size", buf);
     }
     
+    static void
+    goHome(GtkButton *self, void *data){
+      auto child = Util::getCurrentChild();
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+      auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
+      const char *v[]={"cd", NULL};
+      auto retval = Util::cd((const gchar **)v, child);
+
+      auto path = Util::getWorkdir(child);
+      UtilPathbar::updatePathbar(path, pathbar, true);
+      if (retval){
+        //Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir(child)));
+        if (!History::add("cd")) DBG("History::add(%s) failed\n", "cd" );
+      } else {
+        Util::print(output, g_strdup_printf(_("failed to chdir to $HOME")));
+      }
+      return;
+    }
     static void
     openTerminal(GtkButton *self, void *data){
       auto childWidget =Util::getCurrentChild();
