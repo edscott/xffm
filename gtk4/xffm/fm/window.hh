@@ -65,7 +65,9 @@ public:
           GdkModifierType state,
           gpointer data){
         
+
         MainWindow *w = (MainWindow *)data;
+
         auto notebook = GTK_NOTEBOOK(w->notebook());
         auto num = gtk_notebook_get_current_page(notebook);
         auto child = gtk_notebook_get_nth_page(notebook, num); //page box
@@ -77,10 +79,9 @@ public:
           TRACE("window on_keypress,  focusing input\n");
           gtk_widget_grab_focus(input);
           if (termKey) Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
-          if (upArrow) {
-            History::up(Util::getCurrentInput());
-          }
+          if (upArrow) History::up(GTK_TEXT_VIEW(input));         
         }
+        
         return FALSE;
     }
 
@@ -141,6 +142,12 @@ private:
           g_error ("Unsupported GDK backend");
           exit(1);
         }
+
+
+        gtk_widget_realize(GTK_WIDGET(mainWindow_));
+        auto input = Util::getCurrentInput();
+        gtk_widget_grab_focus(GTK_WIDGET(input));
+        
         gtk_window_present (mainWindow_);
 
     }
@@ -166,6 +173,7 @@ private:
         while (num != gtk_notebook_get_current_page(notebook_)) 
           gtk_notebook_next_page(notebook_);
       }
+      gtk_widget_grab_focus(GTK_WIDGET(Util::getCurrentInput()));
      
     }
  
@@ -201,6 +209,8 @@ private:
       auto page = (PageClass *) g_object_get_data(G_OBJECT(child), "page");
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
       delete(page);
+//      Util::flushGTK();
+//      gtk_widget_grab_focus(GTK_WIDGET(Util::getCurrentInput()));
       
     }
 
@@ -215,9 +225,12 @@ private:
       // Show current close button
       auto child = gtk_notebook_get_nth_page(notebook_, new_page);
       auto close = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "close"));
+      auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
       gtk_widget_set_visible (close, TRUE);
       
-      setWindowTitle(child);     
+      setWindowTitle(child);    
+      gtk_widget_grab_focus(GTK_WIDGET(input));
+      
     }
 
 

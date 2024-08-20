@@ -50,7 +50,7 @@ namespace xf {
     concat(gchar **fullString, const gchar* addOn){
         if (!(*fullString)) {
           *fullString = g_strdup(addOn);
-          return;
+return;
         }
         auto newString = g_strconcat(*fullString, addOn, NULL);
         g_free(*fullString);
@@ -246,10 +246,17 @@ namespace xf {
     static GtkPopover *
     mkTextviewMenu(const char *title, const char *which, const char *whichFg, const char *whichBg){
       static const char *text[]= {
-        _("Cut"), // 0x01
         _("Copy"), // 0x02
+        _("Cut"), // 0x01
         _("Paste"), // 0x04
         _("Delete"), // 0x08
+        _("Select All"), //0x10
+        _("Colors"), 
+        NULL
+      };
+      static const char *text1[]= {
+        _("Copy"), // 0x02
+        //_("Paste"), // 0x04
         _("Select All"), //0x10
         _("Colors"), 
         NULL
@@ -259,29 +266,29 @@ namespace xf {
       for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
 
       g_hash_table_insert(mHash[0], _("Cut"), g_strdup(EDIT_CUT));
-      g_hash_table_insert(mHash[1], _("Cut"), NULL);
-      g_hash_table_insert(mHash[2], _("Cut"), NULL);
+      g_hash_table_insert(mHash[1], _("Cut"), (void *)feedClipboard);
+      g_hash_table_insert(mHash[2], _("Cut"), GINT_TO_POINTER(true));
 
       g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
-      g_hash_table_insert(mHash[1], _("Copy"), NULL);
+      g_hash_table_insert(mHash[1], _("Copy"), (void *)feedClipboard);
       g_hash_table_insert(mHash[2], _("Copy"), NULL);
 
       g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
-      g_hash_table_insert(mHash[1], _("Paste"), NULL);
+      g_hash_table_insert(mHash[1], _("Paste"), (void *)pasteClipboard);
       g_hash_table_insert(mHash[2], _("Paste"), NULL);
 
       g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
-      g_hash_table_insert(mHash[1], _("Delete"), NULL);
+      g_hash_table_insert(mHash[1], _("Delete"), (void *)deleteSelectionTxt);
       g_hash_table_insert(mHash[2], _("Delete"), NULL);
 
       g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
-      g_hash_table_insert(mHash[1], _("Select All"), NULL);
+      g_hash_table_insert(mHash[1], _("Select All"), (void *)selectAllTxt);
       g_hash_table_insert(mHash[2], _("Select All"), NULL);
       
       g_hash_table_insert(mHash[0], _("Colors"), g_strdup(DOCUMENT_PROPERTIES));
       g_hash_table_insert(mHash[1], _("Colors"), NULL);
 
-      auto menu = Util::mkMenu(text,mHash,_(title));
+      auto menu = Util::mkMenu(strcmp(which, "output")?text:text1,mHash,_(title));
 
       
        GHashTable *mHash2[3];
@@ -298,9 +305,9 @@ namespace xf {
       g_hash_table_insert(mHash2[0], _("Background"), g_strdup(DOCUMENT_PROPERTIES));
       g_hash_table_insert(mHash2[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
 
-      g_hash_table_insert(mHash2[1], _("Foreground"), (void *)Util::terminalColors);
-      g_hash_table_insert(mHash2[1], _("Background"), (void *)Util::terminalColors);
-      g_hash_table_insert(mHash2[1], _("Default"), (void *)Util::defaultColors);
+      g_hash_table_insert(mHash2[1], _("Foreground"), (void *)terminalColors);
+      g_hash_table_insert(mHash2[1], _("Background"), (void *)terminalColors);
+      g_hash_table_insert(mHash2[1], _("Default"), (void *)defaultColors);
 
 
       g_hash_table_insert(mHash2[2], _("Foreground"), (void *)whichFg);
