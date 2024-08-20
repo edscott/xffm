@@ -82,13 +82,13 @@ private:
         // Load saved value fron xffm+/settings.ini file (if any)
         char *size = Settings::getString("xfterm", "size");
         if (!size) value = 4;
-        else if (strcmp(size, "output1")==0) value=1;
-        else if (strcmp(size, "output2")==0) value=2;
-        else if (strcmp(size, "output3")==0) value=3;
-        else if (strcmp(size, "output4")==0) value=4;
-        else if (strcmp(size, "output5")==0) value=5;
-        else if (strcmp(size, "output6")==0) value=6;
-        else if (strcmp(size, "output7")==0) value=7;
+        else if (strcmp(size, "font1")==0) value=1;
+        else if (strcmp(size, "font2")==0) value=2;
+        else if (strcmp(size, "font3")==0) value=3;
+        else if (strcmp(size, "font4")==0) value=4;
+        else if (strcmp(size, "font5")==0) value=5;
+        else if (strcmp(size, "font6")==0) value=6;
+        else if (strcmp(size, "font7")==0) value=7;
 
         gtk_range_set_value(GTK_RANGE(size_scale), value);
 

@@ -101,6 +101,11 @@ return;
       color: %s;\
       font-family: monospace;\
     }\
+    .inputview text selection  {\
+      background-color: #abc2df;\
+      color: black;\
+      font-family: monospace;\
+    }\
     .xficons {\
       background-color: %s;\
       color: %s;\

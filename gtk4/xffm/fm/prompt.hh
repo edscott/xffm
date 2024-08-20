@@ -27,6 +27,9 @@ namespace xf {
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
         auto dollarBox = createPrompt();
         input_ = UtilPathbar::createInput(); 
+        gtk_widget_add_css_class (GTK_WIDGET(input_), "input" );
+        gtk_widget_add_css_class (GTK_WIDGET(input_), "inputview" );
+   
         auto title = g_strconcat(_("Input"),_(" TTY"), NULL);
         auto menu = Util::mkTextviewMenu(title, "input", "inputFg", "inputBg");
         Util::addMenu(title, menu, GTK_WIDGET(input_));
@@ -278,6 +281,7 @@ namespace xf {
         gtk_text_view_set_cursor_visible (dollar_, FALSE);
         gtk_widget_set_can_focus(GTK_WIDGET(dollar_), FALSE);
         gtk_widget_add_css_class (GTK_WIDGET(dollar_), "input" );
+        gtk_widget_add_css_class (GTK_WIDGET(dollar_), "inputview" );
         boxPack0 (dollarBox, GTK_WIDGET(dollar_), FALSE, FALSE, 0);
         return dollarBox;
     }
