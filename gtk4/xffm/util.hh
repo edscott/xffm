@@ -169,6 +169,7 @@ return;
     g_free(iconsFg);
     g_free(iconsBg);
     gtk_css_provider_load_from_string (css_provider, data);
+    g_free(data);
     return css_provider;
   }
   static void

@@ -56,8 +56,54 @@ namespace xf {
         g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
         gtk_scrolled_window_set_child(bottomScrolledWindow_, GTK_WIDGET(output_));
 
+        //auto gfile = g_file_new_for_path("/");
+        auto gfile = g_file_new_for_path(g_get_home_dir());
+        //auto gfile = g_file_new_for_path(Util::getWorkdir());
+        auto dList = gtk_directory_list_new(NULL, gfile);
+        while (gtk_directory_list_is_loading(dList)) {
+          DBG("gtk_directory_list_is_loading...\n");
+          Util::flushGTK();
+        }
+        auto num = g_list_model_get_n_items(G_LIST_MODEL(dList));
+        DBG("gtk_directory_list_is_loading done: items=%d\n", num);
+        for (int i=0; i<num; i++){
+          auto info = G_FILE_INFO(g_list_model_get_item(G_LIST_MODEL(dList), i));
+          // file, type, name
+          GFileType tipo = G_FILE_TYPE_UNKNOWN;
+          if (g_file_info_has_attribute(info, "standard::type")) tipo = g_file_info_get_file_type (info);
+          else {
+            // XXX no good if no standard::type
+            //if (g_file_info_get_is_symlink(info) )tipo = G_FILE_TYPE_SYMBOLIC_LINK;
+          }
+          auto s = g_file_info_get_attribute_as_string (info, "standard::type");
+          GFile *z = G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
+          DBG("g_file_info_get_attribute_file_path(name)=%s (%s), tipo=%d (%s), ->%s (%p) %s\n",
+              
+              g_file_info_get_name(info),
+              (const char *)g_object_get_data(G_OBJECT(info), "standard::name"), //nah
+              
+              tipo,s,
+              g_file_info_get_attribute_as_string(info, "standard::file"),
+              g_file_info_get_attribute_object(info, "standard::file"),
+              g_file_get_path(z)
+              ); 
+         /* auto **v = g_file_info_list_attributes (info, NULL);
+          for (char **p=v; p && *p; p++){
+            DBG("Attribute: %s\n", *p);
+          }
+          g_strfreev(v);*/
+
+
+         /* auto path = g_file_get_path(file);
+          DBG("path=%s\n", path);
+          g_free(path);*/
+          g_free(info);
+        }
+
+
         auto gridview = gtk_grid_view_new(NULL, NULL);
         gtk_scrolled_window_set_child(topScrolledWindow_, GTK_WIDGET(gridview));
+
 
         auto treeExpander = gtk_tree_expander_new();
         gtk_scrolled_window_set_child(treeScrolledWindow_, GTK_WIDGET(treeExpander));
