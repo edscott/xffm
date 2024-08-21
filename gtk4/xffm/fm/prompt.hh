@@ -99,6 +99,7 @@ namespace xf {
               TRACE("internal command=%s\n", *c);
               continue;
             }
+
             // automatic shell determination:
             if (!g_file_test(workdir, G_FILE_TEST_IS_DIR)) {
                 if (chdir(g_get_home_dir()) < 0){
@@ -168,6 +169,7 @@ namespace xf {
       Util::scroll_to_bottom(output);
       return true;
     }
+    
     static bool
     cd(GtkTextView *output, const char *text){
       gchar **v = Util::getVector(text, " ");
@@ -222,6 +224,16 @@ namespace xf {
       if (pwd(output, text)) return true;
       if (history(output, text)) return true;
       if (cd(output, text)) return true;
+      if (text && strcmp(text, "exit")==0) {
+        // close window.
+        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+        auto num = gtk_notebook_get_current_page(notebook);
+        auto n = gtk_notebook_get_n_pages(notebook);
+        if (n == 1) exit(0);
+        gtk_notebook_remove_page(notebook,num);
+
+        return true;
+      }
       exe(input, output, text); 
       g_free(text);
       return true;
