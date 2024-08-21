@@ -31,6 +31,7 @@ namespace xf {
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       setWindowTitle(child);
       updatePathbar(path, pathbar, updateHistory);
+      IconView::updateGridView(child, path);
       return true;
     }
     static void 

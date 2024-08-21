@@ -2,6 +2,7 @@
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
 #include "utilbasic.hh"
+#include "fm/iconview.hh"
 namespace xf {
 //  class Util : public UtilPathbar, public UtilBasic {
   class Util : public UtilBasic {
@@ -419,6 +420,7 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      IconView::updateGridView(child, path);
       return true;
     }
     static bool

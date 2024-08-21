@@ -55,7 +55,7 @@ namespace xf {
         gtk_paned_set_end_child (vpane_, GTK_WIDGET(bottomScrolledWindow_));
         g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
         gtk_scrolled_window_set_child(bottomScrolledWindow_, GTK_WIDGET(output_));
-
+#if 0
         //auto gfile = g_file_new_for_path("/");
         auto gfile = g_file_new_for_path(g_get_home_dir());
         //auto gfile = g_file_new_for_path(Util::getWorkdir());
@@ -100,15 +100,17 @@ namespace xf {
           g_free(info);
         }
 
+//GtkMultiSelection*
+       // auto gridview = IconView::getGridView(path);
+     /*   auto selectionModel = GTK_SELECTION_MODEL(gtk_multi_selection_new(G_LIST_MODEL(dList)));
+        
+        auto gridview = gtk_grid_view_new(selectionModel, NULL);*/
+       // gtk_scrolled_window_set_child(topScrolledWindow_, GTK_WIDGET(gridview));
 
-        auto gridview = gtk_grid_view_new(NULL, NULL);
-        gtk_scrolled_window_set_child(topScrolledWindow_, GTK_WIDGET(gridview));
-
-
+#endif
         auto treeExpander = gtk_tree_expander_new();
         gtk_scrolled_window_set_child(treeScrolledWindow_, GTK_WIDGET(treeExpander));
 
-        gtk_widget_add_css_class(gridview, "xficons");
         gtk_widget_add_css_class(treeExpander, "xficons");
         
         return ;
@@ -161,7 +163,13 @@ namespace xf {
         auto input = this->input();
         auto dollar = this->dollar();
         auto buttonSpace = this->buttonSpace();
+        auto topScrolledWindow = this->topScrolledWindow();
+
+        auto gridview = IconView::getGridView(path);        
+        gtk_scrolled_window_set_child(topScrolledWindow, GTK_WIDGET(gridview));
+
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
+        g_object_set_data(G_OBJECT(box), "topScrolledWindow", topScrolledWindow);
 
         g_object_set_data(G_OBJECT(input), "output", output);
         g_object_set_data(G_OBJECT(output), "input", input);

@@ -107,7 +107,7 @@ private:
         GtkWidget *widget = GTK_WIDGET(mainWindow_);
         gtk_widget_realize(widget);
         bool OK = false;
-
+ 
 #ifdef GDK_WINDOWING_X11
         GdkDisplay *displayGdk = gdk_display_get_default();
         if (GDK_IS_X11_DISPLAY (displayGdk)) {
