@@ -368,7 +368,7 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
         gtk_range_set_value(GTK_RANGE(size_scale), value);
 
         gtk_range_set_increments (GTK_RANGE(size_scale), 1.0, 1.0);
-        gtk_widget_set_size_request (GTK_WIDGET(size_scale),-1,75);
+        gtk_widget_set_size_request (GTK_WIDGET(size_scale),75,-1);
 
         gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
         //gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);

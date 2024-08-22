@@ -164,12 +164,14 @@ namespace xf {
         auto dollar = this->dollar();
         auto buttonSpace = this->buttonSpace();
         auto topScrolledWindow = this->topScrolledWindow();
+        auto bottomScrolledWindow = this->bottomScrolledWindow();
 
         auto gridview = IconView::getGridView(path);        
         gtk_scrolled_window_set_child(topScrolledWindow, GTK_WIDGET(gridview));
 
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
         g_object_set_data(G_OBJECT(box), "topScrolledWindow", topScrolledWindow);
+        g_object_set_data(G_OBJECT(box), "bottomScrolledWindow", bottomScrolledWindow);
 
         g_object_set_data(G_OBJECT(input), "output", output);
         g_object_set_data(G_OBJECT(output), "input", input);

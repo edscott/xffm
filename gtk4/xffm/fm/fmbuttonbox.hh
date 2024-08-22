@@ -46,7 +46,7 @@ namespace xf {
           (void *)toggleVpane,
           NULL
         };
-        //auto scale = newSizeScale(_("Terminal font"));
+        auto scale = newSizeScale(_("Icon Size"));
 
         auto hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(hbox), FALSE);
@@ -71,7 +71,7 @@ namespace xf {
           }
         }
 
-        //Util::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
+        Util::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
         Util::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(MainWidget), "buttonBox", vButtonBox_);
 
@@ -79,6 +79,44 @@ namespace xf {
     }
 private:
      
+    GtkScale *newSizeScale(const gchar *tooltipText){
+        double value;
+        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 96.0, 12.0));
+        // Load saved value fron xffm+/settings.ini file (if any)
+        auto size = Settings::getInteger("xfterm", "iconsize");
+        if (size < 0) value = 48; else value = size;
+        DBG("range set value=%lf\n", value);
+        gtk_range_set_value(GTK_RANGE(size_scale), value);
+
+        gtk_range_set_increments (GTK_RANGE(size_scale), 12.0, 12.0);
+        gtk_widget_set_size_request (GTK_WIDGET(size_scale),-1,75);
+
+        gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
+        //gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
+        Util::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
+        g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize), NULL);
+        return size_scale;
+    }
+    static void
+    changeSize (GtkRange* self, gpointer user_data){
+      auto value = gtk_range_get_value(self);
+      Settings::setInteger("xfterm", "iconsize", value);
+      
+      // reload all pages
+      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+      auto n = gtk_notebook_get_n_pages(notebook);
+      char buf[32];
+
+      for (int i=0; i<n; i++){
+        auto child = gtk_notebook_get_nth_page(notebook, i);
+        
+        auto bottomScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "bottomScrolledWindow"));
+        auto old = gtk_scrolled_window_get_child(bottomScrolledWindow);
+        gtk_widget_unparent(old);
+        IconView::updateGridView(child, Util::getWorkdir(child));
+      }
+    }
+    
     static void
     goHome(GtkButton *self, void *data){
       auto child = Util::getCurrentChild();
