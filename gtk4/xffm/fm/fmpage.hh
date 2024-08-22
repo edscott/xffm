@@ -178,6 +178,18 @@ namespace xf {
         g_object_set_data(G_OBJECT(box), "input", input);
         g_object_set_data(G_OBJECT(box), "dollar", dollar);
 
+        auto fontSize = Settings::getString("xfterm", "outputSize");
+        if (fontSize) gtk_widget_add_css_class(GTK_WIDGET(output), fontSize);
+        g_free(fontSize);
+
+        fontSize = Settings::getString("xfterm", "inputSize");
+        if (fontSize) {
+          gtk_widget_add_css_class(GTK_WIDGET(output), fontSize);
+          gtk_widget_add_css_class(GTK_WIDGET(dollar), fontSize);
+        }
+        g_free(fontSize);
+
+
         auto promptBox = GTK_WIDGET(this->promptBox());
         auto vpane = GTK_WIDGET(this->vpane());
         auto pathbar = this->pathbar();

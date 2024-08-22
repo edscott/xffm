@@ -291,6 +291,7 @@ namespace xf {
       GtkPopover *menu = GTK_POPOVER(gtk_popover_new ());
       g_object_set_data(G_OBJECT(menu), "titleBox", titleBox);
       g_object_set_data(G_OBJECT(menu), "titleLabel", titleLabel);
+      g_object_set_data(G_OBJECT(menu), "vbox", vbox);
       setMenuTitle(menu, title);
 
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);

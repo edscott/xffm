@@ -46,7 +46,7 @@ namespace xf {
           (void *)toggleVpane,
           NULL
         };
-        auto scale = newSizeScale(_("Terminal font"));
+        //auto scale = newSizeScale(_("Terminal font"));
 
         auto hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(hbox), FALSE);
@@ -71,7 +71,7 @@ namespace xf {
           }
         }
 
-        Util::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
+        //Util::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
         Util::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(MainWidget), "buttonBox", vButtonBox_);
 
@@ -79,54 +79,6 @@ namespace xf {
     }
 private:
      
-    GtkScale *newSizeScale(const gchar *tooltipText){
-        double value;
-        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 1.0, 7.0, 1.0));
-        // Load saved value fron xffm+/settings.ini file (if any)
-        char *size = Settings::getString("xfterm", "size");
-        if (!size) value = 4;
-        else if (strcmp(size, "font1")==0) value=1;
-        else if (strcmp(size, "font2")==0) value=2;
-        else if (strcmp(size, "font3")==0) value=3;
-        else if (strcmp(size, "font4")==0) value=4;
-        else if (strcmp(size, "font5")==0) value=5;
-        else if (strcmp(size, "font6")==0) value=6;
-        else if (strcmp(size, "font7")==0) value=7;
-
-        gtk_range_set_value(GTK_RANGE(size_scale), value);
-
-        gtk_range_set_increments (GTK_RANGE(size_scale), 1.0, 1.0);
-        gtk_widget_set_size_request (GTK_WIDGET(size_scale),-1,75);
-
-        gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
-        //gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
-        Util::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
-        g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize), NULL);
-        return size_scale;
-    }
-    static void
-    changeSize (GtkRange* self, gpointer user_data){
-      auto value = gtk_range_get_value(self);
-      int v = value;
-      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
-      auto n = gtk_notebook_get_n_pages(notebook);
-      char buf[32];
-
-      const char *textviews[]={"output", "input", "dollar", NULL};
-      for (const char **p=textviews; p && *p; p++) for (int i=0; i<n; i++){
-        auto child = gtk_notebook_get_nth_page(notebook, i);
-        auto textview = GTK_WIDGET(g_object_get_data(G_OBJECT(child), *p));
-        for (int j=1; j<=7; j++){
-          snprintf(buf, 32, "font%d", j);
-          gtk_widget_remove_css_class (textview, buf);
-        }
-        snprintf(buf, 32, "font%d", v);
-        gtk_widget_add_css_class (textview, buf);
-      }
-      snprintf(buf, 32, "font%d", v);
-      Settings::setString("xfterm", "size", buf);
-    }
-    
     static void
     goHome(GtkButton *self, void *data){
       auto child = Util::getCurrentChild();

@@ -1,6 +1,6 @@
 #ifndef XF_ICONVIEW_HH
 #define XF_ICONVIEW_HH
-
+#include "texture.hh"
 namespace xf {
     
   class IconView {
@@ -48,11 +48,15 @@ namespace xf {
     GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *label = gtk_label_new( "" );
 
-    GtkWidget *image = gtk_image_new_from_icon_name("text-x-generic");
-    gtk_image_set_icon_size (GTK_IMAGE(image),  GTK_ICON_SIZE_LARGE);
+    //GtkWidget *image = gtk_image_new_from_icon_name("text-x-generic");
+    auto texture = Texture::load("/usr/share/icons/Adwaita/scalable/mimetypes/application-certificate.svg");
+    GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
 
-    //gtk_widget_add_css_class(image, "large-icons"); //normal-icons
-    
+    gtk_widget_add_css_class(image, "textureIcons");
+    auto size = Settings::getInteger("xfterm", "iconsize");
+    if (size < 0) size = 48;
+    gtk_widget_set_size_request(image, size, size);
+        
     gtk_box_append(GTK_BOX(vbox), image);
     gtk_box_append(GTK_BOX(vbox), label);
     gtk_widget_set_halign (label,GTK_ALIGN_FILL);
