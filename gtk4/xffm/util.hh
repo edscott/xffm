@@ -200,12 +200,12 @@ return;
 
       GdkRGBA *color = gtk_color_dialog_choose_rgba_finish (dialog, result, &error_);
       if (color) {
-        DBG("setColor: r=%f, g=%f, b=%f, a=%f\n",
+        TRACE("setColor: r=%f, g=%f, b=%f, a=%f\n",
           color->red, color->green, color->blue, color->alpha);
         short int red = color->red * 255;
         short int green = color->green * 255;
         short int blue = color->blue * 255;
-        DBG("color #%02x%02x%02x for %s\n", red, green, blue, item);
+        TRACE("color #%02x%02x%02x for %s\n", red, green, blue, item);
         char buffer[32];
         snprintf(buffer, 32, "#%02x%02x%02x", red, green, blue);
         Settings::setString("xfterm", item, buffer);
@@ -231,7 +231,7 @@ return;
         // Settings has the information.
         // 
       } else {
-        DBG("No color selected.\n");
+        TRACE("No color selected.\n");
       }
       g_free(color);
     }
@@ -493,7 +493,7 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
         return text;
     }
     static bool setWorkdir(const gchar *path, GtkWidget *child){
-      //DBG("setWorkdir...\n");
+      //TRACE("setWorkdir...\n");
       if (!MainWidget) return false;
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
@@ -554,7 +554,7 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
     static char **getVector(const char *text, const char *token){
       auto string =g_strdup(text);
       g_strstrip(string);     
-      //DBG( "getVector():string=%s\n", string);
+      //TRACE( "getVector():string=%s\n", string);
       char **vector;
       if (!strstr(string, token)){
         vector = (char **)calloc(2,sizeof(char *));
@@ -563,7 +563,7 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
         vector = g_strsplit(string,token,-1);
       }
       g_free(string);
-      //for (char **p=vector; p && *p && p->id p++)  DBG( "getVector():p=%s\n",*p);
+      //for (char **p=vector; p && *p && p->id p++)  TRACE( "getVector():p=%s\n",*p);
       return vector;
     }
     static void

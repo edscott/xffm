@@ -52,9 +52,10 @@ public:
       for (auto p=subdirs; p && *p; p++){
           auto path = g_build_filename(resource_path, *p, NULL);
           gtk_icon_theme_add_search_path (icon_theme, path);
+          TRACE("added search path=\"%s\"\n", path);
           g_free(path);
       }
-      TRACE("added resource path=\"%s\"\n", resource_path);
+      //TRACE("added resource path=\"%s\"\n", resource_path);
     }
     g_free(resource_path);
 

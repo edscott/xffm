@@ -85,7 +85,7 @@ private:
         // Load saved value fron xffm+/settings.ini file (if any)
         auto size = Settings::getInteger("xfterm", "iconsize");
         if (size < 0) value = 48; else value = size;
-        DBG("range set value=%lf\n", value);
+        TRACE("range set value=%lf\n", value);
         gtk_range_set_value(GTK_RANGE(size_scale), value);
 
         gtk_range_set_increments (GTK_RANGE(size_scale), 12.0, 12.0);
@@ -144,7 +144,7 @@ private:
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Util::getWorkdir(childWidget);
-        DBG ("openTerminal::childWidget= %p, buttonSpace = %p workdir=%s\n", 
+        TRACE ("openTerminal::childWidget= %p, buttonSpace = %p workdir=%s\n", 
             childWidget, buttonSpace, workDir);
 
       auto terminal = Util::getTerminal();

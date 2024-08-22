@@ -41,7 +41,7 @@ namespace xf {
       g_error_free(error_);
       return;
     }
-    DBG("readDone: string = %s\n", string);
+    TRACE("readDone: string = %s\n", string);
 
     
   }
