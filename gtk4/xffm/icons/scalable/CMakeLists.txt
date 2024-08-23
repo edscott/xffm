@@ -1,3 +1,0 @@
-set(ICONS application-x-executable.svg default.svg differences.svg drive-harddisk.svg emblem-about.svg emblem-archlinux.svg emblem-blueball.svg emblem-bsd.svg emblem-bookmark.svg emblem-gentoo.svg emblem-greenball.svg emblem-keyhole.svg emblem-redball.svg emblem-symbolic-link.svg emblem-synchronized.svg go-home.svg go-jump.svg go-previous.svg go-up.svg grayball.svg image-x-generic.svg glist-add.svg glist-remove.svg package-x-generic.svg run.svg text-html.svg text-x-generic.svg text-x-script.svg user-trash-full.svg user-trash.svg video-display.svg video-x-generic.svg utilities-terminal.svg)
-INSTALL(FILES  ${ICONS}  DESTINATION share/icons/hicolor/scalable)
-
