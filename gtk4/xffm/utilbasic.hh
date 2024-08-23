@@ -6,6 +6,15 @@ namespace xf {
   static GdkClipboard *clipBoardTxt=NULL;
   class UtilBasic{
     public:
+    static void
+    concat(gchar **fullString, const gchar* addOn){
+        if (!(*fullString)) {
+          *fullString = g_strdup(addOn);
+        }
+        auto newString = g_strconcat(*fullString, addOn, NULL);
+        g_free(*fullString);
+        *fullString = newString;
+    }
   static 
   void boxPack0(  
       GtkBox* box,

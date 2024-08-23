@@ -4,6 +4,8 @@
  */
 #include "xffm.h"
 #include "settings.hh"
+#include "utilbasic.hh"
+#include "fm/iconview.hh"
 #include "util.hh"
 #include "bash.hh"
 #include "history.hh"

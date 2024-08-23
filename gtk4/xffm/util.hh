@@ -1,8 +1,6 @@
 #ifndef XF_UTIL_HH
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
-#include "utilbasic.hh"
-#include "fm/iconview.hh"
 namespace xf {
 //  class Util : public UtilPathbar, public UtilBasic {
   class Util : public UtilBasic {
@@ -46,16 +44,6 @@ namespace xf {
     flushGTK(void){
       while (g_main_context_pending(NULL))
         g_main_context_iteration(NULL, TRUE);
-    }
-    static void
-    concat(gchar **fullString, const gchar* addOn){
-        if (!(*fullString)) {
-          *fullString = g_strdup(addOn);
-return;
-        }
-        auto newString = g_strconcat(*fullString, addOn, NULL);
-        g_free(*fullString);
-        *fullString = newString;
     }
   static
   GtkCssProvider * setCSSprovider(void){

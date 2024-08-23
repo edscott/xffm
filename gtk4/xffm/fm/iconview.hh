@@ -19,8 +19,53 @@ namespace xf {
       static GtkWidget *
       getGridView(const char *path){
         GFile *gfile = g_file_new_for_path(path);
-        GtkDirectoryList *dList = gtk_directory_list_new("standard::type", gfile); // G_LIST_MODEL
-//        GtkDirectoryList *dList = gtk_directory_list_new(NULL, gfile); // G_LIST_MODEL
+        // Create the initial GtkDirectoryList (G_LIST_MODEL).
+        const char *attributes[]={
+          "type",
+          "symbolic_icon",
+          "is_backup",
+          "is-hidden",
+          "is-symlink",
+          "time_modified",
+          "name",
+          "size",
+          "sort_order",
+          "icon",
+          "symbolic_icon",
+          "symlink_target",
+          NULL};
+        auto attribute = g_strdup("");
+        bool first = true;
+        for (const char **p=attributes; p && *p; p++){
+          if (!first){
+            UtilBasic::concat(&attribute, ",");
+          }
+          first = false;
+          UtilBasic::concat(&attribute, "standard::");
+          UtilBasic::concat(&attribute, *p);
+        }
+        GtkDirectoryList *dList = 
+          gtk_directory_list_new(attribute, gfile); 
+        //g_free(attribute); 
+        // Chain link GtkDirectoryList to a GtkFilterListModel.
+        GtkFilter *filter = 
+          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
+        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(dList), filter);
+        // Chain link GtkFilterListModel to a GtkSortListModel.
+        // Directories first, and alphabeta.
+        GtkSorter *sorter = 
+          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
+        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
+
+        // Chain link GtkFilterListModel to a GtkSortListModel.
+        //GtkSorter *sorter = 
+          //GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
+        //GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
+        
+        // Chain link GtkSortListModel to a GtkMultiSelection.
+        GtkMultiSelection *selection_model = gtk_multi_selection_new(G_LIST_MODEL(sortModel));
+
+/*        
         while (gtk_directory_list_is_loading(dList)) {
           DBG("gtk_directory_list_is_loading...\n");
            while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
@@ -30,14 +75,8 @@ namespace xf {
         DBG("gtk_directory_list_is_loading done: items=%d\n", num);
         for (int i=0; i<num; i++){
           auto info = G_FILE_INFO(g_list_model_get_item(G_LIST_MODEL(dList), i));
-        }
+        }*/
         
-        GtkNoSelection *selection_model = gtk_no_selection_new(G_LIST_MODEL(dList));
-        GtkMultiSelection *selection_model2 = gtk_multi_selection_new(G_LIST_MODEL(dList));
-              /*while (gtk_directory_list_is_loading(dList)) {
-              }
-              int num = g_list_model_get_n_items(G_LIST_MODEL(dList));
-              fprintf(stderr, "gtk_directory_list_is_loading done: items=%d\n", num);*/
        
         // GtkListItemFactory implements GtkSignalListItemFactory, which can be connected to
         // bind, setup, teardown and unbind
@@ -45,108 +84,174 @@ namespace xf {
 
         /* Connect handler to the factory.
          */
-        g_signal_connect( factory, "setup", G_CALLBACK(factory3_setup), NULL );
-        g_signal_connect( factory, "bind", G_CALLBACK(factory3_bind), NULL);
+        g_signal_connect( factory, "setup", G_CALLBACK(factorySetup), NULL );
+        g_signal_connect( factory, "bind", G_CALLBACK(factoryBind), NULL);
 
         GtkWidget *view;
         /* Create the view.
          */
-        view = gtk_grid_view_new( GTK_SELECTION_MODEL( selection_model2 ), factory );
+        view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model), factory);
         gtk_widget_add_css_class(view, "xficons");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
         return view;
       }
     private:
-  static void
-  factory3_setup(GtkSignalListItemFactory *self, GObject *object, void *data){
-    GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    GtkWidget *label = gtk_label_new( "" );
-    GtkWidget *imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+      static gboolean
+      filterFunction(GObject *object, void *data){
+        GFileInfo *info = G_FILE_INFO(object);
+        return !g_file_info_get_is_hidden(info);
+      }
+      static void
+      factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
+        GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        GtkWidget *label = gtk_label_new( "" );
+        GtkWidget *imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-    //GtkWidget *image = gtk_image_new_from_icon_name("text-x-generic");
+        //GtkWidget *image = gtk_image_new_from_icon_name("text-x-generic");
+            
+        gtk_box_append(GTK_BOX(vbox), imageBox);
+        g_object_set_data(G_OBJECT(vbox), "imageBox", imageBox);
+
+        gtk_box_append(GTK_BOX(vbox), label);
+        gtk_widget_set_halign (label,GTK_ALIGN_FILL);
+        gtk_widget_set_vexpand(GTK_WIDGET(label), FALSE);
+        gtk_widget_set_margin_top(GTK_WIDGET(label), 0);
+        gtk_widget_set_margin_bottom(GTK_WIDGET(label), 0);
+
+        g_object_set_data(G_OBJECT(vbox),"label", label);
+
+        GtkListItem *list_item = GTK_LIST_ITEM(object);
+        gtk_list_item_set_child(list_item, vbox);
+      }
+
+      /* The bind function for the factory */
+      static void
+      factoryBind(GtkSignalListItemFactory *self, GObject *object, void *data)
+      {
+        auto list_item =GTK_LIST_ITEM(object);
+        auto vbox = GTK_BOX(gtk_list_item_get_child( list_item ));
+        auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+
+       /* GFile *gfile = g_file_enumerator_get_container(G_FILE_ENUMERATOR(info));
+        auto path = g_file_get_path(gfile);
+        DBG("gfile path: %s\n",path);
+        g_free(path);*/
+       
+        GtkWidget *imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "imageBox"));
+        auto w = gtk_widget_get_first_child (imageBox);
+        if (w) gtk_widget_unparent(w);
         
-    gtk_box_append(GTK_BOX(vbox), imageBox);
-    g_object_set_data(G_OBJECT(vbox), "imageBox", imageBox);
+        int scaleFactor = 1;
+        char *name = g_strdup(g_file_info_get_name(info));
+        auto texture = Texture::load(name);
+        if (texture) scaleFactor = 2;
+        if (!texture) {
+          //texture = Texture::loadIconName("emblem-archlinux");
+          texture = Texture::load(info);
+        }
+        if (!texture) {
+            TRACE("Iconmview::load(): Texture::load(info) == NULL\n");
+        }
+          
+        
+        GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        auto size = Settings::getInteger("xfterm", "iconsize");
+        if (size < 0) size = 48;
+        gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
+        gtk_box_append(GTK_BOX(imageBox), image);
 
-    gtk_box_append(GTK_BOX(vbox), label);
-    gtk_widget_set_halign (label,GTK_ALIGN_FILL);
-    gtk_widget_set_vexpand(GTK_WIDGET(label), FALSE);
-    gtk_widget_set_margin_top(GTK_WIDGET(label), 0);
-    gtk_widget_set_margin_bottom(GTK_WIDGET(label), 0);
+        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
 
-    g_object_set_data(G_OBJECT(vbox),"label", label);
+        if (name && strlen(name) > 15){
+          name[15] = 0;
+          name[14] ='~';
+        }
+        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
+        gtk_label_set_markup( GTK_LABEL( label ), markup );
+        g_free(name);
+        g_free(markup);
+      }
 
-    GtkListItem *list_item = GTK_LIST_ITEM(object);
-    gtk_list_item_set_child(list_item, vbox);
-  }
+      static bool
+      symlinkToDir(GFileInfo* info, GFileType type){
+        if (type == G_FILE_TYPE_SYMBOLIC_LINK){ 
+          const char *path = g_file_info_get_symlink_target(info);
+          struct stat st;
+          stat(path, &st);
+          if (S_ISDIR(st.st_mode)) return true;
+        }
+        return false;
+      }
 
-  /* The bind function for the factory */
-  static void
-  factory3_bind(GtkSignalListItemFactory *self, GObject *object, void *data)
-  {
-    auto list_item =GTK_LIST_ITEM(object);
-    auto vbox = GTK_BOX(gtk_list_item_get_child( list_item ));
-    auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+    // flags :
+    // 0x01 : by date
+    // 0x02 : by size
+    // 0x04 : descending
+    static gint 
+    compareFunction(const void *a, const void *b, void *data){
+        auto flags = GPOINTER_TO_INT(data);
+        bool byDate = (flags & 0x01);
+        bool bySize = (flags & 0x02);
+        bool descending = (flags & 0x04);
 
-    auto type = g_file_info_get_file_type(info);
-    const char *iconLo = NULL;
-    const char *iconHi = NULL;
-    GFile *z = G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
-    auto path = g_file_get_path(z);
-    switch (type){
-      case G_FILE_TYPE_UNKNOWN:
-        iconLo = "default";
-        break;
-      case G_FILE_TYPE_REGULAR:
-        iconLo = "application-x-generic";
-        break;
-      case G_FILE_TYPE_DIRECTORY:
-              
-        if (strcmp(path, g_get_home_dir())==0) iconLo = "user-home";
-        else iconLo = "folder";
-        break;
-      case G_FILE_TYPE_SYMBOLIC_LINK:
-        iconLo = "emblem-symbolic-link";
-        break;
-      case G_FILE_TYPE_SPECIAL:
-        iconLo = "application-x-generic";
-        break;
-      case G_FILE_TYPE_SHORTCUT: // Windows
-        iconLo = "emblem-symbolic-link";
-        break;
-      case G_FILE_TYPE_MOUNTABLE:
-        iconLo = "drive-harddisk";
-        break;
+        GFileInfo *infoA = G_FILE_INFO(a);
+        GFileInfo *infoB = G_FILE_INFO(b);
+        auto typeA = g_file_info_get_file_type(infoA);
+        auto typeB = g_file_info_get_file_type(infoB);
+        
+        GFile *fileA = G_FILE(g_file_info_get_attribute_object(infoA, "standard::file"));
+        GFile *fileB = G_FILE(g_file_info_get_attribute_object(infoB, "standard::file"));
+
+        // compare by name, directories or symlinks to directories on top
+        TRACE("compare %s --- %s\n", g_file_info_get_name(infoA), g_file_info_get_name(infoB));
+        //XXX ".." is not a part of the dList...
+        //if (strcmp(xd_a->d_name, "..")==0) return -1;
+        //if (strcmp(xd_b->d_name, "..")==0) return 1;
+
+        gboolean a_cond = FALSE;
+        gboolean b_cond = FALSE;
+
+        a_cond = ((typeA == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(infoA, typeA)));
+        b_cond = ((typeB == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(infoB, typeB)));
+
+        if (a_cond && !b_cond) return -1; 
+        if (!a_cond && b_cond) return 1;
+
+        auto nameA = g_file_info_get_name(infoA);
+        auto nameB = g_file_info_get_name(infoB);
+        if (a_cond && b_cond) {
+            // directory comparison by name is default;
+           if (byDate) {
+              auto dateTimeA = g_file_info_get_modification_date_time(infoA);
+              auto dateTimeB = g_file_info_get_modification_date_time(infoB);
+              auto value = g_date_time_compare(dateTimeA, dateTimeB);
+              g_free(dateTimeA);
+              g_free(dateTimeB);
+              return value;
+           } else {
+                if (descending) return -strcasecmp(nameA, nameB);
+                return strcasecmp(nameA, nameB);
+            }
+        }
+        // by date
+        if (byDate){
+          auto dateTimeA = g_file_info_get_modification_date_time(infoA);
+          auto dateTimeB = g_file_info_get_modification_date_time(infoB);
+          auto value = g_date_time_compare(dateTimeA, dateTimeB);
+          g_free(dateTimeA);
+          g_free(dateTimeB);
+          if (descending) return -value;
+          return value;
+        } else if (bySize){
+          auto sizeA = g_file_info_get_size(infoA);
+          auto sizeB = g_file_info_get_size(infoB);
+          if (descending) return sizeB - sizeA;
+          return sizeA - sizeB;
+        } 
+        // by name 
+        if (descending) return -strcasecmp(nameA, nameB);
+        return strcasecmp(nameA, nameB);
     }
-    g_free(path);
-    if (iconLo == NULL) iconLo ="application-certificate";
-    auto texture = Texture::load(iconLo);
-
-    GtkWidget *imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "imageBox"));
-    auto w = gtk_widget_get_first_child (imageBox);
-    if (w) gtk_widget_unparent(w);
-    
-    
-//    auto texture = Texture::load("/usr/share/icons/Adwaita/scalable/mimetypes/application-certificate.svg");
-    GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-    auto size = Settings::getInteger("xfterm", "iconsize");
-    if (size < 0) size = 48;
-    gtk_widget_set_size_request(image, size, size);
-    gtk_box_append(GTK_BOX(imageBox), image);
-
-    auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
-
-    char *name = g_strdup(g_file_info_get_name(info));
-    if (name && strlen(name) > 15){
-      name[15] = 0;
-      name[14] ='~';
-    }
-    char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
-    gtk_label_set_markup( GTK_LABEL( label ), markup );
-    g_free(name);
-    g_free(markup);
-  }
-
   };
 }
 #endif
