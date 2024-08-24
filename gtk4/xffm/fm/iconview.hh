@@ -120,6 +120,12 @@ namespace xf {
             G_CALLBACK (positive), NULL);
     }
     
+      // FIXME: if gridview Settings color for background is
+      //        too close to #acaaa5, use a different css class color
+      //
+      //        Also: add highlight color for text box and change 
+      //              text from label to entry, to allow inline
+      //              renaming on longpress.
     static gboolean
     negative ( GtkEventControllerMotion* self,
                     gdouble x,
