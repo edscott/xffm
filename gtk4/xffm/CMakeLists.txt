@@ -1,5 +1,4 @@
 
-add_subdirectory(icons)
 
 add_executable(xffm xffm.cc)
 #target_link_libraries(ProjectCESGI PRIVATE PkgConfig::GTK4)

@@ -15,6 +15,11 @@ namespace xf {
         g_free(*fullString);
         *fullString = newString;
     }
+    static void
+    flushGTK(void){
+      while (g_main_context_pending(NULL))
+        g_main_context_iteration(NULL, TRUE);
+    }
   static 
   void boxPack0(  
       GtkBox* box,

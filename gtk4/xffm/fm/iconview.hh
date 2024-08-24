@@ -46,6 +46,14 @@ namespace xf {
         }
         GtkDirectoryList *dList = 
           gtk_directory_list_new(attribute, gfile); 
+        
+        // XXX insert test... does not work 
+        //    invalid cast from GtkDirectoryList to G_LIST_STORE
+    /*    GFile *home = g_file_new_for_path(g_get_home_dir());
+        GFileInfo *info = g_file_query_info (home, "standard::", G_FILE_QUERY_INFO_NONE, NULL, NULL);
+        GListModel *model = G_LIST_MODEL(dList);
+        g_list_store_insert (G_LIST_STORE (model), 0, info);*/
+       
         //g_free(attribute); 
         // Chain link GtkDirectoryList to a GtkFilterListModel.
         GtkFilter *filter = 
@@ -101,11 +109,46 @@ namespace xf {
         GFileInfo *info = G_FILE_INFO(object);
         return !g_file_info_get_is_hidden(info);
       }
+      static
+      void addMotionController(GtkWidget  *widget){
+        auto controller = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(widget), controller);
+        g_signal_connect (G_OBJECT (controller), "enter", 
+            G_CALLBACK (negative), NULL);
+        g_signal_connect (G_OBJECT (controller), "leave", 
+            G_CALLBACK (positive), NULL);
+    }
+    
+    static gboolean
+    negative ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
+        UtilBasic::flushGTK();
+        return FALSE;
+    }
+    static gboolean
+    positive ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
+        UtilBasic::flushGTK();
+        return FALSE;
+    }
+      
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
         GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         GtkWidget *label = gtk_label_new( "" );
         GtkWidget *imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        addMotionController(imageBox);
 
         //GtkWidget *image = gtk_image_new_from_icon_name("text-x-generic");
             
@@ -132,7 +175,8 @@ namespace xf {
         auto vbox = GTK_BOX(gtk_list_item_get_child( list_item ));
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
 
-       /* GFile *gfile = g_file_enumerator_get_container(G_FILE_ENUMERATOR(info));
+       /* does not work:
+        * GFile *gfile = g_file_enumerator_get_container(G_FILE_ENUMERATOR(info));
         auto path = g_file_get_path(gfile);
         DBG("gfile path: %s\n",path);
         g_free(path);*/
@@ -158,6 +202,10 @@ namespace xf {
         auto size = Settings::getInteger("xfterm", "iconsize");
         if (size < 0) size = 48;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
+        //gtk_widget_set_sensitive(GTK_WIDGET(image), FALSE);
+        // no go: gtk_widget_add_css_class(GTK_WIDGET(image), "pathbarboxNegative");
+        // ok: gtk_widget_add_css_class(GTK_WIDGET(imageBox), "pathbarboxNegative");
+        // more or less: gtk_widget_add_css_class(GTK_WIDGET(vbox), "pathbarboxNegative");
         gtk_box_append(GTK_BOX(imageBox), image);
 
         auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));

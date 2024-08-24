@@ -40,11 +40,6 @@ namespace xf {
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
     }
       
-    static void
-    flushGTK(void){
-      while (g_main_context_pending(NULL))
-        g_main_context_iteration(NULL, TRUE);
-    }
   static
   GtkCssProvider * setCSSprovider(void){
     GtkCssProvider *css_provider = gtk_css_provider_new();

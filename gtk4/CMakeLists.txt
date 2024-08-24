@@ -62,6 +62,6 @@ configure_file(
     )
 
 add_subdirectory(xffm)
-#add_subdirectory(structure)
+#add_subdirectory(share)
 
 
