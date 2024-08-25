@@ -2,14 +2,11 @@
 #define XF_WINDOW_HH
 #define NOTEBOOK_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkWidget *, guint, gpointer)) X)
 #include "fmpage.hh"
-
+#include <gio/gio.h>
 namespace xf {
 
-
-
 template <class VbuttonClass, class PageClass> 
-class MainWindow: public VbuttonClass, public PageClass {
-  using mainWindow_c = MainWindow<VbuttonClass, PageClass>;
+class MainWindow: public VbuttonClass, public UtilBasic {
 // We need to inherit VbuttonClass so as to instantiate object.
 private:
     GList *pageList_=NULL;
@@ -24,7 +21,8 @@ private:
     GHashTable *pageHash_=NULL;
 // Constructor  
 public:
-    GtkNotebook *getNotebook(void) {return notebook_;}
+    GtkNotebook *notebook(void) {return notebook_;}
+//    GtkNotebook *getNotebook(void) {return notebook_;}
     MainWindow(const gchar *path){
         createWindow(); 
         addKeyController(GTK_WIDGET(mainWindow_));
@@ -38,13 +36,13 @@ public:
     ~MainWindow(void){
        // for each page: g_file_monitor_cancel(deviceMonitor_);
     }
-    
 // Free functions (for signals)
 public:
     static void
     on_new_page(GtkButton *button, void *data){
         MainWindow *w = (MainWindow *)data;
-        w->addPage("foo");
+        auto child = Util::getCurrentChild();
+        w->addPage(Util::getWorkdir(child));
     }
     static void
     on_zap_page(GtkButton *button, void *data){
@@ -66,41 +64,24 @@ public:
           guint keycode,
           GdkModifierType state,
           gpointer data){
-        TRACE("window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
-            keyval, keyval, keycode, keycode, state, data);
-        gint ignore[]={
-            GDK_KEY_Control_L,
-            GDK_KEY_Control_R,
-            GDK_KEY_Shift_L,
-            GDK_KEY_Shift_R,
-            GDK_KEY_Shift_Lock,
-            GDK_KEY_Caps_Lock,
-            GDK_KEY_Meta_L,
-            GDK_KEY_Meta_R,
-            GDK_KEY_Alt_L,
-            GDK_KEY_Alt_R,
-            GDK_KEY_Super_L,
-            GDK_KEY_Super_R,
-            GDK_KEY_Hyper_L,
-            GDK_KEY_Hyper_R,
-            GDK_KEY_ISO_Lock,
-            GDK_KEY_ISO_Level2_Latch,
-            GDK_KEY_ISO_Level3_Shift,
-            GDK_KEY_ISO_Level3_Latch,
-            GDK_KEY_ISO_Level3_Lock,
-            GDK_KEY_ISO_Level5_Shift,
-            GDK_KEY_ISO_Level5_Latch,
-            GDK_KEY_ISO_Level5_Lock,
-            0
-        };
+        
 
-        gint i;
-        for (i=0; ignore[i]; i++) {
-            if(keyval ==  ignore[i]) {
-                DBG("window_keyboard_event: key ignored\n");
-                return FALSE;
-            }
+        MainWindow *w = (MainWindow *)data;
+
+        auto notebook = GTK_NOTEBOOK(w->notebook());
+        auto num = gtk_notebook_get_current_page(notebook);
+        auto child = gtk_notebook_get_nth_page(notebook, num); //page box
+        auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
+        auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
+        bool termKey = (keyval >= GDK_KEY_space && keyval <= GDK_KEY_asciitilde);
+        bool upArrow = (keyval == GDK_KEY_Up || keyval == GDK_KEY_KP_Up);
+        if (gtk_widget_get_visible(promptBox) && !gtk_widget_is_focus(input)) {
+          TRACE("window on_keypress,  focusing input\n");
+          gtk_widget_grab_focus(input);
+          if (termKey) Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
+          if (upArrow) History::up(GTK_TEXT_VIEW(input));         
         }
+        
         return FALSE;
     }
 
@@ -115,6 +96,7 @@ private:
 
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
+        MainWidget = GTK_WIDGET(mainWindow_);
         g_object_set_data(G_OBJECT(mainWindow_), "windowObject", (void *)this);
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         return;
@@ -122,56 +104,113 @@ private:
 
     void showWindow(){
 
-        GdkDisplay *displayGdk = gdk_display_get_default();
-        Display *display = gdk_x11_display_get_xdisplay(displayGdk);
-
-        XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
-        wm_class->res_name = g_strdup("xffm");
-        wm_class->res_class = g_strdup("Xffm");
-
         GtkWidget *widget = GTK_WIDGET(mainWindow_);
         gtk_widget_realize(widget);
-        GtkNative *native = gtk_widget_get_native(widget);
-        GdkSurface *surface = gtk_native_get_surface(native);
-        Window w = gdk_x11_surface_get_xid (surface);
-        XSetClassHint(display, w, wm_class);
+        bool OK = false;
+ 
+#ifdef GDK_WINDOWING_X11
+        GdkDisplay *displayGdk = gdk_display_get_default();
+        if (GDK_IS_X11_DISPLAY (displayGdk)) {
+          OK = true;
+          Display *display = gdk_x11_display_get_xdisplay(displayGdk);
+          XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
+          wm_class->res_name = g_strdup("xffm");
+          wm_class->res_class = g_strdup("Xffm");
 
+          GtkNative *native = gtk_widget_get_native(widget);
+          GdkSurface *surface = gtk_native_get_surface(native);
+          Window w = gdk_x11_surface_get_xid (surface);
+          XSetClassHint(display, w, wm_class);
+
+          Atom atom = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE_DIALOG");
+          Atom atom0 = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE");
+          XChangeProperty (display, w,
+            atom0, XA_ATOM, 
+            32, PropModeReplace,
+            (guchar *)&atom, 1);
+        }
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+//#warning "Compiling for Wayland (unstable)"
+        OK = true;
+#endif        
+#ifdef GDK_WINDOWING_WIN32
+#warning "Compiling for Windows (unstable)"
+        OK = true;
+#endif
+        if (!OK) {
+          g_error ("Unsupported GDK backend");
+          exit(1);
+        }
+
+
+        gtk_widget_realize(GTK_WIDGET(mainWindow_));
+        auto input = Util::getCurrentInput();
+        gtk_widget_grab_focus(GTK_WIDGET(input));
+        
         gtk_window_present (mainWindow_);
 
     }
 
     void addPage(const gchar *path){
-      
-      GtkBox *child = this->mkPageBox(path);
-      
+      auto page = new PageClass(path);
+      auto child = page->childBox();
+      g_object_set_data(G_OBJECT(child), "page", page);
+
+      //GtkBox *child = this->mkPageBox(path);
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+      Util::reference_textview(output);
       pageList_ = g_list_append(pageList_, child);
       auto label = tabLabel(path, (void *)this);
       auto close = g_object_get_data(G_OBJECT(label), "close");
       g_object_set_data(G_OBJECT(child), "close", close);
 
       auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
+      gtk_widget_realize(GTK_WIDGET(child));
+      Util::flushGTK();
+      
       if (num >= 0) {
         while (num != gtk_notebook_get_current_page(notebook_)) 
           gtk_notebook_next_page(notebook_);
       }
+      gtk_widget_grab_focus(GTK_WIDGET(Util::getCurrentInput()));
      
     }
-
+ 
     void zapPage(){
-      int num = gtk_notebook_get_current_page(notebook_);
-      GtkWidget *child = gtk_notebook_get_nth_page (notebook_, num);
+      TRACE("zapPage...\n");
+
+      auto num = gtk_notebook_get_current_page(notebook_);
+      auto child = gtk_notebook_get_nth_page(notebook_, num);
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+      Util::unreference_textview(output);
       GList *item = g_list_find(pageList_, child);
       pageList_ = g_list_remove(pageList_, child);
       if (g_list_length(pageList_) == 0){
         gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
-        exit(0);
+        gtk_window_destroy(mainWindow_);
+        //exit(0);
       }
+      
+      // Clear page history
+      auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(child ), "pathbar"));
+      auto historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
+      auto historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
+      if (historyBack){
+        for (GList *l=historyBack; l && l->data; l=l->next) g_free(l->data);
+        g_list_free(historyBack);
+      }
+      if (historyNext){
+        for (GList *l=historyNext; l && l->data; l=l->next) g_free(l->data);
+        g_list_free(historyNext);
+      }
+
       // Get VPane object from child widget (box)
-      Vpane *vpane_object =  (Vpane *)g_object_get_data(G_OBJECT(child), "vpane_object");
-      Prompt *prompt_object =  (Prompt *)g_object_get_data(G_OBJECT(child), "prompt_object");
-      gtk_notebook_remove_page(notebook_, num);
-      if (vpane_object) delete(vpane_object);
-      if (prompt_object) delete(prompt_object);
+      auto page = (PageClass *) g_object_get_data(G_OBJECT(child), "page");
+      gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
+      delete(page);
+//      Util::flushGTK();
+//      gtk_widget_grab_focus(GTK_WIDGET(Util::getCurrentInput()));
       
     }
 
@@ -186,7 +225,12 @@ private:
       // Show current close button
       auto child = gtk_notebook_get_nth_page(notebook_, new_page);
       auto close = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "close"));
+      auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
       gtk_widget_set_visible (close, TRUE);
+      
+      setWindowTitle(child);    
+      gtk_widget_grab_focus(GTK_WIDGET(input));
+      
     }
 
 
@@ -197,20 +241,113 @@ private:
       gtk_widget_set_vexpand(GTK_WIDGET(tabBox), FALSE);
       gchar *tag = path? g_path_get_basename(path):g_strdup(".");
       GtkWidget *label = gtk_label_new(tag);
+      g_free(tag);
       Util::boxPack0(tabBox, label,  FALSE, FALSE, 0);
 
       auto close = Util::newButton(WINDOW_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(close), "clicked", 
               BUTTON_CALLBACK(w->on_zap_page), data);    
       g_object_set_data(G_OBJECT(tabBox), "close", close);
+      g_object_set_data(G_OBJECT(tabBox), "label", label);
       
       Util::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
       return GTK_WIDGET(tabBox);
+    }
+
+    GtkPopover *mkMainMenu(void){
+#define ICONHASH mHash[0];
+#define CALLBACKHASH mHash[1];
+#define DATAHASH mHash[2];
+      GHashTable *mHash[3];
+      mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+      for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
+      static const char *text[]= {
+        _("New"),
+        _("Open in New Tab"), 
+        //_("Dual Mode AccessPoint"), // quite hard...
+        _("Open in New Window"), 
+        _("Copy"), 
+        _("Cut"), 
+        _("Paste"), 
+        _("Delete"), 
+        _("Select All"), 
+        _("Match regular expression"), 
+        _("Colors"), 
+        _("Close"), 
+        NULL
+      };
+      // icons
+      g_hash_table_insert(mHash[0], _("New"), g_strdup(DOCUMENT_NEW));
+      g_hash_table_insert(mHash[0], _("Open in New Tab"), g_strdup(NEW_TAB));
+      //g_hash_table_insert(mHash[0], _("Dual Mode AccessPoint"), g_strdup(DUAL_VIEW));
+      g_hash_table_insert(mHash[0], _("Open in New Window"), g_strdup(DUAL_VIEW));
+      g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
+      g_hash_table_insert(mHash[0], _("Cut"), g_strdup(EDIT_CUT));
+      g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
+      g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
+      g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
+      g_hash_table_insert(mHash[0], _("Match regular expression"), g_strdup(DIALOG_QUESTION));
+      g_hash_table_insert(mHash[0], _("Colors"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[0], _("Close"), g_strdup(WINDOW_SHUTDOWN));
+
+      // callbacks
+      g_hash_table_insert(mHash[1], _("New"), NULL);
+      g_hash_table_insert(mHash[1], _("Open in New Tab"), NULL);
+      //g_hash_table_insert(mHash[1], _("Dual Mode AccessPoint"), NULL);
+      g_hash_table_insert(mHash[1], _("Open in New Window"), NULL);
+      g_hash_table_insert(mHash[1], _("Copy"), NULL);
+      g_hash_table_insert(mHash[1], _("Cut"), NULL);
+      g_hash_table_insert(mHash[1], _("Paste"), NULL);
+      g_hash_table_insert(mHash[1], _("Delete"), NULL);
+      g_hash_table_insert(mHash[1], _("Select All"), NULL);
+      g_hash_table_insert(mHash[1], _("Match regular expression"), NULL);
+      g_hash_table_insert(mHash[1], _("Colors"), NULL);
+      g_hash_table_insert(mHash[1], _("Close"), (void *)close);
+
+      //g_hash_table_insert(mHash[2], _("Colors"), GINT_TO_POINTER(-1));
+      auto menu = Util::mkMenu(text,mHash, _("Main Menu"));
+// 
+      GHashTable *mHash2[3];
+      mHash2[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
+      for (int i=1; i<3; i++) mHash2[i] = g_hash_table_new(g_str_hash, g_str_equal);
+      static const char *text2[]= {
+        _("Foreground"),
+        _("Background"), 
+        _("Default"), 
+        NULL
+      };
+
+      g_hash_table_insert(mHash2[0], _("Foreground"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Background"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash2[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
+
+      g_hash_table_insert(mHash2[1], _("Foreground"), (void *)Util::terminalColors);
+      g_hash_table_insert(mHash2[1], _("Background"), (void *)Util::terminalColors);
+      g_hash_table_insert(mHash2[1], _("Default"), (void *)Util::defaultColors);
+
+      g_hash_table_insert(mHash2[2], _("Foreground"), (void *)"iconsFg");
+      g_hash_table_insert(mHash2[2], _("Background"), (void *)"iconsBg");
+      g_hash_table_insert(mHash2[2], _("Default"), (void *)"icons");
+
+      auto submenu = Util::mkMenu(text2,mHash2, _("Colors"));
+      g_object_set_data(G_OBJECT(submenu), "menu", menu);
+      auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("Colors")));
+     // Important: must use both of the following instructions:
+      gtk_popover_set_default_widget(submenu, GTK_WIDGET(button));
+      gtk_widget_set_parent(GTK_WIDGET(submenu), GTK_WIDGET(button));
+      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(Util::popup), submenu);
+  //    gtk_menu_button_set_popover (GTK_MENU_BUTTON(button), GTK_WIDGET(submenu));  
+      //for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
+
+      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
+      for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
+      return menu;
     }
     
 
     void mkNotebook(){
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
+      g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
       gtk_notebook_set_scrollable (notebook_, TRUE);
 
       longPressImage_ = gtk_label_new("");
@@ -221,12 +358,19 @@ private:
 
       auto actionWidget = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       auto tabButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+      auto menuButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
       auto newTabButton = Util::newButton("list-add", _("New Tab"));
+//      auto newMenuButton = Util::newMenuButton("open-menu", _("Open Menu"));
+      auto newMenuButton = Util::newMenuButton("open-menu", NULL);
+      auto menu = mkMainMenu();
+      
+      gtk_menu_button_set_popover (newMenuButton, GTK_WIDGET(menu));  
+
 
 
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
-              BUTTON_CALLBACK(mainWindow_c::on_new_page), (void *)this);    
+              BUTTON_CALLBACK(on_new_page), (void *)this);    
       g_signal_connect (notebook_, "switch-page", 
                 NOTEBOOK_CALLBACK (on_switch_page), (void *)this);
       
@@ -234,8 +378,10 @@ private:
 
       Util::boxPack0(tabButtonBox, GTK_WIDGET(longPressImage_),  TRUE, FALSE, 0);
       Util::boxPack0(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
+      Util::boxPack0(menuButtonBox, GTK_WIDGET(newMenuButton),  TRUE, FALSE, 0);
       //Util::boxPack0(tabButtonBox, GTK_WIDGET(this->menuButton()),  TRUE, FALSE, 0);
       Util::boxPack0(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
+      Util::boxPack0(actionWidget, GTK_WIDGET(menuButtonBox),  TRUE, FALSE, 0);
 
       gtk_notebook_set_action_widget (notebook_, GTK_WIDGET(actionWidget), GTK_PACK_END);
 
@@ -255,13 +401,23 @@ private:
 
       mkNotebook();
       Util::boxPack0(hbox1, GTK_WIDGET(notebook_),  TRUE, TRUE, 0);
+      g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
 
       auto hbox2 = this->mkVbuttonBox();  // More precise.  
 //      auto hbox2 = VbuttonClass::mkVbuttonBox(); // This works too, but less clear.   
       Util::boxPack0(mainBox, GTK_WIDGET(hbox2),  FALSE, FALSE, 0);
+
       return GTK_WIDGET(mainBox);
     }
 
+private:
+
+    static void
+    close(GtkButton *self, void *data){
+      gtk_widget_set_visible(MainWidget, FALSE);
+      gtk_window_destroy(GTK_WINDOW(MainWidget));
+    }
+    
 };
 
 

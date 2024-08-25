@@ -39,6 +39,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 
 find_package(PkgConfig REQUIRED)
+pkg_check_modules(HISTORY history)
 find_package(X11 REQUIRED)
 #set(ENV{PKG_CONFIG_PATH} "/opt/lib/pkgconfig")
 find_package(GLIB 2.56.2 REQUIRED)
@@ -61,6 +62,6 @@ configure_file(
     )
 
 add_subdirectory(xffm)
-#add_subdirectory(structure)
+#add_subdirectory(share)
 
 

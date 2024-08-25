@@ -1,5 +1,4 @@
 
-add_subdirectory(icons)
 
 add_executable(xffm xffm.cc)
 #target_link_libraries(ProjectCESGI PRIVATE PkgConfig::GTK4)
@@ -10,6 +9,7 @@ include_directories(
     "${GTK4_INCLUDE_DIRS}")
 
 target_link_libraries(xffm 
+    ${HISTORY_LIBRARIES}
     ${GTK4_LIBRARIES}
     ${X11_LIBRARIES}
     ${LIBZIP_LIBRARIES}

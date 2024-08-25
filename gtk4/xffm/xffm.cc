@@ -3,9 +3,18 @@
  * license: GPL v.3
  */
 #include "xffm.h"
+#include "settings.hh"
+#include "utilbasic.hh"
+#include "fm/iconview.hh"
+#include "util.hh"
+#include "bash.hh"
+#include "history.hh"
+#include "thread.hh"
+#include "tubo.hh"
+#include "run.hh"
+#include "runbutton.hh"
 
-static const gchar *xffmProgram;
-static const gchar *xffindProgram;
+#include "paintable.hh"
 
 
 static void setupBindText(void){
@@ -68,7 +77,7 @@ main (int argc, char *argv[]) {
   coreSetup(argc, argv);
   xffindProgram = argv[0];
   xffmProgram = argv[0];
-
+  
   if (chdir(g_get_home_dir()) < 0){
     fprintf(stderr, "xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
     exit(1);
