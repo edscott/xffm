@@ -1,6 +1,5 @@
 #ifndef XF_FMPAGE_HH
 #define XF_FMPAGE_HH
-#include "utilpathbar.hh"
 #include "fmbuttonbox.hh"
 #include "pathbar.hh"
 #include "prompt.hh"
@@ -166,7 +165,7 @@ namespace xf {
         auto topScrolledWindow = this->topScrolledWindow();
         auto bottomScrolledWindow = this->bottomScrolledWindow();
 
-        auto gridview = IconView::getGridView(path);        
+        auto gridview = Workdir::getGridView(path);        
         gtk_scrolled_window_set_child(topScrolledWindow, GTK_WIDGET(gridview));
 
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
@@ -206,7 +205,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(pathbar), "output", output);
 
         TRACE("updatePathbar(%s)\n", path);
-        UtilPathbar::updatePathbar(path, pathbar, true); 
+        // FIXME:: UtilPathbar::updatePathbar(path, pathbar, true); 
         // bool is to add navigation history
 
         boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);

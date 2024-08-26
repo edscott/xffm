@@ -113,7 +113,7 @@ private:
         auto bottomScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "bottomScrolledWindow"));
         auto old = gtk_scrolled_window_get_child(bottomScrolledWindow);
         gtk_widget_unparent(old);
-        IconView::updateGridView(child, Util::getWorkdir(child));
+        Workdir::updateGridView(child, Util::getWorkdir(child));
       }
     }
     
@@ -121,7 +121,7 @@ private:
     goHome(GtkButton *self, void *data){
       auto child = Util::getCurrentChild();
       
-      IconView::updateGridView(child, g_get_home_dir());
+      Workdir::updateGridView(child, g_get_home_dir());
         
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
@@ -129,7 +129,7 @@ private:
       auto retval = Util::cd((const gchar **)v, child);
 
       auto path = Util::getWorkdir(child);
-      UtilPathbar::updatePathbar(path, pathbar, true);
+      // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
       if (retval){
         //Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir(child)));
         if (!History::add("cd")) DBG("History::add(%s) failed\n", "cd" );

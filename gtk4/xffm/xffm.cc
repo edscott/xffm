@@ -4,8 +4,14 @@
  */
 #include "xffm.h"
 #include "settings.hh"
+
+#include "child.hh"
+#include "clipboard.hh"
 #include "utilbasic.hh"
-#include "fm/iconview.hh"
+
+#include "utilpathbar.hh"
+#include "workdir.hh"
+
 #include "util.hh"
 #include "bash.hh"
 #include "history.hh"
@@ -15,6 +21,7 @@
 #include "runbutton.hh"
 
 #include "paintable.hh"
+#include "fm/fm.hh"
 
 
 static void setupBindText(void){
@@ -70,7 +77,6 @@ static  gchar *getPath(const char *argv1){
     return g_strdup("xffm:root");
   }
 
-#include "fm/fm.hh"
 
 int
 main (int argc, char *argv[]) {

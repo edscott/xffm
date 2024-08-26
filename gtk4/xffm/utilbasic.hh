@@ -3,8 +3,10 @@
 
 namespace xf {
 
-  static GdkClipboard *clipBoardTxt=NULL;
-  class UtilBasic{
+  class UtilBasic: 
+    public Child,
+    public Clipboard
+  {
     public:
     static void
     concat(gchar **fullString, const gchar* addOn){
@@ -46,69 +48,12 @@ namespace xf {
     }
   }
 
-  static void
-  readDone(GObject* source_object, GAsyncResult* result,  gpointer data){
-    GError *error_ = NULL;
-    auto string = gdk_clipboard_read_text_finish(clipBoardTxt, result, &error_);
-    if (error_){
-      DBG("Error:: putInClipBoard(): %s\n", error_->message);
-      g_error_free(error_);
-      return;
-    }
-    TRACE("readDone: string = %s\n", string);
-
-    
-  }
-    static void 
-    printClipBoard(GdkClipboard *clipBoard){
-        if (!clipBoard) return;
-        //gdk_clipboard_set_text (clipBoardTxt, "foo");
-        gdk_clipboard_read_text_async (clipBoardTxt, NULL, readDone, NULL);
-        return;
-    }
-    static void
-    feedClipboard(GtkButton *self, void *data){
-      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(self), "menu")); 
-      gtk_popover_popdown(GTK_POPOVER(menu));
-      if (!clipBoardTxt) clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
-      
-      auto textview = GTK_TEXT_VIEW(gtk_widget_get_parent(menu));
-      auto buffer = gtk_text_view_get_buffer(textview);
-      auto cut = GPOINTER_TO_INT(data);
-      if (cut) gtk_text_buffer_cut_clipboard (buffer,clipBoardTxt, TRUE);
-      else gtk_text_buffer_copy_clipboard (buffer,clipBoardTxt);
-      //printClipBoard(clipBoardTxt);
-    }
-    static void
-    pasteClipboard(GtkButton *self, void *data){
-      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(self), "menu")); 
-      gtk_popover_popdown(GTK_POPOVER(menu));
-      if (!clipBoardTxt) clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
-
-      auto textview = GTK_TEXT_VIEW(gtk_widget_get_parent(menu));
-      auto buffer = gtk_text_view_get_buffer(textview);      
-      gtk_text_buffer_paste_clipboard (buffer, clipBoardTxt, NULL, TRUE);
-    }
-    static void
-    deleteSelectionTxt(GtkButton *self, void *data){
-      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(self), "menu")); 
-      gtk_popover_popdown(GTK_POPOVER(menu));
-
-      auto textview = GTK_TEXT_VIEW(gtk_widget_get_parent(menu));
-      auto buffer = gtk_text_view_get_buffer(textview);      
-      gtk_text_buffer_delete_selection (buffer, TRUE, TRUE);
-    }
-    static void
-    selectAllTxt(GtkButton *self, void *data){
-      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(self), "menu")); 
-      gtk_popover_popdown(GTK_POPOVER(menu));
-
-      auto textview = GTK_TEXT_VIEW(gtk_widget_get_parent(menu));
-      auto buffer = gtk_text_view_get_buffer(textview);  
-      GtkTextIter start, end;
-      gtk_text_buffer_get_bounds (buffer, &start, &end);
-      gtk_text_buffer_select_range(buffer, &start, &end);
-      
+    static GList *getChildren(GtkBox *box){
+      GList *list = NULL;
+      GtkWidget *w = gtk_widget_get_first_child(GTK_WIDGET(box));
+      if (w) list = g_list_append(list, w);
+      while ((w=gtk_widget_get_next_sibling(w)) != NULL) list = g_list_append(list, w);
+      return list;
     }
 
 
@@ -279,6 +224,26 @@ namespace xf {
     }
  
     public:
+    static GtkBox *
+    pathbarLabelButton (const char *text) {
+        auto label = GTK_LABEL(gtk_label_new(""));
+        auto eventBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        if (text) {
+            auto v = UtilBasic::utf_string(text);
+            auto g = g_markup_escape_text(v, -1);
+            g_free(v);
+            auto markup = g_strdup_printf("   <span size=\"small\">  %s  </span>   ", g);
+            g_free(g);
+            gtk_label_set_markup(label, markup);
+            g_free(markup);
+        } else {
+            gtk_label_set_markup(label, "");
+        }
+        UtilBasic::boxPack0 (eventBox, GTK_WIDGET(label), FALSE, FALSE, 0);
+        g_object_set_data(G_OBJECT(eventBox), "label", label);
+        g_object_set_data(G_OBJECT(eventBox), "name", text?g_strdup(text):g_strdup("RFM_ROOT"));
+        return eventBox;
+    }
  
     static void 
     setMenuTitle(GtkPopover *menu, const char *title){

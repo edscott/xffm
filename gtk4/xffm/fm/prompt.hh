@@ -92,7 +92,7 @@ namespace xf {
               if (Util::cd((const char **)w, child)){
                 auto path = Util::getWorkdir(child);
                 setWindowTitle(child);
-                UtilPathbar::updatePathbar(path, pathbar, true);
+                // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
               }
 
               g_strfreev(w);
@@ -181,7 +181,7 @@ namespace xf {
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto retval = Util::cd((const gchar **)v, child);
       auto path = Util::getWorkdir(child);
-      UtilPathbar::updatePathbar(path, pathbar, true);
+      // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
       Util::print(output, g_strdup_printf("$ %s\n", text));
       if (retval){
         Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir(child)));

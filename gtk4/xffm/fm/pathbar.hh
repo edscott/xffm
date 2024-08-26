@@ -59,7 +59,7 @@ namespace xf {
 
 
         // xffm:root button:
-        auto pb_button = pathbarLabelButton(".");
+        auto pb_button = UtilBasic::pathbarLabelButton(".");
 
         
         boxPack0 (pathbar_, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
@@ -69,17 +69,17 @@ namespace xf {
         auto motion = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
-        g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (UtilPathbar::pathbar_white), (void *)pathbar_);
-        g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (UtilPathbar::pathbar_blue), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (Workdir::pathbar_white), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (Workdir::pathbar_blue), (void *)pathbar_);
   
         auto gesture1 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (UtilPathbar::pathbar_go), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
         
         auto gesture3 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture3),3);
-        g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (UtilPathbar::pathbar_go), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (Workdir::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture3));
         
 
@@ -122,7 +122,7 @@ namespace xf {
            }
            g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
            g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           setWorkdir(previous, GTK_BOX(pathbar), false);
+           Workdir::setWorkdir(previous, GTK_BOX(pathbar), false);
            return TRUE;
          }
       }
@@ -140,7 +140,7 @@ namespace xf {
            historyNext = g_list_remove(historyNext, current);
            g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
            g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           setWorkdir(current, GTK_BOX(pathbar), false);
+           Workdir::setWorkdir(current, GTK_BOX(pathbar), false);
            return TRUE;
          }
       }

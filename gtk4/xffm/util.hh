@@ -2,43 +2,8 @@
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
 namespace xf {
-//  class Util : public UtilPathbar, public UtilBasic {
-  class Util : public UtilBasic {
+  class Util : public UtilBasic, public Workdir {
   public:
-    static GtkBox *vButtonBox(void){
-      return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
-    }
-    static GtkTextView *getCurrentInput(void){
-      auto child = getCurrentChild();
-      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "input"));
-    }
-    static GtkTextView *getCurrentTextView(void){
-      auto child = getCurrentChild();
-      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
-    }
-    static GtkPaned *getCurrentPane(void){
-      auto child = getCurrentChild();
-      auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(child), "vpane"));
-      return vpane;
-    }
-
-    static GtkBox *getCurrentButtonSpace(void){
-      auto child = getCurrentChild();
-      return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
-    }
-    static GtkWidget *getCurrentChild(void){
-      //DBG("getCurrentChild...\n");
-      if (!MainWidget) return NULL;
-      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
-      int num = gtk_notebook_get_current_page(notebook);
-      GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
-      return child;
-    }
-    static const gchar *getWorkdir(GtkWidget *child){
-      //DBG("getWorkdir...\n");
-      if (!MainWidget) return NULL;
-      return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
-    }
       
   static
   GtkCssProvider * setCSSprovider(void){
@@ -475,32 +440,23 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
         }
         return text;
     }
-    static bool setWorkdir(const gchar *path, GtkWidget *child){
-      //TRACE("setWorkdir...\n");
-      if (!MainWidget) return false;
-      auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
-      g_free(wd);
-      g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
-      IconView::updateGridView(child, path);
-      return true;
-    }
     static bool
     cd (const gchar **v, GtkWidget *child) {   
         if (v[1] == NULL){
-          return setWorkdir(g_get_home_dir(), child);
+          return setWorkdir(g_get_home_dir());
         }
         // tilde and $HOME
         if (strncmp(v[1], "~", strlen("~")) == 0){
           const char *part2 = v[1] + strlen("~");
           char *dir = g_strconcat(g_get_home_dir(), part2, NULL);
-          auto retval = setWorkdir(dir, child);
+          auto retval = setWorkdir(dir);
           g_free(dir);
           return retval;
         }
         if (strncmp(v[1], "$HOME", strlen("$HOME")) == 0){
           const char *part2 = v[1] + strlen("$HOME");
           char *dir = g_strconcat(g_get_home_dir(),  part2, NULL);
-          auto retval = setWorkdir(dir, child);
+          auto retval = setWorkdir(dir);
           g_free(dir);
           return retval;
         }
@@ -518,7 +474,7 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
             g_free(rpath);
             return false; 
           }
-          auto retval = setWorkdir(rpath, child);
+          auto retval = setWorkdir(rpath);
           g_free(rpath);
           return retval;
         }
@@ -528,7 +484,7 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
         if (!rpath) return false;
         
 
-        auto retval = setWorkdir(rpath, child);
+        auto retval = setWorkdir(rpath);
         g_free(rpath);
 
         return retval;
