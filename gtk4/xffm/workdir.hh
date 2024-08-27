@@ -391,10 +391,14 @@ namespace xf {
     showWhatFits(GtkBox *pathbar, const gchar *path, GList *children_list){
       GtkRequisition minimum;
       graphene_rect_t bounds;
+      bounds.size.width = 0;
+
       if (!gtk_widget_get_realized(GTK_WIDGET(pathbar))){
         // Take window width.
-        if (!gtk_widget_compute_bounds(GTK_WIDGET(MainWidget), GTK_WIDGET(MainWidget), &bounds)) {
-          DBG("***Error:: gtk_widget_compute_bounds(MainWidget)\n");
+        if (gtk_widget_get_realized(GTK_WIDGET(MainWidget))){
+          if (!gtk_widget_compute_bounds(GTK_WIDGET(MainWidget), GTK_WIDGET(MainWidget), &bounds)) {
+            DBG("***Error:: gtk_widget_compute_bounds(MainWidget)\n");
+          }
         }
       } else {
         if (!gtk_widget_compute_bounds(GTK_WIDGET(pathbar), GTK_WIDGET(pathbar), &bounds)) {
@@ -405,7 +409,7 @@ namespace xf {
       TRACE("pathbar is realized =%d\n", gtk_widget_get_realized(GTK_WIDGET(pathbar)));
       auto size = &(bounds.size);
       auto width = size->width;
-      // hack: if width == 0, then the realized test was not enough
+      // if width == 0, then the realized test was not enough
       if (width == 0) return;
       TRACE("initial width = %f\n", width);
 
@@ -550,9 +554,16 @@ namespace xf {
               gdouble x,
               gdouble y,
               gpointer object){
-      TRACE("gestureClick; object=%p\n", object);
+      TRACE("gestureClick; object=%p button=%d\n", object,
+          gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
+
       auto info = G_FILE_INFO(gtk_list_item_get_item(GTK_LIST_ITEM(object)));
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+      auto root = g_file_info_get_attribute_object (info, "xffm::root");
+      if (root){
+        Workdir::setWorkdir("xffm:root");
+        return TRUE;
+      }
       TRACE("gestureClick; file=%p\n", file);
       auto path = g_file_get_path(file);
       TRACE("gestureClick; path=%p\n", path);
@@ -574,7 +585,9 @@ namespace xf {
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for action released, 3 for popover pressed
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (gestureClick), (void *)object);
+      // Add a different gtk_gesture_click_new for 3 and menu.
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (gestureClick), (void *)object);
+//      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (gestureClick), (void *)object);
       gtk_widget_add_controller(GTK_WIDGET(imageBox), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
@@ -582,23 +595,33 @@ namespace xf {
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
         GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        GtkWidget *label = gtk_label_new( "" );
+        gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);
+        gtk_widget_set_hexpand(GTK_WIDGET(vbox), FALSE);
+        //gtk_widget_set_size_request(vbox, 48,48);
+
         GtkWidget *imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        gtk_widget_set_vexpand(GTK_WIDGET(imageBox), FALSE);
+       
+        GtkWidget *label = gtk_label_new( "" );
         GtkWidget *labelBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        gtk_widget_set_vexpand(GTK_WIDGET(labelBox), FALSE);
         addMotionController(imageBox);
         addMotionController(labelBox);
         addGestureClick(imageBox, object);
 
         //GtkWidget *image = gtk_image_new_from_icon_name("text-x-generic");
-            
-        gtk_box_append(GTK_BOX(vbox), imageBox);
-        gtk_box_append(GTK_BOX(vbox), labelBox);
+        UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
+        UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(labelBox), FALSE, FALSE, 0);     
+        //gtk_box_append(GTK_BOX(vbox), imageBox);
+        //gtk_box_append(GTK_BOX(vbox), labelBox);
+        
         g_object_set_data(G_OBJECT(vbox), "imageBox", imageBox);
         g_object_set_data(G_OBJECT(vbox), "labelBox", labelBox);
         g_object_set_data(G_OBJECT(imageBox), "vbox", vbox);
         g_object_set_data(G_OBJECT(labelBox), "vbox", vbox);
 
-        gtk_box_append(GTK_BOX(labelBox), label);
+        UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(label), FALSE, FALSE, 0);     
+        //gtk_box_append(GTK_BOX(labelBox), label);
         gtk_widget_set_halign (label,GTK_ALIGN_FILL);
         gtk_widget_set_vexpand(GTK_WIDGET(label), FALSE);
         gtk_widget_set_margin_top(GTK_WIDGET(label), 0);
@@ -607,6 +630,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(vbox),"label", label);
 
         GtkListItem *list_item = GTK_LIST_ITEM(object);
+        //auto widget = GTK_WIDGET(list_item);
         gtk_list_item_set_child(list_item, vbox);
       }
 
@@ -649,7 +673,8 @@ namespace xf {
         // no go: gtk_widget_add_css_class(GTK_WIDGET(image), "pathbarboxNegative");
         // ok: gtk_widget_add_css_class(GTK_WIDGET(imageBox), "pathbarboxNegative");
         // more or less: gtk_widget_add_css_class(GTK_WIDGET(vbox), "pathbarboxNegative");
-        gtk_box_append(GTK_BOX(imageBox), image);
+        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);     
+        //gtk_box_append(GTK_BOX(imageBox), image);
 
         auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
 
@@ -663,20 +688,61 @@ namespace xf {
         g_free(markup);
       }
 
-      static GtkWidget *
-      getGridView(const char *path){
-        GFile *gfile = g_file_new_for_path(path);
-        // Create the initial GtkDirectoryList (G_LIST_MODEL).
 
-#if 10
+      static GtkMultiSelection *getSelectionModel(GListModel *store){
+        GtkFilter *filter = 
+          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
+        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
+        // Chain link GtkFilterListModel to a GtkSortListModel.
+        // Directories first, and alphabeta.
+        GtkSorter *sorter = 
+          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
+        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
+        return gtk_multi_selection_new(G_LIST_MODEL(sortModel));
+      }
+      
+      static GtkMultiSelection *standardSelectionModel(const char *path){
+        // This does not have the up icon 
+        auto gfile = g_file_new_for_path(path);
+        GtkDirectoryList *dList = 
+//          gtk_directory_list_new("", gfile); 
+          gtk_directory_list_new("standard::", gfile); 
+        return getSelectionModel(G_LIST_MODEL(dList));
+/*       
+        //g_free(attribute); 
+        // Chain link GtkDirectoryList to a GtkFilterListModel.
+        GtkFilter *filter = 
+          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
+        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(dList), filter);
+        // Chain link GtkFilterListModel to a GtkSortListModel.
+        // Directories first, and alphabeta.
+        GtkSorter *sorter = 
+          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
+        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
+
+        // Chain link GtkFilterListModel to a GtkSortListModel.
+        //GtkSorter *sorter = 
+          //GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
+        //GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
+        
+        // Chain link GtkSortListModel to a GtkMultiSelection.
+        return gtk_multi_selection_new(G_LIST_MODEL(sortModel));*/
+
+      }
+
+      static GtkMultiSelection *xfSelectionModel(const char *path){
        // This section adds the up icon.
 
-        auto store = g_list_store_new(G_TYPE_FILE_INFO);
         auto up = g_path_get_dirname(path);
+        DBG("path=%s up=%s\n", path, up);
+        auto store = g_list_store_new(G_TYPE_FILE_INFO);
         auto upFile = g_file_new_for_path(up);
-        g_free(up);
         GError *error_ = NULL;
         auto info = g_file_query_info(upFile, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+        if (strcmp(path, up)==0) {
+          g_file_info_set_attribute_object(info, "xffm::root", G_OBJECT(upFile));
+        }
+        g_free(up);
         g_file_info_set_name(info, "..");
         g_file_info_set_icon(info, g_themed_icon_new("up"));
         g_list_store_insert(store, 0, G_OBJECT(info));
@@ -705,42 +771,47 @@ namespace xf {
           TRACE("insert path (%s)\n", g_file_get_path(outChild));
           g_list_store_insert(store, k++, G_OBJECT(outInfo));
         } while (true);
-        GtkFilter *filter = 
-          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
-        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
-        // Chain link GtkFilterListModel to a GtkSortListModel.
-        // Directories first, and alphabeta.
-        GtkSorter *sorter = 
-          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
-        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
-        GtkMultiSelection *selection_model = gtk_multi_selection_new(G_LIST_MODEL(sortModel));
+        return getSelectionModel(G_LIST_MODEL(store));
+      }
 
-#else
-        // This section does not have the up icon 
-        GtkDirectoryList *dList = 
-//          gtk_directory_list_new("", gfile); 
-          gtk_directory_list_new("standard::", gfile); 
-       
-        //g_free(attribute); 
-        // Chain link GtkDirectoryList to a GtkFilterListModel.
-        GtkFilter *filter = 
-          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
-        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(dList), filter);
-        // Chain link GtkFilterListModel to a GtkSortListModel.
-        // Directories first, and alphabeta.
-        GtkSorter *sorter = 
-          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
-        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
+      static GtkMultiSelection *rootSelectionModel(void){
+        GError *error_ = NULL;
+        Bookmarks::initBookmarks();
+        auto store = g_list_store_new(G_TYPE_FILE_INFO);
+        auto list = Bookmarks::bookmarksList();
+        for (auto l=list; l && l->data; l=l->next){
+          auto p = (bookmarkItem_t *)l->data;
+          if (!p->path) continue;
+          DBG("adding bookmark %p -> %s\n", p, p->path);
+          if (!g_path_is_absolute(p->path)) continue;
+          if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
+              DBG("Bookmark %s does not exist\n", p->path);
+              continue;
+          }
+          GFile *file = g_file_new_for_path(p->path);
+          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          auto basename = g_path_get_basename(p->path);
+          auto utf_name = UtilBasic::utf_string(basename);
+          g_file_info_set_name(info, utf_name);
+          g_free(basename);
+          g_free(utf_name);
+          g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
+          g_list_store_insert(store, 0, G_OBJECT(info));
+          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
+        }
+        return getSelectionModel(G_LIST_MODEL(store));
+      }
 
-        // Chain link GtkFilterListModel to a GtkSortListModel.
-        //GtkSorter *sorter = 
-          //GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
-        //GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
-        
-        // Chain link GtkSortListModel to a GtkMultiSelection.
-        GtkMultiSelection *selection_model = gtk_multi_selection_new(G_LIST_MODEL(sortModel));
-#endif
-        
+      static GtkWidget *
+      getGridView(const char *path){
+        GtkMultiSelection *selection_model = NULL;
+        if (strcmp(path, "xffm:root")==0) {
+          selection_model = rootSelectionModel();
+        } else {
+          // Create the initial GtkDirectoryList (G_LIST_MODEL).
+          selection_model = xfSelectionModel(path);
+          //selection_model = standardSelectionModel(path);     
+        }
        
         // GtkListItemFactory implements GtkSignalListItemFactory, which can be connected to
         // bind, setup, teardown and unbind
@@ -755,6 +826,8 @@ namespace xf {
         /* Create the view.
          */
         view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model), factory);
+        gtk_grid_view_set_max_columns(GTK_GRID_VIEW(view), 20);
+        gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 5);
         gtk_widget_add_css_class(view, "xficons");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
         return view;

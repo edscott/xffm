@@ -10,6 +10,7 @@
 #include "utilbasic.hh"
 
 #include "utilpathbar.hh"
+#include "bookmarks.hh"
 #include "workdir.hh"
 
 #include "util.hh"
