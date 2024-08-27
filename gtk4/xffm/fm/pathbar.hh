@@ -93,6 +93,7 @@ namespace xf {
               gdouble y,
               gpointer data ) 
     {
+      //DBG("gojump\n");
       auto pathbar = GTK_WIDGET(data);
       auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");

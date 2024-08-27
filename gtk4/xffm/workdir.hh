@@ -540,11 +540,12 @@ namespace xf {
   public:
       static void
       updateGridView(GtkWidget *child, const char *path){
-        auto topScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "topScrolledWindow"));
-        //auto old = gtk_scrolled_window_get_child(topScrolledWindow);
+        auto gridScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
+        // This is not necesary since it will unref gridScrolledWindow, apparently.
+        //auto old = gtk_scrolled_window_get_child(gridScrolledWindow);
         //if (old && GTK_IS_WIDGET(old)) gtk_widget_unparent(old);
         auto view = getGridView(path);
-        gtk_scrolled_window_set_child(topScrolledWindow, view);
+        gtk_scrolled_window_set_child(gridScrolledWindow, view);
 
       }
   private:
@@ -554,6 +555,16 @@ namespace xf {
               gdouble x,
               gdouble y,
               gpointer object){
+
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto event = gtk_event_controller_get_current_event(eventController);
+      
+      auto modType = gdk_event_get_modifier_state(event);
+
+      DBG("modType = 0x%x\n", modType);
+      if (modType & GDK_CONTROL_MASK) return FALSE;
+      if (modType & GDK_SHIFT_MASK) return FALSE;
+      
       TRACE("gestureClick; object=%p button=%d\n", object,
           gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
 
@@ -698,8 +709,22 @@ namespace xf {
         GtkSorter *sorter = 
           GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
         GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
-        return gtk_multi_selection_new(G_LIST_MODEL(sortModel));
+        GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(sortModel));
+        g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), NULL);
+        return s;
       }
+
+      static void selection_changed ( GtkSelectionModel* self,
+            guint position,
+            guint n_items,
+            void *data) {
+        DBG("selection changed position=%d, items=%d\n", position, n_items);
+        if (gtk_selection_model_is_selected(self, 0)){
+          gtk_selection_model_unselect_item(self, 0);
+        }
+        return;
+      }
+
       
       static GtkMultiSelection *standardSelectionModel(const char *path){
         // This does not have the up icon 
@@ -708,25 +733,6 @@ namespace xf {
 //          gtk_directory_list_new("", gfile); 
           gtk_directory_list_new("standard::", gfile); 
         return getSelectionModel(G_LIST_MODEL(dList));
-/*       
-        //g_free(attribute); 
-        // Chain link GtkDirectoryList to a GtkFilterListModel.
-        GtkFilter *filter = 
-          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
-        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(dList), filter);
-        // Chain link GtkFilterListModel to a GtkSortListModel.
-        // Directories first, and alphabeta.
-        GtkSorter *sorter = 
-          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
-        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
-
-        // Chain link GtkFilterListModel to a GtkSortListModel.
-        //GtkSorter *sorter = 
-          //GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
-        //GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
-        
-        // Chain link GtkSortListModel to a GtkMultiSelection.
-        return gtk_multi_selection_new(G_LIST_MODEL(sortModel));*/
 
       }
 
@@ -734,7 +740,7 @@ namespace xf {
        // This section adds the up icon.
 
         auto up = g_path_get_dirname(path);
-        DBG("path=%s up=%s\n", path, up);
+        TRACE("path=%s up=%s\n", path, up);
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
         auto upFile = g_file_new_for_path(up);
         GError *error_ = NULL;

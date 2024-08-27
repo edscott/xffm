@@ -10,25 +10,25 @@ namespace xf {
     private:
     GtkPaned *vpane_;
     GtkTextView *output_;
-    GtkScrolledWindow *topScrolledWindow_;
+    GtkScrolledWindow *gridScrolledWindow_;
     GtkScrolledWindow *treeScrolledWindow_;
-    GtkScrolledWindow *bottomScrolledWindow_; 
+    GtkScrolledWindow *outputScrolledWindow_; 
 
     public:
     GtkPaned *vpane(void){return vpane_;}
     GtkTextView *output(void){return output_;}
     GtkScrolledWindow *treeScrolledWindow(void){return treeScrolledWindow_;}
-    GtkScrolledWindow *topScrolledWindow(void){return topScrolledWindow_;}
-    GtkScrolledWindow *bottomScrolledWindow(void){return bottomScrolledWindow_;}
+    GtkScrolledWindow *gridScrolledWindow(void){return gridScrolledWindow_;}
+    GtkScrolledWindow *outputScrolledWindow(void){return outputScrolledWindow_;}
 
     Vpane(void){
         vpane_ = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
         gtk_paned_set_wide_handle (vpane_, TRUE);
         //gtk_paned_set_wide_handle (vpane_, FALSE);
-        topScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
+        gridScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         treeScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         
-        bottomScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
+        outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util::newTextView();
 
         auto title = g_strconcat(_("Output"),_(" TTY"), NULL);
@@ -39,10 +39,11 @@ namespace xf {
         g_object_set_data(G_OBJECT(vpane_), "output", output_);
          g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
 
-        auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
-        boxPack0 (vbox, GTK_WIDGET(topScrolledWindow_), TRUE, TRUE, 0);
-        boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
-        gtk_paned_set_start_child (vpane_, GTK_WIDGET(vbox));
+        //auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
+        //boxPack0 (vbox, GTK_WIDGET(gridScrolledWindow_), TRUE, TRUE, 0);
+        //boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
+        //gtk_paned_set_start_child (vpane_, GTK_WIDGET(vbox));
+        gtk_paned_set_start_child (vpane_, GTK_WIDGET(gridScrolledWindow_));
         
         
 
@@ -51,9 +52,10 @@ namespace xf {
 
        
         
-        gtk_paned_set_end_child (vpane_, GTK_WIDGET(bottomScrolledWindow_));
+        gtk_paned_set_end_child (vpane_, GTK_WIDGET(outputScrolledWindow_));
         g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
-        gtk_scrolled_window_set_child(bottomScrolledWindow_, GTK_WIDGET(output_));
+        gtk_scrolled_window_set_child(outputScrolledWindow_, GTK_WIDGET(output_));
+        gtk_paned_set_position(vpane_, 10000);
 #if 0
         //auto gfile = g_file_new_for_path("/");
         auto gfile = g_file_new_for_path(g_get_home_dir());
@@ -162,17 +164,17 @@ namespace xf {
         auto input = this->input();
         auto dollar = this->dollar();
         auto buttonSpace = this->buttonSpace();
-        auto topScrolledWindow = this->topScrolledWindow();
-        auto bottomScrolledWindow = this->bottomScrolledWindow();
+        auto gridScrolledWindow = this->gridScrolledWindow();
+        auto outputScrolledWindow = this->outputScrolledWindow();
 
         /* gridview creation and setting is done by workdir class.
          * at updateGridView()
         auto gridview = Workdir::getGridView(path);        
-        gtk_scrolled_window_set_child(topScrolledWindow, GTK_WIDGET(gridview));*/
+        gtk_scrolled_window_set_child(gridScrolledWindow, GTK_WIDGET(gridview));*/
 
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
-        g_object_set_data(G_OBJECT(box), "topScrolledWindow", topScrolledWindow);
-        g_object_set_data(G_OBJECT(box), "bottomScrolledWindow", bottomScrolledWindow);
+        g_object_set_data(G_OBJECT(box), "gridScrolledWindow", gridScrolledWindow);
+        g_object_set_data(G_OBJECT(box), "outputScrolledWindow", outputScrolledWindow);
 
         g_object_set_data(G_OBJECT(input), "output", output);
         g_object_set_data(G_OBJECT(output), "input", input);
