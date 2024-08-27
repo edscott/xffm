@@ -165,8 +165,10 @@ namespace xf {
         auto topScrolledWindow = this->topScrolledWindow();
         auto bottomScrolledWindow = this->bottomScrolledWindow();
 
+        /* gridview creation and setting is done by workdir class.
+         * at updateGridView()
         auto gridview = Workdir::getGridView(path);        
-        gtk_scrolled_window_set_child(topScrolledWindow, GTK_WIDGET(gridview));
+        gtk_scrolled_window_set_child(topScrolledWindow, GTK_WIDGET(gridview));*/
 
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
         g_object_set_data(G_OBJECT(box), "topScrolledWindow", topScrolledWindow);

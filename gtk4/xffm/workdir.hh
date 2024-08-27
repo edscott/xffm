@@ -5,7 +5,7 @@ namespace xf {
   class Workdir {
     public:
     static bool setWorkdir(const gchar *path){
-      //TRACE("setWorkdir...\n");
+      TRACE("setWorkdir...A\n");
       auto child = Child::getCurrentChild();
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
@@ -15,7 +15,7 @@ namespace xf {
       return true;
     }
     static bool setWorkdir(const gchar *path, bool updateHistory){
-      DBG("setWorkdir...path=%s\n",path);
+      TRACE("setWorkdir B...path=%s\n",path);
       auto child = Child::getCurrentChild();
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
@@ -25,7 +25,7 @@ namespace xf {
       return true;
     }
     static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
-      //TRACE("setWorkdir...\n");
+      TRACE("setWorkdir...C\n");
       if (!MainWidget) return false;
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
@@ -297,7 +297,7 @@ namespace xf {
     }
     public:
     static const gchar *getWorkdir(GtkWidget *child){
-      //DBG("getWorkdir...\n");
+      TRACE("getWorkdir...\n");
       if (!MainWidget) return NULL;
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
     }
@@ -543,6 +543,7 @@ namespace xf {
         gtk_scrolled_window_set_child(topScrolledWindow, view);
 
       }
+  private:
     static gboolean
     gestureClick(GtkGestureClick* self,
               gint n_press,
@@ -552,11 +553,13 @@ namespace xf {
       TRACE("gestureClick; object=%p\n", object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(GTK_LIST_ITEM(object)));
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+      TRACE("gestureClick; file=%p\n", file);
       auto path = g_file_get_path(file);
-      DBG("click on %s\n", path);
+      TRACE("gestureClick; path=%p\n", path);
+      TRACE("click on %s\n", path);
       auto type = g_file_info_get_file_type(info);
       if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
-        DBG("Go to action...\n");
+        TRACE("Go to action...\n");
         auto child = UtilBasic::getCurrentChild();
         Workdir::setWorkdir(path);
       } else {
@@ -618,7 +621,7 @@ namespace xf {
        /* does not work:
         * GFile *gfile = g_file_enumerator_get_container(G_FILE_ENUMERATOR(info));
         auto path = g_file_get_path(gfile);
-        DBG("gfile path: %s\n",path);
+        TRACE("gfile path: %s\n",path);
         g_free(path);*/
        
         GtkWidget *imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "imageBox"));
@@ -659,20 +662,64 @@ namespace xf {
         g_free(name);
         g_free(markup);
       }
+
       static GtkWidget *
       getGridView(const char *path){
         GFile *gfile = g_file_new_for_path(path);
         // Create the initial GtkDirectoryList (G_LIST_MODEL).
 
+#if 10
+       // This section adds the up icon.
+
+        auto store = g_list_store_new(G_TYPE_FILE_INFO);
+        auto up = g_path_get_dirname(path);
+        auto upFile = g_file_new_for_path(up);
+        g_free(up);
+        GError *error_ = NULL;
+        auto info = g_file_query_info(upFile, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+        g_file_info_set_name(info, "..");
+        g_file_info_set_icon(info, g_themed_icon_new("up"));
+        g_list_store_insert(store, 0, G_OBJECT(info));
+        g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(upFile));
+
+        GFile *file = g_file_new_for_path(path);
+        GFileEnumerator *dirEnum = 
+          g_file_enumerate_children (file,"standard::",G_FILE_QUERY_INFO_NONE,NULL, &error_);
+        if (error_) {
+          DBG("*** Error::g_file_enumerate_children: %s\n", error_->message);
+          return NULL;
+        }
+        GFile *outChild = NULL;
+        GFileInfo *outInfo = NULL;
+        int k = 1;
+        do {
+          g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
+              NULL, // GCancellable* cancellable,
+              &error_);
+          if (error_) {
+            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+            return NULL;
+          }
+          if (!outInfo || !outChild) break;
+          g_file_info_set_attribute_object(outInfo, "standard::file", G_OBJECT(outChild));
+          TRACE("insert path (%s)\n", g_file_get_path(outChild));
+          g_list_store_insert(store, k++, G_OBJECT(outInfo));
+        } while (true);
+        GtkFilter *filter = 
+          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
+        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
+        // Chain link GtkFilterListModel to a GtkSortListModel.
+        // Directories first, and alphabeta.
+        GtkSorter *sorter = 
+          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
+        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
+        GtkMultiSelection *selection_model = gtk_multi_selection_new(G_LIST_MODEL(sortModel));
+
+#else
+        // This section does not have the up icon 
         GtkDirectoryList *dList = 
+//          gtk_directory_list_new("", gfile); 
           gtk_directory_list_new("standard::", gfile); 
-        
-        // XXX insert test... does not work 
-        //    invalid cast from GtkDirectoryList to G_LIST_STORE
-    /*    GFile *home = g_file_new_for_path(g_get_home_dir());
-        GFileInfo *info = g_file_query_info (home, "standard::", G_FILE_QUERY_INFO_NONE, NULL, NULL);
-        GListModel *model = G_LIST_MODEL(dList);
-        g_list_store_insert (G_LIST_STORE (model), 0, info);*/
        
         //g_free(attribute); 
         // Chain link GtkDirectoryList to a GtkFilterListModel.
@@ -692,18 +739,7 @@ namespace xf {
         
         // Chain link GtkSortListModel to a GtkMultiSelection.
         GtkMultiSelection *selection_model = gtk_multi_selection_new(G_LIST_MODEL(sortModel));
-
-/*        
-        while (gtk_directory_list_is_loading(dList)) {
-          DBG("gtk_directory_list_is_loading...\n");
-           while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
-          //Util::flushGTK();
-        }
-        auto num = g_list_model_get_n_items(G_LIST_MODEL(dList));
-        DBG("gtk_directory_list_is_loading done: items=%d\n", num);
-        for (int i=0; i<num; i++){
-          auto info = G_FILE_INFO(g_list_model_get_item(G_LIST_MODEL(dList), i));
-        }*/
+#endif
         
        
         // GtkListItemFactory implements GtkSignalListItemFactory, which can be connected to
@@ -727,6 +763,8 @@ namespace xf {
       static gboolean
       filterFunction(GObject *object, void *data){
         GFileInfo *info = G_FILE_INFO(object);
+        return TRUE;
+        if (strcmp(g_file_info_get_name(info), "..")==0) return TRUE;
         return !g_file_info_get_is_hidden(info);
       }
       static
@@ -796,6 +834,9 @@ namespace xf {
         GFileInfo *infoB = G_FILE_INFO(b);
         auto typeA = g_file_info_get_file_type(infoA);
         auto typeB = g_file_info_get_file_type(infoB);
+
+        if (strcmp(g_file_info_get_name(infoA), "..")==0) return -1;
+        if (strcmp(g_file_info_get_name(infoB), "..")==0) return 1;
         
         GFile *fileA = G_FILE(g_file_info_get_attribute_object(infoA, "standard::file"));
         GFile *fileB = G_FILE(g_file_info_get_attribute_object(infoB, "standard::file"));
