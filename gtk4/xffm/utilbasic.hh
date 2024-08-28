@@ -51,8 +51,10 @@ namespace xf {
     static GList *getChildren(GtkBox *box){
       GList *list = NULL;
       GtkWidget *w = gtk_widget_get_first_child(GTK_WIDGET(box));
-      if (w) list = g_list_append(list, w);
-      while ((w=gtk_widget_get_next_sibling(w)) != NULL) list = g_list_append(list, w);
+      if (w) {
+        list = g_list_append(list, w);
+        while ((w=gtk_widget_get_next_sibling(w)) != NULL) list = g_list_append(list, w);
+      }
       return list;
     }
 

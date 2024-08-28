@@ -2,8 +2,20 @@
 #define UTILWORKDIR_HH
 #include "texture.hh"
 namespace xf {
+      static GtkPopover *popper=NULL;
   class Workdir {
     public:
+    static bool setWorkdir(const gchar *path, GtkWidget *child){
+      TRACE("setWorkdir...A\n");
+      auto wd = (char *)getWorkdir(child);
+      if (strcmp(wd, path)){
+        g_free(wd);
+        g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      }
+      updatePathbar(false);
+      updateGridView(child, path);
+      return true;
+    }
     static bool setWorkdir(const gchar *path){
       TRACE("setWorkdir...A\n");
       auto child = Child::getCurrentChild();
@@ -590,7 +602,21 @@ namespace xf {
       g_free(path);
       return TRUE;
     }
- 
+
+/*    static gboolean
+    showOpen (
+      GtkWidget* self,
+      gint x,
+      gint y,
+      gboolean keyboard_mode,
+      GtkTooltip* tooltip,
+      gpointer user_data
+    ) {
+      auto texture = Texture::load(info);
+      gtk_tooltip_set_icon(tooltip, texture);
+      return TRUE;
+    }*/
+    
     static void addGestureClick(GtkWidget *imageBox, GObject *object){
       TRACE("addGestureClick; object=%p\n", object);
       auto gesture = gtk_gesture_click_new();
@@ -605,34 +631,47 @@ namespace xf {
     }    
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
-        GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);
-        gtk_widget_set_hexpand(GTK_WIDGET(vbox), FALSE);
+        GtkWidget *box;
+        if (Settings::getInteger("xfterm", "iconsize") <= 30) box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        else box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        gtk_widget_set_vexpand(GTK_WIDGET(box), FALSE);
+        gtk_widget_set_hexpand(GTK_WIDGET(box), FALSE);
+        GtkListItem *list_item = GTK_LIST_ITEM(object);
+        gtk_list_item_set_child(list_item, box);
+
+        /*
         //gtk_widget_set_size_request(vbox, 48,48);
 
-        GtkWidget *imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        GtkWidget *imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_widget_set_vexpand(GTK_WIDGET(imageBox), FALSE);
+        gtk_widget_set_hexpand(GTK_WIDGET(imageBox), FALSE);
        
         GtkWidget *label = gtk_label_new( "" );
-        GtkWidget *labelBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        GtkWidget *labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_widget_set_vexpand(GTK_WIDGET(labelBox), FALSE);
+        gtk_widget_set_hexpand(GTK_WIDGET(labelBox), FALSE);
+
         addMotionController(imageBox);
         addMotionController(labelBox);
         addGestureClick(imageBox, object);
 
-        //GtkWidget *image = gtk_image_new_from_icon_name("text-x-generic");
-        UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
+        //UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
         UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(labelBox), FALSE, FALSE, 0);     
-        //gtk_box_append(GTK_BOX(vbox), imageBox);
-        //gtk_box_append(GTK_BOX(vbox), labelBox);
+        //UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
+        //UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
+        UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(label), FALSE, FALSE, 0);     
+        //UtilBasic::boxPack0(GTK_BOX(labelBox), gtk_label_new("foo"), FALSE, FALSE, 0);     
+        //UtilBasic::boxPack0(GTK_BOX(labelBox), gtk_label_new("bar"), FALSE, FALSE, 0);     
+
+        //auto spaceBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        //UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(spaceBox), FALSE, TRUE, 0);     
+        //UtilBasic::boxPack0(GTK_BOX(spaceBox), gtk_label_new("foo"), FALSE, TRUE, 0);     
         
         g_object_set_data(G_OBJECT(vbox), "imageBox", imageBox);
         g_object_set_data(G_OBJECT(vbox), "labelBox", labelBox);
         g_object_set_data(G_OBJECT(imageBox), "vbox", vbox);
         g_object_set_data(G_OBJECT(labelBox), "vbox", vbox);
 
-        UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(label), FALSE, FALSE, 0);     
-        //gtk_box_append(GTK_BOX(labelBox), label);
         gtk_widget_set_halign (label,GTK_ALIGN_FILL);
         gtk_widget_set_vexpand(GTK_WIDGET(label), FALSE);
         gtk_widget_set_margin_top(GTK_WIDGET(label), 0);
@@ -641,16 +680,44 @@ namespace xf {
         g_object_set_data(G_OBJECT(vbox),"label", label);
 
         GtkListItem *list_item = GTK_LIST_ITEM(object);
-        //auto widget = GTK_WIDGET(list_item);
         gtk_list_item_set_child(list_item, vbox);
+        */
+   }
+ /*     static void popup(GtkWidget *parent, const char *text){
+        if (!popper) {
+          popper = GTK_POPOVER(gtk_popover_new ());
+          gtk_popover_set_autohide(GTK_POPOVER(popper), TRUE);
+          gtk_popover_set_has_arrow(GTK_POPOVER(popper), FALSE);
+          gtk_widget_add_css_class (GTK_WIDGET(popper), "inquire" );
+        }
+        //gtk_widget_unparent (GTK_WIDGET(popper));
+
+        // Important: must use both of the following instructions:
+        gtk_widget_set_parent (GTK_WIDGET(popper), parent);
+        gtk_popover_set_default_widget(popper, parent);
+        
+        gtk_popover_set_child (popper, gtk_label_new(text));
+        
+        gtk_popover_popup(popper);
+   
+
       }
+      static void popdown(void){
+        if (!popper) return;
+        gtk_popover_popdown(popper);
+      }*/
 
       /* The bind function for the factory */
       static void
       factoryBind(GtkSignalListItemFactory *self, GObject *object, void *data)
       {
         auto list_item =GTK_LIST_ITEM(object);
-        auto vbox = GTK_BOX(gtk_list_item_get_child( list_item ));
+        auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
+        auto list = UtilBasic::getChildren(box);
+        for (auto l=list; l && l->data; l=l->next){
+          gtk_widget_unparent(GTK_WIDGET(l->data));
+        }
+        
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
 
        /* does not work:
@@ -659,9 +726,10 @@ namespace xf {
         TRACE("gfile path: %s\n",path);
         g_free(path);*/
        
-        GtkWidget *imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "imageBox"));
-        auto w = gtk_widget_get_first_child (imageBox);
-        if (w) gtk_widget_unparent(w);
+        //GtkWidget *labelBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "labelBox"));
+        //GtkWidget *imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "imageBox"));
+        //auto w = gtk_widget_get_first_child (imageBox);
+        //if (w) gtk_widget_unparent(w);
         
         int scaleFactor = 1;
         char *name = g_strdup(g_file_info_get_name(info));
@@ -675,28 +743,119 @@ namespace xf {
             TRACE("Iconmview::load(): Texture::load(info) == NULL\n");
         }
           
-        
         GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+
+        auto type = g_file_info_get_file_type(info);
+     //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
+        if (type == G_FILE_TYPE_DIRECTORY ) {
+          auto file = G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
+          GError *error_ = NULL;
+          GFileEnumerator *dirEnum = 
+              g_file_enumerate_children (file,"standard::name,standard::type",G_FILE_QUERY_INFO_NONE,NULL, &error_);
+          if (error_){
+            gtk_widget_set_tooltip_markup(image, error_->message);
+            g_error_free(error_);
+          } else {
+            int limit = 20;
+            int k=0;
+            char *t = g_strdup(_("Click to open"));
+            UtilBasic::concat(&t, ":\n");
+            do {
+              GFile *outChild = NULL;
+              GFileInfo *outInfo = NULL;
+              g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
+                  NULL, // GCancellable* cancellable,
+                  &error_);
+              if (error_) {
+                DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+                g_error_free(error_);
+              }
+              if (!outInfo || !outChild) break;
+              UtilBasic::concat(&t, "<span color=\"blue\" size=\"x-small\">  ");
+              UtilBasic::concat(&t, g_file_info_get_name(outInfo));
+              auto subtype = g_file_info_get_file_type(outInfo);
+              if (subtype == G_FILE_TYPE_DIRECTORY )UtilBasic::concat(&t, "/");
+              if (subtype == G_FILE_TYPE_SYMBOLIC_LINK)UtilBasic::concat(&t, "*");
+              UtilBasic::concat(&t, "</span>\n");
+              if (++k >= limit) {
+                UtilBasic::concat(&t, "<span color=\"red\">   more...</span>\n");
+                break;
+              }  
+            } while (true);
+            g_file_enumerator_close(dirEnum, NULL, NULL);
+            gtk_widget_set_tooltip_markup(image, t);
+            g_free(t);
+          }
+        }
+//        gtk_widget_set_has_tooltip(image, TRUE);
+//        g_signal_connect(G_OBJECT(image), "query-tooltip", G_CALLBACK(showOpen), NULL);
+
         auto size = Settings::getInteger("xfterm", "iconsize");
         if (size < 0) size = 48;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
+
         //gtk_widget_set_sensitive(GTK_WIDGET(image), FALSE);
         // no go: gtk_widget_add_css_class(GTK_WIDGET(image), "pathbarboxNegative");
         // ok: gtk_widget_add_css_class(GTK_WIDGET(imageBox), "pathbarboxNegative");
         // more or less: gtk_widget_add_css_class(GTK_WIDGET(vbox), "pathbarboxNegative");
-        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);     
-        //gtk_box_append(GTK_BOX(imageBox), image);
+       // UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), TRUE, FALSE, 0);     
 
-        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
+        //auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
 
         if (name && strlen(name) > 15){
           name[15] = 0;
           name[14] ='~';
         }
         char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
-        gtk_label_set_markup( GTK_LABEL( label ), markup );
-        g_free(name);
+        auto label = gtk_label_new("");
+        gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);
+
+     //   auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+     //   auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(image), FALSE, FALSE, 0);    
+//        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
+  //      UtilBasic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
+       // UtilBasic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);    
+        UtilBasic::boxPack0(GTK_BOX(box), label, FALSE, FALSE, 0);    
+        if (Settings::getInteger("xfterm", "iconsize") == 24 && strcmp(name, "..")){
+          // file information string
+          auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+          auto props = gtk_label_new("");
+          char *markup = g_strconcat("<span size=\"small\" color=\"blue\">", "foo bar", "</span>", NULL);
+          gtk_label_set_markup(GTK_LABEL(props), markup);
+          g_free(markup);
+          UtilBasic::boxPack0(GTK_BOX(hbox), props, FALSE, FALSE, 0);    
+          UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, FALSE, 0);    
+        }
+        g_free(name);
+        addMotionController(label);
+        addMotionController(image);
+        addGestureClick(image, object);
+
+/*
+        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
+        gtk_label_set_markup( GTK_LABEL( label ), name );
+//        gtk_label_set_markup( GTK_LABEL( label ), markup );
+        g_free(name);
+        g_free(markup);*/
+        
+        // HACK
+   /*     auto owner = gtk_widget_get_parent(GTK_WIDGET(vbox));
+        graphene_rect_t bounds;
+        if (!gtk_widget_compute_bounds(owner, MainWidget, &bounds)){
+          DBG("Error: gtk_widget_compute_bounds\n");
+        } else {
+          DBG("owner=%p, width=%lf height=%lf\n", owner, bounds.size.width, bounds.size.height);
+        }
+        gtk_widget_set_size_request(owner, 24,24);
+        gtk_widget_set_vexpand(GTK_WIDGET(owner), FALSE);
+        gtk_widget_set_hexpand(GTK_WIDGET(owner), FALSE);
+        gtk_widget_compute_bounds(owner, owner, &bounds);
+          DBG("owner=%p, width=%lf height=%lf\n", owner, bounds.size.width, bounds.size.height);
+*/
+        
+
       }
 
 
@@ -833,7 +992,7 @@ namespace xf {
          */
         view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model), factory);
         gtk_grid_view_set_max_columns(GTK_GRID_VIEW(view), 20);
-        gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 5);
+        //gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 10);
         gtk_widget_add_css_class(view, "xficons");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
         return view;
@@ -868,9 +1027,10 @@ namespace xf {
                     gdouble y,
                     gpointer data) 
     {
+      DBG("negative...\n");
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        UtilBasic::flushGTK();
+     //   gtk_widget_add_css_class (GTK_WIDGET(eventBox), "labelNegative" );
+     //   UtilBasic::flushGTK();
         return FALSE;
     }
     static gboolean
@@ -879,9 +1039,9 @@ namespace xf {
                     gdouble y,
                     gpointer data) 
     {
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        UtilBasic::flushGTK();
+        /*auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "labelNegative" );
+        UtilBasic::flushGTK();*/
         return FALSE;
     }
 

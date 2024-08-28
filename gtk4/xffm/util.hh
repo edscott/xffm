@@ -85,7 +85,9 @@ namespace xf {
       background-color: #333333;\
       color: #00ff00;\
     }\
-    .tooltip {\
+    tooltip {\
+      color: black;\
+      background-color: #acaaa5;\
       border-width: 0px;\
       border-radius: 0px;\
       border-color: transparent;\

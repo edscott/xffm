@@ -109,11 +109,14 @@ private:
 
       for (int i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(notebook, i);
+        auto path = Workdir::getWorkdir(child);
+        Workdir::setWorkdir(path, child);
+        // not necesary. may cause segv:
+        //auto gridScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
+        // not necesary. may cause segv:
+        //auto old = gtk_scrolled_window_get_child(gridScrolledWindow);
+        //gtk_widget_unparent(old);
         
-        auto bottomScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "bottomScrolledWindow"));
-        auto old = gtk_scrolled_window_get_child(bottomScrolledWindow);
-        gtk_widget_unparent(old);
-        Workdir::updateGridView(child, Util::getWorkdir(child));
       }
     }
     
