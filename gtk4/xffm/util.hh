@@ -55,10 +55,16 @@ namespace xf {
       color: black;\
       font-family: monospace;\
     }\
-    .xficons {\
+    .gridviewColors {\
       background-color: %s;\
       color: %s;\
       font-family: monospace;\
+    }\
+    .gridviewBox {\
+      margin-bottom: 0;\
+      margin-left: 0;\
+      margin-right: 0;\
+      margin-top: 0;\
     }\
     .font1 {\
       font-size: xx-small;\

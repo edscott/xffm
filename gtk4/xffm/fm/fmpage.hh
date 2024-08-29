@@ -109,10 +109,10 @@ namespace xf {
        // gtk_scrolled_window_set_child(topScrolledWindow_, GTK_WIDGET(gridview));
 
 #endif
-        auto treeExpander = gtk_tree_expander_new();
+    /*    auto treeExpander = gtk_tree_expander_new();
         gtk_scrolled_window_set_child(treeScrolledWindow_, GTK_WIDGET(treeExpander));
 
-        gtk_widget_add_css_class(treeExpander, "xficons");
+        gtk_widget_add_css_class(treeExpander, "xficons");*/
         
         return ;
     }

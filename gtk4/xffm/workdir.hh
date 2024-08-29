@@ -573,7 +573,7 @@ namespace xf {
       
       auto modType = gdk_event_get_modifier_state(event);
 
-      DBG("modType = 0x%x\n", modType);
+      TRACE("modType = 0x%x\n", modType);
       if (modType & GDK_CONTROL_MASK) return FALSE;
       if (modType & GDK_SHIFT_MASK) return FALSE;
       
@@ -629,11 +629,17 @@ namespace xf {
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }    
+
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
         GtkWidget *box;
-        if (Settings::getInteger("xfterm", "iconsize") <= 30) box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        else box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        if (Settings::getInteger("xfterm", "iconsize") <= 30)
+        {
+          box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        } else {
+          box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        }
+        gtk_widget_add_css_class(box, "gridviewBox");
         gtk_widget_set_vexpand(GTK_WIDGET(box), FALSE);
         gtk_widget_set_hexpand(GTK_WIDGET(box), FALSE);
         GtkListItem *list_item = GTK_LIST_ITEM(object);
@@ -748,44 +754,7 @@ namespace xf {
         auto type = g_file_info_get_file_type(info);
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
         if (type == G_FILE_TYPE_DIRECTORY ) {
-          auto file = G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
-          GError *error_ = NULL;
-          GFileEnumerator *dirEnum = 
-              g_file_enumerate_children (file,"standard::name,standard::type",G_FILE_QUERY_INFO_NONE,NULL, &error_);
-          if (error_){
-            gtk_widget_set_tooltip_markup(image, error_->message);
-            g_error_free(error_);
-          } else {
-            int limit = 20;
-            int k=0;
-            char *t = g_strdup(_("Click to open"));
-            UtilBasic::concat(&t, ":\n");
-            do {
-              GFile *outChild = NULL;
-              GFileInfo *outInfo = NULL;
-              g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
-                  NULL, // GCancellable* cancellable,
-                  &error_);
-              if (error_) {
-                DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
-                g_error_free(error_);
-              }
-              if (!outInfo || !outChild) break;
-              UtilBasic::concat(&t, "<span color=\"blue\" size=\"x-small\">  ");
-              UtilBasic::concat(&t, g_file_info_get_name(outInfo));
-              auto subtype = g_file_info_get_file_type(outInfo);
-              if (subtype == G_FILE_TYPE_DIRECTORY )UtilBasic::concat(&t, "/");
-              if (subtype == G_FILE_TYPE_SYMBOLIC_LINK)UtilBasic::concat(&t, "*");
-              UtilBasic::concat(&t, "</span>\n");
-              if (++k >= limit) {
-                UtilBasic::concat(&t, "<span color=\"red\">   more...</span>\n");
-                break;
-              }  
-            } while (true);
-            g_file_enumerator_close(dirEnum, NULL, NULL);
-            gtk_widget_set_tooltip_markup(image, t);
-            g_free(t);
-          }
+          addDirectoryTooltip(image, info);
         }
 //        gtk_widget_set_has_tooltip(image, TRUE);
 //        g_signal_connect(G_OBJECT(image), "query-tooltip", G_CALLBACK(showOpen), NULL);
@@ -811,13 +780,15 @@ namespace xf {
         gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);
 
-     //   auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-     //   auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(image), FALSE, FALSE, 0);    
-//        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
-  //      UtilBasic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
-       // UtilBasic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);    
-        UtilBasic::boxPack0(GTK_BOX(box), label, FALSE, FALSE, 0);    
+        auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_widget_add_css_class(imageBox, "gridviewBox");
+        auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_widget_add_css_class(labelBox, "gridviewBox");
+
+        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
+        UtilBasic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
+        UtilBasic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
+        UtilBasic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);    
         if (Settings::getInteger("xfterm", "iconsize") == 24 && strcmp(name, "..")){
           // file information string
           auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -829,9 +800,9 @@ namespace xf {
           UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, FALSE, 0);    
         }
         g_free(name);
-        addMotionController(label);
-        addMotionController(image);
-        addGestureClick(image, object);
+        addMotionController(labelBox);
+        addMotionController(imageBox);
+        addGestureClick(imageBox, object);
 
 /*
         char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
@@ -993,7 +964,7 @@ namespace xf {
         view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model), factory);
         gtk_grid_view_set_max_columns(GTK_GRID_VIEW(view), 20);
         //gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 10);
-        gtk_widget_add_css_class(view, "xficons");
+        gtk_widget_add_css_class(view, "gridviewColors");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
         return view;
       }
@@ -1027,10 +998,9 @@ namespace xf {
                     gdouble y,
                     gpointer data) 
     {
-      DBG("negative...\n");
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-     //   gtk_widget_add_css_class (GTK_WIDGET(eventBox), "labelNegative" );
-     //   UtilBasic::flushGTK();
+        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
+        UtilBasic::flushGTK();
         return FALSE;
     }
     static gboolean
@@ -1039,9 +1009,9 @@ namespace xf {
                     gdouble y,
                     gpointer data) 
     {
-        /*auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "labelNegative" );
-        UtilBasic::flushGTK();*/
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
+        UtilBasic::flushGTK();
         return FALSE;
     }
 
@@ -1131,6 +1101,52 @@ namespace xf {
         return strcasecmp(nameA, nameB);
     }
     
+    static void
+    addDirectoryTooltip(GtkWidget *image, GFileInfo *info){
+      auto name = g_file_info_get_name(info);
+      
+      auto file = G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
+      GError *error_ = NULL;
+      GFileEnumerator *dirEnum = 
+          g_file_enumerate_children (file,"standard::name,standard::type",G_FILE_QUERY_INFO_NONE,NULL, &error_);
+      if (error_){
+        gtk_widget_set_tooltip_markup(image, error_->message);
+        g_error_free(error_);
+      } else {
+        int limit = 20;
+        int k=0;
+        char *t = g_strdup_printf(_("Contents of '%s'"), name);
+//            char *t = g_strdup_printf("%s:",_("contents"));
+        UtilBasic::concat(&t, ":\n");
+        do {
+          GFile *outChild = NULL;
+          GFileInfo *outInfo = NULL;
+          g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
+              NULL, // GCancellable* cancellable,
+              &error_);
+          if (error_) {
+            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+            g_error_free(error_);
+          }
+          if (!outInfo || !outChild) break;
+          UtilBasic::concat(&t, "<span color=\"blue\" size=\"x-small\">  ");
+          UtilBasic::concat(&t, g_file_info_get_name(outInfo));
+          auto subtype = g_file_info_get_file_type(outInfo);
+          if (subtype == G_FILE_TYPE_DIRECTORY )UtilBasic::concat(&t, "/");
+          if (subtype == G_FILE_TYPE_SYMBOLIC_LINK)UtilBasic::concat(&t, "*");
+          UtilBasic::concat(&t, "</span>\n");
+          if (++k >= limit) {
+            UtilBasic::concat(&t, "<span color=\"red\">");
+            UtilBasic::concat(&t, _("More..."));
+            UtilBasic::concat(&t, "</span>\n");
+            break;
+          }  
+        } while (true);
+        g_file_enumerator_close(dirEnum, NULL, NULL);
+        gtk_widget_set_tooltip_markup(image, t);
+        g_free(t);
+      }
+    }
 
   };
 }

@@ -71,15 +71,31 @@ public:
         auto notebook = GTK_NOTEBOOK(w->notebook());
         auto num = gtk_notebook_get_current_page(notebook);
         auto child = gtk_notebook_get_nth_page(notebook, num); //page box
+        auto vpane = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "vpane"));
         auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
-        auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
+       // auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
         bool termKey = (keyval >= GDK_KEY_space && keyval <= GDK_KEY_asciitilde);
         bool upArrow = (keyval == GDK_KEY_Up || keyval == GDK_KEY_KP_Up);
-        if (gtk_widget_get_visible(promptBox) && !gtk_widget_is_focus(input)) {
+        bool switchKey = (keyval == GDK_KEY_Tab || keyval == GDK_KEY_Escape);
+
+
+        //if (gtk_widget_get_visible(promptBox) && !gtk_widget_is_focus(input)) {
+        if (!gtk_widget_is_focus(input)) {
           TRACE("window on_keypress,  focusing input\n");
-          gtk_widget_grab_focus(input);
-          if (termKey) Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
-          if (upArrow) History::up(GTK_TEXT_VIEW(input));         
+          if (switchKey) {
+            gtk_widget_grab_focus(input);
+            return TRUE;
+          }
+          if (termKey) {
+            gtk_widget_grab_focus(input);
+            Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
+            return TRUE;
+          }
+          if (upArrow && gtk_paned_get_position(GTK_PANED(vpane)) < 10) {
+            gtk_widget_grab_focus(input);
+            if (upArrow) History::up(GTK_TEXT_VIEW(input));   
+            return TRUE;
+          }      
         }
         
         return FALSE;

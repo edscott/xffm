@@ -2,11 +2,14 @@
  * Copyright 2005-2018 Edscott Wilson Garcia 
  * license: GPL v.3
  */
+//  to open inspector:
+//  GTK_DEBUG=interactive xffm/xffm -f
 #include "xffm.h"
 #include "settings.hh"
 
 #include "child.hh"
 #include "clipboard.hh"
+#include "cairo.hh"
 #include "utilbasic.hh"
 
 #include "utilpathbar.hh"
