@@ -4,6 +4,7 @@
  */
 //  to open inspector:
 //  GTK_DEBUG=interactive xffm/xffm -f
+#include <librsvg/rsvg.h>
 #include "xffm.h"
 #include "settings.hh"
 

@@ -645,49 +645,6 @@ namespace xf {
         GtkListItem *list_item = GTK_LIST_ITEM(object);
         gtk_list_item_set_child(list_item, box);
 
-        /*
-        //gtk_widget_set_size_request(vbox, 48,48);
-
-        GtkWidget *imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        gtk_widget_set_vexpand(GTK_WIDGET(imageBox), FALSE);
-        gtk_widget_set_hexpand(GTK_WIDGET(imageBox), FALSE);
-       
-        GtkWidget *label = gtk_label_new( "" );
-        GtkWidget *labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        gtk_widget_set_vexpand(GTK_WIDGET(labelBox), FALSE);
-        gtk_widget_set_hexpand(GTK_WIDGET(labelBox), FALSE);
-
-        addMotionController(imageBox);
-        addMotionController(labelBox);
-        addGestureClick(imageBox, object);
-
-        //UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
-        UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(labelBox), FALSE, FALSE, 0);     
-        //UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
-        //UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(imageBox), FALSE, FALSE, 0);     
-        UtilBasic::boxPack0(GTK_BOX(labelBox), GTK_WIDGET(label), FALSE, FALSE, 0);     
-        //UtilBasic::boxPack0(GTK_BOX(labelBox), gtk_label_new("foo"), FALSE, FALSE, 0);     
-        //UtilBasic::boxPack0(GTK_BOX(labelBox), gtk_label_new("bar"), FALSE, FALSE, 0);     
-
-        //auto spaceBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        //UtilBasic::boxPack0(GTK_BOX(vbox), GTK_WIDGET(spaceBox), FALSE, TRUE, 0);     
-        //UtilBasic::boxPack0(GTK_BOX(spaceBox), gtk_label_new("foo"), FALSE, TRUE, 0);     
-        
-        g_object_set_data(G_OBJECT(vbox), "imageBox", imageBox);
-        g_object_set_data(G_OBJECT(vbox), "labelBox", labelBox);
-        g_object_set_data(G_OBJECT(imageBox), "vbox", vbox);
-        g_object_set_data(G_OBJECT(labelBox), "vbox", vbox);
-
-        gtk_widget_set_halign (label,GTK_ALIGN_FILL);
-        gtk_widget_set_vexpand(GTK_WIDGET(label), FALSE);
-        gtk_widget_set_margin_top(GTK_WIDGET(label), 0);
-        gtk_widget_set_margin_bottom(GTK_WIDGET(label), 0);
-
-        g_object_set_data(G_OBJECT(vbox),"label", label);
-
-        GtkListItem *list_item = GTK_LIST_ITEM(object);
-        gtk_list_item_set_child(list_item, vbox);
-        */
    }
  /*     static void popup(GtkWidget *parent, const char *text){
         if (!popper) {
@@ -726,16 +683,6 @@ namespace xf {
         
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
 
-       /* does not work:
-        * GFile *gfile = g_file_enumerator_get_container(G_FILE_ENUMERATOR(info));
-        auto path = g_file_get_path(gfile);
-        TRACE("gfile path: %s\n",path);
-        g_free(path);*/
-       
-        //GtkWidget *labelBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "labelBox"));
-        //GtkWidget *imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(vbox), "imageBox"));
-        //auto w = gtk_widget_get_first_child (imageBox);
-        //if (w) gtk_widget_unparent(w);
         
         int scaleFactor = 1;
         char *name = g_strdup(g_file_info_get_name(info));
@@ -750,24 +697,52 @@ namespace xf {
         }
           
         GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        auto size = Settings::getInteger("xfterm", "iconsize");
 
         auto type = g_file_info_get_file_type(info);
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
         if (type == G_FILE_TYPE_DIRECTORY ) {
           addDirectoryTooltip(image, info);
         }
-//        gtk_widget_set_has_tooltip(image, TRUE);
-//        g_signal_connect(G_OBJECT(image), "query-tooltip", G_CALLBACK(showOpen), NULL);
+        if (name[0] == '.' && name[1] != '.') {
+          // We have texture...
+          // What's the icon name?
+          // We have 
+          //   0. bug: check why no previews in ~/tmp...
+          //   1. get icon names
+          //   2. find icon source file in theme or
+          //   3. find icon source file in search path
+          //   4. must have backup in xffm+ icons.
+          //   5. get the cairo surface
+          //   6. apply mask
+          //   7. render paintable
+          //   8. return GtkImage
+          //   9. For symlinks, add symlink emblem.
+          //   10. For executables, add exe emblem.
+          auto gIcon = g_file_info_get_icon(info);
+          auto tIcon = G_THEMED_ICON(gIcon);
+          auto names = g_themed_icon_get_names(tIcon);
+          char *tname = gtk_icon_theme_get_theme_name(icon_theme);
+          DBG("theme=%s\n", tname);
+          g_free(tname);
+          //for (auto p=names; p && *p; p++) DBG("%s tIcon name=%s\n", name, *p);
+          //auto paths = gtk_icon_theme_get_search_path(icon_theme);
+          //for (auto p=paths; p && *p; p++) DBG("%s paths=%s\n", name, *p);
+          //auto paths = gtk_icon_theme_get_resource_path(icon_theme);
+          //for (auto p=paths; p && *p; p++) DBG("%s resource paths=%s\n", name, *p);
+          //
+          auto file = "/usr/share/icons/Adwaita/scalable/mimetypes/application-certificate.svg";
+          auto paintable = Cairo::getSvgPaintable(file, size, size);   
+          image = gtk_image_new_from_paintable(paintable);
 
-        auto size = Settings::getInteger("xfterm", "iconsize");
+          //const char *testFile = "/home/edscott/tmp/testFile.png";
+          //cairo_surface_write_to_png (surface, testFile); 
+        }
+
         if (size < 0) size = 48;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
 
-        //gtk_widget_set_sensitive(GTK_WIDGET(image), FALSE);
-        // no go: gtk_widget_add_css_class(GTK_WIDGET(image), "pathbarboxNegative");
-        // ok: gtk_widget_add_css_class(GTK_WIDGET(imageBox), "pathbarboxNegative");
-        // more or less: gtk_widget_add_css_class(GTK_WIDGET(vbox), "pathbarboxNegative");
-       // UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), TRUE, FALSE, 0);     
+   
 
         //auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
 
@@ -1147,6 +1122,7 @@ namespace xf {
         g_free(t);
       }
     }
+
 
   };
 }

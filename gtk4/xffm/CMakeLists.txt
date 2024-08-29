@@ -6,10 +6,12 @@ include_directories(
     "./"
     "../"
     "${PROJECT_BINARY_DIR}" 
+    "${libRSVG_INCLUDE_DIRS}"
     "${GTK4_INCLUDE_DIRS}")
 
 target_link_libraries(xffm 
     ${HISTORY_LIBRARIES}
+    ${libRSVG_LIBRARIES}
     ${GTK4_LIBRARIES}
     ${X11_LIBRARIES}
     ${LIBZIP_LIBRARIES}
