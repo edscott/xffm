@@ -722,9 +722,9 @@ namespace xf {
           auto gIcon = g_file_info_get_icon(info);
           auto tIcon = G_THEMED_ICON(gIcon);
           auto names = g_themed_icon_get_names(tIcon);
-          char *tname = gtk_icon_theme_get_theme_name(icon_theme);
+         /* char *tname = gtk_icon_theme_get_theme_name(icon_theme);
           DBG("theme=%s\n", tname);
-          g_free(tname);
+          g_free(tname);*/
           //for (auto p=names; p && *p; p++) DBG("%s tIcon name=%s\n", name, *p);
           //auto paths = gtk_icon_theme_get_search_path(icon_theme);
           //for (auto p=paths; p && *p; p++) DBG("%s paths=%s\n", name, *p);
