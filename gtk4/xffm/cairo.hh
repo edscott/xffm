@@ -57,7 +57,16 @@ public:
     // copy pasted from https://gitlab.gnome.org/GNOME/gtk/-/blob/main/gdk/gdktexture.c
     // both cairo_format_to_memory_format and gdk_texture_new_for_surface
     // pixbuf stuff is now deprecated.
-    // 
+    // Why:
+/* The reason we don’t expose that function is twofold:
+
+    It requires a lot of invariants on the cairo surface - image surface, no device scale, no device offset - and those are complex to document and even more complex to reliably check
+
+    It’s small, so you can just copy/paste it. And then you can adapt it to the invariants your code satisfies.
+
+So the recommended solution is indeed for everybody to copy gdk_texture_new_for_surface() into their code - it’s why GDK_MEMORY_DEFAULT exists after all.
+*/
+
 static GdkMemoryFormat
 cairo_format_to_memory_format (cairo_format_t format)
 {

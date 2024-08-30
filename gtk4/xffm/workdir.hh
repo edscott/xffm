@@ -682,11 +682,14 @@ namespace xf {
         }
         
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+        auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
 
         
         int scaleFactor = 1;
         char *name = g_strdup(g_file_info_get_name(info));
-        auto texture = Texture::load(name);
+        auto path = g_file_get_path(file);
+        auto texture = Texture::load(path);
+        g_free(path);
         if (texture) scaleFactor = 2;
         if (!texture) {
           //texture = Texture::loadIconName("emblem-archlinux");
@@ -708,7 +711,6 @@ namespace xf {
           // We have texture...
           // What's the icon name?
           // We have 
-          //   0. bug: check why no previews in ~/tmp...
           //   1. get icon names
           //   2. find icon source file in theme or
           //   3. find icon source file in search path
