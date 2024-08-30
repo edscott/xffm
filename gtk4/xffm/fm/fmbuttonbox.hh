@@ -105,7 +105,7 @@ private:
       // reload all pages
       auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
       auto n = gtk_notebook_get_n_pages(notebook);
-      char buf[32];
+      
 
       for (int i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(notebook, i);

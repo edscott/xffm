@@ -692,22 +692,21 @@ namespace xf {
         g_free(path);
         if (texture) scaleFactor = 2;
         if (!texture) {
-          //texture = Texture::loadIconName("emblem-archlinux");
+          // FIXME: this only if not cairo modified ;
           texture = Texture::load(info);
         }
-        if (!texture) {
+        // XXX: put all icons in hash (debug)
+        Texture::findIconPath(info);
+        
+        /*if (!texture) {
             TRACE("Iconmview::load(): Texture::load(info) == NULL\n");
-        }
+        }*/
           
-        GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
         auto size = Settings::getInteger("xfterm", "iconsize");
-
         auto type = g_file_info_get_file_type(info);
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
-        if (type == G_FILE_TYPE_DIRECTORY ) {
-          addDirectoryTooltip(image, info);
-        }
         if (name[0] == '.' && name[1] != '.') {
+
           // We have texture...
           // What's the icon name?
           // We have 
@@ -721,25 +720,16 @@ namespace xf {
           //   8. return GtkImage
           //   9. For symlinks, add symlink emblem.
           //   10. For executables, add exe emblem.
-          auto gIcon = g_file_info_get_icon(info);
-          auto tIcon = G_THEMED_ICON(gIcon);
-          auto names = g_themed_icon_get_names(tIcon);
-         /* char *tname = gtk_icon_theme_get_theme_name(icon_theme);
-          DBG("theme=%s\n", tname);
-          g_free(tname);*/
-          //for (auto p=names; p && *p; p++) DBG("%s tIcon name=%s\n", name, *p);
-          //auto paths = gtk_icon_theme_get_search_path(icon_theme);
-          //for (auto p=paths; p && *p; p++) DBG("%s paths=%s\n", name, *p);
-          //auto paths = gtk_icon_theme_get_resource_path(icon_theme);
-          //for (auto p=paths; p && *p; p++) DBG("%s resource paths=%s\n", name, *p);
-          //
-          auto file = "/usr/share/icons/Adwaita/scalable/mimetypes/application-certificate.svg";
-          auto paintable = Cairo::getSvgPaintable(file, size, size);   
-          image = gtk_image_new_from_paintable(paintable);
+          auto *iconPath = Texture::findIconPath(info);
+          //if (!iconPath) iconPath = "/usr/share/icons/Adwaita/scalable/mimetypes/application-certificate.svg";
+          texture = Texture::getSvgPaintable(iconPath, size, size);   
 
-          //const char *testFile = "/home/edscott/tmp/testFile.png";
-          //cairo_surface_write_to_png (surface, testFile); 
         }
+        GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        if (type == G_FILE_TYPE_DIRECTORY ) {
+          addDirectoryTooltip(image, info);
+        }
+
 
         if (size < 0) size = 48;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);

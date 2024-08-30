@@ -289,7 +289,10 @@ private:
         _("Delete"), 
         _("Select All"), 
         _("Match regular expression"), 
-        _("Colors"), 
+        _("Foreground"),
+        _("Background"), 
+        _("Default"), 
+//        _("Colors"), 
         _("Close"), 
         NULL
       };
@@ -321,43 +324,22 @@ private:
       g_hash_table_insert(mHash[1], _("Colors"), NULL);
       g_hash_table_insert(mHash[1], _("Close"), (void *)close);
 
+      g_hash_table_insert(mHash[0], _("Foreground"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[0], _("Background"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
+
+      g_hash_table_insert(mHash[1], _("Foreground"), (void *)Util::terminalColors);
+      g_hash_table_insert(mHash[1], _("Background"), (void *)Util::terminalColors);
+      g_hash_table_insert(mHash[1], _("Default"), (void *)Util::defaultColors);
+
+      g_hash_table_insert(mHash[2], _("Foreground"), (void *)"iconsFg");
+      g_hash_table_insert(mHash[2], _("Background"), (void *)"iconsBg");
+      g_hash_table_insert(mHash[2], _("Default"), (void *)"icons");
+
       //g_hash_table_insert(mHash[2], _("Colors"), GINT_TO_POINTER(-1));
       auto menu = Util::mkMenu(text,mHash, _("Main Menu"));
 // 
-      GHashTable *mHash2[3];
-      mHash2[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
-      for (int i=1; i<3; i++) mHash2[i] = g_hash_table_new(g_str_hash, g_str_equal);
-      static const char *text2[]= {
-        _("Foreground"),
-        _("Background"), 
-        _("Default"), 
-        NULL
-      };
-
-      g_hash_table_insert(mHash2[0], _("Foreground"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash2[0], _("Background"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash2[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
-
-      g_hash_table_insert(mHash2[1], _("Foreground"), (void *)Util::terminalColors);
-      g_hash_table_insert(mHash2[1], _("Background"), (void *)Util::terminalColors);
-      g_hash_table_insert(mHash2[1], _("Default"), (void *)Util::defaultColors);
-
-      g_hash_table_insert(mHash2[2], _("Foreground"), (void *)"iconsFg");
-      g_hash_table_insert(mHash2[2], _("Background"), (void *)"iconsBg");
-      g_hash_table_insert(mHash2[2], _("Default"), (void *)"icons");
-
-      auto submenu = Util::mkMenu(text2,mHash2, _("Colors"));
-      g_object_set_data(G_OBJECT(submenu), "menu", menu);
-      auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("Colors")));
-     // Important: must use both of the following instructions:
-      gtk_popover_set_default_widget(submenu, GTK_WIDGET(button));
-      gtk_widget_set_parent(GTK_WIDGET(submenu), GTK_WIDGET(button));
-      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(Util::popup), submenu);
-  //    gtk_menu_button_set_popover (GTK_MENU_BUTTON(button), GTK_WIDGET(submenu));  
-      //for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
-
       for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
-      for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
       return menu;
     }
     

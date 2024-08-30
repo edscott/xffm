@@ -130,9 +130,9 @@ namespace xf {
     return css_provider;
   }
   static void
-  defaultColors(GtkButton *self, void *data){
-    auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu")); 
-    auto topMenu = GTK_POPOVER(g_object_get_data(G_OBJECT(menu), "menu"));
+  defaultColors(GtkButton *button, void *data){
+    auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+    gtk_popover_popdown(menu);
     const char *x[]={"Bg", "Fg", NULL};
     for (const char **p = x; p && *p; p++){
       auto key = g_strconcat((const char *)data, *p, NULL);
@@ -143,8 +143,9 @@ namespace xf {
     gtk_style_context_add_provider_for_display(gdk_display_get_default(),
         GTK_STYLE_PROVIDER(css),
         GTK_STYLE_PROVIDER_PRIORITY_USER); 
-    gtk_popover_popdown(menu);
-    gtk_popover_popdown(topMenu);
+    
+    context_function(reloadAll_f, NULL);
+    
     return;
   }
 
@@ -155,6 +156,7 @@ namespace xf {
       auto item = (const char *)data;
 
       GdkRGBA *color = gtk_color_dialog_choose_rgba_finish (dialog, result, &error_);
+
       if (color) {
         TRACE("setColor: r=%f, g=%f, b=%f, a=%f\n",
           color->red, color->green, color->blue, color->alpha);
@@ -185,11 +187,26 @@ namespace xf {
         // 4. add user defined color css.
         // On startup, use user color css instead if
         // Settings has the information.
-        // 
+        // 5. But because of hidden mask transparency, we must reload 
+        //    all gridviews 
+        // reload all pages. This is done by sending the changed workdir signal.
+        // This must be done in main context
+        context_function(reloadAll_f, NULL);
       } else {
         TRACE("No color selected.\n");
       }
       g_free(color);
+    }
+    
+    static void *reloadAll_f(void *data){
+        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+        auto n = gtk_notebook_get_n_pages(notebook);
+        for (int i=0; i<n; i++){
+          auto child = gtk_notebook_get_nth_page(notebook, i);
+          auto path = Workdir::getWorkdir(child);
+          Workdir::setWorkdir(path, child);
+        }
+        return NULL;
     }
     
     static void addMenu(const char *title, GtkPopover *menu, GtkWidget *parent){
@@ -208,20 +225,26 @@ namespace xf {
     }
     static GtkPopover *
     mkTextviewMenu(const char *title, const char *which, const char *whichFg, const char *whichBg){
-      static const char *text[]= {
+      static const char *text[]= { //output
         _("Copy"), // 0x02
         _("Cut"), // 0x01
         _("Paste"), // 0x04
         _("Delete"), // 0x08
         _("Select All"), //0x10
-        _("Colors"), 
-        NULL
+ //       _("Colors"), 
+        _("Default"), 
+        _("Foreground"),
+        _("Background"), 
+       NULL
       };
-      static const char *text1[]= {
+      static const char *text1[]= { //input
         _("Copy"), // 0x02
         //_("Paste"), // 0x04
         _("Select All"), //0x10
-        _("Colors"), 
+        //_("Colors"), 
+        _("Default"), 
+        _("Foreground"),
+        _("Background"), 
         NULL
       };
       GHashTable *mHash[3];
@@ -251,9 +274,24 @@ namespace xf {
       g_hash_table_insert(mHash[0], _("Colors"), g_strdup(DOCUMENT_PROPERTIES));
       g_hash_table_insert(mHash[1], _("Colors"), NULL);
 
+      g_hash_table_insert(mHash[0], _("Foreground"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[0], _("Background"), g_strdup(DOCUMENT_PROPERTIES));
+      g_hash_table_insert(mHash[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
+
+      g_hash_table_insert(mHash[1], _("Foreground"), (void *)terminalColors);
+      g_hash_table_insert(mHash[1], _("Background"), (void *)terminalColors);
+      g_hash_table_insert(mHash[1], _("Default"), (void *)defaultColors);
+
+
+      g_hash_table_insert(mHash[2], _("Foreground"), (void *)whichFg);
+      g_hash_table_insert(mHash[2], _("Background"), (void *)whichBg);
+      g_hash_table_insert(mHash[2], _("Default"), (void *)which);
+
+     
       auto menu = Util::mkMenu(strcmp(which, "output")?text:text1,mHash,_(title));
 
-      
+
+#if 0      
        GHashTable *mHash2[3];
       mHash2[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
       for (int i=1; i<3; i++) mHash2[i] = g_hash_table_new(g_str_hash, g_str_equal);
@@ -277,25 +315,25 @@ namespace xf {
       g_hash_table_insert(mHash2[2], _("Background"), (void *)whichBg);
       g_hash_table_insert(mHash2[2], _("Default"), (void *)which);
 
-      auto submenu = Util::mkMenu(text2,mHash2, _("Colors"));
-      g_object_set_data(G_OBJECT(submenu), "menu", menu);
+      auto subMenu = Util::mkMenu(text2,mHash2, _("Colors"));
+      g_object_set_data(G_OBJECT(subMenu), "menu", menu);
       auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("Colors")));
-     // Important: must use both of the following instructions:
-      gtk_popover_set_default_widget(submenu, GTK_WIDGET(button));
-      gtk_widget_set_parent(GTK_WIDGET(submenu), GTK_WIDGET(button));
-g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
-  //    gtk_menu_button_set_popover (GTK_MENU_BUTTON(button), GTK_WIDGET(submenu));  
-      //for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
+      g_object_set_data(G_OBJECT(button), "menu", menu);
+      g_object_set_data(G_OBJECT(button), "subMenu", subMenu);
 
-      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
+     // Important: must use both of the following instructions:
+      gtk_popover_set_default_widget(subMenu, GTK_WIDGET(button));
+      gtk_widget_set_parent(GTK_WIDGET(subMenu), GTK_WIDGET(button));
+      g_object_set_data(G_OBJECT(subMenu), "menu", menu);
+
+      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), subMenu);
+
       for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
      
+#endif
+      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
       auto vbox = GTK_BOX(g_object_get_data(G_OBJECT(menu), "vbox")); 
-      //auto label = gtk_label_new(_("Font size"));
-      //boxPack0(vbox, GTK_WIDGET(label),  FALSE, FALSE, 0);   
-      //auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-      //boxPack0(vbox, GTK_WIDGET(hbox),  FALSE, FALSE, 0);   
-      
+
       auto scale = newSizeScale(_("Font size"), which);
       boxPack0(vbox, GTK_WIDGET(scale),  FALSE, TRUE, 0);      
 
@@ -371,21 +409,22 @@ g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), submenu);
 
   public:
     static void
-    terminalColors(GtkButton *self, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu")); 
-      auto topMenu = GTK_POPOVER(g_object_get_data(G_OBJECT(menu), "menu"));
+    terminalColors(GtkButton *button, void *data){
+
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
       gtk_popover_popdown(menu);
-      gtk_popover_popdown(topMenu);
+      
       auto dialog = gtk_color_dialog_new();
+      //gtk_widget_set_parent(GTK_WIDGET(dialog), MainWidget);
       gtk_color_dialog_set_modal (dialog, TRUE);
-      gtk_color_dialog_set_title (dialog, "fixme: color dialog title");
+      gtk_color_dialog_set_title (dialog, "Color dialog");
       gtk_color_dialog_choose_rgba (dialog, GTK_WINDOW(MainWidget), 
           NULL, NULL, Util::setColor, data);
     }
+
     static void
     popup(GtkButton *self, void *data){
-      auto menu = GTK_POPOVER(data);
-      
+      auto menu = GTK_POPOVER(data);      
       gtk_popover_popup(menu);
     }
 

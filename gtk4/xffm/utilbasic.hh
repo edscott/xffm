@@ -299,6 +299,7 @@ namespace xf {
           continue;
         } else {
           GtkButton *button = GTK_BUTTON(gtk_button_new());
+          g_object_set_data(G_OBJECT(button), "menu", menu);
           gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(hbox));
           boxPack0(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
           g_object_set_data(G_OBJECT(menu), *p, button);

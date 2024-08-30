@@ -10,7 +10,6 @@
 
 #include "child.hh"
 #include "clipboard.hh"
-#include "cairo.hh"
 #include "utilbasic.hh"
 
 #include "utilpathbar.hh"
