@@ -166,21 +166,6 @@ private:
       g_free(find);
       return;
     }
-    static void
-    openXffm(GtkButton *self, void *data){
-      auto childWidget =Util::getCurrentChild();
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Util::getWorkdir(childWidget);
-
-      auto xffm = g_strdup_printf("xffm -f %s", workDir);
-      pid_t childPid = Run::shell_command(output, xffm, false, false);
-
-      auto runButton = new (RunButton);
-      runButton->init(runButton, xffm, childPid, output, workDir, buttonSpace);
-      g_free(xffm);
-      return;
-    }
 
     static void
     upImage (GtkButton *self, void *data){

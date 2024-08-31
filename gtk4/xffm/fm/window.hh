@@ -342,7 +342,7 @@ private:
       g_hash_table_insert(mHash[1], _("New"), NULL);
       g_hash_table_insert(mHash[1], _("Open in New Tab"), NULL);
       //g_hash_table_insert(mHash[1], _("Dual Mode AccessPoint"), NULL);
-      g_hash_table_insert(mHash[1], _("Open in New Window"), NULL);
+      g_hash_table_insert(mHash[1], _("Open in New Window"), (void *)openXffm);
       g_hash_table_insert(mHash[1], _("Copy"), NULL);
       g_hash_table_insert(mHash[1], _("Cut"), NULL);
       g_hash_table_insert(mHash[1], _("Paste"), NULL);
@@ -428,6 +428,23 @@ private:
     }
 
 private:
+    static void
+    openXffm(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto childWidget =Util::getCurrentChild();
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
+      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
+      auto workDir = Util::getWorkdir(childWidget);
+
+      auto xffm = g_strdup_printf("xffm -f %s", workDir);
+      pid_t childPid = Run::shell_command(output, xffm, false, false);
+
+      auto runButton = new (RunButton);
+      runButton->init(runButton, xffm, childPid, output, workDir, buttonSpace);
+      g_free(xffm);
+      return;
+    }
 
     static void
     close(GtkButton *self, void *data){
