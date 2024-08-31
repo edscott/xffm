@@ -97,7 +97,6 @@ namespace xf {
       return NULL;
      }
 
-
     static const char *
     findIconPath(GFileInfo *info){
           auto gIcon = g_file_info_get_icon(info);
@@ -114,9 +113,20 @@ namespace xf {
               return path;
             }
           }
+          DBG("*** Warning: could not find icon path for any of:\n");
+          for (auto p=names; p && *p; p++) {
+            fprintf(stderr, "    %s\n", *p);
+          }
+          DBG("*** Warning: using application-x-generic instead...\n");
+
+          const char *path = locate ("application-x-generic");
+          if (path) {
+              g_hash_table_insert(iconPathHash, g_strdup("application-x-generic"), (void *)path);
+              return path;
+          }
           return NULL;
     }
-  static GdkPaintable *getSvgPaintable(const char *file, double width, double height){
+    static GdkPaintable *getSvgPaintable(const char *file, double width, double height){
           GError *error_ = NULL;
           RsvgHandle *handle = rsvg_handle_new_from_file (file, &error_ );
           if (error_) DBG("*** Error: %s\n", error_->message);

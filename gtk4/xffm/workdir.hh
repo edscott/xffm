@@ -2,7 +2,6 @@
 #define UTILWORKDIR_HH
 #include "texture.hh"
 namespace xf {
-      static GtkPopover *popper=NULL;
   class Workdir {
     public:
     static bool setWorkdir(const gchar *path, GtkWidget *child){
@@ -646,29 +645,6 @@ namespace xf {
         gtk_list_item_set_child(list_item, box);
 
    }
- /*     static void popup(GtkWidget *parent, const char *text){
-        if (!popper) {
-          popper = GTK_POPOVER(gtk_popover_new ());
-          gtk_popover_set_autohide(GTK_POPOVER(popper), TRUE);
-          gtk_popover_set_has_arrow(GTK_POPOVER(popper), FALSE);
-          gtk_widget_add_css_class (GTK_WIDGET(popper), "inquire" );
-        }
-        //gtk_widget_unparent (GTK_WIDGET(popper));
-
-        // Important: must use both of the following instructions:
-        gtk_widget_set_parent (GTK_WIDGET(popper), parent);
-        gtk_popover_set_default_widget(popper, parent);
-        
-        gtk_popover_set_child (popper, gtk_label_new(text));
-        
-        gtk_popover_popup(popper);
-   
-
-      }
-      static void popdown(void){
-        if (!popper) return;
-        gtk_popover_popdown(popper);
-      }*/
 
       /* The bind function for the factory */
       static void
@@ -722,7 +698,7 @@ namespace xf {
           //   10. For executables, add exe emblem.
           auto *iconPath = Texture::findIconPath(info);
           //if (!iconPath) iconPath = "/usr/share/icons/Adwaita/scalable/mimetypes/application-certificate.svg";
-          texture = Texture::getSvgPaintable(iconPath, size, size);   
+          if (iconPath) texture = Texture::getSvgPaintable(iconPath, size, size);   
 
         }
         GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));

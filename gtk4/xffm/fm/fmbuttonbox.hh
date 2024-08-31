@@ -17,10 +17,8 @@ namespace xf {
            OPEN_TERMINAL, 
            GO_HOME, 
            SEARCH, 
-           OPEN_FILEMANAGER, 
-           GLIST_ADD, 
-           GLIST_REMOVE, 
-           EDIT_CLEAR,
+           //OPEN_FILEMANAGER, 
+           //EDIT_CLEAR,
            "media-view-subtitles",
            NULL
          };
@@ -28,10 +26,8 @@ namespace xf {
           _("Open terminal"),
           _("Home"),
           _("Search"),
-          _("Open a New Window"),
-          _("Reset image size"),
-          _("Reset image size"), 
-          _("Clear Log"),
+          // in main menu _("Open a New Window"),
+          //_("Clear Log"),
           _("Show/hide grid."),
           NULL
         };
@@ -39,10 +35,8 @@ namespace xf {
           (void *)openTerminal,
           (void *)goHome,
           (void *)openFind,
-          (void *)openXffm,
-          (void *)upImage,
-          (void *)downImage,
-          (void *)clear,
+          // (void *)openXffm,
+          //(void *)clear,
           (void *)toggleVpane,
           NULL
         };
@@ -228,13 +222,6 @@ private:
       return ;
     }
     
-    static void
-    clear (GtkButton *self, void *data){
-      auto childWidget =Util::getCurrentChild();
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      Util::clear_text(output);
-      return ;
-    }
     static void
     toggleVpane (GtkButton *self, void *data){
       auto vpane =Util::getCurrentPane();
