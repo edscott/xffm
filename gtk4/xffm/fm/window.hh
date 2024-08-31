@@ -1,6 +1,8 @@
 #ifndef XF_WINDOW_HH
 #define XF_WINDOW_HH
 #define NOTEBOOK_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkWidget *, guint, gpointer)) X)
+
+#include "mainMenu.hh"
 #include "fmpage.hh"
 #include <gio/gio.h>
 namespace xf {
@@ -270,91 +272,6 @@ private:
       Util::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
       return GTK_WIDGET(tabBox);
     }
-    
-    GtkPopover *mkColorMenu(void){
-      GHashTable *mHash[3];
-      mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
-      for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
-      static const char *text[]= {
-        _("Foreground color"),
-        _("Background color"), 
-        _("Default Colors"), 
-        NULL
-      };
-
-
-      g_hash_table_insert(mHash[0], _("Foreground color"), NULL);
-      g_hash_table_insert(mHash[0], _("Background color"), NULL);
-      g_hash_table_insert(mHash[0], _("Default Colors"), NULL);
-
-      g_hash_table_insert(mHash[1], _("Foreground color"), (void *)Util::terminalColors);
-      g_hash_table_insert(mHash[1], _("Background color"), (void *)Util::terminalColors);
-      g_hash_table_insert(mHash[1], _("Default Colors"), (void *)Util::defaultColors);
-
-      g_hash_table_insert(mHash[2], _("Foreground color"), (void *)"iconsFg");
-      g_hash_table_insert(mHash[2], _("Background color"), (void *)"iconsBg");
-      g_hash_table_insert(mHash[2], _("Default Colors"), (void *)"icons");
-
-      auto menu = Util::mkMenu(text,mHash, _("Colors"));
-// 
-      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
-      return menu;
-    }
-    
-
-    GtkPopover *mkMainMenu(void){
-#define ICONHASH mHash[0];
-#define CALLBACKHASH mHash[1];
-#define DATAHASH mHash[2];
-      GHashTable *mHash[3];
-      mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
-      for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
-      static const char *text[]= {
-       // not used _("New"),
-       // already has button _("Open in New Tab"), 
-        _("Open in New Window"),  // removed then from vbutton box
-        _("Copy"), 
-        _("Cut"), 
-        _("Paste"), 
-        _("Delete"), 
-        _("Select All"), 
-        _("Match regular expression"), 
-        _("Close"), 
-        NULL
-      };
-      // icons
-      g_hash_table_insert(mHash[0], _("New"), g_strdup(DOCUMENT_NEW));
-      g_hash_table_insert(mHash[0], _("Open in New Tab"), g_strdup(NEW_TAB));
-      //g_hash_table_insert(mHash[0], _("Dual Mode AccessPoint"), g_strdup(DUAL_VIEW));
-      g_hash_table_insert(mHash[0], _("Open in New Window"), g_strdup(DUAL_VIEW));
-      g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
-      g_hash_table_insert(mHash[0], _("Cut"), g_strdup(EDIT_CUT));
-      g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
-      g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
-      g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
-      g_hash_table_insert(mHash[0], _("Match regular expression"), g_strdup(DIALOG_QUESTION));
-      g_hash_table_insert(mHash[0], _("Close"), g_strdup(WINDOW_SHUTDOWN));
-
-      // callbacks
-      g_hash_table_insert(mHash[1], _("New"), NULL);
-      g_hash_table_insert(mHash[1], _("Open in New Tab"), NULL);
-      //g_hash_table_insert(mHash[1], _("Dual Mode AccessPoint"), NULL);
-      g_hash_table_insert(mHash[1], _("Open in New Window"), (void *)openXffm);
-      g_hash_table_insert(mHash[1], _("Copy"), NULL);
-      g_hash_table_insert(mHash[1], _("Cut"), NULL);
-      g_hash_table_insert(mHash[1], _("Paste"), NULL);
-      g_hash_table_insert(mHash[1], _("Delete"), NULL);
-      g_hash_table_insert(mHash[1], _("Select All"), NULL);
-      g_hash_table_insert(mHash[1], _("Match regular expression"), NULL);
-      g_hash_table_insert(mHash[1], _("Close"), (void *)close);
-
-
-      auto menu = Util::mkMenu(text,mHash, _("Main Menu"));
-// 
-      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
-      return menu;
-    }
-    
 
     void mkNotebook(){
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
@@ -372,12 +289,14 @@ private:
       auto menuButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
       auto newTabButton = Util::newButton("list-add", _("New Tab"));
-      auto colorButton = Util::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
       auto newMenuButton = Util::newMenuButton("open-menu", NULL);
-      auto menu = mkMainMenu();
-      auto colorMenu = mkColorMenu(); // deprecated
+
+      auto myMainMenu = new Menu<MainMenu>;
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Main menu"));
+      auto menu = myMainMenu->getMenu(markup);
+      g_free(markup);
+      delete myMainMenu;
       
-      gtk_menu_button_set_popover (colorButton, GTK_WIDGET(colorMenu));  
       gtk_menu_button_set_popover (newMenuButton, GTK_WIDGET(menu));  
 
 
@@ -391,9 +310,7 @@ private:
 
       Util::boxPack0(tabButtonBox, GTK_WIDGET(longPressImage_),  TRUE, FALSE, 0);
       Util::boxPack0(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
-      Util::boxPack0(menuButtonBox, GTK_WIDGET(colorButton),  TRUE, FALSE, 0);
       Util::boxPack0(menuButtonBox, GTK_WIDGET(newMenuButton),  TRUE, FALSE, 0);
-      //Util::boxPack0(tabButtonBox, GTK_WIDGET(this->menuButton()),  TRUE, FALSE, 0);
       Util::boxPack0(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
       Util::boxPack0(actionWidget, GTK_WIDGET(menuButtonBox),  TRUE, FALSE, 0);
 
@@ -425,30 +342,6 @@ private:
     }
 
 private:
-    static void
-    openXffm(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
-      auto childWidget =Util::getCurrentChild();
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Util::getWorkdir(childWidget);
-
-      auto xffm = g_strdup_printf("xffm -f %s", workDir);
-      pid_t childPid = Run::shell_command(output, xffm, false, false);
-
-      auto runButton = new (RunButton);
-      runButton->init(runButton, xffm, childPid, output, workDir, buttonSpace);
-      g_free(xffm);
-      return;
-    }
-
-    static void
-    close(GtkButton *self, void *data){
-      gtk_widget_set_visible(MainWidget, FALSE);
-      gtk_window_destroy(GTK_WINDOW(MainWidget));
-    }
-    
 };
 
 

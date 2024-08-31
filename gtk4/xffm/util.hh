@@ -209,7 +209,7 @@ namespace xf {
         return NULL;
     }
     
-    static void addMenu(const char *title, GtkPopover *menu, GtkWidget *parent){
+    static void addMenu(GtkPopover *menu, GtkWidget *parent){
       g_object_set_data(G_OBJECT(parent), "menu", menu);
       // Important: must use both of the following instructions:
       gtk_popover_set_default_widget(menu, parent);
@@ -223,127 +223,7 @@ namespace xf {
           GTK_PHASE_CAPTURE);
       return;  
     }
-    static GtkPopover *
-    mkTextviewMenu(const char *title, const char *which, const char *whichFg, const char *whichBg){
-      static const char *text[]= { //input
-        _("Select All"), //0x10
-        _("Copy"), // 0x02
-        _("Cut"), // 0x01
-        _("Paste"), // 0x04
- //       _("Colors"), 
-        _("Default"), 
-        _("Foreground color"),
-        _("Background color"), 
-       NULL
-      };
-      static const char *text1[]= { //output
-        _("Clear all"), // 0x02
-        _("Copy"), // 0x02
-        //_("Paste"), // 0x04
-        _("Select All"), //0x10
-        //_("Colors"), 
-        _("Foreground color"),
-        _("Background color"), 
-        _("Default Colors"), 
-        NULL
-      };
-      GHashTable *mHash[3];
-      mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
-      for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
-
-      g_hash_table_insert(mHash[0], _("Clear all"), g_strdup(EDIT_CLEAR));
-      g_hash_table_insert(mHash[1], _("Clear all"), (void *)clear);
-      g_hash_table_insert(mHash[2], _("Clear all"), NULL);
-
-      g_hash_table_insert(mHash[0], _("Cut"), g_strdup(EDIT_CUT));
-      g_hash_table_insert(mHash[1], _("Cut"), (void *)feedClipboard);
-      g_hash_table_insert(mHash[2], _("Cut"), GINT_TO_POINTER(true));
-
-      g_hash_table_insert(mHash[0], _("Copy"), g_strdup(EDIT_COPY));
-      g_hash_table_insert(mHash[1], _("Copy"), (void *)feedClipboard);
-      g_hash_table_insert(mHash[2], _("Copy"), NULL);
-
-      g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
-      g_hash_table_insert(mHash[1], _("Paste"), (void *)pasteClipboard);
-      g_hash_table_insert(mHash[2], _("Paste"), NULL);
-
-      g_hash_table_insert(mHash[0], _("Delete"), g_strdup(EDIT_DELETE));
-      g_hash_table_insert(mHash[1], _("Delete"), (void *)deleteSelectionTxt);
-      g_hash_table_insert(mHash[2], _("Delete"), NULL);
-
-      g_hash_table_insert(mHash[0], _("Select All"), g_strdup(VIEW_MORE));
-      g_hash_table_insert(mHash[1], _("Select All"), (void *)selectAllTxt);
-      g_hash_table_insert(mHash[2], _("Select All"), NULL);
-      
-      g_hash_table_insert(mHash[0], _("Colors"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash[1], _("Colors"), NULL);
-
-      g_hash_table_insert(mHash[0], _("Foreground color"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash[0], _("Background color"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
-
-      g_hash_table_insert(mHash[1], _("Foreground color"), (void *)terminalColors);
-      g_hash_table_insert(mHash[1], _("Background color"), (void *)terminalColors);
-      g_hash_table_insert(mHash[1], _("Default Colors"), (void *)defaultColors);
-
-
-      g_hash_table_insert(mHash[2], _("Foreground color"), (void *)whichFg);
-      g_hash_table_insert(mHash[2], _("Background color"), (void *)whichBg);
-      g_hash_table_insert(mHash[2], _("Default Colors"), (void *)which);
-
-     
-      auto menu = Util::mkMenu(strcmp(which, "output")?text:text1,mHash,_(title));
-
-
-#if 0      
-       GHashTable *mHash2[3];
-      mHash2[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
-      for (int i=1; i<3; i++) mHash2[i] = g_hash_table_new(g_str_hash, g_str_equal);
-      static const char *text2[]= {
-        _("Foreground"),
-        _("Background"), 
-        _("Default"), 
-        NULL
-      };
-
-      g_hash_table_insert(mHash2[0], _("Foreground"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash2[0], _("Background"), g_strdup(DOCUMENT_PROPERTIES));
-      g_hash_table_insert(mHash2[0], _("Default"), g_strdup(DOCUMENT_PROPERTIES));
-
-      g_hash_table_insert(mHash2[1], _("Foreground"), (void *)terminalColors);
-      g_hash_table_insert(mHash2[1], _("Background"), (void *)terminalColors);
-      g_hash_table_insert(mHash2[1], _("Default"), (void *)defaultColors);
-
-
-      g_hash_table_insert(mHash2[2], _("Foreground"), (void *)whichFg);
-      g_hash_table_insert(mHash2[2], _("Background"), (void *)whichBg);
-      g_hash_table_insert(mHash2[2], _("Default"), (void *)which);
-
-      auto subMenu = Util::mkMenu(text2,mHash2, _("Colors"));
-      g_object_set_data(G_OBJECT(subMenu), "menu", menu);
-      auto button = GTK_BUTTON(g_object_get_data(G_OBJECT(menu), _("Colors")));
-      g_object_set_data(G_OBJECT(button), "menu", menu);
-      g_object_set_data(G_OBJECT(button), "subMenu", subMenu);
-
-     // Important: must use both of the following instructions:
-      gtk_popover_set_default_widget(subMenu, GTK_WIDGET(button));
-      gtk_widget_set_parent(GTK_WIDGET(subMenu), GTK_WIDGET(button));
-      g_object_set_data(G_OBJECT(subMenu), "menu", menu);
-
-      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(popup), subMenu);
-
-      for (int i=0; i<3; i++) g_hash_table_destroy(mHash2[i]);
-     
-#endif
-      for (int i=0; i<3; i++) g_hash_table_destroy(mHash[i]);
-      auto vbox = GTK_BOX(g_object_get_data(G_OBJECT(menu), "vbox")); 
-
-      auto scale = newSizeScale(_("Font size"), which);
-      boxPack0(vbox, GTK_WIDGET(scale),  FALSE, TRUE, 0);      
-
-      return menu;
     
-    }
 
   private:
     static void

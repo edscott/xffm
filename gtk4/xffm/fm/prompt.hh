@@ -1,6 +1,7 @@
 #ifndef XF_PROMPT_HH
 #define XF_PROMPT_HH
 #include "run.hh"
+#include "inputMenu.hh"
 namespace xf {
   class Prompt : private UtilBasic {
 
@@ -30,10 +31,13 @@ namespace xf {
         gtk_widget_add_css_class (GTK_WIDGET(input_), "input" );
         gtk_widget_add_css_class (GTK_WIDGET(input_), "inputview" );
    
-        auto title = g_strconcat(_("Input"),_(" TTY"), NULL);
-        auto menu = Util::mkTextviewMenu(title, "input", "inputFg", "inputBg");
-        Util::addMenu(title, menu, GTK_WIDGET(input_));
+
+        auto myInputMenu = new Menu<InputMenu>;
+        auto title = g_strconcat("<span color=\"blue\">",_("Input"),_(" TTY"),  "</span>", NULL);
+        auto inputMenu = myInputMenu->getMenu(title);
         g_free(title);
+        delete myInputMenu;
+        Util::addMenu(inputMenu, GTK_WIDGET(input_));
 
         g_object_set_data(G_OBJECT(input_), "buttonSpace", buttonSpace_);
         g_object_set_data(G_OBJECT(input_), "promptBox", promptBox_);

@@ -3,6 +3,7 @@
 #include "fmbuttonbox.hh"
 #include "pathbar.hh"
 #include "prompt.hh"
+#include "outputMenu.hh"
 
 namespace xf {
 
@@ -31,13 +32,15 @@ namespace xf {
         outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util::newTextView();
 
-        auto title = g_strconcat(_("Output"),_(" TTY"), NULL);
-        auto menu = Util::mkTextviewMenu(title, "output", "outputFg", "outputBg");
-        Util::addMenu(title, menu, GTK_WIDGET(output_));
+        auto myOutputMenu = new Menu<OutputMenu>;
+        auto title = g_strconcat("<span color=\"blue\">", _("Output"),_(" TTY"), "</span>", NULL);
+        auto outputMenu = myOutputMenu->getMenu(title);
         g_free(title);
+        delete myOutputMenu;
+        Util::addMenu(outputMenu, GTK_WIDGET(output_));
        
         g_object_set_data(G_OBJECT(vpane_), "output", output_);
-         g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
+        g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
 
         //auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
         //boxPack0 (vbox, GTK_WIDGET(gridScrolledWindow_), TRUE, TRUE, 0);
@@ -76,7 +79,7 @@ namespace xf {
             // XXX no good if no standard::type
             //if (g_file_info_get_is_symlink(info) )tipo = G_FILE_TYPE_SYMBOLIC_LINK;
           }
-          auto s = g_file_info_get_attribute_as_string (info, "standard::type");
+auto s = g_file_info_get_attribute_as_string (info, "standard::type");
           GFile *z = G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
           DBG("g_file_info_get_attribute_file_path(name)=%s (%s), tipo=%d (%s), ->%s (%p) %s\n",
               
