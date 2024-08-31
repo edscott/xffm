@@ -272,9 +272,6 @@ private:
     }
     
     GtkPopover *mkColorMenu(void){
-#define ICONHASH mHash[0];
-#define CALLBACKHASH mHash[1];
-#define DATAHASH mHash[2];
       GHashTable *mHash[3];
       mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
       for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
@@ -378,7 +375,7 @@ private:
       auto colorButton = Util::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
       auto newMenuButton = Util::newMenuButton("open-menu", NULL);
       auto menu = mkMainMenu();
-      auto colorMenu = mkColorMenu();
+      auto colorMenu = mkColorMenu(); // deprecated
       
       gtk_menu_button_set_popover (colorButton, GTK_WIDGET(colorMenu));  
       gtk_menu_button_set_popover (newMenuButton, GTK_WIDGET(menu));  
