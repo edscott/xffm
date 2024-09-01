@@ -12,7 +12,6 @@ static GHashTable *application_hash_output=NULL;
 static GHashTable *application_hash_output_ext=NULL;*/
 static GHashTable *applicationHash=NULL;
 
-template <class Type>
 class MimeApplication {
     static void freeStrV(void *data){
         auto p = (gchar **)data;
@@ -47,7 +46,7 @@ public:
     add2ApplicationHash(const gchar *type, const gchar *command, gboolean prepend){
         // Always use basic mimetype: avoid hashing alias mimetypes...
         // Suffix hash is currently not enabled.
-        // const gchar *basic_type = MimeSuffix<Type>::getBasicType(type);
+        // const gchar *basic_type = MimeSuffix::getBasicType(type);
         // if (!basic_type) basic_type = type;
         auto basic_type = type;
         pthread_mutex_lock(&mimeAppHashMutex);
@@ -94,7 +93,7 @@ public:
 private:
 
     static gboolean loadAppHash(void){
-        new(Thread<Type>)("MimeApplication::loadAppHash(): loadAppHash_f", loadAppHash_f, NULL);
+        new Thread("MimeApplication::loadAppHash(): loadAppHash_f", loadAppHash_f, NULL);
         return TRUE;
     }
 

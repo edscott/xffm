@@ -7,6 +7,8 @@
 #include <librsvg/rsvg.h>
 #include "xffm.h"
 #include "settings.hh"
+#include "thread.hh"
+#include "mime/mime.hh"
 
 #include "child.hh"
 #include "clipboard.hh"
@@ -19,7 +21,6 @@
 #include "util.hh"
 #include "bash.hh"
 #include "history.hh"
-#include "thread.hh"
 #include "tubo.hh"
 #include "run.hh"
 #include "runbutton.hh"

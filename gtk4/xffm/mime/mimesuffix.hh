@@ -20,7 +20,6 @@ static GHashTable *mimeHashAlias=NULL;
 static GHashTable *mimeHashIcon=NULL;
 
 
-template <class Type>
 class MimeSuffix {
     static const gchar *
     lookupBySuffix(const gchar *file, const gchar *sfx){

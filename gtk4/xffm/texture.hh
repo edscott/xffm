@@ -22,7 +22,7 @@ namespace xf {
         GdkTexture *texture = NULL;
         if (g_file_test(item, G_FILE_TEST_EXISTS)) {
           // both absolute and relative here
-          texture = gdk_texture_new_from_filename(item, &error_);
+          if (Mime::is_image(item)) texture = gdk_texture_new_from_filename(item, &error_);
           if (error_){
             TRACE("Texture::load(): %s\n", error_->message);
             g_error_free(error_);

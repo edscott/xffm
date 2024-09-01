@@ -33,7 +33,6 @@ namespace xf {
 
 static pthread_mutex_t magic_mutex = PTHREAD_MUTEX_INITIALIZER;
 static magic_t cookie;
-template <class Type>
 class MimeMagic {
     //
     // This function may obtain a basic or alias mimetype, but will always

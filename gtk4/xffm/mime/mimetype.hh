@@ -5,7 +5,6 @@
 
 
 namespace xf {
-template <class Type>
 class MimeType {
 #ifdef MIMETYPE_PROGRAM
 private:
@@ -35,7 +34,7 @@ private:
 public:
     static gchar *
     mimeType (const gchar *file){
-        gchar *retval = MimeSuffix<Type>::mimeType(file);
+        gchar *retval = MimeSuffix::mimeType(file);
         if (retval) {
             TRACE("mimeType: %s --> %s\n", file, retval);
             return retval;
@@ -50,9 +49,9 @@ public:
             TRACE("MIMETYPE_PROGRAM mimeType: %s --> %s\n", file, retval);
             if (retval) {
                 if (strchr(file, '.') && strlen(strrchr(file, '.')+1)){
-                    MimeSuffix<Type>::add2sfx_hash(strrchr(file, '.')+1, retval);
+                    MimeSuffix::add2sfx_hash(strrchr(file, '.')+1, retval);
                 } else {
-                    MimeSuffix<Type>::add2sfx_hash(file, retval);
+                    MimeSuffix::add2sfx_hash(file, retval);
                 }
             }
         } else retval = g_strdup("unknown mimetype");
