@@ -55,6 +55,10 @@ namespace xf {
       auto child = getCurrentChild();
       return GTK_BOX(g_object_get_data(G_OBJECT(child), "pathbar"));
     }
+    static GtkScrolledWindow *getGridScrolledWindow(void){
+      auto child = getCurrentChild();
+      return GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
+    }
 
 
 #define MAX_PATH_LABEL 40

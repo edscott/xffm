@@ -2,7 +2,7 @@
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
 namespace xf {
-  class Util : public UtilBasic, public Workdir {
+  class Util : public UtilBasic, public Workdir<GridView> {
   public:
       
   static

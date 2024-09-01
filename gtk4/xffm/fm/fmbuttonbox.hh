@@ -115,8 +115,8 @@ private:
 
       for (int i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(notebook, i);
-        auto path = Workdir::getWorkdir(child);
-        Workdir::setWorkdir(path, child);
+        auto path = Util::getWorkdir(child);
+        Util::setWorkdir(path, child);
         // not necesary. may cause segv:
         //auto gridScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
         // not necesary. may cause segv:
@@ -130,7 +130,7 @@ private:
     goHome(GtkButton *self, void *data){
       auto child = Util::getCurrentChild();
       
-      Workdir::updateGridView(child, g_get_home_dir());
+      Util::setWorkdir(g_get_home_dir());
         
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
