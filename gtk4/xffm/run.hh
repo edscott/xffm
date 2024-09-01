@@ -452,7 +452,7 @@ public:
         if (showTextPane) Util::showText(textview);
         auto currentDir = g_get_current_dir();
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(textview), "child"));
-        auto wd = Util::getWorkdir(child);
+        auto wd = Child::getWorkdir(child);
 #ifdef WINDOWS_COMPILE
         g_chdir(wd);
 #else

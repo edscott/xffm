@@ -3,6 +3,15 @@
 namespace xf {
   class Child {
     public:
+    static const gchar *getWorkdir(GtkWidget *child){
+      TRACE("getWorkdir...\n");
+      if (!MainWidget) return NULL;
+      return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
+    }
+    static const gchar *getWorkdir(void){
+      auto child =  Child::getCurrentChild();
+      return getWorkdir(child);
+    }
     static
     void setWindowTitle(GtkWidget *child){
         auto path = (const char *) g_object_get_data(G_OBJECT(child), "path");

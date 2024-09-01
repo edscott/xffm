@@ -44,7 +44,7 @@ public:
     on_new_page(GtkButton *button, void *data){
         MainWindow *w = (MainWindow *)data;
         auto child = Util::getCurrentChild();
-        w->addPage(Util::getWorkdir(child));
+        w->addPage(Child::getWorkdir(child));
     }
     static void
     on_zap_page(GtkButton *button, void *data){

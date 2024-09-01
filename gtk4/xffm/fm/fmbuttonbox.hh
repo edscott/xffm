@@ -115,7 +115,7 @@ private:
 
       for (int i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(notebook, i);
-        auto path = Util::getWorkdir(child);
+        auto path = Child::getWorkdir(child);
         Util::setWorkdir(path, child);
         // not necesary. may cause segv:
         //auto gridScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
@@ -137,10 +137,10 @@ private:
       const char *v[]={"cd", NULL};
       auto retval = Util::cd((const gchar **)v, child);
 
-      auto path = Util::getWorkdir(child);
+      auto path = Child::getWorkdir(child);
       // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
       if (retval){
-        //Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir(child)));
+        //Util::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
         if (!History::add("cd")) DBG("History::add(%s) failed\n", "cd" );
       } else {
         Util::print(output, g_strdup_printf(_("failed to chdir to $HOME")));
@@ -152,7 +152,7 @@ private:
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Util::getWorkdir(childWidget);
+      auto workDir = Child::getWorkdir(childWidget);
         TRACE ("openTerminal::childWidget= %p, buttonSpace = %p workdir=%s\n", 
             childWidget, buttonSpace, workDir);
 
@@ -168,7 +168,7 @@ private:
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Util::getWorkdir(childWidget);
+      auto workDir = Child::getWorkdir(childWidget);
 
       auto find = g_strdup_printf("xffm --find %s", workDir);
       pid_t childPid = Run::shell_command(output, find, false, false);
@@ -183,7 +183,7 @@ private:
     upImage (GtkButton *self, void *data){
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto workDir = Util::getWorkdir(childWidget);
+      auto workDir = Child::getWorkdir(childWidget);
 
       auto pixels = Settings::getInteger("ImageSize", workDir);
       if (pixels < 48) pixels = 48;
@@ -204,7 +204,7 @@ private:
     downImage (GtkButton *self, void *data){
       auto childWidget =Util::getCurrentChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto workDir = Util::getWorkdir(childWidget);
+      auto workDir = Child::getWorkdir(childWidget);
 
       auto pixels = Settings::getInteger("ImageSize", workDir);
       if (pixels  > 384)  pixels = 384;

@@ -18,6 +18,7 @@
 #include "bookmarks.hh"
 #include "workdir.hh"
 
+#include "print.hh"
 #include "util.hh"
 #include "bash.hh"
 #include "history.hh"

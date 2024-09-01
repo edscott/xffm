@@ -63,7 +63,7 @@ namespace xf {
       TRACE("run: %s\n", command);
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
         pid_t childPID = 0;
-        auto workdir = Util::getWorkdir(child);
+        auto workdir = Child::getWorkdir(child);
         if (!command || !strlen(command)) return 0;
         // escape all quotes
         gchar *ncommand;
@@ -94,7 +94,7 @@ namespace xf {
               auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
               auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
               if (Util::cd((const char **)w, child)){
-                auto path = Util::getWorkdir(child);
+                auto path = Child::getWorkdir(child);
                 setWindowTitle(child);
                 // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
               }
@@ -127,7 +127,7 @@ namespace xf {
             childPID = Run::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) {
               runButton = new (RunButton);
-              runButton->init(runButton, *c, childPID, output, Util::getWorkdir(child), buttonSpace);
+              runButton->init(runButton, *c, childPID, output, Child::getWorkdir(child), buttonSpace);
             }
             TRACE("command loop...\n");
 //            if (withRunButton) newRunButton(*c, childPID);
@@ -156,7 +156,7 @@ namespace xf {
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       if (strcmp(text, "pwd")) return false;
-      auto workdir = Util::getWorkdir(child);
+      auto workdir = Child::getWorkdir(child);
       Util::print(output, g_strdup_printf("$ %s\n", text));
       Util::print(output, g_strdup(workdir));
       Util::print(output, g_strdup("\n"));
@@ -184,11 +184,11 @@ namespace xf {
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto retval = Util::cd((const gchar **)v, child);
-      auto path = Util::getWorkdir(child);
+      auto path = Child::getWorkdir(child);
       // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
       Util::print(output, g_strdup_printf("$ %s\n", text));
       if (retval){
-        Util::print(output, g_strdup_printf("%s\n", Util::getWorkdir(child)));
+        Util::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
         if (!History::add(text)) DBG("History::add(%s) failed\n", text );
       } else {
         Util::print(output, g_strdup_printf(_("failed to chdir to %s"), v[1]));

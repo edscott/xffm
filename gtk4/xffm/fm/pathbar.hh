@@ -69,17 +69,17 @@ namespace xf {
         auto motion = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
-        g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (Util::pathbar_white), (void *)pathbar_);
-        g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (Util::pathbar_blue), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (UtilPathbar::pathbar_white), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (UtilPathbar::pathbar_blue), (void *)pathbar_);
   
         auto gesture1 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Util::pathbar_go), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
         
         auto gesture3 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture3),3);
-        g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (Util::pathbar_go), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (Workdir::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture3));
         
 
