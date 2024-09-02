@@ -10,10 +10,6 @@
 
 
 namespace xf {
-    
-// For starters, we need mime_type() and mime_file(), 
-
-
 class Mime {
 public:
 

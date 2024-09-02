@@ -128,13 +128,14 @@ private:
     
     static void
     goHome(GtkButton *self, void *data){
+      //DBG("goHome....\n");
       auto child = Util::getCurrentChild();
       
-      Util::setWorkdir(g_get_home_dir());
+      //Util::setWorkdir(g_get_home_dir());
         
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
-      const char *v[]={"cd", NULL};
+      const char *v[]={"cd", g_get_home_dir(), NULL};
       auto retval = Util::cd((const gchar **)v, child);
 
       auto path = Child::getWorkdir(child);

@@ -14,15 +14,71 @@ namespace xf {
         } else return NULL;
         return GDK_PAINTABLE(texture);
       }
+
+      static void *preview(void *data){
+        auto arg = (void **)data;
+        auto path = (char *)arg[0];
+        auto imageBox = GTK_BOX(arg[1]);
+        auto image = GTK_IMAGE(arg[2]);
+        auto serial = GPOINTER_TO_INT(arg[3]);
+        auto size = GPOINTER_TO_INT(arg[4]);
+        TRACE("Texture::preview: %s, box=%p, image=%p, serial=%d\n", 
+            path,imageBox, image, serial);
+
+        auto paintable = loadPath(path);
+        // context function...
+        g_free(path);
+        g_free(arg);
+        // replace image in main context
+        void *replaceArg[] ={
+          (void *) paintable,
+          (void *) imageBox,
+          (void *) image,
+          GINT_TO_POINTER(serial),
+          GINT_TO_POINTER(size),
+          NULL
+        };
+        TRACE("Texture::preview: calling replace_f\n");
+
+        auto retval = UtilBasic::context_function(replace_f, replaceArg);
+        TRACE("UtilBasic::context_function(replace_f) retval = %d\n", GPOINTER_TO_INT(retval));
+
+        return NULL;
+      }
+      
+      static void *replace_f(void *data){
+        auto replaceArg = (void **)data;
+        auto paintable = GDK_PAINTABLE(replaceArg[0]);
+        auto imageBox = GTK_BOX(replaceArg[1]);
+        auto image = GTK_IMAGE(replaceArg[2]);
+        auto serial = GPOINTER_TO_INT(replaceArg[3]);
+        auto size = GPOINTER_TO_INT(replaceArg[4]);
+
+        TRACE("replace_f in main context: paintable=%p, box=%p, image=%p, serial=%d\n", 
+            paintable, imageBox, image, serial);
+
+        if (serial != Child::getSerial()){
+          DBG("replace_f serial mismatch %d != %d\n", serial, Child::getSerial());
+          return NULL;
+        }
+
+        gtk_box_remove(imageBox, GTK_WIDGET(image));
+        GtkWidget *preview = gtk_image_new_from_paintable(paintable);
+        gtk_widget_set_size_request(preview, size, size);
+        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(preview), FALSE, FALSE, 0);    
+        return  GINT_TO_POINTER(serial);
+      }
+
+
+
       static 
-      GdkPaintable *load(const char *item){
+      GdkPaintable *loadPath(const char *path){
         GError *error_ = NULL;
-        if (!item) return NULL;
+        if (!path) return NULL;
         
         GdkTexture *texture = NULL;
-        if (g_file_test(item, G_FILE_TEST_EXISTS)) {
-          // both absolute and relative here
-          if (Mime::is_image(item)) texture = gdk_texture_new_from_filename(item, &error_);
+        if (g_file_test(path, G_FILE_TEST_EXISTS)) {
+          texture = gdk_texture_new_from_filename(path, &error_);
           if (error_){
             TRACE("Texture::load(): %s\n", error_->message);
             g_error_free(error_);
@@ -32,6 +88,7 @@ namespace xf {
         }
         return NULL;
       }
+      
      static 
       GdkPaintable *loadIconName(const char *item){
         if (!item) return NULL;      

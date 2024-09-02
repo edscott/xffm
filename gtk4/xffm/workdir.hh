@@ -8,6 +8,8 @@ namespace xf {
     private:
       static void  updateGridView(const char *path){
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
+        TRACE("update updateGridView\n");
+        Child::incrementSerial();
         auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         auto gridScrolledWindow = Child::getGridScrolledWindow();
         gtk_scrolled_window_set_child(gridScrolledWindow, view);

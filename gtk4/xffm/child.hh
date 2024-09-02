@@ -3,6 +3,16 @@
 namespace xf {
   class Child {
     public:
+    static const int getSerial(void){
+      auto child =  Child::getCurrentChild();
+      return GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
+    }
+    static void incrementSerial(void){
+      auto child =  Child::getCurrentChild();
+      auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
+      g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));
+    }
+
     static const gchar *getWorkdir(GtkWidget *child){
       TRACE("getWorkdir...\n");
       if (!MainWidget) return NULL;

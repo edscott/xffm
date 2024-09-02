@@ -126,30 +126,38 @@ namespace xf {
         for (auto l=list; l && l->data; l=l->next){
           gtk_widget_unparent(GTK_WIDGET(l->data));
         }
+
+        auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        g_object_set_data(G_OBJECT(box), "imageBox", imageBox);
+        gtk_widget_add_css_class(imageBox, "gridviewBox");
+
+        auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_widget_add_css_class(labelBox, "gridviewBox");
+        g_object_set_data(G_OBJECT(box), "labelBox", labelBox);
         
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
         auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
 
         
-        int scaleFactor = 1;
+        auto type = g_file_info_get_file_type(info);
         char *name = g_strdup(g_file_info_get_name(info));
-        auto path = g_file_get_path(file);
+        auto size = Settings::getInteger("xfterm", "iconsize");
+        GdkPaintable *texture = NULL;
+        /*
         auto texture = Texture::load(path);
         g_free(path);
         if (texture) scaleFactor = 2;
+         */
         if (!texture) {
-          // FIXME: this only if not cairo modified ;
           texture = Texture::load(info);
         }
         // XXX: put all icons in hash (debug)
-        Texture::findIconPath(info);
+        //Texture::findIconPath(info);
         
         /*if (!texture) {
             TRACE("Iconmview::load(): Texture::load(info) == NULL\n");
         }*/
           
-        auto size = Settings::getInteger("xfterm", "iconsize");
-        auto type = g_file_info_get_file_type(info);
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
         if (name[0] == '.' && name[1] != '.') {
 
@@ -175,9 +183,12 @@ namespace xf {
         if (type == G_FILE_TYPE_DIRECTORY ) {
           DirectoryClass::addDirectoryTooltip(image, info);
         }
-
-
+        auto path = g_file_get_path(file);
+        auto isImage = (type == G_FILE_TYPE_REGULAR && Mime::is_image(path));
+        g_free(path);
         if (size < 0) size = 48;
+        int scaleFactor = 1;
+        if (isImage) scaleFactor = 2;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
 
    
@@ -193,10 +204,6 @@ namespace xf {
         gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);
 
-        auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        gtk_widget_add_css_class(imageBox, "gridviewBox");
-        auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        gtk_widget_add_css_class(labelBox, "gridviewBox");
 
         UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
         UtilBasic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
@@ -216,6 +223,22 @@ namespace xf {
         addMotionController(labelBox);
         addMotionController(imageBox);
         addGestureClick(imageBox, object, gridViewClick_f);
+
+        // Now for replacement of image icons for previews
+        if (isImage){
+          auto path = g_file_get_path(file);
+          // path, imageBox, image, serial
+          auto arg = (void **)calloc(5, sizeof(void *));
+          arg[0] = (void *)path;
+          arg[1] = imageBox;
+          arg[2] = image;
+          arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
+          arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
+                                       
+          pthread_t thread;
+          pthread_create(&thread, NULL, Texture::preview, (void *)arg);
+          pthread_detach(thread);
+        }
 
 /*
         char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
