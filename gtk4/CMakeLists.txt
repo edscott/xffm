@@ -42,6 +42,7 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(HISTORY history)
 find_package(X11 REQUIRED)
 find_package(libRSVG  REQUIRED)
+find_package(libMagic  REQUIRED)
 #set(ENV{PKG_CONFIG_PATH} "/opt/lib/pkgconfig")
 find_package(GLIB 2.56.2 REQUIRED)
 #find_package(GTK4 3.24.0 REQUIRED)
@@ -63,6 +64,6 @@ configure_file(
     )
 
 add_subdirectory(xffm)
-#add_subdirectory(share)
+add_subdirectory(share)
 
 

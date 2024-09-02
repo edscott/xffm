@@ -90,8 +90,8 @@
 #define WINDOW_CLOSE "window-close-symbolic"
 #define WINDOW_SHUTDOWN "system-shutdown-symbolic"
 #define APPLICATION_X_EXECUTABLE "application-x-executable-symbolic"
-#define GO_UP_SYMBOLIC "up"
-#define GO_UP "up"
+#define GO_UP_SYMBOLIC "go-up"
+#define GO_UP "go-up"
 #define PROCESS_STOP "redball"
 
 

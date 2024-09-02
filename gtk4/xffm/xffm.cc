@@ -16,6 +16,7 @@
 
 #include "utilpathbar.hh"
 #include "bookmarks.hh"
+#include "fm/localdir.hh"
 #include "workdir.hh"
 
 #include "print.hh"

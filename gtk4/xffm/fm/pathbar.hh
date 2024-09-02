@@ -3,6 +3,8 @@
 namespace xf {
   class Pathbar : public UtilPathbar
   {
+    using Workdir_c = Workdir;
+//    using Workdir_c = Workdir<GridView, UtilPathbar>;
     GtkBox *pathbar_;
     gchar *path_;
     GtkWidget *back_;
@@ -74,12 +76,12 @@ namespace xf {
   
         auto gesture1 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir::pathbar_go), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir_c::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
         
         auto gesture3 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture3),3);
-        g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (Workdir::pathbar_go), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (Workdir_c::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture3));
         
 

@@ -5,30 +5,32 @@
 
 
 namespace xf {
-#ifdef HAVE_LIBMAGIC
-// see "man libmagic" for explantion of flags
-// Since MAGIC_NO_CHECK_ENCODING is not in file 4.x, we take care
-// of that here.
 #ifndef MAGIC_MIME_TYPE
-#define MAGIC_MIME_TYPE  0
+# define MAGIC_MIME_TYPE  0
 #endif
+
 #ifndef MAGIC_NO_CHECK_APPTYPE
-#define MAGIC_NO_CHECK_APPTYPE  0
+# define MAGIC_NO_CHECK_APPTYPE  0
 #endif
+
 #ifndef MAGIC_NO_CHECK_ENCODING
-#define MAGIC_NO_CHECK_ENCODING  0
+# define MAGIC_NO_CHECK_ENCODING  0
 #endif
+
 #ifndef MAGIC_SYMLINK
-#define MAGIC_SYMLINK  0
+# define MAGIC_SYMLINK  0
 #endif
+
 #ifndef MAGIC_NO_CHECK_COMPRESS
-#define MAGIC_NO_CHECK_COMPRESS  0
+# define MAGIC_NO_CHECK_COMPRESS  0
 #endif
+
 #ifndef MAGIC_NO_CHECK_TAR
-#define MAGIC_NO_CHECK_TAR  0
+# define MAGIC_NO_CHECK_TAR  0
 #endif
+
 #ifndef MAGIC_PRESERVE_ATIME
-#define  MAGIC_PRESERVE_ATIME 0
+# define  MAGIC_PRESERVE_ATIME 0
 #endif
 
 static pthread_mutex_t magic_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -122,6 +124,5 @@ public:
     }
 
 };
-#endif
 }
 #endif

@@ -1,8 +1,8 @@
 #ifndef XF_MIME_HH
 #define XF_MIME_HH
+#include "magic.h"
 #include "mimesuffix.hh"
 #include "mimemagic.hh"
-#include "mimetype.hh"
 #include "mimeapplication.hh"
 
 // We can use either libmagic or perl mimetype, depending on configuration
@@ -21,21 +21,21 @@ public:
     if (!path || !g_file_test(path, G_FILE_TEST_IS_REGULAR)) return false;
 
     auto mimetype = mimeType(path);
-    //bool want_magic = (!mimetype || strcmp(mimetype, _("unknown"))==0);
-    //if (want_magic) {
-        // FIXME mimetype = rfm_natural(RFM_MODULE_DIR, "mime", en->path, "mime_magic");
-    //}
+    bool want_magic = (!mimetype || strcmp(mimetype, _("unknown"))==0);
+    if (want_magic) {
+      mimetype = MimeMagic::mimeMagic(path);
+    }
     if (!mimetype) mimetype = _("unknown");
       
     TRACE("mimetype:: %s --> %s\n", path, mimetype);
     if (strstr(mimetype, "image")) return true;
-    //bool retval = mimetype_is_image(mimetype);
-    return false;
+    bool retval = mimetype_is_image(mimetype);
+    return retval;
 
   }
 
 private:
-#if 0
+
   static gint
   mimetype_is_image(const gchar *mimetype){
       static GSList *pix_mimetypes = NULL;
@@ -46,7 +46,7 @@ private:
           GSList *list = pix_formats;
           for(; list && list->data; list = list->next) {
               gchar **pix_mimetypes_p;
-              GdkPixbufFormat *fmt = list->data;
+              auto fmt = (GdkPixbufFormat *)list->data;
               // This gdk call is thread safe.
               pix_mimetypes_p = gdk_pixbuf_format_get_mime_types (fmt);// check OK
               pix_mimetypes = g_slist_prepend(pix_mimetypes, pix_mimetypes_p);
@@ -57,9 +57,9 @@ private:
       /* check for image support types */
       GSList *list = pix_mimetypes;
       for(; list && list->data; list = list->next) {
-        gchar **pix_mimetypes_p = list->data;
+        auto pix_mimetypes_p = (gchar **)list->data;
         for(; pix_mimetypes_p && *pix_mimetypes_p; pix_mimetypes_p++) {
-            NOOP(stderr, "allowable pix_format=%s --> %s\n", *pix_mimetypes_p, mimetype);
+            TRACE(stderr, "allowable pix_format=%s --> %s\n", *pix_mimetypes_p, mimetype);
             if(g_ascii_strcasecmp (*pix_mimetypes_p, mimetype) == 0) {
           return 1;
             }
@@ -67,20 +67,12 @@ private:
       }
       return 0;
   }
-#endif
+
 
 
     static gchar *
     mimeMagic (const gchar *file){
-#ifdef MIMETYPE_PROGRAM
-        return MimeType::mimeMagic(file);
-#else
-# ifdef HAVE_LIBMAGIC
         return MimeMagic::mimeMagic(file);
-# else
-        return mimeType(file);
-# endif
-#endif
     }
 
     static gchar *
@@ -90,40 +82,12 @@ private:
             TRACE("mimeType: %s --> %s\n", file, retval);
             return retval;
         }
-#ifdef MIMETYPE_PROGRAM
-        return MimeType::mimeType(file);
-#else
-# ifdef HAVE_LIBMAGIC
         return MimeMagic::mimeMagic(file);
-# else
-
-        errno=0;
-        struct stat st;
-        if (stat(file, &st) < 0) {
-            DBG("mime.hh::mimeType(): stat %s (%s)\n",
-                file, strerror(errno));
-            errno=0;
-            return g_strdup("inode/unknown");
-        }
-        gchar *r = mimeType(file, &st);
-        return r;
-        
-# endif
-#endif
    } 
 
     static gchar *
     mimeFile (const gchar *file){
-#ifdef MIMETYPE_PROGRAM
-// XXX: Could use language code -l code, --language=code 
-        return MimeType::mimeFile(file);
-#else
-# ifdef HAVE_LIBMAGIC
         return MimeMagic::mimeFile(file);
-# else
-        return NULL;
-# endif
-#endif
    } 
    
 public: 

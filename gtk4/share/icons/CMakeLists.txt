@@ -1,3 +1,4 @@
 #set(ICONS redball.png greenball.png grayball.png run96.png)
-add_subdirectory(scalable)
+add_subdirectory(emblems)
+add_subdirectory(stock)
 

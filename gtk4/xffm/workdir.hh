@@ -3,14 +3,22 @@
 #include "texture.hh"
 #include "fm/gridview.hh"
 namespace xf {
-  //template <class GridviewClass>
+  //template <class GridviewClass, class PathbarClass>
   class Workdir  {
     private:
       static void  updateGridView(const char *path){
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
-        auto view = GridView::getGridView(path, (void *)gridViewClick);
+        auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         auto gridScrolledWindow = Child::getGridScrolledWindow();
         gtk_scrolled_window_set_child(gridScrolledWindow, view);
+      }
+
+      static void  updatePathbar(bool addHistory, void *pathbar_go){
+        UtilPathbar::updatePathbar(addHistory, pathbar_go);
+      }
+      static void  updatePathbar(const gchar *path, GtkBox *pathbar, 
+          bool addHistory, void *pathbar_go){
+        UtilPathbar::updatePathbar(path, pathbar, addHistory, pathbar_go);
       }
 
     public:
@@ -28,7 +36,7 @@ namespace xf {
         g_free(wd);
         g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       }
-      UtilPathbar::updatePathbar(false, (void *)pathbar_go);
+      updatePathbar(false, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -38,7 +46,7 @@ namespace xf {
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
-      UtilPathbar::updatePathbar(true, (void *)pathbar_go);
+      updatePathbar(true, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -48,7 +56,7 @@ namespace xf {
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
-      UtilPathbar::updatePathbar(updateHistory, (void *)pathbar_go);
+      updatePathbar(updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -60,7 +68,7 @@ namespace xf {
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       UtilBasic::setWindowTitle(child);
-      UtilPathbar::updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
+      updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -96,7 +104,7 @@ namespace xf {
       TRACE("gestureClick; path=%p\n", path);
       TRACE("click on %s\n", path);
       auto type = g_file_info_get_file_type(info);
-      if ((type == G_FILE_TYPE_DIRECTORY )||(GridView::symlinkToDir(info, type))) {
+      if ((type == G_FILE_TYPE_DIRECTORY )||(LocalDir::symlinkToDir(info, type))) {
         TRACE("Go to action...\n");
         auto child = UtilBasic::getCurrentChild();
         setWorkdir(path);

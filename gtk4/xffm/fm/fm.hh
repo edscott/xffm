@@ -38,15 +38,13 @@ public:
       TRACE("resourcepath = \"%s\"\n", *p);
     }*/
 
-    auto resource_path = g_build_filename(PREFIX, "share", "icons", "xffm+", NULL);
+    auto resource_path = g_build_filename(PREFIX, "share", "icons", "hicolor", "scalable", NULL);
     if (g_file_test(resource_path, G_FILE_TEST_IS_DIR)) {
       gtk_icon_theme_add_resource_path(icon_theme, resource_path);// not always needed, maybe sometimes...
  
       const gchar *subdirs[] = {
-                "scalable",
-                "96x96",
-                "48x48",
-                "24x24",
+                "emblems",
+                "stock",
                 NULL
       };
       for (auto p=subdirs; p && *p; p++){

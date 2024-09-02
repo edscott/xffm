@@ -85,12 +85,15 @@ namespace xf {
 #endif  
     static const char *locate(const char *name){
       char *tname = gtk_icon_theme_get_theme_name(icon_theme);
-      const char *dirs[] = {"places", "mimetypes", "status", "devices", NULL};
+      const char *dirs[] = {"places", "mimetypes", "status", "devices", "emblems", "stock", NULL}; 
       for (auto p=dirs; p && *p; p++){
         auto *path = g_strdup_printf("/usr/share/icons/%s/scalable/%s/%s.svg", tname, *p, name);
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (const char *)path;
         g_free(path);
         path = g_strdup_printf("/usr/share/icons/hicolor/scalable/%s/%s.svg", *p, name);
+        if (g_file_test(path, G_FILE_TEST_EXISTS)) return (const char *)path;
+        g_free(path);
+        path = g_strdup_printf("%s/share/icons/hicolor/scalable/%s/%s.svg",PREFIX, *p, name);
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (const char *)path;
         g_free(path);
       }
