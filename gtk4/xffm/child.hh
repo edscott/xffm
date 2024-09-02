@@ -3,6 +3,18 @@
 namespace xf {
   class Child {
     public:
+    static void setGridview(GtkWidget *view){
+      auto child =  Child::getCurrentChild();
+      auto gridScrolledWindow = getGridScrolledWindow();
+      gtk_scrolled_window_set_child(gridScrolledWindow, view);
+      g_object_set_data(G_OBJECT(child), "gridview", view);
+    }
+
+    static void *getGridview(void){
+      auto child =  Child::getCurrentChild();
+      return g_object_get_data(G_OBJECT(child), "gridview");
+    }
+
     static const int getSerial(void){
       auto child =  Child::getCurrentChild();
       return GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));

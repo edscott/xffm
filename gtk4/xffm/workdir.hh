@@ -11,8 +11,7 @@ namespace xf {
         TRACE("update updateGridView\n");
         Child::incrementSerial();
         auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
-        auto gridScrolledWindow = Child::getGridScrolledWindow();
-        gtk_scrolled_window_set_child(gridScrolledWindow, view);
+        Child::setGridview(view);
       }
 
       static void  updatePathbar(bool addHistory, void *pathbar_go){

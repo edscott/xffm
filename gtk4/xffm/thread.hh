@@ -10,6 +10,14 @@
 #endif
  
 
+static GList *threadPool = NULL;
+pthread_mutex_t threadPoolMutex = PTHREAD_MUTEX_INITIALIZER;
+
+#define MAX_THREADS 16
+      typedef struct threadInfo_t {
+        void* (*function)(void*);
+        void *data;
+      } threadInfo_t;
 
 namespace xf {
     gint thread_count = 0;
@@ -21,6 +29,62 @@ namespace xf {
 #endif
 
 class Thread {
+
+public:
+
+
+      static void threadPoolAdd(void* (*function)(void*), void *data){
+        auto info = (threadInfo_t *)calloc(1, sizeof(threadInfo_t));
+        info->function = function;
+        info->data = data;
+        pthread_mutex_lock(&threadPoolMutex);
+        threadPool = g_list_prepend(threadPool, info);
+        pthread_mutex_unlock(&threadPoolMutex);
+      }
+
+      static void *threadPoolRun(void *data){
+        TRACE("Thread::threadPoolRun...\n");
+        int active = 0;
+        pthread_t threads[MAX_THREADS];
+        threadInfo_t *info[MAX_THREADS];
+          
+        while (1){
+          usleep(5);
+          time_t sec = time(NULL);
+          while (active < MAX_THREADS){
+        pthread_mutex_lock(&threadPoolMutex);
+            if (g_list_length(threadPool)) {
+                auto last = g_list_last(threadPool);
+                info[active] = (threadInfo_t *)last->data;
+                threadPool = g_list_remove(threadPool, info[active]);
+                pthread_create(threads+active, NULL, 
+                    info[active]->function, 
+                    info[active]->data);
+                active++;
+                TRACE("thread %d spawned...\n", active);
+            }
+        pthread_mutex_unlock(&threadPoolMutex);
+            if (time(NULL) - sec > 0 && active > 0){
+              sec = time(NULL);
+              void *retval;
+              pthread_join(threads[active - 1], &retval);
+              TRACE("thread %d joined...\n", active);
+              g_free(info[active - 1]);
+              active--;
+            }
+          }
+          
+          while (active > 0){
+            void *retval;
+            pthread_join(threads[active - 1], &retval);
+            TRACE("thread %d joined...\n", active);
+            g_free(info[active - 1]);
+            active--;
+          }
+        }
+      }
+
+private:
 
 pthread_t *runThread_;
 pthread_t *waitThread_;

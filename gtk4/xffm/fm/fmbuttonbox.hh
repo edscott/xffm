@@ -84,10 +84,20 @@ namespace xf {
         return hbox;
     }
 private:
-     
+      static
+      void addMotionController(GtkWidget  *widget){
+        auto controller = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(widget), controller);
+        g_signal_connect (G_OBJECT (controller), "enter", 
+            G_CALLBACK (Texture::redlight), NULL);
+        g_signal_connect (G_OBJECT (controller), "leave", 
+            G_CALLBACK (Texture::greenlight), NULL);
+    }
+    
     GtkScale *newSizeScale(const gchar *tooltipText){
         double value;
-        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 96.0, 12.0));
+        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 768.0, 12.0));
         // Load saved value fron xffm+/settings.ini file (if any)
         auto size = Settings::getInteger("xfterm", "iconsize");
         if (size < 0) value = 48; else value = size;
@@ -101,6 +111,7 @@ private:
         //gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
         Util::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
         g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize), NULL);
+        addMotionController(GTK_WIDGET(size_scale));
         return size_scale;
     }
     static void
@@ -117,12 +128,7 @@ private:
         auto child = gtk_notebook_get_nth_page(notebook, i);
         auto path = Child::getWorkdir(child);
         Util::setWorkdir(path, child);
-        // not necesary. may cause segv:
-        //auto gridScrolledWindow = GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
-        // not necesary. may cause segv:
-        //auto old = gtk_scrolled_window_get_child(gridScrolledWindow);
-        //gtk_widget_unparent(old);
-        
+               
       }
     }
     

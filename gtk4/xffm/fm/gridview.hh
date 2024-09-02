@@ -225,7 +225,22 @@ namespace xf {
         addGestureClick(imageBox, object, gridViewClick_f);
 
         // Now for replacement of image icons for previews
-        if (isImage){
+
+        if (isImage && Texture::previewOK()){ // thread number limited.
+          auto path = g_file_get_path(file);
+          // path, imageBox, image, serial
+          auto arg = (void **)calloc(6, sizeof(void *));
+          arg[0] = (void *)path;
+          arg[1] = imageBox;
+          arg[2] = image;
+          arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
+          arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
+          arg[5] = Child::getGridview(); // in main context
+          Thread::threadPoolAdd(Texture::preview, (void *)arg);
+        }
+
+/*      
+        if (isImage){ // No limit on thread number
           auto path = g_file_get_path(file);
           // path, imageBox, image, serial
           auto arg = (void **)calloc(5, sizeof(void *));
@@ -239,7 +254,7 @@ namespace xf {
           pthread_create(&thread, NULL, Texture::preview, (void *)arg);
           pthread_detach(thread);
         }
-
+*/
 /*
         char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
         gtk_label_set_markup( GTK_LABEL( label ), name );
@@ -264,9 +279,6 @@ namespace xf {
         
 
       }
-
-
-
 
 
     private:

@@ -1,8 +1,26 @@
 #ifndef XF_TEXTURE_HH
 #define XF_TEXTURE_HH
+static bool greenLightPreview = true;
 namespace xf {
     class Texture {
       public:
+      static bool previewOK(void) {return  greenLightPreview;} 
+      static gboolean redlight(GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data){
+        TRACE("redlight...\n");
+        greenLightPreview = false;
+        return FALSE;
+      }  
+      static gboolean greenlight(GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data){
+        TRACE("greenlight...\n");
+        greenLightPreview = true;
+        return FALSE;
+      }  
       static
       GdkPaintable *load(GFileInfo *info){
         auto gIcon = g_file_info_get_icon(info);
@@ -22,6 +40,7 @@ namespace xf {
         auto image = GTK_IMAGE(arg[2]);
         auto serial = GPOINTER_TO_INT(arg[3]);
         auto size = GPOINTER_TO_INT(arg[4]);
+        auto gridview = arg[5];
         TRACE("Texture::preview: %s, box=%p, image=%p, serial=%d\n", 
             path,imageBox, image, serial);
 
@@ -36,6 +55,7 @@ namespace xf {
           (void *) image,
           GINT_TO_POINTER(serial),
           GINT_TO_POINTER(size),
+          gridview,
           NULL
         };
         TRACE("Texture::preview: calling replace_f\n");
@@ -53,6 +73,7 @@ namespace xf {
         auto image = GTK_IMAGE(replaceArg[2]);
         auto serial = GPOINTER_TO_INT(replaceArg[3]);
         auto size = GPOINTER_TO_INT(replaceArg[4]);
+        auto gridview = replaceArg[5];
 
         TRACE("replace_f in main context: paintable=%p, box=%p, image=%p, serial=%d\n", 
             paintable, imageBox, image, serial);
@@ -61,6 +82,7 @@ namespace xf {
           DBG("replace_f serial mismatch %d != %d\n", serial, Child::getSerial());
           return NULL;
         }
+        // no work if (gridview != Child::getGridview()) return NULL;
 
         gtk_box_remove(imageBox, GTK_WIDGET(image));
         GtkWidget *preview = gtk_image_new_from_paintable(paintable);
