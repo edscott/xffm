@@ -218,6 +218,36 @@ namespace xf {
     }
     
     public:
+
+    static void 
+    addLabelTooltip(GtkWidget *label, const char *path){
+      auto name = g_path_get_basename(path);
+      auto fileInfo = UtilBasic::fileInfo(path);
+      auto mimetype = MimeMagic::mimeMagic(path); 
+      char *hidden = NULL;
+      char *backup = NULL;
+      if (name[0] == '.' && name[1] != '.'){
+        hidden = g_strconcat("\n", _("Hidden file"), NULL);
+      } else hidden = g_strdup("");
+      if (UtilBasic::backupType(path)){
+        backup = g_strconcat("\n", _("Backup file"), NULL);
+      } else backup = g_strdup("");
+
+      auto markup = g_strconcat("<span color=\"blue\"><b>", name, "</b></span>\n",
+          _("Type:")," ",fileInfo, "\n", 
+          _("Mimetype:")," ",mimetype,  
+          hidden,backup,
+          NULL);
+
+      gtk_widget_set_tooltip_markup(label, markup);
+      g_free(fileInfo);
+      g_free(mimetype);
+      g_free(markup);
+      g_free(name);
+      g_free(hidden);
+      g_free(backup);
+    }
+    
     static void
     addDirectoryTooltip(GtkWidget *image, GFileInfo *info){
       auto name = g_file_info_get_name(info);

@@ -59,47 +59,6 @@ namespace xf {
           GTK_PHASE_CAPTURE);
     }    
 
-    /*    static gboolean
-    gestureClick(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              gpointer object){
-
-      auto eventController = GTK_EVENT_CONTROLLER(self);
-      auto event = gtk_event_controller_get_current_event(eventController);
-      
-      auto modType = gdk_event_get_modifier_state(event);
-
-      TRACE("modType = 0x%x\n", modType);
-      if (modType & GDK_CONTROL_MASK) return FALSE;
-      if (modType & GDK_SHIFT_MASK) return FALSE;
-      
-      TRACE("gestureClick; object=%p button=%d\n", object,
-          gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
-
-      auto info = G_FILE_INFO(gtk_list_item_get_item(GTK_LIST_ITEM(object)));
-      auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-      auto root = g_file_info_get_attribute_object (info, "xffm::root");
-      if (root){
-        Workdir::setWorkdir("xffm:root");
-        return TRUE;
-      }
-      TRACE("gestureClick; file=%p\n", file);
-      auto path = g_file_get_path(file);
-      TRACE("gestureClick; path=%p\n", path);
-      TRACE("click on %s\n", path);
-      auto type = g_file_info_get_file_type(info);
-      if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
-        TRACE("Go to action...\n");
-        auto child = UtilBasic::getCurrentChild();
-        Workdir::setWorkdir(path);
-      } else {
-        DBG("mimetype action...\n");
-      }
-      g_free(path);
-      return TRUE;
-    }*/
 
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
@@ -165,21 +124,8 @@ namespace xf {
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
         if (name[0] == '.' && name[1] != '.') {
 
-          // We have texture...
-          // What's the icon name?
-          // We have 
-          //   1. get icon names
-          //   2. find icon source file in theme or
-          //   3. find icon source file in search path
-          //   4. must have backup in xffm+ icons.
-          //   5. get the cairo surface
-          //   6. apply mask
-          //   7. render paintable
-          //   8. return GtkImage
-          //   9. For symlinks, add symlink emblem.
-          //   10. For executables, add exe emblem.
           auto *iconPath = Texture::findIconPath(info);
-          //if (!iconPath) iconPath = "/usr/share/icons/Adwaita/scalable/mimetypes/application-certificate.svg";
+
           if (iconPath) texture = Texture::getSvgPaintable(iconPath, size, size);   
 
         }
@@ -212,6 +158,7 @@ namespace xf {
         auto label = gtk_label_new("");
         gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);
+        DirectoryClass::addLabelTooltip(label, path); 
 
         UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
         UtilBasic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    

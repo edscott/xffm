@@ -1,3 +1,5 @@
-* add cpu_info for max threads
 * pathbar menu class
 * rotate for images in image popover menu
+          //   9. For symlinks, add symlink emblem.
+          //   10. For executables, add exe emblem.
+*rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto).
