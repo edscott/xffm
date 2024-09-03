@@ -12,8 +12,8 @@
 
 static GList *threadPool = NULL;
 pthread_mutex_t threadPoolMutex = PTHREAD_MUTEX_INITIALIZER;
+static int maxThreads = 0;
 
-#define MAX_THREADS 16
       typedef struct threadInfo_t {
         void* (*function)(void*);
         void *data;
@@ -31,7 +31,26 @@ namespace xf {
 class Thread {
 
 public:
-
+      static void getMaxThreads(void){
+        if (maxThreads > 0) return;
+        if (g_file_test("/proc/cpuinfo", G_FILE_TEST_EXISTS)){
+          FILE *in = fopen("/proc/cpuinfo", "r");
+          char buffer[256];
+          while (fgets(buffer, 256, in) && ! feof(in)){
+            if (strstr(buffer, "\n")) *strstr(buffer, "\n") = 0;
+            if (strstr(buffer, "siblings")){
+              auto v = g_strsplit(buffer, ":", -1);
+              maxThreads = atoi(v[1]);
+              g_strfreev(v);
+              if (maxThreads > 64) maxThreads = 64;
+              if (maxThreads < 4) maxThreads = 4;
+              DBG("maxThreads set to %d\n", maxThreads);
+              break;
+            }
+          }
+          fclose(in);
+        } else maxThreads = 8;
+      }
 
       static void threadPoolAdd(void* (*function)(void*), void *data){
         auto info = (threadInfo_t *)calloc(1, sizeof(threadInfo_t));
@@ -49,16 +68,19 @@ public:
         return size;
       }
 
+
+
       static void *threadPoolRun(void *data){
         TRACE("Thread::threadPoolRun...\n");
         int active = 0;
-        pthread_t threads[MAX_THREADS];
-        threadInfo_t *info[MAX_THREADS];
+        getMaxThreads();
+        pthread_t threads[maxThreads];
+        threadInfo_t *info[maxThreads];
           
         while (1){
           usleep(5);
           time_t sec = time(NULL);
-          while (active < MAX_THREADS){
+          while (active < maxThreads){
         pthread_mutex_lock(&threadPoolMutex);
             if (g_list_length(threadPool)) {
                 auto last = g_list_last(threadPool);

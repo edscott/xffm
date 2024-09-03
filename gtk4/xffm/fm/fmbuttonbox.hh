@@ -146,6 +146,7 @@ private:
     }
     static void
     changeSize (GtkRange* self, gpointer user_data){
+      if (Workdir::pleaseWait()) return;
       auto value = gtk_range_get_value(self);
       Settings::setInteger("xfterm", "iconsize", value);
       
