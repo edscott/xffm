@@ -8,6 +8,7 @@ namespace xf {
       auto gridScrolledWindow = getGridScrolledWindow();
       gtk_scrolled_window_set_child(gridScrolledWindow, view);
       g_object_set_data(G_OBJECT(child), "gridview", view);
+      g_object_set_data(G_OBJECT(view), "child", child);
     }
 
     static void *getGridview(void){
@@ -15,10 +16,19 @@ namespace xf {
       return g_object_get_data(G_OBJECT(child), "gridview");
     }
 
+    static void *getGridview(GtkWidget *child){
+      return g_object_get_data(G_OBJECT(child), "gridview");
+    }
+
     static const int getSerial(void){
       auto child =  Child::getCurrentChild();
+      return getSerial(child);
+    }
+
+    static const int getSerial(GtkWidget *child){
       return GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
     }
+
     static void incrementSerial(void){
       auto child =  Child::getCurrentChild();
       auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));

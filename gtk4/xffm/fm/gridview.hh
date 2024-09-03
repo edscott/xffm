@@ -12,6 +12,7 @@ namespace xf {
       }*/
       static GtkWidget *
       getGridView(const char *path, void *gridViewClick_f){
+        auto child = Child::getCurrentChild();
         GtkMultiSelection *selection_model = NULL;
         if (strcmp(path, "xffm:root")==0) {
           selection_model = DirectoryClass::rootSelectionModel();
@@ -24,6 +25,7 @@ namespace xf {
         // GtkListItemFactory implements GtkSignalListItemFactory, which can be connected to
         // bind, setup, teardown and unbind
         GtkListItemFactory *factory = gtk_signal_list_item_factory_new();
+        g_object_set_data(G_OBJECT(factory), "child", child);
 
         /* Connect handler to the factory.
          */
@@ -118,8 +120,9 @@ namespace xf {
 
       /* The bind function for the factory */
       static void
-      factoryBind(GtkSignalListItemFactory *self, GObject *object, void *gridViewClick_f)
+      factoryBind(GtkSignalListItemFactory *factory, GObject *object, void *gridViewClick_f)
       {
+        auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
         auto list_item =GTK_LIST_ITEM(object);
         auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
         auto list = UtilBasic::getChildren(box);
@@ -235,26 +238,10 @@ namespace xf {
           arg[2] = image;
           arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
           arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
-          arg[5] = Child::getGridview(); // in main context
+          arg[5] = child; // in main context
           Thread::threadPoolAdd(Texture::preview, (void *)arg);
         }
 
-/*      
-        if (isImage){ // No limit on thread number
-          auto path = g_file_get_path(file);
-          // path, imageBox, image, serial
-          auto arg = (void **)calloc(5, sizeof(void *));
-          arg[0] = (void *)path;
-          arg[1] = imageBox;
-          arg[2] = image;
-          arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
-          arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
-                                       
-          pthread_t thread;
-          pthread_create(&thread, NULL, Texture::preview, (void *)arg);
-          pthread_detach(thread);
-        }
-*/
 /*
         char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
         gtk_label_set_markup( GTK_LABEL( label ), name );

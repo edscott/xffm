@@ -46,7 +46,7 @@ namespace xf {
         auto image = GTK_IMAGE(arg[2]);
         auto serial = GPOINTER_TO_INT(arg[3]);
         auto size = GPOINTER_TO_INT(arg[4]);
-        auto gridview = arg[5];
+        auto child = arg[5];
         TRACE("Texture::preview: %s, box=%p, image=%p, serial=%d\n", 
             path,imageBox, image, serial);
 
@@ -61,7 +61,7 @@ namespace xf {
           (void *) image,
           GINT_TO_POINTER(serial),
           GINT_TO_POINTER(size),
-          gridview,
+          child,
           NULL
         };
         TRACE("Texture::preview: calling replace_f\n");
@@ -79,13 +79,13 @@ namespace xf {
         auto image = GTK_IMAGE(replaceArg[2]);
         auto serial = GPOINTER_TO_INT(replaceArg[3]);
         auto size = GPOINTER_TO_INT(replaceArg[4]);
-        auto gridview = replaceArg[5];
+        auto child = GTK_WIDGET(replaceArg[5]);
 
         TRACE("replace_f in main context: paintable=%p, box=%p, image=%p, serial=%d\n", 
             paintable, imageBox, image, serial);
 
-        if (serial != Child::getSerial()){
-          DBG("replace_f serial mismatch %d != %d\n", serial, Child::getSerial());
+        if (serial != Child::getSerial(child)){
+          DBG("replace_f serial mismatch %d != %d\n", serial, Child::getSerial(child));
           return NULL;
         }
         // no work if (gridview != Child::getGridview()) return NULL;
