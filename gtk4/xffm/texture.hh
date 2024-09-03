@@ -26,6 +26,18 @@ namespace xf {
         } else return NULL;
         return GDK_PAINTABLE(texture);
       }
+      static
+      GdkPaintable *load(const char *iconName, int size){
+        GdkPaintable *texture;
+        auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
+            icon_theme, iconName,
+            NULL, size, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
+
+        if (icon) {
+          return GDK_PAINTABLE(icon);
+        } else return NULL;
+        
+      }
 
       static void *preview(void *data){
         auto arg = (void **)data;

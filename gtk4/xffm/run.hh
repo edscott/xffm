@@ -176,7 +176,7 @@ public:
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=Tubo::getChild (pid);
-        if (textview) Util::printInfo(textview, "greenball", g_strdup_printf("%d:%s\n", grandchild, command));
+        if (textview) Util::printInfo(textview, "emblem-greenball", g_strdup_printf("%d:%s\n", grandchild, command));
         g_strstrip(command);
         push_hash(grandchild, g_strdup(command));
         TRACE("push hash: \"%s\"\n", command);
@@ -274,7 +274,7 @@ public:
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
             gchar *string = exit_string(line);
-            Util::printInfo(textview, "redball", g_strdup_printf("%s", string));
+            Util::printInfo(textview, "emblem-redball", g_strdup_printf("%s", string));
             g_free(string);
         } else {
             Util::print(textview, g_strdup(outline));

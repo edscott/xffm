@@ -88,7 +88,7 @@ private:
                     gdouble x,
                     gdouble y,
                     gpointer data){
-        DBG("enterRange\n");
+        TRACE("enterRange\n");
         auto range = GTK_RANGE(data);
         int value = gtk_range_get_value(range);
         g_object_set_data(G_OBJECT(range), "valor", GINT_TO_POINTER(value));
@@ -99,12 +99,11 @@ private:
                     gdouble x,
                     gdouble y,
                     gpointer data){
-        DBG("leaveRange\n");
+        TRACE("leaveRange\n");
         auto range = GTK_RANGE(data);
         int value = gtk_range_get_value(range);
         if (value != GPOINTER_TO_INT(g_object_get_data(G_OBJECT(range), "valor"))){
-          DBG("getWorkdir\n");
-
+          TRACE("getWorkdir\n");
           auto wd = Workdir::getWorkdir();
           if (g_file_test(wd, G_FILE_TEST_EXISTS)) {
             // race condition here, workdir null or garbage.
@@ -260,9 +259,11 @@ private:
     static void
     toggleVpane (GtkButton *self, void *data){
       auto vpane =Util::getCurrentPane();
-      auto pos = gtk_paned_get_position(vpane);
-      if (pos > 1) gtk_paned_set_position(vpane, 0);
-      else  gtk_paned_set_position(vpane, 2000);
+      auto position = gtk_paned_get_position(vpane);
+      int height = gtk_widget_get_height(GTK_WIDGET(vpane));
+      TRACE("position=%d, height=%d, 3/4height=%d\n", position, height, height * 3 / 4);
+      if (position < height * 3 / 4) gtk_paned_set_position(vpane, height);
+      else gtk_paned_set_position(vpane, 0);
       return ;
     }
 

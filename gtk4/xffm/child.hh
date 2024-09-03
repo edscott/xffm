@@ -60,7 +60,10 @@ namespace xf {
       auto child = getCurrentChild();
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "input"));
     }
-    static GtkTextView *getCurrentTextView(void){
+    static GtkTextView *getCurrentTextView(void){ // deprecated
+      return getCurrentOutput();
+    }
+    static GtkTextView *getCurrentOutput(void){
       auto child = getCurrentChild();
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
     }

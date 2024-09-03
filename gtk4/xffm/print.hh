@@ -89,6 +89,8 @@ namespace xf {
   }
 
 
+
+
     static void print_error(GtkTextView *textview, gchar *string){
         if (!textview) return;
         print_icon(textview, "dialog-error", "bold", string);
@@ -100,10 +102,23 @@ namespace xf {
                               gchar *string){
         print(textview, string);
     }
+    static void
+    setPanePosition(void){
+      auto vpane = Child::getCurrentPane();
+      int height = gtk_widget_get_height(GTK_WIDGET(vpane));
+      auto position = gtk_paned_get_position(vpane);
+      if (position > height * 3 / 4){
+        gtk_paned_set_position(vpane, height * 3 / 4);
+        TRACE("vpane position = %d, set to %d\n", position, height);
+      }
+    }       
+
     static void // print_icon will free string.
     printInfo(GtkTextView *textview, const gchar *icon, gchar *string){
-        print(textview, string);
+        setPanePosition();
+        print_icon(textview, icon, string);
     }
+
     static void // print_icon will free string.
     printError(GtkTextView *textview, gchar *string){
         print(textview, string);
@@ -146,7 +161,29 @@ namespace xf {
         }
         return NULL;
     }
-
+    
+    static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
+    {
+        if (!textview) return;
+        auto icon = Texture::load(iconname, 16);
+        void *arg[]={(void *)icon, (void *)textview, NULL, (void *)string};
+        UtilBasic::context_function(print_i, arg);
+        g_free(string);
+    }
+    
+    static void *
+    print_i(void *data){
+        if (!data) return GINT_TO_POINTER(-1);
+        auto arg=(void **)data;
+        auto textview = GTK_TEXT_VIEW(arg[1]);
+        auto paintable = GDK_PAINTABLE(arg[0]);
+        if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
+        GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
+        GtkTextIter start, end;
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        gtk_text_buffer_insert_paintable (buffer, &end, paintable);
+        return print_f(arg+1);
+    }
 /*
 
     static void // print_icon will free string.
@@ -181,14 +218,6 @@ namespace xf {
      
     }
 
-  static void print_icon(GtkTextView *textview, const gchar *iconname, gchar *string)
-  {
-      if (!textview) return;
-      auto pixbuf = pixbuf_c::getPixbuf(iconname, -16);
-      void *arg[]={(void *)pixbuf, (void *)textview, NULL, (void *)string};
-      context_function(print_i, arg);
-      g_free(string);
-  }
 
   static void print(GtkTextView *textview, 
                               const gchar *iconname, 
@@ -248,19 +277,7 @@ namespace xf {
       scroll_to_bottom(textview);
       return NULL;
   }
- /* static void *
-  print_i(void *data){
-      if (!data) return GINT_TO_POINTER(-1);
-      void **arg=(void **)data;
-      GtkTextView *textview = GTK_TEXT_VIEW(arg[1]);
-      GdkPixbuf *pixbuf = (GdkPixbuf *)arg[0];
-      if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
-      GtkTextBuffer *buffer = gtk_text_view_get_buffer (textview);
-      GtkTextIter start, end;
-      gtk_text_buffer_get_bounds (buffer, &start, &end);
-      gtk_text_buffer_insert_pixbuf (buffer, &end, pixbuf);
-      return print_f(arg+1);
-  }*/
+
 
   static gboolean trim_output(GtkTextBuffer *buffer) {
   //  This is just to prevent a memory overrun (intentional or unintentional).

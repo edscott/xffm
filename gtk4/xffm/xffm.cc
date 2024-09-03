@@ -13,13 +13,14 @@
 #include "child.hh"
 #include "clipboard.hh"
 #include "utilbasic.hh"
+#include "texture.hh"
+#include "print.hh"
 
 #include "utilpathbar.hh"
 #include "bookmarks.hh"
 #include "fm/localdir.hh"
 #include "workdir.hh"
 
-#include "print.hh"
 #include "util.hh"
 #include "bash.hh"
 #include "history.hh"

@@ -37,8 +37,8 @@
 #define RUN "run"
 #define PACKAGE_X_GENERIC "package-x-generic"
 #define INSERT_OBJECT "insert-object"
-#define GREENBALL "greenball"
-#define REDBALL "redball"
+#define GREENBALL "emblem-greenball"
+#define REDBALL "emblem-redball"
 #define EDIT_CUT "edit-cut"
 #define EDIT_COPY "edit-copy"
 #define EDIT_PASTE "edit-paste"
@@ -69,13 +69,13 @@
 
 
 
-#define GRAYBALL "grayball"
+#define GRAYBALL "emblem-grayball"
 #define CANCEL "cancel"
 #define EXECUTE "execute"
 
 #define UTILITIES_TERMINAL "utilities-terminal"
-#define UTILITIES_TERMINAL_ACTIVE UTILITIES_TERMINAL "/NE/greenball/2.0/225"
-#define UTILITIES_TERMINAL_ERROR UTILITIES_TERMINAL "/NE/redball/2.0/225"
+#define UTILITIES_TERMINAL_ACTIVE UTILITIES_TERMINAL "/NE/emblem-greenball/2.0/225"
+#define UTILITIES_TERMINAL_ERROR UTILITIES_TERMINAL "/NE/emblem-redball/2.0/225"
 
 
 #define DEFAULT_ICON "text-x-generic"
@@ -92,7 +92,7 @@
 #define APPLICATION_X_EXECUTABLE "application-x-executable-symbolic"
 #define GO_UP_SYMBOLIC "go-up"
 #define GO_UP "go-up"
-#define PROCESS_STOP "redball"
+#define PROCESS_STOP "emblem-cancel"
 
 
 
@@ -108,8 +108,8 @@
 //#define  ""
 //#define XFFM_ICON "emblem-bsd"
 #define XFFM_ICON "rodent_logo"
-#define BOOKMARK_NEW EMBLEM_BOOKMARK"/C/greenball/2.0/225"
-#define RM_BOOKMARK EMBLEM_BOOKMARK"/C/redball/2.0/225"
+#define BOOKMARK_NEW EMBLEM_BOOKMARK"/C/emblem-greenball/2.0/225"
+#define RM_BOOKMARK EMBLEM_BOOKMARK"/C/emblem-redball/2.0/225"
 
 //#define HIGHLIGHT_FOLDER "NE/" DOCUMENT_OPEN "/2.5/220"
 #define SYSTEM_RUN "gears"

@@ -166,6 +166,8 @@ private:
         auto input = Util::getCurrentInput();
         gtk_widget_grab_focus(GTK_WIDGET(input));
         
+        
+        
         gtk_window_present (mainWindow_);
 
     }

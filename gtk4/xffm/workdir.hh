@@ -33,11 +33,13 @@ namespace xf {
     static bool pleaseWait(void){
       auto size = Thread::threadPoolSize();
       if (size > 0) {
+        
         char buffer[4096];
-        snprintf(buffer, 4096, "%s: %d (%s).\n%s\n",
-              _("Parallel threads:"), size, _("Unfinished Jobs in Queue"),
-              _("There are unfinished jobs: please wait until they are finished."));
-        DBG("%s", buffer);
+        snprintf(buffer, 4096, " %s\n%s: %d (%s).\n",
+              _("There are unfinished jobs: please wait until they are finished."),
+              _("Parallel threads:"), size, _("Unfinished Jobs in Queue"));
+        TRACE("%s", buffer);
+        Print::printInfo(Child::getCurrentOutput(), "emblem-important", g_strdup(buffer));
         return true;
       }
       return false;

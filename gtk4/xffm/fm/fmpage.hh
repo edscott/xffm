@@ -12,13 +12,11 @@ namespace xf {
     GtkPaned *vpane_;
     GtkTextView *output_;
     GtkScrolledWindow *gridScrolledWindow_;
-    GtkScrolledWindow *treeScrolledWindow_;
     GtkScrolledWindow *outputScrolledWindow_; 
 
     public:
     GtkPaned *vpane(void){return vpane_;}
     GtkTextView *output(void){return output_;}
-    GtkScrolledWindow *treeScrolledWindow(void){return treeScrolledWindow_;}
     GtkScrolledWindow *gridScrolledWindow(void){return gridScrolledWindow_;}
     GtkScrolledWindow *outputScrolledWindow(void){return outputScrolledWindow_;}
 
@@ -27,7 +25,6 @@ namespace xf {
         gtk_paned_set_wide_handle (vpane_, TRUE);
         //gtk_paned_set_wide_handle (vpane_, FALSE);
         gridScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
-        treeScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         
         outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util::newTextView();
@@ -44,21 +41,20 @@ namespace xf {
 
         //auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0)); 
         //boxPack0 (vbox, GTK_WIDGET(gridScrolledWindow_), TRUE, TRUE, 0);
-        //boxPack0 (vbox, GTK_WIDGET(treeScrolledWindow_), TRUE, TRUE, 0);
         //gtk_paned_set_start_child (vpane_, GTK_WIDGET(vbox));
         gtk_paned_set_start_child (vpane_, GTK_WIDGET(gridScrolledWindow_));
+        gtk_paned_set_position(vpane_, 10000);
         
         
 
 
-        gtk_widget_set_visible(GTK_WIDGET(treeScrolledWindow_), FALSE);
 
        
         
         gtk_paned_set_end_child (vpane_, GTK_WIDGET(outputScrolledWindow_));
         g_object_set(G_OBJECT(vpane_), "position-set", TRUE, NULL);
         gtk_scrolled_window_set_child(outputScrolledWindow_, GTK_WIDGET(output_));
-        gtk_paned_set_position(vpane_, 10000);
+        //gtk_paned_set_position(vpane_, 10000);
 #if 0
         //auto gfile = g_file_new_for_path("/");
         auto gfile = g_file_new_for_path(g_get_home_dir());
@@ -113,7 +109,6 @@ auto s = g_file_info_get_attribute_as_string (info, "standard::type");
 
 #endif
     /*    auto treeExpander = gtk_tree_expander_new();
-        gtk_scrolled_window_set_child(treeScrolledWindow_, GTK_WIDGET(treeExpander));
 
         gtk_widget_add_css_class(treeExpander, "xficons");*/
         
