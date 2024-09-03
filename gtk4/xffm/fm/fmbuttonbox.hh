@@ -84,20 +84,51 @@ namespace xf {
         return hbox;
     }
 private:
+      static gboolean enterRange(GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data){
+        DBG("enterRange\n");
+        auto range = GTK_RANGE(data);
+        int value = gtk_range_get_value(range);
+        g_object_set_data(G_OBJECT(range), "valor", GINT_TO_POINTER(value));
+        Texture::redlight();
+        return FALSE;
+      }
+      static gboolean leaveRange(GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data){
+        DBG("leaveRange\n");
+        auto range = GTK_RANGE(data);
+        int value = gtk_range_get_value(range);
+        if (value != GPOINTER_TO_INT(g_object_get_data(G_OBJECT(range), "valor"))){
+          DBG("getWorkdir\n");
+
+          auto wd = Workdir::getWorkdir();
+          if (g_file_test(wd, G_FILE_TEST_EXISTS)) {
+            // race condition here, workdir null or garbage.
+            // Workdir::reset();      
+          }
+        }
+        Texture::greenlight();
+        return FALSE;
+      }
+    
       static
       void addMotionController(GtkWidget  *widget){
         auto controller = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(widget), controller);
         g_signal_connect (G_OBJECT (controller), "enter", 
-            G_CALLBACK (Texture::redlight), NULL);
+            G_CALLBACK (enterRange), widget);
         g_signal_connect (G_OBJECT (controller), "leave", 
-            G_CALLBACK (Texture::greenlight), NULL);
+            G_CALLBACK (leaveRange), widget);
     }
     
     GtkScale *newSizeScale(const gchar *tooltipText){
         double value;
-        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 768.0, 12.0));
+        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 384.0, 12.0));
         // Load saved value fron xffm+/settings.ini file (if any)
         auto size = Settings::getInteger("xfterm", "iconsize");
         if (size < 0) value = 48; else value = size;

@@ -30,8 +30,22 @@ namespace xf {
       return Child::getWorkdir();
     }
 
+    static bool pleaseWait(void){
+      auto size = Thread::threadPoolSize();
+      if (size > 0) {
+        char buffer[4096];
+        snprintf(buffer, 4096, "%s: %d (%s).\n%s\n",
+              _("Parallel threads:"), size, _("Unfinished Jobs in Queue"),
+              _("There are unfinished jobs: please wait until they are finished."));
+        DBG("%s", buffer);
+        return true;
+      }
+      return false;
+    }
+
     static bool setWorkdir(const gchar *path, GtkWidget *child){
       TRACE("setWorkdir...A\n");
+      if (pleaseWait()) return false;
       auto wd = (char *)getWorkdir(child);
       if (strcmp(wd, path)){
         g_free(wd);
@@ -43,6 +57,7 @@ namespace xf {
     }
     static bool setWorkdir(const gchar *path){
       TRACE("setWorkdir...A\n");
+      if (pleaseWait()) return false;
       auto child = Child::getCurrentChild();
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
@@ -53,6 +68,7 @@ namespace xf {
     }
     static bool setWorkdir(const gchar *path, bool updateHistory){
       TRACE("setWorkdir B...path=%s\n",path);
+      if (pleaseWait()) return false;
       auto child = Child::getCurrentChild();
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
@@ -63,6 +79,7 @@ namespace xf {
     }
     static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
       TRACE("setWorkdir...C\n");
+      if (pleaseWait()) return false;
       if (!MainWidget) return false;
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");

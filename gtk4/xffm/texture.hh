@@ -5,21 +5,15 @@ namespace xf {
     class Texture {
       public:
       static bool previewOK(void) {return  greenLightPreview;} 
-      static gboolean redlight(GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data){
+      static void redlight(void){
         TRACE("redlight...\n");
         greenLightPreview = false;
-        return FALSE;
+        return;
       }  
-      static gboolean greenlight(GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data){
+      static void greenlight(void){
         TRACE("greenlight...\n");
         greenLightPreview = true;
-        return FALSE;
+        return ;
       }  
       static
       GdkPaintable *load(GFileInfo *info){

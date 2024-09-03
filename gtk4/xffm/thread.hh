@@ -42,6 +42,13 @@ public:
         pthread_mutex_unlock(&threadPoolMutex);
       }
 
+      static int threadPoolSize(void){
+        pthread_mutex_lock(&threadPoolMutex);
+        auto size = g_list_length(threadPool);
+        pthread_mutex_unlock(&threadPoolMutex);
+        return size;
+      }
+
       static void *threadPoolRun(void *data){
         TRACE("Thread::threadPoolRun...\n");
         int active = 0;

@@ -63,6 +63,9 @@ namespace xf {
         }
         
 
+        //Nonexiting paths, use homedir
+        if (!g_file_test(path, G_FILE_TEST_EXISTS)) path = g_get_home_dir();
+         
         // Trim pathbar.
         gchar **paths;
         if (strcmp(path, G_DIR_SEPARATOR_S)==0){
