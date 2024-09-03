@@ -199,6 +199,153 @@ namespace xf {
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
       return menu;
     }
+    static
+        char
+    ftypelet (mode_t bits) {
+#ifdef S_ISBLK
+        if(S_ISBLK (bits))
+            return 'b';
+#endif
+        if(S_ISCHR (bits))
+            return 'c';
+        if(S_ISDIR (bits))
+            return 'd';
+        if(S_ISREG (bits))
+            return '-';
+#ifdef S_ISFIFO
+        if(S_ISFIFO (bits))
+            return 'p';
+#endif
+#ifdef S_ISLNK
+        if(S_ISLNK (bits))
+            return 'l';
+#endif
+#ifdef S_ISSOCK
+        if(S_ISSOCK (bits))
+            return 's';
+#endif
+#ifdef S_ISMPC
+        if(S_ISMPC (bits))
+            return 'm';
+#endif
+#ifdef S_ISNWK
+        if(S_ISNWK (bits))
+            return 'n';
+#endif
+#ifdef S_ISDOOR
+        if(S_ISDOOR (bits))
+            return 'D';
+#endif
+#ifdef S_ISCTG
+        if(S_ISCTG (bits))
+            return 'C';
+#endif
+
+        /* The following two tests are for Cray DMF (Data Migration
+           Facility), which is a HSM file system.  A migrated file has a
+           `st_dm_mode' that is different from the normal `st_mode', so any
+           tests for migrated files should use the former.  */
+
+#ifdef S_ISOFD
+        if(S_ISOFD (bits))
+            /* off line, with data  */
+            return 'M';
+#endif
+#ifdef S_ISOFL
+        /* off line, with no data  */
+        if(S_ISOFL (bits))
+            return 'M';
+#endif
+        return '?';
+    }
+
+    static gchar *
+    modeString (mode_t mode) {
+        gchar *str=(gchar *)calloc(1, 15);
+        if (!str) g_error("calloc: %s", strerror(errno));
+        str[0] = ftypelet (mode);
+        str[1] = mode & S_IRUSR ? 'r' : '-';
+        str[2] = mode & S_IWUSR ? 'w' : '-';
+        str[3] = mode & S_IXUSR ? 'x' : '-';
+
+        str[4] = mode & S_IRGRP ? 'r' : '-';
+        str[5] = mode & S_IWGRP ? 'w' : '-';
+        str[6] = mode & S_IXGRP ? 'x' : '-';
+
+        str[7] = mode & S_IROTH ? 'r' : '-';
+        str[8] = mode & S_IWOTH ? 'w' : '-';
+        str[9] = mode & S_IXOTH ? 'x' : '-';
+        if(mode & S_ISUID)
+            str[3] = mode & S_IXUSR ? 's' : 'S';
+        if(mode & S_ISGID)
+            str[6] = mode & S_IXGRP ? 's' : 'S';
+        if(mode & S_ISVTX)
+            str[9] = mode & S_IXOTH ? 't' : 'T';
+        str[10] = 0;
+        return (str);
+    }
+
+    static gchar *statInfo(const struct stat *st){
+        if (!st){
+            DBG("util::statinfo: st is null\n");
+            return NULL;
+        }
+        auto mode = modeString(st->st_mode);
+        struct passwd *pw = getpwuid (st->st_uid);
+        struct group *gr = getgrgid(st->st_gid);
+        auto links = st->st_nlink;
+
+        auto user = pw ? g_strdup(pw->pw_name) : g_strdup_printf("%d", st->st_uid);
+        auto group = gr ? g_strdup(gr->gr_name) : g_strdup_printf("%d", st->st_gid);
+        auto date = dateString(st->st_mtime);
+        auto size = sizeString(st->st_size);
+
+        auto info = g_strdup_printf("%s %3luL %s %s %s:%s ", 
+            mode, (unsigned long)links, size, date, user, group);
+        //auto info = g_strdup_printf("%s %s:%3lu %s %s:%s ", mode, _("Links"), (unsigned long)links, date, user, group);
+        g_free(size);
+        g_free(date);
+        g_free(user);
+        g_free(group);
+        g_free(mode);
+        return info;
+    }
+    
+    static gchar *
+    sizeString (size_t size) {
+        if (size > 1024 * 1024 * 1024){
+            return g_strdup_printf(" %3ld GB", size/(1024 * 1024 * 1024));
+        }
+        if (size > 1024 * 1024){
+            return g_strdup_printf(" %3ld MB", size/(1024 * 1024));
+        }
+        if (size > 1024){
+            return g_strdup_printf(" %3ld KB", size/(1024));
+        }
+        return g_strdup_printf(" %3ld B ", size);
+    }
+    static gchar *
+    dateString (time_t the_time) {
+        //pthread_mutex_lock(&dateStringMutex);
+
+#ifdef HAVE_LOCALTIME_R
+            struct tm t_r;
+#endif
+            struct tm *t;
+
+#ifdef HAVE_LOCALTIME_R
+            t = localtime_r (&the_time, &t_r);
+#else
+            t = localtime (&the_time);
+#endif
+            gchar *date_string=
+                g_strdup_printf (" %04d/%02d/%02d  %02d:%02d", t->tm_year + 1900,
+                     t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
+       // pthread_mutex_unlock(&dateStringMutex);
+
+        return date_string;
+    }
+
    
   };
 }

@@ -60,7 +60,10 @@ namespace xf {
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
         auto upFile = g_file_new_for_path(up);
         GError *error_ = NULL;
+
         auto info = g_file_query_info(upFile, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+        
+        
         if (strcmp(path, up)==0) {
           g_file_info_set_attribute_object(info, "xffm::root", G_OBJECT(upFile));
         }
@@ -72,7 +75,7 @@ namespace xf {
 
         GFile *file = g_file_new_for_path(path);
         GFileEnumerator *dirEnum = 
-          g_file_enumerate_children (file,"standard::",G_FILE_QUERY_INFO_NONE,NULL, &error_);
+          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           DBG("*** Error::g_file_enumerate_children: %s\n", error_->message);
           return NULL;
@@ -261,7 +264,41 @@ namespace xf {
         g_free(t);
       }
     }
+////////////////////////////////////////////////
+    static gchar *
+    sizeString (size_t size) {
+        if (size > 1024 * 1024 * 1024){
+            return g_strdup_printf("%ld GB", size/(1024 * 1024 * 1024));
+        }
+        if (size > 1024 * 1024){
+            return g_strdup_printf("%ld MB", size/(1024 * 1024));
+        }
+        if (size > 1024){
+            return g_strdup_printf("%ld KB", size/(1024));
+        }
+        return g_strdup_printf("%ld ", size);
+    }
+    static gchar *
+    dateString (time_t the_time) {
+        //pthread_mutex_lock(&dateStringMutex);
 
+#ifdef HAVE_LOCALTIME_R
+            struct tm t_r;
+#endif
+            struct tm *t;
+
+#ifdef HAVE_LOCALTIME_R
+            t = localtime_r (&the_time, &t_r);
+#else
+            t = localtime (&the_time);
+#endif
+            gchar *date_string=
+                g_strdup_printf ("%04d/%02d/%02d  %02d:%02d", t->tm_year + 1900,
+                     t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min);
+        //pthread_mutex_unlock(&dateStringMutex);
+
+        return date_string;
+    }
 
   };
 }

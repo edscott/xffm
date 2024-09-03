@@ -140,6 +140,7 @@ namespace xf {
         
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
         auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+        auto path = g_file_get_path(file);
 
         
         auto type = g_file_info_get_file_type(info);
@@ -186,41 +187,66 @@ namespace xf {
         if (type == G_FILE_TYPE_DIRECTORY ) {
           DirectoryClass::addDirectoryTooltip(image, info);
         }
-        auto path = g_file_get_path(file);
         auto isImage = (type == G_FILE_TYPE_REGULAR && Mime::is_image(path));
-        g_free(path);
         if (size < 0) size = 48;
-        int scaleFactor = 1;
+        double scaleFactor = 1.;
         if (isImage) scaleFactor = 2;
+
+        if (size == 24) scaleFactor = 0.75;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
 
    
 
         //auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
 
-        if (name && strlen(name) > 15){
+        if (name && strlen(name) > 16){
           name[15] = 0;
           name[14] ='~';
         }
-        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
+        char buffer[20];
+        if (size == 24) snprintf(buffer, 20, "%-16s", name);
+        else snprintf(buffer, 20, "%s", name);
+        
+        char *markup = g_strconcat("<span size=\"small\">", buffer, "</span>", NULL);
+//        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
         auto label = gtk_label_new("");
         gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);
 
-
         UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
-        UtilBasic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
         UtilBasic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
+        UtilBasic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
         UtilBasic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);    
+
         if (Settings::getInteger("xfterm", "iconsize") == 24 && strcmp(name, "..")){
           // file information string
           auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+          gtk_widget_add_css_class(hbox, "gridviewBox");
           auto props = gtk_label_new("");
-          char *markup = g_strconcat("<span size=\"small\" color=\"blue\">", "foo bar", "</span>", NULL);
+
+          struct stat st;
+          lstat(path, &st);
+       
+          auto m1 = UtilBasic::statInfo(&st);
+
+          char *markup = g_strdup("<span size=\"small\" color=\"blue\">");
+          UtilBasic::concat(&markup, m1);
+          UtilBasic::concat(&markup, "</span>");
+          
+          g_free(m1);
           gtk_label_set_markup(GTK_LABEL(props), markup);
           g_free(markup);
-          UtilBasic::boxPack0(GTK_BOX(hbox), props, FALSE, FALSE, 0);    
-          UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, FALSE, 0);    
+
+          //auto rightBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+          //gtk_widget_add_css_class(rightBox, "gridviewBox");
+
+          UtilBasic::boxPack0(GTK_BOX(box), props, FALSE, FALSE, 0);  
+          UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
+          //UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(rightBox), FALSE, FALSE, 0);    
+          //UtilBasic::boxPack0(GTK_BOX(rightBox), GTK_WIDGET(labelBox), FALSE, FALSE, 0);    
+
+
+        } else {
         }
         g_free(name);
         addMotionController(labelBox);
@@ -228,6 +254,7 @@ namespace xf {
         addGestureClick(imageBox, object, gridViewClick_f);
 
         // Now for replacement of image icons for previews
+        g_free(path);
 
         if (isImage && Texture::previewOK()){ // thread number limited.
           auto path = g_file_get_path(file);
@@ -242,28 +269,6 @@ namespace xf {
           Thread::threadPoolAdd(Texture::preview, (void *)arg);
         }
 
-/*
-        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
-        gtk_label_set_markup( GTK_LABEL( label ), name );
-//        gtk_label_set_markup( GTK_LABEL( label ), markup );
-        g_free(name);
-        g_free(markup);*/
-        
-        // HACK
-   /*     auto owner = gtk_widget_get_parent(GTK_WIDGET(vbox));
-        graphene_rect_t bounds;
-        if (!gtk_widget_compute_bounds(owner, MainWidget, &bounds)){
-          DBG("Error: gtk_widget_compute_bounds\n");
-        } else {
-          DBG("owner=%p, width=%lf height=%lf\n", owner, bounds.size.width, bounds.size.height);
-        }
-        gtk_widget_set_size_request(owner, 24,24);
-        gtk_widget_set_vexpand(GTK_WIDGET(owner), FALSE);
-        gtk_widget_set_hexpand(GTK_WIDGET(owner), FALSE);
-        gtk_widget_compute_bounds(owner, owner, &bounds);
-          DBG("owner=%p, width=%lf height=%lf\n", owner, bounds.size.width, bounds.size.height);
-*/
-        
 
       }
 
@@ -310,7 +315,6 @@ namespace xf {
 
     
     private:
-
 
   };
 }
