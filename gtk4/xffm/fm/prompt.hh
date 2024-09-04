@@ -3,6 +3,7 @@
 #include "run.hh"
 #include "inputMenu.hh"
 namespace xf {
+  template <class Type>
   class Prompt : private UtilBasic {
 
     public:
@@ -57,7 +58,7 @@ namespace xf {
         boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
         boxPack0 (promptBox_, GTK_WIDGET(buttonSpace_), FALSE, TRUE, 0);
     }
-    private:
+    public:
     static pid_t
     run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonSpace){
       TRACE("run: %s\n", command);
@@ -124,7 +125,7 @@ namespace xf {
                 Util::clear_text(output);
             }
             //Util::print(output, g_strdup_printf("TRACE> final run: %s\n",*c));
-            childPID = Run::shell_command(output, *c, scrollup, showTextPane);
+            childPID = Run<bool>::shell_command(output, *c, scrollup, showTextPane);
             if (withRunButton) {
               runButton = new (RunButton);
               runButton->init(runButton, *c, childPID, output, Child::getWorkdir(child), buttonSpace);
@@ -136,7 +137,7 @@ namespace xf {
         g_free(ncommand); 
         return childPID;
     }
-
+    private:
     static bool
     history(GtkTextView *input, guint keyval){
       switch (keyval){

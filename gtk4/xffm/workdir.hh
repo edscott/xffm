@@ -130,6 +130,7 @@ namespace xf {
         setWorkdir(path);
       } else {
         DBG("mimetype action...\n");
+        new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
       }
       g_free(path);
       return TRUE;

@@ -121,7 +121,7 @@ auto s = g_file_info_get_attribute_as_string (info, "standard::type");
 
   };
 
-  class FMpage : private Util, public Vpane, public Prompt, public Pathbar {
+  class FMpage : private Util, public Vpane, public Prompt<bool>, public Pathbar {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;

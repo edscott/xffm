@@ -72,7 +72,7 @@ namespace xf {
       auto workDir = Child::getWorkdir(childWidget);
 
       auto xffm = g_strdup_printf("xffm -f %s", workDir);
-      pid_t childPid = Run::shell_command(output, xffm, false, false);
+      pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
 
       auto runButton = new (RunButton);
       runButton->init(runButton, xffm, childPid, output, workDir, buttonSpace);

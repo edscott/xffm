@@ -8,14 +8,13 @@
 
 #include <unistd.h>
 #include <gtk/gtk.h>
-        
 
 static pthread_mutex_t fork_mutex_=PTHREAD_MUTEX_INITIALIZER;       
 static pthread_mutex_t string_hash_mutex=PTHREAD_MUTEX_INITIALIZER;       
 static GHashTable *stringHash = NULL;
 namespace xf 
 {
-//template <class Type> 
+template <class Type> 
 class Run {
 
     static void
@@ -568,7 +567,7 @@ public:
         g_free(a);
         return command_line;
     }
-#if 0
+    
     static gboolean isValidCommand (const char *cmd_fmt) {
         //return GINT_TO_POINTER(TRUE);
         TRACE ("MIME: mime_is_valid_command(%s)\n", cmd_fmt);
@@ -628,6 +627,7 @@ public:
         return retval;
     }
 
+#if 0
     
     static gchar *getRunCommand(GtkWindow *parent, const gchar *path){
         TRACE("runWith: path = %s\n", path);

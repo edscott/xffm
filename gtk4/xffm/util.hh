@@ -197,6 +197,7 @@ namespace xf {
       }
       g_free(color);
     }
+
     
     static void *reloadAll_f(void *data){
         auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
@@ -444,24 +445,6 @@ namespace xf {
       g_free(string);
       //for (char **p=vector; p && *p && p->id p++)  TRACE( "getVector():p=%s\n",*p);
       return vector;
-    }
-    static void
-    setTooltip(GtkWidget *w, const gchar *text){
-      //auto t =g_strconcat("<span color=\"yellow\" bgcolor=\"blue\"><i>", text, "</i></span>", NULL);
-      auto t =g_strconcat("<span color=\"yellow\"><i>", text, "</i></span>", NULL);
-      gtk_widget_set_tooltip_markup (w,t);
-      //gtk_widget_add_css_class (w, "tooltip" );
-      g_free(t);
-      return;
-    }
-    static 
-    GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
-      auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
-      setTooltip(GTK_WIDGET(button), tooltipText);
-
-      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
-      gtk_button_set_has_frame(button, FALSE);
-      return button;
     }
     static 
     GtkMenuButton *newMenuButton(const gchar *icon, const gchar *tooltipText){

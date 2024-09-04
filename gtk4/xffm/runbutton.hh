@@ -58,7 +58,7 @@ public:
     
     void init(RunButton *runButton, const gchar *command, pid_t child, GtkTextView *output, const gchar *workdir, GtkBox *buttonBox){
         TRACE("RunButton for %s\n", command);
-        gboolean shellIcon = Run::run_in_shell(command);
+        gboolean shellIcon = Run<bool>::run_in_shell(command);
 
         in_shell_ = shellIcon;
         pid_ = child;
@@ -453,7 +453,7 @@ activate(GtkWidget *self, gpointer data) {
         if (inShell()) pid = shell_child_pid(pid);
 
         gchar *command = g_strdup_printf("renice +1 -p %ld", pid);
-        Run::shell_command(textview_, command, false, true); // yes output to textview
+        Run<bool>::shell_command(textview_, command, false, true); // yes output to textview
         //Run::shell_command(textview_, command, false, false); // no output to textview
         // Here we do not need to save "$command" to history...
         g_free(command);
@@ -515,7 +515,7 @@ public:
         }
         TRACE("signalling with %s\n", command);
         //Run::shell_command(textview_, command, FALSE, TRUE); // yes output to textview
-        Run::shell_command(textview_, command, FALSE, FALSE); // no output to textview
+        Run<bool>::shell_command(textview_, command, FALSE, FALSE); // no output to textview
         // Again, when we signal process, there is no need to save command
         // in the csh history file.
         g_free(command);

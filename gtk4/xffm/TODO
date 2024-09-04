@@ -1,5 +1,22 @@
-* pathbar menu class
-* rotate for images in image popover menu
-          //   9. For symlinks, add symlink emblem.
-          //   10. For executables, add exe emblem.
-*rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto).
+OpenWith:
+1. Change GtkEntry in openwith to a GtkTextView to enable bash completion.
+   (set output to NULL: verify this)
+2. Put default mimetype command as inicial value in 1). Have text selected
+   so that single keystroke will reset.
+3. OpenWith with multiple files selected (this when selection menu enabled)
+4. Missing menu classes:
+     pathbar menu
+     selection menu (single/multiple)
+5. (experimental) Move colors popover to rise from the colors item in main menu:
+    on rising, popdown main menu. associate color popover to some other
+6.  rotate for images in image popover menu
+7.  For symlinks, add symlink emblem to icon.
+8.  For executables, add exe emblem.
+9.  rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
+10. tooltip on nondirectory icons.
+11. sort by size/date/type buttons (toggle buttons in vbuttonbox)
+12. enable all menu button callbacks
+13. xffm-find
+14. xffm-askpassword
+
+

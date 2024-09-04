@@ -15,6 +15,7 @@
 #include "utilbasic.hh"
 #include "texture.hh"
 #include "print.hh"
+#include "openwith.hh"        
 
 #include "utilpathbar.hh"
 #include "bookmarks.hh"

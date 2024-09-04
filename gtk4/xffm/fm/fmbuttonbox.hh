@@ -195,7 +195,7 @@ private:
             childWidget, buttonSpace, workDir);
 
       auto terminal = Util::getTerminal();
-      pid_t childPid = Run::shell_command(output, terminal, false, false);
+      pid_t childPid = Run<bool>::shell_command(output, terminal, false, false);
 
       auto runButton = new (RunButton);
       runButton->init(runButton, terminal, childPid, output, workDir, buttonSpace);
@@ -209,7 +209,7 @@ private:
       auto workDir = Child::getWorkdir(childWidget);
 
       auto find = g_strdup_printf("xffm --find %s", workDir);
-      pid_t childPid = Run::shell_command(output, find, false, false);
+      pid_t childPid = Run<bool>::shell_command(output, find, false, false);
 
       auto runButton = new (RunButton);
       runButton->init(runButton, find, childPid, output, workDir, buttonSpace);

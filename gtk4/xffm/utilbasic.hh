@@ -22,6 +22,61 @@ namespace xf {
       while (g_main_context_pending(NULL))
         g_main_context_iteration(NULL, TRUE);
     }
+    static void
+    setTooltip(GtkWidget *w, const gchar *text){
+      //auto t =g_strconcat("<span color=\"yellow\" bgcolor=\"blue\"><i>", text, "</i></span>", NULL);
+      auto t =g_strconcat("<span color=\"yellow\"><i>", text, "</i></span>", NULL);
+      gtk_widget_set_tooltip_markup (w,t);
+      //gtk_widget_add_css_class (w, "tooltip" );
+      g_free(t);
+      return;
+    }
+    static 
+    GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
+      auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
+      setTooltip(GTK_WIDGET(button), tooltipText);
+
+      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+      gtk_button_set_has_frame(button, FALSE);
+      return button;
+    }
+    static void setAsDialog(GtkWidget *widget, const char *Xname, const char *Xclass){
+        bool OK = false;
+ #ifdef GDK_WINDOWING_X11
+        GdkDisplay *displayGdk = gdk_display_get_default();
+        if (GDK_IS_X11_DISPLAY (displayGdk)) {
+          OK = true;
+          Display *display = gdk_x11_display_get_xdisplay(displayGdk);
+          XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
+          wm_class->res_name = g_strdup(Xname);
+          wm_class->res_class = g_strdup(Xclass);
+
+          GtkNative *native = gtk_widget_get_native(widget);
+          GdkSurface *surface = gtk_native_get_surface(native);
+          Window w = gdk_x11_surface_get_xid (surface);
+          XSetClassHint(display, w, wm_class);
+
+          Atom atom = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE_DIALOG");
+          Atom atom0 = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE");
+          XChangeProperty (display, w,
+            atom0, XA_ATOM, 
+            32, PropModeReplace,
+            (guchar *)&atom, 1);
+        }
+#endif
+#ifdef GDK_WINDOWING_WAYLAND
+//#warning "Compiling for Wayland (unstable)"
+        OK = true;
+#endif        
+#ifdef GDK_WINDOWING_WIN32
+#warning "Compiling for Windows (unstable)"
+        OK = true;
+#endif
+        if (!OK) {
+          g_error ("Unsupported GDK backend");
+          exit(1);
+        }
+   }
   static 
   void boxPack0(  
       GtkBox* box,
