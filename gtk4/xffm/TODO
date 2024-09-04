@@ -1,3 +1,10 @@
+OpenWith dialog (window) working
+
+Pending issues: 
+   enable bash completion
+   fill in with default mime command
+   enable mimecommand completion (new):
+     maybe a column of valid mimeapps selectable. 
 OpenWith:
 1. Change GtkEntry in openwith to a GtkTextView to enable bash completion.
    (set output to NULL: verify this)
