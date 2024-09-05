@@ -18,7 +18,7 @@ public:
 
   Fm(const char *path){
     // Construct app hash
-    //MimeApplication<Type>::constructAppHash();
+    MimeApplication::constructAppHash();
     History::init();  
     gtk_init ();
 

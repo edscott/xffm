@@ -1,14 +1,14 @@
 OpenWith dialog (window) working
 
 Pending issues: 
-   enable bash completion
-   fill in with default mime command
-   enable mimecommand completion (new):
-     maybe a column of valid mimeapps selectable. 
+   DONE enable bash completion
+   DONE fill in with default mime command
+   DONE enable mimecommand completion (new):
+   DONE   maybe a column of valid mimeapps selectable. 
 OpenWith:
-1. Change GtkEntry in openwith to a GtkTextView to enable bash completion.
+DONE 1. Change GtkEntry in openwith to a GtkTextView to enable bash completion.
    (set output to NULL: verify this)
-2. Put default mimetype command as inicial value in 1). Have text selected
+DONE 2. Put default mimetype command as inicial value in 1). Have text selected
    so that single keystroke will reset.
 3. OpenWith with multiple files selected (this when selection menu enabled)
 4. Missing menu classes:

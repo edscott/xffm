@@ -147,11 +147,21 @@ namespace xf {
                 Util::clear_text(output);
             }
             //Util::print(output, g_strdup_printf("TRACE> final run: %s\n",*c));
-            childPID = Run<bool>::shell_command(output, *c, scrollup, showTextPane);
+           /*
+            * FIXME: enable automatic in terminal for always
+            *        move always routine to utilBasic*/
+        
+            if (UtilBasic::alwaysTerminal(*c)){
+              command = Run<bool>::mkTerminalLine(*c, "");
+              childPID = Run<bool>::shell_command(output, command, scrollup, showTextPane);
+            } else {
+              childPID = Run<bool>::shell_command(output, *c, scrollup, showTextPane);
+            }
             if (withRunButton) {
               runButton = new (RunButton);
               runButton->init(runButton, *c, childPID, output, Child::getWorkdir(child), buttonSpace);
             }
+            
             TRACE("command loop...\n");
 //            if (withRunButton) newRunButton(*c, childPID);
         }

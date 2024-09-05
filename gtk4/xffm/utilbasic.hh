@@ -8,6 +8,30 @@ namespace xf {
     public Clipboard
   {
     public:
+      static bool
+      alwaysTerminal(const char *command){
+        char *key = g_strdup(command);
+        if (strchr(key, ' ')) *strrchr(key, ' ') = 0;
+        const char *always[] = {"vi", "vim", "nano", "emacs", NULL};
+        for (auto p=always; p && *p; p++){
+          if (strcmp(key, *p) == 0) {
+            g_free(key);
+            return true;
+          }
+        }
+        g_free(key);
+        return false;
+      }
+      
+    static GtkBox *
+    mkEndBox(){ // not a hack, according to gnome people...
+       auto endBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(endBox), false);
+        auto spacer = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(spacer), true);
+        UtilBasic::boxPack0(endBox,GTK_WIDGET(spacer), TRUE, TRUE, 0);
+        return endBox;
+    }
     static
     GtkTextView *createInput(void){
         GtkTextView *input = GTK_TEXT_VIEW(gtk_text_view_new ());

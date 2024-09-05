@@ -35,7 +35,7 @@ public:
             pthread_mutex_unlock(&mimeAppHashMutex);
             return NULL;
         }
-        TRACE("loading apps for mimetype: %s\n", mimetype);
+        TRACE("**** loading apps for mimetype: \"%s\"\n", mimetype);
         auto apps = (const gchar **)g_hash_table_lookup (applicationHash, mimetype);
         pthread_mutex_unlock(&mimeAppHashMutex);
         return apps;
@@ -180,12 +180,12 @@ private:
                     g_free(epath);
                 }
                 
-                if (*p && e){
+                if (*p && strlen(*p) && e){
                     if (strstr(e, "%U")) *(strstr(e, "%U")+1) = 's';
                     if (strstr(e, "%u")) *(strstr(e, "%u")+1) = 's';
                     if (strstr(e, "%F")) *(strstr(e, "%F")+1) = 's';
                     if (strstr(e, "%f")) *(strstr(e, "%f")+1) = 's';
-                    TRACE("Adding application %s --> %s\n", *p, e);
+                    TRACE("** Adding application \"%s\" --> %s\n", *p, e);
                     add2ApplicationHash(*p, e, TRUE);
                 }
             }

@@ -237,6 +237,7 @@ namespace xf {
       //        Also: add highlight color for text box and change 
       //              text from label to entry, to allow inline
       //              renaming on longpress.
+
     static gboolean
     negative ( GtkEventControllerMotion* self,
                     gdouble x,
