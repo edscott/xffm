@@ -136,6 +136,7 @@ public:
         if (stack_glob_v.gl_pathc > maxOptions()){
             //Util::print(output, "blue/white_bg",g_strdup_printf("%s ", file_token));
 
+            Util::showText(output);
             Util::print_error(output, g_strdup_printf("%s: %ld %s\n", 
                   _("Matches"), maxOptions(), _("Too many selected files")));
             globfree(&stack_glob_v);
@@ -334,6 +335,7 @@ public:
             TRACE("matchCount = %d\n", g_slist_length(matches));
         }
         if (output && g_slist_length(matches) > 1) {
+            Util::showText(output);
             Util::print(output, "blue/white_bg", g_strconcat(_("Options:"), "\n",NULL));
             for(p = matches; p && p->data; p = p->next) {
                 TRACE("msg_show_match call 1\n");
@@ -442,7 +444,7 @@ public:
           g_strstrip(head);   
         }
 
-        TRACE("bash_completion: %s\n", head);
+        TRACE("bash_completion complete: %s\n", head);
         gint head_len = strlen(head);
         g_free (head);
         gchar *token = Util::inputText (input);
@@ -511,7 +513,7 @@ public:
         }
         gchar *suggest = bash_complete_with_head(output, workdir, token);
         //fprintf(stderr, "completion count = %d\n", matches);
-        if (suggest){
+        if (output && suggest){
             gint matchCount = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(output), "matchCount"));
             TRACE("got matchCount=%d\n", matchCount);
             if (suggest[strlen(suggest)-1] != '/' && !tail) {

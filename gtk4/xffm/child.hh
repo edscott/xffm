@@ -75,6 +75,9 @@ namespace xf {
     }
     static GtkTextView *getCurrentOutput(void){
       auto child = getCurrentChild();
+      return GTK_TEXT_VIEW(getOutput(child));
+    }
+    static GtkTextView *getOutput(GtkWidget *child){
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
     }
     static GtkPaned *getCurrentPane(void){
@@ -85,8 +88,13 @@ namespace xf {
 
     static GtkBox *getCurrentButtonSpace(void){
       auto child = getCurrentChild();
+      return GTK_BOX(getButtonSpace(child));
+    }
+
+    static GtkBox *getButtonSpace(GtkWidget *child){
       return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
     }
+
     static GtkWidget *getCurrentChild(void){
       //DBG("getCurrentChild...\n");
       if (!MainWidget) return NULL;

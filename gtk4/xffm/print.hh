@@ -129,8 +129,6 @@ namespace xf {
     }
 
     static void showText(GtkTextView *textview){
-      // FIXME
-      return;
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
         void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};

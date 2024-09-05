@@ -22,15 +22,37 @@ namespace xf {
     GtkScale *sizeScale_;
 
     public:
+    Prompt(GtkWidget *child) {
+      GtkBox *buttonSpace = getButtonSpace(child);
+      GtkTextView *output = getOutput(child);
+      DBG("constructor 1\n");
+        buttonSpace_ = buttonSpace;
+        input_ = UtilBasic::createInput(); 
+        g_object_set_data(G_OBJECT(input_), "output", output);
+        g_object_set_data(G_OBJECT(input_), "child", child);
+
+        
+        g_object_set_data(G_OBJECT(input_), "buttonSpace", buttonSpace_);
+  
+        auto keyController = gtk_event_controller_key_new();
+        gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
+        g_signal_connect (G_OBJECT (keyController), "key-pressed", 
+            G_CALLBACK (this->on_keypress), (void *)input_);
+    }
 
     Prompt(void) {
+      DBG("constructor 0\n");
         promptBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         buttonSpace_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
         auto dollarBox = createPrompt();
-        input_ = UtilPathbar::createInput(); 
+        input_ = UtilBasic::createInput(); 
         gtk_widget_add_css_class (GTK_WIDGET(input_), "input" );
         gtk_widget_add_css_class (GTK_WIDGET(input_), "inputview" );
+
+        char *size = Settings::getString("xfterm", "size");
+        if (!size) size = g_strdup("font4"); // medium
+        gtk_widget_add_css_class (GTK_WIDGET(input_), size );
    
 
         auto myInputMenu = new Menu<InputMenu>;
@@ -254,7 +276,7 @@ namespace xf {
         TRACE("prompt window_keyboard_event: keyval=%d (0x%x), keycode=%d (0x%x), modifying=%d, data= %p\n", 
             keyval, keyval, keycode, keycode, state, data);
         auto input = GTK_TEXT_VIEW(data);
-        auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(data), "output"));
+        auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(input), "output"));
 
         if(keyval ==  GDK_KEY_Tab){
           Bash::complete(input, output);
