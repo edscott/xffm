@@ -1,5 +1,7 @@
 #ifndef UTILWORKDIR_HH
 #define UTILWORKDIR_HH
+#include "fm/pathbarmenu.hh"
+
 #include "texture.hh"
 #include "fm/gridview.hh"
 namespace xf {
@@ -159,31 +161,41 @@ namespace xf {
         }
         if (button == 3){
           DBG("workdir.hh:: FIXME pathbar menu...use menu class template\n");
-#if 0
-          GtkPopover *menu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
-          const char *text[] = {_("Open in new tab"), _("Paste"), _("Preview of data from clipboard"), NULL};
-          GHashTable *mHash[3];
-          mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
-          for (int i=1; i<3; i++) mHash[i] = g_hash_table_new(g_str_hash, g_str_equal);
-          g_hash_table_insert(mHash[0], _("Open in new tab"), g_strdup(LIST_ADD));
-          g_hash_table_insert(mHash[1], _("Open in new tab"), (void *) openNewTab); // callback
-          g_hash_table_insert(mHash[2], _("Open in new tab"), NULL); // data
-          g_hash_table_insert(mHash[0], _("Paste"), g_strdup(EDIT_PASTE));
-          g_hash_table_insert(mHash[1], _("Paste"), (void *) paste);
-          g_hash_table_insert(mHash[2], _("Paste"), NULL);
-          g_hash_table_insert(mHash[0], _("Preview of data from clipboard"), g_strdup("view-reveal"));
-          g_hash_table_insert(mHash[1], _("Preview of data from clipboard"), (void *)showPaste );
-          g_hash_table_insert(mHash[2], _("Preview of data from clipboard"), NULL);
+          DBG("workdir.hh:: path=%s, name=%s\n", path, name);
+          void *object = g_object_get_data(G_OBJECT(pathbar), "menu");
+          if (!object){
 
-          if (!menu) {
-            menu = UtilBasic::mkMenu(text, mHash, path);
-            gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar));
-            //gtk_widget_realize(GTK_WIDGET(menu));
+            DBG("***Error: g_object_get_data(G_OBJECT(pathbar), \"menu\") == NULL\n");
+            // fucking popovers... this will crash app.
+/*
+            GtkPopover *menu = GTK_POPOVER(gtk_popover_new());
             g_object_set_data(G_OBJECT(pathbar), "menu", menu);
+            auto label = gtk_label_new("foo bar");
+            gtk_popover_set_child(menu, label);
+            gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar));
+            gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar));
+*/
+
+            /*auto myPathbarMenu = new Menu<PathbarMenu>;
+            auto title = g_strconcat("<span color=\"blue\">", _("Navigation Toolbar"), "</span>", NULL);
+            auto pathbarMenu = myPathbarMenu->getMenu(title);
+            g_free(title);
+            g_object_set_data(G_OBJECT(pathbar), "menu", pathbarMenu);
+            // Important: must use both of the following instructions:
+            gtk_popover_set_default_widget(pathbarMenu, GTK_WIDGET(pathbar));
+            gtk_widget_set_parent(GTK_WIDGET(pathbarMenu), GTK_WIDGET(pathbar));
+            delete myPathbarMenu; 
+            g_object_set_data(G_OBJECT(pathbar), "menu", pathbarMenu);*/
+            
+          } else
+          {
+            auto pathbarMenu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
+            Menu<PathbarMenu>::setTitle(pathbarMenu, path);
+            gtk_popover_popup(pathbarMenu);
           }
-          UtilBasic::setMenuTitle(menu, path);
-          gtk_popover_popup(menu);
-#endif                
+              
+
+              
           return TRUE;
         }
         //TRACE("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);

@@ -69,6 +69,10 @@ namespace xf {
         gchar *pb_path = NULL;
         for (GList *children = children_list;children && children->data; children=children->next){
             gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
+            if (!name){
+              DBG("***utilpathbar.hh name is not set\n");
+              continue;
+            }
             if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "RFM_GOTO")==0) continue;
             //gchar *p = g_strdup_printf("%s%c", paths[i], G_DIR_SEPARATOR);
             TRACE( "(%d) comparing %s <--> %s\n", i, name, paths[i]);
@@ -239,23 +243,6 @@ namespace xf {
 
         return TRUE;
     }*/
-    private:
-    static void
-    openNewTab(GtkButton *self, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
-
-    }
-    static void
-    paste(GtkButton *self, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
-    }
-    static void
-    showPaste(GtkButton *self, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
-    }
     public:
 
   private:
@@ -366,17 +353,21 @@ namespace xf {
         //const gchar *fontSize = "size=\"small\"";
         const gchar *fontSize = "";
         gchar *name = (gchar *)g_object_get_data(G_OBJECT(eventBox), "name");
-        if (strcmp(name, "RFM_ROOT")==0) {
-            // no path means none is differentiated.
-            gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, color, bgcolor?bgcolor:"#dcdad5", ".");
-            auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
-            gtk_label_set_markup(label, markup);
-            g_free(markup);
-            return;
-        } 
-        if (strcmp(name, "RFM_GOTO")==0) {
-            return;
-        } 
+        if (!name){
+          DBG("utilpathbar:357, name is null\n");
+        } else {
+          if (strcmp(name, "RFM_ROOT")==0) {
+              // no path means none is differentiated.
+              gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, color, bgcolor?bgcolor:"#dcdad5", ".");
+              auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
+              gtk_label_set_markup(label, markup);
+              g_free(markup);
+              return;
+          } 
+          if (strcmp(name, "RFM_GOTO")==0) {
+              return;
+          } 
+        }
         const gchar *pb_path = 
             (const gchar *)g_object_get_data(G_OBJECT(eventBox), "path");
         if (!pb_path){

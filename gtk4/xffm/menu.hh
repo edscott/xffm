@@ -54,6 +54,14 @@ namespace xf {
       GtkPopover *getMenu(const char *title){
         return mkMenu(title);
       }
+
+    static void 
+    setTitle(GtkPopover *menu, const char *title){
+      auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menu), "titleLabel"));
+      auto markup = g_strconcat("<span color=\"blue\">", title, "</span>", NULL);
+      gtk_label_set_markup(label, markup);
+      g_free(markup);
+    }
       
     private:
     static 

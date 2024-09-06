@@ -1,5 +1,6 @@
 #ifndef PATHBAR_HH
 #define PATHBAR_HH
+#include "pathbarmenu.hh"
 namespace xf {
   class Pathbar : public UtilPathbar
   {
@@ -11,6 +12,8 @@ namespace xf {
     GtkWidget *next_;
     GList *historyBack_;
     GList *historyNext_;
+    GtkPopover *pathbarMenu_;
+    Menu<PathbarMenu> *myPathbarMenu_;
      
   public:
    GtkBox *pathbar(void){return pathbar_;} 
@@ -33,10 +36,27 @@ namespace xf {
    } 
  
    ~Pathbar(void){
+     delete myPathbarMenu_;
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+      /*  
+        myPathbarMenu_ = new Menu<PathbarMenu>;
+        auto title = g_strconcat("<span color=\"blue\">", _("Navigation Toolbar"), "</span>", NULL);
+        pathbarMenu_ = myPathbarMenu_->getMenu(title);
+        g_free(title);
+        g_object_set_data(G_OBJECT(pathbar_), "menu", pathbarMenu_);
+        // Important: must use both of the following instructions:
+        gtk_popover_set_default_widget(pathbarMenu_, GTK_WIDGET(pathbar_));
+        gtk_widget_set_parent(GTK_WIDGET(pathbarMenu_), GTK_WIDGET(pathbar_));
+           */
+   
+        //delete myPathbarMenu; // ???
+        //Util::addMenu(pathbarMenu, GTK_WIDGET(pathbar_));
+       
  
+      
+
         auto eventBox1 = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));
         auto eventBox2 = eventButton("xf-go-next", "RFM_GOTO", "xffm:next", _("Next"));
         auto eventBox3 = eventButton("xf-go-to", "RFM_GOTO", "xffm:goto", _("Go to"));
