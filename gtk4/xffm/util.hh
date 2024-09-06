@@ -10,7 +10,7 @@ namespace xf {
     GtkCssProvider *css_provider = gtk_css_provider_new();
 
     char *outputBg = Settings::getString("xfterm", "outputBg");
-    if (!outputBg) outputBg = g_strdup("#bbbbbb");
+    if (!outputBg) outputBg = g_strdup(DEFAULT_OUTPUT_BG);
 
     char *outputFg = Settings::getString("xfterm", "outputFg");
     if (!outputFg) outputFg = g_strdup("#111111");

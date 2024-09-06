@@ -14,6 +14,7 @@ class OpenWith {
     GtkProgressBar *timeoutProgress_;
     GtkCheckButton *checkbutton_;
     GtkTextView *input_;
+    GtkWidget *child_;
     
    
 protected:
@@ -24,10 +25,10 @@ protected:
     GtkProgressBar *progress(void){return timeoutProgress_;}
     GtkCheckButton *checkbutton(void){ return checkbutton_;}
     GtkTextView *input(void){ return input_;}
+    GtkWidget *child(void){ return child_;}
         
     Prompt<Type> *prompt_p;
     GtkBox *buttonSpace;
-    GtkTextView *output;
 public:
     
     ~OpenWith (void){
@@ -39,6 +40,8 @@ public:
     OpenWith (GtkWindow *parent, const gchar *inPath){
       const gchar *windowTitle = _("Open With...");
       const gchar *icon = "emblem-run";
+      child_ = Child::getCurrentChild();
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child_), "output"));
 
       path_ = g_strdup(inPath);
       timeout_ = 10;
@@ -98,7 +101,6 @@ public:
 
       auto child = Child::getCurrentChild();
       buttonSpace = Child::getButtonSpace(child);
-      output = Child::getOutput(child);
       prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
       auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
@@ -232,13 +234,31 @@ public:
     
     static void
     run(OpenWith *object){
+       if (!Child::valid(object->child())){
+         DBG("Child widget (%p) is no longer valid.\n", object->child());
+         return;
+       }
+
+        auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(object->child()), "output"));
         bool inTerminal = gtk_check_button_get_active(object->checkbutton());
         // get input text
         auto buffer = gtk_text_view_get_buffer(object->input());
         GtkTextIter  start, end;
         gtk_text_buffer_get_bounds (buffer, &start, &end);
         auto inputText = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
-        g_strstrip(inputText);   
+        g_strstrip(inputText);  
+        auto executable = g_strdup(inputText);
+        if (strchr(executable, ' ')) *strrchr(executable, ' ') = 0;
+        if (!g_find_program_in_path(executable)){
+          auto message = g_strdup_printf(_("Cannot find executable for \"%s\""), executable);
+          UtilBasic::concat(&message, "\n");
+          Print::printError(output, message);
+          Print::showText(output);
+          g_free(inputText);
+          g_free(executable);
+          return;
+        } 
+        g_free(executable);
         const char *extension = NULL;
         if (strchr(object->path(), '.')) extension = strrchr(object->path(), '.') + 1;
         if (extension) {
@@ -261,7 +281,7 @@ public:
           Settings::setInteger("ExternalTerminal", key, 0);
         }
         g_free(key);
-        object->prompt_p->run(object->output, command, true, true, object->buttonSpace);
+        object->prompt_p->run(output, command, true, true, object->buttonSpace);
         g_free(command);
         g_free(inputText);
     }
@@ -284,7 +304,7 @@ public:
           return TRUE;
         }
         if(keyval == GDK_KEY_Tab) { 
-          auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(object->input()), "output"));
+          auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(object->child()), "output"));
           Print::showText(output);
         }
         return FALSE;

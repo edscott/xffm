@@ -5,6 +5,9 @@
 //  to open inspector:
 //  GTK_DEBUG=interactive xffm/xffm -f
 #include <librsvg/rsvg.h>
+
+#define DEFAULT_OUTPUT_BG "#bbbbbb"
+
 #include "xffm.h"
 #include "settings.hh"
 #include "thread.hh"
@@ -74,17 +77,22 @@ static bool detachProcess(const char *argv1){
   return false;
 }
 static  gchar *getPath(const char *argv1){
-    gchar *path = NULL;
-    if (argv1 && g_file_test(argv1, G_FILE_TEST_IS_DIR)){
-      path = realpath(argv1, NULL);
-      if (!path) {
-        DBG("This should never occur: realpath(%s): %s\n", path, strerror(errno));
-        exit(2);
+    if (!argv1) return g_strdup("xffm:root");
+    if (!g_file_test(argv1, G_FILE_TEST_EXISTS)){
+      DBG("\"%s\" does not exist.\n", argv1);
+      return g_strdup(g_get_home_dir());
+    }
+    gchar *path = realpath(argv1, NULL);
+    if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+      if (chdir(path) < 0) {
+        DBG("xffm.cc::Cannot chdir to %s (%s)\n", argv1, strerror(errno));
+        return g_strdup(g_get_home_dir());
       }
       return path;
-    }
-    return g_strdup("xffm:root");
-  }
+    } 
+    DBG("\"%s\" is not a directory.\n", path);
+    return g_path_get_basename(path);
+}
 
 
 int
@@ -92,23 +100,22 @@ main (int argc, char *argv[]) {
   coreSetup(argc, argv);
   xffindProgram = argv[0];
   xffmProgram = argv[0];
-  
-  if (chdir(g_get_home_dir()) < 0){
-    fprintf(stderr, "xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
-    exit(1);
-  }
+  //foo bar
       
   XInitThreads();
 
   // Run in foreground if "-f"  given:
   if (!detachProcess(argv[1])) argv[1] = argv[2];
-
+  /*if (chdir(g_get_home_dir()) < 0) {
+      DBG("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
+  }*/
  
   pthread_t threadLeader;
   pthread_create(&threadLeader, NULL, xf::Thread:: threadPoolRun, NULL);
   pthread_detach(threadLeader);
 
   gchar *path = getPath(argv[1]);
+  DBG("path is %s (%s)\n", path, argv[1]); 
   auto fm = new(xf::Fm)(path);
   
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)

@@ -1,8 +1,27 @@
 #ifndef CHILD_HH
 #define CHILD_HH
+static GHashTable *childHash = NULL;
 namespace xf {
   class Child {
     public:
+    static void 
+    add(GtkWidget *child){
+      if (!childHash) childHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      g_hash_table_insert(childHash, child, GINT_TO_POINTER(1));
+    }
+    static void 
+    remove(GtkWidget *child){
+      if (!childHash) childHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      if (g_hash_table_lookup(childHash, child)){
+        g_hash_table_remove(childHash, child);
+      }
+    }
+    static bool
+    valid(GtkWidget *child){
+      return ((bool) g_hash_table_lookup(childHash,child));
+    }
+
+
     static void setGridview(GtkWidget *view){
       auto child =  Child::getCurrentChild();
       auto gridScrolledWindow = getGridScrolledWindow();

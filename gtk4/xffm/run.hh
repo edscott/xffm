@@ -306,18 +306,20 @@ public:
         }  
 
         //Util::show_text(textview);      
-        
+#warning  "text color"
         char *line;
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                Util::print(textview, "Cyan", g_strdup(line));
+                //Util::print(textview, "Cyan/default_output_bg", g_strdup(line));
+                Util::print(textview, "darkcyan/default_output_bg", g_strdup(line));
             } else if (strstr(line, "***")) {
                 Util::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
-                Util::print(textview, "yellow", g_strdup(line));
+                //Util::print(textview, "yellow/black", g_strdup(line));
+                Util::print(textview, "brown/default_output_bg", g_strdup(line));
             } else {                
-                Util::printStdErr(textview, g_strdup(line));
+                Util::print(textview, "red/default_output_bg", g_strdup(line));
             }
         }
 
@@ -352,7 +354,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        Util::printStdErr(textview, g_strdup(line));
+        Util::printRed(textview, g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;

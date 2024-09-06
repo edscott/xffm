@@ -141,6 +141,7 @@ private:
       auto page = new PageClass(path);
       auto child = page->childBox();
       g_object_set_data(G_OBJECT(child), "page", page);
+      Child::add(GTK_WIDGET(child));
 
       //GtkBox *child = this->mkPageBox(path);
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
@@ -163,11 +164,13 @@ private:
      
     }
  
-    void zapPage(){
+    void zapPage(void){
       TRACE("zapPage...\n");
 
       auto num = gtk_notebook_get_current_page(notebook_);
       auto child = gtk_notebook_get_nth_page(notebook_, num);
+      Child::remove(child);
+
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       Util::unreference_textview(output);
       GList *item = g_list_find(pageList_, child);

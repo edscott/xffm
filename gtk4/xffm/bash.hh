@@ -49,7 +49,7 @@ public:
         if (!match) {
             const gchar *option_type = get_match_type_text(match_type);
             match = _("Found no match");
-            Util::print_icon(output, "dialog-warning", "red", g_strdup_printf(" %s\n", match));
+            Util::printIcon(output, "dialog-info", g_strdup_printf(" %s\n", match));
         } else {
             auto p = g_find_program_in_path(match);
             if (!p && g_file_test(match, G_FILE_TEST_IS_SYMLINK)){
@@ -137,7 +137,7 @@ public:
             //Util::print(output, "blue/white_bg",g_strdup_printf("%s ", file_token));
 
             Util::showText(output);
-            Util::print_error(output, g_strdup_printf("%s: %ld %s\n", 
+            Util::printError(output, g_strdup_printf("%s: %ld %s\n", 
                   _("Matches"), maxOptions(), _("Too many selected files")));
             globfree(&stack_glob_v);
             g_free(file_token);
@@ -562,7 +562,7 @@ public:
             gint offset = -1;
             // +1 is icon...
             offset = head_len + (suggest_len - token_len) + 1;
-            Util::print_status(input, g_strdup(suggest));
+            Util::printStatus(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
             gtk_text_buffer_place_cursor(buffer, &end);
         }
@@ -610,7 +610,7 @@ public:
             gint offset = -1;
             // +1 is icon...
             offset = head_len + (suggest_len - token_len) + 1;
-            Util::print_status(input, g_strdup(suggest));
+            Util::printStatus(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
             gtk_text_buffer_place_cursor(buffer, &end);
         }
@@ -645,7 +645,7 @@ private:
         if (!output) return;
         Util::showText(output);
 
-        Util::print_icon(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
+        Util::printIcon(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
                 _("Completion mode:"), 
                 _("command"),
                 _("file")));
