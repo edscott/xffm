@@ -29,14 +29,11 @@ namespace xf {
         outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util::newTextView();
 
-#ifdef ENABLE_MENU_CLASS
-        auto myOutputMenu = new Menu<OutputMenu>;
-        auto title = g_strconcat("<span color=\"blue\">", _("Output"),_(" TTY"), "</span>", NULL);
-        auto outputMenu = myOutputMenu->getMenu(title);
+        auto title = g_strconcat("",_("Output"),_(" TTY"), NULL);
+        auto myOutputMenu = new Menu<OutputMenu>(title);
+        myOutputMenu->setMenu(GTK_WIDGET(output_), GTK_WIDGET(output_));
         g_free(title);
         delete myOutputMenu;
-        Util::addMenu(outputMenu, GTK_WIDGET(output_));
-#endif
        
         g_object_set_data(G_OBJECT(vpane_), "output", output_);
         g_object_set_data(G_OBJECT(output_), "vpane", vpane_);

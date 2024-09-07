@@ -43,18 +43,6 @@ namespace xf {
         };
         
         auto scale = newSizeScale(_("Icon Size"));
-
-        auto colorButton = Util::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
-#ifdef ENABLE_MENU_CLASS
-        auto myColorMenu = new Menu<IconColorMenu>;
-        auto markup2 = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Colors"));
-        auto colorMenu = myColorMenu->getMenu(markup2);
-        g_free(markup2);
-        gtk_menu_button_set_popover (colorButton, GTK_WIDGET(colorMenu));  
-        delete myColorMenu;
-#endif
-      
-
         auto hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(hbox), FALSE);
         vButtonBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));
@@ -63,12 +51,10 @@ namespace xf {
 
 
         gtk_widget_set_hexpand(GTK_WIDGET(vButtonBox_), TRUE);
-
-        /*const char *bIcon[]={OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, NULL};
-        const char *bText[]={_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_ NULL};*/
-
         auto q = bText;
         auto r = bCallback;
+        /*const char *bIcon[]={OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, NULL};
+        const char *bText[]={_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_ NULL};*/
         for (auto p=bIcon; p && *p; p++, q++){
           auto button = Util::newButton(*p, *q);
           Util::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
@@ -78,7 +64,12 @@ namespace xf {
           }
         }
 
+        auto colorButton = Util::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
+        auto myColorMenu = new Menu<IconColorMenu>(_("Colors"));
+        myColorMenu->setMenu(colorButton);
+        delete myColorMenu;
         Util::boxPack0(vButtonBox_, GTK_WIDGET(colorButton),  FALSE, FALSE, 0);
+      
         Util::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
         Util::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(MainWidget), "buttonBox", vButtonBox_);

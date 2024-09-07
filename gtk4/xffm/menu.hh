@@ -26,8 +26,13 @@ namespace xf {
       MenuInfo_t *iconNames_;
       MenuInfo_t *callbacks_;
       MenuInfo_t *data_;
+      char *title_;
     public:
-      Menu(void){
+      ~Menu(void){
+        g_free(title_);
+      }
+      Menu(const char *title){
+        title_ = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>",title);
         // Icon/callback/data hashes:
         mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
         mHash[1] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
@@ -49,12 +54,51 @@ namespace xf {
           auto data = p->data;
           if (data) g_hash_table_insert(mHash[2], g_strdup(p->key), data);
         }
+        delete menuClass;
       }
 
-      GtkPopover *getMenu(const char *title){
-        return mkMenu(title);
+      void setMenu(GtkMenuButton *button){
+        auto menu = mkMenu(title_);
+        gtk_menu_button_set_popover (button, GTK_WIDGET(menu)); 
+        g_object_set_data(G_OBJECT(button), "menu", menu);
+        return;
       }
 
+      /*GtkPopover *getMenu(GtkMenuButton *button){
+        auto menu = mkMenu(title_);
+        gtk_menu_button_set_popover (button, GTK_WIDGET(menu)); 
+        return menu;
+      }*/
+      
+      void setMenu(GtkWidget *widget, GtkWidget *parent){
+        auto menu = mkMenu(title_);
+        gtk_popover_set_default_widget(menu, widget);
+        gtk_widget_set_parent(GTK_WIDGET(menu), parent);
+        
+        auto gesture = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3);
+        g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (openMenu), (void *)menu);
+        gtk_widget_add_controller(GTK_WIDGET(parent), GTK_EVENT_CONTROLLER(gesture));
+        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+            GTK_PHASE_CAPTURE);
+
+        return;        
+      }
+
+    private:
+    static gboolean openMenu(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+      auto menu = GTK_POPOVER(data);
+      // position is relative to the parent/default widget.
+      TRACE("position %lf,%lf\n", x, y);
+      gtk_popover_popup(menu);
+      return TRUE;
+    }
+ 
+    public:
     static void 
     setTitle(GtkPopover *menu, const char *title){
       auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menu), "titleLabel"));

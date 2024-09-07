@@ -55,15 +55,12 @@ namespace xf {
         gtk_widget_add_css_class (GTK_WIDGET(input_), size );
    
 
-#ifdef ENABLE_MENU_CLASS
-        auto myInputMenu = new Menu<InputMenu>;
-        auto title = g_strconcat("<span color=\"blue\">",_("Input"),_(" TTY"),  "</span>", NULL);
-        auto inputMenu = myInputMenu->getMenu(title);
+        auto title = g_strconcat("",_("Input"),_(" TTY"), NULL);
+        auto myInputMenu = new Menu<InputMenu>(title);
         g_free(title);
+        myInputMenu->setMenu(GTK_WIDGET(input_), GTK_WIDGET(input_));
         delete myInputMenu;
-        Util::addMenu(inputMenu, GTK_WIDGET(input_));
-#endif
-
+        
         g_object_set_data(G_OBJECT(input_), "buttonSpace", buttonSpace_);
         g_object_set_data(G_OBJECT(input_), "promptBox", promptBox_);
         g_object_set_data(G_OBJECT(promptBox_), "buttonSpace", buttonSpace_);

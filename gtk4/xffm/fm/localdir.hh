@@ -9,6 +9,7 @@ namespace xf {
         if (type == G_FILE_TYPE_SYMBOLIC_LINK){ 
           const char *path = g_file_info_get_symlink_target(info);
           struct stat st;
+          memset(st, 0, sizeof(struct stat));
           stat(path, &st);
           if (S_ISDIR(st.st_mode)) return true;
         }

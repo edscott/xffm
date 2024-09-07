@@ -1,4 +1,4 @@
-/* 
+/* Obsolete now, because menu class will now become a class template with GTK type (gtk menu button or simple widget)
  * Build:
  * c++ -ggdb `pkg-config --cflags gtk4` menu_sample.c -o menu_sample `pkg-config --libs gtk4`
  */

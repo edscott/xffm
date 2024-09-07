@@ -8,6 +8,7 @@
 
 #define DEFAULT_OUTPUT_BG "#bbbbbb"
 
+// Debugging macros:
 #define ENABLE_GRIDVIEW
 //#undef ENABLE_GRIDVIEW
 
@@ -15,7 +16,7 @@
 #undef ENABLE_MENU_CLASS
 
 #define ENABLE_THREAD_POOL
-#undef ENABLE_THREAD_POOL
+//#undef ENABLE_THREAD_POOL
 
 #include "xffm.h"
 #include "settings.hh"

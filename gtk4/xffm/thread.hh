@@ -76,36 +76,28 @@ public:
           
         int count = 0;
         while (1){
-          usleep(5);
-          time_t sec = time(NULL);
+          if (active >= maxThreads) break;
           while (active < maxThreads){
-            DBG("Threadpool loop %d\n", ++count);
-            if (time(NULL) == sec) {
-              sleep(1); // debug hack XXX
-              sec = time(NULL);
-            }
-        pthread_mutex_lock(&threadPoolMutex);
-            if (g_list_length(threadPool)) {
-                auto last = g_list_last(threadPool);
-                info[active] = (threadInfo_t *)last->data;
-                threadPool = g_list_remove(threadPool, info[active]);
+            TRACE("Threadpool loop %d\n", ++count);
+            pthread_mutex_lock(&threadPoolMutex);
+              int pending = g_list_length(threadPool);
+            pthread_mutex_unlock(&threadPoolMutex);
+            if (pending) {
+                pthread_mutex_lock(&threadPoolMutex);
+                  auto last = g_list_last(threadPool);
+                  info[active] = (threadInfo_t *)last->data;
+                  threadPool = g_list_remove(threadPool, info[active]);
+                pthread_mutex_unlock(&threadPoolMutex);
                 pthread_create(threads+active, NULL, 
                     info[active]->function, 
                     info[active]->data);
                 active++;
                 TRACE("thread %d spawned...\n", active);
-            }
-        pthread_mutex_unlock(&threadPoolMutex);
-            if (time(NULL) - sec > 0 && active > 0){
-              sec = time(NULL);
-              void *retval;
-              pthread_join(threads[active - 1], &retval);
-              TRACE("thread %d joined...\n", active);
-              g_free(info[active - 1]);
-              active--;
-            }
+            } else usleep(250000);
+
           }
-          
+          // break send here
+          // Join maxThreads before spawning any more.
           while (active > 0){
             void *retval;
             pthread_join(threads[active - 1], &retval);

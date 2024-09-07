@@ -210,20 +210,6 @@ namespace xf {
         return NULL;
     }
     
-    static void addMenu(GtkPopover *menu, GtkWidget *parent){
-      g_object_set_data(G_OBJECT(parent), "menu", menu);
-      // Important: must use both of the following instructions:
-      gtk_popover_set_default_widget(menu, parent);
-      gtk_widget_set_parent(GTK_WIDGET(menu), parent);
-
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3);
-      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (openMenu), (void *)menu);
-      gtk_widget_add_controller(GTK_WIDGET(parent), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_CAPTURE);
-      return;  
-    }
     
 
   private:
