@@ -54,13 +54,19 @@ namespace xf {
           auto data = p->data;
           if (data) g_hash_table_insert(mHash[2], g_strdup(p->key), data);
         }
-        delete menuClass;
+        delete myMenuClass_p;
+      }
+
+      static void openMenuButton(GtkWidget *self, void *data){
+        auto menu = GTK_POPOVER(data);
+        gtk_popover_popup(menu);
       }
 
       void setMenu(GtkMenuButton *button){
         auto menu = mkMenu(title_);
         gtk_menu_button_set_popover (button, GTK_WIDGET(menu)); 
         g_object_set_data(G_OBJECT(button), "menu", menu);
+       // g_signal_connect(G_OBJECT(button), "activate", G_CALLBACK(openMenuButton), (void *)menu);
         return;
       }
 
@@ -77,7 +83,7 @@ namespace xf {
         
         auto gesture = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3);
-        g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (openMenu), (void *)menu);
+        g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (openMenu), (void *)menu);
         gtk_widget_add_controller(GTK_WIDGET(parent), GTK_EVENT_CONTROLLER(gesture));
         gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
             GTK_PHASE_CAPTURE);
@@ -93,7 +99,7 @@ namespace xf {
               gpointer data){
       auto menu = GTK_POPOVER(data);
       // position is relative to the parent/default widget.
-      TRACE("position %lf,%lf\n", x, y);
+      //TRACE("position %lf,%lf\n", x, y);
       gtk_popover_popup(menu);
       return TRUE;
     }

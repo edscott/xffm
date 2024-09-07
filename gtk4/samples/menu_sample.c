@@ -7,7 +7,7 @@
 #include "../xffm/menu.hh"
 GtkWidget *MainWidget;
 namespace xf {
-  class ExampleMenu {
+  class ExampleMenuClass {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
@@ -106,13 +106,13 @@ int main (int argc, char *argv[])
   GtkMenuButton *button = mkMenuButton("open-menu-symbolic");
   gtk_window_set_child(GTK_WINDOW(MainWidget), GTK_WIDGET(button));  
 
-  //auto myMenuInfo = new ExampleMenu; 
-  auto myMenu = new xf::Menu<xf::ExampleMenu>;
-  auto menu = myMenu->getMenu("<span color=\"blue\"><b>Example menu</b></span>");
-  //delete(myMenuInfo);
-  //delete(myMenu);
+  //For defining a menu for menu button
+  auto myMenu = new xf::Menu<xf::ExampleMenuClass>("Example menu");
+  myMenu->setMenu(button);
+  // For defining a menu for ordinary widget, parent and default widget may be the same.
+  //myMenu->setMenu(widget, parent);
+  delete(myMenu);
       
-  gtk_menu_button_set_popover (button, GTK_WIDGET(menu));
   // Important when not a  gtk_menu_button but widget with gesture callback:
   // gtk_popover_set_default_widget(menu, button);
   // gtk_widget_set_parent(GTK_WIDGET(menu), button);
@@ -124,4 +124,3 @@ int main (int argc, char *argv[])
 
   return 0;
 }
-
