@@ -36,7 +36,7 @@ namespace xf {
    } 
  
    ~Pathbar(void){
-     delete myPathbarMenu_;
+     //delete myPathbarMenu_;
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
