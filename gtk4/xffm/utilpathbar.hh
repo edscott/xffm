@@ -1,6 +1,7 @@
 #ifndef UTILPATHBAR_HH
 #define UTILPATHBAR_HH
-
+#include "menu.hh"
+#include "fm/pathbarmenu.hh"
 namespace xf {
   class UtilPathbar  :  public  UtilBasic{
     public:
@@ -64,13 +65,14 @@ namespace xf {
         paths[0]= g_strdup(G_DIR_SEPARATOR_S);
 
         GList *children_list = UtilBasic::getChildren(pathbar);
+        //for (auto l=children_list; l && l->data; l=l->next);
         //GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar));
         gint i=0;
         gchar *pb_path = NULL;
         for (GList *children = children_list;children && children->data; children=children->next){
             gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
             if (!name){
-              DBG("***utilpathbar.hh name is not set\n");
+              DBG("***Error utilpathbar.hh name is not set\n");
               continue;
             }
             if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "RFM_GOTO")==0) continue;
@@ -123,19 +125,6 @@ namespace xf {
             g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (pathbar_white), (void *)pathbar);
             g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (pathbar_blue), (void *)pathbar);
             
-         /*   auto click = gtk_event_controller_legacy_new();
-            g_signal_connect (G_OBJECT(click) , "event", EVENT_CALLBACK (pathbarGo), (void *)pb_button);
-            gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(click));*/
-
-            auto gesture1 = gtk_gesture_click_new();
-            gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-            g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);
-            gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
-            
-            auto gesture3 = gtk_gesture_click_new();
-            gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture3),3);
-            g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);
-            gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture3));
  
             gtk_widget_set_visible(GTK_WIDGET(pb_button), TRUE);
         }
@@ -144,6 +133,27 @@ namespace xf {
         
         // show what fits
         togglePathbar(path, pathbar);
+
+        // finally, add the menu item for each pathbar item.
+        // This should only be done if no menu is already set
+        // for the item.
+        children_list = UtilBasic::getChildren(pathbar);
+        for (GList *children = children_list;children && children->data; children=children->next){
+           auto widget = GTK_WIDGET(children->data);
+           if (g_object_get_data(G_OBJECT(widget), "menu")) continue;
+           auto parent = widget;
+           auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
+           auto myItemMenu = new Menu<PathbarMenu>(path);
+           myItemMenu->setMenu(widget, parent);
+           delete myItemMenu;
+
+            auto gesture = gtk_gesture_click_new();
+            gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+            g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);
+            gtk_widget_add_controller(GTK_WIDGET(widget), GTK_EVENT_CONTROLLER(gesture));
+            
+
+        }
 
         // Now process to back and next buttons
         {

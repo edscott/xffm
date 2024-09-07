@@ -80,6 +80,7 @@ namespace xf {
         auto menu = mkMenu(title_);
         gtk_popover_set_default_widget(menu, widget);
         gtk_widget_set_parent(GTK_WIDGET(menu), parent);
+        g_object_set_data(G_OBJECT(widget), "menu", (void *)menu);
         
         auto gesture = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3);

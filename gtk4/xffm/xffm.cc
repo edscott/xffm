@@ -30,6 +30,8 @@
 #include "print.hh"
 #include "openwith.hh"        
 
+
+#include "menu.hh"
 #include "utilpathbar.hh"
 #include "bookmarks.hh"
 #include "fm/localdir.hh"

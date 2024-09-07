@@ -161,38 +161,6 @@ namespace xf {
           setWorkdir(path, pathbar, true);
           return TRUE;
         }
-        if (button == 3){
-          DBG("workdir.hh:: FIXME pathbar menu...use menu class template\n");
-          DBG("workdir.hh:: path=%s, name=%s\n", path, name);
-          void *object = g_object_get_data(G_OBJECT(pathbar), "menu");
-          if (!object){
-
-            DBG("***Error: g_object_get_data(G_OBJECT(pathbar), \"menu\") == NULL\n");
-
-            // fucking popovers... this will crash app.
-
-            /*auto myPathbarMenu = new Menu<PathbarMenu>;
-            auto title = g_strconcat("<span color=\"blue\">", _("Navigation Toolbar"), "</span>", NULL);
-            auto pathbarMenu = myPathbarMenu->getMenu(title);
-            g_free(title);
-            g_object_set_data(G_OBJECT(pathbar), "menu", pathbarMenu);
-            // Important: must use both of the following instructions:
-            gtk_popover_set_default_widget(pathbarMenu, GTK_WIDGET(pathbar));
-            gtk_widget_set_parent(GTK_WIDGET(pathbarMenu), GTK_WIDGET(pathbar));
-            delete myPathbarMenu; 
-            g_object_set_data(G_OBJECT(pathbar), "menu", pathbarMenu);*/
-            
-          } else
-          {
-            auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
-            //Menu<PathbarMenu>::setTitle(pathbarMenu, path);
-            gtk_popover_popup(menu);
-          }
-              
-
-              
-          return TRUE;
-        }
         //TRACE("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);
         return FALSE;
         /*
