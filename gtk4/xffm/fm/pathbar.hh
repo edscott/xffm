@@ -12,8 +12,6 @@ namespace xf {
     GtkWidget *next_;
     GList *historyBack_;
     GList *historyNext_;
-    GtkPopover *pathbarMenu_;
-    Menu<PathbarMenu> *myPathbarMenu_;
      
   public:
    GtkBox *pathbar(void){return pathbar_;} 
@@ -40,19 +38,35 @@ namespace xf {
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-      /*  
-        myPathbarMenu_ = new Menu<PathbarMenu>;
+        //gtk_widget_set_parent(GTK_WIDGET(pathbar_), GTK_WIDGET(MainWidget));
+     
+//#ifdef ENABLE_MENU_CLASS
+#if 0
+            GtkPopover *menu = GTK_POPOVER(gtk_popover_new());
+            //gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
+            gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
+            //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
+            //gtk_popover_set_default_widget(menu, GTK_WIDGET(MainWidget));
+            g_object_set_data(G_OBJECT(pathbar_), "menu", menu);
+            auto label = gtk_label_new("foo bar");
+            gtk_popover_set_child(menu, label);
+#else
+ /*       
+        auto myPathbarMenu = new Menu<PathbarMenu>;
         auto title = g_strconcat("<span color=\"blue\">", _("Navigation Toolbar"), "</span>", NULL);
-        pathbarMenu_ = myPathbarMenu_->getMenu(title);
+        auto menu = myPathbarMenu->getMenu(title);
         g_free(title);
-        g_object_set_data(G_OBJECT(pathbar_), "menu", pathbarMenu_);
+        g_object_set_data(G_OBJECT(pathbar_), "menu", menu);
         // Important: must use both of the following instructions:
-        gtk_popover_set_default_widget(pathbarMenu_, GTK_WIDGET(pathbar_));
-        gtk_widget_set_parent(GTK_WIDGET(pathbarMenu_), GTK_WIDGET(pathbar_));
-           */
-   
+        //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
+        gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
+//        gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
+        Util::addMenu(menu, GTK_WIDGET(pathbar_));
+        //gtk_widget_realize(GTK_WIDGET(menu));
+  */        
         //delete myPathbarMenu; // ???
-        //Util::addMenu(pathbarMenu, GTK_WIDGET(pathbar_));
+#endif
+//#endif
        
  
       

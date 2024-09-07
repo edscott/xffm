@@ -154,6 +154,21 @@ private:
       auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
       gtk_widget_realize(GTK_WIDGET(child));
       Util::flushGTK();
+
+        auto pathbar_ = Child::getPathbar();
+        auto myPathbarMenu = new Menu<PathbarMenu>;
+        auto title = g_strconcat("<span color=\"blue\">", _("foo Navigation Toolbar"), "</span>", NULL);
+        auto menu = myPathbarMenu->getMenu(title);
+        g_free(title);
+        g_object_set_data(G_OBJECT(pathbar_), "menu", menu);
+        // Important: must use both of the following instructions:
+        //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
+        //gtk_popover_set_default_widget(menu, GTK_WIDGET(MainWidget));
+        //gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
+        DBG("menu parent = %p (should be null)\n", gtk_widget_get_parent(GTK_WIDGET(menu)));
+        gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
+        Util::addMenu(menu, GTK_WIDGET(pathbar_));
+      
       
       if (num >= 0) {
         while (num != gtk_notebook_get_current_page(notebook_)) 
@@ -261,15 +276,14 @@ private:
       auto newTabButton = Util::newButton("list-add", _("New Tab"));
       auto newMenuButton = Util::newMenuButton("open-menu", NULL);
 
+//#ifdef ENABLE_MENU_CLASS
       auto myMainMenu = new Menu<MainMenu>;
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Main menu"));
       auto menu = myMainMenu->getMenu(markup);
       g_free(markup);
       delete myMainMenu;
-      
       gtk_menu_button_set_popover (newMenuButton, GTK_WIDGET(menu));  
-
-
+//#endif
 
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
               BUTTON_CALLBACK(on_new_page), (void *)this);    

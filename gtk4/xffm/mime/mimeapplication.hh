@@ -19,6 +19,7 @@ class MimeApplication {
     }
 public:
     static void constructAppHash (void) {
+        DBG("**** constructAppHash\n");
         applicationHash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, freeStrV);
         loadAppHash();
     }
@@ -93,7 +94,8 @@ public:
 private:
 
     static gboolean loadAppHash(void){
-        new Thread("MimeApplication::loadAppHash(): loadAppHash_f", loadAppHash_f, NULL);
+      loadAppHash_f(NULL);
+      //  new Thread("MimeApplication::loadAppHash(): loadAppHash_f", loadAppHash_f, NULL);
         return TRUE;
     }
 

@@ -8,6 +8,15 @@
 
 #define DEFAULT_OUTPUT_BG "#bbbbbb"
 
+#define ENABLE_GRIDVIEW
+//#undef ENABLE_GRIDVIEW
+
+#define ENABLE_MENU_CLASS
+#undef ENABLE_MENU_CLASS
+
+#define ENABLE_THREAD_POOL
+#undef ENABLE_THREAD_POOL
+
 #include "xffm.h"
 #include "settings.hh"
 #include "thread.hh"

@@ -45,12 +45,14 @@ namespace xf {
         auto scale = newSizeScale(_("Icon Size"));
 
         auto colorButton = Util::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
+#ifdef ENABLE_MENU_CLASS
         auto myColorMenu = new Menu<IconColorMenu>;
         auto markup2 = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Colors"));
         auto colorMenu = myColorMenu->getMenu(markup2);
         g_free(markup2);
         gtk_menu_button_set_popover (colorButton, GTK_WIDGET(colorMenu));  
         delete myColorMenu;
+#endif
       
 
         auto hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));

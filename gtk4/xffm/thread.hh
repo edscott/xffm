@@ -53,34 +53,37 @@ public:
       }
 
       static void threadPoolAdd(void* (*function)(void*), void *data){
+#ifdef ENABLE_THREAD_POOL
+
         auto info = (threadInfo_t *)calloc(1, sizeof(threadInfo_t));
         info->function = function;
         info->data = data;
         pthread_mutex_lock(&threadPoolMutex);
         threadPool = g_list_prepend(threadPool, info);
         pthread_mutex_unlock(&threadPoolMutex);
-      }
-
-      static int threadPoolSize(void){
-        pthread_mutex_lock(&threadPoolMutex);
-        auto size = g_list_length(threadPool);
-        pthread_mutex_unlock(&threadPoolMutex);
-        return size;
+#endif
       }
 
 
 
       static void *threadPoolRun(void *data){
+#ifdef ENABLE_THREAD_POOL
         TRACE("Thread::threadPoolRun...\n");
         int active = 0;
         getMaxThreads();
         pthread_t threads[maxThreads];
         threadInfo_t *info[maxThreads];
           
+        int count = 0;
         while (1){
           usleep(5);
           time_t sec = time(NULL);
           while (active < maxThreads){
+            DBG("Threadpool loop %d\n", ++count);
+            if (time(NULL) == sec) {
+              sleep(1); // debug hack XXX
+              sec = time(NULL);
+            }
         pthread_mutex_lock(&threadPoolMutex);
             if (g_list_length(threadPool)) {
                 auto last = g_list_last(threadPool);
@@ -111,8 +114,18 @@ public:
             active--;
           }
         }
+#else
+        DBG("Threadpool is disabled\n");
+#endif
+        return NULL;
       }
 
+      static int threadPoolSize(void){
+        pthread_mutex_lock(&threadPoolMutex);
+        auto size = g_list_length(threadPool);
+        pthread_mutex_unlock(&threadPoolMutex);
+        return size;
+      }
 private:
 
 pthread_t *runThread_;
@@ -145,7 +158,7 @@ private:
     gint
     thread_create(const gchar *dbg_text, void *(*thread_f)(void *), void *data)
     {
-        TRACE("thread_create: %s\n", dbg_text);
+        DBG("thread_create: %s\n", dbg_text);
         //auto thread = (pthread_t *)calloc(1,sizeof(pthread_t *));
         gint retval = pthread_create(runThread_, NULL, thread_f, data);
         if (retval){

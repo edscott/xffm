@@ -9,11 +9,13 @@ namespace xf {
   class Workdir  {
     private:
       static void  updateGridView(const char *path){
+#ifdef ENABLE_GRIDVIEW
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
         TRACE("update updateGridView\n");
         Child::incrementSerial();
         auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
+#endif
       }
 
       static void  updatePathbar(bool addHistory, void *pathbar_go){
@@ -166,15 +168,8 @@ namespace xf {
           if (!object){
 
             DBG("***Error: g_object_get_data(G_OBJECT(pathbar), \"menu\") == NULL\n");
+
             // fucking popovers... this will crash app.
-/*
-            GtkPopover *menu = GTK_POPOVER(gtk_popover_new());
-            g_object_set_data(G_OBJECT(pathbar), "menu", menu);
-            auto label = gtk_label_new("foo bar");
-            gtk_popover_set_child(menu, label);
-            gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar));
-            gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar));
-*/
 
             /*auto myPathbarMenu = new Menu<PathbarMenu>;
             auto title = g_strconcat("<span color=\"blue\">", _("Navigation Toolbar"), "</span>", NULL);
@@ -189,9 +184,9 @@ namespace xf {
             
           } else
           {
-            auto pathbarMenu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
-            Menu<PathbarMenu>::setTitle(pathbarMenu, path);
-            gtk_popover_popup(pathbarMenu);
+            auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(pathbar), "menu"));
+            //Menu<PathbarMenu>::setTitle(pathbarMenu, path);
+            gtk_popover_popup(menu);
           }
               
 
