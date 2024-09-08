@@ -112,6 +112,7 @@ namespace xf {
         if (texture) scaleFactor = 2;
          */
         if (!texture) {
+          // Gets the texture from the GIcon. Fast.
           texture = Texture::load(info);
         }
         // XXX: put all icons in hash (debug)
@@ -125,10 +126,11 @@ namespace xf {
         if (name[0] == '.' && name[1] != '.') {
 
           auto *iconPath = Texture::findIconPath(info);
-
+          // Only for the hidden items. Applies background mask.
           if (iconPath) texture = Texture::getSvgPaintable(iconPath, size, size);   
 
         }
+        //
         GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
         if (type == G_FILE_TYPE_DIRECTORY ) {
           DirectoryClass::addDirectoryTooltip(image, info);

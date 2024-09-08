@@ -40,6 +40,7 @@ namespace xf {
       }
 
       static void *preview(void *data){
+        // This is a pthread function, not active in g_main_context.
         auto arg = (void **)data;
         auto path = (char *)arg[0];
         auto imageBox = GTK_BOX(arg[1]);
@@ -64,10 +65,18 @@ namespace xf {
           child,
           NULL
         };
-        TRACE("Texture::preview: calling replace_f\n");
+        auto currentSerial = Child::getSerial(GTK_WIDGET(child));
+        TRACE("Texture::preview: calling replace_f, current serial=%d, valid serial = %d\n",
+            currentSerial, serial);
 
-        auto retval = UtilBasic::context_function(replace_f, replaceArg);
-        TRACE("UtilBasic::context_function(replace_f) retval = %d\n", GPOINTER_TO_INT(retval));
+        if (serial != currentSerial){
+          DBG("Current serial mismatch %d != %d. Dropping paintable %p\n", 
+              currentSerial, serial, paintable);
+        } else {
+          // Here we execute the gtk widget replacement in the g_main_context.
+          auto retval = UtilBasic::context_function(replace_f, replaceArg);
+          TRACE("UtilBasic::context_function(replace_f) retval = %d\n", GPOINTER_TO_INT(retval));
+        }
 
         return NULL;
       }
@@ -85,7 +94,7 @@ namespace xf {
             paintable, imageBox, image, serial);
 
         if (serial != Child::getSerial(child)){
-          DBG("replace_f serial mismatch %d != %d\n", serial, Child::getSerial(child));
+          DBG("replace_f(): serial mismatch %d != %d\n", serial, Child::getSerial(child));
           return NULL;
         }
         // no work if (gridview != Child::getGridview()) return NULL;
@@ -197,15 +206,15 @@ namespace xf {
             path = locate(*p);
             if (path) {
               g_hash_table_insert(iconPathHash, g_strdup(*p), (void *)path);
-              DBG("findIconPath hash insert name=%s -> %s\n", *p, path);
+              TRACE("findIconPath hash insert name=%s -> %s\n", *p, path);
               return path;
             }
           }
-          DBG("*** Warning: could not find icon path for any of:\n");
+          TRACE("*** Warning: could not find icon path for any of:\n");
           for (auto p=names; p && *p; p++) {
             fprintf(stderr, "    %s\n", *p);
           }
-          DBG("*** Warning: using application-x-generic instead...\n");
+          TRACE("*** Warning: using application-x-generic instead...\n");
 
           const char *path = locate ("application-x-generic");
           if (path) {
@@ -241,7 +250,7 @@ namespace xf {
     buffer[0]=string[5];
     buffer[1]=string[6];
     double blue = strtol(buffer, NULL, 16);
-    //DBG("red=%lf green=%lf blue=%lf\n", red/255., green/255., blue/255.);
+    //TRACE("red=%lf green=%lf blue=%lf\n", red/255., green/255., blue/255.);
 	  cairo_set_source_rgba (cr, red/255., green/255., blue/255., .5);
   } else cairo_set_source_rgba (cr, 1,1,1, .5);
 	cairo_set_line_width (cr, 1);

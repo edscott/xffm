@@ -9,10 +9,10 @@
 # define DBG_T(...)   { (void)0; }
 #endif
  
-static bool stop;
 static GList *waitList = NULL;  
 static GList *threadPool = NULL;
 pthread_mutex_t threadPoolMutex = PTHREAD_MUTEX_INITIALIZER;
+
 static int maxThreads = 0;
 
       typedef struct threadInfo_t {
@@ -34,7 +34,6 @@ class Thread {
 
 public:
   static void clearThreadPool(void){
-/*    stop = true;
     pthread_mutex_lock(&threadPoolMutex);
       for (auto l=threadPool; l && l->data; l=l->next){
         g_free(l->data);
@@ -42,7 +41,6 @@ public:
       g_list_free(threadPool);
       threadPool = NULL;
     pthread_mutex_unlock(&threadPoolMutex);
-    stop = false;*/
   }
       static void getMaxThreads(void){
         if (maxThreads > 0) return;
@@ -63,18 +61,17 @@ public:
           fclose(in);
         } else maxThreads = 8;
 
-        maxThreads *= 4;
-              DBG("maxThreads set to %d\n", maxThreads);
+        maxThreads *= 2;
+              TRACE("maxThreads set to %d\n", maxThreads);
       }
 
       static void threadPoolAdd(void* (*function)(void*), void *data){
 #ifdef ENABLE_THREAD_POOL
-        if (stop) return;
         auto info = (threadInfo_t *)calloc(1, sizeof(threadInfo_t));
         info->function = function;
         info->data = data;
         pthread_mutex_lock(&threadPoolMutex);
-        threadPool = g_list_prepend(threadPool, info);
+        threadPool = g_list_append(threadPool, info);
         pthread_mutex_unlock(&threadPoolMutex);
 #endif
       }
@@ -91,30 +88,26 @@ public:
         
         int count=0;
         int lastCount = 0;
-        int pending = 0;
         while (1){
           if (active >= maxThreads) break;
           // Fireup initial thread group
           while (active < maxThreads){
-            if (stop) break;
             TRACE("Threadpool loop %d\n", count);
             pthread_mutex_lock(&threadPoolMutex);
-              pending = g_list_length(threadPool);
-            pthread_mutex_unlock(&threadPoolMutex);
-            if (pending) {
-                pthread_mutex_lock(&threadPoolMutex);
-                  auto first = g_list_first(threadPool);
-                  info = (threadInfo_t *)first->data;
-                  threadPool = g_list_remove(threadPool, info);
-                  waitList = g_list_prepend(waitList, info);
-                pthread_mutex_unlock(&threadPoolMutex);
+            if (g_list_length(threadPool)) {
+                auto first = g_list_first(threadPool);
+                info = (threadInfo_t *)first->data;
+                threadPool = g_list_remove(threadPool, info);
+                waitList = g_list_append(waitList, info);
 
                 pthread_create(&(info->thread), NULL, 
                     info->function, 
                     info->data);
                 active++;
-                DBG("initial: thread %d spawned...\n", active);
+                TRACE("initial: thread %d spawned...\n", active);
+                pthread_mutex_unlock(&threadPoolMutex);
             } else {
+                pthread_mutex_unlock(&threadPoolMutex);
               break;
             }
           }
@@ -130,35 +123,34 @@ public:
             waitList = g_list_remove(waitList, info);
             g_free(info);
 
-            DBG("thread %d joined...\n", active);
+            TRACE("thread %d joined...\n", active);
             lastCount = count;
             count++;
             active--;
-            if (stop) continue;
-            if (pending) {
+            pthread_mutex_lock(&threadPoolMutex);
+            if (g_list_length(threadPool)) {
               // fire up another, if in queue.
-              pthread_mutex_lock(&threadPoolMutex);
-                  auto next = g_list_first(threadPool);
-                  info = (threadInfo_t *)next->data;
-                  threadPool = g_list_remove(threadPool, info);
-                  waitList = g_list_append(waitList, info);
-                  pending = g_list_length(threadPool);
+              auto next = g_list_first(threadPool);
+              info = (threadInfo_t *)next->data;
+              threadPool = g_list_remove(threadPool, info);
+              waitList = g_list_append(waitList, info);
+              pthread_create(&(info->thread), NULL, 
+                  info->function, 
+                  info->data);
+              active++;
+              TRACE("final: thread %d spawned...\n", active);
               pthread_mutex_unlock(&threadPoolMutex);
-                 pthread_create(&(info->thread), NULL, 
-                    info->function, 
-                    info->data);
-                active++;
-                DBG("final: thread %d spawned...\n", active);
+           } else {
+              pthread_mutex_unlock(&threadPoolMutex);
            }
           }
           TRACE("sleep 250...\n");
           usleep(250);
           if (count != lastCount){
-            DBG("Threads processed so far: %d\n", count);
+            TRACE("Threads processed so far: %d\n", count);
             lastCount = count;
           }
         }
-        stop=false;
 #else
         DBG("Threadpool is disabled\n");
 #endif
@@ -170,7 +162,7 @@ public:
         auto sizePending = g_list_length(threadPool);
         auto sizeWaiting = g_list_length(waitList);
         pthread_mutex_unlock(&threadPoolMutex);
-        return sizePending + sizeWaiting;
+        return sizePending;
       }
 private:
 
@@ -204,7 +196,7 @@ private:
     gint
     thread_create(const gchar *dbg_text, void *(*thread_f)(void *), void *data)
     {
-        DBG("thread_create: %s\n", dbg_text);
+        TRACE("thread_create: %s\n", dbg_text);
         //auto thread = (pthread_t *)calloc(1,sizeof(pthread_t *));
         gint retval = pthread_create(runThread_, NULL, thread_f, data);
         if (retval){

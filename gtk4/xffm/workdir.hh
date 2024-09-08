@@ -10,8 +10,8 @@ namespace xf {
     private:
       static void  updateGridView(const char *path){
 #ifdef ENABLE_GRIDVIEW
+        TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(), Child::getSerial()+1);
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
-        TRACE("update updateGridView\n");
         Child::incrementSerial();
         auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
@@ -37,15 +37,19 @@ namespace xf {
     static bool pleaseWait(void){
       auto size = Thread::threadPoolSize();
       if (size > 0) {
-        
+        Thread::clearThreadPool();
+        /*
         char buffer[4096];
-        snprintf(buffer, 4096, " %s\n%s: %d (%s).\n",
+
+        snprintf(buffer, 4096, " %s\n%s: %d->%d (%s).\n",
               _("There are unfinished jobs: please wait until they are finished."),
-              _("Parallel threads:"), size, _("Unfinished Jobs in Queue"));
+              _("Parallel threads:"), size, Thread::threadPoolSize(), 
+              _("Unfinished Jobs in Queue") );
         TRACE("%s", buffer);
         Print::printInfo(Child::getCurrentOutput(), "emblem-important", g_strdup(buffer));
         Thread::clearThreadPool();
-        return true;
+        //return true;
+        */
       }
       return false;
     }
@@ -134,7 +138,7 @@ namespace xf {
         auto child = UtilBasic::getCurrentChild();
         setWorkdir(path);
       } else {
-        DBG("mimetype action...\n");
+        TRACE("mimetype action...\n");
         new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
       }
       g_free(path);

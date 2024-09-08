@@ -19,7 +19,7 @@ class MimeApplication {
     }
 public:
     static void constructAppHash (void) {
-        DBG("**** constructAppHash\n");
+        TRACE("**** constructAppHash\n");
         applicationHash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, freeStrV);
         loadAppHash();
     }
@@ -32,7 +32,7 @@ public:
         if (!mimetype) return NULL;
         pthread_mutex_lock(&mimeAppHashMutex);
         if (!applicationHash) {
-            DBG("applicationHash does not exist.\n");
+            TRACE("applicationHash does not exist.\n");
             pthread_mutex_unlock(&mimeAppHashMutex);
             return NULL;
         }

@@ -25,7 +25,7 @@ namespace xf {
     Prompt(GtkWidget *child) {
       GtkBox *buttonSpace = getButtonSpace(child);
       GtkTextView *output = getOutput(child);
-      DBG("constructor 1\n");
+      TRACE("constructor 1\n");
         buttonSpace_ = buttonSpace;
         input_ = UtilBasic::createInput(); 
         g_object_set_data(G_OBJECT(input_), "output", output);
@@ -41,7 +41,7 @@ namespace xf {
     }
 
     Prompt(void) {
-      DBG("constructor 0\n");
+      TRACE("constructor 0\n");
         promptBox_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         buttonSpace_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
