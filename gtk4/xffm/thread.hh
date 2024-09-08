@@ -34,7 +34,15 @@ class Thread {
 
 public:
   static void clearThreadPool(void){
-    stop = true;
+/*    stop = true;
+    pthread_mutex_lock(&threadPoolMutex);
+      for (auto l=threadPool; l && l->data; l=l->next){
+        g_free(l->data);
+      }
+      g_list_free(threadPool);
+      threadPool = NULL;
+    pthread_mutex_unlock(&threadPoolMutex);
+    stop = false;*/
   }
       static void getMaxThreads(void){
         if (maxThreads > 0) return;
