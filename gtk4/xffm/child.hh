@@ -23,7 +23,7 @@ namespace xf {
 
 
     static void setGridview(GtkWidget *view){
-      auto child =  Child::getCurrentChild();
+      auto child =  Child::getChild();
       auto gridScrolledWindow = getGridScrolledWindow();
       gtk_scrolled_window_set_child(gridScrolledWindow, view);
       g_object_set_data(G_OBJECT(child), "gridview", view);
@@ -31,7 +31,7 @@ namespace xf {
     }
 
     static void *getGridview(void){
-      auto child =  Child::getCurrentChild();
+      auto child =  Child::getChild();
       return g_object_get_data(G_OBJECT(child), "gridview");
     }
 
@@ -40,7 +40,7 @@ namespace xf {
     }
 
     static const int getSerial(void){
-      auto child =  Child::getCurrentChild();
+      auto child =  Child::getChild();
       return getSerial(child);
     }
 
@@ -49,7 +49,7 @@ namespace xf {
     }
 
     static void incrementSerial(void){
-      auto child =  Child::getCurrentChild();
+      auto child =  Child::getChild();
       auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
       g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));
     }
@@ -57,10 +57,11 @@ namespace xf {
     static const gchar *getWorkdir(GtkWidget *child){
       TRACE("getWorkdir...\n");
       if (!MainWidget) return NULL;
+      if (!child) return g_get_home_dir();
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
     }
     static const gchar *getWorkdir(void){
-      auto child =  Child::getCurrentChild();
+      auto child =  Child::getChild();
       return getWorkdir(child);
     }
     static
@@ -85,28 +86,30 @@ namespace xf {
     static GtkBox *vButtonBox(void){
       return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
     }
-    static GtkTextView *getCurrentInput(void){
-      auto child = getCurrentChild();
+    static GtkTextView *getInput(void){
+      auto child = getChild();
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "input"));
     }
-    static GtkTextView *getCurrentTextView(void){ // deprecated
+/*    static GtkTextView *getCurrentTextView(void){ // deprecated
       return getCurrentOutput();
-    }
-    static GtkTextView *getCurrentOutput(void){
-      auto child = getCurrentChild();
-      return GTK_TEXT_VIEW(getOutput(child));
-    }
+    }*/
+     
     static GtkTextView *getOutput(GtkWidget *child){
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
     }
-    static GtkPaned *getCurrentPane(void){
-      auto child = getCurrentChild();
+    
+    static GtkTextView *getOutput(){
+      auto child = getChild();
+      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+    }
+    static GtkPaned *getPane(void){
+      auto child = getChild();
       auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(child), "vpane"));
       return vpane;
     }
 
-    static GtkBox *getCurrentButtonSpace(void){
-      auto child = getCurrentChild();
+    static GtkBox *getButtonSpace(void){
+      auto child = getChild();
       return GTK_BOX(getButtonSpace(child));
     }
 
@@ -114,8 +117,8 @@ namespace xf {
       return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
     }
 
-    static GtkWidget *getCurrentChild(void){
-      //DBG("getCurrentChild...\n");
+    static GtkWidget *getChild(void){
+      //DBG("getChild...\n");
       if (!MainWidget) return NULL;
       auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
       int num = gtk_notebook_get_current_page(notebook);
@@ -123,11 +126,11 @@ namespace xf {
       return child;
     }
     static GtkBox *getPathbar(void){
-      auto child = getCurrentChild();
+      auto child = getChild();
       return GTK_BOX(g_object_get_data(G_OBJECT(child), "pathbar"));
     }
     static GtkScrolledWindow *getGridScrolledWindow(void){
-      auto child = getCurrentChild();
+      auto child = getChild();
       return GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
     }
 

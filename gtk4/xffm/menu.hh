@@ -76,8 +76,9 @@ namespace xf {
         return menu;
       }*/
       
-      void setMenu(GtkWidget *widget, GtkWidget *parent){
+      void setMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
         auto menu = mkMenu(title_);
+        g_object_set_data(G_OBJECT(menu), "path", (void *)path);
         gtk_popover_set_default_widget(menu, widget);
         gtk_widget_set_parent(GTK_WIDGET(menu), parent);
         g_object_set_data(G_OBJECT(widget), "menu", (void *)menu);

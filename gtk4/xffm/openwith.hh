@@ -40,7 +40,7 @@ public:
     OpenWith (GtkWindow *parent, const gchar *inPath){
       const gchar *windowTitle = _("Open With...");
       const gchar *icon = "emblem-run";
-      child_ = Child::getCurrentChild();
+      child_ = Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child_), "output"));
 
       path_ = g_strdup(inPath);
@@ -99,7 +99,7 @@ public:
 
       // prompt
 
-      auto child = Child::getCurrentChild();
+      auto child = Child::getChild();
       buttonSpace = Child::getButtonSpace(child);
       prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
       auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);

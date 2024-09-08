@@ -43,6 +43,7 @@
 #include "tubo.hh"
 #include "run.hh"
 #include "runbutton.hh"
+#include "fm/menucallbacks.hh"
 
 #include "paintable.hh"
 #include "fm/fm.hh"

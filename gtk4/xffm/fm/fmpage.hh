@@ -31,7 +31,7 @@ namespace xf {
 
         auto title = g_strconcat("",_("Output"),_(" TTY"), NULL);
         auto myOutputMenu = new Menu<OutputMenu>(title);
-        myOutputMenu->setMenu(GTK_WIDGET(output_), GTK_WIDGET(output_));
+        myOutputMenu->setMenu(GTK_WIDGET(output_), GTK_WIDGET(output_), Child::getWorkdir());
         g_free(title);
         delete myOutputMenu;
        

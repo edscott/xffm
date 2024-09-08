@@ -143,8 +143,8 @@ namespace xf {
            if (g_object_get_data(G_OBJECT(widget), "menu")) continue;
            auto parent = widget;
            auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
-           auto myItemMenu = new Menu<PathbarMenu>(path);
-           myItemMenu->setMenu(widget, parent);
+           auto myItemMenu = new Menu<PathbarMenu<bool>>(path);
+           myItemMenu->setMenu(widget, parent, path);
            delete myItemMenu;
 
             auto gesture = gtk_gesture_click_new();

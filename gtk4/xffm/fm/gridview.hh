@@ -12,7 +12,7 @@ namespace xf {
       }*/
       static GtkWidget *
       getGridView(const char *path, void *gridViewClick_f){
-        auto child = Child::getCurrentChild();
+        auto child = Child::getChild();
         GtkMultiSelection *selection_model = NULL;
         if (strcmp(path, "xffm:root")==0) {
           selection_model = DirectoryClass::rootSelectionModel();

@@ -27,6 +27,7 @@ public:
 //    GtkNotebook *getNotebook(void) {return notebook_;}
     MainWindow(const gchar *path){
         createWindow(); 
+        //g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
         addKeyController(GTK_WIDGET(mainWindow_));
           // for page: startDeviceMonitor();
         auto box = contentBox(path);
@@ -43,7 +44,7 @@ public:
     static void
     on_new_page(GtkButton *button, void *data){
         MainWindow *w = (MainWindow *)data;
-        auto child = Util::getCurrentChild();
+        auto child = Util::getChild();
         w->addPage(Child::getWorkdir(child));
     }
     static void
@@ -128,7 +129,7 @@ private:
         Util::setAsDialog(widget, "xffm", "Xffm");
 
         gtk_widget_realize(GTK_WIDGET(mainWindow_));
-        auto input = Util::getCurrentInput();
+        auto input = Util::getInput();
         gtk_widget_grab_focus(GTK_WIDGET(input));
         
         
@@ -175,7 +176,7 @@ private:
           gtk_notebook_next_page(notebook_);
       }
       Util::setWorkdir(path, true);
-      gtk_widget_grab_focus(GTK_WIDGET(Util::getCurrentInput()));
+      gtk_widget_grab_focus(GTK_WIDGET(Util::getInput()));
      
     }
  
@@ -214,7 +215,7 @@ private:
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
       delete(page);
 //      Util::flushGTK();
-//      gtk_widget_grab_focus(GTK_WIDGET(Util::getCurrentInput()));
+//      gtk_widget_grab_focus(GTK_WIDGET(Util::getInput()));
       
     }
 

@@ -217,7 +217,7 @@ namespace xf {
     clear (GtkButton *button, void *data){
      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
      gtk_popover_popdown(menu);
-     auto childWidget =Util::getCurrentChild();
+     auto childWidget =Util::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       clear_text(output);
       return ;

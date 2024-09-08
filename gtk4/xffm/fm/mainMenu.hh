@@ -34,14 +34,14 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
-        {_("Open in New Window"),(void *) openXffm}, 
+        {_("Open in New Window"),(void *) MenuCallbacks<bool>::openXffmMain}, 
         {_("Copy"), (void *) NULL},
         {_("Cut"),(void *) NULL}, 
         {_("Paste"),(void *) NULL}, 
         {_("Delete"),(void *) NULL}, 
         {_("Select All"),(void *)  NULL},
         {_("Match regular expression"),(void *)  NULL}, 
-        {_("Close"),(void *)  close},
+        {_("Close"),(void *)  MenuCallbacks<bool>::close},
         {NULL, NULL}
       };
       return menuCallbacks_;
@@ -62,30 +62,6 @@ namespace xf {
     }
 
   private:
-    static void
-    openXffm(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
-      auto childWidget =Util::getCurrentChild();
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Child::getWorkdir(childWidget);
-
-      auto xffm = g_strdup_printf("xffm -f %s", workDir);
-      pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
-
-      auto runButton = new (RunButton);
-      runButton->init(runButton, xffm, childPid, output, workDir, buttonSpace);
-      g_free(xffm);
-      return;
-    }
-    static void
-    close(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
-      gtk_popover_popdown(menu);
-      gtk_widget_set_visible(MainWidget, FALSE);
-      gtk_window_destroy(GTK_WINDOW(MainWidget));
-    }
     
 
   };

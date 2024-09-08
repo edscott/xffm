@@ -159,7 +159,7 @@ private:
     static void
     goHome(GtkButton *self, void *data){
       //DBG("goHome....\n");
-      auto child = Util::getCurrentChild();
+      auto child = Util::getChild();
       
       //Util::setWorkdir(g_get_home_dir());
         
@@ -180,7 +180,7 @@ private:
     }
     static void
     openTerminal(GtkButton *self, void *data){
-      auto childWidget =Util::getCurrentChild();
+      auto childWidget =Util::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Child::getWorkdir(childWidget);
@@ -196,7 +196,7 @@ private:
     }
     static void
     openFind(GtkButton *self, void *data){
-      auto childWidget =Util::getCurrentChild();
+      auto childWidget =Util::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Child::getWorkdir(childWidget);
@@ -212,7 +212,7 @@ private:
 
     static void
     upImage (GtkButton *self, void *data){
-      auto childWidget =Util::getCurrentChild();
+      auto childWidget =Util::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto workDir = Child::getWorkdir(childWidget);
 
@@ -233,7 +233,7 @@ private:
     
     static void
     downImage (GtkButton *self, void *data){
-      auto childWidget =Util::getCurrentChild();
+      auto childWidget =Util::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto workDir = Child::getWorkdir(childWidget);
 
@@ -252,7 +252,7 @@ private:
     
     static void
     toggleVpane (GtkButton *self, void *data){
-      auto vpane =Util::getCurrentPane();
+      auto vpane =Util::getPane();
       auto position = gtk_paned_get_position(vpane);
       int height = gtk_widget_get_height(GTK_WIDGET(vpane));
       TRACE("position=%d, height=%d, 3/4height=%d\n", position, height, height * 3 / 4);
