@@ -17,7 +17,9 @@ public:
     if (!path || !g_file_test(path, G_FILE_TEST_IS_REGULAR)) return false;
 
     auto mimetype = mimeType(path);
-    bool want_magic = (!mimetype || strcmp(mimetype, _("unknown"))==0);
+
+    bool want_magic = false;
+    //bool want_magic = (!mimetype || strcmp(mimetype, _("unknown"))==0);
     if (want_magic) {
       mimetype = MimeMagic::mimeMagic(path);
     }
@@ -55,10 +57,10 @@ private:
       for(; list && list->data; list = list->next) {
         auto pix_mimetypes_p = (gchar **)list->data;
         for(; pix_mimetypes_p && *pix_mimetypes_p; pix_mimetypes_p++) {
-            TRACE(stderr, "allowable pix_format=%s --> %s\n", *pix_mimetypes_p, mimetype);
-            if(g_ascii_strcasecmp (*pix_mimetypes_p, mimetype) == 0) {
-          return 1;
-            }
+          TRACE("allowable pix_format=%s --> %s\n", *pix_mimetypes_p, mimetype);
+          if(g_ascii_strcasecmp (*pix_mimetypes_p, mimetype) == 0) {
+            return 1;
+          }
         }
       }
       return 0;
@@ -78,7 +80,8 @@ private:
             TRACE("mimeType: %s --> %s\n", file, retval);
             return retval;
         }
-        return MimeMagic::mimeMagic(file);
+        // return MimeMagic::mimeMagic(file);
+        return g_strdup(_("unknown"));
    } 
 
     static gchar *

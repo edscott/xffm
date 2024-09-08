@@ -184,13 +184,8 @@ namespace xf {
           gtk_label_set_markup(GTK_LABEL(props), markup);
           g_free(markup);
 
-          //auto rightBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-          //gtk_widget_add_css_class(rightBox, "gridviewBox");
-
           UtilBasic::boxPack0(GTK_BOX(box), props, FALSE, FALSE, 0);  
           UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
-          //UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(rightBox), FALSE, FALSE, 0);    
-          //UtilBasic::boxPack0(GTK_BOX(rightBox), GTK_WIDGET(labelBox), FALSE, FALSE, 0);    
 
 
         } else {
@@ -200,9 +195,13 @@ namespace xf {
         addMotionController(imageBox);
         addGestureClick(imageBox, object, gridViewClick_f);
 
-        // Now for replacement of image icons for previews
         g_free(path);
 
+        // Now for replacement of image icons for previews
+        // This could only be done when load has completed,
+        // and that is because disk access is serialize by bus.
+        // But it really fast from sd disk...
+        // 
         if (isImage && Texture::previewOK()){ // thread number limited.
           auto path = g_file_get_path(file);
           // path, imageBox, image, serial

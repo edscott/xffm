@@ -177,11 +177,20 @@ public:
         
         ///  look in sfx hash...
         gchar *basename = g_path_get_basename (file);
-        if (strchr (basename, '.')) p = strchr (basename, '.');
+        if (strchr (basename, '.')) p = strrchr (basename, '.')+1;
         else {
             // no file extension.
             return NULL;
         }
+#if 10
+        auto sfx = g_utf8_strdown (p, -1);
+        type = lookupBySuffix(NULL, sfx);
+        g_free(basename);
+        if (!type) return g_strdup(_("unknown"));
+        return g_strdup(type);
+    }
+#else
+
         // Right to left:
         for (;p && *p; p = strchr (p, '.'))
         {
@@ -195,7 +204,7 @@ public:
 
             type = lookupBySuffix(NULL, sfx);
             if(type) {
-                TRACE("mime-module(2), FOUND %s: %s\n", sfx, type);
+                DBG("mime-module(2), FOUND sfx %s: %s\n", sfx, type);
                 g_free (sfx);
                 return g_strdup(type);
             } 
@@ -221,6 +230,7 @@ public:
         g_strfreev(q);
         return NULL;
     }
+#endif
 
 };
 

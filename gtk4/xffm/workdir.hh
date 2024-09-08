@@ -44,6 +44,7 @@ namespace xf {
               _("Parallel threads:"), size, _("Unfinished Jobs in Queue"));
         TRACE("%s", buffer);
         Print::printInfo(Child::getCurrentOutput(), "emblem-important", g_strdup(buffer));
+        Thread::clearThreadPool();
         return true;
       }
       return false;

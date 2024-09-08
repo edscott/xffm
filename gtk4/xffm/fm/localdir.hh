@@ -223,8 +223,10 @@ namespace xf {
     static void 
     addLabelTooltip(GtkWidget *label, const char *path){
       auto name = g_path_get_basename(path);
-      auto fileInfo = UtilBasic::fileInfo(path);
-      auto mimetype = MimeMagic::mimeMagic(path); 
+      // This forks without limit:
+      // auto fileInfo = UtilBasic::fileInfo(path);
+      // This takes too long in old box:
+      // auto mimetype = MimeMagic::mimeMagic(path); 
       char *hidden = NULL;
       char *backup = NULL;
       if (name[0] == '.' && name[1] != '.'){
@@ -235,14 +237,14 @@ namespace xf {
       } else backup = g_strdup("");
 
       auto markup = g_strconcat("<span color=\"blue\"><b>", name, "</b></span>\n",
-          _("Type:")," ",fileInfo, "\n", 
-          _("Mimetype:")," ",mimetype,  
+//          _("Type:")," ",fileInfo, "\n", 
+//          _("Mimetype:")," ",mimetype,  
           hidden,backup,
           NULL);
 
       gtk_widget_set_tooltip_markup(label, markup);
-      g_free(fileInfo);
-      g_free(mimetype);
+//      g_free(fileInfo);
+//      g_free(mimetype);
       g_free(markup);
       g_free(name);
       g_free(hidden);
