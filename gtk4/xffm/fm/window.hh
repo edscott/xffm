@@ -34,11 +34,12 @@ public:
         gtk_window_set_child(mainWindow_, box);
         addPage(path);
         showWindow();
+        g_object_set_data(G_OBJECT(MainWidget), "MainWindow", this);
     }
 
     ~MainWindow(void){
        // for each page: g_file_monitor_cancel(deviceMonitor_);
-    }
+    } 
 // Free functions (for signals)
 public:
     static void
