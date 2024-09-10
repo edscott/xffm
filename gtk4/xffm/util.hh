@@ -2,7 +2,7 @@
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
 namespace xf {
-  class Util : public UtilBasic, public Print, public Workdir {
+  class Util {
   public:
       
    static void
@@ -17,7 +17,7 @@ namespace xf {
     }
     CSS::init();
     
-    context_function(reloadAll_f, NULL);
+    Basic::context_function(reloadAll_f, NULL);
     
     return;
   }
@@ -41,7 +41,7 @@ namespace xf {
         snprintf(buffer, 32, "#%02x%02x%02x", red, green, blue);
         Settings::setString("xfterm", item, buffer);
         CSS::init();
-        context_function(reloadAll_f, NULL);
+        Basic::context_function(reloadAll_f, NULL);
       } else {
         TRACE("No color selected.\n");
       }
@@ -55,7 +55,7 @@ namespace xf {
         for (int i=0; i<n; i++){
           auto child = gtk_notebook_get_nth_page(notebook, i);
           auto path = Child::getWorkdir(child);
-          setWorkdir(path, child);
+          Workdir::setWorkdir(path, child);
         }
         return NULL;
     }
@@ -67,9 +67,9 @@ namespace xf {
     clear (GtkButton *button, void *data){
      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
      gtk_popover_popdown(menu);
-     auto childWidget =Util::getChild();
+     auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      clear_text(output);
+      Print::clear_text(output);
       return ;
     }
     static    
@@ -96,7 +96,7 @@ namespace xf {
 
         gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
         //gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
-        Util::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
+        Basic::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
         if (strcmp(which, "output")==0) g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize1), NULL);
         else  g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize2), NULL);
         return size_scale;
@@ -207,20 +207,20 @@ namespace xf {
     static bool
     cd (const gchar **v, GtkWidget *child) {   
         if (v[1] == NULL){
-          return setWorkdir(g_get_home_dir());
+          return Workdir::setWorkdir(g_get_home_dir());
         }
         // tilde and $HOME
         if (strncmp(v[1], "~", strlen("~")) == 0){
           const char *part2 = v[1] + strlen("~");
           char *dir = g_strconcat(g_get_home_dir(), part2, NULL);
-          auto retval = setWorkdir(dir);
+          auto retval = Workdir::setWorkdir(dir);
           g_free(dir);
           return retval;
         }
         if (strncmp(v[1], "$HOME", strlen("$HOME")) == 0){
           const char *part2 = v[1] + strlen("$HOME");
           char *dir = g_strconcat(g_get_home_dir(),  part2, NULL);
-          auto retval = setWorkdir(dir);
+          auto retval = Workdir::setWorkdir(dir);
           g_free(dir);
           return retval;
         }
@@ -238,7 +238,7 @@ namespace xf {
             g_free(rpath);
             return false; 
           }
-          auto retval = setWorkdir(rpath);
+          auto retval = Workdir::setWorkdir(rpath);
           g_free(rpath);
           return retval;
         }
@@ -248,7 +248,7 @@ namespace xf {
         if (!rpath) return false;
         
 
-        auto retval = setWorkdir(rpath);
+        auto retval = Workdir::setWorkdir(rpath);
         g_free(rpath);
 
         return retval;
@@ -268,23 +268,6 @@ namespace xf {
       g_free(string);
       //for (char **p=vector; p && *p && p->id p++)  TRACE( "getVector():p=%s\n",*p);
       return vector;
-    }
-    static 
-    GtkMenuButton *newMenuButton(const gchar *icon, const gchar *tooltipText){
-      if (!tooltipText && !icon) {
-        fprintf(stderr, "Util::newMenuButton(): programing error.\n");
-        exit(1);
-      }
-      auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
-      if (tooltipText) {
-        if (!icon) gtk_menu_button_set_label(button, tooltipText);
-        else setTooltip(GTK_WIDGET(button), tooltipText);
-      }
-      if (icon) gtk_menu_button_set_icon_name(button, icon);
-
-      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
-      gtk_menu_button_set_has_frame(button, FALSE);
-      return button;
     }
     static 
     GtkTextView *newTextView(void){
@@ -331,28 +314,6 @@ namespace xf {
             if (program_in_path(getenv ("XTERM_SHELL"))) return getenv ("XTERM_SHELL");
         }
         return default_shell();
-    }
-    static gchar *
-    esc_string (const gchar * string) {
-        gint i, j, k;
-        const gchar *charset = "\\\"\' ()|<>";
-
-        for(j = 0, i = 0; i < strlen (string); i++) {
-            for(k = 0; k < strlen (charset); k++) {
-                if(string[i] == charset[k])
-                    j++;
-            }
-        }
-        gchar *estring = (gchar *) calloc (1, strlen (string) + j + 1);
-        for(j = 0, i = 0; i < strlen (string); i++, j++) {
-            for(k = 0; k < strlen (charset); k++) {
-                if(string[i] == charset[k])
-                    estring[j++] = '\\';
-            }
-            estring[j] = string[i];
-        }
-        TRACE ("ESC:estring=%s\n", estring);
-        return estring;
     }
     static const gchar *getTerminal(){
         setTerminal();

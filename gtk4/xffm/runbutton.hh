@@ -139,7 +139,7 @@ public:
     void set_tip(const gchar *tip){
         g_free(tip_);
         tip_ = g_strdup(tip); 
-        Util::setTooltip(GTK_WIDGET(button_), tip_);
+        Basic::setTooltip(GTK_WIDGET(button_), tip_);
     }
 
 /* 
@@ -175,7 +175,7 @@ activate(GtkWidget *self, gpointer data) {
       for (const gchar **p=items; p && *p && *q; p++){
         GtkWidget *item = gtk_button_new_with_label(*p);
         gchar *t = g_strdup_printf("%s: %d", _("Signal to emit"), *r);
-        Util::setTooltip(item, t);
+        Basic::setTooltip(item, t);
         g_free(t);
         g_object_set_data(G_OBJECT(item), "run_button_p", run_button_p);
         gtk_button_set_has_frame(GTK_BUTTON(item), FALSE);
@@ -248,7 +248,7 @@ activate(GtkWidget *self, gpointer data) {
         gchar *process = g_strdup_printf("Process: %s\n", commandS);
         gchar *pidS = g_strdup_printf("<span color=\"red\" size=\"larger\">pid: %d</span>", run_button_p->grandchild());
         gchar *markup = g_strdup_printf("<span color=\"blue\" size=\"larger\">%s</span>%s", process, pidS);
-        Util::concat(&markup, "\n<span color=\"green\" size=\"larger\">Send signal:</span>");
+        Basic::concat(&markup, "\n<span color=\"green\" size=\"larger\">Send signal:</span>");
         g_free(commandS);
         g_free(process);
         g_free(pidS);
@@ -344,11 +344,11 @@ activate(GtkWidget *self, gpointer data) {
         
         //g_signal_connect(button, "toggled", G_CALLBACK (run_button_toggled), data);
         //Util::boxPack0 (Util::vButtonBox(), GTK_WIDGET(button), FALSE, FALSE, 0);
-        Util::boxPack0 (run_button_p->buttonSpace(), GTK_WIDGET(button), FALSE, FALSE, 0);
+        Basic::boxPack0 (run_button_p->buttonSpace(), GTK_WIDGET(button), FALSE, FALSE, 0);
 
         gtk_widget_set_visible(GTK_WIDGET(button), TRUE);
         // flush gtk
-        Util::flushGTK();
+        Basic::flushGTK();
         TRACE ("make_run_data_button: button made for grandchildPID=%d\n", (int)run_button_p->pid());
         return NULL;
     }
@@ -362,7 +362,7 @@ activate(GtkWidget *self, gpointer data) {
         // processed by the gtk loop. This to avoid a race with the command_ completing
         // before gtk has fully created the little run button.
         //
-        Util::context_function(make_run_data_button, data);
+        Basic::context_function(make_run_data_button, data);
         TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
                 run_button_p->pid(), 
                 run_button_p->command(), 
@@ -379,7 +379,7 @@ activate(GtkWidget *self, gpointer data) {
         
 #ifdef DEBUG_TRACE    
         // This is out of sync here (grayball), so only in debug mode.
-        print_c::print_icon(run_button_p->textview_, "emblem-grayball", g_strdup_printf("%s %d/%d\n", run_button_p->command(),
+        Print::print_icon(run_button_p->textview_, "emblem-grayball", g_strdup_printf("%s %d/%d\n", run_button_p->command(),
                 run_button_p->pid(), run_button_p->grandchild()));
 #endif
         
@@ -387,7 +387,7 @@ activate(GtkWidget *self, gpointer data) {
         fflush(NULL);  
         // Destroy little button (if exists) and free run_data_p 
         // associated memory. Done in main thread for gtk instruction set.
-        Util::context_function(zap_run_button, data);
+        Basic::context_function(zap_run_button, data);
         return NULL;
     }
 

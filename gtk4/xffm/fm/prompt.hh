@@ -23,8 +23,8 @@ namespace xf {
 
     public:
     Prompt(GtkWidget *child) {
-      GtkBox *buttonSpace = getButtonSpace(child);
-      GtkTextView *output = getOutput(child);
+      GtkBox *buttonSpace = Child::getButtonSpace(child);
+      GtkTextView *output = Child::getOutput(child);
       TRACE("constructor 1\n");
         buttonSpace_ = buttonSpace;
         input_ = UtilBasic::createInput(); 
@@ -66,7 +66,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(promptBox_), "buttonSpace", buttonSpace_);
 
         // child does not yet exist.
-        //auto child =Util::getCurrentChild();
+        //auto child =Child::getCurrentChild();
         //g_object_set_data(G_OBJECT(child), "buttonSpace", buttonSpace_);
         //TRACE ("Prompt::childWidget= %p, buttonSpace = %p\n", child, buttonSpace_);
 
@@ -75,9 +75,9 @@ namespace xf {
         gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
         g_signal_connect (G_OBJECT (keyController), "key-pressed", 
             G_CALLBACK (this->on_keypress), (void *)input_);
-        boxPack0 (promptBox_, GTK_WIDGET(dollarBox), FALSE, FALSE, 0);
-        boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
-        boxPack0 (promptBox_, GTK_WIDGET(buttonSpace_), FALSE, TRUE, 0);
+        Basic::boxPack0 (promptBox_, GTK_WIDGET(dollarBox), FALSE, FALSE, 0);
+        Basic::boxPack0 (promptBox_, GTK_WIDGET(input_), TRUE, TRUE, 0);
+        Basic::boxPack0 (promptBox_, GTK_WIDGET(buttonSpace_), FALSE, TRUE, 0);
     }
     public:
     static pid_t
@@ -117,7 +117,7 @@ namespace xf {
               auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
               if (Util::cd((const char **)w, child)){
                 auto path = Child::getWorkdir(child);
-                setWindowTitle(child);
+                Child::setWindowTitle(child);
                 // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
               }
 
@@ -143,14 +143,14 @@ namespace xf {
             gboolean scrollup = FALSE;
             if (strncmp(command, "man", strlen("man"))==0) {
                 scrollup = TRUE;
-                Util::clear_text(output);
+                Print::clear_text(output);
             }
-            //Util::print(output, g_strdup_printf("TRACE> final run: %s\n",*c));
+            //Print::print(output, g_strdup_printf("TRACE> final run: %s\n",*c));
            /*
             * FIXME: enable automatic in terminal for always
             *        move always routine to utilBasic*/
         
-            if (UtilBasic::alwaysTerminal(*c)){
+            if (Basic::alwaysTerminal(*c)){
               command = Run<bool>::mkTerminalLine(*c, "");
               childPID = Run<bool>::shell_command(output, command, scrollup, showTextPane);
             } else {
@@ -189,9 +189,9 @@ namespace xf {
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       if (strcmp(text, "pwd")) return false;
       auto workdir = Child::getWorkdir(child);
-      Util::print(output, g_strdup_printf("$ %s\n", text));
-      Util::print(output, g_strdup(workdir));
-      Util::print(output, g_strdup("\n"));
+      Print::print(output, g_strdup_printf("$ %s\n", text));
+      Print::print(output, g_strdup(workdir));
+      Print::print(output, g_strdup("\n"));
       if (!History::add(text)) DBG("History::add(%s) failed\n", text );
       return true;
     }
@@ -199,10 +199,10 @@ namespace xf {
     history(GtkTextView *output, const char *text){
       if (strcmp(text, "history")) return false;
       char *t = History::history();
-      Util::print(output, g_strdup_printf("$ %s\n", text));
-      Util::print(output, g_strdup_printf("%s", t));
+      Print::print(output, g_strdup_printf("$ %s\n", text));
+      Print::print(output, g_strdup_printf("%s", t));
       g_free(t);
-      Util::scroll_to_bottom(output);
+      Print::scroll_to_bottom(output);
       return true;
     }
     
@@ -218,12 +218,12 @@ namespace xf {
       auto retval = Util::cd((const gchar **)v, child);
       auto path = Child::getWorkdir(child);
       // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
-      Util::print(output, g_strdup_printf("$ %s\n", text));
+      Print::print(output, g_strdup_printf("$ %s\n", text));
       if (retval){
-        Util::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
+        Print::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
         if (!History::add(text)) DBG("History::add(%s) failed\n", text );
       } else {
-        Util::print(output, g_strdup_printf(_("failed to chdir to %s"), v[1]));
+        Print::print(output, g_strdup_printf(_("failed to chdir to %s"), v[1]));
       }
       g_strfreev(v);
       return true;
@@ -235,16 +235,16 @@ namespace xf {
       char *inPath = g_find_program_in_path(v[0]);
       if (!inPath && g_file_test(v[0], G_FILE_TEST_IS_EXECUTABLE)) inPath = realpath(v[0], NULL);
       if (!inPath){
-        Util::print(output, g_strdup_printf("$ %s\n", v[0]));
-        Util::print(output, g_strdup_printf("%s: %s\n", v[0], _("Command not found.")));
+        Print::print(output, g_strdup_printf("$ %s\n", v[0]));
+        Print::print(output, g_strdup_printf("%s: %s\n", v[0], _("Command not found.")));
         g_strfreev(v);
         return true;
       }
-      Util::print(output, g_strdup_printf("$ %s", inPath));
+      Print::print(output, g_strdup_printf("$ %s", inPath));
       for (int i=1; v[i]; i++){
-        Util::print(output, g_strdup_printf(" %s", v[i]));
+        Print::print(output, g_strdup_printf(" %s", v[i]));
       }
-      Util::print(output, g_strdup_printf("\n"));
+      Print::print(output, g_strdup_printf("\n"));
         
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(input), "buttonSpace"));
       
@@ -256,7 +256,7 @@ namespace xf {
     static bool
     com(GtkTextView *input, GtkTextView *output, guint keyval){
       if (keyval != GDK_KEY_Return && keyval != GDK_KEY_KP_Enter) return false;
-      auto text = Util::inputText(input);
+      auto text = Print::inputText(input);
       if (pwd(output, text)) return true;
       if (history(output, text)) return true;
       if (cd(output, text)) return true;
@@ -295,7 +295,7 @@ namespace xf {
         if(keyval ==  GDK_KEY_Escape){
            gtk_widget_grab_focus(GTK_WIDGET(input));
            gtk_text_view_set_cursor_visible(input, TRUE);
-           Util::flushGTK();
+           Basic::flushGTK();
            return TRUE;
         }
 
@@ -303,7 +303,7 @@ namespace xf {
         History::reset();
 
         if (com(input, output, keyval)){
-          Util::clear_text(input);
+          Print::clear_text(input);
           return TRUE;
         }
 
@@ -320,7 +320,7 @@ namespace xf {
 
         gtk_widget_set_size_request(GTK_WIDGET(dollar_), 20, -1);
         
-        Util::print(dollar_, g_strdup("$"));
+        Print::print(dollar_, g_strdup("$"));
 
         gtk_text_view_set_pixels_above_lines (dollar_, 5);
         gtk_text_view_set_pixels_below_lines (dollar_, 5);
@@ -330,7 +330,7 @@ namespace xf {
         gtk_widget_set_can_focus(GTK_WIDGET(dollar_), FALSE);
         gtk_widget_add_css_class (GTK_WIDGET(dollar_), "input" );
         gtk_widget_add_css_class (GTK_WIDGET(dollar_), "inputview" );
-        boxPack0 (dollarBox, GTK_WIDGET(dollar_), FALSE, FALSE, 0);
+        Basic::boxPack0 (dollarBox, GTK_WIDGET(dollar_), FALSE, FALSE, 0);
         return dollarBox;
     }
     

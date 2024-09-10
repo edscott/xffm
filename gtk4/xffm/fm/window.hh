@@ -7,7 +7,7 @@
 #include <gio/gio.h>
 namespace xf {
 
-class MainWindow: public FMbuttonBox, public UtilBasic {
+class MainWindow: public FMbuttonBox {
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
     GList *pageList_=NULL;
@@ -44,7 +44,7 @@ public:
     static void
     on_new_page(GtkButton *button, void *data){
         MainWindow *w = (MainWindow *)data;
-        auto child = Util::getChild();
+        auto child = Child::getChild();
         w->addPage(Child::getWorkdir(child));
     }
     static void
@@ -91,7 +91,7 @@ public:
           }
           if (termKey) {
             gtk_widget_grab_focus(input);
-            Util::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
+            Print::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
             return TRUE;
           }
           if (upArrow && gtk_paned_get_position(GTK_PANED(vpane)) < 10) {
@@ -126,10 +126,10 @@ private:
         GtkWidget *widget = GTK_WIDGET(mainWindow_);
         gtk_widget_realize(widget);
  
-        Util::setAsDialog(widget, "xffm", "Xffm");
+        Basic::setAsDialog(widget, "xffm", "Xffm");
 
         gtk_widget_realize(GTK_WIDGET(mainWindow_));
-        auto input = Util::getInput();
+        auto input = Child::getInput();
         gtk_widget_grab_focus(GTK_WIDGET(input));
         
         
@@ -151,15 +151,15 @@ private:
       gchar *tag = path? g_path_get_basename(path):g_strdup(".");
       GtkWidget *label = gtk_label_new(tag);
       g_free(tag);
-      Util::boxPack0(tabBox, label,  FALSE, FALSE, 0);
+      Basic::boxPack0(tabBox, label,  FALSE, FALSE, 0);
 
-      auto close = Util::newButton(WINDOW_CLOSE, _("Close"));
+      auto close = Basic::newButton(WINDOW_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(close), "clicked", 
               BUTTON_CALLBACK(w->on_zap_page), data);    
       g_object_set_data(G_OBJECT(tabBox), "close", close);
       g_object_set_data(G_OBJECT(tabBox), "label", label);
       
-      Util::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
+      Basic::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
       return GTK_WIDGET(tabBox);
     }
 public:
@@ -171,7 +171,7 @@ public:
 
       //GtkBox *child = this->mkPageBox(path);
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
-      Util::reference_textview(output);
+      Print::reference_textview(output);
       addChild(child);
       auto label = tabLabel(path, (void *)this);
       auto close = g_object_get_data(G_OBJECT(label), "close");
@@ -179,7 +179,7 @@ public:
 
       auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
       gtk_widget_realize(GTK_WIDGET(child));
-      Util::flushGTK();
+      Basic::flushGTK();
 #ifdef ENABLE_MENU_CLASS
         auto pathbar_ = Child::getPathbar();
         auto myPathbarMenu = new Menu<PathbarMenu>;
@@ -193,15 +193,15 @@ public:
         //gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
         DBG("menu parent = %p (should be null)\n", gtk_widget_get_parent(GTK_WIDGET(menu)));
         gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
-        Util::addMenu(menu, GTK_WIDGET(pathbar_));
+        Print::addMenu(menu, GTK_WIDGET(pathbar_));
 #endif      
       
       if (num >= 0) {
         while (num != gtk_notebook_get_current_page(notebook_)) 
           gtk_notebook_next_page(notebook_);
       }
-      Util::setWorkdir(path, true);
-      gtk_widget_grab_focus(GTK_WIDGET(Util::getInput()));
+      Workdir::setWorkdir(path, true);
+      gtk_widget_grab_focus(GTK_WIDGET(Child::getInput()));
      
     }
 private: 
@@ -213,7 +213,7 @@ private:
       Child::remove(child);
 
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
-      Util::unreference_textview(output);
+      Print::unreference_textview(output);
       GList *item = g_list_find(pageList_, child);
       pageList_ = g_list_remove(pageList_, child);
       if (g_list_length(pageList_) == 0){
@@ -239,8 +239,8 @@ private:
       auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
       delete(page);
-//      Util::flushGTK();
-//      gtk_widget_grab_focus(GTK_WIDGET(Util::getInput()));
+//      Basic::flushGTK();
+//      gtk_widget_grab_focus(GTK_WIDGET(Print::getInput()));
       
     }
 
@@ -258,7 +258,7 @@ private:
       auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
       gtk_widget_set_visible (close, TRUE);
       
-      setWindowTitle(child);    
+      Child::setWindowTitle(child);    
       gtk_widget_grab_focus(GTK_WIDGET(input));
       
     }
@@ -278,8 +278,8 @@ private:
       auto tabButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       auto menuButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
-      auto newTabButton = Util::newButton("list-add", _("New Tab"));
-      auto newMenuButton = Util::newMenuButton("open-menu", NULL);
+      auto newTabButton = Basic::newButton("list-add", _("New Tab"));
+      auto newMenuButton = Basic::newMenuButton("open-menu", NULL);
 
       auto myMainMenu = new Menu<MainMenu>(_("Main menu"));
       myMainMenu->setMenu(newMenuButton);
@@ -292,11 +292,11 @@ private:
       
       gtk_widget_set_hexpand(GTK_WIDGET(actionWidget), FALSE);
 
-      Util::boxPack0(tabButtonBox, GTK_WIDGET(longPressImage_),  TRUE, FALSE, 0);
-      Util::boxPack0(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
-      Util::boxPack0(menuButtonBox, GTK_WIDGET(newMenuButton),  TRUE, FALSE, 0);
-      Util::boxPack0(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
-      Util::boxPack0(actionWidget, GTK_WIDGET(menuButtonBox),  TRUE, FALSE, 0);
+      Basic::boxPack0(tabButtonBox, GTK_WIDGET(longPressImage_),  TRUE, FALSE, 0);
+      Basic::boxPack0(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
+      Basic::boxPack0(menuButtonBox, GTK_WIDGET(newMenuButton),  TRUE, FALSE, 0);
+      Basic::boxPack0(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);
+      Basic::boxPack0(actionWidget, GTK_WIDGET(menuButtonBox),  TRUE, FALSE, 0);
 
       gtk_notebook_set_action_widget (notebook_, GTK_WIDGET(actionWidget), GTK_PACK_END);
 
@@ -311,15 +311,15 @@ private:
 
       auto mainBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       auto hbox1 = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
-      Util::boxPack0(mainBox, GTK_WIDGET(hbox1),  TRUE, TRUE, 0);
+      Basic::boxPack0(mainBox, GTK_WIDGET(hbox1),  TRUE, TRUE, 0);
       gtk_widget_set_hexpand(GTK_WIDGET(hbox1), TRUE);
 
       mkNotebook();
-      Util::boxPack0(hbox1, GTK_WIDGET(notebook_),  TRUE, TRUE, 0);
+      Basic::boxPack0(hbox1, GTK_WIDGET(notebook_),  TRUE, TRUE, 0);
       g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
 
       auto hbox2 = this->mkVbuttonBox();  // More precise.  
-      Util::boxPack0(mainBox, GTK_WIDGET(hbox2),  FALSE, FALSE, 0);
+      Basic::boxPack0(mainBox, GTK_WIDGET(hbox2),  FALSE, FALSE, 0);
 
       return GTK_WIDGET(mainBox);
     }

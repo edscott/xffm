@@ -83,7 +83,7 @@ namespace xf {
       for (HIST_ENTRY **p=history; p && *p; p++, k++){
         if (strcmp(last, (*p)->line)){
           snprintf(buffer, 256, "%5d  %s\n", k, (*p)->line);
-          Print::concat(&t, buffer);
+          Basic::concat(&t, buffer);
         }
         last = (*p)->line;
       }

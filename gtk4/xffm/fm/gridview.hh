@@ -84,7 +84,7 @@ namespace xf {
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
         auto list_item =GTK_LIST_ITEM(object);
         auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
-        auto list = UtilBasic::getChildren(box);
+        auto list = Basic::getChildren(box);
         for (auto l=list; l && l->data; l=l->next){
           gtk_widget_unparent(GTK_WIDGET(l->data));
         }
@@ -162,10 +162,10 @@ namespace xf {
         g_free(markup);
         DirectoryClass::addLabelTooltip(label, path); 
 
-        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
-        UtilBasic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
-        UtilBasic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
-        UtilBasic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);    
 
         if (Settings::getInteger("xfterm", "iconsize") == 24 && strcmp(name, "..")){
           // file information string
@@ -176,18 +176,18 @@ namespace xf {
           struct stat st;
           lstat(path, &st);
        
-          auto m1 = UtilBasic::statInfo(&st);
+          auto m1 = Basic::statInfo(&st);
 
           char *markup = g_strdup("<span size=\"small\" color=\"blue\">");
-          Print::concat(&markup, m1);
-          Print::concat(&markup, "</span>");
+          Basic::concat(&markup, m1);
+          Basic::concat(&markup, "</span>");
           
           g_free(m1);
           gtk_label_set_markup(GTK_LABEL(props), markup);
           g_free(markup);
 
-          UtilBasic::boxPack0(GTK_BOX(box), props, FALSE, FALSE, 0);  
-          UtilBasic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
+          Basic::boxPack0(GTK_BOX(box), props, FALSE, FALSE, 0);  
+          Basic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
 
 
         } else {
@@ -247,7 +247,7 @@ namespace xf {
     {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         return FALSE;
     }
     static gboolean
@@ -258,7 +258,7 @@ namespace xf {
     {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         return FALSE;
     }
 

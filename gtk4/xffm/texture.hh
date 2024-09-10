@@ -74,7 +74,7 @@ namespace xf {
               currentSerial, serial, paintable);
         } else {
           // Here we execute the gtk widget replacement in the g_main_context.
-          auto retval = UtilBasic::context_function(replace_f, replaceArg);
+          auto retval = Basic::context_function(replace_f, replaceArg);
           TRACE("UtilBasic::context_function(replace_f) retval = %d\n", GPOINTER_TO_INT(retval));
         }
 
@@ -102,7 +102,7 @@ namespace xf {
         gtk_box_remove(imageBox, GTK_WIDGET(image));
         GtkWidget *preview = gtk_image_new_from_paintable(paintable);
         gtk_widget_set_size_request(preview, size, size);
-        UtilBasic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(preview), FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(preview), FALSE, FALSE, 0);    
         return  GINT_TO_POINTER(serial);
       }
 

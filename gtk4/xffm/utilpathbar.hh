@@ -3,14 +3,14 @@
 #include "menu.hh"
 #include "fm/pathbarmenu.hh"
 namespace xf {
-  class UtilPathbar  :  public  UtilBasic{
+  class UtilPathbar {
     public:
     ///////////////////   pathbar  ///////////////////////////////////
     
     
     static void 
     updatePathbar(bool updateHistory, void *pathbar_go_f){
-        const gchar *path = getWorkdir();
+        const gchar *path = Child::getWorkdir();
         GtkBox *pathbar = Child::getPathbar();
         updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
     }
@@ -64,7 +64,7 @@ namespace xf {
         }
         paths[0]= g_strdup(G_DIR_SEPARATOR_S);
 
-        GList *children_list = UtilBasic::getChildren(pathbar);
+        GList *children_list = Basic::getChildren(pathbar);
         //for (auto l=children_list; l && l->data; l=l->next);
         //GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar));
         gint i=0;
@@ -105,7 +105,7 @@ namespace xf {
             auto pb_button = 
                 UtilBasic::pathbarLabelButton(strlen(paths[i])?paths[i]:G_DIR_SEPARATOR_S);
 
-            UtilBasic::boxPack0 (pathbar, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
+            Basic::boxPack0 (pathbar, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
             //gtk_container_add(GTK_CONTAINER(pathbar), GTK_WIDGET(pb_button));
 
             gchar *g = (pb_path!=NULL)?
@@ -137,7 +137,7 @@ namespace xf {
         // finally, add the menu item for each pathbar item.
         // This should only be done if no menu is already set
         // for the item.
-        children_list = UtilBasic::getChildren(pathbar);
+        children_list = Basic::getChildren(pathbar);
         for (GList *children = children_list;children && children->data; children=children->next){
            auto widget = GTK_WIDGET(children->data);
            if (g_object_get_data(G_OBJECT(widget), "menu")) continue;
@@ -191,7 +191,7 @@ namespace xf {
         // will adjust?
         //
         TRACE("*** togglePathbar: %s\n", path);
-        GList *children_list = UtilBasic::getChildren(pathbar);
+        GList *children_list = Basic::getChildren(pathbar);
 
         if (gtk_widget_get_realized(MainWidget)) showWhatFits(pathbar, path, children_list);
         else {TRACE("MainWidget not yet realized...\n");}
@@ -386,7 +386,7 @@ namespace xf {
         }
         if (!strlen(pb_path)) pb_path=G_DIR_SEPARATOR_S;//?
         if (strcmp(pb_path, path)==0) {
-            gchar *v = UtilBasic::utf_string(name);
+            gchar *v = Basic::utf_string(name);
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, bgcolor?"white":"red", bgcolor?bgcolor:"#dcdad5", g);
@@ -397,7 +397,7 @@ namespace xf {
             g_free(markup);
         }
         else {
-            gchar *v = UtilBasic::utf_string(name);
+            gchar *v = Basic::utf_string(name);
             gchar *g = g_markup_escape_text(v, -1);
             g_free(v);
             gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, color, bgcolor?bgcolor:"#dcdad5", g);

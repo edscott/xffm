@@ -125,7 +125,7 @@ namespace xf {
           GFile *file = g_file_new_for_path(p->path);
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           auto basename = g_path_get_basename(p->path);
-          auto utf_name = UtilBasic::utf_string(basename);
+          auto utf_name = Basic::utf_string(basename);
           g_file_info_set_name(info, utf_name);
           g_free(basename);
           g_free(utf_name);
@@ -267,7 +267,7 @@ namespace xf {
         int k=0;
         char *t = g_strdup_printf(_("Contents of '%s'"), name);
 //            char *t = g_strdup_printf("%s:",_("contents"));
-        Print::concat(&t, ":\n");
+        Basic::concat(&t, ":\n");
         do {
           GFile *outChild = NULL;
           GFileInfo *outInfo = NULL;
@@ -279,16 +279,16 @@ namespace xf {
             g_error_free(error_);
           }
           if (!outInfo || !outChild) break;
-          Print::concat(&t, "<span color=\"blue\" size=\"x-small\">  ");
-          Print::concat(&t, g_file_info_get_name(outInfo));
+          Basic::concat(&t, "<span color=\"blue\" size=\"x-small\">  ");
+          Basic::concat(&t, g_file_info_get_name(outInfo));
           auto subtype = g_file_info_get_file_type(outInfo);
-          if (subtype == G_FILE_TYPE_DIRECTORY )Print::concat(&t, "/");
-          if (subtype == G_FILE_TYPE_SYMBOLIC_LINK)Print::concat(&t, "*");
-          Print::concat(&t, "</span>\n");
+          if (subtype == G_FILE_TYPE_DIRECTORY )Basic::concat(&t, "/");
+          if (subtype == G_FILE_TYPE_SYMBOLIC_LINK)Basic::concat(&t, "*");
+          Basic::concat(&t, "</span>\n");
           if (++k >= limit) {
-            Print::concat(&t, "<span color=\"red\">");
-            Print::concat(&t, _("More..."));
-            Print::concat(&t, "</span>\n");
+            Basic::concat(&t, "<span color=\"red\">");
+            Basic::concat(&t, _("More..."));
+            Basic::concat(&t, "</span>\n");
             break;
           }  
         } while (true);

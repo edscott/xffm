@@ -96,7 +96,7 @@ namespace xf {
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
-      UtilBasic::setWindowTitle(child);
+      Child::setWindowTitle(child);
       updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
@@ -135,7 +135,7 @@ namespace xf {
       auto type = g_file_info_get_file_type(info);
       if ((type == G_FILE_TYPE_DIRECTORY )||(LocalDir::symlinkToDir(info, type))) {
         TRACE("Go to action...\n");
-        auto child = UtilBasic::getChild();
+        auto child = Child::getChild();
         setWorkdir(path);
       } else {
         TRACE("mimetype action...\n");

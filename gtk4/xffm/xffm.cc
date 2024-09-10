@@ -22,23 +22,22 @@
 /*
 */
 
-#include "mime/mime.hh"
+#include "basic.hh"
+#include "icontheme.hh"
+#include "settings.hh"
 #include "child.hh"
+#include "texture.hh"
+#include "print.hh"
+
+
+#include "mime/mime.hh"
 #include "clipboard.hh"
 #include "utilbasic.hh"
 
-#include "icontheme.hh"
-#include "settings.hh"
-#include "texture.hh"
-#include "print.hh"
 #include "history.hh"
-
 #include "css.hh"
-
 #include "thread.hh"
-
 #include "openwith.hh"        
-
 
 #include "menu.hh"
 #include "utilpathbar.hh"
@@ -51,11 +50,11 @@
 #include "tubo.hh"
 #include "run.hh"
 #include "runbutton.hh"
+
 #include "fm/fmpage.hh"
 #include "fm/window.hh"
 #include "fm/menucallbacks.hh"
 
-#include "paintable.hh"
 
 
 #include "fm/fm.hh"

@@ -14,6 +14,11 @@ namespace xf {
         return;
       }
       TRACE("readDone: string = %s\n", string);
+      auto output = Child::getOutput();
+      Print::showText(output);
+      Print::print(output, "blue/default_output_bg", g_strdup(_("Clipboard contents")));
+      Print::print(output, "blue/default_output_bg", g_strdup(":\n"));
+      Print::print(output, "brown/default_output_bg", string);
 
       
     }

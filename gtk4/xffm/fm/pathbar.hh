@@ -88,9 +88,9 @@ namespace xf {
         addSignals(eventBox2, "xffm:next");
         addSignals(eventBox3, "xffm:goto");
 
-        boxPack0 (pathbar_, GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
-        boxPack0 (pathbar_, GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
-        boxPack0 (pathbar_, GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
+        Basic::boxPack0 (pathbar_, GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
+        Basic::boxPack0 (pathbar_, GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
+        Basic::boxPack0 (pathbar_, GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
         
 
 
@@ -98,7 +98,7 @@ namespace xf {
         auto pb_button = UtilBasic::pathbarLabelButton(".");
 
         
-        boxPack0 (pathbar_, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
+        Basic::boxPack0 (pathbar_, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
         g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("xffm:root"));
 
@@ -159,7 +159,7 @@ namespace xf {
            }
            g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
            g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           Util::setWorkdir(previous, GTK_BOX(pathbar), false);
+           Workdir::setWorkdir(previous, GTK_BOX(pathbar), false);
            return TRUE;
          }
       }
@@ -177,16 +177,16 @@ namespace xf {
            historyNext = g_list_remove(historyNext, current);
            g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
            g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           Util::setWorkdir(current, GTK_BOX(pathbar), false);
+           Workdir::setWorkdir(current, GTK_BOX(pathbar), false);
            return TRUE;
          }
       }
       if (strcmp(path, "xffm:goto") == 0){
-        Util::clear_text(GTK_TEXT_VIEW(input));
-        Util::print(GTK_TEXT_VIEW(input), g_strdup("cd ")); 
+        Print::clear_text(GTK_TEXT_VIEW(input));
+        Print::print(GTK_TEXT_VIEW(input), g_strdup("cd ")); 
         gtk_widget_grab_focus(GTK_WIDGET(input));
 
-        Util::flushGTK();
+        Basic::flushGTK();
       }
       
       return TRUE;
@@ -200,7 +200,7 @@ namespace xf {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        Util::flushGTK();
+        Basic::flushGTK();
         return FALSE;
     }
     static gboolean
@@ -212,7 +212,7 @@ namespace xf {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
-        Util::flushGTK();
+        Basic::flushGTK();
         return FALSE;
     }
     
@@ -223,7 +223,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(eventBox), "path", g_strdup(path));
 
         auto eventImage = gtk_image_new_from_icon_name(icon);
-        boxPack0 (eventBox, GTK_WIDGET(eventImage), FALSE, FALSE, 0);
+        Basic::boxPack0 (eventBox, GTK_WIDGET(eventImage), FALSE, FALSE, 0);
         gtk_widget_set_tooltip_markup(GTK_WIDGET(eventBox),tooltip);
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
         return eventBox;        

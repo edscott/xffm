@@ -5,15 +5,6 @@ namespace xf {
   class Print {
   public:
    /////   print  //////
-    static void
-    concat(gchar **fullString, const gchar* addOn){
-        if (!(*fullString)) {
-          *fullString = g_strdup(addOn);
-        }
-        auto newString = g_strconcat(*fullString, addOn, NULL);
-        g_free(*fullString);
-        *fullString = newString;
-    }
     
     static char *inputText(GtkTextView *input){
         auto buffer = gtk_text_view_get_buffer(input);
@@ -32,7 +23,7 @@ namespace xf {
     scroll_to_top(GtkTextView *textview){
         if (!textview) return NULL;
         // make sure all text is written before attempting scroll
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         GtkTextIter start, end;
         auto buffer = gtk_text_view_get_buffer (textview);
         gtk_text_buffer_get_bounds (buffer, &start, &end);
@@ -41,7 +32,7 @@ namespace xf {
                               0.0,
                               FALSE,
                               0.0, 0.0);        
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         return NULL;
     }
 
@@ -49,7 +40,7 @@ namespace xf {
     scroll_to_bottom(GtkTextView *textview){
         if (!textview) return NULL;
         // make sure all text is written before attempting scroll
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         GtkTextIter start, end;
         auto buffer = gtk_text_view_get_buffer (textview);
         gtk_text_buffer_get_bounds (buffer, &start, &end);
@@ -57,55 +48,22 @@ namespace xf {
         gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
                                       TRUE, 1.0, 1.0);
         //gtk_text_view_scroll_mark_onscreen (textview, mark);
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         return NULL;
-    }
-
-    static gint
-    length_equal_string(const gchar *a, const gchar *b){
-        int length=0;
-        int i;
-        for (i = 0; i < strlen(a) && i < strlen(b); i++){
-            if (strncmp(a,b,i+1)) {
-                length=i;
-                break;
-            } else {
-                length=i+1;
-            }
-        }
-         TRACE("%s --- %s differ at length =%d\n", a,b,length);
-       return length;
-    }
-
-    static gchar *
-    get_tilde_dir(const gchar *token){
-        struct passwd *pw;
-        gchar *tilde_dir = NULL;
-        while((pw = getpwent ()) != NULL) {
-            gchar *id = g_strdup_printf("~%s/", pw->pw_name);
-            if (strncmp(token, id, strlen(id))==0){
-                tilde_dir = g_strdup_printf("%s/", pw->pw_dir);
-                g_free(id);
-                break;
-            }
-            g_free(id);
-        }
-        endpwent ();
-        return tilde_dir;
     }
 
 
     static void clear_text(GtkTextView *textview){
         if (!textview) return;
         void *arg[]={(void *)textview, NULL};
-        UtilBasic::context_function(clear_text_buffer_f, arg);
+        Basic::context_function(clear_text_buffer_f, arg);
     }
 
     // FIXME: color
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
         if (!textview) return;
         void *arg[]={(void *)textview, (void *)tag, (void *)string};
-        UtilBasic::context_function(print_f, arg);
+        Basic::context_function(print_f, arg);
         g_free(string);
     }
     static void print(GtkTextView *textview, gchar *string){
@@ -117,7 +75,7 @@ namespace xf {
         if (!textview) return;
         auto icon = Texture::load(iconname, 16);
         void *arg[]={(void *)icon, (void *)textview, NULL, (void *)string};
-        UtilBasic::context_function(print_i, arg);
+        Basic::context_function(print_i, arg);
         g_free(string);
     }
     // FIXME: color
@@ -156,13 +114,13 @@ namespace xf {
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
         void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
-        UtilBasic::context_function(show_text_buffer_f, arg);
+        Basic::context_function(show_text_buffer_f, arg);
     }
     
     static void printStatus(GtkTextView *textview, gchar *string){
         if (!textview) return;
         void *arg[]={(void *)textview, (void *)string};
-        UtilBasic::context_function(print_s, arg);
+        Basic::context_function(print_s, arg);
         g_free(string);
     }
   private:
@@ -275,7 +233,7 @@ namespace xf {
               }
               /* if (strncmp(code, "0K", 2)==0 ||strncmp(code, "1K", 2)==0 || strncmp(code, "2K", 2)==0){
                   // erase from cursor to eol, from bol to cursor, erase line
-                  concat(&fullString, code+2);
+                  Basic::concat(&fullString, code+2);
                   continue;
               }*/
                // split on m
@@ -313,8 +271,8 @@ namespace xf {
                       continue;
                   } else {
                       TRACE("ansiTag=%s\n", ansiTag);
-                       concat(&fullTag, "/");
-                       concat(&fullTag, ansiTag);
+                       Basic::concat(&fullTag, "/");
+                       Basic::concat(&fullTag, ansiTag);
                       TRACE("fullTag= %s\n", fullTag); 
                   }
               }
@@ -352,7 +310,7 @@ endloop:;
           return;
       }
 
-      gchar *q = UtilBasic::utf_string (s);
+      gchar *q = Basic::utf_string (s);
       /// this should be mutex protected since this function is being called
       //  from threads all over the place.
       static pthread_mutex_t insert_mutex =  PTHREAD_MUTEX_INITIALIZER;
@@ -425,7 +383,7 @@ endloop:;
           {"command", {101, 0x5858, 0x3434, 0xcfcf}},
           {"stderr", {102, 0xcccc, 0, 0}},
           {"command_id", {103, 0x0000, 0x0000, 0xffff}},
-          {"grey", {110, 0x8888, 0x8888, 0x8888}},
+          {"gray", {110, 0x8888, 0x8888, 0x8888}},
 // xterm colors
           // normal 
           {"black", {201, 0x0000, 0x0000, 0x0000}},

@@ -175,7 +175,7 @@ public:
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=Tubo::getChild (pid);
-        if (textview) Util::printIcon(textview, "emblem-greenball", g_strdup_printf("%d:%s\n", grandchild, command));
+        if (textview) Print::printIcon(textview, "emblem-greenball", g_strdup_printf("%d:%s\n", grandchild, command));
         g_strstrip(command);
         push_hash(grandchild, g_strdup(command));
         TRACE("push hash: \"%s\"\n", command);
@@ -197,7 +197,7 @@ public:
         }
         if(!g_shell_parse_argv (ncommand, &argc, &argv, &error)) {
             auto msg = g_strcompress (error->message);
-            if (textview) Util::printError(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
+            if (textview) Print::printError(textview, g_strdup_printf("%s: %s\n", msg, ncommand));
             else TRACE("%s: %s\n", msg, ncommand);
             g_free(ncommand);
             g_error_free (error);
@@ -230,7 +230,7 @@ public:
           DBG("run_operate_stdout: invalid argument\n");
           //  textview = Fm<Type>::getCurrentTextview();
         } else {
-           if (!Util::isValidTextView(data)) return;
+           if (!Print::isValidTextView(data)) return;
            textview = GTK_TEXT_VIEW(data);
         }
         if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
@@ -273,10 +273,10 @@ public:
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
             gchar *string = exit_string(line);
-            Util::printIcon(textview, "emblem-redball", g_strdup_printf("%s", string));
+            Print::printIcon(textview, "emblem-redball", g_strdup_printf("%s", string));
             g_free(string);
         } else {
-            Util::print(textview, g_strdup(outline));
+            Print::print(textview, g_strdup(outline));
         }
         g_free(outline);
 
@@ -301,7 +301,7 @@ public:
            // textview = Fm<Type>::getCurrentTextview();
             
         } else {
-           if (!Util::isValidTextView(data)) return;
+           if (!Print::isValidTextView(data)) return;
            textview = GTK_TEXT_VIEW(data);
         }  
 
@@ -309,15 +309,15 @@ public:
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                //Util::print(textview, "Cyan/default_output_bg", g_strdup(line));
-                Util::print(textview, "darkcyan/default_output_bg", g_strdup(line));
+                //Print::print(textview, "Cyan/default_output_bg", g_strdup(line));
+                Print::print(textview, "darkcyan/default_output_bg", g_strdup(line));
             } else if (strstr(line, "***")) {
-                Util::print(textview, "red/white_bg", g_strdup(line));
+                Print::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
-                //Util::print(textview, "yellow/black", g_strdup(line));
-                Util::print(textview, "brown/default_output_bg", g_strdup(line));
+                //Print::print(textview, "yellow/black", g_strdup(line));
+                Print::print(textview, "brown/default_output_bg", g_strdup(line));
             } else {                
-                Util::print(textview, "red/default_output_bg", g_strdup(line));
+                Print::print(textview, "red/default_output_bg", g_strdup(line));
             }
         }
 
@@ -335,7 +335,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        Util::print(textview, g_strdup(line));
+        Print::print(textview, g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -352,7 +352,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        Util::printRed(textview, g_strdup(line));
+        Print::printRed(textview, g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -368,8 +368,8 @@ public:
         //view_c *view_p = (view_c *)data;
         //view_p->get_lpterm_p()->print("bold", g_strdup_printf("%s\n", "run complete."));
         auto textview = GTK_TEXT_VIEW(data);
-        Util::showText(textview);
-        Util::scroll_to_top(textview);
+        Print::showText(textview);
+        Print::scroll_to_top(textview);
         return FALSE;
     }
 
@@ -448,7 +448,7 @@ public:
         // Make sure any sudo command has the "-A" option
         auto command = sudo_fix(c);
         TRACE("shell_command = %s\n", c);
-        if (showTextPane) Util::showText(textview);
+        if (showTextPane) Print::showText(textview);
         auto currentDir = g_get_current_dir();
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(textview), "child"));
         auto wd = Child::getWorkdir(child);
@@ -544,7 +544,7 @@ public:
         TRACE ("MIME: command_fmt fmt=%s\n", fmt);
 
         TRACE ("MIME: path=%s\n", path);
-        gchar *esc_path = Util::esc_string (path);
+        gchar *esc_path = Basic::esc_string (path);
         command_line = g_strdup_printf (fmt, esc_path);
         g_free (esc_path);
         TRACE ("MIME2: command_line=%s\n", command_line);
@@ -631,7 +631,7 @@ public:
     
     static gchar *getRunCommand(GtkWindow *parent, const gchar *path){
         TRACE("runWith: path = %s\n", path);
-        auto displayPath = Util::valid_utf_pathstring(path);
+        auto displayPath = Print::valid_utf_pathstring(path);
         auto markup = 
             g_strdup_printf("<span color=\"blue\" size=\"larger\"><b>%s</b></span>\n<span color=\"red\">(%s)</span>", displayPath, 
                 _("Executable"));  

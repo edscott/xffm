@@ -7,7 +7,7 @@
 
 namespace xf {
 
-  class Vpane : public UtilBasic {
+  class Vpane {
     private:
     GtkPaned *vpane_;
     GtkTextView *output_;
@@ -56,7 +56,7 @@ namespace xf {
 
   };
 
-  class FMpage : private Util, public Vpane, public Prompt<bool>, public Pathbar {
+  class FMpage : public Vpane, public Prompt<bool>, public Pathbar {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;
@@ -145,9 +145,9 @@ namespace xf {
         // FIXME:: UtilPathbar::updatePathbar(path, pathbar, true); 
         // bool is to add navigation history
 
-        boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
-        boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
-        boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
+        Basic::boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
+        Basic::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
+        Basic::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
 
         //gtk_widget_set_visible(promptBox, TRUE);
 

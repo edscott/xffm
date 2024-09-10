@@ -45,11 +45,11 @@ public:
     static void
     msg_show_match(GtkTextView *output, gint match_type, const gchar *match){
         if (!output) return;
-        Util::showText(output);
+        Print::showText(output);
         if (!match) {
             const gchar *option_type = get_match_type_text(match_type);
             match = _("Found no match");
-            Util::printIcon(output, "dialog-info", g_strdup_printf(" %s\n", match));
+            Print::printIcon(output, "dialog-info", g_strdup_printf(" %s\n", match));
         } else {
             auto p = g_find_program_in_path(match);
             if (!p && g_file_test(match, G_FILE_TEST_IS_SYMLINK)){
@@ -60,13 +60,13 @@ public:
             if (!p && g_file_test(match, G_FILE_TEST_IS_DIR)) p = g_strdup(_("Directory"));
             if (!p && g_file_test(match, G_FILE_TEST_IS_REGULAR)) p = g_strdup(_("File"));
             if (p) {
-              Util::print(output, "blue/white_bg", g_strdup_printf(" %s (%s)\n", match,p));
+              Print::print(output, "blue/white_bg", g_strdup_printf(" %s (%s)\n", match,p));
               g_free(p);
             } else {
-              Util::print(output, "blue/white_bg", g_strdup_printf(" %s\n", match));
+              Print::print(output, "blue/white_bg", g_strdup_printf(" %s\n", match));
             }
         }
-        Util::scroll_to_bottom(output);
+        Print::scroll_to_bottom(output);
     }
 
     
@@ -82,7 +82,7 @@ public:
             if (strncmp(in_token, "~/", strlen("~/"))==0){
                 token = g_strconcat(g_get_home_dir(), in_token+1, NULL);
             } else {
-                gchar *dir = Util::get_tilde_dir(in_token);
+                gchar *dir = Basic::get_tilde_dir(in_token);
                 if (dir) token = g_strconcat(dir, strchr(in_token, '/')+1, NULL);
                 g_free(dir);
             }
@@ -134,10 +134,10 @@ public:
         g_free(directory);
 
         if (stack_glob_v.gl_pathc > maxOptions()){
-            //Util::print(output, "blue/white_bg",g_strdup_printf("%s ", file_token));
+            //Print::print(output, "blue/white_bg",g_strdup_printf("%s ", file_token));
 
-            Util::showText(output);
-            Util::printError(output, g_strdup_printf("%s: %ld %s\n", 
+            Print::showText(output);
+            Print::printError(output, g_strdup_printf("%s: %ld %s\n", 
                   _("Matches"), maxOptions(), _("Too many selected files")));
             globfree(&stack_glob_v);
             g_free(file_token);
@@ -228,8 +228,8 @@ public:
         }
 
         if (stack_glob_v.gl_pathc > maxOptions()){
-           // Util::print(output, "Red/white_bg",g_strdup_printf("%s ", token));
-           // Util::print_error(output, g_strdup_printf(_("More than %d matches\n"), maxOptions()));
+           // Print::print(output, "Red/white_bg",g_strdup_printf("%s ", token));
+           // Print::print_error(output, g_strdup_printf(_("More than %d matches\n"), maxOptions()));
 
             globfree(&stack_glob_v);
             g_free(token);
@@ -295,7 +295,7 @@ public:
             TRACE("comparing a %s\n", (gchar *)a->data);
             for(b = a->next; b && b->data; b = b->next) {
                 TRACE("comparing b %s\n", (gchar *)b->data);
-                length=Util::length_equal_string(
+                length=Basic::length_equal_string(
                         (const gchar *)(a->data), (const gchar *)(b->data));
                 if(length < equal_length) {
                     equal_length = length;
@@ -335,8 +335,8 @@ public:
             TRACE("matchCount = %d\n", g_slist_length(matches));
         }
         if (output && g_slist_length(matches) > 1) {
-            Util::showText(output);
-            Util::print(output, "blue/white_bg", g_strconcat(_("Options:"), "\n",NULL));
+            Print::showText(output);
+            Print::print(output, "blue/white_bg", g_strconcat(_("Options:"), "\n",NULL));
             for(p = matches; p && p->data; p = p->next) {
                 TRACE("msg_show_match call 1\n");
                 msg_show_match(output, match_type, (const gchar *)p->data);
@@ -383,7 +383,7 @@ public:
             TRACE ( "comparing a %s\n", (gchar *)a->data);
             for(b = a->next; b && b->data; b = b->next) {
                 TRACE ( "comparing b %s\n", (gchar *)b->data);
-                length=Util::length_equal_string(
+                length=Basic::length_equal_string(
                         (const gchar *)(a->data), (const gchar *)(b->data));
                 if(length < equal_length) {
                     equal_length = length;
@@ -447,23 +447,23 @@ public:
         TRACE("bash_completion complete: %s\n", head);
         gint head_len = strlen(head);
         g_free (head);
-        gchar *token = Util::inputText (input);
-//        gchar *token = Util::get_current_text (input);
+        gchar *token = Print::inputText (input);
+//        gchar *token = Print::get_current_text (input);
 //
 //        newToken will expand ~ and $HOME
         gchar *newToken = tokenExpand(input, token);
         if (newToken){
             g_free(token);
             token = newToken;
-            Util::clear_text(input);
-            Util::print(input, g_strdup_printf("%s",newToken));
+            Print::clear_text(input);
+            Print::print(input, g_strdup_printf("%s",newToken));
 
             GtkTextIter end;
             GtkTextBuffer *buffer = gtk_text_view_get_buffer (input);
             gtk_text_buffer_get_end_iter(buffer, &end);
             gtk_text_buffer_place_cursor(buffer, &end);
             
-            Util::flushGTK();
+            Basic::flushGTK();
             return;
         }
 
@@ -488,9 +488,9 @@ public:
             GtkTextBuffer *buffer = gtk_text_view_get_buffer (input);
             gint offset = head_len + (suggest_len - token_len);
 //            gint offset = head_len + (suggest_len - token_len) + 1;
-            Util::clear_text(input);
-            Util::print(input, g_strdup_printf("%s", suggest));
-//            Util::print_status(input, g_strdup(suggest));
+            Print::clear_text(input);
+            Print::print(input, g_strdup_printf("%s", suggest));
+//            Print::print_status(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
             gtk_text_buffer_place_cursor(buffer, &end);
         }
@@ -540,14 +540,14 @@ public:
         gchar *head=get_text_to_cursor(input);
         gint head_len = strlen(head);
         g_free (head);
-        gchar *token = Util::get_current_text (input);
+        gchar *token = Print::get_current_text (input);
         gchar *newToken = tokenExpand(input, token);
         if (newToken){
             g_free(token);
             token = newToken;
-            Util::clear_text(input);
-            Util::print(input, g_strdup(newToken));
-            Util::flushGTK();
+            Print::clear_text(input);
+            Print::print(input, g_strdup(newToken));
+            Basic::flushGTK();
             return;
         }
 
@@ -562,7 +562,7 @@ public:
             gint offset = -1;
             // +1 is icon...
             offset = head_len + (suggest_len - token_len) + 1;
-            Util::printStatus(input, g_strdup(suggest));
+            Print::printStatus(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
             gtk_text_buffer_place_cursor(buffer, &end);
         }
@@ -578,14 +578,14 @@ public:
         gchar *head=get_text_to_cursor(input);
         gint head_len = strlen(head);
         g_free (head);
-        gchar *token = Util::get_current_text (input);
+        gchar *token = Print::get_current_text (input);
         gchar *newToken = tokenExpand(input, token);
         if (newToken){
             g_free(token);
             token = newToken;
-            Util::clear_text(input);
-            Util::print(input, g_strdup(newToken));
-            Util::flushGTK();
+            Print::clear_text(input);
+            Print::print(input, g_strdup(newToken));
+            Basic::flushGTK();
             return;
         }
 
@@ -610,7 +610,7 @@ public:
             gint offset = -1;
             // +1 is icon...
             offset = head_len + (suggest_len - token_len) + 1;
-            Util::printStatus(input, g_strdup(suggest));
+            Print::printStatus(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
             gtk_text_buffer_place_cursor(buffer, &end);
         }
@@ -643,28 +643,28 @@ private:
     static void
     msg_help_text(GtkTextView *output){
         if (!output) return;
-        Util::showText(output);
+        Print::showText(output);
 
-        Util::printIcon(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
+        Print::printIcon(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
                 _("Completion mode:"), 
                 _("command"),
                 _("file")));
-        Util::print(output,  "red", g_strdup("TAB.\n"));
-        Util::scroll_to_bottom(output);
+        Print::print(output,  "red", g_strdup("TAB.\n"));
+        Print::scroll_to_bottom(output);
     }
 
     static void
     msg_result_text(GtkTextView *output, gint match_type){
         if (!output) return;
-        Util::showText(output);
+        Print::showText(output);
 #ifdef DEBUG_TRACE
-        Util::print_icon(output, "dialog-info", "green", g_strdup(_("Options >>")));
+        Print::print_icon(output, "dialog-info", "green", g_strdup(_("Options >>")));
         const gchar *option_type = get_match_type_text(match_type);
-        Util::print(output,  "red", g_strdup_printf("(%s)\n", option_type));
+        Print::print(output,  "red", g_strdup_printf("(%s)\n", option_type));
 #else
-        Util::print(output,  "green", g_strdup_printf("%s\n", _("Options >>")));
+        Print::print(output,  "green", g_strdup_printf("%s\n", _("Options >>")));
 #endif
-        Util::scroll_to_bottom(output);
+        Print::scroll_to_bottom(output);
     }
 
     static gchar *

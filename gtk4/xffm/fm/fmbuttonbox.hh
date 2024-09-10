@@ -56,22 +56,22 @@ namespace xf {
         /*const char *bIcon[]={OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, NULL};
         const char *bText[]={_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_ NULL};*/
         for (auto p=bIcon; p && *p; p++, q++){
-          auto button = Util::newButton(*p, *q);
-          Util::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
+          auto button = Basic::newButton(*p, *q);
+          Basic::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
           if (*r) {
             g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(*r), NULL);
             (r)++;
           }
         }
 
-        auto colorButton = Util::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
+        auto colorButton = Basic::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
         auto myColorMenu = new Menu<IconColorMenu>(_("Colors"));
         myColorMenu->setMenu(colorButton);
         delete myColorMenu;
-        Util::boxPack0(vButtonBox_, GTK_WIDGET(colorButton),  FALSE, FALSE, 0);
+        Basic::boxPack0(vButtonBox_, GTK_WIDGET(colorButton),  FALSE, FALSE, 0);
       
-        Util::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
-        Util::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
+        Basic::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
+        Basic::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(MainWidget), "buttonBox", vButtonBox_);
 
         return hbox;
@@ -132,7 +132,7 @@ private:
 
         gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
         //gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
-        Util::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
+        Basic::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
         g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize), NULL);
         addMotionController(GTK_WIDGET(size_scale));
         return size_scale;
@@ -151,7 +151,7 @@ private:
       for (int i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(notebook, i);
         auto path = Child::getWorkdir(child);
-        Util::setWorkdir(path, child);
+        Workdir::setWorkdir(path, child);
                
       }
     }
@@ -159,9 +159,9 @@ private:
     static void
     goHome(GtkButton *self, void *data){
       //DBG("goHome....\n");
-      auto child = Util::getChild();
+      auto child = Child::getChild();
       
-      //Util::setWorkdir(g_get_home_dir());
+      //Workdir::setWorkdir(g_get_home_dir());
         
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
@@ -171,16 +171,16 @@ private:
       auto path = Child::getWorkdir(child);
       // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
       if (retval){
-        //Util::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
+        //Print::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
         if (!History::add("cd")) DBG("History::add(%s) failed\n", "cd" );
       } else {
-        Util::print(output, g_strdup_printf(_("failed to chdir to $HOME")));
+        Print::print(output, g_strdup_printf(_("failed to chdir to $HOME")));
       }
       return;
     }
     static void
     openTerminal(GtkButton *self, void *data){
-      auto childWidget =Util::getChild();
+      auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Child::getWorkdir(childWidget);
@@ -196,7 +196,7 @@ private:
     }
     static void
     openFind(GtkButton *self, void *data){
-      auto childWidget =Util::getChild();
+      auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Child::getWorkdir(childWidget);
@@ -212,7 +212,7 @@ private:
 
     static void
     upImage (GtkButton *self, void *data){
-      auto childWidget =Util::getChild();
+      auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto workDir = Child::getWorkdir(childWidget);
 
@@ -221,7 +221,7 @@ private:
       else if (pixels < 384) pixels = 384;
       else if (pixels < 768) pixels = 768;
       Settings::setInteger("ImageSize", workDir, pixels);
-      Util::print(output, g_strdup_printf("FIXME upImage:: pixels set at %d\n", pixels));
+      Print::print(output, g_strdup_printf("FIXME upImage:: pixels set at %d\n", pixels));
       /* FIXME
         if (pixels !=  Settings::getInteger("ImageSize", workDir)) {
           page->setImageSize(pixels);
@@ -233,7 +233,7 @@ private:
     
     static void
     downImage (GtkButton *self, void *data){
-      auto childWidget =Util::getChild();
+      auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto workDir = Child::getWorkdir(childWidget);
 
@@ -242,7 +242,7 @@ private:
       else  if (pixels  > 48 ) pixels = 48;
       else pixels = 0;
       Settings::setInteger("ImageSize", workDir, pixels);
-      Util::print(output, g_strdup_printf("FIXME downImage:: pixels set at %d\n", pixels));
+      Print::print(output, g_strdup_printf("FIXME downImage:: pixels set at %d\n", pixels));
       /* FIXME
       page->setImageSize(pixels);
       view->reloadModel();
@@ -252,7 +252,7 @@ private:
     
     static void
     toggleVpane (GtkButton *self, void *data){
-      auto vpane =Util::getPane();
+      auto vpane = Child::getPane();
       auto position = gtk_paned_get_position(vpane);
       int height = gtk_widget_get_height(GTK_WIDGET(vpane));
       TRACE("position=%d, height=%d, 3/4height=%d\n", position, height, height * 3 / 4);

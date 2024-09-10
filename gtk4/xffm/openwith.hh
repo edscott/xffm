@@ -61,17 +61,17 @@ public:
           auto paintable = Texture::load(icon, 48);
           auto image = gtk_image_new_from_paintable(paintable);
           gtk_widget_set_size_request(image, 48, 48);
-          UtilBasic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(image), TRUE, TRUE, 0);
+          Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(image), TRUE, TRUE, 0);
       }
       // path title
       auto label = GTK_LABEL(gtk_label_new (""));
       auto markup = g_strconcat("<span color=\"blue\" size=\"large\"> <b>", path_, "</b></span>", NULL);
       gtk_label_set_markup(label, markup);
       g_free(markup);
-      UtilBasic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(label), TRUE, TRUE, 0);
+      Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(label), TRUE, TRUE, 0);
       // mimetype title
       //auto mimeBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0)); 
-      auto mimeBox = UtilBasic::mkEndBox(); 
+      auto mimeBox = Basic::mkEndBox(); 
       auto labelMime = GTK_LABEL(gtk_label_new (""));
       auto mimetype = MimeMagic::mimeMagic(path_); 
       auto markup2 = g_strconcat("<span color=\"brown\" size=\"small\">", mimetype, "</span>", NULL);
@@ -79,22 +79,22 @@ public:
       g_free(markup2);
       auto apps = MimeApplication::locate_apps(mimetype);
  
-      UtilBasic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(mimeBox), TRUE, TRUE, 0);
-      UtilBasic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelMime), FALSE, FALSE, 0);
+      Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(mimeBox), TRUE, TRUE, 0);
+      Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelMime), FALSE, FALSE, 0);
       // execute button
       if (g_file_test(path_, G_FILE_TEST_IS_EXECUTABLE))
       {
         auto labelExe = gtk_label_new(_("Is executable"));
-        UtilBasic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelExe), FALSE, FALSE, 5);
+        Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelExe), FALSE, FALSE, 5);
         auto execute = gtk_button_new();
         auto run = gtk_image_new_from_icon_name("emblem-run");
         auto ebox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto elabel = gtk_label_new(_("Execute"));
-        UtilBasic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(run), FALSE, FALSE, 0);
-        UtilBasic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(elabel), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(run), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(elabel), FALSE, FALSE, 0);
         gtk_button_set_child(GTK_BUTTON(execute), GTK_WIDGET(ebox));
         g_signal_connect (G_OBJECT (execute), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
-        UtilBasic::boxPack0(mimeBox, GTK_WIDGET(execute), FALSE,FALSE, 0);
+        Basic::boxPack0(mimeBox, GTK_WIDGET(execute), FALSE,FALSE, 0);
       }
 
       // prompt
@@ -132,8 +132,8 @@ public:
         auto label = gtk_label_new(*p);
         g_object_set_data(G_OBJECT(label), "openWith", this);
         g_object_set_data(G_OBJECT(label), "popover", popover);
-        UtilBasic::boxPack0(GTK_BOX (box), GTK_WIDGET(label), FALSE, FALSE, 0);
-        UtilBasic::boxPack0(GTK_BOX (popoverBox), GTK_WIDGET(box), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (box), GTK_WIDGET(label), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (popoverBox), GTK_WIDGET(box), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(label), "input", input_);
         addGestureClick(label, (void *)labelClick); 
         addMotionController(GTK_WIDGET(box));
@@ -142,10 +142,10 @@ public:
 
 
 
-      UtilBasic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(label2), FALSE, FALSE, 3);
-      UtilBasic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(input_), TRUE, TRUE, 3);
-      UtilBasic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
-      UtilBasic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(hbox), TRUE, TRUE, 0);
+      Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(label2), FALSE, FALSE, 3);
+      Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(input_), TRUE, TRUE, 3);
+      Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
+      Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(hbox), TRUE, TRUE, 0);
 
         // check button
       {
@@ -154,14 +154,14 @@ public:
 "with applications requiring user input from a terminal emulator. To run such "\
 "applications, you should use an external terminal.");
 
-        auto box = UtilBasic::mkEndBox();
-        UtilBasic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(box), TRUE, TRUE, 5);
+        auto box = Basic::mkEndBox();
+        Basic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(box), TRUE, TRUE, 5);
         auto label = gtk_label_new(_("Use External Terminal:"));
         gtk_widget_set_tooltip_markup(label, info);
         checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new());
 
-        UtilBasic::boxPack0(GTK_BOX (box),GTK_WIDGET(label), FALSE, FALSE, 0);
-        UtilBasic::boxPack0(GTK_BOX (box),GTK_WIDGET(checkbutton_), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(label), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(checkbutton_), FALSE, FALSE, 0);
         //DBG("default app=%s\n", defaultApp);
         //DBG("default apps[0]=%s\n", apps[0]);
         char *key = NULL;
@@ -184,8 +184,8 @@ public:
       }
 
         // button box
-        auto buttonBox = UtilBasic::mkEndBox();
-        UtilBasic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(buttonBox), TRUE, TRUE, 10);
+        auto buttonBox = Basic::mkEndBox();
+        Basic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(buttonBox), TRUE, TRUE, 10);
 
         // no button
 
@@ -193,26 +193,26 @@ public:
         auto red = gtk_image_new_from_icon_name("emblem-redball");
         auto rbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto rlabel = gtk_label_new(_("Cancel"));
-        UtilBasic::boxPack0(GTK_BOX (rbox),GTK_WIDGET(red), FALSE, FALSE, 0);
-        UtilBasic::boxPack0(GTK_BOX (rbox),GTK_WIDGET(rlabel), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (rbox),GTK_WIDGET(red), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (rbox),GTK_WIDGET(rlabel), FALSE, FALSE, 0);
         gtk_button_set_child(GTK_BUTTON(no), GTK_WIDGET(rbox));
         g_signal_connect (G_OBJECT (no), "clicked", G_CALLBACK (OpenWith::dialogCancel), this);
-        UtilBasic::boxPack0(buttonBox, GTK_WIDGET(no), FALSE,FALSE, 0);
+        Basic::boxPack0(buttonBox, GTK_WIDGET(no), FALSE,FALSE, 0);
 
        // yes button
         auto yes = gtk_button_new();
         auto green = gtk_image_new_from_icon_name("emblem-greenball");
         auto gbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto glabel = gtk_label_new(_("Proceed"));
-        UtilBasic::boxPack0(GTK_BOX (gbox),GTK_WIDGET(green), FALSE, FALSE, 0);
-        UtilBasic::boxPack0(GTK_BOX (gbox),GTK_WIDGET(glabel), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (gbox),GTK_WIDGET(green), FALSE, FALSE, 0);
+        Basic::boxPack0(GTK_BOX (gbox),GTK_WIDGET(glabel), FALSE, FALSE, 0);
         gtk_button_set_child(GTK_BUTTON(yes), GTK_WIDGET(gbox));
         g_signal_connect (G_OBJECT (yes), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
-        UtilBasic::boxPack0(buttonBox, GTK_WIDGET(yes), FALSE,FALSE, 0);
+        Basic::boxPack0(buttonBox, GTK_WIDGET(yes), FALSE,FALSE, 0);
  
         // progress bar timeout       
         timeoutProgress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
-        UtilBasic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(timeoutProgress_), TRUE, TRUE, 0);
+        Basic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(timeoutProgress_), TRUE, TRUE, 0);
         g_timeout_add(500, OpenWith::updateProgress, (void *)this);
  
     
@@ -227,7 +227,7 @@ public:
         // finish up
         gtk_widget_realize (GTK_WIDGET(dialog_));
         gtk_widget_grab_focus(GTK_WIDGET(input_));
-        UtilBasic::setAsDialog(GTK_WIDGET(dialog_), "xfDialog", "XfDialog");
+        Basic::setAsDialog(GTK_WIDGET(dialog_), "xfDialog", "XfDialog");
         gtk_window_present(dialog_);
         return;
     }
@@ -251,7 +251,7 @@ public:
         if (strchr(executable, ' ')) *strrchr(executable, ' ') = 0;
         if (!g_find_program_in_path(executable)){
           auto message = g_strdup_printf(_("Cannot find executable for \"%s\""), executable);
-          Print::concat(&message, "\n");
+          Basic::concat(&message, "\n");
           Print::printError(output, message);
           Print::showText(output);
           g_free(inputText);
@@ -270,7 +270,7 @@ public:
         for (auto p=always; p && *p; p++){
           if (strcmp(key, *p) == 0) inTerminal = true;
         }
-        if (UtilBasic::alwaysTerminal(inputText)) inTerminal = true;
+        if (Basic::alwaysTerminal(inputText)) inTerminal = true;
         char *command = NULL;
         if (inTerminal) {
           command = Run<Type>::mkTerminalLine(inputText, object->path());
@@ -445,7 +445,7 @@ private:
     {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         return FALSE;
     }
     static gboolean
@@ -456,7 +456,7 @@ private:
     {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        UtilBasic::flushGTK();
+        Basic::flushGTK();
         return FALSE;
     }
 

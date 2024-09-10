@@ -167,65 +167,19 @@ namespace xf {
 
         return b;
     }
-  static gchar *
-  utf_string (const gchar * t) {
-      if(!t) { return g_strdup (""); }
-      if(g_utf8_validate (t, -1, NULL)) { return g_strdup (t); }
-      /* so we got a non-UTF-8 */
-      /* but is it a valid locale string? */
-      gchar *actual_tag;
-      actual_tag = g_locale_to_utf8 (t, -1, NULL, NULL, NULL);
-      if(actual_tag)
-          return actual_tag;
-      /* So it is not even a valid locale string... 
-       * Let us get valid utf-8 caracters then: */
-      const gchar *p;
-      actual_tag = g_strdup ("");
-      for(p = t; *p; p++) {
-          // short circuit end of string:
-          gchar *r = g_locale_to_utf8 (p, -1, NULL, NULL, NULL);
-          if(g_utf8_validate (p, -1, NULL)) {
-              gchar *qq = g_strconcat (actual_tag, p, NULL);
-              g_free (actual_tag);
-              actual_tag = qq;
-              break;
-          } else if(r) {
-              gchar *qq = g_strconcat (actual_tag, r, NULL);
-              g_free (r);
-              g_free (actual_tag);
-              actual_tag = qq;
-              break;
-          }
-          // convert caracter to utf-8 valid.
-          gunichar gu = g_utf8_get_char_validated (p, 2);
-          if(gu == (gunichar) - 1) {
-              gu = g_utf8_get_char_validated ("?", -1);
-          }
-          gchar outbuf[8];
-          memset (outbuf, 0, 8);
-          gint outbuf_len = g_unichar_to_utf8 (gu, outbuf);
-          if(outbuf_len < 0) {
-              ERROR ("utf_string: unichar=%d char =%c outbuf_len=%d\n", gu, p[0], outbuf_len);
-          }
-          gchar *qq = g_strconcat (actual_tag, outbuf, NULL);
-          g_free (actual_tag);
-          actual_tag = qq;
-      }
-      return actual_tag;
-  }
     private:
     static     gchar *
     get_terminal_name (const char *path) {
         gchar *iconname;
         if(!path) {
-            iconname = utf_string (g_get_host_name());
+            iconname = Basic::utf_string (g_get_host_name());
         } else if(g_path_is_absolute(path) &&
                 g_file_test (path, G_FILE_TEST_EXISTS)) {
             gchar *basename = g_path_get_basename (path);
             gchar *pathname = g_strdup (path);
-            gchar *b = utf_string (basename);   // non chopped
+            gchar *b = Basic::utf_string (basename);   // non chopped
             chop_excess (pathname);
-            gchar *q = utf_string (pathname);   // non chopped
+            gchar *q = Basic::utf_string (pathname);   // non chopped
 
             g_free (basename);
             g_free (pathname);
@@ -234,7 +188,7 @@ namespace xf {
             g_free (q);
             g_free (b);
         } else {
-            iconname = utf_string (path);
+            iconname = Basic::utf_string (path);
             chop_excess (iconname);
         }
 
