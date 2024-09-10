@@ -19,15 +19,24 @@
 //#undef ENABLE_THREAD_POOL
 
 #include "xffm.h"
-#include "settings.hh"
-#include "thread.hh"
-#include "mime/mime.hh"
+/*
+*/
 
+#include "mime/mime.hh"
 #include "child.hh"
 #include "clipboard.hh"
 #include "utilbasic.hh"
+
+#include "icontheme.hh"
+#include "settings.hh"
 #include "texture.hh"
 #include "print.hh"
+#include "history.hh"
+
+#include "css.hh"
+
+#include "thread.hh"
+
 #include "openwith.hh"        
 
 
@@ -39,13 +48,15 @@
 
 #include "util.hh"
 #include "bash.hh"
-#include "history.hh"
 #include "tubo.hh"
 #include "run.hh"
 #include "runbutton.hh"
 #include "fm/menucallbacks.hh"
 
 #include "paintable.hh"
+
+
+#include "fm/window.hh"
 #include "fm/fm.hh"
 
 

@@ -179,8 +179,8 @@ namespace xf {
           auto m1 = UtilBasic::statInfo(&st);
 
           char *markup = g_strdup("<span size=\"small\" color=\"blue\">");
-          UtilBasic::concat(&markup, m1);
-          UtilBasic::concat(&markup, "</span>");
+          Print::concat(&markup, m1);
+          Print::concat(&markup, "</span>");
           
           g_free(m1);
           gtk_label_set_markup(GTK_LABEL(props), markup);

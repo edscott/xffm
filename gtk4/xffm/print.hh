@@ -5,6 +5,28 @@ namespace xf {
   class Print {
   public:
    /////   print  //////
+    static void
+    concat(gchar **fullString, const gchar* addOn){
+        if (!(*fullString)) {
+          *fullString = g_strdup(addOn);
+        }
+        auto newString = g_strconcat(*fullString, addOn, NULL);
+        g_free(*fullString);
+        *fullString = newString;
+    }
+    
+    static char *inputText(GtkTextView *input){
+        auto buffer = gtk_text_view_get_buffer(input);
+        GtkTextIter  start, end;
+        gtk_text_buffer_get_bounds (buffer, &start, &end);
+        auto text = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
+        g_strstrip(text);   
+        if (text[0] == '$') { // Eliminate any preceeding $
+          text[0] = ' ';
+          g_strstrip(text);   
+        }
+        return text;
+    }
 
     static void *
     scroll_to_top(GtkTextView *textview){
@@ -291,8 +313,8 @@ namespace xf {
                       continue;
                   } else {
                       TRACE("ansiTag=%s\n", ansiTag);
-                       UtilBasic::concat(&fullTag, "/");
-                       UtilBasic::concat(&fullTag, ansiTag);
+                       concat(&fullTag, "/");
+                       concat(&fullTag, ansiTag);
                       TRACE("fullTag= %s\n", fullTag); 
                   }
               }

@@ -29,15 +29,15 @@ namespace xf {
         if (history_search_prefix(prefix, 1)==0){
           auto h = current_history();
           //DBG("Down found %s at %d\n", h->line, where_history());
-          Util::clear_text(input);
-          Util::print(input, g_strdup_printf("%s", h->line));
+          Print::clear_text(input);
+          Print::print(input, g_strdup_printf("%s", h->line));
         } else {
           history_set_pos(position);
         }
       } else {
         auto h = next_history();
-        Util::clear_text(input);
-        Util::print(input, g_strdup_printf("%s", h?h->line:""));
+        Print::clear_text(input);
+        Print::print(input, g_strdup_printf("%s", h?h->line:""));
       }
     }
     static void
@@ -46,7 +46,7 @@ namespace xf {
       if (position == 0){
         history_set_pos(history_length);
         position = where_history();
-        auto prefix = Util::inputText(input);
+        auto prefix = Print::inputText(input);
         if (strlen(prefix)) g_object_set_data(G_OBJECT(input), "prefix", prefix);
         else {
           g_free(prefix);
@@ -64,13 +64,13 @@ namespace xf {
         if (history_search_prefix(prefix, -1)==0){
           auto h = current_history();
           //DBG("Up found %s at %d\n", h->line, where_history());
-          Util::clear_text(input);
-          Util::print(input, g_strdup_printf("%s", h->line));
+          Print::clear_text(input);
+          Print::print(input, g_strdup_printf("%s", h->line));
         }
       } else {
         auto h = previous_history();
-        Util::clear_text(input);
-        Util::print(input, g_strdup_printf("%s", h?h->line:""));
+        Print::clear_text(input);
+        Print::print(input, g_strdup_printf("%s", h?h->line:""));
       }
     }
     static char *
@@ -83,7 +83,7 @@ namespace xf {
       for (HIST_ENTRY **p=history; p && *p; p++, k++){
         if (strcmp(last, (*p)->line)){
           snprintf(buffer, 256, "%5d  %s\n", k, (*p)->line);
-          Util::concat(&t, buffer);
+          Print::concat(&t, buffer);
         }
         last = (*p)->line;
       }

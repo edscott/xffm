@@ -12,6 +12,7 @@ typedef struct thread_run_t {
 */
 namespace xf {
 
+pthread_mutex_t rbl_mutex = PTHREAD_MUTEX_INITIALIZER; // run button list mutex
 
 
 class RunButton {
@@ -282,7 +283,7 @@ activate(GtkWidget *self, gpointer data) {
                     g_free(icon_id);
                     icon_id = g_strdup("video-display");
                 } 
-                if (gtk_icon_theme_has_icon (icon_theme, icon_id)){
+                if (gtk_icon_theme_has_icon (iconTheme, icon_id)){
                   auto button = run_button_p->button();
                   gtk_menu_button_set_icon_name(button, icon_id);
                 }

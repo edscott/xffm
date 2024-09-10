@@ -7,8 +7,9 @@
 #include <gio/gio.h>
 namespace xf {
 
-class MainWindow: public FMbuttonBox, public UtilBasic {
-// We need to inherit FMbuttonBox so as to instantiate object.
+template <class PageClass>
+class WindowUtils {
+
 private:
     GList *pageList_=NULL;
     GtkWindow *mainWindow_ = NULL;
@@ -16,35 +17,59 @@ private:
     double windowH_ = 400;    
     double windowW_ = 400*1.618;    
     GList *run_button_list=NULL;
-    pthread_mutex_t *rbl_mutex; // run button list mutex
 
     GtkWidget *longPressImage_=NULL;
     GHashTable *pageHash_=NULL;
-// Constructor  
 public:
     GtkNotebook *notebook(void) {return notebook_;}
-//    GtkNotebook *getNotebook(void) {return notebook_;}
-    MainWindow(const gchar *path){
-        createWindow(); 
-        //g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
-        addKeyController(GTK_WIDGET(mainWindow_));
-          // for page: startDeviceMonitor();
-        auto box = contentBox(path);
-        gtk_window_set_child(mainWindow_, box);
-        addPage(path);
-        showWindow();
-        g_object_set_data(G_OBJECT(MainWidget), "MainWindow", this);
-    }
-
-    ~MainWindow(void){
-       // for each page: g_file_monitor_cancel(deviceMonitor_);
-    } 
-// Free functions (for signals)
-public:
     static void
     on_new_page(GtkButton *button, void *data){
-        MainWindow *w = (MainWindow *)data;
-        auto child = Util::getChild();
+        //MainWindow *w = (MainWindow *)data;
+        
+      auto child = Util::getChild();
+      auto path =Child::getWorkdir(child); 
+        
+      auto page = new PageClass(path);
+      
+      auto child = page->childBox();
+      g_object_set_data(G_OBJECT(child), "page", page);
+      Child::add(GTK_WIDGET(child));
+
+      //GtkBox *child = this->mkPageBox(path);
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+      Util::reference_textview(output);
+      pageList_ = g_list_append(pageList_, child);
+      auto label = tabLabel(path, (void *)this);
+      auto close = g_object_get_data(G_OBJECT(label), "close");
+      g_object_set_data(G_OBJECT(child), "close", close);
+
+      auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
+      gtk_widget_realize(GTK_WIDGET(child));
+      Util::flushGTK();
+#ifdef ENABLE_MENU_CLASS
+        auto pathbar_ = Child::getPathbar();
+        auto myPathbarMenu = new Menu<PathbarMenu>;
+        auto title = g_strconcat("<span color=\"blue\">", _("foo Navigation Toolbar"), "</span>", NULL);
+        auto menu = myPathbarMenu->getMenu(title);
+        g_free(title);
+        g_object_set_data(G_OBJECT(pathbar_), "menu", menu);
+        // Important: must use both of the following instructions:
+        //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
+        //gtk_popover_set_default_widget(menu, GTK_WIDGET(MainWidget));
+        //gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
+        DBG("menu parent = %p (should be null)\n", gtk_widget_get_parent(GTK_WIDGET(menu)));
+        gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
+        Util::addMenu(menu, GTK_WIDGET(pathbar_));
+#endif      
+      
+      if (num >= 0) {
+        while (num != gtk_notebook_get_current_page(notebook_)) 
+          gtk_notebook_next_page(notebook_);
+      }
+      Util::setWorkdir(path, true);
+      gtk_widget_grab_focus(GTK_WIDGET(Util::getInput()));
+     
+    }
         w->addPage(Child::getWorkdir(child));
     }
     static void
@@ -139,7 +164,7 @@ private:
     }
 
     void addPage(const gchar *path){
-      auto page = new FMpage(path);
+      auto page = new PageClass(path);
       auto child = page->childBox();
       g_object_set_data(G_OBJECT(child), "page", page);
       Child::add(GTK_WIDGET(child));
@@ -211,7 +236,7 @@ private:
       }
 
       // Get VPane object from child widget (box)
-      auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
+      auto page = (PageClass *) g_object_get_data(G_OBJECT(child), "page");
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
       delete(page);
 //      Util::flushGTK();
@@ -302,8 +327,8 @@ private:
       pthread_mutexattr_t r_attr;
       pthread_mutexattr_init(&r_attr);
       pthread_mutexattr_settype(&r_attr, PTHREAD_MUTEX_RECURSIVE);
-      rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
-      pthread_mutex_init(rbl_mutex, &r_attr);
+      //rbl_mutex = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
+      //pthread_mutex_init(rbl_mutex, &r_attr);
 
       auto mainBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       auto hbox1 = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
@@ -315,6 +340,7 @@ private:
       g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
 
       auto hbox2 = this->mkVbuttonBox();  // More precise.  
+//      auto hbox2 = VbuttonClass::mkVbuttonBox(); // This works too, but less clear.   
       Util::boxPack0(mainBox, GTK_WIDGET(hbox2),  FALSE, FALSE, 0);
 
       return GTK_WIDGET(mainBox);

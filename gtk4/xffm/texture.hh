@@ -20,7 +20,7 @@ namespace xf {
         auto gIcon = g_file_info_get_icon(info);
         GdkPaintable *texture;
         if (gIcon) {
-          auto icon = gtk_icon_theme_lookup_by_gicon(icon_theme, gIcon, 96, 
+          auto icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, 96, 
               1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
           texture = GDK_PAINTABLE(icon);
         } else return NULL;
@@ -30,7 +30,7 @@ namespace xf {
       GdkPaintable *load(const char *iconName, int size){
         GdkPaintable *texture;
         auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
-            icon_theme, iconName,
+            iconTheme, iconName,
             NULL, size, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
 
         if (icon) {
@@ -131,7 +131,7 @@ namespace xf {
         if (!item) return NULL;      
         // From iconname.
         int size = Settings::getInteger("xfterm", "iconsize");
-        auto icon = gtk_icon_theme_lookup_icon (icon_theme,
+        auto icon = gtk_icon_theme_lookup_icon (iconTheme,
                        item,  
                        NULL, // const char** fallbacks,
                        size,
@@ -178,7 +178,7 @@ namespace xf {
         
 #endif  
     static const char *locate(const char *name){
-      char *tname = gtk_icon_theme_get_theme_name(icon_theme);
+      char *tname = gtk_icon_theme_get_theme_name(iconTheme);
       const char *dirs[] = {"places", "mimetypes", "status", "devices", "emblems", "stock", NULL}; 
       for (auto p=dirs; p && *p; p++){
         auto *path = g_strdup_printf("/usr/share/icons/%s/scalable/%s/%s.svg", tname, *p, name);

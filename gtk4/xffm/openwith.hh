@@ -251,7 +251,7 @@ public:
         if (strchr(executable, ' ')) *strrchr(executable, ' ') = 0;
         if (!g_find_program_in_path(executable)){
           auto message = g_strdup_printf(_("Cannot find executable for \"%s\""), executable);
-          UtilBasic::concat(&message, "\n");
+          Print::concat(&message, "\n");
           Print::printError(output, message);
           Print::showText(output);
           g_free(inputText);
