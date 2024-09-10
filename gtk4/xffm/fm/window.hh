@@ -138,6 +138,31 @@ private:
 
     }
 
+    void addChild(GtkBox *child){
+      pageList_ = g_list_append(pageList_, child);
+
+    }
+    
+    GtkWidget *tabLabel(const gchar *path, void *data){
+      MainWindow *w = (MainWindow *)data;
+      auto tabBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
+      gtk_widget_set_hexpand(GTK_WIDGET(tabBox), FALSE);
+      gtk_widget_set_vexpand(GTK_WIDGET(tabBox), FALSE);
+      gchar *tag = path? g_path_get_basename(path):g_strdup(".");
+      GtkWidget *label = gtk_label_new(tag);
+      g_free(tag);
+      Util::boxPack0(tabBox, label,  FALSE, FALSE, 0);
+
+      auto close = Util::newButton(WINDOW_CLOSE, _("Close"));
+      g_signal_connect(G_OBJECT(close), "clicked", 
+              BUTTON_CALLBACK(w->on_zap_page), data);    
+      g_object_set_data(G_OBJECT(tabBox), "close", close);
+      g_object_set_data(G_OBJECT(tabBox), "label", label);
+      
+      Util::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
+      return GTK_WIDGET(tabBox);
+    }
+public:
     void addPage(const gchar *path){
       auto page = new FMpage(path);
       auto child = page->childBox();
@@ -147,7 +172,7 @@ private:
       //GtkBox *child = this->mkPageBox(path);
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       Util::reference_textview(output);
-      pageList_ = g_list_append(pageList_, child);
+      addChild(child);
       auto label = tabLabel(path, (void *)this);
       auto close = g_object_get_data(G_OBJECT(label), "close");
       g_object_set_data(G_OBJECT(child), "close", close);
@@ -179,7 +204,7 @@ private:
       gtk_widget_grab_focus(GTK_WIDGET(Util::getInput()));
      
     }
- 
+private: 
     void zapPage(void){
       TRACE("zapPage...\n");
 
@@ -236,27 +261,6 @@ private:
       setWindowTitle(child);    
       gtk_widget_grab_focus(GTK_WIDGET(input));
       
-    }
-
-
-    GtkWidget *tabLabel(const gchar *path, void *data){
-      MainWindow *w = (MainWindow *)data;
-      auto tabBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
-      gtk_widget_set_hexpand(GTK_WIDGET(tabBox), FALSE);
-      gtk_widget_set_vexpand(GTK_WIDGET(tabBox), FALSE);
-      gchar *tag = path? g_path_get_basename(path):g_strdup(".");
-      GtkWidget *label = gtk_label_new(tag);
-      g_free(tag);
-      Util::boxPack0(tabBox, label,  FALSE, FALSE, 0);
-
-      auto close = Util::newButton(WINDOW_CLOSE, _("Close"));
-      g_signal_connect(G_OBJECT(close), "clicked", 
-              BUTTON_CALLBACK(w->on_zap_page), data);    
-      g_object_set_data(G_OBJECT(tabBox), "close", close);
-      g_object_set_data(G_OBJECT(tabBox), "label", label);
-      
-      Util::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
-      return GTK_WIDGET(tabBox);
     }
 
     void mkNotebook(){
