@@ -6,7 +6,7 @@ namespace xf {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
-        _("Clear all"),
+        _("Clear"),
         _("Copy"), 
         _("Select All"), 
         _("Foreground color"), 
@@ -18,10 +18,9 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Clear all"),(void *) NULL}, 
+        {_("Clear"),(void *) NULL}, 
         {_("Copy"),(void *) NULL}, 
         {_("Select All"),(void *) NULL}, 
-        {_("Foreground color"),(void *) NULL}, 
         {_("Foreground color"),(void *) NULL}, 
         {_("Background color"), (void *) NULL},
         {_("Default Color"),(void *) NULL}, 
@@ -31,12 +30,9 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
-        {_("Select all"),(void *) NULL}, 
-        {_("Clear all"),(void *) NULL}, 
-        {_("Copy"),(void *) NULL}, 
-        {_("Cut"),(void *) NULL}, 
-        {_("Paste"),(void *) NULL}, 
-        {_("Delete"),(void *) NULL}, 
+        {_("Clear"),(void *) clearAll}, 
+        {_("Copy"),(void *) copy}, 
+        {_("Select All"),(void *) selectAll}, 
         {_("Foreground color"),(void *) Util::terminalColors}, 
         {_("Background color"), (void *) Util::terminalColors},
         {_("Default Colors"),(void *) Util::defaultColors}, 
@@ -46,12 +42,9 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {_("Select all"),(void *) NULL}, 
-        {_("Clear all"),(void *) NULL}, 
+        {_("Clear"),(void *) NULL}, 
         {_("Copy"),(void *) NULL}, 
-        {_("Cut"),(void *) NULL}, 
-        {_("Paste"),(void *) NULL}, 
-        {_("Delete"),(void *) NULL}, 
+        {_("Select All"),(void *) NULL}, 
         {_("Foreground color"),(void *) "outputFg"}, 
         {_("Background color"), (void *) "outputBg"},
         {_("Default Colors"),(void *) "output"}, 
@@ -61,6 +54,32 @@ namespace xf {
     }
 
   private:
+    static void
+    copy(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+    }
+
+    static void
+    selectAll(GtkButton *button, void *data){
+      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(GTK_POPOVER(menu));
+
+      auto textview = GTK_TEXT_VIEW(gtk_widget_get_parent(menu));
+      auto buffer = gtk_text_view_get_buffer(textview);  
+      GtkTextIter start, end;
+      gtk_text_buffer_get_bounds (buffer, &start, &end);
+      gtk_text_buffer_select_range(buffer, &start, &end);
+      
+    }
+
+    static void
+    clearAll(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto output = Child::getOutput();
+      Print::clearText(output);
+    }
   };
 
 
