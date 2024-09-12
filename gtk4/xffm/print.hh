@@ -62,7 +62,6 @@ namespace xf {
       clearText(textview);
     }
 
-    // FIXME: color
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
         if (!textview) return;
         void *arg[]={(void *)textview, (void *)tag, (void *)string};
@@ -73,20 +72,22 @@ namespace xf {
         print(textview, NULL, string);
     }
 
-    static void printIcon(GtkTextView *textview, const gchar *iconname, gchar *string)
-    {
-        if (!textview) return;
-        auto icon = Texture::load(iconname, 16);
-        void *arg[]={(void *)icon, (void *)textview, NULL, (void *)string};
-        Basic::context_function(print_i, arg);
-        g_free(string);
-    }
-    // FIXME: color
     static void printIcon(GtkTextView *textview, 
                               const gchar *iconname, 
                               const gchar *tag, 
                               gchar *string){
-        print(textview, string);
+        if (!textview) return;
+        auto icon = Texture::load(iconname, 16);
+        void *arg[]={(void *)icon, (void *)textview, (void *)tag, (void *)string};
+        Basic::context_function(print_i, arg);
+        g_free(string);
+    }
+
+    static void print(GtkTextView *textview, 
+                              const gchar *iconname, 
+                              const gchar *tag, 
+                              gchar *string){
+      printIcon(textview, iconname, tag, string);
     }
 
     static void // printIcon will free string.
@@ -126,7 +127,17 @@ namespace xf {
         Basic::context_function(print_s, arg);
         g_free(string);
     }
+
+    static void printIcon(GtkTextView *textview, const gchar *iconname, gchar *string)
+    {
+        if (!textview) return;
+        auto icon = Texture::load(iconname, 16);
+        void *arg[]={(void *)icon, (void *)textview, NULL, (void *)string};
+        Basic::context_function(print_i, arg);
+        g_free(string);
+    }
   private:
+
     static void *
     print_s(void *data){
         if (!data) return GINT_TO_POINTER(-1);

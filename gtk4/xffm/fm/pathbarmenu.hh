@@ -13,7 +13,7 @@ namespace xf {
         _("Open in New Window"),
         _("Paste"), // 0x04
         _("Show Clipboard"), // 0x04
-        _("Clipboard is empty."), // 0x04
+     //   _("Clipboard is empty."), // 0x04
         NULL
       };
       return keys_;

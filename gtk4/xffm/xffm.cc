@@ -31,12 +31,15 @@
 
 
 #include "mime/mime.hh"
+#include "thread.hh"
+
+#include "progress.hh"
+#include "gio.hh"
 #include "clipboard.hh"
 #include "utilbasic.hh"
 
 #include "history.hh"
 #include "css.hh"
-#include "thread.hh"
 #include "openwith.hh"        
 
 #include "menu.hh"
@@ -141,8 +144,13 @@ main (int argc, char *argv[]) {
   gchar *path = getPath(argv[1]);
   DBG("path is %s (%s)\n", path, argv[1]); 
   auto fm = new(xf::Fm)(path);
+
+  auto c = new xf::ClipBoard;
+  g_object_set_data(G_OBJECT(MainWidget), "ClipBoard", c);
   
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);
+
+  delete c;
   return 0;
 }

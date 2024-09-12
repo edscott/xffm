@@ -49,7 +49,7 @@ public:
         if (!match) {
             const gchar *option_type = get_match_type_text(match_type);
             match = _("Found no match");
-            Print::printIcon(output, "dialog-info", g_strdup_printf(" %s\n", match));
+            Print::print(output, "dialog-info", g_strdup_printf(" %s\n", match));
         } else {
             auto p = g_find_program_in_path(match);
             if (!p && g_file_test(match, G_FILE_TEST_IS_SYMLINK)){
@@ -645,7 +645,7 @@ private:
         if (!output) return;
         Print::showText(output);
 
-        Print::printIcon(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
+        Print::print(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
                 _("Completion mode:"), 
                 _("command"),
                 _("file")));

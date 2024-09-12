@@ -100,6 +100,14 @@ namespace xf {
               gdouble y,
               gpointer data){
       auto menu = GTK_POPOVER(data);
+
+     auto paste = g_object_get_data(G_OBJECT(menu), _("Paste"));
+     DBG("paste is at button %p\n", paste);
+     if (paste) {
+       auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+       gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
+     }
+      
       // position is relative to the parent/default widget.
       //TRACE("position %lf,%lf\n", x, y);
       gtk_popover_popup(menu);
@@ -184,6 +192,7 @@ namespace xf {
           // A button.
           gtk_label_set_markup(label, *p);
           GtkButton *button = GTK_BUTTON(gtk_button_new());
+          g_object_set_data(G_OBJECT(menu), *p, button);
           g_object_set_data(G_OBJECT(button), "menu", menu);
           g_object_set_data(G_OBJECT(button), "key", g_strdup(*p));
           g_object_set_data(G_OBJECT(menu), *p, button);

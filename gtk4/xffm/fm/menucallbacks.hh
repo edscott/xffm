@@ -12,14 +12,16 @@ namespace xf {
     paste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-      DBG("paste...\n");
+      auto path = g_object_get_data(G_OBJECT(menu), "path");
+      ClipBoard::pasteClip(path);
+      DBG("paste to %s...\n", (char *)path);
     }
     static void
     showPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-      DBG("showPaste...\n");
-      printClipBoard();
+//      DBG("showPaste...valid = %d\n", Clipboard::validClipBoard());
+      ClipBoard::printClipBoard();
     }
  
     static void
@@ -71,33 +73,6 @@ private:
       runButton->init(runButton, xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }
-
-    static void
-    readDone(GObject* source_object, GAsyncResult* result,  gpointer data){
-      GdkClipboard *clipBoard = GDK_CLIPBOARD(source_object);
-      GError *error_ = NULL;
-      auto string = gdk_clipboard_read_text_finish(clipBoard, result, &error_);
-      if (error_){
-        DBG("Error:: readDone(): %s\n", error_->message);
-        g_error_free(error_);
-        return;
-      }
-      TRACE("readDone: string = %s\n", string);
-      auto output = Child::getOutput();
-      Print::showText(output);
-      Print::print(output, "blue/default_output_bg", g_strdup(_("Clipboard contents")));
-      Print::print(output, "blue/default_output_bg", g_strdup(":\n"));
-      Print::print(output, "brown/default_output_bg", string);
-    }
-    static void 
-    printClipBoard(void){
-      GdkClipboard *clipBoard = gdk_display_get_clipboard(gdk_display_get_default());
-      if (!clipBoard) return;
-      //gdk_clipboard_set_text (clipBoardTxt, "foo");
-      gdk_clipboard_read_text_async (clipBoard, NULL, readDone, NULL);
-      return;
-    }
-
  
 
   };
