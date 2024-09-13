@@ -8,6 +8,7 @@ include_directories(
     "../"
     "${PROJECT_BINARY_DIR}" 
     "${libRSVG_INCLUDE_DIRS}"
+    "${libReadline_INCLUDE_DIRS}"
     "${GTK4_INCLUDE_DIRS}")
 
 target_link_libraries(xffm4 
@@ -17,6 +18,7 @@ target_link_libraries(xffm4
     ${X11_LIBRARIES}
     ${LIBZIP_LIBRARIES}
     ${libMagic_LIBRARIES}
+    ${libReadline_LIBRARIES}
     ${THREAD_LIBRARIES})
 
 #execute_process(COMMAND ln -sf xffm xfgetpass WORKING_DIRECTORY xffm)
