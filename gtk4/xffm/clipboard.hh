@@ -77,6 +77,35 @@ public:
         }
         if (files) g_strfreev(files);
     }
+    
+    static void
+    copyClipboardTxt(GtkTextView *textview){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      auto buffer = gtk_text_view_get_buffer(textview);
+      gtk_text_buffer_copy_clipboard (buffer,clipBoardTxt);
+    }
+
+    static void
+    cutClipboardTxt(GtkTextView *textview){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      auto buffer = gtk_text_view_get_buffer(textview);
+      gtk_text_buffer_cut_clipboard (buffer,clipBoardTxt, TRUE); 
+    }
+
+    static void
+    pasteClipboardTxt(GtkTextView *textview){
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      auto buffer = gtk_text_view_get_buffer(textview);      
+      gtk_text_buffer_paste_clipboard (buffer, clipBoardTxt, NULL, TRUE);
+    }
+
+    static int
+    clipBoardSize(void){
+        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto text = c->clipBoardCache();
+        if (!text) return 0;
+        return strlen(text);
+    }
 
 private:
     static void *
@@ -140,6 +169,7 @@ private:
         if (!updateIconBusiness) return;
         // FIXME addClipBoardEmblems();
     }
+
 
 
 #if 0
@@ -314,44 +344,6 @@ private:
         return emblem;
     }
 
-    static void 
-    updateClipBoardCache(const gchar *text){
-        gboolean updateIconBusiness = FALSE;
-        if (!validClipBoard){
-            if (clipBoardCache){
-                // Update any previously set icons.
-                clipBoardCache = removeClipBoardEmblems();
-                updateIconBusiness = TRUE;
-            }
-        }
-        else if (!clipBoardCache || strcmp(text, clipBoardCache)){
-            // Update any previously set icons.
-            clipBoardCache = removeClipBoardEmblems();
-            g_free(clipBoardCache);
-            clipBoardCache = g_strdup(text);
-            updateIconBusiness = TRUE;
-        }
-        if (!updateIconBusiness) return;
-        addClipBoardEmblems();
-    }
-
-    static void
-    setValidity(GtkClipboard *clipBoard, const gchar *text, gpointer data){
-        if (!text || strlen(text)<5){
-            validClipBoard = FALSE;
-        } else if (strncmp(text, "copy", strlen("copy")) == 0){
-            validClipBoard = TRUE;
-        } else if (strncmp(text, "move", strlen("move")) == 0){
-            validClipBoard = TRUE;
-        } else validClipBoard = FALSE;
-        TRACE("Clip board is valid = %d\n", validClipBoard);
-        updateClipBoardCache(text);
-        return;
-    }
-
-    static gboolean
-    clipBoardIsValid(void){ return validClipBoard;}
-
     public:
 
     static void 
@@ -366,19 +358,6 @@ private:
 
 
 #if 0    
-    static void
-    feedClipboard(GtkButton *self, void *data){
-      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(self), "menu")); 
-      gtk_popover_popdown(GTK_POPOVER(menu));
-      if (!clipBoardTxt) clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
-      
-      auto textview = GTK_TEXT_VIEW(gtk_widget_get_parent(menu));
-      auto buffer = gtk_text_view_get_buffer(textview);
-      auto cut = GPOINTER_TO_INT(data);
-      if (cut) gtk_text_buffer_cut_clipboard (buffer,clipBoardTxt, TRUE);
-      else gtk_text_buffer_copy_clipboard (buffer,clipBoardTxt);
-      //printClipBoard(clipBoardTxt);
-    }
     static void
     pasteClipboard(GtkButton *self, void *data){
       auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(self), "menu")); 

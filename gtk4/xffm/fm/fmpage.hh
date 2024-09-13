@@ -97,7 +97,7 @@ namespace xf {
 
         auto title = g_strconcat("",_("Output"),_(" TTY"), NULL);
         auto myOutputMenu = new Menu<OutputMenu<bool> >(title);
-        myOutputMenu->setMenu(GTK_WIDGET(output), GTK_WIDGET(output), Child::getWorkdir());
+        myOutputMenu->setMenu(GTK_WIDGET(output), GTK_WIDGET(output), Child::getWorkdir(), true);
         g_free(title);
         delete myOutputMenu;
 

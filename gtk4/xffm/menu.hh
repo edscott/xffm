@@ -30,6 +30,9 @@ namespace xf {
     public:
       ~Menu(void){
         g_free(title_);
+        g_hash_table_destroy(mHash[0]);
+        g_hash_table_destroy(mHash[1]);
+        g_hash_table_destroy(mHash[2]);
       }
       Menu(const char *title){
         title_ = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>",title);
@@ -48,7 +51,9 @@ namespace xf {
         }
         for (auto p=callbacks_; p && p->key; p++){
           auto callback = p->data;
-          if (callback) g_hash_table_insert(mHash[1], g_strdup(p->key), callback);
+          DBG("callback %p for %s\n", callback, p->key);
+          if (callback)
+            g_hash_table_insert(mHash[1], g_strdup(p->key), callback);
         }
         for (auto p=data_; p && p->key; p++){
           auto data = p->data;
@@ -76,8 +81,9 @@ namespace xf {
         return menu;
       }*/
       
-      void setMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
+      void setMenu(GtkWidget *widget, GtkWidget *parent, const char *path, bool isTextView){
         auto menu = mkMenu(title_);
+        g_object_set_data(G_OBJECT(menu), "isTextView", GINT_TO_POINTER(isTextView));
         g_object_set_data(G_OBJECT(menu), "path", (void *)path);
         gtk_popover_set_default_widget(menu, widget);
         gtk_widget_set_parent(GTK_WIDGET(menu), parent);
@@ -93,6 +99,9 @@ namespace xf {
 
         return;        
       }
+      void setMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
+        setMenu(widget, parent, path, false);
+      }
 
     private:
     static gboolean openMenu(GtkGestureClick* self,
@@ -103,11 +112,22 @@ namespace xf {
       auto menu = GTK_POPOVER(data);
 
      auto paste = g_object_get_data(G_OBJECT(menu), _("Paste"));
+     auto isTextView = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(menu), _("isTextView")));
      DBG("paste is at button %p\n", paste);
-     if (paste) {
+     if (!isTextView && paste) {
        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
        gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
+       auto show =  g_object_get_data(G_OBJECT(menu), _("Show Clipboard"));
+       if (show) gtk_widget_set_visible(GTK_WIDGET(show), c->validClipBoard());
+       auto empty = g_object_get_data(G_OBJECT(menu), _("Clipboard is empty."));
+       if (empty) gtk_widget_set_visible(GTK_WIDGET(empty), !c->validClipBoard());
      }
+     if (isTextView && paste) {
+       gtk_widget_set_visible(GTK_WIDGET(paste), ClipBoard::clipBoardSize() > 0);
+       auto empty = g_object_get_data(G_OBJECT(menu), _("Clipboard is empty."));
+       if (empty) gtk_widget_set_visible(GTK_WIDGET(empty), ClipBoard::clipBoardSize() == 0);
+     }
+       
       
       // position is relative to the parent/default widget.
       //TRACE("position %lf,%lf\n", x, y);

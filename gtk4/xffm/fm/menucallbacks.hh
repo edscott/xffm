@@ -60,6 +60,86 @@ namespace xf {
       gtk_window_destroy(GTK_WINDOW(MainWidget));
     }
 
+    static void 
+    copyTxt(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto txt = (const char *)data;
+      if (txt && strcmp(txt, "output")==0) 
+        ClipBoard::copyClipboardTxt(Child::getOutput());
+      if (txt && strcmp(txt, "input")==0) 
+        ClipBoard::copyClipboardTxt(Child::getInput());
+    }
+
+    static void 
+    cutTxt(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto txt = (const char *)data;
+      if (txt && strcmp(txt, "output")==0) 
+        ClipBoard::cutClipboardTxt(Child::getOutput());
+      if (txt && strcmp(txt, "input")==0) 
+        ClipBoard::cutClipboardTxt(Child::getInput());
+    }
+
+    static void 
+    deleteTxt(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto txt = (const char *)data;
+      DBG("menucallbacks.hh:: deleteTxt inactive\n");
+      // FIXME
+      /*if (txt && strcmp(txt, "output")==0) 
+        ClipBoard::cutClipboardTxt(Child::getOutput());
+      if (txt && strcmp(txt, "input")==0) 
+        ClipBoard::cutClipboardTxt(Child::getInput());*/
+    }
+
+    static void 
+    pasteTxt(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto txt = (const char *)data;
+      if (txt && strcmp(txt, "output")==0) 
+        ClipBoard::pasteClipboardTxt(Child::getOutput());
+      if (txt && strcmp(txt, "input")==0) 
+        ClipBoard::pasteClipboardTxt(Child::getInput());
+      
+    }
+
+    static void
+    selectAllTxt(GtkButton *button, void *data){
+      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(GTK_POPOVER(menu));
+      auto txt = (const char *)data;
+      GtkTextView *textView = NULL;
+
+      if (txt && strcmp(txt, "output")==0) textView = Child::getOutput();
+      if (txt && strcmp(txt, "input")==0)  textView =Child::getInput();
+      if (!textView) return;
+
+      auto buffer = gtk_text_view_get_buffer(textView);  
+      GtkTextIter start, end;
+      gtk_text_buffer_get_bounds (buffer, &start, &end);
+      gtk_text_buffer_select_range(buffer, &start, &end);     
+    }
+
+    static void
+    clearAllTxt(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto output = Child::getOutput();
+      auto txt = (const char *)data;
+      GtkTextView *textView = NULL;
+
+      if (txt && strcmp(txt, "output")==0) textView = Child::getOutput();
+      if (txt && strcmp(txt, "input")==0)  textView =Child::getInput();
+      if (!textView) return;
+
+      Print::clearText(textView);
+    }
+      
+
 
 private:
     static void

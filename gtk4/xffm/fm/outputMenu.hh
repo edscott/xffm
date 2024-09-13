@@ -13,7 +13,7 @@ namespace xf {
         _("Foreground color"), 
         _("Background color"), 
         _("Default Colors"), 
-        _("Show Clipboard"), // 0x04
+        _("Show Clipboard"), // 
         NULL
       };
       return keys_;
@@ -33,9 +33,9 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
-        {_("Clear"),(void *) clearAll}, 
-        {_("Copy"),(void *) copy}, 
-        {_("Select All"),(void *) selectAll}, 
+        {_("Clear"),(void *) MenuCallbacks<Type>::clearAllTxt}, 
+        {_("Copy"),(void *) MenuCallbacks<Type>::copyTxt}, 
+        {_("Select All"),(void *) MenuCallbacks<Type>::selectAllTxt}, 
         {_("Foreground color"),(void *) Util::terminalColors}, 
         {_("Background color"), (void *) Util::terminalColors},
         {_("Default Colors"),(void *) Util::defaultColors}, 
@@ -46,9 +46,9 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {_("Clear"),(void *) NULL}, 
-        {_("Copy"),(void *) NULL}, 
-        {_("Select All"),(void *) NULL}, 
+        {_("Clear"),(void *) "output"}, 
+        {_("Copy"),(void *) "output"}, 
+        {_("Select All"),(void *) "output"}, 
         {_("Foreground color"),(void *) "outputFg"}, 
         {_("Background color"), (void *) "outputBg"},
         {_("Default Colors"),(void *) "output"}, 
@@ -65,26 +65,6 @@ namespace xf {
       gtk_popover_popdown(menu);
     }
 
-    static void
-    selectAll(GtkButton *button, void *data){
-      auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(GTK_POPOVER(menu));
-
-      auto textview = GTK_TEXT_VIEW(gtk_widget_get_parent(menu));
-      auto buffer = gtk_text_view_get_buffer(textview);  
-      GtkTextIter start, end;
-      gtk_text_buffer_get_bounds (buffer, &start, &end);
-      gtk_text_buffer_select_range(buffer, &start, &end);
-      
-    }
-
-    static void
-    clearAll(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
-      auto output = Child::getOutput();
-      Print::clearText(output);
-    }
   };
 
 

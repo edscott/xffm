@@ -9,11 +9,11 @@ namespace xf {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
-        _("Open in new tab"), //0x10
+        _("Open in new tab"), //
         _("Open in New Window"),
-        _("Paste"), // 0x04
-        _("Show Clipboard"), // 0x04
-     //   _("Clipboard is empty."), // 0x04
+        _("Paste"), // 
+        _("Show Clipboard"), // 
+        _("Clipboard is empty."), // 
         NULL
       };
       return keys_;
