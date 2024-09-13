@@ -13,8 +13,8 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
       auto path = g_object_get_data(G_OBJECT(menu), "path");
-      ClipBoard::pasteClip(path);
-      DBG("paste to %s...\n", (char *)path);
+      //ClipBoard::pasteClip(path);
+      DBG("paste to %s...(currently disabled at menucallbacks.hh)\n", (char *)path);
     }
     static void
     showPaste(GtkButton *self, void *data){

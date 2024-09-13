@@ -56,7 +56,7 @@ namespace xf {
    
 
         auto title = g_strconcat("",_("Input"),_(" TTY"), NULL);
-        auto myInputMenu = new Menu<InputMenu>(title);
+        auto myInputMenu = new Menu<InputMenu<bool> >(title);
         g_free(title);
         myInputMenu->setMenu(GTK_WIDGET(input_), GTK_WIDGET(input_), Child::getWorkdir());
         delete myInputMenu;

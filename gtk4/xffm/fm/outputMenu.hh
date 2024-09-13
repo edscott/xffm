@@ -2,7 +2,8 @@
 #define OUTPUTMENU_HH
 #include "menu.hh"
 namespace xf {
-  class OutputMenu {
+  template <class Type> class MenuCallbacks;
+  template <class Type> class OutputMenu {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
@@ -12,6 +13,7 @@ namespace xf {
         _("Foreground color"), 
         _("Background color"), 
         _("Default Colors"), 
+        _("Show Clipboard"), // 0x04
         NULL
       };
       return keys_;
@@ -24,6 +26,7 @@ namespace xf {
         {_("Foreground color"),(void *) NULL}, 
         {_("Background color"), (void *) NULL},
         {_("Default Color"),(void *) NULL}, 
+        {_("Show Clipboard"),(void *) NULL}, 
         {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -36,6 +39,7 @@ namespace xf {
         {_("Foreground color"),(void *) Util::terminalColors}, 
         {_("Background color"), (void *) Util::terminalColors},
         {_("Default Colors"),(void *) Util::defaultColors}, 
+        {_("Show Clipboard"),(void *) MenuCallbacks<Type>::showPaste}, 
         {NULL, NULL}
       };
       return menuCallbacks_;
@@ -48,6 +52,7 @@ namespace xf {
         {_("Foreground color"),(void *) "outputFg"}, 
         {_("Background color"), (void *) "outputBg"},
         {_("Default Colors"),(void *) "output"}, 
+        {_("Show Clipboard"),(void *) NULL}, 
         {NULL, NULL}
       };
       return menuData_;      

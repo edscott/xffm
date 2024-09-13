@@ -174,7 +174,7 @@ activate(GtkWidget *self, gpointer data) {
       void **r = data;
       for (const gchar **p=items; p && *p && *q; p++){
         GtkWidget *item = gtk_button_new_with_label(*p);
-        gchar *t = g_strdup_printf("%s: %d", _("Signal to emit"), *r);
+        gchar *t = g_strdup_printf("%s: %d", _("Signal to emit"), GPOINTER_TO_INT(*r));
         Basic::setTooltip(item, t);
         g_free(t);
         g_object_set_data(G_OBJECT(item), "run_button_p", run_button_p);

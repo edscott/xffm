@@ -28,12 +28,6 @@ namespace xf {
         
         outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util::newTextView();
-
-        auto title = g_strconcat("",_("Output"),_(" TTY"), NULL);
-        auto myOutputMenu = new Menu<OutputMenu>(title);
-        myOutputMenu->setMenu(GTK_WIDGET(output_), GTK_WIDGET(output_), Child::getWorkdir());
-        g_free(title);
-        delete myOutputMenu;
        
         g_object_set_data(G_OBJECT(vpane_), "output", output_);
         g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
@@ -100,10 +94,12 @@ namespace xf {
         auto gridScrolledWindow = this->gridScrolledWindow();
         auto outputScrolledWindow = this->outputScrolledWindow();
 
-        /* gridview creation and setting is done by workdir class.
-         * at updateGridView()
-        auto gridview = Workdir::getGridView(path);        
-        gtk_scrolled_window_set_child(gridScrolledWindow, GTK_WIDGET(gridview));*/
+
+        auto title = g_strconcat("",_("Output"),_(" TTY"), NULL);
+        auto myOutputMenu = new Menu<OutputMenu<bool> >(title);
+        myOutputMenu->setMenu(GTK_WIDGET(output), GTK_WIDGET(output), Child::getWorkdir());
+        g_free(title);
+        delete myOutputMenu;
 
         g_object_set_data(G_OBJECT(box), "buttonSpace", buttonSpace);
         g_object_set_data(G_OBJECT(box), "gridScrolledWindow", gridScrolledWindow);

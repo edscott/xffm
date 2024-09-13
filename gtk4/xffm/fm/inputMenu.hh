@@ -2,7 +2,8 @@
 #define INPUTMENU_HH
 #include "menu.hh"
 namespace xf {
-  class InputMenu {
+  template <class Type> class MenuCallbacks;
+  template <class Type> class InputMenu {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
@@ -15,6 +16,7 @@ namespace xf {
         _("Foreground color"), 
         _("Background color"), 
         _("Default Colors"), 
+        _("Show Clipboard"), // 0x04
         NULL
       };
       return keys_;
@@ -45,6 +47,7 @@ namespace xf {
         {_("Foreground color"),(void *) Util::terminalColors}, 
         {_("Background color"), (void *) Util::terminalColors},
         {_("Default Colors"),(void *) Util::defaultColors}, 
+        {_("Show Clipboard"),(void *) MenuCallbacks<Type>::showPaste}, 
         {NULL, NULL}
       };
       return menuCallbacks_;
