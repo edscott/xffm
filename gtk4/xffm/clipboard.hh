@@ -105,7 +105,7 @@ private:
         auto clipBoard = GDK_CLIPBOARD(source_object);
         auto text = gdk_clipboard_read_text_finish(clipBoard, result, &error_);
          if (error_){
-          DBG("Error:: setValidity(): %s. text=\"%s\"\n", error_->message, text);
+          TRACE("Error:: setValidity(): %s. text=\"%s\"\n", error_->message, text);
           g_error_free(error_);
           return;
         }
