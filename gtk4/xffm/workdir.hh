@@ -15,6 +15,7 @@ namespace xf {
         Child::incrementSerial();
         auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
+        
 #endif
       }
 

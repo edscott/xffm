@@ -1,5 +1,6 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
+#include "foldermenu.hh"
 #include "texture.hh"
 //#define GESTURECLICK_F(X) (gboolean (*)(GtkGestureClick *, gint, gdouble, gdouble, void *) X) 
 namespace xf {
@@ -7,9 +8,6 @@ namespace xf {
   class GridView  {
   private:
   public:
-      /*GridView(void *gestureClick){
-        gestureClick_ = gestureClick;
-      }*/
       static GtkWidget *
       getGridView(const char *path, void *gridViewClick_f){
         auto child = Child::getChild();
@@ -36,14 +34,68 @@ namespace xf {
         /* Create the view.
          */
         view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model), factory);
+        g_object_set_data(G_OBJECT(child), "gridview", view);
         gtk_grid_view_set_max_columns(GTK_GRID_VIEW(view), 20);
         //gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 10);
         gtk_widget_add_css_class(view, "gridviewColors");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
+
+/*        
+        auto title = g_strconcat("", path, NULL);
+        auto myFolderMenu = new Menu<FolderMenu<bool> >(title);
+        auto menu = myFolderMenu->setMenu(GTK_WIDGET(view), GTK_WIDGET(view), path, false);
+        g_object_set_data(G_OBJECT(view), "menu", menu);
+        g_free(title);
+        delete myFolderMenu;
+*/
         return view;
       }
 
   private:
+    static gboolean
+    menu_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer object){
+
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto event = gtk_event_controller_get_current_event(eventController);
+      auto imageBox = gtk_event_controller_get_widget(eventController);
+
+      auto modType = gdk_event_get_modifier_state(event);
+
+      TRACE("modType = 0x%x\n", modType);
+      if (modType & GDK_CONTROL_MASK) return FALSE;
+      if (modType & GDK_SHIFT_MASK) return FALSE;
+      
+      TRACE("gestureClick; object=%p button=%d\n", object,
+          gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
+
+      auto info = G_FILE_INFO(gtk_list_item_get_item(GTK_LIST_ITEM(object)));
+      auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+
+      DBG("gestureClick menu_f; file=%p\n", file);
+      auto path = g_file_get_path(file);
+      DBG("gestureClick; path=%p\n", path);
+      DBG("menu for %s\n", path);
+
+      
+   
+      return TRUE;
+    }
+    
+    static void addGestureClickMenu(GtkWidget *imageBox, GObject *object, void *data){
+      TRACE("addGestureClick; object=%p\n", object);
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
+      // 1 for action released, 3 for popover pressed
+      // Add a different gtk_gesture_click_new for 3 and menu.
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (menu_f), (void *)object);
+      gtk_widget_add_controller(GTK_WIDGET(imageBox), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_CAPTURE);
+    }    
     
     static void addGestureClick(GtkWidget *imageBox, GObject *object, void *gridViewClick_f){
       TRACE("addGestureClick; object=%p\n", object);
@@ -116,11 +168,6 @@ namespace xf {
           texture = Texture::load(info);
         }
         // XXX: put all icons in hash (debug)
-        //Texture::findIconPath(info);
-        
-        /*if (!texture) {
-            TRACE("Iconmview::load(): Texture::load(info) == NULL\n");
-        }*/
           
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
         if (name[0] == '.' && name[1] != '.') {
@@ -165,7 +212,8 @@ namespace xf {
         Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
         Basic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
         Basic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
-        Basic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);  
+  
 
         if (Settings::getInteger("xfterm", "iconsize") == 24 && strcmp(name, "..")){
           // file information string
@@ -196,6 +244,7 @@ namespace xf {
         addMotionController(labelBox);
         addMotionController(imageBox);
         addGestureClick(imageBox, object, gridViewClick_f);
+        addGestureClickMenu(imageBox, object, NULL);
 
         g_free(path);
 

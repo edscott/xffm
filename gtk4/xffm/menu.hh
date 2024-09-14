@@ -51,7 +51,7 @@ namespace xf {
         }
         for (auto p=callbacks_; p && p->key; p++){
           auto callback = p->data;
-          DBG("callback %p for %s\n", callback, p->key);
+          TRACE("callback %p for %s\n", callback, p->key);
           if (callback)
             g_hash_table_insert(mHash[1], g_strdup(p->key), callback);
         }
@@ -67,12 +67,12 @@ namespace xf {
         gtk_popover_popup(menu);
       }
 
-      void setMenu(GtkMenuButton *button){
+      GtkPopover *setMenu(GtkMenuButton *button){
         auto menu = mkMenu(title_);
         gtk_menu_button_set_popover (button, GTK_WIDGET(menu)); 
         g_object_set_data(G_OBJECT(button), "menu", menu);
        // g_signal_connect(G_OBJECT(button), "activate", G_CALLBACK(openMenuButton), (void *)menu);
-        return;
+        return menu;
       }
 
       /*GtkPopover *getMenu(GtkMenuButton *button){
@@ -81,7 +81,7 @@ namespace xf {
         return menu;
       }*/
       
-      void setMenu(GtkWidget *widget, GtkWidget *parent, const char *path, bool isTextView){
+      GtkPopover *setMenu(GtkWidget *widget, GtkWidget *parent, const char *path, bool isTextView){
         auto menu = mkMenu(title_);
         g_object_set_data(G_OBJECT(menu), "isTextView", GINT_TO_POINTER(isTextView));
         g_object_set_data(G_OBJECT(menu), "path", (void *)path);
@@ -97,10 +97,10 @@ namespace xf {
         gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
             GTK_PHASE_CAPTURE);
 
-        return;        
+        return menu;        
       }
-      void setMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
-        setMenu(widget, parent, path, false);
+      GtkPopover *setMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
+        return setMenu(widget, parent, path, false);
       }
 
     private:
@@ -113,7 +113,7 @@ namespace xf {
 
      auto paste = g_object_get_data(G_OBJECT(menu), _("Paste"));
      auto isTextView = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(menu), _("isTextView")));
-     DBG("paste is at button %p\n", paste);
+     TRACE("paste is at button %p\n", paste);
      if (!isTextView && paste) {
        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
        gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
@@ -194,7 +194,7 @@ namespace xf {
         auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto label = GTK_LABEL(gtk_label_new(""));
         auto iconName = (const char *) g_hash_table_lookup(mHash[0], *p);
-        //DBG("icon is %s\n",icon);
+        //TRACE("icon is %s\n",icon);
         if (iconName){
           auto image = gtk_image_new_from_icon_name(iconName);
           boxPack(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
