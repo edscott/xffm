@@ -1,14 +1,34 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
-#include "foldermenu.hh"
+#include "gridviewmenu.hh"
+// race condition. Must realize before this happens. XXX Where?
+//Gtk-CRITICAL **: 10:00:15.047: gtk_widget_compute_point: assertion 'GTK_IS_WIDGET (widget)' failed
+
 #include "texture.hh"
 //#define GESTURECLICK_F(X) (gboolean (*)(GtkGestureClick *, gint, gdouble, gdouble, void *) X) 
 namespace xf {
   template <class DirectoryClass>
   class GridView  {
   private:
+      GtkPopover *menu_;
+      GtkWidget *view_;
   public:
-      static GtkWidget *
+      GtkWidget *view(void){ return view_;}
+      
+      GridView(const char *path, void *gridViewClick_f){
+        view_ = getGridView(path, gridViewClick_f);
+        
+        auto title = g_strconcat("", path, NULL);
+        auto myMenu = new Menu<GridviewMenu<bool> >(title);
+        menu_ = myMenu->setGridviewMenu(GTK_WIDGET(view_), GTK_WIDGET(view_), path);
+        g_free(title);
+        delete myMenu;
+
+      }
+      ~GridView(void){
+      }
+
+      GtkWidget *
       getGridView(const char *path, void *gridViewClick_f){
         auto child = Child::getChild();
         GtkMultiSelection *selection_model = NULL;
@@ -40,14 +60,7 @@ namespace xf {
         gtk_widget_add_css_class(view, "gridviewColors");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
 
-/*        
-        auto title = g_strconcat("", path, NULL);
-        auto myFolderMenu = new Menu<FolderMenu<bool> >(title);
-        auto menu = myFolderMenu->setMenu(GTK_WIDGET(view), GTK_WIDGET(view), path, false);
-        g_object_set_data(G_OBJECT(view), "menu", menu);
-        g_free(title);
-        delete myFolderMenu;
-*/
+
         return view;
       }
 

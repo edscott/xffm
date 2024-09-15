@@ -1,11 +1,14 @@
-#ifndef FOLDERMENU_HH
-#define FOLDERMENU_HH
+#ifndef GRIDVIEWMENU_HH
+#define GRIDVIEWMENU_HH
 #include "menu.hh"
 namespace xf {
   template <class Type> class MenuCallbacks;
   template <class Type>
-  class FolderMenu {
+  class GridviewMenu {
     public:
+    GridviewMenu(void){}
+    ~GridviewMenu(void){}
+
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("auto"), //

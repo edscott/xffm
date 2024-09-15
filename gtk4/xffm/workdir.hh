@@ -13,9 +13,16 @@ namespace xf {
         TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(), Child::getSerial()+1);
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
         Child::incrementSerial();
-        auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
+        auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
+        auto view = viewObject->view();
+        //auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
-        
+        auto oldObject = Child::getGridviewObject();
+        if (oldObject) {
+          auto object = (GridView<LocalDir> *) oldObject;
+          delete object;
+        }
+        Child::setGridviewObject(viewObject);       
 #endif
       }
 
