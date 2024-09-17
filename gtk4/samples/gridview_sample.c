@@ -1,9 +1,59 @@
 /* Example of GtkGridView (GTK4) creation with filter and sort.
+ * gcc -ggdb `pkg-config --cflags gtk4` gridview_sample.c -o gridview_sample `pkg-config --libs gtk4` -lSM -lICE -lX11 -lXext
+
  * Compile with:
 gcc `pkg-config --cflags gtk4` -o gridview_sample gridview_sample.c `pkg-config --libs gtk4` 
 */
+# include <gdk/x11/gdkx.h>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
 #include <gtk/gtk.h>
 static GtkIconTheme *icon_theme;
+
+static void setAsDialog(GtkWidget *widget, const char *Xname, const char *Xclass){
+#ifdef GDK_WINDOWING_X11
+  gtk_widget_realize(widget);
+  GdkDisplay *displayGdk = gdk_display_get_default();
+  if (GDK_IS_X11_DISPLAY (displayGdk)) {
+    Display *display = gdk_x11_display_get_xdisplay(displayGdk);
+    XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
+    wm_class->res_name = g_strdup(Xname);
+    wm_class->res_class = g_strdup(Xclass);
+
+    GtkNative *native = gtk_widget_get_native(widget);
+    GdkSurface *surface = gtk_native_get_surface(native);
+    Window w = gdk_x11_surface_get_xid (surface);
+    XSetClassHint(display, w, wm_class);
+
+    Atom atom = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE_DIALOG");
+    Atom atom0 = gdk_x11_get_xatom_by_name_for_display (displayGdk, "_NET_WM_WINDOW_TYPE");
+    XChangeProperty (display, w,
+      atom0, XA_ATOM, 
+      32, PropModeReplace,
+      (guchar *)&atom, 1);
+  }
+#endif
+}
+
+static gboolean showIt(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+  GtkPopover *popover = GTK_POPOVER(data);       
+  gtk_popover_popup(popover);
+  return TRUE;
+}
+
+static void addGesture(GtkWidget *widget, GtkPopover *popover){
+  GtkGestureSingle *gesture = GTK_GESTURE_SINGLE(gtk_gesture_click_new());
+  gtk_gesture_single_set_button(gesture,3);
+  g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (showIt), (void *)popover);
+  gtk_widget_add_controller(GTK_WIDGET(widget), GTK_EVENT_CONTROLLER(gesture));
+  gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+      GTK_PHASE_CAPTURE);
+}
+
 static void
 factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
 	GtkWidget *vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -45,6 +95,16 @@ factoryBind(GtkSignalListItemFactory *self, GObject *object, void *data)
   GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(icon));
   gtk_widget_set_size_request(image, 48, 48);
   gtk_box_append(GTK_BOX(imageBox), image);
+  
+  GtkWidget *content = gtk_label_new(g_file_info_get_name(info));
+  GtkPopover *popover = GTK_POPOVER(gtk_popover_new ());
+  gtk_popover_set_default_widget(popover, image);
+  gtk_widget_set_parent(GTK_WIDGET(popover), imageBox);
+  gtk_popover_set_position(popover, GTK_POS_RIGHT);
+  gtk_popover_set_autohide(popover, TRUE); 
+  gtk_popover_set_has_arrow(popover, FALSE);
+  gtk_popover_set_child (popover, content);
+  addGesture(imageBox, popover);
 }
 static gboolean
 filterFunction(GObject *object, void *data){
@@ -91,6 +151,7 @@ int main (int argc, char *argv[])
   GtkWidget *MainWidget = gtk_window_new ();
 	gtk_window_set_default_size( GTK_WINDOW(MainWidget), 400, 400 );
   create(MainWidget);
+  setAsDialog(MainWidget, "test", "Test");  
   gtk_window_present (GTK_WINDOW(MainWidget));
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);
