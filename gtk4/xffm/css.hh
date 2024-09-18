@@ -66,6 +66,37 @@ private:
         color: %s;\
         font-family: monospace;\
       }\
+      .inquireButton {\
+        padding-left: 0;\
+        padding-right: 0;\
+        padding-bottom: 0;\
+        padding-top: 0;\
+        min-height: 16px;\
+        font-size: 12px;\
+        margin-bottom: 0;\
+        margin-left: 0;\
+        margin-right: 0;\
+        margin-top: 0;\
+      }\
+      .inquireBox {\
+        padding-bottom: 0;\
+        padding-top: 0;\
+        font-size: 12px;\
+        margin-bottom: 0;\
+        margin-left: 0;\
+        margin-right: 0;\
+        margin-top: 0;\
+      }\
+      .inquire {\
+        background-color: #cccccc;\
+        padding-bottom: 0;\
+        padding-top: 0;\
+        font-size: 12px;\
+        margin-bottom: 0;\
+        margin-left: 0;\
+        margin-right: 0;\
+        margin-top: 0;\
+      }\
       .gridviewBox {\
         margin-bottom: 0;\
         margin-left: 0;\

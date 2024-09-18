@@ -46,9 +46,21 @@ namespace xf {
     openNewTab(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
       auto w = (MainWindow *)g_object_get_data(G_OBJECT(MainWidget), "MainWindow");
-      w->addPage(path);
+      auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
+      if (!path){
+        auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+        if (!info){
+          DBG("*** Error: neither path nor info set for menu.\n");
+          return;
+        }
+        auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+        auto _path = g_file_get_path(file);
+        w->addPage(_path);
+        g_free(_path);
+      } else {
+        w->addPage(path);
+      }
       return;
     }
 

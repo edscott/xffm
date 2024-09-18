@@ -28,6 +28,7 @@ namespace xf {
       MenuInfo_t *data_;
       char *title_;
     public:
+      const char **keys(void) { return keys_;}
       ~Menu(void){
         g_free(title_);
         g_hash_table_destroy(mHash[0]);
@@ -203,10 +204,14 @@ namespace xf {
         exit(2);
       }
     }
-    
+public:    
     GtkPopover *mkMenu(const char *markup){
       auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        gtk_widget_add_css_class (GTK_WIDGET(vbox), "inquireBox" );
+        gtk_widget_set_hexpand(GTK_WIDGET(vbox), FALSE);
+        gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);
       auto titleBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_add_css_class (GTK_WIDGET(titleBox), "inquireBox" );
       gtk_box_append (vbox, GTK_WIDGET(titleBox));
 
       auto titleLabel = GTK_LABEL(gtk_label_new(""));
@@ -219,12 +224,14 @@ namespace xf {
       g_object_set_data(G_OBJECT(menu), "vbox", vbox);
 
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
-      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
+      gtk_popover_set_has_arrow(GTK_POPOVER(menu), TRUE);
+//      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
 
 
       for (const char **p=keys_; p && *p; p++){
         auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_add_css_class (GTK_WIDGET(hbox), "inquireBox" );
         auto label = GTK_LABEL(gtk_label_new(""));
         auto iconName = (const char *) g_hash_table_lookup(mHash[0], *p);
         //TRACE("icon is %s\n",icon);
@@ -246,6 +253,7 @@ namespace xf {
           // A button.
           gtk_label_set_markup(label, *p);
           GtkButton *button = GTK_BUTTON(gtk_button_new());
+          gtk_widget_add_css_class (GTK_WIDGET(button), "inquireButton" );
           g_object_set_data(G_OBJECT(menu), *p, button);
           g_object_set_data(G_OBJECT(button), "menu", menu);
           g_object_set_data(G_OBJECT(button), "key", g_strdup(*p));
@@ -272,6 +280,7 @@ namespace xf {
         continue;
       }
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
+// FIXME      gtk_popover_set_default_widget (menu, GTK_WIDGET(vbox));
       return menu;
     }
 
