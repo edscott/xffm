@@ -219,6 +219,9 @@ public:
       if (markup) gtk_label_set_markup(titleLabel, markup);    
 
       GtkPopover *menu = GTK_POPOVER(gtk_popover_new ());
+        gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);       
+        gtk_widget_add_css_class (GTK_WIDGET(menu), "inquireBox" );
+        
       g_object_set_data(G_OBJECT(menu), "titleBox", titleBox);
       g_object_set_data(G_OBJECT(menu), "titleLabel", titleLabel);
       g_object_set_data(G_OBJECT(menu), "vbox", vbox);
@@ -240,7 +243,7 @@ public:
           boxPack(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
         }
         boxPack(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);
-
+        gtk_label_set_markup(label, *p);
 
         /*if (GPOINTER_TO_INT(g_hash_table_lookup(mHash[2], *p)) == -1) {
           // if the callback data is equal to -1, then item is not an active button,
@@ -251,7 +254,6 @@ public:
         auto callback = g_hash_table_lookup(mHash[1], *p);
         if (callback) {
           // A button.
-          gtk_label_set_markup(label, *p);
           GtkButton *button = GTK_BUTTON(gtk_button_new());
           gtk_widget_add_css_class (GTK_WIDGET(button), "inquireButton" );
           g_object_set_data(G_OBJECT(menu), *p, button);
@@ -274,7 +276,7 @@ public:
         g_free(textMarkup);
         g_object_set_data(G_OBJECT(label), "menu", menu);
         g_object_set_data(G_OBJECT(label), "key", g_strdup(*p));
-        g_object_set_data(G_OBJECT(menu), *p, label);
+        g_object_set_data(G_OBJECT(menu), *p, hbox);
         boxPack(vbox, GTK_WIDGET(hbox),  FALSE, FALSE, 0);
         gtk_widget_set_visible(GTK_WIDGET(label), TRUE);
         continue;

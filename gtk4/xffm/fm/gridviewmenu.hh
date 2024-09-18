@@ -13,6 +13,7 @@ namespace xf {
       static const char *keys_[] = { // Order is important.
         _("auto"), //
         _("Open in new tab"), //
+        _("Open with"), //
         _("Create a compressed archive with the selected objects"),
         _("Mount the volume associated with this folder"),
         _("Unmount the volume associated with this folder"),
@@ -21,7 +22,6 @@ namespace xf {
         _("Copy"),
         _("Cut"),
         _("Paste"), // 
-        _("Clipboard is empty."), // 
         _("Rename"),
         _("Duplicate"),
         _("Link"),
@@ -32,9 +32,11 @@ namespace xf {
       };
       return keys_;
     }
+
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Open in new tab"),(void *) NULL}, 
+        {_("Open in new tab"),(void *) DUAL_VIEW}, 
+        {_("Open with"),(void *) "emblem-run"}, 
         {NULL, NULL}
       }; 
       return menuIconNames_;

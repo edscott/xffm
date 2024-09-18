@@ -75,7 +75,10 @@ namespace xf {
       for (auto p=keys; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
         if (widget){
+          //DBG("hide widget \"%s\"\n", *p);
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
+        } else {
+          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
         }
       }
       // Directory test
@@ -92,6 +95,7 @@ namespace xf {
           _("Delete"),
           NULL};
         for (auto p=show; p && *p; p++){
+          //DBG("show widget \"%s\"\n", *p);
           auto widget = g_object_get_data(G_OBJECT(popover), *p);
           if (widget){
             gtk_widget_set_visible(GTK_WIDGET(widget), true);
@@ -105,6 +109,8 @@ namespace xf {
         // pasteboard test
       } else { // Regular
         const char *show[]={
+          _("auto"), //
+          _("Open with"), //
           _("Copy"),
           _("Cut"),
           _("Rename"),
