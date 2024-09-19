@@ -176,6 +176,7 @@ public:
       pthread_cond_destroy(&signal);
       return result;
     }
+    
     static void setAsDialog(GtkWidget *widget, const char *Xname, const char *Xclass){
         bool OK = false;
  #ifdef GDK_WINDOWING_X11

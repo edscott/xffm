@@ -21,13 +21,17 @@
 #include "xffm.h"
 /*
 */
-
 #include "basic.hh"
+
+
+
 #include "icontheme.hh"
 #include "settings.hh"
 #include "child.hh"
 #include "texture.hh"
 #include "print.hh"
+
+//#include "response/entryresponse.hh"
 
 
 #include "mime/mime.hh"
@@ -103,6 +107,7 @@ static bool detachProcess(const char *argv1){
   DBG("Xffm running in foreground.\n");
   return false;
 }
+
 static  gchar *getPath(const char *argv1){
     if (!argv1) return g_strdup("xffm:root");
     if (!g_file_test(argv1, G_FILE_TEST_EXISTS)){
