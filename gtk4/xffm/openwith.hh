@@ -248,7 +248,7 @@ public:
         auto inputText = gtk_text_buffer_get_text(buffer, &start, &end, FALSE);
         g_strstrip(inputText);  
         auto executable = g_strdup(inputText);
-        if (strchr(executable, ' ')) *strrchr(executable, ' ') = 0;
+        if (strchr(executable, ' ')) *strchr(executable, ' ') = 0;
         if (!g_find_program_in_path(executable)){
           auto message = g_strdup_printf(_("Cannot find executable for \"%s\""), executable);
           Basic::concat(&message, "\n");
@@ -265,11 +265,6 @@ public:
           Settings::setString("MimeTypeApplications", extension, inputText);
         }
         char *key = g_strdup(inputText);
-        if (strchr(key, ' ')) *strrchr(key, ' ') = 0;
-        const char *always[] = {"vi", "vim", "nano", "emacs", NULL};
-        for (auto p=always; p && *p; p++){
-          if (strcmp(key, *p) == 0) inTerminal = true;
-        }
         if (Basic::alwaysTerminal(inputText)) inTerminal = true;
         char *command = NULL;
         if (inTerminal) {

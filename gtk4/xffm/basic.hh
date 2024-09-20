@@ -177,6 +177,22 @@ public:
       return result;
     }
     
+    static GtkButton *mkButton(const char *iconName, const char *markup){
+      auto button = gtk_button_new();
+      auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+      if (iconName){
+        auto image = gtk_image_new_from_icon_name(iconName);
+        gtk_box_append (box, GTK_WIDGET(image));
+      }
+      if (markup){
+        auto label = gtk_label_new("");
+        gtk_label_set_markup(GTK_LABEL(label), markup);
+        gtk_box_append (box, GTK_WIDGET(label));
+      }
+      gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));
+      return GTK_BUTTON(button);
+    }
+    
     static void setAsDialog(GtkWidget *widget, const char *Xname, const char *Xclass){
         bool OK = false;
  #ifdef GDK_WINDOWING_X11

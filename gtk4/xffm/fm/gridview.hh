@@ -73,9 +73,9 @@ namespace xf {
     static void setPopoverItems(GtkPopover *popover, const char *path, GridView *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
-        auto widget = g_object_get_data(G_OBJECT(popover), *p);
+      auto widget = g_object_get_data(G_OBJECT(popover), *p);
         if (widget){
-          //DBG("hide widget \"%s\"\n", *p);
+          //TRACE("hide widget \"%s\"\n", *p);
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         } else {
           DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
@@ -95,7 +95,7 @@ namespace xf {
           _("Delete"),
           NULL};
         for (auto p=show; p && *p; p++){
-          //DBG("show widget \"%s\"\n", *p);
+          //TRACE("show widget \"%s\"\n", *p);
           auto widget = g_object_get_data(G_OBJECT(popover), *p);
           if (widget){
             gtk_widget_set_visible(GTK_WIDGET(widget), true);
@@ -147,25 +147,64 @@ namespace xf {
       
       TRACE("gestureClick; object=%p button=%d\n", object,
           gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
-      DBG("gestureClick; path=%p\n", gridView_p->path());
-      DBG("menu for %s\n", gridView_p->path());
+      TRACE("gestureClick; path=%p\n", gridView_p->path());
+      TRACE("menu for %s\n", gridView_p->path());
+
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(imageBox), "info"));
+      auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+      auto path = g_file_get_path(file);
 
       auto popover = g_object_get_data(G_OBJECT(imageBox), "menu");
       if (!popover){
-        auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(imageBox), "info"));
-        auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-        auto path = g_file_get_path(file);
         
         auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
         popover = gridView_p->myMenu_->mkMenu(markup);
+        g_object_set_data(G_OBJECT(popover), "imageBox", imageBox);
+
         g_object_set_data(G_OBJECT(popover), "info", info);
         setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
         g_free(markup);
-        g_free(path);
         g_object_set_data(G_OBJECT(imageBox), "menu", popover);
         gtk_widget_set_parent(GTK_WIDGET(popover), imageBox);
       }
+      auto abutton = g_object_get_data(G_OBJECT(popover), _("auto"));
+          TRACE("data get %p %s --> %p\n", popover, _("auto"), abutton);
+      if (abutton){
+        const char *defaultApp = GridviewMenu<bool>::getDefaultApp(path);
+
+        gtk_widget_set_visible(GTK_WIDGET(abutton), defaultApp != NULL);
+        if (defaultApp && GTK_IS_BUTTON(abutton)) {
+          TRACE("// set icon and text: defaultApp=%s.\n", defaultApp);        
+          auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+          gtk_widget_add_css_class (GTK_WIDGET(box), "inquireBox" );
+          gtk_widget_set_hexpand(GTK_WIDGET(box), false);
+          gtk_widget_set_vexpand(GTK_WIDGET(box), false);
+          auto n = g_strdup(defaultApp);
+          if (strchr(n, ' ')) *strchr(n, ' ') = 0;
+          auto paintable = Texture::load(n, 16);
+
+          if (paintable){
+            auto image = gtk_image_new_from_paintable(paintable);
+            gtk_box_append (box, GTK_WIDGET(image));
+          } else {
+            auto image = gtk_image_new_from_icon_name("emblem-run");
+            gtk_box_append (box, GTK_WIDGET(image));
+          }
+          auto label = gtk_label_new("");
+          auto base = g_path_get_basename(path);
+          auto markup = g_strconcat("", n, " <span color=\"blue\">", base,"</span>", NULL); 
+          gtk_box_append (box, GTK_WIDGET(label));
+          gtk_label_set_markup(GTK_LABEL(label), markup);
+          g_free(n);
+          g_free(markup);
+          gtk_button_set_child(GTK_BUTTON(abutton), GTK_WIDGET(box));
+        } else {
+          gtk_widget_set_visible(GTK_WIDGET(abutton), false);
+        }
+        
+      } else {DBG("** Error:: no auto button\n");}
       //gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "pathbarboxNegative" );
+      g_free(path);
       
       if (popover) gtk_popover_popup(GTK_POPOVER(popover));
       

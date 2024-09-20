@@ -142,30 +142,22 @@ public:
         Basic::setTooltip(GTK_WIDGET(button_), tip_);
     }
 
-/* 
-static void
-activate(GtkWidget *self, gpointer data) { 
-  char *string = (char *)data;
-  fprintf(stderr,"activate: %s\n", string);
-  GtkPopover *menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-  gtk_popover_popdown(menu);
-  if (strcmp(string, "quit")==0){
-    fprintf(stderr,"goodbye.\n");
-    GtkWindow *window = GTK_WINDOW(g_object_get_data(G_OBJECT(menu), "window"));
-    if (window) gtk_window_destroy(window);
-    else fprintf(stderr, "activate():: programming error g_object_get_data(G_OBJECT(menu), \"window\")\n");
-  }
-  return;
-}
-*/
+// FIXME: use Menu class
+
     static GtkPopover *
     mkPsMenu(GtkLabel *title, RunButton *run_button_p, const gchar **items, void **callback, void **data){
       auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-      auto titleBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_widget_add_css_class (GTK_WIDGET(vbox), "inquireBox" );
+        gtk_widget_set_hexpand(GTK_WIDGET(vbox), FALSE);
+        gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);
+     auto titleBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        gtk_widget_add_css_class (GTK_WIDGET(titleBox), "inquireBox" );
       gtk_box_append (GTK_BOX (vbox), GTK_WIDGET(titleBox));
       gtk_box_append (GTK_BOX (titleBox), GTK_WIDGET(title));
 
       GtkWidget *menu = gtk_popover_new ();
+        gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);       
+        gtk_widget_add_css_class (GTK_WIDGET(menu), "inquireBox" );
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
       gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
@@ -174,6 +166,7 @@ activate(GtkWidget *self, gpointer data) {
       void **r = data;
       for (const gchar **p=items; p && *p && *q; p++){
         GtkWidget *item = gtk_button_new_with_label(*p);
+        gtk_widget_add_css_class (GTK_WIDGET(item), "inquireBox" );
         gchar *t = g_strdup_printf("%s: %d", _("Signal to emit"), GPOINTER_TO_INT(*r));
         Basic::setTooltip(item, t);
         g_free(t);

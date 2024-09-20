@@ -36,7 +36,7 @@ namespace xf {
         g_hash_table_destroy(mHash[2]);
       }
       Menu(const char *title){
-        DBG("title=\"%s\"\n", title);
+        TRACE("title=\"%s\"\n", title);
         title_ = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>",title);
         // Icon/callback/data hashes:
         mHash[0] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
@@ -133,7 +133,7 @@ namespace xf {
       auto menu = GTK_POPOVER(data);       
       
       // position is relative to the parent/default widget.
-      DBG("menu=%p, position %lf,%lf\n", menu, x, y);
+      TRACE("menu=%p, position %lf,%lf\n", menu, x, y);
       gtk_popover_popup(menu);
       return TRUE;
     }
@@ -260,6 +260,7 @@ public:
           g_object_set_data(G_OBJECT(button), "menu", menu);
           g_object_set_data(G_OBJECT(button), "key", g_strdup(*p));
           g_object_set_data(G_OBJECT(menu), *p, button);
+          TRACE("data set %p %s -->button %p\n", menu, *p, button);
 
           gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(hbox));
           boxPack(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
@@ -277,6 +278,7 @@ public:
         g_object_set_data(G_OBJECT(label), "menu", menu);
         g_object_set_data(G_OBJECT(label), "key", g_strdup(*p));
         g_object_set_data(G_OBJECT(menu), *p, hbox);
+          TRACE("data set %p %s -->hbox %p\n", menu, *p, hbox);
         boxPack(vbox, GTK_WIDGET(hbox),  FALSE, FALSE, 0);
         gtk_widget_set_visible(GTK_WIDGET(label), TRUE);
         continue;

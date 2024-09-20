@@ -5,38 +5,40 @@ namespace xf
 
 
 class EntryResponse {
-    
-    time_t timeout_;
-    time_t lastTimeout_;
-    GtkLabel *responseLabel_;
-    GtkLabel *entryLabel_;
-    GtkLabel *checkboxLabel_;
-    GtkEntry *entry_;
-    GtkCheckButton *checkbutton_;
-    GtkEntryCompletion *bashCompletion_;
+    GtkWindow *response_;
 public:
-    
+    GtkWindow *dialog(void){ return response_;}
+
+    static int run(GtkWindow *dialog){
+      // grab pointer
+      // loop
+/*      while (!g_object_get_data(G_OBJECT(dialog), "retval")){
+        usleep(5000);
+      }*/
+      auto retval = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "retval"));
+      // ungrab pointer
+      return retval;
+    }
+
     ~EntryResponse (void){
         //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
         gtk_window_destroy(response_);
     }
 
-EntryResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *iconName){
+EntryResponse (const char *windowTitle, const char *iconName){
         //bashCompletionStore_ = NULL;
-        timeout_ = 0;
         response_ = GTK_WINDOW(gtk_window_new ());
         gtk_window_set_modal (GTK_WINDOW (response_), TRUE);
-        gtk_window_set_transient_for (GTK_WINDOW (response_), GTK_WINDOW (parent));
+        gtk_window_set_transient_for (GTK_WINDOW (response_), GTK_WINDOW (MainWidget));
         gtk_window_set_resizable (GTK_WINDOW (response_), TRUE);
-        gtk_container_set_border_width (GTK_CONTAINER (response_), 2);
 
         auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(vbox), false);
         gtk_window_set_child(response_, GTK_WIDGET(vbox));
         
         auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        responseLabel_ = GTK_LABEL(gtk_label_new (""));
-        gtk_box_append(vbox, GTK_WIDGET(responseLabel_));
+        auto responseLabel = GTK_LABEL(gtk_label_new (""));
+        gtk_box_append(vbox, GTK_WIDGET(responseLabel));
         gtk_box_append(vbox, GTK_WIDGET(hbox));
 
         if (iconName){
@@ -45,20 +47,20 @@ EntryResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *iconNam
           gtk_box_append(hbox, GTK_WIDGET(image));
         }
 
-        vbox2_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        auto vbox2 = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(vbox), false);
-        gtk_box_append(GTK_BOX (hbox), GTK_WIDGET(vbox2_);
+        gtk_box_append(GTK_BOX (hbox), GTK_WIDGET(vbox2));
 
-        hbox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_box_append(GTK_BOX (vbox2_), GTK_WIDGET(hbox_));
+        auto hbox2 = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_box_append(GTK_BOX (vbox2), GTK_WIDGET(hbox2));
         
-        entryLabel_ = GTK_LABEL(gtk_label_new (""));
-        gtk_box_append(GTK_BOX (hbox_), GTK_WIDGET(entryLabel_));
+        auto entryLabel = GTK_LABEL(gtk_label_new (""));
+        gtk_box_append(GTK_BOX (hbox2), GTK_WIDGET(entryLabel));
         
-        entry_ = GTK_ENTRY(gtk_entry_new ());
-        gtk_box_append(GTK_BOX (hbox_), GTK_WIDGET(entry_));
-        g_object_set_data(G_OBJECT(entry_),"response", response_);
-        g_signal_connect (G_OBJECT (entry_), "activate", 
+        auto entry = GTK_ENTRY(gtk_entry_new ());
+        gtk_box_append(GTK_BOX (hbox2), GTK_WIDGET(entry));
+        g_object_set_data(G_OBJECT(entry),"response", response_);
+        g_signal_connect (G_OBJECT (entry), "activate", 
                 ENTRY_CALLBACK (activate_entry), (void *)response_);
 
         // FIXME
@@ -69,42 +71,67 @@ EntryResponse (GtkWindow *parent, const gchar *windowTitle, const gchar *iconNam
         bashCompletionStore_ = gtk_list_store_new(1, G_TYPE_STRING);
         gtk_entry_completion_set_model (bashCompletion_, GTK_TREE_MODEL(bashCompletionStore_));*/
 
-        checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(""));
-        gtk_box_append(GTK_BOX (vbox),GTK_WIDGET(checkbutton_));
+        auto checkbutton = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(""));
+        gtk_box_append(GTK_BOX (vbox),GTK_WIDGET(checkbutton));
 
-        timeoutProgress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
-        gtk_box_append(GTK_BOX (vbox),GTK_WIDGET(timeoutProgress_));
+        //auto timeoutProgress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+        //gtk_box_append(GTK_BOX (vbox),GTK_WIDGET(timeoutProgress));
 
-        actionBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_box_append(GTK_BOX (vbox),GTK_WIDGET(actionBox_));
-        add_cancel_ok(GTK_DIALOG (response_));
-        setTitle(windowTitle);
+        auto actionBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_box_append(GTK_BOX (vbox),GTK_WIDGET(actionBox));
+
+        auto no = Basic::mkButton("emblem-redball", _("Cancel"));
+        gtk_box_append(GTK_BOX (actionBox),GTK_WIDGET(no));
+        g_object_set_data (G_OBJECT (response_), "cancel", no);
+        g_signal_connect(G_OBJECT (no), "clicked", G_CALLBACK(cancel), response_);
+
+
+        auto yes = Basic::mkButton("emblem-greenball", _("Proceed"));
+        g_object_set_data (G_OBJECT (response_), "ok", yes);
+        gtk_box_append(GTK_BOX (actionBox),GTK_WIDGET(yes));
+        g_signal_connect(G_OBJECT (yes), "clicked", G_CALLBACK(cancel), response_);
+
+        gtk_window_set_title (response_, windowTitle);
 
         gtk_widget_realize (GTK_WIDGET(response_));
-        Basic::setAsDialog(response_, "entryResponse", "Response");
+        Basic::setAsDialog(GTK_WIDGET(response_), "entryResponse", "Response");
 
         //g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), response_);
         //g_signal_connect (G_OBJECT (entry_), "key-press-event", G_CALLBACK (progressReset), timeoutProgress_);
-        gtk_widget_grab_focus(GTK_WIDGET(entry_));
-        gtk_widget_set_can_default (GTK_WIDGET(yes_), TRUE);
-        gtk_widget_grab_default(GTK_WIDGET(yes_));
+        gtk_widget_grab_focus(GTK_WIDGET(entry));
+        //gtk_widget_set_can_default (GTK_WIDGET(yes_), TRUE);
+        //gtk_widget_grab_default(GTK_WIDGET(yes_));
+        gtk_window_present(response_);
         return;
     }
 private:
-    GtkProgressBar *timeoutProgress_;
-    GtkWindow *response_;
-    GtkBox *hbox_;
-    GtkBox *vbox2_;
-    GtkButton *yes_;
-    GtkButton *no_;
-    GtkBox *actionBox_;
-    void add_cancel_ok(GtkWindow *dialog){
-       no_ = mkButton("window-close-symbolic", _("Cancel"));
-        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(no_), GTK_RESPONSE_NO);
-        g_object_set_data (G_OBJECT (dialog), "action_false_button", no_);
-       yes_ = mkButton("system-run-symbolic", _("Ok"));
-        g_object_set_data (G_OBJECT (dialog), "action_true_button", yes_);
-        gtk_dialog_add_action_widget (GTK_DIALOG (dialog), GTK_WIDGET(yes_), GTK_RESPONSE_YES);
+    static void
+    cancel (GtkButton *button, gpointer data) {
+      g_object_set_data(G_OBJECT(data), "retval", GINT_TO_POINTER(-1));
+      gtk_window_destroy(GTK_WINDOW(data));
+    }
+    static void
+    ok (GtkButton *button, gpointer data) {
+      g_object_set_data(G_OBJECT(data), "retval", GINT_TO_POINTER(1));
+      gtk_window_destroy(GTK_WINDOW(data));
+    }
+
+    static void
+    activate_entry (GtkEntry * entry, gpointer data) {
+        auto dialog = GTK_WINDOW(data);
+        //tk_dialog_response (dialog,GTK_RESPONSE_YES);
+    }
+
+    static void
+    cancel_entry (GtkEntry * entry, gpointer data) {
+        auto dialog = GTK_WINDOW(data);
+        //gtk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
+    }
+
+    static gboolean 
+    response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
+       //tk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
+        return TRUE;
     }
   
 #if 0
@@ -395,40 +422,6 @@ private:
         auto completion = gtk_entry_get_completion(GTK_ENTRY(widget));
         gtk_entry_completion_complete (completion);
         return FALSE;
-    }
-
-    static void
-    activate_entry (GtkEntry * entry, gpointer data) {
-        auto dialog = GTK_DIALOG(data);
-        gtk_dialog_response (dialog,GTK_RESPONSE_YES);
-    }
-
-    static void
-    cancel_entry (GtkEntry * entry, gpointer data) {
-        auto dialog = GTK_DIALOG(g_object_get_data(G_OBJECT(entry), "dialog"));
-        gtk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
-    }
-
-    static gboolean 
-    response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
-        gtk_dialog_response (GTK_DIALOG(dialog),GTK_RESPONSE_CANCEL);
-        return TRUE;
-    }
-    
-    static GtkButton *mkButton(const char *iconName, const char *markup){
-      auto button = gtk_button_new();
-      auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-      if (iconName){
-        auto image = gtk_image_new_from_icon_name(iconName);
-        gtk_box_append (box, GTK_WIDGET(image));
-      }
-      if (markup){
-        auto label = gtk_label_new("");
-        gtk_label_set_markup(GTK_LABEL(label), markup);
-        gtk_box_append (box, GTK_WIDGET(label));
-      }
-      gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));
-      return button;
     }
 #endif
 };
