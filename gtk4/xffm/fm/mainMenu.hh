@@ -7,6 +7,7 @@ namespace xf {
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("Open in New Window"),  // removed then from vbutton box
+        "test",
         _("Copy"), 
         _("Cut"), 
         _("Paste"), 
@@ -35,6 +36,7 @@ namespace xf {
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
         {_("Open in New Window"),(void *)openXffmMain}, 
+        {"test",(void *)test},
         {_("Copy"), (void *) NULL},
         {_("Cut"),(void *) NULL}, 
         {_("Paste"),(void *) NULL}, 
@@ -62,6 +64,15 @@ namespace xf {
     }
 
   private:
+    static void
+    test(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto response = new EntryResponse("Test", "emblem-redball");
+
+      return;
+    }
+
     
     static void
     openXffmMain(GtkButton *button, void *data){

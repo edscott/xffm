@@ -152,6 +152,7 @@ public:
       }
       return actual_tag;
     }
+    
     static void *context_function(void * (*function)(gpointer), void * function_data){
       pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
       pthread_cond_t signal = PTHREAD_COND_INITIALIZER; 

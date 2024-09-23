@@ -25,16 +25,47 @@ public:
         gtk_window_destroy(response_);
     }
 
-EntryResponse (const char *windowTitle, const char *iconName){
+    int responseValue_=0;
+    EntryResponse (const char *windowTitle, const char *iconName){
+      pthread_t thread;
+      void *arg[]={(void *)windowTitle, (void *)iconName, (void *)this, &responseValue_};
+      int retval = pthread_create(&thread, NULL, response_f, (void *)arg);
+      pthread_detach(thread);
+    }
+
+    static void *response_f(void *data){
+      GtkWidget *dialog=NULL;
+      void **inArg = (void **)data;
+      void *arg[] = {inArg[0], inArg[1], &dialog};
+
+      DBG("response_f wait for response...\n");
+      void *retval = Basic::context_function(mkDialog_f, &arg);
+      DBG("response_f get response...dialog is %p\n", retval);
+      return retval;
+      // 
+
+    }
+
+    static void *mkDialog_f(void *data){
+      void **arg = (void **)data;
+      auto windowTitle = (const char *)arg[0];
+      auto iconName = (const char *)arg[1];
+      auto dialog = mkDialog(windowTitle, iconName);
+      return (void *) dialog;
+    }
+
+
+
+    static GtkWidget *mkDialog(const char *windowTitle, const char *iconName){
         //bashCompletionStore_ = NULL;
-        response_ = GTK_WINDOW(gtk_window_new ());
-        gtk_window_set_modal (GTK_WINDOW (response_), TRUE);
-        gtk_window_set_transient_for (GTK_WINDOW (response_), GTK_WINDOW (MainWidget));
-        gtk_window_set_resizable (GTK_WINDOW (response_), TRUE);
+        auto response = GTK_WINDOW(gtk_window_new ());
+        gtk_window_set_modal (GTK_WINDOW (response), TRUE);
+        gtk_window_set_transient_for (GTK_WINDOW (response), GTK_WINDOW (MainWidget));
+        gtk_window_set_resizable (GTK_WINDOW (response), TRUE);
 
         auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(vbox), false);
-        gtk_window_set_child(response_, GTK_WIDGET(vbox));
+        gtk_window_set_child(response, GTK_WIDGET(vbox));
         
         auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         auto responseLabel = GTK_LABEL(gtk_label_new (""));
@@ -59,9 +90,9 @@ EntryResponse (const char *windowTitle, const char *iconName){
         
         auto entry = GTK_ENTRY(gtk_entry_new ());
         gtk_box_append(GTK_BOX (hbox2), GTK_WIDGET(entry));
-        g_object_set_data(G_OBJECT(entry),"response", response_);
+        g_object_set_data(G_OBJECT(entry),"response", response);
         g_signal_connect (G_OBJECT (entry), "activate", 
-                ENTRY_CALLBACK (activate_entry), (void *)response_);
+                ENTRY_CALLBACK (activate_entry), (void *)response);
 
         // FIXME
   /*      bashCompletion_ = gtk_entry_completion_new();
@@ -82,27 +113,28 @@ EntryResponse (const char *windowTitle, const char *iconName){
 
         auto no = Basic::mkButton("emblem-redball", _("Cancel"));
         gtk_box_append(GTK_BOX (actionBox),GTK_WIDGET(no));
-        g_object_set_data (G_OBJECT (response_), "cancel", no);
-        g_signal_connect(G_OBJECT (no), "clicked", G_CALLBACK(cancel), response_);
+        g_object_set_data (G_OBJECT (response), "cancel", no);
+        g_signal_connect(G_OBJECT (no), "clicked", G_CALLBACK(cancel), response);
 
 
         auto yes = Basic::mkButton("emblem-greenball", _("Proceed"));
-        g_object_set_data (G_OBJECT (response_), "ok", yes);
+        g_object_set_data (G_OBJECT (response), "ok", yes);
         gtk_box_append(GTK_BOX (actionBox),GTK_WIDGET(yes));
-        g_signal_connect(G_OBJECT (yes), "clicked", G_CALLBACK(cancel), response_);
+        g_signal_connect(G_OBJECT (yes), "clicked", G_CALLBACK(cancel), response);
 
-        gtk_window_set_title (response_, windowTitle);
+        gtk_window_set_title (response, windowTitle);
 
-        gtk_widget_realize (GTK_WIDGET(response_));
-        Basic::setAsDialog(GTK_WIDGET(response_), "entryResponse", "Response");
+        gtk_widget_realize (GTK_WIDGET(response));
+        Basic::setAsDialog(GTK_WIDGET(response), "entryResponse", "Response");
 
-        //g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), response_);
+        //g_signal_connect (G_OBJECT (response_), "delete-event", G_CALLBACK (response_delete), response);
         //g_signal_connect (G_OBJECT (entry_), "key-press-event", G_CALLBACK (progressReset), timeoutProgress_);
         gtk_widget_grab_focus(GTK_WIDGET(entry));
         //gtk_widget_set_can_default (GTK_WIDGET(yes_), TRUE);
         //gtk_widget_grab_default(GTK_WIDGET(yes_));
-        gtk_window_present(response_);
-        return;
+        gtk_window_present(response);
+        DBG("dialog is %p\n", response);
+        return GTK_WIDGET(response);
     }
 private:
     static void

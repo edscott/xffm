@@ -31,7 +31,7 @@
 #include "texture.hh"
 #include "print.hh"
 
-//#include "response/entryresponse.hh"
+#include "response/entryresponse.hh"
 
 
 #include "mime/mime.hh"
