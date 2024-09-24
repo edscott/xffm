@@ -31,6 +31,7 @@
 #include "texture.hh"
 #include "print.hh"
 
+#include "response/dialog.hh"
 #include "response/entryresponse.hh"
 
 

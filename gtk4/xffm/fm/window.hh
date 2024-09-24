@@ -113,9 +113,30 @@ private:
             G_CALLBACK (this->on_keypress), (void *)this);
     }
 
+    static gboolean
+    presentDialog ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+      TRACE("present dialog %p\n", MainDialog);
+      if (MainDialog) gtk_window_present(MainDialog);
+        return FALSE;
+    }
+
+    static
+      void addMotionController(GtkWidget  *widget){
+        auto controller = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(widget), controller);
+        g_signal_connect (G_OBJECT (controller), "enter", 
+            G_CALLBACK (presentDialog), NULL);
+    }
+    
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
         MainWidget = GTK_WIDGET(mainWindow_);
+        addMotionController(MainWidget);
         g_object_set_data(G_OBJECT(mainWindow_), "windowObject", (void *)this);
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         return;

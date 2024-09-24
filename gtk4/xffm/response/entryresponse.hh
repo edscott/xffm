@@ -3,12 +3,89 @@
 namespace xf
 {
 
-
 class EntryResponse {
-    GtkWindow *response_;
+   const char *title_;
+   const char *iconName_;
 public:
-    GtkWindow *dialog(void){ return response_;}
+    const char *title(void){ return "fooBar";}
+    const char *iconName(void){ return "emblem-run";}
+    const char *label(void){return "label foobar";}
 
+    ~EntryResponse (void){
+        //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
+        //gtk_window_destroy(response_);
+    }
+
+    EntryResponse (void){
+      /*pthread_t thread;
+      int retval = pthread_create(&thread, NULL, response_f, (void *)this);
+      pthread_detach(thread);*/
+    }
+
+    void *asyncStartData(void){
+      return (void *)"hello world\n";
+    }
+    void *asyncStart(void *data){
+      DBG("%s", (char *)data);
+      sleep(1);
+      asyncEnd(asyncEndData());
+      return NULL;
+    }
+
+    void *asyncEndData(void){
+      return (void *)"goodbye world\n";
+    }
+    void *asyncEnd(void *data){
+      DBG("%s", (char *)data);
+      return NULL;
+    }
+
+
+    void content(GtkWindow *dialog, GtkBox *contentArea){
+
+       auto entryBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+       gtk_widget_set_hexpand(GTK_WIDGET(entryBox), false);
+       gtk_widget_set_halign (GTK_WIDGET(entryBox),GTK_ALIGN_CENTER);
+       gtk_box_append(GTK_BOX (contentArea), GTK_WIDGET(entryBox));
+
+       auto entryLabel = GTK_LABEL(gtk_label_new ("foo"));
+       gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entryLabel));
+       gtk_widget_set_halign (GTK_WIDGET(entryLabel),GTK_ALIGN_START);
+        
+       auto entry = GTK_ENTRY(gtk_entry_new ());
+       gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entry));
+       gtk_widget_set_halign (GTK_WIDGET(entryLabel),GTK_ALIGN_START);
+       g_object_set_data(G_OBJECT(dialog),"entry", entry);
+       
+       g_object_set_data(G_OBJECT(entry),"dialog", dialog);
+       g_signal_connect (G_OBJECT (entry), "activate", 
+                ENTRY_CALLBACK (activate_entry), (void *)dialog);
+
+    }
+    void action(GtkWindow *dialog, GtkBox *actionArea){
+    }
+ 
+private:
+
+    static void
+    activate_entry (GtkEntry * entry, gpointer data) {
+        auto dialog = GTK_WINDOW(data);
+        //tk_dialog_response (dialog,GTK_RESPONSE_YES);
+    }
+
+    static void
+    cancel_entry (GtkEntry * entry, gpointer data) {
+        auto dialog = GTK_WINDOW(data);
+        //gtk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
+    }
+
+    static gboolean 
+    response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
+       //tk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
+        return TRUE;
+    }
+   
+#if 0
     static int run(GtkWindow *dialog){
       // grab pointer
       // loop
@@ -18,19 +95,6 @@ public:
       auto retval = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "retval"));
       // ungrab pointer
       return retval;
-    }
-
-    ~EntryResponse (void){
-        //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
-        gtk_window_destroy(response_);
-    }
-
-    int responseValue_=0;
-    EntryResponse (const char *windowTitle, const char *iconName){
-      pthread_t thread;
-      void *arg[]={(void *)windowTitle, (void *)iconName, (void *)this, &responseValue_};
-      int retval = pthread_create(&thread, NULL, response_f, (void *)arg);
-      pthread_detach(thread);
     }
 
     static void *response_f(void *data){
@@ -43,7 +107,6 @@ public:
       DBG("response_f get response...dialog is %p\n", retval);
       return retval;
       // 
-
     }
 
     static void *mkDialog_f(void *data){
@@ -53,8 +116,6 @@ public:
       auto dialog = mkDialog(windowTitle, iconName);
       return (void *) dialog;
     }
-
-
 
     static GtkWidget *mkDialog(const char *windowTitle, const char *iconName){
         //bashCompletionStore_ = NULL;
@@ -136,35 +197,8 @@ public:
         DBG("dialog is %p\n", response);
         return GTK_WIDGET(response);
     }
+
 private:
-    static void
-    cancel (GtkButton *button, gpointer data) {
-      g_object_set_data(G_OBJECT(data), "retval", GINT_TO_POINTER(-1));
-      gtk_window_destroy(GTK_WINDOW(data));
-    }
-    static void
-    ok (GtkButton *button, gpointer data) {
-      g_object_set_data(G_OBJECT(data), "retval", GINT_TO_POINTER(1));
-      gtk_window_destroy(GTK_WINDOW(data));
-    }
-
-    static void
-    activate_entry (GtkEntry * entry, gpointer data) {
-        auto dialog = GTK_WINDOW(data);
-        //tk_dialog_response (dialog,GTK_RESPONSE_YES);
-    }
-
-    static void
-    cancel_entry (GtkEntry * entry, gpointer data) {
-        auto dialog = GTK_WINDOW(data);
-        //gtk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
-    }
-
-    static gboolean 
-    response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
-       //tk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
-        return TRUE;
-    }
   
 #if 0
 
@@ -455,6 +489,7 @@ private:
         gtk_entry_completion_complete (completion);
         return FALSE;
     }
+#endif
 #endif
 };
 }

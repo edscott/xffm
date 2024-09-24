@@ -68,7 +68,9 @@ namespace xf {
     test(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto response = new EntryResponse("Test", "emblem-redball");
+      auto dialogObject = new Dialog<EntryResponse>(GTK_WINDOW(MainWidget));
+      DBG("create dialogObject=%p\n", dialogObject); 
+      dialogObject->run();
 
       return;
     }

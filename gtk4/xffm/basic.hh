@@ -2,7 +2,27 @@
 #define BASIC_HH
 namespace xf {
   class Basic {
+private:
+
+    static void *destroy_f(void *window){
+      gtk_window_destroy(GTK_WINDOW(window));
+      return NULL;
+    }
+
+    static void *present_f(void *window){
+      gtk_window_present(GTK_WINDOW(window));
+      return NULL;
+    }
 public:
+
+    static void present(GtkWindow *window){
+      context_function(present_f, (void *)window);
+    }
+
+    static void destroy(GtkWindow *window){
+      context_function(destroy_f, (void *)window);
+    }
+
     static gchar *
     esc_string (const gchar * string) {
         gint i, j, k;
