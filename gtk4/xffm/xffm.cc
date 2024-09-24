@@ -138,7 +138,8 @@ main (int argc, char *argv[]) {
   XInitThreads();
 
   // Run in foreground if "-f"  given:
-  if (!detachProcess(argv[1])) argv[1] = argv[2];
+  foreground = !detachProcess(argv[1]);
+  if (foreground) argv[1] = argv[2];
   /*if (chdir(g_get_home_dir()) < 0) {
       DBG("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
   }*/
@@ -148,7 +149,7 @@ main (int argc, char *argv[]) {
   pthread_detach(threadLeader);
 
   gchar *path = getPath(argv[1]);
-  DBG("path is %s (%s)\n", path, argv[1]); 
+  TRACE("path is %s (%s)\n", path, argv[1]); 
   auto fm = new(xf::Fm)(path);
 
   auto c = new xf::ClipBoard;
