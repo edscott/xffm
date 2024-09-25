@@ -10,6 +10,7 @@ namespace xf
   GtkWindow *dialog_;
   GtkWindow *parent_;
   dialogClass *subClass_;
+  GtkLabel *label_;
 
   public:
  
@@ -29,7 +30,7 @@ namespace xf
       subClass_ = new dialogClass;
       parent_ = parent;
       mkWindow();
-      TRACE("dialog is %p\n", dialog_);
+     TRACE("dialog is %p\n", dialog_);
       MainDialog = dialog_;
       templateSetup();
       gtk_widget_realize(GTK_WIDGET(dialog_));
@@ -39,35 +40,10 @@ namespace xf
     }
     dialogClass *subClass(void){ return subClass_;}
 
+
+
     GtkWindow *parent(void){ return parent_;}
 
-    void setTitle(const char *title){ 
-      if (!title) return;
-      gtk_window_set_title(dialog_, title);
-    }
-
-    void setIcon(const char *iconName){
-      if (!iconName) return;
-      auto paintable = Texture::load(iconName, 48);
-      if (paintable) {
-        auto image = gtk_image_new_from_paintable(paintable);
-        gtk_widget_set_size_request(GTK_WIDGET(image), 48, 48);
-        if (image) {
-          auto child = gtk_widget_get_first_child(GTK_WIDGET(iconBox_));
-          if (child) gtk_widget_unparent(child);
-          gtk_box_append(iconBox_, image);
-        }
-      }
-      auto labelText = subClass_->label();
-      if (labelText){
-        auto markup = g_strconcat("  <span color=\"blue\"><b>", labelText, "</b></span>", NULL);
-        auto label = GTK_LABEL(gtk_label_new(""));
-        gtk_label_set_markup(label, markup);
-        g_free(markup);
-        gtk_box_append(iconBox_, GTK_WIDGET(label));
-        gtk_widget_set_valign (GTK_WIDGET(label),GTK_ALIGN_END);
-      }
-    }
 
     
     GtkWindow *dialog(void){ return dialog_;}
@@ -86,7 +62,44 @@ namespace xf
       return 0;
     }
 
+    void setLabelText(const char *text){
+      if (!text) return;
+      TRACE("set label to %s\n", text);
+      auto markup = g_strconcat("<span color=\"blue\"><b>", text, "</b></span>", NULL);
+      gtk_label_set_markup(label_, markup);
+      g_free(markup);
+    }
 private:
+
+    void mkTitle(void){ 
+      const char *title = subClass_->title();
+      if (!title) return;
+      gtk_window_set_title(dialog_, title);
+    }
+
+    void mkLabel(void){
+      label_ = GTK_LABEL(gtk_label_new(""));
+      gtk_box_append(iconBox_, GTK_WIDGET(label_));
+      gtk_widget_set_valign (GTK_WIDGET(label_),GTK_ALIGN_END);
+      DBG("subclass label is %s\n",subClass_->label());       
+      setLabelText(subClass_->label());
+    }
+
+    void mkIcon(void){
+      const char *iconName = subClass_->iconName();
+      if (!iconName) return;
+      auto paintable = Texture::load(iconName, 48);
+      if (paintable) {
+        auto image = gtk_image_new_from_paintable(paintable);
+        gtk_widget_set_size_request(GTK_WIDGET(image), 48, 48);
+        if (image) {
+          auto child = gtk_widget_get_first_child(GTK_WIDGET(iconBox_));
+          if (child) gtk_widget_unparent(child);
+          gtk_box_append(iconBox_, image);
+        }
+      }
+      
+    }
     static void *runWait_f(void *data){
       auto dialogObject = (Dialog<dialogClass> *)data;
       auto dialog = dialogObject->dialog();
@@ -114,8 +127,9 @@ private:
       
       if (GPOINTER_TO_INT(response) > 0){
         auto subClass = dialogObject->subClass_;
-        subClass->asyncStart(subClass->asyncStartData());
-        //subClass->close();
+        Basic::context_function(subClass->asyncStart, (void *)dialog);
+        Basic::context_function(subClass->asyncEnd, (void *)dialog);
+        //Basic::destroy(dialog);
       }
       TRACE("run_f:: Response is %p\n", response);
 
@@ -124,11 +138,10 @@ private:
 
     void templateSetup(void){
       // template class setup
-      const char *title = subClass_->title();
-      const char *iconName = subClass_->iconName();
       // in main context:
-      setTitle(title);
-      setIcon(iconName);
+      mkTitle();
+      mkIcon();
+      mkLabel();
       subClass_->content(dialog_, contentArea_);
       subClass_->action(dialog_, actionArea_);
     }

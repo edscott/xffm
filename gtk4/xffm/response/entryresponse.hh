@@ -22,21 +22,14 @@ public:
       pthread_detach(thread);*/
     }
 
-    void *asyncStartData(void){
-      return (void *)"hello world\n";
-    }
-    void *asyncStart(void *data){
-      DBG("%s", (char *)data);
+     static void *asyncStart(void *data){
+      DBG("%s", "hello world\n");
       sleep(1);
-      asyncEnd(asyncEndData());
       return NULL;
     }
 
-    void *asyncEndData(void){
-      return (void *)"goodbye world\n";
-    }
-    void *asyncEnd(void *data){
-      DBG("%s", (char *)data);
+    static void *asyncEnd(void *data){
+      DBG("%s", "goodbye world\n");
       return NULL;
     }
 

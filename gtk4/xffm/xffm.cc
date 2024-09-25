@@ -33,6 +33,7 @@
 
 #include "response/dialog.hh"
 #include "response/entryresponse.hh"
+#include "response/passwdresponse.hh"
 
 
 #include "mime/mime.hh"
@@ -140,6 +141,10 @@ main (int argc, char *argv[]) {
   //foo bar
       
   XInitThreads();
+  if (strstr(argv[0], "xfgetpass")){
+      xf::PasswordResponse::sendPassword(argv);
+      exit(1);
+  }
 
   // Run in foreground if "-f"  given:
   auto foreground = !detachProcess(argv[1]);
