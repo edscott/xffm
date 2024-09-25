@@ -10,21 +10,28 @@ public:
     const char *iconName(void){ return "dialog-authentication";}
     const char *label(void){ return _("Enter password");}
 
-    static void *asyncStart(void *dialog){
+    static void *asyncStart(void *data){
+      auto dialogObject = (Dialog<PasswordDialog> *)data;
+      auto dialog = dialogObject->dialog();
+      
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
       auto buffer = gtk_entry_get_buffer(entry);
       auto text = g_strdup(gtk_entry_buffer_get_text(buffer));
       gtk_entry_buffer_set_text(buffer, "alkdflakj lkjasdlfkj qwlekr sadlfk lsdflkasjdf ", -1);
       gtk_entry_buffer_set_text(buffer, "", -1);
+        
 
       if (text && strlen(text)) {
           fprintf (stdout, "%s\n", text);
           memset(text, 0, strlen(text));
       } else {
-          // No password, either cancel or close, then
+          // No password, then
           // send interrupt signal to parent
           pid_t parent = getppid();
-          //kill(parent, SIGINT);
+          kill(parent, SIGINT);
+
+          //kill(currentProcess, SIGINT);
+          //kill(parentProcess, SIGINT);
       }
       g_free(text);
       
@@ -35,7 +42,6 @@ public:
 
     static void *asyncEnd(void *dialog){
       TRACE("%s", "goodbye world\n");
-      //DBG("%s", (char *)data);
       return NULL;
     }
 
@@ -47,9 +53,6 @@ public:
        gtk_widget_set_halign (GTK_WIDGET(entryBox),GTK_ALIGN_CENTER);
        gtk_box_append(GTK_BOX (contentArea), GTK_WIDGET(entryBox));
 
-       /*auto entryLabel = GTK_LABEL(gtk_label_new ("foo"));
-       gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entryLabel));
-       gtk_widget_set_halign (GTK_WIDGET(entryLabel),GTK_ALIGN_START);*/
         
        auto entry = GTK_ENTRY(gtk_entry_new ());
        gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entry));
@@ -77,16 +80,12 @@ private:
 
     static gboolean 
     response_delete(GtkWidget *dialog, GdkEvent *event, gpointer data){
-       //tk_dialog_response (dialog,GTK_RESPONSE_CANCEL);
         return TRUE;
     }
 
 };
 
 class PasswordResponse {
-    //using pixbuf_c = Pixbuf<double>;
-    //using gtk_c = Gtk<double>;
-    //using util_c = Util<double>;
     
 public:
     static void sendPassword(gchar **argv){
@@ -103,30 +102,15 @@ public:
       } 
       
       auto dialogObject = new Dialog<PasswordDialog>(NULL);
-      //DBG("create dialogObject=%p\n", dialogObject); 
+      TRACE("create dialogObject=%p\n", dialogObject); 
       dialogObject->setLabelText(string);
+      auto dialog = dialogObject->dialog();
+      auto no = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "no"));
+      gtk_widget_set_visible(no, false);
       
       dialogObject->run();
       while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
         g_main_context_iteration (NULL, TRUE);
-
-#if 0
-       gchar *p;
-
-
-        p = getResponse (string, NULL, TRUE);
-        g_free(string);
-        if (p && strlen(p)) {
-            fprintf (stdout, "%s\n", p);
-            memset(p, 0, strlen(p));
-        } else {
-            // No password, either cancel or close, then
-            // send interrupt signal to parent
-            pid_t parent = getppid();
-            kill(parent, SIGINT);
-        }
-        g_free(p);
-#endif
         exit(0);
     }
 

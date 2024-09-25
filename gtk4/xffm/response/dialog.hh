@@ -12,6 +12,8 @@ namespace xf
   dialogClass *subClass_;
   GtkLabel *label_;
 
+  time_t timeout_;
+
   public:
  
     ~Dialog(void){
@@ -29,8 +31,9 @@ namespace xf
     Dialog(GtkWindow *parent){ // must run in main context.
       subClass_ = new dialogClass;
       parent_ = parent;
+      TRACE("Dialog::parent process = %d\n", parentProcess);
       mkWindow();
-     TRACE("dialog is %p\n", dialog_);
+      TRACE("dialog is %p\n", dialog_);
       MainDialog = dialog_;
       templateSetup();
       gtk_widget_realize(GTK_WIDGET(dialog_));
@@ -39,17 +42,9 @@ namespace xf
 
     }
     dialogClass *subClass(void){ return subClass_;}
-
-
-
     GtkWindow *parent(void){ return parent_;}
-
-
-    
     GtkWindow *dialog(void){ return dialog_;}
-    
     GtkBox *contentArea(void){ return contentArea_;}
-    
     GtkBox *actionArea(void){ return actionArea_;}
 
     int run(){
@@ -81,7 +76,7 @@ private:
       label_ = GTK_LABEL(gtk_label_new(""));
       gtk_box_append(iconBox_, GTK_WIDGET(label_));
       gtk_widget_set_valign (GTK_WIDGET(label_),GTK_ALIGN_END);
-      DBG("subclass label is %s\n",subClass_->label());       
+      TRACE("subclass label is %s\n",subClass_->label());       
       setLabelText(subClass_->label());
     }
 
@@ -127,8 +122,8 @@ private:
       
       if (GPOINTER_TO_INT(response) > 0){
         auto subClass = dialogObject->subClass_;
-        Basic::context_function(subClass->asyncStart, (void *)dialog);
-        Basic::context_function(subClass->asyncEnd, (void *)dialog);
+        Basic::context_function(subClass->asyncStart, data);
+        Basic::context_function(subClass->asyncEnd, data);
         //Basic::destroy(dialog);
       }
       TRACE("run_f:: Response is %p\n", response);
@@ -186,12 +181,14 @@ private:
         gtk_box_append(GTK_BOX (actionArea_),GTK_WIDGET(no));
         gtk_widget_set_halign (GTK_WIDGET(no),GTK_ALIGN_END);
         g_signal_connect(G_OBJECT (no), "clicked", G_CALLBACK(cancel), this);
+        g_object_set_data(G_OBJECT(dialog_), "no", no);
 
 
         auto yes = Basic::mkButton("emblem-greenball", _("Accept"));
         gtk_box_append(GTK_BOX (actionArea_),GTK_WIDGET(yes));
         gtk_widget_set_halign (GTK_WIDGET(yes),GTK_ALIGN_END);
         g_signal_connect(G_OBJECT (yes), "clicked", G_CALLBACK(ok), this);
+        g_object_set_data(G_OBJECT(dialog_), "yes", yes);
 
         return;
     }

@@ -135,6 +135,7 @@ static  gchar *getPath(const char *argv1){
 
 int
 main (int argc, char *argv[]) {
+  TRACE("parent=%d, self=%d\n",getppid(), getpid()); 
   coreSetup(argc, argv);
   xffindProgram = argv[0];
   xffmProgram = argv[0];
