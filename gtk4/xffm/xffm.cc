@@ -105,7 +105,11 @@ static bool detachProcess(const char *argv1){
       setsid(); // detach main process from tty
       return true;
   } 
-  DBG("Xffm running in foreground.\n");
+  // If xffm is running in foreground,
+  // then the tty is not detached.
+  // So we force the X11 askpass:
+  setenv("SSH_ASKPASS_REQUIRE", "force", 1);
+  TRACE("Xffm running in foreground.\n");
   return false;
 }
 
@@ -138,7 +142,7 @@ main (int argc, char *argv[]) {
   XInitThreads();
 
   // Run in foreground if "-f"  given:
-  foreground = !detachProcess(argv[1]);
+  auto foreground = !detachProcess(argv[1]);
   if (foreground) argv[1] = argv[2];
   /*if (chdir(g_get_home_dir()) < 0) {
       DBG("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));

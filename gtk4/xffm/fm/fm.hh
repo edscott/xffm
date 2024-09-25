@@ -58,11 +58,7 @@ private:
             TRACE("get pass at %s\n", getpass);
             setenv("SUDO_ASKPASS", getpass, 1);
             setenv("SSH_ASKPASS", getpass, 1);
-            // If xffm is running in foreground,
-            // then the tty is not detached.
-            // So we force the X11 askpass:
-            TRACE("foreground = %d\n", foreground);
-            if (foreground) setenv("SSH_ASKPASS_REQUIRE", "force", 1);
+
         }
     }
 

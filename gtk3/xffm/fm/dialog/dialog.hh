@@ -40,6 +40,7 @@ public:
         isTreeView = (Settings<Type>::getInteger("window", "TreeView") > 0);
         mainWindow = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
         g_object_set_data(G_OBJECT(mainWindow), "dialogObject", (void *)this);
+//        g_signal_connect (G_OBJECT (mainWindow), "enter-notify-event", EVENT_CALLBACK (DialogSignals<Type>::enter_event), NULL);
         g_signal_connect (G_OBJECT (mainWindow), "delete-event", EVENT_CALLBACK (DialogSignals<Type>::delete_event), NULL);
         // XXX Is it overkill with signal to destroy-event?
         g_signal_connect (G_OBJECT (mainWindow), "destroy-event", EVENT_CALLBACK (DialogSignals<Type>::delete_event), NULL);

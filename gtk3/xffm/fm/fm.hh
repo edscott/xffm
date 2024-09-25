@@ -78,7 +78,12 @@ public:
             }
             setsid(); // detach main process from tty
         } else {
-          DBG("Xffm running in foreground.\n")
+            // If xffm is running in foreground,
+            // then the tty is not detached.
+            // So we force the X11 askpass:
+            setenv("SSH_ASKPASS_REQUIRE", "force", 1);
+
+          TRACE("Xffm running in foreground.\n")
         }
         if (argv[1] && strcmp(argv[1],"-f")==0) {
             argv[1] = argv[2];
