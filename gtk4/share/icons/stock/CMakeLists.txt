@@ -23,6 +23,8 @@ dnd-multiple.svg
 dnd.svg
 document-new.svg
 document-open.svg
+document-save-as.svg
+document-save.svg
 down.svg
 edit-clear.svg
 edit-copy.svg

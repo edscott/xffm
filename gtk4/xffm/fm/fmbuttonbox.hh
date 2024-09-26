@@ -1,6 +1,5 @@
 #ifndef XF_FMBUTTONBOX_HH
 #define XF_FMBUTTONBOX_HH
-#include "iconColorMenu.hh"
 namespace xf {
 
   class EmptyButtonBox{
@@ -187,7 +186,7 @@ private:
         TRACE ("openTerminal::childWidget= %p, buttonSpace = %p workdir=%s\n", 
             childWidget, buttonSpace, workDir);
 
-      auto terminal = Util::getTerminal();
+      auto terminal = Basic::getTerminal();
       pid_t childPid = Run<bool>::shell_command(output, terminal, false, false);
 
       auto runButton = new (RunButton);

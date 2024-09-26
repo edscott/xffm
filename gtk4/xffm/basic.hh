@@ -2,7 +2,122 @@
 #define BASIC_HH
 namespace xf {
   class Basic {
+public:
+    static const gchar **
+    getTerminalEditors(void) {
+        static const gchar *editors_v[] = {
+            "emacs", 
+            "nano",
+            "vi",
+            "vim",
+            NULL
+        }; 
+        return editors_v;
+    }
+    static const gchar **
+    getEditors(void) {
+        static const gchar *editors_v[] = {
+            "gvim -f",  
+            "gedit", 
+            "kate", 
+            "xemacs", 
+            "nano",
+            "vi",
+            NULL
+        }; 
+        return editors_v;
+    }
+
 private:
+    static void setTerminal(void){
+        static gboolean done = FALSE;
+        if (done) return;
+        const gchar *terminal = getenv("TERMINAL");
+        if (terminal && strlen(terminal)) {
+            INFO("User set terminal = %s\n", terminal);
+            setTerminalCmd(terminal);
+            done = TRUE;
+            return;
+        } 
+        DBG("setTerminal()... TERMINAL not defined in environment.\n");
+        // TERMINAL not defined. Look for one.
+        const gchar **p=getTerminals();
+        const gchar *foundTerm = NULL;
+        for (;p && *p; p++){
+            auto s = g_strdup(*p);
+            if (strchr(s, ' ')) *strchr(s, ' ') = 0;
+            auto t = g_find_program_in_path (s);
+            g_free(s);
+            if (t) {
+                INFO("Found terminal: %s\n", t);
+                terminal=*p;
+                g_free(t);
+                setenv("TERMINAL", *p, 1);
+                setTerminalCmd(*p);
+                done = TRUE;
+                return;
+            }  
+        }
+        if (!terminal){
+            DBG("No terminal command found. Please install or define TERMINAL environment variable.\n");
+            // Fallback...
+            setenv("TERMINAL", "xterm", 1);
+            setTerminalCmd("xterm");
+        }
+        done = TRUE;
+        return ;
+    }
+
+    static void
+    setTerminalCmd (const gchar *t) {
+        static gboolean done = FALSE;
+        if (done) return;
+        const gchar *exec_option = "-e";
+        if(strncmp (t, "gnome-terminal", strlen("gnome-terminal")) == 0 ||
+           strncmp (t, "Terminal", strlen("Terminal")) == 0) {
+            exec_option = "-x";
+        }
+        static const gchar *terminalCommand = g_strconcat(t, " ", exec_option, NULL);
+        setenv("TERMINAL_CMD", terminalCommand, 1);
+        return;
+    }
+     
+    static const gchar **
+    getTerminals(void) {
+        static const gchar *terminals_v[] = {
+            "xterm -vb -rv", 
+            "uxterm -vb -rv", 
+            "konsole", 
+            "gnome-terminal", 
+            "sakura",
+            "Eterm", 
+            "Terminal", 
+            "aterm", 
+            "kterm", 
+            "wterm", 
+            NULL
+        };
+        return terminals_v;
+    }
+
+    static gboolean
+    program_in_path(const gchar *program){
+        gchar *s = g_find_program_in_path (program);
+        if (!s) return FALSE;
+        g_free(s);
+        return TRUE;
+    }
+
+    static const gchar *
+    default_shell(void){
+        const gchar *shells[]={"bash","tcsh","csh","dash","zsh","ksh","sash","ash","sh",NULL};
+        const gchar **shell;
+        for (shell = shells; shell && *shell; shell++){
+            if (program_in_path(*shell)) return *shell;
+        }
+        g_warning("unable to find a valid shell\n");
+        return "/bin/sh";
+    }
 
     static void *destroy_f(void *window){
       gtk_window_destroy(GTK_WINDOW(window));
@@ -14,6 +129,26 @@ private:
       return NULL;
     }
 public:
+   static const gchar *
+    u_shell(void){
+        if(getenv ("SHELL") && strlen (getenv ("SHELL"))) {
+            if (program_in_path(getenv ("SHELL"))) return getenv ("SHELL");
+        }
+
+        if(getenv ("XTERM_SHELL") && strlen (getenv ("XTERM_SHELL"))) {
+            if (program_in_path(getenv ("XTERM_SHELL"))) return getenv ("XTERM_SHELL");
+        }
+        return default_shell();
+    }
+    static const gchar *getTerminal(){
+        setTerminal();
+        return  getenv("TERMINAL");
+    }
+
+    static const gchar *getTerminalCmd(){
+        setTerminal();
+        return  getenv("TERMINAL_CMD");
+    }
 
     static void sensitive(GtkEventControllerMotion* self,
                     gdouble x,

@@ -165,6 +165,7 @@ public:
             g_free(command);
             command = g;
         }
+        TRACE("** command = %s\n", command);
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
 
         pid_t pid = Tubo::Fork (fork_function,(gchar **)arguments,
@@ -191,7 +192,7 @@ public:
 
         gchar *ncommand;
         if (run_in_shell(command)){
-            ncommand = g_strdup_printf("%s -c \"%s\"", Util::u_shell(), command);
+            ncommand = g_strdup_printf("%s -c \"%s\"", Basic::u_shell(), command);
         } else {
             ncommand = g_strdup(command);
         }
@@ -562,7 +563,7 @@ public:
         if(!command) return NULL;
         gchar *a = mkCommandLine(command, path);
 
-        auto term = Util::getTerminalCmd();
+        auto term = Basic::getTerminalCmd();
         command_line = g_strdup_printf ("%s %s", term, a);
         g_free(a);
         return command_line;

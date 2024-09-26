@@ -48,6 +48,7 @@ namespace xf
     GtkWindow *dialog(void){ return dialog_;}
     GtkBox *contentArea(void){ return contentArea_;}
     GtkBox *actionArea(void){ return actionArea_;}
+    GtkLabel *label(void){ return label_;}
 
     int run(){
       TRACE("run...\n");

@@ -74,6 +74,10 @@ namespace xf {
       auto child =  Child::getChild();
       return getWorkdir(child);
     }
+    static void *getPrompt(void){
+      auto child =  Child::getChild();
+      return g_object_get_data(G_OBJECT(child), "prompt");
+    }
     static
     void setWindowTitle(GtkWidget *child){
         auto path = (const char *) g_object_get_data(G_OBJECT(child), "path");

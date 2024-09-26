@@ -1,6 +1,5 @@
 #ifndef PATHBAR_HH
 #define PATHBAR_HH
-#include "pathbarmenu.hh"
 namespace xf {
   class Pathbar : public UtilPathbar
   {

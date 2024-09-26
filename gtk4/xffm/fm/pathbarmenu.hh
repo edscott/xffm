@@ -1,6 +1,5 @@
 #ifndef PATHBARMENU_HH
 #define PATHBARMENU_HH
-#include "menu.hh"
 namespace xf {
   template <class Type> class MenuCallbacks;
   

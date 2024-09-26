@@ -2,8 +2,6 @@
 #define XF_WINDOW_HH
 #define NOTEBOOK_CALLBACK(X)  G_CALLBACK((void (*)(GtkNotebook *,GtkWidget *, guint, gpointer)) X)
 
-#include "mainMenu.hh"
-#include "fmpage.hh"
 #include <gio/gio.h>
 namespace xf {
 

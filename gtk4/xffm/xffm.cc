@@ -23,6 +23,7 @@
 */
 #include "basic.hh"
 
+#include "tubo.hh"
 
 
 #include "icontheme.hh"
@@ -30,10 +31,13 @@
 #include "child.hh"
 #include "texture.hh"
 #include "print.hh"
+#include "bash.hh"
+#include "run.hh"
 
 #include "response/dialog.hh"
 #include "response/entryresponse.hh"
 #include "response/passwdresponse.hh"
+#include "response/pathresponse.hh"
 
 
 #include "mime/mime.hh"
@@ -55,14 +59,23 @@
 #include "workdir.hh"
 
 #include "util.hh"
-#include "bash.hh"
-#include "tubo.hh"
-#include "run.hh"
 #include "runbutton.hh"
 
+#include "fm/inputMenu.hh"
+#include "fm/gridviewmenu.hh"
+#include "fm/iconColorMenu.hh"
+#include "fm/fmbuttonbox.hh"
+#include "fm/pathbarmenu.hh"
+#include "fm/pathbar.hh"
+#include "fm/prompt.hh"
+#include "fm/outputMenu.hh"
+#include "fm/mainMenu.hh"
 #include "fm/fmpage.hh"
+//#include "fm/windowUtils.hh"
 #include "fm/window.hh"
 #include "fm/menucallbacks.hh"
+
+
 
 
 

@@ -1,11 +1,7 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
 #include "gridviewmenu.hh"
-// race condition. Must realize before this happens. XXX Where?
-//Gtk-CRITICAL **: 10:00:15.047: gtk_widget_compute_point: assertion 'GTK_IS_WIDGET (widget)' failed
 
-#include "texture.hh"
-//#define GESTURECLICK_F(X) (gboolean (*)(GtkGestureClick *, gint, gdouble, gdouble, void *) X) 
 namespace xf {
   template <class DirectoryClass>
   class GridView  {

@@ -1,7 +1,5 @@
 #ifndef XF_PROMPT_HH
 #define XF_PROMPT_HH
-#include "run.hh"
-#include "inputMenu.hh"
 namespace xf {
   template <class Type>
   class Prompt : private UtilBasic {

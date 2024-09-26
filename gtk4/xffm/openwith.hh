@@ -102,6 +102,7 @@ public:
       auto child = Child::getChild();
       buttonSpace = Child::getButtonSpace(child);
       prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
+      g_object_set_data(G_OBJECT(child), "prompt", prompt_p);
       auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
       auto label2 = GTK_LABEL(gtk_label_new (windowTitle));
