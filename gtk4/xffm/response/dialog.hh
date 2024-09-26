@@ -6,17 +6,24 @@ namespace xf
   class Dialog {
   GtkBox *contentArea_;
   GtkBox *actionArea_;
-  GtkBox *iconBox_;
+  GtkBox *labelBox_;
   GtkWindow *dialog_;
-  GtkWindow *parent_;
+  GtkWindow *parent_ = NULL;
   dialogClass *subClass_;
   GtkLabel *label_;
 
-  time_t timeout_;
-
   public:
  
+    void setParent(GtkWindow *parent){
+      parent_ = parent;
+      if (parent) {
+        TRACE("will destroy with parent\n");
+        gtk_window_set_destroy_with_parent(dialog_, true);
+      }
+    }
+    
     ~Dialog(void){
+      MainDialog = NULL;
       Basic::destroy(dialog_);
       // race
       // Basic::present(GTK_WINDOW(MainWidget));
@@ -25,21 +32,16 @@ namespace xf
       delete subClass_;
       TRACE("subClass_ deleted\n");
       TRACE("destructor for %p\n", this);
-      MainDialog = NULL;
     }
 
-    Dialog(GtkWindow *parent){ // must run in main context.
+    Dialog(void){ // must run in main context.
       subClass_ = new dialogClass;
-      parent_ = parent;
       TRACE("Dialog::parent process = %d\n", parentProcess);
       mkWindow();
       TRACE("dialog is %p\n", dialog_);
       MainDialog = dialog_;
-      templateSetup();
-      gtk_widget_realize(GTK_WIDGET(dialog_));
-      Basic::setAsDialog(GTK_WIDGET(dialog_), "dialog", "Dialog");
-      gtk_window_present(dialog_);
-
+      mkTitle();
+      mkLabel();      
     }
     dialogClass *subClass(void){ return subClass_;}
     GtkWindow *parent(void){ return parent_;}
@@ -67,34 +69,33 @@ namespace xf
 private:
 
     void mkTitle(void){ 
-      const char *title = subClass_->title();
-      if (!title) return;
-      gtk_window_set_title(dialog_, title);
+      if (!subClass_->title()) return;
+      gtk_window_set_title(dialog_, subClass_->title());
     }
 
     void mkLabel(void){
       label_ = GTK_LABEL(gtk_label_new(""));
-      gtk_box_append(iconBox_, GTK_WIDGET(label_));
-      gtk_widget_set_valign (GTK_WIDGET(label_),GTK_ALIGN_END);
+      gtk_box_append(labelBox_, GTK_WIDGET(label_));
+      gtk_widget_set_hexpand(GTK_WIDGET(label_), true);
+
+      gtk_widget_set_halign (GTK_WIDGET(label_),GTK_ALIGN_CENTER);
       TRACE("subclass label is %s\n",subClass_->label());       
       setLabelText(subClass_->label());
     }
 
-    void mkIcon(void){
+ /*   void mkIcon(void){
       const char *iconName = subClass_->iconName();
       if (!iconName) return;
-      auto paintable = Texture::load(iconName, 48);
+      auto paintable = Texture::load(iconName, 24);
       if (paintable) {
         auto image = gtk_image_new_from_paintable(paintable);
-        gtk_widget_set_size_request(GTK_WIDGET(image), 48, 48);
+        gtk_widget_set_size_request(GTK_WIDGET(image), 24, 24);
         if (image) {
-          auto child = gtk_widget_get_first_child(GTK_WIDGET(iconBox_));
-          if (child) gtk_widget_unparent(child);
-          gtk_box_append(iconBox_, image);
+          gtk_box_prepend(labelBox_, image);
         }
-      }
-      
-    }
+      }      
+    }*/
+
     static void *runWait_f(void *data){
       auto dialogObject = (Dialog<dialogClass> *)data;
       auto dialog = dialogObject->dialog();
@@ -116,33 +117,63 @@ private:
       void *response = NULL;
       do {
         response = g_object_get_data(G_OBJECT(dialog), "response");
+        if (exitDialogs) response = GINT_TO_POINTER(-1);
         usleep(2500);
       } while (!response);
       // hide
+      auto subClass = dialogObject->subClass_;
       
       if (GPOINTER_TO_INT(response) > 0){
-        auto subClass = dialogObject->subClass_;
-        Basic::context_function(subClass->asyncStart, data);
-        Basic::context_function(subClass->asyncEnd, data);
-        //Basic::destroy(dialog);
+        Basic::context_function(subClass->asyncYes, data);
+      } else {
+        Basic::context_function(subClass->asyncNo, data);
       }
       TRACE("run_f:: Response is %p\n", response);
-
+      // object will now be deleted.
       return response;
     }
 
-    void templateSetup(void){
-      // template class setup
-      // in main context:
-      mkTitle();
-      mkIcon();
-      mkLabel();
-      subClass_->content(dialog_, contentArea_);
-      subClass_->action(dialog_, actionArea_);
+
+
+    GtkWidget *buttonBox(const char *iconName, const char *tooltip, void *callback){
+      auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
+      auto paintable = Texture::load(iconName, 18);
+      auto image = gtk_image_new_from_paintable(paintable);
+      gtk_widget_set_size_request(image, 18,18);
+      gtk_widget_set_sensitive(image, false);
+      Basic::boxPack0(box, GTK_WIDGET(image), true, true, 1);
+      gtk_widget_set_tooltip_markup(GTK_WIDGET(box), tooltip);
+      // motion
+      auto motion = gtk_event_controller_motion_new();
+      gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
+      gtk_widget_add_controller(GTK_WIDGET(box), motion);
+      g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (Basic::sensitive), (void *)image);
+      g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (Basic::insensitive), (void *)image);
+      // click
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (callback), (void *)this);
+      gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
+      
+      return GTK_WIDGET(box);
     }
 
+    GtkWidget *closeBox(void){
+      return buttonBox("close", _("Cancel"), (void *)cancel);
+    }
+protected:
+    GtkWidget *applyBox(void){
+      return buttonBox("apply", _("Apply"), (void *)ok);
+    }
+private:
     void mkWindow(void){
         dialog_ = GTK_WINDOW(gtk_window_new());
+        gtk_window_set_decorated(dialog_, false);
+        auto frame = GTK_FRAME(gtk_frame_new(NULL));
+        gtk_frame_set_label_align(frame, 1.0);
+        gtk_frame_set_label_widget(frame, closeBox());
+ 
+        gtk_window_set_child(dialog_, GTK_WIDGET(frame));
         
         if (parent_){
           //gtk_window_set_modal (GTK_WINDOW (dialog_), TRUE);
@@ -153,13 +184,12 @@ private:
 
         auto mainBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(mainBox), false);
-        gtk_window_set_child(dialog_, GTK_WIDGET(mainBox));
+        gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(mainBox));
 
-        iconBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_widget_set_hexpand(GTK_WIDGET(iconBox_), true);
-        gtk_widget_set_valign (GTK_WIDGET(iconBox_),GTK_ALIGN_CENTER);
-        gtk_box_append(mainBox, GTK_WIDGET(iconBox_));
-
+        labelBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_vexpand(GTK_WIDGET(labelBox_), true);
+        gtk_widget_set_valign (GTK_WIDGET(labelBox_),GTK_ALIGN_CENTER);
+        gtk_box_append(mainBox, GTK_WIDGET(labelBox_));
 
 
         contentArea_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -177,39 +207,70 @@ private:
         gtk_widget_set_halign (GTK_WIDGET(actionArea_),GTK_ALIGN_END);
         gtk_box_append(vbox2, GTK_WIDGET(actionArea_));
 
-        auto no = Basic::mkButton("emblem-redball", _("Cancel"));
-        gtk_box_append(GTK_BOX (actionArea_),GTK_WIDGET(no));
-        gtk_widget_set_halign (GTK_WIDGET(no),GTK_ALIGN_END);
-        g_signal_connect(G_OBJECT (no), "clicked", G_CALLBACK(cancel), this);
-        g_object_set_data(G_OBJECT(dialog_), "no", no);
-
-
-        auto yes = Basic::mkButton("emblem-greenball", _("Accept"));
-        gtk_box_append(GTK_BOX (actionArea_),GTK_WIDGET(yes));
-        gtk_widget_set_halign (GTK_WIDGET(yes),GTK_ALIGN_END);
-        g_signal_connect(G_OBJECT (yes), "clicked", G_CALLBACK(ok), this);
-        g_object_set_data(G_OBJECT(dialog_), "yes", yes);
-
         return;
     }
 
 
     static void
-    cancel (GtkButton *button, gpointer data) {
-      auto subClass = (Dialog<dialogClass> *)data;
-      auto dialog = subClass->dialog();
+    cancel (GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data) {
+      auto object = (Dialog<dialogClass> *)data;
+      auto dialog = object->dialog();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(-1));
 
     }
 
     static void
-    ok (GtkButton *button, gpointer data) {
-      auto subClass = (Dialog<dialogClass> *)data;
-      auto dialog = subClass->dialog();
+    ok (GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data) {
+      auto object = (Dialog<dialogClass> *)data;
+      auto dialog = object->dialog();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1));
     }
 
   };
+
+  template <class dialogClass>
+  class DialogEntry : public Dialog<dialogClass>{
+
+    public:
+    DialogEntry(void){
+       auto entryBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
+       gtk_widget_set_hexpand(GTK_WIDGET(entryBox), false);
+       gtk_widget_set_halign (GTK_WIDGET(entryBox),GTK_ALIGN_CENTER);
+       gtk_box_append(GTK_BOX (this->contentArea()), GTK_WIDGET(entryBox));
+        
+       auto entry = GTK_ENTRY(gtk_entry_new ());
+       Basic::boxPack0(entryBox, GTK_WIDGET(entry), true, true, 5);
+       //gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entry));
+       gtk_widget_set_halign (GTK_WIDGET(entry),GTK_ALIGN_CENTER);
+       g_object_set_data(G_OBJECT(this->dialog()),"entry", entry);
+       g_signal_connect (G_OBJECT (entry), "activate", 
+                ENTRY_CALLBACK (this->activate), this->dialog());
+       auto apply = this->applyBox();
+       gtk_box_append(GTK_BOX (entryBox), apply);
+       
+       g_object_set_data(G_OBJECT(entry),"dialog", this->dialog());
+       /*g_signal_connect (G_OBJECT (entry), "activate", 
+                ENTRY_CALLBACK (activate_entry), (void *)dialog);*/
+      gtk_widget_realize(GTK_WIDGET(this->dialog()));
+      Basic::setAsDialog(GTK_WIDGET(this->dialog()), "dialog", "Dialog");
+      gtk_window_present(this->dialog());
+
+    }
+    private:
+    static void activate(GtkEntry *entry, void *dialog){
+      g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
+    }
+  };
+
+  
 }
 #endif
 

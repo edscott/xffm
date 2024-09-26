@@ -22,40 +22,14 @@ public:
       pthread_detach(thread);*/
     }
 
-     static void *asyncStart(void *data){
+     static void *asyncYes(void *data){
       DBG("%s", "hello world\n");
-      sleep(1);
       return NULL;
     }
 
-    static void *asyncEnd(void *data){
+    static void *asyncNo(void *data){
       DBG("%s", "goodbye world\n");
       return NULL;
-    }
-
-
-    void content(GtkWindow *dialog, GtkBox *contentArea){
-
-       auto entryBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-       gtk_widget_set_hexpand(GTK_WIDGET(entryBox), false);
-       gtk_widget_set_halign (GTK_WIDGET(entryBox),GTK_ALIGN_CENTER);
-       gtk_box_append(GTK_BOX (contentArea), GTK_WIDGET(entryBox));
-
-       auto entryLabel = GTK_LABEL(gtk_label_new ("foo"));
-       gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entryLabel));
-       gtk_widget_set_halign (GTK_WIDGET(entryLabel),GTK_ALIGN_START);
-        
-       auto entry = GTK_ENTRY(gtk_entry_new ());
-       gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entry));
-       gtk_widget_set_halign (GTK_WIDGET(entryLabel),GTK_ALIGN_START);
-       g_object_set_data(G_OBJECT(dialog),"entry", entry);
-       
-       g_object_set_data(G_OBJECT(entry),"dialog", dialog);
-       g_signal_connect (G_OBJECT (entry), "activate", 
-                ENTRY_CALLBACK (activate_entry), (void *)dialog);
-
-    }
-    void action(GtkWindow *dialog, GtkBox *actionArea){
     }
  
 private:

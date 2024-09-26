@@ -68,7 +68,8 @@ namespace xf {
     test(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto dialogObject = new Dialog<EntryResponse>(GTK_WINDOW(MainWidget));
+      auto dialogObject = new DialogEntry<EntryResponse>;
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
       DBG("create dialogObject=%p\n", dialogObject); 
       dialogObject->run();
 
@@ -102,6 +103,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       gtk_widget_set_visible(MainWidget, FALSE);
       gtk_window_destroy(GTK_WINDOW(MainWidget));
+      exitDialogs = true;
     }
 
   };

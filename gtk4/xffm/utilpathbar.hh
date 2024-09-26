@@ -239,20 +239,7 @@ namespace xf {
         return FALSE;
 
     }
-    /* legacy
-    static gboolean
-    pathbarGo (
-              GtkEventControllerLegacy* self,
-              GdkEvent* event,
-              gpointer data ) 
-    {
-        auto eventBox = GTK_BOX(data);
-        auto type = gdk_event_get_event_type(event);
-        if (type != GDK_BUTTON_RELEASE) return FALSE;
-        TRACE("button release...\n");
 
-        return TRUE;
-    }*/
     public:
 
   private:

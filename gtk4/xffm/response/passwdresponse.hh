@@ -10,7 +10,7 @@ public:
     const char *iconName(void){ return "dialog-authentication";}
     const char *label(void){ return _("Enter password");}
 
-    static void *asyncStart(void *data){
+    static void *asyncYes(void *data){
       auto dialogObject = (Dialog<PasswordDialog> *)data;
       auto dialog = dialogObject->dialog();
       
@@ -39,35 +39,14 @@ public:
       return NULL;
     }
 
-
-    static void *asyncEnd(void *dialog){
-      TRACE("%s", "goodbye world\n");
+    static void *asyncNo(void *data){
+      auto dialogObject = (Dialog<PasswordDialog> *)data;
+      auto dialog = dialogObject->dialog();
+      // Cancel
+      // send interrupt signal to parent
+      pid_t parent = getppid();
+      kill(parent, SIGINT);
       return NULL;
-    }
-
-
-    void content(GtkWindow *dialog, GtkBox *contentArea){
-
-       auto entryBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-       gtk_widget_set_hexpand(GTK_WIDGET(entryBox), false);
-       gtk_widget_set_halign (GTK_WIDGET(entryBox),GTK_ALIGN_CENTER);
-       gtk_box_append(GTK_BOX (contentArea), GTK_WIDGET(entryBox));
-
-        
-       auto entry = GTK_ENTRY(gtk_entry_new ());
-       gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entry));
-       gtk_widget_set_halign (GTK_WIDGET(entry),GTK_ALIGN_START);
-       g_object_set_data(G_OBJECT(dialog),"entry", entry);
-       gtk_entry_set_visibility (entry, false);
-       
-       
-       g_object_set_data(G_OBJECT(entry),"dialog", dialog);
-       g_signal_connect (G_OBJECT (entry), "activate", 
-                ENTRY_CALLBACK (activate), (void *)dialog);
-
-    }
-
-    void action(GtkWindow *dialog, GtkBox *actionArea){
     }
  
 private:
@@ -101,12 +80,15 @@ public:
           }
       } 
       
-      auto dialogObject = new Dialog<PasswordDialog>(NULL);
+      auto dialogObject = new DialogEntry<PasswordDialog>;
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      auto dialog = dialogObject->dialog();
+      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
+      gtk_entry_set_visibility (entry, false);
+
+      
       TRACE("create dialogObject=%p\n", dialogObject); 
       dialogObject->setLabelText(string);
-      auto dialog = dialogObject->dialog();
-      auto no = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), "no"));
-      gtk_widget_set_visible(no, false);
       
       dialogObject->run();
       while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)

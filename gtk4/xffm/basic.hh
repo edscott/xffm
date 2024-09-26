@@ -15,6 +15,15 @@ private:
     }
 public:
 
+    static void sensitive(GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data){ gtk_widget_set_sensitive(GTK_WIDGET(data), true);}
+    static void insensitive(GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data){ gtk_widget_set_sensitive(GTK_WIDGET(data), false);}
+
     static void present(GtkWindow *window){
       context_function(present_f, (void *)window);
     }

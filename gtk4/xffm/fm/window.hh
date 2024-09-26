@@ -240,6 +240,7 @@ private:
       if (g_list_length(pageList_) == 0){
         gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
         gtk_window_destroy(mainWindow_);
+        exitDialogs = true;
         //exit(0);
       }
       

@@ -64,5 +64,6 @@ static GtkWindow *MainDialog = NULL;
 static GList *textviewList = NULL;
 static GList *run_button_list = NULL;
 static GHashTable *iconPathHash = NULL;
+static bool exitDialogs = false;
 
 #endif
