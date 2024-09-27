@@ -158,7 +158,6 @@ namespace xf {
         popover = gridView_p->myMenu_->mkMenu(markup);
         g_object_set_data(G_OBJECT(popover), "info", info);
 
-        g_object_set_data(G_OBJECT(popover), "info", info);
         setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
         g_free(markup);
         g_object_set_data(G_OBJECT(menuBox), "menu", popover);

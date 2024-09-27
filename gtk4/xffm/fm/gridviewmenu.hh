@@ -61,6 +61,7 @@ namespace xf {
         {_("Rename"),(void *) move}, 
         {_("Copy"),(void *) copy}, 
         {_("Cut"),(void *) cut}, 
+        {_("Delete"),(void *) remove}, 
         {NULL, NULL}
       };
       return menuCallbacks_;
@@ -95,8 +96,7 @@ namespace xf {
     private:
 
     static char *getPath(GtkPopover *menu){
-        auto imageBox = G_OBJECT(g_object_get_data(G_OBJECT(menu), "imageBox"));
-        auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(imageBox), "info"));
+        auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
         auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
         return g_file_get_path(file);
     }
@@ -136,6 +136,20 @@ namespace xf {
       DBG("path is %s\n");
       pathResponse<lnDialog>::action(path);
       g_free(path);
+    }
+
+    static void remove(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto path = getPath(menu);
+      auto info = g_object_get_data(G_OBJECT(menu), "info");
+      DBG("path = %s\n", path);
+      auto dialogObject = new DialogButtons<rmResponse>;
+      auto dialog = dialogObject->dialog();
+      g_object_set_data(G_OBJECT(dialog), "path", path);
+      g_object_set_data(G_OBJECT(dialog), "info", info);
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->run();
     }
 
     static void copy(GtkButton *button, void *data){
