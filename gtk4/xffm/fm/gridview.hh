@@ -133,7 +133,8 @@ namespace xf {
       auto gridView_p = (GridView *)data;
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
-      auto imageBox = gtk_event_controller_get_widget(eventController);
+      auto box = gtk_event_controller_get_widget(eventController);
+      auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(box), "menuBox"));
 
       auto modType = gdk_event_get_modifier_state(event);
 
@@ -146,22 +147,22 @@ namespace xf {
       TRACE("gestureClick; path=%p\n", gridView_p->path());
       TRACE("menu for %s\n", gridView_p->path());
 
-      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(imageBox), "info"));
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menuBox), "info"));
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
       auto path = g_file_get_path(file);
 
-      auto popover = g_object_get_data(G_OBJECT(imageBox), "menu");
+      auto popover = g_object_get_data(G_OBJECT(menuBox), "menu");
       if (!popover){
         
         auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
         popover = gridView_p->myMenu_->mkMenu(markup);
-        g_object_set_data(G_OBJECT(popover), "imageBox", imageBox);
+        g_object_set_data(G_OBJECT(popover), "info", info);
 
         g_object_set_data(G_OBJECT(popover), "info", info);
         setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
         g_free(markup);
-        g_object_set_data(G_OBJECT(imageBox), "menu", popover);
-        gtk_widget_set_parent(GTK_WIDGET(popover), imageBox);
+        g_object_set_data(G_OBJECT(menuBox), "menu", popover);
+        gtk_widget_set_parent(GTK_WIDGET(popover), menuBox);
       }
       auto abutton = g_object_get_data(G_OBJECT(popover), _("auto"));
           TRACE("data get %p %s --> %p\n", popover, _("auto"), abutton);
@@ -262,16 +263,21 @@ namespace xf {
           gtk_widget_unparent(GTK_WIDGET(l->data));
         }
 
+        auto menuBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        g_object_set_data(G_OBJECT(imageBox), "menuBox", menuBox);
         g_object_set_data(G_OBJECT(box), "imageBox", imageBox);
+        g_object_set_data(G_OBJECT(box), "menuBox", menuBox);
+        gtk_widget_add_css_class(menuBox, "gridviewBox");
         gtk_widget_add_css_class(imageBox, "gridviewBox");
+        gtk_box_append(GTK_BOX(menuBox), imageBox);
 
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_widget_add_css_class(labelBox, "gridviewBox");
         g_object_set_data(G_OBJECT(box), "labelBox", labelBox);
         
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-        g_object_set_data(G_OBJECT(imageBox), "info", info);
+        g_object_set_data(G_OBJECT(menuBox), "info", info);
         auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
         auto path = g_file_get_path(file);
 
@@ -333,7 +339,7 @@ namespace xf {
 
         Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
         Basic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
-        Basic::boxPack0(GTK_BOX(box), imageBox, FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(box), menuBox, FALSE, FALSE, 0);    
         Basic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);  
   
 
@@ -366,7 +372,7 @@ namespace xf {
 
         addMotionController(labelBox);
         // FIXME:: gray mask falls onto popover:
-        // addMotionController(imageBox);
+         addMotionController(imageBox);
         addGestureClick(imageBox, object, gridView_p);
         addGestureClickMenu(imageBox, object, gridView_p);
         g_free(path);
