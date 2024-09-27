@@ -27,6 +27,14 @@ public:
         gdk_clipboard_set_text (clipBoard_, "");
     }
 
+    static void
+    clearPaste(void){
+        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        // for each file, send monitor the changed signal
+        // this, to update icon
+        c->clearClipBoard();
+    }
+
     void resetClipBoardCache(const char *text){
         g_free(clipBoardCache_);
         clipBoardCache_ = g_strdup(text);
@@ -46,9 +54,13 @@ public:
       auto output = Child::getOutput();
       Print::showText(output);
       Print::print(output, "blue/default_output_bg", g_strdup("\n "));
-      auto text = g_strconcat(" ", _("Clipboard contents"), ":\n", NULL);
-      Print::print(output, "edit-paste", "blue/default_output_bg", text);
-      Print::print(output, "brown/default_output_bg", g_strdup(string));
+      if (!string || strlen(string) == 0){
+        Print::print(output, "edit-paste", "blue/default_output_bg", g_strdup(_("Clipboard is empty.")) );
+      } else {
+        auto text = g_strconcat(" ", _("Clipboard contents"), ":\n", NULL);
+        Print::print(output, "edit-paste", "blue/default_output_bg", text);
+        Print::print(output, "brown/default_output_bg", g_strdup(string));
+      }
     }
 
     static void
@@ -77,7 +89,31 @@ public:
         }
         if (files) g_strfreev(files);
     }
-    
+     
+    static void
+    copyClipboardPath(const char *path){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      gdk_clipboard_set_text (clipBoardTxt, "");
+      gchar *data = g_strdup_printf("copy\n");
+      Basic::concat(&data, URIFILE);
+      Basic::concat(&data, path);
+      Basic::concat(&data, "\n");
+      gdk_clipboard_set_text (clipBoardTxt, data);
+      g_free(data);
+    }
+     
+    static void
+    cutClipboardPath(const char *path){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      gdk_clipboard_set_text (clipBoardTxt, "");
+      gchar *data = g_strdup_printf("move\n");
+      Basic::concat(&data, URIFILE);
+      Basic::concat(&data, path);
+      Basic::concat(&data, "\n");
+      gdk_clipboard_set_text (clipBoardTxt, data);
+      g_free(data);
+    }
+   
     static void
     copyClipboardTxt(GtkTextView *textview){ 
       auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());

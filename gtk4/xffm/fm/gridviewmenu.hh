@@ -59,6 +59,8 @@ namespace xf {
         {_("Duplicate"),(void *) duplicate}, 
         {_("Link"),(void *) link}, 
         {_("Rename"),(void *) move}, 
+        {_("Copy"),(void *) copy}, 
+        {_("Cut"),(void *) cut}, 
         {NULL, NULL}
       };
       return menuCallbacks_;
@@ -107,7 +109,6 @@ namespace xf {
       auto path = getPath(menu);
       new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
       g_free(path);
- 
     }
 
     static void duplicate(GtkButton *button, void *data){
@@ -117,7 +118,6 @@ namespace xf {
       DBG("path is %s\n");
       pathResponse<cpDialog>::action(path);
       g_free(path);
-
     }
 
     static void move(GtkButton *button, void *data){
@@ -127,7 +127,6 @@ namespace xf {
       DBG("path is %s\n");
       pathResponse<mvDialog>::action(path);
       g_free(path);
-
     }
 
     static void link(GtkButton *button, void *data){
@@ -137,7 +136,22 @@ namespace xf {
       DBG("path is %s\n");
       pathResponse<lnDialog>::action(path);
       g_free(path);
+    }
 
+    static void copy(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto path = getPath(menu);
+      ClipBoard::copyClipboardPath(path);
+      g_free(path);
+    }
+
+    static void cut(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto path = getPath(menu);
+      ClipBoard::cutClipboardPath(path);
+      g_free(path);
     }
 
     static void 

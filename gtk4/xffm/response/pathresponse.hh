@@ -26,8 +26,13 @@ public:
           Print::printError(output, string);
         } else {
           if (strcmp(op, "cp") == 0 || strcmp(op, "mv") == 0) {          
-            char *arg[]={(char *)op, (char *)"-v", path, newFile, NULL};
-            Run<bool>::thread_run(output, (const char **)arg, false);
+            if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+              char *arg[]={(char *)op, (char *)"-a", (char *)"-v", path, newFile, NULL};
+              Run<bool>::thread_run(output, (const char **)arg, false);
+            } else {
+              char *arg[]={(char *)op, (char *)"-v", path, newFile, NULL};
+              Run<bool>::thread_run(output, (const char **)arg, false);
+            }
           } else if (strcmp(op, "ln") == 0) {          
             char *arg[]={(char *)op, (char *)"-s", (char *)"-v", path, newFile, NULL};
             Run<bool>::thread_run(output, (const char **)arg, false);

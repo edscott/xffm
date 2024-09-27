@@ -1,6 +1,7 @@
 #ifndef MAINMENU_HH
 #define MAINMENU_HH
 #include "menu.hh"
+// This menu is not using the Menu class template.
 namespace xf {
   class MainMenu {
     public:
@@ -8,6 +9,8 @@ namespace xf {
       static const char *keys_[] = { // Order is important.
         _("Open in New Window"),  // removed then from vbutton box
         "test",
+        _("Show Clipboard"), // 
+        _("Clear Clipboard History"), // 
         _("Copy"), 
         _("Cut"), 
         _("Paste"), 
@@ -22,6 +25,7 @@ namespace xf {
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
         {_("Open in New Window"),(void *) DUAL_VIEW}, 
+        {_("Show Clipboard"),(void *) NULL}, // 
         {_("Copy"), (void *) EDIT_COPY},
         {_("Cut"),(void *) EDIT_CUT}, 
         {_("Paste"),(void *) EDIT_PASTE}, 
@@ -37,6 +41,8 @@ namespace xf {
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
         {_("Open in New Window"),(void *)openXffmMain}, 
         {"test",(void *)test},
+        {_("Show Clipboard"),(void *) showPaste}, 
+        {_("Clear Clipboard History"),(void *) clearPaste}, 
         {_("Copy"), (void *) NULL},
         {_("Cut"),(void *) NULL}, 
         {_("Paste"),(void *) NULL}, 
@@ -51,6 +57,7 @@ namespace xf {
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
         {_("Open in New Window"),(void *) NULL}, 
+        {_("Show Clipboard"),(void *) NULL}, // 
         {_("Copy"), (void *) NULL},
         {_("Cut"),(void *) NULL}, 
         {_("Paste"),(void *) NULL}, 
@@ -104,6 +111,20 @@ namespace xf {
       gtk_widget_set_visible(MainWidget, FALSE);
       gtk_window_destroy(GTK_WINDOW(MainWidget));
       exitDialogs = true;
+    }
+
+    static void
+    showPaste(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      gtk_popover_popdown(menu);
+      ClipBoard::printClipBoard();
+    }
+
+    static void
+    clearPaste(GtkButton *self, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      gtk_popover_popdown(menu);
+      ClipBoard::clearPaste();
     }
 
   };
