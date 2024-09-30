@@ -34,6 +34,7 @@ public:
     ~OpenWith (void){
        gtk_widget_set_visible(GTK_WIDGET(dialog_), FALSE);
        g_free(path_);
+       MainDialog = NULL;
        gtk_window_destroy(dialog_);
     }
 
@@ -47,6 +48,7 @@ public:
       timeout_ = 10;
 
       dialog_ = GTK_WINDOW(gtk_window_new ());
+      MainDialog = dialog_;
       gtk_window_set_title (GTK_WINDOW (dialog_), windowTitle);
       g_signal_connect (G_OBJECT (dialog_), "close-request", G_CALLBACK (OpenWith::dialogClose), this);
 
@@ -102,7 +104,7 @@ public:
       auto child = Child::getChild();
       buttonSpace = Child::getButtonSpace(child);
       prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
-      g_object_set_data(G_OBJECT(child), "prompt", prompt_p);
+      g_object_set_data(G_OBJECT(child), "prompt", prompt_p); // Flexible prompt object.
       auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
       auto label2 = GTK_LABEL(gtk_label_new (windowTitle));

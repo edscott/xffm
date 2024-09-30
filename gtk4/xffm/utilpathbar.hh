@@ -33,9 +33,11 @@ namespace xf {
           if (historyBack){
             if (strcmp(path, (const char *)historyBack->data) != 0){
               historyBack = g_list_prepend(historyBack, g_strdup(path));
+              TRACE("updatePathbar: 1 updating historyBack with path = %s\n", path);
             }
           } else {
               historyBack = g_list_prepend(historyBack, g_strdup(path));
+              TRACE("updatePathbar: 2 updating historyBack with path = %s\n", path);
           }
           g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
           // wipe next history 
@@ -137,9 +139,11 @@ namespace xf {
         // finally, add the menu item for each pathbar item.
         // This should only be done if no menu is already set
         // for the item.
+        // Also, should skip back, next and goto buttons.
         children_list = Basic::getChildren(pathbar);
         for (GList *children = children_list;children && children->data; children=children->next){
            auto widget = GTK_WIDGET(children->data);
+           if (g_object_get_data(G_OBJECT(widget), "skipMenu")) continue;
            if (g_object_get_data(G_OBJECT(widget), "menu")) continue;
            auto parent = widget;
            auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
@@ -253,12 +257,12 @@ namespace xf {
         // Take window width.
         if (gtk_widget_get_realized(GTK_WIDGET(MainWidget))){
           if (!gtk_widget_compute_bounds(GTK_WIDGET(MainWidget), GTK_WIDGET(MainWidget), &bounds)) {
-            DBG("***Error:: gtk_widget_compute_bounds(MainWidget)\n");
+            DBG("***Error:: gtk_widget_compute_bounds(MainWidget). Widget realized?\n");
           }
         }
       } else {
         if (!gtk_widget_compute_bounds(GTK_WIDGET(pathbar), GTK_WIDGET(pathbar), &bounds)) {
-          DBG("***Error:: gtk_widget_compute_bounds(pathbar)\n");
+          DBG("***Error:: gtk_widget_compute_bounds(pathbar). Widget realized?\n");
         }
       }
       TRACE("Window is realized =%d\n", gtk_widget_get_realized(MainWidget));
@@ -317,7 +321,7 @@ namespace xf {
             if (strcmp(name, "RFM_ROOT")==0) continue;
 
             if (!gtk_widget_compute_bounds(GTK_WIDGET(children->data), GTK_WIDGET(children->data), &bounds)) {
-              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
+              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds(). Widget realized?\n");
             }
 
             TRACE("#### width, allocaltion.width %f %f\n",width,  bounds.size.width);
@@ -336,7 +340,7 @@ namespace xf {
             if (strcmp(name, "RFM_ROOT")==0) continue;
 
             if (!gtk_widget_compute_bounds(GTK_WIDGET(children->data), GTK_WIDGET(children->data), &bounds)) {
-              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds()\n");
+              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds(). Widget realized?\n");
             }
             width -= bounds.size.width;
 
@@ -351,7 +355,7 @@ namespace xf {
         const gchar *fontSize = "";
         gchar *name = (gchar *)g_object_get_data(G_OBJECT(eventBox), "name");
         if (!name){
-          DBG("utilpathbar:357, name is null\n");
+          DBG("setPathButtonText: name is null\n");
         } else {
           if (strcmp(name, "RFM_ROOT")==0) {
               // no path means none is differentiated.

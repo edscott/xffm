@@ -144,11 +144,12 @@ namespace xf {
       auto path = getPath(menu);
       auto info = g_object_get_data(G_OBJECT(menu), "info");
       DBG("path = %s\n", path);
-      auto dialogObject = new DialogButtons<rmResponse>;
+      auto dialogObject = new DialogButtons<rmDialog>;
       auto dialog = dialogObject->dialog();
       g_object_set_data(G_OBJECT(dialog), "path", path);
       g_object_set_data(G_OBJECT(dialog), "info", info);
       dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
       dialogObject->run();
     }
 

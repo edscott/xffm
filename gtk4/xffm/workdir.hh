@@ -102,6 +102,7 @@ namespace xf {
       if (!MainWidget) return false;
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
+      TRACE("setWorkdir: path=%s, wd path=%s\n", path, wd);
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);

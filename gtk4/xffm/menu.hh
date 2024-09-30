@@ -144,6 +144,7 @@ namespace xf {
               gdouble y,
               gpointer data){
       auto menu = GTK_POPOVER(data);
+      
 
      auto paste = g_object_get_data(G_OBJECT(menu), _("Paste"));
      auto isTextView = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(menu), _("isTextView")));

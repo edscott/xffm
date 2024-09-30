@@ -104,8 +104,10 @@ namespace xf {
 
     static void // printIcon will free string.
     printError(GtkTextView *textview, gchar *string){
+      auto addSpace = g_strconcat(" ", string, NULL);
+      g_free(string);
       showText(textview);
-      printIcon(textview, "dialog-error", string);
+      printIcon(textview, "dialog-error", addSpace);
     }
 
     static void // 

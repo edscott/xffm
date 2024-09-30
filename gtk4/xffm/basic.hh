@@ -3,6 +3,11 @@
 namespace xf {
   class Basic {
 public:
+    static void setDialog(GtkWindow *dialog){
+    }
+    static void unsetDialog(GtkWindow *dialog){
+    }
+   
     static const gchar **
     getTerminalEditors(void) {
         static const gchar *editors_v[] = {

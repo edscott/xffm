@@ -1,6 +1,101 @@
 #ifndef PATHBAR_HH
 #define PATHBAR_HH
 namespace xf {
+
+
+  template <class dialogClass>
+  class DialogPrompt : public DialogTimeout<dialogClass>{
+    GtkTextView *input_;
+    GtkWidget *child_;
+    Prompt<dialogClass> *prompt_p;
+
+    public:
+    char *getText(void){return Print::inputText(input_);}
+
+    ~DialogPrompt(void){
+      delete prompt_p;
+    }
+    
+    DialogPrompt(void){
+      child_ = Child::getChild();
+      prompt_p = (Prompt<dialogClass> *) new Prompt<dialogClass>(child_);
+      g_object_set_data(G_OBJECT(child_), "prompt", prompt_p);
+      
+      
+      auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
+      gtk_widget_set_halign (GTK_WIDGET(hbox),GTK_ALIGN_CENTER);
+      input_ = prompt_p->input();
+      gtk_widget_set_size_request(GTK_WIDGET(input_), 200, -1);
+
+      Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(input_), TRUE, TRUE, 3);
+      gtk_box_append(GTK_BOX (this->contentArea()), GTK_WIDGET(hbox));
+      
+        
+       // fixme; use a keypress to filter enter and escape
+       //g_signal_connect (G_OBJECT (entry), "activate", 
+         //       ENTRY_CALLBACK (this->activate), this->dialog());
+       auto apply = this->applyBox();
+       gtk_box_append(GTK_BOX (hbox), apply);
+       
+       //g_object_set_data(G_OBJECT(entry),"prompt_p", this->dialog());
+       /*g_signal_connect (G_OBJECT (entry), "activate", 
+                ENTRY_CALLBACK (activate_entry), (void *)dialog);*/
+      gtk_widget_realize(GTK_WIDGET(this->dialog()));
+      Basic::setAsDialog(GTK_WIDGET(this->dialog()), "dialog", "Dialog");
+      gtk_window_present(this->dialog());
+
+    }
+
+    private:
+    /*static void activate(GtkEntry *entry, void *dialog){
+      g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
+    }*/
+  };
+
+
+class jumpResponse {
+    
+public:
+    const char *title(void){ return _("Go to");}
+    const char *iconName(void){ return "dialog-question";}
+    const char *label(void){ return _("Go to");}
+    static void action(const char *path){    
+
+      auto dialogObject = new DialogEntry<jumpResponse>;
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      auto dialog = dialogObject->dialog();
+      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
+      g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
+
+ //     dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
+      
+      dialogObject->run();
+    }
+    static void *asyncNo(void *data){
+      TRACE("asyncNo\n");
+      return NULL;
+    }
+    static void *asyncYes(void *data){
+      auto dialogObject = (DialogPrompt<jumpResponse> *)data;
+      auto dialog = dialogObject->dialog();
+      auto path = dialogObject->getText();
+      if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
+        if (!strlen(path)) return NULL;
+        Print::printError(Child::getOutput(), g_strdup_printf("%s (%s)\n", _("The location does not exist."), path));
+        g_free(path);
+        return NULL;
+      }
+      Workdir::setWorkdir(path, true);
+      gtk_window_present(GTK_WINDOW(MainWidget));
+      g_free(path);
+      TRACE("asyncYes\n");
+      return NULL;
+    }
+
+ };
+  
+
   class Pathbar : public UtilPathbar
   {
     using Workdir_c = Workdir;
@@ -21,11 +116,14 @@ namespace xf {
    void setHistoryNext(GList *historyNext){ historyNext_ = historyNext;}
     
    void addSignals(GtkBox *eventBox, const char *path){
+      g_object_set_data(G_OBJECT(eventBox), "skipMenu", GINT_TO_POINTER(1));
+      
       auto motionB = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(motionB, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(eventBox), motionB);
       g_signal_connect (G_OBJECT(motionB) , "leave", EVENT_CALLBACK (buttonPositive), NULL);
       g_signal_connect (G_OBJECT(motionB) , "enter", EVENT_CALLBACK (buttonNegative), NULL);
+
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (goJump), (void *)pathbar_);
@@ -95,6 +193,7 @@ namespace xf {
 
         // xffm:root button:
         auto pb_button = UtilBasic::pathbarLabelButton(".");
+        g_object_set_data(G_OBJECT(pb_button), "skipMenu", GINT_TO_POINTER(1));
 
         
         Basic::boxPack0 (pathbar_, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
@@ -106,17 +205,17 @@ namespace xf {
         gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
         g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (UtilPathbar::pathbar_white), (void *)pathbar_);
         g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (UtilPathbar::pathbar_blue), (void *)pathbar_);
-  
+    
         auto gesture1 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
         g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir_c::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
-        
+  /*     
         auto gesture3 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture3),3);
         g_signal_connect (G_OBJECT(gesture3) , "released", EVENT_CALLBACK (Workdir_c::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture3));
-        
+   */     
 
     }
   private:
@@ -128,7 +227,7 @@ namespace xf {
               gdouble y,
               gpointer data ) 
     {
-      //DBG("gojump\n");
+      TRACE("*** gojump\n");
       auto pathbar = GTK_WIDGET(data);
       auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
@@ -136,6 +235,7 @@ namespace xf {
       auto location = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "location"));
       auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "input"));
       auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
+      TRACE("gojump: path=%s\n", path);
       if (strcmp(path, "xffm:back") == 0){
          GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
          if (!historyBack){
@@ -181,11 +281,16 @@ namespace xf {
          }
       }
       if (strcmp(path, "xffm:goto") == 0){
-        Print::clear_text(GTK_TEXT_VIEW(input));
+        auto dialogObject = new DialogPrompt<jumpResponse>;
+        auto dialog = dialogObject->dialog();
+        dialogObject->setParent(GTK_WINDOW(MainWidget));
+        dialogObject->run();
+
+     /*   Print::clear_text(GTK_TEXT_VIEW(input));
         Print::print(GTK_TEXT_VIEW(input), g_strdup("cd ")); 
         gtk_widget_grab_focus(GTK_WIDGET(input));
 
-        Basic::flushGTK();
+        Basic::flushGTK();*/
       }
       
       return TRUE;

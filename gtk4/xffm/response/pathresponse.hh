@@ -6,7 +6,7 @@ class pathDialog {
 public:
 
     static void *asyncYesArg(void *data, const char *op){
-      auto dialogObject = (Dialog<pathDialog> *)data;
+      auto dialogObject = (DialogTimeout<pathDialog> *)data;
       auto dialog = dialogObject->dialog();
       
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
@@ -71,10 +71,11 @@ public:
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       auto path = (const char *)g_object_get_data(G_OBJECT(entry), "path");
       auto base = g_path_get_basename(path);
-      auto name = g_strconcat(_("Copy of"), " ", base, NULL);
+      //auto name = g_strconcat(_("Copy of"), " ", base, NULL);
       auto buffer = gtk_entry_get_buffer(entry);
-      gtk_entry_buffer_set_text(buffer, name, -1);
-      g_free(name);
+      //gtk_entry_buffer_set_text(buffer, name, -1);
+      gtk_entry_buffer_set_text(buffer, base, -1);
+      //g_free(name);
       auto string = g_strconcat("<span color=\"blue\"><b>",_("Duplicate"), " ", base, ":</b></span>", NULL);
       gtk_label_set_markup(label, string);
       g_free(base);
@@ -98,12 +99,12 @@ public:
 
     static void setDefaults(GtkWindow *dialog, GtkLabel *label){
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      auto path = (const char *)g_object_get_data(G_OBJECT(entry), "path");
+      auto path = (const char *)g_object_get_data(G_OBJECT(dialog), "path");
       auto base = g_path_get_basename(path);
-      auto name = g_strconcat(_("Rename"), " ", base, NULL);
+      //auto name = g_strconcat(_("Rename"), " ", base, NULL);
       auto buffer = gtk_entry_get_buffer(entry);
-      gtk_entry_buffer_set_text(buffer, name, -1);
-      g_free(name);
+      gtk_entry_buffer_set_text(buffer, base, -1);
+      //g_free(name);
       auto string = g_strconcat("<span color=\"blue\"><b>",_("Rename"), " ", base, ":</b></span>", NULL);
       gtk_label_set_markup(label, string);
       g_free(base);
@@ -129,10 +130,10 @@ public:
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       auto path = (const char *)g_object_get_data(G_OBJECT(entry), "path");
       auto base = g_path_get_basename(path);
-      auto name = g_strconcat(_("Link"), " ", base, NULL);
+      //auto name = g_strconcat(_("Link"), " ", base, NULL);
       auto buffer = gtk_entry_get_buffer(entry);
-      gtk_entry_buffer_set_text(buffer, name, -1);
-      g_free(name);
+      gtk_entry_buffer_set_text(buffer, base, -1);
+      //g_free(name);
       auto string = g_strconcat("<span color=\"blue\"><b>",_("symlink"), " ", base, ":</b></span>", NULL);
       gtk_label_set_markup(label, string);
       g_free(base);
@@ -163,15 +164,18 @@ public:
 
  };
 
-class rmResponse {
+class rmDialog {
   private:
     GtkButton *button_[4];
 public:
     const char *title(void){ return _("Delete");}
     const char *iconName(void){ return "dialog-question";}
-    const char *label(void){ return _("Delete");}
+    const char *label(void){ return _("Delete");
+    }
 
-    rmResponse(void){
+    ~rmDialog(void){
+    }
+    rmDialog(void){
       button_[0] = Basic::mkButton("dialog-warning", _("Shred")); //1
       button_[1] = Basic::mkButton("delete", _("Delete")); //2
       button_[2] = Basic::mkButton("user-trash", _("Trash")); //3
@@ -179,8 +183,17 @@ public:
     }
     GtkButton **getButtons(void){ return button_;}
     
+    static void setDefaults(GtkWindow *dialog, GtkLabel *label){
+      auto path = (const char *)g_object_get_data(G_OBJECT(dialog), "path");
+      auto base = g_path_get_basename(path);
+      auto string = g_strconcat("<span color=\"blue\"><b>",_("Delete"), ":\n", base, "</b></span>", NULL);
+      gtk_label_set_markup(label, string);
+      g_free(base);
+      g_free(string);
+    }
+    
     static void *asyncYes(void *data){
-      auto dialogObject = (Dialog<rmResponse> *)data;
+      auto dialogObject = (DialogTimeout<rmDialog> *)data;
       auto dialog = dialogObject->dialog();
       auto path = (char *)g_object_get_data(G_OBJECT(dialog), "path");
       int response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
@@ -212,12 +225,13 @@ public:
       return NULL;
     }
     static void *asyncNo(void *data){
-      auto dialogObject = (Dialog<rmResponse> *)data;
+      auto dialogObject = (DialogTimeout<rmDialog> *)data;
       auto dialog = dialogObject->dialog();
       auto path = (char *)g_object_get_data(G_OBJECT(dialog), "path");
       g_free(path);
       return NULL;
     }
 };
+
 }
 #endif

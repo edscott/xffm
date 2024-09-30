@@ -78,7 +78,9 @@ namespace xf {
         GFileEnumerator *dirEnum = 
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
-          DBG("*** Error::g_file_enumerate_children: %s\n", error_->message);
+          TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
+          Print::printError(Child::getOutput(), g_strdup(error_->message));
+          g_error_free(error_);
           return NULL;
         }
         GFile *outChild = NULL;
