@@ -1,6 +1,8 @@
 #ifndef ICONCOLORMENU_HH
 #define ICONCOLORMENU_HH
 namespace xf {
+  template <class Type> class Util;
+  template <class Type>
   class IconColorMenu {
     public:
     const char **keys(void){
@@ -23,9 +25,9 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
-        {_("Foreground color"),(void *) Util::terminalColors}, 
-        {_("Background color"), (void *) Util::terminalColors},
-        {_("Default Colors"),(void *) Util::defaultColors}, 
+        {_("Foreground color"),(void *) Util<Type>::terminalColors}, 
+        {_("Background color"), (void *) Util<Type>::terminalColors},
+        {_("Default Colors"),(void *) Util<Type>::defaultColors}, 
         {NULL, NULL}
       };
       return menuCallbacks_;

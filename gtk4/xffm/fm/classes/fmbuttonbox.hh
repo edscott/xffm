@@ -64,7 +64,7 @@ namespace xf {
         }
 
         auto colorButton = Basic::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
-        auto myColorMenu = new Menu<IconColorMenu>(_("Colors"));
+        auto myColorMenu = new Menu<IconColorMenu<bool> >(_("Colors"));
         myColorMenu->setMenu(colorButton);
         delete myColorMenu;
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(colorButton),  FALSE, FALSE, 0);
@@ -96,7 +96,7 @@ private:
         int value = gtk_range_get_value(range);
         if (value != GPOINTER_TO_INT(g_object_get_data(G_OBJECT(range), "valor"))){
           TRACE("getWorkdir\n");
-          auto wd = Workdir::getWorkdir();
+          auto wd = Workdir<bool>::getWorkdir();
           if (g_file_test(wd, G_FILE_TEST_EXISTS)) {
             // race condition here, workdir null or garbage.
             // Workdir::reset();      
@@ -138,7 +138,7 @@ private:
     }
     static void
     changeSize (GtkRange* self, gpointer user_data){
-      if (Workdir::pleaseWait()) return;
+      if (Workdir<bool>::pleaseWait()) return;
       auto value = gtk_range_get_value(self);
       Settings::setInteger("xfterm", "iconsize", value);
       
@@ -150,7 +150,7 @@ private:
       for (int i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(notebook, i);
         auto path = Child::getWorkdir(child);
-        Workdir::setWorkdir(path, child);
+        Workdir<bool>::setWorkdir(path, child);
                
       }
     }
@@ -160,12 +160,12 @@ private:
       //DBG("goHome....\n");
       auto child = Child::getChild();
       
-      //Workdir::setWorkdir(g_get_home_dir());
+      //Workdir<bool>::setWorkdir(g_get_home_dir());
         
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
       const char *v[]={"cd", g_get_home_dir(), NULL};
-      auto retval = Util::cd((const gchar **)v, child);
+      auto retval = Util<bool>::cd((const gchar **)v, child);
 
       auto path = Child::getWorkdir(child);
       // FIXME UtilPathbar::updatePathbar(path, pathbar, true);

@@ -22,19 +22,6 @@
 #include "templates.h"
 
 
-#include "runbutton.hh"
-
-#include "fm/fmbuttonbox.hh"
-#include "fm/pathbar.hh"
-#include "fm/prompt.hh"
-#include "fm/fmpage.hh"
-#include "window.hh"
-
-
-
-
-
-#include "fm/fm.hh"
 
 
 static void setupBindText(void){

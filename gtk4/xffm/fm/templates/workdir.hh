@@ -1,7 +1,7 @@
 #ifndef WORKDIR_HH
 #define WORKDIR_HH
 namespace xf {
-  //template <class GridviewClass, class PathbarClass>
+  template <class Type>
   class Workdir  {
     private:
       static void  updateGridView(const char *path){
@@ -23,11 +23,11 @@ namespace xf {
       }
 
       static void  updatePathbar(bool addHistory, void *pathbar_go){
-        UtilPathbar::updatePathbar(addHistory, pathbar_go);
+        UtilPathbar<Type>::updatePathbar(addHistory, pathbar_go);
       }
       static void  updatePathbar(const gchar *path, GtkBox *pathbar, 
           bool addHistory, void *pathbar_go){
-        UtilPathbar::updatePathbar(path, pathbar, addHistory, pathbar_go);
+        UtilPathbar<Type>::updatePathbar(path, pathbar, addHistory, pathbar_go);
       }
 
     public:

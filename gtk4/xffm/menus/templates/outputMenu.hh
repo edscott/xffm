@@ -1,6 +1,7 @@
 #ifndef OUTPUTMENU_HH
 #define OUTPUTMENU_HH
 namespace xf {
+  template <class Type> class Util;
   template <class Type> class MenuCallbacks;
   template <class Type> class OutputMenu {
     public:
@@ -35,9 +36,9 @@ namespace xf {
         {_("Clear"),(void *) MenuCallbacks<Type>::clearAllTxt}, 
         {_("Copy"),(void *) MenuCallbacks<Type>::copyTxt}, 
         {_("Select All"),(void *) MenuCallbacks<Type>::selectAllTxt}, 
-        {_("Foreground color"),(void *) Util::terminalColors}, 
-        {_("Background color"), (void *) Util::terminalColors},
-        {_("Default Colors"),(void *) Util::defaultColors}, 
+        {_("Foreground color"),(void *) Util<Type>::terminalColors}, 
+        {_("Background color"), (void *) Util<Type>::terminalColors},
+        {_("Default Colors"),(void *) Util<Type>::defaultColors}, 
         {_("Show Clipboard"),(void *) MenuCallbacks<Type>::showPaste}, 
         {NULL, NULL}
       };

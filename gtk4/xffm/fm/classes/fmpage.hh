@@ -24,7 +24,7 @@ namespace xf {
         gridScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         
         outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
-        output_ = Util::newTextView();
+        output_ = Util<bool>::newTextView();
        
         g_object_set_data(G_OBJECT(vpane_), "output", output_);
         g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
@@ -72,11 +72,11 @@ namespace xf {
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
         
         if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-          // too soon Util::setWorkdir(path);
+          // too soon Util<bool>::setWorkdir(path);
           g_object_set_data(G_OBJECT(box), "path", g_strdup(path));
         } else {
           g_object_set_data(G_OBJECT(box), "path", g_strdup(g_get_home_dir()));
-          // too soon Util::setWorkdir(g_get_home_dir());
+          // too soon Util<bool>::setWorkdir(g_get_home_dir());
         }
 
         auto *label = gtk_label_new(tag);

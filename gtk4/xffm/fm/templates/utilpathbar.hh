@@ -1,7 +1,7 @@
 #ifndef UTILPATHBAR_HH
 #define UTILPATHBAR_HH
 namespace xf {
-  
+  template <class Type>
   class UtilPathbar {
     public:
     ///////////////////   pathbar  ///////////////////////////////////

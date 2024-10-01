@@ -1,6 +1,7 @@
 #ifndef INPUTMENU_HH
 #define INPUTMENU_HH
 namespace xf {
+  template <class Type> class Util;
   template <class Type> class MenuCallbacks;
   template <class Type> class InputMenu {
     public:
@@ -43,9 +44,9 @@ namespace xf {
         {_("Cut"),(void *) MenuCallbacks<Type>::cutTxt}, 
         {_("Paste"),(void *) MenuCallbacks<Type>::pasteTxt}, 
         {_("Delete"),(void *) MenuCallbacks<Type>::deleteTxt}, 
-        {_("Foreground color"),(void *) Util::terminalColors}, 
-        {_("Background color"), (void *) Util::terminalColors},
-        {_("Default Colors"),(void *) Util::defaultColors}, 
+        {_("Foreground color"),(void *) Util<Type>::terminalColors}, 
+        {_("Background color"), (void *) Util<Type>::terminalColors},
+        {_("Default Colors"),(void *) Util<Type>::defaultColors}, 
         {_("Show Clipboard"),(void *) MenuCallbacks<Type>::showPaste}, 
         {NULL, NULL}
       };
