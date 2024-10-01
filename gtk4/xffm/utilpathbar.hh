@@ -1,8 +1,7 @@
 #ifndef UTILPATHBAR_HH
 #define UTILPATHBAR_HH
-#include "menu.hh"
-#include "fm/pathbarmenu.hh"
 namespace xf {
+  
   class UtilPathbar {
     public:
     ///////////////////   pathbar  ///////////////////////////////////

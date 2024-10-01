@@ -1,8 +1,5 @@
-#ifndef UTILWORKDIR_HH
-#define UTILWORKDIR_HH
-#include "fm/pathbarmenu.hh"
-
-#include "fm/gridview.hh"
+#ifndef WORKDIR_HH
+#define WORKDIR_HH
 namespace xf {
   //template <class GridviewClass, class PathbarClass>
   class Workdir  {

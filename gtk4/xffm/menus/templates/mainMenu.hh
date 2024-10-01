@@ -1,8 +1,9 @@
 #ifndef MAINMENU_HH
 #define MAINMENU_HH
-#include "menu.hh"
 // This menu is not using the Menu class template.
 namespace xf {
+  template <class Type> class RunButton;
+  template <class Type>
   class MainMenu {
     public:
     const char **keys(void){
@@ -99,7 +100,7 @@ namespace xf {
       auto buttonSpace = Child::getButtonSpace();
       auto xffm = g_strdup_printf("xffm -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
-      auto runButton = new (RunButton);
+      auto runButton = new (RunButton<Type>);
       runButton->init(runButton, xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }

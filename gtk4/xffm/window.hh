@@ -5,6 +5,7 @@
 #include <gio/gio.h>
 namespace xf {
 
+template <class Type> 
 class MainWindow: public FMbuttonBox {
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
@@ -301,7 +302,7 @@ private:
       auto newTabButton = Basic::newButton("list-add", _("New Tab"));
       auto newMenuButton = Basic::newMenuButton("open-menu", NULL);
 
-      auto myMainMenu = new Menu<MainMenu>(_("Main menu"));
+      auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
       myMainMenu->setMenu(newMenuButton);
       delete myMainMenu;
 

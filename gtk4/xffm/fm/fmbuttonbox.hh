@@ -189,7 +189,7 @@ private:
       auto terminal = Basic::getTerminal();
       pid_t childPid = Run<bool>::shell_command(output, terminal, false, false);
 
-      auto runButton = new (RunButton);
+      auto runButton = new (RunButton<bool>);
       runButton->init(runButton, terminal, childPid, output, workDir, buttonSpace);
       return;
     }
@@ -203,7 +203,7 @@ private:
       auto find = g_strdup_printf("xffm --find %s", workDir);
       pid_t childPid = Run<bool>::shell_command(output, find, false, false);
 
-      auto runButton = new (RunButton);
+      auto runButton = new (RunButton<bool>);
       runButton->init(runButton, find, childPid, output, workDir, buttonSpace);
       g_free(find);
       return;

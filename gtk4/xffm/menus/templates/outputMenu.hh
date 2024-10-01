@@ -1,18 +1,14 @@
-#ifndef INPUTMENU_HH
-#define INPUTMENU_HH
-#include "menu.hh"
+#ifndef OUTPUTMENU_HH
+#define OUTPUTMENU_HH
 namespace xf {
   template <class Type> class MenuCallbacks;
-  template <class Type> class InputMenu {
+  template <class Type> class OutputMenu {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("Clear"),
         _("Copy"), 
-        _("Cut"), // 
-        _("Paste"), // 
-        _("Delete"), // 
-        _("Select All"), //
+        _("Select All"), 
         _("Foreground color"), 
         _("Background color"), 
         _("Default Colors"), 
@@ -23,27 +19,22 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Select All"),(void *) NULL}, 
         {_("Clear"),(void *) NULL}, 
         {_("Copy"),(void *) NULL}, 
-        {_("Cut"),(void *) NULL}, 
-        {_("Paste"),(void *) NULL}, 
-        {_("Delete"),(void *) NULL}, 
+        {_("Select All"),(void *) NULL}, 
         {_("Foreground color"),(void *) NULL}, 
         {_("Background color"), (void *) NULL},
-        {_("Default Colors"),(void *) NULL}, 
+        {_("Default Color"),(void *) NULL}, 
+        {_("Show Clipboard"),(void *) NULL}, 
         {NULL, NULL}
       }; 
       return menuIconNames_;
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
-        {_("Select All"),(void *) MenuCallbacks<Type>::selectAllTxt}, 
         {_("Clear"),(void *) MenuCallbacks<Type>::clearAllTxt}, 
         {_("Copy"),(void *) MenuCallbacks<Type>::copyTxt}, 
-        {_("Cut"),(void *) MenuCallbacks<Type>::cutTxt}, 
-        {_("Paste"),(void *) MenuCallbacks<Type>::pasteTxt}, 
-        {_("Delete"),(void *) MenuCallbacks<Type>::deleteTxt}, 
+        {_("Select All"),(void *) MenuCallbacks<Type>::selectAllTxt}, 
         {_("Foreground color"),(void *) Util::terminalColors}, 
         {_("Background color"), (void *) Util::terminalColors},
         {_("Default Colors"),(void *) Util::defaultColors}, 
@@ -54,21 +45,25 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {_("Select All"),(void *) "input"}, 
-        {_("Clear"),(void *) "input"}, 
-        {_("Copy"),(void *) "input"}, 
-        {_("Cut"),(void *) "input"}, 
-        {_("Paste"),(void *) "input"}, 
-        {_("Delete"),(void *) "input"}, 
-        {_("Foreground color"),(void *) "inputFg"}, 
-        {_("Background color"), (void *) "inputBg"},
-        {_("Default Colors"),(void *) "input"}, 
+        {_("Clear"),(void *) "output"}, 
+        {_("Copy"),(void *) "output"}, 
+        {_("Select All"),(void *) "output"}, 
+        {_("Foreground color"),(void *) "outputFg"}, 
+        {_("Background color"), (void *) "outputBg"},
+        {_("Default Colors"),(void *) "output"}, 
+        {_("Show Clipboard"),(void *) NULL}, 
         {NULL, NULL}
       };
       return menuData_;      
     }
 
   private:
+    static void
+    copy(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+    }
+
   };
 
 

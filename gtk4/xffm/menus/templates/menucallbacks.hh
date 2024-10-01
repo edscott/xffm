@@ -1,10 +1,10 @@
 #ifndef MENUCALLBACKS_HH
 #define MENUCALLBACKS_HH
 namespace xf {
+  template <class Type> class MainWindow;
   template <class Type> class Run;
-  //template <class VbuttonClass, class PageClass> class MainWindow;
+  template <class Type> class RunButton;
   
-  //template <class VbuttonClass, class PageClass>
   template <class Type>
   class MenuCallbacks {
     public:
@@ -46,7 +46,7 @@ namespace xf {
     openNewTab(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto w = (MainWindow *)g_object_get_data(G_OBJECT(MainWidget), "MainWindow");
+      auto w = (MainWindow<Type> *)g_object_get_data(G_OBJECT(MainWidget), "MainWindow");
       auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
       if (!path){
         auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
@@ -161,7 +161,7 @@ private:
       auto buttonSpace = Child::getButtonSpace();
       auto xffm = g_strdup_printf("xffm -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
-      auto runButton = new (RunButton);
+      auto runButton = new (RunButton<Type>);
       runButton->init(runButton, xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }

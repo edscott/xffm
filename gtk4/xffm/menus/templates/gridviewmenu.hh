@@ -1,6 +1,5 @@
 #ifndef GRIDVIEWMENU_HH
 #define GRIDVIEWMENU_HH
-#include "menu.hh"
 namespace xf {
   template <class Type> class Prompt;
   template <class Type> class MenuCallbacks;

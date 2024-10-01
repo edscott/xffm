@@ -107,7 +107,7 @@ namespace xf {
         gchar ** commands = NULL;
         commands = Util::getVector(command, ";");
       TRACE("commands[0]: %s\n", commands[0]);
-        RunButton *runButton;
+        RunButton<bool> *runButton;
         for (gchar **c=commands; c && *c; c++){
             if (strncmp(*c,"cd", strlen("cd"))==0){
               auto w = Util::getVector(*c, " ");
@@ -155,7 +155,7 @@ namespace xf {
               childPID = Run<bool>::shell_command(output, *c, scrollup, showTextPane);
             }
             if (withRunButton) {
-              runButton = new (RunButton);
+              runButton = new (RunButton<bool>);
               runButton->init(runButton, *c, childPID, output, Child::getWorkdir(child), buttonSpace);
             }
             

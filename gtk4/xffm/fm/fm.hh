@@ -30,7 +30,7 @@ public:
       setEditor();
       setTerminal();
 
-      auto xffm = new(xf::MainWindow)(path);
+      auto xffm = new(xf::MainWindow<bool>)(path);
     }
 
     static const gchar *getEditor(){

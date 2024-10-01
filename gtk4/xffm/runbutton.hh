@@ -15,7 +15,7 @@ namespace xf {
 pthread_mutex_t rbl_mutex = PTHREAD_MUTEX_INITIALIZER; // run button list mutex
 
 
-class RunButton {
+template <class Type> class RunButton {
 private:
     GtkTextView *textview_ = NULL;
     GtkBox *buttonSpace_ = NULL;

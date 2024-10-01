@@ -22,49 +22,13 @@
 #include "templates.h"
 
 
-/*
-*/
-
-
-
-#include "bash.hh"
-
-
-
-#include "mime/mime.hh"
-#include "thread.hh"
-
-#include "progress.hh"
-#include "gio.hh"
-#include "clipboard.hh"
-#include "utilbasic.hh"
-
-#include "history.hh"
-#include "css.hh"
-#include "openwith.hh"        
-
-#include "menu.hh"
-#include "utilpathbar.hh"
-#include "bookmarks.hh"
-#include "fm/localdir.hh"
-#include "workdir.hh"
-
-#include "util.hh"
 #include "runbutton.hh"
 
-#include "fm/inputMenu.hh"
-#include "fm/gridviewmenu.hh"
-#include "fm/iconColorMenu.hh"
 #include "fm/fmbuttonbox.hh"
-#include "fm/pathbarmenu.hh"
 #include "fm/pathbar.hh"
 #include "fm/prompt.hh"
-#include "fm/outputMenu.hh"
-#include "fm/mainMenu.hh"
 #include "fm/fmpage.hh"
-//#include "fm/windowUtils.hh"
-#include "fm/window.hh"
-#include "fm/menucallbacks.hh"
+#include "window.hh"
 
 
 

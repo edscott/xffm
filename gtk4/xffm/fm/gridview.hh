@@ -1,6 +1,5 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
-#include "gridviewmenu.hh"
 
 namespace xf {
   template <class DirectoryClass>

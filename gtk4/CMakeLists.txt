@@ -14,7 +14,7 @@ include(cmake/pthreads.cmake)
 # debugging in lldb/gdb 
 # to avoid disabling ALPHA, set these options via environment
 # variable CXXFLAGS.
-set(CMAKE_CXX_FLAGS "-g -O0 -DUSE_GTK4")
+set(CMAKE_CXX_FLAGS "-g -O0 -std=c++17 -DUSE_GTK4")
 #set(CMAKE_CXX_FLAGS "-g -O0 -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED")
 #set(CMAKE_CXX_FLAGS "-g -O0")
 #set(CMAKE_CXX_FLAGS "-g -O3")

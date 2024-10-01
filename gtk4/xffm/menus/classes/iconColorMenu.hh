@@ -1,6 +1,5 @@
 #ifndef ICONCOLORMENU_HH
 #define ICONCOLORMENU_HH
-#include "menu.hh"
 namespace xf {
   class IconColorMenu {
     public:
