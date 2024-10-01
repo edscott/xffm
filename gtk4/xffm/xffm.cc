@@ -19,27 +19,16 @@
 //#undef ENABLE_THREAD_POOL
 
 #include "xffm.h"
+#include "templates.h"
 
 
 /*
 */
-#include "basic.hh"
-
-#include "tubo.hh"
 
 
-#include "icontheme.hh"
-#include "settings.hh"
-#include "child.hh"
-#include "texture.hh"
-#include "print.hh"
+
 #include "bash.hh"
-#include "run.hh"
 
-#include "response/dialog.hh"
-#include "response/entryresponse.hh"
-#include "response/passwdresponse.hh"
-#include "response/pathresponse.hh"
 
 
 #include "mime/mime.hh"

@@ -1,5 +1,7 @@
 #ifndef XF_TEXTURE_HH
 #define XF_TEXTURE_HH
+
+
 static bool greenLightPreview = true;
 namespace xf {
     class Texture {

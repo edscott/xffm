@@ -116,7 +116,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       DBG("path is %s\n", path);
-      pathResponse<cpDialog>::action(path);
+      dialogPath<cpResponse>::action(path);
       g_free(path);
     }
 
@@ -125,7 +125,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       DBG("path is %s\n", path);
-      pathResponse<mvDialog>::action(path);
+      dialogPath<mvResponse>::action(path);
       g_free(path);
     }
 
@@ -134,7 +134,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       DBG("path is %s\n", path);
-      pathResponse<lnDialog>::action(path);
+      dialogPath<lnResponse>::action(path);
       g_free(path);
     }
 
@@ -144,7 +144,7 @@ namespace xf {
       auto path = getPath(menu);
       auto info = g_object_get_data(G_OBJECT(menu), "info");
       DBG("path = %s\n", path);
-      auto dialogObject = new DialogButtons<rmDialog>;
+      auto dialogObject = new DialogButtons<rmResponse>;
       auto dialog = dialogObject->dialog();
       g_object_set_data(G_OBJECT(dialog), "path", path);
       g_object_set_data(G_OBJECT(dialog), "info", info);

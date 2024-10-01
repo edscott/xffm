@@ -2,7 +2,6 @@
 #define UTILWORKDIR_HH
 #include "fm/pathbarmenu.hh"
 
-#include "texture.hh"
 #include "fm/gridview.hh"
 namespace xf {
   //template <class GridviewClass, class PathbarClass>
