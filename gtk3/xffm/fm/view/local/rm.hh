@@ -212,7 +212,7 @@ private:
         gtk_container_add (GTK_CONTAINER (buttonbox), GTK_WIDGET(button));
 
         g_signal_connect (G_OBJECT (button), "clicked", 
-                G_CALLBACK ResponseClass<Type>::(responseAction), GINT_TO_POINTER(RM_YES));
+                G_CALLBACK (ResponseClass<Type>::responseAction), GINT_TO_POINTER(RM_YES));
 
         // Trash:
         button = Gtk<Type>::dialog_button ("user-trash", _("Trash"));
