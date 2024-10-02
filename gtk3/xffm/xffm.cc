@@ -115,6 +115,7 @@ static GList *customDialogs = NULL;
 static GtkWindow *MainDialog = NULL;
 static bool exitDialogs = false;
 
+#include "common/responseclass.hh"
 #include "common/compat.hh"
 #include "gtk/gtk3.hh"
 #include "common/common.hh"

@@ -1015,6 +1015,35 @@ public:
         g_free(command);
     }
 
+    static void *applyResponse(void *data){
+      DBG("applyResponse\n");
+      return NULL;
+    }
+    
+    static void
+    pathQuery(void *applyResponse, const gchar *path, const gchar *icon, const gchar *text, 
+            const gchar *label=_("New Name:"))
+    {
+        auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);
+        auto basename = g_path_get_basename(path);
+        entryResponse->setEntryDefault(basename);
+        g_free(basename);
+        entryResponse->setEntryLabel(label);
+
+        auto view =  (View<Type> *)g_object_get_data(G_OBJECT(localItemPopUp), "view");
+        // get page
+        auto page = view->page();
+        const gchar *wd = page->workDir();
+        if (!wd) wd = g_get_home_dir();
+        
+        entryResponse->setEntryBashFileCompletion(wd);
+        entryResponse->setInLineCompletion(1);
+
+        auto _path = g_strdup(path);
+        ResponseClass<Type>::runDialog(entryResponse->dialog(), (void *) applyResponse, (void *)_path);
+      
+    }
+
     static gchar *
     getPath(const gchar *path, const gchar *icon, const gchar *text, const gchar *label){
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);

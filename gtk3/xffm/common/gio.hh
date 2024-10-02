@@ -627,9 +627,7 @@ private:
         }
         g_free(path);
         g_free(arg);
-        DBG("unref file\n");
         g_object_unref(file);
-        DBG("unref file ok\n");
         // decrement async reference
         asyncReference--;
     }
