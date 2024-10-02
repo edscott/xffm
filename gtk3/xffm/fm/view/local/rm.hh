@@ -2,14 +2,10 @@
 # define XF_LOCALRM__HH
 #include "common/gio.hh"
 
-# define RM_NO                        0
-# define RM_YES                        1
-# define RM_YES_ALL                2
-# define SHRED_YES              3
-# define SHRED_YES_ALL          4
-# define TRASH_YES                5
-# define TRASH_YES_ALL                6
-# define RM_CANCEL                7
+# define RM_YES                 1
+# define SHRED_YES              2
+# define TRASH_YES              3
+# define RM_CANCEL              4
 namespace xf
 {
 template <class Type>
@@ -41,20 +37,24 @@ public:
             auto tpath = (GtkTreePath *)tmp->data;
             gtk_tree_model_get_iter(view->treeModel(), &iter, tpath);
             gtk_tree_model_get(view->treeModel(), &iter, PATH, &path, -1);
-            list = g_list_append(list, path);
+            list = g_list_append(list, g_strdup(path));
         }
+#if 1
+        rmQuery(view, list);
+#else
         while (list && g_list_length(list)>0) {
             list = rmQuery(view, list);
         }
+#endif
     }
 
 private:
-    static GList *
+    static void
     rmQuery(View<Type> *view, GList *list){
         TRACE("rmQuery: rm\n");
         if (!list || !g_list_length(list)) {
             g_list_free(list);
-            return NULL;
+            return;
         }
         auto text = g_strdup_printf(_("Delete %s"), (gchar *)list->data);
         auto message = g_list_length(list) > 1 ? 
@@ -62,32 +62,113 @@ private:
         "";
         auto rmDialog = createRemove(view, text, message, FALSE, g_list_length(list)>1);
         g_object_set_data(G_OBJECT(rmDialog), "list", list);
-        /* dialog specifics */
-        auto togglebutton=GTK_WIDGET(g_object_get_data(G_OBJECT(rmDialog), "togglebutton"));
-        if(g_list_length (list) < 2) {
-            gtk_widget_hide(togglebutton);
-        }
-        gtk_widget_show (GTK_WIDGET(rmDialog));
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
-        gint response = gtk_dialog_run(GTK_DIALOG(rmDialog));
-        gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), TRUE);
 
-        list = apply_action(rmDialog, response, list);
-        
-        gtk_widget_hide(GTK_WIDGET(rmDialog));
-        gtk_widget_destroy(GTK_WIDGET(rmDialog));
-        MainDialog = NULL;
-        
-        return list;
+        gtk_widget_show (GTK_WIDGET(rmDialog));
+        runDialog(rmDialog, (void *) applyResponse, (void *)list);
+        return;
    }
 
-    static
-    GtkDialog *
-    createRemove (View<Type> *view, const gchar *text, const gchar *message, gboolean always, gboolean multiple) {
+    static void *
+    applyResponse(void *data){
+      void **arg = (void **)data;
+      auto dialog = GTK_WINDOW(arg[0]);
+      //auto response_f = ((*)(void *))arg[1];
+      auto list = (GList *)(arg[2]);
+
+      gint response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
+      gtk_widget_hide(GTK_WIDGET(dialog));
+      MainDialog = NULL;
+      switch (response) {
+          case TRASH_YES: // Trash operation
+              if (!Gio<Type>::execute(list, MODE_TRASH)){
+                  ERROR("local/rm.hh::Cannot trash\n");
+              }
+              break;
+          case RM_YES:// rm operation
+          {
+              if (!Gio<Type>::execute(list, MODE_RM)){
+                  ERROR("local/rm.hh::Cannot delete\n");
+              }
+              break;
+          }
+          case SHRED_YES: // Shred operation
+              if (!Gio<Type>::execute(list, MODE_SHRED)){
+                  ERROR("local/rm.hh::Cannot shred\n");
+              }
+             break;
+          case RM_CANCEL:
+              TRACE( "remove cancelled\n");
+              break;
+          default:
+             TRACE( "**default : cancel remove all\n");
+             break;
+      }
+      for (auto l=list; l && l->data; l=l->next) g_free(l->data);         
+      g_list_free(list);
+      g_free(arg);
+      return GINT_TO_POINTER(response);
+    }
+    
+    static void *run_f(void *data){
+      void **arg = (void **)data;
+      auto dialog = GTK_WINDOW(arg[0]);
+      auto response_f = PTHREAD_CALLBACK(arg[1]);
+      //auto response_data = arg[2];
+      void *response = NULL;
+      do {
+        response = g_object_get_data(G_OBJECT(dialog), "response");
+        if (exitDialogs) response = GINT_TO_POINTER(-1);
+        usleep(2500);
+      } while (!response);
+      Util<Type>::context_function(response_f, data);
+      
+      TRACE("run_f:: Response is %p\n", response);
+      return response;
+    }
+      
+
+
+    static void *runWait_f(void *data){
+      void **arg = (void **)data;
+      auto dialog = GTK_WINDOW(arg[0]);
+      //auto response_f = ((*)(void *))arg[1];
+      //auto response_data = arg[2];
+    
+      TRACE("runWait_f...\n");
+      pthread_t thread;
+      int retval = pthread_create(&thread, NULL, run_f, data);
+      void *response_p;
+      pthread_join(thread, &response_p);
+      TRACE("run joined, *response_p = %p\n", response_p);
+       
+      gtk_widget_hide(GTK_WIDGET(dialog));
+      gtk_widget_destroy(GTK_WIDGET(dialog));
+      MainDialog = NULL;
+      return NULL;
+    }
+
+    static void runDialog(GtkWindow *dialog, void *response_f, void *data){
+        gtk_widget_show (GTK_WIDGET(dialog));
+        void  **arg = (void **)calloc(4, sizeof(void *));
+        arg[0] = (void *)dialog;
+        arg[1] = (void *)response_f;
+        arg[2] = data;
+      TRACE("in: dialog=%p response_f = %p response_data=%p\n", arg[0], arg[1], arg[2]);
+
+        pthread_t thread;
+        int retval = pthread_create(&thread, NULL, runWait_f, (void *)arg);
+        pthread_detach(thread);
+    }
+
+    static GtkWindow *
+    createRemove (View<Type> *view, const gchar *text, 
+                  const gchar *message, gboolean always, 
+                  gboolean multiple) 
+    {
         TRACE("createRemove: rm\n");
-        //auto rmDialog = GTK_DIALOG(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-        auto rmDialog = GTK_DIALOG(gtk_dialog_new ());
-        //gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+        auto rmDialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+        //auto rmDialog = GTK_WINDOW(gtk_dialog_new ());
+        gtk_window_set_type_hint(GTK_WINDOW(rmDialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         
         // title
         gchar *g=g_strdup_printf("Xffm+ %s", _("Remove"));
@@ -95,12 +176,13 @@ private:
         // icon
         auto pb = Pixbuf<Type>::getPixbuf("edit-delete", SIZE_ICON);
         gtk_window_set_icon (GTK_WINDOW(rmDialog), pb);
-        gtk_window_set_modal (GTK_WINDOW(rmDialog), TRUE);
+        //gtk_window_set_modal (GTK_WINDOW(rmDialog), TRUE);
         gtk_window_set_transient_for(GTK_WINDOW(rmDialog), GTK_WINDOW(mainWindow));
 
         auto vbox2 = Gtk<Type>::vboxNew (FALSE, 0);
         gtk_widget_show (GTK_WIDGET(vbox2));
-        gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area(rmDialog)), GTK_WIDGET(vbox2));
+
+        gtk_container_add (GTK_CONTAINER (rmDialog), GTK_WIDGET(vbox2));
 
         if (multiple){
             pb = Pixbuf<Type>::getPixbuf ("dialog-warning", -96);
@@ -140,13 +222,14 @@ private:
         compat<bool>::boxPackStart (vbox12, GTK_WIDGET(hbox9), TRUE, TRUE, 0);
         gtk_container_set_border_width (GTK_CONTAINER (hbox9), 5);
 
-        auto togglebutton = gtk_check_button_new_with_mnemonic (_("Apply to all"));
+     /* always apply to all! 
+      *   auto togglebutton = gtk_check_button_new_with_mnemonic (_("Apply to all"));
         gtk_widget_show (GTK_WIDGET(togglebutton));
         compat<bool>::boxPackStart (hbox9, GTK_WIDGET(togglebutton), FALSE, FALSE, 0);
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (togglebutton), !always);
         
-        g_object_set_data(G_OBJECT(rmDialog),"togglebutton", togglebutton);
+        g_object_set_data(G_OBJECT(rmDialog),"togglebutton", togglebutton);*/
 
         auto buttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
         gtk_widget_show (GTK_WIDGET(buttonbox));
@@ -155,41 +238,43 @@ private:
         gtk_button_box_set_layout (GTK_BUTTON_BOX (buttonbox), GTK_BUTTONBOX_END);
         gtk_box_set_spacing (GTK_BOX (buttonbox), 5);
 
+        // Cancel:
         auto button = Gtk<Type>::dialog_button ("window-close", _("Cancel"));
+        g_object_set_data(G_OBJECT(button), "dialog", rmDialog);
         gtk_container_add (GTK_CONTAINER (buttonbox),GTK_WIDGET(button));
+
         g_signal_connect (G_OBJECT (button), "clicked", 
                 G_CALLBACK (responseAction), GINT_TO_POINTER(RM_CANCEL));
-        g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
-        g_object_set_data(G_OBJECT(rmDialog), "cancelbutton", button);
-    /****************/
-        // This is now available to BSD with rm -P option
+        
+        // Shred: (available to BSD with rm -P option. FIXME whenever BSD available.)
         button = Gtk<Type>::dialog_button ("edit-delete/NE/edit-delete-symbolic/2.0/150", _("Shred"));
+        g_object_set_data(G_OBJECT(button), "dialog", rmDialog);
         gtk_container_add (GTK_CONTAINER (buttonbox), GTK_WIDGET(button));
+
         g_signal_connect (G_OBJECT (button), "clicked", 
                 G_CALLBACK (responseAction), GINT_TO_POINTER(SHRED_YES));
-        g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
         gchar *shred = g_find_program_in_path("shred");
         gtk_widget_set_sensitive(GTK_WIDGET(button), shred != NULL);
         g_free(shred);
 
-    /****************/
-
+        // Delete: 
         button = Gtk<Type>::dialog_button ("edit-delete", _("Delete"));
+        g_object_set_data(G_OBJECT(button), "dialog", rmDialog);
         gtk_container_add (GTK_CONTAINER (buttonbox), GTK_WIDGET(button));
+
         g_signal_connect (G_OBJECT (button), "clicked", 
                 G_CALLBACK (responseAction), GINT_TO_POINTER(RM_YES));
-        g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
 
-
+        // Trash:
         button = Gtk<Type>::dialog_button ("user-trash", _("Trash"));
+        g_object_set_data(G_OBJECT(button), "dialog", rmDialog);
         gtk_container_add (GTK_CONTAINER (buttonbox), GTK_WIDGET(button));
+
         g_signal_connect (G_OBJECT (button), "clicked", 
                 G_CALLBACK (responseAction), GINT_TO_POINTER(TRASH_YES));
-        g_object_set_data(G_OBJECT(button), "rmDialog", rmDialog);
-        g_object_set_data(G_OBJECT(rmDialog), "trashbutton", button);
 
         g_signal_connect (rmDialog, "delete-event", G_CALLBACK (on_destroy_event), rmDialog);
-        g_signal_connect (rmDialog, "destroy-event", G_CALLBACK (on_destroy_event), NULL);
+        g_signal_connect (rmDialog, "destroy-event", G_CALLBACK (on_destroy_event), rmDialog);
 
 
         gtk_widget_realize (GTK_WIDGET(rmDialog));
@@ -197,8 +282,6 @@ private:
         gtk_widget_grab_focus (GTK_WIDGET(button));
 
         gtk_window_set_position(GTK_WINDOW(rmDialog), GTK_WIN_POS_CENTER_ON_PARENT);
-
-
      
         MainDialog = GTK_WINDOW(rmDialog);
         return rmDialog;
@@ -208,134 +291,15 @@ private:
 
     static gboolean
     on_destroy_event (GtkWidget * rmDialog, GdkEvent * event, gpointer data) {
-        // Send cancel response
-        auto  button=GTK_WIDGET(g_object_get_data(G_OBJECT(rmDialog), "cancelbutton"));
-        responseAction(button, GINT_TO_POINTER(RM_CANCEL));
+        g_object_set_data(G_OBJECT(data), "response", GINT_TO_POINTER(RM_CANCEL));
         return TRUE;
     }
 
-    static GList *
-    removeAllFromList(GList *list){
-        if (!list){
-            ERROR("local/rm.hh::removeAllFromList(): list is NULL\n");
-            return NULL;
-        }
-        for (auto tmp = list; tmp && tmp->data; tmp=tmp->next){
-            g_free(tmp->data);
-        }
-        g_list_free(list);
-        return NULL;
-    }
-        
-    static GList *
-    removeItemFromList(GList *list){
-        if (!list){
-            ERROR("local/rm.hh::removeItemFromList(): list is NULL\n");
-            return NULL;
-        }
-        void *path = list->data;
-        TRACE("*** removing %s from list\n", (gchar *)path);
-        list = g_list_remove (list, path);
-        g_free(path);
-        return list;
-    }
-
-
     static void
-    responseAction(GtkWidget * button, gpointer data){
-        auto dialog=GTK_DIALOG(g_object_get_data(G_OBJECT(button), "rmDialog"));
-        auto list = (GList *)g_object_get_data(G_OBJECT(dialog), "list");
-
-        auto togglebutton=GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(dialog), "togglebutton"));
-        auto apply_to_all=gtk_toggle_button_get_active(togglebutton);
-        auto result=GPOINTER_TO_INT(data);
-
-        if (result == RM_YES && apply_to_all) result=RM_YES_ALL;
-        else if (result == SHRED_YES && apply_to_all) result=SHRED_YES_ALL;
-        else if (result == RM_NO && apply_to_all) result=RM_CANCEL;
-        else if (result == TRASH_YES && apply_to_all) result=TRASH_YES_ALL;
-        gtk_dialog_response(dialog, result);
-
+    responseAction(GtkWidget * button, void *data){
+        auto dialog = g_object_get_data(G_OBJECT(button), "dialog");
+        g_object_set_data(G_OBJECT(dialog), "response", data);
     }
-
-    static GList *
-    apply_action(GtkDialog *rmDialog, gint result, GList *list){
-       
-        TRACE( "**apply_action: 0x%x\n", result);
-
-        switch (result) {
-            case TRASH_YES:
-                TRACE( "**single trash: %s\n", (gchar *)list->data);
-                // Trash operation
-                if (!Gio<Type>::execute((gchar *)list->data, MODE_TRASH)){
-                    ERROR("local/rm.hh::Cannot trash %s\n", (gchar *)list->data);
-                }
-                list = removeItemFromList(list);
-                break;
-            case TRASH_YES_ALL:
-                TRACE( "trash all\n");
-                if (!Gio<Type>::execute(list, MODE_TRASH)){
-                    ERROR("local/rm.hh::Cannot multiTrash %s\n", (gchar *)list->data);
-                }
-                list = removeAllFromList(list);
-                break;
-            case RM_YES:
-            {
-                TRACE( "**single remove: %s\n", (gchar *)list->data);
-                 // rm operation
-                if (!Gio<Type>::execute((gchar *)list->data, MODE_RM)){
-                    ERROR("local/rm.hh::Cannot delete %s\n", (gchar *)list->data);
-                }
-                list = removeItemFromList(list);
-                break;
-            }
-            case RM_YES_ALL:
-            {
-                if (!Gio<Type>::execute(list, MODE_RM)){
-                    ERROR("local/rm.hh::Cannot multiDelete %s\n", (gchar *)list->data);
-                }
-                list = removeAllFromList(list);
-                break;
-            }
-
-            case SHRED_YES:
-                TRACE( "**single shred: %s\n", (gchar *)list->data);
-                 // Shred operation
-                if (!Gio<Type>::execute((gchar *)list->data, MODE_SHRED)){
-
-                    ERROR("local/rm.hh::Cannot shred %s\n", (gchar *)list->data);
-                }
-                list = removeItemFromList(list);
-               break;
-            case SHRED_YES_ALL:
-                TRACE( "shred all\n");
-                if (!Gio<Type>::execute(list, MODE_SHRED)){
-                    ERROR("local/rm.hh::Cannot multishred %s\n", (gchar *)list->data);
-                }
-                list = removeAllFromList(list);
-                break;
-            case RM_NO:
-            {
-                TRACE( "remove cancelled: %s\n", (gchar *)list->data);
-                list = removeItemFromList(list);
-                break;
-            }
-            ////////////////////////////////
-            case RM_CANCEL:
-                TRACE( "**cancel remove\n");
-                list = removeAllFromList(list);
-                break;
-            default:
-            {
-                TRACE( "**default : cancel remove all\n");
-               list = removeAllFromList(list);
-               break;
-            }
-        }
-        gtk_widget_hide(GTK_WIDGET(rmDialog));
-        return list;
-    }
-
     
 };
 }

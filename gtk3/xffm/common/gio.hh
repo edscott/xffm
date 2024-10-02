@@ -44,7 +44,19 @@ public:
     }
     static gboolean 
     execute(GList *list, gint mode){
-        auto retval = multiDoIt(list,mode);
+        TRACE("execute multiDoIt, mode %d...\n", mode);
+        if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED)
+            return FALSE;
+        gint items = g_list_length(list);
+        if (!items) return FALSE;
+        gint count = 0;
+        gboolean retval;
+        for (auto l = list; l && l->data; l=l->next) {
+            auto path = (const gchar *)l->data;
+            retval = doIt(path, mode);
+            if (!retval) DBG("Error processing %s\n",  path);
+            count++;
+        }
         return retval;
     }
 private:
@@ -463,8 +475,8 @@ private:
                    arg[0] = GINT_TO_POINTER(mode);
                    arg[1] = (void *)g_strdup(path);
                    asyncReference++;
-                   INFO("g_file_delete_async(%s)\n", path);
-                   //Print<double>::print(pageP->output(), "green", g_strdup_printf("g_file_delete_async(%s)\n", path));
+                   Print<double>::print(pageP->output(), "green", 
+                           g_strdup_printf("g_file_delete_async(%s)\n", path));
                    g_file_delete_async (file, G_PRIORITY_LOW, 
                             NULL,   // GCancellable *cancellable,
                             asyncCallback,
@@ -550,7 +562,7 @@ public:
         return doIt(dir, MODE_RM);
     }
 private:    
-
+/*
     static gboolean
     multiDoIt(GList *fileList, gint mode)
     {
@@ -569,6 +581,7 @@ private:
         }
         return retval;
     }
+    */
     static void
     progressCallback(goffset currentBytes, goffset totalBytes, void *data){
         auto arg = (void **)data;
@@ -614,7 +627,9 @@ private:
         }
         g_free(path);
         g_free(arg);
+        DBG("unref file\n");
         g_object_unref(file);
+        DBG("unref file ok\n");
         // decrement async reference
         asyncReference--;
     }
