@@ -11,6 +11,7 @@ public:
     Find(const gchar *path){
         if (!this->whichGrep()){
             ERROR("grep command not found\n");
+        exitDialogs = true;
             exit(1);
         }
         gchar *fullPath = NULL;

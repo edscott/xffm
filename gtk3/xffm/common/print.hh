@@ -619,12 +619,14 @@ private:
             auto color = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
             if (!color){
                 ERROR("Print::resolve_tag: calloc: %s\n", strerror(errno));
+        exitDialogs = true;
                 exit(1);
             }
             if (gdk_rgba_parse (color, id)) {
                 auto c = (GdkColor *)calloc(1, sizeof(GdkColor));
                 if (!c){
                     ERROR("Print::resolve_tag: calloc: %s\n", strerror(errno));
+        exitDialogs = true;
                     exit(1);
                 }
                 c->red = color->red * 0xffff;

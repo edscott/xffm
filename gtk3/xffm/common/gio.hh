@@ -36,15 +36,15 @@ class Gio {
 public:
     // rm/shred/trash (by popup)
     static gboolean 
-    execute(GtkDialog *rmDialog, const gchar *path, gint mode){
+    execute(const gchar *path, gint mode){
         GList *list = g_list_prepend(NULL,(void *)path);
-        auto retval = execute(rmDialog,  list, mode);
+        auto retval = execute(list, mode);
         g_list_free(list);
         return retval;
     }
     static gboolean 
-    execute(GtkDialog *rmDialog,  GList *list, gint mode){
-        auto retval = multiDoIt(rmDialog, list,mode);
+    execute(GList *list, gint mode){
+        auto retval = multiDoIt(list,mode);
         return retval;
     }
 private:
@@ -143,6 +143,7 @@ public:
         auto arg = (void **)calloc(4,sizeof(void *));
         if (!arg){
             ERROR("execute(): calloc: %s\n", strerror(errno));
+        exitDialogs = true;
             exit(1);
         }
         GList *list = g_list_prepend(NULL,(void *)g_strdup(path));
@@ -199,6 +200,7 @@ public:
         auto arg = (void **)calloc(4,sizeof(void *));
         if (!arg){
             ERROR("execute(): calloc: %s\n", strerror(errno));
+        exitDialogs = true;
             exit(1);
         }
         auto list = removeUriFormat(files);
@@ -444,7 +446,7 @@ private:
     }
 
 
-    static gboolean doIt(GtkDialog *rmDialog, const gchar *path, gint mode){
+    static gboolean doIt(const gchar *path, gint mode){
         TRACE("doIt...rm %s   (%d)\n", path,  mode);
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED) 
             return FALSE;
@@ -452,7 +454,6 @@ private:
         auto notebookP = Fm<Type>::getCurrentNotebook();
         auto pageP = notebookP->currentPageObject();
         Print<double>::showTextSmall(pageP->output());
-        //pageP->run_lp_command(pageP->output(), pageP->workDir(), command, FALSE);        
         switch (mode) {
             case MODE_RM:
                if (g_file_test(path, G_FILE_TEST_IS_DIR)){
@@ -546,12 +547,12 @@ private:
 public:
     static gboolean
     clearDirectory(const gchar *dir){
-        return doIt(NULL, dir, MODE_RM);
+        return doIt(dir, MODE_RM);
     }
 private:    
 
     static gboolean
-    multiDoIt(GtkDialog *rmDialog, GList *fileList, gint mode)
+    multiDoIt(GList *fileList, gint mode)
     {
         TRACE("multiDoIt, mode %d...\n", mode);
         if (mode != MODE_RM && mode != MODE_TRASH && mode != MODE_SHRED)
@@ -563,7 +564,7 @@ private:
         gboolean retval;
         for (auto l = fileList; l && l->data; l=l->next) {
             auto path = (const gchar *)l->data;
-            retval = doIt(rmDialog, path, mode);
+            retval = doIt(path, mode);
             count++;
         }
         return retval;

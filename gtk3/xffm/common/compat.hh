@@ -34,6 +34,7 @@ public:
       gtk_widget_set_margin_bottom(GTK_WIDGET(child), padding);
     } else {
       fprintf(stderr, "boxPackStart(): programming error. Exit(2)\n");
+        exitDialogs = true;
       exit(2);
     }
     
@@ -59,6 +60,7 @@ public:
       gtk_widget_set_margin_bottom(GTK_WIDGET(child), padding);
     } else {
       fprintf(stderr, "boxPackStart(): programming error. Exit(2)\n");
+        exitDialogs = true;
       exit(2);
     }
     
@@ -86,6 +88,7 @@ public:
       gtk_widget_set_margin_bottom(GTK_WIDGET(child), padding);
     } else {
       fprintf(stderr, "boxPackStart(): programming error. Exit(2)\n");
+        exitDialogs = true;
       exit(2);
     }
 */    
@@ -114,6 +117,7 @@ public:
       g_object_set(G_OBJECT(box), "GtkWidget:margin-top", padding);
     } else {
       fprintf(stderr, "boxPackStart(): programming error. Exit(2)\n");
+        exitDialogs = true;
       exit(2);
     }
 

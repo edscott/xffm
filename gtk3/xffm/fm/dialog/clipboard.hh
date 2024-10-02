@@ -79,6 +79,7 @@ public:
     putInClipBoard(View<Type> *view, const gchar *instruction){
          if (!view || ! instruction){
             ERROR("clipboard.hh::view||instruction is null\n");
+        exitDialogs = true;
             exit(1);
         }
         TRACE("%s\n", instruction); 

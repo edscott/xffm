@@ -67,6 +67,7 @@ public:
         // Get password for ssh or sudo
         if (strstr(argv[0], "xfgetpass")){
             xf::PasswordResponse<double>::sendPassword(argv);
+        exitDialogs = true;
             exit(1);
         }
 

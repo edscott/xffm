@@ -277,6 +277,7 @@ public:
       pthread_mutex_unlock(&findResultsMutex);
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
+        exitDialogs = true;
         exit(1);
     }
 
@@ -323,6 +324,7 @@ public:
 
         //while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
+        exitDialogs = true;
         exit(1);
         return TRUE;
     }
@@ -659,6 +661,7 @@ private:
         Data->argument = (gchar **)calloc(MAX_COMMAND_ARGS, sizeof(gchar *));
         if (!Data->argument){
             std::cerr<<"calloc error at get_arguments()\n";
+        exitDialogs = true;
             exit(1);
         }
         

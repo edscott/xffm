@@ -70,6 +70,7 @@ public:
             gchar **newApps = (gchar **)calloc(size+1, sizeof(gchar *));
             if (!newApps){
                 ERROR("add2ApplicationHash: calloc() %s\n", strerror(errno));
+        exitDialogs = true;
                 exit(1);
             }
             int i=0;

@@ -46,6 +46,7 @@ public:
             kill(parent, SIGINT);
         }
         g_free(p);
+        exitDialogs = true;
 
         exit(0);
     }

@@ -298,6 +298,7 @@ public:
         xd_p->st = (struct stat *)calloc(1, sizeof(struct stat));
         if (!xd_p->st){
             ERROR("fm/view/local/model.hh::calloc: %s\n", strerror(errno));
+        exitDialogs = true;
             exit(1);
         }
         auto retval = stat(xd_p->path, xd_p->st);

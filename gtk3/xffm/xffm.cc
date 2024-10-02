@@ -113,6 +113,7 @@ static GtkWindow *mainWindow = NULL;
 static gboolean isTreeView = FALSE;
 static GList *customDialogs = NULL;
 static GtkWindow *MainDialog = NULL;
+static bool exitDialogs = false;
 
 #include "common/compat.hh"
 #include "gtk/gtk3.hh"
@@ -181,6 +182,6 @@ main (int argc, char *argv[]) {
     g_main_loop_run(ws);*/
     
     gtk_main();
-    //delete(fm);
+    exitDialogs = true;
     return 0;
 }

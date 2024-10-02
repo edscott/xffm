@@ -201,6 +201,7 @@ public:
         if (path) path_ = g_strdup(path);
         else {
             ERROR("fm/base/model.hh::baseView::setPath(NULL)\n");
+        exitDialogs = true;
             exit(1);
         }
 

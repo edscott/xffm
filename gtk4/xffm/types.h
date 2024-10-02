@@ -117,6 +117,7 @@ template <class Type> class Notebook;
 #define BUTTON_CALLBACK(X)  G_CALLBACK((void (*)(GtkButton *,gpointer)) X)
 #define WIDGET_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,gpointer)) X)
 #define CONTEXT_CALLBACK(X)  (gboolean (*)(gpointer)) X
+#define PTHREAD_CALLBACK(X)  (void * (*)(void *)) X
 
 #define FILTER_HISTORY g_get_user_data_dir(),"xffm+","xffind.filter",NULL
 #define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
