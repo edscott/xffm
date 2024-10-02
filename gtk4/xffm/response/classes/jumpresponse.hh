@@ -1,25 +1,14 @@
 #ifndef JUMPRESPONSE_HH
 #define JUMPRESPONSE_HH
 namespace xf {
-
+template <class Type> class Workdir;
+template <class Type>
 class jumpResponse {
     
 public:
     const char *title(void){ return _("Go to");}
     const char *iconName(void){ return "dialog-question";}
     const char *label(void){ return _("Go to");}
-    static void action(const char *path){    
-
-      auto dialogObject = new DialogEntry<jumpResponse>;
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
-      auto dialog = dialogObject->dialog();
-      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
-
- //     dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
-      
-      dialogObject->run();
-    }
     static void *asyncNo(void *data){
       TRACE("asyncNo\n");
       return NULL;
@@ -34,7 +23,7 @@ public:
         g_free(path);
         return NULL;
       }
-      Workdir<bool>::setWorkdir(path, true);
+      Workdir<Type>::setWorkdir(path, true);
       gtk_window_present(GTK_WINDOW(MainWidget));
       g_free(path);
       TRACE("asyncYes\n");

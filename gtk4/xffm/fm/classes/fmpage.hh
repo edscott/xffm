@@ -47,7 +47,7 @@ namespace xf {
 
   };
 
-  class FMpage : public Vpane, public Prompt<bool>, public Pathbar {
+  class FMpage : public Vpane, public Prompt<bool>, public Pathbar<bool> {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;

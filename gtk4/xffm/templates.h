@@ -37,13 +37,15 @@
 #include "response/templates/dialogprompt.hh"        
 
 // response classes
-#include "response/classes/entryresponse.hh"
-#include "response/classes/passwdresponse.hh"
-#include "response/classes/rmresponse.hh"
-#include "response/classes/pathresponse.hh" 
-# include "response/classes/cpresponse.hh"
-# include "response/classes/mvresponse.hh"
-# include "response/classes/lnresponse.hh"
+// jumpresponse is a template to access Workdir<Type>
+#include "response/classes/jumpresponse.hh"  // template
+#include "response/classes/entryresponse.hh" // class
+#include "response/classes/passwdresponse.hh"// class
+#include "response/classes/rmresponse.hh"    // class
+#include "response/classes/pathresponse.hh"  // class
+# include "response/classes/cpresponse.hh"   // class
+# include "response/classes/mvresponse.hh"   // class
+# include "response/classes/lnresponse.hh"   // class
 
 // menu templates
 #include "menus/templates/menu.hh"
@@ -55,25 +57,20 @@
 #include "menus/templates/mainMenu.hh"
 #include "menus/templates/iconColorMenu.hh"
 
+// menu classes: none
 
-#include "fm/classes/localdir.hh" // fm classes
+// fm classes/templates
+#include "fm/classes/localdir.hh"       // fm class
+#include "fm/templates/gridview.hh"     // fm template
+#include "fm/templates/utilpathbar.hh"  // fm template
+#include "fm/templates/workdir.hh"      // fm template
+#include "fm/templates/util.hh"         // fm template
+#include "fm/templates/prompt.hh"       // fm template
+#include "fm/classes/fmbuttonbox.hh"    // fm class
+#include "fm/templates/pathbar.hh"      // fm template
+#include "fm/classes/fmpage.hh"         // fm class
 
-// fm templates
-#include "fm/templates/gridview.hh"
-#include "fm/templates/utilpathbar.hh" 
-#include "fm/templates/workdir.hh"
-#include "fm/templates/util.hh"
-#include "fm/templates/prompt.hh"
-
-#include "response/classes/jumpresponse.hh" // fixme, after Workdir...
-
-// fm classes
-#include "fm/classes/fmbuttonbox.hh" // fm classes
-#include "fm/classes/pathbar.hh" // fm classes
-#include "fm/classes/fmpage.hh" // fm classes
-
-
-#include "window.hh"
-#include "fm.hh"
+#include "window.hh" // template
+#include "fm.hh"     // class
 
 #endif
