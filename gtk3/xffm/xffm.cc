@@ -111,7 +111,7 @@ static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 static GtkWindow *mainWindow = NULL;
 static gboolean isTreeView = FALSE;
-GList *customDialogs = NULL;
+static GList *customDialogs = NULL;
 static GtkWindow *MainDialog = NULL;
 
 #include "common/compat.hh"

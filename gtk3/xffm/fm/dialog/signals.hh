@@ -6,6 +6,16 @@ template <class Type> class Dialog;
 template <class Type> class DialogSignals{
 public:
     // delete/destroy
+    static gboolean enter_event (GtkWidget *widget,
+               GdkEvent  *event,
+               gpointer   user_data){
+      DBG("enter_event main window: main dialog=%p.\n", MainDialog);
+      if (MainDialog){
+        gtk_window_present(MainDialog);
+      }
+      return TRUE;
+    }
+
     static gboolean delete_event (GtkWidget *widget,
                GdkEvent  *event,
                gpointer   user_data){

@@ -76,6 +76,7 @@ private:
         
         gtk_widget_hide(GTK_WIDGET(rmDialog));
         gtk_widget_destroy(GTK_WIDGET(rmDialog));
+        MainDialog = NULL;
         
         return list;
    }
@@ -199,6 +200,7 @@ private:
 
 
      
+        MainDialog = GTK_WINDOW(rmDialog);
         return rmDialog;
     }
 

@@ -78,6 +78,8 @@ public:
     
     ~EntryResponse (void){
         if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
+        MainDialog = NULL;
+        
         gtk_widget_destroy(GTK_WIDGET(response_));
     }
 
@@ -87,6 +89,7 @@ public:
         bashCompletionStore_ = NULL;
         timeout_ = 0;
         response_ = GTK_DIALOG(gtk_dialog_new ());
+        MainDialog = GTK_WINDOW(response_);
         gtk_window_set_type_hint(GTK_WINDOW(response_), GDK_WINDOW_TYPE_HINT_DIALOG);
         gtk_window_set_modal (GTK_WINDOW (response_), TRUE);
         gtk_window_set_transient_for (GTK_WINDOW (response_), GTK_WINDOW (parent));

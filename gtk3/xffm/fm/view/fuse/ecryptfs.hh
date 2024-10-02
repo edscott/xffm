@@ -113,11 +113,11 @@ private:
     initDialog(const gchar *info1, const gchar *info2){
         auto dialog = gtk_dialog_new ();
         if (mainWindow) {
-            gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-            gtk_window_set_transient_for (GTK_WINDOW (dialog), 
-                    GTK_WINDOW (mainWindow));
+         //   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+         //   gtk_window_set_transient_for (GTK_WINDOW (dialog), 
+          //          GTK_WINDOW (mainWindow));
         } else {
-            gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+          //  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         }
 
         gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -196,6 +196,8 @@ private:
 
         response_ = GTK_RESPONSE_CANCEL;
 
+        MainDialog = GTK_WINDOW(dialog);
+        DBG("efs main dialog = %p.\n", MainDialog);
         return GTK_DIALOG(dialog);
 
     }
@@ -456,6 +458,8 @@ public:
             case GTK_RESPONSE_CANCEL:
                 break;
         }
+        
+        MainDialog = NULL;
         delete(efs);
     }
     

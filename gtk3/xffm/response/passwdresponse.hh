@@ -114,6 +114,7 @@ private:
             if (c) response_text = g_strdup(c);
             gtk_entry_set_text(entry, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         } 
+        MainDialog = NULL;
         gtk_widget_destroy (GTK_WIDGET(dialog));
         return response_text;
     }
@@ -122,6 +123,7 @@ private:
     responseDialog (const gchar * ptext, const gchar *default_value, gboolean hidden) {
 
         auto dialog = GTK_DIALOG(gtk_dialog_new ());
+        MainDialog = GTK_WINDOW(dialog);
         //gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(mainWindow));
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 

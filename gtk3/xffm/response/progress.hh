@@ -24,6 +24,7 @@ private:
     dialog(const gchar *message, const gchar *icon){
          // Create the widgets
          auto dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
+         MainDialog = dialog;
          //gtk_window_set_transient_for (dialog,GTK_WINDOW(mainWindow));
          gtk_window_set_type_hint (dialog,GDK_WINDOW_TYPE_HINT_DIALOG);
          auto vbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -106,6 +107,7 @@ private:
             return FALSE;
         }
         if (progress->getStop()){
+            MainDialog = NULL;
             gtk_widget_hide(GTK_WIDGET(dialog));
             gtk_widget_destroy(GTK_WIDGET(dialog));
             delete(progress);
