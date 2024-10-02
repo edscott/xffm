@@ -70,12 +70,18 @@ public:
             exit(1);
         }
 
+#if 1
+         INFO("Xffm running in foreground because of g_monitor bug (see TODO)\n");
+         setsid(); // detach main process from tty
+         setenv("SSH_ASKPASS_REQUIRE", "force", 1);
+#else
         // Detach if "-f" argument not given.
-        if (!argv[1] || strcmp(argv[1],"-f")) {
+        if (!argv[1] || strcmp(argv[1],"-f")) { 
             if(fork ()){
                 sleep(2);
                 _exit (123);
             }
+
             setsid(); // detach main process from tty
         } else {
             // If xffm is running in foreground,
@@ -85,6 +91,7 @@ public:
 
           TRACE("Xffm running in foreground.\n")
         }
+#endif
         if (argv[1] && strcmp(argv[1],"-f")==0) {
             argv[1] = argv[2];
         }
