@@ -134,6 +134,10 @@ public:
             }
             g_free(path);
         }
+        if (!data){
+          DBG("DnD: no data for drop.\n");
+          return NULL;
+        }
         // remove trailing \n
         if (strchr(data, '\n')) *strrchr(data, '\n')=0;
         return data;
