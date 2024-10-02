@@ -456,6 +456,17 @@ private:
        return TRUE;
     }
 
+    static void *openDnDBox_f(void *data){
+      auto arg = (void **)data;
+      auto plural_text = (char *)arg[0];
+      auto lastFind = (GSList *)arg[1];
+      DnDBox<Type>::openDnDBox(findDialog, plural_text, lastFind);
+      g_free(plural_text);
+      return NULL;
+    }
+      
+      
+
     static void
     forkCleanup (void *data) {
        TRACE("forkCleanup\n");
@@ -533,12 +544,12 @@ private:
                 for (;list && list->data; list=list->next){
                     TRACE("last find: %s\n", (gchar *)list->data);
                 }
-                DnDBox<Type>::openDnDBox(findDialog, plural_text, lastFind);
-                
-
+                void *arg[]={(void *)plural_text, (void *)lastFind};
+                Util<Type>::context_function(openDnDBox_f, (void *)arg);
+                //DnDBox<Type>::openDnDBox(findDialog, plural_text, lastFind);
                 // cleanupmake
                 //
-                g_free(plural_text);
+                //g_free(plural_text);
                 g_free(message);
         } else {
             if (!gtk_widget_is_visible(GTK_WIDGET(diagnostics))) return;
