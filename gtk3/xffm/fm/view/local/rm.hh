@@ -106,6 +106,7 @@ private:
       for (auto l=list; l && l->data; l=l->next) g_free(l->data);         
       g_list_free(list);
       g_free(arg);
+      gtk_widget_destroy(GTK_WIDGET(dialog));
       return GINT_TO_POINTER(response);
     }
     

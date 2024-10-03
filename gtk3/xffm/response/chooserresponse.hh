@@ -59,16 +59,16 @@ public:
     static void
     localfolderChooser(GtkButton *button, void *data) {
         auto entryResponse = (EntryResponse<Type> *)data;
-        entryResponse->unsetTimeout();
+        //entryResponse->unsetTimeout();
         chooser(GTK_ENTRY(entryResponse->entry()), _("Choose directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
-        entryResponse->resetTimeout();
+        //entryResponse->resetTimeout();
     }
     static void
     localfileChooser(GtkButton *button, void *data) {
         auto entryResponse = (EntryResponse<Type> *)data;
-        entryResponse->unsetTimeout();
+        //entryResponse->unsetTimeout();
         chooser(GTK_ENTRY(entryResponse->entry()), _("Choose file"), GTK_FILE_CHOOSER_ACTION_OPEN);
-        entryResponse->resetTimeout();
+        //entryResponse->resetTimeout();
     }
 };
 

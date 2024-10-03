@@ -719,7 +719,9 @@ private:
         entryResponse->setResponseLabel(markup);
         g_free(markup);
         entryResponse->setEntryLabel(_("Regular expression"));
-        auto response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        char *response = NULL;
+        //response = entryResponse->runResponse();
         TRACE("response=%s\n", response);
         if (!response) return;
         g_strstrip(response);
@@ -972,7 +974,9 @@ public:
         entryResponse->setEntryLabel(_("New Name:"));
         // get last used arguments...
         entryResponse->setEntryDefault("");
-        auto response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        char *response = NULL;
+        //response = entryResponse->runResponse();
         gboolean isDirectory = 
             gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(entryResponse->checkButton()));
 
@@ -1014,9 +1018,87 @@ public:
         TRACE("*** runWith command = %s\n", command);
         g_free(command);
     }
+private:
+    static void *applyResponse(void *data){
+      void **arg = (void **)data;
+      DBG("run_f: dialog=%p response_f = %p response_data=%p\n", arg[0], arg[1], arg[2]);
+      DBG("applyResponse this=%p\n", arg[2]);
+      auto object = (EntryResponse<Type> *) arg[2];
+      auto dialog = object->dialog();
+      gtk_widget_hide (GTK_WIDGET(dialog));
+      gint response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
+      if (response < 0) return NULL;
+      char *newPath = NULL;
+      if (response > 0){
+        newPath = object->getResponse();
+        if (!g_path_is_absolute(newPath)){
+          auto dirname = g_path_get_dirname(object->path());
+          auto g = g_strconcat(dirname, G_DIR_SEPARATOR_S, newPath, NULL);
+          g_free(newPath);
+          newPath = g;
+        }
+      }
+      DBG("applyResponse path=%s, newPath=%s\n", object->path(), newPath);
+         
+      if (newPath) {
+        g_strstrip(newPath);    
+        if (!strlen(newPath)) {
+          g_free(newPath);
+          newPath=NULL;
+        }
+      }
+      if (strcmp(object->path(), newPath) == 0){
+        DBG("** Error: %s\n", _("source and destination are the same"));
+        g_free(newPath);
+        gtk_window_present(GTK_WINDOW(mainWindow));
+        return NULL;
+      }
+           
+      delete(object);
+      return (void *)newPath;
+    }
 
-    static gchar *
-    getPath(const gchar *path, const gchar *icon, const gchar *text, const gchar *label){
+    static void *applyResponseMV(void *data){
+      auto newPath = (char *)applyResponse(data);
+      if (!newPath) return NULL;
+      void **arg = (void **)data;
+      auto object = (EntryResponse<Type> *) arg[2];
+      auto path = object->path();
+      TRACE("*** rename %s to %s\n", path, newPath);
+      Gio<Type>::execute(path, newPath, MODE_RENAME);
+      g_free(newPath);
+      return NULL;
+    }
+
+    static void *applyResponseCP(void *data){
+      auto newPath = (char *)applyResponse(data);
+      if (!newPath) return NULL;
+      void **arg = (void **)data;
+      auto object = (EntryResponse<Type> *) arg[2];
+      auto path = object->path();
+      TRACE("*** duplicate %s to %s\n", path, newPath);
+      Gio<Type>::execute(path, newPath, MODE_COPY);
+      g_free(newPath);
+      return NULL;
+    }
+
+    static void *applyResponseLN(void *data){
+      auto newPath = (char *)applyResponse(data);
+      if (!newPath) return NULL;
+      void **arg = (void **)data;
+      auto object = (EntryResponse<Type> *) arg[2];
+      auto path = object->path();
+      TRACE("*** symlink %s to %s\n", path, newPath);
+      Gio<Type>::execute(path, newPath, MODE_LINK);
+      g_free(newPath);
+      return NULL;
+    }
+
+    
+    static void
+    pathQuery(void *applyResponse_f, const gchar *path, const gchar *icon, const gchar *text, 
+            const gchar *label=_("New Name:"))
+    {
         auto entryResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), text, icon);
         auto basename = g_path_get_basename(path);
         entryResponse->setEntryDefault(basename);
@@ -1031,31 +1113,14 @@ public:
         
         entryResponse->setEntryBashFileCompletion(wd);
         entryResponse->setInLineCompletion(1);
-        auto response = entryResponse->runResponse();
-        return response;
-   }
 
-    static gchar *
-    getNewPath(const gchar *path, const gchar *icon, const gchar *text, 
-            const gchar *label=_("New Name:"))
-    {
-        auto response = getPath(path, icon, text, label);
-        // entryResponse is deleted automatically.
-        if (response){
-            gchar *newName;
-            if (g_path_is_absolute(response)){
-                newName = g_strdup(response);
-            } else {
-                gchar *dirname = g_path_get_dirname(path);
-                newName = g_strconcat(dirname, G_DIR_SEPARATOR_S, response, NULL);
-                g_free(dirname);
-            }
-            g_free(response);
-            return newName;
-        }
-        return NULL;
-   }
-
+        gtk_widget_show_all(GTK_WIDGET(entryResponse->dialog()));
+        gtk_widget_hide(GTK_WIDGET(entryResponse->checkButton()));
+        entryResponse->runResponse(applyResponse_f, (void *)path);
+        //ResponseClass<Type>::runDialog(entryResponse->dialog(), (void *) applyResponse, (void *)_path);
+      
+    }
+public:
     static gchar *
     getOutputDir (const gchar *path, const gchar *text, const gchar *iniGroup, const gchar *icon=NULL)
     {
@@ -1084,7 +1149,9 @@ public:
         entryResponse->setInLineCompletion(1);
         g_free(dirname);
         
-        auto response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        char *response = NULL;
+        //response = entryResponse->runResponse();
         if (response){
             response = ckDir(response);
              g_strstrip(response);
@@ -1116,7 +1183,8 @@ public:
         g_free(response);
         entryResponse->setEntryBashFileCompletion(g_get_home_dir());
         entryResponse->setInLineCompletion(1);
-        response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        //response = entryResponse->runResponse();
         if (response && strlen(response)){
             if (mkdir(response, 0750) < 0){
                 auto m=g_strdup_printf("\n%s: %s\n", response, strerror(errno));
@@ -1155,13 +1223,13 @@ public:
         new(Properties<Type>)(treeModel, selectionList);
 
     }
-
+private:
     static void
     symlink(GtkMenuItem *menuItem, gpointer data)
     {        
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        auto newName = getNewPath(path, "emblem-symbolic-link", _("Link"));
-        if (!newName) {
+        pathQuery((void *)applyResponseLN, path, "emblem-symbolic-link", _("Link"));
+        /*if (!newName) {
                 DBG("symlink() path is null\n");
                 return;
         }
@@ -1170,15 +1238,15 @@ public:
             TRACE("*** symlink %s to %s\n", path, newName);
             Gio<Type>::execute(path, newName, MODE_LINK);
         }
-        g_free(newName);
+        g_free(newName);*/
     }
 
     static void
     duplicate(GtkMenuItem *menuItem, gpointer data)
     {        
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        auto newName = getNewPath(path, "edit-copy", _("Duplicate"));
-        if (!newName) {
+        pathQuery((void *)applyResponseCP, path, "edit-copy", _("Duplicate"));
+/*        if (!newName) {
                 DBG("duplicate() path is null\n");
                 return;
         }
@@ -1187,14 +1255,15 @@ public:
             TRACE("*** duplicate %s to %s\n", path, newName);
             Gio<Type>::execute(path, newName, MODE_COPY);
         }
-        g_free(newName);
+        g_free(newName);*/
     }
 
     static void
     rename(GtkMenuItem *menuItem, gpointer data)
     {        
         auto path = (const gchar *)g_object_get_data(G_OBJECT(data), "path");
-        auto newName = getNewPath(path, "view-refresh-symbolic", _("Rename"));
+        pathQuery((void *)applyResponseMV, path, "view-refresh-symbolic", _("Rename"));
+        /*
         if (!newName)  {
                 DBG("rename() path is null\n");
                 return;
@@ -1204,9 +1273,9 @@ public:
             TRACE("*** rename %s to %s\n", path, newName);
             Gio<Type>::execute(path, newName, MODE_RENAME);
         }
-        g_free(newName);
+        g_free(newName);*/
     }
-    
+public:    
     
     static void
     openWith(GtkMenuItem *menuItem, gpointer data)

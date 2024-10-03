@@ -175,12 +175,15 @@ public:
                 entryResponse->setResponseLabel(markup);
                 g_free(markup);  
                 entryResponse->setEntryDefault("/dev/null");
-                response = entryResponse->runResponse();
+                DBG("FIXME\n");
+                //response = entryResponse->runResponse();
                 TRACE("response=%s\n", response); 
                 if (!response){
                     g_free(command);
                     return;
                 }
+                DBG("FIXME\n");
+                /*
                 if (strcmp(response,"/dev/null") && g_file_test(response, G_FILE_TEST_EXISTS)){
                     auto warning = g_strdup_printf(_("The output file %s already exists, do you want to overwrite it?"), response);
                     auto confirmResponse = new(EntryResponse<Type>)(GTK_WINDOW(mainWindow), _("Confirm Replace"), "dialog-warning");
@@ -192,7 +195,7 @@ public:
                         g_free(response);
                         return;
                     }
-                }
+                }*/
             }
 
             gchar *g = g_strdup_printf("script -f -c \"%s\" %s", command, response);

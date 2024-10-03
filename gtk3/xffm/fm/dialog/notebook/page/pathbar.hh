@@ -419,7 +419,9 @@ private:
         entryResponse->setEntryBashCompletion(wd);
         entryResponse->setInLineCompletion(TRUE);
         
-        auto response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        char *response = NULL;
+        //response = entryResponse->runResponse();
         TRACE("response=%s\n", response);
         
         if (!response) return FALSE;

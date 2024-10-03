@@ -23,8 +23,8 @@ public:
         compat<bool>::boxPackStart (GTK_BOX (this->hbox_), GTK_WIDGET(combo_), TRUE, TRUE, 0);
         g_object_set_data(G_OBJECT(combo_),"response", this->response_);
         auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
-        g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (EntryResponse<Type>::progressReset), this->timeoutProgress_);
-        g_signal_connect (G_OBJECT (entry), "changed", G_CALLBACK (ComboResponse<Type>::progressReset), this->timeoutProgress_);
+        //g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (EntryResponse<Type>::progressReset), this->timeoutProgress_);
+        //g_signal_connect (G_OBJECT (entry), "changed", G_CALLBACK (ComboResponse<Type>::progressReset), this->timeoutProgress_);
 
         gtk_widget_set_can_focus (GTK_WIDGET(this->yes_), TRUE);
         gtk_widget_grab_focus(GTK_WIDGET(this->yes_));

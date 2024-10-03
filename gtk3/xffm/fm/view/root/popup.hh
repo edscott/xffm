@@ -284,7 +284,9 @@ private:
         entryResponse->setInLineCompletion(1);
         g_free(dirname);
         
-        auto response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        char *response = NULL;
+        //response = entryResponse->runResponse();
         if (response){
             response = LocalPopUp<Type>::ckDir(response);
             if (!response) return;

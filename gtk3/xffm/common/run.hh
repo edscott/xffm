@@ -654,7 +654,9 @@ public:
         entryResponse->setEntryDefault("");
         
         entryResponse->setCheckButtonEntryCallback((void *)toggleTerminalRun, (void *)path); 
-        auto response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        char *response = NULL;
+        //response = entryResponse->runResponse();
 
 
         if (!response) return NULL;
@@ -730,7 +732,8 @@ public:
             
             entryResponse->setCheckButtonEntryCallback((void *)toggleTerminal); 
             entryResponse->setEntryCallback((void *)entryKeyRelease); 
-            response = entryResponse->runResponse();
+            DBG("FIXME\n");
+            //response = entryResponse->runResponse();
         } else {
             auto comboResponse = new(ComboResponse<Type>)(GTK_WINDOW(parent), _("Open with"), RUN);
             comboResponse->setResponseLabel(responseLabel);
@@ -747,7 +750,8 @@ public:
             comboResponse->setCheckButtonComboCallback((void *)toggleTerminal); 
             comboResponse->setComboCallback((void *)comboChanged); 
         
-            response = comboResponse->runResponse();
+            DBG("FIXME\n");
+            //response = comboResponse->runResponse();
         }
 
         if (not response) goto done;

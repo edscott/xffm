@@ -159,7 +159,9 @@ class FstabPopUp {
         g_free(dirname);
         g_free(mountTarget);
         
-        auto response = entryResponse->runResponse();
+        DBG("FIXME\n");
+        char *response = NULL;
+        //response = entryResponse->runResponse();
         TRACE("response=%s\n", response);
         if (response){
             g_strstrip(response);
