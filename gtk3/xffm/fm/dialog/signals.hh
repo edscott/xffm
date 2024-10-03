@@ -11,7 +11,7 @@ public:
                gpointer   user_data){
       TRACE("enter_event main window: main dialog=%p.\n", MainDialog);
       if (MainDialog){
-        gtk_window_present(MainDialog);
+//        gtk_window_present(MainDialog);
       } 
       return FALSE;
     }
