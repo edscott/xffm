@@ -38,6 +38,7 @@ class ResponseClass {
       auto dialog = GTK_WINDOW(arg[0]);
       auto response_f = PTHREAD_CALLBACK(arg[1]);
       //auto response_data = arg[2];
+      MainDialog = dialog; // dialog is active...
       DBG("run_f: dialog=%p response_f = %p response_data=%p\n", arg[0], arg[1], arg[2]);
       void *response = NULL;
       do {
@@ -45,6 +46,7 @@ class ResponseClass {
         if (exitDialogs) response = GINT_TO_POINTER(-1);
         usleep(2500);
       } while (!response);
+      MainDialog = NULL; // user has responded!
       if (response_f) Util<Type>::context_function(response_f, data);
       
       TRACE("run_f:: Response is %p\n", response);
@@ -64,8 +66,6 @@ class ResponseClass {
       pthread_join(thread, &response_p);
       DBG("run joined, *response_p = %p\n", response_p);
        
-      // no good here, must be mainContext function: gtk_widget_hide(GTK_WIDGET(dialog));
-      //MainDialog = NULL;
       return NULL;
     }
 

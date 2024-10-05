@@ -135,7 +135,7 @@ private:
         gtk_container_add (GTK_CONTAINER (rmDialog), GTK_WIDGET(vbox2));
 
         if (multiple){
-            pb = Pixbuf<Type>::getPixbuf ("dialog-warning", -96);
+            pb = Pixbuf<Type>::getPixbuf ("emblem-important", -96);
             auto q = gtk_image_new_from_pixbuf (pb);
             gtk_widget_show (GTK_WIDGET(q));
             compat<bool>::boxPackStart (vbox2, GTK_WIDGET(q), TRUE, TRUE, 5);

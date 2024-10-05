@@ -21,7 +21,7 @@ public:
         
         combo_ = GTK_COMBO_BOX_TEXT(gtk_combo_box_text_new_with_entry());
         compat<bool>::boxPackStart (GTK_BOX (this->hbox_), GTK_WIDGET(combo_), TRUE, TRUE, 0);
-        g_object_set_data(G_OBJECT(combo_),"response", this->response_);
+        g_object_set_data(G_OBJECT(combo_),"response", this->dialog_);
         auto entry = GTK_ENTRY(gtk_bin_get_child(GTK_BIN(combo_)));
         //g_signal_connect (G_OBJECT (entry), "key-press-event", G_CALLBACK (EntryResponse<Type>::progressReset), this->timeoutProgress_);
         //g_signal_connect (G_OBJECT (entry), "changed", G_CALLBACK (ComboResponse<Type>::progressReset), this->timeoutProgress_);

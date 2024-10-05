@@ -1021,7 +1021,7 @@ public:
 private:
     static void *applyResponse(void *data){
       void **arg = (void **)data;
-      DBG("run_f: dialog=%p response_f = %p response_data=%p\n", arg[0], arg[1], arg[2]);
+      DBG("applyResponse: dialog=%p response_f = %p response_data=%p\n", arg[0], arg[1], arg[2]);
       DBG("applyResponse this=%p\n", arg[2]);
       auto object = (EntryResponse<Type> *) arg[2];
       auto dialog = object->dialog();
@@ -1048,13 +1048,14 @@ private:
         }
       }
       if (strcmp(object->path(), newPath) == 0){
+        // blocking:
+        Dialogs<Type>::quickHelp(GTK_WINDOW(mainWindow),_("source and destination are the same"), "emblem-important"); 
+        
         DBG("** Error: %s\n", _("source and destination are the same"));
         g_free(newPath);
-        gtk_window_present(GTK_WINDOW(mainWindow));
         return NULL;
       }
            
-      delete(object);
       return (void *)newPath;
     }
 
@@ -1064,9 +1065,11 @@ private:
       void **arg = (void **)data;
       auto object = (EntryResponse<Type> *) arg[2];
       auto path = object->path();
-      TRACE("*** rename %s to %s\n", path, newPath);
+      DBG("*** rename %s to %s\n", path, newPath);
       Gio<Type>::execute(path, newPath, MODE_RENAME);
       g_free(newPath);
+      delete(object);
+      gtk_window_present(GTK_WINDOW(mainWindow));
       return NULL;
     }
 
@@ -1079,6 +1082,8 @@ private:
       TRACE("*** duplicate %s to %s\n", path, newPath);
       Gio<Type>::execute(path, newPath, MODE_COPY);
       g_free(newPath);
+      delete(object);
+      gtk_window_present(GTK_WINDOW(mainWindow));
       return NULL;
     }
 
@@ -1091,6 +1096,8 @@ private:
       TRACE("*** symlink %s to %s\n", path, newPath);
       Gio<Type>::execute(path, newPath, MODE_LINK);
       g_free(newPath);
+      delete(object);
+      gtk_window_present(GTK_WINDOW(mainWindow));
       return NULL;
     }
 
