@@ -34,7 +34,7 @@ public:
                                    _("Cancel"),
                                    0,
                                    NULL);
-      MainDialog = GTK_WINDOW(dialog);
+      //MainDialog = GTK_WINDOW(dialog);
 
     
       GtkWidget *b= gtk_dialog_get_content_area(GTK_DIALOG(dialog));
@@ -85,7 +85,7 @@ public:
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(r))) 
           action = (GdkDragAction) GPOINTER_TO_INT(g_object_get_data(G_OBJECT(r), "action"));
       }
-      MainDialog = NULL;
+      //MainDialog = NULL;
       gtk_widget_destroy(dialog);
 
       fprintf(stderr, "response=%d, action=%d\n", response, action);

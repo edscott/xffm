@@ -25,7 +25,7 @@ class ChooserResponse {
         auto wd = Fm<Type>::getCurrentDirectory(entry);
         gtk_file_chooser_set_current_folder ((GtkFileChooser *) dialog, wd);
 
-        MainDialog = GTK_WINDOW(dialog);
+        //MainDialog = GTK_WINDOW(dialog);
 
         //gtk_widget_set_sensitive(GTK_WIDGET(mainWindow), FALSE);
         gint response = gtk_dialog_run(dialog);

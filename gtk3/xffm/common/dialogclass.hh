@@ -15,7 +15,7 @@ namespace xf
     }
     
     ~Dialog(void){
-      MainDialog = NULL;
+      //MainDialog = NULL;
       Basic::destroy(dialog_);
     }
 

@@ -65,7 +65,7 @@ class ResponseClass {
       DBG("run joined, *response_p = %p\n", response_p);
        
       // no good here, must be mainContext function: gtk_widget_hide(GTK_WIDGET(dialog));
-      MainDialog = NULL;
+      //MainDialog = NULL;
       return NULL;
     }
 

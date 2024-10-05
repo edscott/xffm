@@ -326,7 +326,7 @@ private:
 
         gtk_widget_grab_focus(GTK_WIDGET(button)); 
         gtk_widget_show(GTK_WIDGET(dialog));
-        MainDialog = GTK_WINDOW(dialog);
+        //MainDialog = GTK_WINDOW(dialog);
         return dialog;
     }
     
@@ -533,7 +533,7 @@ private:
         }
 
 
-        MainDialog = NULL;
+       // MainDialog = NULL;
         gtk_widget_destroy(GTK_WIDGET(dialog));
         return NULL;
     }

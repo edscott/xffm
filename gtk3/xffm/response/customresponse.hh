@@ -18,7 +18,7 @@ public:
         g_free(workdir_);
         g_list_free(optionsList);
         customDialogs = g_list_remove(customDialogs, this->response_);
-        MainDialog = NULL;
+        //MainDialog = NULL;
     }
 
     CustomResponse(GtkWindow *parent, const gchar *file):

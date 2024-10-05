@@ -77,7 +77,7 @@ private:
 
       gint response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
       gtk_widget_hide(GTK_WIDGET(dialog));
-      MainDialog = NULL;
+      //MainDialog = NULL;
       switch (response) {
           case TRASH_YES: // Trash operation
               if (!Gio<Type>::execute(list, MODE_TRASH)){
@@ -235,7 +235,7 @@ private:
 
         gtk_window_set_position(GTK_WINDOW(rmDialog), GTK_WIN_POS_CENTER_ON_PARENT);
      
-        MainDialog = GTK_WINDOW(rmDialog);
+        //MainDialog = GTK_WINDOW(rmDialog);
         return rmDialog;
     }
 

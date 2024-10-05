@@ -28,7 +28,7 @@ public:
         if (!message) message = "<span size=\"larger\" color=\"blue\">Custom message markup appears <span color=\"red\">here</span></span>";
          // Create the widgets
          auto dialog = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
-         MainDialog = GTK_WINDOW(dialog);
+         //MainDialog = GTK_WINDOW(dialog);
 
          //gtk_window_set_keep_above (dialog,TRUE);
          if (!parent) parent = GTK_WINDOW(mainWindow);
@@ -91,7 +91,7 @@ private:
         auto dialog = GTK_WIDGET(data);
         gtk_widget_hide(GTK_WIDGET(dialog));
         gtk_widget_destroy(GTK_WIDGET(dialog));
-        MainDialog = NULL;
+        //MainDialog = NULL;
         return FALSE;
     }
 
@@ -101,7 +101,7 @@ private:
                gpointer   data){
         gtk_widget_hide(GTK_WIDGET(data));
         zap = TRUE;
-        MainDialog = NULL;
+        //MainDialog = NULL;
         //gtk_widget_destroy(GTK_WIDGET(dialog));
          return TRUE;
     }       
@@ -109,7 +109,7 @@ private:
                GdkEvent  *event,
                gpointer   data){
         gtk_widget_hide(widget);
-        MainDialog = NULL;
+        //MainDialog = NULL;
         //gtk_widget_destroy(GTK_WIDGET(dialog));
          return TRUE;
     }

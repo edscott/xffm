@@ -12,14 +12,14 @@ private:
     responseCancel (GtkWidget * button, gpointer data) {
         g_object_set_data(G_OBJECT(data), "response", GINT_TO_POINTER(0));
         gtk_widget_hide(GTK_WIDGET(data));
-        MainDialog = NULL;
+        //MainDialog = NULL;
         gtk_dialog_response(GTK_DIALOG(data), 0);
     }
     static void
     responseYes (GtkWidget * button, gpointer data) {
         g_object_set_data(G_OBJECT(data), "response", GINT_TO_POINTER(1));
         gtk_widget_hide(GTK_WIDGET(data));
-        MainDialog = NULL;
+        //MainDialog = NULL;
         gtk_dialog_response(GTK_DIALOG(data), 1);
     }
 
@@ -34,7 +34,7 @@ public:
         
         
         gtk_dialog_run(GTK_DIALOG(dialog));
-        MainDialog = GTK_WINDOW(dialog);
+        //MainDialog = GTK_WINDOW(dialog);
         return dialog;
     }
 
@@ -109,7 +109,7 @@ public:
       gtk_widget_show_all(GTK_WIDGET(dialog));
       gtk_dialog_run(GTK_DIALOG(dialog));
         
-      MainDialog = GTK_WINDOW(dialog);
+      //MainDialog = GTK_WINDOW(dialog);
 
       return dialog;
     }
@@ -148,7 +148,7 @@ public:
     {
         auto dialog = quickDialogCancel(parent, message, icon, title);
         gtk_widget_show_all (GTK_WIDGET(dialog));
-        MainDialog = GTK_WINDOW(dialog);
+        //MainDialog = GTK_WINDOW(dialog);
         return dialog;
     }
 
@@ -224,7 +224,7 @@ public:
 
         
         
-     MainDialog = GTK_WINDOW(dialog);
+     //MainDialog = GTK_WINDOW(dialog);
 
      return dialog;
     }
@@ -237,7 +237,7 @@ public:
     {
         auto dialog = quickDialog(parent, message, icon, title);
         gtk_widget_show_all (GTK_WIDGET(dialog));
-        MainDialog = GTK_WINDOW(dialog);
+       // MainDialog = GTK_WINDOW(dialog);
         return dialog;
     }
 
@@ -318,7 +318,7 @@ public:
 
         
         
-     MainDialog = GTK_WINDOW(dialog);
+     //MainDialog = GTK_WINDOW(dialog);
 
      return dialog;
     }
@@ -329,7 +329,7 @@ private:
     static void
     onQuickCancel (GtkWidget * button, gpointer data) {
         auto dialog = GTK_DIALOG(data);
-        MainDialog = NULL;
+       // MainDialog = NULL;
         gtk_dialog_response(dialog, GTK_RESPONSE_CANCEL );
     }
     
@@ -342,7 +342,7 @@ private:
           gtk_window_present_with_time(parent, GDK_CURRENT_TIME);
         }
         gtk_widget_destroy(widget);
-        MainDialog = NULL;
+        //MainDialog = NULL;
         
     }
 

@@ -130,7 +130,7 @@ private:
          
         gtk_widget_show_all (GTK_WIDGET(dialog));
         Dialogs<Type>::placeDialog(dialog);
-        MainDialog = GTK_WINDOW(dialog);
+        //MainDialog = GTK_WINDOW(dialog);
         return (dialog);
     }
 

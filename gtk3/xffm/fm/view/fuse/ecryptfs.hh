@@ -196,7 +196,7 @@ private:
 
         response_ = GTK_RESPONSE_CANCEL;
 
-        MainDialog = GTK_WINDOW(dialog);
+        //MainDialog = GTK_WINDOW(dialog);
         DBG("efs main dialog = %p.\n", MainDialog);
         return GTK_DIALOG(dialog);
 
@@ -459,7 +459,7 @@ public:
                 break;
         }
         
-        MainDialog = NULL;
+        //MainDialog = NULL;
         delete(efs);
     }
     
