@@ -269,7 +269,8 @@ public:
         TRACE("fixme: signals::onCloseButton\n");
         GtkWidget *dialog = GTK_WIDGET(data);
         gtk_widget_hide(dialog);
-      pthread_mutex_lock(&findResultsMutex);
+        // simple exit
+/*      pthread_mutex_lock(&findResultsMutex);
         for (auto l=findResultsWidgets; l && l->data; l=l->next){
             if (!GTK_IS_WIDGET(l->data))continue;
             gtk_widget_hide(GTK_WIDGET(l->data));
@@ -278,7 +279,8 @@ public:
         while (gtk_events_pending()) gtk_main_iteration();
         gtk_main_quit();
         exitDialogs = true;
-        exit(1);
+*/        
+        exit(0);
     }
 
     static void
