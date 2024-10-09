@@ -31,7 +31,6 @@
 #include "response/templates/dialog.hh"
 #include "response/templates/dialogtimeout.hh"
 #include "response/templates/dialogbuttons.hh"
-#include "response/templates/dialogtimeoutbuttons.hh"
 #include "response/templates/dialogentry.hh"
 #include "response/templates/dialogpath.hh"
 #include "response/templates/openwith.hh"        
@@ -47,6 +46,7 @@
 # include "response/classes/cpresponse.hh"   // class
 # include "response/classes/mvresponse.hh"   // class
 # include "response/classes/lnresponse.hh"   // class
+# include "response/classes/info.hh"   // class
 
 // menu templates
 #include "menus/templates/menu.hh"

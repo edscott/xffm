@@ -7,6 +7,17 @@ public:
     }
     static void unsetDialog(GtkWindow *dialog){
     }
+
+    static void *hide_f(void *data){
+      auto w = GTK_WIDGET(data);
+      gtk_widget_set_visible(w, false);
+      return NULL;
+    }
+    static void contextHide(GtkWidget *w){
+      context_function(hide_f, (void *)w);
+    }
+
+
    
     static const gchar **
     getTerminalEditors(void) {

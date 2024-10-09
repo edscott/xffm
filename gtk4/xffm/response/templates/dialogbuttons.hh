@@ -11,14 +11,16 @@ namespace xf
     DialogButtons(void){
       auto dialog = this->dialog();
       auto contentArea = this->contentArea();
-      auto button = this->subClass()->getButtons();
+      auto buttons = this->subClass()->getButtons();
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
       gtk_box_append(contentArea, GTK_WIDGET(box));
 
-      for (int i=0; button && button[i]; i++){
-        g_object_set_data(G_OBJECT(button[i]), "dialog", dialog);
-        gtk_box_append(box, GTK_WIDGET(button[i]));
-        g_signal_connect(G_OBJECT(button[i]), "clicked", G_CALLBACK(setResponse), GINT_TO_POINTER(i+1));
+      for (int i=0; buttons && buttons[i]; i++){
+        g_object_set_data(G_OBJECT(buttons[i]), "dialog", dialog);
+        gtk_box_append(box, GTK_WIDGET(buttons[i]));
+      gtk_widget_set_halign (GTK_WIDGET(buttons[i]),GTK_ALIGN_END);
+
+        g_signal_connect(G_OBJECT(buttons[i]), "clicked", G_CALLBACK(setResponse), GINT_TO_POINTER(i+1));
       }
       
       gtk_widget_realize(GTK_WIDGET(dialog));
