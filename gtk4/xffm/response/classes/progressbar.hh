@@ -42,8 +42,6 @@ private:
         auto object = (ProgressBar *)data;
         auto dialog  = object->dialog();
         if (!dialog) {
-          
-          //delete object;
           return G_SOURCE_REMOVE;
         }
 

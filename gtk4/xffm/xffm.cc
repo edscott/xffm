@@ -52,19 +52,22 @@ static void coreSetup(int argc, char *argv[]){
 }
 
 static bool detachProcess(const char *argv1){
-  // Detach if "-f" argument not given.
-  if (!argv1 || strcmp(argv1,"-f")) {
+  // Detach if "-b" argument given.
+  if (argv1 && strcmp(argv1,"-b")==0) {
       if(fork ()){
           sleep(2);
           _exit (123);
       }
       setsid(); // detach main process from tty
+      setenv("SSH_ASKPASS_REQUIRE", "force", 1);
       return true;
-  } 
-  // If xffm is running in foreground,
-  // then the tty is not detached.
-  // So we force the X11 askpass:
-  setenv("SSH_ASKPASS_REQUIRE", "force", 1);
+  } else {
+    // If xffm is running in foreground,
+    // then the tty is not detached.
+    // So we force the X11 askpass:
+    setsid(); // detach main process from tty
+    setenv("SSH_ASKPASS_REQUIRE", "force", 1);
+  }
   TRACE("Xffm running in foreground.\n");
   return false;
 }

@@ -15,8 +15,6 @@ public:
     ~DialogTimeout(void){ 
     }
     DialogTimeout(void){ 
-      // progress bar timeout       
-      //progress_ = new ProgressBar;
       progress_ = &progress_c;
       auto w = progress_->progressBar();
       Basic::boxPack0 (GTK_BOX (this->actionArea()),GTK_WIDGET(w), TRUE, TRUE, 0);
