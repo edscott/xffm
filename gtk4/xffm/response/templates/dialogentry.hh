@@ -4,7 +4,7 @@ namespace xf
 {
 
   template <class dialogClass>
-  class DialogEntry : public Dialog<dialogClass>{
+  class DialogEntry : public DialogTimeout<dialogClass>{
 //  class DialogEntry : public DialogTimeout<dialogClass>{
 
     public:

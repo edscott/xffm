@@ -22,10 +22,12 @@ public:
     GtkButton **getButtons(void){ return button_;}
     
     static void setDefaults(GtkWindow *dialog, GtkLabel *label){
-      auto path = (const char *)g_object_get_data(G_OBJECT(dialog), "path");
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(dialog), "info"));
+      auto path = Basic::getPath(info);
       auto base = g_path_get_basename(path);
       auto string = g_strconcat("<span color=\"red\"><b>",_("Delete"), ":</b></span>\n<span color=\"blue\"><b>", base, "</b></span>", NULL);
       gtk_label_set_markup(label, string);
+      g_free(path);
       g_free(base);
       g_free(string);
     }
@@ -33,15 +35,16 @@ public:
     static void *asyncYes(void *data){
       auto dialogObject = (DialogTimeout<rmResponse> *)data;
       auto dialog = dialogObject->dialog();
-      auto path = (char *)g_object_get_data(G_OBJECT(dialog), "path");
-      int response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
-      GError *error_ = NULL;
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(dialog), "info"));
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+      auto path = Basic::getPath(info);
+      int response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
+      GError *error_ = NULL;
       auto output = Child::getOutput();
       switch (response){
         case 1:
           {
+              Print::showText(output);
               char *arg[]={(char *)"shred", (char *)"-fzuv", path, NULL};
               Run<bool>::thread_run(output, (const char **)arg, false);
           }
@@ -63,10 +66,6 @@ public:
       return NULL;
     }
     static void *asyncNo(void *data){
-      auto dialogObject = (DialogTimeout<rmResponse> *)data;
-      auto dialog = dialogObject->dialog();
-      auto path = (char *)g_object_get_data(G_OBJECT(dialog), "path");
-      g_free(path);
       return NULL;
     }
 };

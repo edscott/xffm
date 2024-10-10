@@ -27,26 +27,9 @@
 #include "templates/run.hh"  
 #include "templates/runbutton.hh"
 
-// dialog templates
-#include "response/templates/dialog.hh"
-#include "response/templates/dialogtimeout.hh"
-#include "response/templates/dialogbuttons.hh"
-#include "response/templates/dialogentry.hh"
-#include "response/templates/dialogpath.hh"
-#include "response/templates/openwith.hh"        
-#include "response/templates/dialogprompt.hh"        
+// dialogs 
+#include "response/dialogs.hh"
 
-// response classes
-// jumpresponse is a template to access Workdir<Type>
-#include "response/classes/jumpresponse.hh"  // template
-#include "response/classes/entryresponse.hh" // class
-#include "response/classes/passwdresponse.hh"// class
-#include "response/classes/rmresponse.hh"    // class
-#include "response/classes/pathresponse.hh"  // class
-# include "response/classes/cpresponse.hh"   // class
-# include "response/classes/mvresponse.hh"   // class
-# include "response/classes/lnresponse.hh"   // class
-# include "response/classes/info.hh"   // class
 
 // menu templates
 #include "menus/templates/menu.hh"

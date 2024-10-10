@@ -11,7 +11,7 @@ public:
     const char *label(void){ return _("Enter password");}
 
     static void *asyncYes(void *data){
-      auto dialogObject = (Dialog<PasswordDialog> *)data;
+      auto dialogObject = (DialogBasic<PasswordDialog> *)data;
       auto dialog = dialogObject->dialog();
       
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
@@ -40,7 +40,7 @@ public:
     }
 
     static void *asyncNo(void *data){
-      auto dialogObject = (Dialog<PasswordDialog> *)data;
+      auto dialogObject = (DialogBasic<PasswordDialog> *)data;
       auto dialog = dialogObject->dialog();
       // Cancel
       // send interrupt signal to parent

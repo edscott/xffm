@@ -3,6 +3,11 @@
 namespace xf {
   class Basic {
 public:
+    static char *getPath(GFileInfo *info){
+        auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+        return g_file_get_path(file);
+    }
+      
     static void setDialog(GtkWindow *dialog){
     }
     static void unsetDialog(GtkWindow *dialog){

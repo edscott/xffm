@@ -5,12 +5,14 @@ namespace xf {
   template <class DirectoryClass>
   class GridView  {
   private:
+      GtkMultiSelection *selection_model_ = NULL;
       GtkPopover *menu_=NULL;
       GtkWidget *view_;
       void *gridViewClick_f_;
       char *path_;
       Menu<GridviewMenu<bool> > *myMenu_=NULL;
   public:
+      GtkMultiSelection *selectionModel(void){ return selection_model_;}
       GtkPopover *menu(void){ return menu_;}
       GtkWidget *view(void){ return view_;}
       void *gridViewClick_f(void){ return gridViewClick_f_;}
@@ -21,6 +23,7 @@ namespace xf {
         path_ = g_strdup(path);
         view_ = getGridView();
         myMenu_ = new Menu<GridviewMenu<bool> >("foo");
+        addGestureClickSelection(view_, NULL, this);
       }
       ~GridView(void){
         if (menu_)g_object_unref(G_OBJECT(menu_));
@@ -31,13 +34,13 @@ namespace xf {
       GtkWidget *
       getGridView(){
         auto child = Child::getChild();
-        GtkMultiSelection *selection_model = NULL;
+        selection_model_ = NULL;
         if (strcmp(path_, "xffm:root")==0) {
-          selection_model = DirectoryClass::rootSelectionModel();
+          selection_model_ = DirectoryClass::rootSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
-          selection_model = DirectoryClass::xfSelectionModel(path_);
-          //selection_model = DirectoryClass::standardSelectionModel(path_);     
+          selection_model_ = DirectoryClass::xfSelectionModel(path_);
+          //selection_model_ = DirectoryClass::standardSelectionModel(path_);     
         }
        
         // GtkListItemFactory implements GtkSignalListItemFactory, which can be connected to
@@ -53,7 +56,7 @@ namespace xf {
         GtkWidget *view;
         /* Create the view.
          */
-        view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model), factory);
+        view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model_), factory);
         g_object_set_data(G_OBJECT(child), "gridview", view);
         gtk_grid_view_set_max_columns(GTK_GRID_VIEW(view), 20);
         //gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 10);
@@ -206,6 +209,44 @@ namespace xf {
    
       return TRUE;
     }
+
+    static gboolean
+    menuSelection_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      DBG("menuSelection_f...\n");
+      auto gridView_p = (GridView *)data;
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto event = gtk_event_controller_get_current_event(eventController);
+      auto selectionModel = gridView_p->selectionModel();
+      GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
+      auto size = gtk_bitset_get_size(bitset);
+      DBG("gtk_bitset_get_size = %ld\n", size);
+      guint value;
+      GtkBitsetIter iter;
+      if (gtk_bitset_iter_init_first (&iter, bitset, &value)){
+        DBG("first=%lu\n", value);
+        while (gtk_bitset_iter_next (&iter,&value)){
+          DBG("next=%lu\n", value);
+        }
+
+
+      }
+      return true;
+    }
+    
+    static void addGestureClickSelection(GtkWidget *self, GObject *object, GridView *gridView_p){
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
+      // 3 for popover pressed
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (menuSelection_f), (void *)gridView_p);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_CAPTURE);
+
+    }    
     
     static void addGestureClickMenu(GtkWidget *imageBox, GObject *object, GridView *gridView_p){
       TRACE("addGestureClick; object=%p\n", gridView_p);

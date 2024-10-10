@@ -6,7 +6,7 @@ namespace xf
 {
 
   template <class dialogClass>
-  class DialogTimeout: public Dialog<dialogClass> {
+  class DialogTimeout: public DialogBasic<dialogClass> {
     ProgressBar *progress_;
     ProgressBar progress_c;
 public:
@@ -19,6 +19,10 @@ public:
       auto w = progress_->progressBar();
       Basic::boxPack0 (GTK_BOX (this->actionArea()),GTK_WIDGET(w), TRUE, TRUE, 0);
       progress_->setDialog(this->dialog());      
+      
+      gtk_widget_realize(GTK_WIDGET(this->dialog()));
+      Basic::setAsDialog(GTK_WIDGET(this->dialog()), "dialog", "Dialog");
+      gtk_window_present(this->dialog());
     }
 
     int run(){ // overload

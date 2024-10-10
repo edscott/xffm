@@ -60,7 +60,7 @@ static bool detachProcess(const char *argv1){
       }
       setsid(); // detach main process from tty
       setenv("SSH_ASKPASS_REQUIRE", "force", 1);
-      return true;
+      return false;
   } else {
     // If xffm is running in foreground,
     // then the tty is not detached.
@@ -69,7 +69,7 @@ static bool detachProcess(const char *argv1){
     setenv("SSH_ASKPASS_REQUIRE", "force", 1);
   }
   TRACE("Xffm running in foreground.\n");
-  return false;
+  return true;
 }
 
 static  gchar *getPath(const char *argv1){

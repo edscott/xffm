@@ -1,9 +1,9 @@
-#ifndef DIALOG_HH
-# define DIALOG_HH
+#ifndef DIALOGBASIC_HH
+# define DIALOGBASIC_HH
 namespace xf
 {
   template <class dialogClass>
-  class Dialog {
+  class DialogBasic {
   GtkBox *contentArea_;
   GtkBox *actionArea_;
   GtkBox *labelBox_;
@@ -25,7 +25,7 @@ void setParent(GtkWindow *parent){
 }
     }
     
-    ~Dialog(void){
+    ~DialogBasic(void){
       MainDialog = NULL;
       Basic::destroy(dialog_);
       // race
@@ -37,9 +37,9 @@ void setParent(GtkWindow *parent){
       TRACE("destructor for %p\n", this);
     }
 
-    Dialog(void){ // must run in main context.
+    DialogBasic(void){ // must run in main context.
       subClass_ = new dialogClass;
-      TRACE("Dialog::parent process = %d\n", parentProcess);
+      TRACE("DialogBasic::parent process = %d\n", parentProcess);
       mkWindow();
       TRACE("dialog is %p\n", dialog_);
       MainDialog = dialog_;
@@ -101,7 +101,7 @@ private:
     }*/
 
     static void *runWait_f(void *data){
-      auto dialogObject = (Dialog<dialogClass> *)data;
+      auto dialogObject = (DialogBasic<dialogClass> *)data;
       auto dialog = dialogObject->dialog();
 
       TRACE("runWait_f...\n");
@@ -116,7 +116,7 @@ int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
     }
 
     static void *run_f(void *data){
-      auto dialogObject = (Dialog<dialogClass> *)data;
+      auto dialogObject = (DialogBasic<dialogClass> *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
       do {
@@ -132,6 +132,7 @@ int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
       } else {
         Basic::context_function(subClass->asyncNo, data);
       }
+      gtk_window_present(GTK_WINDOW(MainWidget));
       TRACE("run_f:: Response is %p\n", response);
       // object will now be deleted.
       return response;
@@ -222,7 +223,7 @@ private:
               gdouble x,
               gdouble y,
               gpointer data) {
-      auto object = (Dialog<dialogClass> *)data;
+      auto object = (DialogBasic<dialogClass> *)data;
       auto dialog = object->dialog();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(-1));
 
@@ -234,7 +235,7 @@ private:
               gdouble x,
               gdouble y,
               gpointer data) {
-      auto object = (Dialog<dialogClass> *)data;
+      auto object = (DialogBasic<dialogClass> *)data;
       auto dialog = object->dialog();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1));
     }

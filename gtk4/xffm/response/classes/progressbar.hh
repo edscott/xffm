@@ -49,7 +49,8 @@ private:
         //if (!GTK_IS_PROGRESS_BAR(progress))  return G_SOURCE_REMOVE;
 
         // While window is active, pause progress bar.
-    /*    if (gtk_window_is_active(GTK_WINDOW(dialog))){
+        // causes crash when user cancels dialog.
+       /* if (gtk_window_is_active(GTK_WINDOW(dialog))){
           TRACE("gtk_window_is_active\n");
           return G_SOURCE_CONTINUE;
         }*/
