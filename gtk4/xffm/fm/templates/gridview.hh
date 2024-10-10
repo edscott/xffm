@@ -126,45 +126,23 @@ namespace xf {
       }
     }
 
-    static gboolean
-    menu_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *data){
-      auto gridView_p = (GridView *)data;
-      auto eventController = GTK_EVENT_CONTROLLER(self);
-      auto event = gtk_event_controller_get_current_event(eventController);
-      auto box = gtk_event_controller_get_widget(eventController);
-      auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(box), "menuBox"));
+    static GtkPopover *getPopover(GFileInfo *info, GridView *gridView_p){ 
+      auto path = Basic::getPath(info);
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
+      auto popover = gridView_p->myMenu_->mkMenu(markup);
+      g_object_set_data(G_OBJECT(popover), "info", info);
 
-      auto modType = gdk_event_get_modifier_state(event);
-
-      TRACE("modType = 0x%x\n", modType);
-      if (modType & GDK_CONTROL_MASK) return FALSE;
-      if (modType & GDK_SHIFT_MASK) return FALSE;
-      
-      TRACE("gestureClick; object=%p button=%d\n", object,
-          gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
-      TRACE("gestureClick; path=%p\n", gridView_p->path());
-      TRACE("menu for %s\n", gridView_p->path());
-
-      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menuBox), "info"));
-      auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-      auto path = g_file_get_path(file);
-
-      auto popover = g_object_get_data(G_OBJECT(menuBox), "menu");
-      if (!popover){
-        
-        auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-        popover = gridView_p->myMenu_->mkMenu(markup);
-        g_object_set_data(G_OBJECT(popover), "info", info);
-
-        setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
-        g_free(markup);
-        g_object_set_data(G_OBJECT(menuBox), "menu", popover);
-        gtk_widget_set_parent(GTK_WIDGET(popover), menuBox);
-      }
+      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      g_free(markup);
+      auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
+      g_object_set_data(G_OBJECT(menuBox2), "menu", popover);
+      gtk_widget_set_parent(GTK_WIDGET(popover), menuBox2);
+      g_free(path);
+      return popover;
+    }
+    
+  static void setupMenu(GtkPopover *popover, GFileInfo *info){
+      auto path = Basic::getPath(info);
       auto abutton = g_object_get_data(G_OBJECT(popover), _("auto"));
           TRACE("data get %p %s --> %p\n", popover, _("auto"), abutton);
       if (abutton){
@@ -203,11 +181,54 @@ namespace xf {
       } else {DBG("** Error:: no auto button\n");}
       //gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "pathbarboxNegative" );
       g_free(path);
+  }
+
+    static gboolean
+    menu_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      auto gridView_p = (GridView *)data;
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto event = gtk_event_controller_get_current_event(eventController);
+      auto box = gtk_event_controller_get_widget(eventController);
+      auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(box), "menuBox"));
+
+      auto modType = gdk_event_get_modifier_state(event);
+
+      TRACE("modType = 0x%x\n", modType);
+      if (modType & GDK_CONTROL_MASK) return false;
+      if (modType & GDK_SHIFT_MASK) return false;
+
+      auto selectionModel = gridView_p->selectionModel();
+
+
+      GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
+      auto size = gtk_bitset_get_size(bitset);
+      if (size > 0) return false;
+
+
       
-      if (popover) gtk_popover_popup(GTK_POPOVER(popover));
+      TRACE("gestureClick; object=%p button=%d\n", object,
+          gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
+      TRACE("gestureClick; path=%p\n", gridView_p->path());
+      TRACE("menu for %s\n", gridView_p->path());
+
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menuBox), "info"));
+      auto popover = g_object_get_data(G_OBJECT(menuBox), "menu");
+  
+      if (!popover){
+        popover = getPopover(info, gridView_p);
+      }
+      
+      if (popover) {
+        setupMenu(GTK_POPOVER(popover), info);
+        gtk_popover_popup(GTK_POPOVER(popover));
+      }
       
    
-      return TRUE;
+      return true;
     }
 
     static gboolean
@@ -221,17 +242,39 @@ namespace xf {
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
       auto selectionModel = gridView_p->selectionModel();
+
+
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
       auto size = gtk_bitset_get_size(bitset);
       DBG("gtk_bitset_get_size = %ld\n", size);
-      guint value;
+return true;      
+      guint position;
       GtkBitsetIter iter;
-      if (gtk_bitset_iter_init_first (&iter, bitset, &value)){
-        DBG("first=%lu\n", value);
-        while (gtk_bitset_iter_next (&iter,&value)){
-          DBG("next=%lu\n", value);
-        }
+      if (gtk_bitset_iter_init_first (&iter, bitset, &position)){
+        /*do{
+          auto list = G_LIST_MODEL(selectionModel);
+          auto info = G_FILE_INFO(g_list_model_get_item (list, position));
+          auto path = Basic::getPath(info);
+          DBG("item=%lu, path = %s\n", position, path);
+          g_free(path);
+        } while (gtk_bitset_iter_next (&iter,&position));*/
+        auto list = G_LIST_MODEL(selectionModel);
+        auto info = G_FILE_INFO(g_list_model_get_item (list, position));
+        auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
+        auto popover = g_object_get_data(G_OBJECT(menuBox2), "menu");
+        if (!popover){          
+          auto path = Basic::getPath(info);
+          auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
+          popover = gridView_p->myMenu_->mkMenu(markup);
+          g_object_set_data(G_OBJECT(popover), "info", info);
 
+          setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+          g_free(markup);
+          g_object_set_data(G_OBJECT(menuBox2), "menu", popover);
+          gtk_widget_set_parent(GTK_WIDGET(popover), menuBox2);
+          g_free(path);
+        }
+        if (popover) gtk_popover_popup(GTK_POPOVER(popover));
 
       }
       return true;
@@ -303,6 +346,7 @@ namespace xf {
         }
 
         auto menuBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        auto menuBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         g_object_set_data(G_OBJECT(imageBox), "menuBox", menuBox);
         g_object_set_data(G_OBJECT(box), "imageBox", imageBox);
@@ -310,6 +354,7 @@ namespace xf {
         gtk_widget_add_css_class(menuBox, "gridviewBox");
         gtk_widget_add_css_class(imageBox, "gridviewBox");
         gtk_box_append(GTK_BOX(menuBox), imageBox);
+        gtk_box_append(GTK_BOX(menuBox2), menuBox);
 
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_widget_add_css_class(labelBox, "gridviewBox");
@@ -317,6 +362,7 @@ namespace xf {
         
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
         g_object_set_data(G_OBJECT(menuBox), "info", info);
+        g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
         auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
         auto path = g_file_get_path(file);
 
@@ -378,7 +424,7 @@ namespace xf {
 
         Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
         Basic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
-        Basic::boxPack0(GTK_BOX(box), menuBox, FALSE, FALSE, 0);    
+        Basic::boxPack0(GTK_BOX(box), menuBox2, FALSE, FALSE, 0);    
         Basic::boxPack0(GTK_BOX(box), labelBox, FALSE, FALSE, 0);  
   
 
