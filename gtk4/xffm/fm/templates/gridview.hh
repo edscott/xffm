@@ -76,6 +76,30 @@ DBG("GridView destructor\n");
       }
 
   private:
+    static void setPopoverItems(GtkPopover *popover, GList *selectionList, GridView *gridView_p){
+      auto keys = gridView_p->myMenu_->keys();
+      for (auto p=keys; p && *p; p++){
+        auto widget = g_object_get_data(G_OBJECT(popover), *p);
+        if (widget){
+          //TRACE("hide widget \"%s\"\n", *p);
+          gtk_widget_set_visible(GTK_WIDGET(widget), false);
+        } else {
+          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+        }
+      }
+      //show
+      const char *items[]={_("Open with"), _("Delete"),_("Copy"),_("Cut"),_("Create a compressed archive with the selected objects"),NULL};
+      for (auto p=items; p && *p; p++){
+        auto widget = g_object_get_data(G_OBJECT(popover), *p);
+        if (widget){
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+        } else {
+          DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
+        }
+      }
+
+    }
+
     static void setPopoverItems(GtkPopover *popover, const char *path, GridView *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
@@ -132,6 +156,17 @@ DBG("GridView destructor\n");
           }
         }
       }
+    }
+
+    static GtkPopover *getPopover(GList *selectionList, GtkWidget *menubox, GridView *gridView_p){ 
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
+      auto popover = gridView_p->myMenu_->mkMenu(markup);
+      g_free(markup);
+      
+
+      setPopoverItems(GTK_POPOVER(popover), selectionList, gridView_p);
+      gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
+      return popover;
     }
 
     static GtkPopover *getPopover(GridView *gridView_p){ 
@@ -247,6 +282,21 @@ DBG("GridView destructor\n");
       g_free(path);
   }
 
+  static void placeMenu(GList *selectionList, GtkWidget *menubox, GridView *gridView_p){
+      auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
+      if (!popover){
+        DBG("getPopover...\n");
+        popover = getPopover(selectionList, menubox, gridView_p);
+        g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
+        DBG("getPopover OK.\n");
+      }
+      
+      if (popover) {
+        //setupMenu(GTK_POPOVER(popover), selectionList);
+        gtk_popover_popup(GTK_POPOVER(popover));
+      }
+  }
+
   static void placeMenu(GridView *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(gridView_p->view()), "menu");
       if (!popover){
@@ -350,40 +400,25 @@ DBG("GridView destructor\n");
         return true;      
       }
       if (size == 0){
-//        DBG("x=%lf y=%lf\n", x, y);
-//        return false;
         placeMenu(gridView_p);
         return true;      
       }
-return true;      
+      // Multiple selection
+
       guint position;
       GtkBitsetIter iter;
+      GList *selectionList = NULL;
       if (gtk_bitset_iter_init_first (&iter, bitset, &position)){
-        /*do{
-          auto list = G_LIST_MODEL(selectionModel);
-          auto info = G_FILE_INFO(g_list_model_get_item (list, position));
-          auto path = Basic::getPath(info);
-          DBG("item=%lu, path = %s\n", position, path);
-          g_free(path);
-        } while (gtk_bitset_iter_next (&iter,&position));*/
         auto list = G_LIST_MODEL(selectionModel);
-        auto info = G_FILE_INFO(g_list_model_get_item (list, position));
+        do {
+          auto info = G_FILE_INFO(g_list_model_get_item (list, position));
+          selectionList = g_list_append(selectionList, info);
+        } while (gtk_bitset_iter_next (&iter,&position));
+
+        auto info = G_FILE_INFO(g_list_first (selectionList)->data);
         auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
-        auto popover = g_object_get_data(G_OBJECT(menuBox2), "menu");
-        if (!popover){          
-          auto path = Basic::getPath(info);
-          auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-          popover = gridView_p->myMenu_->mkMenu(markup);
-          g_object_set_data(G_OBJECT(popover), "info", info);
-
-          setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
-          g_free(markup);
-          g_object_set_data(G_OBJECT(menuBox2), "menu", popover);
-          gtk_widget_set_parent(GTK_WIDGET(popover), menuBox2);
-          g_free(path);
-        }
-        if (popover) gtk_popover_popup(GTK_POPOVER(popover));
-
+        placeMenu(selectionList, menuBox2, gridView_p);
+        //FIXME: we leak selectionList!
       }
       return true;
     }
