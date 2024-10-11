@@ -4,6 +4,7 @@ namespace xf {
   template <class Type> class MainWindow;
   template <class Type> class Run;
   template <class Type> class RunButton;
+  template <class Type> class GridView;
   
   template <class Type>
   class MenuCallbacks {
@@ -51,13 +52,18 @@ namespace xf {
       if (!path){
         auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
         if (!info){
-          DBG("*** Error: neither path nor info set for menu.\n");
-          return;
+          auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+          if (!gridView_p){
+            DBG("*** Error: neither path nor info nor gridView_p set for menu.\n");
+            return;
+          }
+          w->addPage(gridView_p->path());
+        } else {
+          auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+          auto _path = g_file_get_path(file);
+          w->addPage(_path);
+          g_free(_path);
         }
-        auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-        auto _path = g_file_get_path(file);
-        w->addPage(_path);
-        g_free(_path);
       } else {
         w->addPage(path);
       }

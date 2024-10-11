@@ -51,6 +51,7 @@ namespace xf {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;
+      GtkPopover *gridMenu_=NULL;
       // We keep reference to Vpane object,
       // eventhough it will change. Actual reference
       // will be asociated to page box.
@@ -62,6 +63,9 @@ namespace xf {
         childBox_ = mkPageBox(path);
       }
       ~FMpage(){
+        TRACE("FMpage destructor: need to call GridView destructor...\n");
+        //auto gridView_p = (GridView<bool> *)Child::getGridviewObject(GTK_WIDGET(childBox_));
+        //delete gridView_p;
         g_free(path_);
        
       }

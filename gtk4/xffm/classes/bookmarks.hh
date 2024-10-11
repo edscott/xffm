@@ -58,6 +58,7 @@ public:
     
     static gboolean
     addBookmark(const gchar *path){
+      initBookmarks();
         if (!path || !strlen(path)) {
             DBG("AddBookmark() path is NULL or strlen==0");
             return FALSE;
@@ -73,6 +74,7 @@ public:
 
     static gboolean
     removeBookmark(const gchar *path){
+      initBookmarks();
         if (!path || !strlen(path)) {
             DBG("removeBookmark(%s) path is NULL or strlen==0", path);
             return FALSE;

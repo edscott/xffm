@@ -226,10 +226,12 @@ public:
     }
 private: 
     void zapPage(void){
-      TRACE("zapPage...\n");
+      TRACE("zapPage... need to unparent gridview menu\n");
 
       auto num = gtk_notebook_get_current_page(notebook_);
       auto child = gtk_notebook_get_nth_page(notebook_, num);
+      auto gridview_p = (GridView<LocalDir> *) Child::getGridviewObject(child);
+      delete gridview_p;
       Child::remove(child);
 
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));

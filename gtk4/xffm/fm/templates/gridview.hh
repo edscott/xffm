@@ -10,8 +10,9 @@ namespace xf {
       GtkWidget *view_;
       void *gridViewClick_f_;
       char *path_;
-      Menu<GridviewMenu<bool> > *myMenu_=NULL;
+      Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
   public:
+      void setMenu(GtkPopover *menu){ menu_ = menu;}
       GtkMultiSelection *selectionModel(void){ return selection_model_;}
       GtkPopover *menu(void){ return menu_;}
       GtkWidget *view(void){ return view_;}
@@ -22,12 +23,19 @@ namespace xf {
         gridViewClick_f_ = gridViewClick_f;
         path_ = g_strdup(path);
         view_ = getGridView();
-        myMenu_ = new Menu<GridviewMenu<bool> >("foo");
-        addGestureClickSelection(view_, NULL, this);
+        myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
+        addGestureClickSelection1(view_, NULL, this);
+        addGestureClickSelection3(view_, NULL, this);
       }
       ~GridView(void){
-        if (menu_)g_object_unref(G_OBJECT(menu_));
-        if (myMenu_) delete myMenu_;
+DBG("GridView destructor\n");
+        if (menu_){
+          gtk_widget_unparent(GTK_WIDGET(menu_));
+          //g_object_unref(G_OBJECT(menu_));
+        }
+        if (myMenu_) delete myMenu_; // main menu
+
+
         g_free(path_);
       }
 
@@ -126,6 +134,20 @@ namespace xf {
       }
     }
 
+    static GtkPopover *getPopover(GridView *gridView_p){ 
+      auto path = gridView_p->path();
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
+      auto popover = gridView_p->myMenu_->mkMenu(markup);
+      gridView_p->setMenu(popover);
+      g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
+
+      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      g_free(markup);
+      g_object_set_data(G_OBJECT(gridView_p->view()), "menu", popover);
+      gtk_widget_set_parent(GTK_WIDGET(popover), gridView_p->view());
+      return popover;
+    }
+
     static GtkPopover *getPopover(GFileInfo *info, GridView *gridView_p){ 
       auto path = Basic::getPath(info);
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
@@ -134,15 +156,43 @@ namespace xf {
 
       setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
       g_free(markup);
-      auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
-      g_object_set_data(G_OBJECT(menuBox2), "menu", popover);
-      gtk_widget_set_parent(GTK_WIDGET(popover), menuBox2);
+      auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
+      g_object_set_data(G_OBJECT(menubox), "menu", popover);
+      gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
       g_free(path);
       return popover;
     }
     
+  static void setupMenu(GtkPopover *popover, GridView *gridView_p){
+    auto path = gridView_p->path();
+    GridviewMenu<DirectoryClass> d;
+    for (auto keys = d.keys(); keys && *keys; keys++){
+      auto item = g_object_get_data(G_OBJECT(popover), *keys);
+      gtk_widget_set_visible(GTK_WIDGET(item), false);
+    }
+
+    auto addB = g_object_get_data(G_OBJECT(popover), _("Add bookmark"));
+    auto removeB = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
+    auto newTab = g_object_get_data(G_OBJECT(popover), _("Open in new tab"));
+    auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
+    auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
+    auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+    if (c->validClipBoard()){
+      gtk_widget_set_visible(GTK_WIDGET(paste), true);
+      gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
+    } else {
+      gtk_widget_set_visible(GTK_WIDGET(paste), false);
+      gtk_widget_set_visible(GTK_WIDGET(nopaste), true);
+    }
+    gtk_widget_set_visible(GTK_WIDGET(newTab), true);
+    gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
+    gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
+
+  }
+    
   static void setupMenu(GtkPopover *popover, GFileInfo *info){
       auto path = Basic::getPath(info);
+      auto isDir = g_file_test(path, G_FILE_TEST_IS_DIR);
       auto abutton = g_object_get_data(G_OBJECT(popover), _("auto"));
           TRACE("data get %p %s --> %p\n", popover, _("auto"), abutton);
       if (abutton){
@@ -177,10 +227,51 @@ namespace xf {
         } else {
           gtk_widget_set_visible(GTK_WIDGET(abutton), false);
         }
+
         
       } else {DBG("** Error:: no auto button\n");}
+      if (isDir){
+        auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
+        auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
+        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        if (c->validClipBoard()){
+          gtk_widget_set_visible(GTK_WIDGET(paste), true);
+          gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
+        } else {
+          gtk_widget_set_visible(GTK_WIDGET(paste), false);
+          gtk_widget_set_visible(GTK_WIDGET(nopaste), true);
+        }
+        
+      }
       //gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "pathbarboxNegative" );
       g_free(path);
+  }
+
+  static void placeMenu(GridView *gridView_p){
+      auto popover = g_object_get_data(G_OBJECT(gridView_p->view()), "menu");
+      if (!popover){
+        DBG("getPopover...\n");
+        popover = getPopover(gridView_p);
+        DBG("getPopover OK.\n");
+      }
+      
+      if (popover) {
+        setupMenu(GTK_POPOVER(popover), gridView_p);
+        gtk_popover_popup(GTK_POPOVER(popover));
+      }
+  }
+
+  static void placeMenu(GFileInfo *info, GridView *gridView_p){
+      auto menubox = g_object_get_data(G_OBJECT(info), "menuBox");
+      auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
+      if (!popover){
+        popover = getPopover(info, gridView_p);
+      }
+      
+      if (popover) {
+        setupMenu(GTK_POPOVER(popover), info);
+        gtk_popover_popup(GTK_POPOVER(popover));
+      }
   }
 
     static gboolean
@@ -216,18 +307,20 @@ namespace xf {
       TRACE("menu for %s\n", gridView_p->path());
 
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menuBox), "info"));
-      auto popover = g_object_get_data(G_OBJECT(menuBox), "menu");
-  
-      if (!popover){
-        popover = getPopover(info, gridView_p);
-      }
-      
-      if (popover) {
-        setupMenu(GTK_POPOVER(popover), info);
-        gtk_popover_popup(GTK_POPOVER(popover));
-      }
+      placeMenu(info, gridView_p);
       
    
+      return true;
+    }
+   static gboolean
+    unselect_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      auto gridView_p = (GridView *)data;
+      auto selectionModel = gridView_p->selectionModel();
+      gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
       return true;
     }
 
@@ -247,6 +340,21 @@ namespace xf {
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
       auto size = gtk_bitset_get_size(bitset);
       DBG("gtk_bitset_get_size = %ld\n", size);
+      if (size == 1){
+        unsigned position = 1;
+        GtkBitsetIter iter;
+        gtk_bitset_iter_init_first (&iter, bitset, &position);
+        auto list = G_LIST_MODEL(selectionModel);
+        auto info = G_FILE_INFO(g_list_model_get_item (list, position));
+        placeMenu(info, gridView_p);
+        return true;      
+      }
+      if (size == 0){
+//        DBG("x=%lf y=%lf\n", x, y);
+//        return false;
+        placeMenu(gridView_p);
+        return true;      
+      }
 return true;      
       guint position;
       GtkBitsetIter iter;
@@ -280,14 +388,25 @@ return true;
       return true;
     }
     
-    static void addGestureClickSelection(GtkWidget *self, GObject *object, GridView *gridView_p){
+    static void addGestureClickSelection1(GtkWidget *self, GObject *object, GridView *gridView_p){
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
+      // 1 for unselect
+      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (unselect_f), (void *)gridView_p);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_BUBBLE);
+
+    }    
+    
+    static void addGestureClickSelection3(GtkWidget *self, GObject *object, GridView *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for popover pressed
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (menuSelection_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_CAPTURE);
+          GTK_PHASE_BUBBLE);
 
     }    
     
@@ -348,39 +467,41 @@ return true;
         auto menuBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        g_object_set_data(G_OBJECT(imageBox), "menuBox", menuBox);
-        g_object_set_data(G_OBJECT(box), "imageBox", imageBox);
-        g_object_set_data(G_OBJECT(box), "menuBox", menuBox);
-        gtk_widget_add_css_class(menuBox, "gridviewBox");
-        gtk_widget_add_css_class(imageBox, "gridviewBox");
-        gtk_box_append(GTK_BOX(menuBox), imageBox);
-        gtk_box_append(GTK_BOX(menuBox2), menuBox);
-
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        gtk_widget_add_css_class(labelBox, "gridviewBox");
-        g_object_set_data(G_OBJECT(box), "labelBox", labelBox);
-        
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-        g_object_set_data(G_OBJECT(menuBox), "info", info);
-        g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
-        auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-        auto path = g_file_get_path(file);
-
-        
+        auto path = Basic::getPath(info);       
         auto type = g_file_info_get_file_type(info);
         char *name = g_strdup(g_file_info_get_name(info));
         auto size = Settings::getInteger("xfterm", "iconsize");
+
+        gtk_box_append(GTK_BOX(menuBox), imageBox);
+        gtk_box_append(GTK_BOX(menuBox2), menuBox);
+
+        gtk_widget_add_css_class(labelBox, "gridviewBox");
+        gtk_widget_add_css_class(menuBox, "gridviewBox");
+        gtk_widget_add_css_class(menuBox2, "gridviewBox");
+        gtk_widget_add_css_class(imageBox, "gridviewBox");
+        
+        g_object_set_data(G_OBJECT(imageBox), "menuBox", menuBox);
+        g_object_set_data(G_OBJECT(imageBox), "menuBox2", menuBox2);
+
+        g_object_set_data(G_OBJECT(box), "labelBox", labelBox);
+        g_object_set_data(G_OBJECT(box), "imageBox", imageBox);
+        g_object_set_data(G_OBJECT(box), "menuBox", menuBox);
+        g_object_set_data(G_OBJECT(box), "menuBox2", menuBox2);
+
+        g_object_set_data(G_OBJECT(menuBox), "info", info);
+        g_object_set_data(G_OBJECT(menuBox2), "info", info);
+
+        g_object_set_data(G_OBJECT(info), "menuBox", menuBox);
+        g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
+        
+
         GdkPaintable *texture = NULL;
-        /*
-        auto texture = Texture::load(path);
-        g_free(path);
-        if (texture) scaleFactor = 2;
-         */
         if (!texture) {
           // Gets the texture from the GIcon. Fast.
           texture = Texture::load(info);
         }
-        // XXX: put all icons in hash (debug)
           
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
         if (name[0] == '.' && name[1] != '.') {
@@ -390,7 +511,7 @@ return true;
           if (iconPath) texture = Texture::getSvgPaintable(iconPath, size, size);   
 
         }
-        //
+        
         GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
         if (type == G_FILE_TYPE_DIRECTORY ) {
           DirectoryClass::addDirectoryTooltip(image, info);
@@ -402,10 +523,6 @@ return true;
 
         if (size == 24) scaleFactor = 0.75;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
-
-   
-
-        //auto label = GTK_LABEL(g_object_get_data(G_OBJECT(vbox), "label"));
 
         if (name && strlen(name) > 16){
           name[15] = 0;
@@ -460,7 +577,6 @@ return true;
          addMotionController(imageBox);
         addGestureClick(imageBox, object, gridView_p);
         addGestureClickMenu(imageBox, object, gridView_p);
-        g_free(path);
 
         // Now for replacement of image icons for previews
         // This could only be done when load has completed,
@@ -468,10 +584,9 @@ return true;
         // But it really fast from sd disk...
         // 
         if (isImage && Texture::previewOK()){ // thread number limited.
-          auto path = g_file_get_path(file);
           // path, imageBox, image, serial
           auto arg = (void **)calloc(6, sizeof(void *));
-          arg[0] = (void *)path;
+          arg[0] = (void *)g_strdup(path);
           arg[1] = imageBox;
           arg[2] = image;
           arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
@@ -479,6 +594,7 @@ return true;
           arg[5] = child; // in main context
           Thread::threadPoolAdd(Texture::preview, (void *)arg);
         }
+        g_free(path);
 
 
       }

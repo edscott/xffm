@@ -22,12 +22,12 @@ namespace xf {
         _("Copy"),
         _("Cut"),
         _("Paste"), // 
+        _("Clipboard is empty."), // 
         _("Rename"),
         _("Duplicate"),
         _("Link"),
         _("Properties"),
         _("Delete"),
-        _("Clipboard is empty."), // 
         NULL
       };
       return keys_;
@@ -61,6 +61,8 @@ namespace xf {
         {_("Copy"),(void *) copy}, 
         {_("Cut"),(void *) cut}, 
         {_("Delete"),(void *) remove}, 
+        {_("Add bookmark"),(void *) addB}, 
+        {_("Remove bookmark"),(void *) removeB}, 
         {NULL, NULL}
       };
       return menuCallbacks_;
@@ -106,6 +108,33 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
+      g_free(path);
+    }
+    
+    static void addB(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      gchar *path = NULL;
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      if (gridView_p) path = g_strdup(gridView_p->path());
+      else {
+        path = getPath(menu);
+      }
+      DBG("path is %s\n", path);
+      Bookmarks::addBookmark(path);
+      g_free(path);
+    }
+    
+    static void removeB(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      gchar *path = NULL;
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      if (gridView_p) path = g_strdup(gridView_p->path());
+      else {
+        path = getPath(menu);
+      }
+      Bookmarks::removeBookmark(path);
       g_free(path);
     }
 

@@ -27,6 +27,10 @@ namespace xf {
       return (void *)g_object_get_data(G_OBJECT(child), "GridviewObject");
     }
 
+    static void *getGridviewObject(GtkWidget *child){
+      return (void *)g_object_get_data(G_OBJECT(child), "GridviewObject");
+    }
+
     static void setGridviewObject(void *object){
       auto child =  Child::getChild();
       g_object_set_data(G_OBJECT(child), "GridviewObject", object);
