@@ -8,16 +8,14 @@ namespace xf {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
-        _("Open in New Window"),  // removed then from vbutton box
+          _("Search"),
+          _("Open terminal"),
+        _("Open in New Window"), 
         "test",
+          _("Show/hide grid."),
         _("Show Clipboard"), // 
         _("Clear Clipboard History"), // 
-        _("Copy"), 
-        _("Cut"), 
-        _("Paste"), 
-        _("Delete"), 
-        _("Select All"), 
-        _("Match regular expression"), 
+       _("Color settings"),
         _("Close"), 
         NULL
       };
@@ -25,14 +23,14 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Open in New Window"),(void *) DUAL_VIEW}, 
-        {_("Show Clipboard"),(void *) NULL}, // 
-        {_("Copy"), (void *) EDIT_COPY},
-        {_("Cut"),(void *) EDIT_CUT}, 
-        {_("Paste"),(void *) EDIT_PASTE}, 
-        {_("Delete"),(void *) EDIT_DELETE}, 
-        {_("Select All"),(void *)  VIEW_MORE},
-        {_("Match regular expression"),(void *)  DIALOG_QUESTION}, 
+        {_("Show/hide grid."),(void *)"media-view-subtitles" }, 
+        {_("Search"),(void *) SEARCH}, 
+        {_("Open terminal"),(void *) OPEN_TERMINAL}, 
+        {_("Home"),(void *) GO_HOME}, 
+        {_("Show Clipboard"),(void *) "emblem-important"}, // 
+        {_("Clear Clipboard History"),(void *) EDIT_CLEAR}, // 
+        {_("Open in New Window"),(void *)OPEN_FILEMANAGER}, 
+        {_("Color settings"),(void *)DOCUMENT_PROPERTIES}, 
         {_("Close"),(void *)  WINDOW_SHUTDOWN},
         {NULL, NULL}
       }; 
@@ -40,16 +38,16 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
+        {_("Show/hide grid."),(void *) MenuCallbacks<Type>::popCall}, 
+        {_("Search"),(void *) MenuCallbacks<Type>::popCall}, 
+        {_("Open terminal"),(void *) MenuCallbacks<Type>::popCall}, 
+        {_("Home"),(void *) MenuCallbacks<Type>::popCall}, 
+        //{_("Color settings"),(void *) MenuCallbacks<Type>::popCall}, 
+
         {_("Open in New Window"),(void *)openXffmMain}, 
         {"test",(void *)test},
         {_("Show Clipboard"),(void *) showPaste}, 
         {_("Clear Clipboard History"),(void *) clearPaste}, 
-        {_("Copy"), (void *) NULL},
-        {_("Cut"),(void *) NULL}, 
-        {_("Paste"),(void *) NULL}, 
-        {_("Delete"),(void *) NULL}, 
-        {_("Select All"),(void *)  NULL},
-        {_("Match regular expression"),(void *)  NULL}, 
         {_("Close"),(void *) close},
         {NULL, NULL}
       };
@@ -57,6 +55,12 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
+        {_("Show/hide grid."),(void *) MenuCallbacks<Type>::toggleVpane}, 
+        {_("Search"),(void *) MenuCallbacks<Type>::openFind}, 
+        {_("Open terminal"),(void *) MenuCallbacks<Type>::openTerminal}, 
+        {_("Home"),(void *) MenuCallbacks<Type>::goHome}, 
+        // FIXME: this must be submenu, with known unresolved parent issues
+        //{_("Color settings"),(void *) MenuCallbacks<Type>::}, 
         {_("Open in New Window"),(void *) NULL}, 
         {_("Show Clipboard"),(void *) NULL}, // 
         {_("Copy"), (void *) NULL},

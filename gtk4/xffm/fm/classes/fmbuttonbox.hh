@@ -1,7 +1,8 @@
 #ifndef XF_FMBUTTONBOX_HH
 #define XF_FMBUTTONBOX_HH
+//#define BUTTON_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkDragContext *,gpointer)) X)
 namespace xf {
-
+  template <class Type> class MenuCallbacks;
   class EmptyButtonBox{
     public:
     GtkBox *mkVbuttonBox(){
@@ -14,30 +15,27 @@ namespace xf {
     public:
     GtkBox *mkVbuttonBox(){
          const char *bIcon[]={
+           SEARCH, 
            OPEN_TERMINAL, 
            GO_HOME, 
-           SEARCH, 
            //OPEN_FILEMANAGER, 
            //EDIT_CLEAR,
            "media-view-subtitles",
            NULL
          };
         const char *bText[]={
+          _("Search"),
           _("Open terminal"),
           _("Home"),
-          _("Search"),
-          // in main menu _("Open a New Window"),
           //_("Clear Log"),
           _("Show/hide grid."),
           NULL
         };
         void *bCallback[]={
-          (void *)openTerminal,
-          (void *)goHome,
-          (void *)openFind,
-          // (void *)openXffm,
-          //(void *)clear,
-          (void *)toggleVpane,
+          (void *)MenuCallbacks<bool>::openFind,
+          (void *)MenuCallbacks<bool>::openTerminal,
+          (void *)MenuCallbacks<bool>::goHome,
+          (void *)MenuCallbacks<bool>::toggleVpane,
           NULL
         };
         
@@ -154,60 +152,6 @@ private:
                
       }
     }
-    
-    static void
-    goHome(GtkButton *self, void *data){
-      //DBG("goHome....\n");
-      auto child = Child::getChild();
-      
-      //Workdir<bool>::setWorkdir(g_get_home_dir());
-        
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
-      auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
-      const char *v[]={"cd", g_get_home_dir(), NULL};
-      auto retval = Util<bool>::cd((const gchar **)v, child);
-
-      auto path = Child::getWorkdir(child);
-      // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
-      if (retval){
-        //Print::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
-        if (!History::add("cd")) DBG("History::add(%s) failed\n", "cd" );
-      } else {
-        Print::print(output, g_strdup_printf(_("failed to chdir to $HOME")));
-      }
-      return;
-    }
-    static void
-    openTerminal(GtkButton *self, void *data){
-      auto childWidget =Child::getChild();
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Child::getWorkdir(childWidget);
-        TRACE ("openTerminal::childWidget= %p, buttonSpace = %p workdir=%s\n", 
-            childWidget, buttonSpace, workDir);
-
-      auto terminal = Basic::getTerminal();
-      pid_t childPid = Run<bool>::shell_command(output, terminal, false, false);
-
-      auto runButton = new (RunButton<bool>);
-      runButton->init(runButton, terminal, childPid, output, workDir, buttonSpace);
-      return;
-    }
-    static void
-    openFind(GtkButton *self, void *data){
-      auto childWidget =Child::getChild();
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-      auto workDir = Child::getWorkdir(childWidget);
-
-      auto find = g_strdup_printf("xffm --find %s", workDir);
-      pid_t childPid = Run<bool>::shell_command(output, find, false, false);
-
-      auto runButton = new (RunButton<bool>);
-      runButton->init(runButton, find, childPid, output, workDir, buttonSpace);
-      g_free(find);
-      return;
-    }
 
     static void
     upImage (GtkButton *self, void *data){
@@ -246,17 +190,6 @@ private:
       page->setImageSize(pixels);
       view->reloadModel();
       */
-      return ;
-    }
-    
-    static void
-    toggleVpane (GtkButton *self, void *data){
-      auto vpane = Child::getPane();
-      auto position = gtk_paned_get_position(vpane);
-      int height = gtk_widget_get_height(GTK_WIDGET(vpane));
-      TRACE("position=%d, height=%d, 3/4height=%d\n", position, height, height * 3 / 4);
-      if (position < height * 3 / 4) gtk_paned_set_position(vpane, height);
-      else gtk_paned_set_position(vpane, 0);
       return ;
     }
 

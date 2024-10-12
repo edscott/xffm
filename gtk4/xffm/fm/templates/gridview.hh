@@ -208,7 +208,6 @@ DBG("GridView destructor\n");
 
     auto addB = g_object_get_data(G_OBJECT(popover), _("Add bookmark"));
     auto removeB = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
-    auto newTab = g_object_get_data(G_OBJECT(popover), _("Open in new tab"));
     auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
     auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
     auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
@@ -219,10 +218,19 @@ DBG("GridView destructor\n");
       gtk_widget_set_visible(GTK_WIDGET(paste), false);
       gtk_widget_set_visible(GTK_WIDGET(nopaste), true);
     }
-    gtk_widget_set_visible(GTK_WIDGET(newTab), true);
     gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
     gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
+    const char *show[]={_("Open in new tab"), _("Select All"),_("Match regular expression"),NULL};
+    for (auto p=show; p && *p; p++){
+      auto widget = g_object_get_data(G_OBJECT(popover), *p);
+      if (widget){
+        gtk_widget_set_visible(GTK_WIDGET(widget), true);
+      } else {
+        DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
+      }
+    }
 
+    
   }
     
   static void setupMenu(GtkPopover *popover, GFileInfo *info){

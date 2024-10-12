@@ -28,6 +28,8 @@ namespace xf {
         _("Link"),
         _("Properties"),
         _("Delete"),
+        _("Select All"), 
+        _("Match regular expression"), 
         NULL
       };
       return keys_;
