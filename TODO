@@ -1,4 +1,4 @@
-BUG: ubuntu with sddm i3 session: on interrupt from run button, terminal or rodentxffm, i3 crashes (signal probably sent to i3 instead of process. (avoid run button?) *Affects both gtk3 and gtk4*
+BUG: Not a bug. After a kubuntu upgrade, no longer any crashes, but /usr/bin/kill does not work. It does not work either from xffm or from a plain terminal. This is definitely a kubuntu issue. Apparently kill is disactivated for normal users. Maybe so that user cannot disupt desktop environment (maybe protect against some malicioue software). [ubuntu with sddm i3 session: on interrupt from run button, terminal or rodentxffm, i3 crashes (signal probably sent to i3 instead of process. (avoid run button?) *Affects both gtk3 and gtk4*-]
 
 BUG: showstopper, on copy/move, overwrite dialog will open for each and everyfile, only yes/no buttons. Missing checkbox "apply to all" and button "cancel". Also, stupid dialog causes deadlock (no core file found).
 
