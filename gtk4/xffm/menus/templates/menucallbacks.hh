@@ -82,14 +82,21 @@ namespace xf {
       g_free(find);
       return;
     }
+
     static void
     paste(GtkButton *self, void *data){
+      /* for path, in menu create a hidden label with the path.
+       * use label get text to retrieve path without memory leak. */
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-      auto path = g_object_get_data(G_OBJECT(menu), "path");
+      auto path1 = (char *)(g_object_get_data(G_OBJECT(menu), "path"));
+      
+      auto path = Child::getWorkdir();
       //ClipBoard::pasteClip(path);
-      DBG("paste to %s...(currently disabled at menucallbacks.hh)\n", (char *)path);
+      DBG("paste to %s path1=%s...(currently disabled at menucallbacks.hh)\n", 
+          path, path1);
     }
+
     static void
     showPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));

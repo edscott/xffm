@@ -63,6 +63,7 @@ public:
       }
     }
 
+
     static void
     pasteClip(gpointer data){
         auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
@@ -103,6 +104,23 @@ public:
     }
      
     static void
+    copyClipboardList(GList *list){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      gdk_clipboard_set_text (clipBoardTxt, "");
+      gchar *data = g_strdup_printf("copy\n");
+      for (auto l=list; l && l->data; l=l->next){
+        auto info = G_FILE_INFO(l->data);
+        auto path = Basic::getPath(info);
+        Basic::concat(&data, URIFILE);
+        Basic::concat(&data, path);
+        Basic::concat(&data, "\n");
+        g_free(path);
+      }
+      gdk_clipboard_set_text (clipBoardTxt, data);
+      g_free(data);
+    }
+     
+    static void
     cutClipboardPath(const char *path){ 
       auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
       gdk_clipboard_set_text (clipBoardTxt, "");
@@ -110,6 +128,23 @@ public:
       Basic::concat(&data, URIFILE);
       Basic::concat(&data, path);
       Basic::concat(&data, "\n");
+      gdk_clipboard_set_text (clipBoardTxt, data);
+      g_free(data);
+    }
+     
+    static void
+    cutClipboardList(GList *list){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      gdk_clipboard_set_text (clipBoardTxt, "");
+      gchar *data = g_strdup_printf("move\n");
+      for (auto l=list; l && l->data; l=l->next){
+        auto info = G_FILE_INFO(l->data);
+        auto path = Basic::getPath(info);
+        Basic::concat(&data, URIFILE);
+        Basic::concat(&data, path);
+        Basic::concat(&data, "\n");
+        g_free(path);
+      }
       gdk_clipboard_set_text (clipBoardTxt, data);
       g_free(data);
     }

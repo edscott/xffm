@@ -62,6 +62,7 @@ namespace xf {
         {_("Rename"),(void *) move}, 
         {_("Copy"),(void *) copy}, 
         {_("Cut"),(void *) cut}, 
+        {_("Paste"),(void *) MenuCallbacks<Type>::paste}, 
         {_("Delete"),(void *) remove}, 
         {_("Add bookmark"),(void *) addB}, 
         {_("Remove bookmark"),(void *) removeB}, 
@@ -170,6 +171,18 @@ namespace xf {
     static void remove(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
+      auto selectionList = (GList *)g_object_get_data(G_OBJECT(menu), "selectionList");
+      if (selectionList){
+        Dialogs::rmList(menu, selectionList);
+      /*  TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
+        // do your thing
+        ClipBoard::copyClipboardList(selectionList);
+        // cleanup
+        g_list_free(selectionList);
+        g_object_set_data(G_OBJECT(menu), "selectionList", NULL);*/
+        return;
+      }
+
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       Dialogs::rm(info);
     }
@@ -177,6 +190,17 @@ namespace xf {
     static void copy(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
+      auto selectionList = (GList *)g_object_get_data(G_OBJECT(menu), "selectionList");
+      if (selectionList){
+        TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
+        // do your thing
+        ClipBoard::copyClipboardList(selectionList);
+        // cleanup
+        g_list_free(selectionList);
+        g_object_set_data(G_OBJECT(menu), "selectionList", NULL);
+        return;
+      }
+
       auto path = getPath(menu);
       ClipBoard::copyClipboardPath(path);
       g_free(path);
@@ -185,6 +209,16 @@ namespace xf {
     static void cut(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
+      auto selectionList = (GList *)g_object_get_data(G_OBJECT(menu), "selectionList");
+      if (selectionList){
+        TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
+        // do your thing
+        ClipBoard::cutClipboardList(selectionList);
+        // cleanup
+        g_list_free(selectionList);
+        g_object_set_data(G_OBJECT(menu), "selectionList", NULL);
+        return;
+      }
       auto path = getPath(menu);
       ClipBoard::cutClipboardPath(path);
       g_free(path);

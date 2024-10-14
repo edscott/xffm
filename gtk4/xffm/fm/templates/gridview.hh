@@ -76,7 +76,7 @@ DBG("GridView destructor\n");
       }
 
   private:
-    static void setPopoverItems(GtkPopover *popover, GList *selectionList, GridView *gridView_p){
+    static void setPopoverItems(GtkPopover *popover, GridView *gridView_p){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -162,10 +162,15 @@ DBG("GridView destructor\n");
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
       auto popover = gridView_p->myMenu_->mkMenu(markup);
       g_free(markup);
+      DBG("object set selection list\n");
+      g_object_set_data(G_OBJECT(popover), "selectionList", selectionList);
       
 
-      setPopoverItems(GTK_POPOVER(popover), selectionList, gridView_p);
+      setPopoverItems(GTK_POPOVER(popover), gridView_p);
       gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
+      
+      DBG("object set selection popover: %p -> %p\n", selectionList, popover);
+      //g_object_set_data(G_OBJECT(selectionList), "menu", popover);
       return popover;
     }
 
