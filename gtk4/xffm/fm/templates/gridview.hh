@@ -425,6 +425,17 @@ DBG("GridView destructor\n");
 
         auto info = G_FILE_INFO(g_list_first (selectionList)->data);
         auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
+
+#ifdef GDK_WINDOWING_X11
+        GdkDisplay *displayGdk = gdk_display_get_default();
+        Display *display = gdk_x11_display_get_xdisplay(displayGdk);
+        GtkNative *native = gtk_widget_get_native(MainWidget);
+        GdkSurface *surface = gtk_native_get_surface(native);
+        Window src_w = gdk_x11_surface_get_xid (surface);
+        unsigned int src_width = gtk_widget_get_width(MainWidget);
+        int i = round(x);
+        XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
+#endif
         placeMenu(selectionList, menuBox2, gridView_p);
         //FIXME: we leak selectionList!
       }
@@ -446,7 +457,7 @@ DBG("GridView destructor\n");
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for popover pressed
-      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (menuSelection_f), (void *)gridView_p);
+      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (menuSelection_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_BUBBLE);
