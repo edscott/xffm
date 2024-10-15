@@ -2,6 +2,7 @@
 # define DIALOGS_HH
 #include "response/templates/dialogbasic.hh"
 #include "response/templates/dialogtimeout.hh"
+#include "response/templates/dialogdrop.hh"
 #include "response/templates/dialogbuttons.hh"
 #include "response/templates/dialogentry.hh"
 #include "response/templates/dialogpath.hh"

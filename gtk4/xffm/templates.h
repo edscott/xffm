@@ -14,7 +14,7 @@
 #include "classes/mime/mime.hh"
 #include "classes/thread.hh"
 #include "classes/progress.hh"
-#include "classes/gio.hh"
+//#include "classes/gio.hh"
 #include "classes/clipboard.hh"
 #include "classes/bash.hh"
 

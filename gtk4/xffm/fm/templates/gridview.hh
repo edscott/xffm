@@ -319,6 +319,7 @@ DBG("GridView destructor\n");
       }
       
       if (popover) {
+        g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
         setupMenu(GTK_POPOVER(popover), gridView_p);
         gtk_popover_popup(GTK_POPOVER(popover));
       }
@@ -332,6 +333,7 @@ DBG("GridView destructor\n");
       }
       
       if (popover) {
+        g_object_set_data(G_OBJECT(popover), "info", info);
         setupMenu(GTK_POPOVER(popover), info);
         gtk_popover_popup(GTK_POPOVER(popover));
       }

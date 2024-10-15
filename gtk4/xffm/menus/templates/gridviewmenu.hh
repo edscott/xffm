@@ -66,6 +66,7 @@ namespace xf {
         {_("Delete"),(void *) remove}, 
         {_("Add bookmark"),(void *) addB}, 
         {_("Remove bookmark"),(void *) removeB}, 
+        {_("Select All"),(void *) selectAll}, 
         {NULL, NULL}
       };
       return menuCallbacks_;
@@ -126,6 +127,19 @@ namespace xf {
       DBG("path is %s\n", path);
       Bookmarks::addBookmark(path);
       g_free(path);
+    }
+
+    static void selectAll(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      if (!gridView_p) {
+        DBG("selectAll: no gridView_p\n");
+        return;
+      }
+      auto selectionModel = gridView_p->selectionModel();
+      gtk_selection_model_select_all (GTK_SELECTION_MODEL(selectionModel));
+
     }
     
     static void removeB(GtkButton *button, void *data){

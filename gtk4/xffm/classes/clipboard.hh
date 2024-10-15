@@ -63,15 +63,24 @@ public:
       }
     }
 
-
+#if 0
     static void
-    pasteClip(gpointer data){
+    pasteClip(const gchar *target){
         auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-        auto target = (const gchar *)data;
         auto text = c->clipBoardCache();
         gchar **files = g_strsplit(text, "\n", -1);
+      
+        auto dialogObject = new DialogBasic<cpDropResponse>;
 
         DBG("pasteClip(target=%s):\n%s\n", target, text);
+        if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
+          
+        } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
+        } else {
+            DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
+        }
+
+        /*
         if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
             auto message = _("Copying files locally");
             auto command = "cp -R -b -f";
@@ -88,8 +97,10 @@ public:
         } else {
             DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
         }
+        */
         if (files) g_strfreev(files);
     }
+#endif
      
     static void
     copyClipboardPath(const char *path){ 
