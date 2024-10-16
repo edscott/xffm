@@ -5,23 +5,24 @@ namespace xf
 
   template <class dialogClass>
   class DialogDrop : public DialogBasic<dialogClass>{
-
+    GtkLabel *actionLabel_;
+    GtkProgressBar *progress_;
     public:
+    GtkLabel *actionLabel(void){ return actionLabel_;}
+    GtkProgressBar *progress(void){ return progress_;}
     DialogDrop(void){
+      actionLabel_ = GTK_LABEL(gtk_label_new(""));
+      gtk_box_append(this->actionArea(), GTK_WIDGET(actionLabel_));
+      progress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+      gtk_progress_bar_set_show_text(progress_, true);
       auto dialog = this->dialog();
       auto contentArea = this->contentArea();
       //auto buttons = this->subClass()->getButtons();
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
       gtk_box_append(contentArea, GTK_WIDGET(box));
-
-      /*for (int i=0; buttons && buttons[i]; i++){
-        g_object_set_data(G_OBJECT(buttons[i]), "dialog", dialog);
-        gtk_box_append(box, GTK_WIDGET(buttons[i]));
-        gtk_widget_set_halign (GTK_WIDGET(buttons[i]),GTK_ALIGN_END);
-
-        g_signal_connect(G_OBJECT(buttons[i]), "clicked", G_CALLBACK(setResponse), GINT_TO_POINTER(i+1));
-      }*/
-      
+      gtk_box_append(box, GTK_WIDGET(progress_));
+      gtk_widget_set_hexpand(GTK_WIDGET(box), true);
+      gtk_widget_set_halign (GTK_WIDGET(progress_),GTK_ALIGN_END);
       // enough space, seems to resize on each label grow change...
       gtk_widget_set_size_request(GTK_WIDGET(dialog), 200, 75);
 
@@ -30,23 +31,50 @@ namespace xf
       gtk_window_present(dialog);
 
     }
-  /*  static void setDefaults(GtkWindow *dialog, GtkLabel *label){
-      auto string = g_strconcat(
-          "<span color=\"red\" size=\"large\"><b>",_("Copying"),
-           "</b></span>\n"," \n",
-          "<span color=\"blue\"><b>", 
-          _("Copy files"), 
-          "</b></span>", NULL);
-      gtk_label_set_markup(label, string);
-      gtk_widget_set_halign(GTK_WIDGET(label), GTK_ALIGN_CENTER);
-      g_free(string);
-    }   */
-   
+
+    void setProgress (int k, int total, const char *path, const char *file, int bytes, int totalBytes){
+        this->lockResponse();
+        if (this->cancelled()){
+          this->unlockResponse();
+          return;
+        }
+        this->unlockResponse();
+        bool copy = this->subClass()->copy();
+
+        auto markup1 = g_strconcat("<span color=\"red\">",copy?_("Copying"):_("Moving"), 
+            " ---> ", path,
+            "</span>\n", file, NULL);
+        auto markup2 = g_strdup_printf("<span color=\"blue\">%s %.1lf/%.1lf MB</span>", _("Completed"),
+            (double)bytes/1024/1024, (double)totalBytes/1024/1024);
+        void *arg[] = {
+          (void *)markup1,
+          (void *)markup2,
+          GINT_TO_POINTER(k),
+          GINT_TO_POINTER(total),
+          (void *)this,
+         NULL};
+        Basic::context_function(setLabel_f, arg);
+        g_free(markup1);
+        g_free(markup2);
+    }
+
+    
     private:
-  /*  static void setResponse(GtkButton *button, void *data){
-      auto dialog = g_object_get_data(G_OBJECT(button), "dialog");
-      g_object_set_data(G_OBJECT(dialog), "response", data);
-    }*/
+    static void *setLabel_f(void *data){
+      void **arg = (void **)data;
+      auto markup1 = (const char *)arg[0];
+      auto markup2 = (const char *)arg[1];
+      auto k = GPOINTER_TO_INT(arg[2]);
+      auto total = GPOINTER_TO_INT(arg[3]);
+      auto object = (DialogDrop<dialogClass> *)arg[4];
+      gtk_label_set_markup(object->label(), markup1);
+      auto text = g_strdup_printf("%d/%d", k, total);
+      gtk_progress_bar_set_text(object->progress(), text);
+      g_free(text);
+      gtk_progress_bar_set_fraction(object->progress(), (double)k / (double) total);
+      gtk_label_set_markup(object->actionLabel(), markup2);
+      return NULL;
+    }
     
 
   };

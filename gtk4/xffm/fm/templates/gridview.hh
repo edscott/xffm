@@ -565,10 +565,11 @@ DBG("GridView destructor\n");
         }
           
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
-        if (name[0] == '.' && name[1] != '.') {
+        if ((name[0] == '.' && name[1] != '.') ||
+           ( name[strlen(name)-1] == '~') )  {
 
           auto *iconPath = Texture::findIconPath(info);
-          // Only for the hidden items. Applies background mask.
+          // Only for the hidden + backup items. Applies background mask.
           if (iconPath) texture = Texture::getSvgPaintable(iconPath, size, size);   
 
         }
@@ -585,16 +586,16 @@ DBG("GridView destructor\n");
         if (size == 24) scaleFactor = 0.75;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
 
-        if (name && strlen(name) > 16){
-          name[15] = 0;
-          name[14] ='~';
+        if (size > 24 && name && strlen(name) > 16){
+          name[12] = 0;
+          Basic::concat(&name,"<span color=\"red\">...</span>");
         }
-        char buffer[20];
-        if (size == 24) snprintf(buffer, 20, "%-16s", name);
-        else snprintf(buffer, 20, "%s", name);
+       // char buffer[20];
+       // if (size == 24) snprintf(buffer, 20, "%-16s", name);
+       // else snprintf(buffer, 20, "%s", name);
         
-        char *markup = g_strconcat("<span size=\"small\">", buffer, "</span>", NULL);
-//        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
+  //      char *markup = g_strconcat("<span size=\"small\">", buffer, "</span>", NULL);
+        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
         auto label = gtk_label_new("");
         gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);

@@ -101,6 +101,23 @@ public:
         if (files) g_strfreev(files);
     }
 #endif
+    
+    static GList *
+    removeUriFormat(gchar **files) {
+        GList *fileList = NULL;
+        for (auto f=files; f && *f; f++){
+            gchar *file = *f;
+            if (!strstr(file, URIFILE)) continue;
+            if (strlen(file) > strlen(URIFILE)){
+                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
+                    file = *f + strlen(URIFILE);
+                }
+            }
+            fileList = g_list_prepend(fileList, g_strdup(file));
+        }
+        fileList = g_list_reverse(fileList);
+        return fileList;
+    }
      
     static void
     copyClipboardPath(const char *path){ 

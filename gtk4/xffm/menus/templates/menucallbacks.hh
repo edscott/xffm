@@ -82,52 +82,7 @@ namespace xf {
       g_free(find);
       return;
     }
-private:
-  static void *setLabel_f(void *data){
-    void **arg = (void **)data;
-    auto markup = (char *)arg[0];
-    auto label = GTK_LABEL(arg[1]);
-    auto dialog = GTK_WINDOW(arg[2]);
-    gtk_label_set_markup(label, markup);
-    return NULL;
-  }
 
-  static void *thread1(void *data){
-    pthread_t thread;
-    pthread_create(&thread, NULL, thread2, data);
-    void *retval;
-    pthread_join(thread, &retval);
-    DBG("thread2 joined, copy complete.\n");
-    return NULL;
-  }
-  static void *thread2(void *data){
-    void **arg = (void **)data;
-    auto dialogObject = (DialogDrop<cpDropResponse> *)arg[0];
-    auto list = (GList *)arg[1];
-    auto path = (char *)arg[2];
-    for (auto l=list; l && l->data; l=l->next){
-      auto file = (char *)l->data;
-      auto markup = g_strconcat("<span color=\"red\">",_("Copying"), 
-          " ---> ", path,
-          "</span>\n", file, NULL);
-      void *arg2[] = { (void *)markup,
-        (void *)dialogObject->label(),
-        (void *)dialogObject->dialog(),
-        NULL};
-      Basic::context_function(setLabel_f, arg2);
-      // requiere main context:dialogObject->setLabelText(label);
-      DBG("thread2 %s --> %s\n", file, path);
-      g_free(markup);
-      g_free(file);
-      sleep(1);
-    }
-    g_list_free(list);
-    g_free(path);
-    auto dialog = dialogObject->dialog();
-    g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1)); //yes
-
-    return NULL;
-  }
 public:
     static void
     paste(GtkButton *self, void *data){
@@ -147,32 +102,9 @@ public:
         path = g_strdup(gridView_p->path());
       }
 
-      //ClipBoard::pasteClip(path);
-      DBG("paste to %s ...info=%p (currently disabled at menucallbacks.hh)\n", 
-          path, info);
 
-      auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-      auto text = c->clipBoardCache();
-      gchar **files = g_strsplit(text, "\n", -1);
-    
-      auto dialogObject = new DialogDrop<cpDropResponse>;
-      auto dialog = dialogObject->dialog();
-      g_object_set_data(G_OBJECT(dialog), "files", files);
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
-      //dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
-      
-      dialogObject->run(); // running in a thread...
-      auto list = removeUriFormat(files);
-      g_strfreev(files);
-      void **arg = (void **)calloc(4, sizeof (void *));
-      arg[0] = (void *)dialogObject;
-      arg[1] = (void *)list;
-      arg[2] = (void *)path;
-      pthread_t thread;
-      pthread_create(&thread, NULL, thread1, arg);
-      pthread_detach(thread);
-
-      DBG("thread 1 detached\n");
+      cpDropResponse::openDialog(path);
+      g_free(path);
       
 
     /*  DBG("pasteClip(target=%s):\n%s\n", path, text);
@@ -339,23 +271,6 @@ private:
       auto runButton = new (RunButton<Type>);
       runButton->init(runButton, xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
-    }
-    
-    static GList *
-    removeUriFormat(gchar **files) {
-        GList *fileList = NULL;
-        for (auto f=files; f && *f; f++){
-            gchar *file = *f;
-            if (!strstr(file, URIFILE)) continue;
-            if (strlen(file) > strlen(URIFILE)){
-                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
-                    file = *f + strlen(URIFILE);
-                }
-            }
-            fileList = g_list_prepend(fileList, g_strdup(file));
-        }
-        fileList = g_list_reverse(fileList);
-        return fileList;
     }
  
 
