@@ -654,7 +654,8 @@ DBG("GridView destructor\n");
           arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
           arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
           arg[5] = child; // in main context
-          Thread::threadPoolAdd(Texture::preview, (void *)arg);
+          //Thread::threadPoolAdd(Texture::preview, (void *)arg);
+          THREADPOOL->add(Texture::preview, (void *)arg);
         }
         g_free(path);
 

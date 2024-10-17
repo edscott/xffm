@@ -41,9 +41,9 @@ namespace xf {
     }
 
     static bool pleaseWait(void){
-      auto size = Thread::threadPoolSize();
+      auto size = THREADPOOL->size();
       if (size > 0) {
-        Thread::clearThreadPool();
+        THREADPOOL->clear();
         /*
         char buffer[4096];
 

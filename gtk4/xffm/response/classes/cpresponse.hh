@@ -34,6 +34,7 @@ class cpDropResponse {
    const char *title_;
    const char *iconName_;
    bool copy_ = true;
+
   public:
     const char *title(void){ return _("Copy files");}
     const char *iconName(void){ return "copy";}
@@ -130,14 +131,15 @@ private:
         DBG("thread2 %s --> %s\n", (char *)l->data, path);
         // thread copy
         cpmv((char *)l->data, path, dialogObject->subClass()->copy());
-
       }
       if (response < 0) {
         dialogObject->cancel();
+        THREADPOOL->clear();
+
         break;
       }
-      //sleep(1); // slow motion
-      usleep(150);
+      sleep(1); // slow motion
+      //usleep(150);
     }
 
     for (auto l=list; l && l->data; l=l->next){ g_free(l->data);}
@@ -170,17 +172,48 @@ private:
     g_free(dir);
     return false;
   }
-    
+
+private:
+  static void *cpmv_f(void *data){
+    auto arg =(char **)data;
+    TRACE("%s: %s -> %s\n", modeCopy?"copy":"move",src, tgt); 
+    pid_t pid = Run<bool>::thread_run(Child::getOutput(), (const char **)arg, false);
+    int wstatus;
+    waitpid(pid, &wstatus, 0);
+    for (auto p=arg; p && *p; p++) g_free(*p);
+    g_free(arg);
+    return GINT_TO_POINTER(wstatus);
+  }
+  
+public:
     static void
     cpmv(const gchar *src, const gchar *tgt, bool modeCopy){
-        backup(src, tgt);
-        TRACE("%s: %s -> %s\n", modeCopy?"copy":"move",src, tgt); 
-        //const gchar *argCp[] = { "cp", "-R", "-f", src, tgt, NULL };
-        //const gchar *argMv[] = { "mv", "-f", src, tgt, NULL };
-        const gchar *argCp[] = { "cp", "-v", "-R", "-f", src, tgt, NULL };
-        const gchar *argMv[] = { "mv", "-v", "-f", src, tgt, NULL };
-        Run<bool>::thread_run(Child::getOutput(), modeCopy?argCp:argMv, false);
-    }  
+      auto arg = (char **)calloc(10, sizeof(char *));
+      int k = 0;
+      if (modeCopy){
+        arg[k++] = g_strdup("cp");
+        arg[k++] = g_strdup("-R");
+      } else {
+        arg[k++] = g_strdup("mv");
+      }
+      arg[k++] = g_strdup("-v");
+      arg[k++] = g_strdup("-f");
+      arg[k++] = g_strdup(src);
+      arg[k++] = g_strdup(tgt);
+      backup(src, tgt);
+      THREADPOOL->add(cpmv_f, (void *)arg);
+/*
+      //const gchar *argCp[] = { "cp", "-R", "-f", src, tgt, NULL };
+      //const gchar *argMv[] = { "mv", "-f", src, tgt, NULL };
+      const gchar *argCp[] = { "cp", "-v", "-f", "-R",  src, tgt, NULL };
+      const gchar *argMv[] = { "mv", "-v", "-f", src, tgt, NULL };
+
+      void *argC[] = {(void *)src, (void *)tgt, (void *)argCp, NULL};
+      void *argM[] = {(void *)src, (void *)tgt, (void *)argMv, NULL};
+      if (modeCopy) Thread::threadPoolAdd(cpmv_f, (void *)argC);
+      else Thread::threadPoolAdd(cpmv_f, (void *)argM);
+*/
+     }  
 
     static void
     backup(const gchar *path, const gchar *target){
