@@ -43,11 +43,11 @@ class cpDropResponse {
     void copy(bool value){ copy_ = value;}
 
     static void *asyncYes(void *data){
-       DBG("asyncYes::  complete\n");
+       TRACE("asyncYes::  complete\n");
        return NULL;
     }
     static void *asyncNo(void *data){
-      DBG("asyncNo::  cancelled\n");
+      TRACE("asyncNo::  cancelled\n");
       auto dialogObject = (DialogBasic<cpDropResponse> *)data;
       dialogObject->lockCondition();
       pthread_cond_wait(dialogObject->cond_p(), dialogObject->condMutex_p());
@@ -79,7 +79,7 @@ class cpDropResponse {
       pthread_create(&thread, NULL, thread1, arg);
       pthread_detach(thread);
 
-      DBG("thread 1 detached\n");
+      TRACE("thread 1 detached\n");
     }
 private:
   static void *thread1(void *data){
@@ -89,12 +89,12 @@ private:
     pthread_create(&thread, NULL, thread2, data);
     void *retval;
     pthread_join(thread, &retval);
-    DBG("thread2 joined, copy complete.\n");
+    TRACE("thread2 joined, copy complete.\n");
     dialogObject->lockCondition();
-    DBG("thread2 pthread_cond_signal.\n");
+    TRACE("thread2 pthread_cond_signal.\n");
     pthread_cond_signal(dialogObject->cond_p());
     dialogObject->unlockCondition();
-    DBG("thread2 unlockCondition.\n");
+    TRACE("thread2 unlockCondition.\n");
     return NULL;
   }
   static void *thread2(void *data){
@@ -128,7 +128,7 @@ private:
       dialogObject->unlockResponse();
       if (response == 0) {
         dialogObject->setProgress(k, total, path, (char *)l->data, bytes, totalBytes);
-        DBG("thread2 %s --> %s\n", (char *)l->data, path);
+        TRACE("thread2 %s --> %s\n", (char *)l->data, path);
         // thread copy
         cpmv((char *)l->data, path, dialogObject->subClass()->copy());
       }
@@ -146,26 +146,26 @@ private:
     g_list_free(list);
     g_free(path);
         
-    DBG("thread2 loop exited\n");
+    TRACE("thread2 loop exited\n");
     dialogObject->lockResponse();
     if (!dialogObject->cancelled()) {
-      DBG("thread2 setting response to OK\n");
+      TRACE("thread2 setting response to OK\n");
       response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
       if (response == 0) g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1)); //yes
     }
     dialogObject->unlockResponse();
-    DBG("thread2 exit\n");
+    TRACE("thread2 exit\n");
 
     return NULL;
   }
   static bool skip(const char *src, const char *tgt){
     if (strcmp(src, tgt)==0){
-      DBG("skipping %s\n", src);
+      TRACE("skipping %s\n", src);
       return true;
     }
     auto dir = g_path_get_dirname(src);
     if (strcmp(dir, tgt)==0){
-      DBG("skipping %s\n", src);
+      TRACE("skipping %s\n", src);
       g_free(dir);
       return true;
     }

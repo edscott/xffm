@@ -163,7 +163,7 @@ private:
         Basic::context_function(subClass->asyncNo, data);
       }
       if (MainWidget) Basic::present(GTK_WINDOW(MainWidget));
-      DBG("run_f:: Response is %p\n", response);
+      TRACE("run_f:: Response is %p\n", response);
       // object will now be deleted.
       return response;
     }
