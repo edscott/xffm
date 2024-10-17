@@ -63,7 +63,7 @@ namespace xf {
         g_signal_connect( factory, "setup", G_CALLBACK(factorySetup), NULL );
         g_signal_connect( factory, "bind", G_CALLBACK(factoryBind), this);
 
-        DBG("size = %d\n",Settings::getInteger("xfterm", "iconsize"));
+        TRACE("size = %d\n",Settings::getInteger("xfterm", "iconsize"));
 
         TRACE("got maxNameLen_ = %d\n", maxNameLen_);
 
