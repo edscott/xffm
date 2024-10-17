@@ -11,6 +11,7 @@ namespace xf {
       void *gridViewClick_f_;
       char *path_;
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
+      int maxNameLen_ = 0;
   public:
       void setMenu(GtkPopover *menu){ menu_ = menu;}
       GtkMultiSelection *selectionModel(void){ return selection_model_;}
@@ -28,7 +29,7 @@ namespace xf {
         addGestureClickSelection3(view_, NULL, this);
       }
       ~GridView(void){
-DBG("GridView destructor\n");
+      TRACE("GridView destructor\n");
         if (menu_){
           gtk_widget_unparent(GTK_WIDGET(menu_));
           //g_object_unref(G_OBJECT(menu_));
@@ -48,6 +49,7 @@ DBG("GridView destructor\n");
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
           selection_model_ = DirectoryClass::xfSelectionModel(path_);
+          maxNameLen_ = DirectoryClass::getMaxNameLen(path_);
           //selection_model_ = DirectoryClass::standardSelectionModel(path_);     
         }
        
@@ -60,6 +62,10 @@ DBG("GridView destructor\n");
          */
         g_signal_connect( factory, "setup", G_CALLBACK(factorySetup), NULL );
         g_signal_connect( factory, "bind", G_CALLBACK(factoryBind), this);
+
+        DBG("size = %d\n",Settings::getInteger("xfterm", "iconsize"));
+
+        TRACE("got maxNameLen_ = %d\n", maxNameLen_);
 
         GtkWidget *view;
         /* Create the view.
@@ -162,14 +168,14 @@ DBG("GridView destructor\n");
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
       auto popover = gridView_p->myMenu_->mkMenu(markup);
       g_free(markup);
-      DBG("object set selection list\n");
+      TRACE("object set selection list\n");
       g_object_set_data(G_OBJECT(popover), "selectionList", selectionList);
       
 
       setPopoverItems(GTK_POPOVER(popover), gridView_p);
       gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
       
-      DBG("object set selection popover: %p -> %p\n", selectionList, popover);
+      TRACE("object set selection popover: %p -> %p\n", selectionList, popover);
       //g_object_set_data(G_OBJECT(selectionList), "menu", popover);
       return popover;
     }
@@ -298,10 +304,10 @@ DBG("GridView destructor\n");
   static void placeMenu(GList *selectionList, GtkWidget *menubox, GridView *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
       if (!popover){
-        DBG("getPopover...\n");
+        TRACE("getPopover...\n");
         popover = getPopover(selectionList, menubox, gridView_p);
         g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
-        DBG("getPopover OK.\n");
+        TRACE("getPopover OK.\n");
       }
       
       if (popover) {
@@ -313,9 +319,9 @@ DBG("GridView destructor\n");
   static void placeMenu(GridView *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(gridView_p->view()), "menu");
       if (!popover){
-        DBG("getPopover...\n");
+        TRACE("getPopover...\n");
         popover = getPopover(gridView_p);
-        DBG("getPopover OK.\n");
+        TRACE("getPopover OK.\n");
       }
       
       if (popover) {
@@ -395,7 +401,7 @@ DBG("GridView destructor\n");
               gdouble x,
               gdouble y,
               void *data){
-      DBG("menuSelection_f...\n");
+      TRACE("menuSelection_f...\n");
       auto gridView_p = (GridView *)data;
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
@@ -404,7 +410,7 @@ DBG("GridView destructor\n");
 
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
       auto size = gtk_bitset_get_size(bitset);
-      DBG("gtk_bitset_get_size = %ld\n", size);
+      TRACE("gtk_bitset_get_size = %ld\n", size);
       if (size == 1){
         unsigned position = 1;
         GtkBitsetIter iter;
@@ -499,7 +505,7 @@ DBG("GridView destructor\n");
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
         GtkWidget *box;
-        if (Settings::getInteger("xfterm", "iconsize") <= 30)
+        if (Settings::getInteger("xfterm", "iconsize") <= 48)
         {
           box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         } else {
@@ -586,16 +592,37 @@ DBG("GridView destructor\n");
         if (size == 24) scaleFactor = 0.75;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
 
-        if (size > 24 && name && strlen(name) > 16){
-          name[12] = 0;
-          Basic::concat(&name,"<span color=\"red\">...</span>");
+        char buffer[128];
+        if (size == 24){
+          auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen_);
+          TRACE("size 24, format=%s\n", format);
+          snprintf(buffer, 128, (const char *)format, name);
+        } else{
+          const char *n_p = name;
+          if (strlen(name) > 13) {
+            char *b=strdup("");
+            do {
+              char part[14];
+              memset(part, 0, 14);
+              strncpy(part, n_p, 13);
+              part[13] = 0;
+              Basic::concat(&b, part);
+              if (n_p[13] != 0) Basic::concat(&b, "<span color=\"red\">-</span>\n");
+              else break;
+              n_p += 13;
+            } while (strlen(n_p)>13);
+            Basic::concat(&b, n_p);
+
+            snprintf(buffer, 128, "%s", b);
+            g_free(b);
+          } else snprintf(buffer, 128, "%s", name);
         }
-       // char buffer[20];
-       // if (size == 24) snprintf(buffer, 20, "%-16s", name);
-       // else snprintf(buffer, 20, "%s", name);
-        
-  //      char *markup = g_strconcat("<span size=\"small\">", buffer, "</span>", NULL);
-        char *markup = g_strconcat("<span size=\"small\">", name, "</span>", NULL);
+        const char *sizeS = "xsmall";
+        if (size <= 96) sizeS = "small";
+        else if (size <= 156) sizeS = "medium";
+        else if (size <= 192) sizeS = "large";
+        else sizeS = "x-large";
+        auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", sizeS, buffer);
         auto label = gtk_label_new("");
         gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);
