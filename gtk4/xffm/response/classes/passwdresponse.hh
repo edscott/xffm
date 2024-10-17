@@ -83,6 +83,7 @@ public:
       auto dialogObject = new DialogPasswd<PasswordDialog>;
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
+      MainDialog = dialog;
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       gtk_entry_set_visibility (entry, false);
 
