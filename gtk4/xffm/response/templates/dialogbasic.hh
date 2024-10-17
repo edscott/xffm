@@ -162,7 +162,7 @@ private:
       } else {
         Basic::context_function(subClass->asyncNo, data);
       }
-      Basic::present(GTK_WINDOW(MainWidget));
+      if (MainWidget) Basic::present(GTK_WINDOW(MainWidget));
       DBG("run_f:: Response is %p\n", response);
       // object will now be deleted.
       return response;
