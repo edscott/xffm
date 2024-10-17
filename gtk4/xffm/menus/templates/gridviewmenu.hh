@@ -139,8 +139,6 @@ namespace xf {
       }
       THREADPOOL->clear();
       Child::incrementSerial();
-      // FIXME: use condition
-      //while (threadPoolObject->active()) usleep(150);
       auto selectionModel = gridView_p->selectionModel();
       gtk_selection_model_select_all (GTK_SELECTION_MODEL(selectionModel));
 
