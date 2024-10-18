@@ -46,12 +46,12 @@ namespace xf {
       static GtkMultiSelection *standardSelectionModel(const char *path){
         // This does not have the up icon 
         auto gfile = g_file_new_for_path(path);
-        GtkDirectoryList *dList = 
-//          gtk_directory_list_new("", gfile); 
-          gtk_directory_list_new("standard::", gfile); 
-        return getSelectionModel(G_LIST_MODEL(dList));
+        GtkDirectoryList *dList = gtk_directory_list_new("standard::", gfile); 
+        gtk_directory_list_set_monitored(dList, true);
 
+        return getSelectionModel(G_LIST_MODEL(dList));
       }
+
     public:
       static int
       getMaxNameLen(const char *path){
@@ -135,11 +135,134 @@ namespace xf {
           }*/
           g_list_store_insert(store, k++, G_OBJECT(outInfo));
         } while (true);
+    
+        GCancellable *cancellable;
+//        auto monitor = g_file_monitor (file, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error_);
+        auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
+        DBG("monitor=%p file=%p store=%p\n", monitor, file, store);
+        if (error_){
+            ERROR("g_file_monitor_directory(%s) failed: %s\n",
+                    path, error_->message);
+            g_error_free(error_);
+            //g_object_unref(file);
+            //file=NULL;
+            // return;
+        } else {
+          g_signal_connect (monitor, "changed", 
+                G_CALLBACK (changed_f), (void *)store);
+        }
+
         return getSelectionModel(G_LIST_MODEL(store));
       }
 
+      static void
+      changed_f ( GFileMonitor* self,  
+          GFile* first, GFile* second, //same as GioFile * ?
+          GFileMonitorEvent event, 
+          void *data){
+        GListStore *store = G_LIST_STORE(data);
+        DBG("*** monitor changed_f call position=%d...\n", 0);
+        gchar *f= first? g_file_get_path (first):g_strdup("--");
+
+        gchar *s= second? g_file_get_path (second):g_strdup("--");
+      /*  GError *error_=NULL;
+        GFileInfo *infoF = first? g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED", 
+            G_FILE_QUERY_INFO_NONE, NULL, &error_):NULL;
+        if (error_){
+          DBG("Error: %s\n", error_->message);
+          g_error_free(error_);
+          return;
+        }*/
+
+        /* if (!active){
+             DBG("monitor_f(): monitor not currently active.\n");
+             return;
+        }
+        if (p->view()->serial() != p->serial()){
+            DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",p->view()->serial(), p->serial());
+            return;
+        }*/
+        bool verbose = true;
+        guint positionF;
+        if (verbose) DBG("monitor thread %p...\n", g_thread_self());
+         switch (event){
+            case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
+                if (verbose) DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                //p->restat_item(f);
+                break;
+            case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
+                if (verbose) DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+                break;
+            case G_FILE_MONITOR_EVENT_UNMOUNTED:
+                if (verbose) DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+                break;
+
+            case G_FILE_MONITOR_EVENT_DELETED:
+            case G_FILE_MONITOR_EVENT_MOVED_OUT:
+                {
+                  if (verbose) DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);     
+                  GFileInfo *infoF = g_file_info_new();
+                  auto name = g_path_get_basename(f);
+                  g_file_info_set_name(infoF, name);
+                  //positionF = findIt(store, f);
+                  //g_list_store_remove_all(store);
+                  if (g_list_store_find_with_equal_func(store, infoF, equal_f, &positionF)){
+                    DBG("%s found at position %d\n", f, positionF);
+                  } else {
+                    DBG("%s not found by GFile\n", f);  
+                  }
+                  g_free(name);
+                  g_object_unref(infoF);
+                  g_list_store_remove(store, positionF);
+                }
+                //p->remove_item(first);
+                //p->updateFileCountLabel();
+                break;
+
+            case G_FILE_MONITOR_EVENT_CREATED:
+            case G_FILE_MONITOR_EVENT_MOVED_IN:
+                if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                //p->add_new_item(first);
+                //p->updateFileCountLabel();
+
+                break;
+            case G_FILE_MONITOR_EVENT_CHANGED:
+            {
+                if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                //p->restat_item(f);
+            } break;
+            case G_FILE_MONITOR_EVENT_MOVED:
+            case G_FILE_MONITOR_EVENT_RENAMED:
+                if (verbose) DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                //p->add2reSelect(f); // Only adds to selection list if item is selected.
+                //p->remove_item(first); 
+
+                //if (!isInModel(p->treeModel(), s)){
+                    //p->add_new_item(second);
+                //} //else p->restat_item(s);
+                break;
+            case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+                if (verbose) DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+                //p->reSelect(f); // Will only select if in selection list (from move).
+                break;       
+        }
+        g_free(f);
+        g_free(s);
+       
+
+      }
 
 
+      static gboolean equal_f (gconstpointer a, gconstpointer b){
+        auto A = G_FILE_INFO(a);
+        auto B = G_FILE_INFO(b);
+        auto nameA = g_file_info_get_name(A);
+        auto nameB = g_file_info_get_name(B);
+        TRACE("compare \"%s\" with \"%s\"\n", nameA, nameB);
+        if (strcmp(nameA, nameB) == 0) return true;
+        return false;
+      }
+      
       static GtkMultiSelection *rootSelectionModel(void){
         GError *error_ = NULL;
         Bookmarks::initBookmarks();
