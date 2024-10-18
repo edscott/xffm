@@ -230,10 +230,12 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 {
                   if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                  
+                  //g_object_ref(first);
                   GFileInfo *infoF = g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
                       G_FILE_QUERY_INFO_NONE, NULL, &error_);
-                  DBG("infoF=%p\n", infoF);
+                  //g_object_ref(infoF);
+                  g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(first));
+                  DBG("first = %p,infoF=%p\n", first, infoF);
                   if (error_){
                     DBG("Error: %s\n", error_->message);
                     g_error_free(error_);
@@ -243,7 +245,8 @@ namespace xf {
                   //        maybe memory corruption of infoF or not setup properly.
                   //
                   //void *flags = GINT_TO_POINTER(0x100); // FIXME: this will determine sort order
-                  //g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
+                  void *flags = NULL; // FIXME: this will determine sort order
+                  g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
                   //g_list_store_append(store, G_OBJECT(infoF));
 
                   //p->add_new_item(first);

@@ -626,7 +626,7 @@ namespace xf {
         auto label = gtk_label_new("");
         gtk_label_set_markup(GTK_LABEL(label), markup);
         g_free(markup);
-        //DirectoryClass::addLabelTooltip(label, path); 
+        DirectoryClass::addLabelTooltip(label, path); 
 
         Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
         Basic::boxPack0(GTK_BOX(labelBox), label, FALSE, FALSE, 0);    
