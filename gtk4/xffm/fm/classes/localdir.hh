@@ -106,6 +106,7 @@ namespace xf {
         g_file_info_set_name(info, "..");
         g_file_info_set_icon(info, g_themed_icon_new(GO_UP));
         g_list_store_insert(store, 0, G_OBJECT(info));
+        //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
         g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(upFile));
 
         GFile *file = g_file_new_for_path(path);
@@ -129,6 +130,7 @@ namespace xf {
             return NULL;
           }
           if (!outInfo || !outChild) break;
+          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(outInfo, "standard::file", G_OBJECT(outChild));
           TRACE("insert path (%s)\n", g_file_get_path(outChild));
          /* if (g_file_info_get_file_type(outInfo) == G_FILE_TYPE_REGULAR){
@@ -233,7 +235,8 @@ namespace xf {
                   //g_object_ref(first);
                   GFileInfo *infoF = g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
                       G_FILE_QUERY_INFO_NONE, NULL, &error_);
-                  //g_object_ref(infoF);
+
+                  //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
                   g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(first));
                   DBG("first = %p,infoF=%p\n", first, infoF);
                   if (error_){
@@ -313,6 +316,7 @@ namespace xf {
           g_free(utf_name);
           g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
           g_list_store_insert(store, 0, G_OBJECT(info));
+          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
         }
         return getSelectionModel(G_LIST_MODEL(store));
