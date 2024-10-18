@@ -33,12 +33,16 @@ namespace xf {
         GtkFilter *filter = 
           GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
         GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
+
         // Chain link GtkFilterListModel to a GtkSortListModel.
         // Directories first, and alphabeta.
-        GtkSorter *sorter = 
+    /*    GtkSorter *sorter = 
           GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
         GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
-        GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(sortModel));
+        GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(sortModel));*/
+
+        GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
+
         g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), NULL);
         return s;
       }
@@ -133,7 +137,9 @@ namespace xf {
             pthread_t thread;
             pthread_create(&thread, NULL, getPreview, (void *)path);
           }*/
-          g_list_store_insert(store, k++, G_OBJECT(outInfo));
+          //g_list_store_insert(store, k++, G_OBJECT(outInfo));
+          void *flags = NULL; // FIXME: this will determine sort order
+          g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, flags);
         } while (true);
     
         GCancellable *cancellable;
@@ -160,6 +166,7 @@ namespace xf {
           GFile* first, GFile* second, //same as GioFile * ?
           GFileMonitorEvent event, 
           void *data){
+        GError *error_ = NULL;
         GListStore *store = G_LIST_STORE(data);
         DBG("*** monitor changed_f call position=%d...\n", 0);
         gchar *f= first? g_file_get_path (first):g_strdup("--");
@@ -221,10 +228,27 @@ namespace xf {
 
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
-                if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                //p->add_new_item(first);
-                //p->updateFileCountLabel();
+                {
+                  if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
+                  
+                  GFileInfo *infoF = g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
+                      G_FILE_QUERY_INFO_NONE, NULL, &error_);
+                  DBG("infoF=%p\n", infoF);
+                  if (error_){
+                    DBG("Error: %s\n", error_->message);
+                    g_error_free(error_);
+                    return;
+                  }
+                  // FIXME: This does not work. Crashes. Only name gets through to gridview factory bind.
+                  //        maybe memory corruption of infoF or not setup properly.
+                  //
+                  //void *flags = GINT_TO_POINTER(0x100); // FIXME: this will determine sort order
+                  //g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
+                  //g_list_store_append(store, G_OBJECT(infoF));
 
+                  //p->add_new_item(first);
+                  //p->updateFileCountLabel();
+                }
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
             {
@@ -310,17 +334,21 @@ namespace xf {
         bool byDate = (flags & 0x01);
         bool bySize = (flags & 0x02);
         bool descending = (flags & 0x04);
+        
+        bool verbose = (flags & 0x100);
 
         GFileInfo *infoA = G_FILE_INFO(a);
         GFileInfo *infoB = G_FILE_INFO(b);
         auto typeA = g_file_info_get_file_type(infoA);
         auto typeB = g_file_info_get_file_type(infoB);
 
+        if (verbose) DBG("--1\n");
         if (strcmp(g_file_info_get_name(infoA), "..")==0) return -1;
         if (strcmp(g_file_info_get_name(infoB), "..")==0) return 1;
         
         GFile *fileA = G_FILE(g_file_info_get_attribute_object(infoA, "standard::file"));
         GFile *fileB = G_FILE(g_file_info_get_attribute_object(infoB, "standard::file"));
+        if (verbose) DBG("--2\n");
 
         // compare by name, directories or symlinks to directories on top
         TRACE("compare %s --- %s\n", g_file_info_get_name(infoA), g_file_info_get_name(infoB));
@@ -336,6 +364,7 @@ namespace xf {
 
         if (a_cond && !b_cond) return -1; 
         if (!a_cond && b_cond) return 1;
+        if (verbose) DBG("--3\n");
 
         auto nameA = g_file_info_get_name(infoA);
         auto nameB = g_file_info_get_name(infoB);
@@ -368,6 +397,7 @@ namespace xf {
           if (descending) return sizeB - sizeA;
           return sizeA - sizeB;
         } 
+        if (verbose) DBG("--4\n");
         // by name 
         if (descending) return -strcasecmp(nameA, nameB);
         return strcasecmp(nameA, nameB);
