@@ -144,7 +144,6 @@ namespace xf {
           g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, flags);
         } while (true);
     
-        GCancellable *cancellable;
 //        auto monitor = g_file_monitor (file, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error_);
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
         DBG("monitor=%p file=%p store=%p\n", monitor, file, store);

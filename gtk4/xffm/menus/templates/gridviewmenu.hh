@@ -67,6 +67,7 @@ namespace xf {
         {_("Add bookmark"),(void *) addB}, 
         {_("Remove bookmark"),(void *) removeB}, 
         {_("Select All"),(void *) selectAll}, 
+        {_("Properties"),(void *) properties}, 
         {NULL, NULL}
       };
       return menuCallbacks_;
@@ -105,6 +106,17 @@ namespace xf {
         return Basic::getPath(info);
     }
 
+
+    static void 
+    properties(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      //auto path = getPath(menu);
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      //DBG("path= %s, info=%p\n", path, info);
+      new Properties(info);
+      //g_free(path);
+    }
 
     static void 
     openWith(GtkButton *button, void *data){

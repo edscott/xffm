@@ -2,7 +2,100 @@
 #define BASIC_HH
 namespace xf {
   class Basic {
+    private:
+#define PAGE_LINE 256
+
+    static gchar *pipeCommand(const gchar *command){
+        FILE *pipe = popen (command, "r");
+        if(pipe) {
+            gchar line[PAGE_LINE];
+            line[PAGE_LINE - 1] = 0;
+            if (!fgets (line, PAGE_LINE - 1, pipe)){
+                  DBG("fgets(%s): %s\n", command, "no characters read.");
+            } else {
+              if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
+            }
+            pclose (pipe);
+            return g_strdup(line);
+        } 
+        return NULL;
+    }
+
+    static gchar *pipeCommandFull(const gchar *command){
+        FILE *pipe = popen (command, "r");
+        if(pipe) {
+            gchar *result=g_strdup("");
+            gchar line[PAGE_LINE];
+            while (fgets (line, PAGE_LINE - 1, pipe) && !feof(pipe)){
+                line[PAGE_LINE - 1] = 0;
+                auto g = g_strconcat(result, line, NULL);
+                g_free(result);
+                result = g;
+            }
+            pclose (pipe);
+            return result;
+        } 
+        return NULL;
+    }
+    
+    static void 
+    lineBreaker(gchar *inputLine, gint lineLength){
+        if (strlen(inputLine) > lineLength){
+            gchar *remainder;
+            gchar *p = inputLine+lineLength;
+            do{
+                if (*p ==' ' || *p =='_') {
+                    *p = '\n';
+                    remainder = p+1;
+                    break;
+                }
+                p++;
+            } while (*p);
+            if (*p != 0) lineBreaker(remainder, lineLength);
+        }
+    }
+     
 public:
+    static GList *getChildren(GtkWidget *widget){
+      GList *list = NULL;
+      auto child = gtk_widget_get_first_child(widget);
+      if (child) {
+        list = g_list_append(list, child);
+        GtkWidget *next=NULL;
+        while ((next = gtk_widget_get_next_sibling(child)) != NULL){
+          child = next;
+          list = g_list_append(list, child);
+        }
+      }
+      return list;
+    }
+
+
+    static gchar *fileInfo(const gchar *path){
+        gchar *file = g_find_program_in_path("file");
+        if (!file) return g_strdup("\"file\" command not in path!");
+        gchar *result = NULL; 
+        gchar *command = g_strdup_printf("%s \'%s\'", file, path);
+        result = pipeCommand(command);
+        g_free(command);
+        g_free(file);
+
+        if (result){
+            gchar *retval;
+            if (strchr(result, ':')) retval=g_strdup(strchr(result, ':')+1);
+            else retval = g_strdup(result);
+            g_free(result);
+            gchar *p=retval;
+            for(;p && *p; p++) {
+                if (*p == '<') *p='[';
+                else if (*p == '>') *p=']';
+            }
+            lineBreaker(retval, 40);
+            return retval;
+        }
+        return NULL;
+    }
+
     static char *getPath(GFileInfo *info){
         auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
         return g_file_get_path(file);
@@ -575,6 +668,7 @@ private:
         return '?';
     }
 
+public:    
     static gchar *
     modeString (mode_t mode) {
         gchar *str=(gchar *)calloc(1, 15);
@@ -601,7 +695,6 @@ private:
         return (str);
     }
 
-    
     static gchar *
     sizeString (size_t size) {
         if (size > 1024 * 1024 * 1024){
