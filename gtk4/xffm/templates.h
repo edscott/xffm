@@ -9,12 +9,12 @@
 #include "classes/settings.hh"  
 #include "classes/mime/mime.hh"
 #include "templates/texture.hh"  
-#include "templates/preview.hh"
 #include "classes/print.hh"  
 #include "classes/tubo.hh"  
 
 #include "classes/properties.hh"
 #include "classes/thread.hh"
+#include "templates/preview.hh"
 #include "classes/progress.hh"
 #include "classes/clipboard.hh"
 #include "classes/bash.hh"

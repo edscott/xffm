@@ -65,7 +65,6 @@ namespace xf {
 template <class Type> class Texture;
 template <class Type>
 class Preview {
-
   public:
     static GdkPaintable *
     getPaintableWithThumb(const char *path)
@@ -96,28 +95,50 @@ class Preview {
     
     static GdkPaintable *
     textPreview (const gchar *path, gint pixels) {
-        // Read a cache page worth of text and convert to utf-8 
-        gchar *text;
-        if (strcmp(path, "empty-file")==0){
-            TRACE( "oooooo   size for %s == 0\n", path);
-            text = g_strdup_printf("*****  %s  *****", _("Empty file"));
-        } else {
-            text = readFileHead(path);
-        }
+      GdkPaintable *paintable = NULL;
+      if (thumbnailOK(path)){
+          // Read thumbnail.
+          paintable = readThumbnail(path);
+          if (paintable){
+             TRACE("getPaintableWithThumb(): Loaded %s from thumbnail at height %d.\n", path, height);
+             return paintable;
+          }
+      } 
 
-        if(!text) return NULL;
-        if (!strchr(text, '\n')){
-            gchar *t = g_strconcat(text,"\n",NULL);
-            g_free(text);
-            text = t;
-        }
+      // Read a cache page worth of text and convert to utf-8 
+      gchar *text;
+      if (strcmp(path, "empty-file")==0){
+          TRACE( "oooooo   size for %s == 0\n", path);
+          text = g_strdup_printf("*****  %s  *****", _("Empty file"));
+      } else {
+          text = readFileHead(path);
+      }
 
-        auto paintable = processTextPixbuf(text, path, pixels);
-        g_free(text);
-        return paintable;        
+      if(!text) return NULL;
+      if (!strchr(text, '\n')){
+          gchar *t = g_strconcat(text,"\n",NULL);
+          g_free(text);
+          text = t;
+      }
+
+      paintable = processTextPixbuf(text, path, pixels);
+      g_free(text);
+      return paintable;        
     }
        
-  
+    static GdkPaintable *
+    gsPreview (const gchar *path, gint pixels) {
+      GdkPaintable *paintable = NULL;
+      if (thumbnailOK(path)){
+          // Read thumbnail.
+          paintable = readThumbnail(path);
+          if (paintable){
+             TRACE("getPaintableWithThumb(): Loaded %s from thumbnail at height %d.\n", path, height);
+             return paintable;
+          }
+      } 
+      return ghostscript(path, pixels);
+    }
   private:
 
 
@@ -705,8 +726,187 @@ class Preview {
         }
         return page_idx;
     }
+//////////////////////////   pdf /////////////////////////////////////
 
-  
+    static GdkPaintable *
+    ghostscript (const gchar *path, gint pixels) {
+      GdkPaintable * retval=NULL;
+      char *ghostscript = g_find_program_in_path ("gs");
+      static gboolean warned = FALSE;
+      if(!ghostscript) {
+        if(!warned) {
+            g_warning
+            ("\n*** Please install ghostscript for ps and pdf previews\n*** Make sure ghostscript fonts are installed too!\n");
+            fflush (NULL);
+            warned = TRUE;
+        }
+        return NULL;
+      }
+
+      gint fd = open (path, O_RDONLY);
+      if(fd < 0) {
+          return NULL;
+      }
+      close (fd);
+
+      // options for pdf/ps previews:
+      // 
+      // plain ghostscript is muuch faster than imagemagick: (for ps/pdf)
+      // gs -dSAFER -dBATCH -dNOPAUSE -sDEVICE=png256 -dFirstPage=1 -dLastPage=1 -dPDFFitPage -r100 -sOutputFile=out.png input.pdf
+      //
+      //
+
+      gchar *src, *tgt;
+      gchar *arg[13];
+      gint i = 0;
+
+      // The preview will be generated at size: PREVIEW_IMAGE_SIZE
+      auto previewPath = get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
+      //auto thumbnail = get_thumbnail_path (path, pixels);
+
+      //pdf and ps ghostscript conversion
+      src = g_strdup (path);
+      tgt = g_strdup_printf ("-sOutputFile=%s", previewPath);
+      arg[i++] = ghostscript;
+      arg[i++] = (gchar *)"-dSAFER";
+      arg[i++] = (gchar *)"-dBATCH";
+      arg[i++] = (gchar *)"-dNOPAUSE";
+      arg[i++] = (gchar *)"-sPAPERSIZE=letter";    // or a4...
+      arg[i++] = (gchar *)"-sDEVICE=png256";
+      arg[i++] = (gchar *)"-dFirstPage=1";
+      arg[i++] = (gchar *)"-dLastPage=1";
+      arg[i++] = (gchar *)"-dPDFFitPage";
+      arg[i++] = (gchar *)"-r100";
+      arg[i++] = tgt;
+      arg[i++] = src;
+      arg[i++] = NULL;
+
+      TRACE ("SHOW_TIPx: %s(%s)\n", arg[0], arg[3]);
+      // this fork is ok from thread, I guess.
+      TRACE( "gsPreview(): preview for %s\n", src);
+      pid_t pid = fork ();
+      if(!pid) {
+        TRACE( "--> child is creating preview %s\n", preview);
+            auto fd = fopen ("/dev/null", "wb");
+            dup2(fileno(fd), fileno(stdout));
+            execv (arg[0], arg);
+            _exit (123);
+      } else {
+        // Create wait thread. Detached.
+        void **arg = (void **)calloc(3, sizeof(void *));
+        if (!arg) g_error("gsPreview(): malloc: %s\n", strerror(errno));
+        pthread_mutex_t waitMutex = PTHREAD_MUTEX_INITIALIZER;
+        pthread_cond_t waitSignal = PTHREAD_COND_INITIALIZER;
+        
+        arg[0] = &waitMutex;
+        arg[1] = &waitSignal;
+        arg[2] = GINT_TO_POINTER(pid);
+
+        pthread_mutex_lock(&waitMutex);
+        
+        auto dbgText = g_strdup_printf("Preview::gsPreview(%s)", path);
+        auto thread_p = new Thread(dbgText, gs_wait_f, arg);
+        g_free(dbgText);
+
+        const struct timespec abstime={
+            time(NULL) + 4, 0
+        };
+        if (pthread_cond_wait(&waitSignal, &waitMutex) != 0){
+            ERROR("Aborting runaway ghostscript preview for %s (pid %d)\n",
+                src, (int)pid);
+            kill(pid, SIGKILL);
+        } else {
+            TRACE("condition wait complete for file %s\n", previewPath);
+            // this function refs retval
+            // Now we correct for requested size
+            //retval = correctPixbufSize(path, pixels);
+            //retval = loadFromThumbnails(path, NULL, pixels);
+            GError *error_ = NULL;
+            retval = GDK_PAINTABLE(gdk_texture_new_from_filename (previewPath, &error_));
+            if (error_){
+              DBG("** Error::gsPreview(): %s\n", error_->message);
+              g_error_free(error_);
+              retval = NULL;
+            }
+        }
+        pthread_mutex_unlock(&waitMutex);
+        pthread_mutex_destroy(&waitMutex);
+            TRACE ("SHOW_TIPx: preview created by convert\n");
+      }
+      g_free (ghostscript);       //arg[0]
+      g_free (src);
+      g_free (tgt);
+      g_free (previewPath);
+      return retval; 
+    }
+
+    static void *
+    gs_wait_f(void *data){
+        auto arg = (void **)data;
+        auto waitMutex = (pthread_mutex_t *)arg[0];
+        auto waitSignal = (pthread_cond_t *)arg[1];
+        pid_t pid = GPOINTER_TO_INT(arg[2]);
+        g_free(arg);
+        gint status;
+        TRACE("waiting for %d\n", pid);
+        waitpid (pid, &status, WUNTRACED);
+        TRACE("wait for %d complete\n", pid);
+        //pthread_mutex_unlock(waitMutex); 
+        pthread_cond_signal(waitSignal); 
+        return NULL;
+    }
+    static gchar *
+    get_thumbnail_path (const gchar * file, gint size) {
+      gchar *cache_dir;
+      gchar *thumbnail_path = NULL;
+      GString *gs;
+      gchar key[11];
+
+      cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
+      if(g_mkdir_with_parents (cache_dir, 0700) < 0) {
+          g_free (cache_dir);
+          return NULL;
+      }
+
+      /* thumbnails are not subject to thumbnailization: */
+      gchar *dirname = g_path_get_dirname (file);
+      if(strncmp (cache_dir, dirname, strlen (cache_dir)) == 0) {
+          TRACE ("thumbnails cannot be thumbnailed:%s\n", file);
+          g_free (cache_dir);
+          g_free (dirname);
+          return NULL;
+      }
+
+      gs = g_string_new (dirname);
+      auto uintKey = g_string_hash (gs);
+      sprintf (key, "%10u", uintKey);
+      g_strstrip (key);
+      g_string_free (gs, TRUE);
+      g_free (dirname);
+
+      gchar *thumbnail_dir = g_build_filename (cache_dir, key, NULL);
+      if(g_mkdir_with_parents (thumbnail_dir, 0700) < 0) {
+          g_free (thumbnail_dir);
+          return NULL;
+      }
+
+      gchar *filename = g_path_get_basename (file);
+
+      gs = g_string_new (file);
+      sprintf (key, "%10u", g_string_hash (gs));
+      g_strstrip (key);
+      g_string_free (gs, TRUE);
+      g_free (filename);
+
+      filename = g_strdup_printf ("%s-%d.png", key, size);
+      thumbnail_path = g_build_filename (thumbnail_dir, filename, NULL);
+      g_free (filename);
+      g_free (cache_dir);
+      g_free (thumbnail_dir);
+      TRACE ("thread: %s ->thumbnail_path=%s\n", file, thumbnail_path);
+
+      return thumbnail_path;
+    }
 
 };
 

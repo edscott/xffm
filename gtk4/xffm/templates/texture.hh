@@ -50,7 +50,9 @@ template <class Type>  class Texture {
         GdkPaintable *paintable = NULL;
         auto mimetype = Mime::mimeType(path);
         if (!mimetype) mimetype =  _("unknown");
-        if (strstr(mimetype, "image")) return Preview<Type>::getPaintableWithThumb(path);
+        if (strstr(mimetype, "image")) {
+          return Preview<Type>::getPaintableWithThumb(path);
+        }
 
         bool textType =(
             strstr(mimetype, "text")
@@ -64,8 +66,16 @@ template <class Type>  class Texture {
              TRACE("%s texttype paintable=%p\n", path, paintable);
              return paintable;
         }
+        // pdf previews...
+        bool useGhostScript = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript") );
+        if(useGhostScript) {  
 
-        return paintable;
+            // decode delegate is ghostscript
+             GdkPaintable *paintable =  Preview<Type>::gsPreview (path, PREVIEW_IMAGE_SIZE);// refs
+             return paintable;
+        }
+
+        return NULL;
       }
       
      static 
