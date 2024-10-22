@@ -584,10 +584,15 @@ namespace xf {
         if (type == G_FILE_TYPE_DIRECTORY ) {
           DirectoryClass::addDirectoryTooltip(image, info);
         }
-        auto isImage = (type == G_FILE_TYPE_REGULAR && Mime::is_image(path));
+        auto mimetype = Mime::mimeType(path);
+        if (!mimetype) mimetype =  _("unknown");
+        auto isImage = (strstr(mimetype, "image"));
+        auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
+
+        auto doPreview = (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
         if (size < 0) size = 48;
         double scaleFactor = 1.;
-        if (isImage) scaleFactor = 2;
+        if (doPreview) scaleFactor = 2;
 
         if (size == 24) scaleFactor = 0.75;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
@@ -671,8 +676,9 @@ namespace xf {
         // This could only be done when load has completed,
         // and that is because disk access is serialize by bus.
         // But it really fast from sd disk...
-        // 
-        if (isImage && Texture<bool>::previewOK()){ // thread number limited.
+        
+        // if (doPreview && Texture<bool>::previewOK()){ // obsolete.
+        if (doPreview){ 
           // path, imageBox, image, serial
           auto arg = (void **)calloc(6, sizeof(void *));
           arg[0] = (void *)g_strdup(path);
@@ -682,6 +688,7 @@ namespace xf {
           arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
           arg[5] = child; // in main context
           //Thread::threadPoolAdd(Texture<bool>::preview, (void *)arg);
+          // thread number limited.
           THREADPOOL->add(Texture<bool>::preview, (void *)arg);
         }
         g_free(path);

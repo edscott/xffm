@@ -1,12 +1,13 @@
 #ifndef XF_TEXTURE_HH
 #define XF_TEXTURE_HH
 
-static bool greenLightPreview = true;
+//static bool greenLightPreview = true;
 namespace xf {
 template <class Type> class Preview;
 template <class Type>  class Texture {
       public:
-      static bool previewOK(void) {return  greenLightPreview;} 
+      //static bool previewOK(void) {return  greenLightPreview;} 
+      /* obsolete
       static void redlight(void){
         TRACE("redlight...\n");
         greenLightPreview = false;
@@ -17,6 +18,7 @@ template <class Type>  class Texture {
         greenLightPreview = true;
         return ;
       }  
+      */
       static
       GdkPaintable *load(GFileInfo *info){
         auto gIcon = g_file_info_get_icon(info);
@@ -125,7 +127,7 @@ template <class Type>  class Texture {
             currentSerial, serial);
 
         if (serial != currentSerial){
-          DBG("Current serial mismatch %d != %d. Dropping paintable %p\n", 
+          DBG("Current serial mismatch %d != %d. Dropping paintable %p from thread.\n", 
               currentSerial, serial, paintable);
         } else {
           // Here we execute the gtk widget replacement in the g_main_context.
@@ -147,9 +149,11 @@ template <class Type>  class Texture {
 
         TRACE("replace_f in main context: paintable=%p, box=%p, image=%p, serial=%d\n", 
             paintable, imageBox, image, serial);
+        auto activeSerial = Child::getSerial();
 
-        if (serial != Child::getSerial(child)){
-          DBG("replace_f(): serial mismatch %d != %d\n", serial, Child::getSerial(child));
+        //if (serial != Child::getSerial(child)){
+        if (serial != activeSerial){
+          DBG("mainContext::replace_f(): serial mismatch %d != %d (dropping paintable)\n", serial, Child::getSerial(child));
           return NULL;
         }
         // no work if (gridview != Child::getGridview()) return NULL;

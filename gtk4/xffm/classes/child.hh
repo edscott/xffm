@@ -1,6 +1,7 @@
 #ifndef CHILD_HH
 #define CHILD_HH
 static GHashTable *childHash = NULL;
+static pthread_mutex_t serialMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
   class Child {
     public:
@@ -54,18 +55,27 @@ namespace xf {
     }
 
     static const int getSerial(void){
+      pthread_mutex_lock(&serialMutex);
       auto child =  Child::getChild();
-      return getSerial(child);
+      auto serial = g_object_get_data(G_OBJECT(child), "serial");
+      pthread_mutex_unlock(&serialMutex);
+      return GPOINTER_TO_INT(serial);
     }
 
     static const int getSerial(GtkWidget *child){
-      return GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
+      pthread_mutex_lock(&serialMutex);
+      auto serial = g_object_get_data(G_OBJECT(child), "serial");
+      pthread_mutex_unlock(&serialMutex);
+
+      return GPOINTER_TO_INT(serial);
     }
 
     static void incrementSerial(void){
+      pthread_mutex_lock(&serialMutex);
       auto child =  Child::getChild();
       auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
       g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));
+      pthread_mutex_unlock(&serialMutex);
     }
 
     static const gchar *getWorkdir(GtkWidget *child){

@@ -82,7 +82,7 @@ private:
         auto range = GTK_RANGE(data);
         int value = gtk_range_get_value(range);
         g_object_set_data(G_OBJECT(range), "valor", GINT_TO_POINTER(value));
-        Texture<bool>::redlight();
+        //Texture<bool>::redlight(); obsolete
         return FALSE;
       }
       static gboolean leaveRange(GtkEventControllerMotion* self,
@@ -100,7 +100,7 @@ private:
             // Workdir::reset();      
           }
         }
-        Texture<bool>::greenlight();
+        //Texture<bool>::greenlight(); obsolete
         return FALSE;
       }
     
