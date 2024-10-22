@@ -415,10 +415,10 @@ private:
         if (!entry->mimetype) entry->mimetype = MimeMagic::mimeMagic(entry->path);
     
 
-        auto paintable = Texture::loadPath(entry->path);
+        auto paintable = Texture<bool>::loadPath(entry->path);
     
         auto image = gtk_image_new_from_paintable(paintable);
-        gtk_widget_set_size_request(GTK_WIDGET(image), 192, 192);
+        gtk_widget_set_size_request(GTK_WIDGET(image), 320, 320);
         gtk_box_append(box, image);
     }
 

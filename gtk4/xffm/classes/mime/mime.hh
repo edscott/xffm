@@ -73,14 +73,21 @@ private:
         return MimeMagic::mimeMagic(file);
     }
 
+public: 
     static gchar *
     mimeType (const gchar *file){
         gchar *retval = MimeSuffix::mimeType(file);
+        if (!retval || strcmp(retval, _("unknown"))==0){
+          auto retval2 = MimeMagic::mimeMagic(file);
+          if (retval2) {
+            g_free(retval);
+            retval = retval2;
+          }
+        }
         if (retval) {
             TRACE("mimeType: %s --> %s\n", file, retval);
             return retval;
-        }
-        // return MimeMagic::mimeMagic(file);
+        } 
         return g_strdup(_("unknown"));
    } 
 
@@ -89,7 +96,6 @@ private:
         return MimeMagic::mimeFile(file);
    } 
    
-public: 
     static gchar *
     basicMimeType(unsigned char d_type){
         gchar *retval=NULL;

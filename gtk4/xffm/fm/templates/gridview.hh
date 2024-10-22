@@ -261,7 +261,7 @@ namespace xf {
           gtk_widget_set_vexpand(GTK_WIDGET(box), false);
           auto n = g_strdup(defaultApp);
           if (strchr(n, ' ')) *strchr(n, ' ') = 0;
-          auto paintable = Texture::load(n, 16);
+          auto paintable = Texture<bool>::load(n, 16);
 
           if (paintable){
             auto image = gtk_image_new_from_paintable(paintable);
@@ -567,16 +567,16 @@ namespace xf {
         GdkPaintable *texture = NULL;
         if (!texture) {
           // Gets the texture from the GIcon. Fast.
-          texture = Texture::load(info);
+          texture = Texture<bool>::load(info);
         }
           
      //   if ((type == G_FILE_TYPE_DIRECTORY )||(symlinkToDir(info, type))) {
         if ((name[0] == '.' && name[1] != '.') ||
            ( name[strlen(name)-1] == '~') )  {
 
-          auto *iconPath = Texture::findIconPath(info);
+          auto *iconPath = Texture<bool>::findIconPath(info);
           // Only for the hidden + backup items. Applies background mask.
-          if (iconPath) texture = Texture::getSvgPaintable(iconPath, size, size);   
+          if (iconPath) texture = Texture<bool>::getSvgPaintable(iconPath, size, size);   
 
         }
         
@@ -672,7 +672,7 @@ namespace xf {
         // and that is because disk access is serialize by bus.
         // But it really fast from sd disk...
         // 
-        if (isImage && Texture::previewOK()){ // thread number limited.
+        if (isImage && Texture<bool>::previewOK()){ // thread number limited.
           // path, imageBox, image, serial
           auto arg = (void **)calloc(6, sizeof(void *));
           arg[0] = (void *)g_strdup(path);
@@ -681,8 +681,8 @@ namespace xf {
           arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
           arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
           arg[5] = child; // in main context
-          //Thread::threadPoolAdd(Texture::preview, (void *)arg);
-          THREADPOOL->add(Texture::preview, (void *)arg);
+          //Thread::threadPoolAdd(Texture<bool>::preview, (void *)arg);
+          THREADPOOL->add(Texture<bool>::preview, (void *)arg);
         }
         g_free(path);
 

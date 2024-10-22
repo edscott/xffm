@@ -1,10 +1,10 @@
 #ifndef XF_TEXTURE_HH
 #define XF_TEXTURE_HH
 
-
 static bool greenLightPreview = true;
 namespace xf {
-    class Texture {
+template <class Type> class Preview;
+template <class Type>  class Texture {
       public:
       static bool previewOK(void) {return  greenLightPreview;} 
       static void redlight(void){
@@ -48,7 +48,23 @@ namespace xf {
         
         if (!g_file_test(path, G_FILE_TEST_EXISTS)) return NULL;
         GdkPaintable *paintable = NULL;
-        paintable = getPaintableWithThumb(path);
+        auto mimetype = Mime::mimeType(path);
+        if (!mimetype) mimetype =  _("unknown");
+        if (strstr(mimetype, "image")) return Preview<Type>::getPaintableWithThumb(path);
+
+        bool textType =(
+            strstr(mimetype, "text")
+            || strstr(mimetype, "shellscript")
+            || strcmp(path, "empty-file")==0
+            || g_file_test(path, G_FILE_TEST_IS_DIR)
+            );
+
+        if (textType){
+             GdkPaintable *paintable = Preview<Type>::textPreview (path, PREVIEW_IMAGE_SIZE); 
+             TRACE("%s texttype paintable=%p\n", path, paintable);
+             return paintable;
+        }
+
         return paintable;
       }
       
@@ -338,206 +354,6 @@ namespace xf {
       return texture;
     }
         
-       private:
-
-
-    typedef struct paintable_t {
-      GdkPaintable *paintable;
-      time_t mtime;
-    } paintable_t;
-    static void freePaintable(void *data){
-      auto paintableX = (paintable_t *)data;
-      g_object_unref(paintableX->paintable);
-      g_free(data);
-    }
-
-    static GHashTable *hash(void){
-      static GHashTable *paintableHash = NULL;
-      if (!paintableHash) paintableHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, freePaintable);
-      return paintableHash;
-    }
-
-    static void
-    zapThumbnail(const char *path){
-        //Eliminate from thumbnail cache:
-      auto item = g_hash_table_lookup(hash(), path);
-      if (item){
-        g_hash_table_remove(hash(), path);
-      }
-    }
-    static void
-    saveThumbnail(const char *path, GdkPaintable *paintable){
-        if (!path || !paintable) {
-            ERROR("saveThumbnail(%s): !name \n", path);
-            return ;
-        }
-        zapThumbnail(path);
-        auto paintableX = (paintable_t *)calloc(1, sizeof(paintable_t));
-        g_object_ref(G_OBJECT(paintable));
-        paintableX->paintable = paintable;
-        paintableX->mtime = time(NULL);
-
-        g_hash_table_insert(hash(), g_strdup(path), paintableX);
-    }
-    static GdkPaintable *
-    readThumbnail(const char *path){
-      auto item = g_hash_table_lookup(hash(), path);
-      if (!item) return NULL;
-      auto paintableX = (paintable_t *)item;
-      return GDK_PAINTABLE(paintableX->paintable);
-    }
-    static bool thumbnailOK(const char *path){
-        bool retval = true;
-        auto item = g_hash_table_lookup(hash(), path);
-        if (!item) return false;
-        auto paintableX = (paintable_t *)item;
-        
-        struct stat stPath;
-        if (stat(path, &stPath)<0) {
-            DBG("thumbnailOK(): stat %s (%s)\n", path, strerror(errno));
-            errno=0;
-            retval = false;
-        } 
-        if (paintableX->mtime < stPath.st_mtime){
-            TRACE("thumbnailOK(%s): out of date. Removing %s.\n", name, thumbnailPath);
-            zapThumbnail(path);
-            retval = false;
-        }     
-        return true;
-    }
-    static GdkPaintable *
-    getPaintableWithThumb(const char *path)
-    {
-        GdkPaintable *paintable = NULL;
-        if (!path) {
-            TRACE("getPaintableWithThumb(path==NULL)\n");
-            return NULL;
-        }
-
-        if (thumbnailOK(path)){
-            // Read thumbnail.
-            paintable = readThumbnail(path);
-            if (paintable){
-               TRACE("getPaintableWithThumb(): Loaded %s from thumbnail at height %d.\n", path, height);
-               return paintable;
-            }
-        } 
-        // Thumbnail not OK.
-        paintable = buildImagePaintable(path);
-        if (!paintable) {
-            TRACE("buildImagePaintable(%s)\n", path);
-            return NULL;
-        }
-        saveThumbnail(path, paintable);
-        return paintable;
-    }
-    static
-    GdkPaintable *
-    zipThumbnail(const char *path){
-        GdkPaintable *paintable = NULL;
-#ifdef HAVE_ZIP_H
-        TRACE("creating zip preview for %s\n",path);
-        int errorp;
-        auto zf = zip_open(path, ZIP_RDONLY, &errorp);
-        if (!zf) {
-            return NULL;
-        }
-        struct zip_stat sb;
-        if(zip_stat (zf, "Thumbnails/thumbnail.png", 0, &sb) != 0) {
-            zip_close (zf);
-            return NULL;
-        }
-        void *ptr = calloc(1,sb.size);
-        if (!ptr) g_error("calloc: %s", strerror(errno));
-        struct zip_file *f = zip_fopen (zf, "Thumbnails/thumbnail.png", 0);
-       
-        zip_fread (f, ptr, sb.size);
-        zip_fclose (f);
-        zip_close (zf);
-        gchar *base = g_path_get_basename(path);
-        gchar *fname = g_strdup_printf("%s/%d-%s.png",
-                g_get_tmp_dir(), getuid(), base);
-        g_free(base);
-        gint fd=creat(fname, S_IRUSR | S_IWUSR);
-        if (fd >= 0){
-            if (write(fd, ptr, sb.size) < 0){
-                DBG("could not write to %s\n", fname);
-            }
-            close(fd);
-        }
-        if (g_file_test(fname, G_FILE_TEST_EXISTS)){
-            paintable = gdk_paintable_new_from_filename (fname, NULL);
-            unlink(fname);
-        }    
-        g_free(fname);
-        g_free(ptr);
-#endif
-        return paintable;
-    }
-    static bool
-    isZipThumbnailed(const char *path){
-#ifdef HAVE_ZIP_H
-        int errorp;
-        auto zf = zip_open(path, ZIP_RDONLY, &errorp);
-        if (!zf) {
-            return FALSE;
-        }
-        auto f = zip_fopen(zf, "Thumbnails/thumbnail.png", 0);
-        bool retval;
-        if (f){
-            retval = TRUE;
-            zip_fclose(f);
-        } else retval = FALSE;
-        zip_close(zf);
-        return retval;
-#else
- #warning "isZipThumbnailed(): zip.h not configured."
-#endif
-        return FALSE;
-    }
-    static GdkPaintable *
-    buildImagePaintable(const char *path){
-        GError *error_ = NULL;
-        GdkPaintable *paintable = NULL;
-        if (isZipThumbnailed(path)) {
-            paintable = zipThumbnail(path);
-        }
-        if (!paintable) {
-            // If file disappears before this completes, pixbuf will be
-            // NULL and GError undefined. So just ignore GError to avoid
-            // crash while trying to get the error message.
-            paintable = GDK_PAINTABLE(gdk_texture_new_from_filename (path, &error_));
-            if (error_){
-              DBG("** Error::buildImagePaintable():%s\n", error_->message);
-              g_error_free(error_);
-              return NULL;
-            }
-        }
-        return paintable;
-        /*
-        auto pixbufWidth = gdk_pixbuf_get_width(pixbuf);
-        auto pixbufHeight = gdk_pixbuf_get_height(pixbuf);
-            
-        auto newHeight = height;
-        auto newWidth = pixbufWidth * height / pixbufHeight;
-
-        if (newWidth > newHeight){
-            newWidth = height;
-            newHeight = pixbufHeight * height / pixbufWidth;
-        }
-        
-        auto newPixbuf = 
-            gdk_pixbuf_scale_simple (pixbuf, 
-            newWidth, newHeight, GDK_INTERP_HYPER);
-        if (newPixbuf) {
-            g_object_unref(pixbuf);
-            pixbuf = newPixbuf; 
-        }*/
-            
-        // insert symlink emblem if necessary.
-        //insertImageDecoration(path, pixbuf);
-    }
-  
   };
 
 }

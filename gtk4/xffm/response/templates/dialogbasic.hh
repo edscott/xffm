@@ -83,7 +83,7 @@ namespace xf
     void setCloseBox(const char *iconName, const char *tooltip){
       auto old = gtk_widget_get_first_child (GTK_WIDGET(closeBox_));
       gtk_widget_unparent(old);
-      auto paintable = Texture::load(iconName, 18);
+      auto paintable = Texture<bool>::load(iconName, 18);
       auto image = gtk_image_new_from_paintable(paintable);
       gtk_widget_set_size_request(image, 18,18);
       gtk_widget_set_sensitive(image, true);
@@ -118,7 +118,7 @@ private:
  /*   void mkIcon(void){
       const char *iconName = subClass_->iconName();
       if (!iconName) return;
-      auto paintable = Texture::load(iconName, 24);
+      auto paintable = Texture<bool>::load(iconName, 24);
       if (paintable) {
         auto image = gtk_image_new_from_paintable(paintable);
         gtk_widget_set_size_request(GTK_WIDGET(image), 24, 24);
@@ -172,7 +172,7 @@ private:
 
     GtkWidget *buttonBox(const char *iconName, const char *tooltip, void *callback){
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
-      auto paintable = Texture::load(iconName, 18);
+      auto paintable = Texture<bool>::load(iconName, 18);
       auto image = gtk_image_new_from_paintable(paintable);
       gtk_widget_set_size_request(image, 18,18);
       //gtk_widget_set_sensitive(image, false);
