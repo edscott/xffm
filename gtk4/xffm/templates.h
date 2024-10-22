@@ -12,6 +12,7 @@
 #include "classes/tubo.hh"  
 
 #include "classes/mime/mime.hh"
+//#include "classes/preview.hh"
 #include "classes/properties.hh"
 #include "classes/thread.hh"
 #include "classes/progress.hh"
