@@ -526,10 +526,14 @@ namespace xf {
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
         auto list_item =GTK_LIST_ITEM(object);
         auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
-        auto list = Basic::getChildren(box);
+       
+    //    This is wrong. Factory will take care of cleanups
+    //    doing this crashed with factory.
+    /*    DBG("factory bind list=%p\n", list);
         for (auto l=list; l && l->data; l=l->next){
           gtk_widget_unparent(GTK_WIDGET(l->data));
         }
+        g_list_free(list);*/
 
         auto menuBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -540,6 +544,7 @@ namespace xf {
         auto path = Basic::getPath(info);       
         auto type = g_file_info_get_file_type(info);
         char *name = g_strdup(g_file_info_get_name(info));
+        DBG("factory bind %s\n", name);
         auto size = Settings::getInteger("xfterm", "iconsize");
 
         gtk_box_append(GTK_BOX(menuBox), imageBox);

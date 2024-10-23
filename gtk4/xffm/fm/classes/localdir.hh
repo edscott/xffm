@@ -195,6 +195,16 @@ namespace xf {
           }
           g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
       }
+      static void toggleSelect(GListStore *store, guint positionF){
+          auto s = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(store), "selectionModel"));
+          if (gtk_selection_model_is_selected (s, positionF)){
+            gtk_selection_model_unselect_item (s, positionF);
+            gtk_selection_model_select_item (s, positionF, false);
+          } else {
+            gtk_selection_model_select_item (s, positionF, false);
+            gtk_selection_model_unselect_item (s, positionF);
+          }
+      }
 
       static void
       changed_f ( GFileMonitor* self,  
@@ -240,28 +250,9 @@ namespace xf {
                 if (verbose) {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = findPosition(store, f, &positionF, verbose);
                 if (found) {
-                  // This is dorky...
-                  auto info = G_FILE_INFO( g_list_model_get_item(G_LIST_MODEL(store), positionF));
-
-                  auto list_item = g_list_model_get_item(G_LIST_MODEL(store), positionF);
-                  // list_item is a box.
-                  // object is the same as list_item, but cast as g_object.
-                  auto object = g_list_model_get_object(G_LIST_MODEL(store), positionF);
-                  DBG("item=%p, object=%p\n", list_item, object);
-                  DBG("item=%p, object=%p info=%p\n", list_item, object, info);
-                  // hack to reload item
-                  auto s = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(store), "selectionModel"));
-                  if (gtk_selection_model_is_selected (s, positionF)){
-                    gtk_selection_model_unselect_item (s, positionF);
-                    gtk_selection_model_select_item (s, positionF, false);
-                  } else {
-                    gtk_selection_model_select_item (s, positionF, false);
-                    gtk_selection_model_unselect_item (s, positionF);
-                  }
-                  
-                  //g_file_info_set_name(info, "AAxx");
-                  //if (found) g_list_store_remove(store, positionF);
-                  //insert(store, f, verbose);
+                  // This does the trick
+                  g_list_store_remove(store, positionF);
+                  insert(store, f, verbose);                        
                 }
 
                 //p->restat_item(f);
@@ -279,7 +270,9 @@ namespace xf {
                 {
                   if (verbose) {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
                   auto found = findPosition(store, f, &positionF, verbose);
-                  if (found) g_list_store_remove(store, positionF);
+                  if (found) {
+                    g_list_store_remove(store, positionF);
+                  }
                 }
                 //p->remove_item(first);
                 //p->updateFileCountLabel();
@@ -305,7 +298,24 @@ namespace xf {
             } break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
+            {
                 if (verbose) {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                auto found = findPosition(store, f, &positionF, verbose);
+                if (found){
+                  g_list_store_remove(store, positionF);
+                  insert(store, s, verbose);           
+/*                  auto infoF = G_FILE_INFO(g_list_model_get_object (G_LIST_MODEL(store), positionF));
+                  auto fileF = G_FILE(g_file_info_get_attribute_object(infoF, "standard::file"));
+                  auto fileS = g_file_new_for_path(s);
+                  //auto infoS = g_file_query_info(fileS, "standard::", G_FILE_QUERY_INFO_NONE, NULL, NULL);
+                  g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(fileS));*/
+                  //g_object_unref(fileF); crash
+                }
+            }
+                  
+
+
+
                 //p->add2reSelect(f); // Only adds to selection list if item is selected.
                 //p->remove_item(first); 
 

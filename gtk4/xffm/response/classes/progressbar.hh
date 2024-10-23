@@ -15,7 +15,7 @@ public:
 
     ProgressBar(void){
       timeoutProgress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
-      g_timeout_add(500, updateProgress, (void *)this);
+      //g_timeout_add(500, updateProgress, (void *)this);
     }
 
     ~ProgressBar(void){
@@ -24,7 +24,7 @@ public:
     void setDialog(GtkWindow *dialog){
       dialog_ = dialog;
       if (dialog){
-        g_timeout_add(100, updateProgress, (void *)this);
+        //g_timeout_add(100, updateProgress, (void *)this);
         /*auto keyController = gtk_event_controller_key_new();
         gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(this->dialog()), keyController);
