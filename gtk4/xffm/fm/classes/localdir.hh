@@ -143,9 +143,13 @@ namespace xf {
           void *flags = NULL; // FIXME: this will determine sort order
           g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, flags);
         } while (true);
-    
-//        auto monitor = g_file_monitor (file, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error_);
+        //GCancellable *cancellable = g_cancellable_new();
+        int serial = Child::getSerial();
+        //DBG("cancellable new = %p\n", cancellable);
+        //auto monitor = g_file_monitor (file, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error_);
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
+        g_object_set_data(G_OBJECT(Child::getChild()), "monitor", monitor);
+
         DBG("monitor=%p file=%p store=%p\n", monitor, file, store);
         if (error_){
             ERROR("g_file_monitor_directory(%s) failed: %s\n",
@@ -155,6 +159,7 @@ namespace xf {
             //file=NULL;
             // return;
         } else {
+          g_object_set_data(G_OBJECT(monitor), "active", GINT_TO_POINTER(1));
           g_signal_connect (monitor, "changed", 
                 G_CALLBACK (changed_f), (void *)store);
         }
@@ -167,6 +172,13 @@ namespace xf {
           GFile* first, GFile* second, //same as GioFile * ?
           GFileMonitorEvent event, 
           void *data){
+        pthread_mutex_lock(&monitorMutex);   
+        auto active = g_object_get_data(G_OBJECT(self), "active");
+        pthread_mutex_unlock(&monitorMutex);   
+        if (!active) {
+          DBG("monitor %p inactive\n", self);
+          return;
+        }
         GError *error_ = NULL;
         GListStore *store = G_LIST_STORE(data);
         DBG("*** monitor changed_f call position=%d...\n", 0);

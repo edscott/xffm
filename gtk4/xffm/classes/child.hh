@@ -75,6 +75,7 @@ namespace xf {
       auto child =  Child::getChild();
       auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
       g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));
+      
       pthread_mutex_unlock(&serialMutex);
     }
 

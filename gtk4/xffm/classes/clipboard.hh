@@ -13,7 +13,7 @@ public:
       clipBoard_ = gdk_display_get_clipboard(gdk_display_get_default());
       clipBoardSemaphore_ = TRUE;
       new Thread("ClipBoard::startClipBoard()", clipboardThreadF, this);
-      DBG("*** clipboard thread started.\n")
+      TRACE("*** clipboard thread started.\n")
     }
     ~ClipBoard(void){
       clipBoardSemaphore_ = FALSE;
@@ -214,7 +214,7 @@ private:
           usleep(250000);
           Basic::context_function(clipboardContextF, c);
       }
-      DBG("*** clipboard thread exited.\n")
+      TRACE("*** clipboard thread exited.\n")
       return NULL;
     }
 

@@ -8,7 +8,22 @@ namespace xf {
 #ifdef ENABLE_GRIDVIEW
         TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(), Child::getSerial()+1);
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
+        
         Child::incrementSerial();
+        auto child = Child::getChild();
+        auto monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(child), "monitor"));
+//        g_cancellable_cancel(cancellable);
+//        DBG("cancellable cancel = %p\n", cancellable);
+        if (monitor) {
+          pthread_mutex_lock(&monitorMutex);   
+          g_object_set_data(G_OBJECT(monitor), "active", NULL);
+          pthread_mutex_unlock(&monitorMutex);   
+
+          g_file_monitor_cancel(monitor);
+          g_object_unref(monitor);
+          DBG("monitor cancel = %p\n", monitor);
+        }
+        
         auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
         TRACE("new object: %p\n", viewObject);
         auto view = viewObject->view();

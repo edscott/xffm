@@ -68,5 +68,6 @@ static GList *run_button_list = NULL;
 static GHashTable *iconPathHash = NULL;
 static bool exitDialogs = false;
 static void *threadPoolObject = NULL;
+static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
 
 #endif
