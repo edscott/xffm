@@ -130,12 +130,12 @@ private:
         //gtk_widget_set_size_request (GTK_WIDGET(imageBox_), PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
         auto infoBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
         Basic::boxPack0(contentBox, GTK_WIDGET(imageBox_), TRUE, FALSE, 0);
-        Basic::boxPack0(contentBox, GTK_WIDGET(infoBox), TRUE, FALSE, 0);
+        Basic::boxPack0(contentBox, GTK_WIDGET(infoBox), TRUE, FALSE, 10);
         auto buttonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
         Basic::boxPack0(mainBox, GTK_WIDGET(buttonBox), TRUE, FALSE, 0);
 
         auto label = GTK_LABEL(gtk_label_new(""));
-        auto markup = g_strdup_printf("<span size=\"xx-large\">%s</span>", 
+        auto markup = g_strdup_printf("<span size=\"xx-large\">%s</span><span size=\"x-small\">\nuser/group/others: x->01, w->02, r->04</span>", 
                 _("File Mode:"));
         gtk_label_set_markup(label, markup);
         g_free(markup);
@@ -416,10 +416,13 @@ private:
     
 
         auto paintable = Texture<bool>::loadPath(entry->path);
-    
-        auto image = gtk_image_new_from_paintable(paintable);
-        gtk_widget_set_size_request(GTK_WIDGET(image), 320, 320);
-        gtk_box_append(box, image);
+        if (paintable == NULL) {
+          gtk_widget_set_visible(GTK_WIDGET(box), false);
+        } else {
+          auto image = gtk_image_new_from_paintable(paintable);
+          gtk_widget_set_size_request(GTK_WIDGET(image), 320, 320);
+          gtk_box_append(box, image);
+        }
     }
 
     static void
