@@ -210,7 +210,7 @@ class Preview {
     GdkPaintable *
     zipThumbnail(const char *path){
         GdkPaintable *paintable = NULL;
-#ifdef ZIP_PROGRAM_FOUND
+#ifdef HAVE_ZIP_H
         TRACE("creating zip preview for %s\n",path);
         int errorp;
         auto zf = zip_open(path, ZIP_RDONLY, &errorp);
@@ -241,7 +241,7 @@ class Preview {
             close(fd);
         }
         if (g_file_test(fname, G_FILE_TEST_EXISTS)){
-            paintable = gdk_paintable_new_from_filename (fname, NULL);
+            paintable = GDK_PAINTABLE(gdk_texture_new_from_filename (fname, NULL));
             unlink(fname);
         }    
         g_free(fname);
@@ -251,7 +251,7 @@ class Preview {
     }
     static bool
     isZipThumbnailed(const char *path){
-#ifdef ZIP_PROGRAM_FOUND
+#ifdef HAVE_ZIP_H
         int errorp;
         auto zf = zip_open(path, ZIP_RDONLY, &errorp);
         if (!zf) {

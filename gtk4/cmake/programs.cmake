@@ -16,7 +16,7 @@ if(NOT ZIP_PROGRAM)
     message( STATUS "unzip program was not found.")
 else()
     message( STATUS "${ZIP_PROGRAM} was found. Good!" )
-    set(ZIP_PROGRAM "ZIP_PROGRAM_FOUND \"${ZIP_PROGRAM}\" ")
+    set(ZIP_PROGRAM "ZIP_PROGRAM \"${ZIP_PROGRAM}\" ")
 endif()
 
 message(STATUS "Checking for unzip...")

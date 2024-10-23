@@ -7,6 +7,10 @@
 #include "config.h"
 #include "types.h"
 
+#ifdef HAVE_ZIP_H
+# include <zip.h>
+#endif
+
 #include <memory>
 #include <cassert>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2018 Edscott Wilson Garcia 
+ * Copyright 2005-2024 Edscott Wilson Garcia 
  * license: GPL v.3
  */
 //  to open inspector:
@@ -18,6 +18,7 @@
 #define ENABLE_THREAD_POOL
 //#undef ENABLE_THREAD_POOL
 
+#include "config.h"
 #include "xffm.h"
 #include "templates.h"
 
