@@ -535,6 +535,7 @@ namespace xf {
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        // info has been configured and set by 
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
         auto path = Basic::getPath(info);       
         auto type = g_file_info_get_file_type(info);

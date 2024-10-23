@@ -42,6 +42,7 @@ namespace xf {
         GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(sortModel));*/
 
         GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
+        g_object_set_data(G_OBJECT(store), "selectionModel", s);
 
         g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), NULL);
         return s;
@@ -109,7 +110,7 @@ namespace xf {
         //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
         g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(upFile));
 
-        GFile *file = g_file_new_for_path(path);
+        GFile *file = g_file_new_for_path(path); // XXX mem leak
         GFileEnumerator *dirEnum = 
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
@@ -133,20 +134,12 @@ namespace xf {
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(outInfo, "standard::file", G_OBJECT(outChild));
           TRACE("insert path (%s)\n", g_file_get_path(outChild));
-         /* if (g_file_info_get_file_type(outInfo) == G_FILE_TYPE_REGULAR){
-            auto path = g_file_get_path(outChild);
-            //DBG("start preview thread for %s\n", path);
-            pthread_t thread;
-            pthread_create(&thread, NULL, getPreview, (void *)path);
-          }*/
-          //g_list_store_insert(store, k++, G_OBJECT(outInfo));
           void *flags = NULL; // FIXME: this will determine sort order
           g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, flags);
+          DBG("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
         } while (true);
-        //GCancellable *cancellable = g_cancellable_new();
+
         int serial = Child::getSerial();
-        //DBG("cancellable new = %p\n", cancellable);
-        //auto monitor = g_file_monitor (file, G_FILE_MONITOR_WATCH_MOVES, cancellable,&error_);
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
         g_object_set_data(G_OBJECT(Child::getChild()), "monitor", monitor);
 
@@ -167,6 +160,42 @@ namespace xf {
         return getSelectionModel(G_LIST_MODEL(store));
       }
 
+      static bool findPosition(GListStore *store, const char *path, guint *positionF, bool verbose){
+        GFileInfo *infoF = g_file_info_new();
+        auto name = g_path_get_basename(path);
+        g_file_info_set_name(infoF, name);
+        auto found = g_list_store_find_with_equal_func(store, infoF, equal_f, positionF);
+        g_free(name);
+        g_object_unref(infoF);
+        if (found){
+          if (verbose) {DBG("%s found at position %d\n", path, *positionF);}
+        } else {
+          if (verbose) {DBG("%s not found by GFileInfo\n", path);  }
+        }
+        return found;
+      }
+
+      static void insert(GListStore *store, const char *path, bool verbose){
+          GError *error_ = NULL;
+          //void *flags = GINT_TO_POINTER(0x100); // FIXME: this will determine sort order
+          void *flags = NULL; // FIXME: this will determine sort order
+          auto file = g_file_new_for_path(path);
+          GFileInfo *infoF = g_file_query_info (file,
+              "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
+              G_FILE_QUERY_INFO_NONE, NULL, &error_);
+
+          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
+          g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
+          if (verbose) {DBG("insert():path = %s,infoF=%p\n", path, infoF);}
+          if (error_){
+            DBG("Error: %s\n", error_->message);
+            g_error_free(error_);
+            g_object_unref(infoF);
+            return;
+          }
+          g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
+      }
+
       static void
       changed_f ( GFileMonitor* self,  
           GFile* first, GFile* second, //same as GioFile * ?
@@ -179,7 +208,6 @@ namespace xf {
           DBG("monitor %p inactive\n", self);
           return;
         }
-        GError *error_ = NULL;
         GListStore *store = G_LIST_STORE(data);
         DBG("*** monitor changed_f call position=%d...\n", 0);
         gchar *f= first? g_file_get_path (first):g_strdup("--");
@@ -204,36 +232,54 @@ namespace xf {
         }*/
         bool verbose = true;
         guint positionF;
+        void *flags = NULL; // FIXME: this will determine sort order
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());
          switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-                if (verbose) DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+              {
+                if (verbose) {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                auto found = findPosition(store, f, &positionF, verbose);
+                if (found) {
+                  // This is dorky...
+                  auto info = G_FILE_INFO( g_list_model_get_item(G_LIST_MODEL(store), positionF));
+
+                  auto list_item = g_list_model_get_item(G_LIST_MODEL(store), positionF);
+                  // list_item is a box.
+                  // object is the same as list_item, but cast as g_object.
+                  auto object = g_list_model_get_object(G_LIST_MODEL(store), positionF);
+                  DBG("item=%p, object=%p\n", list_item, object);
+                  DBG("item=%p, object=%p info=%p\n", list_item, object, info);
+                  // hack to reload item
+                  auto s = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(store), "selectionModel"));
+                  if (gtk_selection_model_is_selected (s, positionF)){
+                    gtk_selection_model_unselect_item (s, positionF);
+                    gtk_selection_model_select_item (s, positionF, false);
+                  } else {
+                    gtk_selection_model_select_item (s, positionF, false);
+                    gtk_selection_model_unselect_item (s, positionF);
+                  }
+                  
+                  //g_file_info_set_name(info, "AAxx");
+                  //if (found) g_list_store_remove(store, positionF);
+                  //insert(store, f, verbose);
+                }
+
                 //p->restat_item(f);
+              } 
                 break;
             case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-                if (verbose) DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) {DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);}
                 break;
             case G_FILE_MONITOR_EVENT_UNMOUNTED:
-                if (verbose) DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) {DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 break;
 
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
                 {
-                  if (verbose) DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);     
-                  GFileInfo *infoF = g_file_info_new();
-                  auto name = g_path_get_basename(f);
-                  g_file_info_set_name(infoF, name);
-                  //positionF = findIt(store, f);
-                  //g_list_store_remove_all(store);
-                  if (g_list_store_find_with_equal_func(store, infoF, equal_f, &positionF)){
-                    DBG("%s found at position %d\n", f, positionF);
-                  } else {
-                    DBG("%s not found by GFile\n", f);  
-                  }
-                  g_free(name);
-                  g_object_unref(infoF);
-                  g_list_store_remove(store, positionF);
+                  if (verbose) {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
+                  auto found = findPosition(store, f, &positionF, verbose);
+                  if (found) g_list_store_remove(store, positionF);
                 }
                 //p->remove_item(first);
                 //p->updateFileCountLabel();
@@ -242,39 +288,24 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 {
-                  if (verbose) DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);
-                  //g_object_ref(first);
-                  GFileInfo *infoF = g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
-                      G_FILE_QUERY_INFO_NONE, NULL, &error_);
-
-                  //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
-                  g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(first));
-                  DBG("first = %p,infoF=%p\n", first, infoF);
-                  if (error_){
-                    DBG("Error: %s\n", error_->message);
-                    g_error_free(error_);
+                  if (verbose) {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                  if (!g_file_test(f, G_FILE_TEST_EXISTS)){
+                    if (verbose) {DBG("Ghost file: %s\n", f);}
+                    g_free(f);
+                    g_free(s);
                     return;
                   }
-                  // FIXME: This does not work. Crashes. Only name gets through to gridview factory bind.
-                  //        maybe memory corruption of infoF or not setup properly.
-                  //
-                  //void *flags = GINT_TO_POINTER(0x100); // FIXME: this will determine sort order
-                  void *flags = NULL; // FIXME: this will determine sort order
-                  g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
-                  //g_list_store_append(store, G_OBJECT(infoF));
-
-                  //p->add_new_item(first);
-                  //p->updateFileCountLabel();
+                  insert(store, f, verbose);
                 }
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
             {
-                if (verbose) DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) {DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 //p->restat_item(f);
             } break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
-                if (verbose) DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 //p->add2reSelect(f); // Only adds to selection list if item is selected.
                 //p->remove_item(first); 
 
@@ -283,7 +314,7 @@ namespace xf {
                 //} //else p->restat_item(s);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-                if (verbose) DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);
+                if (verbose) {DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);}
                 //p->reSelect(f); // Will only select if in selection list (from move).
                 break;       
         }
