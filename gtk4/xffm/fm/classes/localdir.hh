@@ -195,7 +195,7 @@ namespace xf {
           }
           g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
       }
-      static void toggleSelect(GListStore *store, guint positionF){
+   /*   static void toggleSelect(GListStore *store, guint positionF){
           auto s = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(store), "selectionModel"));
           if (gtk_selection_model_is_selected (s, positionF)){
             gtk_selection_model_unselect_item (s, positionF);
@@ -204,7 +204,7 @@ namespace xf {
             gtk_selection_model_select_item (s, positionF, false);
             gtk_selection_model_unselect_item (s, positionF);
           }
-      }
+      }*/
 
       static void
       changed_f ( GFileMonitor* self,  

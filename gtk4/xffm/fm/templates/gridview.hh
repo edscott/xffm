@@ -529,11 +529,12 @@ namespace xf {
        
     //    This is wrong. Factory will take care of cleanups
     //    doing this crashed with factory.
-    /*    DBG("factory bind list=%p\n", list);
+        auto list = Basic::getChildren(box);
+        DBG("factory bind list=%p\n", list);
         for (auto l=list; l && l->data; l=l->next){
           gtk_widget_unparent(GTK_WIDGET(l->data));
         }
-        g_list_free(list);*/
+        g_list_free(list);
 
         auto menuBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
