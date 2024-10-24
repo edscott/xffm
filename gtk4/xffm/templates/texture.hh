@@ -139,24 +139,25 @@ template <class Type>  class Texture {
       }
       
       static void *replace_f(void *data){
+
         auto replaceArg = (void **)data;
+        auto serial = GPOINTER_TO_INT(replaceArg[3]);
+        auto activeSerial = Child::getSerial();
+
+        if (serial != activeSerial){
+          DBG("mainContext::replace_f(): serial mismatch %d != %d (dropping paintable)\n", 
+              serial, Child::getSerial());
+          return NULL;
+        }
         auto paintable = GDK_PAINTABLE(replaceArg[0]);
         auto imageBox = GTK_BOX(replaceArg[1]);
         auto image = GTK_IMAGE(replaceArg[2]);
-        auto serial = GPOINTER_TO_INT(replaceArg[3]);
+        //auto serial = GPOINTER_TO_INT(replaceArg[3]);
         auto size = GPOINTER_TO_INT(replaceArg[4]);
         auto child = GTK_WIDGET(replaceArg[5]);
 
         TRACE("replace_f in main context: paintable=%p, box=%p, image=%p, serial=%d\n", 
             paintable, imageBox, image, serial);
-        auto activeSerial = Child::getSerial();
-
-        //if (serial != Child::getSerial(child)){
-        if (serial != activeSerial){
-          DBG("mainContext::replace_f(): serial mismatch %d != %d (dropping paintable)\n", serial, Child::getSerial(child));
-          return NULL;
-        }
-        // no work if (gridview != Child::getGridview()) return NULL;
 
         gtk_box_remove(imageBox, GTK_WIDGET(image));
         GtkWidget *preview = gtk_image_new_from_paintable(paintable);

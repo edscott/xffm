@@ -228,8 +228,8 @@ public:
       g_object_set_data(G_OBJECT(menu), "vbox", vbox);
 
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
-      gtk_popover_set_has_arrow(GTK_POPOVER(menu), TRUE);
-//      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
+//      gtk_popover_set_has_arrow(GTK_POPOVER(menu), TRUE);
+      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
 
 

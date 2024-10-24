@@ -250,7 +250,8 @@ namespace xf {
                 if (verbose) {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = findPosition(store, f, &positionF, verbose);
                 if (found) {
-                  // This does the trick
+                  // This does the trick (crash)
+                  // Multiple delete problem with factory cleanups
                   g_list_store_remove(store, positionF);
                   insert(store, f, verbose);                        
                 }
