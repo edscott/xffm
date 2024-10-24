@@ -180,6 +180,7 @@ class Preview {
 
         g_hash_table_insert(hash(), g_strdup(path), paintableX);
     }
+public:
     static GdkPaintable *
     readThumbnail(const char *path){
       auto item = g_hash_table_lookup(hash(), path);
@@ -187,6 +188,7 @@ class Preview {
       auto paintableX = (paintable_t *)item;
       return GDK_PAINTABLE(paintableX->paintable);
     }
+private:
     static bool thumbnailOK(const char *path){
         bool retval = true;
         auto item = g_hash_table_lookup(hash(), path);

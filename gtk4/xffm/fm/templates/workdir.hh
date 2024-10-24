@@ -8,7 +8,8 @@ namespace xf {
 #ifdef ENABLE_GRIDVIEW
         TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(), Child::getSerial()+1);
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
-        
+       
+       // cancel monitor if any 
         Child::incrementSerial();
         auto child = Child::getChild();
         auto monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(child), "monitor"));
@@ -24,6 +25,8 @@ namespace xf {
           DBG("monitor cancel = %p\n", monitor);
         }
         
+        // cancel threadpool for previews, if any. Wait on condition
+
         auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
         TRACE("new object: %p\n", viewObject);
         auto view = viewObject->view();
@@ -36,6 +39,9 @@ namespace xf {
           delete object;
         }
         Child::setGridviewObject(viewObject);       
+
+        // Fireup preview threads here, once initial load has completed.
+        viewObject->fireUpPreviews(child);
 #endif
       }
 

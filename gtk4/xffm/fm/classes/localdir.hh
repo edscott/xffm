@@ -252,8 +252,8 @@ namespace xf {
                 if (found) {
                   // This does the trick (crash)
                   // Multiple delete problem with factory cleanups
-                  g_list_store_remove(store, positionF);
-                  insert(store, f, verbose);                        
+                  //g_list_store_remove(store, positionF);
+                  //insert(store, f, verbose);                        
                 }
 
                 //p->restat_item(f);
@@ -303,8 +303,8 @@ namespace xf {
                 if (verbose) {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = findPosition(store, f, &positionF, verbose);
                 if (found){
-                  g_list_store_remove(store, positionF);
-                  insert(store, s, verbose);           
+                  //g_list_store_remove(store, positionF);
+                  //insert(store, s, verbose);           
 /*                  auto infoF = G_FILE_INFO(g_list_model_get_object (G_LIST_MODEL(store), positionF));
                   auto fileF = G_FILE(g_file_info_get_attribute_object(infoF, "standard::file"));
                   auto fileS = g_file_new_for_path(s);

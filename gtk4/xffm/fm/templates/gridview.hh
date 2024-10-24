@@ -517,6 +517,7 @@ namespace xf {
 
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
+        DBG("factorySetup...\n");
         auto box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -565,6 +566,8 @@ namespace xf {
 
         addMotionController(imageBox);
         addGestureClick(imageBox, object, gridView_p);
+        addGestureClick(labelBox, object, gridView_p);
+        addGestureClick(hlabelBox, object, gridView_p);
         addGestureClickMenu(imageBox, object, gridView_p);
         addGestureClickMenu(labelBox, object, gridView_p);
         addGestureClickMenu(hlabelBox, object, gridView_p);
@@ -576,7 +579,14 @@ namespace xf {
       static void
       factoryUnbind(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
         DBG("factoryUnbind...\n");
-      }
+        //THREADPOOL->clear();
+        //Child::incrementSerial();
+     
+         // cleanup on regen:
+        auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
+        auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
+        if (oldImage) gtk_widget_unparent(oldImage);
+     }
       static void
       factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
         DBG("factoryTeardown...\n");
@@ -624,9 +634,14 @@ namespace xf {
 
         DBG("factory bind name= %s\n", name);
 
+        auto isImage = (strstr(mimetype, "image"));
+        auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
+
+        auto doPreview = (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
+
 
         GdkPaintable *texture = NULL;
-          
+        GtkWidget *image = NULL;
         // Only for the hidden + backup items. Applies background mask.
         bool hidden = (name[0] == '.' && name[1] != '.');
         bool backup = ( name[strlen(name)-1] == '~');
@@ -634,14 +649,25 @@ namespace xf {
           auto *iconPath = Texture<bool>::findIconPath(info);
           // Only for the hidden + backup items. Applies background mask.
           if (iconPath) texture = Texture<bool>::getSvgPaintable(iconPath, size, size);   
-
-        } else {
-          texture = Texture<bool>::load(info);
+          image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
         }
-        GtkWidget *image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+
+        double scaleFactor = 1.;
+        if (doPreview && !image) {
+          // Try to load from paintable hash
+          texture = Preview<bool>::readThumbnail(path);
+          if (texture) image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          scaleFactor = 2;
+          if (size == 24) scaleFactor = 0.75;
+          gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
+        }
+        if (!image){
+          texture = Texture<bool>::load(info);
+          image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        }
         // cleanup on regen:
-        auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
-        if (oldImage) gtk_widget_unparent(oldImage);
+        //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
+        //if (oldImage) gtk_widget_unparent(oldImage);
         Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
         
 
@@ -649,13 +675,8 @@ namespace xf {
           DirectoryClass::addDirectoryTooltip(image, info);
         }
 
-        auto isImage = (strstr(mimetype, "image"));
-        auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
-
-        auto doPreview = (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
         if (size < 0) size = 48;
-        double scaleFactor = 1.;
-        if (doPreview) scaleFactor = 2;
+        //if (doPreview) scaleFactor = 2;
 
         if (size == 24) scaleFactor = 0.75;
         gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
@@ -738,7 +759,7 @@ namespace xf {
         // This could only be done when load has completed,
         // and that is because disk access is serialize by bus.
         // But it really fast from sd disk...
-        
+#if 0       
         // if (doPreview && Texture<bool>::previewOK()){ // obsolete.
         if (doPreview){ 
           DBG("factory bind add preview threads\n");
@@ -754,11 +775,49 @@ namespace xf {
           // thread number limited.
           THREADPOOL->add(Texture<bool>::preview, (void *)arg);
         }
+#else
+        
+#endif
         g_free(path);
         DBG("factory bind complete: %s\n", name);
         g_free(name);
         g_free(mimetype);
       }
+public:
+    void fireUpPreviews(GtkWidget *child){
+
+      // we get imageBox from object
+      // we *need* a reference to image (to remove, but we can do with get child from imageBox)
+      // we obtain scalefactor with size
+      // 
+      //
+
+      // foreach object in model{
+      //   if (doPreview) {
+      //     do the threadpool add
+      //
+        // Now for replacement of image icons for previews
+        // This could only be done when load has completed,
+        // and that is because disk access is serialize by bus.
+        // But it really fast from sd disk...
+#if 0       
+        // if (doPreview && Texture<bool>::previewOK()){ // obsolete.
+        if (doPreview){ 
+          DBG("factory bind add preview threads\n");
+          // path, imageBox, image, serial
+          auto arg = (void **)calloc(6, sizeof(void *));
+          arg[0] = (void *)g_strdup(path);
+          arg[1] = imageBox;
+          arg[2] = image;
+          arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
+          arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
+          arg[5] = child; // in main context
+          //Thread::threadPoolAdd(Texture<bool>::preview, (void *)arg);
+          // thread number limited.
+          THREADPOOL->add(Texture<bool>::preview, (void *)arg);
+        }
+#endif
+    }
 
 
     private:
