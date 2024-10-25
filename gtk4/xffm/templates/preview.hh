@@ -66,6 +66,92 @@ template <class Type> class Texture;
 template <class Type>
 class Preview {
   public:
+      static void *preview(void *data){
+        // This is a pthread function, not active in g_main_context.
+        // Step one: check if serial is OK
+        // Step do: function action.
+
+        // Input data (do not check if GtkWidget pointers are actually valid
+        // since here they are not used, except for "child").
+        auto arg = (void **)data;
+        auto path = (char *)arg[0];
+        auto imageBox = arg[1];
+        auto image = arg[2];
+        auto serial = GPOINTER_TO_INT(arg[3]);
+        auto size = GPOINTER_TO_INT(arg[4]);
+        auto child = (GtkWidget *)arg[5];
+
+        // serial verification:
+        auto currentSerial = Child::getSerial(child);
+        if (serial != currentSerial){
+          DBG("Current serial mismatch %d != %d. Dropping preview() thread.\n", 
+              currentSerial, serial);
+          return NULL;
+        }
+
+        // Serial was OK a moment ago. We now create the paintable from path.
+
+        TRACE("Preview::preview: %s, box=%p, image=%p, serial=%d\n", 
+            path,imageBox, image, serial);
+
+        auto paintable = Texture<Type>::loadPath(path);
+        g_free(path); // no longer needed.
+        g_free(arg);
+
+
+        // context function...
+        // replace image in main context
+        void *replaceArg[] ={
+          (void *) paintable,
+          (void *) imageBox,
+          (void *) image,
+          GINT_TO_POINTER(serial),
+          GINT_TO_POINTER(size),
+          (void *)child,
+          NULL
+        };
+
+        // replace_f is now being queued to main context where.
+        // the gtk widget replacement takes place.
+        auto retval = Basic::context_function(replace_f, replaceArg);
+        
+        // All done here.
+        return NULL;
+      }
+  private:      
+      static void *replace_f(void *data){
+
+
+        auto replaceArg = (void **)data;
+        auto paintable = replaceArg[0]; // GDK_PAINTABLE
+        auto imageBox = replaceArg[1]; // GTK_BOX
+        auto image = replaceArg[2]; // GTK_IMAGE
+        auto serial = GPOINTER_TO_INT(replaceArg[3]); 
+        auto size = GPOINTER_TO_INT(replaceArg[4]);
+        auto child = (GtkWidget *)replaceArg[5]; // GTK_WIDGET
+                                                
+        // Check whether active serial is still valid.
+        auto activeSerial = Child::getSerial(child);
+
+        if (serial != activeSerial){
+          DBG("mainContext::replace_f(): serial mismatch %d != %d (dropping paintable %p)\n", 
+              serial, activeSerial, paintable);
+          // No need to unref, as the object resides in hash table.
+          // We are done here.
+          return NULL;
+        }
+
+        TRACE("replace_f in main context: paintable=%p, box=%p, image=%p, serial=%d\n", 
+            paintable, imageBox, image, serial);
+        // Now we do main context stuff. This should only fail if some other
+        // thread does (incorrectly) main context stuff.
+        gtk_box_remove(GTK_BOX(imageBox), GTK_WIDGET(image)); // cleanup
+        GtkWidget *preview = gtk_image_new_from_paintable(GDK_PAINTABLE(paintable)); // new gtk widget
+        gtk_widget_set_size_request(preview, size, size); // configure widget
+        Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(preview), FALSE, FALSE, 0); // replace
+        return  GINT_TO_POINTER(serial);
+      }
+  public:
     static GdkPaintable *
     getPaintableWithThumb(const char *path)
     {
@@ -181,12 +267,31 @@ class Preview {
         g_hash_table_insert(hash(), g_strdup(path), paintableX);
     }
 public:
+    static bool doPreview(GFileInfo *info){
+        auto path = Basic::getPath(info);       
+        auto type = g_file_info_get_file_type(info);
+        auto mimetype = Mime::mimeType(path);
+        if (!mimetype) mimetype =  g_strdup(_("unknown"));
+        auto isImage = (strstr(mimetype, "image"));
+        auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
+        g_free(path);
+        g_free(mimetype);
+        return (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
+    }
+
     static GdkPaintable *
     readThumbnail(const char *path){
       auto item = g_hash_table_lookup(hash(), path);
       if (!item) return NULL;
       auto paintableX = (paintable_t *)item;
       return GDK_PAINTABLE(paintableX->paintable);
+    }
+
+    static time_t thumbnailMtime(const char *path){
+      auto item = g_hash_table_lookup(hash(), path);
+      if (!item) return 0;
+      auto paintableX = (paintable_t *)item;
+      return paintableX->mtime;
     }
 private:
     static bool thumbnailOK(const char *path){

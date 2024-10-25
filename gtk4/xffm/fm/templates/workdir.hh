@@ -22,13 +22,18 @@ namespace xf {
 
           g_file_monitor_cancel(monitor);
           g_object_unref(monitor);
-          DBG("monitor cancel = %p\n", monitor);
+          DBG("***monitor cancel = %p\n", monitor);
         }
         
         // cancel threadpool for previews, if any. Wait on condition
 
         auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
         TRACE("new object: %p\n", viewObject);
+        viewObject->child(child);
+        auto store = viewObject->listStore();
+        monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
+        DBG("*** monitor = %p\n", monitor);
+        g_object_set_data(G_OBJECT(child), "monitor", monitor);
         auto view = viewObject->view();
         //auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
@@ -38,10 +43,12 @@ namespace xf {
           auto object = (GridView<LocalDir> *) oldObject;
           delete object;
         }
-        Child::setGridviewObject(viewObject);       
+        Child::setGridviewObject(viewObject);     
+        // activate monitor  
+        g_object_set_data(G_OBJECT(monitor), "active", GINT_TO_POINTER(1));
 
         // Fireup preview threads here, once initial load has completed.
-        viewObject->fireUpPreviews(child);
+        //viewObject->fireUpPreviews(child);
 #endif
       }
 

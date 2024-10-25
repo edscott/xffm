@@ -43,6 +43,7 @@ namespace xf {
 
         GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
         g_object_set_data(G_OBJECT(store), "selectionModel", s);
+        g_object_set_data(G_OBJECT(s), "store", store);
 
         g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), NULL);
         return s;
@@ -133,15 +134,13 @@ namespace xf {
           if (!outInfo || !outChild) break;
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(outInfo, "standard::file", G_OBJECT(outChild));
-          TRACE("insert path (%s)\n", g_file_get_path(outChild));
+          
           void *flags = NULL; // FIXME: this will determine sort order
           g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, flags);
-          DBG("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
+          TRACE("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
         } while (true);
 
-        int serial = Child::getSerial();
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
-        g_object_set_data(G_OBJECT(Child::getChild()), "monitor", monitor);
 
         DBG("monitor=%p file=%p store=%p\n", monitor, file, store);
         if (error_){
@@ -152,11 +151,10 @@ namespace xf {
             //file=NULL;
             // return;
         } else {
-          g_object_set_data(G_OBJECT(monitor), "active", GINT_TO_POINTER(1));
           g_signal_connect (monitor, "changed", 
                 G_CALLBACK (changed_f), (void *)store);
         }
-
+        g_object_set_data(G_OBJECT(store), "monitor", monitor);
         return getSelectionModel(G_LIST_MODEL(store));
       }
 
@@ -208,9 +206,12 @@ namespace xf {
 
       static void
       changed_f ( GFileMonitor* self,  
+          // This runs in main context, I presume.
           GFile* first, GFile* second, //same as GioFile * ?
           GFileMonitorEvent event, 
           void *data){
+
+        // Switch to pause monitor execution.
         pthread_mutex_lock(&monitorMutex);   
         auto active = g_object_get_data(G_OBJECT(self), "active");
         pthread_mutex_unlock(&monitorMutex);   
@@ -218,11 +219,17 @@ namespace xf {
           DBG("monitor %p inactive\n", self);
           return;
         }
+
         GListStore *store = G_LIST_STORE(data);
+        auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
+        if (!child){
+          DBG("localdir.hh::changed_f(): this should not happen\n");
+          exit(1);
+        }
         DBG("*** monitor changed_f call position=%d...\n", 0);
         gchar *f= first? g_file_get_path (first):g_strdup("--");
-
         gchar *s= second? g_file_get_path (second):g_strdup("--");
+
       /*  GError *error_=NULL;
         GFileInfo *infoF = first? g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED", 
             G_FILE_QUERY_INFO_NONE, NULL, &error_):NULL;
@@ -240,6 +247,7 @@ namespace xf {
             DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",p->view()->serial(), p->serial());
             return;
         }*/
+
         bool verbose = true;
         guint positionF;
         void *flags = NULL; // FIXME: this will determine sort order
@@ -272,6 +280,7 @@ namespace xf {
                   if (verbose) {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
                   auto found = findPosition(store, f, &positionF, verbose);
                   if (found) {
+                    Child::incrementSerial(child);
                     g_list_store_remove(store, positionF);
                   }
                 }
@@ -289,6 +298,7 @@ namespace xf {
                     g_free(s);
                     return;
                   }
+                  Child::incrementSerial(child);
                   insert(store, f, verbose);
                 }
                 break;

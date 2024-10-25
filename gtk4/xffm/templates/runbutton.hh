@@ -341,7 +341,7 @@ public:
 
         gtk_widget_set_visible(GTK_WIDGET(button), TRUE);
         // flush gtk
-        Basic::flushGTK();
+        //Basic::flushGTK();
         TRACE ("make_run_data_button: button made for grandchildPID=%d\n", (int)run_button_p->pid());
         return NULL;
     }

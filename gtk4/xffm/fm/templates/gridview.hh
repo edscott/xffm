@@ -5,6 +5,7 @@ namespace xf {
   template <class DirectoryClass>
   class GridView  {
   private:
+      GtkWidget *child_;
       GtkMultiSelection *selection_model_ = NULL;
       GtkPopover *menu_=NULL;
       GtkWidget *view_;
@@ -13,12 +14,22 @@ namespace xf {
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
       int maxNameLen_ = 0;
   public:
+      void child(GtkWidget *child){
+        child_ = child;
+        auto store = G_OBJECT(g_object_get_data(G_OBJECT(selection_model_), "store"));
+        g_object_set_data(store, "child", child_);
+      }
+      GtkWidget *child(void){return child_;}
       void setMenu(GtkPopover *menu){ menu_ = menu;}
       GtkMultiSelection *selectionModel(void){ return selection_model_;}
       GtkPopover *menu(void){ return menu_;}
       GtkWidget *view(void){ return view_;}
       void *gridViewClick_f(void){ return gridViewClick_f_;}
       char *path(void){ return path_;}
+      GListModel *listModel(void){ return G_LIST_MODEL(selection_model_);}
+      GListStore *listStore(void){ 
+        return G_LIST_STORE(g_object_get_data(G_OBJECT(selection_model_), "store"));
+      }
       
       GridView(const char *path, void *gridViewClick_f){
         gridViewClick_f_ = gridViewClick_f;
@@ -195,6 +206,23 @@ namespace xf {
       gtk_widget_set_parent(GTK_WIDGET(popover), gridView_p->view());
       return popover;
     }
+    /*
+    static GtkPopover *getPopover(GFileInfo *info, GridView *gridView_p){ 
+     // auto list_item =GTK_LIST_ITEM(object);
+    //  auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+      auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
+      auto path = Basic::getPath(info);
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
+      auto popover = gridView_p->myMenu_->mkMenu(markup);
+      g_object_set_data(G_OBJECT(popover), "info", info);
+
+      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      g_free(markup);
+      g_object_set_data(G_OBJECT(menubox), "menu", popover);
+      gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
+      g_free(path);
+      return popover;
+    }*/
 
     static GtkPopover *getPopover(GObject *object, GridView *gridView_p){ 
       auto list_item =GTK_LIST_ITEM(object);
@@ -335,13 +363,26 @@ namespace xf {
         gtk_popover_popup(GTK_POPOVER(popover));
       }
   }
-
+/*
+  static void placeMenu(GFileInfo *info, GridView *gridView_p){
+//      auto menubox = g_object_get_data(G_OBJECT(object), "menuBox");
+      auto menubox = g_object_get_data(G_OBJECT(info), "menuBox");
+      auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
+      if (!popover){
+        popover = getPopover(info, gridView_p);
+      }
+      
+      if (popover) {
+        g_object_set_data(G_OBJECT(popover), "info", info);
+        setupMenu(GTK_POPOVER(popover), info);
+        gtk_popover_popup(GTK_POPOVER(popover));
+      }
+  }
+*/
   static void placeMenu(GObject *object, GridView *gridView_p){
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-
       auto menubox = g_object_get_data(G_OBJECT(object), "menuBox");
-//      auto menubox = g_object_get_data(G_OBJECT(info), "menuBox");
       auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
       if (!popover){
         popover = getPopover(object, gridView_p);
@@ -422,15 +463,16 @@ namespace xf {
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
       auto size = gtk_bitset_get_size(bitset);
       TRACE("gtk_bitset_get_size = %ld\n", size);
-      if (size == 1){
+/*      if (size == 1){
         unsigned position = 1;
         GtkBitsetIter iter;
         gtk_bitset_iter_init_first (&iter, bitset, &position);
         auto list = G_LIST_MODEL(selectionModel);
+
         auto info = G_FILE_INFO(g_list_model_get_item (list, position));
         DBG("fixme line 425 gridview.hh\n");//placeMenu(info, gridView_p);
         return true;      
-      }
+      }*/
       if (size == 0){
         placeMenu(gridView_p);
         return true;      
@@ -514,10 +556,14 @@ namespace xf {
           GTK_PHASE_CAPTURE);
     }    
 
+      static void
+      factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
+        TRACE("factoryTeardown...\n");
+      }
 
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
-        DBG("factorySetup...\n");
+        TRACE("factorySetup...\n");
         auto box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -559,7 +605,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(menuBox), "object", object);
         g_object_set_data(G_OBJECT(menuBox2), "object", object);
 
-        DBG("factorySetup add signal handlers\n");
+        TRACE("factorySetup add signal handlers\n");
         
         addMotionController(labelBox);
         addMotionController(hlabelBox);
@@ -572,13 +618,13 @@ namespace xf {
         addGestureClickMenu(labelBox, object, gridView_p);
         addGestureClickMenu(hlabelBox, object, gridView_p);
 
-        DBG("factorySetup: object(GTK_LIST_ITEM) = %p box = %p\n", object, box);
+        TRACE("factorySetup: object(GTK_LIST_ITEM) = %p box = %p\n", object, box);
         
       }
 
       static void
       factoryUnbind(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
-        DBG("factoryUnbind...\n");
+        TRACE("factoryUnbind...\n");
         //THREADPOOL->clear();
         //Child::incrementSerial();
      
@@ -587,10 +633,6 @@ namespace xf {
         auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
         if (oldImage) gtk_widget_unparent(oldImage);
      }
-      static void
-      factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
-        DBG("factoryTeardown...\n");
-      }
 
 
       /* The bind function for the factory */
@@ -601,7 +643,6 @@ namespace xf {
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
         auto list_item =GTK_LIST_ITEM(object);
         auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
-        //auto menubox2 = GTK_BOX(g_object_get_data(object, "menubox2"));
         auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
         auto label = GTK_LABEL(g_object_get_data(object, "label"));
         auto hlabel = GTK_LABEL(g_object_get_data(object, "hlabel"));
@@ -619,26 +660,8 @@ namespace xf {
         // allocated:
         auto path = Basic::getPath(info);       
         char *name = g_strdup(g_file_info_get_name(info));
-        auto mimetype = Mime::mimeType(path);
-        if (!mimetype) mimetype =  g_strdup(_("unknown"));
-        
-       
-    //    This is wrong. Crash when item has been deleted
-    //    from the GListStore in multiple delete.
-    /*    auto list = Basic::getChildren(box);
-        DBG("factory bind list=%p\n", list);
-        for (auto l=list; l && l->data; l=l->next){
-          gtk_widget_unparent(GTK_WIDGET(l->data));
-        }
-        g_list_free(list);*/
 
-        DBG("factory bind name= %s\n", name);
-
-        auto isImage = (strstr(mimetype, "image"));
-        auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
-
-        auto doPreview = (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
-
+        TRACE("factory bind name= %s\n", name);
 
         GdkPaintable *texture = NULL;
         GtkWidget *image = NULL;
@@ -650,21 +673,39 @@ namespace xf {
           // Only for the hidden + backup items. Applies background mask.
           if (iconPath) texture = Texture<bool>::getSvgPaintable(iconPath, size, size);   
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          // Texture reference is kept in hashtable.
         }
 
+        bool previewLoaded = false;
         double scaleFactor = 1.;
-        if (doPreview && !image) {
-          // Try to load from paintable hash
+        auto doPreview = Preview<bool>::doPreview(info);
+        if (!image && doPreview) {
+          // Try to load reference to texture from hash table.
           texture = Preview<bool>::readThumbnail(path);
-          if (texture) image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          if (texture){
+            image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+            previewLoaded = true;
+            // is it current?
+            auto textureTime = Preview<bool>::thumbnailMtime(path);
+            // does not work even with attribute set: g_file_info_get_modification_date_time
+            struct stat st;
+            stat(path, &st);
+            if (st.st_mtime > textureTime){
+              //Must do over
+              previewLoaded = false;
+            } else {TRACE("hash preview is OK %ld <= %ld\n", st.st_mtime, textureTime);}
+          }
           scaleFactor = 2;
           if (size == 24) scaleFactor = 0.75;
-          gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
         }
         if (!image){
-          texture = Texture<bool>::load(info);
+          texture = Texture<bool>::load(info); // Loads icon from icontheme.
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          // Texture is not referenced in hash table. 
+          g_object_unref(texture);
         }
+        if (image) gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
+        else {DBG("Should not happen: image is NULL\n");}
         // cleanup on regen:
         //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
         //if (oldImage) gtk_widget_unparent(oldImage);
@@ -751,18 +792,11 @@ namespace xf {
           DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
         }
 
+        if (doPreview && !previewLoaded){
 
-        DBG("factory bind add signal handlers\n");
-        
-
-        // Now for replacement of image icons for previews
-        // This could only be done when load has completed,
-        // and that is because disk access is serialize by bus.
-        // But it really fast from sd disk...
-#if 0       
-        // if (doPreview && Texture<bool>::previewOK()){ // obsolete.
-        if (doPreview){ 
-          DBG("factory bind add preview threads\n");
+          // if hash value exists and is ok, skip regen
+          // otherwise, plug into threadpool.
+          TRACE("factory bind add preview threads\n");
           // path, imageBox, image, serial
           auto arg = (void **)calloc(6, sizeof(void *));
           arg[0] = (void *)g_strdup(path);
@@ -773,51 +807,14 @@ namespace xf {
           arg[5] = child; // in main context
           //Thread::threadPoolAdd(Texture<bool>::preview, (void *)arg);
           // thread number limited.
-          THREADPOOL->add(Texture<bool>::preview, (void *)arg);
+          THREADPOOL->add(Preview<bool>::preview, (void *)arg);
         }
-#else
-        
-#endif
         g_free(path);
-        DBG("factory bind complete: %s\n", name);
+        TRACE("factory bind complete: %s\n", name);
         g_free(name);
-        g_free(mimetype);
       }
 public:
-    void fireUpPreviews(GtkWidget *child){
 
-      // we get imageBox from object
-      // we *need* a reference to image (to remove, but we can do with get child from imageBox)
-      // we obtain scalefactor with size
-      // 
-      //
-
-      // foreach object in model{
-      //   if (doPreview) {
-      //     do the threadpool add
-      //
-        // Now for replacement of image icons for previews
-        // This could only be done when load has completed,
-        // and that is because disk access is serialize by bus.
-        // But it really fast from sd disk...
-#if 0       
-        // if (doPreview && Texture<bool>::previewOK()){ // obsolete.
-        if (doPreview){ 
-          DBG("factory bind add preview threads\n");
-          // path, imageBox, image, serial
-          auto arg = (void **)calloc(6, sizeof(void *));
-          arg[0] = (void *)g_strdup(path);
-          arg[1] = imageBox;
-          arg[2] = image;
-          arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
-          arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
-          arg[5] = child; // in main context
-          //Thread::threadPoolAdd(Texture<bool>::preview, (void *)arg);
-          // thread number limited.
-          THREADPOOL->add(Texture<bool>::preview, (void *)arg);
-        }
-#endif
-    }
 
 
     private:
