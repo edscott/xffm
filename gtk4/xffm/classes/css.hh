@@ -102,6 +102,7 @@ private:
         margin-left: 0;\
         margin-right: 0;\
         margin-top: 0;\
+        border-spacing: 1px 1px;\
       }\
       .font1 {\
         font-size: xx-small;\
