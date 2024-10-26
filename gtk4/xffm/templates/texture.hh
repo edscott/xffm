@@ -46,9 +46,16 @@ template <class Type>  class Texture {
       static 
       GdkPaintable *loadPath(const char *path){
         GError *error_ = NULL;
-        if (!path) return NULL;
+        if (!path) {
+          DBG("*** Error::loadPath(%s): %s\n", path, error_->message);
+          g_error_free(error_);
+          return NULL;
+        }
         
-        if (!g_file_test(path, G_FILE_TEST_EXISTS)) return NULL;
+        if (!g_file_test(path, G_FILE_TEST_EXISTS)) {
+          DBG("*** Error::loadPath(%s): !g_file_test(path, G_FILE_TEST_EXISTS\n", path);
+          return NULL;
+        }
         GdkPaintable *paintable = NULL;
         auto mimetype = Mime::mimeType(path);
         if (!mimetype) mimetype =  _("unknown");
@@ -92,6 +99,9 @@ template <class Type>  class Texture {
                        1,    // int scale,
                        GTK_TEXT_DIR_NONE, 
                        (GtkIconLookupFlags) 0);
+        if (!icon) {
+          DBG("*** loadIconName():gtk_icon_theme_lookup_icon(%s) failed.\n", item);
+        }
 
         return GDK_PAINTABLE(icon);
       }
@@ -135,14 +145,31 @@ template <class Type>  class Texture {
     static const char *locate(const char *name){
       char *tname = gtk_icon_theme_get_theme_name(iconTheme);
       const char *dirs[] = {"places", "mimetypes", "status", "devices", "emblems", "stock", NULL}; 
+      // adwaita format.
       for (auto p=dirs; p && *p; p++){
-        auto *path = g_strdup_printf("/usr/share/icons/%s/scalable/%s/%s.svg", tname, *p, name);
+        // adwaita
+        auto path = g_strdup_printf("/usr/share/icons/%s/scalable/%s/%s.svg", tname, *p, name);
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (const char *)path;
         g_free(path);
-        path = g_strdup_printf("/usr/share/icons/hicolor/scalable/%s/%s.svg", *p, name);
+      }
+      // kde breeze format
+      for (auto p=dirs; p && *p; p++){
+        auto path = g_strdup_printf("/usr/share/icons/%s/%s/16/%s.svg", tname, *p, name);
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (const char *)path;
         g_free(path);
+      }
+
+      // hicolor adwaita format.
+      for (auto p=dirs; p && *p; p++){
+        // hicolor in /usr
+        auto path = g_strdup_printf("/usr/share/icons/hicolor/scalable/%s/%s.svg", *p, name);
+        if (g_file_test(path, G_FILE_TEST_EXISTS)) return (const char *)path;
+        g_free(path);
+
+        // hicolor in PREFIX
         path = g_strdup_printf("%s/share/icons/hicolor/scalable/%s/%s.svg",PREFIX, *p, name);
+        TRACE("locate  %s\n",path);
+
         if (g_file_test(path, G_FILE_TEST_EXISTS)) return (const char *)path;
         g_free(path);
       }
@@ -155,6 +182,7 @@ template <class Type>  class Texture {
           auto tIcon = G_THEMED_ICON(gIcon);
           auto names = g_themed_icon_get_names(tIcon);
           for (auto p=names; p && *p; p++) {
+
             if (!iconPathHash) iconPathHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
             const char *path = (const char *)g_hash_table_lookup(iconPathHash, *p);
             if (path) return path;
@@ -163,11 +191,13 @@ template <class Type>  class Texture {
               g_hash_table_insert(iconPathHash, g_strdup(*p), (void *)path);
               TRACE("findIconPath hash insert name=%s -> %s\n", *p, path);
               return path;
+            } else {
+              TRACE("*** Warning:findIconPath(): cannot gicon for %s-->%s\n", *p, path);
             }
           }
-          TRACE("*** Warning: could not find icon path for any of:\n");
+          TRACE("*** Warning: \n");
           for (auto p=names; p && *p; p++) {
-            fprintf(stderr, "    %s\n", *p);
+            DBG("Texture.hh::findIconPath(): Could not find icon path for   %s\n", *p);
           }
           TRACE("*** Warning: using application-x-generic instead...\n");
 
@@ -176,10 +206,21 @@ template <class Type>  class Texture {
               g_hash_table_insert(iconPathHash, g_strdup("application-x-generic"), (void *)path);
               return path;
           }
+          TRACE("*** Warning:findIconPath(): cannot find icon path for %s\n", path);
           return NULL;
     }
 
     static GdkPaintable *getSvgPaintable(const char *file, double width, double height){
+      // debug
+  /*    findIconPath("*** getSvgPaintable(%s, %lf,%lf)\n", file, width, height);
+      auto retval = loadPath(file);
+      if (!retval){
+        auto base = g_path_get_basename(file);
+        if (strchr(base, '.')) *strchr(base, '.') = 0;
+        retval = loadIconName(base);
+      }
+      return retval;*/
+
           GError *error_ = NULL;
           RsvgHandle *handle = rsvg_handle_new_from_file (file, &error_ );
           if (error_) DBG("*** Error: %s\n", error_->message);
@@ -192,6 +233,7 @@ template <class Type>  class Texture {
           if (!rsvg_handle_render_document (handle, cr, &viewport, &error_)){
              DBG("*** Error: %s\n", error_->message);
           }
+#if 10
 
         auto string = Settings::getString("xfterm", "iconsBg");
         if (string){
@@ -219,8 +261,8 @@ template <class Type>  class Texture {
         cairo_set_source_surface(cr2, surface, 0, 0); // OjO: cr3 coordinates!
         cairo_rectangle (cr2, 0.0, 0.0, width, height);
         cairo_fill (cr2);*/
-
-
+#endif
+        cairo_destroy(cr);
         auto texture = GDK_PAINTABLE(gdk_texture_new_for_surface(surface));
         cairo_surface_destroy(surface);
         return  texture;
