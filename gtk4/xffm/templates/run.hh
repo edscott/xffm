@@ -176,7 +176,11 @@ public:
                                     textview, // XXX view_v,
                                     flags);
         pid_t grandchild=Tubo::getChild (pid);
-        if (textview) Print::printIcon(textview, "emblem-greenball", g_strdup_printf("%d:%s\n", grandchild, command));
+
+        if (textview) {
+          Print::showText(textview);
+          Print::printIcon(textview, "emblem-greenball", g_strdup_printf("%d:%s\n", grandchild, command));
+        }
         g_strstrip(command);
         push_hash(grandchild, g_strdup(command));
         TRACE("push hash: \"%s\"\n", command);

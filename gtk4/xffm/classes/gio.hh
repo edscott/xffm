@@ -32,32 +32,80 @@ class Gio {
     }*/
 
 public:
-    // rm/shred/trash (by popup)
+    //copy/move/symlink (by dnd or clipboard)
     static gboolean 
-    execute(GtkWindow *rmDialog, const gchar *path, gint mode){
-        GList *list = g_list_prepend(NULL,(void *)path);
-        auto retval = execute(rmDialog,  list, mode);
-        g_list_free(list);
-        return retval;
-    }
-    static gboolean 
-    execute(GtkWindow *rmDialog,  GList *list, gint mode){
-        auto retval = multiDoIt(rmDialog, list,mode);
-        return retval;
+    executeURL(gchar **files, const gchar *target, gint mode){
+        if (!files) {
+            ERROR("!files\n");
+            return FALSE;
+        }
+        if (*files==NULL) {
+            ERROR("files==NULL\n");
+            return FALSE;
+        }
+        TRACE("*** target=%s, *files%s\n",target, (*files)+strlen(URIFILE));
+        if (strcmp(target, (*files)+strlen(URIFILE))==0){
+            TRACE("gio.hh:: cannot dnd a file unto itself: %s\n", target);
+            return FALSE;
+        }
+            
+        gchar *source = g_path_get_dirname(*files);
+        if (strncmp(source, URIFILE, strlen(URIFILE))==0){
+            gchar *g = g_strdup(source + strlen(URIFILE));
+            g_free(source);
+            source=g;
+        }
+        if (!target){
+            ERROR("LocalDnd::execute: target cannot be NULL\n");
+            return FALSE;
+        }
+        TRACE("execute: source=%s target=%s command=%s\n", source, target, 
+                mode==MODE_COPY?"copy":mode==MODE_MOVE?"move":"link");
+        gboolean result = FALSE;
+        if (strcmp(source, target) ) result = TRUE;
+        else {
+            g_free(source);
+            TRACE("Gio::execute: source and target are the same\n");
+            return FALSE;
+        }
+        g_free(source);
+
+        // Proceed...
+        auto arg = (void **)calloc(4,sizeof(void *));
+        if (!arg){
+            ERROR("execute(): calloc: %s\n", strerror(errno));
+            exit(1);
+        }
+        auto list = removeUriFormat(files);
+        arg[0] = (void *)list;
+        arg[1] = (void *)g_strdup(target);
+        arg[2] = GINT_TO_POINTER(mode);
+        TRACE("dnd thread1 create\n");
+        new(Thread)("Gio::executeURL(): thread1", thread1, (void *)arg);
+
+        TRACE("dnd return to event loop\n");
+
+        return result;
     }
 private:
-    static void *
-    createProgressObject(void *data){
-        void **arg = (void **)data;
-        auto message = (const gchar *)arg[0];
-        auto icon = (const gchar *)arg[1];
-        auto title = (const gchar *)arg[2];
-        auto text =(const gchar *)arg[3];
-        auto progress = new(Progress)(message, icon, title, text);
-        return (void *) progress;
+    static GList *
+    removeUriFormat(gchar **files) {
+        GList *fileList = NULL;
+        for (auto f=files; f && *f; f++){
+            gchar *file = *f;
+            if (!strstr(file, URIFILE)) continue;
+            if (strlen(file) > strlen(URIFILE)){
+                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
+                    file = *f + strlen(URIFILE);
+                }
+            }
+            fileList = g_list_prepend(fileList, g_strdup(file));
+        }
+        fileList = g_list_reverse(fileList);
+        return fileList;
     }
 
-    //rename/link/duplicate (by popup)
+    // rename/link/duplicate 
     // fireup chain of 2 threads.
     // thread 1 will fire up thread 2 and wait
     // thread 2 will do the action
@@ -133,6 +181,34 @@ private:
         //pthread_exit();
         return GINT_TO_POINTER(retval);
     }
+
+
+public:
+  // rm/shred/trash (by popup)
+    static gboolean 
+    execute(GtkWindow *rmDialog, const gchar *path, gint mode){
+        GList *list = g_list_prepend(NULL,(void *)path);
+        auto retval = execute(rmDialog,  list, mode);
+        g_list_free(list);
+        return retval;
+    }
+    static gboolean 
+    execute(GtkWindow *rmDialog,  GList *list, gint mode){
+        auto retval = multiDoIt(rmDialog, list,mode);
+        return retval;
+    }
+private:
+    static void *
+    createProgressObject(void *data){
+        void **arg = (void **)data;
+        auto message = (const gchar *)arg[0];
+        auto icon = (const gchar *)arg[1];
+        auto title = (const gchar *)arg[2];
+        auto text =(const gchar *)arg[3];
+        auto progress = new(Progress)(message, icon, title, text);
+        return (void *) progress;
+    }
+
 public:
     static gboolean 
     execute(const gchar *path, const gchar *target, gint mode){
@@ -154,61 +230,6 @@ public:
         TRACE("return to event loop\n");
 
         return TRUE;
-    }
-    //copy/move/symlink (by dnd or clipboard)
-    static gboolean 
-    executeURL(gchar **files, const gchar *target, gint mode){
-        if (!files) {
-            ERROR("!files\n");
-            return FALSE;
-        }
-        if (*files==NULL) {
-            ERROR("files==NULL\n");
-            return FALSE;
-        }
-        TRACE("*** target=%s, *files%s\n",target, (*files)+strlen(URIFILE));
-        if (strcmp(target, (*files)+strlen(URIFILE))==0){
-            TRACE("gio.hh:: cannot dnd a file unto itself: %s\n", target);
-            return FALSE;
-        }
-            
-        gchar *source = g_path_get_dirname(*files);
-        if (strncmp(source, URIFILE, strlen(URIFILE))==0){
-            gchar *g = g_strdup(source + strlen(URIFILE));
-            g_free(source);
-            source=g;
-        }
-        if (!target){
-            ERROR("LocalDnd::execute: target cannot be NULL\n");
-            return FALSE;
-        }
-        TRACE("execute: source=%s target=%s command=%s\n", source, target, 
-                mode==MODE_COPY?"copy":mode==MODE_MOVE?"move":"link");
-        gboolean result = FALSE;
-        if (strcmp(source, target) ) result = TRUE;
-        else {
-            g_free(source);
-            TRACE("Gio::execute: source and target are the same\n");
-            return FALSE;
-        }
-        g_free(source);
-
-        // Proceed...
-        auto arg = (void **)calloc(4,sizeof(void *));
-        if (!arg){
-            ERROR("execute(): calloc: %s\n", strerror(errno));
-            exit(1);
-        }
-        auto list = removeUriFormat(files);
-        arg[0] = (void *)list;
-        arg[1] = (void *)g_strdup(target);
-        arg[2] = GINT_TO_POINTER(mode);
-        TRACE("dnd thread1 create\n");
-        new(Thread)("Gio::executeURL(): thread1", thread1, (void *)arg);
-
-        TRACE("dnd return to event loop\n");
-
-        return result;
     }
     
 private:
@@ -339,22 +360,6 @@ private:
         fore(arg);
     }
 
-    static GList *
-    removeUriFormat(gchar **files) {
-        GList *fileList = NULL;
-        for (auto f=files; f && *f; f++){
-            gchar *file = *f;
-            if (!strstr(file, URIFILE)) continue;
-            if (strlen(file) > strlen(URIFILE)){
-                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
-                    file = *f + strlen(URIFILE);
-                }
-            }
-            fileList = g_list_prepend(fileList, g_strdup(file));
-        }
-        fileList = g_list_reverse(fileList);
-        return fileList;
-    }
 
     static GFile *
     getTargetGfile(const gchar *path, const gchar *target){

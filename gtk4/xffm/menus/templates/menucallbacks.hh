@@ -26,7 +26,7 @@ namespace xf {
       if (position < height * 3 / 4) gtk_paned_set_position(vpane, height);
       else gtk_paned_set_position(vpane, 0);
       return ;
-    }
+}
 
     static void
     goHome(GtkButton *self, void *data){
@@ -82,14 +82,42 @@ namespace xf {
       g_free(find);
       return;
     }
+
+public:
     static void
     paste(GtkButton *self, void *data){
+      /* for path, in menu create a hidden label with the path.
+       * use label get text to retrieve path without memory leak. */
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-      auto path = g_object_get_data(G_OBJECT(menu), "path");
-      //ClipBoard::pasteClip(path);
-      DBG("paste to %s...(currently disabled at menucallbacks.hh)\n", (char *)path);
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      char *path = NULL;
+      if (info) path = Basic::getPath(info);
+      else {
+        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        if (!gridView_p){
+          DBG("Neither info nor gridView_p specified in menu.\n");
+          return;
+        }
+        path = g_strdup(gridView_p->path());
+      }
+
+
+      cpDropResponse::openDialog(path);
+      g_free(path);
+      
+
+    /*  DBG("pasteClip(target=%s):\n%s\n", path, text);
+      if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
+        
+      } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
+      } else {
+          DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
+      }
+*/
+      
     }
+
     static void
     showPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));

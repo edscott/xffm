@@ -7,6 +7,10 @@
 #include "config.h"
 #include "types.h"
 
+#ifdef HAVE_ZIP_H
+# include <zip.h>
+#endif
+
 #include <memory>
 #include <cassert>
 
@@ -19,6 +23,8 @@
 #define USER_DIR                 g_get_home_dir()
 #define USE_LOCAL_MONITOR 1
 #define ALPHA
+#define USER_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
+#define XFTHUMBNAIL_DIR         USER_CACHE_DIR,"thumbnails"
 
 #ifdef ALPHA
 # define ENABLE_FSTAB_MODULE 1
@@ -59,11 +65,13 @@
 
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
-static GtkWidget *MainWidget;
+static GtkWidget *MainWidget = NULL;
 static GtkWindow *MainDialog = NULL;
 static GList *textviewList = NULL;
 static GList *run_button_list = NULL;
 static GHashTable *iconPathHash = NULL;
 static bool exitDialogs = false;
+static void *threadPoolObject = NULL;
+static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
 
 #endif

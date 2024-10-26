@@ -2,7 +2,7 @@
 #define XF_SETTINGS_HH
 
 #define SETTINGS_FILE g_get_user_config_dir(),"xffm+","settings.ini"
-//pthread_mutex_t settingsMutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t settingsMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
 
 class Settings {
@@ -16,7 +16,7 @@ public:
 
     static gint 
     getInteger(const gchar *group, const gchar *item){
-        //pthread_mutex_lock(&settingsMutex);
+        pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gint value = -1;
         GError *error = NULL;
@@ -34,7 +34,7 @@ public:
             }
         }
         g_key_file_free(keyFile);
-        //pthread_mutex_unlock(&settingsMutex);
+        pthread_mutex_unlock(&settingsMutex);
         return value;
     }
 
@@ -51,7 +51,7 @@ public:
  
     static gchar * 
     getString(const gchar *group, const gchar *item){
-        //pthread_mutex_lock(&settingsMutex);
+        pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gchar *value = NULL;
         GError *error = NULL;
@@ -69,7 +69,7 @@ public:
             }
         }
         g_key_file_free(keyFile);
-       // pthread_mutex_unlock(&settingsMutex);
+        pthread_mutex_unlock(&settingsMutex);
         return value;
     }
 
@@ -89,18 +89,18 @@ public:
        
     static void
     setInteger(const gchar *group, const gchar *item, int value){
-        //pthread_mutex_lock(&settingsMutex);
+        pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         g_key_file_set_integer (keyFile, group, item, value);
         writeKeyFile(keyFile);
         g_key_file_free(keyFile);
-        //pthread_mutex_unlock(&settingsMutex);
+        pthread_mutex_unlock(&settingsMutex);
         return;
     }
     
     static void
     setString(const gchar *group, const gchar *item, const gchar *value){
-        //pthread_mutex_lock(&settingsMutex);
+        pthread_mutex_lock(&settingsMutex);
         if (!value) {
             TRACE("Settings::setString: %s.%s value is null\n", group, item);
             return;
@@ -109,36 +109,36 @@ public:
         g_key_file_set_string (keyFile, group, item, value);
         writeKeyFile(keyFile);
         g_key_file_free(keyFile);
-        //pthread_mutex_unlock(&settingsMutex);
+        pthread_mutex_unlock(&settingsMutex);
         return;
     }
     
    
     static gboolean
     removeKey(const gchar *group, const gchar *key){
-        //pthread_mutex_lock(&settingsMutex);
+        pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         auto retval = g_key_file_remove_key (keyFile, group, key, NULL);
         if (retval) writeKeyFile(keyFile);
         g_key_file_free(keyFile);
-        //pthread_mutex_unlock(&settingsMutex);
+        pthread_mutex_unlock(&settingsMutex);
         return retval;
     }
 
     static gboolean
     keyFileHasGroupKey(const gchar *group, const gchar *key) {
-        //pthread_mutex_lock(&settingsMutex);
+        pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         if (g_key_file_has_group(keyFile, group) &&
             g_key_file_has_key (keyFile, group, key, NULL))
             return TRUE;
-        //pthread_mutex_unlock(&settingsMutex);
+        pthread_mutex_unlock(&settingsMutex);
         return FALSE;
     }
    
 private:
 
-    static void
+ /*   static void
     getFileLock(const gchar *settingsfile){
         gint count=0;
         auto lock = g_strconcat(settingsfile,".lock", NULL);
@@ -159,7 +159,7 @@ private:
         auto lock = g_strconcat(settingsfile,".lock", NULL);
         unlink(lock);
         g_free(lock);
-    }
+    }*/
 
     static GKeyFile *
     getKeyFile(void){
@@ -188,7 +188,7 @@ private:
             }
         }
         TRACE("Settings::writeKeyFile... getting lock.\n");
-	    getFileLock(settingsfile);
+	      //getFileLock(settingsfile);
         TRACE("Settings::writeKeyFile... got lock.\n");
 
         gsize file_length;
@@ -211,7 +211,7 @@ private:
             WARN("writeKeyFile(): cannot open %s for write: %s\n", settingsfile, strerror(errno));
         }
 	    TRACE("Settings::removing file lock\n");
-        removeFileLock(settingsfile);
+        //removeFileLock(settingsfile);
         g_free(file_string);
         g_free(config_directory);
         return;

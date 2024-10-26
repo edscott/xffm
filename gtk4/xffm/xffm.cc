@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2018 Edscott Wilson Garcia 
+ * Copyright 2005-2024 Edscott Wilson Garcia 
  * license: GPL v.3
  */
 //  to open inspector:
@@ -18,6 +18,7 @@
 #define ENABLE_THREAD_POOL
 //#undef ENABLE_THREAD_POOL
 
+#include "config.h"
 #include "xffm.h"
 #include "templates.h"
 
@@ -112,10 +113,8 @@ main (int argc, char *argv[]) {
       DBG("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
   }*/
  
-  pthread_t threadLeader;
-  pthread_create(&threadLeader, NULL, xf::Thread:: threadPoolRun, NULL);
-  pthread_detach(threadLeader);
-
+  threadPoolObject = (void *)new xf::ThreadPool;
+  
   gchar *path = getPath(argv[1]);
   TRACE("path is %s (%s)\n", path, argv[1]); 
   auto fm = new(xf::Fm)(path);

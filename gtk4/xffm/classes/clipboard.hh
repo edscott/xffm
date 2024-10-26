@@ -13,7 +13,7 @@ public:
       clipBoard_ = gdk_display_get_clipboard(gdk_display_get_default());
       clipBoardSemaphore_ = TRUE;
       new Thread("ClipBoard::startClipBoard()", clipboardThreadF, this);
-      DBG("*** clipboard thread started.\n")
+      TRACE("*** clipboard thread started.\n")
     }
     ~ClipBoard(void){
       clipBoardSemaphore_ = FALSE;
@@ -63,14 +63,24 @@ public:
       }
     }
 
+#if 0
     static void
-    pasteClip(gpointer data){
+    pasteClip(const gchar *target){
         auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-        auto target = (const gchar *)data;
         auto text = c->clipBoardCache();
         gchar **files = g_strsplit(text, "\n", -1);
+      
+        auto dialogObject = new DialogBasic<cpDropResponse>;
 
         DBG("pasteClip(target=%s):\n%s\n", target, text);
+        if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
+          
+        } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
+        } else {
+            DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
+        }
+
+        /*
         if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
             auto message = _("Copying files locally");
             auto command = "cp -R -b -f";
@@ -87,7 +97,26 @@ public:
         } else {
             DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
         }
+        */
         if (files) g_strfreev(files);
+    }
+#endif
+    
+    static GList *
+    removeUriFormat(gchar **files) {
+        GList *fileList = NULL;
+        for (auto f=files; f && *f; f++){
+            gchar *file = *f;
+            if (!strstr(file, URIFILE)) continue;
+            if (strlen(file) > strlen(URIFILE)){
+                if (strncmp(file, URIFILE, strlen(URIFILE))==0){
+                    file = *f + strlen(URIFILE);
+                }
+            }
+            fileList = g_list_prepend(fileList, g_strdup(file));
+        }
+        fileList = g_list_reverse(fileList);
+        return fileList;
     }
      
     static void
@@ -103,6 +132,23 @@ public:
     }
      
     static void
+    copyClipboardList(GList *list){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      gdk_clipboard_set_text (clipBoardTxt, "");
+      gchar *data = g_strdup_printf("copy\n");
+      for (auto l=list; l && l->data; l=l->next){
+        auto info = G_FILE_INFO(l->data);
+        auto path = Basic::getPath(info);
+        Basic::concat(&data, URIFILE);
+        Basic::concat(&data, path);
+        Basic::concat(&data, "\n");
+        g_free(path);
+      }
+      gdk_clipboard_set_text (clipBoardTxt, data);
+      g_free(data);
+    }
+     
+    static void
     cutClipboardPath(const char *path){ 
       auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
       gdk_clipboard_set_text (clipBoardTxt, "");
@@ -110,6 +156,23 @@ public:
       Basic::concat(&data, URIFILE);
       Basic::concat(&data, path);
       Basic::concat(&data, "\n");
+      gdk_clipboard_set_text (clipBoardTxt, data);
+      g_free(data);
+    }
+     
+    static void
+    cutClipboardList(GList *list){ 
+      auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
+      gdk_clipboard_set_text (clipBoardTxt, "");
+      gchar *data = g_strdup_printf("move\n");
+      for (auto l=list; l && l->data; l=l->next){
+        auto info = G_FILE_INFO(l->data);
+        auto path = Basic::getPath(info);
+        Basic::concat(&data, URIFILE);
+        Basic::concat(&data, path);
+        Basic::concat(&data, "\n");
+        g_free(path);
+      }
       gdk_clipboard_set_text (clipBoardTxt, data);
       g_free(data);
     }
@@ -151,7 +214,7 @@ private:
           usleep(250000);
           Basic::context_function(clipboardContextF, c);
       }
-      DBG("*** clipboard thread exited.\n")
+      TRACE("*** clipboard thread exited.\n")
       return NULL;
     }
 

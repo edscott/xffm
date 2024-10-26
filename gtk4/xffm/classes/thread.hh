@@ -8,12 +8,8 @@
 #else
 # define DBG_T(...)   { (void)0; }
 #endif
- 
-static GList *waitList = NULL;  
-static GList *threadPool = NULL;
-pthread_mutex_t threadPoolMutex = PTHREAD_MUTEX_INITIALIZER;
 
-static int maxThreads = 0;
+#define THREADPOOL ((ThreadPool *)threadPoolObject)
 
       typedef struct threadInfo_t {
         void* (*function)(void*);
@@ -22,18 +18,28 @@ static int maxThreads = 0;
       } threadInfo_t;
 
 namespace xf {
-    gint thread_count = 0;
-    pthread_mutex_t inc_dec_mutex=PTHREAD_MUTEX_INITIALIZER;
-#ifdef DEBUG_THREADS        
-    pthread_mutex_t reference_mutex=PTHREAD_MUTEX_INITIALIZER;
-    GHashTable *thread_hash = NULL;
-    GList *thread_list = NULL;
-#endif
 
-class Thread {
-
+class ThreadPool {
+    int maxThreads = 0;
+    GList *waitList = NULL;  
+    GList *threadPool = NULL;
+    pthread_mutex_t threadPoolMutex = PTHREAD_MUTEX_INITIALIZER;
+    //pthread_cond_t threadPoolCond = PTHREAD_COND_INITIALIZER;
 public:
-  static void clearThreadPool(void){
+      ThreadPool(void){
+        pthread_t threadLeader;
+        pthread_create(&threadLeader, NULL, threadPoolRun_f, this);
+        pthread_detach(threadLeader);
+      }
+
+  void lock(void){
+    pthread_mutex_lock(&threadPoolMutex);
+  }
+  void unlock(void){
+    pthread_mutex_unlock(&threadPoolMutex);
+  }
+
+  void clear(void){
     pthread_mutex_lock(&threadPoolMutex);
       for (auto l=threadPool; l && l->data; l=l->next){
         g_free(l->data);
@@ -41,8 +47,10 @@ public:
       g_list_free(threadPool);
       threadPool = NULL;
     pthread_mutex_unlock(&threadPoolMutex);
+    
+    //pthread_cond_wait(&threadPoolCond, &threadPoolMutex); //deadlocks
   }
-      static void getMaxThreads(void){
+       void getMaxThreads(void){
         if (maxThreads > 0) return;
         if (g_file_test("/proc/cpuinfo", G_FILE_TEST_EXISTS)){
           FILE *in = fopen("/proc/cpuinfo", "r");
@@ -65,7 +73,7 @@ public:
               TRACE("maxThreads set to %d\n", maxThreads);
       }
 
-      static void threadPoolAdd(void* (*function)(void*), void *data){
+      void add(void* (*function)(void*), void *data){
 #ifdef ENABLE_THREAD_POOL
         auto info = (threadInfo_t *)calloc(1, sizeof(threadInfo_t));
         info->function = function;
@@ -78,7 +86,20 @@ public:
 
 
 
-      static void *threadPoolRun(void *data){
+      int size(void){
+        pthread_mutex_lock(&threadPoolMutex);
+        auto sizePending = g_list_length(threadPool);
+        auto sizeWaiting = g_list_length(waitList);
+        pthread_mutex_unlock(&threadPoolMutex);
+        return sizePending;
+      }
+private:
+      static void *threadPoolRun_f(void *data){
+        auto p = (ThreadPool *)data;
+        p->threadPoolRun();
+        return NULL;
+      }
+      void threadPoolRun(void){
 #ifdef ENABLE_THREAD_POOL
         TRACE("Thread::threadPoolRun...\n");
         int active = 0;
@@ -143,6 +164,9 @@ public:
            } else {
               pthread_mutex_unlock(&threadPoolMutex);
            }
+           // active is cero here.
+           //pthread_cond_signal(&threadPoolCond);
+
           }
           TRACE("sleep 250...\n");
           usleep(250);
@@ -151,19 +175,24 @@ public:
             lastCount = count;
           }
         }
+        active = 0;
 #else
         DBG("Threadpool is disabled\n");
 #endif
-        return NULL;
+        return;
       }
+};
+ 
+    pthread_mutex_t inc_dec_mutex=PTHREAD_MUTEX_INITIALIZER;
+    gint thread_count = 0;
+#ifdef DEBUG_THREADS        
+    pthread_mutex_t reference_mutex=PTHREAD_MUTEX_INITIALIZER;
+    GHashTable *thread_hash = NULL;
+    GList *thread_list = NULL;
+#endif
 
-      static int threadPoolSize(void){
-        pthread_mutex_lock(&threadPoolMutex);
-        auto sizePending = g_list_length(threadPool);
-        auto sizeWaiting = g_list_length(waitList);
-        pthread_mutex_unlock(&threadPoolMutex);
-        return sizePending;
-      }
+class Thread {
+
 private:
 
 pthread_t *runThread_;

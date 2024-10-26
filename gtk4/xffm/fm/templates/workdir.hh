@@ -8,19 +8,47 @@ namespace xf {
 #ifdef ENABLE_GRIDVIEW
         TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(), Child::getSerial()+1);
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
+       
+       // cancel monitor if any 
         Child::incrementSerial();
+        auto child = Child::getChild();
+        auto monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(child), "monitor"));
+//        g_cancellable_cancel(cancellable);
+//        DBG("cancellable cancel = %p\n", cancellable);
+        if (monitor) {
+          pthread_mutex_lock(&monitorMutex);   
+          g_object_set_data(G_OBJECT(monitor), "active", NULL);
+          pthread_mutex_unlock(&monitorMutex);   
+
+          g_file_monitor_cancel(monitor);
+          g_object_unref(monitor);
+          DBG("***monitor cancel = %p\n", monitor);
+        }
+        
+        // cancel threadpool for previews, if any. Wait on condition
+
         auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
-        DBG("new object: %p\n", viewObject);
+        TRACE("new object: %p\n", viewObject);
+        viewObject->child(child);
+        auto store = viewObject->listStore();
+        monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
+        DBG("*** monitor = %p\n", monitor);
+        g_object_set_data(G_OBJECT(child), "monitor", monitor);
         auto view = viewObject->view();
         //auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
         auto oldObject = Child::getGridviewObject();
-        DBG("oldObject: %p\n", oldObject);
+        TRACE("oldObject: %p\n", oldObject);
         if (oldObject) {
           auto object = (GridView<LocalDir> *) oldObject;
           delete object;
         }
-        Child::setGridviewObject(viewObject);       
+        Child::setGridviewObject(viewObject);     
+        // activate monitor  
+        g_object_set_data(G_OBJECT(monitor), "active", GINT_TO_POINTER(1));
+
+        // Fireup preview threads here, once initial load has completed.
+        //viewObject->fireUpPreviews(child);
 #endif
       }
 
@@ -41,9 +69,9 @@ namespace xf {
     }
 
     static bool pleaseWait(void){
-      auto size = Thread::threadPoolSize();
+      auto size = THREADPOOL->size();
       if (size > 0) {
-        Thread::clearThreadPool();
+        THREADPOOL->clear();
         /*
         char buffer[4096];
 

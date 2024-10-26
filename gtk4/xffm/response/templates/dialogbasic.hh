@@ -7,22 +7,39 @@ namespace xf
   GtkBox *contentArea_;
   GtkBox *actionArea_;
   GtkBox *labelBox_;
+  GtkBox *closeBox_;
   GtkWindow *dialog_;
   GtkWindow *parent_ = NULL;
   dialogClass *subClass_;
   GtkLabel *label_;
+  pthread_cond_t cond_ = PTHREAD_COND_INITIALIZER;
+  pthread_mutex_t condMutex_ = PTHREAD_MUTEX_INITIALIZER;
+  pthread_mutex_t mutex_ = PTHREAD_MUTEX_INITIALIZER;
+  bool cancelled_ = false;
 
   const char *path_;
     protected:
 
   public:
+    pthread_cond_t *cond_p(void){return &cond_;}
+    pthread_mutex_t *condMutex_p(void){return &condMutex_;}
+    bool cancelled(void){ return cancelled_;}
+    void cancel(void){
+      this->lockResponse();
+      cancelled_ = true;
+      this->unlockResponse();
+    }
+    void lockCondition(void){pthread_mutex_lock(&condMutex_);}
+    void unlockCondition(void){pthread_mutex_unlock(&condMutex_);}
+    void lockResponse(void){pthread_mutex_lock(&mutex_);}
+    void unlockResponse(void){pthread_mutex_unlock(&mutex_);}
  
-void setParent(GtkWindow *parent){
+    void setParent(GtkWindow *parent){
       parent_ = parent;
       if (parent) {
         TRACE("will destroy with parent\n");
         gtk_window_set_destroy_with_parent(dialog_, true);
-}
+      }
     }
     
     ~DialogBasic(void){
@@ -63,6 +80,17 @@ void setParent(GtkWindow *parent){
       return 0;
     }
 
+    void setCloseBox(const char *iconName, const char *tooltip){
+      auto old = gtk_widget_get_first_child (GTK_WIDGET(closeBox_));
+      gtk_widget_unparent(old);
+      auto paintable = Texture<bool>::load(iconName, 18);
+      auto image = gtk_image_new_from_paintable(paintable);
+      gtk_widget_set_size_request(image, 18,18);
+      gtk_widget_set_sensitive(image, true);
+      Basic::boxPack0(closeBox_, GTK_WIDGET(image), true, true, 1);
+      gtk_widget_set_tooltip_markup(GTK_WIDGET(closeBox_), tooltip);
+    }
+    
     void setLabelText(const char *text){
       if (!text) return;
       TRACE("set label to %s\n", text);
@@ -90,7 +118,7 @@ private:
  /*   void mkIcon(void){
       const char *iconName = subClass_->iconName();
       if (!iconName) return;
-      auto paintable = Texture::load(iconName, 24);
+      auto paintable = Texture<bool>::load(iconName, 24);
       if (paintable) {
         auto image = gtk_image_new_from_paintable(paintable);
         gtk_widget_set_size_request(GTK_WIDGET(image), 24, 24);
@@ -106,7 +134,7 @@ private:
 
       TRACE("runWait_f...\n");
       pthread_t thread;
-int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
+      int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
       void *response_p;
       pthread_join(thread, &response_p);
       TRACE("run joined, *response_p = %p\n", response_p);
@@ -120,7 +148,9 @@ int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
       auto dialog = dialogObject->dialog();
       void *response = NULL;
       do {
+        dialogObject->lockResponse();
         response = g_object_get_data(G_OBJECT(dialog), "response");
+        dialogObject->unlockResponse();
         if (exitDialogs) response = GINT_TO_POINTER(-1);
         usleep(2500);
       } while (!response);
@@ -132,7 +162,7 @@ int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
       } else {
         Basic::context_function(subClass->asyncNo, data);
       }
-      gtk_window_present(GTK_WINDOW(MainWidget));
+      if (MainWidget) Basic::present(GTK_WINDOW(MainWidget));
       TRACE("run_f:: Response is %p\n", response);
       // object will now be deleted.
       return response;
@@ -142,19 +172,21 @@ int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
 
     GtkWidget *buttonBox(const char *iconName, const char *tooltip, void *callback){
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
-      auto paintable = Texture::load(iconName, 18);
+      auto paintable = Texture<bool>::load(iconName, 18);
       auto image = gtk_image_new_from_paintable(paintable);
       gtk_widget_set_size_request(image, 18,18);
-      gtk_widget_set_sensitive(image, false);
+      //gtk_widget_set_sensitive(image, false);
+      gtk_widget_set_sensitive(image, true);
       Basic::boxPack0(box, GTK_WIDGET(image), true, true, 1);
       gtk_widget_set_tooltip_markup(GTK_WIDGET(box), tooltip);
       // motion
       auto motion = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(box), motion);
-      g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (Basic::sensitive), (void *)image);
-      g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (Basic::insensitive), (void *)image);
-      // click
+      // signal connect incompatible with setCloseBox()
+      //g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (Basic::sensitive), (void *)image);
+      //g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (Basic::insensitive), (void *)image);
+     // click
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (callback), (void *)this);
@@ -164,7 +196,7 @@ int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
     }
 
     GtkWidget *closeBox(void){
-      return buttonBox("close", _("Cancel"), (void *)cancel);
+      return buttonBox("close", _("Close"), (void *)cancelCallback);
     }
 protected:
     GtkWidget *applyBox(void){
@@ -176,7 +208,8 @@ private:
         gtk_window_set_decorated(dialog_, false);
         auto frame = GTK_FRAME(gtk_frame_new(NULL));
         gtk_frame_set_label_align(frame, 1.0);
-        gtk_frame_set_label_widget(frame, closeBox());
+        closeBox_ = GTK_BOX(closeBox());
+        gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox_));
  
         gtk_window_set_child(dialog_, GTK_WIDGET(frame));
         
@@ -188,17 +221,20 @@ private:
         gtk_window_set_resizable (GTK_WINDOW (dialog_), TRUE);
 
         auto mainBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        gtk_widget_set_hexpand(GTK_WIDGET(mainBox), true);
         gtk_widget_set_vexpand(GTK_WIDGET(mainBox), false);
         gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(mainBox));
 
         labelBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(labelBox_), true);
+        gtk_widget_set_hexpand(GTK_WIDGET(labelBox_), true);
         gtk_widget_set_valign (GTK_WIDGET(labelBox_),GTK_ALIGN_CENTER);
         gtk_box_append(mainBox, GTK_WIDGET(labelBox_));
 
 
         contentArea_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(contentArea_), true);
+        gtk_widget_set_hexpand(GTK_WIDGET(contentArea_), true);
         gtk_widget_set_valign (GTK_WIDGET(contentArea_),GTK_ALIGN_START);
         gtk_box_append(mainBox, GTK_WIDGET(contentArea_));
 
@@ -218,14 +254,16 @@ private:
 
 
     static void
-    cancel (GtkGestureClick* self,
+    cancelCallback (GtkGestureClick* self,
               gint n_press,
               gdouble x,
               gdouble y,
               gpointer data) {
       auto object = (DialogBasic<dialogClass> *)data;
       auto dialog = object->dialog();
+      object->lockResponse();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(-1));
+      object->unlockResponse();
 
     }
 
@@ -237,7 +275,9 @@ private:
               gpointer data) {
       auto object = (DialogBasic<dialogClass> *)data;
       auto dialog = object->dialog();
+      object->lockResponse();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1));
+      object->unlockResponse();
     }
 
   };

@@ -1,24 +1,33 @@
 #ifndef CHILD_HH
 #define CHILD_HH
 static GHashTable *childHash = NULL;
+static pthread_mutex_t serialMutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t childMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
   class Child {
     public:
     static void 
     add(GtkWidget *child){
+      pthread_mutex_lock(&childMutex);
       if (!childHash) childHash = g_hash_table_new(g_direct_hash, g_direct_equal);
       g_hash_table_insert(childHash, child, GINT_TO_POINTER(1));
+      pthread_mutex_unlock(&childMutex);
     }
     static void 
     remove(GtkWidget *child){
+      pthread_mutex_lock(&childMutex);
       if (!childHash) childHash = g_hash_table_new(g_direct_hash, g_direct_equal);
       if (g_hash_table_lookup(childHash, child)){
         g_hash_table_remove(childHash, child);
       }
+      pthread_mutex_unlock(&childMutex);
     }
     static bool
     valid(GtkWidget *child){
-      return ((bool) g_hash_table_lookup(childHash,child));
+      pthread_mutex_lock(&childMutex);
+      auto retval = GPOINTER_TO_INT(g_hash_table_lookup(childHash,child));
+      pthread_mutex_unlock(&childMutex);
+      return (bool) retval;
     }
 
 
@@ -28,6 +37,7 @@ namespace xf {
     }
 
     static void *getGridviewObject(GtkWidget *child){
+      if (!valid(child)) return NULL; // Page has disappeared.
       return (void *)g_object_get_data(G_OBJECT(child), "GridviewObject");
     }
 
@@ -45,33 +55,54 @@ namespace xf {
     }
 
     static void *getGridview(void){
-      auto child =  Child::getChild();
-      return g_object_get_data(G_OBJECT(child), "gridview");
+      return getGridviewObject();
     }
 
     static void *getGridview(GtkWidget *child){
-      return g_object_get_data(G_OBJECT(child), "gridview");
+      return getGridviewObject(child);
     }
 
     static const int getSerial(void){
+      pthread_mutex_lock(&serialMutex);
       auto child =  Child::getChild();
-      return getSerial(child);
+      if (!valid(child)) return -1; // Page has disappeared.
+      auto serial = g_object_get_data(G_OBJECT(child), "serial");
+      pthread_mutex_unlock(&serialMutex);
+      return GPOINTER_TO_INT(serial);
     }
 
     static const int getSerial(GtkWidget *child){
-      return GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
+      if (!valid(child)) return -1; // Page has disappeared.
+      pthread_mutex_lock(&serialMutex);
+      auto serial = g_object_get_data(G_OBJECT(child), "serial");
+      pthread_mutex_unlock(&serialMutex);
+
+      return GPOINTER_TO_INT(serial);
     }
 
-    static void incrementSerial(void){
+    static int incrementSerial(GtkWidget *child){
+      if (!valid(child)) return -1; // Page has disappeared.
+      pthread_mutex_lock(&serialMutex);
+      auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
+      g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));      
+      pthread_mutex_unlock(&serialMutex);
+      return serial;
+    }
+
+    static int incrementSerial(void){
+      pthread_mutex_lock(&serialMutex);
       auto child =  Child::getChild();
       auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
       g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));
+      pthread_mutex_unlock(&serialMutex);
+      return serial;
     }
 
     static const gchar *getWorkdir(GtkWidget *child){
       TRACE("getWorkdir...\n");
       if (!MainWidget) return NULL;
       if (!child) return g_get_home_dir();
+      if (!valid(child)) return g_get_home_dir(); // Page has disappeared.
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
     }
     static const gchar *getWorkdir(void){
@@ -113,6 +144,7 @@ namespace xf {
     }*/
      
     static GtkTextView *getOutput(GtkWidget *child){
+      if (!valid(child)) return NULL; // Page has disappeared.
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
     }
     
@@ -132,6 +164,7 @@ namespace xf {
     }
 
     static GtkBox *getButtonSpace(GtkWidget *child){
+      if (!valid(child)) return NULL; // Page has disappeared.
       return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
     }
 

@@ -10,6 +10,7 @@
 
 #define @FREEBSD@
 #define @GVIM_PROGRAM@
+#define @ZIP_PROGRAM@
 #define @UNZIP_PROGRAM@
 
 #define @MNTENT_H@

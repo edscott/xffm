@@ -60,7 +60,7 @@ public:
       gtk_window_set_child(dialog_, GTK_WIDGET(vbox));
       // icon title
       if (icon){
-          auto paintable = Texture::load(icon, 48);
+          auto paintable = Texture<bool>::load(icon, 48);
           auto image = gtk_image_new_from_paintable(paintable);
           gtk_widget_set_size_request(image, 48, 48);
           Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(image), TRUE, TRUE, 0);

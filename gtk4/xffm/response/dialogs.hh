@@ -2,6 +2,7 @@
 # define DIALOGS_HH
 #include "response/templates/dialogbasic.hh"
 #include "response/templates/dialogtimeout.hh"
+#include "response/templates/dialogdrop.hh"
 #include "response/templates/dialogbuttons.hh"
 #include "response/templates/dialogentry.hh"
 #include "response/templates/dialogpath.hh"
@@ -14,6 +15,7 @@
 #include "response/classes/entryresponse.hh" // class
 #include "response/classes/passwdresponse.hh"// class
 #include "response/classes/rmresponse.hh"    // class
+#include "response/classes/rmlistresponse.hh"    // class
 #include "response/classes/pathresponse.hh"  // class
 # include "response/classes/cpresponse.hh"   // class
 # include "response/classes/mvresponse.hh"   // class
@@ -37,6 +39,16 @@ namespace xf
       auto dialogObject = new DialogButtons<rmResponse>;
       auto dialog = dialogObject->dialog();
       g_object_set_data(G_OBJECT(dialog), "info", info);
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
+      dialogObject->run();
+    }
+
+    static void rmList(GtkPopover *menu, GList *selectionList){
+      auto dialogObject = new DialogButtons<rmListResponse>;
+      auto dialog = dialogObject->dialog();
+      g_object_set_data(G_OBJECT(dialog), "menu", menu);
+      g_object_set_data(G_OBJECT(dialog), "selectionList", selectionList);
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
       dialogObject->run();
