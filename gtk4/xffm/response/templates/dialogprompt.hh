@@ -43,14 +43,37 @@ namespace xf {
                 ENTRY_CALLBACK (activate_entry), (void *)dialog);*/
       gtk_widget_realize(GTK_WIDGET(this->dialog()));
       Basic::setAsDialog(GTK_WIDGET(this->dialog()), "dialog", "Dialog");
+
+      auto keyController = gtk_event_controller_key_new();
+      gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);
+      gtk_widget_add_controller(GTK_WIDGET(this->dialog()), keyController);
+      g_signal_connect (G_OBJECT (keyController), "key-pressed", 
+          G_CALLBACK (this->on_keypress), (void *)this);
+
       gtk_window_present(this->dialog());
 
     }
 
     private:
-    /*static void activate(GtkEntry *entry, void *dialog){
-      g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
-    }*/
+
+    static gboolean
+    on_keypress (GtkEventControllerKey* self,
+          guint keyval,
+          guint keycode,
+          GdkModifierType state,
+          gpointer data){
+
+        auto p = (DialogPrompt<dialogClass> *) data;
+
+        if(keyval == GDK_KEY_Return) { 
+          auto dialog = p->dialog();
+          g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1));
+          // this will do p->subClass()->asyncYes(data);
+          return TRUE;
+        }
+        return FALSE;
+      
+    }
   };
 }
 #endif

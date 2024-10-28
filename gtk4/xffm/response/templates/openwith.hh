@@ -227,34 +227,6 @@ public:
           g_free(key);
         }
       }
-#if 0
-        // button box
-        auto buttonBox = Basic::mkEndBox();
-        Basic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(buttonBox), TRUE, TRUE, 10);
-
-        // no button
-
-        auto no = gtk_button_new();
-        auto red = gtk_image_new_from_icon_name("emblem-redball");
-        auto rbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        auto rlabel = gtk_label_new(_("Cancel"));
-        Basic::boxPack0(GTK_BOX (rbox),GTK_WIDGET(red), FALSE, FALSE, 0);
-        Basic::boxPack0(GTK_BOX (rbox),GTK_WIDGET(rlabel), FALSE, FALSE, 0);
-        gtk_button_set_child(GTK_BUTTON(no), GTK_WIDGET(rbox));
-        g_signal_connect (G_OBJECT (no), "clicked", G_CALLBACK (OpenWith::dialogCancel), this);
-        Basic::boxPack0(buttonBox, GTK_WIDGET(no), FALSE,FALSE, 0);
-
-       // yes button
-        auto yes = gtk_button_new();
-        auto green = gtk_image_new_from_icon_name("emblem-greenball");
-        auto gbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        auto glabel = gtk_label_new(_("Proceed"));
-        Basic::boxPack0(GTK_BOX (gbox),GTK_WIDGET(green), FALSE, FALSE, 0);
-        Basic::boxPack0(GTK_BOX (gbox),GTK_WIDGET(glabel), FALSE, FALSE, 0);
-        gtk_button_set_child(GTK_BUTTON(yes), GTK_WIDGET(gbox));
-        g_signal_connect (G_OBJECT (yes), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
-        Basic::boxPack0(buttonBox, GTK_WIDGET(yes), FALSE,FALSE, 0);
-#endif
         // progress bar timeout       
         timeoutProgress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
         Basic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(timeoutProgress_), TRUE, TRUE, 0);

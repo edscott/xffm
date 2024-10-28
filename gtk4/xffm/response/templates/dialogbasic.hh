@@ -49,6 +49,13 @@ namespace xf
     protected:
 
   public:
+    dialogClass *subClass(void){ return subClass_;}
+    GtkWindow *parent(void){ return parent_;}
+    GtkWindow *dialog(void){ return dialog_;}
+    GtkBox *contentArea(void){ return contentArea_;}
+    GtkBox *actionArea(void){ return actionArea_;}
+    GtkLabel *label(void){ return label_;}
+
     pthread_cond_t *cond_p(void){return &cond_;}
     pthread_mutex_t *condMutex_p(void){return &condMutex_;}
     bool cancelled(void){ return cancelled_;}
@@ -91,12 +98,6 @@ namespace xf
       mkTitle();
       mkLabel();      
     }
-    dialogClass *subClass(void){ return subClass_;}
-    GtkWindow *parent(void){ return parent_;}
-    GtkWindow *dialog(void){ return dialog_;}
-    GtkBox *contentArea(void){ return contentArea_;}
-    GtkBox *actionArea(void){ return actionArea_;}
-    GtkLabel *label(void){ return label_;}
 
     int run(){
       TRACE("run...\n");

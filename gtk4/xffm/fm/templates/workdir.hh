@@ -95,6 +95,7 @@ namespace xf {
         g_free(wd);
         g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       }
+      Child::setWindowTitle(child);
       updatePathbar(false, (void *)pathbar_go);
       updateGridView(path);
       return true;
@@ -106,6 +107,7 @@ namespace xf {
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      Child::setWindowTitle(child);
       updatePathbar(true, (void *)pathbar_go);
       updateGridView(path);
       return true;
@@ -117,6 +119,7 @@ namespace xf {
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
+      Child::setWindowTitle(child);
       updatePathbar(updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
