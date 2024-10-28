@@ -213,9 +213,9 @@ namespace xf {
 
         // Switch to pause monitor execution.
         pthread_mutex_lock(&monitorMutex);   
-        auto active = g_object_get_data(G_OBJECT(self), "active");
+        auto inactive = g_object_get_data(G_OBJECT(self), "inactive");
         pthread_mutex_unlock(&monitorMutex);   
-        if (!active) {
+        if (inactive) {
           DBG("monitor %p inactive\n", self);
           return;
         }
@@ -239,7 +239,7 @@ namespace xf {
           return;
         }*/
 
-        /* if (!active){
+        /* if (inactive){
              DBG("monitor_f(): monitor not currently active.\n");
              return;
         }

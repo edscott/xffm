@@ -17,7 +17,7 @@ namespace xf {
 //        DBG("cancellable cancel = %p\n", cancellable);
         if (monitor) {
           pthread_mutex_lock(&monitorMutex);   
-          g_object_set_data(G_OBJECT(monitor), "active", NULL);
+          g_object_set_data(G_OBJECT(monitor), "inactive", GINT_TO_POINTER(1));
           pthread_mutex_unlock(&monitorMutex);   
 
           g_file_monitor_cancel(monitor);
@@ -32,21 +32,20 @@ namespace xf {
         viewObject->child(child);
         auto store = viewObject->listStore();
         monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
-        DBG("*** monitor = %p\n", monitor);
+        TRACE("*** monitor = %p child=%p\n", monitor);
         g_object_set_data(G_OBJECT(child), "monitor", monitor);
         auto view = viewObject->view();
         //auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
         auto oldObject = Child::getGridviewObject();
-        TRACE("oldObject: %p\n", oldObject);
+        DBG("oldObject: %p\n", oldObject);
         if (oldObject) {
           auto object = (GridView<LocalDir> *) oldObject;
           delete object;
         }
         Child::setGridviewObject(viewObject);     
-        // activate monitor  
-        g_object_set_data(G_OBJECT(monitor), "active", GINT_TO_POINTER(1));
 
+        TRACE("updateGridView: ok\n");
         // Fireup preview threads here, once initial load has completed.
         //viewObject->fireUpPreviews(child);
 #endif
@@ -174,7 +173,7 @@ namespace xf {
         setWorkdir(path);
       } else {
         TRACE("mimetype action...\n");
-        new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
+        new OpenWith<bool>(GTK_WINDOW(MainWidget), path, NULL);
       }
       g_free(path);
       return TRUE;

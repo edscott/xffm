@@ -6,29 +6,30 @@ namespace xf {
   class GridView  {
   private:
       GtkWidget *child_;
-      GtkMultiSelection *selection_model_ = NULL;
+      GtkMultiSelection *selectionModel_ = NULL;
       GtkPopover *menu_=NULL;
       GtkWidget *view_;
       void *gridViewClick_f_;
       char *path_;
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
       int maxNameLen_ = 0;
+      GList *selectionList_ = NULL;
   public:
       void child(GtkWidget *child){
         child_ = child;
-        auto store = G_OBJECT(g_object_get_data(G_OBJECT(selection_model_), "store"));
+        auto store = G_OBJECT(g_object_get_data(G_OBJECT(selectionModel_), "store"));
         g_object_set_data(store, "child", child_);
       }
       GtkWidget *child(void){return child_;}
       void setMenu(GtkPopover *menu){ menu_ = menu;}
-      GtkMultiSelection *selectionModel(void){ return selection_model_;}
+      GtkMultiSelection *selectionModel(void){ return selectionModel_;}
       GtkPopover *menu(void){ return menu_;}
       GtkWidget *view(void){ return view_;}
       void *gridViewClick_f(void){ return gridViewClick_f_;}
       char *path(void){ return path_;}
-      GListModel *listModel(void){ return G_LIST_MODEL(selection_model_);}
+      GListModel *listModel(void){ return G_LIST_MODEL(selectionModel_);}
       GListStore *listStore(void){ 
-        return G_LIST_STORE(g_object_get_data(G_OBJECT(selection_model_), "store"));
+        return G_LIST_STORE(g_object_get_data(G_OBJECT(selectionModel_), "store"));
       }
       
       GridView(const char *path, void *gridViewClick_f){
@@ -46,7 +47,7 @@ namespace xf {
           //g_object_unref(G_OBJECT(menu_));
         }
         if (myMenu_) delete myMenu_; // main menu
-
+        g_list_free(selectionList_);
 
         g_free(path_);
       }
@@ -54,14 +55,14 @@ namespace xf {
       GtkWidget *
       getGridView(){
         auto child = Child::getChild();
-        selection_model_ = NULL;
+        selectionModel_ = NULL;
         if (strcmp(path_, "xffm:root")==0) {
-          selection_model_ = DirectoryClass::rootSelectionModel();
+          selectionModel_ = DirectoryClass::rootSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
-          selection_model_ = DirectoryClass::xfSelectionModel(path_);
+          selectionModel_ = DirectoryClass::xfSelectionModel(path_);
           maxNameLen_ = DirectoryClass::getMaxNameLen(path_);
-          //selection_model_ = DirectoryClass::standardSelectionModel(path_);     
+          //selectionModel_ = DirectoryClass::standardSelectionModel(path_);     
         }
        
         // GtkListItemFactory implements GtkSignalListItemFactory, which can be connected to
@@ -83,7 +84,7 @@ namespace xf {
         GtkWidget *view;
         /* Create the view.
          */
-        view = gtk_grid_view_new(GTK_SELECTION_MODEL(selection_model_), factory);
+        view = gtk_grid_view_new(GTK_SELECTION_MODEL(selectionModel_), factory);
         g_object_set_data(G_OBJECT(child), "gridview", view);
         gtk_grid_view_set_max_columns(GTK_GRID_VIEW(view), 20);
         //gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 10);
@@ -177,12 +178,12 @@ namespace xf {
       }
     }
 
-    static GtkPopover *getPopover(GList *selectionList, GtkWidget *menubox, GridView *gridView_p){ 
+    static GtkPopover *getPopover(GtkWidget *menubox, GridView *gridView_p){ 
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
       auto popover = gridView_p->myMenu_->mkMenu(markup);
       g_free(markup);
+      g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       TRACE("object set selection list\n");
-      g_object_set_data(G_OBJECT(popover), "selectionList", selectionList);
       
 
       setPopoverItems(GTK_POPOVER(popover), gridView_p);
@@ -206,23 +207,6 @@ namespace xf {
       gtk_widget_set_parent(GTK_WIDGET(popover), gridView_p->view());
       return popover;
     }
-    /*
-    static GtkPopover *getPopover(GFileInfo *info, GridView *gridView_p){ 
-     // auto list_item =GTK_LIST_ITEM(object);
-    //  auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-      auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
-      auto path = Basic::getPath(info);
-      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-      auto popover = gridView_p->myMenu_->mkMenu(markup);
-      g_object_set_data(G_OBJECT(popover), "info", info);
-
-      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
-      g_free(markup);
-      g_object_set_data(G_OBJECT(menubox), "menu", popover);
-      gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
-      g_free(path);
-      return popover;
-    }*/
 
     static GtkPopover *getPopover(GObject *object, GridView *gridView_p){ 
       auto list_item =GTK_LIST_ITEM(object);
@@ -231,6 +215,7 @@ namespace xf {
       auto path = Basic::getPath(info);
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
       auto popover = gridView_p->myMenu_->mkMenu(markup);
+      g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       g_object_set_data(G_OBJECT(popover), "info", info);
 
       setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
@@ -338,12 +323,12 @@ namespace xf {
       auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
       if (!popover){
         TRACE("getPopover...\n");
-        popover = getPopover(selectionList, menubox, gridView_p);
-        g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
+        popover = getPopover(menubox, gridView_p);
         TRACE("getPopover OK.\n");
       }
       
       if (popover) {
+        g_object_set_data(G_OBJECT(popover), "selectionList", selectionList);
         //setupMenu(GTK_POPOVER(popover), selectionList);
         gtk_popover_popup(GTK_POPOVER(popover));
       }
@@ -358,27 +343,10 @@ namespace xf {
       }
       
       if (popover) {
-        g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
         setupMenu(GTK_POPOVER(popover), gridView_p);
         gtk_popover_popup(GTK_POPOVER(popover));
       }
   }
-/*
-  static void placeMenu(GFileInfo *info, GridView *gridView_p){
-//      auto menubox = g_object_get_data(G_OBJECT(object), "menuBox");
-      auto menubox = g_object_get_data(G_OBJECT(info), "menuBox");
-      auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
-      if (!popover){
-        popover = getPopover(info, gridView_p);
-      }
-      
-      if (popover) {
-        g_object_set_data(G_OBJECT(popover), "info", info);
-        setupMenu(GTK_POPOVER(popover), info);
-        gtk_popover_popup(GTK_POPOVER(popover));
-      }
-  }
-*/
   static void placeMenu(GObject *object, GridView *gridView_p){
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
@@ -414,14 +382,8 @@ namespace xf {
       if (modType & GDK_CONTROL_MASK) return false;
       if (modType & GDK_SHIFT_MASK) return false;
 
-      auto selectionModel = gridView_p->selectionModel();
-
-
-      GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
-      auto size = gtk_bitset_get_size(bitset);
+      auto size = gridView_p->getSelectionSize();
       if (size > 0) return false;
-
-
       
       TRACE("gestureClick; object=%p button=%d\n", object,
           gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
@@ -446,7 +408,28 @@ namespace xf {
       gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
       return true;
     }
+  public:
+    guint getSelectionSize(void){
+      GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel_));
+      return gtk_bitset_get_size(bitset);
+    }
 
+    GList *getSelectionList(void){
+      guint position;
+      GtkBitsetIter iter;
+      if (selectionList_) g_list_free(selectionList_);
+      selectionList_ = NULL;
+      GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel_));
+      if (gtk_bitset_iter_init_first (&iter, bitset, &position)){
+        auto list = G_LIST_MODEL(selectionModel_);        
+        do {
+          auto info = G_FILE_INFO(g_list_model_get_item (list, position));
+          selectionList_ = g_list_append(selectionList_, info);
+        } while (gtk_bitset_iter_next (&iter,&position));
+      }
+      return selectionList_;
+    }
+  private:
     static gboolean
     menuSelection_f(GtkGestureClick* self,
               gint n_press,
@@ -478,23 +461,16 @@ namespace xf {
         return true;      
       }
       // Multiple selection
-
       guint position;
       GtkBitsetIter iter;
-      GList *selectionList = NULL;
-      if (gtk_bitset_iter_init_first (&iter, bitset, &position)){
-        auto list = G_LIST_MODEL(selectionModel);
-        
-        do {
-          auto info = G_FILE_INFO(g_list_model_get_item (list, position));
-          selectionList = g_list_append(selectionList, info);
-        } while (gtk_bitset_iter_next (&iter,&position));
-
-        auto info = G_FILE_INFO(g_list_first (selectionList)->data);
-        auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
-        
-
-
+      GList *selectionList = gridView_p->getSelectionList();
+ 
+      if (!selectionList){
+        DBG("menuSelection_f(): should not happen.\n");
+        return true;
+      }
+      auto info = G_FILE_INFO(g_list_first (selectionList)->data);
+      auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
 #ifdef GDK_WINDOWING_X11
         GdkDisplay *displayGdk = gdk_display_get_default();
         Display *display = gdk_x11_display_get_xdisplay(displayGdk);
@@ -505,9 +481,7 @@ namespace xf {
         int i = round(x);
         XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
 #endif
-        placeMenu(selectionList, menuBox2, gridView_p);
-        //FIXME: we leak selectionList!
-      }
+      placeMenu(selectionList, menuBox2, gridView_p);
       return true;
     }
     

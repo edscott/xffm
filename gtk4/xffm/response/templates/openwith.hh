@@ -10,16 +10,16 @@ class OpenWith {
     
     GtkWindow *dialog_;
     time_t timeout_;
-    char *path_;
+    char *path_ = NULL;
     GtkProgressBar *timeoutProgress_;
     GtkCheckButton *checkbutton_;
     GtkTextView *input_;
     GtkWidget *child_;
+    GList *selectionList_ = NULL;
     
    
 protected:
     GtkWindow *dialog(void){return dialog_;}
-    const char *path(void){ return (const char *)path_;}
     time_t timeout(void){return timeout_;}
     void timeout(time_t value){timeout_ = value;}
     GtkProgressBar *progress(void){return timeoutProgress_;}
@@ -29,6 +29,23 @@ protected:
         
     Prompt<Type> *prompt_p;
     GtkBox *buttonSpace;
+
+    const char *path(void){ return (const char *)path_; }
+    char *paths(void){ 
+      if (g_list_length(selectionList_) < 2) return NULL;
+      auto g = g_strdup("");
+      for (auto l=selectionList_; l && l->data; l=l->next){
+        auto info = G_FILE_INFO(l->data);
+        auto p = Basic::getPath(info);
+        auto e = Basic::esc_string (p);
+        Basic::concat(&g, e);
+        g_free(e);
+        g_free(p);
+        Basic::concat(&g, " ");
+      }
+      g_strstrip(g);
+      return g;
+    }
 public:
     
     ~OpenWith (void){
@@ -38,17 +55,29 @@ public:
        gtk_window_destroy(dialog_);
     }
 
-    OpenWith (GtkWindow *parent, const gchar *inPath){
+    OpenWith (GtkWindow *parent, const gchar *inPath, GList *selectionList){
+      selectionList_ = selectionList;
       const gchar *windowTitle = _("Open With...");
       const gchar *icon = "emblem-run";
       child_ = Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child_), "output"));
 
-      path_ = g_strdup(inPath);
+      if (inPath) path_ = g_strdup(inPath);
+      else {
+        if (!selectionList){
+          DBG("*** Error:: OpenWith(): selectionList is NULL.\n");
+          exit(1);
+        }
+        auto info = G_FILE_INFO(selectionList->data);
+        path_ = Basic::getPath(info);
+      }
+
       timeout_ = 10;
 
       dialog_ = GTK_WINDOW(gtk_window_new ());
       MainDialog = dialog_;
+      gtk_window_set_decorated(dialog_, false);
+
       gtk_window_set_title (GTK_WINDOW (dialog_), windowTitle);
       g_signal_connect (G_OBJECT (dialog_), "close-request", G_CALLBACK (OpenWith::dialogClose), this);
 
@@ -56,8 +85,17 @@ public:
       gtk_window_set_resizable (GTK_WINDOW (dialog_), FALSE);
       gtk_window_set_destroy_with_parent(dialog_, TRUE);
 
+      auto frame = GTK_FRAME(gtk_frame_new(NULL));
+      gtk_frame_set_label_align(frame, 1.0);
+      auto closeBox = Dialog::buttonBox("close", _("Close"), (void *)cancelCallback, this);
+      gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox));
+      
+      gtk_window_set_child(dialog_, GTK_WIDGET(frame));
+
       auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-      gtk_window_set_child(dialog_, GTK_WIDGET(vbox));
+      //gtk_window_set_child(dialog_, GTK_WIDGET(vbox));
+      gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(vbox));
+
       // icon title
       if (icon){
           auto paintable = Texture<bool>::load(icon, 48);
@@ -67,40 +105,13 @@ public:
       }
       // path title
       auto label = GTK_LABEL(gtk_label_new (""));
-      auto markup = g_strconcat("<span color=\"blue\" size=\"large\"> <b>", path_, "</b></span>", NULL);
+      auto markup = g_strdup_printf("<span color=\"%s\" size=\"large\"> <b>%s</b></span>", 
+          (selectionList==NULL)?"blue":"red",(selectionList==NULL)?path_:_("Multiple selections"));
       gtk_label_set_markup(label, markup);
       g_free(markup);
       Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(label), TRUE, TRUE, 0);
-      // mimetype title
-      //auto mimeBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0)); 
-      auto mimeBox = Basic::mkEndBox(); 
-      auto labelMime = GTK_LABEL(gtk_label_new (""));
-      auto mimetype = MimeMagic::mimeMagic(path_); 
-      auto markup2 = g_strconcat("<span color=\"brown\" size=\"small\">", mimetype, "</span>", NULL);
-      gtk_label_set_markup(labelMime, markup2);
-      g_free(markup2);
-      auto apps = MimeApplication::locate_apps(mimetype);
- 
-      Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(mimeBox), TRUE, TRUE, 0);
-      Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelMime), FALSE, FALSE, 0);
-      // execute button
-      if (g_file_test(path_, G_FILE_TEST_IS_EXECUTABLE))
-      {
-        auto labelExe = gtk_label_new(_("Is executable"));
-        Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelExe), FALSE, FALSE, 5);
-        auto execute = gtk_button_new();
-        auto run = gtk_image_new_from_icon_name("emblem-run");
-        auto ebox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        auto elabel = gtk_label_new(_("Execute"));
-        Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(run), FALSE, FALSE, 0);
-        Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(elabel), FALSE, FALSE, 0);
-        gtk_button_set_child(GTK_BUTTON(execute), GTK_WIDGET(ebox));
-        g_signal_connect (G_OBJECT (execute), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
-        Basic::boxPack0(mimeBox, GTK_WIDGET(execute), FALSE,FALSE, 0);
-      }
 
       // prompt
-
       auto child = Child::getChild();
       buttonSpace = Child::getButtonSpace(child);
       prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
@@ -109,50 +120,81 @@ public:
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
       auto label2 = GTK_LABEL(gtk_label_new (windowTitle));
       input_ = prompt_p->input();
-      const char *extension = NULL;
-      if (strchr(path_, '.')) extension = strrchr(path_, '.') + 1;
-      char *defaultApp = NULL;
-      if (extension){
-        defaultApp = Settings::getString("MimeTypeApplications", extension);
-      }
-
-      if (defaultApp){
-        Print::print(input_, g_strdup(defaultApp));
-      } else if (apps){
-        Print::print(input_, g_strdup(apps[0])); // first item
-      }
-
       gtk_widget_set_size_request(GTK_WIDGET(input_), 200, -1);
-      
-      auto mimeButton = GTK_MENU_BUTTON(gtk_menu_button_new());
-      gtk_menu_button_set_icon_name(mimeButton, "go-down");
-      auto popover = GTK_POPOVER(gtk_popover_new());
-      auto popoverBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-      gtk_popover_set_child(popover, GTK_WIDGET(popoverBox));
-      gtk_menu_button_set_popover(mimeButton, GTK_WIDGET(popover)); // Sets popover parent?
-      for (auto p=apps; p && *p; p++){
-        auto box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        auto label = gtk_label_new(*p);
-        g_object_set_data(G_OBJECT(label), "openWith", this);
-        g_object_set_data(G_OBJECT(label), "popover", popover);
-        Basic::boxPack0(GTK_BOX (box), GTK_WIDGET(label), FALSE, FALSE, 0);
-        Basic::boxPack0(GTK_BOX (popoverBox), GTK_WIDGET(box), FALSE, FALSE, 0);
-        g_object_set_data(G_OBJECT(label), "input", input_);
-        addGestureClick(label, (void *)labelClick); 
-        addMotionController(GTK_WIDGET(box));
-      }
-      g_free(mimetype);
-
-
-
       Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(label2), FALSE, FALSE, 3);
       Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(input_), TRUE, TRUE, 3);
-      Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
       Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(hbox), TRUE, TRUE, 0);
 
+      if (path_){
+        // mimetype title
+        //auto mimeBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0)); 
+        auto mimeBox = Basic::mkEndBox(); 
+        auto labelMime = GTK_LABEL(gtk_label_new (""));
+        auto mimetype = MimeMagic::mimeMagic(path_); 
+        auto markup2 = g_strconcat("<span color=\"brown\" size=\"small\">", mimetype, "</span>", NULL);
+        gtk_label_set_markup(labelMime, markup2);
+        g_free(markup2);
+        auto apps = MimeApplication::locate_apps(mimetype);
+   
+        Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(mimeBox), TRUE, TRUE, 0);
+        Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelMime), FALSE, FALSE, 0);
+        // execute button
+        if (g_file_test(path_, G_FILE_TEST_IS_EXECUTABLE))
+        {
+          auto labelExe = gtk_label_new(_("Is executable"));
+          Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelExe), FALSE, FALSE, 5);
+          auto execute = gtk_button_new();
+          auto run = gtk_image_new_from_icon_name("emblem-run");
+          auto ebox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+          auto elabel = gtk_label_new(_("Execute"));
+          Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(run), FALSE, FALSE, 0);
+          Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(elabel), FALSE, FALSE, 0);
+          gtk_button_set_child(GTK_BUTTON(execute), GTK_WIDGET(ebox));
+          g_signal_connect (G_OBJECT (execute), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
+          Basic::boxPack0(mimeBox, GTK_WIDGET(execute), FALSE,FALSE, 0);
+        }
+        char *defaultApp = NULL;
+        const char *extension = NULL;
+        if (path_) {
+          if (strchr(path_, '.')) extension = strrchr(path_, '.') + 1;
+          if (extension){
+            defaultApp = Settings::getString("MimeTypeApplications", extension);
+          }
+
+          if (defaultApp){
+            Print::print(input_, g_strdup(defaultApp));
+          } else if (apps){
+            Print::print(input_, g_strdup(apps[0])); // first item
+          }
+        }
+    
+        auto mimeButton = GTK_MENU_BUTTON(gtk_menu_button_new());
+        gtk_menu_button_set_icon_name(mimeButton, "go-down");
+        auto popover = GTK_POPOVER(gtk_popover_new());
+        auto popoverBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        gtk_popover_set_child(popover, GTK_WIDGET(popoverBox));
+        gtk_menu_button_set_popover(mimeButton, GTK_WIDGET(popover)); // Sets popover parent?
+        for (auto p=apps; p && *p; p++){
+          auto box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+          auto label = gtk_label_new(*p);
+          g_object_set_data(G_OBJECT(label), "openWith", this);
+          g_object_set_data(G_OBJECT(label), "popover", popover);
+          Basic::boxPack0(GTK_BOX (box), GTK_WIDGET(label), FALSE, FALSE, 0);
+          Basic::boxPack0(GTK_BOX (popoverBox), GTK_WIDGET(box), FALSE, FALSE, 0);
+          g_object_set_data(G_OBJECT(label), "input", input_);
+          addGestureClick(label, (void *)labelClick); 
+          addMotionController(GTK_WIDGET(box));
+        }
+        g_free(mimetype);
+
+        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
+        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
+        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
+      
+
         // check button
-      {
-        auto info = _("By default applications will be run in the background and only their "\
+      
+        auto text = _("By default applications will be run in the background and only their "\
 "output will be displayed in a toolview. This makes it impossible to interact "\
 "with applications requiring user input from a terminal emulator. To run such "\
 "applications, you should use an external terminal.");
@@ -160,7 +202,7 @@ public:
         auto box = Basic::mkEndBox();
         Basic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(box), TRUE, TRUE, 5);
         auto label = gtk_label_new(_("Use External Terminal:"));
-        gtk_widget_set_tooltip_markup(label, info);
+        gtk_widget_set_tooltip_markup(label, text);
         checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new());
 
         Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(label), FALSE, FALSE, 0);
@@ -185,7 +227,7 @@ public:
           g_free(key);
         }
       }
-
+#if 0
         // button box
         auto buttonBox = Basic::mkEndBox();
         Basic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(buttonBox), TRUE, TRUE, 10);
@@ -212,7 +254,7 @@ public:
         gtk_button_set_child(GTK_BUTTON(yes), GTK_WIDGET(gbox));
         g_signal_connect (G_OBJECT (yes), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
         Basic::boxPack0(buttonBox, GTK_WIDGET(yes), FALSE,FALSE, 0);
- 
+#endif
         // progress bar timeout       
         timeoutProgress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
         Basic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(timeoutProgress_), TRUE, TRUE, 0);
@@ -270,14 +312,19 @@ public:
         char *key = g_strdup(inputText);
         if (Basic::alwaysTerminal(inputText)) inTerminal = true;
         char *command = NULL;
+        auto p = object->paths();
+        auto e = Basic::esc_string (object->path());
         if (inTerminal) {
-          command = Run<Type>::mkTerminalLine(inputText, object->path());
+          command = Run<Type>::mkTerminalLine(inputText, p?p:e);
           Settings::setInteger("ExternalTerminal", key, 1);
         }
         else {
-          command = Run<Type>::mkCommandLine(inputText, object->path());
+          command = Run<Type>::mkCommandLine(inputText, p?p:e);
           Settings::setInteger("ExternalTerminal", key, 0);
+          DBG("command line is \'%s\'\n", command);
         }
+        g_free(p);
+        g_free(e);
         g_free(key);
         object->prompt_p->run(output, command, true, true, object->buttonSpace);
         g_free(command);
@@ -354,6 +401,27 @@ public:
 
 private:
     
+    static void
+    ok (GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data) {
+        auto object = (OpenWith *)data;
+        run(object);
+        object->timeout_=-1;
+    }
+ 
+
+    static void
+    cancelCallback (GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data) {
+      auto object = (OpenWith *)data;
+      object->timeout_=-1;
+    }
 
     static void
     dialogProceed (GtkButton *button, void *data) {
@@ -361,7 +429,7 @@ private:
         run(object);
         object->timeout_=-1;
     }
-
+/*
     static void
     dialogCancel (GtkButton *button, void *data) {
       auto object = (OpenWith *)data;
@@ -369,7 +437,7 @@ private:
 
 //      delete object;
     }
-
+*/
     static gboolean 
     dialogClose(GtkWindow *dialog, void *data){
       auto object = (OpenWith *)data;
@@ -377,13 +445,12 @@ private:
 //      delete object;
       return TRUE;
     }
-
+/*
     static void 
     dialogActivate(GtkEntry *entry, void *data){
       dialogProceed(NULL, data);
-      DBG("FIXME: gtk_dialog_response (GTK_DIALOG(dialog),dialogActivate)\n");
     }
-
+*/
     static gboolean
     labelClick(GtkGestureClick* self,
               gint n_press,

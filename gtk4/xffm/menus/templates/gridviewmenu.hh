@@ -102,8 +102,10 @@ namespace xf {
     private:
 
     static char *getPath(GtkPopover *menu){
-        auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
-        return Basic::getPath(info);
+      auto data =   g_object_get_data(G_OBJECT(menu), "info");
+      if (!data) return NULL;
+      auto info = G_FILE_INFO(data);
+      return Basic::getPath(info);
     }
 
 
@@ -111,7 +113,6 @@ namespace xf {
     properties(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      //auto path = getPath(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       //DBG("path= %s, info=%p\n", path, info);
       new Properties(info);
@@ -123,7 +124,19 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
-      new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
+
+      if (!path) {
+        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        auto selectionList = gridView_p->getSelectionList();
+        if (selectionList) {
+          DBG("selectionList = %p\n", selectionList);
+         // auto list = getSelectionList();
+         // new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
+          new OpenWith<bool>(GTK_WINDOW(MainWidget), NULL, selectionList);
+        }  
+      } else {
+        new OpenWith<bool>(GTK_WINDOW(MainWidget), path, NULL);
+      }
       g_free(path);
     }
     
@@ -136,9 +149,11 @@ namespace xf {
       else {
         path = getPath(menu);
       }
-      DBG("path is %s\n", path);
-      Bookmarks::addBookmark(path);
-      g_free(path);
+      if (path) {
+        DBG("path is %s\n", path);
+        Bookmarks::addBookmark(path);
+        g_free(path);
+      }
     }
 
     static void selectAll(GtkButton *button, void *data){
@@ -165,15 +180,18 @@ namespace xf {
       else {
         path = getPath(menu);
       }
-      Bookmarks::removeBookmark(path);
-      g_free(path);
+      if (path) {
+        Bookmarks::removeBookmark(path);
+        g_free(path);
+      }
     }
 
     static void duplicate(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
-      DBG("path is %s\n", path);
+      if (!path) return;
+      else {DBG("path is %s\n", path);}
       dialogPath<cpResponse>::action(path);
       g_free(path);
     }
@@ -182,7 +200,8 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
-      DBG("path is %s\n", path);
+      if (!path) return;
+      else {DBG("path is %s\n", path);}
       dialogPath<mvResponse>::action(path);
       g_free(path);
     }
@@ -191,7 +210,8 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
-      DBG("path is %s\n", path);
+      if (!path) return;
+      else {DBG("path is %s\n", path);}
       dialogPath<lnResponse>::action(path);
       g_free(path);
     }
@@ -230,6 +250,8 @@ namespace xf {
       }
 
       auto path = getPath(menu);
+      if (!path) return;
+      else {DBG("path is %s\n", path);}
       ClipBoard::copyClipboardPath(path);
       g_free(path);
     }
@@ -248,6 +270,8 @@ namespace xf {
         return;
       }
       auto path = getPath(menu);
+      if (!path) return;
+      else {DBG("path is %s\n", path);}
       ClipBoard::cutClipboardPath(path);
       g_free(path);
     }
@@ -258,21 +282,22 @@ namespace xf {
       gtk_popover_popdown(menu);
       
       auto path = getPath(menu);
-      /*auto imageBox = G_OBJECT(g_object_get_data(G_OBJECT(menu), "imageBox"));
-      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(imageBox), "info"));
-      auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-      auto path = g_file_get_path(file);*/
+      if (!path) return;
+      else {DBG("path is %s\n", path);}
 
       auto defaultApp = getDefaultApp(path);
       bool inTerminal = false;
       char *command = NULL;
       if (Basic::alwaysTerminal(defaultApp)) inTerminal = true;
+      auto e = Basic::esc_string (path);
+
       if (inTerminal) {
-        command = Run<Type>::mkTerminalLine(defaultApp, path);
+        command = Run<Type>::mkTerminalLine(defaultApp, e);
       }
       else {
-        command = Run<Type>::mkCommandLine(defaultApp, path);
+        command = Run<Type>::mkCommandLine(defaultApp, e);
       }
+      g_free(e);
 
       DBG("run %s \n", command);
       auto output = Child::getOutput();
