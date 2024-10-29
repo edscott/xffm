@@ -138,7 +138,7 @@ namespace xf {
       updateGridView(path);
       return true;
     }
-
+    
     static gboolean
     gridViewClick(GtkGestureClick* self,
               gint n_press,
@@ -148,7 +148,21 @@ namespace xf {
 
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
-      
+/*
+      auto imageBox = gtk_event_controller_get_widget(eventController);
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(imageBox), "gridView_p");
+      auto store = gridView_p->store();
+      guint positionF;
+      auto item = gtk_list_item_get_item(GTK_LIST_ITEM(object));
+      auto found = g_list_store_find_with_equal_func(store, item, equalItem, &positionF);
+      if (!found){
+        DBG("gridViewClick(): this should not happen.\n");
+        exit(1);
+      } 
+      DBG("Found at %d\n", positionF);
+      auto selectionModel = gridView_p->selectionModel();
+      gtk_selection_model_select_item(selectionModel, positionF, false);
+*/                 
       auto modType = gdk_event_get_modifier_state(event);
 
       TRACE("modType = 0x%x\n", modType);
@@ -162,7 +176,7 @@ namespace xf {
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
       auto root = g_file_info_get_attribute_object (info, "xffm::root");
       if (root){
-        setWorkdir("xffm:root");
+        setWorkdir("Gtk:bookmarks");
         return TRUE;
       }
       TRACE("gestureClick; file=%p\n", file);
@@ -198,7 +212,7 @@ namespace xf {
           TRACE("pathbar goto... name=%s, path=%s\n", name, path);
         if (button == 1){
           TRACE("pathbar goto...\n");
-          //if (strcmp(path, "xffm:root")==0) setWorkdir(g_get_home_dir(), pathbar, true);
+          //if (strcmp(path, "Gtk:bookmarks")==0) setWorkdir(g_get_home_dir(), pathbar, true);
           //else setWorkdir(path, pathbar, true);
           setWorkdir(path, pathbar, true);
           return TRUE;
@@ -222,7 +236,7 @@ namespace xf {
                 g_object_set_data(G_OBJECT(menu),"view", NULL);
                 BaseSignals<Type>::configureViewMenu(LOCALVIEW_TYPE);
             } else {
-                // do xffm:root menu
+                // do Gtk:bookmarks menu
                 RootPopUp<Type>::resetPopup();
                 menu = RootPopUp<Type>::popUp();
             }

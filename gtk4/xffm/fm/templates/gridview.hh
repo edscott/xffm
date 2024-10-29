@@ -1,10 +1,10 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
-
 namespace xf {
   template <class DirectoryClass>
   class GridView  {
   private:
+      GtkDragSource *dragSource_;
       GtkWidget *child_;
       GtkMultiSelection *selectionModel_ = NULL;
       GtkPopover *menu_=NULL;
@@ -15,14 +15,18 @@ namespace xf {
       int maxNameLen_ = 0;
       GList *selectionList_ = NULL;
   public:
+      bool dndOn = false;
+      
       void child(GtkWidget *child){
         child_ = child;
         auto store = G_OBJECT(g_object_get_data(G_OBJECT(selectionModel_), "store"));
         g_object_set_data(store, "child", child_);
       }
+
       GtkWidget *child(void){return child_;}
       void setMenu(GtkPopover *menu){ menu_ = menu;}
-      GtkMultiSelection *selectionModel(void){ return selectionModel_;}
+      GtkMultiSelection *multiSelectionModel(void){ return selectionModel_;}
+      GtkSelectionModel *selectionModel(void){ return GTK_SELECTION_MODEL(selectionModel_);}
       GtkPopover *menu(void){ return menu_;}
       GtkWidget *view(void){ return view_;}
       void *gridViewClick_f(void){ return gridViewClick_f_;}
@@ -31,15 +35,33 @@ namespace xf {
       GListStore *listStore(void){ 
         return G_LIST_STORE(g_object_get_data(G_OBJECT(selectionModel_), "store"));
       }
+      GListStore *store(void){return listStore();}
       
       GridView(const char *path, void *gridViewClick_f){
         gridViewClick_f_ = gridViewClick_f;
         path_ = g_strdup(path);
         view_ = getGridView();
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
-        addGestureClickSelection1(view_, NULL, this);
-        addGestureClickSelection3(view_, NULL, this);
+        addGestureClickView1(view_, NULL, this);
+        addGestureClickView3(view_, NULL, this);
+    /*    gtk_drag_source_set (GTK_WIDGET(view_),
+                     (GdkModifierType) 0, //GdkModifierType start_button_mask,
+                     targetTable,
+                     NUM_TARGETS,
+                     (GdkDragAction)
+                                    ((gint)GDK_ACTION_MOVE|
+                                     (gint)GDK_ACTION_COPY|
+                                     (gint)GDK_ACTION_LINK));*/
+        
+        dragSource_ = gtk_drag_source_new ();
+        g_signal_connect (dragSource_, "prepare", G_CALLBACK (onDragBegin), this);
+        g_signal_connect (dragSource_, "drag-begin", G_CALLBACK (onDragBegin), this);
+        gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dragSource_));
+        
+        auto actions = (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+        gtk_drag_source_set_actions(dragSource_, actions);
       }
+
       ~GridView(void){
       TRACE("GridView destructor\n");
         if (menu_){
@@ -56,7 +78,7 @@ namespace xf {
       getGridView(){
         auto child = Child::getChild();
         selectionModel_ = NULL;
-        if (strcmp(path_, "xffm:root")==0) {
+        if (strcmp(path_, "Gtk:bookmarks")==0) {
           selectionModel_ = DirectoryClass::rootSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
@@ -370,6 +392,7 @@ namespace xf {
               gdouble y,
               void *data){
       auto gridView_p = (GridView *)data;
+      
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
       auto box = gtk_event_controller_get_widget(eventController);
@@ -377,13 +400,19 @@ namespace xf {
       auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
 
       auto modType = gdk_event_get_modifier_state(event);
+      // no good here: selectWidget(box, gridView_p);
 
       TRACE("modType = 0x%x\n", modType);
       if (modType & GDK_CONTROL_MASK) return false;
       if (modType & GDK_SHIFT_MASK) return false;
 
-      auto size = gridView_p->getSelectionSize();
-      if (size > 0) return false;
+      // unselect all
+
+      auto selectionModel = gridView_p->selectionModel();
+      gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
+      //bug race with pdf preview: selectWidget(box, gridView_p);
+      //auto size = gridView_p->getSelectionSize();
+      //if (size > 0) return false;
       
       TRACE("gestureClick; object=%p button=%d\n", object,
           gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
@@ -392,7 +421,7 @@ namespace xf {
 
   //    auto list_item =GTK_LIST_ITEM(object);
   //    auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-      placeMenu(object, gridView_p);
+      placeMenu(object, gridView_p); // object is G_FILE_INFO
       
    
       return true;
@@ -406,6 +435,51 @@ namespace xf {
       auto gridView_p = (GridView *)data;
       auto selectionModel = gridView_p->selectionModel();
       gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
+      return true;
+    }
+
+    static gboolean equalItem (gconstpointer a, gconstpointer b){
+      DBG("equalItem %p -- %p\n", a, b);
+
+      if (a == b) return true;
+      return false;
+    }
+   
+   static bool selectWidget(GtkWidget *w, GridView *gridView_p){
+      auto store = gridView_p->store();
+      guint positionF;
+      auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
+      auto item = G_FILE_INFO(gtk_list_item_get_item(listItem));
+      DBG("down_f: self(w) = %p, item=%p\n", w, item);
+      if (item) {
+        auto path = Basic::getPath(item);
+        auto found = LocalDir::findPosition(store, path,  &positionF, true);
+        if (!found){
+          DBG("gridViewClick(): %s not found\n", path);
+          g_free(path);
+          return false;
+        } 
+        DBG("Found %s at %d\n", path, positionF);
+        g_free(path);
+        auto selectionModel = gridView_p->selectionModel();
+        gtk_selection_model_select_item(selectionModel, positionF, false);
+        return true;
+      }
+      return false;
+   }
+
+   static gboolean
+    down_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+  
+      auto gridView_p = (GridView *)data;
+      gridView_p->dndOn = true;
+      DBG("dnd %d\n", gridView_p->dndOn);
+      selectWidget(w, gridView_p);
       return true;
     }
   public:
@@ -446,20 +520,25 @@ namespace xf {
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
       auto size = gtk_bitset_get_size(bitset);
       TRACE("gtk_bitset_get_size = %ld\n", size);
-/*      if (size == 1){
+
+      if (size == 0){
+        placeMenu(gridView_p);
+        return true;      
+      }
+
+      /* this is borked
+      if (size == 1){
         unsigned position = 1;
         GtkBitsetIter iter;
         gtk_bitset_iter_init_first (&iter, bitset, &position);
         auto list = G_LIST_MODEL(selectionModel);
 
-        auto info = G_FILE_INFO(g_list_model_get_item (list, position));
-        DBG("fixme line 425 gridview.hh\n");//placeMenu(info, gridView_p);
+        auto item = G_FILE_INFO(g_list_model_get_item (list, position));
+        //auto object = G_OBJECT(gtk_list_item_get_item(item));
+        placeMenu(G_OBJECT(item), gridView_p);
         return true;      
       }*/
-      if (size == 0){
-        placeMenu(gridView_p);
-        return true;      
-      }
+
       // Multiple selection
       guint position;
       GtkBitsetIter iter;
@@ -485,7 +564,8 @@ namespace xf {
       return true;
     }
     
-    static void addGestureClickSelection1(GtkWidget *self, GObject *object, GridView *gridView_p){
+
+    static void addGestureClickView1(GtkWidget *self, GObject *object, GridView *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for unselect
@@ -496,7 +576,7 @@ namespace xf {
 
     }    
     
-    static void addGestureClickSelection3(GtkWidget *self, GObject *object, GridView *gridView_p){
+    static void addGestureClickView3(GtkWidget *self, GObject *object, GridView *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for popover pressed
@@ -508,7 +588,7 @@ namespace xf {
     }    
     
     static void addGestureClickMenu(GtkWidget *box, GObject *object, GridView *gridView_p){
-      TRACE("addGestureClick; object=%p\n", gridView_p);
+      TRACE("addGestureClickMenu; object=%p\n", gridView_p);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for popover pressed
@@ -519,8 +599,22 @@ namespace xf {
 
     }    
     
-    static void addGestureClick(GtkWidget *imageBox, GObject *object, GridView *gridView_p){
-      TRACE("addGestureClick; object=%p\n", object);
+    static void addGestureClickDown(GtkWidget *self, GObject *item, GridView *gridView_p){
+      g_object_set_data(G_OBJECT(self), "item", item);
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
+      // 1 for select
+      TRACE("addGestureClickDown: self = %p, item=%p\n", self, item);
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (down_f), (void *)gridView_p);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_BUBBLE);
+
+    }    
+    
+    static void addGestureClickUp(GtkWidget *imageBox, GObject *object, GridView *gridView_p){
+      TRACE("addGestureClickUp; object=%p\n", object);
+      g_object_set_data(G_OBJECT(imageBox), "gridView_p", gridView_p);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for action released.
@@ -537,7 +631,8 @@ namespace xf {
 
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
-        TRACE("factorySetup...\n");
+        // object is a GtkListItem!
+        //DBG("factorySetup...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
         auto box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -585,9 +680,11 @@ namespace xf {
         addMotionController(hlabelBox);
 
         addMotionController(imageBox);
-        addGestureClick(imageBox, object, gridView_p);
-        addGestureClick(labelBox, object, gridView_p);
-        addGestureClick(hlabelBox, object, gridView_p);
+        addGestureClickDown(imageBox, object, gridView_p);
+        addGestureClickUp(imageBox, object, gridView_p);
+        addGestureClickUp(labelBox, object, gridView_p);
+        addGestureClickUp(hlabelBox, object, gridView_p);
+        addGestureClickUp(imageBox, object, gridView_p);
         addGestureClickMenu(imageBox, object, gridView_p);
         addGestureClickMenu(labelBox, object, gridView_p);
         addGestureClickMenu(hlabelBox, object, gridView_p);
@@ -613,6 +710,8 @@ namespace xf {
       static void
       factoryBind(GtkSignalListItemFactory *factory, GObject *object, GridView *gridView_p)
       {
+        //DBG("factoryBind...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
+       
         // const:
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
         auto list_item =GTK_LIST_ITEM(object);
@@ -620,7 +719,7 @@ namespace xf {
         auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
         auto label = GTK_LABEL(g_object_get_data(object, "label"));
         auto hlabel = GTK_LABEL(g_object_get_data(object, "hlabel"));
-        
+
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
         
         auto menuBox = GTK_BOX(g_object_get_data(object, "menuBox"));
@@ -834,6 +933,39 @@ public:
 
     
     private:
+      static void
+      onDragBegin (GtkDragSource *source,
+                     GdkDrag *drag,
+                     void *data)
+      {
+        // Set the widget as the drag icon
+        GdkPaintable *paintable = Texture<bool>::load("emblem-redball", 48);
+        gtk_drag_source_set_icon (source, paintable, 0, 0);
+        g_object_unref (paintable);
+      }
+
+static GdkContentProvider *
+on_drag_prepare (GtkDragSource *source,
+                 double         x,
+                 double         y,
+                 GridView *gridView_p)
+{
+
+  auto list = gridView_p->getSelectionList();
+  const char *text = "hello";
+  return gdk_content_provider_new_typed ("text/uri-list", text);
+
+  // This widget supports two types of content: GFile objects
+  // and GdkPixbuf objects; GTK will handle the serialization
+  // of these types automatically
+/*  GFile *file = my_widget_get_file (self);
+  GdkPixbuf *pixbuf = my_widget_get_pixbuf (self);
+
+  return gdk_content_provider_new_union ((GdkContentProvider *[2]) {
+      gdk_content_provider_new_typed (G_TYPE_FILE, file),
+      gdk_content_provider_new_typed (GDK_TYPE_PIXBUF, pixbuf),
+    }, 2);*/
+}
 
   };
 }

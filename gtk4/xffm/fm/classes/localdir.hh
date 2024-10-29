@@ -341,7 +341,6 @@ namespace xf {
 
       }
 
-
       static gboolean equal_f (gconstpointer a, gconstpointer b){
         auto A = G_FILE_INFO(a);
         auto B = G_FILE_INFO(b);
