@@ -161,7 +161,7 @@ static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *da
   memset(buffer, 0, 4096);
   gsize bytes_read;
 /*
-// This is done in main thread. Could block. 
+// This is done in main thread. BLOCKS. And not variable size.
 // Maybe create a thread to do operation (easier than read_bytes_async()).
   gboolean status = g_input_stream_read_all (stream, buffer, 4095, &bytes_read, NULL, &error_);
   if (error_){
