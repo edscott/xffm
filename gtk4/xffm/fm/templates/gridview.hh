@@ -623,11 +623,21 @@ namespace xf {
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }    
+    
+// object is list_item
+// item_get_item is GFileInfo
+// item_get child is GtkWidget
 
       static void
       factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
         TRACE("factoryTeardown...\n");
-      }
+        GtkListItem *list_item = GTK_LIST_ITEM(object);
+        GtkBox *vbox = GTK_BOX(gtk_list_item_get_child( list_item ));
+        // vbox is null on new updateGridview() (new Gridview).
+        // unparent() also fails on close xffm...
+        // if (vbox && GTK_IS_WIDGET(vbox)) gtk_widget_unparent(GTK_WIDGET(vbox));
+        gtk_list_item_set_child(list_item, NULL);
+     }
 
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
