@@ -23,13 +23,13 @@ namespace xf {
             guint n_items,
             void *data) {
         DBG("selection changed position=%d, items=%d\n", position, n_items);
-        if (gtk_selection_model_is_selected(self, 0)){
+        if (data && gtk_selection_model_is_selected(self, 0)){
           gtk_selection_model_unselect_item(self, 0);
         }
         return;
       }
       
-      static GtkMultiSelection *getSelectionModel(GListModel *store){
+      static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0){
         GtkFilter *filter = 
           GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
         GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
@@ -45,7 +45,8 @@ namespace xf {
         g_object_set_data(G_OBJECT(store), "selectionModel", s);
         g_object_set_data(G_OBJECT(s), "store", store);
 
-        g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), NULL);
+        g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), 
+            skip0?s:NULL);
         return s;
       }
       
@@ -55,7 +56,7 @@ namespace xf {
         GtkDirectoryList *dList = gtk_directory_list_new("standard::", gfile); 
         gtk_directory_list_set_monitored(dList, true);
 
-        return getSelectionModel(G_LIST_MODEL(dList));
+        return getSelectionModel(G_LIST_MODEL(dList), false);
       }
 
     public:
@@ -89,6 +90,7 @@ namespace xf {
         } while (true);
         return maxNameLen;
       }
+
       static GtkMultiSelection *xfSelectionModel(const char *path){
        // This section adds the up icon.
 
@@ -155,7 +157,7 @@ namespace xf {
                 G_CALLBACK (changed_f), (void *)store);
         }
         g_object_set_data(G_OBJECT(store), "monitor", monitor);
-        return getSelectionModel(G_LIST_MODEL(store));
+        return getSelectionModel(G_LIST_MODEL(store), true);
       }
 
       static bool findPosition(GListStore *store, const char *path, guint *positionF, bool verbose){
@@ -377,7 +379,7 @@ namespace xf {
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
         }
-        return getSelectionModel(G_LIST_MODEL(store));
+        return getSelectionModel(G_LIST_MODEL(store), false);
       }
 
     private:

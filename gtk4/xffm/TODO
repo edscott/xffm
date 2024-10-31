@@ -1,7 +1,7 @@
 OpenWith dialog (window) working
 
 Pending issues: 
-* DnD: enable with clipboard
+* DnD: enable
 * tar/untar, zip/unzip dialog
 * main menu css format corrections
 * gridview: verify linebreaks with iconsize

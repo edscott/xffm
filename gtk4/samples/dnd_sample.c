@@ -17,7 +17,8 @@
 # include <X11/Xatom.h>
 #endif
 
-GdkContentFormats *contentFormats;
+GtkWidget *view;
+static GtkEventController *dropController;
 static GtkIconTheme *icon_theme;
 ///  drag ////
 //
@@ -42,7 +43,6 @@ image_drag_begin (GtkDragSource *source,
                     GtkWidget     *widget)
 {
   GdkPaintable *paintable;
- // g_object_set(G_OBJECT(drag), "formats", contentFormats, NULL);
   paintable = gtk_widget_paintable_new (widget);
   gtk_drag_source_set_icon (source, paintable, 0, 0);
   g_object_unref (paintable);
@@ -58,7 +58,7 @@ image_drag_prepare (
   GdkContentProvider *dndcontent;
   GtkSelectionModel *selection_model = g_object_get_data(G_OBJECT(data), "selection_model");
   GList *selection_list = getSelectionList(selection_model);
-  char *string = g_strdup("copy\n");
+  char *string = g_strdup("");
   if (g_list_length(selection_list) < 2){
     GFileInfo *info = g_object_get_data(G_OBJECT(data), "info");
     GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
@@ -147,30 +147,112 @@ dropAccept (
   return true; //drop accepted on enter
 }
 
-static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *data){
+
+static void *readAction(void *arg){
+  void **argData = (void **)arg;
+  void *data = argData[1];
+  GBytes *bytes = argData[2];
+
+  gsize size;
+  const void *p = g_bytes_get_data(bytes, &size);
+  fprintf(stderr, "showDrop(): bytes (%d):\n%s\n", size, (const char *)p);
+  g_free(arg);
+}
+
+gboolean dropDrop ( GtkDropTarget* self, GdkDrop* drop,  gdouble x, gdouble y, gpointer data);
+
+static GtkEventController *createDropController(void){
+    const char *mimeTypes[]={"text/uri-list", NULL};
+    GdkContentFormats *contentFormats = gdk_content_formats_new(mimeTypes, 1);
+    GdkDragAction actions =
+      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+    GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
+    g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
+    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), NULL);
+   /* g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
+    g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);
+    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);*/
+    return GTK_EVENT_CONTROLLER(dropTarget);
+}
+
+static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void *arg){
+  GdkDrop *drop = g_object_get_data (source_object, "drop");
+  GOutputStream *stream = G_OUTPUT_STREAM (source_object);
+  GdkDragAction action = GDK_ACTION_COPY; // FIXME
+  GBytes *bytes;
+
+  if (g_output_stream_splice_finish (stream, res, NULL) >= 0){
+      bytes = g_memory_output_stream_steal_as_bytes (G_MEMORY_OUTPUT_STREAM (stream));
+  }
+
+  gdk_drop_finish (drop, action);
+  g_object_unref (drop);
+  // replace controller: does not eliminate bug https://gitlab.gnome.org/GNOME/gtk/-/issues/3755
+  //gtk_widget_remove_controller (view, dropController);
+  //dropController = createDropController();
+  //gtk_widget_add_controller (GTK_WIDGET (view), GTK_EVENT_CONTROLLER (dropController));
+  
+ // const void *p = g_bytes_get_data(bytes, &size);
+ // fprintf(stderr, "dropReadDoneCallback(): bytes (%d):\n%s\n", size, (const char *)p);
+
+  void **argData = (void **)arg;
+  void *(*f)(void *) = argData[0];
+  argData[2] = (void *)bytes;
+  f(arg);
+  /*
+  pthread_t thread;
+  pthread_create(&thread, NULL, f, arg);
+  pthread_detach(thread);
+   */
+  return;
+}
+
+
+static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *arg){
   fprintf(stderr,"dropReadCallback: do your thing.\n" );
   const char *out_mime_type;
   GError *error_ = NULL;
   GdkDrop *drop = GDK_DROP(source_object);
+  GInputStream *input;
+  GOutputStream *output;
 
-
-  GInputStream *stream = gdk_drop_read_finish (drop, res, &out_mime_type, &error_);
-
-  gdk_drop_finish(drop, GDK_ACTION_ASK);
-  char buffer[4096];
-  memset(buffer, 0, 4096);
-  gsize bytes_read;
-/*
-// This is done in main thread. BLOCKS. And not variable size.
-// Maybe create a thread to do operation (easier than read_bytes_async()).
-  gboolean status = g_input_stream_read_all (stream, buffer, 4095, &bytes_read, NULL, &error_);
+  input = gdk_drop_read_finish (drop, res, &out_mime_type, &error_);
   if (error_){
-    fprintf(stderr, "*** Error:: dropReadCallback(): %s\n", error_->message);
-    g_error_free(error_);
+      fprintf(stderr, "** Error::dropReadCallback(): %s\n", error_->message);
+      gdk_drop_finish (drop, 0);
+      g_error_free(error_);
+      return;
   }
-  fprintf(stderr, "DND content:\n%s\n", buffer);
-  */
+  if (input == NULL) {
+      gdk_drop_finish (drop, 0);
+      return;
+  }
+
+  output = g_memory_output_stream_new_resizable ();
+  g_object_set_data (G_OBJECT (output), "drop", drop);
+  g_object_ref (drop);
+
+  g_output_stream_splice_async (output,
+                                input,
+                                G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE | G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET,
+                                G_PRIORITY_DEFAULT,
+                                NULL,
+                                dropReadDoneCallback,
+                                arg);
+  g_object_unref (output);
+  g_object_unref (input);
+  return;
 }
+static void *readDrop(GdkDrop *drop, void *(*f)(void *), void *data){
+  void **arg = calloc(3, sizeof(void*));
+  arg[0] = (void *)f;
+  arg[1] = data;
+  const char *mimeTypes[]={"text/uri-list", NULL};
+  gdk_drop_read_async (drop, mimeTypes, G_PRIORITY_DEFAULT, // int io_priority,
+  NULL, dropReadCallback, (void *)arg);
+  return NULL;
+}
+
 
 gboolean
 dropDrop (
@@ -183,17 +265,9 @@ dropDrop (
 )
 {
   fprintf(stderr,"dropDrop %lf,%lf .\n", x, y);
-  //const GValue *value = gtk_drop_target_get_value (self);
-  //fprintf(stderr,"dropDrop value=%s .\n", g_value_get_string(value));
-
-  
-  const char *mimeTypes[]={"text/uri-list", NULL};
-  gdk_drop_read_async (drop, mimeTypes, G_PRIORITY_DEFAULT, // int io_priority,
-  NULL, dropReadCallback, data);
- // const char *string = g_value_get_string(value);
- // fprintf(stderr,"dropDrop %lf,%lf type=%d string=%s.\n", x, y, type, string);
+  readDrop(drop, readAction, data);
   return true; //drop accepted
-  return false; //drop not accepted
+  //return false; //drop not accepted
 }
 GdkDragAction
 dropEnter (
@@ -357,11 +431,6 @@ factoryBind(GtkSignalListItemFactory *self, GObject *object, void *data)
   g_object_set_data(G_OBJECT(vbox), "image", image);
 
   GtkDragSource *source = gtk_drag_source_new ();
-  //   static:
-  //GdkContentProvider *dndcontent = gdk_content_provider_new_typed (G_TYPE_STRING, "foo bar");
-  //gtk_drag_source_set_content (source, dndcontent);
-  //g_object_unref (dndcontent);
-  //   dynamic:
   g_signal_connect (source, "prepare", G_CALLBACK (image_drag_prepare), image);
   
   g_signal_connect (source, "drag-begin", G_CALLBACK (image_drag_begin), image);
@@ -392,6 +461,7 @@ compareFunction(const void *a, const void *b, void *data){
   GFileInfo *infoB = G_FILE_INFO(b);
   return strcasecmp(g_file_info_get_name(infoA), g_file_info_get_name(infoB));
 }
+
 static void
 create (GtkWidget *MainWidget){
   GtkScrolledWindow *scrolledWindow = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
@@ -416,49 +486,16 @@ create (GtkWidget *MainWidget){
 	g_signal_connect( factory, "unbind", G_CALLBACK(factoryUnBind), selection_model);
   g_signal_connect( factory, "teardown", G_CALLBACK(factoryTeardown), selection_model);
 	// Create the GtkGridView.
-	GtkWidget *view = gtk_grid_view_new( GTK_SELECTION_MODEL( selection_model ), factory );
+	view = gtk_grid_view_new( GTK_SELECTION_MODEL( selection_model ), factory );
   gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), true);
   gtk_scrolled_window_set_child(scrolledWindow, GTK_WIDGET(view));
- 
-        GdkDragAction actions =
-          (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
-/*
-
-        GtkDragSource *dragSource = gtk_drag_source_new ();
-        g_signal_connect (dragSource, "prepare", G_CALLBACK (dragPrepare), NULL);
-        g_signal_connect (dragSource, "drag-begin", G_CALLBACK (dragBegin), NULL);
-        g_signal_connect (dragSource, "drag-end", G_CALLBACK (dragEnd), NULL);
-        g_signal_connect (dragSource, "drag-cancel", G_CALLBACK (dragCancel), NULL);
-        gtk_drag_source_set_actions(dragSource, actions); 
-        gtk_widget_add_controller (GTK_WIDGET (view), GTK_EVENT_CONTROLLER (dragSource));
-*/
-        //GtkDropTarget *dropTarget = gtk_drop_target_new (GType type, GdkDragAction actions);
-        //GtkDropTarget *dropTarget = gtk_drop_target_new ("text/uri-list", actions);
-        //GtkDropTarget *dropTarget = gtk_drop_target_new (G_TYPE_STRING, actions);
-        //
-        GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
-        g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
-        g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), NULL);
-       /* g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
-        g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);
-        g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);*/
-        gtk_widget_add_controller (GTK_WIDGET (view), GTK_EVENT_CONTROLLER (dropTarget));
-
+  
+  dropController = createDropController();
+  gtk_widget_add_controller (GTK_WIDGET (view), GTK_EVENT_CONTROLLER (dropController));
 }
 int main (int argc, char *argv[])
 {
   gtk_init ();
-  const char *mimeTypes[]={"text/uri-list", NULL};
-  contentFormats = gdk_content_formats_new(mimeTypes, 1);
-
-  gsize n_gtypes;
-  const GType *types = gdk_content_formats_get_gtypes (contentFormats, &n_gtypes);
-
-  fprintf(stderr, "n_gtypes=%d\n", n_gtypes);
-  for (int i=0; i<n_gtypes; i++){
-    fprintf(stderr, "%d) type %p\n", i, types[i]);
-  }
-
 
   GdkDisplay *displayGdk = gdk_display_get_default();
   icon_theme = gtk_icon_theme_get_for_display(displayGdk);

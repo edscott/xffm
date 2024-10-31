@@ -14,9 +14,81 @@ namespace xf {
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
       int maxNameLen_ = 0;
       GList *selectionList_ = NULL;
+      double x_;
+      double y_;
   public:
-      bool dndOn = false;
+      double x(void){return x_;}
+      double y(void){return y_;}
+      void x(double value){x_ = value;}
+      void y(double value){y_ = value;}
+
+  private:
+    static void
+    image_drag_begin (GtkDragSource *source, GdkDrag *drag, GtkWidget *widget)
+    {
+      GdkPaintable *paintable;
+      paintable = gtk_widget_paintable_new (widget);
+      gtk_drag_source_set_icon (source, paintable, 0, 0);
+      g_object_unref (paintable);
+      fprintf(stderr,"image_drag_begin.\n");
+    }
+    static GdkContentProvider* 
+    image_drag_prepare ( GtkDragSource* self, gdouble x, gdouble y, gpointer data)
+    {
+      GdkContentProvider *dndcontent;
+      auto gridView_p = (GridView *)data;
+
+      //GtkSelectionModel *selection_model = gridView_p->selectionModel();
+      GList *selection_list = gridView_p->getSelectionList();
+      if (g_list_length(selection_list) < 1) {
+        DBG("*** no drag, selection list ==0\n");
+        return NULL;
+      }
+      char *string = g_strdup("");
+      for (GList *l = selection_list; l && l->data; l=l->next){
+        auto info = G_FILE_INFO(l->data);
+        GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+        char *path = g_file_get_path(file);
+        char *g = g_strconcat(string, "file://", path, "\n", NULL);
+        g_free(string);
+        string = g;
+        g_free(path);     
+      }
+
+      //  dndcontent = gdk_content_provider_new_typed (G_TYPE_STRING, string);
+        GBytes *bytes = g_bytes_new(string, strlen(string)+1);
+        dndcontent = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
+
+        g_free(string);
+      //  GtkDragSource *source = gtk_drag_source_new ();
+      //  gtk_drag_source_set_content (source, dndcontent);
+        
+        fprintf(stderr,"image_drag_prepare.\n");
+        return dndcontent;
+    }
       
+  public:
+      //bool dndOn = false;
+      GridView(const char *path, void *gridViewClick_f){
+        gridViewClick_f_ = gridViewClick_f;
+        path_ = g_strdup(path);
+        view_ = getGridView();
+        myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
+        addGestureClickView1(view_, NULL, this);
+        addGestureClickView3(view_, NULL, this);
+      }
+
+      ~GridView(void){
+      TRACE("GridView destructor\n");
+        if (menu_){
+          gtk_widget_unparent(GTK_WIDGET(menu_));
+          //g_object_unref(G_OBJECT(menu_));
+        }
+        if (myMenu_) delete myMenu_; // main menu
+        g_list_free(selectionList_);
+
+        g_free(path_);
+      }      
       void child(GtkWidget *child){
         child_ = child;
         auto store = G_OBJECT(g_object_get_data(G_OBJECT(selectionModel_), "store"));
@@ -37,42 +109,7 @@ namespace xf {
       }
       GListStore *store(void){return listStore();}
       
-      GridView(const char *path, void *gridViewClick_f){
-        gridViewClick_f_ = gridViewClick_f;
-        path_ = g_strdup(path);
-        view_ = getGridView();
-        myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
-        addGestureClickView1(view_, NULL, this);
-        addGestureClickView3(view_, NULL, this);
-    /*    gtk_drag_source_set (GTK_WIDGET(view_),
-                     (GdkModifierType) 0, //GdkModifierType start_button_mask,
-                     targetTable,
-                     NUM_TARGETS,
-                     (GdkDragAction)
-                                    ((gint)GDK_ACTION_MOVE|
-                                     (gint)GDK_ACTION_COPY|
-                                     (gint)GDK_ACTION_LINK));*/
-        
-        dragSource_ = gtk_drag_source_new ();
-        g_signal_connect (dragSource_, "prepare", G_CALLBACK (onDragBegin), this);
-        g_signal_connect (dragSource_, "drag-begin", G_CALLBACK (onDragBegin), this);
-        gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dragSource_));
-        
-        auto actions = (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
-        gtk_drag_source_set_actions(dragSource_, actions);
-      }
 
-      ~GridView(void){
-      TRACE("GridView destructor\n");
-        if (menu_){
-          gtk_widget_unparent(GTK_WIDGET(menu_));
-          //g_object_unref(G_OBJECT(menu_));
-        }
-        if (myMenu_) delete myMenu_; // main menu
-        g_list_free(selectionList_);
-
-        g_free(path_);
-      }
 
       GtkWidget *
       getGridView(){
@@ -477,9 +514,13 @@ namespace xf {
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
   
       auto gridView_p = (GridView *)data;
-      gridView_p->dndOn = true;
-      DBG("dnd %d\n", gridView_p->dndOn);
+      gridView_p->x(x);
+      gridView_p->y(y);
+
+      //gridView_p->dndOn = true;
+      //DBG("dnd %d\n", gridView_p->dndOn);
       selectWidget(w, gridView_p);
+      //return false;
       return true;
     }
   public:
@@ -612,14 +653,14 @@ namespace xf {
 
     }    
     
-    static void addGestureClickUp(GtkWidget *imageBox, GObject *object, GridView *gridView_p){
+    static void addGestureClickUp(GtkWidget *box, GObject *object, GridView *gridView_p){
       TRACE("addGestureClickUp; object=%p\n", object);
-      g_object_set_data(G_OBJECT(imageBox), "gridView_p", gridView_p);
+      g_object_set_data(G_OBJECT(box), "gridView_p", gridView_p);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for action released.
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (gridView_p->gridViewClick_f()), (void *)object);
-      gtk_widget_add_controller(GTK_WIDGET(imageBox), GTK_EVENT_CONTROLLER(gesture));
+      gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }    
@@ -731,6 +772,7 @@ namespace xf {
         auto hlabel = GTK_LABEL(g_object_get_data(object, "hlabel"));
 
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+        g_object_set_data(G_OBJECT(imageBox), "info", info);
         
         auto menuBox = GTK_BOX(g_object_get_data(object, "menuBox"));
         g_object_set_data(G_OBJECT(info), "menuBox", menuBox);
@@ -796,7 +838,8 @@ namespace xf {
         
 
         if (type == G_FILE_TYPE_DIRECTORY ) {
-          DirectoryClass::addDirectoryTooltip(image, info);
+          // not much use, really.
+          //DirectoryClass::addDirectoryTooltip(image, info);
         }
 
         if (size < 0) size = 48;
@@ -874,6 +917,12 @@ namespace xf {
           g_free(markup);
           DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
         }
+        // drag
+        GtkDragSource *source = gtk_drag_source_new ();
+        g_signal_connect (source, "prepare", G_CALLBACK (image_drag_prepare),gridView_p);
+        
+        g_signal_connect (source, "drag-begin", G_CALLBACK (image_drag_begin), image);
+        gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));
 
         if (doPreview && !previewLoaded){
 
