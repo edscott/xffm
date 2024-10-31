@@ -18,7 +18,7 @@
 #endif
 
 GtkWidget *view;
-static GtkEventController *dropController;
+static GtkEventController *dropController; // bug workaround, does not work.
 static GtkIconTheme *icon_theme;
 ///  drag ////
 //

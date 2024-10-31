@@ -4,164 +4,265 @@
 namespace xf
 {
 //template <class Type> class View;
-template <class Type>
+template <class Type> class GridView;
+template <class DirectoryClass>
 class Dnd {
-
 public:
-#if 0
-    static gchar *
-    sendDndData(View<Type> *view){
-        return ClipBoard::getSelectionData(view, NULL);
-    }
-    static GdkDragAction queryAction(View<Type> *view, const gchar *target, gchar **files){
-      int number=0;
-      for (gchar **p=files; p && *p; p++) number++;
-      GtkWidget *dialog;
-      GdkDragAction action = (GdkDragAction)0;
-      int flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-      dialog = gtk_dialog_new_with_buttons (_("Multiple selections"),
-                                   GTK_WINDOW(mainWindow),
-                                   (GtkDialogFlags)flags,
-                                   _("Accept"),
-                                   1,
-                                   _("Cancel"),
-                                   0,
-                                   NULL);
-      MainDialog = GTK_WINDOW(dialog);
+///////////////////////////////////  drop /////////////////////////////////////
 
-    
-      GtkWidget *b= gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+static GtkEventController *createDropController(void *data){
+    const char *mimeTypes[]={"text/uri-list", NULL};
+    GdkContentFormats *contentFormats = gdk_content_formats_new(mimeTypes, 1);
+    GdkDragAction actions =
+      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+    GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
+    g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
+    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), data);
+   /* g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
+    g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);
+    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);*/
+    return GTK_EVENT_CONTROLLER(dropTarget);
+}
 
-      gchar *s = g_strdup_printf("%s: <b>%s</b>\n(%s:%d)+\n", _("Target"), target? target: view->path(), _("Files"), number);
-      int count=1;
-      for (char **p=files; p && *p; p++, count++){
-        char buffer[256];
-        snprintf(buffer, 256, "<b>%d:</b> %s\n", count, *p);
-        Basic::concat(&s, buffer);
-        if (count >= 3){
-          Basic::concat(&s, "<i>");
-          Basic::concat(&s, _("More…"));
-          Basic::concat(&s, "</i>");
-          Basic::concat(&s, "\n");
-          break;
-        }
-      }
-      GtkWidget *w = gtk_label_new("");
-      gtk_label_set_markup(GTK_LABEL(w), s);
-      g_free(s);
-      gtk_box_pack_end(GTK_BOX(b), w, TRUE, TRUE, 5);
-      GtkBox *rBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,3));
-      gtk_box_pack_end(GTK_BOX(b), GTK_WIDGET(rBox), FALSE, FALSE, 5);
 
-      GtkWidget *r;
-      const char *opts[]={_("Copy"), _("Move"), _("Link"), NULL};
-      int optAction[]={2,4,8};
-      int k=0;
-      GtkRadioButton *group=NULL;
-      for (const char **p=opts; p && *p; p++, k++){
-        r = gtk_radio_button_new_with_label_from_widget (group, *p);
-        if (k==0) group = GTK_RADIO_BUTTON(r);
-        compat<bool>::boxPackStart(GTK_BOX(rBox), r, TRUE, TRUE, 5);
-        g_object_set_data(G_OBJECT(dialog), *p, r);
-        g_object_set_data(G_OBJECT(r), "action", GINT_TO_POINTER(optAction[k]));
-        if (action == optAction[k]) gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(r), TRUE);
-      }
-
-      gtk_widget_show_all(GTK_WIDGET(dialog));
-      int response = gtk_dialog_run(GTK_DIALOG(dialog));
-      gtk_widget_hide(dialog);
-
-      if (!response) return action;
-      k=0;
-      for (const char **p=opts; p && *p; p++, k++){
-        r = GTK_WIDGET(g_object_get_data(G_OBJECT(dialog), *p));
-        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(r))) 
-          action = (GdkDragAction) GPOINTER_TO_INT(g_object_get_data(G_OBJECT(r), "action"));
-      }
-      MainDialog = NULL;
-      gtk_widget_destroy(dialog);
-
-      fprintf(stderr, "response=%d, action=%d\n", response, action);
-      return action;
-    }
-#endif               
-    static gboolean
-    receiveDndData(
-            //View<Type> *view, // gridview
-            const gchar *target, 
-            const GtkSelectionData *selection_data, 
-            GdkDragAction action)
+///////////////////////////////////  drag /////////////////////////////////////
+    // signal drag-begin Emitted on the drag source when a drag is started.
+    static void
+    image_drag_begin (GtkDragSource *source, GdkDrag *drag, GtkWidget *widget)
     {
-        TRACE("View::receiveDndData\n");
-        if (!selection_data) {
-            ERROR("!selection_data\n");
-            return FALSE;
-        }
-        auto dndData = (const char *)gtk_selection_data_get_data (selection_data);
-        gchar **files = g_strsplit(dndData, "\n", -1);
-        int number=0;
-        for (gchar **p=files; p && *p; p++) number++;
-        if (!number) return FALSE;
-
-        const char *tgt = target? target: view->path();
-        char *source=files[0];
-        if (strstr(source, "file://")) source += strlen("file://");
-        char *sourceDir = g_path_get_dirname(source);
-        if (!sourceDir) return FALSE;
-        if (strcmp(sourceDir, tgt) == 0) {
-          g_free(sourceDir);
-          return FALSE;
-        }
-        g_free(sourceDir);
-        //DBG("View::receiveDndData number=%d\n", number);
-
-
-        // FIXME: if (number > 1) action = queryAction(view, tgt, files);
-
-        //DBG("View::receiveDndData action=%d\n", action);
-        const gchar *command;
-        const gchar *message;
-        gint mode;
-        switch (action){
-            case GDK_ACTION_DEFAULT: 
-            case GDK_ACTION_MOVE:
-                message = _("Moving files");
-                command = "mv -b -f";
-                mode = MODE_MOVE;
-                break;
-            case GDK_ACTION_COPY:
-                message = _("Copying files locally");
-                command = "cp -R -b -f";
-                mode = MODE_COPY;
-                break;
-            case GDK_ACTION_LINK:
-                message = _("Create Link");
-                command = "ln -s -b -f";
-                mode = MODE_LINK;
-                break;
-            case GDK_ACTION_PRIVATE:
-            case GDK_ACTION_ASK:
-                ERROR("Not supported GDK_ACTION_PRIVATE || GDK_ACTION_ASK\n");
-                return FALSE;
-
-        }
-
-        auto more = (files[1] != NULL && strstr(files[1], "file://"))?
-                g_strdup_printf("[+ %s]", _("more")):
-                g_strdup("");
-        TRACE("%s %s %s ---> %s\n", message, files[0], more, tgt);
-
-            
-        Print<Type>::print(view->page()->output(), "green", 
-                    g_strdup_printf("%s %s %s ---> %s\n", 
-                    message, files[0], more, tgt)
-                );
-
-        g_free(more);
-        // FIXME: auto result = Gio<Type>::executeURL(files, tgt, mode);
-        if (files) g_strfreev(files);
-        return result;
+      GdkPaintable *paintable;
+      paintable = gtk_widget_paintable_new (widget);
+      gtk_drag_source_set_icon (source, paintable, 0, 0);
+      g_object_unref (paintable);
+      fprintf(stderr,"image_drag_begin.\n");
     }
+    // signal prepare Emitted when a drag is about to be initiated.
+    static GdkContentProvider* 
+    image_drag_prepare ( GtkDragSource* self, gdouble x, gdouble y, gpointer data)
+    {
+      GdkContentProvider *dndcontent;
+      auto gridView_p = (GridView<DirectoryClass> *)data;
+
+      //GtkSelectionModel *selection_model = gridView_p->selectionModel();
+      GList *selection_list = gridView_p->getSelectionList();
+      if (g_list_length(selection_list) < 1) {
+        DBG("*** no drag, selection list ==0\n");
+        return NULL;
+      }
+      char *string = g_strdup("");
+      for (GList *l = selection_list; l && l->data; l=l->next){
+        auto info = G_FILE_INFO(l->data);
+        GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+        char *path = g_file_get_path(file);
+        char *g = g_strconcat(string, "file://", path, "\n", NULL);
+        g_free(string);
+        string = g;
+        g_free(path);     
+      }
+
+      //  dndcontent = gdk_content_provider_new_typed (G_TYPE_STRING, string);
+        GBytes *bytes = g_bytes_new(string, strlen(string)+1);
+        dndcontent = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
+
+        g_free(string);
+      //  GtkDragSource *source = gtk_drag_source_new ();
+      //  gtk_drag_source_set_content (source, dndcontent);
+        
+        fprintf(stderr,"image_drag_prepare.\n");
+        return dndcontent;
+    }
+private:
+///////////////////////////////////  drag /////////////////////////////////////
+
+// GtkDragSource *dragSource
+    
+// signal drag-end Emitted on the drag source when a drag is finished.
+static void dragEnd ( GtkDragSource* self, GdkDrag* drag, 
+    gboolean delete_data, gpointer user_data)
+{
+  fprintf(stderr,"dragEnd.\n");
+}
+// signal drag-cancel Emitted on the drag source when a drag has failed.
+static gboolean dragCancel ( GtkDragSource* self, GdkDrag* drag, 
+    GdkDragCancelReason* reason, gpointer user_data
+){
+  fprintf(stderr,"dragCancel.\n");
+  return true;
+}
+
+
+// GdkDrag *drag
+// signal cancel Emitted when the drag operation is cancelled.
+static gboolean cancel (
+  GdkDrag* self,
+  GdkDragCancelReason* reason,
+  gpointer user_data
+)
+{
+  fprintf(stderr,"cancel.\n");
+  return true;
+}
+// signal drop-performed Emitted when the drop operation is performed on an accepting client.
+static void drop_performed (
+  GdkDrag* self,
+  gpointer user_data
+){
+  fprintf(stderr,"drop_performed.\n");
+}
+// signal dnd-finished Emitted when the destination side has finished reading all data.
+static void
+dnd_finished (
+  GdkDrag* self,
+  gpointer user_data
+){
+  fprintf(stderr,"dnd_finished.\n");
+}
+
+///////////////////////////////////  drop /////////////////////////////////////
+
+
+static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void *arg){
+  auto drop = GDK_DROP(g_object_get_data (source_object, "drop"));
+  GOutputStream *stream = G_OUTPUT_STREAM (source_object);
+  GdkDragAction action = GDK_ACTION_COPY; // FIXME
+  GBytes *bytes;
+
+  if (g_output_stream_splice_finish (stream, res, NULL) >= 0){
+      bytes = g_memory_output_stream_steal_as_bytes (G_MEMORY_OUTPUT_STREAM (stream));
+  }
+
+  gdk_drop_finish (drop, action);
+  g_object_unref (drop);
+  // replace controller: does not eliminate bug https://gitlab.gnome.org/GNOME/gtk/-/issues/3755
+  //gtk_widget_remove_controller (view, dropController);
+  //dropController = createDropController();
+  //gtk_widget_add_controller (GTK_WIDGET (view), GTK_EVENT_CONTROLLER (dropController));
+  
+ // const void *p = g_bytes_get_data(bytes, &size);
+ // fprintf(stderr, "dropReadDoneCallback(): bytes (%d):\n%s\n", size, (const char *)p);
+
+  void **argData = (void **)arg;
+  void *(*f)(void *) = (void* (*)(void*))argData[0];
+  argData[2] = (void *)bytes;
+  f(arg);
+  /*
+  pthread_t thread;
+  pthread_create(&thread, NULL, f, arg);
+  pthread_detach(thread);
+   */
+  return;
+}
+
+
+static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *arg){
+  fprintf(stderr,"dropReadCallback: do your thing.\n" );
+  const char *out_mime_type;
+  GError *error_ = NULL;
+  GdkDrop *drop = GDK_DROP(source_object);
+  GInputStream *input;
+  GOutputStream *output;
+
+  input = gdk_drop_read_finish (drop, res, &out_mime_type, &error_);
+  if (error_){
+      fprintf(stderr, "** Error::dropReadCallback(): %s\n", error_->message);
+      gdk_drop_finish (drop, (GdkDragAction)0);
+      g_error_free(error_);
+      return;
+  }
+  if (input == NULL) {
+      gdk_drop_finish (drop, (GdkDragAction)0);
+      return;
+  }
+
+  output = g_memory_output_stream_new_resizable ();
+  g_object_set_data (G_OBJECT (output), "drop", drop);
+  g_object_ref (drop);
+  int flags = (int)G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE | (int)G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET;
+  g_output_stream_splice_async (output,
+                                input,
+                                (GOutputStreamSpliceFlags)flags,
+                                G_PRIORITY_DEFAULT,
+                                NULL,
+                                dropReadDoneCallback,
+                                arg);
+  g_object_unref (output);
+  g_object_unref (input);
+  return;
+}
+
+static void *readDrop(GdkDrop *drop, void *(*f)(void *), void *data){
+  auto arg = (void **)calloc(3, sizeof(void*));
+  arg[0] = (void *)f;
+  arg[1] = data;
+  const char *mimeTypes[]={"text/uri-list", NULL};
+  gdk_drop_read_async (drop, mimeTypes, G_PRIORITY_DEFAULT, // int io_priority,
+  NULL, dropReadCallback, (void *)arg);
+  return NULL;
+}
+
+static void *readAction(void *arg){
+  void **argData = (void **)arg;
+  void *data = argData[1];
+  GBytes *bytes = (GBytes *)argData[2];
+
+  gsize size;
+  const void *p = g_bytes_get_data(bytes, &size);
+  fprintf(stderr, "readAction(): bytes (%d):\n%s\n", size, (const char *)p);
+  g_free(arg);
+  return NULL;
+}
+
+ // signals ///////
+ 
+
+    static gboolean dropDrop ( GtkDropTarget* self, GdkDrop* drop,  
+        gdouble x, gdouble y, gpointer data)
+    {
+      fprintf(stderr,"dropDrop %lf,%lf .\n", x, y);
+      readDrop(drop, readAction, data);
+      return true; //drop accepted
+      //return false; //drop not accepted
+    }
+  
+static   GdkDragAction
+dropEnter (
+  GtkDropTarget* self,
+  GdkDrop* drop,
+  gdouble x,
+  gdouble y,
+  gpointer user_data
+)
+{
+  fprintf(stderr,"dropEnter %lf,%lf.\n", x, y);
+  return GDK_ACTION_COPY;
+}
+static void
+dropLeave (
+  GtkDropTarget* self,
+  GdkDrop* drop,
+  gpointer user_data
+)
+{
+  fprintf(stderr,"dropLeave.\n");
+}
+static GdkDragAction
+dropMotion (
+  GtkDropTarget* self,
+  GdkDrop* drop,
+  gdouble x,
+  gdouble y,
+  gpointer user_data
+)
+{
+  //fprintf(stderr,"dropMotion %lf,%lf.\n", x, y);
+  return GDK_ACTION_COPY;
+}
+static gboolean dropAccept ( GtkDropTarget* self, GdkDrop* drop, gpointer user_data)
+{
+  fprintf(stderr,"dropAccept.\n");
+  //return false; //drop not accepted on enter
+  return true; //drop accepted on enter
+}
 
 };
 }

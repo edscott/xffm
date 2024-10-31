@@ -1,7 +1,8 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
 namespace xf {
-  template <class DirectoryClass>
+template <class Type> class Dnd;
+template <class DirectoryClass>
   class GridView  {
   private:
       GtkDragSource *dragSource_;
@@ -23,49 +24,6 @@ namespace xf {
       void y(double value){y_ = value;}
 
   private:
-    static void
-    image_drag_begin (GtkDragSource *source, GdkDrag *drag, GtkWidget *widget)
-    {
-      GdkPaintable *paintable;
-      paintable = gtk_widget_paintable_new (widget);
-      gtk_drag_source_set_icon (source, paintable, 0, 0);
-      g_object_unref (paintable);
-      fprintf(stderr,"image_drag_begin.\n");
-    }
-    static GdkContentProvider* 
-    image_drag_prepare ( GtkDragSource* self, gdouble x, gdouble y, gpointer data)
-    {
-      GdkContentProvider *dndcontent;
-      auto gridView_p = (GridView *)data;
-
-      //GtkSelectionModel *selection_model = gridView_p->selectionModel();
-      GList *selection_list = gridView_p->getSelectionList();
-      if (g_list_length(selection_list) < 1) {
-        DBG("*** no drag, selection list ==0\n");
-        return NULL;
-      }
-      char *string = g_strdup("");
-      for (GList *l = selection_list; l && l->data; l=l->next){
-        auto info = G_FILE_INFO(l->data);
-        GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-        char *path = g_file_get_path(file);
-        char *g = g_strconcat(string, "file://", path, "\n", NULL);
-        g_free(string);
-        string = g;
-        g_free(path);     
-      }
-
-      //  dndcontent = gdk_content_provider_new_typed (G_TYPE_STRING, string);
-        GBytes *bytes = g_bytes_new(string, strlen(string)+1);
-        dndcontent = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
-
-        g_free(string);
-      //  GtkDragSource *source = gtk_drag_source_new ();
-      //  gtk_drag_source_set_content (source, dndcontent);
-        
-        fprintf(stderr,"image_drag_prepare.\n");
-        return dndcontent;
-    }
       
   public:
       //bool dndOn = false;
@@ -76,6 +34,9 @@ namespace xf {
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
         addGestureClickView1(view_, NULL, this);
         addGestureClickView3(view_, NULL, this);
+  
+        auto dropController = Dnd<DirectoryClass>::createDropController(this);
+        gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
       }
 
       ~GridView(void){
@@ -919,9 +880,9 @@ namespace xf {
         }
         // drag
         GtkDragSource *source = gtk_drag_source_new ();
-        g_signal_connect (source, "prepare", G_CALLBACK (image_drag_prepare),gridView_p);
+        g_signal_connect (source, "prepare", G_CALLBACK (Dnd<DirectoryClass>::image_drag_prepare),gridView_p);
         
-        g_signal_connect (source, "drag-begin", G_CALLBACK (image_drag_begin), image);
+        g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<DirectoryClass>::image_drag_begin), image);
         gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));
 
         if (doPreview && !previewLoaded){
