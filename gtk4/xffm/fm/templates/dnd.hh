@@ -18,9 +18,10 @@ static GtkEventController *createDropController(void *data){
     GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
     g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
     g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), data);
+    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
+
    /* g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
-    g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);
-    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);*/
+    g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);*/
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
 
@@ -220,6 +221,46 @@ static void *readAction(void *arg){
     {
       fprintf(stderr,"dropDrop %lf,%lf .\n", x, y);
       readDrop(drop, readAction, data);
+      auto gridview_p = (GridView<DirectoryClass> *)data;
+      
+      auto listModel = gridview_p->listModel();
+      auto n = g_list_model_get_n_items(listModel);
+      char *path = NULL;
+      bool xOk = false;
+      bool yOk = false;
+      for (guint i=0; i<n; i++){
+        auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
+        auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
+        graphene_rect_t bounds;
+        if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
+          xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
+          yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
+          if (xOk && yOk) {
+            path = Basic::getPath(info);
+            if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+              DBG("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, path);
+            }
+            break;
+          }
+        } else {
+          DBG("gtk_widget_compute_bounds failed...\n");
+        }
+      }
+      if (!path){
+        auto workdir = Child::getWorkdir();
+        DBG("workdir is \"%s\"\n", workdir);
+        if (g_file_test(workdir, G_FILE_TEST_IS_DIR)){
+          DBG("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, workdir);
+        } else if (workdir && strcmp(workdir, "Gtk:bookmarks") == 0){
+          DBG("*** Drop into bookmarks.\n");
+        }
+
+      }
+
+        
+            
+      g_free(path);
+      
       return true; //drop accepted
       //return false; //drop not accepted
     }

@@ -22,6 +22,12 @@ template <class DirectoryClass>
       double y(void){return y_;}
       void x(double value){x_ = value;}
       void y(double value){y_ = value;}
+      
+      GListModel *listModel(void){ return G_LIST_MODEL(selectionModel_);}
+      GListStore *listStore(void){ 
+        return G_LIST_STORE(g_object_get_data(G_OBJECT(selectionModel_), "store"));
+      }
+      GListStore *store(void){return listStore();}
 
   private:
       
@@ -64,11 +70,7 @@ template <class DirectoryClass>
       GtkWidget *view(void){ return view_;}
       void *gridViewClick_f(void){ return gridViewClick_f_;}
       char *path(void){ return path_;}
-      GListModel *listModel(void){ return G_LIST_MODEL(selectionModel_);}
-      GListStore *listStore(void){ 
-        return G_LIST_STORE(g_object_get_data(G_OBJECT(selectionModel_), "store"));
-      }
-      GListStore *store(void){return listStore();}
+
       
 
 
@@ -733,6 +735,8 @@ template <class DirectoryClass>
         auto hlabel = GTK_LABEL(g_object_get_data(object, "hlabel"));
 
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+        g_object_set_data(G_OBJECT(info), "imageBox", imageBox);
+        //g_object_set_data(G_OBJECT(info), "box", box);
         g_object_set_data(G_OBJECT(imageBox), "info", info);
         
         auto menuBox = GTK_BOX(g_object_get_data(object, "menuBox"));
