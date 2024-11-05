@@ -13,8 +13,10 @@ public:
     GtkWidget **getButtons(void){ return buttons;}
 
     infoResponse(void){
-      buttons = (GtkWidget **)calloc(2,sizeof(GtkWidget *));
-      //buttons[0] = gtk_button_new_from_icon_name("apply");
+      buttons = (GtkWidget **)calloc(3,sizeof(GtkWidget *));
+      /*buttons[0] = gtk_button_new_from_icon_name(_("Copy"));
+      buttons[1] = gtk_button_new_from_icon_name(_("Move"));
+      buttons[2] = gtk_button_new_from_icon_name(_("Link"));*/
     }
 
     ~infoResponse(void){

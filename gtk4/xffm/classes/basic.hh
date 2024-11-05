@@ -465,7 +465,9 @@ public:
       }
       if (markup){
         auto label = gtk_label_new("");
-        gtk_label_set_markup(GTK_LABEL(label), markup);
+        auto g = g_strdup_printf("  %s", markup);
+        gtk_label_set_markup(GTK_LABEL(label), g);
+        g_free(g);
         gtk_box_append (box, GTK_WIDGET(label));
       }
       gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));

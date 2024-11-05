@@ -20,8 +20,8 @@ static GtkEventController *createDropController(void *data){
     g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), data);
     g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
 
-   /* g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
-    g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);*/
+    g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
+    /*g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);*/
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
 
@@ -35,6 +35,10 @@ static GtkEventController *createDropController(void *data){
       paintable = gtk_widget_paintable_new (widget);
       gtk_drag_source_set_icon (source, paintable, 0, 0);
       g_object_unref (paintable);
+      GdkDragAction actions =
+        (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+      gtk_drag_source_set_actions(source, actions);
+      
       fprintf(stderr,"image_drag_begin.\n");
     }
     // signal prepare Emitted when a drag is about to be initiated.
@@ -121,7 +125,7 @@ dnd_finished (
 
 ///////////////////////////////////  drop /////////////////////////////////////
 
-
+// In main context:
 static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void *arg){
   auto drop = GDK_DROP(g_object_get_data (source_object, "drop"));
   GOutputStream *stream = G_OUTPUT_STREAM (source_object);
@@ -134,13 +138,6 @@ static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void
 
   gdk_drop_finish (drop, action);
   g_object_unref (drop);
-  // replace controller: does not eliminate bug https://gitlab.gnome.org/GNOME/gtk/-/issues/3755
-  //gtk_widget_remove_controller (view, dropController);
-  //dropController = createDropController();
-  //gtk_widget_add_controller (GTK_WIDGET (view), GTK_EVENT_CONTROLLER (dropController));
-  
- // const void *p = g_bytes_get_data(bytes, &size);
- // fprintf(stderr, "dropReadDoneCallback(): bytes (%d):\n%s\n", size, (const char *)p);
 
   void **argData = (void **)arg;
   void *(*f)(void *) = (void* (*)(void*))argData[0];
@@ -154,7 +151,7 @@ static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void
   return;
 }
 
-
+// in thread:
 static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *arg){
   fprintf(stderr,"dropReadCallback: do your thing.\n" );
   const char *out_mime_type;
@@ -191,26 +188,35 @@ static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *ar
   return;
 }
 
-static void *readDrop(GdkDrop *drop, void *(*f)(void *), void *data){
-  auto arg = (void **)calloc(3, sizeof(void*));
+static void *readDrop(GdkDrop *drop, void *(*f)(void *), void *data, char *target){
+  auto arg = (void **)calloc(4, sizeof(void*));
   arg[0] = (void *)f;
   arg[1] = data;
+  arg[3] = target;
   const char *mimeTypes[]={"text/uri-list", NULL};
   gdk_drop_read_async (drop, mimeTypes, G_PRIORITY_DEFAULT, // int io_priority,
   NULL, dropReadCallback, (void *)arg);
   return NULL;
 }
 
+
+
 static void *readAction(void *arg){
   void **argData = (void **)arg;
   void *data = argData[1];
   GBytes *bytes = (GBytes *)argData[2];
+  char *target = (char *) argData[3];
 
   gsize size;
   const void *p = g_bytes_get_data(bytes, &size);
-  fprintf(stderr, "readAction(): bytes (%d):\n%s\n", size, (const char *)p);
+  fprintf(stderr, "readAction(): bytes (%d):\ntarget: %s\n%s\n", size, target, (const char *)p);
+//  Dialogs::info("wahtever");
+  
+  Dialogs::dnd((const char *)p);
+  
   g_free(arg);
   return NULL;
+
 }
 
  // signals ///////
@@ -219,8 +225,15 @@ static void *readAction(void *arg){
     static gboolean dropDrop ( GtkDropTarget* self, GdkDrop* drop,  
         gdouble x, gdouble y, gpointer data)
     {
-      fprintf(stderr,"dropDrop %lf,%lf .\n", x, y);
-      readDrop(drop, readAction, data);
+      GdkDragAction action = gdk_drop_get_actions(drop);
+      if (action == (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE| GDK_ACTION_LINK)){
+        action = GDK_ACTION_MOVE;
+      }
+      DBG("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
+
+      fprintf(stderr,"*** dropDrop %lf,%lf .\n", x, y);
+ 
+      
       auto gridview_p = (GridView<DirectoryClass> *)data;
       
       auto listModel = gridview_p->listModel();
@@ -259,6 +272,11 @@ static void *readAction(void *arg){
 
         
             
+
+      // XXX target is synchronous.
+      //     now we have to set it up for asyncronous read. Or rather, get target and
+      //     send to asynchronous...
+      readDrop(drop, readAction, data, g_strdup(path)); // this is asynchronous...
       g_free(path);
       
       return true; //drop accepted
@@ -275,6 +293,8 @@ dropEnter (
 )
 {
   fprintf(stderr,"dropEnter %lf,%lf.\n", x, y);
+
+  return GDK_ACTION_LINK;
   return GDK_ACTION_COPY;
 }
 static void
@@ -287,20 +307,56 @@ dropLeave (
   fprintf(stderr,"dropLeave.\n");
 }
 static GdkDragAction
-dropMotion (
-  GtkDropTarget* self,
-  GdkDrop* drop,
-  gdouble x,
-  gdouble y,
-  gpointer user_data
-)
+dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)
 {
-  //fprintf(stderr,"dropMotion %lf,%lf.\n", x, y);
+  /* // does not work, no modifierType
+  auto eventController = GTK_EVENT_CONTROLLER(self);
+  auto event = gtk_event_controller_get_current_event(eventController);
+  auto modifierType = gdk_event_get_modifier_state (event);
+  //DBG("dropMotion %lf,%lf, modifierType =  %ld\n", x, y, modifierType);
+ 
+  GdkDragAction actions =
+      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+ 
+  if (modifierType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK) | (GDK_CONTROL_MASK& GDK_MODIFIER_MASK))) {
+    gdk_drop_status (drop, actions, GDK_ACTION_LINK);
+    return GDK_ACTION_LINK;
+  }
+  if (modifierType & (GDK_SHIFT_MASK & GDK_MODIFIER_MASK)) {
+    DBG("dropMotion modifierType = GDK_SHIFT_MASK \n");
+    gdk_drop_status (drop, actions, GDK_ACTION_MOVE);
+    return GDK_ACTION_MOVE;
+  }
+  if (modifierType & (GDK_CONTROL_MASK & GDK_MODIFIER_MASK)) {
+    gdk_drop_status (drop, actions, GDK_ACTION_COPY);
+    return GDK_ACTION_COPY;
+  }
+  gdk_drop_status (drop, actions, GDK_ACTION_MOVE);*/
   return GDK_ACTION_COPY;
 }
 static gboolean dropAccept ( GtkDropTarget* self, GdkDrop* drop, gpointer user_data)
 {
   fprintf(stderr,"dropAccept.\n");
+/*  auto eventController = GTK_EVENT_CONTROLLER(self);
+  auto event = gtk_event_controller_get_current_event(eventController);
+  auto modifierType = gdk_event_get_modifier_state (event);
+  GdkDragAction actions =
+      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+
+  if (modifierType & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) {
+    gdk_drop_status (drop, actions, GDK_ACTION_LINK);
+  }
+  else if (modifierType & GDK_SHIFT_MASK) {
+    gdk_drop_status (drop, actions, GDK_ACTION_MOVE);
+  }
+  else if (modifierType & GDK_CONTROL_MASK) {
+    gdk_drop_status (drop, actions, GDK_ACTION_COPY);
+  }
+  else if (modifierType == GDK_NO_MODIFIER_MASK) {
+    gdk_drop_status (drop, actions, GDK_ACTION_MOVE);
+  }
+  gdk_drop_status (drop, actions, GDK_ACTION_MOVE);*/
+  
   //return false; //drop not accepted on enter
   return true; //drop accepted on enter
 }

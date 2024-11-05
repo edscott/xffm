@@ -1,11 +1,11 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
+static GdkDragAction dndStatus = GDK_ACTION_COPY;
 namespace xf {
 template <class Type> class Dnd;
 template <class DirectoryClass>
   class GridView  {
   private:
-      GtkDragSource *dragSource_;
       GtkWidget *child_;
       GtkMultiSelection *selectionModel_ = NULL;
       GtkPopover *menu_=NULL;
@@ -40,7 +40,8 @@ template <class DirectoryClass>
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
         addGestureClickView1(view_, NULL, this);
         addGestureClickView3(view_, NULL, this);
-  
+        //addTopMotionController();
+        
         auto dropController = Dnd<DirectoryClass>::createDropController(this);
         gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
       }
@@ -882,12 +883,14 @@ template <class DirectoryClass>
           g_free(markup);
           DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
         }
-        // drag
+        // gtk drag
         GtkDragSource *source = gtk_drag_source_new ();
         g_signal_connect (source, "prepare", G_CALLBACK (Dnd<DirectoryClass>::image_drag_prepare),gridView_p);
         
         g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<DirectoryClass>::image_drag_begin), image);
         gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));
+        
+
 
         if (doPreview && !previewLoaded){
 
@@ -915,6 +918,25 @@ public:
 
 
     private:
+    static
+    gboolean
+    viewMotion ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+        //DBG("viewMotion %lf, %lf\n", x, y);
+        auto gridview_p = (GridView<DirectoryClass> *)data;
+        return FALSE;
+    }
+      void addTopMotionController(void){
+        auto controller = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(view_), controller);
+        g_signal_connect (G_OBJECT (controller), "motion", 
+            G_CALLBACK (viewMotion), this);
+    }
+
       static
       void addMotionController(GtkWidget  *widget){
         auto controller = gtk_event_controller_motion_new();

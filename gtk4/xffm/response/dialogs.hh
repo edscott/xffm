@@ -21,6 +21,7 @@
 # include "response/classes/mvresponse.hh"   // class
 # include "response/classes/lnresponse.hh"   // class
 # include "response/classes/info.hh"   // class
+# include "response/classes/dndresponse.hh"   // class
 
 namespace xf
 {
@@ -34,6 +35,15 @@ namespace xf
       DBG("create dialogObject=%p\n", dialogObject); 
       dialogObject->run();
     }
+    static void dnd(const char *text){
+      auto dialogObject = new DialogButtons<dndResponse>;
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->setLabelText(text);
+
+      DBG("create dialogObject=%p\n", dialogObject); 
+      dialogObject->run();
+    }
+
 
     static void rm(GFileInfo *info){
       auto dialogObject = new DialogButtons<rmResponse>;
