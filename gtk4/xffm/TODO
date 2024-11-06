@@ -9,7 +9,6 @@ Pending issues:
 * gridview: ecryptfs dialog and root elements
 * gridview: mount/unmount and fstab root elements
 * xffm-find4
-* OpenWith with multiple files selected (this when selection menu enabled)
 * pathbar menu: verify
 * For symlinks, add symlink emblem to icon.
 * For executables, add exe emblem.

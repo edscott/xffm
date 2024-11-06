@@ -212,7 +212,7 @@ static void *readAction(void *arg){
   fprintf(stderr, "readAction(): bytes (%d):\ntarget: %s\n%s\n", size, target, (const char *)p);
 //  Dialogs::info("wahtever");
   
-  Dialogs::dnd((const char *)p);
+  Dialogs::dnd((const char *)p, target);
   
   g_free(arg);
   return NULL;
@@ -220,22 +220,8 @@ static void *readAction(void *arg){
 }
 
  // signals ///////
- 
-
-    static gboolean dropDrop ( GtkDropTarget* self, GdkDrop* drop,  
-        gdouble x, gdouble y, gpointer data)
-    {
-      GdkDragAction action = gdk_drop_get_actions(drop);
-      if (action == (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE| GDK_ACTION_LINK)){
-        action = GDK_ACTION_MOVE;
-      }
-      DBG("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
-
-      fprintf(stderr,"*** dropDrop %lf,%lf .\n", x, y);
- 
-      
+  static char *getDropTarget(double x, double y, void *data){
       auto gridview_p = (GridView<DirectoryClass> *)data;
-      
       auto listModel = gridview_p->listModel();
       auto n = g_list_model_get_n_items(listModel);
       char *path = NULL;
@@ -252,11 +238,14 @@ static void *readAction(void *arg){
             path = Basic::getPath(info);
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){
               DBG("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, path);
+              return path;
+            } else {
+              return NULL;
             }
             break;
           }
         } else {
-          DBG("gtk_widget_compute_bounds failed...\n");
+          DBG("should not happen: gtk_widget_compute_bounds failed...\n");
         }
       }
       if (!path){
@@ -264,13 +253,30 @@ static void *readAction(void *arg){
         DBG("workdir is \"%s\"\n", workdir);
         if (g_file_test(workdir, G_FILE_TEST_IS_DIR)){
           DBG("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, workdir);
+          return g_strdup(workdir);
         } else if (workdir && strcmp(workdir, "Gtk:bookmarks") == 0){
-          DBG("*** Drop into bookmarks.\n");
+          DBG("*** Drop into bookmarks: add a bookmark with this drop (FIXME).\n");
         }
-
       }
+      return NULL;
+  }
 
-        
+    static gboolean dropDrop ( GtkDropTarget* self, GdkDrop* drop,  
+        gdouble x, gdouble y, gpointer data)
+    {
+      GdkDragAction action = gdk_drop_get_actions(drop);
+      if (action == (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE| GDK_ACTION_LINK)){
+        action = GDK_ACTION_MOVE;
+      }
+      DBG("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
+
+      fprintf(stderr,"*** dropDrop %lf,%lf .\n", x, y);
+      auto path = getDropTarget(x, y, data);
+      
+      if (!path) {
+        gdk_drop_finish(drop, GDK_ACTION_COPY);
+        return false; //drop not accepted
+      }
             
 
       // XXX target is synchronous.
@@ -280,7 +286,6 @@ static void *readAction(void *arg){
       g_free(path);
       
       return true; //drop accepted
-      //return false; //drop not accepted
     }
   
 static   GdkDragAction
@@ -309,6 +314,7 @@ dropLeave (
 static GdkDragAction
 dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)
 {
+  //DBG("dropMotion %lf,%lf\n", x, y);
   /* // does not work, no modifierType
   auto eventController = GTK_EVENT_CONTROLLER(self);
   auto event = gtk_event_controller_get_current_event(eventController);
@@ -332,30 +338,12 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
     return GDK_ACTION_COPY;
   }
   gdk_drop_status (drop, actions, GDK_ACTION_MOVE);*/
+  //return GDK_ACTION_MOVE;
   return GDK_ACTION_COPY;
 }
 static gboolean dropAccept ( GtkDropTarget* self, GdkDrop* drop, gpointer user_data)
 {
   fprintf(stderr,"dropAccept.\n");
-/*  auto eventController = GTK_EVENT_CONTROLLER(self);
-  auto event = gtk_event_controller_get_current_event(eventController);
-  auto modifierType = gdk_event_get_modifier_state (event);
-  GdkDragAction actions =
-      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
-
-  if (modifierType & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) {
-    gdk_drop_status (drop, actions, GDK_ACTION_LINK);
-  }
-  else if (modifierType & GDK_SHIFT_MASK) {
-    gdk_drop_status (drop, actions, GDK_ACTION_MOVE);
-  }
-  else if (modifierType & GDK_CONTROL_MASK) {
-    gdk_drop_status (drop, actions, GDK_ACTION_COPY);
-  }
-  else if (modifierType == GDK_NO_MODIFIER_MASK) {
-    gdk_drop_status (drop, actions, GDK_ACTION_MOVE);
-  }
-  gdk_drop_status (drop, actions, GDK_ACTION_MOVE);*/
   
   //return false; //drop not accepted on enter
   return true; //drop accepted on enter

@@ -691,10 +691,10 @@ template <class DirectoryClass>
 
         TRACE("factorySetup add signal handlers\n");
         
-        addMotionController(labelBox);
-        addMotionController(hlabelBox);
+        Basic::addMotionController(labelBox);
+        Basic::addMotionController(hlabelBox);
 
-        addMotionController(imageBox);
+        Basic::addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
         addGestureClickUp(imageBox, object, gridView_p);
         addGestureClickUp(labelBox, object, gridView_p);
@@ -937,45 +937,6 @@ public:
             G_CALLBACK (viewMotion), this);
     }
 
-      static
-      void addMotionController(GtkWidget  *widget){
-        auto controller = gtk_event_controller_motion_new();
-        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
-        gtk_widget_add_controller(GTK_WIDGET(widget), controller);
-        g_signal_connect (G_OBJECT (controller), "enter", 
-            G_CALLBACK (negative), widget);
-        g_signal_connect (G_OBJECT (controller), "leave", 
-            G_CALLBACK (positive), widget);
-    }
-     // FIXME: if gridview Settings color for background is
-      //        too close to #acaaa5, use a different css class color
-      //
-      //        Also: add highlight color for text box and change 
-      //              text from label to entry, to allow inline
-      //              renaming on longpress.
-
-    static gboolean
-    negative ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        //Basic::flushGTK(); // this will cause race condition crash...
-        return FALSE;
-    }
-    static gboolean
-    positive ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        //Basic::flushGTK();
-        return FALSE;
-    }
 
     
     private:

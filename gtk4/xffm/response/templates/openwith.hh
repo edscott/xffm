@@ -183,7 +183,7 @@ public:
           Basic::boxPack0(GTK_BOX (popoverBox), GTK_WIDGET(box), FALSE, FALSE, 0);
           g_object_set_data(G_OBJECT(label), "input", input_);
           addGestureClick(label, (void *)labelClick); 
-          addMotionController(GTK_WIDGET(box));
+          Basic::addMotionController(GTK_WIDGET(box));
         }
         g_free(mimetype);
 
@@ -452,16 +452,6 @@ private:
       //DBG("label text =\"%s\"\n", text);
       return TRUE;
     }
-      static
-      void addMotionController(GtkWidget  *widget){
-        auto controller = gtk_event_controller_motion_new();
-        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
-        gtk_widget_add_controller(GTK_WIDGET(widget), controller);
-        g_signal_connect (G_OBJECT (controller), "enter", 
-            G_CALLBACK (negative), NULL);
-        g_signal_connect (G_OBJECT (controller), "leave", 
-            G_CALLBACK (positive), NULL);
-    }
     
     static void addGestureClick(GtkWidget *label, void *callback){
       auto gesture = gtk_gesture_click_new();
@@ -473,29 +463,6 @@ private:
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }    
-  
-    static gboolean
-    negative ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        Basic::flushGTK();
-        return FALSE;
-    }
-    static gboolean
-    positive ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        Basic::flushGTK();
-        return FALSE;
-    }
 
 
 };

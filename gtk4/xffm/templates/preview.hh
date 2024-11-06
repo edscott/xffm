@@ -209,6 +209,7 @@ class Preview {
 
       paintable = processTextPixbuf(text, path, pixels);
       g_free(text);
+      saveThumbnail(path, paintable);
       return paintable;        
     }
        
@@ -223,7 +224,9 @@ class Preview {
              return paintable;
           }
       } 
-      return ghostscript(path, pixels);
+      paintable = ghostscript(path, pixels);
+      saveThumbnail(path, paintable);
+      return paintable;
     }
   private:
 
