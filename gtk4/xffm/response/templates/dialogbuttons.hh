@@ -19,6 +19,7 @@ namespace xf
 
       for (int i=0; buttons && buttons[i]; i++){
         g_object_set_data(G_OBJECT(buttons[i]), "dialog", dialog);
+        g_object_set_data(G_OBJECT(dialog), "buttons", buttons);
         gtk_box_append(box, GTK_WIDGET(buttons[i]));
         gtk_widget_set_halign (GTK_WIDGET(buttons[i]),GTK_ALIGN_CENTER);
         g_signal_connect(G_OBJECT(buttons[i]), "clicked", G_CALLBACK(setResponse), GINT_TO_POINTER(i+1));

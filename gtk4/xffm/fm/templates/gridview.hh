@@ -53,9 +53,12 @@ template <class DirectoryClass>
           //g_object_unref(G_OBJECT(menu_));
         }
         if (myMenu_) delete myMenu_; // main menu
+        // FIXME: sporadic crash on dnd copy:
+        DBG("~GridView g_list_free(selectionList_...\n");
         g_list_free(selectionList_);
 
         g_free(path_);
+        DBG("~GridView complete.\n");
       }      
       void child(GtkWidget *child){
         child_ = child;

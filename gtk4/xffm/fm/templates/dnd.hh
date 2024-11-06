@@ -75,7 +75,7 @@ static GtkEventController *createDropController(void *data){
         
         fprintf(stderr,"image_drag_prepare.\n");
         return dndcontent;
-    }
+}
 private:
 ///////////////////////////////////  drag /////////////////////////////////////
 
@@ -212,7 +212,7 @@ static void *readAction(void *arg){
   fprintf(stderr, "readAction(): bytes (%d):\ntarget: %s\n%s\n", size, target, (const char *)p);
 //  Dialogs::info("wahtever");
   
-  Dialogs::dnd((const char *)p, target);
+  dnd((const char *)p, target);
   
   g_free(arg);
   return NULL;
@@ -348,6 +348,89 @@ static gboolean dropAccept ( GtkDropTarget* self, GdkDrop* drop, gpointer user_d
   //return false; //drop not accepted on enter
   return true; //drop accepted on enter
 }
+
+private:
+
+    static void dnd(const char *uriList, char *target){
+      char *source = NULL;
+      auto files = getUriFiles(uriList, &source);
+      auto block = getFilesBlock(files);
+      auto markup = g_strconcat("<span color=\"red\">",_("Target"), ": </span>", target, "\n",
+         "<span color=\"green\">", _("Source"),  ": </span>", source, "\n",
+         "<span color=\"black\">", block, "\n</span>", NULL);
+      if (strcmp(source, target)) {
+        auto dialogObject = new DialogButtons<dndResponse>;
+        dialogObject->setParent(GTK_WINDOW(MainWidget));
+
+        dialogObject->setLabelText(markup);
+        DBG("create dialogObject=%p\n", dialogObject); 
+        dialogObject->subClass()->setUriList(uriList);
+        dialogObject->subClass()->setTarget(target);
+        auto count = dialogObject->subClass()->uriCount();
+       
+        if (count > 1){ // a bit hacky...
+          auto buttons = (GtkWidget **)g_object_get_data(G_OBJECT(dialogObject->dialog()), _("buttons"));
+          if (buttons && buttons[2]) {
+            gtk_widget_set_visible(GTK_WIDGET(buttons[2]), false);
+          } else {
+            DBG("Error:: cannot find button \"%s\" to hide.\n", _("Link"));
+          }  
+        }
+    
+       
+
+        g_free(target);
+
+        dialogObject->run();
+        
+      } else {
+        DBG("Source and target are the same: %s\n", source);
+      }
+      g_free(markup);
+      g_free(block);
+      g_strfreev(files);
+
+
+    }
+
+    static char **getUriFiles(const char *uriList, char **path_p){
+      auto files = g_strsplit(uriList, "\n", -1);
+      for (auto p=files ; p && *p; p++){
+        if (strncmp(*p, "file://", strlen("file://")) == 0){
+          for (int i=0; i<strlen("file://"); i++) (*p)[i] = ' ';
+          g_strstrip(*p);
+          if (*path_p == NULL) *path_p = g_path_get_dirname(*p);
+        }
+        if (strlen(*p) == 0) *p = NULL;
+      }
+      return files;
+    }
+
+    
+    static char *getFilesBlock(char **files){
+      auto block = g_strdup("");
+      int count = 0;
+      int total = 0;
+      for (auto p=files ; p && *p; p++)total++;
+      for (auto p=files ; p && *p; p++, count++){
+        if (count >= 5) {
+          auto h = g_strdup_printf("%d %s", total-count, _("files"));
+          auto hh = g_strdup_printf(_("+ %s more"), h);
+          Basic::concat(&block, hh);
+          g_free(h);
+          g_free(hh);
+          break;
+        }
+        auto g = g_path_get_basename(*p);
+        Basic::concat(&block, _("file"));
+        Basic::concat(&block, _(": "));
+        Basic::concat(&block, g);
+        Basic::concat(&block, "\n");
+        g_free(g);
+      }
+      return block;
+    }
+
 
 };
 }

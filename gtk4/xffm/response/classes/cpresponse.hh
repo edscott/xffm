@@ -33,14 +33,14 @@ public:
 class cpDropResponse {
    const char *title_;
    const char *iconName_;
-   bool copy_ = true;
+   int copy_ = 1;
 
   public:
     const char *title(void){ return _("Copy files");}
     const char *iconName(void){ return "copy";}
     const char *label(void){ return _("");}    
-    bool copy(void){ return copy_;}
-    void copy(bool value){ copy_ = value;}
+    int copy(void){ return copy_;}
+    void copy(int value){ copy_ = value;}
 
     static void *asyncYes(void *data){
        TRACE("asyncYes::  complete\n");
@@ -65,8 +65,9 @@ class cpDropResponse {
       auto dialog = dialogObject->dialog();
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       dialogObject->setCloseBox("delete", _("Cancel"));
-      if (strcmp(files[0], "copy")==0) dialogObject->subClass()->copy(true); 
-      else dialogObject->subClass()->copy(false);
+      if (strcmp(files[0], "copy")==0) dialogObject->subClass()->copy(1); 
+      else if (strcmp(files[0], "move")==0) dialogObject->subClass()->copy(0);
+      else if (strcmp(files[0], "link")==0) dialogObject->subClass()->copy(-1);
       
       dialogObject->run(); // running in a thread...
       auto list = ClipBoard::removeUriFormat(files);
@@ -138,8 +139,8 @@ private:
 
         break;
       }
-      sleep(1); // slow motion
-      //usleep(150);
+      //sleep(1); // slow motion
+      usleep(150);
     }
 
     for (auto l=list; l && l->data; l=l->next){ g_free(l->data);}
@@ -176,7 +177,6 @@ private:
 private:
   static void *cpmv_f(void *data){
     auto arg =(char **)data;
-    TRACE("%s: %s -> %s\n", modeCopy?"copy":"move",src, tgt); 
     pid_t pid = Run<bool>::thread_run(Child::getOutput(), (const char **)arg, false);
     int wstatus;
     waitpid(pid, &wstatus, 0);
@@ -187,32 +187,24 @@ private:
   
 public:
     static void
-    cpmv(const gchar *src, const gchar *tgt, bool modeCopy){
+    cpmv(const gchar *src, const gchar *tgt, int modeCopy){
       auto arg = (char **)calloc(10, sizeof(char *));
       int k = 0;
-      if (modeCopy){
+      if (modeCopy > 0){
         arg[k++] = g_strdup("cp");
         arg[k++] = g_strdup("-R");
+      } else if (modeCopy < 0) {
+        arg[k++] = g_strdup("ln");
+        arg[k++] = g_strdup("-s");
       } else {
         arg[k++] = g_strdup("mv");
-      }
+      }      
       arg[k++] = g_strdup("-v");
       arg[k++] = g_strdup("-f");
       arg[k++] = g_strdup(src);
       arg[k++] = g_strdup(tgt);
       backup(src, tgt);
       THREADPOOL->add(cpmv_f, (void *)arg);
-/*
-      //const gchar *argCp[] = { "cp", "-R", "-f", src, tgt, NULL };
-      //const gchar *argMv[] = { "mv", "-f", src, tgt, NULL };
-      const gchar *argCp[] = { "cp", "-v", "-f", "-R",  src, tgt, NULL };
-      const gchar *argMv[] = { "mv", "-v", "-f", src, tgt, NULL };
-
-      void *argC[] = {(void *)src, (void *)tgt, (void *)argCp, NULL};
-      void *argM[] = {(void *)src, (void *)tgt, (void *)argMv, NULL};
-      if (modeCopy) Thread::threadPoolAdd(cpmv_f, (void *)argC);
-      else Thread::threadPoolAdd(cpmv_f, (void *)argM);
-*/
      }  
 
     static void

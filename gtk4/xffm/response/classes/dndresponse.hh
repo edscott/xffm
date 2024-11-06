@@ -6,6 +6,8 @@ class dndResponse {
    const char *title_;
    const char *iconName_;
    GtkWidget **buttons=NULL;
+   char *target_ = NULL;
+   char *uriList_ = NULL;
 public:
     const char *title(void){ return _("Drop Target");}
     const char *iconName(void){ return "emblem-important";}
@@ -20,27 +22,60 @@ public:
     }
 
     ~dndResponse(void){
+      g_free(target_);
+      g_free(uriList_);
       g_free(buttons);
     }
     
+    int uriCount(void){
+      int count=0;
+      auto files = g_strsplit(uriList_, "\n", -1);
+      for (auto p=files; p && *p; p++){
+        if (strlen(*p) > 0) count++;
+      }
+      g_strfreev(files);
+      return count;
+    }
+    void setUriList(const char *uriList){
+      uriList_ = g_strdup(uriList);
+    }
+    void setTarget(const char *target){
+      target_ = g_strdup(target);
+    }
+    const char *target(void) { return target_;}
+    const char *uriList(void) { return uriList_;}
 
     static void *asyncYes(void *data){
       auto dialogObject = (DialogButtons<dndResponse> *)data;
+      auto target = dialogObject->subClass()->target();
+      auto uriList = dialogObject->subClass()->uriList();
+      auto count = dialogObject->subClass()->uriCount();
+      
       //dialogObject->timeout(-1);
       auto response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialogObject->dialog()), "response"));
+      char *clipContent = g_strdup("");
       switch (response) {
         case 1:
-          DBG("hello world, response is %d: copy\n", response);
+          DBG("hello world, response is %d: copy to %s\n%s\n", response, target,uriList);
+          Basic::concat(&clipContent, "copy\n");
           break;
         case 2:
-          DBG("hello world, response is %d: move\n", response);
+          DBG("hello world, response is %d: move to %s\n%s\n", response, target, uriList);
+          Basic::concat(&clipContent, "move\n");
           break;
         case 3:
-          DBG("hello world, response is %d: link\n", response);
+          DBG("hello world, response is %d: link moveto\n", response, target, uriList);
+          Basic::concat(&clipContent, "link\n");
           break;
         default:
           DBG("*** Error:: dndResponse::asyncYes(): response %d is not appropriate.\n", response);
       }
+      Basic::concat(&clipContent, uriList);
+      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      c->resetClipBoardCache(clipContent);
+      g_free(clipContent);
+      cpDropResponse::openDialog(target);
+
       gtk_window_present(GTK_WINDOW(MainWidget));
 
       return NULL;
