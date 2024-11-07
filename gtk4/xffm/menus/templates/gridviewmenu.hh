@@ -12,6 +12,7 @@ namespace xf {
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("auto"), //
+        _("Toggle Text Mode"),
         _("Open in new tab"), //
         _("Open with"), //
         _("Create a compressed archive with the selected objects"),
@@ -30,6 +31,18 @@ namespace xf {
         _("Delete"),
         _("Select All"), 
         _("Match regular expression"), 
+
+        _("Show"),
+        _("Hidden files"),
+        _("Backup files"),
+
+        _("Sort mode"),
+
+        _("Descending"),
+        _("Date"),
+        _("Size"),
+        _("File type"),
+        
         NULL
       };
       return keys_;
@@ -37,6 +50,7 @@ namespace xf {
 
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
+        {_("Toggle Text Mode"),(void *) "emblem-fifo"}, 
         {_("Open in new tab"),(void *) DUAL_VIEW}, 
         {_("Open with"),(void *) "emblem-run"}, 
         {_("auto"),(void *) "emblem-run"}, 
@@ -54,6 +68,7 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
+        {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::popCall}, 
         {_("Open in new tab"),(void *) MenuCallbacks<Type>::openNewTab}, 
         {_("Open with"),(void *) openWith}, 
         {_("auto"),(void *) run}, 
@@ -68,17 +83,43 @@ namespace xf {
         {_("Remove bookmark"),(void *) removeB}, 
         {_("Select All"),(void *) selectAll}, 
         {_("Properties"),(void *) properties}, 
+
+        {_("Hidden files"),(void *) toggleItem},
+        {_("Backup files"),(void *) toggleItem},
+        {_("Descending"),(void *) toggleItem},
+        {_("Date"),(void *) toggleItem},
+        {_("Size"),(void *) toggleItem},
+        {_("File type"),(void *) toggleItem},
+       
         {NULL, NULL}
       };
       return menuCallbacks_;
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
+        {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::toggleVpane}, 
         {_("Open in new tab"),(void *) NULL}, 
        // {_("Copy"),(void *) cpResponse::action}, 
+        {_("Hidden files"),(void *) _("Hidden files")},
+        {_("Backup files"),(void *) _("Backup files")},
+        {_("Descending"),(void *) _("Descending")},
+        {_("Date"),(void *) _("Date")},
+        {_("Size"),(void *) _("Size")},
+        {_("File type"),(void *) _("File type")},
         {NULL, NULL}
       };
       return menuData_;      
+    }
+    const char **checkboxes(void){
+      static const char *boxes_[] = { 
+        _("Hidden files"),
+        _("Backup files"),
+        _("Descending"),
+        _("Date"),
+        _("Size"),
+        _("File type"),
+        NULL};
+      return boxes_;      
     }
 
      static const char *getDefaultApp(const char *path){       
@@ -100,6 +141,26 @@ namespace xf {
    }
 
     private:
+    static void
+    toggleItem(GtkCheckButton *check, gpointer data)
+    {
+      auto item = (const gchar *)data;
+      DBG("toggleItem: %s\n", item);
+      int bit = 0;
+      if (strcmp(item,_("Hidden files")) == 0) bit = 0x01;
+      if (strcmp(item,_("Backup files")) == 0) bit = 0x02;
+      if (strcmp(item,_("Descending")) == 0) bit = 0x03;
+      if (strcmp(item,_("Date")) == 0) bit = 0x08;
+      if (strcmp(item,_("Size")) == 0) bit = 0x10;
+      if (strcmp(item,_("File type")) == 0) bit = 0x20;
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
+      auto flags = gridview_p->flags();
+      if (gtk_check_button_get_active(check)) gridview_p->flagOn(bit);
+      else gridview_p->flagOff(bit);
+      DBG("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridview_p->flags());
+
+      //toggleGroupItem(menuItem, "LocalView", item);
+    }
 
     static char *getPath(GtkPopover *menu){
       auto data =   g_object_get_data(G_OBJECT(menu), "info");

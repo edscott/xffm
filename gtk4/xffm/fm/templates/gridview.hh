@@ -8,7 +8,7 @@ template <class DirectoryClass>
   private:
       GtkWidget *child_;
       GtkMultiSelection *selectionModel_ = NULL;
-      GtkPopover *menu_=NULL;
+      //GtkPopover *menu_=NULL;
       GtkWidget *view_;
       void *gridViewClick_f_;
       char *path_;
@@ -17,6 +17,7 @@ template <class DirectoryClass>
       GList *selectionList_ = NULL;
       double x_;
       double y_;
+      int flags_=0;
   public:
       double x(void){return x_;}
       double y(void){return y_;}
@@ -31,6 +32,17 @@ template <class DirectoryClass>
       }
       GListStore *store(void){return listStore();}
 
+      void flagOn (int flag){ 
+        flags_ |= flag;
+        Settings::setInteger("flags", path_, flags_);
+      }
+      void flagOff (int flag){  
+        flags_ &= (0xff ^ flag);
+        Settings::setInteger("flags", path_, flags_);
+      }
+      int flags(void){return flags_;}
+
+
   private:
       
   public:
@@ -39,6 +51,10 @@ template <class DirectoryClass>
         gridViewClick_f_ = gridViewClick_f;
         path_ = g_strdup(path);
         view_ = getGridView();
+        flags_ = Settings::getInteger("flags", path_);
+        if (flags_ < 0) flags_ = 0;
+        DBG("gridview flags = 0x%x\n", flags_);
+        
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
         addGestureClickView1(view_, NULL, this);
         addGestureClickView3(view_, NULL, this);
@@ -50,10 +66,12 @@ template <class DirectoryClass>
 
       ~GridView(void){
       TRACE("GridView<DirectoryClass> destructor\n");
-        if (menu_){
-          gtk_widget_unparent(GTK_WIDGET(menu_));
+        //if (menu_){
+          // menu_ goes down with gridview. No need to
+          //       unparent or
+          //gtk_widget_unparent(GTK_WIDGET(menu_));
           //g_object_unref(G_OBJECT(menu_));
-        }
+        //}
         if (myMenu_) delete myMenu_; // main menu
         // FIXME: sporadic crash on dnd copy:
         DBG("~GridView g_list_free(selectionList_...\n");
@@ -69,10 +87,10 @@ template <class DirectoryClass>
       }
 
       GtkWidget *child(void){return child_;}
-      void setMenu(GtkPopover *menu){ menu_ = menu;}
+      //void setMenu(GtkPopover *menu){ menu_ = menu;}
       GtkMultiSelection *multiSelectionModel(void){ return selectionModel_;}
       GtkSelectionModel *selectionModel(void){ return GTK_SELECTION_MODEL(selectionModel_);}
-      GtkPopover *menu(void){ return menu_;}
+      //GtkPopover *menu(void){ return menu_;}
       GtkWidget *view(void){ return view_;}
       void *gridViewClick_f(void){ return gridViewClick_f_;}
       char *path(void){ return path_;}
@@ -226,7 +244,7 @@ template <class DirectoryClass>
       auto path = gridView_p->path();
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
       auto popover = gridView_p->myMenu_->mkMenu(markup);
-      gridView_p->setMenu(popover);
+      //gridView_p->setMenu(popover);
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
 
       setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
@@ -266,17 +284,18 @@ template <class DirectoryClass>
     auto removeB = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
     auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
     auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
+    gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
     auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
     if (c->validClipBoard()){
       gtk_widget_set_visible(GTK_WIDGET(paste), true);
-      gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
     } else {
       gtk_widget_set_visible(GTK_WIDGET(paste), false);
-      gtk_widget_set_visible(GTK_WIDGET(nopaste), true);
     }
     gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
     gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
-    const char *show[]={_("Open in new tab"), _("Select All"),_("Match regular expression"),NULL};
+    const char *show[]={_("Open in new tab"), _("Select All"),_("Match regular expression"),
+      _("Show"), _("Hidden files"), _("Backup files"), _("Sort mode"), _("Descending"),
+      _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), NULL};
     for (auto p=show; p && *p; p++){
       auto widget = g_object_get_data(G_OBJECT(popover), *p);
       if (widget){
@@ -285,6 +304,19 @@ template <class DirectoryClass>
         DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
       }
     }
+    auto configFlags = Settings::getInteger("flags", gridView_p->path());
+    if (configFlags < 0) configFlags = 0;
+
+    //auto flags = gridView_p->flags();
+    const char *checks[]={_("Hidden files"), _("Backup files"),("Descending"), _("Date"), _("Size"), _("File type"),NULL};   
+    int bits[]={ 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,0};
+    for (int i=0; checks[i] != NULL; i++){
+      int bit = bits[i];
+      int status = bit & configFlags;
+      auto widget = g_object_get_data(G_OBJECT(popover), checks[i]);
+      gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), status);
+    }
+
 
     
   }

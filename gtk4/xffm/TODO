@@ -1,7 +1,10 @@
 OpenWith dialog (window) working
 
 Pending issues: 
-* DnD: enable
+* show/hide hidden and backup files 
+* put toggle text mode in tty menus
+* sort order
+* DnD: Watch out for gtk4 bugfixes  
 * tar/untar, zip/unzip dialog
 * main menu css format corrections
 * gridview: verify linebreaks with iconsize

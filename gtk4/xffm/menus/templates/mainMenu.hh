@@ -8,11 +8,10 @@ namespace xf {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
-          _("Search"),
-          _("Open terminal"),
+//          _("Search"),
+//          _("Open terminal"),
         _("Open in New Window"), 
         "test",
-          _("Show/hide grid."),
         _("Show Clipboard"), // 
         _("Clear Clipboard History"), // 
        _("Color settings"),
@@ -38,7 +37,6 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
-        {_("Show/hide grid."),(void *) MenuCallbacks<Type>::popCall}, 
         {_("Search"),(void *) MenuCallbacks<Type>::popCall}, 
         {_("Open terminal"),(void *) MenuCallbacks<Type>::popCall}, 
         {_("Home"),(void *) MenuCallbacks<Type>::popCall}, 
@@ -49,30 +47,25 @@ namespace xf {
         {_("Show Clipboard"),(void *) showPaste}, 
         {_("Clear Clipboard History"),(void *) clearPaste}, 
         {_("Close"),(void *) close},
+
         {NULL, NULL}
       };
       return menuCallbacks_;
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {_("Show/hide grid."),(void *) MenuCallbacks<Type>::toggleVpane}, 
         {_("Search"),(void *) MenuCallbacks<Type>::openFind}, 
         {_("Open terminal"),(void *) MenuCallbacks<Type>::openTerminal}, 
         {_("Home"),(void *) MenuCallbacks<Type>::goHome}, 
         // FIXME: this must be submenu, with known unresolved parent issues
         //{_("Color settings"),(void *) MenuCallbacks<Type>::}, 
-        {_("Open in New Window"),(void *) NULL}, 
-        {_("Show Clipboard"),(void *) NULL}, // 
-        {_("Copy"), (void *) NULL},
-        {_("Cut"),(void *) NULL}, 
-        {_("Paste"),(void *) NULL}, 
-        {_("Delete"),(void *) NULL}, 
-        {_("Select All"),(void *)  NULL},
-        {_("Match regular expression"),(void *)  NULL}, 
-        {_("Close"),(void *)  NULL},
         {NULL, NULL}
       };
       return menuData_;      
+    }
+    const char **checkboxes(void){
+      static const char *boxes_[] = {NULL};
+      return boxes_;      
     }
 
   private:

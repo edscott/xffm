@@ -57,6 +57,10 @@ namespace xf {
       };
       return menuData_;      
     }
+    const char **checkboxes(void){
+      static const char *boxes_[] = {NULL};
+      return boxes_;      
+    }
 
   private:
     static void
