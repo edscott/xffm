@@ -128,23 +128,30 @@ template <class Type>  class Texture {
      }
 
     static const char *
+    findIconPath(const char *name){
+      if (!iconPathHash) iconPathHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+      const char *path = (const char *)g_hash_table_lookup(iconPathHash, name);
+      if (path) return path;
+      path = locate(name);
+      if (path) {
+        g_hash_table_insert(iconPathHash, g_strdup(name), (void *)path);
+        TRACE("findIconPath hash insert name=%s -> %s\n", name, path);
+        return path;
+      } else {
+        TRACE("*** Warning:findIconPath(): cannot gicon for %s-->%s\n", name, path);
+      }
+      return path;
+    }
+
+
+    static const char *
     findIconPath(GFileInfo *info){
           auto gIcon = g_file_info_get_icon(info);
           auto tIcon = G_THEMED_ICON(gIcon);
           auto names = g_themed_icon_get_names(tIcon);
           for (auto p=names; p && *p; p++) {
-
-            if (!iconPathHash) iconPathHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
-            const char *path = (const char *)g_hash_table_lookup(iconPathHash, *p);
+            auto path = findIconPath(*p);
             if (path) return path;
-            path = locate(*p);
-            if (path) {
-              g_hash_table_insert(iconPathHash, g_strdup(*p), (void *)path);
-              TRACE("findIconPath hash insert name=%s -> %s\n", *p, path);
-              return path;
-            } else {
-              TRACE("*** Warning:findIconPath(): cannot gicon for %s-->%s\n", *p, path);
-            }
           }
           TRACE("*** Warning: \n");
           for (auto p=names; p && *p; p++) {
@@ -184,19 +191,7 @@ template <class Type>  class Texture {
       return surface;
     }
 
-    static GdkPaintable *getSvgPaintable(const char *file, double width, double height){
-      // debug
-  /*    findIconPath("*** getSvgPaintable(%s, %lf,%lf)\n", file, width, height);
-      auto retval = loadPath(file);
-      if (!retval){
-        auto base = g_path_get_basename(file);
-        if (strchr(base, '.')) *strchr(base, '.') = 0;
-        retval = loadIconName(base);
-      }
-      return retval;*/
-        auto surface = getCairoSurfaceFromSvg (file, width, height);
-        cairo_t *cr = cairo_create (surface);
-
+    static void setShading(cairo_t *cr){
         auto string = Settings::getString("xfterm", "iconsBg");
         if (string){
           char buffer[3];
@@ -212,23 +207,86 @@ template <class Type>  class Texture {
           double blue = strtol(buffer, NULL, 16);
           //TRACE("red=%lf green=%lf blue=%lf\n", red/255., green/255., blue/255.);
           cairo_set_source_rgba (cr, red/255., green/255., blue/255., .5);
-        } else cairo_set_source_rgba (cr, 1,1,1, .5);
+        } else {
+          // XXX default background color is white. 
+          // this may be broken if there is a system defined CSS for gridviews. 
+          cairo_set_source_rgba (cr, 1,1,1, .5);
+        }
+    }
+
+#if 0
+    static GdkPaintable *getEmblemedIcon(const char *file, const char *emblem, double width, double height){
+      // debug
+  /*    findIconPath("*** getSvgPaintable(%s, %lf,%lf)\n", file, width, height);
+      auto retval = loadPath(file);
+      if (!retval){
+        auto base = g_path_get_basename(file);
+        if (strchr(base, '.')) *strchr(base, '.') = 0;
+        retval = loadIconName(base);
+      }
+      return retval;*/
+        auto surface = getCairoSurfaceFromSvg (file, width, height);
+        cairo_t *cr = cairo_create (surface);
+
+        // Uses user defined background color to configure shading.
+        setShading(cr);
+        // Apply shading mask:
         cairo_set_line_width (cr, 1);
         cairo_rectangle (cr, 0.0, 0.0, width, height);
         cairo_fill (cr);
-       /* cairo_surface_t *surface2 = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width, height);
-        cairo_t *cr2 = cairo_create (surface2);
-
-        cairo_set_source_rgba(cr2, 1,1,1,.5);
-        cairo_set_source_surface(cr2, surface, 0, 0); // OjO: cr3 coordinates!
-        cairo_rectangle (cr2, 0.0, 0.0, width, height);
-        cairo_fill (cr2);*/
         cairo_destroy(cr);
         auto texture = GDK_PAINTABLE(gdk_texture_new_for_surface(surface));
         cairo_surface_destroy(surface);
         return  texture;
     }
+#endif
+    static GdkPaintable *addEmblem(const char *iconPath, const char *emblem, double width, double height){
+        auto *emblemPath = Texture<bool>::findIconPath(emblem);
+        if (!iconPath || !emblemPath) return NULL;
+        auto surface = getCairoSurfaceFromSvg (iconPath, width, height);
+        auto emblemSurface = getCairoSurfaceFromSvg (emblemPath, width/4.0, height/4.0);
+        cairo_t *cr = cairo_create (surface);
+        cairo_set_source_surface(cr, emblemSurface, 0.0, 0.0);
+        cairo_rectangle (cr, 0.0, 0.0, width/4.0, height/4.0);
+        cairo_fill (cr);
 
+        auto texture = gdk_texture_new_for_surface(surface);
+        cairo_destroy(cr);
+        cairo_surface_destroy(surface);
+        cairo_surface_destroy(emblemSurface);
+        return GDK_PAINTABLE(texture);
+    }
+    
+    static GdkPaintable *addEmblem(GFileInfo *info, const char *emblem, double width, double height){
+        auto *iconPath = findIconPath(info);
+        return addEmblem(iconPath, emblem, width, height);
+    }
+
+    static GdkPaintable *getShadedIcon2(const char *file, double width, double height, const char *emblem){
+        auto surface = getCairoSurfaceFromSvg (file, width, height);
+        cairo_t *cr = cairo_create (surface);
+        if (emblem) {
+          auto *emblemPath = Texture<bool>::findIconPath(emblem);
+          auto emblemSurface = getCairoSurfaceFromSvg (emblemPath, width/4.0, height/4.0);
+          cairo_set_source_surface(cr, emblemSurface, 0.0, 0.0);
+          cairo_rectangle (cr, 0.0, 0.0, width/4.0, height/4.0);
+          cairo_fill (cr);
+        }
+
+        // Uses user defined background color to configure shading.
+        setShading(cr);
+        // Apply shading mask:
+        cairo_set_line_width (cr, 1);
+        cairo_rectangle (cr, 0.0, 0.0, width, height);
+        cairo_fill (cr);
+
+        
+        cairo_destroy(cr);
+        auto texture = GDK_PAINTABLE(gdk_texture_new_for_surface(surface));
+        cairo_surface_destroy(surface);
+        return  texture;
+    }
+    
     static GdkMemoryFormat
     cairo_format_to_memory_format (cairo_format_t format)
     {

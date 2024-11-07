@@ -134,22 +134,28 @@ template <class DirectoryClass>
         GdkPaintable *texture = NULL;
         GtkWidget *image = NULL;
         image = backupImage(name, info, size);
+        //if (!image) image = emblemedImage(name, info, size);
+
         bool previewLoaded = false;
         bool doPreview = false;
         if (!image){
           image = previewImage(info, path, &doPreview);
           if (image) {
-            scaleFactor = 2.0;
             previewLoaded = true;
           } 
         }
+        if (doPreview)  scaleFactor = 2.0;
         if (size == 24) scaleFactor = 0.75;
         
         if (!image){
-          texture = Texture<bool>::load(info); // Loads icon from icontheme.
+          if (g_file_info_get_is_symlink(info)){
+            texture = Texture<bool>::addEmblem(info,  "emblem-symbolic-link", scaleFactor*size, scaleFactor*size);
+          } else { // simple
+            texture = Texture<bool>::load(info); // Loads icon from icontheme.
+          }
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
           // Texture is not referenced in hash table. 
-          g_object_unref(texture);
+          g_object_unref(texture);        
         }
         if (image) gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
         else {DBG("Should not happen: image is NULL\n");}
@@ -386,17 +392,20 @@ template <class DirectoryClass>
       //return false;
       return true;
     }
-   
     static GtkWidget *backupImage(const char *name, GFileInfo *info, int size){
       // Only for the hidden + backup items. Applies background mask.
       bool hidden = (name[0] == '.' && name[1] != '.');
+      if (!hidden) hidden = g_file_info_get_is_hidden(info);
       bool backup = ( name[strlen(name)-1] == '~');
+      if (!backup) backup = g_file_info_get_is_backup(info);
       if (hidden || backup )  {
         auto *iconPath = Texture<bool>::findIconPath(info);
         // Only for the hidden + backup items. Applies background mask.
         if (iconPath){
-          auto texture = Texture<bool>::getSvgPaintable(iconPath, size, size);   
-          return gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          auto texture = Texture<bool>::getShadedIcon2(iconPath, size, size, backup?"emblem-bak":NULL);   
+          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          g_object_unref(texture); // XXX currently the paintable is not hashed.
+          return GTK_WIDGET(image);
         }
         // Texture reference is kept in hashtable.
       }
