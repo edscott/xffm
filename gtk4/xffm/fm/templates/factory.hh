@@ -138,7 +138,7 @@ template <class DirectoryClass>
 
         bool previewLoaded = false;
         bool doPreview = false;
-        if (!image){
+        if (!image && !g_file_info_get_is_symlink(info)){
           image = previewImage(info, path, &doPreview);
           if (image) {
             previewLoaded = true;
