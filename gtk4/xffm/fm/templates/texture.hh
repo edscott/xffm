@@ -161,6 +161,29 @@ template <class Type>  class Texture {
           return NULL;
     }
 
+    static cairo_surface_t *getCairoSurfaceFromSvg(const char *file, double width, double height){
+      GError *error_ = NULL;
+      RsvgHandle *handle = rsvg_handle_new_from_file (file, &error_ );
+      if (error_) {
+        DBG("*** Error: %s\n", error_->message);
+        return NULL;
+      }
+      cairo_surface_t *surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width, height);
+      cairo_t *cr = cairo_create (surface);
+      RsvgRectangle  viewport;
+      viewport.x = viewport.y = 0.0;
+      viewport.width = width;
+      viewport.height = height;
+      if (!rsvg_handle_render_document (handle, cr, &viewport, &error_)){
+        DBG("*** Error: %s\n", error_->message);
+        cairo_destroy(cr);
+        cairo_surface_destroy(surface);
+        return NULL;
+      }
+      cairo_destroy(cr);
+      return surface;
+    }
+
     static GdkPaintable *getSvgPaintable(const char *file, double width, double height){
       // debug
   /*    findIconPath("*** getSvgPaintable(%s, %lf,%lf)\n", file, width, height);
@@ -171,19 +194,8 @@ template <class Type>  class Texture {
         retval = loadIconName(base);
       }
       return retval;*/
-
-        GError *error_ = NULL;
-        RsvgHandle *handle = rsvg_handle_new_from_file (file, &error_ );
-        if (error_) DBG("*** Error: %s\n", error_->message);
-        cairo_surface_t *surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width, height);
+        auto surface = getCairoSurfaceFromSvg (file, width, height);
         cairo_t *cr = cairo_create (surface);
-        RsvgRectangle  viewport;
-        viewport.x = viewport.y = 0.0;
-        viewport.width = width;
-        viewport.height = height;
-        if (!rsvg_handle_render_document (handle, cr, &viewport, &error_)){
-           DBG("*** Error: %s\n", error_->message);
-        }
 
         auto string = Settings::getString("xfterm", "iconsBg");
         if (string){
