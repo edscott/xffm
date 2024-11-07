@@ -74,4 +74,62 @@ static bool exitDialogs = false;
 static void *threadPoolObject = NULL;
 static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
 
+// classes and templates
+// basic classes
+#include "fm/classes/basic.hh"     
+#include "fm/classes/icontheme.hh"  
+#include "fm/classes/child.hh"  
+#include "fm/classes/settings.hh"  
+#include "mime/mime.hh"
+#include "fm/templates/texture.hh"  
+#include "fm/classes/print.hh"  
+#include "fm/classes/tubo.hh"  
+
+#include "fm/classes/properties.hh"
+#include "fm/classes/thread.hh"
+#include "fm/templates/preview.hh"
+#include "fm/classes/progress.hh"
+#include "fm/classes/clipboard.hh"
+#include "fm/classes/bash.hh"
+
+#include "fm/classes/utilbasic.hh"
+#include "fm/classes/history.hh"
+#include "fm/classes/css.hh"
+#include "fm/classes/bookmarks.hh"
+
+// basic templates
+#include "fm/templates/run.hh"  
+#include "fm/templates/runbutton.hh"
+
+// dialogs 
+#include "response/dialogs.hh"
+
+
+// menu templates
+#include "menus/templates/menu.hh"
+#include "menus/templates/menucallbacks.hh"
+#include "menus/templates/gridviewmenu.hh"
+#include "menus/templates/pathbarmenu.hh"
+#include "menus/templates/outputMenu.hh"
+#include "menus/templates/inputMenu.hh"
+#include "menus/templates/mainMenu.hh"
+#include "menus/templates/iconColorMenu.hh"
+
+// menu classes: none
+
+// fm classes/templates
+#include "fm/classes/localdir.hh"       // fm class
+#include "fm/templates/dnd.hh"     // fm template
+#include "fm/templates/gridview.hh"     // fm template
+#include "fm/templates/utilpathbar.hh"  // fm template
+#include "fm/templates/workdir.hh"      // fm template
+#include "fm/templates/util.hh"         // fm template
+#include "fm/templates/prompt.hh"       // fm template
+#include "fm/classes/fmbuttonbox.hh"    // fm class
+#include "fm/templates/pathbar.hh"      // fm template
+#include "fm/classes/fmpage.hh"         // fm class
+
+#include "fm/templates/window.hh" // template
+#include "fm/classes/fm.hh"     // class
+
 #endif
