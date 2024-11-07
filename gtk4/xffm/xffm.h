@@ -120,6 +120,7 @@ static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
 // fm classes/templates
 #include "fm/classes/localdir.hh"       // fm class
 #include "fm/templates/dnd.hh"     // fm template
+#include "fm/templates/factory.hh"     // fm template
 #include "fm/templates/gridview.hh"     // fm template
 #include "fm/templates/utilpathbar.hh"  // fm template
 #include "fm/templates/workdir.hh"      // fm template

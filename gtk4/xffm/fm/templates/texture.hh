@@ -6,19 +6,6 @@ namespace xf {
 template <class Type> class Preview;
 template <class Type>  class Texture {
       public:
-      //static bool previewOK(void) {return  greenLightPreview;} 
-      /* obsolete
-      static void redlight(void){
-        TRACE("redlight...\n");
-        greenLightPreview = false;
-        return;
-      }  
-      static void greenlight(void){
-        TRACE("greenlight...\n");
-        greenLightPreview = true;
-        return ;
-      }  
-      */
       static
       GdkPaintable *load(GFileInfo *info){
         auto gIcon = g_file_info_get_icon(info);
@@ -106,42 +93,6 @@ template <class Type>  class Texture {
         return GDK_PAINTABLE(icon);
       }
 
-
-#if 0
-        auto type = g_file_info_get_file_type(info);
-        const char *iconLo = NULL;
-        const char *iconHi = NULL;
-        GFile *z = G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
-        auto path = g_file_get_path(z);
-        switch (type){
-          case G_FILE_TYPE_UNKNOWN:
-            iconLo = "default";
-            break;
-          case G_FILE_TYPE_REGULAR:
-            iconLo = "application-x-generic";
-            break;
-          case G_FILE_TYPE_DIRECTORY:                  
-            if (strcmp(path, g_get_home_dir())==0) iconLo = "user-home";
-            else iconLo = "folder";
-            break;
-          case G_FILE_TYPE_SYMBOLIC_LINK:
-            iconLo = "emblem-symbolic-link";
-            break;
-          case G_FILE_TYPE_SPECIAL:
-            iconLo = "application-x-generic";
-            break;
-          case G_FILE_TYPE_SHORTCUT: // Windows
-            iconLo = "emblem-symbolic-link";
-            break;
-          case G_FILE_TYPE_MOUNTABLE:
-            iconLo = "drive-harddisk";
-            break;
-        }
-        g_free(path);
-        if (iconLo == NULL) iconLo ="application-certificate";
-        auto texture = Texture::load(iconLo);
-        
-#endif  
     static const char *locate(const char *name){
       char *tname = gtk_icon_theme_get_theme_name(iconTheme);
       const char *dirs[] = {"places", "mimetypes", "status", "devices", "emblems", "stock", NULL}; 
@@ -221,19 +172,18 @@ template <class Type>  class Texture {
       }
       return retval;*/
 
-          GError *error_ = NULL;
-          RsvgHandle *handle = rsvg_handle_new_from_file (file, &error_ );
-          if (error_) DBG("*** Error: %s\n", error_->message);
-          cairo_surface_t *surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width, height);
-          cairo_t *cr = cairo_create (surface);
-          RsvgRectangle  viewport;
-          viewport.x = viewport.y = 0.0;
-          viewport.width = width;
-          viewport.height = height;
-          if (!rsvg_handle_render_document (handle, cr, &viewport, &error_)){
-             DBG("*** Error: %s\n", error_->message);
-          }
-#if 10
+        GError *error_ = NULL;
+        RsvgHandle *handle = rsvg_handle_new_from_file (file, &error_ );
+        if (error_) DBG("*** Error: %s\n", error_->message);
+        cairo_surface_t *surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width, height);
+        cairo_t *cr = cairo_create (surface);
+        RsvgRectangle  viewport;
+        viewport.x = viewport.y = 0.0;
+        viewport.width = width;
+        viewport.height = height;
+        if (!rsvg_handle_render_document (handle, cr, &viewport, &error_)){
+           DBG("*** Error: %s\n", error_->message);
+        }
 
         auto string = Settings::getString("xfterm", "iconsBg");
         if (string){
@@ -261,7 +211,6 @@ template <class Type>  class Texture {
         cairo_set_source_surface(cr2, surface, 0, 0); // OjO: cr3 coordinates!
         cairo_rectangle (cr2, 0.0, 0.0, width, height);
         cairo_fill (cr2);*/
-#endif
         cairo_destroy(cr);
         auto texture = GDK_PAINTABLE(gdk_texture_new_for_surface(surface));
         cairo_surface_destroy(surface);

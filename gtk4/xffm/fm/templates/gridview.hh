@@ -22,6 +22,8 @@ template <class DirectoryClass>
       double y(void){return y_;}
       void x(double value){x_ = value;}
       void y(double value){y_ = value;}
+     
+      int maxNameLen(void){return maxNameLen_;}
       
       GListModel *listModel(void){ return G_LIST_MODEL(selectionModel_);}
       GListStore *listStore(void){ 
@@ -47,7 +49,7 @@ template <class DirectoryClass>
       }
 
       ~GridView(void){
-      TRACE("GridView destructor\n");
+      TRACE("GridView<DirectoryClass> destructor\n");
         if (menu_){
           gtk_widget_unparent(GTK_WIDGET(menu_));
           //g_object_unref(G_OBJECT(menu_));
@@ -98,10 +100,10 @@ template <class DirectoryClass>
 
         /* Connect handler to the factory.
          */
-        g_signal_connect( factory, "setup", G_CALLBACK(factorySetup), this );
-        g_signal_connect( factory, "bind", G_CALLBACK(factoryBind), this);
-        g_signal_connect( factory, "unbind", G_CALLBACK(factoryUnbind), this);
-        g_signal_connect( factory, "teardown", G_CALLBACK(factoryTeardown), this);
+        g_signal_connect( factory, "setup", G_CALLBACK(Factory<DirectoryClass>::factorySetup), this );
+        g_signal_connect( factory, "bind", G_CALLBACK(Factory<DirectoryClass>::factoryBind), this);
+        g_signal_connect( factory, "unbind", G_CALLBACK(Factory<DirectoryClass>::factoryUnbind), this);
+        g_signal_connect( factory, "teardown", G_CALLBACK(Factory<DirectoryClass>::factoryTeardown), this);
 
         TRACE("size = %d\n",Settings::getInteger("xfterm", "iconsize"));
 
@@ -122,7 +124,7 @@ template <class DirectoryClass>
       }
 
   private:
-    static void setPopoverItems(GtkPopover *popover, GridView *gridView_p){
+    static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -146,7 +148,7 @@ template <class DirectoryClass>
 
     }
 
-    static void setPopoverItems(GtkPopover *popover, const char *path, GridView *gridView_p ){
+    static void setPopoverItems(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
       auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -204,7 +206,7 @@ template <class DirectoryClass>
       }
     }
 
-    static GtkPopover *getPopover(GtkWidget *menubox, GridView *gridView_p){ 
+    static GtkPopover *getPopover(GtkWidget *menubox, GridView<DirectoryClass> *gridView_p){ 
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
       auto popover = gridView_p->myMenu_->mkMenu(markup);
       g_free(markup);
@@ -220,7 +222,7 @@ template <class DirectoryClass>
       return popover;
     }
 
-    static GtkPopover *getPopover(GridView *gridView_p){ 
+    static GtkPopover *getPopover(GridView<DirectoryClass> *gridView_p){ 
       auto path = gridView_p->path();
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
       auto popover = gridView_p->myMenu_->mkMenu(markup);
@@ -234,7 +236,7 @@ template <class DirectoryClass>
       return popover;
     }
 
-    static GtkPopover *getPopover(GObject *object, GridView *gridView_p){ 
+    static GtkPopover *getPopover(GObject *object, GridView<DirectoryClass> *gridView_p){ 
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
@@ -252,7 +254,7 @@ template <class DirectoryClass>
       return popover;
     }
     
-  static void setupMenu(GtkPopover *popover, GridView *gridView_p){
+  static void setupMenu(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
     auto path = gridView_p->path();
     GridviewMenu<DirectoryClass> d;
     for (auto keys = d.keys(); keys && *keys; keys++){
@@ -345,7 +347,7 @@ template <class DirectoryClass>
       g_free(path);
   }
 
-  static void placeMenu(GList *selectionList, GtkWidget *menubox, GridView *gridView_p){
+  static void placeMenu(GList *selectionList, GtkWidget *menubox, GridView<DirectoryClass> *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
       if (!popover){
         TRACE("getPopover...\n");
@@ -360,7 +362,7 @@ template <class DirectoryClass>
       }
   }
 
-  static void placeMenu(GridView *gridView_p){
+  static void placeMenu(GridView<DirectoryClass> *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(gridView_p->view()), "menu");
       if (!popover){
         TRACE("getPopover...\n");
@@ -373,7 +375,8 @@ template <class DirectoryClass>
         gtk_popover_popup(GTK_POPOVER(popover));
       }
   }
-  static void placeMenu(GObject *object, GridView *gridView_p){
+  public:
+  static void placeMenu(GObject *object, GridView<DirectoryClass> *gridView_p){
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
       auto menubox = g_object_get_data(G_OBJECT(object), "menuBox");
@@ -388,55 +391,14 @@ template <class DirectoryClass>
         gtk_popover_popup(GTK_POPOVER(popover));
       }
   }
-
-    static gboolean
-    menu_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *data){
-      auto gridView_p = (GridView *)data;
-      
-      auto eventController = GTK_EVENT_CONTROLLER(self);
-      auto event = gtk_event_controller_get_current_event(eventController);
-      auto box = gtk_event_controller_get_widget(eventController);
-      auto object = G_OBJECT(g_object_get_data(G_OBJECT(box), "object"));
-      auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
-
-      auto modType = gdk_event_get_modifier_state(event);
-      // no good here: selectWidget(box, gridView_p);
-
-      TRACE("modType = 0x%x\n", modType);
-      if (modType & GDK_CONTROL_MASK) return false;
-      if (modType & GDK_SHIFT_MASK) return false;
-
-      // unselect all
-
-      auto selectionModel = gridView_p->selectionModel();
-      gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
-      //bug race with pdf preview: selectWidget(box, gridView_p);
-      //auto size = gridView_p->getSelectionSize();
-      //if (size > 0) return false;
-      
-      TRACE("gestureClick; object=%p button=%d\n", object,
-          gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
-      TRACE("gestureClick; path=%p\n", gridView_p->path());
-      TRACE("menu for %s\n", gridView_p->path());
-
-  //    auto list_item =GTK_LIST_ITEM(object);
-  //    auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-      placeMenu(object, gridView_p); // object is G_FILE_INFO
-      
-   
-      return true;
-    }
+  private:
    static gboolean
     unselect_f(GtkGestureClick* self,
               gint n_press,
               gdouble x,
               gdouble y,
               void *data){
-      auto gridView_p = (GridView *)data;
+      auto gridView_p = (GridView<DirectoryClass> *)data;
       auto selectionModel = gridView_p->selectionModel();
       gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
       return true;
@@ -448,49 +410,7 @@ template <class DirectoryClass>
       if (a == b) return true;
       return false;
     }
-   
-   static bool selectWidget(GtkWidget *w, GridView *gridView_p){
-      auto store = gridView_p->store();
-      guint positionF;
-      auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
-      auto item = G_FILE_INFO(gtk_list_item_get_item(listItem));
-      DBG("down_f: self(w) = %p, item=%p\n", w, item);
-      if (item) {
-        auto path = Basic::getPath(item);
-        auto found = LocalDir::findPosition(store, path,  &positionF, true);
-        if (!found){
-          DBG("gridViewClick(): %s not found\n", path);
-          g_free(path);
-          return false;
-        } 
-        DBG("Found %s at %d\n", path, positionF);
-        g_free(path);
-        auto selectionModel = gridView_p->selectionModel();
-        gtk_selection_model_select_item(selectionModel, positionF, false);
-        return true;
-      }
-      return false;
-   }
-
-   static gboolean
-    down_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *data){
-      auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-  
-      auto gridView_p = (GridView *)data;
-      gridView_p->x(x);
-      gridView_p->y(y);
-
-      //gridView_p->dndOn = true;
-      //DBG("dnd %d\n", gridView_p->dndOn);
-      selectWidget(w, gridView_p);
-      //return false;
-      return true;
-    }
-  public:
+   public:
     guint getSelectionSize(void){
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel_));
       return gtk_bitset_get_size(bitset);
@@ -519,7 +439,7 @@ template <class DirectoryClass>
               gdouble y,
               void *data){
       TRACE("menuSelection_f...\n");
-      auto gridView_p = (GridView *)data;
+      auto gridView_p = (GridView<DirectoryClass> *)data;
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
       auto selectionModel = gridView_p->selectionModel();
@@ -573,7 +493,7 @@ template <class DirectoryClass>
     }
     
 
-    static void addGestureClickView1(GtkWidget *self, GObject *object, GridView *gridView_p){
+    static void addGestureClickView1(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for unselect
@@ -584,7 +504,7 @@ template <class DirectoryClass>
 
     }    
     
-    static void addGestureClickView3(GtkWidget *self, GObject *object, GridView *gridView_p){
+    static void addGestureClickView3(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for popover pressed
@@ -594,328 +514,6 @@ template <class DirectoryClass>
           GTK_PHASE_BUBBLE);
 
     }    
-    
-    static void addGestureClickMenu(GtkWidget *box, GObject *object, GridView *gridView_p){
-      TRACE("addGestureClickMenu; object=%p\n", gridView_p);
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
-      // 3 for popover pressed
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (menu_f), (void *)gridView_p);
-      gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_CAPTURE);
-
-    }    
-    
-    static void addGestureClickDown(GtkWidget *self, GObject *item, GridView *gridView_p){
-      g_object_set_data(G_OBJECT(self), "item", item);
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
-      // 1 for select
-      TRACE("addGestureClickDown: self = %p, item=%p\n", self, item);
-      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (down_f), (void *)gridView_p);
-      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_BUBBLE);
-
-    }    
-    
-    static void addGestureClickUp(GtkWidget *box, GObject *object, GridView *gridView_p){
-      TRACE("addGestureClickUp; object=%p\n", object);
-      g_object_set_data(G_OBJECT(box), "gridView_p", gridView_p);
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
-      // 1 for action released.
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (gridView_p->gridViewClick_f()), (void *)object);
-      gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_CAPTURE);
-    }    
-    
-// object is list_item
-// item_get_item is GFileInfo
-// item_get child is GtkWidget
-
-      static void
-      factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
-        TRACE("factoryTeardown...\n");
-        GtkListItem *list_item = GTK_LIST_ITEM(object);
-        GtkBox *vbox = GTK_BOX(gtk_list_item_get_child( list_item ));
-        // vbox is null on new updateGridview() (new Gridview).
-        // unparent() also fails on close xffm...
-        // if (vbox && GTK_IS_WIDGET(vbox)) gtk_widget_unparent(GTK_WIDGET(vbox));
-        gtk_list_item_set_child(list_item, NULL);
-     }
-
-      static void
-      factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
-        // object is a GtkListItem!
-        //DBG("factorySetup...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
-        auto box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        auto menuBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        auto menuBox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        auto hlabelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        auto hlabel = gtk_label_new("");
-        auto label = gtk_label_new("");
-        
-        GtkWidget *boxes[] = {box, menuBox, menuBox2, hbox, imageBox, labelBox, hlabelBox, NULL};
-        for (auto p = boxes; p && *p; p++){
-          gtk_widget_add_css_class(*p, "gridviewBox");
-          gtk_widget_set_vexpand(GTK_WIDGET(*p), false);
-          gtk_widget_set_hexpand(GTK_WIDGET(*p), false);
-        }
-
-        gtk_list_item_set_child(GTK_LIST_ITEM(object), box); 
-        gtk_box_append(GTK_BOX(box), menuBox);
-        gtk_box_append(GTK_BOX(menuBox), menuBox2);
-        gtk_box_append(GTK_BOX(menuBox2), hbox);
-        gtk_box_append(GTK_BOX(hbox), imageBox);
-        gtk_box_append(GTK_BOX(hbox), hlabelBox);
-        gtk_box_append(GTK_BOX(menuBox2), labelBox);
-        gtk_box_append(GTK_BOX(hlabelBox), hlabel);
-        gtk_box_append(GTK_BOX(labelBox), label);
-        
-
-        g_object_set_data(G_OBJECT(object), "imageBox", imageBox);
-        g_object_set_data(G_OBJECT(object), "label", label);
-        g_object_set_data(G_OBJECT(object), "hlabel", hlabel);
-        g_object_set_data(G_OBJECT(object), "menuBox", menuBox);
-        g_object_set_data(G_OBJECT(object), "menuBox2", menuBox2);
-
- 
-        g_object_set_data(G_OBJECT(labelBox), "object", object);
-        g_object_set_data(G_OBJECT(hlabelBox), "object", object);
-        g_object_set_data(G_OBJECT(imageBox), "object", object);
-        g_object_set_data(G_OBJECT(menuBox), "object", object);
-        g_object_set_data(G_OBJECT(menuBox2), "object", object);
-
-        TRACE("factorySetup add signal handlers\n");
-        
-        Basic::addMotionController(labelBox);
-        Basic::addMotionController(hlabelBox);
-
-        Basic::addMotionController(imageBox);
-        addGestureClickDown(imageBox, object, gridView_p);
-        addGestureClickUp(imageBox, object, gridView_p);
-        addGestureClickUp(labelBox, object, gridView_p);
-        addGestureClickUp(hlabelBox, object, gridView_p);
-        addGestureClickUp(imageBox, object, gridView_p);
-        addGestureClickMenu(imageBox, object, gridView_p);
-        addGestureClickMenu(labelBox, object, gridView_p);
-        addGestureClickMenu(hlabelBox, object, gridView_p);
-
-        TRACE("factorySetup: object(GTK_LIST_ITEM) = %p box = %p\n", object, box);
-        
-      }
-
-      static void
-      factoryUnbind(GtkSignalListItemFactory *self, GObject *object, GridView *gridView_p){
-        TRACE("factoryUnbind...\n");
-        //THREADPOOL->clear();
-        //Child::incrementSerial();
-     
-         // cleanup on regen:
-        auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
-        auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
-        if (oldImage) gtk_widget_unparent(oldImage);
-     }
-
-
-      /* The bind function for the factory */
-      static void
-      factoryBind(GtkSignalListItemFactory *factory, GObject *object, GridView *gridView_p)
-      {
-        //DBG("factoryBind...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
-       
-        // const:
-        auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
-        auto list_item =GTK_LIST_ITEM(object);
-        auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
-        auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
-        auto label = GTK_LABEL(g_object_get_data(object, "label"));
-        auto hlabel = GTK_LABEL(g_object_get_data(object, "hlabel"));
-
-        auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-        g_object_set_data(G_OBJECT(info), "imageBox", imageBox);
-        //g_object_set_data(G_OBJECT(info), "box", box);
-        g_object_set_data(G_OBJECT(imageBox), "info", info);
-        
-        auto menuBox = GTK_BOX(g_object_get_data(object, "menuBox"));
-        g_object_set_data(G_OBJECT(info), "menuBox", menuBox);
-
-        auto menuBox2 = GTK_BOX(g_object_get_data(object, "menuBox2"));
-        g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
-
-        auto type = g_file_info_get_file_type(info);
-        auto size = Settings::getInteger("xfterm", "iconsize");
-        // allocated:
-        auto path = Basic::getPath(info);       
-        char *name = g_strdup(g_file_info_get_name(info));
-
-        TRACE("factory bind name= %s\n", name);
-
-        GdkPaintable *texture = NULL;
-        GtkWidget *image = NULL;
-        // Only for the hidden + backup items. Applies background mask.
-        bool hidden = (name[0] == '.' && name[1] != '.');
-        bool backup = ( name[strlen(name)-1] == '~');
-        if (hidden || backup )  {
-          auto *iconPath = Texture<bool>::findIconPath(info);
-          // Only for the hidden + backup items. Applies background mask.
-          if (iconPath) texture = Texture<bool>::getSvgPaintable(iconPath, size, size);   
-          image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-          // Texture reference is kept in hashtable.
-        }
-
-        bool previewLoaded = false;
-        double scaleFactor = 1.;
-        auto doPreview = Preview<bool>::doPreview(info);
-        if (!image && doPreview) {
-          // Try to load reference to texture from hash table.
-          texture = Preview<bool>::readThumbnail(path);
-          if (texture){
-            image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-            previewLoaded = true;
-            // is it current?
-            auto textureTime = Preview<bool>::thumbnailMtime(path);
-            // does not work even with attribute set: g_file_info_get_modification_date_time
-            struct stat st;
-            stat(path, &st);
-            if (st.st_mtime > textureTime){
-              //Must do over
-              previewLoaded = false;
-            } else {TRACE("hash preview is OK %ld <= %ld\n", st.st_mtime, textureTime);}
-          }
-          scaleFactor = 2;
-          if (size == 24) scaleFactor = 0.75;
-        }
-        if (!image){
-          texture = Texture<bool>::load(info); // Loads icon from icontheme.
-          image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-          // Texture is not referenced in hash table. 
-          g_object_unref(texture);
-        }
-        if (image) gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
-        else {DBG("Should not happen: image is NULL\n");}
-        // cleanup on regen:
-        //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
-        //if (oldImage) gtk_widget_unparent(oldImage);
-        Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
-        
-
-        if (type == G_FILE_TYPE_DIRECTORY ) {
-          // not much use, really.
-          //DirectoryClass::addDirectoryTooltip(image, info);
-        }
-
-        if (size < 0) size = 48;
-        //if (doPreview) scaleFactor = 2;
-
-        if (size == 24) scaleFactor = 0.75;
-        gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
-
-        char buffer[128];
-        if (size == 24){
-          gtk_widget_set_visible(GTK_WIDGET(label), false);
-          gtk_widget_set_visible(GTK_WIDGET(hlabel), true);
-          auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen_);
-          TRACE("size 24, format=%s\n", format);
-          snprintf(buffer, 128, (const char *)format, name);
-
-          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>",  "x-small", buffer);
-
-          //gtk_label_set_markup(label, markup);
-          //g_free(markup);
-
-          if (strcmp(name, "..")){
-            // file information string
-            auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-            gtk_widget_add_css_class(hbox, "gridviewBox");
-
-            struct stat st;
-            lstat(path, &st);
-         
-            auto m1 = Basic::statInfo(&st);
-
-            char *markup2 = g_strdup(" <span size=\"x-small\" color=\"blue\">");
-            Basic::concat(&markup2, m1);
-            Basic::concat(&markup2, "</span>");
-            
-            g_free(m1);
-            Basic::concat(&markup, markup2);
-            g_free(markup2);
-
-            //Basic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
-          } 
-          gtk_label_set_markup(hlabel, markup);
-          g_free(markup);
-        } 
-        else 
-        {
-          gtk_widget_set_visible(GTK_WIDGET(label), true);
-          gtk_widget_set_visible(GTK_WIDGET(hlabel), false);
-          const char *n_p = name;
-          if (strlen(name) > 13) {
-            char *b=strdup("");
-            do {
-              char part[14];
-              memset(part, 0, 14);
-              strncpy(part, n_p, 13);
-              part[13] = 0;
-              Basic::concat(&b, part);
-              if (n_p[13] != 0) Basic::concat(&b, "<span color=\"red\">-</span>\n");
-              else break;
-              n_p += 13;
-            } while (strlen(n_p)>13);
-            Basic::concat(&b, n_p);
-
-            snprintf(buffer, 128, "%s", b);
-            g_free(b);
-          } else snprintf(buffer, 128, "%s", name);
-        
-          const char *sizeS = "x-small";
-          if (size <= 96) sizeS = "small";
-          else if (size <= 156) sizeS = "medium";
-          else if (size <= 192) sizeS = "large";
-          else sizeS = "x-large";
-          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", sizeS, buffer);
-          gtk_label_set_markup(label, markup);
-          g_free(markup);
-          DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
-        }
-        // gtk drag
-        GtkDragSource *source = gtk_drag_source_new ();
-        g_signal_connect (source, "prepare", G_CALLBACK (Dnd<DirectoryClass>::image_drag_prepare),gridView_p);
-        
-        g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<DirectoryClass>::image_drag_begin), image);
-        gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));
-        
-
-
-        if (doPreview && !previewLoaded){
-
-          // if hash value exists and is ok, skip regen
-          // otherwise, plug into threadpool.
-          TRACE("factory bind add preview threads\n");
-          // path, imageBox, image, serial
-          auto arg = (void **)calloc(6, sizeof(void *));
-          arg[0] = (void *)g_strdup(path);
-          arg[1] = imageBox;
-          arg[2] = image;
-          arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
-          arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
-          arg[5] = child; // in main context
-          //Thread::threadPoolAdd(Texture<bool>::preview, (void *)arg);
-          // thread number limited.
-          THREADPOOL->add(Preview<bool>::preview, (void *)arg);
-        }
-        g_free(path);
-        TRACE("factory bind complete: %s\n", name);
-        g_free(name);
-      }
 public:
 
 
@@ -958,7 +556,7 @@ static GdkContentProvider *
 on_drag_prepare (GtkDragSource *source,
                  double         x,
                  double         y,
-                 GridView *gridView_p)
+                 GridView<DirectoryClass> *gridView_p)
 {
 
   auto list = gridView_p->getSelectionList();
