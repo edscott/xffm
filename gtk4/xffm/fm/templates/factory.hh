@@ -129,41 +129,22 @@ template <class DirectoryClass>
 
         TRACE("factory bind name= %s\n", name);
 
+        if (size < 0) size = 48;
+        double scaleFactor = 1.0;
         GdkPaintable *texture = NULL;
         GtkWidget *image = NULL;
-        // Only for the hidden + backup items. Applies background mask.
-        bool hidden = (name[0] == '.' && name[1] != '.');
-        bool backup = ( name[strlen(name)-1] == '~');
-        if (hidden || backup )  {
-          auto *iconPath = Texture<bool>::findIconPath(info);
-          // Only for the hidden + backup items. Applies background mask.
-          if (iconPath) texture = Texture<bool>::getSvgPaintable(iconPath, size, size);   
-          image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-          // Texture reference is kept in hashtable.
-        }
-
+        image = backupImage(name, info, size);
         bool previewLoaded = false;
-        double scaleFactor = 1.;
-        auto doPreview = Preview<bool>::doPreview(info);
-        if (!image && doPreview) {
-          // Try to load reference to texture from hash table.
-          texture = Preview<bool>::readThumbnail(path);
-          if (texture){
-            image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        bool doPreview = false;
+        if (!image){
+          image = previewImage(info, path, &doPreview);
+          if (image) {
+            scaleFactor = 2.0;
             previewLoaded = true;
-            // is it current?
-            auto textureTime = Preview<bool>::thumbnailMtime(path);
-            // does not work even with attribute set: g_file_info_get_modification_date_time
-            struct stat st;
-            stat(path, &st);
-            if (st.st_mtime > textureTime){
-              //Must do over
-              previewLoaded = false;
-            } else {TRACE("hash preview is OK %ld <= %ld\n", st.st_mtime, textureTime);}
-          }
-          scaleFactor = 2;
-          if (size == 24) scaleFactor = 0.75;
+          } 
         }
+        if (size == 24) scaleFactor = 0.75;
+        
         if (!image){
           texture = Texture<bool>::load(info); // Loads icon from icontheme.
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
@@ -182,12 +163,6 @@ template <class DirectoryClass>
           // not much use, really.
           //DirectoryClass::addDirectoryTooltip(image, info);
         }
-
-        if (size < 0) size = 48;
-        //if (doPreview) scaleFactor = 2;
-
-        if (size == 24) scaleFactor = 0.75;
-        gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
 
         char buffer[128];
         if (size == 24){
@@ -410,6 +385,45 @@ template <class DirectoryClass>
       selectWidget(w, gridView_p);
       //return false;
       return true;
+    }
+   
+    static GtkWidget *backupImage(const char *name, GFileInfo *info, int size){
+      // Only for the hidden + backup items. Applies background mask.
+      bool hidden = (name[0] == '.' && name[1] != '.');
+      bool backup = ( name[strlen(name)-1] == '~');
+      if (hidden || backup )  {
+        auto *iconPath = Texture<bool>::findIconPath(info);
+        // Only for the hidden + backup items. Applies background mask.
+        if (iconPath){
+          auto texture = Texture<bool>::getSvgPaintable(iconPath, size, size);   
+          return gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        }
+        // Texture reference is kept in hashtable.
+      }
+      return NULL;
+    }
+
+    static GtkWidget *previewImage(GFileInfo *info, const char *path, bool *doPreview_p){
+      double scaleFactor = 1.;
+      auto doPreview = Preview<bool>::doPreview(info);
+      *doPreview_p = doPreview;
+      if (doPreview) {
+        // Try to load reference to texture from hash table.
+        auto texture = Preview<bool>::readThumbnail(path);
+        if (texture){
+          // is it current?
+          auto textureTime = Preview<bool>::thumbnailMtime(path);
+          // does not work even with attribute set: g_file_info_get_modification_date_time
+          struct stat st;
+          stat(path, &st);
+          if (st.st_mtime > textureTime){
+            //Must do over
+            return NULL;
+          } else {TRACE("hash preview is OK %ld <= %ld\n", st.st_mtime, textureTime);}
+          return GTK_WIDGET(gtk_image_new_from_paintable(GDK_PAINTABLE(texture)));
+        }
+      }
+      return NULL;
     }
       
   };
