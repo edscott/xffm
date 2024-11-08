@@ -29,9 +29,9 @@ namespace xf {
         return;
       }
       
-      static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0){
+      static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0, int flags){
         GtkFilter *filter = 
-          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, NULL, NULL));
+          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, GINT_TO_POINTER(flags), NULL));
         GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
 
         // Chain link GtkFilterListModel to a GtkSortListModel.
@@ -49,7 +49,7 @@ namespace xf {
             skip0?s:NULL);
         return s;
       }
-      
+/*      
       static GtkMultiSelection *standardSelectionModel(const char *path){
         // This does not have the up icon 
         auto gfile = g_file_new_for_path(path);
@@ -58,7 +58,7 @@ namespace xf {
 
         return getSelectionModel(G_LIST_MODEL(dList), false);
       }
-
+*/
     public:
       static int
       getMaxNameLen(const char *path){
@@ -157,7 +157,7 @@ namespace xf {
                 G_CALLBACK (changed_f), (void *)store);
         }
         g_object_set_data(G_OBJECT(store), "monitor", monitor);
-        return getSelectionModel(G_LIST_MODEL(store), true);
+        return getSelectionModel(G_LIST_MODEL(store), true, flags);
       }
 
       static bool findPosition(GListStore *store, const char *path, guint *positionF, bool verbose){
@@ -379,16 +379,28 @@ namespace xf {
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
         }
-        return getSelectionModel(G_LIST_MODEL(store), false);
+        return getSelectionModel(G_LIST_MODEL(store), false, 0);
       }
 
     private:
       static gboolean
       filterFunction(GObject *object, void *data){
+        auto flags = GPOINTER_TO_INT(data);
         GFileInfo *info = G_FILE_INFO(object);
+        bool showHidden = flags & 0x01;
+        bool showbackups = flags & 0x02;
+        auto hidden = g_file_info_get_is_hidden(info);
+        auto backup = g_file_info_get_is_backup(info);
+
+        if (hidden){
+          if (showHidden) return true;
+          return false;
+        }
+        if (backup){
+          if (showbackups) return true;
+          return false;
+        }
         return TRUE;
-        if (strcmp(g_file_info_get_name(info), "..")==0) return TRUE;
-        return !g_file_info_get_is_hidden(info);
       }
    
       // flags :
