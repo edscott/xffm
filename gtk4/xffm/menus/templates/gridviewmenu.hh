@@ -3,6 +3,8 @@
 namespace xf {
   template <class Type> class Prompt;
   template <class Type> class MenuCallbacks;
+  template <class Type> class Workdir;
+  class LocalDir;
   template <class Type>
   class GridviewMenu {
     public:
@@ -42,6 +44,8 @@ namespace xf {
         _("Date"),
         _("Size"),
         _("File type"),
+        _("Apply modifications"),
+
         
         NULL
       };
@@ -62,6 +66,7 @@ namespace xf {
         {_("Copy"),(void *) "copy"}, 
         {_("Cut"),(void *) "cut"}, 
         {_("Paste"),(void *) "paste"}, 
+        {_("Apply modifications"),(void *) "apply"},
         {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -90,6 +95,7 @@ namespace xf {
         {_("Date"),(void *) toggleItem},
         {_("Size"),(void *) toggleItem},
         {_("File type"),(void *) toggleItem},
+        {_("Apply modifications"),(void *) apply},
        
         {NULL, NULL}
       };
@@ -145,19 +151,25 @@ namespace xf {
     toggleItem(GtkCheckButton *check, gpointer data)
     {
       auto item = (const gchar *)data;
-      DBG("toggleItem: %s\n", item);
+      TRACE("toggleItem: %s\n", item);
       int bit = 0;
       if (strcmp(item,_("Hidden files")) == 0) bit = 0x01;
       if (strcmp(item,_("Backup files")) == 0) bit = 0x02;
-      if (strcmp(item,_("Descending")) == 0) bit = 0x03;
+      if (strcmp(item,_("Descending")) == 0) bit = 0x04;
       if (strcmp(item,_("Date")) == 0) bit = 0x08;
       if (strcmp(item,_("Size")) == 0) bit = 0x10;
       if (strcmp(item,_("File type")) == 0) bit = 0x20;
-      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
-      auto flags = gridview_p->flags();
-      if (gtk_check_button_get_active(check)) gridview_p->flagOn(bit);
-      else gridview_p->flagOff(bit);
-      DBG("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridview_p->flags());
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto flags = gridView_p->flags();
+      if (gtk_check_button_get_active(check)) gridView_p->flagOn(bit);
+      else gridView_p->flagOff(bit);
+      TRACE("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridView_p->flags());
+      auto configFlags = Settings::getInteger("flags", gridView_p->path());
+      if (configFlags < 0) configFlags = 0;
+      
+      auto popover = g_object_get_data(G_OBJECT(check), _("menu"));
+      auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
+      gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
 
       //toggleGroupItem(menuItem, "LocalView", item);
     }
@@ -169,6 +181,18 @@ namespace xf {
       return Basic::getPath(info);
     }
 
+    static void 
+    apply(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
+
+      TRACE("apply %s...\n", gridview_p->path());
+      Settings::setInteger("flags", gridview_p->path(), gridview_p->flags());
+      gtk_widget_unparent(GTK_WIDGET(menu));
+      Workdir<Type>::setWorkdir(gridview_p->path());
+    }
 
     static void 
     properties(GtkButton *button, void *data){

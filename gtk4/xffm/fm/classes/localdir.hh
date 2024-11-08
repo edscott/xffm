@@ -93,6 +93,7 @@ namespace xf {
 
       static GtkMultiSelection *xfSelectionModel(const char *path){
        // This section adds the up icon.
+        auto flags = Settings::getInteger("flags", path);
 
         auto up = g_path_get_dirname(path);
         TRACE("path=%s up=%s\n", path, up);
@@ -137,8 +138,7 @@ namespace xf {
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(outInfo, "standard::file", G_OBJECT(outChild));
           
-          void *flags = NULL; // FIXME: this will determine sort order
-          g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, flags);
+          g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, GINT_TO_POINTER(flags));
           TRACE("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
         } while (true);
 
@@ -176,24 +176,24 @@ namespace xf {
       }
 
       static void insert(GListStore *store, const char *path, bool verbose){
-          GError *error_ = NULL;
-          //void *flags = GINT_TO_POINTER(0x100); // FIXME: this will determine sort order
-          void *flags = NULL; // FIXME: this will determine sort order
-          auto file = g_file_new_for_path(path);
-          GFileInfo *infoF = g_file_query_info (file,
-              "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
-              G_FILE_QUERY_INFO_NONE, NULL, &error_);
+        GError *error_ = NULL;
+        auto flags = Settings::getInteger("flags", path);
 
-          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
-          g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
-          if (verbose) {DBG("insert():path = %s,infoF=%p\n", path, infoF);}
-          if (error_){
-            DBG("Error: %s\n", error_->message);
-            g_error_free(error_);
-            g_object_unref(infoF);
-            return;
-          }
-          g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
+        auto file = g_file_new_for_path(path);
+        GFileInfo *infoF = g_file_query_info (file,
+            "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
+            G_FILE_QUERY_INFO_NONE, NULL, &error_);
+
+        //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
+        g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
+        if (verbose) {DBG("insert():path = %s,infoF=%p\n", path, infoF);}
+        if (error_){
+          DBG("Error: %s\n", error_->message);
+          g_error_free(error_);
+          g_object_unref(infoF);
+          return;
+        }
+        g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
       }
    /*   static void toggleSelect(GListStore *store, guint positionF){
           auto s = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(store), "selectionModel"));
@@ -392,30 +392,55 @@ namespace xf {
       }
    
       // flags :
-    // 0x01 : by date
-    // 0x02 : by size
-    // 0x04 : descending
+    // 0x01 : by date _("Hidden files")
+    // 0x02 : by size _("Backup files")
+    // 0x04 : descending _("Descending")
+    // 0x08 : _("Date")
+    // 0x10 : _("Size")
+    // 0x20 : _("File type")
     static gint 
     compareFunction(const void *a, const void *b, void *data){
         auto flags = GPOINTER_TO_INT(data);
-        bool byDate = (flags & 0x01);
-        bool bySize = (flags & 0x02);
+        bool byDate = (flags & 0x08);
+        bool bySize = (flags & 0x10);
         bool descending = (flags & 0x04);
+        bool fileType = (flags & 0x20);
         
-        bool verbose = (flags & 0x100);
 
         GFileInfo *infoA = G_FILE_INFO(a);
         GFileInfo *infoB = G_FILE_INFO(b);
         auto typeA = g_file_info_get_file_type(infoA);
         auto typeB = g_file_info_get_file_type(infoB);
+        auto nameA = g_file_info_get_name(infoA);
+        auto nameB = g_file_info_get_name(infoB);
 
-        if (verbose) DBG("--1\n");
+        TRACE("--1\n");
         if (strcmp(g_file_info_get_name(infoA), "..")==0) return -1;
         if (strcmp(g_file_info_get_name(infoB), "..")==0) return 1;
         
+        if (fileType){
+          auto extA = strrchr(nameA, '.');
+          auto extB = strrchr(nameA, '.');
+          if (!extA && extB) {
+            if (descending) return 1; else return -1; 
+          }
+          if (extA && !extB) {
+            if (descending) return -1; else return 1; 
+          }
+          if (extA && extB) {
+            auto result = strcasecmp(nameA, nameB);
+            if (result){
+              if (descending) return -result; else return result;
+            }
+            // result is 0, continue with subsorting.
+          }
+
+        }
+
+
         GFile *fileA = G_FILE(g_file_info_get_attribute_object(infoA, "standard::file"));
         GFile *fileB = G_FILE(g_file_info_get_attribute_object(infoB, "standard::file"));
-        if (verbose) DBG("--2\n");
+        TRACE("--2\n");
 
         // compare by name, directories or symlinks to directories on top
         TRACE("compare %s --- %s\n", g_file_info_get_name(infoA), g_file_info_get_name(infoB));
@@ -431,10 +456,8 @@ namespace xf {
 
         if (a_cond && !b_cond) return -1; 
         if (!a_cond && b_cond) return 1;
-        if (verbose) DBG("--3\n");
+        TRACE("--3\n");
 
-        auto nameA = g_file_info_get_name(infoA);
-        auto nameB = g_file_info_get_name(infoB);
         if (a_cond && b_cond) {
             // directory comparison by name is default;
            if (byDate) {
@@ -464,7 +487,7 @@ namespace xf {
           if (descending) return sizeB - sizeA;
           return sizeA - sizeB;
         } 
-        if (verbose) DBG("--4\n");
+        TRACE("--4\n");
         // by name 
         if (descending) return -strcasecmp(nameA, nameB);
         return strcasecmp(nameA, nameB);

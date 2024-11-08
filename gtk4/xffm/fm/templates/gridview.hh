@@ -34,11 +34,11 @@ template <class DirectoryClass>
 
       void flagOn (int flag){ 
         flags_ |= flag;
-        Settings::setInteger("flags", path_, flags_);
+        //Settings::setInteger("flags", path_, flags_);
       }
       void flagOff (int flag){  
         flags_ &= (0xff ^ flag);
-        Settings::setInteger("flags", path_, flags_);
+        //Settings::setInteger("flags", path_, flags_);
       }
       int flags(void){return flags_;}
 
@@ -295,7 +295,8 @@ template <class DirectoryClass>
     gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
     const char *show[]={_("Open in new tab"), _("Select All"),_("Match regular expression"),
       _("Show"), _("Hidden files"), _("Backup files"), _("Sort mode"), _("Descending"),
-      _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), NULL};
+      _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), _("Apply modifications"), 
+      NULL};
     for (auto p=show; p && *p; p++){
       auto widget = g_object_get_data(G_OBJECT(popover), *p);
       if (widget){
@@ -306,13 +307,15 @@ template <class DirectoryClass>
     }
     auto configFlags = Settings::getInteger("flags", gridView_p->path());
     if (configFlags < 0) configFlags = 0;
+    auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
+    gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
 
     //auto flags = gridView_p->flags();
-    const char *checks[]={_("Hidden files"), _("Backup files"),("Descending"), _("Date"), _("Size"), _("File type"),NULL};   
+    const char *checks[]={_("Hidden files"), _("Backup files"),_("Descending"), _("Date"), _("Size"), _("File type"), NULL};   
     int bits[]={ 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,0};
     for (int i=0; checks[i] != NULL; i++){
       int bit = bits[i];
-      int status = bit & configFlags;
+      int status = bit & gridView_p->flags();
       auto widget = g_object_get_data(G_OBJECT(popover), checks[i]);
       gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), status);
     }
