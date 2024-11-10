@@ -359,7 +359,13 @@ template <class DirectoryClass>
       DBG("selectWidget: self(w) = %p, item=%p\n", w, item);
       if (item) {
         auto path = Basic::getPath(item);
-        auto found = LocalDir::findPosition(store, path,  &positionF, true);
+        auto dirPath = g_path_get_dirname(path);
+        int flags = Settings::getInteger(dirPath, "flags"); 
+        if (flags < 0) flags = 0;
+        g_free(dirPath);
+       
+        DBG("selectWidget: path= %s\n", path);
+        auto found = LocalDir::findPosition(store, path,  &positionF, flags);
         if (!found){
           DBG("gridViewClick(): %s not found\n", path);
           g_free(path);

@@ -19,9 +19,12 @@ namespace xf {
           pthread_mutex_lock(&monitorMutex);   
           g_object_set_data(G_OBJECT(monitor), "inactive", GINT_TO_POINTER(1));
           pthread_mutex_unlock(&monitorMutex);   
+          auto dirFile = G_FILE(g_object_get_data(G_OBJECT(monitor), "file"));
+          g_object_unref(dirFile);
 
           g_file_monitor_cancel(monitor);
           g_object_unref(monitor);
+          
           DBG("***monitor cancel = %p\n", monitor);
         }
         

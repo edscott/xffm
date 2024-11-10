@@ -39,7 +39,7 @@ static GtkEventController *createDropController(void *data){
         (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
       gtk_drag_source_set_actions(source, actions);
       
-      fprintf(stderr,"image_drag_begin.\n");
+      DBG("image_drag_begin.\n");
     }
     // signal prepare Emitted when a drag is about to be initiated.
     static GdkContentProvider* 
@@ -73,7 +73,7 @@ static GtkEventController *createDropController(void *data){
       //  GtkDragSource *source = gtk_drag_source_new ();
       //  gtk_drag_source_set_content (source, dndcontent);
         
-        fprintf(stderr,"image_drag_prepare.\n");
+        DBG("image_drag_prepare.\n");
         return dndcontent;
 }
 private:
@@ -85,13 +85,13 @@ private:
 static void dragEnd ( GtkDragSource* self, GdkDrag* drag, 
     gboolean delete_data, gpointer user_data)
 {
-  fprintf(stderr,"dragEnd.\n");
+  DBG("dragEnd.\n");
 }
 // signal drag-cancel Emitted on the drag source when a drag has failed.
 static gboolean dragCancel ( GtkDragSource* self, GdkDrag* drag, 
     GdkDragCancelReason* reason, gpointer user_data
 ){
-  fprintf(stderr,"dragCancel.\n");
+  DBG("dragCancel.\n");
   return true;
 }
 
@@ -104,7 +104,7 @@ static gboolean cancel (
   gpointer user_data
 )
 {
-  fprintf(stderr,"cancel.\n");
+  DBG("cancel.\n");
   return true;
 }
 // signal drop-performed Emitted when the drop operation is performed on an accepting client.
@@ -112,7 +112,7 @@ static void drop_performed (
   GdkDrag* self,
   gpointer user_data
 ){
-  fprintf(stderr,"drop_performed.\n");
+  DBG("drop_performed.\n");
 }
 // signal dnd-finished Emitted when the destination side has finished reading all data.
 static void
@@ -120,7 +120,7 @@ dnd_finished (
   GdkDrag* self,
   gpointer user_data
 ){
-  fprintf(stderr,"dnd_finished.\n");
+  DBG("dnd_finished.\n");
 }
 
 ///////////////////////////////////  drop /////////////////////////////////////
@@ -153,7 +153,7 @@ static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void
 
 // in thread:
 static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *arg){
-  fprintf(stderr,"dropReadCallback: do your thing.\n" );
+  DBG("dropReadCallback: do your thing.\n" );
   const char *out_mime_type;
   GError *error_ = NULL;
   GdkDrop *drop = GDK_DROP(source_object);
@@ -162,7 +162,7 @@ static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *ar
 
   input = gdk_drop_read_finish (drop, res, &out_mime_type, &error_);
   if (error_){
-      fprintf(stderr, "** Error::dropReadCallback(): %s\n", error_->message);
+      DBG( "** Error::dropReadCallback(): %s\n", error_->message);
       gdk_drop_finish (drop, (GdkDragAction)0);
       g_error_free(error_);
       return;
@@ -209,7 +209,7 @@ static void *readAction(void *arg){
 
   gsize size;
   const void *p = g_bytes_get_data(bytes, &size);
-  fprintf(stderr, "readAction(): bytes (%d):\ntarget: %s\n%s\n", size, target, (const char *)p);
+  DBG("readAction(): bytes (%ld):\ntarget: %s\n%s\n", size, target, (const char *)p);
 //  Dialogs::info("wahtever");
   
   dnd((const char *)p, target);
@@ -270,7 +270,7 @@ static void *readAction(void *arg){
       }
       DBG("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
 
-      fprintf(stderr,"*** dropDrop %lf,%lf .\n", x, y);
+      DBG("*** dropDrop %lf,%lf .\n", x, y);
       auto path = getDropTarget(x, y, data);
       
       if (!path) {
@@ -297,7 +297,7 @@ dropEnter (
   gpointer user_data
 )
 {
-  fprintf(stderr,"dropEnter %lf,%lf.\n", x, y);
+  DBG("dropEnter %lf,%lf.\n", x, y);
 
   return GDK_ACTION_LINK;
   return GDK_ACTION_COPY;
@@ -309,7 +309,7 @@ dropLeave (
   gpointer user_data
 )
 {
-  fprintf(stderr,"dropLeave.\n");
+  DBG("dropLeave.\n");
 }
 static GdkDragAction
 dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)
@@ -343,7 +343,7 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
 }
 static gboolean dropAccept ( GtkDropTarget* self, GdkDrop* drop, gpointer user_data)
 {
-  fprintf(stderr,"dropAccept.\n");
+  DBG("dropAccept.\n");
   
   //return false; //drop not accepted on enter
   return true; //drop accepted on enter

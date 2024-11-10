@@ -64,7 +64,7 @@ public:
           Basic::concat(&clipContent, "move\n");
           break;
         case 3:
-          DBG("hello world, response is %d: link moveto\n", response, target, uriList);
+          DBG("hello world, response is %d: link moveto\n", response);
           Basic::concat(&clipContent, "link\n");
           break;
         default:

@@ -34,13 +34,6 @@ namespace xf {
           GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, GINT_TO_POINTER(flags), NULL));
         GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
 
-        // Chain link GtkFilterListModel to a GtkSortListModel.
-        // Directories first, and alphabeta.
-    /*    GtkSorter *sorter = 
-          GTK_SORTER(gtk_custom_sorter_new((GCompareDataFunc)compareFunction, NULL, NULL));
-        GtkSortListModel *sortModel = gtk_sort_list_model_new(G_LIST_MODEL(filterModel), sorter);
-        GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(sortModel));*/
-
         GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
         g_object_set_data(G_OBJECT(store), "selectionModel", s);
         g_object_set_data(G_OBJECT(s), "store", store);
@@ -49,16 +42,7 @@ namespace xf {
             skip0?s:NULL);
         return s;
       }
-/*      
-      static GtkMultiSelection *standardSelectionModel(const char *path){
-        // This does not have the up icon 
-        auto gfile = g_file_new_for_path(path);
-        GtkDirectoryList *dList = gtk_directory_list_new("standard::", gfile); 
-        gtk_directory_list_set_monitored(dList, true);
 
-        return getSelectionModel(G_LIST_MODEL(dList), false);
-      }
-*/
     public:
       static int
       getMaxNameLen(const char *path){
@@ -94,6 +78,7 @@ namespace xf {
       static GtkMultiSelection *xfSelectionModel(const char *path){
        // This section adds the up icon.
         auto flags = Settings::getInteger("flags", path);
+        if (flags < 0) flags = 0;
 
         auto up = g_path_get_dirname(path);
         TRACE("path=%s up=%s\n", path, up);
@@ -114,7 +99,7 @@ namespace xf {
         //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
         g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(upFile));
 
-        GFile *file = g_file_new_for_path(path); // XXX mem leak
+        GFile *file = g_file_new_for_path(path); // unreffed with monitor destroy.
         GFileEnumerator *dirEnum = 
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
@@ -143,6 +128,7 @@ namespace xf {
         } while (true);
 
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
+        g_object_set_data(G_OBJECT(monitor), "file", file);
 
         DBG("monitor=%p file=%p store=%p\n", monitor, file, store);
         if (error_){
@@ -160,7 +146,8 @@ namespace xf {
         return getSelectionModel(G_LIST_MODEL(store), true, flags);
       }
 
-      static bool findPosition(GListStore *store, const char *path, guint *positionF, bool verbose){
+      static bool findPosition(GListStore *store, const char *path, guint *positionF, int flags){ 
+        // result will be offset by hidden items.
         GFileInfo *infoF = g_file_info_new();
         auto name = g_path_get_basename(path);
         g_file_info_set_name(infoF, name);
@@ -168,10 +155,23 @@ namespace xf {
         g_free(name);
         g_object_unref(infoF);
         if (found){
-          if (verbose) {DBG("%s found at position %d\n", path, *positionF);}
+          DBG("%s found at position %d\n", path, *positionF);
         } else {
-          if (verbose) {DBG("%s not found by GFileInfo\n", path);  }
+          DBG("%s not found by GFileInfo\n", path); 
         }
+        // we need to figure out offset.
+        int offset = 0;
+
+        DBG("*** FIXME: get hide/show status in localdir.hh:165\n");
+        //for (int i=0; i<positionF; i++){
+          // get item from store
+          // check if isbackup or ishidden
+          // check if flag determines if not shown
+          // if not shown increment offset
+          //if (item(i) is hidden) offset++;
+        //}
+        positionF -= offset;
+        DBG("offset is %d, actual position is %d\n", offset, positionF);
         return found;
       }
 
@@ -252,13 +252,18 @@ namespace xf {
 
         bool verbose = false;
         guint positionF;
-        void *flags = NULL; // FIXME: this will determine sort order
+        auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
+        auto dirPath = g_file_get_path(dirFile);
+        int flags = Settings::getInteger(dirPath, "flags"); 
+        if (flags < 0) flags = 0;
+        g_free(dirPath);
+        
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());
          switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
               {
                 if (verbose) {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = findPosition(store, f, &positionF, verbose);
+                auto found = findPosition(store, f, &positionF, flags);
                 if (found) {
                     Child::incrementSerial(child);
                   g_list_store_remove(store, positionF);
@@ -280,7 +285,7 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
                 {
                   if (verbose) {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
-                  auto found = findPosition(store, f, &positionF, verbose);
+                  auto found = findPosition(store, f, &positionF, flags);
                   if (found) {
                     Child::incrementSerial(child);
                     g_list_store_remove(store, positionF);
@@ -313,7 +318,7 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_RENAMED:
             {
                 if (verbose) {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = findPosition(store, f, &positionF, verbose);
+                auto found = findPosition(store, f, &positionF, flags);
                 if (found){
                   Child::incrementSerial(child);
                   g_list_store_remove(store, positionF);
@@ -417,6 +422,9 @@ namespace xf {
         bool bySize = (flags & 0x10);
         bool descending = (flags & 0x04);
         bool fileType = (flags & 0x20);
+        // mutually exclusive, byDate, bySize.
+
+        TRACE("*** compareFunction flags=0x%x byDate=%d, bySize=%d, descending=%d, fileType=%d\n", flags, byDate, bySize, descending, fileType);
         
 
         GFileInfo *infoA = G_FILE_INFO(a);

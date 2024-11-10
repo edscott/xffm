@@ -161,7 +161,21 @@ namespace xf {
       if (strcmp(item,_("File type")) == 0) bit = 0x20;
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       auto flags = gridView_p->flags();
-      if (gtk_check_button_get_active(check)) gridView_p->flagOn(bit);
+
+      if (gtk_check_button_get_active(check)) {
+        // Date and size are mutually exclusive.
+        auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(check), "menu")); 
+        gridView_p->flagOn(bit);
+        if (bit == 0x08){ // _("Date")
+          gridView_p->flagOff(0x10);
+          auto exclude = g_object_get_data(G_OBJECT(menu), _("Size"));
+          gtk_check_button_set_active(GTK_CHECK_BUTTON(exclude), false);
+        } else if (bit == 0x10){ // _("Size")
+          gridView_p->flagOff(0x08);
+          auto exclude = g_object_get_data(G_OBJECT(menu), _("Date"));
+          gtk_check_button_set_active(GTK_CHECK_BUTTON(exclude), false);
+        }
+      }
       else gridView_p->flagOff(bit);
       TRACE("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridView_p->flags());
       auto configFlags = Settings::getInteger("flags", gridView_p->path());
