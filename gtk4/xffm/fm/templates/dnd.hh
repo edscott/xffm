@@ -31,8 +31,19 @@ static GtkEventController *createDropController(void *data){
     static void
     image_drag_begin (GtkDragSource *source, GdkDrag *drag, GtkWidget *widget)
     {
+      auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      GList *selection_list = gridView_p->getSelectionList();
       GdkPaintable *paintable;
-      paintable = gtk_widget_paintable_new (widget);
+      if (g_list_length(selection_list) > 1) {
+        paintable = Texture<bool>::load("dnd-multiple", 48);
+      } else {
+        // get from item selected.
+        //paintable = gtk_widget_paintable_new (widget);
+        auto info = G_FILE_INFO(selection_list->data);
+        paintable = Texture<bool>::load(info); // Loads icon from icontheme.
+      }
+      
+      
       gtk_drag_source_set_icon (source, paintable, 0, 0);
       g_object_unref (paintable);
       GdkDragAction actions =
@@ -54,6 +65,19 @@ static GtkEventController *createDropController(void *data){
         DBG("*** no drag, selection list ==0\n");
         return NULL;
       }
+
+      //FIXME get widget at x,y. If widget not in selection list, cancel dnd.
+      // return NULL;
+/*
+      bool item = false;
+      for (auto l=selection_list; l && l->data; l=l->next){
+        if (l->data == itemInfo){
+          item = true;
+          break;
+        }
+      }
+      if (!item) return NULL;
+*/
       char *string = g_strdup("");
       for (GList *l = selection_list; l && l->data; l=l->next){
         auto info = G_FILE_INFO(l->data);

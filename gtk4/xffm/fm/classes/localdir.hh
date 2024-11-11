@@ -146,32 +146,44 @@ namespace xf {
         return getSelectionModel(G_LIST_MODEL(store), true, flags);
       }
 
-      static bool findPosition(GListStore *store, const char *path, guint *positionF, int flags){ 
+      static int getHiddenCount(GListModel *listModel, int flags, int limit){
+        int count = 0;
+        auto n = g_list_model_get_n_items(listModel);
+        for (guint i=0; i<limit; i++){
+          auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
+          int showHidden = flags & 0x01;
+          int showBackups = flags & 0x02;
+          if (showHidden && g_file_info_get_is_hidden(info)) {
+            DBG("flags= 0x%x, showHidden = %d, item is hidden type\n", showHidden );
+            count++;
+          }
+          if (!showBackups && g_file_info_get_is_backup(info)) count++;
+        }
+        return count;
+      }
+    public:
+      static bool findPositionModel(GListStore *store, const char *path, guint *positionM, int flags){
+        guint positionS;
+        if (!findPositionStore(store, path, &positionS, flags)) return false;
+        auto offset = getHiddenCount(G_LIST_MODEL(store), flags, positionS);
+        //*positionM = positionS - offset;
+        DBG("offset is %d, store position = %d, model position is %d\n", offset, positionS, *positionM);
+        return true;
+      }
+    private:
+      static bool findPositionStore(GListStore *store, const char *path, guint *positionS, int flags){ 
         // result will be offset by hidden items.
         GFileInfo *infoF = g_file_info_new();
         auto name = g_path_get_basename(path);
         g_file_info_set_name(infoF, name);
-        auto found = g_list_store_find_with_equal_func(store, infoF, equal_f, positionF);
+        auto found = g_list_store_find_with_equal_func(store, infoF, equal_f, positionS);
         g_free(name);
         g_object_unref(infoF);
         if (found){
-          DBG("%s found at position %d\n", path, *positionF);
+          DBG("%s found at position %d\n", path, *positionS);
         } else {
           DBG("%s not found by GFileInfo\n", path); 
         }
-        // we need to figure out offset.
-        int offset = 0;
-
-        DBG("*** FIXME: get hide/show status in localdir.hh:165\n");
-        //for (int i=0; i<positionF; i++){
-          // get item from store
-          // check if isbackup or ishidden
-          // check if flag determines if not shown
-          // if not shown increment offset
-          //if (item(i) is hidden) offset++;
-        //}
-        positionF -= offset;
-        DBG("offset is %d, actual position is %d\n", offset, positionF);
         return found;
       }
 
@@ -263,7 +275,7 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
               {
                 if (verbose) {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = findPosition(store, f, &positionF, flags);
+                auto found = findPositionStore(store, f, &positionF, flags);
                 if (found) {
                     Child::incrementSerial(child);
                   g_list_store_remove(store, positionF);
@@ -285,7 +297,7 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
                 {
                   if (verbose) {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
-                  auto found = findPosition(store, f, &positionF, flags);
+                  auto found = findPositionStore(store, f, &positionF, flags);
                   if (found) {
                     Child::incrementSerial(child);
                     g_list_store_remove(store, positionF);
@@ -318,7 +330,7 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_RENAMED:
             {
                 if (verbose) {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = findPosition(store, f, &positionF, flags);
+                auto found = findPositionStore(store, f, &positionF, flags);
                 if (found){
                   Child::incrementSerial(child);
                   g_list_store_remove(store, positionF);
@@ -357,7 +369,7 @@ namespace xf {
         if (strcmp(nameA, nameB) == 0) return true;
         return false;
       }
-      
+    public:      
       static GtkMultiSelection *rootSelectionModel(void){
         GError *error_ = NULL;
         Bookmarks::initBookmarks();

@@ -8,10 +8,10 @@ template <class DirectoryClass>
   private:
       GtkWidget *child_;
       GtkMultiSelection *selectionModel_ = NULL;
-      //GtkPopover *menu_=NULL;
       GtkWidget *view_;
       void *gridViewClick_f_;
       char *path_;
+      // myMenu is for processing keys for individual widget popovers
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
       int maxNameLen_ = 0;
       GList *selectionList_ = NULL;
@@ -56,8 +56,9 @@ template <class DirectoryClass>
         DBG("gridview flags = 0x%x\n", flags_);
         
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
-        addGestureClickView1(view_, NULL, this);
-        addGestureClickView3(view_, NULL, this);
+        /*addGestureClickView1(view_, NULL, this);
+        addGestureClickView3(view_, NULL, this);*/
+
         //addTopMotionController();
         
         auto dropController = Dnd<DirectoryClass>::createDropController(this);
@@ -142,7 +143,8 @@ template <class DirectoryClass>
       }
 
   private:
-    static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
+      // Send this to main menu: FIXME
+/*    static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -165,6 +167,22 @@ template <class DirectoryClass>
       }
 
     }
+    */
+/*
+    static GtkPopover *getPopover(GridView<DirectoryClass> *gridView_p){ 
+      auto path = gridView_p->path();
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
+      auto popover = gridView_p->myMenu_->mkMenu(markup);
+      //gridView_p->setMenu(popover);
+      g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
+
+      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      g_free(markup);
+      g_object_set_data(G_OBJECT(gridView_p->view()), "menu", popover);
+      gtk_widget_set_parent(GTK_WIDGET(popover), gridView_p->view());
+      return popover;
+    }
+    */
 
     static void setPopoverItems(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
@@ -240,20 +258,6 @@ template <class DirectoryClass>
       return popover;
     }
 
-    static GtkPopover *getPopover(GridView<DirectoryClass> *gridView_p){ 
-      auto path = gridView_p->path();
-      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-      auto popover = gridView_p->myMenu_->mkMenu(markup);
-      //gridView_p->setMenu(popover);
-      g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
-
-      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
-      g_free(markup);
-      g_object_set_data(G_OBJECT(gridView_p->view()), "menu", popover);
-      gtk_widget_set_parent(GTK_WIDGET(popover), gridView_p->view());
-      return popover;
-    }
-
     static GtkPopover *getPopover(GObject *object, GridView<DirectoryClass> *gridView_p){ 
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
@@ -271,59 +275,8 @@ template <class DirectoryClass>
       g_free(path);
       return popover;
     }
-    
-  static void setupMenu(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
-    auto path = gridView_p->path();
-    GridviewMenu<DirectoryClass> d;
-    for (auto keys = d.keys(); keys && *keys; keys++){
-      auto item = g_object_get_data(G_OBJECT(popover), *keys);
-      gtk_widget_set_visible(GTK_WIDGET(item), false);
-    }
-
-    auto addB = g_object_get_data(G_OBJECT(popover), _("Add bookmark"));
-    auto removeB = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
-    auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
-    auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
-    gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
-    auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-    if (c->validClipBoard()){
-      gtk_widget_set_visible(GTK_WIDGET(paste), true);
-    } else {
-      gtk_widget_set_visible(GTK_WIDGET(paste), false);
-    }
-    gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
-    gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
-    const char *show[]={_("Open in new tab"), _("Select All"),_("Match regular expression"),
-      _("Show"), _("Hidden files"), _("Backup files"), _("Sort mode"), _("Descending"),
-      _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), _("Apply modifications"), 
-      NULL};
-    for (auto p=show; p && *p; p++){
-      auto widget = g_object_get_data(G_OBJECT(popover), *p);
-      if (widget){
-        gtk_widget_set_visible(GTK_WIDGET(widget), true);
-      } else {
-        DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
-      }
-    }
-    auto configFlags = Settings::getInteger("flags", gridView_p->path());
-    if (configFlags < 0) configFlags = 0;
-    auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
-    gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
-
-    //auto flags = gridView_p->flags();
-    const char *checks[]={_("Hidden files"), _("Backup files"),_("Descending"), _("Date"), _("Size"), _("File type"), NULL};   
-    int bits[]={ 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,0};
-    for (int i=0; checks[i] != NULL; i++){
-      int bit = bits[i];
-      int status = bit & gridView_p->flags();
-      auto widget = g_object_get_data(G_OBJECT(popover), checks[i]);
-      gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), status);
-    }
-
-
-    
-  }
-    
+/*    
+*/    
   static void setupMenu(GtkPopover *popover, GFileInfo *info){
       auto path = Basic::getPath(info);
       auto isDir = g_file_test(path, G_FILE_TEST_IS_DIR);
@@ -396,7 +349,7 @@ template <class DirectoryClass>
         gtk_popover_popup(GTK_POPOVER(popover));
       }
   }
-
+/*
   static void placeMenu(GridView<DirectoryClass> *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(gridView_p->view()), "menu");
       if (!popover){
@@ -410,6 +363,7 @@ template <class DirectoryClass>
         gtk_popover_popup(GTK_POPOVER(popover));
       }
   }
+  */
   public:
   static void placeMenu(GObject *object, GridView<DirectoryClass> *gridView_p){
       auto list_item =GTK_LIST_ITEM(object);
@@ -485,8 +439,10 @@ template <class DirectoryClass>
       TRACE("gtk_bitset_get_size = %ld\n", size);
 
       if (size == 0){
-        placeMenu(gridView_p);
-        return true;      
+        // This works because on pressed we select the widget, if applicable.
+        return false;
+        //placeMenu(gridView_p);
+        //return true;      
       }
 
       /* this is borked

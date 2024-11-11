@@ -4,6 +4,7 @@
 
 #include <gio/gio.h>
 namespace xf {
+class DirectoryClass;
 
 template <class Type> 
 class MainWindow: public FMbuttonBox {
@@ -302,16 +303,26 @@ private:
       auto menuButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
       auto newTabButton = Basic::newButton("list-add", _("New Tab"));
-      auto newMenuButton = Basic::newMenuButton("open-menu", NULL);
 
+      auto newMenuButton = Basic::newButton("open-menu", _("Main menu"));
+      auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
+      auto menu = myMainMenu->mkMenu(NULL);
+      gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(newMenuButton));
+      g_object_set_data(G_OBJECT(newMenuButton), "menu", menu);
+      delete myMainMenu;
+
+      /*
+      auto newMenuButton = Basic::newMenuButton("open-menu", NULL);
       auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
       myMainMenu->setMenu(newMenuButton);
-      delete myMainMenu;
+      delete myMainMenu;*/
 
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
               BUTTON_CALLBACK(on_new_page), (void *)this);    
       g_signal_connect (notebook_, "switch-page", 
                 NOTEBOOK_CALLBACK (on_switch_page), (void *)this);
+      g_signal_connect (newMenuButton, "clicked", 
+                G_CALLBACK (clickMenu), (void *)this);
       
       gtk_widget_set_hexpand(GTK_WIDGET(actionWidget), FALSE);
 
@@ -348,6 +359,73 @@ private:
     }
 
 private:
+    static void clickMenu(GtkMenuButton *widget, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu"));
+      auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      setupMenu(menu, gridView_p);
+      auto basename = g_path_get_basename( gridView_p->path());     
+      auto markup = g_strconcat("<b><span color=\"blue\">", _("Main menu"),
+          ": <span color=\"red\">",basename,"</span></span></b>", NULL);
+      gtk_popover_popup(menu);
+      auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menu), "titleLabel"));
+      gtk_label_set_markup(label, markup);
+      g_free(basename);
+      g_free(markup);
+
+    }
+
+    static void setupMenu(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
+      auto path = gridView_p->path();
+      GridviewMenu<DirectoryClass> d;
+      /*for (auto keys = d.keys(); keys && *keys; keys++){
+        auto item = g_object_get_data(G_OBJECT(popover), *keys);
+        gtk_widget_set_visible(GTK_WIDGET(item), false);
+      }*/
+
+      auto addB = g_object_get_data(G_OBJECT(popover), _("Add bookmark"));
+      auto removeB = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
+      auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
+      //auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
+      //gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
+      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      if (c->validClipBoard()){
+        gtk_widget_set_visible(GTK_WIDGET(paste), true);
+      } else {
+        gtk_widget_set_visible(GTK_WIDGET(paste), false);
+      }
+      gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
+      gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
+      const char *show[]={ _("Select All"),_("Match regular expression"),
+        _("Show"), _("Hidden files"), _("Backup files"), _("Sort mode"), _("Descending"),
+        _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), _("Apply modifications"), 
+        NULL};
+      for (auto p=show; p && *p; p++){
+        auto widget = g_object_get_data(G_OBJECT(popover), *p);
+        if (widget){
+          //DBG("show %s:%p\n", *p, widget);
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+        } else {
+          DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
+        }
+      }
+      auto configFlags = Settings::getInteger("flags", gridView_p->path());
+      if (configFlags < 0) configFlags = 0;
+      auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
+      gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
+
+      //auto flags = gridView_p->flags();
+      const char *checks[]={_("Hidden files"), _("Backup files"),_("Descending"), _("Date"), _("Size"), _("File type"), NULL};   
+      int bits[]={ 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,0};
+      for (int i=0; checks[i] != NULL; i++){
+        int bit = bits[i];
+        int status = bit & gridView_p->flags();
+        auto widget = g_object_get_data(G_OBJECT(popover), checks[i]);
+        gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), status);
+      }
+
+
+      
+    }
 };
 
 

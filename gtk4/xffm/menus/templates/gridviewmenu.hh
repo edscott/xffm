@@ -14,7 +14,7 @@ namespace xf {
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("auto"), //
-        _("Toggle Text Mode"),
+        //_("Toggle Text Mode"),
         _("Open in new tab"), //
         _("Open with"), //
         _("Create a compressed archive with the selected objects"),
@@ -31,20 +31,9 @@ namespace xf {
         _("Link"),
         _("Properties"),
         _("Delete"),
-        _("Select All"), 
-        _("Match regular expression"), 
+       // _("Select All"), 
+       // _("Match regular expression"), 
 
-        _("Show"),
-        _("Hidden files"),
-        _("Backup files"),
-
-        _("Sort mode"),
-
-        _("Descending"),
-        _("Date"),
-        _("Size"),
-        _("File type"),
-        _("Apply modifications"),
 
         
         NULL
@@ -54,7 +43,6 @@ namespace xf {
 
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Toggle Text Mode"),(void *) "emblem-fifo"}, 
         {_("Open in new tab"),(void *) DUAL_VIEW}, 
         {_("Open with"),(void *) "emblem-run"}, 
         {_("auto"),(void *) "emblem-run"}, 
@@ -66,8 +54,9 @@ namespace xf {
         {_("Copy"),(void *) "copy"}, 
         {_("Cut"),(void *) "cut"}, 
         {_("Paste"),(void *) "paste"}, 
-        {_("Apply modifications"),(void *) "apply"},
-        {NULL, NULL}
+        {_("Add bookmark"),(void *) "emblem-bookmark"}, 
+        {_("Remove bookmark"),(void *) "emblem-bookmark"}, 
+       {NULL, NULL}
       }; 
       return menuIconNames_;
     }
@@ -86,16 +75,8 @@ namespace xf {
         {_("Delete"),(void *) remove}, 
         {_("Add bookmark"),(void *) addB}, 
         {_("Remove bookmark"),(void *) removeB}, 
-        {_("Select All"),(void *) selectAll}, 
+      //  {_("Select All"),(void *) selectAll}, 
         {_("Properties"),(void *) properties}, 
-
-        {_("Hidden files"),(void *) toggleItem},
-        {_("Backup files"),(void *) toggleItem},
-        {_("Descending"),(void *) toggleItem},
-        {_("Date"),(void *) toggleItem},
-        {_("Size"),(void *) toggleItem},
-        {_("File type"),(void *) toggleItem},
-        {_("Apply modifications"),(void *) apply},
        
         {NULL, NULL}
       };
@@ -103,28 +84,12 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::toggleVpane}, 
-        {_("Open in new tab"),(void *) NULL}, 
-       // {_("Copy"),(void *) cpResponse::action}, 
-        {_("Hidden files"),(void *) _("Hidden files")},
-        {_("Backup files"),(void *) _("Backup files")},
-        {_("Descending"),(void *) _("Descending")},
-        {_("Date"),(void *) _("Date")},
-        {_("Size"),(void *) _("Size")},
-        {_("File type"),(void *) _("File type")},
         {NULL, NULL}
       };
       return menuData_;      
     }
     const char **checkboxes(void){
-      static const char *boxes_[] = { 
-        _("Hidden files"),
-        _("Backup files"),
-        _("Descending"),
-        _("Date"),
-        _("Size"),
-        _("File type"),
-        NULL};
+      static const char *boxes_[] = { NULL};
       return boxes_;      
     }
 
@@ -147,65 +112,11 @@ namespace xf {
    }
 
     private:
-    static void
-    toggleItem(GtkCheckButton *check, gpointer data)
-    {
-      auto item = (const gchar *)data;
-      TRACE("toggleItem: %s\n", item);
-      int bit = 0;
-      if (strcmp(item,_("Hidden files")) == 0) bit = 0x01;
-      if (strcmp(item,_("Backup files")) == 0) bit = 0x02;
-      if (strcmp(item,_("Descending")) == 0) bit = 0x04;
-      if (strcmp(item,_("Date")) == 0) bit = 0x08;
-      if (strcmp(item,_("Size")) == 0) bit = 0x10;
-      if (strcmp(item,_("File type")) == 0) bit = 0x20;
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
-      auto flags = gridView_p->flags();
-
-      if (gtk_check_button_get_active(check)) {
-        // Date and size are mutually exclusive.
-        auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(check), "menu")); 
-        gridView_p->flagOn(bit);
-        if (bit == 0x08){ // _("Date")
-          gridView_p->flagOff(0x10);
-          auto exclude = g_object_get_data(G_OBJECT(menu), _("Size"));
-          gtk_check_button_set_active(GTK_CHECK_BUTTON(exclude), false);
-        } else if (bit == 0x10){ // _("Size")
-          gridView_p->flagOff(0x08);
-          auto exclude = g_object_get_data(G_OBJECT(menu), _("Date"));
-          gtk_check_button_set_active(GTK_CHECK_BUTTON(exclude), false);
-        }
-      }
-      else gridView_p->flagOff(bit);
-      TRACE("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridView_p->flags());
-      auto configFlags = Settings::getInteger("flags", gridView_p->path());
-      if (configFlags < 0) configFlags = 0;
-      
-      auto popover = g_object_get_data(G_OBJECT(check), _("menu"));
-      auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
-      gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
-
-      //toggleGroupItem(menuItem, "LocalView", item);
-    }
-
     static char *getPath(GtkPopover *menu){
       auto data =   g_object_get_data(G_OBJECT(menu), "info");
       if (!data) return NULL;
       auto info = G_FILE_INFO(data);
       return Basic::getPath(info);
-    }
-
-    static void 
-    apply(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
-
-      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
-
-      TRACE("apply %s...\n", gridview_p->path());
-      Settings::setInteger("flags", gridview_p->path(), gridview_p->flags());
-      gtk_widget_unparent(GTK_WIDGET(menu));
-      Workdir<Type>::setWorkdir(gridview_p->path());
     }
 
     static void 
@@ -216,6 +127,28 @@ namespace xf {
       //DBG("path= %s, info=%p\n", path, info);
       new Properties(info);
       //g_free(path);
+    }
+    
+    static void addB(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      gchar *path = getPath(menu);
+      
+      if (path) {
+        DBG("path is %s\n", path);
+        Bookmarks::addBookmark(path);
+        g_free(path);
+      }
+    }
+    static void removeB(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      gchar *path = getPath(menu);
+      
+      if (path) {
+        Bookmarks::removeBookmark(path);
+        g_free(path);
+      }
     }
 
     static void 
@@ -238,53 +171,6 @@ namespace xf {
       }
       g_free(path);
     }
-    
-    static void addB(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
-      gchar *path = NULL;
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
-      if (gridView_p) path = g_strdup(gridView_p->path());
-      else {
-        path = getPath(menu);
-      }
-      if (path) {
-        DBG("path is %s\n", path);
-        Bookmarks::addBookmark(path);
-        g_free(path);
-      }
-    }
-
-    static void selectAll(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
-      if (!gridView_p) {
-        DBG("selectAll: no gridView_p\n");
-        return;
-      }
-      THREADPOOL->clear();
-      Child::incrementSerial();
-      auto selectionModel = gridView_p->selectionModel();
-      gtk_selection_model_select_all (GTK_SELECTION_MODEL(selectionModel));
-
-    }
-    
-    static void removeB(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
-      gchar *path = NULL;
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
-      if (gridView_p) path = g_strdup(gridView_p->path());
-      else {
-        path = getPath(menu);
-      }
-      if (path) {
-        Bookmarks::removeBookmark(path);
-        g_free(path);
-      }
-    }
-
     static void duplicate(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);

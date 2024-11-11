@@ -289,7 +289,7 @@ template <class DirectoryClass>
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for select
-      TRACE("addGestureClickDown: self = %p, item=%p\n", self, item);
+      DBG("addGestureClickDown: self = %p, item=%p\n", self, item);
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (down_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
@@ -365,7 +365,7 @@ template <class DirectoryClass>
         g_free(dirPath);
        
         DBG("selectWidget: path= %s\n", path);
-        auto found = LocalDir::findPosition(store, path,  &positionF, flags);
+        auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
           DBG("gridViewClick(): %s not found\n", path);
           g_free(path);
@@ -395,7 +395,7 @@ template <class DirectoryClass>
       //gridView_p->dndOn = true;
       //DBG("dnd %d\n", gridView_p->dndOn);
       selectWidget(w, gridView_p);
-      //return false;
+      return false;
       return true;
     }
     static GtkWidget *backupImage(const char *name, GFileInfo *info, int size){
