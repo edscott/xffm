@@ -153,11 +153,8 @@ namespace xf {
           auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
           int showHidden = flags & 0x01;
           int showBackups = flags & 0x02;
-          if (showHidden && g_file_info_get_is_hidden(info)) {
-            DBG("flags= 0x%x, showHidden = %d, item is hidden type\n", showHidden );
-            count++;
-          }
-          if (!showBackups && g_file_info_get_is_backup(info)) count++;
+          if (showHidden == 0x0 && g_file_info_get_is_hidden(info)) count++;
+          if (showBackups == 0x0 && g_file_info_get_is_backup(info)) count++;
         }
         return count;
       }
@@ -166,8 +163,9 @@ namespace xf {
         guint positionS;
         if (!findPositionStore(store, path, &positionS, flags)) return false;
         auto offset = getHiddenCount(G_LIST_MODEL(store), flags, positionS);
-        //*positionM = positionS - offset;
-        DBG("offset is %d, store position = %d, model position is %d\n", offset, positionS, *positionM);
+        //auto offset = 0;
+        *positionM = positionS - offset;
+        TRACE("*** offset is %d, store position = %d, model position is %d\n", offset, positionS, *positionM);
         return true;
       }
     private:
@@ -180,9 +178,9 @@ namespace xf {
         g_free(name);
         g_object_unref(infoF);
         if (found){
-          DBG("%s found at position %d\n", path, *positionS);
+          TRACE("%s found at position %d\n", path, *positionS);
         } else {
-          DBG("%s not found by GFileInfo\n", path); 
+          TRACE("%s not found by GFileInfo\n", path); 
         }
         return found;
       }

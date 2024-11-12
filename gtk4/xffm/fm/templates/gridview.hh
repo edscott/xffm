@@ -56,8 +56,8 @@ template <class DirectoryClass>
         DBG("gridview flags = 0x%x\n", flags_);
         
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
-        /*addGestureClickView1(view_, NULL, this);
-        addGestureClickView3(view_, NULL, this);*/
+        addGestureClickView1(view_, NULL, this);// unselect all on release
+        /*addGestureClickView3(view_, NULL, this); n// menu (deprecated)*/
 
         //addTopMotionController();
         
@@ -389,6 +389,13 @@ template <class DirectoryClass>
               void *data){
       auto gridView_p = (GridView<DirectoryClass> *)data;
       auto selectionModel = gridView_p->selectionModel();
+      // if control or shift down, return false.
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto event = gtk_event_controller_get_current_event(eventController);
+      auto modifierType = gdk_event_get_modifier_state (event);
+      if (modifierType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK))) return false;
+      if (modifierType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) return false;
+      
       gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
       return true;
     }

@@ -292,9 +292,9 @@ static void *readAction(void *arg){
       if (action == (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE| GDK_ACTION_LINK)){
         action = GDK_ACTION_MOVE;
       }
-      DBG("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
+      TRACE("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
 
-      DBG("*** dropDrop %lf,%lf .\n", x, y);
+      TRACE("*** dropDrop %lf,%lf .\n", x, y);
       auto path = getDropTarget(x, y, data);
       
       if (!path) {

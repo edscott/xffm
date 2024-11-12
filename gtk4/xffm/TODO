@@ -8,9 +8,6 @@ will be moved to main menu. I guess this will not be a problem, as it will apply
 
 
 Pending issues: 
-* Click outside of items does not unselect all
-* Dnd will begin if item outside selection is used to start drag, but will
-    not be included in selection 
 * put toggle text mode in tty menus
 * DnD: Watch out for gtk4 bugfixes  
 * tar/untar, zip/unzip dialog

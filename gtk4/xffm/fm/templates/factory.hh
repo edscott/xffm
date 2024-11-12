@@ -22,7 +22,7 @@ template <class DirectoryClass>
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView<DirectoryClass> *gridView_p){
         // object is a GtkListItem!
-        //DBG("factorySetup...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
+        //TRACE("factorySetup...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
         auto box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -71,10 +71,11 @@ template <class DirectoryClass>
 
         Basic::addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
+
         addGestureClickUp(imageBox, object, gridView_p);
         addGestureClickUp(labelBox, object, gridView_p);
         addGestureClickUp(hlabelBox, object, gridView_p);
-        addGestureClickUp(imageBox, object, gridView_p);
+
         addGestureClickMenu(imageBox, object, gridView_p);
         addGestureClickMenu(labelBox, object, gridView_p);
         addGestureClickMenu(hlabelBox, object, gridView_p);
@@ -100,7 +101,7 @@ template <class DirectoryClass>
       static void
       factoryBind(GtkSignalListItemFactory *factory, GObject *object, GridView<DirectoryClass> *gridView_p)
       {
-        //DBG("factoryBind...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
+        //TRACE("factoryBind...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
        
         // const:
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
@@ -289,7 +290,7 @@ template <class DirectoryClass>
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for select
-      DBG("addGestureClickDown: self = %p, item=%p\n", self, item);
+      TRACE("addGestureClickDown: self = %p, item=%p\n", self, item);
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (down_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
@@ -356,7 +357,7 @@ template <class DirectoryClass>
       guint positionF;
       auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
       auto item = G_FILE_INFO(gtk_list_item_get_item(listItem));
-      DBG("selectWidget: self(w) = %p, item=%p\n", w, item);
+      TRACE("selectWidget: self(w) = %p, item=%p\n", w, item);
       if (item) {
         auto path = Basic::getPath(item);
         auto dirPath = g_path_get_dirname(path);
@@ -364,19 +365,20 @@ template <class DirectoryClass>
         if (flags < 0) flags = 0;
         g_free(dirPath);
        
-        DBG("selectWidget: path= %s\n", path);
+        TRACE("selectWidget: path= %s\n", path);
         auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
-          DBG("gridViewClick(): %s not found\n", path);
+          TRACE("gridViewClick(): %s not found\n", path);
           g_free(path);
           return false;
         } 
-        DBG("Found %s at %d\n", path, positionF);
+        TRACE("Found %s at %d\n", path, positionF);
         g_free(path);
         auto selectionModel = gridView_p->selectionModel();
         gtk_selection_model_select_item(selectionModel, positionF, false);
-        return true;
+        return false;
       }
+      TRACE("*** selectWidget: item is null\n");
       return false;
    }
 
@@ -393,7 +395,7 @@ template <class DirectoryClass>
       gridView_p->y(y);
 
       //gridView_p->dndOn = true;
-      //DBG("dnd %d\n", gridView_p->dndOn);
+      //TRACE("dnd %d\n", gridView_p->dndOn);
       selectWidget(w, gridView_p);
       return false;
       return true;
