@@ -80,6 +80,9 @@ class cpDropResponse {
       pthread_create(&thread, NULL, thread1, arg);
       pthread_detach(thread);
 
+      // clipboard contents no longer needed
+      c->clearClipBoard();
+
       TRACE("thread 1 detached\n");
     }
 private:
