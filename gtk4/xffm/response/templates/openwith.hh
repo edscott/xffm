@@ -47,7 +47,9 @@ protected:
       return g;
     }
 public:
-    
+    void freeSelectionList(void){
+      Basic::freeSelectionList(selectionList_);
+    } 
     ~OpenWith (void){
        gtk_widget_set_visible(GTK_WIDGET(dialog_), FALSE);
        g_free(path_);
@@ -64,11 +66,11 @@ public:
 
       if (inPath) path_ = g_strdup(inPath);
       else {
-        if (!selectionList){
-          DBG("*** Error:: OpenWith(): selectionList is NULL.\n");
+        if (!selectionList_){
+          DBG("*** Error:: OpenWith(): selectionList_ is NULL.\n");
           exit(1);
         }
-        auto info = G_FILE_INFO(selectionList->data);
+        auto info = G_FILE_INFO(selectionList_->data);
         path_ = Basic::getPath(info);
       }
 
@@ -106,7 +108,7 @@ public:
       // path title
       auto label = GTK_LABEL(gtk_label_new (""));
       auto markup = g_strdup_printf("<span color=\"%s\" size=\"large\"> <b>%s</b></span>", 
-          (selectionList==NULL)?"blue":"red",(selectionList==NULL)?path_:_("Multiple selections"));
+          (selectionList_==NULL)?"blue":"red",(selectionList_==NULL)?path_:_("Multiple selections"));
       gtk_label_set_markup(label, markup);
       g_free(markup);
       Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(label), TRUE, TRUE, 0);
@@ -317,6 +319,7 @@ public:
         if(keyval == GDK_KEY_Return) { 
           run(object);
           object->timeout_=-1;
+          object->freeSelectionList();
           // Do not call return from Prompt class.
           return TRUE;
         }
@@ -381,6 +384,7 @@ private:
               gpointer data) {
         auto object = (OpenWith *)data;
         run(object);
+        object->freeSelectionList();
         object->timeout_=-1;
     }
  
@@ -392,6 +396,7 @@ private:
               gdouble y,
               gpointer data) {
       auto object = (OpenWith *)data;
+      object->freeSelectionList();
       object->timeout_=-1;
     }
 
@@ -399,6 +404,7 @@ private:
     dialogProceed (GtkButton *button, void *data) {
         auto object = (OpenWith *)data;
         run(object);
+        object->freeSelectionList();
         object->timeout_=-1;
     }
 /*
@@ -414,7 +420,8 @@ private:
     dialogClose(GtkWindow *dialog, void *data){
       auto object = (OpenWith *)data;
       object->timeout_=-1;
-//      delete object;
+      object->freeSelectionList();
+
       return TRUE;
     }
 /*

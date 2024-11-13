@@ -2,6 +2,14 @@
 #define BASIC_HH
 namespace xf {
   class Basic {
+    public:
+      static void freeSelectionList(GList *selectionList){
+        for (auto l=selectionList; l && l->data; l= l->next){
+          auto info = G_OBJECT(l->data);
+          g_object_unref(info);
+        }
+        g_list_free(selectionList);
+      }
     private:
 #define PAGE_LINE 256
 

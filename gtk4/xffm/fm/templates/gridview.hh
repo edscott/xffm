@@ -14,7 +14,6 @@ template <class DirectoryClass>
       // myMenu is for processing keys for individual widget popovers
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
       int maxNameLen_ = 0;
-      GList *selectionList_ = NULL;
       double x_;
       double y_;
       int flags_=0;
@@ -74,9 +73,6 @@ template <class DirectoryClass>
           //g_object_unref(G_OBJECT(menu_));
         //}
         if (myMenu_) delete myMenu_; // main menu
-        // FIXME: sporadic crash on dnd copy:
-        DBG("~GridView g_list_free(selectionList_...\n");
-        g_list_free(selectionList_);
 
         g_free(path_);
         DBG("~GridView complete.\n");
@@ -416,17 +412,17 @@ template <class DirectoryClass>
     GList *getSelectionList(void){
       guint position;
       GtkBitsetIter iter;
-      if (selectionList_) g_list_free(selectionList_);
-      selectionList_ = NULL;
+      GList *selectionList = NULL;
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel_));
       if (gtk_bitset_iter_init_first (&iter, bitset, &position)){
         auto list = G_LIST_MODEL(selectionModel_);        
         do {
           auto info = G_FILE_INFO(g_list_model_get_item (list, position));
-          selectionList_ = g_list_append(selectionList_, info);
+          g_object_ref(G_OBJECT(info));
+          selectionList = g_list_append(selectionList, info);
         } while (gtk_bitset_iter_next (&iter,&position));
       }
-      return selectionList_;
+      return selectionList;
     }
     
   private:

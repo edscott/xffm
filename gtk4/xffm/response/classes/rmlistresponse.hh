@@ -69,7 +69,7 @@ public:
 
         g_free(path);
       } // end selection list loop
-      g_list_free(selectionList);
+      Basic::freeSelectionList(selectionList);
       g_object_set_data(G_OBJECT(dialog), "selectionList", NULL);
       return NULL;
     }

@@ -204,7 +204,9 @@ namespace xf {
     static void remove(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto selectionList = (GList *)g_object_get_data(G_OBJECT(menu), "selectionList");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+
+      auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         Dialogs::rmList(menu, selectionList);
       /*  TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
