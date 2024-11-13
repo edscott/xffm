@@ -28,7 +28,7 @@ namespace xf {
           _("Open terminal"),
           _("Home"),
           //_("Clear Log"),
-          _("Show/hide grid."),
+          _("Toggle Text Mode"),
           NULL
         };
         void *bCallback[]={

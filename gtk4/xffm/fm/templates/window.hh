@@ -364,8 +364,8 @@ private:
       auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
       setupMenu(menu, gridView_p);
       auto basename = g_path_get_basename( gridView_p->path());     
-      auto markup = g_strconcat("<b><span color=\"blue\">", _("Main menu"),
-          ": <span color=\"red\">",basename,"</span></span></b>", NULL);
+      auto markup = g_strconcat("<b><span color=\"blue\">", _("Directory name: "),
+          "<span color=\"red\">",basename,"</span></span></b>", NULL);
       gtk_popover_popup(menu);
       auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menu), "titleLabel"));
       gtk_label_set_markup(label, markup);

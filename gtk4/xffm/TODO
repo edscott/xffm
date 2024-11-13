@@ -8,20 +8,17 @@ will be moved to main menu. I guess this will not be a problem, as it will apply
 
 
 Pending issues: 
-* put toggle text mode in tty menus
-* DnD: Watch out for gtk4 bugfixes  
-* tar/untar, zip/unzip dialog
-* main menu css format corrections
+* For executables, add exe emblem.
+* pathbar menu: verify
+* pathbar dnd
 * gridview: verify linebreaks with iconsize
 * gridview: verify tab labels with load gridview
+* rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
+ 
+* tar/untar, zip/unzip dialog
 * gridview: ecryptfs dialog and root elements
 * gridview: mount/unmount and fstab root elements
 * xffm-find4
-* pathbar menu: verify
-* For symlinks, add symlink emblem to icon.
-* For executables, add exe emblem.
-* rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
-* tooltip on nondirectory icons.
-* sort by size/date/type buttons (toggle buttons in vbuttonbox)
-
+* tooltip on nondirectory icons (maybe not).
+* DnD: Watch out for gtk4 bugfixes 
 
