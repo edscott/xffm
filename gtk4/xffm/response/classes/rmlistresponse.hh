@@ -74,6 +74,10 @@ public:
       return NULL;
     }
     static void *asyncNo(void *data){
+      auto dialogObject = (DialogTimeout<rmResponse> *)data;
+      auto dialog = dialogObject->dialog();
+      auto selectionList = (GList *)g_object_get_data(G_OBJECT(dialog), "selectionList");
+      Basic::freeSelectionList(selectionList);
       return NULL;
     }
 };
