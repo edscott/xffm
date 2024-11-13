@@ -225,14 +225,14 @@ namespace xf {
     static void copy(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto selectionList = (GList *)g_object_get_data(G_OBJECT(menu), "selectionList");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
         ClipBoard::copyClipboardList(selectionList);
         // cleanup
-        g_list_free(selectionList);
-        g_object_set_data(G_OBJECT(menu), "selectionList", NULL);
+        Basic::freeSelectionList(selectionList);
         return;
       }
 
@@ -246,14 +246,14 @@ namespace xf {
     static void cut(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto selectionList = (GList *)g_object_get_data(G_OBJECT(menu), "selectionList");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
         ClipBoard::cutClipboardList(selectionList);
         // cleanup
-        g_list_free(selectionList);
-        g_object_set_data(G_OBJECT(menu), "selectionList", NULL);
+        Basic::freeSelectionList(selectionList);
         return;
       }
       auto path = getPath(menu);
