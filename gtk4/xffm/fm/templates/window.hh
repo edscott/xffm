@@ -376,6 +376,7 @@ private:
 
     static void setupMenu(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
       auto path = gridView_p->path();
+      g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       GridviewMenu<DirectoryClass> d;
       /*for (auto keys = d.keys(); keys && *keys; keys++){
         auto item = g_object_get_data(G_OBJECT(popover), *keys);
