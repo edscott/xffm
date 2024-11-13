@@ -185,6 +185,16 @@ namespace xf {
         return found;
       }
 
+/*      static void *insert_f(void *data){
+        auto args = (void **)data;
+        auto store = G_LIST_STORE(args[0]);
+        auto infoF = G_FILE_INFO(args[1]);
+        auto flags = args[2];
+        g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
+        g_free(args);
+        return NULL;
+      }*/
+
       static void insert(GListStore *store, const char *path, bool verbose){
         GError *error_ = NULL;
         auto flags = Settings::getInteger("flags", path);
@@ -203,8 +213,14 @@ namespace xf {
           g_object_unref(infoF);
           return;
         }
-        // do this in main context? I guess so...
-        g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
+        // do this in main context? I guess so... Nah. does not work.
+        //g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
+/*        auto args = (void **)calloc(3, sizeof (void *));
+        args[0] = (void *)store;
+        args[1] = (void *)infoF;
+        args[2] = GINT_TO_POINTER(flags);
+        Basic::context_function(insert_f, (void *)args);*/
+
       }
    /*   static void toggleSelect(GListStore *store, guint positionF){
           auto s = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(store), "selectionModel"));
@@ -232,8 +248,9 @@ namespace xf {
           DBG("monitor %p inactive\n", self);
           return;
         }
-
-        GListStore *store = G_LIST_STORE(data);
+        //auto gridView_p = (GridView<DirectoryClass> * )data;
+        //auto store = gridView_p->store();
+        //GListStore *store = G_LIST_STORE(data);
         auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
         if (!child){
           DBG("localdir.hh::changed_f(): this should not happen\n");
@@ -350,6 +367,7 @@ namespace xf {
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
                 if (verbose) {DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);}
+
                 //p->reSelect(f); // Will only select if in selection list (from move).
                 break;       
         }

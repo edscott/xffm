@@ -99,6 +99,8 @@ private:
     pthread_cond_signal(dialogObject->cond_p());
     dialogObject->unlockCondition();
     TRACE("thread2 unlockCondition.\n");
+    // copy move async is done.
+
     return NULL;
   }
   static void *thread2(void *data){
