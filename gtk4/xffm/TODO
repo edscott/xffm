@@ -8,8 +8,9 @@ will be moved to main menu. I guess this will not be a problem, as it will apply
 
 
 Pending issues: 
-* For executables, add exe emblem.
-* pathbar menu: verify
+* verify dnd with selectionList
+* fix race of paste with monitor
+* OK  pathbar menu: verify
 * pathbar dnd
 * gridview: verify linebreaks with iconsize
 * gridview: verify tab labels with load gridview

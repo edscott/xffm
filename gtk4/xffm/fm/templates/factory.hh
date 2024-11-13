@@ -150,7 +150,10 @@ template <class DirectoryClass>
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
-            texture = Texture<bool>::addEmblem(info,  "emblem-symbolic-link", scaleFactor*size, scaleFactor*size);
+            auto emblem = "emblem-symbolic-link";
+            struct stat st;
+            if (stat(path, &st) < 0) emblem = "emblem-broken";
+            texture = Texture<bool>::addEmblem(info,  emblem, scaleFactor*size, scaleFactor*size);
           } else { // simple
             auto gfiletype= g_file_info_get_file_type (info);
             switch (gfiletype){

@@ -203,6 +203,7 @@ namespace xf {
           g_object_unref(infoF);
           return;
         }
+        // do this in main context? I guess so...
         g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
       }
    /*   static void toggleSelect(GListStore *store, guint positionF){
@@ -260,7 +261,7 @@ namespace xf {
             return;
         }*/
 
-        bool verbose = false;
+        bool verbose = true;
         guint positionF;
         auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
         auto dirPath = g_file_get_path(dirFile);
@@ -268,7 +269,7 @@ namespace xf {
         if (flags < 0) flags = 0;
         g_free(dirPath);
         
-        if (verbose) DBG("monitor thread %p...\n", g_thread_self());
+        //if (verbose) DBG("monitor thread %p...\n", g_thread_self());
          switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
               {
