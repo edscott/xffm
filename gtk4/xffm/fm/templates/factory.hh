@@ -377,7 +377,8 @@ template <class DirectoryClass>
         GList *selectionList = gridView_p->getSelectionList();
         auto info = G_FILE_INFO(g_list_first (selectionList)->data);
         auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
-        gridView_p->placeMenu(selectionList, menuBox2, gridView_p);
+        Basic::freeSelectionList(selectionList);
+        gridView_p->placeMenu( menuBox2, gridView_p);
       }
    
       return true;
