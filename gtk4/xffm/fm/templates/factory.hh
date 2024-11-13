@@ -152,7 +152,20 @@ template <class DirectoryClass>
           if (g_file_info_get_is_symlink(info)){
             texture = Texture<bool>::addEmblem(info,  "emblem-symbolic-link", scaleFactor*size, scaleFactor*size);
           } else { // simple
-            texture = Texture<bool>::load(info); // Loads icon from icontheme.
+            auto gfiletype= g_file_info_get_file_type (info);
+            switch (gfiletype){
+              default:
+                texture = Texture<bool>::load(info); // Loads icon from icontheme.
+                break;
+              case (G_FILE_TYPE_MOUNTABLE): // does not work FIXME: use fstab routines
+                {
+                  bool isMounted = false; // FIXME with fstab routine
+                  texture = Texture<bool>::addEmblem(info,  
+                      isMounted?"emblem-greenball":"emblem-blueball", 
+                      scaleFactor*size, scaleFactor*size);
+                }
+                break;
+            }
           }
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
           // Texture is not referenced in hash table. 
@@ -331,23 +344,41 @@ template <class DirectoryClass>
       if (modType & GDK_CONTROL_MASK) return false;
       if (modType & GDK_SHIFT_MASK) return false;
 
-      // unselect all
+      // unselect all, no
 
-      auto selectionModel = gridView_p->selectionModel();
-      gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
+      //auto selectionModel = gridView_p->selectionModel();
+      //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
+      
       //bug race with pdf preview: selectWidget(box, gridView_p);
       //auto size = gridView_p->getSelectionSize();
       //if (size > 0) return false;
       
-      TRACE("gestureClick; object=%p button=%d\n", object,
-          gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
-      TRACE("gestureClick; path=%p\n", gridView_p->path());
-      TRACE("menu for %s\n", gridView_p->path());
-
-  //    auto list_item =GTK_LIST_ITEM(object);
-  //    auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-      gridView_p->placeMenu(object, gridView_p); // object is G_FILE_INFO
-      
+      auto selectionModel = gridView_p->selectionModel();
+      GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
+      auto size = gtk_bitset_get_size(bitset);
+      if (size <= 1) {
+        TRACE("gestureClick; object=%p button=%d\n", object,
+            gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
+        TRACE("gestureClick; path=%p\n", gridView_p->path());
+        TRACE("menu for %s\n", gridView_p->path());
+        gridView_p->placeMenu(object, gridView_p); // object is G_FILE_INFO
+      } else {
+#ifdef GDK_WINDOWING_X11
+        // Gtk bug workaround
+        GdkDisplay *displayGdk = gdk_display_get_default();
+        Display *display = gdk_x11_display_get_xdisplay(displayGdk);
+        GtkNative *native = gtk_widget_get_native(MainWidget);
+        GdkSurface *surface = gtk_native_get_surface(native);
+        Window src_w = gdk_x11_surface_get_xid (surface);
+        unsigned int src_width = gtk_widget_get_width(MainWidget);
+        int i = round(x);
+        XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
+#endif
+        GList *selectionList = gridView_p->getSelectionList();
+        auto info = G_FILE_INFO(g_list_first (selectionList)->data);
+        auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
+        gridView_p->placeMenu(selectionList, menuBox2, gridView_p);
+      }
    
       return true;
     }
@@ -419,7 +450,21 @@ template <class DirectoryClass>
       }
       return NULL;
     }
-
+    static GtkWidget *execImage(const char *name, GFileInfo *info, int size){
+   /*   bool exec = g_file_info_get_is_backup(info);
+      if (hidden || backup )  {
+        auto *iconPath = Texture<bool>::findIconPath(info);
+        // Only for the hidden + backup items. Applies background mask.
+        if (iconPath){
+          auto texture = Texture<bool>::getShadedIcon2(iconPath, size, size, backup?"emblem-bak":NULL);   
+          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          g_object_unref(texture); // XXX currently the paintable is not hashed.
+          return GTK_WIDGET(image);
+        }
+        // Texture reference is kept in hashtable.
+      }*/
+      return NULL;
+    }
     static GtkWidget *previewImage(GFileInfo *info, const char *path, bool *doPreview_p){
       double scaleFactor = 1.;
       auto doPreview = Preview<bool>::doPreview(info);

@@ -95,11 +95,21 @@ public:
       if (info) path = Basic::getPath(info);
       else {
         auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
-        if (!gridView_p){
-          DBG("Neither info nor gridView_p specified in menu.\n");
-          return;
+        if (gridView_p){
+          path = g_strdup(gridView_p->path());
+        } else {
+          auto p = (const char *)g_object_get_data(G_OBJECT(menu), "path");
+          if (p){
+            path = g_strdup(p);
+          } else {
+            DBG("Neither info nor gridView_p nor path specified in menu.\n");
+            return;
+          }
         }
-        path = g_strdup(gridView_p->path());
+      }
+      if (!path){
+        DBG("menucallbacks.hh::paste() should not happen, path==NULL\n");
+        exit(1);
       }
 
 

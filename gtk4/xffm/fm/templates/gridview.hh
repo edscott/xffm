@@ -144,7 +144,7 @@ template <class DirectoryClass>
 
   private:
       // Send this to main menu: FIXME
-/*    static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
+    static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -167,7 +167,7 @@ template <class DirectoryClass>
       }
 
     }
-    */
+    
 /*
     static GtkPopover *getPopover(GridView<DirectoryClass> *gridView_p){ 
       auto path = gridView_p->path();
@@ -334,7 +334,7 @@ template <class DirectoryClass>
       //gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "pathbarboxNegative" );
       g_free(path);
   }
-
+  public:
   static void placeMenu(GList *selectionList, GtkWidget *menubox, GridView<DirectoryClass> *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
       if (!popover){
@@ -349,6 +349,7 @@ template <class DirectoryClass>
         gtk_popover_popup(GTK_POPOVER(popover));
       }
   }
+  private:
 /*
   static void placeMenu(GridView<DirectoryClass> *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(gridView_p->view()), "menu");
@@ -427,14 +428,16 @@ template <class DirectoryClass>
       }
       return selectionList_;
     }
+    
   private:
+#if 0
     static gboolean
     menuSelection_f(GtkGestureClick* self,
               gint n_press,
               gdouble x,
               gdouble y,
               void *data){
-      TRACE("menuSelection_f...\n");
+      DBG("menuSelection_f...\n");
       auto gridView_p = (GridView<DirectoryClass> *)data;
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
@@ -443,7 +446,7 @@ template <class DirectoryClass>
 
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
       auto size = gtk_bitset_get_size(bitset);
-      TRACE("gtk_bitset_get_size = %ld\n", size);
+      DBG("gtk_bitset_get_size = %ld\n", size);
 
       if (size == 0){
         // This works because on pressed we select the widget, if applicable.
@@ -469,6 +472,7 @@ template <class DirectoryClass>
       guint position;
       GtkBitsetIter iter;
       GList *selectionList = gridView_p->getSelectionList();
+      DBG("selectionList= %p\n", selectionList);
  
       if (!selectionList){
         DBG("menuSelection_f(): should not happen.\n");
@@ -477,6 +481,7 @@ template <class DirectoryClass>
       auto info = G_FILE_INFO(g_list_first (selectionList)->data);
       auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
 #ifdef GDK_WINDOWING_X11
+        // Gtk bug workaround
         GdkDisplay *displayGdk = gdk_display_get_default();
         Display *display = gdk_x11_display_get_xdisplay(displayGdk);
         GtkNative *native = gtk_widget_get_native(MainWidget);
@@ -489,7 +494,7 @@ template <class DirectoryClass>
       placeMenu(selectionList, menuBox2, gridView_p);
       return true;
     }
-    
+#endif    
 
     static void addGestureClickView1(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
       auto gesture = gtk_gesture_click_new();
@@ -501,7 +506,7 @@ template <class DirectoryClass>
           GTK_PHASE_BUBBLE);
 
     }    
-    
+#if 0    
     static void addGestureClickView3(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
@@ -512,6 +517,7 @@ template <class DirectoryClass>
           GTK_PHASE_BUBBLE);
 
     }    
+#endif
 public:
 
 

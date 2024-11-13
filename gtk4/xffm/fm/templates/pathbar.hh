@@ -41,37 +41,6 @@ namespace xf {
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        //gtk_widget_set_parent(GTK_WIDGET(pathbar_), GTK_WIDGET(MainWidget));
-     
-//#ifdef ENABLE_MENU_CLASS
-#if 0
-            GtkPopover *menu = GTK_POPOVER(gtk_popover_new());
-            //gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
-            gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
-            //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
-            //gtk_popover_set_default_widget(menu, GTK_WIDGET(MainWidget));
-            g_object_set_data(G_OBJECT(pathbar_), "menu", menu);
-            auto label = gtk_label_new("foo bar");
-            gtk_popover_set_child(menu, label);
-#else
- /*       
-        auto myPathbarMenu = new Menu<PathbarMenu>;
-        auto title = g_strconcat("<span color=\"blue\">", _("Navigation Toolbar"), "</span>", NULL);
-        auto menu = myPathbarMenu->getMenu(title);
-        g_free(title);
-        g_object_set_data(G_OBJECT(pathbar_), "menu", menu);
-        // Important: must use both of the following instructions:
-        //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
-        gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
-//        gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
-        Util::addMenu(menu, GTK_WIDGET(pathbar_));
-        //gtk_widget_realize(GTK_WIDGET(menu));
-  */        
-        //delete myPathbarMenu; // ???
-#endif
-//#endif
-       
- 
       
 
         auto eventBox1 = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));

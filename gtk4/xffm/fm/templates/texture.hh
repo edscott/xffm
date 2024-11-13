@@ -262,9 +262,7 @@ template <class Type>  class Texture {
         return addEmblem(iconPath, emblem, width, height);
     }
 
-    static GdkPaintable *getShadedIcon2(const char *file, double width, double height, const char *emblem){
-        auto surface = getCairoSurfaceFromSvg (file, width, height);
-        cairo_t *cr = cairo_create (surface);
+    static void addEmblem(cairo_t *cr, const char *emblem, double width, double height){
         if (emblem) {
           auto *emblemPath = Texture<bool>::findIconPath(emblem);
           auto emblemSurface = getCairoSurfaceFromSvg (emblemPath, width/4.0, height/4.0);
@@ -272,6 +270,12 @@ template <class Type>  class Texture {
           cairo_rectangle (cr, 0.0, 0.0, width/4.0, height/4.0);
           cairo_fill (cr);
         }
+    }
+    static GdkPaintable *getShadedIcon2(const char *file, double width, double height, const char *emblem){
+        auto surface = getCairoSurfaceFromSvg (file, width, height);
+        cairo_t *cr = cairo_create (surface);
+        // emblem prior to shading
+        //addEmblem(cr, emblem, width, height);
 
         // Uses user defined background color to configure shading.
         setShading(cr);
@@ -279,7 +283,8 @@ template <class Type>  class Texture {
         cairo_set_line_width (cr, 1);
         cairo_rectangle (cr, 0.0, 0.0, width, height);
         cairo_fill (cr);
-
+        // emblem after shading
+        addEmblem(cr, emblem, width, height);
         
         cairo_destroy(cr);
         auto texture = GDK_PAINTABLE(gdk_texture_new_for_surface(surface));
