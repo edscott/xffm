@@ -250,7 +250,7 @@ namespace xf {
         }
         //auto gridView_p = (GridView<DirectoryClass> * )data;
         //auto store = gridView_p->store();
-        //GListStore *store = G_LIST_STORE(data);
+        GListStore *store = G_LIST_STORE(data);
         auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
         if (!child){
           DBG("localdir.hh::changed_f(): this should not happen\n");
