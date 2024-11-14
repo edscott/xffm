@@ -305,6 +305,7 @@ private:
       auto newTabButton = Basic::newButton("list-add", _("New Tab"));
 
       auto newMenuButton = Basic::newButton("open-menu", _("Main menu"));
+      mainMenuButton = newMenuButton;
       auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
       auto menu = myMainMenu->mkMenu(NULL);
       gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(newMenuButton));
@@ -358,8 +359,8 @@ private:
       return GTK_WIDGET(mainBox);
     }
 
-private:
-    static void clickMenu(GtkMenuButton *widget, void *data){
+public:
+    static void clickMenu(GtkButton *widget, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu"));
       auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
       setupMenu(menu, gridView_p);
@@ -373,6 +374,7 @@ private:
       g_free(markup);
 
     }
+private:
 
     static void setupMenu(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
       auto path = gridView_p->path();

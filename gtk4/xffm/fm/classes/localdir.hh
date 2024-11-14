@@ -214,7 +214,9 @@ namespace xf {
           return;
         }
         // do this in main context? I guess so... Nah. does not work.
-        //g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
+        g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
+
+        
 /*        auto args = (void **)calloc(3, sizeof (void *));
         args[0] = (void *)store;
         args[1] = (void *)infoF;
@@ -256,7 +258,7 @@ namespace xf {
           DBG("localdir.hh::changed_f(): this should not happen\n");
           exit(1);
         }
-        DBG("*** monitor changed_f call position=%d...\n", 0);
+        DBG("*** monitor changed_f call \n");
         gchar *f= first? g_file_get_path (first):g_strdup("--");
         gchar *s= second? g_file_get_path (second):g_strdup("--");
 
@@ -293,10 +295,10 @@ namespace xf {
                 if (verbose) {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = findPositionStore(store, f, &positionF, flags);
                 if (found) {
-                    Child::incrementSerial(child);
-                  g_list_store_remove(store, positionF);
-                    Child::incrementSerial(child);
-                  insert(store, f, verbose);                        
+                   Child::incrementSerial(child);
+                   g_list_store_remove(store, positionF);
+                   Child::incrementSerial(child);
+                   insert(store, f, verbose);                        
                 }
 
                 //p->restat_item(f);
@@ -319,8 +321,6 @@ namespace xf {
                     g_list_store_remove(store, positionF);
                   }
                 }
-                //p->remove_item(first);
-                //p->updateFileCountLabel();
                 break;
 
             case G_FILE_MONITOR_EVENT_CREATED:

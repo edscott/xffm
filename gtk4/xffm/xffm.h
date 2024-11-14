@@ -73,7 +73,7 @@ static GHashTable *iconPathHash = NULL;
 static bool exitDialogs = false;
 static void *threadPoolObject = NULL;
 static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
-
+static GtkButton *mainMenuButton = NULL;
 // classes and templates
 // basic classes
 #include "fm/classes/basic.hh"     

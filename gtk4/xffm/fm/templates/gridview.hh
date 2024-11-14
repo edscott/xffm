@@ -56,7 +56,7 @@ template <class DirectoryClass>
         
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
         addGestureClickView1(view_, NULL, this);// unselect all on release
-        /*addGestureClickView3(view_, NULL, this); n// menu (deprecated)*/
+        addGestureClickView3(view_, NULL, this); // menu 
 
         //addTopMotionController();
         
@@ -366,6 +366,15 @@ template <class DirectoryClass>
   }
   private:
    static gboolean
+    openMainMenu(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      MainWindow<DirectoryClass>::clickMenu( mainMenuButton, NULL);
+      return true;
+    }
+   static gboolean
     unselect_f(GtkGestureClick* self,
               gint n_press,
               gdouble x,
@@ -419,6 +428,17 @@ template <class DirectoryClass>
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for unselect
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (unselect_f), (void *)gridView_p);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_BUBBLE);
+
+    }    
+
+    static void addGestureClickView3(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
+      // 3 for menu
+      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (openMainMenu), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_BUBBLE);

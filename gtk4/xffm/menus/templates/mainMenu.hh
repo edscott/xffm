@@ -36,7 +36,7 @@ namespace xf {
         _("Clear Clipboard History"), // 
        _("Color settings"),
        */
-        _("Close"), 
+    //    _("Close"), 
         NULL
       };
       return keys_;
