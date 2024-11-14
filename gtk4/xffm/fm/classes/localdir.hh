@@ -328,10 +328,12 @@ namespace xf {
                 {
                   if (verbose) {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
                   if (!g_file_test(f, G_FILE_TEST_EXISTS)){
-                    if (verbose) {DBG("Ghost file: %s\n", f);}
-                    g_free(f);
-                    g_free(s);
-                    return;
+                    if (!g_file_test(f, G_FILE_TEST_IS_SYMLINK)) {
+                      if (verbose) {DBG("Ghost file: %s\n", f);}
+                      g_free(f);
+                      g_free(s);
+                      return;
+                    }
                   }
                   Child::incrementSerial(child);
                   insert(store, f, verbose);
