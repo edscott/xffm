@@ -351,8 +351,9 @@ template <class DirectoryClass>
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
       auto box = gtk_event_controller_get_widget(eventController);
-      auto object = G_OBJECT(g_object_get_data(G_OBJECT(box), "object"));
-      auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
+      GObject *object = NULL;
+      if (box) object = G_OBJECT(g_object_get_data(G_OBJECT(box), "object"));
+      //auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
 
       auto modType = gdk_event_get_modifier_state(event);
       // no good here: selectWidget(box, gridView_p);

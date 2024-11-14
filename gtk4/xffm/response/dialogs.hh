@@ -44,11 +44,29 @@ namespace xf
       auto dialog = dialogObject->dialog();
       g_object_set_data(G_OBJECT(dialog), "info", info);
       dialogObject->setParent(GTK_WINDOW(MainWidget));
-      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
+
+      auto text = g_strdup_printf(_("Delete '%s'"), g_file_info_get_name(info));
+      auto markup = g_strdup_printf("<span color=\"red\">%s</span>\n", text);
+      dialogObject->setLabelText(markup);
+      g_free(text);
+      g_free(markup);
+
       dialogObject->run();
     }
 
+    static void rmList(GList *selectionList){
+      if (!selectionList) return;
+      rmList(NULL, selectionList);
+      return;
+    }
+
     static void rmList(GtkPopover *menu, GList *selectionList){
+      if (!selectionList) return;
+      if (g_list_length(selectionList) == 1){
+        auto info = G_FILE_INFO(selectionList->data);
+        rm(info);
+        return;
+      }
       auto dialogObject = new DialogButtons<rmListResponse>;
       auto dialog = dialogObject->dialog();
       g_object_set_data(G_OBJECT(dialog), "menu", menu);
@@ -56,6 +74,7 @@ namespace xf
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
       dialogObject->run();
+      return;
     }
 
   };

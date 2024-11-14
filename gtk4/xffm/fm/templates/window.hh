@@ -80,7 +80,18 @@ public:
         bool termKey = (keyval >= GDK_KEY_space && keyval <= GDK_KEY_asciitilde);
         bool upArrow = (keyval == GDK_KEY_Up || keyval == GDK_KEY_KP_Up);
         bool switchKey = (keyval == GDK_KEY_Tab || keyval == GDK_KEY_Escape);
+        bool deleteKey = (keyval == GDK_KEY_Delete);
 
+        if (!gtk_widget_is_focus(input) && deleteKey) {
+          TRACE("delete key now\n");
+          auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+          auto selectionList = gridView_p->getSelectionList();
+          if (selectionList){
+            Dialogs::rmList(selectionList);
+          }
+    
+          return TRUE;
+        }
 
         //if (gtk_widget_get_visible(promptBox) && !gtk_widget_is_focus(input)) {
         if (!gtk_widget_is_focus(input)) {

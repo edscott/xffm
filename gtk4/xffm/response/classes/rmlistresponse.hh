@@ -24,6 +24,7 @@ public:
     static void setDefaults(GtkWindow *dialog, GtkLabel *label){
       auto string = g_strconcat(
           "<span color=\"red\" size=\"large\"><b>",_("WARNING"),
+          ": ", _("Delete"), 
            "</b></span>\n"," \n",
           "<span color=\"blue\"><b>", 
           _("You have selected multiple files or folders"), 
