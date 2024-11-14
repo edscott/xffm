@@ -415,11 +415,11 @@ template <class DirectoryClass>
       if (item) {
         auto path = Basic::getPath(item);
         auto dirPath = g_path_get_dirname(path);
-        int flags = Settings::getInteger(dirPath, "flags"); 
+        int flags = Settings::getInteger("flags", dirPath); 
         if (flags < 0) flags = 0;
-        g_free(dirPath);
        
-        TRACE("selectWidget: path= %s\n", path);
+        TRACE("selectWidget: path= %s flags = 0x%x\n", dirPath, flags);
+        g_free(dirPath);
         auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
           TRACE("gridViewClick(): %s not found\n", path);

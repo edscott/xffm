@@ -8,9 +8,11 @@ will be moved to main menu. I guess this will not be a problem, as it will apply
 
 
 Pending issues: 
+* on dnd.h:378, Add text _("Overwrite existing file?") to the copy/move dialog
+  if any file already exists.
+
 * verify dnd with selectionList
-* fix race of paste with monitor
-* OK  pathbar menu: verify
+
 * pathbar dnd
 * gridview: verify linebreaks with iconsize
 * gridview: verify tab labels with load gridview

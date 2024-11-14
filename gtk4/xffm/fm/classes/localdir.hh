@@ -153,8 +153,12 @@ namespace xf {
           auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
           int showHidden = flags & 0x01;
           int showBackups = flags & 0x02;
-          if (showHidden == 0x0 && g_file_info_get_is_hidden(info)) count++;
-          if (showBackups == 0x0 && g_file_info_get_is_backup(info)) count++;
+          TRACE("flags=0x%x: showHidden = 0x%x, showBackups=0x%x\n", showHidden, showBackups);
+          if (showHidden != 0x01 && g_file_info_get_is_hidden(info)) count++;
+          if (showBackups != 0x02 && g_file_info_get_is_backup(info)) count++;
+
+          //if (showHidden == 0x0 && g_file_info_get_is_hidden(info)) count++;
+          //if (showBackups == 0x0 && g_file_info_get_is_backup(info)) count++;
         }
         return count;
       }
@@ -197,7 +201,9 @@ namespace xf {
 
       static void insert(GListStore *store, const char *path, bool verbose){
         GError *error_ = NULL;
-        auto flags = Settings::getInteger("flags", path);
+        auto dirPath = g_path_get_dirname(path);
+        auto flags = Settings::getInteger("flags", dirPath);
+        g_free(dirPath);
 
         auto file = g_file_new_for_path(path);
         GFileInfo *infoF = g_file_query_info (file,
@@ -284,7 +290,7 @@ namespace xf {
         guint positionF;
         auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
         auto dirPath = g_file_get_path(dirFile);
-        int flags = Settings::getInteger(dirPath, "flags"); 
+        int flags = Settings::getInteger("flags", dirPath); 
         if (flags < 0) flags = 0;
         g_free(dirPath);
         
