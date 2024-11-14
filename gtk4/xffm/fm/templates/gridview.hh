@@ -52,7 +52,7 @@ template <class DirectoryClass>
         view_ = getGridView();
         flags_ = Settings::getInteger("flags", path_);
         if (flags_ < 0) flags_ = 0;
-        DBG("gridview flags = 0x%x\n", flags_);
+        TRACE("gridview flags = 0x%x\n", flags_);
         
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
         addGestureClickView1(view_, NULL, this);// unselect all on release
@@ -75,7 +75,7 @@ template <class DirectoryClass>
         if (myMenu_) delete myMenu_; // main menu
 
         g_free(path_);
-        DBG("~GridView complete.\n");
+        TRACE("~GridView complete.\n");
       }      
       void child(GtkWidget *child){
         child_ = child;
@@ -139,7 +139,6 @@ template <class DirectoryClass>
       }
 
   private:
-      // Send this to main menu: FIXME
     static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
@@ -254,6 +253,22 @@ template <class DirectoryClass>
       return popover;
     }
 
+    static GtkPopover *getPopover(GFileInfo *info, GridView<DirectoryClass> *gridView_p){ 
+      auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
+      auto path = Basic::getPath(info);
+      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
+      auto popover = gridView_p->myMenu_->mkMenu(markup);
+      g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
+      g_object_set_data(G_OBJECT(popover), "info", info);
+
+      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      g_free(markup);
+      g_object_set_data(G_OBJECT(menubox), "menu", popover);
+      gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
+      g_free(path);
+      return popover;
+    }
+
     static GtkPopover *getPopover(GObject *object, GridView<DirectoryClass> *gridView_p){ 
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
@@ -348,6 +363,19 @@ template <class DirectoryClass>
   }
 
   public:
+  static void placeMenu(GFileInfo *info, GridView<DirectoryClass> *gridView_p){
+      auto menubox = g_object_get_data(G_OBJECT(info), "menuBox");
+      auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
+      if (!popover){
+        popover = getPopover(info, gridView_p);
+      }
+      
+      if (popover) {
+        g_object_set_data(G_OBJECT(popover), "info", info);
+        setupMenu(GTK_POPOVER(popover), info);
+        gtk_popover_popup(GTK_POPOVER(popover));
+      }
+  }
   // for single non selected item
   static void placeMenu(GObject *object, GridView<DirectoryClass> *gridView_p){
       auto list_item =GTK_LIST_ITEM(object);
@@ -371,7 +399,13 @@ template <class DirectoryClass>
               gdouble x,
               gdouble y,
               void *data){
-      MainWindow<DirectoryClass>::clickMenu( mainMenuButton, NULL);
+      auto gridView_p = (GridView<DirectoryClass> *)data;
+      if (gridView_p->getSelectionSize() == 0)
+      {
+        MainWindow<DirectoryClass>::clickMenu( mainMenuButton, NULL);
+      } else {
+        return Factory<DirectoryClass>::menu_f(self, n_press, x , y, data);
+      }
       return true;
     }
    static gboolean
@@ -394,7 +428,7 @@ template <class DirectoryClass>
     }
 
     static gboolean equalItem (gconstpointer a, gconstpointer b){
-      DBG("equalItem %p -- %p\n", a, b);
+      TRACE("equalItem %p -- %p\n", a, b);
 
       if (a == b) return true;
       return false;
@@ -454,7 +488,7 @@ public:
                     gdouble y,
                     gpointer data) 
     {
-        //DBG("viewMotion %lf, %lf\n", x, y);
+        //TRACE("viewMotion %lf, %lf\n", x, y);
         auto gridview_p = (GridView<DirectoryClass> *)data;
         return FALSE;
     }

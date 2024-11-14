@@ -14,7 +14,7 @@ namespace xf {
         auto child = Child::getChild();
         auto monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(child), "monitor"));
 //        g_cancellable_cancel(cancellable);
-//        DBG("cancellable cancel = %p\n", cancellable);
+//        TRACE("cancellable cancel = %p\n", cancellable);
         if (monitor) {
           pthread_mutex_lock(&monitorMutex);   
           g_object_set_data(G_OBJECT(monitor), "inactive", GINT_TO_POINTER(1));
@@ -25,7 +25,7 @@ namespace xf {
           g_file_monitor_cancel(monitor);
           g_object_unref(monitor);
           
-          DBG("***monitor cancel = %p\n", monitor);
+          TRACE("***monitor cancel = %p\n", monitor);
         }
         
         // cancel threadpool for previews, if any. Wait on condition
@@ -41,7 +41,7 @@ namespace xf {
         //auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
         Child::setGridview(view);
         auto oldObject = Child::getGridviewObject();
-        DBG("oldObject: %p\n", oldObject);
+        TRACE("oldObject: %p\n", oldObject);
         if (oldObject) {
           auto object = (GridView<LocalDir> *) oldObject;
           delete object;
@@ -156,7 +156,7 @@ namespace xf {
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(box), "gridView_p");
       double distance = sqrt(pow(gridView_p->x() - x,2) + pow(gridView_p->y() - y,2));
       auto size = Settings::getInteger("xfterm", "iconsize");
-      DBG("down at %lf,%lf, up at %lf,%lf. Distance=%lf, size=%d\n", 
+      TRACE("down at %lf,%lf, up at %lf,%lf. Distance=%lf, size=%d\n", 
           gridView_p->x(), gridView_p->y(), x, y, distance, size);
       if (distance > size) return false;
 /*
@@ -167,10 +167,10 @@ namespace xf {
       auto item = gtk_list_item_get_item(GTK_LIST_ITEM(object));
       auto found = g_list_store_find_with_equal_func(store, item, equalItem, &positionF);
       if (!found){
-        DBG("gridViewClick(): this should not happen.\n");
+        TRACE("gridViewClick(): this should not happen.\n");
         exit(1);
       } 
-      DBG("Found at %d\n", positionF);
+      TRACE("Found at %d\n", positionF);
       auto selectionModel = gridView_p->selectionModel();
       gtk_selection_model_select_item(selectionModel, positionF, false);
 */                 

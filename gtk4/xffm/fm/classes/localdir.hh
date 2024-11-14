@@ -22,7 +22,7 @@ namespace xf {
             guint position,
             guint n_items,
             void *data) {
-        DBG("selection changed position=%d, items=%d\n", position, n_items);
+        TRACE("selection changed position=%d, items=%d\n", position, n_items);
         if (data && gtk_selection_model_is_selected(self, 0)){
           gtk_selection_model_unselect_item(self, 0);
         }
@@ -130,7 +130,7 @@ namespace xf {
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
         g_object_set_data(G_OBJECT(monitor), "file", file);
 
-        DBG("monitor=%p file=%p store=%p\n", monitor, file, store);
+        TRACE("monitor=%p file=%p store=%p\n", monitor, file, store);
         if (error_){
             ERROR("g_file_monitor_directory(%s) failed: %s\n",
                     path, error_->message);
@@ -206,7 +206,7 @@ namespace xf {
 
         //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
         g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
-        if (verbose) {DBG("insert():path = %s,infoF=%p\n", path, infoF);}
+        if (verbose) {TRACE("insert():path = %s,infoF=%p\n", path, infoF);}
         if (error_){
           DBG("Error: %s\n", error_->message);
           g_error_free(error_);
@@ -258,7 +258,7 @@ namespace xf {
           DBG("localdir.hh::changed_f(): this should not happen\n");
           exit(1);
         }
-        DBG("*** monitor changed_f call \n");
+        TRACE("*** monitor changed_f call \n");
         gchar *f= first? g_file_get_path (first):g_strdup("--");
         gchar *s= second? g_file_get_path (second):g_strdup("--");
 
@@ -280,7 +280,7 @@ namespace xf {
             return;
         }*/
 
-        bool verbose = true;
+        bool verbose = false;
         guint positionF;
         auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
         auto dirPath = g_file_get_path(dirFile);

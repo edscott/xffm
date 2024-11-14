@@ -71,6 +71,7 @@ template <class DirectoryClass>
 
         Basic::addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
+        addGestureClickDown3(imageBox, object, gridView_p);
 
         addGestureClickUp(imageBox, object, gridView_p);
         addGestureClickUp(labelBox, object, gridView_p);
@@ -314,6 +315,19 @@ template <class DirectoryClass>
 
     }    
     
+    static void addGestureClickDown3(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+      g_object_set_data(G_OBJECT(self), "item", item);
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
+      // 3 for select
+      TRACE("addGestureClickDown: self = %p, item=%p\n", self, item);
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (down_f), (void *)gridView_p);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_BUBBLE);
+
+    }    
+    
     static void addGestureClickUp(GtkWidget *box, GObject *object, GridView<DirectoryClass> *gridView_p){
       TRACE("addGestureClickUp; object=%p\n", object);
       g_object_set_data(G_OBJECT(box), "gridView_p", gridView_p);
@@ -325,7 +339,7 @@ template <class DirectoryClass>
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }    
-
+    public:
     static gboolean
     menu_f(GtkGestureClick* self,
               gint n_press,
@@ -359,12 +373,17 @@ template <class DirectoryClass>
       auto selectionModel = gridView_p->selectionModel();
       GtkBitset *bitset = gtk_selection_model_get_selection (GTK_SELECTION_MODEL(selectionModel));
       auto size = gtk_bitset_get_size(bitset);
-      if (size <= 1) {
-        TRACE("gestureClick; object=%p button=%d\n", object,
-            gtk_gesture_single_get_current_button(GTK_GESTURE_SINGLE(self)));
-        TRACE("gestureClick; path=%p\n", gridView_p->path());
-        TRACE("menu for %s\n", gridView_p->path());
-        gridView_p->placeMenu(object, gridView_p); // object is G_FILE_INFO
+      TRACE("***  size is %d object is %p\n", size, object);
+      //if (size == 1) return true;
+      GList *selectionList = gridView_p->getSelectionList();
+      if (size == 1 ) {
+        if (object == NULL){
+          //auto item = GTK_LIST_ITEM(g_list_first (selectionList)->data); // item is GTK_LIST_ITEM
+          auto info = G_FILE_INFO(g_list_first (selectionList)->data);
+          gridView_p->placeMenu(info, gridView_p); 
+        } else {
+          gridView_p->placeMenu(object, gridView_p); // object is G_FILE_INFO
+        }
       } else {
 #ifdef GDK_WINDOWING_X11
         // Gtk bug workaround
@@ -377,12 +396,11 @@ template <class DirectoryClass>
         int i = round(x);
         XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
 #endif
-        GList *selectionList = gridView_p->getSelectionList();
         auto info = G_FILE_INFO(g_list_first (selectionList)->data);
         auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
-        Basic::freeSelectionList(selectionList);
         gridView_p->placeMenu( menuBox2, gridView_p);
       }
+      Basic::freeSelectionList(selectionList);
    
       return true;
     }
