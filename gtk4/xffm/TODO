@@ -1,10 +1,10 @@
 
 
 Pending issues: 
-* on dnd.h:378, Add text _("Overwrite existing file?") to the copy/move dialog
-  if any file already exists.
+  drops into pathbar. 
+  Maybe put msgid "Operation completed" thread is done.
+  Highlight folder drop targets
 
-* verify dnd with selectionList
 
 * pathbar dnd
 * gridview: verify linebreaks with iconsize
