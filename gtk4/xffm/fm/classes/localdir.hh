@@ -298,7 +298,8 @@ namespace xf {
          switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
               {
-                if (verbose) {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                //if (verbose) 
+                {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = findPositionStore(store, f, &positionF, flags);
                 if (found) {
                    Child::incrementSerial(child);
@@ -320,7 +321,8 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
                 {
-                  if (verbose) {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
+                  //if (verbose) 
+                  {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
                   auto found = findPositionStore(store, f, &positionF, flags);
                   if (found) {
                     Child::incrementSerial(child);
@@ -332,7 +334,8 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 {
-                  if (verbose) {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                  //if (verbose) 
+                  {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
                   if (!g_file_test(f, G_FILE_TEST_EXISTS)){
                     if (!g_file_test(f, G_FILE_TEST_IS_SYMLINK)) {
                       if (verbose) {DBG("Ghost file: %s\n", f);}
@@ -341,6 +344,12 @@ namespace xf {
                       return;
                     }
                   }
+               /*   auto found = findPositionStore(store, f, &positionF, flags);
+                  if (found){
+                    Child::incrementSerial(child);
+                    g_list_store_remove(store, positionF);
+                  }*/
+                  // add updated info.
                   Child::incrementSerial(child);
                   insert(store, f, verbose);
                 }
@@ -353,9 +362,15 @@ namespace xf {
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
             {
-                if (verbose) {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = findPositionStore(store, f, &positionF, flags);
-                if (found){
+                //if (verbose) 
+                {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                auto found1 = findPositionStore(store, s, &positionF, flags);
+                if (found1){
+                  Child::incrementSerial(child);
+                  g_list_store_remove(store, positionF);
+                }
+                auto found2 = findPositionStore(store, f, &positionF, flags);
+                if (found2){
                   Child::incrementSerial(child);
                   g_list_store_remove(store, positionF);
                   Child::incrementSerial(child);

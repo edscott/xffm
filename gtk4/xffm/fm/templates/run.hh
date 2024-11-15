@@ -230,15 +230,16 @@ public:
 
     static void
     run_operate_stdout (void *data, void *stream, int childFD) {
-        GtkTextView *textview;
+        GtkTextView *textview = NULL;
         if (!data){
-          DBG("run_operate_stdout: invalid argument\n");
+          // no textview...
+          //DBG("run_operate_stdout: invalid argument\n");
           //  textview = Fm<Type>::getCurrentTextview();
         } else {
            if (!Print::isValidTextView(data)) return;
            textview = GTK_TEXT_VIEW(data);
         }
-        if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
+        if (!textview || !gtk_widget_is_visible(GTK_WIDGET(textview))) return;
         /*
         view_c *view_p = (view_c *)data;
         window_c *window_p = (window_c *)(view_p->get_window_v());
@@ -302,8 +303,8 @@ public:
     run_operate_stderr (void *data, void *stream, int childFD) {
         GtkTextView *textview;
         if (!data){
-          DBG("run_operate_stderr: invalid argument\n");
-           // textview = Fm<Type>::getCurrentTextview();
+          // DBG("run_operate_stderr: invalid argument\n");
+          textview = Child::getOutput();
             
         } else {
            if (!Print::isValidTextView(data)) return;

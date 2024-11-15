@@ -90,19 +90,19 @@ namespace xf {
       printIcon(textview, iconname, tag, string);
     }
 
-    static void // printIcon will free string.
+    static void //  will free string.
     printWarning(GtkTextView *textview, gchar *string){
       showText(textview);
-      printIcon(textview, "dialog-info", string);
+      printIcon(textview, "dialog-warning", string);
     }
 
-    static void // printIcon will free string.
+    static void //  will free string.
     printInfo(GtkTextView *textview, const gchar *icon, gchar *string){
       showText(textview);
       printIcon(textview, "dialog-info", string);
     }
 
-    static void // printIcon will free string.
+    static void //  will free string.
     printError(GtkTextView *textview, gchar *string){
       auto addSpace = g_strconcat(" ", string, NULL);
       g_free(string);

@@ -55,27 +55,37 @@ class cpDropResponse {
       return NULL;
     }
 
-    static void openDialog(const char *path){
+    static void openDialog(const char *target){
       auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       auto text = c->clipBoardCache();
       gchar **files = g_strsplit(text, "\n", -1);
-      if (!files) return;
-    
+      if (!files) {
+        DBG("*** Error: no files in clipboard\n");
+        return;
+      }
+      int mode = 1; // copy
+      if (strcmp(files[0], "copy")==0) mode = 1; 
+      else if (strcmp(files[0], "move")==0) mode = 0;
+      else if (strcmp(files[0], "link")==0) mode = -1;
+
+      auto list = ClipBoard::removeUriFormat(files);
+      g_strfreev(files);
+
       auto dialogObject = new DialogDrop<cpDropResponse>;
       auto dialog = dialogObject->dialog();
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       dialogObject->setCloseBox("delete", _("Cancel"));
-      if (strcmp(files[0], "copy")==0) dialogObject->subClass()->copy(1); 
-      else if (strcmp(files[0], "move")==0) dialogObject->subClass()->copy(0);
-      else if (strcmp(files[0], "link")==0) dialogObject->subClass()->copy(-1);
-      
+      dialogObject->subClass()->copy(mode);
+
+
+     
       dialogObject->run(); // running in a thread...
-      auto list = ClipBoard::removeUriFormat(files);
-      g_strfreev(files);
+
+
       void **arg = (void **)calloc(4, sizeof (void *));
       arg[0] = (void *)dialogObject;
       arg[1] = (void *)list;
-      arg[2] = (void *)g_strdup(path);
+      arg[2] = (void *)g_strdup(target);
       pthread_t thread;
       pthread_create(&thread, NULL, thread1, arg);
       pthread_detach(thread);
@@ -84,7 +94,7 @@ class cpDropResponse {
       c->clearClipBoard();
 
       TRACE("thread 1 detached\n");
-    }
+     }
 private:
   static void *thread1(void *data){
     void **arg = (void **)data;
@@ -148,6 +158,9 @@ private:
       usleep(150);
     }
 
+    //void *arg2[] = {(void *)path, (void *)list};
+    //Basic::context_function(overwriteMessage, arg2);
+
     for (auto l=list; l && l->data; l=l->next){ g_free(l->data);}
     g_list_free(list);
     g_free(path);
@@ -164,6 +177,36 @@ private:
 
     return NULL;
   }
+/*
+    static void *overwriteMessage(void *data){
+      void **arg = (void **)data;
+      auto target= (char *)arg[0];
+      auto list = (GList *)(arg[1]);
+
+    DBG("overwriteMessage target=%s, list=%p\n", target, list);
+      for (auto l=list; l && l->data; l=l->next){
+        auto base = g_path_get_basename((const char *)l->data);
+        auto f = g_strconcat(target, G_DIR_SEPARATOR_S, (const char *)base, NULL);
+        DBG("final target=%s\n", f);
+        if (g_file_test(f, G_FILE_TEST_EXISTS)){
+          auto b = g_strconcat(f, "~", NULL);
+          auto text1 = g_strdup_printf(_("Backup file of %s: %s"), f, b);
+          auto text = g_strconcat(_("Overwrite Destination"), ": ", text1, "\n", NULL);
+          g_free(text1);
+          auto output = Child::getOutput();
+    DBG(text);
+          Print::printWarning(output, text); // this is run in main context.
+        } DBG("final target=\"%s\" does not exist\n", f);
+        g_free(base);
+        g_free(f);
+      }
+      for (auto l=list; l && l->data; l=l->next){ g_free(l->data);}
+      g_list_free(list);
+      g_free(target);
+
+      return NULL;
+    }
+*/
   static bool skip(const char *src, const char *tgt){
     if (strcmp(src, tgt)==0){
       TRACE("skipping %s\n", src);
@@ -182,7 +225,8 @@ private:
 private:
   static void *cpmv_f(void *data){
     auto arg =(char **)data;
-    pid_t pid = Run<bool>::thread_run(Child::getOutput(), (const char **)arg, false);
+    pid_t pid = Run<bool>::thread_run(NULL, (const char **)arg, false);
+//    pid_t pid = Run<bool>::thread_run(Child::getOutput(), (const char **)arg, false);
     int wstatus;
     waitpid(pid, &wstatus, 0);
     for (auto p=arg; p && *p; p++) g_free(*p);
@@ -218,9 +262,20 @@ public:
         auto srcTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
         g_free(base);
         if (g_file_test(srcTarget, G_FILE_TEST_EXISTS)){
-            auto backup = g_strconcat(srcTarget, "~", NULL);
+          
+          auto backup = g_strconcat(srcTarget, "~", NULL);
+          auto b1 = g_path_get_basename(srcTarget);
+          auto b2 = g_path_get_basename(backup);
+
+          auto text1 = g_strdup_printf(_("Backup file of %s: %s"), b1, b2);
+          //auto text = g_strconcat(_("Created: "), backup, "\n", NULL);
+          auto text = g_strconcat(" ",text1, "\n", NULL);
+          //g_free(text1);
+          Print::printWarning(Child::getOutput(), text); // this is run in main context.
+
+            
             const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
-            Run<bool>::thread_run(Child::getOutput(), arg, false);
+            Run<bool>::thread_run(NULL, arg, false);
             //const gchar *arg[] = { "mv", "-v", "-f", srcTarget, backup, NULL };
             TRACE("backup: %s -> %s\n", srcTarget, backup); 
             g_free(backup);

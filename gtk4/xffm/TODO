@@ -1,10 +1,3 @@
-OpenWith dialog (window) working
-
-BUGS in Kubuntu
-1. popup menu from gridview does not locate correctly, so that bottom part is 
-not visible. Besides, hard to find spot to open menu. So, the gridview menu
-will be moved to main menu. I guess this will not be a problem, as it will apply to current gridview_p.
-2. On signal pressed, selection does not select the single affected item, but some others as well, as if the shift was down or something. What happens is that the selection is done on the item before the filter, so that the position is offset by the number of hidden/backup items which are not visible. Not a kubuntu bug, but due to hide/show options for directory
 
 
 Pending issues: 

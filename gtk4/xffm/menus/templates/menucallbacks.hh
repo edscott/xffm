@@ -86,35 +86,33 @@ namespace xf {
 public:
     static void
     paste(GtkButton *self, void *data){
-      /* for path, in menu create a hidden label with the path.
-       * use label get text to retrieve path without memory leak. */
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
-      char *path = NULL;
-      if (info) path = Basic::getPath(info);
+      char *target = NULL;
+      if (info) target = Basic::getPath(info);
       else {
         auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         if (gridView_p){
-          path = g_strdup(gridView_p->path());
+          target = g_strdup(gridView_p->path());
         } else {
           auto p = (const char *)g_object_get_data(G_OBJECT(menu), "path");
           if (p){
-            path = g_strdup(p);
+            target = g_strdup(p);
           } else {
             DBG("Neither info nor gridView_p nor path specified in menu.\n");
             return;
           }
         }
       }
-      if (!path){
-        DBG("menucallbacks.hh::paste() should not happen, path==NULL\n");
+      if (!target){
+        DBG("menucallbacks.hh::paste() should not happen, target==NULL\n");
         exit(1);
       }
 
 
-      cpDropResponse::openDialog(path);
-      g_free(path);
+      cpDropResponse::openDialog(target);
+      g_free(target);
       
 
     /*  DBG("pasteClip(target=%s):\n%s\n", path, text);
