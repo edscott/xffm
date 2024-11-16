@@ -140,6 +140,7 @@ namespace xf {
         // for the item.
         // Also, should skip back, next and goto buttons.
         children_list = Basic::getChildren(pathbar);
+        auto gridView_p = Child::getGridviewObject();
         for (GList *children = children_list;children && children->data; children=children->next){
            auto widget = GTK_WIDGET(children->data);
            if (g_object_get_data(G_OBJECT(widget), "skipMenu")) continue;
@@ -154,7 +155,11 @@ namespace xf {
             gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
             g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);
             gtk_widget_add_controller(GTK_WIDGET(widget), GTK_EVENT_CONTROLLER(gesture));
-            
+       
+            // also, we need to add the drop controller.
+            auto dropController = Dnd<Type>::createDropControllerPathbar(gridView_p);
+            g_object_set_data(G_OBJECT(dropController), "path", (void *)path);
+            gtk_widget_add_controller (GTK_WIDGET (widget), GTK_EVENT_CONTROLLER (dropController));
 
         }
 

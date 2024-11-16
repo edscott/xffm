@@ -406,7 +406,7 @@ template <class DirectoryClass>
       return true;
     }
   
-   static bool selectWidget(GtkWidget *w, GridView<DirectoryClass> *gridView_p){
+   static bool selectWidget(GtkWidget *w, GridView<DirectoryClass> *gridView_p, bool unselectOthers){
       auto store = gridView_p->store();
       guint positionF;
       auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
@@ -429,7 +429,7 @@ template <class DirectoryClass>
         TRACE("Found %s at %d\n", path, positionF);
         g_free(path);
         auto selectionModel = gridView_p->selectionModel();
-        gtk_selection_model_select_item(selectionModel, positionF, true);
+        gtk_selection_model_select_item(selectionModel, positionF, unselectOthers);
         return false;
       }
       TRACE("*** selectWidget: item is null\n");
@@ -446,20 +446,25 @@ template <class DirectoryClass>
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
       auto modType = gdk_event_get_modifier_state(event);
-      if (modType & GDK_CONTROL_MASK) return false;
-      if (modType & GDK_SHIFT_MASK) return false;
-  
       auto gridView_p = (GridView<DirectoryClass> *)data;
       gridView_p->x(x);
       gridView_p->y(y);
+      if (modType & GDK_CONTROL_MASK) {
+        selectWidget(w, gridView_p, false);
+        return false;
+      }
+      if (modType & GDK_SHIFT_MASK) {
+        return false;
+      }
+  
 
       //gridView_p->dndOn = true;
       //TRACE("dnd %d\n", gridView_p->dndOn);
       //auto selectionModel = gridView_p->selectionModel();
       //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
-      selectWidget(w, gridView_p);
-      return false; 
-      //return true;
+      selectWidget(w, gridView_p, true);
+      //return false; 
+      return true;
     }
     static GtkWidget *backupImage(const char *name, GFileInfo *info, int size){
       // Only for the hidden + backup items. Applies background mask.

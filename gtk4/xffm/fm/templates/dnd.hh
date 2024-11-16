@@ -25,6 +25,21 @@ static GtkEventController *createDropController(void *data){
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
 
+static GtkEventController *createDropControllerPathbar(void *data){
+    const char *mimeTypes[]={"text/uri-list", NULL};
+    GdkContentFormats *contentFormats = gdk_content_formats_new(mimeTypes, 1);
+    GdkDragAction actions =
+      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+    GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
+    g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
+    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDropPathbar), data);
+    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
+
+    g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
+    /*g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);*/
+    return GTK_EVENT_CONTROLLER(dropTarget);
+}
+
 
 ///////////////////////////////////  drag /////////////////////////////////////
     // signal drag-begin Emitted on the drag source when a drag is started.
@@ -284,6 +299,32 @@ static void *readAction(void *arg){
       }
       return NULL;
   }
+    static gboolean dropDropPathbar ( GtkDropTarget* self, GdkDrop* drop,  
+        gdouble x, gdouble y, gpointer data)
+    {
+      GdkDragAction action = gdk_drop_get_actions(drop);
+      if (action == (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE| GDK_ACTION_LINK)){
+        action = GDK_ACTION_MOVE;
+      }
+      TRACE("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
+
+      TRACE("*** dropDropPathbar %lf,%lf .\n", x, y);
+      auto path = (const char *)g_object_get_data(G_OBJECT(self), "path");
+      
+      if (!path) {
+        gdk_drop_finish(drop, GDK_ACTION_COPY);
+        return false; //drop not accepted
+      }
+            
+
+      // XXX target is synchronous.
+      //     now we have to set it up for asyncronous read. Or rather, get target and
+      //     send to asynchronous...
+      readDrop(drop, readAction, data, g_strdup(path)); // this is asynchronous...
+      //g_free(path);
+      
+      return true; //drop accepted
+    }
 
     static gboolean dropDrop ( GtkDropTarget* self, GdkDrop* drop,  
         gdouble x, gdouble y, gpointer data)
