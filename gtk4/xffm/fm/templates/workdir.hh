@@ -155,7 +155,11 @@ namespace xf {
       
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(box), "gridView_p");
       double distance = sqrt(pow(gridView_p->x() - x,2) + pow(gridView_p->y() - y,2));
-      auto size = Settings::getInteger("xfterm", "iconsize");
+
+      //auto size = Settings::getInteger("xfterm", "iconsize");
+      //For single click action, must not be released further
+      //than size, starting at GridView::down_f position
+      int size = 5;
       TRACE("down at %lf,%lf, up at %lf,%lf. Distance=%lf, size=%d\n", 
           gridView_p->x(), gridView_p->y(), x, y, distance, size);
       if (distance > size) return false;

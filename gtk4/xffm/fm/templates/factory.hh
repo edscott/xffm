@@ -429,7 +429,7 @@ template <class DirectoryClass>
         TRACE("Found %s at %d\n", path, positionF);
         g_free(path);
         auto selectionModel = gridView_p->selectionModel();
-        gtk_selection_model_select_item(selectionModel, positionF, false);
+        gtk_selection_model_select_item(selectionModel, positionF, true);
         return false;
       }
       TRACE("*** selectWidget: item is null\n");
@@ -443,6 +443,11 @@ template <class DirectoryClass>
               gdouble y,
               void *data){
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto event = gtk_event_controller_get_current_event(eventController);
+      auto modType = gdk_event_get_modifier_state(event);
+      if (modType & GDK_CONTROL_MASK) return false;
+      if (modType & GDK_SHIFT_MASK) return false;
   
       auto gridView_p = (GridView<DirectoryClass> *)data;
       gridView_p->x(x);
@@ -450,9 +455,11 @@ template <class DirectoryClass>
 
       //gridView_p->dndOn = true;
       //TRACE("dnd %d\n", gridView_p->dndOn);
+      //auto selectionModel = gridView_p->selectionModel();
+      //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
       selectWidget(w, gridView_p);
-      return false;
-      return true;
+      return false; 
+      //return true;
     }
     static GtkWidget *backupImage(const char *name, GFileInfo *info, int size){
       // Only for the hidden + backup items. Applies background mask.
