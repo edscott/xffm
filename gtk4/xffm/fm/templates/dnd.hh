@@ -33,7 +33,7 @@ static GtkEventController *createDropControllerPathbar(void *data){
     GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
     g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
     g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDropPathbar), data);
-    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
+    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotionPathbar), NULL);
 
     g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
     /*g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);*/
@@ -259,6 +259,74 @@ static void *readAction(void *arg){
 }
 
  // signals ///////
+  static void setDropPathbar(double x, double y, void *data){
+    DBG("FIXME: dnd.hh: setDropPathbar()\n");
+    // here we need to have sent:
+    //   1. widget that owns the drop event
+    //   2. all widgets in pathbar
+    //
+    //   So we set to green widget and unset all others...
+    //   something like that, or rather use enter and 
+    //   exit signals since each widget has its own 
+    //   drop controller...
+    /*
+      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto listModel = gridview_p->listModel();
+      auto n = g_list_model_get_n_items(listModel);
+      char *path = NULL;
+      bool xOk = false;
+      bool yOk = false;
+      for (guint i=0; i<n; i++){
+        auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
+        auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
+        graphene_rect_t bounds;
+        if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
+          // FIXME:
+          //       seems like xorigin and yorigin is cero, so only .. is ok
+          xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
+          yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
+          path = Basic::getPath(info);
+          if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+            if (xOk && yOk) {
+              gtk_widget_add_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+            } else {
+              gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+            }
+          }
+          g_free(path);
+        }
+      }
+      */
+  }
+  static void setDropTarget(double x, double y, void *data){
+      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto listModel = gridview_p->listModel();
+      auto n = g_list_model_get_n_items(listModel);
+      char *path = NULL;
+      bool xOk = false;
+      bool yOk = false;
+      for (guint i=0; i<n; i++){
+        auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
+        auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
+        graphene_rect_t bounds;
+        if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
+          // FIXME:
+          //       seems like xorigin and yorigin is cero, so only .. is ok
+          xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
+          yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
+          path = Basic::getPath(info);
+          if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+            if (xOk && yOk) {
+              gtk_widget_add_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+            } else {
+              gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+            }
+          }
+          g_free(path);
+        }
+      }
+  }
+
   static char *getDropTarget(double x, double y, void *data){
       auto gridview_p = (GridView<DirectoryClass> *)data;
       auto listModel = gridview_p->listModel();
@@ -276,7 +344,7 @@ static void *readAction(void *arg){
           if (xOk && yOk) {
             path = Basic::getPath(info);
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-              DBG("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, path);
+              TRACE("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, path);
               return path;
             } else {
               return NULL;
@@ -377,33 +445,25 @@ dropLeave (
   DBG("dropLeave.\n");
 }
 static GdkDragAction
+dropMotionPathbar( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)
+{
+  setDropPathbar(x, y, data) ;
+  return GDK_ACTION_COPY;
+}
+static GdkDragAction
 dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)
 {
+
+  setDropTarget(x, y, data) ;
+   
   //DBG("dropMotion %lf,%lf\n", x, y);
+ 
   /* // does not work, no modifierType
   auto eventController = GTK_EVENT_CONTROLLER(self);
   auto event = gtk_event_controller_get_current_event(eventController);
   auto modifierType = gdk_event_get_modifier_state (event);
   //DBG("dropMotion %lf,%lf, modifierType =  %ld\n", x, y, modifierType);
- 
-  GdkDragAction actions =
-      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
- 
-  if (modifierType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK) | (GDK_CONTROL_MASK& GDK_MODIFIER_MASK))) {
-    gdk_drop_status (drop, actions, GDK_ACTION_LINK);
-    return GDK_ACTION_LINK;
-  }
-  if (modifierType & (GDK_SHIFT_MASK & GDK_MODIFIER_MASK)) {
-    DBG("dropMotion modifierType = GDK_SHIFT_MASK \n");
-    gdk_drop_status (drop, actions, GDK_ACTION_MOVE);
-    return GDK_ACTION_MOVE;
-  }
-  if (modifierType & (GDK_CONTROL_MASK & GDK_MODIFIER_MASK)) {
-    gdk_drop_status (drop, actions, GDK_ACTION_COPY);
-    return GDK_ACTION_COPY;
-  }
-  gdk_drop_status (drop, actions, GDK_ACTION_MOVE);*/
-  //return GDK_ACTION_MOVE;
+*/ 
   return GDK_ACTION_COPY;
 }
 static gboolean dropAccept ( GtkDropTarget* self, GdkDrop* drop, gpointer user_data)

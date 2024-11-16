@@ -149,6 +149,12 @@ private:
         border-radius: 0px;\
         border-color: transparent;\
       }\
+      .dropNegative * {\
+        background-color: #22cc22;\
+        border-width: 0px;\
+        border-radius: 0px;\
+        border-color: transparent;\
+      }\
       .pathbarboxNegative * {\
         background-color: #acaaa5;\
         border-width: 0px;\
