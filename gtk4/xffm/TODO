@@ -1,7 +1,6 @@
 
 
 Pending issues: 
-  Maybe put msgid "Operation completed" thread is done.
   Highlight folder drop targets
 
 Bug: select item, control click on a different item and begin drag. Item draged is selected item. drag should only begin from one of the seleted items.

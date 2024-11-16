@@ -110,9 +110,21 @@ private:
     dialogObject->unlockCondition();
     TRACE("thread2 unlockCondition.\n");
     // copy move async is done.
+    const char *mode ="";
+    switch (dialogObject->subClass()->copy()){
+      case 1:
+        mode = _("copy"); break;
+      case 0:
+        mode = _("move"); break;
+      case -1:
+        mode = _("link"); break;
+    }
+    Print::showText(Child::getOutput());
+    Print::printIcon(Child::getOutput(),"emblem-redball", g_strdup_printf(" %s (%s)",  _("Operation completed"), mode)); 
 
     return NULL;
   }
+  
   static void *thread2(void *data){
     void **arg = (void **)data;
     auto dialogObject = (DialogDrop<cpDropResponse> *)arg[0];
