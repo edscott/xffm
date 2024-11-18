@@ -150,7 +150,7 @@ private:
         border-color: transparent;\
       }\
       .dropNegative * {\
-        background-color: #22cc22;\
+        background-color: green;\
         border-width: 0px;\
         border-radius: 0px;\
         border-color: transparent;\
