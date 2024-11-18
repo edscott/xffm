@@ -19,6 +19,7 @@ namespace xf {
         _("Select All"), 
         _("Match regular expression"), 
 
+        " ",
         _("Show"),
         _("Hidden files"),
         _("Backup files"),
@@ -36,7 +37,8 @@ namespace xf {
         _("Clear Clipboard History"), // 
        _("Color settings"),
        */
-    //    _("Close"), 
+        "", 
+        _("Exit"), 
         NULL
       };
       return keys_;
@@ -55,7 +57,7 @@ namespace xf {
         {_("Clear Clipboard History"),(void *) EDIT_CLEAR}, // 
         {_("Open in New Window"),(void *)OPEN_FILEMANAGER}, 
         {_("Color settings"),(void *)DOCUMENT_PROPERTIES}, 
-        {_("Close"),(void *)  WINDOW_SHUTDOWN},
+        {_("Exit"),(void *)  WINDOW_SHUTDOWN},
         {_("Apply modifications"),(void *) "apply"},
         {NULL, NULL}
       }; 
@@ -78,7 +80,7 @@ namespace xf {
         {"test",(void *)test},
         {_("Show Clipboard"),(void *) showPaste}, 
         {_("Clear Clipboard History"),(void *) clearPaste}, 
-        {_("Close"),(void *) close},
+        {_("Exit"),(void *) close},
 
         {_("Hidden files"),(void *) toggleItem},
         {_("Backup files"),(void *) toggleItem},

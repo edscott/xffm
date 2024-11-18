@@ -20,8 +20,8 @@ static GtkEventController *createDropController(void *data){
     g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), data);
     g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
 
-    g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
-    /*g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);*/
+    //g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
+    //g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
 
@@ -33,10 +33,10 @@ static GtkEventController *createDropControllerPathbar(void *data){
     GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
     g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
     g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDropPathbar), data);
-    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotionPathbar), NULL);
+    //g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotionPathbar), NULL);
 
     g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
-    /*g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);*/
+    g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
 
@@ -431,6 +431,8 @@ dropEnter (
 )
 {
   DBG("dropEnter %lf,%lf.\n", x, y);
+  auto widget = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self)); 
+  gtk_widget_add_css_class (GTK_WIDGET(widget), "dropNegative" );          
 
   return GDK_ACTION_LINK;
   return GDK_ACTION_COPY;
@@ -443,6 +445,8 @@ dropLeave (
 )
 {
   DBG("dropLeave.\n");
+  auto widget = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self)); 
+  gtk_widget_remove_css_class (GTK_WIDGET(widget), "dropNegative" );          
 }
 static GdkDragAction
 dropMotionPathbar( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)

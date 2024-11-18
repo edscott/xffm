@@ -301,7 +301,10 @@ public:
           }
         }
         // No callback: it is a label.
-        auto textMarkup = g_strdup_printf("<i>%s ------------</i>", *p);
+        char *textMarkup = NULL;
+        if (strlen(*p)>=2) textMarkup = g_strdup_printf("<i><b>%s</b></i>", *p);
+        else if (strlen(*p)==1) textMarkup = g_strdup_printf("<span color=\"gray\"><i>_________________________</i></span>");
+        else textMarkup = g_strdup_printf("<span color=\"blue\"><i><b>_________________________</b></i></span>");
         gtk_label_set_markup(label, textMarkup);
         g_free(textMarkup);
         g_object_set_data(G_OBJECT(label), "menu", menu);
