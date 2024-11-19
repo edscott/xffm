@@ -125,6 +125,7 @@ main (int argc, char *argv[]) {
     g_main_context_iteration (NULL, TRUE);
 
   delete c;
+  delete fm;
   TRACE("exit xffm main loop\n");
   return 0;
 }

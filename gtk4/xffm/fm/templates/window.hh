@@ -10,6 +10,7 @@ template <class Type>
 class MainWindow: public FMbuttonBox {
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
+    GtkPopover *menu_ = NULL;
     GList *pageList_=NULL;
     GtkWindow *mainWindow_ = NULL;
     GtkNotebook *notebook_;
@@ -33,10 +34,13 @@ public:
         gtk_window_set_child(mainWindow_, box);
         addPage(path);
         showWindow();
+          
+        
         g_object_set_data(G_OBJECT(MainWidget), "MainWindow", this);
     }
 
     ~MainWindow(void){
+      //gtk_widget_unparent(GTK_WIDGET(menu_));
        // for each page: g_file_monitor_cancel(deviceMonitor_);
     } 
 // Free functions (for signals)
@@ -125,6 +129,22 @@ private:
     }
 
     static gboolean
+    clearCSS ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+      TRACE("present dialog %p\n", MainDialog);
+      auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
+      if (gridview_p){
+        DBG("Leaving window\n");
+        Dnd<LocalDir>::resetGridviewCSS(gridview_p);
+      }
+      if (MainDialog) gtk_window_present(MainDialog);
+        return FALSE;
+    }
+
+    static gboolean
     presentDialog ( GtkEventControllerMotion* self,
                     gdouble x,
                     gdouble y,
@@ -142,6 +162,12 @@ private:
         gtk_widget_add_controller(GTK_WIDGET(widget), controller);
         g_signal_connect (G_OBJECT (controller), "enter", 
             G_CALLBACK (presentDialog), NULL);
+
+ /*       auto controller2 = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controller2, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(widget), controller2);
+        g_signal_connect (G_OBJECT (controller2), "leave", 
+            G_CALLBACK (clearCSS), NULL);*/
     }
     
     void createWindow(void){
@@ -255,6 +281,7 @@ private:
       pageList_ = g_list_remove(pageList_, child);
       if (g_list_length(pageList_) == 0){
         gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
+        gtk_widget_unparent(GTK_WIDGET(menu_));
         gtk_window_destroy(mainWindow_);
         exitDialogs = true;
         //exit(0);
@@ -321,9 +348,10 @@ private:
       auto newMenuButton = Basic::newButton("open-menu", _("Main menu"));
       mainMenuButton = newMenuButton;
       auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
-      auto menu = myMainMenu->mkMenu(NULL);
-      gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(newMenuButton));
-      g_object_set_data(G_OBJECT(newMenuButton), "menu", menu);
+      menu_ = myMainMenu->mkMenu(NULL);
+      TRACE("menu popover = %p\n", menu_);
+      gtk_widget_set_parent(GTK_WIDGET(menu_), GTK_WIDGET(newMenuButton));
+      g_object_set_data(G_OBJECT(newMenuButton), "menu", menu_);
       delete myMainMenu;
 
       /*

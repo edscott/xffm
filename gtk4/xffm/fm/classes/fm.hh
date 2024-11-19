@@ -7,10 +7,11 @@ class Fm{
 private:
 
   History *_history;
-
+  MainWindow<bool> *xffm_;
 public:
     History *history(void) { return _history;}
     ~Fm(void){
+      //delete xffm_;
         //ClipBoard<double>::stopClipBoard();  
     }
 
@@ -30,7 +31,7 @@ public:
       setEditor();
       setTerminal();
 
-      auto xffm = new(xf::MainWindow<bool>)(path);
+      xffm_ = new(xf::MainWindow<bool>)(path);
     }
 
     static const gchar *getEditor(){
