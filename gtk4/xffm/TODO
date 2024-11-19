@@ -1,3 +1,7 @@
+* delete key not working... (focus wrong on items selected?)
+* control click should not unselect and should open menu
+* figure out better start for dnd:
+  - conflicts with rubberband
 * gridview: verify linebreaks with iconsize
 * gridview: verify tab labels with load gridview
 * rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
