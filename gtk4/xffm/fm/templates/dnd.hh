@@ -20,27 +20,10 @@ static GtkEventController *createDropController(void *data){
     GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
     g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
     g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), NULL);
-//    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), data);
     g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
 
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
-/*
-static GtkEventController *createDropControllerPathbar(void *data){
-    const char *mimeTypes[]={"text/uri-list", NULL};
-    GdkContentFormats *contentFormats = gdk_content_formats_new(mimeTypes, 1);
-    GdkDragAction actions =
-      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
-    GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
-    g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
-    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDropPathbar), data);
-    //g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotionPathbar), data);
-
-    //g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), data);
-    //g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), data);
-    return GTK_EVENT_CONTROLLER(dropTarget);
-}
-*/
 
 ///////////////////////////////////  drag /////////////////////////////////////
     // signal drag-begin Emitted on the drag source when a drag is started.
@@ -381,18 +364,13 @@ static void *readAction(void *arg){
         auto widget = getPathbarWidget(x, y, pathbar);
         // reset all:
         UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
-        //UtilPathbar<DirectoryClass>::togglePathbar(gridview_p->path(), pathbar);
         if (widget) {
           // Apply mask
           auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
           TRACE("widget at %s\n", path);
           gtk_widget_remove_css_class (widget, "pathbarbox" );
           gtk_widget_add_css_class (widget, "pathbardrop" );
-          //auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
-          //UtilPathbar<DirectoryClass>::setPathButtonText(widget, path, "white", "green");
         }
-        //if (widget) gtk_widget_add_css_class (widget, "dropNegative" );
-        //gridHighlight(x, y, gridview_p);
         return;
       }
 
