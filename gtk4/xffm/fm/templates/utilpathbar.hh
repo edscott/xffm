@@ -12,6 +12,7 @@ namespace xf {
         const gchar *path = Child::getWorkdir();
         GtkBox *pathbar = Child::getPathbar();
         updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+        resetPathbarCSS(pathbar);
     }
     
     static void 
@@ -157,9 +158,10 @@ namespace xf {
             gtk_widget_add_controller(GTK_WIDGET(widget), GTK_EVENT_CONTROLLER(gesture));
        
             // also, we need to add the drop controller.
-            auto dropController = Dnd<Type>::createDropControllerPathbar(gridView_p);
+            // dprecated.
+            /*auto dropController = Dnd<Type>::createDropControllerPathbar(gridView_p);
             g_object_set_data(G_OBJECT(dropController), "path", (void *)path);
-            gtk_widget_add_controller (GTK_WIDGET (widget), GTK_EVENT_CONTROLLER (dropController));
+            gtk_widget_add_controller (GTK_WIDGET (widget), GTK_EVENT_CONTROLLER (dropController));*/
 
         }
 
@@ -183,6 +185,7 @@ namespace xf {
           }
           gtk_widget_set_sensitive(back, g_list_length(historyBack) > 1); 
         }
+        resetPathbarCSS(pathbar);
         return ;
     }
     private:
@@ -210,10 +213,16 @@ namespace xf {
 
         // Finally, we differentiate active button.
         GList *children = g_list_first(children_list);
+        auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
         for (;children && children->data; children=children->next){
-            setPathButtonText(GTK_WIDGET(children->data), path, "blue", NULL);
+            auto path = (const char *)g_object_get_data(G_OBJECT(children->data), "path");
+            const char *css = "pathbarbox";
+            if (gridview_p && gridview_p->path() && strcmp(path, gridview_p->path())==0) css = "pathbarboxRed";
+            setPathButtonText(GTK_WIDGET(children->data), path, css);
         }
         g_list_free(children_list);
+
+
         auto lastPath = (char *) g_object_get_data(G_OBJECT(pathbar), "path");
         g_free(lastPath);
         g_object_set_data(G_OBJECT(pathbar), "path", g_strdup(path));
@@ -228,9 +237,11 @@ namespace xf {
     {
         auto pathbar = GTK_BOX(data);
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        auto path = (const char *) g_object_get_data(G_OBJECT(pathbar), "path");
+        auto path = (const char *) g_object_get_data(G_OBJECT(eventBox), "path");
 
-        setPathButtonText(eventBox, path, "white", "#acaaa5");
+
+        gtk_widget_remove_css_class (eventBox, "pathbarbox" );
+        gtk_widget_add_css_class (eventBox, "pathbarboxNegative" );
         return FALSE;
     }
 
@@ -240,10 +251,20 @@ namespace xf {
                     gdouble y,
                     gpointer data) {
         auto pathbar = GTK_BOX(data);
+        resetPathbarCSS(pathbar);
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        auto path = (const char *) g_object_get_data(G_OBJECT(pathbar), "path");
+        auto path = (const char *) g_object_get_data(G_OBJECT(eventBox), "path");
 
-        setPathButtonText(eventBox, path, "blue", NULL);
+        auto gridview_p = (GridView<LocalDir> *)data;
+
+        gtk_widget_remove_css_class (eventBox, "pathbarboxNegative" );
+
+        if (gridview_p && gridview_p->path() && strcmp(path, gridview_p->path())==0){
+          gtk_widget_add_css_class (eventBox, "pathbarboxRed" );
+        } else {
+          gtk_widget_add_css_class (eventBox, "pathbarbox" );
+        }
+
         return FALSE;
 
     }
@@ -252,7 +273,7 @@ namespace xf {
 
   private:
     static void         
-    showWhatFits(GtkBox *pathbar, const gchar *path, GList *children_list){
+showWhatFits(GtkBox *pathbar, const gchar *path, GList *children_list){
       GtkRequisition minimum;
       graphene_rect_t bounds;
       bounds.size.width = 0;
@@ -352,18 +373,44 @@ namespace xf {
             gtk_widget_set_visible(GTK_WIDGET(children->data), TRUE);
         }
     }
-  public:
+  public:  
+
+  static void resetPathbarCSS(GtkBox *pathbar){
+    const gchar *path = Child::getWorkdir();
+    //auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
+    //if (!gridview_p || !gridview_p->path()) return;
+    GList *children_list = Basic::getChildren(pathbar);
+    GList *children = g_list_first(children_list);
+    for (;children && children->data; children=children->next){
+      auto widget = GTK_WIDGET(children->data);
+      gtk_widget_remove_css_class (widget, "pathbardrop" );
+      auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
+      if (strcmp(path, Child::getWorkdir())==0) {
+        gtk_widget_remove_css_class (widget, "pathbarbox" );
+        gtk_widget_add_css_class (widget, "pathbarboxRed" );
+      }
+      else gtk_widget_add_css_class (widget, "pathbarbox" );
+    }
+    g_list_free(children_list);
+  }
+    
+  private:
     static void 
-    setPathButtonText(GtkWidget *eventBox, const gchar *path, const gchar *color, const gchar *bgcolor){
+    setPathButtonText(GtkWidget *eventBox, const gchar *path, const char *css){
+
+
         //const gchar *fontSize = "size=\"small\"";
         const gchar *fontSize = "";
-        gchar *name = (gchar *)g_object_get_data(G_OBJECT(eventBox), "name");
+        const char *name = (const char *)g_object_get_data(G_OBJECT(eventBox), "name");
+        gtk_widget_add_css_class (eventBox, css );
+        
         if (!name){
           DBG("setPathButtonText: name is null\n");
+          name="FIXME";
         } else {
           if (strcmp(name, "RFM_ROOT")==0) {
               // no path means none is differentiated.
-              gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, color, bgcolor?bgcolor:"#dcdad5", ".");
+              gchar *markup = g_strdup_printf(" %s  ", ".");
               auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
               gtk_label_set_markup(label, markup);
               g_free(markup);
@@ -373,36 +420,16 @@ namespace xf {
               return;
           } 
         }
-        const gchar *pb_path = 
-            (const gchar *)g_object_get_data(G_OBJECT(eventBox), "path");
-        if (!pb_path){
-            g_warning("rfm_update_pathbar(): pb_path is null\n");
-            return;
-        }
-        if (!strlen(pb_path)) pb_path=G_DIR_SEPARATOR_S;//?
-        if (strcmp(pb_path, path)==0) {
-            gchar *v = Basic::utf_string(name);
-            gchar *g = g_markup_escape_text(v, -1);
-            g_free(v);
-            gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, bgcolor?"white":"red", bgcolor?bgcolor:"#dcdad5", g);
-            auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
-            gtk_label_set_markup(label, markup);
+        gchar *v = Basic::utf_string(name);
+        gchar *g = g_markup_escape_text(v, -1);
+        g_free(v);
+        gchar *markup = g_strdup_printf(" %s ", g);
+        auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
+        gtk_label_set_markup(label, markup);
 
-            g_free(g);
-            g_free(markup);
-        }
-        else {
-            gchar *v = Basic::utf_string(name);
-            gchar *g = g_markup_escape_text(v, -1);
-            g_free(v);
-            gchar *markup = g_strdup_printf("<span %s color=\"%s\" bgcolor=\"%s\">  %s  </span>", fontSize, color, bgcolor?bgcolor:"#dcdad5", g);
-            auto label = GTK_LABEL(g_object_get_data(G_OBJECT(eventBox), "label"));
-            gtk_label_set_markup(label, markup);
-
-            g_free(g);
-            g_free(markup);
-        }
-        return;
+        g_free(g);
+        g_free(markup);
+         return;
     }
 
 

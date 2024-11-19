@@ -56,6 +56,7 @@ namespace xf {
 
       static void  updatePathbar(bool addHistory, void *pathbar_go){
         UtilPathbar<Type>::updatePathbar(addHistory, pathbar_go);
+
       }
       static void  updatePathbar(const gchar *path, GtkBox *pathbar, 
           bool addHistory, void *pathbar_go){

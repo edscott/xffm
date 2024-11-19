@@ -60,8 +60,8 @@ template <class DirectoryClass>
 
         //addTopMotionController();
         
-        auto dropController = Dnd<DirectoryClass>::createDropController(this);
-        gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
+        //auto dropController = Dnd<DirectoryClass>::createDropController(this);
+        //gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
       }
 
       ~GridView(void){

@@ -136,8 +136,30 @@ private:
         border-radius: 0px;\
         border-color: transparent;\
       }\
-      .pathbarbox * {\
+      .pathbarboxRed * {\
+        color: red;\
         background-color: #dcdad5;\
+        border-width: 0px;\
+        border-radius: 0px;\
+        border-color: transparent;\
+      }\
+      .pathbarbox * {\
+        color: blue;\
+        background-color: #dcdad5;\
+        border-width: 0px;\
+        border-radius: 0px;\
+        border-color: transparent;\
+      }\
+      .pathbardrop * {\
+        color: black;\
+        background-color: green;\
+        border-width: 0px;\
+        border-radius: 0px;\
+        border-color: black;\
+      }\
+      .pathbarboxNegative * {\
+        color: white;\
+        background-color: #acaaa5;\
         border-width: 0px;\
         border-radius: 0px;\
         border-color: transparent;\
@@ -151,12 +173,6 @@ private:
       }\
       .dropNegative * {\
         background-color: green;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .pathbarboxNegative * {\
-        background-color: #acaaa5;\
         border-width: 0px;\
         border-radius: 0px;\
         border-color: transparent;\

@@ -1,5 +1,6 @@
 #ifndef XF_LOCALDND__HH
 # define XF_LOCALDND__HH
+bool inPathbar = false;
 
 namespace xf
 {
@@ -18,14 +19,13 @@ static GtkEventController *createDropController(void *data){
       (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
     GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
     g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
-    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), data);
+    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), NULL);
+//    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), data);
     g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
 
-    //g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), NULL);
-    //g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), NULL);
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
-
+/*
 static GtkEventController *createDropControllerPathbar(void *data){
     const char *mimeTypes[]={"text/uri-list", NULL};
     GdkContentFormats *contentFormats = gdk_content_formats_new(mimeTypes, 1);
@@ -36,11 +36,11 @@ static GtkEventController *createDropControllerPathbar(void *data){
     g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDropPathbar), data);
     //g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotionPathbar), data);
 
-    g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), data);
-    g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), data);
+    //g_signal_connect (dropTarget, "drag-enter", G_CALLBACK (dropEnter), data);
+    //g_signal_connect (dropTarget, "drag-leave", G_CALLBACK (dropLeave), data);
     return GTK_EVENT_CONTROLLER(dropTarget);
 }
-
+*/
 
 ///////////////////////////////////  drag /////////////////////////////////////
     // signal drag-begin Emitted on the drag source when a drag is started.
@@ -259,35 +259,146 @@ static void *readAction(void *arg){
 
 }
 
-  static void setDropTarget(double x, double y, void *data){
-      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
-      auto listModel = gridview_p->listModel();
-      auto n = g_list_model_get_n_items(listModel);
-      char *path = NULL;
+
+  static GtkWidget *getPathbarWidget(double x, double y, GtkBox *pathbar){
+    GList *children_list = Basic::getChildren(pathbar);
+    GList *children = g_list_first(children_list);
+    for (;children && children->data; children=children->next){
+      auto widget = GTK_WIDGET(children->data);
+      graphene_rect_t bounds;
+      if (!gtk_widget_compute_bounds (widget, GTK_WIDGET(pathbar), &bounds)) return NULL;
       bool xOk = false;
       bool yOk = false;
-      for (guint i=0; i<n; i++){
-        auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
-        auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
-        graphene_rect_t bounds;
-        if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
-          xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
-          yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
-          path = Basic::getPath(info);
-          if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-            if (xOk && yOk) {
-              gtk_widget_add_css_class (GTK_WIDGET(imageBox), "dropNegative" );
-            } else {
-              gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
-            }
-          }
-          g_free(path);
+     
+      xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
+      yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
+      if (xOk && yOk) {
+        auto path = (const char *) g_object_get_data(G_OBJECT(widget), "path");
+        if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+          g_list_free(children_list);
+          return widget;
         }
       }
+    
+    }
+    g_list_free(children_list);
+    return NULL;
   }
 
-  static char *getDropTarget(double x, double y, void *data){
-      auto gridview_p = (GridView<DirectoryClass> *)data;
+  static bool getPathbarCoordinates(double *x, double *y, GtkBox *pathbar){
+    double X = *x;
+    double Y = *y;
+    
+    graphene_rect_t bounds;
+    if (!gtk_widget_compute_bounds (GTK_WIDGET(pathbar), MainWidget, &bounds)) {
+      DBG("*** Error::getGridCoordinates(): should not happen\n");
+      return false;
+    }
+    double newX = X - bounds.origin.x;
+    double newY = Y - bounds.origin.y;
+    if (newY < 0 || newY > bounds.size.height){
+      DBG("out of pathbar Y\n");
+      if (inPathbar) UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+      inPathbar = false;
+      return false;
+    }
+    if (newX < 0 || newX > bounds.size.width){
+      DBG("out of pathbar X\n");
+      if (inPathbar) UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+      inPathbar = false;
+      return false;
+    }
+    inPathbar = true;
+    // GridView coordinates are displaced by gridview origin
+    *x = newX;
+    *y = newY;
+    //DBG("getPathbarCoordinates: %lf->%lf, %lf->%lf\n", X,*x, Y, *y);
+    return true;
+  }
+
+  static bool getGridCoordinates(double *x, double *y, void *data){
+    double X = *x;
+    double Y = *y;
+    auto gridview_p = (GridView<DirectoryClass> *)data;
+    graphene_rect_t bounds;
+    if (!gtk_widget_compute_bounds (GTK_WIDGET(gridview_p->view()), MainWidget, &bounds)) {
+      DBG("*** Error::getGridCoordinates(): should not happen\n");
+      return false;
+    }
+    double newX = X - bounds.origin.x;
+    double newY = Y - bounds.origin.y;
+    if (newY < 0 || newY >= bounds.size.height){
+      TRACE("out of Y\n");
+      return false;
+    }
+    if (newX < 0 || newX >= bounds.size.width){
+      TRACE("out of X\n");
+      return false;
+    }
+    // GridView coordinates are displaced by gridview origin
+    *x = newX;
+    *y = newY;
+    //TRACE("getGridCoordinates: %lf->%lf, %lf->%lf\n", X,*x, Y, *y);
+    return true;
+  }
+
+  static void gridHighlight(double x, double y, GridView<DirectoryClass> *gridview_p){
+    auto listModel = gridview_p->listModel();
+    auto n = g_list_model_get_n_items(listModel);
+    char *path = NULL;
+    bool xOk = false;
+    bool yOk = false;
+    for (guint i=0; i<n; i++){
+      auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
+      auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
+      graphene_rect_t bounds;
+      if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
+        xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
+        yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
+        path = Basic::getPath(info);
+        if (g_file_test(path, G_FILE_TEST_IS_DIR)){
+          if (xOk && yOk) {
+            gtk_widget_add_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+          } else {
+            gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+          }
+        }
+        g_free(path);
+      }
+    }
+
+  }
+
+  static void targetHighlight(double x, double y, void *data){
+      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      GtkBox *pathbar = Child::getPathbar();
+      if (getGridCoordinates(&x, &y, gridview_p)) {
+        UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+        gridHighlight(x, y, gridview_p);
+        return;
+      }
+      if (getPathbarCoordinates(&x, &y, pathbar)) {
+        auto widget = getPathbarWidget(x, y, pathbar);
+        // reset all:
+        UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+        //UtilPathbar<DirectoryClass>::togglePathbar(gridview_p->path(), pathbar);
+        if (widget) {
+          // Apply mask
+          auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
+          TRACE("widget at %s\n", path);
+          gtk_widget_remove_css_class (widget, "pathbarbox" );
+          gtk_widget_add_css_class (widget, "pathbardrop" );
+          //auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
+          //UtilPathbar<DirectoryClass>::setPathButtonText(widget, path, "white", "green");
+        }
+        //if (widget) gtk_widget_add_css_class (widget, "dropNegative" );
+        //gridHighlight(x, y, gridview_p);
+        return;
+      }
+
+
+  }
+  static char *getGridDropTarget(double x, double y, GridView<DirectoryClass> *gridview_p){
       auto listModel = gridview_p->listModel();
       auto n = g_list_model_get_n_items(listModel);
       char *path = NULL;
@@ -325,7 +436,25 @@ static void *readAction(void *arg){
         }
       }
       return NULL;
+
   }
+
+  static char *getDropTarget(double x, double y, void *data){
+      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      GtkBox *pathbar = Child::getPathbar();
+      DBG("original x,y = %lf,%lf\n", x, y);
+      if (getGridCoordinates(&x, &y, gridview_p)) {
+        DBG("Grid new x,y = %lf,%lf\n", x, y);
+        return getGridDropTarget(x, y, gridview_p);
+      } else if (getPathbarCoordinates(&x, &y, pathbar)) {
+        DBG("Pathbar new x,y = %lf,%lf\n", x, y);
+        GtkWidget *widget = getPathbarWidget(x, y, pathbar);
+        auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
+        return g_strdup(path);
+      }
+      return NULL;
+  }
+/*  
     static gboolean dropDropPathbar ( GtkDropTarget* self, GdkDrop* drop,  
         gdouble x, gdouble y, gpointer data)
     {
@@ -352,7 +481,7 @@ static void *readAction(void *arg){
       
       return true; //drop accepted
     }
-
+*/
     static gboolean dropDrop ( GtkDropTarget* self, GdkDrop* drop,  
         gdouble x, gdouble y, gpointer data)
     {
@@ -362,8 +491,11 @@ static void *readAction(void *arg){
       }
       TRACE("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
 
-      TRACE("*** dropDrop %lf,%lf .\n", x, y);
-      auto path = getDropTarget(x, y, data);
+      DBG("*** dropDrop %lf,%lf .\n", x, y);
+      auto gridview_p = Child::getGridviewObject();
+      //if (!getGridCoordinates(&x, &y, gridview_p)) return false;
+      
+      auto path = getDropTarget(x, y, gridview_p);
       
       if (!path) {
         gdk_drop_finish(drop, GDK_ACTION_COPY);
@@ -379,7 +511,7 @@ static void *readAction(void *arg){
       
       return true; //drop accepted
     }
-  
+#if 0  
 static   GdkDragAction
 dropEnter (
   GtkDropTarget* self,
@@ -393,7 +525,7 @@ dropEnter (
   auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self)); 
   auto path = (const char *)g_object_get_data(G_OBJECT(eventBox), "path");
   UtilPathbar<DirectoryClass>::setPathButtonText(eventBox, path, "white", "green");
-//  UtilPathbar<DirectoryClass>::setPathButtonText(eventBox, path, "white", "#acaaa5");
+  DBG("dropEnter eventBox path=%s\n", path);
 
   //return GDK_ACTION_LINK;
   return GDK_ACTION_COPY;
@@ -411,10 +543,14 @@ dropLeave (
   const char *color = "blue";
   auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
   //auto gridView_p = (GridView<DirectoryClass> *)data;
-  if (strcmp(gridView_p->path(), path) == 0) color ="red";
+  //if (strcmp(gridView_p->path(), path) == 0) color ="red";
+  DBG("dropLeave eventBox path=%s, color = %s\n", path, color);
+  if (strcmp(path, gridView_p->path())==0) color = "red";
   UtilPathbar<DirectoryClass>::setPathButtonText(eventBox, path, color, NULL);
-  const char *bgColor = "blue";
 }
+
+#endif
+
 /*
 static GdkDragAction
 dropMotionPathbar( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)
@@ -430,15 +566,15 @@ static GdkDragAction
 dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer data)
 {
 
-  setDropTarget(x, y, data) ;
+  targetHighlight(x, y, data) ;
    
-  //DBG("dropMotion %lf,%lf\n", x, y);
+  //TRACE("dropMotion %lf,%lf\n", x, y);
  
   /* // does not work, no modifierType
   auto eventController = GTK_EVENT_CONTROLLER(self);
   auto event = gtk_event_controller_get_current_event(eventController);
   auto modifierType = gdk_event_get_modifier_state (event);
-  //DBG("dropMotion %lf,%lf, modifierType =  %ld\n", x, y, modifierType);
+  //TRACE("dropMotion %lf,%lf, modifierType =  %ld\n", x, y, modifierType);
 */ 
   return GDK_ACTION_COPY;
 }
@@ -464,7 +600,7 @@ private:
         dialogObject->setParent(GTK_WINDOW(MainWidget));
 
         dialogObject->setLabelText(markup);
-        DBG("create dialogObject=%p\n", dialogObject); 
+        TRACE("create dialogObject=%p\n", dialogObject); 
         dialogObject->subClass()->setUriList(uriList);
         dialogObject->subClass()->setTarget(target);
         auto count = dialogObject->subClass()->uriCount();

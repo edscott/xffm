@@ -148,6 +148,9 @@ private:
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
         MainWidget = GTK_WIDGET(mainWindow_);
         addMotionController(MainWidget);
+        auto dropController = Dnd<LocalDir>::createDropController(NULL);
+        gtk_widget_add_controller (MainWidget, GTK_EVENT_CONTROLLER (dropController));
+
         g_object_set_data(G_OBJECT(mainWindow_), "windowObject", (void *)this);
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         return;

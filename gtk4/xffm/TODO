@@ -1,12 +1,3 @@
-
-
-Pending issues: 
-  Highlight folder drop targets
-
-Bug: select item, control click on a different item and begin drag. Item draged is selected item. drag should only begin from one of the seleted items.
-
-
-* pathbar dnd
 * gridview: verify linebreaks with iconsize
 * gridview: verify tab labels with load gridview
 * rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
