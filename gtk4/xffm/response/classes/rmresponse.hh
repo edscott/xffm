@@ -4,7 +4,7 @@ namespace xf {
 
 class rmResponse {
   private:
-    GtkButton *button_[4];
+    GtkButton *button_[5];
 public:
     const char *title(void){ return _("Delete");}
     const char *iconName(void){ return "dialog-question";}
@@ -17,7 +17,8 @@ public:
       button_[0] = Basic::mkButton("dialog-warning", _("Shred")); //1
       button_[1] = Basic::mkButton("delete", _("Delete")); //2
       button_[2] = Basic::mkButton("user-trash", _("Trash")); //3
-      button_[3] = NULL;
+      button_[3] = Basic::mkButton("no", _("Cancel")); //4
+      button_[4] = NULL;
     }
     GtkButton **getButtons(void){ return button_;}
     
