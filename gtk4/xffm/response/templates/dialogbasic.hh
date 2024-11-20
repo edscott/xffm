@@ -19,6 +19,28 @@ namespace xf
   bool cancelled_ = false;
 
   const char *path_;
+
+    static gboolean
+    on_keypress (GtkEventControllerKey* self,
+          guint keyval,
+          guint keycode,
+          GdkModifierType state,
+          gpointer data){
+        bool escKey = (keyval == GDK_KEY_Escape);
+        if (escKey) {
+          auto object = (DialogBasic<dialogClass> *)data;
+          object->cancelCallback(NULL, 1, 0., 0., data);
+          return true;
+        }
+        return false;
+    }
+    void addKeyController(GtkWidget  *widget){
+        auto keyController = gtk_event_controller_key_new();
+        gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(widget), keyController);
+        g_signal_connect (G_OBJECT (keyController), "key-pressed", 
+            G_CALLBACK (this->on_keypress), (void *)this);
+    }
     protected:
 
   public:
@@ -70,6 +92,7 @@ namespace xf
       MainDialog = dialog_;
       mkTitle();
       mkLabel();      
+      addKeyController(GTK_WIDGET(dialog_));
     }
 
     int run(){
@@ -176,8 +199,12 @@ private:
       return Dialog::buttonBox("close", _("Cancel"), (void *)cancelCallback, (void *)this);
     }
 protected:
+
+    GtkWidget *cancelBox(void){
+      return Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, (void *)this);
+    }
     GtkWidget *applyBox(void){
-      return Dialog::buttonBox("apply", _("Apply"), (void *)ok, (void *)this);
+      return Dialog::buttonBox("apply", _("Apply"), (void *)ok, (void *)this, 25);
     }
 private:
     void mkWindow(void){

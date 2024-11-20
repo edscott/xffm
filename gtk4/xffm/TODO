@@ -2,7 +2,6 @@
 
 * 
 * delete key not working... (focus wrong on items selected?)
-* control click should not unselect and should open menu
 * figure out better start for dnd:
   - conflicts with rubberband
 * gridview: verify linebreaks with iconsize

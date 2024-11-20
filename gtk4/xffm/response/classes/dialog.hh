@@ -5,11 +5,13 @@ namespace xf
 {
   class Dialog {
     public:
-    static GtkWidget *buttonBox(const char *iconName, const char *tooltip, void *callback, void *data){
+
+    static GtkWidget *buttonBox(const char *iconName, const char *tooltip, void *callback, void *data, int width){
+
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
-      auto paintable = Texture<bool>::load(iconName, 18);
+      auto paintable = Texture<bool>::load(iconName, width);
       auto image = gtk_image_new_from_paintable(paintable);
-      gtk_widget_set_size_request(image, 18,18);
+      gtk_widget_set_size_request(image, width,width);
       //gtk_widget_set_sensitive(image, false);
       gtk_widget_set_sensitive(image, true);
       Basic::boxPack0(box, GTK_WIDGET(image), true, true, 1);
@@ -28,6 +30,11 @@ namespace xf
       gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
       
       Basic::addMotionController(GTK_WIDGET(box));
+      return GTK_WIDGET(box);
+    }
+
+    static GtkWidget *buttonBox(const char *iconName, const char *tooltip, void *callback, void *data){
+      auto box = buttonBox(iconName, tooltip, callback, data, 18);
       
       return GTK_WIDGET(box);
     }

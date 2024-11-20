@@ -58,6 +58,8 @@ namespace xf
                 ENTRY_CALLBACK (this->activate), this->dialog());
        auto apply = this->applyBox();
        gtk_box_append(GTK_BOX (entryBox), apply);
+      // auto cancel = this->cancelBox();
+       //gtk_box_append(GTK_BOX (entryBox), cancel);
        
        g_object_set_data(G_OBJECT(entry),"dialog", this->dialog());
        /*g_signal_connect (G_OBJECT (entry), "activate", 

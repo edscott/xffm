@@ -16,7 +16,6 @@ class OpenWith {
     GtkTextView *input_;
     GtkWidget *child_;
     GList *selectionList_ = NULL;
-    
    
 protected:
     GtkWindow *dialog(void){return dialog_;}
@@ -189,10 +188,12 @@ public:
         }
         g_free(mimetype);
 
-        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
-        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
+        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this, 25);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
-      
+        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
+        //auto cancel = Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, this, 25);
+        //Basic::boxPack0(GTK_BOX (hbox),GTK_WIDGET(cancel), FALSE, FALSE, 10);
+     
 
         // check button
       
@@ -200,9 +201,17 @@ public:
 "output will be displayed in a toolview. This makes it impossible to interact "\
 "with applications requiring user input from a terminal emulator. To run such "\
 "applications, you should use an external terminal.");
-
         auto box = Basic::mkEndBox();
         Basic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(box), TRUE, TRUE, 5);
+
+
+
+        
+       /* auto cancel = Basic::mkButton("no", _("Cancel")); //4
+        g_signal_connect(G_OBJECT(cancel), "pressed", G_CALLBACK(cancelCallback), this);
+        Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(cancel), TRUE, TRUE, 5);*/
+
+
         auto label = gtk_label_new(_("Use External Terminal:"));
         gtk_widget_set_tooltip_markup(label, text);
         checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new());
@@ -316,6 +325,11 @@ public:
        auto progress = object->progress();
         if (!progress || !GTK_IS_PROGRESS_BAR(progress)) return FALSE;
         gtk_progress_bar_set_fraction(progress, 0.0);
+        if(keyval == GDK_KEY_Escape) { 
+          object->timeout_=-1;
+          object->freeSelectionList();
+          return TRUE;
+        }
         if(keyval == GDK_KEY_Return) { 
           run(object);
           object->timeout_=-1;
