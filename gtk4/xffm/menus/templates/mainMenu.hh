@@ -46,6 +46,7 @@ namespace xf {
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
         {_("Paste"),(void *) "paste"}, 
+        {_("Select All"),(void *) "add"}, 
         {_("Add bookmark"),(void *) "emblem-bookmark"}, 
         {_("Remove bookmark"),(void *) "emblem-bookmark"}, 
         {_("Toggle Text Mode"),(void *) "emblem-fifo"}, 
