@@ -120,7 +120,7 @@ private:
         mode = _("link"); break;
     }
     Print::showText(Child::getOutput());
-    Print::printIcon(Child::getOutput(),"emblem-redball", g_strdup_printf(" %s (%s)",  _("Operation completed"), mode)); 
+    Print::printIcon(Child::getOutput(),"emblem-redball", g_strdup_printf(" %s (%s)\n",  _("Operation completed"), mode)); 
 
     return NULL;
   }

@@ -18,6 +18,17 @@ template <class Type>  class Texture {
         return GDK_PAINTABLE(texture);
       }
       static
+      GdkPaintable *load(GFileInfo *info, int size){
+        auto gIcon = g_file_info_get_icon(info);
+        GdkPaintable *texture;
+        if (gIcon) {
+          auto icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, size, 
+              1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
+          texture = GDK_PAINTABLE(icon);
+        } else return NULL;
+        return GDK_PAINTABLE(texture);
+      }
+      static
       GdkPaintable *load(const char *iconName, int size){
         GdkPaintable *texture;
         auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
@@ -74,7 +85,7 @@ template <class Type>  class Texture {
         return NULL;
       }
       
-     static 
+     static // FIXME: try to load from hash first, if created, add to hash
       GdkPaintable *loadIconName(const char *item){
         if (!item) return NULL;      
         // From iconname.
@@ -284,7 +295,7 @@ template <class Type>  class Texture {
         cairo_rectangle (cr, 0.0, 0.0, width, height);
         cairo_fill (cr);
         // emblem after shading
-        addEmblem(cr, emblem, width, height);
+        if (emblem) addEmblem(cr, emblem, width, height);
         
         cairo_destroy(cr);
         auto texture = GDK_PAINTABLE(gdk_texture_new_for_surface(surface));

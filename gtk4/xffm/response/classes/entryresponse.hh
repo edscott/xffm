@@ -23,12 +23,12 @@ public:
     }
 
      static void *asyncYes(void *data){
-      DBG("%s", "hello world\n");
+      TRACE("%s", "hello world\n");
       return NULL;
     }
 
     static void *asyncNo(void *data){
-      DBG("%s", "goodbye world\n");
+      TRACE("%s", "goodbye world\n");
       return NULL;
     }
  

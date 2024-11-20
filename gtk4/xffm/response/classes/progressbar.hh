@@ -67,7 +67,11 @@ private:
         } 
         // Complete fraction, cancel dialog and .
         if (fraction >= 1.0) {
-          DBG("cancel dialog by timeout\n");
+          auto message = g_strdup_printf(" %s (%d)\n", _("Cancelled"), _("Idle Timeout"));
+          Print::printWarning(Child::getOutput(), message);
+
+          TRACE("cancel dialog by timeout\n");
+          
           g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(-3)); 
         }
         return G_SOURCE_CONTINUE;
@@ -102,14 +106,14 @@ private:
       //auto dialogObject = (DialogTimeoutButtons<infoResponse> *)data;
       //dialogObject->timeout(-1);
       
-      DBG("%s", "hello world\n");
+      TRACE("%s", "hello world\n");
       return NULL;
     }
 
     static void *asyncNo(void *data){
       //auto dialogObject = (DialogTimeoutButtons<infoResponse> *)data;
       //dialogObject->timeout(-1);
-      DBG("%s", "bye world\n");
+      TRACE("%s", "bye world\n");
       return NULL;
     }
  

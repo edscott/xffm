@@ -58,19 +58,19 @@ public:
       char *clipContent = g_strdup("");
       switch (response) {
         case 1:
-          DBG("hello world, response is %d: copy to %s\n%s\n", response, target,uriList);
+          TRACE("hello world, response is %d: copy to %s\n%s\n", response, target,uriList);
           Basic::concat(&clipContent, "copy\n");
           break;
         case 2:
-          DBG("hello world, response is %d: move to %s\n%s\n", response, target, uriList);
+          TRACE("hello world, response is %d: move to %s\n%s\n", response, target, uriList);
           Basic::concat(&clipContent, "move\n");
           break;
         case 3:
-          DBG("hello world, response is %d: link \n", response);
+          TRACE("hello world, response is %d: link \n", response);
           Basic::concat(&clipContent, "link\n");
           break;
         case 4:
-          DBG("hello world, response is %d: cancel\n", response);
+          TRACE("hello world, response is %d: cancel\n", response);
           goto done;
         default:
           DBG("*** Error:: dndResponse::asyncYes(): response %d is not appropriate.\n", response);
@@ -89,7 +89,7 @@ done:
     static void *asyncNo(void *data){
       //auto dialogObject = (DialogTimeoutButtons<infoResponse> *)data;
       //dialogObject->timeout(-1);
-      DBG("%s", "Drop cancelled.\n");
+      TRACE("%s", "Drop cancelled.\n");
       gtk_window_present(GTK_WINDOW(MainWidget));
       return NULL;
     }

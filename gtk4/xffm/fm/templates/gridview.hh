@@ -1,6 +1,8 @@
 #ifndef GRIDVIEW_HH
 #define GRIDVIEW_HH
 static GdkDragAction dndStatus = GDK_ACTION_COPY;
+
+
 namespace xf {
 template <class Type> class Dnd;
 template <class DirectoryClass>
@@ -14,12 +16,21 @@ template <class DirectoryClass>
       // myMenu is for processing keys for individual widget popovers
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
       int maxNameLen_ = 0;
-      double x_;
+      double x_; // factory widget
       double y_;
+      double X_; // main widget
+      double Y_;
       int flags_=0;
+      bool dragging_ = false;
   public:
+      bool dragging(void) {return dragging_;}
+      void dragging(bool value) {dragging_ = value;}
+      double X(void){return X_;}
+      double Y(void){return Y_;}
       double x(void){return x_;}
       double y(void){return y_;}
+      void X(double value){X_ = value;}
+      void Y(double value){Y_ = value;}
       void x(double value){x_ = value;}
       void y(double value){y_ = value;}
      
@@ -50,6 +61,7 @@ template <class DirectoryClass>
         gridViewClick_f_ = gridViewClick_f;
         path_ = g_strdup(path);
         view_ = getGridView();
+        //gtk_grid_view_set_single_click_activate (GTK_GRID_VIEW(view_), true);
         flags_ = Settings::getInteger("flags", path_);
         if (flags_ < 0) flags_ = 0;
         TRACE("gridview flags = 0x%x\n", flags_);
@@ -58,7 +70,7 @@ template <class DirectoryClass>
         addGestureClickView1(view_, NULL, this);// unselect all on release
         addGestureClickView3(view_, NULL, this); // menu 
 
-        //addTopMotionController();
+        addMotionController();
         
         //auto dropController = Dnd<DirectoryClass>::createDropController(this);
         //gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
@@ -139,7 +151,7 @@ template <class DirectoryClass>
       }
 
   private:
-    static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
+static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -489,11 +501,75 @@ public:
                     gdouble y,
                     gpointer data) 
     {
-        //TRACE("viewMotion %lf, %lf\n", x, y);
-        auto gridview_p = (GridView<DirectoryClass> *)data;
-        return FALSE;
+        int size = Settings::getInteger("xfterm", "iconsize");
+        if (size < 0) size = 5;
+        
+        auto gridView_p = (GridView<DirectoryClass> *)data;
+        TRACE("viewMotion %lf->%lf, %lf->%lf\n", gridView_p->x(), x, gridView_p->y(), y);
+        graphene_rect_t bounds;
+        if (!gtk_widget_compute_bounds (gridView_p->view(), MainWidget, &bounds)){
+          DBG("** Error:: viewMotion: should not happen\n");
+          return false;
+        }
+        double mainX = x + bounds.origin.x;
+        double mainY = y + bounds.origin.y;
+        
+        double distance = sqrt(pow(gridView_p->X() - mainX,2) + pow(gridView_p->Y() - mainY,2));
+        if (gridView_p->dragging() && distance > size){
+          gridView_p->dragging(false);
+          TRACE("starting drag at point %lf->%lf, %lf->%lf (distance=%lf\n", 
+              gridView_p->X(), mainX, gridView_p->Y(), mainY, distance);
+          GdkSurface *surface;
+          GdkDevice *device;
+          GdkDragAction actions;
+          GdkContentProvider *content;
+          device = gtk_event_controller_get_current_event_device (GTK_EVENT_CONTROLLER(self));
+          surface = gtk_native_get_surface (gtk_widget_get_native (GTK_WIDGET (gridView_p->view())));
+          GList *selection_list = gridView_p->getSelectionList();
+          if (g_list_length(selection_list) < 1) {
+            DBG("*** Error:: no drag, selection list ==0\n");
+            return false;
+          }
+          char *string = g_strdup("");
+          for (GList *l = selection_list; l && l->data; l=l->next){
+            auto info = G_FILE_INFO(l->data);
+            GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+            char *path = g_file_get_path(file);
+            char *g = g_strconcat(string, "file://", path, "\n", NULL);
+            g_free(string);
+            string = g;
+            g_free(path);     
+          }
+
+          GBytes *bytes = g_bytes_new(string, strlen(string)+1);
+          content = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
+          g_free(string);
+          
+          actions = (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+          GdkDrag *drag = gdk_drag_begin (surface,
+                         device,
+                         content,
+                         actions,
+                         gridView_p->X(),
+                         gridView_p->Y());
+
+          GdkPaintable *paintable;
+          if (g_list_length(selection_list) < 2){
+            auto info = G_FILE_INFO(selection_list->data);
+            auto *iconPath = Texture<bool>::findIconPath(info);
+            paintable = Texture<bool>::getShadedIcon2(iconPath, size, size, NULL);   
+            //paintable = Texture<bool>::load(info, size); // Loads icon from icontheme.
+          } else {
+            auto *iconPath = Texture<bool>::findIconPath("dnd-multiple");
+            paintable = Texture<bool>::getShadedIcon2(iconPath, size, size, NULL);   
+          }
+          gtk_drag_icon_set_from_paintable (drag, paintable,  1, 1);
+       }  
+        
+        return false;
     }
-      void addTopMotionController(void){
+
+      void addMotionController(void){
         auto controller = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(view_), controller);
@@ -514,30 +590,6 @@ public:
         gtk_drag_source_set_icon (source, paintable, 0, 0);
         g_object_unref (paintable);
       }
-
-static GdkContentProvider *
-on_drag_prepare (GtkDragSource *source,
-                 double         x,
-                 double         y,
-                 GridView<DirectoryClass> *gridView_p)
-{
-
-  auto list = gridView_p->getSelectionList();
-  const char *text = "hello";
-  return gdk_content_provider_new_typed ("text/uri-list", text);
-
-  // This widget supports two types of content: GFile objects
-  // and GdkPixbuf objects; GTK will handle the serialization
-  // of these types automatically
-/*  GFile *file = my_widget_get_file (self);
-  GdkPixbuf *pixbuf = my_widget_get_pixbuf (self);
-
-  return gdk_content_provider_new_union ((GdkContentProvider *[2]) {
-      gdk_content_provider_new_typed (G_TYPE_FILE, file),
-      gdk_content_provider_new_typed (GDK_TYPE_PIXBUF, pixbuf),
-    }, 2);*/
-}
-
   };
 }
 #endif

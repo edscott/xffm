@@ -155,6 +155,7 @@ namespace xf {
       auto box = gtk_event_controller_get_widget(eventController);
       
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(box), "gridView_p");
+
       double distance = sqrt(pow(gridView_p->x() - x,2) + pow(gridView_p->y() - y,2));
 
       //auto size = Settings::getInteger("xfterm", "iconsize");
@@ -163,7 +164,11 @@ namespace xf {
       int size = 5;
       TRACE("down at %lf,%lf, up at %lf,%lf. Distance=%lf, size=%d\n", 
           gridView_p->x(), gridView_p->y(), x, y, distance, size);
-      if (distance > size) return false;
+      if (distance > size) {
+        gridView_p->dragging(false);
+        return true;
+      }
+      gridView_p->dragging(false);
 /*
       auto imageBox = gtk_event_controller_get_widget(eventController);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(imageBox), "gridView_p");

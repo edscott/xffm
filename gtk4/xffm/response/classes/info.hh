@@ -28,14 +28,14 @@ public:
       //auto dialogObject = (DialogTimeoutButtons<infoResponse> *)data;
       //dialogObject->timeout(-1);
       
-      DBG("%s", "hello world\n");
+      TRACE("%s", "hello world\n");
       return NULL;
     }
 
     static void *asyncNo(void *data){
       //auto dialogObject = (DialogTimeoutButtons<infoResponse> *)data;
       //dialogObject->timeout(-1);
-      DBG("%s", "bye world\n");
+      TRACE("%s", "bye world\n");
       return NULL;
     }
  

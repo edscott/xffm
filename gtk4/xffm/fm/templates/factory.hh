@@ -175,12 +175,13 @@ template <class DirectoryClass>
           // Texture is not referenced in hash table. 
           g_object_unref(texture);        
         }
-        if (image) gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
-        else {DBG("Should not happen: image is NULL\n");}
-        // cleanup on regen:
-        //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
-        //if (oldImage) gtk_widget_unparent(oldImage);
-        Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
+        if (image) {
+          gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
+          // cleanup on regen:
+          //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
+          //if (oldImage) gtk_widget_unparent(oldImage);
+          Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
+        } else {DBG("Error:: Should not happen: image is NULL\n");}
         
 
         if (type == G_FILE_TYPE_DIRECTORY ) {
@@ -257,12 +258,12 @@ template <class DirectoryClass>
           g_free(markup);
           DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
         }
-        // gtk drag
-        GtkDragSource *source = gtk_drag_source_new ();
+        // gtk drag (deprecated for low level gdk_drag)
+        /*GtkDragSource *source = gtk_drag_source_new ();
         g_signal_connect (source, "prepare", G_CALLBACK (Dnd<DirectoryClass>::image_drag_prepare),gridView_p);
         
         g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<DirectoryClass>::image_drag_begin), image);
-        gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));
+        gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));*/
         
 
 
@@ -448,6 +449,20 @@ template <class DirectoryClass>
       auto gridView_p = (GridView<DirectoryClass> *)data;
       gridView_p->x(x);
       gridView_p->y(y);
+      graphene_rect_t bounds;
+      if (!gtk_widget_compute_bounds (w, MainWidget, &bounds)) {
+        DBG("** Error:: down_f() should not happen. \n");
+        return false;
+      }
+      gridView_p->X(x + bounds.origin.x);
+      gridView_p->Y(y + bounds.origin.y);
+      TRACE("down at widget %lf, %lf (origin %lf,%lf) mainWidget %lf, %lf \n", 
+          x,y,bounds.origin.x,bounds.origin.y,
+          gridView_p->X(),gridView_p->Y());
+
+
+      
+      gridView_p->dragging(true);
       if (modType & GDK_CONTROL_MASK) {
         selectWidget(w, gridView_p, false);
         return false;

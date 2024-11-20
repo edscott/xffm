@@ -50,7 +50,7 @@ static GtkEventController *createDropController(void *data){
         (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
       gtk_drag_source_set_actions(source, actions);
       
-      DBG("image_drag_begin.\n");
+      TRACE("image_drag_begin.\n");
     }
     // signal prepare Emitted when a drag is about to be initiated.
     static GdkContentProvider* 
@@ -97,7 +97,7 @@ static GtkEventController *createDropController(void *data){
       //  GtkDragSource *source = gtk_drag_source_new ();
       //  gtk_drag_source_set_content (source, dndcontent);
         
-        DBG("image_drag_prepare.\n");
+        TRACE("image_drag_prepare.\n");
         return dndcontent;
 }
 private:
@@ -109,13 +109,13 @@ private:
 static void dragEnd ( GtkDragSource* self, GdkDrag* drag, 
     gboolean delete_data, gpointer user_data)
 {
-  DBG("dragEnd.\n");
+  TRACE("dragEnd.\n");
 }
 // signal drag-cancel Emitted on the drag source when a drag has failed.
 static gboolean dragCancel ( GtkDragSource* self, GdkDrag* drag, 
     GdkDragCancelReason* reason, gpointer user_data
 ){
-  DBG("dragCancel.\n");
+  TRACE("dragCancel.\n");
   return true;
 }
 
@@ -128,7 +128,7 @@ static gboolean cancel (
   gpointer user_data
 )
 {
-  DBG("cancel.\n");
+  TRACE("cancel.\n");
   return true;
 }
 // signal drop-performed Emitted when the drop operation is performed on an accepting client.
@@ -136,7 +136,7 @@ static void drop_performed (
   GdkDrag* self,
   gpointer user_data
 ){
-  DBG("drop_performed.\n");
+  TRACE("drop_performed.\n");
 }
 // signal dnd-finished Emitted when the destination side has finished reading all data.
 static void
@@ -144,7 +144,7 @@ dnd_finished (
   GdkDrag* self,
   gpointer user_data
 ){
-  DBG("dnd_finished.\n");
+  TRACE("dnd_finished.\n");
 }
 
 ///////////////////////////////////  drop /////////////////////////////////////
@@ -177,7 +177,7 @@ static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void
 
 // in thread:
 static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *arg){
-  DBG("dropReadCallback: do your thing.\n" );
+  TRACE("dropReadCallback: do your thing.\n" );
   const char *out_mime_type;
   GError *error_ = NULL;
   GdkDrop *drop = GDK_DROP(source_object);
@@ -233,7 +233,7 @@ static void *readAction(void *arg){
 
   gsize size;
   const void *p = g_bytes_get_data(bytes, &size);
-  DBG("readAction(): bytes (%ld):\ntarget: %s\n%s\n", size, target, (const char *)p);
+  TRACE("readAction(): bytes (%ld):\ntarget: %s\n%s\n", size, target, (const char *)p);
 //  Dialogs::info("wahtever");
   
   dnd((const char *)p, target);
@@ -296,7 +296,7 @@ static void *readAction(void *arg){
     // GridView coordinates are displaced by gridview origin
     *x = newX;
     *y = newY;
-    //DBG("getPathbarCoordinates: %lf->%lf, %lf->%lf\n", X,*x, Y, *y);
+    TRACE("getPathbarCoordinates: %lf->%lf, %lf->%lf\n", X,*x, Y, *y);
     return true;
   }
 
@@ -521,7 +521,7 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
 }
 static gboolean dropAccept ( GtkDropTarget* self, GdkDrop* drop, gpointer user_data)
 {
-  DBG("dropAccept.\n");
+  TRACE("dropAccept.\n");
   //if (!inPathbar && !inGridView) return false;
   //return false; //drop not accepted on enter
   return true; //drop accepted on enter
@@ -540,7 +540,9 @@ private:
       for (auto p=files; p && *p; p++){
         if (g_file_test(*p, G_FILE_TEST_IS_DIR)){
           if (strcmp(*p, target)==0){
-            DBG("Source and target are the same: %s\n", *p);
+            TRACE("Source and target are the same: %s\n", *p);
+            auto message = g_strdup_printf(" %s: %s\n", _("Invalid target folder"), target);
+            Print::printWarning(Child::getOutput(), message);
             goto done;
           }
         }
@@ -571,7 +573,9 @@ private:
         dialogObject->run();
         
       } else {
-        DBG("Source and target are the same: %s\n", source);
+        auto message = g_strdup_printf(" %s %s (%s)\n", _("Drag:"), _("Invalid target folder"), target);
+        Print::printWarning(Child::getOutput(), message);
+        TRACE("Source and target are the same: %s\n", source);
       }
 done:
         auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
