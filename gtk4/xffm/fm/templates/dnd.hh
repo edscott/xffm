@@ -536,6 +536,15 @@ private:
       auto markup = g_strconcat("<span color=\"red\">",_("Target"), ": </span>", target, "\n",
          "<span color=\"green\">", _("Source"),  ": </span>", source, "\n",
          "<span color=\"black\">", block, "\n</span>", NULL);
+
+      for (auto p=files; p && *p; p++){
+        if (g_file_test(*p, G_FILE_TEST_IS_DIR)){
+          if (strcmp(*p, target)==0){
+            DBG("Source and target are the same: %s\n", *p);
+            goto done;
+          }
+        }
+      }
       if (strcmp(source, target)) {
         auto dialogObject = new DialogButtons<dndResponse>;
         dialogObject->setParent(GTK_WINDOW(MainWidget));
@@ -564,6 +573,11 @@ private:
       } else {
         DBG("Source and target are the same: %s\n", source);
       }
+done:
+        auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+        resetGridviewCSS(gridview_p);
+        inGridView = false;
+        
       g_free(markup);
       g_free(block);
       g_strfreev(files);

@@ -1,6 +1,4 @@
-BUG: start drag on folder and release on same folder source resolved to gridview path and target to the folder!
-     Cannot copy a folder onto itself! Also, green remains on target when drop
-     to a folder is cancelled (maybe even when proceeds).
+
 
 * add cancel button to Basic dialog
 * delete key not working... (focus wrong on items selected?)
