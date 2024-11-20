@@ -15,10 +15,11 @@ public:
     GtkWidget **getButtons(void){ return buttons;}
 
     dndResponse(void){
-      buttons = (GtkWidget **)calloc(4,sizeof(GtkWidget *));
+      buttons = (GtkWidget **)calloc(5,sizeof(GtkWidget *));
       buttons[0] = GTK_WIDGET(Basic::mkButton("list-add", _("Copy")));
       buttons[1] = GTK_WIDGET(Basic::mkButton("list-remove", _("Move")));
       buttons[2] = GTK_WIDGET(Basic::mkButton("emblem-symbolic-link", _("Link")));
+      buttons[3] = GTK_WIDGET(Basic::mkButton("no", _("Cancel")));
     }
 
     ~dndResponse(void){
@@ -50,6 +51,7 @@ public:
       auto target = dialogObject->subClass()->target();
       auto uriList = dialogObject->subClass()->uriList();
       auto count = dialogObject->subClass()->uriCount();
+      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       
       //dialogObject->timeout(-1);
       auto response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialogObject->dialog()), "response"));
@@ -64,18 +66,21 @@ public:
           Basic::concat(&clipContent, "move\n");
           break;
         case 3:
-          DBG("hello world, response is %d: link moveto\n", response);
+          DBG("hello world, response is %d: link \n", response);
           Basic::concat(&clipContent, "link\n");
           break;
+        case 4:
+          DBG("hello world, response is %d: cancel\n", response);
+          goto done;
         default:
           DBG("*** Error:: dndResponse::asyncYes(): response %d is not appropriate.\n", response);
+          goto done;
       }
       Basic::concat(&clipContent, uriList);
-      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       c->resetClipBoardCache(clipContent);
       g_free(clipContent);
       cpDropResponse::openDialog(target);
-
+done:
       gtk_window_present(GTK_WINDOW(MainWidget));
 
       return NULL;
