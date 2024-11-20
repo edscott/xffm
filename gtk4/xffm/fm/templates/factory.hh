@@ -428,6 +428,7 @@ template <class DirectoryClass>
         g_free(path);
         auto selectionModel = gridView_p->selectionModel();
         gtk_selection_model_select_item(selectionModel, positionF, unselectOthers);
+        gtk_widget_grab_focus(GTK_WIDGET(gridView_p->view()));
         return false;
       }
       TRACE("*** selectWidget: item is null\n");

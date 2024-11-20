@@ -424,6 +424,7 @@ template <class DirectoryClass>
       if (modifierType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) return false;
       
       gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
+      gtk_widget_grab_focus(GTK_WIDGET(Child::getInput()));
       return true;
     }
 
