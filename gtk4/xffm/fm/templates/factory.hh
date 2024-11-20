@@ -353,13 +353,11 @@ template <class DirectoryClass>
       auto box = gtk_event_controller_get_widget(eventController);
       GObject *object = NULL;
       if (box) object = G_OBJECT(g_object_get_data(G_OBJECT(box), "object"));
-      //auto menuBox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
 
       auto modType = gdk_event_get_modifier_state(event);
-      // no good here: selectWidget(box, gridView_p);
 
       TRACE("modType = 0x%x\n", modType);
-      if (modType & GDK_CONTROL_MASK) return false;
+      //if (modType & GDK_CONTROL_MASK) return false;
       if (modType & GDK_SHIFT_MASK) return false;
 
       // unselect all, no

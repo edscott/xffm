@@ -20,7 +20,7 @@ namespace xf {
            GO_HOME, 
            //OPEN_FILEMANAGER, 
            //EDIT_CLEAR,
-           "media-view-subtitles",
+           "emblem-fifo",
            NULL
          };
         const char *bText[]={

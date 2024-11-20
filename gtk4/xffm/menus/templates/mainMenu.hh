@@ -56,7 +56,7 @@ namespace xf {
         {_("Home"),(void *) GO_HOME}, 
         {_("Show Clipboard"),(void *) "emblem-important"}, // 
         {_("Clear Clipboard History"),(void *) EDIT_CLEAR}, // 
-        {_("Open in New Window"),(void *)OPEN_FILEMANAGER}, 
+        {_("Open in New Window"),(void *)"new"}, 
         {_("Color settings"),(void *)DOCUMENT_PROPERTIES}, 
         {_("Exit"),(void *)  WINDOW_SHUTDOWN},
         {_("Apply modifications"),(void *) "apply"},
