@@ -384,7 +384,7 @@ template <class DirectoryClass>
         } else {
           gridView_p->placeMenu(object, gridView_p); // object is G_FILE_INFO
         }
-      } else {
+      } else if (size > 1 ){
 #ifdef GDK_WINDOWING_X11
         // Gtk bug workaround
         GdkDisplay *displayGdk = gdk_display_get_default();
@@ -399,7 +399,10 @@ template <class DirectoryClass>
         auto info = G_FILE_INFO(g_list_first (selectionList)->data);
         auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
         gridView_p->placeMenu( menuBox2, gridView_p);
+      } else { // null selection list
+        MainWindow<DirectoryClass>::clickMenu(mainMenuButton, NULL);
       }
+
       Basic::freeSelectionList(selectionList);
    
       return true;

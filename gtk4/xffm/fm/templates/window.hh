@@ -366,7 +366,7 @@ private:
       g_signal_connect (notebook_, "switch-page", 
                 NOTEBOOK_CALLBACK (on_switch_page), (void *)this);
       g_signal_connect (newMenuButton, "clicked", 
-                G_CALLBACK (clickMenu), (void *)this);
+                G_CALLBACK (clickMenu), NULL);
       
       gtk_widget_set_hexpand(GTK_WIDGET(actionWidget), FALSE);
 

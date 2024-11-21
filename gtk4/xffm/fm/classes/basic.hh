@@ -4,6 +4,7 @@ namespace xf {
   class Basic {
     public:
       static void freeSelectionList(GList *selectionList){
+        if (!selectionList) return;
         for (auto l=selectionList; l && l->data; l= l->next){
           auto info = G_OBJECT(l->data);
           g_object_unref(info);
