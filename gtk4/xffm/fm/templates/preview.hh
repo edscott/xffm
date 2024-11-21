@@ -393,7 +393,7 @@ private:
             // crash while trying to get the error message.
             paintable = GDK_PAINTABLE(gdk_texture_new_from_filename (path, &error_));
             if (error_){
-              DBG("** Error::buildImagePaintable():%s\n", error_->message);
+              DBG("** Error::buildImagePaintable(%s):%s\n", path, error_->message);
               g_error_free(error_);
               return NULL;
             }
