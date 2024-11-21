@@ -3,6 +3,7 @@
 bool inPathbar = false;
 bool inGridView = false;
 
+
 namespace xf
 {
 //template <class Type> class View;
@@ -10,23 +11,112 @@ template <class Type> class UtilPathbar;
 template <class Type> class GridView;
 template <class DirectoryClass>
 class Dnd {
+  bool dragOn_ = false;
 public:
+      //bool dragging(void) {return dragging_;}
+      //void dragging(bool value) {dragging_ = value;}
+    bool dragOn(void) {return dragOn_;}
+    void dragOn(bool value) {dragOn_ = value;}
 ///////////////////////////////////  drop /////////////////////////////////////
 
-static GtkEventController *createDropController(void *data){
-    const char *mimeTypes[]={"text/uri-list", NULL};
-    GdkContentFormats *contentFormats = gdk_content_formats_new(mimeTypes, 1);
-    GdkDragAction actions =
-      (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
-    GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
-    g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
-    g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), NULL);
-    g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
+    static GtkEventController *createDropController(void *data){
+        const char *mimeTypes[]={"text/uri-list", NULL};
+        GdkContentFormats *contentFormats = gdk_content_formats_new(mimeTypes, 1);
+        GdkDragAction actions =
+          (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+        GtkDropTargetAsync *dropTarget = gtk_drop_target_async_new (contentFormats, actions);
+        g_signal_connect (dropTarget, "accept", G_CALLBACK (dropAccept), NULL);
+        g_signal_connect (dropTarget, "drop", G_CALLBACK (dropDrop), NULL);
+        g_signal_connect (dropTarget, "drag-motion", G_CALLBACK (dropMotion), NULL);
 
-    return GTK_EVENT_CONTROLLER(dropTarget);
-}
+        return GTK_EVENT_CONTROLLER(dropTarget);
+    }
+    
+    int getSize(void){
+        int size = Settings::getInteger("xfterm", "iconsize");
+        if (size < 0) size = 5;
+        return size;
+
+    }
+
+    bool inOffset(double x, double y, void *data){
+        int size = getSize();
+        auto gridView_p = (GridView<DirectoryClass> *)data;
+        if (gridView_p->X() <= 0.1 && gridView_p->Y() <= 0.1) return true;
+        graphene_rect_t bounds;
+        if (!gtk_widget_compute_bounds (gridView_p->view(), MainWidget, &bounds)){
+          DBG("** Error:: viewMotion: should not happen\n");
+          return true;
+        }
+        double mainX = x + bounds.origin.x;
+        double mainY = y + bounds.origin.y;        
+        double distance = sqrt(pow(gridView_p->X() - mainX,2) + pow(gridView_p->Y() - mainY,2));
+        if (distance <= size) return true;
+        DBG("starting drag at point %lf->%lf, %lf->%lf (distance=%lf\n", 
+            gridView_p->X(), mainX, gridView_p->Y(), mainY, distance);
+
+        return false;
+    }
+
+    // x,y are in MainWidget frame of reference.
+    bool startDrag(GtkEventControllerMotion* self, double x, double y, void *data){
+        if (this->dragOn()) return true;
+        auto noStart = inOffset(x, y, data);
+        if (noStart) return false;
+        this->dragOn(true);
+
+        auto gridView_p = (GridView<DirectoryClass> *)data;        
+        GdkSurface *surface;
+        GdkDevice *device;
+        GdkDragAction actions;
+        GdkContentProvider *content;
+        device = gtk_event_controller_get_current_event_device (GTK_EVENT_CONTROLLER(self));
+        surface = gtk_native_get_surface (gtk_widget_get_native (GTK_WIDGET (gridView_p->view())));
+        GList *selection_list = gridView_p->getSelectionList();
+        if (g_list_length(selection_list) < 1) {
+          DBG("*** Error:: no drag, selection list ==0\n");
+          return false;
+        }
+        char *string = g_strdup("");
+        for (GList *l = selection_list; l && l->data; l=l->next){
+          auto info = G_FILE_INFO(l->data);
+          GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+          char *path = g_file_get_path(file);
+          char *g = g_strconcat(string, "file://", path, "\n", NULL);
+          g_free(string);
+          string = g;
+          g_free(path);     
+        }
+
+        GBytes *bytes = g_bytes_new(string, strlen(string)+1);
+        content = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
+        g_free(string);
+        
+        actions = (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+        GdkDrag *drag = gdk_drag_begin (surface,
+                       device,
+                       content,
+                       actions,
+                       gridView_p->X(),
+                       gridView_p->Y());
+
+        GdkPaintable *paintable;
+        int size = getSize();
+        if (g_list_length(selection_list) < 2){
+          auto info = G_FILE_INFO(selection_list->data);
+          auto *iconPath = Texture<bool>::findIconPath(info);
+          paintable = Texture<bool>::getShadedIcon2(iconPath, size, size, NULL);   
+          //paintable = Texture<bool>::load(info, size); // Loads icon from icontheme.
+        } else {
+          auto *iconPath = Texture<bool>::findIconPath("dnd-multiple");
+          paintable = Texture<bool>::getShadedIcon2(iconPath, size, size, NULL);   
+        }
+        gtk_drag_icon_set_from_paintable (drag, paintable,  1, 1);
+        return true;
+    }
 
 ///////////////////////////////////  drag /////////////////////////////////////
+#if 0
     // signal drag-begin Emitted on the drag source when a drag is started.
     static void
     image_drag_begin (GtkDragSource *source, GdkDrag *drag, GtkWidget *widget)
@@ -89,7 +179,7 @@ static GtkEventController *createDropController(void *data){
         g_free(path);     
       }
 
-      //  dndcontent = gdk_content_provider_new_typed (G_TYPE_STRING, string);
+//  dndcontent = gdk_content_provider_new_typed (G_TYPE_STRING, string);
         GBytes *bytes = g_bytes_new(string, strlen(string)+1);
         dndcontent = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
 
@@ -100,6 +190,7 @@ static GtkEventController *createDropController(void *data){
         TRACE("image_drag_prepare.\n");
         return dndcontent;
 }
+#endif
 private:
 ///////////////////////////////////  drag /////////////////////////////////////
 

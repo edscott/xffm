@@ -119,12 +119,15 @@ main (int argc, char *argv[]) {
   auto fm = new(xf::Fm)(path);
 
   auto c = new xf::ClipBoard;
+  auto d = new xf::Dnd<xf::LocalDir>;
   g_object_set_data(G_OBJECT(MainWidget), "ClipBoard", c);
+  g_object_set_data(G_OBJECT(MainWidget), "Dnd", d);
   
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);
 
   delete c;
+  delete d;
   delete fm;
   TRACE("exit xffm main loop\n");
   return 0;

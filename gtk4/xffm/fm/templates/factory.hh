@@ -442,6 +442,7 @@ template <class DirectoryClass>
               gdouble x,
               gdouble y,
               void *data){
+      auto button = gtk_gesture_single_get_button (GTK_GESTURE_SINGLE(self));
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
@@ -460,9 +461,13 @@ template <class DirectoryClass>
           x,y,bounds.origin.x,bounds.origin.y,
           gridView_p->X(),gridView_p->Y());
 
+      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
 
-      
-      gridView_p->dragging(true);
+      if (button == 1){
+        d->dragOn(false);
+      } else {
+        d->dragOn(true);
+      }
       if (modType & GDK_CONTROL_MASK) {
         selectWidget(w, gridView_p, false);
         return false;
@@ -476,7 +481,7 @@ template <class DirectoryClass>
       //TRACE("dnd %d\n", gridView_p->dndOn);
       //auto selectionModel = gridView_p->selectionModel();
       //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
-      selectWidget(w, gridView_p, true);
+      selectWidget(w, gridView_p, button != 3);
       //return false; 
       return true;
     }
