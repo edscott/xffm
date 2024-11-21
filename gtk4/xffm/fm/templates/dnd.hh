@@ -11,6 +11,7 @@ template <class Type> class UtilPathbar;
 template <class Type> class GridView;
 template <class DirectoryClass>
 class Dnd {
+  GdkDrag *drag_ = NULL;
   bool dragOn_ = false;
 public:
       //bool dragging(void) {return dragging_;}
@@ -52,7 +53,7 @@ public:
         double mainY = y + bounds.origin.y;        
         double distance = sqrt(pow(gridView_p->X() - mainX,2) + pow(gridView_p->Y() - mainY,2));
         if (distance <= size) return true;
-        DBG("starting drag at point %lf->%lf, %lf->%lf (distance=%lf\n", 
+        TRACE("starting drag at point %lf->%lf, %lf->%lf (distance=%lf\n", 
             gridView_p->X(), mainX, gridView_p->Y(), mainY, distance);
 
         return false;
@@ -93,7 +94,7 @@ public:
         g_free(string);
         
         actions = (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
-        GdkDrag *drag = gdk_drag_begin (surface,
+        drag_ = gdk_drag_begin (surface,
                        device,
                        content,
                        actions,
@@ -111,8 +112,13 @@ public:
           auto *iconPath = Texture<bool>::findIconPath("dnd-multiple");
           paintable = Texture<bool>::getShadedIcon2(iconPath, size, size, NULL);   
         }
-        gtk_drag_icon_set_from_paintable (drag, paintable,  1, 1);
+        gtk_drag_icon_set_from_paintable (drag_, paintable,  1, 1);
         return true;
+    }
+
+    void dropDone(bool success){
+      if (this->drag_) gdk_drag_drop_done(this->drag_, success);
+      this->drag_ = NULL;
     }
 
 ///////////////////////////////////  drag /////////////////////////////////////
@@ -627,6 +633,8 @@ private:
       auto markup = g_strconcat("<span color=\"red\">",_("Target"), ": </span>", target, "\n",
          "<span color=\"green\">", _("Source"),  ": </span>", source, "\n",
          "<span color=\"black\">", block, "\n</span>", NULL);
+      
+      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
 
       for (auto p=files; p && *p; p++){
         if (g_file_test(*p, G_FILE_TEST_IS_DIR)){
@@ -634,6 +642,7 @@ private:
             TRACE("Source and target are the same: %s\n", *p);
             auto message = g_strdup_printf(" %s: %s\n", _("Invalid target folder"), target);
             Print::printWarning(Child::getOutput(), message);
+            d->dropDone(false);
             goto done;
           }
         }
@@ -662,11 +671,13 @@ private:
         g_free(target);
 
         dialogObject->run();
+        d->dropDone(true);
         
       } else {
         auto message = g_strdup_printf(" %s %s (%s)\n", _("Drag:"), _("Invalid target folder"), target);
         Print::printWarning(Child::getOutput(), message);
         TRACE("Source and target are the same: %s\n", source);
+        d->dropDone(false);
       }
 done:
         auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();

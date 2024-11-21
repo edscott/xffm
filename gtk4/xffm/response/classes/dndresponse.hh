@@ -79,7 +79,7 @@ public:
       Basic::concat(&clipContent, uriList);
       c->resetClipBoardCache(clipContent);
       g_free(clipContent);
-      cpDropResponse::openDialog(target);
+      cpDropResponse::performPasteAsync(target);
 done:
       gtk_window_present(GTK_WINDOW(MainWidget));
 

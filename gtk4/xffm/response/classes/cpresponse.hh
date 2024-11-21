@@ -55,7 +55,7 @@ class cpDropResponse {
       return NULL;
     }
 
-    static void openDialog(const char *target){
+    static void performPasteAsync(const char *target){
       auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       auto text = c->clipBoardCache();
       gchar **files = g_strsplit(text, "\n", -1);
@@ -63,6 +63,7 @@ class cpDropResponse {
         DBG("*** Error: no files in clipboard\n");
         return;
       }
+      
       int mode = 1; // copy
       if (strcmp(files[0], "copy")==0) mode = 1; 
       else if (strcmp(files[0], "move")==0) mode = 0;
@@ -76,11 +77,12 @@ class cpDropResponse {
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       dialogObject->setCloseBox("delete", _("Cancel"));
       dialogObject->subClass()->copy(mode);
-
-
      
       dialogObject->run(); // running in a thread...
-
+                           // This is a progress dialog 
+                           // which allows cancelation.
+                           // Shows only on long operations.
+      
 
       void **arg = (void **)calloc(4, sizeof (void *));
       arg[0] = (void *)dialogObject;
@@ -108,6 +110,8 @@ private:
     TRACE("thread2 pthread_cond_signal.\n");
     pthread_cond_signal(dialogObject->cond_p());
     dialogObject->unlockCondition();
+   
+    
     TRACE("thread2 unlockCondition.\n");
     // copy move async is done.
     const char *mode ="";

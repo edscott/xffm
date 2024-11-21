@@ -111,7 +111,7 @@ public:
       }
 
 
-      cpDropResponse::openDialog(target);
+      cpDropResponse::performPasteAsync(target);
       g_free(target);
       
 

@@ -151,7 +151,9 @@ namespace xf {
               gpointer object){
         
       auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
-      d->dragOn(false);
+      d->dropDone(true);
+      //d->dragOn(false);
+      d->dragOn(true);
 
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
