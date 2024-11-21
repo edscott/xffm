@@ -302,10 +302,10 @@ namespace xf {
                 {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = findPositionStore(store, f, &positionF, flags);
                 if (found) {
-                   Child::incrementSerial(child);
+                   /*Child::incrementSerial(child);
                    g_list_store_remove(store, positionF);
                    Child::incrementSerial(child);
-                   insert(store, f, verbose);                        
+                   insert(store, f, verbose);                        */
                 }
 
                 //p->restat_item(f);
