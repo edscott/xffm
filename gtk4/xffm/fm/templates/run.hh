@@ -634,6 +634,48 @@ public:
         return retval;
     }
 
+    static gchar *
+    defaultExtApp(const gchar *path){
+        auto ext = strrchr(path, '.');
+        if (!ext || strlen(ext)<2) return NULL;
+        gchar *defaultApp = Settings::getString("MimeTypeApplications", ext+1);
+        TRACE("*** defaultExtApp (%s) --> %s --> %s\n", path, ext+1, defaultApp);
+        return defaultApp;
+    }
+
+    static gchar *
+    defaultTextApp(const gchar *fileInfo){
+        gchar *defaultApp = NULL;
+        gboolean textFiletype =(fileInfo && 
+                (strstr(fileInfo, "text")||strstr(fileInfo,"empty")));
+        if (textFiletype) {
+            auto editor = Basic::getEditor();
+            defaultApp =g_strdup_printf("%s %%s", editor);
+        }
+        return defaultApp;
+    }
+
+    static gchar *
+    defaultMimeTypeApp(const gchar *mimetype){
+        gchar *defaultApp = Settings::getString("MimeTypeApplications", mimetype);
+        if (!defaultApp) {
+            const gchar **apps = MimeApplication::locate_apps(mimetype);
+            if (apps && *apps) defaultApp = g_strdup(*apps);
+        }
+
+        if (!defaultApp)  {
+            gboolean textMimetype = (mimetype && strncmp(mimetype, "text/", strlen("text/")) == 0);
+            if (textMimetype) {
+                auto editor = Basic::getEditor();
+                defaultApp =g_strdup_printf("%s %%s", editor);
+            }
+        }
+        return defaultApp;
+    }
+    static const gchar *getEditor(){
+      Basic::setEditor();
+        return getenv("EDITOR");        
+    }
 
 
 };

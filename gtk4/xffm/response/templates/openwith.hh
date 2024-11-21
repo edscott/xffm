@@ -154,7 +154,18 @@ public:
           g_signal_connect (G_OBJECT (execute), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
           Basic::boxPack0(mimeBox, GTK_WIDGET(execute), FALSE,FALSE, 0);
         }
-        char *defaultApp = NULL;
+
+        gchar *fileInfo = Basic::fileInfo(path_);
+        gchar *defaultApp = Run<Type>::defaultExtApp(path_);
+        if (!defaultApp) defaultApp = Run<Type>::defaultMimeTypeApp(mimetype);
+        if (!defaultApp) defaultApp = Run<Type>::defaultTextApp(fileInfo);
+          if (defaultApp){
+            Print::print(input_, g_strdup(defaultApp));
+          } else if (apps){
+            Print::print(input_, g_strdup(apps[0])); // first item
+          }
+
+        /*char *defaultApp = NULL;
         const char *extension = NULL;
         if (path_) {
           if (strchr(path_, '.')) extension = strrchr(path_, '.') + 1;
@@ -167,7 +178,7 @@ public:
           } else if (apps){
             Print::print(input_, g_strdup(apps[0])); // first item
           }
-        }
+        }*/
     
         auto mimeButton = GTK_MENU_BUTTON(gtk_menu_button_new());
         gtk_menu_button_set_icon_name(mimeButton, "go-down");
@@ -186,7 +197,9 @@ public:
           addGestureClick(label, (void *)labelClick); 
           Basic::addMotionController(GTK_WIDGET(box));
         }
-        g_free(mimetype);
+        g_object_set_data(G_OBJECT(popover), "mimetype", mimetype);
+        g_object_set_data(G_OBJECT(dialog_), "mimetype", mimetype);
+        //g_free(mimetype);
 
         auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this, 25);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
@@ -326,14 +339,20 @@ public:
         if (!progress || !GTK_IS_PROGRESS_BAR(progress)) return FALSE;
         gtk_progress_bar_set_fraction(progress, 0.0);
         if(keyval == GDK_KEY_Escape) { 
-          object->timeout_=-1;
+          auto dialog = object->dialog();
+          auto mimetype = g_object_get_data(G_OBJECT(dialog), "mimetype");
+          g_free(mimetype);
           object->freeSelectionList();
+          object->timeout_=-1;
           return TRUE;
         }
         if(keyval == GDK_KEY_Return) { 
           run(object);
-          object->timeout_=-1;
           object->freeSelectionList();
+          auto dialog = object->dialog();
+          auto mimetype = g_object_get_data(G_OBJECT(dialog), "mimetype");
+          g_free(mimetype);
+          object->timeout_=-1;
           // Do not call return from Prompt class.
           return TRUE;
         }
@@ -453,6 +472,7 @@ private:
       auto label = GTK_LABEL(data);
       auto object = (OpenWith *)g_object_get_data(G_OBJECT(label), "openWith");
       auto popover = GTK_POPOVER(g_object_get_data(G_OBJECT(label), "popover"));
+      auto mimetype = (const char *)(g_object_get_data(G_OBJECT(popover), "mimetype"));
       auto text = gtk_label_get_text(label);
       auto key = g_strdup(text);
       if (strchr(key, ' ')) *strrchr(key,' ') = 0;
@@ -464,6 +484,8 @@ private:
       } else {
         gtk_check_button_set_active(object->checkbutton(), false);
       }
+      DBG("settings: MimeTypeApplications  %s %s\n", mimetype, key);
+      Settings::setString("MimeTypeApplications", mimetype, key);
       g_free(key);
       
 

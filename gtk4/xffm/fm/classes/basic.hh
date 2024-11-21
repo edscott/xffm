@@ -137,6 +137,11 @@ public:
         }; 
         return editors_v;
     }
+
+    static const gchar *getEditor(){
+        setEditor();
+        return getenv("EDITOR");        
+    }
     static const gchar **
     getEditors(void) {
         static const gchar *editors_v[] = {
@@ -151,7 +156,76 @@ public:
         return editors_v;
     }
 
+    static void setEditor(void){
+        static gboolean done = FALSE;
+        if (done) return;
+
+        // Environment variable EDITOR was defined previously.
+        const gchar *e = getenv("EDITOR");
+        if (e && strlen(e)==0) e = NULL;
+
+        else if (e) { // Predefined value.
+            e = fixGvim(e);
+            e = fixTerminalEditor(e);
+            setenv("EDITOR", e, 1);
+            done = TRUE;
+            return;
+        }
+
+        // Environment variable EDITOR was not defined.
+        // Look for one.
+        auto editors = getEditors();
+        for (auto p=editors; p && *p; p++){
+            auto s = g_strdup(*p);
+            if (strchr(s, ' ')) *strchr(s, ' ') = 0;
+            auto t = g_find_program_in_path (s);
+            g_free(s);
+            if (t) {
+                e=*p;
+                g_free(t);
+                break;  
+            }  
+        }
+
+        if (!e){
+            DBG("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
+            e="vi";
+        } else {
+            INFO("Found EDITOR %s\n", e);
+
+        }
+        e = fixGvim(e);
+        e = fixTerminalEditor(e);
+        setenv("EDITOR", e, 1);
+        done = TRUE;
+        return;
+    }
+
+
 private:
+
+    static const gchar *fixTerminalEditor(const gchar *e){
+        // Terminal based editors...
+        for (auto p=getTerminalEditors(); p && *p; p++){
+            if (strncmp(e, *p,strlen(*p))==0){
+                auto terminalCmd = getTerminalCmd();
+                // A terminal based editor.
+                static gchar *f = g_strdup_printf("%s %s", terminalCmd, e); 
+                setenv("EDITOR", f, 1);
+                return f;
+            }
+        }
+        return e;
+    }
+
+
+    
+    static const gchar *fixGvim(const gchar *e){
+        // Do not fork gvim, so that git commit works...
+        if (e && strcmp(e, "gvim")==0) return "gvim -f";
+        return e;
+    }
+
     static void setTerminal(void){
         static gboolean done = FALSE;
         if (done) return;

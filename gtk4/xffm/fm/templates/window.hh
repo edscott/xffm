@@ -109,7 +109,8 @@ public:
             Print::print(GTK_TEXT_VIEW(input), g_strdup_printf("%c", keyval));
             return TRUE;
           }
-          if (upArrow && gtk_paned_get_position(GTK_PANED(vpane)) < 10) {
+          //if (upArrow && gtk_paned_get_position(GTK_PANED(vpane)) < 10) {
+          if (upArrow) {
             gtk_widget_grab_focus(input);
             if (upArrow) History::up(GTK_TEXT_VIEW(input));   
             return TRUE;
