@@ -1,6 +1,3 @@
-* figure out better dnd start: almost there.
-  BUG: a dnd will be started after menu has been opened. Need another flag
-       to disable dnd when menu is opened on selection.
 * gridview: verify linebreaks with iconsize
 * gridview: verify tab labels with load gridview
 * rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
