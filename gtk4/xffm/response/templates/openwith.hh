@@ -45,6 +45,7 @@ protected:
       g_strstrip(g);
       return g;
     }
+
 public:
     void freeSelectionList(void){
       Basic::freeSelectionList(selectionList_);
@@ -160,25 +161,12 @@ public:
         if (!defaultApp) defaultApp = Run<Type>::defaultMimeTypeApp(mimetype);
         if (!defaultApp) defaultApp = Run<Type>::defaultTextApp(fileInfo);
           if (defaultApp){
-            Print::print(input_, g_strdup(defaultApp));
+            char *g = g_strdup_printf("%s", defaultApp);
+            Print::print(input_, g);
           } else if (apps){
-            Print::print(input_, g_strdup(apps[0])); // first item
+            char *g = g_strdup_printf("%s", defaultApp);
+            Print::print(input_, g); // first item
           }
-
-        /*char *defaultApp = NULL;
-        const char *extension = NULL;
-        if (path_) {
-          if (strchr(path_, '.')) extension = strrchr(path_, '.') + 1;
-          if (extension){
-            defaultApp = Settings::getString("MimeTypeApplications", extension);
-          }
-
-          if (defaultApp){
-            Print::print(input_, g_strdup(defaultApp));
-          } else if (apps){
-            Print::print(input_, g_strdup(apps[0])); // first item
-          }
-        }*/
     
         auto mimeButton = GTK_MENU_BUTTON(gtk_menu_button_new());
         gtk_menu_button_set_icon_name(mimeButton, "go-down");
@@ -240,7 +228,8 @@ public:
         } else if (apps){
           key = g_strdup(apps[0]);
         }
-        if (key && strchr(key, ' ')) *strrchr(key, ' ') = 0;
+        
+        //if (key && strchr(key, ' ')) *strrchr(key, ' ') = 0;
         //DBG("key=%s\n", key);
         if (key) {
           if (Settings::getInteger("ExternalTerminal", key) == 1){
@@ -475,7 +464,7 @@ private:
       auto mimetype = (const char *)(g_object_get_data(G_OBJECT(popover), "mimetype"));
       auto text = gtk_label_get_text(label);
       auto key = g_strdup(text);
-      if (strchr(key, ' ')) *strrchr(key,' ') = 0;
+      //if (strchr(key, ' ')) *strrchr(key,' ') = 0;
       auto input = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(label), "input"));
       Print::clear_text(input);
       Print::print(input, g_strdup(text));
