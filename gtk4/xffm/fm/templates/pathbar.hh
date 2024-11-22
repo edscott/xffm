@@ -66,14 +66,14 @@ namespace xf {
         
 
 
-        // Gtk:bookmarks button:
+        // bookmarks button:
         auto pb_button = UtilBasic::pathbarLabelButton(".");
         g_object_set_data(G_OBJECT(pb_button), "skipMenu", GINT_TO_POINTER(1));
 
         
         Basic::boxPack0 (pathbar_, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
-        g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("Gtk:bookmarks"));
+        g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(_("Bookmarks")));
 
         auto motion = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);

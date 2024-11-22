@@ -203,7 +203,7 @@ namespace xf {
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
       auto root = g_file_info_get_attribute_object (info, "xffm::root");
       if (root){
-        setWorkdir("Gtk:bookmarks");
+        setWorkdir(_("Bookmarks"));
         return TRUE;
       }
       TRACE("gestureClick; file=%p\n", file);
@@ -239,7 +239,7 @@ namespace xf {
           TRACE("pathbar goto... name=%s, path=%s\n", name, path);
         if (button == 1){
           TRACE("pathbar goto...\n");
-          //if (strcmp(path, "Gtk:bookmarks")==0) setWorkdir(g_get_home_dir(), pathbar, true);
+          //if (strcmp(path, _("Bookmarks"))==0) setWorkdir(g_get_home_dir(), pathbar, true);
           //else setWorkdir(path, pathbar, true);
           setWorkdir(path, pathbar, true);
           return TRUE;
@@ -263,7 +263,7 @@ namespace xf {
                 g_object_set_data(G_OBJECT(menu),"view", NULL);
                 BaseSignals<Type>::configureViewMenu(LOCALVIEW_TYPE);
             } else {
-                // do Gtk:bookmarks menu
+                // do Bookmarks menu
                 RootPopUp<Type>::resetPopup();
                 menu = RootPopUp<Type>::popUp();
             }

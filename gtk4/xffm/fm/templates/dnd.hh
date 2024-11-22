@@ -524,7 +524,7 @@ private:
         if (g_file_test(workdir, G_FILE_TEST_IS_DIR)){
           TRACE("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, workdir);
           return g_strdup(workdir);
-        } else if (workdir && strcmp(workdir, "Gtk:bookmarks") == 0){
+        } else if (workdir && strcmp(workdir, _("Bookmarks")) == 0){
           DBG("*** Drop into bookmarks: add a bookmark with this drop (FIXME).\n");
         }
       }

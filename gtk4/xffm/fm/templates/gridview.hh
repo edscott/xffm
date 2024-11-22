@@ -108,7 +108,7 @@ template <class DirectoryClass>
       getGridView(){
         auto child = Child::getChild();
         selectionModel_ = NULL;
-        if (strcmp(path_, "Gtk:bookmarks")==0) {
+        if (strcmp(path_, _("Bookmarks"))==0) {
           selectionModel_ = DirectoryClass::rootSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
