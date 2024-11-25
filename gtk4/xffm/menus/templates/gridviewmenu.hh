@@ -18,8 +18,8 @@ namespace xf {
         _("Open in new tab"), //
         _("Open with"), //
         _("Create a compressed archive with the selected objects"),
-        _("Mount the volume associated with this folder"),
-        _("Unmount the volume associated with this folder"),
+        _("Mount Volume"),
+        _("Unmount Volume"),
         _("Add bookmark"),
         _("Remove bookmark"),
         _("Copy"),
@@ -43,6 +43,8 @@ namespace xf {
 
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
+        {_("Mount Volume"),(void *) "emblem-greenball"}, 
+        {_("Unmount Volume"),(void *) "emblem-redball"}, 
         {_("Open in new tab"),(void *) DUAL_VIEW}, 
         {_("Open with"),(void *) "emblem-run"}, 
         {_("auto"),(void *) "emblem-run"}, 
@@ -55,13 +57,15 @@ namespace xf {
         {_("Cut"),(void *) "cut"}, 
         {_("Paste"),(void *) "paste"}, 
         {_("Add bookmark"),(void *) "emblem-bookmark"}, 
-        {_("Remove bookmark"),(void *) "emblem-bookmark"}, 
+        {_("Remove bookmark"),(void *) "emblem-redball"}, 
        {NULL, NULL}
       }; 
       return menuIconNames_;
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
+        {_("Mount Volume"),(void *) mount}, 
+        {_("Unmount Volume"),(void *) mount}, 
         {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::popCall}, 
         {_("Open in new tab"),(void *) MenuCallbacks<Type>::openNewTab}, 
         {_("Open with"),(void *) openWith}, 
@@ -84,7 +88,9 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {NULL, NULL}
+        {_("Mount Volume"),GINT_TO_POINTER(1)}, 
+        {_("Unmount Volume"),GINT_TO_POINTER(0)}, 
+       {NULL, NULL}
       };
       return menuData_;      
     }
@@ -112,6 +118,17 @@ namespace xf {
    }
 
     private:
+    static void 
+    mount(GtkButton *button, void *data){
+      bool mountVolume = GPOINTER_TO_INT(data);
+      if (mountVolume) {
+        DBG("gridviewmenu.hh: mount volume...\n");
+      } else {
+        DBG("gridviewmenu.hh: UNmount volume...\n");
+      }
+      return;
+    }
+    
     static char *getPath(GtkPopover *menu){
       auto data =   g_object_get_data(G_OBJECT(menu), "info");
       if (!data) return NULL;

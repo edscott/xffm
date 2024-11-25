@@ -4,6 +4,7 @@ static GdkDragAction dndStatus = GDK_ACTION_COPY;
 
 
 namespace xf {
+//template <class Type> class FstabDir;
 template <class Type> class Dnd;
 template <class DirectoryClass>
   class GridView  {
@@ -110,6 +111,8 @@ template <class DirectoryClass>
         selectionModel_ = NULL;
         if (strcmp(path_, _("Bookmarks"))==0) {
           selectionModel_ = DirectoryClass::rootSelectionModel();
+        } else if (strcmp(path_, _("Disk Mounter"))==0) {
+          selectionModel_ = FstabDir::fstabSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
           selectionModel_ = DirectoryClass::xfSelectionModel(path_);
@@ -187,6 +190,47 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       return popover;
     }
     */
+    static void setPopoverItemsFstab(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
+      auto keys = gridView_p->myMenu_->keys();
+      for (auto p=keys; p && *p; p++){
+      auto widget = g_object_get_data(G_OBJECT(popover), *p);
+        if (widget){
+          //TRACE("hide widget \"%s\"\n", *p);
+          gtk_widget_set_visible(GTK_WIDGET(widget), false);
+        } else {
+          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+        }
+      }
+      void *widget;
+      widget = g_object_get_data(G_OBJECT(popover), _("Properties"));
+      gtk_widget_set_visible(GTK_WIDGET(widget), true);
+      if (FstabDir::isMounted(path)){
+        widget = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
+        gtk_widget_set_visible(GTK_WIDGET(widget), true);
+      } else {
+        widget = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
+        gtk_widget_set_visible(GTK_WIDGET(widget), true);
+      }
+    }
+
+    static void setPopoverItemsBookmark(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
+      auto keys = gridView_p->myMenu_->keys();
+      for (auto p=keys; p && *p; p++){
+      auto widget = g_object_get_data(G_OBJECT(popover), *p);
+        if (widget){
+          //TRACE("hide widget \"%s\"\n", *p);
+          gtk_widget_set_visible(GTK_WIDGET(widget), false);
+        } else {
+          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+        }
+      }
+      void *widget;
+      widget = g_object_get_data(G_OBJECT(popover), _("Properties"));
+      gtk_widget_set_visible(GTK_WIDGET(widget), true);
+      widget = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
+      gtk_widget_set_visible(GTK_WIDGET(widget), true);
+
+    }
 
     static void setPopoverItems(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
@@ -247,6 +291,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
     }
 
     static GtkPopover *getPopover(GtkWidget *menubox, GridView<DirectoryClass> *gridView_p){ 
+      DBG("getPopover 1\n");
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
       auto popover = gridView_p->myMenu_->mkMenu(markup);
       g_free(markup);
@@ -263,6 +308,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
     }
 
     static GtkPopover *getPopover(GFileInfo *info, GridView<DirectoryClass> *gridView_p){ 
+      DBG("getPopover 12\n");
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
       auto path = Basic::getPath(info);
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
@@ -270,7 +316,11 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       g_object_set_data(G_OBJECT(popover), "info", info);
 
-      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      if (g_file_info_get_attribute_object(info, "xffm::fstabMount")){
+        setPopoverItemsFstab(GTK_POPOVER(popover), path, gridView_p);
+      } else {
+        setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      }
       g_free(markup);
       g_object_set_data(G_OBJECT(menubox), "menu", popover);
       gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
@@ -279,6 +329,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
     }
 
     static GtkPopover *getPopover(GObject *object, GridView<DirectoryClass> *gridView_p){ 
+      DBG("getPopover 123\n");
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
@@ -288,7 +339,13 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       g_object_set_data(G_OBJECT(popover), "info", info);
 
-      setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+     if (g_file_info_get_attribute_object(info, "xffm::fstabMount")){
+        setPopoverItemsFstab(GTK_POPOVER(popover), path, gridView_p);
+      } else if (g_file_info_get_attribute_object(info, "xffm::bookmark")){
+        setPopoverItemsBookmark(GTK_POPOVER(popover), path, gridView_p);
+      } else {
+        setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
+      }
       g_free(markup);
       g_object_set_data(G_OBJECT(menubox), "menu", popover);
       gtk_widget_set_parent(GTK_WIDGET(popover), menubox);

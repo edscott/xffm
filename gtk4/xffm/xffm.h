@@ -97,6 +97,7 @@ static GtkButton *mainMenuButton = NULL;
 #include "fm/classes/history.hh"
 #include "fm/classes/css.hh"
 #include "fm/classes/bookmarks.hh"
+#include "fm/classes/fstabutil.hh"
 
 // basic templates
 #include "fm/templates/run.hh"  
@@ -120,6 +121,7 @@ static GtkButton *mainMenuButton = NULL;
 
 // fm classes/templates
 #include "fm/classes/localdir.hh"       // fm class
+#include "fm/classes/fstab.hh"       // fm class
 #include "fm/templates/dnd.hh"     // fm template
 #include "fm/templates/factory.hh"     // fm template
 #include "fm/templates/gridview.hh"     // fm template

@@ -152,7 +152,6 @@ namespace xf {
         
       auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
       d->dropDone(true);
-      //d->dragOn(false);
       d->dragOn(true);
 
       auto eventController = GTK_EVENT_CONTROLLER(self);
@@ -201,9 +200,15 @@ namespace xf {
 
       auto info = G_FILE_INFO(gtk_list_item_get_item(GTK_LIST_ITEM(object)));
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+
       auto root = g_file_info_get_attribute_object (info, "xffm::root");
       if (root){
         setWorkdir(_("Bookmarks"));
+        return TRUE;
+      }
+      auto fstab = g_file_info_get_attribute_object (info, "xffm::fstab");
+      if (fstab){
+        setWorkdir(_("Disk Mounter"));
         return TRUE;
       }
       TRACE("gestureClick; file=%p\n", file);

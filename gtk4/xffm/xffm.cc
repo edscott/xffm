@@ -73,7 +73,7 @@ static bool detachProcess(const char *argv1){
 }
 
 static  gchar *getPath(const char *argv1){
-    if (!argv1) return g_strdup("Gtk:bookmarks");
+    if (!argv1) return g_strdup(_("Bookmarks"));
     if (!g_file_test(argv1, G_FILE_TEST_EXISTS)){
       DBG("\"%s\" does not exist.\n", argv1);
       return g_strdup(g_get_home_dir());

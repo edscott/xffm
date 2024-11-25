@@ -4,75 +4,44 @@ namespace xf {
   class LocalDir {
 
     public:
-      static bool
-      symlinkToDir(GFileInfo* info, GFileType type){
-        if (type == G_FILE_TYPE_SYMBOLIC_LINK){ 
-          const char *path = g_file_info_get_symlink_target(info);
-          struct stat st;
-          memset(&st, 0, sizeof(struct stat));
-          stat(path, &st);
-          if (S_ISDIR(st.st_mode)) return true;
-        }
-        return false;
-      }
-
- 
-    private:  
-      static void selection_changed ( GtkSelectionModel* self,
-            guint position,
-            guint n_items,
-            void *data) {
-        TRACE("selection changed position=%d, items=%d\n", position, n_items);
-        if (data && gtk_selection_model_is_selected(self, 0)){
-          gtk_selection_model_unselect_item(self, 0);
-        }
-        return;
-      }
-      
-      static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0, int flags){
-        GtkFilter *filter = 
-          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, GINT_TO_POINTER(flags), NULL));
-        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
-
-        GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
-        g_object_set_data(G_OBJECT(store), "selectionModel", s);
-        g_object_set_data(G_OBJECT(s), "store", store);
-
-        g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), 
-            skip0?s:NULL);
-        return s;
-      }
-
-    public:
-      static int
-      getMaxNameLen(const char *path){
+      static GtkMultiSelection *rootSelectionModel(void){
         GError *error_ = NULL;
-        GFile *file = g_file_new_for_path(path);
-        GFileEnumerator *dirEnum = 
-          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
-        if (error_) {
-          TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(), g_strdup(error_->message));
-          g_error_free(error_);
-          return 0;
-        }
-        GFile *outChild = NULL;
-        GFileInfo *outInfo = NULL;
-        int k = 1;
-        int maxNameLen = 0;
-        do {
-          g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
-              NULL, // GCancellable* cancellable,
-              &error_);
-          if (error_) {
-            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
-            return 0;
+        Bookmarks::initBookmarks();
+        auto store = g_list_store_new(G_TYPE_FILE_INFO);
+        // fstab icon
+        GFile *file = g_file_new_for_path(g_get_home_dir());
+        auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+        g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
+        g_file_info_set_icon(info, g_themed_icon_new("drive-harddisk"));
+        g_file_info_set_name(info, _("Disk Mounter"));
+        g_list_store_insert(store, 0, G_OBJECT(info));
+        g_file_info_set_attribute_object (info, "xffm::fstab", G_OBJECT(file));
+        
+        // bookmarks
+        auto list = Bookmarks::bookmarksList();
+        for (auto l=list; l && l->data; l=l->next){
+          auto p = (bookmarkItem_t *)l->data;
+          if (!p->path) continue;
+          TRACE("adding bookmark %p -> %s\n", p, p->path);
+          if (!g_path_is_absolute(p->path)) continue;
+          if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
+              TRACE("Bookmark %s does not exist\n", p->path);
+              continue;
           }
-          if (!outInfo || !outChild) break;
-          if (strlen(g_file_info_get_name(outInfo)) > maxNameLen)
-            maxNameLen = strlen(g_file_info_get_name(outInfo));
-        } while (true);
-        return maxNameLen;
+          GFile *file = g_file_new_for_path(p->path);
+          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          auto basename = g_path_get_basename(p->path);
+          auto utf_name = Basic::utf_string(basename);
+          g_file_info_set_name(info, utf_name);
+          g_free(basename);
+          g_free(utf_name);
+          g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
+          g_list_store_insert(store, 0, G_OBJECT(info));
+          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
+          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
+          g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
+        }
+        return getSelectionModel(G_LIST_MODEL(store), false, 0);
       }
 
       static GtkMultiSelection *xfSelectionModel(const char *path){
@@ -125,6 +94,12 @@ namespace xf {
           
           g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, GINT_TO_POINTER(flags));
           TRACE("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
+          auto _path = g_file_get_path(outChild);
+          if (FstabUtil::isMounted(_path) || FstabUtil::isInFstab(_path)) {
+            g_file_info_set_attribute_object(info, "xffm::fstabMount", G_OBJECT(outChild));
+            FstabUtil::setMountableIcon(outInfo, _path);
+          }
+          g_free(_path);
         } while (true);
 
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
@@ -144,6 +119,77 @@ namespace xf {
         }
         g_object_set_data(G_OBJECT(store), "monitor", monitor);
         return getSelectionModel(G_LIST_MODEL(store), true, flags);
+      }
+
+      static bool
+      symlinkToDir(GFileInfo* info, GFileType type){
+        if (type == G_FILE_TYPE_SYMBOLIC_LINK){ 
+          const char *path = g_file_info_get_symlink_target(info);
+          struct stat st;
+          memset(&st, 0, sizeof(struct stat));
+          stat(path, &st);
+          if (S_ISDIR(st.st_mode)) return true;
+        }
+        return false;
+      }
+
+ 
+    private:  
+      static void selection_changed ( GtkSelectionModel* self,
+            guint position,
+            guint n_items,
+            void *data) {
+        TRACE("selection changed position=%d, items=%d\n", position, n_items);
+        if (data && gtk_selection_model_is_selected(self, 0)){
+          gtk_selection_model_unselect_item(self, 0);
+        }
+        return;
+      }
+    public:   
+      static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0, int flags){
+        GtkFilter *filter = 
+          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, GINT_TO_POINTER(flags), NULL));
+        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
+
+        GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
+        g_object_set_data(G_OBJECT(store), "selectionModel", s);
+        g_object_set_data(G_OBJECT(s), "store", store);
+
+        g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), 
+            skip0?s:NULL);
+        return s;
+      }
+
+    public:
+      static int
+      getMaxNameLen(const char *path){
+        GError *error_ = NULL;
+        GFile *file = g_file_new_for_path(path);
+        GFileEnumerator *dirEnum = 
+          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
+        if (error_) {
+          TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
+          Print::printError(Child::getOutput(), g_strdup(error_->message));
+          g_error_free(error_);
+          return 0;
+        }
+        GFile *outChild = NULL;
+        GFileInfo *outInfo = NULL;
+        int k = 1;
+        int maxNameLen = 0;
+        do {
+          g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
+              NULL, // GCancellable* cancellable,
+              &error_);
+          if (error_) {
+            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+            return 0;
+          }
+          if (!outInfo || !outChild) break;
+          if (strlen(g_file_info_get_name(outInfo)) > maxNameLen)
+            maxNameLen = strlen(g_file_info_get_name(outInfo));
+        } while (true);
+        return maxNameLen;
       }
 
       static int getHiddenCount(GListModel *listModel, int flags, int limit){
@@ -410,35 +456,6 @@ namespace xf {
         return false;
       }
     public:      
-      static GtkMultiSelection *rootSelectionModel(void){
-        GError *error_ = NULL;
-        Bookmarks::initBookmarks();
-        auto store = g_list_store_new(G_TYPE_FILE_INFO);
-        auto list = Bookmarks::bookmarksList();
-        for (auto l=list; l && l->data; l=l->next){
-          auto p = (bookmarkItem_t *)l->data;
-          if (!p->path) continue;
-          TRACE("adding bookmark %p -> %s\n", p, p->path);
-          if (!g_path_is_absolute(p->path)) continue;
-          if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
-              TRACE("Bookmark %s does not exist\n", p->path);
-              continue;
-          }
-          GFile *file = g_file_new_for_path(p->path);
-          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-          auto basename = g_path_get_basename(p->path);
-          auto utf_name = Basic::utf_string(basename);
-          g_file_info_set_name(info, utf_name);
-          g_free(basename);
-          g_free(utf_name);
-          g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
-          g_list_store_insert(store, 0, G_OBJECT(info));
-          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
-          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
-        }
-        return getSelectionModel(G_LIST_MODEL(store), false, 0);
-      }
-
     private:
       static gboolean
       filterFunction(GObject *object, void *data){
@@ -459,7 +476,8 @@ namespace xf {
         }
         return TRUE;
       }
-   
+  
+    public: 
       // flags :
     // 0x01 : by date _("Hidden files")
     // 0x02 : by size _("Backup files")

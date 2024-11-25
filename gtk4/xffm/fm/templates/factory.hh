@@ -135,7 +135,11 @@ template <class DirectoryClass>
         double scaleFactor = 1.0;
         GdkPaintable *texture = NULL;
         GtkWidget *image = NULL;
-        image = backupImage(name, info, size);
+        // xffm:paintable takes preference over all.
+        auto xffmPaintable = g_file_info_get_attribute_object(info, "xffm:paintable");      
+        if (xffmPaintable) {
+          image = gtk_image_new_from_paintable(GDK_PAINTABLE(xffmPaintable));
+        } else image = backupImage(name, info, size);
         //if (!image) image = emblemedImage(name, info, size);
 
         bool previewLoaded = false;
