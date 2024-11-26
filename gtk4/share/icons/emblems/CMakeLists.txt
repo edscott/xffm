@@ -29,6 +29,7 @@ emblem-edit.svg
 emblem-exec.svg
 emblem-exit.svg
 emblem-favorite.svg
+emblem-favourite.svg
 emblem-fifo.svg
 emblem-file.svg
 emblem-find.svg

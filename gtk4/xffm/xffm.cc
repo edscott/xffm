@@ -120,6 +120,7 @@ main (int argc, char *argv[]) {
 
   auto c = new xf::ClipBoard;
   auto d = new xf::Dnd<xf::LocalDir>;
+  xf::Bookmarks::initBookmarks();
   g_object_set_data(G_OBJECT(MainWidget), "ClipBoard", c);
   g_object_set_data(G_OBJECT(MainWidget), "Dnd", d);
   

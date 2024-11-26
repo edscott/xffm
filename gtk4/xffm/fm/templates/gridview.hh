@@ -153,6 +153,7 @@ template <class DirectoryClass>
 
   private:
 static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
+  // multiple select
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -234,6 +235,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
     }
 
     static void setPopoverItems(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
+      // single selection
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
       auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -265,11 +267,23 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
           }
         }
     
-        //const char *hide[]={_("auto"), NULL};
-
         // bookmark test
-        // mount test
+        if (!Bookmarks::isBookmarked(path)){ 
+          auto widget = g_object_get_data(G_OBJECT(popover), _("Add bookmark"));
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+        } else {
+          auto widget = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+        }
         // pasteboard test
+        {
+          auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+          auto widget = g_object_get_data(G_OBJECT(popover), _("Paste"));
+          gtk_widget_set_visible(GTK_WIDGET(widget), c->validClipBoard());
+        }
+
+        // mount test FIXME
+        //
       } else { // Regular
         const char *show[]={
           _("auto"), //

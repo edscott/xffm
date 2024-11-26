@@ -56,7 +56,7 @@ namespace xf {
         {_("Copy"),(void *) "copy"}, 
         {_("Cut"),(void *) "cut"}, 
         {_("Paste"),(void *) "paste"}, 
-        {_("Add bookmark"),(void *) "emblem-bookmark"}, 
+        {_("Add bookmark"),(void *) "emblem-favourite"}, 
         {_("Remove bookmark"),(void *) "emblem-redball"}, 
        {NULL, NULL}
       }; 
@@ -155,6 +155,10 @@ namespace xf {
         DBG("path is %s\n", path);
         Bookmarks::addBookmark(path);
         g_free(path);
+        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        const char *p = gridView_p->path();
+        Workdir<Type>::setWorkdir(p);
+        
       }
     }
     static void removeB(GtkButton *button, void *data){
@@ -165,6 +169,9 @@ namespace xf {
       if (path) {
         Bookmarks::removeBookmark(path);
         g_free(path);
+        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        const char *p = gridView_p->path();
+        Workdir<Type>::setWorkdir(p);
       }
     }
 

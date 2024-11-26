@@ -101,6 +101,10 @@ namespace xf {
             g_file_info_set_attribute_object(info, "xffm::fstabMount", G_OBJECT(outChild));
             FstabUtil::setMountableIcon(outInfo, _path);
           }
+          DBG("isBookmarked(%s) = %d\n", _path, Bookmarks::isBookmarked(_path));
+          if (Bookmarks::isBookmarked(_path)){
+            Bookmarks::setBookmarkIcon(outInfo, _path);
+          }
           g_free(_path);
         } while (true);
 

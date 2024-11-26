@@ -138,7 +138,8 @@ template <class DirectoryClass>
         double scaleFactor = 1.0;
         GdkPaintable *texture = NULL;
         GtkWidget *image = NULL;
-        // xffm:paintable takes preference over all.
+        // xffm:paintable takes preference over all. 
+        // (custom icon, preferably for mount point emblem, bookmark emblem, )
         auto xffmPaintable = g_file_info_get_attribute_object(info, "xffm:paintable");      
         if (xffmPaintable) {
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(xffmPaintable));
