@@ -66,6 +66,7 @@ template <class DirectoryClass>
         
         myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
         addGestureClickView1(view_, NULL, this);// unselect all on release
+        //addGestureDown(view_, NULL, this);// 
         addGestureClickView3(view_, NULL, this); // menu 
 
         addMotionController();
@@ -480,6 +481,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
               gdouble x,
               gdouble y,
               void *data){
+      TRACE("unselect_f...\n");
       auto gridView_p = (GridView<DirectoryClass> *)data;
       auto selectionModel = gridView_p->selectionModel();
       // if control or shift down, return false.
@@ -523,6 +525,32 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
     }
     
   private:
+    /*
+   static gboolean
+    gridDown_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      auto button = gtk_gesture_single_get_button (GTK_GESTURE_SINGLE(self));
+      DBG("gridDown_f button %d\n", button);
+      auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      auto gridView_p = (GridView<DirectoryClass> *)data;
+      return false;
+    }
+    */
+/*
+    static void addGestureDown(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
+      // 1 for unselect
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (gridDown_f), (void *)gridView_p);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_BUBBLE);
+
+    }   
+   */ 
 
     static void addGestureClickView1(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
       auto gesture = gtk_gesture_click_new();
@@ -531,7 +559,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (unselect_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_BUBBLE);
+          GTK_PHASE_CAPTURE);
 
     }    
 

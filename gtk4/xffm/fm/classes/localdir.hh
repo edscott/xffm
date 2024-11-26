@@ -6,15 +6,17 @@ namespace xf {
     public:
       static GtkMultiSelection *rootSelectionModel(void){
         GError *error_ = NULL;
+        int count = 0;
         Bookmarks::initBookmarks();
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
+        g_object_set_data(G_OBJECT(store), "xffm::root", GINT_TO_POINTER(1));
         // fstab icon
         GFile *file = g_file_new_for_path(g_get_home_dir());
         auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
         g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
         g_file_info_set_icon(info, g_themed_icon_new("drive-harddisk"));
         g_file_info_set_name(info, _("Disk Mounter"));
-        g_list_store_insert(store, 0, G_OBJECT(info));
+        g_list_store_insert(store, count++, G_OBJECT(info));
         g_file_info_set_attribute_object (info, "xffm::fstab", G_OBJECT(file));
         
         // bookmarks
@@ -36,7 +38,8 @@ namespace xf {
           g_free(basename);
           g_free(utf_name);
           g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
-          g_list_store_insert(store, 0, G_OBJECT(info));
+          g_list_store_insert_sorted(store, G_OBJECT(info), compareFunction, NULL);
+          //g_list_store_insert(store, 0, G_OBJECT(info));
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
           g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
@@ -49,15 +52,15 @@ namespace xf {
         auto flags = Settings::getInteger("flags", path);
         if (flags < 0) flags = 0;
 
-        auto up = g_path_get_dirname(path);
         TRACE("path=%s up=%s\n", path, up);
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
-        auto upFile = g_file_new_for_path(up);
         GError *error_ = NULL;
 
+        auto up = g_path_get_dirname(path);
+        auto upFile = g_file_new_for_path(up);
         auto info = g_file_query_info(upFile, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-        
-        
+        //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
+        g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(upFile));
         if (strcmp(path, up)==0) {
           g_file_info_set_attribute_object(info, "xffm::root", G_OBJECT(upFile));
         }
@@ -65,8 +68,7 @@ namespace xf {
         g_file_info_set_name(info, "..");
         g_file_info_set_icon(info, g_themed_icon_new(GO_UP));
         g_list_store_insert(store, 0, G_OBJECT(info));
-        //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
-        g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(upFile));
+
 
         GFile *file = g_file_new_for_path(path); // unreffed with monitor destroy.
         GFileEnumerator *dirEnum = 
@@ -139,12 +141,35 @@ namespace xf {
             guint position,
             guint n_items,
             void *data) {
-        TRACE("selection changed position=%d, items=%d\n", position, n_items);
-        if (data && gtk_selection_model_is_selected(self, 0)){
+        auto store = g_object_get_data(G_OBJECT(self), "store");
+        auto xffmRoot = g_object_get_data(G_OBJECT(store), "xffm::root");
+        auto xffmFstab = g_object_get_data(G_OBJECT(store), "xffm::fstab");
+        TRACE("selection changed position=%d, items=%d data=%p isRoot=%d\n", 
+            position, n_items, data, xffmRoot);
+      
+        GtkBitset *bitset = gtk_selection_model_get_selection (self);
+        auto size = gtk_bitset_get_size(bitset);
+
+        
+        // Unselect up icon
+        auto list = G_LIST_MODEL(self);        
+        auto info = G_FILE_INFO(g_list_model_get_item (list, 0));
+        auto name = g_file_info_get_name(info);
+        if (gtk_selection_model_is_selected(self, 0) && strcmp(name, "..")==0) {
+          size--;
+          TRACE("selection_changed:: unselecting up\n");
           gtk_selection_model_unselect_item(self, 0);
         }
-        return;
+        
+        // Only single selection allowed in xffm::root/fstab
+        if (xffmRoot || xffmFstab){
+          if (size > 1) {
+            gtk_selection_model_unselect_all(self);
+          }
+        }
+       return;
       }
+      
     public:   
       static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0, int flags){
         GtkFilter *filter = 
