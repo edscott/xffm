@@ -264,7 +264,7 @@ template <class DirectoryClass>
           auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", sizeS, buffer);
           gtk_label_set_markup(label, markup);
           g_free(markup);
-          DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
+          //DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
         }
         // gtk drag (deprecated for low level gdk_drag)
         /*GtkDragSource *source = gtk_drag_source_new ();
@@ -543,8 +543,13 @@ template <class DirectoryClass>
       //auto button = gtk_gesture_single_get_button (GTK_GESTURE_SINGLE(self));
       //if (skipRename(self, data)) return true;
       if (skipRename(self, data)) return true;
-      DBG("rename_f \n");
-
+      TRACE("rename_f \n");
+      auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      auto item = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item")); 
+      auto info = G_FILE_INFO(gtk_list_item_get_item(item)); 
+      auto path = Basic::getPath(info);
+      dialogPath<mvResponse>::action(path);
+      g_free(path);
       return true;
    }  
 

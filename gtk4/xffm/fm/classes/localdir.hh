@@ -101,7 +101,7 @@ namespace xf {
             g_file_info_set_attribute_object(info, "xffm::fstabMount", G_OBJECT(outChild));
             FstabUtil::setMountableIcon(outInfo, _path);
           }
-          DBG("isBookmarked(%s) = %d\n", _path, Bookmarks::isBookmarked(_path));
+          TRACE("isBookmarked(%s) = %d\n", _path, Bookmarks::isBookmarked(_path));
           if (Bookmarks::isBookmarked(_path)){
             Bookmarks::setBookmarkIcon(outInfo, _path);
           }
@@ -613,7 +613,7 @@ namespace xf {
     }
     
     public:
-
+/*
     static void 
     addLabelTooltip(GtkWidget *label, const char *path){
       auto name = g_path_get_basename(path);
@@ -691,6 +691,7 @@ namespace xf {
         g_free(t);
       }
     }
+  */
 ////////////////////////////////////////////////
     static gchar *
     sizeString (size_t size) {
