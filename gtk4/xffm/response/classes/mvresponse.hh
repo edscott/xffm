@@ -2,7 +2,7 @@
 #define MVRESPONSE_HH
 namespace xf {
 
-class mvResponse: public pathResponse {
+class mvResponse: public pathResponse<CpOp> {
    const char *title_;
    const char *iconName_;
 public:

@@ -47,6 +47,88 @@ class FstabUtil {
 
   public:
 
+    static gchar *
+    mountTarget (const char *label) {
+        if (!label){
+            ERROR("mountTarget() label is null\n");
+            return NULL;
+        }
+        struct mntent *mnt_struct;
+        FILE *fstab_fd;
+        gchar *result = NULL;
+        if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
+            ERROR ("mountTarget(): Unable to open %s\n", "/etc/fstab");
+            return result;
+        }
+
+        struct mntent mntbuf;
+        gchar buf[2048]; 
+        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
+            if(strstr (mnt_struct->mnt_type, MNTTYPE_SWAP))
+                continue;
+            if(!g_file_test (mnt_struct->mnt_dir, G_FILE_TEST_IS_DIR))
+                continue;
+
+            TRACE("mountTarget():%s --->  %s   or   %s\n", 
+                    label, mnt_struct->mnt_dir, mnt_struct->mnt_fsname);
+
+            if(strcmp (label, mnt_struct->mnt_dir)==0) {
+                TRACE("mountTarget(): gotcha mnt_dir %s ---> %s\n", 
+                        label, mnt_struct->mnt_dir);
+                result = g_strdup(mnt_struct->mnt_dir);
+                break;
+            }
+            if(strcmp (label, mnt_struct->mnt_fsname)==0) {
+                TRACE("mountTarget(): gotcha fsname %s ---> %s\n", 
+                        label, mnt_struct->mnt_fsname);
+                result = g_strdup(mnt_struct->mnt_dir);
+                break;
+            }
+        }
+
+        (void)endmntent (fstab_fd);
+        return result;
+    }
+
+    static gchar *
+    e2Label(const gchar *partitionPath){
+        if (!partitionPath) return NULL;
+        const gchar *command = "ls -l /dev/disk/by-label";
+        FILE *pipe = popen (command, "r");
+        if(pipe == NULL) {
+            ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
+            return NULL;
+        }
+        auto partition = g_path_get_basename(partitionPath); 
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *label = NULL;
+        while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (strchr(line, '\n')) *strchr(line, '\n')=0;
+            if (!strstr(line, "->")) continue;
+            gchar **f = g_strsplit(line, "->", 2);
+            gchar *base = g_path_get_basename(f[1]);
+            TRACE("looking for %s in %s\n", base, partition);
+            if (!strstr(partition, base)){
+                g_free(base);
+                g_strfreev(f);
+                continue;
+            }
+            else TRACE("found it..\n");
+            g_free(base);
+            g_strstrip(f[0]);
+            if (strrchr(f[0], ' ')){
+                label = g_strdup(strrchr(f[0], ' ')+1);
+                g_strfreev(f);
+                break;
+            }
+        }
+        pclose (pipe);
+        g_free(partition);
+        return label;
+
+    }
+
     static void setMountableIcon(GFileInfo *info, const char *path){
       int size = Settings::getInteger("xfterm", "iconsize");
       const char *iconPath;

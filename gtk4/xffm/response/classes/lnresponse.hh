@@ -3,7 +3,7 @@
 
 namespace xf {
 
-class lnResponse: public pathResponse {
+class lnResponse: public pathResponse<CpOp> {
    const char *title_;
    const char *iconName_;
 public:

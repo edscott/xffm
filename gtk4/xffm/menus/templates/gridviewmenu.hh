@@ -118,16 +118,7 @@ namespace xf {
    }
 
     private:
-    static void 
-    mount(GtkButton *button, void *data){
-      bool mountVolume = GPOINTER_TO_INT(data);
-      if (mountVolume) {
-        DBG("gridviewmenu.hh: mount volume...\n");
-      } else {
-        DBG("gridviewmenu.hh: UNmount volume...\n");
-      }
-      return;
-    }
+
     
     static char *getPath(GtkPopover *menu){
       auto data =   g_object_get_data(G_OBJECT(menu), "info");
@@ -195,6 +186,17 @@ namespace xf {
       }
       g_free(path);
     }
+     
+    static void mount(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto path = getPath(menu);
+      if (!path) return;
+      else {DBG("mount item path is %s\n", path);}
+      dialogPath<mountResponse>::action(path);
+      g_free(path);
+    }
+   
     static void duplicate(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);

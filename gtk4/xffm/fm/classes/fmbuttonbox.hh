@@ -21,6 +21,7 @@ namespace xf {
            //OPEN_FILEMANAGER, 
            //EDIT_CLEAR,
            "emblem-fifo",
+           "clear",
            NULL
          };
         const char *bText[]={
@@ -29,6 +30,7 @@ namespace xf {
           _("Home"),
           //_("Clear Log"),
           _("Toggle Text Mode"),
+          _("Clear Log"),
           NULL
         };
         void *bCallback[]={
@@ -36,6 +38,7 @@ namespace xf {
           (void *)MenuCallbacks<bool>::openTerminal,
           (void *)MenuCallbacks<bool>::goHome,
           (void *)MenuCallbacks<bool>::toggleVpane,
+          (void *)MenuCallbacks<bool>::clearOutput,
           NULL
         };
         

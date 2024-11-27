@@ -3,7 +3,7 @@
 
 namespace xf {
 
-class cpResponse: public pathResponse {
+class cpResponse: public pathResponse<CpOp> {
    const char *title_;
    const char *iconName_;
 public:
@@ -124,12 +124,17 @@ private:
         mode = _("link"); break;
     }
     Print::showText(Child::getOutput());
-    Print::printIcon(Child::getOutput(),"emblem-redball", g_strdup_printf(" %s (%s)\n",  _("Operation completed"), mode)); 
+    if (retval){
+      Print::printWarning(Child::getOutput(), g_strdup_printf(" %s (%s)\n",  _("Operation cancelled"), mode)); 
+    } else {
+      Print::printIcon(Child::getOutput(),"emblem-redball", g_strdup_printf(" %s (%s)\n",  _("Operation completed"), mode)); 
+    }
 
     return NULL;
   }
   
   static void *thread2(void *data){
+    void *retval = NULL;
     void **arg = (void **)data;
     auto dialogObject = (DialogDrop<cpDropResponse> *)arg[0];
     auto dialog = dialogObject->dialog();
@@ -167,7 +172,7 @@ private:
       if (response < 0) {
         dialogObject->cancel();
         THREADPOOL->clear();
-
+        retval = GINT_TO_POINTER(1);
         break;
       }
       //sleep(1); // slow motion
@@ -191,7 +196,7 @@ private:
     dialogObject->unlockResponse();
     TRACE("thread2 exit\n");
 
-    return NULL;
+    return retval;
   }
 /*
     static void *overwriteMessage(void *data){
