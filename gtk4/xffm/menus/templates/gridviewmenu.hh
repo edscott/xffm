@@ -65,7 +65,7 @@ namespace xf {
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
         {_("Mount Volume"),(void *) mount}, 
-        {_("Unmount Volume"),(void *) mount}, 
+        {_("Unmount Volume"),(void *) unmount}, 
         {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::popCall}, 
         {_("Open in new tab"),(void *) MenuCallbacks<Type>::openNewTab}, 
         {_("Open with"),(void *) openWith}, 
@@ -88,8 +88,6 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {_("Mount Volume"),GINT_TO_POINTER(1)}, 
-        {_("Unmount Volume"),GINT_TO_POINTER(0)}, 
        {NULL, NULL}
       };
       return menuData_;      
@@ -195,6 +193,34 @@ namespace xf {
       else {DBG("mount item path is %s\n", path);}
       dialogPath<mountResponse>::action(path);
       g_free(path);
+    }
+     
+    static void *umountThread(void *data){
+      char *path = (char *)data;
+      char *arg[]={(char *)"sudo", (char *)"-A", (char *)"umount", path, NULL};
+      auto output = Child::getOutput();
+      Run<bool>::thread_run(output, (const char **)arg, true);
+      return NULL;
+    }
+
+    static void *umountThreadMaster(void *data){
+      pthread_t thread;
+      pthread_create(&thread, NULL, umountThread, (void *)data);
+      void *retval;
+      pthread_join(thread, &retval);
+      // FIXME: we need to monitor the fstab directory to update emblems... 
+      return NULL;
+    }
+
+    static void unmount(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto path = getPath(menu);
+      if (!path) return;
+      else {DBG("unmount item %s\n", path);}
+      pthread_t thread;
+      pthread_create(&thread, NULL, umountThreadMaster, (void *)path);
+      pthread_detach(thread);
     }
    
     static void duplicate(GtkButton *button, void *data){

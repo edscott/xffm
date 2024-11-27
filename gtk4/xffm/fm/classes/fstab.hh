@@ -56,7 +56,6 @@ class FstabDir {
       addFstabItems(store);      
       return LocalDir::getSelectionModel(G_LIST_MODEL(store), true, 0);
     }
-    
 
   private:
     static void // Linux
@@ -240,7 +239,7 @@ class FstabDir {
         }
          GtkTreeIter iter;
         gchar *basename = g_path_get_basename(path);
-        auto label = FstabUtil::e2Label(basename);
+        auto label = e2Label(basename);
         gboolean mounted = isMounted(path);
         if (label){
             gchar *g = g_strdup_printf("%s\n(%s)", basename, label);
@@ -362,6 +361,45 @@ class FstabDir {
         }
         (void)endmntent (fstab_fd);
         return mnt_dir;
+    }
+
+    static gchar *
+    e2Label(const gchar *partitionPath){
+        if (!partitionPath) return NULL;
+        const gchar *command = "ls -l /dev/disk/by-label";
+        FILE *pipe = popen (command, "r");
+        if(pipe == NULL) {
+            ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
+            return NULL;
+        }
+        auto partition = g_path_get_basename(partitionPath); 
+        gchar line[256];
+        memset(line, 0, 256);
+        gchar *label = NULL;
+        while (fgets (line, 255, pipe) && !feof(pipe)) {
+            if (strchr(line, '\n')) *strchr(line, '\n')=0;
+            if (!strstr(line, "->")) continue;
+            gchar **f = g_strsplit(line, "->", 2);
+            gchar *base = g_path_get_basename(f[1]);
+            TRACE("looking for %s in %s\n", base, partition);
+            if (!strstr(partition, base)){
+                g_free(base);
+                g_strfreev(f);
+                continue;
+            }
+            else TRACE("found it..\n");
+            g_free(base);
+            g_strstrip(f[0]);
+            if (strrchr(f[0], ' ')){
+                label = g_strdup(strrchr(f[0], ' ')+1);
+                g_strfreev(f);
+                break;
+            }
+        }
+        pclose (pipe);
+        g_free(partition);
+        return label;
+
     }
 
     static gchar *
@@ -637,7 +675,7 @@ public:
          GtkTreeIter iter;
         gchar *basename = g_path_get_basename(path);
         gchar *mntDir = getMntDir(path);
-        auto label = FstabUtil::e2Label(basename);
+        auto label = e2Label(basename);
         TRACE("fstab/addPartition()...\n");
 
         gboolean mounted = isMounted(path);
