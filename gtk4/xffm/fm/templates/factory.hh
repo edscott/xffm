@@ -337,7 +337,7 @@ template <class DirectoryClass>
     static void addGestureClickLongMenu(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_long_press_new();
-      gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 1.0);
+      gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 2.0);
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (longPress_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
@@ -396,7 +396,7 @@ template <class DirectoryClass>
     }   
 
     static gboolean
-    openMenu(GtkEventController *eventController, GridView<DirectoryClass> *gridView_p, double x){
+    openMenu(GtkEventController *eventController, GridView<DirectoryClass> *gridView_p, double y){
       auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
       d->dragOn(true);
       
@@ -418,6 +418,25 @@ template <class DirectoryClass>
       TRACE("***  size is %d object is %p\n", size, object);
       //if (size == 1) return true;
       GList *selectionList = gridView_p->getSelectionList();
+
+#ifdef GDK_WINDOWING_X11
+        // Gtk bug workaround
+        //  Gtk-WARNING **: Broken accounting of active state for widget 
+        GdkDisplay *displayGdk = gdk_display_get_default();
+        Display *display = gdk_x11_display_get_xdisplay(displayGdk);
+        GtkNative *native = gtk_widget_get_native(MainWidget);
+        GdkSurface *surface = gtk_native_get_surface(native);
+        Window src_w = gdk_x11_surface_get_xid (surface);
+        unsigned int src_width = gtk_widget_get_width(MainWidget);
+        unsigned int src_height = gtk_widget_get_height(MainWidget);
+        int i = round(y);
+        
+        //XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
+        //XWarpPointer(display, src_w, src_w, 0, 0, src_width, src_height, src_width, src_height/2);        
+        XWarpPointer(display, src_w, src_w, 0, 0, src_width, src_height, 0, src_height/2);        
+#endif
+
+
       if (size == 1 ) {
         if (object == NULL){
           //auto item = GTK_LIST_ITEM(g_list_first (selectionList)->data); // item is GTK_LIST_ITEM
@@ -427,17 +446,6 @@ template <class DirectoryClass>
           gridView_p->placeMenu(object, gridView_p); // object is G_FILE_INFO
         }
       } else if (size > 1 ){
-#ifdef GDK_WINDOWING_X11
-        // Gtk bug workaround
-        GdkDisplay *displayGdk = gdk_display_get_default();
-        Display *display = gdk_x11_display_get_xdisplay(displayGdk);
-        GtkNative *native = gtk_widget_get_native(MainWidget);
-        GdkSurface *surface = gtk_native_get_surface(native);
-        Window src_w = gdk_x11_surface_get_xid (surface);
-        unsigned int src_width = gtk_widget_get_width(MainWidget);
-        int i = round(x);
-        XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
-#endif
         auto info = G_FILE_INFO(g_list_first (selectionList)->data);
         auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
         gridView_p->placeMenu( menuBox2, gridView_p);
@@ -468,7 +476,7 @@ template <class DirectoryClass>
       TRACE("modType = 0x%x\n", modType);
       //if (modType & GDK_CONTROL_MASK) return false;
       if (modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) return false;
-      return openMenu(eventController, gridView_p, x);
+      return openMenu(eventController, gridView_p, y);
     }
   
    static bool selectWidget(GtkWidget *w, GridView<DirectoryClass> *gridView_p, bool unselectOthers){
@@ -559,7 +567,13 @@ template <class DirectoryClass>
               gdouble y,
               void *data){
       auto gridView_p = (GridView<DirectoryClass> *)data;
-      return openMenu(GTK_EVENT_CONTROLLER(self), gridView_p, x);
+      auto currentSerial = Child::getSerial();
+      if (gridView_p->longPressSerial != currentSerial){
+        DBG("longPress_f(): Current serial mismatch %d != %d. Dropping preview() thread.\n", 
+            currentSerial, gridView_p->longPressSerial);
+        return true;
+      }
+      return openMenu(GTK_EVENT_CONTROLLER(self), gridView_p, y);
    }
 
 
@@ -610,6 +624,7 @@ template <class DirectoryClass>
       auto event = gtk_event_controller_get_current_event(eventController);
       auto modType = gdk_event_get_modifier_state(event);
       auto gridView_p = (GridView<DirectoryClass> *)data;
+      gridView_p->longPressSerial = Child::getSerial();
       gridView_p->x(x);
       gridView_p->y(y);
       graphene_rect_t bounds;

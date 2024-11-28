@@ -23,6 +23,7 @@ template <class DirectoryClass>
       double Y_;
       int flags_=0;
   public:
+      int longPressSerial = -1;
       double X(void){return X_;}
       double Y(void){return Y_;}
       double x(void){return x_;}
