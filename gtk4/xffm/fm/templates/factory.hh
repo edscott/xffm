@@ -491,7 +491,7 @@ template <class DirectoryClass>
         int flags = Settings::getInteger("flags", dirPath); 
         if (flags < 0) flags = 0;
        
-        TRACE("selectWidget: path= %s flags = 0x%x\n", dirPath, flags);
+        TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);
         auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
@@ -678,6 +678,7 @@ template <class DirectoryClass>
       //return false; 
       return true;
     }
+
     static GtkWidget *backupImage(const char *name, GFileInfo *info, int size){
       // Only for the hidden + backup items. Applies background mask.
       bool hidden = (name[0] == '.' && name[1] != '.');

@@ -101,6 +101,7 @@ class FstabDir {
 
             auto label = g_strdup_printf("%s", mnt_struct->mnt_dir);
             auto utf_name = Basic::utf_string(label);
+            TRACE("label=%s, utf_name=%s\n", label, utf_name);
             g_free(label);
             
             const char *path = mnt_struct->mnt_dir;
@@ -109,8 +110,11 @@ class FstabDir {
             auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
             g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
             g_file_info_set_attribute_object(info, "xffm::fstabMount", G_OBJECT(file));
-            g_file_info_set_name(info, utf_name);
+            auto base = (strcmp(utf_name, "/")==0)?g_strdup(utf_name): g_path_get_basename(utf_name);
+            g_file_info_set_name(info, base);
+            g_free(base);
             g_free(utf_name);
+            TRACE("info name=%s\n", g_file_info_get_name(info));
 
             FstabUtil::setMountableIcon(info, path);
 
