@@ -196,7 +196,7 @@ private:
 
 
     GtkWidget *closeBox(void){
-      return Dialog::buttonBox("close", _("Cancel"), (void *)cancelCallback, (void *)this);
+      return Dialog::buttonBox("delete", _("Cancel"), (void *)cancelCallback, (void *)this, 25);
     }
 protected:
 

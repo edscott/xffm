@@ -49,11 +49,15 @@ namespace xf
        gtk_widget_set_halign (GTK_WIDGET(entryBox),GTK_ALIGN_CENTER);
        gtk_box_append(GTK_BOX (this->contentArea()), GTK_WIDGET(entryBox));
         
+       auto entryLabel = GTK_LABEL (gtk_label_new (""));
        auto entry = GTK_ENTRY(gtk_entry_new ());
+       gtk_widget_set_size_request(GTK_WIDGET(entry), 200, -1);
+       Basic::boxPack0(entryBox, GTK_WIDGET(entryLabel), false, false, 1);
        Basic::boxPack0(entryBox, GTK_WIDGET(entry), true, true, 5);
        //gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entry));
        gtk_widget_set_halign (GTK_WIDGET(entry),GTK_ALIGN_CENTER);
        g_object_set_data(G_OBJECT(this->dialog()),"entry", entry);
+       g_object_set_data(G_OBJECT(this->dialog()),"entryLabel", entryLabel);
        g_signal_connect (G_OBJECT (entry), "activate", 
                 ENTRY_CALLBACK (this->activate), this->dialog());
        auto apply = this->applyBox();

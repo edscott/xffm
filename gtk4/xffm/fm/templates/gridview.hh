@@ -6,10 +6,11 @@ static GdkDragAction dndStatus = GDK_ACTION_COPY;
 namespace xf {
 //template <class Type> class FstabDir;
 template <class Type> class Dnd;
+template <class Type> class FstabMonitor;
 template <class DirectoryClass>
   class GridView  {
-  private:
       GtkWidget *child_;
+      //int zzz; //  Put whatever variable here and we get a pathbar crash
       GtkMultiSelection *selectionModel_ = NULL;
       GtkWidget *view_;
       void *gridViewClick_f_;
@@ -22,7 +23,11 @@ template <class DirectoryClass>
       double X_; // main widget
       double Y_;
       int flags_=0;
+      FstabMonitor<DirectoryClass> *fstabMonitor_ = NULL;
+      GFileMonitor *monitor_ = NULL;
   public:
+      GFileMonitor *monitor(void){return monitor_;}
+      void monitor(GFileMonitor *monitor){monitor_ = monitor;}
       int longPressSerial = -1;
       double X(void){return X_;}
       double Y(void){return Y_;}
@@ -71,7 +76,7 @@ template <class DirectoryClass>
         addGestureClickView3(view_, NULL, this); // menu 
 
         addMotionController();
-        
+        fstabMonitor_ = new FstabMonitor<DirectoryClass>(this);  
         //auto dropController = Dnd<DirectoryClass>::createDropController(this);
         //gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
       }
@@ -85,6 +90,7 @@ template <class DirectoryClass>
           //g_object_unref(G_OBJECT(menu_));
         //}
         if (myMenu_) delete myMenu_; // main menu
+        if (fstabMonitor_) delete fstabMonitor_; 
 
         g_free(path_);
         TRACE("~GridView complete.\n");

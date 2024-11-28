@@ -3,6 +3,11 @@
 namespace xf {
   class Basic {
     public:
+
+      static GFile *getGfile(GFileInfo *info){
+        return G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
+      }
+
       static void freeSelectionList(GList *selectionList){
         if (!selectionList) return;
         for (auto l=selectionList; l && l->data; l= l->next){

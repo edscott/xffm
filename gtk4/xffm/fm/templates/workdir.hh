@@ -27,6 +27,7 @@ namespace xf {
           
           TRACE("***monitor cancel = %p\n", monitor);
         }
+
         
         // cancel threadpool for previews, if any. Wait on condition
 
@@ -35,6 +36,8 @@ namespace xf {
         viewObject->child(child);
         auto store = viewObject->listStore();
         monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
+        DBG("*** new monitor at %p\n", monitor);
+        //viewObject->monitor(monitor);
         TRACE("*** monitor = %p child=%p\n", monitor);
         g_object_set_data(G_OBJECT(child), "monitor", monitor);
         auto view = viewObject->view();

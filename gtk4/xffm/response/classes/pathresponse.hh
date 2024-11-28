@@ -50,9 +50,12 @@ public:
       } else if (strcmp(op, "ln") == 0) {          
         char *arg[]={(char *)op, (char *)"-s", (char *)"-v", path, newFile, NULL};
         Run<bool>::thread_run(output, (const char **)arg, false);
-      } else if (strcmp(op, "mount") == 0) {          
-        char *arg[]={(char *)"sudo", (char *)"-A", (char *)op, (char *)"-v", path, (char *)target, NULL};
+      } else if (strcmp(op, "mount") == 0) {      
+        auto mountSrc = FstabUtil::mountSrc(target);
+        if (!mountSrc) mountSrc = g_strdup(path);    
+        char *arg[]={(char *)"sudo", (char *)"-A", (char *)op, (char *)"-v", mountSrc, (char *)target, NULL};
         Run<bool>::thread_run(output, (const char **)arg, true);
+        g_free(mountSrc);
       }
      
       g_free(op_f);

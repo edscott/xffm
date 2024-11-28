@@ -10,12 +10,13 @@ class  mountResponse: public pathResponse {
 public:
 
 
-    const char *title(void){ return _("Path");}
+    const char *title(void){ return _("Mount Volume");}
     const char *iconName(void){ return "dialog-question";}
     const char *label(void){ return _("Mount Device");}
 
     static void setDefaults(GtkWindow *dialog, GtkLabel *label){
 
+      gtk_window_set_decorated(dialog, true);
       auto entryLabel = GTK_LABEL( g_object_get_data(G_OBJECT(dialog),"entryLabel"));
       gtk_label_set_markup(entryLabel, _("Mount point:"));
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));

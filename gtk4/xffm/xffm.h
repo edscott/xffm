@@ -117,7 +117,8 @@ static GtkButton *mainMenuButton = NULL;
 #include "menus/templates/mainMenu.hh"
 #include "menus/templates/iconColorMenu.hh"
 
-// menu classes: none
+// 
+
 
 // fm classes/templates
 #include "fm/classes/localdir.hh"       // fm class
@@ -132,6 +133,8 @@ static GtkButton *mainMenuButton = NULL;
 #include "fm/classes/fmbuttonbox.hh"    // fm class
 #include "fm/templates/pathbar.hh"      // fm template
 #include "fm/classes/fmpage.hh"         // fm class
+
+#include "fm/templates/fstabmonitor.hh"
 
 #include "fm/templates/window.hh" // template
 #include "fm/classes/fm.hh"     // class
