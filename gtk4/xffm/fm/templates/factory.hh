@@ -641,7 +641,14 @@ template <class DirectoryClass>
       auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
 
       if (button == 1){
-        d->dragOn(false);
+        auto store = gridView_p->store();
+        if (g_object_get_data(G_OBJECT(store), "xffm::root")){
+          d->dragOn(true);
+        } else {
+          if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
+            d->dragOn(true);
+          } else d->dragOn(false);
+        }
       } else {
         d->dragOn(true);
       }
