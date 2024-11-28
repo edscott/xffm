@@ -48,6 +48,39 @@ class FstabUtil {
   public:
 
     static gchar *
+    mountSrc (const char *mountTarget) {
+        if (!mountTarget){
+            ERROR("mountSrc() mountTarget is null\n");
+            return NULL;
+        }
+        struct mntent *mnt_struct;
+        FILE *fstab_fd;
+        gchar *result = NULL;
+        if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
+            ERROR ("mountSrc(): Unable to open %s\n", "/etc/fstab");
+            return result;
+        }
+
+        struct mntent mntbuf;
+        gchar buf[2048]; 
+        while ((mnt_struct = getmntent_r (fstab_fd, &mntbuf, buf, 2048)) != NULL) {
+            if(strstr (mnt_struct->mnt_type, MNTTYPE_SWAP))
+                continue;
+            if(!g_file_test (mnt_struct->mnt_dir, G_FILE_TEST_IS_DIR))
+                continue;
+            if (strcmp(mountTarget, mnt_struct->mnt_dir) != 0) 
+                continue;
+            TRACE("mountTarget():mnt_dir = %s; mnt_fsname =  %s \n", 
+                    mnt_struct->mnt_dir, mnt_struct->mnt_fsname);
+            result = g_strdup(mnt_struct->mnt_fsname);
+
+        }
+
+        (void)endmntent (fstab_fd);
+        return result;
+    }
+
+    static gchar *
     mountTarget (const char *label) {
         if (!label){
             ERROR("mountTarget() label is null\n");

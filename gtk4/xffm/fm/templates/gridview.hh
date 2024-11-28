@@ -282,8 +282,14 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
           gtk_widget_set_visible(GTK_WIDGET(widget), c->validClipBoard());
         }
 
-        // mount test FIXME
-        //
+        // mount test 
+        if (FstabUtil::isMounted(path)){
+          auto widget = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+        } else if (FstabUtil::isInFstab(path)) {
+          auto widget = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+        }
       } else { // Regular
         const char *show[]={
           _("auto"), //

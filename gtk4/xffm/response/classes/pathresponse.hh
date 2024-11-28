@@ -24,9 +24,12 @@ public:
       if (!op_f) {DBG("*** Error: %s not found\n", op); return NULL;}
       if (strcmp(op, "mount")==0) {
         if (!g_file_test(target, G_FILE_TEST_EXISTS)){
-          auto string = g_strconcat(_("Sorry"), " \"", target, "\" ", _("Path does not exist"), "\n", NULL);
-          Print::printError(output, string);
-          return NULL;
+          if (mkdir(target,0700) < 0){
+            auto string = g_strdup_printf(_("Cannot create directory '%s'"), target);
+            Print::printError(output, g_strconcat(_("Sorry"), " ", string, " (", strerror(errno), ")\n", NULL));
+            g_free(string);
+            return NULL;
+          }
         }
       } else {
         if (g_file_test(newFile, G_FILE_TEST_EXISTS)){

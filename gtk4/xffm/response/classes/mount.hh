@@ -39,6 +39,8 @@ public:
             DBG("is in fstab OK \"%s\"\n", path);
             mountTarget = FstabUtil::mountTarget(path);
         }
+        auto mountSrc = FstabUtil::mountSrc(mountTarget);
+        DBG("mountTarget=%s, mountSrc=%s\n", mountTarget, mountSrc);
 
         // If no fstab file defined mount point, dirname is the suggested user mount point.
         char *dirname = NULL;
@@ -57,12 +59,13 @@ public:
       auto buffer = gtk_entry_get_buffer(entry);
       gtk_entry_buffer_set_text(buffer, mountTarget?mountTarget:dirname, -1);
 
-      auto string = g_strconcat("<span color=\"green\"><b>",_("Mount Device"), ":\n</b></span><span color=\"blue\"><b>", path, "</b></span>", NULL);
+      auto string = g_strconcat("<span color=\"green\"><b>",_("Mount Device"), ":\n</b></span><span color=\"blue\"><b>", mountSrc?mountSrc:path, "</b></span>", NULL);
       gtk_label_set_markup(label, string);
       g_free(basename);
       g_free(string);
       g_free(dirname);
       g_free(mountTarget);
+      g_free(mountSrc);
     }
     
     
