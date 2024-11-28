@@ -72,6 +72,7 @@ template <class DirectoryClass>
         Basic::addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
         addGestureClickLong(labelBox, object, gridView_p);
+        addGestureClickLongMenu(imageBox, object, gridView_p);
         //addGestureClickDownLabel(labelBox, object, gridView_p);
         //addGestureClickDownBox(box, object, gridView_p);
         addGestureClickDown3(imageBox, object, gridView_p);
@@ -333,6 +334,15 @@ template <class DirectoryClass>
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }
+    static void addGestureClickLongMenu(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+      g_object_set_data(G_OBJECT(self), "item", item);
+      auto gesture = gtk_gesture_long_press_new();
+      gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 1.0);
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (longPress_f), (void *)gridView_p);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_CAPTURE);
+    }
 /*    
     static void addGestureClickDownLabel(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
@@ -383,29 +393,17 @@ template <class DirectoryClass>
       gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
-    }    
-    public:
+    }   
+
     static gboolean
-    menu_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *data){
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+    openMenu(GtkEventController *eventController, GridView<DirectoryClass> *gridView_p, double x){
+      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      d->dragOn(true);
       
-      auto eventController = GTK_EVENT_CONTROLLER(self);
-      auto event = gtk_event_controller_get_current_event(eventController);
       auto box = gtk_event_controller_get_widget(eventController);
       GObject *object = NULL;
       if (box) object = G_OBJECT(g_object_get_data(G_OBJECT(box), "object"));
-
-      auto modType = gdk_event_get_modifier_state(event);
-
-      TRACE("modType = 0x%x\n", modType);
-      //if (modType & GDK_CONTROL_MASK) return false;
-      if (modType & GDK_SHIFT_MASK) return false;
-
-      // unselect all, no
+     // unselect all, no
 
       //auto selectionModel = gridView_p->selectionModel();
       //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
@@ -450,6 +448,27 @@ template <class DirectoryClass>
       Basic::freeSelectionList(selectionList);
    
       return true;
+
+    }
+
+    public:
+    static gboolean
+    menu_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      auto gridView_p = (GridView<DirectoryClass> *)data;
+      
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto event = gtk_event_controller_get_current_event(eventController);
+
+      auto modType = gdk_event_get_modifier_state(event);
+
+      TRACE("modType = 0x%x\n", modType);
+      //if (modType & GDK_CONTROL_MASK) return false;
+      if (modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) return false;
+      return openMenu(eventController, gridView_p, x);
     }
   
    static bool selectWidget(GtkWidget *w, GridView<DirectoryClass> *gridView_p, bool unselectOthers){
@@ -534,6 +553,17 @@ template <class DirectoryClass>
    }
 */
    static gboolean
+   longPress_f(GtkGestureLongPress* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      auto gridView_p = (GridView<DirectoryClass> *)data;
+      return openMenu(GTK_EVENT_CONTROLLER(self), gridView_p, x);
+   }
+
+
+   static gboolean
    rename_f(GtkGestureLongPress* self,
               gint n_press,
               gdouble x,
@@ -608,7 +638,7 @@ template <class DirectoryClass>
         selectWidget(w, gridView_p, unselectOthers);
         return false;
       }*/
-      if (modType & GDK_SHIFT_MASK) {
+      if (modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) {
         return false;
       }
   
@@ -617,7 +647,12 @@ template <class DirectoryClass>
       //TRACE("dnd %d\n", gridView_p->dndOn);
       //auto selectionModel = gridView_p->selectionModel();
       //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
-      selectWidget(w, gridView_p, button != 3);
+
+      if (modType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK)) || button == 3) {
+        selectWidget(w, gridView_p, false);
+      } else {
+        selectWidget(w, gridView_p, true);
+      }
       //return false; 
       return true;
     }
