@@ -47,6 +47,16 @@ namespace xf {
         return getSelectionModel(G_LIST_MODEL(store), false, 0);
       }
 
+    static void setPaintableIcon(GFileInfo *info, const char *path){
+        if (FstabUtil::isMounted(path) || FstabUtil::isInFstab(path)) {
+          FstabUtil::setMountableIcon(info, path);
+        }
+        TRACE("isBookmarked(%s) = %d\n", path, Bookmarks::isBookmarked(path));
+        if (Bookmarks::isBookmarked(path)){
+          Bookmarks::setBookmarkIcon(info, path);
+        }
+    }
+
       static GtkMultiSelection *xfSelectionModel(const char *path){
        // This section adds the up icon.
         auto flags = Settings::getInteger("flags", path);
@@ -55,6 +65,7 @@ namespace xf {
         TRACE("path=%s up=%s\n", path, up);
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
         GError *error_ = NULL;
+        g_object_set_data(G_OBJECT(store), "xffm::local", GINT_TO_POINTER(1));
 
         auto up = g_path_get_dirname(path);
         auto upFile = g_file_new_for_path(up);
@@ -72,7 +83,7 @@ namespace xf {
 
         GFile *file = g_file_new_for_path(path); // unreffed with monitor destroy.
         GFileEnumerator *dirEnum = 
-          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
+          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
           Print::printError(Child::getOutput(), g_strdup(error_->message));
@@ -97,14 +108,7 @@ namespace xf {
           g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, GINT_TO_POINTER(flags));
           TRACE("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
           auto _path = g_file_get_path(outChild);
-          if (FstabUtil::isMounted(_path) || FstabUtil::isInFstab(_path)) {
-            g_file_info_set_attribute_object(info, "xffm::fstabMount", G_OBJECT(outChild));
-            FstabUtil::setMountableIcon(outInfo, _path);
-          }
-          TRACE("isBookmarked(%s) = %d\n", _path, Bookmarks::isBookmarked(_path));
-          if (Bookmarks::isBookmarked(_path)){
-            Bookmarks::setBookmarkIcon(outInfo, _path);
-          }
+          setPaintableIcon(outInfo, _path);
           g_free(_path);
         } while (true);
 
@@ -195,7 +199,7 @@ namespace xf {
         GError *error_ = NULL;
         GFile *file = g_file_new_for_path(path);
         GFileEnumerator *dirEnum = 
-          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
+          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
           Print::printError(Child::getOutput(), g_strdup(error_->message));
@@ -282,8 +286,10 @@ namespace xf {
 
         auto file = g_file_new_for_path(path);
         GFileInfo *infoF = g_file_query_info (file,
-            "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,owner::,user::", 
+            "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED,owner::,user::", 
             G_FILE_QUERY_INFO_NONE, NULL, &error_);
+
+        setPaintableIcon(infoF, path);
 
         //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
         g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
@@ -344,7 +350,7 @@ namespace xf {
         gchar *s= second? g_file_get_path (second):g_strdup("--");
 
       /*  GError *error_=NULL;
-        GFileInfo *infoF = first? g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED", 
+        GFileInfo *infoF = first? g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED", 
             G_FILE_QUERY_INFO_NONE, NULL, &error_):NULL;
         if (error_){
           DBG("Error: %s\n", error_->message);
@@ -377,10 +383,12 @@ namespace xf {
                 {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = findPositionStore(store, f, &positionF, flags);
                 if (found) {
-                   /*Child::incrementSerial(child);
+                   Child::incrementSerial(child);
                    g_list_store_remove(store, positionF);
                    Child::incrementSerial(child);
-                   insert(store, f, verbose);                        */
+                   insert(store, f, verbose);                        
+                } else {
+                  DBG("%s not found!\n", f);
                 }
 
                 //p->restat_item(f);
@@ -532,6 +540,25 @@ namespace xf {
         auto typeB = g_file_info_get_file_type(infoB);
         auto nameA = g_file_info_get_name(infoA);
         auto nameB = g_file_info_get_name(infoB);
+        struct stat stA;
+        struct stat stB;      
+
+        if (byDate || bySize) {
+          auto pathA = Basic::getPath(infoA);
+          auto pathB = Basic::getPath(infoB);
+          stat(pathA, &stA);
+          stat(pathB, &stB);
+          g_free(pathA);
+          g_free(pathB);
+        }
+
+            // this is not freaking working. Seems the monitor is not
+            // sending the GFileInfo with time stamps.
+          /*  TRACE("bydata1\n");
+            auto dateTimeA = g_file_info_get_modification_date_time(infoA);
+            auto dateTimeB = g_file_info_get_modification_date_time(infoB);
+            auto value = g_date_time_compare(dateTimeA, dateTimeB);*/
+        
 
         TRACE("--1\n");
         if (strcmp(g_file_info_get_name(infoA), "..")==0) return -1;
@@ -539,21 +566,13 @@ namespace xf {
         
         if (fileType){
           auto extA = strrchr(nameA, '.');
-          auto extB = strrchr(nameA, '.');
-          if (!extA && extB) {
-            if (descending) return 1; else return -1; 
-          }
-          if (extA && !extB) {
-            if (descending) return -1; else return 1; 
-          }
-          if (extA && extB) {
-            auto result = strcasecmp(nameA, nameB);
-            if (result){
-              if (descending) return -result; else return result;
-            }
-            // result is 0, continue with subsorting.
-          }
-
+          auto extB = strrchr(nameB, '.');
+          if (!extA) extA = ".";
+          if (!extB) extB = ".";
+          auto value = strcasecmp(extA, extB);
+          if (value == 0) value = strcasecmp(extA, extB);
+          if (descending) return -value;
+          return value;
         }
 
 
@@ -580,12 +599,8 @@ namespace xf {
         if (a_cond && b_cond) {
             // directory comparison by name is default;
            if (byDate) {
-              auto dateTimeA = g_file_info_get_modification_date_time(infoA);
-              auto dateTimeB = g_file_info_get_modification_date_time(infoB);
-              auto value = g_date_time_compare(dateTimeA, dateTimeB);
-              g_free(dateTimeA);
-              g_free(dateTimeB);
-              return value;
+              if (descending) return (stB.st_mtime - stA.st_mtime);
+              return (stA.st_mtime - stB.st_mtime);
            } else {
                 if (descending) return -strcasecmp(nameA, nameB);
                 return strcasecmp(nameA, nameB);
@@ -593,18 +608,11 @@ namespace xf {
         }
         // by date
         if (byDate){
-          auto dateTimeA = g_file_info_get_modification_date_time(infoA);
-          auto dateTimeB = g_file_info_get_modification_date_time(infoB);
-          auto value = g_date_time_compare(dateTimeA, dateTimeB);
-          g_free(dateTimeA);
-          g_free(dateTimeB);
-          if (descending) return -value;
-          return value;
+              if (descending) return (stB.st_mtime - stA.st_mtime);
+              return (stA.st_mtime - stB.st_mtime);
         } else if (bySize){
-          auto sizeA = g_file_info_get_size(infoA);
-          auto sizeB = g_file_info_get_size(infoB);
-          if (descending) return sizeB - sizeA;
-          return sizeA - sizeB;
+          if (descending) return stB.st_size - stA.st_size;
+          return stA.st_size - stB.st_size;
         } 
         TRACE("--4\n");
         // by name 

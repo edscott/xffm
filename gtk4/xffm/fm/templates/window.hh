@@ -6,7 +6,7 @@
 namespace xf {
 class DirectoryClass;
 
-template <class Type> 
+template <class MainClass> 
 class MainWindow: public FMbuttonBox {
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
@@ -349,7 +349,7 @@ private:
 
       auto newMenuButton = Basic::newButton("open-menu", _("Main menu"));
       mainMenuButton = newMenuButton;
-      auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
+      auto myMainMenu = new Menu<MainMenu<MainClass> >(_("Main menu"));
       menu_ = myMainMenu->mkMenu(NULL);
       TRACE("menu popover = %p\n", menu_);
       gtk_widget_set_parent(GTK_WIDGET(menu_), GTK_WIDGET(newMenuButton));
@@ -358,7 +358,7 @@ private:
 
       /*
       auto newMenuButton = Basic::newMenuButton("open-menu", NULL);
-      auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
+      auto myMainMenu = new Menu<MainMenu<MainClass> >(_("Main menu"));
       myMainMenu->setMenu(newMenuButton);
       delete myMainMenu;*/
 
@@ -444,30 +444,35 @@ private:
       gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
       const char *show[]={ _("Select All"),_("Match regular expression"),
         _("Show"), _("Hidden files"), _("Backup files"), _("Sort mode"), _("Descending"),
-        _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), _("Apply modifications"), 
+        _("Name"), _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), _("Apply modifications"), 
         NULL};
       for (auto p=show; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
         if (widget){
-          //DBG("show %s:%p\n", *p, widget);
+          //TRACE("show %s:%p\n", *p, widget);
           gtk_widget_set_visible(GTK_WIDGET(widget), true);
         } else {
           DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
         }
       }
       auto configFlags = Settings::getInteger("flags", gridView_p->path());
-      if (configFlags < 0) configFlags = 0;
+      if (configFlags < 0) configFlags = 0x40;
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
       gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
 
       //auto flags = gridView_p->flags();
-      const char *checks[]={_("Hidden files"), _("Backup files"),_("Descending"), _("Date"), _("Size"), _("File type"), NULL};   
-      int bits[]={ 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,0};
+      const char *checks[]={_("Hidden files"), _("Backup files"),_("Descending"), _("Date"), _("Size"), _("File type"), _("Name"), NULL};   
+      int bits[]={ 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,0x40,0};
       for (int i=0; checks[i] != NULL; i++){
         int bit = bits[i];
         int status = bit & gridView_p->flags();
         auto widget = g_object_get_data(G_OBJECT(popover), checks[i]);
         gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), status);
+      }
+      TRACE("gridView_p->flags() = 0x%x\n", gridView_p->flags());
+      if (gridView_p->flags() == 0){
+        auto widget = g_object_get_data(G_OBJECT(popover), _("Name"));
+        gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), true);
       }
 
 

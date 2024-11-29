@@ -5,6 +5,7 @@
 //#define CALLBACKHASH mHash[1];
 //#define DATAHASH mHash[2];
 //#define checkboxHASH mHash[3];
+//#define radioboxHASH mHash[4];
 
 typedef struct MenuInfo_t {
   const char *key;
@@ -22,12 +23,13 @@ namespace xf {
   template <class menuClass>
   class Menu {
     private:
-      GHashTable *mHash[4];
+      GHashTable *mHash[5];
       const char **keys_;
       MenuInfo_t *iconNames_;
       MenuInfo_t *callbacks_;
       MenuInfo_t *data_;
       const char **checkboxes_;
+      const char **radioboxes_;
       char *title_;
     public:
       const char **keys(void) { return keys_;}
@@ -37,6 +39,7 @@ namespace xf {
         g_hash_table_destroy(mHash[1]);
         g_hash_table_destroy(mHash[2]);
         g_hash_table_destroy(mHash[3]);
+        g_hash_table_destroy(mHash[4]);
       }
       Menu(const char *title){
         TRACE("title=\"%s\"\n", title);
@@ -46,12 +49,14 @@ namespace xf {
         mHash[1] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         mHash[2] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         mHash[3] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+        mHash[4] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         auto myMenuClass_p = new menuClass;
         keys_ = myMenuClass_p->keys();
         iconNames_ = myMenuClass_p->iconNames();
         callbacks_ = myMenuClass_p->callbacks();
         data_ = myMenuClass_p->data();
         checkboxes_ = myMenuClass_p->checkboxes();
+        radioboxes_ = myMenuClass_p->radioboxes();
         for (auto p=iconNames_; p && p->key; p++){
           auto iconName = (const char *)p->data;
           if (iconName) g_hash_table_insert(mHash[0], g_strdup(p->key), g_strdup(iconName));
@@ -68,6 +73,9 @@ namespace xf {
         }
         for (auto p=checkboxes_; p && *p; p++){
           g_hash_table_insert(mHash[3], g_strdup(*p), GINT_TO_POINTER(1));
+        }
+        for (auto p=radioboxes_; p && *p; p++){
+          g_hash_table_insert(mHash[4], g_strdup(*p), GINT_TO_POINTER(1));
         }
         delete myMenuClass_p;
       }
@@ -241,6 +249,7 @@ public:
       gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
 
+      GtkCheckButton *firstRadio = NULL;
 
       for (const char **p=keys_; p && *p; p++){
         auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -262,11 +271,16 @@ public:
         } */
 
         auto callback = g_hash_table_lookup(mHash[1], *p);
-
         if (callback) {
-          if (g_hash_table_lookup(mHash[3], *p)){
+          auto isCheck = g_hash_table_lookup(mHash[3], *p);
+          auto isRadio = g_hash_table_lookup(mHash[4], *p);
+          if (isCheck || isRadio){
               // a checkbutton
             GtkCheckButton *button = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(*p));
+            if (isRadio){
+              gtk_check_button_set_group(button, firstRadio);
+              if (!firstRadio) firstRadio = button;
+           }
             // gtk_widget_add_css_class (GTK_WIDGET(button), "inquireButton" );
             g_object_set_data(G_OBJECT(menu), *p, button);
             g_object_set_data(G_OBJECT(button), "menu", menu);
@@ -280,6 +294,7 @@ public:
             auto data = g_hash_table_lookup(mHash[2], *p);
             g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK(callback), data);
             continue;
+
          } else { 
             // A button.
             GtkButton *button = GTK_BUTTON(gtk_button_new());

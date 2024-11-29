@@ -10,7 +10,6 @@ template <class Type> class FstabMonitor;
 template <class DirectoryClass>
   class GridView  {
       GtkWidget *child_=NULL;
-      int zzz; //  Put whatever variable here and we get a pathbar crash
       GtkMultiSelection *selectionModel_ = NULL;
       GtkWidget *view_=NULL;
       void *gridViewClick_f_=NULL;
@@ -76,7 +75,12 @@ template <class DirectoryClass>
         addGestureClickView3(view_, NULL, this); // menu 
 
         addMotionController();
-        fstabMonitor_ = new FstabMonitor<DirectoryClass>(this);  
+        if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
+          fstabMonitor_ = NULL;
+        } else {
+          fstabMonitor_ = new FstabMonitor<DirectoryClass>(this); 
+        } 
+
         //auto dropController = Dnd<DirectoryClass>::createDropController(this);
         //gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
       }

@@ -1,7 +1,7 @@
 #ifndef WORKDIR_HH
 #define WORKDIR_HH
 namespace xf {
-  template <class Type>
+  template <class DirectoryClass>
   class Workdir  {
     private:
       static void  updateGridView(const char *path){
@@ -27,18 +27,21 @@ namespace xf {
           
           TRACE("***monitor cancel = %p\n", monitor);
         }
-
-        
+       
         // cancel threadpool for previews, if any. Wait on condition
 
         auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
         TRACE("new object: %p\n", viewObject);
         viewObject->child(child);
         auto store = viewObject->listStore();
-        monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
-        DBG("*** new monitor at %p\n", monitor);
-        //viewObject->monitor(monitor);
-        TRACE("*** monitor = %p child=%p\n", monitor);
+        if (g_object_get_data(G_OBJECT(store), "xffm::local")){
+          monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
+        } else {
+          monitor = NULL;
+        }
+        viewObject->monitor(monitor);
+
+        if (monitor) TRACE("*** monitor = %p child=%p\n", monitor);
         g_object_set_data(G_OBJECT(child), "monitor", monitor);
         auto view = viewObject->view();
         //auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
@@ -58,12 +61,12 @@ namespace xf {
       }
 
       static void  updatePathbar(bool addHistory, void *pathbar_go){
-        UtilPathbar<Type>::updatePathbar(addHistory, pathbar_go);
+        UtilPathbar<DirectoryClass>::updatePathbar(addHistory, pathbar_go);
 
       }
       static void  updatePathbar(const gchar *path, GtkBox *pathbar, 
           bool addHistory, void *pathbar_go){
-        UtilPathbar<Type>::updatePathbar(path, pathbar, addHistory, pathbar_go);
+        UtilPathbar<DirectoryClass>::updatePathbar(path, pathbar, addHistory, pathbar_go);
       }
 
     public:
@@ -161,7 +164,7 @@ namespace xf {
       auto event = gtk_event_controller_get_current_event(eventController);
       auto box = gtk_event_controller_get_widget(eventController);
       
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(box), "gridView_p");
+      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(box), "gridView_p");
 
       //gridView_p->x,y are in gridview's frame of reference.
       double distance = sqrt(pow(gridView_p->x() - x,2) + pow(gridView_p->y() - y,2));
@@ -179,7 +182,7 @@ namespace xf {
       // proceed with double click action...
       /*
       auto imageBox = gtk_event_controller_get_widget(eventController);
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(imageBox), "gridView_p");
+      auto gridView_p = (GridView<DirectoryClassType> *)g_object_get_data(G_OBJECT(imageBox), "gridView_p");
       auto store = gridView_p->store();
       guint positionF;
       auto item = gtk_list_item_get_item(GTK_LIST_ITEM(object));
@@ -266,14 +269,14 @@ namespace xf {
             TRACE("***clickpath=%s\n", path);
             GtkMenu *menu = NULL;
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){ 
-                menu = LocalPopUp<Type>::popUp();
-                Popup<Type>::setWidgetData(menu, "path", path);
+                menu = LocalPopUp<DirectoryClass>::popUp();
+                Popup<DirectoryClass>::setWidgetData(menu, "path", path);
                 g_object_set_data(G_OBJECT(menu),"view", NULL);
-                BaseSignals<Type>::configureViewMenu(LOCALVIEW_TYPE);
+                BaseSignals<DirectoryClass>::configureViewMenu(LOCALVIEW_TYPE);
             } else {
                 // do Bookmarks menu
-                RootPopUp<Type>::resetPopup();
-                menu = RootPopUp<Type>::popUp();
+                RootPopUp<DirectoryClass>::resetPopup();
+                menu = RootPopUp<DirectoryClass>::popUp();
             }
             if (menu) {
                 gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);

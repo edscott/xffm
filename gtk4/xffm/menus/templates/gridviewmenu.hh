@@ -5,7 +5,7 @@ namespace xf {
   template <class Type> class MenuCallbacks;
   template <class Type> class Workdir;
   class LocalDir;
-  template <class Type>
+  template <class DirectoryClass>
   class GridviewMenu {
     public:
     GridviewMenu(void){}
@@ -66,8 +66,8 @@ namespace xf {
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
         {_("Mount Volume"),(void *) mount}, 
         {_("Unmount Volume"),(void *) unmount}, 
-        {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::popCall}, 
-        {_("Open in new tab"),(void *) MenuCallbacks<Type>::openNewTab}, 
+        {_("Toggle Text Mode"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
+        {_("Open in new tab"),(void *) MenuCallbacks<DirectoryClass>::openNewTab}, 
         {_("Open with"),(void *) openWith}, 
         {_("auto"),(void *) run}, 
         {_("Duplicate"),(void *) duplicate}, 
@@ -75,7 +75,7 @@ namespace xf {
         {_("Rename"),(void *) move}, 
         {_("Copy"),(void *) copy}, 
         {_("Cut"),(void *) cut}, 
-        {_("Paste"),(void *) MenuCallbacks<Type>::paste}, 
+        {_("Paste"),(void *) MenuCallbacks<DirectoryClass>::paste}, 
         {_("Delete"),(void *) remove}, 
         {_("Add bookmark"),(void *) addB}, 
         {_("Remove bookmark"),(void *) removeB}, 
@@ -93,6 +93,10 @@ namespace xf {
       return menuData_;      
     }
     const char **checkboxes(void){
+      static const char *boxes_[] = { NULL};
+      return boxes_;      
+    }
+    const char **radioboxes(void){
       static const char *boxes_[] = { NULL};
       return boxes_;      
     }
@@ -144,9 +148,9 @@ namespace xf {
         DBG("path is %s\n", path);
         Bookmarks::addBookmark(path);
         g_free(path);
-        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         const char *p = gridView_p->path();
-        Workdir<Type>::setWorkdir(p);
+        Workdir<DirectoryClass>::setWorkdir(p);
         
       }
     }
@@ -158,9 +162,9 @@ namespace xf {
       if (path) {
         Bookmarks::removeBookmark(path);
         g_free(path);
-        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         const char *p = gridView_p->path();
-        Workdir<Type>::setWorkdir(p);
+        Workdir<DirectoryClass>::setWorkdir(p);
       }
     }
 
@@ -171,7 +175,7 @@ namespace xf {
       auto path = getPath(menu);
 
       if (!path) {
-        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         auto selectionList = gridView_p->getSelectionList();
         if (selectionList) {
           DBG("selectionList = %p\n", selectionList);
@@ -256,7 +260,7 @@ namespace xf {
     static void remove(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
 
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
@@ -277,7 +281,7 @@ namespace xf {
     static void copy(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
@@ -298,7 +302,7 @@ namespace xf {
     static void cut(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
@@ -331,17 +335,17 @@ namespace xf {
       auto e = Basic::esc_string (path);
 
       if (inTerminal) {
-        command = Run<Type>::mkTerminalLine(defaultApp, e);
+        command = Run<DirectoryClass>::mkTerminalLine(defaultApp, e);
       }
       else {
-        command = Run<Type>::mkCommandLine(defaultApp, e);
+        command = Run<DirectoryClass>::mkCommandLine(defaultApp, e);
       }
       g_free(e);
 
       DBG("run %s \n", command);
       auto output = Child::getOutput();
       auto buttonSpace = Child::getButtonSpace();
-      Prompt<Type>::run(output, command, true, true, buttonSpace);
+      Prompt<DirectoryClass>::run(output, command, true, true, buttonSpace);
       //object->prompt_p->run(output, command, true, true, object->buttonSpace);
       //object->prompt_p->run(output, command, true, true, object->buttonSpace);
       g_free(command);

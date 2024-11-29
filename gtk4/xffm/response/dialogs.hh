@@ -9,10 +9,10 @@
 #include "response/templates/dialogpath.hh"
 #include "response/templates/openwith.hh"        
 #include "response/templates/dialogprompt.hh"        
+#include "response/templates/jumpresponse.hh"  // template
 
 // response classes
 // jumpresponse is a template to access Workdir<Type>
-#include "response/classes/jumpresponse.hh"  // template
 #include "response/classes/entryresponse.hh" // class
 #include "response/classes/passwdresponse.hh"// class
 #include "response/classes/rmresponse.hh"    // class

@@ -3,8 +3,8 @@
 namespace xf {
 
   
-  template <class Type>
-  class Pathbar : public UtilPathbar<Type>
+  template <class DirectoryClass>
+  class Pathbar : public UtilPathbar<DirectoryClass>
   {
     GtkBox *pathbar_;
     gchar *path_;
@@ -78,12 +78,12 @@ namespace xf {
         auto motion = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
-        g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (UtilPathbar<Type>::pathbar_white), (void *)pathbar_);
-        g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (UtilPathbar<Type>::pathbar_blue), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (UtilPathbar<DirectoryClass>::pathbar_white), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (UtilPathbar<DirectoryClass>::pathbar_blue), (void *)pathbar_);
     
         auto gesture1 = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir<Type>::pathbar_go), (void *)pathbar_);
+        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir<DirectoryClass>::pathbar_go), (void *)pathbar_);
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
   /*     
         auto gesture3 = gtk_gesture_click_new();
@@ -133,7 +133,7 @@ namespace xf {
            }
            g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
            g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           Workdir<Type>::setWorkdir(previous, GTK_BOX(pathbar), false);
+           Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
            return TRUE;
          }
       }
@@ -151,12 +151,12 @@ namespace xf {
            historyNext = g_list_remove(historyNext, current);
            g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
            g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           Workdir<Type>::setWorkdir(current, GTK_BOX(pathbar), false);
+           Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
            return TRUE;
          }
       }
       if (strcmp(path, "xffm:goto") == 0){
-        auto dialogObject = new DialogPrompt<jumpResponse<Type> >;
+        auto dialogObject = new DialogPrompt<jumpResponse<DirectoryClass> >;
         auto dialog = dialogObject->dialog();
         dialogObject->setParent(GTK_WINDOW(MainWidget));
         dialogObject->run();

@@ -16,6 +16,7 @@ class FstabMonitor {
   pthread_mutex_t waitMutex = PTHREAD_MUTEX_INITIALIZER;
 
   void **mountArg_ = NULL; 
+  char *path_;
   GridView<Type> *gridView_p = NULL;
 public:    
     /*FstabMonitor(GridView<LocalDir> *gridview)
@@ -28,7 +29,8 @@ public:
     }*/
     FstabMonitor(GridView<LocalDir> *gridview)
     {   
-        DBG("***constructor:fstab_monitor(%s)\n", gridview->path());
+        path_ = g_strdup(gridview->path());
+        TRACE("***constructor:fstab_monitor(%s)\n", path_);
         gridView_p = gridview;       
         pthread_t thread;
         setMountArg();
@@ -39,7 +41,8 @@ public:
         // stop mountThread
         mountArg_[1] = NULL;
         //g_hash_table_destroy(this->itemsHash());
-        DBG("***Destructor:~fstab_monitor complete\n");
+        TRACE("***Destructor:~fstab_monitor(%s)\n", path_);
+        g_free(path_);
     }
 
 private:
@@ -90,7 +93,7 @@ private:
         //if (FstabUtil::isInFstab(path) || FstabUtil::isMounted(path)){
         if (FstabUtil::isMounted(path)){
           g_hash_table_insert(hash, g_strdup(path), GINT_TO_POINTER(1));
-          DBG("getMntHash insert: %s\n", path);
+          TRACE("getMntHash insert: %s\n", path);
         }
         g_free(path);
 
@@ -111,7 +114,7 @@ private:
         }
         if (FstabUtil::isInFstab(path)){
           g_hash_table_insert(hash, g_strdup(path), GINT_TO_POINTER(1));
-          DBG("getFstabHash insert: %s\n", path);
+          TRACE("getFstabHash insert: %s\n", path);
         }
         g_free(path);
 
@@ -120,27 +123,28 @@ private:
     }
 
     static void *sendSignal_f(void *data){
-      DBG( "sendSignal_f\n");
-      //return NULL;
+       TRACE( "sendSignal_f\n");
        auto arg = (void **)data;
-       //auto monitor = G_FILE_MONITOR(arg[0]);
-       auto child = Child::getChild();
-       auto monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(child), "monitor"));
+       auto monitor = G_FILE_MONITOR(arg[0]);
        auto *file = G_FILE(arg[1]);
        g_file_monitor_emit_event (monitor,
-                   file, NULL, G_FILE_MONITOR_EVENT_CHANGED);
+                   file, NULL, G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED);
+                  // file, NULL, G_FILE_MONITOR_EVENT_CHANGED);
        // Seems that the event will manage reference to g_file
        // or at least the following unref does not wreak havoc...
         return NULL;
     }
 
     static void sendSignal(GridView<LocalDir> *gridView_p, GFileInfo *info){
+      if (!gridView_p->monitor()){
+        DBG("no fstab monitor active.\n");
+      }
       auto file = Basic::getGfile(info);
-      void **arg = (void **)calloc(3, sizeof(void*));
-      //arg[0] = (void *)gridView_p->monitor();
+
+      void *arg[] = {(void *)gridView_p->monitor(), (void *)file, NULL};
+      arg[0] = (void *)gridView_p->monitor();
       arg[1] = (void *)file;
       Basic::context_function(sendSignal_f, arg);
-      g_free(arg);
     }
 
     static void *
@@ -152,9 +156,10 @@ private:
         auto gridView_p = (GridView<LocalDir> *)arg[0];
         auto mntHash = getMntHash(gridView_p);
         auto fstabHash = getFstabHash(gridView_p);
+        auto _path = g_strdup(gridView_p->path());
 
    /*     auto baseMonitor = (BaseMonitor<Type> *)arg[0];
-        DBG("*** baseMonitor = %p\n", baseMonitor);
+        TRACE("*** baseMonitor = %p\n", baseMonitor);
         g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
       */  
         // get initial md5sum
@@ -165,7 +170,7 @@ private:
             g_free(data);
             return NULL;
         }
-        DBG("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
+        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
         
         //auto hash = getMountHash(NULL);
         auto selectionModel = gridView_p->selectionModel();
@@ -183,8 +188,8 @@ private:
                 return NULL;
             }
             if (strcmp(newSum, sum)){
-              DBG("new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
-              DBG("now we test whether icon update is necessary...\n");
+              TRACE("new md5sum /proc/mounts = %s (%s)\n", newSum, sum);
+              TRACE("now we test whether icon update is necessary...\n");
               g_free(sum);
               sum = newSum;
 
@@ -200,32 +205,38 @@ private:
                 }
                 
                 if (FstabUtil::isMounted(path) && !g_hash_table_lookup(mntHash, path)){
-                  DBG("update icon for mounted %s\n", path);
+                  TRACE("update icon for mounted %s\n", path);
+                  g_hash_table_insert(mntHash, g_strdup(path), GINT_TO_POINTER(1));
                   updateInfo = info;
                 }
                 else if (!FstabUtil::isMounted(path) &&  g_hash_table_lookup(mntHash, path)){
-                  DBG("update icon for unmounted %s\n", path);
+                  TRACE("update icon for unmounted %s\n", path);
+                  g_hash_table_remove(mntHash, path);
+
                   updateInfo = info;
                 }
                 else if (FstabUtil::isInFstab(path) && !g_hash_table_lookup(fstabHash, path)){
-                  DBG("update icon for removed from fstab %s\n", path);
+                  g_hash_table_insert(fstabHash, g_strdup(path), GINT_TO_POINTER(1));
+                  TRACE("update icon for removed from fstab %s\n", path);
                   updateInfo = info;
                 }
-                if (!FstabUtil::isInFstab(path) && g_hash_table_lookup(fstabHash, path)){
-                  DBG("update icon for added to fstab %s\n", path);
+                else if (!FstabUtil::isInFstab(path) && g_hash_table_lookup(fstabHash, path)){
+                  g_hash_table_remove(fstabHash, path);
+                  TRACE("update icon for added to fstab %s\n", path);
                   updateInfo = info;
                 }
-                g_free(path);
                 if (updateInfo) sendSignal(gridView_p, updateInfo);
+                g_free(path);
               }
             }
             if (strcmp(newSumPartitions, sumPartitions)){
-                DBG("new md5sum /proc/partitions = %s (%s)\n", newSumPartitions, sumPartitions);
+                TRACE("new md5sum /proc/partitions = %s (%s)\n", newSumPartitions, sumPartitions);
             }
         }
         g_free(sum);
-        DBG("***now exiting mountThreadF()\n");
+        TRACE("***now exiting mountThreadF(%s)\n", _path);
         g_free(arg); 
+        g_free(_path); 
         return NULL;
     }
 #if 0

@@ -2,7 +2,7 @@
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
 namespace xf {
-  template <class Type>
+  template <class DirectoryClass>
   class Util {
   public:
       
@@ -56,7 +56,7 @@ namespace xf {
         for (int i=0; i<n; i++){
           auto child = gtk_notebook_get_nth_page(notebook, i);
           auto path = Child::getWorkdir(child);
-          Workdir<Type>::setWorkdir(path, child);
+          Workdir<DirectoryClass>::setWorkdir(path, child);
         }
         return NULL;
     }
@@ -208,20 +208,20 @@ namespace xf {
     static bool
     cd (const gchar **v, GtkWidget *child) {   
         if (v[1] == NULL){
-          return Workdir<Type>::setWorkdir(g_get_home_dir());
+          return Workdir<DirectoryClass>::setWorkdir(g_get_home_dir());
         }
         // tilde and $HOME
         if (strncmp(v[1], "~", strlen("~")) == 0){
           const char *part2 = v[1] + strlen("~");
           char *dir = g_strconcat(g_get_home_dir(), part2, NULL);
-          auto retval = Workdir<Type>::setWorkdir(dir);
+          auto retval = Workdir<DirectoryClass>::setWorkdir(dir);
           g_free(dir);
           return retval;
         }
         if (strncmp(v[1], "$HOME", strlen("$HOME")) == 0){
           const char *part2 = v[1] + strlen("$HOME");
           char *dir = g_strconcat(g_get_home_dir(),  part2, NULL);
-          auto retval = Workdir<Type>::setWorkdir(dir);
+          auto retval = Workdir<DirectoryClass>::setWorkdir(dir);
           g_free(dir);
           return retval;
         }
@@ -239,7 +239,7 @@ namespace xf {
             g_free(rpath);
             return false; 
           }
-          auto retval = Workdir<Type>::setWorkdir(rpath);
+          auto retval = Workdir<DirectoryClass>::setWorkdir(rpath);
           g_free(rpath);
           return retval;
         }
@@ -249,7 +249,7 @@ namespace xf {
         if (!rpath) return false;
         
 
-        auto retval = Workdir<Type>::setWorkdir(rpath);
+        auto retval = Workdir<DirectoryClass>::setWorkdir(rpath);
         g_free(rpath);
 
         return retval;

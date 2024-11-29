@@ -31,7 +31,7 @@ public:
       setEditor();
       setTerminal();
 
-      xffm_ = new(xf::MainWindow<bool>)(path);
+      xffm_ = new(xf::MainWindow<bool>)(path); // bool is MainClass (only one for now)
     }
 
     static const gchar *getEditor(){

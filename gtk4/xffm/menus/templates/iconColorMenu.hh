@@ -45,6 +45,10 @@ namespace xf {
       static const char *boxes_[] = {NULL};
       return boxes_;      
     }
+    const char **radioboxes(void){
+      static const char *boxes_[] = { NULL};
+      return boxes_;      
+    }
 
   private:
   };

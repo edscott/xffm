@@ -252,7 +252,7 @@ namespace xf {
         auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
 
         gtk_widget_remove_css_class (eventBox, "pathbarboxNegative" );
-
+/*
         if (!gridview_p){
           DBG("UtilPathbar::pathbar_blue():Should not happen, gridview_p == NULL\n");
           return false;
@@ -265,6 +265,7 @@ namespace xf {
           DBG("UtilPathbar::pathbar_blue():Should not happen, eventBox path == NULL\n");
           return false;
         }
+        */
         if (strcmp(path, gridview_p->path())==0){
           gtk_widget_add_css_class (eventBox, "pathbarboxRed" );
         } else {
