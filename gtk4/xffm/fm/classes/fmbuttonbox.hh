@@ -148,7 +148,7 @@ private:
       for (int i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(notebook, i);
         auto path = Child::getWorkdir(child);
-        Workdir<bool>::setWorkdir(path, child);
+        Workdir<LocalDir>::setWorkdir(path, child);
                
       }
     }

@@ -76,11 +76,9 @@ namespace xf {
         auto box = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 0));  
         
         if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-          // too soon Util<bool>::setWorkdir(path);
           g_object_set_data(G_OBJECT(box), "path", g_strdup(path));
         } else {
           g_object_set_data(G_OBJECT(box), "path", g_strdup(g_get_home_dir()));
-          // too soon Util<bool>::setWorkdir(g_get_home_dir());
         }
 
         auto *label = gtk_label_new(tag);

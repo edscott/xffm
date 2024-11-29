@@ -249,11 +249,23 @@ namespace xf {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         auto path = (const char *) g_object_get_data(G_OBJECT(eventBox), "path");
 
-        auto gridview_p = (GridView<LocalDir> *)data;
+        auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
 
         gtk_widget_remove_css_class (eventBox, "pathbarboxNegative" );
 
-        if (gridview_p && gridview_p->path() && strcmp(path, gridview_p->path())==0){
+        if (!gridview_p){
+          DBG("UtilPathbar::pathbar_blue():Should not happen, gridview_p == NULL\n");
+          return false;
+        }
+        if (!gridview_p->path()){
+          DBG("UtilPathbar::pathbar_blue():Should not happen, gridview_p->path() == NULL\n");
+          return false;
+        }
+        if (!path){
+          DBG("UtilPathbar::pathbar_blue():Should not happen, eventBox path == NULL\n");
+          return false;
+        }
+        if (strcmp(path, gridview_p->path())==0){
           gtk_widget_add_css_class (eventBox, "pathbarboxRed" );
         } else {
           gtk_widget_add_css_class (eventBox, "pathbarbox" );

@@ -33,7 +33,6 @@ namespace xf {
       //DBG("goHome....\n");
       auto child = Child::getChild();
       
-      //Workdir<bool>::setWorkdir(g_get_home_dir());
         
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));

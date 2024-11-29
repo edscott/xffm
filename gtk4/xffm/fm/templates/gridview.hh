@@ -9,19 +9,19 @@ template <class Type> class Dnd;
 template <class Type> class FstabMonitor;
 template <class DirectoryClass>
   class GridView  {
-      GtkWidget *child_;
-      //int zzz; //  Put whatever variable here and we get a pathbar crash
+      GtkWidget *child_=NULL;
+      int zzz; //  Put whatever variable here and we get a pathbar crash
       GtkMultiSelection *selectionModel_ = NULL;
-      GtkWidget *view_;
-      void *gridViewClick_f_;
-      char *path_;
+      GtkWidget *view_=NULL;
+      void *gridViewClick_f_=NULL;
+      char *path_=NULL;
       // myMenu is for processing keys for individual widget popovers
       Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
       int maxNameLen_ = 0;
-      double x_; // factory widget
-      double y_;
-      double X_; // main widget
-      double Y_;
+      double x_ = 0.0; // factory widget
+      double y_ = 0.0;
+      double X_ = 0.0; // main widget
+      double Y_ = 0.0;
       int flags_=0;
       FstabMonitor<DirectoryClass> *fstabMonitor_ = NULL;
       GFileMonitor *monitor_ = NULL;
