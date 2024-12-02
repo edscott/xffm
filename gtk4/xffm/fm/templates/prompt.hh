@@ -54,7 +54,7 @@ namespace xf {
    
 
         auto title = g_strconcat("",_("Input"),_(" TTY"), NULL);
-        auto myInputMenu = new Menu<InputMenu<bool> >(title);
+        auto myInputMenu = new Menu<InputMenu<LocalDir> >(title);
         g_free(title);
         myInputMenu->setMenu(GTK_WIDGET(input_), GTK_WIDGET(input_), Child::getWorkdir(), true);
         delete myInputMenu;
@@ -105,15 +105,15 @@ namespace xf {
 
         gchar *newWorkdir =NULL;
         gchar ** commands = NULL;
-        commands = Util<bool>::getVector(command, ";");
+        commands = Util<LocalDir>::getVector(command, ";");
       TRACE("commands[0]: %s\n", commands[0]);
-        RunButton<bool> *runButton;
+        RunButton<LocalDir> *runButton;
         for (gchar **c=commands; c && *c; c++){
             if (strncmp(*c,"cd", strlen("cd"))==0){
-              auto w = Util<bool>::getVector(*c, " ");
+              auto w = Util<LocalDir>::getVector(*c, " ");
               auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
               auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
-              if (Util<bool>::cd((const char **)w, child)){
+              if (Util<LocalDir>::cd((const char **)w, child)){
                 auto path = Child::getWorkdir(child);
                 Child::setWindowTitle(child);
                 // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
@@ -149,13 +149,13 @@ namespace xf {
             *        move always routine to utilBasic*/
         
             if (Basic::alwaysTerminal(*c)){
-              command = Run<bool>::mkTerminalLine(*c, "");
-              childPID = Run<bool>::shell_command(output, command, scrollup, showTextPane);
+              command = Run<LocalDir>::mkTerminalLine(*c, "");
+              childPID = Run<LocalDir>::shell_command(output, command, scrollup, showTextPane);
             } else {
-              childPID = Run<bool>::shell_command(output, *c, scrollup, showTextPane);
+              childPID = Run<LocalDir>::shell_command(output, *c, scrollup, showTextPane);
             }
             if (withRunButton) {
-              runButton = new (RunButton<bool>);
+              runButton = new (RunButton<LocalDir>);
               runButton->init(runButton, *c, childPID, output, Child::getWorkdir(child), buttonSpace);
             }
             
@@ -206,14 +206,14 @@ namespace xf {
     
     static bool
     cd(GtkTextView *output, const char *text){
-      gchar **v = Util<bool>::getVector(text, " ");
+      gchar **v = Util<LocalDir>::getVector(text, " ");
       if (strcmp(v[0], "cd")) {
         g_strfreev(v);
         return false;
       }
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
-      auto retval = Util<bool>::cd((const gchar **)v, child);
+      auto retval = Util<LocalDir>::cd((const gchar **)v, child);
       auto path = Child::getWorkdir(child);
       // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
       Print::print(output, g_strdup_printf("$ %s\n", text));
@@ -229,7 +229,7 @@ namespace xf {
     static bool
     exe(GtkTextView *input, GtkTextView *output, const char *text){
       if (!History::add(text)) DBG("History::add(%s) failed\n", text );
-      gchar **v = Util<bool>::getVector(text, " ");
+      gchar **v = Util<LocalDir>::getVector(text, " ");
       char *inPath = g_find_program_in_path(v[0]);
       if (!inPath && g_file_test(v[0], G_FILE_TEST_IS_EXECUTABLE)) inPath = realpath(v[0], NULL);
       if (!inPath){

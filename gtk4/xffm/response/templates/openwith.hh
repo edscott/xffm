@@ -408,6 +408,7 @@ private:
         run(object);
         object->freeSelectionList();
         object->timeout_=-1;
+        gtk_window_present(GTK_WINDOW(MainWidget));
     }
  
 
@@ -420,6 +421,7 @@ private:
       auto object = (OpenWith *)data;
       object->freeSelectionList();
       object->timeout_=-1;
+        gtk_window_present(GTK_WINDOW(MainWidget));
     }
 
     static void
@@ -428,6 +430,7 @@ private:
         run(object);
         object->freeSelectionList();
         object->timeout_=-1;
+        gtk_window_present(GTK_WINDOW(MainWidget));
     }
 /*
     static void
@@ -443,6 +446,7 @@ private:
       auto object = (OpenWith *)data;
       object->timeout_=-1;
       object->freeSelectionList();
+        gtk_window_present(GTK_WINDOW(MainWidget));
 
       return TRUE;
     }

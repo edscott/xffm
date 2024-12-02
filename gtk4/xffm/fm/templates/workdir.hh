@@ -5,7 +5,6 @@ namespace xf {
   class Workdir  {
     private:
       static void  updateGridView(const char *path){
-#ifdef ENABLE_GRIDVIEW
         TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(), Child::getSerial()+1);
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
        
@@ -20,44 +19,71 @@ namespace xf {
           g_object_set_data(G_OBJECT(monitor), "inactive", GINT_TO_POINTER(1));
           pthread_mutex_unlock(&monitorMutex);   
           auto dirFile = G_FILE(g_object_get_data(G_OBJECT(monitor), "file"));
-          g_object_unref(dirFile);
 
           g_file_monitor_cancel(monitor);
           g_object_unref(monitor);
-          
-          TRACE("***monitor cancel = %p\n", monitor);
+          //*
+          auto path = g_file_get_path(dirFile);
+          DBG("local monitor for %s cancelled.\n", path);
+          g_free(path);
+
+          g_object_unref(dirFile);
         }
        
         // cancel threadpool for previews, if any. Wait on condition
-
-        auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
-        TRACE("new object: %p\n", viewObject);
-        viewObject->child(child);
-        auto store = viewObject->listStore();
-        if (g_object_get_data(G_OBJECT(store), "xffm::local")){
+        if (strcmp(path, _("Disk Mounter")) == 0) {
+          auto viewObject = new GridView<FstabDir>(path, (void *)gridViewClick);
+          viewObject->child(child);
+          auto store = viewObject->listStore();
+            
           monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
-        } else {
-          monitor = NULL;
-        }
-        viewObject->monitor(monitor);
+          if (monitor){
+            DBG("local monitor started for %s\n", path);
+          } else {
+            DBG("no local monitor for %s\n", path);
+          }
 
-        if (monitor) TRACE("*** monitor = %p child=%p\n", monitor);
-        g_object_set_data(G_OBJECT(child), "monitor", monitor);
-        auto view = viewObject->view();
-        //auto view = GridView<LocalDir>::getGridView(path, (void *)gridViewClick);
-        Child::setGridview(view);
-        auto oldObject = Child::getGridviewObject();
-        TRACE("oldObject: %p\n", oldObject);
-        if (oldObject) {
-          auto object = (GridView<LocalDir> *) oldObject;
-          delete object;
+          //viewObject->monitor(monitor);
+          //g_object_set_data(G_OBJECT(child), "monitor", monitor);
+
+          auto view = viewObject->view();
+          Child::setGridview(view); // This is the GtkGridView.
+          auto oldObject = Child::getGridviewObject();
+          TRACE("oldObject: %p\n", oldObject);
+          if (oldObject) {
+            auto object = (GridView<DirectoryClass> *) oldObject;
+            delete object;
+          }
+          Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
+        } else {
+          auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
+          TRACE("new object: %p\n", viewObject);
+          viewObject->child(child);
+          auto store = viewObject->listStore();
+            
+          monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
+          if (monitor){
+            DBG("local monitor started on %p\n", monitor);
+          }
+
+          viewObject->monitor(monitor);
+          //if (monitor) TRACE("*** monitor = %p child=%p\n", monitor);
+          g_object_set_data(G_OBJECT(child), "monitor", monitor);
+
+          auto view = viewObject->view();
+          Child::setGridview(view); // This is the GtkGridView.
+          auto oldObject = Child::getGridviewObject();
+          TRACE("oldObject: %p\n", oldObject);
+          if (oldObject) {
+            auto object = (GridView<DirectoryClass> *) oldObject;
+            delete object;
+          }
+          Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
         }
-        Child::setGridviewObject(viewObject);     
+
+
 
         TRACE("updateGridView: ok\n");
-        // Fireup preview threads here, once initial load has completed.
-        //viewObject->fireUpPreviews(child);
-#endif
       }
 
       static void  updatePathbar(bool addHistory, void *pathbar_go){
@@ -156,7 +182,7 @@ namespace xf {
               gdouble y,
               gpointer object){
         
-      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<DirectoryClass> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
       d->dropDone(true);
       d->dragOn(true);
 

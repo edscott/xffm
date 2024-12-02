@@ -256,9 +256,26 @@ namespace xf {
         // result will be offset by hidden items.
         GFileInfo *infoF = g_file_info_new();
         auto name = g_path_get_basename(path);
-        g_file_info_set_name(infoF, name);
+        char *utfName=NULL;
+        if (g_object_get_data(G_OBJECT(store), "xffm::fstab")) {
+          auto label = FstabUtil::e2Label(name);
+          if (label){
+              gchar *g = g_strdup_printf("%s\n(%s)", name, label);
+              g_free(label);
+              label = g;
+              g_free(name);
+          } else {
+             label = name;
+          }
+          utfName = Basic::utf_string(label);
+          g_free(label);
+        } else {
+          utfName = Basic::utf_string(name);
+          g_free(name);
+        }
+        g_file_info_set_name(infoF, utfName);
         auto found = g_list_store_find_with_equal_func(store, infoF, equal_f, positionS);
-        g_free(name);
+        g_free(utfName);
         g_object_unref(infoF);
         if (found){
           TRACE("%s found at position %d\n", path, *positionS);

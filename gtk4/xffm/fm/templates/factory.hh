@@ -366,7 +366,7 @@ template <class DirectoryClass>
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (down_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_BUBBLE);
+          GTK_PHASE_CAPTURE);
 
     }    
     
@@ -379,7 +379,7 @@ template <class DirectoryClass>
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (down_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_BUBBLE);
+          GTK_PHASE_CAPTURE);
 
     }    
     
@@ -484,29 +484,29 @@ template <class DirectoryClass>
       guint positionF;
       auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
       auto item = G_FILE_INFO(gtk_list_item_get_item(listItem));
-      TRACE("selectWidget: self(w) = %p, item=%p\n", w, item);
+      DBG("selectWidget: self(w) = %p, item=%p\n", w, item);
       if (item) {
         auto path = Basic::getPath(item);
         auto dirPath = g_path_get_dirname(path);
         int flags = Settings::getInteger("flags", dirPath); 
         if (flags < 0) flags = 0;
        
-        TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
+        DBG("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);
         auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
-          TRACE("gridViewClick(): %s not found\n", path);
+          DBG("selectWidget(): %s not found\n", path);
           g_free(path);
           return false;
         } 
-        TRACE("Found %s at %d\n", path, positionF);
+        DBG("Found %s at %d\n", path, positionF);
         g_free(path);
         auto selectionModel = gridView_p->selectionModel();
         gtk_selection_model_select_item(selectionModel, positionF, unselectOthers);
         gtk_widget_grab_focus(GTK_WIDGET(gridView_p->view()));
         return false;
       }
-      TRACE("*** selectWidget: item is null\n");
+      DBG("*** selectWidget: item is null\n");
       return false;
    }
 
@@ -661,6 +661,7 @@ template <class DirectoryClass>
         return false;
       }*/
       if (modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) {
+        //DBG("return1\n");
         return false;
       }
   
@@ -671,7 +672,9 @@ template <class DirectoryClass>
       //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
 
       if (modType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK)) || button == 3) {
+      //if (modType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK))) {
         selectWidget(w, gridView_p, false);
+        //DBG("return12\n");
       } else {
         selectWidget(w, gridView_p, true);
       }

@@ -7,7 +7,7 @@ class Fm{
 private:
 
   History *_history;
-  MainWindow<bool> *xffm_;
+  MainWindow<LocalDir> *xffm_;
 public:
     History *history(void) { return _history;}
     ~Fm(void){
@@ -31,7 +31,7 @@ public:
       setEditor();
       setTerminal();
 
-      xffm_ = new(xf::MainWindow<bool>)(path); // bool is MainClass (only one for now)
+      xffm_ = new(xf::MainWindow<LocalDir>)(path); // bool is MainClass (only one for now)
     }
 
     static const gchar *getEditor(){

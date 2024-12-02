@@ -263,7 +263,7 @@ public:
         while (num != gtk_notebook_get_current_page(notebook_)) 
           gtk_notebook_next_page(notebook_);
       }
-      Workdir<bool>::setWorkdir(path, true);
+      Workdir<LocalDir>::setWorkdir(path, true);
       gtk_widget_grab_focus(GTK_WIDGET(Child::getInput()));
      
     }

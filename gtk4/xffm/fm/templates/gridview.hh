@@ -77,6 +77,8 @@ template <class DirectoryClass>
         addMotionController();
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
           fstabMonitor_ = NULL;
+        } else if (g_object_get_data(G_OBJECT(store()), "xffm::fstab")){
+          fstabMonitor_ = new FstabMonitor<DirectoryClass>(this); 
         } else {
           fstabMonitor_ = new FstabMonitor<DirectoryClass>(this); 
         } 
@@ -98,7 +100,8 @@ template <class DirectoryClass>
 
         g_free(path_);
         TRACE("~GridView complete.\n");
-      }      
+      }     
+
       void child(GtkWidget *child){
         child_ = child;
         auto store = G_OBJECT(g_object_get_data(G_OBJECT(selectionModel_), "store"));
@@ -122,13 +125,13 @@ template <class DirectoryClass>
         auto child = Child::getChild();
         selectionModel_ = NULL;
         if (strcmp(path_, _("Bookmarks"))==0) {
-          selectionModel_ = DirectoryClass::rootSelectionModel();
+          selectionModel_ = LocalDir::rootSelectionModel();
         } else if (strcmp(path_, _("Disk Mounter"))==0) {
           selectionModel_ = FstabDir::fstabSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
-          selectionModel_ = DirectoryClass::xfSelectionModel(path_);
-          maxNameLen_ = DirectoryClass::getMaxNameLen(path_);
+          selectionModel_ = LocalDir::xfSelectionModel(path_);
+          maxNameLen_ = LocalDir::getMaxNameLen(path_);
           //selectionModel_ = DirectoryClass::standardSelectionModel(path_);     
         }
        

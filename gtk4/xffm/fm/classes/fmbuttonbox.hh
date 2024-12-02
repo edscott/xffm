@@ -32,10 +32,10 @@ namespace xf {
           NULL
         };
         void *bCallback[]={
-          (void *)MenuCallbacks<bool>::openFind,
-          (void *)MenuCallbacks<bool>::openTerminal,
-          (void *)MenuCallbacks<bool>::goHome,
-          (void *)MenuCallbacks<bool>::toggleVpane,
+          (void *)MenuCallbacks<LocalDir>::openFind,
+          (void *)MenuCallbacks<LocalDir>::openTerminal,
+          (void *)MenuCallbacks<LocalDir>::goHome,
+          (void *)MenuCallbacks<LocalDir>::toggleVpane,
           NULL
         };
         
@@ -62,7 +62,7 @@ namespace xf {
         }
 
         auto colorButton = Basic::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
-        auto myColorMenu = new Menu<IconColorMenu<bool> >(_("Colors"));
+        auto myColorMenu = new Menu<IconColorMenu<LocalDir> >(_("Colors"));
         myColorMenu->setMenu(colorButton);
         delete myColorMenu;
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(colorButton),  FALSE, FALSE, 0);
@@ -94,7 +94,7 @@ private:
         int value = gtk_range_get_value(range);
         if (value != GPOINTER_TO_INT(g_object_get_data(G_OBJECT(range), "valor"))){
           TRACE("getWorkdir\n");
-          auto wd = Workdir<bool>::getWorkdir();
+          auto wd = Workdir<LocalDir>::getWorkdir();
           if (g_file_test(wd, G_FILE_TEST_EXISTS)) {
             // race condition here, workdir null or garbage.
             // Workdir::reset();      
@@ -136,7 +136,7 @@ private:
     }
     static void
     changeSize (GtkRange* self, gpointer user_data){
-      if (Workdir<bool>::pleaseWait()) return;
+      if (Workdir<LocalDir>::pleaseWait()) return;
       auto value = gtk_range_get_value(self);
       Settings::setInteger("xfterm", "iconsize", value);
       

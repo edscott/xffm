@@ -24,7 +24,7 @@ namespace xf {
         gridScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         
         outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
-        output_ = Util<bool>::newTextView();
+        output_ = Util<LocalDir>::newTextView();
        
         g_object_set_data(G_OBJECT(vpane_), "output", output_);
         g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
@@ -47,7 +47,7 @@ namespace xf {
 
   };
 
-  class FMpage : public Vpane, public Prompt<bool>, public Pathbar<bool> {
+  class FMpage : public Vpane, public Prompt<LocalDir>, public Pathbar<LocalDir> {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;
@@ -64,7 +64,7 @@ namespace xf {
       }
       ~FMpage(){
         TRACE("FMpage destructor: need to call GridView destructor...\n");
-        //auto gridView_p = (GridView<bool> *)Child::getGridviewObject(GTK_WIDGET(childBox_));
+        //auto gridView_p = (GridView<LocalDir> *)Child::getGridviewObject(GTK_WIDGET(childBox_));
         //delete gridView_p;
         g_free(path_);
        
@@ -95,7 +95,7 @@ namespace xf {
 
 
         auto title = g_strconcat("",_("Output"),_(" TTY"), NULL);
-        auto myOutputMenu = new Menu<OutputMenu<bool> >(title);
+        auto myOutputMenu = new Menu<OutputMenu<LocalDir> >(title);
         myOutputMenu->setMenu(GTK_WIDGET(output), GTK_WIDGET(output), Child::getWorkdir(), true);
         g_free(title);
         delete myOutputMenu;

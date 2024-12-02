@@ -81,53 +81,63 @@ class FstabDir {
         return;
     }
 
+    static void addListItem(GListStore *store, void *data){
+        auto mnt_struct = (struct mntent *)data;
+        TRACE ("nmnt_fsname=%s, \nmnt_dir= %s, \nmnt_type=%s, \nmnt_opts=%s\n",
+                    mnt_struct->mnt_fsname, 
+                    mnt_struct->mnt_dir, 
+                    mnt_struct->mnt_type, 
+                    mnt_struct->mnt_opts);
+
+        //gboolean mounted = isMounted(mnt_struct->mnt_dir);
+        /*char *text = g_strdup_printf("%s (%s):\n%s\n%s",
+                        mnt_struct->mnt_dir, 
+                        mnt_struct->mnt_type, 
+                        mnt_struct->mnt_fsname, 
+                        mnt_struct->mnt_opts);*/
+
+        auto label = g_strdup_printf("%s", mnt_struct->mnt_dir);
+        auto utf_name = Basic::utf_string(label);
+        TRACE("label=%s, utf_name=%s\n", label, utf_name);
+        g_free(label);
+        
+        const char *path = mnt_struct->mnt_dir;
+        GFile *file = g_file_new_for_path(path);
+        GError *error_ = NULL;
+        auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+        g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
+        g_file_info_set_attribute_object(info, "xffm::fstabMount", G_OBJECT(file));
+        auto base = (strcmp(utf_name, "/")==0)?g_strdup(utf_name): g_path_get_basename(utf_name);
+        g_file_info_set_name(info, base);
+        g_free(base);
+        g_free(utf_name);
+        TRACE("info name=%s\n", g_file_info_get_name(info));
+
+        FstabUtil::setMountableIcon(info, path);
+
+        g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, NULL);
+
+    } 
+
+    static void clearFstabList(GList *list){
+      for (auto l=list; l && l->data; l= l->next){          
+          auto mnt_struct = (struct mntent *)l->data;
+          g_free(mnt_struct->mnt_fsname);
+          g_free(mnt_struct->mnt_dir);
+          g_free(mnt_struct->mnt_type);
+          g_free(mnt_struct->mnt_opts);
+          g_free(mnt_struct);
+      }
+      g_list_free(list);
+    }
+
     static void
     addFstabItems(GListStore *store){
         auto list = getFstabItems();
         for (auto l=list; l && l->data; l= l->next){
-            auto mnt_struct = (struct mntent *)l->data;
-            TRACE ("nmnt_fsname=%s, \nmnt_dir= %s, \nmnt_type=%s, \nmnt_opts=%s\n",
-                        mnt_struct->mnt_fsname, 
-                        mnt_struct->mnt_dir, 
-                        mnt_struct->mnt_type, 
-                        mnt_struct->mnt_opts);
-
-            //gboolean mounted = isMounted(mnt_struct->mnt_dir);
-            /*char *text = g_strdup_printf("%s (%s):\n%s\n%s",
-                            mnt_struct->mnt_dir, 
-                            mnt_struct->mnt_type, 
-                            mnt_struct->mnt_fsname, 
-                            mnt_struct->mnt_opts);*/
-
-            auto label = g_strdup_printf("%s", mnt_struct->mnt_dir);
-            auto utf_name = Basic::utf_string(label);
-            TRACE("label=%s, utf_name=%s\n", label, utf_name);
-            g_free(label);
-            
-            const char *path = mnt_struct->mnt_dir;
-            GFile *file = g_file_new_for_path(path);
-            GError *error_ = NULL;
-            auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-            g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
-            g_file_info_set_attribute_object(info, "xffm::fstabMount", G_OBJECT(file));
-            auto base = (strcmp(utf_name, "/")==0)?g_strdup(utf_name): g_path_get_basename(utf_name);
-            g_file_info_set_name(info, base);
-            g_free(base);
-            g_free(utf_name);
-            TRACE("info name=%s\n", g_file_info_get_name(info));
-
-            FstabUtil::setMountableIcon(info, path);
-
-            g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, NULL);
-            // folder-remote
-            
-            g_free(mnt_struct->mnt_fsname);
-            g_free(mnt_struct->mnt_dir);
-            g_free(mnt_struct->mnt_type);
-            g_free(mnt_struct->mnt_opts);
-            g_free(mnt_struct);
+          addListItem(store, l->data);
         }
-        g_list_free(list);
+        clearFstabList(list);
     }
 
     static const gchar **mntTypes(void){
@@ -241,9 +251,9 @@ class FstabDir {
             ERROR("fstab/view.hh::addPartition: path cannot be null\n");
             return;
         }
-         GtkTreeIter iter;
+#if 1
         gchar *basename = g_path_get_basename(path);
-        auto label = e2Label(basename);
+        auto label = FstabUtil::e2Label(basename);
         gboolean mounted = isMounted(path);
         if (label){
             gchar *g = g_strdup_printf("%s\n(%s)", basename, label);
@@ -255,7 +265,12 @@ class FstabDir {
         }
         auto utf_name = Basic::utf_string(label);
         g_free(label);
+#else
 
+        char *basename = g_path_get_basename(path);
+        auto utf_name = Basic::utf_string(basename);
+        g_free(basename);
+#endif
         GFile *file = g_file_new_for_path(path);
         GError *error_ = NULL;
         auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
@@ -367,44 +382,6 @@ class FstabDir {
         return mnt_dir;
     }
 
-    static gchar *
-    e2Label(const gchar *partitionPath){
-        if (!partitionPath) return NULL;
-        const gchar *command = "ls -l /dev/disk/by-label";
-        FILE *pipe = popen (command, "r");
-        if(pipe == NULL) {
-            ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
-            return NULL;
-        }
-        auto partition = g_path_get_basename(partitionPath); 
-        gchar line[256];
-        memset(line, 0, 256);
-        gchar *label = NULL;
-        while (fgets (line, 255, pipe) && !feof(pipe)) {
-            if (strchr(line, '\n')) *strchr(line, '\n')=0;
-            if (!strstr(line, "->")) continue;
-            gchar **f = g_strsplit(line, "->", 2);
-            gchar *base = g_path_get_basename(f[1]);
-            TRACE("looking for %s in %s\n", base, partition);
-            if (!strstr(partition, base)){
-                g_free(base);
-                g_strfreev(f);
-                continue;
-            }
-            else TRACE("found it..\n");
-            g_free(base);
-            g_strstrip(f[0]);
-            if (strrchr(f[0], ' ')){
-                label = g_strdup(strrchr(f[0], ' ')+1);
-                g_strfreev(f);
-                break;
-            }
-        }
-        pclose (pipe);
-        g_free(partition);
-        return label;
-
-    }
 
     static gchar *
     fsType(const gchar *partitionPath){
@@ -679,7 +656,7 @@ public:
          GtkTreeIter iter;
         gchar *basename = g_path_get_basename(path);
         gchar *mntDir = getMntDir(path);
-        auto label = e2Label(basename);
+        auto label = FstabUtil::e2Label(basename);
         TRACE("fstab/addPartition()...\n");
 
         gboolean mounted = isMounted(path);
