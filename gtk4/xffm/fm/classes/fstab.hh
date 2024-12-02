@@ -226,7 +226,7 @@ class FstabDir {
             return NULL;
         }
         gchar *path = NULL;
-        if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0){
+        if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0 || strncmp(p, "nvme", 2)==0){
             //if (p[3] < '0' || p[3] >'9') return NULL;
             path = g_strdup_printf ("/dev/%s", p);
         }
