@@ -568,9 +568,9 @@ template <class DirectoryClass>
               void *data){
       auto gridView_p = (GridView<DirectoryClass> *)data;
       auto currentSerial = Child::getSerial();
-      if (gridView_p->longPressSerial != currentSerial){
-        DBG("longPress_f(): Current serial mismatch %d != %d. Dropping preview() thread.\n", 
-            currentSerial, gridView_p->longPressSerial);
+      if (longPressSerial != currentSerial){ // Invalid read of size 4
+        DBG("longPress_f(): Current serial mismatch %d != %d. Dropping longPress_f.\n", 
+            currentSerial, longPressSerial);
         return true;
       }
       return openMenu(GTK_EVENT_CONTROLLER(self), gridView_p, y);
@@ -624,7 +624,7 @@ template <class DirectoryClass>
       auto event = gtk_event_controller_get_current_event(eventController);
       auto modType = gdk_event_get_modifier_state(event);
       auto gridView_p = (GridView<DirectoryClass> *)data;
-      gridView_p->longPressSerial = Child::getSerial();
+      longPressSerial = Child::getSerial();
       gridView_p->x(x);
       gridView_p->y(y);
       graphene_rect_t bounds;

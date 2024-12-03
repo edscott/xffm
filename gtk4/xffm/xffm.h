@@ -74,6 +74,7 @@ static bool exitDialogs = false;
 static void *threadPoolObject = NULL;
 static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
 static GtkButton *mainMenuButton = NULL;
+static int longPressSerial = -1;
 
 // classes and templates
 // basic classes

@@ -87,6 +87,56 @@ class FstabUtil {
     }
 
     static gchar *
+    getPartitionPath(const gchar *line){
+        if(strlen (line) < 5) return NULL;
+        if(strchr (line, '#')) return NULL;
+        TRACE ("partitions: %s\n", line);
+        if (!strrchr (line, ' ')) return NULL;
+        gchar *p = g_strdup(strrchr (line, ' '));
+        g_strstrip (p);
+        TRACE ("partitions add input: %s\n", p);
+        if(!strlen (p)) {
+        g_free(p);
+            return NULL;
+        }
+        gchar *path = NULL;
+        if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0 || strncmp(p, "nvme", 2)==0){
+            //if (p[3] < '0' || p[3] >'9') return NULL;
+            path = g_strdup_printf ("/dev/%s", p);
+        }
+        g_free(p);
+        TRACE ("partitions add output: %s\n", path);
+        return path;
+    }
+
+    static bool 
+    isInPartitions(const char *searchPath){
+        FILE *partitions = fopen ("/proc/partitions", "r");
+        if(!partitions) return false;
+        gchar line[1024];
+        memset (line, 0, 1024);
+        while(fgets (line, 1023, partitions) && !feof (partitions)) {
+            char *path = getPartitionPath(line);
+            if (!path) continue; // not a partition path line...
+            if (!g_path_is_absolute(path)){
+                ERROR("fstab/view.hh::partition path should be absolute: %s\n", path);
+                g_free(path);
+                continue;
+            }
+            if (strcmp(path, searchPath)==0){
+              g_free(path);
+              fclose (partitions);
+              return true;
+            }
+            g_free(path);
+            //g_free(fstype);
+            memset (line, 0, 1024);
+        }
+        fclose (partitions);
+        return false;
+    }
+
+    static gchar *
     mountSrc (const char *mountTarget) {
         if (!mountTarget){
             ERROR("mountSrc() mountTarget is null\n");
@@ -120,7 +170,7 @@ class FstabUtil {
     }
 
     static gchar *
-    mountTarget (const char *label) {
+    mountTarget (const char *label) { // mount target in fstab file.
         if (!label){
             ERROR("mountTarget() label is null\n");
             return NULL;
@@ -304,6 +354,59 @@ class FstabUtil {
             return __NFS_TYPE;
 
         return 1;
+    }
+
+    static char *
+    tabMountPoint (const gchar *mntPartition) {
+
+        if(!mntPartition) {
+            ERROR ("fstab/view.hh::mountPoint() mntPartition != NULL not met!\n");
+            return NULL;
+        }
+        gchar *mnt_device;
+        if (g_path_is_absolute(mntPartition)) {
+            mnt_device = realpath(mntPartition, NULL);
+        } else {
+            mnt_device = g_strdup(mntPartition);
+        }
+        TRACE("test for mount status: %s\n", mnt_device);
+        
+        struct mntent *m;
+        //const gchar *mnttab;
+        FILE *tab_file;
+
+        // try both /etc/mtab and /proc/mounts 
+        const gchar *mfile[]={"/proc/mounts", "/etc/mtab", NULL};
+        const gchar **pfile;
+        for (pfile=mfile; pfile && *pfile; pfile++){
+            TRACE("From /proc/mounts and /etc/mtab: %s\n", *pfile);
+            if((tab_file = fopen (*pfile, "r")) == NULL) {
+                DBG("%s: %s\n", strerror(ENOENT), *pfile);
+                continue;
+            }
+            fclose(tab_file);
+            tab_file = setmntent (*pfile, "r");
+
+            if(!tab_file) {
+                perror ("setmntent:");
+                g_free(mnt_device);
+                return NULL;
+            }
+            struct mntent mntbuf;
+            gchar buf[2048]; 
+            while ((m = getmntent_r (tab_file, &mntbuf, buf, 2048)) != NULL) {        
+                TRACE(".isMounted():%s:  %s  or  %s\n", mnt_device, m->mnt_dir, m->mnt_fsname);
+                if(strcmp (m->mnt_fsname, mnt_device) == 0) {
+                    auto retval = g_strdup(m->mnt_dir);
+                    endmntent (tab_file);
+                    g_free(mnt_device);
+                    return retval;
+                }
+            }
+            endmntent (tab_file);
+        }
+        g_free(mnt_device);
+        return NULL;
     }
 
 };

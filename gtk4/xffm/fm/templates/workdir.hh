@@ -9,7 +9,15 @@ namespace xf {
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
        
        // cancel monitor if any 
+        auto oldObject = (GridView<DirectoryClass> *)Child::getGridviewObject();
+        if (oldObject){
+          auto fstabMonitor = oldObject->fstabMonitor();
+          if (fstabMonitor){
+            fstabMonitor->stopMonitor();
+          } 
+        }  
         Child::incrementSerial();
+
         auto child = Child::getChild();
         auto monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(child), "monitor"));
 //        g_cancellable_cancel(cancellable);
@@ -48,12 +56,8 @@ namespace xf {
 
           auto view = viewObject->view();
           Child::setGridview(view); // This is the GtkGridView.
-          auto oldObject = Child::getGridviewObject();
           TRACE("oldObject: %p\n", oldObject);
-          if (oldObject) {
-            auto object = (GridView<DirectoryClass> *) oldObject;
-            delete object;
-          }
+          if (oldObject) delete oldObject;
           Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
         } else {
           auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
@@ -108,7 +112,7 @@ namespace xf {
       if (size > 0) {
         THREADPOOL->clear();
         /*
-        char buffer[4096];
+char buffer[4096];
 
         snprintf(buffer, 4096, " %s\n%s: %d->%d (%s).\n",
               _("There are unfinished jobs: please wait until they are finished."),
@@ -247,6 +251,28 @@ namespace xf {
       auto path = g_file_get_path(file);
       TRACE("gestureClick; path=%p\n", path);
       TRACE("click on %s\n", path);
+      // Partition?
+      DBG("*** FstabUtil::isInPartitions(%s) = %d\n", path, FstabUtil::isInPartitions(path));
+      DBG("*** FstabUtil::isMounted(%s) = %d\n", path, FstabUtil::isMounted(path));
+
+      if (FstabUtil::isInPartitions(path)){
+        DBG("foo 1\n");
+        if (!FstabUtil::isMounted(path)){
+        DBG("foo 12\n");
+          auto message = g_strdup_printf(_("The volume '%s' is not mounted."), path);
+          Print::printWarning(Child::getOutput(), g_strdup_printf(" %s\n", message));
+          g_free(message);
+          return TRUE;
+        }
+        auto mountPoint = FstabUtil::tabMountPoint(path);
+        DBG("foo 123 mountPoint = \n", mountPoint);
+        if (mountPoint){
+        DBG("foo 124\n");
+          setWorkdir(mountPoint);
+          g_free(mountPoint);
+        }
+        return TRUE;
+      }
       auto type = g_file_info_get_file_type(info);
       if ((type == G_FILE_TYPE_DIRECTORY )||(LocalDir::symlinkToDir(info, type))) {
         TRACE("Go to action...\n");

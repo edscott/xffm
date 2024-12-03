@@ -66,7 +66,7 @@ class FstabDir {
         gchar line[1024];
         memset (line, 0, 1024);
         while(fgets (line, 1023, partitions) && !feof (partitions)) {
-            gchar *path = getPartitionPath(line);
+            char *path = FstabUtil::getPartitionPath(line);
             if (!path) continue; // not a partition path line...
             if (!g_path_is_absolute(path)){
                 ERROR("fstab/view.hh::partition path should be absolute: %s\n", path);
@@ -220,29 +220,6 @@ class FstabDir {
             (void)endmntent (fstab_fd);
         }
         return list;
-    }
-
-    static gchar *
-    getPartitionPath(const gchar *line){
-        if(strlen (line) < 5) return NULL;
-        if(strchr (line, '#')) return NULL;
-        TRACE ("partitions: %s\n", line);
-        if (!strrchr (line, ' ')) return NULL;
-        gchar *p = g_strdup(strrchr (line, ' '));
-        g_strstrip (p);
-        TRACE ("partitions add input: %s\n", p);
-        if(!strlen (p)) {
-        g_free(p);
-            return NULL;
-        }
-        gchar *path = NULL;
-        if (strncmp(p, "sd", 2) == 0 || strncmp(p, "hd", 2)==0 || strncmp(p, "nvme", 2)==0){
-            //if (p[3] < '0' || p[3] >'9') return NULL;
-            path = g_strdup_printf ("/dev/%s", p);
-        }
-        g_free(p);
-        TRACE ("partitions add output: %s\n", path);
-        return path;
     }
 
     static void

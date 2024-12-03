@@ -25,9 +25,10 @@ template <class DirectoryClass>
       FstabMonitor<DirectoryClass> *fstabMonitor_ = NULL;
       GFileMonitor *monitor_ = NULL;
   public:
+      FstabMonitor<DirectoryClass> *fstabMonitor(void){return fstabMonitor_;}
+
       GFileMonitor *monitor(void){return monitor_;}
       void monitor(GFileMonitor *monitor){monitor_ = monitor;}
-      int longPressSerial = -1;
       double X(void){return X_;}
       double Y(void){return Y_;}
       double x(void){return x_;}
