@@ -428,6 +428,7 @@ static void *readAction(void *arg){
   }
 public:
   static void resetGridviewCSS(GridView<DirectoryClass> *gridview_p){
+    auto lock = Child::tryLockGridView();
     auto listModel = gridview_p->listModel();
     auto n = g_list_model_get_n_items(listModel);
     for (guint i=0; i<n; i++){
@@ -435,6 +436,7 @@ public:
       auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
       gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
     }
+    if (lock) Child::unlockGridView();
   }
 private:
   static void gridHighlight(double x, double y, GridView<DirectoryClass> *gridview_p){
@@ -443,10 +445,12 @@ private:
     char *path = NULL;
     bool xOk = false;
     bool yOk = false;
+    TRACE("gridHighlight: x=%lf, y=%lf\n", x, y);
     for (guint i=0; i<n; i++){
       auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
       auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
       graphene_rect_t bounds;
+//      if (gtk_widget_compute_bounds (imageBox, MainWidget, &bounds)) {
       if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
         xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
         yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
@@ -492,6 +496,7 @@ private:
 
   }
   static char *getGridDropTarget(double x, double y, GridView<DirectoryClass> *gridview_p){
+    auto lock = Child::tryLockGridView();
       auto listModel = gridview_p->listModel();
       auto n = g_list_model_get_n_items(listModel);
       char *path = NULL;
@@ -508,8 +513,11 @@ private:
             path = Basic::getPath(info);
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){
               TRACE("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, path);
+          
+              if (lock) Child::unlockGridView();
               return path;
             } else {
+              if (lock) Child::unlockGridView();
               return NULL;
             }
             break;
@@ -523,11 +531,15 @@ private:
         TRACE("workdir is \"%s\"\n", workdir);
         if (g_file_test(workdir, G_FILE_TEST_IS_DIR)){
           TRACE("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, workdir);
+          
+          if (lock) Child::unlockGridView();
           return g_strdup(workdir);
         } else if (workdir && strcmp(workdir, _("Bookmarks")) == 0){
           DBG("*** Drop into bookmarks: add a bookmark with this drop (FIXME).\n");
         }
       }
+    
+      if (lock) Child::unlockGridView();
       return NULL;
 
   }
@@ -535,9 +547,9 @@ private:
   static char *getDropTarget(double x, double y, void *data){
       auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
       GtkBox *pathbar = Child::getPathbar();
-      TRACE("original x,y = %lf,%lf\n", x, y);
+      DBG("original x,y = %lf,%lf\n", x, y);
       if (getGridCoordinates(&x, &y, gridview_p)) {
-        TRACE("Grid new x,y = %lf,%lf\n", x, y);
+        DBG("getGridCoordinates x,y = %lf,%lf\n", x, y);
         return getGridDropTarget(x, y, gridview_p);
       }
       resetGridviewCSS(gridview_p);
@@ -605,7 +617,7 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
       }*/
   targetHighlight(x, y, data) ;
    
-  TRACE("dropMotion %lf,%lf\n", x, y);
+  DBG("dropMotion %lf,%lf\n", x, y);
   
  
   /* // does not work, no modifierType

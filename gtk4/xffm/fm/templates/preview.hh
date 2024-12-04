@@ -869,7 +869,7 @@ private:
       gchar *arg[13];
       gint i = 0;
 
-      DBG("Running ghostscript on %s\n", path);
+      TRACE("Running ghostscript on %s\n", path);
       // The preview will be generated at size: PREVIEW_IMAGE_SIZE
       auto previewPath = get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
       //auto thumbnail = get_thumbnail_path (path, pixels);
@@ -962,7 +962,7 @@ private:
           DBG("Error:: Process %d failed (%s)\n", pid, strerror(errno));
         }
         if (WIFEXITED(status)){
-          DBG("*** wait status = %d\n", status & 0xff);
+          TRACE("*** wait status = %d\n", status & 0xff);
         }
         g_free(arg);
         TRACE("wait for %d complete\n", pid);

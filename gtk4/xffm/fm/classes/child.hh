@@ -8,6 +8,9 @@ static pthread_mutex_t gridViewMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
   class Child {
     public:
+    static bool tryLockGridView(void){
+      return pthread_mutex_trylock(&gridViewMutex);
+    }
 
     static void lockGridView(void){
       pthread_mutex_lock(&gridViewMutex);

@@ -179,6 +179,13 @@ private:
         gtk_widget_add_controller (MainWidget, GTK_EVENT_CONTROLLER (dropController));
 
         g_object_set_data(G_OBJECT(mainWindow_), "windowObject", (void *)this);
+
+        // GTK4 bug workaround. drag motion will be limited to maximum
+        // size of window + 45 in x and y.
+        // So we give it a big size, so drag motion does not fail
+        // and then put it to the correct user saved size.
+        gtk_window_set_default_size(mainWindow_, 5000, 5000);
+        //gtk_widget_set_size_request(MainWidget, windowW_, windowH_);
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         return;
     }
