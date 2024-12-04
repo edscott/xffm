@@ -428,7 +428,7 @@ static void *readAction(void *arg){
   }
 public:
   static void resetGridviewCSS(GridView<DirectoryClass> *gridview_p){
-    auto lock = Child::tryLockGridView();
+    //auto lock = Child::tryLockGridView();
     auto listModel = gridview_p->listModel();
     auto n = g_list_model_get_n_items(listModel);
     for (guint i=0; i<n; i++){
@@ -436,10 +436,11 @@ public:
       auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
       gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
     }
-    if (lock) Child::unlockGridView();
+    //if (lock) Child::unlockGridView();
   }
 private:
   static void gridHighlight(double x, double y, GridView<DirectoryClass> *gridview_p){
+    //auto lock = Child::tryLockGridView();
     auto listModel = gridview_p->listModel();
     auto n = g_list_model_get_n_items(listModel);
     char *path = NULL;
@@ -465,6 +466,7 @@ private:
         g_free(path);
       }
     }
+    //if (lock) Child::unlockGridView();
 
   }
 
@@ -496,7 +498,7 @@ private:
 
   }
   static char *getGridDropTarget(double x, double y, GridView<DirectoryClass> *gridview_p){
-    auto lock = Child::tryLockGridView();
+    //auto lock = Child::tryLockGridView();
       auto listModel = gridview_p->listModel();
       auto n = g_list_model_get_n_items(listModel);
       char *path = NULL;
@@ -514,10 +516,10 @@ private:
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){
               TRACE("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, path);
           
-              if (lock) Child::unlockGridView();
+              //if (lock) Child::unlockGridView();
               return path;
             } else {
-              if (lock) Child::unlockGridView();
+              //if (lock) Child::unlockGridView();
               return NULL;
             }
             break;
@@ -532,14 +534,14 @@ private:
         if (g_file_test(workdir, G_FILE_TEST_IS_DIR)){
           TRACE("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, workdir);
           
-          if (lock) Child::unlockGridView();
+          //if (lock) Child::unlockGridView();
           return g_strdup(workdir);
         } else if (workdir && strcmp(workdir, _("Bookmarks")) == 0){
           DBG("*** Drop into bookmarks: add a bookmark with this drop (FIXME).\n");
         }
       }
     
-      if (lock) Child::unlockGridView();
+      //if (lock) Child::unlockGridView();
       return NULL;
 
   }

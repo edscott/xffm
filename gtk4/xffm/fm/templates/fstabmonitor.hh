@@ -265,7 +265,7 @@ private:
         }
         TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
-        Child::lockGridView();
+        Child::lockGridView("mountThreadF1");
         if (!Child::validGridView(gridView_p)) {
             Child::unlockGridView();
             g_free(sum);
@@ -286,7 +286,7 @@ private:
           bool dirChange = checkSumMnt(&sum);
 
           if (dirChange){ // Modify directory mount status.
-            Child::lockGridView();
+            Child::lockGridView("mountThreadF1-2");
             if (!Child::validGridView(gridView_p)) {
               Child::unlockGridView();
               TRACE("***abort3 mountThreadF1 for gridview_p %p\n", gridView_p);
@@ -339,7 +339,7 @@ private:
         }
         TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
-        Child::lockGridView();
+        Child::lockGridView("mountThreadF2");
         if (!Child::validGridView(gridView_p)) {
             Child::unlockGridView();
             g_free(sum);
@@ -362,7 +362,7 @@ private:
             bool partChange = checkSumPart(&sumPartitions);
             if (!partChange && !dirChange) continue;
             TRACE(" Reload fstab gridview\n");
-            Child::lockGridView();
+            Child::lockGridView("mountThreadF2-2");
             if (!Child::validGridView(gridView_p)) {
               Child::unlockGridView();
               TRACE("***abort3 mountThreadF2 for gridview_p %p\n", gridView_p);

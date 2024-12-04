@@ -2,14 +2,55 @@
 #define CHILD_HH
 static GHashTable *gridViewHash = NULL;
 static GHashTable *childHash = NULL;
+static GHashTable *monitorHash = NULL;
 static pthread_mutex_t serialMutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_mutex_t childMutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_mutex_t gridViewMutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
   class Child {
     public:
+      
+    static void 
+    addMonitor(void *monitor){
+      pthread_mutex_lock(&monitorMutex);
+      if (!monitorHash) monitorHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      g_hash_table_insert(monitorHash, monitor, GINT_TO_POINTER(1));
+      pthread_mutex_unlock(&monitorMutex);
+    }
+    static void 
+    removeMonitor(void *monitor){
+      pthread_mutex_lock(&monitorMutex);
+      if (!monitorHash) monitorHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      if (g_hash_table_lookup(monitorHash, monitor)){
+        g_hash_table_remove(monitorHash, monitor);
+      }
+      pthread_mutex_unlock(&monitorMutex);
+    }   
+    static bool
+    validMonitor(void *monitor){
+      if (!monitor) return false;
+      int retval = 0;
+      if (!monitorHash) return false;
+        
+      pthread_mutex_lock(&monitorMutex);
+      retval = GPOINTER_TO_INT(g_hash_table_lookup(monitorHash,monitor));
+      pthread_mutex_unlock(&monitorMutex);
+      return (bool) retval;
+    }
+
     static bool tryLockGridView(void){
       return pthread_mutex_trylock(&gridViewMutex);
+    }
+
+    static void lockGridView(const char *m){
+      DBG("lockGridView: %s\n", m);
+      lockGridView();
+    }
+
+    static void unlockGridView(const char *m){
+      DBG("unlockGridView: %s\n", m);
+      unlockGridView();
     }
 
     static void lockGridView(void){
@@ -20,25 +61,32 @@ namespace xf {
     }
     static void 
     addGridView(void *gridView_p){
-      lockGridView();
-      if (!gridViewHash) gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      lockGridView("addGridView");
+      if (!gridViewHash) {
+        gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      }
       g_hash_table_insert(gridViewHash, gridView_p, GINT_TO_POINTER(1));
-      unlockGridView();
+      unlockGridView("addGridView");
     }
     static void 
     removeGridView(void *gridView_p){
-      lockGridView();
+      if (!gridView_p) return;
+      lockGridView("removeGridView");
       if (!gridViewHash) gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
       if (g_hash_table_lookup(gridViewHash, gridView_p)){
         g_hash_table_remove(gridViewHash, gridView_p);
       }
-      unlockGridView();
-    }   
+      unlockGridView("removeGridView");
+    } 
+
     static bool
     validGridView(void *gridView_p){
       if (!gridView_p) return false;
       int retval = 0;
-      if (gridViewHash) retval = GPOINTER_TO_INT(g_hash_table_lookup(gridViewHash,gridView_p));
+      if (!gridViewHash) return false;
+      // lock must be obtained by calling thread! lockGridView("validGridView");
+      retval = GPOINTER_TO_INT(g_hash_table_lookup(gridViewHash,gridView_p));
+      // lock must be obtained by calling thread! unlockGridView("validGridView");
       return (bool) retval;
     }
 

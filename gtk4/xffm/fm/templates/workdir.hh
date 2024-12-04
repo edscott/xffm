@@ -19,10 +19,12 @@ namespace xf {
         Child::incrementSerial();
 
         auto child = Child::getChild();
-        auto monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(child), "monitor"));
-//        g_cancellable_cancel(cancellable);
-//        TRACE("cancellable cancel = %p\n", cancellable);
-        if (monitor) {
+        auto m = g_object_get_data(G_OBJECT(child), "monitor");
+        GFileMonitor *monitor = NULL;
+        if (Child::validMonitor(m)) {
+          Child::removeMonitor(m);
+          monitor = G_FILE_MONITOR(m);
+          g_object_set_data(G_OBJECT(child), "monitor", NULL);
           pthread_mutex_lock(&monitorMutex);   
           g_object_set_data(G_OBJECT(monitor), "inactive", GINT_TO_POINTER(1));
           pthread_mutex_unlock(&monitorMutex);   

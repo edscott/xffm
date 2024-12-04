@@ -114,6 +114,7 @@ namespace xf {
 
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
         g_object_set_data(G_OBJECT(monitor), "file", file);
+        Child::addMonitor(monitor);
 
         TRACE("monitor=%p file=%p store=%p\n", monitor, file, store);
         if (error_){
