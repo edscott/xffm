@@ -32,7 +32,7 @@ namespace xf {
           g_object_unref(monitor);
           //*
           auto path = g_file_get_path(dirFile);
-          DBG("local monitor for %s cancelled.\n", path);
+          TRACE("local monitor for %s cancelled.\n", path);
           g_free(path);
 
           g_object_unref(dirFile);
@@ -46,9 +46,9 @@ namespace xf {
             
           monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
           if (monitor){
-            DBG("local monitor started for %s\n", path);
+            TRACE("local monitor started for %s\n", path);
           } else {
-            DBG("no local monitor for %s\n", path);
+            TRACE("no local monitor for %s\n", path);
           }
 
           //viewObject->monitor(monitor);
@@ -67,7 +67,7 @@ namespace xf {
             
           monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
           if (monitor){
-            DBG("local monitor started on %p\n", monitor);
+            TRACE("local monitor started on %p\n", monitor);
           }
 
           viewObject->monitor(monitor);
@@ -252,22 +252,18 @@ char buffer[4096];
       TRACE("gestureClick; path=%p\n", path);
       TRACE("click on %s\n", path);
       // Partition?
-      DBG("*** FstabUtil::isInPartitions(%s) = %d\n", path, FstabUtil::isInPartitions(path));
-      DBG("*** FstabUtil::isMounted(%s) = %d\n", path, FstabUtil::isMounted(path));
+      TRACE("workdir.hh:: isInPartitions(%s) = %d\n", path, FstabUtil::isInPartitions(path));
+      TRACE("workdir.hh:: isMounted(%s) = %d\n", path, FstabUtil::isMounted(path));
 
       if (FstabUtil::isInPartitions(path)){
-        DBG("foo 1\n");
         if (!FstabUtil::isMounted(path)){
-        DBG("foo 12\n");
           auto message = g_strdup_printf(_("The volume '%s' is not mounted."), path);
           Print::printWarning(Child::getOutput(), g_strdup_printf(" %s\n", message));
           g_free(message);
           return TRUE;
         }
         auto mountPoint = FstabUtil::tabMountPoint(path);
-        DBG("foo 123 mountPoint = \n", mountPoint);
         if (mountPoint){
-        DBG("foo 124\n");
           setWorkdir(mountPoint);
           g_free(mountPoint);
         }

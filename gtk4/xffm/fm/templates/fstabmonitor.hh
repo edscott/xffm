@@ -174,12 +174,6 @@ private:
     }
 
     static void sendSignal(FstabMonitor<LocalDir> *monitorObject, GFileInfo *info){
-                // serial lock
-      //pthread_mutex_lock(monitorObject->mutex());
-      //if (!monitorObject->checkSerial()) {
-        //pthread_mutex_unlock(monitorObject->mutex());
-       // return;
-      //}
       if (!monitorObject->gridView()->monitor()){ 
         DBG("no fstab monitor active.\n");
         //pthread_mutex_unlock(monitorObject->mutex());
@@ -219,7 +213,6 @@ private:
           updateInfo = info;
         }
         if (updateInfo) {
-          //sendSignal(gridView_p, updateInfo);
           return true;
         }
         return false;
@@ -255,76 +248,69 @@ private:
     // I think I need a controller thread...
     static void *
     mountThreadF1(void *data){
-      TRACE("***mountThreadF1\n");
-
-      // initial hold your horses
-        //sleep(1); // race condition check...
         void **arg = (void **)data;
+        //sleep(1); // race condition check...
         auto monitorObject = (FstabMonitor<LocalDir> *)arg[0];
         auto gridView_p = monitorObject->gridView();
 
+        TRACE("***mountThreadF1 for gridview_p %p\n", gridView_p);
         // get initial md5sum
         char *sum = md5sum("/proc/mounts");
         char *sumPartitions = md5sum("/proc/partitions");
         if (!sum || !sumPartitions) {
-            ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (sum)\n");
-            //g_free(data);
+            DBG("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
             g_free(sum);
             g_free(sumPartitions);
             return NULL;
         }
         TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
+        Child::lockGridView();
+        if (!Child::validGridView(gridView_p)) {
+            Child::unlockGridView();
+            g_free(sum);
+            g_free(sumPartitions);
+            TRACE("***abort2 mountThreadF1 for gridview_p %p\n", gridView_p);
+            return NULL;
+        }
         auto mntHash = getMntHash(gridView_p);
         auto fstabHash = getFstabHash(gridView_p);
         auto selectionModel = gridView_p->selectionModel();
         auto listModel = gridView_p->listModel();
+        Child::unlockGridView();
     
         while (arg[1]){
           usleep(250000);
           if (!arg[1])continue;
-          //if (monitorObject->serial() != Child::getSerial()){
-            //monitorObject->abort(true);
-            //continue;
-          //}
-          //sleep(1); // slow motion
-      
 
-          TRACE("mountThreadF loop for arg=%p\n", data);
           bool dirChange = checkSumMnt(&sum);
 
           if (dirChange){ // Modify directory mount status.
-              //if (monitorObject->checkSerial()){
-                auto items = g_list_model_get_n_items (listModel);
-                for (guint i=0; i<items; i++){
-                  auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
-                  auto path = Basic::getPath(info);
-                  if (!g_file_test(path, G_FILE_TEST_IS_DIR)) continue;
-                  if (update_f(gridView_p, info, path, mntHash, fstabHash)){
-                    sendSignal(monitorObject, info);
-                  }
-                  g_free(path);
-                } // for items
-              //} //monitorObject->checkSerial()
+            Child::lockGridView();
+            if (!Child::validGridView(gridView_p)) {
+              Child::unlockGridView();
+              TRACE("***abort3 mountThreadF1 for gridview_p %p\n", gridView_p);
+              break;
+            }
+            auto items = g_list_model_get_n_items (listModel);
+            for (guint i=0; i<items; i++){
+              auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
+              auto path = Basic::getPath(info);
+              if (!g_file_test(path, G_FILE_TEST_IS_DIR)) continue;
+              if (update_f(gridView_p, info, path, mntHash, fstabHash)){
+                sendSignal(monitorObject, info);
+              } 
+              g_free(path);
+            } // for items
+            Child::unlockGridView();
           } //dirChange
         }
-        /*TRACE("thread condition wait\n");
-        pthread_mutex_lock(monitorObject->mutex());{
-          pthread_cond_wait(monitorObject->condition(), monitorObject->mutex());
-        } pthread_mutex_unlock(monitorObject->mutex());
-        TRACE("thread condition received\n");*/
         g_free(sum);
         g_free(sumPartitions);
-        TRACE("*******now exiting mountThreadF()\n");
-        //g_free(arg); 
         g_hash_table_destroy(mntHash);
         g_hash_table_destroy(fstabHash);
-        //pthread_cond_signal(monitorObject->condition());
-        //pthread_mutex_lock(monitorObject->endMutex());
         arg[2] = GINT_TO_POINTER(1);
-        //pthread_mutex_unlock(monitorObject->endMutex());
-        TRACE("******* mountThreadF all done.\n");
-
+        TRACE("******* mountThreadF1 all done for gridview %p.\n", gridView_p);
         return NULL;
     }
 
@@ -336,48 +322,65 @@ private:
 
     static void *
     mountThreadF2(void *data){
-
-      TRACE("***mountThreadF2\n");
         void **arg = (void **)data;
-
+        //sleep(1); // race condition check...
         auto monitorObject = (FstabMonitor<FstabDir> *)arg[0];
         auto gridView_p = monitorObject->gridView();
+
+        TRACE("***mountThreadF2 for gridview_p %p\n", gridView_p);
         // get initial md5sum
         char *sum = md5sum("/proc/mounts");
         char *sumPartitions = md5sum("/proc/partitions");
         if (!sum || !sumPartitions) {
-            ERROR("fm/view/fstab/monitor::Exiting mountThreadF() on md5sum error (sum)\n");
+            DBG("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
             g_free(sum);
             g_free(sumPartitions);
             return NULL;
         }
         TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
+        Child::lockGridView();
+        if (!Child::validGridView(gridView_p)) {
+            Child::unlockGridView();
+            g_free(sum);
+            g_free(sumPartitions);
+            TRACE("***abort2 mountThreadF2 for gridview_p %p\n", gridView_p);
+            return NULL;
+        }
         auto mntHash = getMntHash(gridView_p);
         auto fstabHash = getFstabHash(gridView_p);
         auto selectionModel = gridView_p->selectionModel();
         auto listModel = gridView_p->listModel();
+        Child::unlockGridView();
         
         bool reload = false;
         while (arg[1]){
             usleep(250000);
             if (!arg[1])continue;
-            //sleep(1); // slow motion
-            TRACE("mountThreadF loop for arg=%p\n", data);
+            
             bool dirChange = checkSumMnt(&sum);
             bool partChange = checkSumPart(&sumPartitions);
             if (!partChange && !dirChange) continue;
             TRACE(" Reload fstab gridview\n");
+            Child::lockGridView();
+            if (!Child::validGridView(gridView_p)) {
+              Child::unlockGridView();
+              TRACE("***abort3 mountThreadF2 for gridview_p %p\n", gridView_p);
+              break;
+            }
+            Child::unlockGridView();
+
             Basic::context_function(reload_f, (void *)_("Disk Mounter"));
+            // After reload, gridView ceases to be valid.
+            // Another monitor will be reloaded with new gridview.
+            break;
         }
         g_free(sum);
         g_free(sumPartitions);
-        //TRACE("***now exiting mountThreadF(%s)\n", _path);
-        //g_free(_path); 
         g_hash_table_destroy(mntHash);
         g_hash_table_destroy(fstabHash);
         arg[2] = GINT_TO_POINTER(1);
-        TRACE("******* mountThreadF all done.\n");
+        TRACE("******* mountThreadF2 all done for gridview %p.\n", gridView_p);
         return NULL;
     }
 

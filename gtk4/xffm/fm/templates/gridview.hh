@@ -62,6 +62,8 @@ template <class DirectoryClass>
   public:
       //bool dndOn = false;
       GridView(const char *path, void *gridViewClick_f){
+        Child::addGridView((void *)this);
+
         gridViewClick_f_ = gridViewClick_f;
         path_ = g_strdup(path);
         view_ = getGridView();
@@ -89,6 +91,7 @@ template <class DirectoryClass>
       }
 
       ~GridView(void){
+        Child::removeGridView((void *)this);
       TRACE("GridView<DirectoryClass> destructor\n");
         //if (menu_){
           // menu_ goes down with gridview. No need to

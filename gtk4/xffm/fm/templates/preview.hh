@@ -84,7 +84,7 @@ class Preview {
         // serial verification:
         auto currentSerial = Child::getSerial(child);
         if (serial != currentSerial){
-          DBG("Current serial mismatch %d != %d. Dropping preview() thread.\n", 
+          TRACE("Current serial mismatch %d != %d. Dropping preview() thread.\n", 
               currentSerial, serial);
           return NULL;
         }
@@ -134,7 +134,7 @@ class Preview {
         auto activeSerial = Child::getSerial(child);
 
         if (serial != activeSerial){
-          DBG("mainContext::replace_f(): serial mismatch %d != %d (dropping paintable %p)\n", 
+          TRACE("mainContext::replace_f(): serial mismatch %d != %d (dropping paintable %p)\n", 
               serial, activeSerial, paintable);
           // No need to unref, as the object resides in hash table.
           // We are done here.
@@ -305,7 +305,7 @@ private:
         
         struct stat stPath;
         if (stat(path, &stPath)<0) {
-            DBG("thumbnailOK(): stat %s (%s)\n", path, strerror(errno));
+            TRACE("thumbnailOK(): stat %s (%s)\n", path, strerror(errno));
             errno=0;
             retval = false;
         } 
@@ -346,7 +346,7 @@ private:
         gint fd=creat(fname, S_IRUSR | S_IWUSR);
         if (fd >= 0){
             if (write(fd, ptr, sb.size) < 0){
-                DBG("could not write to %s\n", fname);
+                DBG("Error:: could not write to %s\n", fname);
             }
             close(fd);
         }
@@ -845,8 +845,7 @@ private:
       static gboolean warned = FALSE;
       if(!ghostscript) {
         if(!warned) {
-            g_warning
-            ("\n*** Please install ghostscript for ps and pdf previews\n*** Make sure ghostscript fonts are installed too!\n");
+          Print::printWarning(Child::getOutput(), g_strdup("*** Please install ghostscript for ps and pdf previews (Make sure ghostscript fonts are installed too!)\n"));
             fflush (NULL);
             warned = TRUE;
         }
@@ -870,6 +869,7 @@ private:
       gchar *arg[13];
       gint i = 0;
 
+      DBG("Running ghostscript on %s\n", path);
       // The preview will be generated at size: PREVIEW_IMAGE_SIZE
       auto previewPath = get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
       //auto thumbnail = get_thumbnail_path (path, pixels);
@@ -956,10 +956,15 @@ private:
         auto waitMutex = (pthread_mutex_t *)arg[0];
         auto waitSignal = (pthread_cond_t *)arg[1];
         pid_t pid = GPOINTER_TO_INT(arg[2]);
-        g_free(arg);
         gint status;
         TRACE("waiting for %d\n", pid);
-        waitpid (pid, &status, WUNTRACED);
+        if (waitpid (pid, &status, WUNTRACED) < 0){
+          DBG("Error:: Process %d failed (%s)\n", pid, strerror(errno));
+        }
+        if (WIFEXITED(status)){
+          DBG("*** wait status = %d\n", status & 0xff);
+        }
+        g_free(arg);
         TRACE("wait for %d complete\n", pid);
         //pthread_mutex_unlock(waitMutex); 
         pthread_cond_signal(waitSignal); 

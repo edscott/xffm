@@ -1,11 +1,44 @@
 #ifndef CHILD_HH
 #define CHILD_HH
+static GHashTable *gridViewHash = NULL;
 static GHashTable *childHash = NULL;
 static pthread_mutex_t serialMutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_mutex_t childMutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t gridViewMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
   class Child {
     public:
+
+    static void lockGridView(void){
+      pthread_mutex_lock(&gridViewMutex);
+    }
+    static void unlockGridView(void){
+      pthread_mutex_unlock(&gridViewMutex);
+    }
+    static void 
+    addGridView(void *gridView_p){
+      lockGridView();
+      if (!gridViewHash) gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      g_hash_table_insert(gridViewHash, gridView_p, GINT_TO_POINTER(1));
+      unlockGridView();
+    }
+    static void 
+    removeGridView(void *gridView_p){
+      lockGridView();
+      if (!gridViewHash) gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
+      if (g_hash_table_lookup(gridViewHash, gridView_p)){
+        g_hash_table_remove(gridViewHash, gridView_p);
+      }
+      unlockGridView();
+    }   
+    static bool
+    validGridView(void *gridView_p){
+      if (!gridView_p) return false;
+      int retval = 0;
+      if (gridViewHash) retval = GPOINTER_TO_INT(g_hash_table_lookup(gridViewHash,gridView_p));
+      return (bool) retval;
+    }
+
     static void 
     add(GtkWidget *child){
       pthread_mutex_lock(&childMutex);
@@ -24,8 +57,10 @@ namespace xf {
     }
     static bool
     valid(GtkWidget *child){
+      if (!child) return false;
       pthread_mutex_lock(&childMutex);
-      auto retval = GPOINTER_TO_INT(g_hash_table_lookup(childHash,child));
+      int retval = 0;
+      if (childHash) retval = GPOINTER_TO_INT(g_hash_table_lookup(childHash,child));
       pthread_mutex_unlock(&childMutex);
       return (bool) retval;
     }

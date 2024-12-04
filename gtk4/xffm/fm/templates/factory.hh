@@ -484,14 +484,14 @@ template <class DirectoryClass>
       guint positionF;
       auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
       auto item = G_FILE_INFO(gtk_list_item_get_item(listItem));
-      DBG("selectWidget: self(w) = %p, item=%p\n", w, item);
+      TRACE("selectWidget: self(w) = %p, item=%p\n", w, item);
       if (item) {
         auto path = Basic::getPath(item);
         auto dirPath = g_path_get_dirname(path);
         int flags = Settings::getInteger("flags", dirPath); 
         if (flags < 0) flags = 0;
        
-        DBG("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
+        TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);
         auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
@@ -499,14 +499,14 @@ template <class DirectoryClass>
           g_free(path);
           return false;
         } 
-        DBG("Found %s at %d\n", path, positionF);
+        TRACE("Found %s at %d\n", path, positionF);
         g_free(path);
         auto selectionModel = gridView_p->selectionModel();
         gtk_selection_model_select_item(selectionModel, positionF, unselectOthers);
         gtk_widget_grab_focus(GTK_WIDGET(gridView_p->view()));
         return false;
       }
-      DBG("*** selectWidget: item is null\n");
+      TRACE("*** selectWidget: item is null\n");
       return false;
    }
 
@@ -569,7 +569,7 @@ template <class DirectoryClass>
       auto gridView_p = (GridView<DirectoryClass> *)data;
       auto currentSerial = Child::getSerial();
       if (longPressSerial != currentSerial){ // Invalid read of size 4
-        DBG("longPress_f(): Current serial mismatch %d != %d. Dropping longPress_f.\n", 
+        TRACE("longPress_f(): Current serial mismatch %d != %d. Dropping longPress_f.\n", 
             currentSerial, longPressSerial);
         return true;
       }
@@ -606,7 +606,7 @@ template <class DirectoryClass>
       //if (doSingleSelection(self, data)) return true;
       auto button = gtk_gesture_single_get_button (GTK_GESTURE_SINGLE(self));
       if (skipRename(self, data)) return true;
-      DBG("label_f button %d n_press=%d\n", button, n_press);
+      TRACE("label_f button %d n_press=%d\n", button, n_press);
 
       return true;
    }  */
@@ -661,7 +661,6 @@ template <class DirectoryClass>
         return false;
       }*/
       if (modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) {
-        //DBG("return1\n");
         return false;
       }
   
@@ -674,7 +673,6 @@ template <class DirectoryClass>
       if (modType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK)) || button == 3) {
       //if (modType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK))) {
         selectWidget(w, gridView_p, false);
-        //DBG("return12\n");
       } else {
         selectWidget(w, gridView_p, true);
       }
