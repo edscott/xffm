@@ -11,38 +11,80 @@ namespace xf {
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
         g_object_set_data(G_OBJECT(store), "xffm::root", GINT_TO_POINTER(1));
         // fstab icon
-        GFile *file = g_file_new_for_path(g_get_home_dir());
-        auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-        g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
-        g_file_info_set_icon(info, g_themed_icon_new("drive-harddisk"));
-        g_file_info_set_name(info, _("Disk Mounter"));
-        g_list_store_insert(store, count++, G_OBJECT(info));
-        g_file_info_set_attribute_object (info, "xffm::fstab", G_OBJECT(file));
+        {
+          GFile *file = g_file_new_for_path(g_get_home_dir());
+          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
+          g_file_info_set_icon(info, g_themed_icon_new("drive-harddisk"));
+          g_file_info_set_name(info, _("Disk Mounter"));
+          g_list_store_insert(store, count++, G_OBJECT(info));
+          g_file_info_set_attribute_object (info, "xffm::fstab", G_OBJECT(file));
+        }
+
+        // ecryptfs icon
+        {
+          auto size = Settings::getInteger("xfterm", "iconsize");
+          if (size < 0) size = 48;
+          double scaleFactor = (size == 24)? 0.75 : 1.0;
+          
+          GFile *file = g_file_new_for_path(g_get_home_dir());
+          auto text = g_strdup_printf("%s ecryptfs", _("New"));
+          auto iconPath = Texture<bool>::findIconPath("folder");
+          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          auto paintable = Texture<bool>::addEmblem(iconPath, "emblem-start-here", scaleFactor*size, scaleFactor*size);
+          g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));      
+          
+          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
+          g_file_info_set_name(info, text);
+          g_list_store_insert(store, count++, G_OBJECT(info));
+          g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
+        }
+        // trash icon
+        {
+          auto trashDir = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
+          auto trashIcon = (g_file_test(trashDir, G_FILE_TEST_IS_DIR))? 
+              "user-trash-full" : "user-trash";
+          GFile *file = (g_file_test(trashDir, G_FILE_TEST_IS_DIR))? 
+              g_file_new_for_path(trashDir) : g_file_new_for_path(g_get_home_dir());
+          
+          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
+          g_file_info_set_icon(info, g_themed_icon_new(trashIcon));
+          g_file_info_set_name(info, _("Trash bin"));
+          g_list_store_insert(store, count++, G_OBJECT(info));
+          g_file_info_set_attribute_object (info, "xffm::trash", G_OBJECT(file));
+        }
+        
         
         // bookmarks
-        auto list = Bookmarks::bookmarksList();
-        for (auto l=list; l && l->data; l=l->next){
-          auto p = (bookmarkItem_t *)l->data;
-          if (!p->path) continue;
-          TRACE("adding bookmark %p -> %s\n", p, p->path);
-          if (!g_path_is_absolute(p->path)) continue;
-          if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
-              TRACE("Bookmark %s does not exist\n", p->path);
-              continue;
+        {
+          auto flags = Settings::getInteger("flags", _("Bookmarks"));
+          if (flags < 0) flags = 0;
+
+          auto list = Bookmarks::bookmarksList();
+          for (auto l=list; l && l->data; l=l->next){
+            auto p = (bookmarkItem_t *)l->data;
+            if (!p->path) continue;
+            TRACE("adding bookmark %p -> %s\n", p, p->path);
+            if (!g_path_is_absolute(p->path)) continue;
+            if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
+                TRACE("Bookmark %s does not exist\n", p->path);
+                continue;
+            }
+            GFile *file = g_file_new_for_path(p->path);
+            auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+            auto basename = g_path_get_basename(p->path);
+            auto utf_name = Basic::utf_string(basename);
+            g_file_info_set_name(info, utf_name);
+            g_free(basename);
+            g_free(utf_name);
+            g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
+            g_list_store_insert_sorted(store, G_OBJECT(info), compareFunction, GINT_TO_POINTER(flags));
+            //g_list_store_insert(store, 0, G_OBJECT(info));
+            //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
+            g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
+            g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
           }
-          GFile *file = g_file_new_for_path(p->path);
-          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-          auto basename = g_path_get_basename(p->path);
-          auto utf_name = Basic::utf_string(basename);
-          g_file_info_set_name(info, utf_name);
-          g_free(basename);
-          g_free(utf_name);
-          g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
-          g_list_store_insert_sorted(store, G_OBJECT(info), compareFunction, NULL);
-          //g_list_store_insert(store, 0, G_OBJECT(info));
-          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
-          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
-          g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
         }
         return getSelectionModel(G_LIST_MODEL(store), false, 0);
       }
@@ -67,6 +109,7 @@ namespace xf {
         GError *error_ = NULL;
         g_object_set_data(G_OBJECT(store), "xffm::local", GINT_TO_POINTER(1));
 
+        // up icon
         auto up = g_path_get_dirname(path);
         auto upFile = g_file_new_for_path(up);
         auto info = g_file_query_info(upFile, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
@@ -75,6 +118,7 @@ namespace xf {
         if (strcmp(path, up)==0) {
           g_file_info_set_attribute_object(info, "xffm::root", G_OBJECT(upFile));
         }
+        g_file_info_set_attribute_object(info, "xffm::up", G_OBJECT(upFile));
         g_free(up);
         g_file_info_set_name(info, "..");
         g_file_info_set_icon(info, g_themed_icon_new(GO_UP));
@@ -98,7 +142,7 @@ namespace xf {
               NULL, // GCancellable* cancellable,
               &error_);
           if (error_) {
-            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
             return NULL;
           }
           if (!outInfo || !outChild) break;
@@ -554,6 +598,33 @@ namespace xf {
 
         GFileInfo *infoA = G_FILE_INFO(a);
         GFileInfo *infoB = G_FILE_INFO(b);
+
+        if (g_file_info_get_attribute_object (infoA, "xffm::up")){
+           return -1;          
+        }
+        if (g_file_info_get_attribute_object (infoB, "xffm::up")){
+           return (1);           
+        }
+        if (g_file_info_get_attribute_object (infoA, "xffm::fstab")){
+          return -1;          
+        }
+        if (g_file_info_get_attribute_object (infoB, "xffm::fstab")){
+          return 1;          
+        }
+        if (g_file_info_get_attribute_object (infoA, "xffm::ecryptfs")){
+          return -1;          
+        }
+        if (g_file_info_get_attribute_object (infoB, "xffm::ecryptfs")){
+          return 1;          
+        }
+        if (g_file_info_get_attribute_object (infoA, "xffm::trash")){
+          return -1;          
+        }
+        if (g_file_info_get_attribute_object (infoB, "xffm::trash")){
+          return 1;          
+        }
+       
+
         auto typeA = g_file_info_get_file_type(infoA);
         auto typeB = g_file_info_get_file_type(infoB);
         auto nameA = g_file_info_get_name(infoA);

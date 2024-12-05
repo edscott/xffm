@@ -251,14 +251,17 @@ template <class Type>  class Texture {
         return  texture;
     }
 #endif
+
     static GdkPaintable *addEmblem(const char *iconPath, const char *emblem, double width, double height){
         auto *emblemPath = Texture<bool>::findIconPath(emblem);
         if (!iconPath || !emblemPath) return NULL;
         auto surface = getCairoSurfaceFromSvg (iconPath, width, height);
-        auto emblemSurface = getCairoSurfaceFromSvg (emblemPath, width/4.0, height/4.0);
+        double size = 3.0;
+        //double size = 4.0;
+        auto emblemSurface = getCairoSurfaceFromSvg (emblemPath, width/size, height/size);
         cairo_t *cr = cairo_create (surface);
         cairo_set_source_surface(cr, emblemSurface, 0.0, 0.0);
-        cairo_rectangle (cr, 0.0, 0.0, width/4.0, height/4.0);
+        cairo_rectangle (cr, 0.0, 0.0, width/size, height/size);
         cairo_fill (cr);
 
         auto texture = gdk_texture_new_for_surface(surface);

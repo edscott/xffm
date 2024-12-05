@@ -249,6 +249,21 @@ char buffer[4096];
         setWorkdir(_("Disk Mounter"));
         return TRUE;
       }
+      auto trash = g_file_info_get_attribute_object (info, "xffm::trash");
+      if (trash){
+        auto trashDir = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
+        if (!g_file_test(trashDir, G_FILE_TEST_EXISTS)){
+          auto message = g_strdup_printf(" %s (%s)\n", _("Trash is empty"), trashDir); 
+          g_free(trashDir);
+          Print::printWarning(Child::getOutput(), message);
+          return TRUE;
+        }
+        setWorkdir(trashDir);
+        g_free(trashDir);
+        return TRUE;
+      }
+
+
       TRACE("gestureClick; file=%p\n", file);
       auto path = g_file_get_path(file);
       TRACE("gestureClick; path=%p\n", path);

@@ -44,12 +44,12 @@ namespace xf {
     }
 
     static void lockGridView(const char *m){
-      DBG("lockGridView: %s\n", m);
+      TRACE("lockGridView: %s\n", m);
       lockGridView();
     }
 
     static void unlockGridView(const char *m){
-      DBG("unlockGridView: %s\n", m);
+      TRACE("unlockGridView: %s\n", m);
       unlockGridView();
     }
 

@@ -42,14 +42,18 @@ class FstabDir {
       GError *error_ = NULL;
       auto store = g_list_store_new(G_TYPE_FILE_INFO);
       g_object_set_data(G_OBJECT(store), "xffm::fstab", GINT_TO_POINTER(1));
-     
+
+      auto flags = Settings::getInteger("flags", _("Disk Mounter"));
+      if (flags < 0) flags = 0;
+    
       auto upFile = g_file_new_for_path(g_get_home_dir());
       auto info = g_file_query_info(upFile, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
       g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(upFile));
       g_file_info_set_attribute_object(info, "xffm::root", G_OBJECT(upFile));
       g_file_info_set_name(info, "..");
       g_file_info_set_icon(info, g_themed_icon_new(GO_UP));
-      g_list_store_insert(store, 0, G_OBJECT(info));
+      //g_list_store_insert(store, 0, G_OBJECT(info));
+      g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
 
       //  RootView<Type>::addXffmItem(treeModel);
       linuxAddPartitionItems(store);
@@ -114,8 +118,9 @@ class FstabDir {
         TRACE("info name=%s\n", g_file_info_get_name(info));
 
         FstabUtil::setMountableIcon(info, path);
-
-        g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, NULL);
+        auto flags = Settings::getInteger("flags", _("Disk Mounter"));
+        if (flags < 0) flags = 0;
+        g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
 
     } 
 
@@ -258,8 +263,10 @@ class FstabDir {
 
             
         FstabUtil::setMountableIcon(info, path);        
+        auto flags = Settings::getInteger("flags", _("Disk Mounter"));
+        if (flags < 0) flags = 0;
 
-        g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, NULL);
+        g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
 
         // gchar *mntDir = getMntDir(path);// not used here, maybe used for properties (FIXME)
 

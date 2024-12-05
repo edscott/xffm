@@ -83,6 +83,20 @@ namespace xf {
     }
 
 public:
+
+    static void
+    emptyTrash(GtkButton *self, void *data){
+      static char *trashDir = NULL;
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      gtk_popover_popdown(menu);
+      if (!trashDir) trashDir = g_strdup_printf("%s/.local/share/Trash/files",
+          g_get_home_dir());
+      char *arg[]={(char *)"rm", (char *)"-rfv", trashDir, NULL};
+      auto output = Child::getOutput();
+      Run<bool>::thread_run(output, (const char **)arg, true);
+      // FIXME: if in xffm::root,  trash bin icon reloaded
+    }
+
     static void
     paste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));

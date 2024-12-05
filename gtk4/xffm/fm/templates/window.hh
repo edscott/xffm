@@ -435,7 +435,36 @@ private:
         auto item = g_object_get_data(G_OBJECT(popover), *keys);
         gtk_widget_set_visible(GTK_WIDGET(item), false);
       }*/
+      const char *show[]={ " ", _("Select All"),_("Match regular expression"),
+        _("Show"), _("Hidden files"), _("Backup files"), _("Sort mode"), _("Descending"),
+        _("Name"), _("Date"), _("Size"), _("File type"), _("Apply modifications"), 
+        NULL};
 
+      const char *onlyLocal[] = {_("Add bookmark"), _("Remove bookmark"), _("Paste"), 
+        _("Select All"),_("Match regular expression"),
+        _("Show"), _("Hidden files"), _("Backup files"), 
+        _("Date"), _("Size"),_("File type"),
+        NULL};
+
+      auto trash = g_object_get_data(G_OBJECT(popover), _("Empty trash bin"));
+      auto trashDir = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
+      gtk_widget_set_visible(GTK_WIDGET(trash), g_file_test(trashDir, G_FILE_TEST_IS_DIR));
+      g_free(trashDir);
+      
+ /*     if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
+        for (auto p = onlyLocal; p && *p; p++){
+          auto widget = g_object_get_data(G_OBJECT(popover), *p);
+          if (widget) gtk_widget_set_visible(GTK_WIDGET(widget), false);      
+        }
+        for (auto p = fstabHide; p && *p; p++){
+          auto widget = g_object_get_data(G_OBJECT(popover), *p);
+          if (widget) gtk_widget_set_visible(GTK_WIDGET(widget), false);      
+        }
+      }*/
+
+      
+
+      
       auto addB = g_object_get_data(G_OBJECT(popover), _("Add bookmark"));
       auto removeB = g_object_get_data(G_OBJECT(popover), _("Remove bookmark"));
       auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
@@ -449,10 +478,6 @@ private:
       }
       gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
       gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
-      const char *show[]={ _("Select All"),_("Match regular expression"),
-        _("Show"), _("Hidden files"), _("Backup files"), _("Sort mode"), _("Descending"),
-        _("Name"), _("Date"), _("Size"), _("File type"), _("Toggle Text Mode"), _("Apply modifications"), 
-        NULL};
       for (auto p=show; p && *p; p++){
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
         if (widget){
@@ -482,6 +507,21 @@ private:
         gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), true);
       }
 
+      auto store = gridView_p->store();
+      if (g_object_get_data(G_OBJECT(store), "xffm::root")){
+        for (auto p = onlyLocal; p && *p; p++){
+          auto widget = g_object_get_data(G_OBJECT(popover), *p);
+          if (widget) gtk_widget_set_visible(GTK_WIDGET(widget), false);      
+        }
+        return;
+      }
+      if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
+        for (auto p = onlyLocal; p && *p; p++){
+          auto widget = g_object_get_data(G_OBJECT(popover), *p);
+          if (widget) gtk_widget_set_visible(GTK_WIDGET(widget), false);      
+        }
+        return;
+      }
 
       
     }

@@ -18,6 +18,7 @@ namespace xf {
         
         _("Select All"), 
         _("Match regular expression"), 
+        _("Empty trash bin"), 
 
         " ",
         _("Show"),
@@ -46,6 +47,7 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
+        {_("Empty trash bin"),(void *) "user-trash-full"}, 
         {_("Paste"),(void *) "paste"}, 
         {_("Select All"),(void *) "add"}, 
         {_("Add bookmark"),(void *) "emblem-bookmark"}, 
@@ -67,6 +69,7 @@ namespace xf {
     }
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
+        {_("Empty trash bin"),(void *) MenuCallbacks<DirectoryClass>::emptyTrash}, 
         {_("Paste"),(void *) MenuCallbacks<DirectoryClass>::paste}, 
         {_("Toggle Text Mode"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
         {_("Add bookmark"),(void *) addB}, 
@@ -204,7 +207,16 @@ namespace xf {
       TRACE("apply %s...\n", gridview_p->path());
       Settings::setInteger("flags", gridview_p->path(), gridview_p->flags());
       //gtk_widget_unparent(GTK_WIDGET(menu));
-      Workdir<DirectoryClass>::setWorkdir(gridview_p->path());
+      auto store = gridview_p->store();
+      if (g_object_get_data(G_OBJECT(store), "xffm::root")){
+        Workdir<DirectoryClass>::setWorkdir(_("Bookmarks"));
+        //Workdir<DirectoryClass>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
+      } else if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
+        Workdir<DirectoryClass>::setWorkdir(_("Disk Mounter"));
+        //Workdir<DirectoryClass>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
+      } else {
+        Workdir<DirectoryClass>::setWorkdir(gridview_p->path());
+      }
     }
 
     
