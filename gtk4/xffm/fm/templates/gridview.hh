@@ -129,7 +129,7 @@ template <class DirectoryClass>
         auto child = Child::getChild();
         selectionModel_ = NULL;
         if (strcmp(path_, _("Bookmarks"))==0) {
-          selectionModel_ = LocalDir::rootSelectionModel();
+          selectionModel_ = rootDir::rootSelectionModel();
         } else if (strcmp(path_, _("Disk Mounter"))==0) {
           selectionModel_ = FstabDir::fstabSelectionModel();
         } else {
@@ -394,7 +394,16 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
 /*    
 */    
   static void setupMenu(GtkPopover *popover, GFileInfo *info){
+    DBG("setupMenu\n");
       auto path = Basic::getPath(info);
+      auto isEfs = g_object_get_data(G_OBJECT(info), "xffm::efs");
+      if (isEfs){
+        // hide all
+        // show mount
+      }
+
+
+
       auto isDir = g_file_test(path, G_FILE_TEST_IS_DIR);
       auto abutton = g_object_get_data(G_OBJECT(popover), _("auto"));
           TRACE("data get %p %s --> %p\n", popover, _("auto"), abutton);

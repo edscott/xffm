@@ -249,6 +249,12 @@ char buffer[4096];
         setWorkdir(_("Disk Mounter"));
         return TRUE;
       }
+      auto ecryptfs = g_file_info_get_attribute_object (info, "xffm::ecryptfs");
+      if (ecryptfs){
+        DBG("Open new ecryptfs dialog.\n");
+        EFS::newEfs();
+        return TRUE;
+      }
       auto trash = g_file_info_get_attribute_object (info, "xffm::trash");
       if (trash){
         auto trashDir = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());

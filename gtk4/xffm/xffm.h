@@ -123,6 +123,8 @@ static int longPressSerial = -1;
 // fm classes/templates
 #include "fm/classes/localdir.hh"       // fm class
 #include "fm/classes/fstab.hh"       // fm class
+#include "fm/classes/efs.hh"       // fm class
+#include "fm/classes/root.hh"       // fm class
 #include "fm/templates/dnd.hh"     // fm template
 #include "fm/templates/factory.hh"     // fm template
 #include "fm/templates/gridview.hh"     // fm template

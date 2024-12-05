@@ -7,6 +7,7 @@ namespace xf
   class DialogBasic {
   GtkBox *contentArea_;
   GtkBox *actionArea_;
+  GtkBox *vbox_;
   GtkBox *labelBox_;
   GtkBox *closeBox_;
   GtkWindow *dialog_;
@@ -50,6 +51,8 @@ namespace xf
     GtkBox *contentArea(void){ return contentArea_;}
     GtkBox *actionArea(void){ return actionArea_;}
     GtkLabel *label(void){ return label_;}
+    GtkBox *labelBox(void){ return labelBox_;}
+    GtkBox *vbox(void){ return vbox_;}
 
     pthread_cond_t *cond_p(void){return &cond_;}
     pthread_mutex_t *condMutex_p(void){return &condMutex_;}
@@ -229,11 +232,17 @@ private:
         gtk_widget_set_vexpand(GTK_WIDGET(mainBox), false);
         gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(mainBox));
 
+        vbox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        gtk_widget_set_vexpand(GTK_WIDGET(vbox_), true);
+        gtk_widget_set_hexpand(GTK_WIDGET(vbox_), true);
+        gtk_widget_set_valign (GTK_WIDGET(vbox_),GTK_ALIGN_CENTER);
+        gtk_box_append(mainBox, GTK_WIDGET(vbox_));
+
         labelBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(labelBox_), true);
         gtk_widget_set_hexpand(GTK_WIDGET(labelBox_), true);
         gtk_widget_set_valign (GTK_WIDGET(labelBox_),GTK_ALIGN_CENTER);
-        gtk_box_append(mainBox, GTK_WIDGET(labelBox_));
+        gtk_box_append(vbox_, GTK_WIDGET(labelBox_));
 
 
         contentArea_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -286,6 +295,10 @@ private:
 
   };
 
+  template <class dialogClass>
+  class DialogComplex : public DialogBasic<dialogClass> {
+
+  };
 
   
 }
