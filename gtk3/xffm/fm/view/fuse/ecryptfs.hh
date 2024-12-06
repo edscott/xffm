@@ -94,7 +94,7 @@ public:
 
 
 private:
-    static GtkTextView *
+   static GtkTextView *
     mkTextView (const gchar *text){
         auto labelview = GTK_TEXT_VIEW(gtk_text_view_new());
         gtk_text_view_set_editable (labelview, FALSE);

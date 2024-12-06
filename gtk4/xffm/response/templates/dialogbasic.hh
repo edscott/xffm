@@ -8,6 +8,7 @@ namespace xf
   GtkBox *contentArea_;
   GtkBox *actionArea_;
   GtkBox *vbox_;
+  GtkBox *vbox2_;
   GtkBox *labelBox_;
   GtkBox *closeBox_;
   GtkWindow *dialog_;
@@ -18,7 +19,8 @@ namespace xf
   pthread_mutex_t condMutex_ = PTHREAD_MUTEX_INITIALIZER;
   pthread_mutex_t mutex_ = PTHREAD_MUTEX_INITIALIZER;
   bool cancelled_ = false;
-
+  GtkFrame *frame_;
+  
   const char *path_;
 
     static gboolean
@@ -52,7 +54,9 @@ namespace xf
     GtkBox *actionArea(void){ return actionArea_;}
     GtkLabel *label(void){ return label_;}
     GtkBox *labelBox(void){ return labelBox_;}
-    GtkBox *vbox(void){ return vbox_;}
+    GtkBox *vbox(void){ return vbox_; }
+    GtkBox *vbox2(void){ return vbox2_; }
+    GtkFrame *frame(){return frame_;}
 
     pthread_cond_t *cond_p(void){return &cond_;}
     pthread_mutex_t *condMutex_p(void){return &condMutex_;}
@@ -219,6 +223,7 @@ private:
         gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox_));
  
         gtk_window_set_child(dialog_, GTK_WIDGET(frame));
+        frame_ = frame;
         
         if (parent_){
           //gtk_window_set_modal (GTK_WINDOW (dialog_), TRUE);
@@ -261,9 +266,11 @@ private:
         gtk_widget_set_hexpand(GTK_WIDGET(actionArea_), true);
         gtk_widget_set_halign (GTK_WIDGET(actionArea_),GTK_ALIGN_CENTER);
         gtk_box_append(vbox2, GTK_WIDGET(actionArea_));
+        vbox2_ = vbox2;
 
         return;
     }
+
 
 
     static void
@@ -297,6 +304,29 @@ private:
 
   template <class dialogClass>
   class DialogComplex : public DialogBasic<dialogClass> {
+    public:
+    DialogComplex(void){
+      auto frame = this->frame();
+      auto mainBox = this->subClass()->mainBox();
+      gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
+      
+    /*  clearVbox();
+      auto mainBox = this->subClass()->mainBox();
+      gtk_box_prepend(this->vbox(), GTK_WIDGET(mainBox));*/
+    }
+    void setSubClassDialog(){
+      this->subClass()->setSubClassDialog(this->dialog());
+    }
+    private:
+ /*   void clearVbox(void){
+      gtk_widget_unparent(GTK_WIDGET(this->contentArea()));
+      gtk_widget_unparent(GTK_WIDGET(this->actionArea()));
+      gtk_widget_unparent(GTK_WIDGET(this->labelBox()));
+      gtk_widget_unparent(GTK_WIDGET(this->vbox2()));
+      gtk_widget_set_hexpand(GTK_WIDGET(this->vbox()), false);
+      gtk_widget_set_vexpand(GTK_WIDGET(this->vbox()), false);
+      //gtk_widget_set_visible(GTK_WIDGET(), false);
+    }*/
 
   };
 
