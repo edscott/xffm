@@ -2,6 +2,7 @@
 # define DIALOGS_HH
 #include "response/classes/dialog.hh"
 #include "response/templates/dialogbasic.hh"
+#include "response/templates/dialogcomplex.hh"
 #include "response/templates/dialogtimeout.hh"
 #include "response/templates/dialogdrop.hh"
 #include "response/templates/dialogbuttons.hh"
@@ -13,13 +14,14 @@
 
 // response classes
 // jumpresponse is a template to access Workdir<Type>
+#include "response/classes/efsresponse.hh" // class
 #include "response/classes/entryresponse.hh" // class
 #include "response/classes/passwdresponse.hh"// class
 #include "response/classes/rmresponse.hh"    // class
 #include "response/classes/rmlistresponse.hh"    // class
 #include "response/classes/pathresponse.hh"  // class
 # include "response/classes/cpresponse.hh"   // class
-# include "response/classes/mvresponse.hh"   // class
+# include "response/classes/mvresponse.hh"   // class 
 # include "response/classes/lnresponse.hh"   // class
 # include "response/classes/info.hh"   // class
 # include "response/classes/dndresponse.hh"   // class
