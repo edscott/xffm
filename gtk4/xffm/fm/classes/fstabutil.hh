@@ -215,8 +215,8 @@ class FstabUtil {
     static void setMountableIcon(GFileInfo *info, const char *path){
       int size = Settings::getInteger("xfterm", "iconsize");
       const char *iconPath;
-      if (g_file_test(path, G_FILE_TEST_IS_DIR)) iconPath = Texture<bool>::findIconPath("folder-remote");
-      else  iconPath = Texture<bool>::findIconPath("drive-harddisk");
+      if (g_file_test(path, G_FILE_TEST_IS_DIR)) iconPath = "folder-remote";
+      else  iconPath = "drive-harddisk";
       
       const char *ball = "emblem-redball";
       if (isMounted(path)) ball = "emblem-greenball";

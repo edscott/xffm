@@ -251,9 +251,45 @@ template <class Type>  class Texture {
         return  texture;
     }
 #endif
+    static GdkPaintable *addEmblem(GtkIconPaintable *icon, const char *emblem, double width, double height){
+        GtkSnapshot  *snapshot = gtk_snapshot_new();
+        graphene_rect_t bounds;
+        bounds.origin.x = bounds.origin.y = 0.0;
+        bounds.size.width = width;
+        bounds.size.height = height;
 
-    static GdkPaintable *addEmblem(const char *iconPath, const char *emblem, double width, double height){
+        gdk_paintable_snapshot (GDK_PAINTABLE(icon), snapshot, width, height);
+        cairo_t *cr = gtk_snapshot_append_cairo(snapshot, &bounds);
+        double size = 3.0;
+        //double size = 4.0;
         auto *emblemPath = Texture<bool>::findIconPath(emblem);
+        auto emblemSurface = getCairoSurfaceFromSvg (emblemPath, width/size, height/size);
+        cairo_set_source_surface(cr, emblemSurface, 0.0, 0.0);
+        cairo_rectangle (cr, 0.0, 0.0, width/size, height/size);
+        cairo_fill (cr);
+
+        auto texture = gtk_snapshot_free_to_paintable(snapshot, &(bounds.size));
+        cairo_destroy(cr);
+        cairo_surface_destroy(emblemSurface);
+        return GDK_PAINTABLE(texture);
+    }
+
+
+    static GdkPaintable *addEmblem(GIcon *gIcon, const char *emblem, double width, double height){
+        //
+        if (!gIcon || !emblem) return NULL;
+        auto icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, width, 
+              1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
+        return addEmblem(icon, emblem, width, height);
+    }
+
+    static GdkPaintable *addEmblem(const char *iconName, const char *emblem, double width, double height){
+        auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
+            iconTheme, iconName,
+            NULL, width, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
+        return addEmblem(icon, emblem, width, height);
+    }
+     /*   auto *emblemPath = Texture<bool>::findIconPath(emblem);
         if (!iconPath || !emblemPath) return NULL;
         auto surface = getCairoSurfaceFromSvg (iconPath, width, height);
         double size = 3.0;
@@ -269,12 +305,19 @@ template <class Type>  class Texture {
         cairo_surface_destroy(surface);
         cairo_surface_destroy(emblemSurface);
         return GDK_PAINTABLE(texture);
-    }
-    
+    }*/
+ 
+
+
     static GdkPaintable *addEmblem(GFileInfo *info, const char *emblem, double width, double height){
+        auto gIcon = g_file_info_get_icon(info);
+        return addEmblem(gIcon, emblem, width, height);
+    }
+
+/*    static GdkPaintable *addEmblem(GFileInfo *info, const char *emblem, double width, double height){
         auto *iconPath = findIconPath(info);
         return addEmblem(iconPath, emblem, width, height);
-    }
+    }*/
 
     static void addEmblem(cairo_t *cr, const char *emblem, double width, double height){
         if (emblem) {

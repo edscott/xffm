@@ -34,7 +34,7 @@ endif()
 
 
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib -L/usr/local/lib")
-set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
+#set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 message(STATUS "Checking for libzip...")

@@ -8,6 +8,7 @@ namespace xf {
 template <class DirectoryClass>
   class Factory {
     public:
+      /* {{{ Factory callbacks */
       static void
       factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView<DirectoryClass> *gridView_p){
         TRACE("factoryTeardown...\n");
@@ -297,6 +298,8 @@ template <class DirectoryClass>
         TRACE("factory bind complete: %s\n", name);
         g_free(name);
       }
+
+      /* }}} */
 
     private:
     
