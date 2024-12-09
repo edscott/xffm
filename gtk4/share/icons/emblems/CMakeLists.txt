@@ -89,12 +89,14 @@ emblem-spreadsheet.svg
 emblem-ssh.svg
 emblem-star.svg
 emblem-start-here.svg
+emblem-symlink.svg
 emblem-symbolic-link.svg
 emblem-synchronized.svg
 emblem-system.svg
 emblem-terminal.svg
 emblem-text.svg
 emblem-unreadable.svg
+emblem-noaccess.svg
 emblem-user.svg
 emblem-video.svg
 emblem-wait.svg

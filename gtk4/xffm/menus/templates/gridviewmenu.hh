@@ -50,7 +50,7 @@ namespace xf {
         {_("auto"),(void *) "emblem-run"}, 
         {_("Rename"),(void *) "document-save-as"}, 
         {_("Duplicate"),(void *) "document-save"}, 
-        {_("Link"),(void *) "emblem-symbolic-link"}, 
+        {_("Link"),(void *) "emblem-symlink"}, 
         {_("Delete"),(void *) "delete"}, 
         {_("Properties"),(void *) "properties"}, 
         {_("Copy"),(void *) "copy"}, 

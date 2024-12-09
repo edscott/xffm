@@ -18,7 +18,7 @@ public:
       buttons = (GtkWidget **)calloc(5,sizeof(GtkWidget *));
       buttons[0] = GTK_WIDGET(Basic::mkButton("list-add", _("Copy")));
       buttons[1] = GTK_WIDGET(Basic::mkButton("list-remove", _("Move")));
-      buttons[2] = GTK_WIDGET(Basic::mkButton("emblem-symbolic-link", _("Link")));
+      buttons[2] = GTK_WIDGET(Basic::mkButton("emblem-symlink", _("Link")));
       buttons[3] = GTK_WIDGET(Basic::mkButton("no", _("Cancel")));
     }
 

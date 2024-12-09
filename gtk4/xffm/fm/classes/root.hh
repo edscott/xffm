@@ -72,7 +72,7 @@ namespace xf {
            
           int size = Settings::getInteger("xfterm", "iconsize");
           //const char *iconPath = Texture<bool>::findIconPath("folder-remote");
-          const char *ball = "emblem-unreadable";
+          const char *ball = "emblem-noaccess";
           if (FstabUtil::isMounted(*p)) ball = "emblem-greenball";
           auto paintable = Texture<bool>::addEmblem("folder-remote", ball, size, size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));

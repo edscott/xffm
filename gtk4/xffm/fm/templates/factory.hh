@@ -161,7 +161,7 @@ template <class DirectoryClass>
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
-            auto emblem = "emblem-symbolic-link";
+            auto emblem = "emblem-symlink";
             struct stat st;
             if (stat(path, &st) < 0) emblem = "emblem-broken";
             texture = Texture<bool>::addEmblem(info,  emblem, scaleFactor*size, scaleFactor*size);
