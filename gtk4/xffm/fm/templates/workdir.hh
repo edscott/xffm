@@ -251,6 +251,14 @@ char buffer[4096];
       }
       auto ecryptfs = g_file_info_get_attribute_object (info, "xffm::ecryptfs");
       if (ecryptfs){
+        auto efsmount = g_find_program_in_path("mount.ecryptfs");
+        if (!efsmount){
+          auto message = g_strdup_printf(_("The %s utility is not installed."), "ecryptfs");
+          Print::printWarning(Child::getOutput(), g_strconcat(message, "(AUR: ecryptfs-utils)\n", NULL));
+          g_free(message);
+          return TRUE;
+        }
+        
         DBG("Open new ecryptfs dialog.\n");
         EFS::newEfs();
         return TRUE;

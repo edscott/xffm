@@ -9,10 +9,15 @@ namespace xf {
    GtkWindow *dialog_ = NULL;
    char *title_;
    const char *iconName_;
+   GtkEntry *remoteEntry_ = NULL;
+   GtkEntry *mountPointEntry_ = NULL;
+   GtkTextView *output_;
 public:
     const char *title(void){ return title_;}
     const char *iconName(void){ return "emblem-run";}
     const char *label(void){return "xffm::efs";}
+    GtkEntry *remoteEntry(void){return remoteEntry_;}
+    GtkEntry *mountPointEntry(void){return mountPointEntry_;}
 
     ~EfsResponse (void){
       g_free(title_);
@@ -88,8 +93,23 @@ public:
         addPage(notebook, GTK_WIDGET(child1), _("Mount"));
 
         // mount child
-        addEntry(child1, "entry1", EFS_REMOTE_PATH, ": ");
-        addEntry(child1, "entry2", FUSE_MOUNT_POINT, " ");
+        // FIXME: all entries in dialog are not editable,
+        //        apparently not sensitive...
+        auto encrypted = g_strconcat(_("Mount Point"), " (", _("Encrypted"), "): ",NULL);
+        remoteEntry_ = addEntry(child1, "entry1", encrypted);
+        g_free(encrypted);
+        //gtk_widget_set_sensitive(GTK_WIDGET(remoteEntry_), true); // FIXME: put to false 
+
+        auto unencrypted = g_strconcat(_("Mount Point"), " (", _("Unencrypted"), "): ",NULL);
+        mountPointEntry_ = addEntry(child1, "entry2", unencrypted);
+        g_free(unencrypted);
+        //gtk_widget_set_sensitive(GTK_WIDGET(mountPointEntry_), true); // FIXME: put to false 
+
+        auto sw = gtk_scrolled_window_new();
+        gtk_box_append(child1, GTK_WIDGET(sw));
+        output_ = GTK_TEXT_VIEW(gtk_text_view_new());
+        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(output_));
+        gtk_widget_set_size_request(GTK_WIDGET(sw), -1, 200);
 
         // Options child
         auto child2 = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -306,25 +326,29 @@ public:
         gtk_notebook_set_tab_reorderable (notebook, GTK_WIDGET(child), TRUE);
       }
 
-       void addEntry(GtkBox *child, const char *id, const char *text, const char *semicolon){
+       GtkEntry *addEntry(GtkBox *child, const char *id, const char *text){
           auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
           gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
           gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
           auto label = gtk_label_new(text);
           gtk_widget_set_hexpand(GTK_WIDGET(label), false);
-          auto semicolonL = gtk_label_new(semicolon);
-          gtk_widget_set_hexpand(GTK_WIDGET(semicolonL), false);
           auto entry = gtk_entry_new();
+
+          //auto buffer = gtk_entry_buffer_new(NULL, -1);
+          //auto entry = gtk_entry_new_with_buffer(buffer);
           gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
           g_object_set_data(G_OBJECT(child), id, entry);
+          //gtk_widget_set_sensitive(GTK_WIDGET(entry), true); // FIXME: put to false 
+                                                             // when filedialog button
+                                                             // is working.
           auto button = Basic::mkButton("document-open", NULL);
           g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), child);
 
           gtk_box_append(hbox, label);
-          gtk_box_append(hbox, semicolonL);
           gtk_box_append(hbox, entry);
           gtk_box_append(hbox, GTK_WIDGET(button));
           gtk_box_append(child, GTK_WIDGET(hbox));
+          return GTK_ENTRY(entry);
         }
 
       static void fileOK( GObject* source_object, GAsyncResult* result,  gpointer data ){
@@ -363,10 +387,113 @@ public:
 
     }
 
+    char *getMountOptions(void){
+        // Mount options
+        gchar *retval = NULL;
+        gint i=0;
+        for (auto p=mount_options; p->id && i+1 < MAX_COMMAND_ARGS; p++,i++) {
+            auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->mainBox_), p->id));
+            if (!box) {
+                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                continue;
+            }
+            auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
+            if (gtk_check_button_get_active(check)) {
+                TRACE("Option %s --> %s\n", p->id, p->flag); 
+                auto g = g_strconcat((retval)?retval:"",(retval)?",":"", p->flag, NULL);
+                g_free(retval);
+                retval=g;
+            }        
+        }
+        return retval;
+    }
+
+    char *getEFSOptions(void){
+        // EFS options
+        char *optionsOn = NULL;
+        gint i=0;
+        for (auto p=efs_options; p->id && i+1 < MAX_COMMAND_ARGS; p++, i++) {
+            auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->mainBox_), p->id));
+            if (!box) {
+                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                continue;
+            }
+            auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
+            auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry")); 
+            if (gtk_check_button_get_active(check)) {
+                if (!optionsOn) {
+                    optionsOn = g_strdup("");
+                } else {
+                    auto g = g_strconcat(optionsOn,",",NULL);
+                    g_free(optionsOn);
+                    optionsOn = g;
+                }
+                const char *g = "";
+                if (entry){
+                  auto buffer = gtk_entry_get_buffer(entry);
+                  g = gtk_entry_buffer_get_text(buffer);
+                }
+                auto gg = g_strconcat(optionsOn, p->id, g, NULL);
+                g_free(optionsOn);
+                optionsOn = gg;
+                TRACE("Option %s --> %s\n", p->id, optionsOn);
+            }
+            else TRACE("no check:  %s\n", p->id);
+        } 
+        return optionsOn;
+    }
+
+    gboolean save(void){
+        auto buffer = gtk_entry_get_buffer(this->remoteEntry());
+        auto path = gtk_entry_buffer_get_text(buffer);
+        buffer = gtk_entry_get_buffer(this->mountPointEntry());
+        auto mountPoint = gtk_entry_buffer_get_text(buffer);
+        auto mountOptions = getMountOptions();
+        auto efsOptions = getEFSOptions();
+        bool ok = true;
+        if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
+          Print::printWarning(output_,
+              g_strconcat(_("Mount Point"), " (", _("Encrypted"), ") ", " \"",path, "\" : ",
+                _("Folder does not exist"), "\n", NULL));
+          ok = false;
+        }
+        if (!g_file_test(mountPoint, G_FILE_TEST_IS_DIR)){
+          Print::printWarning(output_,
+              g_strconcat(_("Mount Point"), " (", _("Unencrypted"), ") ", " \"",mountPoint, "\" : ",
+                _("Folder does not exist"), "\n", NULL));
+          ok = false;
+        }
+        DBG("path=\"%s\"\n", path);
+        DBG(" mountPoint=\"%s\"\n", mountPoint);
+        DBG(" mountOptions=\"%s\"\n", mountOptions);
+        DBG(" efsOptions=\"%s\"\n", efsOptions);
+
+        if (ok) {
+          gchar *file = g_build_filename(EFS_KEY_FILE, NULL);
+          GKeyFile *key_file = g_key_file_new ();
+          g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
+
+          g_key_file_set_value (key_file, path, "mountPoint", mountPoint);
+          g_key_file_set_value (key_file, path, "mountOptions", mountOptions);
+          g_key_file_set_value (key_file, path, "efsOptions", efsOptions);
+          auto retval = g_key_file_save_to_file (key_file,file,NULL);
+          g_key_file_free(key_file);
+          if (!retval){
+            DBG("EfsResponse:: save(): Error writing %s\n", file);
+          }
+          g_free(file);
+        }
+        
+        return ok;
+        
+    }
+
     static void
     button_save (GtkButton * button, gpointer data) {
       auto subClass = (EfsResponse *)data;
-      g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
+      if (subClass->save()){
+        g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
+      }
     }
 
     static void
