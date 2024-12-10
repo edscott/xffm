@@ -419,7 +419,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
           gtk_widget_set_vexpand(GTK_WIDGET(box), false);
           auto n = g_strdup(defaultApp);
           if (strchr(n, ' ')) *strchr(n, ' ') = 0;
-          auto paintable = Texture<bool>::load(n, 16);
+          auto paintable = Texture<bool>::load16(n);
 
 
           if (paintable){
@@ -646,17 +646,6 @@ public:
 
 
     
-    private:
-      static void
-      onDragBegin (GtkDragSource *source,
-                     GdkDrag *drag,
-                     void *data)
-      {
-        // Set the widget as the drag icon
-        GdkPaintable *paintable = Texture<bool>::load("emblem-redball", 48);
-        gtk_drag_source_set_icon (source, paintable, 0, 0);
-        g_object_unref (paintable);
-      }
   };
 }
 #endif

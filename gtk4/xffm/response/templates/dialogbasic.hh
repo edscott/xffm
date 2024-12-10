@@ -115,7 +115,7 @@ namespace xf
     void setCloseBox(const char *iconName, const char *tooltip){
       auto old = gtk_widget_get_first_child (GTK_WIDGET(closeBox_));
       gtk_widget_unparent(old);
-      auto paintable = Texture<bool>::load(iconName, 18);
+      auto paintable = Texture<bool>::load(iconName);
       auto image = gtk_image_new_from_paintable(paintable);
       gtk_widget_set_size_request(image, 18,18);
       gtk_widget_set_sensitive(image, true);
@@ -203,7 +203,7 @@ private:
 
 
     GtkWidget *closeBox(void){
-      return Dialog::buttonBox("delete", _("Cancel"), (void *)cancelCallback, (void *)this, 25);
+      return Dialog::buttonBox("delete", _("Cancel"), (void *)cancelCallback, (void *)this);
     }
 protected:
 
@@ -211,7 +211,7 @@ protected:
       return Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, (void *)this);
     }
     GtkWidget *applyBox(void){
-      return Dialog::buttonBox("apply", _("Apply"), (void *)ok, (void *)this, 25);
+      return Dialog::buttonBox("apply", _("Apply"), (void *)ok, (void *)this);
     }
 private:
     void mkWindow(void){

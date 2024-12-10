@@ -100,7 +100,7 @@ public:
 
       // icon title
       if (icon){
-          auto paintable = Texture<bool>::load(icon, 48);
+          auto paintable = Texture<bool>::load(icon);
           auto image = gtk_image_new_from_paintable(paintable);
           gtk_widget_set_size_request(image, 48, 48);
           Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(image), TRUE, TRUE, 0);
@@ -189,10 +189,10 @@ public:
         g_object_set_data(G_OBJECT(dialog_), "mimetype", mimetype);
         //g_free(mimetype);
 
-        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this, 25);
+        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
-        //auto cancel = Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, this, 25);
+        //auto cancel = Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, this);
         //Basic::boxPack0(GTK_BOX (hbox),GTK_WIDGET(cancel), FALSE, FALSE, 10);
      
 

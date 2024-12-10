@@ -96,7 +96,7 @@ template <class DirectoryClass>
         //THREADPOOL->clear();
         //Child::incrementSerial();
      
-         // cleanup on regen:
+         // cleanup on regen :
         auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
         auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
         if (oldImage) gtk_widget_unparent(oldImage);
@@ -690,31 +690,21 @@ template <class DirectoryClass>
       bool backup = ( name[strlen(name)-1] == '~');
       if (!backup) backup = g_file_info_get_is_backup(info);
       if (hidden || backup )  {
-        auto *iconPath = Texture<bool>::findIconPath(info);
+        //auto *iconPath = Texture<bool>::findIconPath(info);
         // Only for the hidden + backup items. Applies background mask.
-        if (iconPath){
-          auto texture = Texture<bool>::getShadedIcon2(iconPath, size, size, backup?"emblem-bak":NULL);   
+        //if (iconPath){
+          //auto texture = Texture<bool>::getShadedIcon2(iconPath, size, size, backup?"emblem-bak":NULL);   
+          auto texture = Texture<bool>::getShadedIcon(info, size, size, backup?"emblem-bak":NULL);   
           auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
           g_object_unref(texture); // XXX currently the paintable is not hashed.
           return GTK_WIDGET(image);
-        }
+        //}
         // Texture reference is kept in hashtable.
       }
       return NULL;
     }
     static GtkWidget *execImage(const char *name, GFileInfo *info, int size){
-   /*   bool exec = g_file_info_get_is_backup(info);
-      if (hidden || backup )  {
-        auto *iconPath = Texture<bool>::findIconPath(info);
-        // Only for the hidden + backup items. Applies background mask.
-        if (iconPath){
-          auto texture = Texture<bool>::getShadedIcon2(iconPath, size, size, backup?"emblem-bak":NULL);   
-          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-          g_object_unref(texture); // XXX currently the paintable is not hashed.
-          return GTK_WIDGET(image);
-        }
-        // Texture reference is kept in hashtable.
-      }*/
+
       return NULL;
     }
     static GtkWidget *previewImage(GFileInfo *info, const char *path, bool *doPreview_p){

@@ -135,7 +135,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       //DBG("path= %s, info=%p\n", path, info);
-      new Properties(info);
+      new Properties<bool>(info);
       //g_free(path);
     }
     

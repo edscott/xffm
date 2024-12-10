@@ -77,7 +77,7 @@ namespace xf {
                               const gchar *tag, 
                               gchar *string){
         if (!textview) return;
-        auto icon = Texture<bool>::load(iconname, 16);
+        auto icon = Texture<bool>::load16(iconname);
         void *arg[]={(void *)icon, (void *)textview, (void *)tag, (void *)string};
         Basic::context_function(print_i, arg);
         g_free(string);
@@ -133,7 +133,7 @@ namespace xf {
     static void printIcon(GtkTextView *textview, const gchar *iconname, gchar *string)
     {
         if (!textview) return;
-        auto icon = Texture<bool>::load(iconname, 16);
+        auto icon = Texture<bool>::load16(iconname);
         void *arg[]={(void *)icon, (void *)textview, NULL, (void *)string};
         Basic::context_function(print_i, arg);
         g_free(string);

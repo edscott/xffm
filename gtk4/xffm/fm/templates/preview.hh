@@ -1,3 +1,4 @@
+/* vim:set foldmethod=marker expandtab: */
 #ifndef PREVIEW_HH
 #define PREVIEW_HH
 #include <sys/types.h>
@@ -10,6 +11,8 @@
 #define DEFAULT_FONT_SIZE    "12"
 #define MAKE_FONT_NAME(f,s)    f " " s
 
+namespace xf {
+/* {{{ Structures */
 typedef struct {
     cairo_t *cr;
     cairo_surface_t *surface;
@@ -58,14 +61,56 @@ typedef struct paragraph_t {
     int formfeed;
     PangoLayout *layout;
 } paragraph_t;
-
-
-namespace xf {
-
+/* }}} */
 template <class Type> class Texture;
 template <class Type>
 class Preview {
+  /* {{{ Public */
   public:
+      static 
+      GdkPaintable *loadPath(const char *path){
+        GError *error_ = NULL;
+        if (!path) {
+          DBG("*** Error::loadPath(%s): %s\n", path, error_->message);
+          g_error_free(error_);
+          return NULL;
+        }
+        
+        if (!g_file_test(path, G_FILE_TEST_EXISTS)) {
+          DBG("*** Error::loadPath(%s): !g_file_test(path, G_FILE_TEST_EXISTS\n", path);
+          return NULL;
+        }
+        GdkPaintable *paintable = NULL;
+        auto mimetype = Mime::mimeType(path);
+        if (!mimetype) mimetype =  _("unknown");
+        if (strstr(mimetype, "image")) {
+          return getPaintableWithThumb(path);
+        }
+
+        bool textType =(
+            strstr(mimetype, "text")
+            || strstr(mimetype, "shellscript")
+            || strcmp(path, "empty-file")==0
+            || g_file_test(path, G_FILE_TEST_IS_DIR)
+            );
+
+        if (textType){
+             GdkPaintable *paintable = textPreview (path, PREVIEW_IMAGE_SIZE); 
+             TRACE("%s texttype paintable=%p\n", path, paintable);
+             return paintable;
+        }
+        // pdf previews...
+        bool useGhostScript = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript") );
+        if(useGhostScript) {  
+
+            // decode delegate is ghostscript
+             GdkPaintable *paintable =  gsPreview (path, PREVIEW_IMAGE_SIZE);// refs
+             return paintable;
+        }
+
+        return NULL;
+      }
+
       static void *preview(void *data){
         // This is a pthread function, not active in g_main_context.
         // Step one: check if serial is OK
@@ -94,7 +139,7 @@ class Preview {
         TRACE("Preview::preview: %s, box=%p, image=%p, serial=%d\n", 
             path,imageBox, image, serial);
 
-        auto paintable = Texture<Type>::loadPath(path);
+        auto paintable = loadPath(path);
         g_free(path); // no longer needed.
         g_free(arg);
 
@@ -118,7 +163,112 @@ class Preview {
         // All done here.
         return NULL;
       }
-  private:      
+
+    static bool doPreview(GFileInfo *info){
+        auto path = Basic::getPath(info);       
+        auto type = g_file_info_get_file_type(info);
+        auto mimetype = Mime::mimeType(path);
+        if (!mimetype) mimetype =  g_strdup(_("unknown"));
+        auto isImage = (strstr(mimetype, "image"));
+        auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
+        g_free(path);
+        g_free(mimetype);
+        return (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
+    }
+
+    static GdkPaintable *
+    readThumbnail(const char *path){
+      auto item = g_hash_table_lookup(hash(), path);
+      if (!item) return NULL;
+      auto paintableX = (paintable_t *)item;
+      return GDK_PAINTABLE(paintableX->paintable);
+    }
+
+    static time_t thumbnailMtime(const char *path){
+      auto item = g_hash_table_lookup(hash(), path);
+      if (!item) return 0;
+      auto paintableX = (paintable_t *)item;
+      return paintableX->mtime;
+    }
+/* }}} */
+/* {{{ Private */
+  private:
+    
+    static GdkMemoryFormat
+    cairo_format_to_memory_format (cairo_format_t format)
+    {
+      switch (format)
+      {
+        case CAIRO_FORMAT_ARGB32:
+          return GDK_MEMORY_DEFAULT;
+
+        case CAIRO_FORMAT_RGB24:
+#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+          return GDK_MEMORY_B8G8R8X8;
+#elif G_BYTE_ORDER == G_BIG_ENDIAN
+          return GDK_MEMORY_X8R8G8B8;
+#else
+#error "Unknown byte order for Cairo format"
+#endif
+        case CAIRO_FORMAT_A8:
+          return GDK_MEMORY_A8;
+        case CAIRO_FORMAT_RGB96F:
+          return GDK_MEMORY_R32G32B32_FLOAT;
+        case CAIRO_FORMAT_RGBA128F:
+          return GDK_MEMORY_R32G32B32A32_FLOAT;
+
+        case CAIRO_FORMAT_RGB16_565:
+        case CAIRO_FORMAT_RGB30:
+        case CAIRO_FORMAT_INVALID:
+        case CAIRO_FORMAT_A1:
+        default:
+          g_assert_not_reached ();
+          return GDK_MEMORY_DEFAULT;
+      }
+    }
+
+    
+    // copy pasted from https://gitlab.gnome.org/GNOME/gtk/-/blob/main/gdk/gdktexture.c
+    // both cairo_format_to_memory_format and gdk_texture_new_for_surface
+    // pixbuf stuff is now deprecated.
+    // Why:
+    /* The reason we don’t expose that function is twofold:
+
+        It requires a lot of invariants on the cairo surface - image surface, 
+        no device scale, no device offset - and those are complex to document 
+        and even more complex to reliably check.
+        It’s small, so you can just copy/paste it. And then you can adapt it 
+        to the invariants your code satisfies.
+        So the recommended solution is indeed for everybody to copy 
+        gdk_texture_new_for_surface() into their code - it’s why 
+        GDK_MEMORY_DEFAULT exists after all.
+    */
+    static GdkTexture *
+    gdk_texture_new_for_surface (cairo_surface_t *surface)
+    {
+      GdkTexture *texture;
+      GBytes *bytes;
+
+      g_return_val_if_fail (cairo_surface_get_type (surface) == CAIRO_SURFACE_TYPE_IMAGE, NULL);
+      g_return_val_if_fail (cairo_image_surface_get_width (surface) > 0, NULL);
+      g_return_val_if_fail (cairo_image_surface_get_height (surface) > 0, NULL);
+      bytes = g_bytes_new_with_free_func (cairo_image_surface_get_data (surface),
+                                          cairo_image_surface_get_height (surface)
+                                          * cairo_image_surface_get_stride (surface),
+                                          (GDestroyNotify) cairo_surface_destroy,
+                                          cairo_surface_reference (surface));
+      texture = gdk_memory_texture_new (cairo_image_surface_get_width (surface),
+                                        cairo_image_surface_get_height (surface),
+                                        cairo_format_to_memory_format (cairo_image_surface_get_format (surface)),
+                                        bytes,
+                                        cairo_image_surface_get_stride (surface));
+      g_bytes_unref (bytes);
+      return texture;
+    }
+
+    
+
+
       static void *replace_f(void *data){
 
 
@@ -151,7 +301,7 @@ class Preview {
         Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(preview), FALSE, FALSE, 0); // replace
         return  GINT_TO_POINTER(serial);
       }
-  public:
+
     static GdkPaintable *
     getPaintableWithThumb(const char *path)
     {
@@ -228,7 +378,6 @@ class Preview {
       saveThumbnail(path, paintable);
       return paintable;
     }
-  private:
 
 
     typedef struct paintable_t {
@@ -269,34 +418,7 @@ class Preview {
 
         g_hash_table_insert(hash(), g_strdup(path), paintableX);
     }
-public:
-    static bool doPreview(GFileInfo *info){
-        auto path = Basic::getPath(info);       
-        auto type = g_file_info_get_file_type(info);
-        auto mimetype = Mime::mimeType(path);
-        if (!mimetype) mimetype =  g_strdup(_("unknown"));
-        auto isImage = (strstr(mimetype, "image"));
-        auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
-        g_free(path);
-        g_free(mimetype);
-        return (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
-    }
 
-    static GdkPaintable *
-    readThumbnail(const char *path){
-      auto item = g_hash_table_lookup(hash(), path);
-      if (!item) return NULL;
-      auto paintableX = (paintable_t *)item;
-      return GDK_PAINTABLE(paintableX->paintable);
-    }
-
-    static time_t thumbnailMtime(const char *path){
-      auto item = g_hash_table_lookup(hash(), path);
-      if (!item) return 0;
-      auto paintableX = (paintable_t *)item;
-      return paintableX->mtime;
-    }
-private:
     static bool thumbnailOK(const char *path){
         bool retval = true;
         auto item = g_hash_table_lookup(hash(), path);
@@ -650,7 +772,7 @@ private:
         cairo_destroy (page_layout.cr);
         TRACE ("// write previewPixbuf\n");
 
-        auto paintable = GDK_PAINTABLE(Texture<Type>::gdk_texture_new_for_surface(page_layout.surface));
+        auto paintable = GDK_PAINTABLE(gdk_texture_new_for_surface(page_layout.surface));
 
         //if(cairo_surface_write_to_png (page_layout.surface, previewPixbuf) != CAIRO_STATUS_SUCCESS) {
           //  ERROR("cairo_surface_write_to_png(surface,) != CAIRO_STATUS_SUCCESS");
@@ -1022,7 +1144,7 @@ private:
 
       return thumbnail_path;
     }
-
+   /* }}} */
 };
 
 }

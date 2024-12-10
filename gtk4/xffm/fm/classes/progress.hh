@@ -34,7 +34,7 @@ private:
          
          // Add the label, and show everything we have added
          if (icon){
-            auto paintable = Texture<bool>::load(icon, 96); 
+            auto paintable = Texture<bool>::load(icon); 
             if (paintable) {
                 auto image = gtk_image_new_from_paintable(paintable);
                 Basic::boxPack0(vbox, image, FALSE, FALSE,0);

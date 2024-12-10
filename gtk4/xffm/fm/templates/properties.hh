@@ -51,7 +51,8 @@ typedef struct entry_t {
 
 namespace xf{
 
-
+template <class Type> class Preview;
+template <class Type>
 class Properties {
     GtkWindow *dialog_ = NULL;
     GtkBox *imageBox_ = NULL;
@@ -415,7 +416,7 @@ private:
         if (!entry->mimetype) entry->mimetype = MimeMagic::mimeMagic(entry->path);
     
 
-        auto paintable = Texture<bool>::loadPath(entry->path);
+        auto paintable = Preview<Type>::loadPath(entry->path);
         if (paintable == NULL) {
           gtk_widget_set_visible(GTK_WIDGET(box), false);
         } else {

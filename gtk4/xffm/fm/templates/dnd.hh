@@ -105,12 +105,12 @@ public:
         int size = getSize();
         if (g_list_length(selection_list) < 2){
           auto info = G_FILE_INFO(selection_list->data);
-          auto *iconPath = Texture<bool>::findIconPath(info);
-          paintable = Texture<bool>::getShadedIcon2(iconPath, size, size, NULL);   
+          //auto *iconPath = Texture<bool>::findIconPath(info);
+          paintable = Texture<bool>::getShadedIcon(info, size, size, NULL);   
           //paintable = Texture<bool>::load(info, size); // Loads icon from icontheme.
         } else {
-          auto *iconPath = Texture<bool>::findIconPath("dnd-multiple");
-          paintable = Texture<bool>::getShadedIcon2(iconPath, size, size, NULL);   
+          //auto *iconPath = Texture<bool>::findIconPath("dnd-multiple");
+          paintable = Texture<bool>::getShadedIcon("dnd-multiple", size, size, NULL);   
         }
         gtk_drag_icon_set_from_paintable (drag_, paintable,  1, 1);
         return true;
