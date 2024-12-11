@@ -1,8 +1,19 @@
 #ifndef BASIC_HH
 #define BASIC_HH
 namespace xf {
+  GList *dialogStack = NULL;
   class Basic {
     public:
+      static void pushDialog(GtkWindow *dialog){
+        dialogStack = g_list_prepend(dialogStack, dialog);
+      }
+      static void popDialog(GtkWindow *dialog){
+        dialogStack = g_list_remove(dialogStack, dialog);
+      }
+      static GtkWindow *topDialog(void){
+        if (!dialogStack) return NULL;
+        return GTK_WINDOW(g_list_first(dialogStack)->data);
+      }
 
       static GFile *getGfile(GFileInfo *info){
         return G_FILE(g_file_info_get_attribute_object(info, "standard::file"));

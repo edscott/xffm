@@ -12,6 +12,7 @@ namespace xf {
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
    GtkTextView *output_;
+   GtkWindow *subDialog_ = NULL; // FIXME raise on enter.
 public:
     const char *title(void){ return title_;}
     const char *iconName(void){ return "emblem-run";}
@@ -340,7 +341,7 @@ public:
                                                              // when filedialog button
                                                              // is working.
           auto button = Basic::mkButton("document-open", NULL);
-          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), child);
+          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), dialog_);
 
           gtk_box_append(hbox, label);
           gtk_box_append(hbox, entry);
@@ -370,18 +371,9 @@ public:
         //done = TRUE;
       }
 
-    static void getDirectory(GtkButton *button, void *data){
+    static void getDirectory(GtkButton *button, GtkWindow *parent){
       DBG("getDirectory\n");
-      auto fileDialog = gtk_file_dialog_new();
-      gtk_file_dialog_set_title (fileDialog, "foo bar");
-      gtk_file_dialog_set_modal (fileDialog, true);
-      GFile *file = g_file_new_for_path ("/tmp");
-      gtk_file_dialog_set_initial_folder (fileDialog, file);
-      g_object_unref (file);
-   
-      gtk_file_dialog_set_accept_label (fileDialog, _("Accept"));
-
-      gtk_file_dialog_select_folder (fileDialog, GTK_WINDOW(MainWidget), NULL, fileOK, data);
+      FileDialog::newFileDialog(parent);
 
     }
 

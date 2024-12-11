@@ -135,13 +135,13 @@ private:
                     gdouble y,
                     gpointer data) 
     {
-      TRACE("present dialog %p\n", MainDialog);
       auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
       if (gridview_p){
         DBG("Leaving window\n");
         Dnd<LocalDir>::resetGridviewCSS(gridview_p);
       }
-      if (MainDialog) gtk_window_present(MainDialog);
+      auto topDialog = Basic::topDialog();
+      if (topDialog) gtk_window_present(topDialog);
         return FALSE;
     }
 
@@ -151,8 +151,9 @@ private:
                     gdouble y,
                     gpointer data) 
     {
-      TRACE("present dialog %p\n", MainDialog);
-      if (MainDialog) gtk_window_present(MainDialog);
+      auto topDialog = Basic::topDialog();
+      TRACE("present dialog %p\n", topDialog);
+      if (topDialog) gtk_window_present(topDialog);
         return FALSE;
     }
 

@@ -53,7 +53,8 @@ public:
     ~OpenWith (void){
        gtk_widget_set_visible(GTK_WIDGET(dialog_), FALSE);
        g_free(path_);
-       MainDialog = NULL;
+       Basic::popDialog(dialog_);
+       //MainDialog = NULL;
        gtk_window_destroy(dialog_);
     }
 
@@ -77,7 +78,8 @@ public:
       timeout_ = 10;
 
       dialog_ = GTK_WINDOW(gtk_window_new ());
-      MainDialog = dialog_;
+      Basic::pushDialog(dialog_);
+      //MainDialog = dialog_;
       gtk_window_set_decorated(dialog_, false);
 
       gtk_window_set_title (GTK_WINDOW (dialog_), windowTitle);

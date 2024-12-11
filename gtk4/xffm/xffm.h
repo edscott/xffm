@@ -66,7 +66,7 @@
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
 static GtkWidget *MainWidget = NULL;
-static GtkWindow *MainDialog = NULL;
+//static GtkWindow *MainDialog = NULL;
 static GList *textviewList = NULL;
 static GList *run_button_list = NULL;
 static GHashTable *iconPathHash = NULL;
@@ -123,7 +123,6 @@ static int longPressSerial = -1;
 // fm classes/templates
 #include "fm/classes/localdir.hh"       // fm class
 #include "fm/classes/fstab.hh"       // fm class
-//#include "fm/classes/efs.hh"       // fm class 
 #include "fm/classes/root.hh"       // fm class
 #include "fm/templates/dnd.hh"     // fm template
 #include "fm/templates/factory.hh"     // fm template
