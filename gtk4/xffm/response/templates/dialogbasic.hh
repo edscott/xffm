@@ -81,7 +81,6 @@ namespace xf
     
     ~DialogBasic(void){
       Basic::popDialog(dialog_);
-      //MainDialog = NULL;
       Basic::destroy(dialog_);
       // race
       // Basic::present(GTK_WINDOW(MainWidget));
@@ -98,7 +97,6 @@ namespace xf
       mkWindow();
       TRACE("dialog is %p\n", dialog_);
       Basic::pushDialog(dialog_);
-      //MainDialog = dialog_;
       mkTitle();
       mkLabel();      
       addKeyController(GTK_WIDGET(dialog_));

@@ -4,6 +4,17 @@ namespace xf {
   GList *dialogStack = NULL;
   class Basic {
     public:
+      static int getMaxNameLen(GListModel *store){
+        int max = 0;
+        auto items = g_list_model_get_n_items (store);
+        for (guint i=0; i<items; i++){
+          auto info = G_FILE_INFO(g_list_model_get_item(store, i)); // GFileInfo
+          auto name = g_file_info_get_name(info);
+          if (strlen(name) > max) max = strlen(name);
+        }
+        return max;
+      }
+
       static void pushDialog(GtkWindow *dialog){
         dialogStack = g_list_prepend(dialogStack, dialog);
       }

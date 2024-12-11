@@ -12,8 +12,9 @@ namespace xf {
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
    GtkTextView *output_;
-   GtkWindow *subDialog_ = NULL; // FIXME raise on enter.
+   GList *children_ = NULL; 
 public:
+    GList *children(void){return children_;}
     const char *title(void){ return title_;}
     const char *iconName(void){ return "emblem-run";}
     const char *label(void){return "xffm::efs";}
@@ -341,7 +342,7 @@ public:
                                                              // when filedialog button
                                                              // is working.
           auto button = Basic::mkButton("document-open", NULL);
-          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), dialog_);
+          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), this);
 
           gtk_box_append(hbox, label);
           gtk_box_append(hbox, entry);
@@ -371,9 +372,11 @@ public:
         //done = TRUE;
       }
 
-    static void getDirectory(GtkButton *button, GtkWindow *parent){
+    static void getDirectory(GtkButton *button, EfsResponse *subClass){
       DBG("getDirectory\n");
-      FileDialog::newFileDialog(parent);
+      auto parent = subClass->dialog();
+      auto children = subClass->children();
+      FileDialog::newFileDialog(parent, &children);
 
     }
 
@@ -484,12 +487,19 @@ public:
       if (subClass->save()){
         g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
       }
+      for (auto l=subClass->children(); l && l->data; l=l->next){
+        if (GTK_IS_WINDOW(l->data)) gtk_window_destroy(GTK_WINDOW(l->data));
+      }
     }
 
     static void
     button_cancel (GtkButton * button, gpointer data) {
       auto subClass = (EfsResponse *)data;
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
+    
+      for (auto l=subClass->children(); l && l->data; l=l->next){
+        if (GTK_IS_WINDOW(l->data)) gtk_window_destroy(GTK_WINDOW(l->data));
+      }
     }
 
   };

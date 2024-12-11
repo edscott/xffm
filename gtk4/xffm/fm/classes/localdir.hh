@@ -156,7 +156,7 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
       }
 
     public:
-      static int
+/*      static int
       getMaxNameLen(const char *path){
         GError *error_ = NULL;
         GFile *file = g_file_new_for_path(path);
@@ -184,8 +184,9 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
           if (strlen(g_file_info_get_name(outInfo)) > maxNameLen)
             maxNameLen = strlen(g_file_info_get_name(outInfo));
         } while (true);
+        g_object_unref(file); // ?
         return maxNameLen;
-      }
+      }*/
 
       static int getHiddenCount(GListModel *listModel, int flags, int limit){
         int count = 0;

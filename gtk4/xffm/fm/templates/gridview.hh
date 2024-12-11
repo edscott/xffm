@@ -135,8 +135,9 @@ template <class DirectoryClass>
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
           selectionModel_ = LocalDir::xfSelectionModel(path_);
-          maxNameLen_ = LocalDir::getMaxNameLen(path_);
-          //selectionModel_ = DirectoryClass::standardSelectionModel(path_);     
+          auto store = G_LIST_MODEL(g_object_get_data(G_OBJECT(selectionModel_), "store"));
+          maxNameLen_ = Basic::getMaxNameLen(store);
+//          maxNameLen_ = LocalDir::getMaxNameLen(path_);
         }
        
         // GtkListItemFactory implements GtkSignalListItemFactory, which can be connected to
