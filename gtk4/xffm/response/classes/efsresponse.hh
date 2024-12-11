@@ -79,8 +79,8 @@ public:
         gtk_notebook_popup_enable (notebook);
         gtk_notebook_set_scrollable (notebook, TRUE);
         g_object_set (notebook,
-                      "enable-popup", TRUE, 
-                      "can-focus", FALSE,
+                      "enable-popup", FALSE, 
+                      "can-focus", TRUE,
                       "scrollable", TRUE, 
                       "show-border", FALSE,
                       "show-tabs", 
@@ -93,8 +93,6 @@ public:
         addPage(notebook, GTK_WIDGET(child1), _("Mount"));
 
         // mount child
-        // FIXME: all entries in dialog are not editable,
-        //        apparently not sensitive...
         auto encrypted = g_strconcat(_("Mount Point"), " (", _("Encrypted"), "): ",NULL);
         remoteEntry_ = addEntry(child1, "entry1", encrypted);
         g_free(encrypted);
