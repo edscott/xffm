@@ -194,7 +194,9 @@ private:
       } else {
         Basic::context_function(subClass->asyncNo, data);
       }
-      if (MainWidget) Basic::present(GTK_WINDOW(MainWidget));
+      if (MainWidget && GTK_IS_WINDOW (MainWidget)) {
+        Basic::present(GTK_WINDOW(MainWidget));
+      }
       TRACE("run_f:: Response is %p\n", response);
       // object will now be deleted.
       return response;

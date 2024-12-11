@@ -327,7 +327,7 @@ private:
     }
 
     static void *present_f(void *window){
-      gtk_window_present(GTK_WINDOW(window));
+      if (GTK_IS_WINDOW(window)) gtk_window_present(GTK_WINDOW(window));
       return NULL;
     }
 public:
