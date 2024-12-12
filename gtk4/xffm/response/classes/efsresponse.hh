@@ -23,6 +23,8 @@ public:
 
     ~EfsResponse (void){
       g_free(title_);
+      DBG("EFS destructor\n");
+      cleanup();
         //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
         //gtk_window_destroy(response_);
     }
@@ -33,6 +35,28 @@ public:
       int retval = pthread_create(&thread, NULL, response_f, (void *)this);
       pthread_detach(thread);*/
     }
+
+    void push(void *data){
+      children_ = g_list_prepend(children_, data);
+    }
+
+    void cleanup(void){
+      for (auto l=children_; l && l->data; l=l->next){
+        if (GTK_IS_WINDOW(l->data)) {
+          DBG("destroy dialog %p\n", l->data);
+          gtk_widget_set_visible(GTK_WIDGET(l->data), false);
+          // set to self destruct with cancelation:
+          g_object_set_data(G_OBJECT(l->data), "response", GINT_TO_POINTER(-1)); 
+          //gtk_window_destroy(GTK_WINDOW(l->data)); // destroy here causes gtk to crash
+        } else {
+          DBG("%p is not a dialog\n", l->data);
+        }
+      }      
+      DBG("cleanup done\n");
+      g_list_free(children_);
+      children_ = NULL;
+    }
+      
 
      static void *asyncYes(void *data){
       auto dialogObject = (DialogComplex<EfsResponse> *)data;
@@ -373,10 +397,12 @@ public:
       }
 
     static void getDirectory(GtkButton *button, EfsResponse *subClass){
-      DBG("getDirectory\n");
-      auto parent = subClass->dialog();
-      auto children = subClass->children();
-      FileDialog::newFileDialog(parent, &children);
+      TRACE("getDirectory\n");
+      void *newDialog[] = {NULL, NULL};
+      TRACE("getDirectory1:: newDialog[0]= %p\n", newDialog[0]);
+      FileDialog::newFileDialog(newDialog);
+      TRACE("getDirectory2:: newDialog[0]= %p\n", newDialog[0]);
+      subClass->push(newDialog[0]);
 
     }
 
@@ -487,19 +513,12 @@ public:
       if (subClass->save()){
         g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
       }
-      for (auto l=subClass->children(); l && l->data; l=l->next){
-        if (GTK_IS_WINDOW(l->data)) gtk_window_destroy(GTK_WINDOW(l->data));
-      }
     }
 
     static void
     button_cancel (GtkButton * button, gpointer data) {
       auto subClass = (EfsResponse *)data;
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
-    
-      for (auto l=subClass->children(); l && l->data; l=l->next){
-        if (GTK_IS_WINDOW(l->data)) gtk_window_destroy(GTK_WINDOW(l->data));
-      }
     }
 
   };

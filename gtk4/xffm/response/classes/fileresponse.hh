@@ -54,8 +54,6 @@ public:
     
     static GListModel *getChildModel (gpointer listItem, gpointer user_data)
     {
-      //auto item = GTK_LIST_ITEM(listItem);
-      //auto info = G_FILE_INFO(gtk_list_item_get_item(item));
       auto info = G_FILE_INFO(listItem);
       auto path = Basic::getPath(info);
       DBG("getChildModel %s\n", path);
@@ -78,6 +76,7 @@ public:
         }
         GFile *outChild = NULL;
         GFileInfo *outInfo = NULL;
+        int items = 0;
         do {
           g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
               NULL, // GCancellable* cancellable,
@@ -97,6 +96,7 @@ public:
             g_file_info_set_attribute_object(outInfo, "standard::file", G_OBJECT(outChild));          
             g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, NULL);
             TRACE("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
+            items++;
           }
           g_free(path);
           /*auto _path = g_file_get_path(outChild);
@@ -104,18 +104,22 @@ public:
           g_free(_path);*/
         } while (true);
         g_object_unref(file);
+        if (!items){
+          g_object_unref(store);
+          return NULL;
+        }
         return G_LIST_MODEL(store);
     }
 
       static void
       factoryTeardown(GtkSignalListItemFactory *self, GObject *object, void *data){
-        //DBG("factoryTeardown...\n");
+        //TRACE("factoryTeardown...\n");
 
       }
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
         auto box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        DBG("factorySetup...\n");        
+        TRACE("factorySetup...\n");        
 #if 1
         auto expander = gtk_tree_expander_new();
         gtk_tree_expander_set_child(GTK_TREE_EXPANDER(expander), box);
@@ -130,31 +134,33 @@ public:
         auto label = gtk_label_new("foo");
         gtk_box_append(GTK_BOX(box), label);
         g_object_set_data(G_OBJECT(object), "label", label);
-        DBG("factorySetup2...\n");        
+        TRACE("factorySetup2...\n");        
 
       }
       static void
       factoryUnbind(GtkSignalListItemFactory *self, GObject *object, void *data){
-        DBG("factoryUnbind...\n");
+        TRACE("factoryUnbind...\n");
       }
       static void
       factoryBind(GtkSignalListItemFactory *factory, GObject *object, void *data){
-        DBG("factoryBind...\n");
+        TRACE("factoryBind...\n");
 #if 10
         auto list_item =GTK_LIST_ITEM(object);
         auto treeListRow = GTK_TREE_LIST_ROW(gtk_list_item_get_item(list_item));
         auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
         //auto info = G_FILE_INFO(object);
-        DBG("info name = %s\n", g_file_info_get_name(info));
+        TRACE("info name = %s\n", g_file_info_get_name(info));
         auto expander = gtk_list_item_get_child( GTK_LIST_ITEM(object) );
         auto box = GTK_BOX(gtk_tree_expander_get_child( GTK_TREE_EXPANDER(expander) ));
+
+        gtk_tree_expander_set_list_row(GTK_TREE_EXPANDER(expander), treeListRow);
 //        auto box = GTK_BOX(gtk_expander_get_child( GTK_EXPANDER(expander) ));
 #else
         auto list_item =GTK_LIST_ITEM(object);
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
         auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
 #endif
-        DBG("factoryBind2...\n");
+        TRACE("factoryBind2...\n");
         const char *name = g_file_info_get_name(info);
         auto label = GTK_LABEL(g_object_get_data(object, "label"));
         
@@ -216,14 +222,12 @@ public:
         auto listModel = getListModel("/home/tmp");
 #if 10
   GtkTreeListModel * treemodel = gtk_tree_list_model_new (G_LIST_MODEL (listModel),
-                                       FALSE,
-                                       TRUE,
+                                       FALSE, // passthrough
+                                       FALSE, // autoexpand TRUE,
                                        getChildModel,
                                        NULL,
                                        NULL);
        
-
-  g_object_set(G_OBJECT(treemodel), "passthrough", FALSE, NULL);
   auto filterModel = gtk_filter_list_model_new (G_LIST_MODEL (treemodel), NULL);
   GtkSingleSelection *selection = gtk_single_selection_new (G_LIST_MODEL (filterModel));
 #else  
@@ -300,11 +304,12 @@ public:
 
   class FileDialog {
     public:
-    static void newFileDialog(GtkWindow *parent, GList **children){
+    static void newFileDialog(void **newDialog){
       auto dialogObject = new DialogComplex<FileResponse>;
-      dialogObject->setParent(parent);
+      //
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
-      *children = g_list_append(*children, dialog);
+      newDialog[0] = (void *)dialog;
       
       gtk_window_set_decorated(dialog, true);
       dialogObject->setSubClassDialog();
@@ -312,6 +317,8 @@ public:
       gtk_widget_realize(GTK_WIDGET(dialog));
       Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");
       gtk_window_present(dialog);
+      
+      TRACE("FileDialog:: newDialog[0] = %p\n", newDialog[0]);
 
       dialogObject->run();
       
