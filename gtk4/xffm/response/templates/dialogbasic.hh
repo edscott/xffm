@@ -75,7 +75,9 @@ namespace xf
       parent_ = parent;
       if (parent) {
         TRACE("will destroy with parent\n");
-        gtk_window_set_destroy_with_parent(dialog_, true);
+        // Dialogs should self destruct.
+        // 
+        //gtk_window_set_destroy_with_parent(dialog_, true);
       }
     }
     

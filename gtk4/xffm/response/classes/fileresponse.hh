@@ -1,6 +1,6 @@
 #ifndef FILERESPONSE_HH
 #define FILERESPONSE_HH
-
+#define USE_TREE 1
 
 namespace xf {
   class FileResponse {
@@ -56,7 +56,7 @@ public:
     {
       auto info = G_FILE_INFO(listItem);
       auto path = Basic::getPath(info);
-      DBG("getChildModel %s\n", path);
+      TRACE("getChildModel %s\n", path);
       auto listModel = getListModel(path);
       g_free(path);
       return listModel;
@@ -112,15 +112,133 @@ public:
     }
 
       static void
+      factorySetup1(GtkSignalListItemFactory *self, GObject *object, void *data){
+        auto box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        TRACE("factorySetup1...\n");        
+        auto expander = gtk_tree_expander_new();
+        gtk_tree_expander_set_child(GTK_TREE_EXPANDER(expander), box);
+        gtk_list_item_set_child(GTK_LIST_ITEM(object), expander); 
+        g_object_set_data(G_OBJECT(object), "box", box);
+        if (data) {
+          auto paintable = Texture<bool>::load16("folder");
+          auto image = gtk_image_new_from_paintable(paintable);
+          gtk_box_append(GTK_BOX(box), image);
+        }
+        auto label = gtk_label_new("");
+        gtk_box_append(GTK_BOX(box), label);
+        g_object_set_data(G_OBJECT(object), "label", label);
+        TRACE("factorySetup2...\n");        
+      }
+/*
+      static void
+      factorySetup2(GtkSignalListItemFactory *self, GObject *object, void *data){
+        TRACE("factorySetup1...\n");        
+        auto box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+
+        auto expander = gtk_tree_expander_new();
+        gtk_tree_expander_set_child(GTK_TREE_EXPANDER(expander), box);
+        gtk_list_item_set_child(GTK_LIST_ITEM(object), expander); 
+        g_object_set_data(G_OBJECT(object), "box", box);
+
+        auto label = gtk_label_new("bar");
+        gtk_box_append(GTK_BOX(box), label);
+        g_object_set_data(G_OBJECT(object), "label", label);
+        TRACE("factorySetup2...\n");        
+
+      }
+*/
+
+      static void
+      factoryBind1(GtkSignalListItemFactory *factory, GObject *object, void *data){
+        TRACE("factoryBind1...\n");
+
+        auto list_item =GTK_LIST_ITEM(object);
+#ifdef USE_TREE
+        auto treeListRow = GTK_TREE_LIST_ROW(gtk_list_item_get_item(list_item));
+        auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
+        if (data){
+          auto expander = gtk_list_item_get_child( GTK_LIST_ITEM(object) );
+          gtk_tree_expander_set_list_row(GTK_TREE_EXPANDER(expander), treeListRow);
+        }
+#else
+        auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+#endif
+        //auto info = G_FILE_INFO(object);
+        TRACE("info name = %s\n", g_file_info_get_name(info));
+
+        auto label = GTK_LABEL(g_object_get_data(object, "label"));
+        char *markup = NULL;
+        if (data) {
+          const char *name = g_file_info_get_name(info);          
+          auto maxLen = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(factory), "maxLen"));
+          auto format = g_strdup_printf("<tt>%%-%ds", maxLen);
+          char buffer[128];
+          snprintf(buffer, 128, (const char *)format, name);
+          markup = g_strdup_printf("%s</tt>", buffer);                    
+          gtk_label_set_markup(label, markup);
+        } else {
+          auto path = Basic::getPath(info);
+          struct stat st;
+          lstat(path, &st);
+          g_free(path);
+          auto m1 = Basic::statInfo(&st);
+          markup = g_strdup("<tt> <span color=\"blue\" size=\"small\">");
+          Basic::concat(&markup, m1);
+          Basic::concat(&markup, "</span></tt>");           
+          g_free(m1);                   
+          gtk_label_set_markup(label, markup);
+        }
+        g_free(markup);
+        
+      }
+      /*
+      static void
+      factoryBind2(GtkSignalListItemFactory *factory, GObject *object, void *data){
+        TRACE("factoryBind...\n");
+
+        auto list_item =GTK_LIST_ITEM(object);
+        //auto treeListRow = GTK_TREE_LIST_ROW(gtk_list_item_get_item(list_item));
+        //auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
+
+        auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
+        //auto info = G_FILE_INFO(object);
+        TRACE("info name = %s\n", g_file_info_get_name(info));
+        auto expander = gtk_list_item_get_child( GTK_LIST_ITEM(object) );
+
+        // FIXME gtk_tree_expander_set_list_row(GTK_TREE_EXPANDER(expander), treeListRow);
+
+        TRACE("factoryBind2...\n");
+        const char *name = g_file_info_get_name(info);
+        auto label = GTK_LABEL(g_object_get_data(object, "label"));
+
+        auto path = Basic::getPath(info);
+        struct stat st;
+        lstat(path, &st);
+        g_free(path);
+        auto m1 = Basic::statInfo(&st);
+        char *markup = g_strdup("<tt> <span color=\"blue\" size=\"small\">");
+        Basic::concat(&markup, m1);
+        Basic::concat(&markup, "</span></tt>");           
+        g_free(m1);
+
+                    
+        gtk_label_set_markup(label, markup);
+        g_free(markup);
+        
+      }
+      */
+#if 0
+      static void
       factoryTeardown(GtkSignalListItemFactory *self, GObject *object, void *data){
         //TRACE("factoryTeardown...\n");
 
       }
+
       static void
       factorySetup(GtkSignalListItemFactory *self, GObject *object, void *data){
         auto box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         TRACE("factorySetup...\n");        
-#if 1
+#ifdef USE_TREE
         auto expander = gtk_tree_expander_new();
         gtk_tree_expander_set_child(GTK_TREE_EXPANDER(expander), box);
         gtk_list_item_set_child(GTK_LIST_ITEM(object), expander); 
@@ -144,7 +262,8 @@ public:
       static void
       factoryBind(GtkSignalListItemFactory *factory, GObject *object, void *data){
         TRACE("factoryBind...\n");
-#if 10
+#ifdef USE_TREE
+
         auto list_item =GTK_LIST_ITEM(object);
         auto treeListRow = GTK_TREE_LIST_ROW(gtk_list_item_get_item(list_item));
         auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
@@ -187,6 +306,7 @@ public:
         g_free(markup);
         
       }
+#endif
 /*
     static void addGestureClickDown(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
@@ -218,9 +338,11 @@ public:
         gtk_box_append(mainBox_, sw);
         // listview...
         // gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(output_));
-        gtk_widget_set_size_request(GTK_WIDGET(sw), 600, 200);
-        auto listModel = getListModel("/home/tmp");
-#if 10
+        gtk_widget_set_size_request(GTK_WIDGET(sw), 680, 200);
+        auto listModel = getListModel("/");
+     //   auto listModel = getListModel("/home/edscott");
+#ifdef USE_TREE
+
   GtkTreeListModel * treemodel = gtk_tree_list_model_new (G_LIST_MODEL (listModel),
                                        FALSE, // passthrough
                                        FALSE, // autoexpand TRUE,
@@ -235,18 +357,35 @@ public:
 #endif
   
   auto maxLen = Basic::getMaxNameLen(listModel);
-  GtkListItemFactory *factory = gtk_signal_list_item_factory_new();
+/*  GtkListItemFactory *factory = gtk_signal_list_item_factory_new();
 
   g_object_set_data(G_OBJECT(factory), "maxLen", GINT_TO_POINTER(maxLen));
   g_signal_connect( factory, "setup", G_CALLBACK(factorySetup), this );
   g_signal_connect( factory, "bind", G_CALLBACK(factoryBind), this);
   g_signal_connect( factory, "unbind", G_CALLBACK(factoryUnbind), this);
   g_signal_connect( factory, "teardown", G_CALLBACK(factoryTeardown), this);
+*/
+  auto columnView = gtk_column_view_new(GTK_SELECTION_MODEL(selection));
+  gtk_column_view_set_show_column_separators (GTK_COLUMN_VIEW (columnView), false);
+  GtkColumnViewColumn *column;
+
+  GtkListItemFactory *factory1 = gtk_signal_list_item_factory_new();
+  column = gtk_column_view_column_new (_("Name"), factory1);
+  gtk_column_view_append_column (GTK_COLUMN_VIEW (columnView), column);
+  g_signal_connect (factory1, "setup", G_CALLBACK (factorySetup1), GINT_TO_POINTER(1));
+  g_signal_connect (factory1, "bind", G_CALLBACK (factoryBind1), GINT_TO_POINTER(1));
+  g_object_unref (column);
+
+
+  GtkListItemFactory *factory2 = gtk_signal_list_item_factory_new();
+  column = gtk_column_view_column_new (_("Information"), factory2);
+  gtk_column_view_append_column (GTK_COLUMN_VIEW (columnView), column);
+  g_signal_connect (factory2, "setup", G_CALLBACK (factorySetup1), NULL);
+  g_signal_connect (factory2, "bind", G_CALLBACK (factoryBind1), NULL);
+  g_object_unref (column);
   
-  auto listview = gtk_list_view_new (GTK_SELECTION_MODEL(selection), factory);
-
-  gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(listview));
-
+  //auto listview = gtk_list_view_new (GTK_SELECTION_MODEL(selection), factory);
+  gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(columnView));
  
       
 
