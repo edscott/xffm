@@ -7,9 +7,12 @@ namespace xf
   class DialogComplex : public DialogBasic<dialogClass> {
     public:
     DialogComplex(void){
+      DBG("DialogComplex1\n");
       auto frame = this->frame();
       auto mainBox = this->subClass()->mainBox();
+      DBG("DialogComplex12\n");
       gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
+      DBG("DialogComplex123\n");
       
     /*  clearVbox();
       auto mainBox = this->subClass()->mainBox();

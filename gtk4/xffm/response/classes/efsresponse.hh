@@ -40,8 +40,11 @@ public:
       children_ = g_list_prepend(children_, data);
     }
 
-    void cleanup(void){
+    void cleanup(void){// FIXME: this is subject to race 
+                       //GTK_IS_WINDOW(l->data) may cause crash
+                       //probably should do with controls...
       for (auto l=children_; l && l->data; l=l->next){
+          DBG("destroy dialog GTK_IS_WINDOW %p\n", l->data);
         if (GTK_IS_WINDOW(l->data)) {
           DBG("destroy dialog %p\n", l->data);
           gtk_widget_set_visible(GTK_WIDGET(l->data), false);

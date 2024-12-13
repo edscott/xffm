@@ -31,19 +31,25 @@ namespace xf {
     static GtkBox *
     pathbarLabelButton (const char *text) {
         auto label = GTK_LABEL(gtk_label_new(""));
+        gtk_widget_set_vexpand(GTK_WIDGET(label), false);
+        gtk_widget_set_hexpand(GTK_WIDGET(label), false);
+
         auto eventBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_vexpand(GTK_WIDGET(eventBox), false);
+        gtk_widget_set_hexpand(GTK_WIDGET(eventBox), false);
+
         if (text) {
             auto v = Basic::utf_string(text);
             auto g = g_markup_escape_text(v, -1);
             g_free(v);
-            auto markup = g_strdup_printf("   <span size=\"small\">  %s  </span>   ", g);
+            auto markup = g_strdup_printf(" %s ", g);
             g_free(g);
             gtk_label_set_markup(label, markup);
             g_free(markup);
         } else {
             gtk_label_set_markup(label, "");
         }
-        Basic::boxPack0 (eventBox, GTK_WIDGET(label), FALSE, FALSE, 0);
+        gtk_box_append(eventBox, GTK_WIDGET(label));
         g_object_set_data(G_OBJECT(eventBox), "label", label);
         g_object_set_data(G_OBJECT(eventBox), "name", text?g_strdup(text):g_strdup("RFM_ROOT"));
         return eventBox;

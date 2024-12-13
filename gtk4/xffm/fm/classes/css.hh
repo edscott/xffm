@@ -138,6 +138,7 @@ private:
       }\
       .pathbarboxRed * {\
         color: red;\
+        font-size: 12px;\
         background-color: #dcdad5;\
         border-width: 0px;\
         border-radius: 0px;\
@@ -145,6 +146,7 @@ private:
       }\
       .pathbarbox * {\
         color: blue;\
+        font-size: 12px;\
         background-color: #dcdad5;\
         border-width: 0px;\
         border-radius: 0px;\
@@ -159,6 +161,7 @@ private:
       }\
       .pathbarboxNegative * {\
         color: white;\
+        font-size: 12px;\
         background-color: #acaaa5;\
         border-width: 0px;\
         border-radius: 0px;\
