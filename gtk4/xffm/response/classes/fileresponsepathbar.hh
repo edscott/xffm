@@ -1,9 +1,9 @@
 #ifndef FILERESPONSEPATHBAR_HH
 #define FILERESPONSEPATHBAR_HH
 
-//namespace xf {
+namespace xf {
 
-//  class FileResponsePathbar {
+  class FileResponsePathbar {
   private:
     GtkBox *pathbar_;
     gchar *path_ =  NULL;
@@ -13,7 +13,12 @@
     GList *historyBack_;
     GList *historyNext_;
 
+    void *reloadFunction_;
+    void *reloadData_;
+
   public:
+    void reloadFunction(void *value){reloadFunction_ = value;}
+    void reloadData(void *value){reloadData_ = value;}
 
    GtkBox *pathbar(void){return pathbar_;} 
    const gchar *path(void){ return path_;}
@@ -37,14 +42,19 @@
    void setHistoryBack(GList *historyBack){ historyBack_ = historyBack;}
    void setHistoryNext(GList *historyNext){ historyNext_ = historyNext;}
    
-  void 
-    FileResponsePathbar(void) {
+   
+    FileResponsePathbar(void *reloadFunction, void *reloadData) {
+      reloadFunction_ = reloadFunction;
+      reloadData_ = reloadData;
+    //FileResponsePathbar(void) {
+
       pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
       gtk_widget_set_hexpand(GTK_WIDGET(pathbar_), false);
       gtk_widget_set_vexpand(GTK_WIDGET(pathbar_), false);
 
       auto eventBox1 = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));
       auto eventBox2 = eventButton("xf-go-next", "RFM_GOTO", "xffm:next", _("Next"));
+      auto eventBox3 = eventButton("xf-go-to", "RFM_GOTO", "xffm:goto", _("Go to"));
       back_ = GTK_WIDGET(eventBox1);
       next_ = GTK_WIDGET(eventBox2);
       g_object_set_data(G_OBJECT(pathbar_), "back", back_);
@@ -55,8 +65,10 @@
 
       addSignals(eventBox1, "xffm:back");
       addSignals(eventBox2, "xffm:next");
+      addSignals(eventBox3, "xffm:goto");
 
       Basic::boxPack0 (pathbar_, GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
+      Basic::boxPack0 (pathbar_, GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
       Basic::boxPack0 (pathbar_, GTK_WIDGET(eventBox2), FALSE, FALSE, 0);
 
       // bookmarks button:
@@ -71,7 +83,7 @@
 
             auto gesture1 = gtk_gesture_click_new();
             gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-            g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reload_f), NULL);
+            g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reloadFunction_), reloadData_);
             gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
 
       auto motion = gtk_event_controller_motion_new();
@@ -89,10 +101,10 @@
 */
     }
 
-   /* ~FileResponsePathbar(){
+    ~FileResponsePathbar(){
       g_free(path_);
       // free history
-    }*/
+    }
 
 
     void updatePathbarBox(const char *path, bool updateHistory, void *pathbar_go_f){
@@ -180,7 +192,7 @@
 
             auto gesture1 = gtk_gesture_click_new();
             gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-            g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reload_f), this);
+            g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reloadFunction_), reloadData_);
             gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
    
 
@@ -256,7 +268,6 @@
         }
     } 
 
-    private:
 
     void 
     togglePathbar(const gchar *path){
@@ -280,6 +291,7 @@
         }
         g_list_free(children_list);
     }
+    private:
 
     void         
     showWhatFits(const gchar *path, GList *children_list){
@@ -404,8 +416,8 @@
                     gdouble x,
                     gdouble y,
                     gpointer data) {
-        //auto pathbar_p = (FileResponsePathbar *)data;
-        auto pathbar_p = (FileResponse *)data;
+        auto pathbar_p = (FileResponsePathbar *)data;
+        //auto pathbar_p = (FileResponse *)data;
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         auto path = (const char *) g_object_get_data(G_OBJECT(eventBox), "path");
         TRACE("pathbar_blue:%s\n", path);
@@ -423,7 +435,7 @@
   private:
 
    void addSignals(GtkBox *eventBox, const char *path){
-      g_object_set_data(G_OBJECT(eventBox), "skipMenu", GINT_TO_POINTER(1));
+      //g_object_set_data(G_OBJECT(eventBox), "skipMenu", GINT_TO_POINTER(1));
       
       auto motionB = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(motionB, GTK_PHASE_CAPTURE);
@@ -444,7 +456,9 @@
               gdouble y,
               gpointer data ) 
     {
-      TRACE("*** gojump\n");
+
+      DBG("goJump currently disabled.\n");
+    return true;
       auto pathbar = GTK_WIDGET(data);
       auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
@@ -544,6 +558,6 @@
         return eventBox;        
     }
 
-//  };
-//}
+  };
+}
 #endif

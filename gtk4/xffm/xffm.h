@@ -102,6 +102,7 @@ static int longPressSerial = -1;
 #include "fm/templates/run.hh"  
 #include "fm/templates/runbutton.hh"
 
+#include "fm/classes/localdir.hh"       // fm class
 // dialogs 
 #include "response/dialogs.hh"
 
@@ -120,7 +121,7 @@ static int longPressSerial = -1;
 
 
 // fm classes/templates
-#include "fm/classes/localdir.hh"       // fm class
+//#include "fm/classes/localdir.hh"       // fm class
 #include "fm/classes/fstab.hh"       // fm class
 #include "fm/classes/root.hh"       // fm class
 #include "fm/templates/dnd.hh"     // fm template

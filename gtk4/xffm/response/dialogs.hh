@@ -14,7 +14,7 @@
 
 // response classes
 // jumpresponse is a template to access Workdir<Type>
-//#include "response/classes/fileresponsepathbar.hh"
+#include "response/classes/fileresponsepathbar.hh"
 #include "response/classes/fileresponse.hh" // class
 #include "response/classes/efsresponse.hh" // class
 #include "response/classes/entryresponse.hh" // class

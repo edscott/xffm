@@ -1,10 +1,13 @@
 #ifndef FILERESPONSE_HH
 #define FILERESPONSE_HH
 
+/* FIXME: when subdialog returns, it should send information to dialog to
+ *        update the entry and to remove window from cleanup window list.
+ *        */
+
 namespace xf {
   class FileResponse {
 //  class FileResponse : public FileResponsePathbar{
-#include "fileresponsepathbar.hh"
    GtkBox *mainBox_ = NULL;
    GtkWindow *dialog_ = NULL;
    char *title_ = _("Select Directory");
@@ -13,6 +16,7 @@ namespace xf {
    GtkEntry *mountPointEntry_ = NULL;
    GtkTextView *output_;
    GtkWidget *sw_;
+   FileResponsePathbar *responsePathbar_p;
 
 public:
     GtkWidget *sw(void){ return sw_;}
@@ -23,11 +27,14 @@ public:
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
 
     ~FileResponse (void){
-      g_free(path_);
+      delete responsePathbar_p;
     }
 
     FileResponse (void){
-      FileResponsePathbar();
+      responsePathbar_p = new FileResponsePathbar((void *)reload_f, (void *)this);
+      //this->reloadFunction((void *)reload_f);
+      //this->reloadData((void *)this);
+      //FileResponsePathbar((void *)reload_f, (void *)this);
     }
 
      static void *asyncYes(void *data){
@@ -44,7 +51,7 @@ public:
     static gint 
     compareFunction(const void *a, const void *b, void *data){
 
-        GFileInfo *infoA = G_FILE_INFO(a);
+       GFileInfo *infoA = G_FILE_INFO(a);
         GFileInfo *infoB = G_FILE_INFO(b);
 
         auto nameA = g_file_info_get_name(infoA);
@@ -68,6 +75,42 @@ public:
       return listModel;
     }
 
+    static GListModel *getBookmarkModel(const char *path){
+        Bookmarks::initBookmarks();
+        GError *error_ = NULL;
+        auto store = g_list_store_new(G_TYPE_FILE_INFO);
+        auto list = Bookmarks::bookmarksList();
+        for (auto l=list; l && l->data; l=l->next){
+          auto p = (bookmarkItem_t *)l->data;
+          if (!p->path) continue;
+          TRACE("adding bookmark %p -> %s\n", p, p->path);
+          if (!g_path_is_absolute(p->path)) continue;
+          if (!g_file_test(p->path, G_FILE_TEST_EXISTS)) {
+              TRACE("Bookmark %s does not exist\n", p->path);
+              continue;
+          }
+          GFile *file = g_file_new_for_path(p->path);
+          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          auto basename = g_path_get_basename(p->path);
+          auto utf_name = Basic::utf_string(basename);
+          g_file_info_set_name(info, utf_name);
+          g_free(basename);
+          g_free(utf_name);
+          g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
+          g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, NULL);
+          //g_list_store_insert(store, 0, G_OBJECT(info));
+          //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
+          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
+          g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
+        }
+
+        if (!g_slist_length(list)){
+          g_object_unref(store);
+          return NULL;
+        }
+        return G_LIST_MODEL(store);
+    }
+
     static GListModel *getListModel(const char *path){
         GError *error_ = NULL;
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
@@ -76,7 +119,7 @@ public:
           g_file_enumerate_children (file,"standard::",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(), g_strdup(error_->message));
+          Print::printError(Child::getOutput(), g_strconcat(error_->message, "\n", NULL));
           g_error_free(error_);
           return NULL;
         }
@@ -125,10 +168,11 @@ public:
         gtk_tree_expander_set_child(GTK_TREE_EXPANDER(expander), box);
         gtk_list_item_set_child(GTK_LIST_ITEM(object), expander); 
         g_object_set_data(G_OBJECT(object), "box", box);
-        if (data) {
-          auto paintable = Texture<bool>::load16("folder");
-          auto image = gtk_image_new_from_paintable(paintable);
-          gtk_box_append(GTK_BOX(box), image);
+
+        if (data) { // name column
+          auto imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+          gtk_box_append(GTK_BOX(box), imageBox);
+          g_object_set_data(G_OBJECT(object), "imageBox", imageBox);
         }
         auto label = gtk_label_new("");
         gtk_box_append(GTK_BOX(box), label);
@@ -152,7 +196,8 @@ public:
 
         auto label = GTK_LABEL(g_object_get_data(object, "label"));
         char *markup = NULL;
-        if (data) {
+        if (data) { // name column
+          auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
           const char *name = g_file_info_get_name(info);          
           auto maxLen = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(factory), "maxLen"));
           auto format = g_strdup_printf("<tt>%%-%ds", maxLen);
@@ -160,7 +205,14 @@ public:
           snprintf(buffer, 128, (const char *)format, name);
           markup = g_strdup_printf("%s</tt>", buffer);                    
           gtk_label_set_markup(label, markup);
-        } else {
+          
+          auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
+          if (oldImage) gtk_widget_unparent(oldImage);
+          auto paintable = Texture<bool>::load(info);
+          auto image = gtk_image_new_from_paintable(paintable);
+          gtk_widget_set_size_request(image, 16, 16);
+          gtk_box_append(GTK_BOX(imageBox), image);
+        } else { // info column
           auto path = Basic::getPath(info);
           struct stat st;
           lstat(path, &st);
@@ -214,7 +266,7 @@ public:
 
     }  
 */
-    // FIXME: should be in FileResponse
+      
     static gboolean // on release... Coordinates are in icon's frame of reference.
     reload_f(GtkGestureClick* self,
               gint n_press,
@@ -227,9 +279,15 @@ public:
       auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
       DBG("Reload treemodel with %s\n", path);
 
+      p->responsePathbar_p->path(path); // new red
+      p->responsePathbar_p->togglePathbar(path); // new red
       auto columnView = p->getColumnView(path);
       auto sw = GTK_SCROLLED_WINDOW(p->sw());
-      gtk_scrolled_window_set_child(sw, GTK_WIDGET(columnView));
+      if (columnView) gtk_scrolled_window_set_child(sw, GTK_WIDGET(columnView));
+      else {
+        auto label = gtk_label_new("empty");
+        gtk_scrolled_window_set_child(sw, label);
+      }
       return true;
     }
 
@@ -243,12 +301,17 @@ public:
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       DBG("selected: %s\n", g_file_info_get_name(info));
       auto path = Basic::getPath(info);
-      fileResponse_p->updatePathbarBox(path, false, NULL); // FIXME
-                                                           // need to define pathbar_go_f
+      fileResponse_p->responsePathbar_p->updatePathbarBox(path, false, NULL); 
     }
 
     GtkWidget *getColumnView(const char *path){
-        auto listModel = getListModel(path);
+        GListModel * listModel;
+        if (strcmp(path, _("Bookmarks")) == 0){
+          listModel = getBookmarkModel(path);
+        } else {
+          listModel = getListModel(path);
+        }
+        if (!listModel) return NULL;
 
         GtkTreeListModel * treemodel = gtk_tree_list_model_new (G_LIST_MODEL (listModel),
                                              FALSE, // passthrough
@@ -292,7 +355,7 @@ public:
 
     GtkBox *mainBox(void) {
         // set red path (root of treemodel)
-        this->path("/home/edscott"); // red item
+        responsePathbar_p->path("/home/edscott"); // red item
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -302,12 +365,11 @@ public:
 
         auto label = gtk_label_new("file response dialog now...\n");
         gtk_box_append(mainBox_, label);
-        auto pathbarBox = this->pathbar();
+        auto pathbarBox = responsePathbar_p->pathbar();
        // this->updatePathbarBox(path, pathbarBox, NULL);
-        this->updatePathbarBox(this->path(), false, NULL); // FIXME
-                                                           // need to define pathbar_go_f
+        responsePathbar_p->updatePathbarBox(responsePathbar_p->path(), false, NULL); 
         
-        gtk_box_append(mainBox_, GTK_WIDGET(this->pathbar()));
+        gtk_box_append(mainBox_, GTK_WIDGET(responsePathbar_p->pathbar()));
 
         sw_ = gtk_scrolled_window_new();
         gtk_widget_set_vexpand(GTK_WIDGET(sw_), true);
@@ -317,9 +379,15 @@ public:
         // gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(output_));
         gtk_widget_set_size_request(GTK_WIDGET(sw_), 680, 200);
 
-        auto columnView = getColumnView("/home/edscott");
-       //  auto listModel = getListModel("/");
-        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
+        auto columnView = getColumnView("/home/edscott"); // FIXME: send in parameter from calling code...
+        
+        if (columnView){
+          gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
+        } else {
+          auto label = gtk_label_new("empty");
+          gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), label);
+        }
+
  
       
 

@@ -86,41 +86,8 @@ namespace xf {
           DBG("EFS->%s path=%s\n", utf_name, *p);
           g_free(utf_name);
           g_free(basename);
-
-
- /*           const gchar *ball = NULL;
-            if (!g_file_test(*p, G_FILE_TEST_IS_DIR))ball = "/NE/dialog-error/3.0/220";
-            else {
-                TRACE("model.hh::addEfsItem()...\n"); 
-                if (FstabView<Type>::isMounted(*p))ball = "/NE/greenball/3.0/220";
-                else ball = "/NE/grayball/3.0/220";
-            }
-            auto icon_name = g_strconcat(EFS_ICON, ball, NULL);
-
-            auto highlight_name = g_strconcat(icon_name, "/", HIGHLIGHT_JUMP, NULL);
-            auto treeViewPixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -24);
-            auto normal_pixbuf = Pixbuf<Type>::getPixbuf(icon_name,  -48);
-            auto highlight_pixbuf = Pixbuf<Type>::getPixbuf(highlight_name,  -48);   
-
-            gtk_list_store_append (GTK_LIST_STORE(treeModel), &iter);
-            gtk_list_store_set (GTK_LIST_STORE(treeModel), &iter, 
-                    DISPLAY_NAME, utf_name,
-                    PATH, path,
-                    ICON_NAME, icon_name,
-                    TREEVIEW_PIXBUF, treeViewPixbuf, 
-                    DISPLAY_PIXBUF, normal_pixbuf,
-                    NORMAL_PIXBUF, normal_pixbuf,
-                    HIGHLIGHT_PIXBUF, highlight_pixbuf,
-                    TOOLTIP_TEXT,g_get_home_dir(),
-                    -1);
-            g_free(path);
-            g_free(utf_name);
-            g_free(icon_name);
-            g_free(highlight_name);
-        }*/
-        g_strfreev(items);
-    }
-        
+          g_strfreev(items);
+        }
         
         // bookmarks
         {
