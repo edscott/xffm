@@ -297,8 +297,10 @@ private:
         //exit(0);
       }
       
-      // Clear page history
+/*
+      // Clear page history (deprecated: is cleared with pathbar destructor)
       auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(child ), "pathbar"));
+
       auto historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
       auto historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
       if (historyBack){
@@ -309,7 +311,8 @@ private:
         for (GList *l=historyNext; l && l->data; l=l->next) g_free(l->data);
         g_list_free(historyNext);
       }
-
+*/
+      
       // Get VPane object from child widget (box)
       auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));

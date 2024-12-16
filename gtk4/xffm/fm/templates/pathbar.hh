@@ -4,22 +4,16 @@ namespace xf {
 
   
   template <class DirectoryClass>
-  class Pathbar : public UtilPathbar<DirectoryClass>
+  class Pathbar : public UtilPathbar<DirectoryClass>, public PathbarHistory<DirectoryClass>
   {
     GtkBox *pathbar_;
     gchar *path_;
     GtkWidget *back_;
     GtkWidget *next_;
-    GList *historyBack_;
-    GList *historyNext_;
      
   public:
    GtkBox *pathbar(void){return pathbar_;} 
    const gchar *path(void){ return path_;}
-   GList *historyBack(void){ return historyBack_;}
-   GList *historyNext(void){ return historyNext_;}
-   void setHistoryBack(GList *historyBack){ historyBack_ = historyBack;}
-   void setHistoryNext(GList *historyNext){ historyNext_ = historyNext;}
     
    void addSignals(GtkBox *eventBox, const char *path){
       g_object_set_data(G_OBJECT(eventBox), "skipMenu", GINT_TO_POINTER(1));
@@ -32,7 +26,7 @@ namespace xf {
 
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (goJump), (void *)pathbar_);
+      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (goJump), (void *)this);
       gtk_widget_add_controller(GTK_WIDGET(eventBox), GTK_EVENT_CONTROLLER(gesture));
    } 
  
@@ -41,6 +35,7 @@ namespace xf {
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
       
 
         auto eventBox1 = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));
@@ -100,10 +95,12 @@ namespace xf {
               gint n_press,
               gdouble x,
               gdouble y,
-              gpointer data ) 
+              void *data ) 
     {
       TRACE("*** gojump\n");
-      auto pathbar = GTK_WIDGET(data);
+      auto pathbar_p = (Pathbar<DirectoryClass> *)data;
+
+      auto pathbar = GTK_WIDGET(pathbar_p->pathbar());
       auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
       auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
@@ -112,6 +109,9 @@ namespace xf {
       auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
       TRACE("gojump: path=%s\n", path);
       if (strcmp(path, "xffm:back") == 0){
+        auto previous = pathbar_p->backHistory();
+        if (previous) Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
+/*
          GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
          if (!historyBack){
            TRACE("no back history List\n");
@@ -136,8 +136,12 @@ namespace xf {
            Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
            return TRUE;
          }
+*/
       }
       if (strcmp(path, "xffm:next") == 0){
+        auto current = pathbar_p->nextHistory();
+        if (current)  Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
+        /*
          GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
          if (!historyNext){
            TRACE("no next history\n");
@@ -154,6 +158,7 @@ namespace xf {
            Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
            return TRUE;
          }
+        */
       }
       if (strcmp(path, "xffm:goto") == 0){
         auto dialogObject = new DialogPrompt<jumpResponse<DirectoryClass> >;

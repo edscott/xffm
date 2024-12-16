@@ -2,6 +2,77 @@
 #define UTILPATHBAR_HH
 namespace xf {
   template <class Type>
+  class PathbarHistory {
+    GList *historyBack_;
+    GList *historyNext_;
+  public:
+
+   ~PathbarHistory(void){
+     for (auto l=historyBack_; l && l->data; l=l->next) g_free(l->data);
+     for (auto l=historyNext_; l && l->data; l=l->next) g_free(l->data);
+     g_list_free(historyBack_);
+     g_list_free(historyNext_);
+     return;
+   }
+
+   bool historyNext(void) {
+     if (historyNext_) return true; 
+     return false;
+   }
+   bool historyBack(void) {
+     if (historyBack_ && g_list_length(historyBack_) > 1) return true;
+     return false;
+   }
+
+   const char *nextHistory(void){
+     if (!historyNext_ || historyNext_->data == NULL){
+      //if (!historyNext_){ TRACE("no next history List\n"); } else { TRACE("no next history next\n"); }
+      return NULL;
+     }
+     char *current = (char *) historyNext_->data;
+     TRACE("next path is %s\n", (const char *) current);
+     historyBack_ = g_list_prepend(historyBack_, current);
+     historyNext_ = g_list_remove(historyNext_, current);
+     return current;
+   }
+
+   const char *backHistory(void){
+     if (!historyBack_ || historyBack_->next == NULL) {
+      //if (!historyBack_){ TRACE("no back history List\n"); } else { TRACE("no back history next\n"); }
+      return NULL;
+     }
+     auto current = (const char *) historyBack_->data;
+     auto previous = (const char *) historyBack_->next->data;
+     TRACE("Back path is %s\n", previous);
+     // No need to free memory, since we just move from one list to the other.
+     historyNext_ = g_list_prepend(historyNext_, (void *)current);
+     historyBack_ = g_list_remove(historyBack_,  (void *)current);
+     //for (GList *l=historyNext_; l && l->data; l=l->next){TRACE("historyNext list = %s\n", (char *)l->data);}
+     return previous;    
+   }
+
+   void push(const char *path){
+      if (historyBack_ && historyBack_->data != NULL){
+        if (strcmp(path, (const char *)historyBack_->data) != 0){
+          // update with different or non existing path.
+          historyBack_ = g_list_prepend(historyBack_, g_strdup(path));
+          TRACE("updatePathbar: 1 updating historyBack_ with path = %s\n", path);
+        }
+      } else {
+          // update with new path. 
+          historyBack_ = g_list_prepend(historyBack_, g_strdup(path));
+          TRACE("updatePathbar: 2 updating histohistoryBack_ryBack with path = %s\n", path);
+      }
+      // wipe next history 
+      for (GList *l=historyNext_; l && l->data; l=l->next) g_free(l->data);
+      g_list_free(historyNext_);
+      return;
+   }
+  
+  };
+  
+  
+  template <class Type>
   class UtilPathbar {
     public:
     ///////////////////   pathbar  ///////////////////////////////////
@@ -27,8 +98,10 @@ namespace xf {
 //            pathbar_p->toggle_pathbar(NULL);
             return ;
         }
+        auto pathbarHistory_p = (PathbarHistory<Type> *)g_object_get_data(G_OBJECT(pathbar), "pathbarHistory");
         if (updateHistory) {
-          
+          pathbarHistory_p->push(path);
+ /*         
           GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
           if (historyBack){
             if (strcmp(path, (const char *)historyBack->data) != 0){
@@ -45,8 +118,43 @@ namespace xf {
           for (GList *l=historyNext; l && l->data; l=l->next) g_free(l->data);
           g_list_free(historyNext);
           g_object_set_data(G_OBJECT(pathbar), "historyNext", NULL);
+      */
         }
-        
+        // Now process to back and next buttons
+        {
+          auto next = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "next"));
+          auto back = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "back"));
+          if (pathbarHistory_p->historyNext()){
+            gtk_widget_remove_css_class (GTK_WIDGET(next), "pathbarboxNegative" );
+            gtk_widget_add_css_class (GTK_WIDGET(next), "pathbarbox" );          
+            gtk_widget_set_sensitive(next, true);
+          } else gtk_widget_set_sensitive(next, false);
+          if (pathbarHistory_p->historyBack()){
+            gtk_widget_remove_css_class (GTK_WIDGET(back), "pathbarboxNegative" );
+            gtk_widget_add_css_class (GTK_WIDGET(back), "pathbarbox" );          
+            gtk_widget_set_sensitive(back, true);
+          } else gtk_widget_set_sensitive(back, false);
+
+
+/*          
+          GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
+          GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
+          TRACE("length historyNext=%d\n", g_list_length(historyNext));
+          TRACE("length historyBack=%d\n", g_list_length(historyBack));
+          if (g_list_length(historyNext) <= 0) {
+            gtk_widget_remove_css_class (GTK_WIDGET(next), "pathbarboxNegative" );
+            gtk_widget_add_css_class (GTK_WIDGET(next), "pathbarbox" );          
+          }
+          gtk_widget_set_sensitive(next, g_list_length(historyNext) > 0);
+          // History back contains the first path visited. 
+          if (g_list_length(historyBack) <= 1) {
+            gtk_widget_remove_css_class (GTK_WIDGET(back), "pathbarboxNegative" );
+            gtk_widget_add_css_class (GTK_WIDGET(back), "pathbarbox" );          
+          }
+          gtk_widget_set_sensitive(back, g_list_length(historyBack) > 1); 
+*/
+        }
+       
 
         //Nonexisting paths, use homedir
         if (!g_file_test(path, G_FILE_TEST_EXISTS)) path = g_get_home_dir();
@@ -159,26 +267,6 @@ namespace xf {
  
         }
 
-        // Now process to back and next buttons
-        {
-          auto next = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "next"));
-          auto back = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "back"));
-          GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
-          GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
-          TRACE("length historyNext=%d\n", g_list_length(historyNext));
-          TRACE("length historyBack=%d\n", g_list_length(historyBack));
-          if (g_list_length(historyNext) <= 0) {
-            gtk_widget_remove_css_class (GTK_WIDGET(next), "pathbarboxNegative" );
-            gtk_widget_add_css_class (GTK_WIDGET(next), "pathbarbox" );          
-          }
-          gtk_widget_set_sensitive(next, g_list_length(historyNext) > 0);
-          // History back contains the first path visited. 
-          if (g_list_length(historyBack) <= 1) {
-            gtk_widget_remove_css_class (GTK_WIDGET(back), "pathbarboxNegative" );
-            gtk_widget_add_css_class (GTK_WIDGET(back), "pathbarbox" );          
-          }
-          gtk_widget_set_sensitive(back, g_list_length(historyBack) > 1); 
-        }
         resetPathbarCSS(pathbar);
         return ;
     }

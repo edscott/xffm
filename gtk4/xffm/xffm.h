@@ -128,11 +128,11 @@ static int longPressSerial = -1;
 #include "fm/templates/factory.hh"     // fm template
 #include "fm/templates/gridview.hh"     // fm template
 #include "fm/templates/utilpathbar.hh"  // fm template
+#include "fm/templates/pathbar.hh"      // fm template
 #include "fm/templates/workdir.hh"      // fm template
 #include "fm/templates/util.hh"         // fm template
 #include "fm/templates/prompt.hh"       // fm template
 #include "fm/classes/fmbuttonbox.hh"    // fm class
-#include "fm/templates/pathbar.hh"      // fm template
 #include "fm/classes/fmpage.hh"         // fm class
 
 #include "fm/templates/fstabmonitor.hh"
