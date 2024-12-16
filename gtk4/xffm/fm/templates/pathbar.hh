@@ -8,8 +8,6 @@ namespace xf {
   {
     GtkBox *pathbar_;
     gchar *path_;
-    //GtkWidget *back_;
-    //GtkWidget *next_;
      
   public:
    GtkBox *pathbar(void){return pathbar_;} 
@@ -24,9 +22,9 @@ namespace xf {
       g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
       g_object_set_data(G_OBJECT(pathbar_), "pathbar_p", this);
    }
-   Pathbar(void *jumpFunction) {
+   Pathbar(void *goFunction, void *jumpFunction) {
      // Alternate class template constructor with specific jumpFunction.
-      pathbar_ = createPathbar((void *)Workdir<DirectoryClass>::pathbar_go, jumpFunction, (void *)this);
+      pathbar_ = createPathbar(goFunction, jumpFunction, (void *)this);
       g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
       g_object_set_data(G_OBJECT(pathbar_), "pathbar_p", this);
    }
@@ -50,9 +48,6 @@ namespace xf {
       addSignals(eventBox2, jumpFunction, jumpData);
       addSignals(eventBox3, jumpFunction, jumpData);
 
-      /*addSignals(eventBox1, "xffm:back");
-      addSignals(eventBox2, "xffm:next");
-      addSignals(eventBox3, "xffm:goto");*/
 
       Basic::boxPack0 (pathbarBox, GTK_WIDGET(eventBox1), FALSE, FALSE, 0);
       Basic::boxPack0 (pathbarBox, GTK_WIDGET(eventBox3), FALSE, FALSE, 0);
@@ -101,66 +96,16 @@ namespace xf {
       if (strcmp(path, "xffm:back") == 0){
         auto previous = pathbar_p->backHistory();
         if (previous) Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
-/*
-         GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
-         if (!historyBack){
-           TRACE("no back history List\n");
-           return TRUE;
-         }
-         else if (historyBack->next == NULL){
-           TRACE("no back history next\n");
-           return TRUE;
-         }
-         else {
-           auto current = (char *) historyBack->data;
-           auto previous = (char *) historyBack->next->data;
-           TRACE("Back path is %s\n", previous);
-           GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
-           historyNext = g_list_prepend(historyNext, current);
-           historyBack = g_list_remove(historyBack,  current);
-           for (GList *l=historyNext; l && l->data; l=l->next){
-             TRACE("historyNext list = %s\n", (char *)l->data);
-           }
-           g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
-           g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
-           return TRUE;
-         }
-*/
       }
       if (strcmp(path, "xffm:next") == 0){
         auto current = pathbar_p->nextHistory();
         if (current)  Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
-        /*
-         GList *historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
-         if (!historyNext){
-           TRACE("no next history\n");
-           return TRUE;
-         }
-         else {
-           char *current = (char *) historyNext->data;
-           TRACE("next path is %s\n", (const char *) current);
-           GList *historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
-           historyBack = g_list_prepend(historyBack, current);
-           historyNext = g_list_remove(historyNext, current);
-           g_object_set_data(G_OBJECT(pathbar), "historyNext", historyNext);
-           g_object_set_data(G_OBJECT(pathbar), "historyBack", historyBack);
-           Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
-           return TRUE;
-         }
-        */
       }
       if (strcmp(path, "xffm:goto") == 0){
         auto dialogObject = new DialogPrompt<jumpResponse<DirectoryClass> >;
         auto dialog = dialogObject->dialog();
         dialogObject->setParent(GTK_WINDOW(MainWidget));
         dialogObject->run();
-
-     /*   Print::clear_text(GTK_TEXT_VIEW(input));
-        Print::print(GTK_TEXT_VIEW(input), g_strdup("cd ")); 
-        gtk_widget_grab_focus(GTK_WIDGET(input));
-
-        Basic::flushGTK();*/
       }
       
       return TRUE;
@@ -215,7 +160,6 @@ namespace xf {
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (jumpFunction), jumpData);
-      //g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (goJump), (void *)this);
       gtk_widget_add_controller(GTK_WIDGET(eventBox), GTK_EVENT_CONTROLLER(gesture));
    } 
 
