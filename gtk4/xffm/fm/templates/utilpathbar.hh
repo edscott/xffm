@@ -66,6 +66,7 @@ namespace xf {
       // wipe next history 
       for (GList *l=historyNext_; l && l->data; l=l->next) g_free(l->data);
       g_list_free(historyNext_);
+      historyNext_ = NULL;
       return;
    }
   
