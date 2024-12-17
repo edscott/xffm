@@ -10,6 +10,8 @@ namespace xf {
     gchar *path_;
     void *reloadFunction_;
     void *reloadData_;
+    void *jumpFunction_;
+    void *jumpData_;
     GtkBox *eventBox1_;     
     GtkBox *eventBox2_;     
     GtkBox *eventBox3_;     
@@ -83,13 +85,18 @@ namespace xf {
      // jumpFunction() is executed for back/next/goto buttons.
       auto pathbarBox = newPathbarBox();
 
-      addSignals(eventBox1_, jumpFunction, jumpData);
-      addSignals(eventBox2_, jumpFunction, jumpData);
-      addSignals(eventBox3_, jumpFunction, jumpData);
+      reloadFunction_ = goFunction;
+      reloadData_ = (void *)pathbarBox;
+      jumpFunction_ = jumpFunction;
+      jumpData_ = jumpData;
+
+      addSignals(eventBox1_, jumpFunction_, jumpData_);
+      addSignals(eventBox2_, jumpFunction_, jumpData_);
+      addSignals(eventBox3_, jumpFunction_, jumpData_);
   
       auto gesture1 = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-      g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (goFunction), (void *)pathbarBox);
+      g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reloadFunction_), reloadData_);
       gtk_widget_add_controller(GTK_WIDGET(bookmarkButton_), GTK_EVENT_CONTROLLER(gesture1));
       return pathbarBox;
    }
