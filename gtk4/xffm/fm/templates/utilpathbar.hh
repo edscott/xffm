@@ -3,8 +3,8 @@
 namespace xf {
   template <class Type>
   class PathbarHistory {
-    GList *historyBack_;
-    GList *historyNext_;
+    GList *historyBack_ = NULL;
+    GList *historyNext_ = NULL;
   public:
 
    ~PathbarHistory(void){
