@@ -4,20 +4,19 @@
 namespace xf {
 
 
-#if 0
-  template <class DirectoryClass> Pathbar;
-  class FileResponsePathbar : public PathBar<DirectoryClass> {
-  public:
-    FileResponse (void *reloadFunction, void *reloadData){
-      FileResponsePathbar((void *)reload_f, (void *)jump_f);
-      //this->reloadFunction((void *)reload_f);
-      //this->reloadData((void *)this);
-      //FileResponsePathbar((void *)reload_f, (void *)this);
+#if 10
+/*  template <class Type>
+  class FileResponsePathbar{
+
+    FileResponsePathbar(void *reloadFunction, void *reloadData, void *jumpFunction, void *jumpData) {
+      Pathbar<Type> *pathbar_p = new Pathbar<Type>(reloadFunction, reloadData, jumpFunction, jumpData);
     }
 
-  private:
+  };*/
 #else
-  class FileResponsePathbar {
+  
+
+  class FileResponsePathbar : Pathbar<DirectoryClass>{
   private:
     GtkBox *pathbar_;
     gchar *path_ =  NULL;
@@ -571,8 +570,8 @@ namespace xf {
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
         return eventBox;        
     }
-#endif
 
   };
+#endif
 }
 #endif

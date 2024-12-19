@@ -1,6 +1,7 @@
 #ifndef WORKDIR_HH
 #define WORKDIR_HH
 namespace xf {
+  template <class DirectoryClass> class Pathbar;
   template <class DirectoryClass>
   class Workdir  {
     private:
@@ -96,9 +97,9 @@ namespace xf {
         UtilPathbar<DirectoryClass>::updatePathbar(addHistory, pathbar_go);
 
       }
-      static void  updatePathbar(const gchar *path, GtkBox *pathbar, 
+      static void  updatePathbar(const gchar *path, Pathbar<DirectoryClass> *pathbar_p, 
           bool addHistory, void *pathbar_go){
-        UtilPathbar<DirectoryClass>::updatePathbar(path, pathbar, addHistory, pathbar_go);
+        UtilPathbar<DirectoryClass>::updatePathbar(path, pathbar_p, addHistory, pathbar_go);
       }
 
     public:
@@ -166,21 +167,30 @@ char buffer[4096];
       updateGridView(path);
       return true;
     }
-    static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
+    //private:
+    //static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
+    //
+    //Only applies to gridview, not fileResponse.
+    static bool setWorkdir(const gchar *path, Pathbar<DirectoryClass> *pathbar_p, bool updateHistory){
       TRACE("setWorkdir...C\n");
       if (pleaseWait()) return false;
       if (!MainWidget) return false;
-      auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
-      auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
+      auto pathbar = pathbar_p->pathbar();
+      auto wd = pathbar_p->path();
+      //auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
+      //auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       TRACE("setWorkdir: path=%s, wd path=%s\n", path, wd);
-      g_free(wd);
+      //g_free(wd);
+  /*    auto child = Child::getChild();
+      g_free(g_object_get_data(G_OBJECT(child), "path"));
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
-      Child::setWindowTitle(child);
-      updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
+      Child::setWindowTitle(child);*/
+      
+      updatePathbar(path, pathbar_p, updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
-    
+    public:
     static gboolean // on release... Coordinates are in icon's frame of reference.
     gridViewClick(GtkGestureClick* self,
               gint n_press,
@@ -260,7 +270,7 @@ char buffer[4096];
         }
         
         DBG("Open new ecryptfs dialog.\n");
-        EFS::newEfs();
+        EFS<DirectoryClass>::newEfs();
         return TRUE;
       }
       auto trash = g_file_info_get_attribute_object (info, "xffm::trash");
@@ -321,17 +331,18 @@ char buffer[4096];
               gdouble y,
               gpointer data ) 
     {
-        auto pathbar = GTK_BOX(data);
+        auto pathbar_p = (Pathbar<DirectoryClass> *)(data);
+        auto pathbar = pathbar_p->pathbar();
+        //auto pathbar = GTK_BOX(data);
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
         auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
         auto button = gtk_gesture_single_get_button(GTK_GESTURE_SINGLE(self));
           TRACE("pathbar goto... name=%s, path=%s\n", name, path);
         if (button == 1){
-          TRACE("pathbar goto...\n");
           //if (strcmp(path, _("Bookmarks"))==0) setWorkdir(g_get_home_dir(), pathbar, true);
           //else setWorkdir(path, pathbar, true);
-          setWorkdir(path, pathbar, true);
+          setWorkdir(path, pathbar_p, true);
           return TRUE;
         }
         //TRACE("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);

@@ -129,7 +129,7 @@ template <class DirectoryClass>
         auto child = Child::getChild();
         selectionModel_ = NULL;
         if (strcmp(path_, _("Bookmarks"))==0) {
-          selectionModel_ = rootDir::rootSelectionModel();
+          selectionModel_ = rootDir<DirectoryClass>::rootSelectionModel();
         } else if (strcmp(path_, _("Disk Mounter"))==0) {
           selectionModel_ = FstabDir::fstabSelectionModel();
         } else {

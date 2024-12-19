@@ -7,47 +7,72 @@ namespace xf {
   class Pathbar : public UtilPathbar<DirectoryClass>, public PathbarHistory<DirectoryClass>
   {
     GtkBox *pathbar_;
-    gchar *path_;
-    void *reloadFunction_;
-    void *reloadData_;
-    void *jumpFunction_;
-    void *jumpData_;
+    gchar *path_ = NULL;
+    void *reloadFunction_ = NULL;
+    void *reloadData_ = NULL;
+    void *jumpFunction_ = NULL;
+    void *jumpData_ = NULL;
     GtkBox *eventBox1_;     
     GtkBox *eventBox2_;     
     GtkBox *eventBox3_;     
     GtkBox *bookmarkButton_;     
   public:
+
+
+    void reloadFunction(void *value){reloadFunction_ = value;}
+    void reloadData(void *value){reloadData_ = value;}
+    void jumpFunction(void *value){jumpFunction_ = value;}
+    void jumpData(void *value){jumpData_ = value;}
+
    GtkBox *pathbar(void){return pathbar_;} 
    const gchar *path(void){ return path_;}
+   void path(const char *value){
+     g_free(path_);
+     if (!value){
+       path_ = g_strdup(g_get_home_dir());
+       return;
+     }
+
+     //Nonexisting paths, use homedir
+     if (!g_file_test(value, G_FILE_TEST_EXISTS)) {
+       path_ = g_strdup(g_get_home_dir());
+       return;
+     } 
+     path_ = g_strdup(value);
+   }
  
    ~Pathbar(void){
+      g_free(path_);
      //delete myPathbarMenu_;
    }
    Pathbar(void) {
      // Default goJump functionality.
-     // createPathbar with 3 arguments
-      pathbar_ = createPathbar((void *)Workdir<DirectoryClass>::pathbar_go, (void *)goJump, (void *)this);
+     // createPathbar with 1 argument
+      reloadData_ = this;
+      jumpFunction_ = (void *)goJump;
+      jumpData_ = this;
+      pathbar_ = createPathbar((void *)Workdir<DirectoryClass>::pathbar_go);
       g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
       g_object_set_data(G_OBJECT(pathbar_), "pathbar_p", this);
+      TRACE("*** pathbar constructor, goJump=%p pathbar_p=%p\n", goJump, this);
+      TRACE("*** Pathbar...historyBack_= %p, historyNext_=%p\n",
+              this->historyBack_, this->historyNext_);
    }
-   Pathbar(void *goFunction, void *goFunctionData) {
+   Pathbar(void *goFunction, void *goFunctionData, void *jumpFunction, void *jumpData) {
      // Alternate class template constructor with specific goFunction.
      // createPathbar with 2 arguments
+      jumpFunction_ = jumpFunction;
+      jumpData_ = jumpData;
       pathbar_ = createPathbar(goFunction, goFunctionData);
       g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
       g_object_set_data(G_OBJECT(pathbar_), "pathbar_p", this);
    }
-/*   Pathbar(void *goFunction, void *goFunctionData, void *jumpFunction, void *jumpFunctionData) {
-     //FIXME
-     // Alternate class template constructor with specific goFunction and jumpFunction.
-     // createPathbar with 4 arguments
-      pathbar_ = createPathbar(goFunction, jumpFunction, (void *)this);
-      g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
-      g_object_set_data(G_OBJECT(pathbar_), "pathbar_p", this);
-   }*/
+
+  private:
 
    GtkBox *newPathbarBox(void){
       auto pathbarBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+      g_object_set_data(G_OBJECT(pathbarBox), "pathbar_p", this);
       eventBox1_ = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));
       eventBox2_ = eventButton("xf-go-next", "RFM_GOTO", "xffm:next", _("Next"));
       eventBox3_ = eventButton("xf-go-to", "RFM_GOTO", "xffm:goto", _("Go to"));
@@ -80,15 +105,12 @@ namespace xf {
   
    } 
 
-   GtkBox *createPathbar(void *goFunction, void *jumpFunction, void *jumpData){
+   GtkBox *createPathbar(void *goFunction){
      // goFunction() is executed on click of a pathbar eventBox.
      // jumpFunction() is executed for back/next/goto buttons.
       auto pathbarBox = newPathbarBox();
-
+DBG("*** createPathbar1\n");
       reloadFunction_ = goFunction;
-      reloadData_ = (void *)pathbarBox;
-      jumpFunction_ = jumpFunction;
-      jumpData_ = jumpData;
 
       addSignals(eventBox1_, jumpFunction_, jumpData_);
       addSignals(eventBox2_, jumpFunction_, jumpData_);
@@ -96,33 +118,33 @@ namespace xf {
   
       auto gesture1 = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-      g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reloadFunction_), reloadData_);
+      g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reloadFunction_), this);
       gtk_widget_add_controller(GTK_WIDGET(bookmarkButton_), GTK_EVENT_CONTROLLER(gesture1));
       return pathbarBox;
    }
 
-   // FileResponsePathbar(void *reloadFunction, void *reloadData) {
    GtkBox *createPathbar(void *goFunction, void *goFunctionData){
       reloadFunction_ = goFunction;
       reloadData_ = goFunctionData;
+DBG("*** createPathbar2 reloadFunction_=%p, reloadData_=%p\n", reloadFunction_, reloadData_);
+
       auto pathbarBox = newPathbarBox();
 
-/*
-      addSignals(eventBox1, "xffm:back");
-      addSignals(eventBox2, "xffm:next");
-      addSignals(eventBox3, "xffm:goto");
-*/
+      addSignals(eventBox1_, jumpFunction_, jumpData_);
+      addSignals(eventBox2_, jumpFunction_, jumpData_);
+      addSignals(eventBox3_, jumpFunction_, jumpData_);
+DBG("*** createPathbar2 addSignals\n");
 
       auto gesture1 = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
       g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (reloadFunction_), reloadData_);
       gtk_widget_add_controller(GTK_WIDGET(bookmarkButton_), GTK_EVENT_CONTROLLER(gesture1));
+DBG("*** createPathbar2 gesture1\n");
   
       return pathbarBox;
     
     }
 
-  private:
     static gboolean
     goJump (
               GtkGestureClick* self,
@@ -131,7 +153,7 @@ namespace xf {
               gdouble y,
               void *data ) 
     {
-      TRACE("*** gojump\n");
+      DBG("*** gojump pathbar_p = %p\n",data);
       auto pathbar_p = (Pathbar<DirectoryClass> *)data;
 
       auto pathbar = GTK_WIDGET(pathbar_p->pathbar());
@@ -144,11 +166,13 @@ namespace xf {
       TRACE("gojump: path=%s\n", path);
       if (strcmp(path, "xffm:back") == 0){
         auto previous = pathbar_p->backHistory();
-        if (previous) Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
+        if (previous) Workdir<DirectoryClass>::setWorkdir(previous, pathbar_p, false);
+//        if (previous) Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
       }
       if (strcmp(path, "xffm:next") == 0){
         auto current = pathbar_p->nextHistory();
-        if (current)  Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
+        if (current)  Workdir<DirectoryClass>::setWorkdir(current, pathbar_p, false);
+//        if (current)  Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
       }
       if (strcmp(path, "xffm:goto") == 0){
         auto dialogObject = new DialogPrompt<jumpResponse<DirectoryClass> >;
