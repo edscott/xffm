@@ -58,12 +58,12 @@ namespace xf {
       TRACE("*** Pathbar...historyBack_= %p, historyNext_=%p\n",
               this->historyBack_, this->historyNext_);
    }
-   Pathbar(void *goFunction, void *goFunctionData, void *jumpFunction, void *jumpData) {
+   Pathbar(void *goFunction, void *jumpFunction, void *jumpData) {
      // Alternate class template constructor with specific goFunction.
      // createPathbar with 2 arguments
       jumpFunction_ = jumpFunction;
       jumpData_ = jumpData;
-      pathbar_ = createPathbar(goFunction, goFunctionData);
+      pathbar_ = createPathbar(goFunction);
       g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
       g_object_set_data(G_OBJECT(pathbar_), "pathbar_p", this);
    }
@@ -122,7 +122,7 @@ DBG("*** createPathbar1\n");
       gtk_widget_add_controller(GTK_WIDGET(bookmarkButton_), GTK_EVENT_CONTROLLER(gesture1));
       return pathbarBox;
    }
-
+/*
    GtkBox *createPathbar(void *goFunction, void *goFunctionData){
       reloadFunction_ = goFunction;
       reloadData_ = goFunctionData;
@@ -144,7 +144,7 @@ DBG("*** createPathbar2 gesture1\n");
       return pathbarBox;
     
     }
-
+*/
     static gboolean
     goJump (
               GtkGestureClick* self,

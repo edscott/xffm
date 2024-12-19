@@ -34,10 +34,10 @@ public:
     }
 
     FileResponse (void){
-      pathbar_p = new Pathbar<Type>((void *)reload_f, (void *)this, NULL, NULL);
+      pathbar_p = new Pathbar<Type>((void *)reload_f, NULL, NULL);
       
-      pathbar_p->reloadFunction((void *)reload_f);
-      pathbar_p->reloadData((void *)this);
+      //pathbar_p->reloadFunction((void *)reload_f);
+      //pathbar_p->reloadData((void *)this);
       pathbar_p->jumpFunction(NULL);
       pathbar_p->jumpData(NULL);
       //this->reloadFunction((void *)reload_f);
