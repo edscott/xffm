@@ -3,20 +3,7 @@
 
 namespace xf {
 
-
-#if 10
-/*  template <class Type>
-  class FileResponsePathbar{
-
-    FileResponsePathbar(void *reloadFunction, void *reloadData, void *jumpFunction, void *jumpData) {
-      Pathbar<Type> *pathbar_p = new Pathbar<Type>(reloadFunction, reloadData, jumpFunction, jumpData);
-    }
-
-  };*/
-#else
-  
-
-  class FileResponsePathbar : Pathbar<DirectoryClass>{
+  class FileResponsePathbar {
   private:
     GtkBox *pathbar_;
     gchar *path_ =  NULL;
@@ -572,6 +559,5 @@ namespace xf {
     }
 
   };
-#endif
 }
 #endif

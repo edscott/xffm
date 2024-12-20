@@ -6,8 +6,6 @@
  *        */
 
 namespace xf {
-  template <class Type> class Pathbar;
-  template <class Type>
   class FileResponse {
 //  class FileResponse : public FileResponsePathbar{
    GtkBox *mainBox_ = NULL;
@@ -18,8 +16,7 @@ namespace xf {
    GtkEntry *mountPointEntry_ = NULL;
    GtkTextView *output_;
    GtkWidget *sw_;
-   Pathbar<Type> *pathbar_p;
-
+   FileResponsePathbar *responsePathbar_p;
 
 public:
     GtkWidget *sw(void){ return sw_;}
@@ -30,16 +27,11 @@ public:
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
 
     ~FileResponse (void){
-      delete pathbar_p;
+      delete responsePathbar_p;
     }
 
     FileResponse (void){
-      pathbar_p = new Pathbar<Type>((void *)reload_f, NULL, NULL);
-      
-      //pathbar_p->reloadFunction((void *)reload_f);
-      //pathbar_p->reloadData((void *)this);
-      pathbar_p->jumpFunction(NULL);
-      pathbar_p->jumpData(NULL);
+      responsePathbar_p = new FileResponsePathbar((void *)reload_f, (void *)this);
       //this->reloadFunction((void *)reload_f);
       //this->reloadData((void *)this);
       //FileResponsePathbar((void *)reload_f, (void *)this);
@@ -287,9 +279,8 @@ public:
       auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
       DBG("Reload treemodel with %s\n", path);
 
-      p->pathbar_p->path(path); // new red
-      auto pathbarBox = GTK_BOX(p->pathbar_p->pathbar());
-      p->pathbar_p->togglePathbar(path, pathbarBox); // new red
+      p->responsePathbar_p->path(path); // new red
+      p->responsePathbar_p->togglePathbar(path); // new red
       auto columnView = p->getColumnView(path);
       auto sw = GTK_SCROLLED_WINDOW(p->sw());
       if (columnView) gtk_scrolled_window_set_child(sw, GTK_WIDGET(columnView));
@@ -305,16 +296,12 @@ public:
                   GParamSpec         *pspec,
                   void *data)
     {
-      auto p =(FileResponse *)data;
+      auto fileResponse_p =(FileResponse *)data;
       GtkTreeListRow *treeListRow = GTK_TREE_LIST_ROW(gtk_single_selection_get_selected_item (sel));
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       DBG("selected: %s\n", g_file_info_get_name(info));
       auto path = Basic::getPath(info);
-      auto pathbarBox = GTK_BOX(p->pathbar_p->pathbar());
-      // FIXME:
-      // We also need to send reloadData_ and eventually jumpFunction_ and jumpData_
-      // probably eliminate reloadData_ and jumpData_ and set to commonly "this"
-     // p->pathbar_p->updatePathbar(path, pathbarBox, false, p->pathbar_p->reloadFunction()); 
+      fileResponse_p->responsePathbar_p->updatePathbarBox(path, false, NULL); 
     }
 
     GtkWidget *getColumnView(const char *path){
@@ -368,7 +355,7 @@ public:
 
     GtkBox *mainBox(void) {
         // set red path (root of treemodel)
-        pathbar_p->path("/home/edscott"); // red item
+        responsePathbar_p->path("/home/edscott"); // red item
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -378,14 +365,11 @@ public:
 
         auto label = gtk_label_new("file response dialog now...\n");
         gtk_box_append(mainBox_, label);
-        auto pathbarBox = pathbar_p->pathbar();
-      DBG("mainBox 12,11\n");
+        auto pathbarBox = responsePathbar_p->pathbar();
        // this->updatePathbarBox(path, pathbarBox, NULL);
-       //  foo
-        pathbar_p->updatePathbar(pathbar_p->path(), pathbar_p, false, NULL); 
-      DBG("mainBox 12,111\n");
+        responsePathbar_p->updatePathbarBox(responsePathbar_p->path(), false, NULL); 
         
-        gtk_box_append(mainBox_, GTK_WIDGET(pathbar_p->pathbar()));
+        gtk_box_append(mainBox_, GTK_WIDGET(responsePathbar_p->pathbar()));
 
         sw_ = gtk_scrolled_window_new();
         gtk_widget_set_vexpand(GTK_WIDGET(sw_), true);
@@ -459,12 +443,11 @@ public:
 
   };
 
-  template <class Type>
   class FileDialog {
     public:
     static void newFileDialog(void **newDialog){
       TRACE("newFileDialog1\n");
-      auto dialogObject = new DialogComplex<FileResponse<Type> >;
+      auto dialogObject = new DialogComplex<FileResponse>;
       TRACE("newFileDialog12\n");
       //
       dialogObject->setParent(GTK_WINDOW(MainWidget));

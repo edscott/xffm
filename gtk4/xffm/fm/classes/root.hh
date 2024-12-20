@@ -2,7 +2,6 @@
 #define ROOTDIR_HH
 namespace xf {
 
-  template <class Type>
   class rootDir {
     public:
       static GtkMultiSelection *rootSelectionModel(void){
@@ -61,7 +60,7 @@ namespace xf {
         }
 
         // saved ecryptfs mount points
-        auto items = EFS<Type>::getSavedItems();
+        auto items = EFS::getSavedItems();
         for (auto p=items; p && *p; p++){
           if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
           GFile *file = g_file_new_for_path(*p);

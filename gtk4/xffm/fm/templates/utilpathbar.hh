@@ -3,12 +3,9 @@
 namespace xf {
   template <class Type>
   class PathbarHistory {
-    protected:
-    GList *historyBack_ = NULL;
-    GList *historyNext_ = NULL;  
-    
-    public:
-
+    GList *historyBack_;
+    GList *historyNext_;
+  public:
 
    ~PathbarHistory(void){
      for (auto l=historyBack_; l && l->data; l=l->next) g_free(l->data);
@@ -69,7 +66,6 @@ namespace xf {
       // wipe next history 
       for (GList *l=historyNext_; l && l->data; l=l->next) g_free(l->data);
       g_list_free(historyNext_);
-      historyNext_ = NULL;
       return;
    }
   
@@ -86,20 +82,14 @@ namespace xf {
     updatePathbar(bool updateHistory, void *pathbar_go_f){
         const gchar *path = Child::getWorkdir();
         GtkBox *pathbar = Child::getPathbar();
-        auto pathbar_p = (Pathbar<Type> *)g_object_get_data(G_OBJECT(pathbar), "pathbar_p");
-        updatePathbar(path, pathbar_p, updateHistory, pathbar_go_f);
-//        updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+        updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
         resetPathbarCSS(pathbar);
     }
     
     static void 
-    updatePathbar(const gchar *path, Pathbar<Type> *pathbar_p, bool updateHistory, void *pathbar_go_f){
-//    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
-        DBG( "update pathbar to %s (update=%d)\n", path, updateHistory);
-        DBG( "update_pathbar_f:: %s\n", path);
-
-        if (!pathbar_p) return ;
-        auto pathbar = pathbar_p->pathbar();
+    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
+        TRACE( "update pathbar to %s (update=%d)\n", path, updateHistory);
+        TRACE( "update_pathbar_f:: %s\n", path);
 
         if (!pathbar) return ;
         if (!path){
@@ -108,8 +98,7 @@ namespace xf {
 //            pathbar_p->toggle_pathbar(NULL);
             return ;
         }
-        auto pathbarHistory_p = pathbar_p;
-//        auto pathbarHistory_p = (PathbarHistory<Type> *)g_object_get_data(G_OBJECT(pathbar), "pathbarHistory");
+        auto pathbarHistory_p = (PathbarHistory<Type> *)g_object_get_data(G_OBJECT(pathbar), "pathbarHistory");
         if (updateHistory) {
           pathbarHistory_p->push(path);
  /*         
@@ -254,7 +243,6 @@ namespace xf {
         
         // show what fits
         togglePathbar(path, pathbar);
-DBG("updatePathbar123.1 pathbar_go_f =%p\n", pathbar_go_f);
 
         // finally, add the menu item for each pathbar item.
         // This should only be done if no menu is already set
@@ -274,18 +262,15 @@ DBG("updatePathbar123.1 pathbar_go_f =%p\n", pathbar_go_f);
 
             auto gesture = gtk_gesture_click_new();
             gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
-            g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar_p);
-//            g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);
+            g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);
             gtk_widget_add_controller(GTK_WIDGET(widget), GTK_EVENT_CONTROLLER(gesture));
-DBG("updatePathbar123.123\n");
  
         }
 
-DBG("updatePathbar1234\n");
         resetPathbarCSS(pathbar);
         return ;
     }
-
+    private:
 
     static void 
     togglePathbar(const gchar *path, GtkBox *pathbar){
@@ -324,6 +309,7 @@ DBG("updatePathbar1234\n");
         g_free(lastPath);
         g_object_set_data(G_OBJECT(pathbar), "path", g_strdup(path));
     }
+    public:
 
     static gboolean
     pathbar_white ( GtkEventControllerMotion* self,

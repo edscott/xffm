@@ -47,7 +47,7 @@ namespace xf {
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(), g_strconcat(error_->message, "\n", NULL));
+          Print::printError(Child::getOutput(), g_strdup(error_->message));
           g_error_free(error_);
           return NULL;
         }
@@ -164,7 +164,7 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(), g_strconcat(error_->message, "\n", NULL));
+          Print::printError(Child::getOutput(), g_strdup(error_->message));
           g_error_free(error_);
           return 0;
         }

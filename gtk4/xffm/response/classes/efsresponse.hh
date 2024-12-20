@@ -4,7 +4,6 @@
 #include "ecryptfs.i"
 
 namespace xf {
-  template <class Type>
   class EfsResponse {
    GtkBox *mainBox_ = NULL;
    GtkWindow *dialog_ = NULL;
@@ -404,7 +403,7 @@ public:
       TRACE("getDirectory\n");
       void *newDialog[] = {NULL, NULL};
       TRACE("getDirectory1:: newDialog[0]= %p\n", newDialog[0]);
-      FileDialog<Type>::newFileDialog(newDialog);
+      FileDialog::newFileDialog(newDialog);
       TRACE("getDirectory2:: newDialog[0]= %p\n", newDialog[0]);
       subClass->push(newDialog[0]);
 
@@ -527,7 +526,6 @@ public:
 
   };
 
-  template <class Type>
   class EFS {
     static char *efsKeyFile(void){
       return  g_strconcat(g_get_user_config_dir(),G_DIR_SEPARATOR_S, "xffm+",G_DIR_SEPARATOR_S, "efs.ini", NULL);}
@@ -546,7 +544,7 @@ public:
     }
 
     static void newEfs(void){
-      auto dialogObject = new DialogComplex<EfsResponse<Type> >;
+      auto dialogObject = new DialogComplex<EfsResponse>;
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
       gtk_window_set_decorated(dialog, true);
