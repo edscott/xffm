@@ -4,7 +4,7 @@ namespace xf {
 
   
   template <class DirectoryClass>
-  class Pathbar : public UtilPathbar<DirectoryClass>, public PathbarHistory<DirectoryClass>
+  class Pathbar : public UtilPathbar<DirectoryClass>
   {
     GtkBox *pathbar_;
     gchar *path_;
@@ -21,8 +21,8 @@ namespace xf {
       auto motionB = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(motionB, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(eventBox), motionB);
-      g_signal_connect (G_OBJECT(motionB) , "leave", EVENT_CALLBACK (buttonPositive), NULL);
-      g_signal_connect (G_OBJECT(motionB) , "enter", EVENT_CALLBACK (buttonNegative), NULL);
+      g_signal_connect (G_OBJECT(motionB) , "leave", EVENT_CALLBACK (BasicPathbar::buttonPositive), NULL);
+      g_signal_connect (G_OBJECT(motionB) , "enter", EVENT_CALLBACK (BasicPathbar::buttonNegative), NULL);
 
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
@@ -35,7 +35,8 @@ namespace xf {
    }
    Pathbar(void) {
         pathbar_ = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
+        g_object_set_data(G_OBJECT(pathbar_), "pathbar", this);
+        //g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory", this);
       
 
         auto eventBox1 = eventButton("xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"));
@@ -174,30 +175,6 @@ namespace xf {
       }
       
       return TRUE;
-    }
-    static gboolean
-    buttonNegative ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
-        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        Basic::flushGTK();
-        return FALSE;
-    }
-    static gboolean
-    buttonPositive ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "pathbarboxNegative" );
-        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
-        Basic::flushGTK();
-        return FALSE;
     }
     
     GtkBox *eventButton(const gchar *icon, const gchar *name, const gchar *path, const gchar *tooltip) 
