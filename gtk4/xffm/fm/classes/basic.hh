@@ -497,13 +497,16 @@ public:
     static gchar *
     utf_string (const gchar * t) {
       if(!t) { return g_strdup (""); }
-      if(g_utf8_validate (t, -1, NULL)) { return g_strdup (t); }
+      if(g_utf8_validate (t, -1, NULL)) {
+        return g_strdup (t); 
+      }
       /* so we got a non-UTF-8 */
       /* but is it a valid locale string? */
       gchar *actual_tag;
       actual_tag = g_locale_to_utf8 (t, -1, NULL, NULL, NULL);
-      if(actual_tag)
+      if(actual_tag){
           return actual_tag;
+      }
       /* So it is not even a valid locale string... 
        * Let us get valid utf-8 caracters then: */
       const gchar *p;

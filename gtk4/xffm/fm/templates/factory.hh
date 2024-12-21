@@ -131,8 +131,9 @@ template <class DirectoryClass>
         auto type = g_file_info_get_file_type(info);
         auto size = Settings::getInteger("xfterm", "iconsize");
         // allocated:
-        auto path = Basic::getPath(info);       
-        char *name = g_strdup(g_file_info_get_name(info));
+        auto path = Basic::getPath(info);      
+        const char *rawName =  g_file_info_get_name(info);
+        char *name = Basic::utf_string(rawName);
 
         TRACE("factory bind name= %s\n", name);
 
@@ -209,9 +210,6 @@ template <class DirectoryClass>
 
           auto markup = g_strdup_printf("<span size=\"%s\">%s</span>",  "x-small", buffer);
 
-          //gtk_label_set_markup(label, markup);
-          //g_free(markup);
-
           if (strcmp(name, "..")){
             // file information string
             auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -239,6 +237,8 @@ template <class DirectoryClass>
         {
           gtk_widget_set_visible(GTK_WIDGET(label), true);
           gtk_widget_set_visible(GTK_WIDGET(hlabel), false);
+#if 0
+          // buggy with utf strings, may split inside the utf character...
           const char *n_p = name;
           if (strlen(name) > 13) {
             char *b=strdup("");
@@ -253,10 +253,11 @@ template <class DirectoryClass>
               n_p += 13;
             } while (strlen(n_p)>13);
             Basic::concat(&b, n_p);
-
             snprintf(buffer, 128, "%s", b);
             g_free(b);
-          } else snprintf(buffer, 128, "%s", name);
+          } else 
+#endif
+          snprintf(buffer, 128, "%s", name);
         
           const char *sizeS = "x-small";
           if (size <= 96) sizeS = "small";
