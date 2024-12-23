@@ -29,6 +29,7 @@ namespace xf {
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (goJump), (void *)this);
       gtk_widget_add_controller(GTK_WIDGET(eventBox), GTK_EVENT_CONTROLLER(gesture));
    } 
+ 
  */
    ~Pathbar(void){
      //delete myPathbarMenu_;

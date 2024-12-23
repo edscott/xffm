@@ -159,6 +159,13 @@ private:
         border-radius: 0px;\
         border-color: black;\
       }\
+      .gridNegative * {\
+        color: white;\
+        background-color: #acaaa5;\
+        border-width: 0px;\
+        border-radius: 0px;\
+        border-color: transparent;\
+      }\
       .pathbarboxNegative * {\
         color: white;\
         font-size: 12px;\

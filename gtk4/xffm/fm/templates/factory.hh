@@ -67,10 +67,10 @@ template <class DirectoryClass>
 
         TRACE("factorySetup add signal handlers\n");
         
-        Basic::addMotionController(labelBox);
-        Basic::addMotionController(hlabelBox);
+        addMotionController(labelBox);
+        addMotionController(hlabelBox);
 
-        Basic::addMotionController(imageBox);
+        addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
         addGestureClickLong(labelBox, object, gridView_p);
         addGestureClickLongMenu(imageBox, object, gridView_p);
@@ -237,27 +237,6 @@ template <class DirectoryClass>
         {
           gtk_widget_set_visible(GTK_WIDGET(label), true);
           gtk_widget_set_visible(GTK_WIDGET(hlabel), false);
-#if 0
-          // buggy with utf strings, may split inside the utf character...
-          const char *n_p = name;
-          if (strlen(name) > 13) {
-            char *b=strdup("");
-            do {
-              char part[14];
-              memset(part, 0, 14);
-              strncpy(part, n_p, 13);
-              part[13] = 0;
-              Basic::concat(&b, part);
-              if (n_p[13] != 0) Basic::concat(&b, "<span color=\"red\">-</span>\n");
-              else break;
-              n_p += 13;
-            } while (strlen(n_p)>13);
-            Basic::concat(&b, n_p);
-            snprintf(buffer, 128, "%s", b);
-            g_free(b);
-          } else 
-          snprintf(buffer, 128, "%s", );
-#endif
         
           const char *sizeS = "x-small";
           if (size <= 96) sizeS = "small";
@@ -267,6 +246,7 @@ template <class DirectoryClass>
           auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", sizeS, name);
           gtk_label_set_markup(label, markup);
           g_free(markup);
+          
           //DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
         }
         // gtk drag (deprecated for low level gdk_drag)
@@ -303,6 +283,39 @@ template <class DirectoryClass>
       /* }}} */
 
     private:
+      static
+      void addMotionController(GtkWidget  *widget){
+        auto controller = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(widget), controller);
+        g_signal_connect (G_OBJECT (controller), "enter", 
+            G_CALLBACK (gridNegative), widget);
+        g_signal_connect (G_OBJECT (controller), "leave", 
+            G_CALLBACK (gridPositive), widget);
+    }
+
+      static gboolean
+    gridNegative ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        gtk_widget_add_css_class (GTK_WIDGET(eventBox), "gridNegative" );
+        //Basic::flushGTK(); // this will cause race condition crash...
+        return FALSE;
+    }
+    static gboolean
+    gridPositive ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "gridNegative" );
+        //Basic::flushGTK();
+        return FALSE;
+    }
     
     static void addGestureClickMenu(GtkWidget *box, GObject *object, GridView<DirectoryClass> *gridView_p){
       TRACE("addGestureClickMenu; object=%p\n", gridView_p);
