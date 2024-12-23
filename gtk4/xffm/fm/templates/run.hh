@@ -315,15 +315,13 @@ public:
         line = (char *)stream;
         if(line[0] != '\n') {
             if (strstr(line, "error")||strstr(line,_("error"))) {
-                //Print::print(textview, "Cyan/default_output_bg", g_strdup(line));
-                Print::print(textview, "darkcyan/default_output_bg", g_strdup(line));
+                Print::print(textview, "Cyan/black_bg", g_strdup(line));
             } else if (strstr(line, "***")) {
                 Print::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
-                //Print::print(textview, "yellow/black", g_strdup(line));
-                Print::print(textview, "brown/default_output_bg", g_strdup(line));
+                Print::print(textview, "yellow/black_bg", g_strdup(line));
             } else {                
-                Print::print(textview, "red/default_output_bg", g_strdup(line));
+                Print::print(textview, "red/black_bg", g_strdup(line));
             }
         }
 
@@ -358,7 +356,7 @@ public:
         auto textview = GTK_TEXT_VIEW(data);
         auto line = (gchar *)stream;
 
-        Print::printRed(textview, g_strdup(line));
+        Print::print(textview, "red/black_bg",g_strdup(line));
         // This is a bit hacky, to keep runaway output from hogging
         // up the gtk event loop.
         static gint count = 1;
@@ -448,7 +446,7 @@ public:
         }
         return new_command;
     }
-
+    
     static pid_t 
     shell_command(GtkTextView *textview, const gchar *c, gboolean scrollUp, gboolean showTextPane){
         // Make sure any sudo command has the "-A" option

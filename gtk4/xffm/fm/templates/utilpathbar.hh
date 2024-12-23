@@ -14,7 +14,7 @@ namespace xf {
         const gchar *path = Child::getWorkdir();
         GtkBox *pathbar = Child::getPathbar();
         updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
-        resetPathbarCSS(pathbar);
+        BasicPathbar::resetPathbarCSS(pathbar);
     }
     
     static void 
@@ -128,8 +128,10 @@ namespace xf {
             auto motion = gtk_event_controller_motion_new();
             gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
             gtk_widget_add_controller(GTK_WIDGET(pb_button), motion);
-            g_signal_connect (G_OBJECT(motion) , "enter", EVENT_CALLBACK (pathbar_white), (void *)pathbar);
-            g_signal_connect (G_OBJECT(motion) , "leave", EVENT_CALLBACK (pathbar_blue), (void *)pathbar);
+            g_signal_connect (G_OBJECT(motion) , "enter", 
+                EVENT_CALLBACK (BasicPathbar::pathbar_white), (void *)pathbar);
+            g_signal_connect (G_OBJECT(motion) , "leave",
+                EVENT_CALLBACK (BasicPathbar::pathbar_blue), (void *)pathbar);
             
  
             gtk_widget_set_visible(GTK_WIDGET(pb_button), TRUE);
@@ -163,7 +165,7 @@ namespace xf {
  
         }
 
-        resetPathbarCSS(pathbar);
+        BasicPathbar::resetPathbarCSS(pathbar);
         return ;
     }
     private:
@@ -207,64 +209,11 @@ namespace xf {
     }
     public:
 
-    static gboolean
-    pathbar_white ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-        auto pathbar = GTK_BOX(data);
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        auto path = (const char *) g_object_get_data(G_OBJECT(eventBox), "path");
-
-
-        gtk_widget_remove_css_class (eventBox, "pathbarbox" );
-        gtk_widget_add_css_class (eventBox, "pathbarboxNegative" );
-        return FALSE;
-    }
-
-    static gboolean
-    pathbar_blue (GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) {
-        auto pathbar = GTK_BOX(data);
-        resetPathbarCSS(pathbar);
-        auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-        auto path = (const char *) g_object_get_data(G_OBJECT(eventBox), "path");
-
-        auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
-
-        gtk_widget_remove_css_class (eventBox, "pathbarboxNegative" );
-/*
-        if (!gridview_p){
-          DBG("UtilPathbar::pathbar_blue():Should not happen, gridview_p == NULL\n");
-          return false;
-        }
-        if (!gridview_p->path()){
-          DBG("UtilPathbar::pathbar_blue():Should not happen, gridview_p->path() == NULL\n");
-          return false;
-        }
-        if (!path){
-          DBG("UtilPathbar::pathbar_blue():Should not happen, eventBox path == NULL\n");
-          return false;
-        }
-        */
-        if (strcmp(path, gridview_p->path())==0){
-          gtk_widget_add_css_class (eventBox, "pathbarboxRed" );
-        } else {
-          gtk_widget_add_css_class (eventBox, "pathbarbox" );
-        }
-
-        return FALSE;
-
-    }
-
     public:
 
   private:
     static void         
-showWhatFits(GtkBox *pathbar, const gchar *path, GList *children_list){
+    showWhatFits(GtkBox *pathbar, const gchar *path, GList *children_list){
       GtkRequisition minimum;
       graphene_rect_t bounds;
       bounds.size.width = 0;

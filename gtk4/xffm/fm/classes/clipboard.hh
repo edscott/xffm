@@ -1,5 +1,6 @@
 #ifndef CLIPBOARD_HH
 #define CLIPBOARD_HH
+#define CLIPBOARD_TAG "green/black_bg"
 namespace xf {
 //  static GdkClipboard *clipBoardTxt=NULL;
   class ClipBoard {
@@ -53,13 +54,13 @@ public:
       auto string = c->clipBoardCache();
       auto output = Child::getOutput();
       Print::showText(output);
-      Print::print(output, "blue/default_output_bg", g_strdup("\n "));
+      Print::print(output, CLIPBOARD_TAG, g_strdup("\n "));
       if (!string || strlen(string) == 0){
-        Print::print(output, "edit-paste", "blue/default_output_bg", g_strdup(_("Clipboard is empty.")) );
+        Print::print(output, CLIPBOARD_TAG, g_strdup(_("Clipboard is empty.")) );
       } else {
         auto text = g_strconcat(" ", _("Clipboard contents"), ":\n", NULL);
-        Print::print(output, "edit-paste", "blue/default_output_bg", text);
-        Print::print(output, "brown/default_output_bg", g_strdup(string));
+        Print::print(output, CLIPBOARD_TAG, text);
+        Print::print(output, CLIPBOARD_TAG, g_strdup(string));
       }
     }
 

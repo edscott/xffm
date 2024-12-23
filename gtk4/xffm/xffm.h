@@ -84,7 +84,6 @@ static int longPressSerial = -1;
 #include "fm/templates/texture.hh"  
 #include "fm/classes/print.hh"  
 #include "fm/classes/tubo.hh"  
-#include "fm/classes/basicpathbar.hh"     
 
 #include "fm/templates/properties.hh"
 #include "fm/classes/thread.hh"
@@ -96,6 +95,9 @@ static int longPressSerial = -1;
 #include "fm/classes/utilbasic.hh"
 #include "fm/classes/history.hh"
 #include "fm/classes/css.hh"
+#include "fm/classes/basicpathbar.hh"     
+
+
 #include "fm/classes/bookmarks.hh"
 #include "fm/classes/fstabutil.hh"
 

@@ -1,6 +1,7 @@
 #ifndef BASH_COMPLETION_HH
 #define BASH_COMPLETION_HH
 
+#define BASH_MATCH_TAG "blue/white_bg"
         
 extern char **environ;
 
@@ -41,7 +42,6 @@ public:
         }
         return "WTF";
     }
-
     static void
     msg_show_match(GtkTextView *output, gint match_type, const gchar *match){
         if (!output) return;
@@ -49,7 +49,7 @@ public:
         if (!match) {
             const gchar *option_type = get_match_type_text(match_type);
             match = _("Found no match");
-            Print::print(output, "dialog-info", g_strdup_printf(" %s\n", match));
+            Print::print(output, BASH_MATCH_TAG, g_strdup_printf(" %s\n", match));
         } else {
             auto p = g_find_program_in_path(match);
             if (!p && g_file_test(match, G_FILE_TEST_IS_SYMLINK)){
@@ -60,10 +60,10 @@ public:
             if (!p && g_file_test(match, G_FILE_TEST_IS_DIR)) p = g_strdup(_("Directory"));
             if (!p && g_file_test(match, G_FILE_TEST_IS_REGULAR)) p = g_strdup(_("File"));
             if (p) {
-              Print::print(output, "blue/white_bg", g_strdup_printf(" %s (%s)\n", match,p));
+              Print::print(output, BASH_MATCH_TAG, g_strdup_printf(" %s (%s)\n", match,p));
               g_free(p);
             } else {
-              Print::print(output, "blue/white_bg", g_strdup_printf(" %s\n", match));
+              Print::print(output, BASH_MATCH_TAG, g_strdup_printf(" %s\n", match));
             }
         }
         Print::scroll_to_bottom(output);
@@ -134,7 +134,7 @@ public:
         g_free(directory);
 
         if (stack_glob_v.gl_pathc > maxOptions()){
-            //Print::print(output, "blue/white_bg",g_strdup_printf("%s ", file_token));
+            //Print::print(output, BASH_MATCH_TAG,g_strdup_printf("%s ", file_token));
 
             Print::showText(output);
             Print::printError(output, g_strdup_printf("%s: %ld %s\n", 
@@ -336,7 +336,7 @@ public:
         }
         if (output && g_slist_length(matches) > 1) {
             Print::showText(output);
-            Print::print(output, "blue/white_bg", g_strconcat(_("Options:"), "\n",NULL));
+            Print::print(output, BASH_MATCH_TAG, g_strconcat(_("Options:"), "\n",NULL));
             for(p = matches; p && p->data; p = p->next) {
                 TRACE("msg_show_match call 1\n");
                 msg_show_match(output, match_type, (const gchar *)p->data);
@@ -562,7 +562,8 @@ public:
             gint offset = -1;
             // +1 is icon...
             offset = head_len + (suggest_len - token_len) + 1;
-            Print::printStatus(input, g_strdup(suggest));
+            Print::print(input, g_strdup(suggest));
+            //Print::printStatus(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
             gtk_text_buffer_place_cursor(buffer, &end);
         }
@@ -610,7 +611,8 @@ public:
             gint offset = -1;
             // +1 is icon...
             offset = head_len + (suggest_len - token_len) + 1;
-            Print::printStatus(input, g_strdup(suggest));
+            Print::print(input, g_strdup(suggest));
+            //Print::printStatus(input, g_strdup(suggest));
             gtk_text_buffer_get_iter_at_offset (buffer, &end, offset);
             gtk_text_buffer_place_cursor(buffer, &end);
         }
@@ -645,11 +647,11 @@ private:
         if (!output) return;
         Print::showText(output);
 
-        Print::print(output, "dialog-info", "green", g_strdup_printf("%s bash %s/%s--> ",
+        Print::print(output, BASH_MATCH_TAG, g_strdup_printf("%s bash %s/%s--> ",
                 _("Completion mode:"), 
                 _("command"),
                 _("file")));
-        Print::print(output,  "red", g_strdup("TAB.\n"));
+        Print::print(output,  BASH_MATCH_TAG, g_strdup("TAB.\n"));
         Print::scroll_to_bottom(output);
     }
 
@@ -658,11 +660,11 @@ private:
         if (!output) return;
         Print::showText(output);
 #ifdef DEBUG_TRACE
-        Print::print_icon(output, "dialog-info", "green", g_strdup(_("Options >>")));
+        Print::print_icon(output, BASH_MATCH_TAG, g_strdup(_("Options >>")));
         const gchar *option_type = get_match_type_text(match_type);
-        Print::print(output,  "red", g_strdup_printf("(%s)\n", option_type));
+        Print::print(output,  BASH_MATCH_TAG, g_strdup_printf("(%s)\n", option_type));
 #else
-        Print::print(output,  "green", g_strdup_printf("%s\n", _("Options >>")));
+        Print::print(output,  BASH_MATCH_TAG, g_strdup_printf("%s\n", _("Options >>")));
 #endif
         Print::scroll_to_bottom(output);
     }

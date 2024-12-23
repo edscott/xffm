@@ -52,81 +52,48 @@ namespace xf {
         return NULL;
     }
 
-
     static void clearText(GtkTextView *textview){
       if (!textview) return;
       void *arg[]={(void *)textview, NULL};
       Basic::context_function(clear_text_buffer_f, arg);
-   }
+    }
+
     static void clear_text(GtkTextView *textview){ // deprecated
       clearText(textview);
     }
 
-    static void print(GtkTextView *textview, const gchar *tag, gchar *string){
-        if (!textview) return;
-        void *arg[]={(void *)textview, (void *)tag, (void *)string};
-        Basic::context_function(print_f, arg);
-        g_free(string);
-    }
-    static void print(GtkTextView *textview, gchar *string){
-        print(textview, NULL, string);
-    }
-
-    static void printIcon(GtkTextView *textview, 
-                              const gchar *iconname, 
-                              const gchar *tag, 
-                              gchar *string){
-        if (!textview) return;
-        auto icon = Texture<bool>::load16(iconname);
-        void *arg[]={(void *)icon, (void *)textview, (void *)tag, (void *)string};
-        Basic::context_function(print_i, arg);
-        g_free(string);
-    }
-
-    static void print(GtkTextView *textview, 
-                              const gchar *iconname, 
-                              const gchar *tag, 
-                              gchar *string){
-      printIcon(textview, iconname, tag, string);
-    }
-
-    static void //  will free string.
-    printWarning(GtkTextView *textview, gchar *string){
-      showText(textview);
-      printIcon(textview, "dialog-warning", string);
-    }
-
-    static void //  will free string.
-    printInfo(GtkTextView *textview, const gchar *icon, gchar *string){
-      showText(textview);
-      printIcon(textview, "dialog-info", string);
-    }
-
-    static void //  will free string.
-    printError(GtkTextView *textview, gchar *string){
-      auto addSpace = g_strconcat(" ", string, NULL);
-      g_free(string);
-      showText(textview);
-      printIcon(textview, "dialog-error", addSpace);
-    }
-
-    static void // 
-    printRed(GtkTextView *textview, gchar *string){
-      print(textview, "red", string);
-      //printIcon(textview, "dialog-error", string);
-    }
-    
     static void showText(GtkTextView *textview){
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
         void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
         Basic::context_function(show_text_buffer_f, arg);
     }
-    
-    static void printStatus(GtkTextView *textview, gchar *string){
+
+    static void print(GtkTextView *textview, gchar *string){
+        print(textview, NULL, string);
+    }
+
+    static void //  will free string.
+    printWarning(GtkTextView *textview, gchar *string){
+      showText(textview);
+      const char *ret = NULL;
+      if (string[strlen(string)-1] != '\n') ret = "\n"; //hack
+      printIcon(textview, "dialog-warning", g_strconcat(" ", string, ret, NULL));
+    }
+
+    static void //  will free string.
+    printError(GtkTextView *textview, gchar *string){
+      showText(textview);
+      const char *ret = NULL;
+      if (string[strlen(string)-1] != '\n') ret = "\n"; //hack
+      printIcon(textview, "dialog-error", g_strconcat(" ", string, ret, NULL));
+      g_free(string);
+    }
+
+    static void print(GtkTextView *textview, const gchar *tag, gchar *string){
         if (!textview) return;
-        void *arg[]={(void *)textview, (void *)string};
-        Basic::context_function(print_s, arg);
+        void *arg[]={(void *)textview, (void *)tag, (void *)string};
+        Basic::context_function(print_f, arg);
         g_free(string);
     }
 
@@ -138,26 +105,25 @@ namespace xf {
         Basic::context_function(print_i, arg);
         g_free(string);
     }
-  private:
 
-    static void *
-    print_s(void *data){
-        if (!data) return GINT_TO_POINTER(-1);
-        auto arg = (void **)data;
-        auto textview = GTK_TEXT_VIEW(arg[0]);
- 
-        if (!GTK_IS_TEXT_VIEW(textview)) return GINT_TO_POINTER(-1);
-        auto string = (const gchar *)arg[1];
+private:
 
-        // FIXME set_font_size (GTK_WIDGET(textview));
-        auto buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
-        GtkTextIter start, end;
-        gtk_text_buffer_get_bounds (buffer, &start, &end);
-        gtk_text_buffer_delete (buffer, &start, &end);
-        if(string && strlen (string)) {
-            insert_string (buffer, string, NULL);
-        }
-        return NULL;
+    static void print(GtkTextView *textview, 
+                              const gchar *iconname, 
+                              const gchar *tag, 
+                              gchar *string){
+      printIcon(textview, iconname, tag, string);
+    }
+
+    static void printIcon(GtkTextView *textview, 
+                              const gchar *iconname, 
+                              const gchar *tag, 
+                              gchar *string){
+        if (!textview) return;
+        auto icon = Texture<bool>::load16(iconname);
+        void *arg[]={(void *)icon, (void *)textview, (void *)tag, (void *)string};
+        Basic::context_function(print_i, arg);
+        g_free(string);
     }
     
     static void *
@@ -386,6 +352,122 @@ endloop:;
  public:
  private:
 
+typedef struct lpterm_colors_t {
+    const gchar *id;
+    guint16 red;
+    guint16 green;
+    guint16 blue;
+} lpterm_colors_t;
+
+  static
+  GtkTextTag *
+  resolve_tag (GtkTextBuffer * buffer, const gchar * id) {
+      lpterm_colors_t lpterm_colors_v[] = {
+// xterm colors
+          // specific
+          {"command", 0x5858, 0x3434, 0xcfcf},
+          {"stderr", 0xcccc, 0, 0},
+          {"command_id", 0x0000, 0x0000, 0xffff},
+          // plain 
+          {"gray", 0x8888, 0x8888, 0x8888},
+          {"brown", 0x6666, 0x6666, 0x0},
+          {"darkcyan", 0x0, 0x6666, 0x6666},
+          // normal
+          {"black", 0x0000, 0x0000, 0x0000},
+          {"red", 0xcdcd, 0x0, 0x0},
+          {"green", 0x0, 0xcdcd, 0x0},
+          {"yellow", 0xcdcd, 0xcdcd, 0x0},
+          {"blue", 0x0, 0x0, 0xeeee},
+          {"magenta", 0xcdcd, 0x0, 0xcdcd},
+          {"cyan", 0x0, 0xcdcd, 0xcdcd},
+          {"white", 0xe5e5, 0xe5e5, 0xe5e5}, //gray
+          // bright
+          {"Black", 0x7f7f, 0x7f7f, 0x7f7f},
+          {"Red", 0xffff, 0x0, 0x0},
+          {"Green", 0x0, 0xffff, 0x0},
+          {"Yellow", 0xffff, 0xffff, 0x0},
+          {"Blue", 0x0, 0x0, 0xffff},
+          {"Magenta", 0xffff, 0x0, 0xffff},
+          {"Cyan", 0x0, 0xffff, 0xffff},
+          {"White", 0xffff, 0xffff, 0xffff}, 
+
+          {NULL, 0, 0, 0}
+      }; 
+      TRACE("Print::resolve_tag(%s)\n", id);
+      if (!id) return NULL;
+      GtkTextTag *tag = gtk_text_tag_table_lookup (gtk_text_buffer_get_tag_table (buffer), id);
+
+      if (!tag) { // New tag, foreground.
+        for(auto p=lpterm_colors_v; p && p->id; p++) { // Initialize foreground color.
+          // Foreground.
+          if (strcmp(p->id, id) == 0){
+            auto rgba = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
+            rgba->red = (float) p->red / 0xffff;
+            rgba->green = (float) p->green / 0xffff;
+            rgba->blue = (float) p->blue / 0xffff;
+            rgba->alpha = 1.0; 
+            // Foreground color.
+            tag = gtk_text_buffer_create_tag (buffer, p->id, "foreground-rgba", rgba, NULL);
+            TRACE("*** gtk_text_tag_table_lookup(%s) -> %p\n",p->id, tag);
+            break;
+          }
+        }
+      }
+      if (!tag) { // New tag, background.
+        char *bg = g_strdup(id);
+        if (strstr(bg, "_bg")) *strstr(bg, "_bg") = 0;
+        for(auto p=lpterm_colors_v; p && p->id; p++) { // Initialize background color.
+          TRACE("id=\"%s\", bg=\"%s\" p->id=\"%s\"\n", id, bg, p->id);
+          if (strcmp(p->id, bg) == 0){
+            TRACE("bg gotcha: %s\n", bg);
+            auto rgba = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
+            rgba->red = (float) p->red / 0xffff;
+            rgba->green = (float) p->green / 0xffff;
+            rgba->blue = (float) p->blue / 0xffff;
+            rgba->alpha = 1.0; 
+            // Background color.
+            tag = gtk_text_buffer_create_tag (buffer, id, "background-rgba", rgba, NULL);
+            TRACE("*** gtk_text_tag_table_lookup(%s) -> %p\n",p->id, tag);
+            break;
+          }
+        }        
+        g_free(bg); 
+      }
+      // No predefined tag? Specific CSS color. (Currently only foreground).
+      if (!tag && id[0] == '#'){
+        // create a new tag for color id.
+        TRACE("Print::resolve_tag(%s): *** creating new tag.\n", id);
+        auto color = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
+        if (!color){
+            ERROR("Print::resolve_tag: calloc: %s\n", strerror(errno));
+            exit(1);
+        }
+        if (gdk_rgba_parse (color, id)) {
+            TRACE("***tag %s is %lf,%lf,%lf\n", id, color->red,color->green,color->blue); 
+            TRACE("***tag %s is 0x%0x,0x%0x,0x%0x\n", id, c->red,c->green,c->blue); 
+            tag = gtk_text_buffer_create_tag(buffer, id, "foreground-rgba", color, NULL);
+        } 
+      }
+
+      if (!tag) fprintf(stderr,"***Error:: resolve_tag(): No GtkTextTag for %s\n", id);
+      return tag;
+  }
+
+/*
+
+#ifdef USE_GTK4
+struct GdkColor {
+  guint32 pixel;
+  guint16 red;
+  guint16 green;
+  guint16 blue;
+};
+#endif
+
+typedef struct lpterm_colors_t {
+    const gchar *id;
+    GdkColor color;
+} lpterm_colors_t;
 
   static
   GtkTextTag *
@@ -426,35 +508,30 @@ endloop:;
 
       }; 
       void *initialized = g_object_get_data(G_OBJECT(buffer), "text_tag_initialized");
-      if (!initialized) {
+      if (!initialized) { // Each tag is associated to the text buffer.
           lpterm_colors_t *p = lpterm_colors_v;
-          for(; p && p->id; p++) {
+          for(; p && p->id; p++) { // Initialize all foreground and background colors.
             auto rgba = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
             rgba->red = (float) p->color.red / 0xffff;
             rgba->green = (float) p->color.green / 0xffff;
             rgba->blue = (float) p->color.blue / 0xffff;
             rgba->alpha = 1.0;
- 
-            tag = gtk_text_buffer_create_tag (buffer, p->id, 
-                      "foreground-rgba", rgba, NULL);
-              //DBG("*** gtk_text_tag_table_lookup(%s) -> %p\n",p->id, tag);
-              gchar *bg_id = g_strconcat(p->id, "_bg", NULL);
-              gtk_text_buffer_create_tag (buffer, bg_id, 
-                      "background-rgba", rgba, NULL);
-              g_free(bg_id);
+            // Foreground color.
+            gtk_text_buffer_create_tag (buffer, p->id, "foreground-rgba", rgba, NULL);
+            TRACE("*** gtk_text_tag_table_lookup(%s) -> %p\n",p->id, tag);
+            // Background color.
+            gchar *bg_id = g_strconcat(p->id, "_bg", NULL);
+            gtk_text_buffer_create_tag (buffer, bg_id, "background-rgba", rgba, NULL);
+            g_free(bg_id);
          }
-          auto color = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
-          if (gdk_rgba_parse (color, DEFAULT_OUTPUT_BG)) {
-            gtk_text_buffer_create_tag (buffer, "default_output_bg", 
-                "background-rgba", color, 
+         auto color = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
+         if (gdk_rgba_parse (color, DEFAULT_OUTPUT_BG)) {
+            gtk_text_buffer_create_tag (buffer, "default_output_bg", "background-rgba", color, 
                 NULL);
-          }
+         }
           
-          gtk_text_buffer_create_tag (buffer, "bold", 
-              "weight", PANGO_WEIGHT_BOLD, 
-              NULL);
-          gtk_text_buffer_create_tag (buffer, "italic", 
-              "style", PANGO_STYLE_ITALIC, NULL);
+          gtk_text_buffer_create_tag (buffer, "bold", "weight", PANGO_WEIGHT_BOLD, NULL);
+          gtk_text_buffer_create_tag (buffer, "italic", "style", PANGO_STYLE_ITALIC, NULL);
           g_object_set_data(G_OBJECT(buffer), "text_tag_initialized", GINT_TO_POINTER(1));
       } 
 
@@ -480,7 +557,7 @@ endloop:;
       if (!tag) fprintf(stderr,"***Error:: resolve_tag(): No GtkTextTag for %s", id);
       return tag;
   }
-
+*/
   static GtkTextTag **
   resolve_tags(GtkTextBuffer * buffer, const gchar *tag){
     // 

@@ -256,15 +256,15 @@ template <class DirectoryClass>
             snprintf(buffer, 128, "%s", b);
             g_free(b);
           } else 
+          snprintf(buffer, 128, "%s", );
 #endif
-          snprintf(buffer, 128, "%s", name);
         
           const char *sizeS = "x-small";
           if (size <= 96) sizeS = "small";
           else if (size <= 156) sizeS = "medium";
           else if (size <= 192) sizeS = "large";
           else sizeS = "x-large";
-          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", sizeS, buffer);
+          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", sizeS, name);
           gtk_label_set_markup(label, markup);
           g_free(markup);
           //DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);

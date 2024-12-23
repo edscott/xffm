@@ -178,21 +178,6 @@ typedef struct sequence_t {
     const gchar *sequence;
 } sequence_t;
 
-#ifdef USE_GTK4
-struct GdkColor {
-  guint32 pixel;
-  guint16 red;
-  guint16 green;
-  guint16 blue;
-};
-#endif
-
-typedef struct lpterm_colors_t {
-    const gchar *id;
-    GdkColor color;
-} lpterm_colors_t;
-
-
 /** higher level types **/
 
 #define __MONITOR_TYPE                (0x1<<8)
