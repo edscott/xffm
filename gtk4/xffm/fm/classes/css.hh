@@ -19,7 +19,7 @@ private:
       if (!outputBg) outputBg = g_strdup(DEFAULT_OUTPUT_BG);
 
       char *outputFg = Settings::getString("xfterm", "outputFg");
-      if (!outputFg) outputFg = g_strdup("#111111");
+      if (!outputFg) outputFg = g_strdup(DEFAULT_INPUT_BG);
 
       char *inputBg = Settings::getString("xfterm", "inputBg");
       if (!inputBg) inputBg = g_strdup("#dddddd");
@@ -43,20 +43,25 @@ private:
         border-color: transparent;\
       }\
       .output {\
+        font-size: 12px;\
         background-color: %s;\
         color: %s;\
         font-family: monospace;\
       }\
       .outputview text selection {\
+        font-size: 12px;\
         background-color: blue;\
+        font-family: monospace;\
         color: yellow;\
       }\
       .input {\
+        font-size: 12px;\
         background-color: %s;\
         color: %s;\
         font-family: monospace;\
       }\
       .inputview text selection  {\
+        font-size: 12px;\
         background-color: #abc2df;\
         color: black;\
         font-family: monospace;\

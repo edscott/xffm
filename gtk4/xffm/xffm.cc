@@ -6,7 +6,9 @@
 //  GTK_DEBUG=interactive xffm/xffm -f
 #include <librsvg/rsvg.h>
 
-#define DEFAULT_OUTPUT_BG "#bbbbbb"
+//#define DEFAULT_OUTPUT_BG "#bbbbbb"
+#define DEFAULT_OUTPUT_BG "#000000"
+#define DEFAULT_INPUT_BG "#dddddd"
 
 // Debugging macros:
 #define ENABLE_GRIDVIEW

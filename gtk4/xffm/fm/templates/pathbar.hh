@@ -4,7 +4,7 @@ namespace xf {
 
   
   template <class DirectoryClass>
-  class Pathbar : public UtilPathbar<DirectoryClass>
+  class Pathbar : public PathbarHistory, public UtilPathbar<DirectoryClass>
   {
     GtkBox *pathbar_;
     gchar *path_;
@@ -49,7 +49,7 @@ namespace xf {
             EVENT_CALLBACK (goJump), (void *)this);
 
         auto gesture2 = gtk_gesture_click_new();
-        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),2);
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
         g_signal_connect (G_OBJECT(gesture2) , "released", 
             EVENT_CALLBACK (goJump), (void *)this);
 
@@ -67,6 +67,12 @@ namespace xf {
         gtk_widget_add_controller(GTK_WIDGET(eventBox2), GTK_EVENT_CONTROLLER(gesture2));
         gtk_widget_add_controller(GTK_WIDGET(eventBox3), GTK_EVENT_CONTROLLER(gesture3));
         gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture4));
+
+        g_object_set_data(G_OBJECT(eventBox1), "skipMenu", GINT_TO_POINTER(1));
+        g_object_set_data(G_OBJECT(eventBox2), "skipMenu", GINT_TO_POINTER(1));
+        g_object_set_data(G_OBJECT(eventBox3), "skipMenu", GINT_TO_POINTER(1));
+        g_object_set_data(G_OBJECT(pb_button), "skipMenu", GINT_TO_POINTER(1));
+        
     }
   private:
     static gboolean
@@ -77,7 +83,8 @@ namespace xf {
               gdouble y,
               void *data ) 
     {
-      TRACE("*** gojump\n");
+      TRACE("*** gojump disabled...\n");
+      //return true;
       auto pathbar_p = (Pathbar<DirectoryClass> *)data;
 
       auto pathbar = GTK_WIDGET(pathbar_p->pathbar());
@@ -87,9 +94,10 @@ namespace xf {
       auto location = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "location"));
       auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "input"));
       auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
-      TRACE("gojump: path=%s\n", path);
+      DBG("gojump: eventBox path=%s\n", path);
       if (strcmp(path, "xffm:back") == 0){
         auto previous = pathbar_p->backHistory();
+        DBG("previous = %s\n", previous);
         if (previous) Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
       }
       if (strcmp(path, "xffm:next") == 0){

@@ -379,13 +379,13 @@ static void *readAction(void *arg){
     double newY = Y - bounds.origin.y;
     if (newY < 0 || newY > bounds.size.height){
       TRACE("out of pathbar Y\n");
-      if (inPathbar) UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+      if (inPathbar) BasicPathbar::resetPathbarCSS(pathbar);
       inPathbar = false;
       return false;
     }
     if (newX < 0 || newX > bounds.size.width){
       TRACE("out of pathbar X\n");
-      if (inPathbar) UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+      if (inPathbar) BasicPathbar::resetPathbarCSS(pathbar);
       inPathbar = false;
       return false;
     }
@@ -477,14 +477,14 @@ private:
 
 
       if (getGridCoordinates(&x, &y, gridview_p)) {
-        UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+        BasicPathbar::resetPathbarCSS(pathbar);
         gridHighlight(x, y, gridview_p);
         return;
       }
       if (getPathbarCoordinates(&x, &y, pathbar)) {
         auto widget = getPathbarWidget(x, y, pathbar);
         // reset all:
-        UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+        BasicPathbar::resetPathbarCSS(pathbar);
         if (widget) {
           // Apply mask
           auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
@@ -549,9 +549,9 @@ private:
   static char *getDropTarget(double x, double y, void *data){
       auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
       GtkBox *pathbar = Child::getPathbar();
-      DBG("original x,y = %lf,%lf\n", x, y);
+      TRACE("original x,y = %lf,%lf\n", x, y);
       if (getGridCoordinates(&x, &y, gridview_p)) {
-        DBG("getGridCoordinates x,y = %lf,%lf\n", x, y);
+        TRACE("getGridCoordinates x,y = %lf,%lf\n", x, y);
         return getGridDropTarget(x, y, gridview_p);
       }
       resetGridviewCSS(gridview_p);
@@ -561,7 +561,7 @@ private:
         auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
         return g_strdup(path);
       }
-      UtilPathbar<DirectoryClass>::resetPathbarCSS(pathbar);
+      BasicPathbar::resetPathbarCSS(pathbar);
       return NULL;
   }
 
@@ -619,7 +619,7 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
       }*/
   targetHighlight(x, y, data) ;
    
-  DBG("dropMotion %lf,%lf\n", x, y);
+  TRACE("dropMotion %lf,%lf\n", x, y);
   
  
   /* // does not work, no modifierType
@@ -676,7 +676,7 @@ private:
           if (buttons && buttons[2]) {
             gtk_widget_set_visible(GTK_WIDGET(buttons[2]), false);
           } else {
-            DBG("Error:: cannot find button \"%s\" to hide.\n", _("Link"));
+            TRACE("Error:: cannot find button \"%s\" to hide.\n", _("Link"));
           }  
         }
     

@@ -4,19 +4,39 @@ namespace xf {
   
   
   template <class Type>
-  class UtilPathbar : public PathbarHistory{
+  class UtilPathbar{
+//  class UtilPathbar : public PathbarHistory{
     public:
     ///////////////////   pathbar  ///////////////////////////////////
     
+#if 0    
     
     static void 
     updatePathbar(bool updateHistory, void *pathbar_go_f){
         const gchar *path = Child::getWorkdir();
         GtkBox *pathbar = Child::getPathbar();
-        updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
-        BasicPathbar::resetPathbarCSS(pathbar);
+        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+        auto gridView_p = Child::getGridviewObject();
+        g_object_set_data(G_OBJECT(pathbar), "gridView_p", gridView_p);
+        //BasicPathbar::resetPathbarCSS(pathbar);
     }
-    
+    static void 
+    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
+        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+        auto gridView_p = Child::getGridviewObject();
+        g_object_set_data(G_OBJECT(pathbar), "gridView_p", gridView_p);
+    }
+#else    
+    static void 
+    updatePathbar(bool updateHistory, void *pathbar_go_f){
+        const gchar *path = Child::getWorkdir();
+        GtkBox *pathbar = Child::getPathbar();
+        updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+        auto gridView_p = Child::getGridviewObject();
+        g_object_set_data(G_OBJECT(pathbar), "gridView_p", gridView_p);
+        BasicPathbar::setRed(pathbar, path);
+    }
+
     static void 
     updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
         TRACE( "update pathbar to %s (update=%d)\n", path, updateHistory);
@@ -29,21 +49,21 @@ namespace xf {
 //            pathbar_p->toggle_pathbar(NULL);
             return ;
         }
-        //auto pathbarHistory_p = (PathbarHistory *)g_object_get_data(G_OBJECT(pathbar), "pathbarHistory");
-        auto pathbarHistory_p = (PathbarHistory *)g_object_get_data(G_OBJECT(pathbar), "pathbar");
+        auto pathbar_p = (PathbarHistory *)g_object_get_data(G_OBJECT(pathbar), "pathbar");
         if (updateHistory) {
-          pathbarHistory_p->push(path);
+          DBG("updatePathbar, pushing %s\n", path);
+          pathbar_p->push(path);
         }
         // Now process to back and next buttons
         {
           auto next = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "next"));
           auto back = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "back"));
-          if (pathbarHistory_p->historyNext()){
+          if (pathbar_p->historyNext()){
             gtk_widget_remove_css_class (GTK_WIDGET(next), "pathbarboxNegative" );
             gtk_widget_add_css_class (GTK_WIDGET(next), "pathbarbox" );          
             gtk_widget_set_sensitive(next, true);
           } else gtk_widget_set_sensitive(next, false);
-          if (pathbarHistory_p->historyBack()){
+          if (pathbar_p->historyBack()){
             gtk_widget_remove_css_class (GTK_WIDGET(back), "pathbarboxNegative" );
             gtk_widget_add_css_class (GTK_WIDGET(back), "pathbarbox" );          
             gtk_widget_set_sensitive(back, true);
@@ -147,7 +167,6 @@ namespace xf {
         // for the item.
         // Also, should skip back, next and goto buttons.
         children_list = Basic::getChildren(pathbar);
-        auto gridView_p = Child::getGridviewObject();
         for (GList *children = children_list;children && children->data; children=children->next){
            auto widget = GTK_WIDGET(children->data);
            if (g_object_get_data(G_OBJECT(widget), "skipMenu")) continue;
@@ -166,6 +185,7 @@ namespace xf {
         }
 
         BasicPathbar::resetPathbarCSS(pathbar);
+        BasicPathbar::setRed(pathbar, path);
         return ;
     }
     private:
@@ -371,7 +391,7 @@ namespace xf {
         g_free(markup);
          return;
     }
-
+#endif
 
   };
 }

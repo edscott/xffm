@@ -92,15 +92,6 @@ namespace xf {
         TRACE("updateGridView: ok\n");
       }
 
-      static void  updatePathbar(bool addHistory, void *pathbar_go){
-        UtilPathbar<DirectoryClass>::updatePathbar(addHistory, pathbar_go);
-
-      }
-      static void  updatePathbar(const gchar *path, GtkBox *pathbar, 
-          bool addHistory, void *pathbar_go){
-        UtilPathbar<DirectoryClass>::updatePathbar(path, pathbar, addHistory, pathbar_go);
-      }
-
     public:
     static const gchar *getWorkdir(GtkWidget *child){
       return Child::getWorkdir(child);
@@ -138,7 +129,7 @@ char buffer[4096];
         g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       }
       Child::setWindowTitle(child);
-      updatePathbar(false, (void *)pathbar_go);
+      UtilPathbar<DirectoryClass>::updatePathbar(false, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -150,7 +141,7 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      updatePathbar(true, (void *)pathbar_go);
+      UtilPathbar<DirectoryClass>::updatePathbar(true, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -162,7 +153,7 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      updatePathbar(updateHistory, (void *)pathbar_go);
+      UtilPathbar<DirectoryClass>::updatePathbar(updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -176,7 +167,7 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
+      UtilPathbar<DirectoryClass>::updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
