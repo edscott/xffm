@@ -157,9 +157,13 @@ namespace xf {
     setRed(pathbar, redPath);
  }
     
-    
     static void 
     updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
+      updatePathbar(path, pathbar, updateHistory, pathbar_go_f, (void *)pathbar);
+    }
+    
+    static void 
+    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f, void *goData){
         TRACE( "update pathbar to %s (update=%d)\n", path, updateHistory);
         TRACE( "update_pathbar_f:: %s\n", path);
 
@@ -299,7 +303,7 @@ namespace xf {
              TRACE("Adding gesture to %s\n", path);
              auto gesture = gtk_gesture_click_new();
              gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
-             g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);
+             g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), goData);
              gtk_widget_add_controller(GTK_WIDGET(widget), GTK_EVENT_CONTROLLER(gesture));
              g_object_set_data( G_OBJECT(widget), "hasGesture", GINT_TO_POINTER(1));
            }
@@ -311,7 +315,6 @@ namespace xf {
         return ;
     }
 
-    private:
     static void 
     togglePathbar(const gchar *path, GtkBox *pathbar){
         // Hiding stuff which does not fit does not work until
@@ -342,6 +345,7 @@ namespace xf {
         setRed(pathbar, path);
     }
     
+    private:
       
     static gboolean
     buttonNegative (GtkEventControllerMotion* self, double x, double y, void *data) 

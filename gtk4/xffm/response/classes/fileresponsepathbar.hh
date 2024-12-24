@@ -2,9 +2,114 @@
 #define FILERESPONSEPATHBAR_HH
 
 namespace xf {
-
+#if 10
   class FileResponsePathbar {
-  private:
+    GtkBox *pathbar_;
+    gchar *path_;
+    GtkWidget *back_;
+    GtkWidget *next_;
+    PathbarHistory *pathbarHistory_p;
+
+    void *reloadFunction_;
+    void *reloadData_;
+    
+  public:
+   GtkBox *pathbar(void){return pathbar_;} 
+   const gchar *path(void){ return path_;}
+
+    void *reloadFunction(void) {return reloadFunction_;}
+    void *reloadData(void) {return reloadData_;}
+
+
+   ~FileResponsePathbar(void){
+     delete pathbarHistory_p;
+     //delete myPathbarMenu_;
+   }
+   FileResponsePathbar(void *reloadFunction, void *reloadData) {
+      reloadFunction_ = reloadFunction;
+      reloadData_ = reloadData;
+
+        pathbar_ = BasicPathbar::pathbarBox();
+        g_object_set_data(G_OBJECT(pathbar_), "pathbar", this); 
+        pathbarHistory_p = new PathbarHistory;
+        g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory_p", pathbarHistory_p); 
+
+        auto eventBox1 = GTK_BOX(g_object_get_data(G_OBJECT(pathbar_), "back"));
+        auto eventBox2 = GTK_BOX(g_object_get_data(G_OBJECT(pathbar_), "next"));
+        auto eventBox3 = GTK_BOX(g_object_get_data(G_OBJECT(pathbar_), "goto"));
+        auto pb_button = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar_), "pb_button"));
+
+        auto gesture1 = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
+        g_signal_connect (G_OBJECT(gesture1) , "released", 
+            EVENT_CALLBACK (goJump), (void *)this);
+
+        auto gesture2 = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
+        g_signal_connect (G_OBJECT(gesture2) , "released", 
+            EVENT_CALLBACK (goJump), (void *)this);
+
+        auto gesture3 = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture3),1);
+        g_signal_connect (G_OBJECT(gesture3) , "released", 
+            EVENT_CALLBACK (goJump), (void *)this);
+
+        auto gesture4 = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture4),1);
+        g_signal_connect (G_OBJECT(gesture4) , "released", 
+            EVENT_CALLBACK (reloadFunction), reloadData);
+
+        gtk_widget_add_controller(GTK_WIDGET(eventBox1), GTK_EVENT_CONTROLLER(gesture1));
+        gtk_widget_add_controller(GTK_WIDGET(eventBox2), GTK_EVENT_CONTROLLER(gesture2));
+        gtk_widget_add_controller(GTK_WIDGET(eventBox3), GTK_EVENT_CONTROLLER(gesture3));
+        gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture4));
+
+        g_object_set_data(G_OBJECT(eventBox1), "skipMenu", GINT_TO_POINTER(1));
+        g_object_set_data(G_OBJECT(eventBox2), "skipMenu", GINT_TO_POINTER(1));
+        g_object_set_data(G_OBJECT(eventBox3), "skipMenu", GINT_TO_POINTER(1));
+        g_object_set_data(G_OBJECT(pb_button), "skipMenu", GINT_TO_POINTER(1));
+        
+    }
+     
+   static void 
+    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
+        TRACE("Utilpathbar:: updatePathbar2\n");
+        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+    }
+   
+   void path(const char *value){
+     g_free(path_);
+     if (!value){
+       path_ = g_strdup(g_get_home_dir());
+       return;
+     }
+
+     //Nonexisting paths, use homedir
+     if (!g_file_test(value, G_FILE_TEST_EXISTS)) {
+       path_ = g_strdup(g_get_home_dir());
+       return;
+     } 
+     path_ = g_strdup(value);
+   }
+
+private:
+   
+    static gboolean
+    goJump (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data ) 
+    {
+      TRACE("*** gojump disabled...\n");
+      return true;
+    }
+    
+  }; 
+#else
+  class FileResponsePathbar {
+    private:
     GtkBox *pathbar_;
     gchar *path_ =  NULL;
     gchar *workdir_;
@@ -557,7 +662,7 @@ namespace xf {
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
         return eventBox;        
     }
-
   };
+#endif
 }
 #endif

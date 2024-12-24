@@ -265,6 +265,9 @@ private:
         }
         TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
+      // FIXME:
+      // Seems like  lockGridView might fail, at least it failed once
+      //  and we got a gridview::listModel invalid...
         Child::lockGridView("mountThreadF1");
         if (!Child::validGridView(gridView_p)) {
             Child::unlockGridView();

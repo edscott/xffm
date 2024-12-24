@@ -279,8 +279,11 @@ public:
       auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
       DBG("Reload treemodel with %s\n", path);
 
-      p->responsePathbar_p->path(path); // new red
-      p->responsePathbar_p->togglePathbar(path); // new red
+      p->responsePathbar_p->path(path); // new path
+      auto pathbar = p->responsePathbar_p->pathbar(); 
+      BasicPathbar::togglePathbar(path, pathbar); 
+      // set red
+      BasicPathbar::setRed(pathbar, path);
       auto columnView = p->getColumnView(path);
       auto sw = GTK_SCROLLED_WINDOW(p->sw());
       if (columnView) gtk_scrolled_window_set_child(sw, GTK_WIDGET(columnView));
@@ -301,7 +304,11 @@ public:
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       DBG("selected: %s\n", g_file_info_get_name(info));
       auto path = Basic::getPath(info);
-      fileResponse_p->responsePathbar_p->updatePathbarBox(path, false, NULL); 
+      auto pathbar = fileResponse_p->responsePathbar_p->pathbar();
+      //fileResponse_p->responsePathbar_p->updatePathbarBox(path, false, NULL); 
+      auto reload_f = fileResponse_p->responsePathbar_p->reloadFunction();
+      auto reload_data = fileResponse_p->responsePathbar_p->reloadData();
+      BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
     }
 
     GtkWidget *getColumnView(const char *path){
@@ -355,7 +362,7 @@ public:
 
     GtkBox *mainBox(void) {
         // set red path (root of treemodel)
-        responsePathbar_p->path("/home/edscott"); // red item
+        responsePathbar_p->path("/home/edscott"); // FIXME: set default
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -367,7 +374,13 @@ public:
         gtk_box_append(mainBox_, label);
         auto pathbarBox = responsePathbar_p->pathbar();
        // this->updatePathbarBox(path, pathbarBox, NULL);
-        responsePathbar_p->updatePathbarBox(responsePathbar_p->path(), false, NULL); 
+       //
+        auto path = responsePathbar_p->path();
+        auto pathbar = responsePathbar_p->pathbar();
+        auto reload_f = responsePathbar_p->reloadFunction();
+        auto reload_data = responsePathbar_p->reloadData();
+        BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
+        //responsePathbar_p->updatePathbarBox(responsePathbar_p->path(), false, NULL); 
         
         gtk_box_append(mainBox_, GTK_WIDGET(responsePathbar_p->pathbar()));
 

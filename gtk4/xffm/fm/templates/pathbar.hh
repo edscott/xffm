@@ -62,23 +62,6 @@ namespace xf {
         g_object_set_data(G_OBJECT(pb_button), "skipMenu", GINT_TO_POINTER(1));
         
     }
-    
-    static void 
-    updatePathbar(bool updateHistory, void *pathbar_go_f){
-        DBG("Utilpathbar:: updatePathbar1\n");
-        const gchar *path = Child::getWorkdir();
-        GtkBox *pathbar = Child::getPathbar();
-        auto gridView_p = Child::getGridviewObject();
-        g_object_set_data(G_OBJECT(pathbar), "gridView_p", gridView_p);
-        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
-    }
-    static void 
-    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
-        DBG("Utilpathbar:: updatePathbar2\n");
-        auto gridView_p = Child::getGridviewObject();
-        g_object_set_data(G_OBJECT(pathbar), "gridView_p", gridView_p);
-        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
-    }
   
   private:
     static gboolean
