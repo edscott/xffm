@@ -30,7 +30,7 @@ namespace xf {
       return NULL;
      }
      char *current = (char *) historyNext_->data;
-     DBG("next path is %s\n", (const char *) current);
+     TRACE("next path is %s\n", (const char *) current);
      historyBack_ = g_list_prepend(historyBack_, current);
      historyNext_ = g_list_remove(historyNext_, current);
      return current;
@@ -43,7 +43,7 @@ namespace xf {
      }
      auto current = (const char *) historyBack_->data;
      auto previous = (const char *) historyBack_->next->data;
-     DBG("Back path is %s\n", previous);
+     TRACE("Back path is %s\n", previous);
      // No need to free memory, since we just move from one list to the other.
      historyNext_ = g_list_prepend(historyNext_, (void *)current);
      historyBack_ = g_list_remove(historyBack_,  (void *)current);
@@ -52,17 +52,17 @@ namespace xf {
    }
 
    void push(const char *path){
-          DBG("BasicPAthbar:: pushing %s\n", path);
+          TRACE("BasicPAthbar:: pushing %s\n", path);
       if (historyBack_ && historyBack_->data != NULL){
         if (strcmp(path, (const char *)historyBack_->data) != 0){
           // update with different or non existing path.
           historyBack_ = g_list_prepend(historyBack_, g_strdup(path));
-          DBG("push: 1 updating historyBack_ with path = %s\n", path);
+          TRACE("push: 1 updating historyBack_ with path = %s\n", path);
         }
       } else {
           // update with new path. 
           historyBack_ = g_list_prepend(historyBack_, g_strdup(path));
-          DBG("push: 2 updating historyBack with path = %s\n", path);
+          TRACE("push: 2 updating historyBack with path = %s\n", path);
       }
       // wipe next history 
       for (GList *l=historyNext_; l && l->data; l=l->next) g_free(l->data);
@@ -171,7 +171,7 @@ namespace xf {
         }
         auto pathbarHistory_p = (PathbarHistory *)g_object_get_data(G_OBJECT(pathbar), "pathbarHistory_p");
         if (updateHistory) {
-          DBG("BasicPAthbar::updatePathbar, pushing %s\n", path);
+          TRACE("BasicPAthbar::updatePathbar, pushing %s\n", path);
           pathbarHistory_p->push(path);
         }
         // Now process to back and next buttons
@@ -296,7 +296,7 @@ namespace xf {
             
            if (g_object_get_data(G_OBJECT(widget), "hasGesture") == NULL)
            {
-             DBG("Adding gesture to %s\n", path);
+             TRACE("Adding gesture to %s\n", path);
              auto gesture = gtk_gesture_click_new();
              gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
              g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (pathbar_go_f), (void *)pathbar);

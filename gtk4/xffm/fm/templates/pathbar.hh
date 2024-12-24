@@ -4,7 +4,7 @@ namespace xf {
 
   
   template <class DirectoryClass>
-  class Pathbar :  public UtilPathbar<DirectoryClass>
+  class Pathbar 
   {
     GtkBox *pathbar_;
     gchar *path_;
@@ -15,25 +15,9 @@ namespace xf {
   public:
    GtkBox *pathbar(void){return pathbar_;} 
    const gchar *path(void){ return path_;}
-/*    
-   void addSignals(GtkBox *eventBox, const char *path){
-      g_object_set_data(G_OBJECT(eventBox), "skipMenu", GINT_TO_POINTER(1));
-      
-      auto motionB = gtk_event_controller_motion_new();
-      gtk_event_controller_set_propagation_phase(motionB, GTK_PHASE_CAPTURE);
-      gtk_widget_add_controller(GTK_WIDGET(eventBox), motionB);
-      g_signal_connect (G_OBJECT(motionB) , "leave", EVENT_CALLBACK (BasicPathbar::buttonPositive), NULL);
-      g_signal_connect (G_OBJECT(motionB) , "enter", EVENT_CALLBACK (BasicPathbar::buttonNegative), NULL);
 
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (goJump), (void *)this);
-      gtk_widget_add_controller(GTK_WIDGET(eventBox), GTK_EVENT_CONTROLLER(gesture));
-   } 
- 
- */
    ~Pathbar(void){
-
+     delete pathbarHistory_p;
      //delete myPathbarMenu_;
    }
    Pathbar(void) {
@@ -78,6 +62,24 @@ namespace xf {
         g_object_set_data(G_OBJECT(pb_button), "skipMenu", GINT_TO_POINTER(1));
         
     }
+    
+    static void 
+    updatePathbar(bool updateHistory, void *pathbar_go_f){
+        DBG("Utilpathbar:: updatePathbar1\n");
+        const gchar *path = Child::getWorkdir();
+        GtkBox *pathbar = Child::getPathbar();
+        auto gridView_p = Child::getGridviewObject();
+        g_object_set_data(G_OBJECT(pathbar), "gridView_p", gridView_p);
+        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+    }
+    static void 
+    updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
+        DBG("Utilpathbar:: updatePathbar2\n");
+        auto gridView_p = Child::getGridviewObject();
+        g_object_set_data(G_OBJECT(pathbar), "gridView_p", gridView_p);
+        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+    }
+  
   private:
     static gboolean
     goJump (
