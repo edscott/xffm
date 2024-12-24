@@ -121,7 +121,7 @@ char buffer[4096];
     }
 
     static bool setWorkdir(const gchar *path, GtkWidget *child){
-      TRACE("setWorkdir...A\n");
+      DBG("setWorkdir...A\n");
       if (pleaseWait()) return false;
       auto wd = (char *)getWorkdir(child);
       if (strcmp(wd, path)){
@@ -134,7 +134,7 @@ char buffer[4096];
       return true;
     }
     static bool setWorkdir(const gchar *path){
-      TRACE("setWorkdir...A\n");
+      DBG("setWorkdir...A\n");
       if (pleaseWait()) return false;
       auto child = Child::getChild();
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
@@ -146,7 +146,7 @@ char buffer[4096];
       return true;
     }
     static bool setWorkdir(const gchar *path, bool updateHistory){
-      TRACE("setWorkdir B...path=%s\n",path);
+      DBG("setWorkdir B...path=%s\n",path);
       if (pleaseWait()) return false;
       auto child = Child::getChild();
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
@@ -158,7 +158,7 @@ char buffer[4096];
       return true;
     }
     static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
-      TRACE("setWorkdir...C\n");
+      DBG("setWorkdir...C\n");
       if (pleaseWait()) return false;
       if (!MainWidget) return false;
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
@@ -317,9 +317,8 @@ char buffer[4096];
         auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
         auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
         auto button = gtk_gesture_single_get_button(GTK_GESTURE_SINGLE(self));
-          TRACE("pathbar goto... name=%s, path=%s\n", name, path);
+          DBG("***pathbar goto... name=%s, path=%s\n", name, path);
         if (button == 1){
-          TRACE("pathbar goto...\n");
           //if (strcmp(path, _("Bookmarks"))==0) setWorkdir(g_get_home_dir(), pathbar, true);
           //else setWorkdir(path, pathbar, true);
           setWorkdir(path, pathbar, true);
