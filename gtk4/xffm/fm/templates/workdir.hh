@@ -251,7 +251,12 @@ char buffer[4096];
         }
         
         DBG("Open new ecryptfs dialog.\n");
-        EFS::newEfs();
+        mkdir("/tmp/mnt", 0777);
+       /* if (!g_file_test("/tmp/mnt/.keep", G_FILE_TEST_EXISTS)){
+          fclose(fopen("/tmp/mnt/userMounts","w"));          
+        }*/
+
+        EFS::newEfs("/tmp/mnt");
         return TRUE;
       }
       auto trash = g_file_info_get_attribute_object (info, "xffm::trash");

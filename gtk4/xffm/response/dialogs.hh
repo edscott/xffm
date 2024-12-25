@@ -14,9 +14,6 @@
 
 // response classes
 // jumpresponse is a template to access Workdir<Type>
-#include "response/classes/fileresponsepathbar.hh"
-#include "response/classes/fileresponse.hh" // class
-#include "response/classes/efsresponse.hh" // class
 #include "response/classes/entryresponse.hh" // class
 #include "response/classes/passwdresponse.hh"// class
 #include "response/classes/rmresponse.hh"    // class
@@ -27,6 +24,10 @@
 # include "response/classes/lnresponse.hh"   // class
 # include "response/classes/info.hh"   // class
 # include "response/classes/dndresponse.hh"   // class
+                                              // 
+#include "response/classes/fileresponsepathbar.hh"
+#include "response/classes/fileresponse.hh" // class
+#include "response/classes/efsresponse.hh" // class
 # include "response/classes/mount.hh"   // class
 
 namespace xf

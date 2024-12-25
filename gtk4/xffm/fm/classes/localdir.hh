@@ -6,16 +6,6 @@ namespace xf {
 
     public:
 
-    static void setPaintableIcon(GFileInfo *info, const char *path){
-        if (FstabUtil::isMounted(path) || FstabUtil::isInFstab(path)) {
-          FstabUtil::setMountableIcon(info, path);
-        }
-        TRACE("isBookmarked(%s) = %d\n", path, Bookmarks::isBookmarked(path));
-        if (Bookmarks::isBookmarked(path)){
-          Bookmarks::setBookmarkIcon(info, path);
-        }
-    }
-
       static GtkMultiSelection *xfSelectionModel(const char *path){
        // This section adds the up icon.
         auto flags = Settings::getInteger("flags", path);
@@ -93,7 +83,18 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
         return getSelectionModel(G_LIST_MODEL(store), true, flags);
       }
 
-      static bool
+
+    static void setPaintableIcon(GFileInfo *info, const char *path){
+        if (FstabUtil::isMounted(path) || FstabUtil::isInFstab(path)) {
+          FstabUtil::setMountableIcon(info, path);
+        }
+        TRACE("isBookmarked(%s) = %d\n", path, Bookmarks::isBookmarked(path));
+        if (Bookmarks::isBookmarked(path)){
+          Bookmarks::setBookmarkIcon(info, path);
+        }
+    }
+
+    static bool
       symlinkToDir(GFileInfo* info, GFileType type){
         if (type == G_FILE_TYPE_SYMBOLIC_LINK){ 
           const char *path = g_file_info_get_symlink_target(info);

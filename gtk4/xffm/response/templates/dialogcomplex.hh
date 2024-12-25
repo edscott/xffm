@@ -6,10 +6,11 @@ namespace xf
   template <class dialogClass>
   class DialogComplex : public DialogBasic<dialogClass> {
     public:
-    DialogComplex(void){
+    
+    DialogComplex(const char *folder){
       DBG("DialogComplex1\n");
       auto frame = this->frame();
-      auto mainBox = this->subClass()->mainBox();
+      auto mainBox = this->subClass()->mainBox(folder);
       DBG("DialogComplex12\n");
       gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
       DBG("DialogComplex123\n");

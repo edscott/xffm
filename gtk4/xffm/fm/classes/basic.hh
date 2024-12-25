@@ -491,8 +491,8 @@ public:
     }
     static void
     flushGTK(void){
-      while (g_main_context_pending(NULL))
-        g_main_context_iteration(NULL, TRUE);
+      // This may introduce race conditions
+      //while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
     }
     static gchar *
     utf_string (const gchar * t) {

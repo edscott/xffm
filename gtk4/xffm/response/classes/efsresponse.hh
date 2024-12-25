@@ -11,6 +11,7 @@ namespace xf {
    const char *iconName_;
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
+   const char *folder_ = "/mnt";
    GtkTextView *output_;
    GList *children_ = NULL; 
 public:
@@ -20,6 +21,8 @@ public:
     const char *label(void){return "xffm::efs";}
     GtkEntry *remoteEntry(void){return remoteEntry_;}
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
+    const char *folder(){return  folder_;}
+    void folder(const char *value){folder_ = value;}
 
     ~EfsResponse (void){
       g_free(title_);
@@ -73,8 +76,12 @@ public:
       return NULL;
     }
 
-
     GtkBox *mainBox(void) {
+      return mainBox(NULL);
+    }
+
+    GtkBox *mainBox(const char *folder) {
+        folder_ = folder;
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -403,7 +410,7 @@ public:
       TRACE("getDirectory\n");
       void *newDialog[] = {NULL, NULL};
       TRACE("getDirectory1:: newDialog[0]= %p\n", newDialog[0]);
-      FileDialog::newFileDialog(newDialog);
+      FileDialog::newFileDialog(newDialog, subClass->folder());
       TRACE("getDirectory2:: newDialog[0]= %p\n", newDialog[0]);
       subClass->push(newDialog[0]);
 
@@ -543,8 +550,8 @@ public:
         return retval;
     }
 
-    static void newEfs(void){
-      auto dialogObject = new DialogComplex<EfsResponse>;
+    static void newEfs(const char *folder){
+      auto dialogObject = new DialogComplex<EfsResponse>(folder);
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
       gtk_window_set_decorated(dialog, true);
