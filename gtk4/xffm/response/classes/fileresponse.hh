@@ -32,6 +32,7 @@ public:
 
     FileResponse (void){
       responsePathbar_p = new FileResponsePathbar((void *)reload_f, (void *)this);
+      responsePathbar_p->parent((void *)this);
       //this->reloadFunction((void *)reload_f);
       //this->reloadData((void *)this);
       //FileResponsePathbar((void *)reload_f, (void *)this);
@@ -281,7 +282,11 @@ public:
 
       p->responsePathbar_p->path(path); // new path
       auto pathbar = p->responsePathbar_p->pathbar(); 
-      BasicPathbar::togglePathbar(path, pathbar); 
+
+      auto reload_f = p->responsePathbar_p->reloadFunction();
+      auto reload_data = p->responsePathbar_p->reloadData();
+      BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
+      //BasicPathbar::togglePathbar(path, pathbar); 
       // set red
       BasicPathbar::setRed(pathbar, path);
       auto columnView = p->getColumnView(path);
@@ -304,11 +309,17 @@ public:
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       DBG("selected: %s\n", g_file_info_get_name(info));
       auto path = Basic::getPath(info);
+      auto redPath = fileResponse_p->responsePathbar_p->path();
       auto pathbar = fileResponse_p->responsePathbar_p->pathbar();
-      //fileResponse_p->responsePathbar_p->updatePathbarBox(path, false, NULL); 
+
+      //BasicPathbar::togglePathbar(path, pathbar);
+      /*BasicPathbar::setRed(pathbar,path);*/
+      
       auto reload_f = fileResponse_p->responsePathbar_p->reloadFunction();
       auto reload_data = fileResponse_p->responsePathbar_p->reloadData();
-      BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
+      BasicPathbar::updatePathbar(path, pathbar, false, reload_f, reload_data);
+      BasicPathbar::setRed(pathbar,redPath);
+      
     }
 
     GtkWidget *getColumnView(const char *path){

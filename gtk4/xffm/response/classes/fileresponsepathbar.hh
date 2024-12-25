@@ -2,6 +2,8 @@
 #define FILERESPONSEPATHBAR_HH
 
 namespace xf {
+  class FileResponse;
+  
   class FileResponsePathbar {
     GtkBox *pathbar_;
     gchar *path_;
@@ -11,8 +13,13 @@ namespace xf {
 
     void *reloadFunction_;
     void *reloadData_;
+
+    void *parent_ = NULL;
     
   public:
+    void parent(void *value){parent_ = value;}
+    void *parent(void){return parent_;}
+    
    GtkBox *pathbar(void){return pathbar_;} 
    const gchar *path(void){ return path_;}
 
@@ -36,6 +43,9 @@ namespace xf {
         auto eventBox1 = GTK_BOX(g_object_get_data(G_OBJECT(pathbar_), "back"));
         auto eventBox2 = GTK_BOX(g_object_get_data(G_OBJECT(pathbar_), "next"));
         auto eventBox3 = GTK_BOX(g_object_get_data(G_OBJECT(pathbar_), "goto"));
+        // Goto disabled (we would need to put in an intermediate template,
+        // as with the gridview pathbar).
+        gtk_widget_set_sensitive(GTK_WIDGET(eventBox3), false);
         auto pb_button = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar_), "pb_button"));
 
         auto gesture1 = gtk_gesture_click_new();
@@ -108,11 +118,11 @@ private:
       auto pathbar = pathbar_p->pathbar();
       auto pathbarHistory_p = pathbar_p->pathbarHistory_p;
       auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      DBG("gojump: \n");
       auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
+      DBG("gojump: name=%s\n", name);
       auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
-      auto location = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "location"));
-      auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "input"));
-      auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
+      DBG("gojump: path=%s\n", path);
    
       auto reload_f = pathbar_p->reloadFunction();
       auto reload_data = pathbar_p->reloadData();
@@ -121,15 +131,32 @@ private:
       if (strcmp(path, "xffm:back") == 0){
         auto previous = pathbarHistory_p->backHistory();
         DBG("previous = %s\n", previous);
-        if (previous) BasicPathbar::updatePathbar(previous, pathbar, true, reload_f, reload_data);
+        if (previous) BasicPathbar::updatePathbar(previous, pathbar, false, reload_f, reload_data);
+        BasicPathbar::setRed(pathbar, previous);
+        // Too convoluted:
+        //auto r = (void *((*) (GtkGestureClick*, gint, gdouble, gdouble, gpointer)) )reload_f;
+        
 //        if (previous) Workdir<DirectoryClass>::setWorkdir(previous, GTK_BOX(pathbar), false);
       }
       if (strcmp(path, "xffm:next") == 0){
         auto current = pathbarHistory_p->nextHistory();
-        if (current)  BasicPathbar::updatePathbar(current, pathbar, true, reload_f, reload_data);
+        if (current)  BasicPathbar::updatePathbar(current, pathbar, false, reload_f, reload_data);
+        BasicPathbar::setRed(pathbar, current);
+        /* nope
+        auto parent = (FileResponse *)pathbar_p->parent();
+        auto columnView = parent->getColumnView(path);
+
+        auto sw = GTK_SCROLLED_WINDOW(parent->sw());
+        if (columnView) gtk_scrolled_window_set_child(sw, GTK_WIDGET(columnView));
+        else {
+          auto label = gtk_label_new("empty");
+          gtk_scrolled_window_set_child(sw, label);
+        }
+        */
 //        if (current)  Workdir<DirectoryClass>::setWorkdir(current, GTK_BOX(pathbar), false);
       }
       if (strcmp(path, "xffm:goto") == 0){
+        TRACE("xffm:goto\n");
     /*    auto dialogObject = new DialogPrompt<jumpResponse<DirectoryClass> >;
         auto dialog = dialogObject->dialog();
         dialogObject->setParent(GTK_WINDOW(MainWidget));
