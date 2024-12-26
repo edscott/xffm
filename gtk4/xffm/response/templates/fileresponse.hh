@@ -119,9 +119,33 @@ public:
     // object so that it can be referred to in the
     // async main context thread callbacks.
     // 
-    //void dialog(GtkWindow *value){
-    //  dialog_ = value;
-    //}
+    void dialog(GtkWindow *value){
+      dialog_ = value;
+    }
+
+    // void *asyncCallback(void *data)
+    //
+    // This will be executed by the subClassObject->subClassObject,
+    // In other words, by the DialogEntry<mkdirResponse> dialog
+    // subClass object.
+    //
+    void *asyncCallback(void *data){
+       auto text = (const char *)data;
+       auto label = this->selectLabel();
+       gtk_label_set_markup(label, text); 
+       return NULL;
+       //DBG("asyncCallback(%s)...\n", (const char *)data);
+       //return (void *) "foo";
+    }
+
+    //void *asyncCallbackData(void)
+    //
+    // Just for completeness for now.
+    // 
+    void *asyncCallbackData(void){
+      DBG("asyncCallbackData...\n");
+      return (void *) "bar";
+    }
 
 private:
   
@@ -163,6 +187,49 @@ private:
 
     }  
 */
+
+    static void
+    button_new (GtkButton * button, gpointer data) {
+
+      auto subClassObject = (FileResponse *)data;
+      char *path = g_strconcat(subClassObject->responsePathbar_p->path(), G_DIR_SEPARATOR_S,  _("Private"), NULL);
+
+      DBG("***Entry dialog...path=%s\n", path);
+     
+      auto dialogObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      auto dialog = dialogObject->dialog();
+      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
+      g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
+
+      dialogObject->subClass()->parentObject(subClassObject);
+      DBG("*** button_new subClass=%p\n", subClassObject);
+      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
+      
+      dialogObject->run();
+      // get selected path
+/*
+      // path = g_strconcat(path, G_DIR_SEPARATOR_STRING, _("Private"), NULL);
+      dialogPath<mkdirResponse>::action(path);
+      g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
+      // FIXME: if folder exists, update the entry
+*/
+      //g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
+    }
+
+    static void
+    button_save (GtkButton * button, gpointer data) {
+      auto subClass = (FileResponse *)data;
+      if (subClass->save()){
+        g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
+      }
+    }
+
+    static void
+    button_cancel (GtkButton * button, gpointer data) {
+      auto subClass = (FileResponse *)data;
+      g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
+    }
 
     GtkWindow *dialog(void){return dialog_;}
     
@@ -533,49 +600,6 @@ private:
 
     gboolean save(void){
       return true;        
-    }
-
-    static void
-    button_save (GtkButton * button, gpointer data) {
-      auto subClass = (FileResponse *)data;
-      if (subClass->save()){
-        g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
-      }
-    }
-
-    static void
-    button_cancel (GtkButton * button, gpointer data) {
-      auto subClass = (FileResponse *)data;
-      g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
-    }
-
-    static void
-    button_new (GtkButton * button, gpointer data) {
-
-      auto subClass = (FileResponse *)data;
-      char *path = g_strconcat(subClass->responsePathbar_p->path(), G_DIR_SEPARATOR_S,  _("Private"), NULL);
-
-      DBG("***Entry dialog...path=%s\n", path);
-     
-      auto dialogObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
-      auto dialog = dialogObject->dialog();
-      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
-
-      dialogObject->subClass()->parentClass(subClass);
-      DBG("*** button_new subClass=%p\n", subClass);
-      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
-      
-      dialogObject->run();
-      // get selected path
-/*
-      // path = g_strconcat(path, G_DIR_SEPARATOR_STRING, _("Private"), NULL);
-      dialogPath<mkdirResponse>::action(path);
-      g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
-      // FIXME: if folder exists, update the entry
-*/
-      //g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
     }
 
   };

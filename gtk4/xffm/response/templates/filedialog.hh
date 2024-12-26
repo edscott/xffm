@@ -22,7 +22,7 @@ namespace xf {
       newDialog[0] = (void *)dialog;
       
       gtk_window_set_decorated(dialog, true);
-      dialogObject->setSubClassDialog();
+      //dialogObject->setSubClassDialog();
 
       gtk_widget_realize(GTK_WIDGET(dialog));
       Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");

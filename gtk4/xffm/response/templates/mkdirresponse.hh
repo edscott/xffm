@@ -8,10 +8,10 @@ namespace xf {
   class mkdirResponse {
    const char *title_;
    const char *iconName_;
-   void *parentClass_=NULL;
+   void *parentObject_=NULL;
 public:
-   void *parentClass(void){ return parentClass_;}
-   void parentClass(void *value){parentClass_ = value;}
+   void *parentObject(void){ return parentObject_;}
+   void parentObject(void *value){parentObject_ = value;}
 
     const char *title(void){ return _("Path");}
     const char *iconName(void){ return "dialog-question";}
@@ -33,6 +33,42 @@ public:
       g_free(dir);
       g_free(string);
     }
+
+    static void *asyncNo(void *data){
+      auto dialogObject = (DialogEntry<mkdirResponse> *)data;
+      auto dialog = dialogObject->dialog();
+      auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
+      auto path = g_object_get_data(G_OBJECT(entry), "path");
+      g_free(path);
+
+      return NULL;
+    }
+
+    static void *asyncYes(void *data){
+       // this dialog
+       auto dialogObject = (DialogEntry<mkdirResponse> *)data;
+       auto dialog = dialogObject->dialog();
+       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
+       auto buffer = gtk_entry_get_buffer(entry);
+       const char *text = gtk_entry_buffer_get_text(buffer);
+       auto path = g_object_get_data(G_OBJECT(entry), "path");
+       g_free(path); // cleanup
+       // parent dialog
+       auto p = (FileResponse<Type> *)dialogObject->subClass()->parentObject();
+
+       auto retval = p->asyncCallback((void *)text);
+       
+       // Test mode
+       //auto retval = p->asyncCallback(p->asyncCallbackData());
+       //DBG("p->asyncCallback(p->asyncCallbackData) -> %s\n", (const char *)retval);
+       
+       // send path to action (asyncYesArg) where path is g_free'd
+       //asyncYesArg(data, "mkdir");      
+       return NULL;
+    }
+
+private:
+
 /*
     static void *asyncYesArg(void *data, const char *op){
       if (!op) return NULL;
@@ -70,35 +106,6 @@ public:
       return NULL;
     }
 */
-    static void *asyncNo(void *data){
-      auto dialogObject = (DialogEntry<mkdirResponse> *)data;
-      auto dialog = dialogObject->dialog();
-      auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
-      auto path = g_object_get_data(G_OBJECT(entry), "path");
-      g_free(path);
-
-      return NULL;
-    }
-
-    static void *asyncYes(void *data){
-       // this dialog
-       auto dialogObject = (DialogEntry<mkdirResponse> *)data;
-       auto dialog = dialogObject->dialog();
-       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
-       auto buffer = gtk_entry_get_buffer(entry);
-       const char *text = gtk_entry_buffer_get_text(buffer);
-       auto path = g_object_get_data(G_OBJECT(entry), "path");
-       g_free(path); // cleanup
-       // parent dialog
-       auto p = (FileResponse<Type> *)dialogObject->subClass()->parentClass();
-       DBG("*** parent title:%s entry text: %s\n", p->title(), text);
-       auto label = p->selectLabel();
-       gtk_label_set_markup(label, text); 
-       DBG("***mkdirResponse, parent dialogObject = %p\n", p);
-       // send path to action (asyncYesArg) where path is g_free'd
-       //asyncYesArg(data, "mkdir");      
-       return NULL;
-    }
 
 };
 }
