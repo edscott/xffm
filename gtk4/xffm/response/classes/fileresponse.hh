@@ -5,40 +5,12 @@
  *        update the entry and to remove window from cleanup window list.
  *        */
 
+#include "../templates/mkdirresponse.hh"
+
 namespace xf {
-
-  class pathResponse;
-  class mkdirResponse: public pathResponse {
-   const char *title_;
-   const char *iconName_;
-public:
-    const char *title(void){ return _("Path");}
-    const char *iconName(void){ return "dialog-question";}
-    const char *label(void){ return _("New Folder");}
-
-
-    static void setDefaults(GtkWindow *dialog, GtkLabel *label){
-      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      auto path = (const char *)g_object_get_data(G_OBJECT(entry), "path");
-      auto base = g_path_get_basename(path);
-      auto dir = g_path_get_dirname(path);
-      auto buffer = gtk_entry_get_buffer(entry);
-      gtk_entry_buffer_set_text(buffer, base, -1);
-
-      //auto string = g_strconcat("<span color=\"green\"><b>",_("New Folder"), ":\n</b></span><span color=\"blue\"><b>", dir, "</b></span>", NULL);
-      auto string = g_strconcat("<span color=\"blue\"><b>",dir, "\n</b></span><span color=\"green\"><b>", _("New folder name:"), "</b></span>", NULL);
-      gtk_label_set_markup(label, string);
-      g_free(base);
-      g_free(dir);
-      g_free(string);
-    }
-    static void *asyncYes(void *data){
-       asyncYesArg(data, "mkdir");      
-       return NULL;
-    }
-};
-  
-
+  template <class Type> class FileDialog;
+ 
+  template <class Type>
   class FileResponse {
 //  class FileResponse : public FileResponsePathbar{
    GtkBox *mainBox_ = NULL;
@@ -52,8 +24,10 @@ public:
    FileResponsePathbar *responsePathbar_p;
    char *startFolder_ = NULL;
    GtkSingleSelection *selectionModel_;
+   GtkWidget *selectLabel_;
 public:
-   GtkSingleSelection *selectionModel(void){ return selectionModel_;}
+    GtkLabel *selectLabel(void){return GTK_LABEL(selectLabel_);}
+    GtkSingleSelection *selectionModel(void){ return selectionModel_;}
     
     char *startFolder(){return  startFolder_;}
     void startFolder(const char *value){
@@ -74,6 +48,7 @@ public:
     }
 
     FileResponse (void){
+      DBG("***initial FileResponse=%p\n", this);
       responsePathbar_p = new FileResponsePathbar((void *)reload_f, (void *)this);
       responsePathbar_p->parent((void *)this);
       //this->reloadFunction((void *)reload_f);
@@ -435,8 +410,18 @@ public:
         gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), false);
         gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), false);
 
-        auto label = gtk_label_new(_("No folder selected."));
-        gtk_box_append(mainBox_, label);
+        auto boxL = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_box_append(mainBox_, GTK_WIDGET(boxL));
+
+        auto prefix = gtk_label_new("");
+        auto markup = g_strconcat("<span color=\"blue\">", _("Selection:"), "</span> ", NULL);
+        gtk_label_set_markup(GTK_LABEL(prefix), markup);
+        g_free(markup);
+
+        selectLabel_ = gtk_label_new(_("No folder selected."));
+        gtk_box_append(boxL, prefix);
+        gtk_box_append(boxL, selectLabel_);
+        
         auto pathbarBox = responsePathbar_p->pathbar();
        // this->updatePathbarBox(path, pathbarBox, NULL);
        //
@@ -530,23 +515,37 @@ public:
       char *path = g_strconcat(subClass->responsePathbar_p->path(), G_DIR_SEPARATOR_S,  _("Private"), NULL);
 
       DBG("***Entry dialog...path=%s\n", path);
-      // get selected path
+     
+      auto dialogObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      auto dialog = dialogObject->dialog();
+      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
+      g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
 
+      dialogObject->subClass()->parentClass(subClass);
+      DBG("*** button_new subClass=%p\n", subClass);
+      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
+      
+      dialogObject->run();
+      // get selected path
+/*
       // path = g_strconcat(path, G_DIR_SEPARATOR_STRING, _("Private"), NULL);
       dialogPath<mkdirResponse>::action(path);
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
       // FIXME: if folder exists, update the entry
-
+*/
       //g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
     }
 
   };
 
+
+  template <class Type>
   class FileDialog {
     public:
     static void newFileDialog(void **newDialog, const char *startFolder){
       TRACE("newFileDialog1\n");
-      auto dialogObject = new DialogComplex<FileResponse>(startFolder);
+      auto dialogObject = new DialogComplex<FileResponse<Type> >(startFolder);
       TRACE("newFileDialog12\n");
 
       //

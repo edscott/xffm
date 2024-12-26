@@ -2,8 +2,6 @@
 #define FILERESPONSEPATHBAR_HH
 
 namespace xf {
-  class FileResponse;
-  
   class FileResponsePathbar {
     GtkBox *pathbar_;
     gchar *path_;

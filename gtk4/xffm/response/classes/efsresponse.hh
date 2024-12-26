@@ -410,7 +410,7 @@ public:
       TRACE("getDirectory\n");
       void *newDialog[] = {NULL, NULL};
       TRACE("getDirectory1:: newDialog[0]= %p\n", newDialog[0]);
-      FileDialog::newFileDialog(newDialog, subClass->folder());
+      FileDialog<bool>::newFileDialog(newDialog, subClass->folder());
       TRACE("getDirectory2:: newDialog[0]= %p\n", newDialog[0]);
       subClass->push(newDialog[0]);
 
