@@ -25,8 +25,9 @@
 # include "response/classes/info.hh"   // class
 # include "response/classes/dndresponse.hh"   // class
                                               // 
+#include "response/templates/mkdirresponse.hh"
 #include "response/classes/fileresponsepathbar.hh"
-#include "response/classes/fileresponse.hh" // class
+#include "response/templates/fileresponse.hh" // class
 #include "response/classes/efsresponse.hh" // class
 # include "response/classes/mount.hh"   // class
 

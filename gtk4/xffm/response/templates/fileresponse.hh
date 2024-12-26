@@ -5,7 +5,6 @@
  *        update the entry and to remove window from cleanup window list.
  *        */
 
-#include "../templates/mkdirresponse.hh"
 
 namespace xf {
   template <class Type> class FileDialog;

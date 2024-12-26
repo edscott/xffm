@@ -54,7 +54,7 @@ public:
       if (strcmp(op, "mkdir")==0){
         DBG("got mkdir operation:target=\"%s\", newFile=\"%s\".\n", target, newFile);
         if (!g_file_test(newFile, G_FILE_TEST_EXISTS))
-          if(mkdir(newFile,0777) < 0){
+          if(mkdir(newFile,0700) < 0){
             auto string = g_strdup_printf(_("Cannot create directory '%s' (%s)\n"), newFile, strerror(errno));
             Print::printError(output, g_strconcat(_("Sorry"), " ", string, NULL));
             DBG("***%s\n", string);
