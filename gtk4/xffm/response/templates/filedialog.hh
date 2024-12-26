@@ -12,7 +12,7 @@ namespace xf {
   class FileDialog {
     public:
     static void newFileDialog(void **newDialog, const char *startFolder){
-      TRACE("newFileDialog1\n");
+      DBG("*** newFileDialog1 startFolder = %s\n", startFolder);
       auto dialogObject = new DialogComplex<FileResponse<Type> >(startFolder);
       TRACE("newFileDialog12\n");
 

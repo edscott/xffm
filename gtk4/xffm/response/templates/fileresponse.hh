@@ -110,7 +110,8 @@ public:
     // Not compatible with mingw-x86_64.
     // 
     GtkBox *mainBox(const char *folder) {
-      return constructMainBox(folder);
+      startFolder(folder);
+      return constructMainBox();
     }
 
     // void dialog(GtkWindow *value)
@@ -130,9 +131,11 @@ public:
     // subClass object.
     //
     void *asyncCallback(void *data){
-       auto text = (const char *)data;
-       auto label = this->selectLabel();
-       gtk_label_set_markup(label, text); 
+       auto path = (const char *)data;
+       //auto label = this->selectLabel();
+       //gtk_label_set_markup(label, text); 
+       reload(path);
+       // FIXME: add item to columnView and update selection.
        return NULL;
        //DBG("asyncCallback(%s)...\n", (const char *)data);
        //return (void *) "foo";
@@ -188,13 +191,42 @@ private:
     }  
 */
 
+      static gboolean equal_f (gconstpointer a, gconstpointer b){
+        auto A = G_FILE_INFO(a);
+        auto B = G_FILE_INFO(b);
+        auto nameA = g_file_info_get_name(A);
+        auto nameB = g_file_info_get_name(B);
+        TRACE("compare \"%s\" with \"%s\"\n", nameA, nameB);
+        if (strcmp(nameA, nameB) == 0) return true;
+        return false;
+      }
+
+    void reload(const char *path){
+        auto columnView = getColumnView(startFolder()); 
+        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
+        
+        GFileInfo *infoF = g_file_info_new();
+        auto name = g_path_get_basename(path);
+        DBG("** now select %s\n", name);
+        g_file_info_set_name(infoF, name);
+        g_free(name);
+
+
+        auto store = G_LIST_STORE(g_object_get_data(G_OBJECT(columnView), "store"));
+        guint positionS;
+        auto found = g_list_store_find_with_equal_func(store, infoF, equal_f, &positionS);
+        if (found){
+            gtk_single_selection_set_selected (selectionModel_, positionS);
+        }
+    }
+
     static void
     button_new (GtkButton * button, gpointer data) {
 
       auto subClassObject = (FileResponse *)data;
       char *path = g_strconcat(subClassObject->responsePathbar_p->path(), G_DIR_SEPARATOR_S,  _("Private"), NULL);
 
-      DBG("***Entry dialog...path=%s\n", path);
+      DBG("***Entry dialog...path=%s dialog=%p\n", path, subClassObject->dialog());
      
       auto dialogObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
       dialogObject->setParent(GTK_WINDOW(MainWidget));
@@ -219,16 +251,15 @@ private:
 
     static void
     button_save (GtkButton * button, gpointer data) {
-      auto subClass = (FileResponse *)data;
-      if (subClass->save()){
-        g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
-      }
+      auto subClassObject = (FileResponse *)data;
+      g_object_set_data(G_OBJECT(subClassObject->dialog()), "response", GINT_TO_POINTER(1));
+      
     }
 
     static void
     button_cancel (GtkButton * button, gpointer data) {
-      auto subClass = (FileResponse *)data;
-      g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
+      auto subClassObject = (FileResponse *)data;
+      g_object_set_data(G_OBJECT(subClassObject->dialog()), "response", GINT_TO_POINTER(-1));
     }
 
     GtkWindow *dialog(void){return dialog_;}
@@ -444,11 +475,17 @@ private:
       return true;
     }
 
-    static char *getSelectedPath(GtkSingleSelection *sel){
+    char *getSelectedPath(GtkSingleSelection *sel){
       GtkTreeListRow *treeListRow = GTK_TREE_LIST_ROW(gtk_single_selection_get_selected_item (sel));
+      if (!treeListRow) {
+        gtk_label_set_markup(GTK_LABEL(selectLabel_), _("No folder selected."));
+        return NULL;
+      }
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       DBG("selected: %s\n", g_file_info_get_name(info));
       auto path = Basic::getPath(info);
+      auto name = g_file_info_get_name(info);
+      gtk_label_set_markup(GTK_LABEL(selectLabel_), name);
       return path;
     }
 
@@ -458,7 +495,8 @@ private:
                   void *data)
     {
       auto fileResponse_p =(FileResponse *)data;
-      auto path = getSelectedPath(sel);
+      auto path = fileResponse_p->getSelectedPath(sel);
+      if (!path) return;
       auto redPath = fileResponse_p->responsePathbar_p->path();
       auto pathbar = fileResponse_p->responsePathbar_p->pathbar();
 
@@ -469,7 +507,7 @@ private:
       auto reload_data = fileResponse_p->responsePathbar_p->reloadData();
       BasicPathbar::updatePathbar(path, pathbar, false, reload_f, reload_data);
       BasicPathbar::setRed(pathbar,redPath);
-      g_free(path); // sure?
+      g_free(path); 
       
     }
 
@@ -494,7 +532,9 @@ private:
         auto filterModel = gtk_filter_list_model_new (G_LIST_MODEL (treemodel), NULL);
         selectionModel_ = gtk_single_selection_new (G_LIST_MODEL (filterModel));
         g_signal_connect (selectionModel_, "notify::selected-item", G_CALLBACK (selection_cb), (void *)this);
-        
+        gtk_single_selection_set_autoselect(selectionModel_, false);
+        gtk_single_selection_set_can_unselect(selectionModel_, true);
+        gtk_single_selection_set_selected(selectionModel_, GTK_INVALID_LIST_POSITION);
         auto maxLen = Basic::getMaxNameLen(listModel);
         auto columnView = gtk_column_view_new(GTK_SELECTION_MODEL(selectionModel_));
         // no good addGestureClick(columnView);
@@ -523,9 +563,9 @@ private:
 
     }
 
-    GtkBox *constructMainBox(const char *folder) {
+    GtkBox *constructMainBox(void) {
         // set red path (root of treemodel)       
-        responsePathbar_p->path(folder? folder : "/"); 
+        responsePathbar_p->path(startFolder()); 
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -565,7 +605,7 @@ private:
         // gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(output_));
         gtk_widget_set_size_request(GTK_WIDGET(sw_), 680, 200);
 
-        auto columnView = getColumnView(folder? folder : "/"); 
+        auto columnView = getColumnView(startFolder()); 
         
         if (columnView){
           gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));

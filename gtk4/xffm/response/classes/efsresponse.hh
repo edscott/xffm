@@ -11,7 +11,7 @@ namespace xf {
    const char *iconName_;
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
-   const char *folder_ = "/mnt";
+   const char *folder_ = NULL;
    GtkTextView *output_;
    GList *children_ = NULL; 
 public:
@@ -81,7 +81,7 @@ public:
     }
 
     GtkBox *mainBox(const char *folder) {
-        folder_ = folder;
+        folder_ = folder? g_strdup(folder) : g_strdup("/");
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));

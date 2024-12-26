@@ -165,6 +165,7 @@ namespace xf {
     
     static void 
     updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f, void *goData){
+      if (!path || !pathbar) return;
         DBG( "update pathbar to %s (update=%d)\n", path, updateHistory);
         TRACE( "update_pathbar_f:: %s\n", path);
 

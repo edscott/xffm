@@ -251,12 +251,14 @@ char buffer[4096];
         }
         
         DBG("Open new ecryptfs dialog.\n");
-        mkdir("/tmp/mnt", 0777);
-       /* if (!g_file_test("/tmp/mnt/.keep", G_FILE_TEST_EXISTS)){
-          fclose(fopen("/tmp/mnt/userMounts","w"));          
-        }*/
+        auto mountDir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
+        if (mkdir(mountDir, 0750) < 0){
+          TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
+        }
 
-        EFS::newEfs("/tmp/mnt");
+        EFS::newEfs(mountDir);
+        g_free(mountDir);
+
         return TRUE;
       }
       auto trash = g_file_info_get_attribute_object (info, "xffm::trash");

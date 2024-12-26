@@ -8,12 +8,13 @@ namespace xf
     public:
     
     DialogComplex(const char *folder){
-      DBG("DialogComplex1\n");
+      TRACE("DialogComplex1\n");
       auto frame = this->frame();
       auto mainBox = this->subClass()->mainBox(folder);
-      DBG("DialogComplex12\n");
+      TRACE("DialogComplex12\n");
       gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
-      DBG("DialogComplex123\n");
+      TRACE("DialogComplex123\n");
+      setSubClassDialog();
       
     /*  clearVbox();
       auto mainBox = this->subClass()->mainBox();

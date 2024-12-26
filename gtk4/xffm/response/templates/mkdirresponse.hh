@@ -47,65 +47,53 @@ public:
     static void *asyncYes(void *data){
        // this dialog
        auto dialogObject = (DialogEntry<mkdirResponse> *)data;
-       auto dialog = dialogObject->dialog();
-       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
-       auto buffer = gtk_entry_get_buffer(entry);
-       const char *text = gtk_entry_buffer_get_text(buffer);
-       auto path = g_object_get_data(G_OBJECT(entry), "path");
-       g_free(path); // cleanup
-       // parent dialog
-       auto p = (FileResponse<Type> *)dialogObject->subClass()->parentObject();
-
-       auto retval = p->asyncCallback((void *)text);
        
        // Test mode
        //auto retval = p->asyncCallback(p->asyncCallbackData());
        //DBG("p->asyncCallback(p->asyncCallbackData) -> %s\n", (const char *)retval);
        
-       // send path to action (asyncYesArg) where path is g_free'd
-       //asyncYesArg(data, "mkdir");      
+       // send to action (asyncYesArg) where entry property "path" is g_free'd
+       asyncYesArg(data, "mkdir");      
        return NULL;
     }
 
 private:
 
-/*
+
     static void *asyncYesArg(void *data, const char *op){
-      if (!op) return NULL;
-      auto dialogObject = (DialogTimeout<pathResponse> *)data;
-      auto dialog = dialogObject->dialog();
-      
-      auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
-      auto path = (char *)g_object_get_data(G_OBJECT(entry), "path");
-      auto buffer = gtk_entry_get_buffer(entry);
-      auto target = gtk_entry_buffer_get_text(buffer);
-
-      auto dir = g_path_get_dirname(path);
-      auto newFile = g_strconcat(dir, G_DIR_SEPARATOR_S, target, NULL);
-      auto output = Child::getOutput();
-
-      auto op_f = g_find_program_in_path(op);
-      if (!op_f) {DBG("*** Error: %s not found\n", op); return NULL;}
-
-      if (strcmp(op, "mkdir")==0){
-        DBG("got mkdir operation:target=\"%s\", newFile=\"%s\".\n", target, newFile);
-        if (!g_file_test(newFile, G_FILE_TEST_EXISTS))
-          if(mkdir(newFile,0700) < 0){
-            auto string = g_strdup_printf(_("Cannot create directory '%s' (%s)\n"), newFile, strerror(errno));
-            Print::printError(output, g_strconcat(_("Sorry"), " ", string, NULL));
-            DBG("***%s\n", string);
-            g_free(string);
-          }
+       if (!op) return NULL;
+       auto dialogObject = (DialogEntry<mkdirResponse> *)data;
+       auto dialog = dialogObject->dialog();
+       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
+       auto buffer = gtk_entry_get_buffer(entry);
+       const char *text = gtk_entry_buffer_get_text(buffer);
+       auto path = (char *)g_object_get_data(G_OBJECT(entry), "path");
+       auto dir = g_path_get_dirname(path);
+       Basic::concat(&dir, G_DIR_SEPARATOR_S);
+       Basic::concat(&dir, text);
+ 
+       if (!g_file_test(dir, G_FILE_TEST_EXISTS)){
+        DBG("got mkdir operation: path=\"%s\".\n", dir);
+        if(mkdir(dir,0700) < 0){
+          auto string = g_strdup_printf(_("Cannot create directory '%s' (%s)\n"), 
+              dir, strerror(errno));
+          Print::printError(Child::getOutput(), g_strconcat(_("Sorry"), " ", string, NULL));
+          DBG("***%s\n", string);
+          g_free(string);
         }
-      } 
-     
-      g_free(op_f);
+       }
+       // This sets label in parent dialog and should also update
+       // the column view and selected item.
+       if (g_file_test(dir, G_FILE_TEST_IS_DIR)){
+         auto p = (FileResponse<Type> *)dialogObject->subClass()->parentObject();
+         auto retval = p->asyncCallback((void *)dir);
+       }
+      // cleanup
       g_free(path); 
-      g_free(dir);
-      g_free(newFile);
+      g_free(dir); 
       return NULL;
     }
-*/
+
 
 };
 }
