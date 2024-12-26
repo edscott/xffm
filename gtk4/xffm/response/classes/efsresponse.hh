@@ -219,13 +219,20 @@ public:
         return mainBox_;
     }
 
-    void setSubClassDialog(GtkWindow *dialog){
-      dialog_ = dialog;
+
+    // void dialog(GtkWindow *value)
+    // Set a pointer to the GtkWindow in the FileResponse
+    // object so that it can be referred to in the
+    // async main context thread callbacks.
+    // 
+    void dialog(GtkWindow *value){
+      dialog_ = value;
     }
 
+    private:
+    
     GtkWindow *dialog(void){return dialog_;}
 
-    private:
 
    static GtkTextView *
     mkTextView (const gchar *text){

@@ -12,12 +12,7 @@ namespace xf {
     void *reloadFunction_;
     void *reloadData_;
 
-    void *parent_ = NULL;
-    
   public:
-    void parent(void *value){parent_ = value;}
-    void *parent(void){return parent_;}
-    
    GtkBox *pathbar(void){return pathbar_;} 
    const gchar *path(void){ return path_;}
 

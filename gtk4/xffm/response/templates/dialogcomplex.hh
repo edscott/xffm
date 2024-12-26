@@ -19,9 +19,17 @@ namespace xf
       auto mainBox = this->subClass()->mainBox();
       gtk_box_prepend(this->vbox(), GTK_WIDGET(mainBox));*/
     }
-    void setSubClassDialog(){
-      this->subClass()->setSubClassDialog(this->dialog());
+
+    // void setSubClassDialog(void)
+    // Sets a pointer in the subClass object to refer to 
+    // the GtkWindow dialog, in order for the subClass
+    // object async main context thread callback to act
+    // upon the dialog.
+    //
+    void setSubClassDialog(void){
+      this->subClass()->dialog(this->dialog());
     }
+    
     private:
  /*   void clearVbox(void){
       gtk_widget_unparent(GTK_WIDGET(this->contentArea()));

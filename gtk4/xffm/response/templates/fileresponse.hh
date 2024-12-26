@@ -1,17 +1,28 @@
 #ifndef FILERESPONSE_HH
 #define FILERESPONSE_HH
 
-/* FIXME: when subdialog returns, it should send information to dialog to
- *        update the entry and to remove window from cleanup window list.
- *        */
-
-
 namespace xf {
   template <class Type> class FileDialog;
- 
+  //
+  // FileResponse is the template used for construction of the
+  // class which in turn will be used by the dialog construction
+  // template to construct the dialog object.
+  //
+  // The resulting dialog object will point to the actual
+  // FileResponse object with object->subClass().
+  //
+  // The FileResponse object, in turn, has a pointer to a
+  // FileResponsePathbar object, subClass()->responsePathbar_p.
+  // 
+  // The FileResponsePathbar class could also be inherited,
+  // but methinks this way is more clear to keep things
+  // a bit separated.
+  //
   template <class Type>
   class FileResponse {
-//  class FileResponse : public FileResponsePathbar{
+
+private:
+
    GtkBox *mainBox_ = NULL;
    GtkWindow *dialog_ = NULL;
    char *title_ = _("Select Directory");
@@ -24,7 +35,9 @@ namespace xf {
    char *startFolder_ = NULL;
    GtkSingleSelection *selectionModel_;
    GtkWidget *selectLabel_;
+
 public:
+
     GtkLabel *selectLabel(void){return GTK_LABEL(selectLabel_);}
     GtkSingleSelection *selectionModel(void){ return selectionModel_;}
     
@@ -42,30 +55,112 @@ public:
     GtkEntry *remoteEntry(void){return remoteEntry_;}
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
 
+    FileResponse (void){
+      DBG("***initial FileResponse=%p\n", this);
+      responsePathbar_p = new FileResponsePathbar((void *)reload_f, (void *)this);
+    }
+
     ~FileResponse (void){
       delete responsePathbar_p;
     }
 
-    FileResponse (void){
-      DBG("***initial FileResponse=%p\n", this);
-      responsePathbar_p = new FileResponsePathbar((void *)reload_f, (void *)this);
-      responsePathbar_p->parent((void *)this);
-      //this->reloadFunction((void *)reload_f);
-      //this->reloadData((void *)this);
-      //FileResponsePathbar((void *)reload_f, (void *)this);
-    }
-
+    // static void *asyncYes(void *data)
+    //
+    // When dialog propery "response" is > 0, this function
+    // is called in main context before FileResponse object 
+    // is deleted along with the dialog object. Here we set
+    // any action to be performed on the value of "response".
+    //
      static void *asyncYes(void *data){
       auto dialogObject = (DialogComplex<FileResponse> *)data;
       DBG("%s", "hello world\n");
       return NULL;
     }
-
+    
+    // static void *asyncNo(void *data)
+    //
+    // On the other hand, when the dialog property "response" 
+    // is < 0, this function is called to cancel the dialog.
+    // This is also called in the main context thread.
+    //
+    // Note that while "response" == NULL, or zero, dialog
+    // window will remain on top of parent window in wait
+    // for the "response" property to be set != NULL.
+    //
     static void *asyncNo(void *data){
       auto dialogObject = (DialogComplex<FileResponse> *)data;
       DBG("%s", "goodbye world\n");
       return NULL;
     }
+
+    // GtkBox *mainBox(const char *folder)
+    //
+    // subClass()->mainBox(const char *folder) will construct
+    // the contents of the GtkWindow, dialogObject->dialog().
+    // The parameter folder defines the directory which will
+    // be displayed in the columnView tree. 
+    //
+    // The folder parameter may be NULL, in which case the
+    // directory to be shown will be the root "/". 
+    // Not compatible with mingw-x86_64.
+    // 
+    GtkBox *mainBox(const char *folder) {
+      return constructMainBox(folder);
+    }
+
+    // void dialog(GtkWindow *value)
+    //
+    // Set a pointer to the GtkWindow in the FileResponse
+    // object so that it can be referred to in the
+    // async main context thread callbacks.
+    // 
+    void dialog(GtkWindow *value){
+      dialog_ = value;
+    }
+
+private:
+  
+ /*       auto gesture1 = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
+        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir<DirectoryClass>::pathbar_go), (void *)pathbar_);
+        gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
+ 
+*/
+      /*
+    static gboolean // on release... Coordinates are in icon's frame of reference.
+    select_f(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer object){
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto columnView = gtk_event_controller_get_widget(eventController);
+      auto listModel = G_LIST_MODEL(g_object_get_data(G_OBJECT(columnView), "store"));
+      auto selection = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(columnView), "selection"));
+      auto items = g_list_model_get_n_items(listModel);
+      for (int i=0; i<items; i++){
+        if (gtk_selection_model_is_selected(selection, i)){
+          auto info = G_FILE_INFO(g_list_model_get_item(listModel, i));
+          DBG("selected: %s\n", g_file_info_get_name(info));
+        }
+      }
+      return true;
+    }
+
+    static void addGestureClick(GtkWidget *columnView){
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
+      // 1 for select
+      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (select_f), (void *)columnView);
+      gtk_widget_add_controller(GTK_WIDGET(columnView), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_BUBBLE);
+
+    }  
+*/
+
+    GtkWindow *dialog(void){return dialog_;}
+    
     static gint 
     compareFunction(const void *a, const void *b, void *data){
 
@@ -178,8 +273,8 @@ public:
         return G_LIST_MODEL(store);
     }
 
-      static void
-      factorySetup1(GtkSignalListItemFactory *self, GObject *object, void *data){
+    static void
+    factorySetup1(GtkSignalListItemFactory *self, GObject *object, void *data){
         auto box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         TRACE("factorySetup1...\n");        
         auto expander = gtk_tree_expander_new();
@@ -196,10 +291,10 @@ public:
         gtk_box_append(GTK_BOX(box), label);
         g_object_set_data(G_OBJECT(object), "label", label);
         TRACE("factorySetup2...\n");        
-      }
+    }
 
-      static void
-      factoryBind1(GtkSignalListItemFactory *factory, GObject *object, void *data){
+    static void
+    factoryBind1(GtkSignalListItemFactory *factory, GObject *object, void *data){
         TRACE("factoryBind1...\n");
 
         auto list_item =GTK_LIST_ITEM(object);
@@ -244,47 +339,8 @@ public:
         }
         g_free(markup);
         
-      }
-   
- /*       auto gesture1 = gtk_gesture_click_new();
-        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir<DirectoryClass>::pathbar_go), (void *)pathbar_);
-        gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
- 
-*/
-      /*
-    static gboolean // on release... Coordinates are in icon's frame of reference.
-    select_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              gpointer object){
-      auto eventController = GTK_EVENT_CONTROLLER(self);
-      auto columnView = gtk_event_controller_get_widget(eventController);
-      auto listModel = G_LIST_MODEL(g_object_get_data(G_OBJECT(columnView), "store"));
-      auto selection = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(columnView), "selection"));
-      auto items = g_list_model_get_n_items(listModel);
-      for (int i=0; i<items; i++){
-        if (gtk_selection_model_is_selected(selection, i)){
-          auto info = G_FILE_INFO(g_list_model_get_item(listModel, i));
-          DBG("selected: %s\n", g_file_info_get_name(info));
-        }
-      }
-      return true;
     }
-
-    static void addGestureClick(GtkWidget *columnView){
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
-      // 1 for select
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (select_f), (void *)columnView);
-      gtk_widget_add_controller(GTK_WIDGET(columnView), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_BUBBLE);
-
-    }  
-*/
-      
+       
     static gboolean // on release... Coordinates are in icon's frame of reference.
     reload_f(GtkGestureClick* self,
               gint n_press,
@@ -394,13 +450,9 @@ public:
         return columnView;
 
     }
-    GtkBox *mainBox(void) {
-      return mainBox(NULL);
-    }
 
-    GtkBox *mainBox(const char *folder) {
-        // set red path (root of treemodel)
-        
+    GtkBox *constructMainBox(const char *folder) {
+        // set red path (root of treemodel)       
         responsePathbar_p->path(folder? folder : "/"); 
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -450,9 +502,6 @@ public:
           gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), label);
         }
 
- 
-      
-
         auto action_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(action_area), false);
         gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
@@ -474,20 +523,8 @@ public:
         g_signal_connect (G_OBJECT (cancelButton), "clicked", G_CALLBACK (button_cancel), this);
         g_signal_connect (G_OBJECT (newButton), "clicked", G_CALLBACK (button_new), this);
 
-        // FIXME: 
         return mainBox_;
     }
-
-    void setSubClassDialog(GtkWindow *dialog){
-      dialog_ = dialog;
-    }
-
-    GtkWindow *dialog(void){return dialog_;}
-
-    private:
-
-    
- 
 
     gboolean save(void){
       return true;        
@@ -538,37 +575,6 @@ public:
 
   };
 
-
-  template <class Type>
-  class FileDialog {
-    public:
-    static void newFileDialog(void **newDialog, const char *startFolder){
-      TRACE("newFileDialog1\n");
-      auto dialogObject = new DialogComplex<FileResponse<Type> >(startFolder);
-      TRACE("newFileDialog12\n");
-
-      //
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
-      auto dialog = dialogObject->dialog();
-      newDialog[0] = (void *)dialog;
-      
-      gtk_window_set_decorated(dialog, true);
-      dialogObject->setSubClassDialog();
-
-      gtk_widget_realize(GTK_WIDGET(dialog));
-      Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");
-      gtk_window_present(dialog);
-      
-      TRACE("FileDialog:: newDialog[0] = %p\n", newDialog[0]);
-
-      dialogObject->run();
-      
-
-    }
-
-
-
-  };
 
 
 }

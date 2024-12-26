@@ -28,6 +28,7 @@
 #include "response/templates/mkdirresponse.hh"
 #include "response/classes/fileresponsepathbar.hh"
 #include "response/templates/fileresponse.hh" // class
+#include "response/templates/filedialog.hh" // class
 #include "response/classes/efsresponse.hh" // class
 # include "response/classes/mount.hh"   // class
 
