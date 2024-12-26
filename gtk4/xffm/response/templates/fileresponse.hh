@@ -18,23 +18,28 @@ namespace xf {
   // but methinks this way is more clear to keep things
   // a bit separated.
   //
+  // The FileResponse object, in turn, will also construct
+  // a mkdirResponse dialog to obtain the name of a directory
+  // which will be created in the root of the columnView tree. 
+  //
+
   template <class Type>
   class FileResponse {
 
 private:
 
-   GtkBox *mainBox_ = NULL;
-   GtkWindow *dialog_ = NULL;
-   char *title_ = _("Select Directory");
-   const char *iconName_;
-   GtkEntry *remoteEntry_ = NULL;
-   GtkEntry *mountPointEntry_ = NULL;
-   GtkTextView *output_;
-   GtkWidget *sw_;
-   FileResponsePathbar *responsePathbar_p;
-   char *startFolder_ = NULL;
-   GtkSingleSelection *selectionModel_;
-   GtkWidget *selectLabel_;
+    GtkBox *mainBox_ = NULL;
+    GtkWindow *dialog_ = NULL;
+    char *title_ = _("Select Directory");
+    const char *iconName_;
+    GtkEntry *remoteEntry_ = NULL;
+    GtkEntry *mountPointEntry_ = NULL;
+    GtkTextView *output_;
+    GtkWidget *sw_;
+    FileResponsePathbar *responsePathbar_p;
+    char *startFolder_ = NULL;
+    GtkSingleSelection *selectionModel_;
+    GtkWidget *selectLabel_;
 
 public:
 
@@ -114,9 +119,9 @@ public:
     // object so that it can be referred to in the
     // async main context thread callbacks.
     // 
-    void dialog(GtkWindow *value){
-      dialog_ = value;
-    }
+    //void dialog(GtkWindow *value){
+    //  dialog_ = value;
+    //}
 
 private:
   
