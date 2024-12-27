@@ -60,7 +60,7 @@ namespace xf {
         }
 
         // saved ecryptfs mount points
-        auto items = EFS::getSavedItems();
+        auto items = EFS<bool>::getSavedItems();
         for (auto p=items; p && *p; p++){
           if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
           GFile *file = g_file_new_for_path(*p);

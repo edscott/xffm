@@ -2,6 +2,7 @@
 #define FILERESPONSE_HH
 
 namespace xf {
+  template <class Type> class EfsResponse;
   template <class Type> class FileDialog;
   //
   // FileResponse is the template used for construction of the
@@ -40,8 +41,11 @@ private:
     char *startFolder_ = NULL;
     GtkSingleSelection *selectionModel_;
     GtkWidget *selectLabel_;
+    void *parentObject_=NULL;
 
 public:
+    void *parentObject(void){ return parentObject_;}
+    void parentObject(void *value){parentObject_ = value;}
 
     GtkLabel *selectLabel(void){return GTK_LABEL(selectLabel_);}
     GtkSingleSelection *selectionModel(void){ return selectionModel_;}
@@ -79,6 +83,21 @@ public:
      static void *asyncYes(void *data){
       auto dialogObject = (DialogComplex<FileResponse> *)data;
       DBG("%s", "hello world\n");
+         
+      auto p = (EfsResponse<Type> *)dialogObject->subClass()->parentObject();
+      const char *path = dialogObject->subClass()->responsePathbar_p->path();
+      auto label = dialogObject->subClass()->selectLabel();
+      const char *base = gtk_label_get_text(label);
+      char *dir = NULL;
+      if (strcmp(base, _("No folder selected."))){ // folder actually selected...
+        dir = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
+        auto retval = p->asyncCallback((void *)dir);
+        DBG("asyncCallback(\"%s\") --> %s...\n", dir, (const char *)retval);
+        g_free(dir);
+      }
+      
+      //auto retval = p->asyncCallback((void *)"foo");
+      //DBG("asyncCallback(\"foo\") --> %s...\n", (const char *)retval);
       return NULL;
     }
     
@@ -148,6 +167,8 @@ public:
       DBG("asyncCallbackData...\n");
       return (void *) "bar";
     }
+
+////////////////////////////////////////////////////////////////////////////////
 
 private:
   

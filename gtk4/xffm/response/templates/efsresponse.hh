@@ -85,10 +85,13 @@ public:
     //
     void *asyncCallback(void *data){
        /*auto path = (const char *)data;
-       reload(path);*/
-       return NULL;
+       reload(path);
+       return NULL;*/
        DBG("asyncCallback(%s)...\n", (const char *)data);
-       return (void *) "foo";
+       // FIXME: Final step,
+       //        Set the entry text, for this, we
+       //        need to know which entry is referred to...
+       return (void *) "bar";
     }
 
     //void *asyncCallbackData(void)
@@ -97,7 +100,7 @@ public:
     // 
     void *asyncCallbackData(void){
       DBG("asyncCallbackData...\n");
-      return (void *) "bar";
+      return (void *) "foobar";
     }
 
     
@@ -445,6 +448,8 @@ public:
 
       DBG("*** newFileDialog1 startFolder = %s\n", startFolder);
       auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
+      newObject->subClass()->parentObject(object);
+      
       auto _dialog = newObject->dialog();
       
                         // FIXME: each dialog should have it's own gtk window raise callback
@@ -595,44 +600,6 @@ public:
       auto subClass = (EfsResponse *)data;
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
     }
-
-  };
-
-  template <class Type>
-  class EFS {
-    static char *efsKeyFile(void){
-      return  g_strconcat(g_get_user_config_dir(),G_DIR_SEPARATOR_S, "xffm+",G_DIR_SEPARATOR_S, "efs.ini", NULL);}
-
-    public:
-
-    static gchar **
-    getSavedItems(void){
-        gchar *file = g_build_filename(efsKeyFile(), NULL);
-        GKeyFile *key_file = g_key_file_new ();
-        g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
-        g_free(file);
-        auto retval = g_key_file_get_groups (key_file, NULL);
-        g_key_file_free(key_file);
-        return retval;
-    }
-
-    static void newEfs(const char *folder){
-      auto dialogObject = new DialogComplex<EfsResponse<Type> >(folder);
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
-      auto dialog = dialogObject->dialog();
-      gtk_window_set_decorated(dialog, true);
-      dialogObject->setSubClassDialog();
-
-      gtk_widget_realize(GTK_WIDGET(dialog));
-      Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");
-      gtk_window_present(dialog);
-
-      dialogObject->run();
-      
-
-    }
-
-
 
   };
 

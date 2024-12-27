@@ -256,7 +256,7 @@ char buffer[4096];
           TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
         }
 
-        EFS::newEfs(mountDir);
+        EFS<DirectoryClass>::newEfs(mountDir);
         g_free(mountDir);
 
         return TRUE;
