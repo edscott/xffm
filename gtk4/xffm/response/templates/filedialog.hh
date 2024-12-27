@@ -8,6 +8,8 @@
 
 namespace xf {
 
+  // FIXME: probably need to create this class template object
+  //        within the EfsResponse class...
   template <class Type>
   class FileDialog {
     public:

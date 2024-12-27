@@ -126,7 +126,7 @@ public:
 
     // void *asyncCallback(void *data)
     //
-    // This will be executed by the subClassObject->subClassObject,
+    // This will be executed by the subClassObject->subClass(),
     // In other words, by the DialogEntry<mkdirResponse> dialog
     // subClass object.
     //
@@ -135,7 +135,6 @@ public:
        //auto label = this->selectLabel();
        //gtk_label_set_markup(label, text); 
        reload(path);
-       // FIXME: add item to columnView and update selection.
        return NULL;
        //DBG("asyncCallback(%s)...\n", (const char *)data);
        //return (void *) "foo";
