@@ -76,7 +76,7 @@ public:
       DBG("%s", "goodbye world\n");
       return NULL;
     }
-
+#if 0
     // void *asyncCallback(void *data)
     //
     // This will be executed by the subClassObject->subClass(),
@@ -102,7 +102,7 @@ public:
       DBG("asyncCallbackData...\n");
       return (void *) "foobar";
     }
-
+#endif
     
 ///////////////////////////////////////////////////////////////////
 
@@ -413,6 +413,7 @@ public:
                                                              // when filedialog button
                                                              // is working.
           auto button = Basic::mkButton("document-open", NULL);
+          g_object_set_data(G_OBJECT(button), "entry", entry);
           g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), this);
 
           gtk_box_append(hbox, label);
@@ -443,12 +444,12 @@ public:
         //done = TRUE;
       }
 
-    void getDirectoryObject(EfsResponse<Type> *object){
+    void getDirectoryObject(EfsResponse<Type> *object, GtkEntry *entry){
       auto startFolder = object->folder();
 
       DBG("*** newFileDialog1 startFolder = %s\n", startFolder);
       auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
-      newObject->subClass()->parentObject(object);
+      newObject->subClass()->parentEntry(entry);
       
       auto _dialog = newObject->dialog();
       
@@ -476,7 +477,8 @@ public:
     static void getDirectory(GtkButton *button, void *data){
       TRACE("getDirectory\n");
       auto subClass = (EfsResponse<Type> *)data;
-      subClass->getDirectoryObject(subClass);
+      auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
+      subClass->getDirectoryObject(subClass, entry);
 /*
       void *newDialog[] = {NULL, NULL};
       TRACE("getDirectory1:: newDialog[0]= %p\n", newDialog[0]);

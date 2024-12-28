@@ -6,6 +6,8 @@ namespace xf {
 
   template <class Type>
   class EFS {
+    char *folder_ = NULL;
+    
     static char *efsKeyFile(void){
       return  g_strconcat(g_get_user_config_dir(),G_DIR_SEPARATOR_S, "xffm+",G_DIR_SEPARATOR_S, "efs.ini", NULL);}
 
@@ -21,8 +23,12 @@ namespace xf {
         g_key_file_free(key_file);
         return retval;
     }
+    ~EFS(void){
+      g_free(folder_);
+    }
 
-    static void newEfs(const char *folder){
+    EFS(const char *folder){
+      folder_ = g_strdup(folder);
       auto dialogObject = new DialogComplex<EfsResponse<Type> >(folder);
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
@@ -34,11 +40,7 @@ namespace xf {
       gtk_window_present(dialog);
 
       dialogObject->run();
-      
-
     }
-
-
 
   };
 

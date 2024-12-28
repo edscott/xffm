@@ -41,11 +41,11 @@ private:
     char *startFolder_ = NULL;
     GtkSingleSelection *selectionModel_;
     GtkWidget *selectLabel_;
-    void *parentObject_=NULL;
+    GtkEntry *parentEntry_=NULL;
 
 public:
-    void *parentObject(void){ return parentObject_;}
-    void parentObject(void *value){parentObject_ = value;}
+    GtkEntry *parentEntry(void){ return parentEntry_;}
+    void parentEntry(void *value){parentEntry_ = GTK_ENTRY(value);}
 
     GtkLabel *selectLabel(void){return GTK_LABEL(selectLabel_);}
     GtkSingleSelection *selectionModel(void){ return selectionModel_;}
@@ -80,10 +80,23 @@ public:
     // is deleted along with the dialog object. Here we set
     // any action to be performed on the value of "response".
     //
+    // It really does not matter which thread queues this
+    // function to the main context thread.
+    // 
      static void *asyncYes(void *data){
       auto dialogObject = (DialogComplex<FileResponse> *)data;
       DBG("%s", "hello world\n");
-         
+      const char *path = dialogObject->subClass()->responsePathbar_p->path();
+      auto label = dialogObject->subClass()->selectLabel();
+      const char *base = gtk_label_get_text(label);
+      char *target = NULL;
+      if (strcmp(base, _("No folder selected."))){ // folder selected...
+        target = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
+        auto *entry = dialogObject->subClass()->parentEntry();
+        auto *buffer = gtk_entry_get_buffer(entry);
+        gtk_entry_buffer_set_text(buffer, target, -1);
+      }
+/*      
       auto p = (EfsResponse<Type> *)dialogObject->subClass()->parentObject();
       const char *path = dialogObject->subClass()->responsePathbar_p->path();
       auto label = dialogObject->subClass()->selectLabel();
@@ -95,7 +108,7 @@ public:
         DBG("asyncCallback(\"%s\") --> %s...\n", dir, (const char *)retval);
         g_free(dir);
       }
-      
+ */     
       //auto retval = p->asyncCallback((void *)"foo");
       //DBG("asyncCallback(\"foo\") --> %s...\n", (const char *)retval);
       return NULL;
