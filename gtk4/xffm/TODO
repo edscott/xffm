@@ -2,8 +2,8 @@ Sporadic race condition crashes:
 * Crash con close dialog with child dialog open (due to a raise window of dialog or child dialog when this no longer exists)
 * mountThreadF1 with gridview list model, at getMntHash, fstabMonitor.hh:120 (apparently there is a condition in which Child::lockGridView("mountThreadF1") fails to keep things coherent).
 
-- set EFS entries from FileResponse
-- set FileResponse label from selection (initial and dynamic)
+
+
 - menu pathbar color bug
 - font size slider for output
 
