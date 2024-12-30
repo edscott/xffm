@@ -78,7 +78,7 @@ public:
     // When dialog propery "response" is > 0, this function
     // is called in main context before FileResponse object 
     // is deleted along with the dialog object. Here we set
-    // any action to be performed on the value of "response".
+// any action to be performed on the value of "response".
     //
     // It really does not matter which thread queues this
     // function to the main context thread.
@@ -262,11 +262,24 @@ private:
       DBG("***Entry dialog...path=%s dialog=%p\n", path, subClassObject->dialog());
      
       auto dialogObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
+      DialogStack::popMainDialog(dialog);
+
+      auto parentDialog = subClassObject->dialog();
+      auto dialogStack_p = (DialogStack *)g_object_get_data(G_OBJECT(parentDialog), "dialogStack_p");
+      dialogStack_p->pushDialog(dialog);
+
+      // This is to inform FileResponse  parent object 
+      // in order to execute main context function from 
+      // from FileResponse thread (fill in the entry buffer text).
+       dialogObject->setParent(GTK_WINDOW(subClassObject->dialog()));
+
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
 
+      // This is to inform mkdirResponse who parent object is
+      // in order to execute main context function from FileResponse
+      // from mkdirResponse thread. (update columnView and selection).
       dialogObject->subClass()->parentObject(subClassObject);
       DBG("*** button_new subClass=%p\n", subClassObject);
       dialogObject->subClass()->setDefaults(dialog, dialogObject->label());

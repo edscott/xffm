@@ -10,6 +10,8 @@ template <class MainClass>
 class MainWindow: public FMbuttonBox {
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
+    class DialogStack * dialogStack_p = NULL;
+  
     GtkPopover *menu_ = NULL;
     GList *pageList_=NULL;
     GtkWindow *mainWindow_ = NULL;
@@ -27,15 +29,13 @@ public:
 //    GtkNotebook *getNotebook(void) {return notebook_;}
     MainWindow(const gchar *path){
         createWindow(); 
-        //g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
+        dialogStack_p = new DialogStack(mainWindow_);
         addKeyController(GTK_WIDGET(mainWindow_));
           // for page: startDeviceMonitor();
         auto box = contentBox(path);
         gtk_window_set_child(mainWindow_, box);
         addPage(path);
-        showWindow();
-          
-        
+        showWindow();      
         g_object_set_data(G_OBJECT(MainWidget), "MainWindow", this);
     }
 
@@ -43,6 +43,7 @@ public:
       //gtk_widget_unparent(GTK_WIDGET(menu_));
        // for each page: g_file_monitor_cancel(deviceMonitor_);
     } 
+    
 // Free functions (for signals)
 public:
     static void
@@ -140,42 +141,16 @@ private:
         DBG("Leaving window\n");
         Dnd<LocalDir>::resetGridviewCSS(gridview_p);
       }
-      auto topDialog = Basic::topDialog();
+      auto dialogStack_p = (DialogStack *)g_object_get_data(G_OBJECT(dialogStack_p), "");
+      auto topDialog = dialogStack_p->topDialog();
       if (topDialog) gtk_window_present(topDialog);
         return FALSE;
-    }
-
-    static gboolean
-    presentDialog ( GtkEventControllerMotion* self,
-                    gdouble x,
-                    gdouble y,
-                    gpointer data) 
-    {
-      auto topDialog = Basic::topDialog();
-      TRACE("present dialog %p\n", topDialog);
-      if (topDialog) gtk_window_present(topDialog);
-        return FALSE;
-    }
-
-    static
-      void addMotionController(GtkWidget  *widget){
-        auto controller = gtk_event_controller_motion_new();
-        gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
-        gtk_widget_add_controller(GTK_WIDGET(widget), controller);
-        g_signal_connect (G_OBJECT (controller), "enter", 
-            G_CALLBACK (presentDialog), NULL);
-
- /*       auto controller2 = gtk_event_controller_motion_new();
-        gtk_event_controller_set_propagation_phase(controller2, GTK_PHASE_CAPTURE);
-        gtk_widget_add_controller(GTK_WIDGET(widget), controller2);
-        g_signal_connect (G_OBJECT (controller2), "leave", 
-            G_CALLBACK (clearCSS), NULL);*/
     }
     
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
         MainWidget = GTK_WIDGET(mainWindow_);
-        addMotionController(MainWidget);
+        DialogStack::addMotionController(MainWidget);
         auto dropController = Dnd<LocalDir>::createDropController(NULL);
         gtk_widget_add_controller (MainWidget, GTK_EVENT_CONTROLLER (dropController));
 

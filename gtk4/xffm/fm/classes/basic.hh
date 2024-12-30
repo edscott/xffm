@@ -1,9 +1,105 @@
 #ifndef BASIC_HH
 #define BASIC_HH
 namespace xf {
-  GList *dialogStack = NULL;
+  // accessed in dialogbasic.hh
+  // openwith.hh
+  // window.hh
+  class DialogStack {
+    private:
+      GList *dialogStack = NULL;
+    public:
+      DialogStack *dialogStack_p(void){return this;}
+      
+      void pushDialog(GtkWindow *dialog){
+        dialogStack = g_list_prepend(dialogStack, dialog);
+      }
+      void popDialog(GtkWindow *dialog){
+        dialogStack = g_list_remove(dialogStack, dialog);
+      }
+      GtkWindow *topDialog(void){
+        if (!dialogStack) return NULL;
+        return GTK_WINDOW(g_list_first(dialogStack)->data);
+      }
+
+      DialogStack(GtkWindow *dialog){
+        g_object_set_data(G_OBJECT(dialog), "dialogStack_p", this);
+        addMotionController(GTK_WIDGET(dialog));
+        // By default, all dialogs pushed to main widget list.
+        if (GTK_WIDGET(dialog) != MainWidget) pushMainDialog(GTK_WINDOW(dialog));
+      }
+
+      ~DialogStack(void){
+        // first destroy sub lists windows (recursive).
+        destroyList(this);
+      }
+      
+      static void popMainDialog(GtkWindow *dialog){
+        auto mainDialogStack_p = (DialogStack *)
+          g_object_get_data(G_OBJECT(MainWidget), "dialogStack_p");
+        mainDialogStack_p->popDialog(dialog);
+      }
+
+      static void pushMainDialog(GtkWindow *dialog){
+        auto mainDialogStack_p = (DialogStack *)
+          g_object_get_data(G_OBJECT(MainWidget), "dialogStack_p");
+        mainDialogStack_p->pushDialog(dialog);
+      }
+
+      static
+        void addMotionController(GtkWidget  *window){
+          auto controller = gtk_event_controller_motion_new();
+          gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
+          gtk_widget_add_controller(window, controller);
+          g_signal_connect (G_OBJECT (controller), "enter", 
+              G_CALLBACK (DialogStack::presentDialog), window);
+
+      }
+
+  private:   
+
+      static gboolean
+      presentDialog ( GtkEventControllerMotion* self, gdouble x, gdouble y, 
+          void *data) 
+      {
+        auto window = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+        auto dialogStack_p = 
+          (DialogStack *)g_object_get_data(G_OBJECT(window),"dialogStack_p");
+        auto topDialog = dialogStack_p->topDialog();
+        TRACE("present dialog %p\n", topDialog);
+        if (topDialog) gtk_window_present(topDialog);
+        return FALSE;
+      }
+
+      void destroyList(DialogStack *dialogStack_p){
+        for (auto l=dialogStack_p->dialogStack; l && l->data; l=l->next){
+          auto dialog = GTK_WINDOW(l->data);
+          auto subDialogStack = (DialogStack *) g_object_get_data(G_OBJECT(dialog), "dialogStack_p");
+          if (subDialogStack) destroyList(subDialogStack);
+          gtk_window_destroy(GTK_WINDOW(dialog));
+        }
+        g_list_free(dialogStack_p->dialogStack);
+        dialogStack_p->dialogStack = NULL;
+        return;
+      }
+    
+  };
+
+  DialogStack * dialogStack_p = NULL;
+
   class Basic {
     public:
+ /*     static void pushDialog(GtkWindow *dialog){
+        dialogStack_p->pushDialog(dialog);
+      }
+      static void popDialog(GtkWindow *dialog){
+        dialogStack = g_list_remove(dialogStack, dialog);
+      }
+      static GtkWindow *topDialog(void){
+        if (!dialogStack_p->dialogStack) return NULL;
+        return GTK_WINDOW(g_list_first(dialogStack)->data);
+      }*/
+
+
       static int getMaxNameLen(GListModel *store){
         int max = 0;
         auto items = g_list_model_get_n_items (store);
@@ -14,18 +110,6 @@ namespace xf {
         }
         return max;
       }
-
-      static void pushDialog(GtkWindow *dialog){
-        dialogStack = g_list_prepend(dialogStack, dialog);
-      }
-      static void popDialog(GtkWindow *dialog){
-        dialogStack = g_list_remove(dialogStack, dialog);
-      }
-      static GtkWindow *topDialog(void){
-        if (!dialogStack) return NULL;
-        return GTK_WINDOW(g_list_first(dialogStack)->data);
-      }
-
       static GFile *getGfile(GFileInfo *info){
         return G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
       }
