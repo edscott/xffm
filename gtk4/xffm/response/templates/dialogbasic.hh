@@ -75,7 +75,6 @@ namespace xf
     void unlockCondition(void){pthread_mutex_unlock(&condMutex_);}
     void lockResponse(void){pthread_mutex_lock(&mutex_);}
     void unlockResponse(void){pthread_mutex_unlock(&mutex_);}
-  private:
     static gboolean
     presentDialog ( GtkEventControllerMotion* self,
                     gdouble x,
@@ -86,6 +85,7 @@ namespace xf
       gtk_window_present(dialog);
       return FALSE;
     }
+  private:
 
      void setRaise(void){
       auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(parent_), "frame"));
@@ -133,7 +133,7 @@ namespace xf
         //DBG("*** unset raise for %p\n", parent_);
       }
       DBG("*** ~DialogBasic dialog %p \n", dialog_);
-      Basic::popDialog(dialog_);
+      // deprecated Basic::popDialog(dialog_);
       Basic::destroy(dialog_);
       // race
       // Basic::present(GTK_WINDOW(MainWidget));
@@ -148,7 +148,7 @@ namespace xf
       subClass_ = new dialogClass;
       mkWindow();
       DBG("*** DialogBasic dialog %p\n", dialog_);
-      Basic::pushDialog(dialog_); // only pushes non MainWidget dialogs
+      // deprecated Basic::pushDialog(dialog_); 
       mkTitle();
       mkLabel();      
       addKeyController(GTK_WIDGET(dialog_)); 

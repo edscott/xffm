@@ -14,7 +14,7 @@ namespace xf {
         }
         return max;
       }
-
+/*
       static void pushDialog(GtkWindow *dialog){
         dialogStack = g_list_prepend(dialogStack, dialog);
       }
@@ -25,7 +25,7 @@ namespace xf {
         if (!dialogStack) return NULL;
         return GTK_WINDOW(g_list_first(dialogStack)->data);
       }
-
+*/
       static GFile *getGfile(GFileInfo *info){
         return G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
       }

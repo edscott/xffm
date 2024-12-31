@@ -8,7 +8,9 @@ template <class Type> class Run;
 template <class Type>
 class OpenWith {
     
+    GtkEventController *raiseController_ = NULL;
     GtkWindow *dialog_;
+    GtkWindow *parent_= GTK_WINDOW(MainWidget);
     time_t timeout_;
     char *path_ = NULL;
     GtkProgressBar *timeoutProgress_;
@@ -18,6 +20,8 @@ class OpenWith {
     GList *selectionList_ = NULL;
    
 protected:
+    GtkEventController *raiseController(void){return raiseController_;}
+    GtkWindow *parent(void){ return parent_;}
     GtkWindow *dialog(void){return dialog_;}
     time_t timeout(void){return timeout_;}
     void timeout(time_t value){timeout_ = value;}
@@ -46,14 +50,34 @@ protected:
       return g;
     }
 
+     void setRaise(void){
+      auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(parent_), "frame"));
+      gtk_widget_set_sensitive(GTK_WIDGET(content), false);
+      raiseController_ = gtk_event_controller_motion_new();
+      gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
+      gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);
+      g_signal_connect (G_OBJECT (raiseController_), "enter", 
+              G_CALLBACK (DialogBasic<LocalDir>::presentDialog), dialog_);      
+    }
+     
+    static void *unsetRaise_f(void *data){
+      auto object = (OpenWith<Type> *)data;
+      auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(object->parent()), "frame"));
+      gtk_widget_set_sensitive(GTK_WIDGET(content), true);
+      gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
+          object->raiseController());
+      return NULL;
+    }
+
 public:
     void freeSelectionList(void){
       Basic::freeSelectionList(selectionList_);
     } 
     ~OpenWith (void){
+       Basic::context_function(unsetRaise_f, this);
        gtk_widget_set_visible(GTK_WIDGET(dialog_), FALSE);
        g_free(path_);
-       Basic::popDialog(dialog_);
+       //Basic::popDialog(dialog_);
        gtk_window_destroy(dialog_);
     }
 
@@ -77,15 +101,16 @@ public:
       timeout_ = 10;
 
       dialog_ = GTK_WINDOW(gtk_window_new ());
-      Basic::pushDialog(dialog_);
+      //Basic::pushDialog(dialog_);
       gtk_window_set_decorated(dialog_, false);
 
       gtk_window_set_title (GTK_WINDOW (dialog_), windowTitle);
       g_signal_connect (G_OBJECT (dialog_), "close-request", G_CALLBACK (OpenWith::dialogClose), this);
-
+/*
       gtk_window_set_transient_for (GTK_WINDOW (dialog_), GTK_WINDOW (parent));
-      gtk_window_set_resizable (GTK_WINDOW (dialog_), FALSE);
       gtk_window_set_destroy_with_parent(dialog_, TRUE);
+      */
+      gtk_window_set_resizable (GTK_WINDOW (dialog_), FALSE);
 
       auto frame = GTK_FRAME(gtk_frame_new(NULL));
       gtk_frame_set_label_align(frame, 1.0);
@@ -93,6 +118,7 @@ public:
       gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox));
       
       gtk_window_set_child(dialog_, GTK_WIDGET(frame));
+      g_object_set_data(G_OBJECT(dialog_), "frame", frame);
 
       auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
       //gtk_window_set_child(dialog_, GTK_WIDGET(vbox));
@@ -259,6 +285,9 @@ public:
         gtk_widget_grab_focus(GTK_WIDGET(input_));
         Basic::setAsDialog(GTK_WIDGET(dialog_), "xfDialog", "XfDialog");
         gtk_window_present(dialog_);
+
+        setRaise();
+        
         return;
     }
     

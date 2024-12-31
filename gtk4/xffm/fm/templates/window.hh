@@ -142,11 +142,12 @@ private:
         DBG("Leaving window\n");
         Dnd<LocalDir>::resetGridviewCSS(gridview_p);
       }
-      auto topDialog = Basic::topDialog();
-      if (topDialog) gtk_window_present(topDialog);
+      // deprecated auto topDialog = Basic::topDialog();
+      // deprecated if (topDialog) gtk_window_present(topDialog);
         return FALSE;
     }
 
+#if 0
     static gboolean
     presentDialog ( GtkEventControllerMotion* self,
                     gdouble x,
@@ -167,17 +168,13 @@ private:
         g_signal_connect (G_OBJECT (controller), "enter", 
             G_CALLBACK (presentDialog), NULL);
 
- /*       auto controller2 = gtk_event_controller_motion_new();
-        gtk_event_controller_set_propagation_phase(controller2, GTK_PHASE_CAPTURE);
-        gtk_widget_add_controller(GTK_WIDGET(widget), controller2);
-        g_signal_connect (G_OBJECT (controller2), "leave", 
-            G_CALLBACK (clearCSS), NULL);*/
     }
+#endif
     
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
         MainWidget = GTK_WIDGET(mainWindow_);
-        addMotionController(MainWidget);
+        //addMotionController(MainWidget);
         auto dropController = Dnd<LocalDir>::createDropController(NULL);
         gtk_widget_add_controller (MainWidget, GTK_EVENT_CONTROLLER (dropController));
 
