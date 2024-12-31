@@ -47,17 +47,13 @@ protected:
     }
 
 public:
-    class DialogStack *dialogStack_p = NULL;
-
     void freeSelectionList(void){
       Basic::freeSelectionList(selectionList_);
     } 
-
     ~OpenWith (void){
        gtk_widget_set_visible(GTK_WIDGET(dialog_), FALSE);
        g_free(path_);
-       DialogStack::popMainDialog(dialog_);
-       delete dialogStack_p;
+       Basic::popDialog(dialog_);
        gtk_window_destroy(dialog_);
     }
 
@@ -81,9 +77,7 @@ public:
       timeout_ = 10;
 
       dialog_ = GTK_WINDOW(gtk_window_new ());
-      dialogStack_p = new DialogStack(dialog_);
-
-      g_object_set_data(G_OBJECT(dialog_), "this", this);
+      Basic::pushDialog(dialog_);
       gtk_window_set_decorated(dialog_, false);
 
       gtk_window_set_title (GTK_WINDOW (dialog_), windowTitle);

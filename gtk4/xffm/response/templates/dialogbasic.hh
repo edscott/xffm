@@ -45,12 +45,8 @@ namespace xf
             G_CALLBACK (this->on_keypress), (void *)this);
     }
     protected:
-    //class DialogStack * dialogStack_p = NULL;
 
   public:
-    class DialogStack * dialogStack_p = NULL;
-
-
     dialogClass *subClass(void){ return subClass_;}
     GtkWindow *parent(void){ return parent_;}
     GtkWindow *dialog(void){ return dialog_;}
@@ -86,9 +82,10 @@ namespace xf
     }
     
     ~DialogBasic(void){
-      DialogStack::popMainDialog(dialog_);
-      delete dialogStack_p;
+      Basic::popDialog(dialog_);
       Basic::destroy(dialog_);
+      // race
+      // Basic::present(GTK_WINDOW(MainWidget));
 
       TRACE("window %p destroyed\n", dialog_);
       delete subClass_;
@@ -101,12 +98,11 @@ namespace xf
       TRACE("DialogBasic::parent process = %d\n", parentProcess);
       mkWindow();
       TRACE("dialog is %p\n", dialog_);
-      g_object_set_data(G_OBJECT(dialog_), "this", this);
+      Basic::pushDialog(dialog_);
       mkTitle();
       mkLabel();      
       addKeyController(GTK_WIDGET(dialog_));
-      dialogStack_p = new DialogStack(dialog_);
-   }
+    }
 
     int run(){
       TRACE("run...\n");
