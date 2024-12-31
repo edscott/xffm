@@ -65,7 +65,7 @@ public:
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
 
     FileResponse (void){
-      DBG("***initial FileResponse=%p\n", this);
+      TRACE("***initial FileResponse=%p\n", this);
       responsePathbar_p = new FileResponsePathbar((void *)reload_f, (void *)this);
     }
 
@@ -259,16 +259,16 @@ private:
       auto subClassObject = (FileResponse *)data;
       char *path = g_strconcat(subClassObject->responsePathbar_p->path(), G_DIR_SEPARATOR_S,  _("Private"), NULL);
 
-      DBG("***Entry dialog...path=%s dialog=%p\n", path, subClassObject->dialog());
+      TRACE("***Entry dialog...path=%s dialog=%p\n", path, subClassObject->dialog());
      
       auto dialogObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->setParent(subClassObject->dialog());
       auto dialog = dialogObject->dialog();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
 
       dialogObject->subClass()->parentObject(subClassObject);
-      DBG("*** button_new subClass=%p\n", subClassObject);
+      TRACE("*** button_new subClass=%p\n", subClassObject);
       dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
       
       dialogObject->run();

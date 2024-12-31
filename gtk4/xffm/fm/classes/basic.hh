@@ -1,7 +1,7 @@
 #ifndef BASIC_HH
 #define BASIC_HH
 namespace xf {
-  GList *dialogStack = NULL;
+  GList *dialogStack = NULL; // MainWidget dialog stack.
   class Basic {
     public:
       static int getMaxNameLen(GListModel *store){

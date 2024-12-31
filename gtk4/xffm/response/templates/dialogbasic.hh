@@ -73,15 +73,18 @@ namespace xf
  
     void setParent(GtkWindow *parent){
       parent_ = parent;
-      if (parent) {
-        TRACE("will destroy with parent\n");
-        // Dialogs should self destruct.
-        // 
-        //gtk_window_set_destroy_with_parent(dialog_, true);
+      if (parent_) {
+        // only allow one subdialog (modal)
+        gtk_widget_set_sensitive(GTK_WIDGET(parent_), false); 
       }
     }
     
     ~DialogBasic(void){
+      if (parent_) {
+        // only allow one subdialog (modal)
+        gtk_widget_set_sensitive(GTK_WIDGET(parent_), true); 
+      }
+      DBG("*** ~DialogBasic dialog %p \n", dialog_);
       Basic::popDialog(dialog_);
       Basic::destroy(dialog_);
       // race
@@ -95,13 +98,12 @@ namespace xf
 
     DialogBasic(void){ // must run in main context.
       subClass_ = new dialogClass;
-      TRACE("DialogBasic::parent process = %d\n", parentProcess);
       mkWindow();
-      TRACE("dialog is %p\n", dialog_);
-      Basic::pushDialog(dialog_);
+      DBG("*** DialogBasic dialog %p\n", dialog_);
+      Basic::pushDialog(dialog_); // only pushes non MainWidget dialogs
       mkTitle();
       mkLabel();      
-      addKeyController(GTK_WIDGET(dialog_));
+      addKeyController(GTK_WIDGET(dialog_)); 
     }
 
     int run(){

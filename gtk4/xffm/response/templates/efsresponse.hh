@@ -447,17 +447,14 @@ public:
     void getDirectoryObject(EfsResponse<Type> *object, GtkEntry *entry){
       auto startFolder = object->folder();
 
-      DBG("*** newFileDialog1 startFolder = %s\n", startFolder);
+      TRACE("*** newFileDialog1 startFolder = %s\n", startFolder);
       auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
       newObject->subClass()->parentEntry(entry);
       
       auto _dialog = newObject->dialog();
-      
-                        // FIXME: each dialog should have it's own gtk window raise callback
-                        //        or something of the sort, to make things smoother and
-                        //        to get rid of the bug listed in TODO file.
-      newObject->setParent(GTK_WINDOW(MainWidget)); // FIXME
-      //object->push(_dialog);  // FIXME: modified, should be done in setParent...
+      newObject->setParent(dialog_); // FIXME
+
+      //newObject->setParent(GTK_WINDOW(MainWidget)); // FIXME
                                           //
       // is the following necessary, or just duplicated stuff from DialogComplex constructor?
       gtk_window_set_decorated(_dialog, true);
