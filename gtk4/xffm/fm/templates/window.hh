@@ -31,6 +31,8 @@ public:
         addKeyController(GTK_WIDGET(mainWindow_));
           // for page: startDeviceMonitor();
         auto box = contentBox(path);
+        g_object_set_data(G_OBJECT(mainWindow_), "frame", box);
+        
         gtk_window_set_child(mainWindow_, box);
         addPage(path);
         showWindow();

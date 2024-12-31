@@ -5,6 +5,9 @@ namespace xf
 
   template <class dialogClass>
   class DialogBasic {
+    
+  //GtkEventControllerMotion *raiseController_ = NULL;
+  GtkEventController *raiseController_ = NULL;
   GtkBox *contentArea_;
   GtkBox *actionArea_;
   GtkBox *vbox_;
@@ -47,6 +50,8 @@ namespace xf
     protected:
 
   public:
+    GtkEventController *raiseController(void){return raiseController_;}
+
     dialogClass *subClass(void){ return subClass_;}
     GtkWindow *parent(void){ return parent_;}
     GtkWindow *dialog(void){ return dialog_;}
@@ -70,19 +75,62 @@ namespace xf
     void unlockCondition(void){pthread_mutex_unlock(&condMutex_);}
     void lockResponse(void){pthread_mutex_lock(&mutex_);}
     void unlockResponse(void){pthread_mutex_unlock(&mutex_);}
- 
+  private:
+    static gboolean
+    presentDialog ( GtkEventControllerMotion* self,
+                    gdouble x,
+                    gdouble y,
+                    gpointer data) 
+    {
+      auto dialog = GTK_WINDOW(data);
+      gtk_window_present(dialog);
+      return FALSE;
+    }
+
+     void setRaise(void){
+      auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(parent_), "frame"));
+      gtk_widget_set_sensitive(GTK_WIDGET(content), false);
+      //gtk_widget_set_sensitive(GTK_WIDGET(parent_), false);
+      DBG("*** set raise for %p to %p\n", parent_, dialog_);
+      raiseController_ = gtk_event_controller_motion_new();
+      gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
+      gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);
+      g_signal_connect (G_OBJECT (raiseController_), "enter", 
+              G_CALLBACK (presentDialog), dialog_);      
+    }
+     
+    static void *unsetRaise_f(void *data){
+      auto object = (DialogBasic<dialogClass> *)data;
+      auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(object->parent()), "frame"));
+      gtk_widget_set_sensitive(GTK_WIDGET(content), true);
+      //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
+      gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
+          object->raiseController());
+      // aparently not necessary:
+      // g_object_unref(G_OBJECT(object->raiseController()));
+      DBG("*** set unraise for %p\n", object->parent());
+      return NULL;
+    }
+
+  public:
     void setParent(GtkWindow *parent){
       parent_ = parent;
       if (parent_) {
         // only allow one subdialog (modal)
-        gtk_widget_set_sensitive(GTK_WIDGET(parent_), false); 
+        setRaise();
+        //gtk_widget_set_sensitive(GTK_WIDGET(parent_), false);
+        //DBG("*** set raise for %p to %p\n", parent_, dialog_);
       }
     }
     
     ~DialogBasic(void){
+      // This is done by thread, so send all gtk/gdk stuff
+      // to the main context thread.
       if (parent_) {
+        Basic::context_function(unsetRaise_f, this);
         // only allow one subdialog (modal)
-        gtk_widget_set_sensitive(GTK_WIDGET(parent_), true); 
+        //gtk_widget_set_sensitive(GTK_WIDGET(parent_), true); 
+        //DBG("*** unset raise for %p\n", parent_);
       }
       DBG("*** ~DialogBasic dialog %p \n", dialog_);
       Basic::popDialog(dialog_);
@@ -224,6 +272,7 @@ private:
         dialog_ = GTK_WINDOW(gtk_window_new());
         gtk_window_set_decorated(dialog_, false);
         auto frame = GTK_FRAME(gtk_frame_new(NULL));
+        g_object_set_data(G_OBJECT(dialog_), "frame", frame);
         gtk_frame_set_label_align(frame, 1.0);
         closeBox_ = GTK_BOX(closeBox());
         gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox_));
