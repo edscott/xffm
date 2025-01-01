@@ -258,10 +258,10 @@ public:
     void dialog(GtkWindow *value){
       dialog_ = value;
     }
+    GtkWindow *dialog(void){return dialog_;}
 
     private:
     
-    GtkWindow *dialog(void){return dialog_;}
 
 
    static GtkTextView *
@@ -414,7 +414,7 @@ public:
                                                              // is working.
           auto button = Basic::mkButton("document-open", NULL);
           g_object_set_data(G_OBJECT(button), "entry", entry);
-          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), this);
+          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(DialogEntry<EfsResponse<Type> >::getDirectory), this);
 
           gtk_box_append(hbox, label);
           gtk_box_append(hbox, entry);
@@ -443,23 +443,20 @@ public:
 
         //done = TRUE;
       }
+/*
 
     void getDirectoryObject(EfsResponse<Type> *object, GtkEntry *entry){
       auto startFolder = object->folder();
 
-      TRACE("*** newFileDialog1 startFolder = %s\n", startFolder);
+      TRACE("*** getDirectoryObject startFolder = %s\n", startFolder);
       auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
       newObject->subClass()->parentEntry(entry);
       
       auto _dialog = newObject->dialog();
       newObject->setParent(dialog_); // FIXME
 
-      //newObject->setParent(GTK_WINDOW(MainWidget)); // FIXME
-                                          //
-      // is the following necessary, or just duplicated stuff from DialogComplex constructor?
       gtk_window_set_decorated(_dialog, true);
-      gtk_widget_realize(GTK_WIDGET(_dialog)); // This could possibly be done in DialogComplex
-                                              // after newObject->subclass()->mainBox() is done.
+      gtk_widget_realize(GTK_WIDGET(_dialog)); 
       Basic::setAsDialog(GTK_WIDGET(_dialog), "dialog", "Dialog");
       gtk_window_present(_dialog);
 
@@ -470,20 +467,16 @@ public:
 
 
     }
+*/
 
+/*
     static void getDirectory(GtkButton *button, void *data){
       TRACE("getDirectory\n");
       auto subClass = (EfsResponse<Type> *)data;
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
-      subClass->getDirectoryObject(subClass, entry);
-/*
-      void *newDialog[] = {NULL, NULL};
-      TRACE("getDirectory1:: newDialog[0]= %p\n", newDialog[0]);
-      FileDialog<bool>::newFileDialog(newDialog, subClass->folder());
-      TRACE("getDirectory2:: newDialog[0]= %p\n", newDialog[0]);
-      subClass->push(newDialog[0]);
-*/
+      DialogEntry::getDirectoryObject(subClass, entry);
     }
+*/
 
     char *getMountOptions(void){
         // Mount options

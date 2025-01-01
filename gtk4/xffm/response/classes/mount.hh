@@ -9,6 +9,7 @@ class  mountResponse: public pathResponse {
    const char *title_;
    const char *iconName_;
    GtkWindow *dialog_ = NULL;
+   char *mountDir_ = NULL;
   public:
     // Set a pointer to the GtkWindow in the FileResponse
     // object so that it can be referred to in the
@@ -17,7 +18,17 @@ class  mountResponse: public pathResponse {
     void dialog(GtkWindow *value){ dialog_ = value; }
     GtkWindow *dialog(void){return dialog_;}
 public:
-
+    ~mountResponse(void){
+      g_free(mountDir_);
+    }
+    const char *folder(){
+        if (!mountDir_) mountDir_ = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
+        if (mkdir(mountDir_, 0750) < 0){
+          TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
+        }
+        if (g_file_test(mountDir_, G_FILE_TEST_IS_DIR)) return (const char *)mountDir_;
+        else return "/";
+    }
 
     const char *title(void){ return _("Mount Volume");}
     const char *iconName(void){ return "dialog-question";}

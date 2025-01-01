@@ -47,6 +47,7 @@ namespace xf
       GtkBox *entryBox_;
       GtkEntry *entry_;
 
+   public:
     static void getDirectory(GtkButton *button, void *data){
       TRACE("getDirectory\n");
       auto subClass = (dialogClass *)data;
@@ -56,11 +57,12 @@ namespace xf
       getDirectoryObject(subClass, entry);
     }
 
-    private:  
+   private:
     static void getDirectoryObject(dialogClass *object, GtkEntry *entry){
-      auto startFolder = "/";
+      auto startFolder = object->folder();
+      //auto startFolder = "/";
 
-      TRACE("*** newFileDialog1 startFolder = %s\n", startFolder);
+      TRACE("*** getDirectoryObject startFolder = %s\n", startFolder);
       auto newObject = new DialogComplex<FileResponse<dialogClass> >(startFolder);
       newObject->subClass()->parentEntry(entry);
       
@@ -76,6 +78,7 @@ namespace xf
       // object when dialog is destroyed.
       newObject->run();
     }
+    
    public:
     GtkEntry *entry(void){return entry_;}
     DialogEntry(void){
