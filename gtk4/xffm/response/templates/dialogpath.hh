@@ -1,6 +1,6 @@
 #ifndef DIALOGPATH_HH
 #define DIALOGPATH_HH
-// template dependencies
+// Simple entry dialog, no file chooser.
 
 namespace xf {
 

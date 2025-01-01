@@ -4,9 +4,18 @@
 
 namespace xf {
 
+template <class Type>
 class  mountResponse: public pathResponse {
    const char *title_;
    const char *iconName_;
+   GtkWindow *dialog_ = NULL;
+  public:
+    // Set a pointer to the GtkWindow in the FileResponse
+    // object so that it can be referred to in the
+    // async main context thread callbacks.
+    // 
+    void dialog(GtkWindow *value){ dialog_ = value; }
+    GtkWindow *dialog(void){return dialog_;}
 public:
 
 

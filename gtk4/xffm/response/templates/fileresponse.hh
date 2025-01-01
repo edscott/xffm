@@ -91,7 +91,11 @@ public:
       const char *base = gtk_label_get_text(label);
       char *target = NULL;
       if (strcmp(base, _("No folder selected."))){ // folder selected...
-        target = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
+        if (strcmp(path, "/") == 0) {
+          target = g_strconcat(path, base, NULL);
+        } else {
+          target = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
+        }
         auto *entry = dialogObject->subClass()->parentEntry();
         auto *buffer = gtk_entry_get_buffer(entry);
         gtk_entry_buffer_set_text(buffer, target, -1);
