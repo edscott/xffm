@@ -266,6 +266,7 @@ protected:
 private:
     void mkWindow(void){
         dialog_ = GTK_WINDOW(gtk_window_new());
+        g_object_set_data(G_OBJECT(dialog_), "dialogObject", this);
         gtk_window_set_decorated(dialog_, false);
         auto frame = GTK_FRAME(gtk_frame_new(NULL));
         g_object_set_data(G_OBJECT(dialog_), "frame", frame);

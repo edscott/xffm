@@ -88,14 +88,13 @@ public:
       DBG("%s", "hello world\n");
       const char *path = dialogObject->subClass()->responsePathbar_p->path();
       auto label = dialogObject->subClass()->selectLabel();
-      const char *base = gtk_label_get_text(label);
-      char *target = NULL;
-      if (strcmp(base, _("No folder selected."))){ // folder selected...
-        if (strcmp(path, "/") == 0) {
+      const char *target = gtk_label_get_text(label);
+      if (strcmp(target, _("No folder selected."))){ // folder selected...
+        /*if (strcmp(path, "/") == 0) {
           target = g_strconcat(path, base, NULL);
         } else {
           target = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
-        }
+        }*/
         auto *entry = dialogObject->subClass()->parentEntry();
         auto *buffer = gtk_entry_get_buffer(entry);
         gtk_entry_buffer_set_text(buffer, target, -1);
@@ -167,13 +166,12 @@ public:
     // subClass object.
     //
     void *asyncCallback(void *data){
-       auto path = (const char *)data;
+       auto dir = (const char *)data;
        //auto label = this->selectLabel();
        //gtk_label_set_markup(label, text); 
-       reload(path);
+       DBG("reload dir = %s\n", dir);
+       reload(dir);
        return NULL;
-       //DBG("asyncCallback(%s)...\n", (const char *)data);
-       //return (void *) "foo";
     }
 
     //void *asyncCallbackData(void)
@@ -237,13 +235,22 @@ private:
         if (strcmp(nameA, nameB) == 0) return true;
         return false;
       }
-
-    void reload(const char *path){
+/*
+    void reload(const char *dir){
+      //auto newListModel = getListModel(dir);
+      auto newColumnView = getColumnView(dir);
+      if (columnView){
+        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(newColumnView));
+      } else {
+        auto label = gtk_label_new("empty");
+        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), label);
+      }
+      
         auto columnView = getColumnView(startFolder()); 
         gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
         
         GFileInfo *infoF = g_file_info_new();
-        auto name = g_path_get_basename(path);
+        auto name = g_path_get_basename(dir);
         DBG("** now select %s\n", name);
         g_file_info_set_name(infoF, name);
         g_free(name);
@@ -256,34 +263,78 @@ private:
             gtk_single_selection_set_selected (selectionModel_, positionS);
         }
     }
+*/
+    void reload(const char *dir){
+        //auto columnView = getColumnView(startFolder()); // initial model
+        auto columnView = getColumnView(dir); 
+        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
+        
+        GFileInfo *infoF = g_file_info_new();
+        auto name = g_path_get_basename(dir);
+        DBG("** now select %s\n", name);
+        g_file_info_set_name(infoF, name);
+        g_free(name);
+
+
+        auto store = G_LIST_STORE(g_object_get_data(G_OBJECT(columnView), "store"));
+        guint positionS;
+        auto found = g_list_store_find_with_equal_func(store, infoF, equal_f, &positionS);
+        if (found){
+            gtk_single_selection_set_selected (selectionModel_, positionS);
+        }
+        BasicPathbar::setRed(responsePathbar_p->pathbar(), dir);
+        // set pathbar red
+    }
 
     static void
     button_new (GtkButton * button, gpointer data) {
-
-      auto subClassObject = (FileResponse *)data;
-      char *path = g_strconcat(subClassObject->responsePathbar_p->path(), G_DIR_SEPARATOR_S,  _("Private"), NULL);
-
-      TRACE("***Entry dialog...path=%s dialog=%p\n", path, subClassObject->dialog());
-     
-      auto dialogObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
-      dialogObject->setParent(subClassObject->dialog());
-      auto dialog = dialogObject->dialog();
-      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
-
-      dialogObject->subClass()->parentObject(subClassObject);
-      TRACE("*** button_new subClass=%p\n", subClassObject);
-      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
+      // Button is created from the subClass: FileResponse<Type> class.
+      auto fileResponseObject = (FileResponse *)data; // subClass object
+      //auto fileChooserDialog = fileResponseObject->dialog();
+      //auto fileChooserObject = (DialogComplex<FileResponse> *)g_object_get_data(G_OBJECT(fileChooserDialog), "dialogObject");
       
-      dialogObject->run();
-      // get selected path
+      // get selected dir
+      auto selectionModel = fileResponseObject->selectionModel();
+      char *dir = fileResponseObject->getSelectedPath(selectionModel);
+      if (!dir) {
+        dir = g_strdup(fileResponseObject->responsePathbar_p->path());
+      }
+      DBG("*** dir is %s\n", dir);
+
+      // Simple DialogEntry with no filechooser.
+      auto mkdirObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
+      auto dialog = mkdirObject->dialog();
+      mkdirObject->subClass()->dir(dir);
+      // Parent dialog: 
+      mkdirObject->setParent(fileResponseObject->dialog());
+      // config:
+      gtk_window_set_decorated(mkdirObject->dialog(), true);
+      gtk_window_set_title(mkdirObject->dialog(), _("New folder name:"));
+      auto entry = mkdirObject->entry();
+      auto buffer = gtk_entry_get_buffer(entry);
+      gtk_entry_buffer_set_text(buffer, _("New"), -1);
+      auto string = g_strconcat("<b><span color=\"blue\">",_("New Directory"),"\n</span>",_("Create in folder:")," </b>", dir, "\n", NULL);
+      gtk_label_set_markup(mkdirObject->label(), string);
+      g_free(string);
+    
+
+      // The simple entry.
+      //auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
+
+
+      // Label to tell me where the directory will be created,
+      // set from within the mkdirResponseObject by setDefaults(). 
+      auto mkdirResponseObject = mkdirObject->subClass();
+      mkdirResponseObject->parentObject(fileResponseObject);
+      //mkdirResponseObject->setDefaults(dialog, mkdirObject->label());
+      
 /*
       // path = g_strconcat(path, G_DIR_SEPARATOR_STRING, _("Private"), NULL);
       dialogPath<mkdirResponse>::action(path);
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
-      // FIXME: if folder exists, update the entry
 */
       //g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
+      mkdirObject->run();
     }
 
     static void
@@ -519,10 +570,9 @@ private:
         return NULL;
       }
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
-      DBG("selected: %s\n", g_file_info_get_name(info));
       auto path = Basic::getPath(info);
-      auto name = g_file_info_get_name(info);
-      gtk_label_set_markup(GTK_LABEL(selectLabel_), name);
+      DBG("selected: %s path=%s\n", g_file_info_get_name(info), path);
+      gtk_label_set_markup(GTK_LABEL(selectLabel_), path);
       return path;
     }
 

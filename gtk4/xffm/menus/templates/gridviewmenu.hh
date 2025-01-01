@@ -196,7 +196,7 @@ namespace xf {
       if (!path) return;
       else {DBG("mount item path is %s\n", path);}
 
-      auto dialogObject = new DialogEntryPath<mountResponse<LocalDir> >;
+      auto dialogObject = new DialogEntryPath<mountResponse<DirectoryClass> >;
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));

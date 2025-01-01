@@ -77,6 +77,7 @@ namespace xf
       newObject->run();
     }
    public:
+    GtkEntry *entry(void){return entry_;}
     DialogEntry(void){
        entryBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
        gtk_widget_set_hexpand(GTK_WIDGET(entryBox_), false);

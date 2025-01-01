@@ -1,3 +1,8 @@
+file chooser not updating tree in efs and mount
+Incorrect dirname to construct path when entry is set in mount
+Mkdir will create directory in pathbar red, and not in selected directory
+Bunch of GtkCriticals in filechooser in mount (full parameters not set)
+
 Sporadic race condition crashes:
 * mountThreadF1 with gridview list model, at getMntHash, fstabMonitor.hh:120 (apparently there is a condition in which Child::lockGridView("mountThreadF1") fails to keep things coherent).
 
