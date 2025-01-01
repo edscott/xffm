@@ -91,7 +91,7 @@ namespace xf
       auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(parent_), "frame"));
       gtk_widget_set_sensitive(GTK_WIDGET(content), false);
       //gtk_widget_set_sensitive(GTK_WIDGET(parent_), false);
-      DBG("*** set raise for %p to %p\n", parent_, dialog_);
+      TRACE("*** set raise for %p to %p\n", parent_, dialog_);
       raiseController_ = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);
@@ -108,7 +108,7 @@ namespace xf
           object->raiseController());
       // aparently not necessary:
       // g_object_unref(G_OBJECT(object->raiseController()));
-      DBG("*** set unraise for %p\n", object->parent());
+      TRACE("*** set unraise for %p\n", object->parent());
       return NULL;
     }
 
@@ -118,8 +118,6 @@ namespace xf
       if (parent_) {
         // only allow one subdialog (modal)
         setRaise();
-        //gtk_widget_set_sensitive(GTK_WIDGET(parent_), false);
-        //DBG("*** set raise for %p to %p\n", parent_, dialog_);
       }
     }
     
@@ -129,10 +127,8 @@ namespace xf
       if (parent_) {
         Basic::context_function(unsetRaise_f, this);
         // only allow one subdialog (modal)
-        //gtk_widget_set_sensitive(GTK_WIDGET(parent_), true); 
-        //DBG("*** unset raise for %p\n", parent_);
       }
-      DBG("*** ~DialogBasic dialog %p \n", dialog_);
+      TRACE("*** ~DialogBasic dialog %p \n", dialog_);
       // deprecated Basic::popDialog(dialog_);
       Basic::destroy(dialog_);
       // race
@@ -147,7 +143,7 @@ namespace xf
     DialogBasic(void){ // must run in main context.
       subClass_ = new dialogClass;
       mkWindow();
-      DBG("*** DialogBasic dialog %p\n", dialog_);
+      TRACE("*** DialogBasic dialog %p\n", dialog_);
       // deprecated Basic::pushDialog(dialog_); 
       mkTitle();
       mkLabel();      
@@ -257,7 +253,7 @@ private:
 
 
     GtkWidget *closeBox(void){
-      return Dialog::buttonBox("delete", _("Cancel"), (void *)cancelCallback, (void *)this);
+      return Dialog::buttonBox("close", _("Close"), (void *)cancelCallback, (void *)this);
     }
 protected:
 

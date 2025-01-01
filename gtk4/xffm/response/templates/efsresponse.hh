@@ -424,7 +424,7 @@ public:
         }
 
       static void fileOK( GObject* source_object, GAsyncResult* result,  gpointer data ){
-        DBG("fileOK: \n");
+        TRACE("fileOK: \n");
         GtkFileDialog *dialog = GTK_FILE_DIALOG (source_object);
         GFile *file;
         GError *error = NULL;

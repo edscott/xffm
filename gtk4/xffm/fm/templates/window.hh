@@ -139,7 +139,7 @@ private:
     {
       auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
       if (gridview_p){
-        DBG("Leaving window\n");
+        TRACE("Leaving window\n");
         Dnd<LocalDir>::resetGridviewCSS(gridview_p);
       }
       // deprecated auto topDialog = Basic::topDialog();

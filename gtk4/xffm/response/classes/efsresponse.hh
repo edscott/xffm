@@ -27,7 +27,7 @@ public:
 
     ~EfsResponse (void){
       g_free(title_);
-      DBG("EFS destructor\n");
+      TRACE("EFS destructor\n");
       cleanup();
         //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
         //gtk_window_destroy(response_);
@@ -48,18 +48,18 @@ public:
                        //GTK_IS_WINDOW(l->data) may cause crash
                        //probably should do with controls...
       for (auto l=children_; l && l->data; l=l->next){
-          DBG("destroy dialog GTK_IS_WINDOW %p\n", l->data);
+          TRACE("destroy dialog GTK_IS_WINDOW %p\n", l->data);
         if (GTK_IS_WINDOW(l->data)) {
-          DBG("destroy dialog %p\n", l->data);
+          TRACE("destroy dialog %p\n", l->data);
           gtk_widget_set_visible(GTK_WIDGET(l->data), false);
           // set to self destruct with cancelation:
           g_object_set_data(G_OBJECT(l->data), "response", GINT_TO_POINTER(-1)); 
           //gtk_window_destroy(GTK_WINDOW(l->data)); // destroy here causes gtk to crash
         } else {
-          DBG("%p is not a dialog\n", l->data);
+          TRACE("%p is not a dialog\n", l->data);
         }
       }      
-      DBG("cleanup done\n");
+      TRACE("cleanup done\n");
       g_list_free(children_);
       children_ = NULL;
     }
@@ -87,7 +87,7 @@ public:
        /*auto path = (const char *)data;
        reload(path);*/
        return NULL;
-       DBG("asyncCallback(%s)...\n", (const char *)data);
+       TRACE("asyncCallback(%s)...\n", (const char *)data);
        return (void *) "foo";
     }
 
@@ -96,7 +96,7 @@ public:
     // Just for completeness for now.
     // 
     void *asyncCallbackData(void){
-      DBG("asyncCallbackData...\n");
+      TRACE("asyncCallbackData...\n");
       return (void *) "bar";
     }
 
@@ -420,7 +420,7 @@ public:
         }
 
       static void fileOK( GObject* source_object, GAsyncResult* result,  gpointer data ){
-        DBG("fileOK: \n");
+        TRACE("fileOK: \n");
         GtkFileDialog *dialog = GTK_FILE_DIALOG (source_object);
         GFile *file;
         GError *error = NULL;
@@ -443,7 +443,7 @@ public:
     void getDirectoryObject(EfsResponse<Type> *object){
       auto startFolder = object->folder();
 
-      DBG("*** newFileDialog1 startFolder = %s\n", startFolder);
+      TRACE("*** newFileDialog1 startFolder = %s\n", startFolder);
       auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
       auto _dialog = newObject->dialog();
       
