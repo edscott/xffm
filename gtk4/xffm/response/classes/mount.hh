@@ -4,12 +4,14 @@
 
 namespace xf {
 
-template <class Type>
-class  mountResponse: public pathResponse {
+//template <class Type>
+class  mountResponse {
    const char *title_;
    const char *iconName_;
    GtkWindow *dialog_ = NULL;
    char *mountDir_ = NULL;
+   const char *folder_ = NULL;
+   GtkBox *mainBox_ = NULL;
   public:
     // Set a pointer to the GtkWindow in the FileResponse
     // object so that it can be referred to in the
@@ -18,16 +20,28 @@ class  mountResponse: public pathResponse {
     void dialog(GtkWindow *value){ dialog_ = value; }
     GtkWindow *dialog(void){return dialog_;}
 public:
+    const char *folder(){return  folder_;}
+    void folder(const char *value){folder_ = value;}
+    
     ~mountResponse(void){
       g_free(mountDir_);
     }
-    const char *folder(){
-        if (!mountDir_) mountDir_ = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
+    mountResponse(void){
+      mountDir_ = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
+      if (g_file_test(mountDir_, G_FILE_TEST_EXISTS) &&
+          !g_file_test(mountDir_, G_FILE_TEST_IS_DIR)){
+        g_free(mountDir_);
+        mountDir_ = g_strdup("/tmp");
+      } else if (!g_file_test(mountDir_, G_FILE_TEST_IS_DIR)){
         if (mkdir(mountDir_, 0750) < 0){
-          TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
+          TRACE("mkdir %s: %s\n", mountDir_, strerror(errno));
         }
-        if (g_file_test(mountDir_, G_FILE_TEST_IS_DIR)) return (const char *)mountDir_;
-        else return "/";
+      }
+    }
+    GtkBox *mainBox(const char *folder) {
+        mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+
+        return mainBox_;
     }
 
     const char *title(void){ return _("Mount Volume");}
@@ -71,7 +85,8 @@ public:
           } 
           if (!dirname || !g_file_test(dirname, G_FILE_TEST_IS_DIR) ) {
               g_free(dirname);
-              dirname = g_strdup_printf("/tmp/%s", basename);
+              dirname = g_strconcat(g_get_home_dir(),G_DIR_SEPARATOR_S,"mnt",
+                  G_DIR_SEPARATOR_S, basename, NULL);
           }         
         }
 
@@ -88,12 +103,43 @@ public:
       g_free(mountTarget);
       g_free(mountSrc);
     }
+    static void *asyncNo(void *data){
+      DBG("mountResponse asyncNo\n"); 
+       return NULL;
+
+    }
     
     
     static void *asyncYes(void *data){
-       asyncYesArg(data, "mount");      
+      DBG("FIXME: do the mount\n"); 
+      //asyncYesArg(data, "mount");      
        return NULL;
     }
+};
+
+class Mount {
+    char *folder_ = NULL;
+    public:
+  Mount(const char *folder){
+      folder_ = g_strdup(folder);
+      auto dialogObject = new DialogComplex<mountResponse>(folder);
+      //auto dialogObject = new DialogEntryPath<mountResponse>(folder);
+      
+      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      auto dialog = dialogObject->dialog();
+      gtk_window_set_decorated(dialog, true);
+      dialogObject->setSubClassDialog();
+
+      gtk_widget_realize(GTK_WIDGET(dialog));
+      Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");
+      gtk_window_present(dialog);
+
+      dialogObject->run();
+    }
+  ~Mount(void){
+      g_free(folder_);
+  }
+
 };
 }
 #endif

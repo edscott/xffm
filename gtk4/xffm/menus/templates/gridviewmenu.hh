@@ -195,8 +195,14 @@ namespace xf {
       auto path = getPath(menu);
       if (!path) return;
       else {DBG("mount item path is %s\n", path);}
-
-      auto dialogObject = new DialogEntryPath<mountResponse<DirectoryClass> >;
+      
+      auto folder = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
+  
+      new Mount(folder);
+      g_free(folder);
+/*
+      auto dialogObject = new DialogEntryPath<DialogEntry<mountResponse> >(folder);
+      g_free(folder);
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
@@ -205,7 +211,7 @@ namespace xf {
       dialogObject->subClass()->setDefaults(dialog, dialogObject->label());     
       dialogObject->run();
      
-      //dialogPath<mountResponse>::action(path);
+      */
       g_free(path);
     }
      

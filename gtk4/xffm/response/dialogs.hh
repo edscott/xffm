@@ -6,6 +6,7 @@
 #include "response/templates/dialogtimeout.hh"
 #include "response/templates/dialogdrop.hh"
 #include "response/templates/dialogbuttons.hh"
+#include "response/templates/dialogpasswd.hh"
 #include "response/templates/dialogentry.hh"
 #include "response/templates/dialogpath.hh"
 #include "response/templates/openwith.hh"        

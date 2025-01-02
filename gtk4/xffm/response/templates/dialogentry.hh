@@ -3,44 +3,9 @@
 namespace xf
 {
   template <class Type> class FileResponse;
-  template <class dialogClass>
-  class DialogPasswd : public DialogBasic<dialogClass>{
 
-    public:
-    DialogPasswd(void){
-       auto entryBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
-       gtk_widget_set_hexpand(GTK_WIDGET(entryBox), false);
-       gtk_widget_set_halign (GTK_WIDGET(entryBox),GTK_ALIGN_CENTER);
-       gtk_box_append(GTK_BOX (this->contentArea()), GTK_WIDGET(entryBox));
-        
-       auto entry = GTK_ENTRY(gtk_entry_new ());
-       auto buffer = gtk_password_entry_buffer_new();
-       gtk_entry_set_buffer (entry,buffer);
-       Basic::boxPack0(entryBox, GTK_WIDGET(entry), true, true, 5);
-       //gtk_box_append(GTK_BOX (entryBox), GTK_WIDGET(entry));
-       gtk_widget_set_halign (GTK_WIDGET(entry),GTK_ALIGN_CENTER);
-       g_object_set_data(G_OBJECT(this->dialog()),"entry", entry);
-       g_signal_connect (G_OBJECT (entry), "activate", 
-                ENTRY_CALLBACK (this->activate), this->dialog());
-       auto apply = this->applyBox();
-       gtk_box_append(GTK_BOX (entryBox), apply);
-       
-       g_object_set_data(G_OBJECT(entry),"dialog", this->dialog());
-       /*g_signal_connect (G_OBJECT (entry), "activate", 
-                ENTRY_CALLBACK (activate_entry), (void *)dialog);*/
-      gtk_widget_realize(GTK_WIDGET(this->dialog()));
-      Basic::setAsDialog(GTK_WIDGET(this->dialog()), "dialog", "Dialog");
-      gtk_window_present(this->dialog());
-
-    }
-    private:
-    static void activate(GtkEntry *entry, void *dialog){
-      g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
-    }
-  };
-
-  template <class dialogClass>
-  class DialogEntry : public DialogTimeout<dialogClass>{
+  template <class Type>
+  class DialogEntry : public DialogTimeout<Type>{
 //  class DialogEntry : public DialogTimeout<dialogClass>{
     protected:
       
@@ -50,7 +15,7 @@ namespace xf
    public:
     static void getDirectory(GtkButton *button, void *data){
       TRACE("getDirectory\n");
-      auto subClass = (dialogClass *)data;
+      auto subClass = (Type *)data;
       //auto subClass = (mountResponse *)data;
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
       //subClass->getDirectoryObject(subClass, entry);
@@ -58,16 +23,17 @@ namespace xf
     }
 
    private:
-    static void getDirectoryObject(dialogClass *object, GtkEntry *entry){
+    static void getDirectoryObject(Type *object, GtkEntry *entry){
       auto startFolder = object->folder();
       //auto startFolder = "/";
 
-      TRACE("*** getDirectoryObject startFolder = %s\n", startFolder);
-      auto newObject = new DialogComplex<FileResponse<dialogClass> >(startFolder);
+      DBG("*** getDirectoryObject startFolder = %s\n", startFolder);
+      auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
       newObject->subClass()->parentEntry(entry);
+      newObject->subClass()->startFolder(startFolder);
       
-        auto _dialog = newObject->dialog();
-        newObject->setParent(object->dialog()); 
+      auto _dialog = newObject->dialog();
+      newObject->setParent(object->dialog()); 
 
       gtk_window_set_decorated(_dialog, true);
       gtk_widget_realize(GTK_WIDGET(_dialog)); 
@@ -119,18 +85,25 @@ namespace xf
     }
   };
 
-  template <class dialogClass>
-  class DialogEntryPath : public DialogEntry<dialogClass>{
+/*
+  template <class Type>
+  class DialogEntryPath : public DialogEntry<Type>{
+    char *folder_ = NULL;
     public:
-    DialogEntryPath(void){
+    ~DialogEntryPath(void){
+      g_free(folder_);
+    }
+
+    DialogEntryPath(const char *folder){
+      folder_ = g_strdup(folder);
       auto button = Basic::mkButton("document-open", NULL);
       g_object_set_data(G_OBJECT(button), "entry", this->entry_);
       g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(this->getDirectory), this);
       gtk_box_append(this->entryBox_, GTK_WIDGET(button));
 
     }
-
   };
+*/
 }
 #endif
 
