@@ -31,7 +31,8 @@
 #include "response/templates/fileresponse.hh" // class
 #include "response/templates/efsresponse.hh" // class
 #include "response/templates/efs.hh" // class
-# include "response/classes/mount.hh"   // class
+# include "response/templates/mountresponse.hh"   // class
+# include "response/templates/mount.hh"   // class
 
 namespace xf
 {

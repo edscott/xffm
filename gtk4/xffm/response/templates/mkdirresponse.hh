@@ -2,9 +2,9 @@
 #define MKDIRRESPONSE_HH
 namespace xf {
 
-  template <class Type> class FileResponse;
+  template <class Type, class SubClassType> class FileResponse;
 
-  template <class Type>
+  template <class Type, class SubClassType>
   class mkdirResponse {
    const char *title_;
    const char *iconName_;
@@ -75,7 +75,7 @@ private:
        // This sets label in parent dialog and should also update
        // the column view and selected item.
        if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-         auto p = (FileResponse<Type> *)dialogObject->subClass()->parentObject();
+         auto p = (FileResponse<Type, SubClassType> *)dialogObject->subClass()->parentObject();
          auto retval = p->asyncCallback((void *)dir);
        }
       // cleanup

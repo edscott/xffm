@@ -2,8 +2,6 @@
 # define DIALOGENTRY_HH
 namespace xf
 {
-  template <class Type> class FileResponse;
-
   template <class Type>
   class DialogEntry : public DialogTimeout<Type>{
 //  class DialogEntry : public DialogTimeout<dialogClass>{
@@ -11,39 +9,6 @@ namespace xf
       
       GtkBox *entryBox_;
       GtkEntry *entry_;
-
-   public:
-    static void getDirectory(GtkButton *button, void *data){
-      TRACE("getDirectory\n");
-      auto subClass = (Type *)data;
-      //auto subClass = (mountResponse *)data;
-      auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
-      //subClass->getDirectoryObject(subClass, entry);
-      getDirectoryObject(subClass, entry);
-    }
-
-   private:
-    static void getDirectoryObject(Type *object, GtkEntry *entry){
-      auto startFolder = object->folder();
-      //auto startFolder = "/";
-
-      DBG("*** getDirectoryObject startFolder = %s\n", startFolder);
-      auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
-      newObject->subClass()->parentEntry(entry);
-      newObject->subClass()->startFolder(startFolder);
-      
-      auto _dialog = newObject->dialog();
-      newObject->setParent(object->dialog()); 
-
-      gtk_window_set_decorated(_dialog, true);
-      gtk_widget_realize(GTK_WIDGET(_dialog)); 
-      Basic::setAsDialog(GTK_WIDGET(_dialog), "dialog", "Dialog");
-      gtk_window_present(_dialog);
-
-      // This fires off the dialog controlling thread, and will delete
-      // object when dialog is destroyed.
-      newObject->run();
-    }
     
    public:
     GtkEntry *entry(void){return entry_;}

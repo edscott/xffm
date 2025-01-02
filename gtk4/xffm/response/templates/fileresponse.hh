@@ -2,6 +2,7 @@
 #define FILERESPONSE_HH
 
 namespace xf {
+
   template <class Type> class EfsResponse;
   template <class Type> class FileDialog;
   //
@@ -24,9 +25,9 @@ namespace xf {
   // which will be created in the root of the columnView tree. 
   //
 
-  template <class Type>
+  template <class Type, class SubClassType>
   class FileResponse {
-
+    using FileResponse_t = FileResponse<Type, SubClassType>;
 private:
 
     GtkBox *mainBox_ = NULL;
@@ -44,6 +45,7 @@ private:
     GtkEntry *parentEntry_=NULL;
 
 public:
+    GtkWindow *dialog(void){return dialog_;}
     GtkEntry *parentEntry(void){ return parentEntry_;}
     void parentEntry(void *value){parentEntry_ = GTK_ENTRY(value);}
 
@@ -73,65 +75,6 @@ public:
       delete responsePathbar_p;
     }
 
-    // static void *asyncYes(void *data)
-    //
-    // When dialog propery "response" is > 0, this function
-    // is called in main context before FileResponse object 
-    // is deleted along with the dialog object. Here we set
-    // any action to be performed on the value of "response".
-    //
-    // It really does not matter which thread queues this
-    // function to the main context thread.
-    // 
-     static void *asyncYes(void *data){
-      auto dialogObject = (DialogComplex<FileResponse> *)data;
-      DBG("%s", "hello world\n");
-      const char *path = dialogObject->subClass()->responsePathbar_p->path();
-      auto label = dialogObject->subClass()->selectLabel();
-      const char *target = gtk_label_get_text(label);
-      if (strcmp(target, _("No folder selected."))){ // folder selected...
-        /*if (strcmp(path, "/") == 0) {
-          target = g_strconcat(path, base, NULL);
-        } else {
-          target = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
-        }*/
-        auto *entry = dialogObject->subClass()->parentEntry();
-        auto *buffer = gtk_entry_get_buffer(entry);
-        gtk_entry_buffer_set_text(buffer, target, -1);
-      }
-/*      
-      auto p = (EfsResponse<Type> *)dialogObject->subClass()->parentObject();
-      const char *path = dialogObject->subClass()->responsePathbar_p->path();
-      auto label = dialogObject->subClass()->selectLabel();
-      const char *base = gtk_label_get_text(label);
-      char *dir = NULL;
-      if (strcmp(base, _("No folder selected."))){ // folder actually selected...
-        dir = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
-        auto retval = p->asyncCallback((void *)dir);
-        DBG("asyncCallback(\"%s\") --> %s...\n", dir, (const char *)retval);
-        g_free(dir);
-      }
- */     
-      //auto retval = p->asyncCallback((void *)"foo");
-      //DBG("asyncCallback(\"foo\") --> %s...\n", (const char *)retval);
-      return NULL;
-    }
-    
-    // static void *asyncNo(void *data)
-    //
-    // On the other hand, when the dialog property "response" 
-    // is < 0, this function is called to cancel the dialog.
-    // This is also called in the main context thread.
-    //
-    // Note that while "response" == NULL, or zero, dialog
-    // window will remain on top of parent window in wait
-    // for the "response" property to be set != NULL.
-    //
-    static void *asyncNo(void *data){
-      auto dialogObject = (DialogComplex<FileResponse> *)data;
-      DBG("%s", "goodbye world\n");
-      return NULL;
-    }
 
     // GtkBox *mainBox(const char *folder)
     //
@@ -183,49 +126,270 @@ public:
       return (void *) "bar";
     }
 
-////////////////////////////////////////////////////////////////////////////////
-
 private:
-  
- /*       auto gesture1 = gtk_gesture_click_new();
-        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-        g_signal_connect (G_OBJECT(gesture1) , "released", EVENT_CALLBACK (Workdir<DirectoryClass>::pathbar_go), (void *)pathbar_);
-        gtk_widget_add_controller(GTK_WIDGET(pb_button), GTK_EVENT_CONTROLLER(gesture1));
- 
-*/
-      /*
-    static gboolean // on release... Coordinates are in icon's frame of reference.
-    select_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              gpointer object){
-      auto eventController = GTK_EVENT_CONTROLLER(self);
-      auto columnView = gtk_event_controller_get_widget(eventController);
-      auto listModel = G_LIST_MODEL(g_object_get_data(G_OBJECT(columnView), "store"));
-      auto selection = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(columnView), "selection"));
-      auto items = g_list_model_get_n_items(listModel);
-      for (int i=0; i<items; i++){
-        if (gtk_selection_model_is_selected(selection, i)){
-          auto info = G_FILE_INFO(g_list_model_get_item(listModel, i));
-          DBG("selected: %s\n", g_file_info_get_name(info));
-        }
+
+    char *getSelectedPath(GtkSingleSelection *sel){
+      GtkTreeListRow *treeListRow = GTK_TREE_LIST_ROW(gtk_single_selection_get_selected_item (sel));
+      if (!treeListRow) {
+        gtk_label_set_markup(GTK_LABEL(selectLabel_), _("No folder selected."));
+        return NULL;
       }
-      return true;
+      auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
+      auto path = Basic::getPath(info);
+      DBG("selected: %s path=%s\n", g_file_info_get_name(info), path);
+      gtk_label_set_markup(GTK_LABEL(selectLabel_), path);
+      return path;
     }
 
-    static void addGestureClick(GtkWidget *columnView){
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
-      // 1 for select
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (select_f), (void *)columnView);
-      gtk_widget_add_controller(GTK_WIDGET(columnView), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_BUBBLE);
+    GtkWidget *getColumnView(const char *path){
+        GListModel * listModel;
+        if (strcmp(path, _("Bookmarks")) == 0){
+          listModel = getBookmarkModel(path);
+        } else {
+          listModel = getListModel(path);
+        }
+        if (!listModel) return NULL;
 
-    }  
-*/
+        GtkTreeListModel * treemodel = gtk_tree_list_model_new (G_LIST_MODEL (listModel),
+                                             FALSE, // passthrough
+                                             FALSE, // autoexpand TRUE,
+                                             getChildModel,
+                                             NULL,
+                                             NULL);
+             
+        auto filterModel = gtk_filter_list_model_new (G_LIST_MODEL (treemodel), NULL);
+        selectionModel_ = gtk_single_selection_new (G_LIST_MODEL (filterModel));
+        g_signal_connect (selectionModel_, "notify::selected-item", G_CALLBACK (selection_cb), (void *)this);
+        gtk_single_selection_set_autoselect(selectionModel_, false);
+        gtk_single_selection_set_can_unselect(selectionModel_, true);
+        gtk_single_selection_set_selected(selectionModel_, GTK_INVALID_LIST_POSITION);
+        auto maxLen = Basic::getMaxNameLen(listModel);
+        auto columnView = gtk_column_view_new(GTK_SELECTION_MODEL(selectionModel_));
+        // no good addGestureClick(columnView);
+        
+        g_object_set_data(G_OBJECT(columnView), "selection", selectionModel_);
+        g_object_set_data(G_OBJECT(columnView), "store", listModel);
+        gtk_column_view_set_show_column_separators (GTK_COLUMN_VIEW (columnView), false);
+        GtkColumnViewColumn *column;
 
+        GtkListItemFactory *factory1 = gtk_signal_list_item_factory_new();
+        column = gtk_column_view_column_new (_("Name"), factory1);
+        gtk_column_view_append_column (GTK_COLUMN_VIEW (columnView), column);
+        g_signal_connect (factory1, "setup", G_CALLBACK (factorySetup1), GINT_TO_POINTER(1));
+        g_signal_connect (factory1, "bind", G_CALLBACK (factoryBind1), GINT_TO_POINTER(1));
+        g_object_unref (column);
+
+
+        GtkListItemFactory *factory2 = gtk_signal_list_item_factory_new();
+        column = gtk_column_view_column_new (_("Information"), factory2);
+        gtk_column_view_append_column (GTK_COLUMN_VIEW (columnView), column);
+        g_signal_connect (factory2, "setup", G_CALLBACK (factorySetup1), NULL);
+        g_signal_connect (factory2, "bind", G_CALLBACK (factoryBind1), NULL);
+        g_object_unref (column);
+        
+        return columnView;
+
+    }
+
+    GtkBox *constructMainBox(void) {
+        // set red path (root of treemodel)       
+        responsePathbar_p->path(startFolder()); 
+        //auto dialog = gtk_dialog_new ();
+        //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
+        mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 550, 400);
+        gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), false);
+        gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), false);
+
+        auto boxL = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_box_append(mainBox_, GTK_WIDGET(boxL));
+
+        auto prefix = gtk_label_new("");
+        auto markup = g_strconcat("<span color=\"blue\">", _("Selection:"), "</span> ", NULL);
+        gtk_label_set_markup(GTK_LABEL(prefix), markup);
+        g_free(markup);
+
+        selectLabel_ = gtk_label_new(_("No folder selected."));
+        gtk_box_append(boxL, prefix);
+        gtk_box_append(boxL, selectLabel_);
+        
+        auto pathbarBox = responsePathbar_p->pathbar();
+       // this->updatePathbarBox(path, pathbarBox, NULL);
+       //
+        auto path = responsePathbar_p->path();
+        auto pathbar = responsePathbar_p->pathbar();
+        auto reload_f = responsePathbar_p->reloadFunction();
+        auto reload_data = responsePathbar_p->reloadData();
+        BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
+        //responsePathbar_p->updatePathbarBox(responsePathbar_p->path(), false, NULL); 
+        
+        gtk_box_append(mainBox_, GTK_WIDGET(responsePathbar_p->pathbar()));
+
+        sw_ = gtk_scrolled_window_new();
+        gtk_widget_set_vexpand(GTK_WIDGET(sw_), true);
+        gtk_widget_set_hexpand(GTK_WIDGET(sw_), true);
+        gtk_box_append(mainBox_, sw_);
+        // listview...
+        // gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(output_));
+        gtk_widget_set_size_request(GTK_WIDGET(sw_), 680, 200);
+
+        auto columnView = getColumnView(startFolder()); 
+        
+        if (columnView){
+          gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
+        } else {
+          auto label = gtk_label_new("empty");
+          gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), label);
+        }
+
+        auto action_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_vexpand(GTK_WIDGET(action_area), false);
+        gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
+        gtk_box_append(mainBox_, GTK_WIDGET(action_area));
+
+        auto cancelButton = Basic::mkButton("emblem-redball", _("Cancel"));
+        gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
+        gtk_widget_set_vexpand(GTK_WIDGET(cancelButton), false);
+
+        auto newButton = Basic::mkButton ("emblem-edit", _("New Folder"));
+        gtk_box_append(action_area,  GTK_WIDGET(newButton));
+        gtk_widget_set_vexpand(GTK_WIDGET(newButton), false);
+
+        auto saveButton = Basic::mkButton ("emblem-floppy", _("Accept"));
+        gtk_box_append(action_area,  GTK_WIDGET(saveButton));
+        gtk_widget_set_vexpand(GTK_WIDGET(saveButton), false);
+
+        g_signal_connect (G_OBJECT (saveButton), "clicked", G_CALLBACK (button_save), this);
+        g_signal_connect (G_OBJECT (cancelButton), "clicked", G_CALLBACK (button_cancel), this);
+        g_signal_connect (G_OBJECT (newButton), "clicked", G_CALLBACK (button_new), this);
+
+        return mainBox_;
+    }
+
+////////////////////////////////////////////////////////////////////////////////
+
+// Static
+
+/////////////////////////////////////////////////////////////////////////
+
+public: // Free functions.
+    // static void *asyncYes(void *data)
+    //
+    // When dialog propery "response" is > 0, this function
+    // is called in main context before FileResponse object 
+    // is deleted along with the dialog object. Here we set
+    // any action to be performed on the value of "response".
+    //
+    // It really does not matter which thread queues this
+    // function to the main context thread.
+    // 
+     static void *asyncYes(void *data){
+      auto dialogObject = (DialogComplex<FileResponse> *)data;
+      DBG("%s", "hello world\n");
+      const char *path = dialogObject->subClass()->responsePathbar_p->path();
+      auto label = dialogObject->subClass()->selectLabel();
+      const char *target = gtk_label_get_text(label);
+      if (strcmp(target, _("No folder selected."))){ // folder selected...
+        /*if (strcmp(path, "/") == 0) {
+          target = g_strconcat(path, base, NULL);
+        } else {
+          target = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
+        }*/
+        auto *entry = dialogObject->subClass()->parentEntry();
+        auto *buffer = gtk_entry_get_buffer(entry);
+        gtk_entry_buffer_set_text(buffer, target, -1);
+      }
+   
+      //auto retval = p->asyncCallback((void *)"foo");
+      //DBG("asyncCallback(\"foo\") --> %s...\n", (const char *)retval);
+      return NULL;
+    }
+    
+    // static void *asyncNo(void *data)
+    //
+    // On the other hand, when the dialog property "response" 
+    // is < 0, this function is called to cancel the dialog.
+    // This is also called in the main context thread.
+    //
+    // Note that while "response" == NULL, or zero, dialog
+    // window will remain on top of parent window in wait
+    // for the "response" property to be set != NULL.
+    //
+    static void *asyncNo(void *data){
+      auto dialogObject = (DialogComplex<FileResponse> *)data;
+      DBG("%s", "goodbye world\n");
+      return NULL;
+    }
+
+    static GtkEntry *addEntry(GtkBox *child, const char *id, const char *text, void *subClassObject){
+
+      DBG("***subClassObject-Folder=%s\n", ((SubClassType *)subClassObject)->folder());
+        //auto folder = ((SubClassType *)subClassObject)->folder();
+        auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
+        gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
+        auto label = gtk_label_new(text);
+        gtk_widget_set_hexpand(GTK_WIDGET(label), false);
+        auto entry = gtk_entry_new();
+
+        //auto buffer = gtk_entry_buffer_new(NULL, -1);
+        //auto entry = gtk_entry_new_with_buffer(buffer);
+        gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
+        g_object_set_data(G_OBJECT(child), id, entry);
+        //gtk_widget_set_sensitive(GTK_WIDGET(entry), true); // FIXME: put to false 
+                                                           // when filedialog button
+                                                           // is working.
+        auto button = Basic::mkButton("document-open", NULL);
+        //g_object_set_data(G_OBJECT(button), "folder", (void *)folder);
+        g_object_set_data(G_OBJECT(button), "entry", entry);
+        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse_t::getDirectory), subClassObject);
+ //       g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse<Type, SubClassType>::getDirectory), subClassObject);
+  //          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse<EfsResponse<Type> >::getDirectory), this);
+
+        gtk_box_append(hbox, label);
+        gtk_box_append(hbox, entry);
+        gtk_box_append(hbox, GTK_WIDGET(button));
+        gtk_box_append(child, GTK_WIDGET(hbox));
+        return GTK_ENTRY(entry);
+    }
+
+
+    static void getDirectory(GtkButton *button, void *data){
+      //auto folder = (const char *)g_object_get_data(G_OBJECT(button), "folder");
+      auto subClass = (SubClassType *)data;
+      DBG("*** getDirectory Folder = %s\n", subClass->folder());
+      //auto subClass = (mountResponse *)data;
+      auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
+      //subClass->getDirectoryObject(subClass, entry);
+      getDirectoryObject(subClass, entry);
+    }
+
+
+private: // Nonfree functions
+
+    static void getDirectoryObject(SubClassType *object, GtkEntry *entry){
+      auto startFolder = object->folder();
+      //auto startFolder = "/";
+
+      DBG("*** getDirectoryObject startFolder = %s\n", startFolder);
+      auto newObject = new DialogComplex<FileResponse_t>(startFolder);
+      newObject->subClass()->parentEntry(entry);
+      newObject->subClass()->startFolder(startFolder);
+      
+      auto _dialog = newObject->dialog();
+      newObject->setParent(object->dialog()); // FIXME, object is broken.
+
+      gtk_window_set_decorated(_dialog, true);
+      gtk_widget_realize(GTK_WIDGET(_dialog)); 
+      Basic::setAsDialog(GTK_WIDGET(_dialog), "dialog", "Dialog");
+      gtk_window_present(_dialog);
+
+      // This fires off the dialog controlling thread, and will delete
+      // object when dialog is destroyed.
+      newObject->run();
+    }
+
+ 
       static gboolean equal_f (gconstpointer a, gconstpointer b){
         auto A = G_FILE_INFO(a);
         auto B = G_FILE_INFO(b);
@@ -235,36 +399,8 @@ private:
         if (strcmp(nameA, nameB) == 0) return true;
         return false;
       }
-/*
-    void reload(const char *dir){
-      //auto newListModel = getListModel(dir);
-      auto newColumnView = getColumnView(dir);
-      if (columnView){
-        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(newColumnView));
-      } else {
-        auto label = gtk_label_new("empty");
-        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), label);
-      }
-      
-        auto columnView = getColumnView(startFolder()); 
-        gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
-        
-        GFileInfo *infoF = g_file_info_new();
-        auto name = g_path_get_basename(dir);
-        DBG("** now select %s\n", name);
-        g_file_info_set_name(infoF, name);
-        g_free(name);
 
-
-        auto store = G_LIST_STORE(g_object_get_data(G_OBJECT(columnView), "store"));
-        guint positionS;
-        auto found = g_list_store_find_with_equal_func(store, infoF, equal_f, &positionS);
-        if (found){
-            gtk_single_selection_set_selected (selectionModel_, positionS);
-        }
-    }
-*/
-    void reload(const char *dir){
+      void reload(const char *dir){
         //auto columnView = getColumnView(startFolder()); // initial model
         auto columnView = getColumnView(dir); 
         gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
@@ -302,7 +438,7 @@ private:
       DBG("*** dir is %s\n", dir);
 
       // Simple DialogEntry with no filechooser.
-      auto mkdirObject = new DialogEntry<mkdirResponse<FileDialog<Type> > >;
+      auto mkdirObject = new DialogEntry<mkdirResponse<FileResponse_t, SubClassType> >;
       auto dialog = mkdirObject->dialog();
       mkdirObject->subClass()->dir(dir);
       // Parent dialog: 
@@ -349,8 +485,6 @@ private:
       auto subClassObject = (FileResponse *)data;
       g_object_set_data(G_OBJECT(subClassObject->dialog()), "response", GINT_TO_POINTER(-1));
     }
-
-    GtkWindow *dialog(void){return dialog_;}
     
     static gint 
     compareFunction(const void *a, const void *b, void *data){
@@ -563,18 +697,6 @@ private:
       return true;
     }
 
-    char *getSelectedPath(GtkSingleSelection *sel){
-      GtkTreeListRow *treeListRow = GTK_TREE_LIST_ROW(gtk_single_selection_get_selected_item (sel));
-      if (!treeListRow) {
-        gtk_label_set_markup(GTK_LABEL(selectLabel_), _("No folder selected."));
-        return NULL;
-      }
-      auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
-      auto path = Basic::getPath(info);
-      DBG("selected: %s path=%s\n", g_file_info_get_name(info), path);
-      gtk_label_set_markup(GTK_LABEL(selectLabel_), path);
-      return path;
-    }
 
     static void
     selection_cb (GtkSingleSelection *sel,
@@ -598,141 +720,9 @@ private:
       
     }
 
-
-
-    GtkWidget *getColumnView(const char *path){
-        GListModel * listModel;
-        if (strcmp(path, _("Bookmarks")) == 0){
-          listModel = getBookmarkModel(path);
-        } else {
-          listModel = getListModel(path);
-        }
-        if (!listModel) return NULL;
-
-        GtkTreeListModel * treemodel = gtk_tree_list_model_new (G_LIST_MODEL (listModel),
-                                             FALSE, // passthrough
-                                             FALSE, // autoexpand TRUE,
-                                             getChildModel,
-                                             NULL,
-                                             NULL);
-             
-        auto filterModel = gtk_filter_list_model_new (G_LIST_MODEL (treemodel), NULL);
-        selectionModel_ = gtk_single_selection_new (G_LIST_MODEL (filterModel));
-        g_signal_connect (selectionModel_, "notify::selected-item", G_CALLBACK (selection_cb), (void *)this);
-        gtk_single_selection_set_autoselect(selectionModel_, false);
-        gtk_single_selection_set_can_unselect(selectionModel_, true);
-        gtk_single_selection_set_selected(selectionModel_, GTK_INVALID_LIST_POSITION);
-        auto maxLen = Basic::getMaxNameLen(listModel);
-        auto columnView = gtk_column_view_new(GTK_SELECTION_MODEL(selectionModel_));
-        // no good addGestureClick(columnView);
-        
-        g_object_set_data(G_OBJECT(columnView), "selection", selectionModel_);
-        g_object_set_data(G_OBJECT(columnView), "store", listModel);
-        gtk_column_view_set_show_column_separators (GTK_COLUMN_VIEW (columnView), false);
-        GtkColumnViewColumn *column;
-
-        GtkListItemFactory *factory1 = gtk_signal_list_item_factory_new();
-        column = gtk_column_view_column_new (_("Name"), factory1);
-        gtk_column_view_append_column (GTK_COLUMN_VIEW (columnView), column);
-        g_signal_connect (factory1, "setup", G_CALLBACK (factorySetup1), GINT_TO_POINTER(1));
-        g_signal_connect (factory1, "bind", G_CALLBACK (factoryBind1), GINT_TO_POINTER(1));
-        g_object_unref (column);
-
-
-        GtkListItemFactory *factory2 = gtk_signal_list_item_factory_new();
-        column = gtk_column_view_column_new (_("Information"), factory2);
-        gtk_column_view_append_column (GTK_COLUMN_VIEW (columnView), column);
-        g_signal_connect (factory2, "setup", G_CALLBACK (factorySetup1), NULL);
-        g_signal_connect (factory2, "bind", G_CALLBACK (factoryBind1), NULL);
-        g_object_unref (column);
-        
-        return columnView;
-
-    }
-
-    GtkBox *constructMainBox(void) {
-        // set red path (root of treemodel)       
-        responsePathbar_p->path(startFolder()); 
-        //auto dialog = gtk_dialog_new ();
-        //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
-        mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-        //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 550, 400);
-        gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), false);
-        gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), false);
-
-        auto boxL = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_box_append(mainBox_, GTK_WIDGET(boxL));
-
-        auto prefix = gtk_label_new("");
-        auto markup = g_strconcat("<span color=\"blue\">", _("Selection:"), "</span> ", NULL);
-        gtk_label_set_markup(GTK_LABEL(prefix), markup);
-        g_free(markup);
-
-        selectLabel_ = gtk_label_new(_("No folder selected."));
-        gtk_box_append(boxL, prefix);
-        gtk_box_append(boxL, selectLabel_);
-        
-        auto pathbarBox = responsePathbar_p->pathbar();
-       // this->updatePathbarBox(path, pathbarBox, NULL);
-       //
-        auto path = responsePathbar_p->path();
-        auto pathbar = responsePathbar_p->pathbar();
-        auto reload_f = responsePathbar_p->reloadFunction();
-        auto reload_data = responsePathbar_p->reloadData();
-        BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
-        //responsePathbar_p->updatePathbarBox(responsePathbar_p->path(), false, NULL); 
-        
-        gtk_box_append(mainBox_, GTK_WIDGET(responsePathbar_p->pathbar()));
-
-        sw_ = gtk_scrolled_window_new();
-        gtk_widget_set_vexpand(GTK_WIDGET(sw_), true);
-        gtk_widget_set_hexpand(GTK_WIDGET(sw_), true);
-        gtk_box_append(mainBox_, sw_);
-        // listview...
-        // gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw), GTK_WIDGET(output_));
-        gtk_widget_set_size_request(GTK_WIDGET(sw_), 680, 200);
-
-        auto columnView = getColumnView(startFolder()); 
-        
-        if (columnView){
-          gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), GTK_WIDGET(columnView));
-        } else {
-          auto label = gtk_label_new("empty");
-          gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), label);
-        }
-
-        auto action_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_widget_set_vexpand(GTK_WIDGET(action_area), false);
-        gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
-        gtk_box_append(mainBox_, GTK_WIDGET(action_area));
-
-        auto cancelButton = Basic::mkButton("emblem-redball", _("Cancel"));
-        gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
-        gtk_widget_set_vexpand(GTK_WIDGET(cancelButton), false);
-
-        auto newButton = Basic::mkButton ("emblem-edit", _("New Folder"));
-        gtk_box_append(action_area,  GTK_WIDGET(newButton));
-        gtk_widget_set_vexpand(GTK_WIDGET(newButton), false);
-
-        auto saveButton = Basic::mkButton ("emblem-floppy", _("Accept"));
-        gtk_box_append(action_area,  GTK_WIDGET(saveButton));
-        gtk_widget_set_vexpand(GTK_WIDGET(saveButton), false);
-
-        g_signal_connect (G_OBJECT (saveButton), "clicked", G_CALLBACK (button_save), this);
-        g_signal_connect (G_OBJECT (cancelButton), "clicked", G_CALLBACK (button_cancel), this);
-        g_signal_connect (G_OBJECT (newButton), "clicked", G_CALLBACK (button_new), this);
-
-        return mainBox_;
-    }
-
-    gboolean save(void){
-      return true;        
-    }
-
+    
   };
-
-
-
+  
 }
 #endif
 

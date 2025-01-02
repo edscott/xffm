@@ -6,13 +6,16 @@
 namespace xf {
   template <class Type>
   class EfsResponse {
+   using dialog_t = DialogComplex<EfsResponse<Type> >;
+   using subClass_t = EfsResponse<Type>;
+   
    GtkBox *mainBox_ = NULL;
    GtkWindow *dialog_ = NULL;
    char *title_;
    const char *iconName_;
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
-   const char *folder_ = NULL;
+   char *folder_ = NULL;
    GtkTextView *output_;
    GList *children_ = NULL; 
 public:
@@ -22,10 +25,11 @@ public:
     const char *label(void){return "xffm::efs";}
     GtkEntry *remoteEntry(void){return remoteEntry_;}
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
-    const char *folder(){return  folder_;}
-    void folder(const char *value){folder_ = value;}
+    char *folder(){return  folder_;}
+    void folder(const char *value){folder_ = g_strdup(value);}
 
     ~EfsResponse (void){
+      g_free(folder_);
       g_free(title_);
       DBG("EFS destructor\n");
       cleanup();
@@ -66,13 +70,13 @@ public:
       
 
      static void *asyncYes(void *data){
-      auto dialogObject = (DialogComplex<EfsResponse> *)data;
+      auto dialogObject = (dialog_t *)data;
       DBG("%s", "hello world\n");
       return NULL;
     }
 
     static void *asyncNo(void *data){
-      auto dialogObject = (DialogComplex<EfsResponse> *)data;
+      auto dialogObject = (dialog_t *)data;
       DBG("%s", "goodbye world\n");
       return NULL;
     }
@@ -160,12 +164,13 @@ public:
 
         // mount child
         auto encrypted = g_strconcat(_("Mount Point"), " (", _("Encrypted"), "): ",NULL);
-        remoteEntry_ = addEntry(child1, "entry1", encrypted);
+        remoteEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "entry1", encrypted, this);
         g_free(encrypted);
         //gtk_widget_set_sensitive(GTK_WIDGET(remoteEntry_), true); // FIXME: put to false 
 
         auto unencrypted = g_strconcat(_("Mount Point"), " (", _("Unencrypted"), "): ",NULL);
-        mountPointEntry_ = addEntry(child1, "entry2", unencrypted);
+        mountPointEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "entry2", unencrypted, this);
+//        mountPointEntry_ = addEntry(child1, "entry2", unencrypted);
         g_free(unencrypted);
         //gtk_widget_set_sensitive(GTK_WIDGET(mountPointEntry_), true); // FIXME: put to false 
 
@@ -397,6 +402,7 @@ public:
         gtk_notebook_set_tab_reorderable (notebook, GTK_WIDGET(child), TRUE);
       }
 
+/*
        GtkEntry *addEntry(GtkBox *child, const char *id, const char *text){
           auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
           gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
@@ -414,7 +420,8 @@ public:
                                                              // is working.
           auto button = Basic::mkButton("document-open", NULL);
           g_object_set_data(G_OBJECT(button), "entry", entry);
-          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(DialogEntry<EfsResponse<Type> >::getDirectory), this);
+          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse<subClass_t>::getDirectory), this);
+//          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse<EfsResponse<Type> >::getDirectory), this);
 
           gtk_box_append(hbox, label);
           gtk_box_append(hbox, entry);
@@ -422,7 +429,8 @@ public:
           gtk_box_append(child, GTK_WIDGET(hbox));
           return GTK_ENTRY(entry);
         }
-
+*/
+      
       static void fileOK( GObject* source_object, GAsyncResult* result,  gpointer data ){
         TRACE("fileOK: \n");
         GtkFileDialog *dialog = GTK_FILE_DIALOG (source_object);
@@ -443,40 +451,6 @@ public:
 
         //done = TRUE;
       }
-/*
-
-    void getDirectoryObject(EfsResponse<Type> *object, GtkEntry *entry){
-      auto startFolder = object->folder();
-
-      TRACE("*** getDirectoryObject startFolder = %s\n", startFolder);
-      auto newObject = new DialogComplex<FileResponse<Type> >(startFolder);
-      newObject->subClass()->parentEntry(entry);
-      
-      auto _dialog = newObject->dialog();
-      newObject->setParent(dialog_); // FIXME
-
-      gtk_window_set_decorated(_dialog, true);
-      gtk_widget_realize(GTK_WIDGET(_dialog)); 
-      Basic::setAsDialog(GTK_WIDGET(_dialog), "dialog", "Dialog");
-      gtk_window_present(_dialog);
-
-      // This fires off the dialog controlling thread, and will delete
-      // object when dialog is destroyed.
-      newObject->run();
-      
-
-
-    }
-*/
-
-/*
-    static void getDirectory(GtkButton *button, void *data){
-      TRACE("getDirectory\n");
-      auto subClass = (EfsResponse<Type> *)data;
-      auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
-      DialogEntry::getDirectoryObject(subClass, entry);
-    }
-*/
 
     char *getMountOptions(void){
         // Mount options
@@ -581,7 +555,7 @@ public:
 
     static void
     button_save (GtkButton * button, gpointer data) {
-      auto subClass = (EfsResponse *)data;
+      auto subClass = (subClass_t *)data;
       if (subClass->save()){
         g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(1));
       }
@@ -589,7 +563,7 @@ public:
 
     static void
     button_cancel (GtkButton * button, gpointer data) {
-      auto subClass = (EfsResponse *)data;
+      auto subClass = (subClass_t *)data;
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
     }
 

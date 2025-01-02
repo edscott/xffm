@@ -198,20 +198,8 @@ namespace xf {
       
       auto folder = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
   
-      new Mount(folder);
+      new Mount<DirectoryClass>(folder, path);
       g_free(folder);
-/*
-      auto dialogObject = new DialogEntryPath<DialogEntry<mountResponse> >(folder);
-      g_free(folder);
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
-      auto dialog = dialogObject->dialog();
-      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      g_object_set_data(G_OBJECT(entry), "path", g_strdup(path));
-
-      dialogObject->subClass()->setDefaults(dialog, dialogObject->label());     
-      dialogObject->run();
-     
-      */
       g_free(path);
     }
      

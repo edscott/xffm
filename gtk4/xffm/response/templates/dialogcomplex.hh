@@ -7,6 +7,17 @@ namespace xf
   class DialogComplex : public DialogBasic<dialogClass> {
     public:
     
+    DialogComplex(const char *folder, const char *path){
+      TRACE("DialogComplex1\n");
+      auto frame = this->frame();
+      auto mainBox = this->subClass()->mainBox(folder, path);
+      TRACE("DialogComplex12\n");
+      gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
+      TRACE("DialogComplex123\n");
+      setSubClassDialog();
+    }
+    
+
     DialogComplex(const char *folder){
       TRACE("DialogComplex1\n");
       auto frame = this->frame();
@@ -15,10 +26,6 @@ namespace xf
       gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
       TRACE("DialogComplex123\n");
       setSubClassDialog();
-      
-    /*  clearVbox();
-      auto mainBox = this->subClass()->mainBox();
-      gtk_box_prepend(this->vbox(), GTK_WIDGET(mainBox));*/
     }
 
     // void setSubClassDialog(void)
