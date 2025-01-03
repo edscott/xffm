@@ -5,27 +5,37 @@ namespace xf
 
   template <class dialogClass>
   class DialogComplex : public DialogBasic<dialogClass> {
+    GtkBox *mainBox_;
+    GtkWindow *parent_;
     public:
     
-    DialogComplex(const char *folder, const char *path){
-      TRACE("DialogComplex1\n");
+    void setupRun(void){
       auto frame = this->frame();
-      auto mainBox = this->subClass()->mainBox(folder, path);
-      TRACE("DialogComplex12\n");
-      gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
-      TRACE("DialogComplex123\n");
-      setSubClassDialog();
-    }
-    
+      gtk_frame_set_child(frame, GTK_WIDGET(mainBox_));
+      this->setParent(parent_);
+      
+      auto dialog = this->dialog();
+      this->subClass()->dialog(dialog);
+      gtk_window_set_decorated(dialog, true);
+      gtk_widget_realize(GTK_WIDGET(dialog));
+      Basic::setAsDialog(dialog);
+      gtk_window_present(dialog);
 
-    DialogComplex(const char *folder){
-      TRACE("DialogComplex1\n");
-      auto frame = this->frame();
-      auto mainBox = this->subClass()->mainBox(folder);
-      TRACE("DialogComplex12\n");
-      gtk_frame_set_child(frame, GTK_WIDGET(mainBox));
-      TRACE("DialogComplex123\n");
-      setSubClassDialog();
+      // This fires off the dialog controlling thread, and will delete
+      // object when dialog is destroyed.
+      this->run();
+    }
+
+    DialogComplex(GtkWindow *parent, const char *folder, const char *path){
+      mainBox_ = this->subClass()->mainBox(folder, path);
+      parent_ = parent;
+      setupRun();
+    }
+
+    DialogComplex(GtkWindow *parent, const char *folder){
+      mainBox_ = this->subClass()->mainBox(folder);
+      parent_ = parent;
+      setupRun();
     }
 
     // void setSubClassDialog(void)
@@ -39,15 +49,6 @@ namespace xf
     }
     
     private:
- /*   void clearVbox(void){
-      gtk_widget_unparent(GTK_WIDGET(this->contentArea()));
-      gtk_widget_unparent(GTK_WIDGET(this->actionArea()));
-      gtk_widget_unparent(GTK_WIDGET(this->labelBox()));
-      gtk_widget_unparent(GTK_WIDGET(this->vbox2()));
-      gtk_widget_set_hexpand(GTK_WIDGET(this->vbox()), false);
-      gtk_widget_set_vexpand(GTK_WIDGET(this->vbox()), false);
-      //gtk_widget_set_visible(GTK_WIDGET(), false);
-    }*/
 
   };
 

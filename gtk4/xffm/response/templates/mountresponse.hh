@@ -27,10 +27,12 @@ public:
     void folder(const char *value){folder_ = value;}
     
     ~mountResponse(void){
+     TRACE("*** ~mountResponse...\n");
       g_free(folder_);
       g_free(mountDir_);
     }
     mountResponse(void){
+     TRACE("*** mountResponse...\n");
       mountDir_ = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
       if (g_file_test(mountDir_, G_FILE_TEST_EXISTS) &&
           !g_file_test(mountDir_, G_FILE_TEST_IS_DIR)){
@@ -69,20 +71,20 @@ public:
 
         auto labelTxt = g_strdup_printf("LABEL=%s", shortLabel);
         g_free(shortLabel);
-        DBG("is in fstab \"%s\" or \"%s\"\n", labelTxt, path_);
+        TRACE("is in fstab \"%s\" or \"%s\"\n", labelTxt, path_);
 
         // mountTarget is the fstab file defined mount point.
         if (FstabUtil::isInFstab(labelTxt)) {
-            DBG("is in fstab OK \"%s\"\n", labelTxt);
+            TRACE("is in fstab OK \"%s\"\n", labelTxt);
             mountTarget = FstabUtil::mountTarget(labelTxt);
         }
         g_free(labelTxt);
         if (!mountTarget && FstabUtil::isInFstab(path_)) {
-            DBG("is in fstab OK \"%s\"\n", path_);
+            TRACE("is in fstab OK \"%s\"\n", path_);
             mountTarget = FstabUtil::mountTarget(path_);
         }
         auto mountSrc = FstabUtil::mountSrc(mountTarget);
-        DBG("mountTarget=%s, mountSrc=%s\n", mountTarget, mountSrc);
+        TRACE("mountTarget=%s, mountSrc=%s\n", mountTarget, mountSrc);
 
         // If no fstab file defined mount point, dirname is the suggested user mount point.
         char *dirname = NULL;
@@ -112,7 +114,7 @@ public:
 
         // mount point entry
         auto text = g_strconcat(_("Mount Point"), ": ",NULL);
-        DBG("subClass folder =%s, %s\n", folder_, this->folder());
+        TRACE("subClass folder =%s, %s\n", folder_, this->folder());
         remoteEntry_ = FileResponse<Type, subClass_t>::addEntry(mainBox_, "entry1", text, this);
         g_free(text);
         //gtk_widget_set_sensitive(GTK_WIDGET(remoteEntry_), true); // FIXME: put to false 
@@ -160,20 +162,20 @@ public:
 
         auto labelTxt = g_strdup_printf("LABEL=%s", shortLabel);
         g_free(shortLabel);
-        DBG("is in fstab \"%s\" or \"%s\"\n", labelTxt, path);
+        TRACE("is in fstab \"%s\" or \"%s\"\n", labelTxt, path);
 
         // mountTarget is the fstab file defined mount point.
         if (FstabUtil::isInFstab(labelTxt)) {
-            DBG("is in fstab OK \"%s\"\n", labelTxt);
+            TRACE("is in fstab OK \"%s\"\n", labelTxt);
             mountTarget = FstabUtil::mountTarget(labelTxt);
         }
         g_free(labelTxt);
         if (!mountTarget && FstabUtil::isInFstab(path)) {
-            DBG("is in fstab OK \"%s\"\n", path);
+            TRACE("is in fstab OK \"%s\"\n", path);
             mountTarget = FstabUtil::mountTarget(path);
         }
         auto mountSrc = FstabUtil::mountSrc(mountTarget);
-        DBG("mountTarget=%s, mountSrc=%s\n", mountTarget, mountSrc);
+        TRACE("mountTarget=%s, mountSrc=%s\n", mountTarget, mountSrc);
 
         // If no fstab file defined mount point, dirname is the suggested user mount point.
         char *dirname = NULL;

@@ -7,27 +7,15 @@ namespace xf {
   template <class Type>
   class EFS {
     using dialog_t = DialogComplex<EfsResponse<Type> >;
-    char *folder_ = NULL;
     
 public:
 
-    EFS(const char *folder){
-      folder_ = g_strdup(folder);
-      auto dialogObject = new dialog_t(folder);
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
-      auto dialog = dialogObject->dialog();
-      gtk_window_set_decorated(dialog, true);
-      dialogObject->setSubClassDialog();
-
-      gtk_widget_realize(GTK_WIDGET(dialog));
-      Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");
-      gtk_window_present(dialog);
-
-      dialogObject->run();
+    EFS(GtkWindow *parent, const char *folder){
+      auto dialogObject = new dialog_t(parent, folder);
+    
     }
 
     ~EFS(void){
-      g_free(folder_);
     }
 
 //////////////////////////////////////////////////////////////////////////////////////

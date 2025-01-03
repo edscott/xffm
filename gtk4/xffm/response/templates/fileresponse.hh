@@ -112,7 +112,7 @@ public:
        auto dir = (const char *)data;
        //auto label = this->selectLabel();
        //gtk_label_set_markup(label, text); 
-       DBG("reload dir = %s\n", dir);
+       TRACE("reload dir = %s\n", dir);
        reload(dir);
        return NULL;
     }
@@ -136,7 +136,7 @@ private:
       }
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       auto path = Basic::getPath(info);
-      DBG("selected: %s path=%s\n", g_file_info_get_name(info), path);
+      TRACE("selected: %s path=%s\n", g_file_info_get_name(info), path);
       gtk_label_set_markup(GTK_LABEL(selectLabel_), path);
       return path;
     }
@@ -301,7 +301,7 @@ public: // Free functions.
       }
    
       //auto retval = p->asyncCallback((void *)"foo");
-      //DBG("asyncCallback(\"foo\") --> %s...\n", (const char *)retval);
+      //TRACE("asyncCallback(\"foo\") --> %s...\n", (const char *)retval);
       return NULL;
     }
     
@@ -317,13 +317,13 @@ public: // Free functions.
     //
     static void *asyncNo(void *data){
       auto dialogObject = (DialogComplex<FileResponse> *)data;
-      DBG("%s", "goodbye world\n");
+      DBG("goodbye world fileResponse dialog %p\n", dialogObject->dialog());
       return NULL;
     }
 
     static GtkEntry *addEntry(GtkBox *child, const char *id, const char *text, void *subClassObject){
 
-      DBG("***subClassObject-Folder=%s\n", ((SubClassType *)subClassObject)->folder());
+      TRACE("***subClassObject-Folder=%s\n", ((SubClassType *)subClassObject)->folder());
         //auto folder = ((SubClassType *)subClassObject)->folder();
         auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
@@ -357,38 +357,19 @@ public: // Free functions.
     static void getDirectory(GtkButton *button, void *data){
       //auto folder = (const char *)g_object_get_data(G_OBJECT(button), "folder");
       auto subClass = (SubClassType *)data;
-      DBG("*** getDirectory Folder = %s\n", subClass->folder());
-      //auto subClass = (mountResponse *)data;
+      TRACE("*** getDirectory Folder = %s\n", subClass->folder());
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
-      //subClass->getDirectoryObject(subClass, entry);
-      getDirectoryObject(subClass, entry);
+      //getDirectoryObject(subClass, entry);
+      auto parent = subClass->dialog();
+      //getDirectoryObject(parent, subClass, entry);
+      auto startFolder = subClass->folder();
+      auto newObject = new DialogComplex<FileResponse_t>(parent, startFolder);
+      newObject->subClass()->parentEntry(entry);
+      newObject->subClass()->startFolder(startFolder);
     }
 
 
 private: // Nonfree functions
-
-    static void getDirectoryObject(SubClassType *object, GtkEntry *entry){
-      auto startFolder = object->folder();
-      //auto startFolder = "/";
-
-      DBG("*** getDirectoryObject startFolder = %s\n", startFolder);
-      auto newObject = new DialogComplex<FileResponse_t>(startFolder);
-      newObject->subClass()->parentEntry(entry);
-      newObject->subClass()->startFolder(startFolder);
-      
-      auto _dialog = newObject->dialog();
-      newObject->setParent(object->dialog()); // FIXME, object is broken.
-
-      gtk_window_set_decorated(_dialog, true);
-      gtk_widget_realize(GTK_WIDGET(_dialog)); 
-      Basic::setAsDialog(GTK_WIDGET(_dialog), "dialog", "Dialog");
-      gtk_window_present(_dialog);
-
-      // This fires off the dialog controlling thread, and will delete
-      // object when dialog is destroyed.
-      newObject->run();
-    }
-
  
       static gboolean equal_f (gconstpointer a, gconstpointer b){
         auto A = G_FILE_INFO(a);
@@ -407,7 +388,7 @@ private: // Nonfree functions
         
         GFileInfo *infoF = g_file_info_new();
         auto name = g_path_get_basename(dir);
-        DBG("** now select %s\n", name);
+        TRACE("** now select %s\n", name);
         g_file_info_set_name(infoF, name);
         g_free(name);
 
@@ -435,7 +416,7 @@ private: // Nonfree functions
       if (!dir) {
         dir = g_strdup(fileResponseObject->responsePathbar_p->path());
       }
-      DBG("*** dir is %s\n", dir);
+      TRACE("*** dir is %s\n", dir);
 
       // Simple DialogEntry with no filechooser.
       auto mkdirObject = new DialogEntry<mkdirResponse<FileResponse_t, SubClassType> >;
@@ -676,7 +657,7 @@ private: // Nonfree functions
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto button = gtk_event_controller_get_widget(eventController);
       auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
-      DBG("Reload treemodel with %s\n", path);
+      TRACE("Reload treemodel with %s\n", path);
 
       p->responsePathbar_p->path(path); // new path
       auto pathbar = p->responsePathbar_p->pathbar(); 

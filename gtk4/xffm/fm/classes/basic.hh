@@ -586,6 +586,11 @@ public:
       gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));
       return GTK_BUTTON(button);
     }
+
+    static void setAsDialog(GtkWindow *window){
+      Basic::setAsDialog(GTK_WIDGET(window), "dialog", "Dialog");
+    }
+      
     
     static void setAsDialog(GtkWidget *widget, const char *Xname, const char *Xclass){
         bool OK = false;

@@ -134,7 +134,7 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
-      //DBG("path= %s, info=%p\n", path, info);
+      //TRACE("path= %s, info=%p\n", path, info);
       new Properties<bool>(info);
       //g_free(path);
     }
@@ -145,7 +145,7 @@ namespace xf {
       gchar *path = getPath(menu);
       
       if (path) {
-        DBG("path is %s\n", path);
+        TRACE("path is %s\n", path);
         Bookmarks::addBookmark(path);
         g_free(path);
         auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
@@ -178,7 +178,7 @@ namespace xf {
         auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         auto selectionList = gridView_p->getSelectionList();
         if (selectionList) {
-          DBG("selectionList = %p\n", selectionList);
+          TRACE("selectionList = %p\n", selectionList);
          // auto list = getSelectionList();
          // new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
           new OpenWith<bool>(GTK_WINDOW(MainWidget), NULL, selectionList);
@@ -194,11 +194,11 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("mount item path is %s\n", path);}
+      else {TRACE("mount item path is %s\n", path);}
       
       auto folder = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
-  
-      new Mount<DirectoryClass>(folder, path);
+      auto parent = GTK_WINDOW(MainWidget);
+      new Mount<DirectoryClass>(parent, folder, path);
       g_free(folder);
       g_free(path);
     }
@@ -225,7 +225,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("unmount item %s\n", path);}
+      else {TRACE("unmount item %s\n", path);}
       pthread_t thread;
       pthread_create(&thread, NULL, umountThreadMaster, (void *)path);
       pthread_detach(thread);
@@ -236,7 +236,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("path is %s\n", path);}
+      else {TRACE("path is %s\n", path);}
       dialogPath<cpResponse>::action(path);
       g_free(path);
     }
@@ -246,7 +246,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("path is %s\n", path);}
+      else {TRACE("path is %s\n", path);}
       dialogPath<mvResponse>::action(path);
       g_free(path);
     }
@@ -256,7 +256,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("path is %s\n", path);}
+      else {TRACE("path is %s\n", path);}
       dialogPath<lnResponse>::action(path);
       g_free(path);
     }
@@ -298,7 +298,7 @@ namespace xf {
 
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("path is %s\n", path);}
+      else {TRACE("path is %s\n", path);}
       ClipBoard::copyClipboardPath(path);
       g_free(path);
     }
@@ -318,7 +318,7 @@ namespace xf {
       }
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("path is %s\n", path);}
+      else {TRACE("path is %s\n", path);}
       ClipBoard::cutClipboardPath(path);
       g_free(path);
     }
@@ -330,7 +330,7 @@ namespace xf {
       
       auto path = getPath(menu);
       if (!path) return;
-      else {DBG("path is %s\n", path);}
+      else {TRACE("path is %s\n", path);}
 
       auto defaultApp = getDefaultApp(path);
       bool inTerminal = false;
@@ -346,7 +346,7 @@ namespace xf {
       }
       g_free(e);
 
-      DBG("run %s \n", command);
+      TRACE("run %s \n", command);
       auto output = Child::getOutput();
       auto buttonSpace = Child::getButtonSpace();
       Prompt<DirectoryClass>::run(output, command, true, true, buttonSpace);

@@ -31,7 +31,7 @@ public:
     ~EfsResponse (void){
       g_free(folder_);
       g_free(title_);
-      DBG("EFS destructor\n");
+      TRACE("EFS destructor\n");
       cleanup();
         //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
         //gtk_window_destroy(response_);
@@ -402,34 +402,6 @@ public:
         gtk_notebook_set_tab_reorderable (notebook, GTK_WIDGET(child), TRUE);
       }
 
-/*
-       GtkEntry *addEntry(GtkBox *child, const char *id, const char *text){
-          auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-          gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
-          gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
-          auto label = gtk_label_new(text);
-          gtk_widget_set_hexpand(GTK_WIDGET(label), false);
-          auto entry = gtk_entry_new();
-
-          //auto buffer = gtk_entry_buffer_new(NULL, -1);
-          //auto entry = gtk_entry_new_with_buffer(buffer);
-          gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
-          g_object_set_data(G_OBJECT(child), id, entry);
-          //gtk_widget_set_sensitive(GTK_WIDGET(entry), true); // FIXME: put to false 
-                                                             // when filedialog button
-                                                             // is working.
-          auto button = Basic::mkButton("document-open", NULL);
-          g_object_set_data(G_OBJECT(button), "entry", entry);
-          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse<subClass_t>::getDirectory), this);
-//          g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse<EfsResponse<Type> >::getDirectory), this);
-
-          gtk_box_append(hbox, label);
-          gtk_box_append(hbox, entry);
-          gtk_box_append(hbox, GTK_WIDGET(button));
-          gtk_box_append(child, GTK_WIDGET(hbox));
-          return GTK_ENTRY(entry);
-        }
-*/
       
       static void fileOK( GObject* source_object, GAsyncResult* result,  gpointer data ){
         TRACE("fileOK: \n");

@@ -250,12 +250,13 @@ char buffer[4096];
           return TRUE;
         }
         
-        DBG("Open new ecryptfs dialog.\n");
+        TRACE("Open new ecryptfs dialog.\n");
         auto mountDir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
         if (mkdir(mountDir, 0750) < 0){
           TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
         }
-        new EFS<DirectoryClass>(mountDir);
+        auto parent = GTK_WINDOW(MainWidget);
+        new EFS<DirectoryClass>(parent, mountDir);
         g_free(mountDir);
 
         return TRUE;

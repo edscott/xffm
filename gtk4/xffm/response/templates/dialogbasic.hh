@@ -95,6 +95,7 @@ namespace xf
       raiseController_ = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);
+      TRACE("*** add controller %p to window %p\n", raiseController_, parent_);
       g_signal_connect (G_OBJECT (raiseController_), "enter", 
               G_CALLBACK (presentDialog), dialog_);      
     }
@@ -104,16 +105,18 @@ namespace xf
       auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(object->parent()), "frame"));
       gtk_widget_set_sensitive(GTK_WIDGET(content), true);
       //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
+      TRACE("*** set unraise for %p\n", object->parent());
+      TRACE("*** remove controller %p to window %p\n", object->raiseController(), object->parent());
       gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
           object->raiseController());
       // aparently not necessary:
       // g_object_unref(G_OBJECT(object->raiseController()));
-      TRACE("*** set unraise for %p\n", object->parent());
       return NULL;
     }
 
   public:
     void setParent(GtkWindow *parent){
+      TRACE("*** setParent(%p)\n", parent);
       parent_ = parent;
       if (parent_) {
         // only allow one subdialog (modal)
@@ -122,13 +125,13 @@ namespace xf
     }
     
     ~DialogBasic(void){
+      TRACE("*** ~DialogBasic %p\n", dialog_);
       // This is done by thread, so send all gtk/gdk stuff
       // to the main context thread.
       if (parent_) {
         Basic::context_function(unsetRaise_f, this);
         // only allow one subdialog (modal)
       }
-      TRACE("*** ~DialogBasic dialog %p \n", dialog_);
       // deprecated Basic::popDialog(dialog_);
       Basic::destroy(dialog_);
       // race
@@ -151,7 +154,7 @@ namespace xf
     }
 
     int run(){
-      TRACE("run...\n");
+      TRACE("*** run...\n");
       pthread_t thread;
       int retval = pthread_create(&thread, NULL, runWait_f, this);
       pthread_detach(thread);
@@ -227,6 +230,7 @@ private:
       auto dialogObject = (DialogBasic<dialogClass> *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
+      TRACE("*** run_f (thread)\n");
       do {
         dialogObject->lockResponse();
         response = g_object_get_data(G_OBJECT(dialog), "response");
