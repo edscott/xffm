@@ -22,7 +22,7 @@ public:
 
       auto op_f = g_find_program_in_path(op);
       if (!op_f) {DBG("*** Error: %s not found\n", op); return NULL;}
-      if (strcmp(op, "mount")==0) {
+/*      if (strcmp(op, "mount")==0) {
         if (!g_file_test(target, G_FILE_TEST_EXISTS)){
           if (mkdir(target,0777) < 0){
             auto string = g_strdup_printf(_("Cannot create directory '%s'"), target);
@@ -47,7 +47,7 @@ public:
           Print::printError(output, string);
           return NULL;
         }
-      }
+      }*/
 
       if (strcmp(op, "cp") == 0 || strcmp(op, "mv") == 0) {          
         if (g_file_test(path, G_FILE_TEST_IS_DIR)){

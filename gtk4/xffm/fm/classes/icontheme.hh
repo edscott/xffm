@@ -8,6 +8,9 @@ public:
     static void init(void){
       GdkDisplay *displayGdk = gdk_display_get_default();
       iconTheme = gtk_icon_theme_get_for_display(displayGdk);
+      auto iconThemeName = gtk_icon_theme_get_theme_name(iconTheme);
+      DBG("*** System icon theme: %s\n", gtk_icon_theme_get_theme_name(iconTheme));
+      g_free(iconThemeName);
       addResource();
     }
 

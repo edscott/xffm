@@ -1,4 +1,14 @@
-0. broken icons in kubuntu symlink
+*** BUG: dnd broken: drag from xffm3 to xffm4 move mode, a dialog will open asking if copy move or symlink. Select move. Item will not be moved, but will be removed from source. Seems like copy/paste may be broken too.
+*** bug: small iconsize and icon shading mask not really visible. Need to make more constrast
+*** bug: check this... on renaming a file to existing, move src to tgt, tgt exists, backup file created for src, not tgt!!! 
+
+
+*** BUG xffm3: with multiple instances of xffm3, navigating into a folder with images previewed breaks xffm3 run: no icons shown, tab label broken. Seems like a memory overright problem. Should verify with Valgrind.
+
+
+
+
+0. Rodent icons
 1. for mount entry set default mount point, either from fstab or ~/mnt/device
 2. do not save invalid efs items, and allow popup item to remove
 3. no menu pathbar (not even color bug...)
