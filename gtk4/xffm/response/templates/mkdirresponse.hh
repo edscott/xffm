@@ -4,8 +4,9 @@ namespace xf {
 
   template <class Type, class SubClassType> class FileResponse;
 
-  template <class Type, class SubClassType>
+  template <class Type>
   class mkdirResponse {
+    using dialog_t = DialogEntry<mkdirResponse<Type> >;
    const char *title_;
    const char *iconName_;
    void *parentObject_=NULL;
@@ -25,7 +26,7 @@ public:
     }
 
     static void *asyncNo(void *data){
-    /*  auto dialogObject = (DialogEntry<mkdirResponse> *)data;
+    /*  auto dialogObject = (dialog_t *)data;
       auto dialog = dialogObject->dialog();
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
       auto path = g_object_get_data(G_OBJECT(dialog), "path");
@@ -36,7 +37,7 @@ public:
 
     static void *asyncYes(void *data){
        // this dialog
-       auto dialogObject = (DialogEntry<mkdirResponse> *)data;
+       auto dialogObject = (dialog_t *)data;
        
        // Test mode
        //auto retval = p->asyncCallback(p->asyncCallbackData());
@@ -51,7 +52,7 @@ private:
 
     static void *asyncYesArg(void *data, const char *op){
        if (!op) return NULL;
-       auto dialogObject = (DialogEntry<mkdirResponse> *)data;
+       auto dialogObject = (dialog_t *)data;
        auto dialog = dialogObject->dialog();
        auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));
        auto buffer = gtk_entry_get_buffer(entry);
@@ -75,7 +76,7 @@ private:
        // This sets label in parent dialog and should also update
        // the column view and selected item.
        if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-         auto p = (FileResponse<Type, SubClassType> *)dialogObject->subClass()->parentObject();
+         auto p = (Type *)dialogObject->subClass()->parentObject();
          auto retval = p->asyncCallback((void *)dir);
        }
       // cleanup

@@ -5,8 +5,9 @@
 namespace xf
 {
 
-  template <class dialogClass>
-  class DialogTimeout: public DialogBasic<dialogClass> {
+  template <class Type>
+  class DialogTimeout: public DialogBasic<Type> {
+    using dialog_t = DialogTimeout<Type>;
     ProgressBar *progress_;
     ProgressBar progress_c;
 public:
@@ -36,7 +37,7 @@ public:
     }
 
     static void *runWait_f(void *data){
-      auto dialogObject = (DialogTimeout<dialogClass> *)data;
+      auto dialogObject = (dialog_t *)data;
       auto dialog = dialogObject->dialog();
 
       TRACE("runWait_f...\n");
@@ -51,7 +52,7 @@ public:
 
     static void *run_f(void *data){
       // This is run by thread.
-      auto dialogObject = (DialogTimeout<dialogClass> *)data;
+      auto dialogObject = (dialog_t *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
       do {

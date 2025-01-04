@@ -3,28 +3,28 @@
 namespace xf
 {
 
-  template <class dialogClass>
+  template <class subClass_t>
   class DialogBasic {
+    using dialog_t = DialogBasic<subClass_t>; 
+    //GtkEventControllerMotion *raiseController_ = NULL;
+    GtkEventController *raiseController_ = NULL;
+    GtkBox *contentArea_;
+    GtkBox *actionArea_;
+    GtkBox *vbox_;
+    GtkBox *vbox2_;
+    GtkBox *labelBox_;
+    GtkBox *closeBox_;
+    GtkWindow *dialog_;
+    GtkWindow *parent_ = NULL;
+    subClass_t *subClass_;
+    GtkLabel *label_;
+    pthread_cond_t cond_ = PTHREAD_COND_INITIALIZER;
+    pthread_mutex_t condMutex_ = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_t mutex_ = PTHREAD_MUTEX_INITIALIZER;
+    bool cancelled_ = false;
+    GtkFrame *frame_;
     
-  //GtkEventControllerMotion *raiseController_ = NULL;
-  GtkEventController *raiseController_ = NULL;
-  GtkBox *contentArea_;
-  GtkBox *actionArea_;
-  GtkBox *vbox_;
-  GtkBox *vbox2_;
-  GtkBox *labelBox_;
-  GtkBox *closeBox_;
-  GtkWindow *dialog_;
-  GtkWindow *parent_ = NULL;
-  dialogClass *subClass_;
-  GtkLabel *label_;
-  pthread_cond_t cond_ = PTHREAD_COND_INITIALIZER;
-  pthread_mutex_t condMutex_ = PTHREAD_MUTEX_INITIALIZER;
-  pthread_mutex_t mutex_ = PTHREAD_MUTEX_INITIALIZER;
-  bool cancelled_ = false;
-  GtkFrame *frame_;
-  
-  const char *path_;
+    const char *path_;
 
     static gboolean
     on_keypress (GtkEventControllerKey* self,
@@ -34,7 +34,7 @@ namespace xf
           gpointer data){
         bool escKey = (keyval == GDK_KEY_Escape);
         if (escKey) {
-          auto object = (DialogBasic<dialogClass> *)data;
+          auto object = (dialog_t *)data;
           object->cancelCallback(NULL, 1, 0., 0., data);
           return true;
         }
@@ -52,7 +52,7 @@ namespace xf
   public:
     GtkEventController *raiseController(void){return raiseController_;}
 
-    dialogClass *subClass(void){ return subClass_;}
+    subClass_t *subClass(void){ return subClass_;}
     GtkWindow *parent(void){ return parent_;}
     GtkWindow *dialog(void){ return dialog_;}
     GtkBox *contentArea(void){ return contentArea_;}
@@ -101,7 +101,7 @@ namespace xf
     }
      
     static void *unsetRaise_f(void *data){
-      auto object = (DialogBasic<dialogClass> *)data;
+      auto object = (dialog_t *)data;
       auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(object->parent()), "frame"));
       gtk_widget_set_sensitive(GTK_WIDGET(content), true);
       //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
@@ -144,7 +144,7 @@ namespace xf
     }
 
     DialogBasic(void){ // must run in main context.
-      subClass_ = new dialogClass;
+      subClass_ = new subClass_t;
       mkWindow();
       TRACE("*** DialogBasic dialog %p\n", dialog_);
       // deprecated Basic::pushDialog(dialog_); 
@@ -212,7 +212,7 @@ private:
     }*/
 
     static void *runWait_f(void *data){
-      auto dialogObject = (DialogBasic<dialogClass> *)data;
+      auto dialogObject = (dialog_t *)data;
       auto dialog = dialogObject->dialog();
 
       TRACE("runWait_f...\n");
@@ -227,7 +227,7 @@ private:
     }
 
     static void *run_f(void *data){
-      auto dialogObject = (DialogBasic<dialogClass> *)data;
+      auto dialogObject = (dialog_t *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
       TRACE("*** run_f (thread)\n");
@@ -335,7 +335,7 @@ private:
               gdouble x,
               gdouble y,
               gpointer data) {
-      auto object = (DialogBasic<dialogClass> *)data;
+      auto object = (dialog_t *)data;
       auto dialog = object->dialog();
       object->lockResponse();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(-1));
@@ -349,7 +349,7 @@ private:
               gdouble x,
               gdouble y,
               gpointer data) {
-      auto object = (DialogBasic<dialogClass> *)data;
+      auto object = (dialog_t *)data;
       auto dialog = object->dialog();
       object->lockResponse();
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1));

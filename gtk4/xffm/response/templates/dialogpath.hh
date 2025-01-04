@@ -4,13 +4,13 @@
 
 namespace xf {
 
-template <class pathClass>
+template <class Type>
 class dialogPath {
     
 public:
     static void action(const char *path){    
 
-      auto dialogObject = new DialogEntry<pathClass>;
+      auto dialogObject = new DialogEntry<Type>;
       dialogObject->setParent(GTK_WINDOW(MainWidget));
       auto dialog = dialogObject->dialog();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));

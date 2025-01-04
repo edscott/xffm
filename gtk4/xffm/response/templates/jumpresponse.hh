@@ -2,7 +2,8 @@
 #define JUMPRESPONSE_HH
 namespace xf {
 template <class Type> class Workdir;
-template <class DirectoryClass>
+
+template <class Type>
 class jumpResponse {
     
 public:
@@ -23,7 +24,7 @@ public:
         g_free(path);
         return NULL;
       }
-      Workdir<DirectoryClass>::setWorkdir(path, true);
+      Workdir<Type>::setWorkdir(path, true);
       gtk_window_present(GTK_WINDOW(MainWidget));
       g_free(path);
       TRACE("asyncYes\n");

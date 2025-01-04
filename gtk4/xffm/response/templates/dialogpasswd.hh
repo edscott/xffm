@@ -2,8 +2,8 @@
 # define DIALOGPASSWD_HH
 namespace xf
 {
-  template <class dialogClass>
-  class DialogPasswd : public DialogBasic<dialogClass>{
+  template <class Type>
+  class DialogPasswd : public DialogBasic<Type>{
 
     public:
     DialogPasswd(void){

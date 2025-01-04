@@ -3,8 +3,8 @@
 namespace xf
 {
 
-  template <class dialogClass>
-  class DialogComplex : public DialogBasic<dialogClass> {
+  template <class Type>
+  class DialogComplex : public DialogBasic<Type> {
     GtkBox *mainBox_;
     GtkWindow *parent_;
     public:

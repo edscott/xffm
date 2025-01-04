@@ -3,11 +3,13 @@
 namespace xf {
 
 
-  template <class dialogClass>
-  class DialogPrompt : public DialogTimeout<dialogClass>{
+  template <class Type>
+  class DialogPrompt : public DialogTimeout<Type>{
+    using dialog_t = DialogPrompt<Type>;
+    using prompt_t = Prompt<Type>;
     GtkTextView *input_;
     GtkWidget *child_;
-    Prompt<dialogClass> *prompt_p;
+    prompt_t *prompt_p;
 
     public:
     char *getText(void){return Print::inputText(input_);}
@@ -18,7 +20,7 @@ namespace xf {
     
     DialogPrompt(void){
       child_ = Child::getChild();
-      prompt_p = (Prompt<dialogClass> *) new Prompt<dialogClass>(child_);
+      prompt_p = (prompt_t *) new prompt_t(child_);
       g_object_set_data(G_OBJECT(child_), "prompt", prompt_p);
       
       
@@ -63,7 +65,7 @@ namespace xf {
           GdkModifierType state,
           gpointer data){
 
-        auto p = (DialogPrompt<dialogClass> *) data;
+        auto p = (dialog_t *) data;
 
         if(keyval == GDK_KEY_Return) { 
           auto dialog = p->dialog();

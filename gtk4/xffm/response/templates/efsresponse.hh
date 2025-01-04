@@ -6,8 +6,8 @@
 namespace xf {
   template <class Type>
   class EfsResponse {
-   using dialog_t = DialogComplex<EfsResponse<Type> >;
    using subClass_t = EfsResponse<Type>;
+   using dialog_t = DialogComplex<subClass_t>;
    
    GtkBox *mainBox_ = NULL;
    GtkWindow *dialog_ = NULL;

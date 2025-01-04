@@ -6,7 +6,8 @@ namespace xf {
 
   template <class Type>
   class EFS {
-    using dialog_t = DialogComplex<EfsResponse<Type> >;
+    using subClass_t = EfsResponse<Type>;
+    using dialog_t = DialogComplex<subClass_t>;
     
 public:
 

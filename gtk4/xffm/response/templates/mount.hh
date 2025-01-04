@@ -5,7 +5,8 @@ namespace xf {
 
 template <class Type>
 class Mount {
-   using dialog_t = DialogComplex<mountResponse<Type> >;
+   using subClass_t = mountResponse<Type>;
+   using dialog_t = DialogComplex<subClass_t>;
    public:
    Mount(GtkWindow *parent, const char *folder, const char *path){
      TRACE("*** Mount...\n");

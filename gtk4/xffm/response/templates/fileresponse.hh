@@ -28,6 +28,8 @@ namespace xf {
   template <class Type, class SubClassType>
   class FileResponse {
     using FileResponse_t = FileResponse<Type, SubClassType>;
+    using dialog_t = DialogComplex<FileResponse_t>;
+    using mkdirDialog_t =  DialogEntry<mkdirResponse<FileResponse_t> >;
 private:
 
     GtkBox *mainBox_ = NULL;
@@ -363,7 +365,7 @@ public: // Free functions.
       auto parent = subClass->dialog();
       //getDirectoryObject(parent, subClass, entry);
       auto startFolder = subClass->folder();
-      auto newObject = new DialogComplex<FileResponse_t>(parent, startFolder);
+      auto newObject = new dialog_t(parent, startFolder);
       newObject->subClass()->parentEntry(entry);
       newObject->subClass()->startFolder(startFolder);
     }
@@ -419,7 +421,7 @@ private: // Nonfree functions
       TRACE("*** dir is %s\n", dir);
 
       // Simple DialogEntry with no filechooser.
-      auto mkdirObject = new DialogEntry<mkdirResponse<FileResponse_t, SubClassType> >;
+      auto mkdirObject = new mkdirDialog_t;
       auto dialog = mkdirObject->dialog();
       mkdirObject->subClass()->dir(dir);
       // Parent dialog: 

@@ -3,8 +3,9 @@
 namespace xf
 {
 
-  template <class dialogClass>
-  class DialogDrop : public DialogBasic<dialogClass>{
+  template <class Type>
+  class DialogDrop : public DialogBasic<Type>{
+    using dialog_t = DialogDrop<Type>;
     GtkLabel *actionLabel_;
     GtkProgressBar *progress_;
     public:
@@ -66,7 +67,7 @@ namespace xf
       auto markup2 = (const char *)arg[1];
       auto k = GPOINTER_TO_INT(arg[2]);
       auto total = GPOINTER_TO_INT(arg[3]);
-      auto object = (DialogDrop<dialogClass> *)arg[4];
+      auto object = (dialog_t *)arg[4];
       gtk_label_set_markup(object->label(), markup1);
       auto text = g_strdup_printf("%d/%d", k, total);
       gtk_progress_bar_set_text(object->progress(), text);

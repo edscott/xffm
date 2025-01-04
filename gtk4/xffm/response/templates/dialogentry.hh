@@ -4,7 +4,6 @@ namespace xf
 {
   template <class Type>
   class DialogEntry : public DialogTimeout<Type>{
-//  class DialogEntry : public DialogTimeout<dialogClass>{
     protected:
       
       GtkBox *entryBox_;
@@ -49,26 +48,6 @@ namespace xf
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
     }
   };
-
-/*
-  template <class Type>
-  class DialogEntryPath : public DialogEntry<Type>{
-    char *folder_ = NULL;
-    public:
-    ~DialogEntryPath(void){
-      g_free(folder_);
-    }
-
-    DialogEntryPath(const char *folder){
-      folder_ = g_strdup(folder);
-      auto button = Basic::mkButton("document-open", NULL);
-      g_object_set_data(G_OBJECT(button), "entry", this->entry_);
-      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(this->getDirectory), this);
-      gtk_box_append(this->entryBox_, GTK_WIDGET(button));
-
-    }
-  };
-*/
 }
 #endif
 
