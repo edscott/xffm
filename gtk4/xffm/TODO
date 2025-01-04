@@ -1,15 +1,19 @@
+0. broken icons in kubuntu symlink
+1. for mount entry set default mount point, either from fstab or ~/mnt/device
+2. do not save invalid efs items, and allow popup item to remove
+3. no menu pathbar (not even color bug...)
+4. font size slider for input/output at menu
+5. xffm-find4
+
 Sporadic race condition crashes:
 * mountThreadF1 with gridview list model, at getMntHash, fstabMonitor.hh:120 (apparently there is a condition in which Child::lockGridView("mountThreadF1") fails to keep things coherent).
 
 
 - Simplify OpenWith by inhering from DialogComplex (eliminate duplicated functions from DialogBasic)
-- menu pathbar color bug
-- font size slider for output
 
 
 * mount function FileDialog (once efs file dialog is complete).
-* gridview: verify tab labels with load gridview
-* rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
+* WTF? rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
  
 * tar/untar, zip/unzip dialog
 * gridview: ecryptfs dialog and root elements

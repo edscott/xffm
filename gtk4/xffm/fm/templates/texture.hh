@@ -165,6 +165,10 @@ public:
     static GdkPaintable *addEmblem(GFileInfo *info, const char *emblem, double width, double height)
     {
         auto gIcon = g_file_info_get_icon(info);
+        if (gIcon == NULL) {
+          auto paintable = getIcon("emblem-broken");
+          return addEmblem(paintable, emblem, width, height);
+        }
         return addEmblem(gIcon, emblem, width, height);
     }
 

@@ -222,7 +222,7 @@ private:
         auto pathbar = responsePathbar_p->pathbar();
         auto reload_f = responsePathbar_p->reloadFunction();
         auto reload_data = responsePathbar_p->reloadData();
-        BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
+        BasicPathbar<bool>::updatePathbar(path, pathbar, true, reload_f, reload_data);
         //responsePathbar_p->updatePathbarBox(responsePathbar_p->path(), false, NULL); 
         
         gtk_box_append(mainBox_, GTK_WIDGET(responsePathbar_p->pathbar()));
@@ -401,7 +401,7 @@ private: // Nonfree functions
         if (found){
             gtk_single_selection_set_selected (selectionModel_, positionS);
         }
-        BasicPathbar::setRed(responsePathbar_p->pathbar(), dir);
+        BasicPathbar<bool>::setRed(responsePathbar_p->pathbar(), dir);
         // set pathbar red
     }
 
@@ -666,10 +666,10 @@ private: // Nonfree functions
 
       auto reload_f = p->responsePathbar_p->reloadFunction();
       auto reload_data = p->responsePathbar_p->reloadData();
-      BasicPathbar::updatePathbar(path, pathbar, true, reload_f, reload_data);
-      //BasicPathbar::togglePathbar(path, pathbar); 
+      BasicPathbar<bool>::updatePathbar(path, pathbar, true, reload_f, reload_data);
+      //BasicPathbar<bool>::togglePathbar(path, pathbar); 
       // set red
-      BasicPathbar::setRed(pathbar, path);
+      BasicPathbar<bool>::setRed(pathbar, path);
       auto columnView = p->getColumnView(path);
       auto sw = GTK_SCROLLED_WINDOW(p->sw());
       if (columnView) gtk_scrolled_window_set_child(sw, GTK_WIDGET(columnView));
@@ -692,13 +692,13 @@ private: // Nonfree functions
       auto redPath = fileResponse_p->responsePathbar_p->path();
       auto pathbar = fileResponse_p->responsePathbar_p->pathbar();
 
-      //BasicPathbar::togglePathbar(path, pathbar);
-      /*BasicPathbar::setRed(pathbar,path);*/
+      //BasicPathba<bool>r::togglePathbar(path, pathbar);
+      /*BasicPathbar<bool>::setRed(pathbar,path);*/
       
       auto reload_f = fileResponse_p->responsePathbar_p->reloadFunction();
       auto reload_data = fileResponse_p->responsePathbar_p->reloadData();
-      BasicPathbar::updatePathbar(path, pathbar, false, reload_f, reload_data);
-      BasicPathbar::setRed(pathbar,redPath);
+      BasicPathbar<bool>::updatePathbar(path, pathbar, false, reload_f, reload_data);
+      BasicPathbar<bool>::setRed(pathbar,redPath);
       g_free(path); 
       
     }

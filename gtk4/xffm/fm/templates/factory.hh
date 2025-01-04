@@ -162,10 +162,14 @@ template <class DirectoryClass>
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
-            auto emblem = "emblem-symlink";
+            auto emblem = SYMLINK;
             struct stat st;
-            if (stat(path, &st) < 0) emblem = "emblem-broken";
-            texture = Texture<bool>::addEmblem(info,  emblem, scaleFactor*size, scaleFactor*size);
+            if (stat(path, &st) < 0) {
+              auto paintable = Texture<bool>::load("emblem-broken");
+              texture = Texture<bool>::addEmblem(paintable,  emblem, scaleFactor*size, scaleFactor*size);
+            } else {
+              texture = Texture<bool>::addEmblem(info,  emblem, scaleFactor*size, scaleFactor*size);
+            }
           } else { // simple
             auto gfiletype= g_file_info_get_file_type (info);
             switch (gfiletype){

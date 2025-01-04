@@ -95,7 +95,8 @@ static int longPressSerial = -1;
 #include "fm/classes/utilbasic.hh"
 #include "fm/classes/history.hh"
 #include "fm/classes/css.hh"
-#include "fm/classes/basicpathbar.hh"     
+#include "fm/classes/pathbarhistory.hh"     
+#include "fm/templates/basicpathbar.hh"     
 
 
 #include "fm/classes/bookmarks.hh"

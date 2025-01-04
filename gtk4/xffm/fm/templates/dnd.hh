@@ -9,7 +9,7 @@ namespace xf
 //template <class Type> class View;
 template <class Type> class UtilPathbar;
 template <class Type> class GridView;
-template <class DirectoryClass>
+template <class Type>
 class Dnd {
   GdkDrag *drag_ = NULL;
   bool dragOn_ = false;
@@ -42,7 +42,7 @@ public:
 
     bool inOffset(double x, double y, void *data){
         int size = getSize();
-        auto gridView_p = (GridView<DirectoryClass> *)data;
+        auto gridView_p = (GridView<Type> *)data;
         if (gridView_p->X() <= 0.1 && gridView_p->Y() <= 0.1) return true;
         graphene_rect_t bounds;
         if (!gtk_widget_compute_bounds (gridView_p->view(), MainWidget, &bounds)){
@@ -66,7 +66,7 @@ public:
         if (noStart) return false;
         this->dragOn(true);
 
-        auto gridView_p = (GridView<DirectoryClass> *)data;        
+        auto gridView_p = (GridView<Type> *)data;        
         GdkSurface *surface;
         GdkDevice *device;
         GdkDragAction actions;
@@ -127,7 +127,7 @@ public:
     static void
     image_drag_begin (GtkDragSource *source, GdkDrag *drag, GtkWidget *widget)
     {
-      auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       GList *selection_list = gridView_p->getSelectionList();
       GdkPaintable *paintable;
       if (g_list_length(selection_list) > 1) {
@@ -153,7 +153,7 @@ public:
     image_drag_prepare ( GtkDragSource* self, gdouble x, gdouble y, gpointer data)
     {
       GdkContentProvider *dndcontent;
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
 
       //GtkSelectionModel *selection_model = gridView_p->selectionModel();
       GList *selection_list = gridView_p->getSelectionList();
@@ -379,13 +379,13 @@ static void *readAction(void *arg){
     double newY = Y - bounds.origin.y;
     if (newY < 0 || newY > bounds.size.height){
       TRACE("out of pathbar Y\n");
-      if (inPathbar) BasicPathbar::resetPathbarCSS(pathbar);
+      if (inPathbar) BasicPathbar<Type>::resetPathbarCSS(pathbar);
       inPathbar = false;
       return false;
     }
     if (newX < 0 || newX > bounds.size.width){
       TRACE("out of pathbar X\n");
-      if (inPathbar) BasicPathbar::resetPathbarCSS(pathbar);
+      if (inPathbar) BasicPathbar<Type>::resetPathbarCSS(pathbar);
       inPathbar = false;
       return false;
     }
@@ -400,7 +400,7 @@ static void *readAction(void *arg){
   static bool getGridCoordinates(double *x, double *y, void *data){
     double X = *x;
     double Y = *y;
-    auto gridview_p = (GridView<DirectoryClass> *)data;
+    auto gridview_p = (GridView<Type> *)data;
     graphene_rect_t bounds;
     if (!gtk_widget_compute_bounds (GTK_WIDGET(gridview_p->view()), MainWidget, &bounds)) {
       DBG("*** Error::getGridCoordinates(): should not happen\n");
@@ -427,7 +427,7 @@ static void *readAction(void *arg){
     return true;
   }
 public:
-  static void resetGridviewCSS(GridView<DirectoryClass> *gridview_p){
+  static void resetGridviewCSS(GridView<Type> *gridview_p){
     //auto lock = Child::tryLockGridView();
     auto listModel = gridview_p->listModel();
     auto n = g_list_model_get_n_items(listModel);
@@ -439,7 +439,7 @@ public:
     //if (lock) Child::unlockGridView();
   }
 private:
-  static void gridHighlight(double x, double y, GridView<DirectoryClass> *gridview_p){
+  static void gridHighlight(double x, double y, GridView<Type> *gridview_p){
     //auto lock = Child::tryLockGridView();
     auto listModel = gridview_p->listModel();
     auto n = g_list_model_get_n_items(listModel);
@@ -471,20 +471,20 @@ private:
   }
 
   static void targetHighlight(double x, double y, void *data){
-      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
       GtkBox *pathbar = Child::getPathbar();
       
 
 
       if (getGridCoordinates(&x, &y, gridview_p)) {
-        BasicPathbar::resetPathbarCSS(pathbar);
+        BasicPathbar<Type>::resetPathbarCSS(pathbar);
         gridHighlight(x, y, gridview_p);
         return;
       }
       if (getPathbarCoordinates(&x, &y, pathbar)) {
         auto widget = getPathbarWidget(x, y, pathbar);
         // reset all:
-        BasicPathbar::resetPathbarCSS(pathbar);
+        BasicPathbar<Type>::resetPathbarCSS(pathbar);
         if (widget) {
           // Apply mask
           auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
@@ -497,7 +497,7 @@ private:
 
 
   }
-  static char *getGridDropTarget(double x, double y, GridView<DirectoryClass> *gridview_p){
+  static char *getGridDropTarget(double x, double y, GridView<Type> *gridview_p){
     //auto lock = Child::tryLockGridView();
       auto listModel = gridview_p->listModel();
       auto n = g_list_model_get_n_items(listModel);
@@ -547,7 +547,7 @@ private:
   }
 
   static char *getDropTarget(double x, double y, void *data){
-      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
       GtkBox *pathbar = Child::getPathbar();
       TRACE("original x,y = %lf,%lf\n", x, y);
       if (getGridCoordinates(&x, &y, gridview_p)) {
@@ -561,7 +561,7 @@ private:
         auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
         return g_strdup(path);
       }
-      BasicPathbar::resetPathbarCSS(pathbar);
+      BasicPathbar<Type>::resetPathbarCSS(pathbar);
       return NULL;
   }
 
@@ -600,7 +600,7 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
 {
   // does not do the trick
   // whatever
-    /*  auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+    /*  auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
       GtkBox *pathbar = Child::getPathbar();
       
       double pathbarTail=0;
@@ -694,7 +694,7 @@ private:
         d->dropDone(false);
       }
 done:
-        auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+        auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
         resetGridviewCSS(gridview_p);
         inGridView = false;
         

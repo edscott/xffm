@@ -251,8 +251,9 @@ public:
       gtk_widget_realize(GTK_WIDGET(child));
       Basic::flushGTK();
 #ifdef ENABLE_MENU_CLASS
+#warning "ENABLE_MENU_CLASS active"
         auto pathbar_ = Child::getPathbar();
-        auto myPathbarMenu = new Menu<PathbarMenu>;
+        auto myPathbarMenu = new Menu<PathbarMenu<MainClass> >;
         auto title = g_strconcat("<span color=\"blue\">", _("foo Navigation Toolbar"), "</span>", NULL);
         auto menu = myPathbarMenu->getMenu(title);
         g_free(title);

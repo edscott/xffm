@@ -503,9 +503,9 @@ public:
 
         gchar *command;
         if (signal_id == SIGKILL) {
-            command =  g_strdup_printf("%s -%d -%ld -%d", kill, signal_id, pid, grandchild());
+            command =  g_strdup_printf("%s -%d %ld %d", kill, signal_id, pid, grandchild());
         } else {
-            command =  g_strdup_printf("%s -%d -%ld", kill, signal_id, pid);
+            command =  g_strdup_printf("%s -%d %ld", kill, signal_id, pid);
         }
         TRACE("signalling with %s\n", command);
         //Run::shell_command(textview_, command, FALSE, TRUE); // yes output to textview

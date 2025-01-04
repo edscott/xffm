@@ -28,7 +28,7 @@ namespace xf {
       reloadFunction_ = reloadFunction;
       reloadData_ = reloadData;
 
-        pathbar_ = BasicPathbar::pathbarBox();
+        pathbar_ = BasicPathbar<bool>::pathbarBox();
         g_object_set_data(G_OBJECT(pathbar_), "pathbar", this); 
         pathbarHistory_p = new PathbarHistory;
         g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory_p", pathbarHistory_p); 
@@ -76,7 +76,7 @@ namespace xf {
 /*   static void 
     updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f){
         TRACE("Utilpathbar:: updatePathbar2\n");
-        BasicPathbar::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
+        BasicPathbar<bool>::updatePathbar(path, pathbar, updateHistory, pathbar_go_f);
     }*/
    
    void path(const char *value){
@@ -124,8 +124,8 @@ private:
       if (strcmp(path, "xffm:back") == 0){
         auto previous = pathbarHistory_p->backHistory();
         DBG("previous = %s\n", previous);
-        if (previous) BasicPathbar::updatePathbar(previous, pathbar, false, reload_f, reload_data);
-        BasicPathbar::setRed(pathbar, previous);
+        if (previous) BasicPathbar<bool>::updatePathbar(previous, pathbar, false, reload_f, reload_data);
+        BasicPathbar<bool>::setRed(pathbar, previous);
         // Too convoluted:
         //auto r = (void *((*) (GtkGestureClick*, gint, gdouble, gdouble, gpointer)) )reload_f;
         
@@ -133,8 +133,8 @@ private:
       }
       if (strcmp(path, "xffm:next") == 0){
         auto current = pathbarHistory_p->nextHistory();
-        if (current)  BasicPathbar::updatePathbar(current, pathbar, false, reload_f, reload_data);
-        BasicPathbar::setRed(pathbar, current);
+        if (current)  BasicPathbar<bool>::updatePathbar(current, pathbar, false, reload_f, reload_data);
+        BasicPathbar<bool>::setRed(pathbar, current);
         /* nope
         auto parent = (FileResponse *)pathbar_p->parent();
         auto columnView = parent->getColumnView(path);
