@@ -49,6 +49,7 @@ public:
         }
       }*/
 
+/*      
       if (strcmp(op, "cp") == 0 || strcmp(op, "mv") == 0) {          
         if (g_file_test(path, G_FILE_TEST_IS_DIR)){
           char *arg[]={(char *)op, (char *)"-a", (char *)"-v", path, newFile, NULL};
@@ -67,6 +68,14 @@ public:
         Run<bool>::thread_run(output, (const char **)arg, true);
         g_free(mountSrc);
       }
+      */
+      if (strcmp(op, "cp") == 0){
+        cpmv( path, newFile, 1);
+      } else if (strcmp(op, "mv") == 0) {    
+        cpmv( path, newFile, 0);
+      } else if (strcmp(op, "ln") == 0) { 
+        cpmv( path, newFile, -1);
+      }
      
       g_free(op_f);
       g_free(path);
@@ -84,6 +93,80 @@ public:
 
       return NULL;
     }
+public:
+    static void
+    cpmv(const gchar *src, const gchar *tgt, int modeCopy){
+      auto arg = (char **)calloc(10, sizeof(char *));
+      int k = 0;
+      if (g_file_test(tgt, G_FILE_TEST_EXISTS)){
+        auto backup = g_strconcat(tgt, "~", NULL);
+        if (rename(tgt, backup) != 0){
+          auto text = g_strdup_printf(" rename(%s, %s): %s\n", tgt, backup,strerror(errno));
+          Print::printWarning(Child::getOutput(), text);
+        }
+        g_free(backup);
+      }
+
+      if (modeCopy > 0){
+        arg[k++] = g_strdup("cp");
+        if (g_file_test(src, G_FILE_TEST_IS_DIR)) arg[k++] = g_strdup("-a");
+        arg[k++] = g_strdup("-R");
+      } else if (modeCopy < 0) {
+        arg[k++] = g_strdup("ln");
+        arg[k++] = g_strdup("-s");
+      } else {
+        if (g_file_test(src, G_FILE_TEST_IS_DIR)) arg[k++] = g_strdup("-a");
+        arg[k++] = g_strdup("mv");
+      }      
+      arg[k++] = g_strdup("-v");
+      arg[k++] = g_strdup("-f");
+      arg[k++] = g_strdup(src);
+      arg[k++] = g_strdup(tgt);
+      //backup(src, tgt);
+      THREADPOOL->add(cpmv_f, (void *)arg);
+     }  
+
+private:
+  static void *cpmv_f(void *data){
+    auto arg =(char **)data;
+    pid_t pid = Run<bool>::thread_run(NULL, (const char **)arg, false);
+//    pid_t pid = Run<bool>::thread_run(Child::getOutput(), (const char **)arg, false);
+    int wstatus;
+    waitpid(pid, &wstatus, 0);
+    for (auto p=arg; p && *p; p++) g_free(*p);
+    g_free(arg);
+    return GINT_TO_POINTER(wstatus);
+  }
+/*
+    static void
+    backup(const gchar *path, const gchar *target){
+        auto base = g_path_get_basename(path);
+        auto srcTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
+        g_free(base);
+        if (g_file_test(srcTarget, G_FILE_TEST_EXISTS)){
+          
+          auto backup = g_strconcat(srcTarget, "~", NULL);
+          auto b1 = g_path_get_basename(srcTarget);
+          auto b2 = g_path_get_basename(backup);
+
+          auto text1 = g_strdup_printf(_("Backup file of %s: %s"), b1, b2);
+          //auto text = g_strconcat(_("Created: "), backup, "\n", NULL);
+          auto text = g_strconcat(" ",text1, "\n", NULL);
+          //g_free(text1);
+          Print::printWarning(Child::getOutput(), text); // this is run in main context.
+
+            
+            const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
+            Run<bool>::thread_run(NULL, arg, false);
+            //const gchar *arg[] = { "mv", "-v", "-f", srcTarget, backup, NULL };
+            TRACE("backup: %s -> %s\n", srcTarget, backup); 
+            g_free(backup);
+        }
+        g_free(srcTarget);
+    }
+ */   
+
+    
 };
 
 }
