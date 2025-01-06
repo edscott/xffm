@@ -39,9 +39,6 @@ public:
 
     EfsResponse (void){
       title_ = g_strdup_printf("%s ecryptfs", _("New"));
-      /*pthread_t thread;
-      int retval = pthread_create(&thread, NULL, response_f, (void *)this);
-      pthread_detach(thread);*/
     }
 
     void push(void *data){

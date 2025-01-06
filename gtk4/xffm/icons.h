@@ -1,6 +1,50 @@
 #ifndef ICON_MACROS
 #define ICON_MACROS
 
+#if 1
+#define GO_UP "go-up"
+#define EMBLEM_BOOKMARK "emblem-bookmark"
+#define SEARCH "edit-find"
+#define OPEN_TERMINAL "video-display"
+#define GO_HOME "user-home"
+#define EDIT_CLEAR "edit-clear-all"
+#define DOCUMENT_PROPERTIES "document-properties"
+#define WINDOW_SHUTDOWN "system-shutdown-symbolic"
+#define WINDOW_CLOSE "window-close-symbolic"
+
+// Menu icons
+#define EMBLEM_GREEN_BALL "emblem-greenball"
+#define EMBLEM_RED_BALL "emblem-redball"
+#define EMBLEM_NOACCESS "emblem-noaccess"
+#define EMBLEM_NEW_TAB "view-dual"
+#define EMBLEM_RUN "emblem-run"
+#define EMBLEM_SYMLINK "emblem-symbolic-link"
+#define EMBLEM_SAVE "document-save"
+#define EMBLEM_SAVE_AS "document-save-as"
+#define EMBLEM_DELETE "delete"
+#define EMBLEM_PROPERTIES "properties"
+#define EMBLEM_COPY "copy"
+#define EMBLEM_CUT "cut"
+#define EMBLEM_PASTE "paste"
+#define EMBLEM_FAVOURITE "emblem-favourite"
+#define EMBLEM_GRAPHICS "emblem-graphics"
+#define EMBLEM_UNDO "edit-undo"
+#define EMBLEM_CLEAR "edit-clear"
+#define EMBLEM_SELECT_ALL "emblem-select-all"
+#define EMBLEM_BOOKMARK "emblem-bookmark"
+#define EMBLEM_TOGGLE "emblem-toggle"
+#define EMBLEM_TRASH_FULL "user-trash-full"
+#define EMBLEM_IMPORTANT "emblem-important"
+#define EMBLEM_NEW_WINDOW "document-new"
+#define EMBLEM_APPLY "ok"
+#define EMBLEM_ABOUT "emblem-about"
+#define EMBLEM_BROKEN "emblem-broken"
+#define EMBLEM_START_HERE "emblem-start-here"
+
+
+
+
+#else
 // VButtonBox.hh
 #define LIST_REMOVE "list-remove"
 #define LIST_ADD "list-add"
@@ -118,4 +162,5 @@
 #define HIGHLIGHT_APP "NE/" SYSTEM_RUN "/2.5/220"
 #define HIGHLIGHT_UP GO_UP "/NW/" GO_JUMP "/2.0/225"
 
+#endif
 #endif

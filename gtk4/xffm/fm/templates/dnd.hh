@@ -264,11 +264,6 @@ static void dropReadDoneCallback(GObject *source_object, GAsyncResult *res, void
   void *(*f)(void *) = (void* (*)(void*))argData[0];
   argData[2] = (void *)bytes;
   f(arg);
-  /*
-  pthread_t thread;
-  pthread_create(&thread, NULL, f, arg);
-  pthread_detach(thread);
-   */
   return;
 }
 
@@ -648,7 +643,7 @@ private:
          "<span color=\"green\">", _("Source"),  ": </span>", source, "\n",
          "<span color=\"black\">", block, "\n</span>", NULL);
       
-      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
 
       for (auto p=files; p && *p; p++){
         if (g_file_test(*p, G_FILE_TEST_IS_DIR)){

@@ -34,7 +34,6 @@ namespace xf {
 //static pthread_mutex_t mntmutex = PTHREAD_MUTEX_INITIALIZER;
 //static GMutex *infomutex=NULL;
 
-
 class FstabDir {
 
   public:

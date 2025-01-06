@@ -20,13 +20,13 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Clear"),(void *) NULL}, 
-        {_("Copy"),(void *) NULL}, 
-        {_("Select All"),(void *) NULL}, 
-        {_("Foreground color"),(void *) NULL}, 
-        {_("Background color"), (void *) NULL},
-        {_("Default Color"),(void *) NULL}, 
-        {_("Show Clipboard"),(void *) NULL}, 
+        {_("Clear"),(void *) EMBLEM_CLEAR}, 
+        {_("Copy"),(void *) EMBLEM_COPY}, 
+        {_("Select All"),(void *) EMBLEM_SELECT_ALL}, 
+        {_("Foreground color"),(void *) EMBLEM_GRAPHICS}, 
+        {_("Background color"), (void *) EMBLEM_GRAPHICS},
+        {_("Default Color"),(void *) EMBLEM_UNDO}, 
+        {_("Show Clipboard"),(void *) EMBLEM_ABOUT}, 
         {NULL, NULL}
       }; 
       return menuIconNames_;

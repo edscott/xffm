@@ -9,7 +9,7 @@ namespace xf
 // Linux files:
 // (/proc/mounts), /proc/partitions
 // 
-template <class DirectoryClass>
+template <class Type>
 class FstabMonitor {
         
   //pthread_cond_t waitCondition_ = PTHREAD_COND_INITIALIZER;
@@ -17,10 +17,10 @@ class FstabMonitor {
   //pthread_mutex_t endMutex_ = PTHREAD_MUTEX_INITIALIZER;
   void **mountArg_ = NULL; 
   char *path_;
-  GridView<DirectoryClass> *gridView_ = NULL;
+  GridView<Type> *gridView_ = NULL;
 
 public:    
-  GridView<DirectoryClass> *gridView(void){ 
+  GridView<Type> *gridView(void){ 
     return gridView_;
   }
   //pthread_cond_t *condition() {return &waitCondition_;}
@@ -35,8 +35,10 @@ public:
         setMountArg();
 
         pthread_t thread;
+      Thread::threadCount(true,  &thread, "FstabMonitor");
         pthread_create(&thread, NULL, mountThreadF1, (void *)mountArg_);
         pthread_detach(thread);
+      Thread::threadCount(false,  &thread, "FstabMonitor");
     }
     FstabMonitor(GridView<FstabDir> *gridview)
     {   
@@ -46,8 +48,10 @@ public:
         setMountArg();
 
         pthread_t thread;
+      Thread::threadCount(true,  &thread, "FstabMonitor2");
         pthread_create(&thread, NULL, mountThreadF2, (void *)mountArg_);
         pthread_detach(thread);
+      Thread::threadCount(false,  &thread, "FstabMonitor2");
     }
     ~FstabMonitor(void){
         // stop mountThread (if still running)
@@ -57,8 +61,10 @@ public:
         g_free(path_);
         // go ahead for mountThread to cleanup.
         pthread_t thread;
+      Thread::threadCount(true,  &thread, "~FstabMonitor");
         pthread_create(&thread, NULL, cleanup, mountArg_);
         pthread_detach(thread);
+      Thread::threadCount(false,  &thread, "~FstabMonitor");
         TRACE("FstabMonitor: destructor done...\n");        
     }
     static void *cleanup(void *data){
@@ -115,7 +121,7 @@ private:
 
 
 
-    static GHashTable *getMntHash(GridView<DirectoryClass> *gridView_p){
+    static GHashTable *getMntHash(GridView<Type> *gridView_p){
       GHashTable *hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
       auto listModel = gridView_p->listModel();
       auto items = g_list_model_get_n_items (listModel);
@@ -137,7 +143,7 @@ private:
       return hash;
     }
 
-    static GHashTable *getFstabHash(GridView<DirectoryClass> *gridView_p){
+    static GHashTable *getFstabHash(GridView<Type> *gridView_p){
       GHashTable *hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
       auto listModel = gridView_p->listModel();
       auto items = g_list_model_get_n_items (listModel);

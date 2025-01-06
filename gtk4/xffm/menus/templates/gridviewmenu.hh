@@ -5,7 +5,7 @@ namespace xf {
   template <class Type> class MenuCallbacks;
   template <class Type> class Workdir;
   class LocalDir;
-  template <class DirectoryClass>
+  template <class Type>
   class GridviewMenu {
     public:
     GridviewMenu(void){}
@@ -43,21 +43,21 @@ namespace xf {
 
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Mount Volume"),(void *) "emblem-greenball"}, 
-        {_("Unmount Volume"),(void *) "emblem-redball"}, 
-        {_("Open in new tab"),(void *) DUAL_VIEW}, 
-        {_("Open with"),(void *) "emblem-run"}, 
-        {_("auto"),(void *) "emblem-run"}, 
-        {_("Rename"),(void *) "document-save-as"}, 
-        {_("Duplicate"),(void *) "document-save"}, 
-        {_("Link"),(void *) SYMLINK}, 
-        {_("Delete"),(void *) "delete"}, 
-        {_("Properties"),(void *) "properties"}, 
-        {_("Copy"),(void *) "copy"}, 
-        {_("Cut"),(void *) "cut"}, 
-        {_("Paste"),(void *) "paste"}, 
-        {_("Add bookmark"),(void *) "emblem-favourite"}, 
-        {_("Remove bookmark"),(void *) "emblem-redball"}, 
+        {_("Mount Volume"),(void *) EMBLEM_GREEN_BALL}, 
+        {_("Unmount Volume"),(void *) EMBLEM_RED_BALL}, 
+        {_("Open in new tab"),(void *) EMBLEM_NEW_TAB}, 
+        {_("Open with"),(void *) EMBLEM_RUN}, 
+        {_("auto"),(void *) EMBLEM_RUN}, 
+        {_("Rename"),(void *) EMBLEM_SAVE_AS}, 
+        {_("Duplicate"),(void *) EMBLEM_SAVE}, 
+        {_("Link"),(void *) EMBLEM_SYMLINK}, 
+        {_("Delete"),(void *) EMBLEM_DELETE}, 
+        {_("Properties"),(void *) EMBLEM_PROPERTIES}, 
+        {_("Copy"),(void *) EMBLEM_COPY}, 
+        {_("Cut"),(void *) EMBLEM_CUT}, 
+        {_("Paste"),(void *) EMBLEM_PASTE}, 
+        {_("Add bookmark"),(void *) EMBLEM_FAVOURITE}, 
+        {_("Remove bookmark"),(void *) EMBLEM_RED_BALL}, 
        {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -66,8 +66,8 @@ namespace xf {
       static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
         {_("Mount Volume"),(void *) mount}, 
         {_("Unmount Volume"),(void *) unmount}, 
-        {_("Toggle Text Mode"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
-        {_("Open in new tab"),(void *) MenuCallbacks<DirectoryClass>::openNewTab}, 
+        {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::popCall}, 
+        {_("Open in new tab"),(void *) MenuCallbacks<Type>::openNewTab}, 
         {_("Open with"),(void *) openWith}, 
         {_("auto"),(void *) run}, 
         {_("Duplicate"),(void *) duplicate}, 
@@ -75,7 +75,7 @@ namespace xf {
         {_("Rename"),(void *) move}, 
         {_("Copy"),(void *) copy}, 
         {_("Cut"),(void *) cut}, 
-        {_("Paste"),(void *) MenuCallbacks<DirectoryClass>::paste}, 
+        {_("Paste"),(void *) MenuCallbacks<Type>::paste}, 
         {_("Delete"),(void *) remove}, 
         {_("Add bookmark"),(void *) addB}, 
         {_("Remove bookmark"),(void *) removeB}, 
@@ -148,9 +148,9 @@ namespace xf {
         TRACE("path is %s\n", path);
         Bookmarks::addBookmark(path);
         g_free(path);
-        auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         const char *p = gridView_p->path();
-        Workdir<DirectoryClass>::setWorkdir(p);
+        Workdir<Type>::setWorkdir(p);
         
       }
     }
@@ -162,9 +162,9 @@ namespace xf {
       if (path) {
         Bookmarks::removeBookmark(path);
         g_free(path);
-        auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         const char *p = gridView_p->path();
-        Workdir<DirectoryClass>::setWorkdir(p);
+        Workdir<Type>::setWorkdir(p);
       }
     }
 
@@ -175,7 +175,7 @@ namespace xf {
       auto path = getPath(menu);
 
       if (!path) {
-        auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         auto selectionList = gridView_p->getSelectionList();
         if (selectionList) {
           TRACE("selectionList = %p\n", selectionList);
@@ -198,7 +198,7 @@ namespace xf {
       
       auto folder = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
       auto parent = GTK_WINDOW(MainWidget);
-      new Mount<DirectoryClass>(parent, folder, path);
+      new Mount<Type>(parent, folder, path);
       g_free(folder);
       g_free(path);
     }
@@ -214,9 +214,10 @@ namespace xf {
     static void *umountThreadMaster(void *data){
       pthread_t thread;
       pthread_create(&thread, NULL, umountThread, (void *)data);
+      Thread::threadCount(true,  &thread, "umountThreadMaster");
       void *retval;
       pthread_join(thread, &retval);
-      // FIXME: we need to monitor the fstab directory to update emblems... 
+      Thread::threadCount(false,  &thread, "umountThreadMaster");
       return NULL;
     }
 
@@ -227,8 +228,10 @@ namespace xf {
       if (!path) return;
       else {TRACE("unmount item %s\n", path);}
       pthread_t thread;
+      Thread::threadCount(true,  &thread, "unmount");
       pthread_create(&thread, NULL, umountThreadMaster, (void *)path);
       pthread_detach(thread);
+      Thread::threadCount(false,  &thread, "umountThreadMaster");
     }
    
     static void duplicate(GtkButton *button, void *data){
@@ -264,7 +267,7 @@ namespace xf {
     static void remove(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
 
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
@@ -285,7 +288,7 @@ namespace xf {
     static void copy(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
@@ -306,7 +309,7 @@ namespace xf {
     static void cut(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
@@ -339,17 +342,17 @@ namespace xf {
       auto e = Basic::esc_string (path);
 
       if (inTerminal) {
-        command = Run<DirectoryClass>::mkTerminalLine(defaultApp, e);
+        command = Run<Type>::mkTerminalLine(defaultApp, e);
       }
       else {
-        command = Run<DirectoryClass>::mkCommandLine(defaultApp, e);
+        command = Run<Type>::mkCommandLine(defaultApp, e);
       }
       g_free(e);
 
       TRACE("run %s \n", command);
       auto output = Child::getOutput();
       auto buttonSpace = Child::getButtonSpace();
-      Prompt<DirectoryClass>::run(output, command, true, true, buttonSpace);
+      Prompt<Type>::run(output, command, true, true, buttonSpace);
       //object->prompt_p->run(output, command, true, true, object->buttonSpace);
       //object->prompt_p->run(output, command, true, true, object->buttonSpace);
       g_free(command);

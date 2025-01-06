@@ -156,6 +156,7 @@ private:
         arg[3] = (void *)progressObject;
 
         // This thread is managed out of Thread, as it is joinable.
+        Thread::threadCount(true,  &thread, "Gio::thread1");
         if (pthread_create(&thread, NULL, thread2,data) != 0){
             ERROR("thread1(): Unable to create thread2\n");
         } 
@@ -167,6 +168,7 @@ private:
         if (pthread_join(thread, &retval)!=0){
             ERROR("thread1(): Unable to join thread1\n");
         }
+        Thread::threadCount(false,  &thread, "Gio::thread1");
         asyncReference--;
 
 

@@ -214,6 +214,12 @@ public:
         g_free(dbg_text_);
     }
 
+    static void
+    threadCount(gboolean increment, pthread_t *thread_p, const gchar *dbg_text ){
+        // do this in a thread so gtk thread does not block
+       inc_dec_view_ref(increment, thread_p, dbg_text );
+    }
+
 private:
 
     pthread_t *
@@ -256,10 +262,10 @@ private:
         pthread_mutex_lock(&inc_dec_mutex);
         if (increment) {
             thread_count++;
-            DBG_T("Thread count is %d added 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
+            DBG("Thread count is %d added 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
         } else {
             thread_count--;
-            DBG_T("Thread count is %d removed 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
+            DBG("Thread count is %d removed 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
         }
         pthread_mutex_unlock(&inc_dec_mutex);
     }

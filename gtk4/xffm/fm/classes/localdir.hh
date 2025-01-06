@@ -2,6 +2,8 @@
 #define LOCALDIR_HH
 namespace xf {
 
+  template <class Type> class GridView;
+  
   class LocalDir {
 
     public:
@@ -33,6 +35,7 @@ namespace xf {
 
 
         GFile *file = g_file_new_for_path(path); // unreffed with monitor destroy.
+        g_object_set_data(G_OBJECT(store), "file", file);
         GFileEnumerator *dirEnum = 
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
@@ -63,6 +66,7 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
           g_free(_path);
         } while (true);
 
+        /* moved to gridview.hh 
         auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
         g_object_set_data(G_OBJECT(monitor), "file", file);
         Child::addMonitor(monitor);
@@ -80,6 +84,8 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
                 G_CALLBACK (changed_f), (void *)store);
         }
         g_object_set_data(G_OBJECT(store), "monitor", monitor);
+        */
+
         return getSelectionModel(G_LIST_MODEL(store), true, flags);
       }
 
@@ -215,7 +221,7 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
         TRACE("*** offset is %d, store position = %d, model position is %d\n", offset, positionS, *positionM);
         return true;
       }
-    private:
+    public:
       static bool findPositionStore(GListStore *store, const char *path, guint *positionS, int flags){ 
         // result will be offset by hidden items.
         GFileInfo *infoF = g_file_info_new();
@@ -303,166 +309,8 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
           }
       }*/
 
-      static void
-      changed_f ( GFileMonitor* self,  
-          // This runs in main context, I presume.
-          GFile* first, GFile* second, //same as GioFile * ?
-          GFileMonitorEvent event, 
-          void *data){
 
-        // Switch to pause monitor execution.
-        pthread_mutex_lock(&monitorMutex);   
-        auto inactive = g_object_get_data(G_OBJECT(self), "inactive");
-        pthread_mutex_unlock(&monitorMutex);   
-        if (inactive) {
-          DBG("monitor %p inactive\n", self);
-          return;
-        }
-        //auto gridView_p = (GridView<DirectoryClass> * )data;
-        //auto store = gridView_p->store();
-        GListStore *store = G_LIST_STORE(data);
-        auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
-        if (!child){
-          DBG("localdir.hh::changed_f(): this should not happen\n");
-          exit(1);
-        }
-        TRACE("*** monitor changed_f call \n");
-        gchar *f= first? g_file_get_path (first):g_strdup("--");
-        gchar *s= second? g_file_get_path (second):g_strdup("--");
-
-      /*  GError *error_=NULL;
-        GFileInfo *infoF = first? g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED", 
-            G_FILE_QUERY_INFO_NONE, NULL, &error_):NULL;
-        if (error_){
-          DBG("Error: %s\n", error_->message);
-          g_error_free(error_);
-          return;
-        }*/
-
-        /* if (inactive){
-             DBG("monitor_f(): monitor not currently active.\n");
-             return;
-        }
-        if (p->view()->serial() != p->serial()){
-            DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",p->view()->serial(), p->serial());
-            return;
-        }*/
-
-        bool verbose = false;
-        guint positionF;
-        auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
-        auto dirPath = g_file_get_path(dirFile);
-        int flags = Settings::getInteger("flags", dirPath); 
-        if (flags < 0) flags = 0;
-        g_free(dirPath);
-        
-        //if (verbose) DBG("monitor thread %p...\n", g_thread_self());
-         switch (event){
-            case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
-              {
-                //if (verbose) 
-                {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = findPositionStore(store, f, &positionF, flags);
-                if (found) {
-                   Child::incrementSerial(child);
-                   g_list_store_remove(store, positionF);
-                   Child::incrementSerial(child);
-                   insert(store, f, verbose);                        
-                } else {
-                  DBG("%s not found!\n", f);
-                }
-
-                //p->restat_item(f);
-              } 
-                break;
-            case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
-                if (verbose) {DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);}
-                break;
-            case G_FILE_MONITOR_EVENT_UNMOUNTED:
-                if (verbose) {DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                break;
-
-            case G_FILE_MONITOR_EVENT_DELETED:
-            case G_FILE_MONITOR_EVENT_MOVED_OUT:
-                {
-                  //if (verbose) 
-                  {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
-                  auto found = findPositionStore(store, f, &positionF, flags);
-                  if (found) {
-                    Child::incrementSerial(child);
-                    g_list_store_remove(store, positionF);
-                  }
-                }
-                break;
-
-            case G_FILE_MONITOR_EVENT_CREATED:
-            case G_FILE_MONITOR_EVENT_MOVED_IN:
-                {
-                  //if (verbose) 
-                  {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                  if (!g_file_test(f, G_FILE_TEST_EXISTS)){
-                    if (!g_file_test(f, G_FILE_TEST_IS_SYMLINK)) {
-                      if (verbose) {DBG("Ghost file: %s\n", f);}
-                      g_free(f);
-                      g_free(s);
-                      return;
-                    }
-                  }
-               /*   auto found = findPositionStore(store, f, &positionF, flags);
-                  if (found){
-                    Child::incrementSerial(child);
-                    g_list_store_remove(store, positionF);
-                  }*/
-                  // add updated info.
-                  Child::incrementSerial(child);
-                  insert(store, f, verbose);
-                }
-                break;
-            case G_FILE_MONITOR_EVENT_CHANGED:
-            {
-                if (verbose) {DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                //p->restat_item(f);
-            } break;
-            case G_FILE_MONITOR_EVENT_MOVED:
-            case G_FILE_MONITOR_EVENT_RENAMED:
-            {
-                //if (verbose) 
-                {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found1 = findPositionStore(store, s, &positionF, flags);
-                if (found1){
-                  Child::incrementSerial(child);
-                  g_list_store_remove(store, positionF);
-                }
-                auto found2 = findPositionStore(store, f, &positionF, flags);
-                if (found2){
-                  Child::incrementSerial(child);
-                  g_list_store_remove(store, positionF);
-                  Child::incrementSerial(child);
-                  insert(store, s, verbose);           
-                }
-            }
-                  
-
-
-
-                //p->add2reSelect(f); // Only adds to selection list if item is selected.
-                //p->remove_item(first); 
-
-                //if (!isInModel(p->treeModel(), s)){
-                    //p->add_new_item(second);
-                //} //else p->restat_item(s);
-                break;
-            case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
-                if (verbose) {DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);}
-
-                //p->reSelect(f); // Will only select if in selection list (from move).
-                break;       
-        }
-        g_free(f);
-        g_free(s);
-       
-
-      }
+private:
 
       static gboolean equal_f (gconstpointer a, gconstpointer b){
         auto A = G_FILE_INFO(a);

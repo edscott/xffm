@@ -5,12 +5,12 @@
 // item_get_item is GFileInfo
 // item_get child is GtkWidget
 namespace xf {
-template <class DirectoryClass>
+template <class Type>
   class Factory {
     public:
       /* {{{ Factory callbacks */
       static void
-      factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+      factoryTeardown(GtkSignalListItemFactory *self, GObject *object, GridView<Type> *gridView_p){
         TRACE("factoryTeardown...\n");
         GtkListItem *list_item = GTK_LIST_ITEM(object);
         GtkBox *vbox = GTK_BOX(gtk_list_item_get_child( list_item ));
@@ -21,7 +21,7 @@ template <class DirectoryClass>
      }
 
       static void
-      factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+      factorySetup(GtkSignalListItemFactory *self, GObject *object, GridView<Type> *gridView_p){
         // object is a GtkListItem!
         //TRACE("factorySetup...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
         auto box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -91,7 +91,7 @@ template <class DirectoryClass>
       }
 
       static void
-      factoryUnbind(GtkSignalListItemFactory *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+      factoryUnbind(GtkSignalListItemFactory *self, GObject *object, GridView<Type> *gridView_p){
         TRACE("factoryUnbind...\n");
         //THREADPOOL->clear();
         //Child::incrementSerial();
@@ -105,7 +105,7 @@ template <class DirectoryClass>
 
       /* The bind function for the factory */
       static void
-      factoryBind(GtkSignalListItemFactory *factory, GObject *object, GridView<DirectoryClass> *gridView_p)
+      factoryBind(GtkSignalListItemFactory *factory, GObject *object, GridView<Type> *gridView_p)
       {
         //TRACE("factoryBind...object=%p GtkListItem=%p\n", object, GTK_LIST_ITEM(object));
        
@@ -162,13 +162,12 @@ template <class DirectoryClass>
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
-            auto emblem = SYMLINK;
             struct stat st;
             if (stat(path, &st) < 0) {
-              auto paintable = Texture<bool>::load("emblem-broken");
-              texture = Texture<bool>::addEmblem(paintable,  emblem, scaleFactor*size, scaleFactor*size);
+              auto paintable = Texture<bool>::load(EMBLEM_BROKEN);
+              texture = Texture<bool>::addEmblem(paintable,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
             } else {
-              texture = Texture<bool>::addEmblem(info,  emblem, scaleFactor*size, scaleFactor*size);
+              texture = Texture<bool>::addEmblem(info,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
             }
           } else { // simple
             auto gfiletype= g_file_info_get_file_type (info);
@@ -180,7 +179,7 @@ template <class DirectoryClass>
                 {
                   bool isMounted = false; // FIXME with fstab routine
                   texture = Texture<bool>::addEmblem(info,  
-                      isMounted?"emblem-greenball":"emblem-blueball", 
+                      isMounted? EMBLEM_GREEN_BALL : EMBLEM_RED_BALL, 
                       scaleFactor*size, scaleFactor*size);
                 }
                 break;
@@ -201,7 +200,7 @@ template <class DirectoryClass>
 
         if (type == G_FILE_TYPE_DIRECTORY ) {
           // not much use, really.
-          //DirectoryClass::addDirectoryTooltip(image, info);
+          //Type::addDirectoryTooltip(image, info);
         }
 
         char buffer[128];
@@ -251,13 +250,13 @@ template <class DirectoryClass>
           gtk_label_set_markup(label, markup);
           g_free(markup);
           
-          //DirectoryClass::addLabelTooltip(GTK_WIDGET(label), path);
+          //Type::addLabelTooltip(GTK_WIDGET(label), path);
         }
         // gtk drag (deprecated for low level gdk_drag)
         /*GtkDragSource *source = gtk_drag_source_new ();
-        g_signal_connect (source, "prepare", G_CALLBACK (Dnd<DirectoryClass>::image_drag_prepare),gridView_p);
+        g_signal_connect (source, "prepare", G_CALLBACK (Dnd<Type>::image_drag_prepare),gridView_p);
         
-        g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<DirectoryClass>::image_drag_begin), image);
+        g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<Type>::image_drag_begin), image);
         gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));*/
         
 
@@ -321,7 +320,7 @@ template <class DirectoryClass>
         return FALSE;
     }
     
-    static void addGestureClickMenu(GtkWidget *box, GObject *object, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickMenu(GtkWidget *box, GObject *object, GridView<Type> *gridView_p){
       TRACE("addGestureClickMenu; object=%p\n", gridView_p);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
@@ -333,7 +332,7 @@ template <class DirectoryClass>
 
     }    
 /*    
-    static void addGestureClickDownBox(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickDownBox(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
@@ -346,7 +345,7 @@ template <class DirectoryClass>
 
     }    
 */
-    static void addGestureClickLong(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickLong(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_long_press_new();
       gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 1.0);
@@ -355,7 +354,7 @@ template <class DirectoryClass>
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }
-    static void addGestureClickLongMenu(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickLongMenu(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_long_press_new();
       gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 2.0);
@@ -365,7 +364,7 @@ template <class DirectoryClass>
           GTK_PHASE_CAPTURE);
     }
 /*    
-    static void addGestureClickDownLabel(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickDownLabel(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
@@ -378,7 +377,7 @@ template <class DirectoryClass>
 
     }    
   */  
-    static void addGestureClickDown(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickDown(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
@@ -391,7 +390,7 @@ template <class DirectoryClass>
 
     }    
     
-    static void addGestureClickDown3(GtkWidget *self, GObject *item, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickDown3(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
@@ -404,7 +403,7 @@ template <class DirectoryClass>
 
     }    
     
-    static void addGestureClickUp(GtkWidget *box, GObject *object, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickUp(GtkWidget *box, GObject *object, GridView<Type> *gridView_p){
       TRACE("addGestureClickUp; object=%p\n", object);
       g_object_set_data(G_OBJECT(box), "gridView_p", gridView_p);
       auto gesture = gtk_gesture_click_new();
@@ -417,8 +416,10 @@ template <class DirectoryClass>
     }   
 
     static gboolean
-    openMenu(GtkEventController *eventController, GridView<DirectoryClass> *gridView_p, double y){
-      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+    openMenu(GtkEventController *eventController, GridView<Type> *gridView_p, double y){
+      // This is main context, gridview changes would also be main context.
+      if (!Child::validGridView(gridView_p)) return true;
+      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
       d->dragOn(true);
       
       auto box = gtk_event_controller_get_widget(eventController);
@@ -471,7 +472,7 @@ template <class DirectoryClass>
         auto menuBox2 = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox2"));
         gridView_p->placeMenu( menuBox2, gridView_p);
       } else { // null selection list
-        MainWindow<DirectoryClass>::clickMenu(mainMenuButton, NULL);
+        MainWindow<Type>::clickMenu(mainMenuButton, NULL);
       }
 
       Basic::freeSelectionList(selectionList);
@@ -487,7 +488,7 @@ template <class DirectoryClass>
               gdouble x,
               gdouble y,
               void *data){
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
@@ -500,7 +501,7 @@ template <class DirectoryClass>
       return openMenu(eventController, gridView_p, y);
     }
   
-   static bool selectWidget(GtkWidget *w, GridView<DirectoryClass> *gridView_p, bool unselectOthers){
+   static bool selectWidget(GtkWidget *w, GridView<Type> *gridView_p, bool unselectOthers){
       auto store = gridView_p->store();
       guint positionF;
       auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
@@ -533,7 +534,7 @@ template <class DirectoryClass>
 
    static bool 
    skipRename(GtkGestureLongPress* self,void *data){
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       auto xffmRoot = g_object_get_data(G_OBJECT(gridView_p->store()), "xffm::root");
       auto xffmFstab = g_object_get_data(G_OBJECT(gridView_p->store()), "xffm::fstab");
       if (xffmRoot || xffmFstab) return true;
@@ -553,7 +554,7 @@ template <class DirectoryClass>
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
       auto modType = gdk_event_get_modifier_state(event);
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       
       if (modType & GDK_CONTROL_MASK) {
         auto xffmRoot = g_object_get_data(G_OBJECT(gridView_p->store()), "xffm::root");
@@ -587,7 +588,7 @@ template <class DirectoryClass>
               gdouble x,
               gdouble y,
               void *data){
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       auto currentSerial = Child::getSerial();
       if (longPressSerial != currentSerial){ // Invalid read of size 4
         TRACE("longPress_f(): Current serial mismatch %d != %d. Dropping longPress_f.\n", 
@@ -644,7 +645,7 @@ template <class DirectoryClass>
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
       auto modType = gdk_event_get_modifier_state(event);
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       longPressSerial = Child::getSerial();
       gridView_p->x(x);
       gridView_p->y(y);
@@ -659,7 +660,7 @@ template <class DirectoryClass>
           x,y,bounds.origin.x,bounds.origin.y,
           gridView_p->X(),gridView_p->Y());
 
-      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
 
       if (button == 1){
         auto store = gridView_p->store();

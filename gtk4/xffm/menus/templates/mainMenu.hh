@@ -47,22 +47,21 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Empty trash bin"),(void *) "user-trash-full"}, 
-        {_("Paste"),(void *) "paste"}, 
-        {_("Select All"),(void *) "add"}, 
-        {_("Add bookmark"),(void *) "emblem-bookmark"}, 
-        {_("Remove bookmark"),(void *) "emblem-bookmark"}, 
-        {_("Toggle Text Mode"),(void *) "emblem-fifo"}, 
-        {_("Show/hide grid."),(void *)"media-view-subtitles" }, 
+        {_("Empty trash bin"),(void *) EMBLEM_TRASH_FULL}, 
+        {_("Paste"),(void *) EMBLEM_PASTE}, 
+        {_("Select All"),(void *) EMBLEM_SELECT_ALL}, 
+        {_("Add bookmark"),(void *) EMBLEM_BOOKMARK}, 
+        {_("Remove bookmark"),(void *) EMBLEM_BOOKMARK}, 
+        {_("Toggle Text Mode"),(void *) EMBLEM_TOGGLE}, 
         {_("Search"),(void *) SEARCH}, 
         {_("Open terminal"),(void *) OPEN_TERMINAL}, 
         {_("Home"),(void *) GO_HOME}, 
-        {_("Show Clipboard"),(void *) "emblem-important"}, // 
+        {_("Show Clipboard"),(void *) EMBLEM_IMPORTANT}, // 
         {_("Clear Clipboard History"),(void *) EDIT_CLEAR}, // 
-        {_("Open in New Window"),(void *)"new"}, 
+        {_("Open in New Window"),(void *)EMBLEM_NEW_WINDOW}, 
         {_("Color settings"),(void *)DOCUMENT_PROPERTIES}, 
         {_("Exit"),(void *)  WINDOW_SHUTDOWN},
-        {_("Apply modifications"),(void *) "apply"},
+        {_("Apply modifications"),(void *) EMBLEM_APPLY},
         {NULL, NULL}
       }; 
       return menuIconNames_;

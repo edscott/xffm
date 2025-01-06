@@ -81,7 +81,9 @@ namespace xf {
 
     static bool
     validGridView(void *gridView_p){
+      // This is main context, any new gridview should also come from main context.
       if (!gridView_p) return false;
+      
       int retval = 0;
       if (!gridViewHash) return false;
       // lock must be obtained by calling thread! lockGridView("validGridView");

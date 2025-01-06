@@ -4,7 +4,7 @@
 
 #include <gio/gio.h>
 namespace xf {
-class DirectoryClass;
+class Type;
 
 template <class MainClass> 
 class MainWindow: public FMbuttonBox {
@@ -417,7 +417,7 @@ private:
 public:
     static void clickMenu(GtkButton *widget, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu"));
-      auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       setupMenu(menu, gridView_p);
       auto basename = g_path_get_basename( gridView_p->path());     
       auto markup = g_strconcat("<b><span color=\"blue\">", _("Directory name: "),
@@ -431,10 +431,10 @@ public:
     }
 private:
 
-    static void setupMenu(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
+    static void setupMenu(GtkPopover *popover, GridView<Type> *gridView_p){
       auto path = gridView_p->path();
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
-      GridviewMenu<DirectoryClass> d;
+      GridviewMenu<Type> d;
       /*for (auto keys = d.keys(); keys && *keys; keys++){
         auto item = g_object_get_data(G_OBJECT(popover), *keys);
         gtk_widget_set_visible(GTK_WIDGET(item), false);

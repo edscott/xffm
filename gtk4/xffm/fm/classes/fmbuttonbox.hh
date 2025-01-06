@@ -3,12 +3,7 @@
 //#define BUTTON_CALLBACK(X)  G_CALLBACK((void (*)(GtkWidget *,GdkDragContext *,gpointer)) X)
 namespace xf {
   template <class Type> class MenuCallbacks;
-  class EmptyButtonBox{
-    public:
-    GtkBox *mkVbuttonBox(){
-      return GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));  
-    }
-  };
+
   class FMbuttonBox{
     private:
       GtkBox *vButtonBox_;

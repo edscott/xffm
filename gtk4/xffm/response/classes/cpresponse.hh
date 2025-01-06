@@ -89,8 +89,10 @@ class cpDropResponse {
       arg[1] = (void *)list;
       arg[2] = (void *)g_strdup(target);
       pthread_t thread;
+      Thread::threadCount(true,  &thread, "performPasteAsync");
       pthread_create(&thread, NULL, thread1, arg);
       pthread_detach(thread);
+      Thread::threadCount(false,  &thread, "performPasteAsync");
 
       // clipboard contents no longer needed
       c->clearClipBoard();
@@ -102,9 +104,11 @@ private:
     void **arg = (void **)data;
     auto dialogObject = (DialogDrop<cpDropResponse> *)arg[0];
     pthread_t thread;
+      Thread::threadCount(true,  &thread, "thread1");
     pthread_create(&thread, NULL, thread2, data);
     void *retval;
     pthread_join(thread, &retval);
+      Thread::threadCount(false,  &thread, "thread1");
     TRACE("thread2 joined, copy complete.\n");
     dialogObject->lockCondition();
     TRACE("thread2 pthread_cond_signal.\n");

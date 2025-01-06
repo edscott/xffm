@@ -16,9 +16,9 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {_("Foreground color"),(void *) NULL}, 
-        {_("Background color"), (void *) NULL},
-        {_("CuDefault Colorst"),(void *) NULL}, 
+        {_("Foreground color"),(void *) EMBLEM_GRAPHICS}, 
+        {_("Background color"), (void *) EMBLEM_GRAPHICS},
+        {_("Default Colors"),(void *) EMBLEM_UNDO}, 
         {NULL, NULL}
       }; 
       return menuIconNames_;

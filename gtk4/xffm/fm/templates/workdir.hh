@@ -1,7 +1,7 @@
 #ifndef WORKDIR_HH
 #define WORKDIR_HH
 namespace xf {
-  template <class DirectoryClass>
+  template <class Type>
   class Workdir  {
     private:
       static void  updateGridView(const char *path){
@@ -9,7 +9,7 @@ namespace xf {
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
        
        // cancel monitor if any 
-        auto oldObject = (GridView<DirectoryClass> *)Child::getGridviewObject();
+        auto oldObject = (GridView<Type> *)Child::getGridviewObject();
         if (oldObject){
           auto fstabMonitor = oldObject->fstabMonitor();
           if (fstabMonitor){
@@ -62,7 +62,7 @@ namespace xf {
           if (oldObject) delete oldObject;
           Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
         } else {
-          auto viewObject = new GridView<LocalDir>(path, (void *)gridViewClick);
+          auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick);
           TRACE("new object: %p\n", viewObject);
           viewObject->child(child);
           auto store = viewObject->listStore();
@@ -81,7 +81,7 @@ namespace xf {
           auto oldObject = Child::getGridviewObject();
           TRACE("oldObject: %p\n", oldObject);
           if (oldObject) {
-            auto object = (GridView<DirectoryClass> *) oldObject;
+            auto object = (GridView<Type> *) oldObject;
             delete object;
           }
           Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
@@ -129,7 +129,7 @@ char buffer[4096];
         g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       }
       Child::setWindowTitle(child);
-      UtilPathbar<DirectoryClass>::updatePathbar(false, (void *)pathbar_go);
+      UtilPathbar<Type>::updatePathbar(false, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -141,7 +141,7 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      UtilPathbar<DirectoryClass>::updatePathbar(true, (void *)pathbar_go);
+      UtilPathbar<Type>::updatePathbar(true, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -153,7 +153,7 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      UtilPathbar<DirectoryClass>::updatePathbar(updateHistory, (void *)pathbar_go);
+      UtilPathbar<Type>::updatePathbar(updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -167,7 +167,7 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      UtilPathbar<DirectoryClass>::updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
+      UtilPathbar<Type>::updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
       updateGridView(path);
       return true;
     }
@@ -179,7 +179,7 @@ char buffer[4096];
               gdouble y,
               gpointer object){
         
-      auto d = (Dnd<DirectoryClass> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<Type> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
       d->dropDone(true);
       d->dragOn(true);
 
@@ -187,7 +187,7 @@ char buffer[4096];
       auto event = gtk_event_controller_get_current_event(eventController);
       auto box = gtk_event_controller_get_widget(eventController);
       
-      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(box), "gridView_p");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(box), "gridView_p");
 
       //gridView_p->x,y are in gridview's frame of reference.
       double distance = sqrt(pow(gridView_p->x() - x,2) + pow(gridView_p->y() - y,2));
@@ -205,7 +205,7 @@ char buffer[4096];
       // proceed with double click action...
       /*
       auto imageBox = gtk_event_controller_get_widget(eventController);
-      auto gridView_p = (GridView<DirectoryClassType> *)g_object_get_data(G_OBJECT(imageBox), "gridView_p");
+      auto gridView_p = (GridView<TypeType> *)g_object_get_data(G_OBJECT(imageBox), "gridView_p");
       auto store = gridView_p->store();
       guint positionF;
       auto item = gtk_list_item_get_item(GTK_LIST_ITEM(object));
@@ -256,7 +256,7 @@ char buffer[4096];
           TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
         }
         auto parent = GTK_WINDOW(MainWidget);
-        new EFS<DirectoryClass>(parent, mountDir);
+        new EFS<Type>(parent, mountDir);
         g_free(mountDir);
 
         return TRUE;
@@ -345,14 +345,14 @@ char buffer[4096];
             TRACE("***clickpath=%s\n", path);
             GtkMenu *menu = NULL;
             if (g_file_test(path, G_FILE_TEST_IS_DIR)){ 
-                menu = LocalPopUp<DirectoryClass>::popUp();
-                Popup<DirectoryClass>::setWidgetData(menu, "path", path);
+                menu = LocalPopUp<Type>::popUp();
+                Popup<Type>::setWidgetData(menu, "path", path);
                 g_object_set_data(G_OBJECT(menu),"view", NULL);
-                BaseSignals<DirectoryClass>::configureViewMenu(LOCALVIEW_TYPE);
+                BaseSignals<Type>::configureViewMenu(LOCALVIEW_TYPE);
             } else {
                 // do Bookmarks menu
-                RootPopUp<DirectoryClass>::resetPopup();
-                menu = RootPopUp<DirectoryClass>::popUp();
+                RootPopUp<Type>::resetPopup();
+                menu = RootPopUp<Type>::popUp();
             }
             if (menu) {
                 gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);

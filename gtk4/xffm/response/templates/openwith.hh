@@ -7,7 +7,7 @@ template <class Type> class Run;
 
 template <class Type>
 class OpenWith {
-    
+   using dialog_t = DialogBasic<LocalDir >;
     GtkEventController *raiseController_ = NULL;
     GtkWindow *dialog_;
     GtkWindow *parent_= GTK_WINDOW(MainWidget);
@@ -57,7 +57,7 @@ protected:
       gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);
       g_signal_connect (G_OBJECT (raiseController_), "enter", 
-              G_CALLBACK (DialogBasic<LocalDir>::presentDialog), dialog_);      
+              G_CALLBACK (dialog_t::presentDialog), dialog_);      
     }
      
     static void *unsetRaise_f(void *data){

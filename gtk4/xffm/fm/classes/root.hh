@@ -1,7 +1,6 @@
 #ifndef ROOTDIR_HH
 #define ROOTDIR_HH
 namespace xf {
-
   class rootDir {
     public:
       static GtkMultiSelection *rootSelectionModel(void){
@@ -35,7 +34,7 @@ namespace xf {
           auto text = g_strdup_printf("%s ecryptfs", _("New"));
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           //auto iconPath = Texture<bool>::findIconPath("folder");
-          auto paintable = Texture<bool>::addEmblem("folder", "emblem-start-here", scaleFactor*size, scaleFactor*size);
+          auto paintable = Texture<bool>::addEmblem("folder", EMBLEM_START_HERE, scaleFactor*size, scaleFactor*size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));      
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
@@ -72,9 +71,10 @@ namespace xf {
            
           int size = Settings::getInteger("xfterm", "iconsize");
           //const char *iconPath = Texture<bool>::findIconPath("folder-remote");
-          const char *ball = "emblem-noaccess";
-          if (FstabUtil::isMounted(*p)) ball = "emblem-greenball";
-          auto paintable = Texture<bool>::addEmblem("folder-remote", ball, size, size);
+          const char *ball = EMBLEM_NOACCESS;
+          if (FstabUtil::isMounted(*p)) ball = EMBLEM_GREEN_BALL;
+          auto paintable = Texture<bool>::addEmblem("folder", ball, size, size);
+// breeze bug? auto paintable = Texture<bool>::addEmblem("folder-remote", ball, size, size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));
           g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
           g_file_info_set_attribute_object (info, "xffm::efs", G_OBJECT(file));

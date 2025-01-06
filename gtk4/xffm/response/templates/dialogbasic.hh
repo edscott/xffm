@@ -156,8 +156,10 @@ namespace xf
     int run(){
       TRACE("*** run...\n");
       pthread_t thread;
+      Thread::threadCount(true,  &thread, "DialogBasic::run");
       int retval = pthread_create(&thread, NULL, runWait_f, this);
       pthread_detach(thread);
+      Thread::threadCount(false,  &thread, "DialogBasic::run");
       TRACE("run detached...\n");
 
       return 0;
@@ -217,9 +219,11 @@ private:
 
       TRACE("runWait_f...\n");
       pthread_t thread;
+      Thread::threadCount(true,  &thread, "DialogBasic::runWait_f");
       int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
       void *response_p;
       pthread_join(thread, &response_p);
+      Thread::threadCount(false,  &thread, "DialogBasic::runWait_f");
       TRACE("run joined, *response_p = %p\n", response_p);
       // 
       delete dialogObject;

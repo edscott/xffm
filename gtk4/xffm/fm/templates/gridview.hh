@@ -4,10 +4,9 @@ static GdkDragAction dndStatus = GDK_ACTION_COPY;
 
 
 namespace xf {
-//template <class Type> class FstabDir;
 template <class Type> class Dnd;
 template <class Type> class FstabMonitor;
-template <class DirectoryClass>
+template <class Type>
   class GridView  {
       GtkWidget *child_=NULL;
       GtkMultiSelection *selectionModel_ = NULL;
@@ -15,17 +14,17 @@ template <class DirectoryClass>
       void *gridViewClick_f_=NULL;
       char *path_=NULL;
       // myMenu is for processing keys for individual widget popovers
-      Menu<GridviewMenu<DirectoryClass> > *myMenu_=NULL;
+      Menu<GridviewMenu<Type> > *myMenu_=NULL;
       int maxNameLen_ = 0;
       double x_ = 0.0; // factory widget
       double y_ = 0.0;
       double X_ = 0.0; // main widget
       double Y_ = 0.0;
       int flags_=0;
-      FstabMonitor<DirectoryClass> *fstabMonitor_ = NULL;
+      FstabMonitor<Type> *fstabMonitor_ = NULL;
       GFileMonitor *monitor_ = NULL;
   public:
-      FstabMonitor<DirectoryClass> *fstabMonitor(void){return fstabMonitor_;}
+      FstabMonitor<Type> *fstabMonitor(void){return fstabMonitor_;}
 
       GFileMonitor *monitor(void){return monitor_;}
       void monitor(GFileMonitor *monitor){monitor_ = monitor;}
@@ -72,7 +71,7 @@ template <class DirectoryClass>
         if (flags_ < 0) flags_ = 0;
         TRACE("gridview flags = 0x%x\n", flags_);
         
-        myMenu_ = new Menu<GridviewMenu<DirectoryClass> >("foo");
+        myMenu_ = new Menu<GridviewMenu<Type> >("foo");
         addGestureClickView1(view_, NULL, this);// unselect all on release
         //addGestureDown(view_, NULL, this);// 
         addGestureClickView3(view_, NULL, this); // menu 
@@ -81,18 +80,18 @@ template <class DirectoryClass>
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
           fstabMonitor_ = NULL;
         } else if (g_object_get_data(G_OBJECT(store()), "xffm::fstab")){
-          fstabMonitor_ = new FstabMonitor<DirectoryClass>(this); 
+          fstabMonitor_ = new FstabMonitor<Type>(this); 
         } else {
-          fstabMonitor_ = new FstabMonitor<DirectoryClass>(this); 
+          fstabMonitor_ = new FstabMonitor<Type>(this); 
         } 
 
-        //auto dropController = Dnd<DirectoryClass>::createDropController(this);
+        //auto dropController = Dnd<Type>::createDropController(this);
         //gtk_widget_add_controller (GTK_WIDGET (view_), GTK_EVENT_CONTROLLER (dropController));
       }
 
       ~GridView(void){
         Child::removeGridView((void *)this);
-      TRACE("GridView<DirectoryClass> destructor\n");
+      TRACE("GridView<Type> destructor\n");
         //if (menu_){
           // menu_ goes down with gridview. No need to
           //       unparent or
@@ -128,9 +127,11 @@ template <class DirectoryClass>
       getGridView(){
         auto child = Child::getChild();
         selectionModel_ = NULL;
-        if (strcmp(path_, _("Bookmarks"))==0) {
+        bool isBookmarks = (strcmp(path_, _("Bookmarks"))==0);
+        bool isFstab = (strcmp(path_, _("Disk Mounter"))==0);
+        if (isBookmarks) {
           selectionModel_ = rootDir::rootSelectionModel();
-        } else if (strcmp(path_, _("Disk Mounter"))==0) {
+        } else if (isFstab) {
           selectionModel_ = FstabDir::fstabSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
@@ -147,10 +148,10 @@ template <class DirectoryClass>
 
         /* Connect handler to the factory.
          */
-        g_signal_connect( factory, "setup", G_CALLBACK(Factory<DirectoryClass>::factorySetup), this );
-        g_signal_connect( factory, "bind", G_CALLBACK(Factory<DirectoryClass>::factoryBind), this);
-        g_signal_connect( factory, "unbind", G_CALLBACK(Factory<DirectoryClass>::factoryUnbind), this);
-        g_signal_connect( factory, "teardown", G_CALLBACK(Factory<DirectoryClass>::factoryTeardown), this);
+        g_signal_connect( factory, "setup", G_CALLBACK(Factory<Type>::factorySetup), this );
+        g_signal_connect( factory, "bind", G_CALLBACK(Factory<Type>::factoryBind), this);
+        g_signal_connect( factory, "unbind", G_CALLBACK(Factory<Type>::factoryUnbind), this);
+        g_signal_connect( factory, "teardown", G_CALLBACK(Factory<Type>::factoryTeardown), this);
 
         TRACE("size = %d\n",Settings::getInteger("xfterm", "iconsize"));
 
@@ -166,12 +167,202 @@ template <class DirectoryClass>
         gtk_widget_add_css_class(view, "gridviewColors");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
 
+#if 10 ////////////////
+        if (!isBookmarks && !isFstab) {
+          // We wait until here to fireup the monitor.
+          auto store = G_LIST_MODEL(g_object_get_data(G_OBJECT(selectionModel_), "store"));
+          auto file = G_FILE(g_object_get_data(G_OBJECT(store), "file"));
+          GError *error_ = NULL;
+          auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
+          g_object_set_data(G_OBJECT(monitor), "file", file);
+          Child::addMonitor(monitor);
+
+          TRACE("monitor=%p file=%p store=%p\n", monitor, file, store);
+          if (error_){
+              ERROR("g_file_monitor_directory(%s) failed: %s\n",
+                      "fixme", error_->message);
+              g_error_free(error_);
+          } else {
+            g_signal_connect (monitor, "changed", 
+                  G_CALLBACK (changed_f), (void *)view);
+          }
+          g_object_set_data(G_OBJECT(store), "monitor", monitor);
+        }
+#endif ////////////////
 
         return view;
       }
 
   private:
-static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridView_p){
+
+      static void
+      changed_f ( GFileMonitor* self,  
+          // This runs in main context, I presume.
+          GFile* first, GFile* second, //same as GioFile * ?
+          GFileMonitorEvent event, 
+          void *data){
+
+        // Switch to pause monitor execution.
+        pthread_mutex_lock(&monitorMutex);   
+        auto inactive = g_object_get_data(G_OBJECT(self), "inactive");
+        pthread_mutex_unlock(&monitorMutex);   
+        if (inactive) {
+          DBG("monitor %p inactive\n", self);
+          return;
+        }
+
+        //
+        auto gridView_p = (GridView<LocalDir> * )data;
+        if (!Child::validGridView(gridView_p)) return;
+        auto store = gridView_p->store();
+        //GListStore *store = G_LIST_STORE(data);
+
+
+        auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
+        if (!child){
+          DBG("localdir.hh::changed_f(): this should not happen\n");
+          exit(1);
+        }
+        TRACE("*** monitor changed_f call \n");
+        gchar *f= first? g_file_get_path (first):g_strdup("--");
+        gchar *s= second? g_file_get_path (second):g_strdup("--");
+
+      /*  GError *error_=NULL;
+        GFileInfo *infoF = first? g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED", 
+            G_FILE_QUERY_INFO_NONE, NULL, &error_):NULL;
+        if (error_){
+          DBG("Error: %s\n", error_->message);
+          g_error_free(error_);
+          return;
+        }*/
+
+        /* if (inactive){
+             DBG("monitor_f(): monitor not currently active.\n");
+             return;
+        }
+        if (p->view()->serial() != p->serial()){
+            DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",p->view()->serial(), p->serial());
+            return;
+        }*/
+
+        bool verbose = false;
+        guint positionF;
+        auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
+        auto dirPath = g_file_get_path(dirFile);
+        int flags = Settings::getInteger("flags", dirPath); 
+        if (flags < 0) flags = 0;
+        g_free(dirPath);
+        
+        //if (verbose) DBG("monitor thread %p...\n", g_thread_self());
+         switch (event){
+            case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
+              {
+                //if (verbose) 
+                {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
+                if (found) {
+                   Child::incrementSerial(child);
+                   g_list_store_remove(store, positionF);
+                   Child::incrementSerial(child);
+                   LocalDir::insert(store, f, verbose);                        
+                } else {
+                  DBG("%s not found!\n", f);
+                }
+
+                //p->restat_item(f);
+              } 
+                break;
+            case G_FILE_MONITOR_EVENT_PRE_UNMOUNT:
+                if (verbose) {DBG("Received  PRE_UNMOUNT (%d): \"%s\", \"%s\"\n", event, f, s);}
+                break;
+            case G_FILE_MONITOR_EVENT_UNMOUNTED:
+                if (verbose) {DBG("Received  UNMOUNTED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                break;
+
+            case G_FILE_MONITOR_EVENT_DELETED:
+            case G_FILE_MONITOR_EVENT_MOVED_OUT:
+                {
+                  //if (verbose) 
+                  {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
+                  auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
+                  if (found) {
+                    Child::incrementSerial(child);
+                    g_list_store_remove(store, positionF);
+                  }
+                }
+                break;
+
+            case G_FILE_MONITOR_EVENT_CREATED:
+            case G_FILE_MONITOR_EVENT_MOVED_IN:
+                {
+                  //if (verbose) 
+                  {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                  if (!g_file_test(f, G_FILE_TEST_EXISTS)){
+                    if (!g_file_test(f, G_FILE_TEST_IS_SYMLINK)) {
+                      if (verbose) {DBG("Ghost file: %s\n", f);}
+                      g_free(f);
+                      g_free(s);
+                      return;
+                    }
+                  }
+               /*   auto found = findPositionStore(store, f, &positionF, flags);
+                  if (found){
+                    Child::incrementSerial(child);
+                    g_list_store_remove(store, positionF);
+                  }*/
+                  // add updated info.
+                  Child::incrementSerial(child);
+                  LocalDir::insert(store, f, verbose);
+                }
+                break;
+            case G_FILE_MONITOR_EVENT_CHANGED:
+            {
+                if (verbose) {DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                //p->restat_item(f);
+            } break;
+            case G_FILE_MONITOR_EVENT_MOVED:
+            case G_FILE_MONITOR_EVENT_RENAMED:
+            {
+                //if (verbose) 
+                {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                auto found1 = LocalDir::findPositionStore(store, s, &positionF, flags);
+                if (found1){
+                  Child::incrementSerial(child);
+                  g_list_store_remove(store, positionF);
+                }
+                auto found2 = LocalDir::findPositionStore(store, f, &positionF, flags);
+                if (found2){
+                  Child::incrementSerial(child);
+                  g_list_store_remove(store, positionF);
+                  Child::incrementSerial(child);
+                  LocalDir::insert(store, s, verbose);           
+                }
+            }
+                  
+
+
+
+                //p->add2reSelect(f); // Only adds to selection list if item is selected.
+                //p->remove_item(first); 
+
+                //if (!isInModel(p->treeModel(), s)){
+                    //p->add_new_item(second);
+                //} //else p->restat_item(s);
+                break;
+            case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+                if (verbose) {DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);}
+
+                //p->reSelect(f); // Will only select if in selection list (from move).
+                break;       
+        }
+        g_free(f);
+        g_free(s);
+       
+
+      }
+
+
+static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
   // multiple select
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
@@ -197,7 +388,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
     }
     
 /*
-    static GtkPopover *getPopover(GridView<DirectoryClass> *gridView_p){ 
+    static GtkPopover *getPopover(GridView<Type> *gridView_p){ 
       auto path = gridView_p->path();
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
       auto popover = gridView_p->myMenu_->mkMenu(markup);
@@ -211,7 +402,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       return popover;
     }
     */
-    static void setPopoverItemsFstab(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
+    static void setPopoverItemsFstab(GtkPopover *popover, const char *path, GridView<Type> *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
       auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -234,7 +425,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       }
     }
 
-    static void setPopoverItemsBookmark(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
+    static void setPopoverItemsBookmark(GtkPopover *popover, const char *path, GridView<Type> *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
       auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -253,7 +444,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
 
     }
 
-    static void setPopoverItems(GtkPopover *popover, const char *path, GridView<DirectoryClass> *gridView_p ){
+    static void setPopoverItems(GtkPopover *popover, const char *path, GridView<Type> *gridView_p ){
       // single selection
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
@@ -330,7 +521,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       }
     }
 
-    static GtkPopover *getPopover(GtkWidget *menubox, GridView<DirectoryClass> *gridView_p){ 
+    static GtkPopover *getPopover(GtkWidget *menubox, GridView<Type> *gridView_p){ 
       DBG("getPopover 1\n");
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
       auto popover = gridView_p->myMenu_->mkMenu(markup);
@@ -347,7 +538,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       return popover;
     }
 
-    static GtkPopover *getPopover(GFileInfo *info, GridView<DirectoryClass> *gridView_p){ 
+    static GtkPopover *getPopover(GFileInfo *info, GridView<Type> *gridView_p){ 
       DBG("getPopover 12\n");
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
       auto path = Basic::getPath(info);
@@ -368,7 +559,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       return popover;
     }
 
-    static GtkPopover *getPopover(GObject *object, GridView<DirectoryClass> *gridView_p){ 
+    static GtkPopover *getPopover(GObject *object, GridView<Type> *gridView_p){ 
       DBG("getPopover 123\n");
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
@@ -462,7 +653,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
   }
   public:
   // for selected items
-  static void placeMenu(GtkWidget *menubox, GridView<DirectoryClass> *gridView_p){
+  static void placeMenu(GtkWidget *menubox, GridView<Type> *gridView_p){
       auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
       if (!popover){
         TRACE("getPopover...\n");
@@ -478,7 +669,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
   }
 
   public:
-  static void placeMenu(GFileInfo *info, GridView<DirectoryClass> *gridView_p){
+  static void placeMenu(GFileInfo *info, GridView<Type> *gridView_p){
       auto menubox = g_object_get_data(G_OBJECT(info), "menuBox");
       auto popover = g_object_get_data(G_OBJECT(menubox), "menu");
       if (!popover){
@@ -492,7 +683,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       }
   }
   // for single non selected item
-  static void placeMenu(GObject *object, GridView<DirectoryClass> *gridView_p){
+  static void placeMenu(GObject *object, GridView<Type> *gridView_p){
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
       auto menubox = g_object_get_data(G_OBJECT(object), "menuBox");
@@ -514,12 +705,12 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
               gdouble x,
               gdouble y,
               void *data){
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       if (gridView_p->getSelectionSize() == 0)
       {
-        MainWindow<DirectoryClass>::clickMenu( mainMenuButton, NULL);
+        MainWindow<Type>::clickMenu( mainMenuButton, NULL);
       } else {
-        return Factory<DirectoryClass>::menu_f(self, n_press, x , y, data);
+        return Factory<Type>::menu_f(self, n_press, x , y, data);
       }
       return true;
     }
@@ -530,7 +721,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
               gdouble y,
               void *data){
       TRACE("unselect_f...\n");
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       auto selectionModel = gridView_p->selectionModel();
       // if control or shift down, return false.
       auto eventController = GTK_EVENT_CONTROLLER(self);
@@ -583,12 +774,12 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
       auto button = gtk_gesture_single_get_button (GTK_GESTURE_SINGLE(self));
       DBG("gridDown_f button %d\n", button);
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-      auto gridView_p = (GridView<DirectoryClass> *)data;
+      auto gridView_p = (GridView<Type> *)data;
       return false;
     }
     */
 /*
-    static void addGestureDown(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+    static void addGestureDown(GtkWidget *self, GObject *object, GridView<Type> *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for unselect
@@ -600,7 +791,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
     }   
    */ 
 
-    static void addGestureClickView1(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickView1(GtkWidget *self, GObject *object, GridView<Type> *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for unselect
@@ -611,7 +802,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<DirectoryClass> *gridV
 
     }    
 
-    static void addGestureClickView3(GtkWidget *self, GObject *object, GridView<DirectoryClass> *gridView_p){
+    static void addGestureClickView3(GtkWidget *self, GObject *object, GridView<Type> *gridView_p){
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for menu

@@ -166,7 +166,7 @@ public:
     {
         auto gIcon = g_file_info_get_icon(info);
         if (gIcon == NULL) {
-          auto paintable = getIcon("emblem-broken");
+          auto paintable = getIcon(EMBLEM_BROKEN);
           return addEmblem(paintable, emblem, width, height);
         }
         return addEmblem(gIcon, emblem, width, height);

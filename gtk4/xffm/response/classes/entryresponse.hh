@@ -17,9 +17,6 @@ public:
     }
 
     EntryResponse (void){
-      /*pthread_t thread;
-      int retval = pthread_create(&thread, NULL, response_f, (void *)this);
-      pthread_detach(thread);*/
     }
 
      static void *asyncYes(void *data){
