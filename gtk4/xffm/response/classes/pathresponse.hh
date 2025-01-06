@@ -7,6 +7,7 @@ class pathResponse {
 public:
 
     static void *asyncYesArg(void *data, const char *op){
+      TRACE("*** asyncYesArg: %s\n", op);
       if (!op) return NULL;
       auto dialogObject = (DialogTimeout<pathResponse> *)data;
       auto dialog = dialogObject->dialog();
@@ -95,18 +96,31 @@ public:
     }
 public:
     static void
-    cpmv(const gchar *src, const gchar *tgt, int modeCopy){
-      auto arg = (char **)calloc(10, sizeof(char *));
-      int k = 0;
-      if (g_file_test(tgt, G_FILE_TEST_EXISTS)){
-        auto backup = g_strconcat(tgt, "~", NULL);
-        if (rename(tgt, backup) != 0){
-          auto text = g_strdup_printf(" rename(%s, %s): %s\n", tgt, backup,strerror(errno));
+    cpmv(const gchar *src, const gchar *tgtDir, int modeCopy){
+      TRACE("*** cpmv: %s --> %s (%d)\n", src, tgtDir, modeCopy);
+      // Code sanity.
+      if (!g_file_test(tgtDir, G_FILE_TEST_IS_DIR)){
+        auto text =  g_strdup_printf("target %s is not a directory", tgtDir );
+        Print::printWarning(Child::getOutput(), g_strconcat(" ", text, "\n", NULL));
+        return;  
+      }
+      // Backup.
+      auto base = g_path_get_basename(src);
+      auto tgtFile = g_strconcat(tgtDir, G_DIR_SEPARATOR_S, base, NULL);
+      g_free(base);
+      if (g_file_test(tgtFile, G_FILE_TEST_EXISTS)){
+        auto backup = g_strconcat(tgtDir, G_DIR_SEPARATOR_S, base, "~", NULL);
+        TRACE("*** cpmv: backup %s --> %s (%d)\n", tgt, backup, modeCopy);
+        if (rename(tgtFile, backup) != 0){
+          auto text = g_strdup_printf(" rename(%s, %s): %s\n", tgtFile, backup,strerror(errno));
           Print::printWarning(Child::getOutput(), text);
         }
         g_free(backup);
       }
-
+      // Command.
+      auto arg = (char **)calloc(10, sizeof(char *));
+      int k = 0;
+ 
       if (modeCopy > 0){
         arg[k++] = g_strdup("cp");
         if (g_file_test(src, G_FILE_TEST_IS_DIR)) arg[k++] = g_strdup("-a");
@@ -115,19 +129,20 @@ public:
         arg[k++] = g_strdup("ln");
         arg[k++] = g_strdup("-s");
       } else {
-        if (g_file_test(src, G_FILE_TEST_IS_DIR)) arg[k++] = g_strdup("-a");
         arg[k++] = g_strdup("mv");
       }      
       arg[k++] = g_strdup("-v");
       arg[k++] = g_strdup("-f");
       arg[k++] = g_strdup(src);
-      arg[k++] = g_strdup(tgt);
+      arg[k++] = g_strdup(tgtFile);
+      g_free(tgtFile);
       //backup(src, tgt);
       THREADPOOL->add(cpmv_f, (void *)arg);
      }  
 
 private:
   static void *cpmv_f(void *data){
+      DBG("*** cpmv_f: \n");
     auto arg =(char **)data;
     pid_t pid = Run<bool>::thread_run(NULL, (const char **)arg, false);
 //    pid_t pid = Run<bool>::thread_run(Child::getOutput(), (const char **)arg, false);
