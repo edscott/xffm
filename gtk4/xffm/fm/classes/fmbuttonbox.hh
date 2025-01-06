@@ -141,6 +141,9 @@ private:
       if (Workdir<LocalDir>::pleaseWait()) return;
       auto value = gtk_range_get_value(self);
       Settings::setInteger("xfterm", "iconsize", value);
+      Print::printInfo(Child::getOutput(), 
+          g_strdup_printf("%s %.0lf", _("Icon Size:"), value ));
+      
       
       // reload all pages
       auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));

@@ -74,6 +74,14 @@ namespace xf {
     }
 
     static void //  will free string.
+    printInfo(GtkTextView *textview, gchar *string){
+      showText(textview);
+      const char *ret = NULL;
+      if (string[strlen(string)-1] != '\n') ret = "\n"; //hack
+      printIcon(textview, "emblem-about", g_strconcat(" ", string, ret, NULL));
+    }
+
+    static void //  will free string.
     printWarning(GtkTextView *textview, gchar *string){
       showText(textview);
       const char *ret = NULL;
