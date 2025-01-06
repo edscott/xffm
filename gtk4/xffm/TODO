@@ -6,6 +6,8 @@
 *** BUG xffm3: with multiple instances of xffm3, navigating into a folder with images previewed breaks xffm3 run: no icons shown, tab label broken. Seems like a memory overright problem. Should verify with Valgrind.
 
 
+* changed_f does an insert sorted, but result is not sorted. I guess we have to 
+get a new selection model from the store and set it to the gridview.
 
 
 0. Rodent icons

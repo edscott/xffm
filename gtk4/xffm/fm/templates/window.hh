@@ -100,7 +100,7 @@ public:
         }
 
         //if (gtk_widget_get_visible(promptBox) && !gtk_widget_is_focus(input)) {
-        if (!gtk_widget_is_focus(input)) {
+      if (!gtk_widget_is_focus(input)) {
           TRACE("window on_keypress,  focusing input\n");
           if (switchKey) {
             gtk_widget_grab_focus(input);
@@ -341,6 +341,13 @@ private:
       
     }
 
+    static void mainPaste(GtkButton * button, void *data){
+      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+      auto target = g_strdup(gridView_p->path());
+      cpDropResponse::performPasteAsync(target);
+      g_free(target);      
+    }
+
     void mkNotebook(){
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
       g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
@@ -356,10 +363,15 @@ private:
       auto tabButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       auto menuButtonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
 
-      auto newTabButton = Basic::newButton("list-add", _("New Tab"));
-
-      auto newMenuButton = Basic::newButton("open-menu", _("Main menu"));
-      mainMenuButton = newMenuButton;
+      cutButton = Basic::newButton(EMBLEM_CUT, _("Cut")); // global button (xffm.h)
+      gtk_widget_set_sensitive(GTK_WIDGET(cutButton), false);    
+      copyButton = Basic::newButton(EMBLEM_COPY, _("Copy")); // global button (xffm.h)
+      gtk_widget_set_sensitive(GTK_WIDGET(copyButton), false);    
+      pasteButton = Basic::newButton(EMBLEM_PASTE, _("Paste")); // global button (xffm.h)
+      gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);    
+      auto newTabButton = Basic::newButton(LIST_ADD, _("New Tab"));
+      auto newMenuButton = Basic::newButton(OPEN_MENU, _("Main menu"));
+      mainMenuButton = newMenuButton;// global button (xffm.h)
       auto myMainMenu = new Menu<MainMenu<MainClass> >(_("Main menu"));
       menu_ = myMainMenu->mkMenu(NULL);
       TRACE("menu popover = %p\n", menu_);
@@ -368,11 +380,12 @@ private:
       delete myMainMenu;
 
       /*
-      auto newMenuButton = Basic::newMenuButton("open-menu", NULL);
+      auto newMenuButton = Basic::newMenuButton(OPEN_MENU, NULL);
       auto myMainMenu = new Menu<MainMenu<MainClass> >(_("Main menu"));
       myMainMenu->setMenu(newMenuButton);
       delete myMainMenu;*/
-
+      g_signal_connect(G_OBJECT(pasteButton), "clicked", 
+              BUTTON_CALLBACK(mainPaste), (void *)this);   
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
               BUTTON_CALLBACK(on_new_page), (void *)this);    
       g_signal_connect (notebook_, "switch-page", 
@@ -383,6 +396,9 @@ private:
       gtk_widget_set_hexpand(GTK_WIDGET(actionWidget), FALSE);
 
       Basic::boxPack0(tabButtonBox, GTK_WIDGET(longPressImage_),  TRUE, FALSE, 0);
+      Basic::boxPack0(tabButtonBox, GTK_WIDGET(cutButton),  TRUE, FALSE, 0);
+      Basic::boxPack0(tabButtonBox, GTK_WIDGET(copyButton),  TRUE, FALSE, 0);
+      Basic::boxPack0(tabButtonBox, GTK_WIDGET(pasteButton),  TRUE, FALSE, 0);
       Basic::boxPack0(tabButtonBox, GTK_WIDGET(newTabButton),  TRUE, FALSE, 0);
       Basic::boxPack0(menuButtonBox, GTK_WIDGET(newMenuButton),  TRUE, FALSE, 0);
       Basic::boxPack0(actionWidget, GTK_WIDGET(tabButtonBox),  TRUE, FALSE, 0);

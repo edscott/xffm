@@ -167,7 +167,7 @@ template <class Type>
         gtk_widget_add_css_class(view, "gridviewColors");
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
 
-#if 10 ////////////////
+ ////////////////
         if (!isBookmarks && !isFstab) {
           // We wait until here to fireup the monitor.
           auto store = G_LIST_MODEL(g_object_get_data(G_OBJECT(selectionModel_), "store"));
@@ -184,11 +184,11 @@ template <class Type>
               g_error_free(error_);
           } else {
             g_signal_connect (monitor, "changed", 
-                  G_CALLBACK (changed_f), (void *)view);
+                  G_CALLBACK (changed_f), (void *)this);
           }
           g_object_set_data(G_OBJECT(store), "monitor", monitor);
         }
-#endif ////////////////
+ ////////////////
 
         return view;
       }

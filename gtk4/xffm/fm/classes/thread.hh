@@ -262,10 +262,10 @@ private:
         pthread_mutex_lock(&inc_dec_mutex);
         if (increment) {
             thread_count++;
-            DBG("Thread count is %d added 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
+            DBG_T("Thread count is %d added 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
         } else {
             thread_count--;
-            DBG("Thread count is %d removed 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
+            DBG_T("Thread count is %d removed 0x%x (%s)\n", thread_count, GPOINTER_TO_INT(thread), dbg_text);
         }
         pthread_mutex_unlock(&inc_dec_mutex);
     }

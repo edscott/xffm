@@ -72,6 +72,9 @@ static GHashTable *iconPathHash = NULL;
 static bool exitDialogs = false;
 static void *threadPoolObject = NULL;
 static GtkButton *mainMenuButton = NULL;
+static GtkButton *cutButton = NULL;
+static GtkButton *copyButton = NULL;
+static GtkButton *pasteButton = NULL;
 static int longPressSerial = -1;
 
 // classes and templates

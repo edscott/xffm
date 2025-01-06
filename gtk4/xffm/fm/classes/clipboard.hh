@@ -26,6 +26,7 @@ public:
         // for each file, send monitor the changed signal
         // this, to update icon
         gdk_clipboard_set_text (clipBoard_, "");
+        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
     }
 
     static void
@@ -244,6 +245,7 @@ private:
         else if (strncmp(text, "move", strlen("move")) == 0) c->setValidity(true);
         else c->setValidity(false);
         TRACE("Clip board is valid = %d\n", c->validClipBoard());
+        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         updateClipBoardCache(c, text);
         return;
     }

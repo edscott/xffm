@@ -287,27 +287,11 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
           g_object_unref(infoF);
           return;
         }
-        // do this in main context? I guess so... Nah. does not work.
+
         g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
 
-        
-/*        auto args = (void **)calloc(3, sizeof (void *));
-        args[0] = (void *)store;
-        args[1] = (void *)infoF;
-        args[2] = GINT_TO_POINTER(flags);
-        Basic::context_function(insert_f, (void *)args);*/
 
       }
-   /*   static void toggleSelect(GListStore *store, guint positionF){
-          auto s = GTK_SELECTION_MODEL(g_object_get_data(G_OBJECT(store), "selectionModel"));
-          if (gtk_selection_model_is_selected (s, positionF)){
-            gtk_selection_model_unselect_item (s, positionF);
-            gtk_selection_model_select_item (s, positionF, false);
-          } else {
-            gtk_selection_model_select_item (s, positionF, false);
-            gtk_selection_model_unselect_item (s, positionF);
-          }
-      }*/
 
 
 private:
