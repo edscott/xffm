@@ -1,6 +1,6 @@
-*** BUG: dnd broken: drag from xffm3 to xffm4 move mode, a dialog will open asking if copy move or symlink. Select move. Item will not be moved, but will be removed from source. Seems like copy/paste may be broken too.
+
 *** bug: small iconsize and icon shading mask not really visible. Need to make more constrast
-*** bug: check this... on renaming a file to existing, move src to tgt, tgt exists, backup file created for src, not tgt!!! 
+
 
 
 *** BUG xffm3: with multiple instances of xffm3, navigating into a folder with images previewed breaks xffm3 run: no icons shown, tab label broken. Seems like a memory overright problem. Should verify with Valgrind.
@@ -15,8 +15,8 @@
 4. font size slider for input/output at menu
 5. xffm-find4
 
-Sporadic race condition crashes:
-* mountThreadF1 with gridview list model, at getMntHash, fstabMonitor.hh:120 (apparently there is a condition in which Child::lockGridView("mountThreadF1") fails to keep things coherent).
+Sporadic race condition crashes: Must set all gridview_p references in main context in order for Child::validGridView() to be correct.
+
 
 
 - Simplify OpenWith by inhering from DialogComplex (eliminate duplicated functions from DialogBasic)

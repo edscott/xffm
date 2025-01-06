@@ -247,11 +247,32 @@ private:
       return false;
     }
  
-    /*bool checkSerial(void){
-      return (serial() == Child::getSerial());
-    }*/
 
-    // I think I need a controller thread...
+    static void *contextMonitor(void *data){
+        auto monitorObject = (FstabMonitor<LocalDir> *)data;
+        auto gridView_p = monitorObject->gridView();
+        if (!Child::validGridView(gridView_p)) return GINT_TO_POINTER(1);
+
+        auto mntHash = getMntHash(gridView_p);
+        auto fstabHash = getFstabHash(gridView_p);
+        //auto selectionModel = gridView_p->selectionModel();
+
+        auto listModel = gridView_p->listModel();
+        auto items = g_list_model_get_n_items (listModel);
+        for (guint i=0; i<items; i++){
+            auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
+            auto path = Basic::getPath(info);
+            if (!g_file_test(path, G_FILE_TEST_IS_DIR)) continue;
+            if (update_f(gridView_p, info, path, mntHash, fstabHash)){
+              sendSignal(monitorObject, info);
+            } 
+            g_free(path);
+        }
+        g_hash_table_destroy(mntHash);
+        g_hash_table_destroy(fstabHash);
+        return NULL;
+    }
+
     static void *
     mountThreadF1(void *data){
         void **arg = (void **)data;
@@ -271,53 +292,16 @@ private:
         }
         TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
-      // FIXME:
-      // Seems like  lockGridView might fail, at least it failed once
-      //  and we got a gridview::listModel invalid...
-        Child::lockGridView("mountThreadF1");
-        if (!Child::validGridView(gridView_p)) {
-            Child::unlockGridView();
-            g_free(sum);
-            g_free(sumPartitions);
-            TRACE("***abort2 mountThreadF1 for gridview_p %p\n", gridView_p);
-            return NULL;
-        }
-        auto mntHash = getMntHash(gridView_p);
-        auto fstabHash = getFstabHash(gridView_p);
-        auto selectionModel = gridView_p->selectionModel();
-        auto listModel = gridView_p->listModel();
-        Child::unlockGridView();
     
         while (arg[1]){
           usleep(250000);
           if (!arg[1])continue;
-
-          bool dirChange = checkSumMnt(&sum);
-
-          if (dirChange){ // Modify directory mount status.
-            Child::lockGridView("mountThreadF1-2");
-            if (!Child::validGridView(gridView_p)) {
-              Child::unlockGridView();
-              TRACE("***abort3 mountThreadF1 for gridview_p %p\n", gridView_p);
-              break;
-            }
-            auto items = g_list_model_get_n_items (listModel);
-            for (guint i=0; i<items; i++){
-              auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
-              auto path = Basic::getPath(info);
-              if (!g_file_test(path, G_FILE_TEST_IS_DIR)) continue;
-              if (update_f(gridView_p, info, path, mntHash, fstabHash)){
-                sendSignal(monitorObject, info);
-              } 
-              g_free(path);
-            } // for items
-            Child::unlockGridView();
-          } //dirChange
+          if (!checkSumMnt(&sum)) continue;    
+          // This is sent to main context to avoid race with gridview invalidation.
+          if (Basic::context_function(contextMonitor, data) != NULL) break;
         }
         g_free(sum);
         g_free(sumPartitions);
-        g_hash_table_destroy(mntHash);
-        g_hash_table_destroy(fstabHash);
         arg[2] = GINT_TO_POINTER(1);
         TRACE("******* mountThreadF1 all done for gridview %p.\n", gridView_p);
         return NULL;
