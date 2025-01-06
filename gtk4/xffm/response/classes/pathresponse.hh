@@ -99,17 +99,17 @@ public:
     cpmv(const gchar *src, const gchar *tgtDir, int modeCopy){
       TRACE("*** cpmv: %s --> %s (%d)\n", src, tgtDir, modeCopy);
       // Code sanity.
+      char *tgtFile;
       if (!g_file_test(tgtDir, G_FILE_TEST_IS_DIR)){
-        auto text =  g_strdup_printf("target %s is not a directory", tgtDir );
-        Print::printWarning(Child::getOutput(), g_strconcat(" ", text, "\n", NULL));
-        return;  
+        tgtFile = g_strdup(tgtDir);
+      } else {
+        auto base = g_path_get_basename(src);
+        tgtFile = g_strconcat(tgtDir, G_DIR_SEPARATOR_S, base, NULL);
+        g_free(base);
       }
       // Backup.
-      auto base = g_path_get_basename(src);
-      auto tgtFile = g_strconcat(tgtDir, G_DIR_SEPARATOR_S, base, NULL);
-      g_free(base);
       if (g_file_test(tgtFile, G_FILE_TEST_EXISTS)){
-        auto backup = g_strconcat(tgtDir, G_DIR_SEPARATOR_S, base, "~", NULL);
+        auto backup = g_strconcat(tgtFile, "~", NULL);
         TRACE("*** cpmv: backup %s --> %s (%d)\n", tgt, backup, modeCopy);
         if (rename(tgtFile, backup) != 0){
           auto text = g_strdup_printf(" rename(%s, %s): %s\n", tgtFile, backup,strerror(errno));
