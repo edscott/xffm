@@ -296,6 +296,7 @@ namespace xf {
         ClipBoard::copyClipboardList(selectionList);
         // cleanup
         Basic::freeSelectionList(selectionList);
+        gtk_selection_model_unselect_all(Child::selection());
         return;
       }
 
@@ -317,6 +318,7 @@ namespace xf {
         ClipBoard::cutClipboardList(selectionList);
         // cleanup
         Basic::freeSelectionList(selectionList);
+        gtk_selection_model_unselect_all(Child::selection());
         return;
       }
       auto path = getPath(menu);

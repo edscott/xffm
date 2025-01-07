@@ -41,6 +41,7 @@
 #define EMBLEM_ABOUT "emblem-about"
 #define EMBLEM_BROKEN "emblem-broken"
 #define EMBLEM_START_HERE "emblem-start-here"
+#define EMBLEM_BAK "emblem-bak"
 
 #define LIST_ADD "list-add"
 #define OPEN_MENU "open-menu"

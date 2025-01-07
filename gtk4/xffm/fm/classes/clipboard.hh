@@ -37,6 +37,30 @@ public:
         c->clearClipBoard();
     }
 
+    static bool isCut(const char *path){
+        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        if (!c) return false; // before clipboard is associated to MainWidget.
+        if (!c->validClipBoard()) return false;
+        auto string = c->clipBoardCache();
+        if (strncmp(string, "move", strlen("move")) != 0) return false;
+        if (strstr(string, path)) return true;
+        return false;
+    }
+
+    static bool isCopy(const char *path){
+        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        if (!c) return false; // before clipboard is associated to MainWidget.
+        if (!c->validClipBoard()) return false;
+        auto string = c->clipBoardCache();
+        if (strncmp(string, "copy", strlen("copy")) != 0) return false;
+        if (strstr(string, path)) return true;
+        return false;
+    }
+
+
+
+
+
     void resetClipBoardCache(const char *text){
         g_free(clipBoardCache_);
         clipBoardCache_ = g_strdup(text);
@@ -161,7 +185,8 @@ public:
       gdk_clipboard_set_text (clipBoardTxt, data);
       g_free(data);
     }
-     
+    
+
     static void
     cutClipboardList(GList *list){ 
       auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());

@@ -117,7 +117,17 @@ namespace xf {
       pthread_mutex_unlock(&childMutex);
       return (bool) retval;
     }
+    static GtkSelectionModel *selection(void){
+      auto child =  Child::getChild();
+      return selection(child);
+    }
 
+    static GtkSelectionModel *selection(GtkWidget *child){
+      if (!valid(child)) return NULL; // Page has disappeared.
+      auto selection = g_object_get_data(G_OBJECT(child), "selection");
+      if (selection) return GTK_SELECTION_MODEL(selection);
+      return NULL;
+    }
 
     static void *getGridviewObject(void){
       auto child =  Child::getChild();

@@ -3,7 +3,7 @@
 #define FACTORYLOCAL_HH
 // object is list_item
 // item_get_item is GFileInfo
-// item_get child is GtkWidget
+// item_get_child is GtkWidget
 namespace xf {
 template <class Type>
   class Factory {
@@ -146,8 +146,9 @@ template <class Type>
         auto xffmPaintable = g_file_info_get_attribute_object(info, "xffm:paintable");      
         if (xffmPaintable) {
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(xffmPaintable));
-        } else image = backupImage(name, info, size);
-        //if (!image) image = emblemedImage(name, info, size);
+        } else {
+          image = backupImage(name, path, info, size);
+        }
 
         bool previewLoaded = false;
         bool doPreview = false;
@@ -702,22 +703,42 @@ template <class Type>
       return true;
     }
 
-    static GtkWidget *backupImage(const char *name, GFileInfo *info, int size){
+    static GdkPaintable *getCutTexture(GFileInfo *info, int size){
+      auto texture = Texture<bool>::getShadedIcon(info, size, size, NULL);   
+      auto paintable =Texture<bool>::addEmblem(texture, EMBLEM_CUT, size, size);
+      g_object_unref(texture); // XXX currently the paintable is not hashed.
+      return paintable;
+    }
+
+
+
+
+    static GtkWidget *backupImage(const char *name, const char *path, GFileInfo *info, int size){
       // Only for the hidden + backup items. Applies background mask.
       bool hidden = (name[0] == '.' && name[1] != '.');
       if (!hidden) hidden = g_file_info_get_is_hidden(info);
+
+      // check in  clipboard
+      if(strcmp(name, "..") &&  ClipBoard::isCut(path)) {
+        auto paintable = getCutTexture(info, size);
+        auto image = gtk_image_new_from_paintable(paintable);
+        g_object_unref(paintable); // XXX currently the paintable is not hashed.
+        return GTK_WIDGET(image);
+      }
+      if(strcmp(name, "..") &&   ClipBoard::isCopy(path)) {
+        auto texture = Texture<bool>::getShadedIcon(info, size, size, EMBLEM_COPY);   
+        auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        g_object_unref(texture); // XXX currently the paintable is not hashed.
+        return GTK_WIDGET(image);
+      }
+
       bool backup = ( name[strlen(name)-1] == '~');
       if (!backup) backup = g_file_info_get_is_backup(info);
       if (hidden || backup )  {
-        //auto *iconPath = Texture<bool>::findIconPath(info);
-        // Only for the hidden + backup items. Applies background mask.
-        //if (iconPath){
-          //auto texture = Texture<bool>::getShadedIcon2(iconPath, size, size, backup?"emblem-bak":NULL);   
-          auto texture = Texture<bool>::getShadedIcon(info, size, size, backup?"emblem-bak":NULL);   
+          auto texture = Texture<bool>::getShadedIcon(info, size, size, backup?EMBLEM_BAK:NULL);   
           auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
           g_object_unref(texture); // XXX currently the paintable is not hashed.
           return GTK_WIDGET(image);
-        //}
         // Texture reference is kept in hashtable.
       }
       return NULL;

@@ -50,7 +50,7 @@ template <class Type>  class Texture {
         auto paintable = findIconInHash(iconName, size);        
         if (paintable) return paintable;
 
-        DBG("*** Lookup icon \"%s-%d\"\n", iconName, size);
+        TRACE("*** Lookup icon \"%s-%d\"\n", iconName, size);
         auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
             iconTheme, iconName,
             NULL, size, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
@@ -209,7 +209,7 @@ public:
 
     static GdkPaintable *getShadedIcon(const char *iconName, double width, double height, const char *emblem)
     {
-        DBG("*** Lookup icon \"%s\"\n", iconName);
+        TRACE("*** Lookup icon \"%s\"\n", iconName);
         auto icon = lookupIcon(iconName, width);
         return getShadedIcon(GDK_PAINTABLE(icon), width, height, emblem);
     }

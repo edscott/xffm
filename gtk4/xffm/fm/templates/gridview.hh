@@ -56,7 +56,6 @@ template <class Type>
       int flags(void){return flags_;}
 
 
-  private:
       
   public:
       //bool dndOn = false;
@@ -121,7 +120,15 @@ template <class Type>
       char *path(void){ return path_;}
 
       
+  private:
+      static void
+      updateButtons (GtkSelectionModel* self, guint position, guint n_items,  gpointer user_data){
+          auto bitset = gtk_selection_model_get_selection(self);
+          gtk_widget_set_sensitive(GTK_WIDGET(cutButton), (gtk_bitset_get_size(bitset) > 0));
+          gtk_widget_set_sensitive(GTK_WIDGET(copyButton), (gtk_bitset_get_size(bitset) > 0));
+      }
 
+  public:
 
       GtkWidget *
       getGridView(){
@@ -136,8 +143,10 @@ template <class Type>
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
           selectionModel_ = LocalDir::xfSelectionModel(path_);
+          g_object_set_data(G_OBJECT(child), "selection", selectionModel_);
           auto store = G_LIST_MODEL(g_object_get_data(G_OBJECT(selectionModel_), "store"));
           maxNameLen_ = Basic::getMaxNameLen(store);
+          g_signal_connect(G_OBJECT(selectionModel_), "selection-changed", G_CALLBACK(updateButtons), NULL);
 //          maxNameLen_ = LocalDir::getMaxNameLen(path_);
         }
        
@@ -194,6 +203,24 @@ template <class Type>
       }
 
   private:
+
+      static void *reloadIt(void *data){
+        auto arg = (void **)data;
+        auto path = (const char *)arg[0];
+        DBG("*** reloadIt workdir is %s\n", path);
+
+        Workdir<Type>::setWorkdir(path);
+        return NULL;
+      }
+      static void *threadReload(void *data){
+        auto arg = (void **)data;
+        auto path = (char *)arg[0];
+        usleep(500000);
+        Basic::context_function(reloadIt, data);
+        g_free(path);
+        g_free(arg);
+        return NULL;
+      }
 
       static void
       changed_f ( GFileMonitor* self,  
@@ -317,8 +344,24 @@ template <class Type>
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
             {
-                if (verbose) {DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                //p->restat_item(f);
+              
+         // When doing cut/copy, problem is that callback is
+         // happening before change signal.
+
+
+          //if (verbose) 
+                {DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
+          // This works, but scrollbar is not updated to last position
+          // And then it is broken because icon is not updated when a different
+          // icon is set to cut or copy
+                void **arg = (void **)calloc(3, sizeof(void *));
+                arg[0] = (void *) g_strdup(Workdir<Type>::getWorkdir());
+                // get scroll position arg[1] = ; 
+
+                pthread_t thread;
+                pthread_create(&thread, NULL, threadReload, arg);
+                pthread_detach(thread);
+  
             } break;
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:

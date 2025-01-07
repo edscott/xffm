@@ -23,10 +23,6 @@ msgid "NFS Network Volume"
 msgid "NFS remote directory"
 */
 
-
-
-//#include "popup.hh"
-//#include "monitor.hh"
 namespace xf {
 //template <class Type> class FstabPopUp;
 

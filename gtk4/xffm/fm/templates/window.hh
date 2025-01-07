@@ -148,6 +148,7 @@ private:
     }
 
 #if 0
+    // deprecated
     static gboolean
     presentDialog ( GtkEventControllerMotion* self,
                     gdouble x,
@@ -160,16 +161,24 @@ private:
         return FALSE;
     }
 
+#endif
+    
+    static gboolean updateButtons( GtkEventControllerMotion* self,
+                    double x, double y, void *data) {
+        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
+        return FALSE;
+    }
+
     static
       void addMotionController(GtkWidget  *widget){
         auto controller = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(widget), controller);
         g_signal_connect (G_OBJECT (controller), "enter", 
-            G_CALLBACK (presentDialog), NULL);
+            G_CALLBACK (updateButtons), NULL);
 
     }
-#endif
     
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
@@ -336,7 +345,21 @@ private:
       auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
       gtk_widget_set_visible (close, TRUE);
       
-      Child::setWindowTitle(child);    
+      Child::setWindowTitle(child);   
+      auto selection = Child::selection(child);
+      if (!selection) {
+        gtk_widget_set_sensitive(GTK_WIDGET(cutButton), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(copyButton), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
+      } else {
+        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
+        auto bitset = gtk_selection_model_get_selection(selection);
+        gtk_widget_set_sensitive(GTK_WIDGET(cutButton), (gtk_bitset_get_size(bitset) > 0));
+        gtk_widget_set_sensitive(GTK_WIDGET(copyButton), (gtk_bitset_get_size(bitset) > 0));
+      }
+        
+       
       gtk_widget_grab_focus(GTK_WIDGET(input));
       
     }
@@ -344,8 +367,55 @@ private:
     static void mainPaste(GtkButton * button, void *data){
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto target = g_strdup(gridView_p->path());
+      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      if (!c->validClipBoard()){
+        // Should not happen.
+        Print::printWarning(Child::getOutput(), g_strconcat(_("Invalid clip"), "\n", NULL));
+        return;
+      }
+
       cpDropResponse::performPasteAsync(target);
       g_free(target);      
+    }
+
+    static void cutCopyReload(GridView<LocalDir> *gridView_p){
+        auto bitset = gtk_selection_model_get_selection(Child::selection());
+        guint position;
+        GtkBitsetIter iter;
+        auto monitor = (GFileMonitor *)gridView_p->monitor();
+        if (gtk_bitset_iter_init_first (&iter, bitset, &position)){
+            auto list = G_LIST_MODEL(Child::selection());        
+            auto info = G_FILE_INFO(g_list_model_get_item (list, position));
+            auto file = Basic::getGfile(info);
+            g_file_monitor_emit_event (monitor,
+                   file, NULL, G_FILE_MONITOR_EVENT_CHANGED);  
+        }
+    }
+
+    static void mainCut(GtkButton * button, void *data){
+      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+      auto selectionList = gridView_p->getSelectionList();
+      if (selectionList){
+        ClipBoard::cutClipboardList(selectionList);
+        // cleanup
+        Basic::freeSelectionList(selectionList);
+        cutCopyReload(gridView_p);
+        gtk_selection_model_unselect_all(Child::selection());
+       }
+      return;
+    }
+
+    static void mainCopy(GtkButton * button, void *data){
+      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+      auto selectionList = gridView_p->getSelectionList();
+      if (selectionList){
+        ClipBoard::copyClipboardList(selectionList);
+        // cleanup
+        Basic::freeSelectionList(selectionList);
+        cutCopyReload(gridView_p);
+        gtk_selection_model_unselect_all(Child::selection());
+      }
+      return;
     }
 
     void mkNotebook(){
@@ -386,6 +456,12 @@ private:
       delete myMainMenu;*/
       g_signal_connect(G_OBJECT(pasteButton), "clicked", 
               BUTTON_CALLBACK(mainPaste), (void *)this);   
+      g_signal_connect(G_OBJECT(cutButton), "clicked", 
+              BUTTON_CALLBACK(mainCut), (void *)this);   
+      g_signal_connect(G_OBJECT(copyButton), "clicked", 
+              BUTTON_CALLBACK(mainCopy), (void *)this);   
+
+
       g_signal_connect(G_OBJECT(newTabButton), "clicked", 
               BUTTON_CALLBACK(on_new_page), (void *)this);    
       g_signal_connect (notebook_, "switch-page", 
@@ -491,11 +567,8 @@ private:
       //auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
       //gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
       auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-      if (c->validClipBoard()){
-        gtk_widget_set_visible(GTK_WIDGET(paste), true);
-      } else {
-        gtk_widget_set_visible(GTK_WIDGET(paste), false);
-      }
+      gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
+      
       gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
       gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
       for (auto p=show; p && *p; p++){
