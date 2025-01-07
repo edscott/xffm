@@ -164,7 +164,7 @@ template <class Type>
           if (g_file_info_get_is_symlink(info)){
             struct stat st;
             if (stat(path, &st) < 0) {
-              auto paintable = Texture<bool>::load(EMBLEM_BROKEN);
+              auto paintable = Texture<bool>::load(EMBLEM_BROKEN, size);
               texture = Texture<bool>::addEmblem(paintable,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
             } else {
               texture = Texture<bool>::addEmblem(info,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
@@ -173,7 +173,7 @@ template <class Type>
             auto gfiletype= g_file_info_get_file_type (info);
             switch (gfiletype){
               default:
-                texture = Texture<bool>::load(info); // Loads icon from icontheme.
+                texture = Texture<bool>::load(info, size); // Loads icon from icontheme.
                 break;
               case (G_FILE_TYPE_MOUNTABLE): // does not work FIXME: use fstab routines
                 {

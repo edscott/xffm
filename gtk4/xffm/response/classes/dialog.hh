@@ -9,11 +9,12 @@ namespace xf
     static GtkWidget *buttonBox(const char *iconName, const char *tooltip, void *callback, void *data){
 
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
-      auto paintable = Texture<bool>::load(iconName);
-      auto image = gtk_image_new_from_paintable(paintable);
-      gtk_widget_set_size_request(image, 25, 25); 
-      //gtk_widget_set_sensitive(image, false);
-      gtk_widget_set_sensitive(image, true);
+      //auto paintable = Texture<bool>::load(iconName);
+      //auto image = gtk_image_new_from_paintable(paintable);
+      //gtk_widget_set_size_request(image, 25, 25); 
+      auto image = Texture<bool>::getImage(iconName, 24);
+
+      gtk_widget_set_sensitive(GTK_WIDGET(image), true);
       Basic::boxPack0(box, GTK_WIDGET(image), true, true, 1);
       gtk_widget_set_tooltip_markup(GTK_WIDGET(box), tooltip);
       // motion

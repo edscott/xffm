@@ -11,6 +11,7 @@
 #define DOCUMENT_PROPERTIES "document-properties"
 #define WINDOW_SHUTDOWN "system-shutdown-symbolic"
 #define WINDOW_CLOSE "window-close-symbolic"
+#define HARD_DISK "drive-harddisk"
 
 // Menu icons
 #define EMBLEM_GREEN_BALL "emblem-greenball"
@@ -18,7 +19,7 @@
 #define EMBLEM_NOACCESS "emblem-noaccess"
 #define EMBLEM_NEW_TAB "view-dual"
 #define EMBLEM_RUN "emblem-run"
-#define EMBLEM_SYMLINK "emblem-symbolic-link"
+#define EMBLEM_SYMLINK "emblem-link"
 #define EMBLEM_SAVE "document-save"
 #define EMBLEM_SAVE_AS "document-save-as"
 #define EMBLEM_DELETE "delete"

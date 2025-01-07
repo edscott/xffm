@@ -168,10 +168,11 @@ namespace xf
     void setCloseBox(const char *iconName, const char *tooltip){
       auto old = gtk_widget_get_first_child (GTK_WIDGET(closeBox_));
       gtk_widget_unparent(old);
-      auto paintable = Texture<bool>::load(iconName);
-      auto image = gtk_image_new_from_paintable(paintable);
-      gtk_widget_set_size_request(image, 18,18);
-      gtk_widget_set_sensitive(image, true);
+      //auto paintable = Texture<bool>::load(iconName);
+      //auto image = gtk_image_new_from_paintable(paintable);
+      //gtk_widget_set_size_request(image, 18,18);
+      auto image = Texture<bool>::getImage(iconName, 18);
+      gtk_widget_set_sensitive(GTK_WIDGET(image), true);
       Basic::boxPack0(closeBox_, GTK_WIDGET(image), true, true, 1);
       gtk_widget_set_tooltip_markup(GTK_WIDGET(closeBox_), tooltip);
     }
@@ -199,19 +200,6 @@ private:
       TRACE("subclass label is %s\n",subClass_->label());     
       setLabelText(subClass_->label());
     }
-
- /*   void mkIcon(void){
-      const char *iconName = subClass_->iconName();
-      if (!iconName) return;
-      auto paintable = Texture<bool>::load(iconName, 24);
-      if (paintable) {
-        auto image = gtk_image_new_from_paintable(paintable);
-        gtk_widget_set_size_request(GTK_WIDGET(image), 24, 24);
-        if (image) {
-          gtk_box_prepend(labelBox_, image);
-        }
-      }      
-    }*/
 
     static void *runWait_f(void *data){
       auto dialogObject = (dialog_t *)data;

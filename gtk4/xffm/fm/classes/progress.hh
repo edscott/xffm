@@ -34,11 +34,8 @@ private:
          
          // Add the label, and show everything we have added
          if (icon){
-            auto paintable = Texture<bool>::load(icon); 
-            if (paintable) {
-                auto image = gtk_image_new_from_paintable(paintable);
-                Basic::boxPack0(vbox, image, FALSE, FALSE,0);
-            }
+            auto image = Texture<bool>::getImage(icon, 48); 
+            Basic::boxPack0(vbox, GTK_WIDGET(image), FALSE, FALSE,0);
          }
          Basic::boxPack0(vbox, GTK_WIDGET(label_), FALSE, FALSE,0);
          progressBar_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());

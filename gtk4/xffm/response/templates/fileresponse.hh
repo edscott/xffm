@@ -629,10 +629,12 @@ private: // Nonfree functions
           
           auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
           if (oldImage) gtk_widget_unparent(oldImage);
-          auto paintable = Texture<bool>::load(info);
-          auto image = gtk_image_new_from_paintable(paintable);
-          gtk_widget_set_size_request(image, 16, 16);
-          gtk_box_append(GTK_BOX(imageBox), image);
+          //auto paintable = Texture<bool>::load(info);
+          //auto image = gtk_image_new_from_paintable(paintable);
+          //gtk_widget_set_size_request(image, 16, 16);
+          auto image = Texture<bool>::getImage(info, 16);
+          
+          gtk_box_append(GTK_BOX(imageBox), GTK_WIDGET(image));
         } else { // info column
           auto path = Basic::getPath(info);
           struct stat st;

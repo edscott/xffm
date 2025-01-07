@@ -258,7 +258,8 @@ public:
         auto iconName = (const char *) g_hash_table_lookup(mHash[0], *p);
         //TRACE("icon is %s\n",icon);
         if (iconName){
-          auto image = gtk_image_new_from_icon_name(iconName);
+          auto image = Texture<bool>::getImage(iconName, 16);
+//          auto image = gtk_image_new_from_icon_name(iconName);
           boxPack(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
         }
         boxPack(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);

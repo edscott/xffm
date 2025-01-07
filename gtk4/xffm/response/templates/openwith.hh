@@ -84,7 +84,6 @@ public:
     OpenWith (GtkWindow *parent, const gchar *inPath, GList *selectionList){
       selectionList_ = selectionList;
       const gchar *windowTitle = _("Open With...");
-      const gchar *icon = "emblem-run";
       child_ = Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child_), "output"));
 
@@ -124,13 +123,14 @@ public:
       //gtk_window_set_child(dialog_, GTK_WIDGET(vbox));
       gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(vbox));
 
-      // icon title
-      if (icon){
-          auto paintable = Texture<bool>::load(icon);
-          auto image = gtk_image_new_from_paintable(paintable);
-          gtk_widget_set_size_request(image, 48, 48);
-          Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(image), TRUE, TRUE, 0);
-      }
+      // icon 
+        //auto paintable = Texture<bool>::load(EMBLEM_RUN,48);
+        //auto image = gtk_image_new_from_paintable(paintable);
+        //gtk_widget_set_size_request(image, 48, 48);
+        auto image = Texture<bool>::getImage(EMBLEM_RUN, 48);
+        //gtk_widget_set_size_request(GTK_WIDGET(image), 48, 48);
+        Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(image), TRUE, TRUE, 0);
+
       // path title
       auto label = GTK_LABEL(gtk_label_new (""));
       auto markup = g_strdup_printf("<span color=\"%s\" size=\"large\"> <b>%s</b></span>", 
@@ -172,7 +172,8 @@ public:
           auto labelExe = gtk_label_new(_("Is executable"));
           Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelExe), FALSE, FALSE, 5);
           auto execute = gtk_button_new();
-          auto run = gtk_image_new_from_icon_name("emblem-run");
+          auto run = Texture<bool>::getImage(EMBLEM_RUN, 48);
+          //auto run = gtk_image_new_from_icon_name(EMBLEM_RUN);
           auto ebox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
           auto elabel = gtk_label_new(_("Execute"));
           Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(run), FALSE, FALSE, 0);

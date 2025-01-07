@@ -9,7 +9,6 @@ bottom.svg
 cancel.svg
 clear.svg
 close.svg
-computer.svg
 configure.svg
 copy.svg
 cut.svg
@@ -18,7 +17,7 @@ dialog-authentication.svg
 dialog-info.svg
 dialog-question.svg
 dialog-warning.svg
-directory.svg
+display.svg
 dnd-multiple.svg
 dnd.svg
 document-new.svg
@@ -32,11 +31,12 @@ edit-cut.svg
 edit-delete.svg
 edit-find.svg
 edit-paste.svg
+edit-undo.svg
 execute.svg
 file.svg
 find.svg
 first.svg
-folder-new.svg
+folder.svg
 format-text-bold.svg
 go-back.svg
 go-bottom.svg
@@ -55,7 +55,6 @@ help.svg
 home.svg
 image-missing.svg
 index.svg
-info.svg
 jump.svg
 last.svg
 list-add.svg

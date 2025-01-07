@@ -4,92 +4,110 @@
 //static bool greenLightPreview = true;
 namespace xf {
   GHashTable *iconHash = NULL;
-  GHashTable *iconHash16= NULL;
 template <class Type> class Preview;
 template <class Type>  class Texture {
   /* {{{ Load */
+  public:
+
+    static GtkImage *getImage(const char *iconName, int size){
+      auto paintable = GDK_PAINTABLE(lookupIcon(iconName, size));
+      auto image = gtk_image_new_from_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(image), size, size);
+      return GTK_IMAGE(image);
+    }
+
+    static GtkImage *getImage(GFileInfo *info, int size){
+      auto gIcon = g_file_info_get_icon(info);
+      auto paintable = getIcon(gIcon, size);
+      auto image = gtk_image_new_from_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(image), size, size);
+      return GTK_IMAGE(image);
+    }
+
   private:
-      static GdkPaintable *getIcon16(const char *iconName){
-        if (!iconHash16) iconHash16 = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_object_unref);
-        auto paintable = g_hash_table_lookup(iconHash16, iconName);
+
+      static GtkIconPaintable *findIconInHash(const char *iconName, int size){
+        static bool initialized = false;
+        if (!initialized){
+          initialized = true;
+          iconHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_object_unref);
+        }
+
+        auto key = g_strdup_printf("%s-%d", iconName, size);
+        auto paintable = g_hash_table_lookup(iconHash, key);
+        g_free(key);
         if (paintable) {
           g_object_ref(paintable); // increment ref count...
                                    // This because gtkImage holds a reference
                                    // and when the widget is unparented,
                                    // it seems to call unref on the paintable.
-          return GDK_PAINTABLE(paintable);
+          return GTK_ICON_PAINTABLE(paintable);
         }
-        auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
-            iconTheme, iconName,
-            NULL, 16, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
-        g_object_ref(G_OBJECT(icon));
-        g_hash_table_insert(iconHash16, g_strdup(iconName), GDK_PAINTABLE(icon));
-        return GDK_PAINTABLE(icon);
+        return NULL;
       }
 
-      static GdkPaintable *getIcon(const char *iconName){
-        if (!iconHash) iconHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_object_unref);
-        auto paintable = g_hash_table_lookup(iconHash, iconName);
-        if (paintable) {
-          g_object_ref(paintable); // increment ref count...
-                                   // This because gtkImage holds a reference
-                                   // and when the widget is unparented,
-                                   // it seems to call unref on the paintable.
-          return GDK_PAINTABLE(paintable);
-        }
+      static  GtkIconPaintable *lookupIcon(const char *iconName, int size){
+        auto paintable = findIconInHash(iconName, size);        
+        if (paintable) return paintable;
 
+        DBG("*** Lookup icon \"%s-%d\"\n", iconName, size);
         auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
             iconTheme, iconName,
-            NULL, 96, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
+            NULL, size, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
         g_object_ref(G_OBJECT(icon));
-        g_hash_table_insert(iconHash, g_strdup(iconName), GDK_PAINTABLE(icon));
-        return GDK_PAINTABLE(icon);
+
+        auto key = g_strdup_printf("%s-%d", iconName, size);
+        g_hash_table_insert(iconHash, key, (void *)icon);
+        return GTK_ICON_PAINTABLE(icon);
       }
 
-      static GdkPaintable *getIcon(GIcon *gIcon){
-        if (!iconHash) iconHash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_object_unref);
-        auto iconName = g_icon_to_string(gIcon);
-        auto paintable = g_hash_table_lookup(iconHash, iconName);
-        if (paintable) {
+      static GdkPaintable *getIcon(const char *iconName, int width){
+        return GDK_PAINTABLE(lookupIcon(iconName, width));
+       }
+
+//      static GdkPaintable *getIcon(GIcon *gIcon){
+      static GdkPaintable *getIcon(GIcon *gIcon, int width){
+        auto key = g_icon_hash(gIcon);
+        auto iconName = g_strdup_printf("%d-%d", key, width);
+        
+        GdkPaintable *paintable = GDK_PAINTABLE(findIconInHash(iconName, width));
+        if (paintable){
           g_free(iconName);
-          g_object_ref(paintable); // increment ref count...
-                                   // This because gtkImage holds a reference
-                                   // and when the widget is unparented,
-                                   // it seems to call unref on the paintable.
-          return GDK_PAINTABLE(paintable);
+          return paintable;
         }
-        auto icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, 96, 
-            1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
 
+        auto icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, width, 
+            1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
+        
         g_object_ref(G_OBJECT(icon));
-        g_hash_table_insert(iconHash, iconName, GDK_PAINTABLE(icon));
+        g_hash_table_insert(iconHash, iconName, (void *)icon);
 
         return GDK_PAINTABLE(icon);
       }
       static
-      GdkPaintable *load(GIcon *gIcon){
+      GdkPaintable *load(GIcon *gIcon, int size){
         if (!gIcon){
           DBG("Texture::load():gicon is null\n");
           return NULL;
         }
-        return getIcon(gIcon);
+        return getIcon(gIcon, size);
       }
   public:        
 
       static
-      GdkPaintable *load(GFileInfo *info){
+      GdkPaintable *load(GFileInfo *info, int size){
         auto gIcon = g_file_info_get_icon(info);
-        return load(gIcon);
+        return load(gIcon, size);
       }
 
       static
-      GdkPaintable *load(const char *iconName){
+      GdkPaintable *load(const char *iconName, int size){
       //GdkPaintable *load(const char *iconName){
         if (!iconName){
           DBG("Texture::load(iconName): iconName is NULL\n");
           return NULL;
         }
-        return getIcon(iconName);
+        return getIcon(iconName, size);
       }
 
       static
@@ -99,7 +117,7 @@ template <class Type>  class Texture {
           DBG("Texture::load(iconName): iconName is NULL\n");
           return NULL;
         }
-        return getIcon16(iconName);
+        return getIcon(iconName, 16);
       }
 
     /* }}} */
@@ -137,13 +155,8 @@ public:
         bounds.size.height = height;
 
         gdk_paintable_snapshot (paintable, snapshot, width, height);
-        /*if (!emblem){
-          DBG("addEmblem()\n");
-        }*/
-        auto emblemIcon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
-            iconTheme, emblem,
-            NULL, width, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
-  
+        auto emblemIcon = lookupIcon(emblem, width);  
+//        auto emblemIcon = lookupIcon(emblem, width);  
         graphene_point_t point;
         point.x = 2*width/3; // width - (width/3);
         point.y = 0.0;
@@ -157,8 +170,7 @@ public:
     static GdkPaintable *addEmblem(GIcon *gIcon, const char *emblem, double width, double height){
         //
         if (!gIcon || !emblem) return NULL;
-        auto icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, width, 
-              1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
+        auto icon = getIcon(gIcon, width);
         return addEmblem(GDK_PAINTABLE(icon), emblem, width, height);
     }
 
@@ -166,7 +178,7 @@ public:
     {
         auto gIcon = g_file_info_get_icon(info);
         if (gIcon == NULL) {
-          auto paintable = getIcon(EMBLEM_BROKEN);
+          auto paintable = getIcon(EMBLEM_BROKEN, width);
           return addEmblem(paintable, emblem, width, height);
         }
         return addEmblem(gIcon, emblem, width, height);
@@ -174,9 +186,7 @@ public:
 
     static GdkPaintable *addEmblem(const char *iconName, const char *emblem, double width, double height)
     {
-        auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
-            iconTheme, iconName,
-            NULL, width, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
+        auto icon = lookupIcon(iconName, width);
         return addEmblem(GDK_PAINTABLE(icon), emblem, width, height);
     }
  
@@ -184,10 +194,10 @@ public:
     static GdkPaintable *getShadedIcon(GFileInfo *info, double width, double height, const char *emblem)
     {
         auto gIcon = g_file_info_get_icon(info);
-        GtkIconPaintable *icon;
+        GdkPaintable *icon;
         if (gIcon) {
-          icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, 96, 
-              1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
+          icon = getIcon(gIcon, width);
+          //icon = gtk_icon_theme_lookup_by_gicon(iconTheme, gIcon, 96, 1, GTK_TEXT_DIR_NONE,(GtkIconLookupFlags)0);
         } else {
           auto path = Basic::getPath(info);
           DBG("Error:: no GIcon at getShadedIcon(%s)\n", path);
@@ -199,9 +209,8 @@ public:
 
     static GdkPaintable *getShadedIcon(const char *iconName, double width, double height, const char *emblem)
     {
-        auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
-            iconTheme, iconName,
-            NULL, width, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
+        DBG("*** Lookup icon \"%s\"\n", iconName);
+        auto icon = lookupIcon(iconName, width);
         return getShadedIcon(GDK_PAINTABLE(icon), width, height, emblem);
     }
     
