@@ -76,6 +76,7 @@ static GtkButton *cutButton = NULL;
 static GtkButton *copyButton = NULL;
 static GtkButton *pasteButton = NULL;
 static int longPressSerial = -1;
+static GtkNotebook *mainNotebook = NULL;
 
 // classes and templates
 // basic classes
@@ -132,12 +133,14 @@ static int longPressSerial = -1;
 #include "fm/classes/fstab.hh"       // fm class
 #include "fm/classes/root.hh"       // fm class
 #include "fm/templates/dnd.hh"     // fm template
+                                   //
 #include "fm/templates/factory.hh"     // fm template
 #include "fm/templates/gridview.hh"     // fm template
 #include "fm/templates/utilpathbar.hh"  // fm template
 #include "fm/templates/pathbar.hh"      // fm template
 #include "fm/templates/workdir.hh"      // fm template
 #include "fm/templates/util.hh"         // fm template
+                                        //
 #include "fm/templates/prompt.hh"       // fm template
 #include "fm/classes/fmbuttonbox.hh"    // fm class
 #include "fm/classes/fmpage.hh"         // fm class

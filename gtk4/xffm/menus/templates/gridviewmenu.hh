@@ -295,6 +295,7 @@ namespace xf {
         // do your thing
         ClipBoard::copyClipboardList(selectionList);
         // cleanup
+        MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         return;
@@ -317,6 +318,7 @@ namespace xf {
         // do your thing
         ClipBoard::cutClipboardList(selectionList);
         // cleanup
+        MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         return;

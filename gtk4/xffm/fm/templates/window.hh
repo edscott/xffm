@@ -6,7 +6,7 @@
 namespace xf {
 class Type;
 
-template <class MainClass> 
+template <class Type> 
 class MainWindow: public FMbuttonBox {
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
@@ -24,7 +24,6 @@ private:
 // Constructor  
 public:
     GtkNotebook *notebook(void) {return notebook_;}
-//    GtkNotebook *getNotebook(void) {return notebook_;}
     MainWindow(const gchar *path){
         createWindow(); 
         //g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
@@ -240,7 +239,150 @@ private:
       Basic::boxPack0(tabBox, GTK_WIDGET(close),  FALSE, FALSE, 0);
       return GTK_WIDGET(tabBox);
     }
+
 public:
+    
+  static void resetAdj(int value){
+        auto page_p = (FMpage *)Child::page();
+        auto scrollW = page_p->gridScrolledWindow();
+        auto adjustment = gtk_scrolled_window_get_vadjustment(scrollW);
+        gtk_adjustment_set_value(adjustment, value);
+  }
+private:
+  
+    static void *resetPosition(void *data){
+        auto arg = (void **)data;
+        auto path = (const char *)arg[0];
+        auto value_p = (double *)arg[1];
+        auto adjustment = GTK_ADJUSTMENT(arg[2]);
+
+        Basic::flushGTK();
+        DBG("*** new scrollW, new adjustment %p value  to %lf\n",  adjustment, *value_p);
+        gtk_adjustment_set_value(adjustment, *value_p);
+        return NULL;
+
+    }
+
+#if 10
+private:
+
+
+      static void *reloadIt(void *data){
+        auto arg = (void **)data;
+        auto path = (const char *)arg[0];
+        auto value_p = (double *)arg[1];
+        auto adjustment = GTK_ADJUSTMENT(arg[2]);
+        TRACE("*** reloadIt workdir is %s\n", path);
+
+        Workdir<Type>::setWorkdir(path);
+
+        Basic::context_function(resetPosition, arg);
+        g_free(arg[0]);
+        g_free(arg[1]);
+        g_free(arg);
+        return NULL;
+      }
+
+public:
+
+      static void *threadReload(void *data){
+        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        TRACE("threadReload waiting for condition...\n");
+        c->conditionWait();
+        TRACE("Go ahead condition received.\n");
+        
+        Basic::context_function(reloadIt, data);
+        return NULL;
+      }
+    
+
+
+
+#else
+private:   
+     static void *reloadAll(void *data){
+        auto arg = (void **)data;
+        auto path = (const char *)arg[0];
+        auto value_p = (double *)arg[1];
+        auto adjustment = GTK_ADJUSTMENT(arg[2]);
+        
+        auto notebook = GTK_NOTEBOOK(mainNotebook);
+        auto n = gtk_notebook_get_n_pages(notebook);
+        for (int i=0; i<n; i++){
+          auto child = gtk_notebook_get_nth_page(notebook, i);
+          auto gridview_p = (GridView<Type> *)Child::getGridviewObject(child);
+          auto store = gridview_p->store();
+          if (g_object_get_data(G_OBJECT(store), "xffm::root")) continue;
+          if (g_object_get_data(G_OBJECT(store), "xffm::fstab")) continue;
+          if (strcmp(gridview_p->path(), path)) {
+            DBG("skipping %s\n", gridview_p->path());
+            continue;
+          }
+          bool current = ((void *)Child::getGridviewObject() == (void *)gridview_p);
+          if (current) continue;
+
+          Workdir<Type>::setWorkdir(path,child);
+        }
+
+        Workdir<Type>::setWorkdir(path);
+        Basic::context_function(resetPosition, arg);
+
+        g_free(arg[0]);
+        g_free(arg[1]);
+        g_free(arg);
+        return NULL;
+      }
+
+      static void *threadReload(void *data){
+        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        TRACE("threadReload waiting for condition...\n");
+        c->conditionWait();
+        TRACE("Go ahead condition received.\n");
+        
+        Basic::context_function(reloadAll, data);
+        return NULL;
+      }
+
+public:
+     
+
+/*    static void update(char *path){
+        TRACE("*** page=%p, scrolledWindow=%p, adjustmentValue= %lf\n", page_p, scrollW, value);
+        // get scroll position arg[1] = ; 
+
+        pthread_t thread;
+        pthread_create(&thread, NULL, threadReload, (void *)path);
+        pthread_detach(thread);
+
+    }*/
+#endif
+
+    static void update(char *path){
+        auto page_p = (FMpage *)Child::page();
+        auto scrollW = page_p->gridScrolledWindow();
+        auto adjustment = gtk_scrolled_window_get_vadjustment(scrollW);
+        auto value = gtk_adjustment_get_value(adjustment);
+        auto value_p = (double *)calloc(1, sizeof(double));
+        *value_p = value;
+        
+        void **arg = (void **)calloc(4, sizeof(void *));
+        arg[0] = (void *) path;
+        arg[1] = (void *)value_p;
+        arg[2] = (void *)adjustment;
+
+        TRACE("*** page=%p, scrolledWindow=%p, adjustmentValue= %lf\n", page_p, scrollW, value);
+        // get scroll position arg[1] = ; 
+
+        pthread_t thread;
+        pthread_create(&thread, NULL, threadReload, arg);
+        pthread_detach(thread);
+
+    }
+
+
+
+public:
+
     void addPage(const gchar *path){
       auto page = new FMpage(path);
       auto child = page->childBox();
@@ -258,11 +400,11 @@ public:
       auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
       gtk_notebook_set_tab_reorderable (notebook_, GTK_WIDGET(child), true);
       gtk_widget_realize(GTK_WIDGET(child));
-      Basic::flushGTK();
+      //Basic::flushGTK();
 #ifdef ENABLE_MENU_CLASS
 #warning "ENABLE_MENU_CLASS active"
         auto pathbar_ = Child::getPathbar();
-        auto myPathbarMenu = new Menu<PathbarMenu<MainClass> >;
+        auto myPathbarMenu = new Menu<PathbarMenu<Type> >;
         auto title = g_strconcat("<span color=\"blue\">", _("foo Navigation Toolbar"), "</span>", NULL);
         auto menu = myPathbarMenu->getMenu(title);
         g_free(title);
@@ -271,7 +413,7 @@ public:
         //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
         //gtk_popover_set_default_widget(menu, GTK_WIDGET(MainWidget));
         //gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
-        DBG("menu parent = %p (should be null)\n", gtk_widget_get_parent(GTK_WIDGET(menu)));
+        TRACE("menu parent = %p (should be null)\n", gtk_widget_get_parent(GTK_WIDGET(menu)));
         gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
         Print::addMenu(menu, GTK_WIDGET(pathbar_));
 #endif      
@@ -331,7 +473,22 @@ private:
       
     }
 
+     // does not update icon on first, but second switch page
+     // most probably because it is working on the source page
+    /*static void *switchReload(void *data){
+      auto arg = (void **)data;
+      auto path = (const char *)arg[0];
+      auto child = GTK_WIDGET(arg[1]);
+
+      Basic::flushGTK();
+      Workdir<Type>::setWorkdir(path,child);
+      //Basic::flushGTK();
+      //Workdir<Type>::setWorkdir(path,child);
+      return NULL;
+    }*/
+
     void switchPage (gint new_page) {
+      // HMM. it seems that gtk internal does not really do this in main context...
       // hide all close buttons
       for (GList *l=pageList_; l && l->data; l=l->next){
         GtkWidget *box = (GtkWidget *)l->data;
@@ -358,6 +515,16 @@ private:
         gtk_widget_set_sensitive(GTK_WIDGET(cutButton), (gtk_bitset_get_size(bitset) > 0));
         gtk_widget_set_sensitive(GTK_WIDGET(copyButton), (gtk_bitset_get_size(bitset) > 0));
       }
+
+      /*
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject(child);
+      auto path = g_strdup(Child::getWorkdir(child));
+      void *arg[]={(void *)path, (void *)child, NULL};
+      Basic::context_function(switchReload, arg); 
+      g_free(path);
+      */
+      
+      
         
        
       gtk_widget_grab_focus(GTK_WIDGET(input));
@@ -378,29 +545,15 @@ private:
       g_free(target);      
     }
 
-    static void cutCopyReload(GridView<LocalDir> *gridView_p){
-        auto bitset = gtk_selection_model_get_selection(Child::selection());
-        guint position;
-        GtkBitsetIter iter;
-        auto monitor = (GFileMonitor *)gridView_p->monitor();
-        if (gtk_bitset_iter_init_first (&iter, bitset, &position)){
-            auto list = G_LIST_MODEL(Child::selection());        
-            auto info = G_FILE_INFO(g_list_model_get_item (list, position));
-            auto file = Basic::getGfile(info);
-            g_file_monitor_emit_event (monitor,
-                   file, NULL, G_FILE_MONITOR_EVENT_CHANGED);  
-        }
-    }
-
     static void mainCut(GtkButton * button, void *data){
+      
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         ClipBoard::cutClipboardList(selectionList);
-        // cleanup
-        Basic::freeSelectionList(selectionList);
-        cutCopyReload(gridView_p);
         gtk_selection_model_unselect_all(Child::selection());
+        update(g_strdup(Child::getWorkdir()));
+        Basic::freeSelectionList(selectionList);
        }
       return;
     }
@@ -410,16 +563,17 @@ private:
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
         ClipBoard::copyClipboardList(selectionList);
-        // cleanup
-        Basic::freeSelectionList(selectionList);
-        cutCopyReload(gridView_p);
         gtk_selection_model_unselect_all(Child::selection());
+        update(g_strdup(Child::getWorkdir()));
+        Basic::freeSelectionList(selectionList);
       }
       return;
     }
 
     void mkNotebook(){
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
+      mainNotebook = notebook_;
+      
       g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
       gtk_notebook_set_scrollable (notebook_, TRUE);
 
@@ -442,7 +596,7 @@ private:
       auto newTabButton = Basic::newButton(LIST_ADD, _("New Tab"));
       auto newMenuButton = Basic::newButton(OPEN_MENU, _("Main menu"));
       mainMenuButton = newMenuButton;// global button (xffm.h)
-      auto myMainMenu = new Menu<MainMenu<MainClass> >(_("Main menu"));
+      auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
       menu_ = myMainMenu->mkMenu(NULL);
       TRACE("menu popover = %p\n", menu_);
       gtk_widget_set_parent(GTK_WIDGET(menu_), GTK_WIDGET(newMenuButton));
@@ -451,7 +605,7 @@ private:
 
       /*
       auto newMenuButton = Basic::newMenuButton(OPEN_MENU, NULL);
-      auto myMainMenu = new Menu<MainMenu<MainClass> >(_("Main menu"));
+      auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
       myMainMenu->setMenu(newMenuButton);
       delete myMainMenu;*/
       g_signal_connect(G_OBJECT(pasteButton), "clicked", 

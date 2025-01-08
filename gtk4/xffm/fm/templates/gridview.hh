@@ -182,20 +182,20 @@ template <class Type>
           auto store = G_LIST_MODEL(g_object_get_data(G_OBJECT(selectionModel_), "store"));
           auto file = G_FILE(g_object_get_data(G_OBJECT(store), "file"));
           GError *error_ = NULL;
-          auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
-          g_object_set_data(G_OBJECT(monitor), "file", file);
-          Child::addMonitor(monitor);
+          monitor_ = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
+          g_object_set_data(G_OBJECT(monitor_), "file", file);
+          Child::addMonitor(monitor_);
 
-          TRACE("monitor=%p file=%p store=%p\n", monitor, file, store);
+          TRACE("monitor_=%p file=%p store=%p\n", monitor_, file, store);
           if (error_){
               ERROR("g_file_monitor_directory(%s) failed: %s\n",
                       "fixme", error_->message);
               g_error_free(error_);
           } else {
-            g_signal_connect (monitor, "changed", 
+            g_signal_connect (monitor_, "changed", 
                   G_CALLBACK (changed_f), (void *)this);
           }
-          g_object_set_data(G_OBJECT(store), "monitor", monitor);
+          g_object_set_data(G_OBJECT(store), "monitor", monitor_);
         }
  ////////////////
 
@@ -203,24 +203,6 @@ template <class Type>
       }
 
   private:
-
-      static void *reloadIt(void *data){
-        auto arg = (void **)data;
-        auto path = (const char *)arg[0];
-        DBG("*** reloadIt workdir is %s\n", path);
-
-        Workdir<Type>::setWorkdir(path);
-        return NULL;
-      }
-      static void *threadReload(void *data){
-        auto arg = (void **)data;
-        auto path = (char *)arg[0];
-        usleep(500000);
-        Basic::context_function(reloadIt, data);
-        g_free(path);
-        g_free(arg);
-        return NULL;
-      }
 
       static void
       changed_f ( GFileMonitor* self,  
@@ -290,8 +272,10 @@ template <class Type>
                 if (found) {
                    Child::incrementSerial(child);
                    g_list_store_remove(store, positionF);
+                   DBG("removing %s\n",f);
                    Child::incrementSerial(child);
                    LocalDir::insert(store, f, verbose);                        
+                   DBG("inserting %s\n",f);
                 } else {
                   DBG("%s not found!\n", f);
                 }
@@ -347,20 +331,14 @@ template <class Type>
               
          // When doing cut/copy, problem is that callback is
          // happening before change signal.
-
-
           //if (verbose) 
                 {DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
           // This works, but scrollbar is not updated to last position
           // And then it is broken because icon is not updated when a different
           // icon is set to cut or copy
-                void **arg = (void **)calloc(3, sizeof(void *));
-                arg[0] = (void *) g_strdup(Workdir<Type>::getWorkdir());
-                // get scroll position arg[1] = ; 
-
-                pthread_t thread;
-                pthread_create(&thread, NULL, threadReload, arg);
-                pthread_detach(thread);
+                // Only for updating icons after cut/copy
+                //MainWindow<Type>::update(g_path_get_dirname(f));
+                //MainWindow<Type>::update(g_path_get_dirname(f));
   
             } break;
             case G_FILE_MONITOR_EVENT_MOVED:

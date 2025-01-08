@@ -129,6 +129,16 @@ namespace xf {
       return NULL;
     }
 
+    static void *page(GtkWidget *child){
+      return g_object_get_data(G_OBJECT(child), "page");
+    }
+
+    static void *page(void){
+      return page(getChild());
+    }
+
+
+
     static void *getGridviewObject(void){
       auto child =  Child::getChild();
       return (void *)g_object_get_data(G_OBJECT(child), "GridviewObject");

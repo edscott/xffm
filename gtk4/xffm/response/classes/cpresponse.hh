@@ -203,20 +203,20 @@ private:
       auto target= (char *)arg[0];
       auto list = (GList *)(arg[1]);
 
-    DBG("overwriteMessage target=%s, list=%p\n", target, list);
+    TRACE("overwriteMessage target=%s, list=%p\n", target, list);
       for (auto l=list; l && l->data; l=l->next){
         auto base = g_path_get_basename((const char *)l->data);
         auto f = g_strconcat(target, G_DIR_SEPARATOR_S, (const char *)base, NULL);
-        DBG("final target=%s\n", f);
+        TRACE("final target=%s\n", f);
         if (g_file_test(f, G_FILE_TEST_EXISTS)){
           auto b = g_strconcat(f, "~", NULL);
           auto text1 = g_strdup_printf(_("Backup file of %s: %s"), f, b);
           auto text = g_strconcat(_("Overwrite Destination"), ": ", text1, "\n", NULL);
           g_free(text1);
           auto output = Child::getOutput();
-    DBG(text);
+    TRACE(text);
           Print::printWarning(output, text); // this is run in main context.
-        } DBG("final target=\"%s\" does not exist\n", f);
+        } TRACE("final target=\"%s\" does not exist\n", f);
         g_free(base);
         g_free(f);
       }

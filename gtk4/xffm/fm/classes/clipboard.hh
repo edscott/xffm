@@ -8,7 +8,29 @@ namespace xf {
     bool validClipBoard_ = FALSE;
     int clipBoardSemaphore_ = 1;
     char *clipBoardCache_ = NULL;
+    pthread_mutex_t clipCondMutex_ = PTHREAD_MUTEX_INITIALIZER;
+    pthread_cond_t clipCond_ = PTHREAD_COND_INITIALIZER;
+    bool wait_ = false;
 public:
+
+    void conditionWait(void){
+      wait_ = true;
+      pthread_mutex_lock(&clipCondMutex_);
+      DBG("*** clipCond_ wait\n");
+      pthread_cond_wait(&clipCond_, &clipCondMutex_);
+      pthread_mutex_unlock(&clipCondMutex_);
+      DBG("*** clipCond_ go ahead\n");
+      wait_ = false;
+    }
+
+    void signalConditionWait(void){
+      if (!wait_) return;
+      DBG("*** clipCond signaling...\n");
+      pthread_mutex_lock(&clipCondMutex_);
+      pthread_cond_signal(&clipCond_);
+      pthread_mutex_unlock(&clipCondMutex_);
+      DBG("*** clipCond signaled\n");
+    }
 
     ClipBoard(void){
       clipBoard_ = gdk_display_get_clipboard(gdk_display_get_default());
@@ -270,8 +292,11 @@ private:
         else if (strncmp(text, "move", strlen("move")) == 0) c->setValidity(true);
         else c->setValidity(false);
         TRACE("Clip board is valid = %d\n", c->validClipBoard());
+        // Global paste button:
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         updateClipBoardCache(c, text);
+        // Signal condition
+        c->signalConditionWait();
         return;
     }
 

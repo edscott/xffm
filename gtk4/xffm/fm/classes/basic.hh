@@ -492,7 +492,13 @@ public:
     static void
     flushGTK(void){
       // This may introduce race conditions
-      //while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
+      // Should only be done by main thread
+      gboolean owner = g_main_context_is_owner(g_main_context_default());
+      if (owner){
+        while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
+      } else {
+        DBG("*** Basic::flushGTK may only be called from main context\n");
+      }
     }
     static gchar *
     utf_string (const gchar * t) {

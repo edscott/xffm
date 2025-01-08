@@ -3,11 +3,12 @@
 // This menu is not using the Menu class template.
 namespace xf {
   template <class Type> class RunButton;
-  template <class DirectoryClass>
+  template <class Type>
   class MainMenu {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
+        "test",
 //          _("Search"),
 //          _("Open terminal"),
         _("Paste"), // 
@@ -67,18 +68,19 @@ namespace xf {
       return menuIconNames_;
     }
     MenuInfo_t *callbacks(void){
-      static MenuInfo_t menuCallbacks_[] = { // Need not be complete with regards to keys_.
-        {_("Empty trash bin"),(void *) MenuCallbacks<DirectoryClass>::emptyTrash}, 
-        {_("Paste"),(void *) MenuCallbacks<DirectoryClass>::paste}, 
-        {_("Toggle Text Mode"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
+      static MenuInfo_t menuCallbacks_[] = { 
+        // Need not be complete with regards to keys_.
+        {_("Empty trash bin"),(void *) MenuCallbacks<Type>::emptyTrash}, 
+        {_("Paste"),(void *) MenuCallbacks<Type>::paste}, 
+        {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::popCall}, 
         {_("Add bookmark"),(void *) addB}, 
         {_("Remove bookmark"),(void *) removeB}, 
         {_("Select All"),(void *) selectAll}, 
-        {_("Search"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
+        {_("Search"),(void *) MenuCallbacks<Type>::popCall}, 
         
-        {_("Open terminal"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
-        {_("Home"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
-        //{_("Color settings"),(void *) MenuCallbacks<DirectoryClass>::popCall}, 
+        {_("Open terminal"),(void *) MenuCallbacks<Type>::popCall}, 
+        {_("Home"),(void *) MenuCallbacks<Type>::popCall}, 
+        //{_("Color settings"),(void *) MenuCallbacks<Type>::popCall}, 
 
         {_("Open in New Window"),(void *)openXffmMain}, 
         {"test",(void *)test},
@@ -101,13 +103,13 @@ namespace xf {
     }
     MenuInfo_t *data(void){
       static MenuInfo_t menuData_[] = { // Need not be complete with regards to keys_ nor menuCallbacks_.
-        {_("Search"),(void *) MenuCallbacks<DirectoryClass>::openFind}, 
-        {_("Open terminal"),(void *) MenuCallbacks<DirectoryClass>::openTerminal}, 
-        {_("Home"),(void *) MenuCallbacks<DirectoryClass>::goHome}, 
+        {_("Search"),(void *) MenuCallbacks<Type>::openFind}, 
+        {_("Open terminal"),(void *) MenuCallbacks<Type>::openTerminal}, 
+        {_("Home"),(void *) MenuCallbacks<Type>::goHome}, 
         // FIXME: this must be submenu, with known unresolved parent issues
-        //{_("Color settings"),(void *) MenuCallbacks<DirectoryClass>::}, 
+        //{_("Color settings"),(void *) MenuCallbacks<Type>::}, 
         //
-        {_("Toggle Text Mode"),(void *) MenuCallbacks<DirectoryClass>::toggleVpane}, 
+        {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::toggleVpane}, 
        // {_("Copy"),(void *) cpResponse::action}, 
         {_("Hidden files"),(void *) _("Hidden files")},
         {_("Backup files"),(void *) _("Backup files")},
@@ -156,7 +158,7 @@ namespace xf {
       if (strcmp(item,_("Size")) == 0) bit = 0x10;
       if (strcmp(item,_("File type")) == 0) bit = 0x20;
       if (strcmp(item,_("Name")) == 0) bit = 0x40;
-      auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       auto flags = gridView_p->flags();
 
       if (gtk_check_button_get_active(check)) {
@@ -201,20 +203,20 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
 
-      auto gridview_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
 
       TRACE("apply %s...\n", gridview_p->path());
       Settings::setInteger("flags", gridview_p->path(), gridview_p->flags());
       //gtk_widget_unparent(GTK_WIDGET(menu));
       auto store = gridview_p->store();
       if (g_object_get_data(G_OBJECT(store), "xffm::root")){
-        Workdir<DirectoryClass>::setWorkdir(_("Bookmarks"));
-        //Workdir<DirectoryClass>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
+        Workdir<Type>::setWorkdir(_("Bookmarks"));
+        //Workdir<Type>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
       } else if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
-        Workdir<DirectoryClass>::setWorkdir(_("Disk Mounter"));
-        //Workdir<DirectoryClass>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
+        Workdir<Type>::setWorkdir(_("Disk Mounter"));
+        //Workdir<Type>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
       } else {
-        Workdir<DirectoryClass>::setWorkdir(gridview_p->path());
+        Workdir<Type>::setWorkdir(gridview_p->path());
       }
     }
 
@@ -222,20 +224,20 @@ namespace xf {
     static void addB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       Bookmarks::addBookmark(gridView_p->path());
      }
     static void removeB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<DirectoryClass> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       Bookmarks::removeBookmark(gridView_p->path());
     }
 
     static void selectAll(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto gridView_p = (GridView<DirectoryClass> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       if (!gridView_p) {
         DBG("selectAll: no gridView_p\n");
         return;
@@ -255,6 +257,8 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       Dialogs::info("foo and bar");
+      MainWindow<Type>::resetAdj(250);
+
       return;
     }
 
@@ -285,7 +289,7 @@ namespace xf {
       auto buttonSpace = Child::getButtonSpace();
       auto xffm = g_strdup_printf("xffm -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
-      auto runButton = new (RunButton<DirectoryClass>);
+      auto runButton = new (RunButton<Type>);
       runButton->init(runButton, xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }
