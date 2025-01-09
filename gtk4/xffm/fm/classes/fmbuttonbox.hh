@@ -13,16 +13,16 @@ namespace xf {
            SEARCH, 
            OPEN_TERMINAL, 
            GO_HOME, 
-           //OPEN_FILEMANAGER, 
+           EMBLEM_NEW_WINDOW, 
            //EDIT_CLEAR,
-           "emblem-fifo",
+           EMBLEM_TOGGLE,
            NULL
          };
         const char *bText[]={
           _("Search"),
           _("Open terminal"),
           _("Home"),
-          //_("Clear Log"),
+          _("Open a New Window"),
           _("Toggle Text Mode"),
           NULL
         };
@@ -30,6 +30,7 @@ namespace xf {
           (void *)MenuCallbacks<LocalDir>::openFind,
           (void *)MenuCallbacks<LocalDir>::openTerminal,
           (void *)MenuCallbacks<LocalDir>::goHome,
+          (void *)MenuCallbacks<LocalDir>::newWindow,
           (void *)MenuCallbacks<LocalDir>::toggleVpane,
           NULL
         };

@@ -101,7 +101,7 @@ public:
 
       dialog_ = GTK_WINDOW(gtk_window_new ());
       //Basic::pushDialog(dialog_);
-      gtk_window_set_decorated(dialog_, false);
+      gtk_window_set_decorated(dialog_, true);
 
       gtk_window_set_title (GTK_WINDOW (dialog_), windowTitle);
       g_signal_connect (G_OBJECT (dialog_), "close-request", G_CALLBACK (OpenWith::dialogClose), this);

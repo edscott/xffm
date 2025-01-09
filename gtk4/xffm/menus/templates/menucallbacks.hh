@@ -67,6 +67,23 @@ namespace xf {
     }
 
     static void
+    newWindow(GtkButton *self, void *data){
+      auto childWidget =Child::getChild();
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
+      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
+      auto workDir = Child::getWorkdir(childWidget);
+      if (strcmp(_("Bookmarks"), workDir) == 0) workDir = "";
+
+      auto xffm4 = g_strdup_printf("xffm4 %s", workDir);
+      pid_t childPid = Run<Type>::shell_command(output, xffm4, false, false);
+
+      auto runButton = new (RunButton<Type>);
+      runButton->init(runButton, xffm4, childPid, output, workDir, buttonSpace);
+      g_free(xffm4);
+      return;
+    }
+
+    static void
     openFind(GtkButton *self, void *data){
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
