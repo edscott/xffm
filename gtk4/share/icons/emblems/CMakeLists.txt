@@ -1,4 +1,9 @@
 set(ICONS emblem-about.svg
+emblem-c.svg
+emblem-i.svg
+emblem-h.svg
+emblem-f.svg
+emblem-o.svg
 emblem-archlinux.svg
 emblem-bak.svg
 emblem-blockdevice.svg

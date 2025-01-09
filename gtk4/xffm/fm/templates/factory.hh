@@ -147,7 +147,7 @@ template <class Type>
         if (xffmPaintable) {
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(xffmPaintable));
         } else {
-          image = backupImage(name, path, info, size);
+          image = emblemedImage(name, path, info, size);
         }
 
         bool previewLoaded = false;
@@ -713,7 +713,7 @@ template <class Type>
 
 
 
-    static GtkWidget *backupImage(const char *name, const char *path, GFileInfo *info, int size){
+    static GtkWidget *emblemedImage(const char *name, const char *path, GFileInfo *info, int size){
       // Only for the hidden + backup items. Applies background mask.
       bool hidden = (name[0] == '.' && name[1] != '.');
       if (!hidden) hidden = g_file_info_get_is_hidden(info);
@@ -741,8 +741,50 @@ template <class Type>
           return GTK_WIDGET(image);
         // Texture reference is kept in hashtable.
       }
+
+      // My work source code
+      GtkWidget *image = sourceCode(name, info, size);
+      return image;
+
+    }
+
+    static GtkWidget *sourceCode(const char *name, GFileInfo *info, int size){
+      const char *cSrc[] = {"c", "C", "cc", "CC", NULL};
+      auto image = sourceCodeImage(name, info, size, EMBLEM_C, cSrc);
+      if (image) return image;
+
+      const char *fSrc[] = {"f", "F", "f90", "F90", "f95", "F95",NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_F, fSrc);
+      if (image) return image;
+
+      const char *iSrc[] = {"i", "I",NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_I, iSrc);
+      if (image) return image;
+      
+      const char *hSrc[] = {"h", "H", "HH", "hh", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_H, hSrc);
+      if (image) return image;
+      
+      const char *oSrc[] = {"o", "O", "obj", "OBJ", "dbg", "DBG", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_O, oSrc);
+      if (image) return image;
       return NULL;
     }
+
+    static GtkWidget *sourceCodeImage(const char *name, GFileInfo *info, int size, 
+        const char *emblem, const char **src){
+      auto extension = strrchr(name, '.');
+      if (!extension) return NULL;
+      for (auto p=src; p && *p; p++){
+        if (extension+1 != NULL && strcmp(extension+1, *(p)) == 0){
+          auto texture = Texture<bool>::addEmblem(info, emblem, size, size);   
+          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          return image;
+        }
+      }
+      return NULL;
+    }
+    
     static GtkWidget *execImage(const char *name, GFileInfo *info, int size){
 
       return NULL;

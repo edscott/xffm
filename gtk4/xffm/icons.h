@@ -13,6 +13,13 @@
 #define WINDOW_CLOSE "window-close-symbolic"
 #define HARD_DISK "drive-harddisk"
 
+// File type emblems
+#define EMBLEM_C "emblem-c"
+#define EMBLEM_I "emblem-i"
+#define EMBLEM_H "emblem-h"
+#define EMBLEM_F "emblem-f"
+#define EMBLEM_O "emblem-o"
+
 // Menu icons
 #define EMBLEM_GREEN_BALL "emblem-greenball"
 #define EMBLEM_RED_BALL "emblem-redball"
