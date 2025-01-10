@@ -80,7 +80,7 @@ namespace xf {
     public:
     static pid_t
     run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonSpace){
-      TRACE("run: %s\n", command);
+      TRACE("Prompt::run: \"%s\"\n", command);
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
         pid_t childPID = 0;
         auto workdir = Child::getWorkdir(child);
@@ -232,6 +232,7 @@ namespace xf {
       gchar **v = Util<LocalDir >::getVector(text, " ");
       char *inPath = g_find_program_in_path(v[0]);
       if (!inPath && g_file_test(v[0], G_FILE_TEST_IS_EXECUTABLE)) inPath = realpath(v[0], NULL);
+      if (!inPath && strncmp(v[0], "./", strlen("./")) == 0) inPath = g_strdup(v[0]);
       if (!inPath){
         Print::print(output, g_strdup_printf("$ %s\n", v[0]));
         Print::print(output, g_strdup_printf("%s: %s\n", v[0], _("Command not found.")));
