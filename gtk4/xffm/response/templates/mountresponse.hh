@@ -10,6 +10,7 @@ class  mountResponse {
    const char *iconName_;
    GtkWindow *dialog_ = NULL;
    char *mountDir_ = NULL;
+   char *mountSrc_ = NULL;
    char *folder_ = NULL;
    const char *path_ = NULL;
    GtkBox *mainBox_ = NULL;
@@ -22,14 +23,17 @@ class  mountResponse {
     GtkEntry *remoteEntry(void){return remoteEntry_;}
     void dialog(GtkWindow *value){ dialog_ = value; }
     GtkWindow *dialog(void){return dialog_;}
+    const char *path(void){return path_;}
 public:
     char *folder(){return  folder_;}
     void folder(const char *value){folder_ = value;}
+    const char *mountSrc(void){return mountSrc_;}
     
     ~mountResponse(void){
      TRACE("*** ~mountResponse...\n");
       g_free(folder_);
       g_free(mountDir_);
+      g_free(mountSrc_);
     }
     mountResponse(void){
      TRACE("*** mountResponse...\n");
@@ -83,8 +87,9 @@ public:
             TRACE("is in fstab OK \"%s\"\n", path_);
             mountTarget = FstabUtil::mountTarget(path_);
         }
-        auto mountSrc = FstabUtil::mountSrc(mountTarget);
-        TRACE("mountTarget=%s, mountSrc=%s\n", mountTarget, mountSrc);
+        mountSrc_ = FstabUtil::mountSrc(mountTarget);
+        TRACE("mountTarget=%s, mountSrc=%s\n", mountTarget, mountSrc_);
+        if (!mountSrc_) mountSrc_ = g_strdup(path_);
 
         // If no fstab file defined mount point, dirname is the suggested user mount point.
         char *dirname = NULL;
@@ -100,7 +105,7 @@ public:
         }
 
         auto label = gtk_label_new("");
-        auto string = g_strconcat("<span color=\"blue\"><b>",_("Mount Device"), ":\n</b></span>", mountSrc?mountSrc:path_, NULL);
+        auto string = g_strconcat("<span color=\"blue\"><b>",_("Mount Device"), ":\n</b></span>", mountSrc_, NULL);
         gtk_label_set_markup(GTK_LABEL(label), string);
         g_free(string);
         gtk_box_append(hbox, GTK_WIDGET(label));
@@ -116,8 +121,16 @@ public:
         auto text = g_strconcat(_("Mount Point"), ": ",NULL);
         TRACE("subClass folder =%s, %s\n", folder_, this->folder());
         remoteEntry_ = FileResponse<Type, subClass_t>::addEntry(mainBox_, "entry1", text, this);
+        auto entryBuffer = gtk_entry_get_buffer(remoteEntry_);
+        if (mountTarget) gtk_entry_buffer_set_text(entryBuffer, mountTarget, -1);
+        else {
+          auto base = g_path_get_basename(path_);
+          auto target = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", G_DIR_SEPARATOR_S, base, NULL);
+          gtk_entry_buffer_set_text(entryBuffer, target, -1);
+          g_free(base);
+          g_free(target);
+        }
         g_free(text);
-        //gtk_widget_set_sensitive(GTK_WIDGET(remoteEntry_), true); // FIXME: put to false 
 
         auto action_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(action_area), false);
@@ -139,7 +152,6 @@ public:
         g_free(basename);
         g_free(dirname);
         g_free(mountTarget);
-        g_free(mountSrc);
 
         return mainBox_;
     }
@@ -214,8 +226,24 @@ public:
     
     
     static void *asyncYes(void *data){
-      DBG("FIXME: do the mount\n"); 
-      //asyncYesArg(data, "mount");      
+      auto dialogObject = (DialogComplex<subClass_t> *)data;
+      auto entry = dialogObject->subClass()->remoteEntry();
+      auto buffer = gtk_entry_get_buffer(entry);
+      auto target = (const char *)gtk_entry_buffer_get_text(buffer);
+      auto output = Child::getOutput();
+      DBG(" do the mount, target = %s\n", target ); 
+      if (!g_file_test(target, G_FILE_TEST_EXISTS)){
+        if (mkdir(target,0777) < 0){
+          auto string = g_strdup_printf(_("Cannot create directory '%s'"), target);
+          Print::printError(output, g_strconcat(_("Sorry"), " ", string, " (", strerror(errno), ")\n", NULL));
+          g_free(string);
+          return NULL;
+        }
+      }
+      auto mountSrc = (const char *)dialogObject->subClass()->mountSrc();
+      const char *arg[]={"sudo", "-A", "mount", "-v", (const char *)mountSrc, (const char *)target, NULL};
+      Run<bool>::thread_run(output, arg, true);
+
        return NULL;
     }
 private:
