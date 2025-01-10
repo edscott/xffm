@@ -446,6 +446,27 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       }
     }
 
+    static void setPopoverItemsEfs(GtkPopover *popover, const char *path, GridView<Type> *gridView_p ){
+      auto keys = gridView_p->myMenu_->keys();
+      for (auto p=keys; p && *p; p++){
+      auto widget = g_object_get_data(G_OBJECT(popover), *p);
+        if (widget){
+          //TRACE("hide widget \"%s\"\n", *p);
+          gtk_widget_set_visible(GTK_WIDGET(widget), false);
+        } else {
+          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+        }
+      }
+      void *widget;
+      if (FstabDir::isMounted(path)){
+        widget = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
+        gtk_widget_set_visible(GTK_WIDGET(widget), true);
+      } else {
+        widget = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
+        gtk_widget_set_visible(GTK_WIDGET(widget), true);
+      }
+    }
+
     static void setPopoverItemsBookmark(GtkPopover *popover, const char *path, GridView<Type> *gridView_p ){
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
@@ -595,6 +616,8 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         setPopoverItemsFstab(GTK_POPOVER(popover), path, gridView_p);
       } else if (g_file_info_get_attribute_object(info, "xffm::bookmark")){
         setPopoverItemsBookmark(GTK_POPOVER(popover), path, gridView_p);
+      } else if (g_file_info_get_attribute_object(info, "xffm::ecryptfs")){
+        setPopoverItemsEfs(GTK_POPOVER(popover), path, gridView_p);
       } else {
         setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
       }
@@ -609,15 +632,29 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
   static void setupMenu(GtkPopover *popover, GFileInfo *info){
     DBG("setupMenu\n");
       auto path = Basic::getPath(info);
-      auto isEfs = g_object_get_data(G_OBJECT(info), "xffm::efs");
+      if (EfsResponse<Type>::isEfsMount(path)){
+        DBG("*** %s isEfs\n", path);
+        // hide all
+
+      }
+
+  /*    auto isEfs = g_object_get_data(G_OBJECT(info), "xffm::efs");
       if (isEfs){
+        DBG("*** %s isEfs!\n");
+        //auto mount = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
+        //auto unmount = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
         // hide all
         // show mount
-      }
+      }*/
 
 
 
       auto isDir = g_file_test(path, G_FILE_TEST_IS_DIR);
+      if (g_file_info_get_attribute_object(info, "xffm::fstabMount")) isDir = false;
+      if (g_file_info_get_attribute_object(info, "xffm::bookmark")) isDir = false;
+      if (g_file_info_get_attribute_object(info, "xffm::ecryptfs")) isDir = false;
+
+
       auto abutton = g_object_get_data(G_OBJECT(popover), _("auto"));
           TRACE("data get %p %s --> %p\n", popover, _("auto"), abutton);
       if (abutton){

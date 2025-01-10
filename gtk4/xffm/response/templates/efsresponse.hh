@@ -2,7 +2,7 @@
 #define EFSRESPONSE_HH
 
 #include "ecryptfs.i"
-
+template <class Type> class EFS;
 namespace xf {
   template <class Type>
   class EfsResponse {
@@ -32,9 +32,6 @@ public:
       g_free(folder_);
       g_free(title_);
       TRACE("EFS destructor\n");
-      cleanup();
-        //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
-        //gtk_window_destroy(response_);
     }
 
     EfsResponse (void){
@@ -45,6 +42,7 @@ public:
       children_ = g_list_prepend(children_, data);
     }
 
+    /* obsolete
     void cleanup(void){// FIXME: this is subject to race 
                        //GTK_IS_WINDOW(l->data) may cause crash
                        //probably should do with controls...
@@ -63,7 +61,7 @@ public:
       DBG("cleanup done\n");
       g_list_free(children_);
       children_ = NULL;
-    }
+    }*/
       
 
      static void *asyncYes(void *data){
@@ -261,6 +259,22 @@ public:
       dialog_ = value;
     }
     GtkWindow *dialog(void){return dialog_;}
+    
+    static bool isEfsMount(const char *path){
+      bool retval = false;
+      auto key_file = getKeyFile();
+      if (g_key_file_has_key(key_file, path, "efsOptions", NULL)) retval = true;
+      return retval;
+    }
+
+    static GKeyFile *getKeyFile(void){
+        gchar *file = g_build_filename(efsKeyFile(), NULL);
+        GKeyFile *key_file = g_key_file_new ();
+        g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
+        g_free(file);
+        return key_file;
+    }
+
 
     private:
     
@@ -503,13 +517,12 @@ public:
         DBG(" efsOptions=\"%s\"\n", efsOptions);
 
         if (ok) {
-          gchar *file = g_build_filename(EFS_KEY_FILE, NULL);
-          GKeyFile *key_file = g_key_file_new ();
-          g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
-
+          auto key_file = getKeyFile();
+          
           g_key_file_set_value (key_file, path, "mountPoint", mountPoint);
           g_key_file_set_value (key_file, path, "mountOptions", mountOptions);
           g_key_file_set_value (key_file, path, "efsOptions", efsOptions);
+          auto file = efsKeyFile();
           auto retval = g_key_file_save_to_file (key_file,file,NULL);
           g_key_file_free(key_file);
           if (!retval){
@@ -521,6 +534,11 @@ public:
         return ok;
         
     }
+    static char *efsKeyFile(void){
+      return  g_strconcat(g_get_user_config_dir(),
+          G_DIR_SEPARATOR_S, "xffm+",G_DIR_SEPARATOR_S, "efs.ini", NULL);
+    }
+
 
     static void
     button_save (GtkButton * button, gpointer data) {

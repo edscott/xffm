@@ -240,9 +240,18 @@ public:
           return NULL;
         }
       }
+
       auto mountSrc = (const char *)dialogObject->subClass()->mountSrc();
-      const char *arg[]={"sudo", "-A", "mount", "-v", (const char *)mountSrc, (const char *)target, NULL};
-      Run<bool>::thread_run(output, arg, true);
+      if (EfsResponse<Type>::isEfsMount(mountSrc)){
+        DBG("*** do the efs mount for \"%s\"\n", mountSrc);
+        // get mount command
+        // get mount options
+        // prepare mount arguments
+        // Run<bool>::thread_run(output, arg, true);
+      } else {
+        const char *arg[]={"sudo", "-A", "mount", "-v", (const char *)mountSrc, (const char *)target, NULL};
+        Run<bool>::thread_run(output, arg, true);
+      }
 
        return NULL;
     }
