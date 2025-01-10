@@ -453,11 +453,25 @@ private:
       object->timeout_=-1;
         gtk_window_present(GTK_WINDOW(MainWidget));
     }
-
+    
     static void
     dialogProceed (GtkButton *button, void *data) {
         auto object = (OpenWith *)data;
-        run(object);
+        bool inTerminal = gtk_check_button_get_active(object->checkbutton());
+        auto path = object->path();
+        char *command = NULL;
+        if (inTerminal) {
+          command = Run<Type>::mkTerminalLine(path, "");
+          //Settings::setInteger("ExternalTerminal", key, 1);
+        }
+        else {
+          command = Run<Type>::mkCommandLine(path, "");
+          //Settings::setInteger("ExternalTerminal", key, 0);
+          DBG("command line is \'%s\'\n", command);
+        }
+        if (command) 
+          object->prompt_p->run(Child::getOutput(), command, true, true, object->buttonSpace);
+        g_free(command);
         object->freeSelectionList();
         object->timeout_=-1;
         gtk_window_present(GTK_WINDOW(MainWidget));
