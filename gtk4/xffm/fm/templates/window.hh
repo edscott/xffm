@@ -524,10 +524,6 @@ private:
       Basic::context_function(switchReload, arg); 
       g_free(path);
       */
-      
-      
-        
-       
       gtk_widget_grab_focus(GTK_WIDGET(input));
       
     }
@@ -550,8 +546,9 @@ private:
       
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto selectionList = gridView_p->getSelectionList();
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       if (selectionList){
-        clipboard_t::cutClipboardList(selectionList);
+        c->cutClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
@@ -562,10 +559,12 @@ private:
     static void mainCopy(GtkButton * button, void *data){
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto selectionList = gridView_p->getSelectionList();
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       if (selectionList){
-        clipboard_t::copyClipboardList(selectionList);
+        c->copyClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
-        update(g_strdup(Child::getWorkdir()));
+        // No need to reload since copy items not emblemed (factory.hh)
+        //update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
       }
       return;

@@ -726,13 +726,16 @@ template <class Type>
         g_object_unref(paintable); // XXX currently the paintable is not hashed.
         return GTK_WIDGET(image);
       }
+#if 0
+      // XXX This is too buggy, since copy emblem remains after pasted
+      //     and no longer in copy clipboard. Disabling now.
       if(strcmp(name, "..") &&   clipboard_t::isCopy(path)) {
         auto texture = Texture<bool>::getShadedIcon(info, size, size, EMBLEM_COPY);   
         auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
         g_object_unref(texture); // XXX currently the paintable is not hashed.
         return GTK_WIDGET(image);
       }
-
+#endif
       bool backup = ( name[strlen(name)-1] == '~');
       if (!backup) backup = g_file_info_get_is_backup(info);
       if (hidden || backup )  {

@@ -291,12 +291,14 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
-        clipboard_t::copyClipboardList(selectionList);
+        c->copyClipboardList(selectionList);
         // cleanup
-        MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
+        // No need to reload since copy items not emblemed (factory.hh)
+        // MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         return;
@@ -305,7 +307,7 @@ namespace xf {
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("path is %s\n", path);}
-      clipboard_t::copyClipboardPath(path);
+      c->copyClipboardPath(path);
       g_free(path);
     }
 
@@ -314,10 +316,11 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
-        clipboard_t::cutClipboardList(selectionList);
+        c->cutClipboardList(selectionList);
         // cleanup
         MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
@@ -327,7 +330,7 @@ namespace xf {
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("path is %s\n", path);}
-      clipboard_t::cutClipboardPath(path);
+      c->cutClipboardPath(path);
       g_free(path);
     }
 

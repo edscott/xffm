@@ -59,6 +59,12 @@ namespace xf {
     static void unlockGridView(void){
       pthread_mutex_unlock(&gridViewMutex);
     }
+
+    static GList *getGridViewList(void){
+      if (!gridViewHash) return NULL;
+      return g_hash_table_get_keys(gridViewHash);
+    }
+    
     static void 
     addGridView(void *gridView_p){
       lockGridView("addGridView");

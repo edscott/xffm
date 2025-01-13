@@ -2,6 +2,7 @@
 #define CLIPBOARD_HH
 #define CLIPBOARD_TAG "green/black_bg"
 namespace xf {
+  template <class Type> class GridView;
   template <class Type> 
   class ClipBoard {
     GdkClipboard *clipBoard_;
@@ -43,24 +44,45 @@ public:
       usleep(275000); // give it a bunch of time to shut down.
     }
 
+
+    static void *mop_f(void *data){
+      auto list = Child::getGridViewList(); 
+      for (auto l=list; l && l->data; l=l->next){
+        auto p = (GridView<Type> *)l->data;
+        DBG("*** clearClipBoard(): GridView %p, path=%s\n", p, p->path());
+      }
+      g_list_free(list);
+      return NULL;
+    }
+
+    static void *mop(void *data){
+        sleep(1);
+        Basic::context_function(mop_f, data);
+      return NULL;
+    }
+
     void
     clearClipBoard(void){
         // for each file, send monitor the changed signal
         // this, to update icon
+       
+
         gdk_clipboard_set_text (clipBoard_, "");
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
+
+        pthread_t thread;
+        pthread_create(&thread, NULL, mop, this);
+        pthread_detach(thread);
     }
 
     static void
     clearPaste(void){
-        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-        // for each file, send monitor the changed signal
-        // this, to update icon
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         c->clearClipBoard();
     }
 
     static bool isCut(const char *path){
-        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         if (!c) return false; // before clipboard is associated to MainWidget.
         if (!c->validClipBoard()) return false;
         auto string = c->clipBoardCache();
@@ -70,7 +92,7 @@ public:
     }
 
     static bool isCopy(const char *path){
-        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         if (!c) return false; // before clipboard is associated to MainWidget.
         if (!c->validClipBoard()) return false;
         auto string = c->clipBoardCache();
@@ -97,24 +119,34 @@ public:
 
     static void 
     printClipBoard(void){
-      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       auto string = c->clipBoardCache();
       auto output = Child::getOutput();
       Print::showText(output);
       Print::print(output, CLIPBOARD_TAG, g_strdup("\n "));
       if (!string || strlen(string) == 0){
+        Print::printInfo(output, g_strdup("") );
         Print::print(output, CLIPBOARD_TAG, g_strdup(_("Clipboard is empty.")) );
       } else {
-        auto text = g_strconcat(" ", _("Clipboard contents"), ":\n", NULL);
-        Print::print(output, CLIPBOARD_TAG, text);
-        Print::print(output, CLIPBOARD_TAG, g_strdup(string));
+        if(!c->validClipBoard()){
+          Print::print(output, CLIPBOARD_TAG, g_strconcat(_("Clipboard contents"), ": ", NULL));
+          Print::printWarning(output, g_strconcat(_("Invalid clip"),"\n",NULL));
+        } else {
+          Print::print(output, CLIPBOARD_TAG, g_strconcat(_("Clipboard contents"), ":\n", NULL));
+          auto v = g_strsplit(string, "\n", -1);
+          for (auto p = v; p && *p; p++){
+            Print::printInfo(output, *p);
+          }
+          g_free(v);
+          //Print::print(output, CLIPBOARD_TAG, g_strdup(string));
+        }
       }
     }
 
 #if 0
     static void
     pasteClip(const gchar *target){
-        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         auto text = c->clipBoardCache();
         gchar **files = g_strsplit(text, "\n", -1);
       
@@ -125,7 +157,7 @@ public:
           
         } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
         } else {
-            DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
+            DBG("ClipBoard<Type>::pasteClip: Invalid clipboard contents.\n");
         }
 
         /*
@@ -143,7 +175,7 @@ public:
             Gio::executeURL(files, target, MODE_MOVE);
             c->clearClipBoard();
         } else {
-            DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
+            DBG("ClipBoard<Type>::pasteClip: Invalid clipboard contents.\n");
         }
         */
         if (files) g_strfreev(files);
@@ -167,7 +199,7 @@ public:
         return fileList;
     }
      
-    static void
+    void
     copyClipboardPath(const char *path){ 
       auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
       gdk_clipboard_set_text (clipBoardTxt, "");
@@ -179,7 +211,7 @@ public:
       g_free(data);
     }
      
-    static void
+    void
     copyClipboardList(GList *list){ 
       auto clipBoardTxt = gdk_display_get_clipboard(gdk_display_get_default());
       gdk_clipboard_set_text (clipBoardTxt, "");
@@ -249,7 +281,7 @@ public:
 
     static int
     clipBoardSize(void){
-        auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         auto text = c->clipBoardCache();
         if (!text) return 0;
         return strlen(text);
@@ -258,7 +290,7 @@ public:
 private:
     static void *
     clipboardThreadF(void *data){
-      auto c = (ClipBoard *)data;
+      auto c = (ClipBoard<Type> *)data;
       while (c->clipBoardSemaphore()){// data is semaphore to thread
           usleep(250000);
           Basic::context_function(clipboardContextF, c);
@@ -268,7 +300,7 @@ private:
     }
 
     static void *clipboardContextF(void *data){
-        auto c = (ClipBoard *)data;
+        auto c = (ClipBoard<Type> *)data;
         auto clipboard = c->clipBoard();
 //        auto clipboard = gdk_display_get_clipboard(gdk_display_get_default());
         gdk_clipboard_read_text_async (clipboard, NULL, setValidity, c);
@@ -277,7 +309,7 @@ private:
 
     static void
     setValidity(GObject* source_object, GAsyncResult* result,  gpointer data){
-        auto c = (ClipBoard *)data;
+        auto c = (ClipBoard<Type> *)data;
         GError *error_ = NULL;
         auto clipBoard = GDK_CLIPBOARD(source_object);
         auto text = gdk_clipboard_read_text_finish(clipBoard, result, &error_);
@@ -301,7 +333,7 @@ private:
     }
 
     static void 
-    updateClipBoardCache(ClipBoard *c, const gchar *text){
+    updateClipBoardCache(ClipBoard<Type> *c, const gchar *text){
         gboolean updateIconBusiness = FALSE;
       /*  if (!c->validClipBoard()){
             if (c->clipBoardCache()){
