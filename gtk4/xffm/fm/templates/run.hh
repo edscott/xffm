@@ -321,7 +321,7 @@ public:
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
                 Print::print(textview, "yellow/black_bg", g_strdup(line));
             } else {                
-                Print::print(textview, "red/black_bg", g_strdup(line));
+                Print::print(textview, "orange/black_bg", g_strdup(line));
             }
         }
 
