@@ -2,7 +2,7 @@
 #define CLIPBOARD_HH
 #define CLIPBOARD_TAG "green/black_bg"
 namespace xf {
-//  static GdkClipboard *clipBoardTxt=NULL;
+  template <class Type> 
   class ClipBoard {
     GdkClipboard *clipBoard_;
     bool validClipBoard_ = FALSE;

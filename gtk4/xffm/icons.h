@@ -19,6 +19,7 @@
 #define EMBLEM_H "emblem-h"
 #define EMBLEM_F "emblem-f"
 #define EMBLEM_O "emblem-o"
+#define EMBLEM_M "emblem-m"
 
 // Menu icons
 #define EMBLEM_GREEN_BALL "emblem-greenball"

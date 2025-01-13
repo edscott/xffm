@@ -93,7 +93,7 @@ static GtkNotebook *mainNotebook = NULL;
 #include "fm/classes/thread.hh"
 #include "fm/templates/preview.hh"
 #include "fm/classes/progress.hh"
-#include "fm/classes/clipboard.hh"
+#include "fm/templates/clipboard.hh"
 #include "fm/classes/bash.hh"
 
 #include "fm/classes/utilbasic.hh"

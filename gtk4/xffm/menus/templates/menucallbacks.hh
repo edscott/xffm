@@ -9,6 +9,7 @@ namespace xf {
   
   template <class Type>
   class MenuCallbacks {
+    using clipboard_t = ClipBoard<LocalDir>;
     public:
     static void popCall(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
@@ -150,7 +151,7 @@ public:
         
       } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
       } else {
-          DBG("ClipBoard::pasteClip: Invalid clipboard contents.\n");
+          DBG("clipboard_t::pasteClip: Invalid clipboard contents.\n");
       }
 */
       
@@ -161,7 +162,7 @@ public:
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
 //      DBG("showPaste...valid = %d\n", Clipboard::validClipBoard());
-      ClipBoard::printClipBoard();
+      clipboard_t::printClipBoard();
     }
  
     static void
@@ -224,9 +225,9 @@ public:
       gtk_popover_popdown(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
-        ClipBoard::copyClipboardTxt(Child::getOutput());
+        clipboard_t::copyClipboardTxt(Child::getOutput());
       if (txt && strcmp(txt, "input")==0) 
-        ClipBoard::copyClipboardTxt(Child::getInput());
+        clipboard_t::copyClipboardTxt(Child::getInput());
     }
 
     static void 
@@ -235,9 +236,9 @@ public:
       gtk_popover_popdown(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
-        ClipBoard::cutClipboardTxt(Child::getOutput());
+        clipboard_t::cutClipboardTxt(Child::getOutput());
       if (txt && strcmp(txt, "input")==0) 
-        ClipBoard::cutClipboardTxt(Child::getInput());
+        clipboard_t::cutClipboardTxt(Child::getInput());
     }
 
     static void 
@@ -248,9 +249,9 @@ public:
       DBG("menucallbacks.hh:: deleteTxt inactive\n");
       // FIXME
       /*if (txt && strcmp(txt, "output")==0) 
-        ClipBoard::cutClipboardTxt(Child::getOutput());
+        clipboard_t::cutClipboardTxt(Child::getOutput());
       if (txt && strcmp(txt, "input")==0) 
-        ClipBoard::cutClipboardTxt(Child::getInput());*/
+        clipboard_t::cutClipboardTxt(Child::getInput());*/
     }
 
     static void 
@@ -259,9 +260,9 @@ public:
       gtk_popover_popdown(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
-        ClipBoard::pasteClipboardTxt(Child::getOutput());
+        clipboard_t::pasteClipboardTxt(Child::getOutput());
       if (txt && strcmp(txt, "input")==0) 
-        ClipBoard::pasteClipboardTxt(Child::getInput());
+        clipboard_t::pasteClipboardTxt(Child::getInput());
       
     }
 

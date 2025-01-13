@@ -7,6 +7,7 @@
 namespace xf {
 template <class Type>
   class Factory {
+    using clipboard_t = ClipBoard<LocalDir>;
     public:
       /* {{{ Factory callbacks */
       static void
@@ -719,13 +720,13 @@ template <class Type>
       if (!hidden) hidden = g_file_info_get_is_hidden(info);
 
       // check in  clipboard
-      if(strcmp(name, "..") &&  ClipBoard::isCut(path)) {
+      if(strcmp(name, "..") &&  clipboard_t::isCut(path)) {
         auto paintable = getCutTexture(info, size);
         auto image = gtk_image_new_from_paintable(paintable);
         g_object_unref(paintable); // XXX currently the paintable is not hashed.
         return GTK_WIDGET(image);
       }
-      if(strcmp(name, "..") &&   ClipBoard::isCopy(path)) {
+      if(strcmp(name, "..") &&   clipboard_t::isCopy(path)) {
         auto texture = Texture<bool>::getShadedIcon(info, size, size, EMBLEM_COPY);   
         auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
         g_object_unref(texture); // XXX currently the paintable is not hashed.
@@ -749,8 +750,12 @@ template <class Type>
     }
 
     static GtkWidget *sourceCode(const char *name, GFileInfo *info, int size){
+      GtkWidget *image = NULL;
+      image = sourceCodeImageDirect(name, info, size);
+      if (image) return image;
+      
       const char *cSrc[] = {"c", "C", "cc", "CC", NULL};
-      auto image = sourceCodeImage(name, info, size, EMBLEM_C, cSrc);
+      image = sourceCodeImage(name, info, size, EMBLEM_C, cSrc);
       if (image) return image;
 
       const char *fSrc[] = {"f", "F", "f90", "F90", "f95", "F95",NULL};
@@ -768,6 +773,16 @@ template <class Type>
       const char *oSrc[] = {"o", "O", "obj", "OBJ", "dbg", "DBG", NULL};
       image = sourceCodeImage(name, info, size, EMBLEM_O, oSrc);
       if (image) return image;
+      return NULL;
+    }
+
+    static GtkWidget *sourceCodeImageDirect(const char *name, GFileInfo *info, int size)
+    {
+      if (strncmp(name, "Makefile", strlen("Makefile"))==0){
+          auto texture = Texture<bool>::addEmblem(info, EMBLEM_M, size, size);   
+          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          return image;
+      }
       return NULL;
     }
 

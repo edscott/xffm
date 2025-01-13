@@ -8,6 +8,7 @@ template <class Type> class Dnd;
 template <class Type> class FstabMonitor;
 template <class Type>
   class GridView  {
+      using clipboard_t = ClipBoard<LocalDir>;
       GtkWidget *child_=NULL;
       GtkMultiSelection *selectionModel_ = NULL;
       GtkWidget *view_=NULL;
@@ -529,7 +530,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         }
         // pasteboard test
         {
-          auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+          auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
           auto widget = g_object_get_data(G_OBJECT(popover), _("Paste"));
           gtk_widget_set_visible(GTK_WIDGET(widget), c->validClipBoard());
         }
@@ -696,7 +697,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       if (isDir){
         auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
         auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
-        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         if (c->validClipBoard()){
           gtk_widget_set_visible(GTK_WIDGET(paste), true);
           gtk_widget_set_visible(GTK_WIDGET(nopaste), false);

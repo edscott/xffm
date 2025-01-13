@@ -4,6 +4,7 @@
 namespace xf {
 
 class cpResponse: public pathResponse {
+   using clipboard_t = ClipBoard<LocalDir>;
    const char *title_;
    const char *iconName_;
 public:
@@ -31,6 +32,7 @@ public:
 };
 
 class cpDropResponse {
+   using clipboard_t = ClipBoard<LocalDir>;
    const char *title_;
    const char *iconName_;
    int copy_ = 1;
@@ -56,7 +58,7 @@ class cpDropResponse {
     }
 
     static void performPasteAsync(const char *target){
-      auto c =(ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       auto text = c->clipBoardCache();
       gchar **files = g_strsplit(text, "\n", -1);
       if (!files) {
@@ -69,7 +71,7 @@ class cpDropResponse {
       else if (strcmp(files[0], "move")==0) mode = 0;
       else if (strcmp(files[0], "link")==0) mode = -1;
 
-      auto list = ClipBoard::removeUriFormat(files);
+      auto list = clipboard_t::removeUriFormat(files);
       g_strfreev(files);
 
       auto dialogObject = new DialogDrop<cpDropResponse>;

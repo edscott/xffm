@@ -20,9 +20,10 @@ namespace xf {
     
 
   /* */
-  template <class menuClass>
+  template <class subMenuClass>
   class Menu {
     private:
+      using clipboard_t = ClipBoard<LocalDir>;
       GHashTable *mHash[5];
       const char **keys_;
       MenuInfo_t *iconNames_;
@@ -50,7 +51,7 @@ namespace xf {
         mHash[2] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         mHash[3] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
         mHash[4] = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
-        auto myMenuClass_p = new menuClass;
+        auto myMenuClass_p = new subMenuClass;
         keys_ = myMenuClass_p->keys();
         iconNames_ = myMenuClass_p->iconNames();
         callbacks_ = myMenuClass_p->callbacks();
@@ -166,7 +167,7 @@ namespace xf {
      auto isTextView = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(menu), _("isTextView")));
      TRACE("paste is at button %p\n", paste);
      if (!isTextView && paste) {
-       auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+       auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
        gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
        auto show =  g_object_get_data(G_OBJECT(menu), _("Show Clipboard"));
        if (show) gtk_widget_set_visible(GTK_WIDGET(show), c->validClipBoard());
@@ -174,9 +175,9 @@ namespace xf {
        if (empty) gtk_widget_set_visible(GTK_WIDGET(empty), !c->validClipBoard());
      }
      if (isTextView && paste) {
-       gtk_widget_set_visible(GTK_WIDGET(paste), ClipBoard::clipBoardSize() > 0);
+       gtk_widget_set_visible(GTK_WIDGET(paste), clipboard_t::clipBoardSize() > 0);
        auto empty = g_object_get_data(G_OBJECT(menu), _("Clipboard is empty."));
-       if (empty) gtk_widget_set_visible(GTK_WIDGET(empty), ClipBoard::clipBoardSize() == 0);
+       if (empty) gtk_widget_set_visible(GTK_WIDGET(empty), clipboard_t::clipBoardSize() == 0);
      }
        
       

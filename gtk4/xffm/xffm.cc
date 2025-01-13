@@ -120,7 +120,7 @@ main (int argc, char *argv[]) {
   TRACE("path is %s (%s)\n", path, argv[1]); 
   auto fm = new(xf::Fm)(path);
 
-  auto c = new xf::ClipBoard;
+  auto c = new xf::ClipBoard<xf::LocalDir>;
   auto d = new xf::Dnd<xf::LocalDir>;
   xf::Bookmarks::initBookmarks();
   g_object_set_data(G_OBJECT(MainWidget), "ClipBoard", c);

@@ -7,6 +7,7 @@ namespace xf {
   class LocalDir;
   template <class Type>
   class GridviewMenu {
+    using clipboard_t = ClipBoard<LocalDir>;
     public:
     GridviewMenu(void){}
     ~GridviewMenu(void){}
@@ -274,7 +275,7 @@ namespace xf {
         Dialogs::rmList(menu, selectionList);
       /*  TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
-        ClipBoard::copyClipboardList(selectionList);
+        clipboard_t::copyClipboardList(selectionList);
         // cleanup
         g_list_free(selectionList);
         g_object_set_data(G_OBJECT(menu), "selectionList", NULL);*/
@@ -293,7 +294,7 @@ namespace xf {
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
-        ClipBoard::copyClipboardList(selectionList);
+        clipboard_t::copyClipboardList(selectionList);
         // cleanup
         MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
@@ -304,7 +305,7 @@ namespace xf {
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("path is %s\n", path);}
-      ClipBoard::copyClipboardPath(path);
+      clipboard_t::copyClipboardPath(path);
       g_free(path);
     }
 
@@ -316,7 +317,7 @@ namespace xf {
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
-        ClipBoard::cutClipboardList(selectionList);
+        clipboard_t::cutClipboardList(selectionList);
         // cleanup
         MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
@@ -326,7 +327,7 @@ namespace xf {
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("path is %s\n", path);}
-      ClipBoard::cutClipboardPath(path);
+      clipboard_t::cutClipboardPath(path);
       g_free(path);
     }
 

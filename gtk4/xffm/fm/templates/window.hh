@@ -8,6 +8,7 @@ class Type;
 
 template <class Type> 
 class MainWindow: public FMbuttonBox {
+    using clipboard_t = ClipBoard<LocalDir>;
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
     GtkPopover *menu_ = NULL;
@@ -164,7 +165,7 @@ private:
     
     static gboolean updateButtons( GtkEventControllerMotion* self,
                     double x, double y, void *data) {
-        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         return FALSE;
     }
@@ -286,7 +287,7 @@ private:
 public:
 
       static void *threadReload(void *data){
-        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         TRACE("threadReload waiting for condition...\n");
         c->conditionWait();
         TRACE("Go ahead condition received.\n");
@@ -334,7 +335,7 @@ private:
       }
 
       static void *threadReload(void *data){
-        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         TRACE("threadReload waiting for condition...\n");
         c->conditionWait();
         TRACE("Go ahead condition received.\n");
@@ -509,7 +510,7 @@ private:
         gtk_widget_set_sensitive(GTK_WIDGET(copyButton), false);
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
       } else {
-        auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         auto bitset = gtk_selection_model_get_selection(selection);
         gtk_widget_set_sensitive(GTK_WIDGET(cutButton), (gtk_bitset_get_size(bitset) > 0));
@@ -534,7 +535,7 @@ private:
     static void mainPaste(GtkButton * button, void *data){
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto target = g_strdup(gridView_p->path());
-      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       if (!c->validClipBoard()){
         // Should not happen.
         Print::printWarning(Child::getOutput(), g_strconcat(_("Invalid clip"), "\n", NULL));
@@ -550,7 +551,7 @@ private:
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
-        ClipBoard::cutClipboardList(selectionList);
+        clipboard_t::cutClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
@@ -562,7 +563,7 @@ private:
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto selectionList = gridView_p->getSelectionList();
       if (selectionList){
-        ClipBoard::copyClipboardList(selectionList);
+        clipboard_t::copyClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
@@ -720,7 +721,7 @@ private:
       auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
       //auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
       //gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
-      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
       
       gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));

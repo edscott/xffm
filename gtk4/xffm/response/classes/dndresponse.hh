@@ -3,6 +3,7 @@
 
 namespace xf {
 class dndResponse {
+   using clipboard_t = ClipBoard<LocalDir>;
    const char *title_;
    const char *iconName_;
    GtkWidget **buttons=NULL;
@@ -51,7 +52,7 @@ public:
       auto target = dialogObject->subClass()->target();
       auto uriList = dialogObject->subClass()->uriList();
       auto count = dialogObject->subClass()->uriCount();
-      auto c = (ClipBoard *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
       
       //dialogObject->timeout(-1);
       auto response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialogObject->dialog()), "response"));

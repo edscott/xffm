@@ -5,6 +5,7 @@ namespace xf {
   template <class Type> class RunButton;
   template <class Type>
   class MainMenu {
+    using clipboard_t = ClipBoard<LocalDir>;
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
@@ -310,14 +311,14 @@ namespace xf {
     showPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-      ClipBoard::printClipBoard();
+      clipboard_t::printClipBoard();
     }
 
     static void
     clearPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-      ClipBoard::clearPaste();
+      clipboard_t::clearPaste();
     }
 
   };

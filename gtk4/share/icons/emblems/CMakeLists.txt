@@ -4,6 +4,7 @@ emblem-i.svg
 emblem-h.svg
 emblem-f.svg
 emblem-o.svg
+emblem-m.svg
 emblem-archlinux.svg
 emblem-bak.svg
 emblem-blockdevice.svg
