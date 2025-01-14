@@ -171,6 +171,8 @@ namespace xf {
 
       auto css = g_strdup_printf("font%d", valueI);
       TRACE("menucallbacks.hh: fontSize() value=%d font=%s\n", valueI, css);
+
+      // FIXME: do for all outputs
       auto textView = Child::getOutput();
       auto oldCss = (char *)g_object_get_data(G_OBJECT(textView), "css");
       if (oldCss != NULL){

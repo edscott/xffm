@@ -20,7 +20,7 @@ get a new selection model from the store and set it to the gridview.
 1. for mount entry set default mount point, either from fstab or ~/mnt/device
 2. do not save invalid efs items, and allow popup item to remove
 3. no menu pathbar (not even color bug...)
-4. font size slider for input/output at menu
+4. font size slider for input/output at menu (no, at xffm3 position)
 5. xffm-find4
 
 Sporadic race condition crashes: Must set all gridview_p references in main context in order for Child::validGridView() to be correct.
