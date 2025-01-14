@@ -15,7 +15,7 @@ namespace xf {
            GO_HOME, 
            EMBLEM_NEW_WINDOW, 
            //EDIT_CLEAR,
-           EMBLEM_TOGGLE,
+           //EMBLEM_TOGGLE,
            NULL
          };
         const char *bText[]={
@@ -23,7 +23,7 @@ namespace xf {
           _("Open terminal"),
           _("Home"),
           _("Open a New Window"),
-          _("Toggle Text Mode"),
+          //_("Toggle Text Mode"),
           NULL
         };
         void *bCallback[]={
@@ -31,7 +31,7 @@ namespace xf {
           (void *)MenuCallbacks<LocalDir>::openTerminal,
           (void *)MenuCallbacks<LocalDir>::goHome,
           (void *)MenuCallbacks<LocalDir>::newWindow,
-          (void *)MenuCallbacks<LocalDir>::toggleVpane,
+          //(void *)MenuCallbacks<LocalDir>::toggleVpane,
           NULL
         };
         

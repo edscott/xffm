@@ -143,14 +143,11 @@ namespace xf {
         Basic::boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
         Basic::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
 
-      /*  auto fullPrompt = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));         
-        Basic::boxPack0(box, GTK_WIDGET(fullPrompt),  FALSE, TRUE, 0);
         auto toggle = Basic::newButton(EMBLEM_TERMINAL, _("Toggle Text Mode"));
-        Basic::boxPack0(fullPrompt, GTK_WIDGET(toggle),  FALSE, FALSE, 0);
-        Basic::boxPack0(fullPrompt, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);*/
-
-       Basic::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
-
+        Basic::boxPack0(this->promptBox(), GTK_WIDGET(toggle),  FALSE, FALSE, 0);
+        g_signal_connect (G_OBJECT (toggle), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::toggleVpane), NULL);
+        
+        Basic::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
         return box;
       }
 
