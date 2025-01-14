@@ -25,7 +25,8 @@ namespace xf {
         
         outputScrolledWindow_ = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
         output_ = Util<LocalDir>::newTextView();
-       
+   
+
         g_object_set_data(G_OBJECT(vpane_), "output", output_);
         g_object_set_data(G_OBJECT(output_), "vpane", vpane_);
 
@@ -111,17 +112,25 @@ namespace xf {
         g_object_set_data(G_OBJECT(box), "input", input);
         g_object_set_data(G_OBJECT(box), "dollar", dollar);
 
-        auto fontSize = Settings::getString("xfterm", "outputSize");
-        if (fontSize) gtk_widget_add_css_class(GTK_WIDGET(output), fontSize);
-        g_free(fontSize);
+        auto size = Settings::getInteger("xfterm", "fontcss");
+        if (size < 1 || size > 7) size=3;
+        auto css = g_strdup_printf("font%d", size);
 
-        fontSize = Settings::getString("xfterm", "inputSize");
+        DBG("*** css font size  is %d: %s\n", size, css);
+
+        gtk_widget_add_css_class (GTK_WIDGET(output), css);
+        g_object_set_data(G_OBJECT(output), "css", (void *)css);
+
+        /*auto fontSize = Settings::getString("xfterm", "outputSize");
+        if (fontSize) gtk_widget_add_css_class(GTK_WIDGET(output), fontSize);
+        g_free(fontSize);*/
+
+        /*fontSize = Settings::getString("xfterm", "inputSize");
         if (fontSize) {
           gtk_widget_add_css_class(GTK_WIDGET(output), fontSize);
           gtk_widget_add_css_class(GTK_WIDGET(dollar), fontSize);
         }
-        g_free(fontSize);
-
+        g_free(fontSize);*/
 
         auto promptBox = GTK_WIDGET(this->promptBox());
         auto vpane = GTK_WIDGET(this->vpane());
@@ -146,12 +155,63 @@ namespace xf {
         auto toggle = Basic::newButton(EMBLEM_TERMINAL, _("Toggle Text Mode"));
         Basic::boxPack0(this->promptBox(), GTK_WIDGET(toggle),  FALSE, FALSE, 0);
         g_signal_connect (G_OBJECT (toggle), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::toggleVpane), NULL);
+        auto scale = newSizeScale(_("Font size"));
+        Basic::boxPack0(this->promptBox(), GTK_WIDGET(scale),  FALSE, FALSE, 0);
         
         Basic::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
         return box;
       }
 
     private:
+
+    static void
+    fontSize(GtkRange* self, void *data){
+      auto value = floor(gtk_range_get_value(self));
+      int valueI = value;
+
+      auto css = g_strdup_printf("font%d", valueI);
+      TRACE("menucallbacks.hh: fontSize() value=%d font=%s\n", valueI, css);
+      auto textView = Child::getOutput();
+      auto oldCss = (char *)g_object_get_data(G_OBJECT(textView), "css");
+      if (oldCss != NULL){
+        TRACE("retrieved oldCss=%s\n", oldCss);
+        if (strcmp(oldCss, css) == 0){
+           TRACE("no css change\n");
+          g_free(css);
+          return;
+        }
+        TRACE("removing css: %s\n", oldCss);
+        gtk_widget_remove_css_class (GTK_WIDGET(textView), oldCss);
+        //g_free(oldCss);
+      }
+
+      TRACE("adding css: %s\n", css);
+      gtk_widget_add_css_class (GTK_WIDGET(textView), css);
+      g_object_set_data(G_OBJECT(textView), "css", (void *)css);
+
+      Settings::setInteger("xfterm", "fontcss", valueI);
+      Basic::flushGTK();
+
+    }
+        
+    GtkScale *newSizeScale(const gchar *tooltipText){
+        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 1.0, 7.0, 1.0));
+        // Load saved value fron xffm+/settings.ini file (if any)
+        auto size = Settings::getInteger("xfterm", "fontcss");
+        if (size < 1 || size > 7) size=3;
+        double value = size;
+        DBG("***range set value=%lf\n", value);
+        gtk_range_set_value(GTK_RANGE(size_scale), value);
+
+        gtk_range_set_increments (GTK_RANGE(size_scale), 1.0, 1.0);
+        gtk_widget_set_size_request (GTK_WIDGET(size_scale),50, -1);
+
+        gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
+        Basic::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
+        g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(fontSize), NULL);
+        return size_scale;
+    }
+
 
 
   };
