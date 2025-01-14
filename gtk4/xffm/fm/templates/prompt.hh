@@ -229,27 +229,33 @@ namespace xf {
     static bool
     exe(GtkTextView *input, GtkTextView *output, const char *text){
       if (!History::add(text)) DBG("History::add(%s) failed\n", text );
+
+/*
       gchar **v = Util<LocalDir >::getVector(text, " ");
       char *inPath = g_find_program_in_path(v[0]);
       if (!inPath && g_file_test(v[0], G_FILE_TEST_IS_EXECUTABLE)) inPath = realpath(v[0], NULL);
       if (!inPath && strncmp(v[0], "./", strlen("./")) == 0) inPath = g_strdup(v[0]);
+        
       if (!inPath){
         Print::print(output, g_strdup_printf("$ %s\n", v[0]));
         Print::print(output, g_strdup_printf("%s: %s\n", v[0], _("Command not found.")));
         g_strfreev(v);
         return true;
       }
+*/    
+      /*
       Print::print(output, g_strdup_printf("$ %s", inPath));
       for (int i=1; v[i]; i++){
         Print::print(output, g_strdup_printf(" %s", v[i]));
       }
       Print::print(output, g_strdup_printf("\n"));
-        
+      g_free(inPath);
+      g_strfreev(v);
+      */
+
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(input), "buttonSpace"));
       
       run(output, text, true, true, buttonSpace);
-      g_free(inPath);
-      g_strfreev(v);
       return true;
     }
     static bool

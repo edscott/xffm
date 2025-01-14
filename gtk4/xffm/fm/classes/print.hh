@@ -77,16 +77,14 @@ namespace xf {
     printInfo(GtkTextView *textview, gchar *string){
       showText(textview);
       const char *ret = NULL;
-      if (string[strlen(string)-1] != '\n') ret = "\n"; //hack
-      printIcon(textview, "emblem-about", g_strconcat(" ", string, ret, NULL));
+      print(textview, EMBLEM_ABOUT,  "green/black_bg", string);
     }
 
     static void //  will free string.
     printWarning(GtkTextView *textview, gchar *string){
       showText(textview);
       const char *ret = NULL;
-      if (string[strlen(string)-1] != '\n') ret = "\n"; //hack
-      printIcon(textview, "dialog-warning", g_strconcat(" ", string, ret, NULL));
+      printIcon(textview, EMBLEM_WARNING, "yellow/black_bg", string);
     }
 
     static void //  will free string.
@@ -94,7 +92,7 @@ namespace xf {
       showText(textview);
       const char *ret = NULL;
       if (string[strlen(string)-1] != '\n') ret = "\n"; //hack
-      printIcon(textview, "dialog-error", g_strconcat(" ", string, ret, NULL));
+      printIcon(textview, EMBLEM_ERROR,"cyan/black_bg", string);
       g_free(string);
     }
 
@@ -104,7 +102,7 @@ namespace xf {
         Basic::context_function(print_f, arg);
         g_free(string);
     }
-
+/*
     static void printIcon(GtkTextView *textview, const gchar *iconname, gchar *string)
     {
         if (!textview) return;
@@ -113,8 +111,7 @@ namespace xf {
         Basic::context_function(print_i, arg);
         g_free(string);
     }
-
-private:
+*/
 
     static void print(GtkTextView *textview, 
                               const gchar *iconname, 
@@ -122,6 +119,7 @@ private:
                               gchar *string){
       printIcon(textview, iconname, tag, string);
     }
+private:
 
     static void printIcon(GtkTextView *textview, 
                               const gchar *iconname, 

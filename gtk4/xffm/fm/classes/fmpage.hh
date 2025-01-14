@@ -149,7 +149,7 @@ namespace xf {
         Basic::boxPack0(fullPrompt, GTK_WIDGET(toggle),  FALSE, FALSE, 0);
         Basic::boxPack0(fullPrompt, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);*/
 
-    //    Basic::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
+       Basic::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
 
         return box;
       }

@@ -129,7 +129,6 @@ private:
 public:
     static bool
     run_in_shell(const gchar *command){
-        const gchar *special = "\'*?<>|&";
         if (strchr(command, '`')) return TRUE;
         if (strchr(command, '?')) return TRUE;
         if (strchr(command, '*')) return TRUE;
@@ -139,6 +138,7 @@ public:
         if (strchr(command, '&')) return TRUE; 
         if (strchr(command, '\'')) return TRUE;
         if (strchr(command, '"')) return TRUE;
+#if 10
         // Are we defining an environment variable or something else?
         gint count;
         gchar **g;
@@ -154,6 +154,7 @@ public:
         }
         g_strfreev(g);
         return retval;
+#endif
     }
     
     static pid_t 
@@ -179,7 +180,7 @@ public:
 
         if (textview) {
           Print::showText(textview);
-          Print::printIcon(textview, "emblem-greenball", g_strdup_printf("%d:%s\n", grandchild, command));
+          Print::print(textview, EMBLEM_GREEN_BALL, "yellow/black_bg", g_strdup_printf("%d:%s\n", grandchild, command));
         }
         g_strstrip(command);
         push_hash(grandchild, g_strdup(command));
@@ -279,7 +280,7 @@ public:
 
         if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
             gchar *string = exit_string(line);
-            Print::printIcon(textview, "emblem-redball", g_strdup_printf("%s", string));
+            Print::print(textview, EMBLEM_RED_BALL, "yellow/black_bg", g_strdup_printf("%s", string));
             g_free(string);
         } else {
             Print::print(textview, g_strdup(outline));

@@ -317,7 +317,7 @@ public:
         auto run_button_p = (RunButton *)data;
         auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
 
-        gtk_menu_button_set_icon_name(button, "emblem-greenball");
+        gtk_menu_button_set_icon_name(button, EMBLEM_GREEN_BALL);
         run_button_p->setButton(button);
 
         auto menu = create_menu(run_button_p);
@@ -372,7 +372,7 @@ public:
         
 #ifdef DEBUG_TRACE    
         // This is out of sync here (grayball), so only in debug mode.
-        Print::print_icon(run_button_p->textview_, "emblem-grayball", g_strdup_printf("%s %d/%d\n", run_button_p->command(),
+        Print::print_icon(run_button_p->textview_, EMBLEM_GRAY_BALL, g_strdup_printf("%s %d/%d\n", run_button_p->command(),
                 run_button_p->pid(), run_button_p->grandchild()));
 #endif
         

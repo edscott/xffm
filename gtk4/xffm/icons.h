@@ -22,6 +22,7 @@
 #define EMBLEM_M "emblem-m"
 
 // Menu icons
+#define EMBLEM_GRAY_BALL "emblem-grayball"
 #define EMBLEM_GREEN_BALL "emblem-greenball"
 #define EMBLEM_RED_BALL "emblem-redball"
 #define EMBLEM_NOACCESS "emblem-noaccess"
@@ -51,6 +52,10 @@
 #define EMBLEM_START_HERE "emblem-start-here"
 #define EMBLEM_BAK "emblem-bak"
 #define EMBLEM_TERMINAL "emblem-terminal"
+#define EMBLEM_ABOUT "emblem-about"
+#define EMBLEM_WARNING "dialog-warning"
+#define EMBLEM_ERROR "dialog-error"
+//#define EMBLEM_ ""
 
 #define LIST_ADD "list-add"
 #define OPEN_MENU "open-menu"
