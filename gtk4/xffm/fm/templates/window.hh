@@ -195,6 +195,8 @@ private:
         // and then put it to the correct user saved size.
         gtk_window_set_default_size(mainWindow_, 5000, 5000);
         //gtk_widget_set_size_request(MainWidget, windowW_, windowH_);
+        windowW_ = Settings::getInteger("window", "width");
+        windowH_ = Settings::getInteger("window", "height");
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         return;
     }

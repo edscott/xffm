@@ -112,26 +112,6 @@ namespace xf {
         g_object_set_data(G_OBJECT(box), "input", input);
         g_object_set_data(G_OBJECT(box), "dollar", dollar);
 
-        auto size = Settings::getInteger("xfterm", "fontcss");
-        if (size < 1 || size > 7) size=3;
-        auto css = g_strdup_printf("font%d", size);
-
-        DBG("*** css font size  is %d: %s\n", size, css);
-
-        gtk_widget_add_css_class (GTK_WIDGET(output), css);
-        g_object_set_data(G_OBJECT(output), "css", (void *)css);
-
-        /*auto fontSize = Settings::getString("xfterm", "outputSize");
-        if (fontSize) gtk_widget_add_css_class(GTK_WIDGET(output), fontSize);
-        g_free(fontSize);*/
-
-        /*fontSize = Settings::getString("xfterm", "inputSize");
-        if (fontSize) {
-          gtk_widget_add_css_class(GTK_WIDGET(output), fontSize);
-          gtk_widget_add_css_class(GTK_WIDGET(dollar), fontSize);
-        }
-        g_free(fontSize);*/
-
         auto promptBox = GTK_WIDGET(this->promptBox());
         auto vpane = GTK_WIDGET(this->vpane());
         auto pathbar = this->pathbar();
@@ -155,6 +135,11 @@ namespace xf {
         auto toggle = Basic::newButton(EMBLEM_TERMINAL, _("Toggle Text Mode"));
         Basic::boxPack0(this->promptBox(), GTK_WIDGET(toggle),  FALSE, FALSE, 0);
         g_signal_connect (G_OBJECT (toggle), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::toggleVpane), NULL);
+
+        auto clear = Basic::newButton(EMBLEM_CLEAR, _("Clear output."));
+        Basic::boxPack0(this->promptBox(), GTK_WIDGET(clear),  FALSE, FALSE, 0);
+        g_signal_connect (G_OBJECT (clear), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::clearAllTxt), (void *) "output");
+
         auto scale = newSizeScale(_("Font size"));
         g_object_set_data(G_OBJECT(box), "fontslider", scale);
         Basic::boxPack0(this->promptBox(), GTK_WIDGET(scale),  FALSE, FALSE, 0);
