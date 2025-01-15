@@ -307,9 +307,19 @@ namespace xf {
       Settings::setInteger("window", "width", width);
       Settings::setInteger("window", "height", height);
 
-      gtk_widget_unparent(GTK_WIDGET(menu));
-      
-      gtk_window_destroy(GTK_WINDOW(MainWidget));
+      auto n = gtk_notebook_get_n_pages(mainNotebook);
+      for (auto i=0; i<n; i++){
+        auto child = gtk_notebook_get_nth_page(mainNotebook, i);
+        char buffer[64];
+        snprintf(buffer, 64, "%p", child);
+        auto history = g_strconcat(XF_HISTORY,".",buffer,NULL);
+        //FIXME: append history to xf_history
+        unlink(history);
+        g_free(history);
+      }
+
+      //gtk_widget_unparent(GTK_WIDGET(menu));
+      //gtk_window_destroy(GTK_WINDOW(MainWidget));
 
       exitDialogs = true;
     }

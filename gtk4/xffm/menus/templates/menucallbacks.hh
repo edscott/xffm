@@ -209,7 +209,7 @@ public:
       }
       return;
     }
-
+/*
     static void
     close(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
@@ -218,7 +218,7 @@ public:
       exit(0);
       //gtk_window_destroy(GTK_WINDOW(MainWidget));
     }
-
+*/
     static void 
     copyTxt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 

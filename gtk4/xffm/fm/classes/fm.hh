@@ -32,6 +32,8 @@ public:
       setTerminal();
 
       xffm_ = new(xf::MainWindow<LocalDir>)(path); // bool is MainClass (only one for now)
+
+      //g_object_set_data(G_OBJECT(MainWidget), "MainWindow", xffm_);
     }
 
     static const gchar *getEditor(){

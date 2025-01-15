@@ -1,7 +1,8 @@
-Incomplete: font size slider. Works but only applies to current output, needs to apply to all outputs and inputs and dollar. Also, eventhough it is read from config, it is not applied. Slider is correctly set. Maybe the css thing has to be done after realize (that would make sense).
 
 
-BUG (show stopper): History in prompt is general, not specific to the tab.
+BUG (show stopper): History in prompt is general, not specific to the tab. Work in progress.
+
+
 BUG (annoying): Resize window with several tabs and output a plenty, no coredump, apparent hang, but really just taking a lot of time to figure things out, in the end program continues, but this is annoying.
 
 

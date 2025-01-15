@@ -430,11 +430,8 @@ public:
      
     }
 private: 
-    void zapPage(void){
-      TRACE("zapPage... need to unparent gridview menu\n");
 
-      auto num = gtk_notebook_get_current_page(notebook_);
-      auto child = gtk_notebook_get_nth_page(notebook_, num);
+    void zapPage(GtkWidget *child){
       auto gridview_p = (GridView<LocalDir> *) Child::getGridviewObject(child);
       delete gridview_p;
       Child::remove(child);
@@ -448,47 +445,22 @@ private:
         gtk_widget_unparent(GTK_WIDGET(menu_));
         gtk_window_destroy(mainWindow_);
         exitDialogs = true;
-        //exit(0);
       }
-      
-/*
-      // Clear page history (deprecated: is cleared with pathbar destructor)
-      auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(child ), "pathbar"));
-
-      auto historyBack = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyBack");
-      auto historyNext = (GList *)g_object_get_data(G_OBJECT(pathbar), "historyNext");
-      if (historyBack){
-        for (GList *l=historyBack; l && l->data; l=l->next) g_free(l->data);
-        g_list_free(historyBack);
-      }
-      if (historyNext){
-        for (GList *l=historyNext; l && l->data; l=l->next) g_free(l->data);
-        g_list_free(historyNext);
-      }
-*/
       
       // Get VPane object from child widget (box)
       auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
       gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
       delete(page);
-//      Basic::flushGTK();
-//      gtk_widget_grab_focus(GTK_WIDGET(Print::getInput()));
       
     }
+    
+    void zapPage(void){
+      TRACE("zapPage... need to unparent gridview menu\n");
 
-     // does not update icon on first, but second switch page
-     // most probably because it is working on the source page
-    /*static void *switchReload(void *data){
-      auto arg = (void **)data;
-      auto path = (const char *)arg[0];
-      auto child = GTK_WIDGET(arg[1]);
-
-      Basic::flushGTK();
-      Workdir<Type>::setWorkdir(path,child);
-      //Basic::flushGTK();
-      //Workdir<Type>::setWorkdir(path,child);
-      return NULL;
-    }*/
+      auto num = gtk_notebook_get_current_page(notebook_);
+      auto child = gtk_notebook_get_nth_page(notebook_, num);
+      zapPage(child);
+    }
 
     void switchPage (gint new_page) {
       // HMM. it seems that gtk internal does not really do this in main context...
