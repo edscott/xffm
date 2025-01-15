@@ -73,6 +73,7 @@ namespace xf {
       Print::clear_text(output);
       return ;
     }
+    /*
     static    
     GtkScale *newSizeScale(const gchar *tooltipText, const char *which ){
         double value;
@@ -101,7 +102,8 @@ namespace xf {
         if (strcmp(which, "output")==0) g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize1), NULL);
         else  g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize2), NULL);
         return size_scale;
-    }
+    }*/
+    /*
     static void
     changeSize (GtkRange* self, gpointer data){
       auto textviewName = (const char *) data;
@@ -137,7 +139,7 @@ namespace xf {
       changeSize (self, (void *)"dollar");
       changeSize (self, (void *)"input");
     }
-
+*/
   public:
     static void
     terminalColors(GtkButton *button, void *data){
@@ -277,11 +279,11 @@ namespace xf {
         gtk_widget_set_can_focus(GTK_WIDGET(output), FALSE);
         gtk_text_view_set_wrap_mode (output, GTK_WRAP_WORD);
         gtk_text_view_set_cursor_visible (output, FALSE);
+
         gtk_widget_add_css_class (GTK_WIDGET(output), "output" );
         gtk_widget_add_css_class (GTK_WIDGET(output), "outputview" );
-        char *size = Settings::getString("xfterm", "size");
-        if (!size) size = g_strdup("font4"); // medium
-        gtk_widget_add_css_class (GTK_WIDGET(output), size );
+        UtilBasic::setFontCss(GTK_WIDGET(output));
+
         return output;
     }
 

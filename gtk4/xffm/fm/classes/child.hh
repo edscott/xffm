@@ -249,6 +249,10 @@ namespace xf {
     static GtkBox *vButtonBox(void){
       return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
     }
+    static GtkTextView *getDollar(void){
+      auto child = getChild();
+      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "dollar"));
+    }
     static GtkTextView *getInput(void){
       auto child = getChild();
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "input"));

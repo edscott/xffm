@@ -156,6 +156,7 @@ namespace xf {
         Basic::boxPack0(this->promptBox(), GTK_WIDGET(toggle),  FALSE, FALSE, 0);
         g_signal_connect (G_OBJECT (toggle), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::toggleVpane), NULL);
         auto scale = newSizeScale(_("Font size"));
+        g_object_set_data(G_OBJECT(box), "fontslider", scale);
         Basic::boxPack0(this->promptBox(), GTK_WIDGET(scale),  FALSE, FALSE, 0);
         
         Basic::boxPack0(box, GTK_WIDGET(this->promptBox()),  FALSE, TRUE, 0);
@@ -164,17 +165,8 @@ namespace xf {
 
     private:
 
-    static void
-    fontSize(GtkRange* self, void *data){
-      auto value = floor(gtk_range_get_value(self));
-      int valueI = value;
-
-      auto css = g_strdup_printf("font%d", valueI);
-      TRACE("menucallbacks.hh: fontSize() value=%d font=%s\n", valueI, css);
-
-      // FIXME: do for all outputs
-      auto textView = Child::getOutput();
-      auto oldCss = (char *)g_object_get_data(G_OBJECT(textView), "css");
+    static void switchFont(GObject *object, char *css){
+      auto oldCss = (char *)g_object_get_data(object, "css");
       if (oldCss != NULL){
         TRACE("retrieved oldCss=%s\n", oldCss);
         if (strcmp(oldCss, css) == 0){
@@ -183,13 +175,42 @@ namespace xf {
           return;
         }
         TRACE("removing css: %s\n", oldCss);
-        gtk_widget_remove_css_class (GTK_WIDGET(textView), oldCss);
+        gtk_widget_remove_css_class (GTK_WIDGET(object), oldCss);
         //g_free(oldCss);
       }
 
       TRACE("adding css: %s\n", css);
-      gtk_widget_add_css_class (GTK_WIDGET(textView), css);
-      g_object_set_data(G_OBJECT(textView), "css", (void *)css);
+      gtk_widget_add_css_class (GTK_WIDGET(object), css);
+      g_object_set_data(object, "css", (void *)css);
+
+    }
+
+    static void switchFontAllTextviews(GtkWidget *child, int valueI){
+      const char *textviews[] = {"input", "output", "dollar", NULL};
+      for (auto p=textviews; p && *p; p++){ // Forall textviews
+        auto css = g_strdup_printf("font%d", valueI);
+        auto textView = G_OBJECT(g_object_get_data(G_OBJECT(child), *p));
+        switchFont(G_OBJECT(textView), css);
+      }
+    }
+
+    static void switchFontAllPages(int valueI){
+      auto n = gtk_notebook_get_n_pages(mainNotebook);
+      for (auto i=0; i<n; i++){
+        auto child = gtk_notebook_get_nth_page(mainNotebook, i);
+        auto slider = GTK_SCALE(g_object_get_data(G_OBJECT(child), "fontslider"));
+        gtk_range_set_value(GTK_RANGE(slider), valueI);
+        
+        switchFontAllTextviews(child, valueI);
+      }
+    }
+
+    static void
+    fontSize(GtkRange* self, void *data){
+      auto value = floor(gtk_range_get_value(self));
+      int valueI = value;
+      TRACE("menucallbacks.hh: fontSize() value=%d font=%s\n", valueI, css);
+      switchFontAllPages(valueI);
 
       Settings::setInteger("xfterm", "fontcss", valueI);
       Basic::flushGTK();

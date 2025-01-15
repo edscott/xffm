@@ -43,25 +43,21 @@ private:
         border-color: transparent;\
       }\
       .output {\
-        font-size: 12px;\
         background-color: %s;\
         color: %s;\
         font-family: monospace;\
       }\
       .outputview text selection {\
-        font-size: 12px;\
         background-color: blue;\
         font-family: monospace;\
         color: yellow;\
       }\
       .input {\
-        font-size: 12px;\
         background-color: %s;\
         color: %s;\
         font-family: monospace;\
       }\
       .inputview text selection  {\
-        font-size: 12px;\
         background-color: #abc2df;\
         color: black;\
         font-family: monospace;\

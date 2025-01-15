@@ -6,6 +6,14 @@ namespace xf {
   class UtilBasic 
   {
     public:
+
+    static void setFontCss(GtkWidget *widget){
+      auto size = Settings::getInteger("xfterm", "fontcss");
+      if (size < 1 || size > 7) size=3;
+      auto css = g_strdup_printf("font%d", size);
+      gtk_widget_add_css_class (widget, css);
+      g_object_set_data(G_OBJECT(widget), "css", (void *)css);
+    }
       
     static
     GtkTextView *createInput(void){
@@ -20,6 +28,11 @@ namespace xf {
         gtk_text_view_set_wrap_mode (input, GTK_WRAP_CHAR);
         gtk_widget_set_can_focus(GTK_WIDGET(input), TRUE);
         
+        gtk_widget_add_css_class (GTK_WIDGET(input), "input" );
+        gtk_widget_add_css_class (GTK_WIDGET(input), "inputview" );
+        
+        UtilBasic::setFontCss(GTK_WIDGET(input));
+       
         return input;
     }
 

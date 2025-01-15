@@ -45,13 +45,6 @@ namespace xf {
         gtk_widget_set_hexpand(GTK_WIDGET(promptBox_), TRUE);
         auto dollarBox = createPrompt();
         input_ = UtilBasic::createInput(); 
-        gtk_widget_add_css_class (GTK_WIDGET(input_), "input" );
-        gtk_widget_add_css_class (GTK_WIDGET(input_), "inputview" );
-
-        char *size = Settings::getString("xfterm", "size");
-        if (!size) size = g_strdup("font4"); // medium
-        gtk_widget_add_css_class (GTK_WIDGET(input_), size );
-   
 
         auto title = g_strconcat("",_("Input"),_(" TTY"), NULL);
         auto myInputMenu = new Menu<InputMenu<LocalDir > >(title);
@@ -319,10 +312,8 @@ namespace xf {
         auto dollarBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_hexpand(GTK_WIDGET(dollarBox), FALSE);
         dollar_ = GTK_TEXT_VIEW(gtk_text_view_new ());
-        char *size = Settings::getString("xfterm", "size");
-        if (!size) size = g_strdup("font4"); // medium
-        gtk_widget_add_css_class (GTK_WIDGET(dollar_), size );
-
+        
+        UtilBasic::setFontCss(GTK_WIDGET(dollar_));
         gtk_widget_set_size_request(GTK_WIDGET(dollar_), 20, -1);
         
         Print::print(dollar_, g_strdup("$"));
