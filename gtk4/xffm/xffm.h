@@ -97,7 +97,6 @@ static GtkNotebook *mainNotebook = NULL;
 #include "fm/classes/bash.hh"
 
 #include "fm/classes/utilbasic.hh"
-#include "fm/classes/history.hh"
 #include "fm/classes/css.hh"
 #include "fm/classes/pathbarhistory.hh"     
 #include "fm/templates/basicpathbar.hh"     
@@ -114,6 +113,7 @@ static GtkNotebook *mainNotebook = NULL;
 // dialogs 
 #include "response/dialogs.hh"
 
+#include "fm/classes/history.hh"
 
 // menu templates
 #include "menus/templates/menu.hh"

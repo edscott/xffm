@@ -14,8 +14,27 @@ namespace xf {
     }
     static void
     init(void){
-      using_history();
       historyFile = g_strconcat(XF_HISTORY, NULL);
+      if (!g_file_test(historyFile, G_FILE_TEST_EXISTS)) {
+        DBG("*** reading xffm3 history...\n");
+        // gtk3 history
+        auto oldHistory = g_strconcat(g_get_user_cache_dir(),G_DIR_SEPARATOR_S,"lp_terminal_history",NULL);
+        if (g_file_test(oldHistory, G_FILE_TEST_EXISTS)){
+          FILE *in = fopen(oldHistory, "r");
+          FILE *out = fopen(historyFile, "w");
+          char buffer[256];
+          while (fgets(buffer, 256, in) && !feof(in)){
+              fputs(buffer, out);              
+          }
+          fclose(in);
+          fclose(out);
+          // this is threaded and will not be done in time:
+          // pathResponse::cpmv(oldHistory, historyFile, 1);
+        }
+        g_free(oldHistory);
+      } 
+
+      using_history();
       read_history(historyFile);      
     }
     static void 
@@ -102,18 +121,6 @@ namespace xf {
       }
       g_free(dirname);
 
-      if (!g_file_test(historyFile, G_FILE_TEST_EXISTS)) {
-        // gtk3 history
-        auto oldHistory = g_strconcat(g_get_user_cache_dir(),G_DIR_SEPARATOR_S,"lp_terminal_history",NULL);
-        if (g_file_test(oldHistory, G_FILE_TEST_EXISTS)){
-          read_history(oldHistory);
-          g_free(oldHistory);
-        }
-        if (write_history(historyFile) != 0){
-          DBG("failed write_history to \"%s\": %s\n", historyFile, strerror(errno));
-          return false;
-        }
-      } 
       // get last entry
       HIST_ENTRY *p = history_get(history_length);
       if (history_length == 0 || (p != NULL && strcmp(p->line, text))){
