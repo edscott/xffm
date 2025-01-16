@@ -63,11 +63,14 @@ namespace xf {
       FMpage(const char *path){
         path_ = g_strdup(path);
         childBox_ = mkPageBox(path);
+#if 0
         char buffer[64];
         snprintf(buffer, 64, "%p", childBox_);
         history_ = g_strconcat(XF_HISTORY,".",buffer,NULL);
         //FIXME: append xf_history to history_
         fclose(fopen(history_, "w"));
+#endif
+
       }
       ~FMpage(){
         TRACE("FMpage destructor: need to call GridView destructor...\n");

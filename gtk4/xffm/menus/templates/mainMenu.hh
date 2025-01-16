@@ -306,7 +306,7 @@ namespace xf {
       gtk_widget_set_visible(MainWidget, FALSE);
       Settings::setInteger("window", "width", width);
       Settings::setInteger("window", "height", height);
-
+#if 0
       auto n = gtk_notebook_get_n_pages(mainNotebook);
       for (auto i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(mainNotebook, i);
@@ -317,7 +317,7 @@ namespace xf {
         unlink(history);
         g_free(history);
       }
-
+#endif
       //gtk_widget_unparent(GTK_WIDGET(menu));
       //gtk_window_destroy(GTK_WINDOW(MainWidget));
 
