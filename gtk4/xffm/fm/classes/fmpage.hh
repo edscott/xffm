@@ -144,13 +144,29 @@ namespace xf {
         Basic::boxPack0(box, GTK_WIDGET(this->pathbar()),  FALSE, TRUE, 0);
         Basic::boxPack0(box, GTK_WIDGET(this->vpane()),  TRUE, TRUE, 0);
 
-        auto toggle = Basic::newButton(EMBLEM_TERMINAL, _("Toggle Text Mode"));
-        Basic::boxPack0(this->promptBox(), GTK_WIDGET(toggle),  FALSE, FALSE, 0);
-        g_signal_connect (G_OBJECT (toggle), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::toggleVpane), NULL);
+        auto multiBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL,0));
+        gtk_box_prepend(this->promptBox(), GTK_WIDGET(multiBox));
+        auto toggle = imageButton(EMBLEM_TERMINAL, _("Toggle Text Mode"), (void *)MenuCallbacks<LocalDir>::toggleVpane, NULL);
+        gtk_box_prepend(multiBox, GTK_WIDGET(toggle));
+        auto clear = imageButton("list-remove", _("Clear output."), (void *)clearCallback, NULL);
+        gtk_box_append(multiBox, GTK_WIDGET(clear));
 
-        auto clear = Basic::newButton(EMBLEM_CLEAR, _("Clear output."));
-        Basic::boxPack0(this->promptBox(), GTK_WIDGET(clear),  FALSE, FALSE, 0);
-        g_signal_connect (G_OBJECT (clear), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::clearAllTxt), (void *) "output");
+  /*      auto toggle = Basic::newButton(EMBLEM_TERMINAL, _("Toggle Text Mode"));
+        gtk_widget_set_size_request(GTK_WIDGET(toggle), 20, 20);
+        gtk_box_prepend(this->promptBox(), GTK_WIDGET(toggle));*/
+
+        gtk_widget_add_css_class (GTK_WIDGET(multiBox), "input" );
+        
+//        Basic::boxPack0(this->promptBox(), GTK_WIDGET(toggle),  FALSE, FALSE, 0);
+//        g_signal_connect (G_OBJECT (toggle), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::toggleVpane), NULL);
+
+//        auto clear = Texture<bool>::getImage(EMBLEM_CLEAR, 16);
+//        gtk_widget_set_tooltip_markup(GTK_WIDGET(clear), _("Clear output."));
+
+//        auto clear = Basic::newButton(EMBLEM_CLEAR, _("Clear output."));
+//        gtk_box_prepend(this->promptBox(), GTK_WIDGET(clear));
+//        Basic::boxPack0(this->promptBox(), GTK_WIDGET(clear),  FALSE, FALSE, 0);
+//        g_signal_connect (G_OBJECT (clear), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::clearTxt), (void *) "output");
 
         auto scale = newSizeScale(_("Font size"));
         g_object_set_data(G_OBJECT(box), "fontslider", scale);
@@ -232,7 +248,28 @@ namespace xf {
         return size_scale;
     }
 
-
+    private:
+    GtkBox *imageButton(const char *iconName, const char *tooltipText, void *callback, void *data){
+        auto toggleBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL,5));
+        gtk_widget_set_size_request(GTK_WIDGET(toggleBox), 30, 16);
+        auto toggle = Texture<bool>::getImage(iconName, 12);
+        gtk_widget_set_tooltip_markup(GTK_WIDGET(toggle), tooltipText);
+        gtk_box_prepend(toggleBox, GTK_WIDGET(toggle));
+        gtk_widget_add_css_class (GTK_WIDGET(toggleBox), "input" );
+        gtk_widget_add_css_class (GTK_WIDGET(toggle), "input" );
+        auto gesture = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+        gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture));
+        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+            GTK_PHASE_CAPTURE);
+        g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (callback), data);
+        
+        return toggleBox;
+    }
+    static void clearCallback ( GtkGestureClick* self, gint n_press, gdouble x, gdouble y, void *data){
+      GtkTextView *textView = Child::getOutput();
+      Print::clearText(textView);
+    }
 
   };
 

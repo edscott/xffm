@@ -284,9 +284,7 @@ public:
     }
 
     static void
-    clearAllTxt(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+    clearTxt(GtkButton *button, void *data){
       auto output = Child::getOutput();
       auto txt = (const char *)data;
       GtkTextView *textView = NULL;
@@ -296,6 +294,13 @@ public:
       if (!textView) return;
 
       Print::clearText(textView);
+    }
+
+    static void
+    clearAllTxt(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      clearTxt(button, data);
     }
       
 

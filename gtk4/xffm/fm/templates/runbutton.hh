@@ -317,7 +317,7 @@ public:
         auto run_button_p = (RunButton *)data;
         auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
 
-        gtk_menu_button_set_icon_name(button, EMBLEM_GREEN_BALL);
+        gtk_menu_button_set_icon_name(button, EMBLEM_RUN);
         run_button_p->setButton(button);
 
         auto menu = create_menu(run_button_p);

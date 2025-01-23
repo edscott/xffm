@@ -1,7 +1,5 @@
 
 
-BUG (show stopper): History in prompt is general, not specific to the tab. Work in progress.
-
 
 BUG (annoying): Resize window with several tabs and output a plenty, no coredump, apparent hang, but really just taking a lot of time to figure things out, in the end program continues, but this is annoying.
 
