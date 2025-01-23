@@ -93,7 +93,6 @@ namespace xf {
       const char *ret = NULL;
       if (string[strlen(string)-1] != '\n') ret = "\n"; //hack
       printIcon(textview, EMBLEM_ERROR,"cyan/black_bg", string);
-      g_free(string);
     }
 
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
