@@ -121,6 +121,25 @@ namespace xf {
       }
       g_free(dirname);
 
+      // remove previous history entries (if found)
+
+      int which=-1;
+      int pos = history_length - 1;
+      which = history_search_pos(text, -1, pos);
+      while (pos >0 && which >=0){
+        TRACE("found %s at %d history_length=%d\n", text, which, history_length);
+        auto h = remove_history (which);
+        free_history_entry(h); 
+        pos = which - 1;
+        which = history_search_pos(text, -1, pos);
+      }
+/*      
+      while ((which = history_search(text, 1)) >= 0){
+        DBG("found %s at %d\n", text, which);
+        //auto h = remove_history (which);
+        //free_history_entry(h); 
+      };
+*/
       // get last entry
       HIST_ENTRY *p = history_get(history_length);
       if (history_length == 0 || (p != NULL && strcmp(p->line, text))){
