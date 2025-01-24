@@ -7,6 +7,97 @@ namespace xf {
   {
     public:
 
+    
+    static GtkBox *imageButton(const char *iconName, const char *tooltipText, void *callback, void *data){
+        auto toggleBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL,5));
+        gtk_widget_set_size_request(GTK_WIDGET(toggleBox), 30, 16);
+        GtkWidget *toggle;
+        if (iconName){
+          toggle = GTK_WIDGET(Texture<bool>::getImage(iconName, 12));
+          if (tooltipText) gtk_widget_set_tooltip_markup(GTK_WIDGET(toggle), tooltipText);
+        } else {
+          toggle = gtk_label_new("");
+        }
+        gtk_box_prepend(toggleBox, GTK_WIDGET(toggle));
+        gtk_widget_add_css_class (GTK_WIDGET(toggleBox), "input" );
+        gtk_widget_add_css_class (GTK_WIDGET(toggle), "input" );
+        auto gesture = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+        gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture));
+        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+            GTK_PHASE_CAPTURE);
+        g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (callback), data);
+       
+        auto controllerIn = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controllerIn, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerIn);
+        g_signal_connect (G_OBJECT (controllerIn), "enter", 
+            G_CALLBACK (buttonMotion), GINT_TO_POINTER(1));
+       
+        auto controllerOut = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controllerOut, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerOut);
+        g_signal_connect (G_OBJECT (controllerOut), "leave", 
+            G_CALLBACK (buttonMotion), NULL);
+        
+        return toggleBox;
+    }
+    static GtkBox *imageButtonText(const char *iconName, 
+        const char *markup, void *callback, void *data)
+    {
+        auto toggleBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL,5));
+        //gtk_widget_set_size_request(GTK_WIDGET(toggleBox), -1, 16);
+        GtkWidget *toggle;
+        if (iconName){
+          toggle = GTK_WIDGET(Texture<bool>::getImage(iconName, 12));
+        } else {
+          toggle = gtk_label_new("");
+        }
+        gtk_box_prepend(toggleBox, GTK_WIDGET(toggle));
+        gtk_widget_add_css_class (GTK_WIDGET(toggleBox), "input" );
+        gtk_widget_add_css_class (GTK_WIDGET(toggle), "input" );
+        auto gesture = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+        gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture));
+        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+            GTK_PHASE_CAPTURE);
+        g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (callback), data);
+       
+        auto controllerIn = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controllerIn, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerIn);
+        g_signal_connect (G_OBJECT (controllerIn), "enter", 
+            G_CALLBACK (buttonMotion), GINT_TO_POINTER(1));
+       
+        auto controllerOut = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controllerOut, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerOut);
+        g_signal_connect (G_OBJECT (controllerOut), "leave", 
+            G_CALLBACK (buttonMotion), NULL);
+        auto label = gtk_label_new("");
+        gtk_label_set_markup(GTK_LABEL(label), markup);
+        gtk_box_append(toggleBox, label);
+       
+        return toggleBox;
+    }
+
+    private:
+    static gboolean buttonMotion( GtkEventControllerMotion* self,
+                    double x, double y, void *data) {
+      auto controller = GTK_EVENT_CONTROLLER(self);
+      auto widget = gtk_event_controller_get_widget(controller);
+      if (data) {
+        gtk_widget_remove_css_class (GTK_WIDGET(widget), "input" );
+        gtk_widget_add_css_class (GTK_WIDGET(widget), "pathbarboxNegative" );
+      } else {
+        gtk_widget_remove_css_class (GTK_WIDGET(widget), "pathbarboxNegative" );
+        gtk_widget_add_css_class (GTK_WIDGET(widget), "input" );
+      }
+      return TRUE;
+    }
+
+    public:
+
     static void setFontCss(GtkWidget *widget){
       auto size = Settings::getInteger("xfterm", "fontcss");
       if (size < 1 || size > 7) size=3;

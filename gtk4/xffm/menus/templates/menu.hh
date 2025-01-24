@@ -258,11 +258,13 @@ public:
         auto label = GTK_LABEL(gtk_label_new(""));
         auto iconName = (const char *) g_hash_table_lookup(mHash[0], *p);
         //TRACE("icon is %s\n",icon);
+#if 10
         if (iconName){
           auto image = Texture<bool>::getImage(iconName, 16);
 //          auto image = gtk_image_new_from_icon_name(iconName);
           boxPack(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
         }
+#endif
         boxPack(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);
         gtk_label_set_markup(label, *p);
 
@@ -298,6 +300,17 @@ public:
             continue;
 
          } else { 
+#if 0
+            // imagebutton crash GTK_IS_POPOVER (popover)' failed
+            auto data = g_hash_table_lookup(mHash[2], *p);
+            GtkBox *button = UtilBasic::imageButtonText(iconName, *p, (void *)callback, data);
+            g_object_set_data(G_OBJECT(menu), *p, button);
+            g_object_set_data(G_OBJECT(button), "menu", menu);
+            g_object_set_data(G_OBJECT(button), "key",(void *)(*p));/// XXX no need to strdup!
+            g_object_set_data(G_OBJECT(menu), *p, button);
+            boxPack(vbox, GTK_WIDGET(button),  FALSE, FALSE, 0);
+            gtk_widget_set_visible(GTK_WIDGET(button), TRUE);
+#else 
             // A button.
             GtkButton *button = GTK_BUTTON(gtk_button_new());
             gtk_widget_add_css_class (GTK_WIDGET(button), "inquireButton" );
@@ -314,6 +327,7 @@ public:
           
             auto data = g_hash_table_lookup(mHash[2], *p);
             g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(callback), data);
+#endif
             continue;
           }
         }

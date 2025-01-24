@@ -4,7 +4,8 @@ namespace xf {
   GList *dialogStack = NULL; // MainWidget dialog stack.
   class Basic {
     public:
-      static int getMaxNameLen(GListModel *store){
+    
+    static int getMaxNameLen(GListModel *store){
         int max = 0;
         auto items = g_list_model_get_n_items (store);
         for (guint i=0; i<items; i++){

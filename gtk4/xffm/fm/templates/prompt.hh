@@ -2,7 +2,7 @@
 #define XF_PROMPT_HH
 namespace xf {
   template <class Type>
-  class Prompt : private UtilBasic {
+  class Prompt {
 
     public:
     GtkBox *promptBox(void){ return promptBox_;}

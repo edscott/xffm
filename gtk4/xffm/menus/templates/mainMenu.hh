@@ -54,7 +54,7 @@ namespace xf {
         {_("Select All"),(void *) EMBLEM_SELECT_ALL}, 
         {_("Add bookmark"),(void *) EMBLEM_BOOKMARK}, 
         {_("Remove bookmark"),(void *) EMBLEM_BOOKMARK}, 
-        {_("Toggle Text Mode"),(void *) EMBLEM_TOGGLE}, 
+        {_("Toggle Text Mode"),(void *) EMBLEM_TERMINAL}, 
         {_("Search"),(void *) SEARCH}, 
         {_("Open terminal"),(void *) OPEN_TERMINAL}, 
         {_("Home"),(void *) GO_HOME}, 
