@@ -55,6 +55,9 @@
 #define EMBLEM_ABOUT "emblem-about"
 #define EMBLEM_WARNING "dialog-warning"
 #define EMBLEM_ERROR "dialog-error"
+#define EMBLEM_INVERT "emblem-invert"
+#define EMBLEM_TOGGLE "emblem-toggle"
+#define EMBLEM_RESET "process-reset"
 //#define EMBLEM_ ""
 
 #define LIST_ADD "list-add"
