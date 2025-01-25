@@ -406,7 +406,7 @@ public:
           //gtk_widget_set_sensitive(GTK_WIDGET(entry), true); // FIXME: put to false 
                                                              // when filedialog button
                                                              // is working.
-          auto button = Basic::mkButton("document-open", NULL);
+          auto button = Basic::mkButton(EMBLEM_FOLDER_OPEN, NULL);
           g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), this);
 
           gtk_box_append(hbox, label);

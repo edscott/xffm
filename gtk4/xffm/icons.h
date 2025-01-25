@@ -57,8 +57,10 @@
 #define EMBLEM_ERROR "dialog-error"
 #define EMBLEM_INVERT "emblem-invert"
 #define EMBLEM_TOGGLE "emblem-toggle"
+#define EMBLEM_FOLDER_OPEN "document-open"
 #define EMBLEM_RESET "process-reset"
-//#define EMBLEM_ ""
+#define EMBLEM_FIND "emblem-find"
+//#define EMBLEM_ "emblem-"
 
 #define LIST_ADD "list-add"
 #define OPEN_MENU "open-menu"
