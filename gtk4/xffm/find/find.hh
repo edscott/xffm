@@ -59,9 +59,6 @@ public:
           mkVpane();
 
           mkPathEntry();
-          // so far today saturday 2025-01-25 8:22
-          // continue tomorrow or later...
-          // 
           mkFilterEntry();
           ////////////////  grep options.... /////////////////////////
           mkGrepEntry();
@@ -246,6 +243,46 @@ private:
           gtk_box_append(hbox, GTK_WIDGET(button));
           gtk_box_append(child, GTK_WIDGET(hbox));
           return GTK_ENTRY(entry);
+        }
+
+        void mkFilterEntry(void){
+            auto filter_box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+            gtk_box_append(topPaneVbox_, GTK_WIDGET(filter_box));
+            //compat<bool>::boxPack0 (topPaneVbox_, GTK_WIDGET(filter_box), FALSE, TRUE, 5);
+
+            auto text=g_strdup_printf("%s ", _("Filter:"));
+            auto filter_label = GTK_LABEL(gtk_label_new (text));
+            g_free(text);
+
+            auto filter_entry = gtk_entry_new();
+            /* FIXME: auto filter_entry = mkCompletionEntry(history);
+            auto history = g_build_filename(FILTER_HISTORY);
+            auto buffer = gtk_entry_get_buffer(GTK_ENTRY(filter_entry));
+            gtk_entry_buffer_set_text(buffer, recall history, -1)
+            g_object_set_data(G_OBJECT(findDialog), "filter_entry", (gpointer)filter_entry);
+            g_free(history);
+            */
+
+            // Nos quedamos aqui, pues hay que ir a activar la TDC...
+            // Mañana, si el tiempo me lo permite, sigo.
+            // falta terminar rutinas mkFilterEntry,mkGrepEntry,mkButtonBox
+            // 
+            auto dialogbutton2 = gtk_c::dialog_button("dialog-question-symbolic", "");
+            g_object_set_data(G_OBJECT(dialogbutton2), "findDialog", findDialog);
+            tooltip_c::custom_tooltip(GTK_WIDGET(dialogbutton2), NULL,  _(filter_text_help));
+            g_signal_connect (dialogbutton2,
+                              "clicked", WIDGET_CALLBACK(Type::on_buttonHelp), 
+                              (gpointer)filter_text_help);
+            
+            auto vbox = gtk_c::vboxNew (FALSE, 6);
+            compat<bool>::boxPack0 (vbox, GTK_WIDGET(dialogbutton2), FALSE, FALSE, 0);
+            compat<bool>::boxPack0 (filter_box, GTK_WIDGET(filter_label), FALSE, FALSE, 0);
+            compat<bool>::boxPack0 (filter_box, GTK_WIDGET(filter_entry), TRUE, TRUE, 0);
+            compat<bool>::boxPack0 (filter_box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
+            g_signal_connect (filter_entry,
+                              "activate", BUTTON_CALLBACK(Type::onFindButton), 
+                              (gpointer)findDialog);
+
         }
 
 
