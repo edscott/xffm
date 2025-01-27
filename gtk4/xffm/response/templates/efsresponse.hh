@@ -19,6 +19,7 @@ namespace xf {
    GtkTextView *output_;
    GList *children_ = NULL; 
 public:
+    GtkWidget *cbox(void){return NULL;}
     
     GList *children(void){return children_;}
     const char *title(void){ return title_;}

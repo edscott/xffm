@@ -48,6 +48,9 @@ public:
         }
       }
     }
+    
+    GtkWidget *cbox(void){return NULL;}
+
     GtkBox *mainBox(const char *folder, const char *path) {
         folder_ = folder? g_strdup(folder) : g_strdup("/");
         path_ = path? path : "/";

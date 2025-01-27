@@ -269,8 +269,12 @@ private:
         gtk_frame_set_label_align(frame, 1.0);
         closeBox_ = GTK_BOX(getCloseBox());
         g_object_set_data(G_OBJECT(dialog_), "closeBox", closeBox_);
+        auto cbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2));
+        gtk_box_append(cbox, GTK_WIDGET(closeBox_));
         
-        gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox_));
+        gtk_frame_set_label_widget(frame, GTK_WIDGET(cbox));
+        g_object_set_data(G_OBJECT(dialog_), "cbox", cbox);
+        //gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox_));
  
         gtk_window_set_child(dialog_, GTK_WIDGET(frame));
         frame_ = frame;

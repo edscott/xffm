@@ -143,16 +143,16 @@ public:
       }
 
 
+      GtkWidget *cbox(void){
+        return gtk_label_new("bar");
+      }
+
       GtkBox *mainBox(const char *folder) {
 
-        /* FIXME:
-(process:824184): GLib-GObject-CRITICAL **: 16:24:08.620: g_object_get_data: assertion 'G_IS_OBJECT (object)' failed
-(process:824184): Gtk-CRITICAL **: 16:24:08.620: gtk_box_prepend: assertion 'GTK_IS_BOX (box)' failed
-        auto closeBox =GTK_BOX(g_object_get_data(G_OBJECT(dialog_), "closeBox"));
-
-        auto foo = gtk_label_new("foo");
-        gtk_box_prepend(closeBox, foo);
-        */
+        /*auto cbox =GTK_BOX(g_object_get_data(G_OBJECT(dialog_), "cbox"));
+        //auto foo = gtk_label_new("bar");
+        gtk_box_prepend(cbox, foo);*/
+        
         
           if (g_file_test(folder, G_FILE_TEST_IS_DIR)) folder_ = realpath(folder, NULL);
           else {

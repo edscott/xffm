@@ -17,6 +17,10 @@ namespace xf
       auto dialog = this->dialog();
       this->subClass()->dialog(dialog);
 
+      /*auto cbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "cbox"));
+      auto foo = gtk_label_new("foo ok");
+      gtk_box_prepend(cbox, foo);*/
+
       gtk_window_set_decorated(dialog, true);
       gtk_widget_realize(GTK_WIDGET(dialog));
       Basic::setAsDialog(dialog);
