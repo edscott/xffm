@@ -249,15 +249,15 @@ private:
         gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
         gtk_box_append(mainBox_, GTK_WIDGET(action_area));
 
-        auto cancelButton = Basic::mkButton("emblem-redball", _("Cancel"));
+        auto cancelButton = UtilBasic::mkButton("emblem-redball", _("Cancel"));
         gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
         gtk_widget_set_vexpand(GTK_WIDGET(cancelButton), false);
 
-        auto newButton = Basic::mkButton ("emblem-edit", _("New Folder"));
+        auto newButton = UtilBasic::mkButton ("emblem-edit", _("New Folder"));
         gtk_box_append(action_area,  GTK_WIDGET(newButton));
         gtk_widget_set_vexpand(GTK_WIDGET(newButton), false);
 
-        auto saveButton = Basic::mkButton ("emblem-floppy", _("Accept"));
+        auto saveButton = UtilBasic::mkButton ("emblem-floppy", _("Accept"));
         gtk_box_append(action_area,  GTK_WIDGET(saveButton));
         gtk_widget_set_vexpand(GTK_WIDGET(saveButton), false);
 
@@ -341,7 +341,7 @@ public: // Free functions.
         //gtk_widget_set_sensitive(GTK_WIDGET(entry), true); // FIXME: put to false 
                                                            // when filedialog button
                                                            // is working.
-        auto button = Basic::mkButton(EMBLEM_FOLDER_OPEN, NULL);
+        auto button = UtilBasic::mkButton(EMBLEM_FOLDER_OPEN, NULL);
         //g_object_set_data(G_OBJECT(button), "folder", (void *)folder);
         g_object_set_data(G_OBJECT(button), "entry", entry);
         g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse_t::getDirectory), subClassObject);

@@ -7,6 +7,24 @@ namespace xf {
   {
     public:
 
+    static GtkButton *mkButton(const char *iconName, const char *markup){
+      auto button = gtk_button_new();
+      auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+      if (iconName){
+        auto image = GTK_WIDGET(Texture<bool>::getImage(iconName, 12));
+        //auto image = gtk_image_new_from_icon_name(iconName);
+        gtk_box_append (box, GTK_WIDGET(image));
+      }
+      if (markup){
+        auto label = gtk_label_new("");
+        auto g = g_strdup_printf("  %s", markup);
+        gtk_label_set_markup(GTK_LABEL(label), g);
+        g_free(g);
+        gtk_box_append (box, GTK_WIDGET(label));
+      }
+      gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));
+      return GTK_BUTTON(button);
+    }
     
     static GtkBox *imageButton(const char *iconName, const char *tooltipText, void *callback, void *data){
         auto toggleBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL,5));
@@ -14,7 +32,9 @@ namespace xf {
         GtkWidget *toggle;
         if (iconName){
           toggle = GTK_WIDGET(Texture<bool>::getImage(iconName, 12));
-          if (tooltipText) gtk_widget_set_tooltip_markup(GTK_WIDGET(toggle), tooltipText);
+          if (tooltipText) {
+            Basic::setTooltip(GTK_WIDGET(toggle), tooltipText);
+          }
         } else {
           toggle = gtk_label_new("");
         }

@@ -8,7 +8,7 @@ namespace xf {
   class EfsResponse {
    using subClass_t = EfsResponse<Type>;
    using dialog_t = DialogComplex<subClass_t>;
-   
+
    GtkBox *mainBox_ = NULL;
    GtkWindow *dialog_ = NULL;
    char *title_;
@@ -19,6 +19,7 @@ namespace xf {
    GtkTextView *output_;
    GList *children_ = NULL; 
 public:
+    
     GList *children(void){return children_;}
     const char *title(void){ return title_;}
     const char *iconName(void){ return "emblem-run";}
@@ -41,28 +42,6 @@ public:
     void push(void *data){
       children_ = g_list_prepend(children_, data);
     }
-
-    /* obsolete
-    void cleanup(void){// FIXME: this is subject to race 
-                       //GTK_IS_WINDOW(l->data) may cause crash
-                       //probably should do with controls...
-      for (auto l=children_; l && l->data; l=l->next){
-          DBG("destroy dialog GTK_IS_WINDOW %p\n", l->data);
-        if (GTK_IS_WINDOW(l->data)) {
-          DBG("destroy dialog %p\n", l->data);
-          gtk_widget_set_visible(GTK_WIDGET(l->data), false);
-          // set to self destruct with cancelation:
-          g_object_set_data(G_OBJECT(l->data), "response", GINT_TO_POINTER(-1)); 
-          //gtk_window_destroy(GTK_WINDOW(l->data)); // destroy here causes gtk to crash
-        } else {
-          DBG("%p is not a dialog\n", l->data);
-        }
-      }      
-      DBG("cleanup done\n");
-      g_list_free(children_);
-      children_ = NULL;
-    }*/
-      
 
      static void *asyncYes(void *data){
       auto dialogObject = (dialog_t *)data;
@@ -194,11 +173,11 @@ public:
         gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
         gtk_box_append(mainBox_, GTK_WIDGET(action_area));
 
-        auto cancelButton = Basic::mkButton("emblem-redball", _("Cancel"));
+        auto cancelButton = UtilBasic::mkButton("emblem-redball", _("Cancel"));
         gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
         gtk_widget_set_vexpand(GTK_WIDGET(cancelButton), false);
 
-        auto saveButton = Basic::mkButton ("emblem-floppy", _("Save"));
+        auto saveButton = UtilBasic::mkButton ("emblem-floppy", _("Save"));
         gtk_box_append(action_area,  GTK_WIDGET(saveButton));
         gtk_widget_set_vexpand(GTK_WIDGET(saveButton), false);
 

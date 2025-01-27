@@ -16,7 +16,7 @@ namespace xf
 
       gtk_widget_set_sensitive(GTK_WIDGET(image), true);
       Basic::boxPack0(box, GTK_WIDGET(image), true, true, 1);
-      gtk_widget_set_tooltip_markup(GTK_WIDGET(box), tooltip);
+      Basic::setTooltip(GTK_WIDGET(box), tooltip);
       // motion
       auto motion = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);

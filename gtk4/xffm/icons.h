@@ -2,6 +2,10 @@
 #define ICON_MACROS
 
 #if 1
+#define EMBLEM_CLOSE "close"
+#define EMBLEM_NO "no"
+#define EMBLEM_APPLY "apply"
+
 #define GO_UP "go-up"
 #define EMBLEM_BOOKMARK "emblem-bookmark"
 #define SEARCH "edit-find"
@@ -22,6 +26,7 @@
 #define EMBLEM_M "emblem-m"
 
 // Menu icons
+#define EMBLEM_EDIT "emblem-edit"
 #define EMBLEM_GRAY_BALL "emblem-grayball"
 #define EMBLEM_GREEN_BALL "emblem-greenball"
 #define EMBLEM_RED_BALL "emblem-redball"
@@ -46,16 +51,18 @@
 #define EMBLEM_TRASH_FULL "user-trash-full"
 #define EMBLEM_IMPORTANT "emblem-important"
 #define EMBLEM_NEW_WINDOW "document-new"
-#define EMBLEM_APPLY "ok"
+//#define EMBLEM_APPLY "ok"
 #define EMBLEM_ABOUT "emblem-about"
 #define EMBLEM_BROKEN "emblem-broken"
 #define EMBLEM_START_HERE "emblem-start-here"
 #define EMBLEM_BAK "emblem-bak"
 #define EMBLEM_TERMINAL "emblem-terminal"
+#define EMBLEM_TERMINAL_EXEC "utilities-terminal"
 #define EMBLEM_ABOUT "emblem-about"
 #define EMBLEM_WARNING "dialog-warning"
 #define EMBLEM_ERROR "dialog-error"
 #define EMBLEM_INVERT "emblem-invert"
+#define EMBLEM_QUESTION "dialog-question-symbolic"
 #define EMBLEM_TOGGLE "emblem-toggle"
 #define EMBLEM_FOLDER_OPEN "document-open"
 #define EMBLEM_RESET "process-reset"

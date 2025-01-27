@@ -487,7 +487,7 @@ namespace xf {
 
         auto eventImage = gtk_image_new_from_icon_name(icon);
         Basic::boxPack0 (eventBox, GTK_WIDGET(eventImage), FALSE, FALSE, 0);
-        gtk_widget_set_tooltip_markup(GTK_WIDGET(eventBox),tooltip);
+        Basic::setTooltip(GTK_WIDGET(eventBox),tooltip);
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
         return eventBox;        
     }

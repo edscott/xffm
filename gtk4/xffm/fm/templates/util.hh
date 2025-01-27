@@ -257,21 +257,6 @@ namespace xf {
         return retval;
     }
 
-    static char **getVector(const char *text, const char *token){
-      auto string =g_strdup(text);
-      g_strstrip(string);     
-      //TRACE( "getVector():string=%s\n", string);
-      char **vector;
-      if (!strstr(string, token)){
-        vector = (char **)calloc(2,sizeof(char *));
-        vector[0] = g_strdup(string);
-      } else {
-        vector = g_strsplit(string,token,-1);
-      }
-      g_free(string);
-      //for (char **p=vector; p && *p && p->id p++)  TRACE( "getVector():p=%s\n",*p);
-      return vector;
-    }
     static 
     GtkTextView *newTextView(void){
         auto output = GTK_TEXT_VIEW(gtk_text_view_new ());

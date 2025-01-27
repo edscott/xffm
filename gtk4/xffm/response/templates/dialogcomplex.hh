@@ -16,6 +16,7 @@ namespace xf
       
       auto dialog = this->dialog();
       this->subClass()->dialog(dialog);
+
       gtk_window_set_decorated(dialog, true);
       gtk_widget_realize(GTK_WIDGET(dialog));
       Basic::setAsDialog(dialog);

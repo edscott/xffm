@@ -252,6 +252,7 @@ public:
         return GTK_WIDGET(mkPsMenu(title, run_button_p, items, callbacks, signals)); 
     }
 
+
     static void
     run_button_setup (void *data){
         auto run_button_p = (RunButton *)data;
@@ -262,9 +263,13 @@ public:
         
         if (run_button_p->inShell()) {
             TRACE("run_button_p->inShell\n");
-            run_button_p->set_icon_id("utilities-terminal");
+            run_button_p->set_icon_id(EMBLEM_TERMINAL_EXEC);
         } else 
         {
+          auto icon_id = Basic::getAppIconName(command, EMBLEM_RUN);
+          run_button_p->set_icon_id(icon_id);
+        }
+/* obsolete
             command = g_strstrip(command);
             gchar **args = g_strsplit(command, " ", -1);
             gchar *icon_id = NULL;
@@ -283,11 +288,9 @@ public:
 
             }
             g_strfreev(args);
-           /* if (!icon_id) {
-                icon_id = g_strdup("network-workgroup");
-            }*/
             run_button_p->set_icon_id(icon_id);
         }
+           */
 
 
         gchar *tip = g_strdup_printf(" %s=%d\n", _("PID"), run_button_p->grandchild()); 

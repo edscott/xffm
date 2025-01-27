@@ -235,13 +235,13 @@ public:
 
 
         
-       /* auto cancel = Basic::mkButton("no", _("Cancel")); //4
+       /* auto cancel = UtilBasic::mkButton("no", _("Cancel")); //4
         g_signal_connect(G_OBJECT(cancel), "pressed", G_CALLBACK(cancelCallback), this);
         Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(cancel), TRUE, TRUE, 5);*/
 
 
         auto label = gtk_label_new(_("Use External Terminal:"));
-        gtk_widget_set_tooltip_markup(label, text);
+        Basic::setTooltip(label, text);
         checkbutton_ = GTK_CHECK_BUTTON(gtk_check_button_new());
 
         Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(label), FALSE, FALSE, 0);

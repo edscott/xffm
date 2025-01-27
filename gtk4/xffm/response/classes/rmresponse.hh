@@ -14,10 +14,10 @@ public:
     ~rmResponse(void){
     }
     rmResponse(void){
-      button_[0] = Basic::mkButton("dialog-warning", _("Shred")); //1
-      button_[1] = Basic::mkButton("delete", _("Delete")); //2
-      button_[2] = Basic::mkButton("user-trash", _("Trash")); //3
-      button_[3] = Basic::mkButton("no", _("Cancel")); //4
+      button_[0] = UtilBasic::mkButton("dialog-warning", _("Shred")); //1
+      button_[1] = UtilBasic::mkButton("delete", _("Delete")); //2
+      button_[2] = UtilBasic::mkButton("user-trash", _("Trash")); //3
+      button_[3] = UtilBasic::mkButton("no", _("Cancel")); //4
       button_[4] = NULL;
     }
     GtkButton **getButtons(void){ return button_;}

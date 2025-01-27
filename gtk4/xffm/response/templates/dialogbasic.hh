@@ -174,7 +174,7 @@ namespace xf
       auto image = Texture<bool>::getImage(iconName, 18);
       gtk_widget_set_sensitive(GTK_WIDGET(image), true);
       Basic::boxPack0(closeBox_, GTK_WIDGET(image), true, true, 1);
-      gtk_widget_set_tooltip_markup(GTK_WIDGET(closeBox_), tooltip);
+      Basic::setTooltip(GTK_WIDGET(closeBox_), tooltip);
     }
     
     void setLabelText(const char *text){
@@ -248,16 +248,16 @@ private:
 
 
 
-    GtkWidget *closeBox(void){
-      return Dialog::buttonBox("close", _("Close"), (void *)cancelCallback, (void *)this);
+    GtkWidget *getCloseBox(void){
+      return Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
     }
 protected:
 
     GtkWidget *cancelBox(void){
-      return Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, (void *)this);
+      return Dialog::buttonBox(EMBLEM_NO, _("Cancel"), (void *)cancelCallback, (void *)this);
     }
     GtkWidget *applyBox(void){
-      return Dialog::buttonBox("apply", _("Apply"), (void *)ok, (void *)this);
+      return Dialog::buttonBox(EMBLEM_APPLY, _("Apply"), (void *)ok, (void *)this);
     }
 private:
     void mkWindow(void){
@@ -267,7 +267,9 @@ private:
         auto frame = GTK_FRAME(gtk_frame_new(NULL));
         g_object_set_data(G_OBJECT(dialog_), "frame", frame);
         gtk_frame_set_label_align(frame, 1.0);
-        closeBox_ = GTK_BOX(closeBox());
+        closeBox_ = GTK_BOX(getCloseBox());
+        g_object_set_data(G_OBJECT(dialog_), "closeBox", closeBox_);
+        
         gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox_));
  
         gtk_window_set_child(dialog_, GTK_WIDGET(frame));

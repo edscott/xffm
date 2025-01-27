@@ -80,8 +80,8 @@ static GtkNotebook *mainNotebook = NULL;
 
 // classes and templates
 // basic classes
-#include "fm/classes/basic.hh"     
 #include "fm/classes/icontheme.hh"  
+#include "fm/classes/basic.hh"     
 #include "fm/classes/child.hh"  
 #include "fm/classes/settings.hh"  
 #include "mime/mime.hh"
@@ -114,6 +114,8 @@ static GtkNotebook *mainNotebook = NULL;
 #include "response/dialogs.hh"
 
 #include "fm/classes/history.hh"
+
+#include "find/find.hh"
 
 // menu templates
 #include "menus/templates/menu.hh"

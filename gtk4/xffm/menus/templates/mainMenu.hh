@@ -255,10 +255,18 @@ namespace xf {
   
     static void
     test(GtkButton *button, void *data){
+      using subClass_t = FindResponse<Type>;
+      using dialog_t = DialogComplex<subClass_t>;
+
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      Dialogs::info("foo and bar");
-      MainWindow<Type>::resetAdj(250);
+      //Dialogs::info("find in files, test");
+
+      auto dialogObject = new dialog_t(GTK_WINDOW(MainWidget), Child::getWorkdir());
+
+
+      //Dialogs::info("foo and bar");
+      //MainWindow<Type>::resetAdj(250);
 
       return;
     }

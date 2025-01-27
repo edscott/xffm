@@ -148,7 +148,7 @@ namespace xf {
         gtk_box_prepend(this->promptBox(), GTK_WIDGET(multiBox));
         auto toggle = UtilBasic::imageButton(EMBLEM_TERMINAL, _("Show/Hide"), (void *)MenuCallbacks<LocalDir>::toggleVpane, NULL);
         gtk_box_prepend(multiBox, GTK_WIDGET(toggle));
-        auto clear = UtilBasic::imageButton(EMBLEM_RESET, _("Clear"), (void *)clearCallback, NULL);
+        auto clear = UtilBasic::imageButton(EDIT_CLEAR, _("Clear"), (void *)clearCallback, NULL);
         gtk_box_append(multiBox, GTK_WIDGET(clear));
 
   /*      auto toggle = Basic::newButton(EMBLEM_TERMINAL, _("Toggle Text Mode"));

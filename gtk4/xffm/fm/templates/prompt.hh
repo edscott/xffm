@@ -98,12 +98,12 @@ namespace xf {
 
         gchar *newWorkdir =NULL;
         gchar ** commands = NULL;
-        commands = Util<LocalDir >::getVector(command, ";");
+        commands = Basic::getVector(command, ";");
       TRACE("commands[0]: %s\n", commands[0]);
         RunButton<LocalDir > *runButton;
         for (gchar **c=commands; c && *c; c++){
             if (strncmp(*c,"cd", strlen("cd"))==0){
-              auto w = Util<LocalDir >::getVector(*c, " ");
+              auto w = Basic::getVector(*c, " ");
               auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
               auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
               if (Util<LocalDir >::cd((const char **)w, child)){
@@ -199,7 +199,7 @@ namespace xf {
     
     static bool
     cd(GtkTextView *output, const char *text){
-      gchar **v = Util<LocalDir >::getVector(text, " ");
+      gchar **v = Basic::getVector(text, " ");
       if (strcmp(v[0], "cd")) {
         g_strfreev(v);
         return false;
@@ -224,7 +224,7 @@ namespace xf {
       if (!History::add(text)) DBG("History::add(%s) failed\n", text );
 
 /*
-      gchar **v = Util<LocalDir >::getVector(text, " ");
+      gchar **v = Basic::getVector(text, " ");
       char *inPath = g_find_program_in_path(v[0]);
       if (!inPath && g_file_test(v[0], G_FILE_TEST_IS_EXECUTABLE)) inPath = realpath(v[0], NULL);
       if (!inPath && strncmp(v[0], "./", strlen("./")) == 0) inPath = g_strdup(v[0]);

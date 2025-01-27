@@ -137,11 +137,11 @@ public:
         gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
         gtk_box_append(mainBox_, GTK_WIDGET(action_area));
 
-        auto cancelButton = Basic::mkButton(EMBLEM_RED_BALL, _("Cancel"));
+        auto cancelButton = UtilBasic::mkButton(EMBLEM_RED_BALL, _("Cancel"));
         gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
         gtk_widget_set_vexpand(GTK_WIDGET(cancelButton), false);
 
-        auto mountButton = Basic::mkButton (EMBLEM_GREEN_BALL, _("Mount"));
+        auto mountButton = UtilBasic::mkButton (EMBLEM_GREEN_BALL, _("Mount"));
         gtk_box_append(action_area,  GTK_WIDGET(mountButton));
         gtk_widget_set_vexpand(GTK_WIDGET(mountButton), false);
      

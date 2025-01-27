@@ -388,17 +388,17 @@ private:
 
 
 
-        cancelButton_ = Basic::mkButton("window-close", _("Cancel"));
+        cancelButton_ = UtilBasic::mkButton("window-close", _("Cancel"));
         compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(cancelButton_), FALSE, FALSE, 0);
 
 
-        saveButton_ = Basic::mkButton("media-floppy", _("Save"));
+        saveButton_ = UtilBasic::mkButton("media-floppy", _("Save"));
         compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(saveButton_), FALSE, FALSE, 0);
 
-        //loadButton_ = Basic::mkButton("document-open", _("Load"));
+        //loadButton_ = UtilBasic::mkButton("document-open", _("Load"));
         //compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(loadButton_), FALSE, FALSE, 0);
 
-        mountButton_ = Basic::mkButton("greenball", _("Mount"));
+        mountButton_ = UtilBasic::mkButton("greenball", _("Mount"));
         compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
 
 
@@ -454,7 +454,7 @@ private:
         compat<bool>::boxPackStart (hbox, label, FALSE, FALSE, 0);
         compat<bool>::boxPackStart (hbox, entry, TRUE, TRUE, 0);
         if (withSelector){
-            auto button = Basic::mkButton("document-open", NULL);
+            auto button = UtilBasic::mkButton("document-open", NULL);
             g_object_set_data(G_OBJECT(hbox), "button", button);
             g_signal_connect (G_OBJECT (button), "clicked", 
                     G_CALLBACK (ChooserResponse<Type>::folderChooser), entry);

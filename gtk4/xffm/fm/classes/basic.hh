@@ -4,6 +4,41 @@ namespace xf {
   GList *dialogStack = NULL; // MainWidget dialog stack.
   class Basic {
     public:
+
+    static char **getVector(const char *text, const char *token){
+      auto string =g_strdup(text);
+      g_strstrip(string);     
+      //TRACE( "getVector():string=%s\n", string);
+      char **vector;
+      if (!strstr(string, token)){
+        vector = (char **)calloc(2,sizeof(char *));
+        vector[0] = g_strdup(string);
+      } else {
+        vector = g_strsplit(string,token,-1);
+      }
+      g_free(string);
+      //for (char **p=vector; p && *p && p->id p++)  TRACE( "getVector():p=%s\n",*p);
+      return vector;
+    }
+
+    static char *getAppIconName(const char *command, const char *defaultIconName){
+      gchar *icon_id = NULL;
+      if (!command) return icon_id;
+      auto args = getVector(command, " ");
+      icon_id = g_path_get_basename(args[0]);
+      if (strcmp(icon_id, "xterm")==0){
+        g_free(icon_id);
+        g_strfreev(args);
+        return g_strdup(EMBLEM_TERMINAL_EXEC);
+      }
+      if (gtk_icon_theme_has_icon (iconTheme, icon_id)){
+        g_strfreev(args);
+        return g_strdup(icon_id);
+      }
+      g_strfreev(args);
+      g_free(icon_id);
+      return g_strdup(defaultIconName);
+    }
     
     static int getMaxNameLen(GListModel *store){
         int max = 0;
@@ -576,23 +611,6 @@ public:
       return result;
     }
     
-    static GtkButton *mkButton(const char *iconName, const char *markup){
-      auto button = gtk_button_new();
-      auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-      if (iconName){
-        auto image = gtk_image_new_from_icon_name(iconName);
-        gtk_box_append (box, GTK_WIDGET(image));
-      }
-      if (markup){
-        auto label = gtk_label_new("");
-        auto g = g_strdup_printf("  %s", markup);
-        gtk_label_set_markup(GTK_LABEL(label), g);
-        g_free(g);
-        gtk_box_append (box, GTK_WIDGET(label));
-      }
-      gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));
-      return GTK_BUTTON(button);
-    }
 
     static void setAsDialog(GtkWindow *window){
       Basic::setAsDialog(GTK_WIDGET(window), "dialog", "Dialog");

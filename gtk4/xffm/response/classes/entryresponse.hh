@@ -12,8 +12,6 @@ public:
     const char *label(void){return "label foobar";}
 
     ~EntryResponse (void){
-        //if (bashCompletionStore_) gtk_list_store_clear(bashCompletionStore_);
-        //gtk_window_destroy(response_);
     }
 
     EntryResponse (void){
