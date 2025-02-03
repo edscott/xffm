@@ -30,11 +30,14 @@ namespace xf {
           if (size < 0) size = 48;
           double scaleFactor = (size == 24)? 0.75 : 1.0;
           
-          GFile *file = g_file_new_for_path(g_get_home_dir());
+          GFile *file = g_file_new_for_path("/");
+//          GFile *file = g_file_new_for_path(g_get_home_dir());
           auto text = g_strdup_printf("%s ecryptfs", _("New"));
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-          //auto iconPath = Texture<bool>::findIconPath("folder");
-          auto paintable = Texture<bool>::addEmblem("folder", EMBLEM_START_HERE, scaleFactor*size, scaleFactor*size);
+          auto gIcon = g_file_info_get_icon(info);
+          
+          auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_START_HERE, scaleFactor*size, scaleFactor*size);
+//          auto paintable = Texture<bool>::addEmblem("folder", EMBLEM_START_HERE, scaleFactor*size, scaleFactor*size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));      
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
@@ -64,6 +67,7 @@ namespace xf {
           if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
           GFile *file = g_file_new_for_path(*p);
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          auto gIcon = g_file_info_get_icon(info);
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
           auto basename = g_path_get_basename(*p);
           auto utf_name = Basic::utf_string(basename);
@@ -73,8 +77,7 @@ namespace xf {
           //const char *iconPath = Texture<bool>::findIconPath("folder-remote");
           const char *ball = EMBLEM_NOACCESS;
           if (FstabUtil::isMounted(*p)) ball = EMBLEM_GREEN_BALL;
-          auto paintable = Texture<bool>::addEmblem("folder", ball, size, size);
-// breeze bug? auto paintable = Texture<bool>::addEmblem("folder-remote", ball, size, size);
+          auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));
           g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
           g_file_info_set_attribute_object (info, "xffm::efs", G_OBJECT(file));
@@ -92,6 +95,7 @@ namespace xf {
         // bookmarks
         {
 
+          int size = Settings::getInteger("xfterm", "iconsize");
           auto list = Bookmarks::bookmarksList();
           for (auto l=list; l && l->data; l=l->next){
             auto p = (bookmarkItem_t *)l->data;
@@ -104,12 +108,17 @@ namespace xf {
             }
             GFile *file = g_file_new_for_path(p->path);
             auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+            auto gIcon = g_file_info_get_icon(info);
             auto basename = g_path_get_basename(p->path);
             auto utf_name = Basic::utf_string(basename);
             g_file_info_set_name(info, utf_name);
             g_free(basename);
             g_free(utf_name);
-            g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
+
+            auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, size, size);
+            g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+
+            //g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
             g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
             //g_list_store_insert(store, 0, G_OBJECT(info));
             //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:

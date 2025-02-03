@@ -177,14 +177,14 @@ template <class Type>
               default:
                 texture = Texture<bool>::load(info, size); // Loads icon from icontheme.
                 break;
-              case (G_FILE_TYPE_MOUNTABLE): // does not work FIXME: use fstab routines
+              /*case (G_FILE_TYPE_MOUNTABLE): // does not work FIXME: use fstab routines
                 {
                   bool isMounted = false; // FIXME with fstab routine
                   texture = Texture<bool>::addEmblem(info,  
                       isMounted? EMBLEM_GREEN_BALL : EMBLEM_RED_BALL, 
                       scaleFactor*size, scaleFactor*size);
                 }
-                break;
+                break;*/
             }
           }
           image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));

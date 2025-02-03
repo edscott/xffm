@@ -213,15 +213,22 @@ class FstabUtil {
     }
 
     static void setMountableIcon(GFileInfo *info, const char *path){
-      int size = Settings::getInteger("xfterm", "iconsize");
-      const char *iconPath;
-      if (g_file_test(path, G_FILE_TEST_IS_DIR)) iconPath = "folder";
-      else  iconPath = "drive-harddisk";
-      
       const char *ball = EMBLEM_RED_BALL;
       if (isMounted(path)) ball = EMBLEM_GREEN_BALL;
-      auto paintable = Texture<bool>::addEmblem(iconPath, ball, size, size);
-      g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+
+      int size = Settings::getInteger("xfterm", "iconsize");
+      const char *iconPath;
+      if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
+        auto gIcon = g_file_info_get_icon(info);
+        auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
+        g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+       // iconPath = "folder";
+      }
+      else {
+        iconPath = "drive-harddisk";
+        auto paintable = Texture<bool>::addEmblem(iconPath, ball, size, size);
+        g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+      }
       return;  
     }    
 

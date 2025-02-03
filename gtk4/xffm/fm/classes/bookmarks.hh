@@ -31,9 +31,10 @@ class Bookmarks {
 public:
     static void setBookmarkIcon(GFileInfo *info, const char *path){
       int size = Settings::getInteger("xfterm", "iconsize");
+      auto gIcon = g_file_info_get_icon(info);
       
       const char *ball = EMBLEM_FAVOURITE;
-      auto paintable = Texture<bool>::addEmblem("folder", ball, size, size);
+      auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
       g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
       return;  
     }    
