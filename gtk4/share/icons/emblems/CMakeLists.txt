@@ -71,6 +71,9 @@ emblem-video.svg
 emblem-wait.svg
 emblem-write-ok.svg
 emblem-www.svg
+emblem-cut.svg
+emblem-copy.svg
+emblem-paste.svg
 xf-go-next.svg
 xf-go-previous.svg
 xf-go-to.svg)

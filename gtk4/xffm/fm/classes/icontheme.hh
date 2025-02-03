@@ -6,11 +6,16 @@ namespace xf {
 
 public:
     static void init(void){
+
       GdkDisplay *displayGdk = gdk_display_get_default();
       iconTheme = gtk_icon_theme_get_for_display(displayGdk);
       auto iconThemeName = gtk_icon_theme_get_theme_name(iconTheme);
       DBG("*** System icon theme: %s\n", gtk_icon_theme_get_theme_name(iconTheme));
       g_free(iconThemeName);
+
+     // iconTheme = gtk_icon_theme_new();
+     // gtk_icon_theme_set_theme_name(iconTheme, "Humanity");
+     // gtk_icon_theme_set_theme_name(iconTheme, "Adwaita");
       addResource();
     }
 
@@ -27,6 +32,7 @@ private:
       if (g_file_test(resource_path, G_FILE_TEST_IS_DIR)) {
         gtk_icon_theme_add_resource_path(iconTheme, resource_path);// not always needed, maybe sometimes...
    
+        //gtk_icon_theme_add_search_path (iconTheme, resource_path);
         const gchar *subdirs[] = {
                   "emblems",
                   "stock",
@@ -35,15 +41,20 @@ private:
         for (auto p=subdirs; p && *p; p++){
             auto path = g_build_filename(resource_path, *p, NULL);
             gtk_icon_theme_add_search_path (iconTheme, path);
-            TRACE("added search path=\"%s\"\n", path);
+            DBG("added search path=\"%s\"\n", path);
             g_free(path);
         }
-        //TRACE("added resource path=\"%s\"\n", resource_path);
+        DBG("added resource path=\"%s\"\n", resource_path);
       }
       g_free(resource_path);
 
-    }
+    /*
+      const char *rp[] = {"/usr/local/hicolor/scalable/emblems",
+                          "/usr/local/hicolor/scalable/stock",NULL};
+      gtk_icon_theme_set_resource_path(iconTheme, rp);
     
+    */
+    }
   };
 }
 #endif
