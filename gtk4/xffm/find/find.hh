@@ -141,15 +141,71 @@ namespace xf
       GtkNotebook *notebook_ = NULL;
       GtkBox *advancedVbox_ = NULL;
 
+      GList *grepHistory_ = NULL;
+      GList *filterHistory_ = NULL;
+
 public:
       const char *label(void){return "xffm::find";}
 
       FindResponse (void){
+        auto history1 = g_build_filename(GREP_HISTORY);
+        grepHistory_ = loadHistory(history1);
+        auto history2 = g_build_filename(FILTER_HISTORY);
+        filterHistory_ = loadHistory(history2);
+        g_free(history1);
+        g_free(history2);
       }
 
       ~FindResponse (void){
-        g_free(folder_);
         DBG("*** ~FindResponse\n");
+        g_free(folder_);
+        freeHistoryList(filterHistory_);
+        freeHistoryList(grepHistory_);
+      }
+        
+      GList *
+      loadHistory (const gchar *history) {
+        GList *list = NULL;
+        FILE *historyFile = fopen (history, "r");
+        if(!historyFile) {
+           TRACE("loadHistory(): creating new history: \"%s\"\n", history);
+           return NULL;
+        }
+        gchar line[2048];
+        memset (line, 0, 2048);
+        while(fgets (line, 2047, historyFile) && !feof (historyFile)) {
+            if(strchr (line, '\n')) *strchr (line, '\n') = 0;
+            gchar *newline = compact_line(line);
+            if(strlen (newline) == 0) {
+              g_free(newline);
+              continue;
+            }
+            list = g_list_prepend(list, newline);
+            TRACE("%s: %s\n", history, newline);
+        }
+        fclose (historyFile);
+        if (list) list = g_list_reverse(list);
+        return list;
+      }
+
+      gchar *
+      compact_line(const gchar *line){
+          //1. Remove leading and trailing whitespace
+          //2. Compact intermediate whitespace
+
+          gchar *newline= g_strdup(line); 
+          g_strstrip(newline);
+          gchar *p = newline;
+          for(;p && *p; p++){
+              if (*p ==' ') g_strchug(p+1);
+          }
+          return newline;
+      }
+
+      void freeHistoryList(GList *list){
+        if (!list) return;
+        for (auto l=list; l && l->data; l=l->next) g_free(l->data);
+        g_list_free(list);
       }
 
       char *folder(void){ return folder_;}
@@ -415,9 +471,9 @@ private:
             auto filter_label = GTK_LABEL(gtk_label_new (text));
             g_free(text);
 
-            auto history = g_build_filename(FILTER_HISTORY);
-            auto filter_entry = mkCompletionEntry(history);
-            g_free(history);
+            //auto history = g_build_filename(FILTER_HISTORY);
+            auto filter_entry = mkCompletionEntry(&filterHistory_);
+            //g_free(history);
 
 
             auto dialogbutton2 = UtilBasic::mkButton(EMBLEM_QUESTION, NULL);
@@ -444,9 +500,58 @@ private:
         }
 
 
-        GtkEntry *mkCompletionEntry(const gchar *history){
+/*
+        // This does not work, since entry buffer is way too limited
+        // Use modified textview csh completion instead, with custom history. 
+
+        static const char *suggest(const char *token, GList *list){
+          for (auto l=list; l && l->data; l=l->next){
+            auto item = (const char *)l->data;
+            if (strncmp(token, item, strlen(token)) == 0) return item;
+          }
+          return NULL;
+        }
+
+        static gboolean complete(GtkEventControllerKey* self,
+          guint keyval, guint keycode, GdkModifierType state, void *data){
+          if (keyval < 32 || keyval > 126) return false;
+          auto controller = GTK_EVENT_CONTROLLER(self);
+          auto entry = GTK_ENTRY(gtk_event_controller_get_widget(controller));
+          auto list_p = (GList **)g_object_get_data(G_OBJECT(entry), "list_p");
+          auto buffer = gtk_entry_get_buffer(entry);
+          char *text = g_strdup(gtk_entry_buffer_get_text(buffer));
+          auto suggestion = suggest(text, *list_p);
+          char keyBuf[2];
+          keyBuf[0]=keyval;
+          keyBuf[1]=0;
+          DBG("keyval = %c list_p=%p (%p) suggestion = %s\n", 
+              keyval, list_p, *list_p, suggestion);
+          Basic::concat(&text, keyBuf);
+          if (suggestion) gtk_entry_buffer_set_text(buffer, suggestion, -1);
+          else gtk_entry_buffer_set_text(buffer, text, -1);
+          g_free(text);
+
+
+//          Print::print(Child::getOutput(), g_strdup_printf("keyval = %c\n", keyval));
+          return true;
+        }
+        
+        void addKeyComplete(GtkEntry  *entry){
+            auto keyController = gtk_event_controller_key_new();
+            gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);
+            gtk_widget_add_controller(GTK_WIDGET(entry), keyController);
+            g_signal_connect (G_OBJECT (keyController), "key-pressed", 
+                G_CALLBACK (this->complete), (void *)this);
+        }
+
+*/
+  // FIXME: use textview completion.
+        GtkEntry *mkCompletionEntry(GList **list_p){ //
             auto entry = GTK_ENTRY(gtk_entry_new());
             gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
+            g_object_set_data(G_OBJECT(entry), "list_p", list_p);
+         //   addKeyComplete(entry);
+
             /* FIXME
             auto model = util_c::loadHistory(history);
             g_object_set_data(G_OBJECT(entry), "model", model);
@@ -454,7 +559,8 @@ private:
             if (gtk_tree_model_get_iter_first (model, &iter)){
                 gchar *value;
                 gtk_tree_model_get (model, &iter, 0, &value, -1);
-                gtk_entry_set_text(entry, value);        
+                auto buffer = gtk_entry_get_buffer(entry)
+                gtk_entry_buffer_set_text(entry, value, -1);        
                 gtk_editable_select_region (GTK_EDITABLE(entry), 0, strlen(value));
                 g_free(value);
             }
@@ -465,10 +571,8 @@ private:
             gtk_entry_completion_set_popup_completion(completion, TRUE);
             gtk_entry_completion_set_text_column (completion, 0);
                                           
-            g_signal_connect (entry,
-                              "key_release_event", KEY_EVENT_CALLBACK(findSignals<Type>::on_completion), 
-                              (gpointer)NULL);
-                              */
+            g_signal_connect (entry, "key_release_event",  G_CALLBACK(on_completion), NULL);*/
+                             
             return entry;
         }
         
@@ -481,18 +585,18 @@ private:
             auto grep_label = GTK_LABEL(gtk_label_new (t));
             g_free(t);
         
-            auto history = g_build_filename(GREP_HISTORY);
-            auto grep_entry = mkCompletionEntry(history);
-            //FIXME: g_object_set_data(G_OBJECT(findDialog), "grep_entry", grep_entry);
-            g_free(history);        
+            //auto history = g_build_filename(GREP_HISTORY);
+            auto grep_entry = mkCompletionEntry(&grepHistory_);
+            g_object_set_data(G_OBJECT(mainBox_), "grep_entry", grep_entry);
+            //g_free(history);        
             gtk_widget_set_sensitive (GTK_WIDGET(grep_entry), TRUE);   
             
             auto button = UtilBasic::mkButton(EMBLEM_QUESTION, NULL);
             //FIXME: g_object_set_data(G_OBJECT(button), "findDialog", findDialog);
             Basic::setTooltip(GTK_WIDGET(button), _(grep_text_help));
-            g_signal_connect (GTK_WIDGET(button),
+            /*g_signal_connect (GTK_WIDGET(button),
                               "clicked", WIDGET_CALLBACK(findSignals<Type>::on_buttonHelp), 
-                              (gpointer) _(grep_text_help));
+                              (gpointer) _(grep_text_help));*/
 
             auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
             gtk_box_append(vbox, GTK_WIDGET(button));
