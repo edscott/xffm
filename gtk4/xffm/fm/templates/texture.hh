@@ -61,7 +61,7 @@ template <class Type>  class Texture {
         return GTK_ICON_PAINTABLE(icon);
       }
 
-      static GdkPaintable *getIcon(const char *iconName, int width){
+       static GdkPaintable *getIcon(const char *iconName, int width){
         return GDK_PAINTABLE(lookupIcon(iconName, width));
        }
 

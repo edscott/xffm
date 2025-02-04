@@ -567,7 +567,7 @@ private:
       gtk_widget_set_sensitive(GTK_WIDGET(copyButton), false);    
       pasteButton = Basic::newButton(EMBLEM_PASTE, _("Paste")); // global button (xffm.h)
       gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);    
-      auto newTabButton = Basic::newButton(LIST_ADD, _("New Tab"));
+      auto newTabButton = Basic::newButton(EMBLEM_NEW_TAB, _("New Tab"));
       auto newMenuButton = Basic::newButton(OPEN_MENU, _("Main menu"));
       mainMenuButton = newMenuButton;// global button (xffm.h)
       auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
