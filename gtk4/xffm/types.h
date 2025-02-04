@@ -168,11 +168,6 @@ typedef struct menuItem2_t {
     gboolean protect;
 }menuItem2_t;
 
-typedef struct radio_t {
-    GtkBox *box;
-    GtkToggleButton *toggle[5];
-} radio_t;
-
 typedef struct sequence_t {
     const gchar *id;
     const gchar *sequence;

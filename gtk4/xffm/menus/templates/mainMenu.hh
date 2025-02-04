@@ -59,7 +59,7 @@ namespace xf {
         {_("Open terminal"),(void *) OPEN_TERMINAL}, 
         {_("Home"),(void *) GO_HOME}, 
         {_("Show Clipboard"),(void *) EMBLEM_IMPORTANT}, // 
-        {_("Clear Clipboard History"),(void *) EDIT_CLEAR}, // 
+        {_("Clear Clipboard History"),(void *) EMBLEM_CLEAR}, // 
         {_("Open in New Window"),(void *)EMBLEM_NEW_WINDOW}, 
         {_("Color settings"),(void *)DOCUMENT_PROPERTIES}, 
         {_("Exit"),(void *)  WINDOW_SHUTDOWN},
@@ -311,9 +311,18 @@ namespace xf {
       // Save last size.
       auto width = gtk_widget_get_size(MainWidget,  GTK_ORIENTATION_HORIZONTAL);
       auto height = gtk_widget_get_size(MainWidget,  GTK_ORIENTATION_VERTICAL);
-      gtk_widget_set_visible(MainWidget, FALSE);
+      //gtk_widget_set_visible(MainWidget, FALSE);
       Settings::setInteger("window", "width", width);
       Settings::setInteger("window", "height", height);
+        DBG("foo...\n");
+      auto p = (MainWindow<Type> *)mainWindow_p;
+      auto notebook = p->notebook();
+      while (gtk_notebook_get_n_pages(notebook) > 1){
+        gtk_notebook_set_current_page(notebook, 1);
+        p->on_zap_page(NULL, mainWindow_p);
+      }
+      p->on_zap_page(NULL, mainWindow_p);
+
 #if 0
       auto n = gtk_notebook_get_n_pages(mainNotebook);
       for (auto i=0; i<n; i++){
@@ -329,7 +338,7 @@ namespace xf {
       //gtk_widget_unparent(GTK_WIDGET(menu));
       //gtk_window_destroy(GTK_WINDOW(MainWidget));
 
-      exitDialogs = true;
+      //exitDialogs = true;
     }
 
     static void

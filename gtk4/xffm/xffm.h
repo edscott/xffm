@@ -77,6 +77,7 @@ static GtkButton *copyButton = NULL;
 static GtkButton *pasteButton = NULL;
 static int longPressSerial = -1;
 static GtkNotebook *mainNotebook = NULL;
+static void *mainWindow_p = NULL;
 
 // classes and templates
 // basic classes

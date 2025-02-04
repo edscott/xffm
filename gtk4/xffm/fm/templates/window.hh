@@ -26,6 +26,7 @@ private:
 public:
     GtkNotebook *notebook(void) {return notebook_;}
     MainWindow(const gchar *path){
+        mainWindow_p = (void *)this;
         createWindow(); 
         //g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
         addKeyController(GTK_WIDGET(mainWindow_));
@@ -448,9 +449,13 @@ private:
       }
       
       // Get VPane object from child widget (box)
-      auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
-      gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
-      delete(page);
+      // Valid page?
+      if (G_IS_OBJECT(child)){
+        auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
+        gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
+        delete(page);
+      }
+    
       
     }
     
