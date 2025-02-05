@@ -136,12 +136,23 @@ private:
     changeSize (GtkRange* self, gpointer user_data){
       if (Workdir<LocalDir>::pleaseWait()) return;
       auto value = gtk_range_get_value(self);
-      Settings::setInteger("xfterm", "iconsize", value);
+      int valueI = value;
+      Settings::setInteger("xfterm", "iconsize", valueI);
       Print::printInfo(Child::getOutput(), 
           g_strdup_printf("%s %.0lf", _("Icon Size:"), value ));
       
       
+#if 10
+      // reload current page
+      // On switch page, reload if iconsize has changed
+        auto child = Child::getChild();
+        auto path = Child::getWorkdir(child);
+        Workdir<LocalDir>::setWorkdir(path, child);
+
+#else
+
       // reload all pages
+      // Bugged. mixes up the workdir of different pages
       auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
       auto n = gtk_notebook_get_n_pages(notebook);
       
@@ -152,6 +163,7 @@ private:
         Workdir<LocalDir>::setWorkdir(path, child);
                
       }
+#endif
     }
 
     static void

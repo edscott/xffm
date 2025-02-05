@@ -130,7 +130,8 @@ template <class Type>
         g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
 
         auto type = g_file_info_get_file_type(info);
-        auto size = Settings::getInteger("xfterm", "iconsize");
+        //auto size = Settings::getInteger("xfterm", "iconsize");
+        auto size = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child),"iconsize"));
         // allocated:
         auto path = Basic::getPath(info);      
         const char *rawName =  g_file_info_get_name(info);

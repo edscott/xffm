@@ -19,6 +19,8 @@ namespace xf {
         Child::incrementSerial();
 
         auto child = Child::getChild();
+        int iconsize = Settings::getInteger("xfterm", "iconsize");
+        g_object_set_data(G_OBJECT(child), "iconsize", GINT_TO_POINTER(iconsize));
         auto m = g_object_get_data(G_OBJECT(child), "monitor");
         GFileMonitor *monitor = NULL;
         if (Child::validMonitor(m)) {
