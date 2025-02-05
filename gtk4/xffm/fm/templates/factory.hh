@@ -719,13 +719,17 @@ template <class Type>
       bool hidden = (name[0] == '.' && name[1] != '.');
       if (!hidden) hidden = g_file_info_get_is_hidden(info);
 
+
+#if 0
       // check in  clipboard
+      // Disabling because it may have caused the deadlock on 2025-02-06
       if(strcmp(name, "..") &&  clipboard_t::isCut(path)) {
         auto paintable = getCutTexture(info, size);
         auto image = gtk_image_new_from_paintable(paintable);
         g_object_unref(paintable); // XXX currently the paintable is not hashed.
         return GTK_WIDGET(image);
       }
+#endif
 #if 0
       // XXX This is too buggy, since copy emblem remains after pasted
       //     and no longer in copy clipboard. Disabling now.

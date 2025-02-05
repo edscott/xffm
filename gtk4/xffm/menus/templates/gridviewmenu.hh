@@ -322,7 +322,8 @@ namespace xf {
         // do your thing
         c->cutClipboardList(selectionList);
         // cleanup
-        MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
+        // Disabling reload since deadlock encountered 2025-02-06 
+        // MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         return;

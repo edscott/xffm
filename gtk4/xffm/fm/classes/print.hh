@@ -75,9 +75,15 @@ namespace xf {
 
     static void //  will free string.
     printInfo(GtkTextView *textview, gchar *string){
+      if (!string) return;
       showText(textview);
-      const char *ret = NULL;
-      print(textview, EMBLEM_ABOUT,  "green/black_bg", string);
+      if (string[strlen(string)-1] != '\n') {
+        print(textview, "green/black_bg", g_strconcat(string,"\n",NULL));
+        g_free(string);
+      } else {
+        print(textview, "green/black_bg", string);
+      }
+//      print(textview, EMBLEM_ABOUT,  "green/black_bg", string);
     }
 
     static void //  will free string.
