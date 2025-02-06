@@ -1,4 +1,5 @@
-
+BUG: urgent: on mouse click to select, if not ctrl, then unselect others.
+BUG: showstopper: dnd many times to gvim, eventually slowdown and deadlock and crash.
 
 
 BUG (annoying): Resize window with several tabs and output a plenty, no coredump, apparent hang, but really just taking a lot of time to figure things out, in the end program continues, but this is annoying.
