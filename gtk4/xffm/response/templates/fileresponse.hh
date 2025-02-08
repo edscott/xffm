@@ -44,6 +44,7 @@ private:
     char *startFolder_ = NULL;
     GtkSingleSelection *selectionModel_;
     GtkWidget *selectLabel_;
+    GtkWidget *displaySelectLabel_;
     GtkEntry *parentEntry_=NULL;
 
 public:
@@ -132,14 +133,21 @@ private:
 
     char *getSelectedPath(GtkSingleSelection *sel){
       GtkTreeListRow *treeListRow = GTK_TREE_LIST_ROW(gtk_single_selection_get_selected_item (sel));
+      auto text = _("No folder selected.");
       if (!treeListRow) {
-        gtk_label_set_markup(GTK_LABEL(selectLabel_), _("No folder selected."));
+        gtk_label_set_markup(GTK_LABEL(selectLabel_), text);
+        auto g = g_strconcat("<span color=\"red\">", text,"</span>", NULL);
+        gtk_label_set_markup(GTK_LABEL(displaySelectLabel_), g);
+        g_free(g);
         return NULL;
       }
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       auto path = Basic::getPath(info);
       TRACE("selected: %s path=%s\n", g_file_info_get_name(info), path);
       gtk_label_set_markup(GTK_LABEL(selectLabel_), path);
+      auto g = g_strconcat("<span color=\"green\"><b>", path,"</b></span>", NULL);
+      gtk_label_set_markup(GTK_LABEL(displaySelectLabel_), g);
+      g_free(g);
       return path;
     }
 
@@ -211,9 +219,17 @@ private:
         gtk_label_set_markup(GTK_LABEL(prefix), markup);
         g_free(markup);
 
-        selectLabel_ = gtk_label_new(_("No folder selected."));
+        auto text = _("No folder selected.");
+        selectLabel_ = gtk_label_new(text);
         gtk_box_append(boxL, prefix);
         gtk_box_append(boxL, selectLabel_);
+        gtk_widget_set_visible(GTK_WIDGET(selectLabel_), false);
+
+        displaySelectLabel_ = gtk_label_new("");
+        auto g = g_strconcat("<span color=\"red\">", text,"</span>", NULL);
+        gtk_label_set_markup(GTK_LABEL(displaySelectLabel_), g);
+        g_free(g);
+        gtk_box_append(boxL, displaySelectLabel_);
         
         auto pathbarBox = responsePathbar_p->pathbar();
        // this->updatePathbarBox(path, pathbarBox, NULL);
