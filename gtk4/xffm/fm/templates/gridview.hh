@@ -883,7 +883,12 @@ public:
     {
       auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
       auto dragOn = d->startDrag(self, x, y, data);
-      if (dragOn) return true;
+      if (dragOn) {
+        TRACE("Gridview::viewMotion() dragOn() == true, return true\n");
+        return true;
+      } else {
+        TRACE("Gridview::viewMotion() dragOn() == false, return false\n");
+      }
       return false;
     }
 

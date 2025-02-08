@@ -29,16 +29,16 @@ Xffm+ functions
   - items in fstab
   - block devices from /dev
   - ecryptfs
-  - remote nfs 
-  - remote sshfs
  find/install/update packages gentoo, archlinux, freebsd(currently in alpha development)
 
-Deprecated stuff not to be carried over from xffm and rodent
+Deprecated stuff not to be carried over from xffm and rodent to xffm4
   - system processed iconview
   - application launcher iconview 
   - SMB network navigator
-  - mount/umount remote cifs
-  - mount/umount remote ftpfs
+  - mount/umount remote cifs (already in fstab)
+  - mount/umount remote ftpfs (already in fstab
+  - mount/umount remote sshfs (already in fstab)
+  - mount/umount remote nfs (already in fstab)
 
  
 

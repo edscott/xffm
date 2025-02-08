@@ -61,37 +61,59 @@ public:
 
     // x,y are in MainWidget frame of reference.
     bool startDrag(GtkEventControllerMotion* self, double x, double y, void *data){
-        if (this->dragOn()) return true;
+       if (this->dragOn()) {
+          TRACE("Dnd::startDrag return true on this->dragOn() == true\n");
+          return true;
+        }
         auto noStart = inOffset(x, y, data);
-        if (noStart) return false;
+        if (noStart) {
+          TRACE("Dnd::startDrag return false on noStart == true\n");
+          return false;
+        }
         this->dragOn(true);
 
         auto gridView_p = (GridView<Type> *)data;        
+        GList *selection_list = gridView_p->getSelectionList();
+        if (g_list_length(selection_list) < 1) {
+          DBG("*** Error:: Dnd::startDrag: no drag, selection list ==0, return false\n");
+          return false;
+        }
+       
+        this->dragOn(true);
+        DBG("***Dnd::startDrag setting this->dragOn() = true, last drag_=%p\n", drag_);
+
+
+        // Last cleanup:
+        if (drag_) cleanDrag();
+        
         GdkSurface *surface;
         GdkDevice *device;
         GdkDragAction actions;
         GdkContentProvider *content;
         device = gtk_event_controller_get_current_event_device (GTK_EVENT_CONTROLLER(self));
         surface = gtk_native_get_surface (gtk_widget_get_native (GTK_WIDGET (gridView_p->view())));
-        GList *selection_list = gridView_p->getSelectionList();
-        if (g_list_length(selection_list) < 1) {
-          DBG("*** Error:: no drag, selection list ==0\n");
-          return false;
-        }
         char *string = g_strdup("");
         for (GList *l = selection_list; l && l->data; l=l->next){
           auto info = G_FILE_INFO(l->data);
           GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-          char *path = g_file_get_path(file);
-          char *g = g_strconcat(string, "file://", path, "\n", NULL);
-          g_free(string);
-          string = g;
+          auto path = g_file_get_path(file);
+          auto selectedPath = g_strconcat("file://", path, "\n", NULL);
+          Basic::concat(&string, selectedPath);
+          g_free(selectedPath);     
           g_free(path);     
         }
 
         GBytes *bytes = g_bytes_new(string, strlen(string)+1);
         content = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
         g_free(string);
+        // Watch for allocated  (GBytes *)bytes...
+        // The caller of the function takes ownership of the data, and is responsible for freeing it.
+        // Free with "g_bytes_unref (GBytes* bytes)"
+        //
+        // Watch for allocated  (GdkContentProvider *)content...
+        // The caller of the function takes ownership of the data, and is responsible for freeing it.
+        // Free with "g_object_unref(G_OBJECT(content))" (I suppose since it inherits from GObject).
+        //
         
         actions = (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
         drag_ = gdk_drag_begin (surface,
@@ -100,6 +122,14 @@ public:
                        actions,
                        gridView_p->X(),
                        gridView_p->Y());
+        DBG("***Dnd::startDrag drag is now = %p\n", drag_);
+
+        // Keep track of drag_ for memory cleanup.
+
+        // Keep track of bytes and content for memory cleanup,
+        // drag_ is a GdkDrag, inherits from GObject.
+        g_object_set_data(G_OBJECT(drag_), "bytes", bytes);
+        g_object_set_data(G_OBJECT(drag_), "content", content);
 
         GdkPaintable *paintable;
         int size = getSize();
@@ -113,12 +143,51 @@ public:
           paintable = Texture<bool>::getShadedIcon("dnd-multiple", size, size, NULL);   
         }
         gtk_drag_icon_set_from_paintable (drag_, paintable,  1, 1);
+        // Watch for allocated paintable (GdkPaintable *) paintable.
+        // Keep track of paintable for memory cleanup,
+        // paintable is a GdkPaintable *, inherits from GObject.
+        g_object_set_data(G_OBJECT(drag_), "paintable", paintable);
+
         return true;
     }
 
-    void dropDone(bool success){
-      if (this->drag_) gdk_drag_drop_done(this->drag_, success);
+  private:
+    void cleanDrag(void){
+      if (!this->drag_) {
+        return;
+      }
+      // Cleanups before starting a new drag.
+      // Last drag objects remain until program exit (no leaks).
+      auto bytes = (GBytes *)g_object_get_data(G_OBJECT(this->drag_), "bytes");
+      if (!bytes) {
+        DBG("*** Error::Dnd::cleanDrag() drag_ is already clean.\n");// should not happen.
+      } else {
+        DBG("*** Dnd::cleanDrag() cleanup for drag_ %p.\n", this->drag_);
+      }
+      auto content = GDK_CONTENT_PROVIDER(g_object_get_data(G_OBJECT(this->drag_), "content"));
+      auto paintable = GDK_PAINTABLE(g_object_get_data(G_OBJECT(this->drag_), "paintable"));
+      if (bytes) g_bytes_unref(bytes);
+      if (content) g_object_unref(G_OBJECT(content));
+      if (paintable) g_object_unref(G_OBJECT(paintable));
+      g_object_set_data(G_OBJECT(drag_), "bytes", NULL);
+      g_object_set_data(G_OBJECT(drag_), "content", NULL);
+      g_object_set_data(G_OBJECT(drag_), "paintable", NULL);
+      g_object_unref(G_OBJECT(this->drag_));
       this->drag_ = NULL;
+
+
+      return;
+    }
+
+  public:
+    void dropDone(bool success){
+      if (this->drag_) {
+        DBG("Dnd::dropDone() drop success = %s\n", success?"true":"false");
+        gdk_drag_drop_done(this->drag_, success);
+      } else {
+        DBG("*** Error::Dnd::dropDone() this->drag_ is NULL, success = %s\n", success?"true":"false");
+      }
+      //this->drag_ = NULL;
     }
 
 ///////////////////////////////////  drag /////////////////////////////////////

@@ -1,5 +1,8 @@
-BUG: urgent: on mouse click to select, if not ctrl, then unselect others.
-BUG: showstopper: dnd many times to gvim, eventually slowdown and deadlock and crash.
+BUG: hmmm: Where and why did this happen? on mouse click to select, if not ctrl, others not unselected.
+BUG: Fixed: now in testing. Massive memory leak plugged. 
+       [showstopper: dnd many times to gvim, eventually slowdown and deadlock and crash. This is due to massive
+       memory leak. Drag items are not removed from memory since Dnd::dropDone is not called nor drag_ memory
+       is cleaned.]
 
 
 BUG (annoying): Resize window with several tabs and output a plenty, no coredump, apparent hang, but really just taking a lot of time to figure things out, in the end program continues, but this is annoying.
