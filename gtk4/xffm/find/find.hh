@@ -162,7 +162,49 @@ public:
         freeHistoryList(filterHistory_);
         freeHistoryList(grepHistory_);
       }
-        
+       
+      char **historyVector(GList *list){
+        int size = 0;
+        for (auto l=list; l && l->data; l=l->next){
+          size++;
+          if (size == 10) break;
+        }
+        size++;
+        auto vector = (char **)calloc(size+1, sizeof(char *));
+        int k=1;
+        //vector[0] = (char *)"";
+        for (auto l=list; l && l->data; l=l->next, k++){
+          vector[k-1] = (char *)l->data;
+          if (k == 10) break;
+        }
+        vector[k-1] = (char *)"";
+        return vector;
+      }
+
+      GListModel *getDropDownModel(GList *list){
+        return NULL;
+      }
+
+static void
+notify ( GObject* self, void* pspec, void *data){
+  auto dd = GTK_DROP_DOWN(self); 
+
+  auto item = GTK_STRING_OBJECT(gtk_drop_down_get_selected_item(dd));
+  auto selected = gtk_string_object_get_string(item);
+  auto buffer = gtk_entry_get_buffer(GTK_ENTRY(data));
+  gtk_entry_buffer_set_text(buffer, selected, -1);
+
+  DBG("notify callback, data=%p, item=%d, selected=%s\n", data,item,selected);
+  
+}
+
+static void
+sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars, void *data){
+  auto box = GTK_WIDGET(data);
+  auto text = gtk_entry_buffer_get_text(self);
+  gtk_widget_set_sensitive(box, strlen(text)>0);
+}
+
       GList *
       loadHistory (const gchar *history) {
         GList *list = NULL;
@@ -187,6 +229,7 @@ public:
         if (list) list = g_list_reverse(list);
         return list;
       }
+
 
       gchar *
       compact_line(const gchar *line){
@@ -478,10 +521,11 @@ private:
 
             auto dialogbutton2 = UtilBasic::mkButton(EMBLEM_QUESTION, NULL);
             //FIXME: g_object_set_data(G_OBJECT(dialogbutton2), "findDialog", findDialog);
-            Basic::setTooltip(GTK_WIDGET(dialogbutton2), _(filter_text_help));
+            //Basic::setTooltip(GTK_WIDGET(dialogbutton2), _(filter_text_help));
             g_signal_connect (dialogbutton2,
                               "clicked", WIDGET_CALLBACK(findSignals<Type>::on_buttonHelp), 
                               (gpointer)filter_text_help);
+
             
             auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
             gtk_box_append(vbox, GTK_WIDGET(dialogbutton2));
@@ -497,6 +541,7 @@ private:
                               (gpointer)this);
                              // (gpointer)findDialog);
 
+            Basic::setTooltip(GTK_WIDGET(filter_entry), _(filter_text_help));
         }
 
 
@@ -587,13 +632,37 @@ private:
         
             //auto history = g_build_filename(GREP_HISTORY);
             auto grep_entry = mkCompletionEntry(&grepHistory_);
+            Basic::setTooltip(GTK_WIDGET(grep_entry), _(grep_text_help));
             g_object_set_data(G_OBJECT(mainBox_), "grep_entry", grep_entry);
             //g_free(history);        
             gtk_widget_set_sensitive (GTK_WIDGET(grep_entry), TRUE);   
             
-            auto button = UtilBasic::mkButton(EMBLEM_QUESTION, NULL);
+
+            auto buffer = gtk_entry_get_buffer(grep_entry);
+            const char *text = gtk_entry_buffer_get_text(buffer);
+            gboolean active_grep =  text && strlen(text); 
+
+            auto optionBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10));
+            /// FIXME: the following does not do the trick
+            //         crashes with cannot access memory address 0x12 for optionbox
+            //         Probably must come after window mapped...
+            //g_signal_connect(G_OBJECT(buffer), "inserted-text", G_CALLBACK(sensitivize), optionBox);
+            //g_signal_connect(G_OBJECT(buffer), "deleted-text", G_CALLBACK(sensitivize), optionBox);
+
+            auto vector = historyVector(grepHistory_);
+            GtkWidget *button;
+            button = gtk_drop_down_new_from_strings(vector);
+            //gtk_entry_buffer_set_text(buffer, vector[0], -1);
+            g_free(vector);
+
+            GListModel *model = gtk_drop_down_get_model(GTK_DROP_DOWN(button));
+            
+            g_signal_connect(G_OBJECT(button), "notify", G_CALLBACK(notify), grep_entry);
+            
+                
+            //auto button = UtilBasic::mkButton(EMBLEM_QUESTION, NULL);
             //FIXME: g_object_set_data(G_OBJECT(button), "findDialog", findDialog);
-            Basic::setTooltip(GTK_WIDGET(button), _(grep_text_help));
+            //Basic::setTooltip(GTK_WIDGET(button), _(grep_text_help));
             /*g_signal_connect (GTK_WIDGET(button),
                               "clicked", WIDGET_CALLBACK(findSignals<Type>::on_buttonHelp), 
                               (gpointer) _(grep_text_help));*/
@@ -608,9 +677,6 @@ private:
             //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(grep_entry), TRUE, TRUE, 0);
             //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
 
-            auto buffer = gtk_entry_get_buffer(grep_entry);
-            const char *text = gtk_entry_buffer_get_text(buffer);
-            gboolean active_grep =  text && strlen(text); 
       
             auto checkBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
             opt_t options[] = {
@@ -635,7 +701,6 @@ private:
             }
             
             
-            auto optionBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10));
             gtk_box_append(optionBox, GTK_WIDGET(checkBox));
             gtk_box_append(optionBox, GTK_WIDGET(radioBox));
             gtk_box_append(topPaneVbox_, GTK_WIDGET(optionBox));
