@@ -10,6 +10,10 @@
 //
 // 1 file chooser button broken
 
+#define FILTER_HISTORY g_get_user_data_dir(),"xffm+","xffind.filter",NULL
+#define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
+#define PATH_HISTORY g_get_user_data_dir(),"xffm+","xffind.path",NULL
+
 typedef struct radio_t {
     GtkBox *box;
     GtkCheckButton *toggle[5];
@@ -90,6 +94,7 @@ namespace xf
 
     
       char *folder_ = NULL;
+      bool active_grep_ = false;
 //gboolean have_grep = FALSE;
     static constexpr const gchar *
     pathSelect_text_help=
@@ -141,26 +146,17 @@ namespace xf
       GtkNotebook *notebook_ = NULL;
       GtkBox *advancedVbox_ = NULL;
 
-      GList *grepHistory_ = NULL;
-      GList *filterHistory_ = NULL;
+      GtkEntry *grepEntry_ = NULL;
 
 public:
       const char *label(void){return "xffm::find";}
 
       FindResponse (void){
-        auto history1 = g_build_filename(GREP_HISTORY);
-        grepHistory_ = loadHistory(history1);
-        auto history2 = g_build_filename(FILTER_HISTORY);
-        filterHistory_ = loadHistory(history2);
-        g_free(history1);
-        g_free(history2);
       }
 
       ~FindResponse (void){
         DBG("*** ~FindResponse\n");
         g_free(folder_);
-        freeHistoryList(filterHistory_);
-        freeHistoryList(grepHistory_);
       }
        
       char **historyVector(GList *list){
@@ -186,13 +182,31 @@ public:
       }
 
 static void
-notify ( GObject* self, void* pspec, void *data){
+notify ( GObject* self, GParamSpec *pspec, void *data){
+  auto call = g_param_spec_get_name(pspec);
+  if (!call) return;
+  if (strcmp(call, "selected-item")) return;
+  
+  DBG("*** notify name=%s\n", g_param_spec_get_name(pspec));
+
+  if (!GTK_IS_ENTRY(data)) {
+    DBG("*** FIXME: identify notify call\n");
+    return; // FIXME hack!
+            // notify is called when window is closed
+            // and by then the pointer to entry is invalid.
+            // Must use pspec or something to distinguish the
+            // notify call.
+  }
   auto dd = GTK_DROP_DOWN(self); 
 
   auto item = GTK_STRING_OBJECT(gtk_drop_down_get_selected_item(dd));
   auto selected = gtk_string_object_get_string(item);
   auto buffer = gtk_entry_get_buffer(GTK_ENTRY(data));
   gtk_entry_buffer_set_text(buffer, selected, -1);
+  auto sWidget = g_object_get_data(G_OBJECT(data), "sWidget");
+  if (sWidget){
+    gtk_widget_set_sensitive(GTK_WIDGET(sWidget), (selected && strlen(selected) > 0));
+  }
 
   DBG("notify callback, data=%p, item=%d, selected=%s\n", data,item,selected);
   
@@ -208,14 +222,20 @@ sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars,
       GList *
       loadHistory (const gchar *history) {
         GList *list = NULL;
-        FILE *historyFile = fopen (history, "r");
-        if(!historyFile) {
-           TRACE("loadHistory(): creating new history: \"%s\"\n", history);
-           return NULL;
+        if (!history || !g_file_test(history, G_FILE_TEST_EXISTS)){
+          TRACE("loadHistory(): creating new history: \"%s\"\n", history);
+          list = g_list_prepend(list, (void *)"");
+          return list;
+        }
+        FILE *file = fopen (history, "r");
+        if(!file) {
+           DBG("*** Error::loadHistory(): unable to open history: \"%s\"\n", history);
+           list = g_list_prepend(list, (void *) "");
+           return list;
         }
         gchar line[2048];
         memset (line, 0, 2048);
-        while(fgets (line, 2047, historyFile) && !feof (historyFile)) {
+        while(fgets (line, 2047, file) && !feof (file)) {
             if(strchr (line, '\n')) *strchr (line, '\n') = 0;
             gchar *newline = compact_line(line);
             if(strlen (newline) == 0) {
@@ -225,7 +245,7 @@ sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars,
             list = g_list_prepend(list, newline);
             TRACE("%s: %s\n", history, newline);
         }
-        fclose (historyFile);
+        fclose (file);
         if (list) list = g_list_reverse(list);
         return list;
       }
@@ -318,10 +338,31 @@ sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars,
           mkButtonBox(); 
           gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 600, 400);
 
+          //gtk_widget_realize(GTK_WIDGET(dialog())); //WTF
+          postRealize();
           return mainBox_;
       }
 
 private:
+
+     void postRealize(void){
+          // Post realize... WTF
+          auto buffer = gtk_entry_get_buffer(grepEntry_);
+          const char *text = gtk_entry_buffer_get_text(buffer);
+          active_grep_ =  text && strlen(text); 
+          DBG("*** entry=%p, buffer=%p text=\"%s\" active_grep=%d\n", 
+              grepEntry_, buffer, text, active_grep_);
+          auto optionsBox = GTK_WIDGET(g_object_get_data(G_OBJECT(grepEntry_), "optionsBox"));
+          gtk_widget_set_sensitive(GTK_WIDGET(optionsBox), active_grep_);
+            /// FIXME: the following does not do the trick
+            //         crashes with cannot access memory address 0x12 for optionbox
+            //         Probably must come after window mapped...          
+          //g_signal_connect(G_OBJECT(buffer), "inserted-text", G_CALLBACK(sensitivize), GTK_WIDGET(optionsBox));
+          //g_signal_connect(G_OBJECT(buffer), "deleted-text", G_CALLBACK(sensitivize), GTK_WIDGET(optionsBox));
+          
+
+
+     }
           
       void mkVpane(void){
           vpane_ = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
@@ -505,6 +546,7 @@ private:
           return GTK_ENTRY(entry);
         }
 
+#if 0
         void mkFilterEntry(void){
             auto filter_box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
             gtk_box_append(topPaneVbox_, GTK_WIDGET(filter_box));
@@ -515,6 +557,8 @@ private:
             g_free(text);
 
             //auto history = g_build_filename(FILTER_HISTORY);
+            //FIXME:
+            
             auto filter_entry = mkCompletionEntry(&filterHistory_);
             //g_free(history);
 
@@ -542,7 +586,9 @@ private:
                              // (gpointer)findDialog);
 
             Basic::setTooltip(GTK_WIDGET(filter_entry), _(filter_text_help));
+
         }
+#endif
 
 
 /*
@@ -590,6 +636,37 @@ private:
         }
 
 */
+
+        GtkBox *entryBox(const char *labelText, const char *tooltipText, const char *history) {
+            auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+            auto label = GTK_LABEL(gtk_label_new (labelText));
+            
+            auto entry = GTK_ENTRY(gtk_entry_new());     
+            gtk_box_append(box, GTK_WIDGET(label));
+            gtk_box_append(box, GTK_WIDGET(entry));
+
+            g_object_set_data(G_OBJECT(box), "entry", entry);
+            auto buffer = gtk_entry_get_buffer(entry);
+            
+            gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
+            if (tooltipText) Basic::setTooltip(GTK_WIDGET(entry), tooltipText);
+            if (!history) return box;
+
+            GList *list = loadHistory(history);
+            auto vector = historyVector(list);
+            g_object_set_data(G_OBJECT(box), "list", list);
+            g_object_set_data(G_OBJECT(entry), "list", list);
+            auto button = gtk_drop_down_new_from_strings(vector);
+            gtk_entry_buffer_set_text(buffer, vector[0], -1);
+            g_free(vector);
+            GListModel *model = gtk_drop_down_get_model(GTK_DROP_DOWN(button));             
+            g_signal_connect(G_OBJECT(button), "notify", G_CALLBACK(notify), entry);
+            gtk_box_append(box, GTK_WIDGET(button));
+
+
+            return box;
+        }
+
   // FIXME: use textview completion.
         GtkEntry *mkCompletionEntry(GList **list_p){ //
             auto entry = GTK_ENTRY(gtk_entry_new());
@@ -621,7 +698,96 @@ private:
             return entry;
         }
         
+        GtkBox *grepOptions(GtkEntry *grep_entry){
+            auto optionsBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10));
+            auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
+            //gtk_box_append(vbox, GTK_WIDGET(button));
+            //gtk_box_append(grep_box, GTK_WIDGET(grep_label));
+            //gtk_box_append(grep_box, GTK_WIDGET(grep_entry));
+            //gtk_box_append(grep_box, GTK_WIDGET(vbox));
+            //compat<bool>::boxPack0 (vbox, GTK_WIDGET(button), FALSE, FALSE, 0);
+            //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(grep_label), FALSE, FALSE, 0);
+            //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(grep_entry), TRUE, TRUE, 0);
+            //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
+
+      
+            auto checkBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+            opt_t options[] = {
+              {_("Case Sensitive"),"case_sensitive",default_case_sensitive},
+              {_("Extended regexp"), "ext_regexp",default_ext_regexp},
+              {_("Include binary files"),"look_in_binaries",default_look_in_binaries},
+              {_("Line Count"),"line_count",default_line_count},
+              {NULL,NULL,0}};
+            for (opt_t *p=options; p->text != NULL; p++) {
+              mkGrepOption(p, grep_entry, checkBox);
+            }
+               
+            auto radioBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+            GSList *radioGroup = NULL;
+            opt_t rOptions[] = {
+              {_("Anywhere"),"anywhere",default_anywhere},
+              {_("Whole words only"), "match_words",default_match_words},
+              {_("lines"),"match_lines",default_match_lines},
+              {_("No match"),"match_no_match",default_match_no_match},
+              {NULL,NULL,0}};
+            for (opt_t *p=rOptions; p->text != NULL; p++) {
+              mkGrepRadio(p, grep_entry, &radioGroup, radioBox);
+            }
+            
+            
+            gtk_box_append(optionsBox, GTK_WIDGET(checkBox));
+            gtk_box_append(optionsBox, GTK_WIDGET(radioBox));
+            return optionsBox;
+
+        }
+        void mkFilterEntry(void){
+            auto history = g_build_filename(FILTER_HISTORY);              
+            auto box = entryBox(_("Filter:"), _(filter_text_help), history);
+            g_free(history);
+            auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry"));
+
+            gtk_box_append(topPaneVbox_, GTK_WIDGET(box));
+        }
+
         void mkGrepEntry(void){
+            auto history = g_build_filename(GREP_HISTORY);              
+            auto box = entryBox(_("Contains the text"), _(grep_text_help), history);
+            g_free(history);
+            grepEntry_ = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry"));
+            auto optionsBox = grepOptions(grepEntry_);
+            g_object_set_data(G_OBJECT(grepEntry_), "optionsBox", optionsBox);
+            g_object_set_data(G_OBJECT(grepEntry_), "sWidget", optionsBox);
+            gtk_widget_set_sensitive(GTK_WIDGET(optionsBox), false);
+
+            gtk_box_append(topPaneVbox_, GTK_WIDGET(box));
+            gtk_box_append(topPaneVbox_, GTK_WIDGET(optionsBox));
+
+#if 0
+            // needs to be done after realize...
+            // buffer requires realize (X resources, maybe, WTF)
+
+            auto buffer = gtk_entry_get_buffer(entry);
+            const char *text = gtk_entry_buffer_get_text(buffer);
+            active_grep_ =  text && strlen(text); 
+            DBG("*** active_grep=%d\n", active_grep_);
+            gtk_widget_set_sensitive(GTK_WIDGET(optionsBox), active_grep_);
+
+
+            /// FIXME: the following does not do the trick
+            //         crashes with cannot access memory address 0x12 for optionbox
+            //         Probably must come after window mapped...
+            //g_signal_connect(G_OBJECT(buffer), "inserted-text", G_CALLBACK(sensitivize), GTK_WIDGET(optionsBox));
+            //g_signal_connect(G_OBJECT(buffer), "deleted-text", G_CALLBACK(sensitivize), GTK_WIDGET(optionsBox));
+
+#endif
+
+#if 0
+            g_free(history);
+            gtk_box_append(topPaneVbox_, GTK_WIDGET(grep_box));
+            g_object_set_data(G_OBJECT(mainBox_), "grep_entry", grep_entry);
+
+            auto optionBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10));
+
             auto grep_box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
             gtk_box_append(topPaneVbox_, GTK_WIDGET(grep_box));
             //compat<bool>::boxPack0 (topPaneVbox_, GTK_WIDGET(grep_box), FALSE, TRUE, 5);
@@ -666,44 +832,7 @@ private:
             /*g_signal_connect (GTK_WIDGET(button),
                               "clicked", WIDGET_CALLBACK(findSignals<Type>::on_buttonHelp), 
                               (gpointer) _(grep_text_help));*/
-
-            auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
-            gtk_box_append(vbox, GTK_WIDGET(button));
-            gtk_box_append(grep_box, GTK_WIDGET(grep_label));
-            gtk_box_append(grep_box, GTK_WIDGET(grep_entry));
-            gtk_box_append(grep_box, GTK_WIDGET(vbox));
-            //compat<bool>::boxPack0 (vbox, GTK_WIDGET(button), FALSE, FALSE, 0);
-            //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(grep_label), FALSE, FALSE, 0);
-            //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(grep_entry), TRUE, TRUE, 0);
-            //compat<bool>::boxPack0 (grep_box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
-
-      
-            auto checkBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-            opt_t options[] = {
-              {_("Case Sensitive"),"case_sensitive",default_case_sensitive},
-              {_("Extended regexp"), "ext_regexp",default_ext_regexp},
-              {_("Include binary files"),"look_in_binaries",default_look_in_binaries},
-              {_("Line Count"),"line_count",default_line_count},
-              {NULL,NULL,0}};
-            for (opt_t *p=options; p->text != NULL; p++) mkGrepOption(p, active_grep, grep_entry, checkBox);
-            
-               
-            auto radioBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-            GSList *radioGroup = NULL;
-            opt_t rOptions[] = {
-              {_("Anywhere"),"anywhere",default_anywhere},
-              {_("Whole words only"), "match_words",default_match_words},
-              {_("lines"),"match_lines",default_match_lines},
-              {_("No match"),"match_no_match",default_match_no_match},
-              {NULL,NULL,0}};
-            for (opt_t *p=rOptions; p->text != NULL; p++) {
-              mkGrepRadio(p, active_grep, grep_entry, &radioGroup, radioBox);
-            }
-            
-            
-            gtk_box_append(optionBox, GTK_WIDGET(checkBox));
-            gtk_box_append(optionBox, GTK_WIDGET(radioBox));
-            gtk_box_append(topPaneVbox_, GTK_WIDGET(optionBox));
+#endif
      
             //compat<bool>::boxPack0 (optionBox, GTK_WIDGET(checkBox), FALSE, FALSE, 0);
             //compat<bool>::boxPack0 (optionBox, GTK_WIDGET(radioBox), FALSE, FALSE, 0);
@@ -711,9 +840,9 @@ private:
 
         }
 
-        void mkGrepOption(opt_t *opt, gboolean active_grep, GtkEntry *grep_entry, GtkBox *checkBox){
+        void mkGrepOption(opt_t *opt, GtkEntry *grep_entry, GtkBox *checkBox){
             auto check = GTK_CHECK_BUTTON(gtk_check_button_new_with_mnemonic (opt->text));
-            gtk_widget_set_sensitive (GTK_WIDGET(check), active_grep);
+            //gtk_widget_set_sensitive (GTK_WIDGET(check), active_grep);
             gtk_check_button_set_active (check, opt->defaultValue);
             //FIXME: g_object_set_data(G_OBJECT(findDialog), opt->id, check);
             // FIXME g_signal_connect (G_OBJECT (grep_entry), "event", 
@@ -723,7 +852,7 @@ private:
         }
 
 
-        void mkGrepRadio(opt_t *opt, gboolean active_grep, GtkEntry *grep_entry, GSList **group, GtkBox *radioBox){
+        void mkGrepRadio(opt_t *opt, GtkEntry *grep_entry, GSList **group, GtkBox *radioBox){
             auto radio = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(opt->text));
             
             gtk_check_button_set_group(radio, firstGrepRadio_);
@@ -731,7 +860,7 @@ private:
             
             //*group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (radio));
             //FIXME: g_object_set_data(G_OBJECT(findDialog), opt->id, radio);
-            gtk_widget_set_sensitive (GTK_WIDGET(radio), active_grep);
+            //gtk_widget_set_sensitive (GTK_WIDGET(radio), active_grep);
 
             if (opt->defaultValue) {
                 gtk_check_button_set_active (radio, TRUE);

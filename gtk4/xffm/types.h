@@ -119,10 +119,6 @@ template <class Type> class Notebook;
 #define CONTEXT_CALLBACK(X)  (gboolean (*)(gpointer)) X
 #define PTHREAD_CALLBACK(X)  (void * (*)(void *)) X
 
-#define FILTER_HISTORY g_get_user_data_dir(),"xffm+","xffind.filter",NULL
-#define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
-#define PATH_HISTORY g_get_user_data_dir(),"xffm+","xffind.path",NULL
-
 #define BIG_ICON_SIZE                 96 
 #define MEDIUM_ICON_SIZE         72 
 #define SMALL_ICON_SIZE         48 
