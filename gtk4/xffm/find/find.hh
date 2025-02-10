@@ -159,7 +159,7 @@ public:
         g_free(folder_);
       }
        
-      char **historyVector(GList *list){
+      static char **historyVector(GList *list){
         int size = 0;
         for (auto l=list; l && l->data; l=l->next){
           size++;
@@ -186,6 +186,12 @@ notify ( GObject* self, GParamSpec *pspec, void *data){
   auto call = g_param_spec_get_name(pspec);
   if (!call) return;
   if (strcmp(call, "selected-item")) return;
+  if (g_object_get_data(self, "halt")){
+    g_object_set_data(self, "halt", NULL);
+    TRACE(" return on halt.\n");
+    return;
+  }
+
   
   DBG("*** notify name=%s\n", g_param_spec_get_name(pspec));
 
@@ -486,14 +492,6 @@ private:
       void mkPathEntry(void){
           GtkWidget *path_label;
 
-        /*  gchar *default_path=NULL;
-          if (path) default_path = g_strdup(path);*/
-
-          //auto path_box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-          //gtk_widget_set_hexpand(GTK_WIDGET(path_box), TRUE);
-          // DBG("gtk_box_append path_box \n");
-          //gtk_box_append(topPaneVbox_, GTK_WIDGET(path_box));
-          //compat<bool>::boxPack0 (GTK_BOX (topPaneVbox_), GTK_WIDGET(path_box), FALSE, TRUE, 0);
 
 
           auto text=g_strdup_printf("%s:", _("Path"));
@@ -508,15 +506,11 @@ private:
           DBG("folder_ = %s\n", folder_);
           gtk_entry_buffer_set_text(buffer, folder_, -1);
 
-          //DBG("gtk_box_append path_box path_entry\n");
-          //gtk_box_append(path_box, GTK_WIDGET(path_entry));
-          //compat<bool>::boxPack0 (path_box, GTK_WIDGET(path_entry), TRUE, TRUE, 0);
+
 
           g_signal_connect (path_entry,
                             "activate", BUTTON_CALLBACK(findSignals<Type>::onFindButton), 
                             (gpointer)this);
-//                            (gpointer)findDialog);
-
 
       }
 
@@ -546,96 +540,62 @@ private:
           return GTK_ENTRY(entry);
         }
 
-#if 0
-        void mkFilterEntry(void){
-            auto filter_box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-            gtk_box_append(topPaneVbox_, GTK_WIDGET(filter_box));
-            //compat<bool>::boxPack0 (topPaneVbox_, GTK_WIDGET(filter_box), FALSE, TRUE, 5);
+        static void
+        notifyEntry ( GObject* self, GParamSpec *pspec, void *data){
+          auto call = g_param_spec_get_name(pspec);
+          if (!call) return;
 
-            auto text=g_strdup_printf("%s ", _("Filter:"));
-            auto filter_label = GTK_LABEL(gtk_label_new (text));
-            g_free(text);
-
-            //auto history = g_build_filename(FILTER_HISTORY);
-            //FIXME:
-            
-            auto filter_entry = mkCompletionEntry(&filterHistory_);
-            //g_free(history);
-
-
-            auto dialogbutton2 = UtilBasic::mkButton(EMBLEM_QUESTION, NULL);
-            //FIXME: g_object_set_data(G_OBJECT(dialogbutton2), "findDialog", findDialog);
-            //Basic::setTooltip(GTK_WIDGET(dialogbutton2), _(filter_text_help));
-            g_signal_connect (dialogbutton2,
-                              "clicked", WIDGET_CALLBACK(findSignals<Type>::on_buttonHelp), 
-                              (gpointer)filter_text_help);
-
-            
-            auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
-            gtk_box_append(vbox, GTK_WIDGET(dialogbutton2));
-            gtk_box_append(filter_box, GTK_WIDGET(filter_label));
-            gtk_box_append(filter_box, GTK_WIDGET(filter_entry));
-            gtk_box_append(filter_box, GTK_WIDGET(vbox));
-            //compat<bool>::boxPack0 (vbox, GTK_WIDGET(dialogbutton2), FALSE, FALSE, 0);
-            //compat<bool>::boxPack0 (filter_box, GTK_WIDGET(filter_label), FALSE, FALSE, 0);
-            //compat<bool>::boxPack0 (filter_box, GTK_WIDGET(filter_entry), TRUE, TRUE, 0);
-            //compat<bool>::boxPack0 (filter_box, GTK_WIDGET(vbox), FALSE, FALSE, 0);
-            g_signal_connect (filter_entry,
-                              "activate", BUTTON_CALLBACK(findSignals<Type>::onFindButton), 
-                              (gpointer)this);
-                             // (gpointer)findDialog);
-
-            Basic::setTooltip(GTK_WIDGET(filter_entry), _(filter_text_help));
-
-        }
-#endif
-
-
-/*
-        // This does not work, since entry buffer is way too limited
-        // Use modified textview csh completion instead, with custom history. 
-
-        static const char *suggest(const char *token, GList *list){
-          for (auto l=list; l && l->data; l=l->next){
-            auto item = (const char *)l->data;
-            if (strncmp(token, item, strlen(token)) == 0) return item;
-          }
-          return NULL;
-        }
-
-        static gboolean complete(GtkEventControllerKey* self,
-          guint keyval, guint keycode, GdkModifierType state, void *data){
-          if (keyval < 32 || keyval > 126) return false;
-          auto controller = GTK_EVENT_CONTROLLER(self);
-          auto entry = GTK_ENTRY(gtk_event_controller_get_widget(controller));
-          auto list_p = (GList **)g_object_get_data(G_OBJECT(entry), "list_p");
+          
+          if (strcmp(call, "text")) return;
+          auto entry = GTK_ENTRY(self);
+          auto dropdown = GTK_DROP_DOWN(data);
           auto buffer = gtk_entry_get_buffer(entry);
-          char *text = g_strdup(gtk_entry_buffer_get_text(buffer));
-          auto suggestion = suggest(text, *list_p);
-          char keyBuf[2];
-          keyBuf[0]=keyval;
-          keyBuf[1]=0;
-          DBG("keyval = %c list_p=%p (%p) suggestion = %s\n", 
-              keyval, list_p, *list_p, suggestion);
-          Basic::concat(&text, keyBuf);
-          if (suggestion) gtk_entry_buffer_set_text(buffer, suggestion, -1);
-          else gtk_entry_buffer_set_text(buffer, text, -1);
-          g_free(text);
+          auto text = gtk_entry_buffer_get_text(buffer);
+          TRACE("notifyEntry: text=%s\n", text);
+          auto list = (GList *)g_object_get_data(G_OBJECT(entry), "list");
+          GList *newList = NULL;
+          for (auto l=list; l && l->data; l=l->next){
+            if (strncasecmp(text, (const char *)l->data, strlen(text)) == 0){
+              newList = g_list_append(newList, l->data);
+            }
+          }
+
+          for (auto l=newList; l && l->data; l=l->next){
+            TRACE("newList: %s\n", (const char *)l->data);
+          }
+          int n = g_list_length(newList);
+          char **vector = NULL;
+          if (n > 0){
+            vector = (char **)calloc(n+1, sizeof(char*));
+            int k=0;
+            for (auto l=newList; l && l->data; l=l->next,k++){
+              vector[k] =  (char *)l->data;
+            }
+          }
+          g_list_free(newList);
+          auto sWidget = g_object_get_data(self, "sWidget");
+          if (!vector) vector = historyVector(list);
+          
+          if (sWidget){
+            if (strlen(text)) gtk_widget_set_sensitive(GTK_WIDGET(sWidget),true);
+            else gtk_widget_set_sensitive(GTK_WIDGET(sWidget), false);
+          }
+
+          if (vector) {
+            auto model = G_LIST_MODEL (gtk_string_list_new (vector));
+            auto button = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "button"));
+            g_object_set_data(G_OBJECT(button), "halt", GINT_TO_POINTER(1));
+            gtk_drop_down_set_model(button, model);
+            gtk_drop_down_set_selected(button, 0);
+          } 
 
 
-//          Print::print(Child::getOutput(), g_strdup_printf("keyval = %c\n", keyval));
-          return true;
+          g_free(vector);
+
+
+
+          
         }
-        
-        void addKeyComplete(GtkEntry  *entry){
-            auto keyController = gtk_event_controller_key_new();
-            gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);
-            gtk_widget_add_controller(GTK_WIDGET(entry), keyController);
-            g_signal_connect (G_OBJECT (keyController), "key-pressed", 
-                G_CALLBACK (this->complete), (void *)this);
-        }
-
-*/
 
         GtkBox *entryBox(const char *labelText, const char *tooltipText, const char *history) {
             auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -654,14 +614,25 @@ private:
 
             GList *list = loadHistory(history);
             auto vector = historyVector(list);
-            g_object_set_data(G_OBJECT(box), "list", list);
+            //g_object_set_data(G_OBJECT(box), "list", list);
             g_object_set_data(G_OBJECT(entry), "list", list);
+
+            auto buttonBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+            g_object_set_data(G_OBJECT(entry), "buttonBox", buttonBox);
+
             auto button = gtk_drop_down_new_from_strings(vector);
+            g_object_set_data(G_OBJECT(entry), "button", button);
+
             gtk_entry_buffer_set_text(buffer, vector[0], -1);
             g_free(vector);
-            GListModel *model = gtk_drop_down_get_model(GTK_DROP_DOWN(button));             
             g_signal_connect(G_OBJECT(button), "notify", G_CALLBACK(notify), entry);
-            gtk_box_append(box, GTK_WIDGET(button));
+            gtk_box_append(buttonBox, GTK_WIDGET(button));
+            gtk_box_append(box, GTK_WIDGET(buttonBox));
+
+            //addKeyController(GTK_WIDGET(entry), (void *)button);
+            g_signal_connect(G_OBJECT(entry), "notify", G_CALLBACK(notifyEntry), button);
+            
+
 
 
             return box;
