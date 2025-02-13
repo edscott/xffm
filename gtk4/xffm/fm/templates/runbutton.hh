@@ -42,11 +42,13 @@ public:
     }
     ~RunButton(void){
         TRACE("RunButton::~RunButton... button_ %p\n", (void *)button_);
-        auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button_), "menu"));
+        // hmmm. on unparenting button_ popover should automatically be
+        //       unreffed.
+        /*auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button_), "menu"));
         gtk_popover_popdown(menu);
 
         gtk_widget_unrealize(GTK_WIDGET(menu));
-        gtk_widget_unparent(GTK_WIDGET(menu));
+        gtk_widget_unparent(GTK_WIDGET(menu));*/
 
         gtk_widget_set_visible(GTK_WIDGET (button_), FALSE);
         gtk_widget_unrealize(GTK_WIDGET (button_));
