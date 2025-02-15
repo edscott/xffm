@@ -1,3 +1,10 @@
+*** Need to add dropdown history for path entry in find dialog!
+*** BUG: need to chain link dialogs, when a dialog1 has a dialog2 and enter
+signal to dialog1_parent received, then dialog2 must raise, *not* dialog1.
+*** another related BUG: when find action is performed, the window which gets
+raised is the dialog1_parent window, but results are shown in dialog1, which should be raised. When dndBox is enabled, then we must chain dndBox as dialog2 with dialog1 as dialog2_parent.
+*** Bug: cancel button is not unsensitivized when find action is unsuccessful.
+
 BUG: hmmm: Where and why did this happen? on mouse click to select, if not ctrl, others not unselected.
 BUG: Fixed: now in testing. Massive memory leak plugged. 
        [showstopper: dnd many times to gvim, eventually slowdown and deadlock and crash. This is due to massive

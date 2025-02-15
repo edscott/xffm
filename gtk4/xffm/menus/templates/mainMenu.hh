@@ -55,7 +55,7 @@ namespace xf {
         {_("Add bookmark"),(void *) EMBLEM_BOOKMARK}, 
         {_("Remove bookmark"),(void *) EMBLEM_BOOKMARK}, 
         {_("Toggle Text Mode"),(void *) EMBLEM_TERMINAL}, 
-        {_("Search"),(void *) SEARCH}, 
+        {_("Search"),(void *) EMBLEM_FIND}, 
         {_("Open terminal"),(void *) OPEN_TERMINAL}, 
         {_("Home"),(void *) GO_HOME}, 
         {_("Show Clipboard"),(void *) EMBLEM_IMPORTANT}, // 

@@ -2,13 +2,10 @@
 #define ICON_MACROS
 
 #if 1
-#define EMBLEM_CLOSE "close"
-#define EMBLEM_NO "no"
-#define EMBLEM_APPLY "apply"
 
 #define GO_UP "go-up"
 #define EMBLEM_BOOKMARK "emblem-bookmark"
-#define SEARCH "edit-find"
+//#define SEARCH "edit-find"
 #define OPEN_TERMINAL "video-display"
 #define GO_HOME "user-home"
 #define DOCUMENT_PROPERTIES "document-properties"
@@ -18,12 +15,24 @@
 #define HARD_DISK "drive-harddisk"
 
 // File type emblems
+
+
+#define GRAYBALL "emblem-grayball"
+//#define CANCEL "cancel" // remove
+#define EMBLEM_CANCEL "cancel" 
+#define EXECUTE "execute"
+
+
 #define EMBLEM_C "emblem-c"
 #define EMBLEM_I "emblem-i"
 #define EMBLEM_H "emblem-h"
 #define EMBLEM_F "emblem-f"
 #define EMBLEM_O "emblem-o"
 #define EMBLEM_M "emblem-m"
+
+#define EMBLEM_CLOSE "close"
+#define EMBLEM_NO "no"
+#define EMBLEM_APPLY "apply"
 
 // Menu icons
 #define EMBLEM_EDIT "emblem-edit"
@@ -142,11 +151,6 @@
 
 // local/model.hh
 
-
-
-#define GRAYBALL "emblem-grayball"
-#define CANCEL "cancel"
-#define EXECUTE "execute"
 
 #define UTILITIES_TERMINAL "utilities-terminal"
 #define UTILITIES_TERMINAL_ACTIVE UTILITIES_TERMINAL "/NE/emblem-greenball/2.0/225"

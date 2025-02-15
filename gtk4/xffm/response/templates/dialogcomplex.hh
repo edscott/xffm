@@ -16,6 +16,7 @@ namespace xf
       
       auto dialog = this->dialog();
       this->subClass()->dialog(dialog);
+      DBG("*** DialogComplex setupRun: setting this->subClass()->dialog to %p\n", dialog);
 
       /*auto cbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "cbox"));
       auto foo = gtk_label_new("foo ok");

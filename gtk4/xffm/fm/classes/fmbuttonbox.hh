@@ -10,7 +10,7 @@ namespace xf {
     public:
     GtkBox *mkVbuttonBox(){
          const char *bIcon[]={
-           SEARCH, 
+           EMBLEM_FIND, 
            OPEN_TERMINAL, 
            GO_HOME, 
            EMBLEM_NEW_WINDOW, 
