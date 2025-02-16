@@ -50,9 +50,17 @@ public:
         gtk_widget_unrealize(GTK_WIDGET(menu));
         gtk_widget_unparent(GTK_WIDGET(menu));*/
 
+        // This also may crash! There is a race with the 
+        // validity of button_. Same issue as above.
+        // button_ is not a valid GTK_WIDGET
+        // FIXME FIXME FIXME
+        // Debug code to see where button_ is unreffed
+        // and set to NULL to avoid the collision.
+     
         gtk_widget_set_visible(GTK_WIDGET (button_), FALSE);
         gtk_widget_unrealize(GTK_WIDGET (button_));
-        gtk_widget_unparent(GTK_WIDGET (button_));
+        gtk_widget_unparent(GTK_WIDGET (button_));*/
+
         g_free (tip_);
         g_free (command_);
         g_free (icon_id_);
