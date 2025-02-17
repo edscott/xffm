@@ -299,7 +299,7 @@ namespace xf {
       auto xffm = g_strdup_printf("xffm -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
       auto runButton = new (RunButton<Type>);
-      runButton->init(runButton, xffm, childPid, output, path, buttonSpace);
+      runButton->init(xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }
 

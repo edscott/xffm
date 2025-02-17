@@ -63,7 +63,7 @@ namespace xf {
       pid_t childPid = Run<Type>::shell_command(output, terminal, false, false);
 
       auto runButton = new (RunButton<Type>);
-      runButton->init(runButton, terminal, childPid, output, workDir, buttonSpace);
+      runButton->init(terminal, childPid, output, workDir, buttonSpace);
       return;
     }
 
@@ -79,7 +79,7 @@ namespace xf {
       pid_t childPid = Run<Type>::shell_command(output, xffm4, false, false);
 
       auto runButton = new (RunButton<Type>);
-      runButton->init(runButton, xffm4, childPid, output, workDir, buttonSpace);
+      runButton->init(xffm4, childPid, output, workDir, buttonSpace);
       g_free(xffm4);
       return;
     }
@@ -95,7 +95,7 @@ namespace xf {
       pid_t childPid = Run<Type>::shell_command(output, find, false, false);
 
       auto runButton = new (RunButton<Type>);
-      runButton->init(runButton, find, childPid, output, workDir, buttonSpace);
+      runButton->init(find, childPid, output, workDir, buttonSpace);
       g_free(find);
       return;
     }
@@ -314,7 +314,7 @@ private:
       auto xffm = g_strdup_printf("xffm -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
       auto runButton = new (RunButton<Type>);
-      runButton->init(runButton, xffm, childPid, output, path, buttonSpace);
+      runButton->init(xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }
  
