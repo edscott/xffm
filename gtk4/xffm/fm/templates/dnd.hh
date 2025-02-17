@@ -185,7 +185,7 @@ public:
         DBG("Dnd::dropDone() drop success = %s\n", success?"true":"false");
         gdk_drag_drop_done(this->drag_, success);
       } else {
-        DBG("*** Error::Dnd::dropDone() this->drag_ is NULL, success = %s\n", success?"true":"false");
+        TRACE("Dnd::dropDone() this->drag_ is NULL, success = %s\n", success?"true":"false");
       }
       //this->drag_ = NULL;
     }
@@ -749,6 +749,7 @@ private:
         g_free(target);
 
         dialogObject->run();
+        DBG("dialogObject->run(), target=%s, uri=%s\n", target, uriList);
         d->dropDone(true);
         
       } else {

@@ -182,7 +182,7 @@ char buffer[4096];
               gpointer object){
         
       auto d = (Dnd<Type> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
-      d->dropDone(true);
+      d->dropDone(false);
       d->dragOn(true);
 
       auto eventController = GTK_EVENT_CONTROLLER(self);
