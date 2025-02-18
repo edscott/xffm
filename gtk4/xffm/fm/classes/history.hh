@@ -16,7 +16,7 @@ namespace xf {
     init(void){
       historyFile = g_strconcat(XF_HISTORY, NULL);
       if (!g_file_test(historyFile, G_FILE_TEST_EXISTS)) {
-        DBG("*** reading xffm3 history...\n");
+        TRACE("*** reading xffm3 history...\n");
         // gtk3 history
         auto oldHistory = g_strconcat(g_get_user_cache_dir(),G_DIR_SEPARATOR_S,"lp_terminal_history",NULL);
         if (g_file_test(oldHistory, G_FILE_TEST_EXISTS)){
@@ -47,7 +47,7 @@ namespace xf {
           history_set_pos(position + 1);
         if (history_search_prefix(prefix, 1)==0){
           auto h = current_history();
-          //DBG("Down found %s at %d\n", h->line, where_history());
+          //TRACE("Down found %s at %d\n", h->line, where_history());
           Print::clear_text(input);
           Print::print(input, g_strdup_printf("%s", h->line));
         } else {
@@ -74,7 +74,7 @@ namespace xf {
           g_object_set_data(G_OBJECT(input), "prefix", NULL);
         }
       }
-      //DBG("start position=%d\n", position);
+      //TRACE("start position=%d\n", position);
       auto prefix = (char *)g_object_get_data(G_OBJECT(input), "prefix");
       if (prefix) {
         if (where_history() != history_length){
@@ -82,7 +82,7 @@ namespace xf {
         }
         if (history_search_prefix(prefix, -1)==0){
           auto h = current_history();
-          //DBG("Up found %s at %d\n", h->line, where_history());
+          //TRACE("Up found %s at %d\n", h->line, where_history());
           Print::clear_text(input);
           Print::print(input, g_strdup_printf("%s", h->line));
         }
@@ -111,7 +111,7 @@ namespace xf {
 
     static bool
     add(const char *text){
-        DBG("*** add %s\n", text);
+        TRACE("*** add %s\n", text);
       errno=0;
       gchar *dirname = g_path_get_dirname(historyFile);
       if (!g_file_test(dirname, G_FILE_TEST_IS_DIR)){
@@ -128,13 +128,13 @@ namespace xf {
       int pos = history_length - 1;
       which = history_search_pos(text, -1, pos);
       while (pos >0 && which >=0){
-        DBG("*** found %s at %d history_length=%d\n", text, which, history_length);
+        TRACE("*** found %s at %d history_length=%d\n", text, which, history_length);
         HIST_ENTRY *entry = history_get(which+1);
         pos = which - 1;
 
         if (strcmp(entry->line, text) == 0){
           // workaround of the index vs offset mixup history bug.
-          DBG("*** which %d is %s\n", which, entry->line);
+          TRACE("*** which %d is %s\n", which, entry->line);
           auto h = remove_history (which);
           free_history_entry(h); 
         }
@@ -147,7 +147,7 @@ namespace xf {
         add_history(text);
         write_history(historyFile);
       } else {
-        //DBG("add(\"%s\", \"%s\"): skipped\n",p->line, text);
+        //TRACE("add(\"%s\", \"%s\"): skipped\n",p->line, text);
       }
       reset();
       return true;

@@ -32,9 +32,17 @@ namespace xf {
         _("Link"),
         _("Properties"),
         _("Delete"),
+        _("Encrypt File..."),
+        _("Decrypt File..."),
        // _("Select All"), 
        // _("Match regular expression"), 
 
+//msgid "Encrypt..."
+//msgid "Encrypt password"
+//msgid "Encrypt file"
+//msgid "Encrypt File"
+//msgid "Decrypt File..."
+//msgid "Encrypt File..."
 
         
         NULL
@@ -59,6 +67,8 @@ namespace xf {
         {_("Paste"),(void *) EMBLEM_PASTE}, 
         {_("Add bookmark"),(void *) EMBLEM_FAVOURITE}, 
         {_("Remove bookmark"),(void *) EMBLEM_RED_BALL}, 
+        {_("Encrypt File..."),(void *) EMBLEM_BLOWFISH}, 
+        {_("Decrypt File..."),(void *) EMBLEM_BLOWFISH}, 
        {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -82,6 +92,8 @@ namespace xf {
         {_("Remove bookmark"),(void *) removeB}, 
       //  {_("Select All"),(void *) selectAll}, 
         {_("Properties"),(void *) properties}, 
+        {_("Encrypt File..."),(void *) bcrypt}, 
+        {_("Decrypt File..."),(void *) bcrypt}, 
        
         {NULL, NULL}
       };
@@ -128,6 +140,24 @@ namespace xf {
       if (!data) return NULL;
       auto info = G_FILE_INFO(data);
       return Basic::getPath(info);
+    }
+
+    static void 
+    bcrypt(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      auto path = Basic::getPath(info);
+      if (strrchr(path, '.') && strcmp(strrchr(path, '.'), ".bfe") == 0){
+        // decrypt
+        DBG("Decrypt file \"%s\"\n", path);
+      } else {
+        DBG("Encrypt file \"%s\"\n", path);
+      }
+      DBG("open bcrypt dialog...\n");
+      auto parent = GTK_WINDOW(MainWidget);
+      new Bfish<Type>(parent, path);
+      g_free(path);
     }
 
     static void 

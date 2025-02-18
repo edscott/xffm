@@ -597,10 +597,13 @@ public:
           (void *)&signal,
           (void *)&result
       };
+      // GTK4 bug: not switching to main thread...
+      // FIXME
       gboolean owner = g_main_context_is_owner(g_main_context_default());
       if (owner){
           context_function_f(arg);
-      } else {
+      } else 
+      {
           g_main_context_invoke(NULL, CONTEXT_CALLBACK(context_function_f), arg);
           pthread_mutex_lock(&mutex);
           if (result == GINT_TO_POINTER(-1)) pthread_cond_wait(&signal, &mutex);

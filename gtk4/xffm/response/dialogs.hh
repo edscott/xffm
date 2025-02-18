@@ -33,6 +33,8 @@
 #include "response/templates/efs.hh" // class
 # include "response/templates/mountresponse.hh"   // class
 # include "response/templates/mount.hh"   // class
+# include "response/templates/bfishresponse.hh"   // class
+# include "response/templates/bfish.hh"   // class
 
 namespace xf
 {

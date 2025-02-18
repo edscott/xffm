@@ -12,7 +12,7 @@
  * ====================================================================
  */
 
-// include blowfish.hh before this file.
+// include blowfish.hh before this file.??
 
 namespace xf{
 
@@ -58,7 +58,7 @@ namespace xf{
         }
 
         if (options->compression == 1) {
-          if ((*input = realloc(*input, sz + j + 1)) == NULL)
+          if ((*input = (char *)realloc(*input, sz + j + 1)) == NULL)
             memerror();
 
           memset(*input+sz, 0, j + 1);
@@ -81,7 +81,7 @@ namespace xf{
 
         j = sizeof(uInt32);
 
-        if ((mykey = malloc(MAXKEYBYTES + 1)) == NULL)
+        if ((mykey = (unsigned char *)malloc(MAXKEYBYTES + 1)) == NULL)
           memerror();
 
         memset(mykey, 0, MAXKEYBYTES + 1);
@@ -139,7 +139,7 @@ namespace xf{
       char * getkey(int type){
         char *key, *key2, overflow[2], *ch;
 
-        if ((key = malloc(MAXKEYBYTES + 2)) == NULL)
+        if ((key = (char *)malloc(MAXKEYBYTES + 2)) == NULL)
           memerror();
 
         memset(key, 0, MAXKEYBYTES + 2);
@@ -163,7 +163,7 @@ namespace xf{
         }
 
         if (type == ENCRYPT) {
-          if ((key2 = malloc(MAXKEYBYTES + 2)) == NULL)
+          if ((key2 = (char *)malloc(MAXKEYBYTES + 2)) == NULL)
             memerror();
 
           memset(key2, 0, MAXKEYBYTES + 2);
@@ -178,7 +178,7 @@ namespace xf{
           free(key2);
         }
 
-        if ((ch = memchr(key, (char) 10, strlen(key))) != NULL)
+        if ((ch = (char *)memchr(key, (char) 10, strlen(key))) != NULL)
           memset(ch, 0, 1);
 
         fprintf(stderr, "\n");
@@ -194,7 +194,7 @@ namespace xf{
 
         j = sizeof(uInt32);
 
-        Blowfish_Init(&ctx, *key, strlen(*key));
+        Blowfish_Init(&ctx, *key, strlen((const char *)*key));
 
         memcpy(&L, *key, j);
         memcpy(&R, *key+j, j);
@@ -203,11 +203,11 @@ namespace xf{
         l = L;
         r = R;
 
-        if ((*key2 = malloc(MAXKEYBYTES + 1)) == NULL)
+        if ((*key2 = (char *)malloc(MAXKEYBYTES + 1)) == NULL)
           memerror();
-        if ((newkey = malloc(MAXKEYBYTES + 1)) == NULL)
+        if ((newkey = (char *)malloc(MAXKEYBYTES + 1)) == NULL)
           memerror();
-        if ((newkey2 = malloc(MAXKEYBYTES + 1)) == NULL)
+        if ((newkey2 = (char *)malloc(MAXKEYBYTES + 1)) == NULL)
           memerror();
 
         memset(*key2, 0, MAXKEYBYTES + 1);
@@ -260,7 +260,7 @@ namespace xf{
           r = j - sz;
 
         if ( r < j) {
-          if ((*input = realloc(*input, sz + r + 1)) == NULL)
+          if ((*input = (char *)realloc(*input, sz + r + 1)) == NULL)
             memerror();
 
           memset(*input+sz, 0, r + 1);
@@ -273,7 +273,7 @@ namespace xf{
       uLong attachKey(char **input, char *key, uLong sz) {
 
         /* +3 so we have room for info tags at the beginning of the file */
-        if ((*input = realloc(*input, sz + MAXKEYBYTES + 3)) == NULL)
+        if ((*input = (char *)realloc(*input, sz + MAXKEYBYTES + 3)) == NULL)
           memerror();
 
         memcpy(*input+sz, key, MAXKEYBYTES);
@@ -296,7 +296,7 @@ namespace xf{
           return(-1);
         }
 
-        if ((*input = malloc(readsize + sz + 1)) == NULL) 
+        if ((*input = (char *)malloc(readsize + sz + 1)) == NULL) 
           memerror();
 
         memset(*input+sz, 0, readsize);
@@ -345,11 +345,11 @@ namespace xf{
         if (options.securedelete > 0) {
           lsize = sizeof(long);
           k = (statbuf.st_size / lsize) + 1;
-          if ((state = malloc(257)) == NULL)
+          if ((state = (char *)malloc(257)) == NULL)
             memerror();
 
           initstate((unsigned long) key, state, 256);
-          if ((garbage = malloc(lsize + 1)) == NULL)
+          if ((garbage = (char *)malloc(lsize + 1)) == NULL)
             memerror();
 
           fd = fopen(file, "r+b");
@@ -382,7 +382,7 @@ namespace xf{
         char *output;
 
         newsz = sz + (sz *.1) + 13;
-        if ((output = malloc(newsz + 1)) == NULL)
+        if ((output = (char *)malloc(newsz + 1)) == NULL)
           memerror();
 
         memset(output, 0, newsz + 1);
@@ -390,7 +390,7 @@ namespace xf{
         compress((Bytef *) output, &newsz, (const Bytef *) *input,  sz);
 
         free(*input);
-        if ((*input = malloc(newsz)) == NULL)
+        if ((*input = (char *)malloc(newsz)) == NULL)
           memerror();
 
         memcpy(*input, output, newsz);
@@ -403,7 +403,7 @@ namespace xf{
       uLong douncompress(char **input, uLong sz, BCoptions options) {
         char *output;
 
-        if ((output = malloc(options.origsize + 1)) == NULL)
+        if ((output = (char *)malloc(options.origsize + 1)) == NULL)
           memerror();
 
         memset(output, 0, options.origsize + 1);
@@ -412,7 +412,7 @@ namespace xf{
         (const Bytef *) *input, sz);
 
         free(*input);
-        if ((*input = malloc(options.origsize)) == NULL)
+        if ((*input = (char *)malloc(options.origsize)) == NULL)
           memerror();
 
         memcpy(*input, output, options.origsize);
@@ -428,7 +428,7 @@ namespace xf{
         short i = 0x4321;
         int bigE = (*(char*) &i);
 
-        if ((*e = realloc(*e, sizeof(char) + 1)) == NULL)
+        if ((*e = (unsigned char *)realloc(*e, sizeof(char) + 1)) == NULL)
           memerror();
 
         memset(*e, 0, sizeof(char) + 1);
@@ -456,7 +456,7 @@ namespace xf{
         unsigned char *myEndian = NULL, *yourEndian = NULL;
 
         getEndian(&myEndian);
-        if ((yourEndian = malloc(2)) == NULL)
+        if ((yourEndian = (unsigned char *)malloc(2)) == NULL)
           memerror();
 
         memset(yourEndian, 0, 2);

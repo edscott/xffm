@@ -561,6 +561,17 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
             gtk_widget_set_visible(GTK_WIDGET(widget), true);
           }
         }
+        if (strrchr(path, '.') && strcmp(strrchr(path, '.'), ".bfe") == 0){
+          auto widget = g_object_get_data(G_OBJECT(popover), _("Decrypt File..."));
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+          widget = g_object_get_data(G_OBJECT(popover), _("Encrypt File..."));
+          gtk_widget_set_visible(GTK_WIDGET(widget), false);
+        } else {
+          auto widget = g_object_get_data(G_OBJECT(popover), _("Encrypt File..."));
+          gtk_widget_set_visible(GTK_WIDGET(widget), true);
+          widget = g_object_get_data(G_OBJECT(popover), _("Decrypt File..."));
+          gtk_widget_set_visible(GTK_WIDGET(widget), false);
+        }
       }
     }
 
