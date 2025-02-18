@@ -89,9 +89,9 @@ namespace xf {
           DBG("EFS->%s path=%s\n", utf_name, *p);
           g_free(utf_name);
           g_free(basename);
-          g_strfreev(items);
         }
-        
+        g_strfreev(items);
+        items = NULL; 
         // bookmarks
         {
 

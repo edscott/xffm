@@ -7,12 +7,12 @@ namespace xf {
   template <class Type>
   class EFS {
     using subClass_t = EfsResponse<Type>;
-    using dialog_t = DialogComplex<subClass_t>;
+    using complexDialog_t = DialogComplex<subClass_t>;
     
 public:
 
     EFS(GtkWindow *parent, const char *folder){
-      auto dialogObject = new dialog_t(parent, folder);
+      auto dialogObject = new complexDialog_t(parent, folder);
     
     }
 

@@ -725,10 +725,10 @@ private:
         gchar *suggest = NULL;
 
         // Obtain the file token separation, if any.
-        gboolean esc_space;
+        gboolean esc_space = false;
         // Test for use of escaped spaces.
         if (strstr(token, "\\ ")){
-            esc_space=TRUE;
+            esc_space=true;
             gchar *tmp_token = g_strdup(token);
             gint i,j; for(i=0,j=0; j<strlen(token); i++,j++){
                 if (strncmp(token+j, "\\ ", 2) == 0){

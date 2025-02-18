@@ -433,27 +433,21 @@ public:
 private: 
 
     void zapPage(GtkWidget *child){
+
+      auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
       auto gridview_p = (GridView<LocalDir> *) Child::getGridviewObject(child);
+      GList *item = g_list_find(pageList_, child);
+      pageList_ = g_list_remove(pageList_, child);
+      gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
+      delete(page);
       delete gridview_p;
       Child::remove(child);
 
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
-      Print::unreference_textview(output);
-      GList *item = g_list_find(pageList_, child);
-      pageList_ = g_list_remove(pageList_, child);
       if (g_list_length(pageList_) == 0){
         gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
         gtk_widget_unparent(GTK_WIDGET(menu_));
         gtk_window_destroy(mainWindow_);
         exitDialogs = true;
-      }
-      
-      // Get VPane object from child widget (box)
-      // Valid page?
-      if (G_IS_OBJECT(child)){
-        auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
-        gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
-        delete(page);
       }
     
       

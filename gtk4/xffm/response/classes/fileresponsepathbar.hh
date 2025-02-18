@@ -3,14 +3,14 @@
 
 namespace xf {
   class FileResponsePathbar {
-    GtkBox *pathbar_;
-    gchar *path_;
-    GtkWidget *back_;
-    GtkWidget *next_;
-    PathbarHistory *pathbarHistory_p;
+    GtkBox *pathbar_ = NULL;
+    gchar *path_ = NULL;
+    GtkWidget *back_ = NULL;
+    GtkWidget *next_ = NULL;
+    PathbarHistory *pathbarHistory_p = NULL;
 
-    void *reloadFunction_;
-    void *reloadData_;
+    void *reloadFunction_ = NULL;
+    void *reloadData_ = NULL;
 
   public:
    GtkBox *pathbar(void){return pathbar_;} 

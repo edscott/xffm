@@ -104,8 +104,6 @@ public:
         g_signal_connect (G_OBJECT (bcryptButton), "clicked", G_CALLBACK (button_bcrypt), this);
         g_signal_connect (G_OBJECT (cancelButton), "clicked", G_CALLBACK (button_cancel), this);
       
-        g_free(basename);
-
         return mainBox_;
     }
 

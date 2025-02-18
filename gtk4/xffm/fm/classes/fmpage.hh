@@ -50,7 +50,6 @@ namespace xf {
 
   class FMpage : public Vpane, public Prompt<LocalDir>, public Pathbar<LocalDir> {
     private:
-      char *history_ = NULL;
       GtkBox *childBox_;
       gchar *path_=NULL;
       GtkPopover *gridMenu_=NULL;
@@ -63,22 +62,11 @@ namespace xf {
       FMpage(const char *path){
         path_ = g_strdup(path);
         childBox_ = mkPageBox(path);
-#if 0
-        char buffer[64];
-        snprintf(buffer, 64, "%p", childBox_);
-        history_ = g_strconcat(XF_HISTORY,".",buffer,NULL);
-        //FIXME: append xf_history to history_
-        fclose(fopen(history_, "w"));
-#endif
-
       }
       ~FMpage(){
         TRACE("FMpage destructor: need to call GridView destructor...\n");
         //auto gridView_p = (GridView<LocalDir> *)Child::getGridviewObject(GTK_WIDGET(childBox_));
         //delete gridView_p;
-        //FIXME: append history_ to xf_history
-        unlink(history_);
-        g_free(history_);
         g_free(path_);
         
       }

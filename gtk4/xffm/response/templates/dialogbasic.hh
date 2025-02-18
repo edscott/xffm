@@ -40,6 +40,78 @@ namespace xf
         }
         return false;
     }
+     
+    static void *unsetRaise_f(void *data){
+      auto object = (dialog_t *)data;
+      auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(object->parent()), "frame"));
+      gtk_widget_set_sensitive(GTK_WIDGET(content), true);
+      //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
+      TRACE("*** set unraise for %p\n", object->parent());
+      TRACE("*** remove controller %p to window %p\n", object->raiseController(), object->parent());
+      gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
+          object->raiseController());
+      // aparently not necessary:
+      // g_object_unref(G_OBJECT(object->raiseController()));
+      return NULL;
+    }
+/*    
+    static void *contextDelete_f(void *data){
+      auto dialogObject = (dialog_t *)data;
+      delete dialogObject;       
+      return NULL;
+    }
+*/
+    static void *runWait_f(void *data){
+      auto dialogObject = (dialog_t *)data;
+      //auto dialog = dialogObject->dialog();
+      DBG("*** runWait_f for dialog_t\n");
+
+      TRACE("runWait_f...\n");
+      pthread_t thread;
+      Thread::threadCount(true,  &thread, "DialogBasic::runWait_f");
+      int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
+      void *response_p;
+      pthread_join(thread, &response_p);
+      Thread::threadCount(false,  &thread, "DialogBasic::runWait_f");
+      TRACE("run joined, *response_p = %p\n", response_p);
+      // 
+      delete dialogObject;
+      //Basic::context_function(contextDelete_f, data);
+      return response_p;
+    }
+
+
+    static void *run_f(void *data){
+      auto dialogObject = (dialog_t *)data;
+      auto dialog = dialogObject->dialog();
+      void *response = NULL;
+      DBG("*** run_f for Basic::dialog_t\n");
+      TRACE("*** run_f (thread)\n");
+      do {
+        dialogObject->lockResponse();
+        response = g_object_get_data(G_OBJECT(dialog), "response");
+        dialogObject->unlockResponse();
+        if (exitDialogs) response = GINT_TO_POINTER(-1);
+        usleep(2500);
+      } while (!response);
+      // hide
+      auto subClass = dialogObject->subClass_;
+      
+      if (GPOINTER_TO_INT(response) > 0){
+        Basic::context_function(subClass->asyncYes, data);
+      } else {
+        Basic::context_function(subClass->asyncNo, data);
+      }
+      if (MainWidget && GTK_IS_WINDOW (MainWidget)) {
+        Basic::present(GTK_WINDOW(MainWidget));
+      }
+      TRACE("run_f:: Response is %p\n", response);
+      // object will now be deleted.
+      return response;
+    }
+
+
+
     void addKeyController(GtkWidget  *widget){
         auto keyController = gtk_event_controller_key_new();
         gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);
@@ -99,20 +171,6 @@ namespace xf
       g_signal_connect (G_OBJECT (raiseController_), "enter", 
               G_CALLBACK (presentDialog), dialog_);      
     }
-     
-    static void *unsetRaise_f(void *data){
-      auto object = (dialog_t *)data;
-      auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(object->parent()), "frame"));
-      gtk_widget_set_sensitive(GTK_WIDGET(content), true);
-      //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
-      TRACE("*** set unraise for %p\n", object->parent());
-      TRACE("*** remove controller %p to window %p\n", object->raiseController(), object->parent());
-      gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
-          object->raiseController());
-      // aparently not necessary:
-      // g_object_unref(G_OBJECT(object->raiseController()));
-      return NULL;
-    }
 
   public:
     void setParent(GtkWindow *parent){
@@ -153,8 +211,8 @@ namespace xf
       addKeyController(GTK_WIDGET(dialog_)); 
     }
 
-    int run(){
-      TRACE("*** run...\n");
+    int run(void){
+      DBG("*** Basic::dialog_t run...\n");
       pthread_t thread;
       Thread::threadCount(true,  &thread, "DialogBasic::run");
       int retval = pthread_create(&thread, NULL, runWait_f, this);
@@ -200,53 +258,6 @@ private:
       TRACE("subclass label is %s\n",subClass_->label());     
       setLabelText(subClass_->label());
     }
-
-    static void *runWait_f(void *data){
-      auto dialogObject = (dialog_t *)data;
-      auto dialog = dialogObject->dialog();
-
-      TRACE("runWait_f...\n");
-      pthread_t thread;
-      Thread::threadCount(true,  &thread, "DialogBasic::runWait_f");
-      int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
-      void *response_p;
-      pthread_join(thread, &response_p);
-      Thread::threadCount(false,  &thread, "DialogBasic::runWait_f");
-      TRACE("run joined, *response_p = %p\n", response_p);
-      // 
-      delete dialogObject;
-      return response_p;
-    }
-
-    static void *run_f(void *data){
-      auto dialogObject = (dialog_t *)data;
-      auto dialog = dialogObject->dialog();
-      void *response = NULL;
-      TRACE("*** run_f (thread)\n");
-      do {
-        dialogObject->lockResponse();
-        response = g_object_get_data(G_OBJECT(dialog), "response");
-        dialogObject->unlockResponse();
-        if (exitDialogs) response = GINT_TO_POINTER(-1);
-        usleep(2500);
-      } while (!response);
-      // hide
-      auto subClass = dialogObject->subClass_;
-      
-      if (GPOINTER_TO_INT(response) > 0){
-        Basic::context_function(subClass->asyncYes, data);
-      } else {
-        Basic::context_function(subClass->asyncNo, data);
-      }
-      if (MainWidget && GTK_IS_WINDOW (MainWidget)) {
-        Basic::present(GTK_WINDOW(MainWidget));
-      }
-      TRACE("run_f:: Response is %p\n", response);
-      // object will now be deleted.
-      return response;
-    }
-
-
 
     GtkWidget *getCloseBox(void){
       return Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
