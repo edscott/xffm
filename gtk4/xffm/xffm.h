@@ -81,6 +81,7 @@ static void *mainWindow_p = NULL;
 
 // classes and templates
 // basic classes
+#include "mime/mime.hh"
 #include "fm/classes/blowfish.hh"
 #include "fm/classes/bcrypt.hh"
 
@@ -88,7 +89,6 @@ static void *mainWindow_p = NULL;
 #include "fm/classes/basic.hh"     
 #include "fm/classes/child.hh"  
 #include "fm/classes/settings.hh"  
-#include "mime/mime.hh"
 #include "fm/templates/texture.hh"  
 #include "fm/classes/print.hh"  
 #include "fm/classes/tubo.hh"  

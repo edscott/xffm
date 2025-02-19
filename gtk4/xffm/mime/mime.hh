@@ -13,23 +13,39 @@ namespace xf {
 class Mime {
 public:
 
+  static bool isText (const char *path) {
+    if (!path || !g_file_test(path, G_FILE_TEST_IS_REGULAR)) return false;
+    auto mimetype = MimeMagic::mimeMagic(path);
+    
+    if (!mimetype) mimetype = g_strdup(_("unknown"));      
+    if (strstr(mimetype, "text")){
+      g_free(mimetype);
+      return true;
+    }
+    g_free(mimetype);
+    return false;
+  }
+
   static bool is_image (const char *path) {
     if (!path || !g_file_test(path, G_FILE_TEST_IS_REGULAR)) return false;
 
     auto mimetype = mimeType(path);
-
+/*
     bool want_magic = false;
     //bool want_magic = (!mimetype || strcmp(mimetype, _("unknown"))==0);
     if (want_magic) {
       mimetype = MimeMagic::mimeMagic(path);
     }
-    if (!mimetype) mimetype = _("unknown");
-      
+*/      
+    if (!mimetype) mimetype = g_strdup(_("unknown"));
     TRACE("mimetype:: %s --> %s\n", path, mimetype);
-    if (strstr(mimetype, "image")) return true;
+    if (strstr(mimetype, "image")) {
+      g_free(mimetype);
+      return true;
+    }
     bool retval = mimetype_is_image(mimetype);
+    g_free(mimetype);
     return retval;
-
   }
 
 private:
