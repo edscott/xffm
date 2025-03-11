@@ -696,8 +696,8 @@ template <class Type>
       //gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
 
       if (modType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK)) || button == 3) {
-      //if (modType & ((GDK_CONTROL_MASK & GDK_MODIFIER_MASK))) {
-        selectWidget(w, gridView_p, false);
+        // if button 3 and item is not selected then true, if item is selected then false
+        if (button != 3) selectWidget(w, gridView_p, false);
       } else {
         selectWidget(w, gridView_p, true);
       }

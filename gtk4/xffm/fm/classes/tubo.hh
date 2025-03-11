@@ -18,7 +18,6 @@
 #include <pthread.h>
 #include <glib.h>
 
-
 #ifdef HAVE_PROCESS_H
 #include <process.h>
 #endif
@@ -219,6 +218,8 @@ public:
         }
         newfork->PID = PID;
         if(PID == 0) { /* the child */
+            // Change process name (Linux)
+            //auto pname = g_strdup_printf("tubo-%u", grandchildPID);
             controller(newfork, 1, instance, parent);
             _exit(123);
         }
@@ -657,7 +658,10 @@ DBG("threadedWait_f(): wait will be done by system...\n");
         }
             
         TRACE( "grandchildPID fork... \n");
-        grandchildPID = fork ();          
+        grandchildPID = fork ();        
+
+
+        
         if(grandchildPID == 0) {
                 TRACE("grandchild here... \n");
             if (forked) {
@@ -675,7 +679,8 @@ DBG("threadedWait_f(): wait will be done by system...\n");
                 _exit(123);
             }
         } 
-            
+
+
         // put grandchild pid into shm 
         if (!setShmName(newfork->shm_gchild_name, "-gchild", parent, instance_in))_exit(123);
         
