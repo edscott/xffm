@@ -227,6 +227,20 @@ public:
       int spinValue = randomize;
       auto basename = g_path_get_basename(p->path());
       char *message = NULL;
+#if 1
+      if (!decrypt){
+        message = g_strdup_printf(" gnupg -c --batch MY_PASSWORD %s\n", 
+            basename);
+      } else {
+        if (!gtk_widget_get_sensitive(GTK_WIDGET(p->check1()))) remove = false;
+        message = g_strdup_printf(" gnupg -d %s\n", basename);
+      }
+      if (message) {
+        Print::showText(output);
+        Print::print(output, EMBLEM_GREEN_BALL, "green", message);
+      }
+
+#else
       if (decrypt){
         message = g_strdup_printf(" bcrypt %s %s %s\n", 
             remove?"":"-r", standardOut?"-o":"",
@@ -242,7 +256,7 @@ public:
         Print::showText(output);
         Print::print(output, EMBLEM_GREEN_BALL, "green", message);
       }
-        
+#endif        
 
 
       g_free(basename);
