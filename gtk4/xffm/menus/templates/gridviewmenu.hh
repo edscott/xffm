@@ -148,7 +148,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       auto path = Basic::getPath(info);
-      if (strrchr(path, '.') && strcmp(strrchr(path, '.'), ".bfe") == 0){
+      if (strrchr(path, '.') && strcmp(strrchr(path, '.'), ".gpg") == 0){
         // decrypt
         DBG("Decrypt file \"%s\"\n", path);
       } else {
@@ -156,7 +156,11 @@ namespace xf {
       }
       DBG("open bcrypt dialog...\n");
       auto parent = GTK_WINDOW(MainWidget);
-      new Bfish<Type>(parent, path);
+      try {
+        new Bfish<Type>(parent, path);
+      } catch(int errorCode) {
+        DBG("Catch errorCode %d\n", errorCode);
+      }
       g_free(path);
     }
 
