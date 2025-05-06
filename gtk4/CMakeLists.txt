@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.10)
 project (xffm C CXX)
 set(CMAKE_INSTALL_PREFIX /usr/local)
 set (CMAKE_CXX_STANDARD 17)
@@ -14,7 +14,7 @@ include(cmake/pthreads.cmake)
 # debugging in lldb/gdb 
 # to avoid disabling ALPHA, set these options via environment
 # variable CXXFLAGS.
-set(CMAKE_CXX_FLAGS "-g -O0 -std=c++17 -DUSE_GTK4")
+set(CMAKE_CXX_FLAGS "-g -O0 -std=c++17 -DUSE_GTK4 -Wno-deprecated-declarations")
 #set(CMAKE_CXX_FLAGS "-g -O0 -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED")
 #set(CMAKE_CXX_FLAGS "-g -O0")
 #set(CMAKE_CXX_FLAGS "-g -O3")

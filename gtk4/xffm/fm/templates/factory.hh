@@ -443,7 +443,9 @@ template <class Type>
       TRACE("***  size is %d object is %p\n", size, object);
       //if (size == 1) return true;
       GList *selectionList = gridView_p->getSelectionList();
-
+#if 0
+      // It seems this bug has been fixed in gtk-4.18.4
+      // gdk_x11 stuff is now deprecated.
 #ifdef GDK_WINDOWING_X11
         // Gtk bug workaround
         //  Gtk-WARNING **: Broken accounting of active state for widget 
@@ -459,6 +461,7 @@ template <class Type>
         //XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
         //XWarpPointer(display, src_w, src_w, 0, 0, src_width, src_height, src_width, src_height/2);        
         XWarpPointer(display, src_w, src_w, 0, 0, src_width, src_height, 0, src_height/2);        
+#endif
 #endif
 
 
