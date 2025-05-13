@@ -57,6 +57,9 @@ namespace xf {
       void *arg[]={(void *)textview, NULL};
       Basic::context_function(clear_text_buffer_f, arg);
     }
+    static void clearText(void){
+      clearText(Child::getOutput());
+    }
 
     static void clear_text(GtkTextView *textview){ // deprecated
       clearText(textview);

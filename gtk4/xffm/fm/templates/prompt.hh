@@ -102,6 +102,10 @@ namespace xf {
       TRACE("commands[0]: %s\n", commands[0]);
         RunButton<Type> *runButton;
         for (gchar **c=commands; c && *c; c++){
+            if (strncmp(*c,"clear", strlen("clear"))==0){
+              Print::clearText();
+              continue;
+            }
             if (strncmp(*c,"cd", strlen("cd"))==0){
               auto w = Basic::getVector(*c, " ");
               auto pathbar = GTK_BOX(g_object_get_data(G_OBJECT(output), "pathbar"));
