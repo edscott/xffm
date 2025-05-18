@@ -14,9 +14,9 @@ namespace xf {
 //          _("Open terminal"),
         _("Paste"), // 
         _("Open in New Window"), 
-        _("Toggle Text Mode"),
-        _("Add bookmark"),
-        _("Remove bookmark"),
+//        _("Toggle Text Mode"),
+//        _("Add bookmark"),
+//        _("Remove bookmark"),
         
         _("Select All"), 
         _("Match regular expression"), 
@@ -298,7 +298,7 @@ namespace xf {
       auto buttonSpace = Child::getButtonSpace();
       auto xffm = g_strdup_printf("xffm -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
-      auto runButton = new (RunButton<Type>);
+      auto runButton = new RunButton<Type>(EMBLEM_NEW_WINDOW, NULL);
       runButton->init(xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }

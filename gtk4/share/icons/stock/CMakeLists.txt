@@ -86,6 +86,7 @@ system-search.svg
 terminal.svg
 top.svg
 up.svg
+video-display.svg
 view-refresh.svg
 view-sort-ascending.svg
 view-sort-descending.svg

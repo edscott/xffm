@@ -152,7 +152,7 @@ namespace xf {
               childPID = Run<LocalDir >::shell_command(output, *c, scrollup, showTextPane);
             }
             if (withRunButton) {
-              runButton = new (RunButton<Type>);
+              runButton = new RunButton<Type>(NULL, command);
               runButton->init(*c, childPID, output, Child::getWorkdir(child), buttonSpace);
             }
             

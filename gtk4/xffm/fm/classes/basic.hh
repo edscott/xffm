@@ -26,10 +26,10 @@ namespace xf {
       if (!command) return icon_id;
       auto args = getVector(command, " ");
       icon_id = g_path_get_basename(args[0]);
-      if (strcmp(icon_id, "xterm")==0){
+      if (strcmp(icon_id, "xterm")==0 || strcmp(icon_id, "konsole")==0){
         g_free(icon_id);
         g_strfreev(args);
-        return g_strdup(EMBLEM_TERMINAL_EXEC);
+        return g_strdup(OPEN_TERMINAL);
       }
       if (gtk_icon_theme_has_icon (iconTheme, icon_id)){
         g_strfreev(args);

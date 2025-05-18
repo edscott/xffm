@@ -40,12 +40,20 @@ public:
     GtkBox *buttonSpace(void){return buttonSpace_;}
     gchar *workdir(void){return workdir_;}
 
-    RunButton(void){
-      TRACE("RunButton void\n");
+    RunButton(const char *icon, const char *command){
+      TRACE("*** RunButton(%s,%s)\n", icon, command);
       button_ = GTK_MENU_BUTTON(gtk_menu_button_new());
-      gtk_menu_button_set_icon_name(button_, EMBLEM_RUN);
+//      auto Image = GTK_WIDGET(Basic::getImage(EMBLEM_RUN, 18));
+//      gtk_menu_button_set_child (button_,Image);
+//      gtk_menu_button_set_icon_name(button_, EMBLEM_RUN);
       gtk_widget_set_can_focus (GTK_WIDGET(button_), FALSE);
       g_object_ref(G_OBJECT(button_));
+      if (icon) set_icon_id(icon);
+      else {
+        auto icon = Basic::getAppIconName(command, EMBLEM_RUN);
+        set_icon_id(icon);
+        g_free(icon);
+      }
     }
     
     ~RunButton(void){
@@ -196,6 +204,10 @@ private:
     void set_icon_id(const gchar *data){
         g_free(icon_id_); 
         icon_id_ = data?g_strdup(data):NULL;
+        // Change the icon.
+        auto Image = GTK_WIDGET(Basic::getImage(icon_id_, 18));
+        gtk_menu_button_set_child (button_,Image); 
+        TRACE("*** set icon id: %s, image %p\n", icon_id_, Image);
     }
     const gchar *command(void){ return (const gchar *)command_;}
     void set_command(const gchar *command){
@@ -258,15 +270,14 @@ private:
         // Shell commands come from lpterminal (with specific shell characters).
         gchar *command = g_strdup(this->command());
         
-        if (this->inShell()) {
+ /*       if (this->inShell()) {
             TRACE("run_button_p->inShell\n");
             this->set_icon_id(EMBLEM_TERMINAL_EXEC);
-        } else 
-        {
+        } else {
           auto icon_id = Basic::getAppIconName(command, EMBLEM_RUN);
-          this->set_icon_id(icon_id);
-        }
-
+          //if (strcmp(icon_id, EMBLEM_RUN))
+            //this->set_icon_id(icon_id);
+        }*/
         gchar *tip = g_strdup_printf(" %s=%d\n", _("PID"), this->grandchild()); 
         gint i=40;
         gint j=0;

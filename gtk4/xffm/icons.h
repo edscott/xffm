@@ -68,7 +68,6 @@
 #define EMBLEM_START_HERE "emblem-start-here"
 #define EMBLEM_BAK "emblem-bak"
 #define EMBLEM_TERMINAL "emblem-terminal"
-#define EMBLEM_TERMINAL_EXEC "utilities-terminal"
 #define EMBLEM_ABOUT "emblem-about"
 #define EMBLEM_WARNING "dialog-warning"
 #define EMBLEM_ERROR "dialog-error"
