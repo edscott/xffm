@@ -26,17 +26,37 @@ namespace xf {
       if (!command) return icon_id;
       auto args = getVector(command, " ");
       icon_id = g_path_get_basename(args[0]);
-      if (strcmp(icon_id, "xterm")==0 || strcmp(icon_id, "konsole")==0){
-        g_free(icon_id);
-        g_strfreev(args);
-        return g_strdup(OPEN_TERMINAL);
+      const char *token[]={
+        "make","cmake",
+        "xffgr","xffgr",
+        "xterm","konsole",
+        "xffm","xffm4",
+        NULL
+      };
+      const char *tokenIcon[]={
+        EMBLEM_M,EMBLEM_M,
+        EMBLEM_FIND,EMBLEM_FIND,
+        OPEN_TERMINAL,OPEN_TERMINAL,
+        EMBLEM_NEW_WINDOW,EMBLEM_NEW_WINDOW, 
+        NULL
+      };
+      // Fixed icons.
+      auto q = tokenIcon;
+      for (auto p=token; *p && *q; p++,q++){
+        if (strcmp(*p, icon_id)==0){
+          g_free(icon_id);
+          g_strfreev(args);
+          return g_strdup(*q);
+        }
       }
+      // Application icons.
       if (gtk_icon_theme_has_icon (iconTheme, icon_id)){
         g_strfreev(args);
         return g_strdup(icon_id);
       }
       g_strfreev(args);
       g_free(icon_id);
+      // Default run icon.
       return g_strdup(defaultIconName);
     }
     
@@ -734,7 +754,7 @@ public:
     static 
     GtkButton *newButtonX(const gchar *icon, const gchar *tooltipText){
       auto button = GTK_BUTTON(gtk_button_new());
-      auto Image = GTK_WIDGET(getImage(icon, 18));
+      auto Image = GTK_WIDGET(getImage(icon, 20));
       gtk_button_set_child (button,Image);
       //auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
       setTooltip(GTK_WIDGET(button), tooltipText);
@@ -766,7 +786,7 @@ public:
         else setTooltip(GTK_WIDGET(button), tooltipText);
       }
       if (icon) {
-        auto Image = GTK_WIDGET(getImage(icon, 18));
+        auto Image = GTK_WIDGET(getImage(icon, 20));
         gtk_menu_button_set_child (button,Image);
       }
 

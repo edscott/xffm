@@ -430,6 +430,10 @@ public:
       gtk_widget_grab_focus(GTK_WIDGET(Child::getInput()));
      
     }
+    void hideWindow(void){
+        gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
+        Basic::flushGTK();
+    }
 private: 
 
     void zapPage(GtkWidget *child){
@@ -444,11 +448,12 @@ private:
       Child::remove(child);
 
       if (g_list_length(pageList_) == 0){
-        gtk_widget_set_visible (GTK_WIDGET(mainWindow_), FALSE);
+        hideWindow();
         gtk_widget_unparent(GTK_WIDGET(menu_));
         gtk_window_destroy(mainWindow_);
         exitDialogs = true;
       }
+      Basic::flushGTK();
     
       
     }

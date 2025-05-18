@@ -36,7 +36,6 @@ namespace xf {
         _("File type"),
         _("Apply modifications"),
 /*        
-        "test",
         _("Show Clipboard"), // 
         _("Clear Clipboard History"), // 
        _("Color settings"),
@@ -49,6 +48,7 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
+        {"test", (void *) EMBLEM_FIND},
         {_("Empty trash bin"),(void *) EMBLEM_TRASH_FULL}, 
         {_("Paste"),(void *) EMBLEM_PASTE}, 
         {_("Select All"),(void *) EMBLEM_SELECT_ALL}, 
@@ -296,7 +296,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto output = Child::getOutput();
       auto buttonSpace = Child::getButtonSpace();
-      auto xffm = g_strdup_printf("xffm -f %s", path);
+      auto xffm = g_strdup_printf("xffm4 -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
       auto runButton = new RunButton<Type>(EMBLEM_NEW_WINDOW, NULL);
       runButton->init(xffm, childPid, output, path, buttonSpace);
@@ -314,7 +314,7 @@ namespace xf {
       //gtk_widget_set_visible(MainWidget, FALSE);
       Settings::setInteger("window", "width", width);
       Settings::setInteger("window", "height", height);
-        DBG("foo...\n");
+        TRACE("foo...\n");
       auto p = (MainWindow<Type> *)mainWindow_p;
       auto notebook = p->notebook();
       while (gtk_notebook_get_n_pages(notebook) > 1){
