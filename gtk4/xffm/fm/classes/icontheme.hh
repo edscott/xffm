@@ -51,12 +51,12 @@ private:
       }
       g_free(resource_path);
 
-    /*
+    
       const char *rp[] = {"/usr/local/hicolor/scalable/emblems",
                           "/usr/local/hicolor/scalable/stock",NULL};
       gtk_icon_theme_set_resource_path(iconTheme, rp);
     
-    */
+    
     }
   };
 }

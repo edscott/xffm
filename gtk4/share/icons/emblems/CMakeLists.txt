@@ -13,8 +13,10 @@ emblem-blueball.svg
 emblem-bookmark.svg
 emblem-broken.svg
 emblem-chardevice.svg
+emblem-color.svg
 emblem-core.svg
 emblem-disk.svg
+emblem-documents.svg
 emblem-edit.svg
 emblem-exec.svg
 emblem-exit.svg

@@ -714,6 +714,36 @@ public:
       g_free(t);
       return;
     }
+
+      static  GtkIconPaintable *lookupIcon(const char *iconName, int size){
+        TRACE("*** Lookup icon \"%s-%d\"\n", iconName, size);
+        auto icon = gtk_icon_theme_lookup_icon(  //GtkIconPaintable*
+            iconTheme, iconName,
+            NULL, size, 1, GTK_TEXT_DIR_NONE, (GtkIconLookupFlags) 0);
+        //g_object_ref(G_OBJECT(icon));
+        return GTK_ICON_PAINTABLE(icon);
+      }
+       
+    static GtkImage *getImage(const char *iconName, int size){
+      auto paintable = GDK_PAINTABLE(lookupIcon(iconName, size));
+      auto image = gtk_image_new_from_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(image), size, size);
+      return GTK_IMAGE(image);
+    }
+
+    static 
+    GtkButton *newButtonX(const gchar *icon, const gchar *tooltipText){
+      auto button = GTK_BUTTON(gtk_button_new());
+      auto Image = GTK_WIDGET(getImage(icon, 18));
+      gtk_button_set_child (button,Image);
+      //auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
+      setTooltip(GTK_WIDGET(button), tooltipText);
+
+      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+      gtk_button_set_has_frame(button, FALSE);
+      return button;
+    }
+
     static 
     GtkButton *newButton(const gchar *icon, const gchar *tooltipText){
       auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
@@ -723,6 +753,29 @@ public:
       gtk_button_set_has_frame(button, FALSE);
       return button;
     }
+
+    static 
+    GtkMenuButton *newMenuButtonX(const gchar *icon, const gchar *tooltipText){
+      if (!tooltipText && !icon) {
+        fprintf(stderr, "Util::newMenuButton(): programing error.\n");
+        exit(1);
+      }
+      auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
+      if (tooltipText) {
+        if (!icon) gtk_menu_button_set_label(button, tooltipText);
+        else setTooltip(GTK_WIDGET(button), tooltipText);
+      }
+      if (icon) {
+        auto Image = GTK_WIDGET(getImage(icon, 18));
+        gtk_menu_button_set_child (button,Image);
+      }
+
+      gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);
+      gtk_menu_button_set_has_frame(button, FALSE);
+      return button;
+    }
+
+
     static 
     GtkMenuButton *newMenuButton(const gchar *icon, const gchar *tooltipText){
       if (!tooltipText && !icon) {

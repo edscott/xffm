@@ -49,7 +49,7 @@ namespace xf {
         /*const char *bIcon[]={OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, NULL};
         const char *bText[]={_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_ NULL};*/
         for (auto p=bIcon; p && *p; p++, q++){
-          auto button = Basic::newButton(*p, *q);
+          auto button = Basic::newButtonX(*p, *q);
           Basic::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
           if (*r) {
             g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(*r), NULL);
@@ -57,7 +57,7 @@ namespace xf {
           }
         }
 
-        auto colorButton = Basic::newMenuButton(DOCUMENT_PROPERTIES, _("Color settings"));
+        auto colorButton = Basic::newMenuButtonX(EMBLEM_COLOR, _("Color settings"));
         auto myColorMenu = new Menu<IconColorMenu<LocalDir> >(_("Colors"));
         myColorMenu->setMenu(colorButton);
         delete myColorMenu;

@@ -217,7 +217,7 @@ notify ( GObject* self, GParamSpec *pspec, void *data){
     gtk_widget_set_sensitive(GTK_WIDGET(sWidget), (selected && strlen(selected) > 0));
   }
 
-  DBG("notify callback, data=%p, item=%d, selected=%s\n", data,item,selected);
+  DBG("notify callback, data=%p, item=%p, selected=%s\n", data,item,selected);
   
 }
 
