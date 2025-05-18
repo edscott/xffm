@@ -11,6 +11,7 @@ class MainWindow: public FMbuttonBox {
     using clipboard_t = ClipBoard<LocalDir>;
 // We need to inherit FMbuttonBox so as to instantiate object.
 private:
+    bool doFind_ = false;
     GtkPopover *menu_ = NULL;
     GList *pageList_=NULL;
     GtkWindow *mainWindow_ = NULL;
@@ -25,8 +26,14 @@ private:
 // Constructor  
 public:
     GtkNotebook *notebook(void) {return notebook_;}
-    MainWindow(const gchar *path){
+    MainWindow(const gchar *path, bool doFind){
         mainWindow_p = (void *)this;
+        doFind_ = doFind;
+        /*hack if (doFind_){
+          if (!path || strcmp(path, _("Bookmarks")) == 0){
+            path = g_get_home_dir();
+          }
+        }*/
         createWindow(); 
         //g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
         addKeyController(GTK_WIDGET(mainWindow_));
@@ -203,11 +210,11 @@ private:
     }
 
     void showWindow(){
-
         GtkWidget *widget = GTK_WIDGET(mainWindow_);
+        Basic::setAsDialog(widget, "xffm", "Xffm");
+        if (doFind_) return; // No X resources for main xffm window.
         gtk_widget_realize(widget);
  
-        Basic::setAsDialog(widget, "xffm", "Xffm");
 
         gtk_widget_realize(GTK_WIDGET(mainWindow_));
         auto input = Child::getInput();

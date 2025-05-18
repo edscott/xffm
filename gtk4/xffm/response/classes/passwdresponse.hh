@@ -69,7 +69,7 @@ class PasswordResponse {
 // We need another class to run inside app's process:
 //    basically just a dialog entry set to password mode.
 public:
-    static void sendPassword(gchar **argv){
+    static void sendPassword(const char **argv){
       gtk_init ();
       IconTheme::init();
 

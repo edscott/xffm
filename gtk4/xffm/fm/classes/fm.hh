@@ -15,7 +15,8 @@ public:
         //ClipBoard<double>::stopClipBoard();  
     }
 
-    Fm(const char *path){
+    Fm(const char *path, bool doFind){
+      DBG("*** doFind = %d\n", doFind);
       // Construct app hash
       MimeApplication::constructAppHash();
       History::init();  
@@ -31,8 +32,17 @@ public:
       setEditor();
       setTerminal();
 
-      xffm_ = new(xf::MainWindow<LocalDir>)(path); // bool is MainClass (only one for now)
+      xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); // bool is MainClass (only one for now)
 
+      if (doFind){
+        xffm_->hideWindow();
+        {
+          using subClass_t = FindResponse<Type>;
+          using dialog_t = DialogComplex<subClass_t>;
+          //Dialogs::info("find in files, test");
+          auto dialogObject = new dialog_t(GTK_WINDOW(MainWidget), Child::getWorkdir());
+        }
+      }
       //g_object_set_data(G_OBJECT(MainWidget), "MainWindow", xffm_);
     }
 

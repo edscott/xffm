@@ -160,6 +160,7 @@ public:
       ~FindResponse (void){
         DBG("*** ~FindResponse\n");
         g_free(folder_);
+        exit(0);
       }
        
       static char **historyVector(GList *list){

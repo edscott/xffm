@@ -40,7 +40,7 @@ static void setupBindText(void){
     setlocale (LC_ALL, "");
 }
 
-static void coreSetup(int argc, char *argv[]){
+static void coreSetup(int argc, const char *argv[]){
     (void) signal (SIGHUP, SIG_IGN);
 #ifdef CORE
     struct rlimit rlim;
@@ -94,7 +94,7 @@ static  gchar *getPath(const char *argv1){
 
 
 int
-main (int argc, char *argv[]) {
+main (int argc, const char *argv[]) {
   TRACE("parent=%d, self=%d\n",getppid(), getpid()); 
   coreSetup(argc, argv);
   xffindProgram = argv[0];
@@ -107,6 +107,12 @@ main (int argc, char *argv[]) {
       exit(1);
   }
 
+  bool doFind = false;
+  if (argv[1] && strcmp(argv[1], "--find") == 0){
+    doFind = true;
+    argv[1] = "-f";
+  }
+
   // Run in foreground if "-f"  given:
   auto foreground = !detachProcess(argv[1]);
   if (foreground) argv[1] = argv[2];
@@ -114,11 +120,12 @@ main (int argc, char *argv[]) {
       DBG("xffm.cc::Cannot chdir to %s (%s)\n", g_get_home_dir(), strerror(errno));
   }*/
  
+
   threadPoolObject = (void *)new xf::ThreadPool;
   
   gchar *path = getPath(argv[1]);
   TRACE("path is %s (%s)\n", path, argv[1]); 
-  auto fm = new(xf::Fm)(path);
+  auto fm = new(xf::Fm)(path, doFind);
 
   auto c = new xf::ClipBoard<xf::LocalDir>;
   auto d = new xf::Dnd<xf::LocalDir>;

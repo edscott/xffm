@@ -91,9 +91,10 @@ namespace xf {
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Child::getWorkdir(childWidget);
 
-      auto find = g_strdup_printf("xffm --find %s", workDir);
+//      auto find = g_strdup_printf("xffm --find %s", workDir);
+      auto find = g_strdup_printf("xffm4 --find %s", workDir);
       pid_t childPid = Run<Type>::shell_command(output, find, false, false);
-
+DBG("*** command = %s\n", find);
       auto runButton = new RunButton<Type>(EMBLEM_FIND, NULL);
       runButton->init(find, childPid, output, workDir, buttonSpace);
       g_free(find);
