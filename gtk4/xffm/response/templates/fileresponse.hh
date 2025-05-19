@@ -377,6 +377,12 @@ public: // Free functions.
       auto subClass = (SubClassType *)data;
       TRACE("*** getDirectory Folder = %s\n", subClass->folder());
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
+auto buffer=gtk_entry_get_buffer(entry);
+auto text = gtk_entry_buffer_get_text(buffer);
+DBG("Entry value  %s exists=%d\n", text, g_file_test(text,G_FILE_TEST_EXISTS));
+if (g_file_test(text,G_FILE_TEST_EXISTS)) {
+  subClass->folder(text);
+}
       //getDirectoryObject(subClass, entry);
       auto parent = subClass->dialog();
       //getDirectoryObject(parent, subClass, entry);

@@ -26,7 +26,11 @@ class  mountResponse {
     const char *path(void){return path_;}
 public:
     char *folder(){return  folder_;}
-    void folder(const char *value){folder_ = value;}
+    void folder(const char *value){
+      g_free(folder_);
+      folder_ = g_strdup(value);
+    }
+
     const char *mountSrc(void){return mountSrc_;}
     
     ~mountResponse(void){
