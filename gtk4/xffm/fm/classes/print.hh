@@ -376,6 +376,7 @@ typedef struct lpterm_colors_t {
   static
   GtkTextTag *
   resolve_tag (GtkTextBuffer * buffer, const gchar * id) {
+      if (!id || !strlen(id)) return NULL;
       lpterm_colors_t lpterm_colors_v[] = {
 // xterm colors
           // specific
@@ -465,7 +466,7 @@ typedef struct lpterm_colors_t {
       }
 
       if (!tag) {
-        fprintf(stderr,"***Error:: resolve_tag(): No GtkTextTag for %s\n", id);
+        DBG("***Error:: resolve_tag(): No GtkTextTag for %s\n", id);
       }
       return tag;
   }

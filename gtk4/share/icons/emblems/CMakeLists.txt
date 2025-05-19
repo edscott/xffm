@@ -24,6 +24,7 @@ emblem-favourite.svg
 emblem-find.svg
 emblem-flash.svg
 emblem-floppy.svg
+emblem-folder.svg
 emblem-gentoo.svg
 emblem-graphics.svg
 emblem-grayball.svg

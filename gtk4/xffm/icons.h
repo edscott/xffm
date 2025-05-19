@@ -74,7 +74,7 @@
 #define EMBLEM_INVERT "emblem-invert"
 #define EMBLEM_QUESTION "dialog-question-symbolic"
 #define EMBLEM_TOGGLE "emblem-toggle"
-#define EMBLEM_FOLDER_OPEN "document-open"
+#define EMBLEM_FOLDER_OPEN "emblem-folder"
 #define EMBLEM_RESET "process-reset"
 #define EMBLEM_FIND "emblem-find"
 //#define EMBLEM_ "emblem-"
