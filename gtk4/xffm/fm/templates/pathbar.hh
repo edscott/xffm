@@ -98,7 +98,7 @@ namespace xf {
       if (strcmp(path, "xffm:goto") == 0){
         auto dialogObject = new DialogPrompt<jumpResponse<Type> >;
         auto dialog = dialogObject->dialog();
-        dialogObject->setParent(GTK_WINDOW(MainWidget));
+        dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
         dialogObject->run();
       }
       

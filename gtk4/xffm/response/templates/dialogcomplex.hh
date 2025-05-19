@@ -102,8 +102,8 @@ namespace xf
       } else {
         Basic::context_function(subClass->asyncNo, data);
       }
-      if (MainWidget && GTK_IS_WINDOW (MainWidget)) {
-        Basic::present(GTK_WINDOW(MainWidget));
+      if (Child::mainWidget() && GTK_IS_WINDOW (Child::mainWidget())) {
+        Basic::present(GTK_WINDOW(Child::mainWidget()));
       }
       TRACE("run_f:: Response is %p\n", response);
       // object will now be deleted.

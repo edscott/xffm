@@ -36,6 +36,8 @@ public:
           }
         }*/
         createWindow(); 
+        Child::mainWidget(GTK_WIDGET(mainWindow_));
+        
         //g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
         addKeyController(GTK_WIDGET(mainWindow_));
           // for page: startDeviceMonitor();
@@ -47,7 +49,7 @@ public:
         showWindow();
           
         
-        g_object_set_data(G_OBJECT(MainWidget), "MainWindow", this);
+        g_object_set_data(G_OBJECT(mainWindow_), "MainWindow", this);
     }
 
     ~MainWindow(void){
@@ -175,8 +177,10 @@ private:
     static gboolean updateButtons( GtkEventControllerMotion* self,
                     double x, double y, void *data) {
         //DBG("update buttons....\n");
-        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
+        if (pasteButton) {
+          gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
+        }
         return FALSE;
     }
 
@@ -192,10 +196,9 @@ private:
     
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
-        //MainWidget = GTK_WIDGET(mainWindow_);
-        //addMotionController(MainWidget);
+        //addMotionController(mainWindow_);
         auto dropController = Dnd<LocalDir>::createDropController(NULL);
-        gtk_widget_add_controller (MainWidget, GTK_EVENT_CONTROLLER (dropController));
+        gtk_widget_add_controller (GTK_WIDGET(mainWindow_), GTK_EVENT_CONTROLLER (dropController));
 
         g_object_set_data(G_OBJECT(mainWindow_), "windowObject", (void *)this);
 
@@ -204,7 +207,7 @@ private:
         // So we give it a big size, so drag motion does not fail
         // and then put it to the correct user saved size.
         gtk_window_set_default_size(mainWindow_, 5000, 5000);
-        //gtk_widget_set_size_request(MainWidget, windowW_, windowH_);
+        //gtk_widget_set_size_request(mainWindow_, windowW_, windowH_);
         windowW_ = Settings::getInteger("window", "width");
         windowH_ = Settings::getInteger("window", "height");
         gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
@@ -276,7 +279,6 @@ private:
 
     }
 
-#if 10
 private:
 
 
@@ -299,7 +301,7 @@ private:
 public:
 
       static void *threadReload(void *data){
-        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
         TRACE("threadReload waiting for condition...\n");
         c->conditionWait();
         TRACE("Go ahead condition received.\n");
@@ -308,67 +310,6 @@ public:
         return NULL;
       }
     
-
-
-
-#else
-private:   
-     static void *reloadAll(void *data){
-        auto arg = (void **)data;
-        auto path = (const char *)arg[0];
-        auto value_p = (double *)arg[1];
-        auto adjustment = GTK_ADJUSTMENT(arg[2]);
-        
-        auto notebook = GTK_NOTEBOOK(mainNotebook);
-        auto n = gtk_notebook_get_n_pages(notebook);
-        for (int i=0; i<n; i++){
-          auto child = gtk_notebook_get_nth_page(notebook, i);
-          auto gridview_p = (GridView<Type> *)Child::getGridviewObject(child);
-          auto store = gridview_p->store();
-          if (g_object_get_data(G_OBJECT(store), "xffm::root")) continue;
-          if (g_object_get_data(G_OBJECT(store), "xffm::fstab")) continue;
-          if (strcmp(gridview_p->path(), path)) {
-            DBG("skipping %s\n", gridview_p->path());
-            continue;
-          }
-          bool current = ((void *)Child::getGridviewObject() == (void *)gridview_p);
-          if (current) continue;
-
-          Workdir<Type>::setWorkdir(path,child);
-        }
-
-        Workdir<Type>::setWorkdir(path);
-        Basic::context_function(resetPosition, arg);
-
-        g_free(arg[0]);
-        g_free(arg[1]);
-        g_free(arg);
-        return NULL;
-      }
-
-      static void *threadReload(void *data){
-        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-        TRACE("threadReload waiting for condition...\n");
-        c->conditionWait();
-        TRACE("Go ahead condition received.\n");
-        
-        Basic::context_function(reloadAll, data);
-        return NULL;
-      }
-
-public:
-     
-
-/*    static void update(char *path){
-        TRACE("*** page=%p, scrolledWindow=%p, adjustmentValue= %lf\n", page_p, scrollW, value);
-        // get scroll position arg[1] = ; 
-
-        pthread_t thread;
-        pthread_create(&thread, NULL, threadReload, (void *)path);
-        pthread_detach(thread);
-
-    }*/
-#endif
 
     static void update(char *path){
         auto page_p = (FMpage *)Child::page();
@@ -422,10 +363,6 @@ public:
         auto menu = myPathbarMenu->getMenu(title);
         g_free(title);
         g_object_set_data(G_OBJECT(pathbar_), "menu", menu);
-        // Important: must use both of the following instructions:
-        //gtk_popover_set_default_widget(menu, GTK_WIDGET(pathbar_));
-        //gtk_popover_set_default_widget(menu, GTK_WIDGET(MainWidget));
-        //gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(MainWidget));
         TRACE("menu parent = %p (should be null)\n", gtk_widget_get_parent(GTK_WIDGET(menu)));
         gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(pathbar_));
         Print::addMenu(menu, GTK_WIDGET(pathbar_));
@@ -497,7 +434,7 @@ private:
         gtk_widget_set_sensitive(GTK_WIDGET(copyButton), false);
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
       } else {
-        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(mainWindow_), "ClipBoard");
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         auto bitset = gtk_selection_model_get_selection(selection);
         gtk_widget_set_sensitive(GTK_WIDGET(cutButton), (gtk_bitset_get_size(bitset) > 0));
@@ -518,7 +455,7 @@ private:
     static void mainPaste(GtkButton * button, void *data){
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto target = g_strdup(gridView_p->path());
-      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (!c->validClipBoard()){
         // Should not happen.
         Print::printWarning(Child::getOutput(), g_strconcat(_("Invalid clip"), "\n", NULL));
@@ -533,7 +470,7 @@ private:
       
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto selectionList = gridView_p->getSelectionList();
-      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         c->cutClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
@@ -546,7 +483,7 @@ private:
     static void mainCopy(GtkButton * button, void *data){
       auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
       auto selectionList = gridView_p->getSelectionList();
-      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         c->copyClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
@@ -561,7 +498,7 @@ private:
       notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
       mainNotebook = notebook_;
       
-      g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
+      g_object_set_data(G_OBJECT(mainWindow_), "notebook", notebook_);
       gtk_notebook_set_scrollable (notebook_, TRUE);
 
       longPressImage_ = gtk_label_new("");
@@ -639,9 +576,9 @@ private:
 
       mkNotebook();
       Basic::boxPack0(hbox1, GTK_WIDGET(notebook_),  TRUE, TRUE, 0);
-      g_object_set_data(G_OBJECT(MainWidget), "notebook", notebook_);
+      g_object_set_data(G_OBJECT(mainWindow_), "notebook", notebook_);
 
-      auto hbox2 = this->mkVbuttonBox();  // More precise.  
+      auto hbox2 = this->mkVbuttonBox(mainWindow_);  // More precise.  
       Basic::boxPack0(mainBox, GTK_WIDGET(hbox2),  FALSE, FALSE, 0);
 
       return GTK_WIDGET(mainBox);
@@ -707,7 +644,7 @@ private:
       auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
       //auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
       //gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
-      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
       
       if (removeB) gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));

@@ -155,7 +155,7 @@ namespace xf {
         DBG("Encrypt file \"%s\"\n", path);
       }
       DBG("open bcrypt dialog...\n");
-      auto parent = GTK_WINDOW(MainWidget);
+      auto parent = GTK_WINDOW(Child::mainWidget());
       try {
         new Bfish<Type>(parent, path);
       } catch(int errorCode) {
@@ -215,11 +215,11 @@ namespace xf {
         if (selectionList) {
           TRACE("selectionList = %p\n", selectionList);
          // auto list = getSelectionList();
-         // new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
-          new OpenWith<bool>(GTK_WINDOW(MainWidget), NULL, selectionList);
+         // new OpenWith<bool>(GTK_WINDOW(Child::mainWidget()), path);
+          new OpenWith<bool>(GTK_WINDOW(Child::mainWidget()), NULL, selectionList);
         }  
       } else {
-        new OpenWith<bool>(GTK_WINDOW(MainWidget), path, NULL);
+        new OpenWith<bool>(GTK_WINDOW(Child::mainWidget()), path, NULL);
       }
       g_free(path);
     }
@@ -232,7 +232,7 @@ namespace xf {
       else {TRACE("mount item path is %s\n", path);}
       
       auto folder = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
-      auto parent = GTK_WINDOW(MainWidget);
+      auto parent = GTK_WINDOW(Child::mainWidget());
       new Mount<Type>(parent, folder, path);
       g_free(folder);
       g_free(path);
@@ -325,7 +325,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
-      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
@@ -350,7 +350,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
-      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         TRACE("multiple selection...list=%p menu=%p\n", selectionList, menu);
         // do your thing
@@ -409,7 +409,7 @@ namespace xf {
         auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
         auto path = g_file_get_path(file);
 
-      new OpenWith<bool>(GTK_WINDOW(MainWidget), path);
+      new OpenWith<bool>(GTK_WINDOW(Child::mainWidget()), path);
       g_free(path);*/
  
     }

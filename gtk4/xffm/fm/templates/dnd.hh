@@ -14,6 +14,10 @@ class Dnd {
   GdkDrag *drag_ = NULL;
   bool dragOn_ = false;
 public:
+
+    Dnd(void){
+      g_object_set_data(G_OBJECT(xf::Child::mainWidget()), "Dnd", this);
+    }
       //bool dragging(void) {return dragging_;}
       //void dragging(bool value) {dragging_ = value;}
     bool dragOn(void) {return dragOn_;}
@@ -45,7 +49,7 @@ public:
         auto gridView_p = (GridView<Type> *)data;
         if (gridView_p->X() <= 0.1 && gridView_p->Y() <= 0.1) return true;
         graphene_rect_t bounds;
-        if (!gtk_widget_compute_bounds (gridView_p->view(), MainWidget, &bounds)){
+        if (!gtk_widget_compute_bounds (gridView_p->view(), Child::mainWidget(), &bounds)){
           DBG("** Error:: viewMotion: should not happen\n");
           return true;
         }
@@ -59,7 +63,7 @@ public:
         return false;
     }
 
-    // x,y are in MainWidget frame of reference.
+    // x,y are in Child::mainWidget() frame of reference.
     bool startDrag(GtkEventControllerMotion* self, double x, double y, void *data){
        if (this->dragOn()) {
           TRACE("Dnd::startDrag return true on this->dragOn() == true\n");
@@ -435,7 +439,7 @@ static void *readAction(void *arg){
     double Y = *y;
     
     graphene_rect_t bounds;
-    if (!gtk_widget_compute_bounds (GTK_WIDGET(pathbar), MainWidget, &bounds)) {
+    if (!gtk_widget_compute_bounds (GTK_WIDGET(pathbar), Child::mainWidget(), &bounds)) {
       DBG("*** Error::getGridCoordinates(): should not happen\n");
       return false;
     }
@@ -466,7 +470,7 @@ static void *readAction(void *arg){
     double Y = *y;
     auto gridview_p = (GridView<Type> *)data;
     graphene_rect_t bounds;
-    if (!gtk_widget_compute_bounds (GTK_WIDGET(gridview_p->view()), MainWidget, &bounds)) {
+    if (!gtk_widget_compute_bounds (GTK_WIDGET(gridview_p->view()), Child::mainWidget(), &bounds)) {
       DBG("*** Error::getGridCoordinates(): should not happen\n");
       return false;
     }
@@ -515,7 +519,7 @@ private:
       auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
       auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
       graphene_rect_t bounds;
-//      if (gtk_widget_compute_bounds (imageBox, MainWidget, &bounds)) {
+//      if (gtk_widget_compute_bounds (imageBox, Child::mainWidget(), &bounds)) {
       if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
         xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
         yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
@@ -670,10 +674,10 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
       double pathbarTail=0;
       double gridviewTail=0;
       graphene_rect_t bounds;   
-      if (gtk_widget_compute_bounds (GTK_WIDGET(pathbar), MainWidget, &bounds)) {
+      if (gtk_widget_compute_bounds (GTK_WIDGET(pathbar), Child::mainWidget(), &bounds)) {
         pathbarTail = bounds.origin.y + bounds.size.height;
       }
-      if (gtk_widget_compute_bounds (GTK_WIDGET(gridview_p->view()), MainWidget, &bounds)) {
+      if (gtk_widget_compute_bounds (GTK_WIDGET(gridview_p->view()), Child::mainWidget(), &bounds)) {
         gridviewTail = bounds.origin.y + bounds.size.height;
       }
       if (y < pathbarTail || y > gridviewTail){
@@ -712,7 +716,7 @@ private:
          "<span color=\"green\">", _("Source"),  ": </span>", source, "\n",
          "<span color=\"black\">", block, "\n</span>", NULL);
       
-      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(Child::mainWidget()), "Dnd");
 
       for (auto p=files; p && *p; p++){
         if (g_file_test(*p, G_FILE_TEST_IS_DIR)){
@@ -727,7 +731,7 @@ private:
       }
       if (strcmp(source, target)) {
         auto dialogObject = new DialogButtons<dndResponse>;
-        dialogObject->setParent(GTK_WINDOW(MainWidget));
+        dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
 
         dialogObject->setLabelText(markup);
         TRACE("create dialogObject=%p\n", dialogObject); 

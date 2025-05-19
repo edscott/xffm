@@ -530,7 +530,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         }
         // pasteboard test
         {
-          auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+          auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
           auto widget = g_object_get_data(G_OBJECT(popover), _("Paste"));
           gtk_widget_set_visible(GTK_WIDGET(widget), c->validClipBoard());
         }
@@ -708,7 +708,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       if (isDir){
         auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
         auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
-        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
         if (c->validClipBoard()){
           gtk_widget_set_visible(GTK_WIDGET(paste), true);
           gtk_widget_set_visible(GTK_WIDGET(nopaste), false);
@@ -892,7 +892,7 @@ public:
                     gdouble y,
                     gpointer data) 
     {
-      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<LocalDir> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "Dnd");
       auto dragOn = d->startDrag(self, x, y, data);
       if (dragOn) {
         TRACE("Gridview::viewMotion() dragOn() == true, return true\n");

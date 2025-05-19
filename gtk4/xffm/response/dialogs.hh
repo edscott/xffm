@@ -42,7 +42,7 @@ namespace xf
     public:
     static void info(const char *text){
       auto dialogObject = new DialogTimeout<infoResponse>;
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       dialogObject->setLabelText(text);
 
       DBG("create dialogObject=%p\n", dialogObject); 
@@ -55,7 +55,7 @@ namespace xf
       auto dialogObject = new DialogButtons<rmResponse>;
       auto dialog = dialogObject->dialog();
       g_object_set_data(G_OBJECT(dialog), "info", info);
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
 
       auto text = g_strdup_printf(_("Delete '%s'"), g_file_info_get_name(info));
       auto markup = g_strdup_printf("<span color=\"red\">%s</span>\n", text);
@@ -83,7 +83,7 @@ namespace xf
       auto dialog = dialogObject->dialog();
       g_object_set_data(G_OBJECT(dialog), "menu", menu);
       g_object_set_data(G_OBJECT(dialog), "selectionList", selectionList);
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       dialogObject->subClass()->setDefaults(dialog, dialogObject->label());
       dialogObject->run();
       return;

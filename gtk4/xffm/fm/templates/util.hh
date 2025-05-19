@@ -51,7 +51,7 @@ namespace xf {
 
     
     static void *reloadAll_f(void *data){
-        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
         auto n = gtk_notebook_get_n_pages(notebook);
         for (int i=0; i<n; i++){
           auto child = gtk_notebook_get_nth_page(notebook, i);
@@ -109,7 +109,7 @@ namespace xf {
       auto textviewName = (const char *) data;
       auto value = gtk_range_get_value(self);
       int v = value;
-      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
       auto n = gtk_notebook_get_n_pages(notebook);
       char buf[32];
 
@@ -148,10 +148,10 @@ namespace xf {
       gtk_popover_popdown(menu);
       
       auto dialog = gtk_color_dialog_new();
-      //gtk_widget_set_parent(GTK_WIDGET(dialog), MainWidget);
+      //gtk_widget_set_parent(GTK_WIDGET(dialog), Child::mainWidget());
       gtk_color_dialog_set_modal (dialog, TRUE);
       gtk_color_dialog_set_title (dialog, "Color dialog");
-      gtk_color_dialog_choose_rgba (dialog, GTK_WINDOW(MainWidget), 
+      gtk_color_dialog_choose_rgba (dialog, GTK_WINDOW(Child::mainWidget()), 
           NULL, NULL, Util::setColor, data);
     }
 

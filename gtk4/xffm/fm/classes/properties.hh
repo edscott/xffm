@@ -199,7 +199,7 @@ private:
       gtk_widget_realize(GTK_WIDGET(dialog_));
       Basic::setAsDialog(GTK_WIDGET(dialog_), "xfproperties", "Xfproperties");
 #if 10
-       // gtk_widget_set_parent(GTK_WIDGET(dialog_), MainWidget);
+       // gtk_widget_set_parent(GTK_WIDGET(dialog_), Child::mainWidget());
         gtk_window_set_destroy_with_parent(dialog_, true);
 #endif
       gtk_window_present(dialog_);

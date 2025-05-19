@@ -58,7 +58,7 @@ class cpDropResponse {
     }
 
     static void performPasteAsync(const char *target){
-      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       auto text = c->clipBoardCache();
       gchar **files = g_strsplit(text, "\n", -1);
       if (!files) {
@@ -76,7 +76,7 @@ class cpDropResponse {
 
       auto dialogObject = new DialogDrop<cpDropResponse>;
       auto dialog = dialogObject->dialog();
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       dialogObject->setCloseBox("delete", _("Cancel"));
       dialogObject->subClass()->copy(mode);
      

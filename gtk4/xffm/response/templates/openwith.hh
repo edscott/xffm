@@ -10,7 +10,7 @@ class OpenWith {
    using dialog_t = DialogBasic<LocalDir >;
     GtkEventController *raiseController_ = NULL;
     GtkWindow *dialog_;
-    GtkWindow *parent_= GTK_WINDOW(MainWidget);
+    GtkWindow *parent_= GTK_WINDOW(Child::mainWidget());
     time_t timeout_;
     char *path_ = NULL;
     GtkProgressBar *timeoutProgress_;
@@ -438,7 +438,7 @@ private:
         run(object);
         object->freeSelectionList();
         object->timeout_=-1;
-        gtk_window_present(GTK_WINDOW(MainWidget));
+        gtk_window_present(GTK_WINDOW(Child::mainWidget()));
     }
  
 
@@ -451,7 +451,7 @@ private:
       auto object = (OpenWith *)data;
       object->freeSelectionList();
       object->timeout_=-1;
-        gtk_window_present(GTK_WINDOW(MainWidget));
+        gtk_window_present(GTK_WINDOW(Child::mainWidget()));
     }
     
     static void
@@ -474,7 +474,7 @@ private:
         g_free(command);
         object->freeSelectionList();
         object->timeout_=-1;
-        gtk_window_present(GTK_WINDOW(MainWidget));
+        gtk_window_present(GTK_WINDOW(Child::mainWidget()));
     }
 /*
     static void
@@ -490,7 +490,7 @@ private:
       auto object = (OpenWith *)data;
       object->timeout_=-1;
       object->freeSelectionList();
-        gtk_window_present(GTK_WINDOW(MainWidget));
+        gtk_window_present(GTK_WINDOW(Child::mainWidget()));
 
       return TRUE;
     }

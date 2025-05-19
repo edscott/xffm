@@ -152,7 +152,7 @@ private:
         TRACE("xffm:goto\n");
     /*    auto dialogObject = new DialogPrompt<jumpResponse<DirectoryClass> >;
         auto dialog = dialogObject->dialog();
-        dialogObject->setParent(GTK_WINDOW(MainWidget));
+        dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
         dialogObject->run();*/
       }
       

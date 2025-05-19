@@ -8,8 +8,10 @@ private:
 
   History *_history;
   MainWindow<LocalDir> *xffm_;
+  GtkWindow *mainWindow_ = NULL;
 public:
     History *history(void) { return _history;}
+    GtkWidget *mainWidget(void){return GTK_WIDGET(mainWindow_);}
     ~Fm(void){
       //delete xffm_;
         //ClipBoard<double>::stopClipBoard();  
@@ -40,15 +42,17 @@ public:
           using dialog_t = DialogComplex<subClass_t>;
           //Dialogs::info("find in files, test");
           auto dialogObject = new dialog_t(NULL, path);
-          MainWidget = GTK_WIDGET(dialogObject->dialog());
-          //auto dialogObject = new dialog_t(GTK_WINDOW(MainWidget), Child::getWorkdir());
+          mainWindow_ = dialogObject->dialog();
+          Child::mainWidget(GTK_WIDGET(mainWindow_));
         }
         return;
       }
       
-      //g_object_set_data(G_OBJECT(MainWidget), "MainWindow", xffm_);
+      //g_object_set_data(G_OBJECT(Child::mainWidget()), "MainWindow", xffm_);
       xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); // bool is MainClass (only one for now)
-      MainWidget = GTK_WIDGET(xffm_->mainWindow());     
+
+      //mainWindow_ = xffm_->mainWindow();
+      //Child::mainWidget(GTK_WIDGET(mainWindow_));
     }
 
     static const gchar *getEditor(){

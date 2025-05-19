@@ -25,7 +25,7 @@ public:
         return NULL;
       }
       Workdir<Type>::setWorkdir(path, true);
-      gtk_window_present(GTK_WINDOW(MainWidget));
+      gtk_window_present(GTK_WINDOW(Child::mainWidget()));
       g_free(path);
       TRACE("asyncYes\n");
       return NULL;

@@ -464,7 +464,9 @@ typedef struct lpterm_colors_t {
         } 
       }
 
-      if (!tag) fprintf(stderr,"***Error:: resolve_tag(): No GtkTextTag for %s\n", id);
+      if (!tag) {
+        fprintf(stderr,"***Error:: resolve_tag(): No GtkTextTag for %s\n", id);
+      }
       return tag;
   }
 
@@ -583,7 +585,7 @@ typedef struct lpterm_colors_t {
         }*/
 
         graphene_rect_t grect;
-        if (!gtk_widget_compute_bounds (GTK_WIDGET(vpane), MainWidget, &grect)){
+        if (!gtk_widget_compute_bounds (GTK_WIDGET(vpane), Child::mainWidget(), &grect)){
           fprintf(stderr, "show_text_buffer_f:: should not happen.\n");
         }
 

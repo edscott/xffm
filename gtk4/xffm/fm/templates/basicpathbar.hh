@@ -264,8 +264,8 @@ namespace xf {
         //
         TRACE("*** togglePathbar: %s\n", path);
         GList *children_list = Basic::getChildren(pathbar);
-        if (gtk_widget_get_realized(MainWidget)) showWhatFits(pathbar, path, children_list);
-        else {TRACE("MainWidget not yet realized...\n");}
+        if (gtk_widget_get_realized(Child::mainWidget())) showWhatFits(pathbar, path, children_list);
+        else {TRACE("Child::mainWidget() not yet realized...\n");}
  
         // set all texts in blue.
         GList *children = g_list_first(children_list);
@@ -348,9 +348,9 @@ namespace xf {
 
       if (!gtk_widget_get_realized(GTK_WIDGET(pathbar))){
         // Take window width.
-        if (gtk_widget_get_realized(GTK_WIDGET(MainWidget))){
-          if (!gtk_widget_compute_bounds(GTK_WIDGET(MainWidget), GTK_WIDGET(MainWidget), &bounds)) {
-            DBG("***Error:: gtk_widget_compute_bounds(MainWidget). Widget realized?\n");
+        if (gtk_widget_get_realized(GTK_WIDGET(Child::mainWidget()))){
+          if (!gtk_widget_compute_bounds(GTK_WIDGET(Child::mainWidget()), GTK_WIDGET(Child::mainWidget()), &bounds)) {
+            DBG("***Error:: gtk_widget_compute_bounds(Child::mainWidget()). Widget realized?\n");
           }
         }
       } else {
@@ -358,7 +358,7 @@ namespace xf {
           DBG("***Error:: gtk_widget_compute_bounds(pathbar). Widget realized?\n");
         }
       }
-      TRACE("Window is realized =%d\n", gtk_widget_get_realized(MainWidget));
+      TRACE("Window is realized =%d\n", gtk_widget_get_realized(Child::mainWidget()));
       TRACE("pathbar is realized =%d\n", gtk_widget_get_realized(GTK_WIDGET(pathbar)));
       auto size = &(bounds.size);
       auto width = size->width;

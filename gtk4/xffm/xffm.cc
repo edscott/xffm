@@ -131,13 +131,12 @@ main (int argc, const char *argv[]) {
   
   gchar *path = getPath(argv[1]);
   TRACE("path is %s (%s)\n", path, argv[1]); 
-  auto fm = new(xf::Fm)(path, doFind);
-
+  auto fm = new(xf::Fm)(path, doFind); // 
+ 
+  // Constructors c and d will use global variable Child::mainWidget(). 
   auto c = new xf::ClipBoard<xf::LocalDir>;
   auto d = new xf::Dnd<xf::LocalDir>;
   xf::Bookmarks::initBookmarks();
-  g_object_set_data(G_OBJECT(MainWidget), "ClipBoard", c);
-  g_object_set_data(G_OBJECT(MainWidget), "Dnd", d);
   
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);

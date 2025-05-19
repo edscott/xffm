@@ -8,7 +8,7 @@ namespace xf {
     private:
       GtkBox *vButtonBox_;
     public:
-    GtkBox *mkVbuttonBox(){
+    GtkBox *mkVbuttonBox(GtkWindow *mainWindow){
          const char *bIcon[]={
            EMBLEM_FIND, 
            OPEN_TERMINAL, 
@@ -65,7 +65,7 @@ namespace xf {
       
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
         Basic::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
-        g_object_set_data(G_OBJECT(MainWidget), "buttonBox", vButtonBox_);
+        g_object_set_data(G_OBJECT(mainWindow), "buttonBox", vButtonBox_);
 
         return hbox;
     }
@@ -153,7 +153,7 @@ private:
 
       // reload all pages
       // Bugged. mixes up the workdir of different pages
-      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(mainWindow), "notebook"));
       auto n = gtk_notebook_get_n_pages(notebook);
       
 

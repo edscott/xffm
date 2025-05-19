@@ -264,7 +264,7 @@ namespace xf {
       if (cd(output, text)) return true;
       if (text && strcmp(text, "exit")==0) {
         // close window.
-        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
         auto num = gtk_notebook_get_current_page(notebook);
         auto n = gtk_notebook_get_n_pages(notebook);
         if (n == 1) exit(0);

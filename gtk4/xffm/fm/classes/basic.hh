@@ -1,7 +1,7 @@
 #ifndef BASIC_HH
 #define BASIC_HH
 namespace xf {
-  GList *dialogStack = NULL; // MainWidget dialog stack.
+  GList *dialogStack = NULL; // Child::mainWidget() dialog stack.
   class Basic {
     public:
 

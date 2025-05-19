@@ -7,9 +7,20 @@ static pthread_mutex_t serialMutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_mutex_t childMutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_mutex_t gridViewMutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_mutex_t monitorMutex = PTHREAD_MUTEX_INITIALIZER;
+
+static GtkWidget *_mainWidget = NULL;
 namespace xf {
   class Child {
     public:
+    
+    static void mainWidget(GtkWidget *value){_mainWidget = value;}
+    static GtkWidget * mainWidget(void){
+      if (!_mainWidget){
+        DBG("***Fatal error: Child::mainWidget() returns NULL\n");
+        exit(1);
+      }
+      return _mainWidget;
+    }
       
     static void 
     addMonitor(void *monitor){
@@ -214,7 +225,7 @@ namespace xf {
 
     static const gchar *getWorkdir(GtkWidget *child){
       TRACE("getWorkdir...\n");
-      if (!MainWidget) return NULL;
+      if (!Child::mainWidget()) return NULL;
       if (!child) return g_get_home_dir();
       if (!valid(child)) return g_get_home_dir(); // Page has disappeared.
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
@@ -237,17 +248,17 @@ namespace xf {
         gchar *g = g_strconcat(user,"@",host,":",gg, NULL);
         g_free(host);
         g_free(gg); 
-        gtk_window_set_title(GTK_WINDOW(MainWidget), g);
+        gtk_window_set_title(GTK_WINDOW(Child::mainWidget()), g);
         g_free(g);
         auto basename = g_path_get_basename(path);
-        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+        auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
         auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
         auto label = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "label"));
         gtk_label_set_markup(label, basename);
         g_free(basename);
     }
     static GtkBox *vButtonBox(void){
-      return GTK_BOX(g_object_get_data(G_OBJECT(MainWidget), "buttonBox"));
+      return GTK_BOX(g_object_get_data(G_OBJECT(Child::mainWidget()), "buttonBox"));
     }
     static GtkTextView *getDollar(void){
       auto child = getChild();
@@ -288,8 +299,8 @@ namespace xf {
 
     static GtkWidget *getChild(void){
       //DBG("getChild...\n");
-      if (!MainWidget) return NULL;
-      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(MainWidget), "notebook"));
+      if (!Child::mainWidget()) return NULL;
+      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
       int num = gtk_notebook_get_current_page(notebook);
       GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
       return child;

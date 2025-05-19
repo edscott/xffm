@@ -34,6 +34,7 @@ public:
     }
 
     ClipBoard(void){
+      g_object_set_data(G_OBJECT(xf::Child::mainWidget()), "ClipBoard", this);
       clipBoard_ = gdk_display_get_clipboard(gdk_display_get_default());
       clipBoardSemaphore_ = TRUE;
       new Thread("ClipBoard::startClipBoard()", clipboardThreadF, this);
@@ -77,13 +78,13 @@ public:
 
     static void
     clearPaste(void){
-        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
         c->clearClipBoard();
     }
 
     static bool isCut(const char *path){
-        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-        if (!c) return false; // before clipboard is associated to MainWidget.
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
+        if (!c) return false; // before clipboard is associated to Child::mainWidget().
         if (!c->validClipBoard()) return false;
         auto string = c->clipBoardCache();
         if (strncmp(string, "move", strlen("move")) != 0) return false;
@@ -92,8 +93,8 @@ public:
     }
 
     static bool isCopy(const char *path){
-        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
-        if (!c) return false; // before clipboard is associated to MainWidget.
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
+        if (!c) return false; // before clipboard is associated to Child::mainWidget().
         if (!c->validClipBoard()) return false;
         auto string = c->clipBoardCache();
         if (strncmp(string, "copy", strlen("copy")) != 0) return false;
@@ -119,7 +120,7 @@ public:
 
     static void 
     printClipBoard(void){
-      auto c = (ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       auto string = c->clipBoardCache();
       auto output = Child::getOutput();
       Print::showText(output);
@@ -146,7 +147,7 @@ public:
 #if 0
     static void
     pasteClip(const gchar *target){
-        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
         auto text = c->clipBoardCache();
         gchar **files = g_strsplit(text, "\n", -1);
       
@@ -281,7 +282,7 @@ public:
 
     static int
     clipBoardSize(void){
-        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
         auto text = c->clipBoardCache();
         if (!text) return 0;
         return strlen(text);

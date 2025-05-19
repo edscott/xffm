@@ -188,7 +188,7 @@ public:
     openNewTab(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      auto w = (MainWindow<Type> *)g_object_get_data(G_OBJECT(MainWidget), "MainWindow");
+      auto w = (MainWindow<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "MainWindow");
       auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
       if (!path){
         auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
@@ -215,9 +215,9 @@ public:
     close(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
       gtk_popover_popdown(menu);
-      gtk_widget_set_visible(MainWidget, FALSE);
+      gtk_widget_set_visible(Child::mainWidget(), FALSE);
       exit(0);
-      //gtk_window_destroy(GTK_WINDOW(MainWidget));
+      //gtk_window_destroy(GTK_WINDOW(Child::mainWidget()));
     }
 */
     static void 

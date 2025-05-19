@@ -162,7 +162,7 @@ char buffer[4096];
     static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
       TRACE("setWorkdir...C\n");
       if (pleaseWait()) return false;
-      if (!MainWidget) return false;
+      if (!Child::mainWidget()) return false;
       auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "child"));
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       TRACE("setWorkdir: path=%s, wd path=%s\n", path, wd);
@@ -181,7 +181,7 @@ char buffer[4096];
               gdouble y,
               gpointer object){
         
-      auto d = (Dnd<Type> *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "Dnd");
       d->dropDone(false);
       d->dragOn(true);
 
@@ -257,7 +257,7 @@ char buffer[4096];
         if (mkdir(mountDir, 0750) < 0){
           TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
         }
-        auto parent = GTK_WINDOW(MainWidget);
+        auto parent = GTK_WINDOW(Child::mainWidget());
         new EFS<Type>(parent, mountDir);
         g_free(mountDir);
 
@@ -307,7 +307,7 @@ char buffer[4096];
         setWorkdir(path);
       } else {
         TRACE("mimetype action...\n");
-        new OpenWith<bool>(GTK_WINDOW(MainWidget), path, NULL);
+        new OpenWith<bool>(GTK_WINDOW(Child::mainWidget()), path, NULL);
       }
       g_free(path);
       return TRUE;

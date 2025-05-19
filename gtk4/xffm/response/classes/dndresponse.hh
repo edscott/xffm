@@ -52,7 +52,7 @@ public:
       auto target = dialogObject->subClass()->target();
       auto uriList = dialogObject->subClass()->uriList();
       auto count = dialogObject->subClass()->uriCount();
-      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       
       //dialogObject->timeout(-1);
       auto response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialogObject->dialog()), "response"));
@@ -82,7 +82,7 @@ public:
       g_free(clipContent);
       cpDropResponse::performPasteAsync(target);
 done:
-      gtk_window_present(GTK_WINDOW(MainWidget));
+      gtk_window_present(GTK_WINDOW(Child::mainWidget()));
 
       return NULL;
     }
@@ -91,7 +91,7 @@ done:
       //auto dialogObject = (DialogTimeoutButtons<infoResponse> *)data;
       //dialogObject->timeout(-1);
       TRACE("%s", "Drop cancelled.\n");
-      gtk_window_present(GTK_WINDOW(MainWidget));
+      gtk_window_present(GTK_WINDOW(Child::mainWidget()));
       return NULL;
     }
  

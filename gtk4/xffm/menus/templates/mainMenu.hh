@@ -266,7 +266,7 @@ namespace xf {
 
       //Dialogs::info("find in files, test");
 
-      auto dialogObject = new dialog_t(GTK_WINDOW(MainWidget), Child::getWorkdir());
+      auto dialogObject = new dialog_t(GTK_WINDOW(Child::mainWidget()), Child::getWorkdir());
 
 
       //Dialogs::info("foo and bar");
@@ -280,7 +280,7 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       auto dialogObject = new DialogEntry<EntryResponse>;
-      dialogObject->setParent(GTK_WINDOW(MainWidget));
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       DBG("create dialogObject=%p\n", dialogObject); 
       dialogObject->run();
 
@@ -313,9 +313,9 @@ namespace xf {
       gtk_popover_popdown(menu);
 
       // Save last size.
-      auto width = gtk_widget_get_size(MainWidget,  GTK_ORIENTATION_HORIZONTAL);
-      auto height = gtk_widget_get_size(MainWidget,  GTK_ORIENTATION_VERTICAL);
-      //gtk_widget_set_visible(MainWidget, FALSE);
+      auto width = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_HORIZONTAL);
+      auto height = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_VERTICAL);
+      //gtk_widget_set_visible(Child::mainWidget(), FALSE);
       Settings::setInteger("window", "width", width);
       Settings::setInteger("window", "height", height);
         TRACE("foo...\n");
@@ -340,7 +340,7 @@ namespace xf {
       }
 #endif
       //gtk_widget_unparent(GTK_WIDGET(menu));
-      //gtk_window_destroy(GTK_WINDOW(MainWidget));
+      //gtk_window_destroy(GTK_WINDOW(Child::mainWidget()));
 
       //exitDialogs = true;
     }

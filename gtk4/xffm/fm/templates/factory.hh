@@ -422,7 +422,7 @@ template <class Type>
     openMenu(GtkEventController *eventController, GridView<Type> *gridView_p, double y){
       // This is main context, gridview changes would also be main context.
       if (!Child::validGridView(gridView_p)) return true;
-      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(Child::mainWidget()), "Dnd");
       d->dragOn(true);
       
       auto box = gtk_event_controller_get_widget(eventController);
@@ -451,11 +451,11 @@ template <class Type>
         //  Gtk-WARNING **: Broken accounting of active state for widget 
         GdkDisplay *displayGdk = gdk_display_get_default();
         Display *display = gdk_x11_display_get_xdisplay(displayGdk);
-        GtkNative *native = gtk_widget_get_native(MainWidget);
+        GtkNative *native = gtk_widget_get_native(Child::mainWidget());
         GdkSurface *surface = gtk_native_get_surface(native);
         Window src_w = gdk_x11_surface_get_xid (surface);
-        unsigned int src_width = gtk_widget_get_width(MainWidget);
-        unsigned int src_height = gtk_widget_get_height(MainWidget);
+        unsigned int src_width = gtk_widget_get_width(Child::mainWidget());
+        unsigned int src_height = gtk_widget_get_height(Child::mainWidget());
         int i = round(y);
         
         //XWarpPointer(display, src_w, None, 0, 0, 0, 0, src_width-i, 0);        
@@ -656,7 +656,7 @@ template <class Type>
       gridView_p->x(x);
       gridView_p->y(y);
       graphene_rect_t bounds;
-      if (!gtk_widget_compute_bounds (w, MainWidget, &bounds)) {
+      if (!gtk_widget_compute_bounds (w, Child::mainWidget(), &bounds)) {
         DBG("** Error:: down_f() should not happen. \n");
         return false;
       }
@@ -666,7 +666,7 @@ template <class Type>
           x,y,bounds.origin.x,bounds.origin.y,
           gridView_p->X(),gridView_p->Y());
 
-      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(MainWidget), "Dnd");
+      auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(Child::mainWidget()), "Dnd");
 
       if (button == 1){
         auto store = gridView_p->store();

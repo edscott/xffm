@@ -65,7 +65,7 @@
 
 static const gchar *xffmProgram;
 static const gchar *xffindProgram;
-static GtkWidget *MainWidget = NULL;
+// obsolete: static GtkWidget *MainWidget = NULL;
 static GList *textviewList = NULL;
 static GList *run_button_list = NULL;
 static GHashTable *iconPathHash = NULL;

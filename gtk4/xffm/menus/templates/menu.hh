@@ -167,7 +167,7 @@ namespace xf {
      auto isTextView = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(menu), _("isTextView")));
      TRACE("paste is at button %p\n", paste);
      if (!isTextView && paste) {
-       auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
+       auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
        gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
        auto show =  g_object_get_data(G_OBJECT(menu), _("Show Clipboard"));
        if (show) gtk_widget_set_visible(GTK_WIDGET(show), c->validClipBoard());
