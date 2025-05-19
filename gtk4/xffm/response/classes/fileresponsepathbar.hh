@@ -111,19 +111,19 @@ private:
       auto pathbar = pathbar_p->pathbar();
       auto pathbarHistory_p = pathbar_p->pathbarHistory_p;
       auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-      DBG("gojump: \n");
+      TRACE("gojump: \n");
       auto name = (char *) g_object_get_data(G_OBJECT(eventBox), "name");
-      DBG("gojump: name=%s\n", name);
+      TRACE("gojump: name=%s\n", name);
       auto path = (char *) g_object_get_data(G_OBJECT(eventBox), "path");
-      DBG("gojump: path=%s\n", path);
+      TRACE("gojump: path=%s\n", path);
    
       auto reload_f = pathbar_p->reloadFunction();
       auto reload_data = pathbar_p->reloadData();
 
-      DBG("gojump: eventBox path=%s\n", path);
+      TRACE("gojump: eventBox path=%s\n", path);
       if (strcmp(path, "xffm:back") == 0){
         auto previous = pathbarHistory_p->backHistory();
-        DBG("previous = %s\n", previous);
+        TRACE("previous = %s\n", previous);
         if (previous) BasicPathbar<bool>::updatePathbar(previous, pathbar, false, reload_f, reload_data);
         BasicPathbar<bool>::setRed(pathbar, previous);
         // Too convoluted:

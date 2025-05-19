@@ -125,7 +125,7 @@ public:
     // Just for completeness for now.
     // 
     void *asyncCallbackData(void){
-      DBG("asyncCallbackData...\n");
+      TRACE("asyncCallbackData...\n");
       return (void *) "bar";
     }
 
@@ -149,6 +149,44 @@ private:
       gtk_label_set_markup(GTK_LABEL(displaySelectLabel_), g);
       g_free(g);
       return path;
+    }
+
+    static gboolean
+    cvClick (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *object ){
+      if (n_press != 2) return FALSE;
+      TRACE("cvClick n_press = %d\n", n_press);
+      auto p = (FileResponse *)object;
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+
+      //auto button = gtk_event_controller_get_widget(eventController);
+      //auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
+      auto path = p->getSelectedPath(p->selectionModel());
+      if (!path) return FALSE;     
+     
+      TRACE("Reload treemodel with %s\n", path);
+
+      p->responsePathbar_p->path(path); // new path
+      auto pathbar = p->responsePathbar_p->pathbar(); 
+
+      auto reload_f = p->responsePathbar_p->reloadFunction();
+      auto reload_data = p->responsePathbar_p->reloadData();
+      BasicPathbar<bool>::updatePathbar(path, pathbar, true, reload_f, reload_data);
+      //BasicPathbar<bool>::togglePathbar(path, pathbar); 
+      // set red
+      BasicPathbar<bool>::setRed(pathbar, path);
+      auto columnView = p->getColumnView(path);
+      auto sw = GTK_SCROLLED_WINDOW(p->sw());
+      if (columnView) gtk_scrolled_window_set_child(sw, GTK_WIDGET(columnView));
+      else {
+        auto label = gtk_label_new("empty");
+        gtk_scrolled_window_set_child(sw, label);
+      }
+      return TRUE;
     }
 
     GtkWidget *getColumnView(const char *path){
@@ -175,6 +213,13 @@ private:
         gtk_single_selection_set_selected(selectionModel_, GTK_INVALID_LIST_POSITION);
         auto maxLen = Basic::getMaxNameLen(listModel);
         auto columnView = gtk_column_view_new(GTK_SELECTION_MODEL(selectionModel_));
+        auto gesture1 = gtk_gesture_click_new();
+        gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture1),GTK_PHASE_CAPTURE);
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
+        gtk_widget_add_controller (GTK_WIDGET(columnView), 
+            GTK_EVENT_CONTROLLER(gesture1));    
+        g_signal_connect (G_OBJECT(gesture1) , "released", 
+            EVENT_CALLBACK (cvClick), (void *)this);
         // no good addGestureClick(columnView);
         
         g_object_set_data(G_OBJECT(columnView), "selection", selectionModel_);
@@ -303,7 +348,7 @@ public: // Free functions.
     // 
      static void *asyncYes(void *data){
       auto dialogObject = (DialogComplex<FileResponse> *)data;
-      DBG("%s", "hello world\n");
+      TRACE("%s", "hello world\n");
       const char *path = dialogObject->subClass()->responsePathbar_p->path();
       auto label = dialogObject->subClass()->selectLabel();
       const char *target = gtk_label_get_text(label);
@@ -335,7 +380,7 @@ public: // Free functions.
     //
     static void *asyncNo(void *data){
       auto dialogObject = (DialogComplex<FileResponse> *)data;
-      DBG("goodbye world fileResponse dialog %p\n", dialogObject->dialog());
+      TRACE("goodbye world fileResponse dialog %p\n", dialogObject->dialog());
       return NULL;
     }
 
@@ -377,12 +422,14 @@ public: // Free functions.
       auto subClass = (SubClassType *)data;
       TRACE("*** getDirectory Folder = %s\n", subClass->folder());
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
-auto buffer=gtk_entry_get_buffer(entry);
-auto text = gtk_entry_buffer_get_text(buffer);
-DBG("Entry value  %s exists=%d\n", text, g_file_test(text,G_FILE_TEST_EXISTS));
-if (g_file_test(text,G_FILE_TEST_EXISTS)) {
-  subClass->folder(text);
-}
+      
+      auto buffer=gtk_entry_get_buffer(entry);
+      auto text = gtk_entry_buffer_get_text(buffer);
+      TRACE("Entry value  %s exists=%d\n", text, g_file_test(text,G_FILE_TEST_EXISTS));
+      if (g_file_test(text,G_FILE_TEST_EXISTS)) {
+        subClass->folder(text);
+      }
+      
       //getDirectoryObject(subClass, entry);
       auto parent = subClass->dialog();
       //getDirectoryObject(parent, subClass, entry);
