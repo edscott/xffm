@@ -1,0 +1,694 @@
+#ifndef FINDSIGNALS_HH
+#define FINDSIGNALS_HH
+
+namespace xf
+{
+        ///////////////////   signals  /////////////////////////
+template <class Type>
+class FindSignals {
+    static const gchar *
+    get_time_type(GtkBox *mainBox){
+        if (gtk_toggle_button_get_active ((GtkToggleButton *) g_object_get_data(G_OBJECT(mainBox), "radio1"))){
+            return "-M";
+        }
+        if (gtk_toggle_button_get_active ((GtkToggleButton *) g_object_get_data(G_OBJECT(mainBox), "radio2"))){
+            return "-C";
+        }
+        return "-A";
+    }
+
+    static gboolean
+    on_find_clicked_action (void *data) {
+      auto object = (FindResponse<Type> *)data;
+      //auto mainBox = GTK_BOX(data);
+        TRACE("on_find_clicked_action\n");
+        GtkTextView *textview = object->textview();
+        // Get the search path.
+        GtkEntry *entry = GTK_ENTRY(g_object_get_data(G_OBJECT(object->mainBox()), "path_entry"));
+        auto buffer = gtk_entry_get_buffer(entry);
+        char *path = g_strdup(gtk_entry_buffer_get_text(buffer));
+        /* tilde expansion */
+        if(path[0] == '~'){
+            char *t = g_strconcat(g_get_home_dir(),"/", path+1, NULL);
+            g_free(path);
+            path = t;
+        }
+        /* environment variables */
+        else if(path[0] == '$') {
+            const gchar *p = getenv (path + 1);
+            if(p){
+                g_free(path);
+                path = g_strdup(p);
+            }
+        }
+        if(!path || strlen (path) == 0 || !g_file_test (path, G_FILE_TEST_EXISTS)) {
+            char *message = g_strconcat(strerror (ENOENT), ": ", path, "\n", NULL);
+            Print::printError(textview, message);
+            g_free(path);
+            return FALSE;
+        }
+        fgrData_t *Data = (fgrData_t *)calloc(1,sizeof(fgrData_t));
+        Data->mainBox = object->mainBox();
+        object->Data(Data);
+        Data->object = (void *)object;
+
+        Data->done = FALSE; // (This is redundant with calloc, here just for clarity).
+
+
+        GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(object->mainBox()), "cancel_button"));
+        //gtk_widget_show(cancel);
+        gtk_widget_set_sensitive(cancel, TRUE);
+
+        /* get the parameters set by the user... *****/
+        get_arguments(path, Data);
+
+        fprintf(stderr, "DBG> arguments: \'");
+        for (auto p=Data->argument; p && *p; p++){
+          fprintf(stderr, "%s ", *p);
+        }
+        fprintf(stderr, "\n");
+
+
+        /*
+    // not here: FIXME    
+        if (Data->find_list) {
+            GSList *list = find_list;
+            for (;list && list->data; list=list->next){
+                g_free(list->data);
+            }
+            g_slist_free(find_list);
+            find_list = NULL;
+        }
+    */
+
+        int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
+        //Data->pid = Run<Type>::thread_run(Data, (const gchar **)Data->argument, NULL, NULL, NULL);
+
+        // When the dialog is destroyed on action, then output is going to a
+        // widgets_p away from dialog window, so we let the process run on and on.
+        char *command = g_strdup("");
+        char **p=Data->argument;
+        int k=0;
+        for (;p && *p; p++, k++){
+            if (k==0) {
+              auto base = g_path_get_basename(*p);
+              Basic::concat(&command, base);
+              g_free(base);
+            } else Basic::concat(&command, *p);
+            Basic::concat(&command, " ");
+        }
+        //g_hash_table_replace(controllerHash, GINT_TO_POINTER(Data->pid), command);
+        Print::print(textview, EMBLEM_FIND, "green", g_strconcat( _("Searching..."), "\n", NULL));
+        Print::print(textview, EMBLEM_GREEN_BALL, "blue",
+            g_strdup_printf("%s\n", command));
+        g_free(command);
+        Print::showText(textview);
+
+        Data->pid = Run<Type>::thread_run(Data, (const gchar **)Data->argument, stdout_f, stderr_f, forkCleanup);
+
+        return FALSE;
+    }
+
+        static void getSizeOptions(fgrData_t *Data, int *i){
+          GtkBox *mainBox = Data->mainBox;
+          if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                      g_object_get_data(G_OBJECT(mainBox), "size_greater")))) 
+          {
+               int size_greater = gtk_spin_button_get_value_as_int (
+                  GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(mainBox), "size_greater_spin")));            
+               Data->argument[(*i)++] = g_strdup("-s");
+               Data->argument[(*i)++] = g_strdup_printf("+%d", size_greater);
+          }
+          if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                      g_object_get_data(G_OBJECT(mainBox), "size_smaller")))) 
+          {
+               gint size_smaller = gtk_spin_button_get_value_as_int (
+                  GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(mainBox), "size_smaller_spin")));            
+               Data->argument[(*i)++] = g_strdup("-s");
+               Data->argument[(*i)++] = g_strdup_printf("-%d", size_smaller);
+          }
+        }
+
+        static void getTimeOptions(fgrData_t *Data, int *i){
+          GtkBox *mainBox = Data->mainBox;
+          if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                      g_object_get_data(G_OBJECT(mainBox), "last_months")))) 
+          {
+              Data->argument[(*i)++] = g_strdup((gchar *)get_time_type(mainBox));
+              gint last_months = gtk_spin_button_get_value_as_int (
+                  GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(mainBox), "last_months_spin")));            
+              Data->argument[(*i)++] = g_strdup("-m");
+              Data->argument[(*i)++] = g_strdup_printf("%d", last_months);
+          }
+          else if(gtk_check_button_get_active (GTK_CHECK_BUTTON(
+                      g_object_get_data(G_OBJECT(mainBox), "last_days"))))
+          {
+              Data->argument[(*i)++] = (gchar *)get_time_type(mainBox);
+              gint last_days = gtk_spin_button_get_value_as_int (
+                  GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(mainBox), "last_days_spin")));            
+              Data->argument[(*i)++] = g_strdup("-d");
+              Data->argument[(*i)++] = g_strdup_printf("%d", last_days);
+          }
+          else if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                      g_object_get_data(G_OBJECT(mainBox), "last_hours"))))
+          {
+              Data->argument[(*i)++] = (gchar *)get_time_type(mainBox);
+              gint last_hours = gtk_spin_button_get_value_as_int (
+                  GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(mainBox), "last_hours_spin")));            
+              Data->argument[(*i)++] = g_strdup("-h");
+              Data->argument[(*i)++] = g_strdup_printf("%d", last_hours);
+          }
+          else if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                      g_object_get_data(G_OBJECT(mainBox), "last_minutes"))))
+          {
+              Data->argument[(*i)++] = g_strdup((gchar *)get_time_type(mainBox));
+              gint last_minutes = gtk_spin_button_get_value_as_int (
+                  GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(mainBox), "last_minutes_spin")));            
+              Data->argument[(*i)++] = g_strdup("-k");
+              Data->argument[(*i)++] = g_strdup_printf("%d", last_minutes);
+          }
+        }
+
+      static void getFileOptions(fgrData_t *Data, int *i){
+          GtkBox *mainBox = Data->mainBox;
+        // SUID/EXE
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), _("Executable"))))
+            ||
+            gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                        g_object_get_data(G_OBJECT(mainBox), _("SUID"))))){
+              Data->argument[(*i)++] = g_strdup("-p");
+              if (gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), _("Executable"))))) {
+                Data->argument[(*i)++] = g_strdup("exe");
+              } else {
+                Data->argument[(*i)++] = g_strdup("suid");
+              }
+              return;
+        }
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), _("Octal Permissions")))))
+        {
+            Data->argument[(*i)++] = g_strdup("-o");
+            auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox), "permissions_entry"));
+            auto buffer = gtk_entry_get_buffer(entry);
+            const char *c = gtk_entry_buffer_get_text (buffer);
+            // FIXME: check for valid octal number <= 0777
+            if (c && strlen(c)) Data->argument[(*i)++] = g_strdup(c);
+            else Data->argument[(*i)++] = g_strdup("0666");
+            return;
+        } 
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), "uid"))))
+        {
+            auto dd = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(mainBox), "uid_combo")); 
+            auto item = GTK_STRING_OBJECT(gtk_drop_down_get_selected_item(dd));
+            auto selected = gtk_string_object_get_string(item);
+          
+            if(selected && strlen(selected)) {
+                Data->argument[(*i)++] = g_strdup("-u");
+                struct passwd *pw = getpwnam (selected);
+                if(pw) {
+                    Data->argument[(*i)++] = g_strdup_printf("%d", pw->pw_uid);
+                } else {
+                    Data->argument[(*i)++] = g_strdup_printf("%d",atoi(selected));
+                }
+
+            }
+            return;
+        }
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), "gid"))))
+        {
+            auto dd = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(mainBox), "uid_combo")); 
+            auto item = GTK_STRING_OBJECT(gtk_drop_down_get_selected_item(dd));
+            auto selected = gtk_string_object_get_string(item);
+          
+            if(selected && strlen(selected)) {
+                Data->argument[(*i)++] = g_strdup("-g");
+                struct group *gr = getgrnam (selected);
+                if(gr) {
+                    Data->argument[(*i)++] = g_strdup_printf("%d", gr->gr_gid);
+                } else {
+                    Data->argument[(*i)++] = g_strdup_printf("%d",atoi(selected));
+                }
+
+            }
+            return;
+        }
+
+        
+
+      }
+
+      static void getGrepOptions(fgrData_t *Data, int *i){
+          GtkBox *mainBox = Data->mainBox;
+        if(!gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), "case_sensitive"))))
+        {
+            Data->argument[(*i)++] = g_strdup("-i");
+        } 
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON(
+                    g_object_get_data(G_OBJECT(mainBox), "line_count"))))
+        {
+            Data->argument[(*i)++] = g_strdup("-c");
+        } 
+
+
+        auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox), "grep_entry"));
+        auto buffer = gtk_entry_get_buffer(entry);
+        const char *token = gtk_entry_buffer_get_text(buffer);  
+  
+        //const gchar *token = gtk_entry_get_text(GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox), "grep_entry")));
+        if(token && strlen(token)) {
+              if(gtk_check_button_get_active (GTK_CHECK_BUTTON(
+                        g_object_get_data(G_OBJECT(mainBox), "ext_regexp"))))
+            {
+                Data->argument[(*i)++] = g_strdup("-E");
+            } else {
+                Data->argument[(*i)++] = g_strdup("-e");
+            }
+            Data->argument[(*i)++] = g_strdup(token);
+
+            /* options for grep: ***** */
+            if(!gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                        g_object_get_data(G_OBJECT(mainBox), "look_in_binaries"))))
+            {
+                Data->argument[(*i)++] = g_strdup("-I");
+            }
+            if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                        g_object_get_data(G_OBJECT(mainBox), "match_words"))))
+            {
+                Data->argument[(*i)++] = g_strdup("-w");
+            }
+            else if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                        g_object_get_data(G_OBJECT(mainBox), "match_lines"))))
+            {
+                Data->argument[(*i)++] = g_strdup("-x");
+            }
+            else if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                        g_object_get_data(G_OBJECT(mainBox), "match_no_match"))))
+            {
+                Data->argument[(*i)++] = g_strdup("-L");
+            }
+        }
+      }
+
+    static void
+    get_arguments(gchar *path, fgrData_t *Data){
+        int i=0;
+        GtkBox *mainBox = Data->mainBox;
+
+        /* limit */
+        Data->resultLimit = gtk_spin_button_get_value_as_int (
+                GTK_SPIN_BUTTON (g_object_get_data(G_OBJECT(mainBox), "upper_limit_spin")));
+        Data->resultLimitCounter = 0; // fgr ends with "fgr search complete"
+        Data->argument = (char **)calloc(MAX_COMMAND_ARGS, sizeof(gchar *));
+        if (!Data->argument){
+            std::cerr<<"calloc error at get_arguments()\n";
+            exit(1);
+        }
+        
+        /* the rest */
+        Data->argument[i++] = g_strdup(xffindProgram);
+        Data->argument[i++] = g_strdup("--fgr");
+        Data->argument[i++] = g_strdup("-v"); // (verbose output) 
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), _("Recursive")))))
+        {
+            if(gtk_check_button_get_active (GTK_CHECK_BUTTON(
+                        g_object_get_data(G_OBJECT(mainBox), _("Find hidden files and directories"))))) 
+            {
+                Data->argument[i++] = g_strdup("-r");
+            } else {
+                Data->argument[i++] = g_strdup("-R");
+            }
+        } 
+
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( //?? check this XXX
+                    g_object_get_data(G_OBJECT(mainBox), _("Stay on single filesystem")))))
+        {
+            Data->argument[i++] = g_strdup("-a");
+        } 
+        
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), _("File size"))))) {
+          getSizeOptions(Data, &i);
+        }
+
+
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), _("Specific Time"))))){
+          getTimeOptions(Data, &i);
+        }
+
+        if(gtk_check_button_get_active (GTK_CHECK_BUTTON( 
+                    g_object_get_data(G_OBJECT(mainBox), _("File properties"))))){
+          getFileOptions(Data, &i);
+        }
+
+
+        //  grep options
+        getGrepOptions(Data, &i);
+
+        /* select list */
+
+        auto dd = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(mainBox), "file_type_om")); 
+        auto item = GTK_STRING_OBJECT(gtk_drop_down_get_selected_item(dd));
+        auto ftype = gtk_string_object_get_string(item);
+        //const char *ftype = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(
+                //g_object_get_data(G_OBJECT(mainBox), "file_type_om")));
+        for(int j = 0; ftypes[j] != NULL; j++) {
+            if(ftype && strcmp (ftype, _(ftypes[j])) == 0) {
+                Data->argument[i++] = g_strdup("-t");
+                Data->argument[i++] = g_strdup(ft[j]);
+                break;
+            }
+        }
+
+        auto filterEntry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox), "filter_entry"));
+        auto filterBuffer = gtk_entry_get_buffer(filterEntry);
+        const char *filter = gtk_entry_buffer_get_text(filterBuffer);
+        //const char *filter = gtk_entry_get_text(GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox), "filter_entry")));
+        /* apply wildcard filter if not specified (with dotfiles option) */
+        Data->argument[i++] = g_strdup("-f");
+        if(filter && strlen (filter)) {
+            Data->argument[i++] = g_strdup(filter);
+        } else {
+            Data->argument[i++] = g_strdup("*");
+            Data->argument[i++] = g_strdup("-D");
+        }
+
+        /* last Data->argument is the path */
+        //Data->argument[i++] = g_strdup_printf("\"%s\"", path); g_free(path);
+        Data->argument[i++] = path;
+        Data->argument[i] = (char *)0;
+    }
+
+  public:
+    static void
+    onFindButton (GtkWidget * button, void *data) {
+      auto object = (FindResponse<Type> *)data;
+      DBG("onFindButton...\n");
+        /*if (!controllerHash){
+            controllerHash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
+        }*/
+        GtkTextView *textview = object->textview();
+        
+        //Print::showText(textview);
+        on_find_clicked_action (data);
+        gtk_widget_set_sensitive(GTK_WIDGET(object->findButton()), false);
+    }
+
+    static void
+    edit_command (gpointer data) {
+      auto object = (FindResponse<Type> *)data;
+        GtkWindow *dialog = object->dialog();
+        GtkTextView *textview = object->textview();
+        GSList *list = lastFind;
+
+        /*if (!list || g_slist_length(list) < 1) {
+            rfm_diagnostics(widgets_p, "xffm/stock_dialog-warning",NULL);
+            rfm_diagnostics(widgets_p, "xffm_stderr", _("Search returned no results"), "\n", NULL);
+            return;
+        }*/
+
+        auto editor = Basic::getEditor();
+        if (!editor || strlen(editor)==0){
+          Print::printError(textview, g_strdup_printf("%s\n",
+                        _("No editor for current action.")));
+            return;
+        }
+        TRACE("editor = %s\n", editor);
+        gchar *command;
+        if (Run<Type>::runInTerminal(editor)){
+            command = Run<Type>::mkTerminalLine(editor, "");
+        } else {
+            command = g_strdup(editor);
+        }
+      
+        TRACE("command = %s\n", command);
+
+        for (; list && list->data; list=list->next){
+            gchar *g = g_strconcat(command, " \"", (gchar *)list->data, "\"", NULL);
+            g_free(command);
+            command = g;
+        }
+        TRACE("command args = %s\n", command);
+
+        // Hack: for nano or vi, run in terminal
+        gboolean in_terminal = FALSE;
+        if (strstr(command, "nano") || 
+                (strstr(command, "vi") && !strstr(command, "gvim")))
+        {
+            in_terminal = TRUE;
+        }
+
+        TRACE("thread_run %s\n", command);
+        Run<Type>::thread_run(textview, command, FALSE);
+        //RFM_THREAD_RUN2ARGV(widgets_p, command, in_terminal);
+        
+        //widgets_p->workdir = g_strdup(g_get_home_dir());
+    }
+
+
+    static void
+    onEditButton (GtkWidget * button, gpointer data) {
+      auto object = (FindResponse<Type> *)data;
+      DBG("onEditButton...\n");
+        GtkTextView *textview = object->textview();
+        TRACE("fixme: signals::onEditButton\n");
+        //print_c::print_status(textview, g_strdup("fixme: signals::onEditButton testing run\n"));
+        Print::showText(textview);        
+        //Print::showTextSmall(textview);        
+        edit_command(data);
+    }
+
+    static void
+    onClearButton (GtkWidget * button, gpointer data) {
+      DBG("onClearButton...\n");
+      auto object = (FindResponse<Type> *)data;
+
+        auto textview = object->textview();
+        TRACE("fixme: signals::onClearButton\n");
+        Print::clear_text(textview);
+        auto vpane =object->vpane();
+        gtk_paned_set_position(vpane, 2500);
+    }
+
+    static gboolean
+    freeFgrData(void *data){
+        fgrData_t *Data = (fgrData_t *)data;
+        gchar **a=Data->argument;
+        for (;*a; a++) g_free(*a);
+        g_free(Data->argument);
+        g_free(Data);
+        return FALSE;
+    }
+
+    static gboolean
+    Cleanup (void *data) {
+       fgrData_t *Data = (fgrData_t *)data;
+       TRACE("Cleanup\n");
+       auto object = (FindResponse<Type> *)Data->object;
+       auto mainBox = Data->mainBox;
+       //if (g_hash_table_size(controllerHash) == 0){
+       GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(mainBox), "cancel_button"));
+       gtk_widget_set_sensitive(cancel, false);
+       gtk_widget_set_sensitive(GTK_WIDGET(object->findButton()), true);
+       Basic::flushGTK();
+       
+
+       GtkWidget *edit_button = GTK_WIDGET(g_object_get_data(G_OBJECT(mainBox), "edit_button"));
+       if (g_slist_length(lastFind)){
+            const gchar *editor = Basic::getEditor();
+            if (!editor || strlen(editor)==0){
+                GtkTextView *textview = object->textview();
+                Print::print(textview, EMBLEM_WARNING, 
+                        g_strdup_printf("%s\n", _("No editor for current action.")));
+                return FALSE;
+            }
+            gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
+       } else {
+            gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
+       }
+       if (Data->done) {
+           freeFgrData(Data);
+           return FALSE;
+       }
+       return TRUE;
+    }
+
+
+    static void
+    forkCleanup (void *data) {
+       TRACE("forkCleanup\n");
+        fgrData_t *Data = (fgrData_t *)data;
+        //g_hash_table_remove(controllerHash, GINT_TO_POINTER(Data->pid));
+        g_timeout_add_seconds(1, Cleanup, (void *)Data);
+        
+    }
+
+    static void
+    stderr_f (void *data, void *stream, int childFD) {
+        fgrData_t *Data = (fgrData_t *)data;
+
+        auto object = (FindResponse<Type> *)g_object_get_data(G_OBJECT( Data->mainBox), "object");
+    
+        GtkTextView *textview = object->textview();
+        if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
+
+        char *line;
+        line = (char *)stream;
+
+
+        if(line[0] != '\n') {
+            Print::print(textview, EMBLEM_WARNING, "red", g_strdup(line));
+        }
+
+        // With this, this thread will not do a DOS attack
+        // on the gtk event loop.
+        static gint count = 1;
+        if (count % 20 == 0){
+            usleep(10000);
+        } 
+       return;
+    }
+
+
+    static void
+    stdout_f (void *data, void *stream, int childFD) {
+        fgrData_t *Data = (fgrData_t *)data;
+        char *line;
+        line = (char *)stream;
+        TRACE("FORK stdout: %s\n", line);
+
+        if(line[0] == '\n') return;
+        auto object = (FindResponse<Type> *)g_object_get_data(G_OBJECT( Data->mainBox), "object");
+    
+        GtkTextView *textview = object->textview();
+
+        if (Data->resultLimit > 0 && Data->resultLimit==Data->resultLimitCounter) {
+            gchar *g=g_strdup_printf("%s. %s %d", _("Results"), _("Upper limit:"), Data->resultLimit);
+            Print::print(textview, EMBLEM_WARNING, "green", g_strconcat(g, "\n", NULL));
+            Print::print(textview, "blue",  g_strconcat(_("Counting files..."), "\n", NULL));
+            g_free(g);
+        }
+
+        if(strncmp (line, "Tubo-id exit:", strlen ("Tubo-id exit:")) == 0) {
+          GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(Data->mainBox), "cancel_button"));
+                gtk_widget_set_sensitive(GTK_WIDGET(cancel), false);
+          
+                if(strchr (line, '\n')) *strchr (line, '\n') = 0;
+                
+                /*FIXME this wont work if another fgr is running
+                 * must check for any running fgr subprocess
+                 * GtkWidget *cancel = widgets_p->data; 
+                if (cancel && GTK_IS_WIDGET(cancel)) {
+                    rfm_context_function(hide_cancel_button, cancel);
+                }*/
+                gchar *plural_text = 
+                    g_strdup_printf (
+                            ngettext ("Found %d match", "Found %d matches", 
+                                Data->resultLimitCounter), Data->resultLimitCounter);
+                gchar *message = g_strdup_printf(_("%s Finished : %s"), xffindProgram, plural_text);
+                gchar *g = g_strdup_printf("%c[31m%s\n",27, message);
+                Print::print(textview, EMBLEM_RED_BALL, "Red", g);
+                // Free last find results
+                GSList *list = lastFind;
+                for(;list; list=list->next) g_free(list->data);
+                g_slist_free(lastFind);
+                // assign new find results
+                lastFind = Data->findList;
+                Data->done = TRUE;
+                list = lastFind;
+                for (;list && list->data; list=list->next){
+                    TRACE("last find: %s\n", (gchar *)list->data);
+                }
+                // FIXME FIXME construct DnDBox class template
+                // DnDBox<Type>::openDnDBox(findDialog, plural_text, lastFind);
+                
+
+                // cleanupmake
+                //
+                g_free(plural_text);
+                g_free(message);
+        } else {
+            if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;
+            gchar *file = g_strdup(line);
+            if (strchr(file, '\n')) *strchr(file, '\n') = 0;
+            if (g_file_test(file, G_FILE_TEST_EXISTS)) {
+                Data->resultLimitCounter++; 
+                if (Data->resultLimit ==0 ||
+                    (Data->resultLimit > 0 && Data->resultLimit > Data->resultLimitCounter) ) {
+                    Print::print(textview, g_strdup_printf("%s\n", file));
+                    TRACE("--> %s\n",file);
+                    //TRACE("resultLimitCounter:%d %s\n", Data->resultLimitCounter, line);
+                    Data->findList = g_slist_prepend(Data->findList, file);
+                }
+            } else {
+               TRACE("ignoring: \"%s\"\n", file);
+               g_free(file);
+            }
+        }         
+        // With this, this thread will not do a DOS attack
+        // on the gtk event loop.
+        static gint count = 1;
+        if (count % 20 == 0){
+            usleep(10000);
+        } 
+        
+        return;
+    }
+/*
+    static gboolean removeFunc(gpointer key, gpointer value, gpointer data){
+      if (!key) return FALSE;
+        GtkTextView *textview = GTK_TEXT_VIEW(data);
+        Print::print(textview, EMBLEM_DELETE, "bold", 
+                g_strdup_printf("%s: \"%s\"\n",_("Cancel"), (gchar *) value));
+        //Signal process controller to kill child process.
+      fprintf(stderr, "removeFunc...\n");
+        //kill(GPOINTER_TO_INT(key), SIGUSR2);
+        kill(GPOINTER_TO_INT(key), SIGKILL);
+      fprintf(stderr, "removeFunc\n");
+        return FALSE;
+    }
+    
+    static void
+    onCancelButton(GtkWidget * button, void *data){
+      auto object = (FindResponse<Type> *)data;
+        GtkTextView *textview = object->textview();
+        auto dialog = object->dialog();
+        TRACE("cancel_all\n");
+        g_hash_table_foreach_remove (controllerHash, removeFunc, textview);
+        gtk_widget_set_sensitive(button, FALSE);
+    }
+    */
+    
+    static void
+    onCancelButton(GtkWidget * button, void *data){
+      auto object = (FindResponse<Type> *)data;
+        GtkTextView *textview = object->textview();
+        auto dialog = object->dialog();
+        auto Data = object->Data();
+        TRACE("cancel_all\n");
+        Print::print(textview, EMBLEM_DELETE, "blue", 
+                g_strdup_printf("%s: pid %d\n",_("Cancel"), Data->pid));
+        kill(Data->pid, SIGUSR2);
+//        g_hash_table_foreach_remove (controllerHash, removeFunc, textview);
+        //gtk_widget_set_sensitive(button, FALSE);
+        
+    }
+
+    static void
+    on_buttonHelp (GtkWidget * button, gpointer data) {
+      DBG("on_buttonHelp...\n");
+      /*  GtkWindow *dialog=GTK_WINDOW(g_object_get_data(G_OBJECT(button), "findDialog"));
+        const gchar *message = (const gchar *)data;
+        TRACE("fixme: signals::on_buttonHelp\n");
+        Dialogs<Type>::quickHelp(dialog, message);*/
+    }
+
+      };
+}
+#endif
