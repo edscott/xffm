@@ -119,6 +119,7 @@ static void *mainWindow_p = NULL;
 
 #include "fm/classes/history.hh"
 
+#include "find/fgr.hh"
 #include "find/find.hh"
 
 // menu templates

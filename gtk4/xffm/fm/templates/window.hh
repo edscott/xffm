@@ -26,6 +26,7 @@ private:
 // Constructor  
 public:
     GtkNotebook *notebook(void) {return notebook_;}
+    GtkWindow *mainWindow(void){return mainWindow_;}
     MainWindow(const gchar *path, bool doFind){
         mainWindow_p = (void *)this;
         doFind_ = doFind;
@@ -173,6 +174,7 @@ private:
     
     static gboolean updateButtons( GtkEventControllerMotion* self,
                     double x, double y, void *data) {
+        //DBG("update buttons....\n");
         auto c = (clipboard_t *)g_object_get_data(G_OBJECT(MainWidget), "ClipBoard");
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         return FALSE;
@@ -190,7 +192,7 @@ private:
     
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
-        MainWidget = GTK_WIDGET(mainWindow_);
+        //MainWidget = GTK_WIDGET(mainWindow_);
         //addMotionController(MainWidget);
         auto dropController = Dnd<LocalDir>::createDropController(NULL);
         gtk_widget_add_controller (MainWidget, GTK_EVENT_CONTROLLER (dropController));

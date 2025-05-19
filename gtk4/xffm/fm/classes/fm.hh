@@ -32,18 +32,23 @@ public:
       setEditor();
       setTerminal();
 
-      xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); // bool is MainClass (only one for now)
 
-      if (doFind){
-        xffm_->hideWindow();
+      if (doFind){ // find dialog
+        //xffm_->hideWindow();
         {
-          using subClass_t = FindResponse<Type>;
+          using subClass_t = FindResponse<bool>;
           using dialog_t = DialogComplex<subClass_t>;
           //Dialogs::info("find in files, test");
-          auto dialogObject = new dialog_t(GTK_WINDOW(MainWidget), Child::getWorkdir());
+          auto dialogObject = new dialog_t(NULL, path);
+          MainWidget = GTK_WIDGET(dialogObject->dialog());
+          //auto dialogObject = new dialog_t(GTK_WINDOW(MainWidget), Child::getWorkdir());
         }
+        return;
       }
+      
       //g_object_set_data(G_OBJECT(MainWidget), "MainWindow", xffm_);
+      xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); // bool is MainClass (only one for now)
+      MainWidget = GTK_WIDGET(xffm_->mainWindow());     
     }
 
     static const gchar *getEditor(){

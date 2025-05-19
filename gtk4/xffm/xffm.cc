@@ -95,6 +95,12 @@ static  gchar *getPath(const char *argv1){
 
 int
 main (int argc, const char *argv[]) {
+  if (argv[1] && strcmp(argv[1], "--fgr") == 0){
+      xf::Fgr *fgr = new(xf::Fgr);
+      fgr->main(argc, argv);
+      return 0;
+  }
+
   TRACE("parent=%d, self=%d\n",getppid(), getpid()); 
   coreSetup(argc, argv);
   xffindProgram = argv[0];
@@ -110,7 +116,7 @@ main (int argc, const char *argv[]) {
   bool doFind = false;
   if (argv[1] && strcmp(argv[1], "--find") == 0){
     doFind = true;
-    argv[1] = "-f";
+    argv[1] = argv[2];
   }
 
   // Run in foreground if "-f"  given:

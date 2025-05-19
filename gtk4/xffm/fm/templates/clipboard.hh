@@ -68,7 +68,7 @@ public:
        
 
         gdk_clipboard_set_text (clipBoard_, "");
-        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
+        if (pasteButton) gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
 
         pthread_t thread;
         pthread_create(&thread, NULL, mop, this);
@@ -325,7 +325,7 @@ private:
         else c->setValidity(false);
         TRACE("Clip board is valid = %d\n", c->validClipBoard());
         // Global paste button:
-        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
+        if (pasteButton) gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         updateClipBoardCache(c, text);
         // Signal condition
         c->signalConditionWait();

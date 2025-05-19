@@ -221,19 +221,21 @@ static const char *fgrMessage[] = {
 static int terminated = 0;
 static int initial;
 static int options = 0;
-static char *token;
+static const char *token;
 static void *object = NULL;
 
 namespace xf {
-template <class Type>
 class Fgr {
 public:
     int
-    main (int argc, char **argv){
+    main (int argc, const char **argv){
+      fgrMain(argc, argv);
+      /*
         gchar *base = g_path_get_basename(argv[0]);
         if (strcmp(base, "fgr")) fgrMain(argc, argv);
         else  fgrMain(argc-1, ++argv);
         g_free(base);
+        */
         return 0;
     }
 
@@ -342,7 +344,7 @@ private:
 
 #define CHECK_ARG if (argc <= i) goto error;
     int
-    fgrMain (int argc, char **argv) {
+    fgrMain (int argc, const char **argv) {
         int i,
           timetype = 0;
         const char *filter = "*";

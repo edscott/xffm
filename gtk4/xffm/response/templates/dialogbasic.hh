@@ -44,6 +44,7 @@ namespace xf
     static void *unsetRaise_f(void *data){
       auto object = (dialog_t *)data;
       auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(object->parent()), "frame"));
+      TRACE("unsetRaise_f\n");
       gtk_widget_set_sensitive(GTK_WIDGET(content), true);
       //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
       TRACE("*** set unraise for %p\n", object->parent());
@@ -161,6 +162,7 @@ namespace xf
 
      void setRaise(void){
       auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(parent_), "frame"));
+      TRACE("setRaise\n");
       gtk_widget_set_sensitive(GTK_WIDGET(content), false);
       //gtk_widget_set_sensitive(GTK_WIDGET(parent_), false);
       TRACE("*** set raise for %p to %p\n", parent_, dialog_);
@@ -174,7 +176,7 @@ namespace xf
 
   public:
     void setParent(GtkWindow *parent){
-      TRACE("*** setParent(%p)\n", parent);
+      DBG("*** setParent(%p)\n", parent);
       parent_ = parent;
       if (parent_) {
         // only allow one subdialog (modal)
