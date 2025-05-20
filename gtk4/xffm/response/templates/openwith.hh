@@ -9,15 +9,15 @@ template <class Type>
 class OpenWith {
    using dialog_t = DialogBasic<LocalDir >;
     GtkEventController *raiseController_ = NULL;
-    GtkWindow *dialog_;
+    GtkWindow *dialog_ = NULL;
     GtkWindow *parent_= GTK_WINDOW(Child::mainWidget());
     time_t timeout_;
     char *path_ = NULL;
-    GtkProgressBar *timeoutProgress_;
-    GtkCheckButton *checkbutton_;
-    GtkTextView *input_;
-    GtkTextView *output_;
-    GtkWidget *child_;
+    GtkProgressBar *timeoutProgress_ = NULL;
+    GtkCheckButton *checkbutton_ = NULL;
+    GtkTextView *input_ = NULL;
+    GtkTextView *output_ = NULL;
+    GtkWidget *child_ = NULL;
     GList *selectionList_ = NULL;
     bool withTextview_ = false;
    
@@ -33,8 +33,8 @@ protected:
     GtkTextView *output(void){ return output_;}
     GtkWidget *child(void){ return child_;}
         
-    Prompt<Type> *prompt_p;
-    GtkBox *buttonSpace;
+    Prompt<Type> *prompt_p = NULL;
+    GtkBox *buttonSpace = NULL;
 
     const char *path(void){ return (const char *)path_; }
     char *paths(void){ 

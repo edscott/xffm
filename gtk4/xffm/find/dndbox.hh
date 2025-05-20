@@ -150,7 +150,7 @@ private:
               gtk_box_append(buttonBox, GTK_WIDGET(edit_button));
               g_signal_connect(G_OBJECT(edit_button), "clicked", G_CALLBACK(onEditButton), window);
          } //else gtk_widget_set_sensitive(GTK_WIDGET(edit_button), false);
-          g_free(basename);
+          
       } else {
           TRACE("getEditor() = \"%s\"\n", editor);
       }
