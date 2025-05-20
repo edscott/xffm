@@ -242,16 +242,13 @@ private:
         g_object_set_data(G_OBJECT(dialog_), "mimetype", mimetype);
         //g_free(mimetype);
 
-        if (textView == NULL) {
-          auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
-          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
-          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
-        } else {
-          auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)okTextview, this);
-          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
-          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
+        if (textView != NULL) {
+          withTextview(true);
         }
         //auto cancel = Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, this);
+        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
+        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
+        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
         //Basic::boxPack0(GTK_BOX (hbox),GTK_WIDGET(cancel), FALSE, FALSE, 10);
      
 
@@ -462,7 +459,7 @@ private:
 
 private:
     
-    static void
+ /*   static void
     okTextview (GtkGestureClick* self,
               gint n_press,
               gdouble x,
@@ -473,7 +470,7 @@ private:
         run(object);
         object->timeout_=-1;
         //gtk_window_present(GTK_WINDOW(Child::mainWidget()));
-    }
+    }*/
     
     static void
     ok (GtkGestureClick* self,

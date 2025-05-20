@@ -19,7 +19,7 @@ public:
 
       auto window = createWindow(dir, list);
       auto mainBox = mkMainBox(dir, window);
-      auto listBox = mkListBox(dir,list);
+      auto listBox = mkListBox(dir,list,(void *)window);
       g_object_set_data(G_OBJECT(listBox), "textview", textview);
       auto sw = mkScrolledWindow();
      
@@ -75,7 +75,7 @@ private:
       return mainBox;
     }
 
-    static GtkListBox *mkListBox(const gchar *dir, GSList *list){
+    static GtkListBox *mkListBox(const gchar *dir, GSList *list, void *window){
       auto dirLen = strlen(dir)+1;
       auto listBox = GTK_LIST_BOX(gtk_list_box_new());
       gtk_list_box_set_selection_mode(listBox,  GTK_SELECTION_SINGLE );
@@ -103,6 +103,8 @@ private:
 
         auto row = GTK_LIST_BOX_ROW(gtk_list_box_row_new());
         gtk_list_box_row_set_child(row, GTK_WIDGET(box));
+        g_signal_connect(G_OBJECT(row), "activate", G_CALLBACK(activate), window);
+        g_object_set_data(G_OBJECT(row), "listBox", listBox);
 
         g_object_set_data(G_OBJECT(row), "label", label);
         gtk_list_box_append(listBox, GTK_WIDGET(row));
@@ -138,19 +140,14 @@ private:
 
     }
 
-    static gboolean
-    cvClick (
-              GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *window ){
-      if (n_press != 2) return FALSE;
-      DBG("cvClick n_press = %d\n", n_press);
-      auto listBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+    static void activate(GtkListBoxRow* row, void *window){
+      auto listBox = GTK_LIST_BOX(g_object_get_data(G_OBJECT(row), "listBox"));
+      openWith(listBox, row, window);
+      return;      
+    }
+
+    static void openWith(GtkListBox *listBox, GtkListBoxRow *row, void *window){
       auto textview = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(listBox),"textview"));
-      // openwith dialog...
-      GtkListBoxRow *row = gtk_list_box_get_selected_row (GTK_LIST_BOX(listBox));
       auto label = GTK_LABEL(g_object_get_data(G_OBJECT(row), "label"));
       auto dir = (const char *)g_object_get_data(G_OBJECT(window), "dir");
       auto text = gtk_label_get_text(label);
@@ -160,6 +157,21 @@ private:
       new OpenWith<bool>(textview, path);
       g_free(path);
       gtk_widget_set_visible(GTK_WIDGET(window), false);
+      return;
+    }
+
+    static gboolean
+    cvClick (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *window ){
+      if (n_press != 2) return FALSE;
+      TRACE("cvClick n_press = %d\n", n_press);
+      auto listBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      auto row = gtk_list_box_get_selected_row (GTK_LIST_BOX(listBox));
+      openWith(GTK_LIST_BOX(listBox), row, window);
       return TRUE;
     }
 
