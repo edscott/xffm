@@ -7,7 +7,6 @@ namespace xf
 template <class Type> class DnDBox;
 template <class Type>
 class FindSignals {
-  void *lastData_ = NULL;
     static const gchar *
     get_time_type(GtkBox *mainBox){
         if (gtk_toggle_button_get_active ((GtkToggleButton *) g_object_get_data(G_OBJECT(mainBox), "radio1"))){
@@ -50,13 +49,7 @@ class FindSignals {
             return FALSE;
         }
 
-        auto lastData = object->lastData();
-        freeFgrData(lastData);
-
         fgrData_t *Data = (fgrData_t *)calloc(1,sizeof(fgrData_t));
-        object->lastData(Data);
-
-        g_object_set_data(G_OBJECT(object->mainBox()), "lastData", Data);
 
         Data->mainBox = object->mainBox();
         object->Data(Data);
@@ -65,9 +58,9 @@ class FindSignals {
         Data->done = FALSE; // (This is redundant with calloc, here just for clarity).
 
 
-        GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(object->mainBox()), "cancel_button"));
+        //GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(object->mainBox()), "cancel_button"));
         //gtk_widget_show(cancel);
-        gtk_widget_set_sensitive(cancel, TRUE);
+        //gtk_widget_set_sensitive(cancel, TRUE);
 
         /* get the parameters set by the user... *****/
         get_arguments(path, Data);
@@ -407,94 +400,19 @@ class FindSignals {
     
   ~FindSignals(void){
     DBG("*************  ~FindSignals\n");
-    // XXX not happening...
-    freeFgrData(lastData_);
   }
-
-
-  void *lastData(void){return lastData_;}
-  void lastData(void *value){lastData_ = value;}
+  
     static void
     onFindButton (GtkWidget * button, void *data) {
       auto object = (FindResponse<Type> *)data;
       DBG("onFindButton...\n");
-        /*if (!controllerHash){
-            controllerHash = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
-        }*/
         GtkTextView *textview = object->textview();
         
-        //Print::showText(textview);
         on_find_clicked_action (data);
-        gtk_widget_set_sensitive(GTK_WIDGET(object->findButton()), false);
+        gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), true);
+        gtk_widget_set_visible(GTK_WIDGET(object->findButton()), false);
     }
 
-#if 0
-    static void
-    edit_command (gpointer data) {
-      auto object = (FindResponse<Type> *)data;
-        GtkWindow *dialog = object->dialog();
-        GtkTextView *textview = object->textview();
-        fgrData_t *Data = (fgrData_t *)object->lastData();
-        GSList *list = Data->findList;
-
-        /*if (!list || g_slist_length(list) < 1) {
-            rfm_diagnostics(widgets_p, "xffm/stock_dialog-warning",NULL);
-            rfm_diagnostics(widgets_p, "xffm_stderr", _("Search returned no results"), "\n", NULL);
-            return;
-        }*/
-
-        auto editor = Basic::getEditor();
-        if (!editor || strlen(editor)==0){
-          Print::printError(textview, g_strdup_printf("%s\n",
-                        _("No editor for current action.")));
-            return;
-        }
-        TRACE("editor = %s\n", editor);
-        gchar *command;
-        if (Run<Type>::runInTerminal(editor)){
-            command = Run<Type>::mkTerminalLine(editor, "");
-        } else {
-            command = g_strdup(editor);
-        }
-      
-        TRACE("command = %s\n", command);
-
-        for (; list && list->data; list=list->next){
-            gchar *g = g_strconcat(command, " \"", (gchar *)list->data, "\"", NULL);
-            g_free(command);
-            command = g;
-        }
-        TRACE("command args = %s\n", command);
-
-        // Hack: for nano or vi, run in terminal
-        gboolean in_terminal = FALSE;
-        if (strstr(command, "nano") || 
-                (strstr(command, "vi") && !strstr(command, "gvim")))
-        {
-            in_terminal = TRUE;
-        }
-
-        TRACE("thread_run %s\n", command);
-        Run<Type>::thread_run(textview, command, FALSE);
-        //RFM_THREAD_RUN2ARGV(widgets_p, command, in_terminal);
-        
-        //widgets_p->workdir = g_strdup(g_get_home_dir());
-    }
-
-
-    static void
-    onEditButton (GtkWidget * button, gpointer data) {
-      auto object = (FindResponse<Type> *)data;
-      DBG("onEditButton...\n");
-        GtkTextView *textview = object->textview();
-        TRACE("fixme: signals::onEditButton\n");
-        //print_c::print_status(textview, g_strdup("fixme: signals::onEditButton testing run\n"));
-        Print::showText(textview);        
-        //Print::showTextSmall(textview);        
-        edit_command(data);
-    }
-
-#endif
     static void
     onClearButton (GtkWidget * button, gpointer data) {
       DBG("onClearButton...\n");
@@ -525,10 +443,8 @@ class FindSignals {
        TRACE("Cleanup\n");
        auto object = (FindResponse<Type> *)Data->object;
        auto mainBox = Data->mainBox;
-       //if (g_hash_table_size(controllerHash) == 0){
-       GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(mainBox), "cancel_button"));
-       gtk_widget_set_sensitive(cancel, false);
-       gtk_widget_set_sensitive(GTK_WIDGET(object->findButton()), true);
+       gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), false);
+       gtk_widget_set_visible(GTK_WIDGET(object->findButton()), true);
        Basic::flushGTK();
        if (Data->findList) {
          GSList *dndList = NULL;
@@ -542,7 +458,6 @@ class FindSignals {
          k--;
          auto textview = object->textview();
          auto dndBox = DnDBox<Type>::openDnDBox(Data->argument[k], dndList, textview);
-         //if (dndBox) object->addDndWindow(dndBox);
        } else {
          DBG("No Data->findList\n");
        }    
@@ -556,10 +471,7 @@ class FindSignals {
                         g_strdup_printf("%s\n", _("No editor for current action.")));
                 return NULL;
             }
-            gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
-       } else {
-            gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
-       }
+       } 
        return NULL;
     }
 
@@ -567,9 +479,10 @@ class FindSignals {
     Cleanup (void *data) {
        fgrData_t *Data = (fgrData_t *)data;
        if (Data->done) {
-           // FIXME: not yet... freeFgrData(Data);
+           freeFgrData(Data);
            return FALSE;
        }
+       g_free(Data);
        return TRUE;
     }
 
@@ -578,7 +491,6 @@ class FindSignals {
     forkCleanup (void *data) {
        TRACE("forkCleanup\n");
         fgrData_t *Data = (fgrData_t *)data;
-        //g_hash_table_remove(controllerHash, GINT_TO_POINTER(Data->pid));
         g_timeout_add_seconds(1, Cleanup, (void *)Data);
         
     }
@@ -630,17 +542,9 @@ class FindSignals {
         }
 
         if(strncmp (line, "Tubo-id exit:", strlen ("Tubo-id exit:")) == 0) {
-          GtkWidget *cancel = GTK_WIDGET(g_object_get_data(G_OBJECT(Data->mainBox), "cancel_button"));
-                gtk_widget_set_sensitive(GTK_WIDGET(cancel), false);
           
                 if(strchr (line, '\n')) *strchr (line, '\n') = 0;
-                
-                /*FIXME this wont work if another fgr is running
-                 * must check for any running fgr subprocess
-                 * GtkWidget *cancel = widgets_p->data; 
-                if (cancel && GTK_IS_WIDGET(cancel)) {
-                    rfm_context_function(hide_cancel_button, cancel);
-                }*/
+
                 gchar *plural_text = 
                     g_strdup_printf (
                             ngettext ("Found %d match", "Found %d matches", 
@@ -664,7 +568,7 @@ class FindSignals {
                     TRACE("last find: %s\n", (gchar *)list->data);
                 }*/
 
-                  g_free(plural_text);
+                g_free(plural_text);
                 g_free(message);
         } else {
             if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;

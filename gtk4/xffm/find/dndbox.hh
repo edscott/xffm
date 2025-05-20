@@ -121,6 +121,14 @@ private:
       g_free(markup);
       gtk_box_append(buttonBox, GTK_WIDGET(label));
 
+      // pack end hack
+      auto margin = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      gtk_widget_set_hexpand(GTK_WIDGET(margin), true); 
+      auto space = gtk_label_new(" ");
+      gtk_box_append(GTK_BOX(margin),space);
+      gtk_box_append(GTK_BOX(buttonBox),margin);
+
+
 
       GtkButton *edit_button = NULL;
 
@@ -135,7 +143,7 @@ private:
               auto Image = GTK_WIDGET(Texture<bool>::getImage(icon_id, 20));
               edit_button = GTK_BUTTON(gtk_button_new());
               gtk_button_set_child(edit_button,Image);
-              gtk_widget_set_tooltip_markup(GTK_WIDGET(edit_button),_("Edit all"));
+              Basic::setTooltip(GTK_WIDGET(edit_button), _("Edit all"));
               g_free(icon_id);
               g_free(editor_path);
               gtk_widget_set_sensitive(GTK_WIDGET(edit_button), true);

@@ -35,6 +35,7 @@
 #define EMBLEM_APPLY "apply"
 
 // Menu icons
+#define EMBLEM_EXIT "emblem-exit"
 #define EMBLEM_BLOWFISH "emblem-blowfish"
 #define EMBLEM_EDIT "emblem-edit"
 #define EMBLEM_GRAY_BALL "emblem-grayball"

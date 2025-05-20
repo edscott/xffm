@@ -93,6 +93,7 @@ namespace xf
 //      GSList *find_list = NULL;
       gchar  *last_workdir = NULL;
       GtkButton *findButton_ = NULL;
+      GtkButton *cancelButton_ = NULL;
     
       char *folder_ = NULL;
       bool active_grep_ = false;
@@ -153,6 +154,7 @@ namespace xf
 
 public:
        GtkButton *findButton(void) {return findButton_;}
+       GtkButton *cancelButton(void) {return cancelButton_;}
 
       void Data(fgrData_t *value) {Data_ = value;}
       fgrData_t *Data(void) {return Data_;}
@@ -432,14 +434,22 @@ private:
           gtk_box_append(actionBox, GTK_WIDGET(label));
 
           findButton_ = UtilBasic::mkButton(EMBLEM_FIND, NULL);
+          cancelButton_ = UtilBasic::mkButton(EMBLEM_EXIT, NULL);
+          
           //gtk_window_set_default_widget(GTK_WINDOW(dialog_), GTK_WIDGET(findButton_));
           // gtk_widget_set_can_default(GTK_WIDGET(findButton_), TRUE);
           g_signal_connect (G_OBJECT (findButton_), "clicked",
                   BUTTON_CALLBACK(FindSignals<Type>::onFindButton), (gpointer)this);
+          g_signal_connect (G_OBJECT (cancelButton_), "clicked",
+                  BUTTON_CALLBACK(FindSignals<Type>::onCancelButton), (gpointer)this);  
           gtk_box_append(actionBox, GTK_WIDGET(findButton_));
+          gtk_box_append(actionBox, GTK_WIDGET(cancelButton_));
+          gtk_widget_set_visible(GTK_WIDGET(cancelButton_), false);
+          
           gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(actionBox), GTK_PACK_END);
 //          gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(findButton_), GTK_PACK_END);
           Basic::setTooltip(GTK_WIDGET(findButton_), _("Show search results for this query"));
+          Basic::setTooltip(GTK_WIDGET(cancelButton_), _("Cancel Operation"));
 
           //gtk_scrolled_window_set_child(sw, GTK_WIDGET(topPaneVbox_));
           //gtk_container_add(GTK_CONTAINER(sw), GTK_WIDGET(topPaneVbox_));
@@ -774,7 +784,7 @@ private:
             }
             // FIXME g_signal_connect (G_OBJECT (grep_entry), "event", 
                    // KEY_EVENT_CALLBACK (on_key_release), (gpointer) radio);
-            gtk_box_append(radioBox, GTK_WIDGET(radio));
+            gtk_box_append(radioBox, GTK_WIDGET(radio));  
             //compat<bool>::boxPack0 (radioBox, GTK_WIDGET(radio), FALSE, FALSE, 0);
         }
         
@@ -792,10 +802,10 @@ private:
 
         void mkButtonBox(void){
             auto hbuttonbox2 = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
-            auto cancelButton =  boxButton(EMBLEM_RED_BALL, (void *)FindSignals<Type>::onCancelButton);
+           /* auto cancelButton =  boxButton(EMBLEM_RED_BALL, (void *)FindSignals<Type>::onCancelButton);
             g_object_set_data(G_OBJECT(mainBox_), "cancel_button", cancelButton);
             g_object_set_data(G_OBJECT(cancelButton), "mainBox", mainBox_);
-            gtk_widget_set_sensitive(GTK_WIDGET(cancelButton), FALSE);
+            gtk_widget_set_sensitive(GTK_WIDGET(cancelButton), FALSE);*/
 
             auto clearButton =  boxButton(EMBLEM_CLEAR,(void *) FindSignals<Type>::onClearButton);
 
@@ -803,45 +813,14 @@ private:
             g_object_set_data(G_OBJECT(mainBox_), "clear_button", clearButton);
             g_object_set_data(G_OBJECT(clearButton), "mainBox", mainBox_);
 
-            /*GtkBox *edit_button = NULL;
 
-            auto editor =Basic::getEditor();
-            if (editor && strlen(editor)){
-                auto basename = g_strdup(editor);
-                if (strchr(basename, ' ')) *strchr(basename, ' ') = 0;
-                auto editor_path = g_find_program_in_path(basename);
-                g_free(basename);
-                if (editor_path){
-                    auto icon_id = Basic::getAppIconName(editor_path, EMBLEM_EDIT);
-                    edit_button = boxButton(icon_id, (void *)FindSignals<Type>::onEditButton);
-                    g_free(icon_id);
-                    g_object_set_data(G_OBJECT(mainBox_), "edit_button", edit_button);
-                    g_object_set_data(G_OBJECT(edit_button), "mainBox", mainBox_);
-                    g_free(editor_path);
-                    gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
-                } 
-            } else {
-                TRACE("getEditor() = \"%s\"\n", editor);
-            }*/
           
             gtk_box_append(hbuttonbox2, GTK_WIDGET(clearButton));
-            //if (edit_button) gtk_box_append(hbuttonbox2, GTK_WIDGET(edit_button));
-            gtk_box_append(hbuttonbox2, GTK_WIDGET(cancelButton));
+            //gtk_box_append(hbuttonbox2, GTK_WIDGET(cancelButton));
             gtk_box_append(mainBox_, GTK_WIDGET(hbuttonbox2));            
         }
 
-/*
-        static void getDirectory(GtkButton *button, void *data){
-          auto subClass = (FindResponse *)data;
-          TRACE("*** getDirectory Folder = %s\n", subClass->folder());
-          auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(button), "entry"));
-          auto parent = subClass->dialog();
-          auto folder = subClass->folder();
-          auto newObject = new dialog_t(parent, folder);
-          //newObject->subClass()->parentEntry(entry);
-          //newObject->subClass()->folder(folder);
-        }
-*/
+
     GtkCheckButton *simpleCheck(GtkBox *parentBox, const char *checkName){
       auto box = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
       auto check = GTK_CHECK_BUTTON(gtk_check_button_new());
