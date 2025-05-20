@@ -428,6 +428,7 @@ class FindSignals {
         gtk_widget_set_sensitive(GTK_WIDGET(object->findButton()), false);
     }
 
+#if 0
     static void
     edit_command (gpointer data) {
       auto object = (FindResponse<Type> *)data;
@@ -493,6 +494,7 @@ class FindSignals {
         edit_command(data);
     }
 
+#endif
     static void
     onClearButton (GtkWidget * button, gpointer data) {
       DBG("onClearButton...\n");

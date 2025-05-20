@@ -803,7 +803,7 @@ private:
             g_object_set_data(G_OBJECT(mainBox_), "clear_button", clearButton);
             g_object_set_data(G_OBJECT(clearButton), "mainBox", mainBox_);
 
-            GtkBox *edit_button = NULL;
+            /*GtkBox *edit_button = NULL;
 
             auto editor =Basic::getEditor();
             if (editor && strlen(editor)){
@@ -822,10 +822,10 @@ private:
                 } 
             } else {
                 TRACE("getEditor() = \"%s\"\n", editor);
-            }
+            }*/
           
             gtk_box_append(hbuttonbox2, GTK_WIDGET(clearButton));
-            if (edit_button) gtk_box_append(hbuttonbox2, GTK_WIDGET(edit_button));
+            //if (edit_button) gtk_box_append(hbuttonbox2, GTK_WIDGET(edit_button));
             gtk_box_append(hbuttonbox2, GTK_WIDGET(cancelButton));
             gtk_box_append(mainBox_, GTK_WIDGET(hbuttonbox2));            
         }

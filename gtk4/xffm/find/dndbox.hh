@@ -18,6 +18,8 @@ public:
       if (g_slist_length(list) == 0) return NULL;
 
       auto window = createWindow(dir, list);
+      g_object_set_data(G_OBJECT(window), "list", list);
+      g_object_set_data(G_OBJECT(window), "textview", textview);
       auto mainBox = mkMainBox(dir, window);
       auto listBox = mkListBox(dir,list,(void *)window);
       g_object_set_data(G_OBJECT(listBox), "textview", textview);
@@ -29,8 +31,9 @@ public:
       
       mkGesture(GTK_WIDGET(listBox), (void *)window);
 
-      // FIXME: unselect all is not working...
-      gtk_list_box_unselect_all(listBox);
+      // unselect all does not work if dnd source not set.
+      //gtk_list_box_unselect_all(listBox);
+      gtk_list_box_select_all(listBox);
       
       gtk_widget_realize(GTK_WIDGET(window));
       Basic::setAsDialog(window);
@@ -41,8 +44,7 @@ public:
 
 private:
 
-    static void close(GtkButton *button, GtkWindow *window){
-      //gtk_widget_set_visible(window, false);
+    static void close(GtkButton *button, void *window){
       auto list = (GSList *)g_object_get_data(G_OBJECT(window), "list");
 
       for (auto l=list; l && l->data; l=l->next){
@@ -52,7 +54,55 @@ private:
       auto dir = g_object_get_data(G_OBJECT(window), "dir");
       g_free(dir);
       gtk_widget_set_visible(GTK_WIDGET(window), false);
-      //gtk_window_destroy(window);
+      gtk_window_destroy(GTK_WINDOW(window));
+    }
+
+    static void
+    edit_command (GSList *list, void *window, GtkTextView *textview) {
+        auto editor = Basic::getEditor();
+        if (!editor || strlen(editor)==0){
+          Print::printError(textview, g_strdup_printf("%s\n",
+                        _("No editor for current action.")));
+            return;
+        }
+        gchar *command;
+        /*if (Run<bool>::runInTerminal(editor)){
+            command = Run<Type>::mkTerminalLine(editor, "");
+        } else {
+            command = g_strdup(editor);
+        }*/
+        command = g_strdup(editor);
+      
+        TRACE("command = %s\n", command);
+
+        for (; list && list->data; list=list->next){
+            gchar *g = g_strconcat(command, " \"", (gchar *)list->data, "\"", NULL);
+            g_free(command);
+            command = g;
+        }
+        TRACE("command args = %s\n", command);
+
+        // Hack: for nano or vi, run in terminal
+        gboolean in_terminal = FALSE;
+        if (strstr(command, "nano") || 
+                (strstr(command, "vi") && !strstr(command, "gvim")))
+        {
+            in_terminal = TRUE;
+        }
+
+        TRACE("thread_run %s\n", command);
+        Run<Type>::thread_run(textview, command, FALSE);
+        close(NULL, window);
+    }
+
+    
+    static void
+    onEditButton (GtkWidget * button, void *window) {
+      auto list = (GSList *)g_object_get_data(G_OBJECT(window), "list");
+      auto textview = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(window), "textview"));
+      DBG("onEditButton...\n");
+      Print::showText(textview);        
+      edit_command(list, window, textview);
     }
 
     static GtkBox *mkMainBox(const gchar *dir, GtkWindow *window){
@@ -62,6 +112,7 @@ private:
       auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
       gtk_box_append(buttonBox, GTK_WIDGET(button));
+
       auto label =GTK_LABEL(gtk_label_new(""));
       auto string = g_strdup_printf(_("Search results for %s"), dir);
       auto markup = g_strconcat("<span color=\"green\">",string,"/</span>", NULL);
@@ -69,6 +120,34 @@ private:
       g_free(string);
       g_free(markup);
       gtk_box_append(buttonBox, GTK_WIDGET(label));
+
+
+      GtkButton *edit_button = NULL;
+
+      auto editor =Basic::getEditor();
+      if (editor && strlen(editor)){
+          auto basename = g_strdup(editor);
+          if (strchr(basename, ' ')) *strchr(basename, ' ') = 0;
+          auto editor_path = g_find_program_in_path(basename);
+          g_free(basename);
+          if (editor_path){
+              auto icon_id = Basic::getAppIconName(editor_path, EMBLEM_EDIT);
+              auto Image = GTK_WIDGET(Texture<bool>::getImage(icon_id, 20));
+              edit_button = GTK_BUTTON(gtk_button_new());
+              gtk_button_set_child(edit_button,Image);
+              gtk_widget_set_tooltip_markup(GTK_WIDGET(edit_button),_("Edit all"));
+              g_free(icon_id);
+              g_free(editor_path);
+              gtk_widget_set_sensitive(GTK_WIDGET(edit_button), true);
+              gtk_box_append(buttonBox, GTK_WIDGET(edit_button));
+              g_signal_connect(G_OBJECT(edit_button), "clicked", G_CALLBACK(onEditButton), window);
+         } //else gtk_widget_set_sensitive(GTK_WIDGET(edit_button), false);
+          g_free(basename);
+      } else {
+          TRACE("getEditor() = \"%s\"\n", editor);
+      }
+           
+
       gtk_box_append(mainBox, GTK_WIDGET(buttonBox));
       gtk_widget_set_vexpand(GTK_WIDGET(mainBox), true);
       gtk_widget_set_hexpand(GTK_WIDGET(mainBox), true); 
@@ -79,6 +158,7 @@ private:
       auto dirLen = strlen(dir)+1;
       auto listBox = GTK_LIST_BOX(gtk_list_box_new());
       gtk_list_box_set_selection_mode(listBox,  GTK_SELECTION_SINGLE );
+
       for (auto l=list; l && l->data; l=l->next){
         auto path = (const char *)l->data;
         TRACE("Process path: %s\n", path);
@@ -115,6 +195,7 @@ private:
         gtk_widget_add_controller (GTK_WIDGET (row), GTK_EVENT_CONTROLLER (dragSource));
 
         gtk_list_box_append(listBox, GTK_WIDGET(row));
+        if (l == list) gtk_list_box_select_row (listBox, row);
       }
       return listBox;
     }
@@ -201,7 +282,8 @@ private:
       auto path = g_strconcat(dir, G_DIR_SEPARATOR_S, text, NULL);
       new OpenWith<bool>(textview, path);
       g_free(path);
-      gtk_widget_set_visible(GTK_WIDGET(window), false);
+      close(NULL, window);
+
       return;
     }
 
