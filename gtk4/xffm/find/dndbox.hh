@@ -102,15 +102,60 @@ private:
 
 
         auto row = GTK_LIST_BOX_ROW(gtk_list_box_row_new());
+        g_object_set_data(G_OBJECT(row), "window", window);
         gtk_list_box_row_set_child(row, GTK_WIDGET(box));
         g_signal_connect(G_OBJECT(row), "activate", G_CALLBACK(activate), window);
         g_object_set_data(G_OBJECT(row), "listBox", listBox);
 
         g_object_set_data(G_OBJECT(row), "label", label);
+
+        GtkDragSource *dragSource = gtk_drag_source_new();
+        g_signal_connect (dragSource, "prepare", G_CALLBACK (dragPrepare), row);
+        g_signal_connect (dragSource, "drag-begin", G_CALLBACK (dragBegin), row);
+        gtk_widget_add_controller (GTK_WIDGET (row), GTK_EVENT_CONTROLLER (dragSource));
+
         gtk_list_box_append(listBox, GTK_WIDGET(row));
       }
       return listBox;
     }
+
+    static GdkContentProvider *
+    dragPrepare(GtkDragSource* self, gdouble x, gdouble y, void *row){
+        DBG("drag prepare\n");
+            GdkContentProvider *content;
+            char *string = g_strdup("");
+            auto window = g_object_get_data(G_OBJECT(row), "window");
+            auto label = GTK_LABEL(g_object_get_data(G_OBJECT(row), "label"));
+            auto dir = (const char *)g_object_get_data(G_OBJECT(window), "dir");
+            auto text = gtk_label_get_text(label);
+
+            auto path = g_strconcat(dir,"/",text,NULL);
+            auto selectedPath = g_strconcat("file://", path, "\n", NULL);
+            Basic::concat(&string, selectedPath);
+            g_free(path);
+            g_free(selectedPath);
+            
+            GBytes *bytes = g_bytes_new(string, strlen(string)+1);
+            content = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
+            g_free(string);
+            return content;
+    }
+    static void
+    dragBegin (GtkDragSource *source,
+                   GdkDrag       *drag,
+                   GtkListBoxRow *self)
+    {
+        DBG("drag begin\n");
+    /*
+      // Set the widget as the drag icon
+      GdkPaintable *paintable = gtk_widget_paintable_new (GTK_WIDGET (self));
+      gtk_drag_source_set_icon (source, paintable, 0, 0);
+      g_object_unref (paintable);
+      */
+    }
+
+
+
 
     static GtkScrolledWindow *mkScrolledWindow(){
       auto  sw = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new());
