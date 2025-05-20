@@ -395,10 +395,22 @@ class FindSignals {
         Data->argument[i] = (char *)0;
     }
 
+  private:
+    //GList *dndWindowList_=NULL;
+
   public:
+/*    GList *dndWindowList(void){ return dndWindowList_;}
+
+    void addDndWindow(GtkWindow *window){
+      dndWindowList_ = g_list_prepend(dndWindowList_, window);
+    }*/
+    
   ~FindSignals(void){
+    DBG("*************  ~FindSignals\n");
+    // XXX not happening...
     freeFgrData(lastData_);
   }
+
 
   void *lastData(void){return lastData_;}
   void lastData(void *value){lastData_ = value;}
@@ -526,7 +538,9 @@ class FindSignals {
          int k = 0;
          for (;Data->argument[k];k++);
          k--;
-         DnDBox<Type>::openDnDBox(Data->argument[k], dndList);
+         auto textview = object->textview();
+         auto dndBox = DnDBox<Type>::openDnDBox(Data->argument[k], dndList, textview);
+         //if (dndBox) object->addDndWindow(dndBox);
        } else {
          DBG("No Data->findList\n");
        }    

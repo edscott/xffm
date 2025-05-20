@@ -5,6 +5,36 @@ namespace xf {
   class Basic {
     public:
 
+    static char *getPath(GFileInfo *info){
+      if (!info) return NULL;
+      auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
+      return g_file_get_path(file);
+    }
+
+    static GFileInfo *getFileInfo(GFile *file){
+       GError *error_ = NULL;
+        auto fileInfo = g_file_query_info(file, "standard::",
+            G_FILE_QUERY_INFO_NONE, NULL, &error_);
+        if (error_){
+          DBG("Basic::getFileInfo: %s\n", error_->message);
+          g_error_free(error_);
+          return NULL;
+        }
+        return fileInfo;
+    }
+
+    static GFile *getGfile(GFileInfo *info){
+      return G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
+    }
+
+    static GFile *getGfile(const char *path){
+      if (!path || !g_file_test(path, G_FILE_TEST_EXISTS)){
+        DBG("Basic::getGfile failed for \"%s\"\n", path);
+        return NULL;
+      }
+      return g_file_new_for_path(path);
+    }
+
     static char **getVector(const char *text, const char *token){
       auto string =g_strdup(text);
       g_strstrip(string);     
@@ -82,9 +112,6 @@ namespace xf {
         return GTK_WINDOW(g_list_first(dialogStack)->data);
       }
 */
-      static GFile *getGfile(GFileInfo *info){
-        return G_FILE(g_file_info_get_attribute_object(info, "standard::file"));
-      }
 
       static void freeSelectionList(GList *selectionList){
         if (!selectionList) return;
@@ -186,11 +213,6 @@ public:
             return retval;
         }
         return NULL;
-    }
-
-    static char *getPath(GFileInfo *info){
-        auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-        return g_file_get_path(file);
     }
       
     static void setDialog(GtkWindow *dialog){

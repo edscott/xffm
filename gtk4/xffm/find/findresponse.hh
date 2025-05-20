@@ -164,7 +164,7 @@ public:
       }
 
       ~FindResponse (void){
-        DBG("*** ~FindResponse\n");
+        DBG("************** ~FindResponse\n");
         g_free(folder_);
         //exit(0);
       }
@@ -322,7 +322,7 @@ sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars,
 
       static void *asyncNo(void *data){
         auto dialogObject = (dialog_t *)data;
-        DBG("%s", "goodbye world asyncNo\n");
+        DBG("%s", "findresponse ................ goodbye world asyncNo\n");
         gtk_widget_set_visible(GTK_WIDGET(dialogObject->dialog()), false);
         Basic::flushGTK();
         exit(0);

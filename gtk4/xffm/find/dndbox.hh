@@ -12,17 +12,34 @@ template <class Type>
 class DnDBox{
 public:
 
-  //GList *findResultsWidgets_ = NULL;
-/*
-    static void
-    onResponse (GtkWidget * widget, gpointer data) {
-      pthread_mutex_lock(&findResultsMutex);
-        findResultsWidgets = g_list_remove(findResultsWidgets, widget);
-      pthread_mutex_unlock(&findResultsMutex);
-    }
-    */
+    static GtkWindow *
+    openDnDBox(const gchar *dir, GSList *list, GtkTextView *textview){
+      DBG("openDnDBox... dir = %s\n", dir);
+      if (g_slist_length(list) == 0) return NULL;
 
-//private:
+      auto window = createWindow(dir, list);
+      auto mainBox = mkMainBox(dir, window);
+      auto listBox = mkListBox(dir,list);
+      g_object_set_data(G_OBJECT(listBox), "textview", textview);
+      auto sw = mkScrolledWindow();
+     
+      gtk_window_set_child(window, GTK_WIDGET(mainBox));
+      gtk_box_append(mainBox, GTK_WIDGET(sw));
+      gtk_scrolled_window_set_child(sw, GTK_WIDGET(listBox));
+      
+      mkGesture(GTK_WIDGET(listBox), (void *)window);
+
+      // FIXME: unselect all is not working...
+      gtk_list_box_unselect_all(listBox);
+      
+      gtk_widget_realize(GTK_WIDGET(window));
+      Basic::setAsDialog(window);
+      gtk_window_present(window);
+
+      return window;
+    }
+
+private:
 
     static void close(GtkButton *button, GtkWindow *window){
       //gtk_widget_set_visible(window, false);
@@ -32,21 +49,15 @@ public:
         g_free(l->data);
       }
       g_slist_free(list);
-      gtk_window_destroy(window);
+      auto dir = g_object_get_data(G_OBJECT(window), "dir");
+      g_free(dir);
+      gtk_widget_set_visible(GTK_WIDGET(window), false);
+      //gtk_window_destroy(window);
     }
 
-    static void
-    openDnDBox(const gchar *dir, GSList *list){
-      if (g_slist_length(list) == 0) return;
-
-      GtkWindow *window = GTK_WINDOW(gtk_window_new());
-      g_object_set_data(G_OBJECT(window), "list", list);
-      gtk_window_set_title(window, _("Search results"));
-      gtk_widget_set_size_request(GTK_WIDGET(window), 500, 400);
-
-      DBG("openDnDBox... title %s\n", dir);
-      auto dirLen = strlen(dir)+1;
+    static GtkBox *mkMainBox(const gchar *dir, GtkWindow *window){
       auto mainBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+
       auto buttonBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
       auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
@@ -58,26 +69,29 @@ public:
       g_free(string);
       g_free(markup);
       gtk_box_append(buttonBox, GTK_WIDGET(label));
+      gtk_box_append(mainBox, GTK_WIDGET(buttonBox));
+      gtk_widget_set_vexpand(GTK_WIDGET(mainBox), true);
+      gtk_widget_set_hexpand(GTK_WIDGET(mainBox), true); 
+      return mainBox;
+    }
 
+    static GtkListBox *mkListBox(const gchar *dir, GSList *list){
+      auto dirLen = strlen(dir)+1;
       auto listBox = GTK_LIST_BOX(gtk_list_box_new());
-      gtk_list_box_set_selection_mode(listBox, GTK_SELECTION_SINGLE);
+      gtk_list_box_set_selection_mode(listBox,  GTK_SELECTION_SINGLE );
       for (auto l=list; l && l->data; l=l->next){
-        auto path = (char *)l->data;
-//        auto listBoxRow = GTK_LIST_BOX_ROW(gtk_list_box_row_new());
-        DBG("Process path: %s\n", path);
+        auto path = (const char *)l->data;
+        TRACE("Process path: %s\n", path);
         auto box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         gtk_box_append(GTK_BOX(box), imageBox);
           
         //auto info = Basic::getInfo(file);
-        auto file = g_file_new_for_path(path);
-        GError *error_ = NULL;
-        auto fileInfo = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-        if (error_){
-          g_object_unref(G_OBJECT(file));
-          g_error_free(error_);
-          continue;
-        }
+        auto file = Basic::getGfile(path);
+        if (!file) continue;
+        auto fileInfo = Basic::getFileInfo(file);
+        if (!fileInfo){ g_object_unref(G_OBJECT(file)); continue; }
+
         auto image = Texture<bool>::getImage(fileInfo, 24);
         g_object_unref(G_OBJECT(file));
         g_object_unref(G_OBJECT(fileInfo));
@@ -85,41 +99,70 @@ public:
         
         auto label = gtk_label_new(path+dirLen);
         gtk_box_append(GTK_BOX(box), label);
-        gtk_list_box_append(listBox, box);
+
+
+        auto row = GTK_LIST_BOX_ROW(gtk_list_box_row_new());
+        gtk_list_box_row_set_child(row, GTK_WIDGET(box));
+
+        g_object_set_data(G_OBJECT(row), "label", label);
+        gtk_list_box_append(listBox, GTK_WIDGET(row));
       }
-      //auto columnView = getColumnView(list); 
+      return listBox;
+    }
 
-      gtk_widget_set_vexpand(GTK_WIDGET(mainBox), true);
-      gtk_widget_set_hexpand(GTK_WIDGET(mainBox), true); 
-
-
-
-      //GtkBox *mainBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-      //GtkWidget *sw = gtk_scrolled_window_new();
-      //gtk_widget_set_vexpand(GTK_WIDGET(listBox), true);
-      //gtk_widget_set_hexpand(GTK_WIDGET(listBox), true);      
+    static GtkScrolledWindow *mkScrolledWindow(){
       auto  sw = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new());
       gtk_scrolled_window_set_policy(sw, GTK_POLICY_AUTOMATIC,GTK_POLICY_AUTOMATIC);
       gtk_widget_set_vexpand(GTK_WIDGET(sw), true);
       gtk_widget_set_hexpand(GTK_WIDGET(sw), true); 
-
-      gtk_window_set_child(window, GTK_WIDGET(mainBox));
-      gtk_box_append(mainBox, GTK_WIDGET(buttonBox));
-      gtk_box_append(mainBox, GTK_WIDGET(sw));
-      gtk_scrolled_window_set_child(sw, GTK_WIDGET(listBox));
-      // FIXME: unselect all is not working...
-      gtk_list_box_unselect_all(listBox);
-      
-      gtk_widget_realize(GTK_WIDGET(window));
-      Basic::setAsDialog(window);
-      gtk_window_present(window);
+      return sw;
+   }
 
 
-
-      return;
+    static GtkWindow *createWindow(const gchar *dir, GSList *list){
+      GtkWindow *window = GTK_WINDOW(gtk_window_new());
+      g_object_set_data(G_OBJECT(window), "list", list);
+      gtk_window_set_title(window, _("Search results"));
+      gtk_widget_set_size_request(GTK_WIDGET(window), 500, 400);
+      g_object_set_data(G_OBJECT(window), "dir", g_strdup(dir));
+      return window;
     }
 
-private:
+    static void mkGesture(GtkWidget *widget, void *data){
+      auto gesture1 = gtk_gesture_click_new();
+      gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture1),GTK_PHASE_CAPTURE);
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
+      gtk_widget_add_controller (widget, GTK_EVENT_CONTROLLER(gesture1));    
+      g_signal_connect (G_OBJECT(gesture1) , "released", 
+          EVENT_CALLBACK (cvClick), data);
+
+    }
+
+    static gboolean
+    cvClick (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *window ){
+      if (n_press != 2) return FALSE;
+      DBG("cvClick n_press = %d\n", n_press);
+      auto listBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      auto textview = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(listBox),"textview"));
+      // openwith dialog...
+      GtkListBoxRow *row = gtk_list_box_get_selected_row (GTK_LIST_BOX(listBox));
+      auto label = GTK_LABEL(g_object_get_data(G_OBJECT(row), "label"));
+      auto dir = (const char *)g_object_get_data(G_OBJECT(window), "dir");
+      auto text = gtk_label_get_text(label);
+
+      DBG("path = \"%s/%s\"\n", dir,text);
+      auto path = g_strconcat(dir, G_DIR_SEPARATOR_S, text, NULL);
+      new OpenWith<bool>(textview, path);
+      g_free(path);
+      gtk_widget_set_visible(GTK_WIDGET(window), false);
+      return TRUE;
+    }
+
 #if 0
     static void
     activate (GtkTreeView     *treeView,

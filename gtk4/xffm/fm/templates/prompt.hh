@@ -10,16 +10,30 @@ namespace xf {
     GtkTextView *input(void){ return input_;}
     GtkTextView *dollar(void){ return dollar_;}
     private:
-    GtkBox *promptBox_;
-    GtkTextView *input_;
-    GtkTextView *dollar_;
-    GtkBox *buttonSpace_;
+    GtkBox *promptBox_ = NULL;
+    GtkTextView *input_ = NULL;
+    GtkTextView *dollar_ = NULL;
+    GtkBox *buttonSpace_ = NULL;
     
-    GtkButton *promptButton_;
-    GtkButton *clearButton_;
-    GtkScale *sizeScale_;
+    GtkButton *promptButton_ = NULL;
+    GtkButton *clearButton_ = NULL;
+    GtkScale *sizeScale_ = NULL;
 
     public:
+    
+    Prompt(GtkTextView *output) {
+      TRACE("constructor 3\n");
+      input_ = UtilBasic::createInput(); 
+      g_object_set_data(G_OBJECT(input_), "output", output);
+      
+      //g_object_set_data(G_OBJECT(input_), "child", child);
+
+      auto keyController = gtk_event_controller_key_new();
+      gtk_widget_add_controller(GTK_WIDGET(input_), keyController);
+      g_signal_connect (G_OBJECT (keyController), "key-pressed", 
+            G_CALLBACK (this->on_keypress), (void *)input_);
+    }
+
     Prompt(GtkWidget *child) {
       GtkBox *buttonSpace = Child::getButtonSpace(child);
       GtkTextView *output = Child::getOutput(child);
@@ -74,6 +88,7 @@ namespace xf {
     static pid_t
     run(GtkTextView *output, const gchar *command, bool withRunButton, bool showTextPane, GtkBox *buttonSpace){
       TRACE("Prompt::run: \"%s\"\n", command);
+
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(output), "child"));
         pid_t childPID = 0;
         auto workdir = Child::getWorkdir(child);

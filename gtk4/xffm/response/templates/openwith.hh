@@ -16,8 +16,10 @@ class OpenWith {
     GtkProgressBar *timeoutProgress_;
     GtkCheckButton *checkbutton_;
     GtkTextView *input_;
+    GtkTextView *output_;
     GtkWidget *child_;
     GList *selectionList_ = NULL;
+    bool withTextview_ = false;
    
 protected:
     GtkEventController *raiseController(void){return raiseController_;}
@@ -28,6 +30,7 @@ protected:
     GtkProgressBar *progress(void){return timeoutProgress_;}
     GtkCheckButton *checkbutton(void){ return checkbutton_;}
     GtkTextView *input(void){ return input_;}
+    GtkTextView *output(void){ return output_;}
     GtkWidget *child(void){ return child_;}
         
     Prompt<Type> *prompt_p;
@@ -70,7 +73,10 @@ protected:
     }
 
 public:
+    void withTextview(bool value){withTextview_ = value;}
+    bool withTextview(void){return withTextview_;}
     void freeSelectionList(void){
+      if (!selectionList_) return;
       Basic::freeSelectionList(selectionList_);
     } 
     ~OpenWith (void){
@@ -81,11 +87,19 @@ public:
        gtk_window_destroy(dialog_);
     }
 
+    OpenWith (GtkTextView *output, const gchar *inPath){
+      if (!inPath || !g_file_test(inPath, G_FILE_TEST_EXISTS)) throw 1;
+      if (!output) throw 2;
+      output_ = output;
+      path_ = g_strdup(inPath);
+      mkDialog(output);
+
+    }
+
     OpenWith (GtkWindow *parent, const gchar *inPath, GList *selectionList){
       selectionList_ = selectionList;
-      const gchar *windowTitle = _("Open With...");
       child_ = Child::getChild();
-      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child_), "output"));
+      output_ = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child_), "output"));
 
       if (inPath) path_ = g_strdup(inPath);
       else {
@@ -96,9 +110,16 @@ public:
         auto info = G_FILE_INFO(selectionList_->data);
         path_ = Basic::getPath(info);
       }
+      mkDialog(NULL);
 
+         
+        return;
+    }
+
+private:
+    void mkDialog(GtkTextView *textView){
+      const gchar *windowTitle = _("Open With...");
       timeout_ = 10;
-
       dialog_ = GTK_WINDOW(gtk_window_new ());
       //Basic::pushDialog(dialog_);
       gtk_window_set_decorated(dialog_, true);
@@ -140,10 +161,15 @@ public:
       Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(label), TRUE, TRUE, 0);
 
       // prompt
-      auto child = Child::getChild();
-      buttonSpace = Child::getButtonSpace(child);
-      prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
-      g_object_set_data(G_OBJECT(child), "prompt", prompt_p); // Flexible prompt object.
+      if (textView == NULL) {
+        auto child = Child::getChild();
+        buttonSpace = Child::getButtonSpace(child); // XXX Apparently not used anymore.
+        prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
+        g_object_set_data(G_OBJECT(child), "prompt", prompt_p); // Flexible prompt object.
+      } else {
+        prompt_p = (Prompt<Type> *) new Prompt<Type>(textView);
+      }
+
       auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
       auto label2 = GTK_LABEL(gtk_label_new (windowTitle));
@@ -216,9 +242,15 @@ public:
         g_object_set_data(G_OBJECT(dialog_), "mimetype", mimetype);
         //g_free(mimetype);
 
-        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
-        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
-        Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
+        if (textView == NULL) {
+          auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
+          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
+          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
+        } else {
+          auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)okTextview, this);
+          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
+          Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
+        }
         //auto cancel = Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, this);
         //Basic::boxPack0(GTK_BOX (hbox),GTK_WIDGET(cancel), FALSE, FALSE, 10);
      
@@ -288,18 +320,16 @@ public:
         gtk_window_present(dialog_);
 
         setRaise();
-        
-        return;
-    }
+   }
     
     static void
     run(OpenWith *object){
-       if (!Child::valid(object->child())){
-         DBG("Child widget (%p) is no longer valid.\n", object->child());
+       if (!Child::valid(object->child()) && object->withTextview()==false){
+         DBG("Child widget (%p) is not valid child=%p, output=%p.\n",
+             object->child(), object->output());
          return;
        }
-
-        auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(object->child()), "output"));
+        auto output = GTK_TEXT_VIEW(object->output());
         bool inTerminal = gtk_check_button_get_active(object->checkbutton());
         // get input text
         auto buffer = gtk_text_view_get_buffer(object->input());
@@ -341,7 +371,11 @@ public:
         g_free(p);
         g_free(e);
         g_free(key);
-        object->prompt_p->run(output, command, true, true, object->buttonSpace);
+        if (object->withTextview()) {
+          object->prompt_p->run(output, command, false, false, NULL);
+        } else {
+          object->prompt_p->run(output, command, true, true, object->buttonSpace);
+        }
         g_free(command);
         g_free(inputText);
     }
@@ -427,6 +461,19 @@ public:
     }
 
 private:
+    
+    static void
+    okTextview (GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data) {
+        auto object = (OpenWith *)data;
+        object->withTextview(true);
+        run(object);
+        object->timeout_=-1;
+        //gtk_window_present(GTK_WINDOW(Child::mainWidget()));
+    }
     
     static void
     ok (GtkGestureClick* self,
