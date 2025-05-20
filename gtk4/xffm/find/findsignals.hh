@@ -4,8 +4,10 @@
 namespace xf
 {
         ///////////////////   signals  /////////////////////////
+template <class Type> class DnDBox;
 template <class Type>
 class FindSignals {
+  void *lastData_ = NULL;
     static const gchar *
     get_time_type(GtkBox *mainBox){
         if (gtk_toggle_button_get_active ((GtkToggleButton *) g_object_get_data(G_OBJECT(mainBox), "radio1"))){
@@ -47,7 +49,15 @@ class FindSignals {
             g_free(path);
             return FALSE;
         }
+
+        auto lastData = object->lastData();
+        freeFgrData(lastData);
+
         fgrData_t *Data = (fgrData_t *)calloc(1,sizeof(fgrData_t));
+        object->lastData(Data);
+
+        g_object_set_data(G_OBJECT(object->mainBox()), "lastData", Data);
+
         Data->mainBox = object->mainBox();
         object->Data(Data);
         Data->object = (void *)object;
@@ -386,6 +396,12 @@ class FindSignals {
     }
 
   public:
+  ~FindSignals(void){
+    freeFgrData(lastData_);
+  }
+
+  void *lastData(void){return lastData_;}
+  void lastData(void *value){lastData_ = value;}
     static void
     onFindButton (GtkWidget * button, void *data) {
       auto object = (FindResponse<Type> *)data;
@@ -405,7 +421,8 @@ class FindSignals {
       auto object = (FindResponse<Type> *)data;
         GtkWindow *dialog = object->dialog();
         GtkTextView *textview = object->textview();
-        GSList *list = lastFind;
+        fgrData_t *Data = (fgrData_t *)object->lastData();
+        GSList *list = Data->findList;
 
         /*if (!list || g_slist_length(list) < 1) {
             rfm_diagnostics(widgets_p, "xffm/stock_dialog-warning",NULL);
@@ -476,18 +493,20 @@ class FindSignals {
         gtk_paned_set_position(vpane, 2500);
     }
 
-    static gboolean
+    static void
     freeFgrData(void *data){
+      if (!data) return;
         fgrData_t *Data = (fgrData_t *)data;
         gchar **a=Data->argument;
         for (;*a; a++) g_free(*a);
+        for (auto l=Data->findList; l && l->data; l=l->next) g_free(l->data);
+        g_slist_free(Data->findList);
         g_free(Data->argument);
         g_free(Data);
-        return FALSE;
+        return ;
     }
 
-    static gboolean
-    Cleanup (void *data) {
+    static void *processEnd(void *data){
        fgrData_t *Data = (fgrData_t *)data;
        TRACE("Cleanup\n");
        auto object = (FindResponse<Type> *)Data->object;
@@ -497,23 +516,42 @@ class FindSignals {
        gtk_widget_set_sensitive(cancel, false);
        gtk_widget_set_sensitive(GTK_WIDGET(object->findButton()), true);
        Basic::flushGTK();
-       
+       if (Data->findList) {
+         GSList *dndList = NULL;
+         for (auto l=Data->findList; l && l->data; l=l->next){
+           auto string = (const char *)l->data;
+           dndList = g_slist_append(dndList, g_strdup(string));
+         }
+         
+         int k = 0;
+         for (;Data->argument[k];k++);
+         k--;
+         DnDBox<Type>::openDnDBox(Data->argument[k], dndList);
+       } else {
+         DBG("No Data->findList\n");
+       }    
 
        GtkWidget *edit_button = GTK_WIDGET(g_object_get_data(G_OBJECT(mainBox), "edit_button"));
-       if (g_slist_length(lastFind)){
+       if (g_slist_length(Data->findList)){
             const gchar *editor = Basic::getEditor();
             if (!editor || strlen(editor)==0){
                 GtkTextView *textview = object->textview();
                 Print::print(textview, EMBLEM_WARNING, 
                         g_strdup_printf("%s\n", _("No editor for current action.")));
-                return FALSE;
+                return NULL;
             }
             gtk_widget_set_sensitive(GTK_WIDGET(edit_button), TRUE);
        } else {
             gtk_widget_set_sensitive(GTK_WIDGET(edit_button), FALSE);
        }
+       return NULL;
+    }
+
+    static gboolean
+    Cleanup (void *data) {
+       fgrData_t *Data = (fgrData_t *)data;
        if (Data->done) {
-           freeFgrData(Data);
+           // FIXME: not yet... freeFgrData(Data);
            return FALSE;
        }
        return TRUE;
@@ -594,24 +632,23 @@ class FindSignals {
                 gchar *message = g_strdup_printf(_("%s Finished : %s"), xffindProgram, plural_text);
                 gchar *g = g_strdup_printf("%c[31m%s\n",27, message);
                 Print::print(textview, EMBLEM_RED_BALL, "Red", g);
+
+                /*
                 // Free last find results
                 GSList *list = lastFind;
                 for(;list; list=list->next) g_free(list->data);
                 g_slist_free(lastFind);
                 // assign new find results
-                lastFind = Data->findList;
+                lastFind = Data->findList;*/
+
                 Data->done = TRUE;
-                list = lastFind;
+                Basic::context_function(processEnd,data);
+                /* list = lastFind;
                 for (;list && list->data; list=list->next){
                     TRACE("last find: %s\n", (gchar *)list->data);
-                }
-                // FIXME FIXME construct DnDBox class template
-                // DnDBox<Type>::openDnDBox(findDialog, plural_text, lastFind);
-                
+                }*/
 
-                // cleanupmake
-                //
-                g_free(plural_text);
+                  g_free(plural_text);
                 g_free(message);
         } else {
             if (!gtk_widget_is_visible(GTK_WIDGET(textview))) return;

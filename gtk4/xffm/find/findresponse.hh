@@ -90,7 +90,7 @@ namespace xf
       gboolean default_match_words=FALSE;
       gboolean default_match_lines=FALSE;
       gboolean default_match_no_match=FALSE;
-      GSList *find_list = NULL;
+//      GSList *find_list = NULL;
       gchar  *last_workdir = NULL;
       GtkButton *findButton_ = NULL;
     

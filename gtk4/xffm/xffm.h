@@ -123,6 +123,7 @@ static void *mainWindow_p = NULL;
 #include "find/findresponse.hh"
 #include "find/findsignals.hh"
 #include "find/find.hh"
+#include "find/dndbox.hh"
 
 // menu templates
 #include "menus/templates/menu.hh"
