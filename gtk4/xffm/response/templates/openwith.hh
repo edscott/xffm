@@ -322,7 +322,7 @@ private:
     static void
     run(OpenWith *object){
        if (!Child::valid(object->child()) && object->withTextview()==false){
-         DBG("Child widget (%p) is not valid child=%p, output=%p.\n",
+         DBG("Child widget (%p) is not valid, output=%p.\n",
              object->child(), object->output());
          return;
        }
