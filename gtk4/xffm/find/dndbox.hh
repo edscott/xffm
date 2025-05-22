@@ -109,29 +109,9 @@ private:
       auto mainBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
 
       auto buttonBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-      auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
-      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
-      gtk_box_append(buttonBox, GTK_WIDGET(button));
-
-      auto label =GTK_LABEL(gtk_label_new(""));
-      auto string = g_strdup_printf(_("Search results for %s"), dir);
-      auto markup = g_strconcat("<span color=\"green\">",string,"/</span>", NULL);
-      gtk_label_set_markup(label, markup);
-      g_free(string);
-      g_free(markup);
-      gtk_box_append(buttonBox, GTK_WIDGET(label));
-
-      // pack end hack
-      auto margin = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-      gtk_widget_set_hexpand(GTK_WIDGET(margin), true); 
-      auto space = gtk_label_new(" ");
-      gtk_box_append(GTK_BOX(margin),space);
-      gtk_box_append(GTK_BOX(buttonBox),margin);
-
-
-
+ 
+ 
       GtkButton *edit_button = NULL;
-
       auto editor =Basic::getEditor();
       if (editor && strlen(editor)){
           auto basename = g_strdup(editor);
@@ -154,8 +134,26 @@ private:
       } else {
           TRACE("getEditor() = \"%s\"\n", editor);
       }
-           
+     
+      auto label =GTK_LABEL(gtk_label_new(""));
+      auto string = g_strdup_printf(_("Search results for %s"), dir);
+      auto markup = g_strconcat("<span color=\"green\">",string,"/</span>", NULL);
+      gtk_label_set_markup(label, markup);
+      g_free(string);
+      g_free(markup);
+      gtk_box_append(buttonBox, GTK_WIDGET(label));
 
+      // pack end hack
+      auto margin = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      gtk_widget_set_hexpand(GTK_WIDGET(margin), true); 
+      auto space = gtk_label_new(" ");
+      gtk_box_append(GTK_BOX(margin),space);
+      gtk_box_append(GTK_BOX(buttonBox),margin);
+
+     auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
+      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
+      gtk_box_append(buttonBox, GTK_WIDGET(button));
+          
       gtk_box_append(mainBox, GTK_WIDGET(buttonBox));
       gtk_widget_set_vexpand(GTK_WIDGET(mainBox), true);
       gtk_widget_set_hexpand(GTK_WIDGET(mainBox), true); 

@@ -597,7 +597,7 @@ private:
             auto buffer = gtk_entry_get_buffer(entry);
             
             gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
-            if (tooltipText) Basic::setTooltip(GTK_WIDGET(entry), tooltipText);
+            //if (tooltipText) Basic::setTooltip(GTK_WIDGET(entry), tooltipText);
             if (!history) return box;
 
             GList *list = loadHistory(history);
@@ -620,6 +620,12 @@ private:
             //addKeyController(GTK_WIDGET(entry), (void *)button);
             g_signal_connect(G_OBJECT(entry), "notify", G_CALLBACK(notifyEntry), button);
             
+            if (tooltipText) {
+              auto image = Texture<bool>::getImage("dialog-question", 18);
+              gtk_box_append(box, GTK_WIDGET(image));
+              Basic::setTooltip(GTK_WIDGET(image), tooltipText);
+            }
+
 
 
 
