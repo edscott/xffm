@@ -5,6 +5,9 @@ emblem-h.svg
 emblem-f.svg
 emblem-o.svg
 emblem-m.svg
+emblem-error.svg
+emblem-warning.svg
+emblem-question.svg
 emblem-archlinux.svg
 emblem-bak.svg
 emblem-blockdevice.svg

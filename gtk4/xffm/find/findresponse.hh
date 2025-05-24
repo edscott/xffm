@@ -193,43 +193,48 @@ public:
         return NULL;
       }
 
-static void
-notify ( GObject* self, GParamSpec *pspec, void *data){
-  auto call = g_param_spec_get_name(pspec);
-  if (!call) return;
-  if (strcmp(call, "selected-item")) return;
-  if (g_object_get_data(self, "halt")){
-    g_object_set_data(self, "halt", NULL);
-    TRACE(" return on halt.\n");
-    return;
-  }
+    static void
+    notify ( GObject* self, GParamSpec *pspec, void *data){
+      auto call = g_param_spec_get_name(pspec);
+      if (!call) return;
+      if (strcmp(call, "selected-item")) return;
+      if (g_object_get_data(self, "halt")){
+        g_object_set_data(self, "halt", NULL);
+        TRACE(" return on halt.\n");
+        return;
+      }
 
-  
-  DBG("*** notify name=%s\n", g_param_spec_get_name(pspec));
+      
+      DBG("*** notify name=%s\n", g_param_spec_get_name(pspec));
 
-  if (!GTK_IS_ENTRY(data)) {
-    DBG("*** FIXME: identify notify call\n");
-    return; // FIXME hack!
-            // notify is called when window is closed
-            // and by then the pointer to entry is invalid.
-            // Must use pspec or something to distinguish the
-            // notify call.
-  }
-  auto dd = GTK_DROP_DOWN(self); 
+      if (!GTK_IS_ENTRY(data)) {
+        DBG("*** FIXME: identify notify call\n");
+        return; // FIXME hack!
+                // notify is called when window is closed
+                // and by then the pointer to entry is invalid.
+                // Must use pspec or something to distinguish the
+                // notify call.
+      }
+      auto dd = GTK_DROP_DOWN(self); 
+      auto inactive = g_object_get_data(G_OBJECT(data), "inactive");
+      if (!inactive) updateEntry(GTK_ENTRY(data), dd);
+      //g_object_set_data(G_OBJECT(data), "inactive", NULL);
+      //DBG("notify callback, data=%p, item=%p, selected=%s\n", data,item,selected);
+      
+    }
 
-  auto item = GTK_STRING_OBJECT(gtk_drop_down_get_selected_item(dd));
-  auto selected = gtk_string_object_get_string(item);
-  auto buffer = gtk_entry_get_buffer(GTK_ENTRY(data));
-  gtk_entry_buffer_set_text(buffer, selected, -1);
-  auto sWidget = g_object_get_data(G_OBJECT(data), "sWidget");
-  if (sWidget){
-    gtk_widget_set_sensitive(GTK_WIDGET(sWidget), (selected && strlen(selected) > 0));
-  }
+    static void updateEntry(GtkEntry *entry, GtkDropDown *dd){
+      //if (g_object_get_data(G_OBJECT(entry), "inactive")) return;
+      auto item = GTK_STRING_OBJECT(gtk_drop_down_get_selected_item(dd));
+      auto selected = gtk_string_object_get_string(item);
+      auto buffer = gtk_entry_get_buffer(GTK_ENTRY(entry));
+      gtk_entry_buffer_set_text(buffer, selected, -1);
+      auto sWidget = g_object_get_data(G_OBJECT(entry), "sWidget");
+      if (sWidget){
+        gtk_widget_set_sensitive(GTK_WIDGET(sWidget), (selected && strlen(selected) > 0));
+      }
 
-  DBG("notify callback, data=%p, item=%p, selected=%s\n", data,item,selected);
-  
-}
-
+    }
 
     static void 
     sensitivizeSpin (GtkCheckButton *check, gpointer data){
@@ -339,10 +344,6 @@ sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars,
 
       GtkBox *mainBox(const char *folder) {
 
-        /*auto cbox =GTK_BOX(g_object_get_data(G_OBJECT(dialog_), "cbox"));
-        //auto foo = gtk_label_new("bar");
-        gtk_box_prepend(cbox, foo);*/
-        
         //auto parentObject = this->parent();
 DBG("*** if doFind...1: folder=%s\n", folder);
          
@@ -434,7 +435,7 @@ private:
           gtk_box_append(actionBox, GTK_WIDGET(label));
 
           findButton_ = UtilBasic::mkButton(EMBLEM_FIND, NULL);
-          cancelButton_ = UtilBasic::mkButton(EMBLEM_EXIT, NULL);
+          cancelButton_ = UtilBasic::mkButton(EMBLEM_DELETE, NULL);
           
           //gtk_window_set_default_widget(GTK_WINDOW(dialog_), GTK_WIDGET(findButton_));
           // gtk_widget_set_can_default(GTK_WIDGET(findButton_), TRUE);
@@ -617,11 +618,25 @@ private:
             gtk_box_append(buttonBox, GTK_WIDGET(button));
             gtk_box_append(box, GTK_WIDGET(buttonBox));
 
+      auto gesture1 = gtk_gesture_click_new();
+      gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture1),GTK_PHASE_CAPTURE);
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
+      g_signal_connect (G_OBJECT(gesture1) , "pressed", 
+          EVENT_CALLBACK (ddClick1), entry);
+      gtk_widget_add_controller (button, GTK_EVENT_CONTROLLER(gesture1));   
+
+      auto gesture2 = gtk_gesture_click_new();
+      gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture2),GTK_PHASE_CAPTURE);
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
+      g_signal_connect (G_OBJECT(gesture2) , "released", 
+          EVENT_CALLBACK (ddClick2), entry);
+      gtk_widget_add_controller (button, GTK_EVENT_CONTROLLER(gesture2));   
+
             //addKeyController(GTK_WIDGET(entry), (void *)button);
             g_signal_connect(G_OBJECT(entry), "notify", G_CALLBACK(notifyEntry), button);
             
             if (tooltipText) {
-              auto image = Texture<bool>::getImage("dialog-question", 18);
+              auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
               gtk_box_append(box, GTK_WIDGET(image));
               Basic::setTooltip(GTK_WIDGET(image), tooltipText);
             }
@@ -631,6 +646,35 @@ private:
 
             return box;
         }
+    static gboolean
+    ddClick1 (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              GtkEntry *entry ){
+      //if (n_press != 2) return FALSE;
+      DBG("ddClick ddclick1 n_press = %d\n", n_press);
+      // FIXME: need to inactivate dd update from entry 
+      //        while this runs...
+      auto buffer = gtk_entry_get_buffer(entry);
+      g_object_set_data(G_OBJECT(entry), "inactive", GINT_TO_POINTER(1));
+      auto dd = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      updateEntry(entry, GTK_DROP_DOWN(dd));
+      //gtk_entry_buffer_set_text(buffer, "foo", -1);
+      return false;
+    }
+    static gboolean
+    ddClick2 (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              GtkEntry *entry ){
+      DBG("ddClick ddclick2 n_press = %d\n", n_press);
+      g_object_set_data(G_OBJECT(entry), "inactive", NULL);
+      return false;
+    }
 
   // FIXME: use textview completion.
         GtkEntry *mkCompletionEntry(GList **list_p){ //

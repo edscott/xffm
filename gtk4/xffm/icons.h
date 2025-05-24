@@ -35,6 +35,9 @@
 #define EMBLEM_APPLY "apply"
 
 // Menu icons
+#define EMBLEM_ERROR "emblem-error"
+#define EMBLEM_WARNING "emblem-warning"
+#define EMBLEM_QUESTION "emblem-question"
 #define EMBLEM_EXIT "emblem-exit"
 #define EMBLEM_BLOWFISH "emblem-blowfish"
 #define EMBLEM_EDIT "emblem-edit"
@@ -70,10 +73,7 @@
 #define EMBLEM_BAK "emblem-bak"
 #define EMBLEM_TERMINAL "emblem-terminal"
 #define EMBLEM_ABOUT "emblem-about"
-#define EMBLEM_WARNING "dialog-warning"
-#define EMBLEM_ERROR "dialog-error"
 #define EMBLEM_INVERT "emblem-invert"
-#define EMBLEM_QUESTION "dialog-question-symbolic"
 #define EMBLEM_TOGGLE "emblem-toggle"
 #define EMBLEM_FOLDER_OPEN "emblem-folder"
 #define EMBLEM_RESET "process-reset"
