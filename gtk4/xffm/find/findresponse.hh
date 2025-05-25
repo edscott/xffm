@@ -233,6 +233,7 @@ public:
       if (sWidget){
         gtk_widget_set_sensitive(GTK_WIDGET(sWidget), (selected && strlen(selected) > 0));
       }
+      gtk_editable_set_position(GTK_EDITABLE(entry), strlen(selected));
 
     }
 
@@ -577,13 +578,7 @@ private:
             gtk_drop_down_set_model(button, model);
             gtk_drop_down_set_selected(button, 0);
           } 
-
-
           g_free(vector);
-
-
-
-          
         }
 
         GtkBox *entryBox(const char *labelText, const char *tooltipText, const char *history) {
@@ -632,20 +627,88 @@ private:
           EVENT_CALLBACK (ddClick2), entry);
       gtk_widget_add_controller (button, GTK_EVENT_CONTROLLER(gesture2));   
 
-            //addKeyController(GTK_WIDGET(entry), (void *)button);
-            g_signal_connect(G_OBJECT(entry), "notify", G_CALLBACK(notifyEntry), button);
+      addKeyController1(entry, (void *)button);
+      addKeyController2(entry, (void *)button);
+ 
+      //g_signal_connect(G_OBJECT(entry), "notify", G_CALLBACK(notifyEntry), button);
             
             if (tooltipText) {
               auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
               gtk_box_append(box, GTK_WIDGET(image));
               Basic::setTooltip(GTK_WIDGET(image), tooltipText);
             }
-
-
-
-
             return box;
         }
+   
+    static gboolean
+    processKey1 (GtkEventControllerKey* self,
+          guint keyval,
+          guint keycode,
+          GdkModifierType state,
+          gpointer data){
+      auto controller = GTK_EVENT_CONTROLLER(self);
+      auto entry = GTK_ENTRY(gtk_event_controller_get_widget(controller));
+      DBG("processKey1 keyval=%d\n", keyval);
+      if (keyval != GDK_KEY_Tab) {
+        return false;
+      }
+      DBG("got tab key, update entry buffer if possible\n");
+      auto dropdown = GTK_DROP_DOWN(data);
+      updateEntry(entry, dropdown);
+      
+      
+      return true;
+    }
+   
+    static gboolean
+    processKey2 (GtkEventControllerKey* self,
+          guint keyval,
+          guint keycode,
+          GdkModifierType state,
+          gpointer data){
+      auto controller = GTK_EVENT_CONTROLLER(self);
+      auto entry = GTK_ENTRY(gtk_event_controller_get_widget(controller));
+      DBG("processKey2 keyval=%d\n", keyval);
+      switch (keyval){
+        case GDK_KEY_Return: 
+        case GDK_KEY_BackSpace:
+        case GDK_KEY_Delete:
+        case GDK_KEY_Home:
+        case GDK_KEY_Left:
+        case GDK_KEY_Up:
+        case GDK_KEY_Right:
+        case GDK_KEY_Page_Up:
+        case GDK_KEY_Page_Down:
+        case GDK_KEY_End:
+        case GDK_KEY_Begin:
+          return false;
+      }
+      auto buffer = gtk_entry_get_buffer(entry);
+     /* if (keyval == GDK_KEY_Escape){
+        gtk_text_buffer_set_text(buffer, "", -1);
+        DBG("got other key, update DD is not return/enter/esc\n");
+        return false;
+      }*/
+
+      return false;
+    }
+
+    static void addKeyController1(GtkEntry  *entry, void *data){
+        auto keyController = gtk_event_controller_key_new();
+        gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(entry), keyController);
+        g_signal_connect (G_OBJECT (keyController), "key-pressed", 
+            G_CALLBACK (processKey1), (void *)data);
+    }
+
+    static void addKeyController2(GtkEntry  *entry, void *data){
+        auto keyController = gtk_event_controller_key_new();
+        gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_BUBBLE);
+        gtk_widget_add_controller(GTK_WIDGET(entry), keyController);
+        g_signal_connect (G_OBJECT (keyController), "key-released", 
+            G_CALLBACK (processKey2), (void *)data);
+    }
+
     static gboolean
     ddClick1 (
               GtkGestureClick* self,
