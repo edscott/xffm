@@ -531,6 +531,51 @@ private:
         }
 
         static void
+        updateDD (GtkEntry *entry, GtkDropDown *dropdown){
+          auto buffer = gtk_entry_get_buffer(entry);
+          auto text = gtk_entry_buffer_get_text(buffer);
+          DBG("updateDD: text=%s\n", text);
+          auto list = (GList *)g_object_get_data(G_OBJECT(entry), "list");
+          GList *newList = NULL;
+          for (auto l=list; l && l->data; l=l->next){
+            if (strncasecmp(text, (const char *)l->data, strlen(text)) == 0){
+              newList = g_list_append(newList, l->data);
+            }
+          }
+
+          for (auto l=newList; l && l->data; l=l->next){
+            TRACE("newList: %s\n", (const char *)l->data);
+          }
+          int n = g_list_length(newList);
+          char **vector = NULL;
+          if (n > 0){
+            vector = (char **)calloc(n+1, sizeof(char*));
+            int k=0;
+            for (auto l=newList; l && l->data; l=l->next,k++){
+              vector[k] =  (char *)l->data;
+            }
+          }
+          g_list_free(newList);
+          auto sWidget = g_object_get_data(G_OBJECT(entry), "sWidget");
+          if (!vector) vector = historyVector(list);
+          
+          if (sWidget){
+            if (strlen(text)) gtk_widget_set_sensitive(GTK_WIDGET(sWidget),true);
+            else gtk_widget_set_sensitive(GTK_WIDGET(sWidget), false);
+          }
+
+          if (vector) {
+            auto model = G_LIST_MODEL (gtk_string_list_new (vector));
+            //auto button = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "button"));
+            g_object_set_data(G_OBJECT(dropdown), "halt", GINT_TO_POINTER(1));
+            gtk_drop_down_set_model(dropdown, model);
+            gtk_drop_down_set_selected(dropdown, 0);
+          } 
+          g_free(vector);
+        }
+
+/*
+        static void
         notifyEntry ( GObject* self, GParamSpec *pspec, void *data){
           auto call = g_param_spec_get_name(pspec);
           if (!call) return;
@@ -580,7 +625,7 @@ private:
           } 
           g_free(vector);
         }
-
+*/
         GtkBox *entryBox(const char *labelText, const char *tooltipText, const char *history) {
             auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
             auto label = GTK_LABEL(gtk_label_new (labelText));
@@ -604,13 +649,13 @@ private:
             auto buttonBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
             g_object_set_data(G_OBJECT(entry), "buttonBox", buttonBox);
 
-            auto button = gtk_drop_down_new_from_strings(vector);
-            g_object_set_data(G_OBJECT(entry), "button", button);
+            auto dropdown = gtk_drop_down_new_from_strings(vector);
+            g_object_set_data(G_OBJECT(entry), "dropdown", dropdown);
 
             gtk_entry_buffer_set_text(buffer, vector[0], -1);
             g_free(vector);
-            g_signal_connect(G_OBJECT(button), "notify", G_CALLBACK(notify), entry);
-            gtk_box_append(buttonBox, GTK_WIDGET(button));
+            g_signal_connect(G_OBJECT(dropdown), "notify", G_CALLBACK(notify), entry);
+            gtk_box_append(buttonBox, GTK_WIDGET(dropdown));
             gtk_box_append(box, GTK_WIDGET(buttonBox));
 
       auto gesture1 = gtk_gesture_click_new();
@@ -618,27 +663,27 @@ private:
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
       g_signal_connect (G_OBJECT(gesture1) , "pressed", 
           EVENT_CALLBACK (ddClick1), entry);
-      gtk_widget_add_controller (button, GTK_EVENT_CONTROLLER(gesture1));   
+      gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture1));   
 
       auto gesture2 = gtk_gesture_click_new();
       gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture2),GTK_PHASE_CAPTURE);
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
       g_signal_connect (G_OBJECT(gesture2) , "released", 
           EVENT_CALLBACK (ddClick2), entry);
-      gtk_widget_add_controller (button, GTK_EVENT_CONTROLLER(gesture2));   
+      gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture2));   
 
-      addKeyController1(entry, (void *)button);
-      addKeyController2(entry, (void *)button);
+      addKeyController1(entry, (void *)dropdown);
+      addKeyController2(entry, (void *)dropdown);
  
       //g_signal_connect(G_OBJECT(entry), "notify", G_CALLBACK(notifyEntry), button);
             
-            if (tooltipText) {
-              auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
-              gtk_box_append(box, GTK_WIDGET(image));
-              Basic::setTooltip(GTK_WIDGET(image), tooltipText);
-            }
-            return box;
+        if (tooltipText) {
+          auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
+          gtk_box_append(box, GTK_WIDGET(image));
+          Basic::setTooltip(GTK_WIDGET(image), tooltipText);
         }
+        return box;
+    }
    
     static gboolean
     processKey1 (GtkEventControllerKey* self,
@@ -683,6 +728,8 @@ private:
         case GDK_KEY_Begin:
           return false;
       }
+      auto dropdown = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "dropdown"));
+      updateDD(entry, dropdown);
       auto buffer = gtk_entry_get_buffer(entry);
      /* if (keyval == GDK_KEY_Escape){
         gtk_text_buffer_set_text(buffer, "", -1);
