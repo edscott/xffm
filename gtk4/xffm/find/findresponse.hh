@@ -143,6 +143,7 @@ namespace xf
    GtkCheckButton *firstGrepRadio_ = NULL;
       GtkTextView *textview_ = NULL;
       GtkBox *mainBox_ = NULL;
+      GtkFrame *frame_ = NULL;
       GtkBox *topPaneVbox_ = NULL;
       GtkBox *topPaneHbox_ = NULL;
       GtkPaned *vpane_ = NULL;
@@ -419,37 +420,22 @@ public:
       GtkBox *mainBox(const char *folder) {
 
         //auto parentObject = this->parent();
-DBG("*** if doFind...1: folder=%s\n", folder);
          
           if (g_file_test(folder, G_FILE_TEST_IS_DIR)) folder_ = realpath(folder, NULL);
           else {
             if (g_file_test(Child::getWorkdir(), G_FILE_TEST_IS_DIR)) folder_ = g_strdup(Child::getWorkdir());
             else folder_ = g_strdup(g_get_home_dir());
           }
-
-DBG("*** if doFind...13\n");
-
           mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
           g_object_set_data(G_OBJECT(mainBox_), "object", this);
           gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), false);
           gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), false);
-          //gtk_window_set_child(findDialog, GTK_WIDGET(mainBox_));
-          DBG("mkVpane  <- \n");
           mkVpane();
-
-          DBG("mkFilterEntry  <- \n");
           mkFilterEntry();
           ////////////////  grep options.... /////////////////////////
-          DBG("mkGrepEntry  <- \n");
           mkGrepEntry();
-          DBG("mkButtonBox  <- \n");
-
- 
-          mkButtonBox(); 
-          //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 812, 462);
+          //mkButtonBox(); 
           gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 600, 460);
-
-          //gtk_widget_realize(GTK_WIDGET(dialog())); //WTF
           postRealize();
           return mainBox_;
       }
@@ -476,10 +462,14 @@ private:
      }
           
       void mkVpane(void){
+          frame_ = GTK_FRAME(gtk_frame_new(NULL));
+          gtk_box_append(mainBox_, GTK_WIDGET(frame_));
+
           vpane_ = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
           gtk_widget_set_vexpand(GTK_WIDGET(vpane_), true);
           gtk_paned_set_wide_handle (vpane_,TRUE);
-          gtk_box_append(mainBox_, GTK_WIDGET(vpane_));
+          gtk_frame_set_child(frame_, GTK_WIDGET(vpane_));
+          //gtk_box_append(mainBox_, GTK_WIDGET(vpane_));
 
           topPaneVbox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
           gtk_widget_set_vexpand(GTK_WIDGET(topPaneVbox_), true);
@@ -502,6 +492,9 @@ private:
 
           ////////////   findButton... /////////////////////////
           auto actionBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3));
+          gtk_frame_set_label_widget(frame_, GTK_WIDGET(actionBox));
+
+
           auto t=g_strdup_printf("<span color=\"blue\" size=\"large\"><b>%s</b></span>  ", _("Find in Files"));
           auto label = GTK_LABEL(gtk_label_new (t));
           gtk_label_set_use_markup (label, TRUE);
@@ -521,8 +514,21 @@ private:
           gtk_box_append(actionBox, GTK_WIDGET(findButton_));
           gtk_box_append(actionBox, GTK_WIDGET(cancelButton_));
           gtk_widget_set_visible(GTK_WIDGET(cancelButton_), false);
-          
-          gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(actionBox), GTK_PACK_END);
+         
+         /////////////  clear button  /////
+         //auto noteBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3));
+         //gtk_box_append(noteBox, gtk_label_new("        "));
+
+         auto clearButton =  UtilBasic::mkButton(EMBLEM_CLEAR, NULL);
+         g_signal_connect (G_OBJECT (clearButton), "clicked",
+                  BUTTON_CALLBACK(FindSignals<Type>::onClearButton), (gpointer)this);
+//         auto clearButton =  boxButton(EMBLEM_CLEAR,(void *) FindSignals<Type>::onClearButton);
+         g_object_set_data(G_OBJECT(mainBox_), "clear_button", clearButton);
+         g_object_set_data(G_OBJECT(clearButton), "mainBox", mainBox_);
+         gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(clearButton), GTK_PACK_END);
+         //gtk_box_append(actionBox, GTK_WIDGET(clearButton));
+ 
+         // gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(actionBox), GTK_PACK_END);
 //          gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(findButton_), GTK_PACK_END);
           Basic::setTooltip(GTK_WIDGET(findButton_), _("Show search results for this query"));
           Basic::setTooltip(GTK_WIDGET(cancelButton_), _("Cancel Operation"));
@@ -1027,11 +1033,9 @@ private:
             return cbox;
         }
 
-        void mkButtonBox(void){
+    /*    void mkButtonBox(void){
             auto hbuttonbox2 = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
             auto clearButton =  boxButton(EMBLEM_CLEAR,(void *) FindSignals<Type>::onClearButton);
-
-
             g_object_set_data(G_OBJECT(mainBox_), "clear_button", clearButton);
             g_object_set_data(G_OBJECT(clearButton), "mainBox", mainBox_);
 
@@ -1039,7 +1043,7 @@ private:
           
             gtk_box_append(hbuttonbox2, GTK_WIDGET(clearButton));
             gtk_box_append(mainBox_, GTK_WIDGET(hbuttonbox2));            
-        }
+        }*/
 
 
     GtkCheckButton *simpleCheck(GtkBox *parentBox, const char *checkName){
