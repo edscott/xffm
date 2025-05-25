@@ -244,12 +244,85 @@ public:
         gtk_widget_set_sensitive(widget, gtk_check_button_get_active(check));
     }
 
-static void
-sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars, void *data){
-  auto box = GTK_WIDGET(data);
-  auto text = gtk_entry_buffer_get_text(self);
-  gtk_widget_set_sensitive(box, strlen(text)>0);
-}
+    static void
+    sensitivize ( GtkEntryBuffer* self, guint position, gchar* chars, guint n_chars, void *data){
+      auto box = GTK_WIDGET(data);
+      auto text = gtk_entry_buffer_get_text(self);
+      gtk_widget_set_sensitive(box, strlen(text)>0);
+    }
+
+
+    static void 
+    saveHistory (GtkEntry *entry, const gchar *history, const gchar *text) {
+        char *historyDir = g_path_get_dirname(history);
+        TRACE("history dir = %s\n", historyDir);
+        if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
+            g_mkdir_with_parents (historyDir, 0770);
+        }
+        g_free(historyDir);
+
+        auto list = (GList *)g_object_get_data(G_OBJECT(entry), "list");
+
+        // if item is already in history, bring it to the front
+        // else, prepend item.
+       
+        bool found = false;
+        for (auto l=list; l && l->data; l=l->next){
+          auto data = (char *)l->data;
+          if (strcmp(data, text)==0){
+            list = g_list_remove(list, data);
+            list = g_list_prepend(list,data);
+            found = true;
+            break;
+          }
+        }
+        if (!found){
+            list = g_list_prepend(list,g_strdup(text));
+        }
+        g_object_set_data(G_OBJECT(entry), "list", list);
+        // rewrite history file
+        FILE *historyFile = fopen (history, "w");
+        if(!historyFile) {
+            ERROR("saveHistory(): unable to write to file: \"%s\"\n", history);
+            return;
+        }
+
+        for (auto l=list; l && l->data; l=l->next){
+            fprintf (historyFile, "%s\n", (char *)l->data);
+        }
+        fclose (historyFile);
+        return;
+    }
+
+
+    void 
+    saveHistories(void){ 
+        char *history;
+        GtkEntry *entry;
+        GtkEntryBuffer *buffer;
+        const char *text;
+
+        history = g_build_filename (FILTER_HISTORY);
+        entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "filter_entry"));
+        buffer = gtk_entry_get_buffer(entry);
+        text = gtk_entry_buffer_get_text(buffer);
+        saveHistory(entry,history, text);
+        g_free(history);
+
+        history = g_build_filename (GREP_HISTORY);
+        entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "grep_entry"));
+        buffer = gtk_entry_get_buffer(entry);
+        text = gtk_entry_buffer_get_text(buffer);
+        saveHistory(entry,history, text);
+        g_free(history);
+
+        history = g_build_filename (PATH_HISTORY);
+        entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "path_entry"));
+        buffer = gtk_entry_get_buffer(entry);
+        text = gtk_entry_buffer_get_text(buffer);
+        saveHistory(entry,history, text);
+        g_free(history);
+    }
 
       GList *
       loadHistory (const gchar *history) {
@@ -437,6 +510,7 @@ private:
 
           findButton_ = UtilBasic::mkButton(EMBLEM_FIND, NULL);
           cancelButton_ = UtilBasic::mkButton(EMBLEM_DELETE, NULL);
+          g_object_set_data(G_OBJECT(findButton_), "dialog", dialog_);
           
           //gtk_window_set_default_widget(GTK_WINDOW(dialog_), GTK_WIDGET(findButton_));
           // gtk_widget_set_can_default(GTK_WIDGET(findButton_), TRUE);
@@ -513,19 +587,14 @@ private:
           gtk_widget_set_hexpand(GTK_WIDGET(label), false);
           auto entry = gtk_entry_new();
 
-          //auto buffer = gtk_entry_buffer_new(NULL, -1);
-          //auto entry = gtk_entry_new_with_buffer(buffer);
           gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
           g_object_set_data(G_OBJECT(child), id, entry);
           //gtk_widget_set_sensitive(GTK_WIDGET(entry), true); // FIXME: put to false 
                                                              // when filedialog button
                                                              // is working.
-    //      auto button = UtilBasic::mkButton(EMBLEM_FOLDER_OPEN, NULL);
-    //      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(getDirectory), this);
 
           gtk_box_append(hbox, label);
           gtk_box_append(hbox, entry);
-     //     gtk_box_append(hbox, GTK_WIDGET(button));
           gtk_box_append(child, GTK_WIDGET(hbox));
           return GTK_ENTRY(entry);
         }
@@ -638,12 +707,10 @@ private:
             auto buffer = gtk_entry_get_buffer(entry);
             
             gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
-            //if (tooltipText) Basic::setTooltip(GTK_WIDGET(entry), tooltipText);
             if (!history) return box;
 
             GList *list = loadHistory(history);
             auto vector = historyVector(list);
-            //g_object_set_data(G_OBJECT(box), "list", list);
             g_object_set_data(G_OBJECT(entry), "list", list);
 
             auto buttonBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
@@ -962,11 +1029,6 @@ private:
 
         void mkButtonBox(void){
             auto hbuttonbox2 = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
-           /* auto cancelButton =  boxButton(EMBLEM_RED_BALL, (void *)FindSignals<Type>::onCancelButton);
-            g_object_set_data(G_OBJECT(mainBox_), "cancel_button", cancelButton);
-            g_object_set_data(G_OBJECT(cancelButton), "mainBox", mainBox_);
-            gtk_widget_set_sensitive(GTK_WIDGET(cancelButton), FALSE);*/
-
             auto clearButton =  boxButton(EMBLEM_CLEAR,(void *) FindSignals<Type>::onClearButton);
 
 
@@ -976,7 +1038,6 @@ private:
 
           
             gtk_box_append(hbuttonbox2, GTK_WIDGET(clearButton));
-            //gtk_box_append(hbuttonbox2, GTK_WIDGET(cancelButton));
             gtk_box_append(mainBox_, GTK_WIDGET(hbuttonbox2));            
         }
 

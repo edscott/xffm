@@ -411,6 +411,7 @@ class FindSignals {
         on_find_clicked_action (data);
         gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), true);
         gtk_widget_set_visible(GTK_WIDGET(object->findButton()), false);
+        object->saveHistories();
     }
 
     static void
