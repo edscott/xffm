@@ -63,13 +63,13 @@ public:
 
        static void *asyncYes(void *data){
         auto dialogObject = (dialog_t *)data;
-        DBG("%s", "hello world asyncYes\n");
+        TRACE("%s", "hello world asyncYes\n");
         return NULL;
       }
 
       static void *asyncNo(void *data){
         auto dialogObject = (dialog_t *)data;
-        DBG("%s", "findresponse ................ goodbye world asyncNo\n");
+        TRACE("%s", "findresponse ................ goodbye world asyncNo\n");
         gtk_widget_set_visible(GTK_WIDGET(dialogObject->dialog()), false);
         Basic::flushGTK();
         exit(0);
@@ -89,7 +89,7 @@ public:
       }
 
       ~FindResponse (void){
-        DBG("************** ~FindResponse\n");
+        TRACE("************** ~FindResponse\n");
         g_free(folder_);
         //exit(0);
       }
@@ -99,7 +99,7 @@ public:
 
       GtkWindow *dialog(void){return dialog_;}
       void dialog(GtkWindow *value){
-        DBG("*** findResponse setting dialog to %p\n", value);
+        TRACE("*** findResponse setting dialog to %p\n", value);
         dialog_ = value;
         gtk_window_set_default_widget(GTK_WINDOW(dialog_), GTK_WIDGET(findButton_));
       }
@@ -231,7 +231,7 @@ private:
           auto buffer = gtk_entry_get_buffer(grepEntry_);
           const char *text = gtk_entry_buffer_get_text(buffer);
           active_grep_ =  text && strlen(text); 
-          DBG("*** entry=%p, buffer=%p text=\"%s\" active_grep=%d\n", 
+          TRACE("*** entry=%p, buffer=%p text=\"%s\" active_grep=%d\n", 
               grepEntry_, buffer, text, active_grep_);
           auto optionsBox = GTK_WIDGET(g_object_get_data(G_OBJECT(grepEntry_), "optionsBox"));
           gtk_widget_set_sensitive(GTK_WIDGET(optionsBox), active_grep_);
@@ -258,7 +258,7 @@ private:
           gtk_widget_set_vexpand(GTK_WIDGET(topPaneVbox_), true);
           auto advanced = advancedOptions();
 
-          DBG("mkTopPaneHbox  <- \n");
+          TRACE("mkTopPaneHbox  <- \n");
           mkTopPaneHbox();
           gtk_box_append(topPaneVbox_, GTK_WIDGET(topPaneHbox_));
           
@@ -347,7 +347,7 @@ private:
           g_free(text);
 
           auto buffer = gtk_entry_get_buffer(GTK_ENTRY(path_entry));  
-          DBG("folder_ = %s\n", folder_);
+          TRACE("folder_ = %s\n", folder_);
           gtk_entry_buffer_set_text(buffer, folder_, -1);
           g_signal_connect (path_entry,
                             "activate", BUTTON_CALLBACK(FindSignals<Type>::onFindButton), 
@@ -703,7 +703,7 @@ private:
             gtk_box_append(hbox17, GTK_WIDGET(left_options_vbox));
             auto center_options_vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 3));
             gtk_box_append(hbox17, GTK_WIDGET(center_options_vbox));
-          DBG("advancedOptions  <- 1\n");
+          TRACE("advancedOptions  <- 1\n");
          
             auto hbox21 = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
             gtk_box_append(left_options_vbox, GTK_WIDGET(hbox21));
@@ -718,7 +718,7 @@ private:
 
             fileSizeFrame(center_options_vbox);
 
-          DBG("advancedOptions  <- 4\n");
+          TRACE("advancedOptions  <- 4\n");
             mkUserFrame(center_options_vbox);
             // option -M -A -C
             mkTimeFrame(left_options_vbox);

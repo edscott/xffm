@@ -61,11 +61,11 @@ class FindSignals {
         /* get the parameters set by the user... *****/
         get_arguments(path, Data);
 
-        fprintf(stderr, "DBG> arguments: \'");
+    /*    fprintf(stderr, "DBG> arguments: \'");
         for (auto p=Data->argument; p && *p; p++){
           fprintf(stderr, "%s ", *p);
         }
-        fprintf(stderr, "\n");
+        fprintf(stderr, "\n");*/
 
         int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
 
@@ -370,7 +370,7 @@ class FindSignals {
     static void
     onFindButton (GtkWidget * button, void *data) {
       auto object = (FindResponse<Type> *)data;
-      DBG("onFindButton...\n");
+      TRACE("onFindButton...\n");
         GtkTextView *textview = object->textview();
         
         on_find_clicked_action (data);
@@ -381,7 +381,7 @@ class FindSignals {
 
     static void
     onClearButton (GtkWidget * button, gpointer data) {
-      DBG("onClearButton...\n");
+      TRACE("onClearButton...\n");
       auto object = (FindResponse<Type> *)data;
 
         auto textview = object->textview();

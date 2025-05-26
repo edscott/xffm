@@ -14,7 +14,7 @@ public:
 
     static GtkWindow *
     openDnDBox(const gchar *dir, GSList *list, GtkTextView *textview){
-      DBG("openDnDBox... dir = %s\n", dir);
+      TRACE("openDnDBox... dir = %s\n", dir);
       if (g_slist_length(list) == 0) return NULL;
 
       auto window = createWindow(dir, list);
@@ -100,7 +100,7 @@ private:
     onEditButton (GtkWidget * button, void *window) {
       auto list = (GSList *)g_object_get_data(G_OBJECT(window), "list");
       auto textview = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(window), "textview"));
-      DBG("onEditButton...\n");
+      TRACE("onEditButton...\n");
       Print::showText(textview);        
       edit_command(list, window, textview);
     }
@@ -208,7 +208,7 @@ private:
 
     static GdkContentProvider *
     dragPrepare(GtkDragSource* self, gdouble x, gdouble y, void *row){
-        DBG("drag prepare\n");
+        TRACE("drag prepare\n");
             GdkContentProvider *content;
             char *string = g_strdup("");
             auto window = g_object_get_data(G_OBJECT(row), "window");
@@ -232,7 +232,7 @@ private:
                    GdkDrag       *drag,
                    GtkListBoxRow *self)
     {
-        DBG("drag begin\n");
+        TRACE("drag begin\n");
     /*
       // Set the widget as the drag icon
       GdkPaintable *paintable = gtk_widget_paintable_new (GTK_WIDGET (self));
@@ -284,7 +284,7 @@ private:
       auto dir = (const char *)g_object_get_data(G_OBJECT(window), "dir");
       auto text = gtk_label_get_text(label);
 
-      DBG("path = \"%s/%s\"\n", dir,text);
+      TRACE("path = \"%s/%s\"\n", dir,text);
       auto path = g_strconcat(dir, G_DIR_SEPARATOR_S, text, NULL);
       new OpenWith<bool>(textview, path);
       g_free(path);
@@ -308,64 +308,6 @@ private:
       return TRUE;
     }
 
-#if 0
-    static void
-    activate (GtkTreeView     *treeView,
-               GtkTreePath       *tpath,
-               GtkTreeViewColumn *column,
-               gpointer           data)
-    {
-        auto object = (DnD<double> *)data;
-        object->cancelDragState();
-        // Get activated path.
-        auto treeModel = gtk_tree_view_get_model(treeView);
-
-        gchar *path;
-        GtkTreeIter iter;
-        if (!gtk_tree_model_get_iter (treeModel, &iter, (GtkTreePath *)tpath)){
-            DBG("tpath does not exist. Aborting activate signal.\n");
-            return;
-        }
-        GdkPixbuf *normal_pixbuf;
-
-        gtk_tree_model_get (treeModel, &iter, 1, &path, -1);
-        
-        TRACE("base-signals::activate: %s\n", path);
-        /*if (!view->loadModel(treeModel, tpath, path)){
-            TRACE("base-signals:activate():cannot load %s\n", path);
-        }*/
-        TRACE("path is %s\n", path);
-        gchar *wd = g_path_get_dirname(path);
-        GList *pathList = g_list_prepend(NULL, path);
-        gchar *command = Run<Type>::getOpenWithCommand(findDialog, pathList, wd);
-
-        if (command) {  
-
-            GError *error = NULL;
-            gint argc;
-            gchar **argv= NULL; 
-            if(!g_shell_parse_argv (command, &argc, &argv, &error)) {
-                auto msg = g_strcompress (error->message);
-                DBG("%s: %s\n", msg, command);
-                g_error_free (error);
-                g_free (msg);
-            } else {
-                Run<Type>::thread_runReap(NULL, (const gchar**)argv, NULL, NULL, NULL);
-            }
-
-            g_strfreev(argv);
-        }
-
-        g_free(path);
-        g_free(wd);
-        g_list_free(pathList);
-    }
-    static void
-    setUpSignals(GObject *dialog){
-        auto treeView = GTK_TREE_VIEW(g_object_get_data(dialog, "treeView"));
-        auto model = GTK_TREE_MODEL(g_object_get_data(dialog, "model"));
-    }
-#endif
 };
 
 } // namespace xf

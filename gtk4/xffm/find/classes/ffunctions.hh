@@ -111,7 +111,7 @@ namespace xf {
       }
 
       
-      DBG("*** notify name=%s\n", g_param_spec_get_name(pspec));
+      TRACE("*** notify name=%s\n", g_param_spec_get_name(pspec));
 
       if (!GTK_IS_ENTRY(data)) {
         DBG("*** FIXME: identify notify call\n");
@@ -125,7 +125,7 @@ namespace xf {
       auto inactive = g_object_get_data(G_OBJECT(data), "inactive");
       if (!inactive) updateEntry(GTK_ENTRY(data), dd);
       //g_object_set_data(G_OBJECT(data), "inactive", NULL);
-      //DBG("notify callback, data=%p, item=%p, selected=%s\n", data,item,selected);
+      //TRACE("notify callback, data=%p, item=%p, selected=%s\n", data,item,selected);
       
     }
 
@@ -204,7 +204,7 @@ namespace xf {
         updateDD (GtkEntry *entry, GtkDropDown *dropdown){
           auto buffer = gtk_entry_get_buffer(entry);
           auto text = gtk_entry_buffer_get_text(buffer);
-          DBG("updateDD: text=%s\n", text);
+          TRACE("updateDD: text=%s\n", text);
           auto list = (GList *)g_object_get_data(G_OBJECT(entry), "list");
           GList *newList = NULL;
           for (auto l=list; l && l->data; l=l->next){
@@ -253,11 +253,11 @@ namespace xf {
           gpointer data){
       auto controller = GTK_EVENT_CONTROLLER(self);
       auto entry = GTK_ENTRY(gtk_event_controller_get_widget(controller));
-      DBG("processKey1 keyval=%d\n", keyval);
+      TRACE("processKey1 keyval=%d\n", keyval);
       if (keyval != GDK_KEY_Tab) {
         return false;
       }
-      DBG("got tab key, update entry buffer if possible\n");
+      TRACE("got tab key, update entry buffer if possible\n");
       auto dropdown = GTK_DROP_DOWN(data);
       updateEntry(entry, dropdown);
       
@@ -273,7 +273,7 @@ namespace xf {
           gpointer data){
       auto controller = GTK_EVENT_CONTROLLER(self);
       auto entry = GTK_ENTRY(gtk_event_controller_get_widget(controller));
-      DBG("processKey2 keyval=%d\n", keyval);
+      TRACE("processKey2 keyval=%d\n", keyval);
       switch (keyval){
         case GDK_KEY_Return: 
         case GDK_KEY_BackSpace:
@@ -291,11 +291,6 @@ namespace xf {
       auto dropdown = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "dropdown"));
       updateDD(entry, dropdown);
       auto buffer = gtk_entry_get_buffer(entry);
-     /* if (keyval == GDK_KEY_Escape){
-        gtk_text_buffer_set_text(buffer, "", -1);
-        DBG("got other key, update DD is not return/enter/esc\n");
-        return false;
-      }*/
 
       return false;
     }
@@ -324,9 +319,7 @@ namespace xf {
               gdouble y,
               GtkEntry *entry ){
       //if (n_press != 2) return FALSE;
-      DBG("ddClick ddclick1 n_press = %d\n", n_press);
-      // FIXME: need to inactivate dd update from entry 
-      //        while this runs...
+      TRACE("ddClick ddclick1 n_press = %d\n", n_press);
       auto buffer = gtk_entry_get_buffer(entry);
       g_object_set_data(G_OBJECT(entry), "inactive", GINT_TO_POINTER(1));
       auto dd = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
@@ -341,7 +334,7 @@ namespace xf {
               gdouble x,
               gdouble y,
               GtkEntry *entry ){
-      DBG("ddClick ddclick2 n_press = %d\n", n_press);
+      TRACE("ddClick ddclick2 n_press = %d\n", n_press);
       g_object_set_data(G_OBJECT(entry), "inactive", NULL);
       return false;
     }
