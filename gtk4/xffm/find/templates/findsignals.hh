@@ -375,6 +375,7 @@ class FindSignals {
         
         on_find_clicked_action (data);
         gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), true);
+        gtk_widget_set_visible(GTK_WIDGET(object->cancelLabel()), true);
         gtk_widget_set_visible(GTK_WIDGET(object->findButton()), false);
         gtk_widget_set_visible(GTK_WIDGET(object->findLabel()), false);
         object->saveHistories();
@@ -411,6 +412,7 @@ class FindSignals {
        auto object = (FindResponse<Type> *)Data->object;
        auto mainBox = Data->mainBox;
        gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), false);
+       gtk_widget_set_visible(GTK_WIDGET(object->cancelLabel()), false);
        gtk_widget_set_visible(GTK_WIDGET(object->findButton()), true);
        gtk_widget_set_visible(GTK_WIDGET(object->findLabel()), true);
        Basic::flushGTK();
@@ -504,6 +506,7 @@ class FindSignals {
 
         if (Data->resultLimit > 0 && Data->resultLimit==Data->resultLimitCounter) {
             gchar *g=g_strdup_printf("%s. %s %d", _("Results"), _("Upper limit:"), Data->resultLimit);
+                Print::showText(textview);
             Print::print(textview, EMBLEM_WARNING, "green", g_strconcat(g, "\n", NULL));
             Print::print(textview, "blue",  g_strconcat(_("Counting files..."), "\n", NULL));
             g_free(g);
@@ -517,6 +520,7 @@ class FindSignals {
                           Data->resultLimitCounter), Data->resultLimitCounter);
           gchar *message = g_strdup_printf(_("%s Finished : %s"), xffindProgram, plural_text);
           gchar *g = g_strdup_printf("%c[31m%s\n",27, message);
+                Print::showText(textview);
           Print::print(textview, EMBLEM_RED_BALL, "Red", g);
 
           Data->done = TRUE;
@@ -532,6 +536,7 @@ class FindSignals {
               Data->resultLimitCounter++; 
               if (Data->resultLimit ==0 ||
                   (Data->resultLimit > 0 && Data->resultLimit > Data->resultLimitCounter) ) {
+                Print::showText(textview);
                   Print::print(textview, g_strdup_printf("%s\n", file));
                   TRACE("--> %s\n",file);
                   TRACE("resultLimitCounter:%d %s\n", Data->resultLimitCounter, line);

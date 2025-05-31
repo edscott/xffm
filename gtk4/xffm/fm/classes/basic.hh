@@ -18,12 +18,12 @@ namespace xf {
    public:
 
 
-    static GtkLabel *hyperLabelLarge(const char *text, 
+    static GtkLabel *hyperLabelLarge(const char *color, const char *text, 
                                     void *callback, void *data){
       GtkLabel *label = GTK_LABEL(gtk_label_new(""));
-      auto enter = g_strdup_printf("<span color=\"blue\" size=\"large\"><b><u>%s</u></b></span>  ", text);
+      auto enter = g_strdup_printf("<span color=\"%s\" size=\"large\"><b><u>%s</u></b></span>  ", color, text);
       g_object_set_data(G_OBJECT(label), "enter", enter);
-      auto leave = g_strdup_printf("<span color=\"blue\" size=\"large\"><b>%s</b></span>  ", text);
+      auto leave = g_strdup_printf("<span color=\"%s\" size=\"large\"><b>%s</b></span>  ", color, text);
       g_object_set_data(G_OBJECT(label), "leave", leave);
       gtk_label_set_markup(label, leave);
 

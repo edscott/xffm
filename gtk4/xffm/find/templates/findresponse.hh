@@ -41,8 +41,9 @@ namespace xf
 //      GSList *find_list = NULL;
       gchar  *last_workdir = NULL;
       GtkWidget *findButton_ = NULL;
-      GtkButton *cancelButton_ = NULL;
+      GtkWidget *cancelButton_ = NULL;
       GtkLabel *findLabel_ = NULL;
+      GtkLabel *cancelLabel_ = NULL;
     
       char *folder_ = NULL;
       bool active_grep_ = false;
@@ -78,8 +79,9 @@ public:
       }
 
       GtkWidget *findButton(void) {return findButton_;}
-      GtkButton *cancelButton(void) {return cancelButton_;}
+      GtkWidget *cancelButton(void) {return cancelButton_;}
       GtkLabel *findLabel(void) {return findLabel_;}
+      GtkLabel *cancelLabel(void) {return cancelLabel_;}
 
       void Data(fgrData_t *value) {Data_ = value;}
       fgrData_t *Data(void) {return Data_;}
@@ -281,51 +283,63 @@ private:
           gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(actionBox), GTK_PACK_END);
 
 
-   /*       auto t=g_strdup_printf("<span color=\"blue\" size=\"large\"><b><u>%s</u></b></span>  ", _("Find in Files"));
-          auto label = GTK_LABEL(gtk_label_new (t));
-          gtk_label_set_use_markup (label, TRUE);
-          g_free(t);
-          gtk_box_append(actionBox, GTK_WIDGET(label));*/
-
-          findLabel_ = Basic::hyperLabelLarge(_("Find in Files"),
+          findLabel_ = Basic::hyperLabelLarge("blue",_("Find in Files"),
               (void *)findLabelClick,
               (void *)this);
           gtk_box_append(actionBox, GTK_WIDGET(findLabel_));
-          
-          
+          cancelLabel_ = Basic::hyperLabelLarge("red",_("Cancel Operation"),
+              (void *)findLabelCancel,
+              (void *)this);
+          gtk_box_append(actionBox, GTK_WIDGET(cancelLabel_));
+          gtk_widget_set_visible(GTK_WIDGET(cancelLabel_), false);
+        
+/*          
 
           findButton_ = GTK_WIDGET(UtilBasic::mkButton(EMBLEM_FIND, NULL));
           g_object_set_data(G_OBJECT(findButton_), "dialog", dialog_);
           Basic::setTooltip(GTK_WIDGET(findButton_), _("Show search results for this query"));
           g_signal_connect (G_OBJECT (findButton_), "clicked",
                   BUTTON_CALLBACK(FindSignals<Type>::onFindButton), (gpointer)this);
-      /* crash
+                  */
+      
+          // buttonBox requires an eventcontroller callback.
           findButton_ = Dialog::buttonBox(EMBLEM_FIND,
               _("Show search results for this query"),
-              (void *)FindSignals<Type>::onFindButton,
+              (void *)findLabelClick,
               (void *)this);
-              */
-
-          cancelButton_ = UtilBasic::mkButton(EMBLEM_DELETE, NULL);
-          
-          // gtk_widget_set_can_default(GTK_WIDGET(findButton_), TRUE);
-          g_signal_connect (G_OBJECT (cancelButton_), "clicked",
-                  BUTTON_CALLBACK(FindSignals<Type>::onCancelButton), (gpointer)this);  
+             
+          cancelButton_ = Dialog::buttonBox(EMBLEM_DELETE,
+              _("Cancel Operation"),
+              (void *)findLabelCancel,
+              (void *)this);
+                   
           gtk_box_append(actionBox, GTK_WIDGET(findButton_));
           gtk_box_append(actionBox, GTK_WIDGET(cancelButton_));
           gtk_widget_set_visible(GTK_WIDGET(cancelButton_), false);
         
          /////////////  clear button  /////
-         auto clearButton =  UtilBasic::mkButton(EMBLEM_CLEAR, NULL);
-         // no work: gtk_widget_set_size_request(GTK_WIDGET(clearButton), 33, -1);
-         g_signal_connect (G_OBJECT (clearButton), "clicked",
-                  BUTTON_CALLBACK(FindSignals<Type>::onClearButton), (gpointer)this);
+         auto clearBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3));
+         
+         auto clearLabel = Basic::hyperLabelLarge("blue",_("Clear search"),
+              (void *)findLabelClear,
+              (void *)this);
+          gtk_box_append(clearBox, GTK_WIDGET(findLabel_));
+            
+         auto clearButton = Dialog::buttonBox(EMBLEM_CLEAR,
+              _("Clear search"),
+              (void *)findLabelClear,
+              (void *)this);
+          gtk_box_append(clearBox, GTK_WIDGET(clearLabel));
+          gtk_box_append(clearBox, GTK_WIDGET(clearButton));
+
+         //auto clearButton =  UtilBasic::mkButton(EMBLEM_CLEAR, NULL);
+         //g_signal_connect (G_OBJECT (clearButton), "clicked",
+           //       BUTTON_CALLBACK(FindSignals<Type>::onClearButton), (gpointer)this);
          g_object_set_data(G_OBJECT(mainBox_), "clear_button", clearButton);
          g_object_set_data(G_OBJECT(clearButton), "mainBox", mainBox_);
          //gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(clearButton), GTK_PACK_END);
          
 
-         Basic::setTooltip(GTK_WIDGET(cancelButton_), _("Cancel Operation"));
 
          gtk_scrolled_window_set_policy (sw, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
@@ -336,7 +350,7 @@ private:
          auto sw2 = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
          auto frame2 = GTK_FRAME(gtk_frame_new(NULL));
          gtk_frame_set_child(frame2, GTK_WIDGET(sw2));
-         gtk_frame_set_label_widget(frame2, GTK_WIDGET(clearButton));
+         gtk_frame_set_label_widget(frame2, GTK_WIDGET(clearBox));
          gtk_frame_set_label_align(frame2, 1.0);
          
          gtk_paned_set_end_child (vpane_, GTK_WIDGET(frame2));
@@ -367,12 +381,32 @@ private:
       }
 
       static gboolean
+      findLabelCancel(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+        FindSignals<Type>::onCancelButton(NULL, data);
+        return true;
+      }
+
+      static gboolean
       findLabelClick(GtkGestureClick* self,
               gint n_press,
               gdouble x,
               gdouble y,
               void *data){
         FindSignals<Type>::onFindButton(NULL, data);
+        return true;
+      }
+
+      static gboolean
+      findLabelClear(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+        FindSignals<Type>::onClearButton(NULL, data);
         return true;
       }
 
@@ -427,8 +461,8 @@ private:
           auto vector = historyVector(list);
           g_object_set_data(G_OBJECT(entry), "list", list);
 
-          auto buttonBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-          g_object_set_data(G_OBJECT(entry), "buttonBox", buttonBox);
+          auto bBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+          g_object_set_data(G_OBJECT(entry), "buttonBox", bBox);
 
           auto dropdown = gtk_drop_down_new_from_strings(vector);
           g_object_set_data(G_OBJECT(entry), "dropdown", dropdown);
@@ -436,8 +470,8 @@ private:
           gtk_entry_buffer_set_text(buffer, vector[0], -1);
           g_free(vector);
           g_signal_connect(G_OBJECT(dropdown), "notify", G_CALLBACK(notify), entry);
-          gtk_box_append(buttonBox, GTK_WIDGET(dropdown));
-          gtk_box_append(box, GTK_WIDGET(buttonBox));
+          gtk_box_append(bBox, GTK_WIDGET(dropdown));
+          gtk_box_append(box, GTK_WIDGET(bBox));
 
           auto gesture1 = gtk_gesture_click_new();
           gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture1),GTK_PHASE_CAPTURE);
@@ -460,6 +494,8 @@ private:
             auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
             gtk_box_append(box, GTK_WIDGET(image));
             Basic::setTooltip(GTK_WIDGET(image), tooltipText);
+            auto lab = gtk_label_new("   ");
+            gtk_box_append(box, GTK_WIDGET(lab));
           }
           g_signal_connect (entry,
                   "activate", BUTTON_CALLBACK(FindSignals<Type>::onFindButton), 
