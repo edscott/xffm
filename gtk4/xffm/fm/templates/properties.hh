@@ -81,11 +81,11 @@ public:
 
 
     ~Properties(void){
-      DBG("Propetructor\n");
+      TRACE("Propetructor\n");
         freeEntry(entry_);
     }
     Properties(GFileInfo *info) {
-      DBG("Properties constructor\n");
+      TRACE("Properties constructor\n");
 
         entry_ = (entry_t *)calloc(1, sizeof(entry_t));
         entry_->path = Basic::getPath(info);
@@ -93,7 +93,7 @@ public:
         // Do mime magic on single item, the rest on demand
         //entry_->mimetype = Mime<Type>::mimeMagic(entry_->path);
         if (lstat(entry_->path, &(entry_->st)) < 0){
-                DBG("properties.hh::Properties():  %s (%s)\n",
+                ERROR_("properties.hh::Properties():  %s (%s)\n",
                     entry_->path, strerror(errno));
                 freeEntry(entry_);
                 throw(1);
@@ -115,7 +115,7 @@ private:
 
     void 
     doDialog (void) {
-      DBG("Properties doDialog\n");
+      TRACE("Properties doDialog\n");
         dialog_ = GTK_WINDOW(gtk_window_new ());
 
 
@@ -196,7 +196,7 @@ private:
         
         //
 
-      DBG("Properties gtk_window_present %p\n", dialog_);
+      TRACE("Properties gtk_window_present %p\n", dialog_);
       gtk_widget_realize(GTK_WIDGET(dialog_));
       Basic::setAsDialog(GTK_WIDGET(dialog_), "xfproperties", "Xfproperties");
 #if 10
@@ -243,7 +243,7 @@ private:
         sscanf(text, "%o", &modeInput);
         properties_p->validOctal(text);
         mode = modeInput & 0777;
-        DBG("changeMode (\"%s\") event old = %o new = %o\n",text, oldMode, mode);
+        TRACE("changeMode (\"%s\") event old = %o new = %o\n",text, oldMode, mode);
 
         // update label
         auto modeEntry = properties_p->modeEntry();
@@ -317,7 +317,7 @@ private:
             g_key_file_load_from_file(keyInfo, keyPath, (GKeyFileFlags)0, NULL);
         g_free(basename);
         if (!loaded) {
-            ERROR("fm/view/local/properties.hh:: *** unable to load %s\n", keyPath);
+            ERROR_("fm/view/local/properties.hh:: *** unable to load %s\n", keyPath);
             g_free(keyPath);
             return NULL;
         }
@@ -329,7 +329,7 @@ private:
         auto value = g_key_file_get_string (keyInfo, *p, item, &error);
         g_strfreev(p);
         if (error){
-            ERROR("fm/view/local/properties.hh:: trashInfo(%s): %s\n", item, error->message);
+            ERROR_("fm/view/local/properties.hh:: trashInfo(%s): %s\n", item, error->message);
             g_error_free(error);
             value = NULL;
         } 
@@ -345,7 +345,7 @@ private:
         struct stat st;
         if (stat(entry->path, &st)){
           if (lstat(entry->path, &st)){
-            DBG("lstat(%s) failed!\n", entry->path);
+            ERROR_("lstat(%s) failed!\n", entry->path);
           }
         }
         if (!entry->mimetype) entry->mimetype = MimeMagic::mimeMagic(entry->path);
@@ -441,7 +441,7 @@ private:
         auto path = (const gchar *)key;
         auto mode = (mode_t)GPOINTER_TO_INT(value);
         if (chmod(path, mode) < 0){
-            ERROR("fm/view/local/properties.hh::setFileMode(): chmod(%s) %s\n", path, strerror(errno));
+            ERROR_("fm/view/local/properties.hh::setFileMode(): chmod(%s) %s\n", path, strerror(errno));
         }
     }   */ 
     
@@ -455,11 +455,11 @@ private:
         errno=0;
         auto mode = strtol(text, NULL, 8);
         if (errno) {
-          DBG("Error:: applyAction: %s\n", strerror(errno));
+          TRACE("Error:: applyAction: %s\n", strerror(errno));
         } else {
           auto path = properties_p->entry()->path;
           if (chmod(path, mode) < 0){
-              ERROR("fm/view/local/properties.hh::setFileMode(): chmod(%s) %s\n", path, strerror(errno));
+              ERROR_("fm/view/local/properties.hh::setFileMode(): chmod(%s) %s\n", path, strerror(errno));
           }
         }
 

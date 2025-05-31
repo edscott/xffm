@@ -225,7 +225,7 @@ namespace xf {
         auto size = Settings::getInteger("xfterm", "fontcss");
         if (size < 1 || size > 7) size=3;
         double value = size;
-        DBG("***range set value=%lf\n", value);
+        TRACE("***range set value=%lf\n", value);
         gtk_range_set_value(GTK_RANGE(size_scale), value);
 
         gtk_range_set_increments (GTK_RANGE(size_scale), 1.0, 1.0);

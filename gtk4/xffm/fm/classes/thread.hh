@@ -177,7 +177,7 @@ private:
         }
         active = 0;
 #else
-        DBG("Threadpool is disabled\n");
+        TRACE("Threadpool is disabled\n");
 #endif
         return;
       }
@@ -235,7 +235,7 @@ private:
         //auto thread = (pthread_t *)calloc(1,sizeof(pthread_t *));
         gint retval = pthread_create(runThread_, NULL, thread_f, data);
         if (retval){
-            ERROR("threadcontrol.hh::thread_create(): %s\n", strerror(retval));
+            ERROR_("threadcontrol.hh::thread_create(): %s\n", strerror(retval));
             return retval;
         }
         thread_reference(runThread_, dbg_text);
@@ -279,7 +279,7 @@ private:
         if (thread_hash == NULL) {
             thread_hash = g_hash_table_new_full(g_direct_hash, g_direct_equal,NULL, g_free);
         }
-        if (!thread_hash) ERROR("threadcontrol.hh::thread_reference: hash is null!\n");
+        if (!thread_hash) ERROR_("threadcontrol.hh::thread_reference: hash is null!\n");
 
         pthread_mutex_lock(&reference_mutex);
         g_hash_table_replace(thread_hash, thread, 
@@ -297,7 +297,7 @@ private:
         if (thread_hash == NULL) {
             thread_hash = g_hash_table_new(g_direct_hash, g_direct_equal);
         }
-        if (!thread_hash) ERROR("threadcontrol.hh::thread_unreference: hash is null!\n");
+        if (!thread_hash) ERROR_("threadcontrol.hh::thread_unreference: hash is null!\n");
         removed_text = g_strdup((const gchar *)g_hash_table_lookup(thread_hash, (void *)thread));
         TRACE( "Thread count %d: 0x%x (%s)\n", 
                 g_list_length(thread_list)-1,
@@ -335,14 +335,14 @@ public:
 	// Create data structure for sharing with thread.
         heartbeat_t *heartbeat_p = (heartbeat_t *)calloc(1,sizeof(heartbeat_t));
         if (!heartbeat_p) {
-            ERROR("calloc heartbeat_p: %s\n",strerror(errno));
+            ERROR_("calloc heartbeat_p: %s\n",strerror(errno));
             return FALSE;
         }
 
         // Create mutex.
 	heartbeat_p->mutex=(pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
         if (!heartbeat_p->mutex){
-            ERROR("calloc heartbeat_p->mutex: %s\n",strerror(errno));
+            ERROR_("calloc heartbeat_p->mutex: %s\n",strerror(errno));
             g_free(heartbeat_p);
             return FALSE;
         }
@@ -351,7 +351,7 @@ public:
         // Create signal.
         heartbeat_p->signal=(pthread_cond_t *)calloc(1, sizeof(pthread_cond_t));
         if (!heartbeat_p->signal){
-            ERROR("malloc heartbeat_p->signal: %s\n",strerror(errno));
+            ERROR_("malloc heartbeat_p->signal: %s\n",strerror(errno));
             pthread_mutex_destroy(heartbeat_p->mutex);
             g_free(heartbeat_p->mutex);
             g_free(heartbeat_p);
@@ -374,7 +374,7 @@ public:
         
 	// Test for success in creating thread.
 	if (r) {
-	    ERROR("Thread::fileTest():Cannot create thread (%s)\n", strerror(errno));
+	    ERROR_("Thread::fileTest():Cannot create thread (%s)\n", strerror(errno));
             pthread_mutex_unlock(heartbeat_p->mutex);
 	    heartbeatCleanup(heartbeat_p);
 	    return FALSE;
@@ -390,7 +390,7 @@ public:
 	    pthread_cond_timedwait(heartbeat_p->signal, heartbeat_p->mutex, &tv);
 	
 	if (r){
-	    ERROR("Thread::condTimedWait error in condition creation: %s\n", path);
+	    ERROR_("Thread::condTimedWait error in condition creation: %s\n", path);
             pthread_mutex_unlock(heartbeat_p->mutex);
 	    heartbeatCleanup(heartbeat_p);
 	    return FALSE;
@@ -400,7 +400,7 @@ public:
 	gboolean retval;
 	switch (heartbeat_p->condition) {
 	    case 0:
-		ERROR("Thread::fileTest(%s): timeout.\n",heartbeat_p->path);
+		ERROR_("Thread::fileTest(%s): timeout.\n",heartbeat_p->path);
 		retval = FALSE;
 	       	break;
 	    case 1:
@@ -508,7 +508,7 @@ end:
         gboolean retval = TRUE;
         if (r){
             retval = FALSE;
-            ERROR("Thread::condTimedWait error in condition creation: %s\n", path);
+            ERROR_("Thread::condTimedWait error in condition creation: %s\n", path);
         }
         return retval;
     }

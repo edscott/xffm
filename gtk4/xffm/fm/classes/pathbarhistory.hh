@@ -43,8 +43,8 @@ namespace xf {
      }
      auto current = (const char *) historyBack_->data;
      auto previous = (const char *) historyBack_->next->data;
-     DBG("Back path is %s\n", previous);
-     DBG("Next path is %s\n", current);
+     TRACE("Back path is %s\n", previous);
+     TRACE("Next path is %s\n", current);
      // No need to free memory, since we just move from one list to the other.
      historyNext_ = g_list_prepend(historyNext_, (void *)current);
      historyBack_ = g_list_remove(historyBack_,  (void *)current);
@@ -53,7 +53,7 @@ namespace xf {
    }
 
    void push(const char *path){
-          DBG("BasicPAthbar:: pushing %s\n", path);
+          TRACE("BasicPAthbar:: pushing %s\n", path);
       if (historyBack_ && historyBack_->data != NULL){
         if (strcmp(path, (const char *)historyBack_->data) != 0){
           // update with different or non existing path.

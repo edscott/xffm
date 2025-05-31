@@ -13,7 +13,7 @@ public:
 
     Find(const gchar *path){
         if (!whichGrep()){
-            ERROR("grep command not found\n");
+            ERROR_("grep command not found\n");
             exit(1);
         }
         fullPath(path);

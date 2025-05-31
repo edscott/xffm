@@ -328,7 +328,7 @@ private:
         }
 
         if (!e){
-            DBG("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
+            INFO("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
             e="vi";
         } else {
             INFO("Found EDITOR %s\n", e);

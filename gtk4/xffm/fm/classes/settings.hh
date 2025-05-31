@@ -21,14 +21,14 @@ public:
         gint value = -1;
         GError *error = NULL;
         if (!g_key_file_has_key(keyFile, group, item, &error)) {
-            // DBG crashes: Glib bug with GError->message:
-            //TRACE("getInteger(): %s\n", error->message);
-            if (error) g_error_free(error);
+            if (error) {
+              ERROR_("getInteger(): %s\n", error->message);
+              g_error_free(error);
+            }
         } else {
             value = g_key_file_get_integer (keyFile, group, item, &error);
             if (error){
-                // DBG crashes: Glib bug with GError->message:
-                //TRACE("getInteger(): %s\n", error->message);
+                ERROR_("getInteger(): %s\n", error->message);
                 g_error_free(error);
                 value = -1;
             }
@@ -56,14 +56,16 @@ public:
         gchar *value = NULL;
         GError *error = NULL;
         if (!g_key_file_has_key(keyFile, group, item, &error)) {
-            // DBG crashes: Glib bug with GError->message:
-            //DBG(".getString(): %s\n", error->message);
-            if (error) g_error_free(error);
+            // Glib bug with GError->message:
+            if (error){
+              ERROR_(".getString(): %s\n", error->message);
+              g_error_free(error);
+            }
         } else {
             value = g_key_file_get_string (keyFile, group, item, &error);
             if (error){
-                // DBG crashes: Glib bug with GError->message:
-                //DBG("..getString(): %s\n", error->message);
+                // Glib bug with GError->message:
+                ERROR_(".getString(): %s\n", error->message);
                 g_error_free(error);
                 value = NULL;
             }
@@ -138,28 +140,6 @@ public:
    
 private:
 
- /*   static void
-    getFileLock(const gchar *settingsfile){
-        gint count=0;
-        auto lock = g_strconcat(settingsfile,".lock", NULL);
-        while (g_file_test(lock, G_FILE_TEST_EXISTS)){ 
-            usleep(250000);
-            count++;
-            if (count > 4){
-                DBG("removing stale lock\n");
-                unlink(lock);
-            }
-        }
-        fclose(fopen(lock, "w"));
-        g_free(lock);
-    }
-
-    static void
-    removeFileLock(const gchar *settingsfile){
-        auto lock = g_strconcat(settingsfile,".lock", NULL);
-        unlink(lock);
-        g_free(lock);
-    }*/
 
     static GKeyFile *
     getKeyFile(void){

@@ -189,7 +189,7 @@ template <class Type>
 
           TRACE("monitor_=%p file=%p store=%p\n", monitor_, file, store);
           if (error_){
-              ERROR("g_file_monitor_directory(%s) failed: %s\n",
+              ERROR_("g_file_monitor_directory(%s) failed: %s\n",
                       "fixme", error_->message);
               g_error_free(error_);
           } else {
@@ -217,7 +217,7 @@ template <class Type>
         auto inactive = g_object_get_data(G_OBJECT(self), "inactive");
         pthread_mutex_unlock(&monitorMutex);   
         if (inactive) {
-          DBG("monitor %p inactive\n", self);
+          TRACE("monitor %p inactive\n", self);
           return;
         }
 
@@ -230,7 +230,7 @@ template <class Type>
 
         auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
         if (!child){
-          DBG("localdir.hh::changed_f(): this should not happen\n");
+          ERROR_("localdir.hh::changed_f(): this should not happen\n");
           exit(1);
         }
         TRACE("*** monitor changed_f call \n");
@@ -241,17 +241,14 @@ template <class Type>
         GFileInfo *infoF = first? g_file_query_info (first, "standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED", 
             G_FILE_QUERY_INFO_NONE, NULL, &error_):NULL;
         if (error_){
-          DBG("Error: %s\n", error_->message);
+          ERROR_("Error: %s\n", error_->message);
           g_error_free(error_);
           return;
         }*/
 
-        /* if (inactive){
-             DBG("monitor_f(): monitor not currently active.\n");
-             return;
-        }
+        /* 
         if (p->view()->serial() != p->serial()){
-            DBG("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",p->view()->serial(), p->serial());
+            ERROR_("LocalMonitor::changeItem() serial out of sync (%d != %d)\n",p->view()->serial(), p->serial());
             return;
         }*/
 
@@ -263,11 +260,11 @@ template <class Type>
         if (flags < 0) flags = 0;
         g_free(dirPath);
         
-        //if (verbose) DBG("monitor thread %p...\n", g_thread_self());
+        if (verbose) DBG("monitor thread %p...\n", g_thread_self());
          switch (event){
             case G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
               {
-                //if (verbose) 
+                if (verbose) 
                 {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
                 if (found) {
@@ -294,7 +291,7 @@ template <class Type>
             case G_FILE_MONITOR_EVENT_DELETED:
             case G_FILE_MONITOR_EVENT_MOVED_OUT:
                 {
-                  //if (verbose) 
+                  if (verbose) 
                   {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
                   auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
                   if (found) {
@@ -307,7 +304,7 @@ template <class Type>
             case G_FILE_MONITOR_EVENT_CREATED:
             case G_FILE_MONITOR_EVENT_MOVED_IN:
                 {
-                  //if (verbose) 
+                  if (verbose) 
                   {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
                   if (!g_file_test(f, G_FILE_TEST_EXISTS)){
                     if (!g_file_test(f, G_FILE_TEST_IS_SYMLINK)) {
@@ -317,11 +314,6 @@ template <class Type>
                       return;
                     }
                   }
-               /*   auto found = findPositionStore(store, f, &positionF, flags);
-                  if (found){
-                    Child::incrementSerial(child);
-                    g_list_store_remove(store, positionF);
-                  }*/
                   // add updated info.
                   Child::incrementSerial(child);
                   LocalDir::insert(store, f, verbose);
@@ -332,7 +324,7 @@ template <class Type>
               
          // When doing cut/copy, problem is that callback is
          // happening before change signal.
-          //if (verbose) 
+          if (verbose) 
                 {DBG("monitor_f(): Received  CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
           // This works, but scrollbar is not updated to last position
           // And then it is broken because icon is not updated when a different
@@ -345,7 +337,7 @@ template <class Type>
             case G_FILE_MONITOR_EVENT_MOVED:
             case G_FILE_MONITOR_EVENT_RENAMED:
             {
-                //if (verbose) 
+                if (verbose) 
                 {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
                 auto found1 = LocalDir::findPositionStore(store, s, &positionF, flags);
                 if (found1){
@@ -393,7 +385,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           //TRACE("hide widget \"%s\"\n", *p);
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         } else {
-          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+          ERROR_("* Warning: cannot find widget \"%s\" to hide.\n", *p);
         }
       }
       //show
@@ -403,7 +395,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         if (widget){
           gtk_widget_set_visible(GTK_WIDGET(widget), true);
         } else {
-          DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
+          ERROR_("* Warning: cannot find widget \"%s\" to show.\n", *p);
         }
       }
 
@@ -432,7 +424,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           //TRACE("hide widget \"%s\"\n", *p);
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         } else {
-          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+          ERROR_("* Warning: cannot find widget \"%s\" to hide.\n", *p);
         }
       }
       void *widget;
@@ -455,7 +447,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           //TRACE("hide widget \"%s\"\n", *p);
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         } else {
-          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+          ERROR_("* Warning: cannot find widget \"%s\" to hide.\n", *p);
         }
       }
       void *widget;
@@ -476,7 +468,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           //TRACE("hide widget \"%s\"\n", *p);
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         } else {
-          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+          ERROR_("* Warning: cannot find widget \"%s\" to hide.\n", *p);
         }
       }
       void *widget;
@@ -496,7 +488,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           //TRACE("hide widget \"%s\"\n", *p);
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         } else {
-          DBG("* Warning: cannot find widget \"%s\" to hide.\n", *p);
+          ERROR_("* Warning: cannot find widget \"%s\" to hide.\n", *p);
         }
       }
       // Directory test
@@ -576,7 +568,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
     }
 
     static GtkPopover *getPopover(GtkWidget *menubox, GridView<Type> *gridView_p){ 
-      DBG("getPopover 1\n");
+      TRACE("getPopover 1\n");
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
       auto popover = gridView_p->myMenu_->mkMenu(markup);
       g_free(markup);
@@ -593,7 +585,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
     }
 
     static GtkPopover *getPopover(GFileInfo *info, GridView<Type> *gridView_p){ 
-      DBG("getPopover 12\n");
+      TRACE("getPopover 12\n");
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
       auto path = Basic::getPath(info);
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
@@ -614,7 +606,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
     }
 
     static GtkPopover *getPopover(GObject *object, GridView<Type> *gridView_p){ 
-      DBG("getPopover 123\n");
+      TRACE("getPopover 123\n");
       auto list_item =GTK_LIST_ITEM(object);
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
@@ -642,24 +634,13 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
 /*    
 */    
   static void setupMenu(GtkPopover *popover, GFileInfo *info){
-    DBG("setupMenu\n");
+    TRACE("setupMenu\n");
       auto path = Basic::getPath(info);
       if (EfsResponse<Type>::isEfsMount(path)){
-        DBG("*** %s isEfs\n", path);
+        TRACE("*** %s isEfs\n", path);
         // hide all
 
       }
-
-  /*    auto isEfs = g_object_get_data(G_OBJECT(info), "xffm::efs");
-      if (isEfs){
-        DBG("*** %s isEfs!\n");
-        //auto mount = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
-        //auto unmount = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
-        // hide all
-        // show mount
-      }*/
-
-
 
       auto isDir = g_file_test(path, G_FILE_TEST_IS_DIR);
       if (g_file_info_get_attribute_object(info, "xffm::fstabMount")) isDir = false;
@@ -704,7 +685,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         }
 
         
-      } else {DBG("** Error:: no auto button\n");}
+      } else {ERROR_("** Error:: no auto button\n");}
       if (isDir){
         auto paste = g_object_get_data(G_OBJECT(popover), _("Paste"));
         auto nopaste = g_object_get_data(G_OBJECT(popover), _("Clipboard is empty."));
@@ -834,32 +815,6 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
     }
     
   private:
-    /*
-   static gboolean
-    gridDown_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *data){
-      auto button = gtk_gesture_single_get_button (GTK_GESTURE_SINGLE(self));
-      DBG("gridDown_f button %d\n", button);
-      auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-      auto gridView_p = (GridView<Type> *)data;
-      return false;
-    }
-    */
-/*
-    static void addGestureDown(GtkWidget *self, GObject *object, GridView<Type> *gridView_p){
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
-      // 1 for unselect
-      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (gridDown_f), (void *)gridView_p);
-      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_BUBBLE);
-
-    }   
-   */ 
 
     static void addGestureClickView1(GtkWidget *self, GObject *object, GridView<Type> *gridView_p){
       auto gesture = gtk_gesture_click_new();

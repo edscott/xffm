@@ -16,7 +16,7 @@ namespace xf {
     static void mainWidget(GtkWidget *value){_mainWidget = value;}
     static GtkWidget * mainWidget(void){
       if (!_mainWidget){
-        DBG("***Fatal error: Child::mainWidget() returns NULL\n");
+        ERROR_("***Fatal error: Child::mainWidget() returns NULL\n");
         exit(1);
       }
       return _mainWidget;
@@ -315,7 +315,6 @@ namespace xf {
     }
 
     static GtkWidget *getChild(void){
-      //DBG("getChild...\n");
       if (!Child::mainWidget()) return NULL;
       auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
       int num = gtk_notebook_get_current_page(notebook);

@@ -53,7 +53,7 @@ class FstabUtil {
         const gchar *command = "ls -l /dev/disk/by-label";
         FILE *pipe = popen (command, "r");
         if(pipe == NULL) {
-            ERROR("fstab/view.hh::Cannot pipe from %s\n", command);
+            ERROR_("fstab/view.hh::Cannot pipe from %s\n", command);
             return NULL;
         }
         auto partition = g_path_get_basename(partitionPath); 
@@ -119,7 +119,7 @@ class FstabUtil {
             char *path = getPartitionPath(line);
             if (!path) continue; // not a partition path line...
             if (!g_path_is_absolute(path)){
-                ERROR("fstab/view.hh::partition path should be absolute: %s\n", path);
+                ERROR_("fstab/view.hh::partition path should be absolute: %s\n", path);
                 g_free(path);
                 continue;
             }
@@ -139,14 +139,14 @@ class FstabUtil {
     static gchar *
     mountSrc (const char *mountTarget) {
         if (!mountTarget){
-            ERROR("mountSrc() mountTarget is null\n");
+            ERROR_("mountSrc() mountTarget is null\n");
             return NULL;
         }
         struct mntent *mnt_struct;
         FILE *fstab_fd;
         gchar *result = NULL;
         if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
-            ERROR ("mountSrc(): Unable to open %s\n", "/etc/fstab");
+            ERROR_ ("mountSrc(): Unable to open %s\n", "/etc/fstab");
             return result;
         }
 
@@ -172,14 +172,14 @@ class FstabUtil {
     static gchar *
     mountTarget (const char *label) { // mount target in fstab file.
         if (!label){
-            ERROR("mountTarget() label is null\n");
+            ERROR_("mountTarget() label is null\n");
             return NULL;
         }
         struct mntent *mnt_struct;
         FILE *fstab_fd;
         gchar *result = NULL;
         if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
-            ERROR ("mountTarget(): Unable to open %s\n", "/etc/fstab");
+            ERROR_ ("mountTarget(): Unable to open %s\n", "/etc/fstab");
             return result;
         }
 
@@ -235,14 +235,14 @@ class FstabUtil {
     static gboolean
     isInFstab (const gchar *path) {
         if (!path){
-            ERROR("fstab/view.hh::isInFstab() path is null\n");
+            ERROR_("fstab/view.hh::isInFstab() path is null\n");
             return FALSE;
         }
         struct mntent *mnt_struct;
         FILE *fstab_fd;
         gboolean result = FALSE;
         if((fstab_fd = setmntent ("/etc/fstab", "r")) == NULL) {
-            ERROR ("fstab/view.hh::isInFstab(): Unable to open %s\n", "/etc/fstab");
+            ERROR_ ("fstab/view.hh::isInFstab(): Unable to open %s\n", "/etc/fstab");
             return result;
         }
 
@@ -274,7 +274,7 @@ class FstabUtil {
     isMounted (const gchar *mnt_fsname) {
 
         if(!mnt_fsname) {
-            ERROR ("fstab/view.hh::isMounted() mnt_point != NULL not met!\n");
+            ERROR_ ("fstab/view.hh::isMounted() mnt_point != NULL not met!\n");
             return FALSE;
         }
         gchar *mnt_point;
@@ -296,7 +296,7 @@ class FstabUtil {
         for (pfile=mfile; pfile && *pfile; pfile++){
             TRACE("From /proc/mounts and /etc/mtab: %s\n", *pfile);
             if((tab_file = fopen (*pfile, "r")) == NULL) {
-                DBG("%s: %s\n", strerror(ENOENT), *pfile);
+                ERROR_("%s: %s\n", strerror(ENOENT), *pfile);
                 continue;
             }
             fclose(tab_file);
@@ -367,7 +367,7 @@ class FstabUtil {
     tabMountPoint (const gchar *mntPartition) {
 
         if(!mntPartition) {
-            ERROR ("fstab/view.hh::mountPoint() mntPartition != NULL not met!\n");
+            ERROR_ ("fstab/view.hh::mountPoint() mntPartition != NULL not met!\n");
             return NULL;
         }
         gchar *mnt_device;
@@ -388,7 +388,7 @@ class FstabUtil {
         for (pfile=mfile; pfile && *pfile; pfile++){
             TRACE("From /proc/mounts and /etc/mtab: %s\n", *pfile);
             if((tab_file = fopen (*pfile, "r")) == NULL) {
-                DBG("%s: %s\n", strerror(ENOENT), *pfile);
+                ERROR_("%s: %s\n", strerror(ENOENT), *pfile);
                 continue;
             }
             fclose(tab_file);

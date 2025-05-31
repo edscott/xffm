@@ -31,7 +31,6 @@ namespace xf {
 
     static void
     goHome(GtkButton *self, void *data){
-      //DBG("goHome....\n");
       auto child = Child::getChild();
       
         
@@ -44,7 +43,7 @@ namespace xf {
       // FIXME UtilPathbar::updatePathbar(path, pathbar, true);
       if (retval){
         //Print::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
-        if (!History::add("cd")) DBG("History::add(%s) failed\n", "cd" );
+        if (!History::add("cd")) ERROR_("History::add(%s) failed\n", "cd" );
       } else {
         Print::print(output, g_strdup_printf(_("failed to chdir to $HOME")));
       }
@@ -94,7 +93,7 @@ namespace xf {
 //      auto find = g_strdup_printf("xffm --find %s", workDir);
       auto find = g_strdup_printf("xffm4 --find %s", workDir);
       pid_t childPid = Run<Type>::shell_command(output, find, false, false);
-DBG("*** command = %s\n", find);
+      TRACE("*** command = %s\n", find);
       auto runButton = new RunButton<Type>(EMBLEM_FIND, NULL);
       runButton->init(find, childPid, output, workDir, buttonSpace);
       g_free(find);
@@ -132,37 +131,26 @@ public:
           if (p){
             target = g_strdup(p);
           } else {
-            DBG("Neither info nor gridView_p nor path specified in menu.\n");
+            ERROR_("Neither info nor gridView_p nor path specified in menu.\n");
             return;
           }
         }
       }
       if (!target){
-        DBG("menucallbacks.hh::paste() should not happen, target==NULL\n");
+        ERROR_("menucallbacks.hh::paste() should not happen, target==NULL\n");
         exit(1);
       }
 
 
       cpDropResponse::performPasteAsync(target);
       g_free(target);
-      
 
-    /*  DBG("pasteClip(target=%s):\n%s\n", path, text);
-      if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
-        
-      } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
-      } else {
-          DBG("clipboard_t::pasteClip: Invalid clipboard contents.\n");
-      }
-*/
-      
     }
 
     static void
     showPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-//      DBG("showPaste...valid = %d\n", Clipboard::validClipBoard());
       clipboard_t::printClipBoard();
     }
  
@@ -195,7 +183,7 @@ public:
         if (!info){
           auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
           if (!gridView_p){
-            DBG("*** Error: neither path nor info nor gridView_p set for menu.\n");
+            ERROR_("*** Error: neither path nor info nor gridView_p set for menu.\n");
             return;
           }
           w->addPage(gridView_p->path());
@@ -247,8 +235,8 @@ public:
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       auto txt = (const char *)data;
-      DBG("menucallbacks.hh:: deleteTxt inactive\n");
-      // FIXME
+      TRACE("menucallbacks.hh:: deleteTxt inactive\n");
+      // FIXME (what?)
       /*if (txt && strcmp(txt, "output")==0) 
         clipboard_t::cutClipboardTxt(Child::getOutput());
       if (txt && strcmp(txt, "input")==0) 

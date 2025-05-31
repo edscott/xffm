@@ -97,21 +97,21 @@ private:
       static gchar *md5sum(const gchar *file){
           gchar *md5sum = g_find_program_in_path("md5sum");
           if (!md5sum){
-              ERROR("cannot find md5sum program\n");
+              ERROR_("cannot find md5sum program\n");
               return NULL;
           }
           g_free(md5sum);
           gchar *command = g_strdup_printf("md5sum %s", file);
           FILE *pipe = popen(command, "r");
           if (!pipe){
-              ERROR("cannot pipe to %s\n", command);
+              ERROR_("cannot pipe to %s\n", command);
               g_free(command);
               return NULL;
           }
           gchar buffer[1024];
           memset (buffer, 0, 1024);
           if (!fgets(buffer, 1023, pipe)){
-             DBG("fgets(%s): %s\n", command, "no characters read.");
+             ERROR_("fgets(%s): %s\n", command, "no characters read.");
           }
           g_free(command);
           pclose(pipe);
@@ -181,7 +181,7 @@ private:
 
     static void sendSignal(FstabMonitor<LocalDir> *monitorObject, GFileInfo *info){
       if (!monitorObject->gridView()->monitor()){ 
-        DBG("no fstab monitor active.\n");
+        ERROR_("no fstab monitor active.\n");
         //pthread_mutex_unlock(monitorObject->mutex());
         return;
       }
@@ -285,7 +285,7 @@ private:
         char *sum = md5sum("/proc/mounts");
         char *sumPartitions = md5sum("/proc/partitions");
         if (!sum || !sumPartitions) {
-            DBG("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
+            ERROR_("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
             g_free(sum);
             g_free(sumPartitions);
             return NULL;
@@ -325,7 +325,7 @@ private:
         char *sum = md5sum("/proc/mounts");
         char *sumPartitions = md5sum("/proc/partitions");
         if (!sum || !sumPartitions) {
-            DBG("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
+            ERROR_("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
             g_free(sum);
             g_free(sumPartitions);
             return NULL;
@@ -391,7 +391,7 @@ private:
         const gchar *command = "ls -l /dev/disk/by-partuuid";
         FILE *pipe = popen (command, "r");
         if(pipe == NULL) {
-            ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
+            ERROR_("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
             return NULL;
         }
         gchar *partuuid = g_path_get_basename(partuuidPath);
@@ -435,7 +435,7 @@ private:
         const gchar *command = "ls -l /dev/disk/by-id";
         FILE *pipe = popen (command, "r");
         if(pipe == NULL) {
-            ERROR("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
+            ERROR_("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
             return NULL;
         }
         gchar *base = g_path_get_basename(idPath);

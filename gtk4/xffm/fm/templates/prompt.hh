@@ -139,14 +139,14 @@ namespace xf {
             // automatic shell determination:
             if (!g_file_test(workdir, G_FILE_TEST_IS_DIR)) {
                 if (chdir(g_get_home_dir()) < 0){
-                    DBG("Cannot chdir to %s\n", g_get_home_dir());
-                    DBG("aborting command: \"%s\"\n", command);
+                    ERROR_("Cannot chdir to %s\n", g_get_home_dir());
+                    TRACE("aborting command: \"%s\"\n", command);
                     continue;
                 }
             } else {
                 if (chdir(workdir) < 0){
-                    DBG("Cannot chdir to %s\n", workdir);
-                    DBG("aborting command: \"%s\"\n", command);
+                    ERROR_("Cannot chdir to %s\n", workdir);
+                    TRACE("aborting command: \"%s\"\n", command);
                     continue;
                 }
             }
@@ -202,7 +202,7 @@ namespace xf {
       Print::print(output, g_strdup_printf("$ %s\n", text));
       Print::print(output, g_strdup(workdir));
       Print::print(output, g_strdup("\n"));
-      if (!History::add(text)) DBG("History::add(%s) failed\n", text );
+      if (!History::add(text)) ERROR_("History::add(%s) failed\n", text );
       return true;
     }
     static bool
@@ -231,7 +231,7 @@ namespace xf {
       Print::print(output, g_strdup_printf("$ %s\n", text));
       if (retval){
         Print::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
-        if (!History::add(text)) DBG("History::add(%s) failed\n", text );
+        if (!History::add(text)) ERROR_("History::add(%s) failed\n", text );
       } else {
         Print::print(output, g_strdup_printf(_("failed to chdir to %s"), v[1]));
       }
@@ -240,7 +240,7 @@ namespace xf {
     }
     static bool
     exe(GtkTextView *input, GtkTextView *output, const char *text){
-      if (!History::add(text)) DBG("History::add(%s) failed\n", text );
+      if (!History::add(text)) ERROR_("History::add(%s) failed\n", text );
 
 /*
       gchar **v = Basic::getVector(text, " ");

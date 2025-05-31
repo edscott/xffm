@@ -151,7 +151,7 @@ public:
     static gchar *
     mimeType (const gchar *file, struct stat *st_p) {
         if (!file){
-            ERROR("mimeType (file, st_p) file cannot be nil\n");
+            ERROR_("mimeType (file, st_p) file cannot be nil\n");
             return g_strdup("inode/regular");
         }
 

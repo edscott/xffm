@@ -16,7 +16,7 @@ namespace xf {
         auto fileInfo = g_file_query_info(file, "standard::",
             G_FILE_QUERY_INFO_NONE, NULL, &error_);
         if (error_){
-          DBG("Basic::getFileInfo: %s\n", error_->message);
+          ERROR_("Basic::getFileInfo: %s\n", error_->message);
           g_error_free(error_);
           return NULL;
         }
@@ -29,7 +29,7 @@ namespace xf {
 
     static GFile *getGfile(const char *path){
       if (!path || !g_file_test(path, G_FILE_TEST_EXISTS)){
-        DBG("Basic::getGfile failed for \"%s\"\n", path);
+        ERROR_("Basic::getGfile failed for \"%s\"\n", path);
         return NULL;
       }
       return g_file_new_for_path(path);
@@ -130,7 +130,7 @@ namespace xf {
             gchar line[PAGE_LINE];
             line[PAGE_LINE - 1] = 0;
             if (!fgets (line, PAGE_LINE - 1, pipe)){
-                  DBG("fgets(%s): %s\n", command, "no characters read.");
+                  ERROR_("fgets(%s): %s\n", command, "no characters read.");
             } else {
               if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
             }
@@ -293,7 +293,7 @@ public:
         }
 
         if (!e){
-            DBG("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
+            INFO("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
             e="vi";
         } else {
             INFO("Found EDITOR %s\n", e);
@@ -341,7 +341,7 @@ private:
             done = TRUE;
             return;
         } 
-        DBG("setTerminal()... TERMINAL not defined in environment.\n");
+        INFO("setTerminal()... TERMINAL not defined in environment.\n");
         // TERMINAL not defined. Look for one.
         const gchar **p=getTerminals();
         const gchar *foundTerm = NULL;
@@ -361,7 +361,7 @@ private:
             }  
         }
         if (!terminal){
-            DBG("No terminal command found. Please install or define TERMINAL environment variable.\n");
+            INFO("No terminal command found. Please install or define TERMINAL environment variable.\n");
             // Fallback...
             setenv("TERMINAL", "xterm", 1);
             setTerminalCmd("xterm");
@@ -575,7 +575,7 @@ public:
       if (owner){
         while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
       } else {
-        DBG("*** Basic::flushGTK may only be called from main context\n");
+        ERROR_("*** Basic::flushGTK may only be called from main context\n");
       }
     }
     static gchar *
@@ -619,7 +619,7 @@ public:
           memset (outbuf, 0, 8);
           gint outbuf_len = g_unichar_to_utf8 (gu, outbuf);
           if(outbuf_len < 0) {
-              ERROR ("utf_string: unichar=%d char =%c outbuf_len=%d\n", gu, p[0], outbuf_len);
+              ERROR_ ("utf_string: unichar=%d char =%c outbuf_len=%d\n", gu, p[0], outbuf_len);
           }
           gchar *qq = g_strconcat (actual_tag, outbuf, NULL);
           g_free (actual_tag);
@@ -724,7 +724,7 @@ public:
     }
     static gchar *statInfo(const struct stat *st){
         if (!st){
-            DBG("util::statinfo: st is null\n");
+            ERROR_("util::statinfo: st is null\n");
             return NULL;
         }
         auto mode = modeString(st->st_mode);

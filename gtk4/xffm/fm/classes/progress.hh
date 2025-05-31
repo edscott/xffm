@@ -94,7 +94,7 @@ private:
         auto progressBar = progress->progressBar();
         auto dialog = progress->dialog();
         if (!GTK_IS_PROGRESS_BAR(progressBar)){
-            ERROR("simplePulse_f() not a progressbar\n");
+            ERROR_("simplePulse_f() not a progressbar\n");
             return FALSE;
         }
         if (progress->getStop()){

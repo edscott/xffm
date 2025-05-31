@@ -150,16 +150,16 @@ namespace xf {
       auto path = Basic::getPath(info);
       if (strrchr(path, '.') && strcmp(strrchr(path, '.'), ".gpg") == 0){
         // decrypt
-        DBG("Decrypt file \"%s\"\n", path);
+        TRACE("Decrypt file \"%s\"\n", path);
       } else {
-        DBG("Encrypt file \"%s\"\n", path);
+        TRACE("Encrypt file \"%s\"\n", path);
       }
-      DBG("open bcrypt dialog...\n");
+      TRACE("open bcrypt dialog...\n");
       auto parent = GTK_WINDOW(Child::mainWidget());
       try {
         new Bfish<Type>(parent, path);
       } catch(int errorCode) {
-        DBG("Catch errorCode %d\n", errorCode);
+        ERROR_("Catch errorCode %d at gridviewmenu.hh::bcrypt()\n", errorCode);
       }
       g_free(path);
     }

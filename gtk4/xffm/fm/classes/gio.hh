@@ -36,11 +36,11 @@ public:
     static gboolean 
     executeURL(gchar **files, const gchar *target, gint mode){
         if (!files) {
-            ERROR("!files\n");
+            ERROR_("!files\n");
             return FALSE;
         }
         if (*files==NULL) {
-            ERROR("files==NULL\n");
+            ERROR_("files==NULL\n");
             return FALSE;
         }
         TRACE("*** target=%s, *files%s\n",target, (*files)+strlen(URIFILE));
@@ -56,7 +56,7 @@ public:
             source=g;
         }
         if (!target){
-            ERROR("LocalDnd::execute: target cannot be NULL\n");
+            ERROR_("LocalDnd::execute: target cannot be NULL\n");
             return FALSE;
         }
         TRACE("execute: source=%s target=%s command=%s\n", source, target, 
@@ -73,7 +73,7 @@ public:
         // Proceed...
         auto arg = (void **)calloc(4,sizeof(void *));
         if (!arg){
-            ERROR("execute(): calloc: %s\n", strerror(errno));
+            ERROR_("execute(): calloc: %s\n", strerror(errno));
             exit(1);
         }
         auto list = removeUriFormat(files);
@@ -158,7 +158,7 @@ private:
         // This thread is managed out of Thread, as it is joinable.
         Thread::threadCount(true,  &thread, "Gio::thread1");
         if (pthread_create(&thread, NULL, thread2,data) != 0){
-            ERROR("thread1(): Unable to create thread2\n");
+            ERROR_("thread1(): Unable to create thread2\n");
         } 
           
         // We need to be sure all threads are joined (thus completed)
@@ -166,7 +166,7 @@ private:
         // asyncReference.
         asyncReference++;
         if (pthread_join(thread, &retval)!=0){
-            ERROR("thread1(): Unable to join thread1\n");
+            ERROR_("thread1(): Unable to join thread1\n");
         }
         Thread::threadCount(false,  &thread, "Gio::thread1");
         asyncReference--;
@@ -218,7 +218,7 @@ public:
         pthread_t thread;
         auto arg = (void **)calloc(4,sizeof(void *));
         if (!arg){
-            ERROR("execute(): calloc: %s\n", strerror(errno));
+            ERROR_("execute(): calloc: %s\n", strerror(errno));
             exit(1);
         }
         GList *list = g_list_prepend(NULL,(void *)g_strdup(path));
@@ -237,7 +237,7 @@ public:
 private:
     static void 
     fore(const gchar **arg){
-      DBG("FIXME fore %s\n", arg[0]);
+      TRACE("FIXME fore %s\n", arg[0]);
       //FIXME
        /* auto notebookP = Fm<Type>::getCurrentNotebook();
         auto pageP = notebookP->currentPageObject();
@@ -379,7 +379,7 @@ private:
     
     
     static gboolean doItFore(const gchar *path, const gchar *target, gint mode, gboolean *all){
-        DBG("doItFore...%s --> %s  (%d) all=%d\n", path, target, mode, *all);
+        TRACE("doItFore...%s --> %s  (%d) all=%d\n", path, target, mode, *all);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
             return FALSE;
         if (!path || !target) return FALSE; // should not happen.
@@ -407,7 +407,7 @@ private:
             g_free(base);
         } else fullTarget = g_strdup(target);
         int response = 1;
-        DBG("do overwrite: all = %d\n", *all);
+        TRACE("do overwrite: all = %d\n", *all);
         if (g_file_test(fullTarget, G_FILE_TEST_EXISTS) && *all == 0){
           Print::print(Child::getOutput(), "red", g_strdup("FIXME: overwrite condition. App requieres confirm dialog\n"));
           response = 0;
@@ -532,7 +532,7 @@ private:
     static gboolean
     multiDoItFore(GList *fileList, const gchar *target, gint mode, Progress *progress)
     {
-        DBG("multiDoItFore, mode %d...\n", mode);
+        TRACE("multiDoItFore, mode %d...\n", mode);
         if (mode != MODE_COPY && mode != MODE_LINK && mode != MODE_MOVE && mode != MODE_RENAME) 
             return FALSE;
         gint items = g_list_length(fileList);
@@ -617,9 +617,9 @@ private:
                 break;
         }
         if (!success){
-            ERROR("Failed to process \"%s\" in mode %d\n", path, mode);
+            ERROR_("Failed to process \"%s\" in mode %d\n", path, mode);
             if (error){
-                ERROR("GError message: %s\n", error->message);
+                ERROR_("GError message: %s\n", error->message);
                 g_error_free(error);
             }
         } else{

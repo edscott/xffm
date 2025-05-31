@@ -206,7 +206,7 @@ ClickMenu
           //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
           //if (oldImage) gtk_widget_unparent(oldImage);
           Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
-        } else {DBG("Error:: Should not happen: image is NULL\n");}
+        } else {ERROR_("Error:: Should not happen: image is NULL\n");}
         
 
         if (type == G_FILE_TYPE_DIRECTORY ) {
@@ -538,7 +538,7 @@ ClickMenu
         g_free(dirPath);
         auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
-          DBG("selectWidget(): %s not found\n", path);
+          ERROR_("selectWidget(): %s not found\n", path);
           g_free(path);
           return false;
         } 
@@ -568,41 +568,6 @@ ClickMenu
       return false;
    }
 
-/*
-   static bool 
-   doSingleSelection(GtkGestureClick* self,void *data){
-      auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
-      auto eventController = GTK_EVENT_CONTROLLER(self);
-      auto event = gtk_event_controller_get_current_event(eventController);
-      auto modType = gdk_event_get_modifier_state(event);
-      auto gridView_p = (GridView<Type> *)data;
-      
-      if (modType & GDK_CONTROL_MASK) {
-        auto xffmRoot = g_object_get_data(G_OBJECT(gridView_p->store()), "xffm::root");
-        auto xffmFstab = g_object_get_data(G_OBJECT(gridView_p->store()), "xffm::fstab");
-        bool unselectOthers = (xffmRoot || xffmFstab);
-        if (unselectOthers) {
-          DBG("unselectOthers yes\n");
-          selectWidget(w, gridView_p, unselectOthers);
-          return true;
-        }
-          DBG("unselectOthers no\n");
-      }
-      return false;
-   }
-*/
-/*
-   static gboolean
-   box_f(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *data){
-      TRACE("box_f \n");
-      if (doSingleSelection(self, data)) return true;
-      return false;
-   }
-*/
    static gboolean
    longPress_f(GtkGestureLongPress* self,
               gint n_press,
@@ -672,7 +637,7 @@ ClickMenu
       gridView_p->y(y);
       graphene_rect_t bounds;
       if (!gtk_widget_compute_bounds (w, Child::mainWidget(), &bounds)) {
-        DBG("** Error:: down_f() should not happen. \n");
+        ERROR_("** Error:: down_f() should not happen. \n");
         return false;
       }
       gridView_p->X(x + bounds.origin.x);

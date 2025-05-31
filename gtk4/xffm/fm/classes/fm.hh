@@ -18,7 +18,7 @@ public:
     }
 
     Fm(const char *path, bool doFind){
-      DBG("*** doFind = %d\n", doFind);
+      TRACE("*** doFind = %d\n", doFind);
       // Construct app hash
       MimeApplication::constructAppHash();
       History::init();  
@@ -116,10 +116,10 @@ private:
         }
 
         if (!e){
-            DBG("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
+            INFO("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
             e="vi";
         } else {
-            INFO("Found EDITOR %s\n", e);
+            TRACE("Found EDITOR %s\n", e);
 
         }
         e = fixGvim(e);
@@ -139,7 +139,7 @@ private:
             done = TRUE;
             return;
         } 
-        DBG("setTerminal()... TERMINAL not defined in environment.\n");
+        INFO("setTerminal()... TERMINAL not defined in environment.\n");
         // TERMINAL not defined. Look for one.
         const gchar **p=getTerminals();
         const gchar *foundTerm = NULL;
@@ -159,7 +159,7 @@ private:
             }  
         }
         if (!terminal){
-            DBG("No terminal command found. Please install or define TERMINAL environment variable.\n");
+            INFO("No terminal command found. Please install or define TERMINAL environment variable. Fallback is xterm.\n");
             // Fallback...
             setenv("TERMINAL", "xterm", 1);
             setTerminalCmd("xterm");

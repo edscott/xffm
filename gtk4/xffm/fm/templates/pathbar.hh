@@ -85,10 +85,10 @@ namespace xf {
       auto location = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "location"));
       auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(pathbar), "input"));
       auto promptBox = GTK_WIDGET(g_object_get_data(G_OBJECT(input), "promptBox"));
-      DBG("gojump: eventBox path=%s\n", path);
+      TRACE("gojump: eventBox path=%s\n", path);
       if (strcmp(path, "xffm:back") == 0){
         auto previous = pathbarHistory_p->backHistory();
-        DBG("previous = %s\n", previous);
+        TRACE("previous = %s\n", previous);
         if (previous) Workdir<Type>::setWorkdir(previous, GTK_BOX(pathbar), false);
       }
       if (strcmp(path, "xffm:next") == 0){

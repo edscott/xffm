@@ -17,20 +17,20 @@ public:
     void conditionWait(void){
       wait_ = true;
       pthread_mutex_lock(&clipCondMutex_);
-      DBG("*** clipCond_ wait\n");
+      TRACE("*** clipCond_ wait\n");
       pthread_cond_wait(&clipCond_, &clipCondMutex_);
       pthread_mutex_unlock(&clipCondMutex_);
-      DBG("*** clipCond_ go ahead\n");
+      TRACE("*** clipCond_ go ahead\n");
       wait_ = false;
     }
 
     void signalConditionWait(void){
       if (!wait_) return;
-      DBG("*** clipCond signaling...\n");
+      TRACE("*** clipCond signaling...\n");
       pthread_mutex_lock(&clipCondMutex_);
       pthread_cond_signal(&clipCond_);
       pthread_mutex_unlock(&clipCondMutex_);
-      DBG("*** clipCond signaled\n");
+      TRACE("*** clipCond signaled\n");
     }
 
     ClipBoard(void){
@@ -50,7 +50,7 @@ public:
       auto list = Child::getGridViewList(); 
       for (auto l=list; l && l->data; l=l->next){
         auto p = (GridView<Type> *)l->data;
-        DBG("*** clearClipBoard(): GridView %p, path=%s\n", p, p->path());
+        TRACE("*** clearClipBoard(): GridView %p, path=%s\n", p, p->path());
       }
       g_list_free(list);
       return NULL;
@@ -144,44 +144,6 @@ public:
       }
     }
 
-#if 0
-    static void
-    pasteClip(const gchar *target){
-        auto c =(ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
-        auto text = c->clipBoardCache();
-        gchar **files = g_strsplit(text, "\n", -1);
-      
-        auto dialogObject = new DialogBasic<cpDropResponse>;
-
-        DBG("pasteClip(target=%s):\n%s\n", target, text);
-        if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
-          
-        } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
-        } else {
-            DBG("ClipBoard<Type>::pasteClip: Invalid clipboard contents.\n");
-        }
-
-        /*
-        if (strncmp(text, "copy\n", strlen("copy\n")) == 0){
-            auto message = _("Copying files locally");
-            auto command = "cp -R -b -f";
-            DBG("execute(%s, %s, files, %s)\n", message, command, target);
-
-            Gio::executeURL(files, target, MODE_COPY);
-            c->clearClipBoard();
-        } else if (strncmp(text, "move\n", strlen("move\n")) == 0){
-            auto message = _("Moving files");
-            auto command = "mv -b -f";
-            DBG("execute(%s, %s, files, %s)\n", message, command, target);
-            Gio::executeURL(files, target, MODE_MOVE);
-            c->clearClipBoard();
-        } else {
-            DBG("ClipBoard<Type>::pasteClip: Invalid clipboard contents.\n");
-        }
-        */
-        if (files) g_strfreev(files);
-    }
-#endif
     
     static GList *
     removeUriFormat(gchar **files) {

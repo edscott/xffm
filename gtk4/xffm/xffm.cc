@@ -116,7 +116,8 @@ main (int argc, const char *argv[]) {
   bool doFind = false;
   if (argv[1] && strcmp(argv[1], "--find") == 0){
     doFind = true;
-    argv[1] = argv[2];
+    if (!argv[2]) argv[1] = g_get_home_dir();
+    else argv[1] = argv[2];
   }
 
   // Run in foreground if "-f"  given:

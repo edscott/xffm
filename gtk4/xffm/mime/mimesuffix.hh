@@ -59,7 +59,7 @@ class MimeSuffix {
                 g_strfreev(x);
             }
             fclose(input);
-        }else ERROR("Cannot open %s\n", FREEDESKTOP_GLOBS);
+        }else ERROR_("Cannot open %s\n", FREEDESKTOP_GLOBS);
 
         if ((input = fopen(FREEDESKTOP_ICONS, "r")) != NULL) {
             gchar buffer[256]; memset(buffer, 0, 256);
@@ -76,7 +76,7 @@ class MimeSuffix {
                 g_strfreev(x);
             }
             fclose(input);
-        }else ERROR("Cannot open %s\n", FREEDESKTOP_ICONS);
+        }else ERROR_("Cannot open %s\n", FREEDESKTOP_ICONS);
 
         if ((input = fopen(FREEDESKTOP_ALIAS, "r")) != NULL) {
             gchar buffer[256]; memset(buffer, 0, 256);
@@ -93,7 +93,7 @@ class MimeSuffix {
                 g_strfreev(x);
             }
             fclose(input);
-        } else ERROR("Cannot open %s\n", FREEDESKTOP_ALIAS);
+        } else ERROR_("Cannot open %s\n", FREEDESKTOP_ALIAS);
 /*
         // FIXME: break the following code into routines...
         // mimetype registered applications...
@@ -142,7 +142,7 @@ public:
     locate_icon (const gchar *mimetype) {
         const gchar *icon;
         if (!mimeHashIcon) {
-            ERROR("!mimeHashIcon\n");
+            ERROR_("!mimeHashIcon\n");
             return NULL;
         }
         TRACE("mime-module, locate_icon looking in icon hash for \"%s\"\n", mimetype);
@@ -168,7 +168,7 @@ public:
         if (!mimeHashSfx) {
             mimeBuildHashes();
             if (!mimeHashSfx) {
-                ERROR("!mimeHashSfx\n");
+                ERROR_("!mimeHashSfx\n");
                 return NULL;
             }
         }

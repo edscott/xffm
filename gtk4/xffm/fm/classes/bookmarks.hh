@@ -69,7 +69,7 @@ public:
     addBookmark(const gchar *path){
       initBookmarks();
         if (!path || !strlen(path)) {
-            DBG("AddBookmark() path is NULL or strlen==0");
+            ERROR_("AddBookmark() path is NULL or strlen==0");
             return FALSE;
         }
         TRACE("Bookmarking %s\n", path);
@@ -85,7 +85,7 @@ public:
     removeBookmark(const gchar *path){
       initBookmarks();
         if (!path || !strlen(path)) {
-            DBG("removeBookmark(%s) path is NULL or strlen==0", path);
+            ERROR_("removeBookmark(%s) path is NULL or strlen==0", path);
             return FALSE;
         }
         TRACE("removing Bookmark  %s\n", path);
@@ -113,7 +113,7 @@ private:
         auto dir = g_build_filename(configDir, BOOKMARKS_DIR, NULL);
         if (!g_file_test(dir, G_FILE_TEST_IS_DIR)){
             if (g_mkdir_with_parents(dir, 0755)<0){
-                DBG("Cannot create %s: %s\n", dir, strerror(errno));
+                ERROR_("Cannot create %s: %s\n", dir, strerror(errno));
                 g_free(dir);
                 return NULL;
             }
@@ -142,7 +142,7 @@ private:
         GError *error = NULL;
         p->uri = g_filename_to_uri(path, NULL, &error);
         if (error){
-            DBG("bookmarkItemNew(%s): %s\n", path, error->message);
+            ERROR_("bookmarkItemNew(%s): %s\n", path, error->message);
             g_error_free(error);
             bookmarkItemFree(p);
             return NULL;
@@ -175,7 +175,7 @@ private:
         auto filename = getBookmarksFilename();
         auto f=fopen(filename, "r");
         if (!f) {
-            DBG("fopen(%s, \"r\") failed: %s\n", filename, strerror(errno));
+            ERROR_("fopen(%s, \"r\") failed: %s\n", filename, strerror(errno));
         }
         g_free(filename);
         return f;
@@ -195,7 +195,7 @@ private:
             p->path = g_filename_from_uri (p->uri, &(p->hostname), &error);
             if (error) {
                 p->path = NULL;
-                DBG("bookmarks.hh %s: %s\n", p->uri, error->message);
+                ERROR_("bookmarks.hh %s: %s\n", p->uri, error->message);
                 g_error_free(error);
                 //continue;
             }
@@ -239,7 +239,7 @@ private:
         if (list==NULL || g_slist_length(list)==0){
             if (g_file_test(filename, G_FILE_TEST_EXISTS)){
                 if (unlink(filename) < 0){
-                    DBG("unlink(%s): %s\n", filename, strerror(errno));
+                    ERROR_("unlink(%s): %s\n", filename, strerror(errno));
                 }
             }
             g_free(filename);

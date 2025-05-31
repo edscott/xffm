@@ -234,7 +234,6 @@ public:
         GtkTextView *textview = NULL;
         if (!data){
           // no textview...
-          //DBG("run_operate_stdout: invalid argument\n");
           //  textview = Fm<Type>::getCurrentTextview();
         } else {
            if (!Print::isValidTextView(data)) return;
@@ -304,7 +303,6 @@ public:
     run_operate_stderr (void *data, void *stream, int childFD) {
         GtkTextView *textview;
         if (!data){
-          // DBG("run_operate_stderr: invalid argument\n");
           textview = Child::getOutput();
             
         } else {
@@ -585,7 +583,7 @@ public:
             return  (FALSE);
         if(!g_shell_parse_argv (cmd_fmt, &argc, &argv, &error)) {
             gchar *msg = g_strcompress (error->message);
-            ERROR ("%s: %s\n", msg, cmd_fmt);
+            ERROR_ ("%s: %s\n", msg, cmd_fmt);
             g_error_free (error);
             g_free (msg);
             return  (FALSE);

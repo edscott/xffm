@@ -240,7 +240,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       if (!gridView_p) {
-        DBG("selectAll: no gridView_p\n");
+        ERROR_("selectAll: no gridView_p\n");
         return;
       }
       THREADPOOL->clear();
@@ -281,7 +281,7 @@ namespace xf {
       gtk_popover_popdown(menu);
       auto dialogObject = new DialogEntry<EntryResponse>;
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
-      DBG("create dialogObject=%p\n", dialogObject); 
+      fprintf(stderr, "create dialogObject=%p\n", dialogObject); 
       dialogObject->run();
 
       return;

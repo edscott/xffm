@@ -50,7 +50,7 @@ public:
         if (gridView_p->X() <= 0.1 && gridView_p->Y() <= 0.1) return true;
         graphene_rect_t bounds;
         if (!gtk_widget_compute_bounds (gridView_p->view(), Child::mainWidget(), &bounds)){
-          DBG("** Error:: viewMotion: should not happen\n");
+          ERROR_("** Error:: viewMotion: should not happen\n");
           return true;
         }
         double mainX = x + bounds.origin.x;
@@ -79,12 +79,12 @@ public:
         auto gridView_p = (GridView<Type> *)data;        
         GList *selection_list = gridView_p->getSelectionList();
         if (g_list_length(selection_list) < 1) {
-          DBG("*** Error:: Dnd::startDrag: no drag, selection list ==0, return false\n");
+          ERROR_("*** Error:: Dnd::startDrag: no drag, selection list ==0, return false\n");
           return false;
         }
        
         this->dragOn(true);
-        DBG("***Dnd::startDrag setting this->dragOn() = true, last drag_=%p\n", drag_);
+        TRACE("***Dnd::startDrag setting this->dragOn() = true, last drag_=%p\n", drag_);
 
 
         // Last cleanup:
@@ -126,7 +126,7 @@ public:
                        actions,
                        gridView_p->X(),
                        gridView_p->Y());
-        DBG("***Dnd::startDrag drag is now = %p\n", drag_);
+        TRACE("***Dnd::startDrag drag is now = %p\n", drag_);
 
         // Keep track of drag_ for memory cleanup.
 
@@ -164,9 +164,9 @@ public:
       // Last drag objects remain until program exit (no leaks).
       auto bytes = (GBytes *)g_object_get_data(G_OBJECT(this->drag_), "bytes");
       if (!bytes) {
-        DBG("*** Error::Dnd::cleanDrag() drag_ is already clean.\n");// should not happen.
+        TRACE("*** Dnd::cleanDrag() drag_ is already clean.\n");// should not happen.
       } else {
-        DBG("*** Dnd::cleanDrag() cleanup for drag_ %p.\n", this->drag_);
+        TRACE("*** Dnd::cleanDrag() cleanup for drag_ %p.\n", this->drag_);
       }
       auto content = GDK_CONTENT_PROVIDER(g_object_get_data(G_OBJECT(this->drag_), "content"));
       auto paintable = GDK_PAINTABLE(g_object_get_data(G_OBJECT(this->drag_), "paintable"));
@@ -186,7 +186,7 @@ public:
   public:
     void dropDone(bool success){
       if (this->drag_) {
-        DBG("Dnd::dropDone() drop success = %s\n", success?"true":"false");
+        TRACE("Dnd::dropDone() drop success = %s\n", success?"true":"false");
         gdk_drag_drop_done(this->drag_, success);
       } else {
         TRACE("Dnd::dropDone() this->drag_ is NULL, success = %s\n", success?"true":"false");
@@ -194,82 +194,6 @@ public:
       //this->drag_ = NULL;
     }
 
-///////////////////////////////////  drag /////////////////////////////////////
-#if 0
-    // signal drag-begin Emitted on the drag source when a drag is started.
-    static void
-    image_drag_begin (GtkDragSource *source, GdkDrag *drag, GtkWidget *widget)
-    {
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
-      GList *selection_list = gridView_p->getSelectionList();
-      GdkPaintable *paintable;
-      if (g_list_length(selection_list) > 1) {
-        paintable = Texture<bool>::load("dnd-multiple", 48);
-      } else {
-        // get from item selected.
-        //paintable = gtk_widget_paintable_new (widget);
-        auto info = G_FILE_INFO(selection_list->data);
-        paintable = Texture<bool>::load(info); // Loads icon from icontheme.
-      }
-      
-      
-      gtk_drag_source_set_icon (source, paintable, 0, 0);
-      g_object_unref (paintable);
-      GdkDragAction actions =
-        (GdkDragAction)(GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
-      gtk_drag_source_set_actions(source, actions);
-      
-      TRACE("image_drag_begin.\n");
-    }
-    // signal prepare Emitted when a drag is about to be initiated.
-    static GdkContentProvider* 
-    image_drag_prepare ( GtkDragSource* self, gdouble x, gdouble y, gpointer data)
-    {
-      GdkContentProvider *dndcontent;
-      auto gridView_p = (GridView<Type> *)data;
-
-      //GtkSelectionModel *selection_model = gridView_p->selectionModel();
-      GList *selection_list = gridView_p->getSelectionList();
-      if (g_list_length(selection_list) < 1) {
-        DBG("*** no drag, selection list ==0\n");
-        return NULL;
-      }
-
-      //FIXME get widget at x,y. If widget not in selection list, cancel dnd.
-      // return NULL;
-/*
-      bool item = false;
-      for (auto l=selection_list; l && l->data; l=l->next){
-        if (l->data == itemInfo){
-          item = true;
-          break;
-        }
-      }
-      if (!item) return NULL;
-*/
-      char *string = g_strdup("");
-      for (GList *l = selection_list; l && l->data; l=l->next){
-        auto info = G_FILE_INFO(l->data);
-        GFile *file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
-        char *path = g_file_get_path(file);
-        char *g = g_strconcat(string, "file://", path, "\n", NULL);
-        g_free(string);
-        string = g;
-        g_free(path);     
-      }
-
-//  dndcontent = gdk_content_provider_new_typed (G_TYPE_STRING, string);
-        GBytes *bytes = g_bytes_new(string, strlen(string)+1);
-        dndcontent = gdk_content_provider_new_for_bytes ("text/uri-list", bytes);
-
-        g_free(string);
-      //  GtkDragSource *source = gtk_drag_source_new ();
-      //  gtk_drag_source_set_content (source, dndcontent);
-        
-        TRACE("image_drag_prepare.\n");
-        return dndcontent;
-}
-#endif
 private:
 ///////////////////////////////////  drag /////////////////////////////////////
 
@@ -351,7 +275,7 @@ static void dropReadCallback(GObject *source_object, GAsyncResult *res, void *ar
 
   input = gdk_drop_read_finish (drop, res, &out_mime_type, &error_);
   if (error_){
-      DBG( "** Error::dropReadCallback(): %s\n", error_->message);
+      ERROR_( "** Error::dropReadCallback(): %s\n", error_->message);
       gdk_drop_finish (drop, (GdkDragAction)0);
       g_error_free(error_);
       return;
@@ -440,7 +364,7 @@ static void *readAction(void *arg){
     
     graphene_rect_t bounds;
     if (!gtk_widget_compute_bounds (GTK_WIDGET(pathbar), Child::mainWidget(), &bounds)) {
-      DBG("*** Error::getGridCoordinates(): should not happen\n");
+      ERROR_("*** Error::getGridCoordinates(): should not happen\n");
       return false;
     }
     double newX = X - bounds.origin.x;
@@ -471,7 +395,7 @@ static void *readAction(void *arg){
     auto gridview_p = (GridView<Type> *)data;
     graphene_rect_t bounds;
     if (!gtk_widget_compute_bounds (GTK_WIDGET(gridview_p->view()), Child::mainWidget(), &bounds)) {
-      DBG("*** Error::getGridCoordinates(): should not happen\n");
+      ERROR_("*** Error::getGridCoordinates(): should not happen\n");
       return false;
     }
     double newX = X - bounds.origin.x;
@@ -593,7 +517,7 @@ private:
             break;
           }
         } else {
-          DBG("should not happen: gtk_widget_compute_bounds failed...\n");
+          ERROR_("should not happen: gtk_widget_compute_bounds failed...\n");
         }
       }
       if (!path){
@@ -753,7 +677,7 @@ private:
         g_free(target);
 
         dialogObject->run();
-        DBG("dialogObject->run(), target=%s, uri=%s\n", target, uriList);
+        TRACE("dialogObject->run(), target=%s, uri=%s\n", target, uriList);
         d->dropDone(true);
         
       } else {

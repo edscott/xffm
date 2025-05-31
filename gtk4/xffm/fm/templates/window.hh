@@ -176,7 +176,6 @@ private:
     
     static gboolean updateButtons( GtkEventControllerMotion* self,
                     double x, double y, void *data) {
-        //DBG("update buttons....\n");
         auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
         if (pasteButton) {
           gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
@@ -273,7 +272,7 @@ private:
         auto adjustment = GTK_ADJUSTMENT(arg[2]);
 
         Basic::flushGTK();
-        DBG("*** new scrollW, new adjustment %p value  to %lf\n",  adjustment, *value_p);
+        TRACE("*** new scrollW, new adjustment %p value  to %lf\n",  adjustment, *value_p);
         gtk_adjustment_set_value(adjustment, *value_p);
         return NULL;
 
@@ -655,7 +654,7 @@ private:
           //TRACE("show %s:%p\n", *p, widget);
           gtk_widget_set_visible(GTK_WIDGET(widget), true);
         } else {
-          DBG("* Warning: cannot find widget \"%s\" to show.\n", *p);
+          ERROR_("* Warning: cannot find widget \"%s\" to show.\n", *p);
         }
       }
       auto configFlags = Settings::getInteger("flags", gridView_p->path());

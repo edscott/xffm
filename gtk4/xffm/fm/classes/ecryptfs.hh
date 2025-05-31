@@ -413,7 +413,7 @@ private:
         response_ = GTK_RESPONSE_CANCEL;
 
         MainDialog = GTK_WINDOW(dialog);
-        DBG("efs main dialog = %p.\n", MainDialog);
+        TRACE("efs main dialog = %p.\n", MainDialog);
         return GTK_DIALOG(dialog);
 
     }
@@ -480,11 +480,11 @@ private:
           auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
           auto hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
           if (!options_p->id){
-              DBG("optionsBox(): options id cannot be null.\n");
+              ERROR_("optionsBox(): options id cannot be null.\n");
               continue;
           }
           if (g_object_get_data(G_OBJECT(dialog), options_p->id)) {
-              DBG("optionsBox(): Duplicate entry: %s\n", options_p->id);
+              ERROR_("optionsBox(): Duplicate entry: %s\n", options_p->id);
               continue;
           }
           g_object_set_data(G_OBJECT(dialog),options_p->id, hbox);
@@ -596,7 +596,7 @@ public:
         Fuse(EFS_INFO1, EFS_INFO2)
     {
         this->setUrlTemplate("efs");
-        DBG("EFS constructor entries\n");
+        TRACE("EFS constructor entries\n");
         remoteEntry_ = this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
         mountPointEntry_ = this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT");
         //this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
@@ -611,7 +611,7 @@ public:
         gtk_widget_set_sensitive(GTK_WIDGET(this->saveButton()), FALSE);
         gtk_widget_set_sensitive(GTK_WIDGET(this->mountButton()), FALSE);
 
-        DBG("EFS constructor checkboxes\n");
+        TRACE("EFS constructor checkboxes\n");
 
         this->addOptionPage(mount_options, _("Options"), 6 );
         this->addOptionPage(efs_options, _("Advanced"), 12);
@@ -621,7 +621,7 @@ public:
         gtk_widget_show_all(GTK_WIDGET(this->dialog()));
     }
     ~EFS(void){
-        DBG("efs destructor\n");
+        TRACE("efs destructor\n");
     }
     
     static gboolean
@@ -648,7 +648,7 @@ public:
     doDialog( const gchar *path, View<Type> *view){
         auto efs = new(EFS)(path);
         gint response  = gtk_dialog_run(efs->dialog());
-        DBG("menuAddEFS(): efs response=%d (%d,%d,%d)\n", 
+        TRACE("menuAddEFS(): efs response=%d (%d,%d,%d)\n", 
                 response,GTK_RESPONSE_YES,GTK_RESPONSE_APPLY,GTK_RESPONSE_CANCEL);
         gchar *efsmount=NULL;
         switch (response){
@@ -680,32 +680,32 @@ public:
     }
     
     void setOptions(const gchar *url){
-        DBG("efs setOptions %s\n", url);
+        TRACE("efs setOptions %s\n", url);
         GKeyFile *key_file = g_key_file_new ();
         gchar *file = g_build_filename(EFS_KEY_FILE, NULL);
         if (!g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL)){
-            DBG("g_key_file_load_from_file(%s) failed.\n", file);
+            ERROR_("g_key_file_load_from_file(%s) failed.\n", file);
         }
         if (!g_key_file_has_group (key_file, url)){
-            DBG("setOptions(): failed g_key_file_has_group(%s)\n", url);
+            ERROR_("setOptions(): failed g_key_file_has_group(%s)\n", url);
             g_key_file_free(key_file);
             return;
         }
         auto mountPoint = g_key_file_get_string (key_file, url, "mountPoint", NULL);
         if (!mountPoint) {
-            DBG("setOptions(): failed mountPoint\n");
+            ERROR_("setOptions(): failed mountPoint\n");
             g_key_file_free(key_file);
             return;
         }
         auto mountOptions = g_key_file_get_string (key_file, url, "mountOptions", NULL);
         if (!mountOptions) {
-            DBG("setOptions(): failed mountOptions\n");
+            ERROR_("setOptions(): failed mountOptions\n");
             g_key_file_free(key_file);
             return;
         }
         auto efsOptions = g_key_file_get_string (key_file, url, "efsOptions", NULL);
         if (!efsOptions){
-            DBG("setOptions(): failed efsOptions\n");
+            ERROR_("setOptions(): failed efsOptions\n");
             g_key_file_free(key_file);
             return;
         }
@@ -827,7 +827,7 @@ public:
         for (auto p=mount_options; p->id && i+1 < MAX_COMMAND_ARGS; p++,i++) {
             auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
             if (!box) {
-                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                ERROR_("getOptions(): cannot find item \"%s\"\n", p->id);
                 continue;
             }
             auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
@@ -849,7 +849,7 @@ public:
         for (auto p=efs_options; p->id && i+1 < MAX_COMMAND_ARGS; p++, i++) {
             auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->dialog()), p->id));
             if (!box) {
-                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                ERROR_("getOptions(): cannot find item \"%s\"\n", p->id);
                 continue;
             }
             auto check = GTK_TOGGLE_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
@@ -876,7 +876,7 @@ public:
 
         auto path = gtk_entry_get_text(this->remoteEntry());
         auto mountPoint = gtk_entry_get_text(this->mountPointEntry());
-        DBG("mountUrl: %s -> %s\n", path, mountPoint);
+        TRACE("mountUrl: %s -> %s\n", path, mountPoint);
         const gchar *argv[MAX_COMMAND_ARGS];
         memset((void *)argv, 0, MAX_COMMAND_ARGS*sizeof(const gchar *));
 
@@ -912,7 +912,7 @@ public:
         if (!insecurePassphraseFile) {
             passphraseFile = get_passfile(path);
             if (!passphraseFile) {
-                DBG("No passphrase file...\n");
+                ERROR_("No passphrase file...\n");
                 g_free(optionsOn);
                 return;
             }
@@ -964,7 +964,7 @@ public:
 
         gint fd = open(passfile, O_RDWR);
         if (fd < 0){
-            DBG("Cannot open password file %s to wipeout\n", passfile);
+            ERROR_("Cannot open password file %s to wipeout\n", passfile);
         } else {
             gint i;
             // wipeout
@@ -976,7 +976,7 @@ public:
             }
             close(fd);
             if (unlink(passfile)<0) {
-                    DBG("Cannot unlink password file %s\n", passfile);
+                    ERROR_("Cannot unlink password file %s\n", passfile);
             }
         }
         memset(passfile, 0, strlen(passfile));
@@ -1022,15 +1022,15 @@ public:
     //        fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR|O_SYNC|O_DIRECT, 0600);
             if (fd >= 0) {
                 if (write(fd, (void *)"passwd=", strlen("passwd=")) < 0){
-                    DBG("write %s: %s\n", passfile, strerror(errno));
+                    ERROR_("write %s: %s\n", passfile, strerror(errno));
                 }
                 if (write(fd, (void *)passphrase, strlen(passphrase)) < 0){
-                    DBG("write %s: %s\n", passfile, strerror(errno));
+                    ERROR_("write %s: %s\n", passfile, strerror(errno));
                 }
                 memset(passphrase, 0, strlen(passphrase));
                 close(fd);
             } else {
-                DBG("cannot open %s: %s\n", passfile, strerror(errno));
+                ERROR_("cannot open %s: %s\n", passfile, strerror(errno));
             }
 
         }

@@ -86,7 +86,7 @@ namespace xf {
           //g_list_store_insert(store, 0, G_OBJECT(info));
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
       
-          DBG("EFS->%s path=%s\n", utf_name, *p);
+          TRACE("EFS->%s path=%s\n", utf_name, *p);
           g_free(utf_name);
           g_free(basename);
         }

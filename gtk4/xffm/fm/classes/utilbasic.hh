@@ -217,7 +217,6 @@ namespace xf {
         auto label = GTK_LABEL(gtk_label_new(""));
         gtk_label_set_markup(label, *p);
         auto icon = (const char *) g_hash_table_lookup(mHash[0], *p);
-        //DBG("icon is %s\n",icon);
         if (icon){
           auto image = gtk_image_new_from_icon_name(icon);
           Basic::boxPack0(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
@@ -286,7 +285,7 @@ namespace xf {
             gchar line[PAGE_LINE];
             line[PAGE_LINE - 1] = 0;
             if (!fgets (line, PAGE_LINE - 1, pipe)){
-                  DBG("fgets(%s): %s\n", command, "no characters read.");
+                  TRACE("fgets(%s): %s\n", command, "no characters read.");
             } else {
               if (strchr(line, '\n'))*(strchr(line, '\n'))=0;
             }

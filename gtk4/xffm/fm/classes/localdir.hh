@@ -52,7 +52,7 @@ namespace xf {
               NULL, // GCancellable* cancellable,
               &error_);
           if (error_) {
-DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+            ERROR_("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
             return NULL;
           }
           if (!outInfo || !outChild) break;
@@ -73,7 +73,7 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
 
         TRACE("monitor=%p file=%p store=%p\n", monitor, file, store);
         if (error_){
-            ERROR("g_file_monitor_directory(%s) failed: %s\n",
+            ERROR_("g_file_monitor_directory(%s) failed: %s\n",
                     path, error_->message);
             g_error_free(error_);
             //g_object_unref(file);
@@ -184,7 +184,7 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
               NULL, // GCancellable* cancellable,
               &error_);
           if (error_) {
-            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+            ERROR_("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
             return 0;
           }
           if (!outInfo || !outChild) break;
@@ -282,7 +282,7 @@ DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
         g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
         if (verbose) {TRACE("insert():path = %s,infoF=%p\n", path, infoF);}
         if (error_){
-          DBG("Error: %s\n", error_->message);
+          ERROR_("Error: %s\n", error_->message);
           g_error_free(error_);
           g_object_unref(infoF);
           return;
@@ -517,7 +517,7 @@ private:
               NULL, // GCancellable* cancellable,
               &error_);
           if (error_) {
-            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+            ERROR_("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
             g_error_free(error_);
           }
           if (!outInfo || !outChild) break;

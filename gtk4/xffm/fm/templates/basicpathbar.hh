@@ -97,7 +97,7 @@ namespace xf {
     static void 
     updatePathbar(const gchar *path, GtkBox *pathbar, bool updateHistory, void *pathbar_go_f, void *goData){
       if (!path || !pathbar) return;
-        DBG( "update pathbar to %s (update=%d)\n", path, updateHistory);
+        TRACE( "update pathbar to %s (update=%d)\n", path, updateHistory);
         TRACE( "update_pathbar_f:: %s\n", path);
 
         if (!pathbar) return ;
@@ -155,7 +155,7 @@ namespace xf {
         for (GList *children = children_list;children && children->data; children=children->next){
             gchar *name = (gchar *)g_object_get_data(G_OBJECT(children->data), "name");
             if (!name){
-              DBG("***Error utilpathbar.hh name is not set\n");
+              ERROR_("***Error utilpathbar.hh name is not set\n");
               continue;
             }
             if (strcmp(name, "RFM_ROOT")==0 || strcmp(name, "RFM_GOTO")==0) continue;
@@ -350,12 +350,12 @@ namespace xf {
         // Take window width.
         if (gtk_widget_get_realized(GTK_WIDGET(Child::mainWidget()))){
           if (!gtk_widget_compute_bounds(GTK_WIDGET(Child::mainWidget()), GTK_WIDGET(Child::mainWidget()), &bounds)) {
-            DBG("***Error:: gtk_widget_compute_bounds(Child::mainWidget()). Widget realized?\n");
+            ERROR_("***Error:: gtk_widget_compute_bounds(Child::mainWidget()). Widget realized?\n");
           }
         }
       } else {
         if (!gtk_widget_compute_bounds(GTK_WIDGET(pathbar), GTK_WIDGET(pathbar), &bounds)) {
-          DBG("***Error:: gtk_widget_compute_bounds(pathbar). Widget realized?\n");
+          ERROR_("***Error:: gtk_widget_compute_bounds(pathbar). Widget realized?\n");
         }
       }
       TRACE("Window is realized =%d\n", gtk_widget_get_realized(Child::mainWidget()));
@@ -414,7 +414,7 @@ namespace xf {
             if (strcmp(name, "RFM_ROOT")==0) continue;
 
             if (!gtk_widget_compute_bounds(GTK_WIDGET(children->data), GTK_WIDGET(children->data), &bounds)) {
-              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds(). Widget realized?\n");
+              ERROR_("***Error:: showWhatFits():gtk_widget_compute_bounds(). Widget realized?\n");
             }
 
             TRACE("#### width, allocaltion.width %f %f\n",width,  bounds.size.width);
@@ -433,7 +433,7 @@ namespace xf {
             if (strcmp(name, "RFM_ROOT")==0) continue;
 
             if (!gtk_widget_compute_bounds(GTK_WIDGET(children->data), GTK_WIDGET(children->data), &bounds)) {
-              DBG("***Error:: showWhatFits():gtk_widget_compute_bounds(). Widget realized?\n");
+              ERROR_("***Error:: showWhatFits():gtk_widget_compute_bounds(). Widget realized?\n");
             }
             width -= bounds.size.width;
 
@@ -452,7 +452,7 @@ namespace xf {
         gtk_widget_add_css_class (eventBox, css );
         
         if (!name){
-          DBG("setPathButtonText: name is null\n");
+          ERROR_("***Error:: setPathButtonText: name is null\n");
           name="FIXME";
         } else {
           if (strcmp(name, "RFM_ROOT")==0) {

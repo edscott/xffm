@@ -189,7 +189,7 @@ namespace xf {
         // rewrite history file
         FILE *historyFile = fopen (history, "w");
         if(!historyFile) {
-            ERROR("saveHistory(): unable to write to file: \"%s\"\n", history);
+            ERROR_("saveHistory(): unable to write to file: \"%s\"\n", history);
             return;
         }
 

@@ -175,7 +175,7 @@ private:
 
       auto buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
       if (trim_output(buffer)){
-          DBG("trim_output():: textview is at line limit.\n");
+          TRACE("trim_output():: textview is at line limit.\n");
       }
 
       auto tags = resolve_tags(buffer, tag);
@@ -455,7 +455,7 @@ typedef struct lpterm_colors_t {
         TRACE("Print::resolve_tag(%s): *** creating new tag.\n", id);
         auto color = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
         if (!color){
-            ERROR("Print::resolve_tag: calloc: %s\n", strerror(errno));
+            ERROR_("Print::resolve_tag: calloc: %s\n", strerror(errno));
             exit(1);
         }
         if (gdk_rgba_parse (color, id)) {
@@ -466,7 +466,7 @@ typedef struct lpterm_colors_t {
       }
 
       if (!tag) {
-        DBG("***Error:: resolve_tag(): No GtkTextTag for %s\n", id);
+        ERROR_("***Error:: resolve_tag(): No GtkTextTag for %s\n", id);
       }
       return tag;
   }
@@ -569,7 +569,7 @@ typedef struct lpterm_colors_t {
         auto small = arg[2];
         auto err = arg[3];
         if(!vpane) {
-            ERROR("show_text_buffer_f(): vpane is NULL\n");
+            ERROR_("show_text_buffer_f(): vpane is NULL\n");
             return NULL;
         }
         TRACE("show_text_buffer_f:: err=%p\n", err);

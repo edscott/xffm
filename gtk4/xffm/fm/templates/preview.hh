@@ -71,13 +71,13 @@ class Preview {
       GdkPaintable *loadPath(const char *path){
         GError *error_ = NULL;
         if (!path) {
-          DBG("*** Error::loadPath(%s): %s\n", path, error_->message);
+          ERROR_("*** Error::loadPath(%s): %s\n", path, error_->message);
           g_error_free(error_);
           return NULL;
         }
         
         if (!g_file_test(path, G_FILE_TEST_EXISTS)) {
-          DBG("*** Error::loadPath(%s): !g_file_test(path, G_FILE_TEST_EXISTS\n", path);
+          ERROR_("*** Error::loadPath(%s): !g_file_test(path, G_FILE_TEST_EXISTS\n", path);
           return NULL;
         }
         GdkPaintable *paintable = NULL;
@@ -407,7 +407,7 @@ class Preview {
     static void
     saveThumbnail(const char *path, GdkPaintable *paintable){
         if (!path || !paintable) {
-            ERROR("saveThumbnail(%s): !name \n", path);
+            ERROR_("saveThumbnail(%s): !name \n", path);
             return ;
         }
         zapThumbnail(path);
@@ -468,7 +468,7 @@ class Preview {
         gint fd=creat(fname, S_IRUSR | S_IWUSR);
         if (fd >= 0){
             if (write(fd, ptr, sb.size) < 0){
-                DBG("Error:: could not write to %s\n", fname);
+                ERROR_("Error:: could not write to %s\n", fname);
             }
             close(fd);
         }
@@ -531,7 +531,7 @@ class Preview {
         gint count=0;
         DIR *directory = opendir(path);
         if (!directory) {
-            ERROR("directoryText(): Cannot open %s\n", path);
+            ERROR_("directoryText(): Cannot open %s\n", path);
             return g_strdup_printf("%s: %s\n", path, strerror(errno));
         }
         // http://womble.decadent.org.uk/readdir_r-advisory.html
@@ -616,14 +616,14 @@ class Preview {
             gboolean success = TRUE;
             if(error) {
             success = FALSE;
-            ERROR("g_convert_with_fallback() to UTF8: %s\n", error->message);
+            ERROR_("g_convert_with_fallback() to UTF8: %s\n", error->message);
             g_error_free (error);
             error=NULL;
             outputText = 
                 g_convert_with_fallback (inputText, -1, "UTF-8", "iso8859-15",
                              NULL, &bytes_read, &bytes_written, &error);
             if (error) {
-                ERROR("b.g_convert_with_fallback() to iso8859-15: %s\n", error->message);
+                ERROR_("b.g_convert_with_fallback() to iso8859-15: %s\n", error->message);
                 g_error_free (error);
             } else success = TRUE;
 
@@ -648,7 +648,7 @@ class Preview {
         }
         gint fd = open (path, O_RDONLY);
         if(fd < 0) {
-            ERROR("readFileHead(): open(%s): %s\n", path, strerror (errno));
+            ERROR_("readFileHead(): open(%s): %s\n", path, strerror (errno));
             return errorText(path);
         }
         gchar buffer[BUFSIZE];
@@ -661,7 +661,7 @@ class Preview {
         close (fd);
 
         if(bytes < 0) {
-            ERROR("readFileHead():read %s (%s).\n", path, strerror (errno));
+            ERROR_("readFileHead():read %s (%s).\n", path, strerror (errno));
             return errorText(path);
         }
         gint i;
@@ -775,7 +775,7 @@ class Preview {
         auto paintable = GDK_PAINTABLE(gdk_texture_new_for_surface(page_layout.surface));
 
         //if(cairo_surface_write_to_png (page_layout.surface, previewPixbuf) != CAIRO_STATUS_SUCCESS) {
-          //  ERROR("cairo_surface_write_to_png(surface,) != CAIRO_STATUS_SUCCESS");
+          //  ERROR_("cairo_surface_write_to_png(surface,) != CAIRO_STATUS_SUCCESS");
         //}
         cairo_surface_destroy (page_layout.surface);
 
@@ -805,7 +805,7 @@ class Preview {
         GError *error = NULL;
         auto paintable = GDK_PAINTABLE(gdk_texture_new_from_filename (previewPixbuf, &error));
         if(error) {
-            ERROR ("text_preview_f() %s:%s\n", error->message, previewPixbuf);
+            ERROR_ ("text_preview_f() %s:%s\n", error->message, previewPixbuf);
             g_error_free (error);
             return NULL;
         }
@@ -894,7 +894,7 @@ class Preview {
             wc = g_utf8_get_char (p);
             next = g_utf8_next_char (p);
             if(wc == (gunichar) - 1) {
-            ERROR("%s: Invalid character in input\n", g_get_prgname ());
+            ERROR_("%s: Invalid character in input\n", g_get_prgname ());
             wc = 0;
             }
             if(!*p || !wc || wc == '\n' || wc == '\f') {
@@ -1044,7 +1044,7 @@ class Preview {
             time(NULL) + 4, 0
         };
         if (pthread_cond_wait(&waitSignal, &waitMutex) != 0){
-            ERROR("Aborting runaway ghostscript preview for %s (pid %d)\n",
+            ERROR_("Aborting runaway ghostscript preview for %s (pid %d)\n",
                 src, (int)pid);
             kill(pid, SIGKILL);
         } else {
@@ -1056,7 +1056,7 @@ class Preview {
             GError *error_ = NULL;
             retval = GDK_PAINTABLE(gdk_texture_new_from_filename (previewPath, &error_));
             if (error_){
-              DBG("** Error::gsPreview(): %s\n", error_->message);
+              ERROR_("** Error::gsPreview(): %s\n", error_->message);
               g_error_free(error_);
               retval = NULL;
             }
@@ -1081,7 +1081,7 @@ class Preview {
         gint status;
         TRACE("waiting for %d\n", pid);
         if (waitpid (pid, &status, WUNTRACED) < 0){
-          DBG("Error:: Process %d failed (%s)\n", pid, strerror(errno));
+          ERROR_("Error:: Process %d failed (%s)\n", pid, strerror(errno));
         }
         if (WIFEXITED(status)){
           TRACE("*** wait status = %d\n", status & 0xff);

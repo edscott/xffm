@@ -116,7 +116,7 @@ namespace xf {
       gchar *dirname = g_path_get_dirname(historyFile);
       if (!g_file_test(dirname, G_FILE_TEST_IS_DIR)){
         if (mkdir(dirname, 0700) != 0 ){
-          DBG("addHistory(): cannot create \"%s\"\n", historyFile);
+          ERROR_("addHistory(): cannot create \"%s\"\n", historyFile);
           return false;
         }
       }

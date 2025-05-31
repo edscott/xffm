@@ -275,7 +275,8 @@ private:
 
           ////////////   findButton... /////////////////////////
           auto actionBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3));
-          gtk_frame_set_label_widget(frame_, GTK_WIDGET(actionBox));
+          //gtk_frame_set_label_widget(frame_, GTK_WIDGET(actionBox));
+          gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(actionBox), GTK_PACK_END);
 
 
           auto t=g_strdup_printf("<span color=\"blue\" size=\"large\"><b>%s</b></span>  ", _("Find in Files"));
@@ -286,6 +287,8 @@ private:
 
           findButton_ = UtilBasic::mkButton(EMBLEM_FIND, NULL);
           cancelButton_ = UtilBasic::mkButton(EMBLEM_DELETE, NULL);
+          //gtk_widget_set_size_request(GTK_WIDGET(findButton_), 33, -1);
+          //gtk_widget_set_size_request(GTK_WIDGET(cancelButton_), 33, -1);
           g_object_set_data(G_OBJECT(findButton_), "dialog", dialog_);
           
           // gtk_widget_set_can_default(GTK_WIDGET(findButton_), TRUE);
@@ -296,14 +299,17 @@ private:
           gtk_box_append(actionBox, GTK_WIDGET(findButton_));
           gtk_box_append(actionBox, GTK_WIDGET(cancelButton_));
           gtk_widget_set_visible(GTK_WIDGET(cancelButton_), false);
-         
+        
          /////////////  clear button  /////
          auto clearButton =  UtilBasic::mkButton(EMBLEM_CLEAR, NULL);
+         // no work: gtk_widget_set_size_request(GTK_WIDGET(clearButton), 33, -1);
          g_signal_connect (G_OBJECT (clearButton), "clicked",
                   BUTTON_CALLBACK(FindSignals<Type>::onClearButton), (gpointer)this);
          g_object_set_data(G_OBJECT(mainBox_), "clear_button", clearButton);
          g_object_set_data(G_OBJECT(clearButton), "mainBox", mainBox_);
-         gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(clearButton), GTK_PACK_END);
+         //gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(clearButton), GTK_PACK_END);
+         
+
          Basic::setTooltip(GTK_WIDGET(findButton_), _("Show search results for this query"));
          Basic::setTooltip(GTK_WIDGET(cancelButton_), _("Cancel Operation"));
 
@@ -314,7 +320,13 @@ private:
          g_object_set_data(G_OBJECT(textview_), "vpane", (gpointer)vpane_);
           
          auto sw2 = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new ());
-         gtk_paned_set_end_child (vpane_, GTK_WIDGET(sw2));
+         auto frame2 = GTK_FRAME(gtk_frame_new(NULL));
+         gtk_frame_set_child(frame2, GTK_WIDGET(sw2));
+         gtk_frame_set_label_widget(frame2, GTK_WIDGET(clearButton));
+         gtk_frame_set_label_align(frame2, 1.0);
+         
+         gtk_paned_set_end_child (vpane_, GTK_WIDGET(frame2));
+         //gtk_paned_set_end_child (vpane_, GTK_WIDGET(sw2));
          gtk_scrolled_window_set_policy (sw2, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
          gtk_scrolled_window_set_child(sw2, GTK_WIDGET(textview_));
 
@@ -736,7 +748,7 @@ private:
         {
 
             if ((!spin_name && !check_name)|| !options_vbox) {
-                ERROR("add_option_spin(): incorrect function call\n");
+                ERROR_("add_option_spin(): incorrect function call\n");
                 return NULL;
             }
             auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -805,7 +817,7 @@ private:
                 const gchar *default_value)
         {
             if ((!entry_name && !check_name)|| !options_vbox) {
-                ERROR("add_option_entry(): incorrect function call\n");
+                ERROR_("add_option_entry(): incorrect function call\n");
                 return NULL;
             }
             auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -893,7 +905,7 @@ private:
                 GSList *list)
         {
             if ((!combo_name && !check_name)|| !options_vbox) {
-                ERROR("add_option_spin(): incorrect function call\n");
+                ERROR_("add_option_spin(): incorrect function call\n");
                 return NULL;
             }
             auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
