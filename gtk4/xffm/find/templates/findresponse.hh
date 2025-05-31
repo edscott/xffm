@@ -461,6 +461,10 @@ private:
             gtk_box_append(box, GTK_WIDGET(image));
             Basic::setTooltip(GTK_WIDGET(image), tooltipText);
           }
+          g_signal_connect (entry,
+                  "activate", BUTTON_CALLBACK(FindSignals<Type>::onFindButton), 
+                  this);
+
           return box;
       }
 
