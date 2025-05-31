@@ -621,7 +621,7 @@ private: // Nonfree functions
               NULL, // GCancellable* cancellable,
               &error_);
           if (error_) {
-            DBG("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
+            ERROR_("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
             return NULL;
           }
           if (!outInfo || !outChild) break;

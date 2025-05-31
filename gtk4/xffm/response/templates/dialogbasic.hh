@@ -65,7 +65,7 @@ namespace xf
     static void *runWait_f(void *data){
       auto dialogObject = (dialog_t *)data;
       //auto dialog = dialogObject->dialog();
-      DBG("*** runWait_f for dialog_t\n");
+      TRACE("*** runWait_f for dialog_t\n");
 
       TRACE("runWait_f...\n");
       pthread_t thread;
@@ -86,7 +86,7 @@ namespace xf
       auto dialogObject = (dialog_t *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
-      DBG("*** run_f for Basic::dialog_t\n");
+      TRACE("*** run_f for Basic::dialog_t\n");
       TRACE("*** run_f (thread)\n");
       do {
         dialogObject->lockResponse();
@@ -176,7 +176,7 @@ namespace xf
 
   public:
     void setParent(GtkWindow *parent){
-      DBG("*** setParent(%p)\n", parent);
+      TRACE("*** setParent(%p)\n", parent);
       parent_ = parent;
       if (parent_) {
         // only allow one subdialog (modal)
@@ -214,7 +214,7 @@ namespace xf
     }
 
     int run(void){
-      DBG("*** Basic::dialog_t run...\n");
+      TRACE("*** Basic::dialog_t run...\n");
       pthread_t thread;
       Thread::threadCount(true,  &thread, "DialogBasic::run");
       int retval = pthread_create(&thread, NULL, runWait_f, this);

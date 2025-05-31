@@ -226,7 +226,7 @@ public:
 */
 
     static void *asyncNo(void *data){
-      DBG("mountResponse asyncNo\n"); 
+      TRACE("mountResponse asyncNo\n"); 
        return NULL;
 
     }
@@ -238,7 +238,7 @@ public:
       auto buffer = gtk_entry_get_buffer(entry);
       auto target = (const char *)gtk_entry_buffer_get_text(buffer);
       auto output = Child::getOutput();
-      DBG(" do the mount, target = %s\n", target ); 
+      TRACE(" do the mount, target = %s\n", target ); 
       if (!g_file_test(target, G_FILE_TEST_EXISTS)){
         if (mkdir(target,0777) < 0){
           auto string = g_strdup_printf(_("Cannot create directory '%s'"), target);
@@ -250,7 +250,7 @@ public:
 
       auto mountSrc = (const char *)dialogObject->subClass()->mountSrc();
       if (EfsResponse<Type>::isEfsMount(mountSrc)){
-        DBG("*** do the efs mount for \"%s\"\n", mountSrc);
+        TRACE("*** do the efs mount for \"%s\"\n", mountSrc);
         // get mount command
         // get mount options
         // prepare mount arguments

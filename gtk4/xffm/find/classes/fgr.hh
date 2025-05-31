@@ -843,7 +843,7 @@ private:
         // coverity[fs_check_call : FALSE]
         if(stat (path, &path_st) < 0) {
             if (errno){
-                DBG("fgr.hh::globber(): stat %s (%s)\n",
+                TRACE("fgr.hh::globber(): stat %s (%s)\n",
                     path, strerror(errno));
                 errno=0;
             }

@@ -46,13 +46,13 @@ public:
 
      static void *asyncYes(void *data){
       auto dialogObject = (dialog_t *)data;
-      DBG("%s", "hello world\n");
+      TRACE("%s", "hello world\n");
       return NULL;
     }
 
     static void *asyncNo(void *data){
       auto dialogObject = (dialog_t *)data;
-      DBG("%s", "goodbye world\n");
+      TRACE("%s", "goodbye world\n");
       return NULL;
     }
 #if 0
@@ -66,7 +66,7 @@ public:
        /*auto path = (const char *)data;
        reload(path);
        return NULL;*/
-       DBG("asyncCallback(%s)...\n", (const char *)data);
+       TRACE("asyncCallback(%s)...\n", (const char *)data);
        // FIXME: Final step,
        //        Set the entry text, for this, we
        //        need to know which entry is referred to...
@@ -78,7 +78,7 @@ public:
     // Just for completeness for now.
     // 
     void *asyncCallbackData(void){
-      DBG("asyncCallbackData...\n");
+      TRACE("asyncCallbackData...\n");
       return (void *) "foobar";
     }
 #endif
@@ -195,7 +195,7 @@ public:
         // FIXME: 
 /*
         this->setUrlTemplate("efs");
-        DBG("EFS constructor entries\n");
+        TRACE("EFS constructor entries\n");
         remoteEntry_ = this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
         mountPointEntry_ = this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT");
         //this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
@@ -210,7 +210,7 @@ public:
         gtk_widget_set_sensitive(GTK_WIDGET(this->saveButton()), FALSE);
         gtk_widget_set_sensitive(GTK_WIDGET(this->mountButton()), FALSE);
 
-        DBG("EFS constructor checkboxes\n");
+        TRACE("EFS constructor checkboxes\n");
 
         this->getScrolledWindow(mount_options, _("Options"), 6 );
         this->getScrolledWindow(efs_options, _("Advanced"), 12);
@@ -224,7 +224,7 @@ public:
         response_ = GTK_RESPONSE_CANCEL;
 
         MainDialog = GTK_WINDOW(dialog);
-        DBG("efs main dialog = %p.\n", MainDialog);
+        TRACE("efs main dialog = %p.\n", MainDialog);
         */
         return mainBox_;
     }
@@ -293,11 +293,11 @@ public:
           auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
           auto hbox2 = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
           if (!options_p->id){
-              DBG("optionsBox(): options id cannot be null.\n");
+              ERROR_("optionsBox(): options id cannot be null.\n");
               continue;
           }
           if (g_object_get_data(G_OBJECT(mainBox), options_p->id)) {
-              DBG("optionsBox(): Duplicate entry: %s\n", options_p->id);
+              ERROR_("optionsBox(): Duplicate entry: %s\n", options_p->id);
               continue;
           }
           g_object_set_data(G_OBJECT(mainBox),options_p->id, hbox);
@@ -422,7 +422,7 @@ public:
         for (auto p=mount_options; p->id && i+1 < MAX_COMMAND_ARGS; p++,i++) {
             auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->mainBox_), p->id));
             if (!box) {
-                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                ERROR_("getOptions(): cannot find item \"%s\"\n", p->id);
                 continue;
             }
             auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
@@ -443,7 +443,7 @@ public:
         for (auto p=efs_options; p->id && i+1 < MAX_COMMAND_ARGS; p++, i++) {
             auto box = GTK_BOX(g_object_get_data(G_OBJECT(this->mainBox_), p->id));
             if (!box) {
-                DBG("getOptions(): cannot find item \"%s\"\n", p->id);
+                ERROR_("getOptions(): cannot find item \"%s\"\n", p->id);
                 continue;
             }
             auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(box), "check")); 
@@ -491,10 +491,10 @@ public:
                 _("Folder does not exist"), "\n", NULL));
           ok = false;
         }
-        DBG("path=\"%s\"\n", path);
-        DBG(" mountPoint=\"%s\"\n", mountPoint);
-        DBG(" mountOptions=\"%s\"\n", mountOptions);
-        DBG(" efsOptions=\"%s\"\n", efsOptions);
+        TRACE("path=\"%s\"\n", path);
+        TRACE(" mountPoint=\"%s\"\n", mountPoint);
+        TRACE(" mountOptions=\"%s\"\n", mountOptions);
+        TRACE(" efsOptions=\"%s\"\n", efsOptions);
 
         if (ok) {
           auto key_file = getKeyFile();
@@ -506,7 +506,7 @@ public:
           auto retval = g_key_file_save_to_file (key_file,file,NULL);
           g_key_file_free(key_file);
           if (!retval){
-            DBG("EfsResponse:: save(): Error writing %s\n", file);
+            ERROR_("EfsResponse:: save(): Error writing %s\n", file);
           }
           g_free(file);
         }

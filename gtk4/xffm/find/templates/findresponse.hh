@@ -156,7 +156,7 @@ private:
         }
         FILE *file = fopen (history, "r");
         if(!file) {
-           DBG("*** Error::loadHistory(): unable to open history: \"%s\"\n", history);
+           ERROR_("*** Error::loadHistory(): unable to open history: \"%s\"\n", history);
            list = g_list_prepend(list, (void *) "");
            return list;
         }

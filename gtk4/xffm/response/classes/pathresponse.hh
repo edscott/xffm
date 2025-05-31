@@ -22,54 +22,7 @@ public:
       auto output = Child::getOutput();
 
       auto op_f = g_find_program_in_path(op);
-      if (!op_f) {DBG("*** Error: %s not found\n", op); return NULL;}
-/*      if (strcmp(op, "mount")==0) {
-        if (!g_file_test(target, G_FILE_TEST_EXISTS)){
-          if (mkdir(target,0777) < 0){
-            auto string = g_strdup_printf(_("Cannot create directory '%s'"), target);
-            Print::printError(output, g_strconcat(_("Sorry"), " ", string, " (", strerror(errno), ")\n", NULL));
-            g_free(string);
-            return NULL;
-          }
-        }
-      } 
-      else if (strcmp(op, "mkdir")==0){
-        DBG("got mkdir operation:target=\"%s\", newFile=\"%s\".\n", target, newFile);
-        if (mkdir(newFile,0777) < 0){
-          auto string = g_strdup_printf(_("Cannot create directory '%s' (%s)\n"), newFile, strerror(errno));
-          Print::printError(output, g_strconcat(_("Sorry"), " ", string, NULL));
-          DBG("***%s\n", string);
-          g_free(string);
-          return NULL;
-        }
-      } else {
-        if (g_file_test(newFile, G_FILE_TEST_EXISTS)){
-          auto string = g_strconcat(_("Sorry"), " \"", newFile, "\" ", _("exists"), "\n", NULL);
-          Print::printError(output, string);
-          return NULL;
-        }
-      }*/
-
-/*      
-      if (strcmp(op, "cp") == 0 || strcmp(op, "mv") == 0) {          
-        if (g_file_test(path, G_FILE_TEST_IS_DIR)){
-          char *arg[]={(char *)op, (char *)"-a", (char *)"-v", path, newFile, NULL};
-          Run<bool>::thread_run(output, (const char **)arg, false);
-        } else {
-          char *arg[]={(char *)op, (char *)"-v", path, newFile, NULL};
-          Run<bool>::thread_run(output, (const char **)arg, false);
-        }
-      } else if (strcmp(op, "ln") == 0) {          
-        char *arg[]={(char *)op, (char *)"-s", (char *)"-v", path, newFile, NULL};
-        Run<bool>::thread_run(output, (const char **)arg, false);
-      } else if (strcmp(op, "mount") == 0) {      
-        auto mountSrc = FstabUtil::mountSrc(target);
-        if (!mountSrc) mountSrc = g_strdup(path);    
-        char *arg[]={(char *)"sudo", (char *)"-A", (char *)op, (char *)"-v", mountSrc, (char *)target, NULL};
-        Run<bool>::thread_run(output, (const char **)arg, true);
-        g_free(mountSrc);
-      }
-      */
+      if (!op_f) {ERROR_("*** Error: %s not found\n", op); return NULL;}
       if (strcmp(op, "cp") == 0){
         cpmv( path, newFile, 1);
       } else if (strcmp(op, "mv") == 0) {    
@@ -142,45 +95,15 @@ public:
 
 private:
   static void *cpmv_f(void *data){
-      DBG("*** cpmv_f: \n");
+      TRACE("*** cpmv_f: \n");
     auto arg =(char **)data;
     pid_t pid = Run<bool>::thread_run(NULL, (const char **)arg, false);
-//    pid_t pid = Run<bool>::thread_run(Child::getOutput(), (const char **)arg, false);
     int wstatus;
     waitpid(pid, &wstatus, 0);
     for (auto p=arg; p && *p; p++) g_free(*p);
     g_free(arg);
     return GINT_TO_POINTER(wstatus);
   }
-/*
-    static void
-    backup(const gchar *path, const gchar *target){
-        auto base = g_path_get_basename(path);
-        auto srcTarget = g_strconcat(target, G_DIR_SEPARATOR_S, base, NULL);
-        g_free(base);
-        if (g_file_test(srcTarget, G_FILE_TEST_EXISTS)){
-          
-          auto backup = g_strconcat(srcTarget, "~", NULL);
-          auto b1 = g_path_get_basename(srcTarget);
-          auto b2 = g_path_get_basename(backup);
-
-          auto text1 = g_strdup_printf(_("Backup file of %s: %s"), b1, b2);
-          //auto text = g_strconcat(_("Created: "), backup, "\n", NULL);
-          auto text = g_strconcat(" ",text1, "\n", NULL);
-          //g_free(text1);
-          Print::printWarning(Child::getOutput(), text); // this is run in main context.
-
-            
-            const gchar *arg[] = { "mv", "-f", srcTarget, backup, NULL };
-            Run<bool>::thread_run(NULL, arg, false);
-            //const gchar *arg[] = { "mv", "-v", "-f", srcTarget, backup, NULL };
-            TRACE("backup: %s -> %s\n", srcTarget, backup); 
-            g_free(backup);
-        }
-        g_free(srcTarget);
-    }
- */   
-
     
 };
 

@@ -45,7 +45,7 @@ namespace xf
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       dialogObject->setLabelText(text);
 
-      DBG("create dialogObject=%p\n", dialogObject); 
+      TRACE("create dialogObject=%p\n", dialogObject); 
       dialogObject->run();
     }
 

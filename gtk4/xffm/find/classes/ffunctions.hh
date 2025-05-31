@@ -114,7 +114,7 @@ namespace xf {
       TRACE("*** notify name=%s\n", g_param_spec_get_name(pspec));
 
       if (!GTK_IS_ENTRY(data)) {
-        DBG("*** FIXME: identify notify call\n");
+        TRACE("*** FIXME: identify notify call\n");
         return; // FIXME hack!
                 // notify is called when window is closed
                 // and by then the pointer to entry is invalid.

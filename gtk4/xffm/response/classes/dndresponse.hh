@@ -74,7 +74,7 @@ public:
           TRACE("hello world, response is %d: cancel\n", response);
           goto done;
         default:
-          DBG("*** Error:: dndResponse::asyncYes(): response %d is not appropriate.\n", response);
+          ERROR_("*** Error:: dndResponse::asyncYes(): response %d is not appropriate.\n", response);
           goto done;
       }
       Basic::concat(&clipContent, uriList);

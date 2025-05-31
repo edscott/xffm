@@ -41,7 +41,6 @@ public:
        
        // Test mode
        //auto retval = p->asyncCallback(p->asyncCallbackData());
-       //DBG("p->asyncCallback(p->asyncCallbackData) -> %s\n", (const char *)retval);
        
        asyncYesArg(data, "mkdir");      
        return NULL;
@@ -64,12 +63,12 @@ private:
        Basic::concat(&path, text);
  
        if (!g_file_test(path, G_FILE_TEST_EXISTS)){
-        DBG("got mkdir operation: path=\"%s\".\n", dir);
+        TRACE("got mkdir operation: path=\"%s\".\n", dir);
         if(mkdir(path,0700) < 0){
           auto string = g_strdup_printf(_("Cannot create directory '%s' (%s)\n"), 
               path, strerror(errno));
           Print::printError(Child::getOutput(), g_strconcat(_("Sorry"), " ", string, NULL));
-          DBG("***%s\n", string);
+          TRACE("***%s\n", string);
           g_free(string);
         }
        }

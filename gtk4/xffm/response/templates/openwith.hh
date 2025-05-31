@@ -104,7 +104,7 @@ public:
       if (inPath) path_ = g_strdup(inPath);
       else {
         if (!selectionList_){
-          DBG("*** Error:: OpenWith(): selectionList_ is NULL.\n");
+          ERROR_("*** Error:: OpenWith(): selectionList_ is NULL.\n");
           exit(1);
         }
         auto info = G_FILE_INFO(selectionList_->data);
@@ -275,8 +275,6 @@ private:
 
         Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(label), FALSE, FALSE, 0);
         Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(checkbutton_), FALSE, FALSE, 0);
-        //DBG("default app=%s\n", defaultApp);
-        //DBG("default apps[0]=%s\n", apps[0]);
         char *key = NULL;
         if (defaultApp){
           key = g_strdup(defaultApp);
@@ -284,9 +282,6 @@ private:
         } else if (apps){
           key = g_strdup(apps[0]);
         }
-        
-        //if (key && strchr(key, ' ')) *strrchr(key, ' ') = 0;
-        //DBG("key=%s\n", key);
         if (key) {
           if (Settings::getInteger("ExternalTerminal", key) == 1){
             gtk_check_button_set_active(checkbutton_, true);
@@ -322,7 +317,7 @@ private:
     static void
     run(OpenWith *object){
        if (!Child::valid(object->child()) && object->withTextview()==false){
-         DBG("Child widget (%p) is not valid, output=%p.\n",
+         ERROR_("Child widget (%p) is not valid, output=%p.\n",
              object->child(), object->output());
          return;
        }
@@ -363,7 +358,7 @@ private:
         else {
           command = Run<Type>::mkCommandLine(inputText, p?p:e);
           Settings::setInteger("ExternalTerminal", key, 0);
-          DBG("command line is \'%s\'\n", command);
+          TRACE("command line is \'%s\'\n", command);
         }
         g_free(p);
         g_free(e);
@@ -511,7 +506,7 @@ private:
         else {
           command = Run<Type>::mkCommandLine(path, "");
           //Settings::setInteger("ExternalTerminal", key, 0);
-          DBG("command line is \'%s\'\n", command);
+          TRACE("command line is \'%s\'\n", command);
         }
         if (command) 
           object->prompt_p->run(Child::getOutput(), command, true, true, object->buttonSpace);
@@ -565,7 +560,7 @@ private:
       } else {
         gtk_check_button_set_active(object->checkbutton(), false);
       }
-      DBG("settings: MimeTypeApplications  %s %s\n", mimetype, key);
+      TRACE("settings: MimeTypeApplications  %s %s\n", mimetype, key);
       Settings::setString("MimeTypeApplications", mimetype, key);
       g_free(key);
       
@@ -573,7 +568,6 @@ private:
       gtk_popover_popdown(popover);
       gtk_widget_grab_focus(GTK_WIDGET(input));
       
-      //DBG("label text =\"%s\"\n", text);
       return TRUE;
     }
     

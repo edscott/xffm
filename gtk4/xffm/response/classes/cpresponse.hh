@@ -62,7 +62,7 @@ class cpDropResponse {
       auto text = c->clipBoardCache();
       gchar **files = g_strsplit(text, "\n", -1);
       if (!files) {
-        DBG("*** Error: no files in clipboard\n");
+        ERROR_("*** Error: no files in clipboard\n");
         return;
       }
       

@@ -427,7 +427,7 @@ class FindSignals {
          auto textview = object->textview();
          auto dndBox = DnDBox<Type>::openDnDBox(Data->argument[k], dndList, textview);
        } else {
-         DBG("No Data->findList\n");
+         ERROR_("No Data->findList\n");
        }    
 
        GtkWidget *edit_button = GTK_WIDGET(g_object_get_data(G_OBJECT(mainBox), "edit_button"));

@@ -63,7 +63,7 @@ public:
             break;
           case 3:
             if (!g_file_trash(file, NULL, &error_)){
-              DBG("*** Error:: %s: %s\n", path, error_->message);
+              ERROR_("*** Error:: %s: %s\n", path, error_->message);
             }
             break;
         }

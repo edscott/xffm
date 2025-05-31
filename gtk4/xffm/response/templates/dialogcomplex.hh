@@ -17,7 +17,7 @@ namespace xf
       
       auto dialog = this->dialog();
       this->subClass()->dialog(dialog);
-      DBG("*** DialogComplex setupRun: setting this->subClass()->dialog to %p\n", dialog);
+      TRACE("*** DialogComplex setupRun: setting this->subClass()->dialog to %p\n", dialog);
 
       /*auto cbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "cbox"));
       auto foo = gtk_label_new("foo ok");
@@ -63,7 +63,7 @@ namespace xf
     }
 
     static void *runWait_f(void *data){
-      DBG("*** runWait_f for complexDialog_t\n");
+      TRACE("*** runWait_f for complexDialog_t\n");
       auto dialogObject = (complexDialog_t *)data;
       //auto dialog = dialogObject->dialog();
 
@@ -82,7 +82,7 @@ namespace xf
     }
 
     static void *run_f(void *data){
-      DBG("*** run_f for complexDialog_t\n");
+      TRACE("*** run_f for complexDialog_t\n");
       auto dialogObject = (complexDialog_t *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
@@ -111,7 +111,7 @@ namespace xf
     }
 
     int run(void){
-      DBG("*** complexDialog_t run...\n");
+      TRACE("*** complexDialog_t run...\n");
       pthread_t thread;
       Thread::threadCount(true,  &thread, "DialogComplex::run");
       int retval = pthread_create(&thread, NULL, runWait_f, this);

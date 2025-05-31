@@ -204,7 +204,7 @@ public:
 
             type = lookupBySuffix(NULL, sfx);
             if(type) {
-                DBG("mime-module(2), FOUND sfx %s: %s\n", sfx, type);
+                ERROR_("mime-module(2), FOUND sfx %s: %s\n", sfx, type);
                 g_free (sfx);
                 return g_strdup(type);
             } 
