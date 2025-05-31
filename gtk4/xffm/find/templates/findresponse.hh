@@ -40,8 +40,9 @@ namespace xf
       gboolean default_match_no_match=FALSE;
 //      GSList *find_list = NULL;
       gchar  *last_workdir = NULL;
-      GtkButton *findButton_ = NULL;
+      GtkWidget *findButton_ = NULL;
       GtkButton *cancelButton_ = NULL;
+      GtkLabel *findLabel_ = NULL;
     
       char *folder_ = NULL;
       bool active_grep_ = false;
@@ -76,8 +77,9 @@ public:
         return NULL;
       }
 
-      GtkButton *findButton(void) {return findButton_;}
+      GtkWidget *findButton(void) {return findButton_;}
       GtkButton *cancelButton(void) {return cancelButton_;}
+      GtkLabel *findLabel(void) {return findLabel_;}
 
       void Data(fgrData_t *value) {Data_ = value;}
       fgrData_t *Data(void) {return Data_;}
@@ -279,21 +281,34 @@ private:
           gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(actionBox), GTK_PACK_END);
 
 
-          auto t=g_strdup_printf("<span color=\"blue\" size=\"large\"><b>%s</b></span>  ", _("Find in Files"));
+   /*       auto t=g_strdup_printf("<span color=\"blue\" size=\"large\"><b><u>%s</u></b></span>  ", _("Find in Files"));
           auto label = GTK_LABEL(gtk_label_new (t));
           gtk_label_set_use_markup (label, TRUE);
           g_free(t);
-          gtk_box_append(actionBox, GTK_WIDGET(label));
+          gtk_box_append(actionBox, GTK_WIDGET(label));*/
 
-          findButton_ = UtilBasic::mkButton(EMBLEM_FIND, NULL);
-          cancelButton_ = UtilBasic::mkButton(EMBLEM_DELETE, NULL);
-          //gtk_widget_set_size_request(GTK_WIDGET(findButton_), 33, -1);
-          //gtk_widget_set_size_request(GTK_WIDGET(cancelButton_), 33, -1);
-          g_object_set_data(G_OBJECT(findButton_), "dialog", dialog_);
+          findLabel_ = Basic::hyperLabelLarge(_("Find in Files"),
+              (void *)findLabelClick,
+              (void *)this);
+          gtk_box_append(actionBox, GTK_WIDGET(findLabel_));
           
-          // gtk_widget_set_can_default(GTK_WIDGET(findButton_), TRUE);
+          
+
+          findButton_ = GTK_WIDGET(UtilBasic::mkButton(EMBLEM_FIND, NULL));
+          g_object_set_data(G_OBJECT(findButton_), "dialog", dialog_);
+          Basic::setTooltip(GTK_WIDGET(findButton_), _("Show search results for this query"));
           g_signal_connect (G_OBJECT (findButton_), "clicked",
                   BUTTON_CALLBACK(FindSignals<Type>::onFindButton), (gpointer)this);
+      /* crash
+          findButton_ = Dialog::buttonBox(EMBLEM_FIND,
+              _("Show search results for this query"),
+              (void *)FindSignals<Type>::onFindButton,
+              (void *)this);
+              */
+
+          cancelButton_ = UtilBasic::mkButton(EMBLEM_DELETE, NULL);
+          
+          // gtk_widget_set_can_default(GTK_WIDGET(findButton_), TRUE);
           g_signal_connect (G_OBJECT (cancelButton_), "clicked",
                   BUTTON_CALLBACK(FindSignals<Type>::onCancelButton), (gpointer)this);  
           gtk_box_append(actionBox, GTK_WIDGET(findButton_));
@@ -310,7 +325,6 @@ private:
          //gtk_notebook_set_action_widget(notebook_, GTK_WIDGET(clearButton), GTK_PACK_END);
          
 
-         Basic::setTooltip(GTK_WIDGET(findButton_), _("Show search results for this query"));
          Basic::setTooltip(GTK_WIDGET(cancelButton_), _("Cancel Operation"));
 
          gtk_scrolled_window_set_policy (sw, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
@@ -351,6 +365,17 @@ private:
 
 
       }
+
+      static gboolean
+      findLabelClick(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+        FindSignals<Type>::onFindButton(NULL, data);
+        return true;
+      }
+
       void mkPathEntry(GtkBox *parentBox){
           GtkWidget *path_label;
           auto text=g_strdup_printf("%s:", _("Path"));

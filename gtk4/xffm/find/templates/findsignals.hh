@@ -376,6 +376,7 @@ class FindSignals {
         on_find_clicked_action (data);
         gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), true);
         gtk_widget_set_visible(GTK_WIDGET(object->findButton()), false);
+        gtk_widget_set_visible(GTK_WIDGET(object->findLabel()), false);
         object->saveHistories();
     }
 
@@ -411,6 +412,7 @@ class FindSignals {
        auto mainBox = Data->mainBox;
        gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), false);
        gtk_widget_set_visible(GTK_WIDGET(object->findButton()), true);
+       gtk_widget_set_visible(GTK_WIDGET(object->findLabel()), true);
        Basic::flushGTK();
        if (Data->findList) {
          GSList *dndList = NULL;

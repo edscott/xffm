@@ -3,7 +3,64 @@
 namespace xf {
   GList *dialogStack = NULL; // Child::mainWidget() dialog stack.
   class Basic {
-    public:
+ 
+      static gboolean
+      hyperLabelClick(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+        void **datav = (void **)data;
+        void (*f) (void *, void *) = (void (*) (void *, void *)) datav[1];
+        (*f)(NULL, datav[1]);
+        return true;
+      }
+   public:
+
+
+    static GtkLabel *hyperLabelLarge(const char *text, 
+                                    void *callback, void *data){
+      GtkLabel *label = GTK_LABEL(gtk_label_new(""));
+      auto enter = g_strdup_printf("<span color=\"blue\" size=\"large\"><b><u>%s</u></b></span>  ", text);
+      g_object_set_data(G_OBJECT(label), "enter", enter);
+      auto leave = g_strdup_printf("<span color=\"blue\" size=\"large\"><b>%s</b></span>  ", text);
+      g_object_set_data(G_OBJECT(label), "leave", leave);
+      gtk_label_set_markup(label, leave);
+
+      auto gesture = gtk_gesture_click_new();
+      g_object_set_data(G_OBJECT(label), "gesture", gesture);
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
+      g_signal_connect (G_OBJECT(gesture) , "pressed",
+          EVENT_CALLBACK (callback), data);
+      gtk_widget_add_controller(GTK_WIDGET(label), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), GTK_PHASE_CAPTURE);
+      
+      auto controllerIn = gtk_event_controller_motion_new();
+      gtk_event_controller_set_propagation_phase(controllerIn, GTK_PHASE_CAPTURE);
+      gtk_widget_add_controller(GTK_WIDGET(label), controllerIn);
+      g_signal_connect (G_OBJECT (controllerIn), "enter", 
+          G_CALLBACK (hyperLabelMotion), GINT_TO_POINTER(1));
+     
+      auto controllerOut = gtk_event_controller_motion_new();
+      gtk_event_controller_set_propagation_phase(controllerOut, GTK_PHASE_CAPTURE);
+      gtk_widget_add_controller(GTK_WIDGET(label), controllerOut);
+      g_signal_connect (G_OBJECT (controllerOut), "leave", 
+          G_CALLBACK (hyperLabelMotion), NULL);
+
+      
+      return label;
+
+    }
+
+    static gboolean hyperLabelMotion( GtkEventControllerMotion* self,
+                    double x, double y, void *data) {
+      auto controller = GTK_EVENT_CONTROLLER(self);
+      auto label = GTK_LABEL(gtk_event_controller_get_widget(controller));
+      const char *item = (data != NULL)?"enter":"leave";
+      auto markup = (const char *)g_object_get_data(G_OBJECT(label), item);
+      gtk_label_set_markup(label, markup);
+      return true;
+    }
 
     static char *getPath(GFileInfo *info){
       if (!info) return NULL;
