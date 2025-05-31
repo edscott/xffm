@@ -67,7 +67,15 @@ template <class Type>
         g_object_set_data(G_OBJECT(menuBox2), "object", object);
 
         TRACE("factorySetup add signal handlers\n");
-        
+/*
+ClickLong         labelBox
+ClickLongMenu     imageBox
+ClickDown         imageBox
+ClickDown3        imageBox
+ClickUp           imageBox,labelBox
+MotionController  labelBox,hlabelBox,imageBox
+ClickMenu
+*/
         addMotionController(labelBox);
         addMotionController(hlabelBox);
 
@@ -292,6 +300,7 @@ template <class Type>
       static
       void addMotionController(GtkWidget  *widget){
         auto controller = gtk_event_controller_motion_new();
+        g_object_set_data(G_OBJECT(widget), "MotionController", controller);
         gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(widget), controller);
         g_signal_connect (G_OBJECT (controller), "enter", 
@@ -326,6 +335,7 @@ template <class Type>
     static void addGestureClickMenu(GtkWidget *box, GObject *object, GridView<Type> *gridView_p){
       TRACE("addGestureClickMenu; object=%p\n", gridView_p);
       auto gesture = gtk_gesture_click_new();
+      g_object_set_data(G_OBJECT(box), "ClickMenu", gesture);
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for popover pressed
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (menu_f), (void *)gridView_p);
@@ -351,6 +361,7 @@ template <class Type>
     static void addGestureClickLong(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_long_press_new();
+      g_object_set_data(G_OBJECT(self), "ClickLong", gesture);
       gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 1.0);
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (rename_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
@@ -360,6 +371,7 @@ template <class Type>
     static void addGestureClickLongMenu(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_long_press_new();
+      g_object_set_data(G_OBJECT(self), "ClickLongMenu", gesture);
       gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 2.0);
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (longPress_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
@@ -383,6 +395,7 @@ template <class Type>
     static void addGestureClickDown(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_click_new();
+      g_object_set_data(G_OBJECT(self), "ClickDown", gesture);
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for select
       TRACE("addGestureClickDown: self = %p, item=%p\n", self, item);
@@ -396,6 +409,7 @@ template <class Type>
     static void addGestureClickDown3(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_click_new();
+      g_object_set_data(G_OBJECT(self), "ClickDown3", gesture);
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for select
       TRACE("addGestureClickDown: self = %p, item=%p\n", self, item);
@@ -410,6 +424,7 @@ template <class Type>
       TRACE("addGestureClickUp; object=%p\n", object);
       g_object_set_data(G_OBJECT(box), "gridView_p", gridView_p);
       auto gesture = gtk_gesture_click_new();
+      g_object_set_data(G_OBJECT(box), "ClickUp", gesture);
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for action released.
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (gridView_p->gridViewClick_f()), (void *)object);

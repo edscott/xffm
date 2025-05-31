@@ -174,6 +174,23 @@ namespace xf {
     static void setGridview(GtkWidget *view){
       auto child =  Child::getChild();
       auto gridScrolledWindow = getGridScrolledWindow();
+      
+      // Lets see if this works around the gtk inner race bug...
+      auto oldView = gtk_scrolled_window_get_child(gridScrolledWindow);
+        if (oldView && G_IS_OBJECT(oldView)){
+        auto controller1 = g_object_get_data(G_OBJECT(oldView),"MotionController");
+        auto controller2 = g_object_get_data(G_OBJECT(oldView),"ClickView1");
+        auto controller3 = g_object_get_data(G_OBJECT(oldView),"ClickView3");
+        gtk_event_controller_reset(GTK_EVENT_CONTROLLER(controller1));
+        gtk_event_controller_reset(GTK_EVENT_CONTROLLER(controller2));
+        gtk_event_controller_reset(GTK_EVENT_CONTROLLER(controller3));
+        gtk_widget_remove_controller(oldView, GTK_EVENT_CONTROLLER(controller1));
+        gtk_widget_remove_controller(oldView, GTK_EVENT_CONTROLLER(controller2));
+        gtk_widget_remove_controller(oldView, GTK_EVENT_CONTROLLER(controller3));
+        // Now when oldView is automatically unreffed, it has no controllers. 
+        // Maybe we should also do this pre cleanup in the gridview
+        // factory, just to be safe.
+      } 
       gtk_scrolled_window_set_child(gridScrolledWindow, view);
       g_object_set_data(G_OBJECT(child), "gridview", view);
       g_object_set_data(G_OBJECT(view), "child", child);

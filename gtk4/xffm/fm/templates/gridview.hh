@@ -863,6 +863,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
 
     static void addGestureClickView1(GtkWidget *self, GObject *object, GridView<Type> *gridView_p){
       auto gesture = gtk_gesture_click_new();
+      g_object_set_data(G_OBJECT(self), "ClickView1", gesture);
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
       // 1 for unselect
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (unselect_f), (void *)gridView_p);
@@ -874,6 +875,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
 
     static void addGestureClickView3(GtkWidget *self, GObject *object, GridView<Type> *gridView_p){
       auto gesture = gtk_gesture_click_new();
+      g_object_set_data(G_OBJECT(self), "ClickView3", gesture);
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3); 
       // 3 for menu
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (openMainMenu), (void *)gridView_p);
@@ -905,6 +907,7 @@ public:
 
       void addMotionController(void){
         auto controller = gtk_event_controller_motion_new();
+        g_object_set_data(G_OBJECT(view_), "MotionController", controller);
         gtk_event_controller_set_propagation_phase(controller, GTK_PHASE_CAPTURE);
         gtk_widget_add_controller(GTK_WIDGET(view_), controller);
         g_signal_connect (G_OBJECT (controller), "motion", 
