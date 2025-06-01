@@ -323,8 +323,6 @@ private:
          auto clearLabel = Basic::hyperLabelLarge("blue",_("Clear search"),
               (void *)findLabelClear,
               (void *)this);
-          gtk_box_append(clearBox, GTK_WIDGET(findLabel_));
-            
          auto clearButton = Dialog::buttonBox(EMBLEM_CLEAR,
               _("Clear search"),
               (void *)findLabelClear,

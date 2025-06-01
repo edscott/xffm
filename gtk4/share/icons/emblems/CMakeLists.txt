@@ -5,6 +5,7 @@ emblem-h.svg
 emblem-f.svg
 emblem-o.svg
 emblem-m.svg
+emblem-clear.svg
 emblem-error.svg
 emblem-warning.svg
 emblem-question.svg

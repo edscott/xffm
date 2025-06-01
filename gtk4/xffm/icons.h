@@ -58,7 +58,7 @@
 #define EMBLEM_FAVOURITE "emblem-favourite"
 #define EMBLEM_GRAPHICS "emblem-graphics"
 #define EMBLEM_UNDO "edit-undo"
-#define EMBLEM_CLEAR "edit-clear-all-symbolic"
+#define EMBLEM_CLEAR "emblem-clear"
 #define EMBLEM_SELECT_ALL "emblem-select-all"
 #define EMBLEM_BOOKMARK "emblem-bookmark"
 #define EMBLEM_TOGGLE "emblem-toggle"
