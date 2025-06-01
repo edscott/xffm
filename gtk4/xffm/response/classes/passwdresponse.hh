@@ -7,7 +7,7 @@ class PasswordDialog {
    const char *iconName_;
 public:
     const char *title(void){ return _("Security");}
-    const char *iconName(void){ return "dialog-authentication";}
+    const char *iconName(void){ return EMBLEM_AUTHENTICATION;}
     const char *label(void){ return _("Enter password");}
 
     static void *asyncYes(void *data){

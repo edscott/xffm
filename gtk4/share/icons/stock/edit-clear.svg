@@ -1,38 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="stock_clear.svg"
-   sodipodi:docbase="/home/francois/Rodent/scalable/stock"
+   sodipodi:docname="emblem-clear.svg"
    height="128.00000pt"
    width="128.00000pt"
-   inkscape:version="0.41"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:version="0.32"
-   id="svg1">
+   id="svg1"
+   version="1.1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata31">
-    <rdf:RDF
-       id="RDF33">
+    <rdf:RDF>
       <cc:Work
-         id="Work35"
          rdf:about="">
-        <dc:format
-           id="format37">image/svg+xml</dc:format>
+        <dc:format>image/svg+xml</dc:format>
         <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
-           id="type39" />
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs3">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient910">
+      <stop
+         style="stop-color:#c9dd7b;stop-opacity:0.6347903;"
+         offset="0.34998021"
+         id="stop906" />
+      <stop
+         style="stop-color:#d3e686;stop-opacity:0.61197072;"
+         offset="0.71657157"
+         id="stop908" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient902">
+      <stop
+         style="stop-color:#cac510;stop-opacity:1;"
+         offset="0"
+         id="stop898" />
+      <stop
+         style="stop-color:#646464;stop-opacity:0;"
+         offset="0.94544262"
+         id="stop900" />
+    </linearGradient>
     <linearGradient
        id="linearGradient566">
       <stop
@@ -141,39 +162,82 @@
        cx="0.32499999"
        id="radialGradient853"
        xlink:href="#linearGradient566" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient838"
+       id="linearGradient896"
+       x1="48.008156"
+       y1="93.694923"
+       x2="151.25865"
+       y2="93.694923"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient902"
+       id="linearGradient904"
+       x1="8.1666052"
+       y1="31.150721"
+       x2="104.77652"
+       y2="31.150721"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient910"
+       id="linearGradient912"
+       x1="7.7880055"
+       y1="87.645085"
+       x2="96.849917"
+       y2="87.645085"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      inkscape:current-layer="svg1"
-     inkscape:window-y="34"
-     inkscape:window-x="51"
-     gridspacingy="1.0000000mm"
-     gridspacingx="1.0000000mm"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
      snaptogrid="true"
      showgrid="true"
-     inkscape:window-height="653"
-     inkscape:window-width="752"
-     inkscape:cy="107.11864"
-     inkscape:cx="80.000000"
-     inkscape:zoom="2.9500000"
+     inkscape:window-height="724"
+     inkscape:window-width="1362"
+     inkscape:cy="96.101695"
+     inkscape:cx="78.135593"
+     inkscape:zoom="2.95"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base" />
+     id="base"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="pt"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0"
+       originy="0"
+       spacingx="4.3002625"
+       spacingy="4.3002625"
+       color="#3f3fff"
+       empcolor="#3f3fff"
+       opacity="0.15"
+       empopacity="0.38"
+       empspacing="5" />
+  </sodipodi:namedview>
   <path
      sodipodi:nodetypes="ccccccc"
      id="path853"
-     d="M 52.728309,50.500274 L 39.766379,39.538326 C 29.806003,33.466818 4.3599947,7.2430227 15.379134,43.042399 L 45.444220,100.26880 L 58.736776,123.60853 L 100.88159,148.19302 L 52.728309,50.500274 z "
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:9.4407320;stroke-linecap:round;stroke-linejoin:round" />
+     d="M 48.72223,52.340637 36.967256,41.555653 C 27.934344,35.582161 4.8577517,9.7817106 14.850839,45.003158 l 27.265563,56.302562 12.054815,22.96295 38.220482,24.18761 z"
+     style="fill:url(#linearGradient912);fill-rule:evenodd;stroke:#000000;stroke-width:8.91759;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1" />
   <path
      sodipodi:nodetypes="ccccc"
      id="path855"
      d="M 52.728309,50.500274 L 100.88159,148.19302 L 146.53848,134.14474 L 100.05688,39.196847 L 52.728309,50.500274 z "
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:9.4407320;stroke-linecap:round;stroke-linejoin:round" />
+     style="fill:url(#linearGradient896);fill-rule:evenodd;stroke:#000000;stroke-width:9.440732;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1.0" />
   <path
      sodipodi:nodetypes="cccccc"
      id="path856"
      d="M 12.886811,26.214234 C 17.321925,18.204970 18.163161,21.268416 24.280744,19.386041 L 57.028980,11.801168 L 100.05688,39.196847 L 52.728309,50.500274 L 12.886811,26.214234 z "
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:9.4407320;stroke-linecap:round;stroke-linejoin:round" />
+     style="fill:url(#linearGradient904);fill-rule:evenodd;stroke:#000000;stroke-width:9.440732;stroke-linecap:round;stroke-linejoin:round;fill-opacity:1" />
 </svg>

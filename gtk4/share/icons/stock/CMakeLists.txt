@@ -52,7 +52,6 @@ go-top.svg
 go-up.svg
 harddisk.svg
 help.svg
-home.svg
 image-missing.svg
 index.svg
 jump.svg

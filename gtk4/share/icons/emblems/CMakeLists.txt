@@ -5,6 +5,9 @@ emblem-h.svg
 emblem-f.svg
 emblem-o.svg
 emblem-m.svg
+emblem-tty.svg
+emblem-home.svg
+emblem-go-home.svg
 emblem-clear.svg
 emblem-error.svg
 emblem-warning.svg

@@ -11,7 +11,7 @@ namespace xf {
     GtkBox *mkVbuttonBox(GtkWindow *mainWindow){
          const char *bIcon[]={
            EMBLEM_FIND, 
-           OPEN_TERMINAL, 
+           EMBLEM_TTY, //EMBLEM_KEYBOARD, //EMBLEM_TTY, 
            GO_HOME, 
            EMBLEM_NEW_WINDOW, 
            //EDIT_CLEAR,

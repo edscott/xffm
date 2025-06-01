@@ -7,7 +7,7 @@
 #define EMBLEM_BOOKMARK "emblem-bookmark"
 //#define SEARCH "edit-find"
 #define OPEN_TERMINAL "video-display"
-#define GO_HOME "user-home"
+#define GO_HOME "emblem-go-home"
 #define DOCUMENT_PROPERTIES "document-properties"
 #define WINDOW_SHUTDOWN "system-shutdown-symbolic"
 //#define WINDOW_CLOSE "process-stop-symbolic"
@@ -30,6 +30,10 @@
 #define EMBLEM_O "emblem-o"
 #define EMBLEM_M "emblem-m"
 
+#define EMBLEM_INFO "emblem-about"
+#define EMBLEM_AUTHENTICATION "emblem-keyhole"
+#define EMBLEM_KEYBOARD "emblem-keyboard"
+#define EMBLEM_TTY "emblem-tty"
 #define EMBLEM_CLOSE "close"
 #define EMBLEM_NO "no"
 #define EMBLEM_APPLY "apply"
@@ -102,7 +106,7 @@
 #define OPEN_TERMINAL "video-display"
 #define OPEN_FILEMANAGER "star-new"
 #define DIFFERENCES "differences"
-#define GO_HOME "user-home"
+#define GO_HOME "emblem-go-home"
 #define DRIVE_HARDDISK "media-removable"
 #define TRASH_ICON "user-trash"
 
@@ -142,7 +146,7 @@
 #define EFS_ICON "password"
 // GO_UP above
 #define FILE_MANAGER "system-file-manager"
-#define HOME_ICON "user-home"
+#define HOME_ICON "emblem-home"
 // TRASH_ICON above
 #define TRASH_FULL_ICON "user-trash-full"
 #define FSTAB_ICON "drive-harddisk"
@@ -160,7 +164,7 @@
 
 
 #define DEFAULT_ICON "text-x-generic"
-#define USER_HOME "user-home"
+#define USER_HOME "emblem-home"
 #define FOLDER "bluefolder"
 #define FOLDER_OPEN "bluefolder-open"
 #define INPUT_KEYBOARD_SYMBOLIC "input-keyboard-symbolic"

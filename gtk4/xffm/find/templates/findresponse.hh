@@ -389,6 +389,16 @@ private:
       }
 
       static gboolean
+      infoClick(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+        Dialogs::info((const char *)data);
+        return true;
+      }
+
+      static gboolean
       findLabelClick(GtkGestureClick* self,
               gint n_press,
               gdouble x,
@@ -489,9 +499,14 @@ private:
           addKeyController2(entry, (void *)dropdown);
      
           if (tooltipText) {
-            auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
+            auto image = Dialog::buttonBox(EMBLEM_QUESTION,
+              _("Show help"),
+              (void *)infoClick,
+              (void *)tooltipText);
+            
+            //auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
+            //Basic::setTooltip(GTK_WIDGET(image), tooltipText);
             gtk_box_append(box, GTK_WIDGET(image));
-            Basic::setTooltip(GTK_WIDGET(image), tooltipText);
             auto lab = gtk_label_new("   ");
             gtk_box_append(box, GTK_WIDGET(lab));
           }

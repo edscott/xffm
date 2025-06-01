@@ -45,6 +45,9 @@ namespace xf
       setupRun();
     }
 
+    DialogComplex(void){
+    }
+
     // void setSubClassDialog(void)
     // Sets a pointer in the subClass object to refer to 
     // the GtkWindow dialog, in order for the subClass

@@ -3,6 +3,7 @@
 #include "response/classes/dialog.hh"
 #include "response/templates/dialogbasic.hh"
 #include "response/templates/dialogcomplex.hh"
+#include "response/templates/dialogsimple.hh"
 #include "response/templates/dialogtimeout.hh"
 #include "response/templates/dialogdrop.hh"
 #include "response/templates/dialogbuttons.hh"
@@ -25,6 +26,7 @@
 # include "response/classes/lnresponse.hh"   // class
 # include "response/classes/info.hh"   // class
 # include "response/classes/dndresponse.hh"   // class
+# include "response/classes/txtresponse.hh"   // class
                                               // 
 #include "response/templates/mkdirresponse.hh"
 #include "response/classes/fileresponsepathbar.hh"
