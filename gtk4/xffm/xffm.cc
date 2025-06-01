@@ -20,6 +20,7 @@
 #define ENABLE_THREAD_POOL
 //#undef ENABLE_THREAD_POOL
 
+const char **environment = NULL;
 #include "config.h"
 #include "xffm.h"
 
@@ -94,7 +95,8 @@ static  gchar *getPath(const char *argv1){
 
 
 int
-main (int argc, const char *argv[]) {
+main (int argc, const char *argv[], const char *envp[]) {
+  environment = envp;
   if (argv[1] && strcmp(argv[1], "--fgr") == 0){
       xf::Fgr *fgr = new(xf::Fgr);
       fgr->main(argc, argv);

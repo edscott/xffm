@@ -2,7 +2,6 @@
 #define MAINMENU_HH
 // This menu is not using the Menu class template.
 namespace xf {
-  template <class Type> class DialogSimple;
   template <class Type> class RunButton;
   template <class Type>
   class MainMenu {
@@ -257,16 +256,16 @@ namespace xf {
     test(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-
       using subClass_t = TxtDialog;
-      using dialog_t = DialogSimple<subClass_t>;
+      using dialog_t = DialogComplex<subClass_t>;
 
       //Dialogs::info("find in files, test");
 
-      //auto dialogObject = new dialog_t(GTK_WINDOW(Child::mainWidget()), "<span color=\"cyan\">Hello world</span>");
+      auto dialogObject = new dialog_t(GTK_WINDOW(Child::mainWidget()), Child::getWorkdir());
 
 
-      Dialogs::info("foo and bar");
+
+      //Dialogs::info("foo and bar");
       //MainWindow<Type>::resetAdj(250);
 
       return;
