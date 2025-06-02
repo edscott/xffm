@@ -3,24 +3,28 @@
 
 namespace xf {
 class infoResponse {
-   const char *title_;
-   const char *iconName_;
-   GtkWidget **buttons=NULL;
+   const char *title_ = _("Information");
+   const char *iconName_ = "emblem-important";
+   GtkWindow *dialog_ = NULL;
+   const char *label_ = "foo";
 public:
-    const char *title(void){ return _("Information");}
-    const char *iconName(void){ return "emblem-important";}
-    const char *label(void){ return "";}
-    GtkWidget **getButtons(void){ return buttons;}
+    GtkWindow *dialog(void){return dialog_;}
+    void dialog(GtkWindow *value){dialog_ = value;}
+    const char *title(void){ return title_;}
+    const char *iconName(void){ return iconName_;}
+    const char *label(void){ return label_;}
+    void label(const char *value){label_ = value;}
+
 
     infoResponse(void){
-      buttons = (GtkWidget **)calloc(3,sizeof(GtkWidget *));
+      //buttons = (GtkWidget **)calloc(3,sizeof(GtkWidget *));
       /*buttons[0] = gtk_button_new_from_icon_name(_("Copy"));
       buttons[1] = gtk_button_new_from_icon_name(_("Move"));
       buttons[2] = gtk_button_new_from_icon_name(_("Link"));*/
     }
 
     ~infoResponse(void){
-      g_free(buttons);
+      //g_free(buttons);
     }
     
 

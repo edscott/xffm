@@ -10,6 +10,7 @@ namespace xf {
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         "test",
+        "test2",
 //          _("Search"),
 //          _("Open terminal"),
         _("Paste"), // 
@@ -49,6 +50,7 @@ namespace xf {
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
         {"test", (void *) EMBLEM_INFO},
+        {"test2", (void *) EMBLEM_INFO},
         {_("Empty trash bin"),(void *) EMBLEM_TRASH_FULL}, 
         {_("Paste"),(void *) EMBLEM_PASTE}, 
         {_("Select All"),(void *) EMBLEM_SELECT_ALL}, 
@@ -85,6 +87,7 @@ namespace xf {
 
         {_("Open in New Window"),(void *)openXffmMain}, 
         {"test",(void *)test},
+        {"test2",(void *)test2},
         {_("Show Clipboard"),(void *) showPaste}, 
         {_("Clear Clipboard History"),(void *) clearPaste}, 
         {_("Exit"),(void *) close},
@@ -268,6 +271,20 @@ namespace xf {
       //Dialogs::info("foo and bar");
       //MainWindow<Type>::resetAdj(250);
 
+      return;
+    }
+    static void
+    test2(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      Dialogs::info("find in files, test");
+/*
+      using subClass_t = infoResponse;
+      using dialog_t = DialogBasic<subClass_t>;
+      auto dialogObject = new dialog_t();
+      dialogObject->subClass()->label("foo bar");
+
+*/
       return;
     }
  

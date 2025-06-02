@@ -24,7 +24,7 @@
 # include "response/classes/cpresponse.hh"   // class
 # include "response/classes/mvresponse.hh"   // class 
 # include "response/classes/lnresponse.hh"   // class
-# include "response/classes/info.hh"   // class
+# include "response/classes/inforesponse.hh"   // class
 # include "response/classes/dndresponse.hh"   // class
 # include "response/classes/envresponse.hh"   // class
                                               // 
@@ -46,8 +46,11 @@ namespace xf
       auto dialogObject = new DialogTimeout<infoResponse>;
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       dialogObject->setLabelText(text);
-
-      TRACE("create dialogObject=%p\n", dialogObject); 
+      gtk_widget_realize(GTK_WIDGET(dialogObject->dialog()));
+      Basic::setAsDialog(GTK_WINDOW(dialogObject->dialog()));
+      gtk_window_present(GTK_WINDOW(dialogObject->dialog()));
+      DBG("create dialogObject=%p, dialog=%p\n", 
+          dialogObject, dialogObject->dialog()); 
       dialogObject->run();
     }
 
