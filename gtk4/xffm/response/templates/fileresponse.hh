@@ -625,7 +625,7 @@ private: // Nonfree functions
             return NULL;
           }
           if (!outInfo || !outChild) break;
-          if (g_file_info_get_is_symlink(outInfo)) continue;
+          //if (g_file_info_get_is_symlink(outInfo)) continue;
           if (g_file_info_get_is_backup(outInfo)) continue;
           if (g_file_info_get_is_hidden(outInfo)) continue;
           auto path = g_file_get_path(outChild);

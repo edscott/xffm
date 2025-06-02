@@ -81,8 +81,14 @@ ClickMenu
 
         addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
-        addGestureClickLong(labelBox, object, gridView_p);
-        addGestureClickLongMenu(imageBox, object, gridView_p);
+        
+        // FIXME: works in kubuntu, crashes in archie
+        // some race here:
+        // addGestureClickLong(labelBox, object, gridView_p);
+        
+        // FIXME: works in kubuntu, does not work in archie:
+        // addGestureClickLongMenu(imageBox, object, gridView_p);
+        
         //addGestureClickDownLabel(labelBox, object, gridView_p);
         //addGestureClickDownBox(box, object, gridView_p);
         addGestureClickDown3(imageBox, object, gridView_p);
@@ -372,7 +378,7 @@ ClickMenu
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_long_press_new();
       g_object_set_data(G_OBJECT(self), "ClickLongMenu", gesture);
-      gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 2.0);
+      gtk_gesture_long_press_set_delay_factor(GTK_GESTURE_LONG_PRESS(gesture), 1.0);
       g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (longPress_f), (void *)gridView_p);
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
