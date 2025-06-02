@@ -103,7 +103,7 @@ namespace xf
       } else {
         Basic::context_function(subClass->asyncNo, data);
       }
-      if (Child::mainWidget() && GTK_IS_WINDOW (Child::mainWidget())) {
+      if (Child::mainWidget0() && GTK_IS_WINDOW (Child::mainWidget0())) {
         Basic::present(GTK_WINDOW(Child::mainWidget()));
       }
       TRACE("run_f:: Response is %p\n", response);

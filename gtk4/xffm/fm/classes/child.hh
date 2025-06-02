@@ -16,9 +16,12 @@ namespace xf {
     static void mainWidget(GtkWidget *value){_mainWidget = value;}
     static GtkWidget * mainWidget(void){
       if (!_mainWidget){
-        ERROR_("***Fatal error: Child::mainWidget() returns NULL\n");
+        ERROR_("***Child::mainWidget() returns NULL\n");
         exit(1);
       }
+      return _mainWidget;
+    }
+    static GtkWidget * mainWidget0(void){
       return _mainWidget;
     }
       

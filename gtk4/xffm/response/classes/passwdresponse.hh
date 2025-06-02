@@ -80,10 +80,11 @@ public:
           else{
               string = g_strdup(_(argv[1]));
           }
-      } 
+      } else  string = g_strdup_printf("%s:", _("Enter password"));
       
       auto dialogObject = new DialogPasswd<PasswordDialog>;
-      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
+      //This one really has no parent...
+      //dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       auto dialog = dialogObject->dialog();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       gtk_entry_set_visibility (entry, false);
