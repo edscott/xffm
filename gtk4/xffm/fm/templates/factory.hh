@@ -82,12 +82,15 @@ ClickMenu
         addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
         
-        // FIXME: works in kubuntu, crashes in archie
+        // FIXME: works in kubuntu, crashes in archie gtk-4.18.5
         // some race here:
         // addGestureClickLong(labelBox, object, gridView_p);
         
-        // FIXME: works in kubuntu, does not work in archie:
-        // addGestureClickLongMenu(imageBox, object, gridView_p);
+        // FIXME: works in kubuntu, does not work in archie,
+        //        but does not crash archie:
+        addGestureClickLongMenu(imageBox, object, gridView_p);
+        // Maybe the difference is kubuntu with touchpad
+        // while archie is with logitech wireless mouse...
         
         //addGestureClickDownLabel(labelBox, object, gridView_p);
         //addGestureClickDownBox(box, object, gridView_p);
