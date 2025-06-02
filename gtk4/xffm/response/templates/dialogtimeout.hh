@@ -4,8 +4,11 @@
 
 namespace xf
 {
-
   template <class Type>
+#if 1
+  class DialogTimeout: public DialogBasic<Type> {
+  };
+#else
   class DialogTimeout: public DialogBasic<Type> {
     using dialog_t = DialogTimeout<Type>;
     ProgressBar *progress_;
@@ -82,6 +85,7 @@ public:
 
     
   };
+#endif
 
   
 }
