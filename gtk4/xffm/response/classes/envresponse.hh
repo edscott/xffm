@@ -102,14 +102,12 @@ public:
     }
 
     static void *asyncYes(void *data){
+      DBG("hello world\n");
       return asyncNo(data);
     }
 
     static void *asyncNo(void *data){
-      // Cancel
-      // send interrupt signal to parent
-      pid_t parent = getppid();
-      kill(parent, SIGINT);
+      DBG("goodbye world\n");
       return NULL;
     }
 };
