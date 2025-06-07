@@ -6,8 +6,8 @@ namespace xf
   template <class subClass_t>
   class DialogBasic {
     using dialog_t = DialogBasic<subClass_t>; 
-    //GtkEventControllerMotion *raiseController_ = NULL;
-    GtkEventController *raiseController_ = NULL;
+    //GtkEventController *raiseController_ = NULL;
+    GtkGesture *clickController_ = NULL;
     GtkBox *contentArea_;
     GtkBox *actionArea_;
     GtkBox *vbox_;
@@ -49,8 +49,14 @@ namespace xf
       //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
       TRACE("*** set unraise for %p\n", object->parent());
       TRACE("*** remove controller %p to window %p\n", object->raiseController(), object->parent());
-      gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
+      /*
+      if (object->raiseController())
+        gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
           object->raiseController());
+          */
+      if (object->clickController())
+        gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
+          object->clickController());
       // aparently not necessary:
       // g_object_unref(G_OBJECT(object->raiseController()));
       return NULL;
@@ -123,7 +129,10 @@ namespace xf
     protected:
 
   public:
-    GtkEventController *raiseController(void){return raiseController_;}
+    //GtkEventController *raiseController(void){return raiseController_;}
+    GtkEventController *clickController(void){
+      return GTK_EVENT_CONTROLLER(clickController_);
+    }
 
     subClass_t *subClass(void){ return subClass_;}
     GtkWindow *parent(void){ return parent_;}
@@ -148,6 +157,7 @@ namespace xf
     void unlockCondition(void){pthread_mutex_unlock(&condMutex_);}
     void lockResponse(void){pthread_mutex_lock(&mutex_);}
     void unlockResponse(void){pthread_mutex_unlock(&mutex_);}
+    
     static gboolean
     presentDialog ( GtkEventControllerMotion* self,
                     gdouble x,
@@ -158,7 +168,19 @@ namespace xf
       gtk_window_present(dialog);
       return FALSE;
     }
-  private:
+    
+    static gboolean
+    presentDialogClick ( GtkEventControllerMotion* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data) 
+    {
+      auto dialog = GTK_WINDOW(data);
+      gtk_window_present(dialog);
+      return FALSE;
+    }
+ private:
 
      void setRaise(void){
       auto content = GTK_WIDGET(g_object_get_data(G_OBJECT(parent_), "frame"));
@@ -166,12 +188,27 @@ namespace xf
       gtk_widget_set_sensitive(GTK_WIDGET(content), false);
       //gtk_widget_set_sensitive(GTK_WIDGET(parent_), false);
       TRACE("*** set raise for %p to %p\n", parent_, dialog_);
+      /* click controller seems better...
       raiseController_ = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);
       TRACE("*** add controller %p to window %p\n", raiseController_, parent_);
       g_signal_connect (G_OBJECT (raiseController_), "enter", 
               G_CALLBACK (presentDialog), dialog_);      
+    */
+      
+      clickController_ = gtk_gesture_click_new();
+      gtk_event_controller_set_propagation_phase(
+          GTK_EVENT_CONTROLLER(clickController_), GTK_PHASE_CAPTURE);
+      gtk_widget_add_controller(GTK_WIDGET(parent_),
+          GTK_EVENT_CONTROLLER(clickController_));
+      g_signal_connect (G_OBJECT (clickController_), "pressed", 
+              G_CALLBACK (presentDialogClick), dialog_);      
+      TRACE("*** add controller %p to window %p dialog %p\n",
+          clickController_, parent_, dialog_);
+
+      
+      
     }
 
   public:

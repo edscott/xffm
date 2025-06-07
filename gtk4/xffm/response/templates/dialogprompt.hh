@@ -34,7 +34,7 @@ namespace xf {
       gtk_box_append(GTK_BOX (this->contentArea()), GTK_WIDGET(hbox));
       
         
-       // fixme; use a keypress to filter enter and escape
+       // fixme; use a keypress to filter activate and escape
        //g_signal_connect (G_OBJECT (entry), "activate", 
          //       ENTRY_CALLBACK (this->activate), this->dialog());
        auto apply = this->applyBox();
