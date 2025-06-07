@@ -122,7 +122,7 @@ public:
         gtk_widget_set_hexpand(GTK_WIDGET(notebook), true);
         g_object_set_data(G_OBJECT(mainBox_), "notebook", notebook);
         gtk_notebook_popup_enable (notebook);
-        gtk_notebook_set_scrollable (notebook, TRUE);
+        //gtk_notebook_set_scrollable (notebook, TRUE);
         g_object_set (notebook,
                       "enable-popup", FALSE, 
                       "can-focus", TRUE,

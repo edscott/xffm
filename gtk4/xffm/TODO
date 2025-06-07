@@ -1,3 +1,9 @@
+1. on gridview click, raise dialog, if any
+2. modified rename with only entry and placed on mouse position
+3. minimize button to send to xffm workdesk
+4. maximize button to send back to original workdesk
+
+
 *** Need to add dropdown history for path entry in find dialog!
 *** BUG: need to chain link dialogs, when a dialog1 has a dialog2 and enter
 signal to dialog1_parent received, then dialog2 must raise, *not* dialog1.
