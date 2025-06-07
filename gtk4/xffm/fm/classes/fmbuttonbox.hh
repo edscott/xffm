@@ -10,15 +10,16 @@ namespace xf {
     public:
     GtkBox *mkVbuttonBox(GtkWindow *mainWindow){
          const char *bIcon[]={
+           EMBLEM_TOGGLE,
            EMBLEM_FIND, 
            EMBLEM_TTY, //EMBLEM_KEYBOARD, //EMBLEM_TTY, 
            GO_HOME, 
            EMBLEM_NEW_WINDOW, 
            //EDIT_CLEAR,
-           //EMBLEM_TOGGLE,
            NULL
          };
         const char *bText[]={
+          _("Move to tab"),
           _("Search"),
           _("Open terminal"),
           _("Home"),
@@ -27,6 +28,7 @@ namespace xf {
           NULL
         };
         void *bCallback[]={
+          (void *)MenuCallbacks<LocalDir>::moveTab,
           (void *)MenuCallbacks<LocalDir>::openFind,
           (void *)MenuCallbacks<LocalDir>::openTerminal,
           (void *)MenuCallbacks<LocalDir>::goHome,

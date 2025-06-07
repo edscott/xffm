@@ -178,8 +178,26 @@ namespace xf {
         }
         g_list_free(selectionList);
       }
-    private:
 #define PAGE_LINE 256
+    static gchar *pipeCommandFull(const gchar *command){
+        FILE *pipe = popen (command, "r");
+        if(pipe) {
+            gchar *result=g_strdup("");
+            gchar line[PAGE_LINE];
+            while (fgets (line, PAGE_LINE - 1, pipe) && !feof(pipe)){
+                line[PAGE_LINE - 1] = 0;
+                auto g = g_strconcat(result, line, NULL);
+                g_free(result);
+                result = g;
+            }
+            pclose (pipe);
+            return result;
+        } 
+        return NULL;
+    }
+
+
+    private:
 
     static gchar *pipeCommand(const gchar *command){
         FILE *pipe = popen (command, "r");
@@ -197,22 +215,6 @@ namespace xf {
         return NULL;
     }
 
-    static gchar *pipeCommandFull(const gchar *command){
-        FILE *pipe = popen (command, "r");
-        if(pipe) {
-            gchar *result=g_strdup("");
-            gchar line[PAGE_LINE];
-            while (fgets (line, PAGE_LINE - 1, pipe) && !feof(pipe)){
-                line[PAGE_LINE - 1] = 0;
-                auto g = g_strconcat(result, line, NULL);
-                g_free(result);
-                result = g;
-            }
-            pclose (pipe);
-            return result;
-        } 
-        return NULL;
-    }
     
     static void 
     lineBreaker(gchar *inputLine, gint lineLength){

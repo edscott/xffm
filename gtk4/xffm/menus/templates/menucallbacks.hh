@@ -49,6 +49,128 @@ namespace xf {
       }
       return;
     }
+
+    static void
+    moveTab(GtkButton *self, void *data){
+      static char *lastTab=NULL;
+      auto childWidget =Child::getChild();
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
+      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
+      auto command = "i3-msg -t get_workspaces";
+      auto line = Basic::pipeCommandFull(command);
+      char *tt;
+      Print::showText(output);
+      //Print::print(output, line);
+      auto v = g_strsplit(line, "}", -1);
+      g_free(line);
+      for (auto p=v; p && *p; p++){
+        if (strstr(*p, "\"visible\":true")==NULL) continue;
+        auto w = g_strsplit(*p, ",", -1);
+        for (auto q=w; q && *q; q++){
+          if (strstr(*q, "name")==NULL) continue;
+          auto s=strchr(*q, ':');
+          if (!s){
+            ERROR_("No name entry from i3-msg: %s\n", *q);
+            g_strfreev(w);
+            g_strfreev(v);
+            return;
+          }
+          tt = g_strdup(s+1);
+          for (auto t=tt; t && *t; t++){
+            if (*t == '\"') *t = ' ';
+          }
+          g_strstrip(tt);
+          Print::print(output,g_strdup("split> ")); 
+          Print::print(output,g_strdup(tt)); 
+          Print::print(output,g_strdup("\n")); 
+        }
+        g_strfreev(w);
+      }
+      g_strfreev(v);
+  //return;
+      //pid_t childPid = Run<Type>::shell_command(output, command, false, false);
+
+      //auto runButton = new RunButton<Type>(EMBLEM_TOGGLE, NULL);
+      //runButton->init(terminal, childPid, output, g_get_home_dir(), buttonSpace);
+//return;
+
+
+      if (strcmp(tt, "xffm4")==0){
+        // Here we are at xffm4 desktop
+        if (lastTab == NULL){
+          // Here we entered xffm4 destop no by moveTab().
+          g_free(tt);
+          return;
+        }
+      } else {
+        // Send off to xffm4 desktop.
+        // And save tt to lastTab.
+      }
+
+      moveTo( (const char *)lastTab?lastTab:"xffm4");
+      if (lastTab == NULL){
+        // We moved out to xffm4.
+        lastTab = g_strdup(tt);
+      } else {
+        // We moved back from xffm4.
+        // Switch desktop to lastTab.
+        switchDesk(lastTab);
+        g_free(lastTab);
+        lastTab = NULL;
+      }
+      return;
+    }
+   
+    static void switchDesk(const char *tab){
+      auto msg = g_find_program_in_path("i3-msg");
+      if (!msg){
+        ERROR_("i3-msg program not found\n");
+        return;
+      }
+
+      const char *arg[]={(const char *)msg, 
+        "-q",
+        "workspace",
+        tab, NULL};
+      auto pid = fork();
+      if (!pid){
+        TRACE("switching to %s\n", tab);
+        execvp(msg, (char * const *)arg);
+        _exit(1);
+      }
+      usleep(500);
+      waitpid(pid, NULL, WNOHANG);
+      g_free(msg);
+
+      return;
+
+    }
+
+   
+    static void moveTo(const char *tab){
+      auto msg = g_find_program_in_path("i3-msg");
+      if (!msg){
+        ERROR_("i3-msg program not found\n");
+        return;
+      }
+
+      const char *arg[]={(const char *)msg, 
+        "-q","move", "container", "to", "workspace",
+        tab, NULL};
+      auto pid = fork();
+      if (!pid){
+        TRACE("moving to %s\n", tab);
+        execvp(msg, (char * const *)arg);
+        _exit(1);
+      }
+      usleep(500);
+      waitpid(pid, NULL, WNOHANG);
+      g_free(msg);
+
+      return;
+
+    }
+
     static void
     openTerminal(GtkButton *self, void *data){
       auto childWidget =Child::getChild();
