@@ -83,11 +83,17 @@ ClickMenu
         addGestureClickDown(imageBox, object, gridView_p);
         
         // FIXME: works in kubuntu, crashes in archie gtk-4.18.5
-        // some race here:
-        // addGestureClickLong(labelBox, object, gridView_p);
+        // some race here, reenabling now for 4.18, since
+        // it is very possible that the problem was a 
+        // consequence of the memory corruption that
+        // occurs in 4.18 at gtk_notebook_set_scrollable().
+        // This bug has been reported at gnome discourse,
+        // but fat chance it will be addressed promptly...
+        addGestureClickLong(labelBox, object, gridView_p);
         
         // FIXME: works in kubuntu, does not work in archie,
         //        but does not crash archie:
+        //        (same as above condition).
         addGestureClickLongMenu(imageBox, object, gridView_p);
         // Maybe the difference is kubuntu with touchpad
         // while archie is with logitech wireless mouse...
