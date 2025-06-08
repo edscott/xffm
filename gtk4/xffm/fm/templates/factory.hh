@@ -606,9 +606,13 @@ ClickMenu
               gdouble x,
               gdouble y,
               void *data){
-      //if (doSingleSelection(self, data)) return true;
-      //auto button = gtk_gesture_single_get_button (GTK_GESTURE_SINGLE(self));
-      //if (skipRename(self, data)) return true;
+#if 0
+   /*   trouble here, item is being selected on release */
+      auto label = GTK_WIDGET(g_object_get_data(G_OBJECT(data), "label"));
+      auto labelEntry = GTK_WIDGET(g_object_get_data(G_OBJECT(data), "labelEntry"));
+      gtk_widget_set_visible(label, false);
+      gtk_widget_set_visible(labelEntry, true);
+#endif
       if (skipRename(self, data)) return true;
       TRACE("rename_f \n");
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
@@ -616,6 +620,13 @@ ClickMenu
       auto info = G_FILE_INFO(gtk_list_item_get_item(item)); 
       auto path = Basic::getPath(info);
       dialogPath<mvResponse>::action(path);
+
+      //auto event = gtk_event_controller_get_current_event(GTK_EVENT_CONTROLLER(self));
+      //auto modType = gdk_event_get_modifier_state(event);
+      /* gdk_event_get_modifier_state: assertion 'GDK_IS_EVENT (event)' failed
+       * hmm not a f*ing event*/
+  //    if (modType & GDK_CONTROL_MASK){ dialogPath<cpResponse>::action(path); }
+  //    else { dialogPath<mvResponse>::action(path); }
       g_free(path);
       return true;
    }  

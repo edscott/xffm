@@ -18,7 +18,8 @@ public:
       auto base = g_path_get_basename(path);
       auto buffer = gtk_entry_get_buffer(entry);
       gtk_entry_buffer_set_text(buffer, base, -1);
-      auto string = g_strconcat("<span color=\"green\"><b>",_("symlink"), ":\n</b></span><span color=\"blue\"><b>", base, "</b></span>", NULL);
+      auto string = g_strconcat("<span color=\"green\"><b>",_("symlink"), "</b></span>", NULL);
+      //auto string = g_strconcat("<span color=\"green\"><b>",_("symlink"), ":\n</b></span><span color=\"blue\"><b>", base, "</b></span>", NULL);
       gtk_label_set_markup(label, string);
       g_free(base);
       g_free(string);

@@ -59,7 +59,7 @@ namespace xf {
       auto command = "i3-msg -t get_workspaces";
       auto line = Basic::pipeCommandFull(command);
       char *tt;
-      Print::showText(output);
+      //Print::showText(output);
       //Print::print(output, line);
       auto v = g_strsplit(line, "}", -1);
       g_free(line);
@@ -80,9 +80,9 @@ namespace xf {
             if (*t == '\"') *t = ' ';
           }
           g_strstrip(tt);
-          Print::print(output,g_strdup("split> ")); 
-          Print::print(output,g_strdup(tt)); 
-          Print::print(output,g_strdup("\n")); 
+          //Print::print(output,g_strdup("split> ")); 
+          //Print::print(output,g_strdup(tt)); 
+          //Print::print(output,g_strdup("\n")); 
         }
         g_strfreev(w);
       }
