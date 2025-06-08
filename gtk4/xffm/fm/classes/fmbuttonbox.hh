@@ -28,7 +28,7 @@ namespace xf {
           NULL
         };
         void *bCallback[]={
-          (void *)MenuCallbacks<LocalDir>::moveTab,
+          (void *)MenuCallbacks<LocalDir>::moveWS,
           (void *)MenuCallbacks<LocalDir>::openFind,
           (void *)MenuCallbacks<LocalDir>::openTerminal,
           (void *)MenuCallbacks<LocalDir>::goHome,

@@ -50,12 +50,22 @@ namespace xf {
       return;
     }
 
-    static void
-    moveTab(GtkButton *self, void *data){
-      static char *lastTab=NULL;
+    static bool workSpaceExists(const char *tt){
+      auto command = "i3-msg -t get_workspaces";
+      auto line = Basic::pipeCommandFull(command);
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
+      auto token = g_strdup_printf("\"name\":\"%s\"", tt);
+      auto p = strstr(line, token);
+      //Print::showText(output);
+      //Print::print(output, line); // This will free line.
+      g_free(line);
+      g_free(token);
+      if (p) return true;
+      return false;
+   }
+
+    static char *currentWorkSpace(void){
       auto command = "i3-msg -t get_workspaces";
       auto line = Basic::pipeCommandFull(command);
       char *tt;
@@ -73,7 +83,7 @@ namespace xf {
             ERROR_("No name entry from i3-msg: %s\n", *q);
             g_strfreev(w);
             g_strfreev(v);
-            return;
+            return NULL;
           }
           tt = g_strdup(s+1);
           for (auto t=tt; t && *t; t++){
@@ -87,41 +97,80 @@ namespace xf {
         g_strfreev(w);
       }
       g_strfreev(v);
-  //return;
-      //pid_t childPid = Run<Type>::shell_command(output, command, false, false);
+      return tt;
+    }
 
-      //auto runButton = new RunButton<Type>(EMBLEM_TOGGLE, NULL);
-      //runButton->init(terminal, childPid, output, g_get_home_dir(), buttonSpace);
-//return;
+    static void
+    queryWS(void){
+      using subClass_t = wsResponse<Type>;
+      using dialog_t = DialogEntry<subClass_t>;
+      auto dialogObject = new dialog_t;
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
+      
+      dialogObject->run();
+      return;
+    }
 
+    static void
+    moveWS(GtkButton *self, void *data){
 
+      static char *lastWS=NULL;
+      auto childWidget =Child::getChild();
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
+      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
+
+      auto tt = currentWorkSpace();
+      if (!tt) return;
+
+      if (lastWS && !workSpaceExists(lastWS)){
+        Print::showText(output);
+        auto a = g_strconcat("\"",lastWS, "\"", NULL);
+        auto msg = g_strdup_printf(_("Workspace %s"), a);
+        auto msg2 = g_strconcat(" ",msg, " ",  _("does not exist"), "\n",NULL);
+        Print::printError(output, g_strdup_printf("%s\n", msg2));
+        g_free(a);
+        g_free(msg);
+
+        g_free(lastWS);
+        lastWS = NULL;
+        // query for workspace... (lastWS)
+        lastWS = NULL;
+        queryWS(); return;
+      } else if (lastWS) {
+        /*Print::showText(output);
+        auto a = g_strconcat("\"",lastWS, "\"", NULL);
+        auto msg = g_strdup_printf(_("Workspace %s"), a);
+        auto msg2 = g_strconcat(" ",msg, " ",  _("does not exist"), "\n",NULL);
+        Print::print(output, g_strdup_printf("%s\n", msg2));
+        g_free(a);
+        g_free(msg);*/
+      }
+      
       if (strcmp(tt, "xffm4")==0){
         // Here we are at xffm4 desktop
-        if (lastTab == NULL){
-          // Here we entered xffm4 destop no by moveTab().
+        if (lastWS == NULL){
+          // Here we entered xffm4 destop not by moveWS().
           g_free(tt);
+          queryWS(); return;
           return;
         }
-      } else {
-        // Send off to xffm4 desktop.
-        // And save tt to lastTab.
       }
 
-      moveTo( (const char *)lastTab?lastTab:"xffm4");
-      if (lastTab == NULL){
+      moveTo( (const char *)lastWS?lastWS:"xffm4");
+      if (lastWS == NULL){
         // We moved out to xffm4.
-        lastTab = g_strdup(tt);
+        lastWS = g_strdup(tt);
       } else {
         // We moved back from xffm4.
-        // Switch desktop to lastTab.
-        switchDesk(lastTab);
-        g_free(lastTab);
-        lastTab = NULL;
+        // Switch desktop to lastWS.
+        switchWS(lastWS);
+        g_free(lastWS);
+        lastWS = NULL;
       }
       return;
     }
    
-    static void switchDesk(const char *tab){
+    static void switchWS(const char *tab){
       auto msg = g_find_program_in_path("i3-msg");
       if (!msg){
         ERROR_("i3-msg program not found\n");

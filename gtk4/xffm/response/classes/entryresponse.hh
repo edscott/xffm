@@ -1,8 +1,7 @@
-#ifndef XF_ENTRYRESPONSE_HH
-# define XF_ENTRYRESPONSE_HH
+#ifndef ENTRYRESPONSE_HH
+# define ENTRYRESPONSE_HH
 namespace xf
 {
-
 class EntryResponse {
    const char *title_;
    const char *iconName_;

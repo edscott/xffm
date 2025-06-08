@@ -3,7 +3,7 @@
 
 
 namespace xf {
-class TxtDialog {
+class EnvDialog {
    const char *title_;
    const char *iconName_;
    const char *label_;

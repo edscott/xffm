@@ -1,5 +1,5 @@
-#ifndef ENTRYRESPONSE_HH
-#define ENTRYRESPONSE_HH
+#ifndef OPENWITH_HH
+#define OPENWITH_HH
 
 namespace xf {
 template <class Type> class Prompt;
