@@ -50,7 +50,7 @@ emblem-nfs.svg
 emblem-noaccess.svg
 emblem-notes.svg
 emblem-oo.svg
-emblem-package.svg
+emblem-compressed.svg
 emblem-pdf.svg
 emblem-photos.svg
 emblem-preferences.svg

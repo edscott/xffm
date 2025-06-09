@@ -525,6 +525,11 @@ public:
     }
 
     static void destroy(GtkWindow *window){
+      DBG("destroy window %p\n", window);
+// Simply
+//      gtk_widget_set_visible(GTK_WIDGET(window), false);
+//      g_object_unref(G_OBJECT(window));
+// Crashes at times as gtk4 threads race to destroy:
       context_function(destroy_f, (void *)window);
     }
 

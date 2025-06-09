@@ -4,7 +4,7 @@ namespace xf {
 
 template <class Type> class MenuCallbacks;
 template <class Type>
-class wsResponse: public EntryResponse {
+class wsResponse: public entryResponse {
    const char *title_;
    const char *iconName_;
 public:

@@ -8,19 +8,9 @@ class Tar {
    using subClass_t = tarResponse<Type>;
    using dialog_t = DialogComplex<subClass_t>;
    public:
-   Tar(const char *folder, const char *path){
-      auto dialogObject = new dialog_t(parent, folder, path);
-   }
-
-};
-
-template <class Type>
-class unTar {
-   using subClass_t = tarResponse<Type>;
-   using dialog_t = DialogComplex<subClass_t>;
-   public:
-   Tar(const char *folder, const char *path){
-      auto dialogObject = new dialog_t(parent, folder, path);
+   Tar(GtkWindow *parent, const char *path){
+      // Figure out tar/zip
+      auto dialogObject = new dialog_t(parent, Child::getWorkdir(), path);
    }
 
 };

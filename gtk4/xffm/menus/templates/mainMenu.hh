@@ -2,6 +2,7 @@
 #define MAINMENU_HH
 // This menu is not using the Menu class template.
 namespace xf {
+  template <class Type> class Tar;
   template <class Type> class RunButton;
   template <class Type>
   class MainMenu {
@@ -10,7 +11,7 @@ namespace xf {
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("Environment"),
-//        "test2",
+        "test",
 //          _("Search"),
 //          _("Open terminal"),
         _("Paste"), // 
@@ -50,7 +51,7 @@ namespace xf {
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
         {_("Environment"), (void *) EMBLEM_INFO},
-        {"test2", (void *) EMBLEM_INFO},
+        {"test", (void *) EMBLEM_INFO},
         {_("Empty trash bin"),(void *) EMBLEM_TRASH_FULL}, 
         {_("Paste"),(void *) EMBLEM_PASTE}, 
         {_("Select All"),(void *) EMBLEM_SELECT_ALL}, 
@@ -86,8 +87,8 @@ namespace xf {
         //{_("Color settings"),(void *) MenuCallbacks<Type>::popCall}, 
 
         {_("Open in New Window"),(void *)openXffmMain}, 
-        {_("Environment"),(void *)test},
-        {"test2",(void *)test2},
+        {_("Environment"),(void *)environment},
+        {"test",(void *)test},
         {_("Show Clipboard"),(void *) showPaste}, 
         {_("Clear Clipboard History"),(void *) clearPaste}, 
         {_("Exit"),(void *) close},
@@ -256,23 +257,32 @@ namespace xf {
 
 /////////////////////////////////////////////////////////////////////
     static void
-    test(GtkButton *button, void *data){
+    environment(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
       using subClass_t = EnvDialog;
       using dialog_t = DialogComplex<subClass_t>;
-
-      //Dialogs::info("find in files, test");
-
       auto dialogObject = new dialog_t(GTK_WINDOW(Child::mainWidget()), Child::getWorkdir());
-
-
-
-      //Dialogs::info("foo and bar");
-      //MainWindow<Type>::resetAdj(250);
+      return;
+    }
+   
+    static void
+    test(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+  /*    auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      auto path = Basic::getPath(info);
+      auto parent = GTK_WINDOW(Child::mainWidget());
+      try {
+        new Tar<Type>(parent, path);
+      } catch(int errorCode) {
+        ERROR_("Catch errorCode %d at gridviewmenu.hh::bcrypt()\n", errorCode);
+      }
+      g_free(path);*/
 
       return;
     }
+
     static void
     test2(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 

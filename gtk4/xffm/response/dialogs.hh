@@ -38,6 +38,8 @@
 # include "response/templates/mount.hh"   // class
 # include "response/templates/bfishresponse.hh"   // class
 # include "response/templates/bfish.hh"   // class
+# include "response/templates/tarresponse.hh"   // class
+# include "response/templates/tar.hh"   // class
 
 namespace xf
 {

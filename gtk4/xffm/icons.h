@@ -30,6 +30,7 @@
 #define EMBLEM_O "emblem-o"
 #define EMBLEM_M "emblem-m"
 
+#define EMBLEM_PACKAGE "emblem-compressed"
 #define EMBLEM_INFO "emblem-about"
 #define EMBLEM_AUTHENTICATION "emblem-keyhole"
 #define EMBLEM_KEYBOARD "emblem-keyboard"

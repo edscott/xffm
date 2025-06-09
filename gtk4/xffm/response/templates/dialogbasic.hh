@@ -49,11 +49,11 @@ namespace xf
       //gtk_widget_set_sensitive(GTK_WIDGET(object->parent()), true); 
       TRACE("*** set unraise for %p\n", object->parent());
       TRACE("*** remove controller %p to window %p\n", object->raiseController(), object->parent());
-      /*
+      
       if (object->raiseController())
         gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
           object->raiseController());
-          */
+          
       if (object->clickController())
         gtk_widget_remove_controller(GTK_WIDGET(object->parent()), 
           object->clickController());
@@ -190,6 +190,7 @@ namespace xf
       TRACE("*** set raise for %p to %p\n", parent_, dialog_);
       /* click controller seems better... but will use both
        * for handling nested dialogs better. */
+     
       raiseController_ = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);

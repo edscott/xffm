@@ -2,7 +2,7 @@
 # define ENTRYRESPONSE_HH
 namespace xf
 {
-class EntryResponse {
+class entryResponse {
    const char *title_;
    const char *iconName_;
 public:
@@ -10,10 +10,10 @@ public:
     const char *iconName(void){ return "emblem-run";}
     const char *label(void){return "label foobar";}
 
-    ~EntryResponse (void){
+    ~entryResponse (void){
     }
 
-    EntryResponse (void){
+    entryResponse (void){
     }
 
      static void *asyncYes(void *data){

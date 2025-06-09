@@ -69,6 +69,7 @@ namespace xf {
         {_("Remove bookmark"),(void *) EMBLEM_RED_BALL}, 
         {_("Encrypt File..."),(void *) EMBLEM_BLOWFISH}, 
         {_("Decrypt File..."),(void *) EMBLEM_BLOWFISH}, 
+        {_("Create a compressed archive with the selected objects"),(void *) EMBLEM_PACKAGE},
        {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -94,6 +95,7 @@ namespace xf {
         {_("Properties"),(void *) properties}, 
         {_("Encrypt File..."),(void *) bcrypt}, 
         {_("Decrypt File..."),(void *) bcrypt}, 
+        {_("Create a compressed archive with the selected objects"),(void *) tar},
        
         {NULL, NULL}
       };
@@ -162,6 +164,23 @@ namespace xf {
         ERROR_("Catch errorCode %d at gridviewmenu.hh::bcrypt()\n", errorCode);
       }
       g_free(path);
+    }
+
+    static void
+    tar(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      gtk_popover_popdown(menu);
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      auto path = Basic::getPath(info);
+      auto parent = GTK_WINDOW(Child::mainWidget());
+      try {
+        new Tar<Type>(parent, path);
+      } catch(int errorCode) {
+        ERROR_("Catch errorCode %d at gridviewmenu.hh::bcrypt()\n", errorCode);
+      }
+      g_free(path);
+
+      return;
     }
 
     static void 
