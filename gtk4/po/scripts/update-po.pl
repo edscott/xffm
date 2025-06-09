@@ -7,7 +7,7 @@ use File::Compare;
 my $srcdir="xffm";
 my $workdir=`pwd`;
 my $fullPoDir = "/home/GIT/source_po-processed";
-my $catalog="xffm+";
+my $catalog="xffm4";
 
 my $intltool_update = "/usr/bin/intltool-update";
 my $msgmerge = "/usr/bin/msgmerge";
@@ -35,16 +35,16 @@ sub fullmerge{
         print `$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v "#~" | grep -v "# " | grep -v "#\\." > $po.new`;
         print "Cleaning $po...\n";
         open INPUT, "$po.new" or die "cannot open $po.new for read";
-        my $title = "# Xffm+ translation file: ".`date`.
+        my $title = "# Xffm4 translation file: ".`date`.
 	    "# Merged from existing open source files\n".
-	    "# http://xffm.org\n";
+	    "# http://xffm.sf.net\n";
         my $contents = $title;
         while (<INPUT>){$contents .= $_}
         close INPUT;
         open OUTPUT, ">$po" or die "cannot open $po for write";
         while ($contents =~ m/\n\n/g){$contents =~ s/\n\n\n/\n\n/g;}
-        $contents =~ s/# http:\/\/xffm.org\n#\n#, fuzzy/# http:\/\/xffm.org\n#\n#/g;
-        $contents =~ s/Rodent Delta/xffm+/g;
+        $contents =~ s/# http:\/\/xffm.sf.net\n#\n#, fuzzy/# http:\/\/xffm.sf.net\n#\n#/g;
+        $contents =~ s/Rodent Delta/xffm4/g;
         print OUTPUT $contents;
         close OUTPUT;
         print `rm $po.new`;
@@ -54,16 +54,16 @@ end:
 }
 
 sub merge {
-    my $mergepot = "$intltool_update --gettext-package xffm+ --dist";
+    my $mergepot = "$intltool_update --gettext-package xffm4 --dist";
     print `$mergepot es`;
     exit(1);
 }
 
 
 sub template {
-    my $genpot = "$intltool_update --gettext-package xffm+ --pot";
+    my $genpot = "$intltool_update --gettext-package xffm4 --pot";
     print `$genpot`;
-    print `cat xffm+.pot`; exit(1);
+    print `cat xffm4.pot`; exit(1);
     exit(1);
 }
 
