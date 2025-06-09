@@ -15,8 +15,43 @@ namespace xf {
         (*f)(NULL, datav[1]);
         return true;
       }
+#ifdef GDK_WINDOWING_X11
+      static Display *getDisplay(void){ 
+        GdkDisplay *displayGdk = gdk_display_get_default();
+        return gdk_x11_display_get_xdisplay(displayGdk);
+      }
+      static Window getWindow(GtkWindow *dialog){
+        GtkNative *native = gtk_widget_get_native(GTK_WIDGET(dialog));
+        GdkSurface *surface = gtk_native_get_surface(native);
+        Window w = gdk_x11_surface_get_xid (surface);
+        return w;
+      }
+#endif
    public:
 
+#ifdef GDK_WINDOWING_X11
+    static void getXY(GtkWindow *dialog, int *x, int *y){
+        auto display = getDisplay();
+        auto w = getWindow(dialog);
+        Window root_return, child_return;
+        int win_x_return, win_y_return;
+        unsigned int mask_return;
+        XQueryPointer(display, w, &root_return, &child_return, 
+                     x, y, 
+                     &win_x_return, &win_y_return, &mask_return);
+
+    }
+    static void moveToPointer(GtkWindow *dialog){
+        int x,y;
+        getXY(dialog, &x, &y);
+        auto display = getDisplay();
+        auto w = getWindow(dialog);
+        XMoveWindow(display, w, x, y);
+    }
+#else
+    static void moveToPointer(GtkWindow *dialog){return;}
+    static void getXY(GtkWindow *dialog, int *x, int *y){return;}
+#endif
 
     static GtkLabel *hyperLabelLarge(const char *color, const char *text, 
                                     void *callback, void *data){
@@ -525,7 +560,7 @@ public:
     }
 
     static void destroy(GtkWindow *window){
-      DBG("destroy window %p\n", window);
+      TRACE("destroy window %p\n", window);
 // Simply
 //      gtk_widget_set_visible(GTK_WIDGET(window), false);
 //      g_object_unref(G_OBJECT(window));

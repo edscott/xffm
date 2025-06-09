@@ -450,7 +450,8 @@ ClickMenu
     }   
 
     static gboolean
-    openMenu(GtkEventController *eventController, GridView<Type> *gridView_p, double y){
+    openMenu(GtkEventController *eventController, GridView<Type> *gridView_p){
+//    openMenu(GtkEventController *eventController, GridView<Type> *gridView_p, double y){
       // This is main context, gridview changes would also be main context.
       if (!Child::validGridView(gridView_p)) return true;
       auto d = (Dnd<LocalDir > *)g_object_get_data(G_OBJECT(Child::mainWidget()), "Dnd");
@@ -535,7 +536,8 @@ ClickMenu
       TRACE("modType = 0x%x\n", modType);
       //if (modType & GDK_CONTROL_MASK) return false;
       if (modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) return false;
-      return openMenu(eventController, gridView_p, y);
+      return openMenu(eventController, gridView_p);
+//      return openMenu(eventController, gridView_p, y);
     }
   
    static bool selectWidget(GtkWidget *w, GridView<Type> *gridView_p, bool unselectOthers){
@@ -596,7 +598,7 @@ ClickMenu
             currentSerial, longPressSerial);
         return true;
       }
-      return openMenu(GTK_EVENT_CONTROLLER(self), gridView_p, y);
+      return openMenu(GTK_EVENT_CONTROLLER(self), gridView_p);
    }
 
 
@@ -618,7 +620,7 @@ ClickMenu
       auto item = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item")); 
       auto info = G_FILE_INFO(gtk_list_item_get_item(item)); 
       auto path = Basic::getPath(info);
-      dialogPath<mvResponse>::action(path);
+      dialogPath<mvResponse>::actionMove(path);
 
       //auto event = gtk_event_controller_get_current_event(GTK_EVENT_CONTROLLER(self));
       //auto modType = gdk_event_get_modifier_state(event);
