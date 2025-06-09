@@ -42,7 +42,11 @@ template <class Type>
       
       GListModel *listModel(void){ return G_LIST_MODEL(selectionModel_);}
       GListStore *listStore(void){ 
-        return G_LIST_STORE(g_object_get_data(G_OBJECT(selectionModel_), "store"));
+        if (!G_IS_OBJECT(selectionModel_)){
+          DBG("foo\n");
+        }
+        auto store = g_object_get_data(G_OBJECT(selectionModel_), "store");
+        return G_LIST_STORE(store);
       }
       GListStore *store(void){return listStore();}
 

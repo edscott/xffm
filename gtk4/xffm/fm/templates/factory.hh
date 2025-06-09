@@ -382,6 +382,7 @@ ClickMenu
       gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
+      TRACE("addGestureClickLong(): gridView_p-->%p\n", gridView_p);
     }
     static void addGestureClickLongMenu(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
@@ -585,7 +586,6 @@ ClickMenu
 
    static gboolean
    longPress_f(GtkGestureLongPress* self,
-              gint n_press,
               gdouble x,
               gdouble y,
               void *data){
@@ -602,7 +602,6 @@ ClickMenu
 
    static gboolean
    rename_f(GtkGestureLongPress* self,
-              gint n_press,
               gdouble x,
               gdouble y,
               void *data){
