@@ -65,9 +65,9 @@ private:
        if (!g_file_test(path, G_FILE_TEST_EXISTS)){
         TRACE("got mkdir operation: path=\"%s\".\n", dir);
         if(mkdir(path,0700) < 0){
-          auto string = g_strdup_printf(_("Cannot create directory '%s' (%s)\n"), 
+          auto string = g_strdup_printf(_("Cannot create folder '%s': %s"), 
               path, strerror(errno));
-          Print::printError(Child::getOutput(), g_strconcat(_("Sorry"), " ", string, NULL));
+          Print::printError(Child::getOutput(), g_strconcat(_("Sorry"), " ", string, "\n", NULL));
           TRACE("***%s\n", string);
           g_free(string);
         }

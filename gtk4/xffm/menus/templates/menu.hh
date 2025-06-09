@@ -164,7 +164,7 @@ namespace xf {
       
 
      auto paste = g_object_get_data(G_OBJECT(menu), _("Paste"));
-     auto isTextView = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(menu), _("isTextView")));
+     auto isTextView = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(menu), "isTextView"));
      TRACE("paste is at button %p\n", paste);
      if (!isTextView && paste) {
        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");

@@ -14,7 +14,7 @@ my $msgmerge = "/usr/bin/msgmerge";
 
 # 1. Generate POTFILES.in
 if ($ARGV[0] eq "potfiles") {&potfiles}
-# 2. Generate xffm+ pot template file.
+# 2. Generate xffm4 pot template file.
 if ($ARGV[0] eq "template") { &template}
 # 3.1 Merge po template with full po files
 if ($ARGV[0] eq "fullmerge") {&fullmerge}
@@ -23,15 +23,17 @@ if ($ARGV[0] eq "merge") { &merge}
 exit(1);
 
 sub fullmerge{
-    $_ = `ls *.po`;
+    $_ = `ls $fullPoDir/*.po`;
     my $po;
     my @linguas = split;
     my $i=0;
     foreach $po (@linguas) {
+        $po =~ s/$fullPoDir\///g;
         $i++;
         my $total = $#linguas+1;
         print "Processing $po ($i/$total) ... \n";
         my ($lang, $a) = split /\./,$po,2;
+        print "$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v \"#~\" | grep -v \"# \" | grep -v \"#\\.\" > $po.new\n";
         print `$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v "#~" | grep -v "# " | grep -v "#\\." > $po.new`;
         print "Cleaning $po...\n";
         open INPUT, "$po.new" or die "cannot open $po.new for read";
@@ -41,13 +43,16 @@ sub fullmerge{
         my $contents = $title;
         while (<INPUT>){$contents .= $_}
         close INPUT;
+
         open OUTPUT, ">$po" or die "cannot open $po for write";
-        while ($contents =~ m/\n\n/g){$contents =~ s/\n\n\n/\n\n/g;}
-        $contents =~ s/# http:\/\/xffm.sf.net\n#\n#, fuzzy/# http:\/\/xffm.sf.net\n#\n#/g;
+        while ($contents =~ m/\n\n/g){
+          $contents =~ s/\n\n\n/\n\n/g;
+        }
+        $contents =~ s/# http:\/\/xffm.org\n#\n#, fuzzy/# http:\/\/xffm.sf.net\n#\n#/g;
         $contents =~ s/Rodent Delta/xffm4/g;
         print OUTPUT $contents;
         close OUTPUT;
-        print `rm $po.new`;
+#        print `rm $po.new`;
     }
 end:
     exit(1);

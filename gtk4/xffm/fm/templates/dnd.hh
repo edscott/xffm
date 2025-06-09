@@ -664,7 +664,7 @@ private:
         auto count = dialogObject->subClass()->uriCount();
        
         if (count > 1){ // a bit hacky...
-          auto buttons = (GtkWidget **)g_object_get_data(G_OBJECT(dialogObject->dialog()), _("buttons"));
+          auto buttons = (GtkWidget **)g_object_get_data(G_OBJECT(dialogObject->dialog()), "buttons");
           if (buttons && buttons[2]) {
             gtk_widget_set_visible(GTK_WIDGET(buttons[2]), false);
           } else {

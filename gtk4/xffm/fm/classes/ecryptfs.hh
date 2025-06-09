@@ -5,14 +5,11 @@
 
 #define EFS_AUTHORIZATION _("Encryption Options")
 #define EFS_TIP _("Encrypt Files")
-#define ECRYPTFS_SIG _("Mount ecrypt signature")
-#define ECRYPTFS_FNEK_SIG _("Filename ecrypt signature")
-#define EFS_INFO1 _("Ecrypt Filesystem (EFS)")
-#define EFS_INFO2 _("New EFS Link")
-#define EFS_REMOTE_PATH _("Encrypted directory")
-#define EPS_ENABLE_FILENAME_CRYPTO _("Encrypt filenames")
-#define EPS_REQUIRES_SIGNATURE _("Requires ecryptfs signature")
-#define EPS_PASSTHROUGH _("Plaintext passthrough")
+#define EFS_INFO1 _("encrypted volume")
+#define EFS_INFO2 _("create")
+#define EFS_REMOTE_PATH _("Encrypted Container")
+#define EPS_ENABLE_FILENAME_CRYPTO _("Encrypt the file list")
+#define EPS_PASSTHROUGH _("Plaintext Password")
 
 #define FUSE_BROADBAND  _("local filesystem")
 #define FUSE_COMPUTER _("Computer Name:")
@@ -44,34 +41,34 @@ static gchar **mount_option_keys = NULL;
 static  group_options_t mount_options[]={
 
     {
-        .sensitive = 1, .flag = "-r", .id = N_("Mount file system readonly."), 
+        .sensitive = 1, .flag = "-r", .id = N_("Read Only Mode"), 
         .text = NULL, 
         .entry = NULL, .tip = NULL
     },
     {
-        .sensitive = 1, .flag = "-v", .id = N_("Be verbose."), 
+        .sensitive = 1, .flag = "-v", .id = N_("Verbose output debugging mode."), 
         .text = NULL, 
         .entry = NULL, .tip = NULL
     },
     {
-        .sensitive = 1, .flag = "-V", .id = N_("Print version."), 
+        .sensitive = 1, .flag = "-V", .id = N_("Show version information"), 
         .text = NULL, 
         .entry = NULL, .tip = NULL
     },
     {
-        .sensitive = 2, .flag = "-w", .id = N_("Mount file system read-write."), 
+        .sensitive = 2, .flag = "-w", .id = N_("Overwrite Mode"), 
         .text = NULL, 
         .entry = NULL, .tip = NULL
     },
 //#ifdef THIS_IS_LINUX //linux options:
     {
-        .sensitive = 1, .flag = "-f", .id = N_("Fake mount."), 
+        .sensitive = 1, .flag = "-f", .id = N_("Dry run"), 
         .text = NULL,  
         .entry = NULL, 
         .tip = N_("Don't actually call the mount system call.")
     },
     {
-        .sensitive = 1, .flag = "-n", .id = N_("Do  not  update  /etc/mtab."), 
+        .sensitive = 1, .flag = "-n", .id = N_("Update file list"), 
         .text = NULL, 
         .entry = NULL,
         .tip = 
@@ -85,7 +82,7 @@ N_("By default, an entry is created in/etc/mtab for every mounted file system.\n
     },
 //#endif
     {
-        .sensitive = 1, .flag = "-h", .id = N_("Print help message."), 
+        .sensitive = 1, .flag = "-h", .id = N_("Show Help"), 
         .text = NULL, 
         .entry = NULL, .tip = NULL
     },
@@ -99,7 +96,7 @@ static  group_options_t efs_options[]={
         .sensitive = 2, .flag = "", .id = "ecryptfs_cipher=", 
         .text = "aes | blowfish | des3_ede | cast6 | cast5",
         .entry = "aes",
-        .tip = N_("Specify the symmetric cipher to be used on a per file basis. ")
+        .tip = N_("Cipher algorithm")
     },
     
     {
@@ -175,7 +172,7 @@ static  group_options_t efs_options[]={
     
     {
         .sensitive = 0, .flag = "", .id = "passphrase_passwd=", 
-        .text = N_("passphrase"), 
+        .text = N_("Passphrase"), 
         .entry = "",
         .tip = N_("The actual password is passphrase. Since the password is visible to utilities (like ps under Unix) this form should only be  used where security is not important.")
     },
@@ -218,7 +215,7 @@ static  group_options_t efs_options[]={
     },
     {
         .sensitive = 0, .flag = "", .id = "openssl_passwd_fd=", 
-        .text = N_("file descriptor"), 
+        .text = N_("File descriptor"), 
         .entry = "",
         .tip = N_("The password is specified through the specified file descriptor.")
     },
@@ -599,7 +596,6 @@ public:
         TRACE("EFS constructor entries\n");
         remoteEntry_ = this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
         mountPointEntry_ = this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT");
-        //this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
         urlEntry_ = this->addEntry(FUSE_URL, "FUSE_URL", FALSE);
 
         auto entryBuffer = gtk_entry_get_buffer (remoteEntry_);

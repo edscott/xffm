@@ -358,7 +358,7 @@ public:
 #warning "ENABLE_MENU_CLASS active"
         auto pathbar_ = Child::getPathbar();
         auto myPathbarMenu = new Menu<PathbarMenu<Type> >;
-        auto title = g_strconcat("<span color=\"blue\">", _("foo Navigation Toolbar"), "</span>", NULL);
+        auto title = g_strconcat("<span color=\"blue\">", "foo Navigation Toolbar", "</span>", NULL);
         auto menu = myPathbarMenu->getMenu(title);
         g_free(title);
         g_object_set_data(G_OBJECT(pathbar_), "menu", menu);

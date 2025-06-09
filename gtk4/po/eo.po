@@ -1,16 +1,19 @@
-# Xffm+ translation file: jue 18 jul 2024 12:35:06 CST
+# Xffm4 translation file: lun 09 jun 2025 17:07:42 CST
 # Merged from existing open source files
-# http://xffm.org
+# http://xffm.sf.net
 #
-#
+#: ../xffm/fm/classes/ecryptfs.hh:189
+#: ../xffm/response/classes/envresponse.hh:92
+#: ../xffm/response/classes/cpresponse.hh:44
+#, fuzzy
 msgid   ""
-msgstr  "Project-Id-Version: xffm+\n"
+msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
+        "POT-Creation-Date: 2025-06-09 16:21-0600\n"
         "PO-Revision-Date: 2012-10-21 22:29+0200\n"
         "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
-        "Language-Team: Esperanto <translation-team-eo@lists.sourceforge."
-        "net>\n"
+        "Language-Team: Esperanto <translation-team-"
+        "eo@lists.sourceforge.net>\n"
         "Language: eo\n"
         "MIME-Version: 1.0\n"
         "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,1524 +21,1851 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Plural-Forms: nplurals=2; plural=n != 1;\n"
         "X-Generator: Lokalize 1.0\n"
 
-#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
-msgid   "Open terminal"
-msgstr  "Malfermi terminalon"
-
-#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
-msgid   "Execute Shell Command"
-msgstr  "Ruli ŝelkomandon"
-
-#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
-msgid   "Paste"
-msgstr  "Alglui"
-
-#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
-#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
-msgid   "Add bookmark"
-msgstr  "Aldoni legosignon"
-
-#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
-#: ../xffm/fm/view/local/popup.hh:151
-msgid   "Remove bookmark"
-msgstr  "Forigi legosignon"
-
-#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
-msgid   "Search"
-msgstr  "Serĉi"
-
-#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
-msgid   "Close"
-msgstr  "Fermi"
-
-#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
-#: ../xffm/fm/dialog/notebook/menupopover.hh:265
-msgid   "Exit"
-msgstr  "Eliri"
-
-#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
-#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
-#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
-#: ../xffm/common/run.hh:741
-msgid   "Open with"
-msgstr  "Malfermi per"
-
-#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Cut"
-msgstr  "Eltondi"
-
-#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
-#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
-msgid   "Copy"
-msgstr  "Kopii"
-
-#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
-msgid   "Delete"
-msgstr  "Forigi"
-
-#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
-msgid   "Shred"
-msgstr  ""
-
-#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
-#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
-#: ../xffm/fm/view/fstab/popup.hh:19
-msgid   "Open in New Tab"
-msgstr  "Malfermi en nova langeto"
-
-#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "Nova langeto"
-
-#: ../xffm/gtk/dialogs.hh:29
-msgid   "Yes"
-msgstr  "Jes"
-
-#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
-msgid   "Confirm"
-msgstr  "Konfirmi"
-
-#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/menus/templates/pathbarmenu.hh:15
+#: ../xffm/menus/templates/pathbarmenu.hh:25
+#: ../xffm/menus/templates/pathbarmenu.hh:36
+#: ../xffm/menus/templates/pathbarmenu.hh:48
+#: ../xffm/menus/templates/gridviewmenu.hh:29
+#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
 #, fuzzy
-msgid   "Apply to all"
-msgstr  "Respondo al ĉiuj:"
+msgid   "Clipboard is empty."
+msgstr  "La poŝo estas malplena"
 
-#: ../xffm/gtk/dialogs.hh:110
-msgid   "Overwrite"
-msgstr  "Anstataŭigi"
-
-#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
-#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
-#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
-#: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
-#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
-#: ../xffm/find/signals.hh:411
-msgid   "Cancel"
-msgstr  "Nuligi"
-
-#: ../xffm/gtk/dialogs.hh:240
-msgid   "Help"
-msgstr  "Helpo"
-
-#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
-#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
-#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
-#: ../xffm/find/dialog.hh:666
-msgid   "unknown"
-msgstr  "nekonate"
-
-#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
-#: ../xffm/find/signals.hh:11
-msgid   "Block device"
-msgstr  "Blokaparato"
-
-#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
-#: ../xffm/find/signals.hh:12
-msgid   "Character device"
-msgstr  "Signoaparato"
-
-#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
-#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
-#: ../xffm/find/signals.hh:8
-msgid   "Directory"
-msgstr  "Dosierujo"
-
-#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
-#: ../xffm/find/signals.hh:13
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-msgid   "Symbolic Link"
-msgstr  "Simbola ligo"
-
-#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
-msgid   "Regular file"
-msgstr  "Regula dosiero"
-
-#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
-msgid   "Socket"
-msgstr  "Kontactilo"
-
-#: ../xffm/gtk/preview.hh:587
-msgid   "Empty file"
-msgstr  "Malplena dosiero"
-
-#: ../xffm/gtk/preview.hh:658
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "Ne povas legi el %s"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Komando"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Dosiero"
-
-#: ../xffm/completion/base.hh:34
-msgid   "Command history"
-msgstr  "Komandohistorio"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
-msgid   "User"
-msgstr  "Uzanto"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Variablo"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Gastiga komputilo"
-
-#: ../xffm/completion/base.hh:55
+#: ../xffm/fm/templates/clipboard.hh:133 ../xffm/fm/templates/clipboard.hh:136
 #, fuzzy
-msgid   "Found no match"
-msgstr  "Troviĝis ekzakta kongruaĵo"
+msgid   "Clipboard contents"
+msgstr  "Alglui Poŝenhavon"
 
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Kongruoj"
-
-#: ../xffm/completion/base.hh:142
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
 #, fuzzy
-msgid   "Too many files open"
-msgstr  "Tro multaj malfermaj dosieroj"
+msgid   "Invalid clip"
+msgstr  "Nevalida voko"
 
-#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
-#: ../xffm/find/fgr.hh:124
-msgid   "Options:"
-msgstr  "Agordoj:"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "Kompletigomaniero:"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "komando"
-
-#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
-msgid   "file"
-msgstr  "dosiero"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "Opcioj >>"
-
-#: ../xffm/fm/view/view.hh:144
-#, fuzzy, c-format
-msgid   "Loading %s...%s"
-msgstr  "Ŝargas %s-n"
-
-#: ../xffm/fm/view/view.hh:144
-#, fuzzy
-msgid   "Please Wait..."
-msgstr  "Bonvole atendu..."
-
-#: ../xffm/fm/view/root/popup.hh:167
-#, fuzzy
-msgid   "Ecryptfs (EFS)"
-msgstr  "Ĉifri dosieron"
-
-#: ../xffm/fm/view/root/popup.hh:169
-#, fuzzy
-msgid   "Clear cache"
-msgstr  "Malplenigi la kaŝmemoron"
-
-#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
-#: ../xffm/fm/view/fstab/popup.hh:36
-msgid   "Mount the volume associated with this folder"
-msgstr  "Instali la datumportilon ligitan kun ĉi tiu dosierujo"
-
-#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
-#: ../xffm/fm/view/fstab/popup.hh:37
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Malinstali la datumportilon ligitan kun ĉi tiu dosierujo"
-
-#: ../xffm/fm/view/root/popup.hh:204
-msgid   "Empty trash"
-msgstr  "Malplena rubujo"
-
-#: ../xffm/fm/view/root/popup.hh:269
-#, fuzzy
-msgid   "Ecrypt Volume"
-msgstr  "eCryptfs-portilo"
-
-#: ../xffm/fm/view/root/popup.hh:270
-#, fuzzy
-msgid   "private"
-msgstr  "Private"
-
-#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
-msgid   "Specify Output Directory..."
-msgstr  "Specifi dosierujon de eligo..."
-
-#: ../xffm/fm/view/root/model.hh:133
-#, fuzzy
-msgid   "Root Directory"
-msgstr  "Fora Dosierujo:"
-
-#: ../xffm/fm/view/root/model.hh:149
-msgid   "This is the root of the filesystem"
-msgstr  "Jen la radiko de la dosieraro"
-
-#: ../xffm/fm/view/root/model.hh:161
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
-#, fuzzy
-msgid   "Home Directory"
-msgstr  "Hejmdosierujo"
-
-#: ../xffm/fm/view/root/model.hh:188
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "Forĵeti dosieron"
-
-#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
-#, fuzzy
-msgid   "Disk Image Mounter"
+#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
+#: ../xffm/fm/templates/fstabmonitor.hh:366
+#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
+#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
+#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
+msgid   "Disk Mounter"
 msgstr  "Disksurmetilo"
 
-#: ../xffm/fm/view/root/model.hh:238
-msgid   "Mount local disks and devices"
-msgstr  "Surmeti lokajn diskojn kaj aparatojn"
+#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
+#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
+#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
+#: ../xffm/menus/templates/menucallbacks.hh:248
+#: ../xffm/menus/templates/mainMenu.hh:218
+msgid   "Bookmarks"
+msgstr  "Legosignoj"
 
-#: ../xffm/fm/view/root/model.hh:278
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "Iri al la hejmujo"
+#: ../xffm/fm/templates/workdir.hh:249
+#, c-format
+msgid   "The %s utility is not installed."
+msgstr  "La utilaĵo %s ne estas instalita."
 
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Nomo"
-
-#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
-#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
-#: ../xffm/find/dialog.hh:138
-msgid   "Details"
-msgstr  "Detaloj"
-
-#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
-msgid   "Size"
-msgstr  "Grando"
-
-#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
-msgid   "Date"
-msgstr  "Dato"
-
-#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
-msgid   "Mimetype"
-msgstr  "MIME-tipo"
-
-#: ../xffm/fm/view/base/signals.hh:918
+#: ../xffm/fm/templates/workdir.hh:270
 #, fuzzy
 msgid   "Trash is empty"
 msgstr  "Tablulkomputilo estas malplena"
 
-#: ../xffm/fm/view/base/signals.hh:925
-msgid   "Directory does not exist."
-msgstr  "La dosierujo ne ekzistas."
-
-#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
-#, fuzzy, c-format
-msgid   "Files: %s"
-msgstr  "Dosiero: %s"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
-#: ../xffm/fm/view/fuse/ecryptfs.hh:185
-msgid   "Mount"
-msgstr  "Surmeti"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:179
-#: ../xffm/fm/dialog/notebook/createini.hh:87
-#: ../xffm/fm/dialog/notebook/createini.hh:371
-msgid   "Save"
-msgstr  "Konservi"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-msgid   "Options"
-msgstr  "Agordoj"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
-msgid   "Advanced"
-msgstr  "Altnivele"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
-#, c-format
-msgid   "Mounting %s"
-msgstr  "Kroĉante %s"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:770
-#, fuzzy, c-format
-msgid   "Enter Passphrase for %s"
-msgstr  "Enigi pasfrazon por '%s'"
-
-#: ../xffm/fm/view/pkg/popup.hh:260
-msgid   "Package Manager"
-msgstr  "Pakaĵadministrilo"
-
-#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
-msgid   "Accept"
-msgstr  "Akcepti"
-
-#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
-#, fuzzy
-msgid   "options:"
-msgstr  "Agordoj:"
-
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
-#, fuzzy
-msgid   "Software Updater"
-msgstr  "Programar-ĝisdatigo"
-
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-msgid   "Add or remove software installed on the system"
-msgstr  "Aldoni aŭ forigi instalitan pogramaron sur via sistemo"
-
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Signoĉeno"
-
-#: ../xffm/fm/view/pkg/model.hh:117
-#, fuzzy
-msgid   "Waiting for search results"
-msgstr  "Videbla en serĉa rezultoj"
-
-#: ../xffm/fm/view/pkg/model.hh:175
-msgid   "No results"
-msgstr  "Neniuj rezultoj"
-
-#: ../xffm/fm/view/pkg/model.hh:374
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Aktuala albumo"
-
-#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "Nevalida uzanto"
-
-#: ../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/templates/workdir.hh:291
 #, fuzzy, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "La stilo '%s' ne troviĝis"
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "Forigi %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "Averto: "
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
-#: ../xffm/common/dnd.hh:29
-#, fuzzy
-msgid   "Multiple selections"
-msgstr  "Agordi plurajn lokojn"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Forigi"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Rubujo"
-
-#: ../xffm/fm/view/local/popup.hh:93
-msgid   "New"
-msgstr  "Nova"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
-#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
-#, fuzzy
-msgid   "Paste into"
-msgstr  "Enmeti en"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "Estas nenio en tondejo por alglui."
-
-#: ../xffm/fm/view/local/popup.hh:105
-msgid   "Select All"
-msgstr  "Elekti ĉion"
-
-#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
-#, fuzzy
-msgid   "Match regular expression"
-msgstr  "Kongruas kun regula esprimo"
-
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
-#, fuzzy
-msgid   "Run Executable..."
-msgstr  "Plenumeblaĵo:"
-
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
-msgid   "Extract files from the archive"
-msgstr  "Elpaki dosierojn el la arkivo"
-
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "Krei densigitan arkivon kun la elektitaj objektoj"
-
-#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
-msgid   "Rename"
-msgstr  "Alinomi"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
-msgid   "Duplicate"
-msgstr  "Duobligi"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
-#: ../xffm/common/dnd.hh:63
-msgid   "Link"
-msgstr  "Bindu"
-
-#: ../xffm/fm/view/local/popup.hh:163
-msgid   "Properties"
-msgstr  "Atributoj"
-
-#: ../xffm/fm/view/local/popup.hh:566
-msgid   "Files:"
-msgstr  "Dosieroj:"
-
-#: ../xffm/fm/view/local/popup.hh:715
-#, fuzzy
-msgid   "Select items"
-msgstr  "Elektitaj elementoj:"
-
-#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
-#: ../xffm/find/fgr.hh:204
-msgid   "Regular expression"
-msgstr  "Regula esprimo"
-
-#: ../xffm/fm/view/local/popup.hh:732
-#, fuzzy
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "Redaktilo por regulesprimoj"
-
-#: ../xffm/fm/view/local/popup.hh:762
-msgid   "No selection"
-msgstr  "Sen elekto"
-
-#: ../xffm/fm/view/local/popup.hh:762
-msgid   "No matches."
-msgstr  "Neniu rezulto."
-
-#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
-#, fuzzy
-msgid   "Create new..."
-msgstr  "Krei novan..."
-
-#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
-#: ../xffm/fm/view/local/popup.hh:1114
-#, fuzzy
-msgid   "New Name:"
-msgstr  "Nova nomo"
-
-#: ../xffm/fm/view/local/popup.hh:980
-msgid   "No name"
-msgstr  "Neniu nomo"
-
-#: ../xffm/fm/view/local/popup.hh:993
-#, fuzzy, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "Alia dosiero kun la sama nomo jam ekzistas en \"%s\"."
-
-#: ../xffm/fm/view/local/popup.hh:1103
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
-msgid   "Not a directory"
-msgstr  "Ne estas dosierujo"
-
-#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+#: ../xffm/fm/templates/run.hh:316
 msgid   "error"
 msgstr  "eraro"
 
-#: ../xffm/fm/view/local/model.hh:104
-msgid   "There are unfinished jobs: please wait until they are finished."
-msgstr  ""
-
-#: ../xffm/fm/view/local/model.hh:104
-msgid   "Previews"
-msgstr  "Antaŭmontroj"
-
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "legiĝas %s"
-
-#: ../xffm/fm/view/local/model.hh:722
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "%d - %d de %d elementoj"
-
-#: ../xffm/fm/view/local/properties.hh:239
-#, fuzzy
-msgid   "Properties and Attributes"
-msgstr  "Normaj atributoj"
-
-#: ../xffm/fm/view/local/properties.hh:267
-#, fuzzy
-msgid   "File Mode:"
-msgstr  "Klasi sub:"
-
-#: ../xffm/fm/view/local/properties.hh:293
-msgid   "File:"
-msgstr  "Dosiero:"
-
-#: ../xffm/fm/view/local/properties.hh:305
-msgid   "Apply changes"
-msgstr  "Apliki ŝanĝojn"
-
-#: ../xffm/fm/view/local/properties.hh:473
-msgid   "Encoding"
-msgstr  "Kodoprezento"
-
-#: ../xffm/fm/view/local/properties.hh:496
-msgid   "Successfully moved to trash."
-msgstr  "Suksese rubujiĝis"
-
-#: ../xffm/fm/view/local/properties.hh:497
-msgid   "Source:"
-msgstr  "Fonto:"
-
-#: ../xffm/fm/view/fstab/view.hh:174
-msgid   "Used"
-msgstr  "Uzata"
-
-#: ../xffm/fm/view/fstab/view.hh:175
-msgid   "Available"
-msgstr  "Liberaj"
-
-#: ../xffm/fm/view/fstab/view.hh:176
-msgid   "Usage"
-msgstr  "Uzado"
-
-#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
-msgid   "No Label"
-msgstr  "Neniu etikedo"
-
-#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
-#, fuzzy
-msgid   "There is no file system available (unformatted)"
-msgstr  "Ne ekzistas kongrua ero.\n"
-
-#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
-#: ../xffm/fm/view/fstab/popup.hh:144
-msgid   "Mount point:"
-msgstr  "Surmetingo:"
-
-#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
-#, fuzzy
-msgid   "Not mounted"
-msgstr  "Ne muntita"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:89
-#: ../xffm/fm/view/fstab/view-Linux.hh:105
-msgid   "Disks"
-msgstr  "Diskilo"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
-msgid   "NFS Network Volume"
-msgstr  "NFS-reto-portilo"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:398
-msgid   "SFTP (via SSH)"
-msgstr  ""
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
-msgid   "eCryptfs Volume"
-msgstr  "eCryptfs-portilo"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
-msgid   "CIFS Volume"
-msgstr  "CIFS-portilo"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:743
-#, fuzzy, c-format
-msgid   "Unmounting %s"
-msgstr  "Malkroĉanta"
-
-#: ../xffm/fm/view/fstab/view-BSD.hh:604
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Surmetingo:"
-
-#: ../xffm/fm/view/fstab/view-BSD.hh:605
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Kroĉu diskon"
-
-#: ../xffm/fm/view/fstab/popup.hh:21
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "SSHFS-fora dosierujo de sinkronigo..."
-
-#: ../xffm/fm/view/fstab/popup.hh:132
-msgid   "Mount Device"
-msgstr  "Kroĉu diskon"
-
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
-#, fuzzy
-msgid   "Copying files locally"
-msgstr  "Kopiante dosierojn"
-
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
-#: ../xffm/common/gio.hh:93
-#, fuzzy
-msgid   "Moving files"
-msgstr  "Movas dosierojn"
-
-#: ../xffm/fm/dialog/notebook/page/base.hh:51
-#, fuzzy
-msgid   "No Image Preview"
-msgstr  "Bilda antaŭrigardo"
-
-#: ../xffm/fm/dialog/notebook/page/base.hh:55
-msgid   "Maximum image size for thumbnailing"
-msgstr  "Maks. bilda grando por bildetado"
-
-#: ../xffm/fm/dialog/notebook/page/base.hh:60
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
-msgid   "Reset image size"
-msgstr  "Restarigi grandon de bildo"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-msgid   "Embedded Terminal"
-msgstr  "Enkorpigita terminalo"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
-#, fuzzy
-msgid   "All items in the iconview."
-msgstr  "Elekti ĉiujn elementojn en tiu ĉi fenestro"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
-msgid   "Scripting"
-msgstr  "Skriptado"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
-#, fuzzy
-msgid   "Clear Log"
-msgstr  "Vakigi erarlisto"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
-#, fuzzy
-msgid   "Terminal font"
-msgstr  "Terminalo"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid   "Renice Process"
-msgstr  "Reasigni prioritaton al procezo"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid   "Suspend"
-msgstr  "Interrompi"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
-msgid   "Continue"
-msgstr  "Daŭrigi"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
-msgid   "Interrupt"
-msgstr  "Interrompo"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
-msgid   "Hangup"
-msgstr  "Malkonekto"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
-msgid   "User 1 (USR1)"
-msgstr  "Propra 1 (USR1)"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
-msgid   "User 2 (USR2)"
-msgstr  "Propra 2 (USR2)"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
-#, fuzzy
-msgid   "Terminate Task"
-msgstr  "Mortigi"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
-msgid   "Abort"
-msgstr  "Ĉesi"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
-msgid   "Kill"
-msgstr  "Mortigi"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
-msgid   "Segmentation fault"
-msgstr  "Adres-eraro"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
-msgid   "PID"
-msgstr  "PID"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
-#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Antaŭa"
-
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
-msgid   "Go to"
-msgstr  "Iri al"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:61
-msgid   "loading..."
-msgstr  "ŝargado..."
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:171
-#: ../xffm/fm/dialog/notebook/page/page.hh:186
-#, fuzzy
-msgid   "Confirm Replace"
-msgstr  "Konfirmu forigon"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:173
-#, fuzzy
-msgid   "Destination File"
-msgstr  "Celdosierujo"
-
-#: ../xffm/fm/dialog/notebook/page/page.hh:185
-#, fuzzy, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
-msgstr  "La dosiero %s jam ekzistas, ĉu vi volas anstataŭigi ĝin?"
-
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
-#, fuzzy
-msgid   "Long press time"
-msgstr  "Longaj flankoj apude"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Forigi la butonon"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Aldoni enhavtabelon"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Elekti ŝargendan bildon"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
-#, fuzzy, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Ne povas malpaki dosieron: %s : %s"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
-#, fuzzy
-msgid   "You need to restart the application"
-msgstr  "Aplikaĵolanĉilo"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
-#, fuzzy
-msgid   "FIXME New custom content"
-msgstr  "Ebligi propan tiparon"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
-#, fuzzy
-msgid   "Open a New Window"
-msgstr  "Malfermi en nova fenestro"
-
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#, fuzzy
-msgid   "Differences"
-msgstr  "Diferenco"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-#, fuzzy
-msgid   "maximum"
-msgstr  "Maksimumo"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:75
-msgid   "Add option"
-msgstr  "Aldoni opcion"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:79
-#, fuzzy
-msgid   "Remove option"
-msgstr  "Forigi konekton"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:158
-#, fuzzy
-msgid   "icon ID"
-msgstr  "piktogramo"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:159
-#, fuzzy
-msgid   "tooltip"
-msgstr  "ŝpruchelpilo"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:160
-#, fuzzy
-msgid   "Select work directory"
-msgstr  "Elekti dosierujon"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:163
-#, fuzzy
-msgid   "Select executable"
-msgstr  "Elekti tabelojn:"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:166
-msgid   "Run in terminal"
-msgstr  "Ruli en terminalo"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:234
-#: ../xffm/response/chooserresponse.hh:20
-msgid   "Open"
-msgstr  "Malfermi"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:268
-#: ../xffm/response/chooserresponse.hh:55
-#: ../xffm/response/chooserresponse.hh:69
-msgid   "Choose file"
-msgstr  "Elekti dosieron"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:277
-#: ../xffm/response/chooserresponse.hh:50
-#: ../xffm/response/chooserresponse.hh:62
-msgid   "Choose directory"
-msgstr  "Elekti dosierujon"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:366
-msgid   "Save File"
-msgstr  "Konservi dosieron"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:380
-msgid   "customButton.ini"
-msgstr  ""
-
-#: ../xffm/fm/dialog/notebook/createini.hh:420
-msgid   "Option"
-msgstr  "Opcio"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:424
-msgid   "text"
-msgstr  "teksto"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:436
-#, fuzzy
-msgid   "folder"
-msgstr  "Dosierujo"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:441
-msgid   "on"
-msgstr  "sur"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:446
-msgid   "off"
-msgstr  "elŝaltite"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:179
-#, fuzzy
-msgid   "Open menu"
-msgstr  "Malfermi bildon"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237
-#: ../xffm/fm/dialog/notebook/menupopover.hh:381
-msgid   "Background Color"
-msgstr  "Fonkoloro"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:238
-#: ../xffm/fm/dialog/notebook/menupopover.hh:372
-msgid   "Foreground Color"
-msgstr  "Malfona koloro"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:240
-#: ../xffm/fm/dialog/notebook/menupopover.hh:354
-#, fuzzy
-msgid   "Command Text Color"
-msgstr  "Difini tekstkoloron"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:241
-#: ../xffm/fm/dialog/notebook/menupopover.hh:363
-#, fuzzy
-msgid   "Error Text Color"
-msgstr  "Tekstkoloro"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:246
-#: ../xffm/fm/dialog/notebook/menupopover.hh:264
-msgid   "Color settings"
-msgstr  "Agordo de la koloroj"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:254
-#, fuzzy
-msgid   "Sort by"
-msgstr  "Ordigi laŭ:"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:254
-msgid   "File extension"
-msgstr  "Dosier-sufikso"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:256
-msgid   "View as list"
-msgstr  "Montri kiel listo"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:257
-msgid   "Show hidden files"
-msgstr  "Montri kaŝitajn dosierojn"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:258
-msgid   "Show Backup Files"
-msgstr  "Montri restaŭrodosierojn"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:259
-#, fuzzy
-msgid   "Sort data in descending order"
-msgstr  "Ordigi kreskante aŭ malkreskante"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:261
-#, fuzzy
-msgid   "Sort by date"
-msgstr  "Ordigi laŭ nomo"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:262
-#, fuzzy
-msgid   "Sort by size"
-msgstr  "Ordigi laŭ nomo"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:288
-msgid   "Main menu"
-msgstr  "Ĉefa menuo"
-
-#: ../xffm/fm/dialog/dialog.hh:121
-msgid   "Removed"
-msgstr  "Forigite"
-
-#: ../xffm/common/run.hh:339
+#: ../xffm/fm/templates/run.hh:320
 #, fuzzy
 msgid   "warning"
 msgstr  "averto:"
 
-#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
-#: ../xffm/response/passwdresponse.hh:34
+#: ../xffm/fm/templates/run.hh:441
+#: ../xffm/response/classes/passwdresponse.hh:11
+#: ../xffm/response/classes/passwdresponse.hh:79
+#: ../xffm/response/classes/passwdresponse.hh:83
 msgid   "Enter password"
 msgstr  "Enigi la pasvorton"
 
-#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#: ../xffm/fm/templates/runbutton.hh:248
 #, fuzzy
-msgid   "Executable"
-msgstr  "Plenumeblaĵo:"
+msgid   "Signal to emit"
+msgstr  "Modifota dosiero"
 
-#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
-#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
-msgid   "Run in Terminal"
-msgstr  "Ruli en terminalo"
+#: ../xffm/fm/templates/runbutton.hh:281
+msgid   "PID"
+msgstr  "PID"
 
-#: ../xffm/common/run.hh:652
+#: ../xffm/fm/templates/runbutton.hh:305
+msgid   "Renice Process"
+msgstr  "Reasigni prioritaton al procezo"
+
+#: ../xffm/fm/templates/runbutton.hh:306
+msgid   "Suspend"
+msgstr  "Interrompi"
+
+#: ../xffm/fm/templates/runbutton.hh:307
+msgid   "Continue"
+msgstr  "Daŭrigi"
+
+#: ../xffm/fm/templates/runbutton.hh:308
+msgid   "Interrupt"
+msgstr  "Interrompo"
+
+#: ../xffm/fm/templates/runbutton.hh:309
+msgid   "Hangup"
+msgstr  "Malkonekto"
+
+#: ../xffm/fm/templates/runbutton.hh:310
+msgid   "User 1 (USR1)"
+msgstr  "Propra 1 (USR1)"
+
+#: ../xffm/fm/templates/runbutton.hh:311
+msgid   "User 2 (USR2)"
+msgstr  "Propra 2 (USR2)"
+
+#: ../xffm/fm/templates/runbutton.hh:312
 #, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "Argumentoj por komando"
+msgid   "Terminate Task"
+msgstr  "Mortigi"
 
-#: ../xffm/common/run.hh:874
-#, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "Alinomi elektitan dosieron aŭ dosierujon"
+#: ../xffm/fm/templates/runbutton.hh:313
+msgid   "Abort"
+msgstr  "Ĉesi"
 
-#: ../xffm/common/settings.hh:178
-msgid   "New File:"
-msgstr  "Nova dosiero:"
+#: ../xffm/fm/templates/runbutton.hh:314
+msgid   "Kill"
+msgstr  "Mortigi"
 
-#: ../xffm/common/util.hh:1511
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  ""
+#: ../xffm/fm/templates/runbutton.hh:315
+msgid   "Segmentation fault"
+msgstr  "Adres-eraro"
 
-#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
-#, c-format
-msgid   "Open with %s"
-msgstr  "Malfermi per %s"
-
-#: ../xffm/common/util.hh:1513
-msgid   "Text Editor"
-msgstr  "Tekstredaktilo"
-
-#: ../xffm/common/util.hh:1554
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  ""
-
-#: ../xffm/common/dnd.hh:41
+#: ../xffm/fm/templates/dnd.hh:639
 msgid   "Target"
 msgstr  "Celo"
 
-#: ../xffm/common/dnd.hh:41
-msgid   "Files"
-msgstr  "Dosieroj"
+#: ../xffm/fm/templates/dnd.hh:640
+msgid   "Source"
+msgstr  "Fonto"
 
-#: ../xffm/common/dnd.hh:49
-msgid   "More…"
-msgstr  "Pli..."
-
-#: ../xffm/common/dnd.hh:63
-msgid   "Move"
-msgstr  "Movi"
-
-#: ../xffm/common/dnd.hh:143
+#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
 #, fuzzy
-msgid   "Create Link"
-msgstr  "Malfari kreon de ligilo"
+msgid   "Invalid target folder"
+msgstr  "Argumenta valoro ne estas valida"
 
-#: ../xffm/common/dnd.hh:155
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
+#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/response/classes/dndresponse.hh:22
+#: ../xffm/menus/templates/gridviewmenu.hh:32
+#: ../xffm/menus/templates/gridviewmenu.hh:62
+#: ../xffm/menus/templates/gridviewmenu.hh:86
+msgid   "Link"
+msgstr  "Bindu"
+
+#: ../xffm/fm/templates/dnd.hh:684
 #, fuzzy
-msgid   "more"
-msgstr  "Atmore"
+msgid   "Drag:"
+msgstr  "Treni"
 
-#: ../xffm/common/gio.hh:91
-msgid   "Copying files"
-msgstr  "Kopiante dosierojn"
+#: ../xffm/fm/templates/dnd.hh:722
+msgid   "files"
+msgstr  "dosieroj"
 
-#: ../xffm/common/gio.hh:95
-msgid   "linking"
-msgstr  "bindanta"
+#: ../xffm/fm/templates/dnd.hh:723
+#, fuzzy, c-format
+msgid   "+ %s more"
+msgstr  "...kaj %s plu"
 
-#: ../xffm/common/gio.hh:97
-msgid   "rename"
-msgstr  "rename"
+#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
+msgid   "file"
+msgstr  "dosiero"
 
-#: ../xffm/common/gio.hh:408
+#: ../xffm/fm/templates/dnd.hh:731
+msgid   ": "
+msgstr  ": "
+
+#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/response/templates/openwith.hh:137
+#: ../xffm/response/templates/dialogbasic.hh:304
+#: ../xffm/find/templates/dndbox.hh:153
+msgid   "Close"
+msgstr  "Fermi"
+
+#: ../xffm/fm/templates/window.hh:505
 #, fuzzy
-msgid   "Overwrite?"
-msgstr  "Anstataŭigi"
+msgid   "Long press time"
+msgstr  "Longaj flankoj apude"
 
-#: ../xffm/common/gio.hh:498
+#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
+#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/menus/templates/inputMenu.hh:12
+#: ../xffm/menus/templates/inputMenu.hh:29
+#: ../xffm/menus/templates/inputMenu.hh:44
+#: ../xffm/menus/templates/inputMenu.hh:60
+#: ../xffm/menus/templates/gridviewmenu.hh:27
+#: ../xffm/menus/templates/gridviewmenu.hh:66
+#: ../xffm/menus/templates/gridviewmenu.hh:89
+msgid   "Cut"
+msgstr  "Eltondi"
+
+#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
+#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/response/classes/dndresponse.hh:20
+#: ../xffm/menus/templates/inputMenu.hh:11
+#: ../xffm/menus/templates/inputMenu.hh:28
+#: ../xffm/menus/templates/inputMenu.hh:43
+#: ../xffm/menus/templates/inputMenu.hh:59
+#: ../xffm/menus/templates/outputMenu.hh:11
+#: ../xffm/menus/templates/outputMenu.hh:24
+#: ../xffm/menus/templates/outputMenu.hh:37
+#: ../xffm/menus/templates/outputMenu.hh:50
+#: ../xffm/menus/templates/gridviewmenu.hh:26
+#: ../xffm/menus/templates/gridviewmenu.hh:65
+#: ../xffm/menus/templates/gridviewmenu.hh:88
+msgid   "Copy"
+msgstr  "Kopii"
+
+#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
+#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
+#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/menus/templates/pathbarmenu.hh:13
+#: ../xffm/menus/templates/pathbarmenu.hh:24
+#: ../xffm/menus/templates/pathbarmenu.hh:35
+#: ../xffm/menus/templates/pathbarmenu.hh:47
+#: ../xffm/menus/templates/inputMenu.hh:13
+#: ../xffm/menus/templates/inputMenu.hh:30
+#: ../xffm/menus/templates/inputMenu.hh:45
+#: ../xffm/menus/templates/inputMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:17
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/gridviewmenu.hh:28
+#: ../xffm/menus/templates/gridviewmenu.hh:67
+#: ../xffm/menus/templates/gridviewmenu.hh:90
+#: ../xffm/menus/templates/menu.hh:166
+msgid   "Paste"
+msgstr  "Alglui"
+
+#: ../xffm/fm/templates/window.hh:519
+msgid   "New Tab"
+msgstr  "Nova langeto"
+
+#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
+msgid   "Main menu"
+msgstr  "Ĉefa menuo"
+
+#: ../xffm/fm/templates/window.hh:592
+#, fuzzy
+msgid   "Directory name: "
+msgstr  "Dosieruja nomo:"
+
+#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/menus/templates/inputMenu.hh:15
+#: ../xffm/menus/templates/inputMenu.hh:26
+#: ../xffm/menus/templates/inputMenu.hh:41
+#: ../xffm/menus/templates/inputMenu.hh:57
+#: ../xffm/menus/templates/outputMenu.hh:12
+#: ../xffm/menus/templates/outputMenu.hh:25
+#: ../xffm/menus/templates/outputMenu.hh:38
+#: ../xffm/menus/templates/outputMenu.hh:51
+#: ../xffm/menus/templates/mainMenu.hh:23
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:82
+msgid   "Select All"
+msgstr  "Elekti ĉion"
+
+#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/menus/templates/mainMenu.hh:24
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "Kongruas kun regula esprimo"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/menus/templates/mainMenu.hh:28
+msgid   "Show"
+msgstr  "Montri"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
+#: ../xffm/menus/templates/mainMenu.hh:96
+#: ../xffm/menus/templates/mainMenu.hh:119
+#: ../xffm/menus/templates/mainMenu.hh:132
+#: ../xffm/menus/templates/mainMenu.hh:159
+msgid   "Hidden files"
+msgstr  "Kaŝitaj dosieroj"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:97
+#: ../xffm/menus/templates/mainMenu.hh:120
+#: ../xffm/menus/templates/mainMenu.hh:133
+#: ../xffm/menus/templates/mainMenu.hh:160
+msgid   "Backup files"
+msgstr  "Sekurkopiaj dosieroj"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
+#, fuzzy
+msgid   "Sort mode"
+msgstr  "Ordigi:"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
+#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/menus/templates/mainMenu.hh:98
+#: ../xffm/menus/templates/mainMenu.hh:121
+#: ../xffm/menus/templates/mainMenu.hh:134
+#: ../xffm/menus/templates/mainMenu.hh:161
+msgid   "Descending"
+msgstr  "Malkreskante"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:676
+#: ../xffm/response/templates/fileresponse.hh:231
+#: ../xffm/menus/templates/mainMenu.hh:35
+#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:122
+#: ../xffm/menus/templates/mainMenu.hh:141
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Name"
+msgstr  "Nomo"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
+#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
+#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/menus/templates/mainMenu.hh:123
+#: ../xffm/menus/templates/mainMenu.hh:142
+#: ../xffm/menus/templates/mainMenu.hh:162
+msgid   "Date"
+msgstr  "Dato"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
+#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:101
+#: ../xffm/menus/templates/mainMenu.hh:124
+#: ../xffm/menus/templates/mainMenu.hh:143
+#: ../xffm/menus/templates/mainMenu.hh:163
+msgid   "Size"
+msgstr  "Grando"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
+#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:102
+#: ../xffm/menus/templates/mainMenu.hh:125
+#: ../xffm/menus/templates/mainMenu.hh:144
+#: ../xffm/menus/templates/mainMenu.hh:164
+#, fuzzy
+msgid   "File type"
+msgstr  "Dosier-tipo:"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
+#: ../xffm/menus/templates/mainMenu.hh:39
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:200
+msgid   "Apply modifications"
+msgstr  "Apliki ŝanĝojn"
+
+#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
+#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/menus/templates/gridviewmenu.hh:24
+#: ../xffm/menus/templates/gridviewmenu.hh:68
+#: ../xffm/menus/templates/gridviewmenu.hh:92
+msgid   "Add bookmark"
+msgstr  "Aldoni legosignon"
+
+#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
+#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
+#: ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/gridviewmenu.hh:25
+#: ../xffm/menus/templates/gridviewmenu.hh:69
+#: ../xffm/menus/templates/gridviewmenu.hh:93
+msgid   "Remove bookmark"
+msgstr  "Forigi legosignon"
+
+#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:55
+#: ../xffm/menus/templates/mainMenu.hh:77
+#, fuzzy
+msgid   "Empty trash bin"
+msgstr  "Malplenigi la rubujon"
+
+#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/menus/templates/gridviewmenu.hh:20
+#: ../xffm/menus/templates/gridviewmenu.hh:58
+#: ../xffm/menus/templates/gridviewmenu.hh:83
+msgid   "Open with"
+msgstr  "Malfermi per"
+
+#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
+#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/response/classes/rmlistresponse.hh:9
+#: ../xffm/response/classes/rmlistresponse.hh:11
+#: ../xffm/response/classes/rmlistresponse.hh:18
+#: ../xffm/response/classes/rmlistresponse.hh:27
+#: ../xffm/response/classes/rmresponse.hh:9
+#: ../xffm/response/classes/rmresponse.hh:11
+#: ../xffm/response/classes/rmresponse.hh:18
+#: ../xffm/response/classes/rmresponse.hh:29
+#: ../xffm/menus/templates/inputMenu.hh:14
+#: ../xffm/menus/templates/inputMenu.hh:31
+#: ../xffm/menus/templates/inputMenu.hh:46
+#: ../xffm/menus/templates/inputMenu.hh:62
+#: ../xffm/menus/templates/gridviewmenu.hh:34
+#: ../xffm/menus/templates/gridviewmenu.hh:63
+#: ../xffm/menus/templates/gridviewmenu.hh:91
+msgid   "Delete"
+msgstr  "Forigi"
+
+#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
+#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/menus/templates/gridviewmenu.hh:21
+#: ../xffm/menus/templates/gridviewmenu.hh:72
+#: ../xffm/menus/templates/gridviewmenu.hh:98
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Krei densigitan arkivon kun la elektitaj objektoj"
+
+#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
+#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/menus/templates/gridviewmenu.hh:33
+#: ../xffm/menus/templates/gridviewmenu.hh:64
+#: ../xffm/menus/templates/gridviewmenu.hh:95
+msgid   "Properties"
+msgstr  "Atributoj"
+
+#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
+#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/menus/templates/gridviewmenu.hh:23
+#: ../xffm/menus/templates/gridviewmenu.hh:56
+#: ../xffm/menus/templates/gridviewmenu.hh:80
+#, fuzzy
+msgid   "Unmount Volume"
+msgstr  "Radiko-portilo"
+
+#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
+#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/response/templates/mountresponse.hh:166
+#: ../xffm/menus/templates/gridviewmenu.hh:22
+#: ../xffm/menus/templates/gridviewmenu.hh:55
+#: ../xffm/menus/templates/gridviewmenu.hh:79
+#, fuzzy
+msgid   "Mount Volume"
+msgstr  "Mutigi la laŭtecon"
+
+#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/menus/templates/pathbarmenu.hh:11
+#: ../xffm/menus/templates/pathbarmenu.hh:22
+#: ../xffm/menus/templates/pathbarmenu.hh:33
+#: ../xffm/menus/templates/pathbarmenu.hh:45
+#: ../xffm/menus/templates/gridviewmenu.hh:19
+#: ../xffm/menus/templates/gridviewmenu.hh:57
+#: ../xffm/menus/templates/gridviewmenu.hh:82
+#, fuzzy
+msgid   "Open in new tab"
+msgstr  "Malfermi novan langeton"
+
+#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/response/classes/mvresponse.hh:11
+#: ../xffm/response/classes/mvresponse.hh:19
+#: ../xffm/menus/templates/gridviewmenu.hh:30
+#: ../xffm/menus/templates/gridviewmenu.hh:60
+#: ../xffm/menus/templates/gridviewmenu.hh:87
+msgid   "Rename"
+msgstr  "Alinomi"
+
+#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/response/classes/cpresponse.hh:13
+#: ../xffm/response/classes/cpresponse.hh:20
+#: ../xffm/menus/templates/gridviewmenu.hh:31
+#: ../xffm/menus/templates/gridviewmenu.hh:61
+#: ../xffm/menus/templates/gridviewmenu.hh:85
+msgid   "Duplicate"
+msgstr  "Duobligi"
+
+#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
+#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/menus/templates/gridviewmenu.hh:17
+#: ../xffm/menus/templates/gridviewmenu.hh:59
+#: ../xffm/menus/templates/gridviewmenu.hh:84
+msgid   "auto"
+msgstr  "aŭto"
+
+#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/response/templates/bfishresponse.hh:88
+#: ../xffm/response/templates/bfishresponse.hh:355
+#: ../xffm/menus/templates/gridviewmenu.hh:36
+#: ../xffm/menus/templates/gridviewmenu.hh:71
+#: ../xffm/menus/templates/gridviewmenu.hh:97
+#, fuzzy
+msgid   "Decrypt File..."
+msgstr  "Elekti dosieron..."
+
+#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/menus/templates/gridviewmenu.hh:35
+#: ../xffm/menus/templates/gridviewmenu.hh:70
+#: ../xffm/menus/templates/gridviewmenu.hh:96
+#, fuzzy
+msgid   "Encrypt File..."
+msgstr  "Ĉifri dosieron"
+
+#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/response/templates/openwith.hh:158
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Agordi plurajn lokojn"
+
+#: ../xffm/fm/templates/basicpathbar.hh:28 ../xffm/find/classes/fgr.hh:168
+#: ../xffm/find/classes/fgr.hh:171 ../xffm/find/classes/fgr.hh:174
+#: ../xffm/find/classes/fgr.hh:177
+msgid   "Previous"
+msgstr  "Antaŭa"
+
+#: ../xffm/fm/templates/basicpathbar.hh:32
+msgid   "Next"
+msgstr  "Sekva"
+
+#: ../xffm/fm/templates/basicpathbar.hh:36
+#: ../xffm/response/templates/jumpresponse.hh:10
+#: ../xffm/response/templates/jumpresponse.hh:12
+msgid   "Go to"
+msgstr  "Iri al"
+
+#: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
+#: ../xffm/find/templates/findresponse.hh:884
+msgid   "unknown"
+msgstr  "nekonate"
+
+#: ../xffm/fm/templates/preview.hh:348
+msgid   "Empty file"
+msgstr  "Malplena dosiero"
+
+#: ../xffm/fm/templates/preview.hh:557 ../xffm/find/classes/fgr.hh:162
+#: ../xffm/find/classes/ffunctions.hh:13
+msgid   "Block device"
+msgstr  "Blokaparato"
+
+#: ../xffm/fm/templates/preview.hh:560 ../xffm/find/classes/fgr.hh:163
+#: ../xffm/find/classes/ffunctions.hh:14
+msgid   "Character device"
+msgstr  "Signoaparato"
+
+#: ../xffm/fm/templates/preview.hh:563 ../xffm/fm/classes/bash.hh:60
+#: ../xffm/find/classes/fgr.hh:159 ../xffm/find/classes/ffunctions.hh:10
+msgid   "Directory"
+msgstr  "Dosierujo"
+
+#: ../xffm/fm/templates/preview.hh:566 ../xffm/find/classes/fgr.hh:164
+#: ../xffm/find/classes/ffunctions.hh:15
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/fm/templates/preview.hh:569 ../xffm/find/classes/fgr.hh:160
+#: ../xffm/find/classes/ffunctions.hh:11
+msgid   "Symbolic Link"
+msgstr  "Simbola ligo"
+
+#: ../xffm/fm/templates/preview.hh:572 ../xffm/find/classes/fgr.hh:158
+msgid   "Regular file"
+msgstr  "Regula dosiero"
+
+#: ../xffm/fm/templates/preview.hh:575 ../xffm/find/classes/ffunctions.hh:12
+msgid   "Socket"
+msgstr  "Kontactilo"
+
+#: ../xffm/fm/templates/preview.hh:601
 #, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d de %d)"
+msgid   "Cannot read from %s"
+msgstr  "Ne povas legi el %s"
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/fm/templates/prompt.hh:63
+msgid   "Input"
+msgstr  "Enigo"
+
+#: ../xffm/fm/templates/prompt.hh:63 ../xffm/fm/classes/fmpage.hh:98
+msgid   " TTY"
+msgstr  " TTY"
+
+#: ../xffm/fm/templates/prompt.hh:236
+#: ../xffm/menus/templates/menucallbacks.hh:48
+#, c-format
+msgid   "failed to chdir to %s"
+msgstr  "malsukcesis ŝanĝi aktualan dosierujon al %s"
+
+#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
 #, fuzzy
-msgid   "Execute command"
-msgstr  "Lanĉŭ komandon"
+msgid   "Properties and Attributes"
+msgstr  "Normaj atributoj"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Fontdosiero"
+#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Klasi sub:"
 
-#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
-msgid   "Ok"
-msgstr  "Bone"
+#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
+#: ../xffm/response/classes/envresponse.hh:123
+msgid   "Apply changes"
+msgstr  "Apliki ŝanĝojn"
 
-#: ../xffm/response/timeoutresponse.hh:57
-msgid   "Dismiss"
-msgstr  "Malakcepti"
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
+#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/response/templates/mountresponse.hh:147
+#: ../xffm/response/templates/fileresponse.hh:313
+#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/dialogbasic.hh:309
+#: ../xffm/response/templates/bfishresponse.hh:169
+#: ../xffm/response/classes/dndresponse.hh:23
+#: ../xffm/response/classes/rmresponse.hh:20
+#: ../xffm/response/classes/cpresponse.hh:81
+#: ../xffm/find/templates/findsignals.hh:568
+msgid   "Cancel"
+msgstr  "Nuligi"
 
-#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
+#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
+msgid   "Encoding"
+msgstr  "Kodoprezento"
+
+#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
+msgid   "Mimetype"
+msgstr  "MIME-tipo"
+
+#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
+msgid   "Successfully moved to trash."
+msgstr  "Suksese rubujiĝis"
+
+#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
+msgid   "Source:"
+msgstr  "Fonto:"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:22
+#, fuzzy
+msgid   "Move to tab"
+msgstr  "Movi al"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:83
+#: ../xffm/menus/templates/mainMenu.hh:111
+msgid   "Search"
+msgstr  "Serĉi"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:112
+msgid   "Open terminal"
+msgstr  "Malfermi terminalon"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:86
+#: ../xffm/menus/templates/mainMenu.hh:113
+msgid   "Home"
+msgstr  "Hejmo"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:26
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Malfermi en nova fenestro"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:40
+msgid   "Icon Size"
+msgstr  "Piktograma grando"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
+msgid   "Color settings"
+msgstr  "Agordo de la koloroj"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:63
+msgid   "Colors"
+msgstr  "Koloroj"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:144
+#, fuzzy
+msgid   "Icon Size:"
+msgstr  "Piktograma grando"
+
+#: ../xffm/fm/classes/settings.hh:153
+msgid   "New File:"
+msgstr  "Nova dosiero:"
+
+#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/response/templates/efsresponse.hh:40
+msgid   "New"
+msgstr  "Nova"
+
+#: ../xffm/fm/classes/root.hh:59
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Forĵeti dosieron"
+
+#: ../xffm/fm/classes/progress.hh:73
 msgid   "Running"
 msgstr  "Ruliĝante"
 
-#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
+#: ../xffm/fm/classes/progress.hh:78
 #, fuzzy
 msgid   "Waiting for operation to finish..."
 msgstr  "Atendante la plenumon de dvips..."
 
-#: ../xffm/response/passwdresponse.hh:131
+#: ../xffm/fm/classes/bash.hh:25
+msgid   "Command"
+msgstr  "Komando"
+
+#: ../xffm/fm/classes/bash.hh:28 ../xffm/fm/classes/bash.hh:61
+msgid   "File"
+msgstr  "Dosiero"
+
+#: ../xffm/fm/classes/bash.hh:31
+msgid   "Command history"
+msgstr  "Komandohistorio"
+
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
+msgid   "User"
+msgstr  "Uzanto"
+
+#: ../xffm/fm/classes/bash.hh:37
+msgid   "Variable"
+msgstr  "Variablo"
+
+#: ../xffm/fm/classes/bash.hh:40
+msgid   "Host"
+msgstr  "Gastiga komputilo"
+
+#: ../xffm/fm/classes/bash.hh:51
 #, fuzzy
-msgid   "User Input"
-msgstr  "Uzanto-informo"
+msgid   "Found no match"
+msgstr  "Troviĝis ekzakta kongruaĵo"
 
-#: ../xffm/response/passwdresponse.hh:147
+#: ../xffm/fm/classes/bash.hh:57
+msgid   "Symbolic link"
+msgstr  "Simbola ligilo"
+
+#: ../xffm/fm/classes/bash.hh:141
+msgid   "Matches"
+msgstr  "Kongruoj"
+
+#: ../xffm/fm/classes/bash.hh:141
+msgid   "Too many selected files"
+msgstr  "Tro multaj elektitaj dosieroj"
+
+#: ../xffm/fm/classes/bash.hh:339 ../xffm/fm/classes/ecryptfs.hh:346
+#: ../xffm/response/templates/efsresponse.hh:112
+#: ../xffm/find/classes/fgr.hh:124
+msgid   "Options:"
+msgstr  "Agordoj:"
+
+#: ../xffm/fm/classes/bash.hh:651
+msgid   "Completion mode:"
+msgstr  "Kompletigomaniero:"
+
+#: ../xffm/fm/classes/bash.hh:652
+msgid   "command"
+msgstr  "komando"
+
+#: ../xffm/fm/classes/bash.hh:663 ../xffm/fm/classes/bash.hh:667
+msgid   "Options >>"
+msgstr  "Opcioj >>"
+
+#: ../xffm/fm/classes/fmpage.hh:98
+msgid   "Output"
+msgstr  "Eligo"
+
+#: ../xffm/fm/classes/fmpage.hh:137
 #, fuzzy
-msgid   "Response Requested"
-msgstr  "Se postulita"
+msgid   "Show/Hide"
+msgstr  "Montri kaŝitajn"
 
-#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
-msgid   "No Read Permission"
-msgstr  "Ne rajtas legi"
+#: ../xffm/fm/classes/fmpage.hh:139 ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/menus/templates/inputMenu.hh:27
+#: ../xffm/menus/templates/inputMenu.hh:42
+#: ../xffm/menus/templates/inputMenu.hh:58
+#: ../xffm/menus/templates/outputMenu.hh:10
+#: ../xffm/menus/templates/outputMenu.hh:23
+#: ../xffm/menus/templates/outputMenu.hh:36
+#: ../xffm/menus/templates/outputMenu.hh:49
+msgid   "Clear"
+msgstr  "Vakigi"
 
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
-#: ../xffm/find/dialog.hh:341
-msgid   "Path"
-msgstr  "Vojo"
+#: ../xffm/fm/classes/fmpage.hh:160
+msgid   "Font size"
+msgstr  "grando de tiparo"
 
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  "Trovi dokumentojn kaj dosierujojn en ĉi tiu komputilo laŭ nomo aŭ "
-        "enhavo"
+#: ../xffm/fm/classes/gio.hh:137
+msgid   "Copying files"
+msgstr  "Kopiante dosierojn"
 
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
-msgid   "Filter:"
-msgstr  "Filtrilo:"
-
-#: ../xffm/find/fgr.hh:126
-msgid   "Search for files"
-msgstr  "Serĉi dosierojn"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Enhavo:"
-
-#: ../xffm/find/fgr.hh:128
+#: ../xffm/fm/classes/gio.hh:139
 #, fuzzy
-msgid   "File's contents filtered as plain text."
-msgstr  "Ĉu konservi en plata teksta formo"
+msgid   "Moving files"
+msgstr  "Movas dosierojn"
 
-#: ../xffm/find/fgr.hh:131
+#: ../xffm/fm/classes/gio.hh:141
+msgid   "linking"
+msgstr  "bindanta"
+
+#: ../xffm/fm/classes/gio.hh:143
+msgid   "rename"
+msgstr  "rename"
+
+#: ../xffm/fm/classes/gio.hh:418
+#, fuzzy
+msgid   "Overwrite?"
+msgstr  "Anstataŭigi"
+
+#: ../xffm/fm/classes/gio.hh:512
+#, c-format
+msgid   "(%d of %d)"
+msgstr  "(%d de %d)"
+
+#: ../xffm/fm/classes/ecryptfs.hh:6
+#, fuzzy
+msgid   "Encryption Options"
+msgstr  "Abonagordoj"
+
+#: ../xffm/fm/classes/ecryptfs.hh:7
+#, fuzzy
+msgid   "Encrypt Files"
+msgstr  "Ĉifri dosieron"
+
+#: ../xffm/fm/classes/ecryptfs.hh:8
+#, fuzzy
+msgid   "encrypted volume"
+msgstr  "Pli laŭte"
+
+#: ../xffm/fm/classes/ecryptfs.hh:9
+#, fuzzy
+msgid   "create"
+msgstr  "Rekrei"
+
+#: ../xffm/fm/classes/ecryptfs.hh:10
+#, fuzzy
+msgid   "Encrypted Container"
+msgstr  "Ĉifrita mesaĝo"
+
+#: ../xffm/fm/classes/ecryptfs.hh:11
+msgid   "Encrypt the file list"
+msgstr  "Ĉifri la dosierliston"
+
+#: ../xffm/fm/classes/ecryptfs.hh:12
+#, fuzzy
+msgid   "Plaintext Password"
+msgstr  "Enigu pasvorton"
+
+#: ../xffm/fm/classes/ecryptfs.hh:14
+msgid   "local filesystem"
+msgstr  "loka dosiersistemo"
+
+#: ../xffm/fm/classes/ecryptfs.hh:15
+msgid   "Computer Name:"
+msgstr  "Komputilnomo:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:16
+#, fuzzy
+msgid   "Remote Path"
+msgstr  "Forigi vojon"
+
+#: ../xffm/fm/classes/ecryptfs.hh:17
+msgid   "Mount point:"
+msgstr  "Surmetingo:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:18
+msgid   "URL"
+msgstr  "URL"
+
+#: ../xffm/fm/classes/ecryptfs.hh:19
+#, fuzzy
+msgid   "Enable file monitoring"
+msgstr  "Enŝalti reton"
+
+#: ../xffm/fm/classes/ecryptfs.hh:20
+msgid   "Caution"
+msgstr  "Averto"
+
+#: ../xffm/fm/classes/ecryptfs.hh:21
+msgid   "Username:"
+msgstr  "Uzantonomo:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:22
+#, fuzzy
+msgid   "Secure Shell Key"
+msgstr  "Sekura ŝela servilo"
+
+#: ../xffm/fm/classes/ecryptfs.hh:23
+#, fuzzy
+msgid   "Allow empty private key passphrase"
+msgstr  "Bonvolu tajpi vian salutnomon kaj ŝlosilan pasfrazon."
+
+#: ../xffm/fm/classes/ecryptfs.hh:24
+#, fuzzy
+msgid   "Enter your Secure Shell passphrase:"
+msgstr  "Enigi novan pasfrazon"
+
+#: ../xffm/fm/classes/ecryptfs.hh:44
+msgid   "Read Only Mode"
+msgstr  "Nur-lega reĝimo"
+
+#: ../xffm/fm/classes/ecryptfs.hh:49 ../xffm/find/classes/fgr.hh:131
 #, fuzzy
 msgid   "Verbose output debugging mode."
 msgstr  "Enŝalti sencimigan kodon"
 
-#: ../xffm/find/fgr.hh:133
+#: ../xffm/fm/classes/ecryptfs.hh:54 ../xffm/find/classes/fgr.hh:133
 msgid   "Show version information"
 msgstr  "Montri versioinformon"
 
-#: ../xffm/find/fgr.hh:135
-#, fuzzy
-msgid   "Filter Details"
-msgstr  "Uzantodetaloj"
+#: ../xffm/fm/classes/ecryptfs.hh:59
+msgid   "Overwrite Mode"
+msgstr  "Anstataŭiga reĝimo"
 
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
-#, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Skani dosiersistemon"
-
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Presi..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
+#: ../xffm/fm/classes/ecryptfs.hh:65
+msgid   "Dry run"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+#: ../xffm/fm/classes/ecryptfs.hh:68
+msgid   "Don't actually call the mount system call."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:71
+msgid   "Update file list"
+msgstr  "Aktualigi dosierliston"
+
+#: ../xffm/fm/classes/ecryptfs.hh:75
+msgid   "By default, an entry is created in/etc/mtab for every mounted file "
+        "system.\n"
+        " Use this option to skip making an entry."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:78
+#, fuzzy
+msgid   "Tolerate sloppy options."
+msgstr  "Forigi konservitajn agordojn..."
+
+#: ../xffm/fm/classes/ecryptfs.hh:81
+msgid   "Tolerate sloppy mount options rather than fail."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:85
+msgid   "Show Help"
+msgstr  "Montri la helpon"
+
+#: ../xffm/fm/classes/ecryptfs.hh:99
+#, fuzzy
+msgid   "Cipher algorithm"
+msgstr  "algoritmo"
+
+#: ../xffm/fm/classes/ecryptfs.hh:106
+msgid   "Specify  the keysize to be used with the selected cipher. If the "
+        "cipher only has one keysize the keysize  does  not  need  to  be "
+        "specified.\n"
+        "\n"
+        "\taes: blocksize = 16; min keysize = 16; max keysize = 32\n"
+        "\tblowfish: blocksize = 16; min keysize = 16; max keysize = 56\n"
+        "\tdes3_ede: blocksize = 8; min keysize = 24; max keysize = 24\n"
+        "\tcast6: blocksize = 16; min keysize = 16; max keysize = 32\n"
+        "\tcast5: blocksize = 8; min keysize = 5; max keysize = 16\n"
+        "\t"
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:112
+msgid   "Allows for non-eCryptfs files to be read and written from within an "
+        "eCryptfs mount. This option is turned off by default."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:119
+msgid   "Specify whether filename encryption should be enabled.  If  not, "
+        "the  mount  helper  will  not  prompt  the user for the filename "
+        "encryption key signature.\n"
+        "If you enabled filename encryption then pass an additional mount "
+        "option: ecryptfs_fnek_sig=XY, where XY is the same signature you "
+        "provide with the ecryptfs_sig option."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:123
+msgid   "fekek_sig"
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:125
+msgid   "Specify  the  signature  of the mount wide authentication token. The "
+        "authentication token must be in the  kernel  keyring  before the  "
+        "mount  is performed. \n"
+        "ecryptfs-manager or the eCryptfs mount helper can be used to "
+        "construct the authentication token and add it to the keyring prior "
+        "to mounting."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:130
+msgid   "fnek_sig"
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:132
+msgid   "Specify  the  signature  of  the mount wide authentication token "
+        "used for filename crypto. The authentication must be in the kernel "
+        "keyring before mounting."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:141
+msgid   "Do not check the mount key signature against the values  in  the "
+        "user's  ~/.ecryptfs/sig-cache.txt  file. This is useful for such "
+        "things as non-interactive  setup  scripts,  so  that  the  mount "
+        "helper  does  not stop and prompt the user in the event that the key "
+        "sig is not in the cache."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:148
+msgid   "This option provides a unified  encrypted  file  format  of  the "
+        "eCryptfs  files in the lower mount point.  Currently, it is only "
+        "useful if the lower mount point contains files with the metadata "
+        "stored in the extended attribute.  Upon a file read in the upper "
+        "mount point, the encrypted version of the file will be presented "
+        "with  the  metadata  in  the  file  header instead of the xattr.  "
+        "Files cannot be opened for writing when this option is enabled."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:155
+msgid   "Store the metadata in the extended attribute of the lower  files "
+        "rather than the header region of the lower files."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:162
+msgid   "Log  ecryptfs  information  to  /var/log/messages.   Do  not run "
+        "eCryptfs in verbose-mode unless you are doing so  for  the  sole "
+        "purpose  of development, since secret values will be written out to "
+        "the system log in that case."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:170
+msgid   "If verbosity=1, the mount helper will ask you for missing values "
+        "(default).  Otherwise, if verbosity=0, it will not ask for missing "
+        "values and will fail if required values are omitted.  "
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:175
+msgid   "Passphrase"
+msgstr  "Pasfrazo"
+
+#: ../xffm/fm/classes/ecryptfs.hh:177
+msgid   "The actual password is passphrase. Since the password is visible to "
+        "utilities (like ps under Unix) this form should only be  used where "
+        "security is not important."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:182 ../xffm/fm/classes/ecryptfs.hh:203
+#: ../xffm/fm/classes/ecryptfs.hh:212
+msgid   "filename"
+msgstr  "dosiernomo"
+
+#: ../xffm/fm/classes/ecryptfs.hh:184
+msgid   "The    password   should   be   specified   in   a   file   with "
+        "passwd=(passphrase). It is highly reccomended that the  file  be "
+        "stored on a secure medium such as a personal usb key."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:191 ../xffm/fm/classes/ecryptfs.hh:220
+msgid   "The password is specified through the specified file descriptor."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:198
+msgid   "The salt should be specified as a 16 digit hex value.  "
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:205 ../xffm/fm/classes/ecryptfs.hh:214
+msgid   "The   password   should   be   specified   in   a   file    with "
+        "openssl_passwd=(openssl-password). It is highly reccomended that the "
+        "file be stored on a secure medium such  as  a  personal  usb key."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:218
+#, fuzzy
+msgid   "File descriptor"
+msgstr  "MALBONA priskribanto de dosiero"
+
+#: ../xffm/fm/classes/ecryptfs.hh:224
+msgid   "password"
+msgstr  "pasvorto"
+
+#: ../xffm/fm/classes/ecryptfs.hh:226
+msgid   "The  password  can  be  specified on the command line. Since the "
+        "password is visible in the process list,  it  is  highly  "
+        "recommended to use this option only for testing purposes."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
+#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/response/templates/mountresponse.hh:151
+#: ../xffm/response/templates/efsresponse.hh:138
+msgid   "Mount"
+msgstr  "Surmeti"
+
+#: ../xffm/fm/classes/ecryptfs.hh:392
+#: ../xffm/response/templates/efsresponse.hh:181
+msgid   "Save"
+msgstr  "Konservi"
+
+#: ../xffm/fm/classes/ecryptfs.hh:612
+#: ../xffm/response/templates/efsresponse.hh:160
+#: ../xffm/find/templates/findresponse.hh:275
+#: ../xffm/find/templates/findresponse.hh:561
+#: ../xffm/find/templates/findresponse.hh:594
+msgid   "Options"
+msgstr  "Agordoj"
+
+#: ../xffm/fm/classes/ecryptfs.hh:613
+#: ../xffm/response/templates/efsresponse.hh:166
+msgid   "Advanced"
+msgstr  "Altnivele"
+
+#: ../xffm/fm/classes/ecryptfs.hh:928
+#, c-format
+msgid   "Mounting %s"
+msgstr  "Kroĉante %s"
+
+#: ../xffm/fm/classes/ecryptfs.hh:986
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Enigi pasfrazon por '%s'"
+
+#: ../xffm/response/templates/mountresponse.hh:115
+#: ../xffm/response/templates/mountresponse.hh:168
+msgid   "Mount Device"
+msgstr  "Kroĉu diskon"
+
+#: ../xffm/response/templates/mountresponse.hh:128
+#: ../xffm/response/templates/efsresponse.hh:141
+#: ../xffm/response/templates/efsresponse.hh:146
+#: ../xffm/response/templates/efsresponse.hh:484
+#: ../xffm/response/templates/efsresponse.hh:490
+msgid   "Mount Point"
+msgstr  "Surmetingo"
+
+#: ../xffm/response/templates/mountresponse.hh:244
+#, fuzzy, c-format
+msgid   "Cannot create directory '%s'"
+msgstr  "Ne eblas krei dosierujon: %s"
+
+#: ../xffm/response/templates/mountresponse.hh:245
+#: ../xffm/response/templates/mkdirresponse.hh:70
+msgid   "Sorry"
+msgstr  "Pardonu"
+
+#: ../xffm/response/templates/fileresponse.hh:37
+msgid   "Select Directory"
+msgstr  "Elekti dosierujon"
+
+#: ../xffm/response/templates/fileresponse.hh:136
+#: ../xffm/response/templates/fileresponse.hh:267
+#: ../xffm/response/templates/fileresponse.hh:355
+#, fuzzy
+msgid   "No folder selected."
+msgstr  "Neniu filtrilo estas elektita"
+
+#: ../xffm/response/templates/fileresponse.hh:239
+#: ../xffm/response/classes/inforesponse.hh:6
+msgid   "Information"
+msgstr  "Informo"
+
+#: ../xffm/response/templates/fileresponse.hh:263
+msgid   "Selection:"
+msgstr  "Elektaĵo:"
+
+#: ../xffm/response/templates/fileresponse.hh:317
+#: ../xffm/response/templates/mkdirresponse.hh:22
+msgid   "New Folder"
+msgstr  "Nova dosierujo"
+
+#: ../xffm/response/templates/fileresponse.hh:321
+msgid   "Accept"
+msgstr  "Akcepti"
+
+#: ../xffm/response/templates/fileresponse.hh:500
+msgid   "New folder name:"
+msgstr  "Nova dosieruja nomo:"
+
+#: ../xffm/response/templates/fileresponse.hh:504
+msgid   "New Directory"
+msgstr  "Nova dosierujo"
+
+#: ../xffm/response/templates/fileresponse.hh:504
+msgid   "Create in folder:"
+msgstr  "Krei en dosierujo:"
+
+#: ../xffm/response/templates/openwith.hh:121
+msgid   "Open With..."
+msgstr  "Malfermi per..."
+
+#: ../xffm/response/templates/openwith.hh:198
+msgid   "Is executable"
+msgstr  "Estas plenumebla"
+
+#: ../xffm/response/templates/openwith.hh:204
+msgid   "Execute"
+msgstr  "Lanĉi"
+
+#: ../xffm/response/templates/openwith.hh:249
+#: ../xffm/response/templates/dialogbasic.hh:312
+#: ../xffm/response/templates/bfishresponse.hh:173
+msgid   "Apply"
+msgstr  "Apliki"
+
+#: ../xffm/response/templates/openwith.hh:257
+msgid   "By default applications will be run in the background and only their "
+        "output will be displayed in a toolview. This makes it impossible to "
+        "interact with applications requiring user input from a terminal "
+        "emulator. To run such applications, you should use an external "
+        "terminal."
+msgstr  ""
+
+#: ../xffm/response/templates/openwith.hh:272
+#, fuzzy
+msgid   "Use External Terminal:"
+msgstr  "Uzi eksteran ludilon"
+
+#: ../xffm/response/templates/openwith.hh:335
+#, fuzzy, c-format
+msgid   "Cannot find executable for \"%s\""
+msgstr  "Ne eblis forigi dosierujon \"%s\"."
+
+#: ../xffm/response/templates/tarresponse.hh:13
+msgid   "GZip"
+msgstr  ""
+
+#: ../xffm/response/templates/tarresponse.hh:13
+msgid   "BZip2"
+msgstr  ""
+
+#: ../xffm/response/templates/tarresponse.hh:13
+#, fuzzy
+msgid   "XZ"
+msgstr  "XYZ"
+
+#: ../xffm/response/templates/tarresponse.hh:13
+#, fuzzy
+msgid   "Zip"
+msgstr  "ip"
+
+#: ../xffm/response/templates/tarresponse.hh:20
+#, fuzzy
+msgid   "Compressed file..."
+msgstr  "Kunpremita dosiero"
+
+#: ../xffm/response/templates/efsresponse.hh:141
+#: ../xffm/response/templates/efsresponse.hh:484
+msgid   "Encrypted"
+msgstr  "Ĉifrite"
+
+#: ../xffm/response/templates/efsresponse.hh:146
+#: ../xffm/response/templates/efsresponse.hh:490
+msgid   "Unencrypted"
+msgstr  "Neĉifrite"
+
+#: ../xffm/response/templates/efsresponse.hh:485
+#: ../xffm/response/templates/efsresponse.hh:491
+msgid   "Folder does not exist"
+msgstr  "Mesaĝujo ne ekzistas"
+
+#: ../xffm/response/templates/dialogdrop.hh:45
+msgid   "Copying"
+msgstr  "Kopiante"
+
+#: ../xffm/response/templates/dialogdrop.hh:45
+msgid   "Moving"
+msgstr  "Movanta"
+
+#: ../xffm/response/templates/dialogdrop.hh:48
+msgid   "Completed"
+msgstr  "Plenumite"
+
+#: ../xffm/response/templates/mkdirresponse.hh:20
+#: ../xffm/response/classes/wsresponse.hh:11
+#: ../xffm/response/classes/lnresponse.hh:10
+#: ../xffm/response/classes/cpresponse.hh:11
+#: ../xffm/response/classes/mvresponse.hh:9
+#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
+msgid   "Path"
+msgstr  "Vojo"
+
+#: ../xffm/response/templates/mkdirresponse.hh:68
+#, c-format
+msgid   "Cannot create folder '%s': %s"
+msgstr  "Ne eblas krei dosierujon '%s': %s"
+
+#: ../xffm/response/templates/bfish.hh:14
+#, fuzzy
+msgid   "Sorry, file not found"
+msgstr  "Tipara dosiero ne troviĝis"
+
+#: ../xffm/response/templates/bfishresponse.hh:93
+msgid   "Encrypt:"
+msgstr  "Ĉifri:"
+
+#: ../xffm/response/templates/bfishresponse.hh:109
+#, fuzzy
+msgid   "Writes text on standard output."
+msgstr  "ĉefeligujo"
+
+#: ../xffm/response/templates/bfishresponse.hh:131
+msgid   "Password:"
+msgstr  "Pasvorto:"
+
+#: ../xffm/response/templates/bfishresponse.hh:133
+msgid   "Confirm password:"
+msgstr  "Konfirmi pasvorton:"
+
+#: ../xffm/response/templates/bfishresponse.hh:154
+msgid   "Passwords do not match."
+msgstr  "Pasvortoj ne kongruas."
+
+#: ../xffm/response/templates/bfishresponse.hh:188
+msgid   "bcrypt (blowfish encryption)"
+msgstr  ""
+
+#: ../xffm/response/templates/bfishresponse.hh:195
+#, fuzzy
+msgid   "User cancelled."
+msgstr  "Operacio haltigita"
+
+#: ../xffm/response/templates/bfishresponse.hh:215
+#, fuzzy
+msgid   "No password set"
+msgstr  "Neniu pasvorto provizita"
+
+#: ../xffm/response/templates/bfishresponse.hh:220
+#, fuzzy
+msgid   "Passwords Do Not Match"
+msgstr  "La pasvortoj ne kongruas"
+
+#: ../xffm/response/templates/jumpresponse.hh:23
+#, fuzzy
+msgid   "The location does not exist."
+msgstr  "La loko \"%s\" ne ekzistas."
+
+#: ../xffm/response/dialogs.hh:68
+#, c-format
+msgid   "Delete '%s'"
+msgstr  "Forigi '%s'"
+
+#: ../xffm/response/classes/rmlistresponse.hh:17
+#: ../xffm/response/classes/rmresponse.hh:17
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/response/classes/rmlistresponse.hh:19
+#: ../xffm/response/classes/rmresponse.hh:19
+msgid   "Trash"
+msgstr  "Rubujo"
+
+#: ../xffm/response/classes/rmlistresponse.hh:26
+#, fuzzy
+msgid   "WARNING"
+msgstr  "AVERTO:"
+
+#: ../xffm/response/classes/rmlistresponse.hh:30
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Alinomi elektitan dosieron aŭ dosierujon"
+
+#: ../xffm/response/classes/envresponse.hh:90
+#, fuzzy
+msgid   "Environment variables"
+msgstr  "Ĉirkaŭaĵa variabloj:"
+
+#: ../xffm/response/classes/envresponse.hh:122
+msgid   "No changes need to be saved"
+msgstr  "Neniuj ŝanĝoj estas konservendaj"
+
+#: ../xffm/response/classes/envresponse.hh:217
+#, fuzzy
+msgid   "Environment Variable"
+msgstr  "Ĉirkaŭaĵa variabloj:"
+
+#: ../xffm/response/classes/progressbar.hh:70
+msgid   "Cancelled"
+msgstr  "Nuligite"
+
+#: ../xffm/response/classes/progressbar.hh:70
+#, fuzzy
+msgid   "Idle Timeout"
+msgstr  "Tempolimo"
+
+#: ../xffm/response/classes/wsresponse.hh:13
+msgid   "Workspace Switcher"
+msgstr  "Laborspaco-ŝaltilo"
+
+#: ../xffm/response/classes/wsresponse.hh:36
+#: ../xffm/menus/templates/menucallbacks.hh:130
+#, fuzzy, c-format
+msgid   "Workspace %s"
+msgstr  "Laborspaco %s%d"
+
+#: ../xffm/response/classes/wsresponse.hh:37
+#: ../xffm/menus/templates/menucallbacks.hh:131
+msgid   "does not exist"
+msgstr  "ne ekzistas"
+
+#: ../xffm/response/classes/dndresponse.hh:13
+#, fuzzy
+msgid   "Drop Target"
+msgstr  "Forigendaj celoj:"
+
+#: ../xffm/response/classes/dndresponse.hh:21
+msgid   "Move"
+msgstr  "Movi"
+
+#: ../xffm/response/classes/lnresponse.hh:12
+#: ../xffm/response/classes/lnresponse.hh:21
+#, fuzzy
+msgid   "symlink"
+msgstr  "ligilo"
+
+#: ../xffm/response/classes/cpresponse.hh:42
+msgid   "Copy files"
+msgstr  "Kopii dosierojn"
+
+#: ../xffm/response/classes/cpresponse.hh:127
+msgid   "copy"
+msgstr  "kopio"
+
+#: ../xffm/response/classes/cpresponse.hh:129
+msgid   "move"
+msgstr  "movi"
+
+#: ../xffm/response/classes/cpresponse.hh:131
+msgid   "link"
+msgstr  "ligilo"
+
+#: ../xffm/response/classes/cpresponse.hh:134
+#, fuzzy
+msgid   "Operation completed"
+msgstr  "Parto finita"
+
+#: ../xffm/response/classes/passwdresponse.hh:9
+msgid   "Security"
+msgstr  "Sekureco"
+
+#: ../xffm/mime/mimemagic.hh:69 ../xffm/mime/mimemagic.hh:113
+msgid   "No Read Permission"
+msgstr  "Ne rajtas legi"
+
+#: ../xffm/find/templates/findresponse.hh:111
+msgid   "Find files"
+msgstr  "Serĉi doserojn"
+
+#: ../xffm/find/templates/findresponse.hh:278
+#: ../xffm/find/templates/findresponse.hh:780
+msgid   "Advanced options"
+msgstr  "Specialaj agordoj"
+
+#: ../xffm/find/templates/findresponse.hh:286
+msgid   "Find in Files"
+msgstr  "Serĉi en dosieroj"
+
+#: ../xffm/find/templates/findresponse.hh:290
+#: ../xffm/find/templates/findresponse.hh:312
+#, fuzzy
+msgid   "Cancel Operation"
+msgstr  "Bildaj operacioj"
+
+#: ../xffm/find/templates/findresponse.hh:307
+#, fuzzy
+msgid   "Show search results for this query"
+msgstr  "Serĉrezultoj por “%s”"
+
+#: ../xffm/find/templates/findresponse.hh:323
+#: ../xffm/find/templates/findresponse.hh:327
+msgid   "Clear search"
+msgstr  "Vakigi ŝerĉon"
+
+#: ../xffm/find/templates/findresponse.hh:503
+msgid   "Show help"
+msgstr  "Montri helpon"
+
+#: ../xffm/find/templates/findresponse.hh:532
+msgid   "Case Sensitive"
+msgstr  "Usklecodistinge"
+
+#: ../xffm/find/templates/findresponse.hh:533
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Pliige forigi spacetojn"
+
+#: ../xffm/find/templates/findresponse.hh:534
+msgid   "Include binary files"
+msgstr  "Inkluzivi duumajn dosierojn"
+
+#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
+msgid   "Line Count"
+msgstr  "Montri nombron de linioj"
+
+#: ../xffm/find/templates/findresponse.hh:544
+#, fuzzy
+msgid   "Anywhere"
+msgstr  "Kie"
+
+#: ../xffm/find/templates/findresponse.hh:545
+msgid   "Whole words only"
+msgstr  "Nur tutvorte"
+
+#: ../xffm/find/templates/findresponse.hh:546
+msgid   "lines"
+msgstr  "linioj"
+
+#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
+msgid   "No match"
+msgstr  "Neniu trafo"
+
+#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Filtrilo:"
+
+#: ../xffm/find/templates/findresponse.hh:577
+#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Rekursia"
+
+#: ../xffm/find/templates/findresponse.hh:578
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
 #, fuzzy
 msgid   "Find hidden files and directories"
 msgstr  "Dosieroj kaj Dosierujoj"
 
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Filtrilo"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
-msgid   "Recursive"
-msgstr  "Rekursia"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "Kilobajto"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "estas pli grande ol aŭ egale"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "estas pli malgrande ol aŭ egale"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "Lanĉo kiel posedanto (SUID)"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Executable Text Files"
-msgstr  "Plenumeblaj tekstdosieroj"
-
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "La permesoj de la dosiero, okume."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Tipo"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Iu ajn"
-
-#: ../xffm/find/fgr.hh:157
-msgid   "Default type"
-msgstr  "Defaŭlta tipo"
-
-#: ../xffm/find/fgr.hh:161
-msgid   "UNIX Socket"
-msgstr  "Unikskontaktilo"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
-msgid   "Minutes"
-msgstr  "Minutoj"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-msgid   "TIME"
-msgstr  "Ensalutis"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
-msgid   "Hours"
-msgstr  "Horoj"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
-msgid   "Days"
-msgstr  "Tagoj"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Monato"
-
-#: ../xffm/find/fgr.hh:177
+#: ../xffm/find/templates/findresponse.hh:580
+#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
 #, fuzzy
-msgid   "Month(s)"
-msgstr  "monato(j)"
+msgid   "Stay on single filesystem"
+msgstr  "Skani dosiersistemon"
 
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "Dato de modifo"
+#: ../xffm/find/templates/findresponse.hh:582
+msgid   "Upper limit"
+msgstr  "Supra limo"
 
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "Atingite:"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "Dato de kreo"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-msgid   "uid"
-msgstr  "uid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Uzanto:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-msgid   "gid"
-msgstr  "gid"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Grupo:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "Enhava vido"
-
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "SIGNOĈENO"
-
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "Etendite"
-
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "Ignori usklecon"
-
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Tekstdosieroj"
-
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
-msgid   "No match"
-msgstr  "Neniu trafo"
-
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
-msgid   "Line Count"
-msgstr  "Montri nombron de linioj"
-
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Vortoj"
-
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Linioj"
-
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Uzmaniero:  %s [OPCIO]\n"
-
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "Regula"
-
-#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/templates/findresponse.hh:583
+#: ../xffm/find/templates/findsignals.hh:508
 msgid   "Results"
 msgstr  "Rezultoj"
 
-#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#: ../xffm/find/templates/findresponse.hh:602
+#, fuzzy
+msgid   "Contains the text"
+msgstr  "Enhavas tekston:"
+
+#: ../xffm/find/templates/findresponse.hh:667
+#: ../xffm/find/templates/findsignals.hh:318
+msgid   "File size"
+msgstr  "Dosiergrando"
+
+#: ../xffm/find/templates/findresponse.hh:680
+msgid   "At Least"
+msgstr  "Almenaŭ"
+
+#: ../xffm/find/templates/findresponse.hh:680
+#: ../xffm/find/templates/findresponse.hh:687
+msgid   "kBytes"
+msgstr  "kBajtoj"
+
+#: ../xffm/find/templates/findresponse.hh:687
+msgid   "At Most"
+msgstr  "Maksimume"
+
+#: ../xffm/find/templates/findresponse.hh:695
+#: ../xffm/find/templates/findsignals.hh:324
+msgid   "Specific Time"
+msgstr  "Specifa tempo"
+
+#: ../xffm/find/templates/findresponse.hh:705
+msgid   "Modified"
+msgstr  "Modifite"
+
+#: ../xffm/find/templates/findresponse.hh:705
+msgid   "Created"
+msgstr  "Kreite"
+
+#: ../xffm/find/templates/findresponse.hh:705
+#, fuzzy
+msgid   "Accessed"
+msgstr  "Atingite:"
+
+#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/classes/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Minutoj"
+
+#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/classes/fgr.hh:171
+msgid   "Hours"
+msgstr  "Horoj"
+
+#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/classes/fgr.hh:174
+msgid   "Days"
+msgstr  "Tagoj"
+
+#: ../xffm/find/templates/findresponse.hh:718
+msgid   "Months"
+msgstr  "Monatoj"
+
+#: ../xffm/find/templates/findresponse.hh:729
+#: ../xffm/find/templates/findsignals.hh:329
+msgid   "File properties"
+msgstr  "Dosieratributoj"
+
+#: ../xffm/find/templates/findresponse.hh:748
+msgid   "Group"
+msgstr  "Grupo"
+
+#: ../xffm/find/templates/findresponse.hh:753
+#: ../xffm/find/templates/findsignals.hh:175
+msgid   "Octal Permissions"
+msgstr  "Okumaj permesoj"
+
+#: ../xffm/find/templates/findresponse.hh:760
+#: ../xffm/find/templates/findresponse.hh:761
+#: ../xffm/find/templates/findsignals.hh:161
+#: ../xffm/find/templates/findsignals.hh:167
+#, fuzzy
+msgid   "Executable"
+msgstr  "Plenumeblaĵo:"
+
+#: ../xffm/find/templates/findresponse.hh:760
+#: ../xffm/find/templates/findresponse.hh:765
+#: ../xffm/find/templates/findsignals.hh:164
+msgid   "SUID"
+msgstr  "SUID"
+
+#: ../xffm/find/templates/findresponse.hh:801
+#, fuzzy
+msgid   "File type : "
+msgstr  "Dosier-tipo:"
+
+#: ../xffm/find/templates/findsignals.hh:86
+msgid   "Searching..."
+msgstr  "Serĉante..."
+
+#: ../xffm/find/templates/findsignals.hh:441
+#: ../xffm/find/templates/dndbox.hh:65
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "Neniu aktuala ago."
 
-#: ../xffm/find/signals.hh:501
+#: ../xffm/find/templates/findsignals.hh:508
 msgid   "Upper limit:"
 msgstr  "Supra limo:"
 
-#: ../xffm/find/signals.hh:503
+#: ../xffm/find/templates/findsignals.hh:511
 msgid   "Counting files..."
 msgstr  "Nombrante dosierojn..."
 
-#: ../xffm/find/signals.hh:518
+#: ../xffm/find/templates/findsignals.hh:519
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       ""
 msgstr[1]       ""
 
-#: ../xffm/find/signals.hh:520
+#: ../xffm/find/templates/findsignals.hh:521
 #, fuzzy, c-format
 msgid   "%s Finished : %s"
 msgstr  "%s [Plenumita]"
 
-#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
-msgid   "Searching..."
-msgstr  "Serĉante..."
-
-#: ../xffm/find/dialog.hh:106
-msgid   "Find"
-msgstr  "Serĉi"
-
-#: ../xffm/find/dialog.hh:131
+#: ../xffm/find/templates/dndbox.hh:126
 #, fuzzy
-msgid   "Close find"
-msgstr  "Fermi la fenestron"
+msgid   "Edit all"
+msgstr  "Redakti fakturon"
 
-#: ../xffm/find/dialog.hh:146
+#: ../xffm/find/templates/dndbox.hh:139
+#, fuzzy, c-format
+msgid   "Search results for %s"
+msgstr  "Serĉrezultoj por '%s':"
+
+#: ../xffm/find/templates/dndbox.hh:259
+msgid   "Search results"
+msgstr  "Serĉaj rezultoj"
+
+#: ../xffm/find/classes/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  "Trovi dokumentojn kaj dosierujojn en ĉi tiu komputilo laŭ nomo aŭ "
+        "enhavo"
+
+#: ../xffm/find/classes/fgr.hh:126
+msgid   "Search for files"
+msgstr  "Serĉi dosierojn"
+
+#: ../xffm/find/classes/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Enhavo:"
+
+#: ../xffm/find/classes/fgr.hh:128
 #, fuzzy
-msgid   "Find Files"
-msgstr  "Serĉi doserojn"
+msgid   "File's contents filtered as plain text."
+msgstr  "Ĉu konservi en plata teksta formo"
 
-#: ../xffm/find/dialog.hh:209
+#: ../xffm/find/classes/fgr.hh:135
 #, fuzzy
-msgid   "Select advanced options"
-msgstr  "Elektu opcion"
+msgid   "Filter Details"
+msgstr  "Uzantodetaloj"
 
-#: ../xffm/find/dialog.hh:245
-msgid   "Upper limit"
-msgstr  "Supra limo"
+#: ../xffm/find/classes/fgr.hh:140
+msgid   "Print..."
+msgstr  "Presi..."
 
-#: ../xffm/find/dialog.hh:250
-msgid   "At Least"
-msgstr  "Almenaŭ"
+#: ../xffm/find/classes/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
 
-#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
-msgid   "kBytes"
-msgstr  "kBajtoj"
+#: ../xffm/find/classes/fgr.hh:143
+msgid   "Filter"
+msgstr  "Filtrilo"
 
-#: ../xffm/find/dialog.hh:255
-msgid   "At Most"
-msgstr  "Maksimume"
+#: ../xffm/find/classes/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
 
-#: ../xffm/find/dialog.hh:266
-msgid   "Group"
-msgstr  "Grupo"
+#: ../xffm/find/classes/fgr.hh:147 ../xffm/find/classes/fgr.hh:148
+#: ../xffm/find/classes/fgr.hh:149 ../xffm/find/classes/fgr.hh:150
+msgid   "KByte"
+msgstr  "Kilobajto"
 
-#: ../xffm/find/dialog.hh:270
-msgid   "Octal Permissions"
-msgstr  "Okumaj permesoj"
+#: ../xffm/find/classes/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "estas pli grande ol aŭ egale"
 
-#: ../xffm/find/dialog.hh:275
-msgid   "SUID"
-msgstr  "SUID"
+#: ../xffm/find/classes/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "estas pli malgrande ol aŭ egale"
 
-#: ../xffm/find/dialog.hh:299
-msgid   "Months"
-msgstr  "Monatoj"
+#: ../xffm/find/classes/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Lanĉo kiel posedanto (SUID)"
 
-#: ../xffm/find/dialog.hh:309
+#: ../xffm/find/classes/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  "Plenumeblaj tekstdosieroj"
+
+#: ../xffm/find/classes/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "La permesoj de la dosiero, okume."
+
+#: ../xffm/find/classes/fgr.hh:155
+msgid   "Type"
+msgstr  "Tipo"
+
+#: ../xffm/find/classes/fgr.hh:157 ../xffm/find/classes/ffunctions.hh:16
+msgid   "Any"
+msgstr  "Iu ajn"
+
+#: ../xffm/find/classes/fgr.hh:157
+msgid   "Default type"
+msgstr  "Defaŭlta tipo"
+
+#: ../xffm/find/classes/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "Unikskontaktilo"
+
+#: ../xffm/find/classes/fgr.hh:167 ../xffm/find/classes/fgr.hh:170
+#: ../xffm/find/classes/fgr.hh:173 ../xffm/find/classes/fgr.hh:176
+msgid   "Details"
+msgstr  "Detaloj"
+
+#: ../xffm/find/classes/fgr.hh:167 ../xffm/find/classes/fgr.hh:170
+#: ../xffm/find/classes/fgr.hh:173 ../xffm/find/classes/fgr.hh:176
+#: ../xffm/find/classes/fgr.hh:179 ../xffm/find/classes/fgr.hh:180
+#: ../xffm/find/classes/fgr.hh:183 ../xffm/find/classes/fgr.hh:184
+#: ../xffm/find/classes/fgr.hh:187 ../xffm/find/classes/fgr.hh:188
+msgid   "TIME"
+msgstr  "Ensalutis"
+
+#: ../xffm/find/classes/fgr.hh:175
+msgid   "Month"
+msgstr  "Monato"
+
+#: ../xffm/find/classes/fgr.hh:177
 #, fuzzy
-msgid   "File type : "
-msgstr  "Dosier-tipo:"
+msgid   "Month(s)"
+msgstr  "monato(j)"
 
-#: ../xffm/find/dialog.hh:355
-msgid   "Display file selection dialog"
-msgstr  "Montri dosierelekt-dialogon"
-
-#: ../xffm/find/dialog.hh:414
+#: ../xffm/find/classes/fgr.hh:180
 #, fuzzy
-msgid   "Contains the text"
-msgstr  "Enhavas tekston:"
+msgid   "Modification Time :"
+msgstr  "Dato de modifo"
 
-#: ../xffm/find/dialog.hh:444
-msgid   "Case Sensitive"
-msgstr  "Usklecodistinge"
-
-#: ../xffm/find/dialog.hh:445
+#: ../xffm/find/classes/fgr.hh:184
 #, fuzzy
-msgid   "Extended regexp"
-msgstr  "Pliige forigi spacetojn"
-
-#: ../xffm/find/dialog.hh:446
-msgid   "Include binary files"
-msgstr  "Inkluzivi duumajn dosierojn"
-
-#: ../xffm/find/dialog.hh:455
-#, fuzzy
-msgid   "Anywhere"
-msgstr  "Kie"
-
-#: ../xffm/find/dialog.hh:456
-msgid   "Whole words only"
-msgstr  "Nur tutvorte"
-
-#: ../xffm/find/dialog.hh:457
-msgid   "lines"
-msgstr  "linioj"
-
-#: ../xffm/find/dialog.hh:680
-msgid   "Modified"
-msgstr  "Modifite"
-
-#: ../xffm/find/dialog.hh:684
-msgid   "Created"
-msgstr  "Kreite"
-
-#: ../xffm/find/dialog.hh:688
-#, fuzzy
-msgid   "Accessed"
+msgid   "Access Time :"
 msgstr  "Atingite:"
 
-#: ../xffm/find/dialog.hh:1006
+#: ../xffm/find/classes/fgr.hh:188
 #, fuzzy
-msgid   "Close find\n"
-        "\n"
-msgstr  "Fermi la fenestron"
+msgid   "Creation Time :"
+msgstr  "Dato de kreo"
 
-#: ../xffm/find/dialog.hh:1010
+#: ../xffm/find/classes/fgr.hh:191 ../xffm/find/classes/fgr.hh:192
+msgid   "uid"
+msgstr  "uid"
+
+#: ../xffm/find/classes/fgr.hh:192
+msgid   "User:"
+msgstr  "Uzanto:"
+
+#: ../xffm/find/classes/fgr.hh:194 ../xffm/find/classes/fgr.hh:195
+msgid   "gid"
+msgstr  "gid"
+
+#: ../xffm/find/classes/fgr.hh:195
+msgid   "Group:"
+msgstr  "Grupo:"
+
+#: ../xffm/find/classes/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/classes/fgr.hh:200
+msgid   "Content View"
+msgstr  "Enhava vido"
+
+#: ../xffm/find/classes/fgr.hh:201 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:203 ../xffm/find/classes/fgr.hh:204
+msgid   "STRING"
+msgstr  "SIGNOĈENO"
+
+#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "Regula esprimo"
+
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Extended"
+msgstr  "Etendite"
+
+#: ../xffm/find/classes/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Ignori usklecon"
+
+#: ../xffm/find/classes/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Tekstdosieroj"
+
+#: ../xffm/find/classes/fgr.hh:214
+msgid   "Words"
+msgstr  "Vortoj"
+
+#: ../xffm/find/classes/fgr.hh:216
+msgid   "Lines"
+msgstr  "Linioj"
+
+#: ../xffm/find/classes/fgr.hh:364
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Uzmaniero:  %s [OPCIO]\n"
+
+#: ../xffm/find/classes/ffunctions.hh:9
+msgid   "Regular"
+msgstr  "Regula"
+
+#: ../xffm/find/classes/ffunctions.hh:42
 msgid   "Basic rules:\n"
         "\n"
         "*  Will match any character zero or more times.\n"
@@ -1545,7 +1875,7 @@ msgid   "Basic rules:\n"
         "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:1019
+#: ../xffm/find/classes/ffunctions.hh:51
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
@@ -1582,4 +1912,107 @@ msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "\n"
         "More information is available by typing \"man grep\"\n"
 msgstr  ""
+
+#: ../xffm/menus/templates/pathbarmenu.hh:12
+#: ../xffm/menus/templates/pathbarmenu.hh:23
+#: ../xffm/menus/templates/pathbarmenu.hh:34
+#: ../xffm/menus/templates/pathbarmenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:18
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:89
+msgid   "Open in New Window"
+msgstr  "Malfermi en nova fenestro"
+
+#: ../xffm/menus/templates/pathbarmenu.hh:14
+#: ../xffm/menus/templates/pathbarmenu.hh:26
+#: ../xffm/menus/templates/pathbarmenu.hh:37
+#: ../xffm/menus/templates/pathbarmenu.hh:49
+#: ../xffm/menus/templates/inputMenu.hh:19
+#: ../xffm/menus/templates/inputMenu.hh:50
+#: ../xffm/menus/templates/outputMenu.hh:16
+#: ../xffm/menus/templates/outputMenu.hh:29
+#: ../xffm/menus/templates/outputMenu.hh:42
+#: ../xffm/menus/templates/outputMenu.hh:55
+#: ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
+#, fuzzy
+msgid   "Show Clipboard"
+msgstr  "Enpoŝigu"
+
+#: ../xffm/menus/templates/inputMenu.hh:16
+#: ../xffm/menus/templates/inputMenu.hh:32
+#: ../xffm/menus/templates/inputMenu.hh:47
+#: ../xffm/menus/templates/inputMenu.hh:63
+#: ../xffm/menus/templates/outputMenu.hh:13
+#: ../xffm/menus/templates/outputMenu.hh:26
+#: ../xffm/menus/templates/outputMenu.hh:39
+#: ../xffm/menus/templates/outputMenu.hh:52
+#: ../xffm/menus/templates/iconColorMenu.hh:10
+#: ../xffm/menus/templates/iconColorMenu.hh:19
+#: ../xffm/menus/templates/iconColorMenu.hh:28
+#: ../xffm/menus/templates/iconColorMenu.hh:37
+msgid   "Foreground color"
+msgstr  "Malfona koloro"
+
+#: ../xffm/menus/templates/inputMenu.hh:17
+#: ../xffm/menus/templates/inputMenu.hh:33
+#: ../xffm/menus/templates/inputMenu.hh:48
+#: ../xffm/menus/templates/inputMenu.hh:64
+#: ../xffm/menus/templates/outputMenu.hh:14
+#: ../xffm/menus/templates/outputMenu.hh:27
+#: ../xffm/menus/templates/outputMenu.hh:40
+#: ../xffm/menus/templates/outputMenu.hh:53
+#: ../xffm/menus/templates/iconColorMenu.hh:11
+#: ../xffm/menus/templates/iconColorMenu.hh:20
+#: ../xffm/menus/templates/iconColorMenu.hh:29
+#: ../xffm/menus/templates/iconColorMenu.hh:38
+msgid   "Background color"
+msgstr  "Fona koloro"
+
+#: ../xffm/menus/templates/inputMenu.hh:18
+#: ../xffm/menus/templates/inputMenu.hh:34
+#: ../xffm/menus/templates/inputMenu.hh:49
+#: ../xffm/menus/templates/inputMenu.hh:65
+#: ../xffm/menus/templates/outputMenu.hh:15
+#: ../xffm/menus/templates/outputMenu.hh:41
+#: ../xffm/menus/templates/outputMenu.hh:54
+#: ../xffm/menus/templates/iconColorMenu.hh:12
+#: ../xffm/menus/templates/iconColorMenu.hh:21
+#: ../xffm/menus/templates/iconColorMenu.hh:30
+#: ../xffm/menus/templates/iconColorMenu.hh:39
+msgid   "Default Colors"
+msgstr  "Defaŭltaj koloroj"
+
+#: ../xffm/menus/templates/outputMenu.hh:28
+msgid   "Default Color"
+msgstr  "Defaŭlta koloro"
+
+#: ../xffm/menus/templates/mainMenu.hh:13
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:90
+msgid   "Environment"
+msgstr  "Ĉirkaŭaĵo"
+
+#: ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:68
+#: ../xffm/menus/templates/mainMenu.hh:94
+msgid   "Exit"
+msgstr  "Eliri"
+
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:79
+#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/gridviewmenu.hh:81
+#, fuzzy
+msgid   "Toggle Text Mode"
+msgstr  "Baskuligi tekstkursoran navigadon"
+
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:93
+msgid   "Clear Clipboard History"
+msgstr  "Forviŝi poŝohistorion"
+
+#: ../xffm/menus/templates/mainMenu.hh:199
+msgid   "menu"
+msgstr  "menuo"
 

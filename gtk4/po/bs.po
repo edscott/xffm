@@ -1,12 +1,15 @@
-# Xffm+ translation file: jue 18 jul 2024 12:34:32 CST
+# Xffm4 translation file: lun 09 jun 2025 17:06:59 CST
 # Merged from existing open source files
-# http://xffm.org
+# http://xffm.sf.net
 #
-#
+#: ../xffm/fm/classes/ecryptfs.hh:189
+#: ../xffm/response/classes/envresponse.hh:92
+#: ../xffm/response/classes/cpresponse.hh:44
+#, fuzzy
 msgid   ""
-msgstr  "Project-Id-Version: xffm+\n"
+msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
+        "POT-Creation-Date: 2025-06-09 16:21-0600\n"
         "PO-Revision-Date: 2004-07-31 01:24+0200\n"
         "Last-Translator: Kenan Hadžiavdić <kenan@bgnett.no>\n"
         "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -16,1399 +19,1644 @@ msgstr  "Project-Id-Version: xffm+\n"
         "Content-Transfer-Encoding: 8bit\n"
         "X-Generator: KBabel 1.3\n"
 
-#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
-#, fuzzy
-msgid   "Open terminal"
-msgstr  "Otvori terminal"
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/menus/templates/pathbarmenu.hh:15
+#: ../xffm/menus/templates/pathbarmenu.hh:25
+#: ../xffm/menus/templates/pathbarmenu.hh:36
+#: ../xffm/menus/templates/pathbarmenu.hh:48
+#: ../xffm/menus/templates/gridviewmenu.hh:29
+#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
+msgid   "Clipboard is empty."
+msgstr  "Klipbord je prazan."
 
-#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
-msgid   "Execute Shell Command"
-msgstr  "Izvrši naredbu školjke"
+#: ../xffm/fm/templates/clipboard.hh:133 ../xffm/fm/templates/clipboard.hh:136
+msgid   "Clipboard contents"
+msgstr  "Sadržaj međuspremnika"
 
-#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
-msgid   "Paste"
-msgstr  "Umetni"
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
+msgid   "Invalid clip"
+msgstr  "Neispravan snimak"
 
-#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
-#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
-msgid   "Add bookmark"
-msgstr  "Dodaj zabilješku"
-
-#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
-#: ../xffm/fm/view/local/popup.hh:151
-msgid   "Remove bookmark"
-msgstr  "Ukloni zabilješku"
-
-#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
-#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
-msgid   "Search"
-msgstr  "Traži"
-
-#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
-msgid   "Close"
-msgstr  "Zatvori"
-
-#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
-#: ../xffm/fm/dialog/notebook/menupopover.hh:265
-msgid   "Exit"
-msgstr  "Izlaz"
-
-#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
-#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
-#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
-#: ../xffm/common/run.hh:741
-msgid   "Open with"
-msgstr  "Otvori pomoću"
-
-#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
-#: ../xffm/fm/view/local/popup.hh:155
-msgid   "Cut"
-msgstr  "Izreži"
-
-#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
-#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
-msgid   "Copy"
-msgstr  "Kopiraj"
-
-#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
-#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
-msgid   "Delete"
-msgstr  "Izbriši"
-
-#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
-msgid   "Shred"
-msgstr  "Isjeckaj"
-
-#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
-#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
-#: ../xffm/fm/view/fstab/popup.hh:19
-msgid   "Open in New Tab"
-msgstr  "Otvori u novoj kartici"
-
-#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
-msgid   "New Tab"
-msgstr  "Nova kartica"
-
-#: ../xffm/gtk/dialogs.hh:29
-msgid   "Yes"
-msgstr  "Da"
-
-#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
-msgid   "Confirm"
-msgstr  "Potvrdi"
-
-#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
-msgid   "Apply to all"
-msgstr  "Primijeni na sve"
-
-#: ../xffm/gtk/dialogs.hh:110
-msgid   "Overwrite"
-msgstr  "Snimi preko"
-
-#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
-#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
-#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
-#: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
-#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
-#: ../xffm/find/signals.hh:411
-msgid   "Cancel"
-msgstr  "Odustani"
-
-#: ../xffm/gtk/dialogs.hh:240
-msgid   "Help"
-msgstr  "Pomoć"
-
-#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
-#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
-#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
-#: ../xffm/find/dialog.hh:666
-msgid   "unknown"
-msgstr  "nepoznato"
-
-#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
-#: ../xffm/find/signals.hh:11
-msgid   "Block device"
-msgstr  "Blok uređaj"
-
-#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
-#: ../xffm/find/signals.hh:12
-msgid   "Character device"
-msgstr  "Znakovni uređaj"
-
-#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
-#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
-#: ../xffm/find/signals.hh:8
-msgid   "Directory"
-msgstr  "Direktorij"
-
-#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
-#: ../xffm/find/signals.hh:13
-msgid   "FIFO"
-msgstr  "FIFO"
-
-#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
-msgid   "Symbolic Link"
-msgstr  "simbolička veza"
-
-#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
-#, fuzzy
-msgid   "Regular file"
-msgstr  "pravilna mreža"
-
-#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
-msgid   "Socket"
-msgstr  "Socket"
-
-#: ../xffm/gtk/preview.hh:587
-#, fuzzy
-msgid   "Empty file"
-msgstr  "prazna datoteka"
-
-#: ../xffm/gtk/preview.hh:658
-#, c-format
-msgid   "Cannot read from %s"
-msgstr  "Ne mogu da čitam iz %s"
-
-#: ../xffm/completion/base.hh:28
-msgid   "Command"
-msgstr  "Naredba"
-
-#: ../xffm/completion/base.hh:31
-msgid   "File"
-msgstr  "Datoteka"
-
-#: ../xffm/completion/base.hh:34
-msgid   "Command history"
-msgstr  "Historijat komandi"
-
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
-msgid   "User"
-msgstr  "Korisnik"
-
-#: ../xffm/completion/base.hh:40
-msgid   "Variable"
-msgstr  "Varijabla"
-
-#: ../xffm/completion/base.hh:43
-msgid   "Host"
-msgstr  "Računar"
-
-#: ../xffm/completion/base.hh:55
-msgid   "Found no match"
-msgstr  "Nije pronađeno ništa što se poklapa"
-
-#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
-msgid   "Matches"
-msgstr  "Odgovara"
-
-#: ../xffm/completion/base.hh:142
-#, fuzzy
-msgid   "Too many files open"
-msgstr  "Previše direktorija"
-
-#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
-#: ../xffm/find/fgr.hh:124
-msgid   "Options:"
-msgstr  "Opcije:"
-
-#: ../xffm/completion/bash.hh:133
-msgid   "Completion mode:"
-msgstr  "Režim dovršavanja:"
-
-#: ../xffm/completion/bash.hh:134
-msgid   "command"
-msgstr  "komanda"
-
-#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
-msgid   "file"
-msgstr  "datoteka"
-
-#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
-msgid   "Options >>"
-msgstr  "Opcije >>"
-
-#: ../xffm/fm/view/view.hh:144
-#, c-format
-msgid   "Loading %s...%s"
-msgstr  "Učitavam %s...%s"
-
-#: ../xffm/fm/view/view.hh:144
-#, fuzzy
-msgid   "Please Wait..."
-msgstr  "Molim sačekajte..."
-
-#: ../xffm/fm/view/root/popup.hh:167
-#, fuzzy
-msgid   "Ecryptfs (EFS)"
-msgstr  "Šifrirati datoteku(e)"
-
-#: ../xffm/fm/view/root/popup.hh:169
-msgid   "Clear cache"
-msgstr  "Obriši predmemoriju"
-
-#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
-#: ../xffm/fm/view/fstab/popup.hh:36
-#, fuzzy
-msgid   "Mount the volume associated with this folder"
-msgstr  "Vraća vrijednost pridruženu datom ključu."
-
-#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
-#: ../xffm/fm/view/fstab/popup.hh:37
-#, fuzzy
-msgid   "Unmount the volume associated with this folder"
-msgstr  "Vraća vrijednost pridruženu datom ključu."
-
-#: ../xffm/fm/view/root/popup.hh:204
-#, fuzzy
-msgid   "Empty trash"
-msgstr  "Isprazni smeće"
-
-#: ../xffm/fm/view/root/popup.hh:269
-#, fuzzy
-msgid   "Ecrypt Volume"
-msgstr  "Potpisivanje datoteke"
-
-#: ../xffm/fm/view/root/popup.hh:270
-msgid   "private"
-msgstr  "privatno"
-
-#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
-msgid   "Specify Output Directory..."
-msgstr  "Izlazni direktorij..."
-
-#: ../xffm/fm/view/root/model.hh:133
-msgid   "Root Directory"
-msgstr  "Korijeni direktorijum"
-
-#: ../xffm/fm/view/root/model.hh:149
-msgid   "This is the root of the filesystem"
-msgstr  "Ovo je korijen datotečnog sistema"
-
-#: ../xffm/fm/view/root/model.hh:161
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
-msgid   "Home Directory"
-msgstr  "Korisnička fascikla"
-
-#: ../xffm/fm/view/root/model.hh:188
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
-#, fuzzy
-msgid   "Trash bin"
-msgstr  "Baci u smeće"
-
-#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
-#, fuzzy
-msgid   "Disk Image Mounter"
+#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
+#: ../xffm/fm/templates/fstabmonitor.hh:366
+#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
+#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
+#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
+msgid   "Disk Mounter"
 msgstr  "Montiranje diska"
 
-#: ../xffm/fm/view/root/model.hh:238
-msgid   "Mount local disks and devices"
-msgstr  "Montiraj lokalne diskove i uređaje"
+#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
+#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
+#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
+#: ../xffm/menus/templates/menucallbacks.hh:248
+#: ../xffm/menus/templates/mainMenu.hh:218
+msgid   "Bookmarks"
+msgstr  "Zabilješke"
 
-#: ../xffm/fm/view/root/model.hh:278
-#, fuzzy
-msgid   "Go to bookmarked location"
-msgstr  "Dodaj oznaku za lokaciju"
+#: ../xffm/fm/templates/workdir.hh:249
+#, fuzzy, c-format
+msgid   "The %s utility is not installed."
+msgstr  "Grafička kontrola „%s“ nije instalirana."
 
-#: ../xffm/fm/view/treeview.hh:17
-msgid   "Name"
-msgstr  "Ime"
-
-#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
-#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
-#: ../xffm/find/dialog.hh:138
-msgid   "Details"
-msgstr  "Detalji"
-
-#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
-msgid   "Size"
-msgstr  "Veličina"
-
-#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
-msgid   "Date"
-msgstr  "Datum"
-
-#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
-msgid   "Mimetype"
-msgstr  "Mime tip"
-
-#: ../xffm/fm/view/base/signals.hh:918
+#: ../xffm/fm/templates/workdir.hh:270
 #, fuzzy
 msgid   "Trash is empty"
 msgstr  "prazno je"
 
-#: ../xffm/fm/view/base/signals.hh:925
-#, fuzzy
-msgid   "Directory does not exist."
-msgstr  "<html>Fascikla %s ne postoji.</html>"
-
-#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
-#, c-format
-msgid   "Files: %s"
-msgstr  "Datoteke: %s"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
-#: ../xffm/fm/view/fuse/ecryptfs.hh:185
-msgid   "Mount"
-msgstr  "Montiraj"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:179
-#: ../xffm/fm/dialog/notebook/createini.hh:87
-#: ../xffm/fm/dialog/notebook/createini.hh:371
-msgid   "Save"
-msgstr  "Snimi"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-msgid   "Options"
-msgstr  "Opcije"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
-msgid   "Advanced"
-msgstr  "Napredno"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
-#, c-format
-msgid   "Mounting %s"
-msgstr  "Montiranje %s"
-
-#: ../xffm/fm/view/fuse/ecryptfs.hh:770
-#, fuzzy, c-format
-msgid   "Enter Passphrase for %s"
-msgstr  "Unesite lozinku za %s"
-
-#: ../xffm/fm/view/pkg/popup.hh:260
-msgid   "Package Manager"
-msgstr  "Menadžer paketa"
-
-#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
-msgid   "Accept"
-msgstr  "Prihvati"
-
-#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
-#, fuzzy
-msgid   "options:"
-msgstr  "opcije"
-
-#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
-msgid   "Software Updater"
-msgstr  "Nadograđivač softvera "
-
-#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
-#, fuzzy
-msgid   "Add or remove software installed on the system"
-msgstr  "Pretraži set instaliranih paketa na sistem"
-
-#: ../xffm/fm/view/pkg/model.hh:111
-msgid   "String"
-msgstr  "Znakovni niz"
-
-#: ../xffm/fm/view/pkg/model.hh:117
-#, fuzzy
-msgid   "Waiting for search results"
-msgstr  "Čekam izvorni disk"
-
-#: ../xffm/fm/view/pkg/model.hh:175
-#, fuzzy
-msgid   "No results"
-msgstr  "Nema rezultata."
-
-#: ../xffm/fm/view/pkg/model.hh:374
-#, fuzzy
-msgid   "Currently busy\n"
-msgstr  "Trenutni dan"
-
-#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
-#, fuzzy
-msgid   "Invalid entry"
-msgstr  "Loš roditelj"
-
-#: ../xffm/fm/view/local/view.hh:177
+#: ../xffm/fm/templates/workdir.hh:291
 #, fuzzy, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "Sadržaj za pohranu %s nije montiran"
 
-#: ../xffm/fm/view/local/rm.hh:59
-#, c-format
-msgid   "Delete %s"
-msgstr  "Obriši %s"
-
-#: ../xffm/fm/view/local/rm.hh:61
-msgid   "Warning: "
-msgstr  "Upozorenje: "
-
-#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
-#: ../xffm/common/dnd.hh:29
-msgid   "Multiple selections"
-msgstr  "Višestruki odabir"
-
-#: ../xffm/fm/view/local/rm.hh:92
-msgid   "Remove"
-msgstr  "Obriši"
-
-#: ../xffm/fm/view/local/rm.hh:183
-msgid   "Trash"
-msgstr  "Smeće"
-
-#: ../xffm/fm/view/local/popup.hh:93
-msgid   "New"
-msgstr  "Novi"
-
-#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
-#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
-#, fuzzy
-msgid   "Paste into"
-msgstr  "Uređivač umetaka"
-
-#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
-msgid   "There is nothing on the clipboard to paste."
-msgstr  "Nema ništa u clipboardu za umetnuti."
-
-#: ../xffm/fm/view/local/popup.hh:105
-msgid   "Select All"
-msgstr  "Izaberi sve"
-
-#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
-#, fuzzy
-msgid   "Match regular expression"
-msgstr  "poklapa regularni izraz"
-
-#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
-#, fuzzy
-msgid   "Run Executable..."
-msgstr  "Izvršni"
-
-#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
-msgid   "Extract files from the archive"
-msgstr  "Raspakuj datoteke iz arhiva"
-
-#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
-#, fuzzy
-msgid   "Create a compressed archive with the selected objects"
-msgstr  "Pravi tag ili granu za izabrane datoteke"
-
-#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
-msgid   "Rename"
-msgstr  "Promijeni ime"
-
-#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
-msgid   "Duplicate"
-msgstr  "Udvostruči"
-
-#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
-#: ../xffm/common/dnd.hh:63
-msgid   "Link"
-msgstr  "Link"
-
-#: ../xffm/fm/view/local/popup.hh:163
-msgid   "Properties"
-msgstr  "Osobine"
-
-#: ../xffm/fm/view/local/popup.hh:566
-msgid   "Files:"
-msgstr  "Datoteke:"
-
-#: ../xffm/fm/view/local/popup.hh:715
-msgid   "Select items"
-msgstr  "Označi stavke"
-
-#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
-#: ../xffm/find/fgr.hh:204
-msgid   "Regular expression"
-msgstr  "Regularni izraz"
-
-#: ../xffm/fm/view/local/popup.hh:732
-msgid   "Regular Expression syntax is incorrect"
-msgstr  "Loša sintaksa regularnog izraza"
-
-#: ../xffm/fm/view/local/popup.hh:762
-msgid   "No selection"
-msgstr  "Bez izbora"
-
-#: ../xffm/fm/view/local/popup.hh:762
-#, fuzzy
-msgid   "No matches."
-msgstr  "Ništa nije nađeno."
-
-#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
-msgid   "Create new..."
-msgstr  "Kreiraj novi..."
-
-#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
-#: ../xffm/fm/view/local/popup.hh:1114
-msgid   "New Name:"
-msgstr  "Novo ime"
-
-#: ../xffm/fm/view/local/popup.hh:980
-msgid   "No name"
-msgstr  "Bez imena"
-
-#: ../xffm/fm/view/local/popup.hh:993
-#, fuzzy, c-format
-msgid   "Another file with the same name already exists in “%s”."
-msgstr  "Datoteka s istim imenom (%s) već postoji u mapi %s."
-
-#: ../xffm/fm/view/local/popup.hh:1103
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
-msgid   "Not a directory"
-msgstr  "Nije direktorij"
-
-#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+#: ../xffm/fm/templates/run.hh:316
 msgid   "error"
 msgstr  "greška"
 
-#: ../xffm/fm/view/local/model.hh:104
-msgid   "There are unfinished jobs: please wait until they are finished."
-msgstr  ""
+#: ../xffm/fm/templates/run.hh:320
+msgid   "warning"
+msgstr  "upozorenje"
 
-#: ../xffm/fm/view/local/model.hh:104
-msgid   "Previews"
-msgstr  "Pregledi"
+#: ../xffm/fm/templates/run.hh:441
+#: ../xffm/response/classes/passwdresponse.hh:11
+#: ../xffm/response/classes/passwdresponse.hh:79
+#: ../xffm/response/classes/passwdresponse.hh:83
+msgid   "Enter password"
+msgstr  "Upišite šifru"
 
-#: ../xffm/fm/view/local/model.hh:124
-#, fuzzy, c-format
-msgid   "Reading \"%s\""
-msgstr  "Čitanje novosti"
-
-#: ../xffm/fm/view/local/model.hh:722
-#, fuzzy, c-format
-msgid   "Loaded %d of %d articles"
-msgstr  "Učitana je %d datoteka"
-
-#: ../xffm/fm/view/local/properties.hh:239
+#: ../xffm/fm/templates/runbutton.hh:248
 #, fuzzy
-msgid   "Properties and Attributes"
-msgstr  "Standardni atributi"
+msgid   "Signal to emit"
+msgstr  "Datoteka za uređivanje"
 
-#: ../xffm/fm/view/local/properties.hh:267
-#, fuzzy
-msgid   "File Mode:"
-msgstr  "Način pogleda:"
+#: ../xffm/fm/templates/runbutton.hh:281
+msgid   "PID"
+msgstr  "PID"
 
-#: ../xffm/fm/view/local/properties.hh:293
-msgid   "File:"
-msgstr  "Datoteka:"
-
-#: ../xffm/fm/view/local/properties.hh:305
-msgid   "Apply changes"
-msgstr  "Primijeni izmjene"
-
-#: ../xffm/fm/view/local/properties.hh:473
-msgid   "Encoding"
-msgstr  "Kodiranje"
-
-#: ../xffm/fm/view/local/properties.hh:496
-msgid   "Successfully moved to trash."
-msgstr  "Uspješno premještno u smeće."
-
-#: ../xffm/fm/view/local/properties.hh:497
-msgid   "Source:"
-msgstr  "Izvor:"
-
-#: ../xffm/fm/view/fstab/view.hh:174
-msgid   "Used"
-msgstr  "Korišteno"
-
-#: ../xffm/fm/view/fstab/view.hh:175
-msgid   "Available"
-msgstr  "Dostupno"
-
-#: ../xffm/fm/view/fstab/view.hh:176
-msgid   "Usage"
-msgstr  "upotreba"
-
-#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
-msgid   "No Label"
-msgstr  "Bez etikete"
-
-#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
-#, fuzzy
-msgid   "There is no file system available (unformatted)"
-msgstr  "Pomoć za '%s'nije dostupna."
-
-#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
-#: ../xffm/fm/view/fstab/popup.hh:144
-msgid   "Mount point:"
-msgstr  "Tačka montiranja:"
-
-#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
-#, fuzzy
-msgid   "Not mounted"
-msgstr  "Nije montirano."
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:89
-#: ../xffm/fm/view/fstab/view-Linux.hh:105
-#, fuzzy
-msgid   "Disks"
-msgstr  "Disk"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
-msgid   "NFS Network Volume"
-msgstr  "NFS mrežni disk"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:398
-msgid   "SFTP (via SSH)"
-msgstr  "SFTP (preko SSH)"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
-#, fuzzy
-msgid   "eCryptfs Volume"
-msgstr  "Postavi jačinu"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
-#, fuzzy
-msgid   "CIFS Volume"
-msgstr  "XIAFS disk"
-
-#: ../xffm/fm/view/fstab/view-Linux.hh:743
-#, c-format
-msgid   "Unmounting %s"
-msgstr  "Demontiranje %s"
-
-#: ../xffm/fm/view/fstab/view-BSD.hh:604
-#, fuzzy
-msgid   "Mount point: "
-msgstr  "Tačka montiranja:"
-
-#: ../xffm/fm/view/fstab/view-BSD.hh:605
-#, fuzzy
-msgid   "Mount device: "
-msgstr  "Montiraj uređaj"
-
-#: ../xffm/fm/view/fstab/popup.hh:21
-#, fuzzy
-msgid   "SSHFS Remote Synchronization Folder"
-msgstr  "Režim sinhronizacije"
-
-#: ../xffm/fm/view/fstab/popup.hh:132
-msgid   "Mount Device"
-msgstr  "Montiraj uređaj"
-
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
-#, fuzzy
-msgid   "Copying files locally"
-msgstr  "Kopiram datoteke"
-
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
-#: ../xffm/common/gio.hh:93
-msgid   "Moving files"
-msgstr  "Pomjeram datoteke"
-
-#: ../xffm/fm/dialog/notebook/page/base.hh:51
-#, fuzzy
-msgid   "No Image Preview"
-msgstr  "Prethodno gledanje slike"
-
-#: ../xffm/fm/dialog/notebook/page/base.hh:55
-msgid   "Maximum image size for thumbnailing"
-msgstr  "Maksimalna veličina slike za umanjivanje"
-
-#: ../xffm/fm/dialog/notebook/page/base.hh:60
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
-#, fuzzy
-msgid   "Reset image size"
-msgstr  "Promijeni veličinu slika"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
-#, fuzzy
-msgid   "Embedded Terminal"
-msgstr  "Podrška za ugrađeni terminal"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
-msgid   "All items in the iconview."
-msgstr  "Sve stavke u prikazu ikona."
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
-msgid   "Scripting"
-msgstr  "Skriptovanje"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
-#, fuzzy
-msgid   "Clear Log"
-msgstr  "Očisti dnevničku datoteku"
-
-#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
-#, fuzzy
-msgid   "Terminal font"
-msgstr  "Font za terminal:"
-
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/templates/runbutton.hh:305
 msgid   "Renice Process"
 msgstr  "Renice procesa"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/templates/runbutton.hh:306
 msgid   "Suspend"
 msgstr  "Odgodi"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#: ../xffm/fm/templates/runbutton.hh:307
 msgid   "Continue"
 msgstr  "Nastavi"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+#: ../xffm/fm/templates/runbutton.hh:308
 msgid   "Interrupt"
 msgstr  "Prekid"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+#: ../xffm/fm/templates/runbutton.hh:309
 msgid   "Hangup"
 msgstr  "Prekidanje veze"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+#: ../xffm/fm/templates/runbutton.hh:310
 msgid   "User 1 (USR1)"
 msgstr  "Korisnički 1 (USR1)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+#: ../xffm/fm/templates/runbutton.hh:311
 msgid   "User 2 (USR2)"
 msgstr  "Korisnički 2 (USR2)"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+#: ../xffm/fm/templates/runbutton.hh:312
 #, fuzzy
 msgid   "Terminate Task"
 msgstr  "Obustavi %s"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+#: ../xffm/fm/templates/runbutton.hh:313
 msgid   "Abort"
 msgstr  "Odustani"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
+#: ../xffm/fm/templates/runbutton.hh:314
 msgid   "Kill"
 msgstr  "Ubij"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
+#: ../xffm/fm/templates/runbutton.hh:315
 #, fuzzy
 msgid   "Segmentation fault"
 msgstr  "Povreda segmenta"
 
-#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
-msgid   "PID"
-msgstr  "PID"
+#: ../xffm/fm/templates/dnd.hh:639
+msgid   "Target"
+msgstr  "Cilj"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
-#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
-msgid   "Previous"
-msgstr  "Prethodni"
+#: ../xffm/fm/templates/dnd.hh:640
+msgid   "Source"
+msgstr  "Izvor"
 
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
-#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
-msgid   "Go to"
-msgstr  "Idi na"
+#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
+#, fuzzy
+msgid   "Invalid target folder"
+msgstr  "Nevažeća vrijednost argumenta"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:61
-msgid   "loading..."
-msgstr  "učitavam..."
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
+#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/response/classes/dndresponse.hh:22
+#: ../xffm/menus/templates/gridviewmenu.hh:32
+#: ../xffm/menus/templates/gridviewmenu.hh:62
+#: ../xffm/menus/templates/gridviewmenu.hh:86
+msgid   "Link"
+msgstr  "Link"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:171
-#: ../xffm/fm/dialog/notebook/page/page.hh:186
-msgid   "Confirm Replace"
-msgstr  "Potvrdi zamjenu"
+#: ../xffm/fm/templates/dnd.hh:684
+msgid   "Drag:"
+msgstr  "Prevuci:"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:173
-msgid   "Destination File"
-msgstr  "Odredišna datoteka"
+#: ../xffm/fm/templates/dnd.hh:722
+#, fuzzy
+msgid   "files"
+msgstr  " datoteke"
 
-#: ../xffm/fm/dialog/notebook/page/page.hh:185
+#: ../xffm/fm/templates/dnd.hh:723
 #, fuzzy, c-format
-msgid   "The output file %s already exists, do you want to overwrite it?"
-msgstr  "Datoteka %s već postoji; želite li da ga prebrišete?"
+msgid   "+ %s more"
+msgstr  "I još %s..."
 
-#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
+msgid   "file"
+msgstr  "datoteka"
+
+#: ../xffm/fm/templates/dnd.hh:731
+#, fuzzy
+msgid   ": "
+msgstr  " : "
+
+#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/response/templates/openwith.hh:137
+#: ../xffm/response/templates/dialogbasic.hh:304
+#: ../xffm/find/templates/dndbox.hh:153
+msgid   "Close"
+msgstr  "Zatvori"
+
+#: ../xffm/fm/templates/window.hh:505
 #, fuzzy
 msgid   "Long press time"
 msgstr  "Identifier dnevničkog procesa"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
-#, fuzzy
-msgid   "Remove Button Contents"
-msgstr  "Ukloni dugme"
+#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
+#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/menus/templates/inputMenu.hh:12
+#: ../xffm/menus/templates/inputMenu.hh:29
+#: ../xffm/menus/templates/inputMenu.hh:44
+#: ../xffm/menus/templates/inputMenu.hh:60
+#: ../xffm/menus/templates/gridviewmenu.hh:27
+#: ../xffm/menus/templates/gridviewmenu.hh:66
+#: ../xffm/menus/templates/gridviewmenu.hh:89
+msgid   "Cut"
+msgstr  "Izreži"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
-#, fuzzy
-msgid   "Add custom content"
-msgstr  "Dodaj u meni sadržaja"
+#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
+#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/response/classes/dndresponse.hh:20
+#: ../xffm/menus/templates/inputMenu.hh:11
+#: ../xffm/menus/templates/inputMenu.hh:28
+#: ../xffm/menus/templates/inputMenu.hh:43
+#: ../xffm/menus/templates/inputMenu.hh:59
+#: ../xffm/menus/templates/outputMenu.hh:11
+#: ../xffm/menus/templates/outputMenu.hh:24
+#: ../xffm/menus/templates/outputMenu.hh:37
+#: ../xffm/menus/templates/outputMenu.hh:50
+#: ../xffm/menus/templates/gridviewmenu.hh:26
+#: ../xffm/menus/templates/gridviewmenu.hh:65
+#: ../xffm/menus/templates/gridviewmenu.hh:88
+msgid   "Copy"
+msgstr  "Kopiraj"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
-#, fuzzy
-msgid   "Select file to load"
-msgstr  "Izbor datoteke za puštanje"
+#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
+#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
+#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/menus/templates/pathbarmenu.hh:13
+#: ../xffm/menus/templates/pathbarmenu.hh:24
+#: ../xffm/menus/templates/pathbarmenu.hh:35
+#: ../xffm/menus/templates/pathbarmenu.hh:47
+#: ../xffm/menus/templates/inputMenu.hh:13
+#: ../xffm/menus/templates/inputMenu.hh:30
+#: ../xffm/menus/templates/inputMenu.hh:45
+#: ../xffm/menus/templates/inputMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:17
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/gridviewmenu.hh:28
+#: ../xffm/menus/templates/gridviewmenu.hh:67
+#: ../xffm/menus/templates/gridviewmenu.hh:90
+#: ../xffm/menus/templates/menu.hh:166
+msgid   "Paste"
+msgstr  "Umetni"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#: ../xffm/fm/templates/window.hh:519
+msgid   "New Tab"
+msgstr  "Nova kartica"
+
+#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
+msgid   "Main menu"
+msgstr  "Glavni meni"
+
+#: ../xffm/fm/templates/window.hh:592
+#, fuzzy
+msgid   "Directory name: "
+msgstr  "Ime direktorija:"
+
+#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/menus/templates/inputMenu.hh:15
+#: ../xffm/menus/templates/inputMenu.hh:26
+#: ../xffm/menus/templates/inputMenu.hh:41
+#: ../xffm/menus/templates/inputMenu.hh:57
+#: ../xffm/menus/templates/outputMenu.hh:12
+#: ../xffm/menus/templates/outputMenu.hh:25
+#: ../xffm/menus/templates/outputMenu.hh:38
+#: ../xffm/menus/templates/outputMenu.hh:51
+#: ../xffm/menus/templates/mainMenu.hh:23
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:82
+msgid   "Select All"
+msgstr  "Izaberi sve"
+
+#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/menus/templates/mainMenu.hh:24
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "poklapa regularni izraz"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/menus/templates/mainMenu.hh:28
+msgid   "Show"
+msgstr  "Pokaži"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
+#: ../xffm/menus/templates/mainMenu.hh:96
+#: ../xffm/menus/templates/mainMenu.hh:119
+#: ../xffm/menus/templates/mainMenu.hh:132
+#: ../xffm/menus/templates/mainMenu.hh:159
+#, fuzzy
+msgid   "Hidden files"
+msgstr  "Skrivene datoteke"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:97
+#: ../xffm/menus/templates/mainMenu.hh:120
+#: ../xffm/menus/templates/mainMenu.hh:133
+#: ../xffm/menus/templates/mainMenu.hh:160
+#, fuzzy
+msgid   "Backup files"
+msgstr  "Sigurnosna kopija datoteke"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
+#, fuzzy
+msgid   "Sort mode"
+msgstr  "Redoslijed sortiranja"
+
+#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
+#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/menus/templates/mainMenu.hh:98
+#: ../xffm/menus/templates/mainMenu.hh:121
+#: ../xffm/menus/templates/mainMenu.hh:134
+#: ../xffm/menus/templates/mainMenu.hh:161
+msgid   "Descending"
+msgstr  "Padajuće"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:676
+#: ../xffm/response/templates/fileresponse.hh:231
+#: ../xffm/menus/templates/mainMenu.hh:35
+#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:122
+#: ../xffm/menus/templates/mainMenu.hh:141
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Name"
+msgstr  "Ime"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
+#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
+#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/menus/templates/mainMenu.hh:123
+#: ../xffm/menus/templates/mainMenu.hh:142
+#: ../xffm/menus/templates/mainMenu.hh:162
+msgid   "Date"
+msgstr  "Datum"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
+#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:101
+#: ../xffm/menus/templates/mainMenu.hh:124
+#: ../xffm/menus/templates/mainMenu.hh:143
+#: ../xffm/menus/templates/mainMenu.hh:163
+msgid   "Size"
+msgstr  "Veličina"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
+#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:102
+#: ../xffm/menus/templates/mainMenu.hh:125
+#: ../xffm/menus/templates/mainMenu.hh:144
+#: ../xffm/menus/templates/mainMenu.hh:164
+msgid   "File type"
+msgstr  "tip datoteke"
+
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
+#: ../xffm/menus/templates/mainMenu.hh:39
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:200
+#, fuzzy
+msgid   "Apply modifications"
+msgstr  "Aplikacije"
+
+#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
+#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/menus/templates/gridviewmenu.hh:24
+#: ../xffm/menus/templates/gridviewmenu.hh:68
+#: ../xffm/menus/templates/gridviewmenu.hh:92
+msgid   "Add bookmark"
+msgstr  "Dodaj zabilješku"
+
+#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
+#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
+#: ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/gridviewmenu.hh:25
+#: ../xffm/menus/templates/gridviewmenu.hh:69
+#: ../xffm/menus/templates/gridviewmenu.hh:93
+msgid   "Remove bookmark"
+msgstr  "Ukloni zabilješku"
+
+#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:55
+#: ../xffm/menus/templates/mainMenu.hh:77
+#, fuzzy
+msgid   "Empty trash bin"
+msgstr  "Isprazni kantu za smeće"
+
+#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/menus/templates/gridviewmenu.hh:20
+#: ../xffm/menus/templates/gridviewmenu.hh:58
+#: ../xffm/menus/templates/gridviewmenu.hh:83
+msgid   "Open with"
+msgstr  "Otvori pomoću"
+
+#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
+#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/response/classes/rmlistresponse.hh:9
+#: ../xffm/response/classes/rmlistresponse.hh:11
+#: ../xffm/response/classes/rmlistresponse.hh:18
+#: ../xffm/response/classes/rmlistresponse.hh:27
+#: ../xffm/response/classes/rmresponse.hh:9
+#: ../xffm/response/classes/rmresponse.hh:11
+#: ../xffm/response/classes/rmresponse.hh:18
+#: ../xffm/response/classes/rmresponse.hh:29
+#: ../xffm/menus/templates/inputMenu.hh:14
+#: ../xffm/menus/templates/inputMenu.hh:31
+#: ../xffm/menus/templates/inputMenu.hh:46
+#: ../xffm/menus/templates/inputMenu.hh:62
+#: ../xffm/menus/templates/gridviewmenu.hh:34
+#: ../xffm/menus/templates/gridviewmenu.hh:63
+#: ../xffm/menus/templates/gridviewmenu.hh:91
+msgid   "Delete"
+msgstr  "Izbriši"
+
+#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
+#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/menus/templates/gridviewmenu.hh:21
+#: ../xffm/menus/templates/gridviewmenu.hh:72
+#: ../xffm/menus/templates/gridviewmenu.hh:98
+#, fuzzy
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Pravi tag ili granu za izabrane datoteke"
+
+#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
+#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/menus/templates/gridviewmenu.hh:33
+#: ../xffm/menus/templates/gridviewmenu.hh:64
+#: ../xffm/menus/templates/gridviewmenu.hh:95
+msgid   "Properties"
+msgstr  "Osobine"
+
+#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
+#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/menus/templates/gridviewmenu.hh:23
+#: ../xffm/menus/templates/gridviewmenu.hh:56
+#: ../xffm/menus/templates/gridviewmenu.hh:80
+msgid   "Unmount Volume"
+msgstr  "Demontiraj disk"
+
+#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
+#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/response/templates/mountresponse.hh:166
+#: ../xffm/menus/templates/gridviewmenu.hh:22
+#: ../xffm/menus/templates/gridviewmenu.hh:55
+#: ../xffm/menus/templates/gridviewmenu.hh:79
+msgid   "Mount Volume"
+msgstr  "Montiraj disk"
+
+#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/menus/templates/pathbarmenu.hh:11
+#: ../xffm/menus/templates/pathbarmenu.hh:22
+#: ../xffm/menus/templates/pathbarmenu.hh:33
+#: ../xffm/menus/templates/pathbarmenu.hh:45
+#: ../xffm/menus/templates/gridviewmenu.hh:19
+#: ../xffm/menus/templates/gridviewmenu.hh:57
+#: ../xffm/menus/templates/gridviewmenu.hh:82
+#, fuzzy
+msgid   "Open in new tab"
+msgstr  "Otvori u novoj kartici"
+
+#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/response/classes/mvresponse.hh:11
+#: ../xffm/response/classes/mvresponse.hh:19
+#: ../xffm/menus/templates/gridviewmenu.hh:30
+#: ../xffm/menus/templates/gridviewmenu.hh:60
+#: ../xffm/menus/templates/gridviewmenu.hh:87
+msgid   "Rename"
+msgstr  "Promijeni ime"
+
+#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/response/classes/cpresponse.hh:13
+#: ../xffm/response/classes/cpresponse.hh:20
+#: ../xffm/menus/templates/gridviewmenu.hh:31
+#: ../xffm/menus/templates/gridviewmenu.hh:61
+#: ../xffm/menus/templates/gridviewmenu.hh:85
+msgid   "Duplicate"
+msgstr  "Udvostruči"
+
+#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
+#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/menus/templates/gridviewmenu.hh:17
+#: ../xffm/menus/templates/gridviewmenu.hh:59
+#: ../xffm/menus/templates/gridviewmenu.hh:84
+msgid   "auto"
+msgstr  "auto"
+
+#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/response/templates/bfishresponse.hh:88
+#: ../xffm/response/templates/bfishresponse.hh:355
+#: ../xffm/menus/templates/gridviewmenu.hh:36
+#: ../xffm/menus/templates/gridviewmenu.hh:71
+#: ../xffm/menus/templates/gridviewmenu.hh:97
+msgid   "Decrypt File..."
+msgstr  "Dešifruj datoteku..."
+
+#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/menus/templates/gridviewmenu.hh:35
+#: ../xffm/menus/templates/gridviewmenu.hh:70
+#: ../xffm/menus/templates/gridviewmenu.hh:96
+msgid   "Encrypt File..."
+msgstr  "Šifruj datoteku..."
+
+#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/response/templates/openwith.hh:158
+msgid   "Multiple selections"
+msgstr  "Višestruki odabir"
+
+#: ../xffm/fm/templates/basicpathbar.hh:28 ../xffm/find/classes/fgr.hh:168
+#: ../xffm/find/classes/fgr.hh:171 ../xffm/find/classes/fgr.hh:174
+#: ../xffm/find/classes/fgr.hh:177
+msgid   "Previous"
+msgstr  "Prethodni"
+
+#: ../xffm/fm/templates/basicpathbar.hh:32
+msgid   "Next"
+msgstr  "Sljedeći"
+
+#: ../xffm/fm/templates/basicpathbar.hh:36
+#: ../xffm/response/templates/jumpresponse.hh:10
+#: ../xffm/response/templates/jumpresponse.hh:12
+msgid   "Go to"
+msgstr  "Idi na"
+
+#: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
+#: ../xffm/find/templates/findresponse.hh:884
+msgid   "unknown"
+msgstr  "nepoznato"
+
+#: ../xffm/fm/templates/preview.hh:348
+#, fuzzy
+msgid   "Empty file"
+msgstr  "prazna datoteka"
+
+#: ../xffm/fm/templates/preview.hh:557 ../xffm/find/classes/fgr.hh:162
+#: ../xffm/find/classes/ffunctions.hh:13
+msgid   "Block device"
+msgstr  "Blok uređaj"
+
+#: ../xffm/fm/templates/preview.hh:560 ../xffm/find/classes/fgr.hh:163
+#: ../xffm/find/classes/ffunctions.hh:14
+msgid   "Character device"
+msgstr  "Znakovni uređaj"
+
+#: ../xffm/fm/templates/preview.hh:563 ../xffm/fm/classes/bash.hh:60
+#: ../xffm/find/classes/fgr.hh:159 ../xffm/find/classes/ffunctions.hh:10
+msgid   "Directory"
+msgstr  "Direktorij"
+
+#: ../xffm/fm/templates/preview.hh:566 ../xffm/find/classes/fgr.hh:164
+#: ../xffm/find/classes/ffunctions.hh:15
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/fm/templates/preview.hh:569 ../xffm/find/classes/fgr.hh:160
+#: ../xffm/find/classes/ffunctions.hh:11
+msgid   "Symbolic Link"
+msgstr  "simbolička veza"
+
+#: ../xffm/fm/templates/preview.hh:572 ../xffm/find/classes/fgr.hh:158
+#, fuzzy
+msgid   "Regular file"
+msgstr  "pravilna mreža"
+
+#: ../xffm/fm/templates/preview.hh:575 ../xffm/find/classes/ffunctions.hh:12
+msgid   "Socket"
+msgstr  "Socket"
+
+#: ../xffm/fm/templates/preview.hh:601
 #, c-format
-msgid   "Cannot load file %s. Reason: %s"
-msgstr  "Ne može se učitati datoteka %s. Razlog: %s"
+msgid   "Cannot read from %s"
+msgstr  "Ne mogu da čitam iz %s"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
-msgid   "You need to restart the application"
-msgstr  "Potrebno je da ponovno pokrenete aplikaciju"
+#: ../xffm/fm/templates/prompt.hh:63
+msgid   "Input"
+msgstr  "Ulaz"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+#: ../xffm/fm/templates/prompt.hh:63 ../xffm/fm/classes/fmpage.hh:98
+msgid   " TTY"
+msgstr  ""
+
+#: ../xffm/fm/templates/prompt.hh:236
+#: ../xffm/menus/templates/menucallbacks.hh:48
+#, fuzzy, c-format
+msgid   "failed to chdir to %s"
+msgstr  "Neuspjeh izvoza u %s"
+
+#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
 #, fuzzy
-msgid   "FIXME New custom content"
-msgstr  "Uklopi u sadržaj"
+msgid   "Properties and Attributes"
+msgstr  "Standardni atributi"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Način pogleda:"
+
+#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
+#: ../xffm/response/classes/envresponse.hh:123
+msgid   "Apply changes"
+msgstr  "Primijeni izmjene"
+
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
+#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/response/templates/mountresponse.hh:147
+#: ../xffm/response/templates/fileresponse.hh:313
+#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/dialogbasic.hh:309
+#: ../xffm/response/templates/bfishresponse.hh:169
+#: ../xffm/response/classes/dndresponse.hh:23
+#: ../xffm/response/classes/rmresponse.hh:20
+#: ../xffm/response/classes/cpresponse.hh:81
+#: ../xffm/find/templates/findsignals.hh:568
+msgid   "Cancel"
+msgstr  "Odustani"
+
+#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
+msgid   "Encoding"
+msgstr  "Kodiranje"
+
+#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
+msgid   "Mimetype"
+msgstr  "Mime tip"
+
+#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
+msgid   "Successfully moved to trash."
+msgstr  "Uspješno premještno u smeće."
+
+#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
+msgid   "Source:"
+msgstr  "Izvor:"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:22
+#, fuzzy
+msgid   "Move to tab"
+msgstr  "Baci u smeće"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:83
+#: ../xffm/menus/templates/mainMenu.hh:111
+msgid   "Search"
+msgstr  "Traži"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:112
+#, fuzzy
+msgid   "Open terminal"
+msgstr  "Otvori terminal"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:86
+#: ../xffm/menus/templates/mainMenu.hh:113
+msgid   "Home"
+msgstr  "Početna stranica"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:26
 #, fuzzy
 msgid   "Open a New Window"
 msgstr  "Otvori u novom prozoru"
 
-#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
-#, fuzzy
-msgid   "Differences"
-msgstr  "Razlika"
+#: ../xffm/fm/classes/fmbuttonbox.hh:40
+msgid   "Icon Size"
+msgstr  "Veličina ikona"
 
-#: ../xffm/fm/dialog/notebook/createini.hh:67
-#, fuzzy
-msgid   "maximum"
-msgstr  "Maksimalno"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:75
-#, fuzzy
-msgid   "Add option"
-msgstr  "Dodaj opciju"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:79
-#, fuzzy
-msgid   "Remove option"
-msgstr  "Ukloni akciju"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:158
-#, fuzzy
-msgid   "icon ID"
-msgstr  "ikona"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:159
-#, fuzzy
-msgid   "tooltip"
-msgstr  "opis alata"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:160
-#, fuzzy
-msgid   "Select work directory"
-msgstr  "Izaberite direktorij"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:163
-#, fuzzy
-msgid   "Select executable"
-msgstr  "Izaberite tabele:"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:166
-msgid   "Run in terminal"
-msgstr  "Pokreni u terminalu"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:234
-#: ../xffm/response/chooserresponse.hh:20
-msgid   "Open"
-msgstr  "Otvori"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:268
-#: ../xffm/response/chooserresponse.hh:55
-#: ../xffm/response/chooserresponse.hh:69
-#, fuzzy
-msgid   "Choose file"
-msgstr  "Izaberi datoteku"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:277
-#: ../xffm/response/chooserresponse.hh:50
-#: ../xffm/response/chooserresponse.hh:62
-#, fuzzy
-msgid   "Choose directory"
-msgstr  "Izaberite direktorij"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:366
-msgid   "Save File"
-msgstr  "Snimi datoteku"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:380
-#, fuzzy
-msgid   "customButton.ini"
-msgstr  "Pritisno-dugme"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:420
-msgid   "Option"
-msgstr  "Opcija"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:424
-msgid   "text"
-msgstr  "tekst"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:436
-msgid   "folder"
-msgstr  "Datoteka"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:441
-msgid   "on"
-msgstr  "na"
-
-#: ../xffm/fm/dialog/notebook/createini.hh:446
-msgid   "off"
-msgstr  "isključeno"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:179
-#, fuzzy
-msgid   "Open menu"
-msgstr  "Otvori okvir"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:237
-#: ../xffm/fm/dialog/notebook/menupopover.hh:381
-msgid   "Background Color"
-msgstr  "Boja pozadine"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:238
-#: ../xffm/fm/dialog/notebook/menupopover.hh:372
-msgid   "Foreground Color"
-msgstr  "Boja teksta"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:240
-#: ../xffm/fm/dialog/notebook/menupopover.hh:354
-#, fuzzy
-msgid   "Command Text Color"
-msgstr  "Izmijeni boju teksta"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:241
-#: ../xffm/fm/dialog/notebook/menupopover.hh:363
-#, fuzzy
-msgid   "Error Text Color"
-msgstr  "Boja teksta"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:246
-#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
 msgid   "Color settings"
 msgstr  "Podešavanja boja"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:254
-msgid   "Sort by"
-msgstr  "Poređaj po"
+#: ../xffm/fm/classes/fmbuttonbox.hh:63
+msgid   "Colors"
+msgstr  "Boje"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:254
-msgid   "File extension"
-msgstr  "Nastavak imena datoteke"
+#: ../xffm/fm/classes/fmbuttonbox.hh:144
+msgid   "Icon Size:"
+msgstr  "Veličina Ikone:"
 
-#: ../xffm/fm/dialog/notebook/menupopover.hh:256
-#, fuzzy
-msgid   "View as list"
-msgstr  "Pogled pomoću liste"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:257
-msgid   "Show hidden files"
-msgstr  "Prikaži skrivene datoteke"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:258
-#, fuzzy
-msgid   "Show Backup Files"
-msgstr  "Pravljenje rezervne kopije je neuspjelo"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:259
-msgid   "Sort data in descending order"
-msgstr  "Sortiraj podatke u opadajućem redoslijedu"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:261
-msgid   "Sort by date"
-msgstr  "Poredaj po datumu"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:262
-msgid   "Sort by size"
-msgstr  "Poređaj po veličini"
-
-#: ../xffm/fm/dialog/notebook/menupopover.hh:288
-msgid   "Main menu"
-msgstr  "Glavni meni"
-
-#: ../xffm/fm/dialog/dialog.hh:121
-msgid   "Removed"
-msgstr  "Uklonjeno"
-
-#: ../xffm/common/run.hh:339
-msgid   "warning"
-msgstr  "upozorenje"
-
-#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
-#: ../xffm/response/passwdresponse.hh:34
-msgid   "Enter password"
-msgstr  "Upišite šifru"
-
-#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
-msgid   "Executable"
-msgstr  "Izvršni"
-
-#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
-#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
-msgid   "Run in Terminal"
-msgstr  "Pokreni u terminalu"
-
-#: ../xffm/common/run.hh:652
-#, fuzzy
-msgid   "Arguments for the Command"
-msgstr  "Argumenti za naredbu"
-
-#: ../xffm/common/run.hh:874
-#, fuzzy
-msgid   "You have selected multiple files or folders"
-msgstr  "Morate izabrati datoteku ili direktorij."
-
-#: ../xffm/common/settings.hh:178
+#: ../xffm/fm/classes/settings.hh:153
 #, fuzzy
 msgid   "New File:"
 msgstr  "Nova datoteka"
 
-#: ../xffm/common/util.hh:1511
-#, c-format
-msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
-        "attribute on that file."
-msgstr  "Skriptna datoteka \"%s\" nije izvršiva. Molimo postavite izvršne "
-        "atribute nad tom datotekom."
+#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/response/templates/efsresponse.hh:40
+msgid   "New"
+msgstr  "Novi"
 
-#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
-#, c-format
-msgid   "Open with %s"
-msgstr  "Otvori pomoću %s"
-
-#: ../xffm/common/util.hh:1513
-msgid   "Text Editor"
-msgstr  "Editor teksta"
-
-#: ../xffm/common/util.hh:1554
-msgid   "Console: quickly run single commands -- write a command here and "
-        "press enter."
-msgstr  "Konzola: brzo pokreni po jednu naredbu -- napiši je ovdje i pritisni "
-        "enter."
-
-#: ../xffm/common/dnd.hh:41
-msgid   "Target"
-msgstr  "Cilj"
-
-#: ../xffm/common/dnd.hh:41
-msgid   "Files"
-msgstr  "Datoteke"
-
-#: ../xffm/common/dnd.hh:49
+#: ../xffm/fm/classes/root.hh:59
 #, fuzzy
-msgid   "More…"
-msgstr  "Više"
+msgid   "Trash bin"
+msgstr  "Baci u smeće"
 
-#: ../xffm/common/dnd.hh:63
-msgid   "Move"
-msgstr  "Pomjeri"
+#: ../xffm/fm/classes/progress.hh:73
+msgid   "Running"
+msgstr  "Pokrenut"
 
-#: ../xffm/common/dnd.hh:143
+#: ../xffm/fm/classes/progress.hh:78
+msgid   "Waiting for operation to finish..."
+msgstr  "Čekam da se operacija završi..."
+
+#: ../xffm/fm/classes/bash.hh:25
+msgid   "Command"
+msgstr  "Naredba"
+
+#: ../xffm/fm/classes/bash.hh:28 ../xffm/fm/classes/bash.hh:61
+msgid   "File"
+msgstr  "Datoteka"
+
+#: ../xffm/fm/classes/bash.hh:31
+msgid   "Command history"
+msgstr  "Historijat komandi"
+
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
+msgid   "User"
+msgstr  "Korisnik"
+
+#: ../xffm/fm/classes/bash.hh:37
+msgid   "Variable"
+msgstr  "Varijabla"
+
+#: ../xffm/fm/classes/bash.hh:40
+msgid   "Host"
+msgstr  "Računar"
+
+#: ../xffm/fm/classes/bash.hh:51
+msgid   "Found no match"
+msgstr  "Nije pronađeno ništa što se poklapa"
+
+#: ../xffm/fm/classes/bash.hh:57
+msgid   "Symbolic link"
+msgstr  "Simbolički link"
+
+#: ../xffm/fm/classes/bash.hh:141
+msgid   "Matches"
+msgstr  "Odgovara"
+
+#: ../xffm/fm/classes/bash.hh:141
 #, fuzzy
-msgid   "Create Link"
-msgstr  "Napravi u:"
+msgid   "Too many selected files"
+msgstr  "Previše otvorenih datoteka"
 
-#: ../xffm/common/dnd.hh:155
-msgid   "more"
-msgstr  "više"
+#: ../xffm/fm/classes/bash.hh:339 ../xffm/fm/classes/ecryptfs.hh:346
+#: ../xffm/response/templates/efsresponse.hh:112
+#: ../xffm/find/classes/fgr.hh:124
+msgid   "Options:"
+msgstr  "Opcije:"
 
-#: ../xffm/common/gio.hh:91
+#: ../xffm/fm/classes/bash.hh:651
+msgid   "Completion mode:"
+msgstr  "Režim dovršavanja:"
+
+#: ../xffm/fm/classes/bash.hh:652
+msgid   "command"
+msgstr  "komanda"
+
+#: ../xffm/fm/classes/bash.hh:663 ../xffm/fm/classes/bash.hh:667
+msgid   "Options >>"
+msgstr  "Opcije >>"
+
+#: ../xffm/fm/classes/fmpage.hh:98
+msgid   "Output"
+msgstr  "Izlaz"
+
+#: ../xffm/fm/classes/fmpage.hh:137
+#, fuzzy
+msgid   "Show/Hide"
+msgstr  "Prikaži / sakrij"
+
+#: ../xffm/fm/classes/fmpage.hh:139 ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/menus/templates/inputMenu.hh:27
+#: ../xffm/menus/templates/inputMenu.hh:42
+#: ../xffm/menus/templates/inputMenu.hh:58
+#: ../xffm/menus/templates/outputMenu.hh:10
+#: ../xffm/menus/templates/outputMenu.hh:23
+#: ../xffm/menus/templates/outputMenu.hh:36
+#: ../xffm/menus/templates/outputMenu.hh:49
+msgid   "Clear"
+msgstr  "Očisti"
+
+#: ../xffm/fm/classes/fmpage.hh:160
+msgid   "Font size"
+msgstr  "Veličina fonta"
+
+#: ../xffm/fm/classes/gio.hh:137
 msgid   "Copying files"
 msgstr  "Kopiram datoteke"
 
-#: ../xffm/common/gio.hh:95
+#: ../xffm/fm/classes/gio.hh:139
+msgid   "Moving files"
+msgstr  "Pomjeram datoteke"
+
+#: ../xffm/fm/classes/gio.hh:141
 msgid   "linking"
 msgstr  "povezujem"
 
-#: ../xffm/common/gio.hh:97
+#: ../xffm/fm/classes/gio.hh:143
 #, fuzzy
 msgid   "rename"
 msgstr  "Promijeni ime"
 
-#: ../xffm/common/gio.hh:408
+#: ../xffm/fm/classes/gio.hh:418
 msgid   "Overwrite?"
 msgstr  "Da li da prebrišem?"
 
-#: ../xffm/common/gio.hh:498
+#: ../xffm/fm/classes/gio.hh:512
 #, fuzzy, c-format
 msgid   "(%d of %d)"
 msgstr  "%d od %d"
 
-#: ../xffm/response/customresponse.hh:55
-msgid   "Execute command"
-msgstr  "Izvrši naredbu"
+#: ../xffm/fm/classes/ecryptfs.hh:6
+msgid   "Encryption Options"
+msgstr  "Opcije za šifriranje"
 
-#: ../xffm/response/customresponse.hh:103
-msgid   "Source File"
-msgstr  "Izvorna datoteka"
+#: ../xffm/fm/classes/ecryptfs.hh:7
+msgid   "Encrypt Files"
+msgstr  "Šifrovati Datoteke"
 
-#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
-msgid   "Ok"
-msgstr  "U redu"
-
-#: ../xffm/response/timeoutresponse.hh:57
+#: ../xffm/fm/classes/ecryptfs.hh:8
 #, fuzzy
-msgid   "Dismiss"
-msgstr  "Odbaci sve"
+msgid   "encrypted volume"
+msgstr  "PGP-kriptovana datoteka"
 
-#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
-msgid   "Running"
-msgstr  "Pokrenut"
-
-#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
-msgid   "Waiting for operation to finish..."
-msgstr  "Čekam da se operacija završi..."
-
-#: ../xffm/response/passwdresponse.hh:131
+#: ../xffm/fm/classes/ecryptfs.hh:9
 #, fuzzy
-msgid   "User Input"
-msgstr  "Info o korisniku"
+msgid   "create"
+msgstr  "Napravi"
 
-#: ../xffm/response/passwdresponse.hh:147
-msgid   "Response Requested"
-msgstr  "Zahtjeva se odgovor"
+#: ../xffm/fm/classes/ecryptfs.hh:10
+msgid   "Encrypted Container"
+msgstr  "Šifrovani sadržalac"
 
-#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
-msgid   "No Read Permission"
-msgstr  "Nema dozvole za čitanje"
-
-#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
-#: ../xffm/find/dialog.hh:341
-msgid   "Path"
-msgstr  "Putanja"
-
-#: ../xffm/find/fgr.hh:125
-msgid   "Locate documents and folders on this computer by name or content"
-msgstr  ""
-
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
-msgid   "Filter:"
-msgstr  "Filter:"
-
-#: ../xffm/find/fgr.hh:126
-msgid   "Search for files"
-msgstr  "Pretraga za datotekama"
-
-#: ../xffm/find/fgr.hh:128
-msgid   "Contents:"
-msgstr  "Sadržaj:"
-
-#: ../xffm/find/fgr.hh:128
+#: ../xffm/fm/classes/ecryptfs.hh:11
 #, fuzzy
-msgid   "File's contents filtered as plain text."
-msgstr  "Snimi zabilješku kao običan tekst"
+msgid   "Encrypt the file list"
+msgstr  "Šifruj datoteke"
 
-#: ../xffm/find/fgr.hh:131
+#: ../xffm/fm/classes/ecryptfs.hh:12
+#, fuzzy
+msgid   "Plaintext Password"
+msgstr  "Lozinka sajta:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:14
+#, fuzzy
+msgid   "local filesystem"
+msgstr  "Lokalne datoteke"
+
+#: ../xffm/fm/classes/ecryptfs.hh:15
+#, fuzzy
+msgid   "Computer Name:"
+msgstr  "Ime računara"
+
+#: ../xffm/fm/classes/ecryptfs.hh:16
+msgid   "Remote Path"
+msgstr  "Udaljena staza"
+
+#: ../xffm/fm/classes/ecryptfs.hh:17
+msgid   "Mount point:"
+msgstr  "Tačka montiranja:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:18
+msgid   "URL"
+msgstr  "URL"
+
+#: ../xffm/fm/classes/ecryptfs.hh:19
+msgid   "Enable file monitoring"
+msgstr  "Omoući praćenje datoteka"
+
+#: ../xffm/fm/classes/ecryptfs.hh:20
+msgid   "Caution"
+msgstr  "Obazrivost"
+
+#: ../xffm/fm/classes/ecryptfs.hh:21
+msgid   "Username:"
+msgstr  "Korisničko ime:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:22
+#, fuzzy
+msgid   "Secure Shell Key"
+msgstr  "Sigurna školjka (ssh)"
+
+#: ../xffm/fm/classes/ecryptfs.hh:23
+#, fuzzy
+msgid   "Allow empty private key passphrase"
+msgstr  "Pristupni izraz privatnog ključa: "
+
+#: ../xffm/fm/classes/ecryptfs.hh:24
+#, fuzzy
+msgid   "Enter your Secure Shell passphrase:"
+msgstr  "Unesite svoju OpenPGP lozinku:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:44
+msgid   "Read Only Mode"
+msgstr  "Samo za čitanje"
+
+#: ../xffm/fm/classes/ecryptfs.hh:49 ../xffm/find/classes/fgr.hh:131
 msgid   "Verbose output debugging mode."
 msgstr  "Ispravljački režim sa opširnim izlazom."
 
-#: ../xffm/find/fgr.hh:133
+#: ../xffm/fm/classes/ecryptfs.hh:54 ../xffm/find/classes/fgr.hh:133
 msgid   "Show version information"
 msgstr  "Prikaži podatke o verziji"
 
-#: ../xffm/find/fgr.hh:135
-msgid   "Filter Details"
-msgstr  "Detalji o filteru"
+#: ../xffm/fm/classes/ecryptfs.hh:59
+msgid   "Overwrite Mode"
+msgstr  "Prebrisavanje"
 
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+#: ../xffm/fm/classes/ecryptfs.hh:65
 #, fuzzy
-msgid   "Stay on single filesystem"
-msgstr  "Datotečni sistem samo za čitanje"
+msgid   "Dry run"
+msgstr  "Pokretanje ispravljanja grešaka"
 
-#: ../xffm/find/fgr.hh:140
-msgid   "Print..."
-msgstr  "Štampaj..."
-
-#: ../xffm/find/fgr.hh:140
-msgid   "The unique Process ID that identifies this process."
-msgstr  "Jedinstveni ID procesa koji ga jednoznačno predstavlja."
-
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
-msgid   "Find hidden files and directories"
-msgstr  "Pronađi skrivene datoteke i direktorije"
-
-#: ../xffm/find/fgr.hh:143
-msgid   "Filter"
-msgstr  "Filter"
-
-#: ../xffm/find/fgr.hh:144
-msgid   "To display files which pass the filter (stars and regexps will be "
-        "processed)"
+#: ../xffm/fm/classes/ecryptfs.hh:68
+msgid   "Don't actually call the mount system call."
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
-msgid   "Recursive"
-msgstr  "Rekurzivno"
-
-#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
-#: ../xffm/find/fgr.hh:150
-msgid   "KByte"
-msgstr  "kB"
-
-#: ../xffm/find/fgr.hh:148
-msgid   "is greater than or equal to"
-msgstr  "je veće ili jednako od"
-
-#: ../xffm/find/fgr.hh:150
-msgid   "is less than or equal to"
-msgstr  "je manje ili jednako od"
-
-#: ../xffm/find/fgr.hh:152
-msgid   "Set UID"
-msgstr  "Podesiti UID"
-
-#: ../xffm/find/fgr.hh:152
+#: ../xffm/fm/classes/ecryptfs.hh:71
 #, fuzzy
-msgid   "Executable Text Files"
-msgstr  "Izvršne datoteke"
+msgid   "Update file list"
+msgstr  "Dobijen spisak datoteka"
 
-#: ../xffm/find/fgr.hh:154
-msgid   "The permissions of the file, in octal notation."
-msgstr  "Dozvole za datoteku, u oktalnom decimalnom sistemu."
-
-#: ../xffm/find/fgr.hh:155
-msgid   "Type"
-msgstr  "Tip"
-
-#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
-msgid   "Any"
-msgstr  "Bilo koji"
-
-#: ../xffm/find/fgr.hh:157
-#, fuzzy
-msgid   "Default type"
-msgstr  "Zadano vrijeme"
-
-#: ../xffm/find/fgr.hh:161
-#, fuzzy
-msgid   "UNIX Socket"
-msgstr  "Socket"
-
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
-msgid   "Minutes"
-msgstr  "Minuta"
-
-#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
-#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
-#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "TIME"
-msgstr  "ISTIME(x)"
-
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
-msgid   "Hours"
-msgstr  "Sati"
-
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
-msgid   "Days"
-msgstr  "dani"
-
-#: ../xffm/find/fgr.hh:175
-msgid   "Month"
-msgstr  "Mjesec"
-
-#: ../xffm/find/fgr.hh:177
-msgid   "Month(s)"
-msgstr  "Mjesec(i)"
-
-#: ../xffm/find/fgr.hh:180
-#, fuzzy
-msgid   "Modification Time :"
-msgstr  "Vrijeme izmjene"
-
-#: ../xffm/find/fgr.hh:184
-#, fuzzy
-msgid   "Access Time :"
-msgstr  "Zadnji pristup:"
-
-#: ../xffm/find/fgr.hh:188
-#, fuzzy
-msgid   "Creation Time :"
-msgstr  "Vrijeme stvaranja"
-
-#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
-msgid   "uid"
-msgstr  "uid"
-
-#: ../xffm/find/fgr.hh:192
-msgid   "User:"
-msgstr  "Korisnik:"
-
-#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
-#, fuzzy
-msgid   "gid"
-msgstr  "Rigidno"
-
-#: ../xffm/find/fgr.hh:195
-msgid   "Group:"
-msgstr  "Grupa:"
-
-#: ../xffm/find/fgr.hh:198
-msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-        "character that  normally  follows  a file  name"
+#: ../xffm/fm/classes/ecryptfs.hh:75
+msgid   "By default, an entry is created in/etc/mtab for every mounted file "
+        "system.\n"
+        " Use this option to skip making an entry."
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:200
-msgid   "Content View"
-msgstr  "Pregled sadržaja"
+#: ../xffm/fm/classes/ecryptfs.hh:78
+#, fuzzy
+msgid   "Tolerate sloppy options."
+msgstr  "Opcije kategorija"
 
-#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
-#: ../xffm/find/fgr.hh:204
-msgid   "STRING"
-msgstr  "ZNAK"
+#: ../xffm/fm/classes/ecryptfs.hh:81
+msgid   "Tolerate sloppy mount options rather than fail."
+msgstr  ""
 
-#: ../xffm/find/fgr.hh:204
-msgid   "Extended"
-msgstr  "Produženo"
+#: ../xffm/fm/classes/ecryptfs.hh:85
+msgid   "Show Help"
+msgstr  "Pokaži pomoć"
 
-#: ../xffm/find/fgr.hh:206
-msgid   "Ignore case"
-msgstr  "Zanemari mala i velika slova"
+#: ../xffm/fm/classes/ecryptfs.hh:99
+#, fuzzy
+msgid   "Cipher algorithm"
+msgstr  "Algoritam klizača"
 
-#: ../xffm/find/fgr.hh:208
-msgid   "Text Files"
-msgstr  "Tekstualni datoteke"
+#: ../xffm/fm/classes/ecryptfs.hh:106
+msgid   "Specify  the keysize to be used with the selected cipher. If the "
+        "cipher only has one keysize the keysize  does  not  need  to  be "
+        "specified.\n"
+        "\n"
+        "\taes: blocksize = 16; min keysize = 16; max keysize = 32\n"
+        "\tblowfish: blocksize = 16; min keysize = 16; max keysize = 56\n"
+        "\tdes3_ede: blocksize = 8; min keysize = 24; max keysize = 24\n"
+        "\tcast6: blocksize = 16; min keysize = 16; max keysize = 32\n"
+        "\tcast5: blocksize = 8; min keysize = 5; max keysize = 16\n"
+        "\t"
+msgstr  ""
 
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+#: ../xffm/fm/classes/ecryptfs.hh:112
+msgid   "Allows for non-eCryptfs files to be read and written from within an "
+        "eCryptfs mount. This option is turned off by default."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:119
+msgid   "Specify whether filename encryption should be enabled.  If  not, "
+        "the  mount  helper  will  not  prompt  the user for the filename "
+        "encryption key signature.\n"
+        "If you enabled filename encryption then pass an additional mount "
+        "option: ecryptfs_fnek_sig=XY, where XY is the same signature you "
+        "provide with the ecryptfs_sig option."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:123
+msgid   "fekek_sig"
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:125
+msgid   "Specify  the  signature  of the mount wide authentication token. The "
+        "authentication token must be in the  kernel  keyring  before the  "
+        "mount  is performed. \n"
+        "ecryptfs-manager or the eCryptfs mount helper can be used to "
+        "construct the authentication token and add it to the keyring prior "
+        "to mounting."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:130
+msgid   "fnek_sig"
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:132
+msgid   "Specify  the  signature  of  the mount wide authentication token "
+        "used for filename crypto. The authentication must be in the kernel "
+        "keyring before mounting."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:141
+msgid   "Do not check the mount key signature against the values  in  the "
+        "user's  ~/.ecryptfs/sig-cache.txt  file. This is useful for such "
+        "things as non-interactive  setup  scripts,  so  that  the  mount "
+        "helper  does  not stop and prompt the user in the event that the key "
+        "sig is not in the cache."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:148
+msgid   "This option provides a unified  encrypted  file  format  of  the "
+        "eCryptfs  files in the lower mount point.  Currently, it is only "
+        "useful if the lower mount point contains files with the metadata "
+        "stored in the extended attribute.  Upon a file read in the upper "
+        "mount point, the encrypted version of the file will be presented "
+        "with  the  metadata  in  the  file  header instead of the xattr.  "
+        "Files cannot be opened for writing when this option is enabled."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:155
+msgid   "Store the metadata in the extended attribute of the lower  files "
+        "rather than the header region of the lower files."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:162
+msgid   "Log  ecryptfs  information  to  /var/log/messages.   Do  not run "
+        "eCryptfs in verbose-mode unless you are doing so  for  the  sole "
+        "purpose  of development, since secret values will be written out to "
+        "the system log in that case."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:170
+msgid   "If verbosity=1, the mount helper will ask you for missing values "
+        "(default).  Otherwise, if verbosity=0, it will not ask for missing "
+        "values and will fail if required values are omitted.  "
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:175
+#, fuzzy
+msgid   "Passphrase"
+msgstr  "Passphrase:"
+
+#: ../xffm/fm/classes/ecryptfs.hh:177
+msgid   "The actual password is passphrase. Since the password is visible to "
+        "utilities (like ps under Unix) this form should only be  used where "
+        "security is not important."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:182 ../xffm/fm/classes/ecryptfs.hh:203
+#: ../xffm/fm/classes/ecryptfs.hh:212
+msgid   "filename"
+msgstr  "ime datoteke"
+
+#: ../xffm/fm/classes/ecryptfs.hh:184
+msgid   "The    password   should   be   specified   in   a   file   with "
+        "passwd=(passphrase). It is highly reccomended that the  file  be "
+        "stored on a secure medium such as a personal usb key."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:191 ../xffm/fm/classes/ecryptfs.hh:220
+#, fuzzy
+msgid   "The password is specified through the specified file descriptor."
+msgstr  "Lozinka koja se šalje serveru na provjeru"
+
+#: ../xffm/fm/classes/ecryptfs.hh:198
+msgid   "The salt should be specified as a 16 digit hex value.  "
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:205 ../xffm/fm/classes/ecryptfs.hh:214
+msgid   "The   password   should   be   specified   in   a   file    with "
+        "openssl_passwd=(openssl-password). It is highly reccomended that the "
+        "file be stored on a secure medium such  as  a  personal  usb key."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:218
+#, fuzzy
+msgid   "File descriptor"
+msgstr  "LOŠ deskriptor datoteke"
+
+#: ../xffm/fm/classes/ecryptfs.hh:224
+msgid   "password"
+msgstr  "lozinka"
+
+#: ../xffm/fm/classes/ecryptfs.hh:226
+msgid   "The  password  can  be  specified on the command line. Since the "
+        "password is visible in the process list,  it  is  highly  "
+        "recommended to use this option only for testing purposes."
+msgstr  ""
+
+#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
+#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/response/templates/mountresponse.hh:151
+#: ../xffm/response/templates/efsresponse.hh:138
+msgid   "Mount"
+msgstr  "Montiraj"
+
+#: ../xffm/fm/classes/ecryptfs.hh:392
+#: ../xffm/response/templates/efsresponse.hh:181
+msgid   "Save"
+msgstr  "Snimi"
+
+#: ../xffm/fm/classes/ecryptfs.hh:612
+#: ../xffm/response/templates/efsresponse.hh:160
+#: ../xffm/find/templates/findresponse.hh:275
+#: ../xffm/find/templates/findresponse.hh:561
+#: ../xffm/find/templates/findresponse.hh:594
+msgid   "Options"
+msgstr  "Opcije"
+
+#: ../xffm/fm/classes/ecryptfs.hh:613
+#: ../xffm/response/templates/efsresponse.hh:166
+msgid   "Advanced"
+msgstr  "Napredno"
+
+#: ../xffm/fm/classes/ecryptfs.hh:928
+#, c-format
+msgid   "Mounting %s"
+msgstr  "Montiranje %s"
+
+#: ../xffm/fm/classes/ecryptfs.hh:986
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Unesite lozinku za %s"
+
+#: ../xffm/response/templates/mountresponse.hh:115
+#: ../xffm/response/templates/mountresponse.hh:168
+msgid   "Mount Device"
+msgstr  "Montiraj uređaj"
+
+#: ../xffm/response/templates/mountresponse.hh:128
+#: ../xffm/response/templates/efsresponse.hh:141
+#: ../xffm/response/templates/efsresponse.hh:146
+#: ../xffm/response/templates/efsresponse.hh:484
+#: ../xffm/response/templates/efsresponse.hh:490
+msgid   "Mount Point"
+msgstr  "Tačka montiranja"
+
+#: ../xffm/response/templates/mountresponse.hh:244
+#, fuzzy, c-format
+msgid   "Cannot create directory '%s'"
+msgstr  "Ne mogu da napravim direktorij %s"
+
+#: ../xffm/response/templates/mountresponse.hh:245
+#: ../xffm/response/templates/mkdirresponse.hh:70
+msgid   "Sorry"
+msgstr  "Izvinite"
+
+#: ../xffm/response/templates/fileresponse.hh:37
+#, fuzzy
+msgid   "Select Directory"
+msgstr  "Izbor direktroija dnevnika"
+
+#: ../xffm/response/templates/fileresponse.hh:136
+#: ../xffm/response/templates/fileresponse.hh:267
+#: ../xffm/response/templates/fileresponse.hh:355
+msgid   "No folder selected."
+msgstr  "Folder nije selektovan."
+
+#: ../xffm/response/templates/fileresponse.hh:239
+#: ../xffm/response/classes/inforesponse.hh:6
+msgid   "Information"
+msgstr  "Informacije"
+
+#: ../xffm/response/templates/fileresponse.hh:263
+msgid   "Selection:"
+msgstr  "Izbor:"
+
+#: ../xffm/response/templates/fileresponse.hh:317
+#: ../xffm/response/templates/mkdirresponse.hh:22
+msgid   "New Folder"
+msgstr  "Novi direktorij"
+
+#: ../xffm/response/templates/fileresponse.hh:321
+msgid   "Accept"
+msgstr  "Prihvati"
+
+#: ../xffm/response/templates/fileresponse.hh:500
+#, fuzzy
+msgid   "New folder name:"
+msgstr  "Ime novog direktorija"
+
+#: ../xffm/response/templates/fileresponse.hh:504
+#, fuzzy
+msgid   "New Directory"
+msgstr  "Novi direktorijum"
+
+#: ../xffm/response/templates/fileresponse.hh:504
+msgid   "Create in folder:"
+msgstr  "Napravi u direktoriju:"
+
+#: ../xffm/response/templates/openwith.hh:121
+msgid   "Open With..."
+msgstr  "Otvori pomoću..."
+
+#: ../xffm/response/templates/openwith.hh:198
+msgid   "Is executable"
+msgstr  "Izvršno"
+
+#: ../xffm/response/templates/openwith.hh:204
+msgid   "Execute"
+msgstr  "Izvrši"
+
+#: ../xffm/response/templates/openwith.hh:249
+#: ../xffm/response/templates/dialogbasic.hh:312
+#: ../xffm/response/templates/bfishresponse.hh:173
+msgid   "Apply"
+msgstr  "Primjeni"
+
+#: ../xffm/response/templates/openwith.hh:257
+msgid   "By default applications will be run in the background and only their "
+        "output will be displayed in a toolview. This makes it impossible to "
+        "interact with applications requiring user input from a terminal "
+        "emulator. To run such applications, you should use an external "
+        "terminal."
+msgstr  "Standardno aplikacije će se pokrenuti u pozadini i samo njihov izlaz "
+        "će biti prikazana u alatnom pogledu. Ovo čini nemogućim za "
+        "interakciju sa aplikacijama koje zahtijevaju korisnički unosa iz "
+        "emulatora terminala. Da biste pokrenuli takve aplikacije, trebalo bi "
+        "da koristite eksterni terminal."
+
+#: ../xffm/response/templates/openwith.hh:272
+#, fuzzy
+msgid   "Use External Terminal:"
+msgstr  "Koristi eksterni program za poštu"
+
+#: ../xffm/response/templates/openwith.hh:335
+#, fuzzy, c-format
+msgid   "Cannot find executable for \"%s\""
+msgstr  "Ne mogu naći latex program."
+
+#: ../xffm/response/templates/tarresponse.hh:13
+msgid   "GZip"
+msgstr  "GZip"
+
+#: ../xffm/response/templates/tarresponse.hh:13
+msgid   "BZip2"
+msgstr  "BZip2"
+
+#: ../xffm/response/templates/tarresponse.hh:13
+#, fuzzy
+msgid   "XZ"
+msgstr  "XYZ"
+
+#: ../xffm/response/templates/tarresponse.hh:13
+msgid   "Zip"
+msgstr  "Zip"
+
+#: ../xffm/response/templates/tarresponse.hh:20
+#, fuzzy
+msgid   "Compressed file..."
+msgstr  "Kompresovana datoteka"
+
+#: ../xffm/response/templates/efsresponse.hh:141
+#: ../xffm/response/templates/efsresponse.hh:484
+msgid   "Encrypted"
+msgstr  "Šifrovano"
+
+#: ../xffm/response/templates/efsresponse.hh:146
+#: ../xffm/response/templates/efsresponse.hh:490
+msgid   "Unencrypted"
+msgstr  "Nešifrovano"
+
+#: ../xffm/response/templates/efsresponse.hh:485
+#: ../xffm/response/templates/efsresponse.hh:491
+#, fuzzy
+msgid   "Folder does not exist"
+msgstr  "Datoteka ne postoji"
+
+#: ../xffm/response/templates/dialogdrop.hh:45
+msgid   "Copying"
+msgstr  "Kopiram"
+
+#: ../xffm/response/templates/dialogdrop.hh:45
+msgid   "Moving"
+msgstr  "Pomjeram"
+
+#: ../xffm/response/templates/dialogdrop.hh:48
+msgid   "Completed"
+msgstr  "Završeno"
+
+#: ../xffm/response/templates/mkdirresponse.hh:20
+#: ../xffm/response/classes/wsresponse.hh:11
+#: ../xffm/response/classes/lnresponse.hh:10
+#: ../xffm/response/classes/cpresponse.hh:11
+#: ../xffm/response/classes/mvresponse.hh:9
+#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
+msgid   "Path"
+msgstr  "Putanja"
+
+#: ../xffm/response/templates/mkdirresponse.hh:68
+#, fuzzy, c-format
+msgid   "Cannot create folder '%s': %s"
+msgstr  "Ne mogu da napravim datoteku %s: %s"
+
+#: ../xffm/response/templates/bfish.hh:14
+#, fuzzy
+msgid   "Sorry, file not found"
+msgstr  "Font nije pronađen"
+
+#: ../xffm/response/templates/bfishresponse.hh:93
+msgid   "Encrypt:"
+msgstr  "Šifrovanje:"
+
+#: ../xffm/response/templates/bfishresponse.hh:109
+msgid   "Writes text on standard output."
+msgstr  "Ispisuje text na standardni izlaz."
+
+#: ../xffm/response/templates/bfishresponse.hh:131
+msgid   "Password:"
+msgstr  "Šifra:"
+
+#: ../xffm/response/templates/bfishresponse.hh:133
+msgid   "Confirm password:"
+msgstr  "Potvrdite šifru:"
+
+#: ../xffm/response/templates/bfishresponse.hh:154
+msgid   "Passwords do not match."
+msgstr  "Lozinke se ne poklapaju."
+
+#: ../xffm/response/templates/bfishresponse.hh:188
+msgid   "bcrypt (blowfish encryption)"
+msgstr  ""
+
+#: ../xffm/response/templates/bfishresponse.hh:195
+msgid   "User cancelled."
+msgstr  "Korisnik je otkazao."
+
+#: ../xffm/response/templates/bfishresponse.hh:215
+msgid   "No password set"
+msgstr  "Lozinka nije postavljena"
+
+#: ../xffm/response/templates/bfishresponse.hh:220
+#, fuzzy
+msgid   "Passwords Do Not Match"
+msgstr  "Lozinke se ne podudaraju"
+
+#: ../xffm/response/templates/jumpresponse.hh:23
+#, fuzzy
+msgid   "The location does not exist."
+msgstr  "Lokacija \"%s\" ne postoji."
+
+#: ../xffm/response/dialogs.hh:68
+#, fuzzy, c-format
+msgid   "Delete '%s'"
+msgstr  "Obriši %s"
+
+#: ../xffm/response/classes/rmlistresponse.hh:17
+#: ../xffm/response/classes/rmresponse.hh:17
+msgid   "Shred"
+msgstr  "Isjeckaj"
+
+#: ../xffm/response/classes/rmlistresponse.hh:19
+#: ../xffm/response/classes/rmresponse.hh:19
+msgid   "Trash"
+msgstr  "Smeće"
+
+#: ../xffm/response/classes/rmlistresponse.hh:26
+msgid   "WARNING"
+msgstr  "UPOZORENJE"
+
+#: ../xffm/response/classes/rmlistresponse.hh:30
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Morate izabrati datoteku ili direktorij."
+
+#: ../xffm/response/classes/envresponse.hh:90
+msgid   "Environment variables"
+msgstr  "Promjenljive okruženja"
+
+#: ../xffm/response/classes/envresponse.hh:122
+msgid   "No changes need to be saved"
+msgstr  "Nema izmjena koje treba da se snime"
+
+#: ../xffm/response/classes/envresponse.hh:217
+#, fuzzy
+msgid   "Environment Variable"
+msgstr  "Varijable Okruženja"
+
+#: ../xffm/response/classes/progressbar.hh:70
+msgid   "Cancelled"
+msgstr  "Otkazano"
+
+#: ../xffm/response/classes/progressbar.hh:70
+#, fuzzy
+msgid   "Idle Timeout"
+msgstr  "Vrijeme mirovanja"
+
+#: ../xffm/response/classes/wsresponse.hh:13
+msgid   "Workspace Switcher"
+msgstr  "Prebacivanje između radnih površina"
+
+#: ../xffm/response/classes/wsresponse.hh:36
+#: ../xffm/menus/templates/menucallbacks.hh:130
+#, c-format
+msgid   "Workspace %s"
+msgstr  "Radna površina %s"
+
+#: ../xffm/response/classes/wsresponse.hh:37
+#: ../xffm/menus/templates/menucallbacks.hh:131
+msgid   "does not exist"
+msgstr  "ne postoji"
+
+#: ../xffm/response/classes/dndresponse.hh:13
+msgid   "Drop Target"
+msgstr  "Mjesto za spuštanje"
+
+#: ../xffm/response/classes/dndresponse.hh:21
+msgid   "Move"
+msgstr  "Pomjeri"
+
+#: ../xffm/response/classes/lnresponse.hh:12
+#: ../xffm/response/classes/lnresponse.hh:21
+#, fuzzy
+msgid   "symlink"
+msgstr  "link"
+
+#: ../xffm/response/classes/cpresponse.hh:42
+#, fuzzy
+msgid   "Copy files"
+msgstr  "Kopiraj datoteku."
+
+#: ../xffm/response/classes/cpresponse.hh:127
+msgid   "copy"
+msgstr  "kopiraj"
+
+#: ../xffm/response/classes/cpresponse.hh:129
+#, fuzzy
+msgid   "move"
+msgstr  " potez"
+
+#: ../xffm/response/classes/cpresponse.hh:131
+msgid   "link"
+msgstr  "link"
+
+#: ../xffm/response/classes/cpresponse.hh:134
+#, fuzzy
+msgid   "Operation completed"
+msgstr  "Završen dio"
+
+#: ../xffm/response/classes/passwdresponse.hh:9
+msgid   "Security"
+msgstr  "Sigurnost"
+
+#: ../xffm/mime/mimemagic.hh:69 ../xffm/mime/mimemagic.hh:113
+msgid   "No Read Permission"
+msgstr  "Nema dozvole za čitanje"
+
+#: ../xffm/find/templates/findresponse.hh:111
+#, fuzzy
+msgid   "Find files"
+msgstr  "Pronađi u datotekama"
+
+#: ../xffm/find/templates/findresponse.hh:278
+#: ../xffm/find/templates/findresponse.hh:780
+#, fuzzy
+msgid   "Advanced options"
+msgstr  "Napredne opcije"
+
+#: ../xffm/find/templates/findresponse.hh:286
+msgid   "Find in Files"
+msgstr  "Pronađi u datotekama"
+
+#: ../xffm/find/templates/findresponse.hh:290
+#: ../xffm/find/templates/findresponse.hh:312
+#, fuzzy
+msgid   "Cancel Operation"
+msgstr  "Da, otkaži operacije"
+
+#: ../xffm/find/templates/findresponse.hh:307
+#, fuzzy
+msgid   "Show search results for this query"
+msgstr  "Pretraga nema rezultata."
+
+#: ../xffm/find/templates/findresponse.hh:323
+#: ../xffm/find/templates/findresponse.hh:327
+#, fuzzy
+msgid   "Clear search"
+msgstr  "Očisti pretragu"
+
+#: ../xffm/find/templates/findresponse.hh:503
+msgid   "Show help"
+msgstr  "Prikaži pomoć"
+
+#: ../xffm/find/templates/findresponse.hh:532
+msgid   "Case Sensitive"
+msgstr  "Razlikovanje malih i velikih slova"
+
+#: ../xffm/find/templates/findresponse.hh:533
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Dodatno uklanjanje"
+
+#: ../xffm/find/templates/findresponse.hh:534
+msgid   "Include binary files"
+msgstr  "Ukljući binarne datoteke"
+
+#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
+msgid   "Line Count"
+msgstr  "Broj linija"
+
+#: ../xffm/find/templates/findresponse.hh:544
+msgid   "Anywhere"
+msgstr  "gdje bilo"
+
+#: ../xffm/find/templates/findresponse.hh:545
+msgid   "Whole words only"
+msgstr  "Samo cijele riječi"
+
+#: ../xffm/find/templates/findresponse.hh:546
+msgid   "lines"
+msgstr  "linija"
+
+#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
 #, fuzzy
 msgid   "No match"
 msgstr  "(Bez Pronalaska)"
 
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
-msgid   "Line Count"
-msgstr  "Broj linija"
+#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
+msgid   "Filter:"
+msgstr  "Filter:"
 
-#: ../xffm/find/fgr.hh:214
-msgid   "Words"
-msgstr  "Riječi"
+#: ../xffm/find/templates/findresponse.hh:577
+#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
+msgid   "Recursive"
+msgstr  "Rekurzivno"
 
-#: ../xffm/find/fgr.hh:216
-msgid   "Lines"
-msgstr  "Linije"
+#: ../xffm/find/templates/findresponse.hh:578
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  "Pronađi skrivene datoteke i direktorije"
 
-#: ../xffm/find/fgr.hh:362
-#, fuzzy, c-format
-msgid   "Usage : %s [OPTIONS]\n"
-msgstr  "Upotreba: %sRAW [OTVORITI | ZATVORITI]"
+#: ../xffm/find/templates/findresponse.hh:580
+#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "Datotečni sistem samo za čitanje"
 
-#: ../xffm/find/signals.hh:7
-msgid   "Regular"
-msgstr  "osnovni"
+#: ../xffm/find/templates/findresponse.hh:582
+msgid   "Upper limit"
+msgstr  "Gornja granica"
 
-#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/templates/findresponse.hh:583
+#: ../xffm/find/templates/findsignals.hh:508
 msgid   "Results"
 msgstr  "Rezultati"
 
-#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#: ../xffm/find/templates/findresponse.hh:602
+msgid   "Contains the text"
+msgstr  "Sadrži tekst"
+
+#: ../xffm/find/templates/findresponse.hh:667
+#: ../xffm/find/templates/findsignals.hh:318
+msgid   "File size"
+msgstr  "veličina datoteke"
+
+#: ../xffm/find/templates/findresponse.hh:680
+msgid   "At Least"
+msgstr  "Najmanje"
+
+#: ../xffm/find/templates/findresponse.hh:680
+#: ../xffm/find/templates/findresponse.hh:687
+msgid   "kBytes"
+msgstr  "kB"
+
+#: ../xffm/find/templates/findresponse.hh:687
+msgid   "At Most"
+msgstr  "Najviše"
+
+#: ../xffm/find/templates/findresponse.hh:695
+#: ../xffm/find/templates/findsignals.hh:324
+msgid   "Specific Time"
+msgstr  "određeno vrijeme"
+
+#: ../xffm/find/templates/findresponse.hh:705
+msgid   "Modified"
+msgstr  "Promijenjeno"
+
+#: ../xffm/find/templates/findresponse.hh:705
+msgid   "Created"
+msgstr  "Napravljeno"
+
+#: ../xffm/find/templates/findresponse.hh:705
+#, fuzzy
+msgid   "Accessed"
+msgstr  "Zadnji pristup:"
+
+#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/classes/fgr.hh:168
+msgid   "Minutes"
+msgstr  "Minuta"
+
+#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/classes/fgr.hh:171
+msgid   "Hours"
+msgstr  "Sati"
+
+#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/classes/fgr.hh:174
+msgid   "Days"
+msgstr  "dani"
+
+#: ../xffm/find/templates/findresponse.hh:718
+msgid   "Months"
+msgstr  "Mjeseci"
+
+#: ../xffm/find/templates/findresponse.hh:729
+#: ../xffm/find/templates/findsignals.hh:329
+#, fuzzy
+msgid   "File properties"
+msgstr  "Svojstve datoteke"
+
+#: ../xffm/find/templates/findresponse.hh:748
+msgid   "Group"
+msgstr  "Grupa"
+
+#: ../xffm/find/templates/findresponse.hh:753
+#: ../xffm/find/templates/findsignals.hh:175
+msgid   "Octal Permissions"
+msgstr  "Oktalne dozvole"
+
+#: ../xffm/find/templates/findresponse.hh:760
+#: ../xffm/find/templates/findresponse.hh:761
+#: ../xffm/find/templates/findsignals.hh:161
+#: ../xffm/find/templates/findsignals.hh:167
+msgid   "Executable"
+msgstr  "Izvršni"
+
+#: ../xffm/find/templates/findresponse.hh:760
+#: ../xffm/find/templates/findresponse.hh:765
+#: ../xffm/find/templates/findsignals.hh:164
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:801
+#, fuzzy
+msgid   "File type : "
+msgstr  "Vrste datoteke:"
+
+#: ../xffm/find/templates/findsignals.hh:86
+msgid   "Searching..."
+msgstr  "Tražim..."
+
+#: ../xffm/find/templates/findsignals.hh:441
+#: ../xffm/find/templates/dndbox.hh:65
 msgid   "No editor for current action."
 msgstr  "Nema uređivača za trenutnu akciju"
 
-#: ../xffm/find/signals.hh:501
+#: ../xffm/find/templates/findsignals.hh:508
 msgid   "Upper limit:"
 msgstr  "Gornja granica:"
 
-#: ../xffm/find/signals.hh:503
+#: ../xffm/find/templates/findsignals.hh:511
 msgid   "Counting files..."
 msgstr  "Brojim datoteke..."
 
-#: ../xffm/find/signals.hh:518
+#: ../xffm/find/templates/findsignals.hh:519
 #, fuzzy, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
@@ -1416,124 +1664,209 @@ msgstr[0]       "Nađeno %d slaganje"
 msgstr[1]       "Nađena %d slaganja"
 msgstr[2]       "Nađeno %d slaganja"
 
-#: ../xffm/find/signals.hh:520
+#: ../xffm/find/templates/findsignals.hh:521
 #, fuzzy, c-format
 msgid   "%s Finished : %s"
 msgstr  "Završeno: %s %s"
 
-#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
-msgid   "Searching..."
-msgstr  "Tražim..."
-
-#: ../xffm/find/dialog.hh:106
-msgid   "Find"
-msgstr  "Nađi"
-
-#: ../xffm/find/dialog.hh:131
+#: ../xffm/find/templates/dndbox.hh:126
 #, fuzzy
-msgid   "Close find"
-msgstr  "Zatvori prozor"
+msgid   "Edit all"
+msgstr  "Uredi potpuno"
 
-#: ../xffm/find/dialog.hh:146
-#, fuzzy
-msgid   "Find Files"
-msgstr  "Pronađi u datotekama"
+#: ../xffm/find/templates/dndbox.hh:139
+#, fuzzy, c-format
+msgid   "Search results for %s"
+msgstr  "Rezultati pretrage za „%s“:"
 
-#: ../xffm/find/dialog.hh:209
-#, fuzzy
-msgid   "Select advanced options"
-msgstr  "Prikaži napredne opcije"
+#: ../xffm/find/templates/dndbox.hh:259
+msgid   "Search results"
+msgstr  "Rezultati pretrage"
 
-#: ../xffm/find/dialog.hh:245
-msgid   "Upper limit"
-msgstr  "Gornja granica"
-
-#: ../xffm/find/dialog.hh:250
-msgid   "At Least"
-msgstr  "Najmanje"
-
-#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
-msgid   "kBytes"
-msgstr  "kB"
-
-#: ../xffm/find/dialog.hh:255
-msgid   "At Most"
-msgstr  "Najviše"
-
-#: ../xffm/find/dialog.hh:266
-msgid   "Group"
-msgstr  "Grupa"
-
-#: ../xffm/find/dialog.hh:270
-msgid   "Octal Permissions"
-msgstr  "Oktalne dozvole"
-
-#: ../xffm/find/dialog.hh:275
-msgid   "SUID"
+#: ../xffm/find/classes/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:299
-msgid   "Months"
-msgstr  "Mjeseci"
+#: ../xffm/find/classes/fgr.hh:126
+msgid   "Search for files"
+msgstr  "Pretraga za datotekama"
 
-#: ../xffm/find/dialog.hh:309
+#: ../xffm/find/classes/fgr.hh:128
+msgid   "Contents:"
+msgstr  "Sadržaj:"
+
+#: ../xffm/find/classes/fgr.hh:128
 #, fuzzy
-msgid   "File type : "
-msgstr  "Vrste datoteke:"
+msgid   "File's contents filtered as plain text."
+msgstr  "Snimi zabilješku kao običan tekst"
 
-#: ../xffm/find/dialog.hh:355
-msgid   "Display file selection dialog"
-msgstr  "Prikaži dijalog izbora datoteka"
+#: ../xffm/find/classes/fgr.hh:135
+msgid   "Filter Details"
+msgstr  "Detalji o filteru"
 
-#: ../xffm/find/dialog.hh:414
-msgid   "Contains the text"
-msgstr  "Sadrži tekst"
+#: ../xffm/find/classes/fgr.hh:140
+msgid   "Print..."
+msgstr  "Štampaj..."
 
-#: ../xffm/find/dialog.hh:444
-msgid   "Case Sensitive"
-msgstr  "Razlikovanje malih i velikih slova"
+#: ../xffm/find/classes/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  "Jedinstveni ID procesa koji ga jednoznačno predstavlja."
 
-#: ../xffm/find/dialog.hh:445
+#: ../xffm/find/classes/fgr.hh:143
+msgid   "Filter"
+msgstr  "Filter"
+
+#: ../xffm/find/classes/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/classes/fgr.hh:147 ../xffm/find/classes/fgr.hh:148
+#: ../xffm/find/classes/fgr.hh:149 ../xffm/find/classes/fgr.hh:150
+msgid   "KByte"
+msgstr  "kB"
+
+#: ../xffm/find/classes/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  "je veće ili jednako od"
+
+#: ../xffm/find/classes/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  "je manje ili jednako od"
+
+#: ../xffm/find/classes/fgr.hh:152
+msgid   "Set UID"
+msgstr  "Podesiti UID"
+
+#: ../xffm/find/classes/fgr.hh:152
 #, fuzzy
-msgid   "Extended regexp"
-msgstr  "Dodatno uklanjanje"
+msgid   "Executable Text Files"
+msgstr  "Izvršne datoteke"
 
-#: ../xffm/find/dialog.hh:446
-msgid   "Include binary files"
-msgstr  "Ukljući binarne datoteke"
+#: ../xffm/find/classes/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Dozvole za datoteku, u oktalnom decimalnom sistemu."
 
-#: ../xffm/find/dialog.hh:455
-msgid   "Anywhere"
-msgstr  "gdje bilo"
+#: ../xffm/find/classes/fgr.hh:155
+msgid   "Type"
+msgstr  "Tip"
 
-#: ../xffm/find/dialog.hh:456
-msgid   "Whole words only"
-msgstr  "Samo cijele riječi"
+#: ../xffm/find/classes/fgr.hh:157 ../xffm/find/classes/ffunctions.hh:16
+msgid   "Any"
+msgstr  "Bilo koji"
 
-#: ../xffm/find/dialog.hh:457
-msgid   "lines"
-msgstr  "linija"
-
-#: ../xffm/find/dialog.hh:680
-msgid   "Modified"
-msgstr  "Promijenjeno"
-
-#: ../xffm/find/dialog.hh:684
-msgid   "Created"
-msgstr  "Napravljeno"
-
-#: ../xffm/find/dialog.hh:688
+#: ../xffm/find/classes/fgr.hh:157
 #, fuzzy
-msgid   "Accessed"
+msgid   "Default type"
+msgstr  "Zadano vrijeme"
+
+#: ../xffm/find/classes/fgr.hh:161
+#, fuzzy
+msgid   "UNIX Socket"
+msgstr  "Socket"
+
+#: ../xffm/find/classes/fgr.hh:167 ../xffm/find/classes/fgr.hh:170
+#: ../xffm/find/classes/fgr.hh:173 ../xffm/find/classes/fgr.hh:176
+msgid   "Details"
+msgstr  "Detalji"
+
+#: ../xffm/find/classes/fgr.hh:167 ../xffm/find/classes/fgr.hh:170
+#: ../xffm/find/classes/fgr.hh:173 ../xffm/find/classes/fgr.hh:176
+#: ../xffm/find/classes/fgr.hh:179 ../xffm/find/classes/fgr.hh:180
+#: ../xffm/find/classes/fgr.hh:183 ../xffm/find/classes/fgr.hh:184
+#: ../xffm/find/classes/fgr.hh:187 ../xffm/find/classes/fgr.hh:188
+#, fuzzy
+msgid   "TIME"
+msgstr  "ISTIME(x)"
+
+#: ../xffm/find/classes/fgr.hh:175
+msgid   "Month"
+msgstr  "Mjesec"
+
+#: ../xffm/find/classes/fgr.hh:177
+msgid   "Month(s)"
+msgstr  "Mjesec(i)"
+
+#: ../xffm/find/classes/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Vrijeme izmjene"
+
+#: ../xffm/find/classes/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
 msgstr  "Zadnji pristup:"
 
-#: ../xffm/find/dialog.hh:1006
+#: ../xffm/find/classes/fgr.hh:188
 #, fuzzy
-msgid   "Close find\n"
-        "\n"
-msgstr  "Zatvori prozor"
+msgid   "Creation Time :"
+msgstr  "Vrijeme stvaranja"
 
-#: ../xffm/find/dialog.hh:1010
+#: ../xffm/find/classes/fgr.hh:191 ../xffm/find/classes/fgr.hh:192
+msgid   "uid"
+msgstr  "uid"
+
+#: ../xffm/find/classes/fgr.hh:192
+msgid   "User:"
+msgstr  "Korisnik:"
+
+#: ../xffm/find/classes/fgr.hh:194 ../xffm/find/classes/fgr.hh:195
+#, fuzzy
+msgid   "gid"
+msgstr  "Rigidno"
+
+#: ../xffm/find/classes/fgr.hh:195
+msgid   "Group:"
+msgstr  "Grupa:"
+
+#: ../xffm/find/classes/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/classes/fgr.hh:200
+msgid   "Content View"
+msgstr  "Pregled sadržaja"
+
+#: ../xffm/find/classes/fgr.hh:201 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:203 ../xffm/find/classes/fgr.hh:204
+msgid   "STRING"
+msgstr  "ZNAK"
+
+#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "Regularni izraz"
+
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Extended"
+msgstr  "Produženo"
+
+#: ../xffm/find/classes/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Zanemari mala i velika slova"
+
+#: ../xffm/find/classes/fgr.hh:208
+msgid   "Text Files"
+msgstr  "Tekstualni datoteke"
+
+#: ../xffm/find/classes/fgr.hh:214
+msgid   "Words"
+msgstr  "Riječi"
+
+#: ../xffm/find/classes/fgr.hh:216
+msgid   "Lines"
+msgstr  "Linije"
+
+#: ../xffm/find/classes/fgr.hh:364
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Upotreba: %sRAW [OTVORITI | ZATVORITI]"
+
+#: ../xffm/find/classes/ffunctions.hh:9
+msgid   "Regular"
+msgstr  "osnovni"
+
+#: ../xffm/find/classes/ffunctions.hh:42
 msgid   "Basic rules:\n"
         "\n"
         "*  Will match any character zero or more times.\n"
@@ -1543,7 +1876,7 @@ msgid   "Basic rules:\n"
         "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:1019
+#: ../xffm/find/classes/ffunctions.hh:51
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
@@ -1580,4 +1913,108 @@ msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "\n"
         "More information is available by typing \"man grep\"\n"
 msgstr  ""
+
+#: ../xffm/menus/templates/pathbarmenu.hh:12
+#: ../xffm/menus/templates/pathbarmenu.hh:23
+#: ../xffm/menus/templates/pathbarmenu.hh:34
+#: ../xffm/menus/templates/pathbarmenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:18
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:89
+msgid   "Open in New Window"
+msgstr  "Otvori u novom prozoru"
+
+#: ../xffm/menus/templates/pathbarmenu.hh:14
+#: ../xffm/menus/templates/pathbarmenu.hh:26
+#: ../xffm/menus/templates/pathbarmenu.hh:37
+#: ../xffm/menus/templates/pathbarmenu.hh:49
+#: ../xffm/menus/templates/inputMenu.hh:19
+#: ../xffm/menus/templates/inputMenu.hh:50
+#: ../xffm/menus/templates/outputMenu.hh:16
+#: ../xffm/menus/templates/outputMenu.hh:29
+#: ../xffm/menus/templates/outputMenu.hh:42
+#: ../xffm/menus/templates/outputMenu.hh:55
+#: ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
+#, fuzzy
+msgid   "Show Clipboard"
+msgstr  "U clipboard"
+
+#: ../xffm/menus/templates/inputMenu.hh:16
+#: ../xffm/menus/templates/inputMenu.hh:32
+#: ../xffm/menus/templates/inputMenu.hh:47
+#: ../xffm/menus/templates/inputMenu.hh:63
+#: ../xffm/menus/templates/outputMenu.hh:13
+#: ../xffm/menus/templates/outputMenu.hh:26
+#: ../xffm/menus/templates/outputMenu.hh:39
+#: ../xffm/menus/templates/outputMenu.hh:52
+#: ../xffm/menus/templates/iconColorMenu.hh:10
+#: ../xffm/menus/templates/iconColorMenu.hh:19
+#: ../xffm/menus/templates/iconColorMenu.hh:28
+#: ../xffm/menus/templates/iconColorMenu.hh:37
+msgid   "Foreground color"
+msgstr  "Boja teksta"
+
+#: ../xffm/menus/templates/inputMenu.hh:17
+#: ../xffm/menus/templates/inputMenu.hh:33
+#: ../xffm/menus/templates/inputMenu.hh:48
+#: ../xffm/menus/templates/inputMenu.hh:64
+#: ../xffm/menus/templates/outputMenu.hh:14
+#: ../xffm/menus/templates/outputMenu.hh:27
+#: ../xffm/menus/templates/outputMenu.hh:40
+#: ../xffm/menus/templates/outputMenu.hh:53
+#: ../xffm/menus/templates/iconColorMenu.hh:11
+#: ../xffm/menus/templates/iconColorMenu.hh:20
+#: ../xffm/menus/templates/iconColorMenu.hh:29
+#: ../xffm/menus/templates/iconColorMenu.hh:38
+msgid   "Background color"
+msgstr  "Boja pozadine"
+
+#: ../xffm/menus/templates/inputMenu.hh:18
+#: ../xffm/menus/templates/inputMenu.hh:34
+#: ../xffm/menus/templates/inputMenu.hh:49
+#: ../xffm/menus/templates/inputMenu.hh:65
+#: ../xffm/menus/templates/outputMenu.hh:15
+#: ../xffm/menus/templates/outputMenu.hh:41
+#: ../xffm/menus/templates/outputMenu.hh:54
+#: ../xffm/menus/templates/iconColorMenu.hh:12
+#: ../xffm/menus/templates/iconColorMenu.hh:21
+#: ../xffm/menus/templates/iconColorMenu.hh:30
+#: ../xffm/menus/templates/iconColorMenu.hh:39
+msgid   "Default Colors"
+msgstr  "Zadane boje"
+
+#: ../xffm/menus/templates/outputMenu.hh:28
+#, fuzzy
+msgid   "Default Color"
+msgstr  "Zadane boje"
+
+#: ../xffm/menus/templates/mainMenu.hh:13
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:90
+msgid   "Environment"
+msgstr  "Okruženje"
+
+#: ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:68
+#: ../xffm/menus/templates/mainMenu.hh:94
+msgid   "Exit"
+msgstr  "Izlaz"
+
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:79
+#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/gridviewmenu.hh:81
+#, fuzzy
+msgid   "Toggle Text Mode"
+msgstr  "Prebaci kursorski režim"
+
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:93
+msgid   "Clear Clipboard History"
+msgstr  "Očisti istorijat klipborda"
+
+#: ../xffm/menus/templates/mainMenu.hh:199
+msgid   "menu"
+msgstr  "meni"
 

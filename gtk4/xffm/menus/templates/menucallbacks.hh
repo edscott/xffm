@@ -45,7 +45,7 @@ namespace xf {
         //Print::print(output, g_strdup_printf("%s\n", Child::getWorkdir(child)));
         if (!History::add("cd")) ERROR_("History::add(%s) failed\n", "cd" );
       } else {
-        Print::print(output, g_strdup_printf(_("failed to chdir to $HOME")));
+        Print::print(output, g_strdup_printf(_("failed to chdir to %s"), "$HOME"));
       }
       return;
     }
