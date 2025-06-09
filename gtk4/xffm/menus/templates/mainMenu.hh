@@ -9,8 +9,8 @@ namespace xf {
     public:
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
-        "test",
-        "test2",
+        _("Environment"),
+//        "test2",
 //          _("Search"),
 //          _("Open terminal"),
         _("Paste"), // 
@@ -49,7 +49,7 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
-        {"test", (void *) EMBLEM_INFO},
+        {_("Environment"), (void *) EMBLEM_INFO},
         {"test2", (void *) EMBLEM_INFO},
         {_("Empty trash bin"),(void *) EMBLEM_TRASH_FULL}, 
         {_("Paste"),(void *) EMBLEM_PASTE}, 
@@ -86,7 +86,7 @@ namespace xf {
         //{_("Color settings"),(void *) MenuCallbacks<Type>::popCall}, 
 
         {_("Open in New Window"),(void *)openXffmMain}, 
-        {"test",(void *)test},
+        {_("Environment"),(void *)test},
         {"test2",(void *)test2},
         {_("Show Clipboard"),(void *) showPaste}, 
         {_("Clear Clipboard History"),(void *) clearPaste}, 

@@ -138,7 +138,6 @@ public:
         return FALSE;
     }
    
-private:
 
 
     static GKeyFile *
@@ -155,6 +154,7 @@ private:
         }
         return keyFile;
     }
+private:
 
     static void
     writeKeyFile(GKeyFile *keyFile){
