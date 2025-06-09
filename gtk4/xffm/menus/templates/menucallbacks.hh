@@ -69,12 +69,14 @@ namespace xf {
       auto command = "i3-msg -t get_workspaces";
       auto line = Basic::pipeCommandFull(command);
       char *tt;
-      //Print::showText(output);
+      TRACE("line=%s\n",line);
+      ////Print::showText(output);
       //Print::print(output, line);
       auto v = g_strsplit(line, "}", -1);
       g_free(line);
       for (auto p=v; p && *p; p++){
         if (strstr(*p, "\"visible\":true")==NULL) continue;
+        if (strstr(*p, "\"focused\":true")==NULL) continue;
         auto w = g_strsplit(*p, ",", -1);
         for (auto q=w; q && *q; q++){
           if (strstr(*q, "name")==NULL) continue;
@@ -155,7 +157,7 @@ namespace xf {
           return;
         }
       }
-
+      TRACE("moving to %s...\n", lastWS?lastWS:"xffm4");
       moveTo( (const char *)lastWS?lastWS:"xffm4");
       if (lastWS == NULL){
         // We moved out to xffm4.
