@@ -6,7 +6,7 @@ namespace xf
   template <class subClass_t>
   class DialogBasic {
     using dialog_t = DialogBasic<subClass_t>; 
-    //GtkEventController *raiseController_ = NULL;
+    GtkEventController *raiseController_ = NULL;
     GtkGesture *clickController_ = NULL;
     GtkBox *contentArea_;
     GtkBox *actionArea_;
@@ -129,7 +129,7 @@ namespace xf
     protected:
 
   public:
-    //GtkEventController *raiseController(void){return raiseController_;}
+    GtkEventController *raiseController(void){return raiseController_;}
     GtkEventController *clickController(void){
       return GTK_EVENT_CONTROLLER(clickController_);
     }
@@ -188,14 +188,15 @@ namespace xf
       gtk_widget_set_sensitive(GTK_WIDGET(content), false);
       //gtk_widget_set_sensitive(GTK_WIDGET(parent_), false);
       TRACE("*** set raise for %p to %p\n", parent_, dialog_);
-      /* click controller seems better...
+      /* click controller seems better... but will use both
+       * for handling nested dialogs better. */
       raiseController_ = gtk_event_controller_motion_new();
       gtk_event_controller_set_propagation_phase(raiseController_, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(parent_), raiseController_);
       TRACE("*** add controller %p to window %p\n", raiseController_, parent_);
       g_signal_connect (G_OBJECT (raiseController_), "enter", 
               G_CALLBACK (presentDialog), dialog_);      
-    */
+    
       
       clickController_ = gtk_gesture_click_new();
       gtk_event_controller_set_propagation_phase(
