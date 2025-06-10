@@ -217,13 +217,13 @@ private:
           }
           mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
           g_object_set_data(G_OBJECT(mainBox_), "object", this);
-          gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), false);
-          gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), false);
+          gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), true);
+          gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), true);
           mkVpane();
           mkFilterEntry();
           ////////////////  grep options.... /////////////////////////
           mkGrepEntry();
-          gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 600, 460);
+          //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), -1, 460);
           postRealize();
           return mainBox_;
       }
@@ -255,11 +255,13 @@ private:
 
           vpane_ = GTK_PANED(gtk_paned_new(GTK_ORIENTATION_VERTICAL));
           gtk_widget_set_vexpand(GTK_WIDGET(vpane_), true);
+          gtk_widget_set_hexpand(GTK_WIDGET(vpane_), true);
           gtk_paned_set_wide_handle (vpane_,TRUE);
           gtk_frame_set_child(frame_, GTK_WIDGET(vpane_));
 
           topPaneVbox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
           gtk_widget_set_vexpand(GTK_WIDGET(topPaneVbox_), true);
+          gtk_widget_set_hexpand(GTK_WIDGET(topPaneVbox_), true);
           auto advanced = advancedOptions();
 
           TRACE("mkTopPaneHbox  <- \n");
@@ -270,6 +272,8 @@ private:
 
           auto sw = GTK_SCROLLED_WINDOW(gtk_scrolled_window_new());
           gtk_paned_set_start_child (vpane_, GTK_WIDGET(sw));
+          gtk_widget_set_hexpand(GTK_WIDGET(vpane_), true);
+          gtk_widget_set_hexpand(GTK_WIDGET(sw), true);
 
           notebook_ = GTK_NOTEBOOK(gtk_notebook_new());
           gtk_notebook_append_page(notebook_, GTK_WIDGET(topPaneVbox_), gtk_label_new(_("Options")));

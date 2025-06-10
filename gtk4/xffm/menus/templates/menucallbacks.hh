@@ -245,7 +245,7 @@ namespace xf {
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Child::getWorkdir(childWidget);
-      if (strcmp(_("Bookmarks"), workDir) == 0) workDir = "";
+      if (strcmp("Bookmarks", workDir) == 0) workDir = "";
 
       auto xffm4 = g_strdup_printf("xffm4 %s", workDir);
       pid_t childPid = Run<Type>::shell_command(output, xffm4, false, false);

@@ -258,6 +258,15 @@ namespace xf {
       auto child =  Child::getChild();
       return g_object_get_data(G_OBJECT(child), "prompt");
     }
+
+
+    static char *getTabname(const char *path){
+      if (!path) return g_strdup(".");
+      if (strcmp(path, "Bookmarks") == 0) return g_strdup(_("Bookmarks"));
+      if (strcmp(path, "Disk Mounter") == 0) return g_strdup(_("Disk Mounter"));
+      return g_path_get_basename(path);
+    }     
+    
     static
     void setWindowTitle(GtkWidget *child){
         auto path = (const char *) g_object_get_data(G_OBJECT(child), "path");
@@ -270,7 +279,7 @@ namespace xf {
         g_free(gg); 
         gtk_window_set_title(GTK_WINDOW(Child::mainWidget()), g);
         g_free(g);
-        auto basename = g_path_get_basename(path);
+        auto basename = getTabname(path);
         auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
         auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
         auto label = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "label"));

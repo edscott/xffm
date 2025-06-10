@@ -1,3 +1,4 @@
+Window size for find dialog incorrect with es tranlation: should be adaptive.
 
 *** Need to add dropdown history for path entry in find dialog!
 *** BUG: need to chain link dialogs, when a dialog1 has a dialog2 and enter

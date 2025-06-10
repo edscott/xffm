@@ -75,7 +75,7 @@ static bool detachProcess(const char *argv1){
   return true;
 }
 
-static  gchar *getPath(const char *argv1){
+static char *getPath(const char *argv1){
     if (!argv1) return g_strdup(_("Bookmarks"));
     if (!g_file_test(argv1, G_FILE_TEST_EXISTS)){
       DBG("\"%s\" does not exist.\n", argv1);
@@ -116,7 +116,19 @@ main (int argc, const char *argv[], const char *envp[]) {
   coreSetup(argc, argv);
   xffindProgram = argv[0];
   xffmProgram = argv[0];
-  //foo bar
+#ifdef ENABLE_NLS
+    /* this binds domain: */
+    bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+
+    bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+# ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    TRACE ("binding %s, at %s\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+# endif
+#else
+#warning "Translations not enabled."
+#endif
+
       
   XInitThreads();
   if (strstr(argv[0], "xfgetpass")){
@@ -141,8 +153,8 @@ main (int argc, const char *argv[], const char *envp[]) {
 
   threadPoolObject = (void *)new xf::ThreadPool;
   
-  gchar *path = getPath(argv[1]);
-  TRACE("path is %s (%s)\n", path, argv[1]); 
+  char *path = getPath(argv[1]);
+  DBG("path is %s (%s) --> %s\n", path, argv[1], _(path)); 
   auto fm = new(xf::Fm)(path, doFind); // 
  
   // Constructors c and d will use global variable Child::mainWidget(). 

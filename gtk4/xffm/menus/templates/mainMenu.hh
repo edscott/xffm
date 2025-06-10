@@ -195,7 +195,7 @@ namespace xf {
       TRACE("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridView_p->flags());
       auto configFlags = Settings::getInteger("flags", gridView_p->path(), 0x40);
       
-      auto popover = g_object_get_data(G_OBJECT(check), _("menu"));
+      auto popover = g_object_get_data(G_OBJECT(check), "menu");
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
       gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
 
@@ -214,11 +214,9 @@ namespace xf {
       //gtk_widget_unparent(GTK_WIDGET(menu));
       auto store = gridview_p->store();
       if (g_object_get_data(G_OBJECT(store), "xffm::root")){
-        Workdir<Type>::setWorkdir(_("Bookmarks"));
-        //Workdir<Type>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
+        Workdir<Type>::setWorkdir("Bookmarks");
       } else if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
-        Workdir<Type>::setWorkdir(_("Disk Mounter"));
-        //Workdir<Type>::setWorkdir(_("Bookmarks"), Child::getPathbar(), false);
+        Workdir<Type>::setWorkdir("Disk Mounter");
       } else {
         Workdir<Type>::setWorkdir(gridview_p->path());
       }

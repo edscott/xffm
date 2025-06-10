@@ -138,8 +138,8 @@ template <class Type>
       getGridView(){
         auto child = Child::getChild();
         selectionModel_ = NULL;
-        bool isBookmarks = (strcmp(path_, _("Bookmarks"))==0);
-        bool isFstab = (strcmp(path_, _("Disk Mounter"))==0);
+        bool isBookmarks = (strcmp(path_, "Bookmarks")==0);
+        bool isFstab = (strcmp(path_, "Disk Mounter")==0);
         if (isBookmarks) {
           selectionModel_ = rootDir::rootSelectionModel();
         } else if (isFstab) {

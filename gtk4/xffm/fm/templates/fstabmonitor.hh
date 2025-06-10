@@ -363,7 +363,7 @@ private:
             }
             Child::unlockGridView();
 
-            Basic::context_function(reload_f, (void *)_("Disk Mounter"));
+            Basic::context_function(reload_f, (void *)"Disk Mounter");
             // After reload, gridView ceases to be valid.
             // Another monitor will be reloaded with new gridview.
             break;

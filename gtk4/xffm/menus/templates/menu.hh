@@ -83,6 +83,7 @@ namespace xf {
 
       static void openMenuButton(GtkWidget *self, void *data){
         auto menu = GTK_POPOVER(data);
+        TRACE("openMenuButton....\n");
         gtk_popover_popup(menu);
       }
 
@@ -347,7 +348,6 @@ public:
         continue;
       }
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
-// FIXME      gtk_popover_set_default_widget (menu, GTK_WIDGET(vbox));
       return menu;
     }
   };

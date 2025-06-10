@@ -528,7 +528,7 @@ private:
           
           //if (lock) Child::unlockGridView();
           return g_strdup(workdir);
-        } else if (workdir && strcmp(workdir, _("Bookmarks")) == 0){
+        } else if (workdir && strcmp(workdir, "Bookmarks") == 0){
           DBG("*** Drop into bookmarks: add a bookmark with this drop (FIXME).\n");
         }
       }

@@ -4,6 +4,7 @@
 #if 1
 
 #define GO_UP "go-up"
+#define EMBLEM_LOCK "emblem-lock"
 #define EMBLEM_BOOKMARK "emblem-bookmark"
 //#define SEARCH "edit-find"
 #define OPEN_TERMINAL "video-display"

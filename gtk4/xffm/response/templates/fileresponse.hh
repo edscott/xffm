@@ -191,7 +191,7 @@ private:
 
     GtkWidget *getColumnView(const char *path){
         GListModel * listModel;
-        if (strcmp(path, _("Bookmarks")) == 0){
+        if (strcmp(path, "Bookmarks") == 0){
           listModel = getBookmarkModel(path);
         } else {
           listModel = getListModel(path);

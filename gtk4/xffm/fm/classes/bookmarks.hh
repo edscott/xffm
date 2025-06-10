@@ -43,10 +43,6 @@ public:
     initBookmarks(void) {
         if (bookmarks) return;
         bookmarks = readBookmarkFile(bookmarks);
-        auto serial = Settings::getInteger("Bookmarks", "serial",4000); 
-        gchar *g=g_strdup_printf("%d", serial);
-        setenv ("RFM_BOOKMARK_SERIAL", g, TRUE);
-        g_free(g);
     }
 
     static GSList *bookmarksList(void){
@@ -215,23 +211,6 @@ private:
         return list;
     }
 
-
-    static gint
-    getBookMarkSerial(void) {
-        gint serial = 0;
-        if (!getenv("RFM_BOOKMARK_SERIAL")||
-            strlen(getenv("RFM_BOOKMARK_SERIAL"))==0){
-                serial = 0;
-        } else {
-            errno=0;
-            long li = strtol(getenv("RFM_BOOKMARK_SERIAL"), NULL, 10);
-            if (errno==ERANGE) serial=0;
-            else serial = li;
-        }
-        return serial;
-    }
-
-
     static void
     saveBookmarkFile(GSList *list){
         gchar *filename = getBookmarksFilename();
@@ -255,14 +234,6 @@ private:
             }
             fclose(f);
         }
-            
-        auto serial = getBookMarkSerial();
-        serial++;
-        Settings::setInteger("Bookmarks", "serial", serial); 
-
-        gchar *g=g_strdup_printf("%d", serial);
-        setenv ("RFM_BOOKMARK_SERIAL", g, TRUE);
-        g_free(g);
         return;
     }
 

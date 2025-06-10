@@ -43,7 +43,7 @@ namespace xf {
         }
        
         // cancel threadpool for previews, if any. Wait on condition
-        if (strcmp(path, _("Disk Mounter")) == 0) {
+        if (strcmp(path, "Disk Mounter") == 0) {
           auto viewObject = new GridView<FstabDir>(path, (void *)gridViewClick);
           viewObject->child(child);
           auto store = viewObject->listStore();
@@ -234,12 +234,12 @@ char buffer[4096];
 
       auto root = g_file_info_get_attribute_object (info, "xffm::root");
       if (root){
-        setWorkdir(_("Bookmarks"));
+        setWorkdir("Bookmarks");
         return TRUE;
       }
       auto fstab = g_file_info_get_attribute_object (info, "xffm::fstab");
       if (fstab){
-        setWorkdir(_("Disk Mounter"));
+        setWorkdir("Disk Mounter");
         return TRUE;
       }
       auto ecryptfs = g_file_info_get_attribute_object (info, "xffm::ecryptfs");
@@ -328,7 +328,7 @@ char buffer[4096];
         auto button = gtk_gesture_single_get_button(GTK_GESTURE_SINGLE(self));
           TRACE("***pathbar goto... name=%s, path=%s\n", name, path);
         if (button == 1){
-          //if (strcmp(path, _("Bookmarks"))==0) setWorkdir(g_get_home_dir(), pathbar, true);
+          //if (strcmp(path, "Bookmarks")==0) setWorkdir(g_get_home_dir(), pathbar, true);
           //else setWorkdir(path, pathbar, true);
           setWorkdir(path, pathbar, true);
           return TRUE;

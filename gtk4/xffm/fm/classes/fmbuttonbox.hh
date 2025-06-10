@@ -114,7 +114,7 @@ private:
     }
     
     GtkScale *newSizeScale(const gchar *tooltipText){
-        double value;
+        double value = 24.0;
         //auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 384.0, 4.0));
         auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 96.0, 4.0));
         // Load saved value fron xffm4/settings.ini file (if any)

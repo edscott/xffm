@@ -51,7 +51,7 @@ namespace xf {
         
         Basic::boxPack0 (pathbar, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
-        g_object_set_data(G_OBJECT(pb_button), "path", g_strdup(_("Bookmarks")));
+        g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("Bookmarks"));
 
         auto motion = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);

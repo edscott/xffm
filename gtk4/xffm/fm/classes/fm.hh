@@ -49,7 +49,8 @@ public:
       }
       
       //g_object_set_data(G_OBJECT(Child::mainWidget()), "MainWindow", xffm_);
-      xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); // bool is MainClass (only one for now)
+      //xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); 
+      xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); 
 
       //mainWindow_ = xffm_->mainWindow();
       //Child::mainWidget(GTK_WIDGET(mainWindow_));

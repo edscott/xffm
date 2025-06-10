@@ -18,6 +18,7 @@ namespace xf
       auto dialog = this->dialog();
       this->subClass()->dialog(dialog);
       TRACE("*** DialogComplex setupRun: setting this->subClass()->dialog to %p\n", dialog);
+          gtk_widget_set_hexpand(GTK_WIDGET(dialog), true);
 
       /*auto cbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "cbox"));
       auto foo = gtk_label_new("foo ok");
@@ -25,6 +26,7 @@ namespace xf
 
       gtk_window_set_decorated(dialog, true);
       gtk_widget_realize(GTK_WIDGET(dialog));
+      gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 650, 460);
       Basic::setAsDialog(dialog);
       gtk_window_present(dialog);
 

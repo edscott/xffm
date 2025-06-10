@@ -198,7 +198,7 @@ private:
         g_object_get (self, "default-width", &w, "default-height", &h, NULL);
         Settings::setInteger("window", "width", w);
         Settings::setInteger("window", "height", h);
-        DBG("call = %s w=%d h=%d\n", call,w,h);
+        TRACE("call = %s w=%d h=%d\n", call,w,h);
       }
       return;
     }
@@ -215,8 +215,9 @@ private:
         // size of window + 45 in x and y.
         // So we give it a big size, so drag motion does not fail
         // and then put it to the correct user saved size.
-        gtk_window_set_default_size(mainWindow_, 5000, 5000);
-        //gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
+        //gtk_window_set_default_size(mainWindow_, 5000, 5000);
+        
+        gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         //gtk_widget_set_size_request(mainWindow_, windowW_, windowH_);
         return;
     }
@@ -252,7 +253,7 @@ private:
       auto tabBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
       gtk_widget_set_hexpand(GTK_WIDGET(tabBox), FALSE);
       gtk_widget_set_vexpand(GTK_WIDGET(tabBox), FALSE);
-      gchar *tag = path? g_path_get_basename(path):g_strdup(".");
+      char *tag = Child::getTabname(path);
       GtkWidget *label = gtk_label_new(tag);
       g_free(tag);
       Basic::boxPack0(tabBox, label,  FALSE, FALSE, 0);
@@ -598,9 +599,11 @@ private:
 public:
     static void clickMenu(GtkButton *widget, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu"));
+      gtk_widget_realize(GTK_WIDGET(menu));
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       setupMenu(menu, gridView_p);
-      auto basename = g_path_get_basename( gridView_p->path());     
+      char *basename = Child::getTabname(gridView_p->path());
+
       auto markup = g_strconcat("<b><span color=\"blue\">", _("Directory name: "),
           "<span color=\"red\">",basename,"</span></span></b>", NULL);
       gtk_popover_popup(menu);
@@ -661,6 +664,7 @@ private:
       if (removeB) gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
       if (addB) gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
       for (auto p=show; p && *p; p++){
+        TRACE("show visible: %s\n", *p);
         auto widget = g_object_get_data(G_OBJECT(popover), *p);
         if (widget){
           //TRACE("show %s:%p\n", *p, widget);
@@ -673,22 +677,22 @@ private:
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
       gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
 
+      GtkWidget *widget;
       //auto flags = gridView_p->flags();
       const char *checks[]={_("Hidden files"), _("Backup files"),_("Descending"), _("Date"), _("Size"), _("File type"), _("Name"), NULL};   
       int bits[]={ 0x01, 0x02, 0x04, 0x08, 0x10, 0x20,0x40,0};
       for (int i=0; checks[i] != NULL; i++){
         int bit = bits[i];
         int status = bit & gridView_p->flags();
-        auto widget = g_object_get_data(G_OBJECT(popover), checks[i]);
+        widget = GTK_WIDGET(g_object_get_data(G_OBJECT(popover), checks[i]));
+        TRACE("checks1: %s widget=%p\n", checks[i], widget);
+        if (gridView_p->flags() == 0 && i==6) status = true;
         gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), status);
-      }
-      TRACE("gridView_p->flags() = 0x%x\n", gridView_p->flags());
-      if (gridView_p->flags() == 0){
-        auto widget = g_object_get_data(G_OBJECT(popover), _("Name"));
-        gtk_check_button_set_active(GTK_CHECK_BUTTON(widget), true);
+        TRACE("checks2: %s widget=%p\n", checks[i], widget);
       }
 
       auto store = gridView_p->store();
+      TRACE("xffm::root\n");
       if (g_object_get_data(G_OBJECT(store), "xffm::root")){
         for (auto p = onlyLocal; p && *p; p++){
           auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -696,6 +700,7 @@ private:
         }
         return;
       }
+      TRACE("xffm::fstab\n");
       if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
         for (auto p = onlyLocal; p && *p; p++){
           auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -703,6 +708,7 @@ private:
         }
         return;
       }
+      TRACE("return\n");
 
       
     }
