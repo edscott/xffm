@@ -1,12 +1,12 @@
-# Xffm+ translation file: jue 18 jul 2024 12:36:48 CST
+# Xffm4 translation file: mar 10 jun 2025 12:45:14 CST
 # Merged from existing open source files
-# http://xffm.org
+# http://xffm.sf.net
 #
-#
+#, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
+        "POT-Creation-Date: 2025-06-10 12:44-0600\n"
         "PO-Revision-Date: 2010-01-24 17:20+0200\n"
         "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
         "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -68,16 +68,16 @@ msgid   "Cut"
 msgstr  "Taie"
 
 #: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
-#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:64
 msgid   "Copy"
 msgstr  "Copiază"
 
-#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:210
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
 msgid   "Delete"
 msgstr  "Șterge"
 
-#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:199
 msgid   "Shred"
 msgstr  "Forfecare"
 
@@ -91,41 +91,42 @@ msgstr  "Deschide într-un nou tab"
 msgid   "New Tab"
 msgstr  "Tab nou"
 
-#: ../xffm/gtk/dialogs.hh:29
+#: ../xffm/gtk/dialogs.hh:31
 msgid   "Yes"
 msgstr  "Da"
 
-#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+#: ../xffm/gtk/dialogs.hh:46 ../xffm/gtk/dialogs.hh:147
 msgid   "Confirm"
 msgstr  "Confirmare"
 
-#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+#: ../xffm/gtk/dialogs.hh:97
 #, fuzzy
 msgid   "Apply to all"
 msgstr  "Aplică la toate"
 
-#: ../xffm/gtk/dialogs.hh:110
+#: ../xffm/gtk/dialogs.hh:101
 msgid   "Overwrite"
 msgstr  "Suprascrie"
 
-#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/gtk/dialogs.hh:105 ../xffm/gtk/dialogs.hh:218
 #: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
-#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/view/local/rm.hh:191 ../xffm/fm/view/local/properties.hh:307
 #: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
-#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
-#: ../xffm/find/signals.hh:411
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/common/dialogclass.hh:136 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:430 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:415
 msgid   "Cancel"
 msgstr  "Renunță"
 
-#: ../xffm/gtk/dialogs.hh:240
+#: ../xffm/gtk/dialogs.hh:236
 msgid   "Help"
 msgstr  "Ajutor"
 
 #: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
 #: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
-#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
-#: ../xffm/find/dialog.hh:666
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:666
+#: ../xffm/find/dialog.hh:681
 msgid   "unknown"
 msgstr  "necunoscut"
 
@@ -140,7 +141,7 @@ msgid   "Character device"
 msgstr  "Dispozitiv caracter"
 
 #: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
-#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/fm/view/local/model.hh:1039 ../xffm/find/fgr.hh:159
 #: ../xffm/find/signals.hh:8
 msgid   "Directory"
 msgstr  "Dosar"
@@ -184,7 +185,7 @@ msgstr  "Fișier"
 msgid   "Command history"
 msgstr  "Istoric executare comenzi"
 
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:281
 msgid   "User"
 msgstr  "Utilizator"
 
@@ -316,7 +317,7 @@ msgstr  "Nume"
 
 #: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
 #: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
-#: ../xffm/find/dialog.hh:138
+#: ../xffm/find/dialog.hh:155
 msgid   "Details"
 msgstr  "Detalii"
 
@@ -341,7 +342,7 @@ msgstr  "Tableta este descărcată complet"
 msgid   "Directory does not exist."
 msgstr  "Dosarul nu există."
 
-#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:720
 #, c-format
 msgid   "Files: %s"
 msgstr  "Fișiere: %s"
@@ -357,21 +358,21 @@ msgstr  "Montează"
 msgid   "Save"
 msgstr  "Salvează"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/view/fuse/ecryptfs.hh:400
 #: ../xffm/fm/dialog/notebook/createini.hh:67
 msgid   "Options"
 msgstr  "Opțiuni"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+#: ../xffm/fm/view/fuse/ecryptfs.hh:401
 msgid   "Advanced"
 msgstr  "Avansat"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#: ../xffm/fm/view/fuse/ecryptfs.hh:716 ../xffm/fm/view/fstab/view-Linux.hh:743
 #, c-format
 msgid   "Mounting %s"
 msgstr  "Montez %s"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#: ../xffm/fm/view/fuse/ecryptfs.hh:774
 #, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "Introduceți parola pentru %s"
@@ -440,11 +441,11 @@ msgstr  "Atenție: "
 msgid   "Multiple selections"
 msgstr  "Selecții multiple"
 
-#: ../xffm/fm/view/local/rm.hh:92
+#: ../xffm/fm/view/local/rm.hh:123
 msgid   "Remove"
 msgstr  "Elimină"
 
-#: ../xffm/fm/view/local/rm.hh:183
+#: ../xffm/fm/view/local/rm.hh:218
 msgid   "Trash"
 msgstr  "Coș"
 
@@ -491,7 +492,7 @@ msgid   "Duplicate"
 msgstr  "Duplică"
 
 #: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
-#: ../xffm/common/dnd.hh:63
+#: ../xffm/common/dnd.hh:64
 msgid   "Link"
 msgstr  "Legătură"
 
@@ -566,7 +567,7 @@ msgstr  "Previzualizări"
 msgid   "Reading \"%s\""
 msgstr  "se citește %s"
 
-#: ../xffm/fm/view/local/model.hh:722
+#: ../xffm/fm/view/local/model.hh:723
 #, c-format
 msgid   "Loaded %d of %d articles"
 msgstr  "Am descărcat %d din %d articole"
@@ -672,12 +673,12 @@ msgstr  "Dosar sincronizare la distanță SSHFS"
 msgid   "Mount Device"
 msgstr  "Montează dispozitiv"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:140
 msgid   "Copying files locally"
 msgstr  "Se copiază fișiere local"
 
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
-#: ../xffm/common/gio.hh:93
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:135
+#: ../xffm/common/gio.hh:105
 msgid   "Moving files"
 msgstr  "Mutarea fișierelor"
 
@@ -888,14 +889,14 @@ msgid   "Open"
 msgstr  "Deschide"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:268
-#: ../xffm/response/chooserresponse.hh:55
-#: ../xffm/response/chooserresponse.hh:69
+#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/response/chooserresponse.hh:70
 msgid   "Choose file"
 msgstr  "Alege fișier"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:277
-#: ../xffm/response/chooserresponse.hh:50
-#: ../xffm/response/chooserresponse.hh:62
+#: ../xffm/response/chooserresponse.hh:51
+#: ../xffm/response/chooserresponse.hh:63
 msgid   "Choose directory"
 msgstr  "Alege dosar"
 
@@ -997,9 +998,13 @@ msgstr  "Sortează după dimensiune"
 msgid   "Main menu"
 msgstr  "Meniul principal"
 
-#: ../xffm/fm/dialog/dialog.hh:121
+#: ../xffm/fm/dialog/dialog.hh:122
 msgid   "Removed"
 msgstr  "Șters"
+
+#: ../xffm/common/dialogclass.hh:140
+msgid   "Apply"
+msgstr  "Aplică"
 
 #: ../xffm/common/run.hh:339
 msgid   "warning"
@@ -1010,7 +1015,7 @@ msgstr  "avertizare"
 msgid   "Enter password"
 msgstr  "Introduceți parola"
 
-#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:295
 msgid   "Executable"
 msgstr  "Executabil"
 
@@ -1055,83 +1060,83 @@ msgid   "Console: quickly run single commands -- write a command here and "
 msgstr  "Consolă: rulează rapid comenzile singulare - scrieți o comandă aici "
         "și apăsați tasta enter."
 
-#: ../xffm/common/dnd.hh:41
+#: ../xffm/common/dnd.hh:42
 msgid   "Target"
 msgstr  "Destinație"
 
-#: ../xffm/common/dnd.hh:41
+#: ../xffm/common/dnd.hh:42
 msgid   "Files"
 msgstr  "Fișiere"
 
-#: ../xffm/common/dnd.hh:49
+#: ../xffm/common/dnd.hh:50
 msgid   "More…"
 msgstr  "Mai mult…"
 
-#: ../xffm/common/dnd.hh:63
+#: ../xffm/common/dnd.hh:64
 msgid   "Move"
 msgstr  "Mutare"
 
-#: ../xffm/common/dnd.hh:143
+#: ../xffm/common/dnd.hh:145
 msgid   "Create Link"
 msgstr  "Creează legătură"
 
-#: ../xffm/common/dnd.hh:155
+#: ../xffm/common/dnd.hh:157
 msgid   "more"
 msgstr  "multe"
 
-#: ../xffm/common/gio.hh:91
+#: ../xffm/common/gio.hh:103
 msgid   "Copying files"
 msgstr  "Se copiază fișierele"
 
-#: ../xffm/common/gio.hh:95
+#: ../xffm/common/gio.hh:107
 #, fuzzy
 msgid   "linking"
 msgstr  "mă gîndesc"
 
-#: ../xffm/common/gio.hh:97
+#: ../xffm/common/gio.hh:109
 msgid   "rename"
 msgstr  "rename"
 
-#: ../xffm/common/gio.hh:408
+#: ../xffm/common/gio.hh:422
 #, fuzzy
 msgid   "Overwrite?"
 msgstr  "Suprascrie"
 
-#: ../xffm/common/gio.hh:498
+#: ../xffm/common/gio.hh:511
 #, c-format
 msgid   "(%d of %d)"
 msgstr  "(%d din %d)"
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/response/customresponse.hh:56
 msgid   "Execute command"
 msgstr  "Execută comanda"
 
-#: ../xffm/response/customresponse.hh:103
+#: ../xffm/response/customresponse.hh:104
 msgid   "Source File"
 msgstr  "Fișier sursă"
 
-#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+#: ../xffm/response/entryresponse.hh:434 ../xffm/response/passwdresponse.hh:197
 msgid   "Ok"
 msgstr  "Ok"
 
-#: ../xffm/response/timeoutresponse.hh:57
+#: ../xffm/response/timeoutresponse.hh:59
 msgid   "Dismiss"
 msgstr  "Anulează"
 
-#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
+#: ../xffm/response/commandresponse.hh:138 ../xffm/response/progress.hh:83
 msgid   "Running"
 msgstr  "Funcțional"
 
-#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
+#: ../xffm/response/commandresponse.hh:142 ../xffm/response/progress.hh:88
 msgid   "Waiting for operation to finish..."
 msgstr  "Aștept încheierea operației..."
 
-#: ../xffm/response/passwdresponse.hh:131
+#: ../xffm/response/passwdresponse.hh:134
 #, fuzzy
 msgid   "User Input"
 msgstr  "Intrare maus"
 
-#: ../xffm/response/passwdresponse.hh:147
+#: ../xffm/response/passwdresponse.hh:150
 msgid   "Response Requested"
 msgstr  "Răspuns cerut"
 
@@ -1140,7 +1145,7 @@ msgid   "No Read Permission"
 msgstr  "Lipsește permisiunea de a citi"
 
 #: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
-#: ../xffm/find/dialog.hh:341
+#: ../xffm/find/dialog.hh:361
 msgid   "Path"
 msgstr  "Cale"
 
@@ -1149,7 +1154,7 @@ msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "Localizează documente și dosare din acest calculator după nume sau "
         "conținut"
 
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:400
 msgid   "Filter:"
 msgstr  "Filtru:"
 
@@ -1178,7 +1183,7 @@ msgstr  "Arată informații despre versiune"
 msgid   "Filter Details"
 msgstr  "Detalii jucător"
 
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:262
 #, fuzzy
 msgid   "Stay on single filesystem"
 msgstr  "Scanează un sistem de fișiere"
@@ -1191,7 +1196,7 @@ msgstr  "Tipărire..."
 msgid   "The unique Process ID that identifies this process."
 msgstr  "ID-ul unic care identifică acest proces."
 
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:259
 #, fuzzy
 msgid   "Find hidden files and directories"
 msgstr  "Arată fișierele și directoarele ascunse"
@@ -1205,7 +1210,7 @@ msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:256
 msgid   "Recursive"
 msgstr  "Recursiv"
 
@@ -1250,7 +1255,7 @@ msgstr  "Tip implicit"
 msgid   "UNIX Socket"
 msgstr  "Socket UNIX"
 
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:303
 msgid   "Minutes"
 msgstr  "Minute"
 
@@ -1262,11 +1267,11 @@ msgstr  "Minute"
 msgid   "TIME"
 msgstr  "LIMITĂDETIMP"
 
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:308
 msgid   "Hours"
 msgstr  "Ore"
 
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:313
 msgid   "Days"
 msgstr  "Zile"
 
@@ -1332,11 +1337,11 @@ msgstr  "Ignoră majusculele"
 msgid   "Text Files"
 msgstr  "Fișiere text"
 
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:478
 msgid   "No match"
 msgstr  "Nicio potrivire"
 
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:467
 msgid   "Line Count"
 msgstr  "Număr de linii"
 
@@ -1357,25 +1362,25 @@ msgstr  "Folosire : %s [OPTIUNI]\n"
 msgid   "Regular"
 msgstr  "Obișnuit"
 
-#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:516
+#: ../xffm/find/dialog.hh:265
 msgid   "Results"
 msgstr  "Rezultate"
 
-#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#: ../xffm/find/signals.hh:447 ../xffm/find/signals.hh:894
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "Nu există acțiuni curente."
 
-#: ../xffm/find/signals.hh:501
+#: ../xffm/find/signals.hh:516
 msgid   "Upper limit:"
 msgstr  "Limita de sus:"
 
-#: ../xffm/find/signals.hh:503
+#: ../xffm/find/signals.hh:518
 msgid   "Counting files..."
 msgstr  "Numărare fișiere..."
 
-#: ../xffm/find/signals.hh:518
+#: ../xffm/find/signals.hh:533
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
@@ -1383,12 +1388,12 @@ msgstr[0]       "A fost găsit %d potrivire"
 msgstr[1]       "Au fost găsite %d potriviri"
 msgstr[2]       "Au fost găsite %d de potriviri"
 
-#: ../xffm/find/signals.hh:520
+#: ../xffm/find/signals.hh:535
 #, c-format
 msgid   "%s Finished : %s"
 msgstr  "%s Finalizat : %s"
 
-#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+#: ../xffm/find/signals.hh:659 ../xffm/find/signals.hh:661
 msgid   "Searching..."
 msgstr  "Se caută..."
 
@@ -1396,110 +1401,115 @@ msgstr  "Se caută..."
 msgid   "Find"
 msgstr  "Caută"
 
-#: ../xffm/find/dialog.hh:131
+#: ../xffm/find/dialog.hh:133
 msgid   "Close find"
 msgstr  "Închide căutarea"
 
-#: ../xffm/find/dialog.hh:146
+#: ../xffm/find/dialog.hh:143
+#, fuzzy
+msgid   "Search Action"
+msgstr  "Caută în"
+
+#: ../xffm/find/dialog.hh:165
 #, fuzzy
 msgid   "Find Files"
 msgstr  "Găsește în fișiere"
 
-#: ../xffm/find/dialog.hh:209
+#: ../xffm/find/dialog.hh:229
 msgid   "Select advanced options"
 msgstr  "Selectează opțiuni avansate"
 
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/dialog.hh:265
 #, fuzzy
 msgid   "Upper limit"
 msgstr  "Limita de sus:"
 
-#: ../xffm/find/dialog.hh:250
+#: ../xffm/find/dialog.hh:270
 msgid   "At Least"
 msgstr  "Cel puțin"
 
-#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+#: ../xffm/find/dialog.hh:270 ../xffm/find/dialog.hh:275
 msgid   "kBytes"
 msgstr  "kocteți"
 
-#: ../xffm/find/dialog.hh:255
+#: ../xffm/find/dialog.hh:275
 msgid   "At Most"
 msgstr  "Cel mult"
 
-#: ../xffm/find/dialog.hh:266
+#: ../xffm/find/dialog.hh:286
 msgid   "Group"
 msgstr  "Grup"
 
-#: ../xffm/find/dialog.hh:270
+#: ../xffm/find/dialog.hh:290
 msgid   "Octal Permissions"
 msgstr  "Permisiuni octale"
 
-#: ../xffm/find/dialog.hh:275
+#: ../xffm/find/dialog.hh:295
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/dialog.hh:299
+#: ../xffm/find/dialog.hh:319
 msgid   "Months"
 msgstr  "Luni"
 
-#: ../xffm/find/dialog.hh:309
+#: ../xffm/find/dialog.hh:329
 #, fuzzy
 msgid   "File type : "
 msgstr  "Tip fișier:"
 
-#: ../xffm/find/dialog.hh:355
+#: ../xffm/find/dialog.hh:375
 msgid   "Display file selection dialog"
 msgstr  "Afișează un dialog pentru selecție de fișiere"
 
-#: ../xffm/find/dialog.hh:414
+#: ../xffm/find/dialog.hh:434
 msgid   "Contains the text"
 msgstr  "Conține textul"
 
-#: ../xffm/find/dialog.hh:444
+#: ../xffm/find/dialog.hh:464
 msgid   "Case Sensitive"
 msgstr  "Sensibil la majuscule"
 
-#: ../xffm/find/dialog.hh:445
+#: ../xffm/find/dialog.hh:465
 #, fuzzy
 msgid   "Extended regexp"
 msgstr  "Scoate extins"
 
-#: ../xffm/find/dialog.hh:446
+#: ../xffm/find/dialog.hh:466
 msgid   "Include binary files"
 msgstr  "Include fișierele binare"
 
-#: ../xffm/find/dialog.hh:455
+#: ../xffm/find/dialog.hh:475
 #, fuzzy
 msgid   "Anywhere"
 msgstr  "Potrivește oriunde"
 
-#: ../xffm/find/dialog.hh:456
+#: ../xffm/find/dialog.hh:476
 msgid   "Whole words only"
 msgstr  "Numai cuvinte întregi"
 
-#: ../xffm/find/dialog.hh:457
+#: ../xffm/find/dialog.hh:477
 msgid   "lines"
 msgstr  "linii"
 
-#: ../xffm/find/dialog.hh:680
+#: ../xffm/find/dialog.hh:695
 msgid   "Modified"
 msgstr  "Modificate"
 
-#: ../xffm/find/dialog.hh:684
+#: ../xffm/find/dialog.hh:699
 msgid   "Created"
 msgstr  "Creat"
 
-#: ../xffm/find/dialog.hh:688
+#: ../xffm/find/dialog.hh:703
 msgid   "Accessed"
 msgstr  "Accesat"
 
-#: ../xffm/find/dialog.hh:1006
+#: ../xffm/find/dialog.hh:1021
 #, fuzzy
 msgid   "Close find\n"
         "\n"
 msgstr  "Închide căutarea"
 
-#: ../xffm/find/dialog.hh:1010
+#: ../xffm/find/dialog.hh:1025
 msgid   "Basic rules:\n"
         "\n"
         "*  Will match any character zero or more times.\n"
@@ -1509,7 +1519,7 @@ msgid   "Basic rules:\n"
         "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:1019
+#: ../xffm/find/dialog.hh:1034
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "

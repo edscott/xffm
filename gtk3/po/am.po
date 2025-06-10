@@ -1,12 +1,12 @@
-# Xffm+ translation file: jue 18 jul 2024 12:34:18 CST
+# Xffm4 translation file: mar 10 jun 2025 12:44:46 CST
 # Merged from existing open source files
-# http://xffm.org
+# http://xffm.sf.net
 #
-#
+#, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
+        "POT-Creation-Date: 2025-06-10 12:44-0600\n"
         "PO-Revision-Date: 2003-01-08 07:44+EDT\n"
         "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
         "Language-Team: Amharic <locales@geez.org>\n"
@@ -68,16 +68,16 @@ msgid   "Cut"
 msgstr  "ቁረጥ"
 
 #: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
-#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:64
 msgid   "Copy"
 msgstr  "ቅጂ"
 
-#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:210
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
 msgid   "Delete"
 msgstr  "አጥፉ (D)"
 
-#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:199
 msgid   "Shred"
 msgstr  ""
 
@@ -91,42 +91,43 @@ msgstr  "በአዲስ መለያ ምልክት ውስጥ ክፈት (T)"
 msgid   "New Tab"
 msgstr  "አዲስ መክፈቻ (T)"
 
-#: ../xffm/gtk/dialogs.hh:29
+#: ../xffm/gtk/dialogs.hh:31
 msgid   "Yes"
 msgstr  "አዎ"
 
-#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+#: ../xffm/gtk/dialogs.hh:46 ../xffm/gtk/dialogs.hh:147
 #, fuzzy
 msgid   "Confirm"
 msgstr  "ለውጡ"
 
-#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+#: ../xffm/gtk/dialogs.hh:97
 #, fuzzy
 msgid   "Apply to all"
 msgstr  "ለሁሉንም ምስሎች አውል (A)"
 
-#: ../xffm/gtk/dialogs.hh:110
+#: ../xffm/gtk/dialogs.hh:101
 msgid   "Overwrite"
 msgstr  "በላዩ ላይ ይጻፍ"
 
-#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/gtk/dialogs.hh:105 ../xffm/gtk/dialogs.hh:218
 #: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
-#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/view/local/rm.hh:191 ../xffm/fm/view/local/properties.hh:307
 #: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
-#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
-#: ../xffm/find/signals.hh:411
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/common/dialogclass.hh:136 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:430 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:415
 msgid   "Cancel"
 msgstr  "ተወው"
 
-#: ../xffm/gtk/dialogs.hh:240
+#: ../xffm/gtk/dialogs.hh:236
 msgid   "Help"
 msgstr  "መረጃ (H)"
 
 #: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
 #: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
-#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
-#: ../xffm/find/dialog.hh:666
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:666
+#: ../xffm/find/dialog.hh:681
 msgid   "unknown"
 msgstr  "ያልታወቀ"
 
@@ -143,7 +144,7 @@ msgid   "Character device"
 msgstr  "ፊደል ኮድ"
 
 #: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
-#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/fm/view/local/model.hh:1039 ../xffm/find/fgr.hh:159
 #: ../xffm/find/signals.hh:8
 msgid   "Directory"
 msgstr  "ዶሴ"
@@ -191,7 +192,7 @@ msgstr  "ፋይል (F)"
 msgid   "Command history"
 msgstr  "የሰነዱ ታሪክ"
 
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:281
 msgid   "User"
 msgstr  "ተጠቃሚ"
 
@@ -330,7 +331,7 @@ msgstr  "ስም"
 
 #: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
 #: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
-#: ../xffm/find/dialog.hh:138
+#: ../xffm/find/dialog.hh:155
 msgid   "Details"
 msgstr  "ዝርዝሮች"
 
@@ -357,7 +358,7 @@ msgstr  "ፋይሉ ባዶ ነው"
 msgid   "Directory does not exist."
 msgstr  "'%s' የተባለው ሰነድ የለም"
 
-#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:720
 #, fuzzy, c-format
 msgid   "Files: %s"
 msgstr  "ፋይል፦ %s"
@@ -374,21 +375,21 @@ msgstr  "ቆጠራ"
 msgid   "Save"
 msgstr  "አስቀምጥ (S)"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/view/fuse/ecryptfs.hh:400
 #: ../xffm/fm/dialog/notebook/createini.hh:67
 msgid   "Options"
 msgstr  "ምርጫዎች"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+#: ../xffm/fm/view/fuse/ecryptfs.hh:401
 msgid   "Advanced"
 msgstr  "ጠለቅ"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#: ../xffm/fm/view/fuse/ecryptfs.hh:716 ../xffm/fm/view/fstab/view-Linux.hh:743
 #, fuzzy, c-format
 msgid   "Mounting %s"
 msgstr  "የመክፈቻና የመፈለጊያው ይዞታዎች"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#: ../xffm/fm/view/fuse/ecryptfs.hh:774
 #, fuzzy, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "ሚስጢራዊ ቃል አስገቡ"
@@ -463,11 +464,11 @@ msgstr  "ማስጠንቀቂያ፦"
 msgid   "Multiple selections"
 msgstr  "ምርጫ ቁረጥ"
 
-#: ../xffm/fm/view/local/rm.hh:92
+#: ../xffm/fm/view/local/rm.hh:123
 msgid   "Remove"
 msgstr  "አስወግድ (R)"
 
-#: ../xffm/fm/view/local/rm.hh:183
+#: ../xffm/fm/view/local/rm.hh:218
 msgid   "Trash"
 msgstr  "የማይፈለግ"
 
@@ -515,7 +516,7 @@ msgid   "Duplicate"
 msgstr  "አባዛ (D)"
 
 #: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
-#: ../xffm/common/dnd.hh:63
+#: ../xffm/common/dnd.hh:64
 msgid   "Link"
 msgstr  "አያያዝ"
 
@@ -594,7 +595,7 @@ msgstr  "ቅድመ ዕይታ"
 msgid   "Reading \"%s\""
 msgstr  "\"%s\"ን በማስቀመጥ ላይ"
 
-#: ../xffm/fm/view/local/model.hh:722
+#: ../xffm/fm/view/local/model.hh:723
 #, fuzzy, c-format
 msgid   "Loaded %d of %d articles"
 msgstr  "ፋይል ተጭኗል %s"
@@ -711,12 +712,12 @@ msgstr  ""
 msgid   "Mount Device"
 msgstr  "ዲቫይስ"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:140
 msgid   "Copying files locally"
 msgstr  ""
 
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
-#: ../xffm/common/gio.hh:93
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:135
+#: ../xffm/common/gio.hh:105
 #, fuzzy
 msgid   "Moving files"
 msgstr  "ፋይል ን በማስቀመጥ ላይ"
@@ -936,15 +937,15 @@ msgid   "Open"
 msgstr  "ክፈት"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:268
-#: ../xffm/response/chooserresponse.hh:55
-#: ../xffm/response/chooserresponse.hh:69
+#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/response/chooserresponse.hh:70
 #, fuzzy
 msgid   "Choose file"
 msgstr  "የፋይል ስም ምረጡ"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:277
-#: ../xffm/response/chooserresponse.hh:50
-#: ../xffm/response/chooserresponse.hh:62
+#: ../xffm/response/chooserresponse.hh:51
+#: ../xffm/response/chooserresponse.hh:63
 #, fuzzy
 msgid   "Choose directory"
 msgstr  "የቤት ዶሴ፦"
@@ -1056,10 +1057,14 @@ msgstr  "በመጠኑ"
 msgid   "Main menu"
 msgstr  "የዋና ሜኑ"
 
-#: ../xffm/fm/dialog/dialog.hh:121
+#: ../xffm/fm/dialog/dialog.hh:122
 #, fuzzy
 msgid   "Removed"
 msgstr  "አስወግድ (R)"
+
+#: ../xffm/common/dialogclass.hh:140
+msgid   "Apply"
+msgstr  "ተጠቀም"
 
 #: ../xffm/common/run.hh:339
 #, fuzzy
@@ -1072,7 +1077,7 @@ msgstr  "ማስጠንቀቂያ"
 msgid   "Enter password"
 msgstr  "ሚስጢራዊ ቃል አስገቡ"
 
-#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:295
 #, fuzzy
 msgid   "Executable"
 msgstr  "አስኪድ"
@@ -1116,90 +1121,90 @@ msgid   "Console: quickly run single commands -- write a command here and "
         "press enter."
 msgstr  ""
 
-#: ../xffm/common/dnd.hh:41
+#: ../xffm/common/dnd.hh:42
 #, fuzzy
 msgid   "Target"
 msgstr  "ኢላማ፦"
 
-#: ../xffm/common/dnd.hh:41
+#: ../xffm/common/dnd.hh:42
 msgid   "Files"
 msgstr  "ፋይሎች"
 
-#: ../xffm/common/dnd.hh:49
+#: ../xffm/common/dnd.hh:50
 #, fuzzy
 msgid   "More…"
 msgstr  "ተጨማሪ"
 
-#: ../xffm/common/dnd.hh:63
+#: ../xffm/common/dnd.hh:64
 msgid   "Move"
 msgstr  "መንቀሳቅስ"
 
-#: ../xffm/common/dnd.hh:143
+#: ../xffm/common/dnd.hh:145
 #, fuzzy
 msgid   "Create Link"
 msgstr  "አያያዝ ፍጠር"
 
-#: ../xffm/common/dnd.hh:155
+#: ../xffm/common/dnd.hh:157
 msgid   "more"
 msgstr  ""
 
-#: ../xffm/common/gio.hh:91
+#: ../xffm/common/gio.hh:103
 #, fuzzy
 msgid   "Copying files"
 msgstr  "ፋይሎች ቅጂ (C)"
 
-#: ../xffm/common/gio.hh:95
+#: ../xffm/common/gio.hh:107
 #, fuzzy
 msgid   "linking"
 msgstr  "ንጉሥ "
 
-#: ../xffm/common/gio.hh:97
+#: ../xffm/common/gio.hh:109
 msgid   "rename"
 msgstr  "እንደገና ሰይም"
 
-#: ../xffm/common/gio.hh:408
+#: ../xffm/common/gio.hh:422
 #, fuzzy
 msgid   "Overwrite?"
 msgstr  "በላዩ ላይ ይጻፍ"
 
-#: ../xffm/common/gio.hh:498
+#: ../xffm/common/gio.hh:511
 #, fuzzy, c-format
 msgid   "(%d of %d)"
 msgstr  "%d ከ %d"
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/response/customresponse.hh:56
 #, fuzzy
 msgid   "Execute command"
 msgstr  "የተለመደው ትእዛዝ፦"
 
-#: ../xffm/response/customresponse.hh:103
+#: ../xffm/response/customresponse.hh:104
 #, fuzzy
 msgid   "Source File"
 msgstr  "ምንጭ"
 
-#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+#: ../xffm/response/entryresponse.hh:434 ../xffm/response/passwdresponse.hh:197
 msgid   "Ok"
 msgstr  "እሺ"
 
-#: ../xffm/response/timeoutresponse.hh:57
+#: ../xffm/response/timeoutresponse.hh:59
 msgid   "Dismiss"
 msgstr  ""
 
-#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
+#: ../xffm/response/commandresponse.hh:138 ../xffm/response/progress.hh:83
 msgid   "Running"
 msgstr  "በሥራ ላይ"
 
-#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
+#: ../xffm/response/commandresponse.hh:142 ../xffm/response/progress.hh:88
 #, fuzzy
 msgid   "Waiting for operation to finish..."
 msgstr  "ለመጀመር በመጠበቅ ላይ ወይም ጨርሷል።"
 
-#: ../xffm/response/passwdresponse.hh:131
+#: ../xffm/response/passwdresponse.hh:134
 #, fuzzy
 msgid   "User Input"
 msgstr  "የተጠቃሚው መረጃ (I)"
 
-#: ../xffm/response/passwdresponse.hh:147
+#: ../xffm/response/passwdresponse.hh:150
 msgid   "Response Requested"
 msgstr  ""
 
@@ -1209,7 +1214,7 @@ msgid   "No Read Permission"
 msgstr  "ፈቃዶች"
 
 #: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
-#: ../xffm/find/dialog.hh:341
+#: ../xffm/find/dialog.hh:361
 msgid   "Path"
 msgstr  "መተላለፊያ"
 
@@ -1217,7 +1222,7 @@ msgstr  "መተላለፊያ"
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:400
 #, fuzzy
 msgid   "Filter:"
 msgstr  "አጣራ"
@@ -1249,7 +1254,7 @@ msgstr  "የኩነቶች መረጃ"
 msgid   "Filter Details"
 msgstr  "የገጽ ዝርዝሮች"
 
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:262
 msgid   "Stay on single filesystem"
 msgstr  ""
 
@@ -1261,7 +1266,7 @@ msgstr  "አትም... (P)"
 msgid   "The unique Process ID that identifies this process."
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:259
 msgid   "Find hidden files and directories"
 msgstr  ""
 
@@ -1274,7 +1279,7 @@ msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:256
 msgid   "Recursive"
 msgstr  ""
 
@@ -1322,7 +1327,7 @@ msgstr  "የነበረው የፊደል ቅርጽ ዓይነት"
 msgid   "UNIX Socket"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:303
 msgid   "Minutes"
 msgstr  "ደቂቃዎች"
 
@@ -1333,11 +1338,11 @@ msgstr  "ደቂቃዎች"
 msgid   "TIME"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:308
 msgid   "Hours"
 msgstr  "ሰዓቶች"
 
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:313
 msgid   "Days"
 msgstr  "ቀን"
 
@@ -1410,12 +1415,12 @@ msgstr  "የፊደሉን መጠን ተዉት"
 msgid   "Text Files"
 msgstr  "ፋይሎች ቁረጥ (U)"
 
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:478
 #, fuzzy
 msgid   "No match"
 msgstr  "ኢሜይል የልም።"
 
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:467
 #, fuzzy
 msgid   "Line Count"
 msgstr  "የመስመር ቀለም"
@@ -1438,39 +1443,39 @@ msgstr  "አጠቃቀም፦ %s\n"
 msgid   "Regular"
 msgstr  "ሞቢል፦ (e)"
 
-#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:516
+#: ../xffm/find/dialog.hh:265
 msgid   "Results"
 msgstr  "ውጤቶች"
 
-#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#: ../xffm/find/signals.hh:447 ../xffm/find/signals.hh:894
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "አሁን ያለውን ቦታ እንደገና ይጫን"
 
-#: ../xffm/find/signals.hh:501
+#: ../xffm/find/signals.hh:516
 #, fuzzy
 msgid   "Upper limit:"
 msgstr  "ከፍተኛ ሰዓት፦"
 
-#: ../xffm/find/signals.hh:503
+#: ../xffm/find/signals.hh:518
 #, fuzzy
 msgid   "Counting files..."
 msgstr  "ፋይል ን በማስቀመጥ ላይ"
 
-#: ../xffm/find/signals.hh:518
+#: ../xffm/find/signals.hh:533
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       ""
 msgstr[1]       ""
 
-#: ../xffm/find/signals.hh:520
+#: ../xffm/find/signals.hh:535
 #, c-format
 msgid   "%s Finished : %s"
 msgstr  "%sን ጨርሷል ፦ %s"
 
-#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+#: ../xffm/find/signals.hh:659 ../xffm/find/signals.hh:661
 #, fuzzy
 msgid   "Searching..."
 msgstr  "በማስቀመጥ ላይ..."
@@ -1479,119 +1484,124 @@ msgstr  "በማስቀመጥ ላይ..."
 msgid   "Find"
 msgstr  "ፈልግ"
 
-#: ../xffm/find/dialog.hh:131
+#: ../xffm/find/dialog.hh:133
 #, fuzzy
 msgid   "Close find"
 msgstr  "መስኮቱን ዝጋ"
 
-#: ../xffm/find/dialog.hh:146
+#: ../xffm/find/dialog.hh:143
+#, fuzzy
+msgid   "Search Action"
+msgstr  "እንደገና ፈልግ"
+
+#: ../xffm/find/dialog.hh:165
 #, fuzzy
 msgid   "Find Files"
 msgstr  "ምስሎችን ፈልግ"
 
-#: ../xffm/find/dialog.hh:209
+#: ../xffm/find/dialog.hh:229
 #, fuzzy
 msgid   "Select advanced options"
 msgstr  "ምርጫዎች አስቀምጥ (V)"
 
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/dialog.hh:265
 #, fuzzy
 msgid   "Upper limit"
 msgstr  "የበላይ"
 
-#: ../xffm/find/dialog.hh:250
+#: ../xffm/find/dialog.hh:270
 msgid   "At Least"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+#: ../xffm/find/dialog.hh:270 ../xffm/find/dialog.hh:275
 #, fuzzy
 msgid   "kBytes"
 msgstr  "ባይቶች"
 
-#: ../xffm/find/dialog.hh:255
+#: ../xffm/find/dialog.hh:275
 msgid   "At Most"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:266
+#: ../xffm/find/dialog.hh:286
 msgid   "Group"
 msgstr  "መድረክ (G)"
 
-#: ../xffm/find/dialog.hh:270
+#: ../xffm/find/dialog.hh:290
 #, fuzzy
 msgid   "Octal Permissions"
 msgstr  "ፈቃዶች"
 
-#: ../xffm/find/dialog.hh:275
+#: ../xffm/find/dialog.hh:295
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/dialog.hh:299
+#: ../xffm/find/dialog.hh:319
 #, fuzzy
 msgid   "Months"
 msgstr  "ወር"
 
-#: ../xffm/find/dialog.hh:309
+#: ../xffm/find/dialog.hh:329
 #, fuzzy
 msgid   "File type : "
 msgstr  "መጻፊያ ሳጥን ዓይነት፦ %s"
 
-#: ../xffm/find/dialog.hh:355
+#: ../xffm/find/dialog.hh:375
 #, fuzzy
 msgid   "Display file selection dialog"
 msgstr  "የምልክቶች ምርጫ መምረጫ"
 
-#: ../xffm/find/dialog.hh:414
+#: ../xffm/find/dialog.hh:434
 #, fuzzy
 msgid   "Contains the text"
 msgstr  "ጽሑፉን ቅጂ"
 
-#: ../xffm/find/dialog.hh:444
+#: ../xffm/find/dialog.hh:464
 msgid   "Case Sensitive"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:445
+#: ../xffm/find/dialog.hh:465
 msgid   "Extended regexp"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:446
+#: ../xffm/find/dialog.hh:466
 #, fuzzy
 msgid   "Include binary files"
 msgstr  "የቀን መቁጠሪያ ፋይል"
 
-#: ../xffm/find/dialog.hh:455
+#: ../xffm/find/dialog.hh:475
 msgid   "Anywhere"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:456
+#: ../xffm/find/dialog.hh:476
 msgid   "Whole words only"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:457
+#: ../xffm/find/dialog.hh:477
 msgid   "lines"
 msgstr  "መስመሮች"
 
-#: ../xffm/find/dialog.hh:680
+#: ../xffm/find/dialog.hh:695
 #, fuzzy
 msgid   "Modified"
 msgstr  "የተሻሻለ፦"
 
-#: ../xffm/find/dialog.hh:684
+#: ../xffm/find/dialog.hh:699
 #, fuzzy
 msgid   "Created"
 msgstr  "ፍጠር (C)"
 
-#: ../xffm/find/dialog.hh:688
+#: ../xffm/find/dialog.hh:703
 #, fuzzy
 msgid   "Accessed"
 msgstr  "መረጃ ፍለጋ፦"
 
-#: ../xffm/find/dialog.hh:1006
+#: ../xffm/find/dialog.hh:1021
 #, fuzzy
 msgid   "Close find\n"
         "\n"
 msgstr  "መስኮቱን ዝጋ"
 
-#: ../xffm/find/dialog.hh:1010
+#: ../xffm/find/dialog.hh:1025
 msgid   "Basic rules:\n"
         "\n"
         "*  Will match any character zero or more times.\n"
@@ -1601,7 +1611,7 @@ msgid   "Basic rules:\n"
         "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:1019
+#: ../xffm/find/dialog.hh:1034
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "

@@ -60,13 +60,16 @@ xffm/fm/dialog/dialog.hh
 xffm/common/xml.hh
 xffm/common/common.hh
 xffm/common/tooltip.hh
+xffm/common/compat.hh
 xffm/common/threadcontrol.hh
+xffm/common/dialogclass.hh
 xffm/common/run.hh
 xffm/common/settings.hh
 xffm/common/util.hh
 xffm/common/popup.hh
 xffm/common/print.hh
 xffm/common/dnd.hh
+xffm/common/responseclass.hh
 xffm/common/tubo.hh
 xffm/common/gio.hh
 xffm/response/response.hh

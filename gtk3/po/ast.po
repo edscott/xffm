@@ -1,12 +1,12 @@
-# Xffm+ translation file: jue 18 jul 2024 12:34:23 CST
+# Xffm4 translation file: mar 10 jun 2025 12:44:50 CST
 # Merged from existing open source files
-# http://xffm.org
+# http://xffm.sf.net
 #
-#
+#, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2024-07-18 12:31-0600\n"
+        "POT-Creation-Date: 2025-06-10 12:44-0600\n"
         "PO-Revision-Date: 2011-09-30 21:07+0200\n"
         "Last-Translator: Xandru Armesto <xandru@softastur.org>\n"
         "Language-Team: Softastur <alministradores@softastur.org>\n"
@@ -71,16 +71,16 @@ msgid   "Cut"
 msgstr  "Cortar"
 
 #: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
-#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:63
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:64
 msgid   "Copy"
 msgstr  "Copiar"
 
-#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:176
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:210
 #: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
 msgid   "Delete"
 msgstr  "Desaniciar"
 
-#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:165
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:199
 msgid   "Shred"
 msgstr  ""
 
@@ -94,41 +94,42 @@ msgstr  "Abrir nuna llingüeta nueva"
 msgid   "New Tab"
 msgstr  "Llingüeta nueva"
 
-#: ../xffm/gtk/dialogs.hh:29
+#: ../xffm/gtk/dialogs.hh:31
 msgid   "Yes"
 msgstr  "Sí"
 
-#: ../xffm/gtk/dialogs.hh:55 ../xffm/gtk/dialogs.hh:154
+#: ../xffm/gtk/dialogs.hh:46 ../xffm/gtk/dialogs.hh:147
 msgid   "Confirm"
 msgstr  "Confirmar"
 
-#: ../xffm/gtk/dialogs.hh:106 ../xffm/fm/view/local/rm.hh:142
+#: ../xffm/gtk/dialogs.hh:97
 #, fuzzy
 msgid   "Apply to all"
 msgstr  "Aplicar a:"
 
-#: ../xffm/gtk/dialogs.hh:110
+#: ../xffm/gtk/dialogs.hh:101
 msgid   "Overwrite"
 msgstr  "Sobroscribir"
 
-#: ../xffm/gtk/dialogs.hh:114 ../xffm/gtk/dialogs.hh:224
+#: ../xffm/gtk/dialogs.hh:105 ../xffm/gtk/dialogs.hh:218
 #: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
-#: ../xffm/fm/view/local/rm.hh:157 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/view/local/rm.hh:191 ../xffm/fm/view/local/properties.hh:307
 #: ../xffm/fm/dialog/notebook/createini.hh:232
-#: ../xffm/fm/dialog/notebook/createini.hh:369 ../xffm/common/dnd.hh:34
-#: ../xffm/response/entryresponse.hh:427 ../xffm/response/chooserresponse.hh:18
-#: ../xffm/find/signals.hh:411
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/common/dialogclass.hh:136 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:430 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:415
 msgid   "Cancel"
 msgstr  "Encaboxar"
 
-#: ../xffm/gtk/dialogs.hh:240
+#: ../xffm/gtk/dialogs.hh:236
 msgid   "Help"
 msgstr  "Ayuda"
 
 #: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
 #: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
-#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:651
-#: ../xffm/find/dialog.hh:666
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:666
+#: ../xffm/find/dialog.hh:681
 msgid   "unknown"
 msgstr  "desconocíu"
 
@@ -145,7 +146,7 @@ msgid   "Character device"
 msgstr  "Conxuntu de carauteres"
 
 #: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
-#: ../xffm/fm/view/local/model.hh:1038 ../xffm/find/fgr.hh:159
+#: ../xffm/fm/view/local/model.hh:1039 ../xffm/find/fgr.hh:159
 #: ../xffm/find/signals.hh:8
 msgid   "Directory"
 msgstr  "Direutoriu"
@@ -192,7 +193,7 @@ msgstr  "Ficheru"
 msgid   "Command history"
 msgstr  "Hestóricu de llamaes"
 
-#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:261
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:281
 msgid   "User"
 msgstr  "Usuariu"
 
@@ -330,7 +331,7 @@ msgstr  "Nome"
 
 #: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
 #: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
-#: ../xffm/find/dialog.hh:138
+#: ../xffm/find/dialog.hh:155
 msgid   "Details"
 msgstr  "Detalles"
 
@@ -356,7 +357,7 @@ msgstr  "La batería de la tableta ta balera"
 msgid   "Directory does not exist."
 msgstr  "Directoriu nun esiste."
 
-#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:719
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:720
 #, fuzzy, c-format
 msgid   "Files: %s"
 msgstr  "Ficheru: %s"
@@ -372,21 +373,21 @@ msgstr  "Montar"
 msgid   "Save"
 msgstr  "Guardar"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:398
+#: ../xffm/fm/view/fuse/ecryptfs.hh:400
 #: ../xffm/fm/dialog/notebook/createini.hh:67
 msgid   "Options"
 msgstr  "Opciones"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:399
+#: ../xffm/fm/view/fuse/ecryptfs.hh:401
 msgid   "Advanced"
 msgstr  "Avanzáu"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:712 ../xffm/fm/view/fstab/view-Linux.hh:743
+#: ../xffm/fm/view/fuse/ecryptfs.hh:716 ../xffm/fm/view/fstab/view-Linux.hh:743
 #, fuzzy, c-format
 msgid   "Mounting %s"
 msgstr  "Montar %s"
 
-#: ../xffm/fm/view/fuse/ecryptfs.hh:770
+#: ../xffm/fm/view/fuse/ecryptfs.hh:774
 #, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "Introduz la contraseña pa %s"
@@ -457,11 +458,11 @@ msgstr  "Alvertencia: "
 msgid   "Multiple selections"
 msgstr  "Mover la escoyeta"
 
-#: ../xffm/fm/view/local/rm.hh:92
+#: ../xffm/fm/view/local/rm.hh:123
 msgid   "Remove"
 msgstr  "Desaniciar"
 
-#: ../xffm/fm/view/local/rm.hh:183
+#: ../xffm/fm/view/local/rm.hh:218
 msgid   "Trash"
 msgstr  "Papelera"
 
@@ -510,7 +511,7 @@ msgid   "Duplicate"
 msgstr  "Duplicar"
 
 #: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
-#: ../xffm/common/dnd.hh:63
+#: ../xffm/common/dnd.hh:64
 msgid   "Link"
 msgstr  "Enllaz"
 
@@ -587,7 +588,7 @@ msgstr  "Vistes previes"
 msgid   "Reading \"%s\""
 msgstr  "Obteniendo'l «hash» de «%s»"
 
-#: ../xffm/fm/view/local/model.hh:722
+#: ../xffm/fm/view/local/model.hh:723
 #, fuzzy, c-format
 msgid   "Loaded %d of %d articles"
 msgstr  "Ficheros cargaos:"
@@ -699,12 +700,12 @@ msgstr  "Carpeta de Sincronización Remota SSHFS"
 msgid   "Mount Device"
 msgstr  "Montar Preséu"
 
-#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:138
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:140
 msgid   "Copying files locally"
 msgstr  "Copiando ficheru llocalmente"
 
-#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:133
-#: ../xffm/common/gio.hh:93
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:135
+#: ../xffm/common/gio.hh:105
 #, fuzzy
 msgid   "Moving files"
 msgstr  "Moviendo ficheros"
@@ -921,14 +922,14 @@ msgid   "Open"
 msgstr  "Abrir"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:268
-#: ../xffm/response/chooserresponse.hh:55
-#: ../xffm/response/chooserresponse.hh:69
+#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/response/chooserresponse.hh:70
 msgid   "Choose file"
 msgstr  "Escoyer un ficheru"
 
 #: ../xffm/fm/dialog/notebook/createini.hh:277
-#: ../xffm/response/chooserresponse.hh:50
-#: ../xffm/response/chooserresponse.hh:62
+#: ../xffm/response/chooserresponse.hh:51
+#: ../xffm/response/chooserresponse.hh:63
 msgid   "Choose directory"
 msgstr  "Escoyer una carpeta"
 
@@ -1035,9 +1036,13 @@ msgstr  "Axeitar por Nome"
 msgid   "Main menu"
 msgstr  "Menú principal"
 
-#: ../xffm/fm/dialog/dialog.hh:121
+#: ../xffm/fm/dialog/dialog.hh:122
 msgid   "Removed"
 msgstr  "Desaniciáu"
+
+#: ../xffm/common/dialogclass.hh:140
+msgid   "Apply"
+msgstr  "Aplicar"
 
 #: ../xffm/common/run.hh:339
 #, fuzzy
@@ -1049,7 +1054,7 @@ msgstr  "avisu:"
 msgid   "Enter password"
 msgstr  "Conseñe la contraseña"
 
-#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:275
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:295
 msgid   "Executable"
 msgstr  "Executable"
 
@@ -1093,89 +1098,89 @@ msgid   "Console: quickly run single commands -- write a command here and "
 msgstr  "Consola: executa con rapidez órdenes cencielles -- escribi equí una "
         "orde y calca entrar."
 
-#: ../xffm/common/dnd.hh:41
+#: ../xffm/common/dnd.hh:42
 #, fuzzy
 msgid   "Target"
 msgstr  "oxetivos"
 
-#: ../xffm/common/dnd.hh:41
+#: ../xffm/common/dnd.hh:42
 msgid   "Files"
 msgstr  "Ficheros"
 
-#: ../xffm/common/dnd.hh:49
+#: ../xffm/common/dnd.hh:50
 #, fuzzy
 msgid   "More…"
 msgstr  "Más"
 
-#: ../xffm/common/dnd.hh:63
+#: ../xffm/common/dnd.hh:64
 msgid   "Move"
 msgstr  "Mover"
 
-#: ../xffm/common/dnd.hh:143
+#: ../xffm/common/dnd.hh:145
 #, fuzzy
 msgid   "Create Link"
 msgstr  "Apegar enllaz"
 
-#: ../xffm/common/dnd.hh:155
+#: ../xffm/common/dnd.hh:157
 msgid   "more"
 msgstr  "más"
 
-#: ../xffm/common/gio.hh:91
+#: ../xffm/common/gio.hh:103
 msgid   "Copying files"
 msgstr  "Copiando ficheros"
 
-#: ../xffm/common/gio.hh:95
+#: ../xffm/common/gio.hh:107
 #, fuzzy
 msgid   "linking"
 msgstr  "Desaniciando"
 
-#: ../xffm/common/gio.hh:97
+#: ../xffm/common/gio.hh:109
 #, fuzzy
 msgid   "rename"
 msgstr  "Renomar"
 
-#: ../xffm/common/gio.hh:408
+#: ../xffm/common/gio.hh:422
 #, fuzzy
 msgid   "Overwrite?"
 msgstr  "Sobroscribir"
 
-#: ../xffm/common/gio.hh:498
+#: ../xffm/common/gio.hh:511
 #, c-format
 msgid   "(%d of %d)"
 msgstr  "(%d de %d)"
 
-#: ../xffm/response/customresponse.hh:55
+#: ../xffm/response/customresponse.hh:56
 #, fuzzy
 msgid   "Execute command"
 msgstr  "Executa órdenes de la consola"
 
-#: ../xffm/response/customresponse.hh:103
+#: ../xffm/response/customresponse.hh:104
 msgid   "Source File"
 msgstr  "Ficheru fonte"
 
-#: ../xffm/response/entryresponse.hh:431 ../xffm/response/passwdresponse.hh:194
+#: ../xffm/response/entryresponse.hh:434 ../xffm/response/passwdresponse.hh:197
 msgid   "Ok"
 msgstr  "Val"
 
-#: ../xffm/response/timeoutresponse.hh:57
+#: ../xffm/response/timeoutresponse.hh:59
 msgid   "Dismiss"
 msgstr  "Descartar"
 
-#: ../xffm/response/commandresponse.hh:137 ../xffm/response/progress.hh:82
+#: ../xffm/response/commandresponse.hh:138 ../xffm/response/progress.hh:83
 msgid   "Running"
 msgstr  "Executándose"
 
-#: ../xffm/response/commandresponse.hh:141 ../xffm/response/progress.hh:87
+#: ../xffm/response/commandresponse.hh:142 ../xffm/response/progress.hh:88
 #, fuzzy
 msgid   "Waiting for operation to finish..."
 msgstr  "Esperando a qu'acabe Tuxpaint"
 
-#: ../xffm/response/passwdresponse.hh:131
+#: ../xffm/response/passwdresponse.hh:134
 #, fuzzy
 msgid   "User Input"
 msgstr  "Entrada del mur"
 
-#: ../xffm/response/passwdresponse.hh:147
+#: ../xffm/response/passwdresponse.hh:150
 #, fuzzy
 msgid   "Response Requested"
 msgstr  "Rempuesta solicitada"
@@ -1186,7 +1191,7 @@ msgid   "No Read Permission"
 msgstr  "Permisos de Carpetes:"
 
 #: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
-#: ../xffm/find/dialog.hh:341
+#: ../xffm/find/dialog.hh:361
 msgid   "Path"
 msgstr  "Camín"
 
@@ -1194,7 +1199,7 @@ msgstr  "Camín"
 msgid   "Locate documents and folders on this computer by name or content"
 msgstr  "Llocaliza documentos y carpetes pol nome o conteníu nesti equipu"
 
-#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:380
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:400
 msgid   "Filter:"
 msgstr  "Fieltru:"
 
@@ -1225,7 +1230,7 @@ msgstr  "Amuesa la información de la versión"
 msgid   "Filter Details"
 msgstr  "Detalles del usuariu"
 
-#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:242
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:262
 #, fuzzy
 msgid   "Stay on single filesystem"
 msgstr  "Esplorar sistema de ficheros"
@@ -1239,7 +1244,7 @@ msgstr  "Imprentar…"
 msgid   "The unique Process ID that identifies this process."
 msgstr  "Desaniciar l'identificador del procesu del nome del procesu."
 
-#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:239
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:259
 #, fuzzy
 msgid   "Find hidden files and directories"
 msgstr  "Parchea ficheros y carpetes."
@@ -1253,7 +1258,7 @@ msgid   "To display files which pass the filter (stars and regexps will be "
         "processed)"
 msgstr  ""
 
-#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:236
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:256
 msgid   "Recursive"
 msgstr  "Recursiva"
 
@@ -1303,7 +1308,7 @@ msgstr  "Elementu predetermináu"
 msgid   "UNIX Socket"
 msgstr  "Esquema UNIX"
 
-#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:283
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:303
 msgid   "Minutes"
 msgstr  "Minutos"
 
@@ -1315,11 +1320,11 @@ msgstr  "Minutos"
 msgid   "TIME"
 msgstr  "TIEMPU D'ESPIRACIÓN"
 
-#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:288
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:308
 msgid   "Hours"
 msgstr  "Hores"
 
-#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:293
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:313
 msgid   "Days"
 msgstr  "Díes"
 
@@ -1390,11 +1395,11 @@ msgstr  "Inorar capitalización"
 msgid   "Text Files"
 msgstr  "Ficheros de testu"
 
-#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:458
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:478
 msgid   "No match"
 msgstr  "Nun hai coincidencies"
 
-#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:447
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:467
 #, fuzzy
 msgid   "Line Count"
 msgstr  "Cuenta de ficheros"
@@ -1416,38 +1421,38 @@ msgstr  "Usu: %s [OPCIÓN…] %s\n"
 msgid   "Regular"
 msgstr  "Habitual"
 
-#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:501
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:516
+#: ../xffm/find/dialog.hh:265
 msgid   "Results"
 msgstr  "Resultaos"
 
-#: ../xffm/find/signals.hh:443 ../xffm/find/signals.hh:878
+#: ../xffm/find/signals.hh:447 ../xffm/find/signals.hh:894
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "Ensin correición d'error"
 
-#: ../xffm/find/signals.hh:501
+#: ../xffm/find/signals.hh:516
 msgid   "Upper limit:"
 msgstr  "Llende superior:"
 
-#: ../xffm/find/signals.hh:503
+#: ../xffm/find/signals.hh:518
 #, fuzzy
 msgid   "Counting files..."
 msgstr  "Zarrando ficheru..."
 
-#: ../xffm/find/signals.hh:518
+#: ../xffm/find/signals.hh:533
 #, fuzzy, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "Pallabres que concasar"
 msgstr[1]       "Pallabres que concasar"
 
-#: ../xffm/find/signals.hh:520
+#: ../xffm/find/signals.hh:535
 #, fuzzy, c-format
 msgid   "%s Finished : %s"
 msgstr  "Fin de la carga de %s."
 
-#: ../xffm/find/signals.hh:644 ../xffm/find/signals.hh:646
+#: ../xffm/find/signals.hh:659 ../xffm/find/signals.hh:661
 msgid   "Searching..."
 msgstr  "Guetando..."
 
@@ -1455,116 +1460,121 @@ msgstr  "Guetando..."
 msgid   "Find"
 msgstr  "Guetar"
 
-#: ../xffm/find/dialog.hh:131
+#: ../xffm/find/dialog.hh:133
 #, fuzzy
 msgid   "Close find"
 msgstr  "Zarrar ventana"
 
-#: ../xffm/find/dialog.hh:146
+#: ../xffm/find/dialog.hh:143
+#, fuzzy
+msgid   "Search Action"
+msgstr  "Opciones de gueta"
+
+#: ../xffm/find/dialog.hh:165
 #, fuzzy
 msgid   "Find Files"
 msgstr  "Ficheros atopaos"
 
-#: ../xffm/find/dialog.hh:209
+#: ../xffm/find/dialog.hh:229
 #, fuzzy
 msgid   "Select advanced options"
 msgstr  "Seleicionar más opciones"
 
-#: ../xffm/find/dialog.hh:245
+#: ../xffm/find/dialog.hh:265
 #, fuzzy
 msgid   "Upper limit"
 msgstr  "Llende superior:"
 
-#: ../xffm/find/dialog.hh:250
+#: ../xffm/find/dialog.hh:270
 #, fuzzy
 msgid   "At Least"
 msgstr  "Al menos"
 
-#: ../xffm/find/dialog.hh:250 ../xffm/find/dialog.hh:255
+#: ../xffm/find/dialog.hh:270 ../xffm/find/dialog.hh:275
 msgid   "kBytes"
 msgstr  "kBytes"
 
-#: ../xffm/find/dialog.hh:255
+#: ../xffm/find/dialog.hh:275
 #, fuzzy
 msgid   "At Most"
 msgstr  "La mayoría"
 
-#: ../xffm/find/dialog.hh:266
+#: ../xffm/find/dialog.hh:286
 msgid   "Group"
 msgstr  "Grupu"
 
-#: ../xffm/find/dialog.hh:270
+#: ../xffm/find/dialog.hh:290
 msgid   "Octal Permissions"
 msgstr  "Permisos Octales"
 
-#: ../xffm/find/dialog.hh:275
+#: ../xffm/find/dialog.hh:295
 msgid   "SUID"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:299
+#: ../xffm/find/dialog.hh:319
 msgid   "Months"
 msgstr  "meses"
 
-#: ../xffm/find/dialog.hh:309
+#: ../xffm/find/dialog.hh:329
 #, fuzzy
 msgid   "File type : "
 msgstr  "Tipu de ficheru:"
 
-#: ../xffm/find/dialog.hh:355
+#: ../xffm/find/dialog.hh:375
 msgid   "Display file selection dialog"
 msgstr  "Amosar el diálogu d'Escoyeta de ficheru"
 
-#: ../xffm/find/dialog.hh:414
+#: ../xffm/find/dialog.hh:434
 msgid   "Contains the text"
 msgstr  "Contién el testu"
 
-#: ../xffm/find/dialog.hh:444
+#: ../xffm/find/dialog.hh:464
 msgid   "Case Sensitive"
 msgstr  "Sensible a capitalización"
 
-#: ../xffm/find/dialog.hh:445
+#: ../xffm/find/dialog.hh:465
 #, fuzzy
 msgid   "Extended regexp"
 msgstr  "Cinta estendida"
 
-#: ../xffm/find/dialog.hh:446
+#: ../xffm/find/dialog.hh:466
 #, fuzzy
 msgid   "Include binary files"
 msgstr  "Incluyir ficheros:"
 
-#: ../xffm/find/dialog.hh:455
+#: ../xffm/find/dialog.hh:475
 #, fuzzy
 msgid   "Anywhere"
 msgstr  "Concasar con cualesquier parte"
 
-#: ../xffm/find/dialog.hh:456
+#: ../xffm/find/dialog.hh:476
 msgid   "Whole words only"
 msgstr  "Namái pallabres completes"
 
-#: ../xffm/find/dialog.hh:457
+#: ../xffm/find/dialog.hh:477
 msgid   "lines"
 msgstr  "llinies"
 
-#: ../xffm/find/dialog.hh:680
+#: ../xffm/find/dialog.hh:695
 msgid   "Modified"
 msgstr  "Camudáu"
 
-#: ../xffm/find/dialog.hh:684
+#: ../xffm/find/dialog.hh:699
 msgid   "Created"
 msgstr  "Creáu"
 
-#: ../xffm/find/dialog.hh:688
+#: ../xffm/find/dialog.hh:703
 #, fuzzy
 msgid   "Accessed"
 msgstr  "Accedíu:"
 
-#: ../xffm/find/dialog.hh:1006
+#: ../xffm/find/dialog.hh:1021
 #, fuzzy
 msgid   "Close find\n"
         "\n"
 msgstr  "Zarrar ventana"
 
-#: ../xffm/find/dialog.hh:1010
+#: ../xffm/find/dialog.hh:1025
 msgid   "Basic rules:\n"
         "\n"
         "*  Will match any character zero or more times.\n"
@@ -1574,7 +1584,7 @@ msgid   "Basic rules:\n"
         "$  Match at end of string \n"
 msgstr  ""
 
-#: ../xffm/find/dialog.hh:1019
+#: ../xffm/find/dialog.hh:1034
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
