@@ -63,7 +63,7 @@ sub fullmerge{
         $contents =~ s/Rodent Delta/xffm4/g;
         print OUTPUT $contents;
         close OUTPUT;
-#        print `rm $po.new`;
+        print `rm $po.new`;
         
         $manager->finish;        
     }

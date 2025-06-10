@@ -15,24 +15,12 @@ private:
     GtkCssProvider * getCSSprovider(void){
       GtkCssProvider *css_provider = gtk_css_provider_new();
 
-      char *outputBg = Settings::getString("xfterm", "outputBg");
-      if (!outputBg) outputBg = g_strdup(DEFAULT_OUTPUT_BG);
-
-      char *outputFg = Settings::getString("xfterm", "outputFg");
-      if (!outputFg) outputFg = g_strdup(DEFAULT_INPUT_BG);
-
-      char *inputBg = Settings::getString("xfterm", "inputBg");
-      if (!inputBg) inputBg = g_strdup("#dddddd");
-
-      char *inputFg = Settings::getString("xfterm", "inputFg");
-      if (!inputFg) inputFg = g_strdup("#000000");
-
-      char *iconsFg = Settings::getString("xfterm", "iconsFg");
-      if (!iconsFg) iconsFg = g_strdup("#000000");
-
-      char *iconsBg = Settings::getString("xfterm", "iconsBg");
-      if (!iconsBg) iconsBg = g_strdup("#ffffff");
-
+      char *outputBg = Settings::getString("xfterm", "outputBg", DEFAULT_OUTPUT_BG);
+      char *outputFg = Settings::getString("xfterm", "outputFg", DEFAULT_INPUT_BG);
+      char *inputBg = Settings::getString("xfterm", "inputBg", "#dddddd");
+      char *inputFg = Settings::getString("xfterm", "inputFg", "#000000");
+      char *iconsFg = Settings::getString("xfterm", "iconsFg", "#000000");
+      char *iconsBg = Settings::getString("xfterm", "iconsBg", "#ffffff");
 
       char *data = g_strdup_printf(
       "\

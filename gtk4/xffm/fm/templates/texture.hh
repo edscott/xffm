@@ -122,7 +122,8 @@ template <class Type>  class Texture {
 
 public:
     static void setShading(cairo_t *cr){
-        auto string = Settings::getString("xfterm", "iconsBg");
+        // This may be broken if there is a system defined CSS for gridviews. 
+        auto string = Settings::getString("xfterm", "iconsBg", "#ffffff");
         if (string){
           char buffer[3];
           buffer[2]=0;
@@ -138,9 +139,10 @@ public:
           //TRACE("red=%lf green=%lf blue=%lf\n", red/255., green/255., blue/255.);
           cairo_set_source_rgba (cr, red/255., green/255., blue/255., .5);
         } else {
+          ERROR_("this should never happen... Texture::setShading().\n");
+          exit(1);
           // XXX default background color is white. 
-          // this may be broken if there is a system defined CSS for gridviews. 
-          cairo_set_source_rgba (cr, 1,1,1, .5);
+          // cairo_set_source_rgba (cr, 1,1,1, .5);
         }
     }
 

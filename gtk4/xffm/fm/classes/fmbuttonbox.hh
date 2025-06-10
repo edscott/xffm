@@ -118,8 +118,7 @@ private:
         //auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 384.0, 4.0));
         auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 96.0, 4.0));
         // Load saved value fron xffm4/settings.ini file (if any)
-        auto size = Settings::getInteger("xfterm", "iconsize");
-        if (size < 0) value = 48; else value = size;
+        auto size = Settings::getInteger("xfterm", "iconsize", 48);
         TRACE("range set value=%lf\n", value);
         gtk_range_set_value(GTK_RANGE(size_scale), value);
 

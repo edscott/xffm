@@ -71,8 +71,7 @@ template <class Type>
         path_ = g_strdup(path);
         view_ = getGridView();
         //gtk_grid_view_set_single_click_activate (GTK_GRID_VIEW(view_), true);
-        flags_ = Settings::getInteger("flags", path_);
-        if (flags_ < 0) flags_ = 0;
+        flags_ = Settings::getInteger("flags", path_, 0);
         TRACE("gridview flags = 0x%x\n", flags_);
         
         myMenu_ = new Menu<GridviewMenu<Type> >("foo");
@@ -167,7 +166,7 @@ template <class Type>
         g_signal_connect( factory, "unbind", G_CALLBACK(Factory<Type>::factoryUnbind), this);
         g_signal_connect( factory, "teardown", G_CALLBACK(Factory<Type>::factoryTeardown), this);
 
-        TRACE("size = %d\n",Settings::getInteger("xfterm", "iconsize"));
+        TRACE("size = %d\n",Settings::getInteger("xfterm", "iconsize",24));
 
         TRACE("got maxNameLen_ = %d\n", maxNameLen_);
 
@@ -260,8 +259,7 @@ template <class Type>
         guint positionF;
         auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
         auto dirPath = g_file_get_path(dirFile);
-        int flags = Settings::getInteger("flags", dirPath); 
-        if (flags < 0) flags = 0;
+        int flags = Settings::getInteger("flags", dirPath, 0); 
         g_free(dirPath);
         
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());

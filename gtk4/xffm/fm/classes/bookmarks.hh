@@ -30,7 +30,7 @@ class Bookmarks {
     
 public:
     static void setBookmarkIcon(GFileInfo *info, const char *path){
-      int size = Settings::getInteger("xfterm", "iconsize");
+      int size = Settings::getInteger("xfterm", "iconsize", 24);
       auto gIcon = g_file_info_get_icon(info);
       
       const char *ball = EMBLEM_FAVOURITE;
@@ -43,7 +43,7 @@ public:
     initBookmarks(void) {
         if (bookmarks) return;
         bookmarks = readBookmarkFile(bookmarks);
-        auto serial = Settings::getInteger("Bookmarks", "serial"); 
+        auto serial = Settings::getInteger("Bookmarks", "serial",4000); 
         gchar *g=g_strdup_printf("%d", serial);
         setenv ("RFM_BOOKMARK_SERIAL", g, TRUE);
         g_free(g);

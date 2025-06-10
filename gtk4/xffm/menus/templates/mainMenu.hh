@@ -193,8 +193,7 @@ namespace xf {
       }
       else gridView_p->flagOff(bit);
       TRACE("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridView_p->flags());
-      auto configFlags = Settings::getInteger("flags", gridView_p->path());
-      if (configFlags < 0) configFlags = 0x40;
+      auto configFlags = Settings::getInteger("flags", gridView_p->path(), 0x40);
       
       auto popover = g_object_get_data(G_OBJECT(check), _("menu"));
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));

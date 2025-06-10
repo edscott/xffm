@@ -97,6 +97,15 @@ static  gchar *getPath(const char *argv1){
 int
 main (int argc, const char *argv[], const char *envp[]) {
   environment = envp;
+  char *cacheDir = g_strconcat(USER_CACHE_DIR, NULL);
+  if (!g_file_test(cacheDir, G_FILE_TEST_IS_DIR)){
+    if (mkdir(cacheDir, 0700) != 0){
+      ERROR_("%s: %s\n", cacheDir, strerror(errno));
+      exit(1);
+    }
+    g_free(cacheDir);
+  }
+  
   if (argv[1] && strcmp(argv[1], "--fgr") == 0){
       xf::Fgr *fgr = new(xf::Fgr);
       fgr->main(argc, argv);

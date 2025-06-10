@@ -82,21 +82,10 @@ ClickMenu
         addMotionController(imageBox);
         addGestureClickDown(imageBox, object, gridView_p);
         
-        // FIXME: works in kubuntu, crashes in archie gtk-4.18.5
-        // some race here, reenabling now for 4.18, since
-        // it is very possible that the problem was a 
-        // consequence of the memory corruption that
-        // occurs in 4.18 at gtk_notebook_set_scrollable().
-        // This bug has been reported at gnome discourse,
-        // but fat chance it will be addressed promptly...
         addGestureClickLong(labelBox, object, gridView_p);
+        addGestureClickLong(hlabelBox, object, gridView_p);
         
-        // FIXME: works in kubuntu, does not work in archie,
-        //        but does not crash archie:
-        //        (same as above condition).
         addGestureClickLongMenu(imageBox, object, gridView_p);
-        // Maybe the difference is kubuntu with touchpad
-        // while archie is with logitech wireless mouse...
         
         //addGestureClickDownLabel(labelBox, object, gridView_p);
         //addGestureClickDownBox(box, object, gridView_p);
@@ -153,7 +142,6 @@ ClickMenu
         g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
 
         auto type = g_file_info_get_file_type(info);
-        //auto size = Settings::getInteger("xfterm", "iconsize");
         auto size = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child),"iconsize"));
         // allocated:
         auto path = Basic::getPath(info);      
@@ -549,8 +537,7 @@ ClickMenu
       if (item) {
         auto path = Basic::getPath(item);
         auto dirPath = g_path_get_dirname(path);
-        int flags = Settings::getInteger("flags", dirPath); 
-        if (flags < 0) flags = 0;
+        int flags = Settings::getInteger("flags", dirPath, 0); 
        
         TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);

@@ -8,27 +8,27 @@ namespace xf {
 class Settings {
 
 public:
-    static const gchar *settingsFile(void){
-	static gchar *filename = NULL;
+  static const char *settingsFile(void){
+	static char *filename = NULL;
 	if (!filename) filename = g_build_filename(SETTINGS_FILE, NULL);
 	return filename;
     }
 
-    static gint 
-    getInteger(const gchar *group, const gchar *item){
+    static int 
+    getInteger(const char *group, const char *item){
         pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gint value = -1;
         GError *error = NULL;
         if (!g_key_file_has_key(keyFile, group, item, &error)) {
             if (error) {
-              ERROR_("getInteger(): %s\n", error->message);
+              TRACE("getInteger(): %s\n", error->message);
               g_error_free(error);
             }
         } else {
             value = g_key_file_get_integer (keyFile, group, item, &error);
             if (error){
-                ERROR_("getInteger(): %s\n", error->message);
+                TRACE("getInteger(): %s\n", error->message);
                 g_error_free(error);
                 value = -1;
             }
@@ -38,8 +38,8 @@ public:
         return value;
     }
 
-    static gint 
-    getInteger(const gchar *groupitem){
+    static int 
+    getInteger(const char *groupitem){
         if (!strchr(groupitem, '.')) return -1;
         auto group = g_strdup(groupitem);
         *(strchr(group, '.')) = 0;
@@ -48,9 +48,18 @@ public:
         g_free(group);
         return result;
     }
+
+    static int getInteger(const char *group, const char *key, int defaultValue){
+      auto value = getInteger(group, key);
+      if (value < 0){
+        value = defaultValue;
+        setInteger(group, key, value);
+      }
+      return value;
+    }      
  
-    static gchar * 
-    getString(const gchar *group, const gchar *item){
+    static char * 
+    getString(const char *group, const char *item){
         pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         gchar *value = NULL;
@@ -58,14 +67,14 @@ public:
         if (!g_key_file_has_key(keyFile, group, item, &error)) {
             // Glib bug with GError->message:
             if (error){
-              ERROR_(".getString(): %s\n", error->message);
+              TRACE("getString(): %s\n", error->message);
               g_error_free(error);
             }
         } else {
             value = g_key_file_get_string (keyFile, group, item, &error);
             if (error){
                 // Glib bug with GError->message:
-                ERROR_(".getString(): %s\n", error->message);
+                TRACE(".getString(): %s\n", error->message);
                 g_error_free(error);
                 value = NULL;
             }
@@ -75,8 +84,8 @@ public:
         return value;
     }
 
-    static gchar * 
-    getString(const gchar *groupitem){
+    static char * 
+    getString(const char *groupitem){
         if (!strchr(groupitem, '.')) return NULL;
         auto group = g_strdup(groupitem);
         *(strchr(group, '.')) = 0;
@@ -85,9 +94,15 @@ public:
         g_free(group);
         return result;
     }
-        
 
-
+    static char *getString(const char *group, const char *key, const char *defaultValue){
+      auto value = getString(group, key);
+      if (!value){
+        value = g_strdup(defaultValue);
+        setString(group, key, value);
+      }
+      return value;
+    }      
        
     static void
     setInteger(const gchar *group, const gchar *item, int value){

@@ -10,8 +10,7 @@ namespace xf {
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
         g_object_set_data(G_OBJECT(store), "xffm::root", GINT_TO_POINTER(1));
 
-        auto flags = Settings::getInteger("flags", _("Bookmarks"));
-        if (flags < 0) flags = 0;
+        auto flags = Settings::getInteger("flags", "Bookmarks",0);
 
         // fstab icon
         {
@@ -26,8 +25,7 @@ namespace xf {
 
         // ecryptfs icon
         {
-          auto size = Settings::getInteger("xfterm", "iconsize");
-          if (size < 0) size = 48;
+          auto size = Settings::getInteger("xfterm", "iconsize",24);
           double scaleFactor = (size == 24)? 0.75 : 1.0;
           
           GFile *file = g_file_new_for_path("/");

@@ -10,8 +10,7 @@ namespace xf {
 
       static GtkMultiSelection *xfSelectionModel(const char *path){
        // This section adds the up icon.
-        auto flags = Settings::getInteger("flags", path);
-        if (flags < 0) flags = 0;
+        auto flags = Settings::getInteger("flags", path, 0);
 
         TRACE("path=%s up=%s\n", path, up);
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
@@ -268,7 +267,7 @@ namespace xf {
       static void insert(GListStore *store, const char *path, bool verbose){
         GError *error_ = NULL;
         auto dirPath = g_path_get_dirname(path);
-        auto flags = Settings::getInteger("flags", dirPath);
+        auto flags = Settings::getInteger("flags", dirPath, 0);
         g_free(dirPath);
 
         auto file = g_file_new_for_path(path);

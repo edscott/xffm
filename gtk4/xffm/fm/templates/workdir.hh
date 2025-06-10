@@ -19,7 +19,7 @@ namespace xf {
         Child::incrementSerial();
 
         auto child = Child::getChild();
-        int iconsize = Settings::getInteger("xfterm", "iconsize");
+        int iconsize = Settings::getInteger("xfterm", "iconsize", 24);
         g_object_set_data(G_OBJECT(child), "iconsize", GINT_TO_POINTER(iconsize));
         auto m = g_object_get_data(G_OBJECT(child), "monitor");
         GFileMonitor *monitor = NULL;
@@ -194,7 +194,7 @@ char buffer[4096];
       //gridView_p->x,y are in gridview's frame of reference.
       double distance = sqrt(pow(gridView_p->x() - x,2) + pow(gridView_p->y() - y,2));
 
-      //auto size = Settings::getInteger("xfterm", "iconsize");
+      //auto size = Settings::getInteger("xfterm", "iconsize",24);
       //For single click action, must not be released further
       //than size, starting at GridView::down_f position
       int size = 5;
@@ -335,33 +335,7 @@ char buffer[4096];
         }
         //TRACE("pathbar_go...name=%s, path=%s button=%d\n", name, path, button);
         return FALSE;
-        /*
-        
-        if (event->button == 1) {
-            pathbar_p->pathbar_ok(eventBox);
-        }
 
-        if (event->button == 3) {
-            auto view = pathbar_p->pathbarView();
-            const gchar *path = pathbar_p->getClickPath(eventBox);
-            TRACE("***clickpath=%s\n", path);
-            GtkMenu *menu = NULL;
-            if (g_file_test(path, G_FILE_TEST_IS_DIR)){ 
-                menu = LocalPopUp<Type>::popUp();
-                Popup<Type>::setWidgetData(menu, "path", path);
-                g_object_set_data(G_OBJECT(menu),"view", NULL);
-                BaseSignals<Type>::configureViewMenu(LOCALVIEW_TYPE);
-            } else {
-                // do Bookmarks menu
-                RootPopUp<Type>::resetPopup();
-                menu = RootPopUp<Type>::popUp();
-            }
-            if (menu) {
-                gtk_menu_popup_at_pointer (menu, (const GdkEvent *)event);
-            }          
-        }
-
-        return FALSE;*/
     }
    
 

@@ -30,11 +30,6 @@ public:
     MainWindow(const gchar *path, bool doFind){
         mainWindow_p = (void *)this;
         doFind_ = doFind;
-        /*hack if (doFind_){
-          if (!path || strcmp(path, _("Bookmarks")) == 0){
-            path = g_get_home_dir();
-          }
-        }*/
         createWindow(); 
         Child::mainWidget(GTK_WIDGET(mainWindow_));
         
@@ -192,6 +187,21 @@ private:
             G_CALLBACK (updateButtons), NULL);
 
     }
+
+    static void notify(GObject* self, GParamSpec *pspec, void *data){
+      auto call = g_param_spec_get_name(pspec);
+      if (!call) return;
+
+      if (strcmp(call, "default-width")==0 || strcmp(call, "default-height")==0){
+        int w;
+        int h;
+        g_object_get (self, "default-width", &w, "default-height", &h, NULL);
+        Settings::setInteger("window", "width", w);
+        Settings::setInteger("window", "height", h);
+        DBG("call = %s w=%d h=%d\n", call,w,h);
+      }
+      return;
+    }
     
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
@@ -206,10 +216,8 @@ private:
         // So we give it a big size, so drag motion does not fail
         // and then put it to the correct user saved size.
         gtk_window_set_default_size(mainWindow_, 5000, 5000);
+        //gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         //gtk_widget_set_size_request(mainWindow_, windowW_, windowH_);
-        windowW_ = Settings::getInteger("window", "width");
-        windowH_ = Settings::getInteger("window", "height");
-        gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         return;
     }
 
@@ -224,8 +232,12 @@ private:
         auto input = Child::getInput();
         gtk_widget_grab_focus(GTK_WIDGET(input));
         
+        g_signal_connect(G_OBJECT(mainWindow_), "notify", G_CALLBACK(notify), mainWindow_);
         
-        
+        auto w = Settings::getInteger("window", "width", windowW_);
+        auto h = Settings::getInteger("window", "height", windowH_);
+        gtk_window_set_default_size(mainWindow_, w, h);
+
         gtk_window_present (mainWindow_);
 
     }
@@ -657,8 +669,7 @@ private:
           ERROR_("* Warning: cannot find widget \"%s\" to show.\n", *p);
         }
       }
-      auto configFlags = Settings::getInteger("flags", gridView_p->path());
-      if (configFlags < 0) configFlags = 0x40;
+      auto configFlags = Settings::getInteger("flags", gridView_p->path(), 0x40);
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
       gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
 

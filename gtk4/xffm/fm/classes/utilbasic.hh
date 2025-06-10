@@ -119,8 +119,11 @@ namespace xf {
     public:
 
     static void setFontCss(GtkWidget *widget){
-      auto size = Settings::getInteger("xfterm", "fontcss");
-      if (size < 1 || size > 7) size=3;
+      auto size = Settings::getInteger("xfterm", "fontcss", 3);
+      if (size > 7) {
+        size=7;
+        Settings::setInteger("xfterm", "fontcss", 7);
+      }
       auto css = g_strdup_printf("font%d", size);
       gtk_widget_add_css_class (widget, css);
       g_object_set_data(G_OBJECT(widget), "css", (void *)css);
