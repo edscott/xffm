@@ -1,7 +1,7 @@
 #ifndef ECRYPTFS_I
 #define ECRYPTFS_I
 
-#define EFS_KEY_FILE                g_get_user_config_dir(),"xffm+","efs.ini"
+#define EFS_KEY_FILE                g_get_user_config_dir(),"xffm4","efs.ini"
 
 #define EFS_AUTHORIZATION _("Encryption Options")
 #define EFS_TIP _("Encrypt Files")

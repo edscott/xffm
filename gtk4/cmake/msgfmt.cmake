@@ -14,8 +14,8 @@ if(NOT GETTEXT_MSGFMT_EXECUTABLE)
 ------")
 else(NOT GETTEXT_MSGFMT_EXECUTABLE)
 
-  SET(GETTEXT_PACKAGE xffm+)
-  SET(catalogname xffm+)
+  SET(GETTEXT_PACKAGE xffm4)
+  SET(catalogname xffm4)
   set(ENABLE_NLS "#define ENABLE_NLS")
   set(LOCALE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LOCALEDIR}" )
 
@@ -23,14 +23,14 @@ else(NOT GETTEXT_MSGFMT_EXECUTABLE)
   SET(GMO_FILES)
   foreach(_poFile ${PO_FILES})
     GET_FILENAME_COMPONENT(_poFileName ${_poFile} NAME)
-#    MESSAGE("${_poFile} --> ${_poFileName}")
+    MESSAGE("${_poFile} --> ${_poFileName}")
     STRING(REGEX REPLACE "^${catalogname}_?" "" _langCode ${_poFileName} )
     STRING(REGEX REPLACE "\\.po$" "" _langCode ${_langCode} )
 
     if( _langCode )
       GET_FILENAME_COMPONENT(_lang ${_poFile} NAME_WE)
       SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
-#      MESSAGE("file: ${_gmoFile}")
+      MESSAGE("file: ${_gmoFile}")
 
       ADD_CUSTOM_COMMAND(OUTPUT ${_gmoFile}
         COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} --check -o ${_gmoFile} ${_poFile}

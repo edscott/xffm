@@ -594,7 +594,7 @@ private:
                 }
 
                 if(strstr (argv[i], "V") != NULL) {
-                    printf ("This is xffm+ %s\nForward any bug reports to http://sf.net/projects/xffm\n%s\n", 
+                    printf ("This is xffm4 %s\nForward any bug reports to http://sf.net/projects/xffm\n%s\n", 
                             VERSION, COPYRIGHT);
                     return 0;
                 }

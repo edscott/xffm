@@ -4,7 +4,7 @@ set(CMAKE_INSTALL_PREFIX /usr/local)
 set (CMAKE_CXX_STANDARD 17)
 set(PREFIX_BIN /usr/local/bin)
 # Version info
-set(xffm_VERSION_MAJOR 1)
+set(xffm_VERSION_MAJOR 4)
 set(xffm_VERSION_MINOR 001)
 include(cmake/pthreads.cmake)
 
@@ -54,7 +54,7 @@ find_package(libReadline  REQUIRED)
 #set(ENV{PKG_CONFIG_PATH} "/opt/lib/pkgconfig")
 find_package(GLIB 2.56.2 REQUIRED)
 #find_package(GTK4 3.24.0 REQUIRED)
-find_package(GTK4 4.10.0 REQUIRED)
+find_package(GTK4 4.14.0 REQUIRED)
 #pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk4)
 
 include(GNUInstallDirs)

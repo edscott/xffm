@@ -1,8 +1,8 @@
 #ifndef FINDTYPES_HH
 #define FINDTYPES_HH
-#define FILTER_HISTORY g_get_user_data_dir(),"xffm+","xffind.filter",NULL
-#define GREP_HISTORY g_get_user_data_dir(),"xffm+","xffind.grep",NULL
-#define PATH_HISTORY g_get_user_data_dir(),"xffm+","xffind.path",NULL
+#define FILTER_HISTORY g_get_user_data_dir(),"xffm4","xffind.filter",NULL
+#define GREP_HISTORY g_get_user_data_dir(),"xffm4","xffind.grep",NULL
+#define PATH_HISTORY g_get_user_data_dir(),"xffm4","xffind.path",NULL
 
 typedef struct radio_t {
     GtkBox *box;

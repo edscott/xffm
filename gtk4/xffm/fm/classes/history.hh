@@ -2,7 +2,7 @@
 #define HISTORY_HH
 #include <readline/readline.h>
 #include  <readline/history.h>
-#define XF_HISTORY g_get_user_cache_dir(),G_DIR_SEPARATOR_S,"xffm+",G_DIR_SEPARATOR_S,"xf","_history"
+#define XF_HISTORY g_get_user_cache_dir(),G_DIR_SEPARATOR_S,"xffm4",G_DIR_SEPARATOR_S,"xf","_history"
 
 static const gchar *historyFile;
 namespace xf {

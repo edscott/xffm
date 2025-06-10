@@ -1,4 +1,4 @@
-# Xffm4 translation file: lun 09 jun 2025 17:06:46 CST
+# Xffm4 translation file: mar 10 jun 2025 10:17:33 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #

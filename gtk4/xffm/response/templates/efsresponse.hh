@@ -516,7 +516,7 @@ public:
     }
     static char *efsKeyFile(void){
       return  g_strconcat(g_get_user_config_dir(),
-          G_DIR_SEPARATOR_S, "xffm+",G_DIR_SEPARATOR_S, "efs.ini", NULL);
+          G_DIR_SEPARATOR_S, "xffm4",G_DIR_SEPARATOR_S, "efs.ini", NULL);
     }
 
 

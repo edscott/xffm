@@ -23,7 +23,7 @@
 #define USER_DIR                 g_get_home_dir()
 #define USE_LOCAL_MONITOR 1
 #define ALPHA
-#define USER_CACHE_DIR      g_get_user_cache_dir(),"xffm+"
+#define USER_CACHE_DIR      g_get_user_cache_dir(),"xffm4"
 #define XFTHUMBNAIL_DIR         USER_CACHE_DIR,"thumbnails"
 
 #ifdef ALPHA

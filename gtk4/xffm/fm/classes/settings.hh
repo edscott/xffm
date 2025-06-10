@@ -1,7 +1,7 @@
 #ifndef XF_SETTINGS_HH
 #define XF_SETTINGS_HH
 
-#define SETTINGS_FILE g_get_user_config_dir(),"xffm+","settings.ini"
+#define SETTINGS_FILE g_get_user_config_dir(),"xffm4","settings.ini"
 pthread_mutex_t settingsMutex = PTHREAD_MUTEX_INITIALIZER;
 namespace xf {
 

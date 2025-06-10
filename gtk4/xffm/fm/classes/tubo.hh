@@ -523,7 +523,7 @@ private:
         TRACE ("....  thread=0x%x, wait for 0x%x\n", (unsigned)getpid (), (unsigned)(fork_p->PID));
 
 #if 0
-        // XXX Seems that for xffm+, we should always reap child.
+        // XXX Seems that for xffm4, we should always reap child.
         if(fork_p->flags & TUBO_REAP_CHILD) {
             waitpid (fork_p->PID, &status, 0);
         } 

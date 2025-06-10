@@ -221,7 +221,7 @@ namespace xf {
         
     GtkScale *newSizeScale(const gchar *tooltipText){
         auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_HORIZONTAL, 1.0, 7.0, 1.0));
-        // Load saved value fron xffm+/settings.ini file (if any)
+        // Load saved value fron xffm4/settings.ini file (if any)
         auto size = Settings::getInteger("xfterm", "fontcss");
         if (size < 1 || size > 7) size=3;
         double value = size;
