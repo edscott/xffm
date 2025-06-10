@@ -1,0 +1,1678 @@
+# Xffm4 translation file: mar 10 jun 2025 16:49:59 CST
+# Merged from existing open source files
+# http://xffm.sf.net
+#
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2025-06-10 12:44-0600\n"
+        "PO-Revision-Date: 2006-01-11 10:33+0100\n"
+        "Last-Translator: Slobodan D. Sredojević <slobo@akrep.be>\n"
+        "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
+        "Language: sr@Latn\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 "
+        "&& n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
+#, fuzzy
+msgid   "Open terminal"
+msgstr  "Zahteva terminal"
+
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+#, fuzzy
+msgid   "Execute Shell Command"
+msgstr  "Izvrši komandu"
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
+msgid   "Paste"
+msgstr  "Ubaci"
+
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
+#, fuzzy
+msgid   "Add bookmark"
+msgstr  "Dodaj obeleživač"
+
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
+#, fuzzy
+msgid   "Remove bookmark"
+msgstr  "Ukloni alatke"
+
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
+msgid   "Search"
+msgstr  "Pretraga"
+
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+msgid   "Close"
+msgstr  "Zatvori"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
+msgid   "Exit"
+msgstr  "Izlaz"
+
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
+#, fuzzy
+msgid   "Open with"
+msgstr  "Otvaram pomoću:"
+
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Cut"
+msgstr  "Iseci"
+
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:64
+msgid   "Copy"
+msgstr  "Umnoži"
+
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:210
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
+msgid   "Delete"
+msgstr  "Obriši"
+
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:199
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
+#, fuzzy
+msgid   "Open in New Tab"
+msgstr  "Otvori u novom prozoru"
+
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
+#, fuzzy
+msgid   "New Tab"
+msgstr  "Sledeći list"
+
+#: ../xffm/gtk/dialogs.hh:31
+msgid   "Yes"
+msgstr  "Da"
+
+#: ../xffm/gtk/dialogs.hh:46 ../xffm/gtk/dialogs.hh:147
+#, fuzzy
+msgid   "Confirm"
+msgstr  "Potvrdi:"
+
+#: ../xffm/gtk/dialogs.hh:97
+#, fuzzy
+msgid   "Apply to all"
+msgstr  "Primeni na sve slike"
+
+#: ../xffm/gtk/dialogs.hh:101
+msgid   "Overwrite"
+msgstr  "Prepiši"
+
+#: ../xffm/gtk/dialogs.hh:105 ../xffm/gtk/dialogs.hh:218
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:191 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/common/dialogclass.hh:136 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:430 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:415
+msgid   "Cancel"
+msgstr  "Otkaži"
+
+#: ../xffm/gtk/dialogs.hh:236
+msgid   "Help"
+msgstr  "Pomoć"
+
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:666
+#: ../xffm/find/dialog.hh:681
+msgid   "unknown"
+msgstr  "nepoznato"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+msgid   "Block device"
+msgstr  "Blokovski uređaj"
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+msgid   "Character device"
+msgstr  "Znakovni uređaj"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1039 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+msgid   "Directory"
+msgstr  "Direktorijum"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  "FIFO"
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#, fuzzy
+msgid   "Symbolic Link"
+msgstr  "Simbolička veza"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+msgid   "Regular file"
+msgstr  "Obična datoteka"
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+msgid   "Socket"
+msgstr  "Soket"
+
+#: ../xffm/gtk/preview.hh:587
+#, fuzzy
+msgid   "Empty file"
+msgstr  "Uvezi datoteku..."
+
+#: ../xffm/gtk/preview.hh:658
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "%s ne može da učita „%s“ iz %s."
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Naredba"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  "Datoteka"
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "Istorijat naredbi:"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:281
+msgid   "User"
+msgstr  "Korisnik"
+
+#: ../xffm/completion/base.hh:40
+#, fuzzy
+msgid   "Variable"
+msgstr  "Promenljive"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  "Domaćin"
+
+#: ../xffm/completion/base.hh:55
+#, fuzzy
+msgid   "Found no match"
+msgstr  "Našao sam %d poklapanje"
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Matches"
+msgstr  "poklapanja"
+
+#: ../xffm/completion/base.hh:142
+#, fuzzy
+msgid   "Too many files open"
+msgstr  "Previše rešenja"
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+msgid   "Options:"
+msgstr  "Opcije:"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Završeno:"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "Naredba"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  "datoteka"
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Opcije 1"
+
+#: ../xffm/fm/view/view.hh:144
+#, fuzzy, c-format
+msgid   "Loading %s...%s"
+msgstr  "Učitava..."
+
+#: ../xffm/fm/view/view.hh:144
+msgid   "Please Wait..."
+msgstr  "Sačekajte..."
+
+#: ../xffm/fm/view/root/popup.hh:167
+msgid   "Ecryptfs (EFS)"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:169
+#, fuzzy
+msgid   "Clear cache"
+msgstr  "/Alati/Očisti ostavu"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+msgid   "Mount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Unmount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:204
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Prazniti"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Jačina tona"
+
+#: ../xffm/fm/view/root/popup.hh:270
+msgid   "private"
+msgstr  "privatno"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+#, fuzzy
+msgid   "Specify Output Directory..."
+msgstr  "Izaberi direktorijum"
+
+#: ../xffm/fm/view/root/model.hh:133
+#, fuzzy
+msgid   "Root Directory"
+msgstr  "Udaljeni direktorijum:"
+
+#: ../xffm/fm/view/root/model.hh:149
+#, fuzzy
+msgid   "This is the root of the filesystem"
+msgstr  "Boja teksta naslova"
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+#, fuzzy
+msgid   "Home Directory"
+msgstr  "Pravljenje direktorijuma"
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+msgid   "Trash bin"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+msgid   "Disk Image Mounter"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:238
+#, fuzzy
+msgid   "Mount local disks and devices"
+msgstr  "Neuspešno priključenje: zabranjen pristup"
+
+#: ../xffm/fm/view/root/model.hh:278
+#, fuzzy
+msgid   "Go to bookmarked location"
+msgstr  "Idi na sledeće posećeno mesto"
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  "Ime"
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:155
+msgid   "Details"
+msgstr  "Detalji"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "Veličina"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  "Datum"
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+#, fuzzy
+msgid   "Mimetype"
+msgstr  "MIME vrsta:"
+
+#: ../xffm/fm/view/base/signals.hh:918
+msgid   "Trash is empty"
+msgstr  ""
+
+#: ../xffm/fm/view/base/signals.hh:925
+#, fuzzy
+msgid   "Directory does not exist."
+msgstr  "Ova putanja ne postoji."
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:720
+#, fuzzy, c-format
+msgid   "Files: %s"
+msgstr  "Datoteka: %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+msgid   "Mount"
+msgstr  "Priključiti"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  "Sačuvaj"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:400
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Opcije"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:401
+msgid   "Advanced"
+msgstr  "Napredno"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:716 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, c-format
+msgid   "Mounting %s"
+msgstr  "Priključujem %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:774
+#, fuzzy, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  "Unesite lozinku za %s@%s"
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+#, fuzzy
+msgid   "Package Manager"
+msgstr  "naziv paketa"
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  "Prihvati"
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "Opcije:"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
+#, fuzzy
+msgid   "Software Updater"
+msgstr  "Pretraga softvera"
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+#, fuzzy
+msgid   "Add or remove software installed on the system"
+msgstr  "Pretraga instaliraniх paketa na sistemu"
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  "Niz znakova"
+
+#: ../xffm/fm/view/pkg/model.hh:117
+#, fuzzy
+msgid   "Waiting for search results"
+msgstr  "Čekam spisak datoteka"
+
+#: ../xffm/fm/view/pkg/model.hh:175
+#, fuzzy
+msgid   "No results"
+msgstr  "rezultati"
+
+#: ../xffm/fm/view/pkg/model.hh:374
+#, fuzzy
+msgid   "Currently busy\n"
+msgstr  "Struja"
+
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "Nevažeći direktorijum"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, fuzzy, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  "Datoteka slike „%s“ nije pronađena.\n"
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, fuzzy, c-format
+msgid   "Delete %s"
+msgstr  "Obriši"
+
+#: ../xffm/fm/view/local/rm.hh:61
+#, fuzzy
+msgid   "Warning: "
+msgstr  "Upozorenje"
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
+#, fuzzy
+msgid   "Multiple selections"
+msgstr  "Utišaj izbor"
+
+#: ../xffm/fm/view/local/rm.hh:123
+msgid   "Remove"
+msgstr  "Ukloni"
+
+#: ../xffm/fm/view/local/rm.hh:218
+#, fuzzy
+msgid   "Trash"
+msgstr  "smeće"
+
+#: ../xffm/fm/view/local/popup.hh:93
+msgid   "New"
+msgstr  "Novi"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
+msgid   "Paste into"
+msgstr  "Ubaci u"
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
+#, fuzzy
+msgid   "There is nothing on the clipboard to paste."
+msgstr  "Prikaži podatke o spisku isečaka"
+
+#: ../xffm/fm/view/local/popup.hh:105
+msgid   "Select All"
+msgstr  "Označi sve"
+
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
+#, fuzzy
+msgid   "Match regular expression"
+msgstr  "odgovara regularnom izrazu"
+
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
+#, fuzzy
+msgid   "Run Executable..."
+msgstr  "Pokreni izvršnu datoteku"
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
+#, fuzzy
+msgid   "Extract files from the archive"
+msgstr  "Izvuci zvuk sa CD-a"
+
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
+#, fuzzy
+msgid   "Create a compressed archive with the selected objects"
+msgstr  "Napravite i izmenite objekte za tekst"
+
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
+msgid   "Rename"
+msgstr  "Preimenuj"
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
+msgid   "Duplicate"
+msgstr  "Udvostruči"
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:64
+msgid   "Link"
+msgstr  "Veži"
+
+#: ../xffm/fm/view/local/popup.hh:163
+msgid   "Properties"
+msgstr  "Osobine"
+
+#: ../xffm/fm/view/local/popup.hh:566
+msgid   "Files:"
+msgstr  "Datoteke:"
+
+#: ../xffm/fm/view/local/popup.hh:715
+#, fuzzy
+msgid   "Select items"
+msgstr  "Izbor datoteka"
+
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Regular expression"
+msgstr  "Ispravni israz za preskok:"
+
+#: ../xffm/fm/view/local/popup.hh:732
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "Ispravni israz za preskok:"
+
+#: ../xffm/fm/view/local/popup.hh:762
+#, fuzzy
+msgid   "No selection"
+msgstr  "Dodaj izbor"
+
+#: ../xffm/fm/view/local/popup.hh:762
+#, fuzzy
+msgid   "No matches."
+msgstr  "Nema poklapanja"
+
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
+#, fuzzy
+msgid   "Create new..."
+msgstr  "Napravi novu"
+
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
+msgid   "New Name:"
+msgstr  "Novo ime:"
+
+#: ../xffm/fm/view/local/popup.hh:980
+msgid   "No name"
+msgstr  "Bez imena"
+
+#: ../xffm/fm/view/local/popup.hh:993
+#, fuzzy, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  "Server sa takvim nazivom već postoji."
+
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
+#, fuzzy
+msgid   "Not a directory"
+msgstr  "nije direktorijum"
+
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+#, fuzzy
+msgid   "error"
+msgstr  "Greška"
+
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  ""
+
+#: ../xffm/fm/view/local/model.hh:104
+#, fuzzy
+msgid   "Previews"
+msgstr  "Preslušaj"
+
+#: ../xffm/fm/view/local/model.hh:124
+#, fuzzy, c-format
+msgid   "Reading \"%s\""
+msgstr  "Učitavam „%s“"
+
+#: ../xffm/fm/view/local/model.hh:723
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  "Učitano %d od %d poruka"
+
+#: ../xffm/fm/view/local/properties.hh:239
+#, fuzzy
+msgid   "Properties and Attributes"
+msgstr  "Svojstva pilota"
+
+#: ../xffm/fm/view/local/properties.hh:267
+#, fuzzy
+msgid   "File Mode:"
+msgstr  "Mod datoteke"
+
+#: ../xffm/fm/view/local/properties.hh:293
+msgid   "File:"
+msgstr  "Datoteka:"
+
+#: ../xffm/fm/view/local/properties.hh:305
+#, fuzzy
+msgid   "Apply changes"
+msgstr  "Primeni promenljive"
+
+#: ../xffm/fm/view/local/properties.hh:473
+msgid   "Encoding"
+msgstr  "Kodiranje"
+
+#: ../xffm/fm/view/local/properties.hh:496
+#, fuzzy
+msgid   "Successfully moved to trash."
+msgstr  "Uspešno uklonjeno %s\n"
+
+#: ../xffm/fm/view/local/properties.hh:497
+#, fuzzy
+msgid   "Source:"
+msgstr  "Izvor"
+
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "Korišćen"
+
+#: ../xffm/fm/view/fstab/view.hh:175
+msgid   "Available"
+msgstr  "Dostupan"
+
+#: ../xffm/fm/view/fstab/view.hh:176
+#, fuzzy
+msgid   "Usage"
+msgstr  "Poruka"
+
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
+#, fuzzy
+msgid   "No Label"
+msgstr  "Oznaka"
+
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
+msgid   "There is no file system available (unformatted)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+msgid   "Mount point:"
+msgstr  "Tačka priključenja:"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "Nije dokumentovano"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+#, fuzzy
+msgid   "Disks"
+msgstr  "Disketa"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+#, fuzzy
+msgid   "NFS Network Volume"
+msgstr  "Ime mreže"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Glavna jačina"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Jačina tona"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Priključujem %s"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Tačka priključenja:"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
+#, fuzzy
+msgid   "Mount device: "
+msgstr  "Zvučni uređaj:"
+
+#: ../xffm/fm/view/fstab/popup.hh:21
+#, fuzzy
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  "Usklađivanje je završeno"
+
+#: ../xffm/fm/view/fstab/popup.hh:132
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "Pilot uređaj"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:140
+#, fuzzy
+msgid   "Copying files locally"
+msgstr  "Umnožavanje datoteke %ld od %ld"
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:135
+#: ../xffm/common/gio.hh:105
+#, fuzzy
+msgid   "Moving files"
+msgstr  "Sakrivene datoteke"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+#, fuzzy
+msgid   "No Image Preview"
+msgstr  "Pregled slike"
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+msgid   "Maximum image size for thumbnailing"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+#, fuzzy
+msgid   "Reset image size"
+msgstr  "Odaberite datoteku sa slikom"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+#, fuzzy
+msgid   "Embedded Terminal"
+msgstr  "Zahteva terminal"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
+msgid   "All items in the iconview."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
+#, fuzzy
+msgid   "Scripting"
+msgstr  "Skripta"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "Očisti vraćanje"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
+#, fuzzy
+msgid   "Terminal font"
+msgstr  "Vrsta terminala"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "Obični procesor"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Suspend"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Continue"
+msgstr  "Nastavi"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Interrupt"
+msgstr  "Prekini"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Hangup"
+msgstr  "Zatvaranje veze"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "User 1 (USR1)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "User 2 (USR2)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+#, fuzzy
+msgid   "Terminate Task"
+msgstr  "Vrsta terminala"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "Abort"
+msgstr  "Odustani"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
+msgid   "Kill"
+msgstr  "Prekini"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
+#, fuzzy
+msgid   "Segmentation fault"
+msgstr  "Izaberi sve"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
+msgid   "PID"
+msgstr  "PID"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  "Prethodno"
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
+#, fuzzy
+msgid   "Go to"
+msgstr  "Idi na: %s"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
+msgid   "loading..."
+msgstr  "učitavam..."
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
+#, fuzzy
+msgid   "Confirm Replace"
+msgstr  "Zameni"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
+#, fuzzy
+msgid   "Destination File"
+msgstr  "Cilj"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
+#, fuzzy, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  "Datoteka „%s“ već postoji.\n"
+        "Da li želite da je presnimite?"
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+#, fuzzy
+msgid   "Long press time"
+msgstr  "Progresivno"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+msgid   "Remove Button Contents"
+msgstr  "Uklonite sadržaj dugmeta"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+#, fuzzy
+msgid   "Add custom content"
+msgstr  "Uredite sadržaj"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+#, fuzzy
+msgid   "Select file to load"
+msgstr  "Izaberite datoteku za učitavanje"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, fuzzy, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  "Ne mogu da učitam direktorijum „%s“: %s\n"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+#, fuzzy
+msgid   "You need to restart the application"
+msgstr  "Mora se postaviti tipka za ubrzavanje"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+msgid   "FIXME New custom content"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+#, fuzzy
+msgid   "Open a New Window"
+msgstr  "Otvori u novom prozoru"
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Differences"
+msgstr  "Razlika"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+#, fuzzy
+msgid   "maximum"
+msgstr  "Najviše:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+#, fuzzy
+msgid   "Add option"
+msgstr  "Sabiranje"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:79
+#, fuzzy
+msgid   "Remove option"
+msgstr  "Ukloni pesmu"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:158
+msgid   "icon ID"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:159
+#, fuzzy
+msgid   "tooltip"
+msgstr  "Opis alatke"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+#, fuzzy
+msgid   "Select work directory"
+msgstr  "Izaberi direktorijum"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+#, fuzzy
+msgid   "Select executable"
+msgstr  "Moguće obeležiti:"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+#, fuzzy
+msgid   "Run in terminal"
+msgstr  "Zahteva terminal"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Otvori"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/response/chooserresponse.hh:70
+#, fuzzy
+msgid   "Choose file"
+msgstr  "Izaberite ime datoteke"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:51
+#: ../xffm/response/chooserresponse.hh:63
+#, fuzzy
+msgid   "Choose directory"
+msgstr  "Promeni direktorijum"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  "Sačuvaj datoteku"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+msgid   "customButton.ini"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+#, fuzzy
+msgid   "Option"
+msgstr  "Opcije"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  "tekst"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+#, fuzzy
+msgid   "folder"
+msgstr  "Fascikla"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+#, fuzzy
+msgid   "on"
+msgstr  "mes"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Otvori dokument"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+msgid   "Background Color"
+msgstr  "Boja pozadine"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+msgid   "Foreground Color"
+msgstr  "Boja iscrtavanja"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "Boja teksta"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+#, fuzzy
+msgid   "Error Text Color"
+msgstr  "Boja teksta"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+#, fuzzy
+msgid   "Color settings"
+msgstr  "Podešavanja časovnika"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+#, fuzzy
+msgid   "Sort by"
+msgstr  "Uredi"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+#, fuzzy
+msgid   "File extension"
+msgstr  "Po ekstenziji"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
+#, fuzzy
+msgid   "View as list"
+msgstr  "Prikaži kao probu"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
+msgid   "Show hidden files"
+msgstr  "Prikaži sakrivene datoteke"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
+msgid   "Show Backup Files"
+msgstr  "Prikaži rezervne datoteke"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
+#, fuzzy
+msgid   "Sort data in descending order"
+msgstr  "Ređaj rastućim ili opadajućim redosledom"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
+#, fuzzy
+msgid   "Sort by date"
+msgstr  "Datum početka"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
+#, fuzzy
+msgid   "Sort by size"
+msgstr  "po veličini"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
+#, fuzzy
+msgid   "Main menu"
+msgstr  "Glavno"
+
+#: ../xffm/fm/dialog/dialog.hh:122
+#, fuzzy
+msgid   "Removed"
+msgstr  "Ukloni"
+
+#: ../xffm/common/dialogclass.hh:140
+msgid   "Apply"
+msgstr  "Primeni"
+
+#: ../xffm/common/run.hh:339
+#, fuzzy
+msgid   "warning"
+msgstr  "Upozorenje"
+
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+#, fuzzy
+msgid   "Enter password"
+msgstr  "Unesite lozinku"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:295
+#, fuzzy
+msgid   "Executable"
+msgstr  "Pokreni izvršnu datoteku"
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+#, fuzzy
+msgid   "Run in Terminal"
+msgstr  "Terminal"
+
+#: ../xffm/common/run.hh:652
+#, fuzzy
+msgid   "Arguments for the Command"
+msgstr  "Trenutna naredba"
+
+#: ../xffm/common/run.hh:874
+#, fuzzy
+msgid   "You have selected multiple files or folders"
+msgstr  "Možete odrediti više od jednog direktorijuma."
+
+#: ../xffm/common/settings.hh:178
+#, fuzzy
+msgid   "New File:"
+msgstr  "Nova datoteka"
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, fuzzy, c-format
+msgid   "Open with %s"
+msgstr  "Otvaram pomoću:"
+
+#: ../xffm/common/util.hh:1513
+#, fuzzy
+msgid   "Text Editor"
+msgstr  "Unos teksta"
+
+#: ../xffm/common/util.hh:1554
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:42
+msgid   "Target"
+msgstr  "Odredište"
+
+#: ../xffm/common/dnd.hh:42
+msgid   "Files"
+msgstr  "Datoteke"
+
+#: ../xffm/common/dnd.hh:50
+#, fuzzy
+msgid   "More…"
+msgstr  "Više"
+
+#: ../xffm/common/dnd.hh:64
+msgid   "Move"
+msgstr  "Pomeriti"
+
+#: ../xffm/common/dnd.hh:145
+msgid   "Create Link"
+msgstr  "Napravi vezu"
+
+#: ../xffm/common/dnd.hh:157
+msgid   "more"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:103
+#, fuzzy
+msgid   "Copying files"
+msgstr  "Umnoži datoteku"
+
+#: ../xffm/common/gio.hh:107
+#, fuzzy
+msgid   "linking"
+msgstr  "Treperenje"
+
+#: ../xffm/common/gio.hh:109
+msgid   "rename"
+msgstr  "rename"
+
+#: ../xffm/common/gio.hh:422
+#, fuzzy
+msgid   "Overwrite?"
+msgstr  "Prepiši"
+
+#: ../xffm/common/gio.hh:511
+#, fuzzy, c-format
+msgid   "(%d of %d)"
+msgstr  "Strana %d od %d"
+
+#: ../xffm/response/customresponse.hh:56
+#, fuzzy
+msgid   "Execute command"
+msgstr  "Izvrši komandu"
+
+#: ../xffm/response/customresponse.hh:104
+#, fuzzy
+msgid   "Source File"
+msgstr  "Datoteka izvornog koda:"
+
+#: ../xffm/response/entryresponse.hh:434 ../xffm/response/passwdresponse.hh:197
+msgid   "Ok"
+msgstr  "U redu"
+
+#: ../xffm/response/timeoutresponse.hh:59
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:138 ../xffm/response/progress.hh:83
+msgid   "Running"
+msgstr  "Radi"
+
+#: ../xffm/response/commandresponse.hh:142 ../xffm/response/progress.hh:88
+#, fuzzy
+msgid   "Waiting for operation to finish..."
+msgstr  "Čekam na autorizaciju"
+
+#: ../xffm/response/passwdresponse.hh:134
+#, fuzzy
+msgid   "User Input"
+msgstr  "Korisničke Informacije"
+
+#: ../xffm/response/passwdresponse.hh:150
+#, fuzzy
+msgid   "Response Requested"
+msgstr  "Neuspeo zahtev za vraćanje"
+
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+#, fuzzy
+msgid   "No Read Permission"
+msgstr  "Ovlašćenja"
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:361
+msgid   "Path"
+msgstr  "Putanja"
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:400
+msgid   "Filter:"
+msgstr  "Filter:"
+
+#: ../xffm/find/fgr.hh:126
+#, fuzzy
+msgid   "Search for files"
+msgstr  "Traži: "
+
+#: ../xffm/find/fgr.hh:128
+#, fuzzy
+msgid   "Contents:"
+msgstr  "Sadržaj"
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
+#, fuzzy
+msgid   "Verbose output debugging mode."
+msgstr  "Omogući kod pronalaženja grešaka"
+
+#: ../xffm/find/fgr.hh:133
+#, fuzzy
+msgid   "Show version information"
+msgstr  "Prikaži podatke o gFTP-u"
+
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "Detalji za papir"
+
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:262
+#, fuzzy
+msgid   "Stay on single filesystem"
+msgstr  "lokalni sistem datoteka"
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  "Štampaj..."
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:259
+#, fuzzy
+msgid   "Find hidden files and directories"
+msgstr  "Datoteka je direktorijum."
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  "Filter"
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:256
+msgid   "Recursive"
+msgstr  "Rekurzivno"
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "KByte"
+msgstr  "Bajtovi"
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:150
+#, fuzzy
+msgid   "is less than or equal to"
+msgstr  "Odredi najveći ceo broj manji ili jednak n-u"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Set UID"
+msgstr  "Postavi ID"
+
+#: ../xffm/find/fgr.hh:152
+#, fuzzy
+msgid   "Executable Text Files"
+msgstr  "Nova tekstualna datoteka"
+
+#: ../xffm/find/fgr.hh:154
+#, fuzzy
+msgid   "The permissions of the file, in octal notation."
+msgstr  "Menja privilegije lokalnih datoteka"
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  "Vrsta"
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  "Bilo koje"
+
+#: ../xffm/find/fgr.hh:157
+msgid   "Default type"
+msgstr  "Podrazumevana vrsta"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  "Uniks soket"
+
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:303
+#, fuzzy
+msgid   "Minutes"
+msgstr  "minuta"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:308
+#, fuzzy
+msgid   "Hours"
+msgstr  "časa"
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:313
+msgid   "Days"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:175
+#, fuzzy
+msgid   "Month"
+msgstr  "mesec"
+
+#: ../xffm/find/fgr.hh:177
+#, fuzzy
+msgid   "Month(s)"
+msgstr  "meseci"
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Vreme izmene"
+
+#: ../xffm/find/fgr.hh:184
+#, fuzzy
+msgid   "Access Time :"
+msgstr  "Pristupljeno:"
+
+#: ../xffm/find/fgr.hh:188
+#, fuzzy
+msgid   "Creation Time :"
+msgstr  "Vreme stvaranja"
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  "kib"
+
+#: ../xffm/find/fgr.hh:192
+msgid   "User:"
+msgstr  "Korisnik:"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  "gib"
+
+#: ../xffm/find/fgr.hh:195
+msgid   "Group:"
+msgstr  "Grupa"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+#, fuzzy
+msgid   "Content View"
+msgstr  "Sadržaj"
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:204
+#, fuzzy
+msgid   "Extended"
+msgstr  "Dugo odsutan"
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  "Ignoriši slučaj"
+
+#: ../xffm/find/fgr.hh:208
+#, fuzzy
+msgid   "Text Files"
+msgstr  "Nova tekstualna datoteka"
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:478
+#, fuzzy
+msgid   "No match"
+msgstr  "Nema poklapanja"
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:467
+#, fuzzy
+msgid   "Line Count"
+msgstr  "Primedba od jednog reda"
+
+#: ../xffm/find/fgr.hh:214
+#, fuzzy
+msgid   "Words"
+msgstr  "Reč"
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  "Linija"
+
+#: ../xffm/find/fgr.hh:362
+#, fuzzy, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  "Upotreba: %s ICALFILE\n"
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  "Običan"
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:516
+#: ../xffm/find/dialog.hh:265
+msgid   "Results"
+msgstr  "Rezultati"
+
+#: ../xffm/find/signals.hh:447 ../xffm/find/signals.hh:894
+#, fuzzy
+msgid   "No editor for current action."
+msgstr  "Prosledi trenutnu transakciju"
+
+#: ../xffm/find/signals.hh:516
+#, fuzzy
+msgid   "Upper limit:"
+msgstr  "Gornja vrednost:"
+
+#: ../xffm/find/signals.hh:518
+#, fuzzy
+msgid   "Counting files..."
+msgstr  "Pretvaram kadrove..."
+
+#: ../xffm/find/signals.hh:533
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       "Našao sam %d poklapanje"
+msgstr[1]       "Našao sam %d poklapanja"
+msgstr[2]       "Našao sam %d poklapanja"
+
+#: ../xffm/find/signals.hh:535
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  "Završeno %s : %s"
+
+#: ../xffm/find/signals.hh:659 ../xffm/find/signals.hh:661
+#, fuzzy
+msgid   "Searching..."
+msgstr  "Traži..."
+
+#: ../xffm/find/dialog.hh:106
+msgid   "Find"
+msgstr  "Pronađi"
+
+#: ../xffm/find/dialog.hh:133
+#, fuzzy
+msgid   "Close find"
+msgstr  "Zatvori prozor"
+
+#: ../xffm/find/dialog.hh:143
+#, fuzzy
+msgid   "Search Action"
+msgstr  "Traži u:"
+
+#: ../xffm/find/dialog.hh:165
+#, fuzzy
+msgid   "Find Files"
+msgstr  "Nađi slike"
+
+#: ../xffm/find/dialog.hh:229
+#, fuzzy
+msgid   "Select advanced options"
+msgstr  "Izaberite filter:"
+
+#: ../xffm/find/dialog.hh:265
+#, fuzzy
+msgid   "Upper limit"
+msgstr  "Gornja vrednost:"
+
+#: ../xffm/find/dialog.hh:270
+msgid   "At Least"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:270 ../xffm/find/dialog.hh:275
+#, fuzzy
+msgid   "kBytes"
+msgstr  "Bajtovi"
+
+#: ../xffm/find/dialog.hh:275
+#, fuzzy
+msgid   "At Most"
+msgstr  "O dodacima"
+
+#: ../xffm/find/dialog.hh:286
+msgid   "Group"
+msgstr  "Grupiši"
+
+#: ../xffm/find/dialog.hh:290
+#, fuzzy
+msgid   "Octal Permissions"
+msgstr  "Ovlašćenja"
+
+#: ../xffm/find/dialog.hh:295
+msgid   "SUID"
+msgstr  "SUID"
+
+#: ../xffm/find/dialog.hh:319
+#, fuzzy
+msgid   "Months"
+msgstr  "meseci"
+
+#: ../xffm/find/dialog.hh:329
+#, fuzzy
+msgid   "File type : "
+msgstr  "Vrsta datoteke:"
+
+#: ../xffm/find/dialog.hh:375
+#, fuzzy
+msgid   "Display file selection dialog"
+msgstr  "Prozorče za izbor datoteke"
+
+#: ../xffm/find/dialog.hh:434
+#, fuzzy
+msgid   "Contains the text"
+msgstr  "Postavi tekst"
+
+#: ../xffm/find/dialog.hh:464
+msgid   "Case Sensitive"
+msgstr  "Razlikuj velika i mala slova"
+
+#: ../xffm/find/dialog.hh:465
+#, fuzzy
+msgid   "Extended regexp"
+msgstr  "Opširna adresa"
+
+#: ../xffm/find/dialog.hh:466
+#, fuzzy
+msgid   "Include binary files"
+msgstr  "Uključi poddirektorijume"
+
+#: ../xffm/find/dialog.hh:475
+msgid   "Anywhere"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:476
+msgid   "Whole words only"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:477
+msgid   "lines"
+msgstr  "redova"
+
+#: ../xffm/find/dialog.hh:695
+msgid   "Modified"
+msgstr  "Menjano"
+
+#: ../xffm/find/dialog.hh:699
+msgid   "Created"
+msgstr  "Napravljeno"
+
+#: ../xffm/find/dialog.hh:703
+#, fuzzy
+msgid   "Accessed"
+msgstr  "Pristupljeno:"
+
+#: ../xffm/find/dialog.hh:1021
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "Zatvori prozor"
+
+#: ../xffm/find/dialog.hh:1025
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1034
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+

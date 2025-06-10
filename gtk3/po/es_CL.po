@@ -1,0 +1,1566 @@
+# Xffm4 translation file: mar 10 jun 2025 17:04:30 CST
+# Merged from existing open source files
+# http://xffm.sf.net
+#
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: xffm+\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2025-06-10 12:44-0600\n"
+        "PO-Revision-Date: 2006-08-07 15:54+0200\n"
+        "Last-Translator: Francisco Javier F. Serrador "
+        "<serrador@cvs.gnome.org>\n"
+        "Language-Team: Spanish <traductores@es.gnome.org>\n"
+        "Language: es_CL\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+        "X-Generator: KBabel 1.11.1\n"
+
+#: ../xffm/gtk/gtk.hh:107 ../xffm/fm/dialog/notebook/vbuttonbox.hh:253
+msgid   "Open terminal"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:109 ../xffm/common/util.hh:1550
+msgid   "Execute Shell Command"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:111 ../xffm/fm/view/local/popup.hh:156
+msgid   "Paste"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:113 ../xffm/fm/view/root/popup.hh:165
+#: ../xffm/fm/view/root/popup.hh:265 ../xffm/fm/view/local/popup.hh:150
+msgid   "Add bookmark"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:115 ../xffm/fm/view/root/popup.hh:199
+#: ../xffm/fm/view/local/popup.hh:151
+msgid   "Remove bookmark"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:117 ../xffm/fm/view/pkg/model.hh:108
+#: ../xffm/fm/view/pkg/model.hh:300 ../xffm/fm/view/pkg/model.hh:307
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:249
+msgid   "Search"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:119 ../xffm/fm/dialog/notebook/page/page.hh:78
+#, fuzzy
+msgid   "Close"
+msgstr  "Cerrar nota"
+
+#: ../xffm/gtk/gtk.hh:121 ../xffm/fm/dialog/notebook/createini.hh:83
+#: ../xffm/fm/dialog/notebook/menupopover.hh:265
+msgid   "Exit"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:123 ../xffm/fm/view/local/popup.hh:84
+#: ../xffm/fm/view/local/popup.hh:141 ../xffm/common/run.hh:719
+#: ../xffm/common/run.hh:725 ../xffm/common/run.hh:735
+#: ../xffm/common/run.hh:741
+#, fuzzy
+msgid   "Open with"
+msgstr  "Abrir %s"
+
+#: ../xffm/gtk/gtk.hh:125 ../xffm/fm/view/local/popup.hh:99
+#: ../xffm/fm/view/local/popup.hh:155
+msgid   "Cut"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:127 ../xffm/fm/view/local/popup.hh:98
+#: ../xffm/fm/view/local/popup.hh:154 ../xffm/common/dnd.hh:64
+msgid   "Copy"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:129 ../xffm/fm/view/local/rm.hh:210
+#: ../xffm/fm/view/local/popup.hh:102 ../xffm/fm/view/local/popup.hh:159
+#, fuzzy
+msgid   "Delete"
+msgstr  "Borrar todas"
+
+#: ../xffm/gtk/gtk.hh:131 ../xffm/fm/view/local/rm.hh:199
+msgid   "Shred"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:134 ../xffm/fm/view/root/popup.hh:198
+#: ../xffm/fm/view/local/popup.hh:94 ../xffm/fm/view/local/popup.hh:144
+#: ../xffm/fm/view/fstab/popup.hh:19
+msgid   "Open in New Tab"
+msgstr  ""
+
+#: ../xffm/gtk/gtk.hh:179 ../xffm/fm/dialog/notebook/notebook.hh:75
+msgid   "New Tab"
+msgstr  ""
+
+#: ../xffm/gtk/dialogs.hh:31
+msgid   "Yes"
+msgstr  ""
+
+#: ../xffm/gtk/dialogs.hh:46 ../xffm/gtk/dialogs.hh:147
+msgid   "Confirm"
+msgstr  ""
+
+#: ../xffm/gtk/dialogs.hh:97
+msgid   "Apply to all"
+msgstr  ""
+
+#: ../xffm/gtk/dialogs.hh:101
+msgid   "Overwrite"
+msgstr  ""
+
+#: ../xffm/gtk/dialogs.hh:105 ../xffm/gtk/dialogs.hh:218
+#: ../xffm/fm/view/fuse/ecryptfs.hh:175 ../xffm/fm/view/pkg/popup.hh:265
+#: ../xffm/fm/view/local/rm.hh:191 ../xffm/fm/view/local/properties.hh:307
+#: ../xffm/fm/dialog/notebook/createini.hh:232
+#: ../xffm/fm/dialog/notebook/createini.hh:369
+#: ../xffm/common/dialogclass.hh:136 ../xffm/common/dnd.hh:34
+#: ../xffm/response/entryresponse.hh:430 ../xffm/response/chooserresponse.hh:18
+#: ../xffm/find/signals.hh:415
+msgid   "Cancel"
+msgstr  ""
+
+#: ../xffm/gtk/dialogs.hh:236
+msgid   "Help"
+msgstr  "Ayuda"
+
+#: ../xffm/gtk/preview.hh:495 ../xffm/common/util.hh:1461
+#: ../xffm/common/util.hh:1463 ../xffm/common/util.hh:1469
+#: ../xffm/common/util.hh:1471 ../xffm/find/dialog.hh:666
+#: ../xffm/find/dialog.hh:681
+#, fuzzy
+msgid   "unknown"
+msgstr  "Desconocido"
+
+#: ../xffm/gtk/preview.hh:498 ../xffm/find/fgr.hh:162
+#: ../xffm/find/signals.hh:11
+msgid   "Block device"
+msgstr  ""
+
+#: ../xffm/gtk/preview.hh:501 ../xffm/find/fgr.hh:163
+#: ../xffm/find/signals.hh:12
+#, fuzzy
+msgid   "Character device"
+msgstr  "Paleta de caracteres"
+
+#: ../xffm/gtk/preview.hh:504 ../xffm/fm/view/local/popup.hh:969
+#: ../xffm/fm/view/local/model.hh:1039 ../xffm/find/fgr.hh:159
+#: ../xffm/find/signals.hh:8
+#, fuzzy
+msgid   "Directory"
+msgstr  "Histórico"
+
+#: ../xffm/gtk/preview.hh:507 ../xffm/find/fgr.hh:164
+#: ../xffm/find/signals.hh:13
+msgid   "FIFO"
+msgstr  ""
+
+#: ../xffm/gtk/preview.hh:510 ../xffm/find/fgr.hh:160 ../xffm/find/signals.hh:9
+#, fuzzy
+msgid   "Symbolic Link"
+msgstr  "Símbolo"
+
+#: ../xffm/gtk/preview.hh:513 ../xffm/find/fgr.hh:158
+msgid   "Regular file"
+msgstr  ""
+
+#: ../xffm/gtk/preview.hh:516 ../xffm/find/signals.hh:10
+msgid   "Socket"
+msgstr  ""
+
+#: ../xffm/gtk/preview.hh:587
+msgid   "Empty file"
+msgstr  ""
+
+#: ../xffm/gtk/preview.hh:658
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "No se puede obtener el esquema para %s: %s"
+
+#: ../xffm/completion/base.hh:28
+msgid   "Command"
+msgstr  "Comando"
+
+#: ../xffm/completion/base.hh:31
+msgid   "File"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:34
+#, fuzzy
+msgid   "Command history"
+msgstr  "Línea de comandos"
+
+#: ../xffm/completion/base.hh:37 ../xffm/find/dialog.hh:281
+msgid   "User"
+msgstr  "Usuario"
+
+#: ../xffm/completion/base.hh:40
+msgid   "Variable"
+msgstr  "Variable"
+
+#: ../xffm/completion/base.hh:43
+msgid   "Host"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:55
+msgid   "Found no match"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:141 ../xffm/completion/base.hh:142
+msgid   "Matches"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:142
+msgid   "Too many files open"
+msgstr  ""
+
+#: ../xffm/completion/base.hh:339 ../xffm/fm/view/fuse/ecryptfs.hh:133
+#: ../xffm/find/fgr.hh:124
+#, fuzzy
+msgid   "Options:"
+msgstr  "Opciones"
+
+#: ../xffm/completion/bash.hh:133
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Autocompletado"
+
+#: ../xffm/completion/bash.hh:134
+#, fuzzy
+msgid   "command"
+msgstr  "Comando"
+
+#: ../xffm/completion/bash.hh:135 ../xffm/fm/dialog/notebook/createini.hh:431
+msgid   "file"
+msgstr  ""
+
+#: ../xffm/completion/bash.hh:145 ../xffm/completion/bash.hh:149
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Opciones"
+
+#: ../xffm/fm/view/view.hh:144
+#, c-format
+msgid   "Loading %s...%s"
+msgstr  ""
+
+#: ../xffm/fm/view/view.hh:144
+msgid   "Please Wait..."
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:167
+msgid   "Ecryptfs (EFS)"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:169
+#, fuzzy
+msgid   "Clear cache"
+msgstr  "Cielo despejado"
+
+#: ../xffm/fm/view/root/popup.hh:201 ../xffm/fm/view/local/popup.hh:147
+#: ../xffm/fm/view/fstab/popup.hh:36
+msgid   "Mount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:202 ../xffm/fm/view/local/popup.hh:148
+#: ../xffm/fm/view/fstab/popup.hh:37
+msgid   "Unmount the volume associated with this folder"
+msgstr  ""
+
+#: ../xffm/fm/view/root/popup.hh:204
+#, fuzzy
+msgid   "Empty trash"
+msgstr  "Vaciar papelera"
+
+#: ../xffm/fm/view/root/popup.hh:269
+#, fuzzy
+msgid   "Ecrypt Volume"
+msgstr  "Volúmenes"
+
+#: ../xffm/fm/view/root/popup.hh:270
+#, fuzzy
+msgid   "private"
+msgstr  "Activar"
+
+#: ../xffm/fm/view/root/popup.hh:278 ../xffm/fm/view/local/popup.hh:1072
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:404
+msgid   "Specify Output Directory..."
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:133
+msgid   "Root Directory"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:149
+msgid   "This is the root of the filesystem"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
+msgid   "Home Directory"
+msgstr  ""
+
+#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Papelera"
+
+#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
+#, fuzzy
+msgid   "Disk Image Mounter"
+msgstr  "Montador de discos"
+
+#: ../xffm/fm/view/root/model.hh:238
+msgid   "Mount local disks and devices"
+msgstr  "Monta dispositivos y discos locales"
+
+#: ../xffm/fm/view/root/model.hh:278
+msgid   "Go to bookmarked location"
+msgstr  ""
+
+#: ../xffm/fm/view/treeview.hh:17
+msgid   "Name"
+msgstr  ""
+
+#: ../xffm/fm/view/treeview.hh:18 ../xffm/find/fgr.hh:167
+#: ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173 ../xffm/find/fgr.hh:176
+#: ../xffm/find/dialog.hh:155
+msgid   "Details"
+msgstr  "Detalles"
+
+#: ../xffm/fm/view/treeview.hh:19 ../xffm/fm/view/local/properties.hh:478
+msgid   "Size"
+msgstr  "Tamaño"
+
+#: ../xffm/fm/view/treeview.hh:20 ../xffm/fm/view/local/properties.hh:479
+msgid   "Date"
+msgstr  ""
+
+#: ../xffm/fm/view/treeview.hh:22 ../xffm/fm/view/local/properties.hh:474
+msgid   "Mimetype"
+msgstr  ""
+
+#: ../xffm/fm/view/base/signals.hh:918
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Miniaplicación de la papelera"
+
+#: ../xffm/fm/view/base/signals.hh:925
+msgid   "Directory does not exist."
+msgstr  ""
+
+#: ../xffm/fm/view/base/monitor.hh:36 ../xffm/fm/view/local/model.hh:720
+#, c-format
+msgid   "Files: %s"
+msgstr  ""
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:162 ../xffm/fm/view/fuse/ecryptfs.hh:163
+#: ../xffm/fm/view/fuse/ecryptfs.hh:185
+#, fuzzy
+msgid   "Mount"
+msgstr  "Montar %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:179
+#: ../xffm/fm/dialog/notebook/createini.hh:87
+#: ../xffm/fm/dialog/notebook/createini.hh:371
+msgid   "Save"
+msgstr  ""
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:400
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "Options"
+msgstr  "Opciones"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:401
+msgid   "Advanced"
+msgstr  ""
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:716 ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Montar %s"
+
+#: ../xffm/fm/view/fuse/ecryptfs.hh:774
+#, c-format
+msgid   "Enter Passphrase for %s"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:260
+msgid   "Package Manager"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:267 ../xffm/common/dnd.hh:32
+msgid   "Accept"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/popup.hh:312 ../xffm/fm/view/pkg/popup.hh:320
+#, fuzzy
+msgid   "options:"
+msgstr  "Opciones"
+
+#: ../xffm/fm/view/pkg/model.hh:29 ../xffm/fm/dialog/notebook/vbuttonbox.hh:195
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:199
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:203
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:206
+msgid   "Software Updater"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:41 ../xffm/fm/view/pkg/model.hh:52
+msgid   "Add or remove software installed on the system"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:111
+msgid   "String"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:117
+msgid   "Waiting for search results"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:175
+msgid   "No results"
+msgstr  ""
+
+#: ../xffm/fm/view/pkg/model.hh:374
+msgid   "Currently busy\n"
+msgstr  ""
+
+#: ../xffm/fm/view/local/view.hh:156 ../xffm/common/run.hh:759
+#, fuzzy
+msgid   "Invalid entry"
+msgstr  "Inválido"
+
+#: ../xffm/fm/view/local/view.hh:177
+#, c-format
+msgid   "The volume '%s' is not mounted."
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:59
+#, fuzzy, c-format
+msgid   "Delete %s"
+msgstr  "Borrar las notas"
+
+#: ../xffm/fm/view/local/rm.hh:61
+msgid   "Warning: "
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:61 ../xffm/fm/view/local/popup.hh:569
+#: ../xffm/common/dnd.hh:29
+msgid   "Multiple selections"
+msgstr  ""
+
+#: ../xffm/fm/view/local/rm.hh:123
+#, fuzzy
+msgid   "Remove"
+msgstr  "Quitando:"
+
+#: ../xffm/fm/view/local/rm.hh:218
+msgid   "Trash"
+msgstr  "Papelera"
+
+#: ../xffm/fm/view/local/popup.hh:93
+#, fuzzy
+msgid   "New"
+msgstr  "Red"
+
+#: ../xffm/fm/view/local/popup.hh:100 ../xffm/fm/view/local/popup.hh:158
+#: ../xffm/fm/view/local/popup.hh:231 ../xffm/fm/view/local/popup.hh:233
+msgid   "Paste into"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:101 ../xffm/fm/view/local/popup.hh:157
+msgid   "There is nothing on the clipboard to paste."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:105
+#, fuzzy
+msgid   "Select All"
+msgstr  "Borrar todas"
+
+#: ../xffm/fm/view/local/popup.hh:106 ../xffm/fm/view/local/popup.hh:717
+msgid   "Match regular expression"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:142 ../xffm/common/run.hh:645
+msgid   "Run Executable..."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:143 ../xffm/fm/view/local/popup.hh:859
+msgid   "Extract files from the archive"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:145 ../xffm/fm/view/local/popup.hh:911
+msgid   "Create a compressed archive with the selected objects"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:160 ../xffm/fm/view/local/popup.hh:1197
+msgid   "Rename"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:161 ../xffm/fm/view/local/popup.hh:1180
+msgid   "Duplicate"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:162 ../xffm/fm/view/local/popup.hh:1163
+#: ../xffm/common/dnd.hh:64
+msgid   "Link"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:163
+msgid   "Properties"
+msgstr  "Propiedades"
+
+#: ../xffm/fm/view/local/popup.hh:566
+#, fuzzy
+msgid   "Files:"
+msgstr  "millas"
+
+#: ../xffm/fm/view/local/popup.hh:715
+#, fuzzy
+msgid   "Select items"
+msgstr  "Seleccione un tema:"
+
+#: ../xffm/fm/view/local/popup.hh:721 ../xffm/find/fgr.hh:202
+#: ../xffm/find/fgr.hh:204
+msgid   "Regular expression"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:732
+msgid   "Regular Expression syntax is incorrect"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:762
+#, fuzzy
+msgid   "No selection"
+msgstr  "Sin descripción."
+
+#: ../xffm/fm/view/local/popup.hh:762
+msgid   "No matches."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:965 ../xffm/fm/view/local/popup.hh:1111
+msgid   "Create new..."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:972 ../xffm/fm/view/local/popup.hh:1040
+#: ../xffm/fm/view/local/popup.hh:1114
+#, fuzzy
+msgid   "New Name:"
+msgstr  "Nota nueva"
+
+#: ../xffm/fm/view/local/popup.hh:980
+msgid   "No name"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:993
+#, c-format
+msgid   "Another file with the same name already exists in “%s”."
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1103
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:430
+msgid   "Not a directory"
+msgstr  ""
+
+#: ../xffm/fm/view/local/popup.hh:1104 ../xffm/common/run.hh:335
+#, fuzzy
+msgid   "error"
+msgstr  "Error"
+
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "There are unfinished jobs: please wait until they are finished."
+msgstr  ""
+
+#: ../xffm/fm/view/local/model.hh:104
+msgid   "Previews"
+msgstr  ""
+
+#: ../xffm/fm/view/local/model.hh:124
+#, fuzzy, c-format
+msgid   "Reading \"%s\""
+msgstr  "opción «%s»"
+
+#: ../xffm/fm/view/local/model.hh:723
+#, c-format
+msgid   "Loaded %d of %d articles"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:239
+msgid   "Properties and Attributes"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:267
+msgid   "File Mode:"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:293
+msgid   "File:"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:305
+msgid   "Apply changes"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:473
+msgid   "Encoding"
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:496
+msgid   "Successfully moved to trash."
+msgstr  ""
+
+#: ../xffm/fm/view/local/properties.hh:497
+msgid   "Source:"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:174
+msgid   "Used"
+msgstr  "Usado"
+
+#: ../xffm/fm/view/fstab/view.hh:175
+#, fuzzy
+msgid   "Available"
+msgstr  "Variable"
+
+#: ../xffm/fm/view/fstab/view.hh:176
+msgid   "Usage"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:238 ../xffm/fm/view/fstab/view-BSD.hh:222
+msgid   "No Label"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:239 ../xffm/fm/view/fstab/view-BSD.hh:223
+msgid   "There is no file system available (unformatted)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#: ../xffm/fm/view/fstab/popup.hh:144
+#, fuzzy
+msgid   "Mount point:"
+msgstr  "Punto de condensación:"
+
+#: ../xffm/fm/view/fstab/view.hh:240 ../xffm/fm/view/fstab/view-BSD.hh:224
+#, fuzzy
+msgid   "Not mounted"
+msgstr  "(desmontado)"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:89
+#: ../xffm/fm/view/fstab/view-Linux.hh:105
+#, fuzzy
+msgid   "Disks"
+msgstr  "Disco"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:372 ../xffm/fm/view/fstab/popup.hh:20
+msgid   "NFS Network Volume"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:398
+msgid   "SFTP (via SSH)"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:424 ../xffm/fm/view/fstab/popup.hh:22
+msgid   "eCryptfs Volume"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:450 ../xffm/fm/view/fstab/popup.hh:23
+#, fuzzy
+msgid   "CIFS Volume"
+msgstr  "Volúmenes"
+
+#: ../xffm/fm/view/fstab/view-Linux.hh:743
+#, fuzzy, c-format
+msgid   "Unmounting %s"
+msgstr  "Desmontar %s"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:604
+#, fuzzy
+msgid   "Mount point: "
+msgstr  "Punto de condensación:"
+
+#: ../xffm/fm/view/fstab/view-BSD.hh:605
+msgid   "Mount device: "
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/popup.hh:21
+msgid   "SSHFS Remote Synchronization Folder"
+msgstr  ""
+
+#: ../xffm/fm/view/fstab/popup.hh:132
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "Montar %s"
+
+#: ../xffm/fm/dialog/clipboard.hh:23 ../xffm/common/dnd.hh:140
+msgid   "Copying files locally"
+msgstr  ""
+
+#: ../xffm/fm/dialog/clipboard.hh:30 ../xffm/common/dnd.hh:135
+#: ../xffm/common/gio.hh:105
+msgid   "Moving files"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:51
+msgid   "No Image Preview"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:55
+msgid   "Maximum image size for thumbnailing"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/base.hh:60
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:293
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:297
+msgid   "Reset image size"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:42
+msgid   "Embedded Terminal"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:43
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:44
+msgid   "All items in the iconview."
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:45
+msgid   "Scripting"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:46
+#, fuzzy
+msgid   "Clear Log"
+msgstr  "Cielo despejado"
+
+#: ../xffm/fm/dialog/notebook/page/hbuttonbox.hh:48
+msgid   "Terminal font"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "Procesador"
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Suspend"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:139
+msgid   "Continue"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Interrupt"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "Hangup"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:140
+msgid   "User 1 (USR1)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "User 2 (USR2)"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "Terminate Task"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:141
+msgid   "Abort"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:142
+msgid   "Kill"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:143
+msgid   "Segmentation fault"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/runbutton.hh:219
+msgid   "PID"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:39 ../xffm/find/fgr.hh:168
+#: ../xffm/find/fgr.hh:171 ../xffm/find/fgr.hh:174 ../xffm/find/fgr.hh:177
+msgid   "Previous"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:40
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:397
+#: ../xffm/fm/dialog/notebook/page/pathbar.hh:399
+#, fuzzy
+msgid   "Go to"
+msgstr  "Ir a la papelera"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:61
+#, fuzzy
+msgid   "loading..."
+msgstr  "Actualizando…"
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:171
+#: ../xffm/fm/dialog/notebook/page/page.hh:186
+msgid   "Confirm Replace"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:173
+msgid   "Destination File"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/page/page.hh:185
+#, c-format
+msgid   "The output file %s already exists, do you want to overwrite it?"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/notebook.hh:56
+msgid   "Long press time"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:16
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:227
+msgid   "Remove Button Contents"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:75
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:222
+msgid   "Add custom content"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:76
+msgid   "Select file to load"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:132
+#, c-format
+msgid   "Cannot load file %s. Reason: %s"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:161
+msgid   "You need to restart the application"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:217
+msgid   "FIXME New custom content"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:257
+msgid   "Open a New Window"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/vbuttonbox.hh:266
+#, fuzzy
+msgid   "Differences"
+msgstr  "Preferencias"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:67
+msgid   "maximum"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:75
+#, fuzzy
+msgid   "Add option"
+msgstr  "sin opciones"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:79
+#, fuzzy
+msgid   "Remove option"
+msgstr  "sin opciones"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:158
+msgid   "icon ID"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:159
+msgid   "tooltip"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:160
+msgid   "Select work directory"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:163
+msgid   "Select executable"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:166
+msgid   "Run in terminal"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:234
+#: ../xffm/response/chooserresponse.hh:20
+msgid   "Open"
+msgstr  "Abrir"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:268
+#: ../xffm/response/chooserresponse.hh:56
+#: ../xffm/response/chooserresponse.hh:70
+msgid   "Choose file"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:277
+#: ../xffm/response/chooserresponse.hh:51
+#: ../xffm/response/chooserresponse.hh:63
+msgid   "Choose directory"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:366
+msgid   "Save File"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:380
+msgid   "customButton.ini"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:420
+#, fuzzy
+msgid   "Option"
+msgstr  "Opciones"
+
+#: ../xffm/fm/dialog/notebook/createini.hh:424
+msgid   "text"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:436
+msgid   "folder"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:441
+msgid   "on"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/createini.hh:446
+msgid   "off"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:179
+#, fuzzy
+msgid   "Open menu"
+msgstr  "Abrir %s"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:237
+#: ../xffm/fm/dialog/notebook/menupopover.hh:381
+#, fuzzy
+msgid   "Background Color"
+msgstr  "Fondo"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:238
+#: ../xffm/fm/dialog/notebook/menupopover.hh:372
+#, fuzzy
+msgid   "Foreground Color"
+msgstr  "Color de tipografía, componente rojo"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:240
+#: ../xffm/fm/dialog/notebook/menupopover.hh:354
+#, fuzzy
+msgid   "Command Text Color"
+msgstr  "Línea de comandos"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:241
+#: ../xffm/fm/dialog/notebook/menupopover.hh:363
+msgid   "Error Text Color"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:246
+#: ../xffm/fm/dialog/notebook/menupopover.hh:264
+#, fuzzy
+msgid   "Color settings"
+msgstr  "Configuración del monitor"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "Sort by"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:254
+msgid   "File extension"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:256
+msgid   "View as list"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:257
+#, fuzzy
+msgid   "Show hidden files"
+msgstr  "Mostrar el tirador"
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:258
+msgid   "Show Backup Files"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:259
+msgid   "Sort data in descending order"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:261
+msgid   "Sort by date"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:262
+msgid   "Sort by size"
+msgstr  ""
+
+#: ../xffm/fm/dialog/notebook/menupopover.hh:288
+msgid   "Main menu"
+msgstr  ""
+
+#: ../xffm/fm/dialog/dialog.hh:122
+#, fuzzy
+msgid   "Removed"
+msgstr  "Quitando:"
+
+#: ../xffm/common/dialogclass.hh:140
+msgid   "Apply"
+msgstr  ""
+
+#: ../xffm/common/run.hh:339
+msgid   "warning"
+msgstr  ""
+
+#: ../xffm/common/run.hh:460 ../xffm/response/passwdresponse.hh:28
+#: ../xffm/response/passwdresponse.hh:34
+msgid   "Enter password"
+msgstr  "Introduzca la contraseña"
+
+#: ../xffm/common/run.hh:642 ../xffm/find/dialog.hh:295
+msgid   "Executable"
+msgstr  ""
+
+#: ../xffm/common/run.hh:649 ../xffm/common/run.hh:722
+#: ../xffm/common/run.hh:738 ../xffm/common/util.hh:1559
+msgid   "Run in Terminal"
+msgstr  ""
+
+#: ../xffm/common/run.hh:652
+msgid   "Arguments for the Command"
+msgstr  ""
+
+#: ../xffm/common/run.hh:874
+msgid   "You have selected multiple files or folders"
+msgstr  ""
+
+#: ../xffm/common/settings.hh:178
+msgid   "New File:"
+msgstr  ""
+
+#: ../xffm/common/util.hh:1511
+#, c-format
+msgid   "Scriptfile \"%s\" is not executable. Please set the executable-"
+        "attribute on that file."
+msgstr  ""
+
+#: ../xffm/common/util.hh:1513 ../xffm/common/util.hh:1548
+#, fuzzy, c-format
+msgid   "Open with %s"
+msgstr  "Abrir %s"
+
+#: ../xffm/common/util.hh:1513
+msgid   "Text Editor"
+msgstr  ""
+
+#: ../xffm/common/util.hh:1554
+msgid   "Console: quickly run single commands -- write a command here and "
+        "press enter."
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:42
+msgid   "Target"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:42
+#, fuzzy
+msgid   "Files"
+msgstr  "millas"
+
+#: ../xffm/common/dnd.hh:50
+msgid   "More…"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:64
+msgid   "Move"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:145
+msgid   "Create Link"
+msgstr  ""
+
+#: ../xffm/common/dnd.hh:157
+msgid   "more"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:103
+msgid   "Copying files"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:107
+msgid   "linking"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:109
+msgid   "rename"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:422
+msgid   "Overwrite?"
+msgstr  ""
+
+#: ../xffm/common/gio.hh:511
+#, c-format
+msgid   "(%d of %d)"
+msgstr  ""
+
+#: ../xffm/response/customresponse.hh:56
+msgid   "Execute command"
+msgstr  ""
+
+#: ../xffm/response/customresponse.hh:104
+msgid   "Source File"
+msgstr  ""
+
+#: ../xffm/response/entryresponse.hh:434 ../xffm/response/passwdresponse.hh:197
+msgid   "Ok"
+msgstr  ""
+
+#: ../xffm/response/timeoutresponse.hh:59
+msgid   "Dismiss"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:138 ../xffm/response/progress.hh:83
+msgid   "Running"
+msgstr  ""
+
+#: ../xffm/response/commandresponse.hh:142 ../xffm/response/progress.hh:88
+msgid   "Waiting for operation to finish..."
+msgstr  ""
+
+#: ../xffm/response/passwdresponse.hh:134
+msgid   "User Input"
+msgstr  ""
+
+#: ../xffm/response/passwdresponse.hh:150
+msgid   "Response Requested"
+msgstr  ""
+
+#: ../xffm/mime/mimemagic.hh:68 ../xffm/mime/mimemagic.hh:112
+msgid   "No Read Permission"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:124 ../xffm/find/signals.hh:102
+#: ../xffm/find/dialog.hh:361
+msgid   "Path"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:125
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:126 ../xffm/find/dialog.hh:400
+msgid   "Filter:"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:126
+msgid   "Search for files"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:128
+msgid   "Contents:"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:131
+msgid   "Verbose output debugging mode."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:133
+#, fuzzy
+msgid   "Show version information"
+msgstr  "Información meteorológica de una zona"
+
+#: ../xffm/find/fgr.hh:135
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "Detalles"
+
+#: ../xffm/find/fgr.hh:138 ../xffm/find/dialog.hh:262
+msgid   "Stay on single filesystem"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:140
+msgid   "Print..."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:140
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:142 ../xffm/find/dialog.hh:259
+msgid   "Find hidden files and directories"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:143
+msgid   "Filter"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:144
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:146 ../xffm/find/dialog.hh:256
+msgid   "Recursive"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:147 ../xffm/find/fgr.hh:148 ../xffm/find/fgr.hh:149
+#: ../xffm/find/fgr.hh:150
+msgid   "KByte"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:148
+msgid   "is greater than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:150
+msgid   "is less than or equal to"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Set UID"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:152
+msgid   "Executable Text Files"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:154
+msgid   "The permissions of the file, in octal notation."
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:155
+msgid   "Type"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:157 ../xffm/find/signals.hh:14
+msgid   "Any"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:157
+#, fuzzy
+msgid   "Default type"
+msgstr  "Predeterminado"
+
+#: ../xffm/find/fgr.hh:161
+msgid   "UNIX Socket"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:166 ../xffm/find/fgr.hh:168 ../xffm/find/dialog.hh:303
+#, fuzzy
+msgid   "Minutes"
+msgstr  "minutos"
+
+#: ../xffm/find/fgr.hh:167 ../xffm/find/fgr.hh:170 ../xffm/find/fgr.hh:173
+#: ../xffm/find/fgr.hh:176 ../xffm/find/fgr.hh:179 ../xffm/find/fgr.hh:180
+#: ../xffm/find/fgr.hh:183 ../xffm/find/fgr.hh:184 ../xffm/find/fgr.hh:187
+#: ../xffm/find/fgr.hh:188
+msgid   "TIME"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:169 ../xffm/find/fgr.hh:171 ../xffm/find/dialog.hh:308
+msgid   "Hours"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:172 ../xffm/find/fgr.hh:174 ../xffm/find/dialog.hh:313
+msgid   "Days"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:175
+msgid   "Month"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:177
+msgid   "Month(s)"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:180
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Notificaciones"
+
+#: ../xffm/find/fgr.hh:184
+msgid   "Access Time :"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:188
+msgid   "Creation Time :"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:191 ../xffm/find/fgr.hh:192
+msgid   "uid"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:192
+#, fuzzy
+msgid   "User:"
+msgstr  "Usuario"
+
+#: ../xffm/find/fgr.hh:194 ../xffm/find/fgr.hh:195
+msgid   "gid"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:195
+#, fuzzy
+msgid   "Group:"
+msgstr  "Grupos"
+
+#: ../xffm/find/fgr.hh:198
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:200
+msgid   "Content View"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:201 ../xffm/find/fgr.hh:202 ../xffm/find/fgr.hh:203
+#: ../xffm/find/fgr.hh:204
+msgid   "STRING"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:204
+msgid   "Extended"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:206
+msgid   "Ignore case"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:208
+msgid   "Text Files"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:210 ../xffm/find/dialog.hh:478
+msgid   "No match"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:212 ../xffm/find/dialog.hh:467
+msgid   "Line Count"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:214
+msgid   "Words"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:216
+msgid   "Lines"
+msgstr  ""
+
+#: ../xffm/find/fgr.hh:362
+#, c-format
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:7
+msgid   "Regular"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:69 ../xffm/find/signals.hh:516
+#: ../xffm/find/dialog.hh:265
+msgid   "Results"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:447 ../xffm/find/signals.hh:894
+msgid   "No editor for current action."
+msgstr  ""
+
+#: ../xffm/find/signals.hh:516
+msgid   "Upper limit:"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:518
+msgid   "Counting files..."
+msgstr  ""
+
+#: ../xffm/find/signals.hh:533
+#, c-format
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       ""
+msgstr[1]       ""
+
+#: ../xffm/find/signals.hh:535
+#, c-format
+msgid   "%s Finished : %s"
+msgstr  ""
+
+#: ../xffm/find/signals.hh:659 ../xffm/find/signals.hh:661
+#, fuzzy
+msgid   "Searching..."
+msgstr  "Actualizando…"
+
+#: ../xffm/find/dialog.hh:106
+#, fuzzy
+msgid   "Find"
+msgstr  "Buscar:"
+
+#: ../xffm/find/dialog.hh:133
+#, fuzzy
+msgid   "Close find"
+msgstr  "Cerrar nota"
+
+#: ../xffm/find/dialog.hh:143
+msgid   "Search Action"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:165
+#, fuzzy
+msgid   "Find Files"
+msgstr  "Buscar siguiente"
+
+#: ../xffm/find/dialog.hh:229
+#, fuzzy
+msgid   "Select advanced options"
+msgstr  "Seleccione una zona:"
+
+#: ../xffm/find/dialog.hh:265
+msgid   "Upper limit"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:270
+msgid   "At Least"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:270 ../xffm/find/dialog.hh:275
+msgid   "kBytes"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:275
+msgid   "At Most"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:286
+#, fuzzy
+msgid   "Group"
+msgstr  "Grupos"
+
+#: ../xffm/find/dialog.hh:290
+msgid   "Octal Permissions"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:295
+msgid   "SUID"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:319
+msgid   "Months"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:329
+msgid   "File type : "
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:375
+msgid   "Display file selection dialog"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:434
+msgid   "Contains the text"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:464
+msgid   "Case Sensitive"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:465
+msgid   "Extended regexp"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:466
+msgid   "Include binary files"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:475
+msgid   "Anywhere"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:476
+msgid   "Whole words only"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:477
+msgid   "lines"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:695
+msgid   "Modified"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:699
+msgid   "Created"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:703
+msgid   "Accessed"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1021
+#, fuzzy
+msgid   "Close find\n"
+        "\n"
+msgstr  "Cerrar nota"
+
+#: ../xffm/find/dialog.hh:1025
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/find/dialog.hh:1034
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
+
