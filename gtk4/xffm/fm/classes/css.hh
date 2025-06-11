@@ -25,7 +25,8 @@ private:
       char *data = g_strdup_printf(
       "\
       .vbox {\
-        background-color: #888888;\
+        background-color: %s;\
+        color: %s;\
         border-width: 0px;\
         border-radius: 0px;\
         border-color: transparent;\
@@ -177,7 +178,7 @@ private:
         border-color: transparent;\
       }\
       ",
-        outputBg, outputFg, inputBg, inputFg, iconsBg, iconsFg);
+        inputBg, inputFg, outputBg, outputFg, inputBg, inputFg, iconsBg, iconsFg);
       g_free(outputBg);
       g_free(outputFg);
       g_free(inputBg);

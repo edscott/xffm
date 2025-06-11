@@ -25,13 +25,13 @@ namespace xf {
       gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));
       return GTK_BUTTON(button);
     }
-    
-    static GtkBox *imageButton(const char *iconName, const char *tooltipText, void *callback, void *data){
+     
+    static GtkBox *imageButton(int width, int height, const char *iconName, const char *tooltipText, void *callback, void *data){
         auto toggleBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL,5));
-        gtk_widget_set_size_request(GTK_WIDGET(toggleBox), 30, 16);
+        gtk_widget_set_size_request(GTK_WIDGET(toggleBox), width, height);
         GtkWidget *toggle;
         if (iconName){
-          toggle = GTK_WIDGET(Texture<bool>::getImage(iconName, 12));
+          toggle = GTK_WIDGET(Texture<bool>::getImage(iconName, height-4));
           if (tooltipText) {
             Basic::setTooltip(GTK_WIDGET(toggle), tooltipText);
           }
@@ -61,6 +61,10 @@ namespace xf {
             G_CALLBACK (buttonMotion), NULL);
         
         return toggleBox;
+    }
+   
+    static GtkBox *imageButton(const char *iconName, const char *tooltipText, void *callback, void *data){
+      return imageButton(30,16,iconName,tooltipText,callback,data);
     }
     static GtkBox *imageButtonText(const char *iconName, 
         const char *markup, void *callback, void *data)

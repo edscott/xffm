@@ -9,13 +9,17 @@ namespace xf {
       GtkBox *vButtonBox_;
     public:
     GtkBox *mkVbuttonBox(GtkWindow *mainWindow){
+        auto myColorMenu = new Menu<IconColorMenu<LocalDir> >(_("Colors"));
+        auto colorMenu =  myColorMenu->mkMenu(_("Colors"));
+        delete myColorMenu;
+        gtk_popover_set_has_arrow(colorMenu, true);
+
          const char *bIcon[]={
            EMBLEM_TOGGLE,
            EMBLEM_FIND, 
            EMBLEM_TTY, //EMBLEM_KEYBOARD, //EMBLEM_TTY, 
            GO_HOME, 
-           EMBLEM_NEW_WINDOW, 
-           //EDIT_CLEAR,
+           EMBLEM_RUN, 
            NULL
          };
         const char *bText[]={
@@ -24,7 +28,6 @@ namespace xf {
           _("Open terminal"),
           _("Home"),
           _("Open a New Window"),
-          //_("Toggle Text Mode"),
           NULL
         };
         void *bCallback[]={
@@ -33,7 +36,14 @@ namespace xf {
           (void *)MenuCallbacks<LocalDir>::openTerminal,
           (void *)MenuCallbacks<LocalDir>::goHome,
           (void *)MenuCallbacks<LocalDir>::newWindow,
-          //(void *)MenuCallbacks<LocalDir>::toggleVpane,
+          NULL
+        };
+        void *bdata[]={
+          NULL,
+          NULL,
+          NULL,
+          NULL,
+          NULL,
           NULL
         };
         
@@ -48,23 +58,36 @@ namespace xf {
         gtk_widget_set_hexpand(GTK_WIDGET(vButtonBox_), TRUE);
         auto q = bText;
         auto r = bCallback;
+        auto d = bdata;
         /*const char *bIcon[]={OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, NULL};
         const char *bText[]={_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_ NULL};*/
-        for (auto p=bIcon; p && *p; p++, q++){
-          auto button = Basic::newButtonX(*p, *q);
-          Basic::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
+        for (auto p=bIcon; p && *p; p++, q++, d++){
+          auto button = UtilBasic::imageButton(40,32,*p, *q, *r, *d);
+          /*auto button = Basic::newButtonX(*p, *q);
           if (*r) {
             g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(*r), NULL);
             (r)++;
-          }
+          }*/
+          Basic::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
         }
 
-        auto colorButton = Basic::newMenuButtonX(EMBLEM_COLOR, _("Color settings"));
-        auto myColorMenu = new Menu<IconColorMenu<LocalDir> >(_("Colors"));
-        myColorMenu->setMenu(colorButton);
-        delete myColorMenu;
+        auto colorButton = UtilBasic::imageButton(40,32,EMBLEM_COLOR, _("Color settings"), NULL, NULL);
+            gtk_popover_set_default_widget(colorMenu, GTK_WIDGET(colorButton));
+            gtk_widget_set_parent(GTK_WIDGET(colorMenu),GTK_WIDGET(colorButton));
+            
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(colorButton),  FALSE, FALSE, 0);
-      
+        auto gesture = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+        gtk_widget_add_controller(GTK_WIDGET(colorButton), GTK_EVENT_CONTROLLER(gesture));
+        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+            GTK_PHASE_CAPTURE);
+        g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (colorPopover), colorMenu);
+
+
+        //
+        //auto colorButton0 = Basic::newMenuButtonX(EMBLEM_COLOR, _("Color settings"));
+        //Basic::boxPack0(vButtonBox_, GTK_WIDGET(colorButton0),  FALSE, FALSE, 0);
+        //
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
         Basic::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(mainWindow), "buttonBox", vButtonBox_);
@@ -72,6 +95,12 @@ namespace xf {
         return hbox;
     }
 private:
+
+    static void colorPopover(GtkWidget *self, gint n_press, gdouble x, gdouble y, GtkPopover *menu){
+      gtk_popover_popup(menu);
+      
+    }
+
       static gboolean enterRange(GtkEventControllerMotion* self,
                     gdouble x,
                     gdouble y,
