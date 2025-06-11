@@ -94,7 +94,7 @@ private:
         TRACE("thread_run %s\n", command);
         Run<Type>::thread_run(textview, command, FALSE);
 
-        //close(NULL, window);
+        close(NULL, window);
     }
 
     
@@ -296,7 +296,8 @@ private:
       auto path = g_strconcat(dir, G_DIR_SEPARATOR_S, text, NULL);
       new OpenWith<bool>(textview, path);
       g_free(path);
-      //close(NULL, window);
+      
+      close(NULL, window);
 
       return;
     }

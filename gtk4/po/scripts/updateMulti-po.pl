@@ -26,7 +26,31 @@ if ($ARGV[0] eq "template") { &template}
 if ($ARGV[0] eq "fullmerge") {&fullmerge}
 # 3.2 Merge po template with existing po files (empty new translations)
 if ($ARGV[0] eq "merge") { &merge}
+if ($ARGV[0] eq "mergeL") { &mergeL}
+if ($ARGV[0] eq "fuzzy") { &fuzzy}
 exit(1);
+
+sub fuzzy{
+    $_ = `ls *.po`;
+    my $po;
+    my @linguas = split;
+    my $count;
+    my $msgid;
+    my $uso;
+    foreach $po (@linguas) {
+      $count = 0;
+      $msgid=0;
+      open IN, "$po" or die "cannot open $po \n";
+      while (<IN>){
+        if (/fuzzy/) {$count++;}
+        if (/^msgid/) {$msgid++;}
+      }
+      close IN;
+      $uso = ($msgid - $count) / $msgid * 100.; 
+      printf ("%s fuzzys = %d msgid = %d uso = %.1lf %%\n" ,$po,$count,$msgid,$uso) ;
+    }
+    exit(1);
+}
 
 sub fullmerge{
 
@@ -44,7 +68,7 @@ sub fullmerge{
         my $total = $#linguas+1;
         print "Processing $po ($i/$total) ... \n";
         my ($lang, $a) = split /\./,$po,2;
-        print "$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v \"#~\" | grep -v \"# \" | grep -v \"#\\.\" > $po.new\n";
+print "$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v \"#~\" | grep -v \"# \" | grep -v \"#\\.\" > $po.new\n";
         print `$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v "#~" | grep -v "# " | grep -v "#\\." > $po.new`;
         print "Cleaning $po...\n";
         open INPUT, "$po.new" or die "cannot open $po.new for read";
@@ -73,9 +97,28 @@ sub fullmerge{
     exit(1);
 }
 
+sub mergeL{
+    $_ = `ls *.po`;
+    my $po;
+    my $a;
+    my $b;
+    my @linguas = split;
+    foreach $po (@linguas) {
+      ($a,$b) = split /\./, $po, 2;
+      if ($a =~ m/_/g){
+        print "--> $a\n";
+      }
+#      print "$po\n";
+    } 
+
+# print "$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v \"#~\" | grep -v \"# \" | grep -v \"#\\.\" > $po.new\n";
+  
+
+}
+
 sub merge {
     my $mergepot = "$intltool_update --gettext-package xffm4 --dist";
-    print `$mergepot es`;
+    print `$mergepot es_MX`;
     exit(1);
 }
 

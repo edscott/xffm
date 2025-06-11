@@ -114,7 +114,7 @@ public:
         gtk_window_set_default_widget(GTK_WINDOW(dialog_), GTK_WIDGET(findButton_));
       }
       
-      const char *title(void){ return _("Find files");}
+      const char *title(void){ return ("xffm4 --find");}
 
       char *folder(void){ return folder_;}
       void folder(const char *value){ 

@@ -154,7 +154,7 @@ main (int argc, const char *argv[], const char *envp[]) {
   threadPoolObject = (void *)new xf::ThreadPool;
   
   char *path = getPath(argv[1]);
-  DBG("path is %s (%s) --> %s\n", path, argv[1], _(path)); 
+  TRACE("path is %s (%s) --> %s\n", path, argv[1], _(path)); 
   auto fm = new(xf::Fm)(path, doFind); // 
  
   // Constructors c and d will use global variable Child::mainWidget(). 
