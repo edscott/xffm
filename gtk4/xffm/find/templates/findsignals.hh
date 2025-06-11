@@ -1,5 +1,6 @@
 #ifndef FINDSIGNALS_HH
 #define FINDSIGNALS_HH
+static GList *findWindowsList = NULL;
 
 namespace xf
 {
@@ -8,7 +9,9 @@ template <class Type> class DnDBox;
 template <class Type> class FindResponse;
 template <class Type>
 class FindSignals {
+  protected:
   private:
+
     static const gchar *
     get_time_type(GtkBox *mainBox){
         if (gtk_toggle_button_get_active ((GtkToggleButton *) g_object_get_data(G_OBJECT(mainBox), "radio1"))){
@@ -428,6 +431,7 @@ class FindSignals {
          k--;
          auto textview = object->textview();
          auto dndBox = DnDBox<Type>::openDnDBox(Data->argument[k], dndList, textview);
+         findWindowsList = g_list_prepend(findWindowsList,dndBox);
        } else {
          TRACE("No Data->findList\n");
        }    

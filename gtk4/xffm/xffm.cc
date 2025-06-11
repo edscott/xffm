@@ -114,7 +114,7 @@ main (int argc, const char *argv[], const char *envp[]) {
 
   TRACE("parent=%d, self=%d\n",getppid(), getpid()); 
   coreSetup(argc, argv);
-  xffindProgram = argv[0];
+  xffindProgram = "xffm4";
   xffmProgram = argv[0];
 #ifdef ENABLE_NLS
     /* this binds domain: */

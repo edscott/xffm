@@ -54,7 +54,8 @@ private:
       auto dir = g_object_get_data(G_OBJECT(window), "dir");
       g_free(dir);
       gtk_widget_set_visible(GTK_WIDGET(window), false);
-      gtk_window_destroy(GTK_WINDOW(window));
+      // will destroy on program exit.
+      //gtk_window_destroy(GTK_WINDOW(window));
     }
 
     static void
@@ -92,7 +93,8 @@ private:
 
         TRACE("thread_run %s\n", command);
         Run<Type>::thread_run(textview, command, FALSE);
-        close(NULL, window);
+
+        //close(NULL, window);
     }
 
     
@@ -269,6 +271,12 @@ private:
       gtk_widget_add_controller (widget, GTK_EVENT_CONTROLLER(gesture1));    
       g_signal_connect (G_OBJECT(gesture1) , "released", 
           EVENT_CALLBACK (cvClick), data);
+      auto gesture2 = gtk_gesture_click_new();
+      gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture2),GTK_PHASE_CAPTURE);
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
+      gtk_widget_add_controller (widget, GTK_EVENT_CONTROLLER(gesture2));    
+      g_signal_connect (G_OBJECT(gesture2) , "pressed", 
+          EVENT_CALLBACK (cvClick2), data);
 
     }
 
@@ -288,9 +296,24 @@ private:
       auto path = g_strconcat(dir, G_DIR_SEPARATOR_S, text, NULL);
       new OpenWith<bool>(textview, path);
       g_free(path);
-      close(NULL, window);
+      //close(NULL, window);
 
       return;
+    }
+
+    static gboolean
+    cvClick2 (
+              GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *window ){
+      auto listBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
+      int Y = y;
+      auto row = gtk_list_box_get_row_at_y(GTK_LIST_BOX(listBox), Y);
+      gtk_list_box_select_row(GTK_LIST_BOX(listBox), row);
+            
+      return FALSE;
     }
 
     static gboolean

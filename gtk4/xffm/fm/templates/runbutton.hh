@@ -237,7 +237,7 @@ private:
         gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);       
         gtk_widget_add_css_class (GTK_WIDGET(menu), "inquireBox" );
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
-      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
+      gtk_popover_set_has_arrow(GTK_POPOVER(menu), true);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
 
       void **q = callback;

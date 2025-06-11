@@ -20,7 +20,7 @@ namespace xf {
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
         {_("Open in new tab"),(void *) EMBLEM_NEW_TAB}, 
-        {_("Open in New Window"),(void *) EMBLEM_NEW_WINDOW}, 
+        {_("Open in New Window"),(void *) EMBLEM_RUN}, 
         {_("Paste"),(void *) EMBLEM_PASTE}, 
         {_("Clipboard is empty."),(void *) NULL}, 
         {_("Show Clipboard"),(void *) EMBLEM_ABOUT}, 

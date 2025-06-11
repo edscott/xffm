@@ -52,7 +52,7 @@ namespace xf
       gtk_widget_realize(GTK_WIDGET(dialogObject->dialog()));
       Basic::setAsDialog(GTK_WINDOW(dialogObject->dialog()));
       gtk_window_present(GTK_WINDOW(dialogObject->dialog()));
-      DBG("create dialogObject=%p, dialog=%p\n", 
+      TRACE("create dialogObject=%p, dialog=%p\n", 
           dialogObject, dialogObject->dialog()); 
       dialogObject->run();
     }

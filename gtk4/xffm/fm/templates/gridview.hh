@@ -42,9 +42,6 @@ template <class Type>
       
       GListModel *listModel(void){ return G_LIST_MODEL(selectionModel_);}
       GListStore *listStore(void){ 
-        if (!G_IS_OBJECT(selectionModel_)){
-          DBG("foo\n");
-        }
         auto store = g_object_get_data(G_OBJECT(selectionModel_), "store");
         return G_LIST_STORE(store);
       }
@@ -272,12 +269,12 @@ template <class Type>
                 if (found) {
                    Child::incrementSerial(child);
                    g_list_store_remove(store, positionF);
-                   DBG("removing %s\n",f);
+                   if (verbose)DBG("removing %s\n",f);
                    Child::incrementSerial(child);
                    LocalDir::insert(store, f, verbose);                        
-                   DBG("inserting %s\n",f);
+                   if (verbose)DBG("inserting %s\n",f);
                 } else {
-                  DBG("%s not found!\n", f);
+                  if (verbose)DBG("%s not found!\n", f);
                 }
 
                 //p->restat_item(f);

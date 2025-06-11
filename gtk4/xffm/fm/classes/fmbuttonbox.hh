@@ -22,8 +22,9 @@ namespace xf {
            EMBLEM_RUN, 
            NULL
          };
+
         const char *bText[]={
-          _("Move to tab"),
+          _("Switch button"),
           _("Search"),
           _("Open terminal"),
           _("Home"),
@@ -59,15 +60,14 @@ namespace xf {
         auto q = bText;
         auto r = bCallback;
         auto d = bdata;
-        /*const char *bIcon[]={OPEN_FILEMANAGER, GO_HOME, DRIVE_HARDDISK, TRASH_ICON, NULL};
-        const char *bText[]={_("Open a New Window"),_("Home Directory"),_("Disk Image Mounter"),_("Trash bin"),_ NULL};*/
-        for (auto p=bIcon; p && *p; p++, q++, d++){
-          auto button = UtilBasic::imageButton(40,32,*p, *q, *r, *d);
-          /*auto button = Basic::newButtonX(*p, *q);
-          if (*r) {
-            g_signal_connect (G_OBJECT (button), "clicked", G_CALLBACK(*r), NULL);
-            (r)++;
-          }*/
+        for (auto p=bIcon; p && *p; p++, q++, r++, d++){
+          auto button = UtilBasic::imageButton(40,32,*p, *q, NULL, NULL);
+          auto gesture0 = gtk_gesture_click_new();
+          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture0),1);
+          gtk_widget_add_controller(GTK_WIDGET(button), GTK_EVENT_CONTROLLER(gesture0));
+          gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture0), 
+              GTK_PHASE_CAPTURE);
+          g_signal_connect (G_OBJECT(gesture0) , "pressed", G_CALLBACK (*r), NULL);
           Basic::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
         }
 
@@ -83,15 +83,9 @@ namespace xf {
             GTK_PHASE_CAPTURE);
         g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (colorPopover), colorMenu);
 
-
-        //
-        //auto colorButton0 = Basic::newMenuButtonX(EMBLEM_COLOR, _("Color settings"));
-        //Basic::boxPack0(vButtonBox_, GTK_WIDGET(colorButton0),  FALSE, FALSE, 0);
-        //
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
         Basic::boxPack0(hbox, GTK_WIDGET(vButtonBox_),  FALSE, FALSE, 0);
         g_object_set_data(G_OBJECT(mainWindow), "buttonBox", vButtonBox_);
-
         return hbox;
     }
 private:

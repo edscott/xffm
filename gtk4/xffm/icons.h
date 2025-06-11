@@ -70,7 +70,7 @@
 #define EMBLEM_TOGGLE "emblem-toggle"
 #define EMBLEM_TRASH_FULL "user-trash-full"
 #define EMBLEM_IMPORTANT "emblem-important"
-#define EMBLEM_NEW_WINDOW "emblem-documents"
+#define EMBLEM_NEW_WINDOW "emblem-run"
 #define EMBLEM_COLOR "emblem-color"
 //#define EMBLEM_APPLY "ok"
 #define EMBLEM_ABOUT "emblem-about"

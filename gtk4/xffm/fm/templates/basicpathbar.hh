@@ -230,7 +230,9 @@ namespace xf {
            if (g_object_get_data(G_OBJECT(pathbar), "withMenu")){
              // no menu for filechooser!
              auto myItemMenu = new Menu<PathbarMenu<Type>>(path);
-             myItemMenu->setMenu(widget, parent, path);
+             auto menu = myItemMenu->setMenu(widget, parent, path);
+             gtk_popover_set_has_arrow(GTK_POPOVER(menu), false);
+             
              delete myItemMenu;
            }
             

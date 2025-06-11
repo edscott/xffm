@@ -248,7 +248,7 @@ public:
 
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
 //      gtk_popover_set_has_arrow(GTK_POPOVER(menu), TRUE);
-      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
+      gtk_popover_set_has_arrow(GTK_POPOVER(menu), true);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
 
       GtkCheckButton *firstRadio = NULL;

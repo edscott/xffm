@@ -41,12 +41,14 @@ namespace xf {
         gtk_box_prepend(toggleBox, GTK_WIDGET(toggle));
         gtk_widget_add_css_class (GTK_WIDGET(toggleBox), "input" );
         gtk_widget_add_css_class (GTK_WIDGET(toggle), "input" );
-        auto gesture = gtk_gesture_click_new();
-        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
-        gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture));
-        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-            GTK_PHASE_CAPTURE);
-        g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (callback), data);
+        if (callback) {
+          auto gesture = gtk_gesture_click_new();
+          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+          gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture));
+          gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+              GTK_PHASE_CAPTURE);
+          g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (callback), data);
+        }
        
         auto controllerIn = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(controllerIn, GTK_PHASE_CAPTURE);
@@ -215,7 +217,7 @@ namespace xf {
       setMenuTitle(menu, title);
 
       gtk_popover_set_autohide(GTK_POPOVER(menu), TRUE);
-      gtk_popover_set_has_arrow(GTK_POPOVER(menu), FALSE);
+      gtk_popover_set_has_arrow(GTK_POPOVER(menu), true);
       gtk_widget_add_css_class (GTK_WIDGET(menu), "inquire" );
 
 

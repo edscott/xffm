@@ -30,7 +30,9 @@ namespace xf {
 }
 
     static void
-    goHome(GtkButton *self, void *data){
+    goHome(GtkGestureClick *self,   
+        int n, double x, double y,
+        void *data){
       auto child = Child::getChild();
       
         
@@ -114,7 +116,9 @@ namespace xf {
     }
 
     static void
-    moveWS(GtkButton *self, void *data){
+    moveWS(GtkGestureClick *self, 
+        int n, double x, double y,
+        void *data){
 
       static char *lastWS=NULL;
       auto childWidget =Child::getChild();
@@ -162,6 +166,7 @@ namespace xf {
       if (lastWS == NULL){
         // We moved out to xffm4.
         lastWS = g_strdup(tt);
+        
       } else {
         // We moved back from xffm4.
         // Switch desktop to lastWS.
@@ -169,6 +174,22 @@ namespace xf {
         g_free(lastWS);
         lastWS = NULL;
       }
+
+      /*
+       // The following does not work. Apparently in gtk4 tooltips are static elements.
+       // I guess that is why you can no longer play with the tooltip window.
+      auto basename = lastWS?g_strdup(lastWS):g_path_get_basename(xffmProgram); 
+      char *moveTab = g_strconcat(_("Move to tab"), " <span color=\"blue\">",
+        basename,"</span>", NULL);
+      auto toggle = g_object_get_data(G_OBJECT(Child::mainWidget()), "WSToggle");
+      gtk_widget_set_tooltip_markup( GTK_WIDGET(toggle), moveTab);
+      //Basic::setTooltip(GTK_WIDGET(toggle), moveTab);
+      DBG("%p: set tooltip to %s\n", toggle, moveTab);
+      g_free(moveTab);
+      g_free(basename);
+       
+       */
+
       return;
     }
    
@@ -223,7 +244,9 @@ namespace xf {
     }
 
     static void
-    openTerminal(GtkButton *self, void *data){
+    openTerminal(GtkGestureClick *self,   
+        int n, double x, double y,
+        void *data){
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
@@ -240,7 +263,9 @@ namespace xf {
     }
 
     static void
-    newWindow(GtkButton *self, void *data){
+    newWindow(GtkGestureClick *self,   
+        int n, double x, double y,
+        void *data){
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
@@ -257,14 +282,16 @@ namespace xf {
     }
 
     static void
-    openFind(GtkButton *self, void *data){
+    openFind(GtkGestureClick *self,  
+        int n, double x, double y,
+        void *data){
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
       auto workDir = Child::getWorkdir(childWidget);
 
-//      auto find = g_strdup_printf("xffm --find %s", workDir);
       auto find = g_strdup_printf("xffm4 --find %s", workDir);
+      //auto find = g_strdup_printf("%s --find %s", xffindProgram, workDir);
       pid_t childPid = Run<Type>::shell_command(output, find, false, false);
       TRACE("*** command = %s\n", find);
       auto runButton = new RunButton<Type>(EMBLEM_FIND, NULL);
@@ -473,9 +500,9 @@ private:
       gtk_popover_popdown(menu);
       auto output = Child::getOutput();
       auto buttonSpace = Child::getButtonSpace();
-      auto xffm = g_strdup_printf("xffm -f %s", path);
+      auto xffm = g_strdup_printf("%s -f %s", xffmProgram, path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
-      auto runButton = new RunButton<Type>(EMBLEM_NEW_WINDOW,NULL);
+      auto runButton = new RunButton<Type>(EMBLEM_RUN,NULL);
       runButton->init(xffm, childPid, output, path, buttonSpace);
       g_free(xffm);
     }

@@ -36,7 +36,7 @@ class EnvDialog {
        data->variable = g_strdup(*p);
        // First check in environment.
        auto value = getenv(*p);
-       DBG("getenv(%s) = %s\n", *p, value);
+       TRACE("getenv(%s) = %s\n", *p, value);
        if (value && strlen(value)){        
           data->value = g_strdup(value);
        } else {
@@ -258,7 +258,7 @@ private:
       auto label0 = gtk_label_new(data->variable);
       gtk_box_append(box, label0);
       gtk_widget_set_hexpand(GTK_WIDGET(data->entry), true);
-      DBG("addbox, %s --> %s\n", data->variable, value);
+      TRACE("addbox, %s --> %s\n", data->variable, value);
       if (value && strlen(value)){
           auto buffer =gtk_entry_get_buffer(data->entry);
           gtk_entry_buffer_set_text(buffer, value, -1);

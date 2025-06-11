@@ -7,6 +7,7 @@
 #include "findsignals.hh"
 #include "find.hh"
 #include "dndbox.hh"
+    
 
 namespace xf
 {
@@ -61,6 +62,7 @@ namespace xf
       GtkEntry *grepEntry_ = NULL;
       fgrData_t *Data_=NULL;
 
+
 public:
 
        static void *asyncYes(void *data){
@@ -73,6 +75,10 @@ public:
         auto dialogObject = (dialog_t *)data;
         TRACE("%s", "findresponse ................ goodbye world asyncNo\n");
         gtk_widget_set_visible(GTK_WIDGET(dialogObject->dialog()), false);
+        for (auto l=findWindowsList; l && l->data; l=l->next){
+          auto w = (GtkWidget *)l->data;
+          gtk_widget_set_visible(w, false);
+        }
         Basic::flushGTK();
         exit(0);
         return NULL;
