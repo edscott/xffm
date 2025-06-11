@@ -243,7 +243,7 @@ private:
       void **q = callback;
       void **r = data;
       for (const gchar **p=items; p && *p && *q; p++){
-        GtkWidget *item = gtk_button_new_with_label(*p);
+        GtkWidget *item = gtk_button_new_with_label(_(*p));
         gtk_widget_add_css_class (GTK_WIDGET(item), "inquireBox" );
         gchar *t = g_strdup_printf("%s: %d", _("Signal to emit"), GPOINTER_TO_INT(*r));
         Basic::setTooltip(item, t);

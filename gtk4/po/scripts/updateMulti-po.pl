@@ -26,7 +26,6 @@ if ($ARGV[0] eq "template") { &template}
 if ($ARGV[0] eq "fullmerge") {&fullmerge}
 # 3.2 Merge po template with existing po files (empty new translations)
 if ($ARGV[0] eq "merge") { &merge}
-if ($ARGV[0] eq "mergeL") { &mergeL}
 if ($ARGV[0] eq "fuzzy") { &fuzzy}
 exit(1);
 
@@ -95,25 +94,6 @@ print "$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v \
     $manager->wait_all_children;
     
     exit(1);
-}
-
-sub mergeL{
-    $_ = `ls *.po`;
-    my $po;
-    my $a;
-    my $b;
-    my @linguas = split;
-    foreach $po (@linguas) {
-      ($a,$b) = split /\./, $po, 2;
-      if ($a =~ m/_/g){
-        print "--> $a\n";
-      }
-#      print "$po\n";
-    } 
-
-# print "$msgmerge $fullPoDir/$po $catalog.pot -o -  --lang=$lang -i -q| grep -v \"#~\" | grep -v \"# \" | grep -v \"#\\.\" > $po.new\n";
-  
-
 }
 
 sub merge {
