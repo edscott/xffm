@@ -1,3 +1,4 @@
+In updateMulti.pl: eliminate @ from pot files, use (at)
 bug: When a new filter is added to find dialog, it will be added to the configuration, but not to the GList which defines the active filters in the dropdown.
 
 Window size for find dialog incorrect with es tranlation: should be adaptive. Seems hard to fix, as the mainWindow is added after the DialogComplex is realized. Realization takes place to ensure dialogization in X11.

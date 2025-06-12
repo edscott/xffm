@@ -20,7 +20,7 @@ private:
       char *inputBg = Settings::getString("xfterm", "inputBg", "#dddddd");
       char *inputFg = Settings::getString("xfterm", "inputFg", "#000000");
       char *iconsFg = Settings::getString("xfterm", "iconsFg", "#000000");
-      char *iconsBg = Settings::getString("xfterm", "iconsBg", "#ffffff");
+      char *iconsBg = Settings::getString("xfterm", "iconsBg", "#c0bfbc");
 
       char *data = g_strdup_printf(
       "\

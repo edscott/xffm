@@ -277,19 +277,16 @@ namespace xf {
 
         setPaintableIcon(infoF, path);
 
-        //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
-        g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
-        if (verbose) {TRACE("insert():path = %s,infoF=%p\n", path, infoF);}
         if (error_){
-          ERROR_("Error: %s\n", error_->message);
+          TRACE("Error: %s\n", error_->message);
           g_error_free(error_);
-          g_object_unref(infoF);
           return;
         }
 
+        //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
+        g_file_info_set_attribute_object(infoF, "standard::file", G_OBJECT(file));
+        if (verbose) {TRACE("insert():path = %s,infoF=%p\n", path, infoF);}
         g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, GINT_TO_POINTER(flags));
-
-
       }
 
 
