@@ -186,7 +186,7 @@ static  group_options_t efs_options[]={
     
     {
         .sensitive = 0, .flag = "", .id = "passphrase_passwd_fd=", 
-        .text = N_(""), 
+        .text = "", 
         .entry = "",
         .tip = N_("The password is specified through the specified file descriptor.")
     },

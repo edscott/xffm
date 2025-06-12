@@ -92,7 +92,7 @@ public:
     }
     const char *title(void){ return _("Environment variables");}
     const char *iconName(void){ return EMBLEM_INFO;}
-    const char *label(void){ return _("");}
+    const char *label(void){ return "";}
     GtkWindow *dialog(void){return dialog_;}
     void dialog(GtkWindow *value){dialog_ = value;}
     GtkWidget *noChanges(void){return GTK_WIDGET(noChanges_);}

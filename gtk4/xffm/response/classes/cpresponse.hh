@@ -41,7 +41,7 @@ class cpDropResponse {
   public:
     const char *title(void){ return _("Copy files");}
     const char *iconName(void){ return "copy";}
-    const char *label(void){ return _("");}    
+    const char *label(void){ return "";}    
     int copy(void){ return copy_;}
     void copy(int value){ copy_ = value;}
 
