@@ -96,7 +96,17 @@ static char *getPath(const char *argv1){
 
 int
 main (int argc, const char *argv[], const char *envp[]) {
-  environment = envp;
+  environment = envp; // not used anymore, methinks.
+
+  // Setup initial xffm4 environment from user file.
+  auto basicEnv = xf::EnvDialog::basicEnv();
+  for (auto p=basicEnv; p && *p; p++){
+    auto s = xf::Settings::getString("ENVIRONMENT",*p);
+    if (s) {
+      setenv(*p, s, 1);
+    }
+  }
+
   char *cacheDir = g_strconcat(USER_CACHE_DIR, NULL);
   if (!g_file_test(cacheDir, G_FILE_TEST_IS_DIR)){
     if (mkdir(cacheDir, 0700) != 0){

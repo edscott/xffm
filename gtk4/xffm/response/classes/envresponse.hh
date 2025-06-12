@@ -15,22 +15,11 @@ class EnvDialog {
    GtkLabel *frameLabel_ = NULL;
    GtkBox *mainBox_ = NULL;
    GtkWindow *dialog_ = NULL;
-   const char *basicEnv[9]={
-     "LD_LIBRARY_PATH",
-     "EDITOR",
-     "TERMINAL",
-     "TERMINAL_CMD",
-     "SUDO_ASKPASS",
-     "SSH_ASKPASS",
-     "SSH_ASKPASS_REQUIRE",
-     "LC_ALL",
-     NULL
-   };
    GList *envList_ = NULL;
 
    GList *basicEnvList(void){
      GList *list = NULL;
-     for (auto p=basicEnv; p && *p; p++){
+     for (auto p=basicEnv(); p && *p; p++){
        auto data = (envStruct_t *)calloc(1,sizeof(envStruct_t));
        data->entry = GTK_ENTRY(gtk_entry_new());
        data->variable = g_strdup(*p);
@@ -87,6 +76,20 @@ class EnvDialog {
      return list;
    }
 public:
+    static const char **basicEnv(void){
+      static const char *basicEnv_[9]={
+         "LD_LIBRARY_PATH",
+         "EDITOR",
+         "TERMINAL",
+         "TERMINAL_CMD",
+         "SUDO_ASKPASS",
+         "SSH_ASKPASS",
+         "SSH_ASKPASS_REQUIRE",
+         "LC_ALL",
+         NULL
+       };
+      return (const char **)basicEnv_;
+    }
     const char *title(void){ return _("Environment variables");}
     const char *iconName(void){ return EMBLEM_INFO;}
     const char *label(void){ return _("");}
