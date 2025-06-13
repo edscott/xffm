@@ -38,8 +38,7 @@ public:
     }
     
     int getSize(void){
-        int size = Settings::getInteger("xfterm", "iconsize", 5);
-        if (size < 0) size = 5;
+        int size = Settings::getInteger("xfterm", "iconsize", 24);
         return size;
 
     }

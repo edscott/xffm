@@ -88,9 +88,9 @@ static void *mainWindow_p = NULL;
 #include "fm/classes/bcrypt.hh"
 
 #include "fm/classes/icontheme.hh"  
+#include "fm/classes/settings.hh"  
 #include "fm/classes/basic.hh"     
 #include "fm/classes/child.hh"  
-#include "fm/classes/settings.hh"  
 #include "fm/templates/texture.hh"  
 #include "fm/classes/print.hh"  
 #include "fm/classes/tubo.hh"  

@@ -175,8 +175,8 @@ template <class Type>
         gtk_grid_view_set_max_columns(GTK_GRID_VIEW(view), 20);
         //gtk_grid_view_set_min_columns(GTK_GRID_VIEW(view), 10);
         gtk_widget_add_css_class(view, "gridviewColors");
-        //gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
-        gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), false);
+        gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
+        //gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), false);
 
  ////////////////
         if (!isBookmarks && !isFstab) {

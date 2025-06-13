@@ -368,6 +368,7 @@ public:
             e = fixTerminalEditor(e);
             setenv("EDITOR", e, 1);
             done = TRUE;
+            Settings::setString("ENVIRONMENT","EDITOR",e);
             return;
         }
 
@@ -389,13 +390,17 @@ public:
         if (!e){
             INFO("No suitable EDITOR found, defaulting to gvim. Please install or define EDITOR environment variable.\n");
             e="vi";
+            e = fixTerminalEditor(e);
+            setenv("EDITOR", e, 1);
+            done = TRUE;
+            return;
         } else {
             INFO("Found EDITOR %s\n", e);
-
         }
         e = fixGvim(e);
         e = fixTerminalEditor(e);
         setenv("EDITOR", e, 1);
+        Settings::setString("ENVIRONMENT","EDITOR",e);
         done = TRUE;
         return;
     }
@@ -423,45 +428,6 @@ private:
         // Do not fork gvim, so that git commit works...
         if (e && strcmp(e, "gvim")==0) return "gvim -f";
         return e;
-    }
-
-    static void setTerminal(void){
-        static gboolean done = FALSE;
-        if (done) return;
-        const gchar *terminal = getenv("TERMINAL");
-        if (terminal && strlen(terminal)) {
-            INFO("User set terminal = %s\n", terminal);
-            setTerminalCmd(terminal);
-            done = TRUE;
-            return;
-        } 
-        INFO("setTerminal()... TERMINAL not defined in environment.\n");
-        // TERMINAL not defined. Look for one.
-        const gchar **p=getTerminals();
-        const gchar *foundTerm = NULL;
-        for (;p && *p; p++){
-            auto s = g_strdup(*p);
-            if (strchr(s, ' ')) *strchr(s, ' ') = 0;
-            auto t = g_find_program_in_path (s);
-            g_free(s);
-            if (t) {
-                INFO("Found terminal: %s\n", t);
-                terminal=*p;
-                g_free(t);
-                setenv("TERMINAL", *p, 1);
-                setTerminalCmd(*p);
-                done = TRUE;
-                return;
-            }  
-        }
-        if (!terminal){
-            INFO("No terminal command found. Please install or define TERMINAL environment variable.\n");
-            // Fallback...
-            setenv("TERMINAL", "xterm", 1);
-            setTerminalCmd("xterm");
-        }
-        done = TRUE;
-        return ;
     }
 
     static void
@@ -525,6 +491,59 @@ private:
       return NULL;
     }
 public:
+    static void setTerminal(void){
+        static gboolean done = FALSE;
+        if (done) return;
+        const gchar *terminal = getenv("TERMINAL");
+        if (terminal && strlen(terminal)) {
+            TRACE("User set terminal = %s\n", terminal);
+            setTerminalCmd(terminal);
+            done = TRUE;
+            Settings::setString("ENVIRONMENT", "TERMINAL", terminal);
+            return;
+        } 
+        INFO("setTerminal()... TERMINAL not defined in environment.\n");
+        // TERMINAL not defined. Look for one.
+        const gchar **p=getTerminals();
+        const gchar *foundTerm = NULL;
+        for (;p && *p; p++){
+            auto s = g_strdup(*p);
+            if (strchr(s, ' ')) *strchr(s, ' ') = 0;
+            auto t = g_find_program_in_path (s);
+            g_free(s);
+            if (t) {
+                INFO("Found terminal: %s\n", t);
+                terminal=*p;
+                g_free(t);
+                setenv("TERMINAL", *p, 1);
+                setTerminalCmd(*p);
+                done = TRUE;
+                Settings::setString("ENVIRONMENT", "TERMINAL", terminal);
+                return;
+            }  
+        }
+        if (!terminal){
+            INFO("No terminal command found. Please install or define TERMINAL environment variable.\n");
+            // Fallback...
+            setenv("TERMINAL", "xterm", 1);
+            setTerminalCmd("xterm");
+        }
+        done = TRUE;
+        return ;
+    }
+
+    static void setPasswordPrompt(void){
+        gchar *getpass = g_find_program_in_path("xfgetpass4");
+        if (!getpass) getpass = g_find_program_in_path("xfgetpass");
+        if (!getpass) {
+          TRACE("Warning: xfgetpass nor xfgetpass4 found in path.\n");
+        } else {
+            TRACE("get pass at %s\n", getpass);
+            setenv("SUDO_ASKPASS", getpass, 1);
+            setenv("SSH_ASKPASS", getpass, 1);
+
+        }
+    }
    static const gchar *
     u_shell(void){
         if(getenv ("SHELL") && strlen (getenv ("SHELL"))) {
