@@ -2,9 +2,9 @@
 # define FINDRESPONSE_HH
 
 #include "../findtypes.h"
-#include "../classes/historyentry.hh"
 #include "../classes/ffunctions.hh"
 #include "../classes/fgr.hh"
+#include "../classes/historyentry.hh"
 #include "findsignals.hh"
 #include "find.hh"
 #include "dndbox.hh"
@@ -62,11 +62,14 @@ namespace xf
       GtkBox *advancedVbox_ = NULL;
 
       GtkEntry *grepEntry_ = NULL;
+      GtkEntry *filterEntry_ = NULL;
       fgrData_t *Data_=NULL;
 
 
 public:
 
+      GtkEntry *grepEntry(void){return grepEntry_;}
+      GtkEntry *filterEntry(void){return filterEntry_;}
        static void *asyncYes(void *data){
         auto dialogObject = (dialog_t *)data;
         TRACE("%s", "hello world asyncYes\n");
@@ -401,6 +404,16 @@ private:
       }
 
       static gboolean
+      infoClick(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+        Dialogs::info((const char *)data);
+        return true;
+      }
+
+      static gboolean
       findLabelClick(GtkGestureClick* self,
               gint n_press,
               gdouble x,
@@ -508,8 +521,8 @@ private:
                 (void *)FindSignals<Type>::onFindButton,
                 (void *)this);
             g_free(history);
-            auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry"));
-            g_object_set_data(G_OBJECT(mainBox_), "filter_entry", entry);
+            filterEntry_ = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry"));
+            g_object_set_data(G_OBJECT(mainBox_), "filter_entry", filterEntry_);
 
             gtk_box_append(vbox, GTK_WIDGET(box));
             auto recursive = simpleCheck(vbox, _("Recursive"));

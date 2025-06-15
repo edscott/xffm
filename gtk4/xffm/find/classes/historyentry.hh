@@ -4,8 +4,70 @@
 namespace xf
 {
   class HistoryEntry {
+
     public:
-       GtkBox *entryBox(const char *labelText, 
+      GtkBox *entryBox(const char *labelText, 
+                        const char *tooltipText, 
+                        const char *history,
+                        void *callback,
+                        void *data) {
+        return entryBox0(labelText,tooltipText,history,callback,data);
+      }
+
+      static void
+      updateDD (GtkEntry *entry){
+        updateDD0(entry);
+      }
+
+    private:
+
+      static void
+      updateDD0 (GtkEntry *entry){
+        auto dropdown = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "dropdown"));
+
+        auto buffer = gtk_entry_get_buffer(entry);
+        auto text = gtk_entry_buffer_get_text(buffer);
+        TRACE("updateDD: text=%s\n", text);
+        auto list = (GList *)g_object_get_data(G_OBJECT(entry), "list");
+        GList *newList = NULL;
+        for (auto l=list; l && l->data; l=l->next){
+          if (strncasecmp(text, (const char *)l->data, strlen(text)) == 0){
+            newList = g_list_append(newList, l->data);
+          }
+        }
+
+        for (auto l=newList; l && l->data; l=l->next){
+          TRACE("newList: %s\n", (const char *)l->data);
+        }
+        int n = g_list_length(newList);
+        char **vector = NULL;
+        if (n > 0){
+          vector = (char **)calloc(n+1, sizeof(char*));
+          int k=0;
+          for (auto l=newList; l && l->data; l=l->next,k++){
+            vector[k] =  (char *)l->data;
+          }
+        }
+        g_list_free(newList);
+        auto sWidget = g_object_get_data(G_OBJECT(entry), "sWidget");
+        if (!vector) vector = historyVector(list);
+        
+        if (sWidget){
+          if (strlen(text)) gtk_widget_set_sensitive(GTK_WIDGET(sWidget),true);
+          else gtk_widget_set_sensitive(GTK_WIDGET(sWidget), false);
+        }
+
+        if (vector) {
+          auto model = G_LIST_MODEL (gtk_string_list_new (vector));
+          //auto button = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "button"));
+          g_object_set_data(G_OBJECT(dropdown), "halt", GINT_TO_POINTER(1));
+          gtk_drop_down_set_model(dropdown, model);
+          gtk_drop_down_set_selected(dropdown, 0);
+        } 
+        g_free(vector);
+      }
+
+       GtkBox *entryBox0(const char *labelText, 
                         const char *tooltipText, 
                         const char *history,
                         void *callback,
@@ -33,6 +95,7 @@ namespace xf
 
           auto dropdown = gtk_drop_down_new_from_strings(vector);
           g_object_set_data(G_OBJECT(entry), "dropdown", dropdown);
+
 
           gtk_entry_buffer_set_text(buffer, vector[0], -1);
           g_free(vector);
@@ -74,7 +137,6 @@ namespace xf
 
           return box;
       }
-    private:
 
       static gboolean
       infoClick(GtkGestureClick* self,
@@ -284,55 +346,11 @@ namespace xf
         case GDK_KEY_Begin:
           return false;
       }
-      auto dropdown = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "dropdown"));
-      updateDD(entry, dropdown);
-      auto buffer = gtk_entry_get_buffer(entry);
+      updateDD(entry);
+      //auto buffer = gtk_entry_get_buffer(entry);
 
       return false;
     }
-        static void
-        updateDD (GtkEntry *entry, GtkDropDown *dropdown){
-          auto buffer = gtk_entry_get_buffer(entry);
-          auto text = gtk_entry_buffer_get_text(buffer);
-          TRACE("updateDD: text=%s\n", text);
-          auto list = (GList *)g_object_get_data(G_OBJECT(entry), "list");
-          GList *newList = NULL;
-          for (auto l=list; l && l->data; l=l->next){
-            if (strncasecmp(text, (const char *)l->data, strlen(text)) == 0){
-              newList = g_list_append(newList, l->data);
-            }
-          }
-
-          for (auto l=newList; l && l->data; l=l->next){
-            TRACE("newList: %s\n", (const char *)l->data);
-          }
-          int n = g_list_length(newList);
-          char **vector = NULL;
-          if (n > 0){
-            vector = (char **)calloc(n+1, sizeof(char*));
-            int k=0;
-            for (auto l=newList; l && l->data; l=l->next,k++){
-              vector[k] =  (char *)l->data;
-            }
-          }
-          g_list_free(newList);
-          auto sWidget = g_object_get_data(G_OBJECT(entry), "sWidget");
-          if (!vector) vector = historyVector(list);
-          
-          if (sWidget){
-            if (strlen(text)) gtk_widget_set_sensitive(GTK_WIDGET(sWidget),true);
-            else gtk_widget_set_sensitive(GTK_WIDGET(sWidget), false);
-          }
-
-          if (vector) {
-            auto model = G_LIST_MODEL (gtk_string_list_new (vector));
-            //auto button = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "button"));
-            g_object_set_data(G_OBJECT(dropdown), "halt", GINT_TO_POINTER(1));
-            gtk_drop_down_set_model(dropdown, model);
-            gtk_drop_down_set_selected(dropdown, 0);
-          } 
-          g_free(vector);
-        }
 
   };
 

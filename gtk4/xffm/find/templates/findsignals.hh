@@ -374,14 +374,17 @@ class FindSignals {
     onFindButton (GtkWidget * button, void *data) {
       auto object = (FindResponse<Type> *)data;
       TRACE("onFindButton...\n");
-        GtkTextView *textview = object->textview();
-        
-        on_find_clicked_action (data);
-        gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), true);
-        gtk_widget_set_visible(GTK_WIDGET(object->cancelLabel()), true);
-        gtk_widget_set_visible(GTK_WIDGET(object->findButton()), false);
-        gtk_widget_set_visible(GTK_WIDGET(object->findLabel()), false);
-        object->saveHistories();
+      GtkTextView *textview = object->textview();
+      
+      on_find_clicked_action (data);
+      gtk_widget_set_visible(GTK_WIDGET(object->cancelButton()), true);
+      gtk_widget_set_visible(GTK_WIDGET(object->cancelLabel()), true);
+      gtk_widget_set_visible(GTK_WIDGET(object->findButton()), false);
+      gtk_widget_set_visible(GTK_WIDGET(object->findLabel()), false);
+      object->saveHistories();
+      // Also, update filter and grep entries.
+      HistoryEntry::updateDD(object->filterEntry());
+      HistoryEntry::updateDD(object->grepEntry());
     }
 
     static void

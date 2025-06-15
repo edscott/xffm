@@ -1,28 +1,19 @@
+
 When you select text from an entry in find dialog, it is not always copied to
 the button 2 X clipboard. This is bad. Must put in controller so that whenever
 stuff is selected from entries, it is copied to the Xorg button 2 clipboard. I've gotta look up how to do that...
-
-
-*** Need to add dropdown history for path entry in find dialog! HMM, this would required the top 
-item of the dropdown to be set to "" and not updated
-
-bug: When a new filter is added to find dialog, it will be added to the configuration, but not to the GList which defines the active filters in the dropdown.
 
 Window size for find dialog incorrect with es tranlation: should be adaptive. Seems hard to fix, as the mainWindow is added after the DialogComplex is realized. Realization takes place to ensure dialogization in X11.
 
 
 *** BUG: need to chain link dialogs, when a dialog1 has a dialog2 and enter
 signal to dialog1_parent received, then dialog2 must raise, *not* dialog1.
+
 *** another related BUG: when find action is performed, the window which gets
-raised is the dialog1_parent window, but results are shown in dialog1, which should be raised. When dndBox is enabled, then we must chain dndBox as dialog2 with dialog1 as dialog2_parent.
+raised is the dialog1_parent window, but results are shown in dialog1, which should be raised. 
+When dndBox is enabled, then we must chain dndBox as dialog2 with dialog1 as dialog2_parent.
+
 *** Bug: cancel button is not unsensitivized when find action is unsuccessful.
-
-BUG: hmmm: Where and why did this happen? on mouse click to select, if not ctrl, others not unselected.
-BUG: Fixed: now in testing. Massive memory leak plugged. 
-       [showstopper: dnd many times to gvim, eventually slowdown and deadlock and crash. This is due to massive
-       memory leak. Drag items are not removed from memory since Dnd::dropDone is not called nor drag_ memory
-       is cleaned.]
-
 
 BUG (annoying): Resize window with several tabs and output a plenty, no coredump, apparent hang, but really just taking a lot of time to figure things out, in the end program continues, but this is annoying.
 
