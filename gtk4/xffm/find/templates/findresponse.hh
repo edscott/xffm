@@ -2,6 +2,7 @@
 # define FINDRESPONSE_HH
 
 #include "../findtypes.h"
+#include "../classes/historyentry.hh"
 #include "../classes/ffunctions.hh"
 #include "../classes/fgr.hh"
 #include "findsignals.hh"
@@ -13,7 +14,8 @@ namespace xf
 {
     template <class Type>
     class FindResponse : protected Ffunctions,
-                         protected FindSignals<Type>
+                         protected FindSignals<Type>,
+                         protected HistoryEntry
     {
       using subClass_t = FindResponse<Type>;
       using dialog_t = DialogComplex<subClass_t>;
@@ -153,7 +155,7 @@ public:
       }
 
 private:
-
+/*
       GList *
       loadHistory (const gchar *history) {
         GList *list = NULL;
@@ -199,7 +201,7 @@ private:
           }
           return newline;
       }
-
+*/
       void freeHistoryList(GList *list){
         if (!list) return;
         for (auto l=list; l && l->data; l=l->next) g_free(l->data);
@@ -399,16 +401,6 @@ private:
       }
 
       static gboolean
-      infoClick(GtkGestureClick* self,
-              gint n_press,
-              gdouble x,
-              gdouble y,
-              void *data){
-        Dialogs::info((const char *)data);
-        return true;
-      }
-
-      static gboolean
       findLabelClick(GtkGestureClick* self,
               gint n_press,
               gdouble x,
@@ -460,73 +452,7 @@ private:
           gtk_box_append(child, GTK_WIDGET(hbox));
           return GTK_ENTRY(entry);
         }
-
-       GtkBox *entryBox(const char *labelText, const char *tooltipText, const char *history) {
-          auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-          auto label = GTK_LABEL(gtk_label_new (labelText));
-          
-          auto entry = GTK_ENTRY(gtk_entry_new());     
-          gtk_box_append(box, GTK_WIDGET(label));
-          gtk_box_append(box, GTK_WIDGET(entry));
-
-          g_object_set_data(G_OBJECT(box), "entry", entry);
-          auto buffer = gtk_entry_get_buffer(entry);
-          
-          gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
-          if (!history) return box;
-
-          GList *list = loadHistory(history);
-          auto vector = historyVector(list);
-          g_object_set_data(G_OBJECT(entry), "list", list);
-
-          auto bBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-          g_object_set_data(G_OBJECT(entry), "buttonBox", bBox);
-
-          auto dropdown = gtk_drop_down_new_from_strings(vector);
-          g_object_set_data(G_OBJECT(entry), "dropdown", dropdown);
-
-          gtk_entry_buffer_set_text(buffer, vector[0], -1);
-          g_free(vector);
-          g_signal_connect(G_OBJECT(dropdown), "notify", G_CALLBACK(notify), entry);
-          gtk_box_append(bBox, GTK_WIDGET(dropdown));
-          gtk_box_append(box, GTK_WIDGET(bBox));
-
-          auto gesture1 = gtk_gesture_click_new();
-          gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture1),GTK_PHASE_CAPTURE);
-          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-          g_signal_connect (G_OBJECT(gesture1) , "pressed", 
-              EVENT_CALLBACK (ddClick1), entry);
-          gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture1));   
-
-          auto gesture2 = gtk_gesture_click_new();
-          gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture2),GTK_PHASE_CAPTURE);
-          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
-          g_signal_connect (G_OBJECT(gesture2) , "released", 
-              EVENT_CALLBACK (ddClick2), entry);
-          gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture2));   
-
-          addKeyController1(entry, (void *)dropdown);
-          addKeyController2(entry, (void *)dropdown);
-     
-          if (tooltipText) {
-            auto image = Dialog::buttonBox(EMBLEM_QUESTION,
-              _("Show help"),
-              (void *)infoClick,
-              (void *)tooltipText);
-            
-            //auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
-            //Basic::setTooltip(GTK_WIDGET(image), tooltipText);
-            gtk_box_append(box, GTK_WIDGET(image));
-            auto lab = gtk_label_new("   ");
-            gtk_box_append(box, GTK_WIDGET(lab));
-          }
-          g_signal_connect (entry,
-                  "activate", BUTTON_CALLBACK(FindSignals<Type>::onFindButton), 
-                  this);
-
-          return box;
-      }
-
+        
         GtkEntry *mkCompletionEntry(GList **list_p){ 
             auto entry = GTK_ENTRY(gtk_entry_new());
             gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
@@ -578,7 +504,9 @@ private:
             mkPathEntry(vbox);
 
             auto history = g_build_filename(FILTER_HISTORY);              
-            auto box = entryBox(_("Filter:"), filter_text_help(), history);
+            auto box = entryBox(_("Filter:"), filter_text_help(), history,
+                (void *)FindSignals<Type>::onFindButton,
+                (void *)this);
             g_free(history);
             auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry"));
             g_object_set_data(G_OBJECT(mainBox_), "filter_entry", entry);
@@ -609,7 +537,9 @@ private:
             gtk_box_append(topPaneVbox_, GTK_WIDGET(frame));
 
             auto history = g_build_filename(GREP_HISTORY);              
-            auto box = entryBox(_("Contains the text"), grep_text_help(), history);
+            auto box = entryBox(_("Contains the text"), grep_text_help(), history,
+                (void *)FindSignals<Type>::onFindButton,
+                (void *)this);
             g_free(history);
             grepEntry_ = GTK_ENTRY(g_object_get_data(G_OBJECT(box), "entry"));
             g_object_set_data(G_OBJECT(mainBox_), "grep_entry", grepEntry_);
