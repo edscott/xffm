@@ -356,8 +356,10 @@ private:
         GtkWidget *notebook = gtk_notebook_new ();
         g_object_set_data(G_OBJECT(dialog), "notebook", notebook);
         gtk_notebook_popup_enable (GTK_NOTEBOOK(notebook));
-#if 10
+#if 0
         gtk_notebook_set_scrollable (GTK_NOTEBOOK(notebook), TRUE);
+#else
+        gtk_notebook_set_scrollable (GTK_NOTEBOOK(notebook), false);
 #endif
         g_object_set (notebook,
                       "enable-popup", TRUE, 

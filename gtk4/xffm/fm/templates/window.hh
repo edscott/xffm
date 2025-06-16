@@ -511,8 +511,10 @@ private:
       mainNotebook = notebook_;
       
       g_object_set_data(G_OBJECT(mainWindow_), "notebook", notebook_);
-#if 10
+#if 0
       gtk_notebook_set_scrollable (notebook_, TRUE);
+#else
+        gtk_notebook_set_scrollable (notebook_, false);
 #endif
 
       longPressImage_ = gtk_label_new("");
