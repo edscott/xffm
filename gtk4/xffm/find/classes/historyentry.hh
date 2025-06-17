@@ -334,8 +334,6 @@ namespace xf
       TRACE("processKey2 keyval=%d\n", keyval);
       switch (keyval){
         case GDK_KEY_Return: 
-        case GDK_KEY_BackSpace:
-        case GDK_KEY_Delete:
         case GDK_KEY_Home:
         case GDK_KEY_Left:
         case GDK_KEY_Up:
@@ -345,6 +343,9 @@ namespace xf
         case GDK_KEY_End:
         case GDK_KEY_Begin:
           return false;
+        case GDK_KEY_BackSpace:
+        case GDK_KEY_Delete:
+          break;
       }
       updateDD(entry);
       //auto buffer = gtk_entry_get_buffer(entry);
