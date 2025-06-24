@@ -1,3 +1,7 @@
+SemiDeadlock: After a symlink operation, window is no longer being refreshed. Seems like program has crashed, but no. It is still working, but window no longer refreshes. Goes to black
+screen, but still is working. Menus will appear, tooltips. Will react to button press and everything, but no output to window. Seems like the refresh got stuck in a lost thread.
+Since this happened in a paste where symlink was selected, check whether the symlink op was threaded, and avoid this.
+
 
 When you select text from an entry in find dialog, it is not always copied to
 the button 2 X clipboard. This is bad. Must put in controller so that whenever
