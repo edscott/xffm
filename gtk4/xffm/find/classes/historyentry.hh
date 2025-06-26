@@ -23,6 +23,7 @@ namespace xf
 
       static void
       updateDD0 (GtkEntry *entry){
+        int maxEntries = 13;
         auto dropdown = GTK_DROP_DOWN(g_object_get_data(G_OBJECT(entry), "dropdown"));
 
         auto buffer = gtk_entry_get_buffer(entry);
@@ -40,6 +41,16 @@ namespace xf
           TRACE("newList: %s\n", (const char *)l->data);
         }
         int n = g_list_length(newList);
+
+        
+        for (auto l=list; l && l->data; l=l->next){
+          if (g_list_length(newList) >= maxEntries) break;
+          if (strncasecmp(text, (const char *)l->data, strlen(text)) == 0) continue;
+          newList = g_list_append(newList, l->data);
+        }
+
+        n =  g_list_length(newList);
+
         char **vector = NULL;
         if (n > 0){
           vector = (char **)calloc(n+1, sizeof(char*));
