@@ -227,6 +227,8 @@ private:
             else folder_ = g_strdup(g_get_home_dir());
           }
           mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+          g_object_set_data(G_OBJECT(mainBox_), "width", GINT_TO_POINTER(650));
+          g_object_set_data(G_OBJECT(mainBox_), "height", GINT_TO_POINTER(450));
           g_object_set_data(G_OBJECT(mainBox_), "object", this);
           gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), true);
           gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), true);
