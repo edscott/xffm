@@ -26,7 +26,8 @@ namespace xf
 
       gtk_window_set_decorated(dialog, true);
       gtk_widget_realize(GTK_WIDGET(dialog));
-      gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 650, 460);
+      
+      gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 650, -1);
       Basic::setAsDialog(dialog);
       gtk_window_present(dialog);
 

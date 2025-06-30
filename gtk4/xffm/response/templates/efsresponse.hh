@@ -88,13 +88,13 @@ public:
     GtkBox *mainBox(void) {
       return mainBox(NULL);
     }
-
+    
     GtkBox *mainBox(const char *folder) {
         folder_ = folder? g_strdup(folder) : g_strdup("/");
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-        gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 550, 400);
+        //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 550, 400);
         gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), false);
         gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), false);
 
@@ -537,6 +537,8 @@ public:
       auto subClass = (subClass_t *)data;
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
     }
+
+
 
   };
 

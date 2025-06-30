@@ -59,7 +59,7 @@ public:
         folder_ = folder? g_strdup(folder) : g_strdup("/");
         path_ = path? path : "/";
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-        gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 450, -1);
+        //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 450, -1);
         gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), false);
         gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), false);
 
