@@ -17,10 +17,10 @@ public:
 
     dndResponse(void){
       buttons = (GtkWidget **)calloc(5,sizeof(GtkWidget *));
-      buttons[0] = GTK_WIDGET(UtilBasic::mkButton("list-add", _("Copy")));
-      buttons[1] = GTK_WIDGET(UtilBasic::mkButton("list-remove", _("Move")));
-      buttons[2] = GTK_WIDGET(UtilBasic::mkButton("emblem-symlink", _("Link")));
-      buttons[3] = GTK_WIDGET(UtilBasic::mkButton("no", _("Cancel")));
+      buttons[0] = GTK_WIDGET(UtilBasic::mkButton(EMBLEM_ADD, _("Copy")));
+      buttons[1] = GTK_WIDGET(UtilBasic::mkButton(EMBLEM_REMOVE, _("Move")));
+      buttons[2] = GTK_WIDGET(UtilBasic::mkButton(EMBLEM_SYMLINK, _("Link")));
+      buttons[3] = GTK_WIDGET(UtilBasic::mkButton(EMBLEM_DELETE, _("Cancel")));
     }
 
     ~dndResponse(void){

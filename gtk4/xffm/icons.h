@@ -39,6 +39,9 @@
 #define EMBLEM_CLOSE "close"
 #define EMBLEM_NO "no"
 #define EMBLEM_APPLY "apply"
+#define EMBLEM_ADD "emblem-add"
+#define EMBLEM_REMOVE "emblem-remove"
+#define EMBLEM_DELETE "emblem-delete"
 
 // Menu icons
 #define EMBLEM_ERROR "emblem-error"
@@ -56,7 +59,6 @@
 #define EMBLEM_SYMLINK "emblem-link"
 #define EMBLEM_SAVE "document-save"
 #define EMBLEM_SAVE_AS "document-save-as"
-#define EMBLEM_DELETE "delete"
 #define EMBLEM_PROPERTIES "properties"
 #define EMBLEM_COPY "edit-copy-symbolic"
 #define EMBLEM_CUT "edit-cut-symbolic"
