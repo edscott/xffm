@@ -331,6 +331,7 @@ private:
     // 0x08 : _("Date")
     // 0x10 : _("Size")
     // 0x20 : _("File type")
+    // 0x100 : _("Regular expression") : not for sorting, just for prevous filter... TODO
     static gint 
     compareFunction(const void *a, const void *b, void *data){
         auto flags = GPOINTER_TO_INT(data);
@@ -338,6 +339,7 @@ private:
         bool bySize = (flags & 0x10);
         bool descending = (flags & 0x04);
         bool fileType = (flags & 0x20);
+        bool byRegexp = (flags & 0x100);
         // mutually exclusive, byDate, bySize.
 
         TRACE("*** compareFunction flags=0x%x byDate=%d, bySize=%d, descending=%d, fileType=%d\n", flags, byDate, bySize, descending, fileType);

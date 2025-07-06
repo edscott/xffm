@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+#
+#$news = `perl /home/edscott/bin/latest.pl`;
+#$news = "Rodent is now using the GIT development platform:\n<a href=\"http://sourceforge.net/p/xffm/rodent/ci/master/tree/\">HERE</a>\n";
+
+$news="";
+open INPUT, "blog.xml" or open INPUT, "../blog.xml" or die "cannot find blog.xml";
+$blog = "";
+while (<INPUT>){
+    $blog .= $_;
+}
+close INPUT;
+@entries = split /<\/blockquote>/, $blog;
+
+foreach $_ (@entries){
+#    $news .= "<blockquote>\n";
+    if (/<date>/){
+	($a, $dump) = split /<\/date>/, $_, 2;
+	($dump, $date) = split /<date>/, $a, 2;
+       $news .=  "<font color=#aa0000>$date</font>\n";
+    }       
+    if (/<title>/){
+	($a, $dump) = split /<\/title>/, $_, 2;
+	($dump, $title) = split /<title>/, $a, 2;
+       $news .=  "<p><font color=#000000><b>$title</b></font>\n";
+    }    
+    s/<date>.*<\/date>//g;
+    s/<title>.*<\/title>//g;
+    $news .= $_;
+    $news .=  "</blockquote>\n";
+}
+
+
+open INPUT, "index.html" or open INPUT, "../index.html" or die "cannot find index.html";
+while (<INPUT>){
+	s/LATEST_NEWS/$news/;
+	if ($ARGV[0]) {	s/\@SPECIFIC_APP\@/$ARGV[0]/g;}
+	if ($ARGV[1]) {	s/\@SCREENSHOT\@/$ARGV[1]/g;}
+	else {	s/\@SCREENSHOT\@/rodent-ss3.png/g;}
+	print;
+}
+close INPUT;
+
+#print $news;
+#`cat index.html`;

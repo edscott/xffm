@@ -1,0 +1,213 @@
+package		webcommon;
+use		Exporter;
+@ISA		= qw(Exporter);
+@EXPORT		= qw(init document start_document end_document);
+#@EXPORT_OK	= qw($title);
+
+$po_guy="edscott\@xfce.org";
+sub init {
+    ($title,$abstract,$description,$download,$documentation,$news,$screenshots,$svnpath) = @_;
+    $viewsvn="http://svn.foo-projects.org/svn/xffm".$svnpath;
+    $changelog="http://svn.foo-projects.org/svn/xffm".$svnpath."/ChangeLog";
+    $potfiles="http://svn.foo-projects.org/svn/xffm".$svnpath."/po/";
+}
+
+sub document { 
+    &start_document;
+    print <<NEWS;
+<b>News:</b>
+    $news
+<blockquote> 
+The location of the SVN repository has moved from mocha.foo-projects.org to <a href=\"$viewsvn\">expresso.foo-projects.org</a>
+</blockquote>
+NEWS
+    if ($0 =~ /index\.pl/){
+    print <<TRANS;
+    <blockquote>
+    <font color=#ff0000> Is</font>  <font color=#008800>\"$title\"</font>
+    <font color=#ff0000>fully translated into your language?</font>
+    If not, you may wish to contribute a translation. Look at the individual
+    packages for \"potfiles\" which need fixing. <font color=#ff0000>Please note that internationalization is not completely enabled in 4.5.0, but will be for the next release. </font>
+    </blockquote>
+TRANS
+	print "";
+    } 
+    else
+    {
+    print <<TRANSLATIONS;
+    <blockquote>
+    <font color=#ff0000> Is</font>  <font color=#008800>\"$title\"</font>
+    <font color=#ff0000>fully translated into your language?</font>
+    If not, you may wish to translate a new <a href=\"$potfiles\">potfile</a> or correct an existing <a href=\"$potfiles\">potfile</a> and email to $po_guy so that the next release will be complete. 
+    </blockquote>
+TRANSLATIONS
+    }
+
+    &end_document;
+    return;
+}
+
+
+sub start_document { 
+    print &mk_head;
+    print &start_body;
+    return;
+}
+
+sub end_document { 
+    print &end_table;
+    return;
+}
+
+sub mk_head {
+
+$head= <<END;
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<!-- Things to translate in this page : The title and the languages form -->
+<head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- ******************************************************************* -->
+ <title>$title</title>
+<!-- ******************************************************************* -->
+ <link href="common/feuille.css" rel="stylesheet" type="text/css">
+ <link rel="shortcut icon" href="favicon.ico">
+<!-- ******************************************************************* -->
+ <meta name="description" content="$abstract">
+<!-- ******************************************************************* -->
+ <meta name="generator" content="Bluefish">
+ <meta name="author" content="francois">
+ <meta name="keywords" content="xffm,xfce,desktop environment,cde,filemanager,samba,x11,linux,freebsd,solaris,gtk+,icons">
+</head>
+END
+    return $head;
+}
+
+sub start_body {
+$sbody= <<END;
+<body bgcolor="#ffffff" style="color: #154374; font-family: arial, helvetica, sans-serif; margin-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; ">
+<!-- Main table -->
+
+<table cellpadding="0" cellspacing="0" align="center" width="100%">
+
+<!-- Top dark-blue stripe -->
+
+ <tr bgcolor="#8888aa">
+  <td height="25" colspan="3" align="right" valign="middle" style="color: white; font-size: 10; ">
+  <!--
+  <a href="http://xffm.sf.net" class="foot">Xffm.sf.net</a> | 
+  <a href=$viewsvn class="foot">ViewSVN</a> | 
+  <a href="http://svn.foo-projects.org/listing.php?repname=xffm" class="foot">WebSVN</a> | 
+  <a href="http://bugzilla.xfce.org/" class="foot">Xfce Bug Tracker</a> | 
+  <a href="http://www.xfcewiki.org" class="foot">Xfce Wiki</a> | 
+  <a href="http://forum.xfce.org" class="foot">Xfce Forum</a> | 
+  <a href="http://blog.xfce.org" class="foot">Xfce DevBlog</a>
+  -->
+  &nbsp;
+  </td>
+ </tr>
+ </table>
+
+
+  <center>
+  <h1>
+<!-- ******************************************************************* -->
+  <font color=#ff0000>$title</font><br>
+<!-- ******************************************************************* -->  
+  </h1>
+  <h2>
+  beyond plain file management...
+  </h2>
+  </center>
+
+    <table cellpadding="0" cellspacing="0" width="100%">
+
+<!-- Main (left) menu -->
+
+ <tr>
+  <td width="20%" height="0" colspan="0" rowspan="0" valign="top" bgcolor="#e9f3ff" style="color: #154374; font-size: 12px; padding-bottom: 15px; padding-left: 1px; padding-right: 15px; padding-top: 20px;">
+
+
+<ul class="menu">
+<!-- ******************************************************************* -->
+
+$screenshots
+$documentation
+<li><a href="$download" class="mbold">Download</a></li>
+<li><a href="http://xffm.xfce.org/distfiles/" class="mbold">Xffm distfiles</a></li>
+<li><a href="$viewsvn" class="mbold">ViewSVN</a></li>
+<li><a href="http://svn.foo-projects.org/listing.php?repname=xffm&path=$svnpath/" class="mbold">WebSVN</a></li>
+<!-- ******************************************************************* -->
+<!--<li><a href="http://www.xfce.org/index.php?page=mailinglists&lang=en" class="mbold">Mailing lists</a></li>-->
+<li><a href="$changelog" class="mbold">ChangeLog</a></li>
+
+<li><a href="http://xffm.org/" class="mbold">Xffm.org</a></li>
+</ul> 
+  </td>
+
+<!-- Here starts the main content of the page -->
+
+  <td width="80%" align="left" valign="top" bgcolor="#ffffff" style="color: #154374; font-size: 12; padding-bottom: 20; padding-left: 25; padding-right: 40; padding-top: 20; text-align: justify; line-height: 18px; ">
+
+
+<br>
+<!-- ******************************************************************* -->
+<center><h1>$title</h1></center>
+<font color=#005500>$abstract</font><br>$description
+<!-- ******************************************************************* -->
+<br>
+
+END
+return $sbody;
+}
+
+sub end_table {
+$e_table= <<END;
+
+<!-- Never remove this mark !!! Move it (with this comment) below the news you want to appear in last position on front page -->
+<a name="stophere"></a>
+
+<!-- Bottom of all pages for all languages, no translations needed -->
+
+   </td>
+  </tr>
+ </table>
+
+<!-- grey-blue bottom stripe -->
+
+ <table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td height="25" bgcolor="#99a9c0">&nbsp;&nbsp;
+   </td>
+  </tr>
+
+<!-- centered logos at the bottom on white background -->
+  
+  <tr>
+   <td align="center" valign="middle" height="65" bgcolor="#ffffff">
+
+
+
+	<br>
+	<a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=70875&amp;type=5" width="105" height="31" border="0" alt="SourceForge.net Logo" /></a>&nbsp;&nbsp;&nbsp;
+
+<br><br>
+
+   </td>
+  </tr>
+
+<!-- copyright mention at the bottom, using a white font on a dark-blue background -->
+
+  <tr bgcolor="#154374">
+   <td height="30" align="center" valign="middle" style="color: white; font-size: 10; ">
+   	
+	<span class=foottext>&copy; 1996 - 2006</span>
+	
+   </td>
+  </tr>
+</table>
+
+</body>
+</html>
+END
+return $e_table;
+}

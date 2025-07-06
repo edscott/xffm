@@ -1,0 +1,1800 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<!-- Things to translate in this page : The title and the languages form -->
+<head> <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15">
+<!-- ******************************************************************* -->
+ <title>Rodent-fgr: Threaded search tool</title>
+<!-- ******************************************************************* -->
+ <link href="common/feuille.css" rel="stylesheet" type="text/css">
+ <link rel="shortcut icon" href="favicon.ico">
+<!-- ******************************************************************* -->
+ <meta name="description" content="Rodent is fast, small and powerful file manager for the GNU operating system (but it also works in BSD). Rodent is *not* a filemanager for dummies. Emphasis is on ease of use for the advanced user, not the computer illiterate. 
+<br>
+
+">
+<!-- ******************************************************************* -->
+ <meta name="generator" content="Bluefish">
+ <meta name="author" content="francois">
+ <meta name="keywords" content="xffm,rodent filemanager,linux,freebsd,gtk+">
+</head>
+<body bgcolor="#ffffff" style="color: #154374; font-family: arial, helvetica, sans-serif; margin-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; ">
+<!-- Main table -->
+
+<table cellpadding="0" cellspacing="0" align="center" width="100%">
+
+<!-- Top dark-blue stripe -->
+
+ <tr bgcolor="#8888aa">
+  <td align="left" valign="middle">
+  <img height=150 src="images/LOGO_BP.png">
+  </td>
+  <td height="45" colspan="3" align="center" valign="middle" style="color: white; font-size: 36; ">
+<font color=#000000>Rodent-fgr: Threaded search tool</font>
+<br>
+<font color=#333333 size=4>or is it really a graphic shell...</font>
+
+  
+  <!--
+  -->
+  &nbsp;
+  </td>
+ </tr>
+</table>
+
+
+    <table cellpadding="0" cellspacing="0" width="100%">
+
+<!-- Main (left) menu -->
+
+ <tr>
+  <td width="20%" height="0" colspan="0" rowspan="0" valign="top" bgcolor="#e9f3ff" style="color: #154374; font-size: 12px; padding-bottom: 15px; padding-left: 1px; padding-right: 15px; padding-top: 20px;">
+<a href="http://xffm.sourceforge.net/screenshots/ss-2.png"><img src="http://xffm.sourceforge.net/screenshots/ss-2.png" style="width: 75%; height: 75%"></a><br>
+
+<ul class="menu">
+<!-- ******************************************************************* -->
+
+<!--<li><a href=screenshots/ class=mbold>Screenshots</a></li>
+<li><a href="docs/">Documentation</a></li>-->
+</li>
+<li>
+<a href="RTFM/RTFM.html" class="mbold">Documentation</a>
+</li>
+<li>
+<a href="https://sourceforge.net/p/xffm/support-requests/" class="mbold">Developers forum</a>
+<ul>
+<li>Post development discussion here</li>
+</ul>
+</li>
+<li>
+<a href="https://sourceforge.net/p/xffm/discussion/" class="mbold">Users Forum</a>
+<ul>
+<li>Post general discussion here</li>
+</ul>
+</li>
+<li>
+<a href="http://sourceforge.net/projects/xffm/files/rodent" class="mbold">Download here</a>
+<ul>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent/">OpenSUSE rpm</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent/">Ubuntu deb</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent/">Gentoo ebuild</a></li>
+<li><a href="http://www.freshports.org/x11-fm/rodent/">FreeBSD port</a></li>
+</ul>
+</li>
+<li>
+Recommended Linux distributions:
+<ul>
+<li><a href="http://www.gentoo.org/">Gentoo Linux</a></li>
+<li><a href="http://www.archlinux.org/">Arch Linux</a></li>
+<li><a href="http://www.lunar-linux.org/">Lunar Linux</a></li>
+<li><a href="http://www.ubuntu.com/">Ubuntu Linux</a></li>
+<li><a href="http://www.opensuse.org/">OpenSuse</a></li>
+</ul>
+<li>Recommended Opensource resources:
+<ul>
+<li><a href="http://sourceforge.net/projects/xffm/">Sourceforge</a></li>
+</ul>
+<li>
+<a href="http://sourceforge.net/p/xffm/rodent/ci/master/tree/" class="mbold">New code</a> (GIT)</li>
+<li>
+<!-- ******************************************************************* -->
+<!--<li><a href="http://www.xfce.org/index.php?page=mailinglists&lang=en" class="mbold">Mailing lists</a></li>-->
+<!--li>
+</li-->
+<li>
+<a href="https://sourceforge.net/p/xffm/bugs/" class="mbold">Bug reports</a>
+</li>
+
+</ul> 
+  </td>
+
+<!-- Here starts the main content of the page -->
+
+  <td width="80%" align="left" valign="top" bgcolor="#ffffff" style="color: #154374; font-size: 12; padding-bottom: 20; padding-left: 25; padding-right: 40; padding-top: 20; text-align: justify; line-height: 18px; ">
+
+
+<br>
+<!-- ******************************************************************* -->
+<!-- rodent release video at http://www.youtube.com/watch?v=mOafIy098dk -->
+<!-- insert with <object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/mOafIy098dk?hl=es&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/mOafIy098dk?hl=es&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object> -->
+
+<center>  
+<h1><font color=#ff0000>Rodent-fgr: Threaded search tool</font></h1>
+<h2>or is it really a graphic shell...</h2>
+<h3><i>(not for dummies...)</i></h3>
+</center>
+<ul>
+<li><a href="#latest_news">Latest news</a></li>
+<li><a href="#rodent">Rodent</a></li>
+<ul>
+<li><a href="#what_is_rodent">What is Rodent?</a></li>
+<li><a href="#rodent_is_not">What Rodent is not?</a></li>
+<li><a href="#easy">Why is Rodent easy to use?</a></li>
+<li><a href="#fast">Why is Rodent fast?</a></li>
+<li><a href="#small">Why is Rodent small?</a></li>
+<li><a href="#powerful">Why is Rodent powerful?</a></li>
+<li><a href="#packages">Required packages</a></li>
+<li><a href="#software">Included software</a></li>
+<li><a href="#Installation">Installation from source</a></li>
+<li><a href="#programs">Optional programs</a></li>
+<li><a href="#Standards">Standards compliance</a></li>
+<li><a href="#bugs">How to report bugs?</a></li>
+<li><a href="#Notes">Notes</a></li>
+</ul>
+
+Rodent package includes rodent-fm, rodent-pkg, rodent-iconmgr, rodent-diff and rodent-fgr. If you prefer, you can download each of these packages individually at the following sites:
+<li>Command line fgr</li>
+<ul>
+<li><a href="http://xffm.sf.net/fgr.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/fgr">Download</a></li>
+</ul>
+
+<li>Rodent-fgr</li>
+<ul>
+<li><a href="http://xffm.sf.net/rodent-fgr.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent-fgr">Download</a></li>
+</ul>
+
+<li>Rodent-pkg</li>
+<ul>
+<li><a href="http://xffm.sf.net/rodent-pkg.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent-pkg">Download</a></li>
+</ul>
+
+<li>Rodent-iconmgr</li>
+<ul>
+<li><a href="http://xffm.sf.net/rodent-iconmgr.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent-iconmgr">Download</a></li>
+</ul>
+
+<li>Rodent-diff</li>
+<ul>
+<li><a href="http://xffm.sf.net/rodent-diff.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent-diff">Download</a></li>
+</ul>
+
+<li>Rodent-fm</li>
+<ul>
+<li><a href="http://xffm.sf.net/rodent-fm.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/rodent-fm">Download</a></li>
+</ul>
+
+Other related software used by Rodent applications can be found here:
+<ul>
+
+<li>Disk Based hash tables (GNU libdbh)</li>
+<ul>
+<li><a href="http://libdbh.gnu.org/">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/dbh/files/dbh/">Download</a></li>
+</ul>
+
+<li>Libtubo</li>
+<ul>
+<li><a href="http://xffm.sf.net/libtubo.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/libtubo">Download</a></li>
+</ul>
+
+<li>Librfm</li>
+<ul>
+<li><a href="http://xffm.sf.net/libxffm.html">Home page</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/librfm">Download</a></li>
+</ul>
+
+
+
+</ul>
+</ul>
+
+<a name="latest_news">
+<hr>
+<center>
+<h3><b>Latest news</b></h3>
+</center>
+<hr>
+<font color=#aa0000>Saturday July 05, 2014</font>
+<p><font color=#000000><b>Release in the oven</b></font>
+
+<blockquote>
+
+
+<br>
+New release is in the oven. As soon as appdata files are done and es.po completed
+release will be set loose. 
+<br>
+
+</blockquote>
+<font color=#aa0000>Friday March 21, 2014</font>
+<p><font color=#000000><b>Rodent 5.2.8 is now released</b></font>
+
+
+
+<blockquote>
+
+
+<br>
+Rodent 5.2.8 now includes the rodent-pkg plugin, version 5.2.1, which 
+now can search, install and remove packages in RedHat and OpenSUSE
+systems, as well as in FreeBSD. 
+<br>
+Also some small bugfixes are now in librfm-5.2.9. 
+<br>
+RPM packages (lintian prepared on OpenSUSE 12.3) are now available
+for all Rodent applications, as well as for the meta package
+which includes all. 
+<br>
+Enjoy!
+
+</blockquote>
+<font color=#aa0000>Monday March 10, 2014</font>
+<p><font color=#000000><b>5.2.7 released.</b></font>
+
+
+
+<blockquote>
+
+
+<br>
+This is a tarball only release.
+<br>
+This version now includes a package management GUI for FreeBSD, set up
+as a plugin for Rodent Filemanager. This is called rodent-pkg. Not all 
+pkg commands are available by default ---only those I've tested to satisfaction--- 
+but may be enabled very easily if you want to test 'em. They will
+probably work, since the code is the same as that for tested 
+function. Tested functions include "delete", "install", "fetch",
+"search" and others. Future versions of rodent-pkg will have all commands
+enabled. Support for rpm/zypper/yum and dpkg/apt-get combinations
+are in the roadmap to provide a cross platform coherent package management
+tool which is not exclusive to a particular OS distro. 
+<br>
+Rodent-pkg requires rodent-fm 5.2.7 (which has full readline library support
+and other improvements).
+<br>
+Also required is librfm-5.2.8, which fixes a condition where a false request
+for <i>sudo</i> would be triggered on mv/ln/cp operations.
+<br>
+Both rodent-fm and rodent-pkg are available in the Rodent aplications meta package rodent-5.2.7. 
+<br>
+Enjoy.
+
+</blockquote>
+<font color=#aa0000>Thursday February 27, 2014</font>
+<p><font color=#000000><b>Rodent 5.2.6 now released.</b></font>
+
+
+
+<blockquote>
+
+
+<br>
+The major feature enhancement is csh command completion, which is very handy.
+You start typing the command you want, and the up/down arrows allow you
+to match against all commands that match the substring. 
+<br>
+Also, some bug fixes on the change iconsize scale, which would fail if moved
+too quickly.
+<br>
+And, bug fixes for running remotely with Xmingw. In this setting, the rename/
+symlink/duplicate box would not appear as expected. Now it works, although
+it is placed some pixels above where it should. I haven't figured out how
+to place it correctly in Xmingw, not that it really matters.
+<br>
+Finally, some tweaks to allow smooth running of the rodent-pkg plugin,
+which is in working order but in test mode before release (this plugin
+is a gui for FreeBSD pkg program).
+<br>
+Enjoy!
+
+</blockquote>
+<font color=#aa0000>Friday February 21, 2014</font>
+<p><font color=#000000><b> We are now at Rodent 5.2.5.</b></font>
+
+
+
+<blockquote>
+
+
+With this release we begin release of individual program tarballs. As usual,
+all Rodent applications are included in the Rodent tar ball and Rodent deb 
+and rpm. Since each Rodent release does not imply that all apps have
+been upgraded, you can alternatively update the single tarballs that
+have bumped version. For 5.2.5, this is rodent-fm, which has been tweaked
+to make way for a more fluid rodent-pkg plugin (in the oven). Individual
+packages are only released in tarball format since I don't have time
+nor desire to create packages since the rodent meta package will include
+the latest version of each app.
+<br>
+The rodent-pkg plugin is just about cooked and will be released soon. It applies
+to FreeBSD for the moment, although in the future it will also work for
+rpm or deb based package systems. All this is quite easy, since the
+commands rpm, zypper and yum are quite complete. If you are a FreeBSD
+user and curious about rodent-pkg, take a look at 
+ <a href="https://forums.freebsd.org/viewtopic.php?f=42&t=17019&sid=aa0d1fe3509bf5eab3707c1b16d98fea&start=25">this forum</a> where I have posted a 
+description of rodent-pkg along with screenshots.
+
+</blockquote>
+<font color=#aa0000>Wednesday February 19, 2014</font>
+<p><font color=#000000><b>Release 5.2.4 is out</b></font>
+
+
+
+<blockquote>
+
+
+<br>
+This release has many bug fixes and preparations for new plugin in the oven (rodent-pkg, for consistent cross platform software package management, starting with FreBSD). This release has been built into Gentoo ebuild, OpenSUSE rpm and Ubuntu (12.04) deb to minimize possibility of build issues.
+<br>
+Furthermore, the rodent tarball/package is now a meta package which includes five separate programs (each can be compiled and prepared individually with librfm dependency, except for fgr which has minimum dependencies). As time permits, each of these programs will be released in their individual package, so users may choose what flavors to install. These five packages are:
+<ul>
+<li>fgr</li>
+<li>rodent-fgr</li>
+<li>rodent-diff</li>
+<li>rodent-iconmgr</li>
+<li>rodent-fm</li>
+</ul>
+<br>
+Rodent applications requires librfm-5.2.5, which you can also download in tarball, ebuild, deb or rpm format from same sourceforge download site.
+<p>
+Enjoy!
+
+</blockquote>
+<font color=#aa0000>Saturday February 01, 2014</font>
+<p><font color=#000000><b>Rodent 5.2.3 released!</b></font>
+
+
+
+<blockquote>
+
+
+Version 5.2.3 of librfm and rodent has now been released. Icon regeneration is now lightning fast. 
+Modules are now in librfm, which allows rodent to be transformed into a meta package including rodent-fgr (search tool), rodent-fm (file manager), rodent-diff (difference viewer) and rodent-iconmgr (icontheme manager). The "rodent" tarball contains all four programs (as before), but construction proceeds in a slightly different manner. But don't worry, to build it, just do the ./configure and make stuff and that will take care of all four packages contained in the metapackage.
+<br>
+Since modules are now in librfm, each of these programs will be released (when I have some time for that) as individual packages. This scheme will allow Rodent applications to grow modularly from now on.
+<br>
+The next application I have in mind will be rodent-pkg, a graphic front end for FreeBSD pkg program. I really like version 10.0 of FreeBSD, BTW.
+<br>
+<br>
+OpenSUSE-12.3 rpm's and Ubuntu-12.04 deb's will come later. Not tomorrow, because I'll be busy riding my bike
+
+</blockquote>
+<font color=#aa0000>Monday January 27, 2014</font>
+<p><font color=#000000><b>Further speedups</b></font>
+
+
+
+<blockquote>
+
+
+I couldn't get around to rolling around a release during the weekend 
+because I spent some time with further enhancements to placing icons 
+faster. This time I put in a threadpool to spread the work for large 
+directories into a variable number of cores. The number of cores to 
+use is determined on the run, but this part is not yet completed for 
+FreeBSD. As soon as the BSD part is done, I'll roll out the release.
+I'm also working on an intermediate hash table to make things fly.
+<br>
+<br>
+I hope to have the release later this week, if time allows.
+<br>
+
+</blockquote>
+<font color=#aa0000>January 24, 2014</font>
+<p><font color=#000000><b>Release 5.2.3 is nigh</b></font>
+
+
+<blockquote>
+
+
+Several bug fixes are now in GIT and should be rolled into a tarball for
+release. The one that annoyed me the most was that icon generation was working
+in slow motion. Apparently the code was a bit dirty and things got confused. 
+The result was that cache and short circuits were being bypassed.
+<br>
+So I cleaned up the code and icon mapping is lightning fast again.
+<br>
+I also put in a workaround for buggy dotdesktop files with duplicate
+entries in categories key. These buggy third party files could cause a
+crash in rodent-dotdesktop, the next generation application launcher.r
+<br>
+I'll try to roll out a release as soon as possible. Maybe this weekend.
+The fine detail is that rodent now builds as four separate packages: rodent-fm, rodent-fgr, rodent-iconmgr and rodent-diff. 
+<p>
+I'm also working on a rodent front end to the FreeBSD-ports/Gentoo-portage application updater and installer. But that should come a bit later...
+</blockquote>
+<font color=#aa0000>January 12, 2014</font>
+<p><font color=#000000><b>This really bugged me</b></font>
+
+
+<blockquote>
+
+
+Sometimes an "empty file" preview was being shown for directories or files 
+when this was not true. Apparently this was due to a race between the 
+preview creation thread and the item stat thread. The preview should 
+always come after the stat for the item, even if the condition is triggered
+by mouse position. 
+<br>
+Condition is now fixed and is now in librfm-5.2.2, available at the download site. Rodent 5.2.1 need not be updated for changes to take effect.
+</blockquote>
+<font color=#aa0000>January 11, 2014</font>
+<p><font color=#000000><b>Third party comments on Rodent</b></font>
+
+
+<blockquote>
+
+
+I found this on the net: <a href="http://www.linuxrelease.com/2012/06/rodent-file-manager-is-revolutionizing.html">Rodent file manager is revolutionizing your ways!</a>, which seems an accurate review of a past release of Rodent.
+</blockquote>
+<font color=#aa0000>January 8, 2014</font>
+<p><font color=#000000><b>Version 5.2.1 released</b></font>
+
+
+
+<blockquote>
+
+
+Rodent has a fix for the run dialog. Apparently there was a static variable where there shouldn't have been and it could cause segment violation on repeated calls to the run dialog.
+<p>
+Librfm has check controls to enable easier switching between gtk2 and gtk3. The purpose of these checks is to ease the transition for when gtk3 becomes the default.
+</blockquote>
+<font color=#aa0000>January 7, 2014</font>
+<p><font color=#000000><b>Fix in Gtk+</b></font>
+
+
+<blockquote>
+
+
+A fix for the gtk+-3.0 bug <a href="https://bugzilla.gnome.org/show_bug.cgi?id=721583">https://bugzilla.gnome.org/show_bug.cgi?id=721583</a> is now in gtk+-3.11.4. Apparently the bug was caused by an incorrect fix for bug <a href="https://bugzilla.gnome.org/show_bug.cgi?id=698730">https://bugzilla.gnome.org/show_bug.cgi?id=698730</a>.
+<p>
+As soon as these fixes are in a stable release, Rodent will default to gtk+-3.0 (if no other bug pops up, of course). 
+</blockquote>
+<font color=#aa0000>January 6, 2014</font>
+<p><font color=#000000><b>Good news from Gtk+</b></font>
+
+
+<blockquote>
+
+
+A fix for the gtk+-3.0 popup menu problem with fvwm (<a href="https://bugzilla.gnome.org/show_bug.cgi?id=698248">https://bugzilla.gnome.org/show_bug.cgi?id=698248</a>) is now in gtk+ git repository: gtk+-3.11.4. 
+</blockquote>
+<font color=#aa0000>January 5, 2014</font>
+<p><font color=#000000><b>Patches for gtk+-3.8.8</b></font>
+
+
+<blockquote>
+
+
+<p>
+If you plan to use gtk+3.0, you should apply the following patches to GTK (prepared for gtk+-3.8.8). The first is to eliminate an incorrect showing of the tooltip window (previews) before actually placing it on the correct position. The second applies to ewmh window managers (fvwm family). If it is not applied and your configuration has a number of desktops is not consistent with the data stored in the NET_WORKAREA property of the X server, (say, more than 4 desktops in fvwm), you will have crazy popup menus on some of the desktops. This is due to a different handling of the NET_WORKAREA data within fvwm than that which is supposed by gtk. Yeah, it might be a fvwm bug, but gtk+-3.0 will now work around it. BTW, this bug affects all gtk applications in fvwm, not only Rodent.
+<p>
+These patches are included in the bugreports:
+<ul>
+<li><a href="https://bugzilla.gnome.org/show_bug.cgi?id=698248">https://bugzilla.gnome.org/show_bug.cgi?id=698248</a></li>
+<li><a href="https://bugzilla.gnome.org/show_bug.cgi?id=721583">https://bugzilla.gnome.org/show_bug.cgi?id=721583</a></li>
+</ul>
+<p>
+These two problems do not apply if librfm is compiled with gtk+-2.0 (the default).
+</blockquote>
+<font color=#aa0000>December 29, 2013</font>
+<p><font color=#000000><b>Rodent Filemanager 5.2.0 now released.</b></font>
+
+
+<blockquote>
+
+
+<pre>
+* This release closes all pending bugs and issues.
+* Both OpenSUSE and CentOS spec files are produced on executing the configure script 
+and both are lintian. Same goes for Ubuntu deb package. Gentoo ebuilds are also
+provided.
+* Configurable keybindings
+* Configurable tool buttons
+
+The following plugins are included with Rodent (all in a file hierarchy design):
+ -- rodent-fstab (for mount/unmount physical devices)
+ -- rodent-ps (to monitor and signal processes)
+ -- rodent-dotdesktop (to access installed programs)
+ -- rodent-fuse (to manage file systems in user space)
+ -- rodent-ecryptfs (to manage encrypted file systems)
+ -- rodent-ftp (to manage remote ftp file systems)
+ -- rodent-sftp (to manage remote ssh file systems)
+ -- rodent-obex (to manage remote bluetooth file systems)
+ -- rodent-nfs (to manage remote nfs file systems)
+ -- rodent-cifs (to manage remote cifs file systems)
+ -- rodent-smb (to navigate Windows SMB network)
+
+This is the last release of 2013.
+
+Enjoy.
+
+Notes:
+* Rodent is a modular, parallel execution based file manager with plugin design.
+* Rodent-5.2.0 and Xffm-5.2.0 are synonymous.
+* Requirements for this release are now libtubo0, libdbh2, and librfm.
+* Direct comments, suggestions and flames to https://sourceforge.net/p/xffm/discussion/ 
+* Rodent is not for dummies.
+
+</pre>
+</blockquote>
+<font color=#aa0000>August 7, 2013</font>
+<p><font color=#000000><b>Rodent Filemanager 5.1.2 now released.</b></font>
+
+
+<blockquote>
+
+
+<pre>
+Changes from 5.1.1
+    *Disallow placement of cursor before icon:
+    Disallow placement of cursor by means of mouse click before
+    the little terminal icon in the lp-input widget.
+
+    *Disable lp-input on mouse click in icon area:
+    Lp-input is now disabled on mouse button release in icon area.
+
+    *Allow switching to lp-input with a mouse click:
+    lp-input is now activated (if inactive) on button release
+    signal.
+
+    *Improve fix for initial tab-activation of lp-input:
+    First fix was hacky and would eliminate last input text from
+    input line, besides adding an extra space. This fix is clean.
+    Last input text is conserved (if set) and if no last text, lp-input
+    is activated without adding an extra space.
+    
+    * Double free cleanup bug fixed: 
+    On cleaning up the view when tab closed, the saved lpterminal command
+    used to toggle to/from lp-input was being freed twice. Ugh.
+    
+    * activate lpterm after initial tab and paste
+
+</pre>
+</blockquote>
+<font color=#aa0000>July 18, 2013</font>
+<p><font color=#000000><b>About 5.1.x releases</b></font>
+
+
+
+<blockquote>
+
+Currently, the 5.1.x series is being optimized into several packages
+as follows:
+
+<UL>
+<LI>Library packages:
+
+<P>
+
+<UL>
+<LI>dbh 
+</LI>
+<LI>libtubo
+</LI>
+<LI>librfm
+</LI>
+</UL>
+</LI>
+<LI>Program packages:
+
+<P>
+
+<UL>
+<LI>rodent 
+</LI>
+<LI>rodent-diff
+</LI>
+<LI>rodent-fgr
+</LI>
+<LI>rodent-icontheme
+</LI>
+<LI>rodent-fuse (plugins)
+</LI>
+</UL>
+</LI>
+</UL>
+Source files for dbh and libtubo have been released and are required
+to build rodent 5.1.x. I'm currently working on the librfm source
+file release, which will also be required. As soon as that is done
+I'll get back to putting together debian rules files for all packages.
+This optimization will make for easier and more frequent releases,
+since the whole works need not be version bumped if only a component
+or feature is enhanced.
+</blockquote>
+<font color=#aa0000>July 7, 2013</font>
+<p><font color=#000000><b>Rodent Filemanager 5.1.0 now released.</b></font>
+
+
+<blockquote>
+
+<pre>
+Changes from 5.1.0
+
+Changes from  5.1.0
+
++    Race fix: zip preview unref racing ref.
+    
+    Zip preview unreference of pixbuf was racing rescaling of the pixbuf
+    into a new size. OO previews would sometimes fail to appear because
+    of this.
++    Add workdir specification to ls command
+    
+    Workdir specification for the workdir was missing for the ls command,
+    this caused that after certain user actions, the correct workdir was
+    borked and the ls command for selected items would fail (items not
+    found).
++    Use static strings for gtk about dialog
+    
+    This use of static strings avoids internal gtk memory overruns.
++    Standarize dialogs with gtk_dialog_run
+    
+    Dialogs in callbacks modules are now using gtk_dialog_run instead of
+    dropping into another gtk_main loop. This is to avoid confusing calls
+    to main context functions. Also, about dialog requires static strings,
+    otherwise internal gtk will do memory overruns.
++    Restart on segv tweak
+    
+    When segv received, if configure to restart, then terminate wait
+    processes so that window will not remain frozen behind new window.
++    Enable mime module for rodent-diff
+    
+    Mime module was disabled in rodent-diff because module directory was
+    incorrectly directed to the rodent plugin directory. This is now fixed.
++    Enhanced "ls" command
+    
+    If no item is selected, or any selected item is not a valid path,
+    the ls command will popup a history driven query (with filechooser)
+    to get the target for the ls command. The default target will be the
+    current location, if it is a valid path. Otherwise the history will
+    be used to get the best guess.
+</pre>
+</blockquote>
+<font color=#aa0000>July 7, 2013</font>
+<p><font color=#000000><b>Rodent Filemanager 5.1.0 now released.</b></font>
+
+
+<blockquote>
+
+<pre>
+Changes from 5.0.5
+
++    Release 5.1.0
+    
+    Version update and instalation of rfm-simple-agent is now deprecated
++    name sort fixed in rodent-ps and zombie cleanup
+    * Name sorting now works correctly in rodent-ps. Icons have been modified
+    since old icons would be misleading and tend to indicate that name
+    sorting was not working.
+    * Cleanup of rodent-anim was leaving a zombie. This is now fixed
+    * (missing waitpid added).
++    Informative message on no access for partitions
+    Put in a stderr text when access R_OK|X_OK for mounted partition
+    is not satisfied, instead of opening the location with no icon
+    population. This is the same behaviour that a double click on a
+    non mounted partition has.
++    Remove the BUILD string.
+    The BUILD string refers to subversion repository version, which was
+    dropped when GIT was adopted for version control.
++    Point POTFILES to moved find dialog files.
++    Modifications to build from independent libtubo.
++    Moved libtubo to independent git.
++    Cleanups to find dialog
++    Build from independent dbh.
+    Makefiles modified to build from independent installed dbh library.
++    Separate dbh from rodent package.
+    Dbh is now in its own GIT tree. http://sf.net/projects/dbh
++    Fix spec file
++    configure and cxx icons
+    * Switch build to stable/unstable since git does not use revision in
+    sequential ordering.
+    * Add c++src and c++hdr icon coloring and tags.
+</pre>
+<p>Enjoy!
+</blockquote>
+<font color=#aa0000>June 11, 2013</font>
+<p><font color=#000000><b>Rodent Filemanager 5.0.5 now released.</b></font>
+
+<blockquote>
+
+<p>Enjoy!
+</blockquote>
+<font color=#aa0000>May 29, 2013</font>
+<p><font color=#000000><b>Rodent Core (aka xffm-5.0.4, build 6363) now released.</b></font>
+
+<blockquote>
+
+<p>
+Description:
+<p>
+ Threaded filemanager which includes both navigatable desktop and multitab window interfaces, based on a plugin design. Many of the features available in Rodent Core are not available with any other filemanager.
+<p>
+Features:
+<ul>
+  <li>Clean optimized interface, placing top value on display realestate.
+  <li>Automatic pdf/postscript/text/image/directory popup previews
+  <li>GNU backup mechanism for copying/moving/linking
+  <li>GNU shred functionality for highend security
+  <li>On demand Blowfish file encryption
+  <li>Sudo enabled
+  <li>Ssh password prompt enabled
+  <li>Context sensitive popup menus
+  <li>Translated to 132 locales (language variations)
+  <li>Gtk compatible bookmarks
+  <li>Compatible with Gtk/Kde iconthemes (or without them)
+  <li>Bash autocompletion
+  <li>History autocompletion
+  <li>Industry standard mimetype association
+  <li>Multiple actions definable for mimetypes
+  <li>Built in process spawning terminal
+  <li>Process control task bar
+  <li>Configurable keyboard bindings
+  <li>Configurable toolbar
+  <li>Configurable icontheme
+  <li>Run time plugins:
+<ul>
+     <li>Fstab and automatic partition detection mounts
+     <li>System processes control in structured iconview
+     <li>Application menu and categorized application iconview
+     <li>Fuse mount points and navigation for:
+<ul>
+        <li>Secure shell filesystem (sshfs/sftp)
+	<li>Curlftp filesystem
+	<li>Obexfs mobile phone filesystem
+</ul>
+     <li>Ecrypt filesystem mount points and navigation
+     <li>NFS mount points and navigation
+     <li>Cifs mount points and navigation
+     <li>Xfsamba SMB navigation 
+</ul>
+  <li>Fgr search utility
+  <li>Diff front end
+</ul>
+<p>
+Highlights:
+<ul>
+    <li>Thread safety and concurrency
+    <li>Dynamic process spawning
+    <li>Network and process fault tolerance
+    <li>Many OS's supported (32 and 64 bit)
+    <li>Production quality software
+    <li>High performance on all platforms
+    <li>Portable and maintainable
+    <li>Tunable by installers and end-users
+    <li>Component-based design, documented APIs
+    <li>Open source license
+</ul>
+
+</blockquote>
+<font color=#aa0000>May 31, 2013</font>
+<p><font color=#000000><b>Rodent Core (aka xffm-5.0.5) now released.</b></font>
+
+<blockquote>
+
+<p>
+Enjoy.
+</blockquote>
+<font color=#aa0000>May 20, 2013</font>
+<p><font color=#000000><b>Rodent Core (aka xffm-5.0.3, build 6363) now released.</b></font>
+
+<blockquote>
+
+
+<p>
+
+Rodent Core is now released in source tarball format, Gentoo ebuild,
+OpenSUSE/CentOS rpm and Ubuntu/Debian deb.
+<p>
+
+Rodent will compile without any deprected usage of functions from 
+Gtk-2.18.9 to Gtk+-3.8.0 (preferably &gt; Gtk+-2.20.0).
+<p>
+
+Mayor changes in this version has been a focus on stability and 
+forward and backward compatibility to allow instalation of the 
+latest version without having to update the entire system. This
+is of paramount importance in production machines where the down
+time must be minimized.
+<p>
+
+Appreciation is noted to all those who have contributed with bug
+reports and enhancement suggestions.
+<p>
+
+In Rodent Core you will now find:
+<ul>
+<li>
+* All functions are available through keybinds
+</li><li>
+* All keybinds may be customized by the user
+</li><li>
+* Process task bar with menu to control processes.
+</li><li>
+* Flexible tool bar located in unused space, fully customizable by the user.
+</li><li>
+* Front end for the bcrypt program (contributed by 
+   Johnny Shelley)
+</li><li>
+* Full front end to the ls program (contributed by 
+   Richard M. Stallman and David MacKenzie)
+</li><li>
+* Full front end to the cp program (contributed by 
+   Torbjorn Granlund, David MacKenzie, and Jim Meyering)
+</li><li>
+* Full front end to the mv program (contributed by
+   Mike Parker, David MacKenzie, and Jim Meyering)
+</li><li>
+* Full front end to the ln program (contributed by 
+   Mike Parker and David MacKenzie)
+</li><li>
+* Full front end to the rm program (contributed by
+   Paul  Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering)
+</li><li>
+* Front end to the touch program (contributed by 
+   Paul  Rubin, Arnold Robbins, Jim Kingdon, David MacKenzie, and Randy Smith)
+</li><li>
+* Front end to the shred program (contributed by 
+   Colin Plumb)
+</li><li>
+* Plugins to mount and use:
+<ul>
+<li>
+   - Fstab mounts and system detected mount devices
+</li><li>
+   - Ecryptfs
+</li><li>
+   - NFS
+</li><li>
+   - CIFS (with included samba navigator)
+</li><li>
+   - Obexfs
+</li><li>
+   - Curlftpfs
+</li><li>
+   - Sshfs (otherwise known as sftp)
+</li></ul>
+</li><li>
+* Applications plugin to:
+<ul><li>
+   - Create applications popup menu
+</li><li>
+   - Create applications virtual filesystem
+</li></ul>
+</li><li>
+* System processes plugin
+<ul><li>
+   - Front end to ps program (contributed by Branko Lankester, 
+     Michael K. Johnson, Michael Shields, Charles Blake, 
+     David Mossberger-Tang and Albert Cahalan.)
+</li></ul>
+</ul>
+<p>
+
+With Gtk+3 everything works just fine, except for one detail which is due to
+a Gtk bug (see <a href="https://bugzilla.gnome.org/show_bug.cgi?id=698248">https://bugzilla.gnome.org/show_bug.cgi?id=698248</a> ). This
+bug apparently only affects systems where the window manager is handling
+more than 4 desktops, and only surfaces on the fifth desktop and beyond.
+In view that the current gnome approach is to have the computer look like
+a cell phone with no more than one desktop, this bug might take a while to
+get fixed. For this reason, the default is Gtk+2 (functionality is exactly 
+the same). If you are not affected by the above described bug (you use less
+than 5 desktops), you may compile from source with Gtk+3 using the configure
+option --with-gtk3. 
+<p>
+
+Also, if Gtk+2 is not installed, compilation will proceed with Gtk+3.
+<p>
+
+Builds have also been tested on ArchLinux, Gentoo and FreeBSD.
+<p>
+
+About FUSE:
+<p>
+
+Rodent Core acts as a front end to FUSE (and other type) of mount points. This 
+allows you to mount different types of networked or other type of filesystems.
+Unlike gvfs, the user is allowed to choose the mount point and see what is 
+going on.
+<p>
+
+My favorite: ecryptfs.
+<p>
+
+  The approach of encrypting the whole user's directory that some distributions  use is  weak and gives a false sense of security. The Rodent approach is to encrypt that which requires to be encrypted and only decrypt when necessary, not every time you happen to login. This is specially useful for removable devices. If you are working on a multimillion dollar confidential project and your usb drive gets stolen, you might be in a sore spot if that small directory with vital information was not properly encrypted. This plugin replaces the scramble program distributed relevant xfce 4.x releases and closes the security issue noted by FreeBSD users (better late than never).
+<p>
+
+ If you feel that some feature or functionality would be nice, submit a feature request. If you find a bug, submit a bug report (tracebacks are essential). If you do not know what a feature request or bug report is, then Rodent is probably not for you.
+<p>
+
+ Finally, if you wish to enable core dumps, configure with the --with-core option.
+<p>
+
+ Remember that Rodent is provided as is, with no particular Warranty, as stated in the GPLv3 license. My only wish is that this software may be as helpful to you as it is to me. 
+<p>
+
+
+ Enjoy.
+ </blockquote>
+<font color=#aa0000>May 6, 2013</font>
+<p><font color=#000000><b>Rodent-icon-theme (was xfce4-icon-theme) now released.</b></font>
+
+
+<blockquote>
+
+<p>
+Rodent-icon-theme (was xfce4-icon-theme) is a svg (scalable) icon theme created by Francois L Clainche and augmented by Pablo Morales Romero. 
+<p>
+It is freedesktop compatible and works with most mayor Linux/BSD desktop environments. 
+<p>
+This icon theme was included in some versions of Rodent filemanager (xffm versions 4.6.0--4.8.0) , but will not be included in Rodent Core (xffm-5.0). 
+<p>
+Rodent Core (soon to be released) may use any icon theme installed, or none at all with no caveats.
+<p>
+Download from <a href="http://sourceforge.net/projects/xffm/files/rodent-icon-theme/">http://sourceforge.net/projects/xffm/files/rodent-icon-theme/</a>
+<p>
+<i>Enjoy.</i>
+</blockquote>
+<font color=#aa0000>December 25, 2012</font>
+<p><font color=#000000><b>Rodent Core-rc2 (xffm-4.9.2) is now released.</b></font>
+
+
+<hr>
+<blockquote>
+
+<p>
+Merry Christmas!
+<p>
+
+Rodent core-rc2 (aka xffm-4.9.2) is now released. This release is only available as source tarball. As soon as tests have completed on different platforms and final bug reports closed, this will become the 5.0 release. This release is a major milestone release with the following details:
+<p>
+<ul>
+
+<li> Compatible with systems from gtk+2.24 to gtk+3.6 (3.x is preferred).
+<li> New threading paradigm in place (which is now the recommended method for gtk+3.4). This new thread control structure allows for quicker response and several race condition fixes.</li>
+<li> Full OFM  keybind customization with included xml editor for easy access from the  settings dialog (thanks to Liviu Andronic and Harold Ailing for the suggestions).</li>
+<li> Case insensitive sort option on selective basis (popup menu toggle).</li>
+<li> Process signalling popup menu in process taskbar ---little run buttons in bottom right corner--- (thanks to plmday for the suggestion).</li>
+<li> User configurable toolbar in unused space left by tab labels (cool).
+<li> Added go forward functionality.</li>
+<li> Full options now available for GNU cp (original code by TorbjÃ¶rn Granlund, David MacKenzie, and Jim Meyering).</li>
+<li> Full options now available for GNU mv (original code by Mike Parker, David MacKenzie, and Jim Meyering).</li>
+<li> Full options now available for GNU ln (original code by Mike Parker and David MacKenzie).</li>
+<li> Full options now available for GNU rm (original code by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering).</li>
+<li> Full options now available for GNU shred (original code by Colin Plumb).</li>
+<li> Memory leak bugfixes.</li>
+<li> New rodent-lite. This application may now plugins and modules on user request via settings dialog (rodent loads all available modules and plugins). The default configuration for rodent-lite is small and fast. Probably faster than Rox on a multicore box.</li>
+</ul>
+<p>
+
+For a full account of changes, do a <i>svn log --verbose -r 6002:6224</i>
+
+<p>
+
+Comments, bug reports and suggestions are appreciated at the forums and bug tracker located in http://sourceforge.net/projects/xffm
+<p>
+<i> Enjoy</i>.
+
+</blockquote>
+<font color=#aa0000>December 11, 2012</font>
+<p><font color=#000000><b>Rodent 4.9.0 is now in the oven.</b></font>
+
+<hr>
+<blockquote>
+
+<p>
+In current subversion repository (<i>Rodent core rc1</i>), all the gtk+3.4 and gtk+3.6 issues have been resolved. Rodent now uses the new threading paradigm (which is really not new, just that the previous recommended threading paradigm was plain and simply crappy: no wonder why it was deprecated). Things run a lot smoother and much faster with the new threading paradigm. I guess that just goes to show that following the gtk recomended way of doing things is not always the best choice. A lot of new stuff is also coming in 4.9.0:
+<ul>
+<li>All keybindings are now configurable</li>
+<li>Keybindings configurable with custom in-house editor</li>
+<li>Process signalling is now done with a popup menu in process taskbar (little run buttons in bottom right corner) so there is no need to click on the button to open a new window with <i>rodent-ps</i>.</li>
+<li>New user configurable toolbar in unused space left by tab labels</li>
+<li>Thread pool optimizations for faster response and minimized resource usage</li>
+<li>New popup tip widget over icon labels</li>
+<li>Experimental items now in stable code:
+<ul>
+<li> obexfs</li>
+<li> cifs</li>
+<li> samba navigator</li>
+<li> ecryptfs</li>
+<li> curlftpfs</li>
+</ul>
+<li> New <i>rodent-lite</i> symlink that loads no plugins and runs just as fast or faster than <i>ROX</i></li>
+</ul>
+<p>
+Currently a few minor bugs must be fixed and a full memory debugging must be completed before release. A memory leak is currently holding back release. Methinks it might be related to the way GHashTables are being handled, but that is just a hypothesis for the evening. 
+<p>BTW, tomorrow is a big day around here: <b><i>Felicidades Lupita</i></b>.
+
+<hr>
+<blockquote>
+</blockquote>
+<font color=#aa0000>October 30, 2012</font>
+<p><font color=#000000><b>GTK+3.6 woes</b></font>
+
+
+<p>
+In Gtk+-3.6, the threading model has changed.<br>
+Before 3.6, only one thread at a time could do a gtk/gdk call, and this was controlled by means of a mutex (which the user could customize). This did not always work with gdk pixbufs, but that could be controlled by locking the Xserver when necessary. This effectively serializes all gtk/gdk calls.
+<p>
+It seems this method was too difficult to understand and too taxing with the lock/unlocking of the mutex.
+<p>
+As of 3.6, this GDK mutex method is deprecated.
+<p>
+Furthermore, attempted use of the old method method runs into trouble. This is apparent with Rodent (b.6187), as the main loop will deadlock in Ubuntu 12.10, which uses gtk+3.6 and beyond. This deadlock is caused by a GDK mutex lock request in the main thread. I could probably hack a way around this problem, but that would not be quite right.
+<p>
+The new thread paradigm is a reflection of the QT way: all GUI calls (gtk/gdk) can only be done from the main thread. This sucks, in some ways. And does not suck, in other ways.
+<p>
+So what is to be done?
+<ul>
+<li> All GDK mutex blocks should be replaced with functions queued to the main thread by means of g_main_context_invoke() or g_idle_add().</li>
+</ul>
+Current stable gtk+ in Gentoo is at 3.4.4, which means additional trouble since 3.6.1 is masked ~amd64.
+<p>
+So next series of builds beyond b.6187 will target the new gtk/gdk thread serialization paradigm. Support for Gtk+2 may be dropped if the new threading paradigm proves incompatible.
+<i>Last minute update: I just updated my gentoo box to gtk-3.4.4 (from gtk-3.2) and lo behold, the same deadlock for b.6187 occurs as with gtk-3.6. So the deprecated thread paradigm should still work, and the deadlock is due to recent changes in the build. I'll look it up next.</i>
+</blockquote>
+<font color=#aa0000>June 27, 2012</font>
+<p><font color=#000000><b>Rodent Delta (aka xffm 4.8.0) is now yours</b></font>
+
+<hr>
+<blockquote>
+
+<p>
+
+Rodent Delta has extensive work done. Thread units have expanded and support for local/remote files is now in place. Rodent Delta will run much faster on multicore boxes (and a bit slower on single cores), but is still faster than the official gnome filemanager on loading large directories like <i>/usr/bin</i>.
+<p>
+You will find binaries in both amd64 and x86 format for <i>Debian 6</i>, <i>Fedora 17</i>, <i>OpenSuse 12.1</i> and <i>Ubuntu LTS 12.04</i>. Builds have also been tested on <i>ArchLinux</i>, <i>Gentoo</i> and <i>FreeBSD</i>.
+<p>
+Rodent Delta now sports the new <i>"FUSE"</i> plugin, which allows you to mount remote ssh filesystems (you just need a ssh account on the remote machine) and nfs remote mounts (nfs is not exactly fuse, unless you consider that <i>root</i> also falls under the "u").
+<p>
+This is a different approach than that taken by Gnome. There is no GVFS. GVFS will do a fuse mount in <i>~/.gvfs</i>, and hide this from the user. Rodent users, on the other hand, are not stupid: hiding vital information about how the system works is just counter productive and reminds me of <i>MSWindows</i>.
+<p>
+If you compile from source, you may choose to enable the <i>experimental</i> plugins.
+They are experimental because they have not been fully tested on all platforms (but work fine on my <i>Gentoo</i> box). These experimental plugins include:
+<p>
+<ul>
+  <li><i>obexfs</i>: to access files on your mobile phone or device via bluetooth.</li>
+  <li><i>curlftpfs</i>: to access file on remote ftp servers.</li>
+  <li><i>ecryptfs</i>: to create and access encrypted directories on local disk or removable media </li>
+  <li><i>cifs</i>: to mount MSWindows shares. Smbfs is long deprecated and should not be used anymore.</li>
+  <li><i>samba</i>: this allows you to navigate MSWindows networks and select cifs mount points. This replaces xfsamba and samba plugins from relevant xfce 3.x and 4.x releases.</li>
+  <li>edit button in fgr (find) dialog.</li>
+</ul>
+<p>
+  These <i>experimental</i> items will be deemed stable in upcoming releases.
+<p>  
+  
+My favorite: <i>ecryptfs</i>
+<p>
+  The approach of encrypting the whole user's directory that some distributions use is  weak and gives a false sense of security. The Rodent approach is to encrypt that which requires to be encrypted and only decrypt when necessary, not every time you happen to login. This is specially useful for removable devices. If you are working on a multimillion dollar confidential project and your usb drive gets stolen, you might be in a sore spot if that small directory with vital information was not properly encrypted. This plugin replaces the scramble program distributed relevant <i>xfce 4.x</i> releases and closes the security issue noted by <i>FreeBSD</i> users (better late than never).
+<p>
+ If you feel that some feature or functionality would be nice, submit a feature request. If you find a bug, submit a bug report (tracebacks are essential). If you do not know what a feature request or bug report is, then Rodent is probably not for you.
+<p>
+ Finally, if you wish to enable core dumps, configure with the <i>--with-core</i> option.
+<p>
+ Remember that Rodent is provided as is, with no particular Warranty, as stated in the <i>GPLv3</i> license. My only wish is that this software may be as helpful to you as it is to me. 
+<p>
+
+<i> Enjoy</i>.
+</blockquote>
+<font color=#aa0000>March 13, 2012</font>
+<p><font color=#000000><b>Libtubo now released as a separate package</b></font>
+
+<hr>
+<blockquote>
+
+<p>Libtubo, which does all the work behind the scenes for Rodent Filemanager, has now been released as a separate library so that other programs can take advantage of the functionality. Read more at <a href=libtubo.html>Libtubo Homepage</a>
+</blockquote>
+<font color=#aa0000>October 18, 2011</font>
+<p><font color=#000000><b>Rodent Filemanager (version 4.7.4) is now available for download</b></font>
+
+<hr>
+<blockquote>
+
+<p>
+Rodent Gamma release 4 (aka xffm-4.7.4) is now available in source tarball and debian packages for i386 and amd64 architecture (these .deb files built on debian-squeeze also work in ubuntu, xubuntu and kubuntu).
+<p>
+mutex/hashtable cleanups... Fix segfault on remote X connection... more pdf viewer options for debian... Add cancel button to find dialog to stop all the multiple threads that may be running.... additonal use of XInitThreads() ... Error control: fallback icons for population elements... disable gtk-icontheme-selection button if no Rodent theme found... Fixed the open with dialog: commands are saved in the temporary cache ...Open with no longer sets default mimetype application, this is done with CONTROL-click on the menu item. Open with should append the application ...   Menu items that may set default application now have a tooltip to that effect... update translations ... fix for broken gtk_widget_hide in 2.24 which does not cover all the functionality available in gtk_widget_hide_all (won't hide top level popup menu items).
+
+<p>
+This release fixes several segfault conditions as well as enhancing the applications menu. Now setting the default application for any particular mimetype is as easy as control-click. 
+<p>
+Documentation has also been updated to reflect changes and enhancements to Rodent Filemanager.
+<p>
+Download from http://sourceforge.net/projects/xffm/files/
+<p>
+<ul>
+<li>
+Bug reports and requests, please use the trackers at sourceforge: <a href="http://sourceforge.net/projects/xffm/">http://sourceforge.net/projects/xffm/</a>
+</li>
+<li>
+Discussion, comments or just general suggestions, are welcome at the sourceforge forums (<a href="http://sourceforge.net/projects/xffm/forums">http://sourceforge.net/projects/xffm/forums</a>) or direct mail to the author.
+</li>
+</ul>
+<p>
+<i>Enjoy</i>
+
+<p>
+
+<p>
+Rodent Gamma release 3 (aka xffm-4.7.2) is now available in source tarball and debian packages for i386 and amd64 architecture (these .deb files built on debian-squeeze also work in ubuntu, xubuntu and kubuntu).
+<p>
+
+Download from http://sourceforge.net/projects/xffm/files/
+<p>
+
+This release fixes the critical bug identified in Rodent 4.7.0 and 4.7.1 and which affected users with bookmarks which do not exist on the filesystem when the popup menu is summoned. This may happen with an gvfs smb:// path or a local path that no longer exists. For example, if you eliminate the <i>directories for dummies</i> created by some file managers for users who don't have a clue as to where to save videos, documents, downloads and the like, but don't eliminate the associated bookmarks. 
+<p>
+Thanks to Liviu and Populus for the identification and fix of this bug.
+<p>
+
+Release 4.7.2 also has an enhanced dotdesktop plugin, with more informative applications menu (see <a href="http://xffm.foo-projects.org/snapshots/dotdesktop-3.png">http://xffm.foo-projects.org/snapshots/dotdesktop-3.png</a> ) and dot-desktop file (launcher) popups (see <a href="http://xffm.foo-projects.org/snapshots/dotdesktop-4.png">http://xffm.foo-projects.org/snapshots/dotdesktop-4.png</a> ).
+<p>
+Translations have also been updated.
+<p>
+Please enjoy!
+<p>
+<i>(But don't forget that Rodent is provided as is, with no warranty, in the hope that it may be as useful to you as it is to me)</i>
+<hr><p>
+
+<p>
+Enhancements from 4.7.0:
+<p>
+<ul>
+<li> 1. Added direct size options to the "icon size" popup submenu </li>
+<li> 2. Add minimize button to desktop diagnostics window for FVWM users (namely, me). </li>
+</ul>
+
+Bug fixes from 4.7.0: 
+<ul>
+<li> 1- doubleclick on non mime-associated text file was creating the "open with" dialog instead of directly going to the default editor. Now it opens the file. </li>
+<li> 2- Bookmark items were not appearing in deskview menu. List was not being initialized.</li>
+<li> 3- Dotdesktop menu items with Exec outside users path (or nonexistant) are not to be included in popup menu. </li>
+<li> 4. Bookmarks in popup menu was not being updated when a non-rodent application was modifying them (i.e. Nautilus or similar). </li>
+<li> 5. Bookmarks monitor was missing a mutex. </li>
+<li> 6. Allow user to permanently hide desktop diagnostics window with the close button and to hide/show with the setting dialog option. </li>
+<li> 7. Fix a race condition between rodent and rodent-desk to generate mime association caches. This bug causes random crashes on initial startup of fresh installations, only once. </li>
+</ul>
+
+Notes:
+<ul>
+<li> 4.7.1 uses the same configuration directories (rfm-Gamma) and build id for user settings (5190) as 4.7.0.
+</ul>
+<p>
+<i>Enjoy!</i>
+<p>
+<title> 4.7.0 bug<title>
+A startup bug (critical) slipped by unnoticed into the  4.7.0 release. You may or may not be affected by it, depending on how your computer deals with parallel processes. The problem is in the generation of the mimetype-application association cache.
+<p>
+  If on initial startup you get any warnings of the like "refuse to write" or if you click on a text file and the open with dialog pops up instead of the default editor, then you were affected.
+<p>
+    Simple fix: remove all  traces with:<br>
+    $rm -rf  `find ~/ -name "rfm-Gamma"`
+<p>
+      Then start rodent with "rodent-desk" instead of plain "rodent".
+<p>
+      This will avoid the race and generate correct caches. The bug only occurs when the user runs rodent for the first time.<br>
+      This has been fixed in SVN for release 4.7.1.
+<p>
+      Thank you for your comprehension.
+<p>
+
+<p>
+Download from <a href=http://sourceforge.net/project/showfiles.php?group_id=70875>sourceforge</a>.
+<p>
+Rodent Gamma (aka xffm-4.7.0, or build 5190) now includes the following new features:
+<p><ul>
+<li>Inline and  <a href="http://xffm.foo-projects.org/RTFM/">online</a> User's Manual (alas! documentation!). </li>
+
+<li>Rodent icon theme is now XDG spec and includes many new icons. This means you can use the <b><i>Xfce</i></b> native Rodent icon theme</i></b> with your favorite desktop. You can also use any other desktop icon theme with Rodent Filemanager (if this is to your liking). Much appreciation is due to Pablo Morales Romero (<i>Lonerocker</i>) and the resources at Freedesktop.org for making this possible.</li>
+
+<li>Bash completion is now enabled in the lp-terminal command line and all input dialogs (where applicable). This complements the <a href="http://xffm.foo-projects.org/RTFM/RTFM.html#SECTION00048000000000000000">history autocompletion</a> which was already enabled.</li>
+
+<li><a href="http://xffm.foo-projects.org/RTFM/RTFM.html#SECTION00081000000000000000">Rodent-fgr</a> find tool stand alone application.</li>
+
+<li>New <a href="http://xffm.foo-projects.org/RTFM/RTFM.html#SECTION00055000000000000000">rodent-ps</a> plugin. This allows you to monitor all running processes and send signals with point and click ease. Easy access to all processes makes process control much quicker (for those who know what pid and signals are, of course). </li>
+
+<li>New rodent-dotdesktop plugin. This allows Rodent filemanager to process dot desktop files (or launchers) adding the following functionalities:</li>
+    <li><a href="http://xffm.foo-projects.org/snapshots/dotdesktop-2.png">Applications menu</a>. This appears in the top level menu and includes all installed programs grouped in the conventional desktop categories. So if you are stuck with a gnome panel you don't want just to have the menu, or are tired of waiting for an independent application to generate a menu, here's the small and quick solution. </li>
+<ul>
+    <li>Top level <a href="http://xffm.foo-projects.org/RTFM/RTFM.html#Flo:dotdekstop-1">Applications launcher folder</a> which contains folders for every category claimed by an installed applications. (Other filemanagers consider the user too stupid to list each and every category... no wait. No other filemanager handles categories the way Rodent does. Rodent's way of handling applications categories is the <b><i>CDE</i></b> way, which takes us back to <b><i>Xfce</i></b> core roots. Not everything has to emulate <b><i>Micro$oft</i></b> these days.)</li>
+    <li>Automatic mimetype-application association. If an installed application claims it can open files of this-or-that mimetype, then the popup menu for icons of this-or-that mimetype will have the command enabled (with the correct icon, of course).</li>
+</ul>
+
+<li>Complete translations to French, German, Russian, Spanish, Chinese and many more languages (af ar as ast az be@latin be bg bn br bs ca ca@valencia crh csb cs cy da de dz el en_CA en_GB eo es et eu fa fi fr fy ga gl gu he hi hne hr hsb hu hy ia id is it ja ka kg km kn ko ku lt lv mai mk ml mr ms nb nds ne nl nn oc or pa pl ps pt_BR pt ro ru si sk sl sq sr@ijekavianlatin sr@ijekavian sr@ije sr@latin sr sv ta te tg th tk tr ug uk uz@cyrillic uz vi wa xh zh_CN zh_HK zh zh_TW.Big5 zh_TW). </li>
+
+<li><a href="http://xffm.foo-projects.org/snapshots/folder_icons.png">Content folder icons</a>. This features puts a small icon on top of each folder to show the user what type of files the folder contains.  </li>
+
+<li>A lot of other enhancements, optimizations and bug fixes I cannot remember at this point. See <a href="http://svn.foo-projects.org/svn/xffm/CURRENT/rodent/ChangeLog">ChangeLog</a> for full details.</li>
+</ul>
+<p>
+Note: Following the spirit of Free Software, this project feeds on the 
+collaboration of literally thousands of Open Source programmers, 
+artists and translators. As is proper in an educated environment, 
+due credit to every contributor is acknowledged. If by any chance 
+you notice that a contribution you have made has not been recognized
+in the "About" dialog, please file a bug report at 
+https://sourceforge.net/p/xffm/bugs/.
+<p>
+<center><i> <b>Enjoy!</b></center></i>
+<hr><p>
+
+: 
+The comments made by Linus confirm what I have known long ago: the Xfce crowd is not made up of dummies.
+<p>
+Anyways, the next step in the xftree evolution, Rodent Gamma, is almost here. This includes several important new features, along with bug fixes and code optimizations. Among the new features you will find:
+<p>
+<ul>
+<li>** Bash completion.
+<ul>
+ <li>This is for the lp-terminal and all applicable dialogs where paths or
+ commands may be input via the keyboard. The combination of bash completion
+ and history completion make Rodent's keyboard access extremely fast
+ and powerful, as you may soon discover.</li>
+</li>
+</ul>
+<li>** Bookmarks.
+<ul>
+ <li>The standard gtkbookmarks is now used in Rodent. This means that bookmarks
+ generated in Nautilus are available in Rodent and vice versa.</li>
+
+ <li>Nautilus automatically creates bookmarks for users who don't know where
+ to put videos, music, documents or downloads, and you can easily remove
+ these with Rodent.</li>
+
+ <li>Adding or removing bookmarks in Rodent is a two click operation.
+ Nautilus, OTH, uses 2 clicks to add but a click-scroll-click-click-click
+ sequence with buttons and text to read in order to remove a bookmark
+ (are they trying to make it impossible for dummies?)</li>
+</ul>
+</li>
+
+<li>** Launchers.
+<ul>
+ <li>This is the Nautilus "terminology" for dot desktop files, which most
+ applications provide upon installation. "Shortcuts" is the term Linus
+ uses. The functionality for dealing with these files is provided by
+ a Rodent plugin and consists of
+<ul>
+  <li>--filesystem navigation through categories</li>
+  <li>--popup menu with the standard gnome/kde categories</li>
+<ul>
+     <li>N_("Accessories")</li>
+     <li>N_("Graphics applications")</li>
+     <li>N_("System Tools")</li>
+     <li>N_("Internet and Network")</li>
+     <li>N_("Games and amusements")</li>
+     <li>N_("Office Applications")</li>
+     <li>N_("Tools for software development")</li>
+     <li>N_("Audio and Video")</li>
+     <li>N_("Personal preferences")</li>
+</ul>
+    <li>NOTE: These categories are arbitrary and if you have a better
+          suggestion for the application popup menu for Rodent Gamma,
+          now's the time to speak up, before the Gamma version is released.</li>
+</ul>
+</li>
+ <li>Differences with xfce-appfinder:
+<ul>
+  <li>The available categories is only limited by the amount of categories
+  installed in the current system.</li>
+  <li>Categories have their own icon and work as a containing folder for all
+  dot desktop files which list that category as their own.</li>
+  <li>You can browse through categories instead of searching for
+  (search is taken care of with bash completion or find tool, yes?).</li>
+</ul>
+</li>
+ <li>Differences with Nautilus:
+<ul>
+  <li>Rodent will allow you to treat dot desktop files as what they
+  really are, files, not only icons to double click or  drop another icon upon.
+  Please do not interpret this difference with  Nautilus as a Nautilus
+  drawback, some consider it a feature:  dummies are meant to be fooled into
+  believing launchers are not really files so that they won't  mess things up
+  (although this does not always work:  dummies are too darn smart).</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>** Processes
+<ul>
+ <li>There was once a super stable OS system which considered everything,
+ including files, as processes. This OS system disappeared because it
+ was proprietary. In the linux world the tendency is to consider
+ everything, including processes, as part of the filesystem.
+ As a part of the filesystem, why shouldn't processes be manageable by
+ a capable filemanager?AFAIK, Rodent is the only filemanager now endowed
+ with this capability.</li>
+
+ <li>With the rodent-ps plugin, the default behavior of the stop button
+ which appears for backgrounded processes changes. Instead of sending a
+ SIGTERM (and optionally a SIGKILL), a window will open at the point in
+ the process tree where the process is located, giving options to send
+ arbitrary signals to the process (like STOP or CONT), or navigate
+ through the process tree.</li>
+
+ <li>This plugin has the option to visualize user processes (default) or
+ all processes. You may also toggle the tree structure on and off.</li>
+
+ <li>I am specially grateful to
+<ul>
+    <li>Branko Lankester &lt;lankeste@fwi.uva.nl&gt;,</li>
+    <li>Michael K. Johnson &lt;johnsonm@redhat.com&gt;,</li>
+    <li>Michael Shields &lt;mjshield@nyx.cs.du.edu&gt;,</li>
+    <li>Charles Blake &lt;cblake@bbn.com&gt;,</li>
+    <li>Albert Cahalan &lt;albert@users.sf.net&gt; and</li>
+    <li>David Mossberger-Tang</li>
+</ul>
+ for contributing the powerful and bugfree backend to this Rodent plugin.</li>
+</ul>
+</li>
+
+
+<li>** Content folder icons
+<ul>
+ <li>This features puts a small icon on top of each folder to show the user
+ what type of files the folder contains. This is a suggestion from kde
+ team to improve and make less "windowy" the Dolphin feature that maps
+ small thumbnails of contained images on folders. Advanced users will
+ not only be interested in quickly locating pictures at a glance, but
+ also pdf, source code, spreadsheets and all kinds of different files.
+ This feature is enabled by default but can be disabled in the settings
+ dialog.</li>
+</ul>
+</li>
+
+<li>** Optimized read and load
+<ul>
+ <li>For those who are interested in reading /usr/bin quickly, Rodent is now
+ about ten times faster than Nautilus. That is what multithreading in
+ multicore enviroment is all about. A search for "g_thread_create" in
+ Nautilus code gives only one match: this does not look good at all,
+ although I may be mistaken.</li>
+
+ <li>And if you really want speed, you may remove or not install the icons
+ plugin (take the Rodent out of Rodent). This will make the loading of
+ /usr/bin much faster, and cut down memory usage, but will cost you
+ in eyecandy.</li>
+</ul>
+</li>
+
+<li>** Documentation
+<ul>
+ <li>User documentation in pdf and html format will be available. This, and
+ final testing, are the items holding release at this moment.</li>
+</ul>
+</li>
+</ul>
+
+
+<center>*</center><hr><p>
+
+:  
+
+<p>
+Rodent Beta release 2 (aka xffm-4.6.4) has now been released and is yours!
+<p>
+This is a bug fix release with many optimizations and new features added.
+<p>
+The most important fix is a race which caused a dbh file corruption with a 1/25 probability on virgin startups. It would only affect the user who had the corrupt dbh file. The corrupt file could be removed with a rm -rf `find ~ -name "rfm*"`.
+<p>
+Anyways, the race condition is fixed in 4.6.4, but if you were unlucky enough with 4.6.2, just remove the rfm directories "~/.cache/rfm", "~/.local/share/rfm" and "~/.config/rfm". This will leave your directory as good as new. 
+<p>
+The most important features added to 4.6.4 are:
+<p>
+<UL>
+<li>New touch frontend: all GNU touch options are now available. Special thanks to 
+<UL>
+   <li>Paul Rubin</li>
+   <li>Arnold Robbins</li>
+   <li>Jim Kingdon</li>
+   <li>David MacKenzie</li>
+   <li>Randy Smith </li>
+</UL>
+   for the creation of such a powerful and bug free backend to rodent touch.</li>
+
+<li>Rendering is now done with cairo. This makes for prettier graphics and optimized routines.</li>
+
+<li>Rubberband selection now does up and down scrolling and will select/unselect on the fly.
+</li>
+<li>Updated translations: we now have the greater part of the world population covered.</li>
+
+<li>Remove, find, settings, touch dialogs now run in their own threads.</li>
+
+<li>Added RTFM and Help buttons for cp, mv, ln, shred and fgr.</li>
+
+<li>Added a conventional <i>About</i> dialog.</li>
+
+<li>Migrated pasteboard from server-base to thread-safe client-base.</li>
+
+<li>Variable icon/thumbnail size (per directory memory) via a <i>zoom-in/zoom-out</i> button.</li>
+</UL>
+<p>
+
+New requirements:
+<UL>
+    <li>bash (<i>n.b.</i>, this requirement has now been dropped)</li>
+    <li>librsvg &gt;= 2.26.0</li>
+    <li>cairo &gt;= 1.8.10</li>
+</UL>
+<p>
+Requirements which are now optional: (<font color=#ff0000>well, not really. Due to a missing
+ifdef/endif directive pair, libzip is still required. But the configure script won't abort if it is not found! Please excuse any inconvenience this may cause</font>)
+<UL>
+    <li>libzip</li>
+</UL>
+<p>
+A list of reported bugs fixed can be found at <a href="https://sourceforge.net/p/xffm/bugs/">https://sourceforge.net/p/xffm/bugs/</a> 
+</a>.
+<p>
+Source tarball can be downloaded from <a href="http://sourceforge.net/projects/xffm/files/4.6.4/https://sourceforge.net/projects/xffm/files/4.6.4/">http://sourceforge.net/projects/xffm/files/4.6.4/https://sourceforge.net/projects/xffm/files/4.6.4/</a>. You will also find debian i386/amd64 packages (build on squeeze) at this site.
+<p>
+<b>PPA</b> files for <i>Ubuntu</i> are not yet available, but we will try to get them online. Meanwhile, you should be able to use the source tarball or debian packages. Stay tuned.
+<p>
+Build has been tested successfully on <i>Gentoo, Debian, Ubuntu, ArchLinux</i> and <i>FreeBSD</i>. It should be fine on other <i>Linux</i> distributions too.
+<p>
+And 15 seconds to watch a video, look at
+ <a href="http://www.youtube.com/watch?v=mOafIy098dk">the release of Rodent</a>
+<p>
+<b>BTW</b>: 
+The big difference between an advanced user and a dummy, is that the first will <b>RTFM</b>. As such, Rodent's <b>FM</b> will appear shortly at http://xffm.org. Stay tuned on this too. 
+
+<center>*</center><hr><p>
+
+ <title> 
+
+A bit of Rodent (Xffm) history.
+</title>
+Going back in time, Xfce started as a CDE clone. CDE was the "Common Desktop Environment" developed by HP, Sun, Digital and other big box players for their top notch workstations. Definitely cool. Definitely not for dummies. 
+<p>
+CDE had a neat filemanager called dtfile, but this was not open source, so Xfce used a variation of Rasca's "Xtree" called "Xftree" as a filemanager. I entered the show by extending Xftree's functionality with the "glob" search engine (now "fgr"), the samba network browser "Xfsamba", the differences viewer "Xfdiff" and a set of dtfile icons, among other things.
+<p>
+Then came the migration to GTK-2. For this Xftree was rewritten as Xffm, retaining all the previous functionality and adding more. The dtfile icon set was replaced by Francois' Rodent icon theme. To distinguish Xffm as a part of Xfce, the first release was tagged 4.0.
+<p>
+Then came 4.2 and the love/hate story started. Those new to Xfce could not understand why Xffm had such a steep learning curve, while those familiar to Xftree expected the nerdy behaviour they had become used to.
+<p>
+Anyways, it was decided that Xfce would no longer distribute a filemanager: this way users could choose the new Thunar filemanager (which, as an independent software, would no longer follow the Xfce version numbers).
+<p>
+Cut loose of the xfce umbilical, xffm was adopted by foo-projects, hosted at Stockholm University. The xffm.org domain was assigned and the web page at http://xffm.org/ was put on the line. The next release of Xffm would no longer follow the Xfce version numbers, but for consistency would not be rolled back.
+<p>
+Xffm-4.5.0, which featured a new user interface (although the old nerdy treeview was still available) was released on 2006-05-24. This remained stable until 2009, when Intel gave me a multicore laptop to start doing multicore software. 
+<p>
+The new thread-safe thread-based design (code named "Rodent", for Francois' icon theme) required a rewrite of the Xffm code. For this rewrite several goals were set forth:
+<ul>
+  <li>Thread based, thread safe design</li>
+  <li>Cleaner and simpler build process</li>
+  <li>Faster and more powerful</li>
+  <li>Unnerdification (this a bit surreal, coming from a nerd)</li>
+</ul>
+<p>
+As part of the unnerdification, the old treeview is gone. To keep it simple, the graphic part is as simple as the concept developed by the guys at Palo Alto (you know, the guys who first came up with the idea of rodent ---or mouse-- for a computer). Nothing more. Simple uncluttered graphics. Along side this graphic part is the keyboard. A place to issue commands. Graphic, but not for dummies.
+<p>
+The first release of Rodent Alpha, (aka xffm-4.6.0) was in November 2010. And was presented at a conference at the University of Sonora. The second release was much more stable. This was Rodent Beta (aka xffm-4.6.2) in April 2011. The third release, code name Rodent Beta 2 (aka xffm-4.6.4) will be in a few days from today.
+<p>
+Beta 2 is much faster, much more stable and will have over 95% translation for the main non-English speaking Rodent user base (Germany, Spain, France, Ukraine and Russia), along with many other languages. This will be available very soon at the sourceforge download site.
+<center>*</center><hr><p>
+
+
+
+  After a full year's worth of coding, Rodent Beta is now released! This is release 4.6.2: build 4324 (yes, more than 500 changes since Rodent "Alpha").
+<p>
+This release consists of a source tarball and Debian 32 binaries (Ubuntu 10.04).64 bit binaries will come soon, along with Gentoo ebuild and FreeBSD port...
+<p>
+Many thanks to Greg Inda who has performed extensive testing of the software on production machines and has detected many bugs and oportunities for enhancements.
+<p>
+Rodent Beta now sports a brand new "rodent-diff" helper application (replacing aging xfdiff). With the new rodent-diff, practically all the options of the GNU diff program are available in a graphic front end. For creation of such a powerful backend to rodent-diff, we are grateful to:
+<ul>
+<li>Paul Eggert</li>
+<li>Mike Haertel</li>
+<li>David  Hayes</li>
+<li>Richard  Stallman</li>
+<li>Len Tower</li>
+</ul>
+<center>*</center><hr><p>
+
+
+  This is build 3710, (aka. 4.6.0).
+<p>
+This release consists of source tarball. Debian 32 and 64 bit binaries will come soon...
+<p>
+Many thanks to Intel Corporation for the hardware provided for thread control development and Auke Kok for the repository resources and website at <a href="http://foo-projects.org">foo-projects</a>.
+<center>*</center><p>
+</blockquote>
+ 
+
+
+
+
+</blockquote>
+
+<a name="rodent">
+<hr>
+<center>
+<h3><b>Rodent</b></h3>
+</center>
+<hr>
+<blockquote> 
+<p>
+<a name="what_is_rodent">
+<b>What is Rodent?</b>
+<p>
+Rodent is fast, small and powerful file manager for the <b>GNU</b> operating system 
+(but it also works in <b>BSD</b>). That's one way to look at it. Another way is to call it a graphic shell (that's probably more accurate).
+<ul>
+<li>Rodent wastes no space on menus or function buttons (display real estate is too valuable).</li>
+<li>All functionality is available through popup menu or keyboard action.</li>
+<li>Popup menu is context sensitive.</li>
+<li>Full lpterminal is available from keyboard.</li>
+<li>Functionality is extendible via plugin tecnology.</li>
+</ul>
+<p>
+<a name="rodent_is_not">
+<b>What Rodent is not?</b>
+<p>
+Rodent is *not* a filemanager for dummies. Emphasis is on ease of use for the
+advanced user, not the computer illiterate. Rodent is a cross between a command line terminal and an iconview filemanager: the centaur of open source filemanagers.  
+<p>
+<a name="easy">
+<b>Why is Rodent easy to use?</b>
+<p>
+Rodent is not only a point and click application, a fully functional console 
+terminal is also an integral part. In other words, you can type any command 
+from the keyboard and Rodent will have a controlling thread ready and active.
+<p>
+<a name="fast">
+<b>Why is Rodent fast?</b>
+<p>
+Rodent is fast because it uses multithread mechanisms to perform operations 
+in parallel processing. This is the fastest way to work with modern multicore 
+processors. If your processor is not multicore, you may not notice this. Readable image previews of text, image and pdf files pop up by mouse movement, greatly reducing the time required to browse through a directory of unknown files.
+<p>
+<a name="small">
+<b>Why is Rodent small?</b>
+<p>
+Rodent is small because it adds no unnecesary code. Rodent acts as a graphic
+front end for "rm", "cp", "mv", "ln", "mount", "touch", "libmagic" and your shell of
+choice. Some of the developers responsible for the widespread and excellent 
+code used by Rodent are:
+<ul>
+    <li><b>*</b> Richard M. Stallman</li>
+    <li><b>*</b> Torbjörn Granlund</li>
+    <li><b>*</b> David MacKenzie</li>
+    <li><b>*</b> Jim Meyering</li>
+    <li><b>*</b> Mike Parker</li>
+    <li><b>*</b> Paul Rubin</li>
+</ul>
+A more complete list of credits is available in the Rodent "about" dialog 
+(build &gt;=4409).
+<p>
+<a name="powerful">
+<b>Why is Rodent powerful?</b>
+<p>
+Transparent access to powerful commands such as "sudo" and "convert" allow the
+user to go beyond the scope of ordinary filemanagers. If the user types 
+"sudo rm -rf *", Rodent will attempt to do just that. As mentioned previously, 
+Rodent is *not* for dummies.
+<p>
+<a name="packages">
+<b>Required packages</b>
+<p>
+Rodent depends on the following packages:
+<p>
+<ul>
+ <li>- libXML-2.4.0 or above</li>
+ <li>- Glib 2.20.5 or above</li>
+ <li>- cairo 1.8.10 or above</li>
+ <li>- librsvg 2.26.0 or above</li>
+ <li>- GTK+ 2.20.0 or above</li>
+ <li>- intltool 0.40 or above</li>
+ <li>- libmagic (comes with the "file" utility)</li>
+ <li>- gawk (for building from source)</li>
+ <li>- libzip-0.9</li>
+
+</ul>
+<p>
+Rodent uses the following programs:
+<p>
+<ul>
+ <li>- cp</li>
+ <li>- mv</li>
+ <li>- ln</li>
+ <li>- rm</li>
+ <li>- touch</li>
+ <li>- grep</li>
+</ul>
+<p>
+<a name="software">
+<b>Included software</b>
+<p>
+The following programs are included with Rodent Applications:
+<p>
+<ul>
+ <li>- fgr</li>
+ <li>- rodent-pkg</li>
+ <li>- rodent-fgr</li>
+ <li>- rodent-diff</li>
+ <li>- rodent-root</li>
+ <li>- rodent-iconmgr</li>
+ <li>- rodent-desk</li>
+ <li>- rodent-fm (rodent)</li>
+</ul>
+<p>
+<a name="software">
+<b>Included plugins</b>
+<p>
+The following plugins are included with Rodent (all in a file hierarchy design):
+<p>
+<ul>
+ <li>- rodent-fstab (for mount/unmount physical devices)</li>
+ <li>- rodent-ps (to monitor and signal processes)</li>
+ <li>- rodent-dotdesktop (to access installed programs)</li>
+ <li>- rodent-fuse (to manage file systems in user space)</li>
+ <li>- rodent-ecryptfs (to manage encrypted file systems)</li>
+ <li>- rodent-ftp (to manage remote ftp file systems)</li>
+ <li>- rodent-sftp (to manage remote ssh file systems)</li>
+ <li>- rodent-obex (to manage remote bluetooth file systems)</li>
+ <li>- rodent-nfs (to manage remote nfs file systems)</li>
+ <li>- rodent-cifs (to manage remote cifs file systems)</li>
+ <li>- rodent-smb (to navigate Windows SMB network)</li>
+</ul>
+<p>
+<a name="Installation">
+<b>Installation from source</b>
+<p>
+The file INSTALL file  contains generic installation instructions. For a complete 
+system build you should first install latest versions of
+ <a href="#rodent">libdbh2</a>,
+ <a href="#rodent">libtubo0</a>
+ and
+ <a href="#rodent">librfm5</a>
+ and then:
+<p>
+
+<blockquote> <i>
+./configure <br>
+make <br>
+sudo make install<br>
+sudo ldconfig<br></i>
+</blockquote> 
+<p>
+Please note that for a complete build from source tarballs, 
+a full set of autotools and library development headers and m4 macros will be necessary.
+<p>
+<ul>
+ <li>- libtool-2.2.6 or better</li>
+ <li>- automake-1.10 or better</li>
+ <li>- autoconf-2.64 or better</li>
+ <li>- intltool</li>
+ <li>- headers for libraries
+ <ul>
+ <li>glib</li>
+ <li>gtk+</li>
+ <li>cairo</li>
+ <li>librsvg</li>
+ <li>libxml2</li>
+ <li>libmagic</li>
+ <li>libzip (optional)</li>
+</ul>
+</ul>
+<p>
+<a name="programs">
+<b>Optional programs</b>
+<p>
+Rodent can optionally use the following programs:
+<p>
+<ul>
+ <li>- tar, compress, zip, gzip, bzip2</li>
+ <li>- shred, mount, sudo, file, imagemagick</li>
+ <li>- sh, bash, csh, ksh, tsh</li>
+ <li>- xterm, gnome-terminal, konsole, Terminal</li>
+ <li>- xpdf, sox, mpg123, mplayer</li>
+ <li>- gv, gvim, gimp, lyx</li>
+ <li>- cdrecord, dvips, gedit, cdplay, dia</li>
+ <li>- gkrellm, xkill, abiword</li>
+ <li>- rpm, dpkg, pkg_add, pkg_info, pkg_update</li>
+ <li>- openoffice or libreoffice</li>
+
+ <li>- anything else you like.</li>
+</ul>
+<p>
+<a name="Standards">
+<b>Standards compliance</b>
+<p>
+Rodent supports the following standards/specifications:
+<p>
+  <b>*</b> POSIX.1-2001. 
+<p>
+<a name="bugs">
+<b>How to report bugs?</b>
+<p>
+Bugs should be reported at <a href="https://sourceforge.net/p/xffm/bugs/">https://sourceforge.net/p/xffm/bugs/</a>.
+<p>
+<i>Debugging Support:</i>
+Rodent currently supports three levels of debugging support, which
+can be setup using the configure flags `--with-debug` or `--with-trace`
+(check the output of `configure --help`).
+<p>
+<ul>
+  <li><i>trace:</i>	This is extremely verbose output and is not recommended 
+		unless tracking a particularly hard to trace bug.</li>
+  <li><i>debug:</i>	This should be the default for developer builds, and 
+		presents verbose output which must be filtered with
+		"grep" in order to be of any real use.</li>
+  <li><i>none:</i> 	This is the default for release builds, and presents the
+  		recommended behaviour for end users.</li>
+</ul>
+<p>
+<a name="Notes">
+<b>Notes</b>
+<p>
+<ul>
+<li>GNU's not Unix, but Unix is a beast; its plural form is <i>Unixen</i>.</li>
+<li><b><i>Rodent is provided "as is" in the hope that the package is as useful to 
+you as it is to me, but with no garantee, as put forth in the GPL-v3 
+license.</i></b></li>
+</ul>
+
+</blockquote>
+
+<!-- Never remove this mark !!! Move it (with this comment) below the news you want to appear in last position on front page -->
+<a name="stophere"></a>
+
+<!-- Bottom of all pages for all languages, no translations needed -->
+
+   </td>
+  </tr>
+ </table>
+
+<!-- grey-blue bottom stripe -->
+
+ <table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td height="25" bgcolor="#99a9c0">&nbsp;&nbsp;
+   </td>
+  </tr>
+
+<!-- centered logos at the bottom on white background -->
+  
+  <tr>
+   <td align="center" valign="middle" height="65" bgcolor="#ffffff">
+
+
+
+	<br>
+	<a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=70875&amp;type=5" width="105" height="31" border="0" alt="SourceForge.net Logo" /></a>&nbsp;&nbsp;&nbsp;
+
+<br><br>
+
+   </td>
+  </tr>
+
+<!-- copyright mention at the bottom, using a white font on a dark-blue background -->
+
+  <tr bgcolor="#154374">
+   <td height="30" align="center" valign="middle" style="color: white; font-size: 10; ">
+   	
+	<span class=foottext>&copy; 1996 - 2013</span>
+	
+   </td>
+  </tr>
+</table>
+
+</body>
+</html>

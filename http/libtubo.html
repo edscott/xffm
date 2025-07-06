@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<!-- Things to translate in this page : The title and the languages form -->
+<head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- ******************************************************************* -->
+ <title>Libtubo Interprocess Communication </title>
+<!-- ******************************************************************* -->
+ <link href="common/feuille.css" rel="stylesheet" type="text/css">
+ <link rel="shortcut icon" href="favicon.ico">
+<!-- ******************************************************************* -->
+ <meta name="description" content="The Libtubo library is small and simple function set to enable a process to run any other process in the background and communicate via the stdout, stderr and stdin file descriptors.">
+<!-- ******************************************************************* -->
+ <meta name="generator" content="Bluefish">
+ <meta name="author" content="francois">
+ <meta name="keywords" content="xffm,xfce,desktop environment,cde,filemanager,samba,x11,linux,freebsd,solaris,gtk+,icons">
+</head>
+<body bgcolor="#ffffff" style="color: #154374; font-family: arial, helvetica, sans-serif; margin-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; ">
+<!-- Main table -->
+
+<table cellpadding="0" cellspacing="0" align="center" width="100%">
+
+<!-- Top dark-blue stripe -->
+
+ <tr bgcolor="#8888aa">
+  <td height="25" colspan="3" align="right" valign="middle" style="color: white; font-size: 10; ">
+  <!--
+  <a href="http://xffm.sf.net" class="foot">Xffm.sf.net</a> | 
+  <a href=http://svn.foo-projects.org/svn/xffm/CURRENT/libraries/libtubo class="foot">ViewSVN</a> | 
+  <a href="http://svn.foo-projects.org/listing.php?repname=xffm" class="foot">WebSVN</a> | 
+  <a href="http://bugzilla.xfce.org/" class="foot">Xfce Bug Tracker</a> | 
+  <a href="http://www.xfcewiki.org" class="foot">Xfce Wiki</a> | 
+  <a href="http://forum.xfce.org" class="foot">Xfce Forum</a> | 
+  <a href="http://blog.xfce.org" class="foot">Xfce DevBlog</a>
+  -->
+  &nbsp;
+  </td>
+ </tr>
+ </table>
+
+
+  <center>
+  <h1>
+<!-- ******************************************************************* -->
+  <font color=#ff0000>Libtubo Interprocess Communication</font><br>
+<!-- ******************************************************************* -->  
+  </h1>
+  <h2>
+  beyond plain file management...
+  </h2>
+  </center>
+
+    <table cellpadding="0" cellspacing="0" width="100%">
+
+<!-- Main (left) menu -->
+
+ <tr>
+  <td width="20%" height="0" colspan="0" rowspan="0" valign="top" bgcolor="#e9f3ff" style="color: #154374; font-size: 12px; padding-bottom: 15px; padding-left: 1px; padding-right: 15px; padding-top: 20px;">
+
+
+<ul class="menu">
+<!-- ******************************************************************* -->
+
+
+<li><a href="http://sourceforge.net/p/xffm/tubo/ci/master/tree/">GIT</a></li>
+<li><a href="docs/libtubo/">Documentation</a></li>
+<li><a href="http://sourceforge.net/projects/xffm/files/libtubo/" class="mbold">Download</a></li>
+<!-- ******************************************************************* -->
+<!--<li><a href="http://www.xfce.org/index.php?page=mailinglists&lang=en" class="mbold">Mailing lists</a></li>-->
+<li><!--a href="http://svn.foo-projects.org/svn/xffm/CURRENT/libraries/libtubo/ChangeLog" class="mbold">ChangeLog</a></li-->
+
+<li><a href="http://xffm.org/" class="mbold">Xffm.org</a></li>
+</ul> 
+  </td>
+
+<!-- Here starts the main content of the page -->
+
+  <td width="80%" align="left" valign="top" bgcolor="#ffffff" style="color: #154374; font-size: 12; padding-bottom: 20; padding-left: 25; padding-right: 40; padding-top: 20; text-align: justify; line-height: 18px; ">
+
+
+<br>
+<!-- ******************************************************************* -->
+<center><h1>Libtubo Interprocess Communication </h1></center>
+<font color=#005500>
+Libtubo Interprocess Communication is small and simple function set to enable a process to run any other process in the background and communicate via the stdout, stderr and stdin file descriptors. This library is used by Rodent filemanager but is also available here for other programs to use freely. 
+<br>
+<br>
+<b>Description</b><br><blockquote> 
+
+The functionality of libtubo is similar to the glib function g_spawn_async_with_pipes() except that all pipe setup and monitoring is taken care of. The calling function only has to provide the functions with which to process the input/output of the remote process. These must be thread-safe functions.
+<br></blockquote>
+<b>License</b><br><blockquote> GPL v3. Which means you can use the library in open source applications: I share my code, so you share yours. It's all about free software.  
+<br></blockquote>
+<b>Development</b><br><blockquote> 
+The library first appeared in the year 2000 in the xfce3 desktop as part of the xfsamba application. From then on the code has improved constantly, becoming a threaded version in 2010. Examples of the application of the Tubo_threads function can be found in the current Rodent Filemanager code. Documentation can be found at the library home page: http://xffm.org/libtubo.html 
+</b>.<br>
+
+<br></blockquote><br><blockquote>
+
+API Reference Manual can be examined <a href="docs/libtubo/">here</a>. </blockquote>
+
+<!-- ******************************************************************* -->
+<br>
+
+<b>News:</b>
+<blockquote> 
+5.0.0 released on June 21, 2013. Code now at <a href="https://sourceforge.net/p/xffm/tubo/ci/master/tree/">GIT</a>.
+</blockquote>
+<blockquote> 
+Threaded version (4.7.6) released on March 13, 2012.
+</blockquote>
+    
+<blockquote> 
+The location of the SVN repository has moved from mocha.foo-projects.org to <a href="http://svn.foo-projects.org/svn/xffm/CURRENT/rodent/libs/tubo">svn.foo-projects.org</a>
+</blockquote>
+    <blockquote>
+    <font color=#ff0000> This is tubo, </font>  <font color=#008800>"Libtubo Interprocess Communication"</font>
+    </blockquote>
+
+<!-- Never remove this mark !!! Move it (with this comment) below the news you want to appear in last position on front page -->
+<a name="stophere"></a>
+
+<!-- Bottom of all pages for all languages, no translations needed -->
+
+   </td>
+  </tr>
+ </table>
+
+<!-- grey-blue bottom stripe -->
+
+ <table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td height="25" bgcolor="#99a9c0">&nbsp;&nbsp;
+   </td>
+  </tr>
+
+<!-- centered logos at the bottom on white background -->
+  
+  <tr>
+   <td align="center" valign="middle" height="65" bgcolor="#ffffff">
+
+
+
+	<br>
+	<a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=70875&amp;type=5" width="105" height="31" border="0" alt="SourceForge.net Logo" /></a>&nbsp;&nbsp;&nbsp;
+
+<br><br>
+
+   </td>
+  </tr>
+
+<!-- copyright mention at the bottom, using a white font on a dark-blue background -->
+
+  <tr bgcolor="#154374">
+   <td height="30" align="center" valign="middle" style="color: white; font-size: 10; ">
+   	
+	<span class=foottext>&copy; 1996 - 2006</span>
+	
+   </td>
+  </tr>
+</table>
+
+</body>
+</html>

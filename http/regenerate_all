@@ -1,0 +1,18 @@
+#!/bin/sh
+./index.pl > index.html
+./fgr.pl > fgr.html
+./scramble.pl > scramble.html
+./libtubo.pl > libtubo.html
+./libxffm.pl > libxffm.html
+./xffm-gui.pl > xffm-gui.html
+./xffm-filemanager.pl > xffm-filemanager.html
+./xffm-icons.pl > xffm-icons.html
+./xffm-applications.pl > xffm-applications.html
+./xffm-book.pl > xffm-book.html
+./xffm-fstab.pl > xffm-fstab.html
+./xffm-locate.pl > xffm-locate.html
+./xffm-proc.pl > xffm-proc.html
+./xffm-recent.pl > xffm-recent.html
+./xffm-samba.pl > xffm-samba.html
+./xffm-trash.pl > xffm-trash.html
+./xfdiff.pl > xfdiff.html

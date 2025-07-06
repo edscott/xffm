@@ -1,0 +1,447 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<!-- Things to translate in this page: The title and the languages form -->
+<head> <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15">
+<!-- ******************************************************************* -->
+ <title>@SPECIFIC_APP@</title>
+<!-- ******************************************************************* -->
+ <link href="common/feuille.css" rel="stylesheet" type="text/css">
+ <link rel="shortcut icon" href="favicon.ico">
+<!-- ******************************************************************* -->
+ <meta name="description" content="Rodent is fast, small and powerful file manager for the GNU operating system (but it also works in BSD). Rodent is *not* a filemanager for dummies. Emphasis is on ease of use for the advanced user, not the computer illiterate. 
+<br>
+
+">
+<!-- ******************************************************************* -->
+ <meta name="generator" content="Bluefish">
+ <meta name="author" content="francois">
+ <meta name="keywords" content="xffm,rodent filemanager,linux,freebsd,gtk+">
+</head>
+<body bgcolor="#ffffff" style="color: #154374; font-family: arial, helvetica, sans-serif; margin-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; ">
+<!-- Main table -->
+
+<table cellpadding="0" cellspacing="0" align="center" width="100%">
+
+<!-- Top dark-blue stripe -->
+
+ <tr bgcolor="#8888aa">
+  <td align="left" valign="middle">
+  <img height=150 src="/images/LOGO_BP.png">
+  </td>
+  <td height="45" colspan="3" align="center" valign="middle" style="color: white; font-size: 36; ">
+<font color=#000000>@SPECIFIC_APP@</font>
+<br>
+<font color=#333333 size=4>or is it really a graphic shell...</font>
+
+  
+  <!--
+  -->
+  &nbsp;
+  </td>
+ </tr>
+</table>
+
+
+    <table cellpadding="0" cellspacing="0" width="100%">
+
+<!-- Main (left) menu -->
+
+ <tr>
+  <td width="20%" height="0" colspan="0" rowspan="0" valign="top" bgcolor="#e9f3ff" style="color: #154374; font-size: 12px; padding-bottom: 15px; padding-left: 1px; padding-right: 15px; padding-top: 20px;">
+<a href="http://xffm.sourceforge.net/screenshots/@SCREENSHOT@"><img src="http://xffm.sourceforge.net/screenshots/@SCREENSHOT@" style="width: 75%; height: 75%"></a><br>
+
+<ul class="menu">
+<!-- ******************************************************************* -->
+
+<!--<li><a href=screenshots/ class=mbold>Screenshots</a></li>
+<li><a href="docs/">Documentation</a></li>-->
+<li> <a href="https://i3wm.org/" class="mbold">Best desktop (i3)</a> </li>
+<!--
+<li> <a href="RTFM/RTFM.html" class="mbold">Documentation (very old)</a> </li>
+-->
+<li> <a href="http://sourceforge.net/p/xffm/xffm+/ci/master/tree/" class="mbold">Source code</a> (GIT) </li>
+<li> <a href="http://sourceforge.net/projects/xffm/files" class="mbold">Tarballs</a> </li>
+<li> <a href="https://sourceforge.net/p/xffm/support-requests/" class="mbold">Developers forum</a> </li>
+<!--
+<li> <a href="https://sourceforge.net/p/xffm/discussion/" class="mbold">Users Forum</a> </li>
+-->
+<li>Recommended Linux distributions:</li>
+<ul>
+<li><a href="http://www.archlinux.org/">Arch Linux</a></li>
+<li><a href="http://www.ubuntu.com/">Kubuntu Linux</a></li>
+</ul>
+<li> <a href="https://sourceforge.net/p/xffm/bugs/" class="mbold">Bug reports</a> </li>
+
+</ul> 
+  </td>
+
+<!-- Here starts the main content of the page -->
+
+  <td width="80%" align="left" valign="top" bgcolor="#ffffff" style="color: #154374; font-size: 12; padding-bottom: 20; padding-left: 25; padding-right: 40; padding-top: 20; text-align: justify; line-height: 18px; ">
+
+
+<br>
+
+<center>  
+<h1><font color=#ff0000>@SPECIFIC_APP@</font></h1>
+</center>
+<ul>
+<li><a href="#latest_news">Latest news</a></li>
+Rodent applications has continued to evolve. From the xffm filemanager in the XFCE 
+desktop environment, it evolved into the Rodent applications with Rodent icon theme.
+All that in gtk2/gtk3.
+<p>
+Then it went from C to C++ to become xffm+, when support for gtk2 was dropped, becoming
+a gtk3 app.
+<p>
+And now the code has gone from C++ to template based C++, in gtk3/gtk4, with executables
+xffm and xffm4 (yeah the gtk3 version has readopted the gtk2 executable name).
+And yes, the gtk4 version really rocks! Development will continue on this version until
+gtk-4.24 arrives.
+<p>
+If you really don't fall into the general user category and want a developers
+environment, all you need is the i3 window manager, Xorg server, and xffm, along
+with your favorite editor.
+<p>
+
+<a name="latest_news">
+<hr>
+<center>
+<h3><b>Latest news</b></h3>
+</center>
+<hr>
+LATEST_NEWS
+<a name="rodent">
+<hr>
+<center>
+<h3><b>xffm+</b></h3>
+</center>
+<hr>
+<blockquote> 
+<p>
+<a name="what_is_rodent">
+<b>What are Rodent applications?</b>
+<p>
+Rodent applications are build around the rodent-fm file manager environment. This file manager
+is a fast, small and powerful file manager for the <b>GNU</b> operating system 
+(but it also works in <b>BSD</b>). That's one way to look at it. Another way is to call it a graphic shell (that's probably more accurate).
+<ul><li>Rodent-fm</li>
+<ul>
+<li>Rodent-fm wastes no space on menus or function buttons (display real estate is too valuable).</li>
+<li>All functionality is available through popup menu or keyboard action.</li>
+<li>Popup menu is context sensitive.</li>
+<li>Full lpterminal is available from keyboard.</li>
+<li>Functionality is extendible via plugin tecnology.</li>
+<li>And most important of all, functionality for copy, move, remove, rename, link, touch, shred,
+mount/unmount, and a plethora of other commands is provided by the basic GNU (or BSD on that
+platform) which provide the most time tried and complete set of commands available.</li>
+<li>Plugin design with default plugins:
+<ul>
+<li>For mounting/unmounting local filesystems</li>
+<li>For monitoring and controlling system processes</li>
+<li>For navigating SMB networks</li>
+<li>For mounting and navigating NFS file systems</li>
+<li>For mounting and navigating sshfs file systems</li>
+<li>For mounting and navigating curlftpfs file systems</li>
+<li>For mounting and navigating ecrypt file systems</li>
+<li>For mounting and navigating obexfs file systems</li>
+<li>For mounting and navigating cifs file systems</li>
+<li>For associating and accessing third party software</li>
+</ul>
+</UL>
+</ul>
+<ul><li>Rodent-fgr</li>
+<ul>
+<li>Rodent-fgr is a search tool based on coordination of command line glob and GNU grep.</li>
+<li>Search by regular expressions or extended regexps.</li>
+<li>One click edit on search results.</li>
+<li>Search by ctime, mtime or atime</li>
+<li>Search on match or no match, on full words or full lines.</li>
+<li>Searches may be conducted in parallel</li>
+</UL>
+</ul>
+<ul><li>Rodent-diff</li>
+<ul>
+<li>Front end for GNU (or BSD) diff command.</li>
+<li>Patch creation in all available output formats.</li>
+<li>Compare files or directories.</li>
+<li>Ability to ignore case.</li>
+<li>Ability to treat whitespace and empty lines inteligently.</li>
+<li>Access to powerful options of GNU (or BSD) diff.</li>
+</UL>
+</ul>
+<ul><li>Rodent-pkg</li>
+<ul>
+<li>For searching and managing binary packages on FreeBSD systems.</li>
+<li>For searching and managing binary packages on OpenSUSE systems.</li>
+<li>For searching and managing binary packages on CentOS systems.</li>
+</UL>
+</ul>
+<ul><li>Rodent-iconmgr</li>
+<ul>
+<li>For customizing icons used by rodent applications.</li>
+<li>For navigating through currently set icon theme.</li>
+</UL>
+</ul>
+<P>
+<a name="rodent_is_not">
+<b>What Rodent applications are not?</b>
+<p>
+Rodent applications, especially the file manager,  is *not* for dummies.
+ Emphasis is on ease of use for the
+advanced user, not the computer illiterate. The file manager provides full
+keyboard access to system command, which are executed in background in
+parallel. This file manager approach is a cross between a command line terminal 
+and an iconview filemanager: an open source centaur.  
+<p>
+<a name="easy">
+<b>Why are Rodent applications are easy to use?</b>
+<p>
+Rodent applications are not only a point and click application, a fully functional console 
+terminal is also an integral part. In other words, in the file manager you can type any command 
+from the keyboard and have a controlling thread ready and active.
+<p>
+<a name="fast">
+<b>Why are Rodent applications fast?</b>
+<p>
+Rodent is fast because it uses multithread mechanisms to perform operations 
+in parallel processing. This is the fastest way to work with modern multicore 
+processors. If your processor is not multicore, you may not notice this. Readable image previews of text, image and pdf files pop up by mouse movement, greatly reducing the time required to browse through a directory of unknown files.
+<p>
+<a name="small">
+<b>Why are Rodent applications small?</b>
+<p>
+Rodent applications are small because they add no unnecesary code. The file manager, for
+instance, acts as a graphic
+front end for "rm", "cp", "mv", "ln", "mount", "touch", "libmagic" and your shell of
+choice. Some of the developers responsible for the widespread and excellent 
+code used by Rodent are:
+<ul>
+    <li><b>*</b> Richard M. Stallman</li>
+    <li><b>*</b> Torbjörn Granlund</li>
+    <li><b>*</b> David MacKenzie</li>
+    <li><b>*</b> Jim Meyering</li>
+    <li><b>*</b> Mike Parker</li>
+    <li><b>*</b> Paul Rubin</li>
+</ul>
+A more complete list of credits is available in the Rodent "about" dialog (build &gt;=4409). 
+Need we say more?
+<p>
+<a name="powerful">
+<b>Why are Rodent applications powerful?</b>
+<p>
+Transparent access to powerful commands such as "sudo" and "convert" allow the
+user to go beyond the scope of ordinary file managers. If the user types 
+"sudo rm -rf *", Rodent will attempt to do just that (if proper autorization credentials are
+provided). As mentioned previously, 
+Rodent applications are *not* for dummies. Yeah, I know there are a lot of dummies out there,
+but Rodent applications are not out to win their souls.
+<p>
+<a name="packages">
+<b>Required packages</b>
+<p>
+Rodent applications depend on librfm. This library (in a separate package) in turn depends on
+ the following packages:
+<p>
+<ul>
+ <li>- libXML-2.4.0 or above</li>
+ <li>- Glib 2.20.5 or above</li>
+ <li>- cairo 1.8.10 or above</li>
+ <li>- librsvg 2.26.0 or above</li>
+ <li>- GTK+ 2.20.0 or above</li>
+ <li>- intltool 0.40 or above</li>
+ <li>- libmagic (comes with the "file" utility)</li>
+ <li>- gawk (for building from source)</li>
+ <li>- libzip-0.9</li>
+
+</ul>
+<p>
+Rodent uses the following system programs (amongst others):
+<p>
+<ul>
+ <li>- cp</li>
+ <li>- mv</li>
+ <li>- ln</li>
+ <li>- rm</li>
+ <li>- touch</li>
+ <li>- grep</li>
+</ul>
+<p>
+<a name="software">
+<b>Included software</b>
+<p>
+The following programs are included with Rodent Applications:
+<p>
+<ul>
+ <li>- fgr</li>
+ <li>- rodent-pkg</li>
+ <li>- rodent-fgr</li>
+ <li>- rodent-diff</li>
+ <li>- rodent-root (to set desktop background)</li>
+ <li>- rodent-iconmgr</li>
+ <li>- rodent-desk</li>
+ <li>- rodent-fm (aka rodent)</li>
+</ul>
+<p>
+<a name="software">
+<b>Included plugins</b>
+<p>
+The following plugins are included with Rodent-fm (all in a file hierarchy design):
+<p>
+<ul>
+ <li>- rodent-fstab (for mount/unmount physical devices)</li>
+ <li>- rodent-ps (to monitor and signal processes)</li>
+ <li>- rodent-dotdesktop (to access installed programs)</li>
+ <li>- rodent-fuse (to manage file systems in user space)</li>
+ <li>- rodent-ecryptfs (to manage encrypted file systems)</li>
+ <li>- rodent-ftp (to manage remote ftp file systems)</li>
+ <li>- rodent-sftp (to manage remote ssh file systems)</li>
+ <li>- rodent-obex (to manage remote bluetooth file systems)</li>
+ <li>- rodent-nfs (to manage remote nfs file systems)</li>
+ <li>- rodent-cifs (to manage remote cifs file systems)</li>
+ <li>- rodent-smb (to navigate Windows SMB network)</li>
+</ul>
+<p>
+<a name="Installation">
+<b>Installation from source</b>
+<p>
+You can build each application individually or do a parallel build of all applications.
+The file INSTALL file  contains generic installation instructions. For a complete 
+system build you should first install latest versions of
+ <a href="#rodent">libdbh2</a>,
+ <a href="#rodent">libtubo0</a>
+ and
+ <a href="#rodent">librfm5</a>
+ and then:
+<p>
+
+<blockquote> <i>
+./configure <br>
+make <br>
+sudo make install<br>
+sudo ldconfig<br></i>
+</blockquote> 
+<p>
+Please note that for a complete build from GIT source, 
+a full set of autotools and library development headers and m4 macros will be necessary.
+<p>
+<ul>
+ <li>- libtool-2.2.6 or better</li>
+ <li>- automake-1.10 or better</li>
+ <li>- autoconf-2.64 or better</li>
+ <li>- intltool</li>
+ <li>- headers for libraries
+ <ul>
+ <li>glib</li>
+ <li>gtk+</li>
+ <li>cairo</li>
+ <li>librsvg</li>
+ <li>libxml2</li>
+ <li>libmagic</li>
+ <li>libzip (optional)</li>
+</ul>
+</ul>
+<p>
+<a name="programs">
+<b>Optional programs</b>
+<p>
+Rodent-fm can optionally use the following programs:
+<p>
+<ul>
+ <li>- tar, compress, zip, gzip, bzip2</li>
+ <li>- shred, mount, sudo, file, imagemagick</li>
+ <li>- sh, bash, csh, ksh, tsh</li>
+ <li>- xterm, gnome-terminal, konsole, Terminal</li>
+ <li>- xpdf, sox, mpg123, mplayer</li>
+ <li>- gv, gvim, gimp, lyx</li>
+ <li>- cdrecord, dvips, gedit, cdplay, dia</li>
+ <li>- gkrellm, xkill, abiword</li>
+ <li>- rpm, dpkg, pkg_add, pkg_info, pkg_update</li>
+ <li>- openoffice or libreoffice</li>
+
+ <li>- anything else you like.</li>
+</ul>
+<p>
+<a name="Standards">
+<b>Standards compliance</b>
+<p>
+Rodent supports the following standards/specifications:
+<p>
+  <b>*</b> POSIX.1-2001. 
+<p>
+<a name="bugs">
+<b>How to report bugs?</b>
+<p>
+Bugs should be reported at <a href="https://sourceforge.net/p/xffm/bugs/">https://sourceforge.net/p/xffm/bugs/</a>.
+<p>
+<i>Debugging Support:</i>
+Rodent applications currently supports three levels of debugging support, which
+can be setup using the configure flags `--with-debug` or `--with-trace`
+(check the output of `configure --help`).
+<p>
+<ul>
+  <li><i>trace:</i>	This is extremely verbose output and is not recommended 
+		unless tracking a particularly hard to trace bug.</li>
+  <li><i>debug:</i>	This should be the default for developer builds, and 
+		presents verbose output which must be filtered with
+		"grep" in order to be of any real use.</li>
+  <li><i>none:</i> 	This is the default for release builds, and presents the
+  		recommended behaviour for end users.</li>
+</ul>
+<p>
+<a name="Notes">
+<b>Notes</b>
+<p>
+<ul>
+<li>GNU's not Unix, but Unix is a beast; its plural form is <i>Unixen</i>.</li>
+<li><b><i>Rodent is provided "as is" in the hope that the package is as useful to 
+you as it is to me, but with no garantee, as put forth in the GPL-v3 
+license.</i></b></li>
+</ul>
+
+</blockquote>
+
+<a name="stophere"></a>
+
+<!-- Bottom of all pages for all languages, no translations needed -->
+
+   </td>
+  </tr>
+ </table>
+
+<!-- grey-blue bottom stripe -->
+
+ <table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td height="25" bgcolor="#99a9c0">&nbsp;&nbsp;
+   </td>
+  </tr>
+
+<!-- centered logos at the bottom on white background -->
+  
+  <tr>
+   <td align="center" valign="middle" height="65" bgcolor="#ffffff">
+
+
+
+	<br>
+	<a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=70875&amp;type=5" width="105" height="31" border="0" alt="SourceForge.net Logo" /></a>&nbsp;&nbsp;&nbsp;
+
+<br><br>
+
+   </td>
+  </tr>
+
+<!-- copyright mention at the bottom, using a white font on a dark-blue background -->
+
+  <tr bgcolor="#154374">
+   <td height="30" align="center" valign="middle" style="color: white; font-size: 10; ">
+   	
+	<span class=foottext>&copy; 1996 - 2013</span>
+	
+   </td>
+  </tr>
+</table>
+
+</body>
+</html>

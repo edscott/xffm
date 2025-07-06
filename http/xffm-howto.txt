@@ -1,0 +1,116 @@
+The xfce development team is please to inform that the feature of icons
+on the desktop is now implemented for xffm-4.3.3.
+
+The implementation consists of a very minimalistic filemanager that runs
+on the root window and uses the xffm libraries for simple stuff like
+copying and rendering icons and processing double click.
+
+Questions and answers-------------------------------------
+
+Q. How do I start the desktop?
+
+The command to start the desktop is xffm-deskview, but xffm-desktop should also work.
+
+Q. Why does the desktop start when I run xffm?
+
+This is the default. To avoid starting the desktop, define the environment variable DISABLE_DESKTOP. You can do this by using the mcs-manager or executing xffm with the command:
+$DISABLE_DESKTOP=x xffm
+
+Q. How can I add files to the desktop?
+
+By drag and drop. Note that the default drag and drop is to symlink.
+
+Q. How can I add a program launcher to the desktop?
+
+Just drag and drop any .desktop file to the desktop.
+
+Q. Where can i find .desktop files?
+
+This depends on your operating system distribution. To find those for your particular system, execute the "applications" plugin from the top level xffm window.
+
+Desktop popup menu
+
+Q. Does the desktop have any popup menu?
+
+Yes. You must situate the cursor over any icon on the desktop and press button 3.
+
+Q. Why is there no pop up menu with button 3 when the cursor is *not* over an icon?
+
+The default is to let oldstyle window managers (like xfwm3 and fvwm)
+handle the popup menu. If you are not using one of these window managers, keep reading.
+
+Q. How can I make the popup menu used by xfdesktop appear in xffm-deskview?
+
+Define the environment variable USE_DESKTOP_MENU from the mcs manager
+plugin. This feature can be turned on and off on the run but requires
+that libxfcegui4 be installed previous to the installation of xffm.
+
+Q. I don't have the mcs-manager running and still want the 
+xfdesktop menu, how then?
+
+Execute something like this: "USE_DESKTOP_MENU=x xffm-deskview"
+
+Q. I can see the xfdesktop menu, but why can't I see the icons alongside
+the menu entries?
+
+The icons make the menu heavier, and are off by default. To enable, use
+the mcs manager to define the environmente variable
+USE_DESKTOP_MENU_ICONS.
+
+---- Background
+Q. How do I set the background color?
+
+Use a named color (like brown, seagreen, navyblue, etc.) listed
+in /usr/lib/X11/rgb.txt, for the environment variable DESKTOP_COLOR.
+The default background color is black.
+
+Q. How can I set the default background for the desktop?
+
+Define the environment variable DESKTOP_BACKGROUND_IMAGE to the path of the image file you wish to use as background.
+
+Q. How do I change the image background?
+
+After xffm-deskview running, use xffm to select the image you want to use. Then choose the popup menu item "Use as background image" and this will change the background to the selected image. 
+
+Q. How can I make the background image change at timed intervals?
+
+Just write a script that executes xffm-root (the background setting program distributed with xffm) to set the root background at the timed interval. Xffm-deskview will watch for changes in the root background and update accordingly. You can also use the program "fvwm-root -r" for this purpose.
+
+Installation-----------------------------------------------------
+
+Q. I just want to install xffm-deskview, but not xffm-treeview nor
+xffm-iconview nor xfdiff nor anything else. How then?
+
+In future versions this will be configurable, but not today. You might
+try a "make" and then a selective "make install" on individual
+directories of the xffm distribution.
+
+Q. Why is the preferences menu item from xffm-treeview gone?
+
+All preferences are now set by environment variables. To see what they are, read on.
+
+Q. What do the environment variables do?
+
+If you set an environment variable to anything but a null string, you will enable or disable a feature. This is the table for release 4.3.3:
+
+XFFM_DEFAULT_UNLINK=make the unlink the default action for remove.
+XFFM_HOLD_XTERM=hold xterms after they exit.
+XFFM_USE_SUDO=allow xffm to invoke sudo for mounting disk volumes.
+TERMCMD=terminal command to be used.
+DESKTOP_COLOR=solid background color used by desktop.
+DESKTOP_BACKGROUND_IMAGE=path to default background image.
+USE_DESKTOP_MENU=use xfdesktop popup menu.
+USE_DESKTOP_MENU_ICONS=use icons with xfdesktop popup menu.
+DISABLE_DESKTOP=don't start desktop with xffm.
+SMB_USER=user%password to use for samba browsing.
+XFFM_SINGLE_CLICK_NAVIGATION=single click navigation for xffm-iconview.
+XFFM_DRAG_DOES_COPY=do copy instead of move for drag and drop operations.
+XFFM_FORCE_DIAGNOSTICS=show all diagnostics output, always.
+XFFM_DISABLE_DIAGNOSTICS=do not show diagnostics output.
+XFFM_DISABLE_MONITOR=do not automatically reload directories that change.
+XFFM_DISABLE_TEXTCOLORS=do not use text colors in xffm-treeview.
+XFFM_DISABLE_CELL_EDIT=do not allow cell editing in xffm-treeview.
+XFFM_DISABLE_TIPS=do not show popup tips over icons in xffm-iconview.
+XFFM_MAX_PREVIEW_SIZE=maximum size in KB of image files to be previewed.
+
+

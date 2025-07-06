@@ -1,58 +1,154 @@
-SemiDeadlock: After a symlink operation, window is no longer being refreshed. Seems like program has crashed, but no. It is still working, but window no longer refreshes. Goes to black
-screen, but still is working. Menus will appear, tooltips. Will react to button press and everything, but no output to window. Seems like the refresh got stuck in a lost thread.
-Since this happened in a paste where symlink was selected, check whether the symlink op was threaded, and avoid this.
+
+BUG: on chenging directory from file selector using pathbar:
+(process:45791): Gtk-CRITICAL **: 08:29:47.256: gtk_notebook_get_current_page: assertion 'GTK_IS_NOTEBOOK (notebook)' failed
+(process:45791): Gtk-CRITICAL **: 08:29:47.256: gtk_notebook_get_nth_page: assertion 'GTK_IS_NOTEBOOK (notebook)' failed
+(process:45791): GLib-GObject-CRITICAL **: 08:29:47.256: g_object_get_data: assertion 'G_IS_OBJECT (object)' failed
 
 
 When you select text from an entry in find dialog, it is not always copied to
 the button 2 X clipboard. This is bad. Must put in controller so that whenever
 stuff is selected from entries, it is copied to the Xorg button 2 clipboard. I've gotta look up how to do that...
 
-Window size for find dialog incorrect with es tranlation: should be adaptive. Seems hard to fix, as the mainWindow is added after the DialogComplex is realized. Realization takes place to ensure dialogization in X11.
+Add zip option to tar dialog.
+
+untar dialog
+
+select by regexp
+
+monitor updating:
+1. New items not ordered 
+2. On several items dropped, not appearing. This could be fixed, with drop or paste, maybe disable monitor until async is done.
+hack: if dir size is less than threshold, then keep an old time monitor running.
+
+on add window create
+on zap window terminate
+if window ! current, return.
+if window ! local type return.
+if dirsize lt threshold return. 
+check # items --> reload
+check whatever --> reload.
+
+But lets look into previous monitor functionality...
+Last recovered code at sf.net xffm-4.5.0
+All CVS/SVN stuff no longer available
+
+Seems like regexp stuff might be better to return to 4.5.0 filter
+functionality, create gridview according to filter, established by 
+regexp.
+
+monitor stuff (not quite complete yet)
+
+#define MAX_LOAD_TIME 2
+
+G_MODULE_EXPORT
+gboolean update_check(record_entry_t *en){
+    long v1,v2;
+    struct stat st;
+    if(!en || !en->path || strcmp(en->path, "/dev") == 0){
+	TRACE("!en->path || strcmp(en->path, \"/dev\") == 0\n");
+	return FALSE;
+    }
+    if (IS_DIR(en->type) && en->load_time > MAX_LOAD_TIME) {
+        SET_CHANGED(en->type);
+        TRACE("load_time (%ld) for %s takes too long for automatic monitor...",
+		    (long)en->load_time,en->path);
+        return FALSE;
+    }
+    if (stat(en->path,&st)<0) return FALSE;	
+    v1=en->st->st_mtime + en->st->st_ctime + en->st->st_dev;
+    v2=st.st_mtime + st.st_ctime + st.st_dev;
+    TRACE("%ld+%ld+%ld=%ld  %ld+%ld+%ld=%ld",
+	    (long)en->st->st_mtime,(long)en->st->st_ctime,(long)en->st->st_dev,v1,
+	    (long)st.st_mtime,(long)st.st_ctime,(long)st.st_dev,v2);
+    
+    if (!IS_CHANGED(en->type)){
+	if (v1 == v2) {
+	    TRACE("%s: v1 == v2 && !IS_CHANGED: return FALSE",en->path);
+	    return FALSE;
+	} else {
+	    TRACE("%s: v1 != v2 && !IS_CHANGED: return FALSE (+C)",
+		    en->path);
+	    memcpy(en->st,&st,sizeof(struct stat));
+	    SET_CHANGED(en->type);
+	    return FALSE;
+	}
+    } else { /*  (IS_CHANGED(en->type)) */
+	if (v1 == v2) {
+	    TRACE("%s: v1 == v2 && IS_CHANGED: return TRUE (-C)",en->path);
+	    memcpy(en->st,&st,sizeof(struct stat));
+	    UNSET_CHANGED(en->type);
+	    return TRUE;
+	} else { /*  (v1 != v2) */
+	    TRACE("%s: v1 != v2 && IS_CHANGED: return FALSE",en->path);
+	    memcpy(en->st,&st,sizeof(struct stat));
+	    //UNSET_CHANGED(en->type);
+	    return FALSE;
+	}
+    }
+}
+  ///////////////////////////////////  
+	/* calculate checksums for the directory (for later use by monitor) 
+	 * */
+	for(j = 0; j < xfdir_p->pathc; j++) 
+	    if (xfdir_p->gl[j].en && xfdir_p->gl[j].en->st)
+	{
+	    tama += xfdir_p->gl[j].en->st->st_size;	
+	    en->checksum += (xfdir_p->gl[j].en->st->st_mtime + xfdir_p->gl[j].en->st->st_ctime);
+	}
+	set_entry_tag(en, tama);
+	if (xfdir_p->pathc > 52) save_xfdir_cache(en,xfdir_p);
+	
+    }
+    return TRUE;
+/////////////////////////
+
+	/* calculate checksums for the directory (for later use by monitor) 
+	 * */
+	TRACE("---------cache read");
+	if (!xfdir_p->pathc) return TRUE;
+	for(j = 0; j < xfdir_p->pathc; j++) if (xfdir_p->gl[j].en && xfdir_p->gl[j].en->st)
+	{
+	    tama += xfdir_p->gl[j].en->st->st_size;	
+	    en->checksum += (xfdir_p->gl[j].en->st->st_mtime + xfdir_p->gl[j].en->st->st_ctime);
+	}
+///////////////////////////////////////
+
+    if (filter && strcmp(filter,"*") != 0) {
+	g_free(en->filter);
+	en->filter = g_strdup(filter);
+	preg = compile_regex_filter(en->filter,SHOWS_HIDDEN(en->type));
+    }
+    
+//////////////////////////////////////
 
 
-*** BUG: need to chain link dialogs, when a dialog1 has a dialog2 and enter
-signal to dialog1_parent received, then dialog2 must raise, *not* dialog1.
+G_MODULE_EXPORT
+const regex_t *
+compile_regex_filter(		const gchar *filter,
+				gboolean shows_hidden)
+{
+    static regex_t preg;
+    const char *regex;
+    static gboolean compiled=FALSE;
 
-*** another related BUG: when find action is performed, the window which gets
-raised is the dialog1_parent window, but results are shown in dialog1, which should be raised. 
-When dndBox is enabled, then we must chain dndBox as dialog2 with dialog1 as dialog2_parent.
+        
+    if (!filter || !strlen(filter) || strcmp(filter,"*")==0) return NULL;
+    regex = filter2regex(filter, shows_hidden);
+    
 
-*** Bug: cancel button is not unsensitivized when find action is unsuccessful.
+    /*printf("compile_regex_filter(%s)\n",filter);*/
+    if (compiled) regfree(&preg);
+    if (regcomp(&preg, regex, REG_EXTENDED | REG_ICASE | REG_NOSUB)==0)
+	compiled=TRUE;
+    else 
+	compiled=FALSE;
+    return &preg;
+}
+/////////////////////////
 
-BUG (annoying): Resize window with several tabs and output a plenty, no coredump, apparent hang, but really just taking a lot of time to figure things out, in the end program continues, but this is annoying.
-
-
-*** bug: small iconsize and icon shading mask not really visible. Need to make more constrast
-
-
-
-*** BUG xffm3: with multiple instances of xffm3, navigating into a folder with images previewed breaks xffm3 run: no icons shown, tab label broken. Seems like a memory overright problem. Should verify with Valgrind.
-
-
-* changed_f does an insert sorted, but result is not sorted. I guess we have to 
-get a new selection model from the store and set it to the gridview.
-
-
-0. Rodent icons
-1. for mount entry set default mount point, either from fstab or ~/mnt/device
-2. do not save invalid efs items, and allow popup item to remove
-3. no menu pathbar (not even color bug...)
-5. xffm-find4
-
-Sporadic race condition crashes: Must set all gridview_p references in main context in order for Child::validGridView() to be correct.
+#include <regex.h>
 
 
 
-- Simplify OpenWith by inhering from DialogComplex (eliminate duplicated functions from DialogBasic)
-
-
-* mount function FileDialog (once efs file dialog is complete).
-* WTF? rename/duplicate/symlink entry inside listItemWidget(say button3, button 1 to goto). Here we could use a gtk entry, set to 
- 
-* tar/untar, zip/unzip dialog
-* gridview: ecryptfs dialog and root elements
-* gridview: mount/unmount and fstab root elements
-* xffm-find4
-* tooltip on nondirectory icons (maybe not).
 
 
