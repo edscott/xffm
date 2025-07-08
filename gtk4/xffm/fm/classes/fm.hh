@@ -9,15 +9,18 @@ private:
   History *_history;
   MainWindow<LocalDir> *xffm_;
   GtkWindow *mainWindow_ = NULL;
+  char *path_ = NULL;
 public:
     History *history(void) { return _history;}
     GtkWidget *mainWidget(void){return GTK_WIDGET(mainWindow_);}
     ~Fm(void){
-      //delete xffm_;
+      g_free(path_);
+      // delete xffm_;
         //ClipBoard<double>::stopClipBoard();  
     }
 
     Fm(const char *path, bool doFind){
+      path_ = g_strdup(path);
       TRACE("*** doFind = %d\n", doFind);
       // Construct app hash
       MimeApplication::constructAppHash();
@@ -41,7 +44,7 @@ public:
           using subClass_t = FindResponse<bool>;
           using dialog_t = DialogComplex<subClass_t>;
           //Dialogs::info("find in files, test");
-          auto dialogObject = new dialog_t(NULL, path);
+          auto dialogObject = new dialog_t(NULL, path_);
           mainWindow_ = dialogObject->dialog();
           Child::mainWidget(GTK_WIDGET(mainWindow_));
         }
@@ -50,7 +53,7 @@ public:
       
       //g_object_set_data(G_OBJECT(Child::mainWidget()), "MainWindow", xffm_);
       //xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); 
-      xffm_ = new(xf::MainWindow<LocalDir>)(path, doFind); 
+      xffm_ = new(xf::MainWindow<LocalDir>)(path_, doFind); 
 
       //mainWindow_ = xffm_->mainWindow();
       //Child::mainWidget(GTK_WIDGET(mainWindow_));

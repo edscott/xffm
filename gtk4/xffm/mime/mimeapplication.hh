@@ -151,17 +151,18 @@ private:
         GError *error = NULL;
         if (!g_key_file_has_key (key_file, group, "MimeType", &error)){
             g_key_file_free(key_file);
+            if (error) g_error_free(error);
             return;
         }
         error = NULL;
         gchar *exec = g_key_file_get_string (key_file, group, "Exec", &error);
-        if (error){ exec = NULL; error=NULL;}
+        if (error){ exec = NULL; g_error_free(error); error=NULL;}
         gchar *tryExec = g_key_file_get_string (key_file, group, "TryExec", &error);
-        if (error){ tryExec = NULL; error=NULL; }
+        if (error){ tryExec = NULL; g_error_free(error); error=NULL; }
         gchar *terminal = g_key_file_get_string (key_file, group, "Terminal", &error);
-        if (error){ terminal = NULL; error=NULL; }
+        if (error){ terminal = NULL; g_error_free(error); error=NULL; }
         gchar *icon = g_key_file_get_string (key_file, group, "Icon", &error);
-        if (error){ icon = NULL;  error=NULL;}
+        if (error){ icon = NULL;  g_error_free(error); error=NULL;}
         gchar *mimeType = g_key_file_get_string (key_file, group, "MimeType", &error);
 
         if (mimeType){

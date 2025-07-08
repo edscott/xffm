@@ -141,6 +141,7 @@ char buffer[4096];
       auto child = Child::getChild();
       auto wd = (gchar *)g_object_get_data(G_OBJECT(child), "path");
       g_free(wd);
+        // FIXME leak: path      
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
       UtilPathbar<Type>::updatePathbar(true, (void *)pathbar_go);

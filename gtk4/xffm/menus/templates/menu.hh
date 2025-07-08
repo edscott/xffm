@@ -339,7 +339,8 @@ public:
         else textMarkup = g_strdup_printf("<span color=\"blue\"><i><b>_________________________</b></i></span>");
         gtk_label_set_markup(label, textMarkup);
         g_free(textMarkup);
-        g_object_set_data(G_OBJECT(label), "menu", menu);
+        g_object_set_data(G_OBJECT(label), "menu", menu);  
+        // FIXME leak: *p      
         g_object_set_data(G_OBJECT(label), "key", g_strdup(*p));
         g_object_set_data(G_OBJECT(menu), *p, hbox);
           TRACE("data set %p %s -->hbox %p\n", menu, *p, hbox);

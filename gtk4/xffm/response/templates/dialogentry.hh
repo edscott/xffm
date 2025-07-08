@@ -39,7 +39,7 @@ namespace xf
        /*g_signal_connect (G_OBJECT (entry_), "activate", 
                 ENTRY_CALLBACK (activate_entry), (void *)dialog);*/
       gtk_widget_realize(GTK_WIDGET(this->dialog()));
-      Basic::setAsDialog(GTK_WIDGET(this->dialog()), "dialog", "Dialog");
+      Basic::setAsDialog(GTK_WINDOW(this->dialog()));
       gtk_window_present(this->dialog());
 
     }

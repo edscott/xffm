@@ -44,7 +44,7 @@ namespace xf {
        /*g_signal_connect (G_OBJECT (entry), "activate", 
                 ENTRY_CALLBACK (activate_entry), (void *)dialog);*/
       gtk_widget_realize(GTK_WIDGET(this->dialog()));
-      Basic::setAsDialog(GTK_WIDGET(this->dialog()), "dialog", "Dialog");
+      Basic::setAsDialog(GTK_WINDOW(this->dialog()));
 
       auto keyController = gtk_event_controller_key_new();
       gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_CAPTURE);

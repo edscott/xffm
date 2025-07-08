@@ -1,7 +1,12 @@
 #ifndef ROOTDIR_HH
 #define ROOTDIR_HH
 namespace xf {
+  namespace efsSpace {
+    static char *infoName_ = NULL;
+  }
+
   class rootDir {
+    constexpr static char *infoName_ = NULL;
     public:
       static GtkMultiSelection *rootSelectionModel(void){
         GError *error_ = NULL;
@@ -30,7 +35,7 @@ namespace xf {
           
           GFile *file = g_file_new_for_path("/");
 //          GFile *file = g_file_new_for_path(g_get_home_dir());
-          auto text = g_strdup_printf("%s ecryptfs", _("New"));
+          if (!efsSpace::infoName_) efsSpace::infoName_ = g_strdup_printf("%s ecryptfs", _("New"));
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           auto gIcon = g_file_info_get_icon(info);
           
@@ -39,7 +44,7 @@ namespace xf {
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));      
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
-          g_file_info_set_name(info, text);
+          g_file_info_set_name(info, efsSpace::infoName_);
           g_list_store_insert(store, count++, G_OBJECT(info));
           g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
         }

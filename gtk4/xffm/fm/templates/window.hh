@@ -224,7 +224,7 @@ private:
 
     void showWindow(){
         GtkWidget *widget = GTK_WIDGET(mainWindow_);
-        Basic::setAsDialog(widget, "xffm", "Xffm");
+        Basic::setAsDialog(mainWindow_);
         if (doFind_) return; // No X resources for main xffm window.
         gtk_widget_realize(widget);
  

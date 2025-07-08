@@ -80,7 +80,7 @@ private:
         gtk_progress_bar_pulse(progressBar);
         gtk_widget_realize (GTK_WIDGET(dialog));
          
-        Basic::setAsDialog(GTK_WIDGET(dialog), "progress", "Progress");
+        Basic::setAsDialog(GTK_WINDOW(dialog));
         //gtk_widget_show_all (GTK_WIDGET(dialog));
         //Dialogs<Type>::placeDialog(dialog);
         g_timeout_add(250, simplePulse_f, (void *)this);

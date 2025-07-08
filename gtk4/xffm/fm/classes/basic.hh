@@ -2,8 +2,10 @@
 #define BASIC_HH
 namespace xf {
   GList *dialogStack = NULL; // Child::mainWidget() dialog stack.
+
   class Basic {
- 
+      constexpr static const char *Xname_ = "dialog";
+      constexpr static const char *Xclass_ = "Dialog"; 
       static gboolean
       hyperLabelClick(GtkGestureClick* self,
               gint n_press,
@@ -541,7 +543,7 @@ public:
             TRACE("get pass at %s\n", getpass);
             setenv("SUDO_ASKPASS", getpass, 1);
             setenv("SSH_ASKPASS", getpass, 1);
-
+            g_free(getpass);
         }
     }
    static const gchar *
@@ -775,12 +777,10 @@ public:
     }
     
 
-    static void setAsDialog(GtkWindow *window){
-      Basic::setAsDialog(GTK_WIDGET(window), "dialog", "Dialog");
-    }
       
     
-    static void setAsDialog(GtkWidget *widget, const char *Xname, const char *Xclass){
+    static void setAsDialog(GtkWindow *window){
+    //static void setAsDialog(GtkWidget *widget, const char *Xname, const char *Xclass){
         bool OK = false;
  #ifdef GDK_WINDOWING_X11
         GdkDisplay *displayGdk = gdk_display_get_default();
@@ -788,10 +788,12 @@ public:
           OK = true;
           Display *display = gdk_x11_display_get_xdisplay(displayGdk);
           XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
-          wm_class->res_name = g_strdup(Xname);
-          wm_class->res_class = g_strdup(Xclass);
+          wm_class->res_name = (char *)Xname_;
+          wm_class->res_class = (char *)Xclass_;
+          //wm_class->res_name = g_strdup(Xname);
+          //wm_class->res_class = g_strdup(Xclass);
 
-          GtkNative *native = gtk_widget_get_native(widget);
+          GtkNative *native = gtk_widget_get_native(GTK_WIDGET(window));
           GdkSurface *surface = gtk_native_get_surface(native);
           Window w = gdk_x11_surface_get_xid (surface);
           XSetClassHint(display, w, wm_class);

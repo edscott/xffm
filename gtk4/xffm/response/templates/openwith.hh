@@ -308,7 +308,7 @@ private:
         // finish up
         gtk_widget_realize (GTK_WIDGET(dialog_));
         gtk_widget_grab_focus(GTK_WIDGET(input_));
-        Basic::setAsDialog(GTK_WIDGET(dialog_), "xfDialog", "XfDialog");
+        Basic::setAsDialog(GTK_WINDOW(dialog_));
         gtk_window_present(dialog_);
 
         setRaise();

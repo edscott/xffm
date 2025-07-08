@@ -144,6 +144,7 @@ public:
           // XXX default background color is white. 
           // cairo_set_source_rgba (cr, 1,1,1, .5);
         }
+        g_free(string);
     }
 
     static GdkPaintable *addEmblem(GdkPaintable *paintable, const char *emblem, double width, double height){

@@ -27,7 +27,7 @@ namespace xf
       gtk_window_set_decorated(dialog, true);
       
       gtk_widget_realize(GTK_WIDGET(dialog));
-      Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");
+      Basic::setAsDialog(GTK_WINDOW(dialog));
       gtk_window_present(dialog);
 
     }

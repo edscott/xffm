@@ -179,12 +179,14 @@ public:
         gchar *basename = g_path_get_basename (file);
         if (strchr (basename, '.')) p = strrchr (basename, '.')+1;
         else {
+            g_free(basename);
             // no file extension.
             return NULL;
         }
 #if 10
         auto sfx = g_utf8_strdown (p, -1);
         type = lookupBySuffix(NULL, sfx);
+        g_free(sfx);
         g_free(basename);
         if (!type) return g_strdup(_("unknown"));
         return g_strdup(type);

@@ -130,6 +130,7 @@ namespace xf {
         size=7;
         Settings::setInteger("xfterm", "fontcss", 7);
       }
+        // FIXME leak: css      
       auto css = g_strdup_printf("font%d", size);
       gtk_widget_add_css_class (widget, css);
       g_object_set_data(G_OBJECT(widget), "css", (void *)css);
@@ -184,6 +185,7 @@ namespace xf {
         }
         gtk_box_append(eventBox, GTK_WIDGET(label));
         g_object_set_data(G_OBJECT(eventBox), "label", label);
+        // FIXME leak:
         g_object_set_data(G_OBJECT(eventBox), "name", text?g_strdup(text):g_strdup("RFM_ROOT"));
         return eventBox;
     }

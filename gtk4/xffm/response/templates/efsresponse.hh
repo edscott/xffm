@@ -252,7 +252,7 @@ public:
     }
 
     static GKeyFile *getKeyFile(void){
-        gchar *file = g_build_filename(efsKeyFile(), NULL);
+        gchar *file = efsKeyFile();
         GKeyFile *key_file = g_key_file_new ();
         g_key_file_load_from_file (key_file, file, (GKeyFileFlags)(G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS), NULL);
         g_free(file);

@@ -50,8 +50,9 @@ namespace xf {
         g_object_set_data(G_OBJECT(pathbar), "pb_button", pb_button);
         
         Basic::boxPack0 (pathbar, GTK_WIDGET(pb_button), FALSE, FALSE, 0);
-        g_object_set_data(G_OBJECT(pb_button), "name", g_strdup("RFM_ROOT"));
-        g_object_set_data(G_OBJECT(pb_button), "path", g_strdup("Bookmarks"));
+
+        g_object_set_data(G_OBJECT(pb_button), "name", (void *)rfm_root_id);
+        g_object_set_data(G_OBJECT(pb_button), "path", (void *)Bookmarks_id);
 
         auto motion = gtk_event_controller_motion_new();
         gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
@@ -279,6 +280,7 @@ namespace xf {
 
         auto lastPath = (char *) g_object_get_data(G_OBJECT(pathbar), "path");
         g_free(lastPath);
+        // FIXME leak: path      
         g_object_set_data(G_OBJECT(pathbar), "path", g_strdup(path));
         setRed(pathbar, path);
     }
@@ -484,6 +486,7 @@ namespace xf {
                                const gchar *path, const gchar *tooltip) 
     {
         auto eventBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        // FIXME leak: g_strdup(name)      
         g_object_set_data(G_OBJECT(eventBox), "name", g_strdup(name));
         g_object_set_data(G_OBJECT(eventBox), "path", g_strdup(path));
         auto image = GTK_WIDGET(Texture<bool>::getImage(icon, 16));

@@ -21,10 +21,11 @@
 //#undef ENABLE_THREAD_POOL
 
 const char **environment = NULL;
+static const char *rfm_root_id="RFM_ROOT";
+static const char *Bookmarks_id="Bookmarks";
+
 #include "config.h"
 #include "xffm.h"
-
-
 
 
 static void setupBindText(void){
@@ -76,7 +77,7 @@ static bool detachProcess(const char *argv1){
 }
 
 static char *getPath(const char *argv1){
-    if (!argv1) return g_strdup(_("Bookmarks"));
+    if (!argv1) return g_strdup(Bookmarks_id);
     if (!g_file_test(argv1, G_FILE_TEST_EXISTS)){
       DBG("\"%s\" does not exist.\n", argv1);
       return g_strdup(g_get_home_dir());
@@ -105,6 +106,7 @@ main (int argc, const char *argv[], const char *envp[]) {
     if (s) {
       setenv(*p, s, 1);
     }
+    g_free(s);
   }
 
   char *cacheDir = g_strconcat(USER_CACHE_DIR, NULL);
@@ -113,8 +115,8 @@ main (int argc, const char *argv[], const char *envp[]) {
       ERROR_("%s: %s\n", cacheDir, strerror(errno));
       exit(1);
     }
-    g_free(cacheDir);
   }
+  g_free(cacheDir);
   
   if (argv[1] && strcmp(argv[1], "--fgr") == 0){
       xf::Fgr *fgr = new(xf::Fgr);
@@ -163,10 +165,10 @@ main (int argc, const char *argv[], const char *envp[]) {
 
   threadPoolObject = (void *)new xf::ThreadPool;
   
-  char *path = getPath(argv[1]);
+  auto path = getPath(argv[1]);
   TRACE("path is %s (%s) --> %s\n", path, argv[1], _(path)); 
   auto fm = new(xf::Fm)(path, doFind); // 
- 
+  g_free(path);
   // Constructors c and d will use global variable Child::mainWidget(). 
   auto c = new xf::ClipBoard<xf::LocalDir>;
   auto d = new xf::Dnd<xf::LocalDir>;

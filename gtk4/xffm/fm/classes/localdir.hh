@@ -150,8 +150,8 @@ namespace xf {
       static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0, int flags){
         GtkFilter *filter = 
           GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, GINT_TO_POINTER(flags), NULL));
-        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);
-
+        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);       
+        // FIXME leak: s      
         GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
         g_object_set_data(G_OBJECT(store), "selectionModel", s);
         g_object_set_data(G_OBJECT(s), "store", store);

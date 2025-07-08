@@ -118,7 +118,7 @@ private:
         if (!g_file_test(name, G_FILE_TEST_EXISTS)){
             fclose(fopen(name, "w"));
         }
-
+        g_free(dir);
         return name;
     }
 

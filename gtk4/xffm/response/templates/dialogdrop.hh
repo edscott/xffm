@@ -28,7 +28,7 @@ namespace xf
       gtk_widget_set_size_request(GTK_WIDGET(dialog), 200, 75);
 
       gtk_widget_realize(GTK_WIDGET(dialog));
-      Basic::setAsDialog(GTK_WIDGET(dialog), "dialog", "Dialog");
+      Basic::setAsDialog(GTK_WINDOW(dialog));
       gtk_window_present(dialog);
 
     }
