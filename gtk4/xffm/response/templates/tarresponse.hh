@@ -12,9 +12,11 @@ class tarResponse {
    char *zip_ = NULL;
    char *path_ = NULL;
    char *folder_ = NULL;
-   const char *formats_[5]={"GZip","BZip2","XZ",NULL};
-//   const char *formats_[5]={"GZip","BZip2","XZ","Zip",NULL};
+   const char *ext_[5]={"tgz","bz2","xz","zip",NULL};
+   const char *formats_[5]={"GZip","BZip2","XZ","Zip",NULL};
    GtkEntry *targetEntry_ = NULL;
+   GtkEntry *nameEntry_ = NULL;
+   GtkLabel *nameExt_ = NULL; 
    public:
    ~tarResponse(void){
      g_free(folder_);
@@ -26,6 +28,8 @@ class tarResponse {
    const char *path(void){ return (const char *)path_;}
    GtkEntry *targetEntry(void){ return targetEntry_;}
    GtkBox *getMainBox(void){ return mainBox_;}
+   GtkEntry *nameEntry(void){return nameEntry_;}
+   GtkLabel *nameExt(void){return nameExt_;}
    
     const char *title(void){ return _("Compressed file...");}
     const char *label(void){return _("Create a compressed archive with the selected objects");}
@@ -37,8 +41,11 @@ class tarResponse {
       TRACE("%s", "Tar hello world\n");
       auto mainBox = dialogObject->subClass()->getMainBox();
       auto targetEntry = dialogObject->subClass()->targetEntry();
+      auto nameEntry = dialogObject->subClass()->nameEntry();
       auto buffer = gtk_entry_get_buffer(targetEntry);
       auto target = gtk_entry_buffer_get_text(buffer);
+      buffer = gtk_entry_get_buffer(nameEntry);
+      auto name = gtk_entry_buffer_get_text(buffer);
       const char *choice = "";
       for (auto p=dialogObject->subClass()->formats(); p && *p; p++){
           auto r = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(mainBox), *p));
@@ -47,39 +54,56 @@ class tarResponse {
             break;
           }
       }
+      char *tar = g_find_program_in_path("tar");
+      char *zip = g_find_program_in_path("zip");
+      int id = 0;
       const char *option = "-czf";
       const char *ext = ".tgz";
       if (strcmp(choice, "BZip2")==0){ 
         option = "-cjf";
         ext = ".bz2";
+        id = 1;
       }
       if (strcmp(choice, "XZ")==0){ 
         option = "-cJf";
         ext = ".xz";
+        id = 2;
       }
-      auto tar = g_find_program_in_path("tar");
-      if (tar){
-        auto path = dialogObject->subClass()->path();
-        auto base = g_path_get_basename(path);       
-        auto output = g_strconcat(target, G_DIR_SEPARATOR_S, base, ext, NULL);
-        auto command = g_strdup_printf("%s %s %s \"%s\"", tar, option, output, base);
-
-        auto childWidget =Child::getChild();
-        auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
-        auto workDir = Child::getWorkdir(childWidget);
-        TRACE("command = \"%s\"\n", command);
-
-        pid_t childPid = Run<Type>::shell_command(Child::getOutput(), command, false, false);
-        auto runButton = new RunButton<Type>(EMBLEM_PACKAGE, NULL);
-        runButton->init(command, childPid, Child::getOutput(), workDir, buttonSpace);
-        
-        //Run<Type>::thread_run(Child::getOutput(), command, false);
+      if (strcmp(choice, "Zip")==0){ 
+        option = "-vr";
+        ext = ".zip";
+        id = 3;
         g_free(tar);
-        g_free(base);
-        g_free(output);
-        g_free(command);
-        Settings::setString("Tarballs", "Default", target);
+        tar = NULL;
       }
+
+      auto path = dialogObject->subClass()->path();
+      auto base = g_path_get_basename(path);       
+      auto output = g_strconcat(target, G_DIR_SEPARATOR_S, name, ext, NULL);
+      auto childWidget =Child::getChild();
+      auto workDir = Child::getWorkdir(childWidget);
+      auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
+
+      char *command = NULL;
+      if (zip){
+        command = g_strdup_printf("%s %s \"%s\" \"%s\"", zip, option, output, base);
+      }
+      else if (tar){
+        command = g_strdup_printf("%s %s \"%s\" \"%s\"", tar, option, output, base);
+      }
+
+      TRACE("command = \"%s\"\n", command);
+      pid_t childPid = Run<Type>::shell_command(Child::getOutput(), command, false, false);
+      auto runButton = new RunButton<Type>(EMBLEM_PACKAGE, NULL);
+      runButton->init(command, childPid, Child::getOutput(), workDir, buttonSpace);
+      g_free(command);
+
+      Settings::setString("Tarballs", "Default", target);
+      Settings::setInteger("Tarballs", "Ext", id);
+      g_free(zip);
+      g_free(tar);
+      g_free(base);
+      g_free(output);
 
       return NULL;
     }
@@ -127,16 +151,22 @@ class tarResponse {
         gtk_box_append(mainBox_, GTK_WIDGET(hbox));
 
         GtkCheckButton *firstCheck = NULL;
-        for (auto p=formats_; p && *p; p++){
-          auto r = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(*p));
-          g_object_set_data(G_OBJECT(mainBox_), *p, r);
-          gtk_box_append(hbox, GTK_WIDGET(r));
+        auto q = ext_;
+        
+        GtkCheckButton *r[4];
+        int k=0;
+        for (auto p=formats_; p && *p && q && *q; p++, q++, k++){
+          if (!zip_ && k==3) continue;
+          r[k] = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(*p));
+          g_object_set_data(G_OBJECT(mainBox_), *p, r[k]);
+          gtk_box_append(hbox, GTK_WIDGET(r[k]));
           if (!firstCheck) {
-            gtk_check_button_set_group (r, NULL);
-            firstCheck = r;
-            gtk_check_button_set_active(r, true);
+            gtk_check_button_set_group (r[k], NULL);
+            firstCheck = r[k];
           }
-          else gtk_check_button_set_group (r, firstCheck);
+          else gtk_check_button_set_group (r[k], firstCheck);
+          g_signal_connect(G_OBJECT(r[k]), "toggled", G_CALLBACK(toggle), this);
+          g_object_set_data(G_OBJECT(r[k]), "ext", (void *)*q);
         }
 
         hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
@@ -144,10 +174,33 @@ class tarResponse {
         auto entryLabelText = _("Target directory:"); 
         targetEntry_ =
           FileResponse<Type, subClass_t>::addEntry(hbox, "targetEntry", entryLabelText, this);
+        
         auto buffer = gtk_entry_get_buffer(targetEntry_);
         folder_ = Settings::getString("Tarballs", "Default");
         if (!folder_) folder_ = g_strdup(g_get_home_dir());
         gtk_entry_buffer_set_text(buffer, folder_, -1);
+
+        auto nameText = _("Name:"); 
+        auto nameLabel = gtk_label_new(nameText);
+        nameExt_ = GTK_LABEL(gtk_label_new("")); 
+        nameEntry_= GTK_ENTRY(gtk_entry_new());
+        buffer = gtk_entry_get_buffer(nameEntry_);
+        auto basename = g_path_get_basename(path);
+        gtk_entry_buffer_set_text(buffer, basename, -1);
+        g_free(basename);
+        hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_box_append(mainBox_, GTK_WIDGET(hbox));
+        gtk_box_append(hbox, GTK_WIDGET(nameLabel));
+        gtk_box_append(hbox, GTK_WIDGET(nameEntry_));
+        gtk_box_append(hbox, GTK_WIDGET(nameExt_));
+
+        // XXX recall last selection 
+        auto ext = Settings::getInteger("Tarballs", "Ext");
+        if (ext >= 0 && ext <= 4){
+          gtk_check_button_set_active(r[ext], true);
+        } else {
+          gtk_check_button_set_active(r[0], true);
+        }
 
         auto action_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(action_area), false);
@@ -173,6 +226,16 @@ class tarResponse {
    
    private:
 
+    static void
+    toggle(GtkCheckButton* self, void *data){
+      auto subClass = (subClass_t *)data;
+      auto ext = (const char *)g_object_get_data(G_OBJECT(self), "ext");
+      auto label = subClass->nameExt();
+      auto markup = g_strconcat("<span color=\"blue\">.",ext,"</span>", NULL);
+      gtk_label_set_markup(label, markup);
+      g_free(markup);
+    }
+    
     static void
     button_save (GtkButton * button, gpointer data) {
       auto subClass = (subClass_t *)data;
