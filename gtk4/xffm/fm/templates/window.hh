@@ -676,7 +676,7 @@ private:
           ERROR_("* Warning: cannot find widget \"%s\" to show.\n", *p);
         }
       }
-      auto configFlags = Settings::getInteger("flags", gridView_p->path(), 0x40);
+      auto configFlags = Settings::getInteger(gridView_p->path(), "flags", 0x40);
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
       gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
 

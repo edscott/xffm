@@ -537,7 +537,7 @@ ClickMenu
       if (item) {
         auto path = Basic::getPath(item);
         auto dirPath = g_path_get_dirname(path);
-        int flags = Settings::getInteger("flags", dirPath, 0); 
+        int flags = Settings::getInteger(dirPath, "flags", 0); 
        
         TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);

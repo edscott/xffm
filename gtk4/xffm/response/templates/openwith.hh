@@ -501,11 +501,9 @@ private:
         char *command = NULL;
         if (inTerminal) {
           command = Run<Type>::mkTerminalLine(path, "");
-          //Settings::setInteger("ExternalTerminal", key, 1);
         }
         else {
           command = Run<Type>::mkCommandLine(path, "");
-          //Settings::setInteger("ExternalTerminal", key, 0);
           TRACE("command line is \'%s\'\n", command);
         }
         if (command) 

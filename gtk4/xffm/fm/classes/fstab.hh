@@ -38,7 +38,8 @@ class FstabDir {
       auto store = g_list_store_new(G_TYPE_FILE_INFO);
       g_object_set_data(G_OBJECT(store), "xffm::fstab", GINT_TO_POINTER(1));
 
-      auto flags = Settings::getInteger("flags", "Disk Mounter",0);
+      auto flags = Settings::getInteger("Disk Mounter", "flags", 0);
+//      auto flags = Settings::getInteger("flags", "Disk Mounter",0);
     
       auto upFile = g_file_new_for_path(g_get_home_dir());
       auto info = g_file_query_info(upFile, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
@@ -112,7 +113,7 @@ class FstabDir {
         TRACE("info name=%s\n", g_file_info_get_name(info));
 
         FstabUtil::setMountableIcon(info, path);
-        auto flags = Settings::getInteger("flags", "Disk Mounter",0);
+        auto flags = Settings::getInteger("Disk Mounter","flags", 0);
         g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
 
     } 
@@ -256,7 +257,7 @@ class FstabDir {
 
             
         FstabUtil::setMountableIcon(info, path);        
-        auto flags = Settings::getInteger("flags", "Disk Mounter",0);
+        auto flags = Settings::getInteger("Disk Mounter","flags", 0);
       
 
         g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));

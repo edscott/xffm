@@ -99,6 +99,8 @@ int
 main (int argc, const char *argv[], const char *envp[]) {
   environment = envp; // not used anymore, methinks.
 
+  // Settings changed from version .001 to .002:
+  xf::Settings::removeGroup("flags");
   // Setup initial xffm4 environment from user file.
   auto basicEnv = xf::EnvDialog::basicEnv();
   for (auto p=basicEnv; p && *p; p++){

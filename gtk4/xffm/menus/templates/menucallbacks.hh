@@ -303,6 +303,16 @@ namespace xf {
 public:
 
     static void
+    regexp(GtkButton *self, void *data){
+      static char *trashDir = NULL;
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      gtk_popover_popdown(menu);
+      auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
+      auto regexpString = Settings::getString(path,"regexp");
+      DBG("Regexp dialog path = %s...\n", path);
+    }
+
+    static void
     emptyTrash(GtkButton *self, void *data){
       static char *trashDir = NULL;
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));

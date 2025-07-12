@@ -49,11 +49,9 @@ template <class Type>
 
       void flagOn (int flag){ 
         flags_ |= flag;
-        //Settings::setInteger("flags", path_, flags_);
       }
       void flagOff (int flag){  
         flags_ &= (0xff ^ flag);
-        //Settings::setInteger("flags", path_, flags_);
       }
       int flags(void){return flags_;}
 
@@ -68,7 +66,7 @@ template <class Type>
         path_ = g_strdup(path);
         view_ = getGridView();
         //gtk_grid_view_set_single_click_activate (GTK_GRID_VIEW(view_), true);
-        flags_ = Settings::getInteger("flags", path_, 0);
+        flags_ = Settings::getInteger(path_, "flags", 0);
         TRACE("gridview flags = 0x%x\n", flags_);
         
         myMenu_ = new Menu<GridviewMenu<Type> >("foo");
@@ -257,7 +255,7 @@ template <class Type>
         guint positionF;
         auto dirFile = G_FILE(g_object_get_data(G_OBJECT(self), "file"));
         auto dirPath = g_file_get_path(dirFile);
-        int flags = Settings::getInteger("flags", dirPath, 0); 
+        int flags = Settings::getInteger(dirPath, "flags", 0); 
         g_free(dirPath);
         
         if (verbose) DBG("monitor thread %p...\n", g_thread_self());

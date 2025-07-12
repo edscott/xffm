@@ -50,6 +50,7 @@ namespace xf {
     }
     MenuInfo_t *iconNames(void){
       static MenuInfo_t menuIconNames_[] = { // Need not be complete with regards to keys_.
+        {_("Match regular expression"), (void *) EMBLEM_REMOVE},
         {_("Environment"), (void *) EMBLEM_INFO},
         {"test", (void *) EMBLEM_INFO},
         {_("Empty trash bin"),(void *) EMBLEM_TRASH_FULL}, 
@@ -74,6 +75,7 @@ namespace xf {
     MenuInfo_t *callbacks(void){
       static MenuInfo_t menuCallbacks_[] = { 
         // Need not be complete with regards to keys_.
+        {_("Match regular expression"),(void *) MenuCallbacks<Type>::regexp}, 
         {_("Empty trash bin"),(void *) MenuCallbacks<Type>::emptyTrash}, 
         {_("Paste"),(void *) MenuCallbacks<Type>::paste}, 
         {_("Toggle Text Mode"),(void *) MenuCallbacks<Type>::popCall}, 
@@ -193,7 +195,7 @@ namespace xf {
       }
       else gridView_p->flagOff(bit);
       TRACE("bit=0x%x, flag 0x%x->0x%x\n", bit, flags, gridView_p->flags());
-      auto configFlags = Settings::getInteger("flags", gridView_p->path(), 0x40);
+      auto configFlags = Settings::getInteger(gridView_p->path(), "flags", 0x40);
       
       auto popover = g_object_get_data(G_OBJECT(check), "menu");
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
@@ -210,7 +212,15 @@ namespace xf {
       auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
 
       TRACE("apply %s...\n", gridview_p->path());
-      Settings::setInteger("flags", gridview_p->path(), gridview_p->flags());
+      if (gridview_p->flags() != 0){
+        TRACE("setting flags to 0x%x\n", gridview_p->flags());
+        Settings::setInteger(gridview_p->path(), "flags", gridview_p->flags());
+      } else {
+        // Remove from settings
+        TRACE("setting flags to 0x%x\n", gridview_p->flags());
+        Settings::removeKey(gridview_p->path(), "flags");
+      }
+
       //gtk_widget_unparent(GTK_WIDGET(menu));
       auto store = gridview_p->store();
       if (g_object_get_data(G_OBJECT(store), "xffm::root")){

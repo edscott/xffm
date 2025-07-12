@@ -5,7 +5,7 @@ set (CMAKE_CXX_STANDARD 17)
 set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 4)
-set(xffm_VERSION_MINOR 001)
+set(xffm_VERSION_MINOR 002)
 include(cmake/pthreads.cmake)
 
 

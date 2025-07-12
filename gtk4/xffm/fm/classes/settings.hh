@@ -53,7 +53,7 @@ public:
       auto value = getInteger(group, key);
       if (value < 0){
         value = defaultValue;
-        setInteger(group, key, value);
+        //setInteger(group, key, value);
       }
       return value;
     }      
@@ -99,7 +99,7 @@ public:
       auto value = getString(group, key);
       if (!value){
         value = g_strdup(defaultValue);
-        setString(group, key, value);
+        //setString(group, key, value);
       }
       return value;
     }      
@@ -136,6 +136,17 @@ public:
         pthread_mutex_lock(&settingsMutex);
         auto keyFile = getKeyFile();
         auto retval = g_key_file_remove_key (keyFile, group, key, NULL);
+        if (retval) writeKeyFile(keyFile);
+        g_key_file_free(keyFile);
+        pthread_mutex_unlock(&settingsMutex);
+        return retval;
+    }
+   
+    static gboolean
+    removeGroup(const gchar *group){
+        pthread_mutex_lock(&settingsMutex);
+        auto keyFile = getKeyFile();
+        auto retval = g_key_file_remove_group (keyFile, group, NULL);
         if (retval) writeKeyFile(keyFile);
         g_key_file_free(keyFile);
         pthread_mutex_unlock(&settingsMutex);

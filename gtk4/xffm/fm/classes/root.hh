@@ -15,7 +15,7 @@ namespace xf {
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
         g_object_set_data(G_OBJECT(store), "xffm::root", GINT_TO_POINTER(1));
 
-        auto flags = Settings::getInteger("flags", "Bookmarks",0);
+        auto flags = Settings::getInteger("Bookmarks","flags", 0);
 
         // fstab icon
         {

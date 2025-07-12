@@ -277,6 +277,15 @@ namespace xf {
         gchar *g = g_strconcat(user,"@",host,":",gg, NULL);
         g_free(host);
         g_free(gg); 
+        auto flags=Settings::getInteger(path, "flags", 0);
+        char *sorted = NULL;
+        if (flags & 0x08) sorted = g_strconcat("[", _("Date"), "]", NULL);
+        if (flags & 0x10) sorted = g_strconcat("[", _("Size"), "]", NULL);
+        if (flags & 0x20) sorted = g_strconcat("[", _("File type"), "]", NULL);
+        Basic::concat(&g, sorted);
+        g_free(sorted);
+
+
         gtk_window_set_title(GTK_WINDOW(Child::mainWidget()), g);
         g_free(g);
         auto basename = getTabname(path);
@@ -284,6 +293,16 @@ namespace xf {
         auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
         auto label = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "label"));
         gtk_label_set_markup(label, basename);
+        
+        auto oldImage = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "image"));
+        if (oldImage)  gtk_box_remove(GTK_BOX(tabWidget), GTK_WIDGET(oldImage));
+        g_object_set_data(G_OBJECT(tabWidget), "image", NULL);
+
+        if (flags & 0x04){
+          auto image = Texture<bool>::getImage(EMBLEM_DESCENDING, 16);
+          gtk_box_append(GTK_BOX(tabWidget), GTK_WIDGET(image));
+          g_object_set_data(G_OBJECT(tabWidget), "image", image);
+        }
         g_free(basename);
     }
     static GtkBox *vButtonBox(void){

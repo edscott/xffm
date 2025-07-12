@@ -9,6 +9,7 @@ emblem-h.svg
 emblem-f.svg
 emblem-o.svg
 emblem-m.svg
+emblem-descending.svg
 emblem-tty.svg
 emblem-home.svg
 emblem-go-home.svg
