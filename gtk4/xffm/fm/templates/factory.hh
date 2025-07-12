@@ -759,6 +759,10 @@ ClickMenu
       image = sourceCodeImageDirect(name, info, size);
       if (image) return image;
       
+      const char *pSrc[] = {"pl", "PL", "pm", "PM", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_P, pSrc);
+      if (image) return image;
+      
       const char *cSrc[] = {"c", "C", "cc", "CC", NULL};
       image = sourceCodeImage(name, info, size, EMBLEM_C, cSrc);
       if (image) return image;

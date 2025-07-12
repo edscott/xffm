@@ -24,6 +24,7 @@
 #define EXECUTE "execute"
 
 
+#define EMBLEM_P "emblem-p"
 #define EMBLEM_C "emblem-c"
 #define EMBLEM_I "emblem-i"
 #define EMBLEM_H "emblem-h"

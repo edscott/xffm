@@ -2,6 +2,7 @@ set(ICONS emblem-about.svg
 emblem-add.svg
 emblem-remove.svg
 emblem-delete.svg
+emblem-p.svg
 emblem-c.svg
 emblem-i.svg
 emblem-h.svg
