@@ -8,6 +8,7 @@ namespace xf
       
       GtkBox *entryBox_;
       GtkEntry *entry_;
+      GtkWidget *help_ = NULL;
     
    public:
     GtkEntry *entry(void){return entry_;}
@@ -32,6 +33,15 @@ namespace xf
                 ENTRY_CALLBACK (this->activate), this->dialog());
        auto apply = this->applyBox();
        gtk_box_append(GTK_BOX (entryBox_), apply);
+       
+       // FIXME: I have not figured out how to
+       //        set the help text from subclass
+      /* help_ = Dialog::buttonBox(EMBLEM_QUESTION, _("Help"), 
+               (void *)help, (void *)this);
+       gtk_box_append(GTK_BOX (entryBox_), help_);
+       gtk_widget_set_visible(GTK_WIDGET(help_), false);*/
+
+
       // auto cancel = this->cancelBox();
        //gtk_box_append(GTK_BOX (entryBox_), cancel);
        
@@ -47,6 +57,15 @@ namespace xf
     static void activate(GtkEntry *entry, void *dialog){
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
     }
+
+/*    static void help(GtkWidget *widget, void *data){
+      auto object = (DialogEntry<Type> *) data;
+      auto subclass = (Type *)object->subClass();
+      //auto dialog = subclass->dialog();
+      //auto txt = g_object_get_data(G_OBJECT(dialog), "help");
+      //DBG("help(): %s\n", txt);
+    }
+*/
   };
 }
 #endif

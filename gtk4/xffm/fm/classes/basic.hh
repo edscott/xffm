@@ -30,6 +30,15 @@ namespace xf {
       }
 #endif
    public:
+    static const char *
+    filter_text_help(void) {
+      return _("Basic rules:\n" "\n"
+                "*  Will match any character zero or more times.\n"
+                "?  Will match any character exactly one time\n"
+                "[] Match any character within the [] \n"
+                "^  Match at beginning of string\n" 
+                "$  Match at end of string \n");
+    }
 
 #ifdef GDK_WINDOWING_X11
     static void getXY(GtkWindow *dialog, int *x, int *y){

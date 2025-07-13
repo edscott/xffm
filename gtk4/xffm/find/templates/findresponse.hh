@@ -519,7 +519,7 @@ private:
             mkPathEntry(vbox);
 
             auto history = g_build_filename(FILTER_HISTORY);              
-            auto box = entryBox(_("Filter:"), filter_text_help(), history,
+            auto box = entryBox(_("Filter:"), Basic::filter_text_help(), history,
                 (void *)FindSignals<Type>::onFindButton,
                 (void *)this);
             g_free(history);

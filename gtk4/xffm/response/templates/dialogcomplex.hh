@@ -56,6 +56,10 @@ namespace xf
     }
 
     DialogComplex(void){
+      const char * folder = Child::getWorkdir();
+      mainBox_ = this->subClass()->mainBox(folder);
+      parent_ = GTK_WINDOW(_mainWidget);
+      setupRun();
     }
 
     // void setSubClassDialog(void)

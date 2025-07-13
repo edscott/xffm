@@ -51,7 +51,7 @@ template <class Type>
         flags_ |= flag;
       }
       void flagOff (int flag){  
-        flags_ &= (0xff ^ flag);
+        flags_ &= (0xffff ^ flag);
       }
       int flags(void){return flags_;}
 

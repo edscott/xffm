@@ -17,7 +17,8 @@
 // response classes
 // jumpresponse is a template to access Workdir<Type>
 #include "response/classes/entryresponse.hh" // class
-#include "response/classes/wsresponse.hh"// class
+#include "response/classes/wsresponse.hh"// templates
+#include "response/templates/regexpresponse.hh"// templates
 #include "response/classes/passwdresponse.hh"// class
 #include "response/classes/rmresponse.hh"    // class
 #include "response/classes/rmlistresponse.hh"    // class
@@ -96,6 +97,7 @@ namespace xf
       dialogObject->run();
       return;
     }
+    
 
   };
 

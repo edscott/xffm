@@ -207,11 +207,11 @@ class tarResponse {
         gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
         gtk_box_append(mainBox_, GTK_WIDGET(action_area));
 
-        auto cancelButton = UtilBasic::mkButton("emblem-redball", _("Cancel"));
+        auto cancelButton = UtilBasic::mkButton("EMBLEM_REDBALL", _("Cancel"));
         gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
         gtk_widget_set_vexpand(GTK_WIDGET(cancelButton), false);
 
-        auto saveButton = UtilBasic::mkButton ("emblem-floppy", _("Save"));
+        auto saveButton = UtilBasic::mkButton ("EMBLEM_FLOPPY", _("Save"));
         gtk_box_append(action_area,  GTK_WIDGET(saveButton));
         gtk_widget_set_vexpand(GTK_WIDGET(saveButton), false);
 

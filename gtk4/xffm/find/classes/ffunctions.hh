@@ -34,19 +34,9 @@ namespace xf {
      }
 
 
-    protected:
-
+    public:
       
-    const char *
-    filter_text_help(void) {
-      return _("Basic rules:\n" "\n"
-                "*  Will match any character zero or more times.\n"
-                "?  Will match any character exactly one time\n"
-                "[] Match any character within the [] \n"
-                "^  Match at beginning of string\n" 
-                "$  Match at end of string \n");
-    }
-    const char *
+    static const char *
     grep_text_help(void) {
       return _("Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
@@ -85,6 +75,7 @@ namespace xf {
         "More information is available by typing \"man grep\"\n"
 );
     }
+    protected:
 
     static void 
     sensitivizeSpin (GtkCheckButton *check, gpointer data){

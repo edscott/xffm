@@ -165,6 +165,7 @@ namespace xf {
       if (strcmp(item,_("Size")) == 0) bit = 0x10;
       if (strcmp(item,_("File type")) == 0) bit = 0x20;
       if (strcmp(item,_("Name")) == 0) bit = 0x40;
+      // bit 0x1000 reserved for regexp.
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       auto flags = gridView_p->flags();
 
@@ -199,7 +200,8 @@ namespace xf {
       
       auto popover = g_object_get_data(G_OBJECT(check), "menu");
       auto apply = g_object_get_data(G_OBJECT(popover), _("Apply modifications"));
-      gtk_widget_set_sensitive(GTK_WIDGET(apply), configFlags != gridView_p->flags());
+      bool update = ((configFlags & 0xff) != (gridView_p->flags() & 0xff));
+      gtk_widget_set_sensitive(GTK_WIDGET(apply), update);
 
       //toggleGroupItem(menuItem, "LocalView", item);
     }

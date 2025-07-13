@@ -307,9 +307,19 @@ public:
       static char *trashDir = NULL;
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
-      auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
-      auto regexpString = Settings::getString(path,"regexp");
-      DBG("Regexp dialog path = %s...\n", path);
+        
+      auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+      const char *path = gridView_p->path();
+
+      using subClass_t = regexpResponse<Type>;
+      using dialog_t = DialogEntry<subClass_t>;
+      auto dialogObject = new dialog_t;
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
+
+      auto regexpString = Settings::getString(path,"regexp",NULL);
+      DBG("Regexp dialog path = %s  regexp=%s...\n", path, regexpString);
+      dialogObject->run();
+      return;
     }
 
     static void
