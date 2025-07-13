@@ -7,9 +7,10 @@ namespace xf
     using dialog_t = DialogEntry<subClass_t>; 
     protected:
       
-      GtkBox *entryBox_;
-      GtkEntry *entry_;
+      GtkBox *entryBox_=NULL;
+      GtkEntry *entry_=NULL;
       GtkWidget *help_ = NULL;
+      GtkLabel *entryLabel_=NULL;
     
    public:
     GtkEntry *entry(void){return entry_;}
@@ -20,28 +21,28 @@ namespace xf
        gtk_widget_set_halign (GTK_WIDGET(entryBox_),GTK_ALIGN_CENTER);
        gtk_box_append(GTK_BOX (this->contentArea()), GTK_WIDGET(entryBox_));
         
-       auto entryLabel = GTK_LABEL (gtk_label_new (""));
+       entryLabel_ = GTK_LABEL (gtk_label_new (""));
        entry_ = GTK_ENTRY(gtk_entry_new ());
        gtk_widget_set_size_request(GTK_WIDGET(entry_), 200, -1);
-       Basic::boxPack0(entryBox_, GTK_WIDGET(entryLabel), false, false, 1);
+       Basic::boxPack0(entryBox_, GTK_WIDGET(entryLabel_), false, false, 1);
        Basic::boxPack0(entryBox_, GTK_WIDGET(entry_), true, true, 5);
 
 
        //gtk_box_append(GTK_BOX (entryBox_), GTK_WIDGET(entry_));
        gtk_widget_set_halign (GTK_WIDGET(entry_),GTK_ALIGN_CENTER);
        g_object_set_data(G_OBJECT(this->dialog()),"entry", entry_);
-       g_object_set_data(G_OBJECT(this->dialog()),"entryLabel", entryLabel);
+       g_object_set_data(G_OBJECT(this->dialog()),"entryLabel", entryLabel_);
+       g_object_set_data(G_OBJECT(this->dialog()),"entryBox", entryBox_);
        g_signal_connect (G_OBJECT (entry_), "activate", 
                 ENTRY_CALLBACK (this->activate), this->dialog());
        auto apply = this->applyBox();
        gtk_box_append(GTK_BOX (entryBox_), apply);
        
-       // FIXME: I have not figured out how to
-       //        set the help text from subclass
-      /* help_ = Dialog::buttonBox(EMBLEM_QUESTION, _("Help"), 
-               (void *)help, (void *)this);
+       help_ = Dialog::buttonBox(EMBLEM_QUESTION, _("Help"), 
+               NULL, NULL);
        gtk_box_append(GTK_BOX (entryBox_), help_);
-       gtk_widget_set_visible(GTK_WIDGET(help_), false);*/
+       gtk_widget_set_visible(GTK_WIDGET(help_), false);
+       g_object_set_data(G_OBJECT(entry_),"help", help_);
 
 
       // auto cancel = this->cancelBox();
@@ -60,14 +61,6 @@ namespace xf
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
     }
 
-/*    static void help(GtkWidget *widget, void *data){
-      auto object = (DialogEntry<Type> *) data;
-      auto subclass = (Type *)object->subClass();
-      //auto dialog = subclass->dialog();
-      //auto txt = g_object_get_data(G_OBJECT(dialog), "help");
-      //DBG("help(): %s\n", txt);
-    }
-*/
   };
 }
 #endif

@@ -317,16 +317,35 @@ public:
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
 
       auto dialog = dialogObject->dialog();
+      auto regexp = gridView_p->regexp();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      auto buffer = gtk_entry_get_buffer(entry);
-      gtk_entry_buffer_set_text(buffer, gridView_p->regexp(), -1);
-
+      if (regexp && strlen(regexp)){
+        auto buffer = gtk_entry_get_buffer(entry);
+        gtk_entry_buffer_set_text(buffer, gridView_p->regexp(), -1);
+      }
+      auto help = GTK_WIDGET(g_object_get_data(G_OBJECT(entry),"help"));
+      gtk_widget_set_visible(GTK_WIDGET(help), true);
+      auto gesture = gtk_gesture_click_new();
+      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (regexHelp), dialog);
+      gtk_widget_add_controller(GTK_WIDGET(help), GTK_EVENT_CONTROLLER(gesture));
 
       //auto regexpString = Settings::getString(path,"regexp",NULL);
       //DBG("Regexp dialog path = %s  regexp=%s...\n", path, regexpString);
       dialogObject->run();
       return;
     }
+
+    static void regexHelp ( GtkGestureClick* self, int n_press, double x, double y,
+        GtkWindow *dialog){
+      //auto output = Child::getOutput();
+      //Print::showText(output);
+      //Print::print(output, g_strdup(Basic::filter_text_help()));
+      // info dialog will produce a gtk error
+      Dialogs::info(Basic::filter_text_help());
+      //DBG("%s\n", Basic::filter_text_help());
+    }
+
 
     static void
     emptyTrash(GtkButton *self, void *data){

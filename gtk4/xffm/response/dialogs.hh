@@ -55,6 +55,8 @@ namespace xf
       gtk_window_present(GTK_WINDOW(dialogObject->dialog()));
       TRACE("create dialogObject=%p, dialog=%p\n", 
           dialogObject, dialogObject->dialog()); 
+      auto dialog = dialogObject->dialog();
+      gtk_window_set_decorated(dialog, true);
       dialogObject->run();
     }
 

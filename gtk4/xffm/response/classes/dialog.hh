@@ -23,10 +23,12 @@ namespace xf
       gtk_event_controller_set_propagation_phase(motion, GTK_PHASE_CAPTURE);
       gtk_widget_add_controller(GTK_WIDGET(box), motion);
      // click
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
-      g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (callback), data);
-      gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
+      if (callback ){
+        auto gesture = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+        g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (callback), data);
+        gtk_widget_add_controller(GTK_WIDGET(box), GTK_EVENT_CONTROLLER(gesture));
+      }
       
       Basic::addMotionController(GTK_WIDGET(box));
       return GTK_WIDGET(box);
