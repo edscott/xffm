@@ -14,6 +14,10 @@ public:
 
     static void setDefaults(GtkWindow *dialog, GtkLabel *label){
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
+      auto buffer = gtk_entry_get_buffer(entry);
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto txt = gridView_p->regexp();
+      gtk_entry_buffer_set_text(buffer, txt);
     }
 
     static void *asyncYes(void *data){
@@ -46,28 +50,37 @@ public:
       auto flags = gridView_p->flags();
 
       bool update = false;
-      if (!strlen(txt)) {
+      GError *_error = NULL;
+      if (strlen(txt)){
+        auto cflags = (GRegexCompileFlags)((guint)G_REGEX_CASELESS | (guint)G_REGEX_OPTIMIZE);
+        GRegex *regex = g_regex_new (txt, cflags,(GRegexMatchFlags) 0, &_error);
+        if (!regex) {
+          gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n",
+                          _("Regular Expression syntax is incorrect"), _error->message);
+                  g_free(markup);
+                  g_error_free(_error);
+          DBG("%s", markup);
+          g_free(markup);        
+          g_error_free(_error);
+        } else { // regex is OK
+          gridView_p->flagOn(0x100); // Regexp on
+          update = true;
+          Settings::setString(path, "regexp", txt);
+          gridView_p->regexp(txt);
+          Settings::setInteger(path,"flags",gridView_p->flags()); 
+          gridView_p->regex(regex);
+        }
+      } else { // regex off
         gridView_p->flagOff(0x100); // Regexp off
         Settings::removeKey(path, "regexp");
         if (gridView_p->flags() == 0x40) {
           Settings::removeGroup(path);
         }
         gridView_p->regexp(NULL);
-      } else {
-        gridView_p->flagOn(0x100); // Regexp on
-        update = true;
-        Settings::setString(path, "regexp", txt);
-        gridView_p->regexp(txt);
-        Settings::setInteger(path,"flags",gridView_p->flags()); 
-      }
-
+        gridView_p->regex(NULL);
+      } 
       // Need to update?
-
-
-      // Check if valid regexp...
-
-
-
+      // If regexp has changed.
        return NULL;
     }
 };

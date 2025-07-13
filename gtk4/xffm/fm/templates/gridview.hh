@@ -14,7 +14,10 @@ template <class Type>
       GtkWidget *view_=NULL;
       void *gridViewClick_f_=NULL;
       char *path_=NULL;
+
       char *regexp_=NULL;
+      GRegex *regex_=NULL;
+
       // myMenu is for processing keys for individual widget popovers
       Menu<GridviewMenu<Type> > *myMenu_=NULL;
       int maxNameLen_ = 0;
@@ -27,10 +30,19 @@ template <class Type>
       GFileMonitor *monitor_ = NULL;
   public:
       FstabMonitor<Type> *fstabMonitor(void){return fstabMonitor_;}
+
       void regexp(const char *value){
         g_free(regexp_);
         regexp_ = value? g_strdup(value): NULL;
+
       }
+      GRegex *regex(void){return regex_;}
+      void regex(GRegex *value){
+        if (regex_) g_regex_unref(regex_);
+        regex_ = value;
+      }
+
+
       const char *regexp(void){return regexp_;}
       
       GFileMonitor *monitor(void){return monitor_;}
@@ -73,6 +85,19 @@ template <class Type>
         view_ = getGridView();
         //gtk_grid_view_set_single_click_activate (GTK_GRID_VIEW(view_), true);
         flags_ = Settings::getInteger(path_, "flags", 0);
+        regexp_ = Settings::getString(path_, "regexp", "");
+        GError *_error=NULL;
+        if (regexp_ && strlen(regexp_)){
+          auto cflags = (GRegexCompileFlags)((guint)G_REGEX_CASELESS | (guint)G_REGEX_OPTIMIZE);
+          regex_ = g_regex_new (regexp_, cflags,(GRegexMatchFlags) 0, &_error);
+          if (!regex_) {
+            gchar *markup = g_strdup_printf("%s: %s (%s)\n", regexp_,
+                _("Regular Expression syntax is incorrect"), _error->message);
+            DBG("%s", markup);
+            g_free(markup);    
+            g_error_free(_error);
+          }    
+        }
         TRACE("gridview flags = 0x%x\n", flags_);
         
         myMenu_ = new Menu<GridviewMenu<Type> >("foo");
@@ -106,6 +131,8 @@ template <class Type>
         if (fstabMonitor_) delete fstabMonitor_; 
 
         g_free(path_);
+        g_free(regexp_);
+        if (regex_) g_regex_unref(regex_);
         TRACE("~GridView complete.\n");
       }     
 

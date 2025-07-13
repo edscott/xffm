@@ -316,6 +316,12 @@ public:
       auto dialogObject = new dialog_t;
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
 
+      auto dialog = dialogObject->dialog();
+      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
+      auto buffer = gtk_entry_get_buffer(entry);
+      gtk_entry_buffer_set_text(buffer, gridView_p->regexp(), -1);
+
+
       //auto regexpString = Settings::getString(path,"regexp",NULL);
       //DBG("Regexp dialog path = %s  regexp=%s...\n", path, regexpString);
       dialogObject->run();

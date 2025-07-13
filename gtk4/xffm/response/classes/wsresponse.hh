@@ -13,7 +13,6 @@ public:
     const char *label(void){ return _("Workspace Switcher");}
 
     static void setDefaults(GtkWindow *dialog, GtkLabel *label){
-      auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
     }
 
     static void *asyncYes(void *data){

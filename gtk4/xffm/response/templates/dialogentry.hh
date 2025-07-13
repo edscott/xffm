@@ -2,8 +2,9 @@
 # define DIALOGENTRY_HH
 namespace xf
 {
-  template <class Type>
-  class DialogEntry : public DialogTimeout<Type>{
+  template <class subClass_t>
+  class DialogEntry : public DialogTimeout<subClass_t>{
+    using dialog_t = DialogEntry<subClass_t>; 
     protected:
       
       GtkBox *entryBox_;
@@ -13,6 +14,7 @@ namespace xf
    public:
     GtkEntry *entry(void){return entry_;}
     DialogEntry(void){
+       
        entryBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
        gtk_widget_set_hexpand(GTK_WIDGET(entryBox_), false);
        gtk_widget_set_halign (GTK_WIDGET(entryBox_),GTK_ALIGN_CENTER);
