@@ -52,11 +52,12 @@ public:
         if (gridView_p->flags() == 0x40) {
           Settings::removeGroup(path);
         }
-
+        gridView_p->regexp(NULL);
       } else {
         gridView_p->flagOn(0x100); // Regexp on
         update = true;
         Settings::setString(path, "regexp", txt);
+        gridView_p->regexp(txt);
         Settings::setInteger(path,"flags",gridView_p->flags()); 
       }
 

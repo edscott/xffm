@@ -14,6 +14,7 @@ template <class Type>
       GtkWidget *view_=NULL;
       void *gridViewClick_f_=NULL;
       char *path_=NULL;
+      char *regexp_=NULL;
       // myMenu is for processing keys for individual widget popovers
       Menu<GridviewMenu<Type> > *myMenu_=NULL;
       int maxNameLen_ = 0;
@@ -26,7 +27,12 @@ template <class Type>
       GFileMonitor *monitor_ = NULL;
   public:
       FstabMonitor<Type> *fstabMonitor(void){return fstabMonitor_;}
-
+      void regexp(const char *value){
+        g_free(regexp_);
+        regexp_ = value? g_strdup(value): NULL;
+      }
+      const char *regexp(void){return regexp_;}
+      
       GFileMonitor *monitor(void){return monitor_;}
       void monitor(GFileMonitor *monitor){monitor_ = monitor;}
       double X(void){return X_;}

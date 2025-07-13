@@ -608,12 +608,17 @@ public:
       setupMenu(menu, gridView_p);
       char *basename = Child::getTabname(gridView_p->path());
 
-      auto markup = g_strconcat("<b><span color=\"red\">",basename,"</span></b>", NULL);
+      auto mark2 = gridView_p->regexp()==NULL? g_strdup(""):
+             g_strconcat(" [","<span color=\"blue\">", 
+             gridView_p->regexp(),"</span>]", NULL);
+      auto markup = g_strconcat("<b><span color=\"red\">",basename,
+             "</span>", mark2,"</b>", NULL);
       gtk_popover_popup(menu);
       auto label = GTK_LABEL(g_object_get_data(G_OBJECT(menu), "titleLabel"));
       gtk_label_set_markup(label, markup);
       g_free(basename);
       g_free(markup);
+      g_free(mark2);
 
     }
 private:

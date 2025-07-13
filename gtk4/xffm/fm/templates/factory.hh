@@ -538,6 +538,10 @@ ClickMenu
         auto path = Basic::getPath(item);
         auto dirPath = g_path_get_dirname(path);
         int flags = Settings::getInteger(dirPath, "flags", 0); 
+        
+        char *regexp = Settings::getString(dirPath, "regexp", ""); 
+        gridView_p->regexp(regexp);
+        g_free(regexp);
        
         TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);

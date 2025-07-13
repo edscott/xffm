@@ -316,8 +316,8 @@ public:
       auto dialogObject = new dialog_t;
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
 
-      auto regexpString = Settings::getString(path,"regexp",NULL);
-      DBG("Regexp dialog path = %s  regexp=%s...\n", path, regexpString);
+      //auto regexpString = Settings::getString(path,"regexp",NULL);
+      //DBG("Regexp dialog path = %s  regexp=%s...\n", path, regexpString);
       dialogObject->run();
       return;
     }
