@@ -11,7 +11,7 @@ namespace xf {
     const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("Environment"),
-        "test",
+ //       "test",
 //          _("Search"),
 //          _("Open terminal"),
         _("Paste"), // 
@@ -232,6 +232,7 @@ namespace xf {
       } else {
         Workdir<Type>::setWorkdir(gridview_p->path());
       }
+
     }
 
     
@@ -296,7 +297,7 @@ namespace xf {
     test2(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);
-      Dialogs::info("find in files, test");
+      Dialogs::info("This is a info dialog test");
 /*
       using subClass_t = infoResponse;
       using dialog_t = DialogBasic<subClass_t>;

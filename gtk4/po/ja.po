@@ -1,15 +1,12 @@
-# Xffm4 translation file: Wed Jun 11 17:07:21 CST 2025
+# Xffm4 translation file: lun 14 jul 2025 16:36:36 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
-#: ../xffm/fm/classes/ecryptfs.hh:189
-#: ../xffm/response/classes/envresponse.hh:92
-#: ../xffm/response/classes/cpresponse.hh:44
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-06-09 16:21-0600\n"
+        "POT-Creation-Date: 2025-07-14 16:34-0600\n"
         "PO-Revision-Date: 2011-10-28 09:23+0900\n"
         "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
         "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -19,13 +16,13 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Content-Transfer-Encoding: 8bit\n"
         "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:729
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:36
 #: ../xffm/menus/templates/pathbarmenu.hh:48
 #: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
+#: ../xffm/menus/templates/menu.hh:175 ../xffm/menus/templates/menu.hh:180
 msgid   "Clipboard is empty."
 msgstr  "クリップボードは空です。"
 
@@ -33,37 +30,21 @@ msgstr  "クリップボードは空です。"
 msgid   "Clipboard contents"
 msgstr  "クリップボードの内容"
 
-#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:495
 msgid   "Invalid clip"
 msgstr  "正しくないクリップ"
 
-#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
-#: ../xffm/fm/templates/fstabmonitor.hh:366
-#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
-#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
-#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
-msgid   "Disk Mounter"
-msgstr  "ディスク・マウンタ"
-
-#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
-#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
-#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
-#: ../xffm/menus/templates/menucallbacks.hh:248
-#: ../xffm/menus/templates/mainMenu.hh:218
-msgid   "Bookmarks"
-msgstr  "ブックマーク(B)"
-
-#: ../xffm/fm/templates/workdir.hh:249
+#: ../xffm/fm/templates/workdir.hh:250
 #, c-format
 msgid   "The %s utility is not installed."
 msgstr  "%s というユーティリティがインストールされていません。"
 
-#: ../xffm/fm/templates/workdir.hh:270
+#: ../xffm/fm/templates/workdir.hh:271
 #, fuzzy
 msgid   "Trash is empty"
 msgstr  "タブレットのバッテリーが空です"
 
-#: ../xffm/fm/templates/workdir.hh:291
+#: ../xffm/fm/templates/workdir.hh:292
 #, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "ボリューム '%s' はマウントしていません。"
@@ -137,21 +118,21 @@ msgstr  "強制終了(K)"
 msgid   "Segmentation fault"
 msgstr  "Segmentation fault"
 
-#: ../xffm/fm/templates/dnd.hh:639
+#: ../xffm/fm/templates/dnd.hh:638
 msgid   "Target"
 msgstr  "対象"
 
-#: ../xffm/fm/templates/dnd.hh:640
+#: ../xffm/fm/templates/dnd.hh:639
 msgid   "Source"
 msgstr  "ソース"
 
-#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:648 ../xffm/fm/templates/dnd.hh:683
 #, fuzzy
 msgid   "Invalid target folder"
 msgstr  "無効な引数の値です"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
-#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/fm/templates/dnd.hh:670 ../xffm/fm/templates/gridview.hh:541
+#: ../xffm/fm/templates/gridview.hh:584
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:62
@@ -159,40 +140,40 @@ msgstr  "無効な引数の値です"
 msgid   "Link"
 msgstr  "リンク"
 
-#: ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:683
 msgid   "Drag:"
 msgstr  "重み:"
 
-#: ../xffm/fm/templates/dnd.hh:722
+#: ../xffm/fm/templates/dnd.hh:721
 msgid   "files"
 msgstr  "個のファイル"
 
-#: ../xffm/fm/templates/dnd.hh:723
+#: ../xffm/fm/templates/dnd.hh:722
 #, fuzzy, c-format
 msgid   "+ %s more"
 msgstr  "%s とあと %s"
 
-#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
+#: ../xffm/fm/templates/dnd.hh:729 ../xffm/fm/classes/bash.hh:653
 msgid   "file"
 msgstr  "file"
 
-#: ../xffm/fm/templates/dnd.hh:731
+#: ../xffm/fm/templates/dnd.hh:730
 msgid   ": "
 msgstr  ": "
 
-#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/fm/templates/window.hh:272
 #: ../xffm/response/templates/openwith.hh:137
 #: ../xffm/response/templates/dialogbasic.hh:304
-#: ../xffm/find/templates/dndbox.hh:153
+#: ../xffm/find/templates/dndbox.hh:155
 msgid   "Close"
 msgstr  "閉じる"
 
-#: ../xffm/fm/templates/window.hh:505
+#: ../xffm/fm/templates/window.hh:544
 msgid   "Long press time"
 msgstr  "長く押下する時間"
 
-#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/fm/templates/window.hh:552 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:538 ../xffm/fm/templates/gridview.hh:581
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:44
@@ -203,8 +184,8 @@ msgstr  "長く押下する時間"
 msgid   "Cut"
 msgstr  "切り取り(T)"
 
-#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/fm/templates/window.hh:554 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:537 ../xffm/fm/templates/gridview.hh:580
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:28
@@ -220,9 +201,9 @@ msgstr  "切り取り(T)"
 msgid   "Copy"
 msgstr  "コピー(C)"
 
-#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
-#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
-#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/fm/templates/window.hh:556 ../xffm/fm/templates/window.hh:664
+#: ../xffm/fm/templates/window.hh:691 ../xffm/fm/templates/gridview.hh:564
+#: ../xffm/fm/templates/gridview.hh:728
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:24
 #: ../xffm/menus/templates/pathbarmenu.hh:35
@@ -232,29 +213,24 @@ msgstr  "コピー(C)"
 #: ../xffm/menus/templates/inputMenu.hh:45
 #: ../xffm/menus/templates/inputMenu.hh:61
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:80
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:67
 #: ../xffm/menus/templates/gridviewmenu.hh:90
-#: ../xffm/menus/templates/menu.hh:166
+#: ../xffm/menus/templates/menu.hh:167
 msgid   "Paste"
 msgstr  "貼り付け(P)"
 
-#: ../xffm/fm/templates/window.hh:519
+#: ../xffm/fm/templates/window.hh:558
 msgid   "New Tab"
 msgstr  "新規タブ"
 
-#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
+#: ../xffm/fm/templates/window.hh:559 ../xffm/fm/templates/window.hh:561
 msgid   "Main menu"
 msgstr  "メインメニュー"
 
-#: ../xffm/fm/templates/window.hh:592
-#, fuzzy
-msgid   "Directory name: "
-msgstr  "ディレクトリ名:"
-
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:26
 #: ../xffm/menus/templates/inputMenu.hh:41
@@ -264,137 +240,146 @@ msgstr  "ディレクトリ名:"
 #: ../xffm/menus/templates/outputMenu.hh:38
 #: ../xffm/menus/templates/outputMenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 msgid   "Select All"
 msgstr  "すべて選択"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
+#: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:78
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "正規表現としてマッチ(R)"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
 #: ../xffm/menus/templates/mainMenu.hh:28
 msgid   "Show"
 msgstr  "表示"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:96
-#: ../xffm/menus/templates/mainMenu.hh:119
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:159
-msgid   "Hidden files"
-msgstr  "隠しファイル"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:97
-#: ../xffm/menus/templates/mainMenu.hh:120
-#: ../xffm/menus/templates/mainMenu.hh:133
-#: ../xffm/menus/templates/mainMenu.hh:160
-msgid   "Backup files"
-msgstr  "バックアップファイル"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
-#, fuzzy
-msgid   "Sort mode"
-msgstr  "厳しいモード(S)"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
-#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:29
 #: ../xffm/menus/templates/mainMenu.hh:98
 #: ../xffm/menus/templates/mainMenu.hh:121
 #: ../xffm/menus/templates/mainMenu.hh:134
 #: ../xffm/menus/templates/mainMenu.hh:161
+msgid   "Hidden files"
+msgstr  "隠しファイル"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:122
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:162
+msgid   "Backup files"
+msgstr  "バックアップファイル"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/menus/templates/mainMenu.hh:32
+#, fuzzy
+msgid   "Sort mode"
+msgstr  "厳しいモード(S)"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:715
+#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/menus/templates/mainMenu.hh:123
+#: ../xffm/menus/templates/mainMenu.hh:136
+#: ../xffm/menus/templates/mainMenu.hh:163
 msgid   "Descending"
 msgstr  "降順(E)"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:676
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:715
 #: ../xffm/response/templates/fileresponse.hh:231
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:99
-#: ../xffm/menus/templates/mainMenu.hh:122
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:165
-msgid   "Name"
-msgstr  "名前"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
-#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:100
-#: ../xffm/menus/templates/mainMenu.hh:123
-#: ../xffm/menus/templates/mainMenu.hh:142
-#: ../xffm/menus/templates/mainMenu.hh:162
-msgid   "Date"
-msgstr  "日付"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
-#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:101
 #: ../xffm/menus/templates/mainMenu.hh:124
 #: ../xffm/menus/templates/mainMenu.hh:143
-#: ../xffm/menus/templates/mainMenu.hh:163
-msgid   "Size"
-msgstr  "サイズ"
+#: ../xffm/menus/templates/mainMenu.hh:167
+msgid   "Name"
+msgstr  "名前"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/child.hh:303 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:102
 #: ../xffm/menus/templates/mainMenu.hh:125
 #: ../xffm/menus/templates/mainMenu.hh:144
 #: ../xffm/menus/templates/mainMenu.hh:164
+msgid   "Date"
+msgstr  "日付"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/child.hh:304 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:126
+#: ../xffm/menus/templates/mainMenu.hh:145
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Size"
+msgstr  "サイズ"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/classes/child.hh:305
+#: ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:104
+#: ../xffm/menus/templates/mainMenu.hh:127
+#: ../xffm/menus/templates/mainMenu.hh:146
+#: ../xffm/menus/templates/mainMenu.hh:166
 msgid   "File type"
 msgstr  "ファイルの種類"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:710
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:200
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:202
 msgid   "Apply modifications"
 msgstr  "変更を適用"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
-#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
-#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:689
+#: ../xffm/fm/templates/gridview.hh:555 ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:82
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:68
 #: ../xffm/menus/templates/gridviewmenu.hh:92
 msgid   "Add bookmark"
 msgstr  "ブックマークに追加します"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
-#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:690
+#: ../xffm/fm/templates/gridview.hh:515 ../xffm/fm/templates/gridview.hh:558
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:83
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Remove bookmark"
 msgstr  "ブックマークを削除します"
 
-#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
-#: ../xffm/menus/templates/mainMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:77
+#: ../xffm/fm/templates/window.hh:670 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:79
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "ごみ箱を空にする(E)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/fm/templates/gridview.hh:95
+#: ../xffm/response/templates/regexpresponse.hh:44
+#: ../xffm/response/templates/regexpresponse.hh:49
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "正規表現に構文エラーがあります"
+
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:579
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:58
 #: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Open with"
 msgstr  "別のアプリで開く"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
-#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:543
+#: ../xffm/fm/templates/gridview.hh:586
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -413,24 +398,24 @@ msgstr  "別のアプリで開く"
 msgid   "Delete"
 msgstr  "削除(D)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
-#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:21
 #: ../xffm/menus/templates/gridviewmenu.hh:72
 #: ../xffm/menus/templates/gridviewmenu.hh:98
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "選択したオブジェクトを含む圧縮されたアーカイブを生成します"
 
-#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
-#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/fm/templates/gridview.hh:469 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:542 ../xffm/fm/templates/gridview.hh:585
 #: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:95
 msgid   "Properties"
 msgstr  "プロパティ"
 
-#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
-#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/fm/templates/gridview.hh:472 ../xffm/fm/templates/gridview.hh:493
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:56
 #: ../xffm/menus/templates/gridviewmenu.hh:80
@@ -438,8 +423,8 @@ msgstr  "プロパティ"
 msgid   "Unmount Volume"
 msgstr  "Root ボリューム"
 
-#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
-#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/fm/templates/gridview.hh:475 ../xffm/fm/templates/gridview.hh:496
+#: ../xffm/fm/templates/gridview.hh:573
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:55
@@ -448,7 +433,7 @@ msgstr  "Root ボリューム"
 msgid   "Mount Volume"
 msgstr  "ミュート"
 
-#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/fm/templates/gridview.hh:535
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:22
 #: ../xffm/menus/templates/pathbarmenu.hh:33
@@ -460,7 +445,7 @@ msgstr  "ミュート"
 msgid   "Open in new tab"
 msgstr  "新しいタブで開く"
 
-#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/fm/templates/gridview.hh:539 ../xffm/fm/templates/gridview.hh:582
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:30
@@ -469,7 +454,7 @@ msgstr  "新しいタブで開く"
 msgid   "Rename"
 msgstr  "名前の変更"
 
-#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/fm/templates/gridview.hh:540 ../xffm/fm/templates/gridview.hh:583
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:31
@@ -478,15 +463,15 @@ msgstr  "名前の変更"
 msgid   "Duplicate"
 msgstr  "複製"
 
-#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
-#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/fm/templates/gridview.hh:578 ../xffm/fm/templates/gridview.hh:689
+#: ../xffm/fm/templates/gridview.hh:690
 #: ../xffm/menus/templates/gridviewmenu.hh:17
 #: ../xffm/menus/templates/gridviewmenu.hh:59
 #: ../xffm/menus/templates/gridviewmenu.hh:84
 msgid   "auto"
 msgstr  "自動"
 
-#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:595 ../xffm/fm/templates/gridview.hh:602
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:36
@@ -495,14 +480,14 @@ msgstr  "自動"
 msgid   "Decrypt File..."
 msgstr  "ファイルを復号(D)..."
 
-#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/fm/templates/gridview.hh:597 ../xffm/fm/templates/gridview.hh:600
 #: ../xffm/menus/templates/gridviewmenu.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:96
 msgid   "Encrypt File..."
 msgstr  "ファイルを暗号化(E)..."
 
-#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/openwith.hh:158
 msgid   "Multiple selections"
 msgstr  "複数選択"
@@ -524,10 +509,10 @@ msgid   "Go to"
 msgstr  "ジャンプ(G)"
 
 #: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
-#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:191
 #: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
-#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
-#: ../xffm/find/templates/findresponse.hh:884
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:824
+#: ../xffm/find/templates/findresponse.hh:839
 msgid   "unknown"
 msgstr  "不明"
 
@@ -582,109 +567,138 @@ msgid   " TTY"
 msgstr  "端末"
 
 #: ../xffm/fm/templates/prompt.hh:236
-#: ../xffm/menus/templates/menucallbacks.hh:48
+#: ../xffm/menus/templates/menucallbacks.hh:50
 #, c-format
 msgid   "failed to chdir to %s"
 msgstr  "%s にディレクトリを変更 (chdir) できませんでした"
 
-#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
+#: ../xffm/fm/templates/properties.hh:122
 msgid   "Properties and Attributes"
 msgstr  "プロパティと属性値"
 
-#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
+#: ../xffm/fm/templates/properties.hh:140
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "ファイルのモード"
 
-#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
-#: ../xffm/response/classes/envresponse.hh:123
+#: ../xffm/fm/templates/properties.hh:167
+#: ../xffm/response/classes/envresponse.hh:126
 msgid   "Apply changes"
 msgstr  "変更を適用"
 
-#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
-#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:313
-#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/tarresponse.hh:210
+#: ../xffm/response/templates/efsresponse.hh:181
 #: ../xffm/response/templates/dialogbasic.hh:309
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
 #: ../xffm/response/classes/cpresponse.hh:81
-#: ../xffm/find/templates/findsignals.hh:568
+#: ../xffm/find/templates/findsignals.hh:575
 msgid   "Cancel"
 msgstr  "キャンセル"
 
-#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
+#: ../xffm/fm/templates/properties.hh:358
 msgid   "Encoding"
 msgstr  "エンコード"
 
-#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
+#: ../xffm/fm/templates/properties.hh:359
 msgid   "Mimetype"
 msgstr  "MIME タイプ"
 
-#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
+#: ../xffm/fm/templates/properties.hh:381
 msgid   "Successfully moved to trash."
 msgstr  "ごみ箱に移動しました。"
 
-#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
+#: ../xffm/fm/templates/properties.hh:382
 msgid   "Source:"
 msgstr  "転送元:"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:22
-msgid   "Move to tab"
-msgstr  "タブに移動"
+#: ../xffm/fm/classes/localdir.hh:173 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "正規表現"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:83
-#: ../xffm/menus/templates/mainMenu.hh:111
-msgid   "Search"
-msgstr  "検索"
+#: ../xffm/fm/classes/localdir.hh:176
+#, fuzzy, c-format
+msgid   "%s (%s Filtered)"
+msgstr  "%s (%d個のアイテム)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:112
-msgid   "Open terminal"
-msgstr  "端末を開く"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:86
-#: ../xffm/menus/templates/mainMenu.hh:113
-msgid   "Home"
-msgstr  "ホーム"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:26
-msgid   "Open a New Window"
-msgstr  "新しいウィンドウを開きます"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:40
-msgid   "Icon Size"
-msgstr  "アイコンの大きさ"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
-msgid   "Color settings"
-msgstr  "色の設定"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:63
+#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:13
 msgid   "Colors"
 msgstr  "色"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:144
+#: ../xffm/fm/classes/fmbuttonbox.hh:27
+msgid   "Switch button"
+msgstr  "スイッチボタン"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:28 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:113
+msgid   "Search"
+msgstr  "検索"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:114
+msgid   "Open terminal"
+msgstr  "端末を開く"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:115
+msgid   "Home"
+msgstr  "ホーム"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:31
+msgid   "Open a New Window"
+msgstr  "新しいウィンドウを開きます"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:51
+msgid   "Icon Size"
+msgstr  "アイコンの大きさ"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:74 ../xffm/menus/templates/mainMenu.hh:68
+msgid   "Color settings"
+msgstr  "色の設定"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:166
 msgid   "Icon Size:"
 msgstr  "アイコンのサイズ:"
 
-#: ../xffm/fm/classes/settings.hh:153
+#: ../xffm/fm/classes/settings.hh:179
 msgid   "New File:"
 msgstr  "新しいファイル"
 
-#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/fm/classes/root.hh:26 ../xffm/fm/classes/child.hh:266
+msgid   "Disk Mounter"
+msgstr  "ディスク・マウンタ"
+
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:503
 #: ../xffm/response/templates/efsresponse.hh:40
 msgid   "New"
 msgstr  "新規(N)"
 
-#: ../xffm/fm/classes/root.hh:59
+#: ../xffm/fm/classes/root.hh:62
 msgid   "Trash bin"
 msgstr  "ごみ箱"
+
+#: ../xffm/fm/classes/child.hh:265
+msgid   "Bookmarks"
+msgstr  "ブックマーク(B)"
+
+#: ../xffm/fm/classes/basic.hh:35
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  "* は何もなしもしくはどんな長さでも一致。\n"
+        "? はどんな長さでも一文字一致\n"
 
 #: ../xffm/fm/classes/progress.hh:73
 msgid   "Running"
@@ -706,7 +720,7 @@ msgstr  "ファイル(F)"
 msgid   "Command history"
 msgstr  "コマンド履歴(M)"
 
-#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:697
 msgid   "User"
 msgstr  "ユーザー"
 
@@ -1064,37 +1078,38 @@ msgid   "The  password  can  be  specified on the command line. Since the "
         "recommended to use this option only for testing purposes."
 msgstr  ""
 
-#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
-#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/fm/classes/ecryptfs.hh:379 ../xffm/fm/classes/ecryptfs.hh:380
+#: ../xffm/fm/classes/ecryptfs.hh:402
 #: ../xffm/response/templates/mountresponse.hh:151
-#: ../xffm/response/templates/efsresponse.hh:138
+#: ../xffm/response/templates/efsresponse.hh:142
 msgid   "Mount"
 msgstr  "埋め込み"
 
-#: ../xffm/fm/classes/ecryptfs.hh:392
-#: ../xffm/response/templates/efsresponse.hh:181
+#: ../xffm/fm/classes/ecryptfs.hh:396
+#: ../xffm/response/templates/tarresponse.hh:214
+#: ../xffm/response/templates/efsresponse.hh:185
 msgid   "Save"
 msgstr  "保存する"
 
-#: ../xffm/fm/classes/ecryptfs.hh:612
-#: ../xffm/response/templates/efsresponse.hh:160
-#: ../xffm/find/templates/findresponse.hh:275
-#: ../xffm/find/templates/findresponse.hh:561
-#: ../xffm/find/templates/findresponse.hh:594
+#: ../xffm/fm/classes/ecryptfs.hh:616
+#: ../xffm/response/templates/efsresponse.hh:164
+#: ../xffm/find/templates/findresponse.hh:292
+#: ../xffm/find/templates/findresponse.hh:512
+#: ../xffm/find/templates/findresponse.hh:547
 msgid   "Options"
 msgstr  "オプション"
 
-#: ../xffm/fm/classes/ecryptfs.hh:613
-#: ../xffm/response/templates/efsresponse.hh:166
+#: ../xffm/fm/classes/ecryptfs.hh:617
+#: ../xffm/response/templates/efsresponse.hh:170
 msgid   "Advanced"
 msgstr  "拡張"
 
-#: ../xffm/fm/classes/ecryptfs.hh:928
+#: ../xffm/fm/classes/ecryptfs.hh:932
 #, c-format
 msgid   "Mounting %s"
 msgstr  "%sをマウント中"
 
-#: ../xffm/fm/classes/ecryptfs.hh:986
+#: ../xffm/fm/classes/ecryptfs.hh:990
 #, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "%s のパスフレーズを入力してください"
@@ -1105,10 +1120,10 @@ msgid   "Mount Device"
 msgstr  "デバイスをマウント"
 
 #: ../xffm/response/templates/mountresponse.hh:128
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:484
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:488
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Mount Point"
 msgstr  "マウントオプション(P)"
 
@@ -1121,6 +1136,10 @@ msgstr  "フォルダ %s を作成できません"
 #: ../xffm/response/templates/mkdirresponse.hh:70
 msgid   "Sorry"
 msgstr  "申し訳ありません"
+
+#: ../xffm/response/templates/dialogentry.hh:41
+msgid   "Help"
+msgstr  "ヘルプ(H)"
 
 #: ../xffm/response/templates/fileresponse.hh:37
 msgid   "Select Directory"
@@ -1200,39 +1219,31 @@ msgstr  "外部メールクライアントを使う"
 msgid   "Cannot find executable for \"%s\""
 msgstr  "実行ファイルが見つかりません: %s"
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "GZip"
-msgstr  "GZip"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "BZip2"
-msgstr  "BZip2"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-#, fuzzy
-msgid   "XZ"
-msgstr  "XYZ"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "Zip"
-msgstr  "Zip"
-
-#: ../xffm/response/templates/tarresponse.hh:20
+#: ../xffm/response/templates/tarresponse.hh:34
 msgid   "Compressed file..."
 msgstr  "圧縮ファイル(E)..."
 
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:484
+#: ../xffm/response/templates/tarresponse.hh:174
+#, fuzzy
+msgid   "Target directory:"
+msgstr  "親ディレクトリ"
+
+#: ../xffm/response/templates/tarresponse.hh:183
+msgid   "Name:"
+msgstr  "氏名:"
+
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:488
 msgid   "Encrypted"
 msgstr  "暗号化済み"
 
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Unencrypted"
 msgstr  "暗合化されていない"
 
-#: ../xffm/response/templates/efsresponse.hh:485
-#: ../xffm/response/templates/efsresponse.hh:491
+#: ../xffm/response/templates/efsresponse.hh:489
+#: ../xffm/response/templates/efsresponse.hh:495
 msgid   "Folder does not exist"
 msgstr  "フォルダーが存在しません"
 
@@ -1253,7 +1264,7 @@ msgstr  "完了にする"
 #: ../xffm/response/classes/lnresponse.hh:10
 #: ../xffm/response/classes/cpresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:9
-#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
+#: ../xffm/find/templates/findresponse.hh:440 ../xffm/find/classes/fgr.hh:124
 msgid   "Path"
 msgstr  "パス名"
 
@@ -1266,6 +1277,11 @@ msgstr  "'%s' というフォルダーを作成できません: %s"
 #, fuzzy
 msgid   "Sorry, file not found"
 msgstr  "フォントファイルが見つかりません"
+
+#: ../xffm/response/templates/regexpresponse.hh:11
+#, fuzzy
+msgid   "foo"
+msgstr  "以下の期間:"
 
 #: ../xffm/response/templates/bfishresponse.hh:93
 msgid   "Encrypt:"
@@ -1308,7 +1324,7 @@ msgstr  "パスワード不一致"
 msgid   "The location does not exist."
 msgstr  "場所 \"%s\" はもはや存在しません。"
 
-#: ../xffm/response/dialogs.hh:68
+#: ../xffm/response/dialogs.hh:73
 #, c-format
 msgid   "Delete '%s'"
 msgstr  "'%s' を削除します"
@@ -1331,16 +1347,16 @@ msgstr  "警告"
 msgid   "You have selected multiple files or folders"
 msgstr  "複数のファイルまたはフォルダーを選択しました"
 
-#: ../xffm/response/classes/envresponse.hh:90
+#: ../xffm/response/classes/envresponse.hh:93
 #, fuzzy
 msgid   "Environment variables"
 msgstr  "環境変数"
 
-#: ../xffm/response/classes/envresponse.hh:122
+#: ../xffm/response/classes/envresponse.hh:125
 msgid   "No changes need to be saved"
 msgstr  "保存が必要な変更はありません"
 
-#: ../xffm/response/classes/envresponse.hh:217
+#: ../xffm/response/classes/envresponse.hh:220
 #, fuzzy
 msgid   "Environment Variable"
 msgstr  "環境変数"
@@ -1358,14 +1374,14 @@ msgstr  "アイドル時間 (分)"
 msgid   "Workspace Switcher"
 msgstr  "ワークスペース切り換え器"
 
-#: ../xffm/response/classes/wsresponse.hh:36
-#: ../xffm/menus/templates/menucallbacks.hh:130
+#: ../xffm/response/classes/wsresponse.hh:35
+#: ../xffm/menus/templates/menucallbacks.hh:134
 #, fuzzy, c-format
 msgid   "Workspace %s"
 msgstr  "ワークスペース %s%d"
 
-#: ../xffm/response/classes/wsresponse.hh:37
-#: ../xffm/menus/templates/menucallbacks.hh:131
+#: ../xffm/response/classes/wsresponse.hh:36
+#: ../xffm/menus/templates/menucallbacks.hh:135
 msgid   "does not exist"
 msgstr  "が存在しない"
 
@@ -1410,228 +1426,220 @@ msgstr  "セキュリティ"
 msgid   "No Read Permission"
 msgstr  "読み取り権限がありません"
 
-#: ../xffm/find/templates/findresponse.hh:111
-msgid   "Find files"
-msgstr  "ファイルを検索します"
-
-#: ../xffm/find/templates/findresponse.hh:278
-#: ../xffm/find/templates/findresponse.hh:780
+#: ../xffm/find/templates/findresponse.hh:295
+#: ../xffm/find/templates/findresponse.hh:735
 msgid   "Advanced options"
 msgstr  "上級者向けオプション"
 
-#: ../xffm/find/templates/findresponse.hh:286
+#: ../xffm/find/templates/findresponse.hh:303
 msgid   "Find in Files"
 msgstr  "ファイル内の検索"
 
-#: ../xffm/find/templates/findresponse.hh:290
-#: ../xffm/find/templates/findresponse.hh:312
+#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:329
 msgid   "Cancel Operation"
 msgstr  "操作をキャンセルする"
 
-#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:324
 #, fuzzy
 msgid   "Show search results for this query"
 msgstr  "検索結果は空です。"
 
-#: ../xffm/find/templates/findresponse.hh:323
-#: ../xffm/find/templates/findresponse.hh:327
+#: ../xffm/find/templates/findresponse.hh:340
+#: ../xffm/find/templates/findresponse.hh:344
 msgid   "Clear search"
 msgstr  "検索をクリア"
 
-#: ../xffm/find/templates/findresponse.hh:503
-msgid   "Show help"
-msgstr  "ヘルプを表示する"
-
-#: ../xffm/find/templates/findresponse.hh:532
+#: ../xffm/find/templates/findresponse.hh:483
 msgid   "Case Sensitive"
 msgstr  "大/小文字を区別する"
 
-#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findresponse.hh:484
 msgid   "Extended regexp"
 msgstr  "regexp延長"
 
-#: ../xffm/find/templates/findresponse.hh:534
+#: ../xffm/find/templates/findresponse.hh:485
 msgid   "Include binary files"
 msgstr  "バイナリファイルを含める(B)"
 
-#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
+#: ../xffm/find/templates/findresponse.hh:486 ../xffm/find/classes/fgr.hh:212
 msgid   "Line Count"
 msgstr  "行数"
 
-#: ../xffm/find/templates/findresponse.hh:544
+#: ../xffm/find/templates/findresponse.hh:495
 msgid   "Anywhere"
 msgstr  "どこでも"
 
-#: ../xffm/find/templates/findresponse.hh:545
+#: ../xffm/find/templates/findresponse.hh:496
 msgid   "Whole words only"
 msgstr  "単語単位(W)"
 
-#: ../xffm/find/templates/findresponse.hh:546
+#: ../xffm/find/templates/findresponse.hh:497
 msgid   "lines"
 msgstr  "行"
 
-#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
+#: ../xffm/find/templates/findresponse.hh:498 ../xffm/find/classes/fgr.hh:210
 msgid   "No match"
 msgstr  "一致しません"
 
-#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
+#: ../xffm/find/templates/findresponse.hh:522 ../xffm/find/classes/fgr.hh:126
 msgid   "Filter:"
 msgstr  "フィルター(F):"
 
-#: ../xffm/find/templates/findresponse.hh:577
-#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
+#: ../xffm/find/templates/findresponse.hh:530
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:146
 msgid   "Recursive"
 msgstr  "繰り返し"
 
-#: ../xffm/find/templates/findresponse.hh:578
-#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
+#: ../xffm/find/templates/findresponse.hh:531
+#: ../xffm/find/templates/findsignals.hh:306 ../xffm/find/classes/fgr.hh:142
 msgid   "Find hidden files and directories"
 msgstr  "隠しファイル/ディレクトリを検索する"
 
-#: ../xffm/find/templates/findresponse.hh:580
-#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
+#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findsignals.hh:315 ../xffm/find/classes/fgr.hh:138
 msgid   "Stay on single filesystem"
 msgstr  "単一のファイルシステム上のみ"
 
-#: ../xffm/find/templates/findresponse.hh:582
+#: ../xffm/find/templates/findresponse.hh:535
 msgid   "Upper limit"
 msgstr  "上限"
 
-#: ../xffm/find/templates/findresponse.hh:583
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findresponse.hh:536
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Results"
 msgstr  "結果表示用"
 
-#: ../xffm/find/templates/findresponse.hh:602
+#: ../xffm/find/templates/findresponse.hh:555
 msgid   "Contains the text"
 msgstr  "次の文字列を含む(T)"
 
-#: ../xffm/find/templates/findresponse.hh:667
-#: ../xffm/find/templates/findsignals.hh:318
+#: ../xffm/find/templates/findresponse.hh:622
+#: ../xffm/find/templates/findsignals.hh:321
 msgid   "File size"
 msgstr  "ファイルサイズ"
 
-#: ../xffm/find/templates/findresponse.hh:680
+#: ../xffm/find/templates/findresponse.hh:635
 msgid   "At Least"
 msgstr  "以上"
 
-#: ../xffm/find/templates/findresponse.hh:680
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:635
+#: ../xffm/find/templates/findresponse.hh:642
 #, fuzzy
 msgid   "kBytes"
 msgstr  "バイト"
 
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "At Most"
 msgstr  "以下"
 
-#: ../xffm/find/templates/findresponse.hh:695
-#: ../xffm/find/templates/findsignals.hh:324
+#: ../xffm/find/templates/findresponse.hh:650
+#: ../xffm/find/templates/findsignals.hh:327
 msgid   "Specific Time"
 msgstr  "指定した時間"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Modified"
 msgstr  "変更済"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Created"
 msgstr  "作成日"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Accessed"
 msgstr  "アクセス時刻"
 
-#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/templates/findresponse.hh:661 ../xffm/find/classes/fgr.hh:166
 #: ../xffm/find/classes/fgr.hh:168
 msgid   "Minutes"
 msgstr  "分"
 
-#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/templates/findresponse.hh:665 ../xffm/find/classes/fgr.hh:169
 #: ../xffm/find/classes/fgr.hh:171
 msgid   "Hours"
 msgstr  "時間"
 
-#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/templates/findresponse.hh:669 ../xffm/find/classes/fgr.hh:172
 #: ../xffm/find/classes/fgr.hh:174
 msgid   "Days"
 msgstr  "日"
 
-#: ../xffm/find/templates/findresponse.hh:718
+#: ../xffm/find/templates/findresponse.hh:673
 msgid   "Months"
 msgstr  "カ月"
 
-#: ../xffm/find/templates/findresponse.hh:729
-#: ../xffm/find/templates/findsignals.hh:329
+#: ../xffm/find/templates/findresponse.hh:684
+#: ../xffm/find/templates/findsignals.hh:332
 msgid   "File properties"
 msgstr  "ファイルのプロパティ"
 
-#: ../xffm/find/templates/findresponse.hh:748
+#: ../xffm/find/templates/findresponse.hh:703
 msgid   "Group"
 msgstr  "グループ"
 
-#: ../xffm/find/templates/findresponse.hh:753
-#: ../xffm/find/templates/findsignals.hh:175
+#: ../xffm/find/templates/findresponse.hh:708
+#: ../xffm/find/templates/findsignals.hh:178
 msgid   "Octal Permissions"
 msgstr  "8 進数表記のアクセス権"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:761
-#: ../xffm/find/templates/findsignals.hh:161
-#: ../xffm/find/templates/findsignals.hh:167
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:716
+#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findsignals.hh:170
 msgid   "Executable"
 msgstr  "実行可能(E)"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:765
-#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:720
+#: ../xffm/find/templates/findsignals.hh:167
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/templates/findresponse.hh:801
+#: ../xffm/find/templates/findresponse.hh:756
 msgid   "File type : "
 msgstr  "ファイルの種類 : "
 
-#: ../xffm/find/templates/findsignals.hh:86
+#: ../xffm/find/templates/findsignals.hh:89
 msgid   "Searching..."
 msgstr  "検索中..."
 
-#: ../xffm/find/templates/findsignals.hh:441
-#: ../xffm/find/templates/dndbox.hh:65
+#: ../xffm/find/templates/findsignals.hh:448
+#: ../xffm/find/templates/dndbox.hh:66
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "現在、アクションはありません。"
 
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Upper limit:"
 msgstr  "上限:"
 
-#: ../xffm/find/templates/findsignals.hh:511
+#: ../xffm/find/templates/findsignals.hh:518
 msgid   "Counting files..."
 msgstr  "ファイルを数えています..."
 
-#: ../xffm/find/templates/findsignals.hh:519
+#: ../xffm/find/templates/findsignals.hh:526
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "%d 件一致しました"
 
-#: ../xffm/find/templates/findsignals.hh:521
+#: ../xffm/find/templates/findsignals.hh:528
 #, c-format
 msgid   "%s Finished : %s"
 msgstr  "%s が終了 : %s"
 
-#: ../xffm/find/templates/dndbox.hh:126
+#: ../xffm/find/templates/dndbox.hh:128
 #, fuzzy
 msgid   "Edit all"
 msgstr  "すべて編集(E)"
 
-#: ../xffm/find/templates/dndbox.hh:139
+#: ../xffm/find/templates/dndbox.hh:141
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "“%s” の検索結果:"
 
-#: ../xffm/find/templates/dndbox.hh:259
+#: ../xffm/find/templates/dndbox.hh:261
 msgid   "Search results"
 msgstr  "検索結果"
 
@@ -1781,10 +1789,6 @@ msgstr  "内容表示"
 msgid   "STRING"
 msgstr  "STRING"
 
-#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
-msgid   "Regular expression"
-msgstr  "正規表現"
-
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Extended"
 msgstr  "拡張"
@@ -1810,22 +1814,15 @@ msgstr  "行ごと"
 msgid   "Usage : %s [OPTIONS]\n"
 msgstr  "使用法 : %s [OPTIONS]\n"
 
+#: ../xffm/find/classes/historyentry.hh:136
+msgid   "Show help"
+msgstr  "ヘルプを表示する"
+
 #: ../xffm/find/classes/ffunctions.hh:9
 msgid   "Regular"
 msgstr  "標準"
 
-#: ../xffm/find/classes/ffunctions.hh:42
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  "* は何もなしもしくはどんな長さでも一致。\n"
-        "? はどんな長さでも一文字一致\n"
-
-#: ../xffm/find/classes/ffunctions.hh:51
+#: ../xffm/find/classes/ffunctions.hh:41
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
@@ -1897,8 +1894,8 @@ msgstr  "Reserved characters for extended regexp are\n"
 #: ../xffm/menus/templates/pathbarmenu.hh:34
 #: ../xffm/menus/templates/pathbarmenu.hh:46
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:89
+#: ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
 msgid   "Open in New Window"
 msgstr  "新しいウィンドウで開く(W)"
 
@@ -1912,8 +1909,8 @@ msgstr  "新しいウィンドウで開く(W)"
 #: ../xffm/menus/templates/outputMenu.hh:29
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:94 ../xffm/menus/templates/menu.hh:173
 msgid   "Show Clipboard"
 msgstr  "クリップボードの表示(C)"
 
@@ -1966,31 +1963,27 @@ msgid   "Default Color"
 msgstr  "デフォルトの色"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:53
-#: ../xffm/menus/templates/mainMenu.hh:90
+#: ../xffm/menus/templates/mainMenu.hh:54
+#: ../xffm/menus/templates/mainMenu.hh:92
 msgid   "Environment"
 msgstr  "環境変数"
 
 #: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:96
 msgid   "Exit"
 msgstr  "終了(E)"
 
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:79
-#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/mainMenu.hh:119
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "キャレットモードの切り替え"
 
-#: ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:95
 msgid   "Clear Clipboard History"
 msgstr  "クリップボードの履歴を消去(L)"
-
-#: ../xffm/menus/templates/mainMenu.hh:199
-msgid   "menu"
-msgstr  "メニュー"
 

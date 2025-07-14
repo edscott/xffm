@@ -1,216 +1,182 @@
-# Xffm4 translation file: Wed Jun 11 17:07:10 CST 2025
+# Xffm4 translation file: lun 14 jul 2025 16:35:36 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
-#: ../xffm/fm/classes/ecryptfs.hh:189
-#: ../xffm/response/classes/envresponse.hh:92
-#: ../xffm/response/classes/cpresponse.hh:44
 #, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: xffm4\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-09 16:21-0600\n"
-"PO-Revision-Date: 2011-10-18 15:26+0200\n"
-"Last-Translator: Santiago Vila Doncel\n"
-"Language-Team: Spanish <es@li.org>\n"
-"Language: es_MX\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8-bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+msgid   ""
+msgstr  "Project-Id-Version: xffm4\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2025-07-14 16:34-0600\n"
+        "PO-Revision-Date: 2006-08-07 16:11+0200\n"
+        "Last-Translator: Francisco Serrador <serrador@cvs.gnome.org>\n"
+        "Language-Team: Spanish <traductores@es.gnome.org>\n"
+        "Language: es_MX\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+        "X-Generator: KBabel 1.11.1\n"
 
-#.
-#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:729
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:36
 #: ../xffm/menus/templates/pathbarmenu.hh:48
 #: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
-msgid "Clipboard is empty."
-msgstr "El portapapeles está vacío."
+#: ../xffm/menus/templates/menu.hh:175 ../xffm/menus/templates/menu.hh:180
+msgid   "Clipboard is empty."
+msgstr  ""
 
 #: ../xffm/fm/templates/clipboard.hh:133 ../xffm/fm/templates/clipboard.hh:136
-msgid "Clipboard contents"
-msgstr "Contenidos del portapapeles"
+msgid   "Clipboard contents"
+msgstr  ""
 
-#. Should not happen.
-#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
-msgid "Invalid clip"
-msgstr "Clip inválido"
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:495
+#, fuzzy
+msgid   "Invalid clip"
+msgstr  "Inválido"
 
-#. cancel threadpool for previews, if any. Wait on condition
-#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
-#: ../xffm/fm/templates/fstabmonitor.hh:366
-#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
-#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
-#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
-msgid "Disk Mounter"
-msgstr "Montador de discos"
-
-#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
-#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
-#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
-#: ../xffm/menus/templates/menucallbacks.hh:248
-#: ../xffm/menus/templates/mainMenu.hh:218
-msgid "Bookmarks"
-msgstr "Marcadores"
-
-#: ../xffm/fm/templates/workdir.hh:249
+#: ../xffm/fm/templates/workdir.hh:250
 #, c-format
-msgid "The %s utility is not installed."
-msgstr "La utilidad %s no está instalada."
+msgid   "The %s utility is not installed."
+msgstr  ""
 
-#: ../xffm/fm/templates/workdir.hh:270
-msgid "Trash is empty"
-msgstr "La papelera está vacía"
+#: ../xffm/fm/templates/workdir.hh:271
+#, fuzzy
+msgid   "Trash is empty"
+msgstr  "Miniaplicación de la papelera"
 
-#: ../xffm/fm/templates/workdir.hh:291
+#: ../xffm/fm/templates/workdir.hh:292
 #, c-format
-msgid "The volume '%s' is not mounted."
-msgstr "El volumen «%s» no está montado."
+msgid   "The volume '%s' is not mounted."
+msgstr  ""
 
 #: ../xffm/fm/templates/run.hh:316
-msgid "error"
-msgstr "error"
+#, fuzzy
+msgid   "error"
+msgstr  "Error"
 
 #: ../xffm/fm/templates/run.hh:320
-msgid "warning"
-msgstr "atención"
+msgid   "warning"
+msgstr  ""
 
 #: ../xffm/fm/templates/run.hh:441
 #: ../xffm/response/classes/passwdresponse.hh:11
 #: ../xffm/response/classes/passwdresponse.hh:79
 #: ../xffm/response/classes/passwdresponse.hh:83
-msgid "Enter password"
-msgstr "Introduzca la contraseña"
+msgid   "Enter password"
+msgstr  "Introduzca la contraseña"
 
 #: ../xffm/fm/templates/runbutton.hh:248
-msgid "Signal to emit"
-msgstr "Señal a emitir"
+msgid   "Signal to emit"
+msgstr  ""
 
-#. if (this->inShell()) {
-#. TRACE("run_button_p->inShell\n");
-#. this->set_icon_id(EMBLEM_TERMINAL_EXEC);
-#. } else {
-#. auto icon_id = Basic::getAppIconName(command, EMBLEM_RUN);
-#. //if (strcmp(icon_id, EMBLEM_RUN))
-#. //this->set_icon_id(icon_id);
-#. }
 #: ../xffm/fm/templates/runbutton.hh:281
-msgid "PID"
-msgstr "PID"
+msgid   "PID"
+msgstr  ""
 
 #: ../xffm/fm/templates/runbutton.hh:305
-msgid "Renice Process"
-msgstr "Cambiar la prioridad del proceso"
+#, fuzzy
+msgid   "Renice Process"
+msgstr  "Procesador"
 
-#. 1
 #: ../xffm/fm/templates/runbutton.hh:306
-msgid "Suspend"
-msgstr "Suspender"
+msgid   "Suspend"
+msgstr  ""
 
-#. 2
 #: ../xffm/fm/templates/runbutton.hh:307
-msgid "Continue"
-msgstr "Continuar"
+msgid   "Continue"
+msgstr  ""
 
-#. 3
 #: ../xffm/fm/templates/runbutton.hh:308
-msgid "Interrupt"
-msgstr "Interrupción"
+msgid   "Interrupt"
+msgstr  ""
 
-#. 4
 #: ../xffm/fm/templates/runbutton.hh:309
-msgid "Hangup"
-msgstr "Cuelgue (hangup)"
+msgid   "Hangup"
+msgstr  ""
 
-#. 5
 #: ../xffm/fm/templates/runbutton.hh:310
-msgid "User 1 (USR1)"
-msgstr "Usuario 1 (USR1)"
+msgid   "User 1 (USR1)"
+msgstr  ""
 
-#. 6
 #: ../xffm/fm/templates/runbutton.hh:311
-msgid "User 2 (USR2)"
-msgstr "Usuario 2 (USR2)"
+msgid   "User 2 (USR2)"
+msgstr  ""
 
-#. 7
 #: ../xffm/fm/templates/runbutton.hh:312
-msgid "Terminate Task"
-msgstr "Terminar tarea"
+msgid   "Terminate Task"
+msgstr  ""
 
-#. 8
 #: ../xffm/fm/templates/runbutton.hh:313
-msgid "Abort"
-msgstr "Abortar"
+msgid   "Abort"
+msgstr  ""
 
-#. 9
 #: ../xffm/fm/templates/runbutton.hh:314
-msgid "Kill"
-msgstr "Matar"
+msgid   "Kill"
+msgstr  ""
 
-#. 10
 #: ../xffm/fm/templates/runbutton.hh:315
-msgid "Segmentation fault"
-msgstr "Fallo de segmentación"
+msgid   "Segmentation fault"
+msgstr  ""
+
+#: ../xffm/fm/templates/dnd.hh:638
+msgid   "Target"
+msgstr  ""
 
 #: ../xffm/fm/templates/dnd.hh:639
-msgid "Target"
-msgstr "Destino"
+msgid   "Source"
+msgstr  ""
 
-#: ../xffm/fm/templates/dnd.hh:640
-msgid "Source"
-msgstr "Fuente"
+#: ../xffm/fm/templates/dnd.hh:648 ../xffm/fm/templates/dnd.hh:683
+msgid   "Invalid target folder"
+msgstr  ""
 
-#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
-msgid "Invalid target folder"
-msgstr "Carpeta de destino no válida"
-
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
-#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/fm/templates/dnd.hh:670 ../xffm/fm/templates/gridview.hh:541
+#: ../xffm/fm/templates/gridview.hh:584
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:62
 #: ../xffm/menus/templates/gridviewmenu.hh:86
-msgid "Link"
-msgstr "Enlace"
+msgid   "Link"
+msgstr  ""
 
-#: ../xffm/fm/templates/dnd.hh:684
-msgid "Drag:"
-msgstr "Arrastrar:"
+#: ../xffm/fm/templates/dnd.hh:683
+msgid   "Drag:"
+msgstr  ""
+
+#: ../xffm/fm/templates/dnd.hh:721
+#, fuzzy
+msgid   "files"
+msgstr  "millas"
 
 #: ../xffm/fm/templates/dnd.hh:722
-msgid "files"
-msgstr "ficheros"
-
-#: ../xffm/fm/templates/dnd.hh:723
 #, c-format
-msgid "+ %s more"
-msgstr "+ %s más"
+msgid   "+ %s more"
+msgstr  ""
 
-#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
-msgid "file"
-msgstr "fichero"
+#: ../xffm/fm/templates/dnd.hh:729 ../xffm/fm/classes/bash.hh:653
+msgid   "file"
+msgstr  ""
 
-#: ../xffm/fm/templates/dnd.hh:731
-msgid ": "
-msgstr ": "
+#: ../xffm/fm/templates/dnd.hh:730
+msgid   ": "
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/fm/templates/window.hh:272
 #: ../xffm/response/templates/openwith.hh:137
 #: ../xffm/response/templates/dialogbasic.hh:304
-#: ../xffm/find/templates/dndbox.hh:153
-msgid "Close"
-msgstr "Cerrar"
+#: ../xffm/find/templates/dndbox.hh:155
+#, fuzzy
+msgid   "Close"
+msgstr  "Cerrar nota"
 
-#: ../xffm/fm/templates/window.hh:505
-msgid "Long press time"
-msgstr "Tiempo de pulsación largo"
+#: ../xffm/fm/templates/window.hh:544
+msgid   "Long press time"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/fm/templates/window.hh:552 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:538 ../xffm/fm/templates/gridview.hh:581
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:44
@@ -218,12 +184,11 @@ msgstr "Tiempo de pulsación largo"
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:89
-msgid "Cut"
-msgstr "Cortar"
+msgid   "Cut"
+msgstr  ""
 
-#.
-#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/fm/templates/window.hh:554 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:537 ../xffm/fm/templates/gridview.hh:580
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:28
@@ -236,15 +201,12 @@ msgstr "Cortar"
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:65
 #: ../xffm/menus/templates/gridviewmenu.hh:88
-msgid "Copy"
-msgstr "Copiar"
+msgid   "Copy"
+msgstr  ""
 
-#.
-#. _("Search"),
-#. _("Open terminal"),
-#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
-#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
-#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/fm/templates/window.hh:556 ../xffm/fm/templates/window.hh:664
+#: ../xffm/fm/templates/window.hh:691 ../xffm/fm/templates/gridview.hh:564
+#: ../xffm/fm/templates/gridview.hh:728
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:24
 #: ../xffm/menus/templates/pathbarmenu.hh:35
@@ -254,39 +216,24 @@ msgstr "Copiar"
 #: ../xffm/menus/templates/inputMenu.hh:45
 #: ../xffm/menus/templates/inputMenu.hh:61
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:80
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:67
 #: ../xffm/menus/templates/gridviewmenu.hh:90
-#: ../xffm/menus/templates/menu.hh:166
-msgid "Paste"
-msgstr "Pegar"
+#: ../xffm/menus/templates/menu.hh:167
+msgid   "Paste"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:519
-msgid "New Tab"
-msgstr "Solapa nueva"
+#: ../xffm/fm/templates/window.hh:558
+msgid   "New Tab"
+msgstr  ""
 
-#. global button (xffm.h)
-#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
-msgid "Main menu"
-msgstr "Menú principal"
+#: ../xffm/fm/templates/window.hh:559 ../xffm/fm/templates/window.hh:561
+msgid   "Main menu"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:592
-msgid "Directory name: "
-msgstr "Nombre de la carpeta:"
-
-#. for (auto keys = d.keys(); keys && *keys; keys++){
-#. auto item = g_object_get_data(G_OBJECT(popover), *keys);
-#. gtk_widget_set_visible(GTK_WIDGET(item), false);
-#. }
-#.
-#. Need not be complete with regards to keys_.
-#. Need not be complete with regards to keys_ nor menuCallbacks_.
-#. _("Toggle Text Mode"),
-#. _("Add bookmark"),
-#. _("Remove bookmark"),
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:26
 #: ../xffm/menus/templates/inputMenu.hh:41
@@ -296,151 +243,147 @@ msgstr "Nombre de la carpeta:"
 #: ../xffm/menus/templates/outputMenu.hh:38
 #: ../xffm/menus/templates/outputMenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:82
-msgid "Select All"
-msgstr "Seleccionar todo"
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
+#, fuzzy
+msgid   "Select All"
+msgstr  "Borrar todas"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
+#: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:24
-msgid "Match regular expression"
-msgstr "Satisfacer expresión regular"
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:78
+msgid   "Match regular expression"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
 #: ../xffm/menus/templates/mainMenu.hh:28
-msgid "Show"
-msgstr "Mostrar"
+msgid   "Show"
+msgstr  ""
 
-#. auto flags = gridView_p->flags();
-#. {_("Copy"),(void *) cpResponse::action},
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:96
-#: ../xffm/menus/templates/mainMenu.hh:119
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:159
-msgid "Hidden files"
-msgstr "Archivos ocultos"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:97
-#: ../xffm/menus/templates/mainMenu.hh:120
-#: ../xffm/menus/templates/mainMenu.hh:133
-#: ../xffm/menus/templates/mainMenu.hh:160
-msgid "Backup files"
-msgstr "Archivos de respaldo"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
-msgid "Sort mode"
-msgstr "Modo de ordenación"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
-#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:29
 #: ../xffm/menus/templates/mainMenu.hh:98
 #: ../xffm/menus/templates/mainMenu.hh:121
 #: ../xffm/menus/templates/mainMenu.hh:134
 #: ../xffm/menus/templates/mainMenu.hh:161
-msgid "Descending"
-msgstr "Descendente"
+msgid   "Hidden files"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:676
-#: ../xffm/response/templates/fileresponse.hh:231
-#: ../xffm/menus/templates/mainMenu.hh:35
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:30
 #: ../xffm/menus/templates/mainMenu.hh:99
 #: ../xffm/menus/templates/mainMenu.hh:122
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:165
-msgid "Name"
-msgstr "Nombre"
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:162
+msgid   "Backup files"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
-#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
+#: ../xffm/fm/templates/window.hh:660 ../xffm/menus/templates/mainMenu.hh:32
+msgid   "Sort mode"
+msgstr  ""
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:715
+#: ../xffm/menus/templates/mainMenu.hh:34
 #: ../xffm/menus/templates/mainMenu.hh:100
 #: ../xffm/menus/templates/mainMenu.hh:123
-#: ../xffm/menus/templates/mainMenu.hh:142
-#: ../xffm/menus/templates/mainMenu.hh:162
-msgid "Date"
-msgstr "Fecha"
+#: ../xffm/menus/templates/mainMenu.hh:136
+#: ../xffm/menus/templates/mainMenu.hh:163
+msgid   "Descending"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
-#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:715
+#: ../xffm/response/templates/fileresponse.hh:231
+#: ../xffm/menus/templates/mainMenu.hh:35
 #: ../xffm/menus/templates/mainMenu.hh:101
 #: ../xffm/menus/templates/mainMenu.hh:124
 #: ../xffm/menus/templates/mainMenu.hh:143
-#: ../xffm/menus/templates/mainMenu.hh:163
-msgid "Size"
-msgstr "Tamaño"
+#: ../xffm/menus/templates/mainMenu.hh:167
+msgid   "Name"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/child.hh:303 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:102
 #: ../xffm/menus/templates/mainMenu.hh:125
 #: ../xffm/menus/templates/mainMenu.hh:144
 #: ../xffm/menus/templates/mainMenu.hh:164
-msgid "File type"
-msgstr "Tipo de archivo"
+msgid   "Date"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
-#: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/child.hh:304 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:200
-msgid "Apply modifications"
-msgstr "Aplicar modificaciones"
+#: ../xffm/menus/templates/mainMenu.hh:126
+#: ../xffm/menus/templates/mainMenu.hh:145
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Size"
+msgstr  "Tamaño"
 
-#. if (g_object_get_data(G_OBJECT(store), "xffm::fstab")){
-#. for (auto p = onlyLocal; p && *p; p++){
-#. auto widget = g_object_get_data(G_OBJECT(popover), *p);
-#. if (widget) gtk_widget_set_visible(GTK_WIDGET(widget), false);
-#. }
-#. for (auto p = fstabHide; p && *p; p++){
-#. auto widget = g_object_get_data(G_OBJECT(popover), *p);
-#. if (widget) gtk_widget_set_visible(GTK_WIDGET(widget), false);
-#. }
-#. }
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
-#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
-#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/classes/child.hh:305
+#: ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:104
+#: ../xffm/menus/templates/mainMenu.hh:127
+#: ../xffm/menus/templates/mainMenu.hh:146
+#: ../xffm/menus/templates/mainMenu.hh:166
+msgid   "File type"
+msgstr  ""
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:710
+#: ../xffm/menus/templates/mainMenu.hh:39
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:202
+#, fuzzy
+msgid   "Apply modifications"
+msgstr  "Notificaciones"
+
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:689
+#: ../xffm/fm/templates/gridview.hh:555 ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:82
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:68
 #: ../xffm/menus/templates/gridviewmenu.hh:92
-msgid "Add bookmark"
-msgstr "Añadir marcador"
+msgid   "Add bookmark"
+msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
-#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:690
+#: ../xffm/fm/templates/gridview.hh:515 ../xffm/fm/templates/gridview.hh:558
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:83
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:93
-msgid "Remove bookmark"
-msgstr "Quitar marcador"
+msgid   "Remove bookmark"
+msgstr  ""
 
-#. Need not be complete with regards to keys_.
-#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
-#: ../xffm/menus/templates/mainMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:77
-msgid "Empty trash bin"
-msgstr "Vaciar papelera"
+#: ../xffm/fm/templates/window.hh:670 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:79
+#, fuzzy
+msgid   "Empty trash bin"
+msgstr  "Vaciar papelera"
 
-#. show
-#.
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/fm/templates/gridview.hh:95
+#: ../xffm/response/templates/regexpresponse.hh:44
+#: ../xffm/response/templates/regexpresponse.hh:49
+msgid   "Regular Expression syntax is incorrect"
+msgstr  ""
+
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:579
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:58
 #: ../xffm/menus/templates/gridviewmenu.hh:83
-msgid "Open with"
-msgstr "Abrir con"
+#, fuzzy
+msgid   "Open with"
+msgstr  "Abrir %s"
 
-#. 1
-#.
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
-#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:543
+#: ../xffm/fm/templates/gridview.hh:586
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -456,51 +399,46 @@ msgstr "Abrir con"
 #: ../xffm/menus/templates/gridviewmenu.hh:34
 #: ../xffm/menus/templates/gridviewmenu.hh:63
 #: ../xffm/menus/templates/gridviewmenu.hh:91
-msgid "Delete"
-msgstr "Borrar"
+#, fuzzy
+msgid   "Delete"
+msgstr  "Borrar todas"
 
-#.
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
-#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:21
 #: ../xffm/menus/templates/gridviewmenu.hh:72
 #: ../xffm/menus/templates/gridviewmenu.hh:98
-msgid "Create a compressed archive with the selected objects"
-msgstr "Crear un archivador comprimido con los objetos seleccionados"
+msgid   "Create a compressed archive with the selected objects"
+msgstr  ""
 
-#. {_("Select All"),(void *) selectAll},
-#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
-#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/fm/templates/gridview.hh:469 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:542 ../xffm/fm/templates/gridview.hh:585
 #: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:95
-msgid "Properties"
-msgstr "Propiedades"
+msgid   "Properties"
+msgstr  "Propiedades"
 
-#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
-#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/fm/templates/gridview.hh:472 ../xffm/fm/templates/gridview.hh:493
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:56
 #: ../xffm/menus/templates/gridviewmenu.hh:80
-msgid "Unmount Volume"
-msgstr "Desmontar volumen"
+#, fuzzy
+msgid   "Unmount Volume"
+msgstr  "Error al desmontar"
 
-#. Need not be complete with regards to keys_.
-#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
-#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/fm/templates/gridview.hh:475 ../xffm/fm/templates/gridview.hh:496
+#: ../xffm/fm/templates/gridview.hh:573
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:79
-msgid "Mount Volume"
-msgstr "Montar volumen"
+#, fuzzy
+msgid   "Mount Volume"
+msgstr  "Volúmenes"
 
-#. Order is important.
-#. Need not be complete with regards to keys_.
-#. Need not be complete with regards to keys_ nor menuCallbacks_.
-#.
-#. _("Toggle Text Mode"),
-#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/fm/templates/gridview.hh:535
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:22
 #: ../xffm/menus/templates/pathbarmenu.hh:33
@@ -508,338 +446,354 @@ msgstr "Montar volumen"
 #: ../xffm/menus/templates/gridviewmenu.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:57
 #: ../xffm/menus/templates/gridviewmenu.hh:82
-msgid "Open in new tab"
-msgstr "Abrir en una Nueva pestaña"
+msgid   "Open in new tab"
+msgstr  ""
 
-#.
-#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/fm/templates/gridview.hh:539 ../xffm/fm/templates/gridview.hh:582
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:30
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:87
-msgid "Rename"
-msgstr "Renombrar"
+msgid   "Rename"
+msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/fm/templates/gridview.hh:540 ../xffm/fm/templates/gridview.hh:583
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:31
 #: ../xffm/menus/templates/gridviewmenu.hh:61
 #: ../xffm/menus/templates/gridviewmenu.hh:85
-msgid "Duplicate"
-msgstr "Duplicar"
+msgid   "Duplicate"
+msgstr  ""
 
-#. Order is important.
-#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
-#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/fm/templates/gridview.hh:578 ../xffm/fm/templates/gridview.hh:689
+#: ../xffm/fm/templates/gridview.hh:690
 #: ../xffm/menus/templates/gridviewmenu.hh:17
 #: ../xffm/menus/templates/gridviewmenu.hh:59
 #: ../xffm/menus/templates/gridviewmenu.hh:84
-msgid "auto"
-msgstr "auto"
+msgid   "auto"
+msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:595 ../xffm/fm/templates/gridview.hh:602
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:71
 #: ../xffm/menus/templates/gridviewmenu.hh:97
-msgid "Decrypt File..."
-msgstr "Descifrar archivo..."
+msgid   "Decrypt File..."
+msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/fm/templates/gridview.hh:597 ../xffm/fm/templates/gridview.hh:600
 #: ../xffm/menus/templates/gridviewmenu.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:96
-msgid "Encrypt File..."
-msgstr "Cifrar archivo..."
+msgid   "Encrypt File..."
+msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/openwith.hh:158
-msgid "Multiple selections"
-msgstr "Selección múltiple"
+msgid   "Multiple selections"
+msgstr  ""
 
 #: ../xffm/fm/templates/basicpathbar.hh:28 ../xffm/find/classes/fgr.hh:168
 #: ../xffm/find/classes/fgr.hh:171 ../xffm/find/classes/fgr.hh:174
 #: ../xffm/find/classes/fgr.hh:177
-msgid "Previous"
-msgstr "Anterior"
+msgid   "Previous"
+msgstr  ""
 
 #: ../xffm/fm/templates/basicpathbar.hh:32
-msgid "Next"
-msgstr "Siguiente"
+#, fuzzy
+msgid   "Next"
+msgstr  "Buscar siguiente"
 
 #: ../xffm/fm/templates/basicpathbar.hh:36
 #: ../xffm/response/templates/jumpresponse.hh:10
 #: ../xffm/response/templates/jumpresponse.hh:12
-msgid "Go to"
-msgstr "Ir a"
+#, fuzzy
+msgid   "Go to"
+msgstr  "Ir a la papelera"
 
-#.
-#. bool want_magic = false;
-#. //bool want_magic = (!mimetype || strcmp(mimetype, _("unknown"))==0);
-#. if (want_magic) {
-#. mimetype = MimeMagic::mimeMagic(path);
-#. }
-#.
 #: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
-#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:191
 #: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
-#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
-#: ../xffm/find/templates/findresponse.hh:884
-msgid "unknown"
-msgstr "desconocido"
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:824
+#: ../xffm/find/templates/findresponse.hh:839
+#, fuzzy
+msgid   "unknown"
+msgstr  "Desconocido"
 
 #: ../xffm/fm/templates/preview.hh:348
-msgid "Empty file"
-msgstr "Archivo vacío"
+msgid   "Empty file"
+msgstr  ""
 
 #: ../xffm/fm/templates/preview.hh:557 ../xffm/find/classes/fgr.hh:162
 #: ../xffm/find/classes/ffunctions.hh:13
-msgid "Block device"
-msgstr "Dispositivo de bloques"
+msgid   "Block device"
+msgstr  ""
 
 #: ../xffm/fm/templates/preview.hh:560 ../xffm/find/classes/fgr.hh:163
 #: ../xffm/find/classes/ffunctions.hh:14
-msgid "Character device"
-msgstr "Dispositivo caracteres"
+#, fuzzy
+msgid   "Character device"
+msgstr  "Paleta de caracteres"
 
 #: ../xffm/fm/templates/preview.hh:563 ../xffm/fm/classes/bash.hh:60
 #: ../xffm/find/classes/fgr.hh:159 ../xffm/find/classes/ffunctions.hh:10
-msgid "Directory"
-msgstr "Directorio"
+#, fuzzy
+msgid   "Directory"
+msgstr  "Histórico"
 
 #: ../xffm/fm/templates/preview.hh:566 ../xffm/find/classes/fgr.hh:164
 #: ../xffm/find/classes/ffunctions.hh:15
-msgid "FIFO"
-msgstr "FIFO"
+msgid   "FIFO"
+msgstr  ""
 
 #: ../xffm/fm/templates/preview.hh:569 ../xffm/find/classes/fgr.hh:160
 #: ../xffm/find/classes/ffunctions.hh:11
-msgid "Symbolic Link"
-msgstr "Enlace simbólico"
+#, fuzzy
+msgid   "Symbolic Link"
+msgstr  "Símbolo"
 
 #: ../xffm/fm/templates/preview.hh:572 ../xffm/find/classes/fgr.hh:158
-msgid "Regular file"
-msgstr "Archivo regular"
+msgid   "Regular file"
+msgstr  ""
 
 #: ../xffm/fm/templates/preview.hh:575 ../xffm/find/classes/ffunctions.hh:12
-msgid "Socket"
-msgstr "Socket"
+msgid   "Socket"
+msgstr  ""
 
 #: ../xffm/fm/templates/preview.hh:601
-#, c-format
-msgid "Cannot read from %s"
-msgstr "No se puede leer de %s"
+#, fuzzy, c-format
+msgid   "Cannot read from %s"
+msgstr  "No se puede obtener el esquema para %s: %s"
 
 #: ../xffm/fm/templates/prompt.hh:63
-msgid "Input"
-msgstr "Entrada"
+msgid   "Input"
+msgstr  ""
 
 #: ../xffm/fm/templates/prompt.hh:63 ../xffm/fm/classes/fmpage.hh:98
-msgid " TTY"
-msgstr " TTY"
+msgid   " TTY"
+msgstr  ""
 
 #: ../xffm/fm/templates/prompt.hh:236
-#: ../xffm/menus/templates/menucallbacks.hh:48
-#, c-format
-msgid "failed to chdir to %s"
-msgstr "fallo al cambiar a %s"
+#: ../xffm/menus/templates/menucallbacks.hh:50
+#, fuzzy, c-format
+msgid   "failed to chdir to %s"
+msgstr  "Falló al iniciar GConf: %s\n"
 
-#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
-msgid "Properties and Attributes"
-msgstr "Propiedades y atributos"
+#: ../xffm/fm/templates/properties.hh:122
+msgid   "Properties and Attributes"
+msgstr  ""
 
-#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
-msgid "File Mode:"
-msgstr "Modo archivo:"
+#: ../xffm/fm/templates/properties.hh:140
+msgid   "File Mode:"
+msgstr  ""
 
-#. Add file info stuff
-#. set info stuff data according to combo box
-#. add signal handler to changed signal for combo box
-#. Add process buttons
-#.
-#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
-#: ../xffm/response/classes/envresponse.hh:123
-msgid "Apply changes"
-msgstr "Aplicar cambios"
+#: ../xffm/fm/templates/properties.hh:167
+#: ../xffm/response/classes/envresponse.hh:126
+msgid   "Apply changes"
+msgstr  ""
 
-#. gtk_widget_show(GTK_WIDGET(action_area));
-#. 3
-#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
-#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:313
-#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/tarresponse.hh:210
+#: ../xffm/response/templates/efsresponse.hh:181
 #: ../xffm/response/templates/dialogbasic.hh:309
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
 #: ../xffm/response/classes/cpresponse.hh:81
-#: ../xffm/find/templates/findsignals.hh:568
-msgid "Cancel"
-msgstr "Cancelar"
+#: ../xffm/find/templates/findsignals.hh:575
+msgid   "Cancel"
+msgstr  ""
 
-#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
-msgid "Encoding"
-msgstr "Codificación"
+#: ../xffm/fm/templates/properties.hh:358
+msgid   "Encoding"
+msgstr  ""
 
-#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
-msgid "Mimetype"
-msgstr "Tipo Mime"
+#: ../xffm/fm/templates/properties.hh:359
+msgid   "Mimetype"
+msgstr  ""
 
-#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
-msgid "Successfully moved to trash."
-msgstr "Movido a la papelera con éxito."
+#: ../xffm/fm/templates/properties.hh:381
+msgid   "Successfully moved to trash."
+msgstr  ""
 
-#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
-msgid "Source:"
-msgstr "Origen:"
+#: ../xffm/fm/templates/properties.hh:382
+msgid   "Source:"
+msgstr  ""
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:22
-msgid "Move to tab"
-msgstr "Mover a una solapa"
+#: ../xffm/fm/classes/localdir.hh:173 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  ""
 
-#. Need not be complete with regards to keys_ nor menuCallbacks_.
-#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:83
-#: ../xffm/menus/templates/mainMenu.hh:111
-msgid "Search"
-msgstr "Buscar"
+#: ../xffm/fm/classes/localdir.hh:176
+#, c-format
+msgid   "%s (%s Filtered)"
+msgstr  ""
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:13
+msgid   "Colors"
+msgstr  "Colores"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:27
+#, fuzzy
+msgid   "Switch button"
+msgstr  "Botón «Editar»"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:28 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:112
-msgid "Open terminal"
-msgstr "Abrir terminal"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/mainMenu.hh:113
-msgid "Home"
-msgstr "Casa"
+msgid   "Search"
+msgstr  ""
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:26
-msgid "Open a New Window"
-msgstr "Abrir una ventana nueva"
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:114
+msgid   "Open terminal"
+msgstr  ""
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:40
-msgid "Icon Size"
-msgstr "Tamaño de icono"
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:115
+msgid   "Home"
+msgstr  ""
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
-msgid "Color settings"
-msgstr "Preferencias de color"
+#: ../xffm/fm/classes/fmbuttonbox.hh:31
+msgid   "Open a New Window"
+msgstr  ""
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:63
-msgid "Colors"
-msgstr "Colores"
+#: ../xffm/fm/classes/fmbuttonbox.hh:51
+#, fuzzy
+msgid   "Icon Size"
+msgstr  "Tamaño"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:144
-msgid "Icon Size:"
-msgstr "Tamaño del icono:"
+#: ../xffm/fm/classes/fmbuttonbox.hh:74 ../xffm/menus/templates/mainMenu.hh:68
+#, fuzzy
+msgid   "Color settings"
+msgstr  "Configuración del monitor"
 
-#: ../xffm/fm/classes/settings.hh:153
-msgid "New File:"
-msgstr "Archivo nuevo:"
+#: ../xffm/fm/classes/fmbuttonbox.hh:166
+msgid   "Icon Size:"
+msgstr  ""
 
-#. GFile *file = g_file_new_for_path(g_get_home_dir());
-#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/fm/classes/settings.hh:179
+msgid   "New File:"
+msgstr  ""
+
+#: ../xffm/fm/classes/root.hh:26 ../xffm/fm/classes/child.hh:266
+msgid   "Disk Mounter"
+msgstr  "Montador de discos"
+
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:503
 #: ../xffm/response/templates/efsresponse.hh:40
-msgid "New"
-msgstr "Nuevo"
+#, fuzzy
+msgid   "New"
+msgstr  "Red"
 
-#: ../xffm/fm/classes/root.hh:59
-msgid "Trash bin"
-msgstr "Papelera"
+#: ../xffm/fm/classes/root.hh:62
+#, fuzzy
+msgid   "Trash bin"
+msgstr  "Papelera"
+
+#: ../xffm/fm/classes/child.hh:265
+msgid   "Bookmarks"
+msgstr  ""
+
+#: ../xffm/fm/classes/basic.hh:35
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
 
 #: ../xffm/fm/classes/progress.hh:73
-msgid "Running"
-msgstr "Ejecutándose"
+msgid   "Running"
+msgstr  ""
 
-#. auto text = g_strdup_printf("%s (pid: %d)",
-#. _("Waiting for operation to finish..."),
-#. Tubo<Type>::getChild (pid));
 #: ../xffm/fm/classes/progress.hh:78
-msgid "Waiting for operation to finish..."
-msgstr "Esperando a que finalice la operación..."
+msgid   "Waiting for operation to finish..."
+msgstr  ""
 
 #: ../xffm/fm/classes/bash.hh:25
-msgid "Command"
-msgstr "Comando"
+msgid   "Command"
+msgstr  "Comando"
 
 #: ../xffm/fm/classes/bash.hh:28 ../xffm/fm/classes/bash.hh:61
-msgid "File"
-msgstr "Archivo"
+msgid   "File"
+msgstr  ""
 
 #: ../xffm/fm/classes/bash.hh:31
-msgid "Command history"
-msgstr "Historial de órdenes"
+#, fuzzy
+msgid   "Command history"
+msgstr  "Línea de comandos"
 
-#. option -u uid "uid" "uid_combo"
-#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
-msgid "User"
-msgstr "Usuario"
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:697
+msgid   "User"
+msgstr  "Usuario"
 
 #: ../xffm/fm/classes/bash.hh:37
-msgid "Variable"
-msgstr "Variable"
+msgid   "Variable"
+msgstr  "Variable"
 
 #: ../xffm/fm/classes/bash.hh:40
-msgid "Host"
-msgstr "Host"
+msgid   "Host"
+msgstr  ""
 
 #: ../xffm/fm/classes/bash.hh:51
-msgid "Found no match"
-msgstr "No se ha encontrado ninguna coincidencia"
+msgid   "Found no match"
+msgstr  ""
 
 #: ../xffm/fm/classes/bash.hh:57
-msgid "Symbolic link"
-msgstr "Enlace simbólico"
+#, fuzzy
+msgid   "Symbolic link"
+msgstr  "Símbolo"
 
 #: ../xffm/fm/classes/bash.hh:141
-msgid "Matches"
-msgstr "Coincidencias"
+msgid   "Matches"
+msgstr  ""
 
 #: ../xffm/fm/classes/bash.hh:141
-msgid "Too many selected files"
-msgstr "Demasiados archivos seleccionados"
+msgid   "Too many selected files"
+msgstr  ""
 
-#. auto paintable = Texture<bool>::load("authentication", 24);
-#.
-#. auto image = gtk_image_new_from_paintable(paintable);
-#. g_object_unref(paintable);
-#. gtk_box_append(hbox, image);
 #: ../xffm/fm/classes/bash.hh:339 ../xffm/fm/classes/ecryptfs.hh:346
 #: ../xffm/response/templates/efsresponse.hh:112
 #: ../xffm/find/classes/fgr.hh:124
-msgid "Options:"
-msgstr "Opciones:"
+#, fuzzy
+msgid   "Options:"
+msgstr  "Opciones"
 
 #: ../xffm/fm/classes/bash.hh:651
-msgid "Completion mode:"
-msgstr "Modo de terminación:"
+#, fuzzy
+msgid   "Completion mode:"
+msgstr  "Autocompletado"
 
 #: ../xffm/fm/classes/bash.hh:652
-msgid "command"
-msgstr "comando"
+#, fuzzy
+msgid   "command"
+msgstr  "Comando"
 
 #: ../xffm/fm/classes/bash.hh:663 ../xffm/fm/classes/bash.hh:667
-msgid "Options >>"
-msgstr "Opciones >>"
+#, fuzzy
+msgid   "Options >>"
+msgstr  "Opciones"
 
 #: ../xffm/fm/classes/fmpage.hh:98
-msgid "Output"
-msgstr "Salida"
+msgid   "Output"
+msgstr  ""
 
 #: ../xffm/fm/classes/fmpage.hh:137
-msgid "Show/Hide"
-msgstr "Mostrar/ocultar"
+#, fuzzy
+msgid   "Show/Hide"
+msgstr  "Mostrar el tirador"
 
-#. Order is important.
-#. Need not be complete with regards to keys_.
-#. Need not be complete with regards to keys_ nor menuCallbacks_.
 #: ../xffm/fm/classes/fmpage.hh:139 ../xffm/menus/templates/inputMenu.hh:10
 #: ../xffm/menus/templates/inputMenu.hh:27
 #: ../xffm/menus/templates/inputMenu.hh:42
@@ -848,1183 +802,1101 @@ msgstr "Mostrar/ocultar"
 #: ../xffm/menus/templates/outputMenu.hh:23
 #: ../xffm/menus/templates/outputMenu.hh:36
 #: ../xffm/menus/templates/outputMenu.hh:49
-msgid "Clear"
-msgstr "Limpiar"
+#, fuzzy
+msgid   "Clear"
+msgstr  "Cielo despejado"
 
-#. Basic::boxPack0(this->promptBox(), GTK_WIDGET(toggle),  FALSE, FALSE, 0);
-#. g_signal_connect (G_OBJECT (toggle), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::toggleVpane), NULL);
-#. auto clear = Texture<bool>::getImage(EMBLEM_CLEAR, 16);
-#. gtk_widget_set_tooltip_markup(GTK_WIDGET(clear), _("Clear output."));
-#. auto clear = Basic::newButton(EMBLEM_CLEAR, _("Clear output."));
-#. gtk_box_prepend(this->promptBox(), GTK_WIDGET(clear));
-#. Basic::boxPack0(this->promptBox(), GTK_WIDGET(clear),  FALSE, FALSE, 0);
-#. g_signal_connect (G_OBJECT (clear), "clicked", G_CALLBACK(MenuCallbacks<LocalDir>::clearTxt), (void *) "output");
 #: ../xffm/fm/classes/fmpage.hh:160
-msgid "Font size"
-msgstr "Tamaño de la tipografía"
+msgid   "Font size"
+msgstr  ""
 
 #: ../xffm/fm/classes/gio.hh:137
-msgid "Copying files"
-msgstr "Copiando archivos"
+msgid   "Copying files"
+msgstr  ""
 
 #: ../xffm/fm/classes/gio.hh:139
-msgid "Moving files"
-msgstr "Moviendo archivos"
+msgid   "Moving files"
+msgstr  ""
 
 #: ../xffm/fm/classes/gio.hh:141
-msgid "linking"
-msgstr "enlazando"
+msgid   "linking"
+msgstr  ""
 
 #: ../xffm/fm/classes/gio.hh:143
-msgid "rename"
-msgstr "rename"
+msgid   "rename"
+msgstr  ""
 
 #: ../xffm/fm/classes/gio.hh:418
-msgid "Overwrite?"
-msgstr "¿Sobrescribir?"
+msgid   "Overwrite?"
+msgstr  ""
 
 #: ../xffm/fm/classes/gio.hh:512
 #, c-format
-msgid "(%d of %d)"
-msgstr "(%d de %d)"
+msgid   "(%d of %d)"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:6
-msgid "Encryption Options"
-msgstr "Opciones de cifrado"
+#, fuzzy
+msgid   "Encryption Options"
+msgstr  "sin opciones"
 
 #: ../xffm/fm/classes/ecryptfs.hh:7
-msgid "Encrypt Files"
-msgstr "Cifrar archivos"
+msgid   "Encrypt Files"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:8
-msgid "encrypted volume"
-msgstr "volumen encriptado"
+msgid   "encrypted volume"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:9
-msgid "create"
-msgstr "crear"
+msgid   "create"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:10
-msgid "Encrypted Container"
-msgstr "Contenedor cifrado"
+msgid   "Encrypted Container"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:11
-msgid "Encrypt the file list"
-msgstr "Cifrar la lista de archivos"
+msgid   "Encrypt the file list"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:12
-msgid "Plaintext Password"
-msgstr "Contraseña en texto simple"
+#, fuzzy
+msgid   "Plaintext Password"
+msgstr  "Introduzca la contraseña"
 
 #: ../xffm/fm/classes/ecryptfs.hh:14
-msgid "local filesystem"
-msgstr "sistema de archivos local"
+msgid   "local filesystem"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:15
-msgid "Computer Name:"
-msgstr "Equipo:"
+msgid   "Computer Name:"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:16
-msgid "Remote Path"
-msgstr "Ruta remota"
+msgid   "Remote Path"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:17
-msgid "Mount point:"
-msgstr "Punto de montaje:"
+#, fuzzy
+msgid   "Mount point:"
+msgstr  "Punto de condensación:"
 
 #: ../xffm/fm/classes/ecryptfs.hh:18
-msgid "URL"
-msgstr "URL"
+msgid   "URL"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:19
-msgid "Enable file monitoring"
-msgstr "Activar seguimiento de archivo"
+msgid   "Enable file monitoring"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:20
-msgid "Caution"
-msgstr "Precaución"
+#, fuzzy
+msgid   "Caution"
+msgstr  "Zona"
 
 #: ../xffm/fm/classes/ecryptfs.hh:21
-msgid "Username:"
-msgstr "Nombre de usuario:"
+#, fuzzy
+msgid   "Username:"
+msgstr  "Usuario"
 
 #: ../xffm/fm/classes/ecryptfs.hh:22
-msgid "Secure Shell Key"
-msgstr "Clave de shell segura"
+msgid   "Secure Shell Key"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:23
-msgid "Allow empty private key passphrase"
-msgstr "Permitir frase de paso de clave vacía"
+msgid   "Allow empty private key passphrase"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:24
-msgid "Enter your Secure Shell passphrase:"
-msgstr "Introduzca su frase de paso de Secure Shell:"
+msgid   "Enter your Secure Shell passphrase:"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:44
-msgid "Read Only Mode"
-msgstr "Modo de solo lectura"
+msgid   "Read Only Mode"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:49 ../xffm/find/classes/fgr.hh:131
-msgid "Verbose output debugging mode."
-msgstr "Modo detallado de depuración de salida."
+msgid   "Verbose output debugging mode."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:54 ../xffm/find/classes/fgr.hh:133
-msgid "Show version information"
-msgstr "Muestra la información de la versión"
+#, fuzzy
+msgid   "Show version information"
+msgstr  "Información meteorológica de una zona"
 
 #: ../xffm/fm/classes/ecryptfs.hh:59
-msgid "Overwrite Mode"
-msgstr "Modo de sobrescritura"
+msgid   "Overwrite Mode"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:65
-msgid "Dry run"
-msgstr "Ejecución en seco"
+msgid   "Dry run"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:68
-msgid "Don't actually call the mount system call."
-msgstr ""
+msgid   "Don't actually call the mount system call."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:71
-msgid "Update file list"
-msgstr "Actualizar lista de archivos"
+#, fuzzy
+msgid   "Update file list"
+msgstr  "Intervalo de actualización"
 
 #: ../xffm/fm/classes/ecryptfs.hh:75
-msgid ""
-"By default, an entry is created in/etc/mtab for every mounted file system.\n"
-" Use this option to skip making an entry."
-msgstr ""
+msgid   "By default, an entry is created in/etc/mtab for every mounted file "
+        "system.\n"
+        " Use this option to skip making an entry."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:78
-#, fuzzy
-msgid "Tolerate sloppy options."
-msgstr "La herramienta no tiene opciones"
+msgid   "Tolerate sloppy options."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:81
-msgid "Tolerate sloppy mount options rather than fail."
-msgstr ""
+msgid   "Tolerate sloppy mount options rather than fail."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:85
-msgid "Show Help"
-msgstr "Mostrar ayuda"
+#, fuzzy
+msgid   "Show Help"
+msgstr  "Mostrar el menú:"
 
 #: ../xffm/fm/classes/ecryptfs.hh:99
-msgid "Cipher algorithm"
-msgstr "Algoritmo de cifrado"
+msgid   "Cipher algorithm"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:106
-msgid ""
-"Specify  the keysize to be used with the selected cipher. If the cipher only "
-"has one keysize the keysize  does  not  need  to  be specified.\n"
-"\n"
-"\taes: blocksize = 16; min keysize = 16; max keysize = 32\n"
-"\tblowfish: blocksize = 16; min keysize = 16; max keysize = 56\n"
-"\tdes3_ede: blocksize = 8; min keysize = 24; max keysize = 24\n"
-"\tcast6: blocksize = 16; min keysize = 16; max keysize = 32\n"
-"\tcast5: blocksize = 8; min keysize = 5; max keysize = 16\n"
-"\t"
-msgstr ""
+msgid   "Specify  the keysize to be used with the selected cipher. If the "
+        "cipher only has one keysize the keysize  does  not  need  to  be "
+        "specified.\n"
+        "\n"
+        "\taes: blocksize = 16; min keysize = 16; max keysize = 32\n"
+        "\tblowfish: blocksize = 16; min keysize = 16; max keysize = 56\n"
+        "\tdes3_ede: blocksize = 8; min keysize = 24; max keysize = 24\n"
+        "\tcast6: blocksize = 16; min keysize = 16; max keysize = 32\n"
+        "\tcast5: blocksize = 8; min keysize = 5; max keysize = 16\n"
+        "\t"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:112
-msgid ""
-"Allows for non-eCryptfs files to be read and written from within an eCryptfs "
-"mount. This option is turned off by default."
-msgstr ""
+msgid   "Allows for non-eCryptfs files to be read and written from within an "
+        "eCryptfs mount. This option is turned off by default."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:119
-msgid ""
-"Specify whether filename encryption should be enabled.  If  not, the  mount  "
-"helper  will  not  prompt  the user for the filename encryption key "
-"signature.\n"
-"If you enabled filename encryption then pass an additional mount option: "
-"ecryptfs_fnek_sig=XY, where XY is the same signature you provide with the "
-"ecryptfs_sig option."
-msgstr ""
+msgid   "Specify whether filename encryption should be enabled.  If  not, "
+        "the  mount  helper  will  not  prompt  the user for the filename "
+        "encryption key signature.\n"
+        "If you enabled filename encryption then pass an additional mount "
+        "option: ecryptfs_fnek_sig=XY, where XY is the same signature you "
+        "provide with the ecryptfs_sig option."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:123
-msgid "fekek_sig"
-msgstr ""
+msgid   "fekek_sig"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:125
-msgid ""
-"Specify  the  signature  of the mount wide authentication token. The "
-"authentication token must be in the  kernel  keyring  before the  mount  is "
-"performed. \n"
-"ecryptfs-manager or the eCryptfs mount helper can be used to construct the "
-"authentication token and add it to the keyring prior to mounting."
-msgstr ""
+msgid   "Specify  the  signature  of the mount wide authentication token. The "
+        "authentication token must be in the  kernel  keyring  before the  "
+        "mount  is performed. \n"
+        "ecryptfs-manager or the eCryptfs mount helper can be used to "
+        "construct the authentication token and add it to the keyring prior "
+        "to mounting."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:130
-msgid "fnek_sig"
-msgstr ""
+msgid   "fnek_sig"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:132
-msgid ""
-"Specify  the  signature  of  the mount wide authentication token used for "
-"filename crypto. The authentication must be in the kernel keyring before "
-"mounting."
-msgstr ""
+msgid   "Specify  the  signature  of  the mount wide authentication token "
+        "used for filename crypto. The authentication must be in the kernel "
+        "keyring before mounting."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:141
-msgid ""
-"Do not check the mount key signature against the values  in  the user's  "
-"~/.ecryptfs/sig-cache.txt  file. This is useful for such things as non-"
-"interactive  setup  scripts,  so  that  the  mount helper  does  not stop "
-"and prompt the user in the event that the key sig is not in the cache."
-msgstr ""
+msgid   "Do not check the mount key signature against the values  in  the "
+        "user's  ~/.ecryptfs/sig-cache.txt  file. This is useful for such "
+        "things as non-interactive  setup  scripts,  so  that  the  mount "
+        "helper  does  not stop and prompt the user in the event that the key "
+        "sig is not in the cache."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:148
-msgid ""
-"This option provides a unified  encrypted  file  format  of  the eCryptfs  "
-"files in the lower mount point.  Currently, it is only useful if the lower "
-"mount point contains files with the metadata stored in the extended "
-"attribute.  Upon a file read in the upper mount point, the encrypted version "
-"of the file will be presented with  the  metadata  in  the  file  header "
-"instead of the xattr.  Files cannot be opened for writing when this option "
-"is enabled."
-msgstr ""
+msgid   "This option provides a unified  encrypted  file  format  of  the "
+        "eCryptfs  files in the lower mount point.  Currently, it is only "
+        "useful if the lower mount point contains files with the metadata "
+        "stored in the extended attribute.  Upon a file read in the upper "
+        "mount point, the encrypted version of the file will be presented "
+        "with  the  metadata  in  the  file  header instead of the xattr.  "
+        "Files cannot be opened for writing when this option is enabled."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:155
-msgid ""
-"Store the metadata in the extended attribute of the lower  files rather than "
-"the header region of the lower files."
-msgstr ""
+msgid   "Store the metadata in the extended attribute of the lower  files "
+        "rather than the header region of the lower files."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:162
-msgid ""
-"Log  ecryptfs  information  to  /var/log/messages.   Do  not run eCryptfs in "
-"verbose-mode unless you are doing so  for  the  sole purpose  of "
-"development, since secret values will be written out to the system log in "
-"that case."
-msgstr ""
+msgid   "Log  ecryptfs  information  to  /var/log/messages.   Do  not run "
+        "eCryptfs in verbose-mode unless you are doing so  for  the  sole "
+        "purpose  of development, since secret values will be written out to "
+        "the system log in that case."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:170
-msgid ""
-"If verbosity=1, the mount helper will ask you for missing values (default).  "
-"Otherwise, if verbosity=0, it will not ask for missing values and will fail "
-"if required values are omitted.  "
-msgstr ""
+msgid   "If verbosity=1, the mount helper will ask you for missing values "
+        "(default).  Otherwise, if verbosity=0, it will not ask for missing "
+        "values and will fail if required values are omitted.  "
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:175
-msgid "Passphrase"
-msgstr "Contraseña"
+msgid   "Passphrase"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:177
-msgid ""
-"The actual password is passphrase. Since the password is visible to "
-"utilities (like ps under Unix) this form should only be  used where security "
-"is not important."
-msgstr ""
+msgid   "The actual password is passphrase. Since the password is visible to "
+        "utilities (like ps under Unix) this form should only be  used where "
+        "security is not important."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:182 ../xffm/fm/classes/ecryptfs.hh:203
 #: ../xffm/fm/classes/ecryptfs.hh:212
-msgid "filename"
-msgstr "nombre de archivo"
+msgid   "filename"
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:184
-msgid ""
-"The    password   should   be   specified   in   a   file   with "
-"passwd=(passphrase). It is highly reccomended that the  file  be stored on a "
-"secure medium such as a personal usb key."
-msgstr ""
+msgid   "The    password   should   be   specified   in   a   file   with "
+        "passwd=(passphrase). It is highly reccomended that the  file  be "
+        "stored on a secure medium such as a personal usb key."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:191 ../xffm/fm/classes/ecryptfs.hh:220
-#, fuzzy
-msgid "The password is specified through the specified file descriptor."
-msgstr "La contraseña a enviar al servidor para la autorización."
+msgid   "The password is specified through the specified file descriptor."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:198
-msgid "The salt should be specified as a 16 digit hex value.  "
-msgstr ""
+msgid   "The salt should be specified as a 16 digit hex value.  "
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:205 ../xffm/fm/classes/ecryptfs.hh:214
-msgid ""
-"The   password   should   be   specified   in   a   file    with "
-"openssl_passwd=(openssl-password). It is highly reccomended that the file be "
-"stored on a secure medium such  as  a  personal  usb key."
-msgstr ""
+msgid   "The   password   should   be   specified   in   a   file    with "
+        "openssl_passwd=(openssl-password). It is highly reccomended that the "
+        "file be stored on a secure medium such  as  a  personal  usb key."
+msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:218
-msgid "File descriptor"
-msgstr "Descriptor del archivo"
+#, fuzzy
+msgid   "File descriptor"
+msgstr  "Sin descripción."
 
 #: ../xffm/fm/classes/ecryptfs.hh:224
-msgid "password"
-msgstr "contraseña"
+#, fuzzy
+msgid   "password"
+msgstr  "Contraseña:"
 
 #: ../xffm/fm/classes/ecryptfs.hh:226
-msgid ""
-"The  password  can  be  specified on the command line. Since the password is "
-"visible in the process list,  it  is  highly  recommended to use this option "
-"only for testing purposes."
-msgstr ""
+msgid   "The  password  can  be  specified on the command line. Since the "
+        "password is visible in the process list,  it  is  highly  "
+        "recommended to use this option only for testing purposes."
+msgstr  ""
 
-#. gtk_widget_show(GTK_WIDGET(vbox_));
-#. loadButton_ = UtilBasic::mkButton("document-open", _("Load"));
-#. compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(loadButton_), FALSE, FALSE, 0);
-#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
-#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/fm/classes/ecryptfs.hh:379 ../xffm/fm/classes/ecryptfs.hh:380
+#: ../xffm/fm/classes/ecryptfs.hh:402
 #: ../xffm/response/templates/mountresponse.hh:151
-#: ../xffm/response/templates/efsresponse.hh:138
-msgid "Mount"
-msgstr "Montar"
+#: ../xffm/response/templates/efsresponse.hh:142
+#, fuzzy
+msgid   "Mount"
+msgstr  "Montar %s"
 
-#: ../xffm/fm/classes/ecryptfs.hh:392
-#: ../xffm/response/templates/efsresponse.hh:181
-msgid "Save"
-msgstr "Guardar"
+#: ../xffm/fm/classes/ecryptfs.hh:396
+#: ../xffm/response/templates/tarresponse.hh:214
+#: ../xffm/response/templates/efsresponse.hh:185
+msgid   "Save"
+msgstr  ""
 
-#: ../xffm/fm/classes/ecryptfs.hh:612
-#: ../xffm/response/templates/efsresponse.hh:160
-#: ../xffm/find/templates/findresponse.hh:275
-#: ../xffm/find/templates/findresponse.hh:561
-#: ../xffm/find/templates/findresponse.hh:594
-msgid "Options"
-msgstr "Opciones"
+#: ../xffm/fm/classes/ecryptfs.hh:616
+#: ../xffm/response/templates/efsresponse.hh:164
+#: ../xffm/find/templates/findresponse.hh:292
+#: ../xffm/find/templates/findresponse.hh:512
+#: ../xffm/find/templates/findresponse.hh:547
+msgid   "Options"
+msgstr  "Opciones"
 
-#: ../xffm/fm/classes/ecryptfs.hh:613
-#: ../xffm/response/templates/efsresponse.hh:166
-msgid "Advanced"
-msgstr "Avanzada"
+#: ../xffm/fm/classes/ecryptfs.hh:617
+#: ../xffm/response/templates/efsresponse.hh:170
+msgid   "Advanced"
+msgstr  ""
 
-#: ../xffm/fm/classes/ecryptfs.hh:928
+#: ../xffm/fm/classes/ecryptfs.hh:932
+#, fuzzy, c-format
+msgid   "Mounting %s"
+msgstr  "Montar %s"
+
+#: ../xffm/fm/classes/ecryptfs.hh:990
 #, c-format
-msgid "Mounting %s"
-msgstr "Montando %s"
-
-#: ../xffm/fm/classes/ecryptfs.hh:986
-#, c-format
-msgid "Enter Passphrase for %s"
-msgstr "Introduzca la contraseña para %s"
+msgid   "Enter Passphrase for %s"
+msgstr  ""
 
 #: ../xffm/response/templates/mountresponse.hh:115
 #: ../xffm/response/templates/mountresponse.hh:168
-msgid "Mount Device"
-msgstr "Montar dispositivo"
+#, fuzzy
+msgid   "Mount Device"
+msgstr  "Montar %s"
 
-#.
-#. auto text2 = g_strconcat(_("Mount Volume:"), NULL);
-#. auto label = gtk_label_new(text2);
-#. g_free(text2);
-#. gtk_box_append(hbox, GTK_WIDGET(label));
-#. mount point entry
-#. mount child
-#. gtk_widget_set_sensitive(GTK_WIDGET(remoteEntry_), true); // FIXME: put to false
 #: ../xffm/response/templates/mountresponse.hh:128
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:484
-#: ../xffm/response/templates/efsresponse.hh:490
-msgid "Mount Point"
-msgstr "Punto de montaje"
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:488
+#: ../xffm/response/templates/efsresponse.hh:494
+#, fuzzy
+msgid   "Mount Point"
+msgstr  "Error al montar"
 
 #: ../xffm/response/templates/mountresponse.hh:244
-#, c-format
-msgid "Cannot create directory '%s'"
-msgstr "No se puede crear la carpeta «%s»"
+#, fuzzy, c-format
+msgid   "Cannot create directory '%s'"
+msgstr  "No se puede ejecutar «%s»"
 
 #: ../xffm/response/templates/mountresponse.hh:245
 #: ../xffm/response/templates/mkdirresponse.hh:70
-msgid "Sorry"
-msgstr "Disculpe"
+msgid   "Sorry"
+msgstr  ""
+
+#: ../xffm/response/templates/dialogentry.hh:41
+msgid   "Help"
+msgstr  "Ayuda"
 
 #: ../xffm/response/templates/fileresponse.hh:37
-msgid "Select Directory"
-msgstr "Seleccionar directorio"
+msgid   "Select Directory"
+msgstr  ""
 
 #: ../xffm/response/templates/fileresponse.hh:136
 #: ../xffm/response/templates/fileresponse.hh:267
 #: ../xffm/response/templates/fileresponse.hh:355
-msgid "No folder selected."
-msgstr "No hay ninguna carpeta seleccionada."
+msgid   "No folder selected."
+msgstr  ""
 
 #: ../xffm/response/templates/fileresponse.hh:239
 #: ../xffm/response/classes/inforesponse.hh:6
-msgid "Information"
-msgstr "Información"
+#, fuzzy
+msgid   "Information"
+msgstr  "Zona"
 
 #: ../xffm/response/templates/fileresponse.hh:263
-msgid "Selection:"
-msgstr "Selección:"
+#, fuzzy
+msgid   "Selection:"
+msgstr  "Seleccione una zona:"
 
 #: ../xffm/response/templates/fileresponse.hh:317
 #: ../xffm/response/templates/mkdirresponse.hh:22
-msgid "New Folder"
-msgstr "Carpeta nueva"
+#, fuzzy
+msgid   "New Folder"
+msgstr  "Nota nueva"
 
 #: ../xffm/response/templates/fileresponse.hh:321
-msgid "Accept"
-msgstr "Aceptar"
+msgid   "Accept"
+msgstr  ""
 
 #: ../xffm/response/templates/fileresponse.hh:500
-msgid "New folder name:"
-msgstr "Nombre de carpeta nueva:"
+msgid   "New folder name:"
+msgstr  ""
 
 #: ../xffm/response/templates/fileresponse.hh:504
-msgid "New Directory"
-msgstr "Carpeta nueva"
+msgid   "New Directory"
+msgstr  ""
 
 #: ../xffm/response/templates/fileresponse.hh:504
-msgid "Create in folder:"
-msgstr "Crear en la carpeta:"
+msgid   "Create in folder:"
+msgstr  ""
 
 #: ../xffm/response/templates/openwith.hh:121
-msgid "Open With..."
-msgstr "Abrir con..."
+msgid   "Open With..."
+msgstr  ""
 
 #: ../xffm/response/templates/openwith.hh:198
-msgid "Is executable"
-msgstr "es ejecutable"
+msgid   "Is executable"
+msgstr  ""
 
 #: ../xffm/response/templates/openwith.hh:204
-msgid "Execute"
-msgstr "Ejecutar"
+msgid   "Execute"
+msgstr  ""
 
-#. auto cancel = Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, this);
 #: ../xffm/response/templates/openwith.hh:249
 #: ../xffm/response/templates/dialogbasic.hh:312
 #: ../xffm/response/templates/bfishresponse.hh:173
-msgid "Apply"
-msgstr "Aplicar"
+msgid   "Apply"
+msgstr  ""
 
-#. Basic::boxPack0(GTK_BOX (hbox),GTK_WIDGET(cancel), FALSE, FALSE, 10);
-#. check button
 #: ../xffm/response/templates/openwith.hh:257
-msgid ""
-"By default applications will be run in the background and only their output "
-"will be displayed in a toolview. This makes it impossible to interact with "
-"applications requiring user input from a terminal emulator. To run such "
-"applications, you should use an external terminal."
-msgstr ""
-"Por omisión, las aplicaciones se ejecutarán en segundo plano y solo se "
-"mostrará su salida en una vista de herramientas. Esto hace imposible "
-"interactuar con las aplicaciones que necesiten entrada por parte del usuario "
-"en un emulador de terminal. Para ejecutar estas aplicaciones debería usar un "
-"terminal externo."
+msgid   "By default applications will be run in the background and only their "
+        "output will be displayed in a toolview. This makes it impossible to "
+        "interact with applications requiring user input from a terminal "
+        "emulator. To run such applications, you should use an external "
+        "terminal."
+msgstr  ""
 
-#. auto cancel = UtilBasic::mkButton("no", _("Cancel")); //4
-#. g_signal_connect(G_OBJECT(cancel), "pressed", G_CALLBACK(cancelCallback), this);
-#. Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(cancel), TRUE, TRUE, 5);
 #: ../xffm/response/templates/openwith.hh:272
-msgid "Use External Terminal:"
-msgstr "Usar terminal externa:"
+msgid   "Use External Terminal:"
+msgstr  ""
 
 #: ../xffm/response/templates/openwith.hh:335
-#, c-format
-msgid "Cannot find executable for \"%s\""
-msgstr "No se puede encontrar el ejecutable para «%s»"
+#, fuzzy, c-format
+msgid   "Cannot find executable for \"%s\""
+msgstr  "No se puede ejecutar «%s»"
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid "GZip"
-msgstr "GZip"
+#: ../xffm/response/templates/tarresponse.hh:34
+msgid   "Compressed file..."
+msgstr  ""
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid "BZip2"
-msgstr "BZip2"
+#: ../xffm/response/templates/tarresponse.hh:174
+msgid   "Target directory:"
+msgstr  ""
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid "XZ"
-msgstr "XZ"
+#: ../xffm/response/templates/tarresponse.hh:183
+msgid   "Name:"
+msgstr  ""
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid "Zip"
-msgstr "Zip"
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:488
+msgid   "Encrypted"
+msgstr  ""
 
-#: ../xffm/response/templates/tarresponse.hh:20
-msgid "Compressed file..."
-msgstr "Archivo comprimido…"
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:494
+msgid   "Unencrypted"
+msgstr  ""
 
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:484
-msgid "Encrypted"
-msgstr "Cifrado"
-
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:490
-msgid "Unencrypted"
-msgstr "Sin cifrar"
-
-#: ../xffm/response/templates/efsresponse.hh:485
-#: ../xffm/response/templates/efsresponse.hh:491
-msgid "Folder does not exist"
-msgstr "La carpeta no existe"
+#: ../xffm/response/templates/efsresponse.hh:489
+#: ../xffm/response/templates/efsresponse.hh:495
+msgid   "Folder does not exist"
+msgstr  ""
 
 #: ../xffm/response/templates/dialogdrop.hh:45
-msgid "Copying"
-msgstr "Copiar"
+msgid   "Copying"
+msgstr  ""
 
 #: ../xffm/response/templates/dialogdrop.hh:45
-msgid "Moving"
-msgstr "Movimiento"
+#, fuzzy
+msgid   "Moving"
+msgstr  "Quitando:"
 
 #: ../xffm/response/templates/dialogdrop.hh:48
-msgid "Completed"
-msgstr "Completado"
+msgid   "Completed"
+msgstr  ""
 
 #: ../xffm/response/templates/mkdirresponse.hh:20
 #: ../xffm/response/classes/wsresponse.hh:11
 #: ../xffm/response/classes/lnresponse.hh:10
 #: ../xffm/response/classes/cpresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:9
-#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
-msgid "Path"
-msgstr "Ruta"
+#: ../xffm/find/templates/findresponse.hh:440 ../xffm/find/classes/fgr.hh:124
+msgid   "Path"
+msgstr  ""
 
 #: ../xffm/response/templates/mkdirresponse.hh:68
-#, c-format
-msgid "Cannot create folder '%s': %s"
-msgstr "No se puede crear la carpeta: «%s»: %s"
+#, fuzzy, c-format
+msgid   "Cannot create folder '%s': %s"
+msgstr  "No se puede obtener el esquema para %s: %s"
 
 #: ../xffm/response/templates/bfish.hh:14
-msgid "Sorry, file not found"
-msgstr "Archivo no encontrado"
+msgid   "Sorry, file not found"
+msgstr  ""
+
+#: ../xffm/response/templates/regexpresponse.hh:11
+msgid   "foo"
+msgstr  ""
 
 #: ../xffm/response/templates/bfishresponse.hh:93
-msgid "Encrypt:"
-msgstr "Cifrar:"
+msgid   "Encrypt:"
+msgstr  ""
 
 #: ../xffm/response/templates/bfishresponse.hh:109
-msgid "Writes text on standard output."
-msgstr "Escribe texto en la salida estándar."
+msgid   "Writes text on standard output."
+msgstr  ""
 
 #: ../xffm/response/templates/bfishresponse.hh:131
-msgid "Password:"
-msgstr "Contraseña:"
+msgid   "Password:"
+msgstr  "Contraseña:"
 
 #: ../xffm/response/templates/bfishresponse.hh:133
-msgid "Confirm password:"
-msgstr "Confirmar contraseña:"
+#, fuzzy
+msgid   "Confirm password:"
+msgstr  "Introduzca la contraseña"
 
 #: ../xffm/response/templates/bfishresponse.hh:154
-msgid "Passwords do not match."
-msgstr "Las contraseñas no coinciden."
+msgid   "Passwords do not match."
+msgstr  ""
 
 #: ../xffm/response/templates/bfishresponse.hh:188
-msgid "bcrypt (blowfish encryption)"
-msgstr ""
+msgid   "bcrypt (blowfish encryption)"
+msgstr  ""
 
 #: ../xffm/response/templates/bfishresponse.hh:195
-msgid "User cancelled."
-msgstr "El usuario canceló."
+msgid   "User cancelled."
+msgstr  ""
 
 #: ../xffm/response/templates/bfishresponse.hh:215
-msgid "No password set"
-msgstr "Sin contraseña"
+#, fuzzy
+msgid   "No password set"
+msgstr  "Introduzca la contraseña"
 
 #: ../xffm/response/templates/bfishresponse.hh:220
-msgid "Passwords Do Not Match"
-msgstr "Las contraseñas no coinciden"
+msgid   "Passwords Do Not Match"
+msgstr  ""
 
 #: ../xffm/response/templates/jumpresponse.hh:23
-msgid "The location does not exist."
-msgstr "La ubicación no existe."
+msgid   "The location does not exist."
+msgstr  ""
 
-#: ../xffm/response/dialogs.hh:68
-#, c-format
-msgid "Delete '%s'"
-msgstr "Eliminar «%s»"
+#: ../xffm/response/dialogs.hh:73
+#, fuzzy, c-format
+msgid   "Delete '%s'"
+msgstr  "Borrar las notas"
 
 #: ../xffm/response/classes/rmlistresponse.hh:17
 #: ../xffm/response/classes/rmresponse.hh:17
-msgid "Shred"
-msgstr "Triturar"
+msgid   "Shred"
+msgstr  ""
 
-#. 2
 #: ../xffm/response/classes/rmlistresponse.hh:19
 #: ../xffm/response/classes/rmresponse.hh:19
-msgid "Trash"
-msgstr "Papelera"
+msgid   "Trash"
+msgstr  "Papelera"
 
 #: ../xffm/response/classes/rmlistresponse.hh:26
-msgid "WARNING"
-msgstr "AVISO"
+msgid   "WARNING"
+msgstr  ""
 
 #: ../xffm/response/classes/rmlistresponse.hh:30
-msgid "You have selected multiple files or folders"
-msgstr "Ha seleccionado múltiples archivos o carpetas"
+msgid   "You have selected multiple files or folders"
+msgstr  ""
 
-#: ../xffm/response/classes/envresponse.hh:90
-msgid "Environment variables"
-msgstr "Variables de entorno"
+#: ../xffm/response/classes/envresponse.hh:93
+msgid   "Environment variables"
+msgstr  ""
 
-#: ../xffm/response/classes/envresponse.hh:122
-msgid "No changes need to be saved"
-msgstr "No es necesario guardar ningún cambio"
+#: ../xffm/response/classes/envresponse.hh:125
+msgid   "No changes need to be saved"
+msgstr  ""
 
-#: ../xffm/response/classes/envresponse.hh:217
-msgid "Environment Variable"
-msgstr "Variable de entorno"
-
-#: ../xffm/response/classes/progressbar.hh:70
-msgid "Cancelled"
-msgstr "Cancelado"
+#: ../xffm/response/classes/envresponse.hh:220
+msgid   "Environment Variable"
+msgstr  ""
 
 #: ../xffm/response/classes/progressbar.hh:70
-msgid "Idle Timeout"
-msgstr "Tiempo de espera inactivo"
+msgid   "Cancelled"
+msgstr  ""
+
+#: ../xffm/response/classes/progressbar.hh:70
+msgid   "Idle Timeout"
+msgstr  ""
 
 #: ../xffm/response/classes/wsresponse.hh:13
-msgid "Workspace Switcher"
-msgstr "Selector de áreas de trabajo"
+msgid   "Workspace Switcher"
+msgstr  ""
+
+#: ../xffm/response/classes/wsresponse.hh:35
+#: ../xffm/menus/templates/menucallbacks.hh:134
+#, c-format
+msgid   "Workspace %s"
+msgstr  ""
 
 #: ../xffm/response/classes/wsresponse.hh:36
-#: ../xffm/menus/templates/menucallbacks.hh:130
-#, c-format
-msgid "Workspace %s"
-msgstr "Espacio de trabajo %s"
-
-#: ../xffm/response/classes/wsresponse.hh:37
-#: ../xffm/menus/templates/menucallbacks.hh:131
-msgid "does not exist"
-msgstr "no existe"
+#: ../xffm/menus/templates/menucallbacks.hh:135
+msgid   "does not exist"
+msgstr  ""
 
 #: ../xffm/response/classes/dndresponse.hh:13
-msgid "Drop Target"
-msgstr "Etiqueta para soltar"
+msgid   "Drop Target"
+msgstr  ""
 
 #: ../xffm/response/classes/dndresponse.hh:21
-msgid "Move"
-msgstr "Mover"
+msgid   "Move"
+msgstr  ""
 
 #: ../xffm/response/classes/lnresponse.hh:12
 #: ../xffm/response/classes/lnresponse.hh:21
-msgid "symlink"
-msgstr "enlace simbólico"
+msgid   "symlink"
+msgstr  ""
 
 #: ../xffm/response/classes/cpresponse.hh:42
-msgid "Copy files"
-msgstr "Copiar archivos"
+msgid   "Copy files"
+msgstr  ""
 
 #: ../xffm/response/classes/cpresponse.hh:127
-msgid "copy"
-msgstr "copiar"
+msgid   "copy"
+msgstr  ""
 
 #: ../xffm/response/classes/cpresponse.hh:129
-msgid "move"
-msgstr "mover"
+msgid   "move"
+msgstr  ""
 
 #: ../xffm/response/classes/cpresponse.hh:131
-msgid "link"
-msgstr "enlace"
+msgid   "link"
+msgstr  ""
 
 #: ../xffm/response/classes/cpresponse.hh:134
-msgid "Operation completed"
-msgstr "Operación completada"
+msgid   "Operation completed"
+msgstr  ""
 
 #: ../xffm/response/classes/passwdresponse.hh:9
-msgid "Security"
-msgstr "Seguridad"
+msgid   "Security"
+msgstr  ""
 
 #: ../xffm/mime/mimemagic.hh:69 ../xffm/mime/mimemagic.hh:113
-msgid "No Read Permission"
-msgstr "Sin permiso de lectura"
+msgid   "No Read Permission"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:111
-msgid "Find files"
-msgstr "Buscar archivos"
+#: ../xffm/find/templates/findresponse.hh:295
+#: ../xffm/find/templates/findresponse.hh:735
+#, fuzzy
+msgid   "Advanced options"
+msgstr  "sin opciones"
 
-#: ../xffm/find/templates/findresponse.hh:278
-#: ../xffm/find/templates/findresponse.hh:780
-msgid "Advanced options"
-msgstr "Opciones avanzadas"
-
-#: ../xffm/find/templates/findresponse.hh:286
-msgid "Find in Files"
-msgstr "Buscar en archivos"
-
-#: ../xffm/find/templates/findresponse.hh:290
-#: ../xffm/find/templates/findresponse.hh:312
-msgid "Cancel Operation"
-msgstr "Cancelar operación"
+#: ../xffm/find/templates/findresponse.hh:303
+msgid   "Find in Files"
+msgstr  ""
 
 #: ../xffm/find/templates/findresponse.hh:307
-msgid "Show search results for this query"
-msgstr "Mostrar los resultados de búsqueda para esta consulta"
+#: ../xffm/find/templates/findresponse.hh:329
+msgid   "Cancel Operation"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:323
-#: ../xffm/find/templates/findresponse.hh:327
-msgid "Clear search"
-msgstr "Limpiar la búsqueda"
+#: ../xffm/find/templates/findresponse.hh:324
+msgid   "Show search results for this query"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:503
-msgid "Show help"
-msgstr "Mostrar ayuda"
+#: ../xffm/find/templates/findresponse.hh:340
+#: ../xffm/find/templates/findresponse.hh:344
+msgid   "Clear search"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:532
-msgid "Case Sensitive"
-msgstr "Sensible a capitalización"
+#: ../xffm/find/templates/findresponse.hh:483
+msgid   "Case Sensitive"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:484
+msgid   "Extended regexp"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:485
+msgid   "Include binary files"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:486 ../xffm/find/classes/fgr.hh:212
+msgid   "Line Count"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:495
+msgid   "Anywhere"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:496
+msgid   "Whole words only"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:497
+msgid   "lines"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:498 ../xffm/find/classes/fgr.hh:210
+msgid   "No match"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:522 ../xffm/find/classes/fgr.hh:126
+msgid   "Filter:"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:530
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:146
+msgid   "Recursive"
+msgstr  ""
+
+#: ../xffm/find/templates/findresponse.hh:531
+#: ../xffm/find/templates/findsignals.hh:306 ../xffm/find/classes/fgr.hh:142
+msgid   "Find hidden files and directories"
+msgstr  ""
 
 #: ../xffm/find/templates/findresponse.hh:533
-msgid "Extended regexp"
-msgstr "Expreg extendida"
+#: ../xffm/find/templates/findsignals.hh:315 ../xffm/find/classes/fgr.hh:138
+msgid   "Stay on single filesystem"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:534
-msgid "Include binary files"
-msgstr "Incluir archivos binarios"
+#: ../xffm/find/templates/findresponse.hh:535
+msgid   "Upper limit"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
-msgid "Line Count"
-msgstr "Cuenta de líneas"
+#: ../xffm/find/templates/findresponse.hh:536
+#: ../xffm/find/templates/findsignals.hh:515
+msgid   "Results"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:544
-msgid "Anywhere"
-msgstr "En cualquier sitio"
+#: ../xffm/find/templates/findresponse.hh:555
+msgid   "Contains the text"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:545
-msgid "Whole words only"
-msgstr "Solo palabras completas"
+#: ../xffm/find/templates/findresponse.hh:622
+#: ../xffm/find/templates/findsignals.hh:321
+msgid   "File size"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:546
-msgid "lines"
-msgstr "líneas"
+#: ../xffm/find/templates/findresponse.hh:635
+msgid   "At Least"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
-msgid "No match"
-msgstr "No hay ninguna coincidencia"
+#: ../xffm/find/templates/findresponse.hh:635
+#: ../xffm/find/templates/findresponse.hh:642
+msgid   "kBytes"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
-msgid "Filter:"
-msgstr "Filtro:"
+#: ../xffm/find/templates/findresponse.hh:642
+msgid   "At Most"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:577
-#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
-msgid "Recursive"
-msgstr "Recursiva"
+#: ../xffm/find/templates/findresponse.hh:650
+#: ../xffm/find/templates/findsignals.hh:327
+msgid   "Specific Time"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:578
-#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
-msgid "Find hidden files and directories"
-msgstr "Buscar archivos y directorios ocultos"
+#: ../xffm/find/templates/findresponse.hh:660
+msgid   "Modified"
+msgstr  ""
 
-#. ?? check this XXX
-#: ../xffm/find/templates/findresponse.hh:580
-#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
-msgid "Stay on single filesystem"
-msgstr "Permanecer en este sistema de archivos"
+#: ../xffm/find/templates/findresponse.hh:660
+msgid   "Created"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:582
-msgid "Upper limit"
-msgstr "Límite superior"
+#: ../xffm/find/templates/findresponse.hh:660
+msgid   "Accessed"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:583
-#: ../xffm/find/templates/findsignals.hh:508
-msgid "Results"
-msgstr "Resultados"
-
-#: ../xffm/find/templates/findresponse.hh:602
-msgid "Contains the text"
-msgstr "Contiene el texto"
-
-#: ../xffm/find/templates/findresponse.hh:667
-#: ../xffm/find/templates/findsignals.hh:318
-msgid "File size"
-msgstr "Tamaño del archivo"
-
-#. default
-#. option -s +KByte "size_greater", "size_greater_spin"
-#: ../xffm/find/templates/findresponse.hh:680
-msgid "At Least"
-msgstr "Al menos"
-
-#: ../xffm/find/templates/findresponse.hh:680
-#: ../xffm/find/templates/findresponse.hh:687
-msgid "kBytes"
-msgstr "kBytes"
-
-#. option -s -KByte "size_smaller", "size_smaller_spin"
-#: ../xffm/find/templates/findresponse.hh:687
-msgid "At Most"
-msgstr "Como máximo"
-
-#: ../xffm/find/templates/findresponse.hh:695
-#: ../xffm/find/templates/findsignals.hh:324
-msgid "Specific Time"
-msgstr "Hora específica"
-
-#: ../xffm/find/templates/findresponse.hh:705
-msgid "Modified"
-msgstr "Modificado"
-
-#: ../xffm/find/templates/findresponse.hh:705
-msgid "Created"
-msgstr "Creado"
-
-#: ../xffm/find/templates/findresponse.hh:705
-msgid "Accessed"
-msgstr "Accedido"
-
-#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/templates/findresponse.hh:661 ../xffm/find/classes/fgr.hh:166
 #: ../xffm/find/classes/fgr.hh:168
-msgid "Minutes"
-msgstr "Minutos"
+#, fuzzy
+msgid   "Minutes"
+msgstr  "minutos"
 
-#. option -h hours "last_hours", "last_hours_spin"
-#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/templates/findresponse.hh:665 ../xffm/find/classes/fgr.hh:169
 #: ../xffm/find/classes/fgr.hh:171
-msgid "Hours"
-msgstr "Horas"
+msgid   "Hours"
+msgstr  ""
 
-#. option -d days "last_days", "last_days_spin"
-#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/templates/findresponse.hh:669 ../xffm/find/classes/fgr.hh:172
 #: ../xffm/find/classes/fgr.hh:174
-msgid "Days"
-msgstr "Días"
+msgid   "Days"
+msgstr  ""
 
-#. option -m months "last_months", "last_months_spin"
-#: ../xffm/find/templates/findresponse.hh:718
-msgid "Months"
-msgstr "Meses"
+#: ../xffm/find/templates/findresponse.hh:673
+msgid   "Months"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:729
-#: ../xffm/find/templates/findsignals.hh:329
-msgid "File properties"
-msgstr "Propiedades del archivo"
+#: ../xffm/find/templates/findresponse.hh:684
+#: ../xffm/find/templates/findsignals.hh:332
+#, fuzzy
+msgid   "File properties"
+msgstr  "Propiedades"
 
-#: ../xffm/find/templates/findresponse.hh:748
-msgid "Group"
-msgstr "Grupo"
+#: ../xffm/find/templates/findresponse.hh:703
+#, fuzzy
+msgid   "Group"
+msgstr  "Grupos"
 
-#. option -o octal "octal_p" "permissions_entry"
-#: ../xffm/find/templates/findresponse.hh:753
-#: ../xffm/find/templates/findsignals.hh:175
-msgid "Octal Permissions"
-msgstr "Permisos octales"
+#: ../xffm/find/templates/findresponse.hh:708
+#: ../xffm/find/templates/findsignals.hh:178
+msgid   "Octal Permissions"
+msgstr  ""
 
-#. option -p suid | exe
-#. auto privilege = simpleCheck(parentBox, _("Privileges"));
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:761
-#: ../xffm/find/templates/findsignals.hh:161
-#: ../xffm/find/templates/findsignals.hh:167
-msgid "Executable"
-msgstr "Ejecutable"
-
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:765
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:716
 #: ../xffm/find/templates/findsignals.hh:164
-msgid "SUID"
-msgstr "SUID"
+#: ../xffm/find/templates/findsignals.hh:170
+msgid   "Executable"
+msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:801
-msgid "File type : "
-msgstr "Tipo de archivo : "
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:720
+#: ../xffm/find/templates/findsignals.hh:167
+msgid   "SUID"
+msgstr  ""
 
-#. g_hash_table_replace(controllerHash, GINT_TO_POINTER(Data->pid), command);
-#: ../xffm/find/templates/findsignals.hh:86
-msgid "Searching..."
-msgstr "Buscando…"
+#: ../xffm/find/templates/findresponse.hh:756
+msgid   "File type : "
+msgstr  ""
 
-#: ../xffm/find/templates/findsignals.hh:441
-#: ../xffm/find/templates/dndbox.hh:65
-msgid "No editor for current action."
-msgstr "No hay ningún editor para la acción actual."
+#: ../xffm/find/templates/findsignals.hh:89
+#, fuzzy
+msgid   "Searching..."
+msgstr  "Actualizando…"
 
-#: ../xffm/find/templates/findsignals.hh:508
-msgid "Upper limit:"
-msgstr "Límite superior:"
+#: ../xffm/find/templates/findsignals.hh:448
+#: ../xffm/find/templates/dndbox.hh:66
+msgid   "No editor for current action."
+msgstr  ""
 
-#: ../xffm/find/templates/findsignals.hh:511
-msgid "Counting files..."
-msgstr "Contando archivos..."
+#: ../xffm/find/templates/findsignals.hh:515
+msgid   "Upper limit:"
+msgstr  ""
 
-#: ../xffm/find/templates/findsignals.hh:519
+#: ../xffm/find/templates/findsignals.hh:518
+msgid   "Counting files..."
+msgstr  ""
+
+#: ../xffm/find/templates/findsignals.hh:526
 #, c-format
-msgid "Found %d match"
-msgid_plural "Found %d matches"
-msgstr[0] "Se encontró %d coincidencia"
-msgstr[1] "Se encontraron %d coincidencias"
+msgid   "Found %d match"
+msgid_plural    "Found %d matches"
+msgstr[0]       ""
+msgstr[1]       ""
 
-#: ../xffm/find/templates/findsignals.hh:521
+#: ../xffm/find/templates/findsignals.hh:528
 #, c-format
-msgid "%s Finished : %s"
-msgstr "%s Terminado: %s"
+msgid   "%s Finished : %s"
+msgstr  ""
 
-#: ../xffm/find/templates/dndbox.hh:126
-msgid "Edit all"
-msgstr "Editar todo"
+#: ../xffm/find/templates/dndbox.hh:128
+#, fuzzy
+msgid   "Edit all"
+msgstr  "Editar la paleta"
 
-#: ../xffm/find/templates/dndbox.hh:139
+#: ../xffm/find/templates/dndbox.hh:141
 #, c-format
-msgid "Search results for %s"
-msgstr "Resultados de la búsqueda de %s"
+msgid   "Search results for %s"
+msgstr  ""
 
-#: ../xffm/find/templates/dndbox.hh:259
-msgid "Search results"
-msgstr "Resultado de la búsqueda"
+#: ../xffm/find/templates/dndbox.hh:261
+msgid   "Search results"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:125
-msgid "Locate documents and folders on this computer by name or content"
-msgstr "Localice documentos y carpetas por nombre o contenido en este equipo"
+msgid   "Locate documents and folders on this computer by name or content"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:126
-msgid "Search for files"
-msgstr "Buscar archivos"
-
-#. N_("-k | -h | -d | -m --->  -M | -C | -A"), "\n",
-#: ../xffm/find/classes/fgr.hh:128
-msgid "Contents:"
-msgstr "Contenido:"
+msgid   "Search for files"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:128
-msgid "File's contents filtered as plain text."
-msgstr "Contenido del archivo filtrado como texto plano."
+msgid   "Contents:"
+msgstr  ""
+
+#: ../xffm/find/classes/fgr.hh:128
+msgid   "File's contents filtered as plain text."
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:135
-msgid "Filter Details"
-msgstr "Detalles del filtro"
+#, fuzzy
+msgid   "Filter Details"
+msgstr  "Detalles"
 
 #: ../xffm/find/classes/fgr.hh:140
-msgid "Print..."
-msgstr "Imprimir…"
+msgid   "Print..."
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:140
-msgid "The unique Process ID that identifies this process."
-msgstr "El Id único del proceso que identifica este proceso."
+msgid   "The unique Process ID that identifies this process."
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:143
-msgid "Filter"
-msgstr "Filtro"
+msgid   "Filter"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:144
-msgid ""
-"To display files which pass the filter (stars and regexps will be processed)"
-msgstr ""
+msgid   "To display files which pass the filter (stars and regexps will be "
+        "processed)"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:147 ../xffm/find/classes/fgr.hh:148
 #: ../xffm/find/classes/fgr.hh:149 ../xffm/find/classes/fgr.hh:150
-msgid "KByte"
-msgstr "KByte"
+msgid   "KByte"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:148
-msgid "is greater than or equal to"
-msgstr "es mayor o igual que"
+msgid   "is greater than or equal to"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:150
-msgid "is less than or equal to"
-msgstr "es menor que o igual que"
+msgid   "is less than or equal to"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:152
-msgid "Set UID"
-msgstr "Establecer el UID"
+msgid   "Set UID"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:152
-msgid "Executable Text Files"
-msgstr "Archivos de texto ejecutables"
+msgid   "Executable Text Files"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:154
-msgid "The permissions of the file, in octal notation."
-msgstr "Los permisos del archivo, en notación octal."
+msgid   "The permissions of the file, in octal notation."
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:155
-msgid "Type"
-msgstr "Tipo"
+msgid   "Type"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:157 ../xffm/find/classes/ffunctions.hh:16
-msgid "Any"
-msgstr "Cualquiera"
+msgid   "Any"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:157
-msgid "Default type"
-msgstr "Tipo predeterminado"
+#, fuzzy
+msgid   "Default type"
+msgstr  "Predeterminado"
 
 #: ../xffm/find/classes/fgr.hh:161
-msgid "UNIX Socket"
-msgstr "Socket UNIX"
+msgid   "UNIX Socket"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:167 ../xffm/find/classes/fgr.hh:170
 #: ../xffm/find/classes/fgr.hh:173 ../xffm/find/classes/fgr.hh:176
-msgid "Details"
-msgstr "Detalles"
+msgid   "Details"
+msgstr  "Detalles"
 
 #: ../xffm/find/classes/fgr.hh:167 ../xffm/find/classes/fgr.hh:170
 #: ../xffm/find/classes/fgr.hh:173 ../xffm/find/classes/fgr.hh:176
 #: ../xffm/find/classes/fgr.hh:179 ../xffm/find/classes/fgr.hh:180
 #: ../xffm/find/classes/fgr.hh:183 ../xffm/find/classes/fgr.hh:184
 #: ../xffm/find/classes/fgr.hh:187 ../xffm/find/classes/fgr.hh:188
-msgid "TIME"
-msgstr "TIEMPO"
+msgid   "TIME"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:175
-msgid "Month"
-msgstr "Mes"
+msgid   "Month"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:177
-msgid "Month(s)"
-msgstr "Mes(es)"
+msgid   "Month(s)"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:180
-msgid "Modification Time :"
-msgstr "Hora de modificación :"
+#, fuzzy
+msgid   "Modification Time :"
+msgstr  "Notificaciones"
 
 #: ../xffm/find/classes/fgr.hh:184
-msgid "Access Time :"
-msgstr "Último acceso :"
+msgid   "Access Time :"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:188
-msgid "Creation Time :"
-msgstr "Hora de creación :"
+msgid   "Creation Time :"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:191 ../xffm/find/classes/fgr.hh:192
-msgid "uid"
-msgstr "uid"
+msgid   "uid"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:192
-msgid "User:"
-msgstr "Usuario:"
+#, fuzzy
+msgid   "User:"
+msgstr  "Usuario"
 
 #: ../xffm/find/classes/fgr.hh:194 ../xffm/find/classes/fgr.hh:195
-msgid "gid"
-msgstr "gid"
+msgid   "gid"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:195
-msgid "Group:"
-msgstr "Grupo:"
+#, fuzzy
+msgid   "Group:"
+msgstr  "Grupos"
 
 #: ../xffm/find/classes/fgr.hh:198
-msgid ""
-"Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
-"character that  normally  follows  a file  name"
-msgstr ""
+msgid   "Output  a  zero  byte  (the  ASCII  NULL  character) instead of the "
+        "character that  normally  follows  a file  name"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:200
-msgid "Content View"
-msgstr "Vista del contenido"
+msgid   "Content View"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:201 ../xffm/find/classes/fgr.hh:202
 #: ../xffm/find/classes/fgr.hh:203 ../xffm/find/classes/fgr.hh:204
-msgid "STRING"
-msgstr "CADENA"
-
-#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
-msgid "Regular expression"
-msgstr "Expresión regular"
+msgid   "STRING"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:204
-msgid "Extended"
-msgstr "Extendido"
+msgid   "Extended"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:206
-msgid "Ignore case"
-msgstr "Ignorar capitalización"
+msgid   "Ignore case"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:208
-msgid "Text Files"
-msgstr "Archivos de texto"
+msgid   "Text Files"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:214
-msgid "Words"
-msgstr "Palabras"
+msgid   "Words"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:216
-msgid "Lines"
-msgstr "Líneas"
+msgid   "Lines"
+msgstr  ""
 
 #: ../xffm/find/classes/fgr.hh:364
 #, c-format
-msgid "Usage : %s [OPTIONS]\n"
-msgstr "Uso : %s [OPTIONS]\n"
+msgid   "Usage : %s [OPTIONS]\n"
+msgstr  ""
+
+#: ../xffm/find/classes/historyentry.hh:136
+#, fuzzy
+msgid   "Show help"
+msgstr  "Mostrar el tirador"
 
 #: ../xffm/find/classes/ffunctions.hh:9
-msgid "Regular"
-msgstr "Habitual"
+msgid   "Regular"
+msgstr  ""
 
-#: ../xffm/find/classes/ffunctions.hh:42
-msgid ""
-"Basic rules:\n"
-"\n"
-"*  Will match any character zero or more times.\n"
-"?  Will match any character exactly one time\n"
-"[] Match any character within the [] \n"
-"^  Match at beginning of string\n"
-"$  Match at end of string \n"
-msgstr ""
-"Reglas básicas:\n"
-"\n"
-"*  Coincidirá con cualquier carácter cero o más veces.\n"
-"?  Coincidirá con cualquier carácter exáctamente una vez.\n"
-"[] Coincidirá con cualquier carácter dentro del []\n"
-"^  Coincidirá al comienzo de la cadena\n"
-"$  Coincidirá al final de la cadena\n"
+#: ../xffm/find/classes/ffunctions.hh:41
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
+msgstr  ""
 
-#: ../xffm/find/classes/ffunctions.hh:51
-msgid ""
-"Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"In  basic regular expressions the metacharacters ?, +, {, |, (, and ) \n"
-"  lose their special meaning.\n"
-"\n"
-"The  period . matches  any  single  character.\n"
-"The caret ^ matches at the start of line.\n"
-"The dollar $ matches at the end of line.\n"
-"\n"
-"Characters within [ ] matches any single character in the list.\n"
-"Characters within [^ ] matches any single character *not* in the list.\n"
-"Characters inside [ - ] matches a range of characters (ie [0-9] or [a-z]).\n"
-"\n"
-"A regular expression may be followed by one of several repetition "
-"operators:\n"
-"?      The preceding item is optional and matched\n"
-"       at most once.\n"
-"*      The preceding item will be matched zero\n"
-"       or more times.\n"
-"+      The preceding item will be matched one or\n"
-"       more times.\n"
-"{n}    The preceding item is matched exactly n times.\n"
-"{n,}   The preceding item is matched n or more times.\n"
-"{n,m}  The preceding item is matched at least n times,\n"
-"       but not more than m times.\n"
-"\n"
-"To match any reserved character, precede it with \\. \n"
-"\n"
-"Two regular expressions may be joined by the logical or operator |.\n"
-"Two regular expressions may be concatenated.\n"
-"\n"
-"More information is available by typing \"man grep\"\n"
-msgstr ""
-"Los caracteres reservados para expresiones regulares extendidas son\n"
-". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"En expresiones regulares básicas los metacaracteres\n"
-"?, +, {, |, (, y ) pierden su significado especial.\n"
-"\n"
-"El punto  .  se asocia a cualquier carácter.\n"
-"El acento circunflejo ^ busca coincidencias al principio de la línea.\n"
-"El dólar $ busca coincidencias al final de la línea.\n"
-"\n"
-"Caracteres dentro de [ ] coinciden con cualquier carácter en la lista.\n"
-"Caracteres dentro de [^ ] coinciden con cualquier carácter *no* en la "
-"lista.\n"
-"Caracteres dentro de [ - ] coinciden con un rango de caracteres (pe [0-9] ó "
-"[a-z]).\n"
-"\n"
-"Una expresión regular puede ser seguida por uno o varios operadores de "
-"repetición\n"
-"?      El elemento anterior es opcional y coincidirá como máximo una vez.\n"
-"*      El elemento anterior coincidirá cero o más veces.\n"
-"+      El elemento anterior coincidirá una o más veces.\n"
-"{n}    El elemento anterior coincidirá exactamente n veces.\n"
-"{n,}   El elemento anterior coincidirá n o más veces.\n"
-"{n,m}  El elemento anterior coincidirá al menos n veces, pero no más de m "
-"veces\n"
-" \n"
-"Para buscar coincidencia con cualquier carácter reservado, precédalo con "
-"\\. \n"
-"\n"
-"Dos expresiones regulares se pueden unir con el operador | (o lógico).\n"
-"Dos expresiones regulares se pueden concatenar.\n"
-"\n"
-"Más információn disponible con \"man grep\" en la línea de órdenes.\n"
-
-#.
-#. {_("Color settings"),(void *) MenuCallbacks<Type>::popCall},
 #: ../xffm/menus/templates/pathbarmenu.hh:12
 #: ../xffm/menus/templates/pathbarmenu.hh:23
 #: ../xffm/menus/templates/pathbarmenu.hh:34
 #: ../xffm/menus/templates/pathbarmenu.hh:46
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:89
-msgid "Open in New Window"
-msgstr "Abrir en una ventana nueva"
+#: ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
+msgid   "Open in New Window"
+msgstr  ""
 
-#.
 #: ../xffm/menus/templates/pathbarmenu.hh:14
 #: ../xffm/menus/templates/pathbarmenu.hh:26
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -2035,15 +1907,11 @@ msgstr "Abrir en una ventana nueva"
 #: ../xffm/menus/templates/outputMenu.hh:29
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
-msgid "Show Clipboard"
-msgstr "Mostrar portapapeles"
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:94 ../xffm/menus/templates/menu.hh:173
+msgid   "Show Clipboard"
+msgstr  ""
 
-#.
-#. Order is important.
-#. Need not be complete with regards to keys_.
-#. Need not be complete with regards to keys_ nor menuCallbacks_.
 #: ../xffm/menus/templates/inputMenu.hh:16
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:47
@@ -2056,8 +1924,9 @@ msgstr "Mostrar portapapeles"
 #: ../xffm/menus/templates/iconColorMenu.hh:19
 #: ../xffm/menus/templates/iconColorMenu.hh:28
 #: ../xffm/menus/templates/iconColorMenu.hh:37
-msgid "Foreground color"
-msgstr "Color de frente"
+#, fuzzy
+msgid   "Foreground color"
+msgstr  "Color de tipografía, componente rojo"
 
 #: ../xffm/menus/templates/inputMenu.hh:17
 #: ../xffm/menus/templates/inputMenu.hh:33
@@ -2071,8 +1940,9 @@ msgstr "Color de frente"
 #: ../xffm/menus/templates/iconColorMenu.hh:20
 #: ../xffm/menus/templates/iconColorMenu.hh:29
 #: ../xffm/menus/templates/iconColorMenu.hh:38
-msgid "Background color"
-msgstr "Color de fondo"
+#, fuzzy
+msgid   "Background color"
+msgstr  "Fondo"
 
 #: ../xffm/menus/templates/inputMenu.hh:18
 #: ../xffm/menus/templates/inputMenu.hh:34
@@ -2085,43 +1955,36 @@ msgstr "Color de fondo"
 #: ../xffm/menus/templates/iconColorMenu.hh:21
 #: ../xffm/menus/templates/iconColorMenu.hh:30
 #: ../xffm/menus/templates/iconColorMenu.hh:39
-msgid "Default Colors"
-msgstr "Colores predefinidos"
+#, fuzzy
+msgid   "Default Colors"
+msgstr  "Usar el color predeterminado"
 
 #: ../xffm/menus/templates/outputMenu.hh:28
-msgid "Default Color"
-msgstr "Color predeterminado"
+#, fuzzy
+msgid   "Default Color"
+msgstr  "Usar el color predeterminado"
 
-#. Order is important.
-#. Need not be complete with regards to keys_.
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:53
-#: ../xffm/menus/templates/mainMenu.hh:90
-msgid "Environment"
-msgstr "Entorno"
+#: ../xffm/menus/templates/mainMenu.hh:54
+#: ../xffm/menus/templates/mainMenu.hh:92
+msgid   "Environment"
+msgstr  ""
 
 #: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:94
-msgid "Exit"
-msgstr "Salir"
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:96
+msgid   "Exit"
+msgstr  ""
 
-#. FIXME: this must be submenu, with known unresolved parent issues
-#. {_("Color settings"),(void *) MenuCallbacks<Type>::},
-#.
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:79
-#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/mainMenu.hh:119
 #: ../xffm/menus/templates/gridviewmenu.hh:81
-msgid "Toggle Text Mode"
-msgstr "Conmutar el modo texto"
+msgid   "Toggle Text Mode"
+msgstr  ""
 
-#.
-#: ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:93
-msgid "Clear Clipboard History"
-msgstr "Borrar historial del portapapeles"
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:95
+msgid   "Clear Clipboard History"
+msgstr  ""
 
-#: ../xffm/menus/templates/mainMenu.hh:199
-msgid "menu"
-msgstr "menú"

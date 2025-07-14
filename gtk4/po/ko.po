@@ -1,15 +1,12 @@
-# Xffm4 translation file: Wed Jun 11 17:07:16 CST 2025
+# Xffm4 translation file: lun 14 jul 2025 16:36:47 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
-#: ../xffm/fm/classes/ecryptfs.hh:189
-#: ../xffm/response/classes/envresponse.hh:92
-#: ../xffm/response/classes/cpresponse.hh:44
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-06-09 16:21-0600\n"
+        "POT-Creation-Date: 2025-07-14 16:34-0600\n"
         "PO-Revision-Date: 2002-07-22 20:02+0900\n"
         "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
         "Language-Team: Korean <translation-team-ko@lists.sourceforge.net>\n"
@@ -19,13 +16,13 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Content-Transfer-Encoding: 8bit\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:729
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:36
 #: ../xffm/menus/templates/pathbarmenu.hh:48
 #: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
+#: ../xffm/menus/templates/menu.hh:175 ../xffm/menus/templates/menu.hh:180
 msgid   "Clipboard is empty."
 msgstr  "클립보드가 비었습니다."
 
@@ -34,37 +31,21 @@ msgstr  "클립보드가 비었습니다."
 msgid   "Clipboard contents"
 msgstr  "클립보드 내용"
 
-#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:495
 #, fuzzy
 msgid   "Invalid clip"
 msgstr  "잘못된 입력"
 
-#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
-#: ../xffm/fm/templates/fstabmonitor.hh:366
-#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
-#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
-#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
-msgid   "Disk Mounter"
-msgstr  "디스크 마운트"
-
-#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
-#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
-#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
-#: ../xffm/menus/templates/menucallbacks.hh:248
-#: ../xffm/menus/templates/mainMenu.hh:218
-msgid   "Bookmarks"
-msgstr  "북마크(B)"
-
-#: ../xffm/fm/templates/workdir.hh:249
+#: ../xffm/fm/templates/workdir.hh:250
 #, c-format
 msgid   "The %s utility is not installed."
 msgstr  "%s 유틸리티를 설치하지 않았습니다."
 
-#: ../xffm/fm/templates/workdir.hh:270
+#: ../xffm/fm/templates/workdir.hh:271
 msgid   "Trash is empty"
 msgstr  "휴지통이 비어있습니다"
 
-#: ../xffm/fm/templates/workdir.hh:291
+#: ../xffm/fm/templates/workdir.hh:292
 #, fuzzy, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "ID 값 '%s'이(가) 유일하지 않습니다."
@@ -137,21 +118,21 @@ msgstr  "죽임"
 msgid   "Segmentation fault"
 msgstr  "세그먼테이션 위반"
 
-#: ../xffm/fm/templates/dnd.hh:639
+#: ../xffm/fm/templates/dnd.hh:638
 msgid   "Target"
 msgstr  "대상"
 
-#: ../xffm/fm/templates/dnd.hh:640
+#: ../xffm/fm/templates/dnd.hh:639
 msgid   "Source"
 msgstr  "소스"
 
-#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:648 ../xffm/fm/templates/dnd.hh:683
 #, fuzzy
 msgid   "Invalid target folder"
 msgstr  "인자의 값이 잘못되었습니다"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
-#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/fm/templates/dnd.hh:670 ../xffm/fm/templates/gridview.hh:541
+#: ../xffm/fm/templates/gridview.hh:584
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:62
@@ -159,40 +140,40 @@ msgstr  "인자의 값이 잘못되었습니다"
 msgid   "Link"
 msgstr  "링크"
 
-#: ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:683
 msgid   "Drag:"
 msgstr  "드래그(G):"
 
-#: ../xffm/fm/templates/dnd.hh:722
+#: ../xffm/fm/templates/dnd.hh:721
 msgid   "files"
 msgstr  "파일"
 
-#: ../xffm/fm/templates/dnd.hh:723
+#: ../xffm/fm/templates/dnd.hh:722
 #, fuzzy, c-format
 msgid   "+ %s more"
 msgstr  "...그리고 %s개 더"
 
-#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
+#: ../xffm/fm/templates/dnd.hh:729 ../xffm/fm/classes/bash.hh:653
 msgid   "file"
 msgstr  "파일"
 
-#: ../xffm/fm/templates/dnd.hh:731
+#: ../xffm/fm/templates/dnd.hh:730
 msgid   ": "
 msgstr  ": "
 
-#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/fm/templates/window.hh:272
 #: ../xffm/response/templates/openwith.hh:137
 #: ../xffm/response/templates/dialogbasic.hh:304
-#: ../xffm/find/templates/dndbox.hh:153
+#: ../xffm/find/templates/dndbox.hh:155
 msgid   "Close"
 msgstr  "닫기"
 
-#: ../xffm/fm/templates/window.hh:505
+#: ../xffm/fm/templates/window.hh:544
 msgid   "Long press time"
 msgstr  "오래 누르기 시간"
 
-#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/fm/templates/window.hh:552 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:538 ../xffm/fm/templates/gridview.hh:581
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:44
@@ -203,8 +184,8 @@ msgstr  "오래 누르기 시간"
 msgid   "Cut"
 msgstr  "잘라내기(U)"
 
-#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/fm/templates/window.hh:554 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:537 ../xffm/fm/templates/gridview.hh:580
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:28
@@ -220,9 +201,9 @@ msgstr  "잘라내기(U)"
 msgid   "Copy"
 msgstr  "복사(C)"
 
-#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
-#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
-#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/fm/templates/window.hh:556 ../xffm/fm/templates/window.hh:664
+#: ../xffm/fm/templates/window.hh:691 ../xffm/fm/templates/gridview.hh:564
+#: ../xffm/fm/templates/gridview.hh:728
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:24
 #: ../xffm/menus/templates/pathbarmenu.hh:35
@@ -232,29 +213,24 @@ msgstr  "복사(C)"
 #: ../xffm/menus/templates/inputMenu.hh:45
 #: ../xffm/menus/templates/inputMenu.hh:61
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:80
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:67
 #: ../xffm/menus/templates/gridviewmenu.hh:90
-#: ../xffm/menus/templates/menu.hh:166
+#: ../xffm/menus/templates/menu.hh:167
 msgid   "Paste"
 msgstr  "붙여넣기(P)"
 
-#: ../xffm/fm/templates/window.hh:519
+#: ../xffm/fm/templates/window.hh:558
 msgid   "New Tab"
 msgstr  "새로운 탭 "
 
-#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
+#: ../xffm/fm/templates/window.hh:559 ../xffm/fm/templates/window.hh:561
 msgid   "Main menu"
 msgstr  "메인 매뉴"
 
-#: ../xffm/fm/templates/window.hh:592
-#, fuzzy
-msgid   "Directory name: "
-msgstr  "디렉토리 명:"
-
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:26
 #: ../xffm/menus/templates/inputMenu.hh:41
@@ -264,137 +240,146 @@ msgstr  "디렉토리 명:"
 #: ../xffm/menus/templates/outputMenu.hh:38
 #: ../xffm/menus/templates/outputMenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 msgid   "Select All"
 msgstr  "모두 선택"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
+#: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:78
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "정규식(R)"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
 #: ../xffm/menus/templates/mainMenu.hh:28
 msgid   "Show"
 msgstr  "보이기"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:96
-#: ../xffm/menus/templates/mainMenu.hh:119
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:159
-msgid   "Hidden files"
-msgstr  "숨김 파일"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:97
-#: ../xffm/menus/templates/mainMenu.hh:120
-#: ../xffm/menus/templates/mainMenu.hh:133
-#: ../xffm/menus/templates/mainMenu.hh:160
-msgid   "Backup files"
-msgstr  "백업 파일"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
-#, fuzzy
-msgid   "Sort mode"
-msgstr  "폴더 정렬(O)"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
-#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:29
 #: ../xffm/menus/templates/mainMenu.hh:98
 #: ../xffm/menus/templates/mainMenu.hh:121
 #: ../xffm/menus/templates/mainMenu.hh:134
 #: ../xffm/menus/templates/mainMenu.hh:161
+msgid   "Hidden files"
+msgstr  "숨김 파일"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:122
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:162
+msgid   "Backup files"
+msgstr  "백업 파일"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/menus/templates/mainMenu.hh:32
+#, fuzzy
+msgid   "Sort mode"
+msgstr  "폴더 정렬(O)"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:715
+#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/menus/templates/mainMenu.hh:123
+#: ../xffm/menus/templates/mainMenu.hh:136
+#: ../xffm/menus/templates/mainMenu.hh:163
 msgid   "Descending"
 msgstr  "내림차순(D)"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:676
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:715
 #: ../xffm/response/templates/fileresponse.hh:231
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:99
-#: ../xffm/menus/templates/mainMenu.hh:122
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:165
-msgid   "Name"
-msgstr  "이름"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
-#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:100
-#: ../xffm/menus/templates/mainMenu.hh:123
-#: ../xffm/menus/templates/mainMenu.hh:142
-#: ../xffm/menus/templates/mainMenu.hh:162
-msgid   "Date"
-msgstr  "날짜"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
-#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:101
 #: ../xffm/menus/templates/mainMenu.hh:124
 #: ../xffm/menus/templates/mainMenu.hh:143
-#: ../xffm/menus/templates/mainMenu.hh:163
-msgid   "Size"
-msgstr  "크기"
+#: ../xffm/menus/templates/mainMenu.hh:167
+msgid   "Name"
+msgstr  "이름"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/child.hh:303 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:102
 #: ../xffm/menus/templates/mainMenu.hh:125
 #: ../xffm/menus/templates/mainMenu.hh:144
 #: ../xffm/menus/templates/mainMenu.hh:164
+msgid   "Date"
+msgstr  "날짜"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/child.hh:304 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:126
+#: ../xffm/menus/templates/mainMenu.hh:145
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Size"
+msgstr  "크기"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/classes/child.hh:305
+#: ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:104
+#: ../xffm/menus/templates/mainMenu.hh:127
+#: ../xffm/menus/templates/mainMenu.hh:146
+#: ../xffm/menus/templates/mainMenu.hh:166
 msgid   "File type"
 msgstr  "파일 형식"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:710
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:200
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:202
 msgid   "Apply modifications"
 msgstr  "수정사항 적용"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
-#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
-#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:689
+#: ../xffm/fm/templates/gridview.hh:555 ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:82
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:68
 #: ../xffm/menus/templates/gridviewmenu.hh:92
 msgid   "Add bookmark"
 msgstr  "책갈피 추가"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
-#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:690
+#: ../xffm/fm/templates/gridview.hh:515 ../xffm/fm/templates/gridview.hh:558
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:83
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Remove bookmark"
 msgstr  "책갈피 제거"
 
-#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
-#: ../xffm/menus/templates/mainMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:77
+#: ../xffm/fm/templates/window.hh:670 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:79
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "휴지통 비우기(E)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/fm/templates/gridview.hh:95
+#: ../xffm/response/templates/regexpresponse.hh:44
+#: ../xffm/response/templates/regexpresponse.hh:49
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "정규 표현식 문법이 올바르지 않습니다"
+
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:579
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:58
 #: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Open with"
 msgstr  "다른 프로그램으로 열기"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
-#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:543
+#: ../xffm/fm/templates/gridview.hh:586
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -413,24 +398,24 @@ msgstr  "다른 프로그램으로 열기"
 msgid   "Delete"
 msgstr  "삭제(D) "
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
-#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:21
 #: ../xffm/menus/templates/gridviewmenu.hh:72
 #: ../xffm/menus/templates/gridviewmenu.hh:98
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "선택한 오브젝트로 압축 파일을 만듭니다"
 
-#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
-#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/fm/templates/gridview.hh:469 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:542 ../xffm/fm/templates/gridview.hh:585
 #: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:95
 msgid   "Properties"
 msgstr  "속성"
 
-#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
-#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/fm/templates/gridview.hh:472 ../xffm/fm/templates/gridview.hh:493
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:56
 #: ../xffm/menus/templates/gridviewmenu.hh:80
@@ -438,8 +423,8 @@ msgstr  "속성"
 msgid   "Unmount Volume"
 msgstr  "볼륨 마운트"
 
-#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
-#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/fm/templates/gridview.hh:475 ../xffm/fm/templates/gridview.hh:496
+#: ../xffm/fm/templates/gridview.hh:573
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:55
@@ -447,7 +432,7 @@ msgstr  "볼륨 마운트"
 msgid   "Mount Volume"
 msgstr  "볼륨 마운트"
 
-#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/fm/templates/gridview.hh:535
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:22
 #: ../xffm/menus/templates/pathbarmenu.hh:33
@@ -459,7 +444,7 @@ msgstr  "볼륨 마운트"
 msgid   "Open in new tab"
 msgstr  "새 탭에서 열기"
 
-#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/fm/templates/gridview.hh:539 ../xffm/fm/templates/gridview.hh:582
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:30
@@ -468,7 +453,7 @@ msgstr  "새 탭에서 열기"
 msgid   "Rename"
 msgstr  "이름 바꾸기"
 
-#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/fm/templates/gridview.hh:540 ../xffm/fm/templates/gridview.hh:583
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:31
@@ -477,15 +462,15 @@ msgstr  "이름 바꾸기"
 msgid   "Duplicate"
 msgstr  "복제(D)"
 
-#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
-#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/fm/templates/gridview.hh:578 ../xffm/fm/templates/gridview.hh:689
+#: ../xffm/fm/templates/gridview.hh:690
 #: ../xffm/menus/templates/gridviewmenu.hh:17
 #: ../xffm/menus/templates/gridviewmenu.hh:59
 #: ../xffm/menus/templates/gridviewmenu.hh:84
 msgid   "auto"
 msgstr  "자동"
 
-#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:595 ../xffm/fm/templates/gridview.hh:602
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:36
@@ -494,14 +479,14 @@ msgstr  "자동"
 msgid   "Decrypt File..."
 msgstr  "파일 복호화(D)..."
 
-#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/fm/templates/gridview.hh:597 ../xffm/fm/templates/gridview.hh:600
 #: ../xffm/menus/templates/gridviewmenu.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:96
 msgid   "Encrypt File..."
 msgstr  "파일 암호화(E)..."
 
-#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/openwith.hh:158
 msgid   "Multiple selections"
 msgstr  "다중 선택"
@@ -523,10 +508,10 @@ msgid   "Go to"
 msgstr  "이동(G)"
 
 #: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
-#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:191
 #: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
-#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
-#: ../xffm/find/templates/findresponse.hh:884
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:824
+#: ../xffm/find/templates/findresponse.hh:839
 msgid   "unknown"
 msgstr  "알 수 없음"
 
@@ -581,113 +566,141 @@ msgid   " TTY"
 msgstr  ""
 
 #: ../xffm/fm/templates/prompt.hh:236
-#: ../xffm/menus/templates/menucallbacks.hh:48
+#: ../xffm/menus/templates/menucallbacks.hh:50
 #, fuzzy, c-format
 msgid   "failed to chdir to %s"
 msgstr  "%s에 접속할 수 없음"
 
-#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
+#: ../xffm/fm/templates/properties.hh:122
 msgid   "Properties and Attributes"
 msgstr  "속성"
 
-#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
+#: ../xffm/fm/templates/properties.hh:140
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "보기 모드(V):"
 
-#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
-#: ../xffm/response/classes/envresponse.hh:123
+#: ../xffm/fm/templates/properties.hh:167
+#: ../xffm/response/classes/envresponse.hh:126
 msgid   "Apply changes"
 msgstr  "바뀐 점 적용"
 
-#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
-#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:313
-#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/tarresponse.hh:210
+#: ../xffm/response/templates/efsresponse.hh:181
 #: ../xffm/response/templates/dialogbasic.hh:309
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
 #: ../xffm/response/classes/cpresponse.hh:81
-#: ../xffm/find/templates/findsignals.hh:568
+#: ../xffm/find/templates/findsignals.hh:575
 msgid   "Cancel"
 msgstr  "취소"
 
-#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
+#: ../xffm/fm/templates/properties.hh:358
 msgid   "Encoding"
 msgstr  "인코딩"
 
-#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
+#: ../xffm/fm/templates/properties.hh:359
 msgid   "Mimetype"
 msgstr  "MIME 형식"
 
-#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
+#: ../xffm/fm/templates/properties.hh:381
 msgid   "Successfully moved to trash."
 msgstr  "휴지통으로 이동했습니다."
 
-#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
+#: ../xffm/fm/templates/properties.hh:382
 msgid   "Source:"
 msgstr  "소스:"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:22
-msgid   "Move to tab"
-msgstr  "탭으로 옮기기"
+#: ../xffm/fm/classes/localdir.hh:173 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "정규 표현식"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:83
-#: ../xffm/menus/templates/mainMenu.hh:111
+#: ../xffm/fm/classes/localdir.hh:176
+#, fuzzy, c-format
+msgid   "%s (%s Filtered)"
+msgstr  "%s (%d개 항목)"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:13
+msgid   "Colors"
+msgstr  "색상"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:27
+msgid   "Switch button"
+msgstr  "단추 전환"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:28 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:113
 msgid   "Search"
 msgstr  "검색(S)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:112
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:114
 msgid   "Open terminal"
 msgstr  "터미널 열기"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:86
-#: ../xffm/menus/templates/mainMenu.hh:113
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:115
 msgid   "Home"
 msgstr  "집세"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:26
+#: ../xffm/fm/classes/fmbuttonbox.hh:31
 msgid   "Open a New Window"
 msgstr  "새 창 열기"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:40
+#: ../xffm/fm/classes/fmbuttonbox.hh:51
 msgid   "Icon Size"
 msgstr  "아이콘 크기"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/fm/classes/fmbuttonbox.hh:74 ../xffm/menus/templates/mainMenu.hh:68
 #, fuzzy
 msgid   "Color settings"
 msgstr  "색 설정"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:63
-msgid   "Colors"
-msgstr  "색상"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:144
+#: ../xffm/fm/classes/fmbuttonbox.hh:166
 #, fuzzy
 msgid   "Icon Size:"
 msgstr  "아이콘 크기"
 
-#: ../xffm/fm/classes/settings.hh:153
+#: ../xffm/fm/classes/settings.hh:179
 #, fuzzy
 msgid   "New File:"
 msgstr  "새 파일"
 
-#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/fm/classes/root.hh:26 ../xffm/fm/classes/child.hh:266
+msgid   "Disk Mounter"
+msgstr  "디스크 마운트"
+
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:503
 #: ../xffm/response/templates/efsresponse.hh:40
 msgid   "New"
 msgstr  "새 파일(N)"
 
-#: ../xffm/fm/classes/root.hh:59
+#: ../xffm/fm/classes/root.hh:62
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "휴지통에 버리기"
+
+#: ../xffm/fm/classes/child.hh:265
+msgid   "Bookmarks"
+msgstr  "북마크(B)"
+
+#: ../xffm/fm/classes/basic.hh:35
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  ""
 
 #: ../xffm/fm/classes/progress.hh:73
 msgid   "Running"
@@ -711,7 +724,7 @@ msgstr  "파일(F)"
 msgid   "Command history"
 msgstr  "실행 명령 기록"
 
-#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:697
 msgid   "User"
 msgstr  "사용자"
 
@@ -1072,37 +1085,38 @@ msgid   "The  password  can  be  specified on the command line. Since the "
         "recommended to use this option only for testing purposes."
 msgstr  ""
 
-#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
-#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/fm/classes/ecryptfs.hh:379 ../xffm/fm/classes/ecryptfs.hh:380
+#: ../xffm/fm/classes/ecryptfs.hh:402
 #: ../xffm/response/templates/mountresponse.hh:151
-#: ../xffm/response/templates/efsresponse.hh:138
+#: ../xffm/response/templates/efsresponse.hh:142
 msgid   "Mount"
 msgstr  "마운트"
 
-#: ../xffm/fm/classes/ecryptfs.hh:392
-#: ../xffm/response/templates/efsresponse.hh:181
+#: ../xffm/fm/classes/ecryptfs.hh:396
+#: ../xffm/response/templates/tarresponse.hh:214
+#: ../xffm/response/templates/efsresponse.hh:185
 msgid   "Save"
 msgstr  "저장"
 
-#: ../xffm/fm/classes/ecryptfs.hh:612
-#: ../xffm/response/templates/efsresponse.hh:160
-#: ../xffm/find/templates/findresponse.hh:275
-#: ../xffm/find/templates/findresponse.hh:561
-#: ../xffm/find/templates/findresponse.hh:594
+#: ../xffm/fm/classes/ecryptfs.hh:616
+#: ../xffm/response/templates/efsresponse.hh:164
+#: ../xffm/find/templates/findresponse.hh:292
+#: ../xffm/find/templates/findresponse.hh:512
+#: ../xffm/find/templates/findresponse.hh:547
 msgid   "Options"
 msgstr  "옵션"
 
-#: ../xffm/fm/classes/ecryptfs.hh:613
-#: ../xffm/response/templates/efsresponse.hh:166
+#: ../xffm/fm/classes/ecryptfs.hh:617
+#: ../xffm/response/templates/efsresponse.hh:170
 msgid   "Advanced"
 msgstr  "고급"
 
-#: ../xffm/fm/classes/ecryptfs.hh:928
+#: ../xffm/fm/classes/ecryptfs.hh:932
 #, c-format
 msgid   "Mounting %s"
 msgstr  "%s 마운팅 중"
 
-#: ../xffm/fm/classes/ecryptfs.hh:986
+#: ../xffm/fm/classes/ecryptfs.hh:990
 #, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "%s의 암호를 입력하십시오"
@@ -1113,10 +1127,10 @@ msgid   "Mount Device"
 msgstr  "장치 마운트"
 
 #: ../xffm/response/templates/mountresponse.hh:128
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:484
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:488
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Mount Point"
 msgstr  "마운트 지점(P)"
 
@@ -1129,6 +1143,10 @@ msgstr  "%s 디렉토리를 만들 수 없습니다"
 #: ../xffm/response/templates/mkdirresponse.hh:70
 msgid   "Sorry"
 msgstr  "미안합니다"
+
+#: ../xffm/response/templates/dialogentry.hh:41
+msgid   "Help"
+msgstr  "도움말(H)"
 
 #: ../xffm/response/templates/fileresponse.hh:37
 #, fuzzy
@@ -1208,39 +1226,30 @@ msgstr  "moserial Terminal"
 msgid   "Cannot find executable for \"%s\""
 msgstr  "\"%s\"의 실행 파일을 찾을 수가 없습니다"
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "GZip"
-msgstr  ""
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "BZip2"
-msgstr  ""
-
-#: ../xffm/response/templates/tarresponse.hh:13
-#, fuzzy
-msgid   "XZ"
-msgstr  "XYZ"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "Zip"
-msgstr  "Zip"
-
-#: ../xffm/response/templates/tarresponse.hh:20
+#: ../xffm/response/templates/tarresponse.hh:34
 msgid   "Compressed file..."
 msgstr  "압축 파일(E)..."
 
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:484
+#: ../xffm/response/templates/tarresponse.hh:174
+msgid   "Target directory:"
+msgstr  "대상 디렉토리(E):"
+
+#: ../xffm/response/templates/tarresponse.hh:183
+msgid   "Name:"
+msgstr  "이름: "
+
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:488
 msgid   "Encrypted"
 msgstr  "암호화함"
 
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Unencrypted"
 msgstr  "암호화되지 않음"
 
-#: ../xffm/response/templates/efsresponse.hh:485
-#: ../xffm/response/templates/efsresponse.hh:491
+#: ../xffm/response/templates/efsresponse.hh:489
+#: ../xffm/response/templates/efsresponse.hh:495
 msgid   "Folder does not exist"
 msgstr  "폴더가 없습니다"
 
@@ -1261,7 +1270,7 @@ msgstr  "완료됨"
 #: ../xffm/response/classes/lnresponse.hh:10
 #: ../xffm/response/classes/cpresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:9
-#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
+#: ../xffm/find/templates/findresponse.hh:440 ../xffm/find/classes/fgr.hh:124
 msgid   "Path"
 msgstr  "경로"
 
@@ -1274,6 +1283,11 @@ msgstr  "'%s' 폴더를 만들 수 없습니다: %s"
 #, fuzzy
 msgid   "Sorry, file not found"
 msgstr  "글꼴 파일을 찾을 수 없음"
+
+#: ../xffm/response/templates/regexpresponse.hh:11
+#, fuzzy
+msgid   "foo"
+msgstr  "다음 동안:"
 
 #: ../xffm/response/templates/bfishresponse.hh:93
 msgid   "Encrypt:"
@@ -1318,7 +1332,7 @@ msgstr  "암호가 다릅니다"
 msgid   "The location does not exist."
 msgstr  "해당 문서가 없습니다."
 
-#: ../xffm/response/dialogs.hh:68
+#: ../xffm/response/dialogs.hh:73
 #, c-format
 msgid   "Delete '%s'"
 msgstr  "'%s' 삭제"
@@ -1342,15 +1356,15 @@ msgstr  "주의:"
 msgid   "You have selected multiple files or folders"
 msgstr  "파일을 여러개 선택했거나 폴더를 선택했습니다"
 
-#: ../xffm/response/classes/envresponse.hh:90
+#: ../xffm/response/classes/envresponse.hh:93
 msgid   "Environment variables"
 msgstr  "환경 변수"
 
-#: ../xffm/response/classes/envresponse.hh:122
+#: ../xffm/response/classes/envresponse.hh:125
 msgid   "No changes need to be saved"
 msgstr  "저장할 변화가 없습니다"
 
-#: ../xffm/response/classes/envresponse.hh:217
+#: ../xffm/response/classes/envresponse.hh:220
 #, fuzzy
 msgid   "Environment Variable"
 msgstr  "환경 변수"
@@ -1367,14 +1381,14 @@ msgstr  "유휴 시간"
 msgid   "Workspace Switcher"
 msgstr  "작업 공간 바꾸기"
 
-#: ../xffm/response/classes/wsresponse.hh:36
-#: ../xffm/menus/templates/menucallbacks.hh:130
+#: ../xffm/response/classes/wsresponse.hh:35
+#: ../xffm/menus/templates/menucallbacks.hh:134
 #, fuzzy, c-format
 msgid   "Workspace %s"
 msgstr  "작업 공간 %s%d"
 
-#: ../xffm/response/classes/wsresponse.hh:37
-#: ../xffm/menus/templates/menucallbacks.hh:131
+#: ../xffm/response/classes/wsresponse.hh:36
+#: ../xffm/menus/templates/menucallbacks.hh:135
 msgid   "does not exist"
 msgstr  "없음"
 
@@ -1419,232 +1433,223 @@ msgstr  "보안"
 msgid   "No Read Permission"
 msgstr  "읽기 허가권이 없습니다."
 
-#: ../xffm/find/templates/findresponse.hh:111
-#, fuzzy
-msgid   "Find files"
-msgstr  "파일에서 찾기"
-
-#: ../xffm/find/templates/findresponse.hh:278
-#: ../xffm/find/templates/findresponse.hh:780
+#: ../xffm/find/templates/findresponse.hh:295
+#: ../xffm/find/templates/findresponse.hh:735
 msgid   "Advanced options"
 msgstr  "고급 옵션"
 
-#: ../xffm/find/templates/findresponse.hh:286
+#: ../xffm/find/templates/findresponse.hh:303
 msgid   "Find in Files"
 msgstr  "파일에서 찾기…"
 
-#: ../xffm/find/templates/findresponse.hh:290
-#: ../xffm/find/templates/findresponse.hh:312
+#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:329
 msgid   "Cancel Operation"
 msgstr  "작업 취소"
 
-#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:324
 msgid   "Show search results for this query"
 msgstr  "이 쿼리 검색 결과 보이기"
 
-#: ../xffm/find/templates/findresponse.hh:323
-#: ../xffm/find/templates/findresponse.hh:327
+#: ../xffm/find/templates/findresponse.hh:340
+#: ../xffm/find/templates/findresponse.hh:344
 msgid   "Clear search"
 msgstr  "검색 지우기"
 
-#: ../xffm/find/templates/findresponse.hh:503
-msgid   "Show help"
-msgstr  "도움말 보기"
-
-#: ../xffm/find/templates/findresponse.hh:532
+#: ../xffm/find/templates/findresponse.hh:483
 msgid   "Case Sensitive"
 msgstr  "대소문자 구별"
 
-#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findresponse.hh:484
 msgid   "Extended regexp"
 msgstr  "정규표현식 확장"
 
-#: ../xffm/find/templates/findresponse.hh:534
+#: ../xffm/find/templates/findresponse.hh:485
 msgid   "Include binary files"
 msgstr  "바이너리 파일 포함"
 
-#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
+#: ../xffm/find/templates/findresponse.hh:486 ../xffm/find/classes/fgr.hh:212
 msgid   "Line Count"
 msgstr  "줄 수"
 
-#: ../xffm/find/templates/findresponse.hh:544
+#: ../xffm/find/templates/findresponse.hh:495
 #, fuzzy
 msgid   "Anywhere"
 msgstr  "어디든지"
 
-#: ../xffm/find/templates/findresponse.hh:545
+#: ../xffm/find/templates/findresponse.hh:496
 msgid   "Whole words only"
 msgstr  "단어 단위로(W)"
 
-#: ../xffm/find/templates/findresponse.hh:546
+#: ../xffm/find/templates/findresponse.hh:497
 msgid   "lines"
 msgstr  "줄"
 
-#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
+#: ../xffm/find/templates/findresponse.hh:498 ../xffm/find/classes/fgr.hh:210
 msgid   "No match"
 msgstr  "해당 사항 없음"
 
-#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
+#: ../xffm/find/templates/findresponse.hh:522 ../xffm/find/classes/fgr.hh:126
 msgid   "Filter:"
 msgstr  "필터:"
 
-#: ../xffm/find/templates/findresponse.hh:577
-#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
+#: ../xffm/find/templates/findresponse.hh:530
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:146
 msgid   "Recursive"
 msgstr  "순환"
 
-#: ../xffm/find/templates/findresponse.hh:578
-#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
+#: ../xffm/find/templates/findresponse.hh:531
+#: ../xffm/find/templates/findsignals.hh:306 ../xffm/find/classes/fgr.hh:142
 #, fuzzy
 msgid   "Find hidden files and directories"
 msgstr  "파일 및 디렉터리를 패치합니다."
 
-#: ../xffm/find/templates/findresponse.hh:580
-#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
+#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findsignals.hh:315 ../xffm/find/classes/fgr.hh:138
 msgid   "Stay on single filesystem"
 msgstr  "화일 시스템 하나만"
 
-#: ../xffm/find/templates/findresponse.hh:582
+#: ../xffm/find/templates/findresponse.hh:535
 #, fuzzy
 msgid   "Upper limit"
 msgstr  "최댓값:"
 
-#: ../xffm/find/templates/findresponse.hh:583
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findresponse.hh:536
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Results"
 msgstr  "기본값"
 
-#: ../xffm/find/templates/findresponse.hh:602
+#: ../xffm/find/templates/findresponse.hh:555
 msgid   "Contains the text"
 msgstr  "텍스트 포함(T)"
 
-#: ../xffm/find/templates/findresponse.hh:667
-#: ../xffm/find/templates/findsignals.hh:318
+#: ../xffm/find/templates/findresponse.hh:622
+#: ../xffm/find/templates/findsignals.hh:321
 msgid   "File size"
 msgstr  "파일 크기"
 
-#: ../xffm/find/templates/findresponse.hh:680
+#: ../xffm/find/templates/findresponse.hh:635
 msgid   "At Least"
 msgstr  "최소한"
 
-#: ../xffm/find/templates/findresponse.hh:680
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:635
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "kBytes"
 msgstr  "kB"
 
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "At Most"
 msgstr  "최대한"
 
-#: ../xffm/find/templates/findresponse.hh:695
-#: ../xffm/find/templates/findsignals.hh:324
+#: ../xffm/find/templates/findresponse.hh:650
+#: ../xffm/find/templates/findsignals.hh:327
 msgid   "Specific Time"
 msgstr  "지정한 시간"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Modified"
 msgstr  "수정함"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Created"
 msgstr  "만듦"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Accessed"
 msgstr  "접근 시간"
 
-#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/templates/findresponse.hh:661 ../xffm/find/classes/fgr.hh:166
 #: ../xffm/find/classes/fgr.hh:168
 msgid   "Minutes"
 msgstr  "분"
 
-#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/templates/findresponse.hh:665 ../xffm/find/classes/fgr.hh:169
 #: ../xffm/find/classes/fgr.hh:171
 msgid   "Hours"
 msgstr  "시간"
 
-#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/templates/findresponse.hh:669 ../xffm/find/classes/fgr.hh:172
 #: ../xffm/find/classes/fgr.hh:174
 msgid   "Days"
 msgstr  "일"
 
-#: ../xffm/find/templates/findresponse.hh:718
+#: ../xffm/find/templates/findresponse.hh:673
 msgid   "Months"
 msgstr  "개월"
 
-#: ../xffm/find/templates/findresponse.hh:729
-#: ../xffm/find/templates/findsignals.hh:329
+#: ../xffm/find/templates/findresponse.hh:684
+#: ../xffm/find/templates/findsignals.hh:332
 msgid   "File properties"
 msgstr  "파일 속성"
 
-#: ../xffm/find/templates/findresponse.hh:748
+#: ../xffm/find/templates/findresponse.hh:703
 msgid   "Group"
 msgstr  "그룹"
 
-#: ../xffm/find/templates/findresponse.hh:753
-#: ../xffm/find/templates/findsignals.hh:175
+#: ../xffm/find/templates/findresponse.hh:708
+#: ../xffm/find/templates/findsignals.hh:178
 msgid   "Octal Permissions"
 msgstr  "8진수 권한"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:761
-#: ../xffm/find/templates/findsignals.hh:161
-#: ../xffm/find/templates/findsignals.hh:167
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:716
+#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findsignals.hh:170
 #, fuzzy
 msgid   "Executable"
 msgstr  "실행 파일:"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:765
-#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:720
+#: ../xffm/find/templates/findsignals.hh:167
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/templates/findresponse.hh:801
+#: ../xffm/find/templates/findresponse.hh:756
 msgid   "File type : "
 msgstr  "종류 : "
 
-#: ../xffm/find/templates/findsignals.hh:86
+#: ../xffm/find/templates/findsignals.hh:89
 msgid   "Searching..."
 msgstr  "찾는 중입니다..."
 
-#: ../xffm/find/templates/findsignals.hh:441
-#: ../xffm/find/templates/dndbox.hh:65
+#: ../xffm/find/templates/findsignals.hh:448
+#: ../xffm/find/templates/dndbox.hh:66
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "현재 활동이 없습니다."
 
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Upper limit:"
 msgstr  "최댓값:"
 
-#: ../xffm/find/templates/findsignals.hh:511
+#: ../xffm/find/templates/findsignals.hh:518
 msgid   "Counting files..."
 msgstr  "파일 개수 세는 중..."
 
-#: ../xffm/find/templates/findsignals.hh:519
+#: ../xffm/find/templates/findsignals.hh:526
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "%d개의 매치 발견"
 msgstr[1]       "%d개의 매치 발견"
 
-#: ../xffm/find/templates/findsignals.hh:521
+#: ../xffm/find/templates/findsignals.hh:528
 #, fuzzy, c-format
 msgid   "%s Finished : %s"
 msgstr  "%s [완료됨]"
 
-#: ../xffm/find/templates/dndbox.hh:126
+#: ../xffm/find/templates/dndbox.hh:128
 #, fuzzy
 msgid   "Edit all"
 msgstr  "청구서 편집"
 
-#: ../xffm/find/templates/dndbox.hh:139
+#: ../xffm/find/templates/dndbox.hh:141
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "'%s' 검색 결과"
 
-#: ../xffm/find/templates/dndbox.hh:259
+#: ../xffm/find/templates/dndbox.hh:261
 msgid   "Search results"
 msgstr  "찾기 결과"
 
@@ -1790,10 +1795,6 @@ msgstr  "내용 보기 프로그램"
 msgid   "STRING"
 msgstr  "<문자열>"
 
-#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
-msgid   "Regular expression"
-msgstr  "정규 표현식"
-
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Extended"
 msgstr  "확장"
@@ -1819,21 +1820,15 @@ msgstr  "행"
 msgid   "Usage : %s [OPTIONS]\n"
 msgstr  "사용법: %s [<옵션>] [<파일>]...\n"
 
+#: ../xffm/find/classes/historyentry.hh:136
+msgid   "Show help"
+msgstr  "도움말 보기"
+
 #: ../xffm/find/classes/ffunctions.hh:9
 msgid   "Regular"
 msgstr  "일반"
 
-#: ../xffm/find/classes/ffunctions.hh:42
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  ""
-
-#: ../xffm/find/classes/ffunctions.hh:51
+#: ../xffm/find/classes/ffunctions.hh:41
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
@@ -1876,8 +1871,8 @@ msgstr  ""
 #: ../xffm/menus/templates/pathbarmenu.hh:34
 #: ../xffm/menus/templates/pathbarmenu.hh:46
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:89
+#: ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
 msgid   "Open in New Window"
 msgstr  "새 창에서 열기(W)"
 
@@ -1891,8 +1886,8 @@ msgstr  "새 창에서 열기(W)"
 #: ../xffm/menus/templates/outputMenu.hh:29
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:94 ../xffm/menus/templates/menu.hh:173
 msgid   "Show Clipboard"
 msgstr  "클립보드 보이기(C)"
 
@@ -1946,30 +1941,26 @@ msgid   "Default Color"
 msgstr  "기본 색(D)"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:53
-#: ../xffm/menus/templates/mainMenu.hh:90
+#: ../xffm/menus/templates/mainMenu.hh:54
+#: ../xffm/menus/templates/mainMenu.hh:92
 msgid   "Environment"
 msgstr  "환경"
 
 #: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:96
 msgid   "Exit"
 msgstr  "나가기(x)"
 
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:79
-#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/mainMenu.hh:119
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Toggle Text Mode"
 msgstr  "토글 텍스트 모드"
 
-#: ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:95
 msgid   "Clear Clipboard History"
 msgstr  "클립보드 기록 삭제(L)"
-
-#: ../xffm/menus/templates/mainMenu.hh:199
-msgid   "menu"
-msgstr  "메뉴"
 

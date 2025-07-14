@@ -40,7 +40,6 @@ xffm/fm/classes/tubo.hh
 xffm/fm/classes/utilbasic.hh
 xffm/fm/classes/gio.hh
 xffm/fm/classes/ecryptfs.hh
-xffm/fm/classes/properties.hh
 xffm/response/templates/mountresponse.hh
 xffm/response/templates/dialogentry.hh
 xffm/response/templates/mount.hh
@@ -59,6 +58,7 @@ xffm/response/templates/dialogsimple.hh
 xffm/response/templates/dialogcomplex.hh
 xffm/response/templates/dialogtimeout.hh
 xffm/response/templates/bfish.hh
+xffm/response/templates/regexpresponse.hh
 xffm/response/templates/dialogprompt.hh
 xffm/response/templates/bfishresponse.hh
 xffm/response/templates/jumpresponse.hh
@@ -88,6 +88,7 @@ xffm/find/templates/findresponse.hh
 xffm/find/templates/findsignals.hh
 xffm/find/templates/dndbox.hh
 xffm/find/classes/fgr.hh
+xffm/find/classes/historyentry.hh
 xffm/find/classes/ffunctions.hh
 xffm/menus/templates/pathbarmenu.hh
 xffm/menus/templates/menucallbacks.hh

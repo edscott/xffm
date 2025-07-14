@@ -1,15 +1,12 @@
-# Xffm4 translation file: Wed Jun 11 17:06:32 CST 2025
+# Xffm4 translation file: lun 14 jul 2025 16:34:48 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
-#: ../xffm/fm/classes/ecryptfs.hh:189
-#: ../xffm/response/classes/envresponse.hh:92
-#: ../xffm/response/classes/cpresponse.hh:44
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-06-09 16:21-0600\n"
+        "POT-Creation-Date: 2025-07-14 16:34-0600\n"
         "PO-Revision-Date: 2010-01-21 18:15+0600\n"
         "Last-Translator: Loba Yeasmeen <loba@ankur.org.bd>\n"
         "Language-Team: Bengali <ankur-bd-l10n@googlegroups.com>\n"
@@ -21,13 +18,13 @@ msgstr  "Project-Id-Version: xffm4\n"
         "X-Generator: KBabel 1.11.4\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:729
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:36
 #: ../xffm/menus/templates/pathbarmenu.hh:48
 #: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
+#: ../xffm/menus/templates/menu.hh:175 ../xffm/menus/templates/menu.hh:180
 #, fuzzy
 msgid   "Clipboard is empty."
 msgstr  "ক্লিপবোর্ড ফাঁকা"
@@ -37,38 +34,22 @@ msgstr  "ক্লিপবোর্ড ফাঁকা"
 msgid   "Clipboard contents"
 msgstr  "ক্লিপবোর্ড-এর বিষয়বস্তু"
 
-#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:495
 #, fuzzy
 msgid   "Invalid clip"
 msgstr  "অবৈধ ইনপুট"
 
-#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
-#: ../xffm/fm/templates/fstabmonitor.hh:366
-#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
-#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
-#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
-msgid   "Disk Mounter"
-msgstr  "ডিস্ক মাউন্ট ব্যবস্থা"
-
-#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
-#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
-#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
-#: ../xffm/menus/templates/menucallbacks.hh:248
-#: ../xffm/menus/templates/mainMenu.hh:218
-msgid   "Bookmarks"
-msgstr  "বুকমার্ক (B)"
-
-#: ../xffm/fm/templates/workdir.hh:249
+#: ../xffm/fm/templates/workdir.hh:250
 #, c-format
 msgid   "The %s utility is not installed."
 msgstr  "%s ব্যবস্থা ইনস্টল করা নেই।"
 
-#: ../xffm/fm/templates/workdir.hh:270
+#: ../xffm/fm/templates/workdir.hh:271
 #, fuzzy
 msgid   "Trash is empty"
 msgstr  "আবর্জনা: ফাঁকা"
 
-#: ../xffm/fm/templates/workdir.hh:291
+#: ../xffm/fm/templates/workdir.hh:292
 #, fuzzy, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "'%s' স্টাইল পাওয়া যায়নি"
@@ -147,22 +128,22 @@ msgstr  "কিল"
 msgid   "Segmentation fault"
 msgstr  "সেগমেন্ট সীমা লঙ্ঘন"
 
-#: ../xffm/fm/templates/dnd.hh:639
+#: ../xffm/fm/templates/dnd.hh:638
 #, fuzzy
 msgid   "Target"
 msgstr  "লক্ষ্য:"
 
-#: ../xffm/fm/templates/dnd.hh:640
+#: ../xffm/fm/templates/dnd.hh:639
 msgid   "Source"
 msgstr  "উৎস"
 
-#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:648 ../xffm/fm/templates/dnd.hh:683
 #, fuzzy
 msgid   "Invalid target folder"
 msgstr  "অকার্যকর আর্গুমেন্টের মান"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
-#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/fm/templates/dnd.hh:670 ../xffm/fm/templates/gridview.hh:541
+#: ../xffm/fm/templates/gridview.hh:584
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:62
@@ -170,42 +151,42 @@ msgstr  "অকার্যকর আর্গুমেন্টের মান
 msgid   "Link"
 msgstr  "লিংক (L)"
 
-#: ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:683
 #, fuzzy
 msgid   "Drag:"
 msgstr  "টেনে এনে ক্লিক করুন (r):"
 
-#: ../xffm/fm/templates/dnd.hh:722
+#: ../xffm/fm/templates/dnd.hh:721
 msgid   "files"
 msgstr  "ফাইল"
 
-#: ../xffm/fm/templates/dnd.hh:723
+#: ../xffm/fm/templates/dnd.hh:722
 #, fuzzy, c-format
 msgid   "+ %s more"
 msgstr  "... এবং আরও %s"
 
-#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
+#: ../xffm/fm/templates/dnd.hh:729 ../xffm/fm/classes/bash.hh:653
 msgid   "file"
 msgstr  "ফাইল"
 
-#: ../xffm/fm/templates/dnd.hh:731
+#: ../xffm/fm/templates/dnd.hh:730
 #, fuzzy
 msgid   ": "
 msgstr  ":"
 
-#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/fm/templates/window.hh:272
 #: ../xffm/response/templates/openwith.hh:137
 #: ../xffm/response/templates/dialogbasic.hh:304
-#: ../xffm/find/templates/dndbox.hh:153
+#: ../xffm/find/templates/dndbox.hh:155
 msgid   "Close"
 msgstr  "বন্ধ (C)"
 
-#: ../xffm/fm/templates/window.hh:505
+#: ../xffm/fm/templates/window.hh:544
 msgid   "Long press time"
 msgstr  "দীর্ঘ সময় ধরে চাপে রাখা"
 
-#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/fm/templates/window.hh:552 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:538 ../xffm/fm/templates/gridview.hh:581
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:44
@@ -216,8 +197,8 @@ msgstr  "দীর্ঘ সময় ধরে চাপে রাখা"
 msgid   "Cut"
 msgstr  "কাটা"
 
-#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/fm/templates/window.hh:554 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:537 ../xffm/fm/templates/gridview.hh:580
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:28
@@ -233,9 +214,9 @@ msgstr  "কাটা"
 msgid   "Copy"
 msgstr  "অনুলিপি করুন (C)"
 
-#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
-#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
-#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/fm/templates/window.hh:556 ../xffm/fm/templates/window.hh:664
+#: ../xffm/fm/templates/window.hh:691 ../xffm/fm/templates/gridview.hh:564
+#: ../xffm/fm/templates/gridview.hh:728
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:24
 #: ../xffm/menus/templates/pathbarmenu.hh:35
@@ -245,30 +226,25 @@ msgstr  "অনুলিপি করুন (C)"
 #: ../xffm/menus/templates/inputMenu.hh:45
 #: ../xffm/menus/templates/inputMenu.hh:61
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:80
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:67
 #: ../xffm/menus/templates/gridviewmenu.hh:90
-#: ../xffm/menus/templates/menu.hh:166
+#: ../xffm/menus/templates/menu.hh:167
 msgid   "Paste"
 msgstr  "প্রতিলেপন করুন"
 
-#: ../xffm/fm/templates/window.hh:519
+#: ../xffm/fm/templates/window.hh:558
 msgid   "New Tab"
 msgstr  "নতুন ট্যাব (T)"
 
-#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
+#: ../xffm/fm/templates/window.hh:559 ../xffm/fm/templates/window.hh:561
 #, fuzzy
 msgid   "Main menu"
 msgstr  "প্রধান মেনু"
 
-#: ../xffm/fm/templates/window.hh:592
-#, fuzzy
-msgid   "Directory name: "
-msgstr  "DirectoryPane"
-
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:26
 #: ../xffm/menus/templates/inputMenu.hh:41
@@ -278,109 +254,112 @@ msgstr  "DirectoryPane"
 #: ../xffm/menus/templates/outputMenu.hh:38
 #: ../xffm/menus/templates/outputMenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 msgid   "Select All"
 msgstr  "সমগ্র নির্বাচন"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
+#: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:78
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "রেগুলার এক্সপ্রেশনের সাথে মেলানো নাম(x)"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
 #: ../xffm/menus/templates/mainMenu.hh:28
 msgid   "Show"
 msgstr  "প্রদর্শন"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:96
-#: ../xffm/menus/templates/mainMenu.hh:119
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:159
-#, fuzzy
-msgid   "Hidden files"
-msgstr  "লুকানো ফাইল"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:97
-#: ../xffm/menus/templates/mainMenu.hh:120
-#: ../xffm/menus/templates/mainMenu.hh:133
-#: ../xffm/menus/templates/mainMenu.hh:160
-#, fuzzy
-msgid   "Backup files"
-msgstr  "ব্যাক-আপ ফাইল"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
-#, fuzzy
-msgid   "Sort mode"
-msgstr  "Solaris মোড"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
-#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:29
 #: ../xffm/menus/templates/mainMenu.hh:98
 #: ../xffm/menus/templates/mainMenu.hh:121
 #: ../xffm/menus/templates/mainMenu.hh:134
 #: ../xffm/menus/templates/mainMenu.hh:161
+#, fuzzy
+msgid   "Hidden files"
+msgstr  "লুকানো ফাইল"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:122
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:162
+#, fuzzy
+msgid   "Backup files"
+msgstr  "ব্যাক-আপ ফাইল"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/menus/templates/mainMenu.hh:32
+#, fuzzy
+msgid   "Sort mode"
+msgstr  "Solaris মোড"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:715
+#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/menus/templates/mainMenu.hh:123
+#: ../xffm/menus/templates/mainMenu.hh:136
+#: ../xffm/menus/templates/mainMenu.hh:163
 msgid   "Descending"
 msgstr  "অবরোহী"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:676
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:715
 #: ../xffm/response/templates/fileresponse.hh:231
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:99
-#: ../xffm/menus/templates/mainMenu.hh:122
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:165
-msgid   "Name"
-msgstr  "নাম"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
-#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:100
-#: ../xffm/menus/templates/mainMenu.hh:123
-#: ../xffm/menus/templates/mainMenu.hh:142
-#: ../xffm/menus/templates/mainMenu.hh:162
-msgid   "Date"
-msgstr  "তারিখ"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
-#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:101
 #: ../xffm/menus/templates/mainMenu.hh:124
 #: ../xffm/menus/templates/mainMenu.hh:143
-#: ../xffm/menus/templates/mainMenu.hh:163
-msgid   "Size"
-msgstr  "মাপ"
+#: ../xffm/menus/templates/mainMenu.hh:167
+msgid   "Name"
+msgstr  "নাম"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/child.hh:303 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:102
 #: ../xffm/menus/templates/mainMenu.hh:125
 #: ../xffm/menus/templates/mainMenu.hh:144
 #: ../xffm/menus/templates/mainMenu.hh:164
+msgid   "Date"
+msgstr  "তারিখ"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/child.hh:304 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:126
+#: ../xffm/menus/templates/mainMenu.hh:145
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Size"
+msgstr  "মাপ"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/classes/child.hh:305
+#: ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:104
+#: ../xffm/menus/templates/mainMenu.hh:127
+#: ../xffm/menus/templates/mainMenu.hh:146
+#: ../xffm/menus/templates/mainMenu.hh:166
 #, fuzzy
 msgid   "File type"
 msgstr  "ফাইলের ধরন (t):"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:710
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:200
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:202
 #, fuzzy
 msgid   "Apply modifications"
 msgstr  "অ্যাপলিকেশন"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
-#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
-#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:689
+#: ../xffm/fm/templates/gridview.hh:555 ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:82
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:68
 #: ../xffm/menus/templates/gridviewmenu.hh:92
@@ -388,10 +367,10 @@ msgstr  "অ্যাপলিকেশন"
 msgid   "Add bookmark"
 msgstr  "বুকমার্ক যোগ করুন।"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
-#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:690
+#: ../xffm/fm/templates/gridview.hh:515 ../xffm/fm/templates/gridview.hh:558
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:83
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:93
@@ -399,22 +378,29 @@ msgstr  "বুকমার্ক যোগ করুন।"
 msgid   "Remove bookmark"
 msgstr  "বুকমার্ক মুছে ফেলা হবে"
 
-#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
-#: ../xffm/menus/templates/mainMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:77
+#: ../xffm/fm/templates/window.hh:670 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:79
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "আবর্জনার বাক্স ফাঁকা করো"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/fm/templates/gridview.hh:95
+#: ../xffm/response/templates/regexpresponse.hh:44
+#: ../xffm/response/templates/regexpresponse.hh:49
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "রেগুলার এক্সপ্রেশন ফাঁকা!"
+
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:579
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:58
 #: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Open with"
 msgstr  "সহযোগে খোলা হবে (w)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
-#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:543
+#: ../xffm/fm/templates/gridview.hh:586
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -433,32 +419,32 @@ msgstr  "সহযোগে খোলা হবে (w)"
 msgid   "Delete"
 msgstr  "মুছে ফেলুন"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
-#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:21
 #: ../xffm/menus/templates/gridviewmenu.hh:72
 #: ../xffm/menus/templates/gridviewmenu.hh:98
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "এই নির্বাচিত বস্তুগুলো দিয়ে নতুন আর্কাইভ তৈরি করুন"
 
-#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
-#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/fm/templates/gridview.hh:469 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:542 ../xffm/fm/templates/gridview.hh:585
 #: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:95
 msgid   "Properties"
 msgstr  "বৈশিষ্ট্যাবলী (r)"
 
-#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
-#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/fm/templates/gridview.hh:472 ../xffm/fm/templates/gridview.hh:493
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:56
 #: ../xffm/menus/templates/gridviewmenu.hh:80
 msgid   "Unmount Volume"
 msgstr  "ভলিউম অান্মাউন্ট করুন (m)"
 
-#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
-#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/fm/templates/gridview.hh:475 ../xffm/fm/templates/gridview.hh:496
+#: ../xffm/fm/templates/gridview.hh:573
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:55
@@ -466,7 +452,7 @@ msgstr  "ভলিউম অান্মাউন্ট করুন (m)"
 msgid   "Mount Volume"
 msgstr  "ভলিউম মাউন্ট করা হচ্ছে (M)"
 
-#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/fm/templates/gridview.hh:535
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:22
 #: ../xffm/menus/templates/pathbarmenu.hh:33
@@ -478,7 +464,7 @@ msgstr  "ভলিউম মাউন্ট করা হচ্ছে (M)"
 msgid   "Open in new tab"
 msgstr  "নতুন ট্যাব খুলুন"
 
-#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/fm/templates/gridview.hh:539 ../xffm/fm/templates/gridview.hh:582
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:30
@@ -487,7 +473,7 @@ msgstr  "নতুন ট্যাব খুলুন"
 msgid   "Rename"
 msgstr  "পুনঃনামকরণ (R)"
 
-#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/fm/templates/gridview.hh:540 ../xffm/fm/templates/gridview.hh:583
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:31
@@ -496,15 +482,15 @@ msgstr  "পুনঃনামকরণ (R)"
 msgid   "Duplicate"
 msgstr  "নকল (ডুপ্লিকেট)"
 
-#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
-#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/fm/templates/gridview.hh:578 ../xffm/fm/templates/gridview.hh:689
+#: ../xffm/fm/templates/gridview.hh:690
 #: ../xffm/menus/templates/gridviewmenu.hh:17
 #: ../xffm/menus/templates/gridviewmenu.hh:59
 #: ../xffm/menus/templates/gridviewmenu.hh:84
 msgid   "auto"
 msgstr  "auto"
 
-#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:595 ../xffm/fm/templates/gridview.hh:602
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:36
@@ -514,7 +500,7 @@ msgstr  "auto"
 msgid   "Decrypt File..."
 msgstr  "ফাইল ডিক্রিপ্ট করুন"
 
-#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/fm/templates/gridview.hh:597 ../xffm/fm/templates/gridview.hh:600
 #: ../xffm/menus/templates/gridviewmenu.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:96
@@ -522,7 +508,7 @@ msgstr  "ফাইল ডিক্রিপ্ট করুন"
 msgid   "Encrypt File..."
 msgstr  "ফাইল এনক্রিপ্ট করুন"
 
-#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/openwith.hh:158
 #, fuzzy
 msgid   "Multiple selections"
@@ -545,10 +531,10 @@ msgid   "Go to"
 msgstr  "যাও"
 
 #: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
-#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:191
 #: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
-#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
-#: ../xffm/find/templates/findresponse.hh:884
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:824
+#: ../xffm/find/templates/findresponse.hh:839
 msgid   "unknown"
 msgstr  "অজানা"
 
@@ -605,116 +591,147 @@ msgid   " TTY"
 msgstr  ""
 
 #: ../xffm/fm/templates/prompt.hh:236
-#: ../xffm/menus/templates/menucallbacks.hh:48
+#: ../xffm/menus/templates/menucallbacks.hh:50
 #, fuzzy, c-format
 msgid   "failed to chdir to %s"
 msgstr  "%s$s ক্যাশে করতে ব্যর্থ: %s$s"
 
-#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
+#: ../xffm/fm/templates/properties.hh:122
 #, fuzzy
 msgid   "Properties and Attributes"
 msgstr  "সব বৈশিষ্ট্য সংরক্ষণ করুন"
 
-#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
+#: ../xffm/fm/templates/properties.hh:140
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "এর মধ্যে ফাইল করুন: (F)"
 
-#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
-#: ../xffm/response/classes/envresponse.hh:123
+#: ../xffm/fm/templates/properties.hh:167
+#: ../xffm/response/classes/envresponse.hh:126
 msgid   "Apply changes"
 msgstr  "সব পরিবর্তন প্রয়োগ করো"
 
-#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
-#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:313
-#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/tarresponse.hh:210
+#: ../xffm/response/templates/efsresponse.hh:181
 #: ../xffm/response/templates/dialogbasic.hh:309
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
 #: ../xffm/response/classes/cpresponse.hh:81
-#: ../xffm/find/templates/findsignals.hh:568
+#: ../xffm/find/templates/findsignals.hh:575
 msgid   "Cancel"
 msgstr  "বাতিল করুন"
 
-#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
+#: ../xffm/fm/templates/properties.hh:358
 msgid   "Encoding"
 msgstr  "এনকোডিং (E)"
 
-#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
+#: ../xffm/fm/templates/properties.hh:359
 msgid   "Mimetype"
 msgstr  "মাইমটাইপ"
 
-#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
+#: ../xffm/fm/templates/properties.hh:381
 msgid   "Successfully moved to trash."
 msgstr  "আবর্জনার বাক্সে সরানো সফল।"
 
-#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
+#: ../xffm/fm/templates/properties.hh:382
 msgid   "Source:"
 msgstr  "উৎস (S):"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:22
-#, fuzzy
-msgid   "Move to tab"
-msgstr  "উপরে যান (b)"
+#: ../xffm/fm/classes/localdir.hh:173 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "রেগুলার এক্সপ্রেশন (R)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:83
-#: ../xffm/menus/templates/mainMenu.hh:111
+#: ../xffm/fm/classes/localdir.hh:176
+#, fuzzy, c-format
+msgid   "%s (%s Filtered)"
+msgstr  "%d$s (%d$d-টি বস্তু)"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:13
+msgid   "Colors"
+msgstr  "রং"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:27
+#, fuzzy
+msgid   "Switch button"
+msgstr  "অনুসন্ধান বাটন"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:28 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:113
 msgid   "Search"
 msgstr  "অনুসন্ধান"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:112
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:114
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "টার্মিনাল খুলুন (T)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:86
-#: ../xffm/menus/templates/mainMenu.hh:113
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:115
 msgid   "Home"
 msgstr  "হোম"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:26
+#: ../xffm/fm/classes/fmbuttonbox.hh:31
 #, fuzzy
 msgid   "Open a New Window"
 msgstr  "নতুন উইন্ডোতে খুলুন (W)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:40
+#: ../xffm/fm/classes/fmbuttonbox.hh:51
 msgid   "Icon Size"
 msgstr  "আইকন মাপ"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/fm/classes/fmbuttonbox.hh:74 ../xffm/menus/templates/mainMenu.hh:68
 msgid   "Color settings"
 msgstr  "রং সেটিংস"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:63
-msgid   "Colors"
-msgstr  "রং"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:144
+#: ../xffm/fm/classes/fmbuttonbox.hh:166
 #, fuzzy
 msgid   "Icon Size:"
 msgstr  "আইকন মাপ"
 
-#: ../xffm/fm/classes/settings.hh:153
+#: ../xffm/fm/classes/settings.hh:179
 #, fuzzy
 msgid   "New File:"
 msgstr  "নতুন ফাইল"
 
-#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/fm/classes/root.hh:26 ../xffm/fm/classes/child.hh:266
+msgid   "Disk Mounter"
+msgstr  "ডিস্ক মাউন্ট ব্যবস্থা"
+
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:503
 #: ../xffm/response/templates/efsresponse.hh:40
 msgid   "New"
 msgstr  "নতুন (N)"
 
-#: ../xffm/fm/classes/root.hh:59
+#: ../xffm/fm/classes/root.hh:62
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "ফাইল আবর্জনায় পাঠাও"
+
+#: ../xffm/fm/classes/child.hh:265
+msgid   "Bookmarks"
+msgstr  "বুকমার্ক (B)"
+
+#: ../xffm/fm/classes/basic.hh:35
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  "মৌলিক নিয়ম নীতি:\n"
+        "\n"
+        "*  যে কোনো অক্ষর শূণ্য অথবা অধিক বার মেলানো হবে।\n"
+        "?  যে কোনো অক্ষর শুধুমাত্র একবার মেলানো হবে\n"
 
 #: ../xffm/fm/classes/progress.hh:73
 msgid   "Running"
@@ -738,7 +755,7 @@ msgstr  "ফাইল (F)"
 msgid   "Command history"
 msgstr  "'কমান্ড চালাও' ইতিহাস"
 
-#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:697
 msgid   "User"
 msgstr  "ব্যবহারকারী"
 
@@ -1112,37 +1129,38 @@ msgid   "The  password  can  be  specified on the command line. Since the "
         "recommended to use this option only for testing purposes."
 msgstr  ""
 
-#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
-#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/fm/classes/ecryptfs.hh:379 ../xffm/fm/classes/ecryptfs.hh:380
+#: ../xffm/fm/classes/ecryptfs.hh:402
 #: ../xffm/response/templates/mountresponse.hh:151
-#: ../xffm/response/templates/efsresponse.hh:138
+#: ../xffm/response/templates/efsresponse.hh:142
 msgid   "Mount"
 msgstr  "মাউন্ট করুন (M)"
 
-#: ../xffm/fm/classes/ecryptfs.hh:392
-#: ../xffm/response/templates/efsresponse.hh:181
+#: ../xffm/fm/classes/ecryptfs.hh:396
+#: ../xffm/response/templates/tarresponse.hh:214
+#: ../xffm/response/templates/efsresponse.hh:185
 msgid   "Save"
 msgstr  "সংরক্ষণ (S)"
 
-#: ../xffm/fm/classes/ecryptfs.hh:612
-#: ../xffm/response/templates/efsresponse.hh:160
-#: ../xffm/find/templates/findresponse.hh:275
-#: ../xffm/find/templates/findresponse.hh:561
-#: ../xffm/find/templates/findresponse.hh:594
+#: ../xffm/fm/classes/ecryptfs.hh:616
+#: ../xffm/response/templates/efsresponse.hh:164
+#: ../xffm/find/templates/findresponse.hh:292
+#: ../xffm/find/templates/findresponse.hh:512
+#: ../xffm/find/templates/findresponse.hh:547
 msgid   "Options"
 msgstr  "অপশন"
 
-#: ../xffm/fm/classes/ecryptfs.hh:613
-#: ../xffm/response/templates/efsresponse.hh:166
+#: ../xffm/fm/classes/ecryptfs.hh:617
+#: ../xffm/response/templates/efsresponse.hh:170
 msgid   "Advanced"
 msgstr  "অগ্রসর"
 
-#: ../xffm/fm/classes/ecryptfs.hh:928
+#: ../xffm/fm/classes/ecryptfs.hh:932
 #, fuzzy, c-format
 msgid   "Mounting %s"
 msgstr  "%s মাউন্ট করুন (M)"
 
-#: ../xffm/fm/classes/ecryptfs.hh:986
+#: ../xffm/fm/classes/ecryptfs.hh:990
 #, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "%s-এর জন্য পাসওয়ার্ড লিখুন"
@@ -1154,10 +1172,10 @@ msgid   "Mount Device"
 msgstr  "সাউণ্ড ডিভাইস"
 
 #: ../xffm/response/templates/mountresponse.hh:128
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:484
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:488
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Mount Point"
 msgstr  "মাউন্ট-পয়েন্ট"
 
@@ -1170,6 +1188,10 @@ msgstr  "`%s$s' ডিরেক্টরি তৈরি করতে ব্য�
 #: ../xffm/response/templates/mkdirresponse.hh:70
 msgid   "Sorry"
 msgstr  "দুঃখিত"
+
+#: ../xffm/response/templates/dialogentry.hh:41
+msgid   "Help"
+msgstr  "সাহায্য (H)"
 
 #: ../xffm/response/templates/fileresponse.hh:37
 #, fuzzy
@@ -1252,40 +1274,32 @@ msgstr  "টার্মিনাল রিসেট এবং ফাঁকা �
 msgid   "Cannot find executable for \"%s\""
 msgstr  "ফোল্ডার \"%s\" মুছে ফেলা সম্ভব নয়।"
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "GZip"
-msgstr  ""
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "BZip2"
-msgstr  ""
-
-#: ../xffm/response/templates/tarresponse.hh:13
-#, fuzzy
-msgid   "XZ"
-msgstr  "X"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "Zip"
-msgstr  "জিপ"
-
-#: ../xffm/response/templates/tarresponse.hh:20
+#: ../xffm/response/templates/tarresponse.hh:34
 #, fuzzy
 msgid   "Compressed file..."
 msgstr  "সংকোচন..."
 
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:484
+#: ../xffm/response/templates/tarresponse.hh:174
+#, fuzzy
+msgid   "Target directory:"
+msgstr  "টার্গেট ডিরেক্টরি নয়"
+
+#: ../xffm/response/templates/tarresponse.hh:183
+msgid   "Name:"
+msgstr  "নাম:"
+
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:488
 msgid   "Encrypted"
 msgstr  "এনক্রিপ্ট করা হয়েছে"
 
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Unencrypted"
 msgstr  "এনক্রিপ্ট করা নয়"
 
-#: ../xffm/response/templates/efsresponse.hh:485
-#: ../xffm/response/templates/efsresponse.hh:491
+#: ../xffm/response/templates/efsresponse.hh:489
+#: ../xffm/response/templates/efsresponse.hh:495
 msgid   "Folder does not exist"
 msgstr  "ফোল্ডার ইতোমধ্যে উপস্থিত নেই"
 
@@ -1306,7 +1320,7 @@ msgstr  "সম্পন্ন"
 #: ../xffm/response/classes/lnresponse.hh:10
 #: ../xffm/response/classes/cpresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:9
-#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
+#: ../xffm/find/templates/findresponse.hh:440 ../xffm/find/classes/fgr.hh:124
 msgid   "Path"
 msgstr  "পাথ"
 
@@ -1319,6 +1333,11 @@ msgstr  "ফোল্ডার `%s$s' তৈরি পাওয়া সম্ভ�
 #, fuzzy
 msgid   "Sorry, file not found"
 msgstr  "ফাইল খুঁজে পাওয়া যায়নি"
+
+#: ../xffm/response/templates/regexpresponse.hh:11
+#, fuzzy
+msgid   "foo"
+msgstr  "উল্লিখিত সময় অবধি"
 
 #: ../xffm/response/templates/bfishresponse.hh:93
 #, fuzzy
@@ -1366,7 +1385,7 @@ msgstr  "পাসওয়ার্ড মিলছেনা"
 msgid   "The location does not exist."
 msgstr  "\"%s\" অবস্থানটি বর্তমানে উপস্থিত নেই।"
 
-#: ../xffm/response/dialogs.hh:68
+#: ../xffm/response/dialogs.hh:73
 #, fuzzy, c-format
 msgid   "Delete '%s'"
 msgstr  "%s মুছে ফেলুন (D)"
@@ -1390,17 +1409,17 @@ msgstr  "**সাবধান**"
 msgid   "You have selected multiple files or folders"
 msgstr  "একাধিক ফাইল ও ফোল্ডার নির্বাচন করা হয়েছে"
 
-#: ../xffm/response/classes/envresponse.hh:90
+#: ../xffm/response/classes/envresponse.hh:93
 #, fuzzy
 msgid   "Environment variables"
 msgstr  "পূর্বনির্দিষ্ট প্রক্সি এনভায়রনমেন্ট ভেরিয়েবল ব্যবহার করো"
 
-#: ../xffm/response/classes/envresponse.hh:122
+#: ../xffm/response/classes/envresponse.hh:125
 #, fuzzy
 msgid   "No changes need to be saved"
 msgstr  "কোন প্যাকেজ ইনস্টল করার প্রয়োজন নেই"
 
-#: ../xffm/response/classes/envresponse.hh:217
+#: ../xffm/response/classes/envresponse.hh:220
 #, fuzzy
 msgid   "Environment Variable"
 msgstr  "পরিবেশ (এনভায়রনমেন্ট):"
@@ -1418,14 +1437,14 @@ msgstr  "সময়সীমা"
 msgid   "Workspace Switcher"
 msgstr  "কর্মক্ষেত্র পরিবর্তন ব্যবস্থা"
 
-#: ../xffm/response/classes/wsresponse.hh:36
-#: ../xffm/menus/templates/menucallbacks.hh:130
+#: ../xffm/response/classes/wsresponse.hh:35
+#: ../xffm/menus/templates/menucallbacks.hh:134
 #, fuzzy, c-format
 msgid   "Workspace %s"
 msgstr  "কর্মক্ষেত্র %s$s%s$d"
 
-#: ../xffm/response/classes/wsresponse.hh:37
-#: ../xffm/menus/templates/menucallbacks.hh:131
+#: ../xffm/response/classes/wsresponse.hh:36
+#: ../xffm/menus/templates/menucallbacks.hh:135
 msgid   "does not exist"
 msgstr  "অনুপস্থিত"
 
@@ -1474,245 +1493,236 @@ msgstr  "সুরক্ষা"
 msgid   "No Read Permission"
 msgstr  "অনুমতি যোগ করো"
 
-#: ../xffm/find/templates/findresponse.hh:111
-#, fuzzy
-msgid   "Find files"
-msgstr  "শব্দের ফাইল"
-
-#: ../xffm/find/templates/findresponse.hh:278
-#: ../xffm/find/templates/findresponse.hh:780
+#: ../xffm/find/templates/findresponse.hh:295
+#: ../xffm/find/templates/findresponse.hh:735
 #, fuzzy
 msgid   "Advanced options"
 msgstr  "অগ্রসর অপশন"
 
-#: ../xffm/find/templates/findresponse.hh:286
+#: ../xffm/find/templates/findresponse.hh:303
 #, fuzzy
 msgid   "Find in Files"
 msgstr  "ফাইল খোঁজো..."
 
-#: ../xffm/find/templates/findresponse.hh:290
-#: ../xffm/find/templates/findresponse.hh:312
+#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:329
 #, fuzzy
 msgid   "Cancel Operation"
 msgstr  "বিনিময় সংক্রান্ত কাজ"
 
-#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:324
 #, fuzzy
 msgid   "Show search results for this query"
 msgstr  "\"%s\" অনুসন্ধানের ফলাফল"
 
-#: ../xffm/find/templates/findresponse.hh:323
-#: ../xffm/find/templates/findresponse.hh:327
+#: ../xffm/find/templates/findresponse.hh:340
+#: ../xffm/find/templates/findresponse.hh:344
 #, fuzzy
 msgid   "Clear search"
 msgstr  "সন্ধান ফাঁকা করো"
 
-#: ../xffm/find/templates/findresponse.hh:503
-msgid   "Show help"
-msgstr  "সহায়িকা দেখাও"
-
-#: ../xffm/find/templates/findresponse.hh:532
+#: ../xffm/find/templates/findresponse.hh:483
 msgid   "Case Sensitive"
 msgstr  "অক্ষরের ছাঁদ সংবেদনশীল"
 
-#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findresponse.hh:484
 #, fuzzy
 msgid   "Extended regexp"
 msgstr  "বর্ধিত"
 
-#: ../xffm/find/templates/findresponse.hh:534
+#: ../xffm/find/templates/findresponse.hh:485
 msgid   "Include binary files"
 msgstr  "বাইনারি ফাইলেও সন্ধান করো"
 
-#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
+#: ../xffm/find/templates/findresponse.hh:486 ../xffm/find/classes/fgr.hh:212
 #, fuzzy
 msgid   "Line Count"
 msgstr  "নিচের লাইন"
 
-#: ../xffm/find/templates/findresponse.hh:544
+#: ../xffm/find/templates/findresponse.hh:495
 #, fuzzy
 msgid   "Anywhere"
 msgstr  "কোথাও না"
 
-#: ../xffm/find/templates/findresponse.hh:545
+#: ../xffm/find/templates/findresponse.hh:496
 msgid   "Whole words only"
 msgstr  "শুধুমাত্র গোটা শব্দ"
 
-#: ../xffm/find/templates/findresponse.hh:546
+#: ../xffm/find/templates/findresponse.hh:497
 msgid   "lines"
 msgstr  "লাইন"
 
-#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
+#: ../xffm/find/templates/findresponse.hh:498 ../xffm/find/classes/fgr.hh:210
 msgid   "No match"
 msgstr  "কোন মিল পাওয়া যায়নি"
 
-#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
+#: ../xffm/find/templates/findresponse.hh:522 ../xffm/find/classes/fgr.hh:126
 msgid   "Filter:"
 msgstr  "ফিল্টার:"
 
-#: ../xffm/find/templates/findresponse.hh:577
-#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
+#: ../xffm/find/templates/findresponse.hh:530
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:146
 msgid   "Recursive"
 msgstr  "পুনরাবৃত্তি"
 
-#: ../xffm/find/templates/findresponse.hh:578
-#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
+#: ../xffm/find/templates/findresponse.hh:531
+#: ../xffm/find/templates/findsignals.hh:306 ../xffm/find/classes/fgr.hh:142
 #, fuzzy
 msgid   "Find hidden files and directories"
 msgstr  "ফাইল এবং ডিরেক্টরি"
 
-#: ../xffm/find/templates/findresponse.hh:580
-#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
+#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findsignals.hh:315 ../xffm/find/classes/fgr.hh:138
 msgid   "Stay on single filesystem"
 msgstr  "শুধুমাত্র একটি ফাইল-সিস্টেমের মধ্যে অনুসন্ধান করা হবে"
 
-#: ../xffm/find/templates/findresponse.hh:582
+#: ../xffm/find/templates/findresponse.hh:535
 #, fuzzy
 msgid   "Upper limit"
 msgstr  "উর্দ্ধসীমা:"
 
-#: ../xffm/find/templates/findresponse.hh:583
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findresponse.hh:536
+#: ../xffm/find/templates/findsignals.hh:515
 #, fuzzy
 msgid   "Results"
 msgstr  "ফলাফল:"
 
-#: ../xffm/find/templates/findresponse.hh:602
+#: ../xffm/find/templates/findresponse.hh:555
 msgid   "Contains the text"
 msgstr  "চিহ্নিত লেখাসহ (t)"
 
-#: ../xffm/find/templates/findresponse.hh:667
-#: ../xffm/find/templates/findsignals.hh:318
+#: ../xffm/find/templates/findresponse.hh:622
+#: ../xffm/find/templates/findsignals.hh:321
 #, fuzzy
 msgid   "File size"
 msgstr  "ফাইলের মাপ:"
 
-#: ../xffm/find/templates/findresponse.hh:680
+#: ../xffm/find/templates/findresponse.hh:635
 msgid   "At Least"
 msgstr  "অন্তত"
 
-#: ../xffm/find/templates/findresponse.hh:680
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:635
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "kBytes"
 msgstr  "কিলোবাইট"
 
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "At Most"
 msgstr  "বড়জোর"
 
-#: ../xffm/find/templates/findresponse.hh:695
-#: ../xffm/find/templates/findsignals.hh:324
+#: ../xffm/find/templates/findresponse.hh:650
+#: ../xffm/find/templates/findsignals.hh:327
 msgid   "Specific Time"
 msgstr  "নির্দিষ্ট সময়"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Modified"
 msgstr  "পরিবর্তনের সময়"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Created"
 msgstr  "নির্মাণের সময়"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 #, fuzzy
 msgid   "Accessed"
 msgstr  "সর্বশেষ ব্যবহার:"
 
-#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/templates/findresponse.hh:661 ../xffm/find/classes/fgr.hh:166
 #: ../xffm/find/classes/fgr.hh:168
 msgid   "Minutes"
 msgstr  "মিনিট"
 
-#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/templates/findresponse.hh:665 ../xffm/find/classes/fgr.hh:169
 #: ../xffm/find/classes/fgr.hh:171
 msgid   "Hours"
 msgstr  "ঘন্টা"
 
-#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/templates/findresponse.hh:669 ../xffm/find/classes/fgr.hh:172
 #: ../xffm/find/classes/fgr.hh:174
 msgid   "Days"
 msgstr  "দিন"
 
-#: ../xffm/find/templates/findresponse.hh:718
+#: ../xffm/find/templates/findresponse.hh:673
 #, fuzzy
 msgid   "Months"
 msgstr  "মাস"
 
-#: ../xffm/find/templates/findresponse.hh:729
-#: ../xffm/find/templates/findsignals.hh:329
+#: ../xffm/find/templates/findresponse.hh:684
+#: ../xffm/find/templates/findsignals.hh:332
 #, fuzzy
 msgid   "File properties"
 msgstr  "ফোল্ডারের বৈশিষ্ট্যাবলী"
 
-#: ../xffm/find/templates/findresponse.hh:748
+#: ../xffm/find/templates/findresponse.hh:703
 msgid   "Group"
 msgstr  "গ্রুপ"
 
-#: ../xffm/find/templates/findresponse.hh:753
-#: ../xffm/find/templates/findsignals.hh:175
+#: ../xffm/find/templates/findresponse.hh:708
+#: ../xffm/find/templates/findsignals.hh:178
 msgid   "Octal Permissions"
 msgstr  "অক্টাল সংখ্যায় প্রকাশিত অনুমতি"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:761
-#: ../xffm/find/templates/findsignals.hh:161
-#: ../xffm/find/templates/findsignals.hh:167
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:716
+#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findsignals.hh:170
 #, fuzzy
 msgid   "Executable"
 msgstr  "এক্সেকিউটেবল:"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:765
-#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:720
+#: ../xffm/find/templates/findsignals.hh:167
 msgid   "SUID"
 msgstr  "এস-ইউ-আই-ডি"
 
-#: ../xffm/find/templates/findresponse.hh:801
+#: ../xffm/find/templates/findresponse.hh:756
 msgid   "File type : "
 msgstr  "ফাইলের ধরন : "
 
-#: ../xffm/find/templates/findsignals.hh:86
+#: ../xffm/find/templates/findsignals.hh:89
 msgid   "Searching..."
 msgstr  "অনুসন্ধান করা হচ্ছে..."
 
-#: ../xffm/find/templates/findsignals.hh:441
-#: ../xffm/find/templates/dndbox.hh:65
+#: ../xffm/find/templates/findsignals.hh:448
+#: ../xffm/find/templates/dndbox.hh:66
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "বর্তমান অবস্থান খুঁজে পাওয়া যাচ্ছেনা।"
 
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Upper limit:"
 msgstr  "উর্দ্ধসীমা:"
 
-#: ../xffm/find/templates/findsignals.hh:511
+#: ../xffm/find/templates/findsignals.hh:518
 #, fuzzy
 msgid   "Counting files..."
 msgstr  "ফাইল বন্ধ করা হচ্ছে..."
 
-#: ../xffm/find/templates/findsignals.hh:519
+#: ../xffm/find/templates/findsignals.hh:526
 #, fuzzy, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "%d-টি মিল"
 msgstr[1]       "%d-টি মিল"
 
-#: ../xffm/find/templates/findsignals.hh:521
+#: ../xffm/find/templates/findsignals.hh:528
 #, fuzzy, c-format
 msgid   "%s Finished : %s"
 msgstr  "%s লোড করা শেষ হয়েছে।"
 
-#: ../xffm/find/templates/dndbox.hh:126
+#: ../xffm/find/templates/dndbox.hh:128
 #, fuzzy
 msgid   "Edit all"
 msgstr  "সম্পূর্ণ সম্পাদন করুন (E)"
 
-#: ../xffm/find/templates/dndbox.hh:139
+#: ../xffm/find/templates/dndbox.hh:141
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "\"%s\" অনুসন্ধানের ফলাফল"
 
-#: ../xffm/find/templates/dndbox.hh:259
+#: ../xffm/find/templates/dndbox.hh:261
 msgid   "Search results"
 msgstr  "খোঁজের ফলাফল"
 
@@ -1867,10 +1877,6 @@ msgstr  "অভ্যন্তরীণ বিষয়বস্তু প্রদ
 msgid   "STRING"
 msgstr  "STRING"
 
-#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
-msgid   "Regular expression"
-msgstr  "রেগুলার এক্সপ্রেশন (R)"
-
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Extended"
 msgstr  "বর্ধিত"
@@ -1896,24 +1902,15 @@ msgstr  "লাইন"
 msgid   "Usage : %s [OPTIONS]\n"
 msgstr  "ব্যবহারপ্রণালী: orca [OPTION...]"
 
+#: ../xffm/find/classes/historyentry.hh:136
+msgid   "Show help"
+msgstr  "সহায়িকা দেখাও"
+
 #: ../xffm/find/classes/ffunctions.hh:9
 msgid   "Regular"
 msgstr  "সাধারণ"
 
-#: ../xffm/find/classes/ffunctions.hh:42
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  "মৌলিক নিয়ম নীতি:\n"
-        "\n"
-        "*  যে কোনো অক্ষর শূণ্য অথবা অধিক বার মেলানো হবে।\n"
-        "?  যে কোনো অক্ষর শুধুমাত্র একবার মেলানো হবে\n"
-
-#: ../xffm/find/classes/ffunctions.hh:51
+#: ../xffm/find/classes/ffunctions.hh:41
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
@@ -1993,8 +1990,8 @@ msgstr  "extended regexp-র জন্য সংরক্ষিত অক্ষ�
 #: ../xffm/menus/templates/pathbarmenu.hh:34
 #: ../xffm/menus/templates/pathbarmenu.hh:46
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:89
+#: ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
 msgid   "Open in New Window"
 msgstr  "নতুন উইন্ডোতে খুলুন (W)"
 
@@ -2008,8 +2005,8 @@ msgstr  "নতুন উইন্ডোতে খুলুন (W)"
 #: ../xffm/menus/templates/outputMenu.hh:29
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:94 ../xffm/menus/templates/menu.hh:173
 #, fuzzy
 msgid   "Show Clipboard"
 msgstr  "এক্স ক্লিপবোর্ড"
@@ -2064,32 +2061,28 @@ msgid   "Default Color"
 msgstr  "ডিফল্ট রং"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:53
-#: ../xffm/menus/templates/mainMenu.hh:90
+#: ../xffm/menus/templates/mainMenu.hh:54
+#: ../xffm/menus/templates/mainMenu.hh:92
 #, fuzzy
 msgid   "Environment"
 msgstr  "পরিবেশ (এনভায়রনমেন্ট):"
 
 #: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:96
 msgid   "Exit"
 msgstr  "বিদায়"
 
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:79
-#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/mainMenu.hh:119
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "ক্যারেট মোড অদলবদল করো"
 
-#: ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:95
 msgid   "Clear Clipboard History"
 msgstr  "ক্লিপবোর্ড ইতিহাস ফাঁকা করো"
-
-#: ../xffm/menus/templates/mainMenu.hh:199
-msgid   "menu"
-msgstr  "মেনু"
 

@@ -1,15 +1,12 @@
-# Xffm4 translation file: Wed Jun 11 17:07:54 CST 2025
+# Xffm4 translation file: lun 14 jul 2025 16:38:42 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
-#: ../xffm/fm/classes/ecryptfs.hh:189
-#: ../xffm/response/classes/envresponse.hh:92
-#: ../xffm/response/classes/cpresponse.hh:44
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-06-09 16:21-0600\n"
+        "POT-Creation-Date: 2025-07-14 16:34-0600\n"
         "PO-Revision-Date: 2011-03-28 00:26+0800\n"
         "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
         "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -19,13 +16,13 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Content-Transfer-Encoding: 8bit\n"
         "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:729
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:36
 #: ../xffm/menus/templates/pathbarmenu.hh:48
 #: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
+#: ../xffm/menus/templates/menu.hh:175 ../xffm/menus/templates/menu.hh:180
 msgid   "Clipboard is empty."
 msgstr  "剪贴板是空的。"
 
@@ -33,36 +30,20 @@ msgstr  "剪贴板是空的。"
 msgid   "Clipboard contents"
 msgstr  "剪贴板内容"
 
-#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:495
 msgid   "Invalid clip"
 msgstr  "无效的素材"
 
-#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
-#: ../xffm/fm/templates/fstabmonitor.hh:366
-#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
-#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
-#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
-msgid   "Disk Mounter"
-msgstr  "磁盘挂载者"
-
-#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
-#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
-#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
-#: ../xffm/menus/templates/menucallbacks.hh:248
-#: ../xffm/menus/templates/mainMenu.hh:218
-msgid   "Bookmarks"
-msgstr  "书签(B)"
-
-#: ../xffm/fm/templates/workdir.hh:249
+#: ../xffm/fm/templates/workdir.hh:250
 #, c-format
 msgid   "The %s utility is not installed."
 msgstr  "%s 工具未安装。"
 
-#: ../xffm/fm/templates/workdir.hh:270
+#: ../xffm/fm/templates/workdir.hh:271
 msgid   "Trash is empty"
 msgstr  "回收站为空"
 
-#: ../xffm/fm/templates/workdir.hh:291
+#: ../xffm/fm/templates/workdir.hh:292
 #, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "卷“%s”未挂载。"
@@ -134,21 +115,21 @@ msgstr  "杀死(K)"
 msgid   "Segmentation fault"
 msgstr  "段错误"
 
-#: ../xffm/fm/templates/dnd.hh:639
+#: ../xffm/fm/templates/dnd.hh:638
 msgid   "Target"
 msgstr  "目标"
 
-#: ../xffm/fm/templates/dnd.hh:640
+#: ../xffm/fm/templates/dnd.hh:639
 msgid   "Source"
 msgstr  "来源"
 
-#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:648 ../xffm/fm/templates/dnd.hh:683
 #, fuzzy
 msgid   "Invalid target folder"
 msgstr  "无效的参数值"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
-#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/fm/templates/dnd.hh:670 ../xffm/fm/templates/gridview.hh:541
+#: ../xffm/fm/templates/gridview.hh:584
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:62
@@ -156,40 +137,40 @@ msgstr  "无效的参数值"
 msgid   "Link"
 msgstr  "链接"
 
-#: ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:683
 msgid   "Drag:"
 msgstr  "拖曳："
 
-#: ../xffm/fm/templates/dnd.hh:722
+#: ../xffm/fm/templates/dnd.hh:721
 msgid   "files"
 msgstr  "个文件"
 
-#: ../xffm/fm/templates/dnd.hh:723
+#: ../xffm/fm/templates/dnd.hh:722
 #, c-format
 msgid   "+ %s more"
 msgstr  "+ %s 更多"
 
-#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
+#: ../xffm/fm/templates/dnd.hh:729 ../xffm/fm/classes/bash.hh:653
 msgid   "file"
 msgstr  "文件"
 
-#: ../xffm/fm/templates/dnd.hh:731
+#: ../xffm/fm/templates/dnd.hh:730
 msgid   ": "
 msgstr  "："
 
-#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/fm/templates/window.hh:272
 #: ../xffm/response/templates/openwith.hh:137
 #: ../xffm/response/templates/dialogbasic.hh:304
-#: ../xffm/find/templates/dndbox.hh:153
+#: ../xffm/find/templates/dndbox.hh:155
 msgid   "Close"
 msgstr  "关闭"
 
-#: ../xffm/fm/templates/window.hh:505
+#: ../xffm/fm/templates/window.hh:544
 msgid   "Long press time"
 msgstr  "长按时限"
 
-#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/fm/templates/window.hh:552 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:538 ../xffm/fm/templates/gridview.hh:581
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:44
@@ -200,8 +181,8 @@ msgstr  "长按时限"
 msgid   "Cut"
 msgstr  "剪切(T)"
 
-#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/fm/templates/window.hh:554 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:537 ../xffm/fm/templates/gridview.hh:580
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:28
@@ -217,9 +198,9 @@ msgstr  "剪切(T)"
 msgid   "Copy"
 msgstr  "复制(C)"
 
-#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
-#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
-#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/fm/templates/window.hh:556 ../xffm/fm/templates/window.hh:664
+#: ../xffm/fm/templates/window.hh:691 ../xffm/fm/templates/gridview.hh:564
+#: ../xffm/fm/templates/gridview.hh:728
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:24
 #: ../xffm/menus/templates/pathbarmenu.hh:35
@@ -229,29 +210,24 @@ msgstr  "复制(C)"
 #: ../xffm/menus/templates/inputMenu.hh:45
 #: ../xffm/menus/templates/inputMenu.hh:61
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:80
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:67
 #: ../xffm/menus/templates/gridviewmenu.hh:90
-#: ../xffm/menus/templates/menu.hh:166
+#: ../xffm/menus/templates/menu.hh:167
 msgid   "Paste"
 msgstr  "粘贴(P)"
 
-#: ../xffm/fm/templates/window.hh:519
+#: ../xffm/fm/templates/window.hh:558
 msgid   "New Tab"
 msgstr  "新标签"
 
-#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
+#: ../xffm/fm/templates/window.hh:559 ../xffm/fm/templates/window.hh:561
 msgid   "Main menu"
 msgstr  "主菜单"
 
-#: ../xffm/fm/templates/window.hh:592
-#, fuzzy
-msgid   "Directory name: "
-msgstr  "目录名称："
-
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:26
 #: ../xffm/menus/templates/inputMenu.hh:41
@@ -261,135 +237,144 @@ msgstr  "目录名称："
 #: ../xffm/menus/templates/outputMenu.hh:38
 #: ../xffm/menus/templates/outputMenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 msgid   "Select All"
 msgstr  "全部选中"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
+#: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:78
 msgid   "Match regular expression"
 msgstr  "匹配正则表达式"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
 #: ../xffm/menus/templates/mainMenu.hh:28
 msgid   "Show"
 msgstr  "显示"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:96
-#: ../xffm/menus/templates/mainMenu.hh:119
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:159
-msgid   "Hidden files"
-msgstr  "隐藏文件"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:97
-#: ../xffm/menus/templates/mainMenu.hh:120
-#: ../xffm/menus/templates/mainMenu.hh:133
-#: ../xffm/menus/templates/mainMenu.hh:160
-msgid   "Backup files"
-msgstr  "备份文件"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
-msgid   "Sort mode"
-msgstr  "排序模式"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
-#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:29
 #: ../xffm/menus/templates/mainMenu.hh:98
 #: ../xffm/menus/templates/mainMenu.hh:121
 #: ../xffm/menus/templates/mainMenu.hh:134
 #: ../xffm/menus/templates/mainMenu.hh:161
+msgid   "Hidden files"
+msgstr  "隐藏文件"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:122
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:162
+msgid   "Backup files"
+msgstr  "备份文件"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/menus/templates/mainMenu.hh:32
+msgid   "Sort mode"
+msgstr  "排序模式"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:715
+#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/menus/templates/mainMenu.hh:123
+#: ../xffm/menus/templates/mainMenu.hh:136
+#: ../xffm/menus/templates/mainMenu.hh:163
 msgid   "Descending"
 msgstr  "降序"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:676
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:715
 #: ../xffm/response/templates/fileresponse.hh:231
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:99
-#: ../xffm/menus/templates/mainMenu.hh:122
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:165
-msgid   "Name"
-msgstr  "名字"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
-#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:100
-#: ../xffm/menus/templates/mainMenu.hh:123
-#: ../xffm/menus/templates/mainMenu.hh:142
-#: ../xffm/menus/templates/mainMenu.hh:162
-msgid   "Date"
-msgstr  "日期"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
-#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:101
 #: ../xffm/menus/templates/mainMenu.hh:124
 #: ../xffm/menus/templates/mainMenu.hh:143
-#: ../xffm/menus/templates/mainMenu.hh:163
-msgid   "Size"
-msgstr  "容量"
+#: ../xffm/menus/templates/mainMenu.hh:167
+msgid   "Name"
+msgstr  "名字"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/child.hh:303 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:102
 #: ../xffm/menus/templates/mainMenu.hh:125
 #: ../xffm/menus/templates/mainMenu.hh:144
 #: ../xffm/menus/templates/mainMenu.hh:164
+msgid   "Date"
+msgstr  "日期"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/child.hh:304 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:126
+#: ../xffm/menus/templates/mainMenu.hh:145
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Size"
+msgstr  "容量"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/classes/child.hh:305
+#: ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:104
+#: ../xffm/menus/templates/mainMenu.hh:127
+#: ../xffm/menus/templates/mainMenu.hh:146
+#: ../xffm/menus/templates/mainMenu.hh:166
 msgid   "File type"
 msgstr  "文件类型"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:710
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:200
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:202
 msgid   "Apply modifications"
 msgstr  "应用修改"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
-#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
-#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:689
+#: ../xffm/fm/templates/gridview.hh:555 ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:82
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:68
 #: ../xffm/menus/templates/gridviewmenu.hh:92
 msgid   "Add bookmark"
 msgstr  "添加书签(A)"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
-#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:690
+#: ../xffm/fm/templates/gridview.hh:515 ../xffm/fm/templates/gridview.hh:558
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:83
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Remove bookmark"
 msgstr  "清除书签"
 
-#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
-#: ../xffm/menus/templates/mainMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:77
+#: ../xffm/fm/templates/window.hh:670 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:79
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "清空回收站(E)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/fm/templates/gridview.hh:95
+#: ../xffm/response/templates/regexpresponse.hh:44
+#: ../xffm/response/templates/regexpresponse.hh:49
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "正则表达式语法错误"
+
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:579
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:58
 #: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Open with"
 msgstr  "打开方式"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
-#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:543
+#: ../xffm/fm/templates/gridview.hh:586
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -408,32 +393,32 @@ msgstr  "打开方式"
 msgid   "Delete"
 msgstr  "删除"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
-#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:21
 #: ../xffm/menus/templates/gridviewmenu.hh:72
 #: ../xffm/menus/templates/gridviewmenu.hh:98
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "使用选择的对象创建一个压缩的归档"
 
-#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
-#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/fm/templates/gridview.hh:469 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:542 ../xffm/fm/templates/gridview.hh:585
 #: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:95
 msgid   "Properties"
 msgstr  "属性"
 
-#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
-#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/fm/templates/gridview.hh:472 ../xffm/fm/templates/gridview.hh:493
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:56
 #: ../xffm/menus/templates/gridviewmenu.hh:80
 msgid   "Unmount Volume"
 msgstr  "卸载卷(M)"
 
-#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
-#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/fm/templates/gridview.hh:475 ../xffm/fm/templates/gridview.hh:496
+#: ../xffm/fm/templates/gridview.hh:573
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:55
@@ -441,7 +426,7 @@ msgstr  "卸载卷(M)"
 msgid   "Mount Volume"
 msgstr  "挂载卷"
 
-#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/fm/templates/gridview.hh:535
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:22
 #: ../xffm/menus/templates/pathbarmenu.hh:33
@@ -452,7 +437,7 @@ msgstr  "挂载卷"
 msgid   "Open in new tab"
 msgstr  "在新标签中打开(O)"
 
-#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/fm/templates/gridview.hh:539 ../xffm/fm/templates/gridview.hh:582
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:30
@@ -461,7 +446,7 @@ msgstr  "在新标签中打开(O)"
 msgid   "Rename"
 msgstr  "重命名(R)"
 
-#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/fm/templates/gridview.hh:540 ../xffm/fm/templates/gridview.hh:583
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:31
@@ -470,15 +455,15 @@ msgstr  "重命名(R)"
 msgid   "Duplicate"
 msgstr  "复制"
 
-#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
-#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/fm/templates/gridview.hh:578 ../xffm/fm/templates/gridview.hh:689
+#: ../xffm/fm/templates/gridview.hh:690
 #: ../xffm/menus/templates/gridviewmenu.hh:17
 #: ../xffm/menus/templates/gridviewmenu.hh:59
 #: ../xffm/menus/templates/gridviewmenu.hh:84
 msgid   "auto"
 msgstr  "自动"
 
-#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:595 ../xffm/fm/templates/gridview.hh:602
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:36
@@ -487,14 +472,14 @@ msgstr  "自动"
 msgid   "Decrypt File..."
 msgstr  "解密文件(D)..."
 
-#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/fm/templates/gridview.hh:597 ../xffm/fm/templates/gridview.hh:600
 #: ../xffm/menus/templates/gridviewmenu.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:96
 msgid   "Encrypt File..."
 msgstr  "加密文件(E)..."
 
-#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/openwith.hh:158
 msgid   "Multiple selections"
 msgstr  "多选"
@@ -516,10 +501,10 @@ msgid   "Go to"
 msgstr  "转到(G)"
 
 #: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
-#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:191
 #: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
-#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
-#: ../xffm/find/templates/findresponse.hh:884
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:824
+#: ../xffm/find/templates/findresponse.hh:839
 msgid   "unknown"
 msgstr  "未知"
 
@@ -574,108 +559,139 @@ msgid   " TTY"
 msgstr  " TTY"
 
 #: ../xffm/fm/templates/prompt.hh:236
-#: ../xffm/menus/templates/menucallbacks.hh:48
+#: ../xffm/menus/templates/menucallbacks.hh:50
 #, c-format
 msgid   "failed to chdir to %s"
 msgstr  "无法切换到目录%s"
 
-#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
+#: ../xffm/fm/templates/properties.hh:122
 msgid   "Properties and Attributes"
 msgstr  "属性和特性"
 
-#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
+#: ../xffm/fm/templates/properties.hh:140
 msgid   "File Mode:"
 msgstr  "文件模式："
 
-#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
-#: ../xffm/response/classes/envresponse.hh:123
+#: ../xffm/fm/templates/properties.hh:167
+#: ../xffm/response/classes/envresponse.hh:126
 msgid   "Apply changes"
 msgstr  "应用更改"
 
-#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
-#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:313
-#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/tarresponse.hh:210
+#: ../xffm/response/templates/efsresponse.hh:181
 #: ../xffm/response/templates/dialogbasic.hh:309
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
 #: ../xffm/response/classes/cpresponse.hh:81
-#: ../xffm/find/templates/findsignals.hh:568
+#: ../xffm/find/templates/findsignals.hh:575
 msgid   "Cancel"
 msgstr  "取消(C)"
 
-#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
+#: ../xffm/fm/templates/properties.hh:358
 msgid   "Encoding"
 msgstr  "编码"
 
-#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
+#: ../xffm/fm/templates/properties.hh:359
 msgid   "Mimetype"
 msgstr  "MIME 类型"
 
-#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
+#: ../xffm/fm/templates/properties.hh:381
 msgid   "Successfully moved to trash."
 msgstr  "成功移入回收站。"
 
-#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
+#: ../xffm/fm/templates/properties.hh:382
 msgid   "Source:"
 msgstr  "来源："
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:22
-msgid   "Move to tab"
-msgstr  "移至标签"
+#: ../xffm/fm/classes/localdir.hh:173 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "正则表达式"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:83
-#: ../xffm/menus/templates/mainMenu.hh:111
-msgid   "Search"
-msgstr  "搜索"
+#: ../xffm/fm/classes/localdir.hh:176
+#, fuzzy, c-format
+msgid   "%s (%s Filtered)"
+msgstr  "(%s 个已过滤)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:112
-msgid   "Open terminal"
-msgstr  "打开终端"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:86
-#: ../xffm/menus/templates/mainMenu.hh:113
-msgid   "Home"
-msgstr  "主文件夹"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:26
-msgid   "Open a New Window"
-msgstr  "打开新窗口"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:40
-msgid   "Icon Size"
-msgstr  "图标大小"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
-msgid   "Color settings"
-msgstr  "颜色设置"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:63
+#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:13
 msgid   "Colors"
 msgstr  "颜色"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:144
+#: ../xffm/fm/classes/fmbuttonbox.hh:27
+msgid   "Switch button"
+msgstr  "切换按钮"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:28 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:113
+msgid   "Search"
+msgstr  "搜索"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:114
+msgid   "Open terminal"
+msgstr  "打开终端"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:115
+msgid   "Home"
+msgstr  "主文件夹"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:31
+msgid   "Open a New Window"
+msgstr  "打开新窗口"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:51
+msgid   "Icon Size"
+msgstr  "图标大小"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:74 ../xffm/menus/templates/mainMenu.hh:68
+msgid   "Color settings"
+msgstr  "颜色设置"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:166
 msgid   "Icon Size:"
 msgstr  "图标尺寸："
 
-#: ../xffm/fm/classes/settings.hh:153
+#: ../xffm/fm/classes/settings.hh:179
 msgid   "New File:"
 msgstr  "新建文件："
 
-#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/fm/classes/root.hh:26 ../xffm/fm/classes/child.hh:266
+msgid   "Disk Mounter"
+msgstr  "磁盘挂载者"
+
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:503
 #: ../xffm/response/templates/efsresponse.hh:40
 msgid   "New"
 msgstr  "新建(N)"
 
-#: ../xffm/fm/classes/root.hh:59
+#: ../xffm/fm/classes/root.hh:62
 msgid   "Trash bin"
 msgstr  "回收站"
+
+#: ../xffm/fm/classes/child.hh:265
+msgid   "Bookmarks"
+msgstr  "书签(B)"
+
+#: ../xffm/fm/classes/basic.hh:35
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  "基本规则:\n"
+        "\n"
+        "*  匹配任何字符 0 或任意次.\n"
+        "?  匹配任何字符 1 次.\n"
 
 #: ../xffm/fm/classes/progress.hh:73
 msgid   "Running"
@@ -697,7 +713,7 @@ msgstr  "文件(F)"
 msgid   "Command history"
 msgstr  "命令历史(M)"
 
-#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:697
 msgid   "User"
 msgstr  "用户"
 
@@ -1054,37 +1070,38 @@ msgid   "The  password  can  be  specified on the command line. Since the "
         "recommended to use this option only for testing purposes."
 msgstr  ""
 
-#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
-#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/fm/classes/ecryptfs.hh:379 ../xffm/fm/classes/ecryptfs.hh:380
+#: ../xffm/fm/classes/ecryptfs.hh:402
 #: ../xffm/response/templates/mountresponse.hh:151
-#: ../xffm/response/templates/efsresponse.hh:138
+#: ../xffm/response/templates/efsresponse.hh:142
 msgid   "Mount"
 msgstr  "安装"
 
-#: ../xffm/fm/classes/ecryptfs.hh:392
-#: ../xffm/response/templates/efsresponse.hh:181
+#: ../xffm/fm/classes/ecryptfs.hh:396
+#: ../xffm/response/templates/tarresponse.hh:214
+#: ../xffm/response/templates/efsresponse.hh:185
 msgid   "Save"
 msgstr  "保存"
 
-#: ../xffm/fm/classes/ecryptfs.hh:612
-#: ../xffm/response/templates/efsresponse.hh:160
-#: ../xffm/find/templates/findresponse.hh:275
-#: ../xffm/find/templates/findresponse.hh:561
-#: ../xffm/find/templates/findresponse.hh:594
+#: ../xffm/fm/classes/ecryptfs.hh:616
+#: ../xffm/response/templates/efsresponse.hh:164
+#: ../xffm/find/templates/findresponse.hh:292
+#: ../xffm/find/templates/findresponse.hh:512
+#: ../xffm/find/templates/findresponse.hh:547
 msgid   "Options"
 msgstr  "选项"
 
-#: ../xffm/fm/classes/ecryptfs.hh:613
-#: ../xffm/response/templates/efsresponse.hh:166
+#: ../xffm/fm/classes/ecryptfs.hh:617
+#: ../xffm/response/templates/efsresponse.hh:170
 msgid   "Advanced"
 msgstr  "高级"
 
-#: ../xffm/fm/classes/ecryptfs.hh:928
+#: ../xffm/fm/classes/ecryptfs.hh:932
 #, c-format
 msgid   "Mounting %s"
 msgstr  "正在挂载 %s"
 
-#: ../xffm/fm/classes/ecryptfs.hh:986
+#: ../xffm/fm/classes/ecryptfs.hh:990
 #, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "输入 %s 的密码"
@@ -1095,10 +1112,10 @@ msgid   "Mount Device"
 msgstr  "挂载设备"
 
 #: ../xffm/response/templates/mountresponse.hh:128
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:484
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:488
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Mount Point"
 msgstr  "挂载点(P)"
 
@@ -1111,6 +1128,10 @@ msgstr  "无法创建目录 '%s'"
 #: ../xffm/response/templates/mkdirresponse.hh:70
 msgid   "Sorry"
 msgstr  "抱歉"
+
+#: ../xffm/response/templates/dialogentry.hh:41
+msgid   "Help"
+msgstr  "帮助(H)"
 
 #: ../xffm/response/templates/fileresponse.hh:37
 msgid   "Select Directory"
@@ -1189,39 +1210,30 @@ msgstr  "使用外部终端："
 msgid   "Cannot find executable for \"%s\""
 msgstr  "无法找到“%s”的可执行文件"
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "GZip"
-msgstr  "GZip"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "BZip2"
-msgstr  "BZip2"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-#, fuzzy
-msgid   "XZ"
-msgstr  "XYZ"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "Zip"
-msgstr  "Zip"
-
-#: ../xffm/response/templates/tarresponse.hh:20
+#: ../xffm/response/templates/tarresponse.hh:34
 msgid   "Compressed file..."
 msgstr  "压缩文件(E)..."
 
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:484
+#: ../xffm/response/templates/tarresponse.hh:174
+msgid   "Target directory:"
+msgstr  "目标目录(E)："
+
+#: ../xffm/response/templates/tarresponse.hh:183
+msgid   "Name:"
+msgstr  "姓名："
+
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:488
 msgid   "Encrypted"
 msgstr  "加密"
 
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Unencrypted"
 msgstr  "未加密"
 
-#: ../xffm/response/templates/efsresponse.hh:485
-#: ../xffm/response/templates/efsresponse.hh:491
+#: ../xffm/response/templates/efsresponse.hh:489
+#: ../xffm/response/templates/efsresponse.hh:495
 msgid   "Folder does not exist"
 msgstr  "文件夹不存在"
 
@@ -1242,7 +1254,7 @@ msgstr  "已完成"
 #: ../xffm/response/classes/lnresponse.hh:10
 #: ../xffm/response/classes/cpresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:9
-#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
+#: ../xffm/find/templates/findresponse.hh:440 ../xffm/find/classes/fgr.hh:124
 msgid   "Path"
 msgstr  "路径"
 
@@ -1255,6 +1267,10 @@ msgstr  "无法创建文件夹“%s”：%s"
 #, fuzzy
 msgid   "Sorry, file not found"
 msgstr  "字体文件未找到"
+
+#: ../xffm/response/templates/regexpresponse.hh:11
+msgid   "foo"
+msgstr  "foo"
 
 #: ../xffm/response/templates/bfishresponse.hh:93
 msgid   "Encrypt:"
@@ -1297,7 +1313,7 @@ msgstr  "密码不符"
 msgid   "The location does not exist."
 msgstr  "位置不存在。"
 
-#: ../xffm/response/dialogs.hh:68
+#: ../xffm/response/dialogs.hh:73
 #, c-format
 msgid   "Delete '%s'"
 msgstr  "删除“%s”"
@@ -1320,15 +1336,15 @@ msgstr  "警告"
 msgid   "You have selected multiple files or folders"
 msgstr  "您选择了多个文件或文件夹"
 
-#: ../xffm/response/classes/envresponse.hh:90
+#: ../xffm/response/classes/envresponse.hh:93
 msgid   "Environment variables"
 msgstr  "环境变量"
 
-#: ../xffm/response/classes/envresponse.hh:122
+#: ../xffm/response/classes/envresponse.hh:125
 msgid   "No changes need to be saved"
 msgstr  "没有需要保存的修改"
 
-#: ../xffm/response/classes/envresponse.hh:217
+#: ../xffm/response/classes/envresponse.hh:220
 msgid   "Environment Variable"
 msgstr  "环境变量"
 
@@ -1344,14 +1360,14 @@ msgstr  "空闲超时"
 msgid   "Workspace Switcher"
 msgstr  "工作区切换器"
 
-#: ../xffm/response/classes/wsresponse.hh:36
-#: ../xffm/menus/templates/menucallbacks.hh:130
+#: ../xffm/response/classes/wsresponse.hh:35
+#: ../xffm/menus/templates/menucallbacks.hh:134
 #, c-format
 msgid   "Workspace %s"
 msgstr  "工作空间 %s"
 
-#: ../xffm/response/classes/wsresponse.hh:37
-#: ../xffm/menus/templates/menucallbacks.hh:131
+#: ../xffm/response/classes/wsresponse.hh:36
+#: ../xffm/menus/templates/menucallbacks.hh:135
 msgid   "does not exist"
 msgstr  "不存在"
 
@@ -1396,225 +1412,217 @@ msgstr  "安全"
 msgid   "No Read Permission"
 msgstr  "没有读取权限"
 
-#: ../xffm/find/templates/findresponse.hh:111
-msgid   "Find files"
-msgstr  "查找文件"
-
-#: ../xffm/find/templates/findresponse.hh:278
-#: ../xffm/find/templates/findresponse.hh:780
+#: ../xffm/find/templates/findresponse.hh:295
+#: ../xffm/find/templates/findresponse.hh:735
 msgid   "Advanced options"
 msgstr  "高级选项"
 
-#: ../xffm/find/templates/findresponse.hh:286
+#: ../xffm/find/templates/findresponse.hh:303
 msgid   "Find in Files"
 msgstr  "在多个文件中查找"
 
-#: ../xffm/find/templates/findresponse.hh:290
-#: ../xffm/find/templates/findresponse.hh:312
+#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:329
 msgid   "Cancel Operation"
 msgstr  "取消操作"
 
-#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:324
 msgid   "Show search results for this query"
 msgstr  "显示本次查询的搜索结果结果"
 
-#: ../xffm/find/templates/findresponse.hh:323
-#: ../xffm/find/templates/findresponse.hh:327
+#: ../xffm/find/templates/findresponse.hh:340
+#: ../xffm/find/templates/findresponse.hh:344
 msgid   "Clear search"
 msgstr  "清空搜索"
 
-#: ../xffm/find/templates/findresponse.hh:503
-msgid   "Show help"
-msgstr  "显示帮助"
-
-#: ../xffm/find/templates/findresponse.hh:532
+#: ../xffm/find/templates/findresponse.hh:483
 msgid   "Case Sensitive"
 msgstr  "区分大小写"
 
-#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findresponse.hh:484
 msgid   "Extended regexp"
 msgstr  "扩展的正则表达式"
 
-#: ../xffm/find/templates/findresponse.hh:534
+#: ../xffm/find/templates/findresponse.hh:485
 msgid   "Include binary files"
 msgstr  "包含二进制文件"
 
-#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
+#: ../xffm/find/templates/findresponse.hh:486 ../xffm/find/classes/fgr.hh:212
 msgid   "Line Count"
 msgstr  "行数"
 
-#: ../xffm/find/templates/findresponse.hh:544
+#: ../xffm/find/templates/findresponse.hh:495
 msgid   "Anywhere"
 msgstr  "任何地方"
 
-#: ../xffm/find/templates/findresponse.hh:545
+#: ../xffm/find/templates/findresponse.hh:496
 msgid   "Whole words only"
 msgstr  "匹配整个单词(W)"
 
-#: ../xffm/find/templates/findresponse.hh:546
+#: ../xffm/find/templates/findresponse.hh:497
 msgid   "lines"
 msgstr  "行"
 
-#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
+#: ../xffm/find/templates/findresponse.hh:498 ../xffm/find/classes/fgr.hh:210
 msgid   "No match"
 msgstr  "无匹配"
 
-#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
+#: ../xffm/find/templates/findresponse.hh:522 ../xffm/find/classes/fgr.hh:126
 msgid   "Filter:"
 msgstr  "过滤规则(I)："
 
-#: ../xffm/find/templates/findresponse.hh:577
-#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
+#: ../xffm/find/templates/findresponse.hh:530
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:146
 msgid   "Recursive"
 msgstr  "递归"
 
-#: ../xffm/find/templates/findresponse.hh:578
-#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
+#: ../xffm/find/templates/findresponse.hh:531
+#: ../xffm/find/templates/findsignals.hh:306 ../xffm/find/classes/fgr.hh:142
 msgid   "Find hidden files and directories"
 msgstr  "查找隐藏目录和文件"
 
-#: ../xffm/find/templates/findresponse.hh:580
-#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
+#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findsignals.hh:315 ../xffm/find/classes/fgr.hh:138
 msgid   "Stay on single filesystem"
 msgstr  "局限于单文件系统"
 
-#: ../xffm/find/templates/findresponse.hh:582
+#: ../xffm/find/templates/findresponse.hh:535
 msgid   "Upper limit"
 msgstr  "上限"
 
-#: ../xffm/find/templates/findresponse.hh:583
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findresponse.hh:536
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Results"
 msgstr  "结果"
 
-#: ../xffm/find/templates/findresponse.hh:602
+#: ../xffm/find/templates/findresponse.hh:555
 msgid   "Contains the text"
 msgstr  "含有文本(T)"
 
-#: ../xffm/find/templates/findresponse.hh:667
-#: ../xffm/find/templates/findsignals.hh:318
+#: ../xffm/find/templates/findresponse.hh:622
+#: ../xffm/find/templates/findsignals.hh:321
 msgid   "File size"
 msgstr  "文件大小"
 
-#: ../xffm/find/templates/findresponse.hh:680
+#: ../xffm/find/templates/findresponse.hh:635
 msgid   "At Least"
 msgstr  "至少"
 
-#: ../xffm/find/templates/findresponse.hh:680
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:635
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "kBytes"
 msgstr  "千字节"
 
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "At Most"
 msgstr  "最多"
 
-#: ../xffm/find/templates/findresponse.hh:695
-#: ../xffm/find/templates/findsignals.hh:324
+#: ../xffm/find/templates/findresponse.hh:650
+#: ../xffm/find/templates/findsignals.hh:327
 msgid   "Specific Time"
 msgstr  "特定时间"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Modified"
 msgstr  "已修改"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Created"
 msgstr  "已创建"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Accessed"
 msgstr  "已访问过"
 
-#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/templates/findresponse.hh:661 ../xffm/find/classes/fgr.hh:166
 #: ../xffm/find/classes/fgr.hh:168
 msgid   "Minutes"
 msgstr  "分钟"
 
-#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/templates/findresponse.hh:665 ../xffm/find/classes/fgr.hh:169
 #: ../xffm/find/classes/fgr.hh:171
 msgid   "Hours"
 msgstr  "小时"
 
-#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/templates/findresponse.hh:669 ../xffm/find/classes/fgr.hh:172
 #: ../xffm/find/classes/fgr.hh:174
 msgid   "Days"
 msgstr  "天"
 
-#: ../xffm/find/templates/findresponse.hh:718
+#: ../xffm/find/templates/findresponse.hh:673
 msgid   "Months"
 msgstr  "月"
 
-#: ../xffm/find/templates/findresponse.hh:729
-#: ../xffm/find/templates/findsignals.hh:329
+#: ../xffm/find/templates/findresponse.hh:684
+#: ../xffm/find/templates/findsignals.hh:332
 msgid   "File properties"
 msgstr  "文件属性"
 
-#: ../xffm/find/templates/findresponse.hh:748
+#: ../xffm/find/templates/findresponse.hh:703
 msgid   "Group"
 msgstr  "组"
 
-#: ../xffm/find/templates/findresponse.hh:753
-#: ../xffm/find/templates/findsignals.hh:175
+#: ../xffm/find/templates/findresponse.hh:708
+#: ../xffm/find/templates/findsignals.hh:178
 msgid   "Octal Permissions"
 msgstr  "八进制权限"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:761
-#: ../xffm/find/templates/findsignals.hh:161
-#: ../xffm/find/templates/findsignals.hh:167
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:716
+#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findsignals.hh:170
 msgid   "Executable"
 msgstr  "可执行文件"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:765
-#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:720
+#: ../xffm/find/templates/findsignals.hh:167
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/templates/findresponse.hh:801
+#: ../xffm/find/templates/findresponse.hh:756
 msgid   "File type : "
 msgstr  "文件类型 : "
 
-#: ../xffm/find/templates/findsignals.hh:86
+#: ../xffm/find/templates/findsignals.hh:89
 msgid   "Searching..."
 msgstr  "搜索中..."
 
-#: ../xffm/find/templates/findsignals.hh:441
-#: ../xffm/find/templates/dndbox.hh:65
+#: ../xffm/find/templates/findsignals.hh:448
+#: ../xffm/find/templates/dndbox.hh:66
 msgid   "No editor for current action."
 msgstr  "当前操作无编辑器。"
 
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Upper limit:"
 msgstr  "上限："
 
-#: ../xffm/find/templates/findsignals.hh:511
+#: ../xffm/find/templates/findsignals.hh:518
 msgid   "Counting files..."
 msgstr  "正在统计文件..."
 
-#: ../xffm/find/templates/findsignals.hh:519
+#: ../xffm/find/templates/findsignals.hh:526
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "找到 %d 项匹配"
 
-#: ../xffm/find/templates/findsignals.hh:521
+#: ../xffm/find/templates/findsignals.hh:528
 #, c-format
 msgid   "%s Finished : %s"
 msgstr  "%s 已完成：%s"
 
-#: ../xffm/find/templates/dndbox.hh:126
+#: ../xffm/find/templates/dndbox.hh:128
 #, fuzzy
 msgid   "Edit all"
 msgstr  "编辑一个账单"
 
-#: ../xffm/find/templates/dndbox.hh:139
+#: ../xffm/find/templates/dndbox.hh:141
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "%s  作为搜索结果关键字"
 
-#: ../xffm/find/templates/dndbox.hh:259
+#: ../xffm/find/templates/dndbox.hh:261
 msgid   "Search results"
 msgstr  "搜索结果"
 
@@ -1759,10 +1767,6 @@ msgstr  "内容视图"
 msgid   "STRING"
 msgstr  "字符串"
 
-#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
-msgid   "Regular expression"
-msgstr  "正则表达式"
-
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Extended"
 msgstr  "扩展"
@@ -1788,24 +1792,15 @@ msgstr  "行"
 msgid   "Usage : %s [OPTIONS]\n"
 msgstr  "运用选择 : %s [OPTIONS]\n"
 
+#: ../xffm/find/classes/historyentry.hh:136
+msgid   "Show help"
+msgstr  "显示帮助"
+
 #: ../xffm/find/classes/ffunctions.hh:9
 msgid   "Regular"
 msgstr  "常规"
 
-#: ../xffm/find/classes/ffunctions.hh:42
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  "基本规则:\n"
-        "\n"
-        "*  匹配任何字符 0 或任意次.\n"
-        "?  匹配任何字符 1 次.\n"
-
-#: ../xffm/find/classes/ffunctions.hh:51
+#: ../xffm/find/classes/ffunctions.hh:41
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
@@ -1848,8 +1843,8 @@ msgstr  ""
 #: ../xffm/menus/templates/pathbarmenu.hh:34
 #: ../xffm/menus/templates/pathbarmenu.hh:46
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:89
+#: ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
 msgid   "Open in New Window"
 msgstr  "在新窗口中打开(W)"
 
@@ -1863,8 +1858,8 @@ msgstr  "在新窗口中打开(W)"
 #: ../xffm/menus/templates/outputMenu.hh:29
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:94 ../xffm/menus/templates/menu.hh:173
 msgid   "Show Clipboard"
 msgstr  "显示剪贴板(C)"
 
@@ -1917,30 +1912,26 @@ msgid   "Default Color"
 msgstr  "默认颜色"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:53
-#: ../xffm/menus/templates/mainMenu.hh:90
+#: ../xffm/menus/templates/mainMenu.hh:54
+#: ../xffm/menus/templates/mainMenu.hh:92
 msgid   "Environment"
 msgstr  "环境"
 
 #: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:96
 msgid   "Exit"
 msgstr  "退出(X)"
 
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:79
-#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/mainMenu.hh:119
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Toggle Text Mode"
 msgstr  "切换文本模式"
 
-#: ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:95
 msgid   "Clear Clipboard History"
 msgstr  "清除剪贴板历史(L)"
-
-#: ../xffm/menus/templates/mainMenu.hh:199
-msgid   "menu"
-msgstr  "菜单"
 

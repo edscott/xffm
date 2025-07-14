@@ -1,15 +1,12 @@
-# Xffm4 translation file: Wed Jun 11 17:06:56 CST 2025
+# Xffm4 translation file: lun 14 jul 2025 16:36:11 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
-#: ../xffm/fm/classes/ecryptfs.hh:189
-#: ../xffm/response/classes/envresponse.hh:92
-#: ../xffm/response/classes/cpresponse.hh:44
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-06-09 16:21-0600\n"
+        "POT-Creation-Date: 2025-07-14 16:34-0600\n"
         "PO-Revision-Date: 2007-08-06 15:08+0530\n"
         "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
         "Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
@@ -22,13 +19,13 @@ msgstr  "Project-Id-Version: xffm4\n"
         "\n"
         "\n"
 
-#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:695
+#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:729
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:36
 #: ../xffm/menus/templates/pathbarmenu.hh:48
 #: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/menu.hh:174 ../xffm/menus/templates/menu.hh:179
+#: ../xffm/menus/templates/menu.hh:175 ../xffm/menus/templates/menu.hh:180
 #, fuzzy
 msgid   "Clipboard is empty."
 msgstr  "ક્લિપબોર્ડ ખાલી છે"
@@ -38,38 +35,22 @@ msgstr  "ક્લિપબોર્ડ ખાલી છે"
 msgid   "Clipboard contents"
 msgstr  "ક્લિપબોર્ડની વિગતો રાખો"
 
-#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:460
+#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:495
 #, fuzzy
 msgid   "Invalid clip"
 msgstr  "અયોગ્ય કોલ"
 
-#: ../xffm/fm/templates/workdir.hh:46 ../xffm/fm/templates/workdir.hh:242
-#: ../xffm/fm/templates/fstabmonitor.hh:366
-#: ../xffm/fm/templates/gridview.hh:143 ../xffm/fm/classes/root.hh:22
-#: ../xffm/fm/classes/fstab.hh:41 ../xffm/fm/classes/fstab.hh:116
-#: ../xffm/fm/classes/fstab.hh:261 ../xffm/menus/templates/mainMenu.hh:221
-msgid   "Disk Mounter"
-msgstr  "ડિસ્ક માઉન્ટ કરનાર"
-
-#: ../xffm/fm/templates/workdir.hh:237 ../xffm/fm/templates/dnd.hh:531
-#: ../xffm/fm/templates/gridview.hh:142 ../xffm/fm/templates/basicpathbar.hh:54
-#: ../xffm/fm/classes/root.hh:13 ../xffm/response/templates/fileresponse.hh:194
-#: ../xffm/menus/templates/menucallbacks.hh:248
-#: ../xffm/menus/templates/mainMenu.hh:218
-msgid   "Bookmarks"
-msgstr  "બુકમાર્કો (B)"
-
-#: ../xffm/fm/templates/workdir.hh:249
+#: ../xffm/fm/templates/workdir.hh:250
 #, c-format
 msgid   "The %s utility is not installed."
 msgstr  "%s ઉપયોગીતા સ્થાપિત નથી."
 
-#: ../xffm/fm/templates/workdir.hh:270
+#: ../xffm/fm/templates/workdir.hh:271
 #, fuzzy
 msgid   "Trash is empty"
 msgstr  "ટૅબલેટ ખાલી છે"
 
-#: ../xffm/fm/templates/workdir.hh:291
+#: ../xffm/fm/templates/workdir.hh:292
 #, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "વોલ્યુમ '%s' એ માઉન્ટ થયેલ નથી."
@@ -145,21 +126,21 @@ msgstr  "મારી નાંખો (K)"
 msgid   "Segmentation fault"
 msgstr  "વિભાગનુ ખંડન"
 
-#: ../xffm/fm/templates/dnd.hh:639
+#: ../xffm/fm/templates/dnd.hh:638
 msgid   "Target"
 msgstr  "લક્ષ્ય"
 
-#: ../xffm/fm/templates/dnd.hh:640
+#: ../xffm/fm/templates/dnd.hh:639
 msgid   "Source"
 msgstr  "સ્રોત"
 
-#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:648 ../xffm/fm/templates/dnd.hh:683
 #, fuzzy
 msgid   "Invalid target folder"
 msgstr  "અયોગ્ય દલીલ મૂલ્ય"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:507
-#: ../xffm/fm/templates/gridview.hh:550
+#: ../xffm/fm/templates/dnd.hh:670 ../xffm/fm/templates/gridview.hh:541
+#: ../xffm/fm/templates/gridview.hh:584
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:62
@@ -167,40 +148,40 @@ msgstr  "અયોગ્ય દલીલ મૂલ્ય"
 msgid   "Link"
 msgstr  "કડી કરો (L)"
 
-#: ../xffm/fm/templates/dnd.hh:684
+#: ../xffm/fm/templates/dnd.hh:683
 msgid   "Drag:"
 msgstr  "ખેંચો (g):"
 
-#: ../xffm/fm/templates/dnd.hh:722
+#: ../xffm/fm/templates/dnd.hh:721
 msgid   "files"
 msgstr  "ફાઇલો"
 
-#: ../xffm/fm/templates/dnd.hh:723
+#: ../xffm/fm/templates/dnd.hh:722
 #, fuzzy, c-format
 msgid   "+ %s more"
 msgstr  "...સાથે %s વધુ"
 
-#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
+#: ../xffm/fm/templates/dnd.hh:729 ../xffm/fm/classes/bash.hh:653
 msgid   "file"
 msgstr  "ફાઇલ"
 
-#: ../xffm/fm/templates/dnd.hh:731
+#: ../xffm/fm/templates/dnd.hh:730
 msgid   ": "
 msgstr  ": "
 
-#: ../xffm/fm/templates/window.hh:248
+#: ../xffm/fm/templates/window.hh:272
 #: ../xffm/response/templates/openwith.hh:137
 #: ../xffm/response/templates/dialogbasic.hh:304
-#: ../xffm/find/templates/dndbox.hh:153
+#: ../xffm/find/templates/dndbox.hh:155
 msgid   "Close"
 msgstr  "બંધ કરો (C)"
 
-#: ../xffm/fm/templates/window.hh:505
+#: ../xffm/fm/templates/window.hh:544
 msgid   "Long press time"
 msgstr  "લાંબો દબાણ સમય"
 
-#: ../xffm/fm/templates/window.hh:513 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:504 ../xffm/fm/templates/gridview.hh:547
+#: ../xffm/fm/templates/window.hh:552 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:538 ../xffm/fm/templates/gridview.hh:581
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:44
@@ -211,8 +192,8 @@ msgstr  "લાંબો દબાણ સમય"
 msgid   "Cut"
 msgstr  "કાપો (t)"
 
-#: ../xffm/fm/templates/window.hh:515 ../xffm/fm/templates/gridview.hh:396
-#: ../xffm/fm/templates/gridview.hh:503 ../xffm/fm/templates/gridview.hh:546
+#: ../xffm/fm/templates/window.hh:554 ../xffm/fm/templates/gridview.hh:430
+#: ../xffm/fm/templates/gridview.hh:537 ../xffm/fm/templates/gridview.hh:580
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:28
@@ -228,9 +209,9 @@ msgstr  "કાપો (t)"
 msgid   "Copy"
 msgstr  "નકલ કરો (C)"
 
-#: ../xffm/fm/templates/window.hh:517 ../xffm/fm/templates/window.hh:616
-#: ../xffm/fm/templates/window.hh:643 ../xffm/fm/templates/gridview.hh:530
-#: ../xffm/fm/templates/gridview.hh:694
+#: ../xffm/fm/templates/window.hh:556 ../xffm/fm/templates/window.hh:664
+#: ../xffm/fm/templates/window.hh:691 ../xffm/fm/templates/gridview.hh:564
+#: ../xffm/fm/templates/gridview.hh:728
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:24
 #: ../xffm/menus/templates/pathbarmenu.hh:35
@@ -240,29 +221,24 @@ msgstr  "નકલ કરો (C)"
 #: ../xffm/menus/templates/inputMenu.hh:45
 #: ../xffm/menus/templates/inputMenu.hh:61
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:80
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:67
 #: ../xffm/menus/templates/gridviewmenu.hh:90
-#: ../xffm/menus/templates/menu.hh:166
+#: ../xffm/menus/templates/menu.hh:167
 msgid   "Paste"
 msgstr  "ચોંટાડો (P)"
 
-#: ../xffm/fm/templates/window.hh:519
+#: ../xffm/fm/templates/window.hh:558
 msgid   "New Tab"
 msgstr  "નવી ટેબ (T)"
 
-#: ../xffm/fm/templates/window.hh:520 ../xffm/fm/templates/window.hh:522
+#: ../xffm/fm/templates/window.hh:559 ../xffm/fm/templates/window.hh:561
 msgid   "Main menu"
 msgstr  "મુખ્ય મેનુ"
 
-#: ../xffm/fm/templates/window.hh:592
-#, fuzzy
-msgid   "Directory name: "
-msgstr  "ડિરેક્ટરી સ્થિતિ:"
-
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:26
 #: ../xffm/menus/templates/inputMenu.hh:41
@@ -272,109 +248,112 @@ msgstr  "ડિરેક્ટરી સ્થિતિ:"
 #: ../xffm/menus/templates/outputMenu.hh:38
 #: ../xffm/menus/templates/outputMenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 msgid   "Select All"
 msgstr  "બધું પસંદ કરો"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
+#: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:53
+#: ../xffm/menus/templates/mainMenu.hh:78
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "રૅગ્યુલર એક્સપ્રેશન તરીકે બંધબેસાડો (r)"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
 #: ../xffm/menus/templates/mainMenu.hh:28
 msgid   "Show"
 msgstr  "બતાવો"
 
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:96
-#: ../xffm/menus/templates/mainMenu.hh:119
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:159
-#, fuzzy
-msgid   "Hidden files"
-msgstr  "છુપાયેલ ફાઇલ"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:618
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:97
-#: ../xffm/menus/templates/mainMenu.hh:120
-#: ../xffm/menus/templates/mainMenu.hh:133
-#: ../xffm/menus/templates/mainMenu.hh:160
-#, fuzzy
-msgid   "Backup files"
-msgstr  "બૅક-અપ ફાઈલ"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/menus/templates/mainMenu.hh:32
-#, fuzzy
-msgid   "Sort mode"
-msgstr  "ક્રમમાં ગોઠવવાનો ક્રમ"
-
-#: ../xffm/fm/templates/window.hh:612 ../xffm/fm/templates/window.hh:666
-#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:29
 #: ../xffm/menus/templates/mainMenu.hh:98
 #: ../xffm/menus/templates/mainMenu.hh:121
 #: ../xffm/menus/templates/mainMenu.hh:134
 #: ../xffm/menus/templates/mainMenu.hh:161
+#, fuzzy
+msgid   "Hidden files"
+msgstr  "છુપાયેલ ફાઇલ"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
+#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:122
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:162
+#, fuzzy
+msgid   "Backup files"
+msgstr  "બૅક-અપ ફાઈલ"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/menus/templates/mainMenu.hh:32
+#, fuzzy
+msgid   "Sort mode"
+msgstr  "ક્રમમાં ગોઠવવાનો ક્રમ"
+
+#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:715
+#: ../xffm/menus/templates/mainMenu.hh:34
+#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/menus/templates/mainMenu.hh:123
+#: ../xffm/menus/templates/mainMenu.hh:136
+#: ../xffm/menus/templates/mainMenu.hh:163
 msgid   "Descending"
 msgstr  "ઊતરતો ક્રમ"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:676
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:715
 #: ../xffm/response/templates/fileresponse.hh:231
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:99
-#: ../xffm/menus/templates/mainMenu.hh:122
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:165
-msgid   "Name"
-msgstr  "નામ"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:364
-#: ../xffm/fm/classes/properties.hh:363 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:100
-#: ../xffm/menus/templates/mainMenu.hh:123
-#: ../xffm/menus/templates/mainMenu.hh:142
-#: ../xffm/menus/templates/mainMenu.hh:162
-msgid   "Date"
-msgstr  "તારીખ"
-
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/fm/templates/properties.hh:363
-#: ../xffm/fm/classes/properties.hh:362 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:101
 #: ../xffm/menus/templates/mainMenu.hh:124
 #: ../xffm/menus/templates/mainMenu.hh:143
-#: ../xffm/menus/templates/mainMenu.hh:163
-msgid   "Size"
-msgstr  "માપ"
+#: ../xffm/menus/templates/mainMenu.hh:167
+msgid   "Name"
+msgstr  "નામ"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:619
-#: ../xffm/fm/templates/window.hh:666 ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:364
+#: ../xffm/fm/classes/child.hh:303 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:102
 #: ../xffm/menus/templates/mainMenu.hh:125
 #: ../xffm/menus/templates/mainMenu.hh:144
 #: ../xffm/menus/templates/mainMenu.hh:164
+msgid   "Date"
+msgstr  "તારીખ"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:363
+#: ../xffm/fm/classes/child.hh:304 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:126
+#: ../xffm/menus/templates/mainMenu.hh:145
+#: ../xffm/menus/templates/mainMenu.hh:165
+msgid   "Size"
+msgstr  "માપ"
+
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
+#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/classes/child.hh:305
+#: ../xffm/menus/templates/mainMenu.hh:38
+#: ../xffm/menus/templates/mainMenu.hh:104
+#: ../xffm/menus/templates/mainMenu.hh:127
+#: ../xffm/menus/templates/mainMenu.hh:146
+#: ../xffm/menus/templates/mainMenu.hh:166
 #, fuzzy
 msgid   "File type"
 msgstr  "ફાઈલનો પ્રકાર (t):"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/window.hh:662
+#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:710
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:200
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:202
 #, fuzzy
 msgid   "Apply modifications"
 msgstr  "કાર્યક્રમો"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:641
-#: ../xffm/fm/templates/gridview.hh:521 ../xffm/menus/templates/mainMenu.hh:58
-#: ../xffm/menus/templates/mainMenu.hh:80
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:689
+#: ../xffm/fm/templates/gridview.hh:555 ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:82
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:68
 #: ../xffm/menus/templates/gridviewmenu.hh:92
@@ -382,32 +361,39 @@ msgstr  "કાર્યક્રમો"
 msgid   "Add bookmark"
 msgstr  "બુકમાર્ક ઉમેરો"
 
-#: ../xffm/fm/templates/window.hh:616 ../xffm/fm/templates/window.hh:642
-#: ../xffm/fm/templates/gridview.hh:481 ../xffm/fm/templates/gridview.hh:524
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:690
+#: ../xffm/fm/templates/gridview.hh:515 ../xffm/fm/templates/gridview.hh:558
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:83
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Remove bookmark"
 msgstr  "બુકમાર્ક દૂર કરો"
 
-#: ../xffm/fm/templates/window.hh:622 ../xffm/menus/templates/mainMenu.hh:25
-#: ../xffm/menus/templates/mainMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:77
+#: ../xffm/fm/templates/window.hh:670 ../xffm/menus/templates/mainMenu.hh:25
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:79
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "કચરાપેટી ખાલી કરો (E)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:545
+#: ../xffm/fm/templates/gridview.hh:95
+#: ../xffm/response/templates/regexpresponse.hh:44
+#: ../xffm/response/templates/regexpresponse.hh:49
+#, fuzzy
+msgid   "Regular Expression syntax is incorrect"
+msgstr  "નિયમિત સમીકરણ ખાલી નથી!"
+
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:579
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:58
 #: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Open with"
 msgstr  "ની સાથે ખોલો (w)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:509
-#: ../xffm/fm/templates/gridview.hh:552
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:543
+#: ../xffm/fm/templates/gridview.hh:586
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -426,32 +412,32 @@ msgstr  "ની સાથે ખોલો (w)"
 msgid   "Delete"
 msgstr  "કાઢી નાંખો (D)"
 
-#: ../xffm/fm/templates/gridview.hh:396 ../xffm/fm/templates/gridview.hh:502
-#: ../xffm/response/templates/tarresponse.hh:21
+#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:21
 #: ../xffm/menus/templates/gridviewmenu.hh:72
 #: ../xffm/menus/templates/gridviewmenu.hh:98
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "પસંદ કરેલ વસ્તુઓ સાથે સંકોચેલ પેટી બનાવો"
 
-#: ../xffm/fm/templates/gridview.hh:435 ../xffm/fm/templates/gridview.hh:479
-#: ../xffm/fm/templates/gridview.hh:508 ../xffm/fm/templates/gridview.hh:551
+#: ../xffm/fm/templates/gridview.hh:469 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:542 ../xffm/fm/templates/gridview.hh:585
 #: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:95
 msgid   "Properties"
 msgstr  "ગુણધર્મો"
 
-#: ../xffm/fm/templates/gridview.hh:438 ../xffm/fm/templates/gridview.hh:459
-#: ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/fm/templates/gridview.hh:472 ../xffm/fm/templates/gridview.hh:493
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:56
 #: ../xffm/menus/templates/gridviewmenu.hh:80
 msgid   "Unmount Volume"
 msgstr  "વોલ્યુમને અનમાઉન્ટ કરો (m)"
 
-#: ../xffm/fm/templates/gridview.hh:441 ../xffm/fm/templates/gridview.hh:462
-#: ../xffm/fm/templates/gridview.hh:539
+#: ../xffm/fm/templates/gridview.hh:475 ../xffm/fm/templates/gridview.hh:496
+#: ../xffm/fm/templates/gridview.hh:573
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:55
@@ -459,7 +445,7 @@ msgstr  "વોલ્યુમને અનમાઉન્ટ કરો (m)"
 msgid   "Mount Volume"
 msgstr  "વોલ્યુમને માઉન્ટ કરો (M)"
 
-#: ../xffm/fm/templates/gridview.hh:501
+#: ../xffm/fm/templates/gridview.hh:535
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:22
 #: ../xffm/menus/templates/pathbarmenu.hh:33
@@ -471,7 +457,7 @@ msgstr  "વોલ્યુમને માઉન્ટ કરો (M)"
 msgid   "Open in new tab"
 msgstr  "નવી ટૅબ ખોલો"
 
-#: ../xffm/fm/templates/gridview.hh:505 ../xffm/fm/templates/gridview.hh:548
+#: ../xffm/fm/templates/gridview.hh:539 ../xffm/fm/templates/gridview.hh:582
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:30
@@ -480,7 +466,7 @@ msgstr  "નવી ટૅબ ખોલો"
 msgid   "Rename"
 msgstr  "નામ ને બદલો"
 
-#: ../xffm/fm/templates/gridview.hh:506 ../xffm/fm/templates/gridview.hh:549
+#: ../xffm/fm/templates/gridview.hh:540 ../xffm/fm/templates/gridview.hh:583
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:31
@@ -489,15 +475,15 @@ msgstr  "નામ ને બદલો"
 msgid   "Duplicate"
 msgstr  "નકલ બનાવો (D)"
 
-#: ../xffm/fm/templates/gridview.hh:544 ../xffm/fm/templates/gridview.hh:655
-#: ../xffm/fm/templates/gridview.hh:656
+#: ../xffm/fm/templates/gridview.hh:578 ../xffm/fm/templates/gridview.hh:689
+#: ../xffm/fm/templates/gridview.hh:690
 #: ../xffm/menus/templates/gridviewmenu.hh:17
 #: ../xffm/menus/templates/gridviewmenu.hh:59
 #: ../xffm/menus/templates/gridviewmenu.hh:84
 msgid   "auto"
 msgstr  "આપોઆપ"
 
-#: ../xffm/fm/templates/gridview.hh:561 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:595 ../xffm/fm/templates/gridview.hh:602
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:36
@@ -507,7 +493,7 @@ msgstr  "આપોઆપ"
 msgid   "Decrypt File..."
 msgstr  "ફાઈલ ડિક્રિપ્ટ કરો"
 
-#: ../xffm/fm/templates/gridview.hh:563 ../xffm/fm/templates/gridview.hh:566
+#: ../xffm/fm/templates/gridview.hh:597 ../xffm/fm/templates/gridview.hh:600
 #: ../xffm/menus/templates/gridviewmenu.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:96
@@ -515,7 +501,7 @@ msgstr  "ફાઈલ ડિક્રિપ્ટ કરો"
 msgid   "Encrypt File..."
 msgstr  "ફાઈલ એનક્રિપ્ટ કરો"
 
-#: ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/openwith.hh:158
 #, fuzzy
 msgid   "Multiple selections"
@@ -539,10 +525,10 @@ msgid   "Go to"
 msgstr  "%s પર જાવ"
 
 #: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
-#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:189
+#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:191
 #: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
-#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:869
-#: ../xffm/find/templates/findresponse.hh:884
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:824
+#: ../xffm/find/templates/findresponse.hh:839
 msgid   "unknown"
 msgstr  "અજ્ઞાત"
 
@@ -598,114 +584,144 @@ msgid   " TTY"
 msgstr  ""
 
 #: ../xffm/fm/templates/prompt.hh:236
-#: ../xffm/menus/templates/menucallbacks.hh:48
+#: ../xffm/menus/templates/menucallbacks.hh:50
 #, fuzzy, c-format
 msgid   "failed to chdir to %s"
 msgstr  "%s ને આયાત કરવામાં નિષ્ફળ"
 
-#: ../xffm/fm/templates/properties.hh:122 ../xffm/fm/classes/properties.hh:121
+#: ../xffm/fm/templates/properties.hh:122
 #, fuzzy
 msgid   "Properties and Attributes"
 msgstr  "બધા ગુણધર્મોને સાચવો"
 
-#: ../xffm/fm/templates/properties.hh:140 ../xffm/fm/classes/properties.hh:139
+#: ../xffm/fm/templates/properties.hh:140
 msgid   "File Mode:"
 msgstr  "ફાઇલ સ્થિતિ:"
 
-#: ../xffm/fm/templates/properties.hh:167 ../xffm/fm/classes/properties.hh:166
-#: ../xffm/response/classes/envresponse.hh:123
+#: ../xffm/fm/templates/properties.hh:167
+#: ../xffm/response/classes/envresponse.hh:126
 msgid   "Apply changes"
 msgstr  "ફેરફારો લાગુ કરો"
 
-#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:388
-#: ../xffm/fm/classes/properties.hh:168
+#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:313
-#: ../xffm/response/templates/efsresponse.hh:177
+#: ../xffm/response/templates/tarresponse.hh:210
+#: ../xffm/response/templates/efsresponse.hh:181
 #: ../xffm/response/templates/dialogbasic.hh:309
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
 #: ../xffm/response/classes/cpresponse.hh:81
-#: ../xffm/find/templates/findsignals.hh:568
+#: ../xffm/find/templates/findsignals.hh:575
 msgid   "Cancel"
 msgstr  "રદ કરો"
 
-#: ../xffm/fm/templates/properties.hh:358 ../xffm/fm/classes/properties.hh:357
+#: ../xffm/fm/templates/properties.hh:358
 msgid   "Encoding"
 msgstr  "એન્કોડિંગ"
 
-#: ../xffm/fm/templates/properties.hh:359 ../xffm/fm/classes/properties.hh:358
+#: ../xffm/fm/templates/properties.hh:359
 msgid   "Mimetype"
 msgstr  "માઇમપ્રકાર"
 
-#: ../xffm/fm/templates/properties.hh:381 ../xffm/fm/classes/properties.hh:380
+#: ../xffm/fm/templates/properties.hh:381
 msgid   "Successfully moved to trash."
 msgstr  "સફળતાપૂર્વક કચરાપેટીમાં ખસેડાયું."
 
-#: ../xffm/fm/templates/properties.hh:382 ../xffm/fm/classes/properties.hh:381
+#: ../xffm/fm/templates/properties.hh:382
 msgid   "Source:"
 msgstr  "સ્ત્રોત:"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:22
-#, fuzzy
-msgid   "Move to tab"
-msgstr  "કચરાપેટીમાં ખસેડો (M)"
+#: ../xffm/fm/classes/localdir.hh:173 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/find/classes/fgr.hh:204
+msgid   "Regular expression"
+msgstr  "નિયમિત સમીકરણ (R)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:23 ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:83
-#: ../xffm/menus/templates/mainMenu.hh:111
+#: ../xffm/fm/classes/localdir.hh:176
+#, fuzzy, c-format
+msgid   "%s (%s Filtered)"
+msgstr  "%s (%d વસ્તુ)"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:13
+msgid   "Colors"
+msgstr  "રંગો"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:27
+msgid   "Switch button"
+msgstr  "સ્વીચ બટન"
+
+#: ../xffm/fm/classes/fmbuttonbox.hh:28 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:113
 msgid   "Search"
 msgstr  "શોધો (S)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:24 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:112
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:114
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "ટર્મિનલ ખોલો"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:25 ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:86
-#: ../xffm/menus/templates/mainMenu.hh:113
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:115
 msgid   "Home"
 msgstr  "ઘર"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:26
+#: ../xffm/fm/classes/fmbuttonbox.hh:31
 msgid   "Open a New Window"
 msgstr  "નવી વિન્ડોમાં ખોલો"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:40
+#: ../xffm/fm/classes/fmbuttonbox.hh:51
 msgid   "Icon Size"
 msgstr  "ચિહ્ન માપ"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:62 ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/fm/classes/fmbuttonbox.hh:74 ../xffm/menus/templates/mainMenu.hh:68
 msgid   "Color settings"
 msgstr  "રંગ ગોઠવણીઓ"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:63
-msgid   "Colors"
-msgstr  "રંગો"
-
-#: ../xffm/fm/classes/fmbuttonbox.hh:144
+#: ../xffm/fm/classes/fmbuttonbox.hh:166
 #, fuzzy
 msgid   "Icon Size:"
 msgstr  "ચિહ્ન માપ"
 
-#: ../xffm/fm/classes/settings.hh:153
+#: ../xffm/fm/classes/settings.hh:179
 #, fuzzy
 msgid   "New File:"
 msgstr  "નવી ફાઇલ"
 
-#: ../xffm/fm/classes/root.hh:35 ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/fm/classes/root.hh:26 ../xffm/fm/classes/child.hh:266
+msgid   "Disk Mounter"
+msgstr  "ડિસ્ક માઉન્ટ કરનાર"
+
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:503
 #: ../xffm/response/templates/efsresponse.hh:40
 msgid   "New"
 msgstr  "નવુ"
 
-#: ../xffm/fm/classes/root.hh:59
+#: ../xffm/fm/classes/root.hh:62
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "ફાઇલ કચરાપેટીમાં ખસેડો"
+
+#: ../xffm/fm/classes/child.hh:265
+msgid   "Bookmarks"
+msgstr  "બુકમાર્કો (B)"
+
+#: ../xffm/fm/classes/basic.hh:35
+msgid   "Basic rules:\n"
+        "\n"
+        "*  Will match any character zero or more times.\n"
+        "?  Will match any character exactly one time\n"
+        "[] Match any character within the [] \n"
+        "^  Match at beginning of string\n"
+        "$  Match at end of string \n"
+msgstr  "આધારભૂત નિયમો:\n"
+        "\n"
+        "*  કોઈપણ અક્ષરને શૂન્ય અથવા વધુ વખતે સરખાવશે.\n"
+        "?  કોઈપણ અક્ષરને બરાબર એક વાર જ સરખાવશે\n"
 
 #: ../xffm/fm/classes/progress.hh:73
 msgid   "Running"
@@ -729,7 +745,7 @@ msgstr  "ફાઈલ (F)"
 msgid   "Command history"
 msgstr  "કોલ ઇતિહાસ"
 
-#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:742
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:697
 msgid   "User"
 msgstr  "વપરાશકર્તા"
 
@@ -1099,37 +1115,38 @@ msgid   "The  password  can  be  specified on the command line. Since the "
         "recommended to use this option only for testing purposes."
 msgstr  ""
 
-#: ../xffm/fm/classes/ecryptfs.hh:375 ../xffm/fm/classes/ecryptfs.hh:376
-#: ../xffm/fm/classes/ecryptfs.hh:398
+#: ../xffm/fm/classes/ecryptfs.hh:379 ../xffm/fm/classes/ecryptfs.hh:380
+#: ../xffm/fm/classes/ecryptfs.hh:402
 #: ../xffm/response/templates/mountresponse.hh:151
-#: ../xffm/response/templates/efsresponse.hh:138
+#: ../xffm/response/templates/efsresponse.hh:142
 msgid   "Mount"
 msgstr  "માઉન્ટ કરો"
 
-#: ../xffm/fm/classes/ecryptfs.hh:392
-#: ../xffm/response/templates/efsresponse.hh:181
+#: ../xffm/fm/classes/ecryptfs.hh:396
+#: ../xffm/response/templates/tarresponse.hh:214
+#: ../xffm/response/templates/efsresponse.hh:185
 msgid   "Save"
 msgstr  "સંગ્રહ કરો"
 
-#: ../xffm/fm/classes/ecryptfs.hh:612
-#: ../xffm/response/templates/efsresponse.hh:160
-#: ../xffm/find/templates/findresponse.hh:275
-#: ../xffm/find/templates/findresponse.hh:561
-#: ../xffm/find/templates/findresponse.hh:594
+#: ../xffm/fm/classes/ecryptfs.hh:616
+#: ../xffm/response/templates/efsresponse.hh:164
+#: ../xffm/find/templates/findresponse.hh:292
+#: ../xffm/find/templates/findresponse.hh:512
+#: ../xffm/find/templates/findresponse.hh:547
 msgid   "Options"
 msgstr  "વિકલ્પો"
 
-#: ../xffm/fm/classes/ecryptfs.hh:613
-#: ../xffm/response/templates/efsresponse.hh:166
+#: ../xffm/fm/classes/ecryptfs.hh:617
+#: ../xffm/response/templates/efsresponse.hh:170
 msgid   "Advanced"
 msgstr  "ઉન્નત્તિ થયેલ"
 
-#: ../xffm/fm/classes/ecryptfs.hh:928
+#: ../xffm/fm/classes/ecryptfs.hh:932
 #, fuzzy, c-format
 msgid   "Mounting %s"
 msgstr  "માઉન્ટ કરે છે"
 
-#: ../xffm/fm/classes/ecryptfs.hh:986
+#: ../xffm/fm/classes/ecryptfs.hh:990
 #, c-format
 msgid   "Enter Passphrase for %s"
 msgstr  "%s માટે પાસફ્રેઝ દાખલ કરો"
@@ -1141,10 +1158,10 @@ msgid   "Mount Device"
 msgstr  "ઉપકરણને માઉન્ટ કરો"
 
 #: ../xffm/response/templates/mountresponse.hh:128
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:484
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:488
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Mount Point"
 msgstr  "માઉન્ટ બિંદુ (P):"
 
@@ -1157,6 +1174,10 @@ msgstr  "ડિરેક્ટરી '%s' બનાવી શકતા નથી
 #: ../xffm/response/templates/mkdirresponse.hh:70
 msgid   "Sorry"
 msgstr  "માફ કરજો"
+
+#: ../xffm/response/templates/dialogentry.hh:41
+msgid   "Help"
+msgstr  "મદદ (H)"
 
 #: ../xffm/response/templates/fileresponse.hh:37
 #, fuzzy
@@ -1237,39 +1258,31 @@ msgstr  "બિટસ્ટ્રીમ ટર્મિનલ"
 msgid   "Cannot find executable for \"%s\""
 msgstr  "ફોલ્ડર \"%s\" કાઢી શકતા નથી."
 
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "GZip"
-msgstr  ""
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "BZip2"
-msgstr  ""
-
-#: ../xffm/response/templates/tarresponse.hh:13
-#, fuzzy
-msgid   "XZ"
-msgstr  "XYZ"
-
-#: ../xffm/response/templates/tarresponse.hh:13
-msgid   "Zip"
-msgstr  "Zip"
-
-#: ../xffm/response/templates/tarresponse.hh:20
+#: ../xffm/response/templates/tarresponse.hh:34
 msgid   "Compressed file..."
 msgstr  "દબાયેલ ફાઇલ (e)..."
 
-#: ../xffm/response/templates/efsresponse.hh:141
-#: ../xffm/response/templates/efsresponse.hh:484
+#: ../xffm/response/templates/tarresponse.hh:174
+#, fuzzy
+msgid   "Target directory:"
+msgstr  "લક્ષ્ય ડિરેક્ટરી નથી"
+
+#: ../xffm/response/templates/tarresponse.hh:183
+msgid   "Name:"
+msgstr  "નામ (N):"
+
+#: ../xffm/response/templates/efsresponse.hh:145
+#: ../xffm/response/templates/efsresponse.hh:488
 msgid   "Encrypted"
 msgstr  "એનક્રિપ્ટ થયેલ"
 
-#: ../xffm/response/templates/efsresponse.hh:146
-#: ../xffm/response/templates/efsresponse.hh:490
+#: ../xffm/response/templates/efsresponse.hh:150
+#: ../xffm/response/templates/efsresponse.hh:494
 msgid   "Unencrypted"
 msgstr  "એનક્રિપ્ટ થયેલ નથી"
 
-#: ../xffm/response/templates/efsresponse.hh:485
-#: ../xffm/response/templates/efsresponse.hh:491
+#: ../xffm/response/templates/efsresponse.hh:489
+#: ../xffm/response/templates/efsresponse.hh:495
 #, fuzzy
 msgid   "Folder does not exist"
 msgstr  "ફોલ્ડર અસ્તિત્વમાં નથી."
@@ -1291,7 +1304,7 @@ msgstr  "સમાપ્ત થયેલ"
 #: ../xffm/response/classes/lnresponse.hh:10
 #: ../xffm/response/classes/cpresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:9
-#: ../xffm/find/templates/findresponse.hh:423 ../xffm/find/classes/fgr.hh:124
+#: ../xffm/find/templates/findresponse.hh:440 ../xffm/find/classes/fgr.hh:124
 msgid   "Path"
 msgstr  "પાથ"
 
@@ -1304,6 +1317,11 @@ msgstr  "ફોલ્ડર '%s' બનાવી શકતા નથી: %s"
 #, fuzzy
 msgid   "Sorry, file not found"
 msgstr  "ફાઈલ મળી નથી"
+
+#: ../xffm/response/templates/regexpresponse.hh:11
+#, fuzzy
+msgid   "foo"
+msgstr  "માટે"
 
 #: ../xffm/response/templates/bfishresponse.hh:93
 #, fuzzy
@@ -1351,7 +1369,7 @@ msgstr  "પાસવર્ડો બંધબેસતા નથી"
 msgid   "The location does not exist."
 msgstr  "\"%s\" સ્થાન અસ્તિત્વમાં નથી."
 
-#: ../xffm/response/dialogs.hh:68
+#: ../xffm/response/dialogs.hh:73
 #, c-format
 msgid   "Delete '%s'"
 msgstr  "'%s' કાઢી નાંખો"
@@ -1375,17 +1393,17 @@ msgstr  "ચેતવણી:"
 msgid   "You have selected multiple files or folders"
 msgstr  "તમે ઘણી બધી ફાઈલો અથવા ફોલ્ડરો પસંદ કરેલ છે"
 
-#: ../xffm/response/classes/envresponse.hh:90
+#: ../xffm/response/classes/envresponse.hh:93
 #, fuzzy
 msgid   "Environment variables"
 msgstr  "પર્યાવરણ ફોલ્ડરો"
 
-#: ../xffm/response/classes/envresponse.hh:122
+#: ../xffm/response/classes/envresponse.hh:125
 #, fuzzy
 msgid   "No changes need to be saved"
 msgstr  "સ્થાપિત કરવા માટે પેકોજોની જરૂર નથી"
 
-#: ../xffm/response/classes/envresponse.hh:217
+#: ../xffm/response/classes/envresponse.hh:220
 #, fuzzy
 msgid   "Environment Variable"
 msgstr  "પર્યાવરણ નકશો"
@@ -1403,14 +1421,14 @@ msgstr  "નિષ્ક્રિય સમય"
 msgid   "Workspace Switcher"
 msgstr  "કામ કરવાની જગ્યાઓ વચ્ચે ફેરબદલી કરનાર"
 
-#: ../xffm/response/classes/wsresponse.hh:36
-#: ../xffm/menus/templates/menucallbacks.hh:130
+#: ../xffm/response/classes/wsresponse.hh:35
+#: ../xffm/menus/templates/menucallbacks.hh:134
 #, fuzzy, c-format
 msgid   "Workspace %s"
 msgstr  "કામ કરવાની જગ્યા %s%d"
 
-#: ../xffm/response/classes/wsresponse.hh:37
-#: ../xffm/menus/templates/menucallbacks.hh:131
+#: ../xffm/response/classes/wsresponse.hh:36
+#: ../xffm/menus/templates/menucallbacks.hh:135
 msgid   "does not exist"
 msgstr  "અસ્તિત્વમાં નથી"
 
@@ -1458,237 +1476,229 @@ msgstr  "સુરક્ષા"
 msgid   "No Read Permission"
 msgstr  "સાઇટ પરવાનગીઓ"
 
-#: ../xffm/find/templates/findresponse.hh:111
-msgid   "Find files"
-msgstr  "ફાઈલો શોધો (l)"
-
-#: ../xffm/find/templates/findresponse.hh:278
-#: ../xffm/find/templates/findresponse.hh:780
+#: ../xffm/find/templates/findresponse.hh:295
+#: ../xffm/find/templates/findresponse.hh:735
 msgid   "Advanced options"
 msgstr  "ઉન્નત્તિ થયેલ વિકલ્પો"
 
-#: ../xffm/find/templates/findresponse.hh:286
+#: ../xffm/find/templates/findresponse.hh:303
 #, fuzzy
 msgid   "Find in Files"
 msgstr  "ફાઇલો માં શોધે (d)... "
 
-#: ../xffm/find/templates/findresponse.hh:290
-#: ../xffm/find/templates/findresponse.hh:312
+#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:329
 msgid   "Cancel Operation"
 msgstr  "પ્રક્રિયા રદ કરો"
 
-#: ../xffm/find/templates/findresponse.hh:307
+#: ../xffm/find/templates/findresponse.hh:324
 #, fuzzy
 msgid   "Show search results for this query"
 msgstr  "“%s” માટે પરિણામોને શોધો"
 
-#: ../xffm/find/templates/findresponse.hh:323
-#: ../xffm/find/templates/findresponse.hh:327
+#: ../xffm/find/templates/findresponse.hh:340
+#: ../xffm/find/templates/findresponse.hh:344
 msgid   "Clear search"
 msgstr  "શોધ ને સાફ કરો"
 
-#: ../xffm/find/templates/findresponse.hh:503
-msgid   "Show help"
-msgstr  "મદદ બતાવો"
-
-#: ../xffm/find/templates/findresponse.hh:532
+#: ../xffm/find/templates/findresponse.hh:483
 msgid   "Case Sensitive"
 msgstr  "કેસ પ્રત્યે સંવેદનશીલ"
 
-#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findresponse.hh:484
 msgid   "Extended regexp"
 msgstr  "વિસ્તૃત regexp"
 
-#: ../xffm/find/templates/findresponse.hh:534
+#: ../xffm/find/templates/findresponse.hh:485
 msgid   "Include binary files"
 msgstr  "બાઇનરી ફાઇલોનો સામવેશ કરો (b)"
 
-#: ../xffm/find/templates/findresponse.hh:535 ../xffm/find/classes/fgr.hh:212
+#: ../xffm/find/templates/findresponse.hh:486 ../xffm/find/classes/fgr.hh:212
 #, fuzzy
 msgid   "Line Count"
 msgstr  "બ્લેકીન્ગે પરગણું"
 
-#: ../xffm/find/templates/findresponse.hh:544
+#: ../xffm/find/templates/findresponse.hh:495
 #, fuzzy
 msgid   "Anywhere"
 msgstr  "બધે"
 
-#: ../xffm/find/templates/findresponse.hh:545
+#: ../xffm/find/templates/findresponse.hh:496
 msgid   "Whole words only"
 msgstr  "ફક્ત આખો શબ્દ (W)"
 
-#: ../xffm/find/templates/findresponse.hh:546
+#: ../xffm/find/templates/findresponse.hh:497
 msgid   "lines"
 msgstr  "વાક્યો"
 
-#: ../xffm/find/templates/findresponse.hh:547 ../xffm/find/classes/fgr.hh:210
+#: ../xffm/find/templates/findresponse.hh:498 ../xffm/find/classes/fgr.hh:210
 msgid   "No match"
 msgstr  "બંધબેસતુ નથી"
 
-#: ../xffm/find/templates/findresponse.hh:571 ../xffm/find/classes/fgr.hh:126
+#: ../xffm/find/templates/findresponse.hh:522 ../xffm/find/classes/fgr.hh:126
 msgid   "Filter:"
 msgstr  "ગાળક:"
 
-#: ../xffm/find/templates/findresponse.hh:577
-#: ../xffm/find/templates/findsignals.hh:300 ../xffm/find/classes/fgr.hh:146
+#: ../xffm/find/templates/findresponse.hh:530
+#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:146
 msgid   "Recursive"
 msgstr  "પુનરાવર્તિત"
 
-#: ../xffm/find/templates/findresponse.hh:578
-#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:142
+#: ../xffm/find/templates/findresponse.hh:531
+#: ../xffm/find/templates/findsignals.hh:306 ../xffm/find/classes/fgr.hh:142
 #, fuzzy
 msgid   "Find hidden files and directories"
 msgstr  "ફાઇલો અને ડિરેક્ટરીઓ પર પેચ લાગુ કરો."
 
-#: ../xffm/find/templates/findresponse.hh:580
-#: ../xffm/find/templates/findsignals.hh:312 ../xffm/find/classes/fgr.hh:138
+#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findsignals.hh:315 ../xffm/find/classes/fgr.hh:138
 msgid   "Stay on single filesystem"
 msgstr  "એક ફાઈલ સિસ્ટમ પર રહો"
 
-#: ../xffm/find/templates/findresponse.hh:582
+#: ../xffm/find/templates/findresponse.hh:535
 #, fuzzy
 msgid   "Upper limit"
 msgstr  "ઉપલી મર્યાદા:"
 
-#: ../xffm/find/templates/findresponse.hh:583
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findresponse.hh:536
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Results"
 msgstr  "પરિમાણો"
 
-#: ../xffm/find/templates/findresponse.hh:602
+#: ../xffm/find/templates/findresponse.hh:555
 msgid   "Contains the text"
 msgstr  "લખાણ ધરાવે છે (t)"
 
-#: ../xffm/find/templates/findresponse.hh:667
-#: ../xffm/find/templates/findsignals.hh:318
+#: ../xffm/find/templates/findresponse.hh:622
+#: ../xffm/find/templates/findsignals.hh:321
 msgid   "File size"
 msgstr  "ફાઇલ માપ"
 
-#: ../xffm/find/templates/findresponse.hh:680
+#: ../xffm/find/templates/findresponse.hh:635
 msgid   "At Least"
 msgstr  "ઓછામાં ઓછું"
 
-#: ../xffm/find/templates/findresponse.hh:680
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:635
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "kBytes"
 msgstr  "કિબાઇટ્સ"
 
-#: ../xffm/find/templates/findresponse.hh:687
+#: ../xffm/find/templates/findresponse.hh:642
 msgid   "At Most"
 msgstr  "વધુમાં વધુ"
 
-#: ../xffm/find/templates/findresponse.hh:695
-#: ../xffm/find/templates/findsignals.hh:324
+#: ../xffm/find/templates/findresponse.hh:650
+#: ../xffm/find/templates/findsignals.hh:327
 msgid   "Specific Time"
 msgstr  "ચોક્કસ સમય"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Modified"
 msgstr  "બદલાયેલ"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 msgid   "Created"
 msgstr  "બનાવાયેલ"
 
-#: ../xffm/find/templates/findresponse.hh:705
+#: ../xffm/find/templates/findresponse.hh:660
 #, fuzzy
 msgid   "Accessed"
 msgstr  "વાપરેલ છે:"
 
-#: ../xffm/find/templates/findresponse.hh:706 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/templates/findresponse.hh:661 ../xffm/find/classes/fgr.hh:166
 #: ../xffm/find/classes/fgr.hh:168
 msgid   "Minutes"
 msgstr  "મિનીટો"
 
-#: ../xffm/find/templates/findresponse.hh:710 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/templates/findresponse.hh:665 ../xffm/find/classes/fgr.hh:169
 #: ../xffm/find/classes/fgr.hh:171
 msgid   "Hours"
 msgstr  "કલાકો"
 
-#: ../xffm/find/templates/findresponse.hh:714 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/templates/findresponse.hh:669 ../xffm/find/classes/fgr.hh:172
 #: ../xffm/find/classes/fgr.hh:174
 msgid   "Days"
 msgstr  "દિવસો"
 
-#: ../xffm/find/templates/findresponse.hh:718
+#: ../xffm/find/templates/findresponse.hh:673
 #, fuzzy
 msgid   "Months"
 msgstr  "મહિનાઓ:"
 
-#: ../xffm/find/templates/findresponse.hh:729
-#: ../xffm/find/templates/findsignals.hh:329
+#: ../xffm/find/templates/findresponse.hh:684
+#: ../xffm/find/templates/findsignals.hh:332
 #, fuzzy
 msgid   "File properties"
 msgstr  "ફોલ્ડરના ગુણધર્મો"
 
-#: ../xffm/find/templates/findresponse.hh:748
+#: ../xffm/find/templates/findresponse.hh:703
 msgid   "Group"
 msgstr  "જૂથ"
 
-#: ../xffm/find/templates/findresponse.hh:753
-#: ../xffm/find/templates/findsignals.hh:175
+#: ../xffm/find/templates/findresponse.hh:708
+#: ../xffm/find/templates/findsignals.hh:178
 msgid   "Octal Permissions"
 msgstr  "ઓક્ટલ પરવાનગીઓ"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:761
-#: ../xffm/find/templates/findsignals.hh:161
-#: ../xffm/find/templates/findsignals.hh:167
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:716
+#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findsignals.hh:170
 #, fuzzy
 msgid   "Executable"
 msgstr  "એક્ઝેક્યુટેબલ:"
 
-#: ../xffm/find/templates/findresponse.hh:760
-#: ../xffm/find/templates/findresponse.hh:765
-#: ../xffm/find/templates/findsignals.hh:164
+#: ../xffm/find/templates/findresponse.hh:715
+#: ../xffm/find/templates/findresponse.hh:720
+#: ../xffm/find/templates/findsignals.hh:167
 msgid   "SUID"
 msgstr  "SUID"
 
-#: ../xffm/find/templates/findresponse.hh:801
+#: ../xffm/find/templates/findresponse.hh:756
 msgid   "File type : "
 msgstr  "ફાઈલનો પ્રકાર : "
 
-#: ../xffm/find/templates/findsignals.hh:86
+#: ../xffm/find/templates/findsignals.hh:89
 msgid   "Searching..."
 msgstr  "શોધ કરી રહ્યા છે..."
 
-#: ../xffm/find/templates/findsignals.hh:441
-#: ../xffm/find/templates/dndbox.hh:65
+#: ../xffm/find/templates/findsignals.hh:448
+#: ../xffm/find/templates/dndbox.hh:66
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "હાલનાં સ્થાનને તાળું મારો"
 
-#: ../xffm/find/templates/findsignals.hh:508
+#: ../xffm/find/templates/findsignals.hh:515
 msgid   "Upper limit:"
 msgstr  "ઉપલી મર્યાદા:"
 
-#: ../xffm/find/templates/findsignals.hh:511
+#: ../xffm/find/templates/findsignals.hh:518
 #, fuzzy
 msgid   "Counting files..."
 msgstr  "ચોકઠાંઓ રૂપાંતરિત કરી રહ્યા છીએ..."
 
-#: ../xffm/find/templates/findsignals.hh:519
+#: ../xffm/find/templates/findsignals.hh:526
 #, fuzzy, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       "%d% બંધબેસવુ"
 msgstr[1]       "%d% બંધબેસવુ"
 
-#: ../xffm/find/templates/findsignals.hh:521
+#: ../xffm/find/templates/findsignals.hh:528
 #, c-format
 msgid   "%s Finished : %s"
 msgstr  "%s સમાપ્ત થયેલ છે : %s"
 
-#: ../xffm/find/templates/dndbox.hh:126
+#: ../xffm/find/templates/dndbox.hh:128
 msgid   "Edit all"
 msgstr  "બધામાં ફેરફાર કરો"
 
-#: ../xffm/find/templates/dndbox.hh:139
+#: ../xffm/find/templates/dndbox.hh:141
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "'%s' માટે શોધ પરિણામો:"
 
-#: ../xffm/find/templates/dndbox.hh:259
+#: ../xffm/find/templates/dndbox.hh:261
 msgid   "Search results"
 msgstr  "શોધખોળનું પરિણામ"
 
@@ -1844,10 +1854,6 @@ msgstr  "વિષયસૂચી દૃશ્ય"
 msgid   "STRING"
 msgstr  "શબ્દમાળા"
 
-#: ../xffm/find/classes/fgr.hh:202 ../xffm/find/classes/fgr.hh:204
-msgid   "Regular expression"
-msgstr  "નિયમિત સમીકરણ (R)"
-
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Extended"
 msgstr  "વિસ્તરેલ"
@@ -1873,24 +1879,15 @@ msgstr  "લીટીઓ"
 msgid   "Usage : %s [OPTIONS]\n"
 msgstr  "વપરાશ: %s [OPTION...] %s\n"
 
+#: ../xffm/find/classes/historyentry.hh:136
+msgid   "Show help"
+msgstr  "મદદ બતાવો"
+
 #: ../xffm/find/classes/ffunctions.hh:9
 msgid   "Regular"
 msgstr  "નિયમિત"
 
-#: ../xffm/find/classes/ffunctions.hh:42
-msgid   "Basic rules:\n"
-        "\n"
-        "*  Will match any character zero or more times.\n"
-        "?  Will match any character exactly one time\n"
-        "[] Match any character within the [] \n"
-        "^  Match at beginning of string\n"
-        "$  Match at end of string \n"
-msgstr  "આધારભૂત નિયમો:\n"
-        "\n"
-        "*  કોઈપણ અક્ષરને શૂન્ય અથવા વધુ વખતે સરખાવશે.\n"
-        "?  કોઈપણ અક્ષરને બરાબર એક વાર જ સરખાવશે\n"
-
-#: ../xffm/find/classes/ffunctions.hh:51
+#: ../xffm/find/classes/ffunctions.hh:41
 msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
         "( ) : \n"
         "In  basic regular expressions the metacharacters ?, +, {, |, (, "
@@ -1933,8 +1930,8 @@ msgstr  ""
 #: ../xffm/menus/templates/pathbarmenu.hh:34
 #: ../xffm/menus/templates/pathbarmenu.hh:46
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:89
+#: ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
 msgid   "Open in New Window"
 msgstr  "નવી વિન્ડોમાં ખોલો (W)"
 
@@ -1948,8 +1945,8 @@ msgstr  "નવી વિન્ડોમાં ખોલો (W)"
 #: ../xffm/menus/templates/outputMenu.hh:29
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:92 ../xffm/menus/templates/menu.hh:172
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:94 ../xffm/menus/templates/menu.hh:173
 #, fuzzy
 msgid   "Show Clipboard"
 msgstr  "ક્લિપબોર્ડને બતાવો"
@@ -2004,31 +2001,27 @@ msgid   "Default Color"
 msgstr  "મૂળભૂત રંગો"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:53
-#: ../xffm/menus/templates/mainMenu.hh:90
+#: ../xffm/menus/templates/mainMenu.hh:54
+#: ../xffm/menus/templates/mainMenu.hh:92
 msgid   "Environment"
 msgstr  "પર્યાવરણ"
 
 #: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:96
 msgid   "Exit"
 msgstr  "બહાર નીકળો (E)"
 
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:79
-#: ../xffm/menus/templates/mainMenu.hh:117
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:81
+#: ../xffm/menus/templates/mainMenu.hh:119
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "કેરેટ સ્થિતિ બદલો"
 
-#: ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:95
 msgid   "Clear Clipboard History"
 msgstr  "ક્લિપબોર્ડ ઇતિહાસ સાફ કરો (l)"
-
-#: ../xffm/menus/templates/mainMenu.hh:199
-msgid   "menu"
-msgstr  "મેનુ"
 

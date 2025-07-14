@@ -16,8 +16,11 @@
 
 // response classes
 // jumpresponse is a template to access Workdir<Type>
+# include "response/classes/inforesponse.hh"   // class
 #include "response/classes/entryresponse.hh" // class
 #include "response/classes/wsresponse.hh"// templates
+
+
 #include "response/templates/regexpresponse.hh"// templates
 #include "response/classes/passwdresponse.hh"// class
 #include "response/classes/rmresponse.hh"    // class
@@ -26,7 +29,6 @@
 # include "response/classes/cpresponse.hh"   // class
 # include "response/classes/mvresponse.hh"   // class 
 # include "response/classes/lnresponse.hh"   // class
-# include "response/classes/inforesponse.hh"   // class
 # include "response/classes/dndresponse.hh"   // class
 # include "response/classes/envresponse.hh"   // class
                                               // 

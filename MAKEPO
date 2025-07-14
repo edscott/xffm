@@ -1,5 +1,11 @@
 
 For new translation construction:
+Do:
+perl scripts/update-po.pl potfiles
+perl scripts/update-po.pl template
+perl scripts/update-po.pl fullmerge
+
+
 1. Create new po/POTFILES.in file
    For this, routine &generatePotfiles in po/scripts/update-po.pl
    "perl scripts/update-po.pl potfiles"
@@ -7,7 +13,7 @@ For new translation construction:
    For this, routine &generatePot in po/scripts/update-po.pl
    "perl scripts/update-po.pl template"
 3. Create updated po files from external po files
-   For this, routine &fullMerge in po/scripts/update-po.pl
+   For this, routine &fullmerge in po/scripts/update-po.pl
    NOTE: set $fullPoDir in scripts/update-po.pl to path to external po files 
    (external path cannot be named [whatever]/po/)
    "perl scripts/update-po.pl fullmerge"

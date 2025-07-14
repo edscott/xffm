@@ -243,7 +243,7 @@ namespace xf {
       return serial;
     }
 
-    static const gchar *getWorkdir(GtkWidget *child){
+    static const char *getWorkdir(GtkWidget *child){
       TRACE("getWorkdir...\n");
       if (!Child::mainWidget()) return NULL;
       if (!child) return g_get_home_dir();
@@ -266,9 +266,31 @@ namespace xf {
       if (strcmp(path, "Disk Mounter") == 0) return g_strdup(_("Disk Mounter"));
       return g_path_get_basename(path);
     }     
+
+    static void updateTabLabel(GtkWidget *child, const char *path, int flags, const char *regexp){
+
+      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
+      auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
+      auto descending = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "descending"));
+      auto regexLabel = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "regexLabel"));
+
+      DBG("updateTabLabel(%p): flags= 0x%x (%d), bool(0x04)= %d\n", child, flags, flags & 0x04);
+      gtk_widget_set_visible(descending, flags & 0x04);
+      if (regexp && strlen(regexp)){
+        auto markup = g_strconcat(" <b>[<span color=\"blue\">", 
+                      regexp, "</span>]</b>", NULL);
+        gtk_label_set_markup(GTK_LABEL(regexLabel), markup);
+        g_free(markup);
+        gtk_widget_set_visible(regexLabel, flags & 0x100);
+      } else {
+        gtk_label_set_markup(GTK_LABEL(regexLabel), "");
+      }
+    }
     
     static
-    void setWindowTitle(GtkWidget *child){
+    void setWindowTitle(GtkWidget *child, int flags, const char *regexp){
+      TRACE("setWindowTitleFull(%p)\n", child);
+
         auto path = (const char *) g_object_get_data(G_OBJECT(child), "path");
         gchar *gg = get_terminal_name(path);
         auto user = g_get_user_name();
@@ -277,7 +299,6 @@ namespace xf {
         gchar *g = g_strconcat(user,"@",host,":",gg, NULL);
         g_free(host);
         g_free(gg); 
-        auto flags=Settings::getInteger(path, "flags", 0);
         char *sorted = NULL;
         if (flags & 0x08) sorted = g_strconcat("[", _("Date"), "]", NULL);
         if (flags & 0x10) sorted = g_strconcat("[", _("Size"), "]", NULL);
@@ -293,18 +314,20 @@ namespace xf {
         auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
         auto label = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "label"));
         gtk_label_set_markup(label, basename);
-        
-        auto oldImage = GTK_LABEL(g_object_get_data(G_OBJECT(tabWidget), "image"));
-        if (oldImage)  gtk_box_remove(GTK_BOX(tabWidget), GTK_WIDGET(oldImage));
-        g_object_set_data(G_OBJECT(tabWidget), "image", NULL);
 
-        if (flags & 0x04){
-          auto image = Texture<bool>::getImage(EMBLEM_DESCENDING, 16);
-          gtk_box_append(GTK_BOX(tabWidget), GTK_WIDGET(image));
-          g_object_set_data(G_OBJECT(tabWidget), "image", image);
-        }
+        updateTabLabel(child, path, flags, regexp);
         g_free(basename);
     }
+
+    static
+    void setWindowTitle(GtkWidget *child){
+      TRACE("setWindowTitle(%p)\n", child);
+        auto path = (const char *) g_object_get_data(G_OBJECT(child), "path");
+        int flags = Settings::getInteger(path, "flags", 0x40);
+        char *regexp = Settings::getString(path, "regexp", "");
+        setWindowTitle(child, flags, regexp);
+    }
+
     static GtkBox *vButtonBox(void){
       return GTK_BOX(g_object_get_data(G_OBJECT(Child::mainWidget()), "buttonBox"));
     }

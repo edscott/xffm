@@ -29,7 +29,7 @@ public:
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto path = Child::getWorkdir();
-      DBG(" path = %s, regular expresion = \"%s\"\n", path,txt);
+      TRACE(" path = %s, regular expresion = \"%s\"\n", path,txt);
       int bit = 0x100;
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       auto flags = gridView_p->flags();
@@ -44,13 +44,16 @@ public:
                           _("Regular Expression syntax is incorrect"), _error->message);
                   g_free(markup);
                   g_error_free(_error);
-          DBG("%s", markup);
+          // Gotta make into a template to use here:
+          // Dialogs::info(markup);
+          DBG("%s: %s", _("Regular Expression syntax is incorrect"), _error->message);
           g_free(markup);        
           g_error_free(_error);
         } else { // regex is OK
           gridView_p->flagOn(0x100); // Regexp on
           update = true;
           Settings::setString(path, "regexp", txt);
+          if (!gridView_p->regexp() || strcmp(gridView_p->regexp(), txt)) update = true;
           gridView_p->regexp(txt);
           Settings::setInteger(path,"flags",gridView_p->flags()); 
           gridView_p->regex(regex);
@@ -61,12 +64,16 @@ public:
         if (gridView_p->flags() == 0x40) {
           Settings::removeGroup(path);
         }
+        if (gridView_p->regexp()) update = true;
         gridView_p->regexp(NULL);
         gridView_p->regex(NULL);
       } 
-      // Need to update?
-      // If regexp has changed.
-       return NULL;
+      // Need to update? If regexp has changed. 
+      // On update, saved values for regex and regexp will not be used.
+      if (update) {
+        Workdir<Type>::setWorkdir(gridView_p->path());
+      } 
+      return NULL;
     }
 };
 

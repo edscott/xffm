@@ -2,13 +2,19 @@
 #define LOCALDIR_HH
 namespace xf {
 
-  template <class Type> class GridView;
+  typedef struct {
+    int flags;
+    int count;
+    int total;
+    GRegex *regex;
+    const char *regexp;
+  } filterData_t;
   
   class LocalDir {
 
     public:
 
-      static GtkMultiSelection *xfSelectionModel(const char *path){
+      static GtkMultiSelection *xfSelectionModel(const char *path, filterData_t *filterData ){
        // This section adds the up icon.
         auto flags = Settings::getInteger(path, "flags", 0);
 
@@ -85,7 +91,7 @@ namespace xf {
         g_object_set_data(G_OBJECT(store), "monitor", monitor);
         */
 
-        return getSelectionModel(G_LIST_MODEL(store), true, flags);
+        return getSelectionModel(G_LIST_MODEL(store), true, filterData);
       }
 
 
@@ -147,10 +153,11 @@ namespace xf {
       }
       
     public:   
-      static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0, int flags){
+      static GtkMultiSelection *getSelectionModel(GListModel *store, bool skip0, filterData_t *filterData){
         GtkFilter *filter = 
-          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, GINT_TO_POINTER(flags), NULL));
-        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);       
+          GTK_FILTER(gtk_custom_filter_new ((GtkCustomFilterFunc)filterFunction, filterData, NULL));
+
+        GtkFilterListModel *filterModel = gtk_filter_list_model_new(G_LIST_MODEL(store), filter);        
         // FIXME leak: s      
         GtkMultiSelection *s = gtk_multi_selection_new(G_LIST_MODEL(filterModel));
         g_object_set_data(G_OBJECT(store), "selectionModel", s);
@@ -158,6 +165,20 @@ namespace xf {
 
         g_signal_connect(G_OBJECT(s), "selection-changed", G_CALLBACK(selection_changed), 
             skip0?s:NULL);
+       
+        if (filterData && filterData->flags & 0x100 && filterData->count > 0){
+          char buffer[256];
+          char buffer2[32];
+          snprintf (buffer2, 256, "%d/%d", filterData->count, filterData->total);
+          snprintf (buffer, 256, "%s [%s]", _("Regular expression"), filterData->regexp);
+          // Show text will cause new tabs to open with show text to full window.
+          //Print::showText(Child::getOutput());
+          char buffer3[256];
+          snprintf(buffer3, 256,_("%s (%s Filtered)"), buffer, buffer2);  
+          Print::print(Child::getOutput(), g_strconcat(buffer3,"\n", NULL));
+        }
+
+
         return s;
       }
 
@@ -305,13 +326,29 @@ private:
     private:
       static gboolean
       filterFunction(GObject *object, void *data){
-        auto flags = GPOINTER_TO_INT(data);
+        auto filterData = (filterData_t *)data;
+        auto flags = filterData? filterData->flags: 0;
+        auto regex = filterData? filterData->regex: NULL;
         GFileInfo *info = G_FILE_INFO(object);
         bool showHidden = flags & 0x01;
         bool showbackups = flags & 0x02;
+        bool doRegex = flags & 0x100;
         auto hidden = g_file_info_get_is_hidden(info);
         auto backup = g_file_info_get_is_backup(info);
 
+        // First do the regex, if applicable.
+        if (doRegex && regex){
+          auto name = g_file_info_get_name(info);
+          auto match = g_regex_match (regex, name, (GRegexMatchFlags)0, NULL);
+          if (!match) {
+            filterData->count++;
+            TRACE("not match %s, count=%d\n", name, filterData->count);
+          } else TRACE("name: match=%s\n", match?"true":"false");
+          filterData->total++;
+
+          return match;
+        }
+        
         if (hidden){
           if (showHidden) return true;
           return false;

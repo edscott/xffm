@@ -17,6 +17,7 @@ template <class Type>
 
       char *regexp_=NULL;
       GRegex *regex_=NULL;
+      filterData_t filterData_;
 
       // myMenu is for processing keys for individual widget popovers
       Menu<GridviewMenu<Type> > *myMenu_=NULL;
@@ -82,7 +83,6 @@ template <class Type>
 
         gridViewClick_f_ = gridViewClick_f;
         path_ = g_strdup(path);
-        view_ = getGridView();
         //gtk_grid_view_set_single_click_activate (GTK_GRID_VIEW(view_), true);
         flags_ = Settings::getInteger(path_, "flags", 0);
         regexp_ = Settings::getString(path_, "regexp", "");
@@ -98,7 +98,14 @@ template <class Type>
             g_error_free(_error);
           }    
         }
+        filterData_.flags = flags_;
+        filterData_.count = 0;
+        filterData_.total = 0;
+        filterData_.regex = regex_;
+        filterData_.regexp = regexp_;
+        
         TRACE("gridview flags = 0x%x\n", flags_);
+        view_ = getGridView();
         
         myMenu_ = new Menu<GridviewMenu<Type> >("foo");
         addGestureClickView1(view_, NULL, this);// unselect all on release
@@ -174,7 +181,7 @@ template <class Type>
           selectionModel_ = FstabDir::fstabSelectionModel();
         } else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
-          selectionModel_ = LocalDir::xfSelectionModel(path_);
+          selectionModel_ = LocalDir::xfSelectionModel(path_, &filterData_);
           g_object_set_data(G_OBJECT(child), "selection", selectionModel_);
           auto store = G_LIST_MODEL(g_object_get_data(G_OBJECT(selectionModel_), "store"));
           maxNameLen_ = Basic::getMaxNameLen(store);

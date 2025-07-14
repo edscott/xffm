@@ -258,6 +258,17 @@ private:
       g_free(tag);
       Basic::boxPack0(tabBox, label,  FALSE, FALSE, 0);
 
+      auto regexLabel = gtk_label_new("");
+      Basic::boxPack0(tabBox, regexLabel,  FALSE, FALSE, 0);
+      g_object_set_data(G_OBJECT(tabBox), "regexLabel", regexLabel);
+
+      auto descending = Texture<bool>::getImage(EMBLEM_DESCENDING, 16);
+      gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(descending));
+      g_object_set_data(G_OBJECT(tabBox), "descending", descending);
+      auto flags = Settings::getInteger(path, "flags", 0x40);
+      gtk_widget_set_visible(GTK_WIDGET(descending), flags & 0x04);
+      
+
       auto close = Basic::newButton(WINDOW_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(close), "clicked", 
               BUTTON_CALLBACK(w->on_zap_page), data);    
@@ -435,11 +446,22 @@ private:
 
       // Show current close button
       auto child = gtk_notebook_get_nth_page(notebook_, new_page);
+      TRACE("switchPage %p\n", child);
       auto close = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "close"));
       auto input = GTK_WIDGET(g_object_get_data(G_OBJECT(child), "input"));
       gtk_widget_set_visible (close, TRUE);
       
-      Child::setWindowTitle(child);   
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject(child);
+      if (gridview_p) {
+        int flags = gridview_p->flags();
+        const char *regexp = gridview_p->regexp();
+        Child::setWindowTitle(child, flags, regexp);   
+        TRACE("switchPage setWindowTitle %p, 0x%x, %s\n", child, flags, regexp);
+      } else {
+         TRACE("switchPage setWindowTitle %p\n", child);
+         Child::setWindowTitle(child);   
+      }
+     
       auto selection = Child::selection(child);
       if (!selection) {
         gtk_widget_set_sensitive(GTK_WIDGET(cutButton), false);
@@ -608,9 +630,12 @@ public:
       setupMenu(menu, gridView_p);
       char *basename = Child::getTabname(gridView_p->path());
 
-      auto mark2 = gridView_p->regexp()==NULL? g_strdup(""):
+      bool haveRegexp = gridView_p->regexp() && strlen(gridView_p->regexp());
+      auto mark2 = haveRegexp? 
              g_strconcat(" [","<span color=\"blue\">", 
-             gridView_p->regexp(),"</span>]", NULL);
+             gridView_p->regexp(),"</span>]", NULL):
+             g_strdup("");
+
       auto markup = g_strconcat("<b><span color=\"red\">",basename,
              "</span>", mark2,"</b>", NULL);
       gtk_popover_popup(menu);
