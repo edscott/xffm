@@ -262,7 +262,7 @@ private:
       Basic::boxPack0(tabBox, regexLabel,  FALSE, FALSE, 0);
       g_object_set_data(G_OBJECT(tabBox), "regexLabel", regexLabel);
 
-      auto descending = Texture<bool>::getImage(EMBLEM_DESCENDING, 16);
+      auto descending = Texture<bool>::getImage(EMBLEM_DESCENDING, 8, 16);
       gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(descending));
       g_object_set_data(G_OBJECT(tabBox), "descending", descending);
       auto flags = Settings::getInteger(path, "flags", 0x40);

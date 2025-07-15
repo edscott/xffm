@@ -15,6 +15,13 @@ template <class Type>  class Texture {
       return GTK_IMAGE(image);
     }
 
+    static GtkImage *getImage(const char *iconName, int width, int height){
+      auto paintable = GDK_PAINTABLE(lookupIcon(iconName, height));
+      auto image = gtk_image_new_from_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(image), width, height);
+      return GTK_IMAGE(image);
+    }
+
     static GtkImage *getImage(GFileInfo *info, int size){
       auto gIcon = g_file_info_get_icon(info);
       auto paintable = getIcon(gIcon, size);

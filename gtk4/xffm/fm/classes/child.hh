@@ -274,7 +274,7 @@ namespace xf {
       auto descending = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "descending"));
       auto regexLabel = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "regexLabel"));
 
-      DBG("updateTabLabel(%p): flags= 0x%x (%d), bool(0x04)= %d\n", child, flags, flags & 0x04);
+      TRACE("updateTabLabel(%p): flags= 0x%x (%d), bool(0x04)= %d\n", child, flags, flags & 0x04);
       gtk_widget_set_visible(descending, flags & 0x04);
       if (regexp && strlen(regexp)){
         auto markup = g_strconcat(" <b>[<span color=\"blue\">", 
