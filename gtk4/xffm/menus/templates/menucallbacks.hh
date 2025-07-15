@@ -338,12 +338,8 @@ public:
 
     static void regexHelp ( GtkGestureClick* self, int n_press, double x, double y,
         GtkWindow *dialog){
-      //auto output = Child::getOutput();
-      //Print::showText(output);
-      //Print::print(output, g_strdup(Basic::filter_text_help()));
-      // info dialog will produce a gtk error
-      Dialogs::info(Basic::filter_text_help());
-      //DBG("%s\n", Basic::filter_text_help());
+      Dialogs::info(Basic::grep_text_help()); // Grep regex filter.
+// This is for shell filter:   Dialogs::info(Basic::filter_text_help());
     }
 
 

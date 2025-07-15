@@ -552,7 +552,7 @@ private:
             gtk_box_append(topPaneVbox_, GTK_WIDGET(frame));
 
             auto history = g_build_filename(GREP_HISTORY);              
-            auto box = entryBox(_("Contains the text"), grep_text_help(), history,
+            auto box = entryBox(_("Contains the text"), Basic::grep_text_help(), history,
                 (void *)FindSignals<Type>::onFindButton,
                 (void *)this);
             g_free(history);

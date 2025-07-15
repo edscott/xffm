@@ -42,8 +42,6 @@ public:
         if (!regex) {
           gchar *markup = g_strdup_printf("<span size=\"larger\" color=\"blue\">%s\n<span color=\"red\">%s</span></span>\n",
                           _("Regular Expression syntax is incorrect"), _error->message);
-                  g_free(markup);
-                  g_error_free(_error);
           // Gotta make into a template to use here:
           // Dialogs::info(markup);
           DBG("%s: %s", _("Regular Expression syntax is incorrect"), _error->message);
