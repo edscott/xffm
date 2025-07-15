@@ -7,7 +7,7 @@
    width="128pt"
    height="128pt"
    sodipodi:docname="emblem-c.svg"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    version="1.1"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -253,11 +253,11 @@
      showgrid="true"
      snaptogrid="false"
      inkscape:zoom="2.95"
-     inkscape:cx="14.40678"
-     inkscape:cy="80.508475"
+     inkscape:cx="14.915254"
+     inkscape:cy="79.322034"
      inkscape:window-width="1916"
-     inkscape:window-height="1034"
-     inkscape:window-x="1920"
+     inkscape:window-height="1033"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:current-layer="svg559"
      inkscape:window-maximized="1"
@@ -284,23 +284,23 @@
        units="px" />
   </sodipodi:namedview>
   <path
-     style="font-size:12.000;fill:#000002;fill-rule:evenodd;stroke:none;stroke-width:3.8000;stroke-linecap:round;stroke-linejoin:round;fill-opacity:0.2011;stroke-dasharray:none;"
-     d="M 15.861841,69.484931 L 63.213311,16.284581"
+     style="font-size:12px;fill:#000002;fill-opacity:0.2011;fill-rule:evenodd;stroke:none;stroke-width:3.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+     d="m 19.590655,73.891711 47.35147,-53.20035"
      id="path607"
      sodipodi:nodetypes="cc" />
   <path
-     style="font-size:12.000;fill:#000002;fill-rule:evenodd;stroke:none;stroke-width:3.8000;stroke-linecap:round;stroke-linejoin:round;fill-opacity:0.2011;stroke-dasharray:none;"
-     d="M 110.56467,16.284581 L 157.91617,69.484931"
+     style="font-size:12px;fill:#000002;fill-opacity:0.2011;fill-rule:evenodd;stroke:none;stroke-width:3.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+     d="m 114.29348,20.691361 47.3515,53.20035"
      id="path608"
      sodipodi:nodetypes="cc" />
   <path
-     style="font-size:12.000;fill:#000002;fill-rule:evenodd;stroke:none;stroke-width:3.8000;stroke-linecap:round;stroke-linejoin:round;fill-opacity:0.2011;stroke-dasharray:none;"
-     d="M 15.861841,69.484931 L 63.213311,16.284581"
+     style="font-size:12px;fill:#000002;fill-opacity:0.2011;fill-rule:evenodd;stroke:none;stroke-width:3.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+     d="m 19.590655,73.891711 47.35147,-53.20035"
      id="path613"
      sodipodi:nodetypes="cc" />
   <path
-     style="font-size:12.000;fill:#000002;fill-rule:evenodd;stroke:none;stroke-width:3.8000;stroke-linecap:round;stroke-linejoin:round;fill-opacity:0.2011;stroke-dasharray:none;"
-     d="M 110.56467,16.284581 L 157.91617,69.484931"
+     style="font-size:12px;fill:#000002;fill-opacity:0.2011;fill-rule:evenodd;stroke:none;stroke-width:3.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+     d="m 114.29348,20.691361 47.3515,53.20035"
      id="path614"
      sodipodi:nodetypes="cc" />
   <metadata
@@ -316,8 +316,8 @@
   </metadata>
   <rect
      rx="8.8118048"
-     y="4.6791291"
-     x="4.5221395"
+     y="9.0859089"
+     x="8.2509527"
      ry="23.664799"
      height="150.17532"
      width="151.12648"
@@ -329,10 +329,10 @@
      x="-190.84746"
      y="121.01695"
      id="text2"
-     transform="matrix(2.5425407,-0.01312529,0.01303332,2.2557653,504.62129,-140.7389)"><tspan
+     transform="matrix(2.5425407,-0.01312529,0.01303332,2.2557653,508.3501,-136.33212)"><tspan
        x="-190.84746"
        y="121.01695"
-       id="tspan2">C</tspan></text>
+       id="tspan1">C</tspan></text>
   <text
      xml:space="preserve"
      id="text3"

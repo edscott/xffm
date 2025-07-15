@@ -272,10 +272,14 @@ namespace xf {
       auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
       auto tabWidget = gtk_notebook_get_tab_label(notebook, child);
       auto descending = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "descending"));
+      auto bak = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "bak"));
+      auto hidden = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "hidden"));
       auto regexLabel = GTK_WIDGET(g_object_get_data(G_OBJECT(tabWidget), "regexLabel"));
 
       TRACE("updateTabLabel(%p): flags= 0x%x (%d), bool(0x04)= %d\n", child, flags, flags & 0x04);
-      gtk_widget_set_visible(descending, flags & 0x04);
+      if (hidden) gtk_widget_set_visible(hidden, flags & 0x01);
+      if (bak) gtk_widget_set_visible(bak, flags & 0x02);
+      if (descending) gtk_widget_set_visible(descending, flags & 0x04);
       if (regexp && strlen(regexp)){
         auto markup = g_strconcat(" <b>[<span color=\"blue\">", 
                       regexp, "</span>]</b>", NULL);

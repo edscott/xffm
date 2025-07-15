@@ -8,17 +8,16 @@ template <class Type> class Preview;
 template <class Type>  class Texture {
   public:
 
+    static GtkImage *getImage(const char *iconName){
+      auto paintable = GDK_PAINTABLE(load(iconName, 24));
+      auto image = gtk_image_new_from_paintable(paintable);
+      return GTK_IMAGE(image);
+    }
+
     static GtkImage *getImage(const char *iconName, int size){
       auto paintable = GDK_PAINTABLE(lookupIcon(iconName, size));
       auto image = gtk_image_new_from_paintable(paintable);
       gtk_widget_set_size_request(GTK_WIDGET(image), size, size);
-      return GTK_IMAGE(image);
-    }
-
-    static GtkImage *getImage(const char *iconName, int width, int height){
-      auto paintable = GDK_PAINTABLE(lookupIcon(iconName, height));
-      auto image = gtk_image_new_from_paintable(paintable);
-      gtk_widget_set_size_request(GTK_WIDGET(image), width, height);
       return GTK_IMAGE(image);
     }
 
@@ -165,11 +164,13 @@ public:
         auto emblemIcon = lookupIcon(emblem, width);  
 //        auto emblemIcon = lookupIcon(emblem, width);  
         graphene_point_t point;
-        point.x = 2*width/3; // width - (width/3);
+        point.x = width/2; // width - (width/2);
+//        point.x = 2*width/3; // width - (width/3);
         point.y = 0.0;
         gtk_snapshot_translate (snapshot, &point);
 
-        gdk_paintable_snapshot (GDK_PAINTABLE(emblemIcon), snapshot, width/3, height/3);
+        gdk_paintable_snapshot (GDK_PAINTABLE(emblemIcon), snapshot, width/2, height/2);
+//        gdk_paintable_snapshot (GDK_PAINTABLE(emblemIcon), snapshot, width/3, height/3);
         auto texture = gtk_snapshot_free_to_paintable(snapshot, &(bounds.size));
         return GDK_PAINTABLE(texture);
     }

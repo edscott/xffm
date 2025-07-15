@@ -256,18 +256,29 @@ private:
       char *tag = Child::getTabname(path);
       GtkWidget *label = gtk_label_new(tag);
       g_free(tag);
-      Basic::boxPack0(tabBox, label,  FALSE, FALSE, 0);
 
       auto regexLabel = gtk_label_new("");
       Basic::boxPack0(tabBox, regexLabel,  FALSE, FALSE, 0);
       g_object_set_data(G_OBJECT(tabBox), "regexLabel", regexLabel);
 
-      auto descending = Texture<bool>::getImage(EMBLEM_DESCENDING, 8, 16);
+      auto descending = Texture<bool>::getImage(EMBLEM_DESCENDING);
       gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(descending));
       g_object_set_data(G_OBJECT(tabBox), "descending", descending);
       auto flags = Settings::getInteger(path, "flags", 0x40);
       gtk_widget_set_visible(GTK_WIDGET(descending), flags & 0x04);
+
+      Basic::boxPack0(tabBox, label,  FALSE, FALSE, 0);
       
+      auto hidden = Texture<bool>::getImage(EMBLEM_HIDDEN);
+      gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(hidden));
+      g_object_set_data(G_OBJECT(tabBox), "hidden", hidden);
+      gtk_widget_set_visible(GTK_WIDGET(hidden), flags & 0x01);
+      
+
+      auto bak = gtk_label_new("~");
+      gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(bak));
+      g_object_set_data(G_OBJECT(tabBox), "bak", bak);
+      gtk_widget_set_visible(GTK_WIDGET(bak), flags & 0x02);
 
       auto close = Basic::newButton(WINDOW_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(close), "clicked", 
