@@ -4,7 +4,6 @@
 #include "../findtypes.h"
 #include "../classes/ffunctions.hh"
 #include "../classes/fgr.hh"
-#include "../classes/historyentry.hh"
 #include "findsignals.hh"
 #include "find.hh"
 #include "dndbox.hh"
@@ -12,10 +11,11 @@
 
 namespace xf
 {
+    template <class Type> class HistoryEntry;
     template <class Type>
     class FindResponse : protected Ffunctions,
                          protected FindSignals<Type>,
-                         protected HistoryEntry
+                         protected HistoryEntry<Type>
     {
       using subClass_t = FindResponse<Type>;
       using dialog_t = DialogComplex<subClass_t>;
@@ -139,21 +139,21 @@ public:
           entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "filter_entry"));
           buffer = gtk_entry_get_buffer(entry);
           text = gtk_entry_buffer_get_text(buffer);
-          saveHistory(entry,history, text);
+          Basic::saveHistory(entry,history, text);
           g_free(history);
 
           history = g_build_filename (GREP_HISTORY);
           entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "grep_entry"));
           buffer = gtk_entry_get_buffer(entry);
           text = gtk_entry_buffer_get_text(buffer);
-          saveHistory(entry,history, text);
+          Basic::saveHistory(entry,history, text);
           g_free(history);
 
           history = g_build_filename (PATH_HISTORY);
           entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "path_entry"));
           buffer = gtk_entry_get_buffer(entry);
           text = gtk_entry_buffer_get_text(buffer);
-          saveHistory(entry,history, text);
+          Basic::saveHistory(entry,history, text);
           g_free(history);
       }
 
@@ -519,7 +519,7 @@ private:
             mkPathEntry(vbox);
 
             auto history = g_build_filename(FILTER_HISTORY);              
-            auto box = entryBox(_("Filter:"), Basic::filter_text_help(), history,
+            auto box = this->entryBox(_("Filter:"), Basic::filter_text_help(), history,
                 (void *)FindSignals<Type>::onFindButton,
                 (void *)this);
             g_free(history);
@@ -552,7 +552,7 @@ private:
             gtk_box_append(topPaneVbox_, GTK_WIDGET(frame));
 
             auto history = g_build_filename(GREP_HISTORY);              
-            auto box = entryBox(_("Contains the text"), Basic::grep_text_help(), history,
+            auto box = this->entryBox(_("Contains the text"), Basic::grep_text_help(), history,
                 (void *)FindSignals<Type>::onFindButton,
                 (void *)this);
             g_free(history);

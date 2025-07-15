@@ -79,6 +79,49 @@ namespace xf {
 );
     }
 
+    static void 
+    saveHistory (GtkEntry *entry, const gchar *history, const gchar *text) {
+        char *historyDir = g_path_get_dirname(history);
+        TRACE("history dir = %s\n", historyDir);
+        if (!g_file_test(historyDir,G_FILE_TEST_IS_DIR)){
+            g_mkdir_with_parents (historyDir, 0770);
+        }
+        g_free(historyDir);
+
+        auto list = (GList *)g_object_get_data(G_OBJECT(entry), "list");
+
+        // if item is already in history, bring it to the front
+        // else, prepend item.
+       
+        bool found = false;
+        for (auto l=list; l && l->data; l=l->next){
+          auto data = (char *)l->data;
+          if (strcmp(data, text)==0){
+            list = g_list_remove(list, data);
+            list = g_list_prepend(list,data);
+            found = true;
+            break;
+          }
+        }
+        if (!found){
+            list = g_list_prepend(list,g_strdup(text));
+        }
+        g_object_set_data(G_OBJECT(entry), "list", list);
+        // rewrite history file
+        FILE *historyFile = fopen (history, "w");
+        if(!historyFile) {
+            ERROR_("saveHistory(): unable to write to file: \"%s\"\n", history);
+            return;
+        }
+
+        for (auto l=list; l && l->data; l=l->next){
+            fprintf (historyFile, "%s\n", (char *)l->data);
+        }
+        fclose (historyFile);
+        return;
+    }
+
+
 #ifdef GDK_WINDOWING_X11
     static void getXY(GtkWindow *dialog, int *x, int *y){
         auto display = getDisplay();

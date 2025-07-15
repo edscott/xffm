@@ -71,6 +71,13 @@ public:
       if (update) {
         Workdir<Type>::setWorkdir(gridView_p->path());
       } 
+
+      auto history = g_build_filename (REGEX_HISTORY);
+      buffer = gtk_entry_get_buffer(entry);
+      auto text = gtk_entry_buffer_get_text(buffer);
+      Basic::saveHistory(entry,history, text);
+      g_free(history);
+      
       return NULL;
     }
 };

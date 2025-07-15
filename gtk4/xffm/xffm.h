@@ -6,6 +6,7 @@
 #define XFFM_H
 #include "config.h"
 #include "types.h"
+#define REGEX_HISTORY g_get_user_data_dir(),"xffm4","regex",NULL
 
 #ifdef HAVE_ZIP_H
 # include <zip.h>
@@ -118,6 +119,7 @@ static void *mainWindow_p = NULL;
 #include "fm/classes/localdir.hh"       // fm class
 // dialogs 
 #include "response/dialogs.hh"
+#include "fm/templates/historyentry.hh"
 
 #include "fm/classes/history.hh"
 

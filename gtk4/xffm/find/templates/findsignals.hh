@@ -383,8 +383,8 @@ class FindSignals {
       gtk_widget_set_visible(GTK_WIDGET(object->findLabel()), false);
       object->saveHistories();
       // Also, update filter and grep entries.
-      HistoryEntry::updateDD(object->filterEntry());
-      HistoryEntry::updateDD(object->grepEntry());
+      HistoryEntry<Type>::updateDD(object->filterEntry());
+      HistoryEntry<Type>::updateDD(object->grepEntry());
     }
 
     static void

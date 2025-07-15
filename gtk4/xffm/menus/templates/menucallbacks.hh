@@ -304,7 +304,8 @@ public:
 
     static void
     regexp(GtkButton *self, void *data){
-      static char *trashDir = NULL;
+      char *history = g_build_filename(REGEX_HISTORY);
+
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
       gtk_popover_popdown(menu);
         
@@ -313,7 +314,8 @@ public:
 
       using subClass_t = regexpResponse<Type>;
       using dialog_t = DialogEntry<subClass_t>;
-      auto dialogObject = new dialog_t;
+      auto dialogObject = new dialog_t(history);
+//      auto dialogObject = new dialog_t(history);
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
 
       auto dialog = dialogObject->dialog();
@@ -324,7 +326,7 @@ public:
         gtk_entry_buffer_set_text(buffer, gridView_p->regexp(), -1);
       }
       auto help = GTK_WIDGET(g_object_get_data(G_OBJECT(entry),"help"));
-      gtk_widget_set_visible(GTK_WIDGET(help), true);
+      if (help) gtk_widget_set_visible(GTK_WIDGET(help), true);
       auto gesture = gtk_gesture_click_new();
       gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
       g_signal_connect (G_OBJECT(gesture) , "released", EVENT_CALLBACK (regexHelp), dialog);
@@ -333,12 +335,14 @@ public:
       //auto regexpString = Settings::getString(path,"regexp",NULL);
       //DBG("Regexp dialog path = %s  regexp=%s...\n", path, regexpString);
       dialogObject->run();
+      g_free(history);
       return;
     }
 
     static void regexHelp ( GtkGestureClick* self, int n_press, double x, double y,
         GtkWindow *dialog){
       Dialogs::info(Basic::grep_text_help()); // Grep regex filter.
+//      Dialogs::info(Basic::grep_text_help(), dialog); // Grep regex filter.
 // This is for shell filter:   Dialogs::info(Basic::filter_text_help());
     }
 

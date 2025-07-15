@@ -3,20 +3,57 @@
 
 namespace xf
 {
+  template <class Type>
   class HistoryEntry {
 
     public:
-      GtkBox *entryBox(const char *labelText, 
-                        const char *tooltipText, 
+      static GtkBox *entryBox(const char *labelText, 
+                        const char *helpButtonText, 
                         const char *history,
                         void *callback,
                         void *data) {
-        return entryBox0(labelText,tooltipText,history,callback,data);
+        return entryBox0(labelText,helpButtonText,history,callback,data);
       }
 
       static void
       updateDD (GtkEntry *entry){
         updateDD0(entry);
+      }
+
+      static GtkBox *getHistoryDropdown(GtkEntry *entry, const char *history){
+          GList *list = loadHistory(history);
+          auto vector = historyVector(list);
+          g_object_set_data(G_OBJECT(entry), "list", list);
+
+          auto bBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+          g_object_set_data(G_OBJECT(entry), "buttonBox", bBox);
+
+          auto dropdown = gtk_drop_down_new_from_strings(vector);
+          g_object_set_data(G_OBJECT(entry), "dropdown", dropdown);
+
+
+          gtk_entry_buffer_set_text(gtk_entry_get_buffer(entry), vector[0], -1);
+          g_free(vector);
+          g_signal_connect(G_OBJECT(dropdown), "notify", G_CALLBACK(notify), entry);
+          gtk_box_append(bBox, GTK_WIDGET(dropdown));
+
+          auto gesture1 = gtk_gesture_click_new();
+          gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture1),GTK_PHASE_CAPTURE);
+          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
+          g_signal_connect (G_OBJECT(gesture1) , "pressed", 
+              EVENT_CALLBACK (ddClick1), entry);
+          gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture1));   
+
+          auto gesture2 = gtk_gesture_click_new();
+          gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture2),GTK_PHASE_CAPTURE);
+          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
+          g_signal_connect (G_OBJECT(gesture2) , "released", 
+              EVENT_CALLBACK (ddClick2), entry);
+          gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture2));   
+
+          addKeyController1(entry, (void *)dropdown);
+          addKeyController2(entry, (void *)dropdown);
+          return bBox;
       }
 
     private:
@@ -78,72 +115,46 @@ namespace xf
         g_free(vector);
       }
 
-       GtkBox *entryBox0(const char *labelText, 
-                        const char *tooltipText, 
+      static  GtkBox *entryBox0(const char *labelText, 
+                        const char *helpButtonText, 
                         const char *history,
                         void *callback,
                         void *data)
        {
           auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-          auto label = GTK_LABEL(gtk_label_new (labelText));
+          auto label = GTK_LABEL(gtk_label_new (labelText?labelText:""));
+          g_object_set_data(G_OBJECT(box), "label", label);
           
           auto entry = GTK_ENTRY(gtk_entry_new());     
+          g_object_set_data(G_OBJECT(box), "entry", entry);
           gtk_box_append(box, GTK_WIDGET(label));
           gtk_box_append(box, GTK_WIDGET(entry));
 
-          g_object_set_data(G_OBJECT(box), "entry", entry);
           auto buffer = gtk_entry_get_buffer(entry);
           
           gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
-          if (!history) return box;
 
-          GList *list = loadHistory(history);
-          auto vector = historyVector(list);
-          g_object_set_data(G_OBJECT(entry), "list", list);
-
-          auto bBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
-          g_object_set_data(G_OBJECT(entry), "buttonBox", bBox);
-
-          auto dropdown = gtk_drop_down_new_from_strings(vector);
-          g_object_set_data(G_OBJECT(entry), "dropdown", dropdown);
-
-
-          gtk_entry_buffer_set_text(buffer, vector[0], -1);
-          g_free(vector);
-          g_signal_connect(G_OBJECT(dropdown), "notify", G_CALLBACK(notify), entry);
-          gtk_box_append(bBox, GTK_WIDGET(dropdown));
-          gtk_box_append(box, GTK_WIDGET(bBox));
-
-          auto gesture1 = gtk_gesture_click_new();
-          gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture1),GTK_PHASE_CAPTURE);
-          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
-          g_signal_connect (G_OBJECT(gesture1) , "pressed", 
-              EVENT_CALLBACK (ddClick1), entry);
-          gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture1));   
-
-          auto gesture2 = gtk_gesture_click_new();
-          gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER(gesture2),GTK_PHASE_CAPTURE);
-          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
-          g_signal_connect (G_OBJECT(gesture2) , "released", 
-              EVENT_CALLBACK (ddClick2), entry);
-          gtk_widget_add_controller (dropdown, GTK_EVENT_CONTROLLER(gesture2));   
-
-          addKeyController1(entry, (void *)dropdown);
-          addKeyController2(entry, (void *)dropdown);
-     
-          if (tooltipText) {
-            auto image = Dialog::buttonBox(EMBLEM_QUESTION,
-              _("Show help"),
-              (void *)infoClick,
-              (void *)tooltipText);
-            
-            //auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
-            //Basic::setTooltip(GTK_WIDGET(image), tooltipText);
-            gtk_box_append(box, GTK_WIDGET(image));
-            auto lab = gtk_label_new("   ");
-            gtk_box_append(box, GTK_WIDGET(lab));
+          if (history){ // Add the dropdown item.
+            auto bBox = getHistoryDropdown(entry, history);
+            gtk_box_append(box, GTK_WIDGET(bBox));
           }
-          g_signal_connect (entry, "activate", G_CALLBACK(callback), data);
+          
+     
+          auto help = Dialog::buttonBox(EMBLEM_QUESTION,
+              _("Show help"),
+              helpButtonText?(void *)infoClick: NULL,
+              helpButtonText?(void *)helpButtonText: NULL);
+          gtk_widget_set_visible(help, helpButtonText!=NULL);
+          DBG("HistoryEntry:: help button at %p\n", help);  
+          //auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
+          //Basic::setTooltip(GTK_WIDGET(image), helpButtonText);
+          gtk_box_append(box, GTK_WIDGET(help));
+          g_object_set_data(G_OBJECT(box), "help", help);
+          auto lab = gtk_label_new("   ");
+          gtk_box_append(box, GTK_WIDGET(lab));
+
+          
+          if (callback) g_signal_connect (entry, "activate", G_CALLBACK(callback), data);
                   //BUTTON_CALLBACK(FindSignals<Type>::onFindButton), this);
 
           return box;
@@ -189,7 +200,7 @@ namespace xf
       
     }
 
-      GList *
+    static   GList *
       loadHistory (const gchar *history) {
         GList *list = NULL;
         if (!history || !g_file_test(history, G_FILE_TEST_EXISTS)){
@@ -220,7 +231,7 @@ namespace xf
         return list;
       }
 
-      char * compact_line(const char *line){
+    static   char * compact_line(const char *line){
           //1. Remove leading and trailing whitespace
           //2. Compact intermediate whitespace
           char *newline= g_strdup(line); 

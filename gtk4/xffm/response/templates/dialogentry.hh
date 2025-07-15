@@ -2,6 +2,7 @@
 # define DIALOGENTRY_HH
 namespace xf
 {
+  template <class subClass_t> class HistoryEntry;
   template <class subClass_t>
   class DialogEntry : public DialogTimeout<subClass_t>{
     using dialog_t = DialogEntry<subClass_t>; 
@@ -14,8 +15,15 @@ namespace xf
     
    public:
     GtkEntry *entry(void){return entry_;}
+    DialogEntry(const char *historyFile){
+      createDialog(historyFile);
+    }
     DialogEntry(void){
-       
+      createDialog(NULL);
+    }  
+
+   private:
+     void createDialog(const char *historyFile){
        entryBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3));
        gtk_widget_set_hexpand(GTK_WIDGET(entryBox_), false);
        gtk_widget_set_halign (GTK_WIDGET(entryBox_),GTK_ALIGN_CENTER);
@@ -27,6 +35,10 @@ namespace xf
        Basic::boxPack0(entryBox_, GTK_WIDGET(entryLabel_), false, false, 1);
        Basic::boxPack0(entryBox_, GTK_WIDGET(entry_), true, true, 5);
 
+       if (historyFile){
+         auto dBox = HistoryEntry<subClass_t>::getHistoryDropdown(entry_, historyFile);
+         Basic::boxPack0(entryBox_, GTK_WIDGET(dBox), true, true, 5);
+       }
 
        //gtk_box_append(GTK_BOX (entryBox_), GTK_WIDGET(entry_));
        gtk_widget_set_halign (GTK_WIDGET(entry_),GTK_ALIGN_CENTER);
@@ -56,7 +68,6 @@ namespace xf
       gtk_window_present(this->dialog());
 
     }
-    private:
     static void activate(GtkEntry *entry, void *dialog){
       g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(2));
     }
