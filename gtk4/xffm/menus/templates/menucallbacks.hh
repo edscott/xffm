@@ -383,7 +383,7 @@ public:
       }
       if (!target){
         ERROR_("menucallbacks.hh::paste() should not happen, target==NULL\n");
-        exit(1);
+        Basic::Exit("menucallbacks.hh::paste() should not happen, target==NULL\n");
       }
 
 
@@ -443,16 +443,7 @@ public:
       }
       return;
     }
-/*
-    static void
-    close(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
-      gtk_popover_popdown(menu);
-      gtk_widget_set_visible(Child::mainWidget(), FALSE);
-      exit(0);
-      //gtk_window_destroy(GTK_WINDOW(Child::mainWidget()));
-    }
-*/
+
     static void 
     copyTxt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 

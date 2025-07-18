@@ -206,21 +206,7 @@ char buffer[4096];
       }
 
       // proceed with double click action...
-      /*
-      auto imageBox = gtk_event_controller_get_widget(eventController);
-      auto gridView_p = (GridView<TypeType> *)g_object_get_data(G_OBJECT(imageBox), "gridView_p");
-      auto store = gridView_p->store();
-      guint positionF;
-      auto item = gtk_list_item_get_item(GTK_LIST_ITEM(object));
-      auto found = g_list_store_find_with_equal_func(store, item, equalItem, &positionF);
-      if (!found){
-        TRACE("gridViewClick(): this should not happen.\n");
-        exit(1);
-      } 
-      TRACE("Found at %d\n", positionF);
-      auto selectionModel = gridView_p->selectionModel();
-      gtk_selection_model_select_item(selectionModel, positionF, false);
-*/                 
+               
       auto modType = gdk_event_get_modifier_state(event);
 
       TRACE("modType = 0x%x\n", modType);

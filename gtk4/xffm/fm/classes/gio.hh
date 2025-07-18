@@ -73,8 +73,9 @@ public:
         // Proceed...
         auto arg = (void **)calloc(4,sizeof(void *));
         if (!arg){
-            ERROR_("execute(): calloc: %s\n", strerror(errno));
-            exit(1);
+            char buffer[256];
+            snprintf(buffer, 256, "gio.hh::executeURL(): calloc: %s\n", strerror(errno)
+            Basic::Exit(buffer);
         }
         auto list = removeUriFormat(files);
         arg[0] = (void *)list;
@@ -162,7 +163,7 @@ private:
         } 
           
         // We need to be sure all threads are joined (thus completed)
-        // before the program can exit. Thus we keep track with
+        // before the program can Exit. Thus we keep track with
         // asyncReference.
         asyncReference++;
         if (pthread_join(thread, &retval)!=0){
@@ -180,7 +181,6 @@ private:
         g_free(target);
         g_free(arg);
         TRACE("thread1 done: retval= %p\n", retval);
-        //pthread_exit();
         return GINT_TO_POINTER(retval);
     }
 
@@ -218,8 +218,9 @@ public:
         pthread_t thread;
         auto arg = (void **)calloc(4,sizeof(void *));
         if (!arg){
-            ERROR_("execute(): calloc: %s\n", strerror(errno));
-            exit(1);
+            char buffer[256];
+            snprintf(buffer, 256, "gio.hh::execute(): calloc: %s\n", strerror(errno)
+            Basic::Exit(buffer);
         }
         GList *list = g_list_prepend(NULL,(void *)g_strdup(path));
         arg[0] = (void *)list;

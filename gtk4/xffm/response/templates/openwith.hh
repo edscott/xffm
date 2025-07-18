@@ -105,7 +105,7 @@ public:
       else {
         if (!selectionList_){
           ERROR_("*** Error:: OpenWith(): selectionList_ is NULL.\n");
-          exit(1);
+          Basic::Exit("*** Error:: OpenWith(): selectionList_ is NULL.\n");
         }
         auto info = G_FILE_INFO(selectionList_->data);
         path_ = Basic::getPath(info);

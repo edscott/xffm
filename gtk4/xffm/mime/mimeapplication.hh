@@ -2,7 +2,6 @@
 #define XF_MIMEAPPLICATION_HH
 #include <pthread.h>
 
-
 namespace xf {
 
 static pthread_mutex_t mimeAppHashMutex=PTHREAD_MUTEX_INITIALIZER;
@@ -69,8 +68,9 @@ public:
 
             gchar **newApps = (gchar **)calloc(size+1, sizeof(gchar *));
             if (!newApps){
-                ERROR_("add2ApplicationHash: calloc() %s\n", strerror(errno));
-                exit(1);
+              char buffer[256];
+              snprintf(buffer, 256,"add2ApplicationHash: calloc() %s\n", strerror(errno));
+              Basic::Exit(buffer);
             }
             int i=0;
             if (prepend) newApps[i++] = g_strdup(command);

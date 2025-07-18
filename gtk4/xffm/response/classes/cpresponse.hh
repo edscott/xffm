@@ -195,7 +195,7 @@ private:
       if (response == 0) g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1)); //yes
     }
     dialogObject->unlockResponse();
-    TRACE("thread2 exit\n");
+    TRACE("thread2 Exit\n");
 
     return NULL;
   }

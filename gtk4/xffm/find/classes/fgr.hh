@@ -319,8 +319,9 @@ private:
 #endif
         if(fork () == 0) {
             execvp ("grep",(char* const*) arguments);
-            fprintf(stderr, "%s: %s\n", strerror (ENOENT), "grep");
-            exit (1);
+            char buffer[256];
+            snprintf(buffer, 256,"%s: %s\n", strerror (ENOENT), "grep");
+            Basic::Exit (buffer);
         }
         wait (&status);
 

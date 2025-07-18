@@ -220,7 +220,7 @@ namespace xf {
         gtk_widget_set_margin_bottom(GTK_WIDGET(child), padding);
       } else {
         fprintf(stderr, "boxPack(): programming error. Exit(2)\n");
-        exit(2);
+        Basic::Exit("boxPack(): programming error. Exit(2)\n");
       }
     }
 public:    

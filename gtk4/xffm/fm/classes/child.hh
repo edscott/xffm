@@ -17,7 +17,7 @@ namespace xf {
     static GtkWidget * mainWidget(void){
       if (!_mainWidget){
         ERROR_("***Child::mainWidget() returns NULL\n");
-        exit(1);
+        Basic::Exit("***Child::mainWidget() returns NULL\n");
       }
       return _mainWidget;
     }

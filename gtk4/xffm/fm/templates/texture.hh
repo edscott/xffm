@@ -145,8 +145,7 @@ public:
           //TRACE("red=%lf green=%lf blue=%lf\n", red/255., green/255., blue/255.);
           cairo_set_source_rgba (cr, red/255., green/255., blue/255., .5);
         } else {
-          ERROR_("this should never happen... Texture::setShading().\n");
-          exit(1);
+          Basic::Exit("setShading(): this should never happen... Texture::setShading().\n");
           // XXX default background color is white. 
           // cairo_set_source_rgba (cr, 1,1,1, .5);
         }

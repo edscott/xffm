@@ -30,6 +30,17 @@ namespace xf {
       }
 #endif
    public:
+    static void Exit(const char *text){
+      char *f = g_strconcat(g_get_home_dir(),G_DIR_SEPARATOR_S,"xffm4_error.log", NULL);
+      FILE *log = fopen(f, "w");
+      if (log) {
+        time_t t = time(NULL);
+        fprintf(log, "Error (%s):\n%s\n", ctime(&t), text);
+        fclose(log);
+      }
+    } 
+
+
     static const char *
     filter_text_help(void) {
       return _("Basic rules:\n" "\n"
@@ -774,8 +785,8 @@ public:
         gtk_widget_set_margin_top(GTK_WIDGET(child), padding);
         gtk_widget_set_margin_bottom(GTK_WIDGET(child), padding);
       } else {
-        fprintf(stderr, "boxPack0(): programming error. Exit(2)\n");
-        exit(2);
+        //fprintf(stderr, "boxPack0(): programming error. Exit(2)\n");
+        Basic::Exit("boxPack0(): programming error. Exit(2)\n");
       }
     }
     static void
@@ -907,7 +918,7 @@ public:
 #endif
         if (!OK) {
           g_error ("Unsupported GDK backend");
-          exit(1);
+          Basic::Exit("Unsupported GDK backend");
         }
    }
     static bool
@@ -1011,7 +1022,7 @@ public:
     GtkMenuButton *newMenuButtonX(const gchar *icon, const gchar *tooltipText){
       if (!tooltipText && !icon) {
         fprintf(stderr, "Util::newMenuButton(): programing error.\n");
-        exit(1);
+        Basic::Exit("Util::newMenuButton(): programing error.\n");
       }
       auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
       if (tooltipText) {
@@ -1033,7 +1044,7 @@ public:
     GtkMenuButton *newMenuButton(const gchar *icon, const gchar *tooltipText){
       if (!tooltipText && !icon) {
         fprintf(stderr, "Util::newMenuButton(): programing error.\n");
-        exit(1);
+        Basic::Exit("Util::newMenuButton(): programing error.\n");
       }
       auto button = GTK_MENU_BUTTON(gtk_menu_button_new());
       if (tooltipText) {

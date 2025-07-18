@@ -292,7 +292,7 @@ class FindSignals {
       Data->argument = (char **)calloc(MAX_COMMAND_ARGS, sizeof(gchar *));
       if (!Data->argument){
           std::cerr<<"calloc error at get_arguments()\n";
-          exit(1);
+          Basic::Exit("findsignals.hh::get_arguments():calloc error at get_arguments()\n");
       }
       
       /* the rest */

@@ -21,11 +21,11 @@ namespace xf {
 //        _("Remove bookmark"),
         
         _("Select All"), 
-        _("Match regular expression"), 
         _("Empty trash bin"), 
 
         " ",
         _("Show"),
+        _("Match regular expression"), 
         _("Hidden files"),
         _("Backup files"),
 

@@ -160,7 +160,7 @@ public:
         return;
       }
       // Cleanups before starting a new drag.
-      // Last drag objects remain until program exit (no leaks).
+      // Last drag objects remain until program Exit (no leaks).
       auto bytes = (GBytes *)g_object_get_data(G_OBJECT(this->drag_), "bytes");
       if (!bytes) {
         TRACE("*** Dnd::cleanDrag() drag_ is already clean.\n");// should not happen.

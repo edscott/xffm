@@ -282,7 +282,10 @@ namespace xf {
         auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
         auto num = gtk_notebook_get_current_page(notebook);
         auto n = gtk_notebook_get_n_pages(notebook);
-        if (n == 1) exit(0);
+        if (n == 1) {
+          gtk_widget_set_visible(Child::mainWidget(), false);
+          exit(0);
+        }
         gtk_notebook_remove_page(notebook,num);
 
         return true;

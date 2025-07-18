@@ -269,8 +269,7 @@ template <class Type>
 
         auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
         if (!child){
-          ERROR_("localdir.hh::changed_f(): this should not happen\n");
-          exit(1);
+          Basic::Exit("localdir.hh::changed_f(): this should not happen\n");
         }
         TRACE("*** monitor changed_f call \n");
         gchar *f= first? g_file_get_path (first):g_strdup("--");

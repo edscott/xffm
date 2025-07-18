@@ -54,7 +54,7 @@ private:
       auto dir = g_object_get_data(G_OBJECT(window), "dir");
       g_free(dir);
       gtk_widget_set_visible(GTK_WIDGET(window), false);
-      // will destroy on program exit.
+      // will destroy on program Exit.
       //gtk_window_destroy(GTK_WINDOW(window));
     }
 

@@ -14,7 +14,7 @@ public:
     Find(const gchar *path){
         if (!whichGrep()){
             ERROR_("grep command not found\n");
-            exit(1);
+            Basic::Exit("grep command not found\n");
         }
         fullPath(path);
         gchar *fullPath = NULL;

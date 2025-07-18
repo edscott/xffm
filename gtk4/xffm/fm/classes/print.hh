@@ -455,8 +455,9 @@ typedef struct lpterm_colors_t {
         TRACE("Print::resolve_tag(%s): *** creating new tag.\n", id);
         auto color = (GdkRGBA *)calloc(1, sizeof(GdkRGBA));
         if (!color){
-            ERROR_("Print::resolve_tag: calloc: %s\n", strerror(errno));
-            exit(1);
+            char buffer[256];
+            snprintf(buffer, 256,"Print::resolve_tag: calloc: %s\n", strerror(errno));
+            Basic::Exit(buffer);
         }
         if (gdk_rgba_parse (color, id)) {
             TRACE("***tag %s is %lf,%lf,%lf\n", id, color->red,color->green,color->blue); 
