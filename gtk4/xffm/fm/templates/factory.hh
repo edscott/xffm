@@ -172,16 +172,15 @@ ClickMenu
           } 
         }
         if (doPreview)  scaleFactor = 2.0;
-        if (size == 24) scaleFactor = 0.75;
+if (size == 24) scaleFactor = 0.75;
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
             struct stat st;
             if (stat(path, &st) < 0) {
-              auto paintable = Texture<bool>::load(EMBLEM_BROKEN, size);
-              texture = Texture<bool>::addEmblem(paintable,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
+              texture = Texture<bool>::addEmblem(info,  EMBLEM_BROKEN, scaleFactor*size, scaleFactor*size);
             } else {
-              texture = Texture<bool>::addEmblem(info,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
+              texture = Texture<bool>::addEmblemLeft(info,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
             }
           } else { // simple
             auto gfiletype= g_file_info_get_file_type (info);
@@ -802,11 +801,29 @@ ClickMenu
 
     static GtkWidget *sourceCodeImage(const char *name, GFileInfo *info, int size, 
         const char *emblem, const char **src){
+        
+      double scaleFactor = 1.0;
+      if (size == 24) scaleFactor = 0.75;
+      
       auto extension = strrchr(name, '.');
       if (!extension) return NULL;
       for (auto p=src; p && *p; p++){
         if (extension+1 != NULL && strcmp(extension+1, *(p)) == 0){
           auto texture = Texture<bool>::addEmblem(info, emblem, size, size);   
+          
+          if (g_file_info_get_is_symlink(info)){
+            auto path = Basic::getPath(info);      
+            struct stat st;
+            if (stat(path, &st) < 0) {
+              auto paintable = Texture<bool>::load(EMBLEM_BROKEN, size);
+              texture = Texture<bool>::addEmblemLeft(texture,  EMBLEM_BROKEN, scaleFactor*size, scaleFactor*size);
+            } else {
+              texture = Texture<bool>::addEmblemLeft(texture,  EMBLEM_SYMLINK, scaleFactor*size, scaleFactor*size);
+            }
+            g_free(path);
+          } 
+
+
           auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
           return image;
         }

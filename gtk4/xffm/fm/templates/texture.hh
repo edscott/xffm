@@ -152,6 +152,39 @@ public:
         g_free(string);
     }
 
+    static GdkPaintable *addEmblemLeft(GFileInfo *info, const char *emblem, double width, double height)
+    {
+        auto gIcon = g_file_info_get_icon(info);
+        if (gIcon == NULL) {
+          auto paintable = getIcon(EMBLEM_BROKEN, width);
+          return addEmblemLeft(paintable, emblem, width, height);
+        }
+        if (!gIcon || !emblem) return NULL;
+        auto icon = getIcon(gIcon, width);
+        return addEmblemLeft(icon, emblem, width, height);
+    }
+
+    static GdkPaintable *addEmblemLeft(GdkPaintable *paintable, const char *emblem, double width, double height){
+        GtkSnapshot  *snapshot = gtk_snapshot_new();
+        graphene_rect_t bounds;
+        bounds.origin.x = bounds.origin.y = 0.0;
+        bounds.size.width = width;
+        bounds.size.height = height;
+
+        gdk_paintable_snapshot (paintable, snapshot, width, height);
+        auto emblemIcon = lookupIcon(emblem, width);  
+//        auto emblemIcon = lookupIcon(emblem, width);  
+        graphene_point_t point;
+        point.x = 0.0; 
+        point.y = 0.0;
+        gtk_snapshot_translate (snapshot, &point);
+
+        gdk_paintable_snapshot (GDK_PAINTABLE(emblemIcon), snapshot, width/2, height/2);
+//        gdk_paintable_snapshot (GDK_PAINTABLE(emblemIcon), snapshot, width/3, height/3);
+        auto texture = gtk_snapshot_free_to_paintable(snapshot, &(bounds.size));
+        return GDK_PAINTABLE(texture);
+    }
+
     static GdkPaintable *addEmblem(GdkPaintable *paintable, const char *emblem, double width, double height){
         GtkSnapshot  *snapshot = gtk_snapshot_new();
         graphene_rect_t bounds;
@@ -190,6 +223,7 @@ public:
         }
         return addEmblem(gIcon, emblem, width, height);
     }
+
 
     static GdkPaintable *addEmblem(const char *iconName, const char *emblem, double width, double height)
     {
