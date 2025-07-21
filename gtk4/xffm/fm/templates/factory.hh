@@ -172,7 +172,7 @@ ClickMenu
           } 
         }
         if (doPreview)  scaleFactor = 2.0;
-if (size == 24) scaleFactor = 0.75;
+        if (size == 24) scaleFactor = 0.75;
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
@@ -761,6 +761,40 @@ if (size == 24) scaleFactor = 0.75;
     static GtkWidget *sourceCode(const char *name, GFileInfo *info, int size){
       GtkWidget *image = NULL;
       image = sourceCodeImageDirect(name, info, size);
+      if (image) return image;
+
+      // Ini
+      const char *pIni[] = {"ini", "INI",  NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_PREFERENCES, pIni);
+      if (image) return image;
+
+      // Log
+      const char *pLog[] = {"log", "LOG",  NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_LOG, pLog);
+      if (image) return image;
+
+      // Text
+      const char *pTxt[] = {"txt", "TXT", "readme", "md", "MD",  NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_TEXT, pTxt);
+      if (image) return image;
+
+
+      // Compressed
+      const char *pCompressed[] = {"tar", "xz", "tgz", "bz2", "zip", "ZIP", "gz", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_COMPRESSED, pCompressed);
+      if (image) return image;
+
+      // LyX
+      const char *pMath[] = {"lyx", "LYX", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_MATH, pMath);
+      if (image) return image;
+
+      // OO
+      const char *pOO[] = {"xlsx", "docx", "XLSX", "DOCX", "pptx", "PPTX", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_MSOFFICE, pOO);
+      if (image) return image;
+
+
       if (image) return image;
       
       const char *pSrc[] = {"pl", "PL", "pm", "PM", NULL};

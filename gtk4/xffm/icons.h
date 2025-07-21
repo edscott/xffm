@@ -30,6 +30,13 @@
 #define EMBLEM_O "emblem-o"
 #define EMBLEM_M "emblem-m"
 
+#define EMBLEM_MSOFFICE "emblem-msoffice"
+#define EMBLEM_PREFERENCES "emblem-preferences"
+#define EMBLEM_LOG "emblem-about"
+#define EMBLEM_TEXT "emblem-text"
+#define EMBLEM_OO "emblem-oo"
+#define EMBLEM_MATH "emblem-math"
+#define EMBLEM_COMPRESSED "emblem-compressed"
 #define EMBLEM_HIDDEN "emblem-show-hidden"
 #define EMBLEM_FLOPPY "emblem-floppy"
 #define EMBLEM_DESCENDING "emblem-descending"

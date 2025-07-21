@@ -142,6 +142,14 @@ class Preview {
         auto paintable = loadPath(path);
         g_free(path); // no longer needed.
         g_free(arg);
+        TRACE("Preview::preview: paintable=%p\n", paintable);
+        if (!paintable){
+          double scaleFactor = 1.0;
+          if (size == 24) scaleFactor = 0.75;
+          auto texture = GDK_PAINTABLE(Texture<bool>::load("image-x-generic", size));
+          paintable = Texture<bool>::addEmblem(texture,  EMBLEM_GRAPHICS, scaleFactor*size, scaleFactor*size);
+          // add EMBLEM_GRAPHICS
+        }
 
 
         // context function...
@@ -171,6 +179,7 @@ class Preview {
         if (!mimetype) mimetype =  g_strdup(_("unknown"));
         auto isImage = (strstr(mimetype, "image"));
         auto isPdf = (strstr (mimetype, "pdf") || strstr (mimetype, "postscript"));
+        if (isImage){ TRACE("\"%s\" is image.\n", path); }
         g_free(path);
         g_free(mimetype);
         return (type == G_FILE_TYPE_REGULAR && (isImage || isPdf));
