@@ -143,11 +143,13 @@ class Preview {
         g_free(path); // no longer needed.
         g_free(arg);
         TRACE("Preview::preview: paintable=%p\n", paintable);
+        int iconSize = size;
         if (!paintable){
           double scaleFactor = 1.0;
-          if (size == 24) scaleFactor = 0.75;
-          auto texture = GDK_PAINTABLE(Texture<bool>::load("image-x-generic", size));
-          paintable = Texture<bool>::addEmblem(texture,  EMBLEM_GRAPHICS, scaleFactor*size, scaleFactor*size);
+          iconSize = Settings::getInteger("xfterm", "iconsize");
+          if (iconSize == 24) scaleFactor = 0.75;
+          auto texture = GDK_PAINTABLE(Texture<bool>::load("image-x-generic", iconSize));
+          paintable = Texture<bool>::addEmblem(texture,  EMBLEM_GRAPHICS, scaleFactor*iconSize, scaleFactor*iconSize);
           // add EMBLEM_GRAPHICS
         }
 
@@ -159,7 +161,7 @@ class Preview {
           (void *) imageBox,
           (void *) image,
           GINT_TO_POINTER(serial),
-          GINT_TO_POINTER(size),
+          GINT_TO_POINTER(iconSize),
           (void *)child,
           NULL
         };
