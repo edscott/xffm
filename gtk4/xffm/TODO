@@ -1,4 +1,8 @@
 
+Bug: selection seems broken when regexp filter is on.
+TODO: hide icons which are in cut buffer, both on reload and on
+cut action  ( probably also in a fixed monitor function).
+
 BUG: on chenging directory from file selector using pathbar:
 (process:45791): Gtk-CRITICAL **: 08:29:47.256: gtk_notebook_get_current_page: assertion 'GTK_IS_NOTEBOOK (notebook)' failed
 (process:45791): Gtk-CRITICAL **: 08:29:47.256: gtk_notebook_get_nth_page: assertion 'GTK_IS_NOTEBOOK (notebook)' failed
