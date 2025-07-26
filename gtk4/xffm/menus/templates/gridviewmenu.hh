@@ -30,7 +30,7 @@ namespace xf {
         _("Rename"),
         _("Duplicate"),
         _("Link"),
-        _("Properties"),
+        //_("Properties"),
         _("Delete"),
         _("Encrypt File..."),
         _("Decrypt File..."),

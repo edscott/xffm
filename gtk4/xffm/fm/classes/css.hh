@@ -156,6 +156,12 @@ private:
         border-radius: 0px;\
         border-color: transparent;\
       }\
+      .menuNegative * {\
+        background-color: #acaaa5;\
+      }\
+      .menuPositive * {\
+        background-color: white\
+      }\
       .pathbarboxNegative * {\
         color: white;\
         font-size: 12px;\

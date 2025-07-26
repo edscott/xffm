@@ -89,7 +89,7 @@ namespace xf {
       }
 
       GtkPopover *setMenu(GtkMenuButton *button){
-        auto menu = mkMenu(title_, NULL);
+        auto menu = mkMenu(title_);
         gtk_menu_button_set_popover (button, GTK_WIDGET(menu)); 
         g_object_set_data(G_OBJECT(button), "menu", menu);
        // g_signal_connect(G_OBJECT(button), "activate", G_CALLBACK(openMenuButton), (void *)menu);
@@ -103,7 +103,7 @@ namespace xf {
       }*/
       
       GtkPopover *setMenu(GtkWidget *widget, GtkWidget *parent, const char *path, bool isTextView){
-        auto menu = mkMenu(title_, NULL);
+        auto menu = mkMenu(title_);
         g_object_set_data(G_OBJECT(menu), "isTextView", GINT_TO_POINTER(isTextView));
         g_object_set_data(G_OBJECT(menu), "path", (void *)path);
         gtk_popover_set_default_widget(menu, widget);
@@ -225,8 +225,11 @@ namespace xf {
       }
     }
 public:    
+    GtkPopover *mkMenu(const char *markup){
+      return mkMenu(markup, NULL, NULL);
+    }
 
-    GtkPopover *mkMenu(const char *markup, void *callback){
+    GtkPopover *mkMenu(const char *markup, void *callback, const char *tooltipText){
       auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_add_css_class (GTK_WIDGET(vbox), "inquireBox" );
         gtk_widget_set_hexpand(GTK_WIDGET(vbox), FALSE);
@@ -243,12 +246,24 @@ public:
       g_object_set_data(G_OBJECT(titleLabel), "menu", menu);
       if (markup) gtk_label_set_markup(titleLabel, markup);    
       if (callback){
+        if (tooltipText) Basic::setTooltip(GTK_WIDGET(titleBox), tooltipText);
         auto gesture = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
         g_signal_connect (G_OBJECT(gesture) , "released", G_CALLBACK (callback), (void *)menu);
         gtk_widget_add_controller(GTK_WIDGET(titleBox), GTK_EVENT_CONTROLLER(gesture));
         gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
             GTK_PHASE_CAPTURE);      
+        auto controllerIn = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controllerIn, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(titleBox), controllerIn);
+        g_signal_connect (G_OBJECT (controllerIn), "enter", 
+            G_CALLBACK (UtilBasic::buttonMotion2), GINT_TO_POINTER(1));
+       
+        auto controllerOut = gtk_event_controller_motion_new();
+        gtk_event_controller_set_propagation_phase(controllerOut, GTK_PHASE_CAPTURE);
+        gtk_widget_add_controller(GTK_WIDGET(titleBox), controllerOut);
+        g_signal_connect (G_OBJECT (controllerOut), "leave", 
+            G_CALLBACK (UtilBasic::buttonMotion2), NULL);
       }
 
       gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);       

@@ -593,7 +593,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
     static GtkPopover *getPopover(GtkWidget *menubox, GridView<Type> *gridView_p){ 
       TRACE("getPopover 1\n");
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", _("Multiple selections"));
-      auto popover = gridView_p->myMenu_->mkMenu(markup, NULL);
+      auto popover = gridView_p->myMenu_->mkMenu(markup);
       g_free(markup);
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       TRACE("object set selection list\n");
@@ -612,7 +612,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
       auto path = Basic::getPath(info);
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-      auto popover = gridView_p->myMenu_->mkMenu(markup, (void *)GridviewMenu<Type>::gestureProperties);
+      auto popover = gridView_p->myMenu_->mkMenu(markup, (void *)GridviewMenu<Type>::gestureProperties, _("Properties"));
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       g_object_set_data(G_OBJECT(popover), "info", info);
 
@@ -635,7 +635,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
       auto path = Basic::getPath(info);
       auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-      auto popover = gridView_p->myMenu_->mkMenu(markup, (void *)GridviewMenu<Type>::gestureProperties);
+      auto popover = gridView_p->myMenu_->mkMenu(markup, (void *)GridviewMenu<Type>::gestureProperties, _("Properties"));
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       g_object_set_data(G_OBJECT(popover), "info", info);
 

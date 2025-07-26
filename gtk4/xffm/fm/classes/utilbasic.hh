@@ -123,6 +123,20 @@ namespace xf {
     }
 
     public:
+    static gboolean buttonMotion2( GtkEventControllerMotion* self,
+                    double x, double y, void *data) {
+      auto controller = GTK_EVENT_CONTROLLER(self);
+      auto widget = gtk_event_controller_get_widget(controller);
+      if (data) {
+        gtk_widget_remove_css_class (GTK_WIDGET(widget), "menuPositive" );
+        gtk_widget_add_css_class (GTK_WIDGET(widget), "menuNegative" );
+      } else {
+        gtk_widget_remove_css_class (GTK_WIDGET(widget), "menuNegative" );
+        gtk_widget_add_css_class (GTK_WIDGET(widget), "menuPositive" );
+      }
+      return TRUE;
+    }
+
 
     static void setFontCss(GtkWidget *widget){
       auto size = Settings::getInteger("xfterm", "fontcss", 3);
