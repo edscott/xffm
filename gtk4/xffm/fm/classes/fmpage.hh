@@ -197,6 +197,7 @@ namespace xf {
     }
 
     static void switchFontAllPages(int valueI){
+      TRACE("switchFontAllPages()...\n");
       auto n = gtk_notebook_get_n_pages(mainNotebook);
       for (auto i=0; i<n; i++){
         auto child = gtk_notebook_get_nth_page(mainNotebook, i);

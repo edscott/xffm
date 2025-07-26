@@ -373,9 +373,13 @@ namespace xf {
     }
 
     static GtkWidget *getChild(void){
-      if (!Child::mainWidget()) return NULL;
+      if (!mainWidget()) return NULL;
       auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
+      if (!notebook) {
+        return gtk_window_get_child(GTK_WINDOW(mainWidget()));
+      }
       int num = gtk_notebook_get_current_page(notebook);
+      TRACE("Child::getChild()... Notebook = %p\n",notebook);
       GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
       return child;
     }

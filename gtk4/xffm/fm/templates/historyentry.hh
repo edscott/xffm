@@ -145,7 +145,7 @@ namespace xf
               helpButtonText?(void *)infoClick: NULL,
               helpButtonText?(void *)helpButtonText: NULL);
           gtk_widget_set_visible(help, helpButtonText!=NULL);
-          DBG("HistoryEntry:: help button at %p\n", help);  
+          TRACE("HistoryEntry:: help button at %p\n", help);  
           //auto image = Texture<bool>::getImage(EMBLEM_QUESTION, 18);
           //Basic::setTooltip(GTK_WIDGET(image), helpButtonText);
           gtk_box_append(box, GTK_WIDGET(help));

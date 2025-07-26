@@ -5,8 +5,7 @@ Bug: selection seems broken when regexp filter is on:
   3. rename long press is OK
   4. select out of icon and button3 menu is OK
 
-TODO: On clear find results, close all open dialog results as well.
-.
+
 TODO: hide icons which are in cut buffer, both on reload and on
 cut action  ( probably also in a fixed monitor function).
 

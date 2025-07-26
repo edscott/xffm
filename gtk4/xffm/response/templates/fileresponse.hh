@@ -133,13 +133,14 @@ private:
 
     char *getSelectedPath(GtkSingleSelection *sel){
       GtkTreeListRow *treeListRow = GTK_TREE_LIST_ROW(gtk_single_selection_get_selected_item (sel));
-      auto text = _("No folder selected.");
+      auto text = startFolder();
+//      auto text = _("No folder selected.");
       if (!treeListRow) {
         gtk_label_set_markup(GTK_LABEL(selectLabel_), text);
         auto g = g_strconcat("<span color=\"red\">", text,"</span>", NULL);
         gtk_label_set_markup(GTK_LABEL(displaySelectLabel_), g);
         g_free(g);
-        return NULL;
+        return g_strdup(text);
       }
       auto info = G_FILE_INFO(gtk_tree_list_row_get_item(treeListRow));
       auto path = Basic::getPath(info);
@@ -167,6 +168,7 @@ private:
       //auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
       auto path = p->getSelectedPath(p->selectionModel());
       if (!path) return FALSE;     
+      //if (!path) {path = g_strdup(p->startFolder()); }
      
       TRACE("Reload treemodel with %s\n", path);
 
@@ -731,6 +733,7 @@ private: // Nonfree functions
       auto button = gtk_event_controller_get_widget(eventController);
       auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
       TRACE("Reload treemodel with %s\n", path);
+      p->startFolder(path);
 
       p->responsePathbar_p->path(path); // new path
       auto pathbar = p->responsePathbar_p->pathbar(); 

@@ -51,6 +51,7 @@ namespace xf {
 
     
     static void *reloadAll_f(void *data){
+        TRACE("util.hh reloadAll_f()...\n");
         auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(Child::mainWidget()), "notebook"));
         auto n = gtk_notebook_get_n_pages(notebook);
         for (int i=0; i<n; i++){
