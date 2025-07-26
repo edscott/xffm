@@ -716,7 +716,8 @@ private:
           //TRACE("show %s:%p\n", *p, widget);
           gtk_widget_set_visible(GTK_WIDGET(widget), true);
         } else {
-          ERROR_("* Warning: cannot find widget \"%s\" to show.\n", *p);
+          
+          TRACE("* Warning: cannot find widget \"%s\" to show.\n", *p);
         }
       }
       auto configFlags = Settings::getInteger(gridView_p->path(), "flags", 0x40);

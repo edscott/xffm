@@ -332,10 +332,11 @@ public:
       auto dialog = dialogObject->dialog();
       auto regexp = gridView_p->regexp();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
-      if (regexp && strlen(regexp)){
+      //if (regexp && strlen(regexp)){
         auto buffer = gtk_entry_get_buffer(entry);
-        gtk_entry_buffer_set_text(buffer, gridView_p->regexp(), -1);
-      }
+        gtk_entry_buffer_set_text(buffer, "", -1);
+//        gtk_entry_buffer_set_text(buffer, gridView_p->regexp(), -1);
+      //}
       auto help = GTK_WIDGET(g_object_get_data(G_OBJECT(entry),"help"));
       if (help) gtk_widget_set_visible(GTK_WIDGET(help), true);
       auto gesture = gtk_gesture_click_new();
