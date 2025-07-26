@@ -13,6 +13,7 @@ typedef struct MenuInfo_t {
 } MenuInfo_t;
 
 namespace xf {
+  template <class Type>  class GridviewMenu;
   typedef struct MenuInfo_t {
     const char *key;
     void *data;
@@ -88,7 +89,7 @@ namespace xf {
       }
 
       GtkPopover *setMenu(GtkMenuButton *button){
-        auto menu = mkMenu(title_);
+        auto menu = mkMenu(title_, NULL);
         gtk_menu_button_set_popover (button, GTK_WIDGET(menu)); 
         g_object_set_data(G_OBJECT(button), "menu", menu);
        // g_signal_connect(G_OBJECT(button), "activate", G_CALLBACK(openMenuButton), (void *)menu);
@@ -102,7 +103,7 @@ namespace xf {
       }*/
       
       GtkPopover *setMenu(GtkWidget *widget, GtkWidget *parent, const char *path, bool isTextView){
-        auto menu = mkMenu(title_);
+        auto menu = mkMenu(title_, NULL);
         g_object_set_data(G_OBJECT(menu), "isTextView", GINT_TO_POINTER(isTextView));
         g_object_set_data(G_OBJECT(menu), "path", (void *)path);
         gtk_popover_set_default_widget(menu, widget);
@@ -121,7 +122,7 @@ namespace xf {
       }
       
       GtkPopover *setGridviewMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
-        auto menu = mkMenu(title_);
+        auto menu = mkMenu(title_, (void *)GridviewMenu<subMenuClass>::gestureProperties);
         g_object_set_data(G_OBJECT(menu), "path", (void *)path);
         gtk_popover_set_default_widget(menu, widget);
         gtk_widget_set_parent(GTK_WIDGET(menu), parent);
@@ -225,7 +226,7 @@ namespace xf {
     }
 public:    
 
-    GtkPopover *mkMenu(const char *markup){
+    GtkPopover *mkMenu(const char *markup, void *callback){
       auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_add_css_class (GTK_WIDGET(vbox), "inquireBox" );
         gtk_widget_set_hexpand(GTK_WIDGET(vbox), FALSE);
@@ -233,14 +234,25 @@ public:
       auto titleBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_add_css_class (GTK_WIDGET(titleBox), "inquireBox" );
       gtk_box_append (vbox, GTK_WIDGET(titleBox));
+      GtkPopover *menu = GTK_POPOVER(gtk_popover_new ());
+      g_object_set_data(G_OBJECT(titleBox), "menu", menu);
+      TRACE("mkMenu() titleBox(%p) -> menu(%p)\n", titleBox, menu);
 
       auto titleLabel = GTK_LABEL(gtk_label_new(""));
       gtk_box_append (titleBox, GTK_WIDGET(titleLabel));
+      g_object_set_data(G_OBJECT(titleLabel), "menu", menu);
       if (markup) gtk_label_set_markup(titleLabel, markup);    
+      if (callback){
+        auto gesture = gtk_gesture_click_new();
+        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
+        g_signal_connect (G_OBJECT(gesture) , "released", G_CALLBACK (callback), (void *)menu);
+        gtk_widget_add_controller(GTK_WIDGET(titleBox), GTK_EVENT_CONTROLLER(gesture));
+        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+            GTK_PHASE_CAPTURE);      
+      }
 
-      GtkPopover *menu = GTK_POPOVER(gtk_popover_new ());
-        gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);       
-        gtk_widget_add_css_class (GTK_WIDGET(menu), "inquireBox" );
+      gtk_widget_set_vexpand(GTK_WIDGET(vbox), FALSE);       
+      gtk_widget_add_css_class (GTK_WIDGET(menu), "inquireBox" );
         
       g_object_set_data(G_OBJECT(menu), "titleBox", titleBox);
       g_object_set_data(G_OBJECT(menu), "titleLabel", titleLabel);

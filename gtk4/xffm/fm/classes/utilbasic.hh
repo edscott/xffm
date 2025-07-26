@@ -190,6 +190,7 @@ namespace xf {
         return eventBox;
     }
  
+#if 0
     static void 
     setMenuTitle(GtkPopover *menu, const char *title){
      if (title) {      
@@ -264,6 +265,9 @@ namespace xf {
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
       return menu;
     }
+
+#endif
+    
     static gchar *fileInfo(const gchar *path){
         gchar *file = g_find_program_in_path("file");
         if (!file) return g_strdup("\"file\" command not in path!");

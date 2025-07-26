@@ -111,7 +111,7 @@ namespace xf {
       static const char *boxes_[] = { NULL};
       return boxes_;      
     }
-    const char **radioboxes(void){
+const char **radioboxes(void){
       static const char *boxes_[] = { NULL};
       return boxes_;      
     }
@@ -183,16 +183,40 @@ namespace xf {
       return;
     }
 
+  public:
     static void 
-    properties(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+    gestureProperties(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+      
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto widget = gtk_event_controller_get_widget(eventController);
+      properties(widget, NULL);
+    }
+
+  private: 
+    
+    static void 
+    properties(GtkWidget *widget, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu")); 
+      TRACE("properties: widget is %p\n", widget);
+      if (!menu){
+        TRACE("menu is null\n");
+        return;
+      }
+      if (!GTK_IS_POPOVER(menu)){
+        TRACE("%p is not popover\n", menu);
+        return;
+      }
       gtk_popover_popdown(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       //TRACE("path= %s, info=%p\n", path, info);
       new Properties<bool>(info);
       //g_free(path);
     }
-    
+
     static void addB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       gtk_popover_popdown(menu);

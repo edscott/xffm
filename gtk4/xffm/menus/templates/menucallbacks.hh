@@ -301,12 +301,23 @@ namespace xf {
     }
 
 public:
+    static void 
+    gestureRegexp(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+      
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto widget = gtk_event_controller_get_widget(eventController);
+      regexp(widget, NULL);
+    }
 
     static void
-    regexp(GtkButton *self, void *data){
+    regexp(GtkWidget *widget, void *data){
       char *history = g_build_filename(REGEX_HISTORY);
 
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu"));
       gtk_popover_popdown(menu);
         
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");

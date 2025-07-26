@@ -1,3 +1,7 @@
+Add motion controller to titleBox in menu for shading
+Add filter option to root view (bookmarks) and fstab too.
+Remove properties and regexp from menus (already at titlebox).
+
 
 Bug: selection seems broken when regexp filter is on:
   1. DnD selection and trigger not working

@@ -570,7 +570,7 @@ private:
       auto newMenuButton = Basic::newButton(OPEN_MENU, _("Main menu"));
       mainMenuButton = newMenuButton;// global button (xffm.h)
       auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
-      menu_ = myMainMenu->mkMenu(NULL);
+      menu_ = myMainMenu->mkMenu(NULL, (void *)MenuCallbacks<Type>::gestureRegexp);
       TRACE("menu popover = %p\n", menu_);
       gtk_widget_set_parent(GTK_WIDGET(menu_), GTK_WIDGET(newMenuButton));
       g_object_set_data(G_OBJECT(newMenuButton), "menu", menu_);
