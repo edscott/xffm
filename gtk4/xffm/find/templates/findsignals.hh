@@ -1,9 +1,9 @@
 #ifndef FINDSIGNALS_HH
 #define FINDSIGNALS_HH
-static GList *findWindowsList = NULL;
 
 namespace xf
 {
+static GList *findWindowsList = NULL;
         ///////////////////   signals  /////////////////////////
 template <class Type> class DnDBox;
 template <class Type> class FindResponse;
@@ -391,12 +391,15 @@ class FindSignals {
     onClearButton (GtkWidget * button, gpointer data) {
       TRACE("onClearButton...\n");
       auto object = (FindResponse<Type> *)data;
-
-        auto textview = object->textview();
-        TRACE("fixme: signals::onClearButton\n");
-        Print::clear_text(textview);
-        auto vpane =object->vpane();
-        gtk_paned_set_position(vpane, 2500);
+      for (auto l=findWindowsList; l && l->data; l=l->next){
+        auto w = GTK_WIDGET(l->data);
+        gtk_widget_set_visible(w, false);
+      }
+      auto textview = object->textview();
+      TRACE("fixme: signals::onClearButton\n");
+      Print::clear_text(textview);
+      auto vpane =object->vpane();
+      gtk_paned_set_position(vpane, 2500);
     }
 
     static void
