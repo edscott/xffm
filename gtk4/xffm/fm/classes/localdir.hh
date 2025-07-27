@@ -349,7 +349,11 @@ private:
         // First do the regex, if applicable.
         if (doRegex && regex){
           auto name = g_file_info_get_name(info);
-          auto match = g_regex_match (regex, name, (GRegexMatchFlags)0, NULL);
+          // skip ".."
+          bool match;
+          if (strcmp(name, "..") == 0) match = true;
+          else match = g_regex_match (regex, name, (GRegexMatchFlags)0, NULL);
+          
           if (!match) {
             filterData->count++;
             TRACE("not match %s, count=%d\n", name, filterData->count);
