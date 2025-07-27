@@ -232,17 +232,31 @@ namespace xf {
         return count;
       }
     public:
-      static bool findPositionModel(GListStore *store, const char *path, guint *positionM, int flags){
-        guint positionS;
-        if (!findPositionStore(store, path, &positionS, flags)) return false;
-        auto offset = getHiddenCount(G_LIST_MODEL(store), flags, positionS);
-        //auto offset = 0;
-        *positionM = positionS - offset;
-        TRACE("*** offset is %d, store position = %d, model position is %d\n", offset, positionS, *positionM);
-        return true;
+      
+// selectionModel_
+// G_LIST_MODEL
+// GTK_SELECTION_MODEL      
+      static bool findPositionModel2(GListModel *model, const char *path, guint *positionM){
+
+        guint n = g_list_model_get_n_items(model);
+        for (guint i=0; i<n; i++){
+          auto info = G_FILE_INFO(g_list_model_get_object (model, i));
+          auto name = g_file_info_get_name(info);
+          auto basename = g_path_get_basename(path);
+          if (strcmp(basename, name)==0) {
+            g_free(basename);
+            *positionM = i;
+            TRACE("Eureka! found at %d\n", i);
+            return true;
+          }
+          g_free(basename);
+        }
+        return false;
       }
+
     public:
-      static bool findPositionStore(GListStore *store, const char *path, guint *positionS, int flags){ 
+      
+      static bool findPositionStore(GListStore *store, const char *path, guint *positionS){ 
         // result will be offset by hidden items.
         GFileInfo *infoF = g_file_info_new();
         auto name = g_path_get_basename(path);
@@ -270,20 +284,16 @@ namespace xf {
         if (found){
           TRACE("%s found at position %d\n", path, *positionS);
         } else {
+
           TRACE("%s not found by GFileInfo\n", path); 
         }
         return found;
       }
+      
 
-/*      static void *insert_f(void *data){
-        auto args = (void **)data;
-        auto store = G_LIST_STORE(args[0]);
-        auto infoF = G_FILE_INFO(args[1]);
-        auto flags = args[2];
-        g_list_store_insert_sorted(store, G_OBJECT(infoF), compareFunction, flags);
-        g_free(args);
-        return NULL;
-      }*/
+
+    public:
+      
 
       static void insert(GListStore *store, const char *path, bool verbose){
         GError *error_ = NULL;

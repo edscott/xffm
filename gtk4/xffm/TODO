@@ -1,57 +1,25 @@
-Add motion controller to titleBox in menu for shading
-Add filter option to root view (bookmarks) and fstab too.
-Remove properties and regexp from menus (already at titlebox).
-
-
-Bug: selection seems broken when regexp filter is on:
-  1. DnD selection and trigger not working
-  2. long press menu not working (item not selected on down)
-  3. rename long press is OK
-  4. select out of icon and button3 menu is OK
-
-
-TODO: hide icons which are in cut buffer, both on reload and on
-cut action  ( probably also in a fixed monitor function).
-
-BUG: on chenging directory from file selector using pathbar:
-(process:45791): Gtk-CRITICAL **: 08:29:47.256: gtk_notebook_get_current_page: assertion 'GTK_IS_NOTEBOOK (notebook)' failed
-(process:45791): Gtk-CRITICAL **: 08:29:47.256: gtk_notebook_get_nth_page: assertion 'GTK_IS_NOTEBOOK (notebook)' failed
-(process:45791): GLib-GObject-CRITICAL **: 08:29:47.256: g_object_get_data: assertion 'G_IS_OBJECT (object)' failed
-
+TODO filter work:
+ Add filter option to root view (bookmarks) and fstab too.
+ Filter out items which are in cut buffer, both on reload and on
+ cut action  ( probably also in a fixed monitor function).
 
 When you select text from an entry in find dialog, it is not always copied to
 the button 2 X clipboard. This is bad. Must put in controller so that whenever
 stuff is selected from entries, it is copied to the Xorg button 2 clipboard. I've gotta look up how to do that...
 
-Add zip option to tar dialog.
-
 untar dialog
 
-select by regexp
-
-monitor updating:
+monitor updating (could be because of now solved filter model/store issue?):
 1. New items not ordered 
 2. On several items dropped, not appearing. This could be fixed, with drop or paste, maybe disable monitor until async is done.
 hack: if dir size is less than threshold, then keep an old time monitor running.
 
-on add window create
-on zap window terminate
-if window ! current, return.
-if window ! local type return.
-if dirsize lt threshold return. 
-check # items --> reload
-check whatever --> reload.
-
 But lets look into previous monitor functionality...
 Last recovered code at sf.net xffm-4.5.0
 All CVS/SVN stuff no longer available
+monitor stuff (might not be quite complete yet)
 
-Seems like regexp stuff might be better to return to 4.5.0 filter
-functionality, create gridview according to filter, established by 
-regexp.
-
-monitor stuff (not quite complete yet)
-
+#### old method:
 #define MAX_LOAD_TIME 2
 
 G_MODULE_EXPORT

@@ -263,11 +263,13 @@ template <class Type>
         //
         auto gridView_p = (GridView<LocalDir> * )data;
         if (!Child::validGridView(gridView_p)) return;
-        auto store = gridView_p->store();
+        auto model = gridView_p->listModel();  // Model to find
+        auto store = gridView_p->store();      // Store to remove/add
         //GListStore *store = G_LIST_STORE(data);
 
 
-        auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
+        auto child = gridView_p->child();
+//        auto child = (GtkWidget *)g_object_get_data(G_OBJECT(store), "child");
         if (!child){
           Basic::Exit("localdir.hh::changed_f(): this should not happen\n");
         }
@@ -303,9 +305,12 @@ template <class Type>
               {
                 if (verbose) 
                 {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
+                auto found = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
+//                auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
                 if (found) {
                    Child::incrementSerial(child);
+                   // Position in store not necesarily == to model (filter)
+                   LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
                    g_list_store_remove(store, positionF);
                    if (verbose)DBG("removing %s\n",f);
                    Child::incrementSerial(child);
@@ -330,9 +335,10 @@ template <class Type>
                 {
                   if (verbose) 
                   {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
-                  auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
+                  auto found = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
                   if (found) {
                     Child::incrementSerial(child);
+                    LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
                     g_list_store_remove(store, positionF);
                   }
                 }
@@ -376,13 +382,15 @@ template <class Type>
             {
                 if (verbose) 
                 {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found1 = LocalDir::findPositionStore(store, s, &positionF, flags);
+                auto found1 = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
                 if (found1){
                   Child::incrementSerial(child);
+                  LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
                   g_list_store_remove(store, positionF);
                 }
-                auto found2 = LocalDir::findPositionStore(store, f, &positionF, flags);
+                auto found2 = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
                 if (found2){
+                  LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
                   Child::incrementSerial(child);
                   g_list_store_remove(store, positionF);
                   Child::incrementSerial(child);

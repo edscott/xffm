@@ -371,6 +371,7 @@ ClickMenu
           GTK_PHASE_CAPTURE);
       TRACE("addGestureClickLong(): gridView_p-->%p\n", gridView_p);
     }
+
     static void addGestureClickLongMenu(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_long_press_new();
@@ -381,20 +382,7 @@ ClickMenu
       gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
           GTK_PHASE_CAPTURE);
     }
-/*    
-    static void addGestureClickDownLabel(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
-      g_object_set_data(G_OBJECT(self), "item", item);
-      auto gesture = gtk_gesture_click_new();
-      gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
-      // 1 for rename
-      TRACE("addGestureClickDownLabel: self = %p, item=%p\n", self, item);
-      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (label_f), (void *)gridView_p);
-      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
-      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-          GTK_PHASE_CAPTURE);
 
-    }    
-  */  
     static void addGestureClickDown(GtkWidget *self, GObject *item, GridView<Type> *gridView_p){
       g_object_set_data(G_OBJECT(self), "item", item);
       auto gesture = gtk_gesture_click_new();
@@ -528,7 +516,8 @@ ClickMenu
     }
   
    static bool selectWidget(GtkWidget *w, GridView<Type> *gridView_p, bool unselectOthers){
-      auto store = gridView_p->store();
+      //auto store = gridView_p->store();
+      auto model = gridView_p->listModel();
       guint positionF;
       auto listItem = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item"));
       auto item = G_FILE_INFO(gtk_list_item_get_item(listItem));
@@ -544,7 +533,9 @@ ClickMenu
        
         TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);
-        auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
+        auto found = LocalDir::findPositionModel2(model, path, &positionF);
+        // no: auto found = LocalDir::findPositionModel(GTK_LIST_STORE(model), path,  &positionF, flags);
+        //auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
           ERROR_("selectWidget(): %s not found\n", path);
           g_free(path);
@@ -581,7 +572,10 @@ ClickMenu
               gdouble x,
               gdouble y,
               void *data){
+      auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto gridView_p = (GridView<Type> *)data;
+  
+      selectWidget(w, gridView_p, false);   
       auto currentSerial = Child::getSerial();
       if (longPressSerial != currentSerial){ // Invalid read of size 4
         TRACE("longPress_f(): Current serial mismatch %d != %d. Dropping longPress_f.\n", 
@@ -686,6 +680,7 @@ ClickMenu
         return false;
       }*/
       if (modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) {
+        TRACE(" false on modType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))\n");
         return false;
       }
   
