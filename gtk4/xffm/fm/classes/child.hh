@@ -281,8 +281,8 @@ namespace xf {
       if (bak) gtk_widget_set_visible(bak, flags & 0x02);
       if (descending) gtk_widget_set_visible(descending, flags & 0x04);
       if (regexp && strlen(regexp)){
-        auto markup = g_strconcat(" <b>[<span color=\"blue\">", 
-                      regexp, "</span>]</b>", NULL);
+        auto markup = g_strconcat("<b><span color=\"blue\">", 
+                      regexp, "</span> </b>", NULL);
         gtk_label_set_markup(GTK_LABEL(regexLabel), markup);
         g_free(markup);
         gtk_widget_set_visible(regexLabel, flags & 0x100);

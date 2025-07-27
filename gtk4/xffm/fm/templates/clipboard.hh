@@ -2,6 +2,7 @@
 #define CLIPBOARD_HH
 #define CLIPBOARD_TAG "green/black_bg"
 namespace xf {
+  void *clipBoardObject = NULL;
   template <class Type> class GridView;
   template <class Type> 
   class ClipBoard {
@@ -106,17 +107,23 @@ public:
 
 
 
-    void resetClipBoardCache(const char *text){
-        g_free(clipBoardCache_);
-        clipBoardCache_ = g_strdup(text);
-        TRACE("resetClipBoardCache(): %s\n", clipBoardCache_);
+
+    void clipBoardCache(const char *value){
+      g_free(clipBoardCache_);
+      if (value) clipBoardCache_ = g_strdup(value);
+      else clipBoardCache_ = g_strdup("");
     }
+    const char *clipBoardCache(void){
+      if (!clipBoardCache_) return "";
+      return clipBoardCache_;
+    }
+
+
 
     void setValidity(bool value){ validClipBoard_ = value;}
     bool validClipBoard(void){ return validClipBoard_;}
     int clipBoardSemaphore(void){ return clipBoardSemaphore_;}
     GdkClipboard *clipBoard(void){ return clipBoard_;}
-    char *clipBoardCache(void){return clipBoardCache_;}
 
     static void 
     printClipBoard(void){
@@ -189,6 +196,21 @@ public:
       }
       gdk_clipboard_set_text (clipBoardTxt, data);
       g_free(data);
+    }
+
+    bool
+    isCutItem(const char *path){
+      auto clipTxt = clipBoardCache();
+      if (!clipTxt || strncmp(clipTxt, "move\n", strlen("move\n"))){
+        return false;
+      }
+      auto g = g_strconcat(path, "\n", NULL);
+      if (!strstr(clipTxt, g)){
+        g_free(g);
+        return false;
+      }
+      g_free(g);
+      return true;
     }
      
     static void
@@ -289,36 +311,11 @@ private:
         TRACE("Clip board is valid = %d\n", c->validClipBoard());
         // Global paste button:
         if (pasteButton) gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
-        updateClipBoardCache(c, text);
+        c->clipBoardCache(text);
         // Signal condition
         c->signalConditionWait();
         return;
     }
-
-    static void 
-    updateClipBoardCache(ClipBoard<Type> *c, const gchar *text){
-        gboolean updateIconBusiness = FALSE;
-      /*  if (!c->validClipBoard()){
-            if (c->clipBoardCache()){
-                // Update any previously set icons.
-                // FIXME clipBoardCache = removeClipBoardEmblems();
-                updateIconBusiness = TRUE;
-            }
-        }
-        else */
-        if (!c->clipBoardCache() || strcmp(text, c->clipBoardCache())){
-            // Update any previously set icons.
-            // FIXME clipBoardCache = removeClipBoardEmblems();
-            c->resetClipBoardCache(text);
-            updateIconBusiness = TRUE;
-        }
-        //c->resetClipBoardCache(text);
-        if (!updateIconBusiness) return;
-        // FIXME addClipBoardEmblems();
-    }
-
-
-
 
   };
 

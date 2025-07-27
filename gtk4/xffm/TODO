@@ -1,7 +1,5 @@
 TODO filter work:
  Add filter option to root view (bookmarks) and fstab too.
- Filter out items which are in cut buffer, both on reload and on
- cut action  ( probably also in a fixed monitor function).
 
 When you select text from an entry in find dialog, it is not always copied to
 the button 2 X clipboard. This is bad. Must put in controller so that whenever

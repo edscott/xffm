@@ -147,7 +147,14 @@ ClickMenu
         auto path = Basic::getPath(info);      
         const char *rawName =  g_file_info_get_name(info);
         char *name = Basic::utf_string(rawName);
-
+  /*      
+        bool isCut = false;
+        auto c =(clipboard_t *)clipBoardObject;
+        if (c) {
+          isCut = c->isCutItem(path);
+          if (isCut) {DBG("item %s is cut\n", path);}
+        }
+  */
         TRACE("factory bind name= %s\n", name);
 
         if (size < 0) size = 48;

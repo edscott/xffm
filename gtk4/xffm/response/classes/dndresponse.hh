@@ -78,7 +78,7 @@ public:
           goto done;
       }
       Basic::concat(&clipContent, uriList);
-      c->resetClipBoardCache(clipContent);
+      c->clipBoardCache(clipContent);
       g_free(clipContent);
       cpDropResponse::performPasteAsync(target);
 done:

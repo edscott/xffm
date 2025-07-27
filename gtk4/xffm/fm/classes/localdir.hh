@@ -11,6 +11,7 @@ namespace xf {
   } filterData_t;
   
   class LocalDir {
+    using clipboard_t = ClipBoard<LocalDir>;
 
     public:
 
@@ -345,10 +346,22 @@ private:
         bool doRegex = flags & 0x100;
         auto hidden = g_file_info_get_is_hidden(info);
         auto backup = g_file_info_get_is_backup(info);
+        auto name = g_file_info_get_name(info);
 
+        
+         //* not working. 
+        auto c =(clipboard_t *)clipBoardObject;
+        bool isCut = false;
+        if (c) {
+          auto path = Basic::getPath(info);
+          isCut = c->isCutItem(path);
+          if (isCut) {TRACE("item %s is cut\n", path);}
+          g_free(path);
+          if (isCut) return false;
+        }
+       
         // First do the regex, if applicable.
         if (doRegex && regex){
-          auto name = g_file_info_get_name(info);
           // skip ".."
           bool match;
           if (strcmp(name, "..") == 0) match = true;

@@ -173,6 +173,7 @@ main (int argc, const char *argv[], const char *envp[]) {
   g_free(path);
   // Constructors c and d will use global variable Child::mainWidget(). 
   auto c = new xf::ClipBoard<xf::LocalDir>;
+  xf::clipBoardObject = (void *)c;
   auto d = new xf::Dnd<xf::LocalDir>;
   xf::Bookmarks::initBookmarks();
   
