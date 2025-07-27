@@ -129,6 +129,7 @@ namespace xf {
       if (!tt) return;
 
       if (lastWS && !workSpaceExists(lastWS)){
+        
         Print::showText(output);
         auto a = g_strconcat("\"",lastWS, "\"", NULL);
         auto msg = g_strdup_printf(_("Workspace %s"), a);

@@ -24,8 +24,9 @@ public:
       auto ok = MenuCallbacks<Type>::workSpaceExists(txt);
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
+      MenuCallbacks<Type>::moveTo(txt);
+      /*
       if (ok){
-        Print::showText(output);
         MenuCallbacks<Type>::moveTo(txt);
         //hmmm... race with i3: either moveto or switchWS
         //MenuCallbacks<Type>::switchWS(txt);
@@ -37,7 +38,7 @@ public:
         Print::printError(output, g_strdup_printf("%s\n", msg2));
         g_free(a);
         g_free(msg);
-      }
+      }*/
 
 
        return NULL;
