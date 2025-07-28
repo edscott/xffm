@@ -59,7 +59,7 @@ public:
       } else { // regex off
         gridView_p->flagOff(0x100); // Regexp off
         Settings::removeKey(path, "regexp");
-        if (gridView_p->flags() == 0x40) {
+        if (gridView_p->flags() == 0x40 || gridView_p->flags() == 0x0) {
           Settings::removeGroup(path);
         }
         if (gridView_p->regexp()) update = true;

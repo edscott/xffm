@@ -276,6 +276,7 @@ private:
       
 
       auto bak = gtk_label_new("~");
+      gtk_label_set_markup(GTK_LABEL(bak), "<span color=\"green\">~</span>");
       gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(bak));
       g_object_set_data(G_OBJECT(tabBox), "bak", bak);
       gtk_widget_set_visible(GTK_WIDGET(bak), flags & 0x02);

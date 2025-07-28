@@ -142,7 +142,13 @@ ClickMenu
         g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
 
         auto type = g_file_info_get_file_type(info);
-        auto size = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child),"iconsize"));
+        auto size = 48;
+        if (gridView_p->flags() & 0x200){ // custom size
+          size = Settings::getInteger(gridView_p->path(), "iconsize");
+          if (size < 0) size = 48;
+        }
+
+        //auto size = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child),"iconsize"));
         // allocated:
         auto path = Basic::getPath(info);
 
@@ -164,7 +170,7 @@ ClickMenu
   */
         TRACE("factory bind name= %s\n", name);
 
-        if (size < 0) size = 48;
+        // already ut supra. if (size < 0) size = 48;
         double scaleFactor = 1.0;
         GdkPaintable *texture = NULL;
         GtkWidget *image = NULL;

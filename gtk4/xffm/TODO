@@ -1,101 +1,10 @@
-BUG: monitor not working with rename/remove, but ok with duplicate.
-Definitely must add legacy code as helper.
+In green output after copy/move, specify src-->tgt (src basename or "multipleFiles")
 
-TODO filter work:
- Add filter option to root view (bookmarks) and fstab too.
 
 When you select text from an entry in find dialog, it is not always copied to
 the button 2 X clipboard. This is bad. Must put in controller so that whenever
 stuff is selected from entries, it is copied to the Xorg button 2 clipboard. I've gotta look up how to do that...
 
 untar dialog
-
-monitor updating (could be because of now solved filter model/store issue?):
-1. New items not ordered 
-2. On several items dropped, not appearing. This could be fixed, with drop or paste, maybe disable monitor until async is done.
-hack: if dir size is less than threshold, then keep an old time monitor running.
-
-But lets look into previous monitor functionality...
-Last recovered code at sf.net xffm-4.5.0
-All CVS/SVN stuff no longer available
-monitor stuff (might not be quite complete yet)
-
-#### old method:
-#define MAX_LOAD_TIME 2
-
-G_MODULE_EXPORT
-gboolean update_check(record_entry_t *en){
-    long v1,v2;
-    struct stat st;
-    if(!en || !en->path || strcmp(en->path, "/dev") == 0){
-	TRACE("!en->path || strcmp(en->path, \"/dev\") == 0\n");
-	return FALSE;
-    }
-    if (IS_DIR(en->type) && en->load_time > MAX_LOAD_TIME) {
-        SET_CHANGED(en->type);
-        TRACE("load_time (%ld) for %s takes too long for automatic monitor...",
-		    (long)en->load_time,en->path);
-        return FALSE;
-    }
-    if (stat(en->path,&st)<0) return FALSE;	
-    v1=en->st->st_mtime + en->st->st_ctime + en->st->st_dev;
-    v2=st.st_mtime + st.st_ctime + st.st_dev;
-    TRACE("%ld+%ld+%ld=%ld  %ld+%ld+%ld=%ld",
-	    (long)en->st->st_mtime,(long)en->st->st_ctime,(long)en->st->st_dev,v1,
-	    (long)st.st_mtime,(long)st.st_ctime,(long)st.st_dev,v2);
-    
-    if (!IS_CHANGED(en->type)){
-	if (v1 == v2) {
-	    TRACE("%s: v1 == v2 && !IS_CHANGED: return FALSE",en->path);
-	    return FALSE;
-	} else {
-	    TRACE("%s: v1 != v2 && !IS_CHANGED: return FALSE (+C)",
-		    en->path);
-	    memcpy(en->st,&st,sizeof(struct stat));
-	    SET_CHANGED(en->type);
-	    return FALSE;
-	}
-    } else { /*  (IS_CHANGED(en->type)) */
-	if (v1 == v2) {
-	    TRACE("%s: v1 == v2 && IS_CHANGED: return TRUE (-C)",en->path);
-	    memcpy(en->st,&st,sizeof(struct stat));
-	    UNSET_CHANGED(en->type);
-	    return TRUE;
-	} else { /*  (v1 != v2) */
-	    TRACE("%s: v1 != v2 && IS_CHANGED: return FALSE",en->path);
-	    memcpy(en->st,&st,sizeof(struct stat));
-	    //UNSET_CHANGED(en->type);
-	    return FALSE;
-	}
-    }
-}
-  ///////////////////////////////////  
-	/* calculate checksums for the directory (for later use by monitor) 
-	 * */
-	for(j = 0; j < xfdir_p->pathc; j++) 
-	    if (xfdir_p->gl[j].en && xfdir_p->gl[j].en->st)
-	{
-	    tama += xfdir_p->gl[j].en->st->st_size;	
-	    en->checksum += (xfdir_p->gl[j].en->st->st_mtime + xfdir_p->gl[j].en->st->st_ctime);
-	}
-	set_entry_tag(en, tama);
-	if (xfdir_p->pathc > 52) save_xfdir_cache(en,xfdir_p);
-	
-    }
-    return TRUE;
-/////////////////////////
-
-	/* calculate checksums for the directory (for later use by monitor) 
-	 * */
-	TRACE("---------cache read");
-	if (!xfdir_p->pathc) return TRUE;
-	for(j = 0; j < xfdir_p->pathc; j++) if (xfdir_p->gl[j].en && xfdir_p->gl[j].en->st)
-	{
-	    tama += xfdir_p->gl[j].en->st->st_size;	
-	    en->checksum += (xfdir_p->gl[j].en->st->st_mtime + xfdir_p->gl[j].en->st->st_ctime);
-	}
-///////////////////////////////////////
-
-
 
 
