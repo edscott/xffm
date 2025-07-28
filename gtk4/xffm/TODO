@@ -1,3 +1,6 @@
+BUG: monitor not working with rename/remove, but ok with duplicate.
+Definitely must add legacy code as helper.
+
 TODO filter work:
  Add filter option to root view (bookmarks) and fstab too.
 
@@ -92,42 +95,6 @@ gboolean update_check(record_entry_t *en){
 	    en->checksum += (xfdir_p->gl[j].en->st->st_mtime + xfdir_p->gl[j].en->st->st_ctime);
 	}
 ///////////////////////////////////////
-
-    if (filter && strcmp(filter,"*") != 0) {
-	g_free(en->filter);
-	en->filter = g_strdup(filter);
-	preg = compile_regex_filter(en->filter,SHOWS_HIDDEN(en->type));
-    }
-    
-//////////////////////////////////////
-
-
-G_MODULE_EXPORT
-const regex_t *
-compile_regex_filter(		const gchar *filter,
-				gboolean shows_hidden)
-{
-    static regex_t preg;
-    const char *regex;
-    static gboolean compiled=FALSE;
-
-        
-    if (!filter || !strlen(filter) || strcmp(filter,"*")==0) return NULL;
-    regex = filter2regex(filter, shows_hidden);
-    
-
-    /*printf("compile_regex_filter(%s)\n",filter);*/
-    if (compiled) regfree(&preg);
-    if (regcomp(&preg, regex, REG_EXTENDED | REG_ICASE | REG_NOSUB)==0)
-	compiled=TRUE;
-    else 
-	compiled=FALSE;
-    return &preg;
-}
-/////////////////////////
-
-#include <regex.h>
-
 
 
 

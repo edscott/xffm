@@ -1,4 +1,5 @@
 set(ICONS emblem-about.svg
+emblem-usb.svg
 emblem-add.svg
 emblem-remove.svg
 emblem-delete.svg

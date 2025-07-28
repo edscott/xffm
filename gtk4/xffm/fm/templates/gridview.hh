@@ -5,6 +5,7 @@ static GdkDragAction dndStatus = GDK_ACTION_COPY;
 
 namespace xf {
 template <class Type> class Dnd;
+template <class Type> class RodentMonitor;
 template <class Type> class FstabMonitor;
 template <class Type>
   class GridView  {
@@ -27,10 +28,12 @@ template <class Type>
       double X_ = 0.0; // main widget
       double Y_ = 0.0;
       int flags_=0;
+      RodentMonitor<Type> *rodentMonitor_ = NULL;
       FstabMonitor<Type> *fstabMonitor_ = NULL;
       GFileMonitor *monitor_ = NULL;
   public:
       FstabMonitor<Type> *fstabMonitor(void){return fstabMonitor_;}
+      RodentMonitor<Type> *rodentMonitor(void){return rodentMonitor_;}
 
       void regexp(const char *value){
         g_free(regexp_);
@@ -115,8 +118,6 @@ template <class Type>
         addMotionController();
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
           fstabMonitor_ = NULL;
-        } else if (g_object_get_data(G_OBJECT(store()), "xffm::fstab")){
-          fstabMonitor_ = new FstabMonitor<Type>(this); 
         } else {
           fstabMonitor_ = new FstabMonitor<Type>(this); 
         } 
@@ -215,7 +216,14 @@ template <class Type>
         gtk_widget_add_css_class(view, "gridviewColors");
         //gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), false);
-
+#if 0
+        //FIXME: not working...
+        if (!isBookmarks && !isFstab) {
+          rodentMonitor_ = new RodentMonitor<Type>(this); 
+          
+        }
+        
+#else
  ////////////////
         if (!isBookmarks && !isFstab) {
           // We wait until here to fireup the monitor.
@@ -238,7 +246,7 @@ template <class Type>
           g_object_set_data(G_OBJECT(store), "monitor", monitor_);
         }
  ////////////////
-
+#endif
         return view;
       }
 
@@ -305,12 +313,12 @@ template <class Type>
               {
                 if (verbose) 
                 {DBG("Received  ATTRIBUTE_CHANGED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
+                auto found = LocalDir::findPositionModel2(model, f, &positionF);
 //                auto found = LocalDir::findPositionStore(store, f, &positionF, flags);
                 if (found) {
                    Child::incrementSerial(child);
                    // Position in store not necesarily == to model (filter)
-                   LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
+                   LocalDir::findPositionStore(store, f, &positionF);
                    g_list_store_remove(store, positionF);
                    if (verbose)DBG("removing %s\n",f);
                    Child::incrementSerial(child);
@@ -335,12 +343,16 @@ template <class Type>
                 {
                   if (verbose) 
                   {DBG("Received DELETED  (%d): \"%s\", \"%s\"\n", event, f, s);}  
-                  auto found = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
+                  auto found = LocalDir::findPositionModel2(model, f, &positionF);
                   if (found) {
+                    guint positionX;
                     Child::incrementSerial(child);
-                    LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
-                    g_list_store_remove(store, positionF);
+                    LocalDir::findPositionStore(store, f, &positionX);
+                    g_list_store_remove(store, positionX);
+                    //g_list_model_items_changed (model, positionF, 1, 0);
+
                   }
+ 
                 }
                 break;
 
@@ -382,20 +394,22 @@ template <class Type>
             {
                 if (verbose) 
                 {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                auto found1 = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
+                auto found1 = LocalDir::findPositionModel2(model, f, &positionF);
                 if (found1){
                   Child::incrementSerial(child);
-                  LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
                   g_list_store_remove(store, positionF);
+                  Child::incrementSerial(child);
+                  LocalDir::insert(store, s, verbose); 
                 }
-                auto found2 = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
+          /*      auto found2 = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
                 if (found2){
                   LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
                   Child::incrementSerial(child);
                   g_list_store_remove(store, positionF);
                   Child::incrementSerial(child);
                   LocalDir::insert(store, s, verbose);           
-                }
+                }*/
+            
             }
                   
 

@@ -94,30 +94,6 @@ private:
       mountArg_[2] = NULL;
     }
 
-      static gchar *md5sum(const gchar *file){
-          gchar *md5sum = g_find_program_in_path("md5sum");
-          if (!md5sum){
-              ERROR_("cannot find md5sum program\n");
-              return NULL;
-          }
-          g_free(md5sum);
-          gchar *command = g_strdup_printf("md5sum %s", file);
-          FILE *pipe = popen(command, "r");
-          if (!pipe){
-              ERROR_("cannot pipe to %s\n", command);
-              g_free(command);
-              return NULL;
-          }
-          gchar buffer[1024];
-          memset (buffer, 0, 1024);
-          if (!fgets(buffer, 1023, pipe)){
-             ERROR_("fgets(%s): %s\n", command, "no characters read.");
-          }
-          g_free(command);
-          pclose(pipe);
-          if (strlen(buffer)) return g_strdup(buffer);
-          return NULL;
-      }
 
 
 
@@ -226,7 +202,7 @@ private:
     }
 
     static bool checkSumMnt(char **sum){
-      char *newSum = md5sum("/proc/mounts");
+      char *newSum = Basic::md5sum("/proc/mounts");
       if (strcmp(newSum, *sum)) {
         g_free(*sum);
         *sum = newSum;
@@ -237,7 +213,7 @@ private:
     }
 
     static bool checkSumPart(char **sum){
-      char *newSum = md5sum("/proc/partitions");
+      char *newSum = Basic::md5sum("/proc/partitions");
       if (strcmp(newSum, *sum)) {
         g_free(*sum);
         *sum = newSum;
@@ -282,8 +258,8 @@ private:
 
         TRACE("***mountThreadF1 for gridview_p %p\n", gridView_p);
         // get initial md5sum
-        char *sum = md5sum("/proc/mounts");
-        char *sumPartitions = md5sum("/proc/partitions");
+        char *sum = Basic::md5sum("/proc/mounts");
+        char *sumPartitions = Basic::md5sum("/proc/partitions");
         if (!sum || !sumPartitions) {
             ERROR_("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
             g_free(sum);
@@ -322,8 +298,8 @@ private:
 
         TRACE("***mountThreadF2 for gridview_p %p\n", gridView_p);
         // get initial md5sum
-        char *sum = md5sum("/proc/mounts");
-        char *sumPartitions = md5sum("/proc/partitions");
+        char *sum = Basic::md5sum("/proc/mounts");
+        char *sumPartitions = Basic::md5sum("/proc/partitions");
         if (!sum || !sumPartitions) {
             ERROR_("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
             g_free(sum);

@@ -144,7 +144,14 @@ ClickMenu
         auto type = g_file_info_get_file_type(info);
         auto size = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child),"iconsize"));
         // allocated:
-        auto path = Basic::getPath(info);      
+        auto path = Basic::getPath(info);
+
+        //FIXME: add to info, not like this... 
+        //st_mtime for rodent monitor.   
+       /* struct stat st;
+        stat(path, &st);
+        g_object_set_data(G_OBJECT(info), "st_mtime", GINT_TO_POINTER(st.st_mtime));   */
+        
         const char *rawName =  g_file_info_get_name(info);
         char *name = Basic::utf_string(rawName);
   /*      

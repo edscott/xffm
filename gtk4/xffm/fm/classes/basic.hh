@@ -30,7 +30,32 @@ namespace xf {
       }
 #endif
    public:
-    static void Exit(const char *text){
+      static gchar *md5sum(const gchar *file){
+          gchar *md5sum = g_find_program_in_path("md5sum");
+          if (!md5sum){
+              ERROR_("cannot find md5sum program\n");
+              return NULL;
+          }
+          g_free(md5sum);
+          gchar *command = g_strdup_printf("md5sum %s", file);
+          FILE *pipe = popen(command, "r");
+          if (!pipe){
+              ERROR_("cannot pipe to %s\n", command);
+              g_free(command);
+              return NULL;
+          }
+          gchar buffer[1024];
+          memset (buffer, 0, 1024);
+          if (!fgets(buffer, 1023, pipe)){
+             ERROR_("fgets(%s): %s\n", command, "no characters read.");
+          }
+          g_free(command);
+          pclose(pipe);
+          if (strlen(buffer)) return g_strdup(buffer);
+          return NULL;
+      }
+
+      static void Exit(const char *text){
       char *f = g_strconcat(g_get_home_dir(),G_DIR_SEPARATOR_S,"xffm4_error.log", NULL);
       FILE *log = fopen(f, "w");
       if (log) {
