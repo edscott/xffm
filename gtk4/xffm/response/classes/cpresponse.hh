@@ -19,7 +19,6 @@ public:
       auto buffer = gtk_entry_get_buffer(entry);
       auto string = g_strconcat("<span color=\"green\"><b>",_("Duplicate"), "</b></span>", NULL);
       gtk_entry_buffer_set_text(buffer, base, -1);
-     // auto string = g_strconcat("<span color=\"green\"><b>",_("Duplicate"), ":\n</b></span><span color=\"blue\"><b>", base, "</b></span>", NULL);
       gtk_label_set_markup(label, string);
       g_free(base);
       g_free(string);
@@ -105,6 +104,15 @@ class cpDropResponse {
 private:
   static void *thread1(void *data){
     void **arg = (void **)data;
+    auto list = (GList *)arg[1];
+    auto path = (char *)arg[2];
+    auto src = (const char *)list->data;
+    if (g_list_length(list) > 1) src = _("Multiple selections");
+    auto tgt = g_path_get_basename(path);
+    auto srcTgt = g_strconcat(src, " ---> ", tgt, NULL);
+    g_free(tgt);
+
+
     auto dialogObject = (DialogDrop<cpDropResponse> *)arg[0];
     pthread_t thread;
       Thread::threadCount(true,  &thread, "thread1");
@@ -131,7 +139,8 @@ private:
         mode = _("link"); break;
     }
     Print::showText(Child::getOutput());
-    Print::printInfo(Child::getOutput(), g_strdup_printf(" %s (%s)\n",  _("Operation completed"), mode)); 
+    Print::printInfo(Child::getOutput(), g_strdup_printf(" %s (%s) %s\n",  _("Operation completed"), mode, srcTgt)); 
+    g_free(srcTgt);
     return NULL;
   }
   
@@ -180,9 +189,6 @@ private:
       usleep(150);
     }
 
-    //void *arg2[] = {(void *)path, (void *)list};
-    //Basic::context_function(overwriteMessage, arg2);
-
     for (auto l=list; l && l->data; l=l->next){ g_free(l->data);}
     g_list_free(list);
     g_free(path);
@@ -192,43 +198,13 @@ private:
     if (!dialogObject->cancelled()) {
       TRACE("thread2 setting response to OK\n");
       response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
-      if (response == 0) g_object_set_data(G_OBJECT(dialog), "response", GINT_TO_POINTER(1)); //yes
     }
     dialogObject->unlockResponse();
     TRACE("thread2 Exit\n");
 
     return NULL;
   }
-/*
-    static void *overwriteMessage(void *data){
-      void **arg = (void **)data;
-      auto target= (char *)arg[0];
-      auto list = (GList *)(arg[1]);
 
-    TRACE("overwriteMessage target=%s, list=%p\n", target, list);
-      for (auto l=list; l && l->data; l=l->next){
-        auto base = g_path_get_basename((const char *)l->data);
-        auto f = g_strconcat(target, G_DIR_SEPARATOR_S, (const char *)base, NULL);
-        TRACE("final target=%s\n", f);
-        if (g_file_test(f, G_FILE_TEST_EXISTS)){
-          auto b = g_strconcat(f, "~", NULL);
-          auto text1 = g_strdup_printf(_("Backup file of %s: %s"), f, b);
-          auto text = g_strconcat(_("Overwrite Destination"), ": ", text1, "\n", NULL);
-          g_free(text1);
-          auto output = Child::getOutput();
-    TRACE(text);
-          Print::printWarning(output, text); // this is run in main context.
-        } TRACE("final target=\"%s\" does not exist\n", f);
-        g_free(base);
-        g_free(f);
-      }
-      for (auto l=list; l && l->data; l=l->next){ g_free(l->data);}
-      g_list_free(list);
-      g_free(target);
-
-      return NULL;
-    }
-*/
   static bool skip(const char *src, const char *tgt){
     if (strcmp(src, tgt)==0){
       TRACE("skipping %s\n", src);

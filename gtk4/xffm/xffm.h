@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2024 Edscott Wilson Garcia 
+ * Copyright 2005-2025 Edscott Wilson Garcia 
  * license: GPL v.3
  */
 #ifndef XFFM_H
@@ -117,6 +117,7 @@ static void *mainWindow_p = NULL;
 #include "fm/classes/localdir.hh"       // fm class
 // dialogs 
 #include "response/dialogs.hh"
+
 #include "fm/templates/historyentry.hh"
 
 #include "fm/classes/history.hh"
