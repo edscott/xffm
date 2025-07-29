@@ -192,7 +192,7 @@ ClickMenu
           } 
         }
         if (doPreview)  scaleFactor = 2.0;
-        if (size == 24) scaleFactor = 0.75;
+        if (size <= 28) scaleFactor = 0.75;
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
@@ -237,14 +237,17 @@ ClickMenu
         }
 
         char buffer[128];
-        if (size == 24){
+        if (size <= 32){
           gtk_widget_set_visible(GTK_WIDGET(label), false);
           gtk_widget_set_visible(GTK_WIDGET(hlabel), true);
           auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen());
-          TRACE("size 24, format=%s\n", format);
           snprintf(buffer, 128, (const char *)format, name);
+          auto sizeString = "x-small";
+          if (size >24) sizeString = "small";
+          if (size == 32) sizeString = "medium";
 
-          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>",  "x-small", buffer);
+
+          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>",  sizeString, buffer);
 
           if (strcmp(name, "..")){
             // file information string
@@ -256,7 +259,7 @@ ClickMenu
          
             auto m1 = Basic::statInfo(&st);
 
-            char *markup2 = g_strdup(" <span size=\"x-small\" color=\"blue\">");
+            char *markup2 = g_strdup_printf(" <span size=\"%s\" color=\"blue\">", sizeString);
             Basic::concat(&markup2, m1);
             Basic::concat(&markup2, "</span>");
             
