@@ -188,7 +188,6 @@ private:
       dialogObject->lockResponse();
       bool active = dialogObject->subClass()->active();
       if (!active) {
-        //dialogObject->cancel();
         dialogObject->unlockResponse();
         THREADPOOL->clear();
         TRACE("Operation interrupted\n");
