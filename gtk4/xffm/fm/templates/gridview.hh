@@ -394,33 +394,27 @@ template <class Type>
             {
                 if (verbose) 
                 {DBG("Received  MOVED (%d): \"%s\", \"%s\"\n", event, f, s);}
+                // Delete old item
                 auto found1 = LocalDir::findPositionModel2(model, f, &positionF);
                 if (found1){
-                  Child::incrementSerial(child);
-                  g_list_store_remove(store, positionF);
-                  Child::incrementSerial(child);
-                  LocalDir::insert(store, s, verbose); 
+                    guint positionX;
+                    Child::incrementSerial(child);
+                    LocalDir::findPositionStore(store, f, &positionX);
+                    g_list_store_remove(store, positionX);
                 }
-          /*      auto found2 = LocalDir::findPositionModel2(model, gridView_p->path(), &positionF);
-                if (found2){
-                  LocalDir::findPositionStore(store, gridView_p->path(), &positionF);
-                  Child::incrementSerial(child);
-                  g_list_store_remove(store, positionF);
-                  Child::incrementSerial(child);
-                  LocalDir::insert(store, s, verbose);           
-                }*/
+                if (!g_file_test(s, G_FILE_TEST_EXISTS)){
+                  if (!g_file_test(s, G_FILE_TEST_IS_SYMLINK)) {
+                    if (verbose) {DBG("Ghost file: %s\n", f);}
+                    g_free(f);
+                    g_free(s);
+                    return;
+                  }
+                }
+                // add updated info.
+                Child::incrementSerial(child);
+                LocalDir::insert(store, s, verbose);
             
             }
-                  
-
-
-
-                //p->add2reSelect(f); // Only adds to selection list if item is selected.
-                //p->remove_item(first); 
-
-                //if (!isInModel(p->treeModel(), s)){
-                    //p->add_new_item(second);
-                //} //else p->restat_item(s);
                 break;
             case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
                 if (verbose) {DBG("Received  CHANGES_DONE_HINT (%d): \"%s\", \"%s\"\n", event, f, s);}
