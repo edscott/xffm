@@ -25,7 +25,8 @@ namespace xf
       gtk_widget_set_hexpand(GTK_WIDGET(box), true);
       gtk_widget_set_halign (GTK_WIDGET(progress_),GTK_ALIGN_END);
       // enough space, seems to resize on each label grow change...
-      gtk_widget_set_size_request(GTK_WIDGET(dialog), 200, 75);
+      gtk_widget_set_size_request(GTK_WIDGET(dialog), 450, 125);
+      gtk_widget_set_size_request(GTK_WIDGET(progress_), 410, -1);
 
       gtk_widget_realize(GTK_WIDGET(dialog));
       Basic::setAsDialog(GTK_WINDOW(dialog));
@@ -35,11 +36,11 @@ namespace xf
 
     void setProgress (int k, int total, const char *path, const char *file, int bytes, int totalBytes){
         this->lockResponse();
-        if (this->cancelled()){
+
+        if (this->subClass()->active() == false){
           this->unlockResponse();
           return;
         }
-        this->unlockResponse();
         bool copy = this->subClass()->copy();
 
         auto markup1 = g_strconcat("<span color=\"red\">",copy?_("Copying"):_("Moving"), 
@@ -57,6 +58,7 @@ namespace xf
         Basic::context_function(setLabel_f, arg);
         g_free(markup1);
         g_free(markup2);
+        this->unlockResponse();
     }
 
     

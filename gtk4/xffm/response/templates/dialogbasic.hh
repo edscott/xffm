@@ -18,10 +18,7 @@ namespace xf
     GtkWindow *parent_ = NULL;
     subClass_t *subClass_;
     GtkLabel *label_;
-    pthread_cond_t cond_ = PTHREAD_COND_INITIALIZER;
-    pthread_mutex_t condMutex_ = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_t mutex_ = PTHREAD_MUTEX_INITIALIZER;
-    bool cancelled_ = false;
     GtkFrame *frame_;
     
     const char *path_;
@@ -145,16 +142,6 @@ namespace xf
     GtkBox *vbox2(void){ return vbox2_; }
     GtkFrame *frame(){return frame_;}
 
-    pthread_cond_t *cond_p(void){return &cond_;}
-    pthread_mutex_t *condMutex_p(void){return &condMutex_;}
-    bool cancelled(void){ return cancelled_;}
-    void cancel(void){
-      this->lockResponse();
-      cancelled_ = true;
-      this->unlockResponse();
-    }
-    void lockCondition(void){pthread_mutex_lock(&condMutex_);}
-    void unlockCondition(void){pthread_mutex_unlock(&condMutex_);}
     void lockResponse(void){pthread_mutex_lock(&mutex_);}
     void unlockResponse(void){pthread_mutex_unlock(&mutex_);}
     

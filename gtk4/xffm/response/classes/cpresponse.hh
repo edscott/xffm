@@ -36,6 +36,7 @@ class cpDropResponse {
    const char *title_;
    const char *iconName_;
    int copy_ = 1;
+   bool active_ = true;
 
   public:
     const char *title(void){ return _("Copy files");}
@@ -43,17 +44,25 @@ class cpDropResponse {
     const char *label(void){ return "";}    
     int copy(void){ return copy_;}
     void copy(int value){ copy_ = value;}
+    bool active(void){return active_;}
+    void active(bool value){active_ = value;}
 
     static void *asyncYes(void *data){
+      auto dialogObject = (DialogBasic<cpDropResponse> *)data;
        TRACE("asyncYes::  complete\n");
+        dialogObject->lockResponse();
+        dialogObject->subClass()->active(false);
+        dialogObject->unlockResponse();
        return NULL;
     }
     static void *asyncNo(void *data){
       TRACE("asyncNo::  cancelled\n");
       auto dialogObject = (DialogBasic<cpDropResponse> *)data;
-      dialogObject->lockCondition();
-      pthread_cond_wait(dialogObject->cond_p(), dialogObject->condMutex_p());
-      dialogObject->unlockCondition();
+      dialogObject->lockResponse();
+      dialogObject->subClass()->active(false);
+      dialogObject->unlockResponse();
+      //pthread_cond_wait(dialogObject->cond_p(), dialogObject->condMutex_p());
+      //dialogObject->unlockCondition();
       return NULL;
     }
 
@@ -121,10 +130,6 @@ private:
     pthread_join(thread, &retval);
       Thread::threadCount(false,  &thread, "thread1");
     TRACE("thread2 joined, copy complete.\n");
-    dialogObject->lockCondition();
-    TRACE("thread2 pthread_cond_signal.\n");
-    pthread_cond_signal(dialogObject->cond_p());
-    dialogObject->unlockCondition();
    
     
     TRACE("thread2 unlockCondition.\n");
@@ -141,6 +146,16 @@ private:
     Print::showText(Child::getOutput());
     Print::printInfo(Child::getOutput(), g_strdup_printf(" %s (%s) %s\n",  _("Operation completed"), mode, srcTgt)); 
     g_free(srcTgt);
+
+      dialogObject->lockResponse();
+      bool active = dialogObject->subClass()->active();
+      if (active){
+        dialogObject->subClass()->active(false);
+        // close dialog
+        g_object_set_data(G_OBJECT(dialogObject->dialog()), "response", GINT_TO_POINTER(-1));
+      }
+      dialogObject->unlockResponse();
+
     return NULL;
   }
   
@@ -171,21 +186,22 @@ private:
       bytes += st.st_size;
       
       dialogObject->lockResponse();
-      response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
-      dialogObject->unlockResponse();
-      if (response == 0) {
-        dialogObject->setProgress(k, total, path, (char *)l->data, bytes, totalBytes);
-        TRACE("thread2 %s --> %s\n", (char *)l->data, path);
-        // thread copy
-        pathResponse::cpmv((char *)l->data, path, dialogObject->subClass()->copy());
-      }
-      if (response < 0) {
-        dialogObject->cancel();
+      bool active = dialogObject->subClass()->active();
+      if (!active) {
+        //dialogObject->cancel();
+        dialogObject->unlockResponse();
         THREADPOOL->clear();
-
+        TRACE("Operation interrupted\n");
         break;
       }
-      //sleep(1); // slow motion
+      dialogObject->unlockResponse();
+      // Currently active.
+      dialogObject->setProgress(k, total, path, (char *)l->data, bytes, totalBytes);
+      TRACE("thread2 %s --> %s\n", (char *)l->data, path);
+      // thread copy
+      pathResponse::cpmv((char *)l->data, path, dialogObject->subClass()->copy());
+      
+      //sleep(1); // slow motion for debugging progress dialog.
       usleep(150);
     }
 
@@ -193,15 +209,7 @@ private:
     g_list_free(list);
     g_free(path);
         
-    TRACE("thread2 loop exited\n");
-    dialogObject->lockResponse();
-    if (!dialogObject->cancelled()) {
-      TRACE("thread2 setting response to OK\n");
-      response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
-    }
-    dialogObject->unlockResponse();
-    TRACE("thread2 Exit\n");
-
+    TRACE("thread2 loop exit\n");
     return NULL;
   }
 
