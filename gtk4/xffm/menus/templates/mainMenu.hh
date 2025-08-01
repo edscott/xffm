@@ -25,7 +25,7 @@ namespace xf {
 
         " ",
         _("Show"),
-        //_("Match regular expression"), 
+        _("Match regular expression"), 
         _("Hidden files"),
         _("Backup files"),
 

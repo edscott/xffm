@@ -32,7 +32,9 @@ template <class Type>
         auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        auto hlabelBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabel = gtk_label_new("");
+        auto hlabel2 = gtk_label_new("");
         auto label = gtk_label_new("");
         
         GtkWidget *boxes[] = {box, menuBox, menuBox2, hbox, imageBox, labelBox, hlabelBox, NULL};
@@ -48,20 +50,24 @@ template <class Type>
         gtk_box_append(GTK_BOX(menuBox2), hbox);
         gtk_box_append(GTK_BOX(hbox), imageBox);
         gtk_box_append(GTK_BOX(hbox), hlabelBox);
+        gtk_box_append(GTK_BOX(hbox), hlabelBox2);
         gtk_box_append(GTK_BOX(menuBox2), labelBox);
         gtk_box_append(GTK_BOX(hlabelBox), hlabel);
+        gtk_box_append(GTK_BOX(hlabelBox2), hlabel2);
         gtk_box_append(GTK_BOX(labelBox), label);
         
 
         g_object_set_data(G_OBJECT(object), "imageBox", imageBox);
         g_object_set_data(G_OBJECT(object), "label", label);
         g_object_set_data(G_OBJECT(object), "hlabel", hlabel);
+        g_object_set_data(G_OBJECT(object), "hlabel2", hlabel2);
         g_object_set_data(G_OBJECT(object), "menuBox", menuBox);
         g_object_set_data(G_OBJECT(object), "menuBox2", menuBox2);
 
  
         g_object_set_data(G_OBJECT(labelBox), "object", object);
         g_object_set_data(G_OBJECT(hlabelBox), "object", object);
+        g_object_set_data(G_OBJECT(hlabelBox2), "object", object);
         g_object_set_data(G_OBJECT(imageBox), "object", object);
         g_object_set_data(G_OBJECT(menuBox), "object", object);
         g_object_set_data(G_OBJECT(menuBox2), "object", object);
@@ -94,10 +100,12 @@ ClickMenu
         addGestureClickUp(imageBox, object, gridView_p);
         addGestureClickUp(labelBox, object, gridView_p);
         addGestureClickUp(hlabelBox, object, gridView_p);
+        addGestureClickUp(hlabelBox2, object, gridView_p);
 
         addGestureClickMenu(imageBox, object, gridView_p);
         addGestureClickMenu(labelBox, object, gridView_p);
         addGestureClickMenu(hlabelBox, object, gridView_p);
+        addGestureClickMenu(hlabelBox2, object, gridView_p);
 
         TRACE("factorySetup: object(GTK_LIST_ITEM) = %p box = %p\n", object, box);
         
@@ -129,6 +137,7 @@ ClickMenu
         auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
         auto label = GTK_LABEL(g_object_get_data(object, "label"));
         auto hlabel = GTK_LABEL(g_object_get_data(object, "hlabel"));
+        auto hlabel2 = GTK_LABEL(g_object_get_data(object, "hlabel2"));
 
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
         g_object_set_data(G_OBJECT(info), "imageBox", imageBox);
@@ -240,6 +249,7 @@ ClickMenu
         if (size <= 32){
           gtk_widget_set_visible(GTK_WIDGET(label), false);
           gtk_widget_set_visible(GTK_WIDGET(hlabel), true);
+          gtk_widget_set_visible(GTK_WIDGET(hlabel2), true);
           auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen());
           snprintf(buffer, 128, (const char *)format, name);
           auto sizeString = "x-small";
@@ -259,13 +269,16 @@ ClickMenu
          
             auto m1 = Basic::statInfo(&st);
 
-            char *markup2 = g_strdup_printf(" <span size=\"%s\" color=\"blue\">", sizeString);
+            char *markup2 = g_strdup_printf(" <span size=\"%s\">", sizeString);
+//            char *markup2 = g_strdup_printf(" <span size=\"%s\" color=\"blue\">", sizeString);
             Basic::concat(&markup2, m1);
             Basic::concat(&markup2, "</span>");
             
             g_free(m1);
-            Basic::concat(&markup, markup2);
+            //Basic::concat(&markup, markup2);
+            gtk_label_set_markup(hlabel2, markup2);
             g_free(markup2);
+          
 
             //Basic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
           } 
@@ -276,6 +289,7 @@ ClickMenu
         {
           gtk_widget_set_visible(GTK_WIDGET(label), true);
           gtk_widget_set_visible(GTK_WIDGET(hlabel), false);
+          gtk_widget_set_visible(GTK_WIDGET(hlabel2), false);
         
           const char *sizeS = "x-small";
           if (size <= 96) sizeS = "small";
