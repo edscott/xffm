@@ -37,7 +37,7 @@ template <class Type>
         auto hlabel2 = gtk_label_new("");
         auto label = gtk_label_new("");
         
-        GtkWidget *boxes[] = {box, menuBox, menuBox2, hbox, imageBox, labelBox, hlabelBox, NULL};
+        GtkWidget *boxes[] = {box, menuBox, menuBox2, hbox, imageBox, labelBox, hlabelBox, hlabelBox2, NULL};
         for (auto p = boxes; p && *p; p++){
           gtk_widget_add_css_class(*p, "gridviewBox");
           gtk_widget_set_vexpand(GTK_WIDGET(*p), false);
@@ -60,7 +60,9 @@ template <class Type>
         g_object_set_data(G_OBJECT(object), "imageBox", imageBox);
         g_object_set_data(G_OBJECT(object), "label", label);
         g_object_set_data(G_OBJECT(object), "hlabel", hlabel);
+        g_object_set_data(G_OBJECT(object), "hlabelBox", hlabelBox);
         g_object_set_data(G_OBJECT(object), "hlabel2", hlabel2);
+        g_object_set_data(G_OBJECT(object), "hlabelBox2", hlabelBox2);
         g_object_set_data(G_OBJECT(object), "menuBox", menuBox);
         g_object_set_data(G_OBJECT(object), "menuBox2", menuBox2);
 
@@ -201,7 +203,7 @@ ClickMenu
           } 
         }
         if (doPreview)  scaleFactor = 2.0;
-        if (size <= 28) scaleFactor = 0.75;
+        if (size <= 32) scaleFactor = 0.75;
         
         if (!image){
           if (g_file_info_get_is_symlink(info)){
