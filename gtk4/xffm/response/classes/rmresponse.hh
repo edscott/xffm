@@ -57,8 +57,12 @@ public:
           }
           break;
         case 3:
-          if (!g_file_trash(file, NULL, &error_)){
-            ERROR_("*** Error:: %s: %s\n", path, error_->message);
+          if (!g_file_trash(file, NULL, &error_) && error_){
+            auto message = g_strconcat(error_->message,":\n<span color=\"red\">", path, "</span>", NULL);
+            infoMessage(message);
+            g_error_free(error_);
+            g_free(message);
+            //ERROR_("*** Error:: %s: %s\n", path, error_->message);
           }
           break;
       }
@@ -68,6 +72,20 @@ public:
     }
     static void *asyncNo(void *data){
       return NULL;
+    }
+
+    static void infoMessage(const char *text){
+      auto dialogObject = new DialogTimeout<infoResponse>;
+      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
+      dialogObject->setLabelText(text);
+      gtk_widget_realize(GTK_WIDGET(dialogObject->dialog()));
+      Basic::setAsDialog(GTK_WINDOW(dialogObject->dialog()));
+      gtk_window_present(GTK_WINDOW(dialogObject->dialog()));
+      TRACE("create dialogObject=%p, dialog=%p\n", 
+          dialogObject, dialogObject->dialog()); 
+      auto dialog = dialogObject->dialog();
+      gtk_window_set_decorated(dialog, true);
+      dialogObject->run();
     }
 };
 
