@@ -399,15 +399,15 @@ template <class Type>
                     LocalDir::findPositionStore(store, f, &positionX);
                     g_list_store_remove(store, positionX);
                 }
-                if (!g_file_test(s, G_FILE_TEST_EXISTS)){
-                  if (!g_file_test(s, G_FILE_TEST_IS_SYMLINK)) {
-                    if (verbose) {DBG("Ghost file: %s\n", f);}
-                    g_free(f);
-                    g_free(s);
-                    return;
-                  }
+                // if new item exists, remove it from the list first 
+                auto found2 = LocalDir::findPositionModel2(model, s, &positionF);
+                if (found2){
+                    guint positionX;
+                    Child::incrementSerial(child);
+                    LocalDir::findPositionStore(store, s, &positionX);
+                    g_list_store_remove(store, positionX);
                 }
-                // add updated info.
+                // add updated info to the list.
                 Child::incrementSerial(child);
                 LocalDir::insert(store, s, verbose);
             
