@@ -361,17 +361,14 @@ template <class Type>
                 {
                   if (verbose) 
                   {DBG("Received  CREATED (%d): \"%s\", \"%s\"\n", event, f, s);}
-                  if (!g_file_test(f, G_FILE_TEST_EXISTS)){
-                    if (!g_file_test(f, G_FILE_TEST_IS_SYMLINK)) {
-                      if (verbose) {DBG("Ghost file: %s\n", f);}
-                      g_free(f);
-                      g_free(s);
-                      return;
-                    }
-                  }
-                  // add updated info.
-                  Child::incrementSerial(child);
-                  LocalDir::insert(store, f, verbose);
+                  auto found = LocalDir::findPositionModel2(model, f, &positionF);
+                  if (found) {
+                     Child::incrementSerial(child);
+                     LocalDir::findPositionStore(store, f, &positionF);
+                     g_list_store_remove(store, positionF);
+                     Child::incrementSerial(child);
+                     LocalDir::insert(store, f, verbose);                        
+                  } 
                 }
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
