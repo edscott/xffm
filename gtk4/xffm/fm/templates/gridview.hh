@@ -351,8 +351,10 @@ template <class Type>
                     g_list_store_remove(store, positionX);
                     //g_list_model_items_changed (model, positionF, 1, 0);
 
-                  }
- 
+                  } else {
+                  if (verbose)DBG("%s not found!\n", f);
+                }
+
                 }
                 break;
 
@@ -368,7 +370,10 @@ template <class Type>
                      g_list_store_remove(store, positionF);
                      Child::incrementSerial(child);
                      LocalDir::insert(store, f, verbose);                        
-                  } 
+                  } else {
+                     Child::incrementSerial(child);
+                     LocalDir::insert(store, f, verbose);    
+                  }
                 }
                 break;
             case G_FILE_MONITOR_EVENT_CHANGED:
