@@ -819,7 +819,7 @@ ClickMenu
       if (image) return image;
 
       // LyX
-      const char *pMath[] = {"lyx", "LYX", NULL};
+      const char *pMath[] = {"lyx", "LYX", "LyX", "math",NULL};
       image = sourceCodeImage(name, info, size, EMBLEM_MATH, pMath);
       if (image) return image;
 
