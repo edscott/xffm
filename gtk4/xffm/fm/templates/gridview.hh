@@ -97,7 +97,8 @@ template <class Type>
             gchar *markup = g_strdup_printf("%s: %s (%s)\n", regexp_,
                 _("Regular Expression syntax is incorrect"), _error->message);
             DBG("%s", markup);
-            g_free(markup);    
+            Print::printInfo(Child::getOutput(), markup);
+            // done by printInfo(): g_free(markup);    
             g_error_free(_error);
           }    
         }

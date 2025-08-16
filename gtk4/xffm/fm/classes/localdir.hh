@@ -176,7 +176,7 @@ namespace xf {
           //Print::showText(Child::getOutput());
           char buffer3[256];
           snprintf(buffer3, 256,_("%s (%s Filtered)"), buffer, buffer2);  
-          Print::print(Child::getOutput(), g_strconcat(buffer3,"\n", NULL));
+          Print::printInfo(Child::getOutput(), g_strconcat(buffer3,"\n", NULL));
         }
 
 
