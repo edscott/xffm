@@ -219,11 +219,7 @@ private:
         // This bug may have been fixed, but you really cannot
         // count on that...
       
-        // Only setting the default size to last setting screws things
-        // up when last window was in i3 non dialog mode. 
-        // gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
-        // Set to default dialog size:
-        gtk_widget_set_size_request(GTK_WIDGET(mainWindow_), 500, 500);
+        // Set to default dialog size: at showWindow()
         return;
     }
 
@@ -240,9 +236,16 @@ private:
         
         g_signal_connect(G_OBJECT(mainWindow_), "notify", G_CALLBACK(notify), mainWindow_);
         
-        auto w = Settings::getInteger("window", "width", windowW_);
-        auto h = Settings::getInteger("window", "height", windowH_);
-        gtk_window_set_default_size(mainWindow_, w, h);
+        // Only setting the default size to last setting screws things
+        // up when last window was in i3 non dialog mode. 
+        // XXX Instead we need to figure out how to determine
+        //     if window is in dialog mode or not before saving
+        //     window width and height...
+        //     Ask on i3 list.
+        // auto w = Settings::getInteger("window", "width", windowW_);
+        // auto h = Settings::getInteger("window", "height", windowH_);
+        // gtk_window_set_default_size(mainWindow_, w, h);
+        gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
 
         gtk_window_present (mainWindow_);
 
