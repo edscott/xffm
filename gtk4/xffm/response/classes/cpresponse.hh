@@ -143,7 +143,7 @@ private:
       case -1:
         mode = _("link"); break;
     }
-    Print::showText(Child::getOutput());
+    //Print::showText(Child::getOutput());
     Print::printInfo(Child::getOutput(), g_strdup_printf(" %s (%s) %s\n",  _("Operation completed"), mode, srcTgt)); 
     g_free(srcTgt);
 
