@@ -79,7 +79,7 @@ namespace xf {
     static void //  will free string.
     printInfo(GtkTextView *textview, gchar *string){
       if (!string) return;
-      showText(textview);
+      //showText(textview);
       if (string[strlen(string)-1] != '\n') {
         print(textview, "green/black_bg", g_strconcat(string,"\n",NULL));
         g_free(string);
