@@ -215,10 +215,15 @@ private:
         // size of window + 45 in x and y.
         // So we give it a big size, so drag motion does not fail
         // and then put it to the correct user saved size.
-        //gtk_window_set_default_size(mainWindow_, 5000, 5000);
-        
-        gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
-        //gtk_widget_set_size_request(mainWindow_, windowW_, windowH_);
+         gtk_window_set_default_size(mainWindow_, 5000, 5000);
+        // This bug may have been fixed, but you really cannot
+        // count on that...
+      
+        // Only setting the default size to last setting screws things
+        // up when last window was in i3 non dialog mode. 
+        // gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
+        // Set to default dialog size:
+        gtk_widget_set_size_request(GTK_WIDGET(mainWindow_), 500, 500);
         return;
     }
 
