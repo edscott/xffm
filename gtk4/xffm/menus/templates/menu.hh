@@ -107,9 +107,13 @@ namespace xf {
         g_object_set_data(G_OBJECT(menu), "isTextView", GINT_TO_POINTER(isTextView));
         g_object_set_data(G_OBJECT(menu), "path", (void *)path);
         gtk_popover_set_default_widget(menu, widget);
-        gtk_widget_set_parent(GTK_WIDGET(menu), parent);
+        // We need to set parent to toggle textview imagebutton...
+        // Might not yet be created. How about bottom of tab label...
+        //gtk_widget_set_parent(GTK_WIDGET(menu), parent);
+        gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(mainMenuButton));
         g_object_set_data(G_OBJECT(widget), "menu", (void *)menu);
-        gtk_popover_set_position(GTK_POPOVER(menu), GTK_POS_TOP);
+
+        gtk_popover_set_position(GTK_POPOVER(menu), GTK_POS_BOTTOM);
         
         auto gesture = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),3);
