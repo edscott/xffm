@@ -23,6 +23,7 @@
 const char **environment = NULL;
 static const char *rfm_root_id="RFM_ROOT";
 static const char *Bookmarks_id="Bookmarks";
+const char *Xname_ = NULL;
 
 #include "config.h"
 #include "xffm.h"
@@ -98,6 +99,7 @@ static char *getPath(const char *argv1){
 int
 main (int argc, const char *argv[], const char *envp[]) {
   environment = envp; // not used anymore, methinks.
+  Xname_ = (const char *)g_strdup_printf("xffm-%ld", time(NULL));
 
   // Settings changed from version .001 to .002:
   xf::Settings::removeGroup("flags");

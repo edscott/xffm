@@ -354,13 +354,15 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
       gtk_popover_popdown(menu);
 
-      // Save last size.
-      auto width = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_HORIZONTAL);
-      auto height = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_VERTICAL);
-      //gtk_widget_set_visible(Child::mainWidget(), FALSE);
-      Settings::setInteger("window", "width", width);
-      Settings::setInteger("window", "height", height);
-        TRACE("foo...\n");
+      // Save last size. (only if not paned in i3)
+      if (Basic::isXffmFloating()){
+        auto width = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_HORIZONTAL);
+        auto height = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_VERTICAL);
+        //gtk_widget_set_visible(Child::mainWidget(), FALSE);
+        Settings::setInteger("window", "width", width);
+        Settings::setInteger("window", "height", height);
+        TRACE("set saved size %d,%d\n", width, height);
+      }
       auto p = (MainWindow<Type> *)mainWindow_p;
       auto notebook = p->notebook();
       while (gtk_notebook_get_n_pages(notebook) > 1){

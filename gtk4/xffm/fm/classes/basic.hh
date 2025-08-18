@@ -1,10 +1,11 @@
 #ifndef BASIC_HH
 #define BASIC_HH
+#include <string.h>
 namespace xf {
   GList *dialogStack = NULL; // Child::mainWidget() dialog stack.
 
   class Basic {
-      constexpr static const char *Xname_ = "dialog";
+     // constexpr static const char *Xname_ = "xffm";
       constexpr static const char *Xclass_ = "Dialog"; 
       static gboolean
       hyperLabelClick(GtkGestureClick* self,
@@ -30,6 +31,26 @@ namespace xf {
       }
 #endif
    public:
+
+      static bool isXffmFloating(void){
+        auto command = "i3-msg -t get_tree";
+        bool retval = true;
+        auto line = pipeCommandFull(command);
+        if (!line) return false;
+        char *p = strstr(line, Xname_);
+        if (!p) return false;
+        char *q = strstr(p, "\"floating\":");
+        if (!q) {ERROR_("isXffmPaned: this should not happen.\n"); return false;}
+        q += strlen("\"floating\":");
+        if (strncmp(q+1, "user_off", strlen("user_off")) == 0) {
+          TRACE("floating = user off\n");
+          retval = false;
+        }
+        g_free(line);
+        TRACE("isXffmFloating...%s\n", retval?"yes":"no");
+        return retval;
+      } 
+      
       static gchar *md5sum(const gchar *file){
           gchar *md5sum = g_find_program_in_path("md5sum");
           if (!md5sum){
@@ -348,8 +369,7 @@ namespace xf {
         if(pipe) {
             gchar *result=g_strdup("");
             gchar line[PAGE_LINE];
-            while (fgets (line, PAGE_LINE - 1, pipe) && !feof(pipe)){
-                line[PAGE_LINE - 1] = 0;
+            while (fgets (line, PAGE_LINE, pipe) && !feof(pipe)){
                 auto g = g_strconcat(result, line, NULL);
                 g_free(result);
                 result = g;
@@ -915,6 +935,7 @@ public:
           OK = true;
           Display *display = gdk_x11_display_get_xdisplay(displayGdk);
           XClassHint *wm_class = (XClassHint *)calloc(1, sizeof(XClassHint));
+
           wm_class->res_name = (char *)Xname_;
           wm_class->res_class = (char *)Xclass_;
           //wm_class->res_name = g_strdup(Xname);

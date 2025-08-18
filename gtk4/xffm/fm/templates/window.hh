@@ -191,8 +191,10 @@ private:
     static void notify(GObject* self, GParamSpec *pspec, void *data){
       auto call = g_param_spec_get_name(pspec);
       if (!call) return;
+      //if (Basic::isXffmPaned()) return;
 
       if (strcmp(call, "default-width")==0 || strcmp(call, "default-height")==0){
+        TRACE("Xinstance = %s paned=%d\n", Xname_, Basic::isXffmPaned());
         int w;
         int h;
         g_object_get (self, "default-width", &w, "default-height", &h, NULL);
@@ -242,10 +244,10 @@ private:
         //     if window is in dialog mode or not before saving
         //     window width and height...
         //     Ask on i3 list.
-        // auto w = Settings::getInteger("window", "width", windowW_);
-        // auto h = Settings::getInteger("window", "height", windowH_);
-        // gtk_window_set_default_size(mainWindow_, w, h);
-        gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
+         auto w = Settings::getInteger("window", "width", windowW_);
+         auto h = Settings::getInteger("window", "height", windowH_);
+         gtk_window_set_default_size(mainWindow_, w, h);
+        //gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
 
         gtk_window_present (mainWindow_);
 
@@ -438,6 +440,14 @@ private:
 
       if (g_list_length(pageList_) == 0){
         hideWindow();
+        if (Basic::isXffmFloating()){
+          auto width = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_HORIZONTAL);
+          auto height = gtk_widget_get_size(Child::mainWidget(),  GTK_ORIENTATION_VERTICAL);
+          //gtk_widget_set_visible(Child::mainWidget(), FALSE);
+          Settings::setInteger("window", "width", width);
+          Settings::setInteger("window", "height", height);
+          TRACE("set saved size %d,%d\n", width, height);
+        }
         gtk_widget_unparent(GTK_WIDGET(menu_));
         gtk_window_destroy(mainWindow_);
         exitDialogs = true;
