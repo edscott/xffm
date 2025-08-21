@@ -400,7 +400,8 @@ const char **radioboxes(void){
         c->cutClipboardList(selectionList);
         // cleanup
         // Disabling reload since deadlock encountered 2025-02-06 
-        // MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
+        // but might not be related to deadlock, reenabled 2025-08-21.
+        MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
         Basic::freeSelectionList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         return;
