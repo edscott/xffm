@@ -835,8 +835,12 @@ ClickMenu
       image = sourceCodeImage(name, info, size, EMBLEM_P, pSrc);
       if (image) return image;
       
-      const char *cSrc[] = {"c", "C", "cc", "CC", NULL};
+      const char *cSrc[] = {"c", "C", NULL};
       image = sourceCodeImage(name, info, size, EMBLEM_C, cSrc);
+      if (image) return image;
+      
+      const char *ccSrc[] = {"cc", "CC", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_CC, ccSrc);
       if (image) return image;
 
       const char *fSrc[] = {"f", "F", "f90", "F90", "f95", "F95",NULL};
@@ -847,8 +851,12 @@ ClickMenu
       image = sourceCodeImage(name, info, size, EMBLEM_I, iSrc);
       if (image) return image;
       
-      const char *hSrc[] = {"h", "H", "HH", "hh", NULL};
+      const char *hSrc[] = {"h", "H", NULL};
       image = sourceCodeImage(name, info, size, EMBLEM_H, hSrc);
+      if (image) return image;
+      
+      const char *hhSrc[] = {"HH", "hh", NULL};
+      image = sourceCodeImage(name, info, size, EMBLEM_HH, hhSrc);
       if (image) return image;
       
       const char *oSrc[] = {"o", "O", "obj", "OBJ", "dbg", "DBG", NULL};

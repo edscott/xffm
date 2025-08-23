@@ -5,8 +5,10 @@ emblem-remove.svg
 emblem-delete.svg
 emblem-p.svg
 emblem-c.svg
+emblem-cc.svg
 emblem-i.svg
 emblem-h.svg
+emblem-hh.svg
 emblem-f.svg
 emblem-o.svg
 emblem-m.svg

@@ -24,8 +24,10 @@
 
 #define EMBLEM_P "emblem-p"
 #define EMBLEM_C "emblem-c"
+#define EMBLEM_CC "emblem-cc"
 #define EMBLEM_I "emblem-i"
 #define EMBLEM_H "emblem-h"
+#define EMBLEM_HH "emblem-hh"
 #define EMBLEM_F "emblem-f"
 #define EMBLEM_O "emblem-o"
 #define EMBLEM_M "emblem-m"
