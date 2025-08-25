@@ -100,6 +100,10 @@ int
 main (int argc, const char *argv[], const char *envp[]) {
   environment = envp; // not used anymore, methinks.
   Xname_ = (const char *)g_strdup_printf("xffm-%ld", time(NULL));
+    
+  mkdir(g_get_user_data_dir(), 0700);
+  mkdir(g_get_user_cache_dir(), 0700);
+  mkdir(g_get_user_config_dir(), 0700);
 
   // Settings changed from version .001 to .002:
   xf::Settings::removeGroup("flags");
