@@ -253,11 +253,11 @@
      showgrid="true"
      snaptogrid="false"
      inkscape:zoom="2.95"
-     inkscape:cx="77.118644"
-     inkscape:cy="79.491525"
-     inkscape:window-width="1362"
-     inkscape:window-height="732"
-     inkscape:window-x="0"
+     inkscape:cx="76.949153"
+     inkscape:cy="79.322034"
+     inkscape:window-width="1916"
+     inkscape:window-height="1033"
+     inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:current-layer="svg559"
      inkscape:window-maximized="1"
@@ -329,10 +329,20 @@
      x="-190.84746"
      y="121.01695"
      id="text2"
-     transform="matrix(2.5425407,-0.01312529,0.01303332,2.2557653,508.3501,-136.33212)"><tspan
+     transform="matrix(1.7571741,-0.00802534,0.00900745,1.3792669,344.24174,-83.659871)"><tspan
        x="-190.84746"
        y="121.01695"
-       id="tspan2">C</tspan></text>
+       id="tspan3">C</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:64px;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;white-space:pre;inline-size:59.7514;display:inline;fill:#2e3436;fill-rule:evenodd;stroke-width:22.5946;stroke-dasharray:none"
+     x="-190.84746"
+     y="121.01695"
+     id="text2-0"
+     transform="matrix(1.7571741,-0.00802534,0.00900745,1.3792669,404.00306,-26.036237)"><tspan
+       x="-190.84746"
+       y="121.01695"
+       id="tspan4">C</tspan></text>
   <text
      xml:space="preserve"
      id="text3"
