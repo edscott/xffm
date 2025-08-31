@@ -472,7 +472,10 @@ private:
           if (!extA) extA = ".";
           if (!extB) extB = ".";
           auto value = strcasecmp(extA, extB);
-          if (value == 0) value = strcasecmp(extA, extB);
+          //  error if (value == 0) value = strcasecmp(extA, extB);
+          if (value == 0){
+            value = strcasecmp(nameA, nameB);
+          }
           if (descending) return -value;
           return value;
         }
