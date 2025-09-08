@@ -572,13 +572,15 @@ ClickMenu
        
         TRACE("selectWidget: path=%s flags = 0x%x\n", dirPath, flags);
         g_free(dirPath);
-        auto found = LocalDir::findPositionModel2(model, path, &positionF);
+        auto found = Type::findPositionModel2(model, path, &positionF);
         // no: auto found = LocalDir::findPositionModel(GTK_LIST_STORE(model), path,  &positionF, flags);
         //auto found = LocalDir::findPositionModel(store, path,  &positionF, flags);
         if (!found){
-          ERROR_("selectWidget(): %s not found\n", path);
-          g_free(path);
-          return false;
+          if (!g_file_test(path, G_FILE_TEST_EXISTS)) { // ignore false negatives
+            ERROR_("selectWidget(): %s not found\n", path);
+            g_free(path);
+            return false;
+          }
         } 
         TRACE("Found %s at %d\n", path, positionF);
         g_free(path);
@@ -613,7 +615,6 @@ ClickMenu
               void *data){
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto gridView_p = (GridView<Type> *)data;
-  
       selectWidget(w, gridView_p, false);   
       auto currentSerial = Child::getSerial();
       if (longPressSerial != currentSerial){ // Invalid read of size 4

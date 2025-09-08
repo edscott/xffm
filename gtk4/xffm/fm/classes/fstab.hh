@@ -55,6 +55,27 @@ class FstabDir {
       addFstabItems(store);      
       return LocalDir::getSelectionModel(G_LIST_MODEL(store), true, 0);
     }
+      
+    static bool findPositionModel2(GListModel *model, const char *path, guint *positionM){
+
+        guint n = g_list_model_get_n_items(model);
+        for (guint i=0; i<n; i++){
+          auto info = G_FILE_INFO(g_list_model_get_object (model, i));
+          auto name = g_strdup(g_file_info_get_name(info));
+          if (strchr(name, '\n')) *strchr(name, '\n') = 0;
+          auto basename = g_path_get_basename(path);
+          TRACE("Fstab::findPositionModel2: %d) %s, %s\n", i, name, basename);
+          if (strcmp(basename, name)==0) {
+            g_free(basename);
+            *positionM = i;
+            TRACE("Eureka! found at %d\n", i);
+            return true;
+          }
+          g_free(basename);
+          g_free(name);
+        }
+        return false;
+      }
 
   private:
     static void // Linux
