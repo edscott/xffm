@@ -10,6 +10,7 @@ typedef struct radio_t {
 } radio_t;
 
 typedef struct fgrData_t{
+    GtkWindow *parent;
     GtkBox *mainBox;
     pid_t pid;
     gint resultLimit;

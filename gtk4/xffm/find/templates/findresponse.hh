@@ -70,9 +70,11 @@ public:
 
       GtkEntry *grepEntry(void){return grepEntry_;}
       GtkEntry *filterEntry(void){return filterEntry_;}
-       static void *asyncYes(void *data){
+       
+      static void *asyncYes(void *data){
         auto dialogObject = (dialog_t *)data;
         TRACE("%s", "hello world asyncYes\n");
+        asyncNo(data);
         return NULL;
       }
 

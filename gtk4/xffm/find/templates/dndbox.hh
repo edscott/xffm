@@ -13,12 +13,13 @@ class DnDBox{
 public:
 
     static GtkWindow *
-    openDnDBox(const gchar *dir, GSList *list, GtkTextView *textview){
+    openDnDBox(const gchar *dir, GSList *list, GtkTextView *textview, GtkWindow *parent){
       TRACE("openDnDBox... dir = %s\n", dir);
       if (g_slist_length(list) == 0) return NULL;
 
       auto window = createWindow(dir, list);
       g_object_set_data(G_OBJECT(window), "list", list);
+      g_object_set_data(G_OBJECT(window), "parent", parent);
       g_object_set_data(G_OBJECT(window), "textview", textview);
       auto mainBox = mkMainBox(dir, window);
       auto listBox = mkListBox(dir,list,(void *)window);
@@ -54,6 +55,10 @@ private:
       auto dir = g_object_get_data(G_OBJECT(window), "dir");
       g_free(dir);
       gtk_widget_set_visible(GTK_WIDGET(window), false);
+
+      auto parent = g_object_get_data(G_OBJECT(window), "parent");
+      g_object_set_data(G_OBJECT(parent), "response", GINT_TO_POINTER(1));
+
       // will destroy on program Exit.
       //gtk_window_destroy(GTK_WINDOW(window));
     }
@@ -297,7 +302,7 @@ private:
       new OpenWith<bool>(textview, path);
       g_free(path);
       
-      close(NULL, window);
+      //close(NULL, window);
 
       return;
     }

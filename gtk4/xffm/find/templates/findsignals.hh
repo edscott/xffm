@@ -56,6 +56,7 @@ class FindSignals {
         fgrData_t *Data = (fgrData_t *)calloc(1,sizeof(fgrData_t));
 
         Data->mainBox = object->mainBox();
+        Data->parent = object->dialog();
         object->Data(Data);
         Data->object = (void *)object;
 
@@ -436,7 +437,7 @@ class FindSignals {
          for (;Data->argument[k];k++);
          k--;
          auto textview = object->textview();
-         auto dndBox = DnDBox<Type>::openDnDBox(Data->argument[k], dndList, textview);
+         auto dndBox = DnDBox<Type>::openDnDBox(Data->argument[k], dndList, textview, Data->parent);
          findWindowsList = g_list_prepend(findWindowsList,dndBox);
        } else {
          TRACE("No Data->findList\n");
