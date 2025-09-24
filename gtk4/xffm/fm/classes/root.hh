@@ -40,7 +40,7 @@ namespace xf {
           auto gIcon = g_file_info_get_icon(info);
           
           auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
-//          auto paintable = Texture<bool>::addEmblem("folder", EMBLEM_START_HERE, scaleFactor*size, scaleFactor*size);
+//          auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));      
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
@@ -99,6 +99,7 @@ namespace xf {
         {
 
           int size = Settings::getInteger("xfterm", "iconsize");
+          double scaleFactor = (size == 24)? 0.75 : 1.0;
           auto list = Bookmarks::bookmarksList();
           for (auto l=list; l && l->data; l=l->next){
             auto p = (bookmarkItem_t *)l->data;
@@ -118,7 +119,9 @@ namespace xf {
             g_free(basename);
             g_free(utf_name);
 
-            auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, size, size);
+            //auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
+            auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
+            //auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, size, size);
             g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
 
             //g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
