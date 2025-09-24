@@ -39,8 +39,8 @@ namespace xf {
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           auto gIcon = g_file_info_get_icon(info);
           
-          auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
-//          auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
+//          auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
+          auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));      
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
@@ -119,8 +119,8 @@ namespace xf {
             g_free(basename);
             g_free(utf_name);
 
-            //auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
-            auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
+            auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
+            //auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
             //auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, size, size);
             g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
 
