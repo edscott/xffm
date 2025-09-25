@@ -157,7 +157,11 @@ private:
       gtk_box_append(GTK_BOX(margin),space);
       gtk_box_append(GTK_BOX(buttonBox),margin);
 
-     auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
+      auto hide = Basic::newButtonX(EMBLEM_CLEAR, _("Clear"));
+      gtk_box_append(buttonBox, GTK_WIDGET(hide));
+      g_signal_connect(G_OBJECT(hide), "clicked", G_CALLBACK(clearBox), window);
+
+      auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
       g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
       gtk_box_append(buttonBox, GTK_WIDGET(button));
           
@@ -165,6 +169,10 @@ private:
       gtk_widget_set_vexpand(GTK_WIDGET(mainBox), true);
       gtk_widget_set_hexpand(GTK_WIDGET(mainBox), true); 
       return mainBox;
+    }
+
+    static void clearBox(GtkWidget *w, GtkWindow *window){
+      gtk_widget_set_visible(GTK_WIDGET(window), false);
     }
 
     static GtkListBox *mkListBox(const gchar *dir, GSList *list, void *window){

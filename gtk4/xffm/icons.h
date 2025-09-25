@@ -15,12 +15,10 @@
 
 // File type emblems
 
-
 #define GRAYBALL "emblem-grayball"
 //#define CANCEL "cancel" // remove
 #define EMBLEM_CANCEL "cancel" 
 #define EXECUTE "execute"
-
 
 #define EMBLEM_P "emblem-p"
 #define EMBLEM_C "emblem-c"
@@ -101,8 +99,5 @@
 
 #define LIST_ADD "list-add"
 #define OPEN_MENU "open-menu"
-
-
-
 
 #endif

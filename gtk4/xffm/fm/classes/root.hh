@@ -16,6 +16,8 @@ namespace xf {
         g_object_set_data(G_OBJECT(store), "xffm::root", GINT_TO_POINTER(1));
 
         auto flags = Settings::getInteger("Bookmarks","flags", 0);
+        auto size = Settings::getInteger("xfterm", "iconsize",24);
+        double scaleFactor = (size == 24)? 0.75 : 1.0;
 
         // fstab icon
         {
@@ -30,8 +32,6 @@ namespace xf {
 
         // ecryptfs icon
         {
-          auto size = Settings::getInteger("xfterm", "iconsize",24);
-          double scaleFactor = (size == 24)? 0.75 : 1.0;
           
           GFile *file = g_file_new_for_path("/");
 //          GFile *file = g_file_new_for_path(g_get_home_dir());
@@ -99,8 +99,6 @@ namespace xf {
         // bookmarks
         {
 
-          int size = Settings::getInteger("xfterm", "iconsize");
-          double scaleFactor = (size == 24)? 0.75 : 1.0;
           auto list = Bookmarks::bookmarksList();
           for (auto l=list; l && l->data; l=l->next){
             auto p = (bookmarkItem_t *)l->data;
