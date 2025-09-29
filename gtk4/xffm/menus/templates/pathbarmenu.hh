@@ -13,6 +13,7 @@ namespace xf {
         _("Paste"), // 
         _("Show Clipboard"), // 
         _("Clipboard is empty."), // 
+        _("Close"), 
         NULL
       };
       return keys_;
@@ -24,6 +25,7 @@ namespace xf {
         {_("Paste"),(void *) EMBLEM_PASTE}, 
         {_("Clipboard is empty."),(void *) NULL}, 
         {_("Show Clipboard"),(void *) EMBLEM_ABOUT}, 
+        {_("Close"),(void *) WINDOW_CLOSE},
         {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -35,6 +37,7 @@ namespace xf {
         {_("Paste"),(void *)  MenuCallbacks<Type>::paste}, 
         {_("Clipboard is empty."),(void *) NULL}, 
         {_("Show Clipboard"),(void *) MenuCallbacks<Type>::showPaste}, 
+        {_("Close"),(void *) MainMenu<Type>::closeMenu},
 
         {NULL, NULL}
       };

@@ -10,6 +10,7 @@ namespace xf {
         _("Foreground color"),
         _("Background color"), 
         _("Default Colors"), 
+        _("Close"), 
         NULL
       };
       return keys_;
@@ -19,6 +20,7 @@ namespace xf {
         {_("Foreground color"),(void *) EMBLEM_GRAPHICS}, 
         {_("Background color"), (void *) EMBLEM_GRAPHICS},
         {_("Default Colors"),(void *) EMBLEM_UNDO}, 
+        {_("Close"),(void *) WINDOW_CLOSE},
         {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -28,6 +30,7 @@ namespace xf {
         {_("Foreground color"),(void *) Util<Type>::terminalColors}, 
         {_("Background color"), (void *) Util<Type>::terminalColors},
         {_("Default Colors"),(void *) Util<Type>::defaultColors}, 
+        {_("Close"),(void *) MainMenu<Type>::closeMenu},
         {NULL, NULL}
       };
       return menuCallbacks_;

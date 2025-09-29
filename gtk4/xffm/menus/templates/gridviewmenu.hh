@@ -1,6 +1,7 @@
 #ifndef GRIDVIEWMENU_HH
 #define GRIDVIEWMENU_HH
 namespace xf {
+  template <class Type> class MainMenu;
   template <class Type> class Prompt;
   template <class Type> class MenuCallbacks;
   template <class Type> class Workdir;
@@ -34,6 +35,7 @@ namespace xf {
         _("Delete"),
         _("Encrypt File..."),
         _("Decrypt File..."),
+        _("Close"), 
        // _("Select All"), 
        // _("Match regular expression"), 
 
@@ -70,6 +72,7 @@ namespace xf {
         {_("Encrypt File..."),(void *) EMBLEM_BLOWFISH}, 
         {_("Decrypt File..."),(void *) EMBLEM_BLOWFISH}, 
         {_("Create a compressed archive with the selected objects"),(void *) EMBLEM_PACKAGE},
+        {_("Close"),(void *) WINDOW_CLOSE},
        {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -96,6 +99,7 @@ namespace xf {
         {_("Encrypt File..."),(void *) bcrypt}, 
         {_("Decrypt File..."),(void *) bcrypt}, 
         {_("Create a compressed archive with the selected objects"),(void *) tar},
+        {_("Close"),(void *) MainMenu<Type>::closeMenu},
        
         {NULL, NULL}
       };
@@ -135,7 +139,6 @@ const char **radioboxes(void){
    }
 
     private:
-
     
     static char *getPath(GtkPopover *menu){
       auto data =   g_object_get_data(G_OBJECT(menu), "info");

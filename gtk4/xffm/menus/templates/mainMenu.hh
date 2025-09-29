@@ -44,6 +44,7 @@ namespace xf {
        */
         "", 
         _("Exit"), 
+        _("Close"), 
         NULL
       };
       return keys_;
@@ -68,6 +69,7 @@ namespace xf {
         {_("Color settings"),(void *)DOCUMENT_PROPERTIES}, 
         {_("Exit"),(void *)  WINDOW_SHUTDOWN},
         {_("Apply modifications"),(void *) EMBLEM_APPLY},
+        {_("Close"),(void *) WINDOW_CLOSE},
         {NULL, NULL}
       }; 
       return menuIconNames_;
@@ -94,6 +96,7 @@ namespace xf {
         {_("Show Clipboard"),(void *) showPaste}, 
         {_("Clear Clipboard History"),(void *) clearPaste}, 
         {_("Exit"),(void *) close},
+        {_("Close"),(void *) closeMenu},
 
         {_("Hidden files"),(void *) toggleItem},
         {_("Backup files"),(void *) toggleItem},
@@ -349,6 +352,14 @@ namespace xf {
       g_free(xffm);
     }
 
+    public:
+    static void
+    closeMenu(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
+      gtk_popover_popdown(menu);
+    }
+
+    private:
     static void
     close(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));

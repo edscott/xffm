@@ -588,6 +588,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           _("Link"),
           _("Properties"),
           _("Delete"),
+          _("Close"),
           NULL};
         for (auto p=show; p && *p; p++){
           auto widget = g_object_get_data(G_OBJECT(popover), *p);
