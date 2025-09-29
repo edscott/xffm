@@ -136,17 +136,23 @@ private:
       gtk_frame_set_label_align(frame, 1.0);
       auto closeBox = Dialog::buttonBox("close", _("Close"), (void *)cancelCallback, this);
       gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox));
-      
+      //gtk_widget_set_vexpand(GTK_WIDGET(frame), false);
+      //gtk_widget_set_hexpand(GTK_WIDGET(frame), false);
+
       gtk_window_set_child(dialog_, GTK_WIDGET(frame));
       g_object_set_data(G_OBJECT(dialog_), "frame", frame);
 
       auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+      gtk_widget_set_vexpand(GTK_WIDGET(vbox), false);
+      gtk_widget_set_hexpand(GTK_WIDGET(vbox), false);
       //gtk_window_set_child(dialog_, GTK_WIDGET(vbox));
       gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(vbox));
+      
 
       // icon 
-        auto picture = Texture<bool>::getPicture(EMBLEM_RUN, 48);
-        Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(picture), TRUE, TRUE, 0);
+//        auto picture = Texture<bool>::getPicture(EMBLEM_RUN, 50);
+//        gtk_box_append(GTK_BOX (vbox), GTK_WIDGET(picture));
+//      auto image = Texture<bool>::getImage(EMBLEM_RUN, 50); // image now ignores size (gtk>=4.20)
 
       // path title
       auto label = GTK_LABEL(gtk_label_new (""));
@@ -167,18 +173,26 @@ private:
       }
 
       auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      //gtk_box_prepend(GTK_BOX(hbox), GTK_WIDGET(image));
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
+      gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
       auto label2 = GTK_LABEL(gtk_label_new (windowTitle));
       input_ = prompt_p->input();
       gtk_widget_set_size_request(GTK_WIDGET(input_), 200, -1);
-      Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(label2), FALSE, FALSE, 3);
+
+      gtk_box_append(GTK_BOX (hbox), GTK_WIDGET(label2));
+      gtk_box_append(GTK_BOX (hbox), GTK_WIDGET(input_));
+      gtk_box_append(GTK_BOX (vbox), GTK_WIDGET(hbox));
+
+      /*Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(label2), FALSE, FALSE, 3);
       Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(input_), TRUE, TRUE, 3);
-      Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(hbox), TRUE, TRUE, 0);
+      Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(hbox), TRUE, TRUE, 0);*/
 
       if (path_){
         // mimetype title
         //auto mimeBox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0)); 
-        auto mimeBox = Basic::mkEndBox(); 
+        //auto mimeBox = Basic::mkEndBox(); 
+        auto mimeBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0); 
         auto labelMime = GTK_LABEL(gtk_label_new (""));
         auto mimetype = MimeMagic::mimeMagic(path_); 
         auto markup2 = g_strconcat("<span color=\"brown\" size=\"small\">", mimetype, "</span>", NULL);
@@ -186,22 +200,29 @@ private:
         g_free(markup2);
         auto apps = MimeApplication::locate_apps(mimetype);
    
-        Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(mimeBox), TRUE, TRUE, 0);
-        Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelMime), FALSE, FALSE, 0);
+        gtk_box_append(GTK_BOX (vbox), GTK_WIDGET(mimeBox));
+        //Basic::boxPack0(GTK_BOX (vbox), GTK_WIDGET(mimeBox), TRUE, TRUE, 0);
+        gtk_box_append(GTK_BOX (mimeBox), GTK_WIDGET(labelMime));
+        //Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelMime), FALSE, FALSE, 0);
         // execute button
         if (g_file_test(path_, G_FILE_TEST_IS_EXECUTABLE))
         {
           auto labelExe = gtk_label_new(_("Is executable"));
           Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(labelExe), FALSE, FALSE, 5);
-          auto execute = gtk_button_new();
-          auto run = Texture<bool>::getPicture(EMBLEM_RUN, 48);
+
+          auto execute = Dialog::buttonBox(EMBLEM_RUN, _("Execute"), (void *)runIt, this);
+          Basic::boxPack0(GTK_BOX (mimeBox), GTK_WIDGET(execute), FALSE, FALSE, 3);
+
+
+     /*     auto execute = gtk_button_new();
+          auto run = Texture<bool>::getImage(EMBLEM_RUN, 48);
           auto ebox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
           auto elabel = gtk_label_new(_("Execute"));
-          Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(run), FALSE, FALSE, 0);
-          Basic::boxPack0(GTK_BOX (ebox),GTK_WIDGET(elabel), FALSE, FALSE, 0);
+          gtk_box_append(GTK_BOX (ebox), GTK_WIDGET(run));
+          gtk_box_append(GTK_BOX (ebox), GTK_WIDGET(elabel));
           gtk_button_set_child(GTK_BUTTON(execute), GTK_WIDGET(ebox));
           g_signal_connect (G_OBJECT (execute), "clicked", G_CALLBACK (OpenWith::dialogProceed), this);
-          Basic::boxPack0(mimeBox, GTK_WIDGET(execute), FALSE,FALSE, 0);
+          gtk_box_append(GTK_BOX (mimeBox), GTK_WIDGET(execute));*/
         }
 
         gchar *fileInfo = Basic::fileInfo(path_);
@@ -473,6 +494,15 @@ private:
         object->freeSelectionList();
         object->timeout_=-1;
         gtk_window_present(GTK_WINDOW(Child::mainWidget()));
+    }
+    
+    static void
+    runIt (GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data) {
+        OpenWith::dialogProceed(NULL, data);
     }
  
 

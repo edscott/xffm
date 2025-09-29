@@ -10,13 +10,13 @@ namespace xf
 
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 2));
       gtk_widget_set_vexpand(GTK_WIDGET(box), false);
-      //auto paintable = Texture<bool>::load(iconName);
-      //auto image = gtk_picture_new_for_paintable(paintable);
-      //gtk_widget_set_size_request(image, 25, 25); 
-      auto picture = Texture<bool>::getPicture(iconName, 24);
+      //auto picture = Texture<bool>::getPicture(iconName, 24);
+      //gtk_widget_set_sensitive(GTK_WIDGET(picture), true);
+      //Basic::boxPack0(box, GTK_WIDGET(picture), true, true, 1);
+      auto image = Texture<bool>::getImage(iconName, 24);
+      gtk_widget_set_sensitive(GTK_WIDGET(image), true);
+      Basic::boxPack0(box, GTK_WIDGET(image), true, true, 1);
 
-      gtk_widget_set_sensitive(GTK_WIDGET(picture), true);
-      Basic::boxPack0(box, GTK_WIDGET(picture), true, true, 1);
       Basic::setTooltip(GTK_WIDGET(box), tooltip);
       // motion
       auto motion = gtk_event_controller_motion_new();
