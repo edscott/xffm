@@ -271,7 +271,7 @@ private:
       Basic::boxPack0(tabBox, regexLabel,  FALSE, FALSE, 0);
       g_object_set_data(G_OBJECT(tabBox), "regexLabel", regexLabel);
 
-      auto descending = Texture<bool>::getImage(EMBLEM_DESCENDING);
+      auto descending = Texture<bool>::getPicture(EMBLEM_DESCENDING);
       gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(descending));
       g_object_set_data(G_OBJECT(tabBox), "descending", descending);
       auto flags = Settings::getInteger(path, "flags", 0x40);
@@ -279,7 +279,7 @@ private:
 
       Basic::boxPack0(tabBox, label,  FALSE, FALSE, 0);
       
-      auto hidden = Texture<bool>::getImage(EMBLEM_HIDDEN);
+      auto hidden = Texture<bool>::getPicture(EMBLEM_HIDDEN);
       gtk_box_append(GTK_BOX(tabBox), GTK_WIDGET(hidden));
       g_object_set_data(G_OBJECT(tabBox), "hidden", hidden);
       gtk_widget_set_visible(GTK_WIDGET(hidden), flags & 0x01);

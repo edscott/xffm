@@ -12,7 +12,6 @@ namespace xf {
       auto box = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
       if (iconName){
         auto image = GTK_WIDGET(Texture<bool>::getImage(iconName, 18));
-        //auto image = gtk_image_new_from_icon_name(iconName);
         gtk_box_append (box, GTK_WIDGET(image));
       }
       if (markup){

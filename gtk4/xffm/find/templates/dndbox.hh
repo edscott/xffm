@@ -127,9 +127,9 @@ private:
           g_free(basename);
           if (editor_path){
               auto icon_id = Basic::getAppIconName(editor_path, EMBLEM_EDIT);
-              auto Image = GTK_WIDGET(Texture<bool>::getImage(icon_id, 20));
+              auto picture = GTK_WIDGET(Texture<bool>::getPicture(icon_id, 20));
               edit_button = GTK_BUTTON(gtk_button_new());
-              gtk_button_set_child(edit_button,Image);
+              gtk_button_set_child(edit_button,picture);
               Basic::setTooltip(GTK_WIDGET(edit_button), _("Edit all"));
               g_free(icon_id);
               g_free(editor_path);
@@ -193,10 +193,10 @@ private:
         auto fileInfo = Basic::getFileInfo(file);
         if (!fileInfo){ g_object_unref(G_OBJECT(file)); continue; }
 
-        auto image = Texture<bool>::getImage(fileInfo, 24);
+        auto picture = Texture<bool>::getPicture(fileInfo, 24);
         g_object_unref(G_OBJECT(file));
         g_object_unref(G_OBJECT(fileInfo));
-        gtk_box_append(GTK_BOX(imageBox), GTK_WIDGET(image));
+        gtk_box_append(GTK_BOX(imageBox), GTK_WIDGET(picture));
         
         auto label = gtk_label_new(path+dirLen);
         gtk_box_append(GTK_BOX(box), label);

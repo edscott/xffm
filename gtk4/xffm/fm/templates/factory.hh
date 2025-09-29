@@ -29,7 +29,7 @@ template <class Type>
         auto menuBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto menuBox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
         auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        auto imageBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        auto pictureBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabelBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -37,7 +37,7 @@ template <class Type>
         auto hlabel2 = gtk_label_new("");
         auto label = gtk_label_new("");
         
-        GtkWidget *boxes[] = {box, menuBox, menuBox2, hbox, imageBox, labelBox, hlabelBox, hlabelBox2, NULL};
+        GtkWidget *boxes[] = {box, menuBox, menuBox2, hbox, pictureBox, labelBox, hlabelBox, hlabelBox2, NULL};
         for (auto p = boxes; p && *p; p++){
           gtk_widget_add_css_class(*p, "gridviewBox");
           gtk_widget_set_vexpand(GTK_WIDGET(*p), false);
@@ -48,7 +48,7 @@ template <class Type>
         gtk_box_append(GTK_BOX(box), menuBox);
         gtk_box_append(GTK_BOX(menuBox), menuBox2);
         gtk_box_append(GTK_BOX(menuBox2), hbox);
-        gtk_box_append(GTK_BOX(hbox), imageBox);
+        gtk_box_append(GTK_BOX(hbox), pictureBox);
         gtk_box_append(GTK_BOX(hbox), hlabelBox);
         gtk_box_append(GTK_BOX(hbox), hlabelBox2);
         gtk_box_append(GTK_BOX(menuBox2), labelBox);
@@ -57,7 +57,7 @@ template <class Type>
         gtk_box_append(GTK_BOX(labelBox), label);
         
 
-        g_object_set_data(G_OBJECT(object), "imageBox", imageBox);
+        g_object_set_data(G_OBJECT(object), "pictureBox", pictureBox);
         g_object_set_data(G_OBJECT(object), "label", label);
         g_object_set_data(G_OBJECT(object), "hlabel", hlabel);
         g_object_set_data(G_OBJECT(object), "hlabelBox", hlabelBox);
@@ -70,41 +70,41 @@ template <class Type>
         g_object_set_data(G_OBJECT(labelBox), "object", object);
         g_object_set_data(G_OBJECT(hlabelBox), "object", object);
         g_object_set_data(G_OBJECT(hlabelBox2), "object", object);
-        g_object_set_data(G_OBJECT(imageBox), "object", object);
+        g_object_set_data(G_OBJECT(pictureBox), "object", object);
         g_object_set_data(G_OBJECT(menuBox), "object", object);
         g_object_set_data(G_OBJECT(menuBox2), "object", object);
 
         TRACE("factorySetup add signal handlers\n");
 /*
 ClickLong         labelBox
-ClickLongMenu     imageBox
-ClickDown         imageBox
-ClickDown3        imageBox
-ClickUp           imageBox,labelBox
-MotionController  labelBox,hlabelBox,imageBox
+ClickLongMenu     pictureBox
+ClickDown         pictureBox
+ClickDown3        pictureBox
+ClickUp           pictureBox,labelBox
+MotionController  labelBox,hlabelBox,pictureBox
 ClickMenu
 */
         addMotionController(labelBox);
         addMotionController(hlabelBox);
 
-        addMotionController(imageBox);
-        addGestureClickDown(imageBox, object, gridView_p);
+        addMotionController(pictureBox);
+        addGestureClickDown(pictureBox, object, gridView_p);
         
         addGestureClickLong(labelBox, object, gridView_p);
         addGestureClickLong(hlabelBox, object, gridView_p);
         
-        addGestureClickLongMenu(imageBox, object, gridView_p);
+        addGestureClickLongMenu(pictureBox, object, gridView_p);
         
         //addGestureClickDownLabel(labelBox, object, gridView_p);
         //addGestureClickDownBox(box, object, gridView_p);
-        addGestureClickDown3(imageBox, object, gridView_p);
+        addGestureClickDown3(pictureBox, object, gridView_p);
 
-        addGestureClickUp(imageBox, object, gridView_p);
+        addGestureClickUp(pictureBox, object, gridView_p);
         addGestureClickUp(labelBox, object, gridView_p);
         addGestureClickUp(hlabelBox, object, gridView_p);
         addGestureClickUp(hlabelBox2, object, gridView_p);
 
-        addGestureClickMenu(imageBox, object, gridView_p);
+        addGestureClickMenu(pictureBox, object, gridView_p);
         addGestureClickMenu(labelBox, object, gridView_p);
         addGestureClickMenu(hlabelBox, object, gridView_p);
         addGestureClickMenu(hlabelBox2, object, gridView_p);
@@ -120,8 +120,8 @@ ClickMenu
         //Child::incrementSerial();
      
          // cleanup on regen :
-        auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
-        auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
+        auto pictureBox = GTK_BOX(g_object_get_data(object, "pictureBox"));
+        auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(pictureBox));
         if (oldImage) gtk_widget_unparent(oldImage);
      }
 
@@ -136,15 +136,15 @@ ClickMenu
         auto child = GTK_WIDGET(g_object_get_data(G_OBJECT(factory), "child"));
         auto list_item =GTK_LIST_ITEM(object);
         auto box = GTK_BOX(gtk_list_item_get_child( list_item ));
-        auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
+        auto pictureBox = GTK_BOX(g_object_get_data(object, "pictureBox"));
         auto label = GTK_LABEL(g_object_get_data(object, "label"));
         auto hlabel = GTK_LABEL(g_object_get_data(object, "hlabel"));
         auto hlabel2 = GTK_LABEL(g_object_get_data(object, "hlabel2"));
 
         auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
-        g_object_set_data(G_OBJECT(info), "imageBox", imageBox);
+        g_object_set_data(G_OBJECT(info), "pictureBox", pictureBox);
         //g_object_set_data(G_OBJECT(info), "box", box);
-        g_object_set_data(G_OBJECT(imageBox), "info", info);
+        g_object_set_data(G_OBJECT(pictureBox), "info", info);
         
         auto menuBox = GTK_BOX(g_object_get_data(object, "menuBox"));
         g_object_set_data(G_OBJECT(info), "menuBox", menuBox);
@@ -184,28 +184,28 @@ ClickMenu
         // already ut supra. if (size < 0) size = 48;
         double scaleFactor = 1.0;
         GdkPaintable *texture = NULL;
-        GtkWidget *image = NULL;
+        GtkWidget *picture = NULL;
         // xffm:paintable takes preference over all. 
         // (custom icon, preferably for mount point emblem, bookmark emblem, )
         auto xffmPaintable = g_file_info_get_attribute_object(info, "xffm:paintable");      
         if (xffmPaintable) {
-          image = gtk_image_new_from_paintable(GDK_PAINTABLE(xffmPaintable));
+          picture = GTK_WIDGET(gtk_picture_new_for_paintable(GDK_PAINTABLE(xffmPaintable)));
         } else {
-          image = emblemedImage(name, path, info, size);
+          picture = emblemedPicture(name, path, info, size);
         }
 
         bool previewLoaded = false;
         bool doPreview = false;
-        if (!image && !g_file_info_get_is_symlink(info)){
-          image = previewImage(info, path, &doPreview);
-          if (image) {
+        if (!picture && !g_file_info_get_is_symlink(info)){
+          picture = previewPicture(info, path, &doPreview);
+          if (picture) {
             previewLoaded = true;
           } 
         }
         if (doPreview)  scaleFactor = 2.0;
         if (size <= 32) scaleFactor = 0.75;
         
-        if (!image){
+        if (!picture){
           if (g_file_info_get_is_symlink(info)){
             struct stat st;
             if (stat(path, &st) < 0) {
@@ -229,22 +229,22 @@ ClickMenu
                 break;*/
             }
           }
-          image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          picture = gtk_picture_new_for_paintable(GDK_PAINTABLE(texture));
           // Texture is not referenced in hash table. 
           g_object_unref(texture);        
         }
-        if (image) {
-          gtk_widget_set_size_request(image, size*scaleFactor, size*scaleFactor);
+        if (picture) {
+          gtk_widget_set_size_request(picture, size*scaleFactor, size*scaleFactor);
           // cleanup on regen:
-          //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
+          //auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(pictureBox));
           //if (oldImage) gtk_widget_unparent(oldImage);
-          Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(image), FALSE, FALSE, 0);    
-        } else {ERROR_("Error:: Should not happen: image is NULL\n");}
+          Basic::boxPack0(GTK_BOX(pictureBox), GTK_WIDGET(picture), FALSE, FALSE, 0);    
+        } else {ERROR_("Error:: Should not happen: picture is NULL\n");}
         
 
         if (type == G_FILE_TYPE_DIRECTORY ) {
           // not much use, really.
-          //Type::addDirectoryTooltip(image, info);
+          //Type::addDirectoryTooltip(picture, info);
         }
 
         char buffer[128];
@@ -308,8 +308,8 @@ ClickMenu
         /*GtkDragSource *source = gtk_drag_source_new ();
         g_signal_connect (source, "prepare", G_CALLBACK (Dnd<Type>::image_drag_prepare),gridView_p);
         
-        g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<Type>::image_drag_begin), image);
-        gtk_widget_add_controller (image, GTK_EVENT_CONTROLLER (source));*/
+        g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<Type>::image_drag_begin), picture);
+        gtk_widget_add_controller (picture, GTK_EVENT_CONTROLLER (source));*/
         
 
 
@@ -318,11 +318,11 @@ ClickMenu
           // if hash value exists and is ok, skip regen
           // otherwise, plug into threadpool.
           TRACE("factory bind add preview threads\n");
-          // path, imageBox, image, serial
+          // path, pictureBox, picture, serial
           auto arg = (void **)calloc(6, sizeof(void *));
           arg[0] = (void *)g_strdup(path);
-          arg[1] = imageBox;
-          arg[2] = image;
+          arg[1] = pictureBox;
+          arg[2] = picture;
           arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
           arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
           arg[5] = child; // in main context
@@ -750,7 +750,7 @@ ClickMenu
 
 
 
-    static GtkWidget *emblemedImage(const char *name, const char *path, GFileInfo *info, int size){
+    static GtkWidget *emblemedPicture(const char *name, const char *path, GFileInfo *info, int size){
       // Only for the hidden + backup items. Applies background mask.
       bool hidden = (name[0] == '.' && name[1] != '.');
       if (!hidden) hidden = g_file_info_get_is_hidden(info);
@@ -761,9 +761,9 @@ ClickMenu
       // Disabling because it may have caused the deadlock on 2025-02-06
       if(strcmp(name, "..") &&  clipboard_t::isCut(path)) {
         auto paintable = getCutTexture(info, size);
-        auto image = gtk_image_new_from_paintable(paintable);
+        auto picture = gtk_picture_new_for_paintable(paintable);
         g_object_unref(paintable); // XXX currently the paintable is not hashed.
-        return GTK_WIDGET(image);
+        return GTK_WIDGET(picture);
       }
 #endif
 #if 0
@@ -771,9 +771,9 @@ ClickMenu
       //     and no longer in copy clipboard. Disabling now.
       if(strcmp(name, "..") &&   clipboard_t::isCopy(path)) {
         auto texture = Texture<bool>::getShadedIcon(info, size, size, EMBLEM_COPY);   
-        auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+        auto picture = gtk_picture_new_for_paintable(GDK_PAINTABLE(texture));
         g_object_unref(texture); // XXX currently the paintable is not hashed.
-        return GTK_WIDGET(image);
+        return GTK_WIDGET(picture);
       }
 #endif
       bool backup = ( name[strlen(name)-1] == '~');
@@ -781,102 +781,102 @@ ClickMenu
       if (hidden || backup )  {
           auto texture = Texture<bool>::getShadedIcon(info, size, size, NULL);   
 //          auto texture = Texture<bool>::getShadedIcon(info, size, size, backup?EMBLEM_BAK:NULL);   
-          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
+          auto picture = gtk_picture_new_for_paintable(GDK_PAINTABLE(texture));
           g_object_unref(texture); // XXX currently the paintable is not hashed.
-          return GTK_WIDGET(image);
+          return GTK_WIDGET(picture);
         // Texture reference is kept in hashtable.
       }
 
       // My work source code
-      GtkWidget *image = sourceCode(name, info, size);
-      return image;
+      GtkWidget *picture = sourceCode(name, info, size);
+      return picture;
 
     }
 
     static GtkWidget *sourceCode(const char *name, GFileInfo *info, int size){
-      GtkWidget *image = NULL;
-      image = sourceCodeImageDirect(name, info, size);
-      if (image) return image;
+      GtkWidget *picture = NULL;
+      picture = sourceCodePictureDirect(name, info, size);
+      if (picture) return picture;
 
       // Ini
       const char *pIni[] = {"ini", "INI",  NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_PREFERENCES, pIni);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_PREFERENCES, pIni);
+      if (picture) return picture;
 
       // Log
       const char *pLog[] = {"log", "LOG",  NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_LOG, pLog);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_LOG, pLog);
+      if (picture) return picture;
 
       // Text
       const char *pTxt[] = {"txt", "TXT", "readme", "md", "MD",  NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_TEXT, pTxt);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_TEXT, pTxt);
+      if (picture) return picture;
 
 
       // Compressed
       const char *pCompressed[] = {"tar", "xz", "tgz", "bz2", "zip", "ZIP", "gz", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_COMPRESSED, pCompressed);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_COMPRESSED, pCompressed);
+      if (picture) return picture;
 
       // LyX
       const char *pMath[] = {"lyx", "LYX", "LyX", "math",NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_MATH, pMath);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_MATH, pMath);
+      if (picture) return picture;
 
       // OO
       const char *pOO[] = {"xlsx", "docx", "XLSX", "DOCX", "pptx", "PPTX", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_MSOFFICE, pOO);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_MSOFFICE, pOO);
+      if (picture) return picture;
 
 
-      if (image) return image;
+      if (picture) return picture;
       
       const char *pSrc[] = {"pl", "PL", "pm", "PM", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_P, pSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_P, pSrc);
+      if (picture) return picture;
       
       const char *cSrc[] = {"c", "C", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_C, cSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_C, cSrc);
+      if (picture) return picture;
       
       const char *ccSrc[] = {"cc", "CC", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_CC, ccSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_CC, ccSrc);
+      if (picture) return picture;
 
       const char *fSrc[] = {"f", "F", "f90", "F90", "f95", "F95",NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_F, fSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_F, fSrc);
+      if (picture) return picture;
 
       const char *iSrc[] = {"i", "I",NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_I, iSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_I, iSrc);
+      if (picture) return picture;
       
       const char *hSrc[] = {"h", "H", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_H, hSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_H, hSrc);
+      if (picture) return picture;
       
       const char *hhSrc[] = {"HH", "hh", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_HH, hhSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_HH, hhSrc);
+      if (picture) return picture;
       
       const char *oSrc[] = {"o", "O", "obj", "OBJ", "dbg", "DBG", NULL};
-      image = sourceCodeImage(name, info, size, EMBLEM_O, oSrc);
-      if (image) return image;
+      picture = sourceCodePicture(name, info, size, EMBLEM_O, oSrc);
+      if (picture) return picture;
       return NULL;
     }
 
-    static GtkWidget *sourceCodeImageDirect(const char *name, GFileInfo *info, int size)
+    static GtkWidget *sourceCodePictureDirect(const char *name, GFileInfo *info, int size)
     {
       if (strncmp(name, "Makefile", strlen("Makefile"))==0){
           auto texture = Texture<bool>::addEmblem(info, EMBLEM_M, size, size);   
-          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-          return image;
+          auto picture = gtk_picture_new_for_paintable(GDK_PAINTABLE(texture));
+          return GTK_WIDGET(picture);
       }
       return NULL;
     }
 
-    static GtkWidget *sourceCodeImage(const char *name, GFileInfo *info, int size, 
+    static GtkWidget *sourceCodePicture(const char *name, GFileInfo *info, int size, 
         const char *emblem, const char **src){
         
       double scaleFactor = 1.0;
@@ -901,8 +901,8 @@ ClickMenu
           } 
 
 
-          auto image = gtk_image_new_from_paintable(GDK_PAINTABLE(texture));
-          return image;
+          auto picture = gtk_picture_new_for_paintable(GDK_PAINTABLE(texture));
+          return GTK_WIDGET(picture);
         }
       }
       return NULL;
@@ -912,7 +912,7 @@ ClickMenu
 
       return NULL;
     }
-    static GtkWidget *previewImage(GFileInfo *info, const char *path, bool *doPreview_p){
+    static GtkWidget *previewPicture(GFileInfo *info, const char *path, bool *doPreview_p){
       double scaleFactor = 1.;
       auto doPreview = Preview<bool>::doPreview(info);
       *doPreview_p = doPreview;
@@ -929,7 +929,7 @@ ClickMenu
             //Must do over
             return NULL;
           } else {TRACE("hash preview is OK %ld <= %ld\n", st.st_mtime, textureTime);}
-          return GTK_WIDGET(gtk_image_new_from_paintable(GDK_PAINTABLE(texture)));
+          return GTK_WIDGET(gtk_picture_new_for_paintable(GDK_PAINTABLE(texture)));
         }
       }
       return NULL;

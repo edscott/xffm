@@ -255,11 +255,11 @@ namespace xf
       auto old = gtk_widget_get_first_child (GTK_WIDGET(closeBox_));
       gtk_widget_unparent(old);
       //auto paintable = Texture<bool>::load(iconName);
-      //auto image = gtk_image_new_from_paintable(paintable);
+      //auto image = gtk_picture_new_for_paintable(paintable);
       //gtk_widget_set_size_request(image, 18,18);
-      auto image = Texture<bool>::getImage(iconName, 18);
-      gtk_widget_set_sensitive(GTK_WIDGET(image), true);
-      Basic::boxPack0(closeBox_, GTK_WIDGET(image), true, true, 1);
+      auto picture = Texture<bool>::getPicture(iconName, 18);
+      gtk_widget_set_sensitive(GTK_WIDGET(picture), true);
+      Basic::boxPack0(closeBox_, GTK_WIDGET(picture), true, true, 1);
       Basic::setTooltip(GTK_WIDGET(closeBox_), tooltip);
     }
     

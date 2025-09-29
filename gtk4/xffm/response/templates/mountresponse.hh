@@ -69,10 +69,10 @@ public:
         gtk_box_append(mainBox_, GTK_WIDGET(hbox));
 
         //auto paintable = Texture<Type>::load("drive-harddisk");    
-        //auto image = gtk_image_new_from_paintable(paintable);
-        //gtk_widget_set_size_request(image, 48, 48);
-        auto image = Texture<bool>::getImage(HARD_DISK, 48);
-        gtk_box_append(hbox, GTK_WIDGET(image));
+        //auto picture = gtk_picture_new_for_paintable(paintable);
+        //gtk_widget_set_size_request(picture, 48, 48);
+        auto picture = Texture<bool>::getPicture(HARD_DISK, 48);
+        gtk_box_append(hbox, GTK_WIDGET(picture));
 
        
 

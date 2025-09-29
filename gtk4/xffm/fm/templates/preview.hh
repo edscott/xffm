@@ -120,8 +120,8 @@ class Preview {
         // since here they are not used, except for "child").
         auto arg = (void **)data;
         auto path = (char *)arg[0];
-        auto imageBox = arg[1];
-        auto image = arg[2];
+        auto pictureBox = arg[1];
+        auto picture = arg[2];
         auto serial = GPOINTER_TO_INT(arg[3]);
         auto size = GPOINTER_TO_INT(arg[4]);
         auto child = (GtkWidget *)arg[5];
@@ -136,8 +136,8 @@ class Preview {
 
         // Serial was OK a moment ago. We now create the paintable from path.
 
-        TRACE("Preview::preview: %s, box=%p, image=%p, serial=%d\n", 
-            path,imageBox, image, serial);
+        TRACE("Preview::preview: %s, box=%p, picture=%p, serial=%d\n", 
+            path,pictureBox, picture, serial);
 
         auto paintable = loadPath(path);
         g_free(path); // no longer needed.
@@ -155,11 +155,11 @@ class Preview {
 
 
         // context function...
-        // replace image in main context
+        // replace picture in main context
         void *replaceArg[] ={
           (void *) paintable,
-          (void *) imageBox,
-          (void *) image,
+          (void *) pictureBox,
+          (void *) picture,
           GINT_TO_POINTER(serial),
           GINT_TO_POINTER(iconSize),
           (void *)child,
@@ -285,8 +285,8 @@ class Preview {
 
         auto replaceArg = (void **)data;
         auto paintable = replaceArg[0]; // GDK_PAINTABLE
-        auto imageBox = replaceArg[1]; // GTK_BOX
-        auto image = replaceArg[2]; // GTK_IMAGE
+        auto pictureBox = replaceArg[1]; // GTK_BOX
+        auto picture = replaceArg[2]; // GTK_IMAGE
         auto serial = GPOINTER_TO_INT(replaceArg[3]); 
         auto size = GPOINTER_TO_INT(replaceArg[4]);
         auto child = (GtkWidget *)replaceArg[5]; // GTK_WIDGET
@@ -302,14 +302,14 @@ class Preview {
           return NULL;
         }
 
-        TRACE("replace_f in main context: paintable=%p, box=%p, image=%p, serial=%d\n", 
-            paintable, imageBox, image, serial);
+        TRACE("replace_f in main context: paintable=%p, box=%p, picture=%p, serial=%d\n", 
+            paintable, pictureBox, picture, serial);
         // Now we do main context stuff. This should only fail if some other
         // thread does (incorrectly) main context stuff.
-        gtk_box_remove(GTK_BOX(imageBox), GTK_WIDGET(image)); // cleanup
-        GtkWidget *preview = gtk_image_new_from_paintable(GDK_PAINTABLE(paintable)); // new gtk widget
+        gtk_box_remove(GTK_BOX(pictureBox), GTK_WIDGET(picture)); // cleanup
+        GtkWidget *preview = gtk_picture_new_for_paintable(GDK_PAINTABLE(paintable)); // new gtk widget
         gtk_widget_set_size_request(preview, size, size); // configure widget
-        Basic::boxPack0(GTK_BOX(imageBox), GTK_WIDGET(preview), FALSE, FALSE, 0); // replace
+        Basic::boxPack0(GTK_BOX(pictureBox), GTK_WIDGET(preview), FALSE, FALSE, 0); // replace
         return  GINT_TO_POINTER(serial);
       }
 

@@ -43,7 +43,7 @@ public:
     RunButton(const char *icon, const char *command){
       TRACE("*** RunButton(%s,%s)\n", icon, command);
       button_ = GTK_MENU_BUTTON(gtk_menu_button_new());
-//      auto Image = GTK_WIDGET(Basic::getImage(EMBLEM_RUN, 18));
+//      auto Image = GTK_WIDGET(Basic::getPicture(EMBLEM_RUN, 18));
 //      gtk_menu_button_set_child (button_,Image);
 //      gtk_menu_button_set_icon_name(button_, EMBLEM_RUN);
       gtk_widget_set_can_focus (GTK_WIDGET(button_), FALSE);
@@ -205,9 +205,9 @@ private:
         g_free(icon_id_); 
         icon_id_ = data?g_strdup(data):NULL;
         // Change the icon.
-        auto Image = GTK_WIDGET(Basic::getImage(icon_id_, 18));
-        gtk_menu_button_set_child (button_,Image); 
-        TRACE("*** set icon id: %s, image %p\n", icon_id_, Image);
+        auto picture = GTK_WIDGET(Basic::getPicture(icon_id_, 18));
+        gtk_menu_button_set_child (button_,picture); 
+        TRACE("*** set icon id: %s, picture %p\n", icon_id_, picture);
     }
     const gchar *command(void){ return (const gchar *)command_;}
     void set_command(const gchar *command){

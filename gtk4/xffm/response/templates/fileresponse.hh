@@ -662,9 +662,9 @@ private: // Nonfree functions
         g_object_set_data(G_OBJECT(object), "box", box);
 
         if (data) { // name column
-          auto imageBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-          gtk_box_append(GTK_BOX(box), imageBox);
-          g_object_set_data(G_OBJECT(object), "imageBox", imageBox);
+          auto pictureBox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+          gtk_box_append(GTK_BOX(box), pictureBox);
+          g_object_set_data(G_OBJECT(object), "pictureBox", pictureBox);
         }
         auto label = gtk_label_new("");
         gtk_box_append(GTK_BOX(box), label);
@@ -689,7 +689,7 @@ private: // Nonfree functions
         auto label = GTK_LABEL(g_object_get_data(object, "label"));
         char *markup = NULL;
         if (data) { // name column
-          auto imageBox = GTK_BOX(g_object_get_data(object, "imageBox"));
+          auto pictureBox = GTK_BOX(g_object_get_data(object, "pictureBox"));
           const char *name = g_file_info_get_name(info);          
           auto maxLen = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(factory), "maxLen"));
           auto format = g_strdup_printf("<tt>%%-%ds", maxLen);
@@ -698,14 +698,14 @@ private: // Nonfree functions
           markup = g_strdup_printf("%s</tt>", buffer);                    
           gtk_label_set_markup(label, markup);
           
-          auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(imageBox));
+          auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(pictureBox));
           if (oldImage) gtk_widget_unparent(oldImage);
           //auto paintable = Texture<bool>::load(info);
-          //auto image = gtk_image_new_from_paintable(paintable);
-          //gtk_widget_set_size_request(image, 16, 16);
-          auto image = Texture<bool>::getImage(info, 16);
+          //auto picture = gtk_picture_new_for_paintable(paintable);
+          //gtk_widget_set_size_request(picture, 16, 16);
+          auto picture = Texture<bool>::getPicture(info, 16);
           
-          gtk_box_append(GTK_BOX(imageBox), GTK_WIDGET(image));
+          gtk_box_append(GTK_BOX(pictureBox), GTK_WIDGET(picture));
         } else { // info column
           auto path = Basic::getPath(info);
           struct stat st;

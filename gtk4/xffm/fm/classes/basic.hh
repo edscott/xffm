@@ -1034,18 +1034,18 @@ public:
         return GTK_ICON_PAINTABLE(icon);
       }
        
-    static GtkImage *getImage(const char *iconName, int size){
+    static GtkPicture *getPicture(const char *iconName, int size){
       auto paintable = GDK_PAINTABLE(lookupIcon(iconName, size));
-      auto image = gtk_image_new_from_paintable(paintable);
-      gtk_widget_set_size_request(GTK_WIDGET(image), size, size);
-      return GTK_IMAGE(image);
+      auto picture = gtk_picture_new_for_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(picture), size, size);
+      return GTK_PICTURE(picture);
     }
 
     static 
     GtkButton *newButtonX(const gchar *icon, const gchar *tooltipText){
       auto button = GTK_BUTTON(gtk_button_new());
-      auto Image = GTK_WIDGET(getImage(icon, 20));
-      gtk_button_set_child (button,Image);
+      auto picture = GTK_WIDGET(getPicture(icon, 20));
+      gtk_button_set_child (button,picture);
       //auto button = GTK_BUTTON(gtk_button_new_from_icon_name(icon));
       setTooltip(GTK_WIDGET(button), tooltipText);
 
@@ -1076,8 +1076,8 @@ public:
         else setTooltip(GTK_WIDGET(button), tooltipText);
       }
       if (icon) {
-        auto Image = GTK_WIDGET(getImage(icon, 20));
-        gtk_menu_button_set_child (button,Image);
+        auto picture = GTK_WIDGET(getPicture(icon, 20));
+        gtk_menu_button_set_child (button,picture);
       }
 
       gtk_widget_set_can_focus (GTK_WIDGET(button), FALSE);

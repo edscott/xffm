@@ -72,8 +72,8 @@ public:
         gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
         gtk_box_append(mainBox_, GTK_WIDGET(hbox));
 
-        auto image = Texture<bool>::getImage(EMBLEM_BLOWFISH, 48);
-        gtk_box_append(hbox, GTK_WIDGET(image));
+        auto picture = Texture<bool>::getPicture(EMBLEM_BLOWFISH, 48);
+        gtk_box_append(hbox, GTK_WIDGET(picture));
 
        
 

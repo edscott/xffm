@@ -292,9 +292,9 @@ public:
         //TRACE("icon is %s\n",icon);
 #if 10
         if (iconName){
-          auto image = Texture<bool>::getImage(iconName, 16);
+          auto picture = Texture<bool>::getPicture(iconName, 16);
 //          auto image = gtk_image_new_from_icon_name(iconName);
-          boxPack(hbox, GTK_WIDGET(image),  FALSE, FALSE, 0);
+          boxPack(hbox, GTK_WIDGET(picture),  FALSE, FALSE, 0);
         }
 #endif
         boxPack(hbox, GTK_WIDGET(label),  FALSE, FALSE, 5);

@@ -489,10 +489,10 @@ namespace xf {
         // FIXME leak: g_strdup(name)      
         g_object_set_data(G_OBJECT(eventBox), "name", g_strdup(name));
         g_object_set_data(G_OBJECT(eventBox), "path", g_strdup(path));
-        auto image = GTK_WIDGET(Texture<bool>::getImage(icon, 16));
+        auto picture = GTK_WIDGET(Texture<bool>::getPicture(icon, 16));
 
         //auto eventImage = gtk_image_new_from_icon_name(icon);
-        Basic::boxPack0 (eventBox, GTK_WIDGET(image), FALSE, FALSE, 0);
+        Basic::boxPack0 (eventBox, GTK_WIDGET(picture), FALSE, FALSE, 0);
         Basic::setTooltip(GTK_WIDGET(eventBox),tooltip);
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "pathbarbox" );
         return eventBox;        

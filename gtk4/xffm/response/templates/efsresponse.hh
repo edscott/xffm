@@ -105,9 +105,9 @@ public:
 
      /*   auto paintable = Texture<bool>::load("authentication", 24);
         
-        auto image = gtk_image_new_from_paintable(paintable);
+        auto picture = gtk_picture_new_for_paintable(paintable);
         g_object_unref(paintable);
-        gtk_box_append(hbox, image);*/
+        gtk_box_append(hbox, picture);*/
 
         auto text = g_strconcat(_("Options:"), " Ecrypt file system", NULL);        
         auto label = gtk_label_new(text);

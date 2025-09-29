@@ -708,11 +708,12 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
 
 
           if (paintable){
-            auto image = gtk_image_new_from_paintable(paintable);
-            gtk_box_append (box, GTK_WIDGET(image));
+            auto picture = gtk_picture_new_for_paintable(paintable);
+            gtk_box_append (box, GTK_WIDGET(picture));
           } else {
-            auto image = gtk_image_new_from_icon_name("emblem-run");
-            gtk_box_append (box, GTK_WIDGET(image));
+            // FIXME
+            auto picture = gtk_image_new_from_icon_name("emblem-run");
+            gtk_box_append (box, GTK_WIDGET(picture));
           }
           auto label = gtk_label_new("");
           auto base = g_path_get_basename(path);
@@ -741,7 +742,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         }
         
       }
-      //gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "pathbarboxNegative" );
+      //gtk_widget_remove_css_class (GTK_WIDGET(pictureBox), "pathbarboxNegative" );
       g_free(path);
   }
   public:

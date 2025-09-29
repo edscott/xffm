@@ -55,7 +55,7 @@ template <class Type> class Preview;
 template <class Type>
 class Properties {
     GtkWindow *dialog_ = NULL;
-    GtkBox *imageBox_ = NULL;
+    GtkBox *pictureBox_ = NULL;
     GtkBox *modeBox_ = NULL;
     GtkButton *apply_ = NULL;
     entry_t *entry_ = NULL;
@@ -127,10 +127,10 @@ private:
 
         auto contentBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
         Basic::boxPack0(mainBox, GTK_WIDGET(contentBox), TRUE, FALSE, 0);
-        imageBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
-        //gtk_widget_set_size_request (GTK_WIDGET(imageBox_), PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
+        pictureBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
+        //gtk_widget_set_size_request (GTK_WIDGET(pictureBox_), PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
         auto infoBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
-        Basic::boxPack0(contentBox, GTK_WIDGET(imageBox_), TRUE, FALSE, 0);
+        Basic::boxPack0(contentBox, GTK_WIDGET(pictureBox_), TRUE, FALSE, 0);
         Basic::boxPack0(contentBox, GTK_WIDGET(infoBox), TRUE, FALSE, 10);
         auto buttonBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
         Basic::boxPack0(mainBox, GTK_WIDGET(buttonBox), TRUE, FALSE, 0);
@@ -154,7 +154,7 @@ private:
         Basic::boxPack0(modeBox_, GTK_WIDGET(modeEntry_), FALSE, FALSE, 0);
         Basic::boxPack0(modeBox_, GTK_WIDGET(modeInfo_), FALSE, FALSE, 0);
         Basic::boxPack0(infoBox, GTK_WIDGET(modeBox_), FALSE, FALSE, 0);
-        g_object_set_data(G_OBJECT(imageBox_), "modeBox", modeBox_);
+        g_object_set_data(G_OBJECT(pictureBox_), "modeBox", modeBox_);
         g_object_set_data(G_OBJECT(modeEntry_), "modeBox", modeBox_);
         g_object_set_data(G_OBJECT(modeEntry_), "modeLabel", modeLabel_);
         
@@ -178,7 +178,7 @@ private:
         g_signal_connect (G_OBJECT (cancel), "clicked", G_CALLBACK (cancelAction), this);
         g_signal_connect (G_OBJECT (apply_), "clicked", G_CALLBACK (applyAction), this);
         //
-        // Create and add image for initial selected file in dialog
+        // Create and add picture for initial selected file in dialog
         //
         //auto pixbuf = Pixbuf<Type>::getPixbuf("accessories-calculator", -256);
         
@@ -188,7 +188,7 @@ private:
             entry_->mimetype = g_strdup("text/plain");
         }
 
-        setUpImage(imageBox_, entry_);
+        setUpImage(pictureBox_, entry_);
         setUpMode(modeBox_, entry_);
 
         addKeyController(GTK_WIDGET(modeEntry_));
@@ -420,9 +420,9 @@ private:
         if (paintable == NULL) {
           gtk_widget_set_visible(GTK_WIDGET(box), false);
         } else {
-          auto image = gtk_image_new_from_paintable(paintable);
-          gtk_widget_set_size_request(GTK_WIDGET(image), 320, 320);
-          gtk_box_append(box, image);
+          auto picture = gtk_picture_new_for_paintable(paintable);
+          gtk_widget_set_size_request(GTK_WIDGET(picture), 320, 320);
+          gtk_box_append(box, picture);
         }
     }
 

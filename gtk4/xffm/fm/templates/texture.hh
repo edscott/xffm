@@ -8,25 +8,32 @@ template <class Type> class Preview;
 template <class Type>  class Texture {
   public:
 
-    static GtkImage *getImage(const char *iconName){
+    static GtkPicture *getPicture(const char *iconName){
       auto paintable = GDK_PAINTABLE(load(iconName, 24));
-      auto image = gtk_image_new_from_paintable(paintable);
-      return GTK_IMAGE(image);
+      auto picture = gtk_picture_new_for_paintable(paintable);
+      return GTK_PICTURE(picture);
     }
 
     static GtkImage *getImage(const char *iconName, int size){
       auto paintable = GDK_PAINTABLE(lookupIcon(iconName, size));
-      auto image = gtk_image_new_from_paintable(paintable);
+      auto image = gtk_image_new_from_paintable(paintable); // from, as opposed to for with picture.
       gtk_widget_set_size_request(GTK_WIDGET(image), size, size);
       return GTK_IMAGE(image);
     }
 
-    static GtkImage *getImage(GFileInfo *info, int size){
+    static GtkPicture *getPicture(const char *iconName, int size){
+      auto paintable = GDK_PAINTABLE(lookupIcon(iconName, size));
+      auto picture = gtk_picture_new_for_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(picture), size, size);
+      return GTK_PICTURE(picture);
+    }
+
+    static GtkPicture *getPicture(GFileInfo *info, int size){
       auto gIcon = g_file_info_get_icon(info);
       auto paintable = getIcon(gIcon, size);
-      auto image = gtk_image_new_from_paintable(paintable);
-      gtk_widget_set_size_request(GTK_WIDGET(image), size, size);
-      return GTK_IMAGE(image);
+      auto picture = gtk_picture_new_for_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(picture), size, size);
+      return GTK_PICTURE(picture);
     }
 
   private:
