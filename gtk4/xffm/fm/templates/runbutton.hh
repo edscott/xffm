@@ -314,6 +314,7 @@ private:
           N_("Abort"),          //9
           N_("Kill"),           //10
           N_("Segmentation fault"),//11
+          N_("Close"),//0
           NULL}; 
         
       void *signals[] = {
@@ -328,6 +329,7 @@ private:
             GINT_TO_POINTER(SIGABRT), //9
             GINT_TO_POINTER(SIGKILL), //10
             GINT_TO_POINTER(SIGSEGV), //11
+            GINT_TO_POINTER(0),      //0
             NULL};
 
 
@@ -343,6 +345,7 @@ private:
         (void *)ps_signal, //9
         (void *)ps_signal, //10
         (void *)ps_signal, //11
+        (void *)MainMenu<Type>::closeMenu, //11
         NULL};
         GtkLabel *title = GTK_LABEL(gtk_label_new(""));
 
