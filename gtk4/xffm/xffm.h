@@ -81,6 +81,7 @@ static GtkButton *pasteButton = NULL;
 static int longPressSerial = -1;
 static GtkNotebook *mainNotebook = NULL;
 static void *mainWindow_p = NULL;
+static GtkPopover *currentPopover = NULL;
 
 // classes and templates
 // basic classes

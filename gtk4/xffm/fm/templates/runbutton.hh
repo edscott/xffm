@@ -14,6 +14,7 @@ namespace xf {
 
 pthread_mutex_t rbl_mutex = PTHREAD_MUTEX_INITIALIZER; // run button list mutex
 
+template <class Type> class MainMenu;
 
 template <class Type> class RunButton {
 private:
@@ -61,7 +62,7 @@ public:
         // hmmm. on unparenting button_ popover should automatically be
         //       unreffed.
         /*auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button_), "menu"));*/
-        gtk_popover_popdown(menu_);
+        MainMenu<Type>::closePopover(menu_);
         //gtk_widget_unrealize(GTK_WIDGET(menu_));
         //gtk_widget_unparent(GTK_WIDGET(menu_));
      
@@ -143,7 +144,7 @@ private:
 
         TRACE("apply data: (%p) -> %p\n", (void *)button, (void *)run_button_p);
         auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
-        gtk_popover_popdown(menu);
+        MainMenu<Type>::closePopover(menu);
 
         if (signal_id ==-1) {
             run_button_p->ps_renice();

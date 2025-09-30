@@ -6,6 +6,7 @@ namespace xf {
   template <class Type> class Util;
   template <class Type> class RunButton;
   template <class Type> class GridView;
+  template <class Type> class MainMenu;
   
   template <class Type>
   class MenuCallbacks {
@@ -13,7 +14,7 @@ namespace xf {
     public:
     static void popCall(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto f = G_CALLBACK(data);
       f();
     }
@@ -319,7 +320,7 @@ public:
       char *history = g_build_filename(REGEX_HISTORY);
 
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu"));
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
         
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       const char *path = gridView_p->path();
@@ -364,7 +365,7 @@ public:
     emptyTrash(GtkButton *self, void *data){
       static char *trashDir = NULL;
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       if (!trashDir) trashDir = g_strdup_printf("%s/.local/share/Trash/files",
           g_get_home_dir());
       char *arg[]={(char *)"rm", (char *)"-rfv", trashDir, NULL};
@@ -376,7 +377,7 @@ public:
     static void
     paste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       char *target = NULL;
       if (info) target = Basic::getPath(info);
@@ -408,14 +409,14 @@ public:
     static void
     showPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       clipboard_t::printClipBoard();
     }
  
     static void
     openXffmPathbar(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
       openXffm(menu, path);
       return;
@@ -424,7 +425,7 @@ public:
     static void
     openXffmMain(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto workDir = Child::getWorkdir();
       openXffm(menu, workDir);
       return;
@@ -433,7 +434,7 @@ public:
     static void
     openNewTab(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto w = (MainWindow<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "MainWindow");
       auto path = (const char *)g_object_get_data(G_OBJECT(menu), "path");
       if (!path){
@@ -460,7 +461,7 @@ public:
     static void 
     copyTxt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
         clipboard_t::copyClipboardTxt(Child::getOutput());
@@ -471,7 +472,7 @@ public:
     static void 
     cutTxt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
         clipboard_t::cutClipboardTxt(Child::getOutput());
@@ -482,7 +483,7 @@ public:
     static void 
     deleteTxt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto txt = (const char *)data;
       TRACE("menucallbacks.hh:: deleteTxt inactive\n");
       // FIXME (what?)
@@ -495,7 +496,7 @@ public:
     static void 
     pasteTxt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
         clipboard_t::pasteClipboardTxt(Child::getOutput());
@@ -507,7 +508,7 @@ public:
     static void
     selectAllTxt(GtkButton *button, void *data){
       auto menu = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(GTK_POPOVER(menu));
+      MainMenu<Type>::closePopover(GTK_POPOVER(menu));
       auto txt = (const char *)data;
       GtkTextView *textView = NULL;
 
@@ -537,7 +538,7 @@ public:
     static void
     clearAllTxt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       clearTxt(button, data);
     }
       
@@ -546,7 +547,7 @@ public:
 private:
     static void
     openXffm(GtkPopover *menu, const char *path){
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto output = Child::getOutput();
       auto buttonSpace = Child::getButtonSpace();
       auto xffm = g_strdup_printf("%s -f %s", xffmProgram, path);

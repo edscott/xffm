@@ -73,7 +73,7 @@ namespace xf {
     static void
     copy(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
     }
 
   };

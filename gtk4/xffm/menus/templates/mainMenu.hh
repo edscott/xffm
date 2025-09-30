@@ -152,6 +152,24 @@ namespace xf {
       return boxes_;      
     }
 
+  public:
+    static void
+    closeMenu(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
+      closePopover(menu);
+    }
+
+    static void closePopover(GtkPopover *menu){
+      currentPopover = NULL;
+      auto parent = gtk_widget_get_parent(GTK_WIDGET(menu));
+      gtk_popover_popdown(menu);
+      g_object_ref(G_OBJECT(menu));
+      gtk_widget_unparent(GTK_WIDGET(menu)); 
+          
+      gtk_widget_set_parent(GTK_WIDGET(menu), GTK_WIDGET(parent));
+      g_object_unref(G_OBJECT(menu));
+    }
+
   private:
 
 
@@ -212,7 +230,7 @@ namespace xf {
     static void 
     apply(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
 
       auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
 
@@ -241,20 +259,20 @@ namespace xf {
     
     static void addB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       Bookmarks::addBookmark(gridView_p->path());
      }
     static void removeB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
       Bookmarks::removeBookmark(gridView_p->path());
     }
 
     static void selectAll(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       if (!gridView_p) {
         ERROR_("selectAll: no gridView_p\n");
@@ -272,7 +290,7 @@ namespace xf {
     static void
     environment(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       using subClass_t = EnvDialog;
       using dialog_t = DialogComplex<subClass_t>;
       auto dialogObject = new dialog_t(GTK_WINDOW(Child::mainWidget()), Child::getWorkdir());
@@ -282,7 +300,7 @@ namespace xf {
     static void
     test(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
   /*    auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       auto path = Basic::getPath(info);
       auto parent = GTK_WINDOW(Child::mainWidget());
@@ -299,7 +317,7 @@ namespace xf {
     static void
     test2(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       Dialogs::info("This is a info dialog test");
 /*
       using subClass_t = infoResponse;
@@ -314,7 +332,7 @@ namespace xf {
     static void
     testFind(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
 
       MenuCallbacks<Type>::openFind(button, data);
       return;
@@ -323,7 +341,7 @@ namespace xf {
  /*    static void
     test(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       auto dialogObject = new DialogEntry<EntryResponse>;
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       fprintf(stderr, "create dialogObject=%p\n", dialogObject); 
@@ -335,14 +353,14 @@ namespace xf {
     static void
     openXffmMain(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       auto workDir = Child::getWorkdir();
       openXffm(menu, workDir);
       return;
     }
     static void
     openXffm(GtkPopover *menu, const char *path){
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       auto output = Child::getOutput();
       auto buttonSpace = Child::getButtonSpace();
       auto xffm = g_strdup_printf("xffm4 -f %s", path);
@@ -352,18 +370,11 @@ namespace xf {
       g_free(xffm);
     }
 
-    public:
-    static void
-    closeMenu(GtkButton *button, void *data){
-      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
-      gtk_popover_popdown(menu);
-    }
-
     private:
     static void
     close(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
-      gtk_popover_popdown(menu);
+      closePopover(menu);
 
       // Save last size. (only if not paned in i3)
       if (Basic::isXffmFloating()){
@@ -403,14 +414,14 @@ namespace xf {
     static void
     showPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       clipboard_t::printClipBoard();
     }
 
     static void
     clearPaste(GtkButton *self, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(self), "menu"));
-      gtk_popover_popdown(menu);
+      closePopover(menu);
       clipboard_t::clearPaste();
     }
 

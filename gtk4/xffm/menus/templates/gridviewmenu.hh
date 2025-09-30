@@ -150,7 +150,7 @@ const char **radioboxes(void){
     static void 
     bcrypt(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       auto path = Basic::getPath(info);
       if (strrchr(path, '.') && strcmp(strrchr(path, '.'), ".gpg") == 0){
@@ -172,7 +172,7 @@ const char **radioboxes(void){
     static void
     tar(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       auto path = Basic::getPath(info);
       auto parent = GTK_WINDOW(Child::mainWidget());
@@ -213,7 +213,7 @@ const char **radioboxes(void){
         TRACE("%p is not popover\n", menu);
         return;
       }
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
       //TRACE("path= %s, info=%p\n", path, info);
       new Properties<bool>(info);
@@ -222,7 +222,7 @@ const char **radioboxes(void){
 
     static void addB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       gchar *path = getPath(menu);
       
       if (path) {
@@ -237,7 +237,7 @@ const char **radioboxes(void){
     }
     static void removeB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       gchar *path = getPath(menu);
       
       if (path) {
@@ -252,7 +252,7 @@ const char **radioboxes(void){
     static void 
     openWith(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
 
       if (!path) {
@@ -272,7 +272,7 @@ const char **radioboxes(void){
      
     static void mount(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("mount item path is %s\n", path);}
@@ -304,7 +304,7 @@ const char **radioboxes(void){
 
     static void unmount(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("unmount item %s\n", path);}
@@ -317,7 +317,7 @@ const char **radioboxes(void){
    
     static void duplicate(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("path is %s\n", path);}
@@ -327,7 +327,7 @@ const char **radioboxes(void){
 
     static void move(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("path is %s\n", path);}
@@ -337,7 +337,7 @@ const char **radioboxes(void){
 
     static void link(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("path is %s\n", path);}
@@ -347,7 +347,7 @@ const char **radioboxes(void){
 
     static void remove(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
 
       auto selectionList = gridView_p->getSelectionList();
@@ -368,7 +368,7 @@ const char **radioboxes(void){
 
     static void copy(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
       auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
@@ -393,7 +393,7 @@ const char **radioboxes(void){
 
     static void cut(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
       auto selectionList = gridView_p->getSelectionList();
       auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
@@ -419,7 +419,7 @@ const char **radioboxes(void){
     static void 
     run(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       
       auto path = getPath(menu);
       if (!path) return;

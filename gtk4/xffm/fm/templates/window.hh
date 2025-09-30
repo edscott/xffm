@@ -204,9 +204,33 @@ private:
       }
       return;
     }
+
+    static gboolean
+    hidePopover(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              void *data){
+      DBG("hidePopover: %p\n", currentPopover);
+      if (!currentPopover) return false;
+      MainMenu<Type>::closePopover(currentPopover);
+      currentPopover = NULL;
+      return false;
+    }
+
+    void addGestureClickPopover(GtkWindow *self){
+      auto gesture = gtk_gesture_click_new();
+      // all buttons
+      // gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1); 
+      g_signal_connect (G_OBJECT(gesture) , "pressed", EVENT_CALLBACK (hidePopover), NULL);
+      gtk_widget_add_controller(GTK_WIDGET(self), GTK_EVENT_CONTROLLER(gesture));
+      gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
+          GTK_PHASE_CAPTURE);
+    }    
     
     void createWindow(void){
         mainWindow_ = GTK_WINDOW(gtk_window_new ());
+        //addGestureClickPopover(mainWindow_);
         //addMotionController(mainWindow_);
         auto dropController = Dnd<LocalDir>::createDropController(NULL);
         gtk_widget_add_controller (GTK_WIDGET(mainWindow_), GTK_EVENT_CONTROLLER (dropController));

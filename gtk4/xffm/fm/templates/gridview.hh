@@ -588,7 +588,6 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           _("Link"),
           _("Properties"),
           _("Delete"),
-          _("Close"),
           NULL};
         for (auto p=show; p && *p; p++){
           auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -608,6 +607,10 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         }
       }
+      // all show close button WSL
+      auto widget = g_object_get_data(G_OBJECT(popover), _("Close"));
+      gtk_widget_set_visible(GTK_WIDGET(widget), true);
+
     }
 
     static GtkPopover *getPopover(GtkWidget *menubox, GridView<Type> *gridView_p){ 

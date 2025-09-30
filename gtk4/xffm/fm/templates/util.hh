@@ -2,6 +2,7 @@
 #define XF_UTIL_HH
 #define MAX_LINES_IN_BUFFER 10000    
 namespace xf {
+  template <class Type> class MainMenu;
   template <class Type>
   class Util {
   public:
@@ -9,7 +10,7 @@ namespace xf {
    static void
   defaultColors(GtkButton *button, void *data){
     auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-    gtk_popover_popdown(menu);
+    MainMenu<Type>::closePopover(menu);
     const char *x[]={"Bg", "Fg", NULL};
     for (const char **p = x; p && *p; p++){
       auto key = g_strconcat((const char *)data, *p, NULL);
@@ -68,7 +69,7 @@ namespace xf {
     static void
     clear (GtkButton *button, void *data){
      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
-     gtk_popover_popdown(menu);
+     MainMenu<Type>::closePopover(menu);
      auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       Print::clear_text(output);
@@ -80,7 +81,7 @@ namespace xf {
     terminalColors(GtkButton *button, void *data){
 
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
-      gtk_popover_popdown(menu);
+      MainMenu<Type>::closePopover(menu);
       
       auto dialog = gtk_color_dialog_new();
       //gtk_widget_set_parent(GTK_WIDGET(dialog), Child::mainWidget());

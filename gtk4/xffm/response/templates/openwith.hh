@@ -4,6 +4,7 @@
 namespace xf {
 template <class Type> class Prompt;
 template <class Type> class Run;
+template <class Type> class MainMenu;
 
 template <class Type>
 class OpenWith {
@@ -588,7 +589,7 @@ private:
       g_free(key);
       
 
-      gtk_popover_popdown(popover);
+      MainMenu<Type>::closePopover(popover);
       gtk_widget_grab_focus(GTK_WIDGET(input));
       
       return TRUE;
