@@ -77,7 +77,8 @@ class EnvDialog {
    }
 public:
     static const char **basicEnv(void){
-      static const char *basicEnv_[9]={
+      static const char *basicEnv_[10]={
+         "PKG_CONFIG_PATH",
          "LD_LIBRARY_PATH",
          "EDITOR",
          "TERMINAL",

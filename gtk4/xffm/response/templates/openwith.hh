@@ -145,7 +145,7 @@ private:
 
       auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
       gtk_widget_set_vexpand(GTK_WIDGET(vbox), false);
-      gtk_widget_set_hexpand(GTK_WIDGET(vbox), false);
+      gtk_widget_set_hexpand(GTK_WIDGET(vbox), true);
       //gtk_window_set_child(dialog_, GTK_WIDGET(vbox));
       gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(vbox));
       
@@ -173,14 +173,14 @@ private:
         prompt_p = (Prompt<Type> *) new Prompt<Type>(textView);
       }
 
-      //auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-      auto hbox = Basic::mkEndBox();
+      auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
       //gtk_box_prepend(GTK_BOX(hbox), GTK_WIDGET(image));
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
       gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
       auto label2 = GTK_LABEL(gtk_label_new (windowTitle));
       input_ = prompt_p->input();
       gtk_widget_set_size_request(GTK_WIDGET(input_), 200, -1);
+      gtk_widget_set_hexpand(GTK_WIDGET(input_), true);
 
       gtk_box_append(GTK_BOX (hbox), GTK_WIDGET(label2));
       gtk_box_append(GTK_BOX (hbox), GTK_WIDGET(input_));
