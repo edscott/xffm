@@ -173,7 +173,8 @@ private:
         prompt_p = (Prompt<Type> *) new Prompt<Type>(textView);
       }
 
-      auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      //auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+      auto hbox = Basic::mkEndBox();
       //gtk_box_prepend(GTK_BOX(hbox), GTK_WIDGET(image));
       gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
       gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
