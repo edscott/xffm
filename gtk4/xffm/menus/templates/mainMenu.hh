@@ -44,7 +44,9 @@ namespace xf {
        */
         "", 
         _("Exit"), 
+#ifdef WSL
         _("Close"), 
+#endif
         NULL
       };
       return keys_;

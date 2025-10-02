@@ -17,7 +17,9 @@ namespace xf {
         _("Background color"), 
         _("Default Colors"), 
         _("Show Clipboard"), // 
+#ifdef WSL
         _("Close"), 
+#endif
         NULL
       };
       return keys_;

@@ -13,7 +13,9 @@ namespace xf {
         _("Paste"), // 
         _("Show Clipboard"), // 
         _("Clipboard is empty."), // 
+#ifdef WSL
         _("Close"), 
+#endif
         NULL
       };
       return keys_;

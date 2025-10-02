@@ -4,7 +4,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#define PREVIEW_IMAGE_SIZE  400
 #define BUFSIZE (4096)
 #define DEFAULT_FONT_FAMILY    "Sans"
 //#define DEFAULT_FONT_FAMILY   "Arial"
@@ -1004,7 +1003,7 @@ class Preview {
 
       TRACE("Running ghostscript on %s\n", path);
       // The preview will be generated at size: PREVIEW_IMAGE_SIZE
-      auto previewPath = get_thumbnail_path (path, PREVIEW_IMAGE_SIZE);
+      auto previewPath = get_thumbnail_path (path, pixels);
       //auto thumbnail = get_thumbnail_path (path, pixels);
 
       //pdf and ps ghostscript conversion

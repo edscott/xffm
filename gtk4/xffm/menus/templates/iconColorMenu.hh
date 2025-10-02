@@ -10,7 +10,9 @@ namespace xf {
         _("Foreground color"),
         _("Background color"), 
         _("Default Colors"), 
+#ifdef WSL
         _("Close"), 
+#endif
         NULL
       };
       return keys_;

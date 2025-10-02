@@ -117,7 +117,10 @@ private:
     doDialog (void) {
       TRACE("Properties doDialog\n");
         dialog_ = GTK_WINDOW(gtk_window_new ());
+        //gtk_widget_set_size_request (GTK_WIDGET(dialog_), PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
 
+        //gtk_widget_set_hexpand(GTK_WIDGET(dialog_), false);
+        //gtk_widget_set_vexpand(GTK_WIDGET(dialog_), false);
 
         gtk_window_set_title(dialog_, _("Properties and Attributes"));
         auto mainBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
@@ -128,6 +131,8 @@ private:
         auto contentBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1));
         Basic::boxPack0(mainBox, GTK_WIDGET(contentBox), TRUE, FALSE, 0);
         pictureBox_ = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
+        //gtk_widget_set_hexpand(GTK_WIDGET(pictureBox_), false);
+        //gtk_widget_set_vexpand(GTK_WIDGET(pictureBox_), false);
         //gtk_widget_set_size_request (GTK_WIDGET(pictureBox_), PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
         auto infoBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL, 2));
         Basic::boxPack0(contentBox, GTK_WIDGET(pictureBox_), TRUE, FALSE, 0);
@@ -203,6 +208,7 @@ private:
        // gtk_widget_set_parent(GTK_WIDGET(dialog_), Child::mainWidget());
         gtk_window_set_destroy_with_parent(dialog_, true);
 #endif
+      gtk_widget_set_size_request (GTK_WIDGET(dialog_), PREVIEW_IMAGE_SIZE, PREVIEW_IMAGE_SIZE);
       gtk_window_present(dialog_);
         //Dialogs<Type>::placeDialog(GTK_WINDOW(dialog_));
         return ;
@@ -420,8 +426,20 @@ private:
         if (paintable == NULL) {
           gtk_widget_set_visible(GTK_WIDGET(box), false);
         } else {
-          auto picture = gtk_picture_new_for_paintable(paintable);
-          gtk_widget_set_size_request(GTK_WIDGET(picture), 320, 320);
+          auto r = gdk_paintable_get_intrinsic_aspect_ratio(paintable);
+          TRACE("r=%lf\n", r);
+          GdkSnapshot *snapshot = GDK_SNAPSHOT(gtk_snapshot_new());  
+          graphene_size_t  size;
+          size.width = PREVIEW_IMAGE_SIZE;
+          size.height = PREVIEW_IMAGE_SIZE / r;
+          gdk_paintable_snapshot(paintable, snapshot, size.width,size.height);
+          auto paintable2 = gtk_snapshot_to_paintable(GTK_SNAPSHOT(snapshot), &size);
+          g_object_unref(paintable);
+
+          //auto image = gtk_image_new_from_paintable(paintable);
+          //gtk_box_append(box, image);
+          auto picture = gtk_picture_new_for_paintable(paintable2);
+          gtk_picture_set_can_shrink(GTK_PICTURE(picture), true);
           gtk_box_append(box, picture);
         }
     }

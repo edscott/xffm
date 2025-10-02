@@ -35,7 +35,9 @@ namespace xf {
         _("Delete"),
         _("Encrypt File..."),
         _("Decrypt File..."),
+#ifdef WSL
         _("Close"), 
+#endif
        // _("Select All"), 
        // _("Match regular expression"), 
 

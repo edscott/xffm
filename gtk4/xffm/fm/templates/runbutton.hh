@@ -314,7 +314,9 @@ private:
           N_("Abort"),          //9
           N_("Kill"),           //10
           N_("Segmentation fault"),//11
+#ifdef WSL
           N_("Close"),//0
+#endif
           NULL}; 
         
       void *signals[] = {

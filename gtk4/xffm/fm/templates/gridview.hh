@@ -607,9 +607,11 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           gtk_widget_set_visible(GTK_WIDGET(widget), false);
         }
       }
+#ifdef WSL
       // all show close button WSL
       auto widget = g_object_get_data(G_OBJECT(popover), _("Close"));
       gtk_widget_set_visible(GTK_WIDGET(widget), true);
+#endif
 
     }
 
