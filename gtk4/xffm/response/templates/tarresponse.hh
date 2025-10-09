@@ -59,6 +59,7 @@ class tarResponse {
       int id = 0;
       const char *option = "-czf";
       const char *ext = ".tgz";
+      char *cmd = tar;
       if (strcmp(choice, "BZip2")==0){ 
         option = "-cjf";
         ext = ".bz2";
@@ -70,6 +71,7 @@ class tarResponse {
         id = 2;
       }
       if (strcmp(choice, "Zip")==0){ 
+        cmd = zip;
         option = "-vr";
         ext = ".zip";
         id = 3;
@@ -84,19 +86,14 @@ class tarResponse {
       auto workDir = Child::getWorkdir(childWidget);
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
 
-      char *command = NULL;
-      if (zip){
-        command = g_strdup_printf("%s %s \"%s\" \"%s\"", zip, option, output, base);
+      if (cmd) {
+        char *command = g_strdup_printf("%s %s \"%s\" \"%s\"", cmd, option, output, base);
+        TRACE("command = \"%s\"\n", command);
+        pid_t childPid = Run<Type>::shell_command(Child::getOutput(), command, false, false);
+        auto runButton = new RunButton<Type>(EMBLEM_PACKAGE, NULL);
+        runButton->init(command, childPid, Child::getOutput(), workDir, buttonSpace);
+        g_free(command);
       }
-      else if (tar){
-        command = g_strdup_printf("%s %s \"%s\" \"%s\"", tar, option, output, base);
-      }
-
-      TRACE("command = \"%s\"\n", command);
-      pid_t childPid = Run<Type>::shell_command(Child::getOutput(), command, false, false);
-      auto runButton = new RunButton<Type>(EMBLEM_PACKAGE, NULL);
-      runButton->init(command, childPid, Child::getOutput(), workDir, buttonSpace);
-      g_free(command);
 
       Settings::setString("Tarballs", "Default", target);
       Settings::setInteger("Tarballs", "Ext", id);
