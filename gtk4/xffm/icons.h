@@ -1,7 +1,7 @@
 #ifndef ICON_MACROS
 #define ICON_MACROS
 
-#define GO_UP "go-up"
+#define GO_UP "emblem-go-up"
 #define EMBLEM_LOCK "emblem-lock"
 #define EMBLEM_BOOKMARK "emblem-bookmark"
 //#define SEARCH "edit-find"
