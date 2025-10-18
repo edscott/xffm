@@ -424,8 +424,8 @@ public:
     auto n = g_list_model_get_n_items(listModel);
     for (guint i=0; i<n; i++){
       auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
-      auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
-      gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+      auto pictureBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "pictureBox"));
+      gtk_widget_remove_css_class (GTK_WIDGET(pictureBox), "dropNegative" );
     }
     //if (lock) Child::unlockGridView();
   }
@@ -440,18 +440,19 @@ private:
     TRACE("gridHighlight: x=%lf, y=%lf\n", x, y);
     for (guint i=0; i<n; i++){
       auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
-      auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
+      auto pictureBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "pictureBox"));
+      TRACE("gridHighlight: info=%p, imagebox=%p\n", info, pictureBox);
       graphene_rect_t bounds;
-//      if (gtk_widget_compute_bounds (imageBox, Child::mainWidget(), &bounds)) {
-      if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
+//      if (gtk_widget_compute_bounds (pictureBox, Child::mainWidget(), &bounds)) {
+      if (gtk_widget_compute_bounds (pictureBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
         xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
         yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
         path = Basic::getPath(info);
         if (g_file_test(path, G_FILE_TEST_IS_DIR)){
           if (xOk && yOk) {
-            gtk_widget_add_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+            gtk_widget_add_css_class (GTK_WIDGET(pictureBox), "dropNegative" );
           } else {
-            gtk_widget_remove_css_class (GTK_WIDGET(imageBox), "dropNegative" );
+            gtk_widget_remove_css_class (GTK_WIDGET(pictureBox), "dropNegative" );
           }
         }
         g_free(path);
@@ -497,9 +498,9 @@ private:
       bool yOk = false;
       for (guint i=0; i<n; i++){
         auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
-        auto imageBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "imageBox"));
+        auto pictureBox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "pictureBox"));
         graphene_rect_t bounds;
-        if (gtk_widget_compute_bounds (imageBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
+        if (gtk_widget_compute_bounds (pictureBox, GTK_WIDGET(gridview_p->view()), &bounds)) {
           xOk = (x > bounds.origin.x && x < bounds.origin.x + bounds.size.width);
           yOk = (y > bounds.origin.y && y < bounds.origin.y + bounds.size.height); 
           if (xOk && yOk) {
@@ -528,7 +529,7 @@ private:
           //if (lock) Child::unlockGridView();
           return g_strdup(workdir);
         } else if (workdir && strcmp(workdir, "Bookmarks") == 0){
-          DBG("*** Drop into bookmarks: add a bookmark with this drop (FIXME).\n");
+          TRACE("*** Drop into bookmarks: add a bookmark with this drop (FIXME).\n");
         }
       }
     
@@ -667,7 +668,7 @@ private:
           if (buttons && buttons[2]) {
             gtk_widget_set_visible(GTK_WIDGET(buttons[2]), false);
           } else {
-            TRACE("Error:: cannot find button \"%s\" to hide.\n", _("Link"));
+            ERROR_("Error:: cannot find button \"%s\" to hide.\n", _("Link"));
           }  
         }
     
