@@ -91,7 +91,8 @@ template <class Type>
         regexp_ = Settings::getString(path_, "regexp", "");
         GError *_error=NULL;
         if (regexp_ && strlen(regexp_)){
-          auto cflags = (GRegexCompileFlags)((guint)G_REGEX_CASELESS | (guint)G_REGEX_OPTIMIZE);
+          auto cflags = (GRegexCompileFlags)((guint)G_REGEX_OPTIMIZE);
+//          auto cflags = (GRegexCompileFlags)((guint)G_REGEX_CASELESS | (guint)G_REGEX_OPTIMIZE);
           regex_ = g_regex_new (regexp_, cflags,(GRegexMatchFlags) 0, &_error);
           if (!regex_) {
             gchar *markup = g_strdup_printf("%s: %s (%s)\n", regexp_,
