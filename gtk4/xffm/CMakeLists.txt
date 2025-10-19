@@ -37,7 +37,7 @@ INSTALL(CODE "execute_process( \
 #    )"
 #)
     install(CODE "
-    EXECUTE_PROCESS(COMMAND ln -sf xffm xfgetpass
+    EXECUTE_PROCESS(COMMAND ln -sf xffm4 xfgetpass
        WORKING_DIRECTORY ${PREFIX_BIN}
        )
     ")
