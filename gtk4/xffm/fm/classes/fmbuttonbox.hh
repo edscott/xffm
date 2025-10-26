@@ -66,17 +66,13 @@ namespace xf {
           Basic::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
         }
 
-        auto colorButton = UtilBasic::imageButton(40,32,EMBLEM_COLOR, _("Color settings"), NULL, NULL);
-            gtk_popover_set_default_widget(colorMenu, GTK_WIDGET(colorButton));
-            gtk_widget_set_parent(GTK_WIDGET(colorMenu),GTK_WIDGET(colorButton));
+        auto colorButton = UtilBasic::imageButton(40,32,EMBLEM_COLOR, 
+            _("Color settings"), (void *)colorPopover, (void *)colorMenu, false);
+//            _("Color settings"), NULL, NULL);
+        gtk_popover_set_default_widget(colorMenu, GTK_WIDGET(colorButton));
+        gtk_widget_set_parent(GTK_WIDGET(colorMenu),GTK_WIDGET(colorButton));
             
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(colorButton),  FALSE, FALSE, 0);
-        auto gesture = gtk_gesture_click_new();
-        gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
-        gtk_widget_add_controller(GTK_WIDGET(colorButton), GTK_EVENT_CONTROLLER(gesture));
-        gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-            GTK_PHASE_CAPTURE);
-        g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (colorPopover), colorMenu);
 
         //Basic::boxPack0(vButtonBox_, GTK_WIDGET(scale),  FALSE, FALSE, 0);        
         Basic::boxPack0(vButtonBox_, GTK_WIDGET(scale2),  FALSE, FALSE, 0);        
@@ -153,28 +149,6 @@ private:
         return size_scale;
     }
  
-#if 0   
-    GtkScale *newSizeScale(const gchar *tooltipText){
-        double value = 24.0;
-        //auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 384.0, 4.0));
-        auto size_scale = GTK_SCALE(gtk_scale_new_with_range(GTK_ORIENTATION_VERTICAL, 24.0, 96.0, 4.0));
-        // Load saved value fron xffm4/settings.ini file (if any)
-        auto size = Settings::getInteger("xfterm", "iconsize", 48);
-        TRACE("range set value=%lf\n", value);
-        gtk_range_set_value(GTK_RANGE(size_scale), value);
-
-        gtk_range_set_increments (GTK_RANGE(size_scale), 4.0, 4.0);
-//        gtk_range_set_increments (GTK_RANGE(size_scale), 12.0, 12.0);
-        gtk_widget_set_size_request (GTK_WIDGET(size_scale),-1,75);
-
-        gtk_scale_set_value_pos (size_scale,GTK_POS_BOTTOM);
-        //gtk_adjustment_set_upper (gtk_range_get_adjustment(GTK_RANGE(size_scale)), 24.0);
-        Basic::setTooltip (GTK_WIDGET(size_scale),tooltipText);   
-        g_signal_connect(G_OBJECT(size_scale), "value-changed", G_CALLBACK(changeSize), NULL);
-        addMotionController(GTK_WIDGET(size_scale));
-        return size_scale;
-    }
-#endif
 
     static void
     changeSize2 (GtkRange* self, gpointer user_data){
@@ -201,41 +175,6 @@ private:
       Print::printInfo(Child::getOutput(), 
           g_strdup_printf("%s %.0lf", _("Icon Size:"), value ));
     }    
-#if 0    
-    static void
-    changeSize (GtkRange* self, gpointer user_data){
-      if (Workdir<LocalDir>::pleaseWait()) return;
-      auto value = gtk_range_get_value(self);
-      int valueI = value;
-      Settings::setInteger("xfterm", "iconsize", valueI);
-      Print::printInfo(Child::getOutput(), 
-          g_strdup_printf("%s %.0lf", _("Icon Size:"), value ));
-      
-      
-#if 10
-      // reload current page
-      // On switch page, reload if iconsize has changed
-        auto child = Child::getChild();
-        auto path = Child::getWorkdir(child);
-        Workdir<LocalDir>::setWorkdir(path, child);
-
-#else
-
-      // reload all pages
-      // Bugged. mixes up the workdir of different pages
-      auto notebook = GTK_NOTEBOOK(g_object_get_data(G_OBJECT(mainWindow), "notebook"));
-      auto n = gtk_notebook_get_n_pages(notebook);
-      
-
-      for (int i=0; i<n; i++){
-        auto child = gtk_notebook_get_nth_page(notebook, i);
-        auto path = Child::getWorkdir(child);
-        Workdir<LocalDir>::setWorkdir(path, child);
-               
-      }
-#endif
-    }
-#endif
 
     static void
     upImage (GtkButton *self, void *data){

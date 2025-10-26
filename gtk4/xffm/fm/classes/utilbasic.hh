@@ -24,8 +24,8 @@ namespace xf {
       gtk_button_set_child(GTK_BUTTON(button), GTK_WIDGET(box));
       return GTK_BUTTON(button);
     }
-     
-    static GtkBox *imageButton(int width, int height, const char *iconName, const char *tooltipText, void *callback, void *data){
+
+    static GtkBox *imageButton(int width, int height, const char *iconName, const char *tooltipText, void *callback, void *data, bool withMotion){
         auto toggleBox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_VERTICAL,5));
         gtk_widget_set_size_request(GTK_WIDGET(toggleBox), width, height);
         GtkWidget *toggle;
@@ -45,32 +45,38 @@ namespace xf {
           gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
           gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture));
           gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
-              GTK_PHASE_CAPTURE);
-          g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (callback), data);
+              GTK_PHASE_BUBBLE);
+          g_signal_connect (G_OBJECT(gesture) , "released", G_CALLBACK (callback), data);
 
           auto gesture2 = gtk_gesture_click_new();
           gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
           gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture2));
           gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture2), 
-              GTK_PHASE_CAPTURE);
-          g_signal_connect (G_OBJECT(gesture2) , "pressed", G_CALLBACK (unclick), NULL);
+              GTK_PHASE_BUBBLE);
+          g_signal_connect (G_OBJECT(gesture2) , "released", G_CALLBACK (unclick), NULL);
 
         }
        
-        auto controllerIn = gtk_event_controller_motion_new();
-        gtk_event_controller_set_propagation_phase(controllerIn, GTK_PHASE_CAPTURE);
-        gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerIn);
-        g_signal_connect (G_OBJECT (controllerIn), "enter", 
-            G_CALLBACK (buttonMotion), GINT_TO_POINTER(1));
-       
-        auto controllerOut = gtk_event_controller_motion_new();
-        gtk_event_controller_set_propagation_phase(controllerOut, GTK_PHASE_CAPTURE);
-        gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerOut);
-        g_signal_connect (G_OBJECT (controllerOut), "leave", 
-            G_CALLBACK (buttonMotion), NULL);
+        if (withMotion){
+          auto controllerIn = gtk_event_controller_motion_new();
+          gtk_event_controller_set_propagation_phase(controllerIn, GTK_PHASE_CAPTURE);
+          gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerIn);
+          g_signal_connect (G_OBJECT (controllerIn), "enter", 
+              G_CALLBACK (buttonMotion), GINT_TO_POINTER(1));
+         
+          auto controllerOut = gtk_event_controller_motion_new();
+          gtk_event_controller_set_propagation_phase(controllerOut, GTK_PHASE_CAPTURE);
+          gtk_widget_add_controller(GTK_WIDGET(toggleBox), controllerOut);
+          g_signal_connect (G_OBJECT (controllerOut), "leave", 
+              G_CALLBACK (buttonMotion), NULL);
+        }
         
         return toggleBox;
     }
+   
+    static GtkBox *imageButton(int width, int height, const char *iconName, const char *tooltipText, void *callback, void *data){
+      return imageButton(width, height, iconName, tooltipText, callback, data, true);
+     }
    
     static GtkBox *imageButton(const char *iconName, const char *tooltipText, void *callback, void *data){
       return imageButton(30,16,iconName,tooltipText,callback,data);
@@ -89,6 +95,7 @@ namespace xf {
         gtk_box_prepend(toggleBox, GTK_WIDGET(toggle));
         gtk_widget_add_css_class (GTK_WIDGET(toggleBox), "input" );
         gtk_widget_add_css_class (GTK_WIDGET(toggle), "input" );
+        
         auto gesture = gtk_gesture_click_new();
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture),1);
         gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture));
