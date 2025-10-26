@@ -47,6 +47,14 @@ namespace xf {
           gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture), 
               GTK_PHASE_CAPTURE);
           g_signal_connect (G_OBJECT(gesture) , "pressed", G_CALLBACK (callback), data);
+
+          auto gesture2 = gtk_gesture_click_new();
+          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture2),1);
+          gtk_widget_add_controller(GTK_WIDGET(toggleBox), GTK_EVENT_CONTROLLER(gesture2));
+          gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture2), 
+              GTK_PHASE_CAPTURE);
+          g_signal_connect (G_OBJECT(gesture2) , "pressed", G_CALLBACK (unclick), NULL);
+
         }
        
         auto controllerIn = gtk_event_controller_motion_new();
@@ -120,6 +128,18 @@ namespace xf {
       }
       return TRUE;
     }
+
+    
+    static gboolean unclick( GtkGestureClick* self,int n, 
+                    double x, double y, void *data) {
+      auto controller = GTK_EVENT_CONTROLLER(self);
+      auto widget = gtk_event_controller_get_widget(controller);
+      gtk_widget_remove_css_class (GTK_WIDGET(widget), "pathbarboxNegative" );
+      gtk_widget_add_css_class (GTK_WIDGET(widget), "input" );
+      
+      return TRUE;
+    }
+
 
     public:
     static gboolean buttonMotion2( GtkEventControllerMotion* self,

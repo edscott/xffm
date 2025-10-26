@@ -62,13 +62,7 @@ namespace xf {
         auto r = bCallback;
         auto d = bdata;
         for (auto p=bIcon; p && *p; p++, q++, r++, d++){
-          auto button = UtilBasic::imageButton(40,32,*p, *q, NULL, NULL);
-          auto gesture0 = gtk_gesture_click_new();
-          gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture0),1);
-          gtk_widget_add_controller(GTK_WIDGET(button), GTK_EVENT_CONTROLLER(gesture0));
-          gtk_event_controller_set_propagation_phase(GTK_EVENT_CONTROLLER(gesture0), 
-              GTK_PHASE_CAPTURE);
-          g_signal_connect (G_OBJECT(gesture0) , "pressed", G_CALLBACK (*r), NULL);
+          auto button = UtilBasic::imageButton(40,32,*p, *q, *r, *d);
           Basic::boxPack0(vButtonBox_, GTK_WIDGET(button),  FALSE, FALSE, 0);
         }
 
