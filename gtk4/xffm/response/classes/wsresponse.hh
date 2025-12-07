@@ -20,19 +20,19 @@ public:
       
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialogObject->dialog()),"entry"));
       auto buffer = gtk_entry_get_buffer(entry);
-      auto txt = gtk_entry_buffer_get_text(buffer);
-      auto ok = MenuCallbacks<Type>::workSpaceExists(txt);
+      auto nextWS = gtk_entry_buffer_get_text(buffer);
+      //auto ok = MenuCallbacks<Type>::workSpaceExists(txt);
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      MenuCallbacks<Type>::moveTo(txt);
+      MenuCallbacks<Type>::moveTo(nextWS);
       /*
       if (ok){
-        MenuCallbacks<Type>::moveTo(txt);
+        MenuCallbacks<Type>::moveTo(nextWS);
         //hmmm... race with i3: either moveto or switchWS
         //MenuCallbacks<Type>::switchWS(txt);
       } else {
         Print::showText(output);
-        auto a = g_strconcat("\"",txt, "\"", NULL);
+        auto a = g_strconcat("\"",nextWS, "\"", NULL);
         auto msg = g_strdup_printf(_("Workspace %s"), a);
         auto msg2 = g_strconcat(" ",msg, " ",  _("does not exist"), "\n",NULL);
         Print::printError(output, g_strdup_printf("%s\n", msg2));

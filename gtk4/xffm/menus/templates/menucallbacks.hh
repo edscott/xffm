@@ -143,7 +143,8 @@ DBG("moveWS now...\n");
         lastWS = NULL;
         // query for workspace... (lastWS)
         lastWS = NULL;
-        queryWS(); return;
+        queryWS(); 
+        return;
       } else if (lastWS) {
         /*Print::showText(output);
         auto a = g_strconcat("\"",lastWS, "\"", NULL);
@@ -159,7 +160,7 @@ DBG("moveWS now...\n");
         if (lastWS == NULL){
           // Here we entered xffm4 destop not by moveWS().
           g_free(tt);
-          queryWS(); return;
+          queryWS(); 
           return;
         }
       }

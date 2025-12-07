@@ -24,6 +24,7 @@ const char **environment = NULL;
 static const char *rfm_root_id="RFM_ROOT";
 static const char *Bookmarks_id="Bookmarks";
 const char *Xname_ = NULL;
+static char *lastWS=NULL;
 
 #include "config.h"
 #include "xffm.h"
