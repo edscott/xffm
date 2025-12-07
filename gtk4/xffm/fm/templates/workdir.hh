@@ -238,15 +238,24 @@ char buffer[4096];
           g_free(message);
           return TRUE;
         }
-        
-        TRACE("Open new ecryptfs dialog.\n");
-        auto mountDir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
-        if (mkdir(mountDir, 0750) < 0){
-          TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
+        auto efsInfo = G_FILE_INFO(g_file_info_get_attribute_object (info, "xffm::efsInfo"));
+        if (efsInfo){
+          auto path = Basic::getPath(efsInfo);
+          DBG("workdir.hh: efsInfo = '%s'\n", path);
+
+          auto parent = GTK_WINDOW(Child::mainWidget());
+          new EFS<Type>(parent, path, true);
+
+        } else {     
+          TRACE("Open new ecryptfs dialog.\n");
+          auto mountDir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
+          if (mkdir(mountDir, 0750) < 0){
+            TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
+          }
+          auto parent = GTK_WINDOW(Child::mainWidget());
+          new EFS<Type>(parent, mountDir);
+          g_free(mountDir);
         }
-        auto parent = GTK_WINDOW(Child::mainWidget());
-        new EFS<Type>(parent, mountDir);
-        g_free(mountDir);
 
         return TRUE;
       }

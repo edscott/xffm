@@ -1,0 +1,49 @@
+
+#0  0x00007ffff609894c in ?? () from /usr/lib/libc.so.6
+#1  0x00007ffff603e410 in raise () from /usr/lib/libc.so.6
+#2  0x00007ffff602557a in abort () from /usr/lib/libc.so.6
+#3  0x00007ffff60254e3 in ?? () from /usr/lib/libc.so.6
+#4  0x00007ffff543ec8c in ?? () from /usr/lib/libepoxy.so.0
+#5  0x00007ffff53ed50a in ?? () from /usr/lib/libepoxy.so.0
+#6  0x00007ffff726ab80 in ?? () from /usr/lib/libgtk-4.so.1
+#7  0x00007ffff75e1dde in ?? () from /usr/lib/libglib-2.0.so.0
+#8  0x00007ffff75e488c in g_hash_table_unref () from /usr/lib/libglib-2.0.so.0
+#9  0x00007ffff726c53a in ?? () from /usr/lib/libgtk-4.so.1
+#10 0x00007ffff7f13e70 in g_object_unref () from /usr/lib/libgobject-2.0.so.0
+#11 0x00007ffff728c7ad in ?? () from /usr/lib/libgtk-4.so.1
+#12 0x00007ffff7228958 in gsk_renderer_unrealize () from /usr/lib/libgtk-4.so.1
+#13 0x00007ffff6f826e0 in ?? () from /usr/lib/libgtk-4.so.1
+#14 0x00007ffff7f24c77 in ?? () from /usr/lib/libgobject-2.0.so.0
+#15 0x00007ffff7f24d89 in g_signal_emit_valist () from /usr/lib/libgobject-2.0.so.0
+#16 0x00007ffff7f24e44 in g_signal_emit () from /usr/lib/libgobject-2.0.so.0
+#17 0x00007ffff6f8c322 in gtk_widget_unrealize () from /usr/lib/libgtk-4.so.1
+#18 0x00007ffff6f8cb19 in gtk_widget_unparent () from /usr/lib/libgtk-4.so.1
+#19 0x00007ffff6f8085e in ?? () from /usr/lib/libgtk-4.so.1
+#20 0x00007ffff6fa8a92 in gtk_window_destroy () from /usr/lib/libgtk-4.so.1
+#21 0x000055555556ab4e in xf::Basic::destroy_f (window=0x555555fd8e90)
+    at /home/GIT/xffm+/gtk4/xffm/fm/classes/basic.hh:634
+#22 0x000055555556c28c in xf::Basic::context_function_f (data=0x7fffb57f9370)
+    at /home/GIT/xffm+/gtk4/xffm/fm/classes/basic.hh:1116
+#23 0x00007ffff75f89e5 in g_main_context_invoke_full () from /usr/lib/libglib-2.0.so.0
+#24 0x000055555556b9e3 in xf::Basic::context_function (
+    function=0x55555556ab23 <xf::Basic::destroy_f(void*)>, 
+    function_data=0x555555fd8e90) at /home/GIT/xffm+/gtk4/xffm/fm/classes/basic.hh:916
+#25 0x000055555556b054 in xf::Basic::destroy (window=0x555555fd8e90)
+    at /home/GIT/xffm+/gtk4/xffm/fm/classes/basic.hh:736
+#26 0x00005555555bc376 in xf::DialogBasic<xf::EfsResponse<xf::LocalDir> >::~DialogBasic (this=0x555555e23300)
+    at /home/GIT/xffm+/gtk4/xffm/./response/templates/dialogbasic.hh:222
+#27 0x00005555555df12e in xf::DialogComplex<xf::EfsResponse<xf::LocalDir> >::~DialogComplex (this=0x555555e23300)
+    at /home/GIT/xffm+/gtk4/xffm/./response/templates/dialogcomplex.hh:7
+#28 0x00005555555df157 in xf::DialogComplex<xf::EfsResponse<xf::LocalDir> >::contextDelete_f (data=0x555555e23300)
+    at /home/GIT/xffm+/gtk4/xffm/./response/templates/dialogcomplex.hh:78
+#29 0x000055555556c28c in xf::Basic::context_function_f (data=0x7fffb57f95a0)
+    at /home/GIT/xffm+/gtk4/xffm/fm/classes/basic.hh:1116
+#30 0x00007ffff75f8a85 in g_main_context_invoke_full () from /usr/lib/libglib-2.0.so.0
+#31 0x000055555556b9e3 in xf::Basic::context_function (
+    function=0x5555555df131 <xf::DialogComplex<xf::EfsResponse<xf::LocalDir> >::contextDelete_f(void*)>, function_data=0x555555e23300)
+    at /home/GIT/xffm+/gtk4/xffm/fm/classes/basic.hh:916
+#32 0x00005555555d55fd in xf::DialogComplex<xf::EfsResponse<xf::LocalDir> >::runWait_f
+    (data=0x555555e23300)
+    at /home/GIT/xffm+/gtk4/xffm/./response/templates/dialogcomplex.hh:97
+#33 0x00007ffff60969cb in ?? () from /usr/lib/libc.so.6
+#34 0x00007ffff611aa0c in ?? () from /usr/lib/libc.so.6

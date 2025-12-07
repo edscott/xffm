@@ -90,6 +90,7 @@ public:
     }
     
     GtkBox *mainBox(const char *folder) {
+      DBG("efsresponse.hh: mainBox(%s)\n", folder);
         folder_ = folder? g_strdup(folder) : g_strdup("/");
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -143,12 +144,12 @@ public:
 
         // mount child
         auto encrypted = g_strconcat(_("Mount Point"), " (", _("Encrypted"), "): ",NULL);
-        remoteEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "entry1", encrypted, this);
+        remoteEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "FUSE_REMOTE_PATH", encrypted, this);
         g_free(encrypted);
         //gtk_widget_set_sensitive(GTK_WIDGET(remoteEntry_), true); // FIXME: put to false 
 
         auto unencrypted = g_strconcat(_("Mount Point"), " (", _("Unencrypted"), "): ",NULL);
-        mountPointEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "entry2", unencrypted, this);
+        mountPointEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "FUSE_MOUNT_POINT", unencrypted, this);
 //        mountPointEntry_ = addEntry(child1, "entry2", unencrypted);
         g_free(unencrypted);
         //gtk_widget_set_sensitive(GTK_WIDGET(mountPointEntry_), true); // FIXME: put to false 
@@ -233,6 +234,89 @@ public:
         return mainBox_;
     }
 
+    void setup(const char *path, 
+               const char *mountPoint, 
+               const char *mountOptions, 
+               const char *efsOptions)
+    {
+      TRACE("efsresponse.hh: setup() foo\n");
+      auto buffer = gtk_entry_get_buffer(remoteEntry_);
+      gtk_entry_buffer_set_text(buffer, path, -1);
+      buffer = gtk_entry_get_buffer(mountPointEntry_);
+      gtk_entry_buffer_set_text(buffer, mountPoint, -1);
+
+      // Mount options. Turn all off.
+      for (auto p=mount_options; p && p->flag != NULL; p++){
+        auto hbox = g_object_get_data(G_OBJECT(mainBox_), p->id);
+        auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(hbox), "check"));
+        if (check) gtk_check_button_set_active(check, false);
+      }
+      // Now turn on necessary options.
+      char **v=NULL;
+      if (mountOptions){
+        if (strchr(mountOptions, ',')) {
+          v = g_strsplit(mountOptions, ",", -1);
+        } else if (strlen(mountOptions)) {
+          v = (char **)calloc(2, sizeof(char *));
+          v[0] = g_strdup(mountOptions);
+        }
+      }
+      for (auto p=v; p && *p; p++){
+        auto hbox = g_object_get_data(G_OBJECT(mainBox_), *p);
+        auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(hbox), "entry"));
+        auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(hbox), "check"));
+        if (check) gtk_check_button_set_active(check, true);
+        TRACE("efsresponse.hh: hbox=%p, option %s  entry --> %p, check --> %p\n",
+            hbox, *p, entry, check);
+      }
+      if (v) g_strfreev(v);
+      // Mount options done.
+
+      // Efs options. Turn all off.
+      for (auto p=efs_options; p && p->id != NULL; p++){
+        auto hbox = g_object_get_data(G_OBJECT(mainBox_), p->id);
+        auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(hbox), "check"));
+        if (check) gtk_check_button_set_active(check, false);
+      }
+      // Now turn on necessary options.
+      v=NULL;
+      if (efsOptions){
+        if (strchr(efsOptions, ',')) {
+          v = g_strsplit(efsOptions, ",", -1);
+        } else if (strlen(efsOptions)) {
+          v = (char **)calloc(2, sizeof(char *));
+          v[0] = g_strdup(efsOptions);
+        }
+      }
+      DBG("now at options '%s'\n", efsOptions);
+      for (auto p=v; p && *p; p++){
+        char **w = NULL;
+        char *key = NULL;
+        if (strchr(*p, '=')){
+          w = g_strsplit(*p, "=", -1);
+          key = g_strconcat(w[0], "=", NULL);
+        }
+        auto hbox =  g_object_get_data(G_OBJECT(mainBox_), key? key : *p);
+        DBG("p=%s hbox=%p\n", w? w[0] : *p, hbox); 
+        auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(hbox), "entry"));
+        auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(hbox), "check"));
+          DBG("efsresponse.hh: hbox=%p, option %s  entry --> %p, check --> %p\n",
+            hbox, *p, entry, check);
+        if (check) {
+          gtk_check_button_set_active(check, true);
+          if (w){
+            auto buffer = gtk_entry_get_buffer(entry);
+            gtk_entry_buffer_set_text(buffer, w[1], -1);
+          }
+        }
+        if (w) g_strfreev(w);
+        if (key) g_free(key);
+      }
+      if (v) g_strfreev(v);
+
+
+      return;
+    }
 
     // void dialog(GtkWindow *value)
     // Set a pointer to the GtkWindow in the FileResponse
@@ -305,6 +389,10 @@ public:
               continue;
           }
           g_object_set_data(G_OBJECT(mainBox),options_p->id, hbox);
+          if (strlen(options_p->flag)){
+              g_object_set_data(G_OBJECT(mainBox),options_p->flag, hbox);
+              DBG("Set hbox %s --> %p\n", options_p->flag, hbox);
+          }
         
           const gchar *labelColor = (options_p->sensitive ==0)?"gray":"red";
 

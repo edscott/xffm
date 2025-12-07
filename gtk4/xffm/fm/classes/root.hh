@@ -66,8 +66,10 @@ namespace xf {
 
         // saved ecryptfs mount points
         auto items = EFS<bool>::getSavedItems();
+        auto keyfile = items? EFS<bool>::getKeyfile() : NULL;
         for (auto p=items; p && *p; p++){
           if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
+      DBG("root.hh:: adding efs entry '%s'\n", *p);
           GFile *file = g_file_new_for_path(*p);
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           //auto gIcon = g_file_info_get_icon(info);
@@ -84,7 +86,7 @@ namespace xf {
           //auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
           g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));
           g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
-          g_file_info_set_attribute_object (info, "xffm::efs", G_OBJECT(file));
+          g_file_info_set_attribute_object (info, "xffm::efsInfo", G_OBJECT(info));
           
           g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
           //g_list_store_insert(store, 0, G_OBJECT(info));
@@ -94,6 +96,7 @@ namespace xf {
           g_free(utf_name);
           g_free(basename);
         }
+        if (keyfile) g_key_file_free(keyfile);
         g_strfreev(items);
         items = NULL; 
         // bookmarks
