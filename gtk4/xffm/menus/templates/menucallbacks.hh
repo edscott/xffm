@@ -120,8 +120,7 @@ namespace xf {
     moveWS(GtkGestureClick *self, 
         int n, double x, double y,
         void *data){
-DBG("moveWS now...\n");
-      static char *lastWS=NULL;
+      TRACE("moveWS now...\n");
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
