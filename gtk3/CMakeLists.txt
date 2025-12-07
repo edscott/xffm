@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.10)
 project (xffm C CXX)
 set(CMAKE_INSTALL_PREFIX /usr/local)
 set (CMAKE_CXX_STANDARD 17)
@@ -33,7 +33,7 @@ endif()
 
 
 set(CMAKE_EXE_LINKER_FLAGS "-L/usr/lib -L/usr/local/lib")
-set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
+#set(ENV{PKG_CONFIG_PATH}  "/usr/local/lib/pkgconfig")
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 message(STATUS "Checking for libzip...")
@@ -57,7 +57,7 @@ find_package(GTK3 3.24.1 REQUIRED)
 include(GNUInstallDirs)
 include(cmake/headers.cmake)
 include(cmake/freeDesktop.cmake)
-#include(cmake/programs.cmake)
+include(cmake/programs.cmake)
 include(cmake/msgfmt.cmake)
 
 

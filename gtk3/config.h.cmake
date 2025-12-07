@@ -22,10 +22,10 @@
 #define @MAGIC_H@
 #define @ZIP_H@
 #define @READLINE_HISTORY_H@
-#define @HAVE_GREP@
-#define @HAVE_EMERGE@
-#define @HAVE_PACMAN@
-#define @HAVE_PKG@
+//#define @HAVE_GREP@
+//#define @HAVE_EMERGE@
+//#define @HAVE_PACMAN@
+//#define @HAVE_PKG@
 
 #define @MIMETYPE_PROGRAM@
 #define @FREEDESKTOP_GLOBS@
