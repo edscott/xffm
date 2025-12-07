@@ -4,6 +4,8 @@
 #include "ecryptfs.i"
 template <class Type> class EFS;
 namespace xf {
+  pthread_mutex_t efsMountMutex=PTHREAD_MUTEX_INITIALIZER;
+ 
   template <class Type>
   class EfsResponse {
    using subClass_t = EfsResponse<Type>;
@@ -15,9 +17,13 @@ namespace xf {
    const char *iconName_;
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
+   GtkEntry *passphaseEntry_ = NULL;
    char *folder_ = NULL;
    GtkTextView *output_;
    GList *children_ = NULL; 
+   GtkButton *mountButton_ = NULL;
+   GtkButton *cancelButton_ = NULL;
+   GtkButton *saveButton_ = NULL;
 public:
     GtkWidget *cbox(void){return NULL;}
     
@@ -27,6 +33,7 @@ public:
     const char *label(void){return "xffm::efs";}
     GtkEntry *remoteEntry(void){return remoteEntry_;}
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
+    GtkEntry *passphaseEntry(void){return passphaseEntry_;}
     char *folder(){return  folder_;}
     void folder(const char *value){folder_ = g_strdup(value);}
 
@@ -46,13 +53,13 @@ public:
 
      static void *asyncYes(void *data){
       auto dialogObject = (dialog_t *)data;
-      TRACE("%s", "hello world\n");
+      DBG("%s", "hello world\n");
       return NULL;
     }
 
     static void *asyncNo(void *data){
       auto dialogObject = (dialog_t *)data;
-      TRACE("%s", "goodbye world\n");
+      DBG("%s", "goodbye world\n");
       return NULL;
     }
 #if 0
@@ -152,6 +159,9 @@ public:
         mountPointEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "FUSE_MOUNT_POINT", unencrypted, this);
 //        mountPointEntry_ = addEntry(child1, "entry2", unencrypted);
         g_free(unencrypted);
+
+        passphaseEntry_ = FileResponse<Type, subClass_t>::addEntryPass(child1, "FUSE_PASSPHRASE", _("Passphrase"), this);
+        gtk_entry_set_visibility (passphaseEntry_, false);
         //gtk_widget_set_sensitive(GTK_WIDGET(mountPointEntry_), true); // FIXME: put to false 
 
         auto sw = gtk_scrolled_window_new();
@@ -179,23 +189,23 @@ public:
         gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
         gtk_box_append(mainBox_, GTK_WIDGET(action_area));
 
-        auto cancelButton = UtilBasic::mkButton("emblem-redball", _("Cancel"));
-        gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
-        gtk_widget_set_vexpand(GTK_WIDGET(cancelButton), false);
+        cancelButton_ = UtilBasic::mkButton("emblem-redball", _("Cancel"));
+        gtk_box_append(action_area,  GTK_WIDGET(cancelButton_));
+        gtk_widget_set_vexpand(GTK_WIDGET(cancelButton_), false);
 
-        auto saveButton = UtilBasic::mkButton ("emblem-floppy", _("Save"));
-        gtk_box_append(action_area,  GTK_WIDGET(saveButton));
-        gtk_widget_set_vexpand(GTK_WIDGET(saveButton), false);
+        saveButton_ = UtilBasic::mkButton ("emblem-floppy", _("Save"));
+        gtk_box_append(action_area,  GTK_WIDGET(saveButton_));
+        gtk_widget_set_vexpand(GTK_WIDGET(saveButton_), false);
 
-        // FIXME: this no longer here
-        /*mountButton_ = Gtk<Type>::dialog_button ("greenball", _("Mount"));
-        compat<bool>::boxPackStart (GTK_BOX (action_area), GTK_WIDGET(mountButton_), FALSE, FALSE, 0);
+        mountButton_ = UtilBasic::mkButton ("emblem-greenball", _("Mount"));
+        gtk_box_append (GTK_BOX (action_area), GTK_WIDGET(mountButton_));
         g_signal_connect (G_OBJECT (mountButton_), "clicked", G_CALLBACK (button_mount), this);
-         */
+        gtk_widget_set_visible(GTK_WIDGET(mountButton_), false);
+         
 
 
-        g_signal_connect (G_OBJECT (saveButton), "clicked", G_CALLBACK (button_save), this);
-        g_signal_connect (G_OBJECT (cancelButton), "clicked", G_CALLBACK (button_cancel), this);
+        g_signal_connect (G_OBJECT (saveButton_), "clicked", G_CALLBACK (button_save), this);
+        g_signal_connect (G_OBJECT (cancelButton_), "clicked", G_CALLBACK (button_cancel), this);
 
         // FIXME: 
 /*
@@ -314,6 +324,7 @@ public:
       }
       if (v) g_strfreev(v);
 
+      gtk_widget_set_visible(GTK_WIDGET(mountButton_), true);
 
       return;
     }
@@ -626,6 +637,194 @@ public:
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(-1));
     }
 
+    static void
+    button_mount (GtkButton * button, gpointer data) {
+      auto subClass = (subClass_t *)data;
+      g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(2));
+      DBG("button_mount...\n");
+      subClass->mount();
+      
+    }
+
+    void mount(void){
+       // mount
+      DBG("mount...\n");
+      auto efsmount = g_find_program_in_path("mount.ecryptfs");
+      if (not efsmount){
+          ERROR_(g_strdup_printf("%s: mount.ecryptfs\n", strerror(ENOENT)));
+          g_free(efsmount);
+          return;
+      }
+      // This here will ask for passphrase before mounting:
+      mountUrl();
+    }
+
+    void mountUrl(void){
+      DBG("mountUrl...\n");
+      
+      auto buffer = gtk_entry_get_buffer(this->remoteEntry());
+      auto path = gtk_entry_buffer_get_text(buffer);
+
+      buffer = gtk_entry_get_buffer(this->mountPointEntry());
+      auto mountPoint = gtk_entry_buffer_get_text(buffer);
+
+      buffer = gtk_entry_get_buffer(this->passphaseEntry());
+      auto passphase = g_strdup(gtk_entry_buffer_get_text(buffer));
+
+      DBG("mountUrl: %s -> %s\n", path, mountPoint);
+      const gchar *argv[MAX_COMMAND_ARGS];
+      memset((void *)argv, 0, MAX_COMMAND_ARGS*sizeof(const gchar *));
+
+      gint i=0;
+      if (geteuid() != 0) {
+        argv[i++] = "sudo";
+        argv[i++] = "-A";
+      }
+        
+      argv[i++] = "mount";
+      // Mount options
+      auto mountOptions = getMountOptions();
+      if (mountOptions) {
+        auto optionsM = g_strsplit(mountOptions, ",", -1);
+        for (auto o=optionsM; o && *o; o++){
+          argv[i++] = *o;
+        }
+        g_free(mountOptions);
+      }
+
+      argv[i++] = "-t";
+      argv[i++] = "ecryptfs";
+        
+      auto optionsOn = getEFSOptions();
+        
+      gchar *passphraseFile = NULL;
+      gboolean insecurePassphraseFile = FALSE;
+      if (optionsOn && strstr(optionsOn, "passphrase_passwd_file=")){
+        insecurePassphraseFile = TRUE;
+      }
+
+      // Get passphrase option
+      if (!insecurePassphraseFile) {
+      
+        passphraseFile = get_passfile(passphase);
+        if (!passphraseFile) {
+          Print::printError(output_, g_strdup("No passphrase file...\n"));
+          g_free(optionsOn);
+          return;
+        }
+        auto g = g_strconcat(optionsOn, ",passphrase_passwd_file=", passphraseFile, NULL);
+        g_free(optionsOn);
+        optionsOn = g;
+      }
+      if (optionsOn){
+        argv[i++] = "-o";
+        argv[i++] = optionsOn;
+      }
+      argv[i++] = path;
+      argv[i++] = mountPoint;
+      argv[i] = NULL;
+
+      
+      Print::print(output_, g_strdup_printf(_("Mounting %s"), path));
+ 
+      pthread_mutex_lock(&efsMountMutex);
+      new Thread("EFS::mountUrl(): cleanup_passfile", cleanup_passfile, (void *) passphraseFile);
+
+      auto pid = fork();
+      if (pid){
+        int status;
+        waitpid(pid, &status, 0);
+        pthread_mutex_unlock(&efsMountMutex);
+      } else {
+        execvp(argv[0], (char* const*)argv);
+      }
+      //new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo, (void *)view);
+      //Run<bool>::thread_run(output_, (const char **)argv, true);
+
+
+        // cleanup
+      memset(optionsOn, 0, strlen(optionsOn));
+      g_free(optionsOn);
+   }
+
+    static void *
+    cleanup_passfile(void * data){
+        auto passfile = (gchar *)data;
+        if (!passfile) return NULL;
+        struct stat st;
+        pthread_mutex_lock(&efsMountMutex);
+
+        gint fd = open(passfile, O_RDWR);
+        if (fd < 0){
+            DBG("Cannot open password file %s to wipeout\n", passfile);
+        } else {
+            gint i;
+            // wipeout
+            for (i=0; i<2048; i++){
+                const gchar *null="";
+                if (write(fd, null, 1) < 0){
+                    break;
+                }
+            }
+            close(fd);
+            if (unlink(passfile)<0) {
+                    DBG("Cannot unlink password file %s\n", passfile);
+            }
+        }
+        memset(passfile, 0, strlen(passfile));
+        g_free(passfile);
+        pthread_mutex_unlock(&efsMountMutex);
+        return NULL;
+    }
+
+    static gchar *
+    get_passfile(char *passphrase){
+      gchar *passfile = NULL;
+
+      gint fd = -1;
+      if (passphrase && strlen(passphrase)){
+          time_t seconds;
+          time (&seconds);
+          gint tried=0;
+    retry:
+          srand ((unsigned)seconds);
+          gint divide = RAND_MAX / 10000;
+          
+          if((seconds = rand () / divide) > 100000L){
+            seconds = 50001;
+          }
+          passfile = g_strdup_printf("%s/.efs-%ld", g_get_home_dir(), (long)seconds);
+          // if the file exists, retry with a different seudo-random number...
+          if (g_file_test(passfile, G_FILE_TEST_EXISTS)){
+            if (seconds > 0) seconds--;
+            else seconds++;
+            if (tried++ < 300) {
+              g_free(passfile);
+              goto retry;
+            } else {
+              g_error("This is a \"a chickpea that weighs a pound\"\n");
+            }
+          }
+         // TRACE("passfile=%s on try %d\n", passfile, try);
+
+          fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR, 0600);
+    //        fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR|O_SYNC|O_DIRECT, 0600);
+          if (fd >= 0) {
+            if (write(fd, (void *)"passwd=", strlen("passwd=")) < 0){
+              DBG("write %s: %s\n", passfile, strerror(errno));
+            }
+            if (write(fd, (void *)passphrase, strlen(passphrase)) < 0){
+              DBG("write %s: %s\n", passfile, strerror(errno));
+            }
+            memset(passphrase, 0, strlen(passphrase));
+            close(fd);
+          } else {
+            DBG("cannot open %s: %s\n", passfile, strerror(errno));
+          }
+
+        }
+        return passfile;
+    }
 
 
   };

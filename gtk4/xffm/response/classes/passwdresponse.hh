@@ -2,6 +2,8 @@
 #define XF_PASSWDRESPONSE_HH
 
 namespace xf {
+
+
 class PasswordDialog {
    const char *title_;
    const char *iconName_;
@@ -69,6 +71,8 @@ class PasswordResponse {
 // We need another class to run inside app's process:
 //    basically just a dialog entry set to password mode.
 public:
+    
+
     static void sendPassword(const char **argv){
       gtk_init ();
       IconTheme::init();
