@@ -34,7 +34,10 @@ public:
 #ifdef ENABLE_FSTAB_MODULE
         addFstabItem(treeModel);
 #ifdef ENABLE_EFS_MODULE
-        addEfsItem(treeModel);
+        // gtk3 changes have broken efs module. 
+        // Now will only maintain in gtk4 
+        //
+        //addEfsItem(treeModel);
 #endif
 #endif
  #ifdef ENABLE_PKG_MODULE
