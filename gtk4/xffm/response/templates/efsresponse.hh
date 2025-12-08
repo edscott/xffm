@@ -18,6 +18,7 @@ namespace xf {
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
    GtkEntry *passphaseEntry_ = NULL;
+   GtkBox *passphaseBox_ = NULL;
    char *folder_ = NULL;
    GtkTextView *output_;
    GList *children_ = NULL; 
@@ -34,6 +35,8 @@ public:
     GtkEntry *remoteEntry(void){return remoteEntry_;}
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
     GtkEntry *passphaseEntry(void){return passphaseEntry_;}
+    void passphaseEntry(GtkEntry *value){passphaseEntry_ = value;}
+    GtkBox *passphaseBox(void){return passphaseBox_;}
     char *folder(){return  folder_;}
     void folder(const char *value){folder_ = g_strdup(value);}
 
@@ -160,9 +163,7 @@ public:
 //        mountPointEntry_ = addEntry(child1, "entry2", unencrypted);
         g_free(unencrypted);
 
-        passphaseEntry_ = FileResponse<Type, subClass_t>::addEntryPass(child1, "FUSE_PASSPHRASE", _("Passphrase"), this);
-        gtk_entry_set_visibility (passphaseEntry_, false);
-        //gtk_widget_set_sensitive(GTK_WIDGET(mountPointEntry_), true); // FIXME: put to false 
+        passphaseBox_ = addEntryPass(child1);
 
         auto sw = gtk_scrolled_window_new();
         gtk_box_append(child1, GTK_WIDGET(sw));
@@ -242,6 +243,48 @@ public:
         TRACE("efs main dialog = %p.\n", MainDialog);
         */
         return mainBox_;
+    }
+  
+    GtkBox *addEntryPass(GtkBox *child){
+// FIXME: add key controller to entries to turn redball/greenball on/off
+      TRACE("***subClassObject-Folder=%s\n", folder());
+        auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
+        gtk_widget_set_vexpand(GTK_WIDGET(vbox), false);
+        gtk_widget_set_hexpand(GTK_WIDGET(vbox), true);
+
+        GtkBox *hbox[2];
+        GtkWidget *label[2];
+        GtkWidget *entry[2];
+        GtkImage *red[2];
+        GtkImage *green[2];
+        const char *text[]={_("Passphrase"), _("Confirm"), NULL};
+        for (int i=0; i<2; i++){
+          hbox[i] = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+          gtk_widget_set_vexpand(GTK_WIDGET(hbox[i]), false);
+          gtk_widget_set_hexpand(GTK_WIDGET(hbox[i]), true);
+          label[i] = gtk_label_new(text[i]);
+          gtk_widget_set_hexpand(GTK_WIDGET(label[i]), false);
+          entry[i] = gtk_entry_new();
+          gtk_widget_set_hexpand(entry[i], true);
+          g_object_set_data(G_OBJECT(child), text[i], entry[i]);
+
+          red[i] = Texture<bool>::getImage(EMBLEM_RED_BALL, 16);
+          green[i] = Texture<bool>::getImage(EMBLEM_GREEN_BALL, 16);       
+          g_object_set_data(G_OBJECT(entry[i]), "red", red[i]);
+          g_object_set_data(G_OBJECT(entry[i]), "green", green[i]);
+          gtk_box_append(hbox[i], label[i]);
+          gtk_box_append(hbox[i], entry[i]);
+          gtk_box_append(hbox[i], GTK_WIDGET(red[i]));
+          gtk_box_append(hbox[i], GTK_WIDGET(green[i]));
+          gtk_box_append(vbox, GTK_WIDGET(hbox[i]));
+          gtk_widget_set_visible(GTK_WIDGET(green[i]), false);
+        //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse_t::getDirectory), subClassObject);
+          gtk_entry_set_visibility (GTK_ENTRY(entry[i]), false);
+          gtk_box_append(vbox, GTK_WIDGET(hbox[i]));
+        }
+        passphaseEntry(GTK_ENTRY(entry[0]));
+        gtk_box_append(child, GTK_WIDGET(vbox));
+        return vbox;
     }
 
     void setup(const char *path, 
@@ -696,37 +739,25 @@ public:
       argv[i++] = "ecryptfs";
         
       auto optionsOn = getEFSOptions();
-        
-      gchar *passphraseFile = NULL;
-      gboolean insecurePassphraseFile = FALSE;
-      if (optionsOn && strstr(optionsOn, "passphrase_passwd_file=")){
-        insecurePassphraseFile = TRUE;
-      }
-
-      // Get passphrase option
-      if (!insecurePassphraseFile) {
+      auto buffer2 = gtk_entry_get_buffer(this->passphaseEntry());
+      auto keyOption = g_strconcat(optionsOn,",key=passphrase:passphrase_passwd=",
+          gtk_entry_buffer_get_text(buffer2));
       
-        passphraseFile = get_passfile(passphase);
-        if (!passphraseFile) {
-          Print::printError(output_, g_strdup("No passphrase file...\n"));
-          g_free(optionsOn);
-          return;
-        }
-        auto g = g_strconcat(optionsOn, ",passphrase_passwd_file=", passphraseFile, NULL);
-        g_free(optionsOn);
-        optionsOn = g;
-      }
-      if (optionsOn){
-        argv[i++] = "-o";
-        argv[i++] = optionsOn;
-      }
+
+      argv[i++] = "-o";
+      argv[i++] = keyOption;
+      
+
       argv[i++] = path;
       argv[i++] = mountPoint;
-      argv[i] = NULL;
+      argv[i] = NULL;   
 
-      
       Print::print(output_, g_strdup_printf(_("Mounting %s"), path));
- 
+
+      for (auto p=argv; p && *p; p++)fprintf(stderr, "%s "); fprintf(stderr, "\n");
+
+// FIXME: run a "sudo -A modprobe ecryptfs" first
+/* 
       pthread_mutex_lock(&efsMountMutex);
       new Thread("EFS::mountUrl(): cleanup_passfile", cleanup_passfile, (void *) passphraseFile);
 
@@ -740,11 +771,12 @@ public:
       }
       //new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo, (void *)view);
       //Run<bool>::thread_run(output_, (const char **)argv, true);
+*/
 
-
-        // cleanup
-      memset(optionsOn, 0, strlen(optionsOn));
+      // cleanup
       g_free(optionsOn);
+      memset(keyOption, 0, strlen(keyOption));
+      g_free(keyOption);
    }
 
     static void *

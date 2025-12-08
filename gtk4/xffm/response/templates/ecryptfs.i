@@ -171,7 +171,7 @@ static  group_options_t efs_options[]={
         .entry = "1",
         .tip = N_("If verbosity=1, the mount helper will ask you for missing values (default).  Otherwise, if verbosity=0, it will not ask for missing values and will fail if required values are omitted.  ")
     },
-    
+/*    
     {
         .sensitive = 0, .flag = "", .id = "passphrase_passwd=", 
         .text = N_("passphrase"), 
@@ -227,7 +227,7 @@ static  group_options_t efs_options[]={
         .entry = "",
         .tip = N_("The  password  can  be  specified on the command line. Since the password is visible in the process list,  it  is  highly  recommended to use this option only for testing purposes.")
     },
-    
+*/    
     {.sensitive = 1, NULL, NULL, NULL, NULL, NULL}
 };
 

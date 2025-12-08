@@ -386,31 +386,6 @@ public: // Free functions.
       return NULL;
     }
 
-    static GtkEntry *addEntryPass(GtkBox *child, const char *id, const char *text, void *subClassObject){
-
-      TRACE("***subClassObject-Folder=%s\n", ((SubClassType *)subClassObject)->folder());
-        auto hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
-        gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
-        auto label = gtk_label_new(text);
-        gtk_widget_set_hexpand(GTK_WIDGET(label), false);
-        auto entry = gtk_entry_new();
-
-        gtk_widget_set_hexpand(GTK_WIDGET(entry), true);
-        g_object_set_data(G_OBJECT(child), id, entry);
-        //gtk_widget_set_sensitive(GTK_WIDGET(entry), true); // FIXME: put to false 
-                                                           // when filedialog button
-                                                           // is working.
-        auto button = UtilBasic::mkButton(EMBLEM_ABOUT, NULL);
-        g_object_set_data(G_OBJECT(button), "entry", entry);
-        //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse_t::getDirectory), subClassObject);
-
-        gtk_box_append(hbox, label);
-        gtk_box_append(hbox, entry);
-        gtk_box_append(hbox, GTK_WIDGET(button));
-        gtk_box_append(child, GTK_WIDGET(hbox));
-        return GTK_ENTRY(entry);
-    }
 
     static GtkEntry *addEntry(GtkBox *child, const char *id, const char *text, void *subClassObject){
 
