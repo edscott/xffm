@@ -756,7 +756,9 @@ public:
 
       for (auto p=argv; p && *p; p++)fprintf(stderr, "%s "); fprintf(stderr, "\n");
 
-// FIXME: run a "sudo -A modprobe ecryptfs" first
+// FIXME: run a "sudo -A modprobe ecryptfs" first and test for confirm ok, or do not activate
+//                                          the mount button until both greens are set 
+//                                          with no empty string passphrase.
 /* 
       pthread_mutex_lock(&efsMountMutex);
       new Thread("EFS::mountUrl(): cleanup_passfile", cleanup_passfile, (void *) passphraseFile);
