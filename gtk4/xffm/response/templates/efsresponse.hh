@@ -54,13 +54,13 @@ public:
 
      static void *asyncYes(void *data){
       auto dialogObject = (dialog_t *)data;
-      DBG("%s", "hello world\n");
+      TRACE("%s", "hello world\n");
       return NULL;
     }
 
     static void *asyncNo(void *data){
       auto dialogObject = (dialog_t *)data;
-      DBG("%s", "goodbye world\n");
+      TRACE("%s", "goodbye world\n");
       return NULL;
     }
 #if 0
@@ -98,7 +98,7 @@ public:
     }
     
     GtkBox *mainBox(const char *folder) {
-      DBG("efsresponse.hh: mainBox(%s)\n", folder);
+      TRACE("efsresponse.hh: mainBox(%s)\n", folder);
         folder_ = folder? g_strdup(folder) : g_strdup("/");
         //auto dialog = gtk_dialog_new ();
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
@@ -377,7 +377,7 @@ public:
           v[0] = g_strdup(efsOptions);
         }
       }
-      DBG("now at options '%s'\n", efsOptions);
+      TRACE("now at options '%s'\n", efsOptions);
       for (auto p=v; p && *p; p++){
         char **w = NULL;
         char *key = NULL;
@@ -386,10 +386,10 @@ public:
           key = g_strconcat(w[0], "=", NULL);
         }
         auto hbox =  g_object_get_data(G_OBJECT(mainBox_), key? key : *p);
-        DBG("p=%s hbox=%p\n", w? w[0] : *p, hbox); 
+        TRACE("p=%s hbox=%p\n", w? w[0] : *p, hbox); 
         auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(hbox), "entry"));
         auto check = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(hbox), "check"));
-          DBG("efsresponse.hh: hbox=%p, option %s  entry --> %p, check --> %p\n",
+          TRACE("efsresponse.hh: hbox=%p, option %s  entry --> %p, check --> %p\n",
             hbox, *p, entry, check);
         if (check) {
           gtk_check_button_set_active(check, true);
@@ -481,7 +481,7 @@ public:
           g_object_set_data(G_OBJECT(mainBox),options_p->id, hbox);
           if (strlen(options_p->flag)){
               g_object_set_data(G_OBJECT(mainBox),options_p->flag, hbox);
-              DBG("Set hbox %s --> %p\n", options_p->flag, hbox);
+              TRACE("Set hbox %s --> %p\n", options_p->flag, hbox);
           }
         
           const gchar *labelColor = (options_p->sensitive ==0)?"gray":"red";
@@ -662,13 +662,13 @@ public:
         auto efsOptions = getEFSOptions();
         bool ok = true;
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-          Print::printWarning(output_,
+          Print::printWarning(Child::getOutput(),
               g_strconcat(_("Mount Point"), " (", _("Encrypted"), ") ", " \"",path, "\" : ",
                 _("Folder does not exist"), "\n", NULL));
           ok = false;
         }
         if (!g_file_test(mountPoint, G_FILE_TEST_IS_DIR)){
-          Print::printWarning(output_,
+          Print::printWarning(Child::getOutput(),
               g_strconcat(_("Mount Point"), " (", _("Unencrypted"), ") ", " \"",mountPoint, "\" : ",
                 _("Folder does not exist"), "\n", NULL));
           ok = false;
@@ -720,14 +720,14 @@ public:
     button_mount (GtkButton * button, gpointer data) {
       auto subClass = (subClass_t *)data;
       g_object_set_data(G_OBJECT(subClass->dialog()), "response", GINT_TO_POINTER(2));
-      DBG("button_mount...\n");
+      TRACE("button_mount...\n");
       subClass->mount();
       
     }
 
     void mount(void){
        // mount
-      DBG("mount...\n");
+      TRACE("mount...\n");
       auto efsmount = g_find_program_in_path("mount.ecryptfs");
       if (not efsmount){
           ERROR_(g_strdup_printf("%s: mount.ecryptfs\n", strerror(ENOENT)));
@@ -739,7 +739,7 @@ public:
     }
 
     void mountUrl(void){
-      DBG("mountUrl...\n");
+      TRACE("mountUrl...\n");
       
       auto buffer = gtk_entry_get_buffer(this->remoteEntry());
       auto path = gtk_entry_buffer_get_text(buffer);
@@ -750,7 +750,7 @@ public:
       buffer = gtk_entry_get_buffer(passEntrys_[0]);
       auto passphase = g_strdup(gtk_entry_buffer_get_text(buffer));
 
-      DBG("mountUrl: %s -> %s\n", path, mountPoint);
+      TRACE("mountUrl: %s -> %s\n", path, mountPoint);
       const gchar *argv[MAX_COMMAND_ARGS];
       memset((void *)argv, 0, MAX_COMMAND_ARGS*sizeof(const gchar *));
 
@@ -777,7 +777,7 @@ public:
       auto optionsOn = getEFSOptions();
       auto buffer2 = gtk_entry_get_buffer(passEntrys_[0]);
       auto pass = gtk_entry_buffer_get_text(buffer2);
-      auto keyOption = g_strconcat(optionsOn,",key=passphrase:passphrase_passwd=",pass, NULL);
+      auto keyOption = g_strconcat("key=passphrase:passphrase_passwd=",pass, ",",optionsOn,NULL);
       
 
       argv[i++] = "-o";
@@ -788,9 +788,33 @@ public:
       argv[i++] = mountPoint;
       argv[i] = NULL;   
 
-      Print::print(output_, g_strdup_printf(_("Mounting %s"), path));
+      Print::showText(Child::getOutput());
+      Print::print(Child::getOutput(), g_strdup_printf(_("Mounting %s\n"), path));
+/*      auto resultMprobe = Basic::pipeCommandFull("sudo -A modprobe ecryptfs");
+      if (resultMprobe) {
+        DBG("resultMprobe='%s'\n", resultMprobe);
+        Print::print(output_, g_strdup("sudo -A modprobe ecryptfs"));
+        Print::print(output_, resultMprobe);
+      }
+      */
 
-      for (auto p=argv; p && *p; p++)fprintf(stderr, "%s ", *p); fprintf(stderr, "\n");
+
+      char *command = g_strdup("sudo -A modprobe ecryptfs && ");
+      for (auto p=argv; p && *p; p++){
+        Basic::concat(&command, *p);
+        Basic::concat(&command, " ");
+      }
+      TRACE("command='%s'\n", command);
+
+      Run<bool>::thread_run(Child::getOutput(), command, false, false);
+    /*  auto result = Basic::pipeCommandFull(command);
+      if (result) {
+        DBG("Result='%s'\n", result);
+        Print::print(Child::getOutput(), result);
+      }*/
+      g_free(command);
+
+      //for (auto p=argv; p && *p; p++)fprintf(stderr, "%s ", *p); fprintf(stderr, "\n");
 
 // FIXME: run a "sudo -A modprobe ecryptfs" first and test for confirm ok, or do not activate
 //                                          the mount button until both greens are set 
@@ -808,7 +832,7 @@ public:
         execvp(argv[0], (char* const*)argv);
       }
       //new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo, (void *)view);
-      //Run<bool>::thread_run(output_, (const char **)argv, true);
+      //Run<bool>::thread_run(Child::getOutput(), (const char **)argv, true);
 */
 
       // cleanup
@@ -816,85 +840,6 @@ public:
       memset(keyOption, 0, strlen(keyOption));
       g_free(keyOption);
    }
-
-    static void *
-    cleanup_passfile(void * data){
-        auto passfile = (gchar *)data;
-        if (!passfile) return NULL;
-        struct stat st;
-        pthread_mutex_lock(&efsMountMutex);
-
-        gint fd = open(passfile, O_RDWR);
-        if (fd < 0){
-            DBG("Cannot open password file %s to wipeout\n", passfile);
-        } else {
-            gint i;
-            // wipeout
-            for (i=0; i<2048; i++){
-                const gchar *null="";
-                if (write(fd, null, 1) < 0){
-                    break;
-                }
-            }
-            close(fd);
-            if (unlink(passfile)<0) {
-                    DBG("Cannot unlink password file %s\n", passfile);
-            }
-        }
-        memset(passfile, 0, strlen(passfile));
-        g_free(passfile);
-        pthread_mutex_unlock(&efsMountMutex);
-        return NULL;
-    }
-
-    static gchar *
-    get_passfile(char *passphrase){
-      gchar *passfile = NULL;
-
-      gint fd = -1;
-      if (passphrase && strlen(passphrase)){
-          time_t seconds;
-          time (&seconds);
-          gint tried=0;
-    retry:
-          srand ((unsigned)seconds);
-          gint divide = RAND_MAX / 10000;
-          
-          if((seconds = rand () / divide) > 100000L){
-            seconds = 50001;
-          }
-          passfile = g_strdup_printf("%s/.efs-%ld", g_get_home_dir(), (long)seconds);
-          // if the file exists, retry with a different seudo-random number...
-          if (g_file_test(passfile, G_FILE_TEST_EXISTS)){
-            if (seconds > 0) seconds--;
-            else seconds++;
-            if (tried++ < 300) {
-              g_free(passfile);
-              goto retry;
-            } else {
-              g_error("This is a \"a chickpea that weighs a pound\"\n");
-            }
-          }
-         // TRACE("passfile=%s on try %d\n", passfile, try);
-
-          fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR, 0600);
-    //        fd = open (passfile, O_CREAT|O_TRUNC|O_RDWR|O_SYNC|O_DIRECT, 0600);
-          if (fd >= 0) {
-            if (write(fd, (void *)"passwd=", strlen("passwd=")) < 0){
-              DBG("write %s: %s\n", passfile, strerror(errno));
-            }
-            if (write(fd, (void *)passphrase, strlen(passphrase)) < 0){
-              DBG("write %s: %s\n", passfile, strerror(errno));
-            }
-            memset(passphrase, 0, strlen(passphrase));
-            close(fd);
-          } else {
-            DBG("cannot open %s: %s\n", passfile, strerror(errno));
-          }
-
-        }
-        return passfile;
-    }
 
 
   };

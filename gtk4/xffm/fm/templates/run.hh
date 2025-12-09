@@ -156,6 +156,39 @@ public:
         return retval;
 #endif
     }
+   
+    static pid_t 
+    thread_run(GtkTextView *textview, const gchar **arguments){
+        auto command = g_strdup("");
+        auto p = arguments;
+        for (;p && *p; p++){
+            auto g =  g_strdup_printf("%s %s", command, *p);
+            g_free(command);
+            command = g;
+        }
+        TRACE("** command = %s\n", command);
+        int flags = TUBO_EXIT_TEXT|TUBO_VALID_ANSI|TUBO_CONTROLLER_PID;
+
+        pid_t pid = Tubo::Fork (fork_function,(gchar **)arguments,
+                                    NULL, // stdin
+                                    run_operate_stdout_no_echo, // no echo command,
+                                    run_operate_stderr, //stderr_f
+                                    fork_finished_function,
+                                    textview, // 
+                                    flags);
+        pid_t grandchild=Tubo::getChild (pid);
+
+        if (textview) {
+          // no echo command.
+          //Print::showText(textview);
+          //Print::print(textview, EMBLEM_GREEN_BALL, "yellow/black_bg", g_strdup_printf("%d:%s\n", grandchild, command));
+        }
+        g_strstrip(command);
+        push_hash(grandchild, g_strdup(command));
+        TRACE("push hash: \"%s\"\n", command);
+        g_free(command);
+        return pid;
+    }
     
     static pid_t 
     thread_run(GtkTextView *textview, const gchar **arguments, gboolean scrollUp){
@@ -189,7 +222,7 @@ public:
         return pid;
     }
 
-    static pid_t thread_run(GtkTextView *textview, const gchar *command, gboolean scrollUp){
+    static pid_t thread_run(GtkTextView *textview, const gchar *command, bool scrollUp, bool echo){
         GError *error = NULL;
         gint argc;
         gchar **argv;
@@ -216,10 +249,16 @@ public:
             g_free(argv[0]);
             argv[0] = full_path;
         }
-        pid_t pid = thread_run(textview, (const gchar **)argv, scrollUp);
+        pid_t pid;
+        if (echo) pid = thread_run(textview, (const gchar **)argv, scrollUp);
+        else pid = thread_run(textview, (const gchar **)argv);
         
         g_strfreev(argv);
         return pid;
+    }
+
+    static pid_t thread_run(GtkTextView *textview, const gchar *command, gboolean scrollUp){
+      return thread_run(textview, command, scrollUp, true);
     }
 
     static void *thread_f(void *data){
@@ -228,9 +267,19 @@ public:
     static void *wait_f(void *data){
         return NULL;
     }
+    
+    static void
+    run_operate_stdout (void *data, void *stream, int childFD){
+      run_operate_stdout_echo(data, stream, childFD, true);
+    }
+    
+    static void
+    run_operate_stdout_no_echo (void *data, void *stream, int childFD){
+      run_operate_stdout_echo(data, stream, childFD, false);
+    }
 
     static void
-    run_operate_stdout (void *data, void *stream, int childFD) {
+    run_operate_stdout_echo (void *data, void *stream, int childFD, bool echo) {
         GtkTextView *textview = NULL;
         if (!data){
           // no textview...
@@ -277,7 +326,7 @@ public:
         }
         outline[j] = 0;
 
-        if(strncmp (line, exit_token, strlen (exit_token)) == 0) {
+        if(echo && strncmp (line, exit_token, strlen (exit_token)) == 0) {
             gchar *string = exit_string(line);
             Print::print(textview, EMBLEM_RED_BALL, "yellow/black_bg", g_strdup_printf("%s", string));
             g_free(string);
@@ -299,6 +348,7 @@ public:
         }
         return;
     }
+
     static void
     run_operate_stderr (void *data, void *stream, int childFD) {
         GtkTextView *textview;
