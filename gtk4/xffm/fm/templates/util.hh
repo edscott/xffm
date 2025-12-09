@@ -19,6 +19,7 @@ namespace xf {
     }
     CSS::init();
     
+      TRACE("Basic::context_function for reloadAll_f\n");
     Basic::context_function(reloadAll_f, NULL);
     
     return;
@@ -43,6 +44,7 @@ namespace xf {
         snprintf(buffer, 32, "#%02x%02x%02x", red, green, blue);
         Settings::setString("xfterm", item, buffer);
         CSS::init();
+      TRACE("Basic::context_function for reloadAll_f\n");
         Basic::context_function(reloadAll_f, NULL);
       } else {
         TRACE("No color selected.\n");

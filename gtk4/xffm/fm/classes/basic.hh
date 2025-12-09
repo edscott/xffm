@@ -1118,6 +1118,7 @@ private:
         *result_p = result;
         pthread_cond_signal(signal);
         pthread_mutex_unlock(mutex);
+        DBG("context function result= %p (should be NULL)\n");
         return FALSE;
     }
     static char

@@ -12,11 +12,13 @@ namespace xf {
 public:
 
     EFS(GtkWindow *parent, const char *folder){
+      DBG("EFS no load\n");
       auto dialogObject = new complexDialog_t(parent, folder);
     
     }
 
     EFS(GtkWindow *parent, const char *path, bool load){
+      DBG("EFS load\n");
       auto keyfile = getKeyfile();
       auto dialogObject = new complexDialog_t(parent, path);
       auto mountPoint = g_key_file_get_string(keyfile, path, "mountPoint", NULL);

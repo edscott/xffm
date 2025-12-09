@@ -55,6 +55,7 @@ namespace xf {
     static void clearText(GtkTextView *textview){
       if (!textview) return;
       void *arg[]={(void *)textview, NULL};
+      TRACE("Basic::context_function for clear_text_buffer_f\n");
       Basic::context_function(clear_text_buffer_f, arg);
     }
     static void clearText(void){
@@ -69,6 +70,7 @@ namespace xf {
         if (!textview) return;
         auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(textview), "vpane"));
         void *arg[]={(void *)vpane, NULL, NULL, NULL, NULL};
+      TRACE("Basic::context_function for show_text_buffer_f\n");
         Basic::context_function(show_text_buffer_f, arg);
     }
 
@@ -107,6 +109,7 @@ namespace xf {
     static void print(GtkTextView *textview, const gchar *tag, gchar *string){
         if (!textview) return;
         void *arg[]={(void *)textview, (void *)tag, (void *)string};
+      TRACE("Basic::context_function for print_f\n");
         Basic::context_function(print_f, arg);
         g_free(string);
     }
@@ -136,6 +139,7 @@ private:
         if (!textview) return;
         auto icon = Texture<bool>::load16(iconname);
         void *arg[]={(void *)icon, (void *)textview, (void *)tag, (void *)string};
+      TRACE("Basic::context_function for print_i\n");
         Basic::context_function(print_i, arg);
         g_free(string);
     }

@@ -59,6 +59,7 @@ public:
 
     static void *mop(void *data){
         sleep(1);
+      TRACE("Basic::context_function for mop_f\n");
         Basic::context_function(mop_f, data);
       return NULL;
     }
@@ -278,7 +279,9 @@ private:
       auto c = (ClipBoard<Type> *)data;
       while (c->clipBoardSemaphore()){// data is semaphore to thread
           usleep(250000);
-          Basic::context_function(clipboardContextF, c);
+      TRACE("Basic::context_function for clipboardContextF\n");
+//#warning "clipboardContextF is disabled"
+          //Basic::context_function(clipboardContextF, c);
       }
       TRACE("*** clipboard thread exited.\n")
       return NULL;

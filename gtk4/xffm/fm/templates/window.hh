@@ -211,7 +211,7 @@ private:
               gdouble x,
               gdouble y,
               void *data){
-      DBG("hidePopover: %p\n", currentPopover);
+      TRACE("hidePopover: %p\n", currentPopover);
       if (!currentPopover) return false;
       MainMenu<Type>::closePopover(currentPopover);
       currentPopover = NULL;
@@ -360,6 +360,7 @@ private:
 
         Workdir<Type>::setWorkdir(path);
 
+      TRACE("Basic::context_function for resetPosition\n");
         Basic::context_function(resetPosition, arg);
         g_free(arg[0]);
         g_free(arg[1]);
@@ -375,6 +376,7 @@ public:
         c->conditionWait();
         TRACE("Go ahead condition received.\n");
         
+      TRACE("Basic::context_function for reloadIt\n");
         Basic::context_function(reloadIt, data);
         return NULL;
       }

@@ -162,6 +162,7 @@ private:
         // processed by the gtk loop. This to avoid a race with the command_ completing
         // before gtk has fully created the little run button.
         //
+      TRACE("Basic::context_function for make_run_data_button\n");
         Basic::context_function(make_run_data_button, data);
         TRACE("run_wait_f: thread waitpid for %d on (%s/%s)\n", 
                 run_button_p->pid(), 
@@ -187,6 +188,7 @@ private:
         fflush(NULL);  
         // Destroy little button (if exists) and free run_data_p 
         // associated memory. Done in main thread for gtk instruction set.
+      TRACE("Basic::context_function for zap_run_button\n");
         Basic::context_function(zap_run_button, data);
         return NULL;
     }

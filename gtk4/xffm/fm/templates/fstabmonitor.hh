@@ -30,7 +30,7 @@ public:
     FstabMonitor(GridView<LocalDir> *gridview)
     {   
         path_ = g_strdup(gridview->path());
-        TRACE("*** fstab_monitor started for LocalDir %s\n", path_);
+        DBG("*** fstab_monitor started for LocalDir %s\n", path_);
         gridView_ = gridview;   
         setMountArg();
 
@@ -43,7 +43,7 @@ public:
     FstabMonitor(GridView<FstabDir> *gridview)
     {   
         path_ = g_strdup(gridview->path());
-        TRACE("*** fstab_monitor started for LocalDir %s\n", path_);
+        DBG("*** fstab_monitor started for LocalDir %s\n", path_);
         gridView_ = gridview;       
         setMountArg();
 
@@ -56,7 +56,7 @@ public:
     ~FstabMonitor(void){
         // stop mountThread (if still running)
         stopMonitor();
-        TRACE("fstab monitor cancelled for %s\n", path_);
+        DBG("*** fstab monitor cancelled for %s\n", path_);
         //sleep(1);
         g_free(path_);
         // go ahead for mountThread to cleanup.
@@ -165,13 +165,14 @@ private:
       auto file = Basic::getGfile(info);
       void *arg[] = {(void *)monitorObject, (void *)file, NULL};
       TRACE("thread send signal %s\n", Basic::getPath(info));
+      DBG("Basic::context_function for sendSignal_f\n");
       Basic::context_function(sendSignal_f, arg);
     }
 
     static bool update_f(GridView<LocalDir> *gridView_p, GFileInfo *info, 
                            const char *path,
                            GHashTable * mntHash, GHashTable * fstabHash){
-      TRACE("*** update_f: %s\n", path);
+      DBG("*** update_f: %s\n", path);
         GFileInfo *updateInfo = NULL;
         if (FstabUtil::isMounted(path) && !g_hash_table_lookup(mntHash, path)){
           TRACE("update icon for mounted %s\n", path);
@@ -203,7 +204,9 @@ private:
 
     static bool checkSumMnt(char **sum){
       char *newSum = Basic::md5sum("/proc/mounts");
+        TRACE("md5sum compare %s / %s\n", *sum, newSum);
       if (strcmp(newSum, *sum)) {
+        DBG("md5sum mismatch %s / %s\n", *sum, newSum);
         g_free(*sum);
         *sum = newSum;
         return true;
@@ -256,7 +259,7 @@ private:
         auto monitorObject = (FstabMonitor<LocalDir> *)arg[0];
         auto gridView_p = monitorObject->gridView();
 
-        TRACE("***mountThreadF1 for gridview_p %p\n", gridView_p);
+        DBG("***mountThreadF1 for gridview_p %p\n", gridView_p);
         // get initial md5sum
         char *sum = Basic::md5sum("/proc/mounts");
         char *sumPartitions = Basic::md5sum("/proc/partitions");
@@ -266,7 +269,7 @@ private:
             g_free(sumPartitions);
             return NULL;
         }
-        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
+        DBG("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
     
         while (arg[1]){
@@ -274,12 +277,13 @@ private:
           if (!arg[1])continue;
           if (!checkSumMnt(&sum)) continue;    
           // This is sent to main context to avoid race with gridview invalidation.
+      DBG("Basic::context_function for contextMonitor\n");
           if (Basic::context_function(contextMonitor, data) != NULL) break;
         }
         g_free(sum);
         g_free(sumPartitions);
         arg[2] = GINT_TO_POINTER(1);
-        TRACE("******* mountThreadF1 all done for gridview %p.\n", gridView_p);
+        DBG("*** mountThreadF1 all done for gridview %p.\n", gridView_p);
         return NULL;
     }
 
@@ -296,7 +300,7 @@ private:
         auto monitorObject = (FstabMonitor<FstabDir> *)arg[0];
         auto gridView_p = monitorObject->gridView();
 
-        TRACE("***mountThreadF2 for gridview_p %p\n", gridView_p);
+        DBG("***mountThreadF2 for gridview_p %p\n", gridView_p);
         // get initial md5sum
         char *sum = Basic::md5sum("/proc/mounts");
         char *sumPartitions = Basic::md5sum("/proc/partitions");
@@ -338,6 +342,7 @@ private:
               break;
             }
             Child::unlockGridView();
+      DBG("Basic::context_function for reload_f (fstab)\n");
 
             Basic::context_function(reload_f, (void *)"Disk Mounter");
             // After reload, gridView ceases to be valid.
@@ -349,7 +354,7 @@ private:
         g_hash_table_destroy(mntHash);
         g_hash_table_destroy(fstabHash);
         arg[2] = GINT_TO_POINTER(1);
-        TRACE("******* mountThreadF2 all done for gridview %p.\n", gridView_p);
+        DBG("*** mountThreadF2 all done for gridview %p.\n", gridView_p);
         return NULL;
     }
 
