@@ -17,8 +17,9 @@ namespace xf {
    const char *iconName_;
    GtkEntry *remoteEntry_ = NULL;
    GtkEntry *mountPointEntry_ = NULL;
-   GtkEntry *passphaseEntry_ = NULL;
-   GtkBox *passphaseBox_ = NULL;
+   GtkEntry *passEntrys_[2];
+   GtkEntry *pathEntrys_[2];
+   GtkBox *passphraseBox_ = NULL;
    char *folder_ = NULL;
    GtkTextView *output_;
    GList *children_ = NULL; 
@@ -34,9 +35,6 @@ public:
     const char *label(void){return "xffm::efs";}
     GtkEntry *remoteEntry(void){return remoteEntry_;}
     GtkEntry *mountPointEntry(void){return mountPointEntry_;}
-    GtkEntry *passphaseEntry(void){return passphaseEntry_;}
-    void passphaseEntry(GtkEntry *value){passphaseEntry_ = value;}
-    GtkBox *passphaseBox(void){return passphaseBox_;}
     char *folder(){return  folder_;}
     void folder(const char *value){folder_ = g_strdup(value);}
 
@@ -154,16 +152,24 @@ public:
 
         // mount child
         auto encrypted = g_strconcat(_("Mount Point"), " (", _("Encrypted"), "): ",NULL);
-        remoteEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "FUSE_REMOTE_PATH", encrypted, this);
+        pathEntrys_[0] = remoteEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "FUSE_REMOTE_PATH", encrypted, this);
         g_free(encrypted);
-        //gtk_widget_set_sensitive(GTK_WIDGET(remoteEntry_), true); // FIXME: put to false 
 
         auto unencrypted = g_strconcat(_("Mount Point"), " (", _("Unencrypted"), "): ",NULL);
-        mountPointEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "FUSE_MOUNT_POINT", unencrypted, this);
+        pathEntrys_[1] = mountPointEntry_ = FileResponse<Type, subClass_t>::addEntry(child1, "FUSE_MOUNT_POINT", unencrypted, this);
 //        mountPointEntry_ = addEntry(child1, "entry2", unencrypted);
         g_free(unencrypted);
+        
+        for (int i=0; i<2; i++){
+          auto keyController = gtk_event_controller_key_new();
+          gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_BUBBLE);
+          gtk_widget_add_controller(GTK_WIDGET(pathEntrys_[i]), keyController);
+          g_signal_connect (G_OBJECT (keyController), "key-released", 
+          G_CALLBACK (on_keypress0), (void *)this);
+        }
 
-        passphaseBox_ = addEntryPass(child1);
+        passphraseBox_ = addEntryPass(child1);
+        gtk_widget_set_visible(GTK_WIDGET(passphraseBox_), false);
 
         auto sw = gtk_scrolled_window_new();
         gtk_box_append(child1, GTK_WIDGET(sw));
@@ -201,52 +207,17 @@ public:
         mountButton_ = UtilBasic::mkButton ("emblem-greenball", _("Mount"));
         gtk_box_append (GTK_BOX (action_area), GTK_WIDGET(mountButton_));
         g_signal_connect (G_OBJECT (mountButton_), "clicked", G_CALLBACK (button_mount), this);
-        gtk_widget_set_visible(GTK_WIDGET(mountButton_), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(mountButton_), false);
          
 
 
         g_signal_connect (G_OBJECT (saveButton_), "clicked", G_CALLBACK (button_save), this);
         g_signal_connect (G_OBJECT (cancelButton_), "clicked", G_CALLBACK (button_cancel), this);
 
-        // FIXME: 
-/*
-        this->setUrlTemplate("efs");
-        TRACE("EFS constructor entries\n");
-        remoteEntry_ = this->addEntry(EFS_REMOTE_PATH, "FUSE_REMOTE_PATH");
-        mountPointEntry_ = this->addEntry(FUSE_MOUNT_POINT, "FUSE_MOUNT_POINT");
-        //this->addEntry(ECRYPTFS_SIG, "ECRYPTFS_SIG", FALSE);
-        urlEntry_ = this->addEntry(FUSE_URL, "FUSE_URL", FALSE);
-
-        auto entryBuffer = gtk_entry_get_buffer (remoteEntry_);
-        g_signal_connect(G_OBJECT(entryBuffer), "inserted-text", G_CALLBACK(updateUrl), this);
-        g_signal_connect(G_OBJECT(entryBuffer), "inserted-text", G_CALLBACK(activateButtons), this);
-        entryBuffer = gtk_entry_get_buffer (mountPointEntry_);
-        g_signal_connect(G_OBJECT(entryBuffer), "inserted-text", G_CALLBACK(activateButtons), this);
-
-        gtk_widget_set_sensitive(GTK_WIDGET(this->saveButton()), FALSE);
-        gtk_widget_set_sensitive(GTK_WIDGET(this->mountButton()), FALSE);
-
-        TRACE("EFS constructor checkboxes\n");
-
-        this->getScrolledWindow(mount_options, _("Options"), 6 );
-        this->getScrolledWindow(efs_options, _("Advanced"), 12);
-
-        if (path) setOptions(path);
- */       
-        /*
-        g_signal_connect (G_OBJECT (dialog), "delete-event", G_CALLBACK (response_delete), this);
-        gtk_window_set_resizable (GTK_WINDOW(dialog), TRUE);
-
-        response_ = GTK_RESPONSE_CANCEL;
-
-        MainDialog = GTK_WINDOW(dialog);
-        TRACE("efs main dialog = %p.\n", MainDialog);
-        */
-        return mainBox_;
+         return mainBox_;
     }
   
     GtkBox *addEntryPass(GtkBox *child){
-// FIXME: add key controller to entries to turn redball/greenball on/off
       TRACE("***subClassObject-Folder=%s\n", folder());
         auto vbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(vbox), false);
@@ -254,7 +225,6 @@ public:
 
         GtkBox *hbox[2];
         GtkWidget *label[2];
-        GtkWidget *entry[2];
         GtkImage *red[2];
         GtkImage *green[2];
         const char *text[]={_("Passphrase"), _("Confirm"), NULL};
@@ -264,27 +234,93 @@ public:
           gtk_widget_set_hexpand(GTK_WIDGET(hbox[i]), true);
           label[i] = gtk_label_new(text[i]);
           gtk_widget_set_hexpand(GTK_WIDGET(label[i]), false);
-          entry[i] = gtk_entry_new();
-          gtk_widget_set_hexpand(entry[i], true);
-          g_object_set_data(G_OBJECT(child), text[i], entry[i]);
+          passEntrys_[i] = GTK_ENTRY(gtk_entry_new());
+          gtk_widget_set_hexpand(GTK_WIDGET(passEntrys_[i]), true);
 
           red[i] = Texture<bool>::getImage(EMBLEM_RED_BALL, 16);
           green[i] = Texture<bool>::getImage(EMBLEM_GREEN_BALL, 16);       
-          g_object_set_data(G_OBJECT(entry[i]), "red", red[i]);
-          g_object_set_data(G_OBJECT(entry[i]), "green", green[i]);
+          g_object_set_data(G_OBJECT(passEntrys_[i]), "red", red[i]);
+          g_object_set_data(G_OBJECT(passEntrys_[i]), "green", green[i]);
           gtk_box_append(hbox[i], label[i]);
-          gtk_box_append(hbox[i], entry[i]);
+          gtk_box_append(hbox[i], GTK_WIDGET(passEntrys_[i]));
           gtk_box_append(hbox[i], GTK_WIDGET(red[i]));
           gtk_box_append(hbox[i], GTK_WIDGET(green[i]));
           gtk_box_append(vbox, GTK_WIDGET(hbox[i]));
+          gtk_widget_set_visible(GTK_WIDGET(red[i]), true);
           gtk_widget_set_visible(GTK_WIDGET(green[i]), false);
-        //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(FileResponse_t::getDirectory), subClassObject);
-          gtk_entry_set_visibility (GTK_ENTRY(entry[i]), false);
+          gtk_entry_set_visibility (GTK_ENTRY(passEntrys_[i]), false);
           gtk_box_append(vbox, GTK_WIDGET(hbox[i]));
+
+          auto keyController = gtk_event_controller_key_new();
+          gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_BUBBLE);
+          gtk_widget_add_controller(GTK_WIDGET(passEntrys_[i]), keyController);
+          g_signal_connect (G_OBJECT (keyController), "key-released", 
+          G_CALLBACK (this->on_keypress), (void *)this);
         }
-        passphaseEntry(GTK_ENTRY(entry[0]));
         gtk_box_append(child, GTK_WIDGET(vbox));
         return vbox;
+    }
+    
+    static gboolean
+    on_keypress (GtkEventControllerKey* self,
+          guint keyval,
+          guint keycode,
+          GdkModifierType state,
+          gpointer data){
+      auto object = (EfsResponse *)data;
+      object->checkPass();
+      return FALSE;
+    }
+    
+    static gboolean
+    on_keypress0 (GtkEventControllerKey* self,
+          guint keyval,
+          guint keycode,
+          GdkModifierType state,
+          gpointer data){
+      auto object = (EfsResponse *)data;
+      object->checkPaths();
+      return FALSE;
+    }
+
+    void checkPass(void){
+      bool result = false;
+      const char *text[2];
+      for (int i=0; i<2; i++) {
+        auto buffer = gtk_entry_get_buffer(passEntrys_[i]);
+        text[i] = gtk_entry_buffer_get_text(buffer);
+      }
+      if (strlen(text[0]) && strcmp(text[0], text[1]) == 0) result = true;
+      if (result){
+        gtk_widget_set_sensitive(GTK_WIDGET(mountButton_), true);
+        for (int i=0; i<2; i++){
+          gtk_widget_set_visible(GTK_WIDGET(g_object_get_data(G_OBJECT(passEntrys_[i]),"red")), false);
+          gtk_widget_set_visible(GTK_WIDGET(g_object_get_data(G_OBJECT(passEntrys_[i]),"green")), true);
+        }
+
+      } else {
+        gtk_widget_set_sensitive(GTK_WIDGET(mountButton_), false);
+        for (int i=0; i<2; i++){
+          gtk_widget_set_visible(GTK_WIDGET(g_object_get_data(G_OBJECT(passEntrys_[i]),"red")), true);
+          gtk_widget_set_visible(GTK_WIDGET(g_object_get_data(G_OBJECT(passEntrys_[i]),"green")), false);
+        }
+      }
+    }
+
+    void checkPaths(void){
+      bool result = false;
+      const char *text[2];
+      for (int i=0; i<2; i++) {
+        auto buffer = gtk_entry_get_buffer(pathEntrys_[i]);
+        text[i] = gtk_entry_buffer_get_text(buffer);
+      }
+      if (g_file_test(text[0], G_FILE_TEST_IS_DIR) && 
+          g_file_test(text[1], G_FILE_TEST_IS_DIR)) result = true;
+      if (result){
+        gtk_widget_set_visible(GTK_WIDGET(passphraseBox_), true);
+      } else {
+        gtk_widget_set_visible(GTK_WIDGET(passphraseBox_), false);
+      }
     }
 
     void setup(const char *path, 
@@ -366,9 +402,9 @@ public:
         if (key) g_free(key);
       }
       if (v) g_strfreev(v);
-
-      gtk_widget_set_visible(GTK_WIDGET(mountButton_), true);
-
+      gtk_widget_set_sensitive(GTK_WIDGET(mountButton_), false);
+      gtk_widget_set_visible(GTK_WIDGET(passphraseBox_), true);
+      
       return;
     }
 
@@ -711,7 +747,7 @@ public:
       buffer = gtk_entry_get_buffer(this->mountPointEntry());
       auto mountPoint = gtk_entry_buffer_get_text(buffer);
 
-      buffer = gtk_entry_get_buffer(this->passphaseEntry());
+      buffer = gtk_entry_get_buffer(passEntrys_[0]);
       auto passphase = g_strdup(gtk_entry_buffer_get_text(buffer));
 
       DBG("mountUrl: %s -> %s\n", path, mountPoint);
@@ -739,9 +775,9 @@ public:
       argv[i++] = "ecryptfs";
         
       auto optionsOn = getEFSOptions();
-      auto buffer2 = gtk_entry_get_buffer(this->passphaseEntry());
-      auto keyOption = g_strconcat(optionsOn,",key=passphrase:passphrase_passwd=",
-          gtk_entry_buffer_get_text(buffer2));
+      auto buffer2 = gtk_entry_get_buffer(passEntrys_[0]);
+      auto pass = gtk_entry_buffer_get_text(buffer2);
+      auto keyOption = g_strconcat(optionsOn,",key=passphrase:passphrase_passwd=",pass, NULL);
       
 
       argv[i++] = "-o";
@@ -754,7 +790,7 @@ public:
 
       Print::print(output_, g_strdup_printf(_("Mounting %s"), path));
 
-      for (auto p=argv; p && *p; p++)fprintf(stderr, "%s "); fprintf(stderr, "\n");
+      for (auto p=argv; p && *p; p++)fprintf(stderr, "%s ", *p); fprintf(stderr, "\n");
 
 // FIXME: run a "sudo -A modprobe ecryptfs" first and test for confirm ok, or do not activate
 //                                          the mount button until both greens are set 
