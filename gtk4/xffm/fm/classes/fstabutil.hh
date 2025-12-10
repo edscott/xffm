@@ -314,7 +314,7 @@ class FstabUtil {
                 if((mnt_point && strcmp (m->mnt_dir, mnt_point) == 0) || 
                    (mnt_point && strcmp (m->mnt_fsname, mnt_point) == 0)) {
                    //(mnt_fsname && strcmp (m->mnt_fsname, mnt_fsname) == 0)) {
-                    TRACE("%s ..isMounted(): mnt_dir=%s  mnt_fsname=%s mnt_point=%s\n", 
+                    TRACE("*** %s ..isMounted(): mnt_dir=%s  mnt_fsname=%s mnt_point=%s\n", 
                             *pfile, m->mnt_dir, m->mnt_fsname, mnt_point);
                     endmntent (tab_file);
                     g_free(mnt_point);
@@ -414,6 +414,59 @@ class FstabUtil {
         }
         g_free(mnt_device);
         return NULL;
+    }
+
+  public:
+
+    static GHashTable *createMountHash(void){
+      FILE *tab_file;
+      struct mntent *m;
+      GHashTable *hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+        const gchar *mfile[]={"/proc/mounts", "/etc/mtab", NULL};
+        const gchar **pfile;
+        for (pfile=mfile; pfile && *pfile; pfile++){
+            if((tab_file = fopen (*pfile, "r")) == NULL) {
+                ERROR_("%s: %s\n", strerror(ENOENT), *pfile);
+                continue;
+            }
+            fclose(tab_file);
+            tab_file = setmntent (*pfile, "r");
+
+            if(!tab_file) {
+                perror ("setmntent:");
+                return FALSE;
+            }
+            struct mntent mntbuf;
+            gchar buf[2048]; 
+            while ((m = getmntent_r (tab_file, &mntbuf, buf, 2048)) != NULL) {        
+                if (!g_hash_table_lookup(hash, m->mnt_dir)) {
+                  g_hash_table_insert(hash, g_strdup(m->mnt_dir), GINT_TO_POINTER(1));
+                  TRACE("hashed :%s\n", m->mnt_dir);
+                }
+                if (!g_hash_table_lookup(hash, m->mnt_fsname)) {
+                  g_hash_table_insert(hash, g_strdup(m->mnt_fsname), GINT_TO_POINTER(1));
+                  TRACE("hashed :%s\n", m->mnt_fsname);
+                }
+            }
+            endmntent (tab_file);
+        }
+        return hash;
+    }
+
+    static GHashTable *createLocalMountHash(const char *folder){
+      GHashTable *hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+      // read directory
+      GDir *dir = g_dir_open(folder, 0, NULL);
+      if (!dir) return NULL;
+      const char *name;
+      // for all items, if in mountHash, add to mountHash_
+      while (name = g_dir_read_name(dir)) {
+        auto path = g_strconcat(folder, G_DIR_SEPARATOR_S, name);
+        if (g_hash_table_lookup(hash, path)) g_hash_table_insert(hash, path, GINT_TO_POINTER(1));
+        else g_free(path);
+      }
+      g_dir_close(dir);
+      return hash;
     }
 
 };

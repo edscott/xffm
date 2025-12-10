@@ -80,6 +80,13 @@ template <class Type>
 
       
   public:
+      const char *path(void){ return (const char *)path_;}
+      GtkWidget *child(void){return child_;}
+      GtkMultiSelection *multiSelectionModel(void){ return selectionModel_;}
+      GtkSelectionModel *selectionModel(void){ return GTK_SELECTION_MODEL(selectionModel_);}
+      GtkWidget *view(void){ return view_;}
+      void *gridViewClick_f(void){ return gridViewClick_f_;}
+
       //bool dndOn = false;
       GridView(const char *path, void *gridViewClick_f){
         Child::addGridView((void *)this);
@@ -152,14 +159,6 @@ template <class Type>
         g_object_set_data(store, "child", child_);
       }
 
-      GtkWidget *child(void){return child_;}
-      //void setMenu(GtkPopover *menu){ menu_ = menu;}
-      GtkMultiSelection *multiSelectionModel(void){ return selectionModel_;}
-      GtkSelectionModel *selectionModel(void){ return GTK_SELECTION_MODEL(selectionModel_);}
-      //GtkPopover *menu(void){ return menu_;}
-      GtkWidget *view(void){ return view_;}
-      void *gridViewClick_f(void){ return gridViewClick_f_;}
-      char *path(void){ return path_;}
 
       
   private:

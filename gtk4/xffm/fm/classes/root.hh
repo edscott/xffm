@@ -69,7 +69,7 @@ namespace xf {
         auto keyfile = items? EFS<bool>::getKeyfile() : NULL;
         for (auto p=items; p && *p; p++){
           if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
-      DBG("root.hh:: adding efs entry '%s'\n", *p);
+      TRACE("root.hh:: adding efs entry '%s'\n", *p);
           GFile *file = g_file_new_for_path(*p);
           auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           //auto gIcon = g_file_info_get_icon(info);

@@ -150,7 +150,7 @@ main (int argc, const char *argv[], const char *envp[]) {
 #warning "Translations not enabled."
 #endif
 
-      
+
   XInitThreads();
   if (strstr(argv[0], "xfgetpass")){
       xf::PasswordResponse::sendPassword(argv);

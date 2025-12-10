@@ -18,24 +18,34 @@ class FstabMonitor {
   void **mountArg_ = NULL; 
   char *path_;
   GridView<Type> *gridView_ = NULL;
+  GHashTable *mountHash_ = NULL;
 
 public:    
   GridView<Type> *gridView(void){ 
     return gridView_;
   }
+  GHashTable *mountHash(void){return mountHash_;}
   //pthread_cond_t *condition() {return &waitCondition_;}
   //pthread_mutex_t *mutex() {return &waitMutex_;}
   //pthread_mutex_t *endMutex() {return &endMutex_;}
 
+
     FstabMonitor(GridView<LocalDir> *gridview)
     {   
+        mountHash_ = xf::FstabUtil::createMountHash();    
         path_ = g_strdup(gridview->path());
-        DBG("*** fstab_monitor started for LocalDir %s\n", path_);
+        TRACE("*** fstab_monitor started for LocalDir %s\n", path_);
         gridView_ = gridview;   
-        setMountArg();
+
+        mountArg_ = (void **)calloc(3, sizeof(void *));
+        mountArg_[0] = (void *) this;
+        mountArg_[1] = (void *) gridView_;
+        mountArg_[2] = GINT_TO_POINTER(TRUE);
+
 
         pthread_t thread;
       Thread::threadCount(true,  &thread, "FstabMonitor");
+//        pthread_create(&thread, NULL, waitThread1, (void *)mountArg_);
         pthread_create(&thread, NULL, mountThreadF1, (void *)mountArg_);
         pthread_detach(thread);
       Thread::threadCount(false,  &thread, "FstabMonitor");
@@ -43,7 +53,7 @@ public:
     FstabMonitor(GridView<FstabDir> *gridview)
     {   
         path_ = g_strdup(gridview->path());
-        DBG("*** fstab_monitor started for LocalDir %s\n", path_);
+        TRACE("*** fstab_monitor started for LocalDir %s\n", path_);
         gridView_ = gridview;       
         setMountArg();
 
@@ -56,7 +66,7 @@ public:
     ~FstabMonitor(void){
         // stop mountThread (if still running)
         stopMonitor();
-        DBG("*** fstab monitor cancelled for %s\n", path_);
+        TRACE("*** fstab monitor cancelled for %s\n", path_);
         //sleep(1);
         g_free(path_);
         // go ahead for mountThread to cleanup.
@@ -65,7 +75,8 @@ public:
         pthread_create(&thread, NULL, cleanup, mountArg_);
         pthread_detach(thread);
       Thread::threadCount(false,  &thread, "~FstabMonitor");
-        TRACE("FstabMonitor: destructor done...\n");        
+        TRACE("FstabMonitor: destructor done...\n");    
+      if (mountHash_) g_hash_table_destroy( mountHash_);  
     }
     static void *cleanup(void *data){
       TRACE("FstabMonitor cleanup thread...\n");        
@@ -140,8 +151,8 @@ private:
       return hash;
     }
 
-
-    static void *sendSignal_f(void *data){
+#if 0
+/*    static void *sendSignal_f(void *data){
        TRACE( "sendSignal_f\n");
        auto arg = (void **)data;
        auto monitorObject = (FstabMonitor<LocalDir> *)arg[0];
@@ -153,44 +164,53 @@ private:
        g_file_monitor_emit_event (monitor,
                    file, NULL, G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED);
        return NULL;
-    }
+    }*/
 
     static void sendSignal(FstabMonitor<LocalDir> *monitorObject, GFileInfo *info){
+      // This is already running in context mode.
       if (!monitorObject->gridView()->monitor()){ 
         ERROR_("no fstab monitor active.\n");
         //pthread_mutex_unlock(monitorObject->mutex());
         return;
       }
-      
+      auto monitor = (GFileMonitor *)monitorObject->gridView()->monitor();
+      auto file = Basic::getGfile(info);
+      g_file_monitor_emit_event (monitor,
+                   file, NULL, G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED);
+    /*  
       auto file = Basic::getGfile(info);
       void *arg[] = {(void *)monitorObject, (void *)file, NULL};
       TRACE("thread send signal %s\n", Basic::getPath(info));
-      DBG("Basic::context_function for sendSignal_f\n");
-      Basic::context_function(sendSignal_f, arg);
+      TRACE("Basic::context_function for sendSignal_f\n");
+      Basic::context_function(sendSignal_f, arg);*/
     }
+#endif
 
     static bool update_f(GridView<LocalDir> *gridView_p, GFileInfo *info, 
                            const char *path,
                            GHashTable * mntHash, GHashTable * fstabHash){
-      DBG("*** update_f: %s\n", path);
+      bool isInMountHash = GPOINTER_TO_INT(g_hash_table_lookup(mntHash, path));
+      bool isMounted = FstabUtil::isMounted(path);
+
+      TRACE("*** update_f: %s isMounted=%d isInMountHash=%d\n", path);
         GFileInfo *updateInfo = NULL;
-        if (FstabUtil::isMounted(path) && !g_hash_table_lookup(mntHash, path)){
-          TRACE("update icon for mounted %s\n", path);
+        if (isMounted && !isInMountHash){
+          TRACE("update_f:update icon for mounted %s\n", path);
           g_hash_table_insert(mntHash, g_strdup(path), GINT_TO_POINTER(1));
           updateInfo = info;
         }
-        else if (!FstabUtil::isMounted(path) &&  g_hash_table_lookup(mntHash, path)){
-          TRACE("update icon for unmounted %s\n", path);
+        else if (!isMounted && isInMountHash){
+          TRACE("update_f:update icon for unmounted %s\n", path);
           g_hash_table_remove(mntHash, path);
-
           updateInfo = info;
         }
-        else if (FstabUtil::isInFstab(path) && !g_hash_table_lookup(fstabHash, path)){
+
+        else if (fstabHash && FstabUtil::isInFstab(path) && !g_hash_table_lookup(fstabHash, path)){
           g_hash_table_insert(fstabHash, g_strdup(path), GINT_TO_POINTER(1));
           TRACE("update icon for removed from fstab %s\n", path);
           updateInfo = info;
         }
-        else if (!FstabUtil::isInFstab(path) && g_hash_table_lookup(fstabHash, path)){
+        else if (fstabHash && !FstabUtil::isInFstab(path) && g_hash_table_lookup(fstabHash, path)){
           g_hash_table_remove(fstabHash, path);
           TRACE("update icon for added to fstab %s\n", path);
           updateInfo = info;
@@ -206,7 +226,7 @@ private:
       char *newSum = Basic::md5sum("/proc/mounts");
         TRACE("md5sum compare %s / %s\n", *sum, newSum);
       if (strcmp(newSum, *sum)) {
-        DBG("md5sum mismatch %s / %s\n", *sum, newSum);
+        TRACE("md5sum mismatch %s / %s\n", *sum, newSum);
         g_free(*sum);
         *sum = newSum;
         return true;
@@ -228,13 +248,19 @@ private:
  
 
     static void *contextMonitor(void *data){
-        auto monitorObject = (FstabMonitor<LocalDir> *)data;
-        auto gridView_p = monitorObject->gridView();
-        if (!Child::validGridView(gridView_p)) return GINT_TO_POINTER(1);
+        void **arguments = (void **)data;
+        TRACE("*** now at contextMonitor arg[0]=%p arg[1]=%p\n",arguments[0],arguments[1]); 
+        auto monitorObject = (FstabMonitor<LocalDir> *)arguments[0];
+        //auto monitorObject = (FstabMonitor<LocalDir> *)data;
+        auto gridView_p =(GridView<LocalDir> *)arguments[1];
+        if (!Child::validGridView(gridView_p)) {
+          TRACE("*** contextMonitor: %p is not valid gridview\n", gridView_p); 
+          return GINT_TO_POINTER(1);
+        }
 
         auto mntHash = getMntHash(gridView_p);
-        auto fstabHash = getFstabHash(gridView_p);
-        //auto selectionModel = gridView_p->selectionModel();
+        //auto fstabHash = getFstabHash(gridView_p);
+        GHashTable *fstabHash = NULL;
 
         auto listModel = gridView_p->listModel();
         auto items = g_list_model_get_n_items (listModel);
@@ -242,34 +268,56 @@ private:
             auto info = G_FILE_INFO(g_list_model_get_item(listModel, i)); // GFileInfo
             auto path = Basic::getPath(info);
             if (!g_file_test(path, G_FILE_TEST_IS_DIR)) continue;
-            if (update_f(gridView_p, info, path, mntHash, fstabHash)){
-              sendSignal(monitorObject, info);
+            if (update_f(gridView_p, info, path, monitorObject->mountHash(), NULL)){
+              monitorObject->updateItem(gridView_p, path);
+              // gtk4 broke this: sendSignal(monitorObject, info);
             } 
             g_free(path);
         }
-        g_hash_table_destroy(mntHash);
-        g_hash_table_destroy(fstabHash);
-        return NULL;
+        if (mntHash) g_hash_table_destroy(mntHash);
+        //g_hash_table_destroy(fstabHash);
+        return GINT_TO_POINTER(1);
     }
+
+ /*   static void *waitThread1(void *data){
+        void **arg = (void **)data;
+        auto monitorObject = (FstabMonitor<LocalDir> *)arg[0];
+        auto gridView_p = monitorObject->gridView();
+        char *path = g_strdup(gridView_p->path());
+
+        pthread_t thread;
+
+        pthread_create(&thread, NULL, mountThreadF1, (void *)mountArg_);
+
+    }*/
 
     static void *
     mountThreadF1(void *data){
         void **arg = (void **)data;
-        //sleep(1); // race condition check...
         auto monitorObject = (FstabMonitor<LocalDir> *)arg[0];
-        auto gridView_p = monitorObject->gridView();
+        auto gridView_p = (GridView<LocalDir> *)arg[1];
+        GtkWidget *child = gridView_p->child();
+        char *path = g_strdup(gridView_p->path());
 
-        DBG("***mountThreadF1 for gridview_p %p\n", gridView_p);
+        TRACE("***mountThreadF1 for gridview_p %p \n", gridView_p);
+
         // get initial md5sum
-        char *sum = Basic::md5sum("/proc/mounts");
-        char *sumPartitions = Basic::md5sum("/proc/partitions");
-        if (!sum || !sumPartitions) {
+        char *sum = NULL;
+loop:
+        // gridview may change.
+        if (!Child::validGridView(gridView_p)) {
+          TRACE("*** fstab monitor, child %p --> %p\n",child,gridView_p->child());
+          TRACE("*** fstab monitor, gridView has changed from %p\n", gridView_p);
+          return NULL;
+        }
+        sum = Basic::md5sum("/proc/mounts");
+        if (!sum) {
             ERROR_("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
+            g_free(path);
             g_free(sum);
-            g_free(sumPartitions);
             return NULL;
         }
-        DBG("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
+        TRACE("FstabMonitor::mountThreadF(): initial md5sum=%s ", sum);
 
     
         while (arg[1]){
@@ -277,14 +325,18 @@ private:
           if (!arg[1])continue;
           if (!checkSumMnt(&sum)) continue;    
           // This is sent to main context to avoid race with gridview invalidation.
-      DBG("Basic::context_function for contextMonitor\n");
-          if (Basic::context_function(contextMonitor, data) != NULL) break;
+          TRACE("***checksum changed. context function.with %p, %p\n",monitorObject, gridView_p);
+          TRACE("***checksum changed. context function.with %p, %p\n",arg[0], arg[1]);
+          auto retval = Basic::context_function(contextMonitor, data);
+          TRACE("***mountThreadF1(): return value from context_function is %p\n");
+          if (retval != NULL) break; // We break because we need to update checksums.
         }
         g_free(sum);
-        g_free(sumPartitions);
-        arg[2] = GINT_TO_POINTER(1);
-        DBG("*** mountThreadF1 all done for gridview %p.\n", gridView_p);
-        return NULL;
+
+        sleep(1);
+        TRACE("*** valid gridview (%p) = %d\n",
+            gridView_p,Child::validGridView(gridView_p)); 
+        goto loop;
     }
 
     static void *reload_f(void *data){
@@ -300,7 +352,7 @@ private:
         auto monitorObject = (FstabMonitor<FstabDir> *)arg[0];
         auto gridView_p = monitorObject->gridView();
 
-        DBG("***mountThreadF2 for gridview_p %p\n", gridView_p);
+        TRACE("***mountThreadF2 for gridview_p %p\n", gridView_p);
         // get initial md5sum
         char *sum = Basic::md5sum("/proc/mounts");
         char *sumPartitions = Basic::md5sum("/proc/partitions");
@@ -342,7 +394,7 @@ private:
               break;
             }
             Child::unlockGridView();
-      DBG("Basic::context_function for reload_f (fstab)\n");
+      TRACE("Basic::context_function for reload_f (fstab)\n");
 
             Basic::context_function(reload_f, (void *)"Disk Mounter");
             // After reload, gridView ceases to be valid.
@@ -351,114 +403,38 @@ private:
         }
         g_free(sum);
         g_free(sumPartitions);
-        g_hash_table_destroy(mntHash);
-        g_hash_table_destroy(fstabHash);
+        if (mntHash) g_hash_table_destroy(mntHash);
+        if (fstabHash) g_hash_table_destroy(fstabHash);
         arg[2] = GINT_TO_POINTER(1);
-        DBG("*** mountThreadF2 all done for gridview %p.\n", gridView_p);
+        TRACE("*** mountThreadF2 all done for gridview %p.\n", gridView_p);
         return NULL;
     }
 
-    ///////////////////////////////////////////////////
-    
+    // Should be run in main context, for now it is called from
+    //  contextMonitor which is called from main context.
+    void updateItem(GridView<LocalDir> *gridView_p, const char *path){
+     // from gridview.hh monitor function...
+      if (!Child::validGridView(gridView_p)) return;
+      guint positionF;
+      auto model = gridView_p->listModel();  // Model to find
+      auto store = gridView_p->store();      // Store to remove/add
+      auto child = gridView_p->child(); 
 
-
-    ///////////////////////////////////////////////////
-
-#if 0
-
-   
-    static gchar *
-    uuid2Partition(const gchar *partuuidPath){
-        const gchar *command = "ls -l /dev/disk/by-partuuid";
-        FILE *pipe = popen (command, "r");
-        if(pipe == NULL) {
-            ERROR_("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
-            return NULL;
-        }
-        gchar *partuuid = g_path_get_basename(partuuidPath);
-        gchar line[256];
-        memset(line, 0, 256);
-        gchar *partition = NULL;
-            TRACE("uuid2Partition(): looking for : \"%s\"\n", partuuid);
-        while (fgets (line, 255, pipe) && !feof(pipe)) {
-            TRACE("uuid2Partition(): %s: %s\n", partuuid, line);
-            if (!strstr(line, "->")) continue;
-            if (!strstr(line, partuuid)) continue;
-            TRACE("uuid2Partition(): GOTCHA: %s\n", line);
-            gchar **f = g_strsplit(line, "->", 2);
-            if (strchr(f[1], '\n')) *strchr(f[1], '\n') = 0;
-            g_strstrip(f[1]);
-            gchar *basename = g_path_get_basename(f[1]);
-            TRACE("uuid2Partition(): GOTCHA: basename=%s\n", basename);
-            g_strfreev(f);
-            partition = g_strconcat ("/dev/", basename, NULL);
-            g_free(basename);
-            break;
-
-            /*if (strstr(line, "->") && strstr(line, partuuid)) {
-                if (strchr(line, '\n')) *strchr(line, '\n') = 0;
-                partition = g_strdup_printf("/dev/%s", strrchr(line, '/')+1);
-                g_strstrip(partition);
-                if (strcmp("/dev",partition)==0) {
-                    g_free(partition);
-                    partition=NULL;
-                }
-                break;
-            }*/
-        }
-        pclose (pipe);
-        g_free(partuuid);
-        return partition;
-
+      TRACE("updateItem \"%s\"\n", path);
+      auto found = LocalDir::findPositionModel2(model, path, &positionF);
+      if (found) {
+         Child::incrementSerial(child);
+         // Position in store not necesarily == to model (filter)
+         LocalDir::findPositionStore(store, path, &positionF);
+         g_list_store_remove(store, positionF);
+         TRACE("removing %s\n",path);
+         Child::incrementSerial(child);
+         LocalDir::insert(store, path, false);                        
+         TRACE("inserting %s\n",path);
+      } else {
+        TRACE("%s not found!\n", path);
+      }
     }
-    static gchar *
-    id2Partition(const gchar *idPath){
-        const gchar *command = "ls -l /dev/disk/by-id";
-        FILE *pipe = popen (command, "r");
-        if(pipe == NULL) {
-            ERROR_("fm/view/fstab/monitor::Cannot pipe from %s\n", command);
-            return NULL;
-        }
-        gchar *base = g_path_get_basename(idPath);
-        gchar line[256];
-        memset(line, 0, 256);
-        gchar *partition = NULL;
-            TRACE("id2Partition(): looking for : \"%s\"\n", base);
-        while (fgets (line, 255, pipe) && !feof(pipe)) {
-            TRACE("id2Partition(): %s: %s\n", base, line);
-            if (!strstr(line, "->")) continue;
-            if (!strstr(line, base)) continue;
-            TRACE("id2Partition(): GOTCHA: %s\n", line);
-            gchar **f = g_strsplit(line, "->", 2);
-            if (strchr(f[1], '\n')) *strchr(f[1], '\n') = 0;
-            g_strstrip(f[1]);
-            gchar *basename = g_path_get_basename(f[1]);
-            TRACE("id2Partition(): GOTCHA: basename=%s\n", basename);
-            g_strfreev(f);
-            partition = g_strconcat ("/dev/", basename, NULL);
-            g_free(basename);
-            break;
-
-            /*if (strstr(line, "->") && strstr(line, partuuid)) {
-                if (strchr(line, '\n')) *strchr(line, '\n') = 0;
-                partition = g_strdup_printf("/dev/%s", strrchr(line, '/')+1);
-                g_strstrip(partition);
-                if (strcmp("/dev",partition)==0) {
-                    g_free(partition);
-                    partition=NULL;
-                }
-                break;
-            }*/
-        }
-        pclose (pipe);
-        g_free(base);
-        return partition;
-
-    }
-    
-#endif
-
-
 };
 }
 #endif
