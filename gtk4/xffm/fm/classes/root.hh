@@ -1,7 +1,7 @@
 #ifndef ROOTDIR_HH
 #define ROOTDIR_HH
 namespace xf {
-  namespace efsSpace {
+  namespace efsSpace { 
     static char *infoName_ = NULL;
   }
 
@@ -144,6 +144,8 @@ namespace xf {
       }
 
   };
+
+  
 
 }
 #endif
