@@ -683,6 +683,13 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       if (g_file_info_get_attribute_object(info, "xffm::ecryptfs")) return true;
       return false;
     }
+
+  public:
+    static bool isBookmark(void *data){
+      auto info = G_FILE_INFO(data);
+      if (g_file_info_get_attribute_object(info, "xffm::bookmark")) return true;
+      return false;
+    }
   public:
     static bool isEfsInfo(void *data){
       auto info = G_FILE_INFO(data);
@@ -761,6 +768,9 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           } else {
             GridviewMenu<Type>::showItem(popover, "Mount Volume");
           }
+        }
+        if (isBookmark(info)){
+          GridviewMenu<Type>::showItem(popover, "Remove bookmark");
         }
         g_free(path);
         return;
