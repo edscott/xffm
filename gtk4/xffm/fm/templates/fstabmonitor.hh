@@ -308,6 +308,8 @@ loop:
         if (!Child::validGridView(gridView_p)) {
           TRACE("*** fstab monitor, child %p --> %p\n",child,gridView_p->child());
           TRACE("*** fstab monitor, gridView has changed from %p\n", gridView_p);
+          g_free(path);
+          g_free(sum);
           return NULL;
         }
         sum = Basic::md5sum("/proc/mounts");

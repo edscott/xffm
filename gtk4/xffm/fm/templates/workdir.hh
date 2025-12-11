@@ -135,6 +135,7 @@ char buffer[4096];
       updateGridView(path);
       return true;
     }
+
     static bool setWorkdir(const gchar *path){
       TRACE("setWorkdir...A\n");
       if (pleaseWait()) return false;
@@ -148,6 +149,7 @@ char buffer[4096];
       updateGridView(path);
       return true;
     }
+
     static bool setWorkdir(const gchar *path, bool updateHistory){
       TRACE("setWorkdir B...path=%s\n",path);
       if (pleaseWait()) return false;
@@ -160,6 +162,7 @@ char buffer[4096];
       updateGridView(path);
       return true;
     }
+
     static bool setWorkdir(const gchar *path, GtkBox *pathbar, bool updateHistory){
       TRACE("setWorkdir...C\n");
       if (pleaseWait()) return false;

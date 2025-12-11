@@ -151,6 +151,8 @@ static GtkPopover *currentPopover = NULL;
 #include "fm/templates/pathbar.hh"      // fm template
 #include "fm/templates/workdir.hh"      // fm template
 #include "fm/templates/util.hh"         // fm template
+
+#include "fm/templates/rootmonitor.hh"       // fm template
                                         //
 #include "fm/templates/prompt.hh"       // fm template
 #include "fm/classes/fmbuttonbox.hh"    // fm class

@@ -101,7 +101,6 @@ public:
          return TRUE;
     }
 
-private:
 
     static gchar *
     getBookmarksFilename(void){
@@ -121,6 +120,7 @@ private:
         g_free(dir);
         return name;
     }
+private:
 
     static bookmarkItem_t *
     bookmarkItemNew(void){
