@@ -5,8 +5,8 @@ static GdkDragAction dndStatus = GDK_ACTION_COPY;
 
 namespace xf {
 template <class Type> class Dnd;
-template <class Type> class RodentMonitor;
 template <class Type> class FstabMonitor;
+template <class Type> class RootMonitor;
 template <class Type>
   class GridView  {
       using clipboard_t = ClipBoard<LocalDir>;
@@ -28,12 +28,12 @@ template <class Type>
       double X_ = 0.0; // main widget
       double Y_ = 0.0;
       int flags_=0;
-      RodentMonitor<Type> *rodentMonitor_ = NULL;
+      RootMonitor<Type> *rootMonitor_ = NULL;
       FstabMonitor<Type> *fstabMonitor_ = NULL;
       GFileMonitor *monitor_ = NULL;
   public:
       FstabMonitor<Type> *fstabMonitor(void){return fstabMonitor_;}
-      RodentMonitor<Type> *rodentMonitor(void){return rodentMonitor_;}
+      RootMonitor<Type> *rootMonitor(void){return rootMonitor_;}
 
       void regexp(const char *value){
         g_free(regexp_);
@@ -126,7 +126,7 @@ template <class Type>
 
         addMotionController();
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
-          fstabMonitor_ = NULL;
+          rootMonitor_ = new RootMonitor<Type>(this);
         } else {
           fstabMonitor_ = new FstabMonitor<Type>(this); 
         } 
@@ -217,14 +217,7 @@ template <class Type>
         gtk_widget_add_css_class(view, "gridviewColors");
         //gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), TRUE);
         gtk_grid_view_set_enable_rubberband(GTK_GRID_VIEW(view), false);
-#if 0
-        //FIXME: not working...
-        if (!isBookmarks && !isFstab) {
-          rodentMonitor_ = new RodentMonitor<Type>(this); 
-          
-        }
-        
-#else
+
  ////////////////
         if (!isBookmarks && !isFstab) {
           // We wait until here to fireup the monitor.
@@ -247,7 +240,6 @@ template <class Type>
           g_object_set_data(G_OBJECT(store), "monitor", monitor_);
         }
  ////////////////
-#endif
         return view;
       }
 
