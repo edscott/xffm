@@ -185,9 +185,9 @@ ClickMenu
         double scaleFactor = 1.0;
         GdkPaintable *texture = NULL;
         GtkWidget *picture = NULL;
-        // xffm:paintable takes preference over all. 
+        // xffm::paintable takes preference over all. 
         // (custom icon, preferably for mount point emblem, bookmark emblem, )
-        auto xffmPaintable = g_file_info_get_attribute_object(info, "xffm:paintable");      
+        auto xffmPaintable = g_file_info_get_attribute_object(info, "xffm::paintable");      
         if (xffmPaintable) {
           picture = GTK_WIDGET(gtk_picture_new_for_paintable(GDK_PAINTABLE(xffmPaintable)));
         } else {

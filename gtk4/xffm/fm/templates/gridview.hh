@@ -481,7 +481,8 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       }
     }
 
-    static void setPopoverItemsEfs(GtkPopover *popover, const char *path, GridView<Type> *gridView_p ){
+    static void setPopoverItemsEfs(GtkPopover *popover, const char *path, GridView<Type> *gridView_p, void *data ){
+      auto info = G_FILE_INFO(data);
       auto keys = gridView_p->myMenu_->keys();
       for (auto p=keys; p && *p; p++){
       auto widget = g_object_get_data(G_OBJECT(popover), *p);
@@ -493,7 +494,13 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         }
       }
       void *widget;
-      if (FstabDir::isMounted(path)){
+      if (!g_file_info_get_attribute_object(info, "xffm::efsInfo")){
+        widget = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
+        gtk_widget_set_visible(GTK_WIDGET(widget), true);
+        return;
+      }
+      // Has additional xffm::efsInfo tag
+      if (FstabUtil::isMounted(path)){
         widget = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
         gtk_widget_set_visible(GTK_WIDGET(widget), true);
       } else {
@@ -632,12 +639,25 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       return popover;
     }
 
+    static char *getMenuTitle(GFileInfo *info){
+      auto path = Basic::getPath(info);
+      auto color = "blue";
+      const char *name = (const char *)path;
+      if (isRootItem(info)) {
+        name = g_file_info_get_name(info);
+        color="green";
+        if (isEfsInfo(info)) name = _("eCryptfs Volume");
+      }
+      auto markup = g_strdup_printf("<span color=\"%s\"><b>%s</b></span>", color, name);
+      return markup;
+    }
+
     static GtkPopover *getPopover(GFileInfo *info, GridView<Type> *gridView_p){ 
       TRACE("getPopover 12\n");
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(info), "menuBox"));
       auto path = Basic::getPath(info);
-      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-      auto popover = gridView_p->myMenu_->mkMenu(markup, (void *)GridviewMenu<Type>::gestureProperties, _("Properties"));
+      GtkPopover *popover = createPopover(gridView_p, (void *)info);
+   
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       g_object_set_data(G_OBJECT(popover), "info", info);
 
@@ -646,10 +666,58 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       } else {
         setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
       }
-      g_free(markup);
       g_object_set_data(G_OBJECT(menubox), "menu", popover);
       gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
       g_free(path);
+      return popover;
+    }
+
+    static bool isRootItem(void *data){
+      auto info = G_FILE_INFO(data);
+      if (g_file_info_get_attribute_object(info, "xffm::rootItem")) return true;
+      return false;
+    }
+
+    static bool isEcryptfs(void *data){
+      auto info = G_FILE_INFO(data);
+      if (g_file_info_get_attribute_object(info, "xffm::ecryptfs")) return true;
+      return false;
+    }
+  public:
+    static bool isEfsInfo(void *data){
+      auto info = G_FILE_INFO(data);
+      if (g_file_info_get_attribute_object(info, "xffm::efsInfo")) return true;
+      return false;
+    }
+  private:
+    static bool isFstab(void *data){
+      auto info = G_FILE_INFO(data);
+      if (g_file_info_get_attribute_object(info, "xffm::fstab")) return true;
+      return false;
+    }
+
+    static GtkPopover *createPopover(GridView<Type> *gridView_p, void *data){
+      auto info = G_FILE_INFO(data);
+      auto markup = getMenuTitle(info);
+      GtkPopover *popover;
+      if (isFstab((void *)info)) {
+        popover = gridView_p->myMenu_->mkMenu(markup, 
+            (void *)GridviewMenu<Type>::gestureFstab,
+            NULL);
+      } else if (isEfsInfo((void *)info)) {
+        popover = gridView_p->myMenu_->mkMenu(markup, 
+            (void *)GridviewMenu<Type>::gestureEFSinfo,
+            NULL);
+      } else if (isEcryptfs((void *)info)) {
+        popover = gridView_p->myMenu_->mkMenu(markup, 
+            (void *)GridviewMenu<Type>::gestureEcryptfs,
+            NULL);
+      } else {
+        popover = gridView_p->myMenu_->mkMenu(markup, 
+            (void *)GridviewMenu<Type>::gestureProperties,
+            _("Properties"));
+      }
+      g_free(markup);
       return popover;
     }
 
@@ -659,8 +727,8 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       auto info = G_FILE_INFO(gtk_list_item_get_item(list_item));
       auto menubox = GTK_WIDGET(g_object_get_data(G_OBJECT(object), "menuBox"));
       auto path = Basic::getPath(info);
-      auto markup = g_strdup_printf("<span color=\"blue\"><b>%s</b></span>", path);
-      auto popover = gridView_p->myMenu_->mkMenu(markup, (void *)GridviewMenu<Type>::gestureProperties, _("Properties"));
+      GtkPopover *popover = createPopover(gridView_p, (void *)info);
+      
       g_object_set_data(G_OBJECT(popover), "gridView_p", gridView_p);
       g_object_set_data(G_OBJECT(popover), "info", info);
 
@@ -669,11 +737,10 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       } else if (g_file_info_get_attribute_object(info, "xffm::bookmark")){
         setPopoverItemsBookmark(GTK_POPOVER(popover), path, gridView_p);
       } else if (g_file_info_get_attribute_object(info, "xffm::ecryptfs")){
-        setPopoverItemsEfs(GTK_POPOVER(popover), path, gridView_p);
+        setPopoverItemsEfs(GTK_POPOVER(popover), path, gridView_p, (void *)info);
       } else {
         setPopoverItems(GTK_POPOVER(popover), path, gridView_p);
       }
-      g_free(markup);
       g_object_set_data(G_OBJECT(menubox), "menu", popover);
       gtk_widget_set_parent(GTK_WIDGET(popover), menubox);
       g_free(path);
@@ -681,14 +748,24 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
     }
 /*    
 */    
+
   static void setupMenu(GtkPopover *popover, GFileInfo *info){
     TRACE("setupMenu\n");
       auto path = Basic::getPath(info);
-      if (EfsResponse<Type>::isEfsMount(path)){
-        TRACE("*** %s isEfs\n", path);
-        // hide all
-
+      if (isRootItem(info)){
+        DBG("*** %s isRootItem hide all\n", path);
+        GridviewMenu<Type>::hideAll(popover);
+        if (isEfsInfo(info)){
+          if (FstabUtil::isMounted(path)){
+            GridviewMenu<Type>::showItem(popover, "Unmount Volume");
+          } else {
+            GridviewMenu<Type>::showItem(popover, "Mount Volume");
+          }
+        }
+        g_free(path);
+        return;
       }
+
 
       auto isDir = g_file_test(path, G_FILE_TEST_IS_DIR);
       if (g_file_info_get_attribute_object(info, "xffm::fstabMount")) isDir = false;

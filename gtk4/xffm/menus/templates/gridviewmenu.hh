@@ -13,7 +13,7 @@ namespace xf {
     GridviewMenu(void){}
     ~GridviewMenu(void){}
 
-    const char **keys(void){
+    static const char **keys(void){
       static const char *keys_[] = { // Order is important.
         _("auto"), //
         //_("Toggle Text Mode"),
@@ -38,17 +38,6 @@ namespace xf {
 #ifdef WSL
         _("Close"), 
 #endif
-       // _("Select All"), 
-       // _("Match regular expression"), 
-
-//msgid "Encrypt..."
-//msgid "Encrypt password"
-//msgid "Encrypt file"
-//msgid "Encrypt File"
-//msgid "Decrypt File..."
-//msgid "Encrypt File..."
-
-        
         NULL
       };
       return keys_;
@@ -148,6 +137,24 @@ const char **radioboxes(void){
       auto info = G_FILE_INFO(data);
       return Basic::getPath(info);
     }
+    
+    static bool isEFSinfo(GtkPopover *menu){
+      auto data =   g_object_get_data(G_OBJECT(menu), "info");
+      if (!data) return false;
+      auto info = G_FILE_INFO(data);
+      auto x = g_file_info_get_attribute_object(info, "xffm:efsInfo");
+      if (x) return true;
+      return false;
+    }
+    
+    static bool isEcryptfs(GtkPopover *menu){
+      auto data =   g_object_get_data(G_OBJECT(menu), "info");
+      if (!data) return false;
+      auto info = G_FILE_INFO(data);
+      auto x = g_file_info_get_attribute_object(info, "xffm:ecryptfs");
+      if (x) return true;
+      return false;
+    }
 
     static void 
     bcrypt(GtkButton *button, void *data){
@@ -199,6 +206,74 @@ const char **radioboxes(void){
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto widget = gtk_event_controller_get_widget(eventController);
       properties(widget, NULL);
+    }
+
+    static void 
+    gestureEFSinfo(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+      
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto widget = gtk_event_controller_get_widget(eventController);
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu")); 
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      auto path = Basic::getPath(info);
+      auto parent = GTK_WINDOW(Child::mainWidget());
+      new EFS<Type>(parent, path, true);
+    }
+
+    static void 
+    gestureEcryptfs(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+      
+      auto mountDir = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
+      if (mkdir(mountDir, 0750) < 0){
+        TRACE("mkdir %s: %s\n", mountDir, strerror(errno));
+      }
+      auto parent = GTK_WINDOW(Child::mainWidget());
+      new EFS<Type>(parent, mountDir);
+      g_free(mountDir);
+    }
+
+    static void 
+    gestureFstab(GtkGestureClick* self,
+              gint n_press,
+              gdouble x,
+              gdouble y,
+              gpointer data){
+      
+      auto eventController = GTK_EVENT_CONTROLLER(self);
+      auto widget = gtk_event_controller_get_widget(eventController);
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu")); 
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      Workdir<Type>::setWorkdir("Disk Mounter", true);
+    }
+
+    static void
+    showItem(GtkPopover *menu, const char *id){
+      auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(menu), id));
+      if (w) gtk_widget_set_visible(w, true);
+    }
+
+    static void
+    hideAll(GtkPopover *menu){
+      for (auto p=keys(); p && *p; p++){
+        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(menu), *p));
+        gtk_widget_set_visible(w, false);
+      } 
+    }
+
+    static void
+    showAll(GtkPopover *menu){
+      for (auto p=keys(); p && *p; p++){
+        auto w = GTK_WIDGET(g_object_get_data(G_OBJECT(menu), *p));
+        gtk_widget_set_visible(w, true);
+      } 
     }
 
   private: 
@@ -278,7 +353,13 @@ const char **radioboxes(void){
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("mount item path is %s\n", path);}
-      
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      if (GridView<Type>::isEfsInfo((void *)info)){
+        auto parent = GTK_WINDOW(Child::mainWidget());
+        new EFS<Type>(parent, path, true);
+        g_free(path);
+        return;
+      }
       auto folder = g_strconcat(g_get_home_dir(), G_DIR_SEPARATOR_S, "mnt", NULL);
       auto parent = GTK_WINDOW(Child::mainWidget());
       new Mount<Type>(parent, folder, path);

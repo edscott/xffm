@@ -28,6 +28,7 @@ namespace xf {
           g_file_info_set_name(info, _("Disk Mounter"));
           g_list_store_insert(store, count++, G_OBJECT(info));
           g_file_info_set_attribute_object (info, "xffm::fstab", G_OBJECT(file));
+          g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
         }
 
         // ecryptfs icon
@@ -41,12 +42,13 @@ namespace xf {
           
 //          auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
           auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
-          g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));      
+          g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));      
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
           g_file_info_set_name(info, efsSpace::infoName_);
           g_list_store_insert(store, count++, G_OBJECT(info));
           g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
+          g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
         }
         // trash icon
         {
@@ -62,6 +64,8 @@ namespace xf {
           g_file_info_set_name(info, _("Trash bin"));
           g_list_store_insert(store, count++, G_OBJECT(info));
           g_file_info_set_attribute_object (info, "xffm::trash", G_OBJECT(file));
+          g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
+
         }
 
         // saved ecryptfs mount points
@@ -84,9 +88,10 @@ namespace xf {
           if (FstabUtil::isMounted(*p)) ball = EMBLEM_GREEN_BALL;
           auto paintable = Texture<bool>::addEmblem("emblem-folder", ball, scaleFactor*size, scaleFactor*size);
           //auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
-          g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));
+          g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));
           g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
           g_file_info_set_attribute_object (info, "xffm::efsInfo", G_OBJECT(info));
+          g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
           
           g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
           //g_list_store_insert(store, 0, G_OBJECT(info));
@@ -124,7 +129,7 @@ namespace xf {
             auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
             //auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, scaleFactor*size, scaleFactor*size);
             //auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_FAVOURITE, size, size);
-            g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+            g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));  
 
             //g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_BOOKMARK));
             g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
@@ -132,6 +137,7 @@ namespace xf {
             //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
             g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
             g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
+            g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
           }
         }
         return LocalDir::getSelectionModel(G_LIST_MODEL(store), false, 0);

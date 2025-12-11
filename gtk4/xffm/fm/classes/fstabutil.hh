@@ -221,13 +221,13 @@ class FstabUtil {
       if (g_file_test(path, G_FILE_TEST_IS_DIR)) {
         auto gIcon = g_file_info_get_icon(info);
         auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
-        g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+        g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));  
        // iconPath = "folder";
       }
       else {
         iconPath = "drive-harddisk";
         auto paintable = Texture<bool>::addEmblem(iconPath, ball, size, size);
-        g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+        g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));  
       }
       return;  
     }    

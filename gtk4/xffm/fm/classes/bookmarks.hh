@@ -35,7 +35,7 @@ public:
       
       const char *ball = EMBLEM_FAVOURITE;
       auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
-      g_file_info_set_attribute_object(info, "xffm:paintable", G_OBJECT(paintable));  
+      g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));  
       return;  
     }    
 
