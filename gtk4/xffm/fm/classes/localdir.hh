@@ -100,9 +100,11 @@ namespace xf {
         if (FstabUtil::isMounted(path) || FstabUtil::isInFstab(path)) {
           FstabUtil::setMountableIcon(info, path);
         }
-        TRACE("isBookmarked(%s) = %d\n", path, Bookmarks::isBookmarked(path));
-        if (Bookmarks::isBookmarked(path)){
-          Bookmarks::setBookmarkIcon(info, path);
+        auto bookmarks_p = (Bookmarks *) bookmarksObject;
+        
+        TRACE("isBookmarked(%s) = %d\n", path, bookmarks_p->isBookmarked(path));
+        if (bookmarks_p->isBookmarked(path)){
+          bookmarks_p->setBookmarkIcon(info, path);
         }
     }
 

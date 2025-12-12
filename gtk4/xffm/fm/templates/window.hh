@@ -752,8 +752,9 @@ private:
       auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       gtk_widget_set_visible(GTK_WIDGET(paste), c->validClipBoard());
       
-      if (removeB) gtk_widget_set_visible(GTK_WIDGET(removeB), Bookmarks::isBookmarked(path));
-      if (addB) gtk_widget_set_visible(GTK_WIDGET(addB), !Bookmarks::isBookmarked(path));
+      auto bookmarks_p = (Bookmarks *) bookmarksObject;
+      if (removeB) gtk_widget_set_visible(GTK_WIDGET(removeB), bookmarks_p->isBookmarked(path));
+      if (addB) gtk_widget_set_visible(GTK_WIDGET(addB), !bookmarks_p->isBookmarked(path));
       for (auto p=show; p && *p; p++){
         TRACE("show visible: %s\n", *p);
         auto widget = g_object_get_data(G_OBJECT(popover), *p);

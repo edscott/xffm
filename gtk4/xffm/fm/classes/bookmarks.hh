@@ -1,7 +1,8 @@
 #ifndef BOOKMARKS_HH
 #define BOOKMARKS_HH
 #define USER_DIR                 g_get_home_dir()
-#define BOOKMARKS_DIR                "gtk-3.0"
+#define BOOKMARKS_GTK3                "gtk-3.0"
+#define BOOKMARKS_GTK4                "gtk-4.0"
 #define BOOKMARKS_FILE                "bookmarks"
 
 namespace xf {
@@ -23,13 +24,44 @@ typedef struct bookmarkItem_t {
     enum transport_e transport_type;
 }bookmarkItem_t;
 
-static GSList *bookmarks=NULL;
 
 //template <class Type>
 class Bookmarks {
-    
+    GList *bookmarksList_=NULL;
+    bool gtk4_;
 public:
-    static void setBookmarkIcon(GFileInfo *info, const char *path){
+  
+    
+    Bookmarks(bool gtk4){
+      gtk4_ = gtk4;
+      initBookmarks();
+
+    }
+    ~Bookmarks(void){
+      clearBookmarksList();
+    }
+
+    void
+    initBookmarks(void) {
+      clearBookmarksList();
+      readBookmarkFile();
+    }
+
+    GList *bookmarksList(void){return bookmarksList_;}
+
+    gboolean
+    isBookmarked(const gchar *path){
+       for (auto l=bookmarksList_; l && l->data; l=l->next){
+            // Bookmarks in settings.ini
+            // local bookmarksList_:
+            auto p = (bookmarkItem_t *)l->data;
+            if (!p->path) continue;
+            if (strcmp(p->path, path)==0) return TRUE;
+       }
+       return FALSE;
+    }
+
+    void setBookmarkIcon(GFileInfo *info, const char *path){
       int size = Settings::getInteger("xfterm", "iconsize", 24);
       auto gIcon = g_file_info_get_icon(info);
       
@@ -38,30 +70,8 @@ public:
       g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));  
       return;  
     }    
-
-    static void
-    initBookmarks(void) {
-        if (bookmarks) return;
-        bookmarks = readBookmarkFile(bookmarks);
-    }
-
-    static GSList *bookmarksList(void){
-        return bookmarks;
-    }
-
-    static gboolean
-    isBookmarked(const gchar *path){
-       for (auto l=bookmarks; l && l->data; l=l->next){
-            // Bookmarks in settings.ini
-            // local bookmarks:
-            auto p = (bookmarkItem_t *)l->data;
-            if (!p->path) continue;
-            if (strcmp(p->path, path)==0) return TRUE;
-       }
-       return FALSE;
-    }
     
-    static gboolean
+    gboolean
     addBookmark(const gchar *path){
       initBookmarks();
         if (!path || !strlen(path)) {
@@ -71,13 +81,32 @@ public:
         TRACE("Bookmarking %s\n", path);
         auto p = bookmarkItemNew(path);
 
-        bookmarks = g_slist_prepend(bookmarks, p);
-        saveBookmarkFile(bookmarks);
+        bookmarksList_ = g_list_prepend(bookmarksList_, p);
+        saveBookmarkFile();
         return TRUE;
     }
 
+    gchar *
+    getBookmarksFilename(void){
+        auto configDir = g_get_user_config_dir();
+        const char *gtkDir = gtk4_? BOOKMARKS_GTK4 : BOOKMARKS_GTK3;
+        auto dir = g_build_filename(configDir, gtkDir, NULL);
+        if (!g_file_test(dir, G_FILE_TEST_IS_DIR)){
+            if (g_mkdir_with_parents(dir, 0755)<0){
+                ERROR_("Cannot create %s: %s\n", dir, strerror(errno));
+                g_free(dir);
+                return NULL;
+            }
+        }
+        auto name = g_build_filename(configDir, gtkDir, BOOKMARKS_FILE, NULL);
+        if (!g_file_test(name, G_FILE_TEST_EXISTS)){
+            fclose(fopen(name, "w"));
+        }
+        g_free(dir);
+        return name;
+    }
 
-    static gboolean
+    gboolean
     removeBookmark(const gchar *path){
       initBookmarks();
         if (!path || !strlen(path)) {
@@ -86,43 +115,26 @@ public:
         }
         TRACE("removing Bookmark  %s\n", path);
         gboolean retval = FALSE;
-        for (auto l=bookmarks; l && l->data; l=l->next){
+        for (auto l=bookmarksList_; l && l->data; l=l->next){
              auto p = (bookmarkItem_t *)l->data;
              if (p->path == NULL) continue;
              if (strcmp(p->path, path)==0){
                  TRACE("removeBookmark() gotcha %s\n", path);
-                 bookmarks = g_slist_remove(bookmarks, p);
+                 bookmarksList_ = g_list_remove(bookmarksList_, p);
                  bookmarkItemFree(p);
                  retval = TRUE;
                  break;
              }
          }
-         if (retval) saveBookmarkFile(bookmarks);
+         if (retval) saveBookmarkFile();
          return TRUE;
     }
 
+  private:
+    //clearBookmarks(void)
 
-    static gchar *
-    getBookmarksFilename(void){
-        auto configDir = g_get_user_config_dir();
-        auto dir = g_build_filename(configDir, BOOKMARKS_DIR, NULL);
-        if (!g_file_test(dir, G_FILE_TEST_IS_DIR)){
-            if (g_mkdir_with_parents(dir, 0755)<0){
-                ERROR_("Cannot create %s: %s\n", dir, strerror(errno));
-                g_free(dir);
-                return NULL;
-            }
-        }
-        auto name = g_build_filename(configDir, BOOKMARKS_DIR, BOOKMARKS_FILE, NULL);
-        if (!g_file_test(name, G_FILE_TEST_EXISTS)){
-            fclose(fopen(name, "w"));
-        }
-        g_free(dir);
-        return name;
-    }
-private:
 
-    static bookmarkItem_t *
+    bookmarkItem_t *
     bookmarkItemNew(void){
         bookmarkItem_t *p = (bookmarkItem_t *)calloc(1,sizeof(bookmarkItem_t));
         if (!p) {
@@ -130,8 +142,8 @@ private:
         }
         return p;
     }
-
-    static bookmarkItem_t *
+    
+    bookmarkItem_t *
     bookmarkItemNew(const gchar *path){
         bookmarkItem_t *p = bookmarkItemNew();
         p->path = g_strdup(path);
@@ -147,7 +159,7 @@ private:
     }
 
 
-    static void
+    void
     bookmarkItemFree( bookmarkItem_t *p){
         if (!p) return;
         g_free(p->uri);
@@ -157,16 +169,16 @@ private:
         return;
     }
 
-    static GSList *
-    clearBookmarksList(GSList *list){
-        for (auto l=list; l && l->data; l=l->next){
+    void
+    clearBookmarksList(void){
+        for (auto l=bookmarksList_; l && l->data; l=l->next){
             bookmarkItemFree((bookmarkItem_t *)(l->data));
         }
-        g_slist_free(list);
-        return NULL;
+        g_list_free(bookmarksList_);
+        bookmarksList_ = NULL;
     }
 
-    static FILE *
+    FILE *
     openBookmarkFile(void){
         auto filename = getBookmarksFilename();
         auto f=fopen(filename, "r");
@@ -177,8 +189,8 @@ private:
         return f;
     }
 
-    static GSList *
-    fillBookmarksList(FILE *f, GSList *list){
+    void
+    fillBookmarksList(FILE *f){
         gchar buffer[2048];
 
         while (fgets(buffer, 2047, f) && !feof(f)){
@@ -195,27 +207,27 @@ private:
                 g_error_free(error);
                 //continue;
             }
-            list = g_slist_prepend(list, p);
+            bookmarksList_ = g_list_prepend(bookmarksList_, p);
         }
-        return list;
+        return;
     }
         
-    static GSList *
-    readBookmarkFile(GSList * list){ 
+    void
+    readBookmarkFile(void){ 
         TRACE("now reading bookmark file\n"); 
-        list = clearBookmarksList(list);
+        clearBookmarksList();
         auto f = openBookmarkFile();
-        if (!f) return NULL;
-        list = fillBookmarksList(f, list);
+        if (!f) return;
+        fillBookmarksList(f);
         fclose(f);
-        return list;
+        return;
     }
 
-    static void
-    saveBookmarkFile(GSList *list){
+    void
+    saveBookmarkFile(){
         gchar *filename = getBookmarksFilename();
         if (!filename) return;
-        if (list==NULL || g_slist_length(list)==0){
+        if (bookmarksList_==NULL || g_list_length(bookmarksList_)==0){
             if (g_file_test(filename, G_FILE_TEST_EXISTS)){
                 if (unlink(filename) < 0){
                     ERROR_("unlink(%s): %s\n", filename, strerror(errno));
@@ -226,9 +238,8 @@ private:
         }
         FILE *f=fopen(filename, "w");
         g_free(filename);
-        GSList *tmp=list;
         if (f) {
-            for (auto l=list; l && l->data; l=l->next){
+            for (auto l=bookmarksList_; l && l->data; l=l->next){
                 auto p = (bookmarkItem_t *)l->data;
                 fprintf(f,"%s\n", p->uri);
             }

@@ -312,6 +312,7 @@ loop:
           g_free(sum);
           return NULL;
         }
+        g_free(sum);
         sum = Basic::md5sum("/proc/mounts");
         if (!sum) {
             ERROR_("Error:: Exiting mountThreadF2(%p) on md5sum error (sum)\n", gridView_p);
@@ -333,7 +334,6 @@ loop:
           TRACE("***mountThreadF1(): return value from context_function is %p\n");
           if (retval != NULL) break; // We break because we need to update checksums.
         }
-        g_free(sum);
 
         sleep(1);
         TRACE("*** valid gridview (%p) = %d\n",

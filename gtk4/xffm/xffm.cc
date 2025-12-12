@@ -26,6 +26,8 @@ static const char *Bookmarks_id="Bookmarks";
 const char *Xname_ = NULL;
 static char *lastWS=NULL;
 
+static void *bookmarksObject = NULL;
+
 #include "config.h"
 #include "xffm.h"
 
@@ -173,6 +175,8 @@ main (int argc, const char *argv[], const char *envp[]) {
  
 
   threadPoolObject = (void *)new xf::ThreadPool;
+  bookmarksObject = (void *)new xf::Bookmarks(false); // True for .config/gtk-4.0 bookmarks
+                                                      // otherwise .config/gtk-3.0 bookmarks
   
   auto path = getPath(argv[1]);
   TRACE("path is %s (%s) --> %s\n", path, argv[1], _(path)); 
@@ -182,7 +186,7 @@ main (int argc, const char *argv[], const char *envp[]) {
   auto c = new xf::ClipBoard<xf::LocalDir>;
   xf::clipBoardObject = (void *)c;
   auto d = new xf::Dnd<xf::LocalDir>;
-  xf::Bookmarks::initBookmarks();
+
   
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);

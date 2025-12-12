@@ -11,7 +11,8 @@ namespace xf {
       static GtkMultiSelection *rootSelectionModel(void){
         GError *error_ = NULL;
         int count = 0;
-        Bookmarks::initBookmarks();
+        auto bookmarks_p = (Bookmarks *) bookmarksObject;
+        bookmarks_p->initBookmarks();
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
         g_object_set_data(G_OBJECT(store), "xffm::root", GINT_TO_POINTER(1));
 
@@ -107,7 +108,7 @@ namespace xf {
         // bookmarks
         {
 
-          auto list = Bookmarks::bookmarksList();
+          auto list = bookmarks_p->bookmarksList();
           for (auto l=list; l && l->data; l=l->next){
             auto p = (bookmarkItem_t *)l->data;
             if (!p->path) continue;

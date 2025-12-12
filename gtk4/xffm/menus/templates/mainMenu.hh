@@ -263,13 +263,15 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       closePopover(menu);
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
-      Bookmarks::addBookmark(gridView_p->path());
+      auto bookmarks_p = (Bookmarks *) bookmarksObject;
+      bookmarks_p->addBookmark(gridView_p->path());
      }
     static void removeB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       closePopover(menu);
       auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
-      Bookmarks::removeBookmark(gridView_p->path());
+      auto bookmarks_p = (Bookmarks *) bookmarksObject;
+      bookmarks_p->removeBookmark(gridView_p->path());
     }
 
     static void selectAll(GtkButton *button, void *data){

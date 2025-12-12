@@ -4,10 +4,11 @@ namespace xf {
 
   template <class Type> class RootMonitor {
 
+    void **args = NULL;
     public:
       RootMonitor(GridView<FstabDir> *gridView){
-        DBG("*** RootMonitor(GridView<FstabDir>) constructor\n");
-        void **args = (void **)calloc(3, sizeof(void *));
+        TRACE("*** RootMonitor(GridView<FstabDir>) constructor\n");
+        args = (void **)calloc(3, sizeof(void *));
         args[0] = (void *) this;
         args[1] = (void *) gridView;
         args[2] = GINT_TO_POINTER(TRUE);
@@ -17,8 +18,8 @@ namespace xf {
       }
 
       RootMonitor(GridView<LocalDir> *gridView){
-        DBG("*** RootMonitor(GridView<LocalDir>) constructor\n");
-        void **args = (void **)calloc(3, sizeof(void *));
+        TRACE("*** RootMonitor(GridView<LocalDir>) constructor\n");
+        args = (void **)calloc(3, sizeof(void *));
         args[0] = (void *) this;
         args[1] = (void *) gridView;
         args[2] = GINT_TO_POINTER(TRUE);
@@ -28,6 +29,8 @@ namespace xf {
       }
 
       ~RootMonitor(){
+        args[2] = (NULL);
+        TRACE("*** root monitor is gone.\n");
       }
 
     private:
@@ -38,7 +41,7 @@ namespace xf {
       if (*sum == NULL) {*sum = newSum; return false;}
         TRACE("md5sum compare %s / %s\n", *sum, newSum);
       if (strcmp(newSum, *sum)) {
-        DBG("md5sum mismatch %s / %s\n", *sum, newSum);
+        TRACE("md5sum mismatch %s / %s\n", *sum, newSum);
         g_free(*sum);
         *sum = newSum;
         return true;
@@ -56,42 +59,49 @@ namespace xf {
         char *path = g_strdup(gridView_p->path());
         char *sum = NULL;
         char *sumMnt = NULL;
-        auto bookmarksFile = Bookmarks::getBookmarksFilename();
+        char *sumEfs = NULL;
+        auto bookmarks_p = (Bookmarks *) bookmarksObject;
+        auto bookmarksFile = bookmarks_p->getBookmarksFilename();
 
         TRACE("***threadF1 for gridview_p %p \n", gridView_p);
+        auto efsFile = EfsResponse<Type>::efsKeyFile();
+        auto mntFile = g_strdup("/proc/mounts");
 
 loop:
         // gridView may change.
-        if (!Child::validGridView(gridView_p)) {
+        if (!arg[2] || !Child::validGridView(gridView_p)) {
           TRACE("*** RootMonitor, child %p --> %p\n",child,gridView_p->child());
-          DBG("*** RootMonitor, gridView has changed from %p\n", gridView_p);
+          TRACE("*** RootMonitor, gridView has changed from %p\n", gridView_p);
+done:
+          TRACE("*** root monitor thread now has exited.\n");
           g_free(path);
           g_free(sum);
           g_free(sumMnt);
+          g_free(sumEfs);
           g_free(bookmarksFile);
+          g_free(efsFile);
+          g_free(mntFile);
           g_free(data);
           return NULL;
         }
        
         // get initial md5sum
         g_free(sum);
+        g_free(sumMnt);
+        g_free(sumEfs);
         sum = Basic::md5sum(bookmarksFile);
-        sumMnt = Basic::md5sum("/proc/mounts");
+        sumMnt = Basic::md5sum(mntFile);
+        sumEfs = Basic::md5sum(efsFile);
 
-        if (!sum) {
+        if (!sum || !sumMnt || !sumEfs) {
           ERROR_("Error:: Exiting threadF1(%p) on md5sum error (sum)\n", gridView_p);
-          g_free(path);
-          g_free(sum);
-          g_free(sumMnt);
-          g_free(bookmarksFile);
-          g_free(data);
-          return NULL;
+          goto done;
         }
-        DBG("***RootMonitor::threadF1(): initial sum=%s \n", sum);
-        DBG("***RootMonitor::threadF1(): initial sumMnt=%s \n", sumMnt);
+        TRACE("***RootMonitor::threadF1(): initial sum=%s \n", sum);
+        TRACE("***RootMonitor::threadF1(): initial sumMnt=%s \n", sumMnt);
 
     
-        while (arg[1]){
+        while (arg[2]){
           usleep(250000);
           if (!arg[1])continue;
           auto test1 = checkSumMnt(bookmarksFile, &sum);
@@ -99,14 +109,14 @@ loop:
           if (!test1 && !test2) continue;   
 
           // This is sent to main context to avoid race with gridView invalidation.
-          DBG("***checksum changed. context function.with %p, %p\n",monitorObject, gridView_p);
+          TRACE("***checksum changed. context function.with %p, %p\n",monitorObject, gridView_p);
           TRACE("***checksum changed. context function.with %p, %p\n",arg[0], arg[1]);
           Basic::context_function(reload_f, (void *)child);
           break; // We break because we need to update checksums.
         }
 
         sleep(1);
-        DBG("*** valid gridView (%p) = %d\n",
+        TRACE("*** valid gridView (%p) = %d\n",
             gridView_p,Child::validGridView(gridView_p)); 
         goto loop;
     }

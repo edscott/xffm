@@ -433,10 +433,7 @@ public:
         return key_file;
     }
 
-
     private:
-    
-
 
    static GtkTextView *
     mkTextView (const gchar *text){
@@ -696,12 +693,13 @@ public:
         return ok;
         
     }
+  public:
     static char *efsKeyFile(void){
       return  g_strconcat(g_get_user_config_dir(),
           G_DIR_SEPARATOR_S, "xffm4",G_DIR_SEPARATOR_S, "efs.ini", NULL);
     }
 
-
+  private:
     static void
     button_save (GtkButton * button, gpointer data) {
       auto subClass = (subClass_t *)data;

@@ -34,6 +34,7 @@ template <class Type>
   public:
       FstabMonitor<Type> *fstabMonitor(void){return fstabMonitor_;}
       RootMonitor<Type> *rootMonitor(void){return rootMonitor_;}
+      void rootMonitor(RootMonitor<Type> *value){rootMonitor_ = value;}
 
       void regexp(const char *value){
         g_free(regexp_);
@@ -91,6 +92,8 @@ template <class Type>
       GridView(const char *path, void *gridViewClick_f){
         Child::addGridView((void *)this);
 
+
+
         gridViewClick_f_ = gridViewClick_f;
         path_ = g_strdup(path);
         //gtk_grid_view_set_single_click_activate (GTK_GRID_VIEW(view_), true);
@@ -104,7 +107,7 @@ template <class Type>
           if (!regex_) {
             gchar *markup = g_strdup_printf("%s: %s (%s)\n", regexp_,
                 _("Regular Expression syntax is incorrect"), _error->message);
-            DBG("%s", markup);
+            TRACE("%s", markup);
             Print::printInfo(Child::getOutput(), markup);
             // done by printInfo(): g_free(markup);    
             g_error_free(_error);
@@ -126,6 +129,7 @@ template <class Type>
 
         addMotionController();
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
+          TRACE("*** paz rootMonitor_\n");
           rootMonitor_ = new RootMonitor<Type>(this);
         } else {
           fstabMonitor_ = new FstabMonitor<Type>(this); 
@@ -145,6 +149,10 @@ template <class Type>
           //g_object_unref(G_OBJECT(menu_));
         //}
         if (myMenu_) delete myMenu_; // main menu
+        if (rootMonitor_) {
+          TRACE("*** zap rootMonitor_\n");
+          delete rootMonitor_;
+        }
         if (fstabMonitor_) delete fstabMonitor_; 
 
         g_free(path_);
@@ -554,7 +562,9 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         }
     
         // bookmark test
-        if (!Bookmarks::isBookmarked(path)){ 
+
+        auto bookmarks_p = (Bookmarks *) bookmarksObject;
+        if (!bookmarks_p->isBookmarked(path)){ 
           auto widget = g_object_get_data(G_OBJECT(popover), _("Add bookmark"));
           gtk_widget_set_visible(GTK_WIDGET(widget), true);
         } else {
@@ -752,7 +762,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
     TRACE("setupMenu\n");
       auto path = Basic::getPath(info);
       if (isRootItem(info)){
-        DBG("*** %s isRootItem hide all\n", path);
+        TRACE("*** %s isRootItem hide all\n", path);
         GridviewMenu<Type>::hideAll(popover);
         if (isEfsInfo(info)){
           if (FstabUtil::isMounted(path)){

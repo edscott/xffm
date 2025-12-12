@@ -569,10 +569,11 @@ private: // Nonfree functions
     }
 
     static GListModel *getBookmarkModel(const char *path){
-        Bookmarks::initBookmarks();
+        auto bookmarks_p = (Bookmarks *) bookmarksObject;
+        bookmarks_p->initBookmarks();
         GError *error_ = NULL;
         auto store = g_list_store_new(G_TYPE_FILE_INFO);
-        auto list = Bookmarks::bookmarksList();
+        auto list = bookmarks_p->bookmarksList();
         for (auto l=list; l && l->data; l=l->next){
           auto p = (bookmarkItem_t *)l->data;
           if (!p->path) continue;
@@ -597,7 +598,7 @@ private: // Nonfree functions
           g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
         }
 
-        if (!g_slist_length(list)){
+        if (!g_list_length(list)){
           g_object_unref(store);
           return NULL;
         }

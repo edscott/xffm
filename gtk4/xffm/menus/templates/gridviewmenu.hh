@@ -304,7 +304,8 @@ const char **radioboxes(void){
       
       if (path) {
         TRACE("path is %s\n", path);
-        Bookmarks::addBookmark(path);
+        auto bookmarks_p = (Bookmarks *) bookmarksObject;
+        bookmarks_p->addBookmark(path);
         g_free(path);
         auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         const char *p = gridView_p->path();
@@ -318,10 +319,12 @@ const char **radioboxes(void){
       gchar *path = getPath(menu);
       
       if (path) {
-        Bookmarks::removeBookmark(path);
+        auto bookmarks_p = (Bookmarks *) bookmarksObject;
+        bookmarks_p->removeBookmark(path);
         g_free(path);
         auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
         const char *p = gridView_p->path();
+        TRACE("*** removeB set workdir to %s\n", p);
         Workdir<Type>::setWorkdir(p);
       }
     }
