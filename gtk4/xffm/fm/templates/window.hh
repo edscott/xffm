@@ -328,7 +328,7 @@ private:
 public:
     
   static void resetAdj(int value){
-        auto page_p = (FMpage *)Child::page();
+        auto page_p = (FMpage *)Child::page(NULL);
         auto scrollW = page_p->gridScrolledWindow();
         auto adjustment = gtk_scrolled_window_get_vadjustment(scrollW);
         gtk_adjustment_set_value(adjustment, value);
@@ -383,7 +383,7 @@ public:
     
 
     static void update(char *path){
-        auto page_p = (FMpage *)Child::page();
+        auto page_p = (FMpage *)Child::page(NULL);
         auto scrollW = page_p->gridScrolledWindow();
         auto adjustment = gtk_scrolled_window_get_vadjustment(scrollW);
         auto value = gtk_adjustment_get_value(adjustment);

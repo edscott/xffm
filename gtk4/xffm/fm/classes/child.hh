@@ -140,11 +140,6 @@ namespace xf {
       return (bool) retval;
     }
   
-  /*  static GtkSelectionModel *selection(void){
-      auto child =  Child::getChild();
-      return selection(child);
-    }*/
-
     static GtkSelectionModel *selection(GtkWidget *child){
       if (!valid(child)) return NULL; // Page has disappeared.
       auto selection = g_object_get_data(G_OBJECT(child), "selection");
@@ -153,19 +148,9 @@ namespace xf {
     }
 
     static void *page(GtkWidget *child){
+      if (!child) child = Child::getChild();
       return g_object_get_data(G_OBJECT(child), "page");
     }
-
-    static void *page(void){
-      return page(getChild());
-    }
-
-
-/*
-    static void *getGridviewObject(void){
-      auto child =  Child::getChild();
-      return (void *)g_object_get_data(G_OBJECT(child), "GridviewObject");
-    }*/
 
     static void *getGridviewObject(GtkWidget *child){
       if (!child) child = Child::getChild();
@@ -208,15 +193,6 @@ namespace xf {
       if (!child) child = Child::getChild();
       return getGridviewObject(child);
     }
-/*
-    static const int getSerial(void){
-      pthread_mutex_lock(&serialMutex);
-      auto child =  Child::getChild();
-      if (!valid(child)) return -1; // Page has disappeared.
-      auto serial = g_object_get_data(G_OBJECT(child), "serial");
-      pthread_mutex_unlock(&serialMutex);
-      return GPOINTER_TO_INT(serial);
-    }*/
 
     static const int getSerial(GtkWidget *child){
       if (!valid(child)) return -1; // Page has disappeared.
@@ -236,16 +212,7 @@ namespace xf {
       pthread_mutex_unlock(&serialMutex);
       return serial;
     }
-/*
-    static int incrementSerial(void){
-      pthread_mutex_lock(&serialMutex);
-      auto child =  Child::getChild();
-      auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
-      g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));
-      pthread_mutex_unlock(&serialMutex);
-      return serial;
-    }
-*/
+
     static const char *getWorkdir(GtkWidget *child){
       TRACE("getWorkdir...\n");
       if (!child) child =  Child::getChild();
@@ -254,8 +221,9 @@ namespace xf {
       if (!valid(child)) return g_get_home_dir(); // Page has disappeared.
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
     }
-    static void *getPrompt(void){
-      auto child =  Child::getChild();
+
+    static void *getPrompt(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       return g_object_get_data(G_OBJECT(child), "prompt");
     }
 

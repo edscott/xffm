@@ -124,6 +124,7 @@ done:
       TRACE("*** RootMonitor reload(%s) with %p(%p)\n", 
             path, child, gridview);
       g_object_set_data(G_OBJECT(child), "selection", NULL);
+      //g_object_set_data(G_OBJECT(child), "path", NULL);
       
       Workdir<Type>::setWorkdir(path, child);
       return NULL;
