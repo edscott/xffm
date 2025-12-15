@@ -466,7 +466,7 @@ const char **radioboxes(void){
         // No need to reload since copy items not emblemed (factory.hh)
         // MainWindow<Type>::update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);
-        gtk_selection_model_unselect_all(Child::selection());
+        gtk_selection_model_unselect_all(Child::selection(NULL));
         return;
       }
 
@@ -492,7 +492,7 @@ const char **radioboxes(void){
         // but might not be related to deadlock, reenabled 2025-08-21.
         MainWindow<Type>::update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);
-        gtk_selection_model_unselect_all(Child::selection());
+        gtk_selection_model_unselect_all(Child::selection(NULL));
         return;
       }
       auto path = getPath(menu);

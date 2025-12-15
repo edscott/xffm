@@ -123,6 +123,8 @@ done:
       auto monitorObject = (RootMonitor<Type> *) data;
       DBG("*** RootMonitor reload(%s) with %p(%p)\n", 
             path, child, gridview);
+      g_object_set_data(G_OBJECT(child), "selection", NULL);
+      
       Workdir<Type>::setWorkdir(path, child);
       return NULL;
     }

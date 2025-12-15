@@ -517,6 +517,8 @@ private:
          TRACE("switchPage setWindowTitle %p\n", child);
          Child::setWindowTitle(child);   
       }
+
+      // FIXME crash on switch page after rootmonitor reload
      
       auto selection = Child::selection(child);
       if (!selection) {
@@ -563,7 +565,7 @@ private:
       auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         c->cutClipboardList(selectionList);
-        gtk_selection_model_unselect_all(Child::selection());
+        gtk_selection_model_unselect_all(Child::selection(NULL));
         update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);
        }
@@ -576,7 +578,7 @@ private:
       auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         c->copyClipboardList(selectionList);
-        gtk_selection_model_unselect_all(Child::selection());
+        gtk_selection_model_unselect_all(Child::selection(NULL));
         // No need to reload since copy items not emblemed (factory.hh)
         //update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);

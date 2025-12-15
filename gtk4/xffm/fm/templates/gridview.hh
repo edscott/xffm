@@ -134,10 +134,10 @@ template <class Type>
           TRACE("*** paz rootMonitor_\n");
           rootMonitor_ = new RootMonitor<Type>(this, "Bookmarks", 4);
         } else if (g_object_get_data(G_OBJECT(store()), "xffm::fstab")){
-          rootMonitor_ = new RootMonitor<Type>(this, "Disk Mounter", 3);
+          rootMonitor_ = new RootMonitor<Type>(this, "Disk Mounter", 2);
         } else {
           // FIXME: should just update the icon emblem, not a full reload.
-          rootMonitor_ = new RootMonitor<Type>(this, path_, 2);
+          rootMonitor_ = new RootMonitor<Type>(this, path_, 3);
           //fstabMonitor_ = new FstabMonitor<Type>(this); 
         } 
 
