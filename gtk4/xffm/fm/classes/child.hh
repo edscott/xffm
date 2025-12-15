@@ -86,7 +86,7 @@ namespace xf {
         gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
       }
       g_hash_table_insert(gridViewHash, gridView_p, GINT_TO_POINTER(1));
-      DBG("added gridview %p\n", gridView_p);
+      TRACE("added gridview %p\n", gridView_p);
       unlockGridView("addGridView");
     }
     static void 
@@ -96,7 +96,7 @@ namespace xf {
       if (!gridViewHash) gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
       if (g_hash_table_lookup(gridViewHash, gridView_p)){
         g_hash_table_remove(gridViewHash, gridView_p);
-        DBG("removed gridview %p\n", gridView_p);
+        TRACE("removed gridview %p\n", gridView_p);
       }
       unlockGridView("removeGridView");
     } 

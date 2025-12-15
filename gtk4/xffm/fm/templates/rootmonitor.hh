@@ -57,17 +57,17 @@ namespace xf {
         GtkWidget *child_p = monitorObject->child();
         char *path = g_strdup(gridView_p->path());
 
-        DBG("\n***Root Monitor %p(%p) started '%s'\n", child_p, gridView_p, path);
+        TRACE("\n***Root Monitor %p(%p) started '%s'\n", child_p, gridView_p, path);
 
 loop:
         // gridView may change.
         Child::lockGridView("Root Monitor");
         auto valid = Child::validGridView(gridView_p);
         Child::unlockGridView("Root Monitor");
-        DBG("\n*** valid gridView %p(%p) %s = %d\n",
+        TRACE("\n*** valid gridView %p(%p) %s = %d\n",
             child_p, gridView_p, path, valid); 
         if (!arg[2] || !valid) {
-          DBG("\n***Root Monitor cleanup %p(%p) continue=%d, valid=%d %s\n", 
+          TRACE("\n***Root Monitor cleanup %p(%p) continue=%d, valid=%d %s\n", 
               child_p, gridView_p, arg[2], valid, path);
 done:
           g_free(path);
@@ -101,7 +101,7 @@ done:
           if (!test[0] && !test[1] && !test[2] && !test[3]) continue;
           Child::removeGridView(gridView_p); // gridView_p will no longer be valid.
           // This is sent to main context to avoid race with gridView invalidation.
-          DBG("\n***RootMonitor checksum changed %p(%p) '%s'\n",
+          TRACE("\n***RootMonitor checksum changed %p(%p) '%s'\n",
               child_p, gridView_p, path);
           void *v[] = {(void *)path, (void *)child_p, (void *)gridView_p, NULL};
           Basic::context_function(reload_f, v);
@@ -121,7 +121,7 @@ done:
       auto gridview = (GridView<Type> *)v[2];
 
       auto monitorObject = (RootMonitor<Type> *) data;
-      DBG("*** RootMonitor reload(%s) with %p(%p)\n", 
+      TRACE("*** RootMonitor reload(%s) with %p(%p)\n", 
             path, child, gridview);
       g_object_set_data(G_OBJECT(child), "selection", NULL);
       

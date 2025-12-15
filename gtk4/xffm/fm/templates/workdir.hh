@@ -37,7 +37,7 @@ namespace xf {
           g_object_unref(monitor);
           //*
           auto path = g_file_get_path(dirFile);
-          DBG("local monitor for %s cancelled.\n", path);
+          TRACE("local monitor for %s cancelled.\n", path);
           g_free(path);
 
           g_object_unref(dirFile);
@@ -51,9 +51,9 @@ namespace xf {
             
           monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
           if (monitor){
-            DBG("local monitor started for %s\n", path);
+            TRACE("local monitor started for %s\n", path);
           } else {
-            DBG("no local monitor for %s\n", path);
+            TRACE("no local monitor for %s\n", path);
           }
 
           //viewObject->monitor(monitor);
@@ -132,7 +132,7 @@ char buffer[4096];
       }
       Child::setWindowTitle(child);
       UtilPathbar<Type>::updatePathbar(false, (void *)pathbar_go, child);
-      DBG("    setWorkdir child %p to %s\n", child, path);
+      TRACE("    setWorkdir child %p to %s\n", child, path);
       updateGridView(path, child);
       return true;
     }
@@ -245,7 +245,7 @@ char buffer[4096];
         auto efsInfo = G_FILE_INFO(g_file_info_get_attribute_object (info, "xffm::efsInfo"));
         if (efsInfo){
           auto path = Basic::getPath(efsInfo);
-          DBG("workdir.hh: efsInfo = '%s'\n", path);
+          TRACE("workdir.hh: efsInfo = '%s'\n", path);
 
           auto parent = GTK_WINDOW(Child::mainWidget());
           new EFS<Type>(parent, path, true);
