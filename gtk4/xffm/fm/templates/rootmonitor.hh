@@ -97,7 +97,7 @@ done:
             test[k] = Basic::checkSumFile(*p, &(sum[k]));
           }
            
-          DBG("tests: %d %d %d %d\n", test[0],test[1],test[2],test[3]);
+          TRACE("tests: %d %d %d %d\n", test[0],test[1],test[2],test[3]);
           if (!test[0] && !test[1] && !test[2] && !test[3]) continue;
 
           // This is sent to main context to avoid race with gridView invalidation.

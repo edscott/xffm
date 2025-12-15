@@ -133,8 +133,13 @@ template <class Type>
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
           TRACE("*** paz rootMonitor_\n");
           rootMonitor_ = new RootMonitor<Type>(this, "Bookmarks");
+        } else if (g_object_get_data(G_OBJECT(store()), "xffm::fstab")){
+          rootMonitor_ = new RootMonitor<Type>(this, "Disk Mounter");
         } else {
-          fstabMonitor_ = new FstabMonitor<Type>(this); 
+          // FIXME: fstabMonitor_ should look for mounts or bookmarks
+          //        and just update the icon emblem, not a full reload.
+          rootMonitor_ = new RootMonitor<Type>(this, path_);
+          //fstabMonitor_ = new FstabMonitor<Type>(this); 
         } 
 
         //auto dropController = Dnd<Type>::createDropController(this);
