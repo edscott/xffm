@@ -44,7 +44,7 @@ namespace xf {
        
         // cancel threadpool for previews, if any. Wait on condition
         if (strcmp(path, "Disk Mounter") == 0) {
-          auto viewObject = new GridView<FstabDir>(path, (void *)gridViewClick);
+          auto viewObject = new GridView<FstabDir>(path, (void *)gridViewClick, child);
           viewObject->child(child);
           auto store = viewObject->listStore();
             
@@ -64,9 +64,10 @@ namespace xf {
           if (oldObject) delete oldObject;
           Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
         } else {
-          auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick);
+          auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick, child);
+//          auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick);
           TRACE("new object: %p\n", viewObject);
-          viewObject->child(child);
+//          viewObject->child(child);
           auto store = viewObject->listStore();
             
           monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));

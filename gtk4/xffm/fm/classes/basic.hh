@@ -32,6 +32,20 @@ namespace xf {
 #endif
    public:
 
+    static bool checkSumFile(const char *file, char **sum){
+      char *newSum = md5sum(file);
+      if (*sum == NULL) {*sum = newSum; return false;}
+        TRACE("md5sum compare %s / %s\n", *sum, newSum);
+      if (strcmp(newSum, *sum)) {
+        TRACE("md5sum mismatch %s / %s\n", *sum, newSum);
+        g_free(*sum);
+        *sum = newSum;
+        return true;
+      }
+      g_free(newSum);
+      return false;
+    }
+
       static bool isXffmFloating(void){
         auto command = "i3-msg -t get_tree";
         bool retval = true;

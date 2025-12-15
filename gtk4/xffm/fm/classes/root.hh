@@ -23,8 +23,7 @@ namespace xf {
         // fstab icon
         {
           GFile *file = g_file_new_for_path(g_get_home_dir());
-          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
-          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
+          auto info = newInfo(file, G_FILE_TYPE_UNKNOWN);
           g_file_info_set_icon(info, g_themed_icon_new("drive-harddisk"));
           g_file_info_set_name(info, _("Disk Mounter"));
           g_list_store_insert(store, count++, G_OBJECT(info));
@@ -34,11 +33,9 @@ namespace xf {
 
         // ecryptfs icon
         {
-          
           GFile *file = g_file_new_for_path("/");
-//          GFile *file = g_file_new_for_path(g_get_home_dir());
+          auto info = newInfo(file, G_FILE_TYPE_UNKNOWN);
           if (!efsSpace::infoName_) efsSpace::infoName_ = g_strdup_printf("%s ecryptfs", _("New"));
-          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           //auto gIcon = g_file_info_get_icon(info);
           
 //          auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
@@ -58,8 +55,8 @@ namespace xf {
               "user-trash-full" : "user-trash";
           GFile *file = (g_file_test(trashDir, G_FILE_TEST_IS_DIR))? 
               g_file_new_for_path(trashDir) : g_file_new_for_path(g_get_home_dir());
+          auto info = newInfo(file, G_FILE_TYPE_DIRECTORY);
           
-          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
           g_file_info_set_icon(info, g_themed_icon_new(trashIcon));
           g_file_info_set_name(info, _("Trash bin"));
@@ -76,7 +73,7 @@ namespace xf {
           if (!g_file_test(*p, G_FILE_TEST_EXISTS)) continue;
       TRACE("root.hh:: adding efs entry '%s'\n", *p);
           GFile *file = g_file_new_for_path(*p);
-          auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+          auto info = newInfo(file, G_FILE_TYPE_MOUNTABLE);
           //auto gIcon = g_file_info_get_icon(info);
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
           auto basename = g_path_get_basename(*p);
@@ -119,7 +116,7 @@ namespace xf {
                 continue;
             }
             GFile *file = g_file_new_for_path(p->path);
-            auto info = g_file_query_info(file, "standard::", G_FILE_QUERY_INFO_NONE, NULL, &error_);
+            auto info = newInfo(file, G_FILE_TYPE_DIRECTORY);
             //auto gIcon = g_file_info_get_icon(info);
             auto basename = g_path_get_basename(p->path);
             auto utf_name = Basic::utf_string(basename);
@@ -136,12 +133,22 @@ namespace xf {
             g_list_store_insert_sorted(store, G_OBJECT(info), LocalDir::compareFunction, GINT_TO_POINTER(flags));
             //g_list_store_insert(store, 0, G_OBJECT(info));
             //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
-            g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));          
             g_file_info_set_attribute_object (info, "xffm::bookmark", G_OBJECT(file));
             g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
           }
         }
         return LocalDir::getSelectionModel(G_LIST_MODEL(store), false, 0);
+      }
+
+      static GFileInfo *newInfo(GFile *file, GFileType type){
+        auto info = g_file_info_new();
+        g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));     
+        //g_file_info_set_attribute_boolean("standard::backup", false);
+        g_file_info_set_attribute_boolean(info, G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP, false);
+        g_file_info_set_file_type(info,type);
+        g_file_info_set_is_hidden(info, false);
+        g_file_info_set_is_symlink(info, false);
+        return info;
       }
 
   };

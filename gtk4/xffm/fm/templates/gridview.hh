@@ -89,8 +89,9 @@ template <class Type>
       void *gridViewClick_f(void){ return gridViewClick_f_;}
 
       //bool dndOn = false;
-      GridView(const char *path, void *gridViewClick_f){
+      GridView(const char *path, void *gridViewClick_f, GtkWidget *_child){
         Child::addGridView((void *)this);
+        child_ = _child;
 
 
 
@@ -128,9 +129,10 @@ template <class Type>
         addGestureClickView3(view_, NULL, this); // menu 
 
         addMotionController();
+        
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
           TRACE("*** paz rootMonitor_\n");
-          rootMonitor_ = new RootMonitor<Type>(this);
+          rootMonitor_ = new RootMonitor<Type>(this, "Bookmarks");
         } else {
           fstabMonitor_ = new FstabMonitor<Type>(this); 
         } 

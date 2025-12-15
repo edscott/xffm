@@ -22,7 +22,7 @@ class FstabMonitor {
 
 public:    
   GridView<Type> *gridView(void){ 
-    return gridView_;
+return gridView_;
   }
   GHashTable *mountHash(void){return mountHash_;}
   //pthread_cond_t *condition() {return &waitCondition_;}
