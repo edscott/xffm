@@ -249,7 +249,6 @@ public:
           gtk_widget_set_visible(GTK_WIDGET(red[i]), true);
           gtk_widget_set_visible(GTK_WIDGET(green[i]), false);
           gtk_entry_set_visibility (GTK_ENTRY(passEntrys_[i]), false);
-          gtk_box_append(vbox, GTK_WIDGET(hbox[i]));
 
           auto keyController = gtk_event_controller_key_new();
           gtk_event_controller_set_propagation_phase(keyController, GTK_PHASE_BUBBLE);
@@ -790,7 +789,7 @@ public:
       Print::print(Child::getOutput(), g_strdup_printf(_("Mounting %s\n"), path));
 /*      auto resultMprobe = Basic::pipeCommandFull("sudo -A modprobe ecryptfs");
       if (resultMprobe) {
-        DBG("resultMprobe='%s'\n", resultMprobe);
+        TRACE("resultMprobe='%s'\n", resultMprobe);
         Print::print(output_, g_strdup("sudo -A modprobe ecryptfs"));
         Print::print(output_, resultMprobe);
       }
@@ -807,7 +806,7 @@ public:
       Run<bool>::thread_run(Child::getOutput(), command, false, false);
     /*  auto result = Basic::pipeCommandFull(command);
       if (result) {
-        DBG("Result='%s'\n", result);
+        TRACE("Result='%s'\n", result);
         Print::print(Child::getOutput(), result);
       }*/
       g_free(command);

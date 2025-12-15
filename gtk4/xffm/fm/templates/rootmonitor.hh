@@ -14,7 +14,7 @@ namespace xf {
         reloadPath_ = g_strdup(reloadPath);
         child_ = gridview->child();
         gridView_ = gridview;
-        DBG("*** RootMonitor(GridView<Type>) constructor, child=%p\n",child_);
+        TRACE("*** RootMonitor(GridView<Type>) constructor, child=%p\n",child_);
 
         args = (void **)calloc(3, sizeof(void *));
         args[0] = (void *) this;
@@ -55,7 +55,7 @@ namespace xf {
         GtkWidget *child = monitorObject->child();
         char *path = g_strdup(gridView_p->path());
 
-        DBG("***Root Monitor %p started\n", gridView_p);
+        TRACE("***Root Monitor %p started\n", gridView_p);
 
 loop:
         // gridView may change.
@@ -63,7 +63,7 @@ loop:
           TRACE("*** RootMonitor, child %p --> %p\n",child,gridView_p->child());
           TRACE("*** RootMonitor, gridView has changed from %p\n", gridView_p);
 done:
-          DBG("*** root monitor %p now has exited.\n", gridView_p);
+          TRACE("*** root monitor %p now has exited.\n", gridView_p);
           g_free(path);
           g_strfreev(sum);
           g_strfreev(files);
