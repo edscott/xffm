@@ -15,7 +15,7 @@ public:
     static void setDefaults(GtkWindow *dialog, GtkLabel *label){
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       auto buffer = gtk_entry_get_buffer(entry);
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject(NULL);
       auto txt = gridView_p->regexp();
       gtk_entry_buffer_set_text(buffer, txt);
     }
@@ -28,10 +28,10 @@ public:
       auto txt = gtk_entry_buffer_get_text(buffer);
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
-      auto path = Child::getWorkdir();
+      auto path = Child::getWorkdir(childWidget);
       TRACE(" path = %s, regular expresion = \"%s\"\n", path,txt);
       int bit = 0x100;
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject(NULL);
       auto flags = gridView_p->flags();
 
       bool update = false;

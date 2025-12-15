@@ -927,7 +927,7 @@ public:
         argv[i++] = path;
         argv[i++] = mountPoint;
 
-        auto textview = Child::getOutput();
+        auto textview = Child::getOutput(NULL);
         Print::showText(textview);
         gchar *command = g_strdup_printf(_("Mounting %s"), path);
  

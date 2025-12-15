@@ -307,9 +307,9 @@ const char **radioboxes(void){
         auto bookmarks_p = (Bookmarks *) bookmarksObject;
         bookmarks_p->addBookmark(path);
         g_free(path);
-        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
-        const char *p = gridView_p->path();
-        Workdir<Type>::setWorkdir(p);
+        //auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        //const char *p = gridView_p->path();
+        //Workdir<Type>::setWorkdir(p);
         
       }
     }
@@ -322,10 +322,10 @@ const char **radioboxes(void){
         auto bookmarks_p = (Bookmarks *) bookmarksObject;
         bookmarks_p->removeBookmark(path);
         g_free(path);
-        auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
-        const char *p = gridView_p->path();
+        //auto gridView_p = (GridView<Type> *)g_object_get_data(G_OBJECT(menu), "gridView_p");
+        //const char *p = gridView_p->path();
         TRACE("*** removeB set workdir to %s\n", p);
-        Workdir<Type>::setWorkdir(p);
+        //Workdir<Type>::setWorkdir(p);
       }
     }
 
@@ -373,7 +373,7 @@ const char **radioboxes(void){
     static void *umountThread(void *data){
       char *path = (char *)data;
       char *arg[]={(char *)"sudo", (char *)"-A", (char *)"umount", path, NULL};
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
       Run<bool>::thread_run(output, (const char **)arg, true);
       return NULL;
     }
@@ -464,7 +464,7 @@ const char **radioboxes(void){
         c->copyClipboardList(selectionList);
         // cleanup
         // No need to reload since copy items not emblemed (factory.hh)
-        // MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
+        // MainWindow<Type>::update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         return;
@@ -490,7 +490,7 @@ const char **radioboxes(void){
         // cleanup
         // Disabling reload since deadlock encountered 2025-02-06 
         // but might not be related to deadlock, reenabled 2025-08-21.
-        MainWindow<Type>::update(g_strdup(Child::getWorkdir()));
+        MainWindow<Type>::update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         return;
@@ -526,8 +526,8 @@ const char **radioboxes(void){
       g_free(e);
 
       TRACE("run %s \n", command);
-      auto output = Child::getOutput();
-      auto buttonSpace = Child::getButtonSpace();
+      auto output = Child::getOutput(NULL);
+      auto buttonSpace = Child::getButtonSpace(NULL);
       Prompt<Type>::run(output, command, true, true, buttonSpace);
       //object->prompt_p->run(output, command, true, true, object->buttonSpace);
       //object->prompt_p->run(output, command, true, true, object->buttonSpace);

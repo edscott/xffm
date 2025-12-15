@@ -21,7 +21,7 @@ namespace xf {
 
     static void
     toggleVpane (GtkButton *self, void *data){
-      auto vpane = Child::getPane();
+      auto vpane = Child::getPane(NULL);
       auto position = gtk_paned_get_position(vpane);
       int height = gtk_widget_get_height(GTK_WIDGET(vpane));
       TRACE("position=%d, height=%d, 3/4height=%d\n", position, height, height * 3 / 4);
@@ -369,7 +369,7 @@ public:
       if (!trashDir) trashDir = g_strdup_printf("%s/.local/share/Trash/files",
           g_get_home_dir());
       char *arg[]={(char *)"rm", (char *)"-rfv", trashDir, NULL};
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
       Run<bool>::thread_run(output, (const char **)arg, true);
       // FIXME: if in xffm::root,  trash bin icon reloaded
     }
@@ -426,7 +426,7 @@ public:
     openXffmMain(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       MainMenu<Type>::closePopover(menu);
-      auto workDir = Child::getWorkdir();
+      auto workDir = Child::getWorkdir(NULL);
       openXffm(menu, workDir);
       return;
     }
@@ -464,9 +464,9 @@ public:
       MainMenu<Type>::closePopover(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
-        clipboard_t::copyClipboardTxt(Child::getOutput());
+        clipboard_t::copyClipboardTxt(Child::getOutput(NULL));
       if (txt && strcmp(txt, "input")==0) 
-        clipboard_t::copyClipboardTxt(Child::getInput());
+        clipboard_t::copyClipboardTxt(Child::getInput(NULL));
     }
 
     static void 
@@ -475,9 +475,9 @@ public:
       MainMenu<Type>::closePopover(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
-        clipboard_t::cutClipboardTxt(Child::getOutput());
+        clipboard_t::cutClipboardTxt(Child::getOutput(NULL));
       if (txt && strcmp(txt, "input")==0) 
-        clipboard_t::cutClipboardTxt(Child::getInput());
+        clipboard_t::cutClipboardTxt(Child::getInput(NULL));
     }
 
     static void 
@@ -488,9 +488,9 @@ public:
       TRACE("menucallbacks.hh:: deleteTxt inactive\n");
       // FIXME (what?)
       /*if (txt && strcmp(txt, "output")==0) 
-        clipboard_t::cutClipboardTxt(Child::getOutput());
+        clipboard_t::cutClipboardTxt(Child::getOutput(NULL));
       if (txt && strcmp(txt, "input")==0) 
-        clipboard_t::cutClipboardTxt(Child::getInput());*/
+        clipboard_t::cutClipboardTxt(Child::getInput(NULL));*/
     }
 
     static void 
@@ -499,9 +499,9 @@ public:
       MainMenu<Type>::closePopover(menu);
       auto txt = (const char *)data;
       if (txt && strcmp(txt, "output")==0) 
-        clipboard_t::pasteClipboardTxt(Child::getOutput());
+        clipboard_t::pasteClipboardTxt(Child::getOutput(NULL));
       if (txt && strcmp(txt, "input")==0) 
-        clipboard_t::pasteClipboardTxt(Child::getInput());
+        clipboard_t::pasteClipboardTxt(Child::getInput(NULL));
       
     }
 
@@ -512,8 +512,8 @@ public:
       auto txt = (const char *)data;
       GtkTextView *textView = NULL;
 
-      if (txt && strcmp(txt, "output")==0) textView = Child::getOutput();
-      if (txt && strcmp(txt, "input")==0)  textView =Child::getInput();
+      if (txt && strcmp(txt, "output")==0) textView = Child::getOutput(NULL);
+      if (txt && strcmp(txt, "input")==0)  textView =Child::getInput(NULL);
       if (!textView) return;
 
       auto buffer = gtk_text_view_get_buffer(textView);  
@@ -524,12 +524,12 @@ public:
 
     static void
     clearTxt(GtkButton *button, void *data){
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
       auto txt = (const char *)data;
       GtkTextView *textView = NULL;
 
-      if (txt && strcmp(txt, "output")==0) textView = Child::getOutput();
-      if (txt && strcmp(txt, "input")==0)  textView =Child::getInput();
+      if (txt && strcmp(txt, "output")==0) textView = Child::getOutput(NULL);
+      if (txt && strcmp(txt, "input")==0)  textView =Child::getInput(NULL);
       if (!textView) return;
 
       Print::clearText(textView);
@@ -548,8 +548,8 @@ private:
     static void
     openXffm(GtkPopover *menu, const char *path){
       MainMenu<Type>::closePopover(menu);
-      auto output = Child::getOutput();
-      auto buttonSpace = Child::getButtonSpace();
+      auto output = Child::getOutput(NULL);
+      auto buttonSpace = Child::getButtonSpace(NULL);
       auto xffm = g_strdup_printf("%s -f %s", xffmProgram, path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
       auto runButton = new RunButton<Type>(EMBLEM_RUN,NULL);

@@ -613,7 +613,7 @@ private: // Nonfree functions
           g_file_enumerate_children (file,"standard::",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(), g_strconcat(error_->message, "\n", NULL));
+          Print::printError(Child::getOutput(NULL), g_strconcat(error_->message, "\n", NULL));
           g_error_free(error_);
           return NULL;
         }

@@ -109,7 +109,7 @@ template <class Type>
             gchar *markup = g_strdup_printf("%s: %s (%s)\n", regexp_,
                 _("Regular Expression syntax is incorrect"), _error->message);
             TRACE("%s", markup);
-            Print::printInfo(Child::getOutput(), markup);
+            Print::printInfo(Child::getOutput(NULL), markup);
             // done by printInfo(): g_free(markup);    
             g_error_free(_error);
           }    
@@ -132,13 +132,12 @@ template <class Type>
         
         if (g_object_get_data(G_OBJECT(store()), "xffm::root")){
           TRACE("*** paz rootMonitor_\n");
-          rootMonitor_ = new RootMonitor<Type>(this, "Bookmarks");
+          rootMonitor_ = new RootMonitor<Type>(this, "Bookmarks", 4);
         } else if (g_object_get_data(G_OBJECT(store()), "xffm::fstab")){
-          rootMonitor_ = new RootMonitor<Type>(this, "Disk Mounter");
+          rootMonitor_ = new RootMonitor<Type>(this, "Disk Mounter", 3);
         } else {
-          // FIXME: fstabMonitor_ should look for mounts or bookmarks
-          //        and just update the icon emblem, not a full reload.
-          rootMonitor_ = new RootMonitor<Type>(this, path_);
+          // FIXME: should just update the icon emblem, not a full reload.
+          rootMonitor_ = new RootMonitor<Type>(this, path_, 2);
           //fstabMonitor_ = new FstabMonitor<Type>(this); 
         } 
 
@@ -927,7 +926,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       if (modifierType & ((GDK_SHIFT_MASK & GDK_MODIFIER_MASK))) return false;
       
       gtk_selection_model_unselect_all(GTK_SELECTION_MODEL(selectionModel));
-      gtk_widget_grab_focus(GTK_WIDGET(Child::getInput()));
+      gtk_widget_grab_focus(GTK_WIDGET(Child::getInput(NULL)));
       return true;
     }
 

@@ -463,8 +463,8 @@ private:
   }
 
   static void targetHighlight(double x, double y, void *data){
-      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
-      GtkBox *pathbar = Child::getPathbar();
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject(NULL);
+      GtkBox *pathbar = Child::getPathbar(NULL);
       
 
 
@@ -521,7 +521,7 @@ private:
         }
       }
       if (!path){
-        auto workdir = Child::getWorkdir();
+        auto workdir = Child::getWorkdir(NULL);
         TRACE("workdir is \"%s\"\n", workdir);
         if (g_file_test(workdir, G_FILE_TEST_IS_DIR)){
           TRACE("*** Drop OK at xok=%d, yok=%d \"%s\"\n", xOk, yOk, workdir);
@@ -539,8 +539,8 @@ private:
   }
 
   static char *getDropTarget(double x, double y, void *data){
-      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
-      GtkBox *pathbar = Child::getPathbar();
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject(NULL);
+      GtkBox *pathbar = Child::getPathbar(NULL);
       TRACE("original x,y = %lf,%lf\n", x, y);
       if (getGridCoordinates(&x, &y, gridview_p)) {
         TRACE("getGridCoordinates x,y = %lf,%lf\n", x, y);
@@ -567,7 +567,7 @@ private:
       TRACE("action = %d (%d,%d,%d)\n", action, GDK_ACTION_COPY, GDK_ACTION_MOVE, GDK_ACTION_LINK);
 
       TRACE("*** dropDrop %lf,%lf .\n", x, y);
-      auto gridview_p = Child::getGridviewObject();
+      auto gridview_p = Child::getGridviewObject(NULL);
       //if (!getGridCoordinates(&x, &y, gridview_p)) return false;
       
       auto path = getDropTarget(x, y, gridview_p);
@@ -592,8 +592,8 @@ dropMotion ( GtkDropTarget* self, GdkDrop* drop, gdouble x, gdouble y, gpointer 
 {
   // does not do the trick
   // whatever
-    /*  auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
-      GtkBox *pathbar = Child::getPathbar();
+    /*  auto gridview_p = (GridView<Type> *)Child::getGridviewObject(NULL);
+      GtkBox *pathbar = Child::getPathbar(NULL);
       
       double pathbarTail=0;
       double gridviewTail=0;
@@ -647,7 +647,7 @@ private:
           if (strcmp(*p, target)==0){
             TRACE("Source and target are the same: %s\n", *p);
             auto message = g_strdup_printf(" %s: %s\n", _("Invalid target folder"), target);
-            Print::printWarning(Child::getOutput(), message);
+            Print::printWarning(Child::getOutput(NULL), message);
             d->dropDone(false);
             goto done;
           }
@@ -682,12 +682,12 @@ private:
         
       } else {
         auto message = g_strdup_printf(" %s %s (%s)\n", _("Drag:"), _("Invalid target folder"), target);
-        Print::printWarning(Child::getOutput(), message);
+        Print::printWarning(Child::getOutput(NULL), message);
         TRACE("Source and target are the same: %s\n", source);
         d->dropDone(false);
       }
 done:
-        auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
+        auto gridview_p = (GridView<Type> *)Child::getGridviewObject(NULL);
         resetGridviewCSS(gridview_p);
         inGridView = false;
         

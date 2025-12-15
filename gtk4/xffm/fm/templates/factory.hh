@@ -323,7 +323,7 @@ ClickMenu
           arg[0] = (void *)g_strdup(path);
           arg[1] = pictureBox;
           arg[2] = picture;
-          arg[3] = GINT_TO_POINTER(Child::getSerial()); // in main context
+          arg[3] = GINT_TO_POINTER(Child::getSerial(NULL)); // in main context
           arg[4] = GINT_TO_POINTER(size*scaleFactor); // in main context
           arg[5] = child; // in main context
           //Thread::threadPoolAdd(Texture<bool>::preview, (void *)arg);
@@ -616,7 +616,7 @@ ClickMenu
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto gridView_p = (GridView<Type> *)data;
       selectWidget(w, gridView_p, false);   
-      auto currentSerial = Child::getSerial();
+      auto currentSerial = Child::getSerial(NULL);
       if (longPressSerial != currentSerial){ // Invalid read of size 4
         TRACE("longPress_f(): Current serial mismatch %d != %d. Dropping longPress_f.\n", 
             currentSerial, longPressSerial);
@@ -683,7 +683,7 @@ ClickMenu
       auto event = gtk_event_controller_get_current_event(eventController);
       auto modType = gdk_event_get_modifier_state(event);
       auto gridView_p = (GridView<Type> *)data;
-      longPressSerial = Child::getSerial();
+      longPressSerial = Child::getSerial(NULL);
       gridView_p->x(x);
       gridView_p->y(y);
       graphene_rect_t bounds;

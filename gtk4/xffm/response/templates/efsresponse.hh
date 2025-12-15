@@ -658,13 +658,13 @@ public:
         auto efsOptions = getEFSOptions();
         bool ok = true;
         if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
-          Print::printWarning(Child::getOutput(),
+          Print::printWarning(Child::getOutput(NULL),
               g_strconcat(_("Mount Point"), " (", _("Encrypted"), ") ", " \"",path, "\" : ",
                 _("Folder does not exist"), "\n", NULL));
           ok = false;
         }
         if (!g_file_test(mountPoint, G_FILE_TEST_IS_DIR)){
-          Print::printWarning(Child::getOutput(),
+          Print::printWarning(Child::getOutput(NULL),
               g_strconcat(_("Mount Point"), " (", _("Unencrypted"), ") ", " \"",mountPoint, "\" : ",
                 _("Folder does not exist"), "\n", NULL));
           ok = false;
@@ -785,8 +785,8 @@ public:
       argv[i++] = mountPoint;
       argv[i] = NULL;   
 
-      Print::showText(Child::getOutput());
-      Print::print(Child::getOutput(), g_strdup_printf(_("Mounting %s\n"), path));
+      Print::showText(Child::getOutput(NULL));
+      Print::print(Child::getOutput(NULL), g_strdup_printf(_("Mounting %s\n"), path));
 /*      auto resultMprobe = Basic::pipeCommandFull("sudo -A modprobe ecryptfs");
       if (resultMprobe) {
         TRACE("resultMprobe='%s'\n", resultMprobe);
@@ -803,11 +803,11 @@ public:
       }
       TRACE("command='%s'\n", command);
 
-      Run<bool>::thread_run(Child::getOutput(), command, false, false);
+      Run<bool>::thread_run(Child::getOutput(NULL), command, false, false);
     /*  auto result = Basic::pipeCommandFull(command);
       if (result) {
         TRACE("Result='%s'\n", result);
-        Print::print(Child::getOutput(), result);
+        Print::print(Child::getOutput(NULL), result);
       }*/
       g_free(command);
 
@@ -829,7 +829,7 @@ public:
         execvp(argv[0], (char* const*)argv);
       }
       //new (CommandResponse<Type>)(command,"system-run", argv, cleanupGo, (void *)view);
-      //Run<bool>::thread_run(Child::getOutput(), (const char **)argv, true);
+      //Run<bool>::thread_run(Child::getOutput(NULL), (const char **)argv, true);
 */
 
       // cleanup

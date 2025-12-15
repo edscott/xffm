@@ -4,21 +4,22 @@ namespace xf {
   template <class Type>
   class Workdir  {
     private:
-      static void  updateGridView(const char *path){
-        TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(), Child::getSerial()+1);
+      static void  updateGridView(const char *path, GtkWidget *child){
+        TRACE("updateGridView(): Serial=%d->%d\n", Child::getSerial(child), Child::getSerial(child)+1);
         // On creating a new GtkGridView, we send pointer to function to process directory change (gridViewClick).
        
        // cancel monitor if any 
-        auto oldObject = (GridView<Type> *)Child::getGridviewObject();
-        if (oldObject){
+        auto oldObject = (GridView<Type> *)Child::getGridviewObject(child);
+ /*       if (oldObject){
           auto fstabMonitor = oldObject->fstabMonitor();
           if (fstabMonitor){
             fstabMonitor->stopMonitor();
           } 
-        }  
-        Child::incrementSerial();
+        }  */
 
-        auto child = Child::getChild();
+        if (!child) child = Child::getChild();
+        Child::incrementSerial(child);
+
         int iconsize = Settings::getInteger("xfterm", "iconsize", 24);
         g_object_set_data(G_OBJECT(child), "iconsize", GINT_TO_POINTER(iconsize));
         auto m = g_object_get_data(G_OBJECT(child), "monitor");
@@ -36,7 +37,7 @@ namespace xf {
           g_object_unref(monitor);
           //*
           auto path = g_file_get_path(dirFile);
-          TRACE("local monitor for %s cancelled.\n", path);
+          DBG("local monitor for %s cancelled.\n", path);
           g_free(path);
 
           g_object_unref(dirFile);
@@ -50,19 +51,19 @@ namespace xf {
             
           monitor = G_FILE_MONITOR(g_object_get_data(G_OBJECT(store), "monitor"));
           if (monitor){
-            TRACE("local monitor started for %s\n", path);
+            DBG("local monitor started for %s\n", path);
           } else {
-            TRACE("no local monitor for %s\n", path);
+            DBG("no local monitor for %s\n", path);
           }
 
           //viewObject->monitor(monitor);
           //g_object_set_data(G_OBJECT(child), "monitor", monitor);
 
           auto view = viewObject->view();
-          Child::setGridview(view); // This is the GtkGridView.
+          Child::setGridview(view, child); // This is the GtkGridView.
           TRACE("oldObject: %p\n", oldObject);
           if (oldObject) delete oldObject;
-          Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
+          Child::setGridviewObject(viewObject, child);  // This is the object from GridView template.   
         } else {
           auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick, child);
 //          auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick);
@@ -80,14 +81,14 @@ namespace xf {
           g_object_set_data(G_OBJECT(child), "monitor", monitor);
 
           auto view = viewObject->view();
-          Child::setGridview(view); // This is the GtkGridView.
-          auto oldObject = Child::getGridviewObject();
+          Child::setGridview(view, child); // This is the GtkGridView.
+          auto oldObject = Child::getGridviewObject(child);
           TRACE("oldObject: %p\n", oldObject);
           if (oldObject) {
             auto object = (GridView<Type> *) oldObject;
             delete object;
           }
-          Child::setGridviewObject(viewObject);  // This is the object from GridView template.   
+          Child::setGridviewObject(viewObject, child);  // This is the object from GridView template.   
         }
 
 
@@ -97,10 +98,8 @@ namespace xf {
 
     public:
     static const gchar *getWorkdir(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       return Child::getWorkdir(child);
-    }
-    static const gchar *getWorkdir(void){
-      return Child::getWorkdir();
     }
 
     static bool pleaseWait(void){
@@ -132,8 +131,9 @@ char buffer[4096];
         g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       }
       Child::setWindowTitle(child);
-      UtilPathbar<Type>::updatePathbar(false, (void *)pathbar_go);
-      updateGridView(path);
+      UtilPathbar<Type>::updatePathbar(false, (void *)pathbar_go, child);
+      DBG("    setWorkdir child %p to %s\n", child, path);
+      updateGridView(path, child);
       return true;
     }
 
@@ -146,8 +146,8 @@ char buffer[4096];
         // FIXME leak: path      
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      UtilPathbar<Type>::updatePathbar(true, (void *)pathbar_go);
-      updateGridView(path);
+      UtilPathbar<Type>::updatePathbar(true, (void *)pathbar_go, child);
+      updateGridView(path, NULL);
       return true;
     }
 
@@ -159,8 +159,8 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      UtilPathbar<Type>::updatePathbar(updateHistory, (void *)pathbar_go);
-      updateGridView(path);
+      UtilPathbar<Type>::updatePathbar(updateHistory, (void *)pathbar_go, child);
+      updateGridView(path, NULL);
       return true;
     }
 
@@ -174,8 +174,8 @@ char buffer[4096];
       g_free(wd);
       g_object_set_data(G_OBJECT(child), "path", g_strdup(path));
       Child::setWindowTitle(child);
-      UtilPathbar<Type>::updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go);
-      updateGridView(path);
+      UtilPathbar<Type>::updatePathbar(path, pathbar, updateHistory, (void *)pathbar_go, child);
+      updateGridView(path, NULL);
       return true;
     }
     
@@ -238,7 +238,7 @@ char buffer[4096];
         auto efsmount = g_find_program_in_path("mount.ecryptfs");
         if (!efsmount){
           auto message = g_strdup_printf(_("The %s utility is not installed."), "ecryptfs");
-          Print::printWarning(Child::getOutput(), g_strconcat(message, "(AUR: ecryptfs-utils)\n", NULL));
+          Print::printWarning(Child::getOutput(NULL), g_strconcat(message, "(AUR: ecryptfs-utils)\n", NULL));
           g_free(message);
           return TRUE;
         }
@@ -269,7 +269,7 @@ char buffer[4096];
         if (!g_file_test(trashDir, G_FILE_TEST_EXISTS)){
           auto message = g_strdup_printf(" %s (%s)\n", _("Trash is empty"), trashDir); 
           g_free(trashDir);
-          Print::printWarning(Child::getOutput(), message);
+          Print::printWarning(Child::getOutput(NULL), message);
           return TRUE;
         }
         setWorkdir(trashDir);
@@ -289,7 +289,7 @@ char buffer[4096];
       if (FstabUtil::isInPartitions(path)){
         if (!FstabUtil::isMounted(path)){
           auto message = g_strdup_printf(_("The volume '%s' is not mounted."), path);
-          Print::printWarning(Child::getOutput(), g_strdup_printf(" %s\n", message));
+          Print::printWarning(Child::getOutput(NULL), g_strdup_printf(" %s\n", message));
           g_free(message);
           return TRUE;
         }

@@ -237,7 +237,7 @@ public:
       auto entry = dialogObject->subClass()->remoteEntry();
       auto buffer = gtk_entry_get_buffer(entry);
       auto target = (const char *)gtk_entry_buffer_get_text(buffer);
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
       TRACE(" do the mount, target = %s\n", target ); 
       if (!g_file_test(target, G_FILE_TEST_EXISTS)){
         if (mkdir(target,0777) < 0){

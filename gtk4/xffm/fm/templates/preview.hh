@@ -978,7 +978,7 @@ class Preview {
       static gboolean warned = FALSE;
       if(!ghostscript) {
         if(!warned) {
-          Print::printWarning(Child::getOutput(), g_strdup("*** Please install ghostscript for ps and pdf previews (Make sure ghostscript fonts are installed too!)\n"));
+          Print::printWarning(Child::getOutput(NULL), g_strdup("*** Please install ghostscript for ps and pdf previews (Make sure ghostscript fonts are installed too!)\n"));
             fflush (NULL);
             warned = TRUE;
         }

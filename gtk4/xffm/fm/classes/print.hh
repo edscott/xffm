@@ -59,7 +59,7 @@ namespace xf {
       Basic::context_function(clear_text_buffer_f, arg);
     }
     static void clearText(void){
-      clearText(Child::getOutput());
+      clearText(Child::getOutput(NULL));
     }
 
     static void clear_text(GtkTextView *textview){ // deprecated

@@ -19,7 +19,7 @@ public:
 
       auto dir = g_path_get_dirname(path);
       auto newFile = g_strconcat(dir, G_DIR_SEPARATOR_S, target, NULL);
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
 
       auto op_f = g_find_program_in_path(op);
       if (!op_f) {ERROR_("*** Error: %s not found\n", op); return NULL;}
@@ -66,7 +66,7 @@ public:
         TRACE("*** cpmv: backup %s --> %s (%d)\n", tgt, backup, modeCopy);
         if (rename(tgtFile, backup) != 0){
           auto text = g_strdup_printf(" rename(%s, %s): %s\n", tgtFile, backup,strerror(errno));
-          Print::printWarning(Child::getOutput(), text);
+          Print::printWarning(Child::getOutput(NULL), text);
         }
         g_free(backup);
       }

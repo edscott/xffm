@@ -20,7 +20,7 @@ public:
       auto path = dialogObject->getText();
       if (!g_file_test(path, G_FILE_TEST_IS_DIR)){
         if (!strlen(path)) return NULL;
-       // Print::printError(Child::getOutput(), g_strdup_printf("%s (%s)\n", _("The location does not exist."), path));
+       // Print::printError(Child::getOutput(NULL), g_strdup_printf("%s (%s)\n", _("The location does not exist."), path));
        // g_free(path);
        // return NULL;
       }

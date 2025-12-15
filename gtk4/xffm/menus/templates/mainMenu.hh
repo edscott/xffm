@@ -189,7 +189,7 @@ namespace xf {
       if (strcmp(item,_("File type")) == 0) bit = 0x20;
       if (strcmp(item,_("Name")) == 0) bit = 0x40;
       // bit 0x1000 reserved for regexp.
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject(NULL);
       auto flags = gridView_p->flags();
 
       if (gtk_check_button_get_active(check)) {
@@ -234,7 +234,7 @@ namespace xf {
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       closePopover(menu);
 
-      auto gridview_p = (GridView<Type> *)Child::getGridviewObject();
+      auto gridview_p = (GridView<Type> *)Child::getGridviewObject(NULL);
 
       TRACE("apply %s...\n", gridview_p->path());
       if (gridview_p->flags() != 0){
@@ -262,14 +262,14 @@ namespace xf {
     static void addB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       closePopover(menu);
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject(NULL);
       auto bookmarks_p = (Bookmarks *) bookmarksObject;
       bookmarks_p->addBookmark(gridView_p->path());
      }
     static void removeB(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       closePopover(menu);
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject(NULL);
       auto bookmarks_p = (Bookmarks *) bookmarksObject;
       bookmarks_p->removeBookmark(gridView_p->path());
     }
@@ -283,7 +283,7 @@ namespace xf {
         return;
       }
       THREADPOOL->clear();
-      Child::incrementSerial();
+      Child::incrementSerial(NULL);
       auto selectionModel = gridView_p->selectionModel();
       gtk_selection_model_select_all (GTK_SELECTION_MODEL(selectionModel));
 
@@ -297,7 +297,7 @@ namespace xf {
       closePopover(menu);
       using subClass_t = EnvDialog;
       using dialog_t = DialogComplex<subClass_t>;
-      auto dialogObject = new dialog_t(GTK_WINDOW(Child::mainWidget()), Child::getWorkdir());
+      auto dialogObject = new dialog_t(GTK_WINDOW(Child::mainWidget()), Child::getWorkdir(NULL));
       return;
     }
    
@@ -358,15 +358,15 @@ namespace xf {
     openXffmMain(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       closePopover(menu);
-      auto workDir = Child::getWorkdir();
+      auto workDir = Child::getWorkdir(NULL);
       openXffm(menu, workDir);
       return;
     }
     static void
     openXffm(GtkPopover *menu, const char *path){
       closePopover(menu);
-      auto output = Child::getOutput();
-      auto buttonSpace = Child::getButtonSpace();
+      auto output = Child::getOutput(NULL);
+      auto buttonSpace = Child::getButtonSpace(NULL);
       auto xffm = g_strdup_printf("xffm4 -f %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
       auto runButton = new RunButton<Type>(EMBLEM_NEW_WINDOW, NULL);

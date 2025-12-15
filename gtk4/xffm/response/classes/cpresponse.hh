@@ -143,8 +143,8 @@ private:
       case -1:
         mode = _("link"); break;
     }
-    //Print::showText(Child::getOutput());
-    Print::printInfo(Child::getOutput(), g_strdup_printf(" %s (%s) %s\n",  _("Operation completed"), mode, srcTgt)); 
+    //Print::showText(Child::getOutput(NULL));
+    Print::printInfo(Child::getOutput(NULL), g_strdup_printf(" %s (%s) %s\n",  _("Operation completed"), mode, srcTgt)); 
     g_free(srcTgt);
 
       dialogObject->lockResponse();

@@ -107,7 +107,7 @@ private:
         int value = gtk_range_get_value(range);
         if (value != GPOINTER_TO_INT(g_object_get_data(G_OBJECT(range), "valor"))){
           TRACE("getWorkdir\n");
-          auto wd = Workdir<LocalDir>::getWorkdir();
+          auto wd = Workdir<LocalDir>::getWorkdir(NULL);
           if (g_file_test(wd, G_FILE_TEST_EXISTS)) {
             // race condition here, workdir null or garbage.
             // Workdir::reset();      
@@ -152,7 +152,7 @@ private:
 
     static void
     changeSize2 (GtkRange* self, gpointer user_data){
-      auto gridView_p = (GridView<LocalDir> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<LocalDir> *)Child::getGridviewObject(NULL);
       auto flags = gridView_p->flags();
       if (Workdir<LocalDir>::pleaseWait()) return;
       auto value = gtk_range_get_value(self);
@@ -172,7 +172,7 @@ private:
         Settings::setInteger(path, "iconsize", valueI);
       }
       Workdir<LocalDir>::setWorkdir(path, child); // reload.
-      Print::printInfo(Child::getOutput(), 
+      Print::printInfo(Child::getOutput(NULL), 
           g_strdup_printf("%s %.0lf", _("Icon Size:"), value ));
     }    
 

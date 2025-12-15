@@ -46,7 +46,7 @@ public:
         auto path = Basic::getPath(info);
         int response = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "response"));
         GError *error_ = NULL;
-        auto output = Child::getOutput();
+        auto output = Child::getOutput(NULL);
         switch (response){
           case 1:
             {

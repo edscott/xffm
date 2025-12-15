@@ -9,8 +9,9 @@ namespace xf {
     GtkWidget *child_ = NULL;
     GridView<Type> *gridView_ = NULL;
     public:
-      RootMonitor(GridView<Type> *gridview, const char *reloadPath){
-        TRACE("*** RootMonitor(GridView<Type>) constructor\n");
+      RootMonitor(GridView<Type> *gridview, const char *reloadPath, int size){
+        TRACE("*** RootMonitor(GridView<Type>) constructor %p(%p)\n",
+            gridview->child(), gridview);
         reloadPath_ = g_strdup(reloadPath);
         child_ = gridview->child();
         gridView_ = gridview;
@@ -18,7 +19,7 @@ namespace xf {
 
         args = (void **)calloc(3, sizeof(void *));
         args[0] = (void *) this;
-        args[1] = (void *) gridView_;
+        args[1] = GINT_TO_POINTER(size);
         args[2] = GINT_TO_POINTER(TRUE);
         pthread_t thread;
         pthread_create(&thread, NULL, threadF1, (void *)args);
@@ -42,28 +43,33 @@ namespace xf {
       char **files = (char **)calloc(5, sizeof(char *));
        
       auto bookmarks_p = (Bookmarks *) bookmarksObject; // bookmarksObject is global
-      files[0] = bookmarks_p->getBookmarksFilename();
-      files[1] = EfsResponse<Type>::efsKeyFile(); // static function
-      files[2] = g_strdup("/proc/mounts");
-      files[3] = g_strdup("/proc/partitions");
+      files[0] = g_strdup("/proc/mounts");
+      files[1] = g_strdup("/proc/partitions");
+      files[2] = bookmarks_p->getBookmarksFilename();
+      files[3] = EfsResponse<Type>::efsKeyFile(); // static function
 
 
 
         void **arg = (void **)data;
         auto monitorObject = (RootMonitor<Type> *)arg[0];
-        auto gridView_p = (GridView<Type> *)arg[1];
-        GtkWidget *child = monitorObject->child();
+        auto size = GPOINTER_TO_INT(arg[1]);
+        auto gridView_p = monitorObject->gridView();
+        GtkWidget *child_p = monitorObject->child();
         char *path = g_strdup(gridView_p->path());
 
-        TRACE("***Root Monitor %p started\n", gridView_p);
+        DBG("\n***Root Monitor %p(%p) started '%s'\n", child_p, gridView_p, path);
 
 loop:
         // gridView may change.
-        if (!arg[2] || !Child::validGridView(gridView_p)) {
-          TRACE("*** RootMonitor, child %p --> %p\n",child,gridView_p->child());
-          TRACE("*** RootMonitor, gridView has changed from %p\n", gridView_p);
+        Child::lockGridView("Root Monitor");
+        auto valid = Child::validGridView(gridView_p);
+        Child::unlockGridView("Root Monitor");
+        DBG("\n*** valid gridView %p(%p) %s = %d\n",
+            child_p, gridView_p, path, valid); 
+        if (!arg[2] || !valid) {
+          DBG("\n***Root Monitor cleanup %p(%p) continue=%d, valid=%d %s\n", 
+              child_p, gridView_p, arg[2], valid, path);
 done:
-          TRACE("*** root monitor %p now has exited.\n", gridView_p);
           g_free(path);
           g_strfreev(sum);
           g_strfreev(files);
@@ -72,52 +78,52 @@ done:
         }
        
         // get initial md5sum
-        auto q = sum;
-        for (auto p=files; p && *p && q && *q; p++, q++){
-          g_free(*q);
-          *q = Basic::md5sum(*p);
-        }
-
-
-        for (auto q=sum; q && *q; q++){
-          if (*q == NULL) {
-            ERROR_("Error:: Exiting threadF1(%p) on md5sum error (sum)\n", gridView_p);
+        for (int i=0; i<size; i++){
+          g_free(sum[i]);
+          sum[i] = Basic::md5sum(files[i]);
+          if (sum[i] == NULL) {
+            ERROR_("Error:: Exiting threadF1 %p(%p) on md5sum error (sum)\n", 
+                child_p, gridView_p);
             goto done;
           }
         }
-
     
         while (arg[2]){
           usleep(250000);
           if (!arg[1])continue;
 
           bool test[5];
-          int k=0;
-          for (auto p=files; p && *p; p++, k++){
-            test[k] = Basic::checkSumFile(*p, &(sum[k]));
+          for (int i=0; i<size; i++){
+            test[i] = Basic::checkSumFile(files[i], &(sum[i]));
           }
            
           TRACE("tests: %d %d %d %d\n", test[0],test[1],test[2],test[3]);
           if (!test[0] && !test[1] && !test[2] && !test[3]) continue;
-
+          Child::removeGridView(gridView_p); // gridView_p will no longer be valid.
           // This is sent to main context to avoid race with gridView invalidation.
-          TRACE("***checksum changed. context function.with %p, %p child=%p\n",
-              arg[0], arg[1],child);
-          Basic::context_function(reload_f, arg[0]);
+          DBG("\n***RootMonitor checksum changed %p(%p) '%s'\n",
+              child_p, gridView_p, path);
+          void *v[] = {(void *)path, (void *)child_p, (void *)gridView_p, NULL};
+          Basic::context_function(reload_f, v);
           break; // We break because we need to update checksums.
         }
 
         sleep(1);
-        TRACE("*** valid gridView (%p) = %d\n",
-            gridView_p,Child::validGridView(gridView_p)); 
+        
+
         goto loop;
     }
      
     static void *reload_f(void *data){
+      auto v = (void **)data;
+      auto path = (const char *)v[0];
+      auto child = GTK_WIDGET(v[1]);
+      auto gridview = (GridView<Type> *)v[2];
+
       auto monitorObject = (RootMonitor<Type> *) data;
-      TRACE("*** reload with path=%s, child = %p\n", 
-                 monitorObject->reloadPath(), monitorObject->child());
-      Workdir<Type>::setWorkdir(monitorObject->reloadPath(), monitorObject->child());
+      DBG("*** RootMonitor reload(%s) with %p(%p)\n", 
+            path, child, gridview);
+      Workdir<Type>::setWorkdir(path, child);
       return NULL;
     }
   };

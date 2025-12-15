@@ -67,7 +67,7 @@ private:
         if(mkdir(path,0700) < 0){
           auto string = g_strdup_printf(_("Cannot create folder '%s': %s"), 
               path, strerror(errno));
-          Print::printError(Child::getOutput(), g_strconcat(_("Sorry"), " ", string, "\n", NULL));
+          Print::printError(Child::getOutput(NULL), g_strconcat(_("Sorry"), " ", string, "\n", NULL));
           TRACE("***%s\n", string);
           g_free(string);
         }

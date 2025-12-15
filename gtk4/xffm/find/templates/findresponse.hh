@@ -225,7 +225,7 @@ private:
       GtkBox *_mainBox(const char *folder) {
           if (g_file_test(folder, G_FILE_TEST_IS_DIR)) folder_ = realpath(folder, NULL);
           else {
-            if (g_file_test(Child::getWorkdir(), G_FILE_TEST_IS_DIR)) folder_ = g_strdup(Child::getWorkdir());
+            if (g_file_test(Child::getWorkdir(NULL), G_FILE_TEST_IS_DIR)) folder_ = g_strdup(Child::getWorkdir(NULL));
             else folder_ = g_strdup(g_get_home_dir());
           }
           mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));

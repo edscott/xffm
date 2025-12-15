@@ -96,7 +96,7 @@ public:
 
         if (!gtk_widget_is_focus(input) && deleteKey) {
           TRACE("delete key now\n");
-          auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+          auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject(NULL);
           auto selectionList = gridView_p->getSelectionList();
           if (selectionList){
             Dialogs::rmList(selectionList);
@@ -143,7 +143,7 @@ private:
                     gdouble y,
                     gpointer data) 
     {
-      auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject();
+      auto gridview_p = (GridView<LocalDir> *)Child::getGridviewObject(NULL);
       if (gridview_p){
         TRACE("Leaving window\n");
         Dnd<LocalDir>::resetGridviewCSS(gridview_p);
@@ -257,7 +257,7 @@ private:
  
 
         gtk_widget_realize(GTK_WIDGET(mainWindow_));
-        auto input = Child::getInput();
+        auto input = Child::getInput(NULL);
         gtk_widget_grab_focus(GTK_WIDGET(input));
         
         g_signal_connect(G_OBJECT(mainWindow_), "notify", G_CALLBACK(notify), mainWindow_);
@@ -428,7 +428,7 @@ public:
       //Basic::flushGTK();
 #ifdef ENABLE_MENU_CLASS
 #warning "ENABLE_MENU_CLASS active"
-        auto pathbar_ = Child::getPathbar();
+        auto pathbar_ = Child::getPathbar(NULL);
         auto myPathbarMenu = new Menu<PathbarMenu<Type> >;
         auto title = g_strconcat("<span color=\"blue\">", "foo Navigation Toolbar", "</span>", NULL);
         auto menu = myPathbarMenu->getMenu(title);
@@ -444,7 +444,7 @@ public:
           gtk_notebook_next_page(notebook_);
       }
       Workdir<LocalDir>::setWorkdir(path, true);
-      gtk_widget_grab_focus(GTK_WIDGET(Child::getInput()));
+      gtk_widget_grab_focus(GTK_WIDGET(Child::getInput(NULL)));
      
     }
     void hideWindow(void){
@@ -543,12 +543,12 @@ private:
     }
 
     static void mainPaste(GtkButton * button, void *data){
-      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject(NULL);
       auto target = g_strdup(gridView_p->path());
       auto c = (clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (!c->validClipBoard()){
         // Should not happen.
-        Print::printWarning(Child::getOutput(), g_strconcat(_("Invalid clip"), "\n", NULL));
+        Print::printWarning(Child::getOutput(NULL), g_strconcat(_("Invalid clip"), "\n", NULL));
         return;
       }
 
@@ -558,27 +558,27 @@ private:
 
     static void mainCut(GtkButton * button, void *data){
       
-      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject(NULL);
       auto selectionList = gridView_p->getSelectionList();
       auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         c->cutClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
-        update(g_strdup(Child::getWorkdir()));
+        update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);
        }
       return;
     }
 
     static void mainCopy(GtkButton * button, void *data){
-      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject();
+      auto gridView_p = (GridView<LocalDir> *) Child::getGridviewObject(NULL);
       auto selectionList = gridView_p->getSelectionList();
       auto c =(clipboard_t *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       if (selectionList){
         c->copyClipboardList(selectionList);
         gtk_selection_model_unselect_all(Child::selection());
         // No need to reload since copy items not emblemed (factory.hh)
-        //update(g_strdup(Child::getWorkdir()));
+        //update(g_strdup(Child::getWorkdir(NULL)));
         Basic::freeSelectionList(selectionList);
       }
       return;
@@ -684,7 +684,7 @@ public:
     static void clickMenu(GtkButton *widget, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(widget), "menu"));
       gtk_widget_realize(GTK_WIDGET(menu));
-      auto gridView_p = (GridView<Type> *)Child::getGridviewObject();
+      auto gridView_p = (GridView<Type> *)Child::getGridviewObject(NULL);
       setupMenu(menu, gridView_p);
       char *basename = Child::getTabname(gridView_p->path());
 

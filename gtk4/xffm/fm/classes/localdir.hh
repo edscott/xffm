@@ -46,7 +46,7 @@ namespace xf {
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(), g_strdup(error_->message));
+          Print::printError(Child::getOutput(NULL), g_strdup(error_->message));
           g_error_free(error_);
           return NULL;
         }
@@ -175,10 +175,10 @@ namespace xf {
           snprintf (buffer2, 256, "%d/%d", filterData->count, filterData->total);
           snprintf (buffer, 256, "%s [%s]", _("Regular expression"), filterData->regexp);
           // Show text will cause new tabs to open with show text to full window.
-          //Print::showText(Child::getOutput());
+          //Print::showText(Child::getOutput(NULL));
           char buffer3[256];
           snprintf(buffer3, 256,_("%s (%s Filtered)"), buffer, buffer2);  
-          Print::printInfo(Child::getOutput(), g_strconcat(buffer3,"\n", NULL));
+          Print::printInfo(Child::getOutput(NULL), g_strconcat(buffer3,"\n", NULL));
         }
 
 
@@ -194,7 +194,7 @@ namespace xf {
           g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
         if (error_) {
           TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(), g_strdup(error_->message));
+          Print::printError(Child::getOutput(NULL), g_strdup(error_->message));
           g_error_free(error_);
           return 0;
         }

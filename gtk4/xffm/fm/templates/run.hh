@@ -353,7 +353,7 @@ public:
     run_operate_stderr (void *data, void *stream, int childFD) {
         GtkTextView *textview;
         if (!data){
-          textview = Child::getOutput();
+          textview = Child::getOutput(NULL);
             
         } else {
            if (!Print::isValidTextView(data)) return;

@@ -89,9 +89,9 @@ class tarResponse {
       if (cmd) {
         char *command = g_strdup_printf("%s %s \"%s\" \"%s\"", cmd, option, output, base);
         TRACE("command = \"%s\"\n", command);
-        pid_t childPid = Run<Type>::shell_command(Child::getOutput(), command, false, false);
+        pid_t childPid = Run<Type>::shell_command(Child::getOutput(NULL), command, false, false);
         auto runButton = new RunButton<Type>(EMBLEM_PACKAGE, NULL);
-        runButton->init(command, childPid, Child::getOutput(), workDir, buttonSpace);
+        runButton->init(command, childPid, Child::getOutput(NULL), workDir, buttonSpace);
         g_free(command);
       }
 

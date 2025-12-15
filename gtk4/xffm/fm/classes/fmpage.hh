@@ -97,7 +97,7 @@ namespace xf {
 
         auto title = g_strconcat("",_("Output"),_(" TTY"), NULL);
         auto myOutputMenu = new Menu<OutputMenu<LocalDir> >(title);
-        myOutputMenu->setMenu(GTK_WIDGET(output), GTK_WIDGET(output), Child::getWorkdir(), true);
+        myOutputMenu->setMenu(GTK_WIDGET(output), GTK_WIDGET(output), Child::getWorkdir(NULL), true);
         g_free(title);
         delete myOutputMenu;
 
@@ -245,7 +245,7 @@ namespace xf {
 
     
     static void clearCallback ( GtkGestureClick* self, gint n_press, gdouble x, gdouble y, void *data){
-      GtkTextView *textView = Child::getOutput();
+      GtkTextView *textView = Child::getOutput(NULL);
       Print::clearText(textView);
     }
 

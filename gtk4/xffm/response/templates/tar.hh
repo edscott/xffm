@@ -10,7 +10,7 @@ class Tar {
    public:
    Tar(GtkWindow *parent, const char *path){
       // Figure out tar/zip
-      auto dialogObject = new dialog_t(parent, Child::getWorkdir(), path);
+      auto dialogObject = new dialog_t(parent, Child::getWorkdir(NULL), path);
    }
 
 };

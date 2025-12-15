@@ -130,7 +130,7 @@ public:
     printClipBoard(void){
       auto c = (ClipBoard<Type> *)g_object_get_data(G_OBJECT(Child::mainWidget()), "ClipBoard");
       auto string = c->clipBoardCache();
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
       Print::showText(output);
       Print::print(output, CLIPBOARD_TAG, g_strdup("\n "));
       if (!string || strlen(string) == 0){

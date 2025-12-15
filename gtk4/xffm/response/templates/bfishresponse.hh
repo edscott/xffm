@@ -191,7 +191,7 @@ public:
 
 
     static void *asyncNo(void *data){
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
       auto message = g_strdup_printf("bcrypt: %s\n", _("User cancelled."));
       Print::printWarning(output, message);
       return NULL;
@@ -201,7 +201,7 @@ public:
       auto dialogObject = (DialogComplex<subClass_t> *)data;
 
       auto p = (subClass_t *) dialogObject->subClass();
-      auto output = Child::getOutput();
+      auto output = Child::getOutput(NULL);
       TRACE("bfishResponse asyncYes\n"); 
       auto decrypt = g_object_get_data(G_OBJECT(p->mainBox()), "decrypt");
       const char *passwd;
@@ -273,7 +273,7 @@ public:
       auto entry = dialogObject->subClass()->remoteEntry();
       auto buffer = gtk_entry_get_buffer(entry);
       auto target = (const char *)gtk_entry_buffer_get_text(buffer);
-      auto output = Child::getOutput();*/
+      auto output = Child::getOutput(NULL);*/
       //TRACE(" bfishResponse, target = %s\n", target ); 
 
   /*    auto mountSrc = (const char *)dialogObject->subClass()->mountSrc();

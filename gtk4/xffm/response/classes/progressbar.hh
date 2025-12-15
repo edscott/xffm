@@ -68,7 +68,7 @@ private:
         // Complete fraction, cancel dialog and .
         if (fraction >= 1.0) {
           auto message = g_strdup_printf(" %s (%s)\n", _("Cancelled"), _("Idle Timeout"));
-          Print::printWarning(Child::getOutput(), message);
+          Print::printWarning(Child::getOutput(NULL), message);
 
           TRACE("cancel dialog by timeout\n");
           

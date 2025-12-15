@@ -166,7 +166,7 @@ private:
       // prompt
       if (textView == NULL) {
         auto child = Child::getChild();
-        buttonSpace = Child::getButtonSpace(child); // XXX Apparently not used anymore.
+        buttonSpace = Child::getButtonSpace(child); 
         prompt_p = (Prompt<Type> *) new Prompt<Type>(child);
         g_object_set_data(G_OBJECT(child), "prompt", prompt_p); // Flexible prompt object.
       } else {
@@ -534,7 +534,7 @@ private:
           TRACE("command line is \'%s\'\n", command);
         }
         if (command) 
-          object->prompt_p->run(Child::getOutput(), command, true, true, object->buttonSpace);
+          object->prompt_p->run(Child::getOutput(NULL), command, true, true, object->buttonSpace);
         g_free(command);
         object->freeSelectionList();
         object->timeout_=-1;

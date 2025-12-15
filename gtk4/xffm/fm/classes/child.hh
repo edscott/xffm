@@ -86,6 +86,7 @@ namespace xf {
         gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
       }
       g_hash_table_insert(gridViewHash, gridView_p, GINT_TO_POINTER(1));
+      DBG("added gridview %p\n", gridView_p);
       unlockGridView("addGridView");
     }
     static void 
@@ -95,6 +96,7 @@ namespace xf {
       if (!gridViewHash) gridViewHash = g_hash_table_new(g_direct_hash, g_direct_equal);
       if (g_hash_table_lookup(gridViewHash, gridView_p)){
         g_hash_table_remove(gridViewHash, gridView_p);
+        DBG("removed gridview %p\n", gridView_p);
       }
       unlockGridView("removeGridView");
     } 
@@ -158,25 +160,27 @@ namespace xf {
     }
 
 
-
+/*
     static void *getGridviewObject(void){
       auto child =  Child::getChild();
       return (void *)g_object_get_data(G_OBJECT(child), "GridviewObject");
-    }
+    }*/
 
     static void *getGridviewObject(GtkWidget *child){
+      if (!child) child = Child::getChild();
       if (!valid(child)) return NULL; // Page has disappeared.
       return (void *)g_object_get_data(G_OBJECT(child), "GridviewObject");
     }
 
-    static void setGridviewObject(void *object){
-      auto child =  Child::getChild();
+    static void setGridviewObject(void *object, GtkWidget *child){
+      if (!child) child =  Child::getChild();
       g_object_set_data(G_OBJECT(child), "GridviewObject", object);
     }
 
-    static void setGridview(GtkWidget *view){
-      auto child =  Child::getChild();
-      auto gridScrolledWindow = getGridScrolledWindow();
+
+    static void setGridview(GtkWidget *view, GtkWidget *child){
+      if (!child) child =  Child::getChild();
+      auto gridScrolledWindow = getGridScrolledWindow(child);
       
       // Lets see if this works around the gtk inner race bug...
       auto oldView = gtk_scrolled_window_get_child(gridScrolledWindow);
@@ -199,14 +203,11 @@ namespace xf {
       g_object_set_data(G_OBJECT(view), "child", child);
     }
 
-    static void *getGridview(void){
-      return getGridviewObject();
-    }
-
     static void *getGridview(GtkWidget *child){
+      if (!child) child = Child::getChild();
       return getGridviewObject(child);
     }
-
+/*
     static const int getSerial(void){
       pthread_mutex_lock(&serialMutex);
       auto child =  Child::getChild();
@@ -214,7 +215,7 @@ namespace xf {
       auto serial = g_object_get_data(G_OBJECT(child), "serial");
       pthread_mutex_unlock(&serialMutex);
       return GPOINTER_TO_INT(serial);
-    }
+    }*/
 
     static const int getSerial(GtkWidget *child){
       if (!valid(child)) return -1; // Page has disappeared.
@@ -226,6 +227,7 @@ namespace xf {
     }
 
     static int incrementSerial(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       if (!valid(child)) return -1; // Page has disappeared.
       pthread_mutex_lock(&serialMutex);
       auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
@@ -233,7 +235,7 @@ namespace xf {
       pthread_mutex_unlock(&serialMutex);
       return serial;
     }
-
+/*
     static int incrementSerial(void){
       pthread_mutex_lock(&serialMutex);
       auto child =  Child::getChild();
@@ -242,17 +244,14 @@ namespace xf {
       pthread_mutex_unlock(&serialMutex);
       return serial;
     }
-
+*/
     static const char *getWorkdir(GtkWidget *child){
       TRACE("getWorkdir...\n");
+      if (!child) child =  Child::getChild();
       if (!Child::mainWidget()) return NULL;
       if (!child) return g_get_home_dir();
       if (!valid(child)) return g_get_home_dir(); // Page has disappeared.
       return (const gchar *)g_object_get_data(G_OBJECT(child), "path");
-    }
-    static const gchar *getWorkdir(void){
-      auto child =  Child::getChild();
-      return getWorkdir(child);
     }
     static void *getPrompt(void){
       auto child =  Child::getChild();
@@ -335,12 +334,12 @@ namespace xf {
     static GtkBox *vButtonBox(void){
       return GTK_BOX(g_object_get_data(G_OBJECT(Child::mainWidget()), "buttonBox"));
     }
-    static GtkTextView *getDollar(void){
-      auto child = getChild();
+    static GtkTextView *getDollar(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "dollar"));
     }
-    static GtkTextView *getInput(void){
-      auto child = getChild();
+    static GtkTextView *getInput(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "input"));
     }
 /*    static GtkTextView *getCurrentTextView(void){ // deprecated
@@ -348,26 +347,19 @@ namespace xf {
     }*/
      
     static GtkTextView *getOutput(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       if (!valid(child)) return NULL; // Page has disappeared.
       return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
     }
     
-    static GtkTextView *getOutput(){
-      auto child = getChild();
-      return GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
-    }
-    static GtkPaned *getPane(void){
-      auto child = getChild();
+    static GtkPaned *getPane(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       auto vpane = GTK_PANED(g_object_get_data(G_OBJECT(child), "vpane"));
       return vpane;
     }
 
-    static GtkBox *getButtonSpace(void){
-      auto child = getChild();
-      return GTK_BOX(getButtonSpace(child));
-    }
-
     static GtkBox *getButtonSpace(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       if (!valid(child)) return NULL; // Page has disappeared.
       return GTK_BOX(g_object_get_data(G_OBJECT(child), "buttonSpace"));
     }
@@ -383,12 +375,12 @@ namespace xf {
       GtkWidget *child = gtk_notebook_get_nth_page (notebook, num);
       return child;
     }
-    static GtkBox *getPathbar(void){
-      auto child = getChild();
+    static GtkBox *getPathbar(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       return GTK_BOX(g_object_get_data(G_OBJECT(child), "pathbar"));
     }
-    static GtkScrolledWindow *getGridScrolledWindow(void){
-      auto child = getChild();
+    static GtkScrolledWindow *getGridScrolledWindow(GtkWidget *child){
+      if (!child) child =  Child::getChild();
       return GTK_SCROLLED_WINDOW(g_object_get_data(G_OBJECT(child), "gridScrolledWindow"));
     }
 
