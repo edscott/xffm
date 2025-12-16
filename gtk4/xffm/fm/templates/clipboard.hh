@@ -196,6 +196,7 @@ public:
         g_free(path);
       }
       gdk_clipboard_set_text (clipBoardTxt, data);
+      TRACE("clipboard data: %s\n",data);
       g_free(data);
     }
 
@@ -281,13 +282,14 @@ private:
           usleep(250000);
       TRACE("Basic::context_function for clipboardContextF\n");
 //#warning "clipboardContextF is disabled"
-          //Basic::context_function(clipboardContextF, c);
+          Basic::context_function(clipboardContextF, c);
       }
       TRACE("*** clipboard thread exited.\n")
       return NULL;
     }
 
     static void *clipboardContextF(void *data){
+      TRACE("clipboardContextF now to read.\n");
         auto c = (ClipBoard<Type> *)data;
         auto clipboard = c->clipBoard();
 //        auto clipboard = gdk_display_get_clipboard(gdk_display_get_default());
@@ -306,6 +308,8 @@ private:
           g_error_free(error_);
           return;
         }
+
+        TRACE("setValidity for %s\n", text);
      
         if (!text || strlen(text)<5) c->setValidity(false);
         else if (strncmp(text, "copy", strlen("copy")) == 0) c->setValidity(true);

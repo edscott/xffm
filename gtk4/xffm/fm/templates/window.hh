@@ -518,16 +518,16 @@ private:
          Child::setWindowTitle(child);   
       }
 
-      // FIXME crash on switch page after rootmonitor reload
      
       auto selection = Child::selection(child);
+      auto c = (clipboard_t *)g_object_get_data(G_OBJECT(mainWindow_), "ClipBoard");
       if (!selection) {
         gtk_widget_set_sensitive(GTK_WIDGET(cutButton), false);
         gtk_widget_set_sensitive(GTK_WIDGET(copyButton), false);
         gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
+        if (c) gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
       } else {
-        auto c = (clipboard_t *)g_object_get_data(G_OBJECT(mainWindow_), "ClipBoard");
-        gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
+        if (c) gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), c->validClipBoard());
         auto bitset = gtk_selection_model_get_selection(selection);
         gtk_widget_set_sensitive(GTK_WIDGET(cutButton), (gtk_bitset_get_size(bitset) > 0));
         gtk_widget_set_sensitive(GTK_WIDGET(copyButton), (gtk_bitset_get_size(bitset) > 0));

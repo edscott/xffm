@@ -141,6 +141,7 @@ namespace xf {
     }
   
     static GtkSelectionModel *selection(GtkWidget *child){
+      if (!child) child = Child::getChild();
       if (!valid(child)) return NULL; // Page has disappeared.
       auto selection = g_object_get_data(G_OBJECT(child), "selection");
       if (selection) return GTK_SELECTION_MODEL(selection);
