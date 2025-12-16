@@ -124,6 +124,7 @@ template <class Type>
         view_ = getGridView();
         
         myMenu_ = new Menu<GridviewMenu<Type> >("foo");
+        TRACE("*** myMainMenu popover = %p\n", myMenu_);
         addGestureClickView1(view_, NULL, this);// unselect all on release
         //addGestureDown(view_, NULL, this);// 
         addGestureClickView3(view_, NULL, this); // menu 

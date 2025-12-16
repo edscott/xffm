@@ -11,6 +11,7 @@ namespace xf {
 
     void *reloadFunction_ = NULL;
     void *reloadData_ = NULL;
+    BasicPathbar<bool> *basicPathbar_p = NULL;
 
   public:
    GtkBox *pathbar(void){return pathbar_;} 
@@ -22,13 +23,15 @@ namespace xf {
 
    ~FileResponsePathbar(void){
      delete pathbarHistory_p;
+     delete basicPathbar_p;
      //delete myPathbarMenu_;
    }
    FileResponsePathbar(void *reloadFunction, void *reloadData) {
       reloadFunction_ = reloadFunction;
       reloadData_ = reloadData;
+      basicPathbar_p = ( BasicPathbar<bool> *)new  BasicPathbar<bool>;
 
-        pathbar_ = BasicPathbar<bool>::pathbarBox();
+        pathbar_ = basicPathbar_p->pathbarBox();
         g_object_set_data(G_OBJECT(pathbar_), "pathbar", this); 
         pathbarHistory_p = new PathbarHistory;
         g_object_set_data(G_OBJECT(pathbar_), "pathbarHistory_p", pathbarHistory_p); 

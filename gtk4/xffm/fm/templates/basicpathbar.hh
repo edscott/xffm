@@ -8,7 +8,7 @@ namespace xf {
   template <class Type>
   class BasicPathbar {
 
-    static GtkBox *eventBox(const char **p){
+    GtkBox *eventBox(const char **p){
 
       auto box = eventButton(p[0], p[1], p[2], p[3]);
 
@@ -22,8 +22,10 @@ namespace xf {
     }
     public:
 
+    ~BasicPathbar(void) {
+    }
 
-    static GtkBox *pathbarBox(void){
+     GtkBox *pathbarBox(void){
         GtkBox *pathbar = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         const char *p1[] = {"xf-go-previous", "RFM_GOTO", "xffm:back", _("Previous"), NULL};
         auto eventBox1 = eventBox(p1);
@@ -151,6 +153,13 @@ namespace xf {
         GList *children_list = Basic::getChildren(pathbar);
         //for (auto l=children_list; l && l->data; l=l->next);
         //GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar));
+
+        for (GList *l = children_list;l && l->data; l=l->next){ 
+          auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(l->data), "menu"));
+          DBG("update passbar, menu is %p\n", menu);
+        }
+
+
         gint i=0;
         gchar *pb_path = NULL;
         for (GList *children = children_list;children && children->data; children=children->next){
@@ -176,6 +185,12 @@ namespace xf {
                 gchar *name  = (gchar *)g_object_get_data(G_OBJECT(tail->data), "name");
                 TRACE( "Zapping tail item: \"%s\"\n", name);
                 g_free(name);
+
+                auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(tail->data), "menu"));
+                DBG("update passbar, tail menu is %p\n", menu);
+                gtk_widget_unparent(GTK_WIDGET(menu));
+                g_object_set_data(G_OBJECT(tail->data), "menu", NULL);
+
                 gtk_widget_unparent(GTK_WIDGET(tail->data));
             }
             break;
@@ -232,7 +247,9 @@ namespace xf {
              // no menu for filechooser!
              auto myItemMenu = new Menu<PathbarMenu<Type>>(path);
              auto menu = myItemMenu->setMenu(widget, parent, path);
+             g_object_set_data(G_OBJECT(widget), "menu", menu);
              gtk_popover_set_has_arrow(GTK_POPOVER(menu), false);
+             DBG("*** myItemMenu popover = %p\n", menu);
              
              delete myItemMenu;
            }

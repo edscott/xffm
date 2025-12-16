@@ -11,6 +11,7 @@ namespace xf {
     GtkWidget *back_;
     GtkWidget *next_;
     PathbarHistory *pathbarHistory_p;
+    BasicPathbar<Type> *basicPathbar_p = NULL;
      
   public:
    GtkBox *pathbar(void){return pathbar_;} 
@@ -18,10 +19,12 @@ namespace xf {
 
    ~Pathbar(void){
      delete pathbarHistory_p;
+     delete basicPathbar_p;
      //delete myPathbarMenu_;
    }
    Pathbar(void) {
-        pathbar_ = BasicPathbar<Type>::pathbarBox();
+        basicPathbar_p = (BasicPathbar<Type> *) new BasicPathbar<Type>;
+        pathbar_ = basicPathbar_p->pathbarBox();
         g_object_set_data(G_OBJECT(pathbar_), "withMenu", GINT_TO_POINTER(1));
         g_object_set_data(G_OBJECT(pathbar_), "pathbar", this); 
         pathbarHistory_p = new PathbarHistory;

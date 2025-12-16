@@ -280,8 +280,7 @@ private:
       auto c = (ClipBoard<Type> *)data;
       while (c->clipBoardSemaphore()){// data is semaphore to thread
           usleep(250000);
-      TRACE("Basic::context_function for clipboardContextF\n");
-//#warning "clipboardContextF is disabled"
+          TRACE("Basic::context_function for clipboardContextF\n");
           Basic::context_function(clipboardContextF, c);
       }
       TRACE("*** clipboard thread exited.\n")

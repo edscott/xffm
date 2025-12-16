@@ -10,6 +10,7 @@ namespace xf {
     public:
     GtkBox *mkVbuttonBox(GtkWindow *mainWindow){
         auto myColorMenu = new Menu<IconColorMenu<LocalDir> >(_("Colors"));
+        TRACE("*** myColorMenu popover = %p\n", myColorMenu);
         auto colorMenu =  myColorMenu->mkMenu(_("Colors"));
         delete myColorMenu;
         gtk_popover_set_has_arrow(colorMenu, true);

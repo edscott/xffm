@@ -620,7 +620,7 @@ private:
       menu_ = myMainMenu->mkMenu(NULL, 
               (void *)MenuCallbacks<Type>::gestureRegexp,
               _("Match regular expression"));
-      TRACE("menu popover = %p\n", menu_);
+      TRACE("*** myMainMenu popover = %p\n", menu_);
       gtk_widget_set_parent(GTK_WIDGET(menu_), GTK_WIDGET(newMenuButton));
       g_object_set_data(G_OBJECT(newMenuButton), "menu", menu_);
       delete myMainMenu;
