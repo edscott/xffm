@@ -1,4 +1,4 @@
-# Xffm4 translation file: lun 14 jul 2025 16:36:59 CST
+# Xffm4 translation file: Wed Dec 17 15:32:29 CST 2025
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-07-14 16:34-0600\n"
+        "POT-Creation-Date: 2025-12-17 15:28-0600\n"
         "PO-Revision-Date: 2010-03-21 10:57+0200\n"
         "Last-Translator: ntsetsbold <ntsetsbold@gmail.com>\n"
         "Language-Team: Mongolian <openmn-translation@lists.sourceforge.net>\n"
@@ -19,390 +19,415 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
         "X-Generator: Pootle 2.0.3\n"
 
-#: ../xffm/fm/templates/clipboard.hh:130 ../xffm/fm/templates/gridview.hh:729
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:836
 #: ../xffm/menus/templates/pathbarmenu.hh:15
-#: ../xffm/menus/templates/pathbarmenu.hh:25
-#: ../xffm/menus/templates/pathbarmenu.hh:36
-#: ../xffm/menus/templates/pathbarmenu.hh:48
-#: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/menu.hh:175 ../xffm/menus/templates/menu.hh:180
+#: ../xffm/menus/templates/pathbarmenu.hh:28
+#: ../xffm/menus/templates/pathbarmenu.hh:40
+#: ../xffm/menus/templates/pathbarmenu.hh:53
+#: ../xffm/menus/templates/gridviewmenu.hh:30
+#: ../xffm/menus/templates/menu.hh:183 ../xffm/menus/templates/menu.hh:188
 msgid   "Clipboard is empty."
 msgstr  "Клипборд хоосон байна."
 
-#: ../xffm/fm/templates/clipboard.hh:133 ../xffm/fm/templates/clipboard.hh:136
+#: ../xffm/fm/templates/clipboard.hh:141 ../xffm/fm/templates/clipboard.hh:144
 #, fuzzy
 msgid   "Clipboard contents"
 msgstr  "Ү"
 
-#: ../xffm/fm/templates/clipboard.hh:134 ../xffm/fm/templates/window.hh:495
+#: ../xffm/fm/templates/clipboard.hh:142 ../xffm/fm/templates/window.hh:554
 #, fuzzy
 msgid   "Invalid clip"
 msgstr  "Буруу"
 
-#: ../xffm/fm/templates/workdir.hh:250
+#: ../xffm/fm/templates/workdir.hh:240
 #, fuzzy, c-format
 msgid   "The %s utility is not installed."
 msgstr  "Загвар суухгүй байна. \n"
         " bzip2 хэрэглээ суусангүй. "
 
-#: ../xffm/fm/templates/workdir.hh:271
+#: ../xffm/fm/templates/workdir.hh:270
 #, fuzzy
 msgid   "Trash is empty"
 msgstr  "Файл хоосон"
 
-#: ../xffm/fm/templates/workdir.hh:292
+#: ../xffm/fm/templates/workdir.hh:291
 #, fuzzy, c-format
 msgid   "The volume '%s' is not mounted."
 msgstr  "»%s« текст олдсонгүй."
 
-#: ../xffm/fm/templates/run.hh:316
+#: ../xffm/fm/templates/run.hh:366
 #, fuzzy
 msgid   "error"
 msgstr  "Террор"
 
-#: ../xffm/fm/templates/run.hh:320
+#: ../xffm/fm/templates/run.hh:370
 #, fuzzy
 msgid   "warning"
 msgstr  "Анхааруулга"
 
-#: ../xffm/fm/templates/run.hh:441
-#: ../xffm/response/classes/passwdresponse.hh:11
-#: ../xffm/response/classes/passwdresponse.hh:79
+#: ../xffm/fm/templates/run.hh:491
+#: ../xffm/response/classes/passwdresponse.hh:13
 #: ../xffm/response/classes/passwdresponse.hh:83
+#: ../xffm/response/classes/passwdresponse.hh:87
 msgid   "Enter password"
 msgstr  "Нууц үгээ оруулах"
 
-#: ../xffm/fm/templates/runbutton.hh:248
+#: ../xffm/fm/templates/runbutton.hh:251
 #, fuzzy
 msgid   "Signal to emit"
 msgstr  "Сигналын хүч"
 
-#: ../xffm/fm/templates/runbutton.hh:281
+#: ../xffm/fm/templates/runbutton.hh:284
 msgid   "PID"
 msgstr  "PID"
 
-#: ../xffm/fm/templates/runbutton.hh:305
+#: ../xffm/fm/templates/runbutton.hh:308
 #, fuzzy
 msgid   "Renice Process"
 msgstr  "Процесс нууцлах"
 
-#: ../xffm/fm/templates/runbutton.hh:306
+#: ../xffm/fm/templates/runbutton.hh:309
 msgid   "Suspend"
 msgstr  "Унтуулах"
 
-#: ../xffm/fm/templates/runbutton.hh:307
+#: ../xffm/fm/templates/runbutton.hh:310
 msgid   "Continue"
 msgstr  "Үргэлжлүүлэх"
 
-#: ../xffm/fm/templates/runbutton.hh:308
+#: ../xffm/fm/templates/runbutton.hh:311
 msgid   "Interrupt"
 msgstr  "Тасалдал"
 
-#: ../xffm/fm/templates/runbutton.hh:309
+#: ../xffm/fm/templates/runbutton.hh:312
 msgid   "Hangup"
 msgstr  "Тавих"
 
-#: ../xffm/fm/templates/runbutton.hh:310
+#: ../xffm/fm/templates/runbutton.hh:313
 msgid   "User 1 (USR1)"
 msgstr  ""
 
-#: ../xffm/fm/templates/runbutton.hh:311
+#: ../xffm/fm/templates/runbutton.hh:314
 msgid   "User 2 (USR2)"
 msgstr  ""
 
-#: ../xffm/fm/templates/runbutton.hh:312
+#: ../xffm/fm/templates/runbutton.hh:315
 #, fuzzy
 msgid   "Terminate Task"
 msgstr  "Төгсгөх"
 
-#: ../xffm/fm/templates/runbutton.hh:313
+#: ../xffm/fm/templates/runbutton.hh:316
 msgid   "Abort"
 msgstr  "Болих"
 
-#: ../xffm/fm/templates/runbutton.hh:314
+#: ../xffm/fm/templates/runbutton.hh:317
 msgid   "Kill"
 msgstr  "Ал"
 
-#: ../xffm/fm/templates/runbutton.hh:315
+#: ../xffm/fm/templates/runbutton.hh:318
 #, fuzzy
 msgid   "Segmentation fault"
 msgstr  "Сегментийн гажуудал"
 
-#: ../xffm/fm/templates/dnd.hh:638
+#: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
+#: ../xffm/fm/templates/gridview.hh:628
+#: ../xffm/response/templates/openwith.hh:138
+#: ../xffm/response/templates/dialogbasic.hh:291
+#: ../xffm/find/templates/dndbox.hh:164
+#: ../xffm/menus/templates/pathbarmenu.hh:17
+#: ../xffm/menus/templates/pathbarmenu.hh:30
+#: ../xffm/menus/templates/pathbarmenu.hh:42
+#: ../xffm/menus/templates/inputMenu.hh:21
+#: ../xffm/menus/templates/inputMenu.hh:38
+#: ../xffm/menus/templates/inputMenu.hh:55
+#: ../xffm/menus/templates/outputMenu.hh:18
+#: ../xffm/menus/templates/outputMenu.hh:33
+#: ../xffm/menus/templates/outputMenu.hh:47
+#: ../xffm/menus/templates/mainMenu.hh:48
+#: ../xffm/menus/templates/mainMenu.hh:74
+#: ../xffm/menus/templates/mainMenu.hh:101
+#: ../xffm/menus/templates/gridviewmenu.hh:39
+#: ../xffm/menus/templates/gridviewmenu.hh:66
+#: ../xffm/menus/templates/gridviewmenu.hh:93
+#: ../xffm/menus/templates/iconColorMenu.hh:14
+#: ../xffm/menus/templates/iconColorMenu.hh:25
+#: ../xffm/menus/templates/iconColorMenu.hh:35
+msgid   "Close"
+msgstr  "Хаа"
+
+#: ../xffm/fm/templates/historyentry.hh:144
+#, fuzzy
+msgid   "Show help"
+msgstr  "Тусламж харуулах"
+
+#: ../xffm/fm/templates/dnd.hh:639
 #, fuzzy
 msgid   "Target"
 msgstr  "Зорилго:"
 
-#: ../xffm/fm/templates/dnd.hh:639
+#: ../xffm/fm/templates/dnd.hh:640
 msgid   "Source"
 msgstr  "Эх үүсвэр"
 
-#: ../xffm/fm/templates/dnd.hh:648 ../xffm/fm/templates/dnd.hh:683
+#: ../xffm/fm/templates/dnd.hh:649 ../xffm/fm/templates/dnd.hh:684
 #, fuzzy
 msgid   "Invalid target folder"
 msgstr  "Аргументийн хүчингүй утга "
 
-#: ../xffm/fm/templates/dnd.hh:670 ../xffm/fm/templates/gridview.hh:541
-#: ../xffm/fm/templates/gridview.hh:584
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:559
+#: ../xffm/fm/templates/gridview.hh:604
 #: ../xffm/response/classes/dndresponse.hh:22
-#: ../xffm/menus/templates/gridviewmenu.hh:32
-#: ../xffm/menus/templates/gridviewmenu.hh:62
-#: ../xffm/menus/templates/gridviewmenu.hh:86
+#: ../xffm/menus/templates/gridviewmenu.hh:33
+#: ../xffm/menus/templates/gridviewmenu.hh:55
+#: ../xffm/menus/templates/gridviewmenu.hh:80
 msgid   "Link"
 msgstr  "Холбоос"
 
-#: ../xffm/fm/templates/dnd.hh:683
+#: ../xffm/fm/templates/dnd.hh:684
 msgid   "Drag:"
 msgstr  "Чирэх:"
 
-#: ../xffm/fm/templates/dnd.hh:721
+#: ../xffm/fm/templates/dnd.hh:722
 #, fuzzy
 msgid   "files"
 msgstr  "Файлууд"
 
-#: ../xffm/fm/templates/dnd.hh:722
+#: ../xffm/fm/templates/dnd.hh:723
 #, c-format
 msgid   "+ %s more"
 msgstr  ""
 
-#: ../xffm/fm/templates/dnd.hh:729 ../xffm/fm/classes/bash.hh:653
+#: ../xffm/fm/templates/dnd.hh:730 ../xffm/fm/classes/bash.hh:653
 #, fuzzy
 msgid   "file"
 msgstr  "Профил"
 
-#: ../xffm/fm/templates/dnd.hh:730
+#: ../xffm/fm/templates/dnd.hh:731
 #, fuzzy
 msgid   ": "
 msgstr  ":"
 
-#: ../xffm/fm/templates/window.hh:272
-#: ../xffm/response/templates/openwith.hh:137
-#: ../xffm/response/templates/dialogbasic.hh:304
-#: ../xffm/find/templates/dndbox.hh:155
-msgid   "Close"
-msgstr  "Хаа"
-
-#: ../xffm/fm/templates/window.hh:544
+#: ../xffm/fm/templates/window.hh:603
 #, fuzzy
 msgid   "Long press time"
 msgstr  "Дууны шинжүүд"
 
-#: ../xffm/fm/templates/window.hh:552 ../xffm/fm/templates/gridview.hh:430
-#: ../xffm/fm/templates/gridview.hh:538 ../xffm/fm/templates/gridview.hh:581
+#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
+#: ../xffm/fm/templates/gridview.hh:556 ../xffm/fm/templates/gridview.hh:601
 #: ../xffm/menus/templates/inputMenu.hh:12
-#: ../xffm/menus/templates/inputMenu.hh:29
-#: ../xffm/menus/templates/inputMenu.hh:44
-#: ../xffm/menus/templates/inputMenu.hh:60
-#: ../xffm/menus/templates/gridviewmenu.hh:27
-#: ../xffm/menus/templates/gridviewmenu.hh:66
-#: ../xffm/menus/templates/gridviewmenu.hh:89
+#: ../xffm/menus/templates/inputMenu.hh:32
+#: ../xffm/menus/templates/inputMenu.hh:48
+#: ../xffm/menus/templates/inputMenu.hh:65
+#: ../xffm/menus/templates/gridviewmenu.hh:28
+#: ../xffm/menus/templates/gridviewmenu.hh:59
+#: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Cut"
 msgstr  "Хачла"
 
-#: ../xffm/fm/templates/window.hh:554 ../xffm/fm/templates/gridview.hh:430
-#: ../xffm/fm/templates/gridview.hh:537 ../xffm/fm/templates/gridview.hh:580
+#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
+#: ../xffm/fm/templates/gridview.hh:555 ../xffm/fm/templates/gridview.hh:600
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
-#: ../xffm/menus/templates/inputMenu.hh:28
-#: ../xffm/menus/templates/inputMenu.hh:43
-#: ../xffm/menus/templates/inputMenu.hh:59
+#: ../xffm/menus/templates/inputMenu.hh:31
+#: ../xffm/menus/templates/inputMenu.hh:47
+#: ../xffm/menus/templates/inputMenu.hh:64
 #: ../xffm/menus/templates/outputMenu.hh:11
-#: ../xffm/menus/templates/outputMenu.hh:24
-#: ../xffm/menus/templates/outputMenu.hh:37
-#: ../xffm/menus/templates/outputMenu.hh:50
-#: ../xffm/menus/templates/gridviewmenu.hh:26
-#: ../xffm/menus/templates/gridviewmenu.hh:65
-#: ../xffm/menus/templates/gridviewmenu.hh:88
+#: ../xffm/menus/templates/outputMenu.hh:27
+#: ../xffm/menus/templates/outputMenu.hh:41
+#: ../xffm/menus/templates/outputMenu.hh:55
+#: ../xffm/menus/templates/gridviewmenu.hh:27
+#: ../xffm/menus/templates/gridviewmenu.hh:58
+#: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "Copy"
 msgstr  "Хуул"
 
-#: ../xffm/fm/templates/window.hh:556 ../xffm/fm/templates/window.hh:664
-#: ../xffm/fm/templates/window.hh:691 ../xffm/fm/templates/gridview.hh:564
-#: ../xffm/fm/templates/gridview.hh:728
+#: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:584
+#: ../xffm/fm/templates/gridview.hh:835
 #: ../xffm/menus/templates/pathbarmenu.hh:13
-#: ../xffm/menus/templates/pathbarmenu.hh:24
-#: ../xffm/menus/templates/pathbarmenu.hh:35
-#: ../xffm/menus/templates/pathbarmenu.hh:47
+#: ../xffm/menus/templates/pathbarmenu.hh:27
+#: ../xffm/menus/templates/pathbarmenu.hh:39
+#: ../xffm/menus/templates/pathbarmenu.hh:52
 #: ../xffm/menus/templates/inputMenu.hh:13
-#: ../xffm/menus/templates/inputMenu.hh:30
-#: ../xffm/menus/templates/inputMenu.hh:45
-#: ../xffm/menus/templates/inputMenu.hh:61
+#: ../xffm/menus/templates/inputMenu.hh:33
+#: ../xffm/menus/templates/inputMenu.hh:49
+#: ../xffm/menus/templates/inputMenu.hh:66
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:80
-#: ../xffm/menus/templates/gridviewmenu.hh:28
-#: ../xffm/menus/templates/gridviewmenu.hh:67
-#: ../xffm/menus/templates/gridviewmenu.hh:90
-#: ../xffm/menus/templates/menu.hh:167
+#: ../xffm/menus/templates/mainMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:84
+#: ../xffm/menus/templates/gridviewmenu.hh:29
+#: ../xffm/menus/templates/gridviewmenu.hh:60
+#: ../xffm/menus/templates/gridviewmenu.hh:84
+#: ../xffm/menus/templates/menu.hh:175
 msgid   "Paste"
 msgstr  ""
 
-#: ../xffm/fm/templates/window.hh:558
+#: ../xffm/fm/templates/window.hh:617
 msgid   "New Tab"
 msgstr  "Шинэ самбар"
 
-#: ../xffm/fm/templates/window.hh:559 ../xffm/fm/templates/window.hh:561
+#: ../xffm/fm/templates/window.hh:618 ../xffm/fm/templates/window.hh:620
 #, fuzzy
 msgid   "Main menu"
 msgstr  "Үндсэн цэс"
 
-#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
-#: ../xffm/menus/templates/inputMenu.hh:15
-#: ../xffm/menus/templates/inputMenu.hh:26
-#: ../xffm/menus/templates/inputMenu.hh:41
-#: ../xffm/menus/templates/inputMenu.hh:57
-#: ../xffm/menus/templates/outputMenu.hh:12
-#: ../xffm/menus/templates/outputMenu.hh:25
-#: ../xffm/menus/templates/outputMenu.hh:38
-#: ../xffm/menus/templates/outputMenu.hh:51
-#: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:58
-#: ../xffm/menus/templates/mainMenu.hh:84
-msgid   "Select All"
-msgstr  "Бүгдийг сонгох"
-
-#: ../xffm/fm/templates/window.hh:659 ../xffm/fm/templates/window.hh:665
+#: ../xffm/fm/templates/window.hh:623 ../xffm/fm/templates/window.hh:720
+#: ../xffm/fm/templates/window.hh:726
 #: ../xffm/response/templates/regexpresponse.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:24
-#: ../xffm/menus/templates/mainMenu.hh:53
-#: ../xffm/menus/templates/mainMenu.hh:78
+#: ../xffm/menus/templates/mainMenu.hh:28
+#: ../xffm/menus/templates/mainMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:82
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "Файлын нэр энгийн илэрхийллээс давжээ"
 
-#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
-#: ../xffm/menus/templates/mainMenu.hh:28
+#: ../xffm/fm/templates/window.hh:720 ../xffm/fm/templates/window.hh:726
+#: ../xffm/menus/templates/inputMenu.hh:15
+#: ../xffm/menus/templates/inputMenu.hh:29
+#: ../xffm/menus/templates/inputMenu.hh:45
+#: ../xffm/menus/templates/inputMenu.hh:62
+#: ../xffm/menus/templates/outputMenu.hh:12
+#: ../xffm/menus/templates/outputMenu.hh:28
+#: ../xffm/menus/templates/outputMenu.hh:42
+#: ../xffm/menus/templates/outputMenu.hh:56
+#: ../xffm/menus/templates/mainMenu.hh:23
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:88
+msgid   "Select All"
+msgstr  "Бүгдийг сонгох"
+
+#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
+#: ../xffm/menus/templates/mainMenu.hh:27
 msgid   "Show"
 msgstr  "Харуулах"
 
-#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:98
-#: ../xffm/menus/templates/mainMenu.hh:121
-#: ../xffm/menus/templates/mainMenu.hh:134
-#: ../xffm/menus/templates/mainMenu.hh:161
+#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
+#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:29
+#: ../xffm/menus/templates/mainMenu.hh:103
+#: ../xffm/menus/templates/mainMenu.hh:126
+#: ../xffm/menus/templates/mainMenu.hh:139
+#: ../xffm/menus/templates/mainMenu.hh:184
 #, fuzzy
 msgid   "Hidden files"
 msgstr  "Далдалсан файлуудыг харуулах"
 
-#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:666
-#: ../xffm/fm/templates/window.hh:715 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:99
-#: ../xffm/menus/templates/mainMenu.hh:122
-#: ../xffm/menus/templates/mainMenu.hh:135
-#: ../xffm/menus/templates/mainMenu.hh:162
+#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
+#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:104
+#: ../xffm/menus/templates/mainMenu.hh:127
+#: ../xffm/menus/templates/mainMenu.hh:140
+#: ../xffm/menus/templates/mainMenu.hh:185
 #, fuzzy
 msgid   "Backup files"
 msgstr  "Нөөц файл"
 
-#: ../xffm/fm/templates/window.hh:660 ../xffm/menus/templates/mainMenu.hh:32
+#: ../xffm/fm/templates/window.hh:721 ../xffm/menus/templates/mainMenu.hh:32
 #, fuzzy
 msgid   "Sort mode"
 msgstr  "Хавтсыг эрэмбэл"
 
-#: ../xffm/fm/templates/window.hh:660 ../xffm/fm/templates/window.hh:715
+#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:778
 #: ../xffm/menus/templates/mainMenu.hh:34
-#: ../xffm/menus/templates/mainMenu.hh:100
-#: ../xffm/menus/templates/mainMenu.hh:123
-#: ../xffm/menus/templates/mainMenu.hh:136
-#: ../xffm/menus/templates/mainMenu.hh:163
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:128
+#: ../xffm/menus/templates/mainMenu.hh:141
+#: ../xffm/menus/templates/mainMenu.hh:186
 msgid   "Descending"
 msgstr  "Буурахаар"
 
-#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:715
-#: ../xffm/response/templates/fileresponse.hh:231
+#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:778
+#: ../xffm/response/templates/fileresponse.hh:233
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:101
-#: ../xffm/menus/templates/mainMenu.hh:124
-#: ../xffm/menus/templates/mainMenu.hh:143
-#: ../xffm/menus/templates/mainMenu.hh:167
+#: ../xffm/menus/templates/mainMenu.hh:106
+#: ../xffm/menus/templates/mainMenu.hh:129
+#: ../xffm/menus/templates/mainMenu.hh:148
+#: ../xffm/menus/templates/mainMenu.hh:190
 msgid   "Name"
 msgstr  "Нэр"
 
-#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
-#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:364
-#: ../xffm/fm/classes/child.hh:303 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:102
-#: ../xffm/menus/templates/mainMenu.hh:125
-#: ../xffm/menus/templates/mainMenu.hh:144
-#: ../xffm/menus/templates/mainMenu.hh:164
+#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
+#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:370
+#: ../xffm/fm/classes/child.hh:276 ../xffm/menus/templates/mainMenu.hh:36
+#: ../xffm/menus/templates/mainMenu.hh:107
+#: ../xffm/menus/templates/mainMenu.hh:130
+#: ../xffm/menus/templates/mainMenu.hh:149
+#: ../xffm/menus/templates/mainMenu.hh:187
 msgid   "Date"
 msgstr  "Огноо"
 
-#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
-#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/templates/properties.hh:363
-#: ../xffm/fm/classes/child.hh:304 ../xffm/menus/templates/mainMenu.hh:37
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:126
-#: ../xffm/menus/templates/mainMenu.hh:145
-#: ../xffm/menus/templates/mainMenu.hh:165
+#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
+#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:369
+#: ../xffm/fm/classes/child.hh:277 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/menus/templates/mainMenu.hh:108
+#: ../xffm/menus/templates/mainMenu.hh:131
+#: ../xffm/menus/templates/mainMenu.hh:150
+#: ../xffm/menus/templates/mainMenu.hh:188
 msgid   "Size"
 msgstr  "Хэмжээ"
 
-#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:667
-#: ../xffm/fm/templates/window.hh:715 ../xffm/fm/classes/child.hh:305
+#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
+#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:278
 #: ../xffm/menus/templates/mainMenu.hh:38
-#: ../xffm/menus/templates/mainMenu.hh:104
-#: ../xffm/menus/templates/mainMenu.hh:127
-#: ../xffm/menus/templates/mainMenu.hh:146
-#: ../xffm/menus/templates/mainMenu.hh:166
+#: ../xffm/menus/templates/mainMenu.hh:109
+#: ../xffm/menus/templates/mainMenu.hh:132
+#: ../xffm/menus/templates/mainMenu.hh:151
+#: ../xffm/menus/templates/mainMenu.hh:189
 #, fuzzy
 msgid   "File type"
 msgstr  "Файлын төрөл:"
 
-#: ../xffm/fm/templates/window.hh:661 ../xffm/fm/templates/window.hh:710
+#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:773
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:70
-#: ../xffm/menus/templates/mainMenu.hh:105
-#: ../xffm/menus/templates/mainMenu.hh:202
+#: ../xffm/menus/templates/mainMenu.hh:73
+#: ../xffm/menus/templates/mainMenu.hh:110
+#: ../xffm/menus/templates/mainMenu.hh:225
 #, fuzzy
 msgid   "Apply modifications"
 msgstr  "Програмууд"
 
-#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:689
-#: ../xffm/fm/templates/gridview.hh:555 ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:82
-#: ../xffm/menus/templates/gridviewmenu.hh:24
-#: ../xffm/menus/templates/gridviewmenu.hh:68
-#: ../xffm/menus/templates/gridviewmenu.hh:92
+#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:86
+#: ../xffm/menus/templates/gridviewmenu.hh:25
+#: ../xffm/menus/templates/gridviewmenu.hh:61
+#: ../xffm/menus/templates/gridviewmenu.hh:86
 #, fuzzy
 msgid   "Add bookmark"
 msgstr  "Тэмдэглэгээ нэмэх"
 
-#: ../xffm/fm/templates/window.hh:664 ../xffm/fm/templates/window.hh:690
-#: ../xffm/fm/templates/gridview.hh:515 ../xffm/fm/templates/gridview.hh:558
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:83
-#: ../xffm/menus/templates/gridviewmenu.hh:25
-#: ../xffm/menus/templates/gridviewmenu.hh:69
-#: ../xffm/menus/templates/gridviewmenu.hh:93
+#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:578
+#: ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/gridviewmenu.hh:26
+#: ../xffm/menus/templates/gridviewmenu.hh:62
+#: ../xffm/menus/templates/gridviewmenu.hh:87
 msgid   "Remove bookmark"
 msgstr  "Хавчуурагыг устгах"
 
-#: ../xffm/fm/templates/window.hh:670 ../xffm/menus/templates/mainMenu.hh:25
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:79
+#: ../xffm/fm/templates/window.hh:731 ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:83
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "Хогны сав хоослох"
 
-#: ../xffm/fm/templates/gridview.hh:95
+#: ../xffm/fm/templates/gridview.hh:110
 #: ../xffm/response/templates/regexpresponse.hh:44
-#: ../xffm/response/templates/regexpresponse.hh:49
+#: ../xffm/response/templates/regexpresponse.hh:47
 #, fuzzy
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "Ердийн Илэрхийлэл"
 
-#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:579
-#: ../xffm/menus/templates/gridviewmenu.hh:20
-#: ../xffm/menus/templates/gridviewmenu.hh:58
-#: ../xffm/menus/templates/gridviewmenu.hh:83
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:599
+#: ../xffm/menus/templates/gridviewmenu.hh:21
+#: ../xffm/menus/templates/gridviewmenu.hh:51
+#: ../xffm/menus/templates/gridviewmenu.hh:77
 #, fuzzy
 msgid   "Open with"
 msgstr  "Одоо нээ"
 
-#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:543
-#: ../xffm/fm/templates/gridview.hh:586
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:561
+#: ../xffm/fm/templates/gridview.hh:606
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -412,296 +437,303 @@ msgstr  "Одоо нээ"
 #: ../xffm/response/classes/rmresponse.hh:18
 #: ../xffm/response/classes/rmresponse.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:14
-#: ../xffm/menus/templates/inputMenu.hh:31
-#: ../xffm/menus/templates/inputMenu.hh:46
-#: ../xffm/menus/templates/inputMenu.hh:62
-#: ../xffm/menus/templates/gridviewmenu.hh:34
-#: ../xffm/menus/templates/gridviewmenu.hh:63
-#: ../xffm/menus/templates/gridviewmenu.hh:91
+#: ../xffm/menus/templates/inputMenu.hh:34
+#: ../xffm/menus/templates/inputMenu.hh:50
+#: ../xffm/menus/templates/inputMenu.hh:67
+#: ../xffm/menus/templates/gridviewmenu.hh:35
+#: ../xffm/menus/templates/gridviewmenu.hh:56
+#: ../xffm/menus/templates/gridviewmenu.hh:85
 msgid   "Delete"
 msgstr  "Устга"
 
-#: ../xffm/fm/templates/gridview.hh:430 ../xffm/fm/templates/gridview.hh:536
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:554
 #: ../xffm/response/templates/tarresponse.hh:35
-#: ../xffm/menus/templates/gridviewmenu.hh:21
-#: ../xffm/menus/templates/gridviewmenu.hh:72
-#: ../xffm/menus/templates/gridviewmenu.hh:98
+#: ../xffm/menus/templates/gridviewmenu.hh:22
+#: ../xffm/menus/templates/gridviewmenu.hh:65
+#: ../xffm/menus/templates/gridviewmenu.hh:92
 #, fuzzy
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "Бичиг объект үүсгэх ба засах"
 
-#: ../xffm/fm/templates/gridview.hh:469 ../xffm/fm/templates/gridview.hh:513
-#: ../xffm/fm/templates/gridview.hh:542 ../xffm/fm/templates/gridview.hh:585
-#: ../xffm/menus/templates/gridviewmenu.hh:33
-#: ../xffm/menus/templates/gridviewmenu.hh:64
-#: ../xffm/menus/templates/gridviewmenu.hh:95
+#: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
+#: ../xffm/fm/templates/gridview.hh:560 ../xffm/fm/templates/gridview.hh:605
+#: ../xffm/fm/templates/gridview.hh:734
+#: ../xffm/menus/templates/gridviewmenu.hh:34
+#: ../xffm/menus/templates/gridviewmenu.hh:57
+#: ../xffm/menus/templates/gridviewmenu.hh:89
 msgid   "Properties"
 msgstr  "Шинжүүд"
 
-#: ../xffm/fm/templates/gridview.hh:472 ../xffm/fm/templates/gridview.hh:493
-#: ../xffm/fm/templates/gridview.hh:570
-#: ../xffm/menus/templates/gridviewmenu.hh:23
-#: ../xffm/menus/templates/gridviewmenu.hh:56
-#: ../xffm/menus/templates/gridviewmenu.hh:80
+#: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
+#: ../xffm/fm/templates/gridview.hh:590
+#: ../xffm/menus/templates/gridviewmenu.hh:24
+#: ../xffm/menus/templates/gridviewmenu.hh:49
+#: ../xffm/menus/templates/gridviewmenu.hh:74
 msgid   "Unmount Volume"
 msgstr  "Хуваалтыг салгах"
 
-#: ../xffm/fm/templates/gridview.hh:475 ../xffm/fm/templates/gridview.hh:496
-#: ../xffm/fm/templates/gridview.hh:573
+#: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:593
 #: ../xffm/response/templates/mountresponse.hh:166
-#: ../xffm/menus/templates/gridviewmenu.hh:22
-#: ../xffm/menus/templates/gridviewmenu.hh:55
-#: ../xffm/menus/templates/gridviewmenu.hh:79
+#: ../xffm/menus/templates/gridviewmenu.hh:23
+#: ../xffm/menus/templates/gridviewmenu.hh:48
+#: ../xffm/menus/templates/gridviewmenu.hh:73
 msgid   "Mount Volume"
 msgstr  "Диск залгах"
 
-#: ../xffm/fm/templates/gridview.hh:535
+#: ../xffm/fm/templates/gridview.hh:553
 #: ../xffm/menus/templates/pathbarmenu.hh:11
-#: ../xffm/menus/templates/pathbarmenu.hh:22
-#: ../xffm/menus/templates/pathbarmenu.hh:33
-#: ../xffm/menus/templates/pathbarmenu.hh:45
-#: ../xffm/menus/templates/gridviewmenu.hh:19
-#: ../xffm/menus/templates/gridviewmenu.hh:57
-#: ../xffm/menus/templates/gridviewmenu.hh:82
+#: ../xffm/menus/templates/pathbarmenu.hh:25
+#: ../xffm/menus/templates/pathbarmenu.hh:37
+#: ../xffm/menus/templates/pathbarmenu.hh:50
+#: ../xffm/menus/templates/gridviewmenu.hh:20
+#: ../xffm/menus/templates/gridviewmenu.hh:50
+#: ../xffm/menus/templates/gridviewmenu.hh:76
 #, fuzzy
 msgid   "Open in new tab"
 msgstr  "Шинэ самбар нээх"
 
-#: ../xffm/fm/templates/gridview.hh:539 ../xffm/fm/templates/gridview.hh:582
+#: ../xffm/fm/templates/gridview.hh:557 ../xffm/fm/templates/gridview.hh:602
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
-#: ../xffm/menus/templates/gridviewmenu.hh:30
-#: ../xffm/menus/templates/gridviewmenu.hh:60
-#: ../xffm/menus/templates/gridviewmenu.hh:87
+#: ../xffm/menus/templates/gridviewmenu.hh:31
+#: ../xffm/menus/templates/gridviewmenu.hh:53
+#: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Rename"
 msgstr  "Ахин нэрлэ"
 
-#: ../xffm/fm/templates/gridview.hh:540 ../xffm/fm/templates/gridview.hh:583
+#: ../xffm/fm/templates/gridview.hh:558 ../xffm/fm/templates/gridview.hh:603
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
-#: ../xffm/menus/templates/gridviewmenu.hh:31
-#: ../xffm/menus/templates/gridviewmenu.hh:61
-#: ../xffm/menus/templates/gridviewmenu.hh:85
+#: ../xffm/menus/templates/gridviewmenu.hh:32
+#: ../xffm/menus/templates/gridviewmenu.hh:54
+#: ../xffm/menus/templates/gridviewmenu.hh:79
 msgid   "Duplicate"
 msgstr  "Хувьла"
 
-#: ../xffm/fm/templates/gridview.hh:578 ../xffm/fm/templates/gridview.hh:689
-#: ../xffm/fm/templates/gridview.hh:690
-#: ../xffm/menus/templates/gridviewmenu.hh:17
-#: ../xffm/menus/templates/gridviewmenu.hh:59
-#: ../xffm/menus/templates/gridviewmenu.hh:84
+#: ../xffm/fm/templates/gridview.hh:598 ../xffm/fm/templates/gridview.hh:795
+#: ../xffm/fm/templates/gridview.hh:796
+#: ../xffm/menus/templates/gridviewmenu.hh:18
+#: ../xffm/menus/templates/gridviewmenu.hh:52
+#: ../xffm/menus/templates/gridviewmenu.hh:78
 msgid   "auto"
 msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:595 ../xffm/fm/templates/gridview.hh:602
+#: ../xffm/fm/templates/gridview.hh:615 ../xffm/fm/templates/gridview.hh:622
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
-#: ../xffm/menus/templates/gridviewmenu.hh:36
-#: ../xffm/menus/templates/gridviewmenu.hh:71
-#: ../xffm/menus/templates/gridviewmenu.hh:97
+#: ../xffm/menus/templates/gridviewmenu.hh:37
+#: ../xffm/menus/templates/gridviewmenu.hh:64
+#: ../xffm/menus/templates/gridviewmenu.hh:91
 #, fuzzy
 msgid   "Decrypt File..."
 msgstr  "Текст Файл..."
 
-#: ../xffm/fm/templates/gridview.hh:597 ../xffm/fm/templates/gridview.hh:600
-#: ../xffm/menus/templates/gridviewmenu.hh:35
-#: ../xffm/menus/templates/gridviewmenu.hh:70
-#: ../xffm/menus/templates/gridviewmenu.hh:96
+#: ../xffm/fm/templates/gridview.hh:617 ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/menus/templates/gridviewmenu.hh:36
+#: ../xffm/menus/templates/gridviewmenu.hh:63
+#: ../xffm/menus/templates/gridviewmenu.hh:90
 #, fuzzy
 msgid   "Encrypt File..."
 msgstr  "Текст Файл..."
 
-#: ../xffm/fm/templates/gridview.hh:610
-#: ../xffm/response/templates/openwith.hh:158
+#: ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/response/templates/openwith.hh:161
+#: ../xffm/response/classes/cpresponse.hh:119
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "Олон хэлбэрийн"
 
-#: ../xffm/fm/templates/basicpathbar.hh:28 ../xffm/find/classes/fgr.hh:168
+#: ../xffm/fm/templates/gridview.hh:658
+#, fuzzy
+msgid   "eCryptfs Volume"
+msgstr  "Санах ойн өгөгдөл хадгалагч"
+
+#: ../xffm/fm/templates/basicpathbar.hh:30 ../xffm/find/classes/fgr.hh:168
 #: ../xffm/find/classes/fgr.hh:171 ../xffm/find/classes/fgr.hh:174
 #: ../xffm/find/classes/fgr.hh:177
 msgid   "Previous"
 msgstr  "Өмнөх"
 
-#: ../xffm/fm/templates/basicpathbar.hh:32
+#: ../xffm/fm/templates/basicpathbar.hh:34
 msgid   "Next"
 msgstr  "Дараачийн"
 
-#: ../xffm/fm/templates/basicpathbar.hh:36
+#: ../xffm/fm/templates/basicpathbar.hh:38
 #: ../xffm/response/templates/jumpresponse.hh:10
 #: ../xffm/response/templates/jumpresponse.hh:12
 #, fuzzy
 msgid   "Go to"
 msgstr  "Хуудсанд очих"
 
-#: ../xffm/fm/templates/preview.hh:85 ../xffm/fm/templates/preview.hh:171
-#: ../xffm/fm/templates/preview.hh:554 ../xffm/mime/mimesuffix.hh:191
+#: ../xffm/fm/templates/preview.hh:84 ../xffm/fm/templates/preview.hh:181
+#: ../xffm/fm/templates/preview.hh:565 ../xffm/mime/mimesuffix.hh:191
 #: ../xffm/mime/mime.hh:20 ../xffm/mime/mime.hh:40 ../xffm/mime/mime.hh:96
-#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:824
-#: ../xffm/find/templates/findresponse.hh:839
+#: ../xffm/mime/mime.hh:107 ../xffm/find/templates/findresponse.hh:826
+#: ../xffm/find/templates/findresponse.hh:841
 msgid   "unknown"
 msgstr  "тодорхойгүй"
 
-#: ../xffm/fm/templates/preview.hh:348
+#: ../xffm/fm/templates/preview.hh:359
 #, fuzzy
 msgid   "Empty file"
 msgstr  "Хоосон файл"
 
-#: ../xffm/fm/templates/preview.hh:557 ../xffm/find/classes/fgr.hh:162
+#: ../xffm/fm/templates/preview.hh:568 ../xffm/find/classes/fgr.hh:162
 #: ../xffm/find/classes/ffunctions.hh:13
 msgid   "Block device"
 msgstr  "Бүлэг төхөөрөмж"
 
-#: ../xffm/fm/templates/preview.hh:560 ../xffm/find/classes/fgr.hh:163
+#: ../xffm/fm/templates/preview.hh:571 ../xffm/find/classes/fgr.hh:163
 #: ../xffm/find/classes/ffunctions.hh:14
 msgid   "Character device"
 msgstr  "Тэмдэгт төхөөрөмж"
 
-#: ../xffm/fm/templates/preview.hh:563 ../xffm/fm/classes/bash.hh:60
+#: ../xffm/fm/templates/preview.hh:574 ../xffm/fm/classes/bash.hh:60
 #: ../xffm/find/classes/fgr.hh:159 ../xffm/find/classes/ffunctions.hh:10
 msgid   "Directory"
 msgstr  "Лавлах"
 
-#: ../xffm/fm/templates/preview.hh:566 ../xffm/find/classes/fgr.hh:164
+#: ../xffm/fm/templates/preview.hh:577 ../xffm/find/classes/fgr.hh:164
 #: ../xffm/find/classes/ffunctions.hh:15
 msgid   "FIFO"
 msgstr  ""
 
-#: ../xffm/fm/templates/preview.hh:569 ../xffm/find/classes/fgr.hh:160
+#: ../xffm/fm/templates/preview.hh:580 ../xffm/find/classes/fgr.hh:160
 #: ../xffm/find/classes/ffunctions.hh:11
 #, fuzzy
 msgid   "Symbolic Link"
 msgstr  "Тэмдэгт Холбоос"
 
-#: ../xffm/fm/templates/preview.hh:572 ../xffm/find/classes/fgr.hh:158
+#: ../xffm/fm/templates/preview.hh:583 ../xffm/find/classes/fgr.hh:158
 #, fuzzy
 msgid   "Regular file"
 msgstr  "Хэвийн"
 
-#: ../xffm/fm/templates/preview.hh:575 ../xffm/find/classes/ffunctions.hh:12
+#: ../xffm/fm/templates/preview.hh:586 ../xffm/find/classes/ffunctions.hh:12
 msgid   "Socket"
 msgstr  "Соккет"
 
-#: ../xffm/fm/templates/preview.hh:601
+#: ../xffm/fm/templates/preview.hh:612
 #, fuzzy, c-format
 msgid   "Cannot read from %s"
 msgstr  "CD уншиж чадахгүй байна:%s"
 
-#: ../xffm/fm/templates/prompt.hh:63
+#: ../xffm/fm/templates/prompt.hh:68
 msgid   "Input"
 msgstr  "Оролт"
 
-#: ../xffm/fm/templates/prompt.hh:63 ../xffm/fm/classes/fmpage.hh:98
+#: ../xffm/fm/templates/prompt.hh:68 ../xffm/fm/classes/fmpage.hh:97
 msgid   " TTY"
 msgstr  ""
 
-#: ../xffm/fm/templates/prompt.hh:236
-#: ../xffm/menus/templates/menucallbacks.hh:50
+#: ../xffm/fm/templates/prompt.hh:243
+#: ../xffm/menus/templates/menucallbacks.hh:51
 #, fuzzy, c-format
 msgid   "failed to chdir to %s"
 msgstr  "%s-д мониторийг суулгах боломжгүй байна"
 
-#: ../xffm/fm/templates/properties.hh:122
+#: ../xffm/fm/templates/properties.hh:125
 #, fuzzy
 msgid   "Properties and Attributes"
 msgstr  "Шинжийг устгах"
 
-#: ../xffm/fm/templates/properties.hh:140
+#: ../xffm/fm/templates/properties.hh:145
 #, fuzzy
 msgid   "File Mode:"
 msgstr  "Файлын эзэн:"
 
-#: ../xffm/fm/templates/properties.hh:167
-#: ../xffm/response/classes/envresponse.hh:126
+#: ../xffm/fm/templates/properties.hh:172
+#: ../xffm/response/classes/envresponse.hh:127
 #, fuzzy
 msgid   "Apply changes"
 msgstr  "Загварыг хэрэглэх"
 
-#: ../xffm/fm/templates/properties.hh:169 ../xffm/fm/classes/ecryptfs.hh:392
+#: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
-#: ../xffm/response/templates/fileresponse.hh:313
-#: ../xffm/response/templates/tarresponse.hh:210
-#: ../xffm/response/templates/efsresponse.hh:181
-#: ../xffm/response/templates/dialogbasic.hh:309
+#: ../xffm/response/templates/fileresponse.hh:315
+#: ../xffm/response/templates/tarresponse.hh:207
+#: ../xffm/response/templates/efsresponse.hh:199
+#: ../xffm/response/templates/dialogbasic.hh:296
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
-#: ../xffm/response/classes/cpresponse.hh:81
-#: ../xffm/find/templates/findsignals.hh:575
+#: ../xffm/response/classes/cpresponse.hh:89
+#: ../xffm/find/templates/findsignals.hh:579
 msgid   "Cancel"
 msgstr  "Цуцла"
 
-#: ../xffm/fm/templates/properties.hh:358
+#: ../xffm/fm/templates/properties.hh:364
 msgid   "Encoding"
 msgstr  "Кодчлол"
 
-#: ../xffm/fm/templates/properties.hh:359
+#: ../xffm/fm/templates/properties.hh:365
 #, fuzzy
 msgid   "Mimetype"
 msgstr  "Тоглоомын төрөл"
 
-#: ../xffm/fm/templates/properties.hh:381
+#: ../xffm/fm/templates/properties.hh:387
 msgid   "Successfully moved to trash."
 msgstr  ""
 
-#: ../xffm/fm/templates/properties.hh:382
+#: ../xffm/fm/templates/properties.hh:388
 msgid   "Source:"
 msgstr  "Эх үүсвэр:"
 
-#: ../xffm/fm/classes/localdir.hh:173 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/fm/classes/localdir.hh:176 ../xffm/find/classes/fgr.hh:202
 #: ../xffm/find/classes/fgr.hh:204
 #, fuzzy
 msgid   "Regular expression"
 msgstr  "Ердийн Илэрхийлэл"
 
-#: ../xffm/fm/classes/localdir.hh:176
+#: ../xffm/fm/classes/localdir.hh:180
 #, fuzzy, c-format
 msgid   "%s (%s Filtered)"
 msgstr  "2 (стерео)"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:13
+#: ../xffm/fm/classes/fmbuttonbox.hh:12 ../xffm/fm/classes/fmbuttonbox.hh:14
 msgid   "Colors"
 msgstr  "Өнгөнүүд"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:27
+#: ../xffm/fm/classes/fmbuttonbox.hh:28
 #, fuzzy
 msgid   "Switch button"
 msgstr  "»Хайх« товч"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:28 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:113
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:89
+#: ../xffm/menus/templates/mainMenu.hh:118
 msgid   "Search"
 msgstr  "Хайх"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:87
-#: ../xffm/menus/templates/mainMenu.hh:114
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:91
+#: ../xffm/menus/templates/mainMenu.hh:119
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "Терминал нээх"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:88
-#: ../xffm/menus/templates/mainMenu.hh:115
+#: ../xffm/fm/classes/fmbuttonbox.hh:31 ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:92
+#: ../xffm/menus/templates/mainMenu.hh:120
 msgid   "Home"
 msgstr  "Home"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:31
+#: ../xffm/fm/classes/fmbuttonbox.hh:32
 #, fuzzy
 msgid   "Open a New Window"
 msgstr  "Шинэ цонхонд нээх"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:51
+#: ../xffm/fm/classes/fmbuttonbox.hh:53
 msgid   "Icon Size"
 msgstr  "Дүрсийн хэмжээ"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:74 ../xffm/menus/templates/mainMenu.hh:68
+#: ../xffm/fm/classes/fmbuttonbox.hh:71 ../xffm/menus/templates/mainMenu.hh:71
 #, fuzzy
 msgid   "Color settings"
 msgstr  "Дүүргэх тохиргоо"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:166
+#: ../xffm/fm/classes/fmbuttonbox.hh:177
 #, fuzzy
 msgid   "Icon Size:"
 msgstr  "Дүрсийн хэмжээ"
@@ -711,12 +743,12 @@ msgstr  "Дүрсийн хэмжээ"
 msgid   "New File:"
 msgstr  "Шинэ файл"
 
-#: ../xffm/fm/classes/root.hh:26 ../xffm/fm/classes/child.hh:266
+#: ../xffm/fm/classes/root.hh:28 ../xffm/fm/classes/child.hh:235
 msgid   "Disk Mounter"
 msgstr  "Диск үүсгэгч"
 
-#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:503
-#: ../xffm/response/templates/efsresponse.hh:40
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:506
+#: ../xffm/response/templates/efsresponse.hh:48
 msgid   "New"
 msgstr  "Шинэ"
 
@@ -725,11 +757,11 @@ msgstr  "Шинэ"
 msgid   "Trash bin"
 msgstr  "Хогийн сав"
 
-#: ../xffm/fm/classes/child.hh:265
+#: ../xffm/fm/classes/child.hh:234
 msgid   "Bookmarks"
 msgstr  "Тэмдэглэгээ"
 
-#: ../xffm/fm/classes/basic.hh:35
+#: ../xffm/fm/classes/basic.hh:106
 msgid   "Basic rules:\n"
         "\n"
         "*  Will match any character zero or more times.\n"
@@ -737,6 +769,44 @@ msgid   "Basic rules:\n"
         "[] Match any character within the [] \n"
         "^  Match at beginning of string\n"
         "$  Match at end of string \n"
+msgstr  ""
+
+#: ../xffm/fm/classes/basic.hh:115
+msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
+        "( ) : \n"
+        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
+        "and ) \n"
+        "  lose their special meaning.\n"
+        "\n"
+        "The  period . matches  any  single  character.\n"
+        "The caret ^ matches at the start of line.\n"
+        "The dollar $ matches at the end of line.\n"
+        "\n"
+        "Characters within [ ] matches any single character in the list.\n"
+        "Characters within [^ ] matches any single character *not* in the "
+        "list.\n"
+        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
+        "[a-z]).\n"
+        "\n"
+        "A regular expression may be followed by one of several repetition "
+        "operators:\n"
+        "?      The preceding item is optional and matched\n"
+        "       at most once.\n"
+        "*      The preceding item will be matched zero\n"
+        "       or more times.\n"
+        "+      The preceding item will be matched one or\n"
+        "       more times.\n"
+        "{n}    The preceding item is matched exactly n times.\n"
+        "{n,}   The preceding item is matched n or more times.\n"
+        "{n,m}  The preceding item is matched at least n times,\n"
+        "       but not more than m times.\n"
+        "\n"
+        "To match any reserved character, precede it with \\. \n"
+        "\n"
+        "Two regular expressions may be joined by the logical or operator |.\n"
+        "Two regular expressions may be concatenated.\n"
+        "\n"
+        "More information is available by typing \"man grep\"\n"
 msgstr  ""
 
 #: ../xffm/fm/classes/progress.hh:73
@@ -761,7 +831,7 @@ msgstr  "Файл"
 msgid   "Command history"
 msgstr  "Тушаалын бичлэг"
 
-#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:697
+#: ../xffm/fm/classes/bash.hh:34 ../xffm/find/templates/findresponse.hh:699
 msgid   "User"
 msgstr  "Хэрэглэгч"
 
@@ -792,7 +862,7 @@ msgid   "Too many selected files"
 msgstr  "Хэт олон нээлттэй файл"
 
 #: ../xffm/fm/classes/bash.hh:339 ../xffm/fm/classes/ecryptfs.hh:346
-#: ../xffm/response/templates/efsresponse.hh:112
+#: ../xffm/response/templates/efsresponse.hh:121
 #: ../xffm/find/classes/fgr.hh:124
 #, fuzzy
 msgid   "Options:"
@@ -813,57 +883,30 @@ msgstr  "команда%d"
 msgid   "Options >>"
 msgstr  "Сонголт 1"
 
-#: ../xffm/fm/classes/fmpage.hh:98
+#: ../xffm/fm/classes/fmpage.hh:97
 msgid   "Output"
 msgstr  "Гаралт"
 
-#: ../xffm/fm/classes/fmpage.hh:137
+#: ../xffm/fm/classes/fmpage.hh:138
 #, fuzzy
 msgid   "Show/Hide"
 msgstr  "Таниулагч шугамыг үзүүлэх"
 
-#: ../xffm/fm/classes/fmpage.hh:139 ../xffm/menus/templates/inputMenu.hh:10
-#: ../xffm/menus/templates/inputMenu.hh:27
-#: ../xffm/menus/templates/inputMenu.hh:42
-#: ../xffm/menus/templates/inputMenu.hh:58
+#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/find/templates/dndbox.hh:160
+#: ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/menus/templates/inputMenu.hh:30
+#: ../xffm/menus/templates/inputMenu.hh:46
+#: ../xffm/menus/templates/inputMenu.hh:63
 #: ../xffm/menus/templates/outputMenu.hh:10
-#: ../xffm/menus/templates/outputMenu.hh:23
-#: ../xffm/menus/templates/outputMenu.hh:36
-#: ../xffm/menus/templates/outputMenu.hh:49
+#: ../xffm/menus/templates/outputMenu.hh:26
+#: ../xffm/menus/templates/outputMenu.hh:40
+#: ../xffm/menus/templates/outputMenu.hh:54
 msgid   "Clear"
 msgstr  "Цэвэрлэ"
 
-#: ../xffm/fm/classes/fmpage.hh:160
+#: ../xffm/fm/classes/fmpage.hh:161
 msgid   "Font size"
 msgstr  "Фонтын хэмжээ"
-
-#: ../xffm/fm/classes/gio.hh:137
-msgid   "Copying files"
-msgstr  "Файлыг хуулж байна"
-
-#: ../xffm/fm/classes/gio.hh:139
-msgid   "Moving files"
-msgstr  "Файлуудыг зөөж байна"
-
-#: ../xffm/fm/classes/gio.hh:141
-#, fuzzy
-msgid   "linking"
-msgstr  "Холбоос үүсгэх"
-
-#: ../xffm/fm/classes/gio.hh:143
-#, fuzzy
-msgid   "rename"
-msgstr  "Ахин нэрлэ"
-
-#: ../xffm/fm/classes/gio.hh:418
-#, fuzzy
-msgid   "Overwrite?"
-msgstr  "Дарж бичих"
-
-#: ../xffm/fm/classes/gio.hh:512
-#, c-format
-msgid   "(%d of %d)"
-msgstr  "(%d -ийн %d)"
 
 #: ../xffm/fm/classes/ecryptfs.hh:6
 #, fuzzy
@@ -1092,6 +1135,7 @@ msgid   "If verbosity=1, the mount helper will ask you for missing values "
 msgstr  ""
 
 #: ../xffm/fm/classes/ecryptfs.hh:175
+#: ../xffm/response/templates/efsresponse.hh:230
 #, fuzzy
 msgid   "Passphrase"
 msgstr  "Нэвтрэх үг"
@@ -1147,27 +1191,28 @@ msgstr  ""
 #: ../xffm/fm/classes/ecryptfs.hh:379 ../xffm/fm/classes/ecryptfs.hh:380
 #: ../xffm/fm/classes/ecryptfs.hh:402
 #: ../xffm/response/templates/mountresponse.hh:151
-#: ../xffm/response/templates/efsresponse.hh:142
+#: ../xffm/response/templates/efsresponse.hh:151
+#: ../xffm/response/templates/efsresponse.hh:207
 #, fuzzy
 msgid   "Mount"
 msgstr  "Кантри"
 
 #: ../xffm/fm/classes/ecryptfs.hh:396
-#: ../xffm/response/templates/tarresponse.hh:214
-#: ../xffm/response/templates/efsresponse.hh:185
+#: ../xffm/response/templates/tarresponse.hh:211
+#: ../xffm/response/templates/efsresponse.hh:203
 msgid   "Save"
 msgstr  "Хадгал"
 
 #: ../xffm/fm/classes/ecryptfs.hh:616
-#: ../xffm/response/templates/efsresponse.hh:164
-#: ../xffm/find/templates/findresponse.hh:292
-#: ../xffm/find/templates/findresponse.hh:512
-#: ../xffm/find/templates/findresponse.hh:547
+#: ../xffm/response/templates/efsresponse.hh:182
+#: ../xffm/find/templates/findresponse.hh:294
+#: ../xffm/find/templates/findresponse.hh:514
+#: ../xffm/find/templates/findresponse.hh:549
 msgid   "Options"
 msgstr  "Сонголт"
 
 #: ../xffm/fm/classes/ecryptfs.hh:617
-#: ../xffm/response/templates/efsresponse.hh:170
+#: ../xffm/response/templates/efsresponse.hh:188
 msgid   "Advanced"
 msgstr  "�асширенные"
 
@@ -1188,10 +1233,10 @@ msgid   "Mount Device"
 msgstr  "Оролтын төхөөрөмж:"
 
 #: ../xffm/response/templates/mountresponse.hh:128
-#: ../xffm/response/templates/efsresponse.hh:145
-#: ../xffm/response/templates/efsresponse.hh:150
-#: ../xffm/response/templates/efsresponse.hh:488
-#: ../xffm/response/templates/efsresponse.hh:494
+#: ../xffm/response/templates/efsresponse.hh:154
+#: ../xffm/response/templates/efsresponse.hh:158
+#: ../xffm/response/templates/efsresponse.hh:662
+#: ../xffm/response/templates/efsresponse.hh:668
 #, fuzzy
 msgid   "Mount Point"
 msgstr  "Фонтын нэгж"
@@ -1206,7 +1251,7 @@ msgstr  "»%s« каталог зохиож чадсангүй: %s\n"
 msgid   "Sorry"
 msgstr  ""
 
-#: ../xffm/response/templates/dialogentry.hh:41
+#: ../xffm/response/templates/dialogentry.hh:53
 msgid   "Help"
 msgstr  "Тусламж"
 
@@ -1214,65 +1259,64 @@ msgstr  "Тусламж"
 msgid   "Select Directory"
 msgstr  "Хавтсыг сонго"
 
-#: ../xffm/response/templates/fileresponse.hh:136
-#: ../xffm/response/templates/fileresponse.hh:267
-#: ../xffm/response/templates/fileresponse.hh:355
-#, fuzzy
-msgid   "No folder selected."
-msgstr  "Ямар ч файл сонгогдоогүй байна"
-
-#: ../xffm/response/templates/fileresponse.hh:239
+#: ../xffm/response/templates/fileresponse.hh:241
 #: ../xffm/response/classes/inforesponse.hh:6
 msgid   "Information"
 msgstr  "Мэдээлэл"
 
-#: ../xffm/response/templates/fileresponse.hh:263
+#: ../xffm/response/templates/fileresponse.hh:265
 msgid   "Selection:"
 msgstr  "Сонголт:"
 
-#: ../xffm/response/templates/fileresponse.hh:317
+#: ../xffm/response/templates/fileresponse.hh:269
+#: ../xffm/response/templates/fileresponse.hh:357
+#, fuzzy
+msgid   "No folder selected."
+msgstr  "Ямар ч файл сонгогдоогүй байна"
+
+#: ../xffm/response/templates/fileresponse.hh:319
 #: ../xffm/response/templates/mkdirresponse.hh:22
 msgid   "New Folder"
 msgstr  "Шинэ хавтас"
 
-#: ../xffm/response/templates/fileresponse.hh:321
+#: ../xffm/response/templates/fileresponse.hh:323
 msgid   "Accept"
 msgstr  "Зөвшөөрөх"
 
-#: ../xffm/response/templates/fileresponse.hh:500
+#: ../xffm/response/templates/fileresponse.hh:503
 #, fuzzy
 msgid   "New folder name:"
 msgstr  "Шинэ хавтасын нэр"
 
-#: ../xffm/response/templates/fileresponse.hh:504
+#: ../xffm/response/templates/fileresponse.hh:507
 #, fuzzy
 msgid   "New Directory"
 msgstr  "Лавлах"
 
-#: ../xffm/response/templates/fileresponse.hh:504
+#: ../xffm/response/templates/fileresponse.hh:507
 msgid   "Create in folder:"
 msgstr  "Хавтас дотор үүсгэх:"
 
-#: ../xffm/response/templates/openwith.hh:121
+#: ../xffm/response/templates/openwith.hh:122
 msgid   "Open With..."
 msgstr  "Үүгээр нээх..."
 
-#: ../xffm/response/templates/openwith.hh:198
+#: ../xffm/response/templates/openwith.hh:212
 #, fuzzy
 msgid   "Is executable"
 msgstr  "гүйцэтгэх"
 
-#: ../xffm/response/templates/openwith.hh:204
+#: ../xffm/response/templates/openwith.hh:215
 msgid   "Execute"
 msgstr  "Гүйцэтгэх"
 
-#: ../xffm/response/templates/openwith.hh:249
-#: ../xffm/response/templates/dialogbasic.hh:312
+#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/dialogbasic.hh:299
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "Батлах"
 
-#: ../xffm/response/templates/openwith.hh:257
+#: ../xffm/response/templates/openwith.hh:275
 msgid   "By default applications will be run in the background and only their "
         "output will be displayed in a toolview. This makes it impossible to "
         "interact with applications requiring user input from a terminal "
@@ -1280,12 +1324,12 @@ msgid   "By default applications will be run in the background and only their "
         "terminal."
 msgstr  ""
 
-#: ../xffm/response/templates/openwith.hh:272
+#: ../xffm/response/templates/openwith.hh:290
 #, fuzzy
 msgid   "Use External Terminal:"
 msgstr  "Терминал нээх"
 
-#: ../xffm/response/templates/openwith.hh:335
+#: ../xffm/response/templates/openwith.hh:353
 #, fuzzy, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  "»%s« лавлах олдсонгүй\n"
@@ -1295,42 +1339,52 @@ msgstr  "»%s« лавлах олдсонгүй\n"
 msgid   "Compressed file..."
 msgstr  "Хадгалсан файлуудыг шах"
 
-#: ../xffm/response/templates/tarresponse.hh:174
+#: ../xffm/response/templates/tarresponse.hh:171
 #, fuzzy
 msgid   "Target directory:"
 msgstr  "Хэрэглэгчийн директор:"
 
-#: ../xffm/response/templates/tarresponse.hh:183
+#: ../xffm/response/templates/tarresponse.hh:180
 msgid   "Name:"
 msgstr  "Нэр:"
 
-#: ../xffm/response/templates/efsresponse.hh:145
-#: ../xffm/response/templates/efsresponse.hh:488
+#: ../xffm/response/templates/efsresponse.hh:154
+#: ../xffm/response/templates/efsresponse.hh:662
 #, fuzzy
 msgid   "Encrypted"
 msgstr  "ПЖП шифр"
 
-#: ../xffm/response/templates/efsresponse.hh:150
-#: ../xffm/response/templates/efsresponse.hh:494
+#: ../xffm/response/templates/efsresponse.hh:158
+#: ../xffm/response/templates/efsresponse.hh:668
 #, fuzzy
 msgid   "Unencrypted"
 msgstr  "PGP хамгаалагдсан файл"
 
-#: ../xffm/response/templates/efsresponse.hh:489
-#: ../xffm/response/templates/efsresponse.hh:495
+#: ../xffm/response/templates/efsresponse.hh:230
+#, fuzzy
+msgid   "Confirm"
+msgstr  "Тохиргоо хийх"
+
+#: ../xffm/response/templates/efsresponse.hh:663
+#: ../xffm/response/templates/efsresponse.hh:669
 #, fuzzy
 msgid   "Folder does not exist"
 msgstr  "Хавтас байхгүй байна"
 
-#: ../xffm/response/templates/dialogdrop.hh:45
+#: ../xffm/response/templates/efsresponse.hh:789
+#, fuzzy, c-format
+msgid   "Mounting %s\n"
+msgstr  " %s-ийг хувиргаж байна"
+
+#: ../xffm/response/templates/dialogdrop.hh:46
 msgid   "Copying"
 msgstr  "Хуулбарлах"
 
-#: ../xffm/response/templates/dialogdrop.hh:45
+#: ../xffm/response/templates/dialogdrop.hh:46
 msgid   "Moving"
 msgstr  "Зөөх"
 
-#: ../xffm/response/templates/dialogdrop.hh:48
+#: ../xffm/response/templates/dialogdrop.hh:49
 msgid   "Completed"
 msgstr  "Дууссан"
 
@@ -1339,7 +1393,7 @@ msgstr  "Дууссан"
 #: ../xffm/response/classes/lnresponse.hh:10
 #: ../xffm/response/classes/cpresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:9
-#: ../xffm/find/templates/findresponse.hh:440 ../xffm/find/classes/fgr.hh:124
+#: ../xffm/find/templates/findresponse.hh:442 ../xffm/find/classes/fgr.hh:124
 msgid   "Path"
 msgstr  "Зам"
 
@@ -1399,11 +1453,6 @@ msgstr  "Нууц үг өгөгдөөгүй"
 msgid   "Passwords Do Not Match"
 msgstr  "Нэвтрэх үгнүүд тохирохгүй байна."
 
-#: ../xffm/response/templates/jumpresponse.hh:23
-#, fuzzy
-msgid   "The location does not exist."
-msgstr  "Байршил »%s« байхгүй болжээ."
-
 #: ../xffm/response/dialogs.hh:73
 #, fuzzy, c-format
 msgid   "Delete '%s'"
@@ -1429,17 +1478,17 @@ msgstr  "АНХААР!!!"
 msgid   "You have selected multiple files or folders"
 msgstr  "Та энд олон хавтас оруулж болно."
 
-#: ../xffm/response/classes/envresponse.hh:93
+#: ../xffm/response/classes/envresponse.hh:94
 #, fuzzy
 msgid   "Environment variables"
 msgstr  "боломжгүй"
 
-#: ../xffm/response/classes/envresponse.hh:125
+#: ../xffm/response/classes/envresponse.hh:126
 #, fuzzy
 msgid   "No changes need to be saved"
 msgstr  "Зураг хадгалагдсангүй."
 
-#: ../xffm/response/classes/envresponse.hh:220
+#: ../xffm/response/classes/envresponse.hh:221
 #, fuzzy
 msgid   "Environment Variable"
 msgstr  "боломжгүй"
@@ -1456,18 +1505,6 @@ msgstr  "Завсар:"
 #: ../xffm/response/classes/wsresponse.hh:13
 msgid   "Workspace Switcher"
 msgstr  "Ажлын талбарыг холбогч"
-
-#: ../xffm/response/classes/wsresponse.hh:35
-#: ../xffm/menus/templates/menucallbacks.hh:134
-#, fuzzy, c-format
-msgid   "Workspace %s"
-msgstr  "Ажилын талбар %s%d"
-
-#: ../xffm/response/classes/wsresponse.hh:36
-#: ../xffm/menus/templates/menucallbacks.hh:135
-#, fuzzy
-msgid   "does not exist"
-msgstr  "Файл үл оршино."
 
 #: ../xffm/response/classes/dndresponse.hh:13
 #, fuzzy
@@ -1489,25 +1526,25 @@ msgstr  "Холбоос"
 msgid   "Copy files"
 msgstr  "Файлуудыг хуулах"
 
-#: ../xffm/response/classes/cpresponse.hh:127
+#: ../xffm/response/classes/cpresponse.hh:140
 msgid   "copy"
 msgstr  "хуулах"
 
-#: ../xffm/response/classes/cpresponse.hh:129
+#: ../xffm/response/classes/cpresponse.hh:142
 #, fuzzy
 msgid   "move"
 msgstr  "Устга"
 
-#: ../xffm/response/classes/cpresponse.hh:131
+#: ../xffm/response/classes/cpresponse.hh:144
 msgid   "link"
 msgstr  "Холбоос"
 
-#: ../xffm/response/classes/cpresponse.hh:134
+#: ../xffm/response/classes/cpresponse.hh:147
 #, fuzzy
 msgid   "Operation completed"
 msgstr  "Хэсэгчилэл бэлэн"
 
-#: ../xffm/response/classes/passwdresponse.hh:9
+#: ../xffm/response/classes/passwdresponse.hh:11
 msgid   "Security"
 msgstr  "Аюулгүй байдал"
 
@@ -1516,245 +1553,245 @@ msgstr  "Аюулгүй байдал"
 msgid   "No Read Permission"
 msgstr  "Хандах эрхүүд"
 
-#: ../xffm/find/templates/findresponse.hh:295
-#: ../xffm/find/templates/findresponse.hh:735
+#: ../xffm/find/templates/findresponse.hh:297
+#: ../xffm/find/templates/findresponse.hh:737
 #, fuzzy
 msgid   "Advanced options"
 msgstr  "Өргөтгөсөн Тохиргоо"
 
-#: ../xffm/find/templates/findresponse.hh:303
+#: ../xffm/find/templates/findresponse.hh:305
 #, fuzzy
 msgid   "Find in Files"
 msgstr  "Холбоосыг хайх:"
 
-#: ../xffm/find/templates/findresponse.hh:307
-#: ../xffm/find/templates/findresponse.hh:329
+#: ../xffm/find/templates/findresponse.hh:309
+#: ../xffm/find/templates/findresponse.hh:331
 #, fuzzy
 msgid   "Cancel Operation"
 msgstr  "Нээх үйлдлийг зогсоох уу?"
 
-#: ../xffm/find/templates/findresponse.hh:324
+#: ../xffm/find/templates/findresponse.hh:326
 #, fuzzy
 msgid   "Show search results for this query"
 msgstr  "Хайлтын элементийг харуулах"
 
-#: ../xffm/find/templates/findresponse.hh:340
-#: ../xffm/find/templates/findresponse.hh:344
+#: ../xffm/find/templates/findresponse.hh:342
+#: ../xffm/find/templates/findresponse.hh:346
 #, fuzzy
 msgid   "Clear search"
 msgstr  "Үргэлж хайх"
 
-#: ../xffm/find/templates/findresponse.hh:483
+#: ../xffm/find/templates/findresponse.hh:485
 msgid   "Case Sensitive"
 msgstr  "Үсгийн хэмжээг ялгана"
 
-#: ../xffm/find/templates/findresponse.hh:484
+#: ../xffm/find/templates/findresponse.hh:486
 #, fuzzy
 msgid   "Extended regexp"
 msgstr  "Сонордуулгын энгийн илэрхийлэл"
 
-#: ../xffm/find/templates/findresponse.hh:485
+#: ../xffm/find/templates/findresponse.hh:487
 #, fuzzy
 msgid   "Include binary files"
 msgstr  "Файл хавсаргах:"
 
-#: ../xffm/find/templates/findresponse.hh:486 ../xffm/find/classes/fgr.hh:212
+#: ../xffm/find/templates/findresponse.hh:488 ../xffm/find/classes/fgr.hh:212
 #, fuzzy
 msgid   "Line Count"
 msgstr  "Мөрийн тайлбар"
 
-#: ../xffm/find/templates/findresponse.hh:495
+#: ../xffm/find/templates/findresponse.hh:497
 msgid   "Anywhere"
 msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:496
+#: ../xffm/find/templates/findresponse.hh:498
 #, fuzzy
 msgid   "Whole words only"
 msgstr  "Зөвхөн бүтэн үгсийг харгалзана"
 
-#: ../xffm/find/templates/findresponse.hh:497
+#: ../xffm/find/templates/findresponse.hh:499
 msgid   "lines"
 msgstr  "Мөрүүд"
 
-#: ../xffm/find/templates/findresponse.hh:498 ../xffm/find/classes/fgr.hh:210
+#: ../xffm/find/templates/findresponse.hh:500 ../xffm/find/classes/fgr.hh:210
 #, fuzzy
 msgid   "No match"
 msgstr  "Ямарч тохиолдол олдсонгүй"
 
-#: ../xffm/find/templates/findresponse.hh:522 ../xffm/find/classes/fgr.hh:126
+#: ../xffm/find/templates/findresponse.hh:524 ../xffm/find/classes/fgr.hh:126
 #, fuzzy
 msgid   "Filter:"
 msgstr  "Шүүлтүүрүүд"
 
-#: ../xffm/find/templates/findresponse.hh:530
-#: ../xffm/find/templates/findsignals.hh:303 ../xffm/find/classes/fgr.hh:146
+#: ../xffm/find/templates/findresponse.hh:532
+#: ../xffm/find/templates/findsignals.hh:304 ../xffm/find/classes/fgr.hh:146
 #, fuzzy
 msgid   "Recursive"
 msgstr  "Рекурсээр"
 
-#: ../xffm/find/templates/findresponse.hh:531
-#: ../xffm/find/templates/findsignals.hh:306 ../xffm/find/classes/fgr.hh:142
+#: ../xffm/find/templates/findresponse.hh:533
+#: ../xffm/find/templates/findsignals.hh:307 ../xffm/find/classes/fgr.hh:142
 msgid   "Find hidden files and directories"
 msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:533
-#: ../xffm/find/templates/findsignals.hh:315 ../xffm/find/classes/fgr.hh:138
+#: ../xffm/find/templates/findresponse.hh:535
+#: ../xffm/find/templates/findsignals.hh:316 ../xffm/find/classes/fgr.hh:138
 #, fuzzy
 msgid   "Stay on single filesystem"
 msgstr  "Бичихээс хамгаалагдсан файлын систем"
 
-#: ../xffm/find/templates/findresponse.hh:535
+#: ../xffm/find/templates/findresponse.hh:537
 #, fuzzy
 msgid   "Upper limit"
 msgstr  "Дээдхийн нийлбэр"
 
-#: ../xffm/find/templates/findresponse.hh:536
-#: ../xffm/find/templates/findsignals.hh:515
+#: ../xffm/find/templates/findresponse.hh:538
+#: ../xffm/find/templates/findsignals.hh:519
 msgid   "Results"
 msgstr  "Үр дүн"
 
-#: ../xffm/find/templates/findresponse.hh:555
+#: ../xffm/find/templates/findresponse.hh:557
 msgid   "Contains the text"
 msgstr  "Агуулсан текст"
 
-#: ../xffm/find/templates/findresponse.hh:622
-#: ../xffm/find/templates/findsignals.hh:321
+#: ../xffm/find/templates/findresponse.hh:624
+#: ../xffm/find/templates/findsignals.hh:322
 #, fuzzy
 msgid   "File size"
 msgstr  "Файлын хэмжээ:"
 
-#: ../xffm/find/templates/findresponse.hh:635
+#: ../xffm/find/templates/findresponse.hh:637
 msgid   "At Least"
 msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:635
-#: ../xffm/find/templates/findresponse.hh:642
+#: ../xffm/find/templates/findresponse.hh:637
+#: ../xffm/find/templates/findresponse.hh:644
 #, fuzzy
 msgid   "kBytes"
 msgstr  "Байт"
 
-#: ../xffm/find/templates/findresponse.hh:642
+#: ../xffm/find/templates/findresponse.hh:644
 #, fuzzy
 msgid   "At Most"
 msgstr  "Модулийн Тухай"
 
-#: ../xffm/find/templates/findresponse.hh:650
-#: ../xffm/find/templates/findsignals.hh:327
+#: ../xffm/find/templates/findresponse.hh:652
+#: ../xffm/find/templates/findsignals.hh:328
 #, fuzzy
 msgid   "Specific Time"
 msgstr  "Та цагаа сонгоно уу"
 
-#: ../xffm/find/templates/findresponse.hh:660
+#: ../xffm/find/templates/findresponse.hh:662
 msgid   "Modified"
 msgstr  "Өөрчлөгдсөн"
 
-#: ../xffm/find/templates/findresponse.hh:660
+#: ../xffm/find/templates/findresponse.hh:662
 #, fuzzy
 msgid   "Created"
 msgstr  "Бүтээсэн:"
 
-#: ../xffm/find/templates/findresponse.hh:660
+#: ../xffm/find/templates/findresponse.hh:662
 #, fuzzy
 msgid   "Accessed"
 msgstr  "Хандсан:"
 
-#: ../xffm/find/templates/findresponse.hh:661 ../xffm/find/classes/fgr.hh:166
+#: ../xffm/find/templates/findresponse.hh:663 ../xffm/find/classes/fgr.hh:166
 #: ../xffm/find/classes/fgr.hh:168
 msgid   "Minutes"
 msgstr  "Минут"
 
-#: ../xffm/find/templates/findresponse.hh:665 ../xffm/find/classes/fgr.hh:169
+#: ../xffm/find/templates/findresponse.hh:667 ../xffm/find/classes/fgr.hh:169
 #: ../xffm/find/classes/fgr.hh:171
 msgid   "Hours"
 msgstr  "Цаг"
 
-#: ../xffm/find/templates/findresponse.hh:669 ../xffm/find/classes/fgr.hh:172
+#: ../xffm/find/templates/findresponse.hh:671 ../xffm/find/classes/fgr.hh:172
 #: ../xffm/find/classes/fgr.hh:174
 msgid   "Days"
 msgstr  "Өдөр"
 
-#: ../xffm/find/templates/findresponse.hh:673
+#: ../xffm/find/templates/findresponse.hh:675
 #, fuzzy
 msgid   "Months"
 msgstr  "Сар"
 
-#: ../xffm/find/templates/findresponse.hh:684
-#: ../xffm/find/templates/findsignals.hh:332
+#: ../xffm/find/templates/findresponse.hh:686
+#: ../xffm/find/templates/findsignals.hh:333
 #, fuzzy
 msgid   "File properties"
 msgstr  "Cookie шинжүүд"
 
-#: ../xffm/find/templates/findresponse.hh:703
+#: ../xffm/find/templates/findresponse.hh:705
 msgid   "Group"
 msgstr  "Бүлэглэ"
 
-#: ../xffm/find/templates/findresponse.hh:708
-#: ../xffm/find/templates/findsignals.hh:178
+#: ../xffm/find/templates/findresponse.hh:710
+#: ../xffm/find/templates/findsignals.hh:179
 msgid   "Octal Permissions"
 msgstr  "Октал (наймт) эрх"
 
-#: ../xffm/find/templates/findresponse.hh:715
-#: ../xffm/find/templates/findresponse.hh:716
-#: ../xffm/find/templates/findsignals.hh:164
-#: ../xffm/find/templates/findsignals.hh:170
+#: ../xffm/find/templates/findresponse.hh:717
+#: ../xffm/find/templates/findresponse.hh:718
+#: ../xffm/find/templates/findsignals.hh:165
+#: ../xffm/find/templates/findsignals.hh:171
 #, fuzzy
 msgid   "Executable"
 msgstr  "Гүйцэтгэх"
 
-#: ../xffm/find/templates/findresponse.hh:715
-#: ../xffm/find/templates/findresponse.hh:720
-#: ../xffm/find/templates/findsignals.hh:167
+#: ../xffm/find/templates/findresponse.hh:717
+#: ../xffm/find/templates/findresponse.hh:722
+#: ../xffm/find/templates/findsignals.hh:168
 msgid   "SUID"
 msgstr  ""
 
-#: ../xffm/find/templates/findresponse.hh:756
+#: ../xffm/find/templates/findresponse.hh:758
 #, fuzzy
 msgid   "File type : "
 msgstr  "Файлын төрөл:"
 
-#: ../xffm/find/templates/findsignals.hh:89
+#: ../xffm/find/templates/findsignals.hh:90
 msgid   "Searching..."
 msgstr  "Хайж байна..."
 
-#: ../xffm/find/templates/findsignals.hh:448
-#: ../xffm/find/templates/dndbox.hh:66
+#: ../xffm/find/templates/findsignals.hh:452
+#: ../xffm/find/templates/dndbox.hh:71
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "Идэвхтэй ажиллагааг Зогсоох"
 
-#: ../xffm/find/templates/findsignals.hh:515
+#: ../xffm/find/templates/findsignals.hh:519
 #, fuzzy
 msgid   "Upper limit:"
 msgstr  "Дээдхийн нийлбэр"
 
-#: ../xffm/find/templates/findsignals.hh:518
+#: ../xffm/find/templates/findsignals.hh:522
 #, fuzzy
 msgid   "Counting files..."
 msgstr  "Файлыг хуулж байна"
 
-#: ../xffm/find/templates/findsignals.hh:526
+#: ../xffm/find/templates/findsignals.hh:530
 #, c-format
 msgid   "Found %d match"
 msgid_plural    "Found %d matches"
 msgstr[0]       ""
 msgstr[1]       ""
 
-#: ../xffm/find/templates/findsignals.hh:528
+#: ../xffm/find/templates/findsignals.hh:532
 #, fuzzy, c-format
 msgid   "%s Finished : %s"
 msgstr  "Дуусав"
 
-#: ../xffm/find/templates/dndbox.hh:128
+#: ../xffm/find/templates/dndbox.hh:133
 #, fuzzy
 msgid   "Edit all"
 msgstr  "Засварлагдах"
 
-#: ../xffm/find/templates/dndbox.hh:141
+#: ../xffm/find/templates/dndbox.hh:146
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "Хайлтын үр дүн"
 
-#: ../xffm/find/templates/dndbox.hh:261
+#: ../xffm/find/templates/dndbox.hh:274
 msgid   "Search results"
 msgstr  "Хайлтын үр дүн"
 
@@ -1937,158 +1974,125 @@ msgstr  "Үгс"
 msgid   "Lines"
 msgstr  "Зураасууд"
 
-#: ../xffm/find/classes/fgr.hh:364
+#: ../xffm/find/classes/fgr.hh:365
 #, fuzzy, c-format
 msgid   "Usage : %s [OPTIONS]\n"
 msgstr  "Хэрэглээ: %s\n"
-
-#: ../xffm/find/classes/historyentry.hh:136
-#, fuzzy
-msgid   "Show help"
-msgstr  "Тусламж харуулах"
 
 #: ../xffm/find/classes/ffunctions.hh:9
 msgid   "Regular"
 msgstr  "Хэвийн"
 
-#: ../xffm/find/classes/ffunctions.hh:41
-msgid   "Reserved characters for extended regexp are . ^ $ [ ] ? * + { } | \\ "
-        "( ) : \n"
-        "In  basic regular expressions the metacharacters ?, +, {, |, (, "
-        "and ) \n"
-        "  lose their special meaning.\n"
-        "\n"
-        "The  period . matches  any  single  character.\n"
-        "The caret ^ matches at the start of line.\n"
-        "The dollar $ matches at the end of line.\n"
-        "\n"
-        "Characters within [ ] matches any single character in the list.\n"
-        "Characters within [^ ] matches any single character *not* in the "
-        "list.\n"
-        "Characters inside [ - ] matches a range of characters (ie [0-9] or "
-        "[a-z]).\n"
-        "\n"
-        "A regular expression may be followed by one of several repetition "
-        "operators:\n"
-        "?      The preceding item is optional and matched\n"
-        "       at most once.\n"
-        "*      The preceding item will be matched zero\n"
-        "       or more times.\n"
-        "+      The preceding item will be matched one or\n"
-        "       more times.\n"
-        "{n}    The preceding item is matched exactly n times.\n"
-        "{n,}   The preceding item is matched n or more times.\n"
-        "{n,m}  The preceding item is matched at least n times,\n"
-        "       but not more than m times.\n"
-        "\n"
-        "To match any reserved character, precede it with \\. \n"
-        "\n"
-        "Two regular expressions may be joined by the logical or operator |.\n"
-        "Two regular expressions may be concatenated.\n"
-        "\n"
-        "More information is available by typing \"man grep\"\n"
-msgstr  ""
-
 #: ../xffm/menus/templates/pathbarmenu.hh:12
-#: ../xffm/menus/templates/pathbarmenu.hh:23
-#: ../xffm/menus/templates/pathbarmenu.hh:34
-#: ../xffm/menus/templates/pathbarmenu.hh:46
+#: ../xffm/menus/templates/pathbarmenu.hh:26
+#: ../xffm/menus/templates/pathbarmenu.hh:38
+#: ../xffm/menus/templates/pathbarmenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:67
-#: ../xffm/menus/templates/mainMenu.hh:91
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:95
 msgid   "Open in New Window"
 msgstr  "Шинэ цонхонд нээх"
 
 #: ../xffm/menus/templates/pathbarmenu.hh:14
-#: ../xffm/menus/templates/pathbarmenu.hh:26
-#: ../xffm/menus/templates/pathbarmenu.hh:37
-#: ../xffm/menus/templates/pathbarmenu.hh:49
+#: ../xffm/menus/templates/pathbarmenu.hh:29
+#: ../xffm/menus/templates/pathbarmenu.hh:41
+#: ../xffm/menus/templates/pathbarmenu.hh:54
 #: ../xffm/menus/templates/inputMenu.hh:19
-#: ../xffm/menus/templates/inputMenu.hh:50
+#: ../xffm/menus/templates/inputMenu.hh:54
 #: ../xffm/menus/templates/outputMenu.hh:16
-#: ../xffm/menus/templates/outputMenu.hh:29
-#: ../xffm/menus/templates/outputMenu.hh:42
-#: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:94 ../xffm/menus/templates/menu.hh:173
+#: ../xffm/menus/templates/outputMenu.hh:32
+#: ../xffm/menus/templates/outputMenu.hh:46
+#: ../xffm/menus/templates/outputMenu.hh:60
+#: ../xffm/menus/templates/mainMenu.hh:68
+#: ../xffm/menus/templates/mainMenu.hh:98 ../xffm/menus/templates/menu.hh:181
 #, fuzzy
 msgid   "Show Clipboard"
 msgstr  "Ирмэгийн үзүүлэх"
 
+#: ../xffm/menus/templates/menucallbacks.hh:135
+#, fuzzy, c-format
+msgid   "Workspace %s"
+msgstr  "Ажилын талбар %s%d"
+
+#: ../xffm/menus/templates/menucallbacks.hh:136
+#, fuzzy
+msgid   "does not exist"
+msgstr  "Файл үл оршино."
+
 #: ../xffm/menus/templates/inputMenu.hh:16
-#: ../xffm/menus/templates/inputMenu.hh:32
-#: ../xffm/menus/templates/inputMenu.hh:47
-#: ../xffm/menus/templates/inputMenu.hh:63
+#: ../xffm/menus/templates/inputMenu.hh:35
+#: ../xffm/menus/templates/inputMenu.hh:51
+#: ../xffm/menus/templates/inputMenu.hh:68
 #: ../xffm/menus/templates/outputMenu.hh:13
-#: ../xffm/menus/templates/outputMenu.hh:26
-#: ../xffm/menus/templates/outputMenu.hh:39
-#: ../xffm/menus/templates/outputMenu.hh:52
+#: ../xffm/menus/templates/outputMenu.hh:29
+#: ../xffm/menus/templates/outputMenu.hh:43
+#: ../xffm/menus/templates/outputMenu.hh:57
 #: ../xffm/menus/templates/iconColorMenu.hh:10
-#: ../xffm/menus/templates/iconColorMenu.hh:19
-#: ../xffm/menus/templates/iconColorMenu.hh:28
-#: ../xffm/menus/templates/iconColorMenu.hh:37
+#: ../xffm/menus/templates/iconColorMenu.hh:22
+#: ../xffm/menus/templates/iconColorMenu.hh:32
+#: ../xffm/menus/templates/iconColorMenu.hh:42
 #, fuzzy
 msgid   "Foreground color"
 msgstr  "Өнгөн өнгө:"
 
 #: ../xffm/menus/templates/inputMenu.hh:17
-#: ../xffm/menus/templates/inputMenu.hh:33
-#: ../xffm/menus/templates/inputMenu.hh:48
-#: ../xffm/menus/templates/inputMenu.hh:64
+#: ../xffm/menus/templates/inputMenu.hh:36
+#: ../xffm/menus/templates/inputMenu.hh:52
+#: ../xffm/menus/templates/inputMenu.hh:69
 #: ../xffm/menus/templates/outputMenu.hh:14
-#: ../xffm/menus/templates/outputMenu.hh:27
-#: ../xffm/menus/templates/outputMenu.hh:40
-#: ../xffm/menus/templates/outputMenu.hh:53
+#: ../xffm/menus/templates/outputMenu.hh:30
+#: ../xffm/menus/templates/outputMenu.hh:44
+#: ../xffm/menus/templates/outputMenu.hh:58
 #: ../xffm/menus/templates/iconColorMenu.hh:11
-#: ../xffm/menus/templates/iconColorMenu.hh:20
-#: ../xffm/menus/templates/iconColorMenu.hh:29
-#: ../xffm/menus/templates/iconColorMenu.hh:38
+#: ../xffm/menus/templates/iconColorMenu.hh:23
+#: ../xffm/menus/templates/iconColorMenu.hh:33
+#: ../xffm/menus/templates/iconColorMenu.hh:43
 msgid   "Background color"
 msgstr  "Арын өнгө:"
 
 #: ../xffm/menus/templates/inputMenu.hh:18
-#: ../xffm/menus/templates/inputMenu.hh:34
-#: ../xffm/menus/templates/inputMenu.hh:49
-#: ../xffm/menus/templates/inputMenu.hh:65
+#: ../xffm/menus/templates/inputMenu.hh:37
+#: ../xffm/menus/templates/inputMenu.hh:53
+#: ../xffm/menus/templates/inputMenu.hh:70
 #: ../xffm/menus/templates/outputMenu.hh:15
-#: ../xffm/menus/templates/outputMenu.hh:41
-#: ../xffm/menus/templates/outputMenu.hh:54
+#: ../xffm/menus/templates/outputMenu.hh:45
+#: ../xffm/menus/templates/outputMenu.hh:59
 #: ../xffm/menus/templates/iconColorMenu.hh:12
-#: ../xffm/menus/templates/iconColorMenu.hh:21
-#: ../xffm/menus/templates/iconColorMenu.hh:30
-#: ../xffm/menus/templates/iconColorMenu.hh:39
+#: ../xffm/menus/templates/iconColorMenu.hh:24
+#: ../xffm/menus/templates/iconColorMenu.hh:34
+#: ../xffm/menus/templates/iconColorMenu.hh:44
 #, fuzzy
 msgid   "Default Colors"
 msgstr  "Стандарт өнгө хэрэглэх"
 
-#: ../xffm/menus/templates/outputMenu.hh:28
+#: ../xffm/menus/templates/outputMenu.hh:31
 #, fuzzy
 msgid   "Default Color"
 msgstr  "Стандарт өнгө хэрэглэх"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:54
-#: ../xffm/menus/templates/mainMenu.hh:92
+#: ../xffm/menus/templates/mainMenu.hh:57
+#: ../xffm/menus/templates/mainMenu.hh:96
 #, fuzzy
 msgid   "Environment"
 msgstr  "Зугаа цэнгэл"
 
 #: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:96
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:100
 msgid   "Exit"
 msgstr  "Гарах"
 
-#: ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:81
-#: ../xffm/menus/templates/mainMenu.hh:119
-#: ../xffm/menus/templates/gridviewmenu.hh:81
+#: ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:85
+#: ../xffm/menus/templates/mainMenu.hh:124
+#: ../xffm/menus/templates/gridviewmenu.hh:75
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "Бүтэн дэлгэц гаргах горимыг асааж унтраах"
 
-#: ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:95
+#: ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:99
 #, fuzzy
 msgid   "Clear Clipboard History"
 msgstr  "Түүхийг арилгах"

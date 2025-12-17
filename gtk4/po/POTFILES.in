@@ -2,7 +2,9 @@ xffm/fm/templates/clipboard.hh
 xffm/fm/templates/workdir.hh
 xffm/fm/templates/run.hh
 xffm/fm/templates/util.hh
+xffm/fm/templates/rodentmonitor.hh
 xffm/fm/templates/runbutton.hh
+xffm/fm/templates/historyentry.hh
 xffm/fm/templates/pathbar.hh
 xffm/fm/templates/dnd.hh
 xffm/fm/templates/factory.hh
@@ -12,6 +14,7 @@ xffm/fm/templates/gridview.hh
 xffm/fm/templates/basicpathbar.hh
 xffm/fm/templates/preview.hh
 xffm/fm/templates/texture.hh
+xffm/fm/templates/rootmonitor.hh
 xffm/fm/templates/prompt.hh
 xffm/fm/templates/utilpathbar.hh
 xffm/fm/templates/properties.hh
@@ -21,13 +24,11 @@ xffm/fm/classes/fstabutil.hh
 xffm/fm/classes/icontheme.hh
 xffm/fm/classes/history.hh
 xffm/fm/classes/fmbuttonbox.hh
-xffm/fm/classes/bcrypt.hh
 xffm/fm/classes/thread.hh
 xffm/fm/classes/settings.hh
 xffm/fm/classes/bookmarks.hh
 xffm/fm/classes/root.hh
 xffm/fm/classes/css.hh
-xffm/fm/classes/blowfish.hh
 xffm/fm/classes/child.hh
 xffm/fm/classes/fstab.hh
 xffm/fm/classes/print.hh
@@ -38,7 +39,6 @@ xffm/fm/classes/bash.hh
 xffm/fm/classes/fmpage.hh
 xffm/fm/classes/tubo.hh
 xffm/fm/classes/utilbasic.hh
-xffm/fm/classes/gio.hh
 xffm/fm/classes/ecryptfs.hh
 xffm/response/templates/mountresponse.hh
 xffm/response/templates/dialogentry.hh
@@ -88,7 +88,6 @@ xffm/find/templates/findresponse.hh
 xffm/find/templates/findsignals.hh
 xffm/find/templates/dndbox.hh
 xffm/find/classes/fgr.hh
-xffm/find/classes/historyentry.hh
 xffm/find/classes/ffunctions.hh
 xffm/menus/templates/pathbarmenu.hh
 xffm/menus/templates/menucallbacks.hh
