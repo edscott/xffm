@@ -1,12 +1,12 @@
-# Xffm4 translation file: mar 10 jun 2025 17:04:39 CST
+# Xffm+ translation file: Wed Dec 17 15:46:58 CST 2025
 # Merged from existing open source files
-# http://xffm.sf.net
+# http://xffm.org
 #
-#, fuzzy
+#
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-06-10 12:44-0600\n"
+        "POT-Creation-Date: 2025-12-17 15:44-0600\n"
         "PO-Revision-Date: 2010-01-08 12:38+0100\n"
         "Last-Translator: Mikel Olasagasti Uranga <heyneken@mundurat.net>\n"
         "Language-Team: Basque <translation-team-eu@lists.sourceforge.net>\n"
@@ -276,35 +276,35 @@ msgstr  "Pribatua"
 msgid   "Specify Output Directory..."
 msgstr  "Zehaztu irteera direktorioa..."
 
-#: ../xffm/fm/view/root/model.hh:133
+#: ../xffm/fm/view/root/model.hh:136
 msgid   "Root Directory"
 msgstr  "Erroko direktorioa"
 
-#: ../xffm/fm/view/root/model.hh:149
+#: ../xffm/fm/view/root/model.hh:152
 msgid   "This is the root of the filesystem"
 msgstr  "Fitxategi-sistemaren erroa da"
 
-#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/view/root/model.hh:164
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
 msgid   "Home Directory"
 msgstr  "Etxeko direktorioa"
 
-#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/view/root/model.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "Zakarrontziratu fitxategia"
 
-#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/view/root/model.hh:224 ../xffm/fm/view/fstab/popup.hh:28
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
 msgid   "Disk Image Mounter"
 msgstr  "Disko-irudien muntatzailea"
 
-#: ../xffm/fm/view/root/model.hh:238
+#: ../xffm/fm/view/root/model.hh:241
 msgid   "Mount local disks and devices"
 msgstr  "Disko eta gailu lokalak muntatu"
 
-#: ../xffm/fm/view/root/model.hh:278
+#: ../xffm/fm/view/root/model.hh:281
 msgid   "Go to bookmarked location"
 msgstr  "Joan laster-markatutako kokalekura"
 

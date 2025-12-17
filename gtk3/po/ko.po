@@ -1,12 +1,12 @@
-# Xffm4 translation file: mar 10 jun 2025 17:04:44 CST
+# Xffm+ translation file: Wed Dec 17 15:47:46 CST 2025
 # Merged from existing open source files
-# http://xffm.sf.net
+# http://xffm.org
 #
-#, fuzzy
+#
 msgid   ""
 msgstr  "Project-Id-Version: xffm+\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-06-10 12:44-0600\n"
+        "POT-Creation-Date: 2025-12-17 15:44-0600\n"
         "PO-Revision-Date: 2002-07-22 20:02+0900\n"
         "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
         "Language-Team: Korean <translation-team-ko@lists.sourceforge.net>\n"
@@ -276,36 +276,36 @@ msgstr  "private"
 msgid   "Specify Output Directory..."
 msgstr  "출력 디렉터리 지정..."
 
-#: ../xffm/fm/view/root/model.hh:133
+#: ../xffm/fm/view/root/model.hh:136
 #, fuzzy
 msgid   "Root Directory"
 msgstr  "/(root) 디렉토리"
 
-#: ../xffm/fm/view/root/model.hh:149
+#: ../xffm/fm/view/root/model.hh:152
 msgid   "This is the root of the filesystem"
 msgstr  "파일 시스템의 루트입니다"
 
-#: ../xffm/fm/view/root/model.hh:161
+#: ../xffm/fm/view/root/model.hh:164
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:274
 msgid   "Home Directory"
 msgstr  "홈 디렉터리"
 
-#: ../xffm/fm/view/root/model.hh:188
+#: ../xffm/fm/view/root/model.hh:191
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:286
 #, fuzzy
 msgid   "Trash bin"
 msgstr  "휴지통에 버리기"
 
-#: ../xffm/fm/view/root/model.hh:221 ../xffm/fm/view/fstab/popup.hh:28
+#: ../xffm/fm/view/root/model.hh:224 ../xffm/fm/view/fstab/popup.hh:28
 #: ../xffm/fm/dialog/notebook/vbuttonbox.hh:281
 msgid   "Disk Image Mounter"
 msgstr  "디스크 이미지 마운트"
 
-#: ../xffm/fm/view/root/model.hh:238
+#: ../xffm/fm/view/root/model.hh:241
 msgid   "Mount local disks and devices"
 msgstr  "로컬 디스크와 장치를 마운트합니다"
 
-#: ../xffm/fm/view/root/model.hh:278
+#: ../xffm/fm/view/root/model.hh:281
 msgid   "Go to bookmarked location"
 msgstr  "책갈피 이치로 이동"
 

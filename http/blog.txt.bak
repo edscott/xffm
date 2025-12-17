@@ -1,5 +1,69 @@
 
 <blockquote>
+<date>Sunday July 06, 2025</date>
+<title>The time has come for GTK+4</title>
+<pre>
+The current maintained version of xffm is now called xffm4, and 
+is configured with GTK4. As of today, works fine with 
+4.18.6 in ArchLinux. Should work on other Linux distros,
+but I have no time to check that out. I use it in a production
+environment developing specific high tech simulators for
+the oil industry where any error is costly.
+
+The method in which the application is constructed is
+following the C++ template paradigm I learned from
+Oliver Sander at the University of Dresden in his code
+for solving partial differential equations, available
+at https://www.dune-project.org/, which is used by the
+open-source simulator and research code in modern C++
+for Multi-{Phase, Component, Scale, Physics, …} transport
+at https://dumux.org. 
+
+If you look into the source code, you might find it hard
+to understand, especially if you have a fixed
+mind for pyramid based algorithms. Modern template based
+C++ requires a comprehension of matrix based algorithms.
+This modern C++ paradigm is extremely powerful.
+
+Anyways, for xffm+ there is now a gtk3 version and the current
+gtk4 version.
+
+To build the gtk3 version, chdir to gtk3 and:
+1- mkdir build
+2- cd build
+3- cmake ..
+4- make
+5- make install
+
+For the current gtk4 version, the instructions are just
+the same, except that you should start from the gtk4 
+directory.
+
+If you do not install, then the gtk3 version will be
+located at gtk3/build/xffm/xffm, while the gtk4
+version will be at gtk4/build/xffm/xffm4.
+
+The rodent-fgr find utility is much improved with gtk4
+and you can access it directly with the option --find,
+in other words, "xffm4 --find".
+
+Since gtk4 is currently a moving target, I will keep it
+up to date in xffm4 with the version which is available
+in ArchLinux. 
+
+And yes, as soon a I get around to it, I will put in an
+ebuild at AUR.archlinux. But don't hold your breath.
+
+Best bet is to build from git repository, which is located
+at sourceforge.net and mirrored at github.
+
+Enjoy. And I read comments, suggestions or issues at 
+edscott(at)imp.mx.
+</pre>
+</blockquote>
+
+
+<blockquote>
 <date>Friday August 16, 2019</date>
 <title>And now, finally, the gtk3.24 version is here: xffm+</title>
 <a href=https://sourceforge.net/projects/xffm/files/xffm%2B/>Download</a>

@@ -1,5 +1,39 @@
 
 <blockquote>
+<date>Wednesday December 17, 2025</date>
+<title>XFFM release for gtk-4.20.3</title>
+<br><pre>
+Today I released a tarball with the current stable xffm4 
+application compiled and tested with gtk-4.20.3 and
+targeting the i3 window manager behavior.
+This is file xffm4_20_3.bz2 in the xffm+ files
+directory.
+<br>
+This release has several improvements and enhancements
+over the previous release. Most notable change is how 
+ecryptfs works. As you can recall, ecryptfs was a part of
+the fuse (file system in user space) application and 
+was generally not included in standard Linux distros.
+But now, apparently since 2006, ecrypfs is included
+in the kernel as a module. Just goes to show how often
+I use encrypted file systems.
+<br>
+The kernel module will automatically be loaded when necessary
+with xffm4 (gtk4 version), but in the gtk3 version, xffm+,
+(xffm+3_24_51.bz2) also released today, you should manually
+load the ecryptfs kernel module before you can mount 
+encrypted volumes from within xffm+.
+<br>
+Yeah, that's if you want to keep personal files on your
+work computer safe and private.
+<br>
+<i>Enjoy!</i>
+</pre>
+
+</blockquote>
+
+
+<blockquote>
 <date>Sunday July 06, 2025</date>
 <title>The time has come for GTK+4</title>
 <pre>
