@@ -33,7 +33,10 @@ namespace xf {
       const char **checkboxes_;
       const char **radioboxes_;
       char *title_;
+      GtkPopover *popover_ = NULL;
     public:
+      GtkPopover *popover(void){ return popover_;}
+
       const char **keys(void) { return keys_;}
       ~Menu(void){
         g_free(title_);
@@ -380,6 +383,7 @@ public:
         continue;
       }
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
+      popover_ = menu;
       return menu;
     }
   };

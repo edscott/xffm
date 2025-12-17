@@ -52,7 +52,8 @@ namespace xf {
     private:
       GtkBox *childBox_;
       gchar *path_=NULL;
-      GtkPopover *gridMenu_=NULL;
+      //GtkPopover *gridMenu_=NULL;
+      GtkPopover *outputPopover_=NULL;
       // We keep reference to Vpane object,
       // eventhough it will change. Actual reference
       // will be asociated to page box.
@@ -62,13 +63,11 @@ namespace xf {
       FMpage(const char *path){
         path_ = g_strdup(path);
         childBox_ = mkPageBox(path);
+        TRACE("*** FMpage pathbar is %p\n", this->pathbar());
       }
       ~FMpage(){
-        TRACE("FMpage destructor: need to call GridView destructor...\n");
-        //auto gridView_p = (GridView<LocalDir> *)Child::getGridviewObject(GTK_WIDGET(childBox_));
-        //delete gridView_p;
+        gtk_widget_unparent(GTK_WIDGET(outputPopover_));
         g_free(path_);
-        
       }
 
       GtkBox *mkPageBox(const gchar *path){
@@ -99,6 +98,7 @@ namespace xf {
         auto myOutputMenu = new Menu<OutputMenu<LocalDir> >(title);
         TRACE("*** myOutputMenu popover = %p\n", myOutputMenu);
         myOutputMenu->setMenu(GTK_WIDGET(output), GTK_WIDGET(output), Child::getWorkdir(NULL), true);
+        outputPopover_ = myOutputMenu->popover();
         g_free(title);
         delete myOutputMenu;
 

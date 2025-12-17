@@ -548,7 +548,7 @@ private:
       }
       resetGridviewCSS(gridview_p);
       if (getPathbarCoordinates(&x, &y, pathbar)) {
-        TRACE("Pathbar new x,y = %lf,%lf\n", x, y);
+        TRACE("pathbar new x,y = %lf,%lf\n", x, y);
         GtkWidget *widget = getPathbarWidget(x, y, pathbar);
         auto path = (const char *)g_object_get_data(G_OBJECT(widget), "path");
         return g_strdup(path);

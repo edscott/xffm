@@ -154,10 +154,6 @@ namespace xf {
         //for (auto l=children_list; l && l->data; l=l->next);
         //GList *children_list = gtk_container_get_children(GTK_CONTAINER(pathbar));
 
-        for (GList *l = children_list;l && l->data; l=l->next){ 
-          auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(l->data), "menu"));
-          DBG("update passbar, menu is %p\n", menu);
-        }
 
 
         gint i=0;
@@ -187,7 +183,7 @@ namespace xf {
                 g_free(name);
 
                 auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(tail->data), "menu"));
-                DBG("update passbar, tail menu is %p\n", menu);
+                TRACE("update passbar, tail menu is %p\n", menu);
                 gtk_widget_unparent(GTK_WIDGET(menu));
                 g_object_set_data(G_OBJECT(tail->data), "menu", NULL);
 
@@ -249,7 +245,7 @@ namespace xf {
              auto menu = myItemMenu->setMenu(widget, parent, path);
              g_object_set_data(G_OBJECT(widget), "menu", menu);
              gtk_popover_set_has_arrow(GTK_POPOVER(menu), false);
-             DBG("*** myItemMenu popover = %p\n", menu);
+             TRACE("*** myItemMenu popover = %p\n", menu);
              
              delete myItemMenu;
            }

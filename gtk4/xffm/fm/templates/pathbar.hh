@@ -18,13 +18,23 @@ namespace xf {
    const gchar *path(void){ return path_;}
 
    ~Pathbar(void){
-     delete pathbarHistory_p;
-     delete basicPathbar_p;
-     //delete myPathbarMenu_;
+      GList *children_list = Basic::getChildren(pathbar_);
+      for (GList *l = children_list;l && l->data; l=l->next){ 
+        auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(l->data), "menu"));
+        if (!menu) continue;
+        gtk_widget_unparent(GTK_WIDGET(menu));
+        g_object_set_data(G_OBJECT(l->data), "menu", NULL);
+        TRACE("zap passbar menu  %p\n", menu);
+      }
+      g_list_free(children_list);
+     
+      delete pathbarHistory_p;
+      delete basicPathbar_p;
    }
    Pathbar(void) {
         basicPathbar_p = (BasicPathbar<Type> *) new BasicPathbar<Type>;
         pathbar_ = basicPathbar_p->pathbarBox();
+        TRACE("***  pathbar_ = %p\n", pathbar_);
         g_object_set_data(G_OBJECT(pathbar_), "withMenu", GINT_TO_POINTER(1));
         g_object_set_data(G_OBJECT(pathbar_), "pathbar", this); 
         pathbarHistory_p = new PathbarHistory;

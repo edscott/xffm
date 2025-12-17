@@ -148,7 +148,7 @@ template <class Type>
 
       ~GridView(void){
         Child::removeGridView((void *)this);
-      TRACE("GridView<Type> destructor\n");
+        TRACE("*** GridView<Type> destructor\n");
         //if (menu_){
           // menu_ goes down with gridview. No need to
           //       unparent or

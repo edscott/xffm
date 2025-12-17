@@ -18,8 +18,13 @@ namespace xf {
     GtkButton *promptButton_ = NULL;
     GtkButton *clearButton_ = NULL;
     GtkScale *sizeScale_ = NULL;
+    GtkPopover *inputPopover_=NULL;
 
     public:
+
+    ~Prompt(void){
+        gtk_widget_unparent(GTK_WIDGET(inputPopover_));
+    }
     
     Prompt(GtkTextView *output) {
       TRACE("constructor 3\n");
@@ -65,6 +70,7 @@ namespace xf {
         TRACE("*** myInputMenu popover = %p\n", myInputMenu);
         g_free(title);
         myInputMenu->setMenu(GTK_WIDGET(input_), GTK_WIDGET(input_), Child::getWorkdir(NULL), true);
+        inputPopover_ = myInputMenu->popover();
         delete myInputMenu;
         
         g_object_set_data(G_OBJECT(input_), "buttonSpace", buttonSpace_);

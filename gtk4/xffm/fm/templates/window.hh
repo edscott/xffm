@@ -456,13 +456,14 @@ private:
     void zapPage(GtkWidget *child){
 
       auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
+      
       auto gridview_p = (GridView<LocalDir> *) Child::getGridviewObject(child);
       GList *item = g_list_find(pageList_, child);
       pageList_ = g_list_remove(pageList_, child);
-      gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
       delete(page);
       delete gridview_p;
       Child::remove(child);
+      gtk_notebook_remove_page(notebook_, gtk_notebook_get_current_page(notebook_));
 
       if (g_list_length(pageList_) == 0){
         hideWindow();
