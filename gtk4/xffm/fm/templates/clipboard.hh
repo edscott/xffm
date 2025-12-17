@@ -279,7 +279,7 @@ private:
     clipboardThreadF(void *data){
       auto c = (ClipBoard<Type> *)data;
       while (c->clipBoardSemaphore()){// data is semaphore to thread
-          usleep(250000);
+          usleep(500000);
           TRACE("Basic::context_function for clipboardContextF\n");
           Basic::context_function(clipboardContextF, c);
       }

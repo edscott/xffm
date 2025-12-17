@@ -211,6 +211,7 @@ namespace xf {
         auto display = getDisplay();
         auto w = getWindow(dialog);
         XMoveWindow(display, w, x, y);
+        TRACE("*** Moving window to %d,%d\n", x,y);
     }
 #else
     static void moveToPointer(GtkWindow *dialog){return;}

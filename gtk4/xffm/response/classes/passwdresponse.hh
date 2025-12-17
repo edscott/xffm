@@ -97,6 +97,7 @@ public:
       TRACE("create dialogObject=%p\n", dialogObject); 
       dialogObject->setLabelText(string);
       
+      Basic::moveToPointer(dialog);
       dialogObject->run();
       while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
         g_main_context_iteration (NULL, TRUE);
