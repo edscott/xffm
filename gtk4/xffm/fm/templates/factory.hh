@@ -298,7 +298,11 @@ ClickMenu
           else if (size <= 156) sizeS = "medium";
           else if (size <= 192) sizeS = "large";
           else sizeS = "x-large";
-          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", sizeS, name);
+          int textLen = 18;
+          char buffer[textLen];
+          snprintf(buffer, textLen, "%s", name);
+          auto markup = g_strdup_printf("<span size=\"%s\">%s%s</span>", 
+            sizeS, buffer, (strlen(name) > textLen)?"...":"");
           gtk_label_set_markup(label, markup);
           g_free(markup);
           
