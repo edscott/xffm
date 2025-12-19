@@ -21,13 +21,14 @@ target_link_libraries(xffm4
     ${libReadline_LIBRARIES}
     ${THREAD_LIBRARIES})
 
-#execute_process(COMMAND ln -sf xffm xfgetpass WORKING_DIRECTORY xffm)
+execute_process(COMMAND ln -sf xffm4 xfgetpass4 WORKING_DIRECTORY xffm)
 
 
 install(TARGETS xffm4 RUNTIME DESTINATION bin)
 INSTALL(CODE "execute_process( \
     COMMAND ${CMAKE_COMMAND} -E create_symlink \
     xffm4 \
+    xfgetpass4   \
     )"
 )
 #INSTALL(CODE "execute_process( \
@@ -37,7 +38,7 @@ INSTALL(CODE "execute_process( \
 #    )"
 #)
     install(CODE "
-    EXECUTE_PROCESS(COMMAND ln -sf xffm4 xfgetpass
+    EXECUTE_PROCESS(COMMAND ln -sf xffm4 xfgetpass4
        WORKING_DIRECTORY ${PREFIX_BIN}
        )
     ")
