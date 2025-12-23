@@ -176,7 +176,7 @@ ClickMenu
         auto c =(clipboard_t *)clipBoardObject;
         if (c) {
           isCut = c->isCutItem(path);
-          if (isCut) {DBG("item %s is cut\n", path);}
+          if (isCut) {TRACE("item %s is cut\n", path);}
         }
   */
         TRACE("factory bind name= %s\n", name);
@@ -199,6 +199,7 @@ ClickMenu
         if (!picture && !g_file_info_get_is_symlink(info)){
           picture = previewPicture(info, path, &doPreview);
           if (picture) {
+            TRACE("previewLoaded already for %s\n", path);
             previewLoaded = true;
           } 
         }
@@ -321,7 +322,7 @@ ClickMenu
 
           // if hash value exists and is ok, skip regen
           // otherwise, plug into threadpool.
-          TRACE("factory bind add preview threads\n");
+          TRACE("factory bind add preview thread for %s\n",path);
           // path, pictureBox, picture, serial
           auto arg = (void **)calloc(6, sizeof(void *));
           arg[0] = (void *)g_strdup(path);

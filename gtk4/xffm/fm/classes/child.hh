@@ -196,6 +196,8 @@ namespace xf {
     }
 
     static const int getSerial(GtkWidget *child){
+      if (!child) child =  Child::getChild();
+      TRACE("getSerial(%p) valid=%d\n", child);
       if (!valid(child)) return -1; // Page has disappeared.
       pthread_mutex_lock(&serialMutex);
       auto serial = g_object_get_data(G_OBJECT(child), "serial");
@@ -205,8 +207,12 @@ namespace xf {
     }
 
     static int incrementSerial(GtkWidget *child){
+      TRACE("incrementSerial(%p)\n", child);
       if (!child) child =  Child::getChild();
-      if (!valid(child)) return -1; // Page has disappeared.
+      if (!valid(child)) {
+        TRACE("valid child (%p) false\n", child);
+        return -1; // Page has disappeared.
+      }
       pthread_mutex_lock(&serialMutex);
       auto serial = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child), "serial"));
       g_object_set_data(G_OBJECT(child), "serial", GINT_TO_POINTER(++serial));      

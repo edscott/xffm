@@ -128,7 +128,7 @@ class Preview {
         // serial verification:
         auto currentSerial = Child::getSerial(child);
         if (serial != currentSerial){
-          TRACE("Current serial mismatch %d != %d. Dropping preview() thread.\n", 
+          DBG("Current serial mismatch %d != %d. Dropping preview() thread.\n", 
               currentSerial, serial);
           return NULL;
         }
@@ -167,7 +167,7 @@ class Preview {
 
         // replace_f is now being queued to main context where.
         // the gtk widget replacement takes place.
-      TRACE("Basic::context_function for replace_f\n");
+        TRACE("Basic::context_function for replace_f\n");
         auto retval = Basic::context_function(replace_f, replaceArg);
         
         // All done here.
