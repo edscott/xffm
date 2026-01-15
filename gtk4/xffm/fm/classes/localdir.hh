@@ -349,6 +349,9 @@ private:
         auto hidden = g_file_info_get_is_hidden(info);
         auto backup = g_file_info_get_is_backup(info);
         auto name = g_file_info_get_name(info);
+        if (strchr(name, ':') ){
+          if (strcasecmp(strrchr(name, ':'), ":Zone.Identifier") == 0) backup = true;
+        }
 
         
          //* not working. 

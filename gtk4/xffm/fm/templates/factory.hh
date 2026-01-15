@@ -33,8 +33,8 @@ template <class Type>
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabelBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        auto hlabel = gtk_label_new("");
-        auto hlabel2 = gtk_label_new("");
+        auto hlabel = gtk_label_new(""); // This is file info column.
+        auto hlabel2 = gtk_label_new(""); // This is file name column.
         auto label = gtk_label_new("");
         
         GtkWidget *boxes[] = {box, menuBox, menuBox2, hbox, pictureBox, labelBox, hlabelBox, hlabelBox2, NULL};
@@ -247,20 +247,33 @@ ClickMenu
           // not much use, really.
           //Type::addDirectoryTooltip(picture, info);
         }
+        auto columnW = 18;
 
         char buffer[128];
         if (size <= 32){
           gtk_widget_set_visible(GTK_WIDGET(label), false);
           gtk_widget_set_visible(GTK_WIDGET(hlabel), true);
           gtk_widget_set_visible(GTK_WIDGET(hlabel2), true);
-          auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen());
-          snprintf(buffer, 128, (const char *)format, name);
+
+          auto textSize = (gridView_p->maxNameLen() > columnW)?
+            columnW + strlen("..."): 
+            gridView_p->maxNameLen();
+
+          auto format = g_strdup_printf("%%-%ds", textSize);
+          //auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen());
+          char nameBuffer[columnW];
+          snprintf(nameBuffer, columnW, "%s", name);
+          auto n = g_strconcat(nameBuffer, (strlen(name) > columnW)?"...":"", NULL);
+          snprintf(buffer, 128, (const char *)format, n);
+          
+
           auto sizeString = "x-small";
           if (size >24) sizeString = "small";
           if (size == 32) sizeString = "medium";
 
 
-          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>",  sizeString, buffer);
+          auto markup = g_strdup_printf("<span size=\"%s\"><b>%s</b></span>",  
+              sizeString, buffer);
 
           if (strcmp(name, "..")){
             // file information string
@@ -278,14 +291,15 @@ ClickMenu
             Basic::concat(&markup2, "</span>");
             
             g_free(m1);
-            //Basic::concat(&markup, markup2);
             gtk_label_set_markup(hlabel2, markup2);
             g_free(markup2);
           
 
             //Basic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
-          } 
+          }  
           gtk_label_set_markup(hlabel, markup);
+          if (strlen(name) > columnW) gtk_widget_set_tooltip_markup(GTK_WIDGET(hlabel), name);
+          else gtk_widget_set_tooltip_markup(GTK_WIDGET(hlabel), NULL);
           g_free(markup);
         } 
         else 
@@ -299,13 +313,14 @@ ClickMenu
           else if (size <= 156) sizeS = "medium";
           else if (size <= 192) sizeS = "large";
           else sizeS = "x-large";
-          int textLen = 18;
-          char buffer[textLen];
-          snprintf(buffer, textLen, "%s", name);
+          char buffer[columnW];
+          snprintf(buffer, columnW, "%s", name);
           auto markup = g_strdup_printf("<span size=\"%s\">%s%s</span>", 
-            sizeS, buffer, (strlen(name) > textLen)?"...":"");
+            sizeS, buffer, (strlen(name) > columnW)?"...":"");
           gtk_label_set_markup(label, markup);
           g_free(markup);
+          if (strlen(name) > columnW) gtk_widget_set_tooltip_markup(GTK_WIDGET(label), name);
+          else gtk_widget_set_tooltip_markup(GTK_WIDGET(label), NULL);
           
           //Type::addLabelTooltip(GTK_WIDGET(label), path);
         }
@@ -636,19 +651,15 @@ ClickMenu
               gdouble x,
               gdouble y,
               void *data){
-#if 0
-   /*   trouble here, item is being selected on release */
-      auto label = GTK_WIDGET(g_object_get_data(G_OBJECT(data), "label"));
-      auto labelEntry = GTK_WIDGET(g_object_get_data(G_OBJECT(data), "labelEntry"));
-      gtk_widget_set_visible(label, false);
-      gtk_widget_set_visible(labelEntry, true);
-#endif
       if (skipRename(self, data)) return true;
       TRACE("rename_f \n");
       auto w = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto item = GTK_LIST_ITEM(g_object_get_data(G_OBJECT(w), "item")); 
       auto info = G_FILE_INFO(gtk_list_item_get_item(item)); 
       auto path = Basic::getPath(info);
+      auto name = g_file_info_get_name(info);
+      TRACE("rename_f: path='%s', name='%s'\n", path, name);
+      if (strcmp(name, "..") == 0) return true;
       dialogPath<mvResponse>::actionMove(path);
 
       //auto event = gtk_event_controller_get_current_event(GTK_EVENT_CONTROLLER(self));
@@ -782,9 +793,12 @@ ClickMenu
       }
 #endif
       bool backup = ( name[strlen(name)-1] == '~');
+      if (strchr(name, ':') ){
+        if (strcasecmp(strrchr(name, ':'), ":Zone.Identifier") == 0) backup = true;
+      }
       if (!backup) backup = g_file_info_get_is_backup(info);
       if (hidden || backup )  {
-          auto texture = Texture<bool>::getShadedIcon(info, size, size, NULL);   
+          auto texture = Texture<bool>::getShadedIcon(info, size, size, backup?EMBLEM_BAK:NULL);   
 //          auto texture = Texture<bool>::getShadedIcon(info, size, size, backup?EMBLEM_BAK:NULL);   
           auto picture = gtk_picture_new_for_paintable(GDK_PAINTABLE(texture));
           g_object_unref(texture); // XXX currently the paintable is not hashed.
@@ -830,8 +844,12 @@ ClickMenu
       if (picture) return picture;
 
       // OO
-      const char *pOO[] = {"xlsx", "docx", "XLSX", "DOCX", "pptx", "PPTX", NULL};
-      picture = sourceCodePicture(name, info, size, EMBLEM_MSOFFICE, pOO);
+      const char *pOO[] = {"odf", "odt", "ods", "odp", "odg", "odb", "ODF", "ODT", "ODS", "ODP", "ODG", "ODB",NULL};
+      picture = sourceCodePicture(name, info, size, EMBLEM_OO, pOO);
+      if (picture) return picture;
+      // MS
+      const char *msOO[] = {"xlsx", "docx", "XLSX", "DOCX", "pptx", "PPTX", NULL};
+      picture = sourceCodePicture(name, info, size, EMBLEM_MSOFFICE, msOO);
       if (picture) return picture;
 
 
