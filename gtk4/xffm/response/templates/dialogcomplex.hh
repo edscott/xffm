@@ -19,6 +19,7 @@ namespace xf
       this->subClass()->dialog(dialog);
       TRACE("*** DialogComplex setupRun: setting this->subClass()->dialog to %p\n", dialog);
           gtk_widget_set_hexpand(GTK_WIDGET(dialog), true);
+          gtk_widget_set_vexpand(GTK_WIDGET(dialog), true);
 
       /*auto cbox = GTK_BOX(g_object_get_data(G_OBJECT(dialog), "cbox"));
       auto foo = gtk_label_new("foo ok");
