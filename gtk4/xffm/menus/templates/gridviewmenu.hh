@@ -6,6 +6,8 @@ namespace xf {
   template <class Type> class MenuCallbacks;
   template <class Type> class Workdir;
   class LocalDir;
+    
+  static GHashTable *appHash = NULL;
   template <class Type>
   class GridviewMenu {
     using clipboard_t = ClipBoard<LocalDir>;
@@ -19,6 +21,7 @@ namespace xf {
         //_("Toggle Text Mode"),
         _("Open in new tab"), //
         _("Open with"), //
+        _("Extract archive"),
         _("Create a compressed archive with the selected objects"),
         _("Mount Volume"),
         _("Unmount Volume"),
@@ -63,6 +66,7 @@ namespace xf {
         {_("Encrypt File..."),(void *) EMBLEM_BLOWFISH}, 
         {_("Decrypt File..."),(void *) EMBLEM_BLOWFISH}, 
         {_("Create a compressed archive with the selected objects"),(void *) EMBLEM_PACKAGE},
+        {_("Extract archive"),(void *) EMBLEM_PACKAGE},
         {_("Close"),(void *) WINDOW_CLOSE},
        {NULL, NULL}
       }; 
@@ -90,6 +94,7 @@ namespace xf {
         {_("Encrypt File..."),(void *) bcrypt}, 
         {_("Decrypt File..."),(void *) bcrypt}, 
         {_("Create a compressed archive with the selected objects"),(void *) tar},
+        {_("Extract archive"),(void *) (void *) untar},
         {_("Close"),(void *) MainMenu<Type>::closeMenu},
        
         {NULL, NULL}
@@ -106,25 +111,39 @@ namespace xf {
       static const char *boxes_[] = { NULL};
       return boxes_;      
     }
-const char **radioboxes(void){
+    const char **radioboxes(void){
       static const char *boxes_[] = { NULL};
       return boxes_;      
     }
 
+    // App hash.
+     
+
      static const char *getDefaultApp(const char *path){       
+
+      if (!appHash) appHash = g_hash_table_new(g_str_hash, g_str_equal);
+      const char *defaultApp = NULL;
       const char *extension = NULL;
       if (strchr(path, '.')) extension = strrchr(path, '.') + 1;
-      const char *defaultApp = NULL;
       if (extension){
+        defaultApp = (const char *)g_hash_table_lookup(appHash, extension);
+        if (defaultApp) return defaultApp;
         defaultApp = Settings::getString("MimeTypeApplications", extension);
+        if (defaultApp){
+          g_hash_table_insert(appHash, g_strdup(extension), (void *)defaultApp);
+          return defaultApp;
+        }
       }
+      
         TRACE("defaultApp = %s\n", defaultApp);
       
       if (!defaultApp){
         auto mimetype = MimeMagic::mimeMagic(path); 
         TRACE("%s: mimetype= %s\n", path, mimetype);
         auto apps = MimeApplication::locate_apps(mimetype);
-        if (apps) defaultApp = apps[0]; // first item
+        if (apps) {
+          defaultApp = apps[0]; // first item (const char *)
+        }
       }
       return defaultApp;
    }
@@ -188,7 +207,24 @@ const char **radioboxes(void){
       try {
         new Tar<Type>(parent, path);
       } catch(int errorCode) {
-        ERROR_("Catch errorCode %d at gridviewmenu.hh::bcrypt()\n", errorCode);
+        ERROR_("Catch errorCode %d at gridviewmenu.hh::tar()\n", errorCode);
+      }
+      g_free(path);
+
+      return;
+    }
+
+    static void
+    untar(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
+      MainMenu<Type>::closePopover(menu);
+      auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(menu), "info"));
+      auto path = Basic::getPath(info);
+      auto parent = GTK_WINDOW(Child::mainWidget());
+      try {
+        new UnTar<Type>(parent, path);
+      } catch(int errorCode) {
+        ERROR_("Catch errorCode %d at gridviewmenu.hh::untar()\n", errorCode);
       }
       g_free(path);
 

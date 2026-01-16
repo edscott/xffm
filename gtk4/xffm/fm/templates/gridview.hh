@@ -547,6 +547,20 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           ERROR_("* Warning: cannot find widget \"%s\" to hide.\n", *p);
         }
       }
+      // Archive test
+      const char *ext_[5]={".tgz",".bz2",".xz",".zip",NULL};
+      if (strchr(path, '.')){
+        for (auto p=ext_; p && *p; p++){
+          if (strcasecmp(strrchr(path, '.'), *p) == 0){
+            auto widget = g_object_get_data(G_OBJECT(popover), _("Extract archive"));
+            if (widget){
+              gtk_widget_set_visible(GTK_WIDGET(widget), true);
+            }
+            break;
+          }
+        }
+      }
+      
       // Directory test
       if (g_file_test(path, G_FILE_TEST_IS_DIR)){
         const char *show[]={
@@ -796,7 +810,9 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           TRACE("data get %p %s --> %p\n", popover, _("auto"), abutton);
       if (abutton){
         const char *defaultApp = GridviewMenu<bool>::getDefaultApp(path);
-
+        // hack: no sudo app
+        //if (defaultApp && strcmp(defaultApp, "sudo") == 0) defaultApp = NULL;
+        
         gtk_widget_set_visible(GTK_WIDGET(abutton), defaultApp != NULL);
         if (defaultApp && GTK_IS_BUTTON(abutton)) {
           TRACE("// set icon and text: defaultApp=%s.\n", defaultApp);        
@@ -806,20 +822,18 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           gtk_widget_set_vexpand(GTK_WIDGET(box), false);
           auto n = g_strdup(defaultApp);
           if (strchr(n, ' ')) *strchr(n, ' ') = 0;
-          auto paintable = Texture<bool>::load16(n);
-
-
+          auto hasIcon = gtk_icon_theme_has_icon(iconTheme, n);
+          GdkPaintable *paintable = hasIcon? 
+            Texture<bool>::load16(n) : 
+            Texture<bool>::load16(EMBLEM_RUN);
+           
           if (paintable){
             auto picture = gtk_picture_new_for_paintable(paintable);
             gtk_box_append (box, GTK_WIDGET(picture));
-          } else {
-            // FIXME
-            auto picture = gtk_image_new_from_icon_name("emblem-run");
-            gtk_box_append (box, GTK_WIDGET(picture));
-          }
+          } 
           auto label = gtk_label_new("");
           auto base = g_path_get_basename(path);
-          auto markup = g_strconcat("", n, " <span color=\"blue\">", base,"</span>", NULL); 
+          auto markup = g_strconcat("<b>", defaultApp, "</b> <span color=\"blue\">", base,"</span>", NULL); 
           gtk_box_append (box, GTK_WIDGET(label));
           gtk_label_set_markup(GTK_LABEL(label), markup);
           g_free(n);

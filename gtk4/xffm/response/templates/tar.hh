@@ -14,6 +14,18 @@ class Tar {
    }
 
 };
+
+template <class Type>
+class UnTar {
+   using subClass_t = untarResponse<Type>;
+   using dialog_t = DialogComplex<subClass_t>;
+   public:
+   UnTar(GtkWindow *parent, const char *path){
+      // Figure out tar/zip
+      auto dialogObject = new dialog_t(parent, Child::getWorkdir(NULL), path);
+   }
+
+};
 }
 #endif
 

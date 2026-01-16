@@ -42,6 +42,7 @@
 # include "response/templates/bfishresponse.hh"   // class
 # include "response/templates/bfish.hh"   // class
 # include "response/templates/tarresponse.hh"   // class
+# include "response/templates/untarresponse.hh"   // class
 # include "response/templates/tar.hh"   // class
 
 namespace xf
