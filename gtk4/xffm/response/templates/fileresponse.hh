@@ -255,8 +255,9 @@ private:
         //gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
         mainBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 0));
         //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 700, 600);
-        g_object_set_data(G_OBJECT(mainBox_),"width", GINT_TO_POINTER(680));
-        g_object_set_data(G_OBJECT(mainBox_),"height", GINT_TO_POINTER(300));
+        g_object_set_data(G_OBJECT(mainBox_),"width", GINT_TO_POINTER(300));
+        g_object_set_data(G_OBJECT(mainBox_),"height", GINT_TO_POINTER(400));
+        g_object_set_data(G_OBJECT(mainBox_),"fixed", GINT_TO_POINTER(true));
        // gtk_widget_set_size_request(GTK_WIDGET(mainBox_), 680, 200);
         gtk_widget_set_vexpand(GTK_WIDGET(mainBox_), true);
         gtk_widget_set_hexpand(GTK_WIDGET(mainBox_), true);
@@ -296,16 +297,6 @@ private:
         sw_ = gtk_scrolled_window_new();
         gtk_widget_set_vexpand(GTK_WIDGET(sw_), true);
         gtk_widget_set_hexpand(GTK_WIDGET(sw_), true);
-// FIXME: gtk_adjustment_configure: assertion 'lower + page_size <= upper' failed
-        auto hAdj = GTK_ADJUSTMENT(gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(sw_)));
-        auto vAdj = GTK_ADJUSTMENT(gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(sw_)));
-        //gtk_adjustment_set_page_size(hAdj, 100.0);
-        //gtk_adjustment_set_page_size(vAdj, 100.0);
-        gtk_adjustment_set_upper(hAdj, 680.0);
-        gtk_adjustment_set_upper(vAdj, 300.0);
-        DBG("lower=%lf pagesize=%lf upper=%lf\n",
-            gtk_adjustment_get_lower(hAdj), gtk_adjustment_get_page_size(hAdj),
-            gtk_adjustment_get_upper(hAdj));
         
         gtk_box_append(mainBox_, sw_);
         // listview...
@@ -321,7 +312,7 @@ private:
           auto label = gtk_label_new("empty");
           gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(sw_), label);
         }
-        gtk_scrolled_window_set_has_frame(GTK_SCROLLED_WINDOW(sw_), true);
+//        gtk_scrolled_window_set_has_frame(GTK_SCROLLED_WINDOW(sw_), true);
 
         auto action_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(action_area), false);

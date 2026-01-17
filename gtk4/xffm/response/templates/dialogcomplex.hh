@@ -34,8 +34,12 @@ namespace xf
         w = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(mainBox_), "width"));
       if (g_object_get_data(G_OBJECT(mainBox_), "height"))
         h = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(mainBox_), "height"));
-      gtk_widget_set_size_request(GTK_WIDGET(mainBox_), w, h);
-      
+      //gtk_widget_set_size_request(GTK_WIDGET(mainBox_), w, h);
+      gtk_window_set_default_size(GTK_WINDOW(dialog), w, h);
+
+      auto fixed = g_object_get_data(G_OBJECT(mainBox_), "fixed");
+      gtk_window_set_resizable(GTK_WINDOW(dialog), fixed == NULL);  
+
       Basic::setAsDialog(dialog);
       gtk_window_present(dialog);
 
