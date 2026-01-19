@@ -44,6 +44,7 @@ xffm/response/templates/mountresponse.hh
 xffm/response/templates/dialogentry.hh
 xffm/response/templates/mount.hh
 xffm/response/templates/fileresponse.hh
+xffm/response/templates/untarresponse.hh
 xffm/response/templates/dialogpasswd.hh
 xffm/response/templates/openwith.hh
 xffm/response/templates/dialogbuttons.hh

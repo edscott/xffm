@@ -1,4 +1,4 @@
-# Xffm4 translation file: Wed Dec 17 15:32:31 CST 2025
+# Xffm4 translation file: Mon Jan 19 13:36:19 CST 2026
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-12-17 15:28-0600\n"
+        "POT-Creation-Date: 2026-01-19 13:32-0600\n"
         "PO-Revision-Date: 2011-10-11 12:10+0630\n"
         "Last-Translator: Thura Hlaing <trhura@gmail.com>\n"
         "Language-Team: Burmese <my-l10n-team@googlegroups.com>\n"
@@ -21,12 +21,12 @@ msgstr  "Project-Id-Version: xffm4\n"
         "X-Poedit-Country: MYANMAR\n"
         "X-Generator: Narro 0.9.4 on http://translate.libreworks.info\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:836
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:850
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
 #: ../xffm/menus/templates/pathbarmenu.hh:53
-#: ../xffm/menus/templates/gridviewmenu.hh:30
+#: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/menu.hh:183 ../xffm/menus/templates/menu.hh:188
 #, fuzzy
 msgid   "Clipboard is empty."
@@ -133,7 +133,7 @@ msgid   "Segmentation fault"
 msgstr  "F မူလတိုင်းပြန်သတ်မှတ်"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:628
+#: ../xffm/fm/templates/gridview.hh:642
 #: ../xffm/response/templates/openwith.hh:138
 #: ../xffm/response/templates/dialogbasic.hh:291
 #: ../xffm/find/templates/dndbox.hh:164
@@ -149,9 +149,9 @@ msgstr  "F မူလတိုင်းပြန်သတ်မှတ်"
 #: ../xffm/menus/templates/mainMenu.hh:48
 #: ../xffm/menus/templates/mainMenu.hh:74
 #: ../xffm/menus/templates/mainMenu.hh:101
-#: ../xffm/menus/templates/gridviewmenu.hh:39
-#: ../xffm/menus/templates/gridviewmenu.hh:66
-#: ../xffm/menus/templates/gridviewmenu.hh:93
+#: ../xffm/menus/templates/gridviewmenu.hh:42
+#: ../xffm/menus/templates/gridviewmenu.hh:70
+#: ../xffm/menus/templates/gridviewmenu.hh:98
 #: ../xffm/menus/templates/iconColorMenu.hh:14
 #: ../xffm/menus/templates/iconColorMenu.hh:25
 #: ../xffm/menus/templates/iconColorMenu.hh:35
@@ -177,12 +177,12 @@ msgstr  "ပင်ရင်း"
 msgid   "Invalid target folder"
 msgstr  "အပုဒ်ပုံစံအမှား"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:559
-#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:573
+#: ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/response/classes/dndresponse.hh:22
-#: ../xffm/menus/templates/gridviewmenu.hh:33
-#: ../xffm/menus/templates/gridviewmenu.hh:55
-#: ../xffm/menus/templates/gridviewmenu.hh:80
+#: ../xffm/menus/templates/gridviewmenu.hh:36
+#: ../xffm/menus/templates/gridviewmenu.hh:58
+#: ../xffm/menus/templates/gridviewmenu.hh:84
 msgid   "Link"
 msgstr  "L လင့်ချိတ်"
 
@@ -210,25 +210,30 @@ msgstr  "ဖိုင်"
 msgid   ": "
 msgstr  ":"
 
+#: ../xffm/fm/templates/factory.hh:318 ../xffm/fm/templates/factory.hh:341
+#, fuzzy
+msgid   "Full name"
+msgstr  "အမည်ရင်း - "
+
 #: ../xffm/fm/templates/window.hh:603
 #, fuzzy
 msgid   "Long press time"
 msgstr  "အစမ်းမြင်ကွင်းကို ဖွင့်နေတယ်..."
 
 #: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:556 ../xffm/fm/templates/gridview.hh:601
+#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
 #: ../xffm/menus/templates/inputMenu.hh:65
-#: ../xffm/menus/templates/gridviewmenu.hh:28
-#: ../xffm/menus/templates/gridviewmenu.hh:59
-#: ../xffm/menus/templates/gridviewmenu.hh:83
+#: ../xffm/menus/templates/gridviewmenu.hh:31
+#: ../xffm/menus/templates/gridviewmenu.hh:62
+#: ../xffm/menus/templates/gridviewmenu.hh:87
 msgid   "Cut"
 msgstr  "ဖြတ်ယူပါ"
 
 #: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:555 ../xffm/fm/templates/gridview.hh:600
+#: ../xffm/fm/templates/gridview.hh:569 ../xffm/fm/templates/gridview.hh:614
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -238,15 +243,15 @@ msgstr  "ဖြတ်ယူပါ"
 #: ../xffm/menus/templates/outputMenu.hh:27
 #: ../xffm/menus/templates/outputMenu.hh:41
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/gridviewmenu.hh:27
-#: ../xffm/menus/templates/gridviewmenu.hh:58
-#: ../xffm/menus/templates/gridviewmenu.hh:82
+#: ../xffm/menus/templates/gridviewmenu.hh:30
+#: ../xffm/menus/templates/gridviewmenu.hh:61
+#: ../xffm/menus/templates/gridviewmenu.hh:86
 msgid   "Copy"
 msgstr  "C ကူးယူပါ"
 
 #: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:584
-#: ../xffm/fm/templates/gridview.hh:835
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:598
+#: ../xffm/fm/templates/gridview.hh:849
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -258,9 +263,9 @@ msgstr  "C ကူးယူပါ"
 #: ../xffm/menus/templates/mainMenu.hh:17
 #: ../xffm/menus/templates/mainMenu.hh:60
 #: ../xffm/menus/templates/mainMenu.hh:84
-#: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/gridviewmenu.hh:60
-#: ../xffm/menus/templates/gridviewmenu.hh:84
+#: ../xffm/menus/templates/gridviewmenu.hh:32
+#: ../xffm/menus/templates/gridviewmenu.hh:63
+#: ../xffm/menus/templates/gridviewmenu.hh:88
 #: ../xffm/menus/templates/menu.hh:175
 msgid   "Paste"
 msgstr  "ပွားယူပါ"
@@ -351,7 +356,7 @@ msgstr  "အမည်"
 
 #: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
 #: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:370
-#: ../xffm/fm/classes/child.hh:276 ../xffm/menus/templates/mainMenu.hh:36
+#: ../xffm/fm/classes/child.hh:282 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:107
 #: ../xffm/menus/templates/mainMenu.hh:130
 #: ../xffm/menus/templates/mainMenu.hh:149
@@ -361,7 +366,7 @@ msgstr  "နေ့စွဲ"
 
 #: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
 #: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:369
-#: ../xffm/fm/classes/child.hh:277 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/fm/classes/child.hh:283 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:108
 #: ../xffm/menus/templates/mainMenu.hh:131
 #: ../xffm/menus/templates/mainMenu.hh:150
@@ -370,7 +375,7 @@ msgid   "Size"
 msgstr  "အရွယ်အစား"
 
 #: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:278
+#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:284
 #: ../xffm/menus/templates/mainMenu.hh:38
 #: ../xffm/menus/templates/mainMenu.hh:109
 #: ../xffm/menus/templates/mainMenu.hh:132
@@ -390,22 +395,22 @@ msgid   "Apply modifications"
 msgstr  "ဆော့ဖ်ဝဲများ"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:575 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/templates/gridview.hh:589 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:86
-#: ../xffm/menus/templates/gridviewmenu.hh:25
-#: ../xffm/menus/templates/gridviewmenu.hh:61
-#: ../xffm/menus/templates/gridviewmenu.hh:86
+#: ../xffm/menus/templates/gridviewmenu.hh:28
+#: ../xffm/menus/templates/gridviewmenu.hh:64
+#: ../xffm/menus/templates/gridviewmenu.hh:90
 #, fuzzy
 msgid   "Add bookmark"
 msgstr  "A မှတ်သားချက်ပေါင်းထည့်"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:578
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:592
 #: ../xffm/menus/templates/mainMenu.hh:63
 #: ../xffm/menus/templates/mainMenu.hh:87
-#: ../xffm/menus/templates/gridviewmenu.hh:26
-#: ../xffm/menus/templates/gridviewmenu.hh:62
-#: ../xffm/menus/templates/gridviewmenu.hh:87
+#: ../xffm/menus/templates/gridviewmenu.hh:29
+#: ../xffm/menus/templates/gridviewmenu.hh:65
+#: ../xffm/menus/templates/gridviewmenu.hh:91
 #, fuzzy
 msgid   "Remove bookmark"
 msgstr  "R မှတ်သားချက် ပယ်ဖျက်ရန်"
@@ -423,15 +428,15 @@ msgstr  "T အမှိုက်ပုံးရှင်းပါ"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:599
-#: ../xffm/menus/templates/gridviewmenu.hh:21
-#: ../xffm/menus/templates/gridviewmenu.hh:51
-#: ../xffm/menus/templates/gridviewmenu.hh:77
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:613
+#: ../xffm/menus/templates/gridviewmenu.hh:23
+#: ../xffm/menus/templates/gridviewmenu.hh:54
+#: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "W အခြားအက်ပလီကေးရှင်းများဖြင့် ဖွင့်ရန်"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:561
-#: ../xffm/fm/templates/gridview.hh:606
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:575
+#: ../xffm/fm/templates/gridview.hh:620
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -444,111 +449,118 @@ msgstr  "W အခြားအက်ပလီကေးရှင်းများ
 #: ../xffm/menus/templates/inputMenu.hh:34
 #: ../xffm/menus/templates/inputMenu.hh:50
 #: ../xffm/menus/templates/inputMenu.hh:67
-#: ../xffm/menus/templates/gridviewmenu.hh:35
-#: ../xffm/menus/templates/gridviewmenu.hh:56
-#: ../xffm/menus/templates/gridviewmenu.hh:85
+#: ../xffm/menus/templates/gridviewmenu.hh:38
+#: ../xffm/menus/templates/gridviewmenu.hh:59
+#: ../xffm/menus/templates/gridviewmenu.hh:89
 msgid   "Delete"
 msgstr  "ပယ်ဖျက်ပါ"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:554
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:568
 #: ../xffm/response/templates/tarresponse.hh:35
-#: ../xffm/menus/templates/gridviewmenu.hh:22
-#: ../xffm/menus/templates/gridviewmenu.hh:65
-#: ../xffm/menus/templates/gridviewmenu.hh:92
+#: ../xffm/menus/templates/gridviewmenu.hh:25
+#: ../xffm/menus/templates/gridviewmenu.hh:68
+#: ../xffm/menus/templates/gridviewmenu.hh:96
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "ရွေးချယ်ထားသောအရာနဲ့ဖိသိပ်ထားသောဖိုင်ထုပ်ကိုဖန်တီးပါ"
 
 #: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:560 ../xffm/fm/templates/gridview.hh:605
-#: ../xffm/fm/templates/gridview.hh:734
-#: ../xffm/menus/templates/gridviewmenu.hh:34
-#: ../xffm/menus/templates/gridviewmenu.hh:57
-#: ../xffm/menus/templates/gridviewmenu.hh:89
+#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
+#: ../xffm/fm/templates/gridview.hh:748
+#: ../xffm/menus/templates/gridviewmenu.hh:37
+#: ../xffm/menus/templates/gridviewmenu.hh:60
+#: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Properties"
 msgstr  "R ဂုဏ်သတ္တိများ"
 
 #: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:590
-#: ../xffm/menus/templates/gridviewmenu.hh:24
-#: ../xffm/menus/templates/gridviewmenu.hh:49
-#: ../xffm/menus/templates/gridviewmenu.hh:74
+#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/menus/templates/gridviewmenu.hh:27
+#: ../xffm/menus/templates/gridviewmenu.hh:52
+#: ../xffm/menus/templates/gridviewmenu.hh:78
 #, fuzzy
 msgid   "Unmount Volume"
 msgstr  "အသံပမာဏ အပြည့်"
 
 #: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:593
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:607
 #: ../xffm/response/templates/mountresponse.hh:166
-#: ../xffm/menus/templates/gridviewmenu.hh:23
-#: ../xffm/menus/templates/gridviewmenu.hh:48
-#: ../xffm/menus/templates/gridviewmenu.hh:73
+#: ../xffm/menus/templates/gridviewmenu.hh:26
+#: ../xffm/menus/templates/gridviewmenu.hh:51
+#: ../xffm/menus/templates/gridviewmenu.hh:77
 #, fuzzy
 msgid   "Mount Volume"
 msgstr  "အသံပမာဏ အပြည့်"
 
-#: ../xffm/fm/templates/gridview.hh:553
+#: ../xffm/fm/templates/gridview.hh:555
+#: ../xffm/menus/templates/gridviewmenu.hh:24
+#: ../xffm/menus/templates/gridviewmenu.hh:69
+#: ../xffm/menus/templates/gridviewmenu.hh:97
+msgid   "Extract archive"
+msgstr  "ဖိုင်တွဲကိုထုတ်ယူပါ"
+
+#: ../xffm/fm/templates/gridview.hh:567
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
 #: ../xffm/menus/templates/pathbarmenu.hh:50
-#: ../xffm/menus/templates/gridviewmenu.hh:20
-#: ../xffm/menus/templates/gridviewmenu.hh:50
-#: ../xffm/menus/templates/gridviewmenu.hh:76
+#: ../xffm/menus/templates/gridviewmenu.hh:22
+#: ../xffm/menus/templates/gridviewmenu.hh:53
+#: ../xffm/menus/templates/gridviewmenu.hh:80
 #, fuzzy
 msgid   "Open in new tab"
 msgstr  "T မျက်နှာစာအသစ်တွင်ဖွင့်ပါ"
 
-#: ../xffm/fm/templates/gridview.hh:557 ../xffm/fm/templates/gridview.hh:602
+#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
-#: ../xffm/menus/templates/gridviewmenu.hh:31
-#: ../xffm/menus/templates/gridviewmenu.hh:53
-#: ../xffm/menus/templates/gridviewmenu.hh:81
+#: ../xffm/menus/templates/gridviewmenu.hh:34
+#: ../xffm/menus/templates/gridviewmenu.hh:56
+#: ../xffm/menus/templates/gridviewmenu.hh:85
 msgid   "Rename"
 msgstr  "R အမည်ပြောင်း"
 
-#: ../xffm/fm/templates/gridview.hh:558 ../xffm/fm/templates/gridview.hh:603
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
-#: ../xffm/menus/templates/gridviewmenu.hh:32
-#: ../xffm/menus/templates/gridviewmenu.hh:54
-#: ../xffm/menus/templates/gridviewmenu.hh:79
+#: ../xffm/menus/templates/gridviewmenu.hh:35
+#: ../xffm/menus/templates/gridviewmenu.hh:57
+#: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Duplicate"
 msgstr  "ပုံတူပွားပါ"
 
-#: ../xffm/fm/templates/gridview.hh:598 ../xffm/fm/templates/gridview.hh:795
-#: ../xffm/fm/templates/gridview.hh:796
-#: ../xffm/menus/templates/gridviewmenu.hh:18
-#: ../xffm/menus/templates/gridviewmenu.hh:52
-#: ../xffm/menus/templates/gridviewmenu.hh:78
+#: ../xffm/fm/templates/gridview.hh:612 ../xffm/fm/templates/gridview.hh:809
+#: ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/menus/templates/gridviewmenu.hh:20
+#: ../xffm/menus/templates/gridviewmenu.hh:55
+#: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:615 ../xffm/fm/templates/gridview.hh:622
+#: ../xffm/fm/templates/gridview.hh:629 ../xffm/fm/templates/gridview.hh:636
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
-#: ../xffm/menus/templates/gridviewmenu.hh:37
-#: ../xffm/menus/templates/gridviewmenu.hh:64
-#: ../xffm/menus/templates/gridviewmenu.hh:91
+#: ../xffm/menus/templates/gridviewmenu.hh:40
+#: ../xffm/menus/templates/gridviewmenu.hh:67
+#: ../xffm/menus/templates/gridviewmenu.hh:95
 #, fuzzy
 msgid   "Decrypt File..."
 msgstr  "ဖိုင်များရှာဖွေရန်..."
 
-#: ../xffm/fm/templates/gridview.hh:617 ../xffm/fm/templates/gridview.hh:620
-#: ../xffm/menus/templates/gridviewmenu.hh:36
-#: ../xffm/menus/templates/gridviewmenu.hh:63
-#: ../xffm/menus/templates/gridviewmenu.hh:90
+#: ../xffm/fm/templates/gridview.hh:631 ../xffm/fm/templates/gridview.hh:634
+#: ../xffm/menus/templates/gridviewmenu.hh:39
+#: ../xffm/menus/templates/gridviewmenu.hh:66
+#: ../xffm/menus/templates/gridviewmenu.hh:94
 msgid   "Encrypt File..."
 msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/fm/templates/gridview.hh:650
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "ရွေးချယ်မှုကို ရွှေ့ပါ"
 
-#: ../xffm/fm/templates/gridview.hh:658
+#: ../xffm/fm/templates/gridview.hh:672
 #, fuzzy
 msgid   "eCryptfs Volume"
 msgstr  "အသံလျှော့ပါ"
@@ -658,8 +670,9 @@ msgstr  "အတိုင်းအတာကို အသုံးချပါ"
 
 #: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
-#: ../xffm/response/templates/fileresponse.hh:315
-#: ../xffm/response/templates/tarresponse.hh:207
+#: ../xffm/response/templates/fileresponse.hh:322
+#: ../xffm/response/templates/untarresponse.hh:144
+#: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
 #: ../xffm/response/templates/dialogbasic.hh:296
 #: ../xffm/response/templates/bfishresponse.hh:169
@@ -753,12 +766,12 @@ msgstr  "အရွယ် -"
 msgid   "New File:"
 msgstr  "I ဖိုင်အသစ်"
 
-#: ../xffm/fm/classes/root.hh:28 ../xffm/fm/classes/child.hh:235
+#: ../xffm/fm/classes/root.hh:28 ../xffm/fm/classes/child.hh:241
 #, fuzzy
 msgid   "Disk Mounter"
 msgstr  "Disk ဆာဗာ"
 
-#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:506
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:513
 #: ../xffm/response/templates/efsresponse.hh:48
 msgid   "New"
 msgstr  "N အသစ်"
@@ -768,7 +781,7 @@ msgstr  "N အသစ်"
 msgid   "Trash bin"
 msgstr  "အမှိုက်ပုံး"
 
-#: ../xffm/fm/classes/child.hh:234
+#: ../xffm/fm/classes/child.hh:240
 msgid   "Bookmarks"
 msgstr  "မှတ်သားချက်"
 
@@ -1217,7 +1230,6 @@ msgid   "Mount"
 msgstr  "ရေတွက်ပါ -"
 
 #: ../xffm/fm/classes/ecryptfs.hh:396
-#: ../xffm/response/templates/tarresponse.hh:211
 #: ../xffm/response/templates/efsresponse.hh:203
 msgid   "Save"
 msgstr  "S သိမ်းရန်"
@@ -1284,39 +1296,63 @@ msgstr  "D ဖိုင်တွဲတည်နေရာရှာ"
 msgid   "Information"
 msgstr  "M  အချက်အလက်များ"
 
-#: ../xffm/response/templates/fileresponse.hh:265
+#: ../xffm/response/templates/fileresponse.hh:269
 #, fuzzy
 msgid   "Selection:"
 msgstr  "ရွေးချယ်မှု -"
 
-#: ../xffm/response/templates/fileresponse.hh:269
-#: ../xffm/response/templates/fileresponse.hh:357
+#: ../xffm/response/templates/fileresponse.hh:273
+#: ../xffm/response/templates/fileresponse.hh:364
 #, fuzzy
 msgid   "No folder selected."
 msgstr  "ရွေးထားတဲ့ စစ်ထုတ်ကိရိယာ မရှိဘူး"
 
-#: ../xffm/response/templates/fileresponse.hh:319
+#: ../xffm/response/templates/fileresponse.hh:326
 #: ../xffm/response/templates/mkdirresponse.hh:22
 msgid   "New Folder"
 msgstr  "F ဖိုင်တွဲအသစ် "
 
-#: ../xffm/response/templates/fileresponse.hh:323
+#: ../xffm/response/templates/fileresponse.hh:330
 msgid   "Accept"
 msgstr  "လက်ခံ"
 
-#: ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/response/templates/fileresponse.hh:510
 #, fuzzy
 msgid   "New folder name:"
 msgstr  "ဖိုင်တွဲအမည်အသစ်"
 
-#: ../xffm/response/templates/fileresponse.hh:507
+#: ../xffm/response/templates/fileresponse.hh:514
 #, fuzzy
 msgid   "New Directory"
 msgstr  "D ဖိုင်တွဲတည်နေရာရှာ"
 
-#: ../xffm/response/templates/fileresponse.hh:507
+#: ../xffm/response/templates/fileresponse.hh:514
 msgid   "Create in folder:"
 msgstr  "ဖိုင်တွဲထဲမျာ ဖန်တီးပါ -"
+
+#: ../xffm/response/templates/untarresponse.hh:34
+#: ../xffm/response/templates/tarresponse.hh:34
+#, fuzzy
+msgid   "Compressed file..."
+msgstr  "ဖိသိပ်..."
+
+#: ../xffm/response/templates/untarresponse.hh:35
+msgid   "Extract files from the archive"
+msgstr  "ဖိုင်ထုပ်ထဲမှဖိုင်တွေကိုထုတ်ယူပါ"
+
+#: ../xffm/response/templates/untarresponse.hh:129
+#: ../xffm/response/templates/tarresponse.hh:171
+#, fuzzy
+msgid   "Target directory:"
+msgstr  "H ပင်မဖိုင်လမ်းညွှန်-"
+
+#: ../xffm/response/templates/untarresponse.hh:148
+#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/tarresponse.hh:212
+#: ../xffm/response/templates/dialogbasic.hh:299
+#: ../xffm/response/templates/bfishresponse.hh:173
+msgid   "Apply"
+msgstr  "P အတည်ပြု"
 
 #: ../xffm/response/templates/openwith.hh:122
 msgid   "Open With..."
@@ -1330,12 +1366,6 @@ msgstr  "ဆောင်ရွတ်ပါ"
 #: ../xffm/response/templates/openwith.hh:215
 msgid   "Execute"
 msgstr  "ဆောင်ရွတ်ပါ"
-
-#: ../xffm/response/templates/openwith.hh:267
-#: ../xffm/response/templates/dialogbasic.hh:299
-#: ../xffm/response/templates/bfishresponse.hh:173
-msgid   "Apply"
-msgstr  "P အတည်ပြု"
 
 #: ../xffm/response/templates/openwith.hh:275
 msgid   "By default applications will be run in the background and only their "
@@ -1354,16 +1384,6 @@ msgstr  "E တာမီနယ် ဒီမှာ ဖွင့်ပါ"
 #, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  ""
-
-#: ../xffm/response/templates/tarresponse.hh:34
-#, fuzzy
-msgid   "Compressed file..."
-msgstr  "ဖိသိပ်..."
-
-#: ../xffm/response/templates/tarresponse.hh:171
-#, fuzzy
-msgid   "Target directory:"
-msgstr  "H ပင်မဖိုင်လမ်းညွှန်-"
 
 #: ../xffm/response/templates/tarresponse.hh:180
 msgid   "Name:"
@@ -1475,7 +1495,7 @@ msgstr  "N စကားဝှက်အသစ်"
 msgid   "Passwords Do Not Match"
 msgstr  "စကားဝှက်နှစ်ခု မတူကြပါ"
 
-#: ../xffm/response/dialogs.hh:73
+#: ../xffm/response/dialogs.hh:74
 #, fuzzy, c-format
 msgid   "Delete '%s'"
 msgstr  "'%s' ကို ပယ်ဖျက်မလား။"
@@ -2100,7 +2120,7 @@ msgstr  ""
 #: ../xffm/menus/templates/mainMenu.hh:64
 #: ../xffm/menus/templates/mainMenu.hh:85
 #: ../xffm/menus/templates/mainMenu.hh:124
-#: ../xffm/menus/templates/gridviewmenu.hh:75
+#: ../xffm/menus/templates/gridviewmenu.hh:79
 msgid   "Toggle Text Mode"
 msgstr  ""
 

@@ -1,4 +1,4 @@
-# Xffm4 translation file: Wed Dec 17 15:31:04 CST 2025
+# Xffm4 translation file: Mon Jan 19 13:34:51 CST 2026
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2025-12-17 15:28-0600\n"
+        "POT-Creation-Date: 2026-01-19 13:32-0600\n"
         "PO-Revision-Date: 2012-09-05 13:04+0100\n"
         "Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
         "Language-Team: British English <en@li.org>\n"
@@ -19,12 +19,12 @@ msgstr  "Project-Id-Version: xffm4\n"
         "X-Generator: Virtaal 0.7.1\n"
         "X-Project-Style: gnome\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:836
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:850
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
 #: ../xffm/menus/templates/pathbarmenu.hh:53
-#: ../xffm/menus/templates/gridviewmenu.hh:30
+#: ../xffm/menus/templates/gridviewmenu.hh:33
 #: ../xffm/menus/templates/menu.hh:183 ../xffm/menus/templates/menu.hh:188
 msgid   "Clipboard is empty."
 msgstr  "Clipboard is empty."
@@ -122,7 +122,7 @@ msgid   "Segmentation fault"
 msgstr  "Segmentation violation"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:628
+#: ../xffm/fm/templates/gridview.hh:642
 #: ../xffm/response/templates/openwith.hh:138
 #: ../xffm/response/templates/dialogbasic.hh:291
 #: ../xffm/find/templates/dndbox.hh:164
@@ -138,9 +138,9 @@ msgstr  "Segmentation violation"
 #: ../xffm/menus/templates/mainMenu.hh:48
 #: ../xffm/menus/templates/mainMenu.hh:74
 #: ../xffm/menus/templates/mainMenu.hh:101
-#: ../xffm/menus/templates/gridviewmenu.hh:39
-#: ../xffm/menus/templates/gridviewmenu.hh:66
-#: ../xffm/menus/templates/gridviewmenu.hh:93
+#: ../xffm/menus/templates/gridviewmenu.hh:42
+#: ../xffm/menus/templates/gridviewmenu.hh:70
+#: ../xffm/menus/templates/gridviewmenu.hh:98
 #: ../xffm/menus/templates/iconColorMenu.hh:14
 #: ../xffm/menus/templates/iconColorMenu.hh:25
 #: ../xffm/menus/templates/iconColorMenu.hh:35
@@ -163,12 +163,12 @@ msgstr  "Source"
 msgid   "Invalid target folder"
 msgstr  "Invalid target folder"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:559
-#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:573
+#: ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/response/classes/dndresponse.hh:22
-#: ../xffm/menus/templates/gridviewmenu.hh:33
-#: ../xffm/menus/templates/gridviewmenu.hh:55
-#: ../xffm/menus/templates/gridviewmenu.hh:80
+#: ../xffm/menus/templates/gridviewmenu.hh:36
+#: ../xffm/menus/templates/gridviewmenu.hh:58
+#: ../xffm/menus/templates/gridviewmenu.hh:84
 msgid   "Link"
 msgstr  "Link"
 
@@ -193,24 +193,28 @@ msgstr  "file"
 msgid   ": "
 msgstr  ": "
 
+#: ../xffm/fm/templates/factory.hh:318 ../xffm/fm/templates/factory.hh:341
+msgid   "Full name"
+msgstr  "Full name"
+
 #: ../xffm/fm/templates/window.hh:603
 msgid   "Long press time"
 msgstr  "Long press time"
 
 #: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:556 ../xffm/fm/templates/gridview.hh:601
+#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
 #: ../xffm/menus/templates/inputMenu.hh:65
-#: ../xffm/menus/templates/gridviewmenu.hh:28
-#: ../xffm/menus/templates/gridviewmenu.hh:59
-#: ../xffm/menus/templates/gridviewmenu.hh:83
+#: ../xffm/menus/templates/gridviewmenu.hh:31
+#: ../xffm/menus/templates/gridviewmenu.hh:62
+#: ../xffm/menus/templates/gridviewmenu.hh:87
 msgid   "Cut"
 msgstr  "Cut"
 
 #: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:555 ../xffm/fm/templates/gridview.hh:600
+#: ../xffm/fm/templates/gridview.hh:569 ../xffm/fm/templates/gridview.hh:614
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -220,15 +224,15 @@ msgstr  "Cut"
 #: ../xffm/menus/templates/outputMenu.hh:27
 #: ../xffm/menus/templates/outputMenu.hh:41
 #: ../xffm/menus/templates/outputMenu.hh:55
-#: ../xffm/menus/templates/gridviewmenu.hh:27
-#: ../xffm/menus/templates/gridviewmenu.hh:58
-#: ../xffm/menus/templates/gridviewmenu.hh:82
+#: ../xffm/menus/templates/gridviewmenu.hh:30
+#: ../xffm/menus/templates/gridviewmenu.hh:61
+#: ../xffm/menus/templates/gridviewmenu.hh:86
 msgid   "Copy"
 msgstr  "Copy"
 
 #: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:584
-#: ../xffm/fm/templates/gridview.hh:835
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:598
+#: ../xffm/fm/templates/gridview.hh:849
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -240,9 +244,9 @@ msgstr  "Copy"
 #: ../xffm/menus/templates/mainMenu.hh:17
 #: ../xffm/menus/templates/mainMenu.hh:60
 #: ../xffm/menus/templates/mainMenu.hh:84
-#: ../xffm/menus/templates/gridviewmenu.hh:29
-#: ../xffm/menus/templates/gridviewmenu.hh:60
-#: ../xffm/menus/templates/gridviewmenu.hh:84
+#: ../xffm/menus/templates/gridviewmenu.hh:32
+#: ../xffm/menus/templates/gridviewmenu.hh:63
+#: ../xffm/menus/templates/gridviewmenu.hh:88
 #: ../xffm/menus/templates/menu.hh:175
 msgid   "Paste"
 msgstr  "Paste"
@@ -329,7 +333,7 @@ msgstr  "Name"
 
 #: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
 #: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:370
-#: ../xffm/fm/classes/child.hh:276 ../xffm/menus/templates/mainMenu.hh:36
+#: ../xffm/fm/classes/child.hh:282 ../xffm/menus/templates/mainMenu.hh:36
 #: ../xffm/menus/templates/mainMenu.hh:107
 #: ../xffm/menus/templates/mainMenu.hh:130
 #: ../xffm/menus/templates/mainMenu.hh:149
@@ -339,7 +343,7 @@ msgstr  "Date"
 
 #: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
 #: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:369
-#: ../xffm/fm/classes/child.hh:277 ../xffm/menus/templates/mainMenu.hh:37
+#: ../xffm/fm/classes/child.hh:283 ../xffm/menus/templates/mainMenu.hh:37
 #: ../xffm/menus/templates/mainMenu.hh:108
 #: ../xffm/menus/templates/mainMenu.hh:131
 #: ../xffm/menus/templates/mainMenu.hh:150
@@ -348,7 +352,7 @@ msgid   "Size"
 msgstr  "Size"
 
 #: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:278
+#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:284
 #: ../xffm/menus/templates/mainMenu.hh:38
 #: ../xffm/menus/templates/mainMenu.hh:109
 #: ../xffm/menus/templates/mainMenu.hh:132
@@ -366,21 +370,21 @@ msgid   "Apply modifications"
 msgstr  "Apply modifications"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:575 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/templates/gridview.hh:589 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:86
-#: ../xffm/menus/templates/gridviewmenu.hh:25
-#: ../xffm/menus/templates/gridviewmenu.hh:61
-#: ../xffm/menus/templates/gridviewmenu.hh:86
+#: ../xffm/menus/templates/gridviewmenu.hh:28
+#: ../xffm/menus/templates/gridviewmenu.hh:64
+#: ../xffm/menus/templates/gridviewmenu.hh:90
 msgid   "Add bookmark"
 msgstr  "Add bookmark"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:578
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:592
 #: ../xffm/menus/templates/mainMenu.hh:63
 #: ../xffm/menus/templates/mainMenu.hh:87
-#: ../xffm/menus/templates/gridviewmenu.hh:26
-#: ../xffm/menus/templates/gridviewmenu.hh:62
-#: ../xffm/menus/templates/gridviewmenu.hh:87
+#: ../xffm/menus/templates/gridviewmenu.hh:29
+#: ../xffm/menus/templates/gridviewmenu.hh:65
+#: ../xffm/menus/templates/gridviewmenu.hh:91
 msgid   "Remove bookmark"
 msgstr  "Remove bookmark"
 
@@ -397,15 +401,15 @@ msgstr  "Empty Wastebin"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "Regular Expression syntax is incorrect"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:599
-#: ../xffm/menus/templates/gridviewmenu.hh:21
-#: ../xffm/menus/templates/gridviewmenu.hh:51
-#: ../xffm/menus/templates/gridviewmenu.hh:77
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:613
+#: ../xffm/menus/templates/gridviewmenu.hh:23
+#: ../xffm/menus/templates/gridviewmenu.hh:54
+#: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "Open with"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:561
-#: ../xffm/fm/templates/gridview.hh:606
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:575
+#: ../xffm/fm/templates/gridview.hh:620
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -418,107 +422,114 @@ msgstr  "Open with"
 #: ../xffm/menus/templates/inputMenu.hh:34
 #: ../xffm/menus/templates/inputMenu.hh:50
 #: ../xffm/menus/templates/inputMenu.hh:67
-#: ../xffm/menus/templates/gridviewmenu.hh:35
-#: ../xffm/menus/templates/gridviewmenu.hh:56
-#: ../xffm/menus/templates/gridviewmenu.hh:85
+#: ../xffm/menus/templates/gridviewmenu.hh:38
+#: ../xffm/menus/templates/gridviewmenu.hh:59
+#: ../xffm/menus/templates/gridviewmenu.hh:89
 msgid   "Delete"
 msgstr  "Delete"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:554
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:568
 #: ../xffm/response/templates/tarresponse.hh:35
-#: ../xffm/menus/templates/gridviewmenu.hh:22
-#: ../xffm/menus/templates/gridviewmenu.hh:65
-#: ../xffm/menus/templates/gridviewmenu.hh:92
+#: ../xffm/menus/templates/gridviewmenu.hh:25
+#: ../xffm/menus/templates/gridviewmenu.hh:68
+#: ../xffm/menus/templates/gridviewmenu.hh:96
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "Create a compressed archive with the selected objects"
 
 #: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:560 ../xffm/fm/templates/gridview.hh:605
-#: ../xffm/fm/templates/gridview.hh:734
-#: ../xffm/menus/templates/gridviewmenu.hh:34
-#: ../xffm/menus/templates/gridviewmenu.hh:57
-#: ../xffm/menus/templates/gridviewmenu.hh:89
+#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
+#: ../xffm/fm/templates/gridview.hh:748
+#: ../xffm/menus/templates/gridviewmenu.hh:37
+#: ../xffm/menus/templates/gridviewmenu.hh:60
+#: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Properties"
 msgstr  "Properties"
 
 #: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:590
-#: ../xffm/menus/templates/gridviewmenu.hh:24
-#: ../xffm/menus/templates/gridviewmenu.hh:49
-#: ../xffm/menus/templates/gridviewmenu.hh:74
+#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/menus/templates/gridviewmenu.hh:27
+#: ../xffm/menus/templates/gridviewmenu.hh:52
+#: ../xffm/menus/templates/gridviewmenu.hh:78
 msgid   "Unmount Volume"
 msgstr  "Unmount Volume"
 
 #: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:593
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:607
 #: ../xffm/response/templates/mountresponse.hh:166
-#: ../xffm/menus/templates/gridviewmenu.hh:23
-#: ../xffm/menus/templates/gridviewmenu.hh:48
-#: ../xffm/menus/templates/gridviewmenu.hh:73
+#: ../xffm/menus/templates/gridviewmenu.hh:26
+#: ../xffm/menus/templates/gridviewmenu.hh:51
+#: ../xffm/menus/templates/gridviewmenu.hh:77
 msgid   "Mount Volume"
 msgstr  "Mount Volume"
 
-#: ../xffm/fm/templates/gridview.hh:553
+#: ../xffm/fm/templates/gridview.hh:555
+#: ../xffm/menus/templates/gridviewmenu.hh:24
+#: ../xffm/menus/templates/gridviewmenu.hh:69
+#: ../xffm/menus/templates/gridviewmenu.hh:97
+msgid   "Extract archive"
+msgstr  "Extract archive"
+
+#: ../xffm/fm/templates/gridview.hh:567
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
 #: ../xffm/menus/templates/pathbarmenu.hh:50
-#: ../xffm/menus/templates/gridviewmenu.hh:20
-#: ../xffm/menus/templates/gridviewmenu.hh:50
-#: ../xffm/menus/templates/gridviewmenu.hh:76
+#: ../xffm/menus/templates/gridviewmenu.hh:22
+#: ../xffm/menus/templates/gridviewmenu.hh:53
+#: ../xffm/menus/templates/gridviewmenu.hh:80
 #, fuzzy
 msgid   "Open in new tab"
 msgstr  "Open in a new tab"
 
-#: ../xffm/fm/templates/gridview.hh:557 ../xffm/fm/templates/gridview.hh:602
+#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
-#: ../xffm/menus/templates/gridviewmenu.hh:31
-#: ../xffm/menus/templates/gridviewmenu.hh:53
-#: ../xffm/menus/templates/gridviewmenu.hh:81
+#: ../xffm/menus/templates/gridviewmenu.hh:34
+#: ../xffm/menus/templates/gridviewmenu.hh:56
+#: ../xffm/menus/templates/gridviewmenu.hh:85
 msgid   "Rename"
 msgstr  "Rename"
 
-#: ../xffm/fm/templates/gridview.hh:558 ../xffm/fm/templates/gridview.hh:603
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
-#: ../xffm/menus/templates/gridviewmenu.hh:32
-#: ../xffm/menus/templates/gridviewmenu.hh:54
-#: ../xffm/menus/templates/gridviewmenu.hh:79
+#: ../xffm/menus/templates/gridviewmenu.hh:35
+#: ../xffm/menus/templates/gridviewmenu.hh:57
+#: ../xffm/menus/templates/gridviewmenu.hh:83
 msgid   "Duplicate"
 msgstr  "Duplicate"
 
-#: ../xffm/fm/templates/gridview.hh:598 ../xffm/fm/templates/gridview.hh:795
-#: ../xffm/fm/templates/gridview.hh:796
-#: ../xffm/menus/templates/gridviewmenu.hh:18
-#: ../xffm/menus/templates/gridviewmenu.hh:52
-#: ../xffm/menus/templates/gridviewmenu.hh:78
+#: ../xffm/fm/templates/gridview.hh:612 ../xffm/fm/templates/gridview.hh:809
+#: ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/menus/templates/gridviewmenu.hh:20
+#: ../xffm/menus/templates/gridviewmenu.hh:55
+#: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  "auto"
 
-#: ../xffm/fm/templates/gridview.hh:615 ../xffm/fm/templates/gridview.hh:622
+#: ../xffm/fm/templates/gridview.hh:629 ../xffm/fm/templates/gridview.hh:636
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
-#: ../xffm/menus/templates/gridviewmenu.hh:37
-#: ../xffm/menus/templates/gridviewmenu.hh:64
-#: ../xffm/menus/templates/gridviewmenu.hh:91
+#: ../xffm/menus/templates/gridviewmenu.hh:40
+#: ../xffm/menus/templates/gridviewmenu.hh:67
+#: ../xffm/menus/templates/gridviewmenu.hh:95
 msgid   "Decrypt File..."
 msgstr  "Decrypt File..."
 
-#: ../xffm/fm/templates/gridview.hh:617 ../xffm/fm/templates/gridview.hh:620
-#: ../xffm/menus/templates/gridviewmenu.hh:36
-#: ../xffm/menus/templates/gridviewmenu.hh:63
-#: ../xffm/menus/templates/gridviewmenu.hh:90
+#: ../xffm/fm/templates/gridview.hh:631 ../xffm/fm/templates/gridview.hh:634
+#: ../xffm/menus/templates/gridviewmenu.hh:39
+#: ../xffm/menus/templates/gridviewmenu.hh:66
+#: ../xffm/menus/templates/gridviewmenu.hh:94
 msgid   "Encrypt File..."
 msgstr  "Encrypt File..."
 
-#: ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/fm/templates/gridview.hh:650
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 msgid   "Multiple selections"
 msgstr  "Multiple selections"
 
-#: ../xffm/fm/templates/gridview.hh:658
+#: ../xffm/fm/templates/gridview.hh:672
 msgid   "eCryptfs Volume"
 msgstr  "eCryptfs Volume"
 
@@ -617,8 +628,9 @@ msgstr  "Apply changes"
 
 #: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
-#: ../xffm/response/templates/fileresponse.hh:315
-#: ../xffm/response/templates/tarresponse.hh:207
+#: ../xffm/response/templates/fileresponse.hh:322
+#: ../xffm/response/templates/untarresponse.hh:144
+#: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
 #: ../xffm/response/templates/dialogbasic.hh:296
 #: ../xffm/response/templates/bfishresponse.hh:169
@@ -702,11 +714,11 @@ msgstr  "Icon Size:"
 msgid   "New File:"
 msgstr  "New File"
 
-#: ../xffm/fm/classes/root.hh:28 ../xffm/fm/classes/child.hh:235
+#: ../xffm/fm/classes/root.hh:28 ../xffm/fm/classes/child.hh:241
 msgid   "Disk Mounter"
 msgstr  "Disk Mounter"
 
-#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:506
+#: ../xffm/fm/classes/root.hh:38 ../xffm/response/templates/fileresponse.hh:513
 #: ../xffm/response/templates/efsresponse.hh:48
 msgid   "New"
 msgstr  "New"
@@ -715,7 +727,7 @@ msgstr  "New"
 msgid   "Trash bin"
 msgstr  "Wastebin"
 
-#: ../xffm/fm/classes/child.hh:234
+#: ../xffm/fm/classes/child.hh:240
 msgid   "Bookmarks"
 msgstr  "Bookmarks"
 
@@ -1128,7 +1140,6 @@ msgid   "Mount"
 msgstr  "Mount"
 
 #: ../xffm/fm/classes/ecryptfs.hh:396
-#: ../xffm/response/templates/tarresponse.hh:211
 #: ../xffm/response/templates/efsresponse.hh:203
 msgid   "Save"
 msgstr  "Save"
@@ -1192,35 +1203,57 @@ msgstr  "Select Directory"
 msgid   "Information"
 msgstr  "Information"
 
-#: ../xffm/response/templates/fileresponse.hh:265
+#: ../xffm/response/templates/fileresponse.hh:269
 msgid   "Selection:"
 msgstr  "Selection:"
 
-#: ../xffm/response/templates/fileresponse.hh:269
-#: ../xffm/response/templates/fileresponse.hh:357
+#: ../xffm/response/templates/fileresponse.hh:273
+#: ../xffm/response/templates/fileresponse.hh:364
 msgid   "No folder selected."
 msgstr  "No folder selected."
 
-#: ../xffm/response/templates/fileresponse.hh:319
+#: ../xffm/response/templates/fileresponse.hh:326
 #: ../xffm/response/templates/mkdirresponse.hh:22
 msgid   "New Folder"
 msgstr  "New Folder"
 
-#: ../xffm/response/templates/fileresponse.hh:323
+#: ../xffm/response/templates/fileresponse.hh:330
 msgid   "Accept"
 msgstr  "Accept"
 
-#: ../xffm/response/templates/fileresponse.hh:503
+#: ../xffm/response/templates/fileresponse.hh:510
 msgid   "New folder name:"
 msgstr  "New folder name:"
 
-#: ../xffm/response/templates/fileresponse.hh:507
+#: ../xffm/response/templates/fileresponse.hh:514
 msgid   "New Directory"
 msgstr  "New Directory"
 
-#: ../xffm/response/templates/fileresponse.hh:507
+#: ../xffm/response/templates/fileresponse.hh:514
 msgid   "Create in folder:"
 msgstr  "Create in folder:"
+
+#: ../xffm/response/templates/untarresponse.hh:34
+#: ../xffm/response/templates/tarresponse.hh:34
+msgid   "Compressed file..."
+msgstr  "Compressed file…"
+
+#: ../xffm/response/templates/untarresponse.hh:35
+msgid   "Extract files from the archive"
+msgstr  "Extract files from the archive"
+
+#: ../xffm/response/templates/untarresponse.hh:129
+#: ../xffm/response/templates/tarresponse.hh:171
+msgid   "Target directory:"
+msgstr  "Target directory:"
+
+#: ../xffm/response/templates/untarresponse.hh:148
+#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/tarresponse.hh:212
+#: ../xffm/response/templates/dialogbasic.hh:299
+#: ../xffm/response/templates/bfishresponse.hh:173
+msgid   "Apply"
+msgstr  "Apply"
 
 #: ../xffm/response/templates/openwith.hh:122
 msgid   "Open With..."
@@ -1233,12 +1266,6 @@ msgstr  "Is executable"
 #: ../xffm/response/templates/openwith.hh:215
 msgid   "Execute"
 msgstr  "Execute"
-
-#: ../xffm/response/templates/openwith.hh:267
-#: ../xffm/response/templates/dialogbasic.hh:299
-#: ../xffm/response/templates/bfishresponse.hh:173
-msgid   "Apply"
-msgstr  "Apply"
 
 #: ../xffm/response/templates/openwith.hh:275
 msgid   "By default applications will be run in the background and only their "
@@ -1261,14 +1288,6 @@ msgstr  "External Terminal:"
 #, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  "Cannot find executable for \"%s\""
-
-#: ../xffm/response/templates/tarresponse.hh:34
-msgid   "Compressed file..."
-msgstr  "Compressed file…"
-
-#: ../xffm/response/templates/tarresponse.hh:171
-msgid   "Target directory:"
-msgstr  "Target directory:"
 
 #: ../xffm/response/templates/tarresponse.hh:180
 msgid   "Name:"
@@ -1370,7 +1389,7 @@ msgstr  "No password set"
 msgid   "Passwords Do Not Match"
 msgstr  "Passwords Do Not Match"
 
-#: ../xffm/response/dialogs.hh:73
+#: ../xffm/response/dialogs.hh:74
 #, c-format
 msgid   "Delete '%s'"
 msgstr  "Delete '%s'"
@@ -1946,7 +1965,7 @@ msgstr  "Exit"
 #: ../xffm/menus/templates/mainMenu.hh:64
 #: ../xffm/menus/templates/mainMenu.hh:85
 #: ../xffm/menus/templates/mainMenu.hh:124
-#: ../xffm/menus/templates/gridviewmenu.hh:75
+#: ../xffm/menus/templates/gridviewmenu.hh:79
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "Toggle TV Mode"
