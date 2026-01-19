@@ -353,6 +353,7 @@ namespace xf {
         for (guint i=0; i<items; i++){
           auto info = G_FILE_INFO(g_list_model_get_item(store, i)); // GFileInfo
           auto name = g_file_info_get_name(info);
+          //if (g_utf8_strlen(name, -1) > max) max = g_utf8_strlen(name, -1);
           if (strlen(name) > max) max = strlen(name);
         }
         return max;
@@ -860,6 +861,36 @@ public:
         ERROR_("*** Basic::flushGTK may only be called from main context\n");
       }
     }
+
+    static char *utf_truncate(const char *t, int size){
+      if (g_utf8_strlen(t, -1) <= size) return g_strdup(t);
+
+      auto actual_tag = g_strdup (t);
+      auto p = g_utf8_offset_to_pointer(actual_tag, size);
+      while (!g_utf8_validate (p, -1, NULL)) p++;
+      p++;
+      *p = 0;
+      concat(&actual_tag, "...");
+      return actual_tag;
+    }
+
+    static char *utf_truncateMarkup(const char *t, int size){
+      TRACE("%s: strlen=%d g_utf8_strlen=%d\n",
+          t, strlen(t), g_utf8_strlen(t, -1));
+      auto utfLength = g_utf8_strlen(t, -1);
+      auto actual_tag = g_strdup (t);
+      if (utfLength <= size){
+        return actual_tag;
+      }
+
+      auto p = g_utf8_offset_to_pointer(actual_tag, size);
+      while (!g_utf8_validate (p, -1, NULL)) p++;
+      p++;
+      *p = 0;
+      concat(&actual_tag, "<span color='red'><b>...</b></span>");
+      return actual_tag;
+    }
+
     static gchar *
     utf_string (const gchar * t) {
       if(!t) { return g_strdup (""); }
@@ -873,8 +904,15 @@ public:
       if(actual_tag){
           return actual_tag;
       }
+
+
       /* So it is not even a valid locale string... 
        * Let us get valid utf-8 caracters then: */
+      // Simple new way (glib >= 2.52):
+      return g_utf8_make_valid(t, -1);
+    }
+#if 0
+      // Old way, deprecated, too complex:
       const gchar *p;
       actual_tag = g_strdup ("");
       for(p = t; *p; p++) {
@@ -909,6 +947,8 @@ public:
       }
       return actual_tag;
     }
+#endif
+    
     
     static void *context_function(void * (*function)(gpointer), void * function_data){
       pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;

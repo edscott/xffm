@@ -196,7 +196,7 @@ ClickMenu
 
         bool previewLoaded = false;
         bool doPreview = false;
-        if (!picture && !g_file_info_get_is_symlink(info)){
+        if (size > 32 && !picture && !g_file_info_get_is_symlink(info)){
           picture = previewPicture(info, path, &doPreview);
           if (picture) {
             TRACE("previewLoaded already for %s\n", path);
@@ -248,6 +248,7 @@ ClickMenu
           //Type::addDirectoryTooltip(picture, info);
         }
         auto columnW = 18;
+        auto truncName = Basic::utf_truncateMarkup(name, columnW);
 
         char buffer[128];
         if (size <= 32){
@@ -255,16 +256,23 @@ ClickMenu
           gtk_widget_set_visible(GTK_WIDGET(hlabel), true);
           gtk_widget_set_visible(GTK_WIDGET(hlabel2), true);
 
-          auto textSize = (gridView_p->maxNameLen() > columnW)?
+          auto textSize = columnW + strlen("...")+1;
+
+          textSize += (strlen(truncName) - g_utf8_strlen(truncName, -1));
+         /* auto textSize = (gridView_p->maxNameLen() > columnW)?
             columnW + strlen("..."): 
-            gridView_p->maxNameLen();
+            gridView_p->maxNameLen();*/
 
           auto format = g_strdup_printf("%%-%ds", textSize);
           //auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen());
-          char nameBuffer[columnW];
+
+          snprintf(buffer, 128, (const char *)format, truncName);
+
+/*          char nameBuffer[columnW+1];
           snprintf(nameBuffer, columnW, "%s", name);
+
           auto n = g_strconcat(nameBuffer, (strlen(name) > columnW)?"...":"", NULL);
-          snprintf(buffer, 128, (const char *)format, n);
+          snprintf(buffer, 128, (const char *)format, n);*/
           
 
           auto sizeString = "x-small";
@@ -272,7 +280,7 @@ ClickMenu
           if (size == 32) sizeString = "medium";
 
 
-          auto markup = g_strdup_printf("<span size=\"%s\"><b>%s</b></span>",  
+          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>",  
               sizeString, buffer);
 
           if (strcmp(name, "..")){
@@ -313,10 +321,8 @@ ClickMenu
           else if (size <= 156) sizeS = "medium";
           else if (size <= 192) sizeS = "large";
           else sizeS = "x-large";
-          char buffer[columnW];
-          snprintf(buffer, columnW, "%s", name);
-          auto markup = g_strdup_printf("<span size=\"%s\">%s%s</span>", 
-            sizeS, buffer, (strlen(name) > columnW)?"...":"");
+          auto markup = g_strdup_printf("<span size=\"%s\">%s</span>", 
+            sizeS, truncName);
           gtk_label_set_markup(label, markup);
           g_free(markup);
           if (strlen(name) > columnW) gtk_widget_set_tooltip_markup(GTK_WIDGET(label), name);
@@ -331,6 +337,7 @@ ClickMenu
         g_signal_connect (source, "drag-begin", G_CALLBACK (Dnd<Type>::image_drag_begin), picture);
         gtk_widget_add_controller (picture, GTK_EVENT_CONTROLLER (source));*/
         
+        g_free(truncName);
 
 
         if (doPreview && !previewLoaded){

@@ -289,7 +289,7 @@ endloop:;
           g_strfreev(split);
           // done
           return;
-      }
+      } // end esc_location.
 
       auto mark = gtk_text_buffer_get_mark (buffer, "rfm-ow");
       gchar *cr = (gchar *)strchr (s, 0x0D);

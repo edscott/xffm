@@ -186,37 +186,6 @@ namespace xf {
       }
 
     public:
-/*      static int
-      getMaxNameLen(const char *path){
-        GError *error_ = NULL;
-        GFile *file = g_file_new_for_path(path);
-        GFileEnumerator *dirEnum = 
-          g_file_enumerate_children (file,"standard::,G_FILE_ATTRIBUTE_TIME_MODIFIED,G_FILE_ATTRIBUTE_TIME_CREATED",G_FILE_QUERY_INFO_NONE,NULL, &error_);
-        if (error_) {
-          TRACE("*** Error::g_file_enumerate_children: %s\n", error_->message);
-          Print::printError(Child::getOutput(NULL), g_strdup(error_->message));
-          g_error_free(error_);
-          return 0;
-        }
-        GFile *outChild = NULL;
-        GFileInfo *outInfo = NULL;
-        int k = 1;
-        int maxNameLen = 0;
-        do {
-          g_file_enumerator_iterate (dirEnum, &outInfo, &outChild,
-              NULL, // GCancellable* cancellable,
-              &error_);
-          if (error_) {
-            ERROR_("*** Error::g_file_enumerator_iterate: %s\n", error_->message);
-            return 0;
-          }
-          if (!outInfo || !outChild) break;
-          if (strlen(g_file_info_get_name(outInfo)) > maxNameLen)
-            maxNameLen = strlen(g_file_info_get_name(outInfo));
-        } while (true);
-        g_object_unref(file); // ?
-        return maxNameLen;
-      }*/
 
       static int getHiddenCount(GListModel *listModel, int flags, int limit){
         int count = 0;
