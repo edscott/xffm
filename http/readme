@@ -1,0 +1,11 @@
+Cheatsheet.
+
+To update your SourceForge project homepage, 
+you upload your custom HTML/CSS/JS files 
+via SFTP (using clients like FileZilla 
+or command line) to the 
+/home/project-web/<projectname>/htdocs/ 
+directory on web.sourceforge.net.
+
+Once logged in with ftp, just cd htdocs to
+get into /home/project-web/<projectname>/htdocs/

@@ -1,5 +1,40 @@
 
 <blockquote>
+<date>Monday January 19, 2026</date>
+<title>Version 4.20.3-3 released</title>
+<br><pre>
+Today I have uploaded the tarball to sf.net and
+created and tested the AUR for xffm version
+4.20.3 release 3 with updated stuff:
+<br>
+    In this build the dialog for extracting from compressed files (.gz,
+    .bz2, .xz, .zip) has been added.
+    
+    Added a workaround for the gtk4 bug that triggers a false warning
+    when horizontal adjustment disappears when no longer necessary on
+    configue event (triggered by resize).
+    
+    Also improved the filename truncation in output, ensuring consistent
+    column width for filenames in ISO and UTF locales. Elipsis on truncated
+    names is colored red and full name will show on tooltip for truncated
+    names.
+    
+    Translations updated with some new strings.
+    
+    Other fixes:
+     * avoid rename on longpress of label ".."
+     * :Zone.Identifier now considered a backup file
+     * Added emblem to backup files
+     * Added emblem to open document files
+     * Reenable image previews
+</pre><br>
+Enjoy.
+<br>
+
+</blockquote>
+
+
+<blockquote>
 <date>Wednesday December 17, 2025</date>
 <title>XFFM release for gtk-4.20.3</title>
 <br><pre>

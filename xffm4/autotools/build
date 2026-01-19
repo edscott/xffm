@@ -1,7 +1,0 @@
-#!/bin/sh
-pwd
-cd po
-pwd
-make update-po
-make
-
