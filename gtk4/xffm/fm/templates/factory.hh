@@ -31,6 +31,10 @@ template <class Type>
         auto hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto pictureBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto labelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+        if (getViewIconSize(gridView_p) > 32) {
+          gtk_widget_set_halign(hbox, GTK_ALIGN_CENTER);
+          gtk_widget_set_halign(labelBox, GTK_ALIGN_CENTER);
+        }
         auto hlabelBox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabelBox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         auto hlabel = gtk_label_new(""); // This is file info column.
@@ -125,6 +129,14 @@ ClickMenu
         if (oldImage) gtk_widget_unparent(oldImage);
      }
 
+      static int getViewIconSize(GridView<Type> *gridView_p){
+        auto size = 48;
+        if (gridView_p->flags() & 0x200){ // custom size
+          size = Settings::getInteger(gridView_p->path(), "iconsize");
+          if (size < 0) size = 48;
+        }
+        return size;
+      }
 
       /* The bind function for the factory */
       static void
@@ -153,11 +165,7 @@ ClickMenu
         g_object_set_data(G_OBJECT(info), "menuBox2", menuBox2);
 
         auto type = g_file_info_get_file_type(info);
-        auto size = 48;
-        if (gridView_p->flags() & 0x200){ // custom size
-          size = Settings::getInteger(gridView_p->path(), "iconsize");
-          if (size < 0) size = 48;
-        }
+        auto size = getViewIconSize(gridView_p);
 
         //auto size = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(child),"iconsize"));
         // allocated:
@@ -306,7 +314,11 @@ ClickMenu
             //Basic::boxPack0(GTK_BOX(box), GTK_WIDGET(hbox), FALSE, TRUE, 0);    
           }  
           gtk_label_set_markup(hlabel, markup);
-          if (strlen(name) > columnW) gtk_widget_set_tooltip_markup(GTK_WIDGET(hlabel), name);
+          if (strlen(name) > columnW) {
+            auto m = g_strdup_printf("<i>%s</i>\n<b>%s</b>", _("Full name"), name);
+            gtk_widget_set_tooltip_markup(GTK_WIDGET(hlabel), m);
+            g_free(m);
+          }
           else gtk_widget_set_tooltip_markup(GTK_WIDGET(hlabel), NULL);
           g_free(markup);
         } 
@@ -325,7 +337,11 @@ ClickMenu
             sizeS, truncName);
           gtk_label_set_markup(label, markup);
           g_free(markup);
-          if (strlen(name) > columnW) gtk_widget_set_tooltip_markup(GTK_WIDGET(label), name);
+          if (strlen(name) > columnW) {
+            auto m = g_strdup_printf("<i>%s</i>\n<b>%s</b>", _("Full name"), name);
+            gtk_widget_set_tooltip_markup(GTK_WIDGET(label), m);
+            g_free(m);
+          }
           else gtk_widget_set_tooltip_markup(GTK_WIDGET(label), NULL);
           
           //Type::addLabelTooltip(GTK_WIDGET(label), path);
