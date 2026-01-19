@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   id="svg1"
+   sodipodi:version="0.32"
+   inkscape:version="0.38.1"
+   width="128.00000pt"
+   height="128.00000pt"
+   sodipodi:docbase="/usr/share/icons/Fuzzy/scalable/emblems"
+   sodipodi:docname="gnome-mailcheck.svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient840">
+      <stop
+         style="stop-color:#e0c39e;stop-opacity:1.0000000;"
+         offset="0.0000000"
+         id="stop841" />
+      <stop
+         style="stop-color:#eae8e3;stop-opacity:1.0000000;"
+         offset="1.0000000"
+         id="stop842" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient837">
+      <stop
+         style="stop-color:#ffbe00;stop-opacity:1.0000000;"
+         offset="0.0000000"
+         id="stop838" />
+      <stop
+         style="stop-color:#fff200;stop-opacity:1.0000000;"
+         offset="1.0000000"
+         id="stop839" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient834">
+      <stop
+         style="stop-color:#dddd84;stop-opacity:1.0000000;"
+         offset="0.0000000"
+         id="stop835" />
+      <stop
+         style="stop-color:#ffffe8;stop-opacity:1.0000000;"
+         offset="1.0000000"
+         id="stop836" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient830">
+      <stop
+         style="stop-color:#000;stop-opacity:1;"
+         offset="0"
+         id="stop831" />
+      <stop
+         style="stop-color:#fff;stop-opacity:1;"
+         offset="1"
+         id="stop832" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient840"
+       id="linearGradient833"
+       x1="0.88387096"
+       y1="0.88059700"
+       x2="2.6596832e-18"
+       y2="0.14925373" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="6.1875000"
+     inkscape:cx="66.087064"
+     inkscape:cy="63.515152"
+     inkscape:window-width="948"
+     inkscape:window-height="894"
+     showgrid="true"
+     snaptogrid="false"
+     gridspacingx="1.0000000mm"
+     gridspacingy="1.0000000mm"
+     inkscape:window-x="42"
+     inkscape:window-y="38" />
+  <rect
+     style="fill-rule:evenodd;stroke:none;stroke-width:3.7500000;fill:#000000;fill-opacity:0.40000001;stroke-dasharray:none;stroke-linejoin:round;stroke-linecap:round;stroke-opacity:1.0000000;"
+     id="rect829"
+     width="132.40930"
+     height="87.658941"
+     x="-4.9263880"
+     y="57.473546"
+     transform="matrix(0.959159,-0.282867,0.229848,0.973227,0.000000,0.000000)" />
+  <rect
+     style="fill:url(#linearGradient833);fill-rule:evenodd;stroke:#000000;stroke-width:3.5920253;stroke-linecap:round;stroke-linejoin:round;"
+     id="rect825"
+     width="128.14711"
+     height="84.209057"
+     x="-5.7160496"
+     y="55.777251"
+     transform="matrix(0.959159,-0.282867,0.229848,0.973227,0.000000,0.000000)" />
+  <path
+     style="fill:none;fill-opacity:0.49999997;fill-rule:evenodd;stroke:#000000;stroke-width:3.5893228;stroke-linejoin:round;"
+     d="M 7.3367570,56.304852 L 49.565197,88.902196 L 108.09536,71.641019 L 130.25096,19.652379 L 7.3367570,56.304852 z "
+     id="path826"
+     sodipodi:nodetypes="ccccc" />
+  <path
+     style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.1964408;"
+     d="M 49.389498,88.515276 L 26.692738,137.85549"
+     id="path827" />
+  <path
+     style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.1964408;"
+     d="M 108.20375,71.540553 L 149.60609,101.60701"
+     id="path828" />
+</svg>
