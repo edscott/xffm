@@ -29,6 +29,7 @@ namespace xf
                 ENTRY_CALLBACK (activate_entry), (void *)dialog);*/
       gtk_widget_realize(GTK_WIDGET(this->dialog()));
       Basic::setAsDialog(GTK_WINDOW(this->dialog()));
+
       gtk_window_present(this->dialog());
 
     }

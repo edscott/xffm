@@ -204,32 +204,45 @@ namespace xf {
         XQueryPointer(display, w, &root_return, &child_return, 
                      x, y, 
                      &win_x_return, &win_y_return, &mask_return);
+        TRACE("pointer_return at (%d, %d) relative to root %p.\n", *x, *y, w);
 
     }
 
     static void getXY(GtkWindow *dialog, int *x, int *y){
+        auto root = gdk_x11_display_get_xrootwindow(gdk_display_get_default());
         auto display = getDisplay();
         auto w = getWindow(dialog);
-        Window root_return, child_return;
-        int win_x_return, win_y_return;
-        unsigned int mask_return;
-        XQueryPointer(display, w, &root_return, &child_return, 
-                     x, y, 
-                     &win_x_return, &win_y_return, &mask_return);
-        TRACE("pointer at (%d, %d) relative to dialog %p.\n", x, y, w);
+        Window child_window;
+        int dest_x, dest_y;
+        // Translate coordinates from the window's local origin (0, 0)
+        // to the root window's coordinates
+        XTranslateCoordinates(display, w, root, 0, 0, &dest_x, &dest_y, &child_window);
+
+        // To get the accurate position including potential window manager decorations, 
+        // it can be useful to use XGetGeometry and adjust. 
+        // The XTranslateCoordinates method above often provides the correct 
+        // screen position directly.
+
+        *x = dest_x;
+        *y = dest_y;
+
+        TRACE("dialog at (%d, %d).\n", *x, *y);
 
     }
-    static void moveToPointer(GtkWindow *dialog){
-        int x,y;
-        getXY(&x, &y);
-//        getXY(dialog, &x, &y);
+    static void moveTo(GtkWindow *dialog, int x, int y){
         auto display = getDisplay();
         auto w = getWindow(dialog);
         XMoveWindow(display, w, x, y);
         TRACE("*** Moving window to %d,%d\n", x,y);
     }
+    static void moveToPointer(GtkWindow *dialog){
+        int x,y;
+        getXY(&x, &y);
+        moveTo(dialog, x, y);
+    }
 #else
     static void moveToPointer(GtkWindow *dialog){return;}
+    static void moveTo(GtkWindow *dialog,int x, int y){return;}
     static void getXY(GtkWindow *dialog, int *x, int *y){return;}
 #endif
 

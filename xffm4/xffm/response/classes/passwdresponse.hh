@@ -86,12 +86,6 @@ public:
           }
       } else  string = g_strdup_printf("%s:", _("Enter password"));
 
-#ifdef GDK_WINDOWING_X11  
-      // Get current pointer position in root window.
-      int x,y;
-      Basic::getXY(&x, &y);
-      TRACE("pointer at (%d, %d) relative to root window.\n", x, y);
-#endif
 
       auto dialogObject = new DialogPasswd<PasswordDialog>;
       //This one really has no parent...
@@ -99,13 +93,23 @@ public:
       auto dialog = dialogObject->dialog();
       auto entry = GTK_ENTRY( g_object_get_data(G_OBJECT(dialog),"entry"));
       gtk_entry_set_visibility (entry, false);
+#ifdef GDK_WINDOWING_X11  
+      // Get current pointer position in root window.
+      // This will move the window to the pointer position.
+      int x,y;
+      Basic::getXY(&x, &y);
+      TRACE("pointer at (%d, %d) relative to root window.\n", x, y);
+      g_object_set_data(G_OBJECT(dialog),"X", GINT_TO_POINTER(x));
+      g_object_set_data(G_OBJECT(dialog),"Y", GINT_TO_POINTER(y));
+#endif
 
       
       TRACE("create dialogObject=%p\n", dialogObject); 
       dialogObject->setLabelText(string);
       
+      //Basic::moveToPointer(dialog); //does not work here.
+      
       dialogObject->run();
-      Basic::moveToPointer(dialog);
       while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
         g_main_context_iteration (NULL, TRUE);
         exit(0);

@@ -69,8 +69,8 @@ namespace xf
       auto dialogObject = (dialog_t *)data;
       //auto dialog = dialogObject->dialog();
       TRACE("*** runWait_f for dialog_t\n");
+      //Basic::moveToPointer(dialogObject->dialog()); //Centers on the pointer screen (not always).
 
-      TRACE("runWait_f...\n");
       pthread_t thread;
       Thread::threadCount(true,  &thread, "DialogBasic::runWait_f");
       int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
@@ -91,7 +91,21 @@ namespace xf
       void *response = NULL;
       TRACE("*** run_f for Basic::dialog_t\n");
       TRACE("*** run_f (thread)\n");
+
+      auto X = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "X"));
+      auto Y = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "Y"));
+      int x=0,y=0;
+      Basic::getXY(dialog, &x, &y);
+      TRACE("dataXY is (%d, %d)\n", X, Y);
+      TRACE("getXY(dialog) is (%d, %d)\n", x, y);
+            
       do {
+        if ((X != 0 || Y != 0) &&  (X != x || Y != y) ){
+            TRACE("now moving to (%d, %d)\n", X, Y);
+            Basic::moveTo(dialog, X, Y);
+            Basic::getXY(dialog, &x, &y);
+            TRACE("dialog at (%d, %d)\n", x, y);
+        }
         dialogObject->lockResponse();
         response = g_object_get_data(G_OBJECT(dialog), "response");
         dialogObject->unlockResponse();
@@ -242,6 +256,7 @@ namespace xf
     int run(void){
       TRACE("*** Basic::dialog_t run...\n");
       pthread_t thread;
+      //Basic::moveToPointer(this->dialog()); //Centers on the pointer screen (not always).
       Thread::threadCount(true,  &thread, "DialogBasic::run");
       int retval = pthread_create(&thread, NULL, runWait_f, this);
       pthread_detach(thread);
