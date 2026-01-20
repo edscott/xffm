@@ -6,7 +6,7 @@ while (<INPUT>){
     $blog.=$_;
 }
 close INPUT;
-`cp blog.xml blog.txt.bak`;
+`cp blog.xml blog.xml.bak`;
 $date=`LC_ALL=C date +"%A %B %d, %Y"`;
 chop $date;
 
@@ -27,7 +27,9 @@ $newblog="
 <blockquote>
 <date>$date</date>
 <title>$title</title>
+<pre>
 $entry
+</pre>
 </blockquote>
 
 $blog";
