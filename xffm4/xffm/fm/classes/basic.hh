@@ -194,6 +194,19 @@ namespace xf {
 
 
 #ifdef GDK_WINDOWING_X11
+
+    static void getXY(int *x, int *y){
+        auto display = getDisplay();
+        auto w = gdk_x11_display_get_xrootwindow(gdk_display_get_default());
+        Window root_return, child_return;
+        int win_x_return, win_y_return;
+        unsigned int mask_return;
+        XQueryPointer(display, w, &root_return, &child_return, 
+                     x, y, 
+                     &win_x_return, &win_y_return, &mask_return);
+
+    }
+
     static void getXY(GtkWindow *dialog, int *x, int *y){
         auto display = getDisplay();
         auto w = getWindow(dialog);
@@ -203,11 +216,13 @@ namespace xf {
         XQueryPointer(display, w, &root_return, &child_return, 
                      x, y, 
                      &win_x_return, &win_y_return, &mask_return);
+        TRACE("pointer at (%d, %d) relative to dialog %p.\n", x, y, w);
 
     }
     static void moveToPointer(GtkWindow *dialog){
         int x,y;
-        getXY(dialog, &x, &y);
+        getXY(&x, &y);
+//        getXY(dialog, &x, &y);
         auto display = getDisplay();
         auto w = getWindow(dialog);
         XMoveWindow(display, w, x, y);

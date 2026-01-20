@@ -142,10 +142,10 @@ main (int argc, const char *argv[], const char *envp[]) {
 #ifdef ENABLE_NLS
     /* this binds domain: */
     bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-    DBG("bindtextdomain (%s, %s)\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+    TRACE("bindtextdomain (%s, %s)\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 # ifdef HAVE_BIND_TEXTDOMAIN_CODESET
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-    DBG ("binding %s, at %s with codeset UTF-8\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+    TRACE ("binding %s, at %s with codeset UTF-8\n", GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
 # endif
 #else
 #warning "Translations not enabled."
