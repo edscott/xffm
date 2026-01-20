@@ -1,5 +1,28 @@
 
 <blockquote>
+<date>Tuesday January 20, 2026</date>
+<title>Password dialog placement in i3 environment.</title>
+<pre>
+<br>
+Release 4.20.3-4 solves the password dialog placement
+under i3 window manager.
+<br>
+    Basically:
+    
+        1- Window must be realized.
+        2- Use root window coordinates (XTranslateCoordinates)
+        3- Resolve race condition when running from parallel thread.
+<br>
+Now available at aur.archlinux.org and download from sf.net:
+<a href="https://sourceforge.net/projects/xffm/files/xffm+/xffm4_20_3-4.bz2">here</a>
+<br>
+Enjoy.
+
+</pre>
+</blockquote>
+
+
+<blockquote>
 <date>Monday January 19, 2026</date>
 <title>Version 4.20.3-3 released</title>
 <br><pre>
