@@ -1,5 +1,39 @@
 
 <blockquote>
+<date>Wednesday January 21, 2026</date>
+<title>4_20_3 release 5</title>
+<pre>
+<br>
+    Updated release 5
+    
+    This release improves the following:
+    
+        Added list option to untar dialog
+    
+        Fixed unzip command in untar dialog.
+        Removed missing ";" warning from CSS
+    
+        Make find results icons more consistent
+    
+        At DnDBox class template:
+          Close icon only closes window (previously done by clear icon)
+          Clear icon replaced by exit icon and does clear function, i.e.,
+            only closes afected results window.
+        Eliminate a Gtk-CRITICAL message
+    
+        Prompt destructor was not checking inputPopover_ for NULL
+        before unparenting.
+ 
+    Now in AUR. Source: <a href="https://sourceforge.net/projects/xffm/files/xffm%2B/xffm4_20_3-5.bz2">Download</a>
+    AUR: <a href="https://aur.archlinux.org/packages/xffm">Here</a>
+<br>
+Enjoy.
+
+</pre>
+</blockquote>
+
+
+<blockquote>
 <date>Tuesday January 20, 2026</date>
 <title>Password dialog placement in i3 environment.</title>
 <pre>
