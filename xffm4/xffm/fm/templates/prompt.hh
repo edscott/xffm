@@ -23,7 +23,7 @@ namespace xf {
     public:
 
     ~Prompt(void){
-        gtk_widget_unparent(GTK_WIDGET(inputPopover_));
+        if (inputPopover_) gtk_widget_unparent(GTK_WIDGET(inputPopover_));
     }
     
     Prompt(GtkTextView *output) {

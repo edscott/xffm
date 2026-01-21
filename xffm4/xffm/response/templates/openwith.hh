@@ -84,7 +84,7 @@ public:
        Basic::context_function(unsetRaise_f, this);
        gtk_widget_set_visible(GTK_WIDGET(dialog_), FALSE);
        g_free(path_);
-       //Basic::popDialog(dialog_);
+       // prompt_p is deleted by timeout callback.
        gtk_window_destroy(dialog_);
     }
 
@@ -263,7 +263,6 @@ private:
         if (textView != NULL) {
           withTextview(true);
         }
-        //auto cancel = Dialog::buttonBox("no", _("Cancel"), (void *)cancelCallback, this);
         auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
@@ -278,14 +277,6 @@ private:
 "applications, you should use an external terminal.");
         auto box = Basic::mkEndBox();
         Basic::boxPack0(GTK_BOX (vbox),GTK_WIDGET(box), TRUE, TRUE, 5);
-
-
-
-        
-       /* auto cancel = UtilBasic::mkButton("no", _("Cancel")); //4
-        g_signal_connect(G_OBJECT(cancel), "pressed", G_CALLBACK(cancelCallback), this);
-        Basic::boxPack0(GTK_BOX (box),GTK_WIDGET(cancel), TRUE, TRUE, 5);*/
-
 
         auto label = gtk_label_new(_("Use External Terminal:"));
         Basic::setTooltip(label, text);
@@ -438,7 +429,7 @@ private:
 
         // Shortcircuit to delete.
         if (timeout < 0) {
-          TRACE("timeout done...\n");
+            TRACE("timeout done...\n");
             delete object->prompt_p;
             delete object;
             return G_SOURCE_REMOVE;
