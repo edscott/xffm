@@ -1,4 +1,4 @@
-# Xffm4 translation file: Mon Jan 19 13:34:18 CST 2026
+# Xffm4 translation file: mié 21 ene 2026 15:11:04 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-19 13:32-0600\n"
+        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
         "PO-Revision-Date: 2013-03-07 21:29+0100\n"
         "Last-Translator: Joan Duran <jodufi@gmail.com>\n"
         "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -16,7 +16,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Content-Transfer-Encoding: 8bit\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -119,10 +119,10 @@ msgid   "Segmentation fault"
 msgstr  "Violació de segment"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:642
+#: ../xffm/fm/templates/gridview.hh:643
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:291
-#: ../xffm/find/templates/dndbox.hh:164
+#: ../xffm/response/templates/dialogbasic.hh:306
+#: ../xffm/find/templates/dndbox.hh:165
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -161,8 +161,8 @@ msgstr  "Font"
 msgid   "Invalid target folder"
 msgstr  "Valor d'argument no vàlid"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:573
-#: ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
+#: ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -200,7 +200,7 @@ msgid   "Long press time"
 msgstr  "Temps de pressió llarg"
 
 #: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -212,7 +212,7 @@ msgid   "Cut"
 msgstr  "Retalla"
 
 #: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:569 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -229,8 +229,8 @@ msgid   "Copy"
 msgstr  "Copia"
 
 #: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:598
-#: ../xffm/fm/templates/gridview.hh:849
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
+#: ../xffm/fm/templates/gridview.hh:850
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -370,7 +370,7 @@ msgid   "Apply modifications"
 msgstr  "Aplica les modificacions"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:589 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
@@ -379,7 +379,7 @@ msgid   "Add bookmark"
 msgstr  "Afig una adreça d'interés"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:592
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
 #: ../xffm/menus/templates/mainMenu.hh:63
 #: ../xffm/menus/templates/mainMenu.hh:87
 #: ../xffm/menus/templates/gridviewmenu.hh:29
@@ -401,15 +401,15 @@ msgstr  "Buida la paperera"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "La sintaxi de l'expressió regular no és correcta"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:613
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "Obri amb"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:575
-#: ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -428,7 +428,7 @@ msgstr  "Obri amb"
 msgid   "Delete"
 msgstr  "Suprimeix"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -437,8 +437,8 @@ msgid   "Create a compressed archive with the selected objects"
 msgstr  "Crea un arxiu comprimit amb els objectes seleccionats"
 
 #: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
-#: ../xffm/fm/templates/gridview.hh:748
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:749
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
@@ -446,7 +446,7 @@ msgid   "Properties"
 msgstr  "Propietats"
 
 #: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/fm/templates/gridview.hh:605
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
@@ -454,7 +454,7 @@ msgid   "Unmount Volume"
 msgstr  "Desmunta el volum"
 
 #: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:607
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -462,14 +462,14 @@ msgstr  "Desmunta el volum"
 msgid   "Mount Volume"
 msgstr  "Munta el volum"
 
-#: ../xffm/fm/templates/gridview.hh:555
+#: ../xffm/fm/templates/gridview.hh:556
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
 msgid   "Extract archive"
 msgstr  "Extrau l'arxiu"
 
-#: ../xffm/fm/templates/gridview.hh:567
+#: ../xffm/fm/templates/gridview.hh:568
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -481,7 +481,7 @@ msgstr  "Extrau l'arxiu"
 msgid   "Open in new tab"
 msgstr  "Obri en una nova pestanya"
 
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -490,7 +490,7 @@ msgstr  "Obri en una nova pestanya"
 msgid   "Rename"
 msgstr  "Canvia el nom"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -499,15 +499,15 @@ msgstr  "Canvia el nom"
 msgid   "Duplicate"
 msgstr  "Duplica"
 
-#: ../xffm/fm/templates/gridview.hh:612 ../xffm/fm/templates/gridview.hh:809
-#: ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:811
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  "auto"
 
-#: ../xffm/fm/templates/gridview.hh:629 ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -516,20 +516,20 @@ msgstr  "auto"
 msgid   "Decrypt File..."
 msgstr  "Desencripta fitxer..."
 
-#: ../xffm/fm/templates/gridview.hh:631 ../xffm/fm/templates/gridview.hh:634
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
 msgid   "Encrypt File..."
 msgstr  "Encripta fitxer..."
 
-#: ../xffm/fm/templates/gridview.hh:650
+#: ../xffm/fm/templates/gridview.hh:651
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 msgid   "Multiple selections"
 msgstr  "Seleccions múltiples"
 
-#: ../xffm/fm/templates/gridview.hh:672
+#: ../xffm/fm/templates/gridview.hh:673
 msgid   "eCryptfs Volume"
 msgstr  "Volum d'eCryptfs"
 
@@ -633,10 +633,10 @@ msgstr  "Aplica els canvis"
 #: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:322
-#: ../xffm/response/templates/untarresponse.hh:144
+#: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:296
+#: ../xffm/response/templates/dialogbasic.hh:311
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -859,8 +859,7 @@ msgstr  "Eixida"
 msgid   "Show/Hide"
 msgstr  "Mostra/amaga"
 
-#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/find/templates/dndbox.hh:160
-#: ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/menus/templates/inputMenu.hh:10
 #: ../xffm/menus/templates/inputMenu.hh:30
 #: ../xffm/menus/templates/inputMenu.hh:46
 #: ../xffm/menus/templates/inputMenu.hh:63
@@ -1242,24 +1241,28 @@ msgstr  "Directori nou"
 msgid   "Create in folder:"
 msgstr  "Crea a la carpeta:"
 
-#: ../xffm/response/templates/untarresponse.hh:34
+#: ../xffm/response/templates/untarresponse.hh:38
 #: ../xffm/response/templates/tarresponse.hh:34
 msgid   "Compressed file..."
 msgstr  "Fitxer comprimit..."
 
-#: ../xffm/response/templates/untarresponse.hh:35
+#: ../xffm/response/templates/untarresponse.hh:39
 msgid   "Extract files from the archive"
 msgstr  "Extrau fitxers de l'arxiu"
 
-#: ../xffm/response/templates/untarresponse.hh:129
+#: ../xffm/response/templates/untarresponse.hh:140
 #: ../xffm/response/templates/tarresponse.hh:171
 msgid   "Target directory:"
 msgstr  "Directori destinació:"
 
-#: ../xffm/response/templates/untarresponse.hh:148
-#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/untarresponse.hh:156
+msgid   "List files only"
+msgstr  "Només llistar fitxers"
+
+#: ../xffm/response/templates/untarresponse.hh:164
+#: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:299
+#: ../xffm/response/templates/dialogbasic.hh:314
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "Aplica"
@@ -1276,7 +1279,7 @@ msgstr  "És executable"
 msgid   "Execute"
 msgstr  "Executa"
 
-#: ../xffm/response/templates/openwith.hh:275
+#: ../xffm/response/templates/openwith.hh:274
 msgid   "By default applications will be run in the background and only their "
         "output will be displayed in a toolview. This makes it impossible to "
         "interact with applications requiring user input from a terminal "
@@ -1284,12 +1287,12 @@ msgid   "By default applications will be run in the background and only their "
         "terminal."
 msgstr  ""
 
-#: ../xffm/response/templates/openwith.hh:290
+#: ../xffm/response/templates/openwith.hh:281
 #, fuzzy
 msgid   "Use External Terminal:"
 msgstr  "Terminal extern:"
 
-#: ../xffm/response/templates/openwith.hh:353
+#: ../xffm/response/templates/openwith.hh:344
 #, fuzzy, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  "No s'ha pogut suprimir la carpeta «%s»."
@@ -1702,7 +1705,13 @@ msgstr  "Edita una factura"
 msgid   "Search results for %s"
 msgstr  "Resultats de la cerca de «%s»:"
 
-#: ../xffm/find/templates/dndbox.hh:274
+#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:100
+msgid   "Exit"
+msgstr  "Surt"
+
+#: ../xffm/find/templates/dndbox.hh:276
 msgid   "Search results"
 msgstr  "Resultats de la cerca"
 
@@ -1972,12 +1981,6 @@ msgstr  "Color predeterminat"
 #: ../xffm/menus/templates/mainMenu.hh:96
 msgid   "Environment"
 msgstr  "Entorn"
-
-#: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
-msgid   "Exit"
-msgstr  "Surt"
 
 #: ../xffm/menus/templates/mainMenu.hh:64
 #: ../xffm/menus/templates/mainMenu.hh:85

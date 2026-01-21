@@ -548,10 +548,11 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         }
       }
       // Archive test
-      const char *ext_[5]={".tgz",".bz2",".xz",".zip",NULL};
+      const char *ext_[6]={".gz",".tgz",".bz2",".xz",".zip",NULL};
       if (strchr(path, '.')){
         for (auto p=ext_; p && *p; p++){
           if (strcasecmp(strrchr(path, '.'), *p) == 0){
+            if (strcmp(*p, ".gz")==0 && strstr(path, ".tar.gz") == NULL) continue;
             auto widget = g_object_get_data(G_OBJECT(popover), _("Extract archive"));
             if (widget){
               gtk_widget_set_visible(GTK_WIDGET(widget), true);

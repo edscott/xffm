@@ -1,4 +1,4 @@
-# Xffm4 translation file: Mon Jan 19 13:35:41 CST 2026
+# Xffm4 translation file: mié 21 ene 2026 15:11:06 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-19 13:32-0600\n"
+        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
         "PO-Revision-Date: 2000-10-27 02:02+0100\n"
         "Last-Translator: Robert Brady <rwb197@zepler.org>\n"
         "Language-Team: Interlingua\n"
@@ -16,7 +16,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Content-Transfer-Encoding: 8bit\n"
         "pixbuf\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -122,10 +122,10 @@ msgid   "Segmentation fault"
 msgstr  "Il falleva le negotiation TLS"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:642
+#: ../xffm/fm/templates/gridview.hh:643
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:291
-#: ../xffm/find/templates/dndbox.hh:164
+#: ../xffm/response/templates/dialogbasic.hh:306
+#: ../xffm/find/templates/dndbox.hh:165
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -164,8 +164,8 @@ msgstr  "Fonte"
 msgid   "Invalid target folder"
 msgstr  "Invalide valor de etiquetta (tag)"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:573
-#: ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
+#: ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -206,7 +206,7 @@ msgid   "Long press time"
 msgstr  "Identificator de processo de registro"
 
 #: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -218,7 +218,7 @@ msgid   "Cut"
 msgstr  "Taliar"
 
 #: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:569 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -235,8 +235,8 @@ msgid   "Copy"
 msgstr  "Copiar"
 
 #: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:598
-#: ../xffm/fm/templates/gridview.hh:849
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
+#: ../xffm/fm/templates/gridview.hh:850
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -377,7 +377,7 @@ msgid   "Apply modifications"
 msgstr  "Applicationes"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:589 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
@@ -387,7 +387,7 @@ msgid   "Add bookmark"
 msgstr  "Adde marcator de libro"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:592
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
 #: ../xffm/menus/templates/mainMenu.hh:63
 #: ../xffm/menus/templates/mainMenu.hh:87
 #: ../xffm/menus/templates/gridviewmenu.hh:29
@@ -410,15 +410,15 @@ msgstr  "Vacua le corbe"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "Syntaxe de expression regular incorrecte"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:613
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "Aperi con"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:575
-#: ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -437,7 +437,7 @@ msgstr  "Aperi con"
 msgid   "Delete"
 msgstr  "Deler"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -447,8 +447,8 @@ msgid   "Create a compressed archive with the selected objects"
 msgstr  "Crea un nove profilo basate sur le profilo seligite"
 
 #: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
-#: ../xffm/fm/templates/gridview.hh:748
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:749
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
@@ -456,7 +456,7 @@ msgid   "Properties"
 msgstr  "Proprietates"
 
 #: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/fm/templates/gridview.hh:605
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
@@ -465,7 +465,7 @@ msgid   "Unmount Volume"
 msgstr  "Volumine de sono"
 
 #: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:607
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -474,7 +474,7 @@ msgstr  "Volumine de sono"
 msgid   "Mount Volume"
 msgstr  "Volumine de sono"
 
-#: ../xffm/fm/templates/gridview.hh:555
+#: ../xffm/fm/templates/gridview.hh:556
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
@@ -482,7 +482,7 @@ msgstr  "Volumine de sono"
 msgid   "Extract archive"
 msgstr  "Extrahe archivo hic"
 
-#: ../xffm/fm/templates/gridview.hh:567
+#: ../xffm/fm/templates/gridview.hh:568
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -494,7 +494,7 @@ msgstr  "Extrahe archivo hic"
 msgid   "Open in new tab"
 msgstr  "Aperir un nove scheda"
 
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -503,7 +503,7 @@ msgstr  "Aperir un nove scheda"
 msgid   "Rename"
 msgstr  "Renomina"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -512,15 +512,15 @@ msgstr  "Renomina"
 msgid   "Duplicate"
 msgstr  "Duplica"
 
-#: ../xffm/fm/templates/gridview.hh:612 ../xffm/fm/templates/gridview.hh:809
-#: ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:811
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  "auto"
 
-#: ../xffm/fm/templates/gridview.hh:629 ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -529,20 +529,20 @@ msgstr  "auto"
 msgid   "Decrypt File..."
 msgstr  "Decrypta file..."
 
-#: ../xffm/fm/templates/gridview.hh:631 ../xffm/fm/templates/gridview.hh:634
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
 msgid   "Encrypt File..."
 msgstr  "Crypta file..."
 
-#: ../xffm/fm/templates/gridview.hh:650
+#: ../xffm/fm/templates/gridview.hh:651
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 msgid   "Multiple selections"
 msgstr  "Selectiones multiple"
 
-#: ../xffm/fm/templates/gridview.hh:672
+#: ../xffm/fm/templates/gridview.hh:673
 #, fuzzy
 msgid   "eCryptfs Volume"
 msgstr  "Fixa volumine"
@@ -650,10 +650,10 @@ msgstr  "Applica le modificationes"
 #: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:322
-#: ../xffm/response/templates/untarresponse.hh:144
+#: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:296
+#: ../xffm/response/templates/dialogbasic.hh:311
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -888,8 +888,7 @@ msgstr  "Exito"
 msgid   "Show/Hide"
 msgstr  "Monstra/Cela"
 
-#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/find/templates/dndbox.hh:160
-#: ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/menus/templates/inputMenu.hh:10
 #: ../xffm/menus/templates/inputMenu.hh:30
 #: ../xffm/menus/templates/inputMenu.hh:46
 #: ../xffm/menus/templates/inputMenu.hh:63
@@ -1288,27 +1287,32 @@ msgstr  "Directorio"
 msgid   "Create in folder:"
 msgstr  "Crear in le dossier:"
 
-#: ../xffm/response/templates/untarresponse.hh:34
+#: ../xffm/response/templates/untarresponse.hh:38
 #: ../xffm/response/templates/tarresponse.hh:34
 #, fuzzy
 msgid   "Compressed file..."
 msgstr  "Comprime a..."
 
-#: ../xffm/response/templates/untarresponse.hh:35
+#: ../xffm/response/templates/untarresponse.hh:39
 #, fuzzy
 msgid   "Extract files from the archive"
 msgstr  "Delente un file ex archivo"
 
-#: ../xffm/response/templates/untarresponse.hh:129
+#: ../xffm/response/templates/untarresponse.hh:140
 #: ../xffm/response/templates/tarresponse.hh:171
 #, fuzzy
 msgid   "Target directory:"
 msgstr  "Directorio de thema:"
 
-#: ../xffm/response/templates/untarresponse.hh:148
-#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/untarresponse.hh:156
+#, fuzzy
+msgid   "List files only"
+msgstr  "Solmenmte files seligite"
+
+#: ../xffm/response/templates/untarresponse.hh:164
+#: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:299
+#: ../xffm/response/templates/dialogbasic.hh:314
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "Applicar"
@@ -1325,7 +1329,7 @@ msgstr  "Il es executabile"
 msgid   "Execute"
 msgstr  "Exequer"
 
-#: ../xffm/response/templates/openwith.hh:275
+#: ../xffm/response/templates/openwith.hh:274
 msgid   "By default applications will be run in the background and only their "
         "output will be displayed in a toolview. This makes it impossible to "
         "interact with applications requiring user input from a terminal "
@@ -1333,12 +1337,12 @@ msgid   "By default applications will be run in the background and only their "
         "terminal."
 msgstr  ""
 
-#: ../xffm/response/templates/openwith.hh:290
+#: ../xffm/response/templates/openwith.hh:281
 #, fuzzy
 msgid   "Use External Terminal:"
 msgstr  "Usa programma de inviar posta externe"
 
-#: ../xffm/response/templates/openwith.hh:353
+#: ../xffm/response/templates/openwith.hh:344
 #, fuzzy, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  "Non pote trovar executabile de latex."
@@ -1776,7 +1780,13 @@ msgstr  "Modifica alarma"
 msgid   "Search results for %s"
 msgstr  "Resultatos de cerca pro '%s':"
 
-#: ../xffm/find/templates/dndbox.hh:274
+#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:100
+msgid   "Exit"
+msgstr  "Sorti"
+
+#: ../xffm/find/templates/dndbox.hh:276
 #, fuzzy
 msgid   "Search results"
 msgstr  "Resultatos de cerca"
@@ -2054,12 +2064,6 @@ msgstr  "Color predefinite"
 #, fuzzy
 msgid   "Environment"
 msgstr  "Ambiente:"
-
-#: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
-msgid   "Exit"
-msgstr  "Sorti"
 
 #: ../xffm/menus/templates/mainMenu.hh:64
 #: ../xffm/menus/templates/mainMenu.hh:85

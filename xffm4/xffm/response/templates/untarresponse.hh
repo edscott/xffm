@@ -7,6 +7,7 @@ class untarResponse {
    using subClass_t = untarResponse;
    using dialog_t = DialogComplex<subClass_t>;
    GtkBox *mainBox_;
+   GtkBox *entryBox_;
    GtkWindow *dialog_ = NULL;
    char *tar_ = NULL;
    char *zip_ = NULL;
@@ -17,6 +18,7 @@ class untarResponse {
    GtkEntry *targetEntry_ = NULL;
    GtkEntry *nameEntry_ = NULL;
    GtkLabel *nameExt_ = NULL; 
+   GtkCheckButton *listCheck_ = NULL;
    public:
    ~untarResponse(void){
      g_free(folder_);
@@ -28,8 +30,10 @@ class untarResponse {
    const char *path(void){ return (const char *)path_;}
    GtkEntry *targetEntry(void){ return targetEntry_;}
    GtkBox *getMainBox(void){ return mainBox_;}
+   GtkBox *entryBox(void){ return entryBox_;}
    GtkEntry *nameEntry(void){return nameEntry_;}
    GtkLabel *nameExt(void){return nameExt_;}
+   GtkCheckButton *listCheck(void){return listCheck_;}
    
     const char *title(void){ return _("Compressed file...");}
     const char *label(void){return _("Extract files from the archive");}
@@ -45,7 +49,7 @@ class untarResponse {
       auto target = gtk_entry_buffer_get_text(buffer);
 
       char *tar = g_find_program_in_path("tar");
-      char *zip = g_find_program_in_path("zip");
+      char *zip = g_find_program_in_path("unzip");
 
       auto path = dialogObject->subClass()->path();
       const char *extension = strrchr(path, '.');
@@ -60,11 +64,20 @@ class untarResponse {
       auto buttonSpace = GTK_BOX(g_object_get_data(G_OBJECT(childWidget), "buttonSpace"));
 
       char *cmd = NULL;
-      if (strcmp(extension, ".tgz") == 0) cmd = g_strconcat(tar, " ", "-xzf", NULL);
-      else if (strcmp(extension, ".bz2") == 0) cmd = g_strconcat(tar, " ", "-xjf", NULL);
-      else if (strcmp(extension, ".xz") == 0) cmd = g_strconcat(tar, " ", "-xJf", NULL);
-      else if (strcmp(extension, ".zip") == 0) cmd = g_strconcat(zip, " ", "-vr", NULL);
-
+      auto onlyList = gtk_check_button_get_active(dialogObject->subClass()->listCheck());
+      if (onlyList){
+        if (strcmp(extension, ".tgz") == 0) cmd = g_strconcat(tar, " ", "-tzf", NULL);
+        else if (strcmp(extension, ".bz2") == 0) cmd = g_strconcat(tar, " ", "-tjf", NULL);
+        else if (strcmp(extension, ".xz") == 0) cmd = g_strconcat(tar, " ", "-tJf", NULL);
+        else if (strcmp(extension, ".zip") == 0) cmd = g_strconcat(zip, " ", "-l", NULL);
+        if (strcmp(extension, ".gz") == 0 && strstr(base, ".tar.gz") ) cmd = g_strconcat(tar, " ", "-tzf", NULL);
+      } else {
+        if (strcmp(extension, ".tgz") == 0) cmd = g_strconcat(tar, " ", "-xzf", NULL);
+        else if (strcmp(extension, ".bz2") == 0) cmd = g_strconcat(tar, " ", "-xjf", NULL);
+        else if (strcmp(extension, ".xz") == 0) cmd = g_strconcat(tar, " ", "-xJf", NULL);
+        else if (strcmp(extension, ".zip") == 0) cmd = g_strconcat(zip, " ", " ", NULL);
+        if (strcmp(extension, ".gz") == 0 && strstr(base, ".tar.gz") ) cmd = g_strconcat(tar, " ", "-xzf", NULL);
+      }
       if (cmd) {
         char *command = g_strdup_printf("cd \"%s\" && %s \"%s\" ", target, cmd, path);
         TRACE("command = %s\n", command);
@@ -119,27 +132,30 @@ class untarResponse {
         g_free(markup);
         gtk_box_append(hbox, GTK_WIDGET(pathLabel));
         
-        hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_widget_set_vexpand(GTK_WIDGET(hbox), false);
-        gtk_widget_set_hexpand(GTK_WIDGET(hbox), true);
-        gtk_box_append(mainBox_, GTK_WIDGET(hbox));
+        entryBox_ = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+        gtk_widget_set_vexpand(GTK_WIDGET(entryBox_), false);
+        gtk_widget_set_hexpand(GTK_WIDGET(entryBox_), true);
+        gtk_box_append(mainBox_, GTK_WIDGET(entryBox_));
 
-        hbox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-        gtk_box_append(mainBox_, GTK_WIDGET(hbox));
         auto entryLabelText = _("Target directory:"); 
         targetEntry_ =
-          FileResponse<Type, subClass_t>::addEntry(hbox, "targetEntry", entryLabelText, this);
+          FileResponse<Type, subClass_t>::addEntry(entryBox_, "targetEntry", entryLabelText, this);
         
         auto buffer = gtk_entry_get_buffer(targetEntry_);
         folder_ = Settings::getString("Tarballs", "Default");
         if (!folder_) folder_ = g_strdup(g_get_home_dir());
         gtk_entry_buffer_set_text(buffer, folder_, -1);
 
+
         auto action_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
         gtk_widget_set_vexpand(GTK_WIDGET(action_area), false);
         gtk_widget_set_hexpand(GTK_WIDGET(action_area), false);
         gtk_box_append(mainBox_, GTK_WIDGET(action_area));
         gtk_widget_set_halign(GTK_WIDGET(action_area), GTK_ALIGN_END);
+
+        listCheck_ = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(_("List files only")));
+        gtk_box_append(action_area,  GTK_WIDGET(listCheck_));
+        g_signal_connect (G_OBJECT(listCheck_), "toggled", G_CALLBACK (checkToggled), this);
 
         auto cancelButton = UtilBasic::mkButton(EMBLEM_RED_BALL, _("Cancel"));
         gtk_box_append(action_area,  GTK_WIDGET(cancelButton));
@@ -168,6 +184,14 @@ class untarResponse {
       auto markup = g_strconcat("<span color=\"blue\">.",ext,"</span>", NULL);
       gtk_label_set_markup(label, markup);
       g_free(markup);
+    }
+    
+    static void
+    checkToggled (GtkCheckButton * button, gpointer data) {
+      auto subClass = (subClass_t *)data;
+      auto onlyList = gtk_check_button_get_active(button);
+      auto entryBox = GTK_WIDGET(subClass->entryBox());
+      gtk_widget_set_sensitive(entryBox, !onlyList );
     }
     
     static void

@@ -1,4 +1,4 @@
-# Xffm4 translation file: Mon Jan 19 13:36:38 CST 2026
+# Xffm4 translation file: mié 21 ene 2026 15:11:26 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-19 13:32-0600\n"
+        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
         "PO-Revision-Date: 2009-02-05 18:16+0530\n"
         "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
         "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
@@ -20,7 +20,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "\n"
         "\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -131,10 +131,10 @@ msgid   "Segmentation fault"
 msgstr  "ଖଣ୍ଡକରଣ ଉଲଂଘନ"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:642
+#: ../xffm/fm/templates/gridview.hh:643
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:291
-#: ../xffm/find/templates/dndbox.hh:164
+#: ../xffm/response/templates/dialogbasic.hh:306
+#: ../xffm/find/templates/dndbox.hh:165
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -174,8 +174,8 @@ msgstr  "ଉତ୍ସ"
 msgid   "Invalid target folder"
 msgstr  "ଅବୈଧ ସ୍ବତନ୍ତ୍ରଚର ମୂଲ୍ଯ"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:573
-#: ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
+#: ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -214,7 +214,7 @@ msgid   "Long press time"
 msgstr  "ଅଧିକ ଦବାଇବା ସମୟ"
 
 #: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -226,7 +226,7 @@ msgid   "Cut"
 msgstr  "କାଟନ୍ତୁ (u)"
 
 #: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:569 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -243,8 +243,8 @@ msgid   "Copy"
 msgstr  "ନକଲ କରନ୍ତୁ (C)"
 
 #: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:598
-#: ../xffm/fm/templates/gridview.hh:849
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
+#: ../xffm/fm/templates/gridview.hh:850
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -387,7 +387,7 @@ msgid   "Apply modifications"
 msgstr  "ପ୍ରୟୋଗ"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:589 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
@@ -396,7 +396,7 @@ msgid   "Add bookmark"
 msgstr  "ଚିହ୍ନିତ ସ୍ଥାନକୁ ଯୋଗ କରନ୍ତୁ (b)"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:592
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
 #: ../xffm/menus/templates/mainMenu.hh:63
 #: ../xffm/menus/templates/mainMenu.hh:87
 #: ../xffm/menus/templates/gridviewmenu.hh:29
@@ -419,15 +419,15 @@ msgstr  "ଖାଲି ଆବର୍ଜନା ପାତ୍ର"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "ନିୟମିତ ଅଭିବ୍ୟକ୍ତିଟି ଖାଲି ଅଛି!"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:613
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "ଏହା ସହିତ ଖୋଲନ୍ତୁ (w)h"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:575
-#: ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -446,7 +446,7 @@ msgstr  "ଏହା ସହିତ ଖୋଲନ୍ତୁ (w)h"
 msgid   "Delete"
 msgstr  "ବିଲୋପ କର"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -455,8 +455,8 @@ msgid   "Create a compressed archive with the selected objects"
 msgstr  "ଚୟିତ ବସ୍ତୁ ମାନଙ୍କ ସହିତ ଗୋଟିଏ ସଙ୍କୋଚିତ ଅଭିଲେଖକୁ ସ୍ରୁଷ୍ଟି କରନ୍ତୁ"
 
 #: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
-#: ../xffm/fm/templates/gridview.hh:748
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:749
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
@@ -464,7 +464,7 @@ msgid   "Properties"
 msgstr  "ବିଶେଷତାଗୁଡିକ"
 
 #: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/fm/templates/gridview.hh:605
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
@@ -473,7 +473,7 @@ msgid   "Unmount Volume"
 msgstr  "ମୂଳ ମାତ୍ରା"
 
 #: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:607
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -482,14 +482,14 @@ msgstr  "ମୂଳ ମାତ୍ରା"
 msgid   "Mount Volume"
 msgstr  "SuperMount ମାତ୍ରା"
 
-#: ../xffm/fm/templates/gridview.hh:555
+#: ../xffm/fm/templates/gridview.hh:556
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
 msgid   "Extract archive"
 msgstr  "ଅଭିଲେଖକୁ କାଢନ୍ତୁ"
 
-#: ../xffm/fm/templates/gridview.hh:567
+#: ../xffm/fm/templates/gridview.hh:568
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -501,7 +501,7 @@ msgstr  "ଅଭିଲେଖକୁ କାଢନ୍ତୁ"
 msgid   "Open in new tab"
 msgstr  "ଗୋଟିଏ ନୂତନ ଟ୍ୟାବ ଖୋଲନ୍ତୁ"
 
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -510,7 +510,7 @@ msgstr  "ଗୋଟିଏ ନୂତନ ଟ୍ୟାବ ଖୋଲନ୍ତୁ"
 msgid   "Rename"
 msgstr  "ନାମ ବଦଳାନ୍ତୁ (R)"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -519,15 +519,15 @@ msgstr  "ନାମ ବଦଳାନ୍ତୁ (R)"
 msgid   "Duplicate"
 msgstr  "ନକଲ କରନ୍ତୁ"
 
-#: ../xffm/fm/templates/gridview.hh:612 ../xffm/fm/templates/gridview.hh:809
-#: ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:811
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  "ସ୍ବୟଂଚାଳିତ"
 
-#: ../xffm/fm/templates/gridview.hh:629 ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -537,7 +537,7 @@ msgstr  "ସ୍ବୟଂଚାଳିତ"
 msgid   "Decrypt File..."
 msgstr  "ଫାଇଲ ଅସଂଗୁପ୍ତ କରନ୍ତୁ"
 
-#: ../xffm/fm/templates/gridview.hh:631 ../xffm/fm/templates/gridview.hh:634
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
@@ -545,14 +545,14 @@ msgstr  "ଫାଇଲ ଅସଂଗୁପ୍ତ କରନ୍ତୁ"
 msgid   "Encrypt File..."
 msgstr  "ଫାଇଲକୁ ସଂଗୁପ୍ତ କରନ୍ତୁ"
 
-#: ../xffm/fm/templates/gridview.hh:650
+#: ../xffm/fm/templates/gridview.hh:651
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "ଫାଇଲ ମନୋନଯନ"
 
-#: ../xffm/fm/templates/gridview.hh:672
+#: ../xffm/fm/templates/gridview.hh:673
 #, fuzzy
 msgid   "eCryptfs Volume"
 msgstr  "ସ୍ମୃତି ମାତ୍ରା"
@@ -661,10 +661,10 @@ msgstr  "ପରିବର୍ତ୍ତନକୁ ପ୍ରୟୋଗ କରନ୍ତ
 #: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:322
-#: ../xffm/response/templates/untarresponse.hh:144
+#: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:296
+#: ../xffm/response/templates/dialogbasic.hh:311
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -898,8 +898,7 @@ msgstr  "ଫଳାଫଳ"
 msgid   "Show/Hide"
 msgstr  "ଲୁକ୍କାୟିତମାନଙ୍କୁ ଦର୍ଶାନ୍ତୁ (H)"
 
-#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/find/templates/dndbox.hh:160
-#: ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/menus/templates/inputMenu.hh:10
 #: ../xffm/menus/templates/inputMenu.hh:30
 #: ../xffm/menus/templates/inputMenu.hh:46
 #: ../xffm/menus/templates/inputMenu.hh:63
@@ -1292,25 +1291,29 @@ msgstr  "ବିବରଣୀପଞ୍ଜିକା"
 msgid   "Create in folder:"
 msgstr  "ଫୋଲ୍ଡରରେ ସୃଷ୍ଟି କରନ୍ତୁ: (f)"
 
-#: ../xffm/response/templates/untarresponse.hh:34
+#: ../xffm/response/templates/untarresponse.hh:38
 #: ../xffm/response/templates/tarresponse.hh:34
 msgid   "Compressed file..."
 msgstr  "ସଙ୍କୋଚିତ ଫାଇଲ (e)..."
 
-#: ../xffm/response/templates/untarresponse.hh:35
+#: ../xffm/response/templates/untarresponse.hh:39
 msgid   "Extract files from the archive"
 msgstr  "ଅଭିଲେଖରୁ ଫାଇଲ ମାନଙ୍କୁ କାଢନ୍ତୁ"
 
-#: ../xffm/response/templates/untarresponse.hh:129
+#: ../xffm/response/templates/untarresponse.hh:140
 #: ../xffm/response/templates/tarresponse.hh:171
 #, fuzzy
 msgid   "Target directory:"
 msgstr  "କୌଣସି ଲକ୍ଷ୍ଯସ୍ଥଳ ଡିରେକ୍ଟୋରୀ ନାହିଁ"
 
-#: ../xffm/response/templates/untarresponse.hh:148
-#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/untarresponse.hh:156
+msgid   "List files only"
+msgstr  "କେବଳ ଫାଇଲ ମାନଙ୍କୁ ସୂଚୀବଦ୍ଧ କରିରଖନ୍ତୁ"
+
+#: ../xffm/response/templates/untarresponse.hh:164
+#: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:299
+#: ../xffm/response/templates/dialogbasic.hh:314
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "ପ୍ରୟୋଗ କରନ୍ତୁ (p)"
@@ -1329,7 +1332,7 @@ msgstr  "ନିଷ୍ପାଦନଯୋଗ୍ୟ:"
 msgid   "Execute"
 msgstr  "କାର୍ୟ୍ଯକାରୀ କର "
 
-#: ../xffm/response/templates/openwith.hh:275
+#: ../xffm/response/templates/openwith.hh:274
 msgid   "By default applications will be run in the background and only their "
         "output will be displayed in a toolview. This makes it impossible to "
         "interact with applications requiring user input from a terminal "
@@ -1337,12 +1340,12 @@ msgid   "By default applications will be run in the background and only their "
         "terminal."
 msgstr  ""
 
-#: ../xffm/response/templates/openwith.hh:290
+#: ../xffm/response/templates/openwith.hh:281
 #, fuzzy
 msgid   "Use External Terminal:"
 msgstr  "ସ୍ଥାନିୟ ଟର୍ମିନାଲରେ ଖୋଲନ୍ତୁ (L)"
 
-#: ../xffm/response/templates/openwith.hh:353
+#: ../xffm/response/templates/openwith.hh:344
 #, fuzzy, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  "ଫୋଲଡର \"%s\"କୁ ଅପସାରଣ କରିପାରିବ ନାହିଁ।"
@@ -1782,7 +1785,13 @@ msgstr  "ସମସ୍ତଙ୍କୁ ସମ୍ପାଦନ କରନ୍ତୁ"
 msgid   "Search results for %s"
 msgstr  "“%s” ପାଇଁ ସନ୍ଧାନ ଫଳାଫଳଗୁଡ଼ିକ"
 
-#: ../xffm/find/templates/dndbox.hh:274
+#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:100
+msgid   "Exit"
+msgstr  "ପ୍ରସ୍ଥାନ କରନ୍ତୁ"
+
+#: ../xffm/find/templates/dndbox.hh:276
 msgid   "Search results"
 msgstr  "ସନ୍ଧାନ ଫଳାଫଳ"
 
@@ -2062,12 +2071,6 @@ msgstr  "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ରଙ୍ଗ"
 #, fuzzy
 msgid   "Environment"
 msgstr  "ପରିବେଶ ମାନଚିତ୍ର"
-
-#: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
-msgid   "Exit"
-msgstr  "ପ୍ରସ୍ଥାନ କରନ୍ତୁ"
 
 #: ../xffm/menus/templates/mainMenu.hh:64
 #: ../xffm/menus/templates/mainMenu.hh:85

@@ -1,4 +1,4 @@
-# Xffm4 translation file: Mon Jan 19 13:38:08 CST 2026
+# Xffm4 translation file: mié 21 ene 2026 15:11:50 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-19 13:32-0600\n"
+        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
         "PO-Revision-Date: 2011-07-08 13:09+0200\n"
         "Last-Translator: Priscilla Mahlangu <priny@translate.org.za>\n"
         "Language-Team: translate.org.za\n"
@@ -19,7 +19,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "X-Generator: Virtaal 0.7.0\n"
         "X-Project-Style: gnome\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -131,10 +131,10 @@ msgid   "Segmentation fault"
 msgstr  "Setha kabusha kubengokuzenzakalelayo"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:642
+#: ../xffm/fm/templates/gridview.hh:643
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:291
-#: ../xffm/find/templates/dndbox.hh:164
+#: ../xffm/response/templates/dialogbasic.hh:306
+#: ../xffm/find/templates/dndbox.hh:165
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -175,8 +175,8 @@ msgstr  "Umthombo"
 msgid   "Invalid target folder"
 msgstr  "Izilinganiso ezingaphandle"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:573
-#: ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
+#: ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -217,7 +217,7 @@ msgid   "Long press time"
 msgstr  ""
 
 #: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -229,7 +229,7 @@ msgid   "Cut"
 msgstr  "Sika"
 
 #: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:569 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -246,8 +246,8 @@ msgid   "Copy"
 msgstr  "Kopisha"
 
 #: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:598
-#: ../xffm/fm/templates/gridview.hh:849
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
+#: ../xffm/fm/templates/gridview.hh:850
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -390,7 +390,7 @@ msgid   "Apply modifications"
 msgstr  " Izithobo"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:589 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
@@ -400,7 +400,7 @@ msgid   "Add bookmark"
 msgstr  "Engeza uphawu lokubekisa"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:592
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
 #: ../xffm/menus/templates/mainMenu.hh:63
 #: ../xffm/menus/templates/mainMenu.hh:87
 #: ../xffm/menus/templates/gridviewmenu.hh:29
@@ -423,15 +423,15 @@ msgstr  "Thulula Udoti"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:613
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "Vula nge"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:575
-#: ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -450,7 +450,7 @@ msgstr  "Vula nge"
 msgid   "Delete"
 msgstr  "Cima"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -459,8 +459,8 @@ msgid   "Create a compressed archive with the selected objects"
 msgstr  "Dala ingobo yomlando ecindezelekile ngezinto ezikhethiwe"
 
 #: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
-#: ../xffm/fm/templates/gridview.hh:748
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:749
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
@@ -468,7 +468,7 @@ msgid   "Properties"
 msgstr  "Izakhiwo"
 
 #: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/fm/templates/gridview.hh:605
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
@@ -476,7 +476,7 @@ msgid   "Unmount Volume"
 msgstr  "Yehlisa Umsindo"
 
 #: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:607
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -484,14 +484,14 @@ msgstr  "Yehlisa Umsindo"
 msgid   "Mount Volume"
 msgstr  "Khuphula Umsindo"
 
-#: ../xffm/fm/templates/gridview.hh:555
+#: ../xffm/fm/templates/gridview.hh:556
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
 msgid   "Extract archive"
 msgstr  "Khipha ingobo yomlando"
 
-#: ../xffm/fm/templates/gridview.hh:567
+#: ../xffm/fm/templates/gridview.hh:568
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -503,7 +503,7 @@ msgstr  "Khipha ingobo yomlando"
 msgid   "Open in new tab"
 msgstr  "Vula kwiwindi elisha"
 
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -512,7 +512,7 @@ msgstr  "Vula kwiwindi elisha"
 msgid   "Rename"
 msgstr  "Qamba futhi"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -521,15 +521,15 @@ msgstr  "Qamba futhi"
 msgid   "Duplicate"
 msgstr  "Phinda"
 
-#: ../xffm/fm/templates/gridview.hh:612 ../xffm/fm/templates/gridview.hh:809
-#: ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:811
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  ""
 
-#: ../xffm/fm/templates/gridview.hh:629 ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -539,7 +539,7 @@ msgstr  ""
 msgid   "Decrypt File..."
 msgstr  "Phenya Ohele..."
 
-#: ../xffm/fm/templates/gridview.hh:631 ../xffm/fm/templates/gridview.hh:634
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
@@ -547,14 +547,14 @@ msgstr  "Phenya Ohele..."
 msgid   "Encrypt File..."
 msgstr  "Thumela amafayela..."
 
-#: ../xffm/fm/templates/gridview.hh:650
+#: ../xffm/fm/templates/gridview.hh:651
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "Ukuphindaphinda"
 
-#: ../xffm/fm/templates/gridview.hh:672
+#: ../xffm/fm/templates/gridview.hh:673
 #, fuzzy
 msgid   "eCryptfs Volume"
 msgstr  "Ivolumu yomgqondo"
@@ -661,10 +661,10 @@ msgstr  " Izithobo"
 #: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:322
-#: ../xffm/response/templates/untarresponse.hh:144
+#: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:296
+#: ../xffm/response/templates/dialogbasic.hh:311
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -908,8 +908,7 @@ msgstr  "Okokukhishwa konke"
 msgid   "Show/Hide"
 msgstr  "Veza/Fihla izilawuli"
 
-#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/find/templates/dndbox.hh:160
-#: ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/menus/templates/inputMenu.hh:10
 #: ../xffm/menus/templates/inputMenu.hh:30
 #: ../xffm/menus/templates/inputMenu.hh:46
 #: ../xffm/menus/templates/inputMenu.hh:63
@@ -1315,26 +1314,31 @@ msgstr  "Umkhondo"
 msgid   "Create in folder:"
 msgstr  "Gcina kwifolda:"
 
-#: ../xffm/response/templates/untarresponse.hh:34
+#: ../xffm/response/templates/untarresponse.hh:38
 #: ../xffm/response/templates/tarresponse.hh:34
 #, fuzzy
 msgid   "Compressed file..."
 msgstr  "Cindezela..."
 
-#: ../xffm/response/templates/untarresponse.hh:35
+#: ../xffm/response/templates/untarresponse.hh:39
 msgid   "Extract files from the archive"
 msgstr  "Khipha amafayela asuka kwingobo yomlando"
 
-#: ../xffm/response/templates/untarresponse.hh:129
+#: ../xffm/response/templates/untarresponse.hh:140
 #: ../xffm/response/templates/tarresponse.hh:171
 #, fuzzy
 msgid   "Target directory:"
 msgstr  "Yindlela"
 
-#: ../xffm/response/templates/untarresponse.hh:148
-#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/untarresponse.hh:156
+#, fuzzy
+msgid   "List files only"
+msgstr  "Ohele Basendaweni Kuphela"
+
+#: ../xffm/response/templates/untarresponse.hh:164
+#: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:299
+#: ../xffm/response/templates/dialogbasic.hh:314
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "Faka"
@@ -1352,7 +1356,7 @@ msgstr  "ithebula lesihlahla"
 msgid   "Execute"
 msgstr  "Sebenzisa"
 
-#: ../xffm/response/templates/openwith.hh:275
+#: ../xffm/response/templates/openwith.hh:274
 msgid   "By default applications will be run in the background and only their "
         "output will be displayed in a toolview. This makes it impossible to "
         "interact with applications requiring user input from a terminal "
@@ -1360,12 +1364,12 @@ msgid   "By default applications will be run in the background and only their "
         "terminal."
 msgstr  ""
 
-#: ../xffm/response/templates/openwith.hh:290
+#: ../xffm/response/templates/openwith.hh:281
 #, fuzzy
 msgid   "Use External Terminal:"
 msgstr  "Isixhumanisi esinephutha"
 
-#: ../xffm/response/templates/openwith.hh:353
+#: ../xffm/response/templates/openwith.hh:344
 #, fuzzy, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  "Ngakhoni ukusebenzisa '%s'"
@@ -1818,7 +1822,13 @@ msgstr  "Hlela isithombe"
 msgid   "Search results for %s"
 msgstr  "Imiphumela wopheyo"
 
-#: ../xffm/find/templates/dndbox.hh:274
+#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:100
+msgid   "Exit"
+msgstr  ""
+
+#: ../xffm/find/templates/dndbox.hh:276
 msgid   "Search results"
 msgstr  "Imiphumela wopheyo"
 
@@ -2102,12 +2112,6 @@ msgstr  "Isikhombi esinephutha"
 #, fuzzy
 msgid   "Environment"
 msgstr  "Indawo zentuthuko"
-
-#: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
-msgid   "Exit"
-msgstr  ""
 
 #: ../xffm/menus/templates/mainMenu.hh:64
 #: ../xffm/menus/templates/mainMenu.hh:85

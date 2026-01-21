@@ -1,4 +1,4 @@
-# Xffm4 translation file: Mon Jan 19 13:36:02 CST 2026
+# Xffm4 translation file: mié 21 ene 2026 15:11:17 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-19 13:32-0600\n"
+        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
         "PO-Revision-Date: 2008-06-02 17:45+0530\n"
         "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
         "Language-Team: debian-l10n-kannada@lists.debian.org\n"
@@ -18,7 +18,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "X-Generator: KBabel 1.11.4\n"
         "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -128,10 +128,10 @@ msgid   "Segmentation fault"
 msgstr  "ಸೆಗ್ಮೆಂಟೇಶನ್ ಉಲ್ಲಂಘನೆ"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:642
+#: ../xffm/fm/templates/gridview.hh:643
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:291
-#: ../xffm/find/templates/dndbox.hh:164
+#: ../xffm/response/templates/dialogbasic.hh:306
+#: ../xffm/find/templates/dndbox.hh:165
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -171,8 +171,8 @@ msgstr  "ಮೂಲ"
 msgid   "Invalid target folder"
 msgstr  "ಅಮಾನ್ಯವಾದ ಆರ್ಗುಮೆಂಟ್ ಮೌಲ್ಯ"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:573
-#: ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
+#: ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -210,7 +210,7 @@ msgid   "Long press time"
 msgstr  "ಬಹಳ ಹೊತ್ತಿನವರೆಗೆ ಒತ್ತಿ ಹಿಡಿಯುವ ಸಮಯ"
 
 #: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -222,7 +222,7 @@ msgid   "Cut"
 msgstr  "ಕತ್ತರಿಸು(u)"
 
 #: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:569 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -239,8 +239,8 @@ msgid   "Copy"
 msgstr  "ನಕಲಿಸು(C)"
 
 #: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:598
-#: ../xffm/fm/templates/gridview.hh:849
+#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
+#: ../xffm/fm/templates/gridview.hh:850
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -381,7 +381,7 @@ msgid   "Apply modifications"
 msgstr  "ಬದಲಾವಣೆಗಳನ್ನು ಅಪ್ಪಿಸು"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:589 ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
 #: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
@@ -390,7 +390,7 @@ msgid   "Add bookmark"
 msgstr  "ಬುಕ್ಮಾರ್ಕನ್ನು ಸೇರಿಸು(b)"
 
 #: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:592
+#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
 #: ../xffm/menus/templates/mainMenu.hh:63
 #: ../xffm/menus/templates/mainMenu.hh:87
 #: ../xffm/menus/templates/gridviewmenu.hh:29
@@ -413,15 +413,15 @@ msgstr  "(ಖ) ಕಸಬುಟ್ಟಿಯನ್ನು ಖಾಲಿಮಾಡು"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "ರೆಗ್ಯುಲರ್ ಎಕ್ಸ್‌ಪ್ರೆಶನ್ ಖಾಲಿ ಇದೆ!"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:613
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "ಇದರೊಂದಿಗೆ ತೆಗೆ"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:575
-#: ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -440,7 +440,7 @@ msgstr  "ಇದರೊಂದಿಗೆ ತೆಗೆ"
 msgid   "Delete"
 msgstr  "ಅಳಿಸಿಹಾಕು"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -449,8 +449,8 @@ msgid   "Create a compressed archive with the selected objects"
 msgstr  "ಆರಿಸಲಾದ ವಸ್ತುಗಳೊಂದಿಗೆ ಒಂದು ಸಂಕುಚಿತ ಆರ್ಕೈವ್ ನಿರ್ಮಿಸು"
 
 #: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
-#: ../xffm/fm/templates/gridview.hh:748
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
+#: ../xffm/fm/templates/gridview.hh:749
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
@@ -458,7 +458,7 @@ msgid   "Properties"
 msgstr  "ಗುಣಲಕ್ಷಣಗಳು"
 
 #: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:604
+#: ../xffm/fm/templates/gridview.hh:605
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
@@ -466,7 +466,7 @@ msgid   "Unmount Volume"
 msgstr  "ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸು (m)"
 
 #: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:607
+#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -474,14 +474,14 @@ msgstr  "ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸು (m)"
 msgid   "Mount Volume"
 msgstr  "ಪರಿಮಾಣವನ್ನು ಆರೋಹಿಸು (M)"
 
-#: ../xffm/fm/templates/gridview.hh:555
+#: ../xffm/fm/templates/gridview.hh:556
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
 msgid   "Extract archive"
 msgstr  "ಆರ್ಕೈವಿನಿಂದ ಹೊರತೆಗೆ"
 
-#: ../xffm/fm/templates/gridview.hh:567
+#: ../xffm/fm/templates/gridview.hh:568
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -493,7 +493,7 @@ msgstr  "ಆರ್ಕೈವಿನಿಂದ ಹೊರತೆಗೆ"
 msgid   "Open in new tab"
 msgstr  "ಹೊಸ ಹಾಳೆಯನ್ನು ತೆರೆ"
 
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -502,7 +502,7 @@ msgstr  "ಹೊಸ ಹಾಳೆಯನ್ನು ತೆರೆ"
 msgid   "Rename"
 msgstr  "ಹೆಸರನ್ನು ಬದಲಾಯಿಸು (R)"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -511,15 +511,15 @@ msgstr  "ಹೆಸರನ್ನು ಬದಲಾಯಿಸು (R)"
 msgid   "Duplicate"
 msgstr  "ನಕಲು"
 
-#: ../xffm/fm/templates/gridview.hh:612 ../xffm/fm/templates/gridview.hh:809
-#: ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
+#: ../xffm/fm/templates/gridview.hh:811
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  "ಆಟೋ"
 
-#: ../xffm/fm/templates/gridview.hh:629 ../xffm/fm/templates/gridview.hh:636
+#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -529,7 +529,7 @@ msgstr  "ಆಟೋ"
 msgid   "Decrypt File..."
 msgstr  "ಕಡತವನ್ನು ಡೀಕ್ರಿಪ್ಟ್‍ ಮಾಡು"
 
-#: ../xffm/fm/templates/gridview.hh:631 ../xffm/fm/templates/gridview.hh:634
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
@@ -537,14 +537,14 @@ msgstr  "ಕಡತವನ್ನು ಡೀಕ್ರಿಪ್ಟ್‍ ಮಾಡು
 msgid   "Encrypt File..."
 msgstr  "ಕಡತವನ್ನು ಗೂಢಲಿಪೀಕರಿಸು"
 
-#: ../xffm/fm/templates/gridview.hh:650
+#: ../xffm/fm/templates/gridview.hh:651
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "ಅನೇಕ ಸ್ಥಳಗಳನ್ನು ಸಜ್ಜುಗೊಳಿಸಲಾಗಿದೆ"
 
-#: ../xffm/fm/templates/gridview.hh:672
+#: ../xffm/fm/templates/gridview.hh:673
 msgid   "eCryptfs Volume"
 msgstr  "eCryptfs ಪರಿಮಾಣ"
 
@@ -651,10 +651,10 @@ msgstr  "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸು"
 #: ../xffm/fm/templates/properties.hh:174 ../xffm/fm/classes/ecryptfs.hh:392
 #: ../xffm/response/templates/mountresponse.hh:147
 #: ../xffm/response/templates/fileresponse.hh:322
-#: ../xffm/response/templates/untarresponse.hh:144
+#: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:296
+#: ../xffm/response/templates/dialogbasic.hh:311
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -886,8 +886,7 @@ msgstr  "ಔಟ್‌ಪುಟ್"
 msgid   "Show/Hide"
 msgstr  "ತೋರಿಸು/ಅಡಗಿಸು(H)"
 
-#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/find/templates/dndbox.hh:160
-#: ../xffm/menus/templates/inputMenu.hh:10
+#: ../xffm/fm/classes/fmpage.hh:140 ../xffm/menus/templates/inputMenu.hh:10
 #: ../xffm/menus/templates/inputMenu.hh:30
 #: ../xffm/menus/templates/inputMenu.hh:46
 #: ../xffm/menus/templates/inputMenu.hh:63
@@ -1280,25 +1279,29 @@ msgstr  "ಕೋಶ"
 msgid   "Create in folder:"
 msgstr  "ಈ ಕಡತಕೋಶದಲ್ಲಿ ಸೃಷ್ಟಿಸು (f):"
 
-#: ../xffm/response/templates/untarresponse.hh:34
+#: ../xffm/response/templates/untarresponse.hh:38
 #: ../xffm/response/templates/tarresponse.hh:34
 msgid   "Compressed file..."
 msgstr  "ಸಂಕುಚನಗೊಳಿಸಲಾದ ಕಡತ(e)..."
 
-#: ../xffm/response/templates/untarresponse.hh:35
+#: ../xffm/response/templates/untarresponse.hh:39
 msgid   "Extract files from the archive"
 msgstr  "ಆಕೈವಿನಿಂದ ಕಡತಗಳನ್ನು ಹೊರತೆಗೆ"
 
-#: ../xffm/response/templates/untarresponse.hh:129
+#: ../xffm/response/templates/untarresponse.hh:140
 #: ../xffm/response/templates/tarresponse.hh:171
 #, fuzzy
 msgid   "Target directory:"
 msgstr  "ಗುರಿ ಕೋಶವಲ್ಲ"
 
-#: ../xffm/response/templates/untarresponse.hh:148
-#: ../xffm/response/templates/openwith.hh:267
+#: ../xffm/response/templates/untarresponse.hh:156
+msgid   "List files only"
+msgstr  "ಪಟ್ಟಿ ಕಡತಗಳು ಮಾತ್ರ"
+
+#: ../xffm/response/templates/untarresponse.hh:164
+#: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:299
+#: ../xffm/response/templates/dialogbasic.hh:314
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "ಅನ್ವಯಿಸು (p)"
@@ -1316,7 +1319,7 @@ msgstr  "ಕಾರ್ಯಗತಗೊಳಿಸಬಲ್ಲ:"
 msgid   "Execute"
 msgstr  "ಕಾರ್ಯಗತಗೊಳಿಸು"
 
-#: ../xffm/response/templates/openwith.hh:275
+#: ../xffm/response/templates/openwith.hh:274
 msgid   "By default applications will be run in the background and only their "
         "output will be displayed in a toolview. This makes it impossible to "
         "interact with applications requiring user input from a terminal "
@@ -1324,12 +1327,12 @@ msgid   "By default applications will be run in the background and only their "
         "terminal."
 msgstr  ""
 
-#: ../xffm/response/templates/openwith.hh:290
+#: ../xffm/response/templates/openwith.hh:281
 #, fuzzy
 msgid   "Use External Terminal:"
 msgstr  "GNOME ಟರ್ಮಿನಲ್ ಪರಿಚಯಚಿತ್ರಣವನ್ನು ಬಳಸು:"
 
-#: ../xffm/response/templates/openwith.hh:353
+#: ../xffm/response/templates/openwith.hh:344
 #, fuzzy, c-format
 msgid   "Cannot find executable for \"%s\""
 msgstr  "\"%s\" ಫೋಲ್ಡರನ್ನು ಅಳಿಸಲಾಗಿಲ್ಲ."
@@ -1761,7 +1764,13 @@ msgstr  "ಎಲ್ಲವನ್ನೂ ಸಂಪಾದಿಸು"
 msgid   "Search results for %s"
 msgstr  "'%s' ಗಾಗಿನ ಹುಡುಕು ಫಲಿತಾಂಶ:"
 
-#: ../xffm/find/templates/dndbox.hh:274
+#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:100
+msgid   "Exit"
+msgstr  "ನಿರ್ಗಮಿಸು"
+
+#: ../xffm/find/templates/dndbox.hh:276
 msgid   "Search results"
 msgstr  "ಶೋಧನೆಯ ಫಲಿತಾಂಶಗಳು"
 
@@ -2041,12 +2050,6 @@ msgstr  "ಪೂರ್ವನಿಯೋಜಿತ ಬಣ್ಣ"
 #, fuzzy
 msgid   "Environment"
 msgstr  "ಪರಿಸರ:"
-
-#: ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
-msgid   "Exit"
-msgstr  "ನಿರ್ಗಮಿಸು"
 
 #: ../xffm/menus/templates/mainMenu.hh:64
 #: ../xffm/menus/templates/mainMenu.hh:85
