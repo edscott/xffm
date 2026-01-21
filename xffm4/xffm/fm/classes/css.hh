@@ -22,175 +22,182 @@ private:
       char *iconsFg = Settings::getString("xfterm", "iconsFg", "#000000");
       char *iconsBg = Settings::getString("xfterm", "iconsBg", "#c0bfbc");
 
-      char *data = g_strdup_printf(
+      char *variable = g_strdup_printf(
       "\
-      .vbox {\
-        background-color: %s;\
-        color: %s;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .output {\
-        background-color: %s;\
-        color: %s;\
-        font-family: monospace;\
-      }\
-      .outputview text selection {\
-        background-color: blue;\
-        font-family: monospace;\
-        color: yellow;\
-      }\
-      .input {\
-        background-color: %s;\
-        color: %s;\
-        font-family: monospace;\
-      }\
-      .inputview text selection  {\
-        background-color: #abc2df;\
-        color: black;\
-        font-family: monospace;\
-      }\
-      .gridviewColors {\
-        background-color: %s;\
-        color: %s;\
-        font-family: monospace;\
-      }\
-      .inquireButton {\
-        padding-left: 0;\
-        padding-right: 0;\
-        padding-bottom: 0;\
-        padding-top: 0;\
-        min-height: 16px;\
-        font-size: 12px;\
-        margin-bottom: 0;\
-        margin-left: 0;\
-        margin-right: 0;\
-        margin-top: 0;\
-      }\
-      .inquireBox {\
-        padding-bottom: 0;\
-        padding-top: 0;\
-        font-size: 12px;\
-        margin-bottom: 0;\
-        margin-left: 0;\
-        margin-right: 0;\
-        margin-top: 0;\
-      }\
-      .inquire {\
-        background-color: #cccccc;\
-        padding-bottom: 0;\
-        padding-top: 0;\
-        font-size: 12px;\
-        margin-bottom: 0;\
-        margin-left: 0;\
-        margin-right: 0;\
-        margin-top: 0;\
-      }\
-      .gridviewBox {\
-        margin-bottom: 0;\
-        margin-left: 0;\
-        margin-right: 0;\
-        margin-top: 0;\
-        border-spacing: 1px 1px;\
-      }\
-      .font1 {\
-        font-size: xx-small;\
-      }\
-      .font2 {\
-        font-size: x-small;\
-      }\
-      .font3 {\
-        font-size: small;\
-      }\
-      .font4 {\
-        font-size: medium;\
-      }\
-      .font5 {\
-        font-size: large;\
-      }\
-      .font6 {\
-        font-size: x-large;\
-      }\
-      .font7 {\
-        font-size: xx-large;\
-      }\
-      .prompt {\
-        background-color: #333333;\
-        color: #00ff00;\
-      }\
-      tooltip {\
-        color: black;\
-        background-color: #acaaa5;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .pathbarboxRed * {\
-        color: red;\
-        font-size: 12px;\
-        background-color: #dcdad5;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .pathbarbox * {\
-        color: blue;\
-        font-size: 12px;\
-        background-color: #dcdad5;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .pathbardrop * {\
-        color: black;\
-        background-color: green;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: black;\
-      }\
-      .gridNegative * {\
-        color: white;\
-        background-color: #acaaa5;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .menuNegative * {\
-        background-color: #acaaa5;\
-      }\
-      .menuPositive * {\
-        background-color: white\
-      }\
-      .pathbarboxNegative * {\
-        color: white;\
-        font-size: 12px;\
-        background-color: #acaaa5;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .location * {\
-        color: blue;\
-        background-color: #dcdad5;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      .dropNegative * {\
-        background-color: green;\
-        border-width: 0px;\
-        border-radius: 0px;\
-        border-color: transparent;\
-      }\
-      ", 
-         inputBg, inputFg, outputBg, outputFg, inputBg, inputFg, iconsBg, iconsFg);
+      .vbox {\n\
+        background-color: %s;\n\
+        color: %s;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      .output {\n\
+        background-color: %s;\n\
+        color: %s;\n\
+        font-family: monospace;\n\
+      }\n\
+      .input {\n\
+        background-color: %s;\n\
+        color: %s;\n\
+        font-family: monospace;\n\
+      }\n\
+      .gridviewColors {\n\
+        background-color: %s;\n\
+        color: %s;\n\
+        font-family: monospace;\n\
+      }", inputBg, inputFg, outputBg, outputFg, inputBg, inputFg, iconsBg, iconsFg);
+
       g_free(outputBg);
       g_free(outputFg);
       g_free(inputBg);
       g_free(inputFg);
       g_free(iconsFg);
       g_free(iconsBg);
+
+      char *data = g_strdup_printf(
+      "\
+      %s\n\
+      .outputview text selection {\n\
+        background-color: blue;\n\
+        font-family: monospace;\n\
+        color: yellow;\n\
+      }\n\
+      .inputview text selection  {\n\
+        background-color: #abc2df;\n\
+        color: black;\n\
+        font-family: monospace;\n\
+      }\n\
+      .inquireButton {\n\
+        padding-left: 0;\n\
+        padding-right: 0;\n\
+        padding-bottom: 0;\n\
+        padding-top: 0;\n\
+        min-height: 16px;\n\
+        font-size: 12px;\n\
+        margin-bottom: 0;\n\
+        margin-left: 0;\n\
+        margin-right: 0;\n\
+        margin-top: 0;\n\
+      }\n\
+      .inquireBox {\n\
+        padding-bottom: 0;\n\
+        padding-top: 0;\n\
+        font-size: 12px;\n\
+        margin-bottom: 0;\n\
+        margin-left: 0;\n\
+        margin-right: 0;\n\
+        margin-top: 0;\n\
+      }\n\
+      .inquire {\n\
+        background-color: #cccccc;\n\
+        padding-bottom: 0;\n\
+        padding-top: 0;\n\
+        font-size: 12px;\n\
+        margin-bottom: 0;\n\
+        margin-left: 0;\n\
+        margin-right: 0;\n\
+        margin-top: 0;\n\
+      }\n\
+      .gridviewBox {\n\
+        margin-bottom: 0;\n\
+        margin-left: 0;\n\
+        margin-right: 0;\n\
+        margin-top: 0;\n\
+        border-spacing: 1px 1px;\n\
+      }\n\
+      .font1 {\n\
+        font-size: xx-small;\n\
+      }\n\
+      .font2 {\n\
+        font-size: x-small;\n\
+      }\n\
+      .font3 {\n\
+        font-size: small;\n\
+      }\n\
+      .font4 {\n\
+        font-size: medium;\n\
+      }\n\
+      .font5 {\n\
+        font-size: large;\n\
+      }\n\
+      .font6 {\n\
+        font-size: x-large;\n\
+      }\n\
+      .font7 {\n\
+        font-size: xx-large;\n\
+      }\n\
+      .prompt {\n\
+        background-color: #333333;\n\
+        color: #00ff00;\n\
+      }\n\
+      tooltip {\n\
+        color: black;\n\
+        background-color: #acaaa5;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      .pathbarboxRed * {\n\
+        color: red;\n\
+        font-size: 12px;\n\
+        background-color: #dcdad5;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      .pathbarbox * {\n\
+        color: blue;\n\
+        font-size: 12px;\n\
+        background-color: #dcdad5;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      .pathbardrop * {\n\
+        color: black;\n\
+        background-color: green;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: black;\n\
+      }\n\
+      .gridNegative * {\n\
+        color: white;\n\
+        background-color: #acaaa5;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      .menuNegative * {\n\
+        background-color: #acaaa5;\n\
+      }\n\
+      .menuPositive * {\n\
+        background-color: white;\n\
+      }\n\
+      .pathbarboxNegative * {\n\
+        color: white;\n\
+        font-size: 12px;\n\
+        background-color: #acaaa5;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      .location * {\n\
+        color: blue;\n\
+        background-color: #dcdad5;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      .dropNegative * {\n\
+        background-color: green;\n\
+        border-width: 0px;\n\
+        border-radius: 0px;\n\
+        border-color: transparent;\n\
+      }\n\
+      ", variable);
+        
+      //fprintf(stdout, "%s", data);
+      g_free(variable);
       gtk_css_provider_load_from_string (css_provider, data);
       g_free(data);
       return css_provider;
