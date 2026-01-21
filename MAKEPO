@@ -3,7 +3,10 @@ For new translation construction:
 Do:
 perl scripts/update-po.pl potfiles
 perl scripts/update-po.pl template
-perl scripts/update-po.pl fullmerge
+perl scripts/updateMulti-po.pl fullmerge
+# perl scripts/update-po.pl fullmerge
+
+updateMulti-po runs in parallel, while update-po is single threaded.
 
 
 1. Create new po/POTFILES.in file
