@@ -17,6 +17,8 @@ public:
       TRACE("openDnDBox... dir = %s\n", dir);
       if (g_slist_length(list) == 0) return NULL;
 
+      gtk_widget_set_visible(GTK_WIDGET(parent),false);
+      TRACE("open: parent=%p\n", parent);
       auto window = createWindow(dir, list);
       g_object_set_data(G_OBJECT(window), "list", list);
       g_object_set_data(G_OBJECT(window), "parent", parent);
@@ -57,6 +59,7 @@ private:
       gtk_widget_set_visible(GTK_WIDGET(window), false);
 
       auto parent = g_object_get_data(G_OBJECT(window), "parent");
+
       g_object_set_data(G_OBJECT(parent), "response", GINT_TO_POINTER(1));
 
       // will destroy on program Exit.
@@ -175,6 +178,10 @@ private:
 
     static void clearBox(GtkWidget *w, GtkWindow *window){
       gtk_widget_set_visible(GTK_WIDGET(window), false);
+      auto parent = g_object_get_data(G_OBJECT(window), "parent");
+      TRACE("clearBox: parent=%p\n", parent);
+      gtk_widget_set_visible(GTK_WIDGET(parent),true);
+      gtk_window_present(GTK_WINDOW(parent));
     }
 
     static GtkListBox *mkListBox(const gchar *dir, GSList *list, void *window){
