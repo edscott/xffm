@@ -126,7 +126,10 @@ ClickMenu
          // cleanup on regen :
         auto pictureBox = GTK_BOX(g_object_get_data(object, "pictureBox"));
         auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(pictureBox));
-        if (oldImage) gtk_widget_unparent(oldImage);
+        if (oldImage) {
+            TRACE("factory.hh: unparent oldImage\n");
+            gtk_widget_unparent(oldImage);
+        }
      }
 
       static int getViewIconSize(GridView<Type> *gridView_p){
@@ -584,7 +587,7 @@ ClickMenu
               gdouble y,
               void *data){
       auto gridView_p = (GridView<Type> *)data;
-      
+      TRACE("factory.hh: menu_f\n"); 
       auto eventController = GTK_EVENT_CONTROLLER(self);
       auto event = gtk_event_controller_get_current_event(eventController);
 

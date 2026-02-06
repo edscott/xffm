@@ -268,6 +268,7 @@ namespace xf
 
     void setCloseBox(const char *iconName, const char *tooltip){
       auto old = gtk_widget_get_first_child (GTK_WIDGET(closeBox_));
+      TRACE("dialogbasic.hh: unparent old\n");
       gtk_widget_unparent(old);
       //auto paintable = Texture<bool>::load(iconName);
       //auto image = gtk_picture_new_for_paintable(paintable);

@@ -183,10 +183,10 @@ namespace xf {
                 g_free(name);
 
                 auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(tail->data), "menu"));
-                TRACE("update passbar, tail menu is %p\n", menu);
-                gtk_widget_unparent(GTK_WIDGET(menu));
+                TRACE("update passbar, tail menu is %p. Unparent.\n", menu);
+                if (menu && GTK_IS_WIDGET(menu)) gtk_widget_unparent(GTK_WIDGET(menu));
                 g_object_set_data(G_OBJECT(tail->data), "menu", NULL);
-
+                TRACE("And again, Unparent %p.\n", tail->data);
                 gtk_widget_unparent(GTK_WIDGET(tail->data));
             }
             break;

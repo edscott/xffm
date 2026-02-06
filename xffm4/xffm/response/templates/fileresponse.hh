@@ -708,7 +708,10 @@ private: // Nonfree functions
           gtk_label_set_markup(label, markup);
           
           auto oldImage = gtk_widget_get_first_child(GTK_WIDGET(pictureBox));
-          if (oldImage) gtk_widget_unparent(oldImage);
+          if (oldImage) {
+            TRACE("fileresponse.hh: unparent oldImage\n");
+            gtk_widget_unparent(oldImage);
+          }
           //auto paintable = Texture<bool>::load(info);
           //auto picture = gtk_picture_new_for_paintable(paintable);
           //gtk_widget_set_size_request(picture, 16, 16);
