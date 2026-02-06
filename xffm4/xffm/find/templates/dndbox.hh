@@ -14,6 +14,10 @@ public:
 
     static GtkWindow *
     openDnDBox(const gchar *dir, GSList *list, GtkTextView *textview, GtkWindow *parent){
+#ifdef GDK_WINDOWING_X11
+      int x,y;
+      Basic::getXY(parent, &x, &y);
+#endif
       TRACE("openDnDBox... dir = %s\n", dir);
       if (g_slist_length(list) == 0) return NULL;
 
@@ -41,13 +45,17 @@ public:
       gtk_widget_realize(GTK_WIDGET(window));
       Basic::setAsDialog(window);
       gtk_window_present(window);
+#ifdef GDK_WINDOWING_X11
+      Basic::moveTo(window, x, y);
+#endif
+
 
       return window;
     }
 
 private:
 
-    static void close(GtkButton *button, void *window){
+    static void close(GtkButton *button, GtkWindow *window){
       auto list = (GSList *)g_object_get_data(G_OBJECT(window), "list");
 
       for (auto l=list; l && l->data; l=l->next){
@@ -58,7 +66,9 @@ private:
       g_free(dir);
       gtk_widget_set_visible(GTK_WIDGET(window), false);
 
-      auto parent = g_object_get_data(G_OBJECT(window), "parent");
+
+      auto parent = GTK_WINDOW(g_object_get_data(G_OBJECT(window), "parent"));
+
 
       g_object_set_data(G_OBJECT(parent), "response", GINT_TO_POINTER(1));
 
@@ -102,7 +112,7 @@ private:
         TRACE("thread_run %s\n", command);
         Run<Type>::thread_run(textview, command, FALSE);
 
-        close(NULL, window);
+        close(NULL, GTK_WINDOW(window));
     }
 
     
@@ -177,11 +187,18 @@ private:
     }
 
     static void clearBox(GtkWidget *w, GtkWindow *window){
+#ifdef GDK_WINDOWING_X11
+        int x,y;
+        Basic::getXY(window, &x, &y);
+#endif
       gtk_widget_set_visible(GTK_WIDGET(window), false);
       auto parent = g_object_get_data(G_OBJECT(window), "parent");
       TRACE("clearBox: parent=%p\n", parent);
       gtk_widget_set_visible(GTK_WIDGET(parent),true);
       gtk_window_present(GTK_WINDOW(parent));
+#ifdef GDK_WINDOWING_X11
+      Basic::moveTo(GTK_WINDOW(parent), x, y);
+#endif
     }
 
     static GtkListBox *mkListBox(const gchar *dir, GSList *list, void *window){
