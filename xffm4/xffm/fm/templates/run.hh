@@ -369,6 +369,8 @@ public:
                 Print::print(textview, "red/white_bg", g_strdup(line));
             } else if (strstr(line, "warning")||strstr(line, _("warning"))) {
                 Print::print(textview, "yellow/black_bg", g_strdup(line));
+            } else if (strstr(line, "required from here")) {
+                Print::print(textview, "yellow/black_bg", g_strdup(line));
             } else {                
                 Print::print(textview, "orange/black_bg", g_strdup(line));
             }
