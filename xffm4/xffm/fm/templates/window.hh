@@ -454,8 +454,14 @@ public:
 private: 
 
     void zapPage(GtkWidget *child){
+      // 
 
       auto page = (FMpage *) g_object_get_data(G_OBJECT(child), "page");
+      // Here we *must* unreference associated textview to avoid future
+      // invalid reference.
+      auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(child), "output"));
+      Print::unreference_textview(output);
+      g_object_set_data(G_OBJECT(child), "output", NULL);
       
       auto gridview_p = (GridView<LocalDir> *) Child::getGridviewObject(child);
       GList *item = g_list_find(pageList_, child);
