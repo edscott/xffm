@@ -238,21 +238,23 @@ template <class Type>
           // We wait until here to fireup the monitor.
           auto store = G_LIST_MODEL(g_object_get_data(G_OBJECT(selectionModel_), "store"));
           auto file = G_FILE(g_object_get_data(G_OBJECT(store), "file"));
-          GError *error_ = NULL;
-          monitor_ = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
-          g_object_set_data(G_OBJECT(monitor_), "file", file);
-          Child::addMonitor(monitor_);
+          if (file) {
+            GError *error_ = NULL;
+            monitor_ = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
+            g_object_set_data(G_OBJECT(monitor_), "file", file);
+            Child::addMonitor(monitor_);
 
-          TRACE("monitor_=%p file=%p store=%p\n", monitor_, file, store);
-          if (error_){
-              ERROR_("g_file_monitor_directory(%s) failed: %s\n",
-                      "fixme", error_->message);
-              g_error_free(error_);
-          } else {
-            g_signal_connect (monitor_, "changed", 
-                  G_CALLBACK (changed_f), (void *)this);
+            TRACE("monitor_=%p file=%p store=%p\n", monitor_, file, store);
+            if (error_){
+                ERROR_("g_file_monitor_directory(%s) failed: %s\n",
+                        "fixme", error_->message);
+                g_error_free(error_);
+            } else {
+              g_signal_connect (monitor_, "changed", 
+                    G_CALLBACK (changed_f), (void *)this);
+            }
+            g_object_set_data(G_OBJECT(store), "monitor", monitor_);
           }
-          g_object_set_data(G_OBJECT(store), "monitor", monitor_);
         }
  ////////////////
         return view;

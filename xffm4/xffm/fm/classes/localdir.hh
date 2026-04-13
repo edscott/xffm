@@ -24,6 +24,17 @@ namespace xf {
         GError *error_ = NULL;
         g_object_set_data(G_OBJECT(store), "xffm::local", GINT_TO_POINTER(1));
 
+        // Path disappears?
+        if (!g_file_test(path, G_FILE_TEST_EXISTS)){
+          TRACE("'%s' does not exist. Empty model.\n", path);
+          auto base = g_path_get_basename(path);
+          Print::printError(Child::getOutput(NULL), g_strdup_printf("%s (%s)\n", _("Folder does not exist"), base));
+          g_free(base);
+          g_object_set_data(G_OBJECT(store), "file", NULL);
+          // empty model.
+          return getSelectionModel(G_LIST_MODEL(store), true, filterData);
+        }
+
         // up icon
         auto up = g_path_get_dirname(path);
         auto upFile = g_file_new_for_path(up);
@@ -71,26 +82,6 @@ namespace xf {
           setPaintableIcon(outInfo, _path);
           g_free(_path);
         } while (true);
-
-        /* moved to gridview.hh 
-        auto monitor = g_file_monitor_directory (file, G_FILE_MONITOR_WATCH_MOVES, NULL,&error_);
-        g_object_set_data(G_OBJECT(monitor), "file", file);
-        Child::addMonitor(monitor);
-
-        TRACE("monitor=%p file=%p store=%p\n", monitor, file, store);
-        if (error_){
-            ERROR_("g_file_monitor_directory(%s) failed: %s\n",
-                    path, error_->message);
-            g_error_free(error_);
-            //g_object_unref(file);
-            //file=NULL;
-            // return;
-        } else {
-          g_signal_connect (monitor, "changed", 
-                G_CALLBACK (changed_f), (void *)store);
-        }
-        g_object_set_data(G_OBJECT(store), "monitor", monitor);
-        */
 
         return getSelectionModel(G_LIST_MODEL(store), true, filterData);
       }
