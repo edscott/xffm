@@ -5,7 +5,7 @@ set (CMAKE_CXX_STANDARD 17)
 set(PREFIX_BIN /usr/local/bin)
 # Version info
 set(xffm_VERSION_MAJOR 4)
-set(xffm_VERSION_MINOR 03)
+set(xffm_VERSION_MINOR 22)
 include(cmake/pthreads.cmake)
 
 
@@ -53,7 +53,8 @@ find_package(libMagic  REQUIRED)
 find_package(libReadline  REQUIRED)
 #set(ENV{PKG_CONFIG_PATH} "/opt/lib/pkgconfig")
 find_package(GLIB 2.56.2 REQUIRED)
-find_package(GTK4 4.18.1 REQUIRED)
+# NOTE: sync version info in xffm.h
+find_package(GTK4 4.22.2 REQUIRED)
 
 include(GNUInstallDirs)
 include(cmake/headers.cmake)

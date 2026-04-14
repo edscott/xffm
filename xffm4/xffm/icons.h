@@ -53,6 +53,7 @@
 #define EMBLEM_DELETE "emblem-delete"
 
 // Menu icons
+#define EMBLEM_USER "emblem-user"
 #define EMBLEM_ERROR "emblem-error"
 #define EMBLEM_WARNING "emblem-warning"
 #define EMBLEM_QUESTION "emblem-question"

@@ -22,6 +22,7 @@ namespace xf {
         
         _("Select All"), 
         _("Empty trash bin"), 
+        _("About"),
 
         " ",
         _("Show"),
@@ -71,6 +72,7 @@ namespace xf {
         {_("Color settings"),(void *)DOCUMENT_PROPERTIES}, 
         {_("Exit"),(void *)  WINDOW_SHUTDOWN},
         {_("Apply modifications"),(void *) EMBLEM_APPLY},
+        {_("About"),(void *) EMBLEM_USER},
         {_("Close"),(void *) WINDOW_CLOSE},
         {NULL, NULL}
       }; 
@@ -108,6 +110,7 @@ namespace xf {
         {_("Size"),(void *) toggleItem},
         {_("File type"),(void *) toggleItem},
         {_("Apply modifications"),(void *) apply},
+        {_("About"),(void *) about},
 
         {NULL, NULL}
       };
@@ -375,6 +378,23 @@ namespace xf {
     }
 
     private:
+    static void
+    about(GtkButton *button, void *data){
+      auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));
+      closePopover(menu);
+      auto message = g_strdup_printf("\n\
+%s XFFM+ %s\n\
+%s GPL Version 3 (2007)\n\
+%s Edscott Wilson Garcia\n\
+%s: edscott.wilson.garcia@gmail.com\n",
+_("Version"),XFFM_VERSION,
+_("License:"),
+_("Author Name:"),
+_("Author Email Address:"));
+      Print::showText(Child::getOutput(NULL));
+      Print::printInfo(Child::getOutput(NULL),message);
+    }
+
     static void
     close(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu"));

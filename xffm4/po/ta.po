@@ -1,4 +1,4 @@
-# Xffm4 translation file: mié 21 ene 2026 15:11:50 CST
+# Xffm4 translation file: mar 14 abr 2026 10:01:38 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
+        "POT-Creation-Date: 2026-04-14 09:59-0600\n"
         "PO-Revision-Date: 2007-06-03 05:06+0530\n"
         "Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
         "Language-Team: TAMIL <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -18,7 +18,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
         "\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:853
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -33,7 +33,7 @@ msgstr  "சித்திரப்பலகை காலி"
 msgid   "Clipboard contents"
 msgstr  "ஒட்டுப்பலகை உரை"
 
-#: ../xffm/fm/templates/clipboard.hh:142 ../xffm/fm/templates/window.hh:554
+#: ../xffm/fm/templates/clipboard.hh:142 ../xffm/fm/templates/window.hh:560
 #, fuzzy
 msgid   "Invalid clip"
 msgstr  "தவறான அழைப்பு"
@@ -61,7 +61,7 @@ msgstr  "பிழை"
 msgid   "warning"
 msgstr  "எச்சரிக்கை"
 
-#: ../xffm/fm/templates/run.hh:491
+#: ../xffm/fm/templates/run.hh:493
 #: ../xffm/response/classes/passwdresponse.hh:13
 #: ../xffm/response/classes/passwdresponse.hh:83
 #: ../xffm/response/classes/passwdresponse.hh:87
@@ -124,10 +124,10 @@ msgid   "Segmentation fault"
 msgstr  "செக்மன்டேஷன் மீறல்"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:643
+#: ../xffm/fm/templates/gridview.hh:645
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:306
-#: ../xffm/find/templates/dndbox.hh:165
+#: ../xffm/response/templates/dialogbasic.hh:307
+#: ../xffm/find/templates/dndbox.hh:178
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -137,9 +137,9 @@ msgstr  "செக்மன்டேஷன் மீறல்"
 #: ../xffm/menus/templates/outputMenu.hh:18
 #: ../xffm/menus/templates/outputMenu.hh:33
 #: ../xffm/menus/templates/outputMenu.hh:47
-#: ../xffm/menus/templates/mainMenu.hh:48
-#: ../xffm/menus/templates/mainMenu.hh:74
-#: ../xffm/menus/templates/mainMenu.hh:101
+#: ../xffm/menus/templates/mainMenu.hh:50
+#: ../xffm/menus/templates/mainMenu.hh:76
+#: ../xffm/menus/templates/mainMenu.hh:103
 #: ../xffm/menus/templates/gridviewmenu.hh:42
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:98
@@ -166,8 +166,8 @@ msgstr  "மூலம்"
 msgid   "Invalid target folder"
 msgstr  "பிழையான மாறி மதிப்பு"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
-#: ../xffm/fm/templates/gridview.hh:619
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -197,16 +197,16 @@ msgstr  "கோப்பு"
 msgid   ": "
 msgstr  ": "
 
-#: ../xffm/fm/templates/factory.hh:318 ../xffm/fm/templates/factory.hh:341
+#: ../xffm/fm/templates/factory.hh:321 ../xffm/fm/templates/factory.hh:344
 msgid   "Full name"
 msgstr  "முழு பெயர்"
 
-#: ../xffm/fm/templates/window.hh:603
+#: ../xffm/fm/templates/window.hh:609
 msgid   "Long press time"
 msgstr  "அதிக அழுத்தும் நேரம்."
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/window.hh:617 ../xffm/fm/templates/gridview.hh:457
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -217,8 +217,8 @@ msgstr  "அதிக அழுத்தும் நேரம்."
 msgid   "Cut"
 msgstr  "வெட்டு"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/window.hh:619 ../xffm/fm/templates/gridview.hh:457
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -234,9 +234,9 @@ msgstr  "வெட்டு"
 msgid   "Copy"
 msgstr  "(C) நகலெடு"
 
-#: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
-#: ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/window.hh:621 ../xffm/fm/templates/window.hh:731
+#: ../xffm/fm/templates/window.hh:758 ../xffm/fm/templates/gridview.hh:601
+#: ../xffm/fm/templates/gridview.hh:852
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -246,8 +246,8 @@ msgstr  "(C) நகலெடு"
 #: ../xffm/menus/templates/inputMenu.hh:49
 #: ../xffm/menus/templates/inputMenu.hh:66
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:84
+#: ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:63
 #: ../xffm/menus/templates/gridviewmenu.hh:88
@@ -255,25 +255,25 @@ msgstr  "(C) நகலெடு"
 msgid   "Paste"
 msgstr  "ஒட்டு"
 
-#: ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:623
 msgid   "New Tab"
 msgstr  "புதிய கீற்று"
 
-#: ../xffm/fm/templates/window.hh:618 ../xffm/fm/templates/window.hh:620
+#: ../xffm/fm/templates/window.hh:624 ../xffm/fm/templates/window.hh:626
 msgid   "Main menu"
 msgstr  "முக்கிய பட்டி"
 
-#: ../xffm/fm/templates/window.hh:623 ../xffm/fm/templates/window.hh:720
-#: ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:629 ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:732
 #: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:28
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "(r) இயல்பான கூற்று ஆக பொருத்துக"
 
-#: ../xffm/fm/templates/window.hh:720 ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:726 ../xffm/fm/templates/window.hh:732
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:45
@@ -283,121 +283,121 @@ msgstr  "(r) இயல்பான கூற்று ஆக பொருத்�
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:56
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:90
 msgid   "Select All"
 msgstr  "அனைத்தையும் தேர்வு செய்"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
 #: ../xffm/menus/templates/mainMenu.hh:27
 msgid   "Show"
 msgstr  "காட்சி"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
-#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:126
-#: ../xffm/menus/templates/mainMenu.hh:139
-#: ../xffm/menus/templates/mainMenu.hh:184
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
+#: ../xffm/fm/templates/window.hh:784 ../xffm/menus/templates/mainMenu.hh:29
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:129
+#: ../xffm/menus/templates/mainMenu.hh:142
+#: ../xffm/menus/templates/mainMenu.hh:187
 #, fuzzy
 msgid   "Hidden files"
 msgstr  "மறைந்துள்ள கோப்புகள்:"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
-#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:104
-#: ../xffm/menus/templates/mainMenu.hh:127
-#: ../xffm/menus/templates/mainMenu.hh:140
-#: ../xffm/menus/templates/mainMenu.hh:185
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
+#: ../xffm/fm/templates/window.hh:784 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:106
+#: ../xffm/menus/templates/mainMenu.hh:130
+#: ../xffm/menus/templates/mainMenu.hh:143
+#: ../xffm/menus/templates/mainMenu.hh:188
 #, fuzzy
 msgid   "Backup files"
 msgstr  "காப்பு கோப்பு"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/menus/templates/mainMenu.hh:32
+#: ../xffm/fm/templates/window.hh:727 ../xffm/menus/templates/mainMenu.hh:32
 msgid   "Sort mode"
 msgstr  "வரிசைப்படுத்தப்பட்ட முறைமை"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:778
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:784
 #: ../xffm/menus/templates/mainMenu.hh:34
-#: ../xffm/menus/templates/mainMenu.hh:105
-#: ../xffm/menus/templates/mainMenu.hh:128
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:186
+#: ../xffm/menus/templates/mainMenu.hh:107
+#: ../xffm/menus/templates/mainMenu.hh:131
+#: ../xffm/menus/templates/mainMenu.hh:144
+#: ../xffm/menus/templates/mainMenu.hh:189
 msgid   "Descending"
 msgstr  "e இறங்கு வரிசை"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:778
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:784
 #: ../xffm/response/templates/fileresponse.hh:233
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:106
-#: ../xffm/menus/templates/mainMenu.hh:129
-#: ../xffm/menus/templates/mainMenu.hh:148
-#: ../xffm/menus/templates/mainMenu.hh:190
+#: ../xffm/menus/templates/mainMenu.hh:108
+#: ../xffm/menus/templates/mainMenu.hh:132
+#: ../xffm/menus/templates/mainMenu.hh:151
+#: ../xffm/menus/templates/mainMenu.hh:193
 msgid   "Name"
 msgstr  "பெயர்"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:370
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/templates/properties.hh:370
 #: ../xffm/fm/classes/child.hh:282 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:107
-#: ../xffm/menus/templates/mainMenu.hh:130
-#: ../xffm/menus/templates/mainMenu.hh:149
-#: ../xffm/menus/templates/mainMenu.hh:187
+#: ../xffm/menus/templates/mainMenu.hh:109
+#: ../xffm/menus/templates/mainMenu.hh:133
+#: ../xffm/menus/templates/mainMenu.hh:152
+#: ../xffm/menus/templates/mainMenu.hh:190
 msgid   "Date"
 msgstr  "தேதி"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:369
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/templates/properties.hh:369
 #: ../xffm/fm/classes/child.hh:283 ../xffm/menus/templates/mainMenu.hh:37
-#: ../xffm/menus/templates/mainMenu.hh:108
-#: ../xffm/menus/templates/mainMenu.hh:131
-#: ../xffm/menus/templates/mainMenu.hh:150
-#: ../xffm/menus/templates/mainMenu.hh:188
+#: ../xffm/menus/templates/mainMenu.hh:110
+#: ../xffm/menus/templates/mainMenu.hh:134
+#: ../xffm/menus/templates/mainMenu.hh:153
+#: ../xffm/menus/templates/mainMenu.hh:191
 msgid   "Size"
 msgstr  "அளவு"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:284
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/classes/child.hh:284
 #: ../xffm/menus/templates/mainMenu.hh:38
-#: ../xffm/menus/templates/mainMenu.hh:109
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:151
-#: ../xffm/menus/templates/mainMenu.hh:189
+#: ../xffm/menus/templates/mainMenu.hh:111
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:154
+#: ../xffm/menus/templates/mainMenu.hh:192
 #, fuzzy
 msgid   "File type"
 msgstr  "கோப்பு வகை (t):"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:773
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:779
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:73
-#: ../xffm/menus/templates/mainMenu.hh:110
-#: ../xffm/menus/templates/mainMenu.hh:225
+#: ../xffm/menus/templates/mainMenu.hh:75
+#: ../xffm/menus/templates/mainMenu.hh:112
+#: ../xffm/menus/templates/mainMenu.hh:228
 #, fuzzy
 msgid   "Apply modifications"
 msgstr  "பயன்பாடுகள்"
 
-#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:86
+#: ../xffm/fm/templates/window.hh:731 ../xffm/fm/templates/window.hh:756
+#: ../xffm/fm/templates/gridview.hh:592 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:90
 msgid   "Add bookmark"
 msgstr  "b புத்தககுறி சேர்"
 
-#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
-#: ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/fm/templates/window.hh:731 ../xffm/fm/templates/window.hh:757
+#: ../xffm/fm/templates/gridview.hh:535 ../xffm/fm/templates/gridview.hh:595
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:89
 #: ../xffm/menus/templates/gridviewmenu.hh:29
 #: ../xffm/menus/templates/gridviewmenu.hh:65
 #: ../xffm/menus/templates/gridviewmenu.hh:91
 msgid   "Remove bookmark"
 msgstr  "புத்தகக்குறியை நீக்கு"
 
-#: ../xffm/fm/templates/window.hh:731 ../xffm/menus/templates/mainMenu.hh:24
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:83
+#: ../xffm/fm/templates/window.hh:737 ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:85
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "குப்பைத் தொட்டியைக் காலியாக்கு"
@@ -409,15 +409,15 @@ msgstr  "குப்பைத் தொட்டியைக் காலிய
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "வாடிக்கையான தொடர்களை பரிசோதிப்பவர்."
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "w இதனுடன் திறக்க"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
-#: ../xffm/fm/templates/gridview.hh:621
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:578
+#: ../xffm/fm/templates/gridview.hh:623
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -436,7 +436,7 @@ msgstr  "w இதனுடன் திறக்க"
 msgid   "Delete"
 msgstr  "D அழி"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:571
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -444,25 +444,25 @@ msgstr  "D அழி"
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "தேர்ந்தெடுக்கப்பட்ட பொருட்களுடன் ஒரு குறுக்கப்பட்ட காப்பகத்தை உருவாக்கவும்"
 
-#: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
-#: ../xffm/fm/templates/gridview.hh:749
+#: ../xffm/fm/templates/gridview.hh:482 ../xffm/fm/templates/gridview.hh:533
+#: ../xffm/fm/templates/gridview.hh:577 ../xffm/fm/templates/gridview.hh:622
+#: ../xffm/fm/templates/gridview.hh:751
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Properties"
 msgstr  "r பண்புகள்"
 
-#: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:605
+#: ../xffm/fm/templates/gridview.hh:485 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:607
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
 msgid   "Unmount Volume"
 msgstr  "m தொகுதியை ஏற்றமிறக்கு"
 
-#: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
+#: ../xffm/fm/templates/gridview.hh:488 ../xffm/fm/templates/gridview.hh:507
+#: ../xffm/fm/templates/gridview.hh:516 ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -470,14 +470,14 @@ msgstr  "m தொகுதியை ஏற்றமிறக்கு"
 msgid   "Mount Volume"
 msgstr  "M தொகுதி ஏற்று"
 
-#: ../xffm/fm/templates/gridview.hh:556
+#: ../xffm/fm/templates/gridview.hh:558
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
 msgid   "Extract archive"
 msgstr  "காப்பகத்தைப் பிரித்தெடுத்தல்"
 
-#: ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -489,7 +489,7 @@ msgstr  "காப்பகத்தைப் பிரித்தெடுத�
 msgid   "Open in new tab"
 msgstr  "புதுக் கீற்றை திற"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -498,7 +498,7 @@ msgstr  "புதுக் கீற்றை திற"
 msgid   "Rename"
 msgstr  "மறுபெயரிடு (R)"
 
-#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -507,15 +507,15 @@ msgstr  "மறுபெயரிடு (R)"
 msgid   "Duplicate"
 msgstr  "(D) படியெடு"
 
-#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
-#: ../xffm/fm/templates/gridview.hh:811
+#: ../xffm/fm/templates/gridview.hh:615 ../xffm/fm/templates/gridview.hh:812
+#: ../xffm/fm/templates/gridview.hh:813
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  "தானி"
 
-#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:639
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -524,21 +524,21 @@ msgstr  "தானி"
 msgid   "Decrypt File..."
 msgstr  "மறைவிலக்கு கோபு"
 
-#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
+#: ../xffm/fm/templates/gridview.hh:634 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
 msgid   "Encrypt File..."
 msgstr  "மறையாக்கு கோபு "
 
-#: ../xffm/fm/templates/gridview.hh:651
+#: ../xffm/fm/templates/gridview.hh:653
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "பலவித செயல்பாடுகள்"
 
-#: ../xffm/fm/templates/gridview.hh:673
+#: ../xffm/fm/templates/gridview.hh:675
 #, fuzzy
 msgid   "eCryptfs Volume"
 msgstr  "நினைவிடம் பிரிவு"
@@ -645,7 +645,7 @@ msgstr  "மாற்றங்களை செயற்படுத்து"
 #: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:311
+#: ../xffm/response/templates/dialogbasic.hh:312
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -671,12 +671,18 @@ msgstr  "%s அகற்றப்பட்டது"
 msgid   "Source:"
 msgstr  "மூலம்:"
 
-#: ../xffm/fm/classes/localdir.hh:176 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/fm/classes/localdir.hh:31
+#: ../xffm/response/templates/efsresponse.hh:663
+#: ../xffm/response/templates/efsresponse.hh:669
+msgid   "Folder does not exist"
+msgstr  "அடைவு இருப்பில் இல்லை"
+
+#: ../xffm/fm/classes/localdir.hh:167 ../xffm/find/classes/fgr.hh:202
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Regular expression"
 msgstr  "(R) இயல்பான கூற்று"
 
-#: ../xffm/fm/classes/localdir.hh:180
+#: ../xffm/fm/classes/localdir.hh:171
 #, fuzzy, c-format
 msgid   "%s (%s Filtered)"
 msgstr  "%s (%d உருப்படி)"
@@ -689,22 +695,22 @@ msgstr  "வண்ணங்கள்"
 msgid   "Switch button"
 msgstr  "மாற்றி பொத்தான்"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:89
-#: ../xffm/menus/templates/mainMenu.hh:118
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
+#: ../xffm/menus/templates/mainMenu.hh:121
 msgid   "Search"
 msgstr  "தெடு"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:91
-#: ../xffm/menus/templates/mainMenu.hh:119
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:68
+#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:122
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "ஒரு முனையத்தை திற"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:31 ../xffm/menus/templates/mainMenu.hh:67
-#: ../xffm/menus/templates/mainMenu.hh:92
-#: ../xffm/menus/templates/mainMenu.hh:120
+#: ../xffm/fm/classes/fmbuttonbox.hh:31 ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:123
 msgid   "Home"
 msgstr  "இல்லம்"
 
@@ -716,7 +722,7 @@ msgstr  "புதிய சாளரத்தைத் திறக்கவு
 msgid   "Icon Size"
 msgstr  "முகவுரு அளவு"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:71 ../xffm/menus/templates/mainMenu.hh:71
+#: ../xffm/fm/classes/fmbuttonbox.hh:71 ../xffm/menus/templates/mainMenu.hh:73
 msgid   "Color settings"
 msgstr  "வண்ண அமைப்புகள்"
 
@@ -1283,7 +1289,7 @@ msgstr  "பட்டியல் கோப்புகள் மட்டும
 #: ../xffm/response/templates/untarresponse.hh:164
 #: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:314
+#: ../xffm/response/templates/dialogbasic.hh:315
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "p அமை"
@@ -1335,11 +1341,6 @@ msgstr  "குறிமுறையாக்கப்படாத"
 #: ../xffm/response/templates/efsresponse.hh:230
 msgid   "Confirm"
 msgstr  "உறுதிசெய்"
-
-#: ../xffm/response/templates/efsresponse.hh:663
-#: ../xffm/response/templates/efsresponse.hh:669
-msgid   "Folder does not exist"
-msgstr  "அடைவு இருப்பில் இல்லை"
 
 #: ../xffm/response/templates/efsresponse.hh:789
 #, fuzzy, c-format
@@ -1702,7 +1703,7 @@ msgid   "Searching..."
 msgstr  "தேடுகிறது..."
 
 #: ../xffm/find/templates/findsignals.hh:452
-#: ../xffm/find/templates/dndbox.hh:71
+#: ../xffm/find/templates/dndbox.hh:84
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "தற்போதைய செயலை இணை"
@@ -1727,22 +1728,22 @@ msgstr[1]       "%d பொருத்தங்கள்"
 msgid   "%s Finished : %s"
 msgstr  "%s முடிவடைந்தது : %s"
 
-#: ../xffm/find/templates/dndbox.hh:133
+#: ../xffm/find/templates/dndbox.hh:146
 msgid   "Edit all"
 msgstr  "அனைத்தையும் திருத்து"
 
-#: ../xffm/find/templates/dndbox.hh:146
+#: ../xffm/find/templates/dndbox.hh:159
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "'%s'க்கான தேடல் முடிவுகள்:"
 
-#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/find/templates/dndbox.hh:173 ../xffm/menus/templates/mainMenu.hh:48
+#: ../xffm/menus/templates/mainMenu.hh:74
+#: ../xffm/menus/templates/mainMenu.hh:102
 msgid   "Exit"
 msgstr  "வெளியேறுக"
 
-#: ../xffm/find/templates/dndbox.hh:276
+#: ../xffm/find/templates/dndbox.hh:300
 msgid   "Search results"
 msgstr  "தேடை விடைகள்"
 
@@ -1929,8 +1930,8 @@ msgstr  "வழக்கமான"
 #: ../xffm/menus/templates/pathbarmenu.hh:38
 #: ../xffm/menus/templates/pathbarmenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:70
-#: ../xffm/menus/templates/mainMenu.hh:95
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:97
 msgid   "Open in New Window"
 msgstr  "புது சாளரத்தில் திறக்கவும்"
 
@@ -1944,8 +1945,8 @@ msgstr  "புது சாளரத்தில் திறக்கவும
 #: ../xffm/menus/templates/outputMenu.hh:32
 #: ../xffm/menus/templates/outputMenu.hh:46
 #: ../xffm/menus/templates/outputMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:98 ../xffm/menus/templates/menu.hh:181
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:100 ../xffm/menus/templates/menu.hh:181
 #, fuzzy
 msgid   "Show Clipboard"
 msgstr  "பிடிப்புபலகைக்கு"
@@ -2008,21 +2009,41 @@ msgid   "Default Color"
 msgstr  "முன்னிருப்பு வண்ணம்"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:96
+#: ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:98
 msgid   "Environment"
 msgstr  "சூழல்"
 
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:124
+#: ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:113
+msgid   "About"
+msgstr  "இதைப்பற்றி"
+
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:127
 #: ../xffm/menus/templates/gridviewmenu.hh:79
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "கேரட் முறையை மாற்றுக"
 
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:71
+#: ../xffm/menus/templates/mainMenu.hh:101
 msgid   "Clear Clipboard History"
 msgstr  "தற்காலிக நினைவிட வரலாற்றைச் சுத்தம் செய்"
+
+#: ../xffm/menus/templates/mainMenu.hh:388
+#, c-format
+msgid   "License:"
+msgstr  "உரிமம்:"
+
+#: ../xffm/menus/templates/mainMenu.hh:389
+#, fuzzy
+msgid   "Author Name:"
+msgstr  "ஆசிரியர் பெயர்"
+
+#: ../xffm/menus/templates/mainMenu.hh:390
+#, fuzzy
+msgid   "Author Email Address:"
+msgstr  "மின்னஞ்சல் முகவரிகள் (A):"
 

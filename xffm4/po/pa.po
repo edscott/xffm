@@ -1,4 +1,4 @@
-# Xffm4 translation file: mié 21 ene 2026 15:11:33 CST
+# Xffm4 translation file: mar 14 abr 2026 10:01:22 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
+        "POT-Creation-Date: 2026-04-14 09:59-0600\n"
         "PO-Revision-Date: 2007-04-21 07:15+0530\n"
         "Last-Translator: A S Alam <aalam@users.sf.net>\n"
         "Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
@@ -17,7 +17,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "X-Generator: KBabel 1.11.4\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:853
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -31,7 +31,7 @@ msgstr  "ਕਲਿੱਪਬੋਰਡ ਖਾਲੀ ਹੈ।"
 msgid   "Clipboard contents"
 msgstr  "ਕਲਿੱਪਬੋਰਡ ਸਮੱਗਰੀ"
 
-#: ../xffm/fm/templates/clipboard.hh:142 ../xffm/fm/templates/window.hh:554
+#: ../xffm/fm/templates/clipboard.hh:142 ../xffm/fm/templates/window.hh:560
 #, fuzzy
 msgid   "Invalid clip"
 msgstr  "ਗਲਤ ਕਾਲ"
@@ -59,7 +59,7 @@ msgstr  "ਗਲਤੀ"
 msgid   "warning"
 msgstr  "ਚੇਤਾਵਨੀ"
 
-#: ../xffm/fm/templates/run.hh:491
+#: ../xffm/fm/templates/run.hh:493
 #: ../xffm/response/classes/passwdresponse.hh:13
 #: ../xffm/response/classes/passwdresponse.hh:83
 #: ../xffm/response/classes/passwdresponse.hh:87
@@ -121,10 +121,10 @@ msgid   "Segmentation fault"
 msgstr  "ਸਿਗਮੈਂਟੇਸ਼ਨ ਉਲੰਘਣਾ"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:643
+#: ../xffm/fm/templates/gridview.hh:645
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:306
-#: ../xffm/find/templates/dndbox.hh:165
+#: ../xffm/response/templates/dialogbasic.hh:307
+#: ../xffm/find/templates/dndbox.hh:178
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -134,9 +134,9 @@ msgstr  "ਸਿਗਮੈਂਟੇਸ਼ਨ ਉਲੰਘਣਾ"
 #: ../xffm/menus/templates/outputMenu.hh:18
 #: ../xffm/menus/templates/outputMenu.hh:33
 #: ../xffm/menus/templates/outputMenu.hh:47
-#: ../xffm/menus/templates/mainMenu.hh:48
-#: ../xffm/menus/templates/mainMenu.hh:74
-#: ../xffm/menus/templates/mainMenu.hh:101
+#: ../xffm/menus/templates/mainMenu.hh:50
+#: ../xffm/menus/templates/mainMenu.hh:76
+#: ../xffm/menus/templates/mainMenu.hh:103
 #: ../xffm/menus/templates/gridviewmenu.hh:42
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:98
@@ -163,8 +163,8 @@ msgstr  "ਸਰੋਤ"
 msgid   "Invalid target folder"
 msgstr  "ਗਲਤ ਆਰਗੂਮੈਂਟ ਮੁੱਲ"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
-#: ../xffm/fm/templates/gridview.hh:619
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -193,16 +193,16 @@ msgstr  "ਫਾਇਲ"
 msgid   ": "
 msgstr  ": "
 
-#: ../xffm/fm/templates/factory.hh:318 ../xffm/fm/templates/factory.hh:341
+#: ../xffm/fm/templates/factory.hh:321 ../xffm/fm/templates/factory.hh:344
 msgid   "Full name"
 msgstr  "ਪੂਰਾ ਨਾਂ"
 
-#: ../xffm/fm/templates/window.hh:603
+#: ../xffm/fm/templates/window.hh:609
 msgid   "Long press time"
 msgstr  "ਲੰਮਾ ਪਰੈੱਸ ਟਾਈਮ"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/window.hh:617 ../xffm/fm/templates/gridview.hh:457
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -213,8 +213,8 @@ msgstr  "ਲੰਮਾ ਪਰੈੱਸ ਟਾਈਮ"
 msgid   "Cut"
 msgstr  "ਕੱਟੋ"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/window.hh:619 ../xffm/fm/templates/gridview.hh:457
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -230,9 +230,9 @@ msgstr  "ਕੱਟੋ"
 msgid   "Copy"
 msgstr  "ਨਕਲ"
 
-#: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
-#: ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/window.hh:621 ../xffm/fm/templates/window.hh:731
+#: ../xffm/fm/templates/window.hh:758 ../xffm/fm/templates/gridview.hh:601
+#: ../xffm/fm/templates/gridview.hh:852
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -242,8 +242,8 @@ msgstr  "ਨਕਲ"
 #: ../xffm/menus/templates/inputMenu.hh:49
 #: ../xffm/menus/templates/inputMenu.hh:66
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:84
+#: ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:63
 #: ../xffm/menus/templates/gridviewmenu.hh:88
@@ -251,24 +251,24 @@ msgstr  "ਨਕਲ"
 msgid   "Paste"
 msgstr  "ਚਿਪਕਾਉ"
 
-#: ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:623
 msgid   "New Tab"
 msgstr  "ਨਵੀਂ ਟੈਬ"
 
-#: ../xffm/fm/templates/window.hh:618 ../xffm/fm/templates/window.hh:620
+#: ../xffm/fm/templates/window.hh:624 ../xffm/fm/templates/window.hh:626
 msgid   "Main menu"
 msgstr  "ਮੇਨ ਮੇਨੂ"
 
-#: ../xffm/fm/templates/window.hh:623 ../xffm/fm/templates/window.hh:720
-#: ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:629 ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:732
 #: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:28
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 msgid   "Match regular expression"
 msgstr  "ਰੈਗੂਲਰ ਸਮੀਕਰਨ ਮੇਲ"
 
-#: ../xffm/fm/templates/window.hh:720 ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:726 ../xffm/fm/templates/window.hh:732
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:45
@@ -278,118 +278,118 @@ msgstr  "ਰੈਗੂਲਰ ਸਮੀਕਰਨ ਮੇਲ"
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:56
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:90
 msgid   "Select All"
 msgstr  "ਸਭ ਚੁਣੋ"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
 #: ../xffm/menus/templates/mainMenu.hh:27
 msgid   "Show"
 msgstr  "ਵੇਖਾਓ"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
-#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:126
-#: ../xffm/menus/templates/mainMenu.hh:139
-#: ../xffm/menus/templates/mainMenu.hh:184
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
+#: ../xffm/fm/templates/window.hh:784 ../xffm/menus/templates/mainMenu.hh:29
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:129
+#: ../xffm/menus/templates/mainMenu.hh:142
+#: ../xffm/menus/templates/mainMenu.hh:187
 msgid   "Hidden files"
 msgstr  "ਲੁਕਵੀਆਂ ਫਾਇਲਾਂ"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
-#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:104
-#: ../xffm/menus/templates/mainMenu.hh:127
-#: ../xffm/menus/templates/mainMenu.hh:140
-#: ../xffm/menus/templates/mainMenu.hh:185
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
+#: ../xffm/fm/templates/window.hh:784 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:106
+#: ../xffm/menus/templates/mainMenu.hh:130
+#: ../xffm/menus/templates/mainMenu.hh:143
+#: ../xffm/menus/templates/mainMenu.hh:188
 msgid   "Backup files"
 msgstr  "ਬੈਕਅੱਪ ਫਾਇਲਾਂ"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/menus/templates/mainMenu.hh:32
+#: ../xffm/fm/templates/window.hh:727 ../xffm/menus/templates/mainMenu.hh:32
 #, fuzzy
 msgid   "Sort mode"
 msgstr  "ਕ੍ਰਮਬੱਧ "
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:778
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:784
 #: ../xffm/menus/templates/mainMenu.hh:34
-#: ../xffm/menus/templates/mainMenu.hh:105
-#: ../xffm/menus/templates/mainMenu.hh:128
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:186
+#: ../xffm/menus/templates/mainMenu.hh:107
+#: ../xffm/menus/templates/mainMenu.hh:131
+#: ../xffm/menus/templates/mainMenu.hh:144
+#: ../xffm/menus/templates/mainMenu.hh:189
 msgid   "Descending"
 msgstr  "ਘੱਟਦਾ ਕ੍ਰਮ(e)"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:778
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:784
 #: ../xffm/response/templates/fileresponse.hh:233
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:106
-#: ../xffm/menus/templates/mainMenu.hh:129
-#: ../xffm/menus/templates/mainMenu.hh:148
-#: ../xffm/menus/templates/mainMenu.hh:190
+#: ../xffm/menus/templates/mainMenu.hh:108
+#: ../xffm/menus/templates/mainMenu.hh:132
+#: ../xffm/menus/templates/mainMenu.hh:151
+#: ../xffm/menus/templates/mainMenu.hh:193
 msgid   "Name"
 msgstr  "ਨਾਂ"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:370
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/templates/properties.hh:370
 #: ../xffm/fm/classes/child.hh:282 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:107
-#: ../xffm/menus/templates/mainMenu.hh:130
-#: ../xffm/menus/templates/mainMenu.hh:149
-#: ../xffm/menus/templates/mainMenu.hh:187
+#: ../xffm/menus/templates/mainMenu.hh:109
+#: ../xffm/menus/templates/mainMenu.hh:133
+#: ../xffm/menus/templates/mainMenu.hh:152
+#: ../xffm/menus/templates/mainMenu.hh:190
 msgid   "Date"
 msgstr  "ਮਿਤੀ"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:369
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/templates/properties.hh:369
 #: ../xffm/fm/classes/child.hh:283 ../xffm/menus/templates/mainMenu.hh:37
-#: ../xffm/menus/templates/mainMenu.hh:108
-#: ../xffm/menus/templates/mainMenu.hh:131
-#: ../xffm/menus/templates/mainMenu.hh:150
-#: ../xffm/menus/templates/mainMenu.hh:188
+#: ../xffm/menus/templates/mainMenu.hh:110
+#: ../xffm/menus/templates/mainMenu.hh:134
+#: ../xffm/menus/templates/mainMenu.hh:153
+#: ../xffm/menus/templates/mainMenu.hh:191
 msgid   "Size"
 msgstr  "ਆਕਾਰ"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:284
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/classes/child.hh:284
 #: ../xffm/menus/templates/mainMenu.hh:38
-#: ../xffm/menus/templates/mainMenu.hh:109
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:151
-#: ../xffm/menus/templates/mainMenu.hh:189
+#: ../xffm/menus/templates/mainMenu.hh:111
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:154
+#: ../xffm/menus/templates/mainMenu.hh:192
 msgid   "File type"
 msgstr  "ਫਾਇਲ ਕਿਸਮ"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:773
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:779
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:73
-#: ../xffm/menus/templates/mainMenu.hh:110
-#: ../xffm/menus/templates/mainMenu.hh:225
+#: ../xffm/menus/templates/mainMenu.hh:75
+#: ../xffm/menus/templates/mainMenu.hh:112
+#: ../xffm/menus/templates/mainMenu.hh:228
 msgid   "Apply modifications"
 msgstr  "ਸੋਧ ਲਾਗੂ ਕਰੋ"
 
-#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:86
+#: ../xffm/fm/templates/window.hh:731 ../xffm/fm/templates/window.hh:756
+#: ../xffm/fm/templates/gridview.hh:592 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:90
 msgid   "Add bookmark"
 msgstr  "ਬੁੱਕਮਾਰਕ ਵਿਚ ਜੋਡ਼੍ਹੋ"
 
-#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
-#: ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/fm/templates/window.hh:731 ../xffm/fm/templates/window.hh:757
+#: ../xffm/fm/templates/gridview.hh:535 ../xffm/fm/templates/gridview.hh:595
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:89
 #: ../xffm/menus/templates/gridviewmenu.hh:29
 #: ../xffm/menus/templates/gridviewmenu.hh:65
 #: ../xffm/menus/templates/gridviewmenu.hh:91
 msgid   "Remove bookmark"
 msgstr  "ਬੁੱਕਮਾਰਕ ਹਟਾਓ"
 
-#: ../xffm/fm/templates/window.hh:731 ../xffm/menus/templates/mainMenu.hh:24
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:83
+#: ../xffm/fm/templates/window.hh:737 ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:85
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "ਰੱਦੀ ਖਾਲੀ ਕਰੋ(E)"
@@ -401,15 +401,15 @@ msgstr  "ਰੱਦੀ ਖਾਲੀ ਕਰੋ(E)"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "ਨਿਯਮਤ ਸਮੀਕਰਨ, ਜਿਸ ਨੂੰ ਤਬਦੀਲ ਕੀਤਾ ਜਾਵੇਗਾ।"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ(w)"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
-#: ../xffm/fm/templates/gridview.hh:621
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:578
+#: ../xffm/fm/templates/gridview.hh:623
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -428,7 +428,7 @@ msgstr  "ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ(w)"
 msgid   "Delete"
 msgstr  "ਹਟਾਓ(D)"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:571
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -436,25 +436,25 @@ msgstr  "ਹਟਾਓ(D)"
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "ਚੁਣੇ ਆਬਜੈਕਟਾਂ ਨਾਲ ਨਵਾਂ ਕੰਪਰੈੱਸ ਅਕਾਇਵ ਬਣਾਓ"
 
-#: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
-#: ../xffm/fm/templates/gridview.hh:749
+#: ../xffm/fm/templates/gridview.hh:482 ../xffm/fm/templates/gridview.hh:533
+#: ../xffm/fm/templates/gridview.hh:577 ../xffm/fm/templates/gridview.hh:622
+#: ../xffm/fm/templates/gridview.hh:751
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Properties"
 msgstr  "ਵਿਸ਼ੇਸ਼ਤਾ"
 
-#: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:605
+#: ../xffm/fm/templates/gridview.hh:485 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:607
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
 msgid   "Unmount Volume"
 msgstr  "ਵਾਲੀਅਮ ਅਣ-ਮਾਊਂਟ ਕਰੋ(m)"
 
-#: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
+#: ../xffm/fm/templates/gridview.hh:488 ../xffm/fm/templates/gridview.hh:507
+#: ../xffm/fm/templates/gridview.hh:516 ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -462,14 +462,14 @@ msgstr  "ਵਾਲੀਅਮ ਅਣ-ਮਾਊਂਟ ਕਰੋ(m)"
 msgid   "Mount Volume"
 msgstr  "ਵਾਲੀਅਮ ਮਾਊਂਟ ਕਰੋ(M)"
 
-#: ../xffm/fm/templates/gridview.hh:556
+#: ../xffm/fm/templates/gridview.hh:558
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
 msgid   "Extract archive"
 msgstr  "ਅਕਾਇਵ ਖਿਲਾਰੋ"
 
-#: ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -481,7 +481,7 @@ msgstr  "ਅਕਾਇਵ ਖਿਲਾਰੋ"
 msgid   "Open in new tab"
 msgstr  "ਨਵੀਂ ਟੈਬ ਖੋਲ੍ਹੋ"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -490,7 +490,7 @@ msgstr  "ਨਵੀਂ ਟੈਬ ਖੋਲ੍ਹੋ"
 msgid   "Rename"
 msgstr  "ਨਾਂ ਬਦਲੋ"
 
-#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -499,15 +499,15 @@ msgstr  "ਨਾਂ ਬਦਲੋ"
 msgid   "Duplicate"
 msgstr  "ਡੁਪਲੀਕੇਟ(D)"
 
-#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
-#: ../xffm/fm/templates/gridview.hh:811
+#: ../xffm/fm/templates/gridview.hh:615 ../xffm/fm/templates/gridview.hh:812
+#: ../xffm/fm/templates/gridview.hh:813
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
 msgid   "auto"
 msgstr  "ਆਟੋ"
 
-#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:639
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -516,20 +516,20 @@ msgstr  "ਆਟੋ"
 msgid   "Decrypt File..."
 msgstr  "ਫਾਇਲ ਡਿਸਕ੍ਰਿਪਟ(D)..."
 
-#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
+#: ../xffm/fm/templates/gridview.hh:634 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
 msgid   "Encrypt File..."
 msgstr  "ਫਾਇਲ ਇੰਕ੍ਰਿਪਟ(E)..."
 
-#: ../xffm/fm/templates/gridview.hh:651
+#: ../xffm/fm/templates/gridview.hh:653
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 msgid   "Multiple selections"
 msgstr  "ਕਈ ਭਾਗ"
 
-#: ../xffm/fm/templates/gridview.hh:673
+#: ../xffm/fm/templates/gridview.hh:675
 msgid   "eCryptfs Volume"
 msgstr  "eCryptfs ਵਾਲੀਅਮ"
 
@@ -634,7 +634,7 @@ msgstr  "ਤਬਦੀਲੀਆਂ ਲਾਗੂ ਕਰੋ"
 #: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:311
+#: ../xffm/response/templates/dialogbasic.hh:312
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -659,12 +659,18 @@ msgstr  "ਠੀਕ ਤਰ੍ਹਾਂ ਰੱਦੀ ਵਿੱਚ ਭੇਜਿਆ 
 msgid   "Source:"
 msgstr  "ਸਰੋਤ:"
 
-#: ../xffm/fm/classes/localdir.hh:176 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/fm/classes/localdir.hh:31
+#: ../xffm/response/templates/efsresponse.hh:663
+#: ../xffm/response/templates/efsresponse.hh:669
+msgid   "Folder does not exist"
+msgstr  "ਫੋਲਡਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ"
+
+#: ../xffm/fm/classes/localdir.hh:167 ../xffm/find/classes/fgr.hh:202
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Regular expression"
 msgstr  "ਨਿਯਮਤ ਸਮੀਕਰਨ(R)"
 
-#: ../xffm/fm/classes/localdir.hh:180
+#: ../xffm/fm/classes/localdir.hh:171
 #, fuzzy, c-format
 msgid   "%s (%s Filtered)"
 msgstr  "%s (%s ਨਾ-ਪੜ੍ਹੇ)"
@@ -677,22 +683,22 @@ msgstr  "ਰੰਗ"
 msgid   "Switch button"
 msgstr  "ਸਵਿੱਚ ਬਟਨ"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:89
-#: ../xffm/menus/templates/mainMenu.hh:118
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
+#: ../xffm/menus/templates/mainMenu.hh:121
 msgid   "Search"
 msgstr  "ਖੋਜ"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:91
-#: ../xffm/menus/templates/mainMenu.hh:119
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:68
+#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:122
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "ਇੱਕ ਟਰਮੀਨਲ ਖੋਲ੍ਹੋ"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:31 ../xffm/menus/templates/mainMenu.hh:67
-#: ../xffm/menus/templates/mainMenu.hh:92
-#: ../xffm/menus/templates/mainMenu.hh:120
+#: ../xffm/fm/classes/fmbuttonbox.hh:31 ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:123
 msgid   "Home"
 msgstr  "ਘਰ"
 
@@ -704,7 +710,7 @@ msgstr  "ਨਵੀਂ ਵਿੰਡੋ ਖੋਲ੍ਹੋ"
 msgid   "Icon Size"
 msgstr  "ਆਈਕਾਨ ਸਾਈਜ਼"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:71 ../xffm/menus/templates/mainMenu.hh:71
+#: ../xffm/fm/classes/fmbuttonbox.hh:71 ../xffm/menus/templates/mainMenu.hh:73
 msgid   "Color settings"
 msgstr  "ਰੰਗ ਸੈਟਿੰਗ"
 
@@ -1304,7 +1310,7 @@ msgstr  "ਕੇਵਲ ਫਾਇਲਾਂ ਵੇਖੋ"
 #: ../xffm/response/templates/untarresponse.hh:164
 #: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:314
+#: ../xffm/response/templates/dialogbasic.hh:315
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "ਲਾਗੂ ਕਰੋ(p)"
@@ -1356,11 +1362,6 @@ msgstr  "ਅਣ-ਇੰਕ੍ਰਿਪਟਡ"
 #: ../xffm/response/templates/efsresponse.hh:230
 msgid   "Confirm"
 msgstr  "ਪੁਸ਼ਟੀ"
-
-#: ../xffm/response/templates/efsresponse.hh:663
-#: ../xffm/response/templates/efsresponse.hh:669
-msgid   "Folder does not exist"
-msgstr  "ਫੋਲਡਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ"
 
 #: ../xffm/response/templates/efsresponse.hh:789
 #, fuzzy, c-format
@@ -1723,7 +1724,7 @@ msgid   "Searching..."
 msgstr  "ਖੋਜ ਜਾਰੀ ਹੈ…"
 
 #: ../xffm/find/templates/findsignals.hh:452
-#: ../xffm/find/templates/dndbox.hh:71
+#: ../xffm/find/templates/dndbox.hh:84
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "ਕੋਈ ਮੌਜੂਦਾ ਐਕਸ਼ਨ ਨਹੀਂ ਹੈ।"
@@ -1748,23 +1749,23 @@ msgstr[1]       ""
 msgid   "%s Finished : %s"
 msgstr  "%s ਨੇ %s ਨੂੰ ਖਤਮ ਕੀਤਾ"
 
-#: ../xffm/find/templates/dndbox.hh:133
+#: ../xffm/find/templates/dndbox.hh:146
 #, fuzzy
 msgid   "Edit all"
 msgstr  "ਪੂਰਾ ਸੋਧੋ(E)"
 
-#: ../xffm/find/templates/dndbox.hh:146
+#: ../xffm/find/templates/dndbox.hh:159
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "ਖੋਜ ਨਤੀਜੇ: %s"
 
-#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/find/templates/dndbox.hh:173 ../xffm/menus/templates/mainMenu.hh:48
+#: ../xffm/menus/templates/mainMenu.hh:74
+#: ../xffm/menus/templates/mainMenu.hh:102
 msgid   "Exit"
 msgstr  "ਬੰਦ ਕਰੋ"
 
-#: ../xffm/find/templates/dndbox.hh:276
+#: ../xffm/find/templates/dndbox.hh:300
 msgid   "Search results"
 msgstr  "ਖੋਜ ਨਤੀਜੇ"
 
@@ -1945,8 +1946,8 @@ msgstr  "ਰੈਗੂਲਰ"
 #: ../xffm/menus/templates/pathbarmenu.hh:38
 #: ../xffm/menus/templates/pathbarmenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:70
-#: ../xffm/menus/templates/mainMenu.hh:95
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:97
 msgid   "Open in New Window"
 msgstr  "ਨਵੀਂ ਵਿੰਡੋ ਵਿੱਚ ਖੋਲ੍ਹੋ(W)"
 
@@ -1960,8 +1961,8 @@ msgstr  "ਨਵੀਂ ਵਿੰਡੋ ਵਿੱਚ ਖੋਲ੍ਹੋ(W)"
 #: ../xffm/menus/templates/outputMenu.hh:32
 #: ../xffm/menus/templates/outputMenu.hh:46
 #: ../xffm/menus/templates/outputMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:98 ../xffm/menus/templates/menu.hh:181
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:100 ../xffm/menus/templates/menu.hh:181
 #, fuzzy
 msgid   "Show Clipboard"
 msgstr  "ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ(T)"
@@ -2025,21 +2026,41 @@ msgid   "Default Color"
 msgstr  "ਡਿਫਾਲਟ ਰੰਗ(D)"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:96
+#: ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:98
 msgid   "Environment"
 msgstr  "ਇੰਵਾਇਰਨਮਿੰਟ"
 
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:124
+#: ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:113
+msgid   "About"
+msgstr  "ਇਸ ਬਾਰੇ"
+
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:127
 #: ../xffm/menus/templates/gridviewmenu.hh:79
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "ਕਰੇਟ ਮੋਡ ਬਦਲੋ"
 
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:71
+#: ../xffm/menus/templates/mainMenu.hh:101
 msgid   "Clear Clipboard History"
 msgstr  "ਕਲਿੱਪਬੋਰਡ ਅਤੀਤ ਸਾਫ਼ ਕਰੋ(l)"
+
+#: ../xffm/menus/templates/mainMenu.hh:388
+#, c-format
+msgid   "License:"
+msgstr  "ਲਾਇਸੈਂਸ:"
+
+#: ../xffm/menus/templates/mainMenu.hh:389
+#, fuzzy
+msgid   "Author Name:"
+msgstr  "ਲੇਖਕ ਨਾਂ:"
+
+#: ../xffm/menus/templates/mainMenu.hh:390
+#, fuzzy
+msgid   "Author Email Address:"
+msgstr  "aalam@users.sf.net"
 

@@ -4,6 +4,7 @@
  */
 #ifndef XFFM_H
 #define XFFM_H
+#define XFFM_VERSION "4.22.2-1"
 #include "config.h"
 #include "types.h"
 #define REGEX_HISTORY g_get_user_data_dir(),"xffm4","regex",NULL

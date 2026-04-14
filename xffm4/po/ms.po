@@ -1,4 +1,4 @@
-# Xffm4 translation file: mié 21 ene 2026 15:11:18 CST
+# Xffm4 translation file: mar 14 abr 2026 10:01:08 CST
 # Merged from existing open source files
 # http://xffm.sf.net
 #
@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: xffm4\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2026-01-21 15:04-0600\n"
+        "POT-Creation-Date: 2026-04-14 09:59-0600\n"
         "PO-Revision-Date: 2003-08-10 16:00+0800\n"
         "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
         "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr  "Project-Id-Version: xffm4\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:851
+#: ../xffm/fm/templates/clipboard.hh:138 ../xffm/fm/templates/gridview.hh:853
 #: ../xffm/menus/templates/pathbarmenu.hh:15
 #: ../xffm/menus/templates/pathbarmenu.hh:28
 #: ../xffm/menus/templates/pathbarmenu.hh:40
@@ -30,7 +30,7 @@ msgstr  "Papanklip kosong."
 msgid   "Clipboard contents"
 msgstr  "Tampal kandungan papan klip"
 
-#: ../xffm/fm/templates/clipboard.hh:142 ../xffm/fm/templates/window.hh:554
+#: ../xffm/fm/templates/clipboard.hh:142 ../xffm/fm/templates/window.hh:560
 #, fuzzy
 msgid   "Invalid clip"
 msgstr  "Jenis Tak Sah"
@@ -58,7 +58,7 @@ msgstr  "ralat"
 msgid   "warning"
 msgstr  "amaran"
 
-#: ../xffm/fm/templates/run.hh:491
+#: ../xffm/fm/templates/run.hh:493
 #: ../xffm/response/classes/passwdresponse.hh:13
 #: ../xffm/response/classes/passwdresponse.hh:83
 #: ../xffm/response/classes/passwdresponse.hh:87
@@ -120,10 +120,10 @@ msgid   "Segmentation fault"
 msgstr  "Tetapkan sebagai default"
 
 #: ../xffm/fm/templates/runbutton.hh:320 ../xffm/fm/templates/window.hh:318
-#: ../xffm/fm/templates/gridview.hh:643
+#: ../xffm/fm/templates/gridview.hh:645
 #: ../xffm/response/templates/openwith.hh:138
-#: ../xffm/response/templates/dialogbasic.hh:306
-#: ../xffm/find/templates/dndbox.hh:165
+#: ../xffm/response/templates/dialogbasic.hh:307
+#: ../xffm/find/templates/dndbox.hh:178
 #: ../xffm/menus/templates/pathbarmenu.hh:17
 #: ../xffm/menus/templates/pathbarmenu.hh:30
 #: ../xffm/menus/templates/pathbarmenu.hh:42
@@ -133,9 +133,9 @@ msgstr  "Tetapkan sebagai default"
 #: ../xffm/menus/templates/outputMenu.hh:18
 #: ../xffm/menus/templates/outputMenu.hh:33
 #: ../xffm/menus/templates/outputMenu.hh:47
-#: ../xffm/menus/templates/mainMenu.hh:48
-#: ../xffm/menus/templates/mainMenu.hh:74
-#: ../xffm/menus/templates/mainMenu.hh:101
+#: ../xffm/menus/templates/mainMenu.hh:50
+#: ../xffm/menus/templates/mainMenu.hh:76
+#: ../xffm/menus/templates/mainMenu.hh:103
 #: ../xffm/menus/templates/gridviewmenu.hh:42
 #: ../xffm/menus/templates/gridviewmenu.hh:70
 #: ../xffm/menus/templates/gridviewmenu.hh:98
@@ -162,8 +162,8 @@ msgstr  "Sumber"
 msgid   "Invalid target folder"
 msgstr  "Nilai hujah yang tak sah"
 
-#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:574
-#: ../xffm/fm/templates/gridview.hh:619
+#: ../xffm/fm/templates/dnd.hh:671 ../xffm/fm/templates/gridview.hh:576
+#: ../xffm/fm/templates/gridview.hh:621
 #: ../xffm/response/classes/dndresponse.hh:22
 #: ../xffm/menus/templates/gridviewmenu.hh:36
 #: ../xffm/menus/templates/gridviewmenu.hh:58
@@ -194,17 +194,17 @@ msgstr  "fail"
 msgid   ": "
 msgstr  ":"
 
-#: ../xffm/fm/templates/factory.hh:318 ../xffm/fm/templates/factory.hh:341
+#: ../xffm/fm/templates/factory.hh:321 ../xffm/fm/templates/factory.hh:344
 msgid   "Full name"
 msgstr  "Nama Penuh"
 
-#: ../xffm/fm/templates/window.hh:603
+#: ../xffm/fm/templates/window.hh:609
 #, fuzzy
 msgid   "Long press time"
 msgstr  "Hujung panjang"
 
-#: ../xffm/fm/templates/window.hh:611 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:571 ../xffm/fm/templates/gridview.hh:616
+#: ../xffm/fm/templates/window.hh:617 ../xffm/fm/templates/gridview.hh:457
+#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
 #: ../xffm/menus/templates/inputMenu.hh:12
 #: ../xffm/menus/templates/inputMenu.hh:32
 #: ../xffm/menus/templates/inputMenu.hh:48
@@ -215,8 +215,8 @@ msgstr  "Hujung panjang"
 msgid   "Cut"
 msgstr  "Potong"
 
-#: ../xffm/fm/templates/window.hh:613 ../xffm/fm/templates/gridview.hh:455
-#: ../xffm/fm/templates/gridview.hh:570 ../xffm/fm/templates/gridview.hh:615
+#: ../xffm/fm/templates/window.hh:619 ../xffm/fm/templates/gridview.hh:457
+#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
 #: ../xffm/response/classes/dndresponse.hh:20
 #: ../xffm/menus/templates/inputMenu.hh:11
 #: ../xffm/menus/templates/inputMenu.hh:31
@@ -232,9 +232,9 @@ msgstr  "Potong"
 msgid   "Copy"
 msgstr  "Salin"
 
-#: ../xffm/fm/templates/window.hh:615 ../xffm/fm/templates/window.hh:725
-#: ../xffm/fm/templates/window.hh:752 ../xffm/fm/templates/gridview.hh:599
-#: ../xffm/fm/templates/gridview.hh:850
+#: ../xffm/fm/templates/window.hh:621 ../xffm/fm/templates/window.hh:731
+#: ../xffm/fm/templates/window.hh:758 ../xffm/fm/templates/gridview.hh:601
+#: ../xffm/fm/templates/gridview.hh:852
 #: ../xffm/menus/templates/pathbarmenu.hh:13
 #: ../xffm/menus/templates/pathbarmenu.hh:27
 #: ../xffm/menus/templates/pathbarmenu.hh:39
@@ -244,8 +244,8 @@ msgstr  "Salin"
 #: ../xffm/menus/templates/inputMenu.hh:49
 #: ../xffm/menus/templates/inputMenu.hh:66
 #: ../xffm/menus/templates/mainMenu.hh:17
-#: ../xffm/menus/templates/mainMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:84
+#: ../xffm/menus/templates/mainMenu.hh:62
+#: ../xffm/menus/templates/mainMenu.hh:86
 #: ../xffm/menus/templates/gridviewmenu.hh:32
 #: ../xffm/menus/templates/gridviewmenu.hh:63
 #: ../xffm/menus/templates/gridviewmenu.hh:88
@@ -253,26 +253,26 @@ msgstr  "Salin"
 msgid   "Paste"
 msgstr  "Tepek"
 
-#: ../xffm/fm/templates/window.hh:617
+#: ../xffm/fm/templates/window.hh:623
 msgid   "New Tab"
 msgstr  "Tab Baru"
 
-#: ../xffm/fm/templates/window.hh:618 ../xffm/fm/templates/window.hh:620
+#: ../xffm/fm/templates/window.hh:624 ../xffm/fm/templates/window.hh:626
 #, fuzzy
 msgid   "Main menu"
 msgstr  "Menu Utama"
 
-#: ../xffm/fm/templates/window.hh:623 ../xffm/fm/templates/window.hh:720
-#: ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:629 ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:732
 #: ../xffm/response/templates/regexpresponse.hh:13
 #: ../xffm/menus/templates/mainMenu.hh:28
-#: ../xffm/menus/templates/mainMenu.hh:56
-#: ../xffm/menus/templates/mainMenu.hh:82
+#: ../xffm/menus/templates/mainMenu.hh:58
+#: ../xffm/menus/templates/mainMenu.hh:84
 #, fuzzy
 msgid   "Match regular expression"
 msgstr  "sepadan dengan ungkapan biasa"
 
-#: ../xffm/fm/templates/window.hh:720 ../xffm/fm/templates/window.hh:726
+#: ../xffm/fm/templates/window.hh:726 ../xffm/fm/templates/window.hh:732
 #: ../xffm/menus/templates/inputMenu.hh:15
 #: ../xffm/menus/templates/inputMenu.hh:29
 #: ../xffm/menus/templates/inputMenu.hh:45
@@ -282,122 +282,122 @@ msgstr  "sepadan dengan ungkapan biasa"
 #: ../xffm/menus/templates/outputMenu.hh:42
 #: ../xffm/menus/templates/outputMenu.hh:56
 #: ../xffm/menus/templates/mainMenu.hh:23
-#: ../xffm/menus/templates/mainMenu.hh:61
-#: ../xffm/menus/templates/mainMenu.hh:88
+#: ../xffm/menus/templates/mainMenu.hh:63
+#: ../xffm/menus/templates/mainMenu.hh:90
 msgid   "Select All"
 msgstr  "Pilih Semua"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
 #: ../xffm/menus/templates/mainMenu.hh:27
 msgid   "Show"
 msgstr  "Tunjuk"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
-#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:29
-#: ../xffm/menus/templates/mainMenu.hh:103
-#: ../xffm/menus/templates/mainMenu.hh:126
-#: ../xffm/menus/templates/mainMenu.hh:139
-#: ../xffm/menus/templates/mainMenu.hh:184
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
+#: ../xffm/fm/templates/window.hh:784 ../xffm/menus/templates/mainMenu.hh:29
+#: ../xffm/menus/templates/mainMenu.hh:105
+#: ../xffm/menus/templates/mainMenu.hh:129
+#: ../xffm/menus/templates/mainMenu.hh:142
+#: ../xffm/menus/templates/mainMenu.hh:187
 #, fuzzy
 msgid   "Hidden files"
 msgstr  "Papar fail tersembunyi"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:727
-#: ../xffm/fm/templates/window.hh:778 ../xffm/menus/templates/mainMenu.hh:30
-#: ../xffm/menus/templates/mainMenu.hh:104
-#: ../xffm/menus/templates/mainMenu.hh:127
-#: ../xffm/menus/templates/mainMenu.hh:140
-#: ../xffm/menus/templates/mainMenu.hh:185
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:733
+#: ../xffm/fm/templates/window.hh:784 ../xffm/menus/templates/mainMenu.hh:30
+#: ../xffm/menus/templates/mainMenu.hh:106
+#: ../xffm/menus/templates/mainMenu.hh:130
+#: ../xffm/menus/templates/mainMenu.hh:143
+#: ../xffm/menus/templates/mainMenu.hh:188
 #, fuzzy
 msgid   "Backup files"
 msgstr  "Fail backup"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/menus/templates/mainMenu.hh:32
+#: ../xffm/fm/templates/window.hh:727 ../xffm/menus/templates/mainMenu.hh:32
 #, fuzzy
 msgid   "Sort mode"
 msgstr  "Mod Tegas"
 
-#: ../xffm/fm/templates/window.hh:721 ../xffm/fm/templates/window.hh:778
+#: ../xffm/fm/templates/window.hh:727 ../xffm/fm/templates/window.hh:784
 #: ../xffm/menus/templates/mainMenu.hh:34
-#: ../xffm/menus/templates/mainMenu.hh:105
-#: ../xffm/menus/templates/mainMenu.hh:128
-#: ../xffm/menus/templates/mainMenu.hh:141
-#: ../xffm/menus/templates/mainMenu.hh:186
+#: ../xffm/menus/templates/mainMenu.hh:107
+#: ../xffm/menus/templates/mainMenu.hh:131
+#: ../xffm/menus/templates/mainMenu.hh:144
+#: ../xffm/menus/templates/mainMenu.hh:189
 msgid   "Descending"
 msgstr  "Turun (e)"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:778
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:784
 #: ../xffm/response/templates/fileresponse.hh:233
 #: ../xffm/menus/templates/mainMenu.hh:35
-#: ../xffm/menus/templates/mainMenu.hh:106
-#: ../xffm/menus/templates/mainMenu.hh:129
-#: ../xffm/menus/templates/mainMenu.hh:148
-#: ../xffm/menus/templates/mainMenu.hh:190
+#: ../xffm/menus/templates/mainMenu.hh:108
+#: ../xffm/menus/templates/mainMenu.hh:132
+#: ../xffm/menus/templates/mainMenu.hh:151
+#: ../xffm/menus/templates/mainMenu.hh:193
 msgid   "Name"
 msgstr  "Nama"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:370
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/templates/properties.hh:370
 #: ../xffm/fm/classes/child.hh:282 ../xffm/menus/templates/mainMenu.hh:36
-#: ../xffm/menus/templates/mainMenu.hh:107
-#: ../xffm/menus/templates/mainMenu.hh:130
-#: ../xffm/menus/templates/mainMenu.hh:149
-#: ../xffm/menus/templates/mainMenu.hh:187
+#: ../xffm/menus/templates/mainMenu.hh:109
+#: ../xffm/menus/templates/mainMenu.hh:133
+#: ../xffm/menus/templates/mainMenu.hh:152
+#: ../xffm/menus/templates/mainMenu.hh:190
 msgid   "Date"
 msgstr  "Tarikh"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/templates/properties.hh:369
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/templates/properties.hh:369
 #: ../xffm/fm/classes/child.hh:283 ../xffm/menus/templates/mainMenu.hh:37
-#: ../xffm/menus/templates/mainMenu.hh:108
-#: ../xffm/menus/templates/mainMenu.hh:131
-#: ../xffm/menus/templates/mainMenu.hh:150
-#: ../xffm/menus/templates/mainMenu.hh:188
+#: ../xffm/menus/templates/mainMenu.hh:110
+#: ../xffm/menus/templates/mainMenu.hh:134
+#: ../xffm/menus/templates/mainMenu.hh:153
+#: ../xffm/menus/templates/mainMenu.hh:191
 msgid   "Size"
 msgstr  "Saiz"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:728
-#: ../xffm/fm/templates/window.hh:778 ../xffm/fm/classes/child.hh:284
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:734
+#: ../xffm/fm/templates/window.hh:784 ../xffm/fm/classes/child.hh:284
 #: ../xffm/menus/templates/mainMenu.hh:38
-#: ../xffm/menus/templates/mainMenu.hh:109
-#: ../xffm/menus/templates/mainMenu.hh:132
-#: ../xffm/menus/templates/mainMenu.hh:151
-#: ../xffm/menus/templates/mainMenu.hh:189
+#: ../xffm/menus/templates/mainMenu.hh:111
+#: ../xffm/menus/templates/mainMenu.hh:135
+#: ../xffm/menus/templates/mainMenu.hh:154
+#: ../xffm/menus/templates/mainMenu.hh:192
 #, fuzzy
 msgid   "File type"
 msgstr  "Jenis fail:"
 
-#: ../xffm/fm/templates/window.hh:722 ../xffm/fm/templates/window.hh:773
+#: ../xffm/fm/templates/window.hh:728 ../xffm/fm/templates/window.hh:779
 #: ../xffm/menus/templates/mainMenu.hh:39
-#: ../xffm/menus/templates/mainMenu.hh:73
-#: ../xffm/menus/templates/mainMenu.hh:110
-#: ../xffm/menus/templates/mainMenu.hh:225
+#: ../xffm/menus/templates/mainMenu.hh:75
+#: ../xffm/menus/templates/mainMenu.hh:112
+#: ../xffm/menus/templates/mainMenu.hh:228
 #, fuzzy
 msgid   "Apply modifications"
 msgstr  "Aplikasi"
 
-#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:750
-#: ../xffm/fm/templates/gridview.hh:590 ../xffm/menus/templates/mainMenu.hh:62
-#: ../xffm/menus/templates/mainMenu.hh:86
+#: ../xffm/fm/templates/window.hh:731 ../xffm/fm/templates/window.hh:756
+#: ../xffm/fm/templates/gridview.hh:592 ../xffm/menus/templates/mainMenu.hh:64
+#: ../xffm/menus/templates/mainMenu.hh:88
 #: ../xffm/menus/templates/gridviewmenu.hh:28
 #: ../xffm/menus/templates/gridviewmenu.hh:64
 #: ../xffm/menus/templates/gridviewmenu.hh:90
 msgid   "Add bookmark"
 msgstr  "Tambah"
 
-#: ../xffm/fm/templates/window.hh:725 ../xffm/fm/templates/window.hh:751
-#: ../xffm/fm/templates/gridview.hh:533 ../xffm/fm/templates/gridview.hh:593
-#: ../xffm/menus/templates/mainMenu.hh:63
-#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/fm/templates/window.hh:731 ../xffm/fm/templates/window.hh:757
+#: ../xffm/fm/templates/gridview.hh:535 ../xffm/fm/templates/gridview.hh:595
+#: ../xffm/menus/templates/mainMenu.hh:65
+#: ../xffm/menus/templates/mainMenu.hh:89
 #: ../xffm/menus/templates/gridviewmenu.hh:29
 #: ../xffm/menus/templates/gridviewmenu.hh:65
 #: ../xffm/menus/templates/gridviewmenu.hh:91
 msgid   "Remove bookmark"
 msgstr  "Buang tandabuku"
 
-#: ../xffm/fm/templates/window.hh:731 ../xffm/menus/templates/mainMenu.hh:24
-#: ../xffm/menus/templates/mainMenu.hh:59
-#: ../xffm/menus/templates/mainMenu.hh:83
+#: ../xffm/fm/templates/window.hh:737 ../xffm/menus/templates/mainMenu.hh:24
+#: ../xffm/menus/templates/mainMenu.hh:61
+#: ../xffm/menus/templates/mainMenu.hh:85
 #, fuzzy
 msgid   "Empty trash bin"
 msgstr  "Kosongkan Tong Sampah"
@@ -409,15 +409,15 @@ msgstr  "Kosongkan Tong Sampah"
 msgid   "Regular Expression syntax is incorrect"
 msgstr  "Penyunting Ungkapan Nalar (regexp)"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:614
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:616
 #: ../xffm/menus/templates/gridviewmenu.hh:23
 #: ../xffm/menus/templates/gridviewmenu.hh:54
 #: ../xffm/menus/templates/gridviewmenu.hh:81
 msgid   "Open with"
 msgstr  "Buka dengan"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:576
-#: ../xffm/fm/templates/gridview.hh:621
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:578
+#: ../xffm/fm/templates/gridview.hh:623
 #: ../xffm/response/classes/rmlistresponse.hh:9
 #: ../xffm/response/classes/rmlistresponse.hh:11
 #: ../xffm/response/classes/rmlistresponse.hh:18
@@ -436,7 +436,7 @@ msgstr  "Buka dengan"
 msgid   "Delete"
 msgstr  "Padam (D)"
 
-#: ../xffm/fm/templates/gridview.hh:455 ../xffm/fm/templates/gridview.hh:569
+#: ../xffm/fm/templates/gridview.hh:457 ../xffm/fm/templates/gridview.hh:571
 #: ../xffm/response/templates/tarresponse.hh:35
 #: ../xffm/menus/templates/gridviewmenu.hh:25
 #: ../xffm/menus/templates/gridviewmenu.hh:68
@@ -445,17 +445,17 @@ msgstr  "Padam (D)"
 msgid   "Create a compressed archive with the selected objects"
 msgstr  "Mulakan perbualan dengan orang hubungan yang dipilih."
 
-#: ../xffm/fm/templates/gridview.hh:480 ../xffm/fm/templates/gridview.hh:531
-#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
-#: ../xffm/fm/templates/gridview.hh:749
+#: ../xffm/fm/templates/gridview.hh:482 ../xffm/fm/templates/gridview.hh:533
+#: ../xffm/fm/templates/gridview.hh:577 ../xffm/fm/templates/gridview.hh:622
+#: ../xffm/fm/templates/gridview.hh:751
 #: ../xffm/menus/templates/gridviewmenu.hh:37
 #: ../xffm/menus/templates/gridviewmenu.hh:60
 #: ../xffm/menus/templates/gridviewmenu.hh:93
 msgid   "Properties"
 msgstr  "Ciri-ciri"
 
-#: ../xffm/fm/templates/gridview.hh:483 ../xffm/fm/templates/gridview.hh:511
-#: ../xffm/fm/templates/gridview.hh:605
+#: ../xffm/fm/templates/gridview.hh:485 ../xffm/fm/templates/gridview.hh:513
+#: ../xffm/fm/templates/gridview.hh:607
 #: ../xffm/menus/templates/gridviewmenu.hh:27
 #: ../xffm/menus/templates/gridviewmenu.hh:52
 #: ../xffm/menus/templates/gridviewmenu.hh:78
@@ -463,8 +463,8 @@ msgstr  "Ciri-ciri"
 msgid   "Unmount Volume"
 msgstr  "Lekap Volum"
 
-#: ../xffm/fm/templates/gridview.hh:486 ../xffm/fm/templates/gridview.hh:505
-#: ../xffm/fm/templates/gridview.hh:514 ../xffm/fm/templates/gridview.hh:608
+#: ../xffm/fm/templates/gridview.hh:488 ../xffm/fm/templates/gridview.hh:507
+#: ../xffm/fm/templates/gridview.hh:516 ../xffm/fm/templates/gridview.hh:610
 #: ../xffm/response/templates/mountresponse.hh:166
 #: ../xffm/menus/templates/gridviewmenu.hh:26
 #: ../xffm/menus/templates/gridviewmenu.hh:51
@@ -472,7 +472,7 @@ msgstr  "Lekap Volum"
 msgid   "Mount Volume"
 msgstr  "Lekap Volum"
 
-#: ../xffm/fm/templates/gridview.hh:556
+#: ../xffm/fm/templates/gridview.hh:558
 #: ../xffm/menus/templates/gridviewmenu.hh:24
 #: ../xffm/menus/templates/gridviewmenu.hh:69
 #: ../xffm/menus/templates/gridviewmenu.hh:97
@@ -480,7 +480,7 @@ msgstr  "Lekap Volum"
 msgid   "Extract archive"
 msgstr  "Ekstrak Sini"
 
-#: ../xffm/fm/templates/gridview.hh:568
+#: ../xffm/fm/templates/gridview.hh:570
 #: ../xffm/menus/templates/pathbarmenu.hh:11
 #: ../xffm/menus/templates/pathbarmenu.hh:25
 #: ../xffm/menus/templates/pathbarmenu.hh:37
@@ -492,7 +492,7 @@ msgstr  "Ekstrak Sini"
 msgid   "Open in new tab"
 msgstr  "Buka tab baru"
 
-#: ../xffm/fm/templates/gridview.hh:572 ../xffm/fm/templates/gridview.hh:617
+#: ../xffm/fm/templates/gridview.hh:574 ../xffm/fm/templates/gridview.hh:619
 #: ../xffm/response/classes/mvresponse.hh:11
 #: ../xffm/response/classes/mvresponse.hh:19
 #: ../xffm/menus/templates/gridviewmenu.hh:34
@@ -501,7 +501,7 @@ msgstr  "Buka tab baru"
 msgid   "Rename"
 msgstr  "Tukarnama"
 
-#: ../xffm/fm/templates/gridview.hh:573 ../xffm/fm/templates/gridview.hh:618
+#: ../xffm/fm/templates/gridview.hh:575 ../xffm/fm/templates/gridview.hh:620
 #: ../xffm/response/classes/cpresponse.hh:13
 #: ../xffm/response/classes/cpresponse.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:35
@@ -510,8 +510,8 @@ msgstr  "Tukarnama"
 msgid   "Duplicate"
 msgstr  "Gandakan"
 
-#: ../xffm/fm/templates/gridview.hh:613 ../xffm/fm/templates/gridview.hh:810
-#: ../xffm/fm/templates/gridview.hh:811
+#: ../xffm/fm/templates/gridview.hh:615 ../xffm/fm/templates/gridview.hh:812
+#: ../xffm/fm/templates/gridview.hh:813
 #: ../xffm/menus/templates/gridviewmenu.hh:20
 #: ../xffm/menus/templates/gridviewmenu.hh:55
 #: ../xffm/menus/templates/gridviewmenu.hh:82
@@ -519,7 +519,7 @@ msgstr  "Gandakan"
 msgid   "auto"
 msgstr  "Wautoma"
 
-#: ../xffm/fm/templates/gridview.hh:630 ../xffm/fm/templates/gridview.hh:637
+#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:639
 #: ../xffm/response/templates/bfishresponse.hh:88
 #: ../xffm/response/templates/bfishresponse.hh:355
 #: ../xffm/menus/templates/gridviewmenu.hh:40
@@ -528,21 +528,21 @@ msgstr  "Wautoma"
 msgid   "Decrypt File..."
 msgstr  "Nyahsulitkan Fail..."
 
-#: ../xffm/fm/templates/gridview.hh:632 ../xffm/fm/templates/gridview.hh:635
+#: ../xffm/fm/templates/gridview.hh:634 ../xffm/fm/templates/gridview.hh:637
 #: ../xffm/menus/templates/gridviewmenu.hh:39
 #: ../xffm/menus/templates/gridviewmenu.hh:66
 #: ../xffm/menus/templates/gridviewmenu.hh:94
 msgid   "Encrypt File..."
 msgstr  "Sulitkan Fail..."
 
-#: ../xffm/fm/templates/gridview.hh:651
+#: ../xffm/fm/templates/gridview.hh:653
 #: ../xffm/response/templates/openwith.hh:161
 #: ../xffm/response/classes/cpresponse.hh:119
 #, fuzzy
 msgid   "Multiple selections"
 msgstr  "Urusan berbilang"
 
-#: ../xffm/fm/templates/gridview.hh:673
+#: ../xffm/fm/templates/gridview.hh:675
 msgid   "eCryptfs Volume"
 msgstr  "Volum eCryptfs"
 
@@ -650,7 +650,7 @@ msgstr  "Terap perubahan"
 #: ../xffm/response/templates/untarresponse.hh:160
 #: ../xffm/response/templates/tarresponse.hh:208
 #: ../xffm/response/templates/efsresponse.hh:199
-#: ../xffm/response/templates/dialogbasic.hh:311
+#: ../xffm/response/templates/dialogbasic.hh:312
 #: ../xffm/response/templates/bfishresponse.hh:169
 #: ../xffm/response/classes/dndresponse.hh:23
 #: ../xffm/response/classes/rmresponse.hh:20
@@ -676,12 +676,18 @@ msgstr  "Berjaya membuang %s"
 msgid   "Source:"
 msgstr  "Sumber:"
 
-#: ../xffm/fm/classes/localdir.hh:176 ../xffm/find/classes/fgr.hh:202
+#: ../xffm/fm/classes/localdir.hh:31
+#: ../xffm/response/templates/efsresponse.hh:663
+#: ../xffm/response/templates/efsresponse.hh:669
+msgid   "Folder does not exist"
+msgstr  "Folder tidak wujud"
+
+#: ../xffm/fm/classes/localdir.hh:167 ../xffm/find/classes/fgr.hh:202
 #: ../xffm/find/classes/fgr.hh:204
 msgid   "Regular expression"
 msgstr  "Ungkapan regular (regepx)"
 
-#: ../xffm/fm/classes/localdir.hh:180
+#: ../xffm/fm/classes/localdir.hh:171
 #, fuzzy, c-format
 msgid   "%s (%s Filtered)"
 msgstr  "%s (%s bytes)"
@@ -695,22 +701,22 @@ msgstr  "Warna"
 msgid   "Switch button"
 msgstr  "Butang carian"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:65
-#: ../xffm/menus/templates/mainMenu.hh:89
-#: ../xffm/menus/templates/mainMenu.hh:118
+#: ../xffm/fm/classes/fmbuttonbox.hh:29 ../xffm/menus/templates/mainMenu.hh:67
+#: ../xffm/menus/templates/mainMenu.hh:91
+#: ../xffm/menus/templates/mainMenu.hh:121
 msgid   "Search"
 msgstr  "Cari"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:66
-#: ../xffm/menus/templates/mainMenu.hh:91
-#: ../xffm/menus/templates/mainMenu.hh:119
+#: ../xffm/fm/classes/fmbuttonbox.hh:30 ../xffm/menus/templates/mainMenu.hh:68
+#: ../xffm/menus/templates/mainMenu.hh:93
+#: ../xffm/menus/templates/mainMenu.hh:122
 #, fuzzy
 msgid   "Open terminal"
 msgstr  "Buka Terminal"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:31 ../xffm/menus/templates/mainMenu.hh:67
-#: ../xffm/menus/templates/mainMenu.hh:92
-#: ../xffm/menus/templates/mainMenu.hh:120
+#: ../xffm/fm/classes/fmbuttonbox.hh:31 ../xffm/menus/templates/mainMenu.hh:69
+#: ../xffm/menus/templates/mainMenu.hh:94
+#: ../xffm/menus/templates/mainMenu.hh:123
 msgid   "Home"
 msgstr  "Rumah"
 
@@ -723,7 +729,7 @@ msgstr  "Buka dalam Tetingkap Baru"
 msgid   "Icon Size"
 msgstr  "Saiz Ikon"
 
-#: ../xffm/fm/classes/fmbuttonbox.hh:71 ../xffm/menus/templates/mainMenu.hh:71
+#: ../xffm/fm/classes/fmbuttonbox.hh:71 ../xffm/menus/templates/mainMenu.hh:73
 msgid   "Color settings"
 msgstr  "Seting warna"
 
@@ -1300,7 +1306,7 @@ msgstr  "Senarai fail sahaja"
 #: ../xffm/response/templates/untarresponse.hh:164
 #: ../xffm/response/templates/openwith.hh:266
 #: ../xffm/response/templates/tarresponse.hh:212
-#: ../xffm/response/templates/dialogbasic.hh:314
+#: ../xffm/response/templates/dialogbasic.hh:315
 #: ../xffm/response/templates/bfishresponse.hh:173
 msgid   "Apply"
 msgstr  "Terap"
@@ -1353,11 +1359,6 @@ msgstr  "Hantar Tanpa Disulitkan"
 #: ../xffm/response/templates/efsresponse.hh:230
 msgid   "Confirm"
 msgstr  "Pasti"
-
-#: ../xffm/response/templates/efsresponse.hh:663
-#: ../xffm/response/templates/efsresponse.hh:669
-msgid   "Folder does not exist"
-msgstr  "Folder tidak wujud"
 
 #: ../xffm/response/templates/efsresponse.hh:789
 #, fuzzy, c-format
@@ -1726,7 +1727,7 @@ msgid   "Searching..."
 msgstr  "Sedang mencari..."
 
 #: ../xffm/find/templates/findsignals.hh:452
-#: ../xffm/find/templates/dndbox.hh:71
+#: ../xffm/find/templates/dndbox.hh:84
 #, fuzzy
 msgid   "No editor for current action."
 msgstr  "Laksanakan transaksi semasa"
@@ -1751,23 +1752,23 @@ msgstr[1]       "Tiada padanan"
 msgid   "%s Finished : %s"
 msgstr  "%s Tamat : %s"
 
-#: ../xffm/find/templates/dndbox.hh:133
+#: ../xffm/find/templates/dndbox.hh:146
 #, fuzzy
 msgid   "Edit all"
 msgstr  "Edit Penuh "
 
-#: ../xffm/find/templates/dndbox.hh:146
+#: ../xffm/find/templates/dndbox.hh:159
 #, fuzzy, c-format
 msgid   "Search results for %s"
 msgstr  "Hasil Carian bagi '%s':"
 
-#: ../xffm/find/templates/dndbox.hh:160 ../xffm/menus/templates/mainMenu.hh:46
-#: ../xffm/menus/templates/mainMenu.hh:72
-#: ../xffm/menus/templates/mainMenu.hh:100
+#: ../xffm/find/templates/dndbox.hh:173 ../xffm/menus/templates/mainMenu.hh:48
+#: ../xffm/menus/templates/mainMenu.hh:74
+#: ../xffm/menus/templates/mainMenu.hh:102
 msgid   "Exit"
 msgstr  "Keluar"
 
-#: ../xffm/find/templates/dndbox.hh:276
+#: ../xffm/find/templates/dndbox.hh:300
 msgid   "Search results"
 msgstr  "Hasil carian"
 
@@ -1954,8 +1955,8 @@ msgstr  "Biasa"
 #: ../xffm/menus/templates/pathbarmenu.hh:38
 #: ../xffm/menus/templates/pathbarmenu.hh:51
 #: ../xffm/menus/templates/mainMenu.hh:18
-#: ../xffm/menus/templates/mainMenu.hh:70
-#: ../xffm/menus/templates/mainMenu.hh:95
+#: ../xffm/menus/templates/mainMenu.hh:72
+#: ../xffm/menus/templates/mainMenu.hh:97
 msgid   "Open in New Window"
 msgstr  "Buka dalam Tetingkap Baru"
 
@@ -1969,8 +1970,8 @@ msgstr  "Buka dalam Tetingkap Baru"
 #: ../xffm/menus/templates/outputMenu.hh:32
 #: ../xffm/menus/templates/outputMenu.hh:46
 #: ../xffm/menus/templates/outputMenu.hh:60
-#: ../xffm/menus/templates/mainMenu.hh:68
-#: ../xffm/menus/templates/mainMenu.hh:98 ../xffm/menus/templates/menu.hh:181
+#: ../xffm/menus/templates/mainMenu.hh:70
+#: ../xffm/menus/templates/mainMenu.hh:100 ../xffm/menus/templates/menu.hh:181
 msgid   "Show Clipboard"
 msgstr  "Tunjukkan Papan keratan"
 
@@ -2034,21 +2035,41 @@ msgid   "Default Color"
 msgstr  "Warna Default"
 
 #: ../xffm/menus/templates/mainMenu.hh:13
-#: ../xffm/menus/templates/mainMenu.hh:57
-#: ../xffm/menus/templates/mainMenu.hh:96
+#: ../xffm/menus/templates/mainMenu.hh:59
+#: ../xffm/menus/templates/mainMenu.hh:98
 msgid   "Environment"
 msgstr  "Persekitaran"
 
-#: ../xffm/menus/templates/mainMenu.hh:64
-#: ../xffm/menus/templates/mainMenu.hh:85
-#: ../xffm/menus/templates/mainMenu.hh:124
+#: ../xffm/menus/templates/mainMenu.hh:46
+#: ../xffm/menus/templates/mainMenu.hh:113
+msgid   "About"
+msgstr  "Mengenai"
+
+#: ../xffm/menus/templates/mainMenu.hh:66
+#: ../xffm/menus/templates/mainMenu.hh:87
+#: ../xffm/menus/templates/mainMenu.hh:127
 #: ../xffm/menus/templates/gridviewmenu.hh:79
 #, fuzzy
 msgid   "Toggle Text Mode"
 msgstr  "Toggel Mod Caret"
 
-#: ../xffm/menus/templates/mainMenu.hh:69
-#: ../xffm/menus/templates/mainMenu.hh:99
+#: ../xffm/menus/templates/mainMenu.hh:71
+#: ../xffm/menus/templates/mainMenu.hh:101
 msgid   "Clear Clipboard History"
 msgstr  "Kosongkan Rekod Papan Klip"
+
+#: ../xffm/menus/templates/mainMenu.hh:388
+#, c-format
+msgid   "License:"
+msgstr  "Lesen:"
+
+#: ../xffm/menus/templates/mainMenu.hh:389
+#, fuzzy
+msgid   "Author Name:"
+msgstr  "Pengarang:"
+
+#: ../xffm/menus/templates/mainMenu.hh:390
+#, fuzzy
+msgid   "Author Email Address:"
+msgstr  "Alamat E-Mail Lain:"
 
