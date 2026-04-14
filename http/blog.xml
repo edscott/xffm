@@ -1,5 +1,22 @@
 
 <blockquote>
+<date>Tuesday April 14, 2026</date>
+<title>Release 4.22.2-1</title>
+<pre>
+Release is now available at https://aur.archlinux.org/ with source
+tarball at https://sourceforge.net/projects/xffm/files/xffm%2B/
+<br>
+This release reenables rubberband selection as the bug in GTK4 has
+apparently been fixed. For this reason, the minimum GTK version is
+now required to 4.22.2.
+<br>
+Enjoy!
+
+</pre>
+</blockquote>
+
+
+<blockquote>
 <date>Wednesday January 21, 2026</date>
 <title>4_20_3 release 5</title>
 <pre>

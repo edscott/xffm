@@ -1,0 +1,4 @@
+Modify PKGBUILD for release, and run:
+   makepkg --printsrcinfo > .SRCINFO
+Then copy PKGBUILD and .SRCINFO to GIT/xffm-aur and commit/push.
+
