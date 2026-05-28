@@ -159,14 +159,15 @@ private:
               gdouble x,
               gdouble y,
               void *object ){
-      if (n_press != 2) return FALSE;
       TRACE("cvClick n_press = %d\n", n_press);
+      if (n_press != 2) return FALSE;
       auto p = (FileResponse *)object;
       auto eventController = GTK_EVENT_CONTROLLER(self);
 
       //auto button = gtk_event_controller_get_widget(eventController);
       //auto path = (const char *)g_object_get_data(G_OBJECT(button), "path");
       auto path = p->getSelectedPath(p->selectionModel());
+      DBG("path is %s\n", path);
       if (!path) return FALSE;     
       //if (!path) {path = g_strdup(p->startFolder()); }
      
@@ -220,7 +221,7 @@ private:
         gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(gesture1),1);
         gtk_widget_add_controller (GTK_WIDGET(columnView), 
             GTK_EVENT_CONTROLLER(gesture1));    
-        g_signal_connect (G_OBJECT(gesture1) , "released", 
+        g_signal_connect (G_OBJECT(gesture1) , "pressed", 
             EVENT_CALLBACK (cvClick), (void *)this);
         // no good addGestureClick(columnView);
         
