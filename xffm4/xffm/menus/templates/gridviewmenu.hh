@@ -414,27 +414,13 @@ namespace xf {
       return NULL;
     }
 
-    static void *umountThreadMaster(void *data){
-      pthread_t thread;
-      pthread_create(&thread, NULL, umountThread, (void *)data);
-      Thread::threadCount(true,  &thread, "umountThreadMaster");
-      void *retval;
-      pthread_join(thread, &retval);
-      Thread::threadCount(false,  &thread, "umountThreadMaster");
-      return NULL;
-    }
-
     static void unmount(GtkButton *button, void *data){
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
       if (!path) return;
       else {TRACE("unmount item %s\n", path);}
-      pthread_t thread;
-      Thread::threadCount(true,  &thread, "unmount");
-      pthread_create(&thread, NULL, umountThreadMaster, (void *)path);
-      pthread_detach(thread);
-      Thread::threadCount(false,  &thread, "umountThreadMaster");
+      new Thread("unmount()", umountThread, (void *)path);
     }
    
     static void duplicate(GtkButton *button, void *data){
