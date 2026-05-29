@@ -398,9 +398,13 @@ public:
         TRACE("*** page=%p, scrolledWindow=%p, adjustmentValue= %lf\n", page_p, scrollW, value);
         // get scroll position arg[1] = ; 
 
+#if 1
+        new Thread("Window::update", threadReload, (void *)arg);
+#else
         pthread_t thread;
         pthread_create(&thread, NULL, threadReload, arg);
         pthread_detach(thread);
+#endif
 
     }
 
