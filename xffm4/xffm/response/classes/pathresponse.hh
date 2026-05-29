@@ -9,7 +9,7 @@ public:
     static void *asyncYesArg(void *data, const char *op){
       TRACE("*** asyncYesArg: %s\n", op);
       if (!op) return NULL;
-      auto dialogObject = (DialogTimeout<pathResponse> *)data;
+      auto dialogObject = (DialogBasic<pathResponse> *)data;
       auto dialog = dialogObject->dialog();
       
       auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(dialog), "entry"));

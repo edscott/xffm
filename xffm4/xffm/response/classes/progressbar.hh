@@ -77,31 +77,6 @@ private:
         return G_SOURCE_CONTINUE;
     }
 
-/*
-    static gboolean
-    on_keypress (GtkEventControllerKey* self,
-          guint keyval,
-          guint keycode,
-          GdkModifierType state,
-          gpointer data){
-
-       auto object = (DialogTimeout<dialogClass> *)data;
-       auto progress = object->progress();
-        if (!progress || !GTK_IS_PROGRESS_BAR(progress)) return FALSE;
-        gtk_progress_bar_set_fraction(progress, 0.0);
-        if(keyval == GDK_KEY_Escape) { 
-          g_object_set_data(G_OBJECT(object->dialog()), "response", GINT_TO_POINTER(-2)); 
-          return TRUE;
-        }
-        if(keyval == GDK_KEY_Return) { 
-          g_object_set_data(G_OBJECT(object->dialog()), "response", GINT_TO_POINTER(2)); 
-          return TRUE;
-        }
-        return FALSE;      
-    }
-*/
-    
-
     static void *asyncYes(void *data){
       //auto dialogObject = (DialogTimeoutButtons<infoResponse> *)data;
       //dialogObject->timeout(-1);

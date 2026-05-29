@@ -34,7 +34,7 @@ public:
     }
     
     static void *asyncYes(void *data){
-      auto dialogObject = (DialogTimeout<rmResponse> *)data;
+      auto dialogObject = (DialogBasic<rmResponse> *)data;
       auto dialog = dialogObject->dialog();
       auto info = G_FILE_INFO(g_object_get_data(G_OBJECT(dialog), "info"));
       auto file = G_FILE(g_file_info_get_attribute_object (info, "standard::file"));
@@ -75,7 +75,7 @@ public:
     }
 
     static void infoMessage(const char *text){
-      auto dialogObject = new DialogTimeout<infoResponse>;
+      auto dialogObject = new DialogBasic<infoResponse>;
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       dialogObject->setLabelText(text);
       gtk_widget_realize(GTK_WIDGET(dialogObject->dialog()));

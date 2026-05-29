@@ -4,8 +4,7 @@ namespace xf
 {
 
   template <class Type>
-  class DialogButtons : public DialogTimeout<Type>{
-//  class DialogButtons : public DialogTimeout<Type>{
+  class DialogButtons : public DialogBasic<Type>{
 
     public:
     DialogButtons(void){

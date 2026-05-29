@@ -4,7 +4,7 @@ namespace xf
 {
   template <class subClass_t> class HistoryEntry;
   template <class subClass_t>
-  class DialogEntry : public DialogTimeout<subClass_t>{
+  class DialogEntry : public DialogBasic<subClass_t>{
     using dialog_t = DialogEntry<subClass_t>; 
     protected:
       

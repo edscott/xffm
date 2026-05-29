@@ -4,7 +4,7 @@ namespace xf {
 
 
   template <class Type>
-  class DialogPrompt : public DialogTimeout<Type>{
+  class DialogPrompt : public DialogBasic<Type>{
     using dialog_t = DialogPrompt<Type>;
     using prompt_t = Prompt<Type>;
     GtkTextView *input_;

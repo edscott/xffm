@@ -35,7 +35,7 @@ public:
     }
     
     static void *asyncYes(void *data){
-      auto dialogObject = (DialogTimeout<rmResponse> *)data;
+      auto dialogObject = (DialogBasic<rmResponse> *)data;
       auto dialog = dialogObject->dialog();
       auto selectionList = (GList *)g_object_get_data(G_OBJECT(dialog), "selectionList");
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(dialog), "menu"));
@@ -75,7 +75,7 @@ public:
       return NULL;
     }
     static void *asyncNo(void *data){
-      auto dialogObject = (DialogTimeout<rmResponse> *)data;
+      auto dialogObject = (DialogBasic<rmResponse> *)data;
       auto dialog = dialogObject->dialog();
       auto selectionList = (GList *)g_object_get_data(G_OBJECT(dialog), "selectionList");
       Basic::freeSelectionList(selectionList);

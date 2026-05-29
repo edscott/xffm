@@ -4,7 +4,6 @@
 #include "response/templates/dialogbasic.hh"
 #include "response/templates/dialogcomplex.hh"
 #include "response/templates/dialogsimple.hh"
-#include "response/templates/dialogtimeout.hh"
 #include "response/templates/dialogdrop.hh"
 #include "response/templates/dialogbuttons.hh"
 #include "response/templates/dialogpasswd.hh"
@@ -50,7 +49,7 @@ namespace xf
   class Dialogs {
     public:
     static void info(const char *text){
-      auto dialogObject = new DialogTimeout<infoResponse>;
+      auto dialogObject = new DialogBasic<infoResponse>;
       dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
       dialogObject->setLabelText(text);
       gtk_widget_realize(GTK_WIDGET(dialogObject->dialog()));
