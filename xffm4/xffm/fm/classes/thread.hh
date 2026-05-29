@@ -26,18 +26,39 @@ private:
 pthread_t *runThread_ = NULL;
 pthread_t *waitThread_ = NULL;
 gchar *dbg_text_ = NULL;
-void *(*thread_function_)(void *);
-void *data_;
+void *(*threadFunction_)(void *) = NULL;
+void *(*waitFunction_)(void *) = NULL;
+void *data_ = NULL;
+void *waitData_ = NULL;
 
 public:
-    Thread(const gchar *dbg_text, void *(*thread_f)(void *), void *data) {
+
+    Thread(const gchar *dbg_text, void *(*thread_function)(void *), void *data) {
+      // pseudo detached
         if (dbg_text) dbg_text_ = g_strdup(dbg_text);
-        thread_function_ = thread_f;
+        threadFunction_ = thread_function;
         data_ = data;
         
         runThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
         waitThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
-        if (thread_create(dbg_text, thread_f, data)){
+        if (thread_create(dbg_text, threadFunction_, data)){
+            DBG("cannot create thread (%s). throw(1).\n", dbg_text);
+            throw 1;
+        }
+
+    }
+// waitFunction algorithm not yet tested, might be broken.
+    Thread(const gchar *dbg_text, void *(*thread_function)(void *), void *data, 
+                                  void *(*wait_function)(void *), void *wait_data) {
+        if (dbg_text) dbg_text_ = g_strdup(dbg_text);
+        threadFunction_ = thread_function;
+        waitFunction_ = wait_function;
+        waitData_ = wait_data;
+        data_ = data;
+        
+        runThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
+        waitThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
+        if (thread_create(dbg_text, threadFunction_, data)){
             DBG("cannot create thread (%s). throw(1).\n", dbg_text);
             throw 1;
         }
@@ -48,6 +69,10 @@ public:
         g_free(waitThread_);
         g_free(dbg_text_);
     }
+
+    void *waitData(void){ return waitData_;}
+
+    void *waitFunction(void){ return (void *)waitFunction_;}
 
     pthread_t *
     runThread(void){ return runThread_;}
@@ -81,7 +106,17 @@ private:
     
     static void *
     wait_f(void *data){
+      using FuncPtr = void *(*)(void *);
         auto thread_p = (Thread *)data;
+#if 0
+        auto waitData = thread_p->waitData();
+        auto waitFunction = thread_p->waitFunction();
+
+        if (waitFunction){
+          FuncPtr f = reinterpret_cast<FuncPtr>(waitFunction);
+          f(waitData);
+        }
+#endif
         void *retval;
         auto runThread = thread_p->runThread();
         pthread_join(*runThread, &retval);

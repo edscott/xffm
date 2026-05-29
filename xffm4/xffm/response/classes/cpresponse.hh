@@ -99,12 +99,15 @@ class cpDropResponse {
       arg[0] = (void *)dialogObject;
       arg[1] = (void *)list;
       arg[2] = (void *)g_strdup(target);
+#if 1
+      new Thread("performPasteAsync()", thread1, (void *)arg);
+#else
       pthread_t thread;
       Thread::threadCount(true,  &thread, "performPasteAsync");
       pthread_create(&thread, NULL, thread1, arg);
       pthread_detach(thread);
       Thread::threadCount(false,  &thread, "performPasteAsync");
-
+#endif
       // clipboard contents no longer needed
       c->clearClipBoard();
 
@@ -121,8 +124,12 @@ private:
     auto srcTgt = g_strconcat(src, " ---> ", tgt, NULL);
     g_free(tgt);
 
-
     auto dialogObject = (DialogDrop<cpDropResponse> *)arg[0];
+
+
+#if 1
+    thread2(data);
+#else
     pthread_t thread;
       Thread::threadCount(true,  &thread, "thread1");
     pthread_create(&thread, NULL, thread2, data);
@@ -130,7 +137,8 @@ private:
     pthread_join(thread, &retval);
       Thread::threadCount(false,  &thread, "thread1");
     TRACE("thread2 joined, copy complete.\n");
-   
+#endif  
+
     
     TRACE("thread2 unlockCondition.\n");
     // copy move async is done.
@@ -189,7 +197,7 @@ private:
       bool active = dialogObject->subClass()->active();
       if (!active) {
         dialogObject->unlockResponse();
-        THREADPOOL->clear();
+        //THREADPOOL->clear();
         TRACE("Operation interrupted\n");
         break;
       }
