@@ -42,13 +42,15 @@ return gridView_;
         mountArg_[1] = (void *) gridView_;
         mountArg_[2] = GINT_TO_POINTER(TRUE);
 
-
+#if 1
+      new Thread("FstabMonitor<LocalDir>", mountThreadF1, (void *)mountArg_);
+#else
         pthread_t thread;
       Thread::threadCount(true,  &thread, "FstabMonitor");
-//        pthread_create(&thread, NULL, waitThread1, (void *)mountArg_);
         pthread_create(&thread, NULL, mountThreadF1, (void *)mountArg_);
         pthread_detach(thread);
       Thread::threadCount(false,  &thread, "FstabMonitor");
+#endif
     }
     FstabMonitor(GridView<FstabDir> *gridview)
     {   
@@ -57,11 +59,15 @@ return gridView_;
         gridView_ = gridview;       
         setMountArg();
 
+#if 1
+      new Thread("FstabMonitor<FstabDir>", mountThreadF2, (void *)mountArg_);
+#else
         pthread_t thread;
       Thread::threadCount(true,  &thread, "FstabMonitor2");
         pthread_create(&thread, NULL, mountThreadF2, (void *)mountArg_);
         pthread_detach(thread);
       Thread::threadCount(false,  &thread, "FstabMonitor2");
+#endif
     }
     ~FstabMonitor(void){
         // stop mountThread (if still running)
@@ -70,12 +76,16 @@ return gridView_;
         //sleep(1);
         g_free(path_);
         // go ahead for mountThread to cleanup.
+#if 1
+      new Thread("~FstabMonitor", cleanup, (void *)mountArg_);
+#else
         pthread_t thread;
       Thread::threadCount(true,  &thread, "~FstabMonitor");
         pthread_create(&thread, NULL, cleanup, mountArg_);
         pthread_detach(thread);
       Thread::threadCount(false,  &thread, "~FstabMonitor");
         TRACE("FstabMonitor: destructor done...\n");    
+#endif
       if (mountHash_) g_hash_table_destroy( mountHash_);  
     }
     static void *cleanup(void *data){
@@ -278,18 +288,6 @@ private:
         //g_hash_table_destroy(fstabHash);
         return GINT_TO_POINTER(1);
     }
-
- /*   static void *waitThread1(void *data){
-        void **arg = (void **)data;
-        auto monitorObject = (FstabMonitor<LocalDir> *)arg[0];
-        auto gridView_p = monitorObject->gridView();
-        char *path = g_strdup(gridView_p->path());
-
-        pthread_t thread;
-
-        pthread_create(&thread, NULL, mountThreadF1, (void *)mountArg_);
-
-    }*/
 
     static void *
     mountThreadF1(void *data){
