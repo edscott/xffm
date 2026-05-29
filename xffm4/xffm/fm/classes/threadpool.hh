@@ -27,9 +27,13 @@ class ThreadPool {
     //pthread_cond_t threadPoolCond = PTHREAD_COND_INITIALIZER;
 public:
       ThreadPool(void){
+#if 1
+      new Thread("ThreadPool", threadPoolRun_f, (void *)this);
+#else
         pthread_t threadLeader;
         pthread_create(&threadLeader, NULL, threadPoolRun_f, this);
         pthread_detach(threadLeader);
+#endif
       }
 
   void lock(void){
@@ -124,6 +128,7 @@ private:
                 pthread_create(&(info->thread), NULL, 
                     info->function, 
                     info->data);
+
                 active++;
                 TRACE("initial: thread %d spawned...\n", active);
                 pthread_mutex_unlock(&threadPoolMutex);
