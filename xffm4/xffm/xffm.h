@@ -161,7 +161,6 @@ static GtkPopover *currentPopover = NULL;
 #include "fm/classes/fmpage.hh"         // fm class
 
 #include "fm/templates/fstabmonitor.hh"
-#include "fm/templates/rodentmonitor.hh"
 
 #include "fm/templates/window.hh" // template
 #include "fm/classes/fm.hh"     // class

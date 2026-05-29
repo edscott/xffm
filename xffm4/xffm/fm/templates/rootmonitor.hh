@@ -21,9 +21,14 @@ namespace xf {
         args[0] = (void *) this;
         args[1] = GINT_TO_POINTER(size);
         args[2] = GINT_TO_POINTER(TRUE);
+#if 1
+        new Thread("RootMonitor::RootMonitor()", threadF1, (void *)args);
+#else
         pthread_t thread;
         pthread_create(&thread, NULL, threadF1, (void *)args);
         pthread_detach(thread);
+#endif
+        
       }
       ~RootMonitor(){
         args[2] = (NULL);
