@@ -95,7 +95,7 @@ public:
         TRACE ("RunButton::buttonSpace = %p\n", buttonSpace_);
 //        
         auto text = g_strdup_printf("RunButton::setup(): %s", command_);
-        new(Thread)(text, run_wait_f, (void *) this);
+        new Thread(text, run_wait_f, (void *) this);
         g_free(text);
         RunButton::reference_run_button((void *)this);
     }

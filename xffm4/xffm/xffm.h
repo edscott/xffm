@@ -98,6 +98,7 @@ static GtkPopover *currentPopover = NULL;
 
 #include "fm/templates/properties.hh"
 #include "fm/classes/thread.hh"
+#include "fm/classes/threadpool.hh"
 #include "fm/templates/preview.hh"
 #include "fm/classes/progress.hh"
 #include "fm/templates/clipboard.hh"

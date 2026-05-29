@@ -47,23 +47,6 @@ public:
     }
 
 
-    static void *mop_f(void *data){
-      auto list = Child::getGridViewList(); 
-      for (auto l=list; l && l->data; l=l->next){
-        auto p = (GridView<Type> *)l->data;
-        TRACE("*** clearClipBoard(): GridView %p, path=%s\n", p, p->path());
-      }
-      g_list_free(list);
-      return NULL;
-    }
-
-    static void *mop(void *data){
-        sleep(1);
-      TRACE("Basic::context_function for mop_f\n");
-        Basic::context_function(mop_f, data);
-      return NULL;
-    }
-
     void
     clearClipBoard(void){
         // for each file, send monitor the changed signal
@@ -72,10 +55,6 @@ public:
 
         gdk_clipboard_set_text (clipBoard_, "");
         if (pasteButton) gtk_widget_set_sensitive(GTK_WIDGET(pasteButton), false);
-
-        pthread_t thread;
-        pthread_create(&thread, NULL, mop, this);
-        pthread_detach(thread);
     }
 
     static void
