@@ -70,18 +70,7 @@ namespace xf
       //auto dialog = dialogObject->dialog();
       TRACE("*** runWait_f for dialog_t\n");
       //Basic::moveToPointer(dialogObject->dialog()); //Centers on the pointer screen (not always).
-#if 1
       run_f((void *)dialogObject);
-#else
-      pthread_t thread;
-      Thread::threadCount(true,  &thread, "DialogBasic::runWait_f");
-      int retval = pthread_create(&thread, NULL, run_f, (void *)dialogObject);
-      void *response_p;
-      pthread_join(thread, &response_p);
-      Thread::threadCount(false,  &thread, "DialogBasic::runWait_f");
-      TRACE("run joined, *response_p = %p\n", response_p);
-      // 
-#endif
       //delete dialogObject;
       Basic::context_function(contextDelete_f, data);
  
@@ -259,18 +248,7 @@ namespace xf
 
     int run(void){
       TRACE("*** Basic::dialog_t run...\n");
-#if 1
       new Thread("DialogBasic::run", runWait_f, (void *)this);
-#else
-      pthread_t thread;
-      //Basic::moveToPointer(this->dialog()); //Centers on the pointer screen (not always).
-      Thread::threadCount(true,  &thread, "DialogBasic::run");
-      int retval = pthread_create(&thread, NULL, runWait_f, this);
-      pthread_detach(thread);
-      Thread::threadCount(false,  &thread, "DialogBasic::run");
-      TRACE("run detached...\n");
-#endif
-
       return 0;
     }
 
