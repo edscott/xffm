@@ -104,7 +104,7 @@ namespace xf
       TRACE("run joined, *response_p = %p\n", response_p);
 #endif
       // 
-      //delete dialogObject; // FIXME: do in main context
+      //delete dialogObject; // do in main context
       Basic::context_function(contextDelete_f, data);
       return NULL;
 //      return response_p;
