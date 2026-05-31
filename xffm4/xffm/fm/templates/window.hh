@@ -253,9 +253,8 @@ private:
         GtkWidget *widget = GTK_WIDGET(mainWindow_);
         Basic::setAsDialog(mainWindow_);
         if (doFind_) return; // No X resources for main xffm window.
-        gtk_widget_realize(widget);
- 
 
+        gtk_window_set_default_size(mainWindow_, windowW_, windowH_);
         gtk_widget_realize(GTK_WIDGET(mainWindow_));
         auto input = Child::getInput(NULL);
         gtk_widget_grab_focus(GTK_WIDGET(input));
