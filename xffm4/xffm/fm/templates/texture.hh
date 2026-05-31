@@ -9,8 +9,10 @@ template <class Type>  class Texture {
   public:
 
     static GtkPicture *getPicture(const char *iconName){
-      auto paintable = GDK_PAINTABLE(load(iconName, 24));
+      int size =16;
+      auto paintable = GDK_PAINTABLE(load(iconName, size));
       auto picture = gtk_picture_new_for_paintable(paintable);
+      gtk_widget_set_size_request(GTK_WIDGET(picture), size, size);
       return GTK_PICTURE(picture);
     }
 
