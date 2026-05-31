@@ -65,25 +65,27 @@ namespace xf
       return NULL;
     }
 
+    // pthread function
     static void *runWait_f(void *data){
       auto dialogObject = (dialog_t *)data;
       //auto dialog = dialogObject->dialog();
       TRACE("*** runWait_f for dialog_t\n");
       //Basic::moveToPointer(dialogObject->dialog()); //Centers on the pointer screen (not always).
-      run_f((void *)dialogObject);
+      run_f(dialogObject);
       //delete dialogObject;
-      Basic::context_function(contextDelete_f, data);
+      Basic::context_function(DialogBasic<subClass_t>::contextDelete_f, data);
  
-      return NULL;;
+      return NULL;
     }
 
 
-    static void *run_f(void *data){
-      auto dialogObject = (dialog_t *)data;
+    template <class Dtype>
+    static void *run_f(Dtype *data){
+      auto dialogObject = data;
+//      auto dialogObject = (dialog_t *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
-      TRACE("*** run_f for Basic::dialog_t\n");
-      TRACE("*** run_f (thread)\n");
+      TRACE("*** run_f for DialogBasic\n");
 
       auto X = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "X"));
       auto Y = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(dialog), "Y"));

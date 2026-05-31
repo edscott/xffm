@@ -9,8 +9,27 @@ namespace xf
     GtkBox *mainBox_;
     GtkWindow *parent_;
     public:
+
+    DialogComplex(GtkWindow *parent, const char *folder, const char *path){
+      mainBox_ = this->subClass()->mainBox(folder, path);
+      parent_ = parent;
+      setupRun();
+    }
+
+    DialogComplex(GtkWindow *parent, const char *folder){
+      mainBox_ = this->subClass()->mainBox(folder);
+      parent_ = parent;
+      setupRun();
+    }
+
+    DialogComplex(void){
+      const char * folder = Child::getWorkdir(NULL);
+      mainBox_ = this->subClass()->mainBox(folder);
+      parent_ = GTK_WINDOW(_mainWidget);
+      setupRun();
+    }
     
-    void setupRun(void){
+    void setupRun(void){ // exclusive to DialogComplex
       auto frame = this->frame();
       gtk_frame_set_child(frame, GTK_WIDGET(mainBox_));
       this->setParent(parent_);
@@ -48,25 +67,6 @@ namespace xf
       this->run();
     }
 
-    DialogComplex(GtkWindow *parent, const char *folder, const char *path){
-      mainBox_ = this->subClass()->mainBox(folder, path);
-      parent_ = parent;
-      setupRun();
-    }
-
-    DialogComplex(GtkWindow *parent, const char *folder){
-      mainBox_ = this->subClass()->mainBox(folder);
-      parent_ = parent;
-      setupRun();
-    }
-
-    DialogComplex(void){
-      const char * folder = Child::getWorkdir(NULL);
-      mainBox_ = this->subClass()->mainBox(folder);
-      parent_ = GTK_WINDOW(_mainWidget);
-      setupRun();
-    }
-
     // void setSubClassDialog(void)
     // Sets a pointer in the subClass object to refer to 
     // the GtkWindow dialog, in order for the subClass
@@ -77,33 +77,40 @@ namespace xf
       this->subClass()->dialog(this->dialog());
     }
     
-    // Overloads:
+    static void *runWait_f(void *data){
+      auto dialogObject = (complexDialog_t *)data;
+      //auto dialog = dialogObject->dialog();
+      TRACE("*** runWait_f for dialog_t\n");
+      //Basic::moveToPointer(dialogObject->dialog()); //Centers on the pointer screen (not always).
+      run_f(dialogObject);
+      //delete dialogObject;
+      Basic::context_function(DialogBasic<subClass_t>::contextDelete_f, data);
+ 
+      return NULL;
+    }
+    
+
+/*
+    // Has no reason to be
     static void *contextDelete_f(void *data){
       auto dialogObject = (complexDialog_t *)data;
       delete dialogObject;       
       return NULL;
     }
 
-    static void *runWait_f(void *data){
-      TRACE("*** runWait_f for complexDialog_t\n");
-      auto dialogObject = (complexDialog_t *)data;
-      //auto dialog = dialogObject->dialog();
-
-      TRACE("runWait_f...\n");
-      run_f((void *)dialogObject);
-      // 
-      //delete dialogObject; // do in main context
-      Basic::context_function(contextDelete_f, data);
-      return NULL;
-//      return response_p;
+    int run(void){
+      TRACE("*** complexDialog_t run...\n");
+      new Thread("DialogComplex::run", runWait_f, (void *)this);
+      return 0;
     }
 
+    // This differs from DialogBasic version, and overloads:
     static void *run_f(void *data){
-      TRACE("*** run_f for complexDialog_t\n");
       auto dialogObject = (complexDialog_t *)data;
       auto dialog = dialogObject->dialog();
       void *response = NULL;
-      TRACE("*** run_f (thread)\n");
+      TRACE("*** run_f for DialogComplex\n");
+
       do {
         dialogObject->lockResponse();
         response = g_object_get_data(G_OBJECT(dialog), "response");
@@ -126,12 +133,7 @@ namespace xf
       // object will now be deleted.
       return response;
     }
-
-    int run(void){
-      TRACE("*** complexDialog_t run...\n");
-      new Thread("DialogComplex::run", runWait_f, (void *)this);
-      return 0;
-    }
+*/
 
   };
 
