@@ -90,51 +90,6 @@ namespace xf
     }
     
 
-/*
-    // Has no reason to be
-    static void *contextDelete_f(void *data){
-      auto dialogObject = (complexDialog_t *)data;
-      delete dialogObject;       
-      return NULL;
-    }
-
-    int run(void){
-      TRACE("*** complexDialog_t run...\n");
-      new Thread("DialogComplex::run", runWait_f, (void *)this);
-      return 0;
-    }
-
-    // This differs from DialogBasic version, and overloads:
-    static void *run_f(void *data){
-      auto dialogObject = (complexDialog_t *)data;
-      auto dialog = dialogObject->dialog();
-      void *response = NULL;
-      TRACE("*** run_f for DialogComplex\n");
-
-      do {
-        dialogObject->lockResponse();
-        response = g_object_get_data(G_OBJECT(dialog), "response");
-        dialogObject->unlockResponse();
-        if (exitDialogs) response = GINT_TO_POINTER(-1);
-        usleep(2500);
-      } while (!response);
-      // hide
-      auto subClass = dialogObject->subClass();
-      
-      if (GPOINTER_TO_INT(response) > 0){
-        Basic::context_function(subClass->asyncYes, data);
-      } else {
-        Basic::context_function(subClass->asyncNo, data);
-      }
-      if (Child::mainWidget() && GTK_IS_WINDOW (Child::mainWidget())) {
-        Basic::present(GTK_WINDOW(Child::mainWidget()));
-      }
-      TRACE("run_f:: Response is %p\n", response);
-      // object will now be deleted.
-      return response;
-    }
-*/
-
   };
 
   

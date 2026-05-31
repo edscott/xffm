@@ -675,6 +675,7 @@ private:
     }
 
     static void *destroy_f(void *window){
+      gtk_widget_set_visible(GTK_WIDGET(window), false);
       gtk_window_destroy(GTK_WINDOW(window));
       return NULL;
     }
