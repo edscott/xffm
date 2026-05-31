@@ -76,13 +76,15 @@ namespace xf {
           //Important: if this is not set, then the GFile cannot be obtained from the GFileInfo:
           g_file_info_set_attribute_object(outInfo, "standard::file", G_OBJECT(outChild));
           
-          g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, GINT_TO_POINTER(flags));
+          g_list_store_insert(store, k++, G_OBJECT(outInfo));
+          //g_list_store_insert_sorted(store, G_OBJECT(outInfo), compareFunction, GINT_TO_POINTER(flags));
           TRACE("insert path=%s info=%p\n", g_file_get_path(outChild), outInfo);
           auto _path = g_file_get_path(outChild);
           setPaintableIcon(outInfo, _path);
           g_free(_path);
         } while (true);
 
+        g_list_store_sort(store,compareFunction, GINT_TO_POINTER(flags));
         return getSelectionModel(G_LIST_MODEL(store), true, filterData);
       }
 
