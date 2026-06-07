@@ -879,16 +879,15 @@ public:
         Basic::Exit("boxPack0(): programming error. Exit(2)\n");
       }
     }
+
     static void
     flushGTK(void){
-      // This may introduce race conditions
-      // Should only be done by main thread
-      gboolean owner = g_main_context_is_owner(g_main_context_default());
-      if (owner){
-        while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
-      } else {
-        ERROR_("*** Basic::flushGTK may only be called from main context\n");
-      }
+      context_function(flushGTK_f, NULL);
+    }
+      
+    static void *flushGTK_f(void *data){
+      while (g_main_context_pending(NULL)) g_main_context_iteration(NULL, TRUE);
+      return NULL;
     }
 
     static char *utf_truncate(const char *t, int size){

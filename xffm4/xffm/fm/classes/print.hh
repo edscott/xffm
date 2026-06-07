@@ -19,36 +19,51 @@ namespace xf {
         return text;
     }
 
+    static void *scroll_to_top_f(void *data){
+      auto textview = (GtkTextView *)data;
+      if (!textview) return NULL;
+      // make sure all text is written before attempting scroll
+      Basic::flushGTK();
+
+      GtkTextIter start, end;
+      auto buffer = gtk_text_view_get_buffer (textview);
+      gtk_text_buffer_get_bounds (buffer, &start, &end);
+      gtk_text_view_scroll_to_iter (textview,
+                            &start,
+                            0.0,
+                            FALSE,
+                            0.0, 0.0); 
+      Basic::flushGTK();
+      return NULL;
+    }
+
     static void *
     scroll_to_top(GtkTextView *textview){
-        if (!textview) return NULL;
+      if (!textview) return NULL;
+      Basic::context_function(scroll_to_top_f, (void *)textview);
+      return NULL;
+    }
+
+    static void *
+    scroll_to_bottom_f(void *data){
+      auto textview = (GtkTextView *)data;
+      if (!textview) return NULL;
         // make sure all text is written before attempting scroll
-        Basic::flushGTK();
-        GtkTextIter start, end;
-        auto buffer = gtk_text_view_get_buffer (textview);
-        gtk_text_buffer_get_bounds (buffer, &start, &end);
-        gtk_text_view_scroll_to_iter (textview,
-                              &start,
-                              0.0,
-                              FALSE,
-                              0.0, 0.0);        
-        Basic::flushGTK();
-        return NULL;
+      Basic::flushGTK();
+      GtkTextIter start, end;
+      auto buffer = gtk_text_view_get_buffer (textview);
+      gtk_text_buffer_get_bounds (buffer, &start, &end);
+      auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
+      gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
+                                    TRUE, 1.0, 1.0);
+      Basic::flushGTK();
+      return NULL;
     }
 
     static void *
     scroll_to_bottom(GtkTextView *textview){
         if (!textview) return NULL;
-        // make sure all text is written before attempting scroll
-        Basic::flushGTK();
-        GtkTextIter start, end;
-        auto buffer = gtk_text_view_get_buffer (textview);
-        gtk_text_buffer_get_bounds (buffer, &start, &end);
-        auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
-        gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
-                                      TRUE, 1.0, 1.0);
-        //gtk_text_view_scroll_mark_onscreen (textview, mark);
-        Basic::flushGTK();
+        Basic::context_function(scroll_to_bottom_f, (void *)textview);
         return NULL;
     }
 
