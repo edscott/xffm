@@ -23,7 +23,7 @@ namespace xf {
       auto textview = (GtkTextView *)data;
       if (!textview) return NULL;
       // make sure all text is written before attempting scroll
-      Basic::flushGTK();
+      Basic::flushGTK_f(NULL);
 
       GtkTextIter start, end;
       auto buffer = gtk_text_view_get_buffer (textview);
@@ -33,7 +33,7 @@ namespace xf {
                             0.0,
                             FALSE,
                             0.0, 0.0); 
-      Basic::flushGTK();
+      Basic::flushGTK_f(NULL);
       return NULL;
     }
 
@@ -49,14 +49,14 @@ namespace xf {
       auto textview = (GtkTextView *)data;
       if (!textview) return NULL;
         // make sure all text is written before attempting scroll
-      Basic::flushGTK();
+      Basic::flushGTK_f(NULL);
       GtkTextIter start, end;
       auto buffer = gtk_text_view_get_buffer (textview);
       gtk_text_buffer_get_bounds (buffer, &start, &end);
       auto mark = gtk_text_buffer_create_mark (buffer, "scrolldown", &end, FALSE);
       gtk_text_view_scroll_to_mark (textview, mark, 0.2,    /*gdouble within_margin, */
                                     TRUE, 1.0, 1.0);
-      Basic::flushGTK();
+      Basic::flushGTK_f(NULL);
       return NULL;
     }
 
@@ -202,7 +202,7 @@ private:
           insert_string (buffer, string, tags);
       }
       g_free(tags);
-      scroll_to_bottom(textview);
+      scroll_to_bottom_f((void *)textview);
       return NULL;
   }
 

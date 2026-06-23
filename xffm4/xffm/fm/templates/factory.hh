@@ -404,7 +404,6 @@ ClickMenu
     {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_add_css_class (GTK_WIDGET(eventBox), "gridNegative" );
-        //Basic::flushGTK(); // this will cause race condition crash...
         return FALSE;
     }
     static gboolean
@@ -415,7 +414,6 @@ ClickMenu
     {
         auto eventBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
         gtk_widget_remove_css_class (GTK_WIDGET(eventBox), "gridNegative" );
-        //Basic::flushGTK();
         return FALSE;
     }
     

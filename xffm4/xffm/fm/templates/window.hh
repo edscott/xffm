@@ -422,7 +422,6 @@ public:
       auto num = gtk_notebook_append_page (notebook_, GTK_WIDGET(child), label);
       gtk_notebook_set_tab_reorderable (notebook_, GTK_WIDGET(child), true);
       gtk_widget_realize(GTK_WIDGET(child));
-      //Basic::flushGTK();
 #ifdef ENABLE_MENU_CLASS
 #warning "ENABLE_MENU_CLASS active"
         auto pathbar_ = Child::getPathbar(NULL);
