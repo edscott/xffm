@@ -89,7 +89,9 @@ N_("By default, an entry is created in/etc/mtab for every mounted file system.\n
         .entry = NULL, .tip = NULL
     },
     
-    {.sensitive = 1, NULL, NULL, NULL, NULL, NULL}
+    {.sensitive = 1, .flag = NULL, .id = NULL, 
+         .text = NULL,
+         .entry = NULL, .tip = NULL}
 };
 
 static gchar **efs_option_keys = NULL;
@@ -228,7 +230,9 @@ static  group_options_t efs_options[]={
         .tip = N_("The  password  can  be  specified on the command line. Since the password is visible in the process list,  it  is  highly  recommended to use this option only for testing purposes.")
     },
 */    
-    {.sensitive = 1, NULL, NULL, NULL, NULL, NULL}
+    {.sensitive = 1,  .flag = NULL, .id = NULL, 
+         .text = NULL,
+         .entry = NULL, .tip = NULL}
 };
 
 

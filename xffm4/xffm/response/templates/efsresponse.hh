@@ -727,7 +727,7 @@ public:
       TRACE("mount...\n");
       auto efsmount = g_find_program_in_path("mount.ecryptfs");
       if (not efsmount){
-          ERROR_(g_strdup_printf("%s: mount.ecryptfs\n", strerror(ENOENT)));
+          ERROR_("%s: mount.ecryptfs\n", strerror(ENOENT));
           g_free(efsmount);
           return;
       }

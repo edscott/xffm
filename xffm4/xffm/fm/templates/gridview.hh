@@ -160,7 +160,9 @@ template <class Type>
           TRACE("*** zap rootMonitor_\n");
           delete rootMonitor_;
         }
+#ifdef HAVE_FSTAB_H
         if (fstabMonitor_) delete fstabMonitor_; 
+#endif
 
         g_free(path_);
         g_free(regexp_);
@@ -194,9 +196,13 @@ template <class Type>
         bool isFstab = (strcmp(path_, "Disk Mounter")==0);
         if (isBookmarks) {
           selectionModel_ = rootDir::rootSelectionModel();
-        } else if (isFstab) {
+        } 
+#ifdef HAVE_FSTAB_H
+	else if (isFstab) {
           selectionModel_ = FstabDir::fstabSelectionModel();
-        } else {
+        }
+#endif
+	else {
           // Create the initial GtkDirectoryList (G_LIST_MODEL).
           selectionModel_ = LocalDir::xfSelectionModel(path_, &filterData_);
           g_object_set_data(G_OBJECT(child), "selection", selectionModel_);
@@ -481,10 +487,13 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       void *widget;
       widget = g_object_get_data(G_OBJECT(popover), _("Properties"));
       gtk_widget_set_visible(GTK_WIDGET(widget), true);
+#ifdef HAVE_FSTAB_H
       if (FstabDir::isMounted(path)){
         widget = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
         gtk_widget_set_visible(GTK_WIDGET(widget), true);
-      } else {
+      } else 
+#endif
+      {
         widget = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
         gtk_widget_set_visible(GTK_WIDGET(widget), true);
       }
@@ -509,10 +518,13 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
         return;
       }
       // Has additional xffm::efsInfo tag
+#ifdef HAVE_FSTAB_H
       if (FstabUtil::isMounted(path)){
         widget = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
         gtk_widget_set_visible(GTK_WIDGET(widget), true);
-      } else {
+      } else 
+#endif
+      {
         widget = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
         gtk_widget_set_visible(GTK_WIDGET(widget), true);
       }
@@ -602,6 +614,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           gtk_widget_set_visible(GTK_WIDGET(widget), c->validClipBoard());
         }
 
+#ifdef HAVE_FSTAB_H
         // mount test 
         if (FstabUtil::isMounted(path)){
           auto widget = g_object_get_data(G_OBJECT(popover), _("Unmount Volume"));
@@ -610,6 +623,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
           auto widget = g_object_get_data(G_OBJECT(popover), _("Mount Volume"));
           gtk_widget_set_visible(GTK_WIDGET(widget), true);
         }
+#endif
       } else { // Regular
         const char *show[]={
           _("auto"), //
@@ -788,6 +802,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
       if (isRootItem(info)){
         TRACE("*** %s isRootItem hide all\n", path);
         GridviewMenu<Type>::hideAll(popover);
+#ifdef HAVE_FSTAB_H
         if (isEfsInfo(info)){
           if (FstabUtil::isMounted(path)){
             GridviewMenu<Type>::showItem(popover, "Unmount Volume");
@@ -795,6 +810,7 @@ static void setPopoverItems(GtkPopover *popover, GridView<Type> *gridView_p){
             GridviewMenu<Type>::showItem(popover, "Mount Volume");
           }
         }
+#endif
         if (isBookmark(info)){
           GridviewMenu<Type>::showItem(popover, "Remove bookmark");
         }

@@ -1,3 +1,4 @@
+#ifdef HAVE_FSTAB_H
 #ifndef MOUNTRESPONSE_HH
 #define MOUNTRESPONSE_HH
 
@@ -278,5 +279,6 @@ private:
 
 };
 }
+#endif
 #endif
 

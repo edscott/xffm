@@ -695,32 +695,39 @@ private:
             gtk_widget_set_sensitive(GTK_WIDGET(vbox), false); // default
 
             auto slist = get_user_slist();
-            // option -u uid "uid" "uid_combo"
-            auto radio1 = add_option_combo(vbox, "uid", "uid_combo", _("User"), slist);
-            slist = free_string_slist(slist);
-            gtk_check_button_set_active(radio1, true);
+	    GtkCheckButton *radioGroup = NULL;
+	    if (slist) {
+		// option -u uid "uid" "uid_combo"
+		auto radio1 = add_option_combo(vbox, "uid", "uid_combo", _("User"), slist);
+		slist = free_string_slist(slist);
+		gtk_check_button_set_active(radio1, true);
+		radioGroup = radio1;
+	    }
 
             // option -g gid "gid" "gid_combo"
             slist = get_group_slist();
-            auto radio2 = add_option_combo(vbox, "gid", "gid_combo", _("Group"), slist);
-            slist = free_string_slist(slist);
-            gtk_check_button_set_group(radio2, radio1);
+	    if (slist) {
+                auto radio2 = add_option_combo(vbox, "gid", "gid_combo", _("Group"), slist);
+                slist = free_string_slist(slist);
+                gtk_check_button_set_group(radio2, radioGroup);
+	    }
             
             // option -o octal "octal_p" "permissions_entry"
             auto radio3 = add_option_entry(vbox, "octal_p", "permissions_entry", _("Octal Permissions"), "0666");
             auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "permissions_entry"));
             gtk_widget_set_size_request (GTK_WIDGET(entry), 75, -1);
-            gtk_check_button_set_group(radio3, radio1);
+	    if (!radioGroup) radioGroup = radio3;
+            gtk_check_button_set_group(radio3, radioGroup);
             
             // option -p suid | exe 
            // auto privilege = simpleCheck(parentBox, _("Privileges"));
             auto privBox = add_option_radio2(vbox, _("Executable"),_("SUID"), NULL);
             auto radio4 = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(mainBox_), _("Executable")));
-            //gtk_check_button_set_group(radio4, radio1);
+            //gtk_check_button_set_group(radio4, radioGroup);
             gtk_check_button_set_active(radio4, false);
 
             auto radio5 = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(mainBox_), _("SUID")));
-            gtk_check_button_set_group(radio5, radio1);
+            gtk_check_button_set_group(radio5, radioGroup);
             gtk_check_button_set_active(radio5, false);
 
            // gtk_widget_set_sensitive(GTK_WIDGET(privBox), false);
@@ -816,6 +823,7 @@ private:
         GSList *
         get_user_slist(void){
             GSList *g_user = NULL;
+#ifdef HAVE_GETPWENT
             struct passwd *pw;
             while((pw = getpwent ()) != NULL) {
                 g_user = g_slist_append (g_user, g_strdup (pw->pw_name));
@@ -825,12 +833,14 @@ private:
             pw = getpwuid (geteuid ());
             auto buf = g_strdup_printf ("%s", pw ? pw->pw_name : _("unknown"));
             g_user = g_slist_prepend (g_user, buf);
+#endif
             return g_user;
         }
 
         GSList *
         get_group_slist(void){
             GSList *g_group=NULL;
+#ifdef HAVE_GETPWENT
             struct group *gr;
             while((gr = getgrent ()) != NULL) {
                g_group = g_slist_append (g_group, g_strdup (gr->gr_name));
@@ -840,6 +850,7 @@ private:
             gr = getgrgid (geteuid ());
             auto buf = g_strdup_printf ("%s", gr ? gr->gr_name : _("unknown"));
             g_group = g_slist_prepend (g_group, buf);
+#endif
             return g_group;
         }
 

@@ -1,3 +1,4 @@
+#ifdef HAVE_FSTAB_H
 #ifndef MOUNT_HH
 #define MOUNT_HH
 
@@ -14,5 +15,6 @@ class Mount {
     }
 };
 }
+#endif
 #endif
 

@@ -44,6 +44,7 @@ namespace xf {
         }
        
         // cancel threadpool for previews, if any. Wait on condition
+#ifdef HAVE_FSTAB_H
         if (strcmp(path, "Disk Mounter") == 0) {
           auto viewObject = new GridView<FstabDir>(path, (void *)gridViewClick, child);
           viewObject->child(child);
@@ -64,7 +65,9 @@ namespace xf {
           TRACE("oldObject: %p\n", oldObject);
           if (oldObject) delete oldObject;
           Child::setGridviewObject(viewObject, child);  // This is the object from GridView template.   
-        } else {
+        } else
+#endif
+	{
           auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick, child);
 //          auto viewObject = new GridView<LocalDir >(path, (void *)gridViewClick);
           TRACE("new object: %p\n", viewObject);
@@ -286,6 +289,7 @@ char buffer[4096];
       TRACE("workdir.hh:: isInPartitions(%s) = %d\n", path, FstabUtil::isInPartitions(path));
       TRACE("workdir.hh:: isMounted(%s) = %d\n", path, FstabUtil::isMounted(path));
 
+#ifdef HAVE_FSTAB_H
       if (FstabUtil::isInPartitions(path)){
         if (!FstabUtil::isMounted(path)){
           auto message = g_strdup_printf(_("The volume '%s' is not mounted."), path);
@@ -300,6 +304,7 @@ char buffer[4096];
         }
         return TRUE;
       }
+#endif
       auto type = g_file_info_get_file_type(info);
       if ((type == G_FILE_TYPE_DIRECTORY )||(LocalDir::symlinkToDir(info, type))) {
         TRACE("Go to action...\n");

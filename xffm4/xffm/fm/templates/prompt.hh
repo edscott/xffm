@@ -1,6 +1,7 @@
 #ifndef XF_PROMPT_HH
 #define XF_PROMPT_HH
 namespace xf {
+
   template <class Type>
   class Prompt {
 

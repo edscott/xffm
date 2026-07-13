@@ -17,7 +17,7 @@ public:
             Basic::Exit("grep command not found\n");
         }
         fullPath(path);
-        gchar *fullPath = NULL;
+        //gchar *fullPath = NULL;
         createDialog();
     }
 
@@ -32,7 +32,7 @@ public:
           g_free(current);
           return;
         }
-        fullPath = realpath(path, NULL);
+        fullPath_ = realpath(path, NULL);
         return;
     }
 

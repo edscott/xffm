@@ -387,6 +387,7 @@ namespace xf {
     }
      
     static void mount(GtkButton *button, void *data){
+#ifdef HAVE_FSTAB_H	    
       auto menu = GTK_POPOVER(g_object_get_data(G_OBJECT(button), "menu")); 
       MainMenu<Type>::closePopover(menu);
       auto path = getPath(menu);
@@ -404,6 +405,7 @@ namespace xf {
       new Mount<Type>(parent, folder, path);
       g_free(folder);
       g_free(path);
+#endif
     }
      
     static void *umountThread(void *data){

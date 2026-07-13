@@ -83,7 +83,9 @@ namespace xf {
           int size = Settings::getInteger("xfterm", "iconsize");
           //const char *iconPath = Texture<bool>::findIconPath("folder-remote");
           const char *ball = EMBLEM_NOACCESS;
+#ifdef HAVE_FSTAB_H
           if (FstabUtil::isMounted(*p)) ball = EMBLEM_GREEN_BALL;
+#endif
           auto paintable = Texture<bool>::addEmblem("emblem-folder", ball, scaleFactor*size, scaleFactor*size);
           //auto paintable = Texture<bool>::addEmblem(gIcon, ball, size, size);
           g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));

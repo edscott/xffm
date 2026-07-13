@@ -1,3 +1,4 @@
+#ifdef HAVE_FSTAB_H
 #ifndef XF_FSTAB_HH 
 #define XF_FSTAB_HH
 
@@ -506,4 +507,5 @@ class FstabDir {
     }
 };
 }
+#endif
 #endif

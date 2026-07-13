@@ -403,7 +403,7 @@ public:
 
 
 };
-#if 10
+
 class Bash{
 public:
 //    BashCompletion(GtkTextView *textView, GtkTextView *input){
@@ -943,7 +943,6 @@ private:
 
 };
 
-#endif
 }
 
 

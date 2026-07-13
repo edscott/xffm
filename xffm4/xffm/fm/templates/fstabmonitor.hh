@@ -1,3 +1,4 @@
+#ifdef HAVE_FSTAB_H
 #ifndef XF_FSTABMONITOR__HH
 # define XF_FSTABMONITOR__HH
 #ifdef HAVE_MNTENT_H
@@ -412,5 +413,6 @@ loop:
     }
 };
 }
+#endif
 #endif
 

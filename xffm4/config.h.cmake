@@ -9,6 +9,9 @@
 #define VERSION "@xffm_VERSION_MAJOR@.@xffm_VERSION_MINOR@"
 
 #define @FREEBSD@
+@GETPWENT@
+@FSTAB_MODULE@
+@SHMEM@
 #define @GVIM_PROGRAM@
 #define @ZIP_PROGRAM@
 #define @UNZIP_PROGRAM@

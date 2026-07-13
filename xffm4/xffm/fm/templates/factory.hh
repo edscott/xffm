@@ -274,7 +274,7 @@ ClickMenu
             columnW + strlen("..."): 
             gridView_p->maxNameLen();*/
 
-          auto format = g_strdup_printf("%%-%ds", textSize);
+          auto format = g_strdup_printf("%%-%zus", textSize);
           //auto format = g_strdup_printf("%%-%ds", gridView_p->maxNameLen());
 
           snprintf(buffer, 128, (const char *)format, truncName);

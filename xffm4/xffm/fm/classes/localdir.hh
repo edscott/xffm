@@ -90,9 +90,11 @@ namespace xf {
 
 
     static void setPaintableIcon(GFileInfo *info, const char *path){
+#ifdef HAVE_FSTAB_H
         if (FstabUtil::isMounted(path) || FstabUtil::isInFstab(path)) {
           FstabUtil::setMountableIcon(info, path);
         }
+#endif
         auto bookmarks_p = (Bookmarks *) bookmarksObject;
         
         TRACE("isBookmarked(%s) = %d\n", path, bookmarks_p->isBookmarked(path));
@@ -164,7 +166,7 @@ namespace xf {
        
         if (filterData && filterData->flags & 0x100 && filterData->count > 0){
           char buffer[256];
-          char buffer2[32];
+          char buffer2[256];
           snprintf (buffer2, 256, "%d/%d", filterData->count, filterData->total);
           snprintf (buffer, 256, "%s [%s]", _("Regular expression"), filterData->regexp);
           // Show text will cause new tabs to open with show text to full window.
@@ -226,6 +228,7 @@ namespace xf {
         GFileInfo *infoF = g_file_info_new();
         auto name = g_path_get_basename(path);
         char *utfName=NULL;
+#ifdef HAVE_FSTAB_H
         if (g_object_get_data(G_OBJECT(store), "xffm::fstab")) {
           auto label = FstabUtil::e2Label(name);
           if (label){
@@ -238,7 +241,9 @@ namespace xf {
           }
           utfName = Basic::utf_string(label);
           g_free(label);
-        } else {
+        } else
+#endif
+	{
           utfName = Basic::utf_string(name);
           g_free(name);
         }

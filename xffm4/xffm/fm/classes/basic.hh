@@ -805,8 +805,10 @@ public:
     }
     static gchar *
     get_tilde_dir(const gchar *token){
-        struct passwd *pw;
         gchar *tilde_dir = NULL;
+#ifdef HAVE_GETPWENT
+	struct passwd *pw;
+
         while((pw = getpwent ()) != NULL) {
             gchar *id = g_strdup_printf("~%s/", pw->pw_name);
             if (strncmp(token, id, strlen(id))==0){
@@ -817,6 +819,10 @@ public:
             g_free(id);
         }
         endpwent ();
+#else
+        auto home = getenv("HOME");
+	if (home && g_file_test(home, G_FILE_TEST_IS_DIR)) tilde_dir = g_strdup(home);
+#endif
         return tilde_dir;
     }
 

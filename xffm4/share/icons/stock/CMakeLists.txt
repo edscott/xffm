@@ -1,104 +1,16 @@
-set(ICONS about.svg
-add.svg
-application-exit.svg
-apply.svg
-authentication.svg
-bold.svg
-bookmark-new.svg
-bottom.svg
-cancel.svg
-clear.svg
-close.svg
-configure.svg
-copy.svg
-cut.svg
-delete.svg
-dialog-authentication.svg
-dialog-info.svg
-dialog-question.svg
-dialog-warning.svg
-display.svg
-dnd-multiple.svg
-dnd.svg
-document-new.svg
-document-open.svg
-document-save-as.svg
-document-save.svg
-down.svg
-edit-clear.svg
-edit-copy.svg
-edit-cut.svg
-edit-delete.svg
-edit-find.svg
-edit-paste.svg
-edit-undo.svg
-execute.svg
-file.svg
-find.svg
-first.svg
-folder.svg
-format-text-bold.svg
-go-back.svg
-go-bottom.svg
-go-down.svg
-go-first.svg
-go-forward.svg
-go-home.svg
-go-jump.svg
-go-last.svg
-go-next.svg
-go-previous.svg
-go-top.svg
-go-up.svg
-harddisk.svg
-help.svg
-image-missing.svg
-index.svg
-jump.svg
-last.svg
-list-add.svg
-list-remove.svg
-missing-image.svg
-network.svg
-new.svg
-next.svg
-no.svg
-ok.svg
-open.svg
-paste.svg
-preferences.svg
-previous.svg
-process-reset.svg
-properties.svg
-question.svg
-refresh.svg
-remove.svg
-save-as.svg
-save.svg
-select-all.svg
-select-color.svg
-sort-ascending.svg
-sort-descending.svg
-stop.svg
-strikethrough.svg
-system-search.svg
-terminal.svg
-top.svg
-up.svg
-video-display.svg
-view-refresh.svg
-view-sort-ascending.svg
-view-sort-descending.svg
-warning.svg
-window-close.svg
-yes.svg
-zoom-100.svg
-zoom-fit-best.svg
-zoom-in.svg
-zoom-original.svg
-zoom-out.svg
-zoom-page-height.svg
-zoom-page-width.svg
-zoom.svg)
+set(ICONS edit-clear.svg        go-jump.svg        select-color.svg
+delete.svg                 edit-copy.svg         go-last.svg        strikethrough.svg
+dialog-authentication.svg  edit-cut.svg          go-next.svg        video-display.svg
+dialog-info.svg            edit-find.svg         go-previous.svg    view-refresh.svg
+dialog-question.svg        edit-paste.svg        go-top.svg         view-sort-ascending.svg
+dialog-warning.svg         edit-undo.svg         go-up.svg          view-sort-descending.svg
+display.svg                file.svg              index.svg          window-close.svg
+dnd-multiple.svg           folder.svg            list-add.svg       zoom-fit-best.svg
+dnd.svg                    format-text-bold.svg  list-remove.svg    zoom-in.svg
+document-new.svg           go-bottom.svg         ok.svg             zoom-original.svg
+document-open.svg          go-down.svg           process-reset.svg  zoom-out.svg
+document-save-as.svg       go-first.svg          properties.svg     zoom-page-height.svg
+document-save.svg          go-home.svg           properties.svg~    zoom-page-width.svg
+)
 INSTALL(FILES  ${ICONS}  DESTINATION share/icons/hicolor/scalable/stock)
 

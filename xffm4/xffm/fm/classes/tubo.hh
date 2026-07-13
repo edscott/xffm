@@ -173,6 +173,20 @@ typedef struct tuboPublic_t{
 static pthread_mutex_t  list_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 namespace xf {
+#ifndef HAVE_SHM
+  int shm_open(const char *basename, int flags, mode_t mode){
+    auto path = g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S, basename, NULL);
+    auto fd = open(path, flags, mode);
+    g_free(path);
+    return fd;
+  }
+
+  void shm_unlink(const char *basename){
+    auto path =  g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S, basename, NULL);
+    unlink(path);
+    g_free(path);
+  }
+#endif
 
 class Tubo {
 public:
