@@ -21,7 +21,7 @@ target_link_libraries(xffm4
     ${libReadline_LIBRARIES}
     ${THREAD_LIBRARIES})
 
-execute_process(COMMAND ln -sf xffm4 xfgetpass4 WORKING_DIRECTORY xffm)
+execute_process(COMMAND cp xffm4 xfgetpass4 WORKING_DIRECTORY xffm)
 
 
 install(TARGETS xffm4 RUNTIME DESTINATION bin)
