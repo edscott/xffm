@@ -47,7 +47,7 @@ public:
         this->startMonitor(view->treeModel(), path, (void *)monitor_f);
         view->setMonitorObject(this);
         // start mountThread
-#ifdef USE_MOUNTTHREAD
+#ifdef HAVE_FSTAB_H
         pthread_t mountThread;
         this->mountArg_[0] = (void *)this;
         this->mountArg_[1] = GINT_TO_POINTER(TRUE);
@@ -62,10 +62,14 @@ public:
 
     static void *
     mountThreadF(void *data){
+#ifndef HAVE_FSTAB_H
+      return NULL;
+#endif
         void **arg = (void **)data;
         auto baseMonitor = (BaseMonitor<Type> *)arg[0];
         TRACE("*** baseMonitor = %p\n", baseMonitor);
         g_object_set_data(G_OBJECT(baseMonitor->treeModel()), "baseMonitor", (void *)baseMonitor);
+
         // get initial md5sum
         gchar *sum = Util<Type>::md5sum("/proc/mounts");
         gchar *sumPartitions = Util<Type>::md5sum("/proc/partitions");

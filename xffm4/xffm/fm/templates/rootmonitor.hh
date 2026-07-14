@@ -42,10 +42,14 @@ namespace xf {
       char **files = (char **)calloc(5, sizeof(char *));
        
       auto bookmarks_p = (Bookmarks *) bookmarksObject; // bookmarksObject is global
-      files[0] = g_strdup("/proc/mounts");
-      files[1] = g_strdup("/proc/partitions");
-      files[2] = bookmarks_p->getBookmarksFilename();
-      files[3] = EfsResponse<Type>::efsKeyFile(); // static function
+      files[0] = bookmarks_p->getBookmarksFilename();
+      files[1] = EfsResponse<Type>::efsKeyFile(); // static function
+#ifdef HAVE_FSTAB_H 
+      files[2] = g_strdup("/proc/mounts");
+      files[3] = g_strdup("/proc/partitions");
+#else
+      files[2] = NULL;
+#endif
 
 
 
@@ -77,12 +81,14 @@ done:
         }
        
         // get initial md5sum
-        for (int i=0; i<size; i++){
+        for (int i=0; i<size && files[i] != NULL; i++){
+          if (!g_file_test(files[i], G_FILE_TEST_EXISTS)) continue;
           g_free(sum[i]);
+          sum[i] = NULL;
           sum[i] = Basic::md5sum(files[i]);
           if (sum[i] == NULL) {
-            ERROR_("Error:: Exiting threadF1 %p(%p) on md5sum error (sum)\n", 
-                child_p, gridView_p);
+            ERROR_("Error:: Exiting threadF1 %p(%p) on md5sum error (%s)\n", 
+                child_p, gridView_p, files[i]);
             goto done;
           }
         }
@@ -92,7 +98,9 @@ done:
           if (!arg[1])continue;
 
           bool test[5];
-          for (int i=0; i<size; i++){
+          memset(test, 0, 5*sizeof(bool));
+          for (int i=0; i<size && files[i] != NULL; i++){
+            if (!g_file_test(files[i], G_FILE_TEST_EXISTS)) continue;
             test[i] = Basic::checkSumFile(files[i], &(sum[i]));
           }
            

@@ -1,6 +1,6 @@
+#ifdef HAVE_FSTAB_H
 #ifndef XF_FSTABUTIL_HH 
 #define XF_FSTABUTIL_HH
-#ifdef HAVE_FSTAB_H
 
 // These are the strings returned from getMntType()
 #define MNTTYPE_PROCFS        "proc"

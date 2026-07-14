@@ -135,7 +135,7 @@ private:
 
       auto frame = GTK_FRAME(gtk_frame_new(NULL));
       gtk_frame_set_label_align(frame, 1.0);
-      auto closeBox = Dialog::buttonBox("close", _("Close"), (void *)cancelCallback, this);
+      auto closeBox = Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, this);
       gtk_frame_set_label_widget(frame, GTK_WIDGET(closeBox));
       //gtk_widget_set_vexpand(GTK_WIDGET(frame), false);
       //gtk_widget_set_hexpand(GTK_WIDGET(frame), false);
@@ -263,7 +263,7 @@ private:
         if (textView != NULL) {
           withTextview(true);
         }
-        auto yesBox = Dialog::buttonBox("apply", _("Apply"), (void *)ok, this);
+        auto yesBox = Dialog::buttonBox(EMBLEM_APPLY, _("Apply"), (void *)ok, this);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(mimeButton), FALSE, FALSE, 3);
         Basic::boxPack0(GTK_BOX (hbox), GTK_WIDGET(yesBox), FALSE, FALSE, 3);
         //Basic::boxPack0(GTK_BOX (hbox),GTK_WIDGET(cancel), FALSE, FALSE, 10);

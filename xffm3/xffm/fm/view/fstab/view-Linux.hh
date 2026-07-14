@@ -1,3 +1,4 @@
+#ifdef HAVE_FSTAB_H
 #ifndef VIEW_LINUX_HH 
 #define VIEW_LINUX_HH
 public:
@@ -978,4 +979,5 @@ private:
     }
 
 
+#endif
 #endif

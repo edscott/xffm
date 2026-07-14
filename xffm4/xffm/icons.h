@@ -8,16 +8,14 @@
 #define OPEN_TERMINAL "video-display"
 #define GO_HOME "emblem-go-home"
 #define DOCUMENT_PROPERTIES "document-properties"
-#define WINDOW_SHUTDOWN "system-shutdown-symbolic"
-//#define WINDOW_CLOSE "process-stop-symbolic"
+//#define WINDOW_SHUTDOWN "system-shutdown-symbolic"
 #define WINDOW_CLOSE "window-close"
 #define HARD_DISK "drive-harddisk"
 
 // File type emblems
 
 #define GRAYBALL "emblem-grayball"
-//#define CANCEL "cancel" // remove
-#define EMBLEM_CANCEL "cancel" 
+#define EMBLEM_CANCEL "window-close" 
 #define EXECUTE "execute"
 
 #define EMBLEM_P "emblem-p"
@@ -45,9 +43,9 @@
 #define EMBLEM_AUTHENTICATION "emblem-keyhole"
 #define EMBLEM_KEYBOARD "emblem-keyboard"
 #define EMBLEM_TTY "emblem-tty"
-#define EMBLEM_CLOSE "close"
-#define EMBLEM_NO "no"
-#define EMBLEM_APPLY "apply"
+#define EMBLEM_CLOSE "window-close"
+#define EMBLEM_NO "emblem-redball"
+#define EMBLEM_APPLY "ok"
 #define EMBLEM_ADD "emblem-add"
 #define EMBLEM_REMOVE "emblem-remove"
 #define EMBLEM_DELETE "emblem-delete"
@@ -84,7 +82,6 @@
 #define EMBLEM_IMPORTANT "emblem-important"
 #define EMBLEM_NEW_WINDOW "emblem-run"
 #define EMBLEM_COLOR "emblem-color"
-//#define EMBLEM_APPLY "ok"
 #define EMBLEM_ABOUT "emblem-about"
 #define EMBLEM_BROKEN "emblem-broken"
 #define EMBLEM_START_HERE "emblem-start-here"
@@ -96,9 +93,7 @@
 #define EMBLEM_FOLDER_OPEN "emblem-folder"
 #define EMBLEM_RESET "process-reset"
 #define EMBLEM_FIND "emblem-find"
-//#define EMBLEM_ "emblem-"
-
-#define LIST_ADD "list-add"
+#define WINDOW_SHUTDOWN "emblem-exit"
 #define OPEN_MENU "open-menu"
 
 #endif
