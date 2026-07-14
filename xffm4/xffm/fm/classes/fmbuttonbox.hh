@@ -21,6 +21,7 @@ namespace xf {
            EMBLEM_TTY, //EMBLEM_KEYBOARD, //EMBLEM_TTY, 
            GO_HOME, 
            EMBLEM_RUN, 
+          // DESKTOP_ICON,
            NULL
          };
 
@@ -30,6 +31,7 @@ namespace xf {
           _("Open terminal"),
           _("Home"),
           _("Open a New Window"),
+         // _("Workspace Switcher"),
           NULL
         };
         void *bCallback[]={
@@ -38,6 +40,7 @@ namespace xf {
           (void *)MenuCallbacks<LocalDir>::openTerminal,
           (void *)MenuCallbacks<LocalDir>::goHome,
           (void *)MenuCallbacks<LocalDir>::newWindow,
+         // (void *)MenuCallbacks<LocalDir>::moveWS,
           NULL
         };
         void *bdata[]={
@@ -46,6 +49,7 @@ namespace xf {
           NULL,
           NULL,
           NULL,
+        //  GINT_TO_POINTER(1),
           NULL
         };
         

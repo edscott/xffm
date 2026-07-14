@@ -1111,7 +1111,9 @@ class Preview {
       gchar key[11];
 
       cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
+      DBG("cache dir is '%s'\n", cache_dir)
       if(g_mkdir_with_parents (cache_dir, 0700) < 0) {
+          DBG("cannot create cache dir '%s'\n", cache_dir)
           g_free (cache_dir);
           return NULL;
       }
@@ -1119,7 +1121,7 @@ class Preview {
       /* thumbnails are not subject to thumbnailization: */
       gchar *dirname = g_path_get_dirname (file);
       if(strncmp (cache_dir, dirname, strlen (cache_dir)) == 0) {
-          TRACE ("thumbnails cannot be thumbnailed:%s\n", file);
+          DBG ("thumbnails cannot be thumbnailed: '%s'\n", file);
           g_free (cache_dir);
           g_free (dirname);
           return NULL;
@@ -1134,6 +1136,7 @@ class Preview {
 
       gchar *thumbnail_dir = g_build_filename (cache_dir, key, NULL);
       if(g_mkdir_with_parents (thumbnail_dir, 0700) < 0) {
+          DBG ("Cannot create thumbnail dir '%s' for file '%s' (%s)\n", thumbnail_dir, file, strerror(errno));
           g_free (thumbnail_dir);
           return NULL;
       }

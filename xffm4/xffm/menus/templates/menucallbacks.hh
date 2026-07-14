@@ -106,20 +106,36 @@ namespace xf {
     }
 
     static void
-    queryWS(void){
-      using subClass_t = wsResponse<Type>;
-      using dialog_t = DialogEntry<subClass_t>;
-      auto dialogObject = new dialog_t;
-      dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));
-      
-      dialogObject->run();
+    queryWS(int k){
+
+      if (k == 0){
+        using subClass_t0 = wsResponse0<Type>;
+        using dialog_t0 = DialogEntry<subClass_t0>;
+        auto dialogObject = new dialog_t0;
+        dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));       
+        dialogObject->run();
+      }
+      if (k == 1){
+        using subClass_t1 = wsResponse1<Type>;
+        using dialog_t1 = DialogEntry<subClass_t1>;
+        auto dialogObject = new dialog_t1;
+        dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));       
+        dialogObject->run();
+      }
       return;
     }
+
 
     static void
     moveWS(GtkGestureClick *self, 
         int n, double x, double y,
         void *data){
+
+      if (GPOINTER_TO_INT(data) == 1){
+          queryWS(1); 
+          return;
+      }
+
       TRACE("moveWS now...\n");
       auto childWidget =Child::getChild();
       auto output = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(childWidget), "output"));
@@ -142,7 +158,7 @@ namespace xf {
         lastWS = NULL;
         // query for workspace... (lastWS)
         lastWS = NULL;
-        queryWS(); 
+        queryWS(0); 
         return;
       } else if (lastWS) {
         /*Print::showText(output);
@@ -154,17 +170,17 @@ namespace xf {
         g_free(msg);*/
       }
       
-      if (strcmp(tt, "xffm4")==0){
+      if (strcmp(tt, "10:xffm4")==0){
         // Here we are at xffm4 desktop
         if (lastWS == NULL){
           // Here we entered xffm4 destop not by moveWS().
           g_free(tt);
-          queryWS(); 
+          queryWS(0); 
           return;
         }
       }
-      TRACE("moving to %s...\n", lastWS?lastWS:"xffm4");
-      moveTo( (const char *)lastWS?lastWS:"xffm4");
+      TRACE("moving to %s...\n", lastWS?lastWS:"10:xffm4");
+      moveTo( (const char *)lastWS?lastWS:"10:xffm4", 0);
       if (lastWS == NULL){
         // We moved out to xffm4.
         lastWS = g_strdup(tt);
@@ -221,20 +237,27 @@ namespace xf {
     }
 
    
-    static void moveTo(const char *tab){
+    static void moveTo(const char *tab, int k){
       auto msg = g_find_program_in_path("i3-msg");
       if (!msg){
         ERROR_("i3-msg program not found\n");
         return;
       }
 
-      const char *arg[]={(const char *)msg, 
+      const char *arg0[]={(const char *)msg, 
         "-q","move", "container", "to", "workspace",
         tab, NULL};
+      const char *arg1[]={(const char *)msg, 
+        "workspace",
+        tab, NULL};     
+
       auto pid = fork();
       if (!pid){
-        TRACE("moving to %s\n", tab);
-        execvp(msg, (char * const *)arg);
+        if (k==0) execvp(msg, (char * const *)arg0);
+        if (k==1) {
+          TRACE("moveTo(): %s %s %s\n", arg1[0], arg1[1], arg1[2]);
+          execvp(msg, (char * const *)arg1);
+        }
         _exit(1);
       }
       usleep(500);

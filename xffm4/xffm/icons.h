@@ -95,5 +95,6 @@
 #define EMBLEM_FIND "emblem-find"
 #define WINDOW_SHUTDOWN "emblem-exit"
 #define OPEN_MENU "open-menu"
+#define DESKTOP_ICON "user-desktop"
 
 #endif

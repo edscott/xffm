@@ -20,6 +20,7 @@ namespace xf {
         auto size = Settings::getInteger("xfterm", "iconsize",24);
         double scaleFactor = (size == 24)? 0.75 : 1.0;
 
+#ifdef HAVE_FSTAB_H
         // fstab icon
         {
           GFile *file = g_file_new_for_path(g_get_home_dir());
@@ -30,7 +31,8 @@ namespace xf {
           g_file_info_set_attribute_object (info, "xffm::fstab", G_OBJECT(file));
           g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
         }
-
+#endif
+        
         // ecryptfs icon
         {
           GFile *file = g_file_new_for_path("/");
