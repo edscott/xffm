@@ -11,6 +11,6 @@ document-new.svg           go-bottom.svg         ok.svg             zoom-origina
 document-open.svg          go-down.svg           process-reset.svg  zoom-out.svg
 document-save-as.svg       go-first.svg          properties.svg     zoom-page-height.svg
 document-save.svg          go-home.svg           properties.svg~    zoom-page-width.svg
-)
+user-desktop.svg )
 INSTALL(FILES  ${ICONS}  DESTINATION share/icons/hicolor/scalable/stock)
 
