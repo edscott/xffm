@@ -61,6 +61,8 @@ namespace xf
 
       Basic::setAsDialog(dialog);
       gtk_window_present(dialog);
+      // Speed up showing dialog:
+      while (g_main_context_pending(NULL))g_main_context_iteration(NULL, TRUE);
 
       // This fires off the dialog controlling thread, and will delete
       // object when dialog is destroyed.

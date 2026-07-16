@@ -18,7 +18,6 @@ public:
         }
         fullPath(path);
         //gchar *fullPath = NULL;
-        createDialog();
     }
 
     ~Find(void){
@@ -61,10 +60,6 @@ TRACE("pipe for \"grep --version\"\n");
         }
         g_free (grep);
         return true;
-    }
-
-    void createDialog(){
-
     }
 
 };
