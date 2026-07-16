@@ -173,19 +173,65 @@ typedef struct tuboPublic_t{
 static pthread_mutex_t  list_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 namespace xf {
-#ifndef HAVE_SHM
-  int shm_open(const char *basename, int flags, mode_t mode){
-    auto path = g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S, basename, NULL);
-    auto fd = open(path, flags, mode);
-    g_free(path);
-    return fd;
-  }
+#if defined __BIONIC__
 
-  void shm_unlink(const char *basename){
-    auto path =  g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S, basename, NULL);
-    unlink(path);
-    g_free(path);
-  }
+static char *getShmName(const char *name){
+    const char *prefix = getenv("PREFIX");
+    /* Construct the filename.  */
+    if (name[0] == '/' && strlen(name) == 1){
+        /* The name "/" is not supported.  */
+        errno = EINVAL;
+        return NULL;
+    }
+
+    char *fname = (char *) calloc(strlen(name) + strlen("/tmp") + strlen(prefix) + 1, sizeof(char));
+    //fprintf(stderr, "shm_open(): prefix=%s\n", prefix);
+
+    memcpy(fname, prefix, strlen(prefix));
+    //fprintf(stderr, "shm_open(): fname=%s\n", fname);
+    memcpy(fname + strlen(prefix), "/tmp", strlen("/tmp"));
+    //fprintf(stderr, "shm_open(): fname=%s\n", fname);
+
+    memcpy(fname + strlen(prefix) +strlen("/tmp") , name, strlen(name));
+    return fname;
+}
+
+ 
+static int shm_unlink(const char *name) {
+    char *fname = getShmName(name);
+    if (!fname) {
+        errno = EINVAL;
+        return -1;
+    }
+    return unlink(fname);
+}
+
+
+static int shm_open(const char *name, int oflag, mode_t mode) {
+    char *fname = getShmName(name);
+    if (!fname) return -1;
+    fprintf(stderr, "shm name is '%s'\n", fname);
+    int fd;
+
+    fd = open(fname, oflag, mode);
+    if (fd != -1) {
+        /* We got a descriptor.  Now set the FD_CLOEXEC bit.  */
+        int flags = fcntl(fd, F_GETFD, 0);
+        flags |= FD_CLOEXEC;
+        flags = fcntl(fd, F_SETFD, flags);
+
+        if (flags == -1) {
+            /* Something went wrong.  We cannot return the descriptor.  */
+            int save_errno = errno;
+            close(fd);
+            fd = -1;
+            errno = save_errno;
+        }
+    }
+
+    return fd;
+}
+
 #endif
 
 class Tubo {
