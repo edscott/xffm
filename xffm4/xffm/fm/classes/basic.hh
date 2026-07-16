@@ -31,6 +31,16 @@ namespace xf {
       }
 #endif
    public:
+    
+    static  gboolean
+    pulseProgress(void * data){
+      auto progress = GTK_PROGRESS_BAR(data);
+
+        gtk_progress_bar_pulse(progress);
+        return G_SOURCE_REMOVE;
+    //    return G_SOURCE_CONTINUE;
+    }
+
 
     static bool checkSumFile(const char *file, char **sum){
       char *newSum = md5sum(file);

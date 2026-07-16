@@ -28,12 +28,22 @@ namespace xf
       parent_ = GTK_WINDOW(_mainWidget);
       setupRun();
     }
-    
     void setupRun(void){ // exclusive to DialogComplex
       auto frame = this->frame();
-      gtk_frame_set_child(frame, GTK_WIDGET(mainBox_));
+
       this->setParent(parent_);
-      
+       
+      auto vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+      gtk_widget_set_vexpand(GTK_WIDGET(vbox), false);
+      gtk_widget_set_hexpand(GTK_WIDGET(vbox), true);
+      gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(vbox));  
+      Basic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(mainBox_), TRUE, TRUE, 0);
+      // Termux-x11 speed up showing dialog trick:
+      auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+      Basic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(progress), false, false, 0);
+      g_timeout_add(50, Basic::pulseProgress, (void *)progress);
+      //gtk_frame_set_child(frame, GTK_WIDGET(mainBox_));
+
       auto dialog = this->dialog();
       this->subClass()->dialog(dialog);
       TRACE("*** DialogComplex setupRun: setting this->subClass()->dialog to %p\n", dialog);
@@ -61,9 +71,6 @@ namespace xf
 
       Basic::setAsDialog(dialog);
       gtk_window_present(dialog);
-      // Speed up showing dialog:
-      while (g_main_context_pending(NULL))g_main_context_iteration(NULL, TRUE);
-
       // This fires off the dialog controlling thread, and will delete
       // object when dialog is destroyed.
       this->run();

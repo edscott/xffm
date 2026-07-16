@@ -35,6 +35,10 @@ public:
       gtk_window_set_child(window, GTK_WIDGET(mainBox));
       gtk_box_append(mainBox, GTK_WIDGET(sw));
       gtk_scrolled_window_set_child(sw, GTK_WIDGET(listBox));
+      // Termux-x11 speed up showing dialog trick:
+      auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+      gtk_box_append(mainBox, GTK_WIDGET(progress));
+      g_timeout_add(50, Basic::pulseProgress, (void *)progress);
       
       mkGesture(GTK_WIDGET(listBox), (void *)window);
 
@@ -170,14 +174,13 @@ private:
       gtk_box_append(GTK_BOX(margin),space);
       gtk_box_append(GTK_BOX(buttonBox),margin);
 
-      auto hide = Basic::newButtonX(EMBLEM_DELETE, _("Exit"));
+  /*    auto hide = Basic::newButtonX(EMBLEM_DELETE, _("Exit"));
       gtk_box_append(buttonBox, GTK_WIDGET(hide));
-      g_signal_connect(G_OBJECT(hide), "clicked", G_CALLBACK(close), window);
-      //g_signal_connect(G_OBJECT(hide), "clicked", G_CALLBACK(clearBox), window);
+      g_signal_connect(G_OBJECT(hide), "clicked", G_CALLBACK(close), window);*/
 
       auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
-      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(clearBox), window);
-      //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
+      //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(clearBox), window);
+      g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
       gtk_box_append(buttonBox, GTK_WIDGET(button));
           
       gtk_box_append(mainBox, GTK_WIDGET(buttonBox));
