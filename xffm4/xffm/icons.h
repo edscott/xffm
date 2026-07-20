@@ -10,13 +10,14 @@
 #define DOCUMENT_PROPERTIES "document-properties"
 //#define WINDOW_SHUTDOWN "system-shutdown-symbolic"
 #define WINDOW_CLOSE "window-close"
-#define HARD_DISK "drive-harddisk"
+#define HARD_DISK "emblem-usb"
 
 // File type emblems
 
 #define GRAYBALL "emblem-grayball"
 #define EMBLEM_CANCEL "window-close" 
 #define EXECUTE "execute"
+
 
 #define EMBLEM_P "emblem-p"
 #define EMBLEM_C "emblem-c"
@@ -78,7 +79,8 @@
 #define EMBLEM_SELECT_ALL "emblem-select-all"
 #define EMBLEM_BOOKMARK "emblem-bookmark"
 #define EMBLEM_TOGGLE "emblem-toggle"
-#define EMBLEM_TRASH_FULL "user-trash-full"
+#define EMBLEM_TRASH "emblem-trash"
+#define EMBLEM_TRASH_FULL "emblem-trash"
 #define EMBLEM_IMPORTANT "emblem-important"
 #define EMBLEM_NEW_WINDOW "emblem-run"
 #define EMBLEM_COLOR "emblem-color"
@@ -91,6 +93,7 @@
 #define EMBLEM_INVERT "emblem-invert"
 #define EMBLEM_TOGGLE "emblem-toggle"
 #define EMBLEM_FOLDER_OPEN "emblem-folder"
+#define EMBLEM_FOLDER "emblem-folder"
 #define EMBLEM_RESET "process-reset"
 #define EMBLEM_FIND "emblem-find"
 #define WINDOW_SHUTDOWN "emblem-exit"

@@ -231,7 +231,7 @@ namespace xf {
         Basic::Exit("boxPack(): programming error. Exit(2)\n");
       }
     }
-public:    
+public:     
     GtkPopover *mkMenu(const char *markup){
       return mkMenu(markup, NULL, NULL);
     }

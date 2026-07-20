@@ -1115,11 +1115,14 @@ public:
     }
     static void
     setTooltip(GtkWidget *w, const gchar *text){
-      //auto t =g_strconcat("<span color=\"yellow\" bgcolor=\"blue\"><i>", text, "</i></span>", NULL);
+#ifndef __BIONIC__
+      // No tooltips in termux-x11, since X11 draw event is not generated at once.
       auto t =g_strconcat("<span color=\"yellow\"><i>", text, "</i></span>", NULL);
+//      gtk_widget_set_tooltip_text (w,text);
       gtk_widget_set_tooltip_markup (w,t);
       //gtk_widget_add_css_class (w, "tooltip" );
       g_free(t);
+#endif
       return;
     }
 

@@ -81,6 +81,7 @@ emblem-star.svg
 emblem-start-here.svg
 emblem-symbolic-link.svg
 emblem-synchronized.svg
+emblem-trash.svg
 emblem-terminal.svg
 emblem-text.svg
 emblem-toggle.svg

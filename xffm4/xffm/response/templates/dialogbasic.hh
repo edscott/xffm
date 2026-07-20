@@ -314,7 +314,7 @@ private:
       arg[0] = (void *)progress_;
       arg[1] = &progressStatus_;
       arg[2] = (void *)dialog_;
-      g_timeout_add(250, pulseProgress, (void *)arg);
+      g_timeout_add(150, pulseProgress, (void *)arg);
 #endif
       return GTK_WIDGET(closeBox);
 

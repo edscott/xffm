@@ -19,13 +19,25 @@ namespace xf {
         auto flags = Settings::getInteger("Bookmarks","flags", 0);
         auto size = Settings::getInteger("xfterm", "iconsize",24);
         double scaleFactor = (size == 24)? 0.75 : 1.0;
+        // home icon
+        {
+          GFile *file = g_file_new_for_path(g_get_home_dir());
+          auto info = newInfo(file, G_FILE_TYPE_DIRECTORY);
+          
+          g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
+          g_file_info_set_icon(info, g_themed_icon_new(GO_HOME));
+          g_file_info_set_name(info, _("Home"));
+          g_list_store_insert(store, count++, G_OBJECT(info));
+          g_file_info_set_attribute_object (info, "xffm::home", G_OBJECT(file));
+          g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
+        }
 
 #ifdef HAVE_FSTAB_H
         // fstab icon
         {
           GFile *file = g_file_new_for_path(g_get_home_dir());
           auto info = newInfo(file, G_FILE_TYPE_UNKNOWN);
-          g_file_info_set_icon(info, g_themed_icon_new("drive-harddisk"));
+          g_file_info_set_icon(info, g_themed_icon_new(HARD_DISK));
           g_file_info_set_name(info, _("Disk Mounter"));
           g_list_store_insert(store, count++, G_OBJECT(info));
           g_file_info_set_attribute_object (info, "xffm::fstab", G_OBJECT(file));
@@ -41,7 +53,7 @@ namespace xf {
           //auto gIcon = g_file_info_get_icon(info);
           
 //          auto paintable = Texture<bool>::addEmblem(gIcon, EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
-          auto paintable = Texture<bool>::addEmblem("emblem-folder", EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
+          auto paintable = Texture<bool>::addEmblem(EMBLEM_FOLDER, EMBLEM_LOCK, scaleFactor*size, scaleFactor*size);
           g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));      
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
@@ -50,17 +62,22 @@ namespace xf {
           g_file_info_set_attribute_object (info, "xffm::ecryptfs", G_OBJECT(file));
           g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
         }
+
         // trash icon
         {
           auto trashDir = g_strdup_printf("%s/.local/share/Trash/files", g_get_home_dir());
-          auto trashIcon = (g_file_test(trashDir, G_FILE_TEST_IS_DIR))? 
-              "user-trash-full" : "user-trash";
           GFile *file = (g_file_test(trashDir, G_FILE_TEST_IS_DIR))? 
               g_file_new_for_path(trashDir) : g_file_new_for_path(g_get_home_dir());
           auto info = newInfo(file, G_FILE_TYPE_DIRECTORY);
+          if (g_file_test(trashDir, G_FILE_TEST_IS_DIR)) {
+            auto paintable = Texture<bool>::addEmblem(EMBLEM_FOLDER, EMBLEM_TRASH, scaleFactor*size, scaleFactor*size);
+            g_file_info_set_attribute_object(info, "xffm::paintable", G_OBJECT(paintable));    
+          } else {
+            g_file_info_set_icon(info, g_themed_icon_new(EMBLEM_TRASH));
+          }
+          g_free(trashDir);
           
           g_file_info_set_attribute_object(info, "standard::file", G_OBJECT(file));   
-          g_file_info_set_icon(info, g_themed_icon_new(trashIcon));
           g_file_info_set_name(info, _("Trash bin"));
           g_list_store_insert(store, count++, G_OBJECT(info));
           g_file_info_set_attribute_object (info, "xffm::trash", G_OBJECT(file));
@@ -141,7 +158,33 @@ namespace xf {
             g_file_info_set_attribute_object (info, "xffm::rootItem", G_OBJECT(file));
           }
         }
+        g_list_store_sort(store, compareRoot, NULL);
         return LocalDir::getSelectionModel(G_LIST_MODEL(store), false, 0);
+      }
+
+      static int resolveInfo(GFileInfo *A, GFileInfo *B, const char *attrib){
+          auto attribA = g_file_info_get_attribute_object(A, attrib);
+          auto attribB = g_file_info_get_attribute_object(B, attrib);
+          if (attribA) return -1;
+          if (attribB) return 1;
+          return 0;
+      }
+
+
+      static int compareRoot(const void *a, const void *b, void *data){
+          auto A = (GFileInfo *)a;
+          auto B = (GFileInfo *)b;
+          int retval = 0;
+          if ( (retval=resolveInfo(A, B, "xffm::home")) != 0) return retval;
+          if ( (retval=resolveInfo(A, B, "xffm::trash")) != 0) return retval;
+          if ( (retval=resolveInfo(A, B, "xffm::fstab")) != 0) return retval;
+          if ( (retval=resolveInfo(A, B, "xffm::ecryptfs")) != 0) return retval;
+
+
+          auto nameA = g_file_info_get_name(A);
+          auto nameB = g_file_info_get_name(B);
+          return strcmp(nameA,nameB);
+          
       }
 
       static GFileInfo *newInfo(GFile *file, GFileType type){
