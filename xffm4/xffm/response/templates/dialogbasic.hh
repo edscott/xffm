@@ -115,6 +115,7 @@ namespace xf
         if (exitDialogs) response = GINT_TO_POINTER(-1);
         usleep(2500);
       } while (!response);
+      dialogObject->progressStatus(false);
       // hide
       auto subClass = dialogObject->subClass_;
       
@@ -143,6 +144,8 @@ namespace xf
     protected:
 
   public:
+    void progressStatus(bool value){progressStatus_ = value;}
+  
     GtkEventController *raiseController(void){return raiseController_;}
     GtkEventController *clickController(void){
       return GTK_EVENT_CONTROLLER(clickController_);
@@ -304,14 +307,14 @@ private:
       auto button = Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
       gtk_box_append(closeBox, GTK_WIDGET(button));
 
-#if 1
+#if 0
       g_timeout_add(50, Basic::pulseProgress, (void *)progress_);
 #else
       auto arg = (void **)calloc(3,sizeof(void *));
       arg[0] = (void *)progress_;
       arg[1] = &progressStatus_;
       arg[2] = (void *)dialog_;
-      g_timeout_add(50, pulseProgress, (void *)arg);
+      g_timeout_add(250, pulseProgress, (void *)arg);
 #endif
       return GTK_WIDGET(closeBox);
 
@@ -331,18 +334,16 @@ private:
     pulseProgress(void * data){
       auto arg = (void **)data;
 
+      if (!arg[0] || !GTK_IS_PROGRESS_BAR (arg[0])){
+        return G_SOURCE_REMOVE;
+      }
+
       auto progressStatus = (bool *)arg[1];
       if (*progressStatus){
         auto progress = GTK_PROGRESS_BAR(arg[0]);
         gtk_progress_bar_pulse(progress);
         return G_SOURCE_CONTINUE;
       }
-      TRACE("window %p destroyed\n", dialog);
-      auto dialog = (GtkWindow *)arg[2];
-      gtk_widget_set_visible(GTK_WIDGET(dialog), false);
-      gtk_window_destroy(GTK_WINDOW(dialog));
-//      Basic::destroy(dialog);
-      
       g_free(arg);
       return G_SOURCE_REMOVE;
     }
