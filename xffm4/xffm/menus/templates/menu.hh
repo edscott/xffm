@@ -382,6 +382,15 @@ public:
         gtk_widget_set_visible(GTK_WIDGET(label), TRUE);
         continue;
       }
+
+      // final progress bar        
+      auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+      gtk_widget_add_css_class (GTK_WIDGET(hbox), "inquireBox" );
+      auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+      boxPack(hbox, GTK_WIDGET(progress),  FALSE, FALSE, 5);
+      boxPack(vbox, GTK_WIDGET(hbox),  FALSE, FALSE, 0);
+      g_timeout_add(50, Basic::pulseProgress, (void *)progress);
+
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
       popover_ = menu;
       return menu;

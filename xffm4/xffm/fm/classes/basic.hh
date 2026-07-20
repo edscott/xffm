@@ -34,9 +34,13 @@ namespace xf {
     
     static  gboolean
     pulseProgress(void * data){
-// single pulse
+      if (!data || !GTK_IS_PROGRESS_BAR (data)){
+        return G_SOURCE_REMOVE;
+      }
       auto progress = GTK_PROGRESS_BAR(data);
       gtk_progress_bar_pulse(progress);
+      return G_SOURCE_CONTINUE;
+// single pulse
       return G_SOURCE_REMOVE;
     }
 
