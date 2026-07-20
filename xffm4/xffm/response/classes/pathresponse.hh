@@ -19,6 +19,14 @@ public:
 
       auto dir = g_path_get_dirname(path);
       auto newFile = g_strconcat(dir, G_DIR_SEPARATOR_S, target, NULL);
+      if (strcmp(newFile, path) == 0){
+        auto message = g_strdup_printf(" %s: %s (%s)\n", _("Invalid target folder"), dir, target);
+        Print::printWarning(Child::getOutput(NULL), message);
+        g_free(dir);
+        g_free(newFile);
+        g_free(path);
+        return NULL;
+      }
       auto output = Child::getOutput(NULL);
 
       auto op_f = g_find_program_in_path(op);
