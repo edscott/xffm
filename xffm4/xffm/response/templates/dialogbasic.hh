@@ -332,8 +332,9 @@ protected:
 private:
     static  gboolean
     pulseProgress(void * data){
-      auto arg = (void **)data;
 
+      auto arg = (void **)data;
+#if 0
       if (!arg[0] || !GTK_IS_PROGRESS_BAR (arg[0])){
         return G_SOURCE_REMOVE;
       }
@@ -344,6 +345,7 @@ private:
         gtk_progress_bar_pulse(progress);
         return G_SOURCE_CONTINUE;
       }
+#endif
       g_free(arg);
       return G_SOURCE_REMOVE;
     }
