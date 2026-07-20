@@ -38,10 +38,12 @@ namespace xf
       gtk_widget_set_hexpand(GTK_WIDGET(vbox), true);
       gtk_frame_set_child(GTK_FRAME(frame), GTK_WIDGET(vbox));  
       Basic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(mainBox_), TRUE, TRUE, 0);
+      
       // Termux-x11 speed up showing dialog trick:
-      auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+ /*     auto progress = this->progress();
       Basic::boxPack0 (GTK_BOX (vbox),GTK_WIDGET(progress), false, false, 0);
-      g_timeout_add(50, Basic::pulseProgress, (void *)progress);
+      g_timeout_add(50, Basic::pulseProgress, (void *)progress);*/
+
       //gtk_frame_set_child(frame, GTK_WIDGET(mainBox_));
 
       auto dialog = this->dialog();

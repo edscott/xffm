@@ -5,7 +5,15 @@ namespace xf
 
   template <class subClass_t>
   class DialogBasic {
+    protected:
+    GtkProgressBar *progress(void){return progress_;}
+
+    private:
     using dialog_t = DialogBasic<subClass_t>; 
+    
+    GtkProgressBar *progress_ = NULL;
+    bool progressStatus_ = true;
+
     GtkEventController *raiseController_ = NULL;
     GtkGesture *clickController_ = NULL;
     GtkBox *contentArea_;
@@ -221,18 +229,15 @@ namespace xf
     
     ~DialogBasic(void){
       TRACE("*** ~DialogBasic %p\n", dialog_);
+      progressStatus_ = false;
       // This is done by thread, so send all gtk/gdk stuff
       // to the main context thread.
       if (parent_) {
         Basic::context_function(unsetRaise_f, this);
         // only allow one subdialog (modal)
       }
-      // deprecated Basic::popDialog(dialog_);
       Basic::destroy(dialog_);
-      // race
-      // Basic::present(GTK_WINDOW(Child::mainWidget()));
 
-      TRACE("window %p destroyed\n", dialog_);
       delete subClass_;
       TRACE("subClass_ deleted\n");
       TRACE("destructor for %p\n", this);
@@ -292,7 +297,26 @@ private:
     }
 
     GtkWidget *getCloseBox(void){
-      return Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
+      auto closeBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
+      progress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+
+      gtk_box_append(closeBox, GTK_WIDGET(progress_));
+      auto button = Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
+      gtk_box_append(closeBox, GTK_WIDGET(button));
+
+#if 1
+      g_timeout_add(50, Basic::pulseProgress, (void *)progress_);
+#else
+      auto arg = (void **)calloc(3,sizeof(void *));
+      arg[0] = (void *)progress_;
+      arg[1] = &progressStatus_;
+      arg[2] = (void *)dialog_;
+      g_timeout_add(50, pulseProgress, (void *)arg);
+#endif
+      return GTK_WIDGET(closeBox);
+
+      
+//      return Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
     }
 protected:
 
@@ -303,6 +327,26 @@ protected:
       return Dialog::buttonBox(EMBLEM_APPLY, _("Apply"), (void *)ok, (void *)this);
     }
 private:
+    static  gboolean
+    pulseProgress(void * data){
+      auto arg = (void **)data;
+
+      auto progressStatus = (bool *)arg[1];
+      if (*progressStatus){
+        auto progress = GTK_PROGRESS_BAR(arg[0]);
+        gtk_progress_bar_pulse(progress);
+        return G_SOURCE_CONTINUE;
+      }
+      TRACE("window %p destroyed\n", dialog);
+      auto dialog = (GtkWindow *)arg[2];
+      gtk_widget_set_visible(GTK_WIDGET(dialog), false);
+      gtk_window_destroy(GTK_WINDOW(dialog));
+//      Basic::destroy(dialog);
+      
+      g_free(arg);
+      return G_SOURCE_REMOVE;
+    }
+
     void mkWindow(void){
         dialog_ = GTK_WINDOW(gtk_window_new());
         g_object_set_data(G_OBJECT(dialog_), "dialogObject", this);
