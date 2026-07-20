@@ -580,9 +580,9 @@ private:
 
         void mkGrepRadio(opt_t *opt, GtkEntry *grep_entry, GSList **group, GtkBox *radioBox){
             auto radio = GTK_CHECK_BUTTON(gtk_check_button_new_with_label(opt->text));
-            
-            gtk_check_button_set_group(radio, firstGrepRadio_);
             if (!firstGrepRadio_) firstGrepRadio_ = radio;
+            
+            if (radio != firstGrepRadio_) gtk_check_button_set_group(radio, firstGrepRadio_);
             
             g_object_set_data(G_OBJECT(mainBox_), opt->id, radio);
 
@@ -636,7 +636,6 @@ private:
             // option -s +KByte "size_greater", "size_greater_spin"
             auto text = g_strdup_printf("%s (%s): ", _("At Least"), _("kBytes"));
             auto radioS1 = add_option_spin(vbox, "", "size_greater_spin", text, size_greater);
-            //gtk_check_button_set_group(radioS1, radioS1);
             gtk_check_button_set_active(radioS1, true);
             g_free(text);
             
@@ -697,15 +696,15 @@ private:
             auto slist = get_user_slist();
 	    GtkCheckButton *radioGroup = NULL;
 	    if (slist) {
-		// option -u uid "uid" "uid_combo"
-		auto radio1 = add_option_combo(vbox, "uid", "uid_combo", _("User"), slist);
-		slist = free_string_slist(slist);
-		gtk_check_button_set_active(radio1, true);
-		radioGroup = radio1;
+        // option -u uid "uid" "uid_combo"
+        auto radio1 = add_option_combo(vbox, "uid", "uid_combo", _("User"), slist);
+        slist = free_string_slist(slist);
+        gtk_check_button_set_active(radio1, true);
+        radioGroup = radio1;
 	    }
 
-            // option -g gid "gid" "gid_combo"
-            slist = get_group_slist();
+      // option -g gid "gid" "gid_combo"
+      slist = get_group_slist();
 	    if (slist) {
                 auto radio2 = add_option_combo(vbox, "gid", "gid_combo", _("Group"), slist);
                 slist = free_string_slist(slist);
@@ -717,25 +716,25 @@ private:
             auto entry = GTK_ENTRY(g_object_get_data(G_OBJECT(mainBox_), "permissions_entry"));
             gtk_widget_set_size_request (GTK_WIDGET(entry), 75, -1);
 	    if (!radioGroup) radioGroup = radio3;
-            gtk_check_button_set_group(radio3, radioGroup);
-            
-            // option -p suid | exe 
-           // auto privilege = simpleCheck(parentBox, _("Privileges"));
-            auto privBox = add_option_radio2(vbox, _("Executable"),_("SUID"), NULL);
-            auto radio4 = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(mainBox_), _("Executable")));
-            //gtk_check_button_set_group(radio4, radioGroup);
-            gtk_check_button_set_active(radio4, false);
+      if (radio3 != radioGroup) gtk_check_button_set_group(radio3, radioGroup);
+      
+      // option -p suid | exe 
+     // auto privilege = simpleCheck(parentBox, _("Privileges"));
+      auto privBox = add_option_radio2(vbox, _("Executable"),_("SUID"), NULL);
+      auto radio4 = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(mainBox_), _("Executable")));
+      //gtk_check_button_set_group(radio4, radioGroup);
+      gtk_check_button_set_active(radio4, false);
 
-            auto radio5 = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(mainBox_), _("SUID")));
-            gtk_check_button_set_group(radio5, radioGroup);
-            gtk_check_button_set_active(radio5, false);
+      auto radio5 = GTK_CHECK_BUTTON(g_object_get_data(G_OBJECT(mainBox_), _("SUID")));
+      gtk_check_button_set_group(radio5, radioGroup);
+      gtk_check_button_set_active(radio5, false);
 
-           // gtk_widget_set_sensitive(GTK_WIDGET(privBox), false);
-           // g_signal_connect(G_OBJECT(privilege), "toggled", G_CALLBACK(sensitivizeSpin), privBox);
-           // gtk_check_button_set_active(privilege, false);
+     // gtk_widget_set_sensitive(GTK_WIDGET(privBox), false);
+     // g_signal_connect(G_OBJECT(privilege), "toggled", G_CALLBACK(sensitivizeSpin), privBox);
+     // gtk_check_button_set_active(privilege, false);
 
 
-            return frame;
+      return frame;
     }
 
         GtkFrame *advancedOptions(void){
@@ -923,7 +922,7 @@ private:
               if (!firstRadio) {
                 firstRadio = radio;
                 gtk_check_button_set_active(radio, true);
-              } else gtk_check_button_set_group(radio, firstRadio);
+              } else if (radio != firstRadio) gtk_check_button_set_group(radio, firstRadio);
               gtk_box_append(hbox, GTK_WIDGET(radio));
               g_object_set_data(G_OBJECT(mainBox_), radioText, radio);
 
