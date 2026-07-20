@@ -12,6 +12,7 @@ namespace xf
     GtkLabel *actionLabel(void){ return actionLabel_;}
     GtkProgressBar *progress(void){ return progress_;}
     DialogDrop(void){
+      this->progressS(NULL);
       actionLabel_ = GTK_LABEL(gtk_label_new(""));
       gtk_box_append(this->actionArea(), GTK_WIDGET(actionLabel_));
       progress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());

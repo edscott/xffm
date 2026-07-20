@@ -174,9 +174,9 @@ private:
       gtk_box_append(GTK_BOX(margin),space);
       gtk_box_append(GTK_BOX(buttonBox),margin);
 
-  /*    auto hide = Basic::newButtonX(EMBLEM_DELETE, _("Exit"));
+      auto hide = Basic::newButtonX(EMBLEM_CLEAR, _("Clear"));
       gtk_box_append(buttonBox, GTK_WIDGET(hide));
-      g_signal_connect(G_OBJECT(hide), "clicked", G_CALLBACK(close), window);*/
+      g_signal_connect(G_OBJECT(hide), "clicked", G_CALLBACK(clearBox), window);
 
       auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
       //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(clearBox), window);

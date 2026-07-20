@@ -71,7 +71,7 @@ public:
       // Backup.
       if (g_file_test(tgtFile, G_FILE_TEST_EXISTS)){
         auto backup = g_strconcat(tgtFile, "~", NULL);
-        TRACE("*** cpmv: backup %s --> %s (%d)\n", tgt, backup, modeCopy);
+        TRACE("*** cpmv: backup %s --> %s (%d)\n", tgtFile, backup, modeCopy);
         if (rename(tgtFile, backup) != 0){
           auto text = g_strdup_printf(" rename(%s, %s): %s\n", tgtFile, backup,strerror(errno));
           Print::printWarning(Child::getOutput(NULL), text);
@@ -98,6 +98,7 @@ public:
       arg[k++] = g_strdup(tgtFile);
       g_free(tgtFile);
       //backup(src, tgt);
+      TRACE("pathresponse.hh:THREADPOOL->add\n");
       THREADPOOL->add(cpmv_f, (void *)arg);
      }  
 

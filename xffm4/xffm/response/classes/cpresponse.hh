@@ -99,6 +99,7 @@ class cpDropResponse {
       arg[0] = (void *)dialogObject;
       arg[1] = (void *)list;
       arg[2] = (void *)g_strdup(target);
+      TRACE("cpresponse.hh: list=%p\ntarget=%s\n", list, target);
       new Thread("performPasteAsync()", thread1, (void *)arg);
       // clipboard contents no longer needed
       c->clearClipBoard();
@@ -107,6 +108,8 @@ class cpDropResponse {
      }
 private:
   static void *thread1(void *data){
+    TRACE("cpresponse.hh: thread1\n");
+
     void **arg = (void **)data;
     auto list = (GList *)arg[1];
     auto path = (char *)arg[2];

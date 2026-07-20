@@ -210,7 +210,7 @@ static int shm_unlink(const char *name) {
 static int shm_open(const char *name, int oflag, mode_t mode) {
     char *fname = getShmName(name);
     if (!fname) return -1;
-    fprintf(stderr, "shm name is '%s'\n", fname);
+    TRACE("shm name is '%s'\n", fname);
     int fd;
 
     fd = open(fname, oflag, mode);
@@ -273,7 +273,7 @@ public:
         // The main fork
         pid_t PID = fork ();
         if (PID < 0) {
-            fprintf(stderr, "fork(): %s\n", strerror(errno));
+            DBG("fork(): %s\n", strerror(errno));
             return PID;
         }
         newfork->PID = PID;
@@ -387,7 +387,7 @@ private:
         gchar *shm_name = shmName(parent, instance_in);
         if (!shm_name) return FALSE;
         if (strlen(shm_name) + strlen(tag) >= 64){
-            fprintf(stderr, "*** Tubo: shm_name too long: %s\n", shm_name);
+            DBG("*** Tubo: shm_name too long: %s\n", shm_name);
             g_free(shm_name);
             return FALSE;
         }

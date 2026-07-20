@@ -55,9 +55,9 @@ public:
           char buffer[256];
           while (fgets(buffer, 256, in) && ! feof(in)){
             if (strstr(buffer, "\n")) *strstr(buffer, "\n") = 0;
-            if (strstr(buffer, "siblings")){
+            if (strstr(buffer, "processor")){
               auto v = g_strsplit(buffer, ":", -1);
-              maxThreads = atoi(v[1]);
+              if (atoi(v[1])+1 > maxThreads) maxThreads = atoi(v[1])+1; 
               g_strfreev(v);
               if (maxThreads > 64) maxThreads = 64;
               if (maxThreads < 4) maxThreads = 4;
@@ -68,17 +68,23 @@ public:
         } else maxThreads = 8;
 
         maxThreads *= 2;
-              TRACE("maxThreads set to %d\n", maxThreads);
-      }
+        if (!maxThreads){
+          DBG(" ******** Error: threadpool.hh: maxThreads set to %d\n", maxThreads);
+        }      
+       }
 
       void add(void* (*function)(void*), void *data){
 #ifdef ENABLE_THREAD_POOL
         auto info = (threadInfo_t *)calloc(1, sizeof(threadInfo_t));
         info->function = function;
         info->data = data;
+        TRACE("pthread_mutex_lock(&threadPoolMutex\n");
         pthread_mutex_lock(&threadPoolMutex);
         threadPool = g_list_append(threadPool, info);
         pthread_mutex_unlock(&threadPoolMutex);
+        TRACE("pthread_mutex_unlock(&threadPoolMutex\n");
+#else
+#error "threadpool not enabled."
 #endif
       }
 

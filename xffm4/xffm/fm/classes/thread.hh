@@ -38,11 +38,11 @@ public:
         if (dbg_text) dbg_text_ = g_strdup(dbg_text);
         threadFunction_ = thread_function;
         data_ = data;
-        
+        TRACE("thread.hh: dbgtext=%s\n", dbg_text);    
         runThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
         waitThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
         if (thread_create(dbg_text, threadFunction_, data)){
-            DBG("cannot create thread (%s). throw(1).\n", dbg_text);
+            DBG("1) thread.hh: cannot create threadFunction_ (%s). throw(1).\n", dbg_text);
             throw 1;
         }
 
@@ -59,7 +59,7 @@ public:
         runThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
         waitThread_ = (pthread_t *)calloc(1, sizeof(pthread_t *));
         if (thread_create(dbg_text, threadFunction_, data)){
-            DBG("cannot create thread (%s). throw(1).\n", dbg_text);
+            DBG("2) thread.hh: cannot create threadFunction_ (%s). throw(1).\n", dbg_text);
             throw 1;
         }
     }

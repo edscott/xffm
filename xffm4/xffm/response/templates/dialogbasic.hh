@@ -6,12 +6,13 @@ namespace xf
   template <class subClass_t>
   class DialogBasic {
     protected:
-    GtkProgressBar *progress(void){return progress_;}
+    GtkProgressBar *progressS(void){return progressS_;}
+    void progressS(GtkProgressBar *value){progressS_ = NULL;}
 
     private:
     using dialog_t = DialogBasic<subClass_t>; 
     
-    GtkProgressBar *progress_ = NULL;
+    GtkProgressBar *progressS_ = NULL;
     bool progressStatus_ = true;
 
     GtkEventController *raiseController_ = NULL;
@@ -301,9 +302,9 @@ private:
 
     GtkWidget *getCloseBox(void){
       auto closeBox = GTK_BOX (gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
-      progress_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+      progressS_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
 
-      gtk_box_append(closeBox, GTK_WIDGET(progress_));
+      gtk_box_append(closeBox, GTK_WIDGET(progressS_));
       auto button = Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
       gtk_box_append(closeBox, GTK_WIDGET(button));
 
@@ -311,7 +312,7 @@ private:
       g_timeout_add(50, Basic::pulseProgress, (void *)progress_);
 #else
       auto arg = (void **)calloc(3,sizeof(void *));
-      arg[0] = (void *)progress_;
+      arg[0] = &progressS_;
       arg[1] = &progressStatus_;
       arg[2] = (void *)dialog_;
       g_timeout_add(150, pulseProgress, (void *)arg);
@@ -334,19 +335,27 @@ private:
     pulseProgress(void * data){
 
       auto arg = (void **)data;
-      if (!arg[0] || !GTK_IS_PROGRESS_BAR (arg[0])){
+      auto progress_p = (GtkProgressBar **)arg[0];
+
+      if (!progress_p || *progress_p==NULL || !GTK_IS_PROGRESS_BAR (*progress_p)){
         return G_SOURCE_REMOVE;
       }
-
+      gtk_progress_bar_pulse(*progress_p);
+      *progress_p = NULL;
+      g_free(arg);
+      return G_SOURCE_REMOVE;
+    }
+/*
       auto progressStatus = (bool *)arg[1];
       if (*progressStatus){
+        auto progress_p = (
         auto progress = GTK_PROGRESS_BAR(arg[0]);
         gtk_progress_bar_pulse(progress);
  //       return G_SOURCE_CONTINUE;
       }
       g_free(arg);
       return G_SOURCE_REMOVE;
-    }
+    }*/
 
     void mkWindow(void){
         dialog_ = GTK_WINDOW(gtk_window_new());
