@@ -40,7 +40,7 @@ namespace xf {
       }
       auto progress = GTK_PROGRESS_BAR(data);
       gtk_progress_bar_pulse(progress);
-      gtk_widget_set_visible(GTK_WIDGET(progress), false);
+      //gtk_widget_set_visible(GTK_WIDGET(progress), false);
       return G_SOURCE_REMOVE;
     }
 /*    
