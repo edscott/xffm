@@ -26,6 +26,7 @@ namespace xf {
     private:
       using clipboard_t = ClipBoard<LocalDir>;
       GHashTable *mHash[5];
+      GtkProgressBar *progressS_ = NULL;
       const char **keys_;
       MenuInfo_t *iconNames_;
       MenuInfo_t *callbacks_;
@@ -127,7 +128,7 @@ namespace xf {
 
         return menu;        
       }
-      
+/*      
       GtkPopover *setGridviewMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
         auto menu = mkMenu(title_, (void *)GridviewMenu<subMenuClass>::gestureProperties);
         g_object_set_data(G_OBJECT(menu), "path", (void *)path);
@@ -145,7 +146,7 @@ namespace xf {
 
         return menu;        
       }
-
+*/
       GtkPopover *setMenu(GtkWidget *widget, GtkWidget *parent, const char *path){
         return setMenu(widget, parent, path, false);
       }
@@ -386,10 +387,10 @@ public:
       // final progress bar        
       auto hbox = GTK_BOX(gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0));
       gtk_widget_add_css_class (GTK_WIDGET(hbox), "inquireBox" );
-      auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
-      boxPack(hbox, GTK_WIDGET(progress),  FALSE, FALSE, 5);
+      progressS_ = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+      boxPack(hbox, GTK_WIDGET(progressS_),  FALSE, FALSE, 5);
       boxPack(vbox, GTK_WIDGET(hbox),  FALSE, FALSE, 0);
-      g_timeout_add(50, Basic::multiPulse, (void *)progress);
+      g_timeout_add(50, Basic::singlePulse, progressS_);
 
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
       popover_ = menu;

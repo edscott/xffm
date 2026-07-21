@@ -40,19 +40,21 @@ namespace xf {
       }
       auto progress = GTK_PROGRESS_BAR(data);
       gtk_progress_bar_pulse(progress);
+      gtk_widget_set_visible(GTK_WIDGET(progress), false);
       return G_SOURCE_REMOVE;
     }
-    
+/*    
     static  gboolean
     multiPulse(void * data){
-      if (!data || !GTK_IS_PROGRESS_BAR (data)){
+      auto progress_p = (GtkProgressBar**)(data);
+      if (!progress_p || *progress_p == NULL) return G_SOURCE_REMOVE;
+      if (!GTK_IS_PROGRESS_BAR (*progress_p)){
         return G_SOURCE_REMOVE;
       }
-      auto progress = GTK_PROGRESS_BAR(data);
-      gtk_progress_bar_pulse(progress);
+      gtk_progress_bar_pulse(*progress_p);
       return G_SOURCE_CONTINUE;
     }
-
+*/
 
     static bool checkSumFile(const char *file, char **sum){
       char *newSum = md5sum(file);

@@ -628,11 +628,7 @@ private:
       g_object_set_data(G_OBJECT(newMenuButton), "menu", menu_);
       delete myMainMenu;
 
-      /*
-      auto newMenuButton = Basic::newMenuButton(OPEN_MENU, NULL);
-      auto myMainMenu = new Menu<MainMenu<Type> >(_("Main menu"));
-      myMainMenu->setMenu(newMenuButton);
-      delete myMainMenu;*/
+
       g_signal_connect(G_OBJECT(pasteButton), "clicked", 
               BUTTON_CALLBACK(mainPaste), (void *)this);   
       g_signal_connect(G_OBJECT(cutButton), "clicked", 
