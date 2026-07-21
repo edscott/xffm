@@ -5,15 +5,22 @@ namespace xf
 
   template <class subClass_t>
   class DialogBasic {
-    protected:
-    GtkProgressBar *progressS(void){return progressS_;}
-    void progressS(GtkProgressBar *value){progressS_ = NULL;}
+    public:
+      pthread_mutex_t *progressSmutex(void){return &progressSmutex_;}
+      pthread_cond_t *progressScond(void){return &progressScond_;}
+      bool progressSignal(void){return progressSignal_;}
+    
+      GtkProgressBar *progressS(void){return progressS_;}
+      void progressS(GtkProgressBar *value){progressS_ = NULL;}
+      void progressSignal(bool value){progressSignal_ = value;}
 
     private:
     using dialog_t = DialogBasic<subClass_t>; 
     
     GtkProgressBar *progressS_ = NULL;
-    bool progressStatus_ = true;
+    bool progressSignal_ = false;
+    pthread_mutex_t progressSmutex_ = PTHREAD_MUTEX_INITIALIZER;
+    pthread_cond_t progressScond_ = PTHREAD_COND_INITIALIZER;
 
     GtkEventController *raiseController_ = NULL;
     GtkGesture *clickController_ = NULL;
@@ -81,12 +88,19 @@ namespace xf
       TRACE("*** runWait_f for dialog_t\n");
       //Basic::moveToPointer(dialogObject->dialog()); //Centers on the pointer screen (not always).
       run_f(dialogObject);
-      //delete dialogObject;
+
+      TRACE("runWait_f mutex lock...\n");
+      //while (!dialogObject->progressSignal()) sleep(1);
+      pthread_mutex_lock(dialogObject->progressSmutex());
+      dialogObject->progressS(NULL);
+      pthread_cond_wait(dialogObject->progressScond(),dialogObject->progressSmutex()); 
+      pthread_mutex_unlock(dialogObject->progressSmutex());
+      TRACE("runWait_f mutex unlock...\n");
+
       Basic::context_function(DialogBasic<subClass_t>::contextDelete_f, data);
  
       return NULL;
     }
-
 
     template <class Dtype>
     static void *run_f(Dtype *data){
@@ -116,7 +130,7 @@ namespace xf
         if (exitDialogs) response = GINT_TO_POINTER(-1);
         usleep(2500);
       } while (!response);
-      dialogObject->progressStatus(false);
+      
       // hide
       auto subClass = dialogObject->subClass_;
       
@@ -145,7 +159,7 @@ namespace xf
     protected:
 
   public:
-    void progressStatus(bool value){progressStatus_ = value;}
+
   
     GtkEventController *raiseController(void){return raiseController_;}
     GtkEventController *clickController(void){
@@ -233,7 +247,7 @@ namespace xf
     
     ~DialogBasic(void){
       TRACE("*** ~DialogBasic %p\n", dialog_);
-      progressStatus_ = false;
+
       // This is done by thread, so send all gtk/gdk stuff
       // to the main context thread.
       if (parent_) {
@@ -308,15 +322,12 @@ private:
       auto button = Dialog::buttonBox(EMBLEM_CLOSE, _("Close"), (void *)cancelCallback, (void *)this);
       gtk_box_append(closeBox, GTK_WIDGET(button));
 
-#if 0
-      g_timeout_add(50, Basic::pulseProgress, (void *)progress_);
-#else
+
       auto arg = (void **)calloc(3,sizeof(void *));
       arg[0] = &progressS_;
-      arg[1] = &progressStatus_;
-      arg[2] = (void *)dialog_;
-      g_timeout_add(150, pulseProgress, (void *)arg);
-#endif
+      //arg[1] = &progressSmutex_;
+      arg[2] = &progressSignal_;
+      g_timeout_add(150, pulseProgress, (void *)this);
       return GTK_WIDGET(closeBox);
 
       
@@ -331,31 +342,34 @@ protected:
       return Dialog::buttonBox(EMBLEM_APPLY, _("Apply"), (void *)ok, (void *)this);
     }
 private:
+
+    
+
     static  gboolean
     pulseProgress(void * data){
+      // This runs in main context. A mutex here will deadlock.
 
-      auto arg = (void **)data;
-      auto progress_p = (GtkProgressBar **)arg[0];
+      auto object = (DialogBasic<subClass_t> *)data;
 
-      if (!progress_p || *progress_p==NULL || !GTK_IS_PROGRESS_BAR (*progress_p)){
+      auto mutex = object->progressSmutex();
+      TRACE("lock..\n");
+      pthread_mutex_lock(mutex);
+      auto progress = object->progressS();
+      pthread_mutex_unlock(mutex);
+      TRACE("unlock..\n");
+      
+      auto cond = object->progressScond();
+
+      if (!progress) {
+        object->progressSignal(true);
+        TRACE("progress is NULL\n");
+        pthread_cond_signal(cond);
         return G_SOURCE_REMOVE;
       }
-      gtk_progress_bar_pulse(*progress_p);
-      *progress_p = NULL;
-      g_free(arg);
-      return G_SOURCE_REMOVE;
+
+      gtk_progress_bar_pulse(progress);
+      return G_SOURCE_CONTINUE;
     }
-/*
-      auto progressStatus = (bool *)arg[1];
-      if (*progressStatus){
-        auto progress_p = (
-        auto progress = GTK_PROGRESS_BAR(arg[0]);
-        gtk_progress_bar_pulse(progress);
- //       return G_SOURCE_CONTINUE;
-      }
-      g_free(arg);
-      return G_SOURCE_REMOVE;
-    }*/
 
     void mkWindow(void){
         dialog_ = GTK_WINDOW(gtk_window_new());

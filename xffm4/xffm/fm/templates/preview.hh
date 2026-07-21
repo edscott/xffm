@@ -1111,7 +1111,7 @@ class Preview {
       gchar key[11];
 
       cache_dir = g_build_filename (XFTHUMBNAIL_DIR, NULL);
-      DBG("cache dir is '%s'\n", cache_dir)
+      TRACE("cache dir is '%s'\n", cache_dir)
       if(g_mkdir_with_parents (cache_dir, 0700) < 0) {
           DBG("cannot create cache dir '%s'\n", cache_dir)
           g_free (cache_dir);

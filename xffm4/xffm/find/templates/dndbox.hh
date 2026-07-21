@@ -38,7 +38,7 @@ public:
       // Termux-x11 speed up showing dialog trick:
       auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
       gtk_box_append(mainBox, GTK_WIDGET(progress));
-      g_timeout_add(50, Basic::pulseProgress, (void *)progress);
+      g_timeout_add(50, Basic::singlePulse, (void *)progress);
       
       mkGesture(GTK_WIDGET(listBox), (void *)window);
 
@@ -179,7 +179,6 @@ private:
       g_signal_connect(G_OBJECT(hide), "clicked", G_CALLBACK(clearBox), window);
 
       auto button = Basic::newButtonX(EMBLEM_CLOSE, _("Close"));
-      //g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(clearBox), window);
       g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(close), window);
       gtk_box_append(buttonBox, GTK_WIDGET(button));
           
@@ -329,6 +328,7 @@ private:
     }
 
     static void openWith(GtkListBox *listBox, GtkListBoxRow *row, void *window){
+      gtk_widget_set_visible(GTK_WIDGET(window), false);
       auto textview = GTK_TEXT_VIEW(g_object_get_data(G_OBJECT(listBox),"textview"));
       auto label = GTK_LABEL(g_object_get_data(G_OBJECT(row), "label"));
       auto dir = (const char *)g_object_get_data(G_OBJECT(window), "dir");
@@ -338,8 +338,6 @@ private:
       auto path = g_strconcat(dir, G_DIR_SEPARATOR_S, text, NULL);
       new OpenWith<bool>(textview, path);
       g_free(path);
-      
-      //close(NULL, window);
 
       return;
     }
@@ -371,7 +369,7 @@ private:
       auto listBox = gtk_event_controller_get_widget(GTK_EVENT_CONTROLLER(self));
       auto row = gtk_list_box_get_selected_row (GTK_LIST_BOX(listBox));
       openWith(GTK_LIST_BOX(listBox), row, window);
-      return TRUE;
+      return FALSE;
     }
 
 };

@@ -389,7 +389,7 @@ public:
       auto progress = GTK_PROGRESS_BAR(gtk_progress_bar_new());
       boxPack(hbox, GTK_WIDGET(progress),  FALSE, FALSE, 5);
       boxPack(vbox, GTK_WIDGET(hbox),  FALSE, FALSE, 0);
-      g_timeout_add(50, Basic::pulseProgress, (void *)progress);
+      g_timeout_add(50, Basic::singlePulse, (void *)progress);
 
       gtk_popover_set_child (menu, GTK_WIDGET(vbox));
       popover_ = menu;
