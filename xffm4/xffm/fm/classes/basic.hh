@@ -42,6 +42,16 @@ namespace xf {
       gtk_progress_bar_pulse(progress);
       return G_SOURCE_REMOVE;
     }
+    
+    static  gboolean
+    multiPulse(void * data){
+      if (!data || !GTK_IS_PROGRESS_BAR (data)){
+        return G_SOURCE_REMOVE;
+      }
+      auto progress = GTK_PROGRESS_BAR(data);
+      gtk_progress_bar_pulse(progress);
+      return G_SOURCE_CONTINUE;
+    }
 
 
     static bool checkSumFile(const char *file, char **sum){
