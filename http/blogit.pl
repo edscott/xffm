@@ -16,20 +16,20 @@ chop $title;
 print "entry: (end with EOF)\n";
 $entry="";
 while ($_=<>){
-    if (/^\n/) {$entry .= "<br>\n"; next}
+#    if (/^\n/) {$entry .= "<br>\n"; next}
     if (/^EOF/g){goto done}
     $entry .= "$_";
 }
 done:
-
+$entry =~ s/\n/<br>\n/g;
 
 $newblog="
 <blockquote>
 <date>$date</date>
 <title>$title</title>
-<pre>
+<!--pre-->
 $entry
-</pre>
+<!--/pre-->
 </blockquote>
 
 $blog";

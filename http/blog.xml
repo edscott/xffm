@@ -1,5 +1,24 @@
 
 <blockquote>
+<date>Wednesday July 22, 2026</date>
+<title>Release 4.22.4</title>
+<!--pre-->
+i3 and xffm4 in termux-x11<br>
+<br>
+I just finished compiling and testing the filemanager/terminal xffm4 in a termux-x11 environment managed by i3. Works fine with Samsung Dex. The release targets gtk-4.22.4 and also has some fixes for some sporadic race conditions which would close the app sometimes.<br>
+<br>
+To compile in termux you can find source code at https://sourceforge.net/projects/xffm/files/xffm%2B/ and for ArchLinux, the package build is at https://aur.archlinux.org/packages/xffm.<br>
+<br>
+I hope this may help anyone who is also migrating workstation programs to cellphone environments.<br>
+<br>
+cheers!<br>
+<br>
+
+<!--/pre-->
+  </blockquote>
+
+
+<blockquote>
 <date>Tuesday April 14, 2026</date>
 <title>Release 4.22.2-1</title>
 <pre>
