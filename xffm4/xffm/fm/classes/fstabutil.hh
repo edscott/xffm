@@ -462,7 +462,7 @@ class FstabUtil {
       const char *name;
       // for all items, if in mountHash, add to mountHash_
       while (name = g_dir_read_name(dir)) {
-        auto path = g_strconcat(folder, G_DIR_SEPARATOR_S, name);
+        auto path = g_strconcat(folder, G_DIR_SEPARATOR_S, name, NULL);
         if (g_hash_table_lookup(hash, path)) g_hash_table_insert(hash, path, GINT_TO_POINTER(1));
         else g_free(path);
       }
