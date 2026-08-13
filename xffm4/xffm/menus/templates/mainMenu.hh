@@ -370,7 +370,7 @@ namespace xf {
       closePopover(menu);
       auto output = Child::getOutput(NULL);
       auto buttonSpace = Child::getButtonSpace(NULL);
-      auto xffm = g_strdup_printf("xffm4 -f %s", path);
+      auto xffm = g_strdup_printf("xffm4 %s", path);
       pid_t childPid = Run<bool>::shell_command(output, xffm, false, false);
       auto runButton = new RunButton<Type>(EMBLEM_NEW_WINDOW, NULL);
       runButton->init(xffm, childPid, output, path, buttonSpace);
