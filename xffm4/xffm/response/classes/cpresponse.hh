@@ -114,13 +114,35 @@ private:
     auto list = (GList *)arg[1];
     auto path = (char *)arg[2];
     auto src = (const char *)list->data;
+    auto srcbase = g_path_get_basename(src);
     if (g_list_length(list) > 1) src = _("Multiple selections");
     auto tgt = g_path_get_basename(path);
-    auto srcTgt = g_strconcat(src, " ---> ", tgt, NULL);
+    auto srcTgt = g_strconcat(srcbase, " ---> ", tgt, G_DIR_SEPARATOR_S, NULL);
     g_free(tgt);
+    g_free(srcbase);
 
     auto dialogObject = (DialogDrop<cpDropResponse> *)arg[0];
+    char *backup = NULL;
+    for (auto l=list; l && l->data; l=l->next){
+      TRACE("list: %s\n", (char *)l->data);
+      auto base = g_path_get_basename((char *)l->data);
+      auto tgtpath = g_strconcat(path, G_DIR_SEPARATOR_S, base, NULL);
+      
+      if (g_file_test(tgtpath, G_FILE_TEST_EXISTS)){
+        auto tgtbase = g_path_get_basename(path);
+        auto backupFile = g_strconcat(tgtbase, G_DIR_SEPARATOR_S, base, "~", NULL);
 
+        char buffer[256];
+        snprintf(buffer, 256, _(" (backup: %s)"), backupFile);
+        if (backup == NULL) backup = g_strdup("");
+        Basic::concat(&backup, buffer);
+        Basic::concat(&backup, "\n");
+        g_free(backupFile);
+        g_free(tgtbase);
+      }   
+      g_free(base);
+      g_free(tgtpath);
+    }
 
     thread2(data);
     
@@ -135,8 +157,13 @@ private:
       case -1:
         mode = _("link"); break;
     }
+
     //Print::showText(Child::getOutput(NULL));
     Print::printInfo(Child::getOutput(NULL), g_strdup_printf(" %s (%s) %s\n",  _("Operation completed"), mode, srcTgt)); 
+    if (backup){
+        Print::showText(Child::getOutput(NULL));     
+        Print::printWarning(Child::getOutput(NULL), backup);  
+    }
     g_free(srcTgt);
 
       dialogObject->lockResponse();

@@ -74,8 +74,10 @@ public:
         TRACE("*** cpmv: backup %s --> %s (%d)\n", tgtFile, backup, modeCopy);
         if (rename(tgtFile, backup) != 0){
           auto text = g_strdup_printf(" rename(%s, %s): %s\n", tgtFile, backup,strerror(errno));
-          Print::printWarning(Child::getOutput(NULL), text);
-        }
+          DBG("%s", text);
+          g_free(text);
+          //Print::printWarning(Child::getOutput(NULL), text);
+        } 
         g_free(backup);
       }
       // Command.
