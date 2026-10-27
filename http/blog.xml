@@ -1,5 +1,95 @@
 
 <blockquote>
+<date>Tuesday October 27, 2026</date>
+<title>i3/xffm in Android HOWTO</title>
+<pre>
+<br>
+How to install xffm development environment in Android. Now Android 17
+
+1. Download F-Droid> F-Droid.apk. This is available at the official site: 
+https://f-droid.org/en/
+2. Install F-Droid using the downloaded apk package. For this you must 
+enable installations from sources other than google playstore. 
+CONFIG: Security and Privacy > Auto Blocker > OFF
+3. Open F-Droid and search for termux and install.
+4. Open termux and update system files with: 
+   pkg update && pkg upgrade
+5. Install termux-x11 apk. You can find this at: 
+https://github.com/termux/termux-x11/releases/tag/nightly . 
+Download and install 
+https://github.com/termux/termux-x11/releases/download/nightly/termux-x11-universal-debug.apk . 
+Again, make sure auto blocker is OFF (it turns back on after a while)
+ and the app from which you are calling the installer is allowed to install.
+6. In termux, enable X11 repo with: 
+   pkg install x11-repo . 
+And then install: 
+   pkg install termux-x11-nightly
+7. Install i3 environment: 
+   pkg install i3 dmenu aterm dbus
+
+Entering i3 environment:
+8. Open the android Xserver, i.e., termux-x11
+9. Start i3 environment. This is done from the termux terminal with:
+  termux-x11 -xstartup i3 &
+or if for some reason you need dbus:
+  termux-x11 -xstartup "dbus-launch --exit-with-session i3" &
+
+Now this has you in X11 with i3, but not quite practical on the 
+tiny cellphone screen.
+At this point you should probably connect to an external monitor 
+and a bluetooth keyboard and mouse to take full advantage of the 
+computer you have in your cellphone.
+
+Since I use a Galaxy phone, conneting to external display opens 
+the DeX display, which is basically Samsung's desktop environment 
+for Android. Once in DeX I open the X server, Termux:X11 and the 
+Termux console.
+
+This I always forget: to resize font size use "CTL ALT -" to decrease 
+and "CTL ALT +" to increase.
+My BT keyboard does not have a windows key, so I setup i3 with <Alt> 
+as the modifier.
+
+Now all I need is my developer GUI, which is basically xffm+gvim.
+
+  pkg install vim-gtk
+
+Next, the build tools I need:
+
+  pkg install cmake pkg-config gettext libzip
+
+And xffm:
+   git clone https://github.com/edscott/xffm.git
+   cd xffm/xffm4/build
+   CMAKE_INSTALL_PREFIX=$HOME cmake .. && make && make install
+
+Setting the install prefix to $HOME allows you to run built executables, 
+setting PATH to $PATH:$HOME/binEdit $HOME/.bashrc to add $HOME to PATH.
+
+Open xffm4:
+  xffm4 $HOME
+
+From here I use this to port workstation C/C++ programs to Android. 
+I also port programs that combine C/C++ with scientific Fortran 
+routines, but that takes a further step down the rabbit hole, 
+since CLang Fortran sucks and you need an actual GNU GCC for this.
+
+This takes us to LinuxPRoot. First install proot-distro 
+   pkg install proot-distro
+archlinux is not yet available, so I fallback to ubuntu
+   proot-distro install ubuntu
+   proot-distro login ubuntu
+That puts you in a virtual ubuntu box where gfortran will work foine.
+
+What I have pending to figure out is how to libraries and executables 
+created in proot-distro directly in termux. I see no reason why this 
+cannot be done, I just have not figured it out yet...
+
+</pre>
+</blockquote>
+
+
+<blockquote>
 <date>Wednesday July 22, 2026</date>
 <title>Release 4.22.4</title>
 <!--pre-->
