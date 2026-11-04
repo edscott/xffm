@@ -1,5 +1,16 @@
 Cheatsheet.
+  ./blogit.pl 
+This creates updated blog.xml.
+Now recreate index.html 
+  perl  index.htm "Rodent Applications: xffm4" > new.html
+Check new.html
+cp new.html to index.html
 
+sftp to web.sourceforge.net
+cd htdocs
+upload index.html
+
+///////////////////////////
 To update your SourceForge project homepage, 
 you upload your custom HTML/CSS/JS files 
 via SFTP (using clients like FileZilla 
