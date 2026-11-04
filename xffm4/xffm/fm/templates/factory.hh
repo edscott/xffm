@@ -207,6 +207,7 @@ ClickMenu
 
         bool previewLoaded = false;
         bool doPreview = false;
+#ifndef __BIONIC__
         if (size > 32 && !picture && !g_file_info_get_is_symlink(info)){
           picture = previewPicture(info, path, &doPreview);
           if (picture) {
@@ -214,6 +215,7 @@ ClickMenu
             previewLoaded = true;
           } 
         }
+#endif
         if (doPreview)  scaleFactor = 2.0;
         if (size <= 32) scaleFactor = 0.75;
         
