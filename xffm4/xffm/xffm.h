@@ -7,7 +7,7 @@
 #define XFFM_VERSION "4.22.5-1"
 // Version gtk-4.22.5 has broken rubber band, again
 // now disabled until workaround to broken behavior is found. 
-#define ENABLE_RUBBER_BAND false
+#define ENABLE_RUBBER_BAND true
 #include "config.h"
 #include "types.h"
 #define REGEX_HISTORY g_get_user_data_dir(),"xffm4","regex",NULL
