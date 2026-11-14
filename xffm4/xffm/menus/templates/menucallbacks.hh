@@ -107,18 +107,24 @@ namespace xf {
 
     static void
     queryWS(int k){
-
       if (k == 0){
-        using subClass_t0 = wsResponse0<Type>;
-        using dialog_t0 = DialogEntry<subClass_t0>;
-        auto dialogObject = new dialog_t0;
+        using subClass_t = wsResponse0<Type>;
+        using dialog_t = DialogEntry<subClass_t>;
+        auto dialogObject = new dialog_t;
         dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));       
         dialogObject->run();
       }
       if (k == 1){
-        using subClass_t1 = wsResponse1<Type>;
-        using dialog_t1 = DialogEntry<subClass_t1>;
-        auto dialogObject = new dialog_t1;
+        using subClass_t = wsResponse1<Type>;
+        using dialog_t = DialogEntry<subClass_t>;
+        auto dialogObject = new dialog_t;
+        dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));       
+        dialogObject->run();
+      }
+      if (k == 2){
+        using subClass_t = wsResponse2<Type>;
+        using dialog_t = DialogEntry<subClass_t>;
+        auto dialogObject = new dialog_t;
         dialogObject->setParent(GTK_WINDOW(Child::mainWidget()));       
         dialogObject->run();
       }
@@ -157,8 +163,8 @@ namespace xf {
         g_free(lastWS);
         lastWS = NULL;
         // query for workspace... (lastWS)
-        lastWS = NULL;
-        queryWS(0); 
+        queryWS(2); 
+     // moveTo(lastWS, 0);
         return;
       } else if (lastWS) {
         /*Print::showText(output);
@@ -198,21 +204,6 @@ namespace xf {
         g_free(lastWS);
         lastWS = NULL;
       }
-
-      /*
-       // The following does not work. Apparently in gtk4 tooltips are static elements.
-       // I guess that is why you can no longer play with the tooltip window.
-      auto basename = lastWS?g_strdup(lastWS):g_path_get_basename(xffmProgram); 
-      char *moveTab = g_strconcat(_("Move to tab"), " <span color=\"blue\">",
-        basename,"</span>", NULL);
-      auto toggle = g_object_get_data(G_OBJECT(Child::mainWidget()), "WSToggle");
-      gtk_widget_set_tooltip_markup( GTK_WIDGET(toggle), moveTab);
-      //Basic::setTooltip(GTK_WIDGET(toggle), moveTab);
-      DBG("%p: set tooltip to %s\n", toggle, moveTab);
-      g_free(moveTab);
-      g_free(basename);
-       
-       */
 
       return;
     }
