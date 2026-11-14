@@ -170,7 +170,13 @@ namespace xf {
         g_free(msg);*/
       }
       
-      if (strcmp(tt, "10:xffm4")==0){
+#ifdef __BIONIC__
+      const char *dtName = "10:xffm4";
+#else
+      const char *dtName = "xffm4";
+#endif
+      if (strcmp(tt, dtName)==0)
+      {
         // Here we are at xffm4 desktop
         if (lastWS == NULL){
           // Here we entered xffm4 destop not by moveWS().
@@ -179,8 +185,8 @@ namespace xf {
           return;
         }
       }
-      TRACE("moving to %s...\n", lastWS?lastWS:"10:xffm4");
-      moveTo( (const char *)lastWS?lastWS:"10:xffm4", 0);
+      TRACE("moving to %s...\n", lastWS?lastWS:dtName);
+      moveTo( (const char *)lastWS?lastWS:dtName, 0);
       if (lastWS == NULL){
         // We moved out to xffm4.
         lastWS = g_strdup(tt);
